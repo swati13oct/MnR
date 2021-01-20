@@ -57,6 +57,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     And user validate elements in loading page mobile
     Then user verifies doctors session in VPP page mobile
 
@@ -90,6 +91,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     And user validate elements in loading page mobile
     Then user verifies drugs session in VPP page mobile
 
@@ -121,79 +123,78 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
 
   #@PRE @planrecommandonationmobile @startovermobile @F427582
   #Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate start over function with MAPD flow in PRE Mobile
-    #Given the user is on UHC medicare acquisition site mobile
-    #And user navigates to Zip Code page mobile
-    #And runs questionnaire at zipcode page mobile
-      #| Zip Code        | <Zipcode>       |
-      #| Is Multi County | <isMultiCounty> |
-      #| County Name     | <County>        |
-    #And user selects plan type in coverage options page mobile
-      #| Plan Type | <isCoverageOpt> |
-    #And user selects SNP options in Special Needs Page mobile
-      #| SNP Options | <SpecialNeeds> |
-    #And user selects Travel options in Travel Page mobile
-      #| Travel Options | <TravelOption> |
-    #And user selects Doctors in Doctors page mobile
-      #| Doctors Selection   | <DoctorsSelection> |
-      #| Doctors Search Text | <DoctorsName>      |
-      #| Multi Doctor        | <isMultiDoctor>    |
-    #And user selects add drug option in Drug page mobile
-      #| Drug Selection | <DrugSelection>                                                        |
-      #| Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    #And user selects Pharmacy in Pharmacy page mobile
-    #  | Pharmacy Selection | <PharmacySelection> |
-    #And user selects additional services option in additional services page mobile
-      #| Additional Option | <Dental-Hearing-Vision-Fitness> |
-    #And user selects cost preferences option in cost preferences page mobile
-      #| Preference Option | <costPreferenceOption> |
-    #And user validate elements in loading page mobile
-    #When user navigates to Zip Code page from vpp plans using startover mobile
-    #And user validte zip info in location page mobile
-      #| Zip Code        | <Zipcode>       |
-      #| Is Multi County | <isMultiCounty> |
-      #| County Name     | <County>        |
-    #And runs questionnaire at zipcode page mobile
-      #| Zip Code        | <Zipcode>       |
-      #| Is Multi County | <isMultiCounty> |
-      #| County Name     | <County>        |
-    #Then user selects plan type in coverage options page mobile
-      #| Plan Type |  |
-    #And user selects plan type in coverage options page mobile
-      #| Plan Type | <isCoverageOpt> |
-    #And user selects SNP options in Special Needs Page and validate errors mobile
-      #| SNP Options |  |
-    #And user selects SNP options in Special Needs Page mobile
-      #| SNP Options | <SpecialNeeds> |
-    #And user selects Travel options in Travel Page and validate errors mobile
-      #| Travel Options |  |
-    #And user selects Travel options in Travel Page mobile
-      #| Travel Options | <TravelOption> |
-    #And user selects Doctors in Doctors page and validate errors mobile
-      #| Doctors Selection   |  |
-      #| Doctors Search Text |  |
-      #| Multi Doctor        |  |
-    #And user navigate Doctors lookup session in Doctors page mobile
-    #Then user verifies existing PRE provider session using startover mobile
-      #| Multi Doctor | <isMultiDoctor> |
-    #And user validte error function in drug option selection page mobile
-      #| Drug Selection |  |
-    #And user verifies exisitng PRE drug session using startover mobile
-    #And user selects Pharmacy in Pharmacy page and validate errors mobile
-    #  | Pharmacy Selection |  |
-    #And user selects Pharmacy in Pharmacy page mobile
-    #  | Pharmacy Selection | <PharmacySelection> |
-    #And user validates additional services error function in additional services page mobile
-      #| Additional Option | <Dental-Hearing-Vision-Fitness> |
-    #And user validates cost preferences error function in cost preferences page mobile
-    #And user selects cost preferences option in cost preferences page mobile
-      #| Preference Option | <costPreferenceOption> |
-    #And user validate elements in loading page mobile
-    #And user navigates to Zip Code page from vpp plans using startover mobile
-#
-    #Examples: 
-      #| Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      #|   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | YES           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
-
+  #Given the user is on UHC medicare acquisition site mobile
+  #And user navigates to Zip Code page mobile
+  #And runs questionnaire at zipcode page mobile
+  #| Zip Code        | <Zipcode>       |
+  #| Is Multi County | <isMultiCounty> |
+  #| County Name     | <County>        |
+  #And user selects plan type in coverage options page mobile
+  #| Plan Type | <isCoverageOpt> |
+  #And user selects SNP options in Special Needs Page mobile
+  #| SNP Options | <SpecialNeeds> |
+  #And user selects Travel options in Travel Page mobile
+  #| Travel Options | <TravelOption> |
+  #And user selects Doctors in Doctors page mobile
+  #| Doctors Selection   | <DoctorsSelection> |
+  #| Doctors Search Text | <DoctorsName>      |
+  #| Multi Doctor        | <isMultiDoctor>    |
+  #And user selects add drug option in Drug page mobile
+  #| Drug Selection | <DrugSelection>                                                        |
+  #| Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+  #And user selects Pharmacy in Pharmacy page mobile
+  #  | Pharmacy Selection | <PharmacySelection> |
+  #And user selects additional services option in additional services page mobile
+  #| Additional Option | <Dental-Hearing-Vision-Fitness> |
+  #And user selects cost preferences option in cost preferences page mobile
+  #| Preference Option | <costPreferenceOption> |
+  #And user validate elements in loading page mobile
+  #When user navigates to Zip Code page from vpp plans using startover mobile
+  #And user validte zip info in location page mobile
+  #| Zip Code        | <Zipcode>       |
+  #| Is Multi County | <isMultiCounty> |
+  #| County Name     | <County>        |
+  #And runs questionnaire at zipcode page mobile
+  #| Zip Code        | <Zipcode>       |
+  #| Is Multi County | <isMultiCounty> |
+  #| County Name     | <County>        |
+  #Then user selects plan type in coverage options page mobile
+  #| Plan Type |  |
+  #And user selects plan type in coverage options page mobile
+  #| Plan Type | <isCoverageOpt> |
+  #And user selects SNP options in Special Needs Page and validate errors mobile
+  #| SNP Options |  |
+  #And user selects SNP options in Special Needs Page mobile
+  #| SNP Options | <SpecialNeeds> |
+  #And user selects Travel options in Travel Page and validate errors mobile
+  #| Travel Options |  |
+  #And user selects Travel options in Travel Page mobile
+  #| Travel Options | <TravelOption> |
+  #And user selects Doctors in Doctors page and validate errors mobile
+  #| Doctors Selection   |  |
+  #| Doctors Search Text |  |
+  #| Multi Doctor        |  |
+  #And user navigate Doctors lookup session in Doctors page mobile
+  #Then user verifies existing PRE provider session using startover mobile
+  #| Multi Doctor | <isMultiDoctor> |
+  #And user validte error function in drug option selection page mobile
+  #| Drug Selection |  |
+  #And user verifies exisitng PRE drug session using startover mobile
+  #And user selects Pharmacy in Pharmacy page and validate errors mobile
+  #  | Pharmacy Selection |  |
+  #And user selects Pharmacy in Pharmacy page mobile
+  #  | Pharmacy Selection | <PharmacySelection> |
+  #And user validates additional services error function in additional services page mobile
+  #| Additional Option | <Dental-Hearing-Vision-Fitness> |
+  #And user validates cost preferences error function in cost preferences page mobile
+  #And user selects cost preferences option in cost preferences page mobile
+  #| Preference Option | <costPreferenceOption> |
+  #And user validate elements in loading page mobile
+  #And user navigates to Zip Code page from vpp plans using startover mobile
+  #
+  #Examples:
+  #| Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+  #|   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | YES           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
   @PRE @planrecommandonationmobile @startnowmobile @F427582
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate start now function in PRE Mobile
     Given the user is on UHC medicare acquisition site mobile
@@ -221,6 +222,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     And user validate elements in loading page mobile
     When user navigates to Zip Code page from vpp plans mobile
     And user validte zip info in location page mobile
@@ -238,12 +240,13 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     #And verify continue function on "Pharmacy" page mobile
     And verify continue function on "Additional Services" page mobile
     And verify continue function on "Cost Preferences" page mobile
+    And verify continue function on "Priorities" page mobile
     And user validate elements in loading page mobile
     And user navigates to Zip Code page from vpp plans mobile
 
     Examples: 
       | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | YES           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
+      |   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @deleteDocZipChange @F428517
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate provider removal on zip change in PRE Mobile
@@ -272,6 +275,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     And user validate elements in loading page mobile
     When user navigates to Zip Code page from vpp plans mobile
     And runs questionnaire at zipcode page mobile
@@ -289,6 +293,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     #And verify continue function on "Pharmacy" page mobile
     And verify continue function on "Additional Services" page mobile
     And verify continue function on "Cost Preferences" page mobile
+    And verify continue function on "Priorities" page mobile
     And user validate elements in loading page mobile
     And user navigates to Zip Code page from vpp plans mobile
 
@@ -341,6 +346,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     And user validate elements in loading page mobile
     Then user validate email plan list from vpp mobile
       | Recommendation | <primaryRecommendation> |

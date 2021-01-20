@@ -439,7 +439,7 @@ public class ProviderSearchPage extends UhcDriver {
 			System.out.println("OLD Rally page displayed");
 			Checkcoverage.click();
 		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
 			System.out.println("NEW Rally page displayed");
 //			FinishButton.click();
 			jsClickNew(FinishButtonFinish);
