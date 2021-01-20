@@ -3695,10 +3695,15 @@ public class AccountHomePage extends UhcDriver {
 		return new ClaimDetailsPage(driver);
 	}
 
+	@SuppressWarnings("unchecked")
 	public WebElement expandRootElement(WebElement element) {
-		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+		List<WebElement> eleList= (List<WebElement>) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot.children",
 				element);
-		return ele;
+		//note: return the last element from the list
+		return eleList.get(eleList.size()-1);
+		//WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+		//		element);
+		//return ele;
 	}
 
 	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {
