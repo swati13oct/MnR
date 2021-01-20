@@ -4,7 +4,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
 
   # @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators @emailAndPrint_UHC1 @emailAndPrintplancompare @predatorsdecrelease2018
   Scenario Outline: TID: <TID> -plantype: <plantype> - Verify print and email for plan compare page in <site> site.
-    Given the user is on medicare acquisition site landing page
+   Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
