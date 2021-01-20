@@ -2329,6 +2329,12 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateLISBuyDown_CopaySection_LISAlert();
 	}
 
+	@Then("^the user validates correct Copay section view and LIS message for LIS Non Buydown Plan on DCE details Page$")
+	public void the_user_validates_correct_Copay_section_view_and_LIS_message_for_LIS_NonBuydown_Plan_on_DCE_details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateLISonly_CopaySection_LISAlert();
+	}
+
 	@Then("^the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page$")
 	public void the_user_validates_Monthly_Costs_are_not_displayed_for_LIS_Buydown_plan_on_DCE_details_Page()
 			throws Throwable {
