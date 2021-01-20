@@ -342,9 +342,10 @@ public class VisitorProfilePage extends UhcDriver {
 		return null;
 	}
 	
-	public AcquisitionHomePage findPlans() {
+	public AcquisitionHomePage findPlans() throws InterruptedException {
 
 		jsClickNew(addPlans);
+		Thread.sleep(2000);
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("profile")) {
 			return new AcquisitionHomePage(driver);

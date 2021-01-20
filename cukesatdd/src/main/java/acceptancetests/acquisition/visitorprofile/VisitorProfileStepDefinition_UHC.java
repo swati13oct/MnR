@@ -87,7 +87,7 @@ public class VisitorProfileStepDefinition_UHC {
 	
 	
 	@And("^the user clicks on the add plans button in the guest profile in UHC site$")
-	public void the_user_clicks_on_the_add_plans_button_in_the_guest_profile_in_UHC_site() {
+	public void the_user_clicks_on_the_add_plans_button_in_the_guest_profile_in_UHC_site() throws InterruptedException {
 		
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);

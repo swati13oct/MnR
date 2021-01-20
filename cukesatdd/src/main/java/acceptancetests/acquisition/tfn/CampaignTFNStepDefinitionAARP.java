@@ -26,12 +26,13 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.tfn.CampaignTFNPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.ulayer.GlobalWebElements;
 import pages.acquisition.ulayer.UlayerTFNPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+//import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class CampaignTFNStepDefinitionAARP {
@@ -657,6 +658,126 @@ public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate
 
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 
+}
+
+@Then("^the user navigates to plan tab on VPP and validates Federal TFN$")
+public void the_user_navigates_to_plan_tab_on_VPP_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String Zip = "90210";
+	tfnPage.HomepagePlanSearch(Zip);
+	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToPlanDetails(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+@Then("^the user navigates to Plan Details Page for any plan and validates Federal TFN$")
+public void the_user_navigates_to_Plan_Details_Page_any_plan_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+//	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToPlanDetails(PlanType);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+@Then("^the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN$")
+public void the_user_navigates_to_Plan_Details_Page_any_plan_Enroll_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+//	tfnPage.ViewPlanSummary(PlanType);
+	//tfnPage.NavigateToPlanDetails(PlanType);
+tfnPage.NavigateToOLE(PlanType);
+String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
+tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+@When("^the user performs plan search using Shop Pages for campaign Links$")
+public void Standalone_zipcode_details_shop_camapign_TFN(DataTable givenAttributes) throws InterruptedException {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String zipcode = memberAttributesMap.get("Zip Code");
+	String county = memberAttributesMap.get("County Name");
+	String isMultiCounty = memberAttributesMap.get("Is Multi County");
+	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+	getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+	getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	VPPPlanSummaryPage plansummaryPage = null;
+	if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+		plansummaryPage = tfnPage.searchPlansWithOutCountyShopEnroll(zipcode);
+	} else {
+		plansummaryPage = tfnPage.searchPlansShopEnroll(zipcode, county);
+	}
+
+	if (plansummaryPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+	} else {
+		Assert.fail("Error Loading VPP plan summary page");
+	}
+}
+
+@When("^the user performs plan search using Medicare articles pages for campaign Links$")
+public void Standalone_zipcode_details_shop_camapign_TFN_medicare_article(DataTable givenAttributes) throws InterruptedException {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String zipcode = memberAttributesMap.get("Zip Code");
+	String county = memberAttributesMap.get("County Name");
+	String isMultiCounty = memberAttributesMap.get("Is Multi County");
+	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+	getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+	getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	VPPPlanSummaryPage plansummaryPage = null;
+	if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+		plansummaryPage = tfnPage.searchPlansWithOutCountyArticlePage(zipcode);
+	} else {
+		plansummaryPage = tfnPage.searchPlansShopArticlePage(zipcode, county);
+	}
+	if (plansummaryPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+	} else {
+		Assert.fail("Error Loading VPP plan summary page");
+	}
 }
 
 }

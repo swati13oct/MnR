@@ -49,7 +49,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
    |Sc. 3.08 - AMP |  880188 |  880187       |shop/medicare-advantage-plans.html     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]     |health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]      | /medicare-articles.html                 |  (//a[contains(@class, 'tel')])[1]               |   medicare-articles/medicare-made-clear.html                 |     (//a[contains(@class, 'tel')])[1]              |    medicare-articles/eligibility-and-enrollment.html                 |        (//a[contains(@class, 'tel')])[1]                |
    
   @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
-  Scenario Outline: 4.1 to 4.8 Campaign Precedence Logic No 1 for UHC
+  Scenario Outline: <scenario > Campaign Precedence Logic No 1 for UHC
     #------------------------**********---------------------------------
     #------------------------**********---------------------------------
     # Precedence 4.3.1 - Visit UHC using Campaign URL, PSC code 800085
@@ -103,7 +103,18 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
      Then the user navigates to homepage validates Federal TFN   
    Then the user navigates to MA Plan Details Page and validates Federal TFN 
   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-    #----------****  Campaign supercedes Campaign  ***** --------------
+    
+    #------------------------**********---------------------------------
+    
+
+    Examples: 
+    | scenario                             | site   | Precedence1PSC | Precedence2PSC |  Precedence3PSC |  Precedence4PSC | Precedence5PSC |Precedence6PSC |campaign2Url    |campaign3Url      |campaign4Url                                                                                                  |
+    |Scenario 4a: Campaign Precedence- UMS  | blayer |        800085 |          800086|  800086         |  880180        |        880188 | 880189         | /?WT.mc_id=800085 |/?WT.mc_id=800086|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|
+    
+    
+    @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
+  Scenario Outline: <scenario >  Campaign Precedence Logic No 4b for UHC
+   #----------****  Campaign supercedes Campaign  ***** --------------
      # Precedence 4.3.11 - Visit site via UHC organic search from Yahoo, PSC 880189
        # Campaign supercedes Organic search, so Expected PSC code - 880189
    # Given the user Starts WebDriver
@@ -113,12 +124,8 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       | PSC Code | <Precedence6PSC> |
      Then the user navigates to homepage validates Federal TFN   
    Then the user navigates to MA Plan Details Page and validates Federal TFN 
-  Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-    #------------------------**********---------------------------------
-    
-
-    Examples: 
+  Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN   
+   Examples: 
     | scenario                             | site   | Precedence1PSC | Precedence2PSC |  Precedence3PSC |  Precedence4PSC | Precedence5PSC |Precedence6PSC |campaign2Url    |campaign3Url      |campaign4Url                                                                                                  |
-    |Scenario 4: Campaign Precedence- UMS  | blayer |        800085 |          800086|  800086         |  880180        |        880188 | 880189         | /?WT.mc_id=800085 |/?WT.mc_id=800086|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|
-    
-        
+    |Scenario 4b: Campaign Precedence- UMS  | blayer |        800085 |          800086|  800086         |  880180        |        880188 | 880189         | /?WT.mc_id=800085 |/?WT.mc_id=800086|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|
+      

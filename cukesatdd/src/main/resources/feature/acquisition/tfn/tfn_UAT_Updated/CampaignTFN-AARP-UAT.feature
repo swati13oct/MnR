@@ -25,7 +25,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 	And the user clicks on the add plans button in the profile in AARP site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
-      | PSC Code | <pscCode> |
+      | PSC Code | <pscCode> |    
     Then the user navigates to following  DCE Page URL and validate Federal TFN
       | DCE URL | <dceUrl> |
     Then the user navigates to homepage validates Federal TFN
@@ -48,21 +48,52 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>        |
+      | Campaign URL | <campaignUrl2> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    Then the user navigates to plan tab on VPP and validates Federal TFN
+       | Plan Type | <MAplantype> |
+    Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>        |
       | Campaign URL | <campaignUrl> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
-      | MedSupp URL | <medSuppUrl> |
-      | TFN Xpath   | <medSuppTFN> |
-    Then the user navigates to homepage validates Federal TFN
-    Then the user navigates to MA Plan Details Page and validates Federal TFN
+    #Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
+     # | MedSupp URL | <medSuppUrl> |
+     # | TFN Xpath   | <medSuppTFN> |
+     Then the user navigates to shop pages Page and validates Federal TFN
+      | SHOPPAGES URL |<medSuppUrl> |
+     | TFN Xpath   | <medSuppTFN> |
+   # Then the user navigates to homepage validates Federal TFN
+    #Then the user navigates to MA Plan Details Page and validates Federal TFN
     #  Then the user navigate to following SNP Plan page URL and validate Federal TFN
     #    | SNP URL   | <snpUrl> |
     #    | TFN Xpath | <snpTFN> |
-    Then the user navigates to following MA Plan Page URL and validate Federal TFN
-      | MA URL    | <maUrl> |
-      | TFN Xpath | <maTFN> |
+    #And the user hovers screen over the shop for a plan
+   # And click on Enroll Plan on shoppages for plans
+    #And click on how to enroll shop pages
+     #	| Plan Type | <MAplantype> |
+     # | Plan Name | <planName> |
+     #  |Plan Year	| <planyear>|
+   When the user performs plan search using Shop Pages for campaign Links
+     | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |   
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
+     Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+       | Plan Type | <MAplantype> |
+     Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+    | Plan Type | <MAplantype> |
+    #Then the user navigates to following MA Plan Page URL and validate Federal TFN
+     # | MA URL    | <maUrl> |
+     # | TFN Xpath | <maTFN> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates PSC code
+      | PSC Code | <pscCode> |
     Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
     Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <agentApptUrl> |
@@ -73,6 +104,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user navigate to following PDP Plan Page URL and validate Federal TFN
       | PDP URL   | <pdpUrl> |
       | TFN Xpath | <pdpTFN> |
+     Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+    | Plan Type | <PDPplantype> |
     Then the user navigates to shop pages Page and validates Federal TFN
       | SHOPPAGES URL | <shoppages>    |
       | TFN Xpath     | <shoppagesTFN> |
@@ -81,8 +114,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | PSC Code | <pscCode> |
 
     Examples: 
-    |scenario            | pscCode  | site  |campaignUrl                                                                 | maUrl                                    |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |medSuppUrl|medSuppTFN|shoppages|shoppagesTFN|
-    |Scenario 2 - AMP 	  |  8001038 | ulayer|/shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038  | enroll/ma-enrollment.html   |  //*[contains(@class,'call')]//a[contains(@class,'tel')]  | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |shop/medicare-supplement-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|
+    |scenario             |planyear|zipcode| planName                                         |MAplantype|PDPplantype|isMultutiCounty | county            | pscCode  | site  |campaignUrl                                                                 | maUrl                       |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |medSuppUrl                         |medSuppTFN                                                  |shoppages         |shoppagesTFN|campaignUrl2|
+    |Scenario 2 - AMP 	  | future  |90210|AARP Medicare Advantage Freedom Plus (HMO-POS)   |MA      |PDP|NO              | Baldwin County | 8001038 | ulayer|/shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038               | enroll/ma-enrollment.html   |  //*[contains(@class,'call')]//a[contains(@class,'tel')]      | enroll/pdp-enrollment.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |shop/medicare-advantage-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|/?wt.mc_id=8001038|
    
    
     ############################ Script 4: AMS Referral Traffic & Referral Visit###########################################
@@ -95,6 +128,13 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
+     Then the site user fills all the details in MedsuppPage
+   		| DOB           | <DOB>         | 
+   		Then user validate the plandetails on medsupp plans
+  Then the site user clicks on Start Application Button and proceed Next 
+      | DOB           | <DOB>         |
+      | Firstname     | <Firstname>   |
+      | Lastname      | <Lastname>    | 		
       #Then the user validate the sam icons tfn with federal TFN on Acquistion page
       Then the user navigates to PDP Plan Details Page and validates Federal TFN
       Then the user navigates to shop pages Page and validates Federal TFN
@@ -130,7 +170,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       Then the user navigates to following MA Plan Page URL and validate Federal TFN
       | MA URL    | <maUrl> |
       | TFN Xpath | <maTFN> |
-      Then the user navigates to homepage validates Federal TFN
+     # Then the user navigates to homepage validates Federal TFN
+     Given the user is on AARP medicare acquisition site landing page
      Then the user navigates to MA Plan Details Page and validates Federal TFN
     #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     #Then the user validates PSC code
@@ -138,8 +179,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
 
      Examples:
-   | scenario            | site|pscCode  | shoppages       |     shoppagesTFN                                                                 |shoppagescompare                   |             shoppagescompareTFN                                                     |shoppagesdsnp                                    |   shoppagesdsnpTFN                                 |connect                   |    connectTFN                                                       |    maUrl                                          |maTFN                                                             |         MedsuppUrl      |                                                                                                                                                                                                                                                          
-   | Sc. 04.01 - 4.02    |  ulayer|8003093 |   shop.html | (//a[contains(@class, 'tel')])[1]              | shop/compare.html               |(//a[contains(@class, 'tel')])[1] |shop/dual-special-needs-plans.html  | (//a[contains(@class, 'tel')])[1] |  contact-us.html      |(//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]  |enroll/ma-enrollment.html                          |(//a[contains(@class, 'tel')])[2]                                 |health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary|
+   | scenario            | site|pscCode  | shoppages       |     shoppagesTFN                                                                 |shoppagescompare                   |             shoppagescompareTFN                                                     |shoppagesdsnp                                    |   shoppagesdsnpTFN                                 |connect                   |    connectTFN                                                       |    maUrl                                          |maTFN                                                             |         MedsuppUrl      |     DOB      | Firstname | Lastname|                                                                                                                                                                                                                                                     
+   | Sc. 04.01 - 4.02    |  ulayer|8003093 |   shop.html | (//a[contains(@class, 'tel')])[1]              | shop/compare.html               |(//a[contains(@class, 'tel')])[1] |shop/dual-special-needs-plans.html  | (//a[contains(@class, 'tel')])[1] |  contact-us.html      |(//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]  |enroll/ma-enrollment.html                          |(//a[contains(@class, 'tel')])[2]                                 |health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary|11/13/1940 | John      | Carry   |
     
 	
     #######################Script 5: Portfolio Campaign Traffic to Med Ed########################################
@@ -162,14 +203,24 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
       | MedEd URL | <medEdURL2> |
       | TFN Xpath | <medEdTFN>  |
-    Then the user navigates to homepage validates Federal TFN
-    Then the user navigates to MA Plan Details Page and validates Federal TFN
-    Then the user navigates to SNP Plan Details Page and validates Federal TFN
-    Then the user navigates to SNP OLE Page and validates Federal TFN
+    Then the user performs plan search using Medicare articles pages for campaign Links
+       | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |   
+   # Then the user navigates to homepage validates Federal TFN
+     Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+       | Plan Type | <MAplantype> |
+   # Then the user navigates to MA Plan Details Page and validates Federal TFN
+    #Then the user navigates to SNP Plan Details Page and validates Federal TFN
+   # Then the user navigates to SNP OLE Page and validates Federal TFN
+   Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+       | Plan Type | <SNPplantype> |
+     Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+    | Plan Type | <SNPplantype> |
 
     Examples: 
-      | scenario                  | site   | pscCode | campaignUrl                               | medEdURL               | medEdTFN                           | medEdURL1                                  | medEdURL2                                         |
-      | Scenerio 5-Portfolio- AMP | ulayer | 8001277 | /medicare-education.html?WT.mc_id=8001277 | medicare-articles.html | (//span[@class='heading-6']//u)[1] | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html |
+      | scenario                  |MAplantype|SNPplantype|zipcode| county|isMultutiCounty|site   | pscCode | campaignUrl                               | medEdURL               | medEdTFN                           | medEdURL1                                  | medEdURL2                                         |
+      | Scenerio 5-Portfolio- AMP |MA        | SNP       |10001|New York County |NO      |ulayer |  8001277 | /medicare-education.html?WT.mc_id=8001277 | medicare-articles.html | (//span[@class='heading-6']//u)[1] | medicare-articles/medicare-made-clear.html | medicare-articles/eligibility-and-enrollment.html |
 
   #######################Script 7: Email Validation########################################
   @Scenario_7_DirectTraffic_Email_UAT @UATRegression
@@ -278,7 +329,9 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-      Then the user navigates to homepage validates Federal TFN  
+      Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+       | Plan Type | <MAplantype> |
+    #Then the user navigates to homepage validates Federal TFN  
     #And the user selects the state drop down value in AARP home page
     And the user selects the state drop down value in home page
        | State | <state> |
@@ -291,21 +344,23 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     #Then the user signs in with optum Id credentials for campaign TFN
      # | User Name | <userName> |
      # | Password  | <password> |  
-      Then the user navigates to homepage validates Federal TFN
+   	Then the user navigates to homepage validates Federal TFN
    	Then the user navigates to MA Plan Details Page and validates Federal TFN
-   	 Then the user navigates to MA OLE Page and validates Federal TFN
+   	 #Then the user navigates to MA OLE Page and validates Federal TFN
+   	 Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+    | Plan Type | <MAplantype> |
    	  Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
       | MedEd URL    | <medEdURL1> |
       | TFN Xpath | <medEdTFN> |
       Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppagesUrl> |
       | TFN Xpath | <shoppagesTFN> | 
-        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN 
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN 
       Then the user validates PSC code
       | PSC Code | <pscCode> | 
     Examples:  
-       |scenario                         | pscCode |state| campaignUrl                                                                                      | medEdURL1                                  | medEdTFN                                                        | shoppagesUrl|      shoppagesTFN             |userName|password|
-       |Scenerio 9-ExternalLink - AMP 	|  8000158 |Alabama| health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html         |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|
+       |scenario                         |MAplantype| pscCode |state| campaignUrl                                                                                      | medEdURL1                                  | medEdTFN                                                        | shoppagesUrl|      shoppagesTFN             |userName|password|
+       |Scenerio 9-ExternalLink - AMP 	 | MA       | 8000158 |Alabama| health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html         |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|
        
        
      

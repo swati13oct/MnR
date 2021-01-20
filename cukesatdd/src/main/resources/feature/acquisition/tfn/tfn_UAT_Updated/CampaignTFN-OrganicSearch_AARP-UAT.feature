@@ -51,7 +51,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
    |Sc. 3.08 - AMP |  810106 |  810104 |shop/medicare-advantage-plans.html     | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]|health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]  |
    
 
-  #######################Script 6: Campaign Precedence Logic#######################################
+  #######################Script 6a: Campaign Precedence Logic#######################################
   @Scenario_6_Precedence_1_AARP_UAT @UATRegression
   Scenario Outline: <scenario> Campaign Precedence Logic No 1
     #------------------------**********---------------------------------
@@ -121,7 +121,14 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <medSuppUrl> |
       | TFN Xpath   | <medSuppTFN> |    
-    ################## Precedence 6.15 - Visit site via organic search from Yahoo, PSC code 810105######################
+    Examples: 
+   | scenario                             | site   | Precedence1PSC | Precedence2PSC |  Precedence3PSC |  Precedence4PSC | Precedence5PSC |Precedence6PSC |Precedence7PSC |Precedence8PSC       | medSuppUrl                          |medSuppTFN                                                      | campaign2Url                                                   |campaign3Url                                        |campaign4Url                                                                                                  |connect|connectTFN|
+   |Scenario 6a: Campaign Precedence- AMP  | ulayer |        810106  |         860002 | 8001533          |  8001533        |        810027 | 810106          |  8001533        |        810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]   | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210|/shop/medicare-advantage-plans.html?WT.mc_id=8001533|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|/shop/medicare-advantage-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|
+  
+    #######################Script 6b: Campaign Precedence Logic#######################################
+  @Scenario_6_Precedence_1_AARP_UAT @UATRegression
+  Scenario Outline: <scenario> Campaign Precedence Logic No 1
+   ################## Precedence 6.15 - Visit site via organic search from Yahoo, PSC code 810105######################
     Given the user Starts WebDriver
     Given user is on Yahoo and search AARP Medicare Advantage Plan to navigate to AARP page
     Then the user navigates to shop pages Page and validates Federal TFN
@@ -136,8 +143,6 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
     Examples: 
    | scenario                             | site   | Precedence1PSC | Precedence2PSC |  Precedence3PSC |  Precedence4PSC | Precedence5PSC |Precedence6PSC |Precedence7PSC |Precedence8PSC       | medSuppUrl                          |medSuppTFN                                                      | campaign2Url                                                   |campaign3Url                                        |campaign4Url                                                                                                  |connect|connectTFN|
-   |Scenario 6: Campaign Precedence- AMP  | ulayer |        810106  |         860002 | 8001533          |  8001533        |        810027 | 810106          |  8001533        |        810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]   | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210|/shop/medicare-advantage-plans.html?WT.mc_id=8001533|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|/shop/medicare-advantage-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|
-  
-   
-     
+   |Scenario 6b: Campaign Precedence- AMP  | ulayer |        810106  |         860002 | 8001533          |  8001533        |        810027 | 810106          |  8001533        |        810105 | shop/medicare-supplement-plans.html | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]   | /shop/medicare-advantage-plans.html?WT.mc_id=860002&zipcode=90210|/shop/medicare-advantage-plans.html?WT.mc_id=8001533|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary|/shop/medicare-advantage-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|
+    
     
