@@ -288,9 +288,10 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	
 
 @Then("^the user navigates to MA Plan Details Page and validates Federal TFN$")
-public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-	String Zip = "90210";
+	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
@@ -301,10 +302,11 @@ public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN
 }
 
 @Then("^the user navigates to PDP Plan Details Page and validates Federal TFN$")
-public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
-	String Zip = "90210";
+	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
@@ -315,10 +317,11 @@ public void the_user_navigates_to_PDP_Plan_Details_Page_and_validates_Federal_TF
 }
 
 @Then("^the user navigates to SNP Plan Details Page and validates Federal TFN$")
-public void the_user_navigates_to_SNP_Plan_Details_Page_and_validates_Federal_TFN() throws Throwable {
+public void the_user_navigates_to_SNP_Plan_Details_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
-	String Zip = "80210";
+	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "SNP";
 	tfnPage.ViewPlanSummary(PlanType);
@@ -329,10 +332,11 @@ public void the_user_navigates_to_SNP_Plan_Details_Page_and_validates_Federal_TF
 }
 
 @Then("^the user navigates to MA OLE Page and validates Federal TFN$")
-public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
-	String Zip = "90210";
+	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
@@ -343,10 +347,11 @@ public void the_user_navigates_to_MA_OLE_Page_and_validates_Federal_TFN() throws
 }
 
 @Then("^the user navigates to PDP OLE Page and validates Federal TFN$")
-public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
-	String Zip = "90210";
+	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "PDP";
 	tfnPage.ViewPlanSummary(PlanType);
@@ -358,10 +363,11 @@ public void the_user_navigates_to_PDP_OLE_Page_and_validates_Federal_TFN() throw
 }
 
 @Then("^the user navigates to SNP OLE Page and validates Federal TFN$")
-public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN() throws Throwable {
+public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
-	String Zip = "80210";
+	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "SNP";
 	tfnPage.ViewPlanSummary(PlanType);
@@ -373,15 +379,17 @@ public void the_user_navigates_to_SNP_OLE_Page_and_validates_Federal_TFN() throw
 }
 
 @Then("^the user navigates to Medsupp Plans in VPP and validates Medsupp TFN$")
-public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN() throws Throwable {
+public void the_user_navigates_to_Medsupp_VPP_and_validates_Medsupp_TFN(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.NavigateToHome();
-	String Zip = "90210";
+	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	String PlanType = "MS";
 	tfnPage.ViewPlanSummary(PlanType);
-	String TFNXpath_PlanDetails = "//*[contains(@class,'tel right')]";
-	tfnPage.validateMedSuppTFN(TFNXpath_PlanDetails);
+	//String TFNXpath_PlanDetails = "//*[contains(@class,'tel right')]";
+//	String TFNXpath_PlanDetails=inputAttributesMap.get("TFN Xpath");
+//	tfnPage.validateMedSuppTFN(TFNXpath_PlanDetails);
 			
 		
 }
@@ -395,7 +403,7 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 	//AcquisitionHomePage aquisitionhomepage1 = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	
+	if (!(MRScenario.environment.equalsIgnoreCase("offline")) || !(MRScenario.environment.equalsIgnoreCase("stage"))){
 	if (getLoginScenario().environment.equalsIgnoreCase("stage")) {
 		aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
 	} 
@@ -408,7 +416,7 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	else {
 		Assert.fail("Error in loading the UHC Agent Page");
 	}
-	
+	}	
 }
 
 @Then("^the user validate the sam icons tfn with federal TFN on Acquistion page$")
@@ -453,7 +461,7 @@ public void the_user_navigates_to_following_DCE_Page_URL_and_validate_Federal_TF
 	String TFN_Xpath = "//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]";
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToUrl(URLpath);
-	tfnPage.validateFederalTFN(TFN_Xpath);
+//	tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
 @Then("^the user navigates to shop pages Page and validates Federal TFN$")
@@ -641,7 +649,7 @@ public void the_user_navigate_to_following_MedED_Pages_URL_and_validate_Federal_
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToUrl(URLpath);
 	//tfnPage.validateMedSuppTFN(TFN_Xpath);
-	tfnPage.validateFederalTFN(TFN_Xpath);
+//	tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
 @Given("^user is on Yahoo and search AARP Medicare Advantage Plan and  navigate to AARP shop pages$")
@@ -695,8 +703,8 @@ public void the_user_navigates_to_Plan_Details_Page_any_plan_and_validates_Feder
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 //	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	//String TFNXpath_PlanDetails = memberAttributesMap.get("TFN Xpath");
+//	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
 }
 @Then("^the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN$")
@@ -713,9 +721,9 @@ public void the_user_navigates_to_Plan_Details_Page_any_plan_Enroll_and_validate
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 //	tfnPage.ViewPlanSummary(PlanType);
 	//tfnPage.NavigateToPlanDetails(PlanType);
-tfnPage.NavigateToOLEEnroll(PlanType);
-String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
-tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+    tfnPage.NavigateToOLEEnroll(PlanType);
+ //   String TFNXpath_PlanDetails = memberAttributesMap.get("TFN Xpath");
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
 }
 
@@ -780,8 +788,32 @@ public void Standalone_zipcode_details_shop_camapign_TFN_medicare_article(DataTa
 	}
 }
 
+@Then("^the user validates TFN Number$")
+public void the_user_validates_TFN(DataTable inputAttributes) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String TFNXpath = inputAttributesMap.get("TFN Xpath");
+	String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+//	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
 }
 
+@Then("^the user navigates to plan tab for any plan$")
+public void the_user_navigates_to_Plan_tab_plan(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.ViewPlanSummary(PlanType);
+//	tfnPage.NavigateToPlanDetails(PlanType);
+}
+}
 
 
 

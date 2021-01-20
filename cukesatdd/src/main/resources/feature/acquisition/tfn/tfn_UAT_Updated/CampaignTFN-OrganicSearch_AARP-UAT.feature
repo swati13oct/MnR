@@ -26,10 +26,12 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | PSC Code | <Precedence1PSC> | 
        Then the user navigates to homepage validates Federal TFN
    	Then the user navigates to MA Plan Details Page and validates Federal TFN
+   		| Zip Code        | <zipcode>|
    	 And the user retrieves TFNSessionCookie and Federal and MedSupp TFN 
    	Then the user validates PSC code
       | PSC Code | <Precedence1PSC> | 
    	Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+   		| Zip Code        | <zipcode>|
    	Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <agentApptUrl> |
       | TFN Xpath   | <agentApptTFN> |
@@ -37,6 +39,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       | MedSupp URL | <decisionGuideUrl> |
       | TFN Xpath   | <decisionGuideTFN> |     
       Then the user navigates to PDP Plan Details Page and validates Federal TFN
+      	| Zip Code        | <zipcode>|
      Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppages> |
       | TFN Xpath | <shoppagesTFN> |
