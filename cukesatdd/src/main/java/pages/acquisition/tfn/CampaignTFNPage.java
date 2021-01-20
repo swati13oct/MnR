@@ -734,5 +734,22 @@ public class CampaignTFNPage extends UhcDriver {
 			return null;
 		}
 			
-		
+			@FindBy(xpath="//a[contains(text(),'Enroll in plan')]")
+			private WebElement EnrollPlanLink;
+			
+			public void NavigateToOLEEnroll(String planType) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				CommonUtility.waitForPageLoadNew(driver, EnrollPlanLink, 30);
+				jsClickNew(EnrollPlanLink);
+				waitForPageLoadSafari();
+				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
+						CommonUtility.checkPageIsReadyNew(driver);
+						if (driver.getCurrentUrl().contains("welcome")) {	
+							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+						}
+						else {
+							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+						}
+			}
 		}

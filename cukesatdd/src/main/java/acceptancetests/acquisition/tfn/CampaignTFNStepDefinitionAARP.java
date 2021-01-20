@@ -713,7 +713,7 @@ public void the_user_navigates_to_Plan_Details_Page_any_plan_Enroll_and_validate
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 //	tfnPage.ViewPlanSummary(PlanType);
 	//tfnPage.NavigateToPlanDetails(PlanType);
-tfnPage.NavigateToOLE(PlanType);
+tfnPage.NavigateToOLEEnroll(PlanType);
 String TFNXpath_PlanDetails = "//a[contains(@class, 'tel') and contains(@href, 'tel')]";
 tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
