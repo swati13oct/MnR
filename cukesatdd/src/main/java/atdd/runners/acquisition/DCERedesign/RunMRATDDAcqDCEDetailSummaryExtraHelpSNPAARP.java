@@ -10,7 +10,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcqDCEDetailsPageAARP - Scenario for VPP Page
+ * this file is to run test cases for RunMRATDDAcqDCEDetailSummaryExtraHelpSNPAARP - Scenario for validating Extra help for SNP plans
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEDetailSummaryExtraHelpSNPAARP.json",detailedReport = true,

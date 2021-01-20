@@ -110,7 +110,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "selectaPharmacyHeader")
 	public WebElement selectPharmacyHeader;
 
-	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(xpath = "//*[@id='modal']//*[@id='cancelicon']/img")
 	public WebElement selectPharmacyModalCloseBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -496,11 +496,11 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 
 		validateNew(drugTitle);
-		validateNew(switchToGenericBtn);
+		//validateNew(switchToGenericBtn);
 		validateNew(drugPricingDeductText);
-		Assert.assertTrue("Expected text not displayed on Drug pricing modal",
-				drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
-
+		Assert.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
+		validateNew(drugClose);
+		jsClickNew(drugClose);
 	}
 
 	public void verifyDrugCoverageAndYouPayNotCoveredDrug() {

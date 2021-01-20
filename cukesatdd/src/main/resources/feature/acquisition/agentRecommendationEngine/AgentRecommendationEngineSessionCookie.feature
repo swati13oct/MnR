@@ -75,8 +75,8 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | Current Plan         | <DisplayCurrentPlan> |
 
     Examples: 
-      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | RankingOptions | PlansOrder                                                                                                                                   | DisplayCurrentPlan |
-      | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Plan1(HMO),Plan2(HMO),MOSAIC(HMO),Essential(HMO),Choice(PPO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Essential(RegionalPPO) | YES                |
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | RankingOptions | PlansOrder                                                                                                                              | DisplayCurrentPlan |
+      | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Prime(HMO),Plan1(HMO),Plan2(HMO),Choice(PPO),Patriot(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO) | YES                |
 
   @ARE @AddEditDeleteDrug @F457409
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Drugs in ARE

@@ -6,8 +6,6 @@ import java.io.FileOutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,9 +22,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
@@ -35,7 +31,6 @@ import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
@@ -43,31 +38,27 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.commonpages.AboutUsAARPPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.ContactUsAARPPage;
+import pages.acquisition.commonpages.DisclaimersAARPPage;
+import pages.acquisition.commonpages.FindCarePage;
+import pages.acquisition.commonpages.MultiCountyModalPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
-import pages.acquisition.commonpages.ShopPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.ole.PersonalInformationPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
-import pages.acquisition.vppforaep.AepPlanDetailsPage;
-import pages.acquisition.vppforaep.VppCommonPage;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.commonpages.FindCarePage;
-import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
-import pages.acquisition.commonpages.DisclaimersAARPPage;
-import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
 import pages.acquisition.commonpages.SiteMapAARPPage;
-import pages.acquisition.commonpages.ContactUsAARPPage;
-import pages.acquisition.commonpages.AboutUsAARPPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.MultiCountyModalPage;
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.acquisition.vppforaep.VppCommonPage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -1297,98 +1288,82 @@ public class VppCommonStepDefinition {
 
 	}
 
-	// @And("^user clicks on contact us link of aboutus page$")
-	// public void click_contact_us() {
-	// AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	// getLoginScenario()
-	// .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	// ContactUsAARPPage contactUsAARPPage =
-	// aquisitionhomepage.contactUsFooterClick();
-	// if (contactUsAARPPage != null) {
-	// getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE,
-	// contactUsAARPPage);
-	// Assert.assertTrue(true);
-	// } else {
-	// Assert.fail("contactus page not found");
-	// }
-	// }
+	@And("^user clicks on contact us link of aboutus page$")
+	public void click_contact_us() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		ContactUsAARPPage contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
+		if (contactUsAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("contactus page not found");
+		}
+	}
 
-	// @And("^user clicks on sitemap link of contact us page$")
-	// public void click_sitemap() {
-	// AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	// getLoginScenario()
-	// .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	// SiteMapAARPPage siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
-	// if (siteMapAARPPage != null) {
-	// getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE,
-	// siteMapAARPPage);
-	//
-	// Assert.assertTrue(true);
-	// } else {
-	// Assert.fail("sitemap page not found");
-	// }
-	// }
+	@And("^user clicks on sitemap link of contact us page$")
+	public void click_sitemap() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		SiteMapAARPPage siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
+		if (siteMapAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
 
-	// @And("^user clicks on privacy policy link of sitemap page$")
-	// public void click_privacypolicy() {
-	// AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	// getLoginScenario()
-	// .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	// PrivacyPolicyAARPPage privacyPolicyAARPPage =
-	// aquisitionhomepage.privacypolicyFooterClick();
-	// if (privacyPolicyAARPPage != null) {
-	// getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE,
-	// privacyPolicyAARPPage);
-	//
-	// Assert.assertTrue(true);
-	// } else {
-	// Assert.fail("privacypolicy page not found");
-	// }
-	// }
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("sitemap page not found");
+		}
+	}
 
-	// @And("^user clicks on disclaimers link of terms & conditions page$")
-	// public void click_disclaimers() {
-	// AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	// getLoginScenario()
-	// .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	// DisclaimersAARPPage disclaimersAARPPage =
-	// aquisitionhomepage.disclaimersFooterClick();
-	// if (disclaimersAARPPage != null) {
-	// getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE,
-	// disclaimersAARPPage);
-	//
-	// Assert.assertTrue(true);
-	// } else {
-	// Assert.fail("disclaimers page not found");
-	// }
-	// }
+	@And("^user clicks on privacy policy link of sitemap page$")
+	public void click_privacypolicy() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		PrivacyPolicyAARPPage privacyPolicyAARPPage = aquisitionhomepage.privacypolicyFooterClick();
+		if (privacyPolicyAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE, privacyPolicyAARPPage);
 
-	// @And("^user clicks on agents & brokers link of disclaimers page$")
-	// public void click_agentsnbrokers() {
-	// AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	// getLoginScenario()
-	// .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	// AgentsnBrokersAARPPage agentsnBrokersAARPPage =
-	// aquisitionhomepage.agentsnbrokersFooterClick();
-	// if (agentsnBrokersAARPPage != null) {
-	// getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE,
-	// agentsnBrokersAARPPage);
-	//
-	// Assert.assertTrue(true);
-	// } else {
-	// Assert.fail("agents&brokers page not found");
-	// }
-	// }
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("privacypolicy page not found");
+		}
+	}
 
-	// @And("^user verifies home link of agents & brokers page$")
-	// public void click_home() {
-	// AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-	// getLoginScenario()
-	// .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	// AcquisitionHomePage aquisitionHomePageReload =
-	// aquisitionhomepage.homeFooterClick();
-	// Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
-	// }
+	@And("^user clicks on disclaimers link of terms & conditions page$")
+	public void click_disclaimers() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DisclaimersAARPPage disclaimersAARPPage = aquisitionhomepage.disclaimersFooterClick();
+		if (disclaimersAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE, disclaimersAARPPage);
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("disclaimers page not found");
+		}
+	}
+
+	@And("^user clicks on agents & brokers link of disclaimers page$")
+	public void click_agentsnbrokers() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AgentsnBrokersAARPPage agentsnBrokersAARPPage = aquisitionhomepage.agentsnbrokersFooterClick();
+		if (agentsnBrokersAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE, agentsnBrokersAARPPage);
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("agents&brokers page not found");
+		}
+	}
+
+	@And("^user verifies home link of agents & brokers page$")
+	public void click_home() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
+	}
 
 	@Then("^the user clicks on Learn More for Rocky Mountain plans$")
 	public void the_user_clicks_on_Learn_More__for_Rocky_Mountain_plans(DataTable planAttributes) throws Throwable {

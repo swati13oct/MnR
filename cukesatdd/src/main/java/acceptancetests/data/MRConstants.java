@@ -463,4 +463,8 @@ public class MRConstants {
   public static final String PROD_AARP_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
   public static final String PROD_PCP_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
   public static final String PROD_Medica_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
+  
+  public static final String Stage_CrossDomain_URL = "https://stage-mymedicareaccount.uhc.com/";
+  public static final String Stage_TestHarness_CrossDomain_URL = "https://stage-mymedicareaccount.uhc.com/?testharness=true";
+  public static final String TeamH_TestHarness_CrossDomain_URL = "https://www.team-h-mymedicareaccount.ocp-ctc-dmz-nonprod.optum.com/content/login/overview.html?testharness=true";
   }

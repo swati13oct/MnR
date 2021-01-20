@@ -256,8 +256,8 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement pharmacyName;
 	
 	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
-	
-	@FindBy(xpath ="//*[@id='selectPharmacyBtn3']")
+	////button[contains(@aria-label,'Select ALIXARX - MN')]
+	@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
@@ -1534,29 +1534,37 @@ public class DrugDetailsPage extends UhcDriver {
 
 
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]")
-	public WebElement LIS_Buydown_CopaySection;
+	public WebElement LIS_CopaySection;
 
-	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Qualify for LIS')]")
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Qualify for LIS')]//parent::div")
+	public WebElement LIS_CopayHeader;
+
+	@FindBy(xpath = "//*[contains(@id, 'lisbuydown')]//*[contains(text(), 'All covered drugs:')]")
 	public WebElement LIS_BuyDown_Copay;
+	
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//parent::div")
+	public WebElement LIS_Deductible;
 
-	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]")
-	public WebElement LIS_BuyDown_Deductible;
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//following::a[contains(text(), 'Learn more about Extra Help')]")
+	public WebElement LIS_DeductibleLISLink;
 
 	@FindBy(xpath = "//*[contains(@alt, 'alert')]//following::*[contains(text(), 'level of Extra Help')]")
 	public WebElement LIS_Alert;
 
 
 	public void validateLISBuyDown_CopaySection_LISAlert() {
-		if(validateNew(LIS_Buydown_CopaySection)  &&
+		if(validateNew(LIS_CopaySection)  &&
 		validateNew(LIS_BuyDown_Copay) &&
-		validateNew(LIS_BuyDown_Deductible) &&
+		!validate(LIS_CopayHeader) &&
+		validateNew(LIS_Deductible) &&
+		validateNew(LIS_DeductibleLISLink) &&
 		validateNew(LIS_Alert)
 		) {
 			System.out.println("***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
-			System.out.println("***** $0 Copay and Coinsurance for LIS Buydown *****");
+			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Buydown Plan *****");
 			System.out.println(LIS_BuyDown_Copay.getText());
-			System.out.println("***** Deductible for LIS Buydown *****");
-			System.out.println(LIS_BuyDown_Deductible.getText());
+			System.out.println("***** Deductible for LIS Buydown and LIS link Displayed *****");
+			System.out.println(LIS_Deductible.getText());
 			System.out.println("***** Alert Displayed for LIS Buydown *****");
 			System.out.println(LIS_Alert.getText());
 		}
@@ -1564,6 +1572,31 @@ public class DrugDetailsPage extends UhcDriver {
 			Assert.fail("***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
 	}
 
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'No LIS')]//parent::div")
+	public WebElement NonLIS_CopayHeader;
+	
+
+	public void validateLISonly_CopaySection_LISAlert() {
+		if(validateNew(LIS_CopaySection)  &&
+		validateNew(NonLIS_CopayHeader) &&
+		validateNew(LIS_CopayHeader) &&
+		validateNew(LIS_Deductible) &&
+		validateNew(LIS_DeductibleLISLink) &&
+		validateNew(LIS_Alert)
+		) {
+			System.out.println("***** DCE Details Page validation Passed for LIS Non BuyDown Plan - Alert and LIS copay Section *****");
+			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Non Buydown Plan *****");
+			System.out.println(NonLIS_CopayHeader.getText());
+			System.out.println(LIS_CopayHeader.getText() );
+			System.out.println("***** Deductible for LIS Non Buydown and LIS link Displayed *****");
+			System.out.println(LIS_Deductible.getText());
+			System.out.println("***** Alert Displayed for LIS Buydown *****");
+			System.out.println(LIS_Alert.getText());
+		}
+		else
+			Assert.fail("***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
+			
+	}
 	
 	@FindBy(xpath = "//div[@id='monthlycostdetails']")
 	public WebElement MonthlyDrug_Tbl;
