@@ -3,17 +3,12 @@ Feature: 1.05.7 OLE common tool flow E2E ENROLL Pages
  Scenario Outline: Verify Zip code serch from Standlaone zipcode to OLE
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-    And the user hovers screen over the shop for a plan
-    And click on Enroll Plan on ENROLL Pages
-    And click on Learn how to enroll on enroll page
-      | Plan Type | <plantype> |
-      | Plan Name | <planName> |
-    When the user performs plan search using Standalone information in EnrollPage
+   When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-   	#And the user views the plans of the below plan type
-    #| Plan Type | <plantype> |
+      | County Name     | <county>          |
+		And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
     And the user selects plan year
     	|Plan Year	| <planyear>|
     And the user validates the available plans for selected plan types
@@ -112,17 +107,12 @@ Feature: 1.05.7 OLE common tool flow E2E ENROLL Pages
       Scenario Outline: Verify Zip code serch from Standlaone zipcode to OLE for PDP Plan
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-    And the user hovers screen over the shop for a plan
-    And click on Enroll Plan on ENROLL Pages
-    And click on Learn how to enroll on enroll page
-      | Plan Type | <plantype> |
-      | Plan Name | <planName> |
-    When the user performs plan search using Standalone information in EnrollPage
+     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-   	#And the user views the plans of the below plan type
-    #| Plan Type | <plantype> |
+      | County Name     | <county>          |
+		And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
     And the user selects plan year
     	|Plan Year	| <planyear>|
     And the user validates the available plans for selected plan types

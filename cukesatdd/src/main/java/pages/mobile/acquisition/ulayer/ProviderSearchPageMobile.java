@@ -55,6 +55,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
 	private List<WebElement> SaveBtns;
 
+	
 	@FindBys(value = {
 			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
 	private List<WebElement> MulitpleSaveBtns;
@@ -487,9 +488,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 		jsClickNew(Physician);
+		
 
 		for (WebElement element : MulitpleSaveBtns) {
-			CommonUtility.waitForPageLoadNew(driver, element, 45);
+			//CommonUtility.waitForPageLoadNew(driver, element, 45);
 			jsClickNew(element);
 
 			if (validate(selectLocationOption)) {
@@ -520,7 +522,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		}
 
-		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
+	//	CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 		/*
 		 * Old Changes
 		 * 

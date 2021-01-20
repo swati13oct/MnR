@@ -1769,7 +1769,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
 		} else
 
-			// scrollToView(plan);
+		//	 scrollToView(plan);
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
 		scrollToView(premiumForPlan);
@@ -4002,7 +4002,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
 		String mproviderinfo = ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		ProviderSearchLink.click();
+		//ProviderSearchLink.click();
+		jsClickMobile(ProviderSearchLink);
 		ArrayList<String> providerNames = new ArrayList<String>();
 		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));

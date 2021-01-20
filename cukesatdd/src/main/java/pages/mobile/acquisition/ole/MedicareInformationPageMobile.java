@@ -317,9 +317,15 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		String emailConfirmation = MedicareDetailsMap.get("Email Confirmation");
 		String goGreen = MedicareDetailsMap.get("Go Green");
 		String email = MedicareDetailsMap.get("Email");
-
+		
+		//jsClickMobile(claimNumberField);
 		jsSendkeys(claimNumberField, MedicareNumber);
 		//claimNumberField.sendKeys(MedicareNumber);
+		jsClickMobile(claimNumberField);
+		claimNumberField.clear();
+		System.out.println("Medicare number cleared");
+		jsSendkeys(claimNumberField, MedicareNumber);
+		System.out.println("Medicare number set again");
 
 		if (SSNflag.contains("true")) {
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");

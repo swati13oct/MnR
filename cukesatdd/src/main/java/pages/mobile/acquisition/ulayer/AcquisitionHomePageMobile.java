@@ -118,6 +118,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
 	private WebElement pharmacylocator;
 
+	@FindBy(xpath = "//*[@id=\"planTypesColumn\"]/h3[2]/a")
+	private WebElement enroll;
+	
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
 
@@ -1316,6 +1319,27 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 					jse.executeScript("window.scrollBy(0,100)", "");
 				}
 				jsClickMobile(pharmacylocator);
+			}
+		}
+
+		if (locatePharmacy.getText().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE))) {
+			return new PharmacySearchPageMobile(driver);
+		} else {
+			return null;
+		}
+	}
+	
+	public PharmacySearchPageMobile navigateToEnrollMobile() {
+		waitforElement(menu);
+		if (menu.isDisplayed()) {
+			jsClickMobile(menu);
+			if (OurPlans.isDisplayed()) {
+				jsClickMobile(OurPlans);
+				while (!enroll.isDisplayed()) {
+					JavascriptExecutor jse = (JavascriptExecutor) driver;
+					jse.executeScript("window.scrollBy(0,100)", "");
+				}
+				jsClickMobile(enroll);
 			}
 		}
 

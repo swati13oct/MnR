@@ -3,16 +3,12 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
   	Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from E2E Shop Pages-MA,SNP PLans
 		Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-    And the user hovers screen over the shop for a plan
-    And click on Enroll Plan on shoppages for plans
-    And click on how to enroll shop pages
-     	| Plan Type | <plantype> |
-      | Plan Name | <planName> |
-       |Plan Year	| <planyear>|
-    When the user performs plan search using Shop Pages
+   When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+		And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
    	And the user selects plan year
     	|Plan Year	| <planyear>|
     And the user validates the available plans for selected plan types
@@ -116,16 +112,12 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from E2E Shop Pages-PDP PLANS
 		Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-    And the user hovers screen over the shop for a plan
-    And click on Enroll Plan on shoppages for plans
-    And click on how to enroll shop pages
-     	| Plan Type | <plantype> |
-      | Plan Name | <planName> |
-        	|Plan Year	| <planyear>|
-    When the user performs plan search using Shop Pages
+   When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+		And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
    	And the user selects plan year
     	|Plan Year	| <planyear>|
     And the user validates the available plans for selected plan types
