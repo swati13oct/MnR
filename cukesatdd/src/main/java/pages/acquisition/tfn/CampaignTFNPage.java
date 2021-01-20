@@ -755,7 +755,6 @@ public class CampaignTFNPage extends UhcDriver {
 			
 			public void validateFederalTFNNo(String TFNXpath, String ExpecetdTFNNo) {
 				
-				driver.navigate().back();
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {
