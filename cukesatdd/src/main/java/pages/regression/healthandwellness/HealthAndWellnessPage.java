@@ -134,9 +134,6 @@ public class HealthAndWellnessPage extends HealthAndWellnessBase {
 		if (MRScenario.browserName.equalsIgnoreCase("Firefox")) {
 			List<WebElement> eleList= (List<WebElement>) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot.children",
 					element);
-			for (WebElement e: eleList) {
-				System.out.println("TEST - e="+e.getAttribute("innerHTML"));
-			}
 			//note: return the last element from the list
 			return eleList.get(eleList.size()-1);
 		} else {
