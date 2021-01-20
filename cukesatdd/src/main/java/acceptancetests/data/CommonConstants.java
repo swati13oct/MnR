@@ -1,6 +1,3 @@
-/**
- * 
- */
 package acceptancetests.data;
 
 /**
@@ -864,7 +861,7 @@ public class CommonConstants {
 	//public static final String SAUCELABS_DEFAULT_TUNNEL = "OptumSharedTunnel-Stg";
 	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Stage";
 	public static String MAIN_WINDOW_HANDLE_ACQUISITION = null;
-	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "OptumRDC_Manual_Stage";//None/OptumRDC_Manual_Stage or optumtest/Optum-Stage;
+	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Stage";//Optum-Stage/Optum-Prd;
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER"; // Parameter name from Jenkins run
 	
 	public static final String APPIUM_DEFAULT_VERSION = "1.17.0";

@@ -3,37 +3,20 @@
  */
 package pages.mobile.acquisition.planrecommendationengine;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
@@ -54,7 +37,7 @@ public class EditResponseMobilePage extends UhcDriver {
 	String flow;
 
 	public WebElement drugCoveredeVPP;
-	PlanRecommendationEngineDrugsPage drug = new PlanRecommendationEngineDrugsPage(driver);
+	DrugMobilePage drug = new DrugMobilePage(driver);
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 
@@ -146,6 +129,7 @@ public class EditResponseMobilePage extends UhcDriver {
 		checkContent("drugs");
 		checkContent("additional");
 		checkContent("cost");
+		checkContent("priorities");
 		verifyClickEditButton("location", false);
 		verifyClickEditButton("coverage", false);
 		verifyClickEditButton("special", false);
@@ -154,6 +138,7 @@ public class EditResponseMobilePage extends UhcDriver {
 		verifyClickEditButton("drugs", false);
 		verifyClickEditButton("additional", false);
 		verifyClickEditButton("cost", false);
+		verifyClickEditButton("priorities", false);
 		checkDrugDocInfo("drugs", false);
 		checkDrugDocInfo("doctor", false);
 		editCancel(inputValues.get("Plan Type").toLowerCase());
@@ -182,15 +167,15 @@ public class EditResponseMobilePage extends UhcDriver {
 		inputValues = userInput;
 		String flow = inputValues.get("Plan Type");
 		if (flow.equalsIgnoreCase("pdp")) {
-			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
+			jsClickMobile(PDPViewPlansLink);
 			pdpEditResponseButton.click();
 		} else {
 			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
-				mobileUtils.mobileLocateElementClick(MAViewPlansLink); // Have zip with snp for all flows
+				jsClickMobile(MAViewPlansLink); // Have zip with snp for all flows
 				mapdEditResponseButton.click();
 			}
 			else {
-				mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
+				jsClickMobile(SNPViewPlansLink);
 				snpEditResponseButton.click();
 			}
 		}
@@ -247,6 +232,8 @@ public class EditResponseMobilePage extends UhcDriver {
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
+		} else if (section.equalsIgnoreCase("priorities")) {
+			UIValue = inputValues.get("Priorities");
 		}
 
 		return UIValue.toLowerCase();
@@ -321,6 +308,7 @@ public class EditResponseMobilePage extends UhcDriver {
 		mapd.put(5, "drugs");
 		mapd.put(6, "additional");
 		mapd.put(7, "cost");
+		mapd.put(8, "priorities");
 
 		ma = new HashMap<Integer, String>();
 		ma.put(0, "location");
@@ -330,6 +318,7 @@ public class EditResponseMobilePage extends UhcDriver {
 		ma.put(4, "doctor");
 		ma.put(5, "additional");
 		ma.put(6, "cost");
+		ma.put(7, "priorities");
 
 		pdp = new HashMap<Integer, String>();
 		pdp.put(0, "location");
@@ -469,6 +458,11 @@ public class EditResponseMobilePage extends UhcDriver {
 				checkDrugDocInfo("doctor", false);
 				docEdit = true;
 			}
+		} else if (section.equalsIgnoreCase("priorities")) {
+			PrioritiesMobilePage priority = new PrioritiesMobilePage(driver);
+			priority.prioritiesFunctional(inputValues.get("Priority Option"), inputValues.get("Priorities"));
+			jsClickNew(saveBtn);
+			checkContent("priorities");
 		}
 	}
 	
@@ -491,7 +485,7 @@ public class EditResponseMobilePage extends UhcDriver {
 		verifyClickEditButton("coverage", true);
 		validate(progressInfo, 10);
 		CoverageOptionsMobilePage coverage =  new CoverageOptionsMobilePage(driver);
-		coverage.coverageOptionMobile(inputValues.get("Plan Type"));
+		coverage.coverageOptionMobile(inputValues.get("Plan Type").toUpperCase().replace("PDPTOMAPD", "MAPD"));
 		jsClickNew(saveBtn);
 	}
 	
