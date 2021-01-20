@@ -229,11 +229,14 @@ public class ValueAddedServicepage extends UhcDriver {
 	//VAS widgets will display as per user plancode & statecode
 	public void vastiles(String planCode, String stateCode) throws InterruptedException
 	{
+		checkModelPopup(driver,5);
 	try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	
+	checkModelPopup(driver,5);
 		
 		if(planCode.equalsIgnoreCase("F01") && stateCode.equalsIgnoreCase("AR")) {
 			validate(silverSneakersWidget);
