@@ -50,6 +50,7 @@ import pages.acquisition.ole.PersonalInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
+import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 
@@ -181,7 +182,7 @@ public class OLEStepDefinitionMobile {
 		} else {
 			VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			TFN = planSummaryPage.GetTFNforPlanType();
+			//TFN = planSummaryPage.GetTFNforPlanType();
 
 			// PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
@@ -195,13 +196,13 @@ public class OLEStepDefinitionMobile {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+	//	getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
 		System.out.println("Plan County Name is : " + County);
 		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		System.out.println("TFN for Plan Type is : " + TFN);
+		//System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 
@@ -213,6 +214,9 @@ public class OLEStepDefinitionMobile {
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
 
+	
+	
+	
 	@Then("^the user navigates to clicks on Enroll Now for AARP site to start the OLE flow$")
 	public void the_user_navgates_to_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes)
 			throws Throwable {
@@ -462,13 +466,13 @@ public class OLEStepDefinitionMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (plansummaryPage.validatePlanNames(planType)) {
+	//	if (plansummaryPage.validatePlanNames(planType)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
-		}
+		//	Assert.assertTrue(true);
+		//} else {
+		//	Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
+		//}
 	}
 
 	// /**
@@ -2949,6 +2953,85 @@ public class OLEStepDefinitionMobile {
 			Assert.fail();
 		}
 	}
+	
+	@When("^the user Click on Is my Provider covered links$")
+	public void clickonProvidercoveredlinks(DataTable Planname) {
+		{
+			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String planName = plannameAttributesMap.get("PlanName");
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
+			if (providerSearchPage != null) {
+				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+			}
+
+		}
+	}
+
+	@When("^user selects a multiple providers and retuns to VPP page$")
+	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page() {
+		{
+			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.MultipleselectsProvider();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
+	
+
+	@Then("^User store the information provided from rally to vpp page$")
+	public void user_store_the_information_provided_from_rally_to_vpp(DataTable givenAttributes) {
+
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String planName = givenAttributesMap.get("PlanName");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		/*
+		 * ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+		 * plansummaryPage.setStringList(providers);
+		 * Assert.assertFalse("Providers not added",providers.isEmpty());
+		 * 
+		 * //Adding Line for Marketing bullet points VPPPlanSummaryPage plansummaryPage1
+		 * = (VPPPlanSummaryPage) getLoginScenario()
+		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); ArrayList<String>
+		 * vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
+		 * plansummaryPage1.setStringList(vppmarketingBullets);
+		 * Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
+		 * System.out.println("List of MarketingBullets in OLE page is: " +
+		 * vppmarketingBullets); // Line End for Marketing bullet points
+		 */
+		ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+		Assert.assertFalse("Providers not added", providers.isEmpty());
+		System.out.println("List of Providers in OLE page is: " + providers);
+		ArrayList<String> vppmarketingBullets = plansummaryPage.validate_marketing_details(planName);
+		Assert.assertFalse("Marketing Bullets not added", vppmarketingBullets.isEmpty());
+		System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
+		Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+		map.put("Provider", providers);
+		map.put("MarketingBullet", vppmarketingBullets);
+		plansummaryPage.setMap(map);
+
+	}
+
 
 	@Then("^the user navigates to Medicare Information Page for DSNP$")
 	public void the_user_navigates_to_Medicare_Information_Page_for_DSNP() throws Throwable {

@@ -1,36 +1,15 @@
 Feature: 1.05.8. OLE PRE Integration Flow
 
 	Scenario Outline: To validate MA plans through PRE
-    Given the user is on medicare acquisition site landing page for PRE
+    Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
-    And clicks on get started button and runs a questionnaire
-      | Zip Code        | <Zipcode>       |
-      | Is Multi County | <isMultiCounty> |
-      | CountyDropDown  | <county>        |
-    And user selects a plan type in coverage options page
-      | Plan Type | <isCoverageOpt> |
-    And user selects SNP options on Special Needs Page
-      | SNP Options | <specialNeeds> |
-    And user selects Travel options on Care Away From Home Page
-      | Travel Options | <travel> |
-    And user selects doctors on doctors page
-      | Doctors             | <doctors>       |
-      | Doctors Search Text | <DoctorsName>   |
-      | Multi Doctor        | <isMultiDoctor> |
-    And user selects skip option on Drug page
-    	| Plan Type | <isCoverageOpt> |
-      | Drug Selection | <Drug Selection> |
-    And user selects additional services option on additional services page
-      | Additional Option | <Dental-Hearing-Vision-Fitness> |
-    Then user selects cost preferences option on cost preferences page
-      | Preference Option | <costPreferenceOption> |
-    Then user validate elements on loading results page
-    #And the user views the plans of the below plan type and select Next year
-     # | Plan Type | <plantype> |
-		#And the user views the plans of the below plan type
-      #| Plan Type | <plantype> |
-    And the user selects plan year for PRE Flow
+   When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+		And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+   	And the user selects plan year
     	|Plan Year	| <planyear>|
 		And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
