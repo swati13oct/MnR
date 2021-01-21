@@ -70,18 +70,18 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <DCETFNxpath> |
-    #Then the user navigates to homepage validates Federal TFN
+   		 #------------Comment the below lines due to member page is not stable need to check with UAT Team--------------------#
     Then the user navigates to following memeber signin page and navigate to view medicare plans link AARP
       | Member Signin URL | <memberSignIn>               |
       | Member Signin URL STG | <memberSignInstage>      |
       | Member Signin URL Offline| <memberSignInOffline> |
- 		 Then the user validates TFN Number
-        | TFN No | <memberTFNNo> |
-        | TFN Xpath | <TFNxpath> |
-   # And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <Precedence2PSC> |
-    #Then the user validate the sam icons tfn with federal TFN on Acquistion page
+ 		 #------------Comment the below lines due to member page is not stable need to check with UAT Team---------------------#
+ 		 #Then the user validates TFN Number
+        #| TFN No | <memberTFNNo> |
+        #| TFN Xpath | <TFNxpath> |   
+    	#Then the user validates PSC code
+      #| PSC Code | <Precedence2PSC> |
+
 
     Examples: 
       | scenario         | site |zipcode|TFNNo          |memberTFNNo   |memberSignIn                  |memberSignInstage               |memberSignInOffline              | pscCode | maUrl                     | pdpUrl                        |  snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                |  medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype|MAplantype|TFNxpath                         |MedsuppTFNxpath                  |DCETFNxpath|MSplantype|
