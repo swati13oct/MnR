@@ -790,7 +790,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 			scrollElementToCenterScreen(contactUslink);
 			contactUslink.click();
 			sleepBySec(10);
-			Assert.assertTrue("Contact Us page is loaded successfully",driver.getCurrentUrl().contains("contact-us/overview.html"));
+			Assert.assertTrue("Contact Us page load unsuccessfully",driver.getCurrentUrl().contains("contact-us/overview.html"));
 			System.out.println("Contact Us page is loaded successfully");
 		}
 		else{

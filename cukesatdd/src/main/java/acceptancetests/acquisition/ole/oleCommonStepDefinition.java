@@ -8,14 +8,17 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.util.Strings;
 
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 
@@ -172,5 +175,11 @@ public class oleCommonStepDefinition {
 		}
 	}
 
+	@When("^user clicks on pharmacy link on OLE page$")
+	public void user_clicks_on_pharmacy_link_on_OLE_page() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		PharmacySearchPage pharmacySearchPage=welcomePage.clickPharamcyLinkAndSwitchTab();
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	}
 
 }

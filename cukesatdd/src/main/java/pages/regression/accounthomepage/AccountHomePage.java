@@ -1595,10 +1595,18 @@ public class AccountHomePage extends UhcDriver {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public WebElement expandRootElement1(WebElement element) {
-		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
-				element);
-		return ele;
+		if (MRScenario.browserName.equalsIgnoreCase("Firefox")) {
+			List<WebElement> eleList= (List<WebElement>) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot.children",
+					element);
+			//note: return the last element from the list
+			return eleList.get(eleList.size()-1);
+		} else {
+			WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+					element);
+			return ele;
+		}
 	}
 
 	public ContactUsPage navigateToContactUsPage2() throws InterruptedException {
@@ -3695,10 +3703,18 @@ public class AccountHomePage extends UhcDriver {
 		return new ClaimDetailsPage(driver);
 	}
 
+	@SuppressWarnings("unchecked")
 	public WebElement expandRootElement(WebElement element) {
-		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
-				element);
-		return ele;
+		if (MRScenario.browserName.equalsIgnoreCase("Firefox")) {
+			List<WebElement> eleList= (List<WebElement>) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot.children",
+					element);
+			//note: return the last element from the list
+			return eleList.get(eleList.size()-1);
+		} else {
+			WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+					element);
+			return ele;
+		}
 	}
 
 	public WebElement locateElementWithinShadowRoot(WebElement shadowRootElement, String inputSelector) {

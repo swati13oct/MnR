@@ -229,11 +229,14 @@ public class ValueAddedServicepage extends UhcDriver {
 	//VAS widgets will display as per user plancode & statecode
 	public void vastiles(String planCode, String stateCode) throws InterruptedException
 	{
+		checkModelPopup(driver,5);
 	try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	
+	checkModelPopup(driver,5);
 		
 		if(planCode.equalsIgnoreCase("F01") && stateCode.equalsIgnoreCase("AR")) {
 			validate(silverSneakersWidget);
@@ -402,20 +405,23 @@ public class ValueAddedServicepage extends UhcDriver {
 		
 		aarpVisionDiscountsShowMoreLnk.click();
 		
-		Thread.sleep(2000);		
-	
+		Thread.sleep(2000);	
+		
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
 		
 		aarpSmartDriverShowMoreLnk.click();
 		
 		Thread.sleep(2000);
 		
-		scrollToView(aarpSmartDriverShowMorePara);
+		scrollElementToCenterScreen(aarpSmartDriverShowMorePara);
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMorePara, 20);
 		
-		scrollToView(aarpSmartDriverShowMorePara);
+		scrollElementToCenterScreen(aarpSmartDriverShowMorePara);
 		
-		Assert.assertTrue(aarpSmartDriverShowMorePara.getText().contains("Here’s how to Register:"));
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("window.scrollBy(0,200)", "");
+		
+		Assert.assertTrue(aarpSmartDriverShowMorePara.getText().contains("how to Register:"));
 		
 		CommonUtility.waitForPageLoadNew(driver, aarpSmartDriverShowMoreLnk, 20);
 		

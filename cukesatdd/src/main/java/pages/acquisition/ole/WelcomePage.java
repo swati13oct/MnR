@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
  * @author sdwaraka
@@ -92,6 +94,9 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Hearing'))]//img")
 	private WebElement HearingImg;
+	
+	@FindBy(xpath = "//*[@id='ole-form-content']//a[contains(@href,'pharmacy.html')]")
+	private WebElement pharmacyLink;
 		
 	public WelcomePage(WebDriver driver) {
 		
@@ -348,6 +353,15 @@ public MedicareInformationPage navigate_to_medicare_info_page() {
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacySearchPage clickPharamcyLinkAndSwitchTab() {
+		pharmacyLink.click();
+		switchToNewTab();
+		if (driver.getCurrentUrl().contains("health-plans/aarp-pharmacy.html#/Pharmacy-Search-English")) {
+			return new PharmacySearchPage(driver);
 		}
 		return null;
 	}
