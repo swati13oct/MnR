@@ -11,6 +11,7 @@ import org.openqa.selenium.By;
  */
 
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +24,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 
 
 
@@ -779,4 +781,38 @@ public class CampaignTFNPage extends UhcDriver {
 				
 				driver.navigate().back();
 			}
+			
+			@FindBy(xpath="(//button//span[contains(text(),'View plan') or contains(text(),'View Plan Details')])[1]")
+			private WebElement firstPlanDetailsLinkdce;
+
+			public void NavigateToPlanDetailsdce(String planType) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLinkdce, 30);
+				jsClickNew(firstPlanDetailsLinkdce);
+				waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
+				System.out.println("View Plan Details Link is clicked for first plan for "+planType);
+						CommonUtility.checkPageIsReadyNew(driver);
+						if (driver.getCurrentUrl().contains("#/details")) {	
+							Assert.assertTrue("Plan Details is displayed for Plan Type : "+planType, true);
+						}
+						else {
+							Assert.assertTrue("Plan Details NOT Diaplyed for Plan Type : "+planType, false);
+						}
+			
+			}
+			
+			@FindBy(xpath = "(//a[contains(text(),'Estimate your drug costs at a Walgreens preferred retail pharmacy')])[2]")
+			private WebElement DCELink;
+			
+			public void NavigateToDCE() throws InterruptedException {
+			
+					validateNew(DCELink);
+					JavascriptExecutor executor = (JavascriptExecutor) driver;
+					executor.executeScript("arguments[0].scrollIntoView(true);", DCELink);
+					DCELink.click();
+					Thread.sleep(2000);
+			}
+
 }

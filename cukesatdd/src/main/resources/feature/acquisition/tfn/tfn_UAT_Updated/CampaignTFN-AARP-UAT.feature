@@ -11,8 +11,15 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN Xpath | <TFNxpath> |
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    Then the user navigates to MA Plan Details Page and validates Federal TFN
-    	  | Zip Code        | <zipcode>|
+    #Then the user navigates to MA Plan Details Page and validates Federal TFN
+    	 # | Zip Code        | <zipcode>|
+    Then the user enter zipcode in homepage
+    		 | Zip Code        | <zipcode>         |
+    		    | Plan Type | <MAplantype> | 
+   	#Then the user navigates to plan tab for any plan
+      #  | Plan Type | <MAplantype> |  
+   # Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+     # | Plan Type | <MAplantype> |
  		Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
@@ -394,7 +401,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
    
   #######################Script 8: External Link PDP########################################
   @Scenario_8_External_Link_PDP_UAT @UATRegression
-  Scenario Outline: <scenario> 1.0  Verify TFN through External Links PDP
+  Scenario Outline: <scenario>  Verify TFN through External Links PDP
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>        |
@@ -402,27 +409,70 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    Then the user navigates to PDP Plan Details Page and validates Federal TFN
-    	| Zip Code        | <zipcode>|
-    Then the user navigates to homepage validates Federal TFN
-    Then the user navigates to MA Plan Details Page and validates Federal TFN
-    	| Zip Code        | <zipcode>|
-    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-    	| Zip Code        | <zipcode>|
-    Then the user navigates to SNP Plan Details Page and validates Federal TFN
-    	| Zip Code        | <zipcode>|
-    Then the user navigates to SNP OLE Page and validates Federal TFN
-    	| Zip Code        | <zipcode>|
+    Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
+    Then the user enter zipcode in homepage
+    		 | Zip Code        | <zipcode>  |
+    		    | Plan Type | <PDPplantype> | 
+  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <PDPplantype> |  
+   	Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
+    Then the user navigates to plan tab for any plan
+        | Plan Type | <MAplantype> |
+  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <MAplantype> |  
+   Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
+    Then the user navigates to plan tab for any plan
+        | Plan Type | <MSplantype> |
+  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <MSplantype> |  
+   Then the user validates TFN Number
+       | TFN No | <MedsuppTFNNo> |
+       | TFN Xpath | <MedsuppTFNxpath> |
+   Then the user navigates to plan tab for any plan
+        | Plan Type | <SNPplantype> |
+  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <SNPplantype> |  
+   Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
+   Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+    | Plan Type | <SNPplantype> |
+   Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <EnrollTFNxpath> |
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaignUrl1> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <DCETFNxpath> |
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <DCETFNxpath> |
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+     Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <DCETFNxpath> |
+    Then the user navigates to Plan Details Page for DCE Flow 
+       | Plan Type | <MAplantype> | 
+        Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <DCETFNxpath> |     
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaignUrl2> |
@@ -430,25 +480,46 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates PSC code
       | PSC Code | <pscCode> |
     ###May be need to add  step 8.10 ########## Added the line 8.10 ##############
-    Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
-      | MedEd URL | <estimateUrl>  |
-      | TFN Xpath | <shoppagesTFN> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
-      | PSC Code | <pscCode> |
+    #Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
+      #| MedEd URL | <estimateUrl>  |
+     # | TFN Xpath | <shoppagesTFN> |
+    And the user enters following details for the pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown list
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    Then the user validates the Pharmacies available
+      | Language | English |
+    And the user validates pharmacy widgets on page
+      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+      | Has Walgreens plan                         | <hasWalgreensPlan>      |
+      | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
+      Then the user validates TFN Number
+       | TFN No    | <TFNNo>    |
+       | TFN Xpath | <TFNxpath> | 
+    And click on DCE Link on Pharmacy  
+   	Then the user validates TFN Number
+       | TFN No    | <TFNNo>    |
+       | TFN Xpath | <TFNxpath> | 
+    #-##########-----------------------------------------------------------------------###########
    	  Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
       | MedEd URL    | <medEdURL1> |
-      | TFN Xpath | <medEdTFN> |
+      Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |     
       Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppagesUrl> |
-      | TFN Xpath | <shoppagesTFN> | 
-      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN 
-      Then the user validates PSC code
-      | PSC Code | <pscCode> | 
+      Then the user validates TFN Number
+       | TFN No    | <MedsuppTFNNo>    |
+       | TFN Xpath | <shopTFNxpath> | 
     Examples:  
-       |scenario                         | site  |zipcode|pscCode | campaignUrl                                                                                                  | campaignUrl1                                                                                 |drug1   |zipCode|planType | planName                                                                          | campaignUrl2                                                                                                |distance|countyName |ny_planYear | ny_planName                     |pharmacyType                |medEdURL1                                                        | medEdTFN|shoppagesUrl                                              |      shoppagesTFN             |estimateUrl|
-       |Scenerio 8-ExternalLink - AMP 	| ulayer |90210|8001024 | health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27#/plan-summary |  health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27#/getstarted      | Lipitor|10001| MAPD     |AARP Medicare Advantage Prime (HMO)                                                 | health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27#/Pharmacy-Search-English               |    15 | None       | 2020 | AARP MedicareRx Preferred (PDP) | Preferred Retail Pharmacy Network|  medicare-articles/eligibility-and-enrollment.html             | (//span[@class='heading-6']//u)[1] |shop/medicare-supplement-plans.html                       |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|/health-plans/estimate-drug-costs.html#/getstarted|
-       
+      |scenario                         | site   |zipcode|pscCode | campaignUrl                                                                                                  | campaignUrl1                                                                                 |drug1   |zipCode|planType  | planName                                                                          | campaignUrl2                                                                                                |medEdURL1                                                        | shoppagesUrl                           | estimateUrl                                        |TFNNo          |TFNxpath                           |medSuppTFNNo              | medSuppTFNxpath                  |            EnrollTFNxpath        |DCETFNxpath                                                                      |shopTFNxpath                       |   distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | PDPplantype |  MAplantype |   MSplantype |  SNPplantype |   
+      |Scenerio 8-ExternalLink - AMP 	  | ulayer |10001  |8001024 | health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27#/plan-summary |  health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27#/getstarted      | Lipitor|10001  | MAPD     |AARP Medicare Advantage Prime (HMO)                                                 | health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27#/Pharmacy-Search-English              |  medicare-articles/eligibility-and-enrollment.html              | shop/medicare-supplement-plans.html    | /health-plans/estimate-drug-costs.html#/getstarted |1-866-308-8818 | (//a[contains(@class, 'tel')])[1] |1-844-895-7228            |//*[contains(@class,'tel right')] |(//a[contains(@class, 'tel')])[3] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text | (//a[contains(@class, 'tel')])[2] |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                   | PDP         |   MA        | MS           | SNP          |
+     
       
         #######################Script 9: External Link Plan 11########################################
    

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -28,6 +29,8 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.tfn.CampaignTFNPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.ulayer.GlobalWebElements;
@@ -83,20 +86,20 @@ public class CampaignTFNStepDefinitionAARP {
 	public void the_user_navigates_to_following_MA_Plan_Page_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("MA URL");
-		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	//	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.navigateToUrl(URLpath);
-		tfnPage.validateFederalTFN(TFN_Xpath);
+		//tfnPage.validateFederalTFN(TFN_Xpath);
 	}
 	
 	@Then("^the user navigates to following MedEd Plan Page URL and validate Federal TFN$")
 	public void the_user_navigates_MedEd_Page_and_validates_federal_TFN(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("MedEd URL");
-		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+		//String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.navigateToUrl(URLpath);
-		tfnPage.validateFederalTFN(TFN_Xpath);	
+		//tfnPage.validateFederalTFN(TFN_Xpath);	
 	}
 
 	@Then("^the user navigate to following PDP Plan Page URL and validate Federal TFN$")
@@ -123,10 +126,10 @@ public class CampaignTFNStepDefinitionAARP {
 	public void the_user_navigate_to_following_Med_Supp_Plan_URL_and_validate_MedSupp_TFN(DataTable arg1) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String URLpath = inputAttributesMap.get("MedSupp URL");
-		String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+		//String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 		tfnPage.navigateToUrl(URLpath);
-		tfnPage.validateMedSuppTFN(TFN_Xpath);
+		//tfnPage.validateMedSuppTFN(TFN_Xpath);
 		//tfnPage.validateFederalTFN(TFN_Xpath);
 	}
 
@@ -296,8 +299,8 @@ public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
 }
 
@@ -469,7 +472,7 @@ public void the_user_navigates_to_following_DCE_Page_URL_and_validate_Federal_TF
 public void the_user_navigates_to_shop_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("SHOPPAGES URL");
-	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	//String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 	
 	//String TFN_Xpath = "(//a[contains(@class, 'tel')])[1] ";
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -646,7 +649,7 @@ public void the_user_is_on_following_acquisition_site_from_External_Site_Land_MA
 public void the_user_navigate_to_following_MedED_Pages_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("MedEd URL");
-	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	//String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToUrl(URLpath);
 	//tfnPage.validateMedSuppTFN(TFN_Xpath);
@@ -820,6 +823,51 @@ public void the_user_navigates_back_page() throws Throwable {
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.validatebackpage();
+}
+
+
+@Then("^the user enter zipcode in homepage$")
+public void the_user_enter_zipcode(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String Zip = memberAttributesMap.get("Zip Code");
+	tfnPage.HomepagePlanSearch(Zip);
+	tfnPage.ViewPlanSummary(PlanType);
+	
+}
+
+@Then("^the user navigates to Plan Details Page for DCE Flow$")
+public void the_user_navigates_to_Plan_Details_Page_DCE_FLOW(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+//	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToPlanDetailsdce(PlanType);
+	//String TFNXpath_PlanDetails = memberAttributesMap.get("TFN Xpath");
+//	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+@Then("^click on DCE Link on Pharmacy$")
+public void clickonDCELink_Pharmacy_page() throws InterruptedException {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+//	tfnPage.ViewPlanSummary(PlanType);
+	tfnPage.NavigateToDCE();
 }
 
 }
