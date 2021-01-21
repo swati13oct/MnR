@@ -403,7 +403,6 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(driver);
 	//AcquisitionHomePage aquisitionhomepage1 = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	if (!(MRScenario.environment.equalsIgnoreCase("offline")) || !(MRScenario.environment.equalsIgnoreCase("stage"))){
 	if (getLoginScenario().environment.equalsIgnoreCase("stage")) {
 		aquisitionhomepage.clickonmemberSignInStagelink(memberSignINSTAGEURL);
 	} 
@@ -416,7 +415,7 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	else {
 		Assert.fail("Error in loading the UHC Agent Page");
 	}
-	}	
+	
 }
 
 @Then("^the user validate the sam icons tfn with federal TFN on Acquistion page$")
