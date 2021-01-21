@@ -141,6 +141,7 @@ public class ReviewOneTimePaymentPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		CommonUtility.waitForPageLoad(driver, ChangeCard, 20);
 		if((ChangeCard.isDisplayed()))
    		{
    			System.out.println("Change Card Link was displayed , Passed");	

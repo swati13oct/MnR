@@ -6,8 +6,6 @@ package pages.acquisition.commonpages;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,7 +16,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
@@ -91,8 +88,11 @@ public class ProviderSearchPage extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
 	private WebElement Checkcoverage;
 	
-	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
 	private WebElement FinishButton;
+
+	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")
+	private WebElement FinishButtonFinish;
 
 	@FindBy(xpath = "//*[contains(text(),'People')][contains(@class,'option-title')]")
 	private WebElement People;
@@ -141,6 +141,10 @@ public class ProviderSearchPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'provider-name')]")
 	private WebElement providerNameText;
+	
+	
+	@FindBy(xpath = "//li[@class='provider-card']")
+	private WebElement providerCard;
 
 	@FindBy(xpath = "//ul[contains(@class,'gs-options')]/li//div[contains(@class,'img')][contains(@src,'next')]")
 	private WebElement nextYrTile;
@@ -382,7 +386,8 @@ public class ProviderSearchPage extends UhcDriver {
 			System.out.println("New Rally page not displayed");
 		 
 		}
-		validateNew(providerNameText);
+		CommonUtility.waitForPageLoadNew(driver, PrintEmailBtn, 30);
+		//validateNew(providerCard);
 		validateNew(PrintEmailBtn);
 
 	}
@@ -434,9 +439,10 @@ public class ProviderSearchPage extends UhcDriver {
 			System.out.println("OLD Rally page displayed");
 			Checkcoverage.click();
 		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
 			System.out.println("NEW Rally page displayed");
-			FinishButton.click();
+//			FinishButton.click();
+			jsClickNew(FinishButtonFinish);
 		}else
 			System.out.println("Issue with Xpath");
 		
@@ -550,15 +556,18 @@ public class ProviderSearchPage extends UhcDriver {
 
 		}
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
-		 jsClickNew(Savedproviders); 	
-
+		jsClickNew(Savedproviders); 	
+		waitForPageLoadSafari();
+		
 	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 		System.out.println("OLD Rally page displayed");
 		Checkcoverage.click();
 	}	
 	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
 		System.out.println("NEW Rally page displayed");
-		FinishButton.click();
+		//FinishButton.click();
+		validateNew(FinishButton);
+		jsClickNew(FinishButton);
 	}else
 		System.out.println("Issue with Xpath");
 

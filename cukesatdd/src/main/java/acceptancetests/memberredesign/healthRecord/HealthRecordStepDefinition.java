@@ -413,16 +413,22 @@ public class HealthRecordStepDefinition {
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		wd=healthRecordPage.navigateToBenefitsPage(memberType);
 
-		//note: consumerDetail only show up on secondary page, get all the info now for later use
-		String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
-		boolean isComboUser=memberType.toLowerCase().contains("combo");
-		String lookForPlanCategory=planType;
-		if (planType.toUpperCase().contains("SHIP")) {
-			String[] tmp=planType.split("_");
-			Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
-			lookForPlanCategory=tmp[1];
+		boolean hasPaymentTab=false;
+		//note: for Safari, localStorage may not be supported, workaround it by just checking if paymnet tab is on page
+		if (MRScenario.browserName.equalsIgnoreCase("Chrome")) {
+			//note: consumerDetail only show up on secondary page, get all the info now for later use
+			String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
+			boolean isComboUser=memberType.toLowerCase().contains("combo");
+			String lookForPlanCategory=planType;
+			if (planType.toUpperCase().contains("SHIP")) {
+				String[] tmp=planType.split("_");
+				Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
+				lookForPlanCategory=tmp[1];
+			}
+			hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
+		} else {
+			hasPaymentTab=healthRecordPage.hasPaymentTabOnPage();
 		}
-		boolean hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB, hasPaymentTab);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
@@ -646,16 +652,20 @@ public class HealthRecordStepDefinition {
 		if (getLoginScenario().getBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB)==null) {
 			wd=healthRecordPage.navigateToBenefitsPage(memberType);
 
-			//note: consumerDetail only show up on secondary page, get all the info now for later use
-			String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
-			boolean isComboUser=memberType.toLowerCase().contains("combo");
-			String lookForPlanCategory=planType;
-			if (planType.toUpperCase().contains("SHIP")) {
-				String[] tmp=planType.split("_");
-				Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
-				lookForPlanCategory=tmp[1];
+			if (MRScenario.browsername.equalsIgnoreCase("FireFox")) {
+				//note: consumerDetail only show up on secondary page, get all the info now for later use
+				String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
+				boolean isComboUser=memberType.toLowerCase().contains("combo");
+				String lookForPlanCategory=planType;
+				if (planType.toUpperCase().contains("SHIP")) {
+					String[] tmp=planType.split("_");
+					Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
+					lookForPlanCategory=tmp[1];
+				}
+				hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
+			} else {
+				hasPaymentTab=healthRecordPage.hasPaymentTabOnPage();
 			}
-			hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
 			getLoginScenario().saveBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB, hasPaymentTab);
 
 		} else {
@@ -898,16 +908,21 @@ public class HealthRecordStepDefinition {
 	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to Pharmacy Locator page and validate Health Record link display behavior$")
 	public void user_toPharmacyLocator() {
-		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		String targetPage="Pharmacy Locator";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
+		testNote.add("\tSKIPPED - Health Record link destination validation - "+targetPage+" is Rally page");
+		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+		return;
+		/* keep - resurrect this code and fix it up if we need to validate Rally page also
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
 		if (planType.toUpperCase().contains("SHIP") || planType.equalsIgnoreCase("MA") 
 				|| planType.equalsIgnoreCase("SSUP") || memberType.toUpperCase().contains("TERM")) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
@@ -955,23 +970,28 @@ public class HealthRecordStepDefinition {
 		}
 		healthRecordPage.backToOriginalLinkToPrepNextStep(planType, memberType, originalUrl);
 		testNote.add("\tPASSED - Health Record link destination validation");
-		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+		*/
 	}
 
 	@SuppressWarnings("unchecked")
 	@Then("^the user navigates to DCE page and validate Health Record link display behavior$")
 	public void user_toDce() {
-		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
-		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		List<String> testNote=(List<String>) getLoginScenario().getBean(HealthRecordCommonConstants.TEST_NOTE);
 		if (testNote==null)
 			testNote=new ArrayList<String>();
 		String targetPage="DCE";
 		testNote.add("===================================================");
 		testNote.add("\tValidation for page '"+targetPage+"'");
+		testNote.add("\tSKIPPED - Health Record link destination validation - "+targetPage+" is Rally page");
+		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
+		return;
+		/* keep - resurrect this code and fix it up if we need to validate Rally page also
+		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
 		if (planType.toUpperCase().contains("SHIP") || planType.equalsIgnoreCase("MA") 
 				|| planType.equalsIgnoreCase("SSUP") || memberType.toUpperCase().contains("TERM")) {
 			System.out.println(planType+" user doesn't have '"+targetPage+"' page, skipping step...");
@@ -1021,6 +1041,7 @@ public class HealthRecordStepDefinition {
 		testNote.add("\tPASSED - Health Record link destination validation");
 		getLoginScenario().saveBean(HealthRecordCommonConstants.TEST_NOTE, testNote);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		*/
 	}
 
 	@SuppressWarnings("unchecked")

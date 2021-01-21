@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 //import acceptancetests.deprecated.benefitsandcoverage.data.PlanBenefitsAndCoverageCommonConstants;
 import acceptancetests.data.LoginCommonConstants;
+import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
 import acceptancetests.util.CommonUtility;
@@ -39,6 +40,7 @@ import pages.regression.deeplinkPages.OfflineProd_PharmacynPrescriptionLoginPage
 import pages.regression.deeplinkPages.OfflineProd_VirtualVisitDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PaymentsDeeplinkLoginPage;
 import pages.regression.deeplinkPages.PharmacyDeeplinkLoginPage;
+import pages.regression.deeplinkPages.Prod_VirtualVisitDeeplinkLoginPage;
 import pages.regression.deeplinkPages.VirtualVisitDeeplinkLoginPage;
 import pages.regression.deeplinkPages.aarpChatAgentLogin;
 import pages.regression.deeplinkPages.accountsProfileDeeplinkLoginPage;
@@ -1280,12 +1282,11 @@ public class HSIDStepDefinition {
 										 * @todo :member lands on myDocuments deep link
 										 */
 										@Given("^I am an M&R SHIP member$")
-										public void the_SHIP_user_iS_on_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
-											String brand = givenAttributes.asList(String.class).get(0);
+										public void the_SHIP_user_iS_on_deeplink_Page() throws InterruptedException{
 											WebDriver wd = getLoginScenario().getWebDriver();
 											getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 											healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
-											healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURL(brand);
+											healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURL();
 											getLoginScenario().saveBean(PageConstants.AARP_HAWL,healthwellnessDeepLinkLoginPageSHIP );	
 										}
 										/** 
@@ -1686,6 +1687,157 @@ public class HSIDStepDefinition {
 											public void offlinePROD_edelivery_displayed() throws InterruptedException{
 												myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = (myDocumentsEdeliveryDeeplinkLoginPage) loginScenario.getBean(PageConstants.Offline_PROD_edelivery);
 												myDocumentsEdeliveryDeeplinkLoginPage.validateofflinePageElements();
-												myDocumentsEdeliveryDeeplinkLoginPage.validateOfflineProdedeliverypage();
+												myDocumentsEdeliveryDeeplinkLoginPage.validateOfflineProdpRODedeliverypage();
 											}
-										}
+											/** 
+											 * @todo :member lands on virtual visit offline PROD deep link
+											*/
+											@Given("^member lands on the PROD virtual visit deeplink page$")
+											public void the_user_is_on_PROD_virtualVisit_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												Prod_VirtualVisitDeeplinkLoginPage Prod_VirtualVisitDeeplinkLoginPage = new Prod_VirtualVisitDeeplinkLoginPage(wd);
+												Prod_VirtualVisitDeeplinkLoginPage.navigateToLoginURL(brand);
+												getLoginScenario().saveBean(PageConstants.PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE,Prod_VirtualVisitDeeplinkLoginPage);
+														}
+											/** 
+											 * @todo :deep link login page elements validate  
+											*/
+											@And("^the PROD virtual visit deeplink login page is displayed with all the fields$")
+											public void PROD_virtualVisit_pageis_displayed(){
+												Prod_VirtualVisitDeeplinkLoginPage Prod_VirtualVisitDeeplinkLoginPage = (Prod_VirtualVisitDeeplinkLoginPage) loginScenario.getBean(PageConstants.PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE);
+												Prod_VirtualVisitDeeplinkLoginPage.validatePageElements();
+												Prod_VirtualVisitDeeplinkLoginPage.validateOfflineProdVirtualVisitPage();
+											}  
+											/** 
+											 * @todo :member lands on the offline PROD health & wellness deeplink page
+											*/
+											@Given("^member lands on the PROD health & wellness deeplink page$")
+											public void the_user_is_on_PROD_healthnwellness_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = new healthwellnessDeepLinkLoginPageSHIP(wd);
+												healthwellnessDeepLinkLoginPageSHIP.navigateToLoginURLPROD(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_SHIP_healthNwellness,healthwellnessDeepLinkLoginPageSHIP);
+														}
+											/** 
+											 * @throws InterruptedException 
+											 * @todo :deep link login page elements validate  
+											*/
+											@And("^the PROD health & wellness deeplink login page is displayed with all the fields$")
+											public void PROD_healthnWellness_displayed() throws InterruptedException{
+												healthwellnessDeepLinkLoginPageSHIP healthwellnessDeepLinkLoginPageSHIP = (healthwellnessDeepLinkLoginPageSHIP) loginScenario.getBean(PageConstants.Offline_PROD_SHIP_healthNwellness);
+												healthwellnessDeepLinkLoginPageSHIP.validateofflinePageElements();
+												healthwellnessDeepLinkLoginPageSHIP.validateOfflineProdhealthwellnessPage();
+											}
+											/** 
+											 * @todo :member lands on the offline PROD health & wellness deeplink page
+											*/
+											@Given("^member lands on the PROD edelivery deeplink page$")
+											public void the_user_is_on_PROD_edelivery_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												myDocumentsEdeliveryDeeplinkLoginPage myDocumentsEdeliveryDeeplinkLoginPage = new myDocumentsEdeliveryDeeplinkLoginPage(wd);
+												myDocumentsEdeliveryDeeplinkLoginPage.navigateToLoginURLPOD(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_edelivery,myDocumentsEdeliveryDeeplinkLoginPage);
+														}
+											/** 
+											 * @todo :member lands on virtual visit offline PROD deep link
+											*/
+											@Given("^member lands on the PROD HWP deeplink page$")
+											public void the_user_is_on__PROD_HWP_deeplink_Page(DataTable givenAttributes) throws InterruptedException{
+												String brand = givenAttributes.asList(String.class).get(0);
+												WebDriver wd = getLoginScenario().getWebDriver();
+												getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+												OfflineProd_PharmacynPrescriptionLoginPage OfflineProd_PharmacynPrescriptionLoginPage = new OfflineProd_PharmacynPrescriptionLoginPage(wd);
+												OfflineProd_PharmacynPrescriptionLoginPage.navigateToProdLoginURL(brand);
+												getLoginScenario().saveBean(PageConstants.Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE,OfflineProd_PharmacynPrescriptionLoginPage);
+														}
+											
+	@Given("^login with a cross domain URL in the member portal and validate elements$")
+	public void login_with_a_cross_domain_url_in_the_member_portal(DataTable memberAttributes)	throws Exception {
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+				.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+		String category = memberAttributesMap.get("Member Type");
+		getLoginScenario().saveBean(LoginCommonConstants.CATOGERY,category);
+		String planType = memberAttributesMap.get("Plan Type");
+		getLoginScenario().saveBean(LoginCommonConstants.PLANTYPE,planType);
+		
+		Set<String> memberAttributesKeySet = memberAttributesMap.keySet();
+		List<String> desiredAttributes = new ArrayList<String>();
+		for (Iterator<String> iterator = memberAttributesKeySet.iterator(); iterator
+			.hasNext();) {
+			{
+				String key = iterator.next();
+				desiredAttributes.add(memberAttributesMap.get(key));
+			}
+		}
+		System.out.println("desiredAttributes.." + desiredAttributes);
+		if (desiredAttributes.size() > 1) {
+			getLoginScenario().saveBean(LoginCommonConstants.MEMBERTYPE,
+					desiredAttributes.get(1));
+		}
+												
+		Map<String, String> loginCreds = loginScenario
+			.getUMSMemberWithDesiredAttributes(desiredAttributes);
+		String userName = null;
+		String pwd = null;
+		Assert.assertTrue("unable to find a " + desiredAttributes + " member. Member Type data could not be setup !!! ", loginCreds != null);
+		userName = loginCreds.get("user");
+		pwd = loginCreds.get("pwd");
+		System.out.println("User is..." + userName);
+		System.out.println("Password is..." + pwd);
+
+		getLoginScenario().saveBean(LoginCommonConstants.USERNAME, userName);
+		getLoginScenario().saveBean(LoginCommonConstants.PASSWORD, pwd);
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		String navigateURL = getCrossDomainURL();
+		HSIDLoginPage loginPage = null;
+		if (navigateURL != null) {
+			loginPage = new HSIDLoginPage(wd, navigateURL);
+		} else {
+			Assert.fail("URL not found to navigate. Check configuration parameters");
+		}
+		try {
+			if (("YES").equalsIgnoreCase(MRScenario.isTestHarness)) {
+				TestHarness testHarnessPage=null;
+				testHarnessPage = (TestHarness) loginPage.doLoginWith(userName, pwd);
+				Assert.assertTrue("PROBLEM - Login not successful...", testHarnessPage != null);
+				getLoginScenario().saveBean(PageConstantsMnR.TEST_HARNESS_PAGE, testHarnessPage);
+				return;
+			}
+			AccountHomePage accountHomePage=null;
+			accountHomePage = (AccountHomePage) loginPage.doLoginWith(userName, pwd);
+			Assert.assertTrue("PROBLEM - Login not successful...", accountHomePage != null);
+			getLoginScenario().saveBean(PageConstantsMnR.ACCOUNT_HOME_PAGE, accountHomePage);
+		} catch (Exception e) {
+			System.out.println("Login not successful. Error: " + e);
+			Assert.fail("Login not successful. Error: " + e.getMessage());
+		} 
+	}
+	
+	public String getCrossDomainURL() {
+		String navigateURL = null;
+		if("YES".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			if ("team-h".equalsIgnoreCase(MRScenario.environment)) {
+				navigateURL = MRConstants.TeamH_TestHarness_CrossDomain_URL;
+			} else if ("stage".equalsIgnoreCase(MRScenario.environment)) {
+				navigateURL = MRConstants.Stage_TestHarness_CrossDomain_URL;
+			}
+		} else if("NO".equalsIgnoreCase(MRScenario.isTestHarness)) {
+			if ("stage".equalsIgnoreCase(MRScenario.environment)) {
+				navigateURL = MRConstants.Stage_CrossDomain_URL;
+			}
+		}
+		System.out.println("Navigated to URL:" + navigateURL);
+		return navigateURL;
+	}
+}

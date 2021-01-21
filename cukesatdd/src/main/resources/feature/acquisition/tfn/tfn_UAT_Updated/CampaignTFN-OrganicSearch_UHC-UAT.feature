@@ -1,7 +1,7 @@
 Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
 
   ################################Script 3: Organic Search via Google and Bing######################################
-  @Scenario3_1_GoogleBingSearch_UHC_UAT
+  @Scenario3_1_GoogleBingSearch_UHC_UAT @UATRegression
   Scenario Outline: - <scenario> 3.1 Google search UHC Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page
@@ -48,7 +48,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
    |scenario       | pscCode | Precedence1PSC|maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                                  |medicarearicleUrl|medicarearicleTFN|medicareMadeclearUrl|medicareMadeclearTFN|medicareEligibilityUrl|medicareEligibilityTFN|
    |Sc. 3.08 - AMP |  880188 |  880187       |shop/medicare-advantage-plans.html     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]     |health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]      | /medicare-articles.html                 |  (//a[contains(@class, 'tel')])[1]               |   medicare-articles/medicare-made-clear.html                 |     (//a[contains(@class, 'tel')])[1]              |    medicare-articles/eligibility-and-enrollment.html                 |        (//a[contains(@class, 'tel')])[1]                |
    
-  @Scenario_4_1to8_Precedence_1_UHC_UAT
+  @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
   Scenario Outline: 4.1 to 4.8 Campaign Precedence Logic No 1 for UHC
     #------------------------**********---------------------------------
     #------------------------**********---------------------------------

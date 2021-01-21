@@ -122,6 +122,12 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		WebElement imgElement=pharmacyLocator_link_img;
 		List<WebElement> instElement=pharmacyLocator_instr_PD;
 		String expectedUrl="/content/medicare/member/pharmacy-locator/overview.html";
+		if (MRScenario.environment.contains("team-atest")) {
+			if (testInputInfoMap.get("planType").equals("MEDICA")||testInputInfoMap.get("planType").equals("PCP"))
+				expectedUrl="https://member.mymedicareaccount.com/pharmacy-uhc/pharmacies";
+			else 
+				expectedUrl="https://member.uhc.com/pharmacy-uhc/pharmacies";
+		}
 
 		testInputInfoMap.put("docName", item);
 		testInputInfoMap.put("expectedUrl", expectedUrl);
@@ -160,7 +166,7 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		List<WebElement> instElement=providerSearch_instr_PD;
 		String expectedUrl="";
 		String redirectUrl="";
-		if (testInputInfoMap.get("memberType").contains("_PREEFF_")) {
+		//tbd if (testInputInfoMap.get("memberType").contains("_PREEFF_")) {
 			expectedUrl="https://member.uhc.com/UHC/find-care";
 			redirectUrl="https://www.myuhc.com/member/prewelcome.do";
 
@@ -238,14 +244,14 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 					}
 				}
 			}
-		} else {
-			expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=";
-			redirectUrl="none";
-			if (testInputInfoMap.get("memberType").contains("GROUP")) {
-				expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
-			 	redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
-			}
-		}
+		//tbd } else {
+		//tbd 	expectedUrl="/county-plan-selection/uhc.mnr/zip?clientPortalCode=";
+		//tbd 	redirectUrl="none";
+		//tbd 	if (testInputInfoMap.get("memberType").contains("GROUP")) {
+		//tbd 		expectedUrl="https://connect.werally.com/guest/acquisition/guestSearch/";
+		//tbd 	 	redirectUrl="https://connect.werally.com/county-plan-selection/uhc.mnr/zip?clientPortalCode";
+		//tbd 	}
+		//tbd }
 		
 
 		testInputInfoMap.put("section", section);

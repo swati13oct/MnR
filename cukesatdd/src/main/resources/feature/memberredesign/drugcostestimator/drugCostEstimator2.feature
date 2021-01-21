@@ -1,6 +1,6 @@
 Feature: Member DCE Page
 
-@codeWarriors @F467985
+#@codeWarriors @F467985 -- Functionality changed
   Scenario Outline: plan: <planType> -memberType: <memberType> - Verify DCE flow for individual members
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |

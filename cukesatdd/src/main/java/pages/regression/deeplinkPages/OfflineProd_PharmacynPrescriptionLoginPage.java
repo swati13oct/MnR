@@ -72,6 +72,11 @@ public class OfflineProd_PharmacynPrescriptionLoginPage extends UhcDriver {
 	  public static final String Offline_PROD_AARP_DEEPLINK_URL_HWP ="https://offline.myaarpmedicare.com/hwp";
 	  public static final String Offline_PROD_PCP_DEEPLINK_URL_HWP ="https://offline.mypcpmedicare.com/hwp";
 	  public static final String Offline_PROD_Medica_DEEPLINK_URL_HWP ="https://offline.mymedicamedicare.com/hwp";
+	  
+	  public static final String PROD_UHC_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
+	  public static final String PROD_AARP_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
+	  public static final String PROD_PCP_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
+	  public static final String PROD_Medica_DEEPLINK_URL_HWP ="https://myuhcmedicare.com/hwp";
 			
 			 /*This method will open deep link page */
 			public OfflineProd_PharmacynPrescriptionLoginPage navigateToLoginURL(String brand){
@@ -161,7 +166,34 @@ public class OfflineProd_PharmacynPrescriptionLoginPage extends UhcDriver {
 										
 						return true;	
 					}
-				
+				 /*This method will open deep link page */
+				public OfflineProd_PharmacynPrescriptionLoginPage navigateToProdLoginURL(String brand){
+					
+					switch (brand) {
+					case "UHC":
+						start(PROD_UHC_DEEPLINK_URL_HWP);
+						break;
+					case "AARP":
+						start(PROD_AARP_DEEPLINK_URL_HWP);
+						break;
+					case "PCP":
+						start(PROD_PCP_DEEPLINK_URL_HWP);
+						break;
+					case "Medica":
+						start(PROD_Medica_DEEPLINK_URL_HWP);
+						break;
+					}
+					driver.manage().deleteAllCookies();
+					
+					try {
+						Thread.sleep(10000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}		
+					return null;
+					}
+					
 				
 }
 

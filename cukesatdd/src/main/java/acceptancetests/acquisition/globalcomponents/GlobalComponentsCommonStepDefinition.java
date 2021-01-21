@@ -1,15 +1,13 @@
-
-
 package acceptancetests.acquisition.globalcomponents;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 
@@ -39,6 +37,7 @@ import pages.acquisition.commonpages.DisclaimersAARPPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.EnrollmentBasicsPage;
 import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
+import pages.acquisition.commonpages.ShopPage;
 import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.TermsnConditionsAARPPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
@@ -47,14 +46,14 @@ import pages.acquisition.commonpages.AboutUsAARPPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class GlobalComponentsCommonStepDefinition {
-	
+
 	@Autowired
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	@When("^user accesses global header of the Medicare Plans home page$")
 	public void access_global_header_aarp() {
 
@@ -66,7 +65,25 @@ public class GlobalComponentsCommonStepDefinition {
 			Assert.fail("Home page not found");
 		}
 	}
-	
+
+	@Given("^the user is on medicare acquisition site landing page$")
+	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String site = memberAttributesMap.get("Site");
+
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		aquisitionhomepage.validateSubtitle();
+	}
+
 	@When("^user accesses global footer of the Medicare Plans All page$")
 	public void access_global_footer_aarp_all_pages() {
 
@@ -78,37 +95,54 @@ public class GlobalComponentsCommonStepDefinition {
 			Assert.fail("Home Page not Loading");
 		}
 	}
-	
+
 	@When("^user verifies the logo$")
 	public void user_verifies_the_AARP_logo_on_home_page() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateLogo();		
+		aquisitionhomepage.validateLogo();
 	}
 
 	@And("^user clicks on Sign in link$")
 	public void click_signIn_aarp() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.signInheader();		
+		aquisitionhomepage.signInheader();
 	}
-	
+
 	@And("^user clicks on register link$")
 	public void click_register_aarp() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.headerRegisterLink();
 	}
-	
+
 	@Then("^user validates visitor profile$")
 	public void the_user_validates_visitor_profile_aarp() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatevisitorprofile();
 	}
-	
+
+	@Then("^user validates Subtitle$")
+	public void user_validates_Subtitle(DataTable givenAttributes) throws Throwable {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String site = memberAttributesMap.get("Site");
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+		if (site.equalsIgnoreCase("AARP")) {
+			aquisitionhomepage.validateSubtitle();
+		}
+	}
+
 	@Given("^the user navigates to following medicare acquisition site page$")
-	public void the_user_navigates_to_following_AARP_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
+	public void the_user_navigates_to_following_medicare_acquisition_site_page(DataTable givenAttributes)
+			throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -117,12 +151,12 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : "+path);
+		System.out.print("Path to Acq page : " + path);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPath(path);
 	}
-	
+
 	@Then("^the User validates Shop for a Plan Navigation link$")
 	public void the_USer_validates_Shop_for_a_Plan_Navigation_links() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -133,7 +167,7 @@ public class GlobalComponentsCommonStepDefinition {
 			Assert.fail("Home Page not Loading");
 		}
 	}
-	
+
 	@Then("^the user validates Medicare Education Navigation link$")
 	public void the_user_validates_Medicare_Education_Navigation_links() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -144,8 +178,8 @@ public class GlobalComponentsCommonStepDefinition {
 			Assert.fail("Home Page not Loading");
 		}
 	}
-	
-	@Then("^the user validates TFN on the page$") 
+
+	@Then("^the user validates TFN on page$")
 	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -156,68 +190,74 @@ public class GlobalComponentsCommonStepDefinition {
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
-		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		if(tfnFlag.equalsIgnoreCase("true")) {
+		if (tfnFlag.equalsIgnoreCase("true")) {
 			aquisitionhomepage.validateTFNelement(tfnXpath);
 		}
 	}
-	
-	@Then("^the user validate ZipCode Components on the page using ZipCode \"([^\"]*)\"$") 
+
+	@Then("^the user validate ZipCode Components on page using ZipCode \"([^\"]*)\"$")
 	public void the_user_validate_ZipCode_Components_on_page_using_ZipCode(String zipCode) throws Throwable {
-		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
-				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
-				enterZipCodePage.validateZipComp(zipCode);
+		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		EnterZipCodePage enterZipCodePage = aquisitionhomepage.enterZipCode();
+		enterZipCodePage.validateZipComp(zipCode);
 	}
-	
+
+	@Then("^the user enters and validate the fields and clicks on submit$")
+	public void the_user_enters_and_validate_the_fields_and_clicks_on_submit() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.enterAndvalidateEmail();
+	}
+
 	@When("^user vaidates the state drop down link on the home page$")
 	public void user_vaidates_the_state_drop_down_link_on_home_page() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateStateDropDown();
 	}
-	
+
 	@When("^user clicks on View all disclaimer information link on the home page$")
 	public void user_clicks_on_View_all_disclaimer_information_link_on_home_page() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateDisclaimer();
 	}
-	
+
 	@When("^user verifies visit aarp\\.org link on home page$")
 	public void user_verifies_visit_aarp_org_link_on_home_page_ulayer() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateVisitAarpOrglink();
 	}
-	
+
 	@Then("^user clicks on back to top link of home page$")
 	public void user_clicks_on_back_to_top_link_on_home_page() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.backToToplink();
 	}
-	
+
 	/**
-	 * @toDo:user clicks on Aboutus link from footer 
+	 * @toDo:user clicks on Aboutus link from footer
 	 */
 	@And("^user clicks on Aboutus link from footer of the Medicare Plans home page$")
 	public void click_aboutus() {
-		AcquisitionHomePage aquisitionhomepage  = (AcquisitionHomePage) getLoginScenario()
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AboutUsAARPPage aboutUsAARPPage = aquisitionhomepage.aboutUsFooterClick();
-		if(aboutUsAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE,
-					aboutUsAARPPage);
+		if (aboutUsAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE, aboutUsAARPPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Aboutus page not found");
 		}
 	}
-	
+
 	/**
 	 * @toDo:user clicks on contactus link of aboutus
 	 */
@@ -242,16 +282,15 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		SiteMapAARPPage siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
-		if(siteMapAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE,
-					siteMapAARPPage);
+		if (siteMapAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
 
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("sitemap page not found");
 		}
 	}
-	
+
 	/**
 	 * @toDo:user clicks on privacypolicy link of sitemap
 	 */
@@ -260,9 +299,8 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		PrivacyPolicyAARPPage privacyPolicyAARPPage = aquisitionhomepage.privacypolicyFooterClick();
-		if(privacyPolicyAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE,
-					privacyPolicyAARPPage);
+		if (privacyPolicyAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE, privacyPolicyAARPPage);
 
 			Assert.assertTrue(true);
 		} else {
@@ -278,9 +316,8 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		TermsnConditionsAARPPage termsnConditionsAARPPage = aquisitionhomepage.termsnconditionsFooterClick();
-		if(termsnConditionsAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_TERMS_AND_CONDITIONS_PAGE,
-					termsnConditionsAARPPage);
+		if (termsnConditionsAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_TERMS_AND_CONDITIONS_PAGE, termsnConditionsAARPPage);
 
 			Assert.assertTrue(true);
 		} else {
@@ -296,9 +333,8 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		DisclaimersAARPPage disclaimersAARPPage = aquisitionhomepage.disclaimersFooterClick();
-		if(disclaimersAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE,
-					disclaimersAARPPage);
+		if (disclaimersAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE, disclaimersAARPPage);
 
 			Assert.assertTrue(true);
 		} else {
@@ -314,9 +350,8 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AgentsnBrokersAARPPage agentsnBrokersAARPPage = aquisitionhomepage.agentsnbrokersFooterClick();
-		if(agentsnBrokersAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE,
-					agentsnBrokersAARPPage);
+		if (agentsnBrokersAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE, agentsnBrokersAARPPage);
 
 			Assert.assertTrue(true);
 		} else {
@@ -327,425 +362,579 @@ public class GlobalComponentsCommonStepDefinition {
 	/**
 	 * @toDo:user clicks on home link of agents&brokers
 	 */
-	
-	  @And("^user verifies home link of agents&brokers page$")
-	  public void click_home() { 
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  AcquisitionHomePage aquisitionHomePageReload =
-		  aquisitionhomepage.homeFooterClick();
-     
+
+	@And("^user verifies home link of agents&brokers page$")
+	public void click_home() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+
 //		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
-	  }
+	}
 
-	  @And("^the user clicks on browser back button$")
-	  public void click_browser_Back_Button() { 
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)
-		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickBrowserBackButton();
-		  
-	  }
+	@And("^the user clicks on browser back button$")
+	public void click_browser_Back_Button() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickBrowserBackButton();
 
- @And("^user clicks on visit aarp.org link in the header$")
- public void click_visitAARP_Link_in_the_header() { 
-	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickVisitAARPHeaderLink();
-	  
-	  }
-  
-	  @And("^user clicks on visit aarp.org link in the footer$")
-	  public void click_visitAARP_Link_in_the_footer() { 
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickVisitAARPFooterLink();
-		  
-	  }
+	}
 
+	@And("^the user closes the new browser tab$")
+	public void closes_new_browser_tab() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.closeBrowserTab();
 
-	  @When("^the user clicks on Medicare Advantage Plans Link$")
-	  public void the_user_clicks_on_Medicare_Advantage_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.MedicareAdvantagePlans();
-		 
-	  }
+	}
 
-	  @When("^the user clicks on Dual Special Needs Plans Link$")
-	  public void the_user_clicks_on_Dual_Special_Needs_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.DualSplNeedPlans();
-	  }
+	@And("^user clicks on visit aarp.org link in the header$")
+	public void click_visitAARP_Link_in_the_header() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickVisitAARPHeaderLink();
 
-	  @When("^the user clicks on Medicare Supplement Insurance Plans Link$")
-	  public void the_user_clicks_on_Medicare_Supplement_Insurance_Plans_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.Medicaresupplementinsuranceplans();
-	  }
+	}
 
-	  @When("^the user clicks on Medicare Prescription Drug Plans Link$")
-	  public void the_user_clicks_on_Medicare_Prescription_Drug_Plans_Link() throws Throwable {
-	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.MedicarePrescriptionDrugPlans();
-	  }
+//	  @And("^user clicks on visit aarp.org link in the header$")
+//	  public void click_visitAARP_Link_in_the_header() { 
+//		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		  aquisitionhomepage.clickVisitAARPHeaderLink();
+//		  
+//	  }
+//	  
+	@And("^user clicks on visit aarp.org link in the footer$")
+	public void click_visitAARP_Link_in_the_footer() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickVisitAARPFooterLink();
+	}
 
-  @When("^the user clicks on Medicare Education Link$")
-	  public void the_user_clicks_on_Medicare_Education_Link() throws Throwable {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.MedicareEducation();
-  }
+//@Then("^the user validates whether sam call value is displayed on the page$")
+//public void the_user_validates_whether_TFN_is_displayed_on_the_page() throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateCallSamValue();
 
- @When("^the user clicks on Back to top Link$")
-public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
-	  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	  aquisitionhomepage.backtotop();
-  }
+//}
 
+	@When("^the user clicks on Medicare Advantage Plans Link$")
+	public void the_user_clicks_on_Medicare_Advantage_Plans_Link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.MedicareAdvantagePlans();
 
-     @When("^the user clicks on Accessibility Link$")
-  public void the_user_clicks_on_Accessibility_Link() throws Throwable {
-  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-  aquisitionhomepage.Accessibility();
-}
+	}
 
+	@When("^the user clicks on Dual Special Needs Plans Link$")
+	public void the_user_clicks_on_Dual_Special_Needs_Plans_Link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.DualSplNeedPlans();
+	}
 
+	@When("^the user clicks on Medicare Supplement Insurance Plans Link$")
+	public void the_user_clicks_on_Medicare_Supplement_Insurance_Plans_Link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.Medicaresupplementinsuranceplans();
+	}
 
-	  @Then("^user select state for geotargeting from global footer of the Medicare Plans All page$")
-	  public void user_select_state_for_geotargeting(){
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  learnAboutMedicareHomePage.selectStateForGeotargeting();
-	  }
-	  
-	  @Then("^user check inner page links on the Medicare Education page$")
-	  public void user_check_inner_page_links(DataTable givenAttributes)
-	  {
-		  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-						memberAttributesRow.get(i).getCells().get(1));
-			}
-			String pageName = memberAttributesMap.get("PageName");
-			
-			LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-			  learnAboutMedicareHomePage.checkInnerPageLinks(pageName);
-		  
-	  }
-	  
-	  @Then ("^user clicks on Medicare Annual Enrollment Period Link and comes back$")
-	  public void user_clicks_on_Medicare_Annual_Enrollment_Period_Link() {
-		  PrescriptionsProvidersBenefitsPage benefitsPage= (PrescriptionsProvidersBenefitsPage)getLoginScenario().getBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE);
-		  benefitsPage.clickMedicareAnnualEnrollment();
-		  
-	  }
-	  
-	  @When("^the user navigates to Medicare Education Page from homepage$")
-	  public void user_navigates_to_Medicare_Education_Page_from_homepage()
-	  {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=aquisitionhomepage.clickLearnMoreOnHomePage();  
-		  if(learnAboutMedicareHomePage!=null)
-		  {
-			  getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-			  System.out.println("Medicare Education Page opened");
-			  Assert.assertTrue(true);
-		  }else {
-			  Assert.fail("Error in opening Medicare Education Page ");
-		  }
-	  }
-	  
-	  @Then("^the user navigates to Prescriptions, Providers and Benefits page$")
-	  public void the_user_navigates_to_Prescriptions_Providers_and_Benefits_page()
-	  {
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  PrescriptionsProvidersBenefitsPage benefitsPage=learnAboutMedicareHomePage.selectBenifitsEducation();  
-		  if(benefitsPage!=null) {
-			  getLoginScenario().saveBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE, benefitsPage);
-			  System.out.println("Prescriptions, Providers and Benefits page loaded");
-			  Assert.assertTrue(true);
-		  }else {
+	@When("^the user clicks on Medicare Prescription Drug Plans Link$")
+	public void the_user_clicks_on_Medicare_Prescription_Drug_Plans_Link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.MedicarePrescriptionDrugPlans();
+	}
+
+	@When("^the user clicks on Medicare Education Link$")
+	public void the_user_clicks_on_Medicare_Education_Link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.MedicareEducation();
+	}
+
+	@When("^the user clicks on Back to top Link$")
+	public void the_user_clicks_on_Back_to_top_Link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.backtotop();
+	}
+
+	@When("^the user clicks on Accessibility Link$")
+	public void the_user_clicks_on_Accessibility_Link() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.Accessibility();
+	}
+
+	@Then("^user select state for geotargeting from global footer of the Medicare Plans All page$")
+	public void user_select_state_for_geotargeting() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.selectStateForGeotargeting();
+	}
+
+	@Then("^user check inner page links on the Medicare Education page$")
+	public void user_check_inner_page_links(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String pageName = memberAttributesMap.get("PageName");
+
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.checkInnerPageLinks(pageName);
+	}
+
+	@Then("^user clicks on Medicare Annual Enrollment Period Link and comes back$")
+	public void user_clicks_on_Medicare_Annual_Enrollment_Period_Link() {
+		PrescriptionsProvidersBenefitsPage benefitsPage = (PrescriptionsProvidersBenefitsPage) getLoginScenario()
+				.getBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE);
+		benefitsPage.clickMedicareAnnualEnrollment();
+
+	}
+
+	@When("^the user navigates to Medicare Education Page from homepage$")
+	public void user_navigates_to_Medicare_Education_Page_from_homepage() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = aquisitionhomepage.clickLearnMoreOnHomePage();
+		if (learnAboutMedicareHomePage != null) {
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+			System.out.println("Medicare Education Page opened");
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Error in opening Medicare Education Page ");
+		}
+	}
+
+	@Then("^the user navigates to Prescriptions, Providers and Benefits page$")
+	public void the_user_navigates_to_Prescriptions_Providers_and_Benefits_page() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		PrescriptionsProvidersBenefitsPage benefitsPage = learnAboutMedicareHomePage.selectBenifitsEducation();
+		if (benefitsPage != null) {
+			getLoginScenario().saveBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE, benefitsPage);
+			System.out.println("Prescriptions, Providers and Benefits page loaded");
+			Assert.assertTrue(true);
+		} else {
 			System.out.println("Prescriptions, Providers and Benefits page did not  loaded");
-		  }
-			  
-		  
-		  
-	  }
-	  
-	  @Then("^the user navigates to Medicare Cost Basic page$")
-	  public void the_user_navigates_to_Medicare_Cost_Basic_page() {
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  CostBasicsPage costBasicsPage=learnAboutMedicareHomePage.navigatetoMedicareCostBasic();
-		  if(costBasicsPage!=null) {
-			  getLoginScenario().saveBean(PageConstants.COST_BASICS_PAGE, costBasicsPage );
-			  System.out.println("Cost Basics page loaded");
-			  Assert.assertTrue(true);
-		  }else {
+		}
+
+	}
+
+	@Then("^the user navigates to Medicare Cost Basic page$")
+	public void the_user_navigates_to_Medicare_Cost_Basic_page() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		CostBasicsPage costBasicsPage = learnAboutMedicareHomePage.navigatetoMedicareCostBasic();
+		if (costBasicsPage != null) {
+			getLoginScenario().saveBean(PageConstants.COST_BASICS_PAGE, costBasicsPage);
+			System.out.println("Cost Basics page loaded");
+			Assert.assertTrue(true);
+		} else {
 			System.out.println("Cost Basics page did not  loaded");
-		  }
-	  }
-	  
-	  @Then("^the user navigates to Medicare Eligibility page$")
-	  public void the_user_navigates_to_Medicare_Eligibility_page(){
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		  
-		  MedicareEligibilityPage eligibilityPage=learnAboutMedicareHomePage.selectMedicareEligibility();
-		  if(eligibilityPage!=null) {
-			  getLoginScenario().saveBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE, eligibilityPage );
-			  System.out.println("Medicare Eligibility page loaded");
-			  Assert.assertTrue(true);
-		  }else {
+		}
+	}
+
+	@Then("^the user navigates to Medicare Eligibility page$")
+	public void the_user_navigates_to_Medicare_Eligibility_page() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		MedicareEligibilityPage eligibilityPage = learnAboutMedicareHomePage.selectMedicareEligibility();
+		if (eligibilityPage != null) {
+			getLoginScenario().saveBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE, eligibilityPage);
+			System.out.println("Medicare Eligibility page loaded");
+			Assert.assertTrue(true);
+		} else {
 			System.out.println("Medicare Eligibility Page did not loaded");
-		  }
-	  }
-	  @Then("^the user clicks on Coverage Choices link$")
-	  public void the_user_clicks_on_Coverage_Choices_link(){
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		  
-		  CoverageChoicesPage choicesPage=learnAboutMedicareHomePage.clickonCoverageChoicesLink();
-		  if(choicesPage!=null) {
-			  getLoginScenario().saveBean(PageConstants.COVERAGE_CHOICE_PAGE, choicesPage );
-			  System.out.println("Coverage Choices page loaded");
-			  Assert.assertTrue(true);
-		  }else {
+		}
+	}
+
+	@Then("^the user clicks on Coverage Choices link$")
+	public void the_user_clicks_on_Coverage_Choices_link() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		CoverageChoicesPage choicesPage = learnAboutMedicareHomePage.clickonCoverageChoicesLink();
+		if (choicesPage != null) {
+			getLoginScenario().saveBean(PageConstants.COVERAGE_CHOICE_PAGE, choicesPage);
+			System.out.println("Coverage Choices page loaded");
+			Assert.assertTrue(true);
+		} else {
 			System.out.println("Coverage Choices Page did not loaded");
-		  }		  
-		  
-	  }
-	    
-	  @Then ("^user clicks on  Initial Enrollment Period Link and comes back$")
-	  public void user_clicks_on_Initial_Enrollment_Period_Link() {
-		  
-		  MedicareEligibilityPage eligibilityPage=(MedicareEligibilityPage)getLoginScenario().getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
-		  eligibilityPage.clickOnIEP();
-		  
-	  }
-	  
-	  @Then("^user checks the plan links on left rail of the page$")
-	  public void user_checks_the_plan_links_on_left_rail_of_the_page() {
-	   MedicareEligibilityPage eligibilityPage=(MedicareEligibilityPage)getLoginScenario().getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
-	   eligibilityPage.checkLeftRailPlanLinks("MA");
-	   eligibilityPage.checkLeftRailPlanLinks("MS");
-	   eligibilityPage.checkLeftRailPlanLinks("PDP");
-	  }
-	  
-	  @Then("^the user clicks on Coverage Choices link on Medicare Eligibility page$")
-	  public void the_user_clicks_on_Coverage_Choices_link_from_Med_Elegibility(){
-		  MedicareEligibilityPage eligibilityPage=(MedicareEligibilityPage)getLoginScenario().getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);		  
-		  CoverageChoicesPage choicesPage=eligibilityPage.clickonCoverageChoicesLink();
-		  if(choicesPage!=null) {
-			  getLoginScenario().saveBean(PageConstants.COVERAGE_CHOICE_PAGE, choicesPage );
-			  System.out.println("Coverage Choices page loaded");
-			  Assert.assertTrue(true);
-		  }else {
+		}
+
+	}
+
+	@Then("^user clicks on  Initial Enrollment Period Link and comes back$")
+	public void user_clicks_on_Initial_Enrollment_Period_Link() {
+
+		MedicareEligibilityPage eligibilityPage = (MedicareEligibilityPage) getLoginScenario()
+				.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
+		eligibilityPage.clickOnIEP();
+
+	}
+
+	@Then("^user checks the plan links on left rail of the page$")
+	public void user_checks_the_plan_links_on_left_rail_of_the_page() {
+		MedicareEligibilityPage eligibilityPage = (MedicareEligibilityPage) getLoginScenario()
+				.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
+		eligibilityPage.checkLeftRailPlanLinks("MA");
+		eligibilityPage.checkLeftRailPlanLinks("MS");
+		eligibilityPage.checkLeftRailPlanLinks("PDP");
+	}
+
+	@Then("^the user clicks on Coverage Choices link on Medicare Eligibility page$")
+	public void the_user_clicks_on_Coverage_Choices_link_from_Med_Elegibility() {
+		MedicareEligibilityPage eligibilityPage = (MedicareEligibilityPage) getLoginScenario()
+				.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
+		CoverageChoicesPage choicesPage = eligibilityPage.clickonCoverageChoicesLink();
+		if (choicesPage != null) {
+			getLoginScenario().saveBean(PageConstants.COVERAGE_CHOICE_PAGE, choicesPage);
+			System.out.println("Coverage Choices page loaded");
+			Assert.assertTrue(true);
+		} else {
 			System.out.println("Coverage Choices Page did not loaded");
-		  }		  
-		  
-	  }
-	  
-	  @Then("^the user gather medicare info through video$")
-	  public void the_user_gather_medicare_info_through_video()
-	  {
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  learnAboutMedicareHomePage.clickToYoutubeVideo();
-		  
-	  }
-	  @Then("^the user click on video transcript link$")
-	  public void the_user_click_on_video_transcript_link()
-	  {
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  learnAboutMedicareHomePage.clickVideoTransciptLink();
-		  
-	  }
-	  @Then("^the user come back to Med-ed page$")
-	  public void the_user_come_back_to_Med_ed_page(){
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage= (LearnAboutMedicareHomePage)getLoginScenario() .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  learnAboutMedicareHomePage.backToMedEdPage();
-	  }
-	  
-	  
-	  @Then ("^user clicks on  Medicare Part A and Part B Coverage dropdown$")
-	  public void user_check_coverage_dropdown() {
-		  CoverageChoicesPage coverageChoicesPage=(CoverageChoicesPage)getLoginScenario().getBean(PageConstants.COVERAGE_CHOICE_PAGE);
-		  coverageChoicesPage.checkCoverageDropdownAB();
-		 
-	  }
-	  @Then ("^user clicks on the plan dropdowns$")
-	  public void user_clicks_on_the_plan_dropdowns() {
-		  CoverageChoicesPage coverageChoicesPage=(CoverageChoicesPage)getLoginScenario().getBean(PageConstants.COVERAGE_CHOICE_PAGE);
-		  coverageChoicesPage.checkPlanDropDowns();
+		}
 
-	  }
-	  @Then ("^the user navigates through learn extra links on Cost Basic page$")
-	  public void user_navigates_extra_links() {
-		  CostBasicsPage costBasicsPage=(CostBasicsPage)getLoginScenario().getBean(PageConstants.COST_BASICS_PAGE);
-		  costBasicsPage.navigatesExtraLinks();
-	  }
-	  
-	  @Then("^the user check Medicare Savings Program link$")
-	  public void user_check_Medicare_saving_link() {
-		  CostBasicsPage costBasicsPage=(CostBasicsPage)getLoginScenario().getBean(PageConstants.COST_BASICS_PAGE);
-		  costBasicsPage.navigatesToMedicareSaving();  
-	  }
-	  @Then("^the user click on next article link$")
-	  public void user_click_next_link(){
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  learnAboutMedicareHomePage.clickOnReadNextLink();
-	  }
-	  @Then("^the user navigates to plan information page$")
-	  public void user_navigates_to_plan(DataTable givenAttributes) {
-		  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-						memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	@Then("^the user gather medicare info through video$")
+	public void the_user_gather_medicare_info_through_video() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.clickToYoutubeVideo();
+
+	}
+
+	@Then("^the user click on video transcript link$")
+	public void the_user_click_on_video_transcript_link() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.clickVideoTransciptLink();
+
+	}
+
+	@Then("^the user come back to Med-ed page$")
+	public void the_user_come_back_to_Med_ed_page() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.backToMedEdPage();
+	}
+
+	@Then("^user clicks on  Medicare Part A and Part B Coverage dropdown$")
+	public void user_check_coverage_dropdown() {
+		CoverageChoicesPage coverageChoicesPage = (CoverageChoicesPage) getLoginScenario()
+				.getBean(PageConstants.COVERAGE_CHOICE_PAGE);
+		coverageChoicesPage.checkCoverageDropdownAB();
+
+	}
+
+	@Then("^user clicks on the plan dropdowns$")
+	public void user_clicks_on_the_plan_dropdowns() {
+		CoverageChoicesPage coverageChoicesPage = (CoverageChoicesPage) getLoginScenario()
+				.getBean(PageConstants.COVERAGE_CHOICE_PAGE);
+		coverageChoicesPage.checkPlanDropDowns();
+
+	}
+
+	@Then("^the user navigates through learn extra links on Cost Basic page$")
+	public void user_navigates_extra_links() {
+		CostBasicsPage costBasicsPage = (CostBasicsPage) getLoginScenario().getBean(PageConstants.COST_BASICS_PAGE);
+		costBasicsPage.navigatesExtraLinks();
+	}
+
+	@Then("^the user check Medicare Savings Program link$")
+	public void user_check_Medicare_saving_link() {
+		CostBasicsPage costBasicsPage = (CostBasicsPage) getLoginScenario().getBean(PageConstants.COST_BASICS_PAGE);
+		costBasicsPage.navigatesToMedicareSaving();
+	}
+
+	@Then("^the user click on next article link$")
+	public void user_click_next_link() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.clickOnReadNextLink();
+	}
+
+	@Then("^the user navigates to plan information page$")
+	public void user_navigates_to_plan(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planType = memberAttributesMap.get("planType");
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		if (planType.equalsIgnoreCase("MA")) {
+			MedicareAdvantagePartCPlansPage MAplanPage = learnAboutMedicareHomePage.planSelectionMA();
+			if (MAplanPage != null) {
+				getLoginScenario().saveBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_PAGE, MAplanPage);
+				getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("MA plan page not loaded");
 			}
-			String planType = memberAttributesMap.get("planType");
-			 LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-			 if(planType.equalsIgnoreCase("MA")) {
-				 MedicareAdvantagePartCPlansPage MAplanPage=learnAboutMedicareHomePage.planSelectionMA();
-				 if(MAplanPage!=null) {
-					 getLoginScenario().saveBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_PAGE, MAplanPage);
-					 getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
-					 Assert.assertTrue(true);
-				 }else {
-					 Assert.fail("MA plan page not loaded");
-				 }
-			 }else if(planType.equalsIgnoreCase("MS")) {
-				 MedicareSupplementInsurancePlansPage MSplanPage=learnAboutMedicareHomePage.planSelectionMS();
-				 if(MSplanPage!=null) {
-					 getLoginScenario().saveBean(PageConstants.MEDICARE_SUPPLEMENT_INSURANCE_PLANS_PAGE, MSplanPage);
-					 getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
-					 Assert.assertTrue(true);
-				 }else {
-					 Assert.fail("MS plan page not loaded");
-				 }
-			 }else if(planType.equalsIgnoreCase("PDP")) {
-				 MedicarePrescriptionDrugPartDPlansPage PDPplanPage=learnAboutMedicareHomePage.planSelectionPDP();
-				 if(PDPplanPage!=null) {
-					 
-					 getLoginScenario().saveBean(PageConstants.MEDICARE_PRESCRIPTION_DRUG_PLANS_PAGE, PDPplanPage);
-					 getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
-					 Assert.assertTrue(true);
-				 }else {
-					 Assert.fail("PDP plan page not loaded");
-				 }
-			 }
-	  }
-	  @Then("^user click on see plan in your area link$")
-	  public void user_click_on_see_plan_in_your_area_link() {
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  learnAboutMedicareHomePage.clickOnSeePlanLink();
-	  }
-	  
-	  @Then("^the user navigates to Enrollment Basics Page$")
-	  public void the_user_navigates_to_Enrollment_Basics_Page() {
-
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  EnrollmentBasicsPage enrollmentBasicsPage=learnAboutMedicareHomePage.clickonEnrollmentBasicLink();
-		  if(enrollmentBasicsPage!=null) {
-			  getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollmentBasicsPage);
-		  }
-		  
-	  }
-	  
-	  @Then("^the user check the inner links on Enrollment Basic Page$")
-	  public void check_the_inner_links_on_Enrollment_Basic() {
-		  EnrollmentBasicsPage enrollmentBasicsPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
-		  enrollmentBasicsPage.selectStateForGeotargeting();
-		  enrollmentBasicsPage.checkInnerLinks();
-		  enrollmentBasicsPage.clickSocialSecurity();
-	  }
-	  
-	  @Then ("^the user check Social Security link on Enrollment Basic Page$")
-	  public void check_the_socaial_security_link_on_Enrollment_Basic() {
-		  EnrollmentBasicsPage enrollmentBasicsPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
-		  enrollmentBasicsPage.clickSocialSecurity();
-	  }
-	  
-	  @Then ("^the user click on see all plan link on Enrollment Basic Page$")
-	  public void check_the_see_all_plan_link_on_Enrollment_Basic() {
-		  EnrollmentBasicsPage enrollmentBasicsPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
-		  enrollmentBasicsPage.clickSeePlans();
-	  }
-	  @Then("^the user hover over and select plan page link$")
-	  public void the_user_hover_over_and_select_MS_plan_page_link(DataTable givenAttributes)
-	  {
-		  List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-						memberAttributesRow.get(i).getCells().get(1));
+		} else if (planType.equalsIgnoreCase("MS")) {
+			MedicareSupplementInsurancePlansPage MSplanPage = learnAboutMedicareHomePage.planSelectionMS();
+			if (MSplanPage != null) {
+				getLoginScenario().saveBean(PageConstants.MEDICARE_SUPPLEMENT_INSURANCE_PLANS_PAGE, MSplanPage);
+				getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("MS plan page not loaded");
 			}
-			String plantype = memberAttributesMap.get("nextplanType");
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  learnAboutMedicareHomePage.hoverToPlanPage(plantype);
-	  }
-	  
-	  @Then("^the user hover over Shop for a Plan and validates zipcode component$")
-	  public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  if(aquisitionhomepage.checkZipCompErrorInSubNav()==true){
-			  Assert.assertTrue(true);
-		  }else
-			  Assert.fail("Zip Component not present or Error msg not shown");
-	  }
-	  
-	  @Then("^the user validate ZipCode Components on SubNav using ZipCode \"([^\"]*)\"$")
-	  public void the_user_enter_zipcode_and_go_to_Plan_Summary_Page(String zipCode){
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  VPPPlanSummaryPage vppPlanSummaryPage=aquisitionhomepage.checkZipCompSubNavVpp(zipCode);
-		  if(vppPlanSummaryPage!=null) {
-			  System.out.println("Vpp Plan Summary Page opened Successfully");
-			  Assert.assertTrue(true);
-		  }else
-			  Assert.fail("Error Loading in VPP Plan Summary Page");
-		  
-		  
-	  }
-	  @Then("^the user check Still have a question$")
-	  public void the_user_check_Still_have_a_question() {
-		  LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		  learnAboutMedicareHomePage.chechStillHaveQues();
-	  }
-	  
-	  @Then("^the user clicks on View all disclaimer information link in footer$")
-	  public void clicks_on_View_all_disclaimer_information_link() {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickViewDisclaimerInfoLink();
-	  }
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			MedicarePrescriptionDrugPartDPlansPage PDPplanPage = learnAboutMedicareHomePage.planSelectionPDP();
+			if (PDPplanPage != null) {
 
-	  @Then("^the user validate links in disclaimer information section$")
-	  public void the_user_validate_links_in_disclaimer_information_section() {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.checkLinkContact("english");
-		  aquisitionhomepage.checkLinkContact("spanish");
-		  aquisitionhomepage.checkLinkContact("chinese");
-		 
-	  }
-	  
-	  @Then("^the user clicks on Hide all disclaimer information link in footer$")
-	   public void clicks_on_Hide_all_disclaimer_information_link() {
-			  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-			  aquisitionhomepage.clickHideDisclaimerInfoLink();
-	  }
-	  
-	  @Then("^the user clicks on Complaint Form link in footer$")
-	  public void the_user_clicks_on_Complaint_Form_link() {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.clickComplaintFormLink();
-	  }
-	  
-	  @Then("^user select state for geotargeting from global footer on homepage$")
-	  public void user_select_state_for_geotargeting_on_homepage(){
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.selectStateForGeotargeting();
-	  }
-	  
-	  @Then("^the user validates Language assistance links$")
-	  public void the_user_validates_Language_assistance_links() {
-		  AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		  aquisitionhomepage.validateAssistancelink("English");
-		  aquisitionhomepage.validateAssistancelink("Spanish");
-		  aquisitionhomepage.validateAssistancelink("Chinese");
-	  }
-	 
+				getLoginScenario().saveBean(PageConstants.MEDICARE_PRESCRIPTION_DRUG_PLANS_PAGE, PDPplanPage);
+				getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("PDP plan page not loaded");
+			}
+		}
+	}
 
-	 
-	  
+	@Then("^user click on see plan in your area link$")
+	public void user_click_on_see_plan_in_your_area_link() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.clickOnSeePlanLink();
+	}
+
+	@Then("^the user navigates to Enrollment Basics Page$")
+	public void the_user_navigates_to_Enrollment_Basics_Page() {
+
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		EnrollmentBasicsPage enrollmentBasicsPage = learnAboutMedicareHomePage.clickonEnrollmentBasicLink();
+		if (enrollmentBasicsPage != null) {
+			getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollmentBasicsPage);
+		}
+
+	}
+
+	@Then("^the user check the inner links on Enrollment Basic Page$")
+	public void check_the_inner_links_on_Enrollment_Basic() {
+		EnrollmentBasicsPage enrollmentBasicsPage = (EnrollmentBasicsPage) getLoginScenario()
+				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollmentBasicsPage.selectStateForGeotargeting();
+		enrollmentBasicsPage.checkInnerLinks();
+		enrollmentBasicsPage.clickSocialSecurity();
+	}
+
+	@Then("^the user check Social Security link on Enrollment Basic Page$")
+	public void check_the_socaial_security_link_on_Enrollment_Basic() {
+		EnrollmentBasicsPage enrollmentBasicsPage = (EnrollmentBasicsPage) getLoginScenario()
+				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollmentBasicsPage.clickSocialSecurity();
+	}
+
+	@Then("^the user click on see all plan link on Enrollment Basic Page$")
+	public void check_the_see_all_plan_link_on_Enrollment_Basic() {
+		EnrollmentBasicsPage enrollmentBasicsPage = (EnrollmentBasicsPage) getLoginScenario()
+				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollmentBasicsPage.clickSeePlans();
+	}
+
+	@Then("^the user hover over and select plan page link$")
+	public void the_user_hover_over_and_select_MS_plan_page_link(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String plantype = memberAttributesMap.get("nextplanType");
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.hoverToPlanPage(plantype);
+	}
+
+	@Then("^the user hover over Shop for a Plan and validates zipcode component$")
+	public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (aquisitionhomepage.checkZipCompErrorInSubNav() == true) {
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Zip Component not present or Error msg not shown");
+	}
+
+	@Then("^the user validate ZipCode Components on SubNav using ZipCode \"([^\"]*)\"$")
+	public void the_user_enter_zipcode_and_go_to_Plan_Summary_Page(String zipCode) {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage vppPlanSummaryPage = aquisitionhomepage.checkZipCompSubNavVpp(zipCode);
+		if (vppPlanSummaryPage != null) {
+			System.out.println("Vpp Plan Summary Page opened Successfully");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error Loading in VPP Plan Summary Page");
+
+	}
+
+	@Then("^the user check Still have a question$")
+	public void the_user_check_Still_have_a_question() {
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.chechStillHaveQues();
+	}
+
+	@Then("^the user clicks on View all disclaimer information link in footer$")
+	public void clicks_on_View_all_disclaimer_information_link() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickViewDisclaimerInfoLink();
+	}
+
+	@Then("^the user validate links in disclaimer information section$")
+	public void the_user_validate_links_in_disclaimer_information_section() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.checkLinkContact("english");
+		aquisitionhomepage.checkLinkContact("spanish");
+		aquisitionhomepage.checkLinkContact("chinese");
+
+	}
+
+	@Then("^the user clicks on Hide all disclaimer information link in footer$")
+	public void clicks_on_Hide_all_disclaimer_information_link() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickHideDisclaimerInfoLink();
+	}
+
+	@Then("^the user clicks on Complaint Form link in footer$")
+	public void the_user_clicks_on_Complaint_Form_link() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickComplaintFormLink();
+	}
+
+	@Then("^user select state for geotargeting from global footer on homepage$")
+	public void user_select_state_for_geotargeting_on_homepage() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.selectStateForGeotargeting();
+	}
+
+	@Then("^the user validates Language assistance links$")
+	public void the_user_validates_Language_assistance_links() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateAssistancelink("English");
+		aquisitionhomepage.validateAssistancelink("Spanish");
+		aquisitionhomepage.validateAssistancelink("Chinese");
+	}
+
+	@Then("^the user validates TFN on right rail Medicare Article$")
+	public void the_user_validates_TFN_on_right_rail_Medicare_article(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String tfnXpath = memberAttributesMap.get("TFNxpath");
+		String tfnFlag = memberAttributesMap.get("TFNflag");
+
+		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (tfnFlag.equalsIgnoreCase("true")) {
+			aquisitionhomepage.validateTFNelement(tfnXpath);
+		}
+	}
+
+	@Then("^the user validates TFN on need help section of Shop pages$")
+	public void the_user_validates_TFN_on_need_help_section_of_Shop_pages(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String tfnXpath = memberAttributesMap.get("TFNxpath");
+		String tfnFlag = memberAttributesMap.get("TFNflag");
+
+		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (tfnFlag.equalsIgnoreCase("true")) {
+			aquisitionhomepage.validateTFNelement(tfnXpath);
+		}
+
+	}
+
+	@Then("^the user validate ZipCode Components on the page using ZipCode \"([^\"]*)\"$")
+	public void the_user_validate_ZipCode_Components_on_the_page_using_ZipCode(String zipCode) throws Throwable {
+		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		EnterZipCodePage enterZipCodePage = aquisitionhomepage.enterZipCode();
+		enterZipCodePage.validateZipComp(zipCode);
+	}
+
+	@Then("^the user validates TFN on the page$")
+	public void the_user_validates_TFN_on_the_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String tfnXpath = memberAttributesMap.get("TFNxpath");
+		String tfnFlag = memberAttributesMap.get("TFNflag");
+
+		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (tfnFlag.equalsIgnoreCase("true")) {
+			aquisitionhomepage.validateTFNelement(tfnXpath);
+		}
+	}
+
+	@Then("^the user clicks on Agent link and validates the correct URL is loaded from article page$")
+	public void the_user_clicks_on_Agent_link_and_validates_the_correct_URL_is_loaded_from_articles_page(DataTable arg1)
+			throws InterruptedException {
+		Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickonFindanAgentlinkfromArticle(myUHCAgentURL);
+
+	}
+
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
+	}
+
+	@Then("^user should be navigated to the previous page$")
+	public void user_should_be_navigated_to_the_previous_page(DataTable givenAttributes) throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String path = memberAttributesMap.get("PagePath");
+		aquisitionhomepage.validatePageNavigated(path);
+	}
 }
-

@@ -196,6 +196,13 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(),'Estimate')]")
 	protected WebElement oldDcePgHeader;
 	
+	//GET THE MOST OUT OF YOUR PRESCRIPTION
+	@FindBy(xpath="//h1[@id='globalContentIdForSkipLink']")
+	protected WebElement oldPharmacyLocatorHeader; 
+	
+	@FindBy(xpath="(//span[contains(text(),'Results for')])[1]")
+	protected WebElement rallyPharmacyResultsHeader;
+			
 	@FindBy(xpath = "//span[contains(text(),'DRUG LOOKUP')]")
 	protected WebElement LookUpDrugsButtonSection;
 	
@@ -298,6 +305,12 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(id = "mapdPageNonLisForSRetail")
 	protected WebElement RetailDrugCost_TableNONLIS;
 
+	@FindBy(xpath="//h3[contains(text(),'Standard Network Pharmacy Retail Drug Costs')]")
+	protected WebElement PdpStdNwtDrugCost_TableNONLIS_header;
+
+	@FindBy(xpath="//table[contains(@class,'atdd-bnc-rx187grptable')]")
+	protected WebElement PdpStdNwtDrugCost_TableNONLIS;
+	
 	@FindBy(xpath = ".//*[@id='mapdPageLis']")
 	protected WebElement RetailDrugCost_Table1; 
 
@@ -463,6 +476,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//a[@class='btn btn--secondary margin-small atdd-bnc-ancilry-learnmorbtn']")
 	protected WebElement LearnmoreButton;
 
+	@FindBy(xpath="//div[@class='header']")
+	protected WebElement hearingPgHeader;
+	
 	@FindBy(className = "atdd-bnc-exclusivehrng-leavingpopuptxt")
 	protected WebElement popup;
 
@@ -1175,6 +1191,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='btn btn--primary']")
 	protected WebElement makePaymentButton;
+	
+	@FindBy(xpath = "//a[@id='make-payment']")
+	protected WebElement makePaymentButtonnewView;
 		
 	@FindBy(linkText = "plan documents")
 	protected WebElement planDocumentsLink;
@@ -1217,6 +1236,32 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Pharmacy Out-Of-Pocket Maximum']")
 	protected WebElement pharmoutpockttextarea;
 	
+	@FindBy(xpath = "//div[contains(@class,'drugpricingTiers')]//div[contains(@class,'benefitsAndCoveragePage ng-scope')]")
+	protected WebElement LearnmoretierslinkInsulinContent;
+	
+	@FindBy(xpath = "//a[@class='display-block collapse-expand atdd-bnc-drgpricingtiers']")
+	protected WebElement Learnmoretierslink_toCloseIt;
+	
+	@FindBy(xpath="//h2[text()='OPTIONAL SERVICES (RIDERS)']")
+	protected WebElement riderSection;
+	
+	@FindBy(xpath="//button[contains(@class,'add-rider-button')]")
+	protected WebElement riderAddBtn;
+	
+	@FindBy(xpath="//span[contains(@class,'remove-rider-button')]")
+	protected WebElement riderDeleteBtn;
+	
+	@FindBy(xpath="//div[contains(@class,'optionalRiders section')]//div[contains(@class,'message')]//div[@class='body']/p")
+	protected WebElement riderMsgWithStartDate;
+	
+	@FindBy(xpath="//div[contains(@class,'optionalRiders section')]//ul//li[contains(text(),'For assistance')]//a")
+	protected WebElement riderAssistanceLnk;
+	
+	@FindBy(xpath="//div[contains(@class,'optionalRiders section')]//div[contains(@ng-show,'rider') and not(contains(@class,'ng-hide'))]/a[contains(text(),'DOWNLOAD RIDER PDF')]")
+	protected WebElement riderViewPdfLnk;
+	
+	@FindBy(xpath="//h1/strong[contains(text(),'Dental Care')]")
+	protected WebElement rallyDentalSearchHeader;
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);
@@ -1227,3 +1272,4 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	}
 
 }
+

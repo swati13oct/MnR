@@ -15,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePrioritiesPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
@@ -23,6 +24,7 @@ import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
@@ -680,5 +682,19 @@ public class PlanRecommendationStepDefinitionMobile {
 		EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
 		preEditMobile.addDrugs(inputValues);
    	}
+	
+	@Then("^user selects priority in priorities page mobile$")
+	public void user_selects_priorities(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		PrioritiesMobilePage prioritiesMobile =  new PrioritiesMobilePage(wd);
+		prioritiesMobile.prioritiesFunctional(inputValues.get("Priority Option"),inputValues.get("Priorities"));
+		prioritiesMobile.continuePriority();
+	}
+
+	@Then("^user validate elements in priorities page mobile$")
+	public void user_validate_prioritiesElements() {
+		PrioritiesMobilePage prioritiesMobile =  new PrioritiesMobilePage(wd);
+		prioritiesMobile.prioritiesElementsMobile();
+	}
 
 }

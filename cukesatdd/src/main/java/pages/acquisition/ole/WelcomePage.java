@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
  * @author sdwaraka
@@ -35,7 +37,7 @@ public class WelcomePage extends UhcDriver{
 	private WebElement NextBtn;
 	
 	//@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
-	@FindBy(id = "cancel-enrollment")
+	@FindBy(xpath = "//*[contains(@id,'cancel-enrollment') or contains(@id,'ole-form-cancel-button')]")
 	private WebElement CancelEnrollmentLink;
 	
 	// WebElements for Welcome Page
@@ -45,7 +47,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(id = "view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(id = "ole-cancel-confirm")
+	@FindBy(xpath = "//*[(contains(@id,'ole-cancel-confirm') or contains(@id,'enroll-cancel-profile')) and contains(@class,'active')]")
 	private WebElement CancellationModal;
 	
 	@FindBy(id = "leavingSite-linkrouter")
@@ -92,6 +94,9 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Hearing'))]//img")
 	private WebElement HearingImg;
+	
+	@FindBy(xpath = "//*[@id='ole-form-content']//a[contains(@href,'pharmacy.html')]")
+	private WebElement pharmacyLink;
 		
 	public WelcomePage(WebDriver driver) {
 		
@@ -231,12 +236,12 @@ public class WelcomePage extends UhcDriver{
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
 		
 		//CancelEnrollmentLink.click();
-		try {
+		/*try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
-		if(validate(CancellationModal)){
+		}*/
+		if(validate(CancellationModal,20)){
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModal(driver);
 		}
@@ -348,6 +353,15 @@ public MedicareInformationPage navigate_to_medicare_info_page() {
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
+		}
+		return null;
+	}
+
+	public PharmacySearchPage clickPharamcyLinkAndSwitchTab() {
+		pharmacyLink.click();
+		switchToNewTab();
+		if (driver.getCurrentUrl().contains("health-plans/aarp-pharmacy.html#/Pharmacy-Search-English")) {
+			return new PharmacySearchPage(driver);
 		}
 		return null;
 	}

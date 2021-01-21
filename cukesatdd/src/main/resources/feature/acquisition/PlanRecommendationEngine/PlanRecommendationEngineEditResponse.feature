@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @PRERegression7 @PRERegression
 Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response functionalities
 
-  @PRE @planrecommendation @EditResponsePage
+  @PRE @planrecommendation @EditResponsePage @EditResponsePageValidation
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate responses in edit preference page in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -26,6 +26,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate saved values in edit response page
       | Zip Code            | <Zipcode>                                                              |
       | CountyDropDown      | <county>                                                               |
@@ -38,12 +41,13 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Drug Details        | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
       | Additional Option   | <Dental-Hearing-Vision-Fitness>                                        |
       | Preference Option   | <costPreferenceOption>                                                 |
+      | Priorities          | <priorities>                                                           |
     Then user return to vpp page using "return" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | 2ndRecommendation |
-      |   10001 | NO            | New York | None          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                | SNP               | MA                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         | 1stRecommendation | 2ndRecommendation |
+      |   10001 | NO            | New York | None          | Medicaid     | regular | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Doctors | SNP               | MA                |
 
   @PRE @planrecommendation @EditResponsePage @EditValuePDP
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> - To validate Edit preference functions for pdp in PRE
@@ -96,6 +100,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user edits values in edit response page
       | Plan Type           | <isCoverageOpt>                                                          |
       | Zip Code            | <E_Zipcode>                                                              |
@@ -110,13 +115,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Drug Details        | <E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
       | Additional Option   | <E_Dental-Hearing-Vision-Fitness>                                        |
       | Preference Option   | <E_costPreferenceOption>                                                 |
+      | Priority Option     | <E_priorityOption>                                                       |
+      | Priorities          | <E_priorities>                                                           |
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_Zipcode | E_isMultiCounty | E_county    | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
-      |   10002 | NO            | New York | MAPD          | Medicaid     | regular   | Lookup     | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                |     35034 | YES             | Bibb County | MAPD            | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 |
-      |   33143 | NO            | Miami    | None          | chronic      | outsideUS | UHGNetwork | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | No,No,No,No                   | Lower                |     10003 | NO              | New York    | MAPD            | Medicaid       | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | Yes,Yes,Yes,Yes                 | Lower                  |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_Zipcode | E_isMultiCounty | E_county    | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities       |
+      |   10002 | NO            | New York | MAPD          | Medicaid     | regular   | Lookup     | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Yes,Yes,Yes,Yes               | Lower                |     35034 | YES             | Bibb County | MAPD            | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 | both             | Drug Cost, Hearing |
+      |   33143 | NO            | Miami    | None          | chronic      | outsideUS | UHGNetwork | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | No,No,No,No                   | Lower                |     10003 | NO              | New York    | MAPD            | Medicaid       | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | Yes,Yes,Yes,Yes                 | Lower                  | 1st              | Travel, None       |
 
   @PRE @planrecommendation @EditResponsePage @EditvalueMA
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Edit preference functions for MA in PRE
@@ -140,6 +147,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user edits values in edit response page
       | Plan Type           | <isCoverageOpt>                   |
       | Zip Code            | <E_Zipcode>                       |
@@ -152,12 +162,14 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Multi Doctor        | <E_isMultiDoctor>                 |
       | Additional Option   | <E_Dental-Hearing-Vision-Fitness> |
       | Preference Option   | <E_costPreferenceOption>          |
+      | Priority Option     | <E_priorityOption>                |
+      | Priorities          | <E_priorities>                    |
     Then user return to vpp page using "update" from edit response page
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
-      |   35034 | Yes           | Bibb County | MA            | nursing      | regular | UHGNetwork |             |               | Yes,Yes,Yes,Yes               | Lower                |     10002 | NO              | New York | MA              | chronic        | withinUS | Lookup    | john          | NO              | No,No,No,No                     | Higher                 |
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption | E_priorityOption | E_priorities                |
+      |   35034 | Yes           | Bibb County | MA            | nursing      | regular | UHGNetwork |             |               | Yes,Yes,Yes,Yes               | Lower                | both           | Travel,Doctors |     10002 | NO              | New York | MA              | chronic        | withinUS | Lookup    | john          | NO              | No,No,No,No                     | Higher                 | both             | Doctors,Health Care Premium |
 
   @PRE @planrecommendation @EditResponsePage @EditResponseAddProvider
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Edit preference functions with add provider in PRE
@@ -184,6 +196,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user adds doctor in edit response page
       | Plan Type           | <isCoverageOpt> |
       | Doctors             | <E_doctors>     |
@@ -220,6 +233,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user navigates to edit response page
       | Plan Type | <isCoverageOpt> |
     Then user edits coverage value in edit response page
@@ -261,6 +275,9 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user navigates to edit response page
       | Plan Type | <isCoverageOpt> |
     Then user edits coverage value in edit response page
@@ -275,13 +292,13 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
 
     @EditResponsePage_MAtoPDP
     Examples: 
-      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   32115 | NO            | Volusia | MA            | Medicaid     | regular | Lookup  | David B. Auerbach | NO            | Yes,Yes,Yes,Yes               | Lower                | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,1,YES,NO                                 |
+      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName       | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
+      |   32115 | NO            | Volusia | MA            | Medicaid     | regular | Lookup  | David B. Auerbach | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Doctors, Health Care Premium | PDP             | Yes              | Lipitor,NO,Lipitor TAB 80MG,,,1,YES,NO                                 |
 
     @EditResponsePage_MAtoIDK
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   10004 | NO            | New York | MA            | Medicaid     | regular | Lookup  | sue         | NO            | Yes,Yes,Yes,Yes               | Lower                | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                 |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   | E_isCoverageOpt | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
+      |   10004 | NO            | New York | MA            | Medicaid     | regular | Lookup  | sue         | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Doctors, Health Care Premium | None            | Yes              | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                 |
 
   @PRE @planrecommendation @EditResponsePage @PDPtoMAPD
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> - To validate Edit preference functions for PDP to MAPD in PRE
@@ -318,7 +335,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows with Edit response f
 
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | E_isCoverageOpt | E_specialNeeds | E_travel | E_doctors | E_DoctorsName | E_isMultiDoctor | E_Drug Selection | E_DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | E_Dental-Hearing-Vision-Fitness | E_costPreferenceOption |
-      |   33143 | NO            | Miami-Dade | PDP           | No             | MAPD            | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 |
+      |   33143 | NO            | Miami-Dade | PDP           | No             | PDPTOMAPD       | nursing        | withinUS | Lookup    | john          | NO              | Yes              | Imuran,YES,Imuran TAB 50MG,,25,1,YES,NO                                | No,No,No,No                     | Higher                 |
 
   @PRE @planrecommendation @EditResponsePage @PDPtoMA
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> - To validate Edit preference functions for PDP to MA in PRE

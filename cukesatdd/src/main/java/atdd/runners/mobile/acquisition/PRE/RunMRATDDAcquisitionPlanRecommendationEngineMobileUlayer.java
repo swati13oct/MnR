@@ -13,7 +13,7 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineMobileUlayer.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineMobileUlayer")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition.planrecommendationengine" }, features = {
 		"src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, plugin = { "pretty",
 				"html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineMobileUlayer.json" }, 

@@ -152,7 +152,7 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = "div h3[class*='plan-name']")
 	private List<WebElement> planNamesVisitorPrf;
 
-	@FindBy(css = "div[class*='title-compare'] button[class*='btn']")
+	@FindBy(css = "#landrover div[class*='justify-content-between'] a[dtmid*='acq_visitor_profile']")
 	private WebElement comparePlansBtn;
 
 	@FindBy(css = "a[dtmname*='Edit Drugs']")

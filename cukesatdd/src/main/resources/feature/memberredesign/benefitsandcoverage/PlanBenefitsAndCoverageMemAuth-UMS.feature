@@ -251,7 +251,7 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType| memberType| copayCategory |Identifier      | count | rider   |
-      | 08    | 15239 | qavgogine| qavgogine|q4_grp_dec204|PDP    | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
+      | 08    | 15239 | qavgogine| qavgogine|q2_jun_grp0023|PDP    | Group_BnC  | NON LIS     |GrpEffectiveUHC | 3     | NoRider |
       
 
   #TC19_Ways To Save should come only for PDP members (Saver,Walgreen,Preferred, Symphonix)
@@ -474,16 +474,16 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user validates dropdown selection functionality
     And the user validates text for the Look Up Drugs section
     And the user validates group Drug coverage header and text under the section
+    And the NON-LIS PDP group user should see drug cost table for non Lis members
+    And the user should see drug copay and discount table
+      | Updated Language | <UpdatedLanguage> |
+      | Display Flag     | <DisplayFlag>     |
+    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates text for the Look Up Drugs section
     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
-    And the NON-LIS PDP group user should see drug cost table for Lis members
-    And the user should see drug copay and discount table
-      | Updated Language | <UpdatedLanguage> |
-      | Display Flag     | <DisplayFlag>     |
-    And the user validates the user click on the link it expands and when user clicks it again it should collapse
     And the user validates view and document label
     And the user validates static links
       | Plan Type | <planType> |
@@ -492,12 +492,14 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     And the user verifies that the correct pdfs are there in the plan material section of benefits page
       | Summary of Benefits                 | <SummaryofBenefits>               |
       | Evidence of Coverage                | <EvidenceofCoverage>              |
+     #| Comprehensive Formulary - Drug List | <ComprehensiveFormularyDrug List> |
+    #And the user validates Needhelp section
     And the user clicks on More Information link
     And the user validates contactus section
 
     Examples: 
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
-      | 16    | 15366 |qavgogine| qavgogine| q4_grp_dec204|PDP      | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD | 0191976081 | 01/01/2019    | Not Available  | Tier 2          | true        |
+      | 16    | 15366 |qavgogine| qavgogine| q2_jun_grp0023|PDP      | Group_BnC  | NON LIS       | ENGLISH  | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | BBBCCB FFAAFAD | 0191976081 | 01/01/2019    | Not Available  | Tier 2          | true        |
 
   #TO BE DEPRECATED
   #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table
@@ -847,20 +849,20 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
       | Deductible | <deductible> |
       | Insulin | <insulin> |
 	
-    @memAuth_hasInsulin_mapd_NoD
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I01 | 478830 | qavgogine| qavgogine | q4_insulinDemo_005 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
+    #@memAuth_hasInsulin_mapd_NoD
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I01 | 478830 | qavgogine| qavgogine | q4_insulinDemo_005 | MAPD      | Individual_BnC | NON LIS       | NoD          | hasInsulin   | 
 
-    @memAuth_hasInsulin_mapd_T12NoD_T345D
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I02 | 478830 | qavgogine| qavgogine | q4_insulinDemo_003 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
+    #@memAuth_hasInsulin_mapd_T12NoD_T345D
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I02 | 478830 | qavgogine| qavgogine | q4_insulinDemo_003 | MAPD      | Individual_BnC | NON LIS       | T12NoD_T345D | hasInsulin   | 
 
-    @memAuth_hasInsulin_mapd_T123NoD_T45D
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 31-I03 | 478830 | qavgogine| qavgogine | Q4_insulinDemo_100 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
+    #@memAuth_hasInsulin_mapd_T123NoD_T45D
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I03 | 478830 | qavgogine| qavgogine | Q4_insulinDemo_100 | MAPD      | Individual_BnC | NON LIS       | T123NoD_T45D | hasInsulin   | 
      
     @memAuth_hasInsulin_pdp_NoD
     Examples: 
@@ -885,12 +887,12 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
     @memAuth_nonInsulin_mapd_NoT
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I08 | 478830 | qavgogine | qavgogine| q4_insulinDemo_002 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
+      | 31-I08 | 478830 | qavgogine | qavgogine| q4_insulinDemo_002 | MAPD      | Individual_BnC | LIS 4         | NoTier       | nonInsulin   | 
 
-    @memAuth_nonInsulin_mapd_T12345
-    Examples: 
-      | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
-      | 34-I09 | 478830 | qavgogine| qavgogine | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
+    #@memAuth_nonInsulin_mapd_T12345
+    #Examples: 
+    #  | index  | FID    | username | password  | MemUserName        | planType  | memberType     | copayCategory | deductible   | insulin      |
+    #  | 31-I09 | 478830 | qavgogine| qavgogine | q4_insulinDemo_019 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
   @memAuth_benefitsAndCoverage24 @memAuth_api
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
@@ -925,13 +927,43 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth
 
   @memAuth_benefitsAndCoverage25 @memAuth_api
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user
-    Given login with following details logins in the member portal and validate elements
-      | Plan Type   | <planType>   |
-      | Member Type | <memberType> |
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
     Then The user will not be able to navigate to Benefits and Coverage page
       
     @memAuth_singleApi
     Examples: 
       | index | TID   | username | password  | MemUserName        | planType | memberType   |
       | 41    | xxxxx | qavgogine| qavgogine | q2_jun_grp0440     | TERM     | FED_BnC      |
+      
+  @memAuth_benefitsAndCoverage26 @memAuth_rider
+  Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - Verify Rider tile display
+    Given the user is on member auth login flow page
+    When the member is able to login with correct username and password
+      | Username | <username> |
+      | Password | <password> |
+    And Member Enters the Username he wants to search
+      | MemUsername | <MemUserName> |
+    And user clicks on member to select
+    And user stores test input for validations
+      | Username | <MemUserName> |
+      | Plan Type    | <planType>    |
+      | Member Type  | <memberType>  |
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
+	And the user validate rider tile is displayed
+	
+    Examples: 
+      | index  | FID    | username | password  | MemUserName        | planType  | memberType           |
+      | 42     | xxxxxx | qavgogine| qavgogine | q4_3monthrider_003 | MAPD      | Individual_Rider_BnC |
+      
 ########################################################################################################  

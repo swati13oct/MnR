@@ -803,10 +803,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	/** 
+	 * @throws InterruptedException 
 	 * @toDo : Validates the Locate a Pharmacy button 
 	 */
 	@And("^the user validates Locate a Pharmacy button should be visible$")
-	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
+	public void user_validate_locatepharmacybutton(DataTable memberAttributes) throws InterruptedException {
 		System.out.println("***the user validates Locate a Pharmacy button should be visible***");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -993,10 +994,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}	
 	}
 	
-	@And("the NON-LIS PDP group user should see drug cost table for Lis members")
+	@And("the NON-LIS PDP group user should see drug cost table for non Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Group() {
 		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
-		System.out.println("***the NON-LIS PDP group user should see drug cost table for Lis members***");
+		System.out.println("***the NON-LIS PDP group user should see drug cost table for non Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		
@@ -1100,7 +1101,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a Non lis member Ind Member
 	 */
-	@And("the user validates Ind plan overview")
+	@And("^the user validates Ind plan overview$")
 	public void user_validate_IndplanOverviewsection(DataTable givenAttributes) {
 		System.out.println("***the user validates Ind plan overview***");
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -1477,7 +1478,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 
 
 	@Then("^the user validate vas tiles on vas page")
-	public void validatevastiles(DataTable memberAttributes)
+	public void validatevastiles(DataTable memberAttributes) throws InterruptedException
 	{
 		ValueAddedServicepage valueaddedservices = (ValueAddedServicepage) getLoginScenario()
 				.getBean(PageConstantsMnR.VALUE_ADDED_SERVICES);
@@ -2689,6 +2690,36 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		Assert.assertTrue(benefitsCoveragePage.display_provider_search_tile());
 	}
+	
+	@Then("^validates LEARN MORE ABOUT DRUG TIERS link content for user with insulin$")
+	public void validates_learnMoreAboutDrugTiers_insulin()
+	{
+		String copayCategory = (String) getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_COPAY_CATEGORY);
+
+		String insulinFlag=(String) getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_INSULIN);
+
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		benefitsCoveragePage.validate_learnmoreaboutlink_insulin(copayCategory, insulinFlag);
+	}
+
+	@Then("^the user validate rider tile is displayed$")
+	public void validates_riderTile()
+	{
+		
+		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario().getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
+		Date currentDate=benefitsCoveragePage.getCurrentSystemDate();
+		String dateStr=benefitsCoveragePage.convertDateToStrFormat_MMDDYYYY(currentDate);
+
+		String planType=(String) getLoginScenario().getBean(LoginCommonConstants.PLANTYPE);
+		String memberType=(String) getLoginScenario().getBean(LoginCommonConstants.CATOGERY);
+
+		boolean isComboUser=false;
+		if (memberType.toUpperCase().contains("COMBO"))
+			isComboUser=true;
+
+		benefitsCoveragePage.validateRiderTileDisplay(isComboUser, planType, dateStr);
+	}
+
 	
 }//end of class
 
