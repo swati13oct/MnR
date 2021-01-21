@@ -760,7 +760,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	private WebElement planCompareCheckBox;
 
 	
-	@FindBy(xpath="//span[@class='multiple-added-text show']")
+	
+	@FindBy(xpath = "//span[@class='multiple-added-text show']")
 	private WebElement multipleCompareText;
 
 	@FindBy(xpath = "//div[contains(@class,'plan-list show active')]//*[@class='segment-title oon-benefit-padding']//h3")
@@ -4790,9 +4791,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public ComparePlansPageMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-		scrollToView(compareLinks.get(1));
-		compareLinks.get(1).click();
-
+		jsClickNew(compareLinks.get(1));
+		waitForPageLoadSafari();
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
@@ -5136,6 +5136,34 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
+		}
+	}
+	
+	
+	public void checkMAPlansOnly(String counter) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
+		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
+		if (count == 0)
+			for (String index : counter.split(",")) {
+				selectPlanIndexes.add(Integer.parseInt(index));
+			}
+		else
+			for (int i = 0; i < count; i++) {
+				selectPlanIndexes.add(i);
+			}
+
+		List<WebElement> allMAPlans = driver
+				.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
+		if (allMAPlans != null) {
+			for (int i : selectPlanIndexes) {
+				jsClickNew(allMAPlans.get(i));
+			}
 		}
 	}
 

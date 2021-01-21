@@ -38,6 +38,16 @@ import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.AboutUsAARPPage;
+import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.ContactUsAARPPage;
+import pages.acquisition.commonpages.DisclaimersAARPPage;
+import pages.acquisition.commonpages.FindCarePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
+import pages.acquisition.commonpages.SiteMapAARPPage;
+import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.bluelayer.AgentsAndBrokersPageMobile;
 import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
@@ -54,6 +64,7 @@ import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 //import pages.acquisition.ulayer.VisitorProfilePage;
 //import pages.acquisition.ulayer.ZipcodeLookupHomePage;
 import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.AddDrugDetailsMobile;
@@ -4240,6 +4251,483 @@ public class VppPlanCompareMobile {
 			Assert.fail("Error in Agents and brokers page");
 		}
 
+	}
+	
+	@And("^user clicks on disclaimers link of terms & conditions page$")
+	public void click_disclaimers1() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		DisclaimersAARPPageMobile disclaimersAARPPage = aquisitionhomepage.disclaimersFooterClick();
+		if (disclaimersAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE, disclaimersAARPPage);
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("disclaimers page not found");
+		}
+	}
+	
+	@Then("^the user clicks on back on all plan link in Plan Compare page")
+	public void user_clicks_back_to_all_plan_PlanCompare_page() throws InterruptedException {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		VPPPlanSummaryPageMobile plansummaryPage = planComparePage.navigateBackToAllPlans();
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			Assert.assertTrue(true);
+			plansummaryPage.handlePlanYearSelectionPopup();
+		} else
+			Assert.fail("Error in navigating back to Plan Summary Page");
+
+	}
+	
+	@Then("^verify plan compare page is loaded$")
+	public void verify_plan_compare_page_is_loaded_on_AARP1() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlanComparePage();
+	}
+
+	@And("^user clicks on agents & brokers link of disclaimers page$")
+	public void click_agentsnbrokers1() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AgentsnBrokersAARPPageMobile agentsnBrokersAARPPage = aquisitionhomepage.agentsnbrokersFooterClick();
+		if (agentsnBrokersAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE, agentsnBrokersAARPPage);
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("agents&brokers page not found");
+		}
+	}
+
+	@And("^user verifies home link of agents & brokers page$")
+	public void click_home1() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
+	}
+	
+	@And("^user clicks on privacy policy link of sitemap page$")
+	public void click_privacypolicy1() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		PrivacyPolicyAARPPageMobile privacyPolicyAARPPage = aquisitionhomepage.privacypolicyFooterClick();
+		if (privacyPolicyAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE, privacyPolicyAARPPage);
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("privacypolicy page not found");
+		}
+	}
+	
+	@And("^user clicks on sitemap link of contact us page$")
+	public void click_sitemap1() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		SiteMapAARPPageMobile siteMapAARPPage = aquisitionhomepage.siteMapFooterClick();
+		if (siteMapAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE, siteMapAARPPage);
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("sitemap page not found");
+		}
+	}
+	
+	@And("^user clicks on contact us link of aboutus page$")
+	public void click_contact_us() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		ContactUsAARPPageMobile contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
+		if (contactUsAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("contactus page not found");
+		}
+	}
+	
+
+	@And("^user clicks on About us link from footer of the Medicare Plans home page$")
+	public void click_about_us() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AboutUsAARPPageMobile aboutUsAARPPage = aquisitionhomepage.aboutUsFooterClick();
+		if (aboutUsAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE, aboutUsAARPPage);
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("Aboutus page not found");
+		}
+
+	}
+	
+	@Then("^user verify the popup and content on Plan Comapare Page$")
+	public void user_verify_the_popup_and_content_PlanCompare_Page() throws InterruptedException {
+
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallpopup();
+	}
+	
+	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
+	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_Page()
+			throws InterruptedException {
+
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallSamContent();
+
+	}
+	
+	@Then("^validate OON Toggle is displayed on medical and additional benefits$")
+	public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateOONDDisplayed();
+	}
+
+	@Then("^Validate OON Toggle is not displayed when there are no OON Plans Available$")
+	public void validate_OON_Toggle_is_not_displayed_when_there_are_no_OON_Plans_Available() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateOONNotDisplayed();
+	}
+	
+	@Then("^remove \"([^\"]*)\" plan from new plan compare page$")
+	public void remove_plan_from_new_plan_compare_page_for_UHC(String planIndices) throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnSelectedRemoveLink(planIndices);
+	}
+
+	@Then("^validate optional service riders section on compare page is not shown$")
+	public void validate_optional_service_riders_section_on_compare_page_is_not_shown() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateOptionalRidersSectionHidden();
+	}
+
+	@Then("^validate all available plans are shown on click of view all plans$")
+	public void validate_all_plans_are_shown() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAllPlansShown();
+	}
+	
+	@And("^I click on Get Started on and Add Places from Hospitals find care page$")
+	public void I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page() throws Exception {
+		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPageMobile planComparePage = findCarePage.placesfromHospital();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^check one plan and add it to plancompare")
+	public void check_one_plan_and_add_it_to_plancompare() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickon3rdPlan();
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@When("^user selects a Hospitals and retuns to VPP page$")
+	public void user_selects_Hospitals_and_return_vpp_page() {
+		{
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsHospitals();
+			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+
+		}
+	}
+	
+	@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page$")
+	public void verify_doctors_covered() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateDoctors();
+	}
+
+	@And("^click on Edit your doctors link and Navigate to Rally page$")
+	public void clickONEdityourdocits() throws Exception {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		FindCarePageMobile findCarePage = planComparePage.clickonEditYourDoctors();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	@And("^user selects a provider from medical group and retuns to plan compare page$")
+	public void selectsproviderfrommedicalGroup() throws Exception {
+		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPageMobile planComparePage = findCarePage.providerfromMedicalGroup();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page$")
+	public void verify_Add_doctors_covered() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAddDoctors();
+	}
+
+	@And("^click on Add your doctors link and Navigate to Rally page$")
+	public void clickOnAddyourdocits() throws Exception {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		FindCarePageMobile findCarePage = planComparePage.clickonAddYourDoctors();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	// New plan compare related
+	@And("^I click on Get Started on and Add PrimaryCare PCP from find care page$")
+	public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page() throws Exception {
+		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPageMobile planComparePage = findCarePage.providerfromPrimaryCare();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	@Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page$")
+	public void verify_Hospital_covered() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateEditHospitals();
+	}
+
+	@And("^click on Edit your Hospitals link and Navigate to Rally page$")
+	public void clickONEdityourHospitals() throws Exception {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		FindCarePageMobile findCarePage = planComparePage.clickonEditYourHosptials();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	@And("^user selects a Hospitals from Clinical and retuns to plan compare page$")
+	public void selectsproviderfromPrimaryCareClinic() throws Exception {
+		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPageMobile planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	@Then("^verify Add Hospitals is loaded without summary on Plan Compare page$")
+	public void verify_Add_Hospitals_covered() {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAddHospitals();
+	}
+
+	@And("^click on Add your Hospitals link and Navigate to Rally page$")
+	public void clickOnAddyourHospitals() throws Exception {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		FindCarePageMobile findCarePage = planComparePage.clickonAddYourHospitals();
+		if (findCarePage != null) {
+			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+
+	
+	
+	@Then("^Verify newly added plan displayed on new plan compare page$")
+	public void verify_newly_added_plan_displayed_on_new_plan_compare_page() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatenewlyAddPlanonNewPlanComapre();
+	}
+	
+	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare and click on compare plan link$")
+	public void i_select_plans_and_plans_to_compare_and_click_on_compare_plan_link(String planType, String Counter)
+			throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		// int counter = Integer.parseInt(Counter);
+		if (planType.equals("MAPD")) {
+			// plansummaryPage.clickonViewPlans();
+			plansummaryPage.checkMAPlansOnly(Counter);
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		}
+
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
+	@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page$")
+	public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewAddIcon();
+	}
+	
+	@Then("^remove one plan from new plan compare page$")
+	public void remove_one_plan_from_new_plan_compare_page() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile ) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnNewRemoveLink();
+	}
+
+	@Then("^click on back to plans on plan compare page$")
+	public void click_on_back_to_plans_on_plan_compare_page() throws Throwable {
+		ComparePlansPageMobile  planComparePage = (ComparePlansPageMobile ) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnBacktoPlans();
+	}
+
+	@Then("^Verify the Plan compare checkbox should be unchecked for the removed plan$")
+	public void verify_the_Plan_compare_checkbox_should_be_unchecked_for_the_removed_plan() throws Throwable {
+		VPPPlanSummaryPageMobile  plansummaryPage = (VPPPlanSummaryPageMobile ) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyPlanComapreCheckboxIsUnchecked();
+	}
+	
+	@When("^verify Call SAM icon is visible or not on Plan Comapare Page$")
+	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_Page() throws InterruptedException {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallSam();
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		Assert.assertTrue(true);
+		System.out.println("TFN Widget is Displayed");
+	}
+	
+	@Then("^verify plan compare checkbox is not visible on plan summary$")
+	public void verify_plan_compare_checkbox_is_not_visible_on_plan_summary() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		boolean validationFlag = plansummaryPage.verifyPlanCompareCheckboxNotVisible();
+		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ", validationFlag);
+
+	}
+	
+	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare")
+	public void user_clicks_enrollInPlan_newPlanCompare() throws InterruptedException {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		WelcomePageMobile welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
+		if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading Welcome Page for OLE");
+		}
+	}
+
+	@Then("^the user clicks on Plan details link in new Plan Compare page")
+	public void user_clicks_planDetails_newPlanCompare() throws InterruptedException {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		PlanDetailsPageMobile vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
+		if (vppPlanDetailsPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in Loading the Plan Details Page");
+
+	}
+
+	@Then("^Click on view more plans for right navigaton$")
+	public void Clickonviewmoreplansforrightnavigatonon() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewMoreplansComparePage();
+	}
+
+	@Then("^Click on view less plans for left navigaton$")
+	public void Clickonviewlessplansforrightnavigatonon() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewlessplansComparePage();
+	}
+
+	@Given("^remove one plan from \"([^\"]*)\" new plan compare and verify remove icon is disabled page$")
+	public void removeoneplanfrom_compare_plan_link(String Counter) throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.CounterNewRemoveLink(Counter);
+	}
+
+	@Then("^Click on Dental Flyer Link$")
+	public void clickonDentalFlyerLink(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String PDFtype = memberAttributesMap.get("PDF LINK");
+		String DocCode = memberAttributesMap.get("DocumentCode");
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.CounterDentalFlyerLink(PDFtype, DocCode);
+	}
+	
+	@Then("^validate view locations popup on compare page$")
+	public void validate_view_locations_popup_on_compare_page() throws Throwable {
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewLocation();
 	}
 
 }
