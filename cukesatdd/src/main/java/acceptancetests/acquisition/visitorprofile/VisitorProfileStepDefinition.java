@@ -511,4 +511,12 @@ public void user_clicks_on_home_from_visitor_profile_page() {
 	AcquisitionHomePage acquisitionHomePage = visitorProfilePage.clickHomeMenu();
 	getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, acquisitionHomePage);
 }
+
+@Then("^user verify breadcrumb \"([^\"]*)\" on the visitor profile page$")
+public void user_verify_breadcrumb_on_the_visitor_profile_page(String breadcrumb) {
+	VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfilePage.verifyBreadCrumb(breadcrumb);
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+}
 }

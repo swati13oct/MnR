@@ -184,6 +184,9 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@class,'remove-button') and contains(@aria-label,'Delete')]")
 	private List<WebElement> deletePlan;
+	
+	@FindBy(xpath = "//*[@id='navLinks']/a[1]")
+	private WebElement breadCrumbLink;
 
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -841,4 +844,7 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 	}
 
+	public void verifyBreadCrumb(String breadCrumb) {
+		Assert.assertTrue("Expected breadcrumb "+breadCrumb+ "not displayed",breadCrumbLink.getText().equals(breadCrumb));
+	}
 }

@@ -238,7 +238,9 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+   # And the user validated the Look up Drugs link
+     And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> |
     And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
       | Type   | <type>   |
     And the user validates Locate a Pharmacy button should be visible
@@ -277,7 +279,9 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+   # And the user validated the Look up Drugs link
+     And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> | 
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
@@ -310,7 +314,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+   # And the user validated the Look up Drugs link
+    And the user validates group Look Up Drugs button should be visible
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
@@ -346,7 +351,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+  #  And the user validated the Look up Drugs link
+     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |

@@ -21,6 +21,7 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
@@ -28,6 +29,7 @@ import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -558,6 +560,14 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = DCEbuildDrugList.navigateToZipEntryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+	}
+
+	@Then("^the user clicks on Review Drug Costs button to Land on Drug Summary Page$")
+	public void the_user_clicks_on_Review_Drug_Costs_button_to_Land_on_Drug_Summary_Page() throws Throwable {
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugSummaryPage drugSummaryPage = DCEbuildDrugList.navigateToDrugSummay();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@When("^adds drugs in drug list page$")
@@ -2503,4 +2513,38 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateStandardTab();
 	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" on get started page$")
+	public void user_verify_breadcrumb_on_get_started_page(String breadCrumb) {
+		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		DCEgetStarted.validateBreadCrumb(breadCrumb);
+	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" on drug summary page$")
+	public void user_verify_breadcrumb_on_drug_summary_page(String breadCrumb) {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateBreadCrumb(breadCrumb);
+	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" on drug details page$")
+	public void user_verify_breadcrumb_on_drug_details_page(String breadCrumb) {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateBreadCrumb(breadCrumb);
+	}
+
+	@Then("^user should be able to see Back to profile button on details page$")
+	public void user_should_be_able_to_see_Back_to_profile_button_on_details_page() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.verifyBackToProfileBtnDisplayed();
+	}
+
+	@Then("^user click on breadcrumb \"([^\"]*)\" on get started page$")
+	public void user_click_breadcrumb_on_get_started_page(String breadCrumb) {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickReturnToPharamcySearch();
+
+	}
+
 }

@@ -406,5 +406,11 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 	}
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
+	public WebElement returntoPharmacySearch;
+	
+	public void clickReturnToPharamcySearch() {
+		validateNew(returntoPharmacySearch);
+		returntoPharmacySearch.click();
 }
-
+}

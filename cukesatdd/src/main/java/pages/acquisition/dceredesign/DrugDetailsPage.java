@@ -378,6 +378,11 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
+	@FindBy(xpath = "(//a[contains(@class,'uhc-link-button')])[3]")
+	private WebElement breaCrumbLink;
+	
+	@FindBy(xpath = "//button/span[text()='Back To Profile']")
+	private WebElement backToProfileBtn;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -1861,4 +1866,18 @@ public class DrugDetailsPage extends UhcDriver {
 		Assert.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
 	}
 	
+	public void validateBreadCrumb(String breadCrumb) {
+		Assert.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().trim().equals(breadCrumb));
+	}
+	
+	public void verifyBackToProfileBtnDisplayed() {
+		try {
+			if (backToProfileBtn.isDisplayed()) {
+				System.out.println("Back to profile button is displayed");
+			}
+		} catch (Exception e) {
+			Assert.fail("Back to profile button is not displayed");
+		}
+	}
+
 }
