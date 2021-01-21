@@ -679,12 +679,12 @@ public void the_user_navigates_to_plan_tab_on_VPP_and_validates_Federal_TFN(Data
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-	String Zip = "90210";
+	String Zip = memberAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
 }
 
