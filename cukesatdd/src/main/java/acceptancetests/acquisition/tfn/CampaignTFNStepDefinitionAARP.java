@@ -816,14 +816,7 @@ public void the_user_navigates_to_Plan_tab_plan(DataTable attributes) throws Thr
 }
 
 @Then("^the user navigates back to page$")
-public void the_user_navigates_back_page(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-				memberAttributesRow.get(i).getCells().get(1));
-	}
+public void the_user_navigates_back_page() throws Throwable {
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.validatebackpage();
