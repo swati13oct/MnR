@@ -1809,7 +1809,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateInvalidZipErrCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText());
-		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {

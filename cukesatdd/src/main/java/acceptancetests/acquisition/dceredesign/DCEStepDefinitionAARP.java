@@ -2,6 +2,8 @@ package acceptancetests.acquisition.dceredesign;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -1512,7 +1514,28 @@ public class DCEStepDefinitionAARP {
 		buildDrugListPage.deleteDrug(DeleteDrug);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		System.out.println("Drug List before Delete Drug : " + druglist);
-		druglist = druglist.replace("&" + DeleteDrug, "");
+//		druglist = druglist.replace("&" + DeleteDrug, "");
+		
+		//Get the current drug list into an Arraylist
+		try {
+			List<String> drugListBeforeRemoving = new ArrayList<String>(Arrays.asList(druglist.split("&")));
+
+			//Update the arraylist by removing the deleted drug
+			if(drugListBeforeRemoving.contains(DeleteDrug)) {
+				drugListBeforeRemoving.remove(DeleteDrug);
+			}
+			//Get the updated list of drugs in druglist variable
+			druglist = String.join("&", drugListBeforeRemoving);
+		}catch(UnsupportedOperationException e) {
+			System.out.println("Initiliaze the List correctly !");
+			
+			/**When using Arrays.asList, arraylist has to be initialized as
+			List<String> listName = new ArrayList<String>(Arrays.asList(String.split("delimiter")));
+			*/
+		}
+		
+		
+		
 		System.out.println("Updated Drugs List after Delete Drug : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);

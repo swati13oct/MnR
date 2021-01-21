@@ -1304,13 +1304,15 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void ValidatesAddedDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length-1;
+//		int DrugCount_Total = DrugListItems.length-1; 		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(By.xpath("//*[contains(@class, 'drugcoveredalignment')][contains(text(), 'Covered')]"));
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		for(i=1; i<=DrugCount_Total; i++) {
+//		for(i=1; i<=DrugCount_Total; i++) {					//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for (i = 0; i < DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//h2[contains(@id, 'yourdrugsheading')]//following::*[contains(text(), '"+currentDrug+"')]"));
