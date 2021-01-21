@@ -155,8 +155,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
     	#| Zip Code        | <zipcode>|
     	Then the user navigates back to page
-    	Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
-       | Plan Type | <MSplantype> |
+    	   Then the user navigates to plan tab for any plan
+        | Plan Type | <MSplantype> |
      Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath1> |
@@ -429,8 +429,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN Xpath | <TFNxpath> |
     Then the user navigates to plan tab for any plan
         | Plan Type | <MSplantype> |
-  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
-      | Plan Type | <MSplantype> |  
+  #Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+     # | Plan Type | <MSplantype> |  
    Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |

@@ -36,8 +36,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
        | TFN Xpath | <TFNxpath> |	
      Then the user navigates to plan tab for any plan
         | Plan Type | <MSplantype> |
-  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
-      | Plan Type | <MSplantype> |  
+ # Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      #| Plan Type | <MSplantype> |  
    	Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |	

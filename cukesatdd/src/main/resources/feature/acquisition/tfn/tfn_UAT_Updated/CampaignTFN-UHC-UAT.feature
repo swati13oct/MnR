@@ -40,8 +40,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    	 Then the user navigates back to page
      Then the user navigates to plan tab for any plan
         | Plan Type | <MSplantype> |
-  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
-      | Plan Type | <MSplantype> |  
+  #Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      #| Plan Type | <MSplantype> |  
    	Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |
