@@ -1530,6 +1530,7 @@ public class PlanDetailsPage extends UhcDriver {
 		validateNew(backtoDrugEstBtn);
 		backtoDrugEstBtn.click();
 	}
+
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
@@ -1887,4 +1888,8 @@ public class PlanDetailsPage extends UhcDriver {
 
 		return result;
 	}
+
+	public void validateVPPDetailsPage() {
+	Assert.assertTrue("user not navigated to VPP Details Page",driver.getCurrentUrl().contains("details"));
+}
 }
