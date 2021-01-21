@@ -141,13 +141,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     private WebElement headerShopLink;
     
     @FindBy(css = "#planTypesColumn h3:nth-of-type(2)>a")
-    private WebElement headerNewExistingMemberLink;
-    
-    @FindBy(css = "#planTypesColumn h3:nth-of-type(3)>a")
     private WebElement headerEnrollLink;
     
-    @FindBy(css = "#planTypesColumn h3:nth-of-type(4)>a")
+    @FindBy(css = "#planTypesColumn h3:nth-of-type(3)>a")
     private WebElement headerResourcesLink;
+    
+//    @FindBy(css = "#planTypesColumn h3:nth-of-type(4)>a")
+//    private WebElement headerResourcesLink;
     
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(1)>a")
     private WebElement headerAdvantageplanLink;
@@ -155,7 +155,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(2)>a")
 	private WebElement headerDualSpecialLink;
 
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3 #_82nrmz9f2>a")
+	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(3)>span:nth-of-type(2)>a")
     private WebElement headerMedicaresupplementplanLink;
     
 	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(5)>a")
@@ -269,7 +269,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = ".footer-middle>p:nth-of-type(2)")
 	public WebElement footerLastUpdated;
         
+// DCE elements
 	
+	@FindBy(css = "#addDrug")
+	private WebElement drugAddBtn;
+	
+	@FindBy(css = "h1#progressHeader")
+	private WebElement dceTitle;
 	
 //Header Element Verification Method 
 	
@@ -334,8 +340,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //2nd column in Shop for a plan		headerNewExistingMemberLink
 		validate(headerShopLink, 30);
 		Assert.assertTrue(headerShopLink.getText().contains("Shop"));
-		validate(headerNewExistingMemberLink, 30);
-		Assert.assertTrue(headerNewExistingMemberLink.getText().contains("New and Existing Members"));
+//		validate(headerNewExistingMemberLink, 30);
+//		Assert.assertTrue(headerNewExistingMemberLink.getText().contains("New and Existing Members"));
 		validate(headerEnrollLink, 30);
 		Assert.assertTrue(headerEnrollLink.getText().contains("Enroll"));
 		validate(headerResourcesLink, 30);
@@ -610,15 +616,12 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	}
 	
 //Navigating Plan RecommendationEngine via Get Plan Recommendation	
-	public void navigationToPlanRecommendationEngine() throws InterruptedException{
-		/*validate(headerNavigationBarShopForaPlanTab, 45);
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).perform();
-		 Thread.sleep(10000);
-		 validate(headerGetaPlanRecommendationLink, 30);
-		 actions.moveToElement(headerGetaPlanRecommendationLink,20,0).click().perform();*/
-		actions.moveToElement(headerNavigationBarShopForaPlanTab).click(headerGetaPlanRecommendationLink).build().perform();
+	public void navigationToPlanRecommendationEngine() {
+		validate(headerNavigationBarShopForaPlanTab, 45);
+		jsMouseOver(headerNavigationBarShopForaPlanTab);
+//		jsClickNew(headerNavigationBarShopForaPlanTab);
+		jsClickNew(headerGetaPlanRecommendationLink);
 		validate(landingpageHeader, 30);
-//		Assert.assertTrue(landingpageHeader.getText().contains("plan"));
 	}
 	
 //Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing	
@@ -635,6 +638,21 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		jsClickNew(HeaderGetRecommendationInShop);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
+	}
+	
+//	Navigate to DCE
+	
+	public void navigationToDrugCostEstimatorViaShopTools() {
+		jsClickNew(headerNavigationBarHomeTab);
+		threadsleep(2000);
+		validate(headerNavigationBarShopForaPlanTab, 45);
+		jsMouseOver(headerNavigationBarShopForaPlanTab);
+//		jsClickNew(headerNavigationBarShopForaPlanTab);
+		jsClickNew(headerDrugcostLink);
+		threadsleep(2000);
+		validate(drugAddBtn, 30);
+		validate(dceTitle, 30);
+		Assert.assertTrue(dceTitle.getText().contains("Drug Cost Estimator"));
 	}
 	
 //ZipCode Function inside Shop for a Plan

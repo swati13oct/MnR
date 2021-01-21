@@ -1,5 +1,7 @@
 package pages.regression.healthRecord;
 
+import java.util.List;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,6 +18,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.remote.html5.RemoteWebStorage;
 import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 
 public class HealthRecordBase  extends HealthRecordWebElements {
 
@@ -45,10 +48,18 @@ public class HealthRecordBase  extends HealthRecordWebElements {
 		System.out.println("TEST - move element to center view"); 
 	}
 
+	@SuppressWarnings("unchecked")
 	public WebElement expandRootElement(WebElement element) {
-		WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
-				element);
-		return ele;
+		if (MRScenario.browserName.equalsIgnoreCase("Firefox")) {
+			List<WebElement> eleList= (List<WebElement>) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot.children",
+					element);
+			//note: return the last element from the list
+			return eleList.get(eleList.size()-1);
+		} else {
+			WebElement ele = (WebElement) ((JavascriptExecutor) driver).executeScript("return arguments[0].shadowRoot",
+					element);
+			return ele;
+		}
 	}
 
 	public boolean noWaitValidate(WebElement element) {

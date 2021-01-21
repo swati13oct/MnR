@@ -563,5 +563,9 @@ public class HealthRecordPage  extends HealthRecordBase {
 	public boolean hasSorryError() {
 		return noWaitValidate(sorryError);
 	}
+	
+	public boolean hasPaymentTabOnPage() {
+		return noWaitValidate(paymentTopMenuLnk);
+	}
 
 }

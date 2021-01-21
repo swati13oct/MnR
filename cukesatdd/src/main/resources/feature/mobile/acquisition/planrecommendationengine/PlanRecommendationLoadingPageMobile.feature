@@ -25,6 +25,7 @@ Feature: Plan Recommendation Engine flow - Verify Loading screen page functional
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     And user selects cost preferences option in cost preferences page mobile
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page mobile
     Then user validate elements in loading page mobile
 
     Examples: 
