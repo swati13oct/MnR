@@ -79,7 +79,8 @@ public class HSIDLoginPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/username')]")
 	private WebElement usernamelink;
 
-	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/password')]")
+	//tbd @FindBy(xpath = "//*[contains(@ng-href,'accountreset/password')]")
+	@FindBy(xpath = "//*[contains(@ng-href,'accountreset/password') or contains(@ng-click,'gotToResetPassword')]")
 	private WebElement passwordlink;
 
 	@FindBy(xpath = "//*[contains(@class,'strong success') and contains(text(),'Email confirmed')]")
