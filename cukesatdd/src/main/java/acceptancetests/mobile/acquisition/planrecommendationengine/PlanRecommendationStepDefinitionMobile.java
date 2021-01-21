@@ -8,6 +8,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineEditResponsePage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePrioritiesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
@@ -22,6 +25,7 @@ import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
@@ -52,6 +56,7 @@ import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngin
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineCoverageOptionPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineDoctorsPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineDrugsPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineEditResponsePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineHeaderAndFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineLandingAndZipcodeMobilePages;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEnginePharmacyPageMobile;
@@ -86,6 +91,41 @@ public class PlanRecommendationStepDefinitionMobile {
 			System.out.println("Current PRE Flow : " + PREflow);
 		}
 	}
+	
+	@And("^user validate druglist in Drug Cost Estimator page$")
+	public void Druglist_DCE() {
+		ACQDrugCostEstimatorPage dceDrugs =  new ACQDrugCostEstimatorPage(wd);
+		dceDrugs.getDruglist();
+	}
+	
+	@Then("^user verify drug list are same in DCE VS Drug page$")
+  	public void verify_drugs_dce_vs_drug_page(DataTable givenAttributes) {
+  		readfeaturedataMobile(givenAttributes);
+  		PlanRecommendationEngineDrugsPageMobile planSelectorDrugspage =  new PlanRecommendationEngineDrugsPageMobile(wd);
+  		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
+  		planSelectorDrugspage.comparingDrugsDCEvsPRE();
+  	}
+	
+	@Then("^user validate navigate to Get a Plan Recomendation page$")
+	public void navigate_PRE() {
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter =  new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		headerAndFooter.navigationToPlanRecommendationEngine();
+	}
+	
+	@When("^user validate navigate to Drug Cost Estimator page$")
+	public void navigate_DCE() {
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter =  new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		headerAndFooter.navigationToDrugCostEstimatorViaShopTools();
+	}
+
+	@Then("^user save recommendation results and validate in VP$")
+   	public void save_results(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		PlanRecommendationEngineEditResponsePageMobile preEditpage =  new PlanRecommendationEngineEditResponsePageMobile(wd);
+		checkpopup();
+		preEditpage.validateSaveResults(inputValues.get("Plan Type"));
+	}
+	
 
 	@Then("^user selects priority in priorities page$")
 	public void user_selects_priorities(DataTable givenAttributes) {
@@ -665,6 +705,13 @@ public class PlanRecommendationStepDefinitionMobile {
 		else
 			planSelectorResultspage.checkVPP(false);
 	}
+	
+	@Then("^user adds Drugs in Drug Cost Estimator page$")
+   	public void add_drugs_DCE_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
+		dce.useraddDrugsDCEWithoutVPP(inputValues.get("Drug Details"));
+   	}
 
 	@When("^user navigates to PRE landing page menu mobile$")
 	public void user_navigates_PRE_landingpage_menu_mobile() {

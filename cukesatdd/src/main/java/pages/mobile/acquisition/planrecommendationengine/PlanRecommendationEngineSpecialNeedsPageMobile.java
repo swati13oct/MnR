@@ -272,4 +272,12 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 
 		driver.navigate().back();
 	}
+	
+	public void edit_specialneeds(String options) {
+		String snpoptions[] = options.split(",");
+		for (String option : snpoptions) {
+			specialNeedspageFunctional(option);
+			specialNeedsOptionsMoreInfo(option);
+		}
+	}
 }

@@ -338,6 +338,17 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		continueBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
+	
+	public void edit_location(String zipcode,String multi,String county) {
+ 		waitforElementVisibilityInTime(zipCode, 45);
+ 		zipCode.clear();
+ 		sendkeys(zipCode, zipcode);
+ 		if(multi.equalsIgnoreCase("Yes")) {
+ 			waitforElementVisibilityInTime(PRECounty, 45);
+ 			selectFromDropDownByText(driver, PRECounty, county);
+ 		}
+ 		threadsleep(3000);
+ 	}
 
 	public void browserBack() {
 

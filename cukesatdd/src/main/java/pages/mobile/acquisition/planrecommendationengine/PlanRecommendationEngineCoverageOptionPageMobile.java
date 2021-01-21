@@ -179,4 +179,28 @@ public class PlanRecommendationEngineCoverageOptionPageMobile extends UhcDriver 
 
 		driver.navigate().back();
 	}
+	
+	public void chooseCoverageOption(String planType) {
+		if (planType.equalsIgnoreCase("MAPD")) {
+			validate(plantypeMAPD);
+//			plantypeMAPD.click();						//E2E : updated to jsClickNew as .click does not work in Safari13 
+			jsClickNew(plantypeMAPD);
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("MA")) {
+			validate(plantypeMA);
+//			plantypeMA.click();
+			jsClickNew(plantypeMA);
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			validate(plantypePDP);
+//			plantypePDP.click();
+			jsClickNew(plantypePDP);
+			System.out.println("Plan Type " + planType + " Clicked");
+		} else if (planType.equalsIgnoreCase("None")) {
+			validate(plantypeNone);
+//			plantypeNone.click();
+			jsClickNew(plantypeNone);
+			System.out.println("Plan Type " + planType + " Clicked");
+		}
+	}
 }

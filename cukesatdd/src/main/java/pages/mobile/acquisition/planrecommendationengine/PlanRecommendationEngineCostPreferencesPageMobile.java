@@ -135,5 +135,10 @@ public class PlanRecommendationEngineCostPreferencesPageMobile extends UhcDriver
 		continueBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
+	
+	public void edit_cost(String preference) {
+		costPreferencepageOptions(preference);
+	}
+
 
 }

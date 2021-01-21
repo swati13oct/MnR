@@ -19,6 +19,7 @@ import org.testng.Assert;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.WerallyMobilePage;
 
@@ -274,6 +275,17 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		System.out.println("Validating " + page + " page Continue button functionality");
 		// desktopCommonUtils.nextPageValidation(page.toUpperCase() + "skip");
 	}
+	
+//	Fetch the drug details and compare with DCE 
+
+		public void comparingDrugsDCEvsPRE() {
+			System.out.println("Validating " + page + " page druglist with DCE drugs");
+			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
+			DrugsInDCE = dce.vppDrugsResults;
+			threadsleep(2000);
+			drugnamesList();
+			verifyConfirmationmodalResults(DrugsInDCE.size(), DrugsInDCE, drugNames);
+		}	
 
 	// Drug option selects in Drug page
 

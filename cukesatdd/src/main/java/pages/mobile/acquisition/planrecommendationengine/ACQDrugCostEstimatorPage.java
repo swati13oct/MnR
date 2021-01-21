@@ -17,6 +17,7 @@ import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 
 public class ACQDrugCostEstimatorPage extends UhcDriver {
 
@@ -38,6 +39,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	static ArrayList<String> DCEDrugsResults = new ArrayList<String>();
 
 	String page = "Drug Cost Estimator";
+	ArrayList<String> druglistPRE;
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -241,11 +243,27 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
+	
+	public void getDruglist(){
+		PlanRecommendationEngineDrugsPage drugPRE = new PlanRecommendationEngineDrugsPage(driver);
+		druglistPRE = drugPRE.drugnamesList();
+		threadsleep(5000);
+		jsClickNew(drugAddBtn);
+		getDrugsDCE();
+		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
+	}
+	
 	public void Pharmacytype() {
 		threadsleep(5000);
 		validate(PharmacyType);
 		Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"),
 				"Pharmacy is not default online");
+	}
+	
+	public void useraddDrugsDCEWithoutVPP(String drugDetails) {
+		threadsleep(5000);
+		drugsHandlerWithdetails(drugDetails);
+		getDrugsDCE();
 	}
 
 	public ArrayList<String> getDrugsDCE() {
