@@ -2132,7 +2132,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// headerSignInLink.click();
 		jsClickNew(headerSignInLink);
 		waitforElementVisibilityInTime(signIn, 10);
-		validateNew(signIn);
+	
 		if (driver.getCurrentUrl().contains("medicare.uhc.com/aarp")) {
 			Assert.assertTrue(true);
 			System.out.println("Signin page is loaded");
