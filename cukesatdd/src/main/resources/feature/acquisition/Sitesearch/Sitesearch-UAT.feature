@@ -413,7 +413,7 @@ Examples:
     
   
 @SiteSearchULayerPages @UATRegression
- Scenario Outline: <Scenario> : To verify provider search third party URL on page mentioned - - <searchValue> 
+ Scenario Outline: <Scenario> : To verify provider search third party URL on page mentioned - <PageName>- <searchValue> 
    Given the user is on medicare acquisition site landing page
   		| Site | <site>	|
     Given the user navigates to following medicare acquisition site page
@@ -525,7 +525,7 @@ Examples:
      
      
     @SiteSearchULayerPages @UATRegression
- Scenario Outline: Verify search results on page mentioned - <searchValue> - <newsearchvalue>
+ Scenario Outline: Verify search results on page mentioned <PageName>- <searchValue> - <newsearchvalue>
    Given the user is on medicare acquisition site landing page
          	|Site| <site>|
     Given the user navigates to following medicare acquisition site page
@@ -636,7 +636,7 @@ Examples:
    
    
     @SiteSearchULayerPages @UATRegression
- Scenario Outline: <Scenario>: Verify Error handling on page mentioned - <searchValue> - <NewSearchValue> 
+ Scenario Outline: <Scenario>: Verify Error handling on page mentioned -<pageName> : <searchValue> - <NewSearchValue> 
     Given the user is on medicare acquisition site landing page
     |Site| <site>|
     Given the user navigates to following medicare acquisition site page
