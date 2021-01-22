@@ -24,7 +24,7 @@ public class UpdateRecurringPage extends UhcDriver {
 	@FindBy(id = "optionsRadios10")
 	private WebElement CheckingAccountRadioButton;
 
-	@FindBy(id = "optionsRadios20")
+	@FindBy(xpath = "(//input[@id='optionsRadios20'])[2]")
 	private WebElement CreditDebitRadioButton;
 
 	@FindBy(id = "optionsRadios30")

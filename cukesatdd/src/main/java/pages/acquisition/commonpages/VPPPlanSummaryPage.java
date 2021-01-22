@@ -35,7 +35,6 @@ import com.mysql.jdbc.StringUtils;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -875,7 +874,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
 	private WebElement savePlanButton;
 	
-	@FindBy(xpath = "//img[@class='uhc-modal__close']")
+	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
 	private WebElement close;
 
 
@@ -5223,6 +5222,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(10000);
 		jsClickNew(planK);
 		Thread.sleep(2000);
+		if (close.isDisplayed()) {
+			close.click();
+			Thread.sleep(2000);
+		}
 		action.moveToElement(addBtn3).build().perform();
 		addBtn3.click();
 		Thread.sleep(10000);
@@ -6117,7 +6120,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				System.out.println(expectedPlanNames);
 				System.out.println(actualPlanNames);
 				Assert.assertTrue("Saved plans not displayed in Enroll Popup.../n Expected plans" + expectedPlanNames
-						+ "\n Actual plans" + actualPlanNames, actualPlanNames.contains(expectedPlanNames));
+						+ "\n Actual plans" + actualPlanNames, actualPlanNames.equals(expectedPlanNames));
 			}
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");
@@ -6308,6 +6311,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("No providers in plan card");
 		}
 	}
+
 	public void medsuppOLEBenefitsTable() throws InterruptedException {
 		validateNew(RightRail_BenefitsTable);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_BenefitsTable, 30);
@@ -6322,7 +6326,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
-
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
@@ -6530,5 +6533,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.switchTo().window(parentWindow);
 
 	}
-	
+
+	public void enternewZip(String zipCode) {
+	ChangeLocationLink.click();
+	validate(ZipCodeTxtBx);
+	ZipCodeTxtBx.click();
+	ZipCodeTxtBx.clear();
+	ZipCodeTxtBx.sendKeys(zipCode);
+	validate(FIndPlansButton);
+	FIndPlansButton.click();
+	CommonUtility.checkPageIsReadyNew(driver);
+}
+
+public void validateVPPSummaryPage() {
+	Assert.assertTrue("user not navigated to VPP Page",driver.getCurrentUrl().contains("plan-summary"));
+}
 }

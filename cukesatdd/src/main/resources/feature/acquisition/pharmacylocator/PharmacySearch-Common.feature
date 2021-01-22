@@ -122,8 +122,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     #@prodRegression
     @PharmacyLocatorCommonProd_AARP
     Examples: 
-      | TID   | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | AARP     |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
     #@pharmacylocatorAARP02b
     @PharmacyLocatorCommonAARP02b
@@ -145,8 +145,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     #@prodRegression
     @PharmacyLocatorCommonProd_UHC
     Examples: 
-      | TID   | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | UHC      |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15582 | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
     #@pharmacylocatorAARP02b
     @PharmacyLocatorCommonUHC02b
@@ -409,3 +409,251 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | TID   | site | state     |
       | xxxxx | UHC  | Ohio      |
       | xxxxx | UHC  | Minnesota |
+
+  ############## Pharmacy search- Breadcrumb validations ##########################
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through home page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to Home Page" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to home page
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site |
+      | AARP |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site |
+      | UHC  |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through guest profile on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user navigate to pharmacy search page from the navigation bar
+    And the user clicks on the shopping cart icon
+    Then user should be navigated to visitor profile page
+    Then user verify breadcrumb "Return to Pharmacy Search" on the visitor profile page
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to Profile" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to visitor profile page
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site |
+      | AARP |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site |
+      | UHC  |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through plan compare page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And I select "<plantype>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to Compare" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then verify plan compare page is loaded
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | AARP |   19019 | Iowa County | No              | MAPD     |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | UHC  |   19019 | Iowa County | No              | MAPD     |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to plan summary" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to VPP summary page
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | AARP |   19019 | Iowa County | No              | MAPD     |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype |
+      | UHC  |   19019 | Iowa County | No              | MAPD     |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through DCE page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to Drug Cost Estimator" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then the user validates Get Started Page
+    Then user verify breadcrumb "Return to Pharmacy Search" on get started page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipcode> |
+    And user clicks on continue button in Zip Entry Page
+    And user verify the drug summary page
+    Then user verify breadcrumb "Return to Pharmacy Search" on drug summary page
+    When user clicks view drug cost button
+    Then user verify breadcrumb "Return to Pharmacy Search" on drug details page
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype | drug1   |
+      | AARP |   19019 | Iowa County | No              | MAPD     | Lipitor |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | county      | isMultutiCounty | plantype | drug1   |
+      | UHC  |   19019 | Iowa County | No              | MAPD     | Lipitor |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP details page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user navigates to the plan details for the given plan type
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to plan details" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to VPP detail page
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
+      | AARP |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | AARP |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
+      | AARP |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | county          | isMultutiCounty | plantype | planyear | planname                                           |
+      | UHC  |   90210 | Iowa County     | No              | MAPD     | future   | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | UHC  |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
+      | UHC  |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to previous page" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to the previous page
+      | PagePath | <path> |
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | path                              | pageName                                                         |
+      | AARP | shop.html                         | ShopPlan: Shop                                                   |
+      | AARP | shop/compare/compare-pdp.html     | Compare Medicare Part D Plans                                    |
+      | AARP | shop/estimate/pdp-costs.html      | Medicare Prescription Drug (Part D) Plan Costs                   |
+      | AARP | shop/prescription-drug-plans.html | Shop AARP Medicare Prescription Drug Plans from UnitedHealthcare |
+      | AARP | plan-documents.html               | Plan Documents Search Tool                                       |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | path                              | pageName                                                         |
+      | UHC  | shop.html                         | ShopPlan: Shop                                                   |
+      | UHC  | shop/compare/compare-pdp.html     | Compare Medicare Part D Plans                                    |
+      | UHC  | shop/estimate/pdp-costs.html      | Medicare Prescription Drug (Part D) Plan Costs                   |
+      | UHC  | shop/prescription-drug-plans.html | Shop AARP Medicare Prescription Drug Plans from UnitedHealthcare |
+      | UHC  | plan-documents.html               | Plan Documents Search Tool                                       |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through OLE page on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    And the user validates the available plans for selected plan types
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planName> |
+    Then the user validates the Plan details on OLE
+    When user clicks on pharmacy link on OLE page
+    Then user verify breadcrumb "Return to enroll" displayed on pharmacy search page
+    When user clicks on breadcrumb on pharmacy search page
+    Then user should be navigated to the previous page
+      | PagePath | <path> |
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                      |
+      | AARP | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                      |
+      | UHC  | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through home page for Preferred Retail Pharmacy on acquisition <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user navigate to pharmacy search page from the navigation bar
+    Then user verify breadcrumb "Return to Home Page" displayed on pharmacy search page
+    And the user enters following details for the pharmacy search
+      | Zip Code    | <zipcode>    |
+      | Distance    | <distance>   |
+      | County Name | <countyName> |
+    And the user chooses a plan from dropdown
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    And click on DCE Link on Pharmacy Page
+    Then the user validates Get Started Page
+    Then user click on breadcrumb "Return to Pharmacy Search" on get started page
+    Then user verify breadcrumb "Return to Drug Cost Estimator" displayed on pharmacy search page
+
+    @breadcrumbPharmacySearch_AARP
+    Examples: 
+      | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) |
+
+    @breadcrumbPharmacySearch_UHC
+    Examples: 
+      | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |
+      | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) |

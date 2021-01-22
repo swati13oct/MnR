@@ -236,3 +236,39 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Examples: 
       | drug1  | drug2   | zipCode | planType | planName                                   | site |
       | Fanapt | Lipitor |   10001 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  |
+
+  @DCE_DrugDetailsNonBuyDownLIS
+  Scenario Outline: To verify DCE Details Page  <site> site - for LIS Buydown Plans
+    #Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user validates all added drugs in DrugList
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    And user should verify the Extra help on SNP plan type
+    And user click on View Drug Pricing Modal
+    And user should verify the drug extra qualification in drug pricing popup
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+    Then the user validates planName matches plan Name in VPP
+    Then the user validates correct Copay section view and LIS message for LIS Non Buydown Plan on DCE details Page
+
+    @DCE_DrugDetailsNonBuyDownLIS_AARP
+    Examples: 
+      | drug1  | drug2   | zipCode | planType | planName                                                   | site |
+      | Fanapt | Lipitor |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP |
+
+    @DCE_DrugDetailsNonBuyDownLIS_UHC
+    Examples: 
+      | drug1  | drug2   | zipCode | planType | planName                                                   | site |
+      | Fanapt | Lipitor |   78006 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | UHC  |
