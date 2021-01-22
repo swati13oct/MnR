@@ -26,6 +26,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
@@ -1362,6 +1363,21 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assert.fail("Plan Added text not displayed. Please check if checkbox is checked or not");
 			return false;
 		}
+	}
+	
+
+	@FindBy(xpath = "(//label[contains(text(),'Add to Compare')])[1]")
+	public WebElement addToCompareLabel;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
+	public WebElement comparePlansLink;
+	
+	public ComparePlansPageMobile addToCompareAndNavigate() {
+		jsClickNew(addToCompareLabel);
+		jsClickNew(comparePlansLink);
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPageMobile(driver);
+		return null;
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPage() {
