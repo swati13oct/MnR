@@ -101,7 +101,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>        |
       | Campaign URL | <campaignUrl2> |
-    #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
    Then the user validates TFN Number
@@ -348,8 +348,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
         Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
-            Then the user navigates to plan tab for any plan
-        | Plan Type | <SNPplantype> |
+    # Then the user navigates to plan tab for any plan
+      #  | Plan Type | <SNPplantype> |
      Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
     | Plan Type | <SNPplantype> |
      Then the user validates TFN Number
@@ -372,7 +372,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN Xpath | <TFNxpath> |
     Then the user navigates to following  Medicare Education Page URL and validate Federal TFN
       | MEDICARE URL | <emailLinkUrl> |
-      | TFN Xpath    | <emailLinkTFN> |
+     # | TFN Xpath    | <emailLinkTFN> |
     #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode1> |
