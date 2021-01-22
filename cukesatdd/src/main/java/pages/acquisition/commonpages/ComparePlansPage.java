@@ -303,6 +303,8 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//h2[@id='viewLocationTitle']")
 	private WebElement viewLocationPopupProviderName;
 
+	@FindBy(xpath = "//div[@class='modal-body']/span")
+	private WebElement allSetDrugsProvidersInfo;
 
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -1052,7 +1054,7 @@ public class ComparePlansPage extends UhcDriver {
 		String dob = givenAttributesMap.get("DOB");
 		String mbi = givenAttributesMap.get("MBI");
 		
-		allSet();
+		allSet(providers,drugs);
 		
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
@@ -1138,7 +1140,7 @@ public class ComparePlansPage extends UhcDriver {
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
 		
-		allSet();
+		allSet(providers,drugs);
 		
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
@@ -1182,8 +1184,28 @@ public class ComparePlansPage extends UhcDriver {
 		}
 	}
 	
-	public void allSet() {
+	public void allSet(String providers, String drugs) {
 		try {
+			System.out.println("#####################");
+			System.out.println(allSetDrugsProvidersInfo.getText().trim());
+			System.out.println("#####################");
+			if(!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("no")) {
+				String[] provider = providers.split(";");
+				String[] drugName = drugs.split(",");
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of providers loaded: "+provider.length));
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of drugs loaded: "+drugName.length));
+			}else if(!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("yes")){
+				String[] provider = providers.split(";");
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of providers loaded: "+provider.length));
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of drugs loaded: "+"0"));
+			}else if(!providers.equalsIgnoreCase("yes") && !drugs.equalsIgnoreCase("no")){
+				String[] drugName = drugs.split(",");
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of providers loaded: "+"0"));
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of drugs loaded: "+drugName.length));
+			}
+			else {
+				Assert.assertEquals("No data within 12 months of order date.",allSetDrugsProvidersInfo.getText().trim());
+			}
 			CommonUtility.waitForPageLoad(driver, popupAccept, 100);
 			popupAccept.click();
 			Thread.sleep(30000);
