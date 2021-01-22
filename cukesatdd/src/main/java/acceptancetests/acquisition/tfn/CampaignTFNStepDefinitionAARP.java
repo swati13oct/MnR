@@ -504,9 +504,9 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_MA_Plans(DataTable 
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
-	String PlanType = "MA";
-	tfnPage.ViewPlanSummary(PlanType);
-	tfnPage.NavigateToPlanDetails(PlanType);
+//	String PlanType = "MA";
+	//tfnPage.ViewPlanSummary(PlanType);
+	//tfnPage.NavigateToPlanDetails(PlanType);
 	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
 	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 	}
@@ -868,6 +868,64 @@ public void clickonDCELink_Pharmacy_page() throws InterruptedException {
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 //	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToDCE();
+}
+
+@Then("^the user navigates to Plan Details Page for any SNP plan for Enroll and validates Federal TFN$")
+public void the_user_navigates_to_Plan_Details_Page_any_SNP_plan_Enroll_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+//	tfnPage.ViewPlanSummary(PlanType);
+	//tfnPage.NavigateToPlanDetails(PlanType);
+    tfnPage.NavigateToOLEEnrollDSNP(PlanType);
+ //   String TFNXpath_PlanDetails = memberAttributesMap.get("TFN Xpath");
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
+}
+
+@Then("^the user enter zipcode in homepage for External Links$")
+public void the_user_enter_zipcode_External_Link(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String Zip = memberAttributesMap.get("Zip Code");
+	tfnPage.HomepagePlanSearchExternalLinks(Zip);
+	tfnPage.ViewPlanSummary(PlanType);
+	
+}
+
+@Then("^the user Enroll for any plan on plan summary page$")
+public void the_user_enroll_for_plan_summary_page(DataTable attributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String PlanType = memberAttributesMap.get("Plan Type");
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+//	tfnPage.ViewPlanSummary(PlanType);
+//	tfnPage.NavigateToPlanDetails(PlanType);
+    tfnPage.EnrollonVPPPage(PlanType);
+ //   String TFNXpath_PlanDetails = memberAttributesMap.get("TFN Xpath");
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+
 }
 
 }

@@ -482,8 +482,14 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(id = "zipcodebtn")
 	private WebElement findPlansButton;
 	
+	@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
+	private WebElement findPlansButtonExternalLinks;
+	
 	@FindBy(id="cta-zipcode")
 	private WebElement HomePage_EnterZip;
+	
+	@FindBy(xpath="(//input[contains(@id,'zipcode')])[2]")
+	private WebElement HomePageExternalLinks_EnterZip;
 
 	@FindBy(id = "nav-zipcode")
 	private WebElement OurPlans_zipfield;
@@ -814,5 +820,58 @@ public class CampaignTFNPage extends UhcDriver {
 					DCELink.click();
 					Thread.sleep(2000);
 			}
+			
+			@FindBy(xpath="//a//span[contains(text(),'Enroll in plan')]")
+			private WebElement EnrollPlanLinkDSNP;
+			
+			public void NavigateToOLEEnrollDSNP(String planType) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				CommonUtility.waitForPageLoadNew(driver,EnrollPlanLinkDSNP, 30);
+				jsClickNew(EnrollPlanLinkDSNP);
+				waitForPageLoadSafari();
+				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
+						CommonUtility.checkPageIsReadyNew(driver);
+						if (driver.getCurrentUrl().contains("welcome")) {	
+							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+						}
+						else {
+							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+						}
+			}
+			public void HomepagePlanSearchExternalLinks(String zip) {
+				CheckPageLoad();
+				CheckiPerseptions();
 
+				//validateNew(OurPlansLink1);
+				// Hover over text
+				//Actions action = new Actions(driver);
+				//action.moveToElement(OurPlansLink1).build().perform();
+				// action.click().build().perform();
+				//validateNew(OurPlansLink1);
+				validate(HomePageExternalLinks_EnterZip);
+				HomePageExternalLinks_EnterZip.click();
+				HomePageExternalLinks_EnterZip.sendKeys(zip);
+				validate(findPlansButtonExternalLinks);
+				findPlansButtonExternalLinks.click();
+			}
+			
+			@FindBy(xpath="(//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'view plans') or contains(text(),'Enroll in Plan')])[2]")
+			private WebElement VPPEnrollPlanLinkOLE;
+			
+			public void EnrollonVPPPage(String planType) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				CommonUtility.waitForPageLoadNew(driver, VPPEnrollPlanLinkOLE, 30);
+				jsClickNew(VPPEnrollPlanLinkOLE);
+				waitForPageLoadSafari();
+				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
+						CommonUtility.checkPageIsReadyNew(driver);
+						if (driver.getCurrentUrl().contains("welcome")) {	
+							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+						}
+						else {
+							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+						}
+			}
 }
