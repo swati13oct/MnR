@@ -625,7 +625,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     @breadcrumbPharmacySearch_UHC
     Examples: 
       | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                      |
-      | UHC  | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+      | UHC  | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-enrollment/medicare-prescription-drug-plans-online-application.html/welcome |
 
   Scenario Outline: To verify breadcrumbs on pharmacy search page through Preferred Retail Pharmacy on acquisition <site> site
     Given the user is on medicare acquisition site landing page
