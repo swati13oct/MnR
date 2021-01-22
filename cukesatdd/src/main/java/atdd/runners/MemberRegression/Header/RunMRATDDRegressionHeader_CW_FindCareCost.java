@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionHeader_CW_FindCareCost.json",de
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionHeader_CW_FindCareCost")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/header/Header.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader_CW_FindCareCost.json" }, tags = { "@CodeWarriors" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionHeader_CW_FindCareCost.json" }, tags = { "@regressionMember" })
 public class RunMRATDDRegressionHeader_CW_FindCareCost {
 
 }
