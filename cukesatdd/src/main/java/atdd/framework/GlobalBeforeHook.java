@@ -31,7 +31,7 @@ public class GlobalBeforeHook implements BeforeHook {
 
 	@Before
 	public void setup() throws Exception {
-		
+		getGlobalScenario().flushBeans();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
 				try {

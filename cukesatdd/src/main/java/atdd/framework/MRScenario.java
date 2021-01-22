@@ -150,6 +150,7 @@ public class MRScenario {
 	public void flushBeans() {
 		if (!scenarioObjectMap.isEmpty()) {
 			scenarioObjectMap.clear();
+			System.out.println("Flushing all saved beans !");
 		}
 	}
 
