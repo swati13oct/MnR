@@ -436,10 +436,10 @@ public void the_user_validate_sam_icons_tfn_with_Federal_TFN() throws Throwable 
 public void the_user_navigates_to_following_Medicare_Education_Page_URL_and_validate_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	String URLpath = inputAttributesMap.get("MEDICARE URL");
-	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	//String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.navigateToUrl(URLpath);
-	tfnPage.validateFederalTFN(TFN_Xpath);
+//	tfnPage.validateFederalTFN(TFN_Xpath);
 }
 
 @And("^the user clicks on the shopping cart icon in AARP site for campaign TFN$")
