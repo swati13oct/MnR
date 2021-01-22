@@ -489,7 +489,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget",
 						!pharmacyValidate(widget_walgreens));
-				expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+				expUrl = "health-plans/estimate-drug-costs.html#/drug-cost-estimator";
 				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 			}
 		} else {
