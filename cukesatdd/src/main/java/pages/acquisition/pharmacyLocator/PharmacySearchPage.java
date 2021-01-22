@@ -27,7 +27,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		openAndValidate();
 	}
 
-	@FindBy(xpath = "//a[text()='Estimate your drug costs1 at a preferred retail pharmacy']")
+	@FindBy(xpath = "//a[text()='Estimate your drug costs at a preferred retail pharmacy']")
 	private WebElement DCELink;
 
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
@@ -619,6 +619,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public GetStartedPage navigateToDCE() {
+		scrollToView(DCELink);
 		validateNew(DCELink);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", DCELink);
