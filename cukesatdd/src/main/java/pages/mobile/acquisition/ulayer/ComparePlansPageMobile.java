@@ -496,19 +496,23 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public WelcomePageMobile Enroll_OLE_Plancompare() throws InterruptedException {
 		WebElement enrollForPlan = null;
-		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//span[text()='Enroll']"));
-		if (enrollForPlan != null) {
-			// validateNew(enrollForPlan);
-			enrollForPlan.click();
-		}
-		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
-		System.out.println(driver.getCurrentUrl());
-		if (driver.getCurrentUrl().contains("welcome")) {
-			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePageMobile(driver);
-		}
-		return null;
-	}
+  		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']"));
+  		if(enrollForPlan!=null){
+  			//validateNew(enrollForPlan);
+//  			enrollForPlan.click();
+  			jsClickNew(enrollForPlan);
+  			waitForPageLoadSafari();
+  		}
+  		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+  		System.out.println(driver.getCurrentUrl());
+  		if(driver.getCurrentUrl().contains("welcome"))
+  		{
+  			System.out.println("OLE Welcome Page is Displayed");
+  			return new WelcomePageMobile(driver);
+  		}
+  		return null;
+  	  	}
+
 
 	public PlanDetailsPageMobile navigateToPlanDetailfromplanCompare() {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -577,14 +581,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 		// CommonUtility.checkPageIsReady(driver);
 		callsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-		driver.switchTo().activeElement();
-		if (CallSamTFN.getText().isEmpty()) {
-			// return null;
-			Assert.fail("TFN number was not found on the SAM call Popup");
-		} else {
-			CallSamTFNClose.click();
-			validateNew(callsam);
-		}
+//		driver.switchTo().activeElement();
+//		if (CallSamTFN.getText().isEmpty()) {
+//			// return null;
+//			Assert.fail("TFN number was not found on the SAM call Popup");
+//		} else {
+//			CallSamTFNClose.click();
+//			validateNew(callsam);
+//		}
 	}
 
 	public ComparePlansPageMobile validateChatSam() throws InterruptedException {
@@ -868,7 +872,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
@@ -1294,7 +1298,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 	{
 		System.out.println(firstDoctorNameLabel.getText());
 		String firstDoctorName=firstDoctorNameLabel.getText();
-		viewLocationLink.click();
+		jsClickNew(viewLocationLink);
+		//viewLocationLink.click();
 		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName, viewLocationPopupProviderName.getText());
 	}
 	
