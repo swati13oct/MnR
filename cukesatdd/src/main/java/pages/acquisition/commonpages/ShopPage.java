@@ -476,8 +476,8 @@ public class ShopPage extends UhcDriver {
 	
 	public void clickonFindanAgentlinkfromShop(String ExpectedUHCAgentURL ) {
 		
-		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
+		validateNew(FindAnAgent);
 		String parentWindow = driver.getWindowHandle();
 //		FindAnAgent.click();
 		jsClickNew(FindAnAgent);
