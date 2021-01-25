@@ -2688,6 +2688,8 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, plansummaryPage);
 	}
 
 	@Then("^the site user clicks on continue application until confirmaion page$")

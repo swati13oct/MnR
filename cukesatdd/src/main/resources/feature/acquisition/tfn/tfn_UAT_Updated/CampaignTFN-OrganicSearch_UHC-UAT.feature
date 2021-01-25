@@ -49,7 +49,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
    |Sc. 3.08 - AMP |  880188 |  880187       |shop/medicare-advantage-plans.html     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]     |health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]      | /medicare-articles.html                 |  (//a[contains(@class, 'tel')])[1]               |   medicare-articles/medicare-made-clear.html                 |     (//a[contains(@class, 'tel')])[1]              |    medicare-articles/eligibility-and-enrollment.html                 |        (//a[contains(@class, 'tel')])[1]                |
    
   @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
-  Scenario Outline: <scenario > Campaign Precedence Logic No 1 for UHC
+  Scenario Outline: <scenario> Campaign Precedence Logic No 1 for UHC
     #------------------------**********---------------------------------
     #------------------------**********---------------------------------
     # Precedence 4.3.1 - Visit UHC using Campaign URL, PSC code 800085
@@ -114,7 +114,8 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
        | TFN Xpath | <TFNxpath> |
     #Then the user navigates to homepage validates Federal TFN   
    #Then the user navigates to MA Plan Details Page and validates Federal TFN 
-   Then the user enter zipcode in homepage
+   #Then the user enter zipcode in homepage
+   Then the user enter zipcode in homepage for External Links
     		 | Zip Code        | <zipcode>         |
     		 | Plan Type    | <MAplantype>        |
    Then the user validates TFN Number
@@ -152,7 +153,8 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
        | TFN No | <TFNNo2> |
        | TFN Xpath | <TFNxpath> |
      Then the user navigates to homepage validates Federal TFN   
-     Then the user enter zipcode in homepage
+     #Then the user enter zipcode in homepage
+     Then the user enter zipcode in homepage for External Links
     		 | Zip Code        | <zipcode>         |
     		 | Plan Type    | <MAplantype>        |
   # Then the user navigates to MA Plan Details Page and validates Federal TFN
@@ -173,11 +175,11 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     |Scenario 4a: Campaign Precedence- UMS  | blayer |90210 | MA       |MS|       800085 |          800086|  800086         |  880180        |        880188 | 880189         | /?WT.mc_id=800085 |/?WT.mc_id=800086|/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8001533&county=053&state=27#/plan-summary         | //*[contains(@class,'tel right')]  | (//a[contains(@class, 'tel')])[1] | 1-888-262-3289      | 1-866-260-5005 | 1-888-581-8578 |1-877-596-3258 |1-800-607-2877|1-888-378-0849|1-800-850-8659|
 
     @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
-  Scenario Outline: <scenario >  Campaign Precedence Logic No 4b for UHC
+  Scenario Outline: <scenario>  Campaign Precedence Logic No 4b for UHC
    #----------****  Campaign supercedes Campaign  ***** --------------
      # Precedence 4.3.11 - Visit site via UHC organic search from Yahoo, PSC 880189
        # Campaign supercedes Organic search, so Expected PSC code - 880189
-   # Given the user Starts WebDriver
+   Given the user Starts WebDriver
     Given user is on Yahoo and search UHC Medicare Advantage Plan to navigate to UHC page
      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code

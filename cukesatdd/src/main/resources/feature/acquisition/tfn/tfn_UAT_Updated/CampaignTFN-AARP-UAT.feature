@@ -51,7 +51,9 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
  Then the user navigates to homepage validates Federal TFN
   #And the user selects the state drop down value in AARP home page
     # | State | <state> |
-     And the user clicks on the shopping cart icon in AARP site
+    #And the user clicks on the shopping cart icon in AARP site
+   And the user clicks on the shopping cart icon
+    #And the user clicks on the shopping cart icon
   	#And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -224,22 +226,29 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |
-     Then the site user fills all the details in MedsuppPage
+     #Then the site user fills all the details in MedsuppPage
+     Then the site user fills all the details in MedsuppPage for TFN
    		| DOB           | <DOB>         | 
-   		Then user validate the plandetails on medsupp plans
+   		#Then user validate the plandetails on medsupp plans
    		 Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |
-  Then the site user clicks on Start Application Button and proceed Next 
+  #Then the site user clicks on Start Application Button and proceed Next 
+  Then the site user clicks on Start Application Button and proceed few Pages
       | DOB           | <DOB>         |
       | Firstname     | <Firstname>   |
       | Lastname      | <Lastname>    | 
+      | TFN No        | <MedsuppTFNNo> |
+       | TFN Xpath | <MedsuppOLETFNxpath> |		
      Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |		
-      #Then the user validate the sam icons tfn with federal TFN on Acquistion page
-      Then the user navigates to PDP Plan Details Page and validates Federal TFN
-      	| Zip Code        | <zipcode>|
+      Then the user navigates to plan tab for any plan
+        | Plan Type | <PDPplantype> |
+      #Then the user navigates to PDP Plan Details Page and validates Federal TFN
+      	#| Zip Code        | <zipcode>|
+    Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <PDPplantype> |
       Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
@@ -298,8 +307,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN Xpath | <MedsuppTFNxpath> |
 
      Examples:
-  	| scenario            | site   |zipcode|pscCode  | shoppages       |     shoppagesTFN                  |shoppagescompare   |             shoppagescompareTFN  |shoppagesdsnp                       |   shoppagesdsnpTFN                |connect                |    connectTFN                                                       |    maUrl                    |maTFN                              |         MedsuppUrl                                                                                                                                                                       |     DOB     | Firstname | Lastname  | MedsuppTFNNo    |TFNNo          |MedsuppTFNxpath                  | ShopTFNxpath1                     |ShopTFNxpath2                     |ShopTFNxpath3                     | TFNxpath                         | connectTFNxpath                 |                                                                                                                                                                                                                                                
-	  | Sc. 04.01 - 4.02    |  ulayer|90210  |8003093  |   shop.html     | (//a[contains(@class, 'tel')])[1] | shop/compare.html |(//a[contains(@class, 'tel')])[1] |shop/dual-special-needs-plans.html  | (//a[contains(@class, 'tel')])[1] |  contact-us.html      |(//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]  |enroll/ma-enrollment.html    |(//a[contains(@class, 'tel')])[2]  |health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary  |  11/13/1940 | John      | Carry     |1-866-242-0247   |1-855-888-1640 |//*[contains(@class,'tel right')]|  (//a[contains(@class, 'tel')])[4]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |(//a[contains(@class, 'tel')])[1] |(//a[contains(@class, 'tel')])[2]|
+  	| scenario            | site   |zipcode|pscCode  | shoppages       |     shoppagesTFN                  |shoppagescompare   |             shoppagescompareTFN  |shoppagesdsnp                       |   shoppagesdsnpTFN                |connect                |    connectTFN                                                       |    maUrl                    |maTFN                              |         MedsuppUrl                                                                                                                                                                       |     DOB     | Firstname | Lastname  | MedsuppTFNNo    |TFNNo          |MedsuppTFNxpath                  | ShopTFNxpath1                     |ShopTFNxpath2                     |ShopTFNxpath3                     | TFNxpath                         | connectTFNxpath                 |   MedsuppOLETFNxpath |     PDPplantype |                                                                                                                                                                                                                                        
+	  | Sc. 04.01 - 4.02    |  ulayer|90210  |8003093  |   shop.html     | (//a[contains(@class, 'tel')])[1] | shop/compare.html |(//a[contains(@class, 'tel')])[1] |shop/dual-special-needs-plans.html  | (//a[contains(@class, 'tel')])[1] |  contact-us.html      |(//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]  |enroll/ma-enrollment.html    |(//a[contains(@class, 'tel')])[2]  |health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary  |  11/13/1940 | John      | Carry     |1-866-242-0247   |1-855-888-1640 |//*[contains(@class,'tel right')]|  (//a[contains(@class, 'tel')])[4]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |(//a[contains(@class, 'tel')])[1] |(//a[contains(@class, 'tel')])[2]| (//span[contains(@class,'telephone')])[1] | PDP|
     
 	  
 	
@@ -377,28 +386,32 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 		Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
-    Then the user navigates to following  Medicare Education Page URL and validate Federal TFN
-      | MEDICARE URL | <emailLinkUrl> |
-     # | TFN Xpath    | <emailLinkTFN> |
-    #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
+    Then the user navigates to following External Email Links
+      | Email URL    | <emailLinkUrl> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+       Then the user validates PSC code
       | PSC Code | <pscCode1> |
     Then the user validates TFN Number
        | TFN No | <EmailTFNNo> |
-       | TFN Xpath | <EmailTFNxpath> |
+       | TFN Xpath | <EmailTFNxpath> | 
     Then the user navigates to following  Medicare Education Page URL and validate Federal TFN
       | MEDICARE URL | <medicareUrl> |
       | TFN Xpath    | <medicareTFN> |
+          And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+      Then the user validates PSC code
+      | PSC Code | <pscCode1> | 
     Then the user validates TFN Number
        | TFN No | <EmailTFNNo> |
        | TFN Xpath | <TFNxpath> |
-   Then the user validates PSC code
-      | PSC Code | <pscCode1> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+      Then the user validates PSC code
+      | PSC Code | <pscCode1> | 
     Then the user navigates to shop pages Page and validates Federal TFN
       | SHOPPAGES URL | <shoppagesUrl> |
       | TFN Xpath     | <shoppagesTFN> |
-    Then the user validates PSC code
-      | PSC Code | <pscCode1> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+      Then the user validates PSC code
+      | PSC Code | <pscCode1> | 
 		Then the user validates TFN Number
        | TFN No | <MedicareSupplementTFNNo> |
        | TFN Xpath | <MedicareSupplementTFNxpath> |
@@ -541,6 +554,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
+      Then the user navigates to refresh page
         Then the user navigates to plan tab for any plan
         | Plan Type | <MAplantype> |
       Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
@@ -548,20 +562,22 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
-    	And the user clicks on the shopping cart icon in AARP site
+    	#And the user clicks on the shopping cart icon in AARP site
+    	And the user clicks on the shopping cart icon
   		Then the user validates PSC code
       | PSC Code | <pscCode> |
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile in AARP site
+	#And the user clicks on the add plans button in the profile in AARP site
+	And the user clicks on the add plans button in the profile
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
    Then the user validates PSC code
       | PSC Code | <pscCode> | 
-     Then the user navigates to plan tab for any plan
-        | Plan Type | <MAplantype> |  
+    # Then the user navigates to plan tab for any plan
+      #  | Plan Type | <MAplantype> |  
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
       | Plan Type | <MAplantype> |
    Then the user validates TFN Number
@@ -592,6 +608,6 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | PSC Code | <pscCode> | 
     Examples:  
     |scenario                         |zipcode|MAplantype| pscCode |state| campaignUrl                                                                                      | medEdURL1                                     | medEdTFN                                        | shoppagesUrl                           |      shoppagesTFN                                                                 |userName|password   |TFNNo               |TFNxpath                         | EnrollTFNxpath                   | ShopTFNxpath                     |
-     |Scenerio 9-ExternalLink - AMP 	  | 10001 |MA       | 8000158 |Alabama| health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html |         (//span[@class='heading-6']//u)[1]      |  shop/medicare-supplement-plans.html   |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|1-844-850-6592      |(//a[contains(@class, 'tel')])[1]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |  
+    |Scenerio 9-ExternalLink - AMP 	  | 10001 |MA        | 8000158 |Alabama| health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html |         (//span[@class='heading-6']//u)[1]      |  shop/medicare-supplement-plans.html   |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|mnrqavd11|Password@1|1-844-850-6592      |(//a[contains(@class, 'tel')])[1]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |  
        
      

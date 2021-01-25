@@ -133,6 +133,60 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ArticlesEnrollButton;
 	
+	@FindBy(id = "msVppZipCode")
+	private WebElement medSuppZipCode;
+
+	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
+	private WebElement viewPlansBtnMedSupp;
+
+	@FindBy(id = "mpaed-month")
+	private WebElement part_A_monthDrpDwn;
+
+	@FindBy(id = "mpaed-year")
+	private WebElement part_A_yearDrpDwn;
+
+	@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
+	private WebElement Part_A_monthDrpDwnOption;
+
+	@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
+	private WebElement Part_A_yearDrpDwnOption;
+
+	@FindBy(id = "mpbed-month")
+	private WebElement part_B_monthDrpDwn;
+
+	@FindBy(id = "mpbed-year")
+	private WebElement part_B_yearDrpDwn;
+
+	@FindBy(xpath = "//*[@id='mpbed-month']/option[2]")
+	private WebElement Part_B_monthDrpDwnOption;
+
+	@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
+	private WebElement Part_B_yearDrpDwnOption;
+
+	@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
+	WebElement ViewPlanMedSupPage;
+	
+	@FindBy(xpath = "(//*[contains(@for,'Gender_2')])[2]")
+	private WebElement femaleGender;
+
+	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
+	private WebElement MaleGender;
+	
+	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	//@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
+	private WebElement Start_ApplicationBtn;
+	
+	@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
+	private WebElement insuredStatus;
+
+	@FindBy(xpath = "//button[@class='cta-button next-button action_next']")
+	private WebElement nextButton;
+	
+	@FindBy(id = "FirstName")
+	private WebElement firstName;
+
+	@FindBy(id = "LastName")
+	private WebElement lastName;
 	
 	public CampaignTFNPage(WebDriver driver) {
 		super(driver);
@@ -555,8 +609,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
 	private WebElement pdpPlansViewLink;
 
-	@FindBy(id="msVppZipCode")
-	private WebElement medSuppZipCode;
+	//@FindBy(id="msVppZipCode")
+	//private WebElement medSuppZipCode;
 
 
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
@@ -789,6 +843,13 @@ public class CampaignTFNPage extends UhcDriver {
 				driver.navigate().back();
 			}
 			
+			
+			public void validateRefreshpage() throws InterruptedException {
+				
+				Thread.sleep(2000);
+				driver.navigate().refresh();
+			}	
+			
 			@FindBy(xpath="(//button//span[contains(text(),'View plan') or contains(text(),'View Plan Details')])[1]")
 			private WebElement firstPlanDetailsLinkdce;
 
@@ -875,4 +936,105 @@ public class CampaignTFNPage extends UhcDriver {
 							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
 						}
 			}
+			
+			@FindBy(id = "msVppdpsd")
+			private WebElement startDrpDwn;
+
+			@FindBy(xpath = "//select[@id='msVppdpsd']//option[2]")
+			private WebElement startDrpDwnOption;
+			
+
+			@FindBy(id = "msVppDOB")
+			private WebElement DOB;
+			
+			public void MedSupFormValidationTFN(String DateOfBirth) throws InterruptedException {
+
+				validateNew(DOB, 30);
+				System.out.println("MedSup page form is displayed");
+				DOB.click();
+				DOB.sendKeys(DateOfBirth);
+				System.out.println("Date of birth is entered");
+				Thread.sleep(2000);
+				jsClickNew(MaleGender);
+				Thread.sleep(2000);
+				part_A_monthDrpDwn.click();
+				Thread.sleep(2000);
+				Part_A_monthDrpDwnOption.click();
+				Thread.sleep(2000);
+				System.out.println("Effective date- month value selected");
+				jsClickNew(part_A_yearDrpDwn);
+				Thread.sleep(2000);
+				Part_A_yearDrpDwnOption.click();
+				System.out.println("Effective date- year value selected");
+				Thread.sleep(2000);
+				part_B_monthDrpDwn.click();
+				Thread.sleep(2000);
+				Part_B_monthDrpDwnOption.click();
+				Thread.sleep(2000);
+				part_B_yearDrpDwn.click();
+				Thread.sleep(2000);
+				Part_B_yearDrpDwnOption.click();
+				Thread.sleep(2000);
+				scrollToView(startDrpDwn);
+				jsClickNew(startDrpDwn);
+				Thread.sleep(2000);
+				startDrpDwnOption.click();
+				System.out.println("Plan to start date selected");
+				Thread.sleep(15000);
+				jsMouseOver(ViewPlanMedSupPage);
+				jsClickNew(ViewPlanMedSupPage);
+			}
+
+			@FindBy(xpath = "//a[@class='cancel-button modal-link']")
+			private WebElement cancelButton;
+
+			@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
+			private WebElement cancelButtonPopUp;
+
+			@FindBy(xpath = "(//a[contains(text(),'Return to Application')])[3]")
+			private WebElement ReturntoApplicationButton;
+			
+			@FindBy(xpath = "//p[contains(text(),'Return to this application using the code below')]//..//span")
+			private WebElement resumeKey;
+			
+			public String StartApplicationTFN(String FirstName, String LastName) throws InterruptedException {
+				Thread.sleep(4000);
+				CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+				jsClickNew(Start_ApplicationBtn);
+				System.out.println("Start application button is clicked on application page");
+				Thread.sleep(4000);
+				CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+				insuredStatus.click();
+				Thread.sleep(2000);
+				jsClickNew(nextButton);
+				Thread.sleep(2000);
+				jsClickNew(nextButton);
+				Thread.sleep(2000);
+				jsClickNew(nextButton);
+				Thread.sleep(2000);
+				jsClickNew(nextButton);
+				Thread.sleep(2000);
+				firstName.sendKeys(FirstName);
+				lastName.sendKeys(LastName);
+				jsClickNew(nextButton);
+			/*	Thread.sleep(2000);
+				String ResumeKey = resumeKey.getText();
+				System.out.println("The return to the application code is- " + ResumeKey);
+				jsClickNew(cancelButton);
+				CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
+				jsClickNew(cancelButtonPopUp);
+				System.out.println("Cancel application has been clicked on the pop up");*/
+				return LastName;
+			}	
+			
+			
+			public String CancelApplicationTFN(String FirstName, String LastName) throws InterruptedException {
+				String ResumeKey = resumeKey.getText();
+				System.out.println("The return to the application code is- " + ResumeKey);
+				jsClickNew(cancelButton);
+				CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
+				jsClickNew(cancelButtonPopUp);
+				System.out.println("Cancel application has been clicked on the pop up");
+				return ResumeKey;
+			}			
 }

@@ -6,6 +6,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
   Scenario Outline: - <scenario> 3.1 Google search AARP Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
    Then the user validates PSC code
       | PSC Code | <pscCode> |
     Then the user validates TFN Number
@@ -19,6 +20,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
 		Given user is on Bing and search AARP Medicare Advantage Plan to navigate to navigate to AARP page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
    Then the user validates PSC code
       | PSC Code | <Precedence1PSC> | 
    	Then the user validates TFN Number
@@ -86,6 +88,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     # Precedence 6.1 - Visit AMP using google URL , PSC code 810106
     Given the user Starts WebDriver
      Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
+     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence1PSC> |
      Then the user validates TFN Number
@@ -101,6 +104,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaign2Url> |
+      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <Precedence2PSC> |
       Then the user validates TFN Number
@@ -116,6 +120,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
      Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaign3Url> |
+     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence3PSC> |
       Then the user validates TFN Number
@@ -129,6 +134,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
         | TFN Xpath | <MedSuppTFNxpath> |
     ####################### # Precedence 6.7 - Visit AMP using organic traffic from Google search URL , PSC code 8001533#####################
     Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
+     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence4PSC> |
       Then the user validates TFN Number
@@ -141,7 +147,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
         | TFN No | <TFNNo6> |
         | TFN Xpath | <MedSuppTFNxpath> |
       ################# Precedence 6.9 - Visit AMP using direct URL , PSC code 810027########################
-        Given the user is on AARP medicare acquisition site landing page
+    Given the user is on AARP medicare acquisition site landing page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TF
     Then the user validates PSC code
       | PSC Code | <Precedence5PSC> |
       Then the user validates TFN Number
@@ -156,6 +163,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
         | TFN Xpath | <MedSuppTFNxpath> |
  ######## Precedence 6.11 - Visit AMP using organic traffic from Google search URL , PSC code 810106##############
     Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
    Then the user validates PSC code
       | PSC Code | <Precedence6PSC> |
       Then the user validates TFN Number
@@ -174,6 +182,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       Then the user validates TFN Number
         | TFN No | <TFNNo5> |
         | TFN Xpath | <TFNxpath> |
+       And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <Precedence7PSC> |
       Then the user navigates to MA Plan Details Page and validates Federal TFN 
@@ -199,6 +208,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Given user is on Yahoo and search AARP Medicare Advantage Plan to navigate to AARP page
     Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <connect> |
+		 And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
 		Then the user validates PSC code
       | PSC Code | <Precedence8PSC> |
      Then the user validates TFN Number

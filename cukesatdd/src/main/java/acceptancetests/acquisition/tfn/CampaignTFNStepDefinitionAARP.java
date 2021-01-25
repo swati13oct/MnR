@@ -162,6 +162,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 	CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 	tfnPage.OpenPath(Acq_Site, CampaignPath);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, tfnPage);
 
 }
 
@@ -904,7 +905,7 @@ public void the_user_enter_zipcode_External_Link(DataTable attributes) throws Th
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	String Zip = memberAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearchExternalLinks(Zip);
-	tfnPage.ViewPlanSummary(PlanType);
+//	tfnPage.ViewPlanSummary(PlanType);
 	
 }
 
@@ -928,6 +929,68 @@ public void the_user_enroll_for_plan_summary_page(DataTable attributes) throws T
 
 }
 
+@Then("^the user navigates to following External Email Links$")
+public void the_user_navigates_External_Email_links(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("Email URL");
+	//String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.navigateToUrl(URLpath);
+	tfnPage.validateRefreshpage();
+	//tfnPage.validateFederalTFN(TFN_Xpath);	
+}
+
+
+@Then("^the user navigates to refresh page$")
+public void the_user_navigates_refresh_page() throws Throwable {
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.validateRefreshpage();
+}
+
+@Then("^the site user fills all the details in MedsuppPage for TFN$")
+public void user_fills_all_details_medsupp_TFN(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	String DateOfBirth = memberAttributesMap.get("DOB");
+
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.MedSupFormValidationTFN(DateOfBirth);
+	
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, tfnPage);
+}
+
+
+
+@Then("^the site user clicks on Start Application Button and proceed few Pages$")
+public void Start_application_button_proceed_next_few_pages(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+
+	// String DateOfBirth = memberAttributesMap.get("DOB");
+	String FirstName = memberAttributesMap.get("Firstname");
+	String LastName = memberAttributesMap.get("Lastname");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.StartApplicationTFN(FirstName, LastName);
+	String TFNXpath = memberAttributesMap.get("TFN Xpath");
+	String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+//	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+	tfnPage.CancelApplicationTFN(FirstName, LastName);
+	
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, tfnPage);
+}
 }
 
 

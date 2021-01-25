@@ -56,7 +56,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     | Plan Type | <PDPplantype> |
    Then the user validates TFN Number
        | TFN No | <TFNNo> |
-        | TFN Xpath | <TFNxpath> |
+        | TFN Xpath | <EnrollTFNxpath> |
     Then the user navigates back to page
  #Then the user navigates to PDP Plan Details Page and validates Federal TFN
  	#| Zip Code        | <zipcode>|
@@ -65,7 +65,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
  Then the user navigates to homepage validates Federal TFN
   #And the user selects the state drop down value in AARP home page
     # | State | <state> |
-     And the user clicks on the shopping cart icon in AARP site
+   #And the user clicks on the shopping cart icon in AARP site
+   And the user clicks on the shopping cart icon
   	#And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -94,8 +95,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
 
     Examples: 
-      | scenario         | site |zipcode|TFNNo          |isMultutiCounty | county                |pscCode | maUrl                     | pdpUrl                        |  snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                |  medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype|MAplantype|TFNxpath                         |MedsuppTFNxpath                  |DCETFNxpath|MSplantype|
- 			| Scenario 1 - UMS | UHC  |90210  |1-877-596-3258 |NO              | Baldwin County        | 880180 | enroll/ma-enrollment.html |  shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true  |  medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP        |MA        |(//a[contains(@class, 'tel')])[1]|//*[contains(@class,'tel right')]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|MS|
+      | scenario         | site |zipcode|TFNNo          |isMultutiCounty | county                |pscCode | maUrl                     | pdpUrl                        |  snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                |  medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype|MAplantype|TFNxpath                         |MedsuppTFNxpath                  |DCETFNxpath|MSplantype|EnrollTFNxpath|
+ 			| Scenario 1 - UMS | UHC  |90210  |1-877-596-3258 |NO              | Baldwin County        | 880180 | enroll/ma-enrollment.html |  shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true  |  medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP        |MA        |(//a[contains(@class, 'tel')])[1]|//*[contains(@class,'tel right')]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|MS|(//a[contains(@class, 'tel')])[3] |
      
   
    #######################Script 2: Campaign traffic########################################
@@ -137,8 +138,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
      Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
-     Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
-      | MEDICARE URL    | <emailLinkUrl> |
+    Then the user navigates to following External Email Links
+      | Email URL    | <emailLinkUrl> |
       And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <pscCode1> |
@@ -147,8 +148,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
        | TFN Xpath | <EmailTFNxpath> | 
 	   Then the user navigates to following  Medicare Education Page URL and validate Federal TFN  
       | MEDICARE URL    | <medicareUrl> |
-      | TFN Xpath | <medicareTFN> |
-         And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+      | TFN Xpath       | <medicareTFN> |
+      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <pscCode1> | 
      Then the user validates TFN Number
@@ -178,20 +179,21 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
-    	And the user clicks on the shopping cart icon in AARP site
+    	#And the user clicks on the shopping cart icon in AARP site
+    	And the user clicks on the shopping cart icon
   		Then the user validates PSC code
       | PSC Code | <pscCode> |
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile in AARP site
+	And the user clicks on the add plans button in the profile
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
    Then the user validates PSC code
       | PSC Code | <pscCode> | 
-     Then the user navigates to plan tab for any plan
-        | Plan Type | <MAplantype> |  
+     #Then the user navigates to plan tab for any plan
+        #| Plan Type | <MAplantype> |  
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
       | Plan Type | <MAplantype> |
    Then the user validates TFN Number
