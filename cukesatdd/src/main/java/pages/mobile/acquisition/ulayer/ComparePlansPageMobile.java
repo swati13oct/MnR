@@ -115,7 +115,7 @@ public class ComparePlansPageMobile extends UhcDriver {
    	private WebElement CallSamTFNClose;
    	
    	String CallSam= "Call a Licensed Insurance Agent";
-   	@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[2]/img")
+   	@FindBy(xpath = "//div[@id='sp-chat-label-text']")
    	private WebElement chatsam;
    	
    	@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[1]")
@@ -562,19 +562,24 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validateCallSamContent() throws InterruptedException {
+		
+		scrollToView(callsam);
+		String callsamtext = callsam.getText();
+		if(callsamtext.contentEquals("1-877-699-5710"))
+			System.out.println("Mobile callsam icon verified successfully");
 
-		Actions action = new Actions(driver);
-		WebElement element = callsam;
-		action.moveToElement(element).perform();
-		String toolTipText = callsamtooltip.getText();
-		System.out.println("====================================================================");
-		System.out.println(toolTipText);
-		System.out.println("====================================================================");
-		if (CallSam.equalsIgnoreCase(toolTipText)) {
-			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
-		} else
-			System.out.println(
-					"No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+//		Actions action = new Actions(driver);
+//		WebElement element = callsam;
+//		action.moveToElement(element).perform();
+//		String toolTipText = callsamtooltip.getText();
+//		System.out.println("====================================================================");
+//		System.out.println(toolTipText);
+//		System.out.println("====================================================================");
+//		if (CallSam.equalsIgnoreCase(toolTipText)) {
+//			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
+//		} else
+//			System.out.println(
+//					"No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
 	}
 
 	public void validateCallpopup() throws InterruptedException {

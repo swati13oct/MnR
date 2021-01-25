@@ -298,6 +298,8 @@ public class SiteSearchMobile {
 		plansummaryPage.verifyproviderName(planName);
 	}
 
+	
+	
 	/**
 	 * @toDo:Verify provider covered information is displayed on Plan Summary page
 	 */

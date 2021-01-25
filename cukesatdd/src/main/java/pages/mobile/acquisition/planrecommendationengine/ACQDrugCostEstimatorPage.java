@@ -245,7 +245,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	
 	public void getDruglist(){
-		PlanRecommendationEngineDrugsPage drugPRE = new PlanRecommendationEngineDrugsPage(driver);
+		PlanRecommendationEngineDrugsPageMobile drugPRE = new PlanRecommendationEngineDrugsPageMobile(driver);
 		druglistPRE = drugPRE.drugnamesList();
 		threadsleep(5000);
 		jsClickNew(drugAddBtn);
