@@ -37,6 +37,7 @@ import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
 import pages.acquisition.ulayer.PageTitleConstants;
@@ -50,7 +51,7 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
  */
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//input[@id='cta-zipcode']")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -1501,12 +1502,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// viewPlansButton.click();
 		jsClickNew(viewPlansButton);
 
-		CommonUtility.checkPageIsReadyNew(driver);
+//		CommonUtility.checkPageIsReadyNew(driver);
 
-		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		validateNew(vppTop, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
-		} else
+		}
+		else
 			return null;
 	}
 

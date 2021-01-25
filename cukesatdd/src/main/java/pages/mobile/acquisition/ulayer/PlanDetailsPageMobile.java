@@ -1109,44 +1109,54 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		WebElement PDFlink = driver
 				.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '" + pDFtype + "')]"));
 
-		String parentHandle = driver.getWindowHandle();
-		int initialCount = driver.getWindowHandles().size();
+		WebElement PDFCode = driver
+				.findElement(By.xpath("//a[@href='/online_documents/ovation/pdf/mapd/en/2021/Step_Therapy_MCOREE_2021.pdf']"));
 
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink);
-		executor.executeScript("arguments[0].click();", PDFlink);
+		// On mobile chrome when user clicks on pdf link it asks for phone memory access
+		// on SauceLabs hence verifying code via @href
+		// String parentHandle = driver.getWindowHandle();
+		// int initialCount = driver.getWindowHandles().size();
 
-		// PDFlink.click();
+		scrollToView(PDFlink);
 
-		waitForCountIncrement(initialCount);
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		String currentHandle = null;
-		for (int i = 0; i < initialCount + 1; i++) {
-			System.out.println("Switching Window");
-			driver.switchTo().window(tabs.get(i));
-			currentHandle = driver.getWindowHandle();
-			if (!currentHandle.contentEquals(parentHandle)) {
-				System.out.println("In Parent Window : FAILED");
-				break;
-
-			}
-
-		}
-		System.out.println("Switched to new window : Passed");
-
-		try {
-			driver.manage().timeouts().implicitlyWait(11, TimeUnit.SECONDS);
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-		if (driver.getCurrentUrl().contains(documentCode)) {
-			System.out.println("PDF url has the correct document code.. : " + documentCode);
-			System.out.println("PDF url : " + driver.getCurrentUrl());
+		if (validateNew(PDFCode))
 			return true;
-		}
-		return false;
+
+		else
+			// jsClickNew(PDFlink);
+
+			// PDFlink.click();
+
+			// waitForCountIncrement(initialCount);
+			// ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+			// String currentHandle = null;
+			// for (int i = 0; i < initialCount + 1; i++) {
+			// System.out.println("Switching Window");
+			// driver.switchTo().window(tabs.get(i));
+			// currentHandle = driver.getWindowHandle();
+			// if (!currentHandle.contentEquals(parentHandle)) {
+			// System.out.println("In Parent Window : FAILED");
+			// break;
+			//
+			// }
+			//
+			// }
+			// System.out.println("Switched to new window : Passed");
+			//
+			// try {
+			// driver.manage().timeouts().implicitlyWait(11, TimeUnit.SECONDS);
+			// } catch (Exception e1) {
+			// // TODO Auto-generated catch block
+			// e1.printStackTrace();
+			// }
+
+			// if (driver.getCurrentUrl().contains(documentCode)) {
+			// System.out.println("PDF url has the correct document code.. : " +
+			// documentCode);
+			// System.out.println("PDF url : " + driver.getCurrentUrl());
+			// return true;
+			// }
+			return false;
 	}
 
 	public boolean ClickValidatePDFText_ForDocCode(String pDFtype, String documentCode) throws AWTException {
@@ -1364,14 +1374,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			return false;
 		}
 	}
-	
 
 	@FindBy(xpath = "(//label[contains(text(),'Add to Compare')])[1]")
 	public WebElement addToCompareLabel;
-	
+
 	@FindBy(xpath = "(//a[contains(text(),'Compare plans')])[1]")
 	public WebElement comparePlansLink;
-	
+
 	public ComparePlansPageMobile addToCompareAndNavigate() {
 		jsClickNew(addToCompareLabel);
 		jsClickNew(comparePlansLink);
@@ -1408,7 +1417,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
-	
+
 	@FindBy(xpath = "//a[@class='cta-button ng-scope' and text()='Learn More']")
 	private WebElement learnMore;
 

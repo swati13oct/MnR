@@ -221,7 +221,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
   #Examples:
   #| zipcode | isMultutiCounty | plantype | planName                    |
   #|   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @Harshal
+  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression 
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
