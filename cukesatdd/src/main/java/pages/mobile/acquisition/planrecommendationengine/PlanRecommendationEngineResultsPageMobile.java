@@ -286,8 +286,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@FindBy(css = "#plan-list-1 div.module-plan-overview:nth-child(1) .drugs-list div[class*='drug-info-container']")
 	private List<WebElement> DrugsNames;
 
-	@FindBy(xpath = "//button[@aria-describedby='answer-a-few-simple']")
-	private WebElement StartNowButton;
+	@FindBy(css = "a#selector")
+	private  WebElement StartNowButton;
 
 	// Start Over Popup
 
@@ -658,7 +658,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	public void startnowtilldrugs() {
 		System.out.println("Navigating to PRE Using StartNow: ");
 		flow = PlanRecommendationEngineStepDefinition.PREflow;
-		MobileMenuAndGetStarted();
+		MobileMenuAndGetPlanRecom();
 		// vppToPre();
 		validateDrugPage(flow, false);
 	}

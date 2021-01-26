@@ -122,7 +122,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id=\"planTypesColumn\"]/h3[2]/a")
 	private WebElement enroll;
-	
+
 	@FindBy(id = "ghn_lnk_1")
 	public static WebElement navigationSectionHomeLink;
 
@@ -1328,7 +1328,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			return null;
 		}
 	}
-	
+
 	public PharmacySearchPageMobile navigateToEnrollMobile() {
 		waitforElement(menu);
 		if (menu.isDisplayed()) {
@@ -1502,13 +1502,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// viewPlansButton.click();
 		jsClickNew(viewPlansButton);
 
-//		CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 
 		validateNew(vppTop, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
-		}
-		else
+		} else
 			return null;
 	}
 
@@ -2131,10 +2130,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void signInheader() {
 		MobileMenuMain();
-		// headerSignInLink.click();
+
 		jsClickNew(headerSignInLink);
 		waitforElementVisibilityInTime(signIn, 10);
-	
+
 		if (driver.getCurrentUrl().contains("medicare.uhc.com/aarp")) {
 			Assert.assertTrue(true);
 			System.out.println("Signin page is loaded");
@@ -2328,7 +2327,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath = "//span[text()='Back']")
+	@FindBy(xpath = "//span[@role='button']")
 	private WebElement MobileMenuBackBtn;
 
 	@FindBy(xpath = "//a[@aria-label='Close Navigation button']")
@@ -3287,7 +3286,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		waitforElement(shoppingCartIcon);
 		shoppingCartIcon.click();
-		//guestProfileLink.click();
+		// guestProfileLink.click();
 		jsClickNew(guestProfileLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("profile")) {

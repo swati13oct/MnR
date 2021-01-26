@@ -234,6 +234,10 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/a")
 	public static WebElement takeQuizButton;
+	
+	@FindBy(css = "button[onclick=\"jumpToHSIDRegistration('header')\"]")
+	public static WebElement registerLink;
+	
 
 	@FindBy(id = "nav-zipcode")
 	public static WebElement zipcodeField;
