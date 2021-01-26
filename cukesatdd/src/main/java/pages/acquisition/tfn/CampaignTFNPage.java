@@ -553,7 +553,14 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
 	public WebElement OurPlans_viewPlansButton;
 	
-
+	//@FindBy(id="cta-zipcode")
+	@FindBy(xpath = "//input[contains(@id,'cta-zipcode')]")
+	private WebElement HomePageOLE_EnterZip;
+	
+	//@FindBy(id = "zipcodebtn")
+	@FindBy(id = "//button[contains(@id,'zipcodebtn')]")
+	private WebElement findPlansButtonOLE;
+	
 	public void SubNavPlanSearch(String zip) {
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -585,6 +592,24 @@ public class CampaignTFNPage extends UhcDriver {
 		HomePage_EnterZip.sendKeys(zip);
 		validate(findPlansButton);
 		findPlansButton.click();
+	}
+	
+	
+	public void HomepagePlanSearchOLE(String zip) {
+		CheckPageLoad();
+		CheckiPerseptions();
+
+		//validateNew(OurPlansLink1);
+		// Hover over text
+		//Actions action = new Actions(driver);
+		//action.moveToElement(OurPlansLink1).build().perform();
+		// action.click().build().perform();
+		//validateNew(OurPlansLink1);
+		validate(HomePageOLE_EnterZip);
+		HomePageOLE_EnterZip.click();
+		HomePageOLE_EnterZip.sendKeys(zip);
+		validate(findPlansButtonOLE);
+		findPlansButtonOLE.click();
 	}
 	
 	@FindBy(id = "plan-list-1")

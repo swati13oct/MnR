@@ -201,9 +201,6 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
   #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN  
    Then the user navigates to plan tab for any plan
         | Plan Type | <MSplantype> |
-  Then the user validates TFN Number
-     | TFN No | <TFNNo3> |
-       | TFN Xpath | <TFNxpath> | 
       Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo2> |
        | TFN Xpath | <MedsuppTFNxpath> |
