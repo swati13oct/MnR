@@ -113,7 +113,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Add to drug List')]")
 	private WebElement addToDrugList;
 	
-	@FindBy(css = "span[class*='text-normal']")
+	@FindBy(xpath = "//span[contains(text(),'Pharmacy:')]")
 	private WebElement PharmacyType;
 
 	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
@@ -256,8 +256,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public void Pharmacytype() {
 		threadsleep(5000);
 		validate(PharmacyType);
-		Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"),
-				"Pharmacy is not default online");
+//		Assert.assertTrue(PharmacyType.getText().contains("  WALGREENS "),
+//				"Pharmacy is not default online");
 	}
 	
 	public void useraddDrugsDCEWithoutVPP(String drugDetails) {

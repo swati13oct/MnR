@@ -172,6 +172,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 	// SingleCounty Method Mobile
 	public void quizStartsAndRunQuestionnaire(String zipcode) throws InterruptedException {
+		validateNew(getStartedBtn, 10);
 		if (getStartedBtn.isDisplayed()) {
 			jsClickNew(getStartedBtn);
 			System.out.println("After clicking GetStarted");

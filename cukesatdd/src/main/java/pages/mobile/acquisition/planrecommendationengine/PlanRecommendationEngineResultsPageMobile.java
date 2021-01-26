@@ -363,6 +363,11 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "input#currentYear[class*='selected']")
 	private WebElement currentPlanYearSelected;
+	
+	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
+	private WebElement adddrugbtn;
+	
+	
 
 	// Result Loading Page Element Verification Method
 
@@ -382,7 +387,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		pageloadcomplete();
 
 		validate(planZipInfo, 60);
-		waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		//waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		Assert.assertTrue(planZipInfo.getText().contains(zip), "Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
@@ -410,6 +415,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	public void validateZipcodePage(String zip, String county, String isMultiCounty) {
 		System.out.println("Validating Zipcode and County in location Page");
 		pageloadcomplete();
+		validateNew(getStartedBtn, 10);
 		if (getStartedBtn.isDisplayed()) {
 			jsClickNew(getStartedBtn);
 			Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip), "Invalid Zip");
@@ -645,7 +651,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		drugsCoveredInVPP(count);
 		removeDrugs(count);
 		// vppToPre();
-		MobileMenuAndGetStarted();
+		MobileMenuAndGetPlanRecom();
 		validateDrugPage(flow, true);
 	}
 
@@ -767,7 +773,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	public void validateDrugPage(String plan, boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
-		// getStartedBtn.click();
+	
+		scrollToView(getStartedBtn);
 		jsClickNew(getStartedBtn);
 		threadsleep(2000);
 		int MAPD = 6;
@@ -1410,6 +1417,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 				driver);
 		System.out.println("Validating Pharmacy Details in DCE Page: ");
 		MobileMenuAccessDCE();
+		jsClickNew(adddrugbtn);
 		dce.Pharmacytype();
 		System.out.println("Validating Drugs Details from VPP to DCE Page: ");
 		DrugsInDCE = dce.DCEDrugsResults;
