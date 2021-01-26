@@ -991,6 +991,13 @@ public void Start_application_button_proceed_next_few_pages(DataTable givenAttri
 	
 	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, tfnPage);
 }
+
+@Then("^the user navigates to Homepage$")
+public void the_user_navigates_to_Homepage() throws Throwable {
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.NavigateToHome();
+	
+}
 }
 
 

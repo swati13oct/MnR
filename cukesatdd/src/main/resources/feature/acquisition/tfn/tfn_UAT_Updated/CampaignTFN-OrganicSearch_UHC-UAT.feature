@@ -13,6 +13,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
      # | TFN Xpath | <maTFN> |
      Then the user navigates to homepage validates Federal TFN
      Then the user navigates to MA Plan Details Page and validates Federal TFN 
+          | Zip Code    | <zipcode>    |
      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |  
@@ -37,6 +38,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
       | PSC Code | <Precedence1PSC> | 
      Then the user navigates to homepage validates Federal TFN
    	Then the user navigates to MA Plan Details Page and validates Federal TFN
+   	       | Zip Code    | <zipcode>    |
    	#Then the user validates PSC code
       #| PSC Code | <Precedence1PSC> | 
    	Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
@@ -45,8 +47,8 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
        | MedEd URL | <medicareeduUrl> |
       | TFN Xpath   | <medicareeduTFN> |
     Examples: 
-   |scenario       | pscCode | Precedence1PSC|maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                                  |medicarearicleUrl|medicarearicleTFN|medicareMadeclearUrl|medicareMadeclearTFN|medicareEligibilityUrl|medicareEligibilityTFN|
-   |Sc. 3.08 - AMP |  880188 |  880187       |shop/medicare-advantage-plans.html     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]     |health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]      | /medicare-articles.html                 |  (//a[contains(@class, 'tel')])[1]               |   medicare-articles/medicare-made-clear.html                 |     (//a[contains(@class, 'tel')])[1]              |    medicare-articles/eligibility-and-enrollment.html                 |        (//a[contains(@class, 'tel')])[1]                |
+   |scenario       | pscCode | Precedence1PSC|zipcode|maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                                  |medicarearicleUrl|medicarearicleTFN|medicareMadeclearUrl|medicareMadeclearTFN|medicareEligibilityUrl|medicareEligibilityTFN|
+   |Sc. 3.08 - AMP |  880188 |  880187       |90210  | shop/medicare-advantage-plans.html     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]     |health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]      | /medicare-articles.html                 |  (//a[contains(@class, 'tel')])[1]               |   medicare-articles/medicare-made-clear.html                 |     (//a[contains(@class, 'tel')])[1]              |    medicare-articles/eligibility-and-enrollment.html                 |        (//a[contains(@class, 'tel')])[1]                |
    
   @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
   Scenario Outline: <scenario> Campaign Precedence Logic No 1 for UHC
@@ -138,6 +140,7 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
        | TFN No | <MedsuppTFNNo1> |
        | TFN Xpath | <TFNxpath> |
    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+        | Zip Code    | <zipcode>    |
    Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo1> |
        | TFN Xpath | <MedsuppTFNxpath> |
@@ -199,6 +202,8 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
    Then the user navigates to plan tab for any plan
         | Plan Type | <MSplantype> |
   Then the user validates TFN Number
+     | TFN No | <TFNNo3> |
+       | TFN Xpath | <TFNxpath> | 
       Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo2> |
        | TFN Xpath | <MedsuppTFNxpath> |

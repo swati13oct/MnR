@@ -65,7 +65,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
  Then the user navigates to homepage validates Federal TFN
   #And the user selects the state drop down value in AARP home page
     # | State | <state> |
-   #And the user clicks on the shopping cart icon in AARP site
+   #And the user clicks on the shopping cart icon in UHC site
    And the user clicks on the shopping cart icon
   	#And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
@@ -73,7 +73,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile in AARP site
+	And the user clicks on the add plans button in the profile
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
@@ -180,13 +180,14 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
     	#And the user clicks on the shopping cart icon in AARP site
-    	And the user clicks on the shopping cart icon
+    	And the user clicks on the shopping cart icon in UHC site
   		Then the user validates PSC code
       | PSC Code | <pscCode> |
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile
+	#And the user clicks on the add plans button in the profile
+	And the user clicks on the add plans button in the guest profile in UHC site
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |

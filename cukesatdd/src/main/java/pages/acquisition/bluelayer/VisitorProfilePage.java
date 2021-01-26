@@ -14,6 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+//import pages.acquisition.ulayer.AcquisitionHomePage;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -27,7 +28,8 @@ public class VisitorProfilePage extends UhcDriver {
 	private WebElement btnCreateProfile;
 	
 	//@FindBy(xpath = "//*[contains(@aria-label,'Add Plans')]")
-	@FindBy(xpath = "//*[contains(@aria-labelledby,'findPlans')]")
+	//@FindBy(xpath = "//*[contains(@aria-labelledby,'findPlans')]")
+	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
 	private WebElement addPlans;
 	
 	@FindBy(css = "a.addrugs")
@@ -345,7 +347,6 @@ public class VisitorProfilePage extends UhcDriver {
 	public AcquisitionHomePage findPlans() throws InterruptedException {
 
 		jsClickNew(addPlans);
-		Thread.sleep(2000);
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("profile")) {
 			return new AcquisitionHomePage(driver);
