@@ -270,7 +270,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
    And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+   # And the user validated the Look up Drugs link
+    And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> |
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
@@ -331,10 +333,10 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates spanish and chinese should not display in dropdown
     And the user clicks on More Information link
     And the user validates contactus section
-@abc
+
     Examples: 
       | index | TID   | username |password  | MemUserName|planType|memberType | copayCategory | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List |
-      | 10    | 15247 |kkumard| tnps459#|GLORIA9494| MAPD|Group_BnC| LIS 2|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
+      | 10    | 15247 |kkumard| tnps459#|jstobbie1| MAPD|Group_BnC| LIS 3|Summary Of Benefits|Evidence of Coverage| Comprehensive Formulary         |
       
   #TC26_Group members_PDP_LIS(1,2)
   @prod__benefitsAndCoverage2  @CMGroupmembersPDPLIS_TC26 @prod_BnC_Part6 
@@ -476,9 +478,9 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | index | TID   |username |password  |MemUserName| planType | memberType | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List | name           | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag |
       | 13    | 15366 |kkumard| tnps459#|LeanoraF |PDP| Group_BnC| NON LIS | ENGLISH | Summary Of Benefits | Evidence of Coverage | Comprehensive Formulary         | PETER DAWSON | 0108537701 | 01/01/2013    | Not Available  | Tier 2          | true        |     
       
- #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
-  @prod__benefitsAndCoverage15 @CMFedPDPNonLis  @Nonlis_Pdp
-  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
+  #TC22_NON LIS Ind plan member(PDP)- Drug Cost table
+  @prod_benefitsAndCoverage15 @CMFedPDPNonLis @Nonlis_Pdp
+  Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify all sections for PDP Ind NonLIS member on Benefits and Coverage page
     Given the user is on member auth login flow page
     When the member is able to login with correct username and password
       | Username | <username> |
@@ -491,8 +493,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Username | <MemUserName> |
       | Plan Type    | <planType>    |
       | Member Type  | <memberType>  |
-      | Copay Category | <copayCategory> |
-    Then The user navigate to Benefits and Coverage page
+    Then The user navigates to Benefits and Coverage page
+      | Plan Type | <planType> |
     Then user verifies presence of jump links
       | Plan Type  | <planType>   |
       | Rider      | <rider>      |
@@ -509,10 +511,10 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
       | Count      | <count>      |
       | MemberType | <memberType> |
     And the user validates Ind plan overview
-      | Name            | <name>           |
-      | Member ID       | <memberid>       |
-      | Effective Date  | <effectivedate>  |
-      | Monthly premium | <monthlypremium> |
+      | Name            | ECADEA DCAA   |
+      | Member ID       | 0197331001    |
+      | Effective Date  | 05/01/2018    |
+      | Monthly premium | Not Available |
     And the user view the Drug Copays & Discounts header
     And the user validates Drug coverage header and text under the section
     And the user validates dropdown selection functionality
@@ -546,8 +548,8 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
     And the user validates contactus section
 
     Examples: 
-      | index | TID   |username |password  |MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
-      | 16    | 15377 |kkumard| tnps459#|cmc29501 | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | ECADEA DCAA | 0197331001 | 05/01/2018    | Not Available  | Tier 2          | true |EffectivePDPAARP | 4     | NoRider |
+      | index | TID   | username | password  | MemUserName| planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | UpdatedLanguage | DisplayFlag | Identifier       | count | rider   |
+      | 16    | 15377 | kkumard  | tnps459#  | cmc29501   | PDP      | Individual_BnC | NON LIS       | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | Tier 2          | true        | EffectivePDPAARP | 4     | NoRider |
       
    @prod__benefitsAndCoverage30  @hartfordprescriptionDrugBenefit @Greenwich_Hartford_Drugtable
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify city of Hartford Prescription Drug Benefits
@@ -886,4 +888,4 @@ Feature: 1.01 Member  benefits and Coverage page  - Member Auth Prod
 	
     Examples: 
       | index  | FID    | username | password  | MemUserName        | planType  | memberType           |
-      | 44     | xxxxxx | kkumard  | tnps459#  | JohnPrais          | MAPD      | Individual_Rider_BnC |       
+      | 44     | xxxxxx | kkumard  | tnps459#  | JohnPrais          | MAPD      | Individual_Rider_BnC |      

@@ -196,6 +196,13 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	@FindBy(xpath="//h1[contains(text(),'Estimate')]")
 	protected WebElement oldDcePgHeader;
 	
+	//GET THE MOST OUT OF YOUR PRESCRIPTION
+	@FindBy(xpath="//h1[@id='globalContentIdForSkipLink']")
+	protected WebElement oldPharmacyLocatorHeader; 
+	
+	@FindBy(xpath="(//span[contains(text(),'Results for')])[1]")
+	protected WebElement rallyPharmacyResultsHeader;
+			
 	@FindBy(xpath = "//span[contains(text(),'DRUG LOOKUP')]")
 	protected WebElement LookUpDrugsButtonSection;
 	
@@ -1184,6 +1191,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='btn btn--primary']")
 	protected WebElement makePaymentButton;
+	
+	@FindBy(xpath = "//a[@id='make-payment']")
+	protected WebElement makePaymentButtonnewView;
 		
 	@FindBy(linkText = "plan documents")
 	protected WebElement planDocumentsLink;
@@ -1249,6 +1259,9 @@ public class BenefitsAndCoverageWebElements extends UhcDriver {
 	
 	@FindBy(xpath="//div[contains(@class,'optionalRiders section')]//div[contains(@ng-show,'rider') and not(contains(@class,'ng-hide'))]/a[contains(text(),'DOWNLOAD RIDER PDF')]")
 	protected WebElement riderViewPdfLnk;
+	
+	@FindBy(xpath="//h1/strong[contains(text(),'Dental Care')]")
+	protected WebElement rallyDentalSearchHeader;
 	
 	public BenefitsAndCoverageWebElements(WebDriver driver) {
 		super(driver);

@@ -26,6 +26,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | 15523 | Ulayer | 90210   | MA       | NO            |
 
   #@prodRegression
+  @VppEmailandPrintProdSanity_AARP
     Examples:
       | TID   | site   | zipcode | plantype | isMultiCounty |
       | 15523 | Ulayer | 90210   | PDP      | NO            |
@@ -55,6 +56,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | 15531 | Ulayer | 80001   | PDP      | No              |current  |
 
   #@prodRegression
+  @VppEmailandPrintProdSanity_AARP
     Examples:
       | TID   | site   | zipcode | plantype | isMultutiCounty |planyear |
       | 15531 | Ulayer | 80001   | SNP      | No            |current  |
@@ -86,6 +88,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | 1598166 | Ulayer | SNP      | 80001   | NO            | Jefferson County | current  |
 
  # @prodRegression
+ @VppEmailandPrintProdSanity_AARP
     Examples:
       | UID     | site   | plantype | zipcode | isMultiCounty | county           | planyear |
       | 1598166 | Ulayer | MA       | 80001   | NO            | Jefferson County | current  |

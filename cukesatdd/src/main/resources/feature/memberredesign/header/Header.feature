@@ -125,7 +125,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | TID   | memberType           |
 	      | 15162 | Terminated_header    |  
 
-  @CodeWarriors @F497797
+  @CodeWarriors @F497797 @regressionMember
   Scenario Outline: plan: <planType> -memberType: <memberType> - To check that the Find Care or Find Care and Costs Tab is not displayed for termed MedSupp
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -139,7 +139,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | planType | memberType 	 | flow   |
 	      | SHIP     | TermedMedsupp | header |
 
-  @CodeWarriors @F497797
+  @CodeWarriors @F497797 @regressionMember
   Scenario Outline: plan: <planType> -memberType: <memberType> - To check that the Find Care Tab is displayed for active MedSupp
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -153,7 +153,7 @@ Feature: 1.08 Member Header/Navigation validation
 	      | SHIP     | Medsupp    			   | header |
 	      | SHIP 	 | Combo_Medsupp_TermedPDP | header |
 
-  @CodeWarriors @F497797
+  @CodeWarriors @F497797 @regressionMember
   Scenario Outline: plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is displayed for combo plan
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |

@@ -1,6 +1,6 @@
 Feature: Member Header validation from secondary page
 
-  @CodeWarriors
+  @CodeWarriors @F497797 @regressionMember
   Scenario Outline: plan: <planType> -memberType: <memberType> - To check that the Find Care or Find Care and Costs Tab is not displayed for termed MedSupp
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -14,7 +14,7 @@ Feature: Member Header validation from secondary page
 	      | planType | memberType 	 | flow   |
 	      | SHIP     | TermedMedsupp | header |
 
-  @CodeWarriors
+  @CodeWarriors @F497797 @regressionMember
   Scenario Outline: plan: <planType> -memberType: <memberType> - To check that the Find Care Tab is displayed for active MedSupp
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |
@@ -28,7 +28,7 @@ Feature: Member Header validation from secondary page
 	      | SHIP     | Medsupp    | header |
 	      | SHIP 	 | Combo_Medsupp_TermedPDP | header |
 	      
-  @CodeWarriors
+  @CodeWarriors @F497797 @regressionMember
   Scenario Outline: plan: <planType> -memberType: <memberType> - To check that the Find Care and Costs Tab is displayed for combo plan
 	    Given login with following details logins in the member portal and validate elements
 	      | Plan Type   | <planType>   |

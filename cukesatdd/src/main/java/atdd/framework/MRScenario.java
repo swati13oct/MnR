@@ -141,6 +141,7 @@ public class MRScenario {
 	// public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+	public static final String mobileURL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.us-west-1.saucelabs.com/wd/hub";
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -1205,7 +1206,7 @@ try {
 		System.out.println("Launching Device : "+mobileDeviceName);
 		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
+		//capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
 		// max 30 mins for device allocation - mobileSessionTimeout
@@ -1214,10 +1215,8 @@ try {
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		// Offline prod and prod env. should not use tunnels
 		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
-		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE")) {
-			//capabilities.setCapability("parentTunnel", "optumtest");
-			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
-		}
+		capabilities.setCapability("parentTunnel", "optumtest");
+		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
@@ -1233,18 +1232,18 @@ try {
 		try {
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
-				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+				//mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+				mobileDriver = new AndroidDriver(new URL(mobileURL), capabilities);
 			}
 			else {
 				capabilities.setCapability("browserName", "Safari");
-				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+				mobileDriver = new IOSDriver(new URL(mobileURL), capabilities);
 			}
 			System.out.println("Session ID --- " + mobileDriver.getSessionId());
-			System.out.println(mobileDeviceName + " JobURL  --- "
-					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
+			System.out.println(mobileDeviceName + " JobURL  --- " + JobURL);
 			// System.out.println("JobReportURL ---
-			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
+			// "+mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 			// System.out.println("APIURL ---
 			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
 			System.out.println(mobileDriver.getContext());
