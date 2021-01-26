@@ -24,6 +24,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.mobile.acquisition.planrecommendationengine.PlanRecommendationStepDefinitionMobile;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
@@ -408,19 +409,36 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	public void validateZipcodePage(String zip, String county, String isMultiCounty) {
 		System.out.println("Validating Zipcode and County in location Page");
-		// getStartedBtn.click();
-		jsClickNew(getStartedBtn);
 		pageloadcomplete();
-		Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip), "Invalid Zip");
-		if (isMultiCounty.equalsIgnoreCase("NO")) {
-			validate(countyInfo, 20);
-			Assert.assertTrue(countyInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+		if (getStartedBtn.isDisplayed()) {
+			jsClickNew(getStartedBtn);
+			Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip), "Invalid Zip");
+			if (isMultiCounty.equalsIgnoreCase("NO")) {
+				validate(countyInfo, 20);
+				Assert.assertTrue(countyInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+			} else {
+				validate(multiCountyInfo, 20);
+				Assert.assertTrue(multiCountyInfo.getText().toUpperCase().contains(county.toUpperCase()),
+						"Invalid County");
+			}
+			// continueBtn.click();
+			jsClickNew(continueBtn);
+
 		} else {
-			validate(multiCountyInfo, 20);
-			Assert.assertTrue(multiCountyInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+			
+			Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip), "Invalid Zip");
+			if (isMultiCounty.equalsIgnoreCase("NO")) {
+				validate(countyInfo, 20);
+				Assert.assertTrue(countyInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
+			} else {
+				validate(multiCountyInfo, 20);
+				Assert.assertTrue(multiCountyInfo.getText().toUpperCase().contains(county.toUpperCase()),
+						"Invalid County");
+			}
+			// continueBtn.click();
+			jsClickNew(continueBtn);
+
 		}
-		// continueBtn.click();
-		jsClickNew(continueBtn);
 
 	}
 
@@ -620,8 +638,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	public void removedDrugsDetailsVPPtoPRE() {
 		System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
-		flow = PlanRecommendationEngineStepDefinition.PREflow;
-		DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
+		flow = PlanRecommendationStepDefinitionMobile.PREflow;
+		DrugsInPRE = PlanRecommendationEngineDrugsPageMobile.drugNames;
 		boolean remove = true;
 		int count = DrugsInPRE.size();
 		drugsCoveredInVPP(count);
@@ -739,6 +757,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	public void vppToPre() {
 		System.out.println("Validating VPP to PRE Page");
+		MobileMenuAndGetPlanRecom();
 		validate(StartNowButton, 20);
 		jsClickNew(StartNowButton);
 		validateNew(continueBtn, 5);
@@ -1385,16 +1404,17 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		driver.navigate().back();
 		plansLoader();
 	}
-	
-	
+
 	public void DrugsDetailsVPPtoDCE() {
-		pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage dce = new pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage(driver);
+		pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage dce = new pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage(
+				driver);
 		System.out.println("Validating Pharmacy Details in DCE Page: ");
+		MobileMenuAccessDCE();
 		dce.Pharmacytype();
 		System.out.println("Validating Drugs Details from VPP to DCE Page: ");
 		DrugsInDCE = dce.DCEDrugsResults;
-		int count =DrugsInDCE.size();
-		verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
+		int count = DrugsInDCE.size();
+		verifyConfirmationmodalResults(count, DrugsInDCE, DrugsList);
 	}
 
 	public void useraddDrugsVPP(String drugDetails) {

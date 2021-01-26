@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PRERegression
+@PlanRecommendationEngine @PRERegression @harshal
 Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with session cookies
 
   @PRE @planrecommendation @DrugPREtoVPPtoDCE @F375045 @PRERegression1

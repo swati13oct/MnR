@@ -172,29 +172,39 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 	// SingleCounty Method Mobile
 	public void quizStartsAndRunQuestionnaire(String zipcode) throws InterruptedException {
+		if (getStartedBtn.isDisplayed()) {
+			jsClickNew(getStartedBtn);
+			System.out.println("After clicking GetStarted");
+			zipcodePage();
+			waitforElementVisibilityInTime(zipCode, 45);
 
-		jsClickNew(getStartedBtn);
-		System.out.println("After clicking GetStarted");
-		zipcodePage();
-		waitforElementVisibilityInTime(zipCode, 45);
+			sendkeys(zipCode, zipcode);
 
-		sendkeys(zipCode, zipcode);
+			waitforElementVisibilityInTime(countyInfo, 45);
+			threadsleep(5000);
+			jsClickNew(continueBtn);
+			waitforElementVisibilityInTime(coverageTitle, 30);
+			Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+		} else {
+			
+			System.out.println("After clicking GetStarted");
+			zipcodePage();
+			waitforElementVisibilityInTime(zipCode, 45);
 
-		// zipCode.sendKeys(Keys.ENTER);
-		// getkeypad();
-		// jsSendkeys(zipCode, zipcode);
+			sendkeys(zipCode, zipcode);
 
-		waitforElementVisibilityInTime(countyInfo, 45);
-		threadsleep(5000);
-		jsClickNew(continueBtn);
-		waitforElementVisibilityInTime(coverageTitle, 30);
-		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+			waitforElementVisibilityInTime(countyInfo, 45);
+			threadsleep(5000);
+			jsClickNew(continueBtn);
+			waitforElementVisibilityInTime(coverageTitle, 30);
+			Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+		}
 
 	}
 
 	// SingleCounty Method
 	public void quizStartAndRunQuestionnaire(String zipcode) throws InterruptedException {
-	
+
 		System.out.println("Before clicking GetStarted");
 		// MobileMenu();
 		scrollToView(getStartedBtn);
@@ -215,7 +225,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	public void quizStartAndRunQuestionnaireWithCounty(String zip_code, String County) throws Exception {
 
 		Thread.sleep(20000);
-		//driver.switchTo().defaultContent();
+		// driver.switchTo().defaultContent();
 		// switchToNewIframe(iframePst);
 		// waitTillElementClickableInTime(getStartedBtn, 45);
 		// waitTillElementClickableInTime(getStartedBtn1, 45);
@@ -255,7 +265,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		// Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1:
 		// Location"));
 		// validate(pageProgressPercentage, 30);
-	
+
 		scrollToView(pageProgressPercentage);
 		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo);
@@ -338,17 +348,17 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		continueBtn.click();
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
-	
-	public void edit_location(String zipcode,String multi,String county) {
- 		waitforElementVisibilityInTime(zipCode, 45);
- 		zipCode.clear();
- 		sendkeys(zipCode, zipcode);
- 		if(multi.equalsIgnoreCase("Yes")) {
- 			waitforElementVisibilityInTime(PRECounty, 45);
- 			selectFromDropDownByText(driver, PRECounty, county);
- 		}
- 		threadsleep(3000);
- 	}
+
+	public void edit_location(String zipcode, String multi, String county) {
+		waitforElementVisibilityInTime(zipCode, 45);
+		zipCode.clear();
+		sendkeys(zipCode, zipcode);
+		if (multi.equalsIgnoreCase("Yes")) {
+			waitforElementVisibilityInTime(PRECounty, 45);
+			selectFromDropDownByText(driver, PRECounty, county);
+		}
+		threadsleep(3000);
+	}
 
 	public void browserBack() {
 

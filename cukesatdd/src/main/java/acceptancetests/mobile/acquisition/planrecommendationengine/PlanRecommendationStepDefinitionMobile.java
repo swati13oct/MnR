@@ -1372,7 +1372,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
 		planSelectorResultspage.drugsDetailsPREtoVPP();
-		planSelectorResultspage.MobileMenu();
+		//planSelectorResultspage.MobileMenu();
 	}
 
 	@Then("^user validate removed drugs details updated from VPP to PRE page$")
