@@ -175,8 +175,33 @@ public class AepPlanComparePage extends UhcDriver {
         System.out.println("Proceed to collect the info on vpp compare page =====");
         HashMap<String, String> result = new HashMap<String, String>();
 
-        //Read prescription Drug Benefits and PlanCosts table
-        result.putAll(readBenefitsData("prescription-drug-table", ""));
+        //Read prescription Drug Benefits table
+        //result.putAll(readBenefitsData("prescription-drug-table", ""));
+
+        HashMap<String, String> pdresult = new HashMap<String, String>();
+        for (int i = 0; i < 3; i++) {
+            try {
+                pdresult = readBenefitsData("prescription-drug-table", "");
+                int benefitUICnt = pdresult.size();
+                System.out.println("prescription-drug-table - Attempt - " + (i + 1) + ", Benefits Map count - " + benefitUICnt);
+                if (benefitUICnt == 0 ||benefitUICnt == 6 ) {
+                    driver.navigate().refresh();
+                    threadsleep(2000);
+                    System.out.println("prescription-drug-table - Attempt - " + (i + 1) + ", Page Refreshed");
+                    continue;
+                } else {
+                    result.putAll(pdresult);
+                    break;
+                }
+            } catch (Exception ex) {
+                driver.navigate().refresh();
+                System.out.println("prescription-drug-table - Attempt - " + (i + 1) + ", Page Refreshed after Exception");
+                continue;
+            }
+
+        }
+
+        //Read PlanCosts table
         result.putAll(readBenefitsData("plan-costs-table", ""));
 
         //Read Plan Summary table
