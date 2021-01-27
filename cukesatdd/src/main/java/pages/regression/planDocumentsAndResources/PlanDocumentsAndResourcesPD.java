@@ -122,6 +122,12 @@ public class PlanDocumentsAndResourcesPD extends PlanDocumentsAndResourcesBase  
 		WebElement imgElement=pharmacyLocator_link_img;
 		List<WebElement> instElement=pharmacyLocator_instr_PD;
 		String expectedUrl="/content/medicare/member/pharmacy-locator/overview.html";
+		if (MRScenario.environment.contains("team-atest")) {
+			if (testInputInfoMap.get("planType").equals("MEDICA")||testInputInfoMap.get("planType").equals("PCP"))
+				expectedUrl="https://member.mymedicareaccount.com/pharmacy-uhc/pharmacies";
+			else 
+				expectedUrl="https://member.uhc.com/pharmacy-uhc/pharmacies";
+		}
 
 		testInputInfoMap.put("docName", item);
 		testInputInfoMap.put("expectedUrl", expectedUrl);

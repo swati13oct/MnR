@@ -790,7 +790,7 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 			scrollElementToCenterScreen(contactUslink);
 			contactUslink.click();
 			sleepBySec(10);
-			Assert.assertTrue("Contact Us page is loaded successfully",driver.getCurrentUrl().contains("contact-us/overview.html"));
+			Assert.assertTrue("Contact Us page load unsuccessfully",driver.getCurrentUrl().contains("contact-us/overview.html"));
 			System.out.println("Contact Us page is loaded successfully");
 		}
 		else{
@@ -1059,16 +1059,35 @@ public class BenefitsAndCoverageBase extends BenefitsAndCoverageWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);	
 		TestHarness.checkForIPerceptionModel(driver);
 		System.out.println("Now Checking that Make Payment Button is displayed");
+		try
+		{
 		if (makePaymentButton.isDisplayed()) 
 		{
-		System.out.println("Make Payment Button is displayed");
-		} else 
-		{
-				Assert.fail("Make Payment Button is not displayed, please check if correct test data is used, member should have total amount due >0 ");
+		System.out.println("Make Payment Button is displayed in old view of B&C page");
+		} 
+		
 		}
-					
+		catch (Exception e)
+		{
+			if (makePaymentButtonnewView.isDisplayed()) 
+			{
+			System.out.println("Make Payment Button is displayed in new View of B&C page");
+			} else 
+			{
+					Assert.fail("Make Payment Button is not displayed, please check if correct test data is used, member should have total amount due >0 ");
+			}	
+		
+		}
 		System.out.println("Now clicking on Make a Payment button");
+		try {
 		makePaymentButton.click();
+		System.out.println("Make a payment button from old view of B&C page was clicked");
+		}
+		catch (Exception e)
+		{
+			makePaymentButtonnewView.click();
+			System.out.println("Make a payment button from new view of B&C page was clicked");
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("payments/overview.html"))
 			{
