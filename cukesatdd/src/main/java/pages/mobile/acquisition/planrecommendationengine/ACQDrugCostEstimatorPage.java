@@ -46,7 +46,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	// DCE Page Elements
 
-	@FindBy(css = "#adddrugfooter")
+	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
 	private WebElement drugAddBtn;
 
 	@FindBy(css = "input#drugsearch")
@@ -268,7 +268,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	public ArrayList<String> getDrugsDCE() {
 		threadsleep(5000);
-		validate(drugcount, 60);
+		validateNew(drugcount, 30);
 		int count = Integer.parseInt(drugcount.getText().split("drugs")[0].split(" ")[2]);
 		vppDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
