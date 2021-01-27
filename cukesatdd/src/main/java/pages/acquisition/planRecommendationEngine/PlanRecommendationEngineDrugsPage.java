@@ -372,6 +372,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 
 //Validating Result Count
 	public void validateResultsCount() {
+		validate(modaldrugsCount, 10);			//E2E : Adding validate since scripts failing intermittently while fetching the confirmation size
 		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
 		if (drugsList.size() == confirmationSize) {
 			System.out.println("Resutls and Count matched");
@@ -411,7 +412,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			threadsleep(1000);
 			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim()
 					.toUpperCase() + " "
-					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().toUpperCase());
+					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim()				//E2E : Added trim()
+					.toUpperCase());
 		}
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
