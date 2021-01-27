@@ -107,7 +107,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(id = "modal-label")
 	public WebElement selectPharmacyHeader;
 
 	@FindBy(xpath = "//*[@id='modal']//*[@id='cancelicon']/img")
