@@ -334,8 +334,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		Hospitals.click();
 
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
-
 		jsClickNew(selectProviderBtn);
+		
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();
 			validateNew(saveBtn2);

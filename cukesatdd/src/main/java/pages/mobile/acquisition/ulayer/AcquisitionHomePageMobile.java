@@ -1503,7 +1503,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(viewPlansButton);
 
 		// CommonUtility.checkPageIsReadyNew(driver);
-
+		pageloadcomplete();
 		validateNew(vppTop, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -2132,7 +2132,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		MobileMenuMain();
 
 		jsClickNew(headerSignInLink);
-		waitforElementVisibilityInTime(signIn, 10);
+
 		validate(registerLink, 10);
 		if (driver.getCurrentUrl().contains("medicare.uhc.com/aarp")) {
 			Assert.assertTrue(true);
@@ -2398,9 +2398,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
 		}
 
-		
+		pageloadcomplete();
 		jsClickNew(MobileMenuBackBtn);
-	
+
 		jsClickNew(MobileMenuCloseNavigationBtn);
 
 	}
@@ -2626,8 +2626,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateCallpopup() throws InterruptedException {
-		
-	
 
 		// CommonUtility.checkPageIsReady(driver);
 		System.out.println(callsam.getText());

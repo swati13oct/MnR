@@ -16,6 +16,9 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.ole.WelcomePageMobile;
+import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
+import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 
@@ -50,9 +53,9 @@ public class oleCommonStepDefinition {
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		System.out.println("Site Name is : " + SiteName);
 		//-----------------------------------------------------------------------------------------------------
-		WelcomePage welcomePage;			
+		WelcomePageMobile welcomePage;			
 			if(SiteName.contains("UHC_ACQ")){
-				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
 						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 				//TFN = planSummaryPage.GetTFNforPlanType();
 
@@ -60,7 +63,7 @@ public class oleCommonStepDefinition {
 
 			}
 			else{
-				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
 						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 				//TFN = planSummaryPage.GetTFNforPlanType();
 
@@ -113,10 +116,10 @@ public class oleCommonStepDefinition {
 		 * vppPlanDetailsPage.GetTFNforPlanType(); welcomePage =
 		 * vppPlanDetailsPage.Enroll_OLE_Plan(PlanName); } else{
 		 */
-		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		TFN = vppPlanDetailsPage.GetTFNforPlanType();
-		WelcomePage welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
+		WelcomePageMobile welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
 		// }
 		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
@@ -147,7 +150,7 @@ public class oleCommonStepDefinition {
 	@Then("^The User validates the Plan details on OLE page$")
 	public void the_user_validates_the_Plan_details_on_OLE() throws Throwable {
 
-		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
 		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));

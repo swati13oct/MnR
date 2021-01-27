@@ -879,7 +879,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			//driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindCareLink);
+			waitforElementNew(FindCareLink,30);
 		} else {
 		System.out.println("Not found Expected window");
 		driver.switchTo().window(ParentWindow);
@@ -1251,7 +1251,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		for(String index:(TreeSet<String>)mySet.descendingSet())
 		{
 		ele=driver.findElement(By.xpath("(//button[contains(@class,'removePlan')])["+Integer.parseInt(index)+"]"));
-		validateNew(ele);
+		validateNew(ele,20);
 		ele.click();
 		System.out.println("Clicked on Remove Link on plan Compare page");
 		}
