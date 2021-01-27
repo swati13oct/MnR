@@ -158,7 +158,6 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
      Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |      
-       Then the user navigates back to page
     Then the user navigates to plan tab for any plan
         | Plan Type | <PDPplantype> |
   Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
@@ -187,7 +186,7 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
         | TFN Xpath | <EnrollTFNxpath> |
     Examples: 
     |scenario             | site    |pscCode  |zipcode| campaignUrl                                                                                                   | maUrl                                    |   connectUrl   |TFNNo           |MedsuppTFNNo   |TFNxpath                          | MedsuppTFNxpath                  |            EnrollTFNxpath        |  ConnectTFNxpath                     |MAplantype |MSplantype|PDPplantype|SNPplantype|
-    |Scenario 2 - UMS     | blayer | 8003728  | 90210 |health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary  | enroll/ma-enrollment.html                |/contact-us.html|1-855-448-4586  |1-866-271-0607 |(//a[contains(@class, 'tel')])[1] |//*[contains(@class,'tel right')] |(//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[1]/u  | MA        |MS|PDP|SNP|
+    |Scenario 2 - UMS     | blayer | 8003728  | 10001 |health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary  | enroll/ma-enrollment.html                |/contact-us.html|1-855-448-4586  |1-866-271-0607 |(//a[contains(@class, 'tel')])[1] |//*[contains(@class,'tel right')] |(//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[1]/u  | MA        |MS|PDP|SNP|
   
    
    
