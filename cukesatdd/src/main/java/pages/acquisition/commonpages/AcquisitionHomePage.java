@@ -4052,6 +4052,28 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 
 		}
 		
+		public VPPPlanSummaryPage navigateToPathNew(String path) {
+
+			String CurrentURL = driver.getCurrentUrl();
+			System.out.println("Current URL : " + CurrentURL);
+
+			String NavigateToURL = CurrentURL + path;
+			System.out.println("Navigating to URL : " + NavigateToURL);
+			driver.navigate().to(NavigateToURL);
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+			System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+			if(driver.getCurrentUrl().contains("plan-summary")){
+				return new VPPPlanSummaryPage(driver);
+			}
+			else {
+				System.out.println("Navigation to vpp plan summary page is failed");
+				return null;
+			}
+			}
+
+		
+		
 		public void validateGlobalFooterLinks() {
 			scrollToView(footerHomeLink);
 			validateNew(footerHomeLink);

@@ -88,3 +88,54 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Examples: 
       | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
       | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
+
+       @DCE_E2E_Scenario6_UAT
+  Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link
+   Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+		Given the user navigates to following Campaign acquisition site page     
+      | PagePath | <path>     |
+     And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+      And I access the DCE Redesign from Plan Summary for mentioned plan
+      | Plan Type | <plantype> |
+      | Plan Name | <planname> |
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+      Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug4> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug5> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug6> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug7> |
+    Then the user edits supply length to three months for following drug  
+      | EditDrug | <drug5> |
+    Then the user validates all added drugs in DrugList  
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page   
+    Then the user validates planName matches plan Name in VPP
+    Then the user Captures Drug costs on Drug Details Page
+    Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+      | Brand Drug   | <brandDrug1>   |
+      | Generic Drug | <genericDrug1> |
+    Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+      | Brand Drug   | <brandDrug2>   |
+      | Generic Drug | <genericDrug2> |
+   Then the user validates following expected Premium on DCE Details Page
+      | Premium | <premium> |
+   Then the user verify the Retail chain pharmacy on detail page   
+   And the user validates link to Drug Summary Page
+     
+    
+    
+     Examples: 
+      | Scenario           | site  | path                                                                                   | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium |                     
+      | E2E Scenario 4_UMS | AARP  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 
+    

@@ -1170,8 +1170,9 @@ public class VppCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		aquisitionhomepage.navigateToPath(path);
-		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToPathNew(path);
+		//Thread.sleep(5000);
+		//VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		//	getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
