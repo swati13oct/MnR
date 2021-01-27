@@ -13,11 +13,11 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for DCE REdesign - Scenario for VPP Plan Summary Page for MAPD Plans on UHC
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEVPPPlanSummaryIntegrationUHC01.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEVPPPlanSummaryIntegrationUHC01")
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEVPPPlanSummaryIntegrationUHC02.json",detailedReport = true,
+ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEVPPPlanSummaryIntegrationUHC02")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanSummaryIntegrationUHC01.json" }, tags = { "DCE_Redesign_VPP_PlanSummary_MAPD_UHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEVPPPlanSummaryIntegrationUHC02.json" }, tags = { "@VPP_NBA_DCE_Redesign_Integration_UHC" })
 
-public class RunMRATDDAcqDCEVPPPlanSummaryIntegrationUHC01 {
+public class RunMRATDDAcqDCEVPPPlanSummaryIntegrationUHC02 {
 
 }
