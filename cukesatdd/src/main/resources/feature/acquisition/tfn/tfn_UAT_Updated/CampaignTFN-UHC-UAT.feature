@@ -14,10 +14,11 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
        | TFN Xpath | <TFNxpath> |
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    Then the user navigates to MA Plan Details Page and validates Federal TFN
-    	  | Zip Code        | <zipcode>|
+  		Then the user enter zipcode in homepage
+    		 | Zip Code        | <zipcode>         |
+    		    | Plan Type | <MAplantype> | 
  		Then the user validates TFN Number
-       | TFN No | <TFNNo> |
+       | TFN No    | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
     Then the user navigate to following MedED Pages URL and validate Federal TFN
        | MedEd URL | <medicareUrl> |
@@ -110,22 +111,82 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
+     Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |         
+       Then the user enter zipcode in homepage for External Links
+        	 | Zip Code | <zipcode>         |
+    		  | Plan Type | <MAplantype> |  
+    Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |         		   
       Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedEd URL | <connectUrl> |
-      | TFN Xpath   | <connectTFN> | 
+         Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <ConnectTFNxpath> | 
    Then the user navigates to following MA Plan Page URL and validate Federal TFN
       | MA URL    | <maUrl> |
       | TFN Xpath | <maTFN> |
-      Then the user navigates to MA OLE Page and validates Federal TFN in UHC
-   Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-   Then the user navigates to PDP Plan Details Page and validates Federal TFN in UHC
-   Then the user navigates to PDP OLE Page and validates Federal TFN in UHC
-   Then the user navigates to SNP Plan Details Page and validates Federal TFN in UHC
-   Then the user navigates to SNP OLE Page and validates Federal TFN in UHC
+         Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> | 
+     Then the user enter zipcode in homepage for External Links
+    		 | Zip Code     | <zipcode>    |
+    		 | Plan Type    | <MAplantype> | 
+   	Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
+    Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+       | Plan Type | <MAplantype> |
+ 			Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+     Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+    | Plan Type | <MAplantype> |
+     Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <EnrollTFNxpath> |
+    #Then the user validates PSC code
+     # | PSC Code | <pscCode> |
+    #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+    	#| Zip Code        | <zipcode>|
+    	Then the user navigates back to page
+    	   Then the user navigates to plan tab for any plan
+        | Plan Type | <MSplantype> |
+     Then the user validates TFN Number
+       | TFN No | <MedsuppTFNNo> |
+       | TFN Xpath | <MedsuppTFNxpath> |      
+       Then the user navigates back to page
+    Then the user navigates to plan tab for any plan
+        | Plan Type | <PDPplantype> |
+  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <PDPplantype> |
+  Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+  Then the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN
+    | Plan Type | <PDPplantype> |
+   Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <EnrollTFNxpath> |
+    Then the user navigates back to page
+    Then the user navigates to plan tab for any plan
+        | Plan Type | <SNPplantype> |
+  Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <SNPplantype> |  
+   Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
+   Then the user navigates to Plan Details Page for any SNP plan for Enroll and validates Federal TFN
+    | Plan Type | <SNPplantype> |
+   Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+        | TFN Xpath | <EnrollTFNxpath> |
     Examples: 
-     |scenario             | site    |pscCode  | campaignUrl                                                                 | maUrl                                    |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |medSuppUrl|medSuppTFN|shoppages|shoppagesTFN|connectUrl|connectTFN|
-     |Scenario 2 - UMS     | blayer | 8003728 | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary  | enroll/ma-enrollment.html   |  (//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]  | enroll/pdp-enrollment.html | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |shop/medicare-supplement-plans.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[2]|/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]|/contact-us.html |  //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |
-   
+    |scenario             | site    |pscCode  |zipcode| campaignUrl                                                                                                   | maUrl                                    |   connectUrl   |TFNNo           |MedsuppTFNNo   |TFNxpath                          | MedsuppTFNxpath                  |            EnrollTFNxpath        |  ConnectTFNxpath                     |MAplantype |MSplantype|PDPplantype|SNPplantype|
+    |Scenario 2 - UMS     | blayer | 8003728  | 90210 |health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8003728&county=053&state=27#/plan-summary  | enroll/ma-enrollment.html                |/contact-us.html|1-855-448-4586  |1-866-271-0607 |(//a[contains(@class, 'tel')])[1] |//*[contains(@class,'tel right')] |(//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[1]/u  | MA        |MS|PDP|SNP|
+  
    
    
    #######################Script 5: Email Validation########################################
