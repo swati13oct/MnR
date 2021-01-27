@@ -2398,8 +2398,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Sub Nav - Learn about Medicare - All links and element not found / displayed on page");
 		}
 
-		MobileMenuBackBtn.click();
-		MobileMenuCloseNavigationBtn.click();
+		
+		jsClickNew(MobileMenuBackBtn);
+	
+		jsClickNew(MobileMenuCloseNavigationBtn);
 
 	}
 
@@ -2624,6 +2626,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateCallpopup() throws InterruptedException {
+		
+	
 
 		// CommonUtility.checkPageIsReady(driver);
 		System.out.println(callsam.getText());

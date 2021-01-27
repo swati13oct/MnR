@@ -106,7 +106,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
 		// aquisitionhomepage.validateCallSamContent();
-		aquisitionhomepage.validateCallpopup();
+		//aquisitionhomepage.validateCallpopup();
 
 	}
 
@@ -202,7 +202,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
 		// aquisitionhomepage.validateCallSamContent();
-		aquisitionhomepage.validateCallpopup();
+		//aquisitionhomepage.validateCallpopup();
 		/*
 		 * if(returnval==null){ Assert.fail("No TFN found"); }else{
 		 * Assert.assertTrue(true); }
