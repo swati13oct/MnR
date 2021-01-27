@@ -14,7 +14,7 @@ jsonReport = "target/cucumber-RunMRATDDRegressionProviderSearch_CodeWarriorsPROD
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDRegressionProviderSearch_CodeWarriorsPROD")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.memberredesign" }, 
 features = { "src/main/resources/feature/memberredesign/providerSearch/providerSearch1.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProviderSearch_CodeWarriorsPROD.json" }, tags = { "@@regressionMemberPROD" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDRegressionProviderSearch_CodeWarriorsPROD.json" }, tags = { "@regressionMemberPROD" })
 public class RunMRATDDRegressionProviderSearch_CodeWarriorsPROD {
 
 }
