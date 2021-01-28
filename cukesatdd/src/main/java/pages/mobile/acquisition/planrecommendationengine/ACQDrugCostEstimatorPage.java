@@ -112,7 +112,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'Add to drug List')]")
 	private WebElement addToDrugList;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Pharmacy:')]")
 	private WebElement PharmacyType;
 
@@ -169,7 +169,6 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 					switchGeneric = true;
 				threadsleep(2000);
 				jsClickNew(drugAddBtn);
-				// drugAddBtn.click();
 				threadsleep(2000);
 				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
@@ -191,28 +190,26 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public void addDrugbySearchDCE(String drugName, boolean searchButtonClick, String dosage, String packageName,
 			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
 		try {
-			jsClickNew(addMyDrug);
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
 			drugsearchBox.clear();
-			drugsearchBox.sendKeys(drugName);
+			jsSendkeys(drugsearchBox, drugName);
 			if (searchButtonClick) {
-				// drugsearchButton.click();
-				jsClickNew(drugsearchButton);
-				// Select modal
-				validate(searchList.get(0), 30);
-				threadsleep(2000);
-				for (WebElement elm : searchList) {
-					if (elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
-						elm.findElement(By.cssSelector("button")).click();
-						break;
-					}
+			jsClickNew(drugsearchButton);
+			//Select modal
+			validate(searchList.get(0), 30);
+			threadsleep(2000);
+			for(WebElement elm:searchList) {
+				if(elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
+					jsClickNew(elm.findElement(By.cssSelector("button")));
+					break;
 				}
-				threadsleep(2000);
-			} else {
-				threadsleep(5000);
-				drugsAutoList.get(0).click();
 			}
+			threadsleep(2000);
+		} else {
+			threadsleep(10000);
+			jsClickNew(drugsAutoList.get(0));
+		}
 
 			validate(modalDosageSelect, 30);
 			threadsleep(2000);
@@ -235,16 +232,14 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
-			// addDrugButton.click();
-			jsClickNew(addToDrugList);
+			jsClickNew(addDrugButton);
 			// Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {
 			System.out.println("Unable to add drug");
 		}
 	}
 
-	
-	public void getDruglist(){
+	public void getDruglist() {
 		PlanRecommendationEngineDrugsPageMobile drugPRE = new PlanRecommendationEngineDrugsPageMobile(driver);
 		druglistPRE = drugPRE.drugnamesList();
 		threadsleep(5000);
@@ -252,14 +247,14 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		getDrugsDCE();
 		drugPRE.verifyConfirmationmodalResults(druglistPRE.size(), druglistPRE, DCEDrugsResults);
 	}
-	
+
 	public void Pharmacytype() {
 		threadsleep(5000);
 		validate(PharmacyType);
-//		Assert.assertTrue(PharmacyType.getText().contains("  WALGREENS "),
-//				"Pharmacy is not default online");
+		// Assert.assertTrue(PharmacyType.getText().contains(" WALGREENS "),
+		// "Pharmacy is not default online");
 	}
-	
+
 	public void useraddDrugsDCEWithoutVPP(String drugDetails) {
 		threadsleep(5000);
 		drugsHandlerWithdetails(drugDetails);
@@ -271,13 +266,15 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		validateNew(drugcount, 30);
 		int count = Integer.parseInt(drugcount.getText().split("drugs")[0].split(" ")[2]);
 		vppDrugsResults = new ArrayList<String>();
-		for (int i = count-1; i >= 0; i--){
-			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace("(Brand)", "").toUpperCase()+ "" +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("Qty ", "").replace(", refill", "").toUpperCase());
+		for (int i = count - 1; i >= 0; i--) {
+			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText()
+					.trim().replace("(Brand)", "").toUpperCase() + ""
+					+ drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim()
+							.replace("Qty ", "").replace(", refill", "").toUpperCase());
 		}
 		Collections.sort(vppDrugsResults);
-		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
-		System.out.println("DrugList in DCE Content is : "+vppDrugsResults);
+		System.out.println("DrugsList in DCE Size is : " + vppDrugsResults.size());
+		System.out.println("DrugList in DCE Content is : " + vppDrugsResults);
 		return vppDrugsResults;
 	}
 

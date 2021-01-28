@@ -158,6 +158,7 @@ public class OLEStepDefinitionMobile {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String PlanName = givenAttributesMap.get("Plan Name");
+		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		// String PlanName = (String)
 		// getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
@@ -166,7 +167,7 @@ public class OLEStepDefinitionMobile {
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		String TFN;
+		
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
@@ -196,7 +197,8 @@ public class OLEStepDefinitionMobile {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-	//	getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);

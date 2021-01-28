@@ -286,7 +286,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@FindBy(css = "#plan-list-1 div.module-plan-overview:nth-child(1) .drugs-list div[class*='drug-info-container']")
 	private List<WebElement> DrugsNames;
 
-	@FindBy(css = "a#selector")
+	@FindBy(xpath = "//*[contains(@class,'get-started-banner')]//button[contains(text(),'Get Started')]")
 	private  WebElement StartNowButton;
 
 	// Start Over Popup

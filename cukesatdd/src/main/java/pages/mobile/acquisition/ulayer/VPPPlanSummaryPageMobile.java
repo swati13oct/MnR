@@ -128,7 +128,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'pop-btn-1')]")
 	private WebElement keepShoppingBtn;
 
@@ -1033,7 +1033,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// note: add sleep for timing issue, tried increase timeout from
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
-			//sleepBySec(2);
+			// sleepBySec(2);
 			System.out.println("PDP Plan Type Clicked");
 			validateNew(planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
@@ -2914,6 +2914,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ listOfAppearedSavedText.size() + "'", listOfAppearedSavedText.size() == expMatch);
 		}
 	}
+
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String planTypePath = "";
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
@@ -4273,7 +4274,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
 		if (learnMore != null) {
-			validateNew(learnMore,20);
+			validateNew(learnMore, 20);
 			switchToNewTabNew(learnMore);
 		}
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
@@ -4283,8 +4284,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Validated Rocky Mountian Logo");
 
 		}
-		
-		
+
 	}
 
 	public void peopleLearnMoreButtonandValidate(String planName) throws InterruptedException {
