@@ -182,7 +182,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
         | TFN No | <TFNNo1> |
         | TFN Xpath | <MedSuppTFNxpath> |
     ################ # Precedence 6.13 - Visit AMP using Campign URL , PSC code 8001533################
-        Given the user is on following acquisition site from Campaign Traffic
+      Then the user close and reopen the broswer
+      Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaign4Url> |
       Then the user validates TFN Number
