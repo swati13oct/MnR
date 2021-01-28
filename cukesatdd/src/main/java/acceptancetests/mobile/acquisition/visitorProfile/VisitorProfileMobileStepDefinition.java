@@ -172,6 +172,7 @@ public class VisitorProfileMobileStepDefinition {
 	public void navigate_to_Visitor_Profile_page() {
 		ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		VisitorProfilePageMobile visitorProfilePage = comparePlansPage.navigateToVisitorProfilePage();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}

@@ -542,6 +542,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 	}
 
+
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");

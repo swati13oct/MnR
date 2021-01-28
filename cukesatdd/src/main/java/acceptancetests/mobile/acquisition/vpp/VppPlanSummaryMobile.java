@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -69,8 +70,11 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.pageloadcomplete();
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
+		
+		
 	}
 
 	@Then("^the user validates marketing bullets of the plan$")
@@ -181,7 +185,8 @@ public class VppPlanSummaryMobile {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.toolTipForAnnualDeductible(planName);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+			//plansummaryPage.toolTipForAnnualDeductible(planName);
 			plansummaryPage.viewPlanSummary(planType);
 		}
 	}

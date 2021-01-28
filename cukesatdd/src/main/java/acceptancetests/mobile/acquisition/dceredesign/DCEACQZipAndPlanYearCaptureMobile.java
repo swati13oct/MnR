@@ -170,6 +170,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 	public void user_should_be_navigated_to_Review_drug_cost_estimate_page_in_AARP() {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		zipCodePlanYearPage.verifyReviewDrugCostPageDisplayed();
 	}
 

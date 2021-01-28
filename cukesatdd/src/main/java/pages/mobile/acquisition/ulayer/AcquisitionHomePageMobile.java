@@ -1496,14 +1496,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
+		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
-		// sendkeys(zipCodeField, zipcode);
-		zipCodeField.sendKeys(zipcode);
-		// viewPlansButton.click();
+
+		sendkeysNew(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
 
-		// CommonUtility.checkPageIsReadyNew(driver);
 		pageloadcomplete();
+
 		validateNew(vppTop, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -1747,7 +1747,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
+	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
@@ -1755,7 +1755,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
-			return new pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile(driver);
+			return new ProviderSearchPageMobile(driver);
 
 		}
 		return null;
@@ -2627,23 +2627,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void validateCallpopup() throws InterruptedException {
 
-		// CommonUtility.checkPageIsReady(driver);
-		System.out.println(callsam.getText());
-		callsam.click();
-		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-		driver.switchTo().activeElement();
-		System.out.println(CallSamTFN.getText());
+		/* Mobile does not show callSam popup hence verifying callSam icon */
+		validateNew(callsam, 5);
+		// // CommonUtility.checkPageIsReady(driver);
+		// System.out.println(callsam.getText());
+		// callsam.click();
+		// System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		// driver.switchTo().activeElement();
+		// System.out.println(CallSamTFN.getText());
+		// // CallSamTFNClose.click();
+		// // validateNew(callsam);
+		// // return null;
+		// if (CallSamTFN.getText().isEmpty()) {
+		// // return null;
+		// Assert.fail("TFN number was not found on the SAM call Popup");
+		// } else {
 		// CallSamTFNClose.click();
 		// validateNew(callsam);
-		// return null;
-		if (CallSamTFN.getText().isEmpty()) {
-			// return null;
-			Assert.fail("TFN number was not found on the SAM call Popup");
-		} else {
-			CallSamTFNClose.click();
-			validateNew(callsam);
-			// return new AcquisitionHomePage(driver);
-		}
+		// // return new AcquisitionHomePage(driver);
+		// }
 	}
 
 	public void validateChatSam() throws InterruptedException {
@@ -3416,7 +3418,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				Assert.fail("Visit AARP link did not lead to the right page");
 			} else {
 				Assert.assertTrue(true, "Navigated to AARP org page");
-				driver.close();
+				// driver.close();
 				// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			}
 		}

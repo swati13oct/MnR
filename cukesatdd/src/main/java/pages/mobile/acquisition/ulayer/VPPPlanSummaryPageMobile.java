@@ -30,6 +30,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
+import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -127,6 +128,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[@id='popupClose']")
 	private WebElement closeProfilePopup;
+	
+	@FindBy(xpath = "//*[contains(@id,'pop-btn-1')]")
+	private WebElement keepShoppingBtn;
 
 	@FindBy(xpath = ".//*[@id='site-wrapper']/div[4]/div/div[1]/div[1]/div/div/div[1]/div/div/div[1]/div[2]/div/div[2]/div[3]/div/span[3]")
 	private WebElement showPdpPlans;
@@ -1029,7 +1033,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// note: add sleep for timing issue, tried increase timeout from
 			// waitForPageLoadNew but didn't work
 			jsClickNew(pdpPlansViewLink);
-			sleepBySec(2);
+			//sleepBySec(2);
 			System.out.println("PDP Plan Type Clicked");
 			validateNew(planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
@@ -2804,9 +2808,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 
-		String subPath = determineSubpath(planType);
-		String headerPath = determineHeaderPath(planType);
-
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out
 				.println("Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
@@ -2838,7 +2839,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 			System.out.println("Proceed to validate 'Saved Plan' icon will not appear before 'Save Plan' is clicked");
 			String savedPlanIconXpath = "//*[contains(text(),'" + plan
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]"
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'added')]"
 					+ savedPlanImgXpath;
 			System.out.println("TEST - savedPlanIconXpath xpath=" + savedPlanIconXpath);
 			List<WebElement> listOfSavedPlanIcons = driver.findElements(By.xpath(savedPlanIconXpath));
@@ -2850,35 +2851,38 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);",
-					listOfSavePlanIcons.get(0));
-			((JavascriptExecutor) driver).executeScript("arguments[0].click();", listOfSavePlanIcons.get(0));
+			WebDriverWait d = new WebDriverWait(driver, 20);
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
-			if (validate(closeProfilePopup))
-				closeProfilePopup.click();
+
+			if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
+				if (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania")
+						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico")
+						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {
+					if (validate(closeProfilePopup))
+						jsClickNew(closeProfilePopup);
+				} else {
+					if (validate(keepShoppingBtn))
+						jsClickNew(keepShoppingBtn);
+				}
+			} else {
+				if (validate(keepShoppingBtn))
+					jsClickNew(keepShoppingBtn);
+			}
 			CommonUtility.checkPageIsReady(driver);
 
-			// clicking the saved heart to validate it goes back to unsaved
+			System.out.println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it");
+			System.out.println("TEST - initial_savePlanLIconXpath xpath=" + initial_savePlanIconXpath);
 			/*
-			 * String afterSavePlanIconXpath=headerPath+"//*[contains(text(),'"+
-			 * plan+"')]/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@class,'js-favorite-plan favorite-plan ng-scope added')]//img[contains(@src,'ic_favorite-unfilled.png')]"
+			 * String afterSavePlanIconXpath=headerPath+"[contains(text(),'"+plan+"')]"+
+			 * subPath+"//button[contains(@class,'savePlan') and contains(@style,'block')]//img[contains(@src,'ic_favorite-unfilled.png')]"
 			 * ; listOfSavePlanIcons=driver.findElements(By.xpath(afterSavePlanIconXpath));
-			 * ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-			 * listOfSavePlanIcons.get(0));
-			 * 
-			 * System.out.
-			 * println("Proceed to validate 'Save Plan' link and icon disappeared after clicking it"
-			 * ); System.out.println("TEST - initial_savePlanLIconXpath xpath="
-			 * +initial_savePlanIconXpath); expMatch=0; Assert.
+			 * expMatch=0; Assert.
 			 * assertTrue("PROBLEM - 'Save Plan' icon should have disappeared after click for ='"
 			 * +plan+"'.  Expect number of match='"+expMatch+"' | Actual number of match='"
 			 * +listOfSavePlanIcons.size()+"'",listOfSavePlanIcons.size()==expMatch);
-			 * 
-			 * //clicking the save heart option again and validate it was saved
-			 * listOfSavePlanIcons=driver.findElements(By.xpath(initial_savePlanIconXpath));
-			 * ((JavascriptExecutor) driver).executeScript("arguments[0].click();",
-			 * listOfSavePlanIcons.get(0));
 			 */
 			System.out.println("Proceed to validate 'Saved Plan' icon will appear after 'Save Plan' is clicked");
 			String appeared_savedPlanIconXpath = "";
@@ -2910,7 +2914,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ listOfAppearedSavedText.size() + "'", listOfAppearedSavedText.size() == expMatch);
 		}
 	}
-
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String planTypePath = "";
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
@@ -2993,25 +2996,32 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public VPPPlanSummaryPageMobile navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
+		Actions action = new Actions(driver);
+		action.moveToElement(planOverviewChangeZipCodeLink).build().perform();
 		try {
 			// if change zip code link is there then click it, once you used it then it will
 			// only display field box going forward.
-			planOverviewChangeZipCodeLink.click();
+			jsClickNew(planOverviewChangeZipCodeLink);
 		} catch (Exception e) {
 			System.out.println(
 					"Change ZipCode link already not on the page, proceed to update zipcode for search directly");
 		}
 		// if field box already there then clear it if left over text from prior run
-		planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
-		planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
+		// Commenting since there is no Control key on a Mac machine
+		/*
+		 * planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
+		 * planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
+		 */
+		planOverviewZipCodeFieldBox.clear();
+
 		// enter zipcode
 		planOverviewZipCodeFieldBox.sendKeys(zipcode);
-		planOverviewFindPlanButton.click();
+		jsClickNew(planOverviewFindPlanButton);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county case");
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
 		sleepBySec(3);
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
@@ -4263,7 +4273,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
 		if (learnMore != null) {
-			validateNew(learnMore);
+			validateNew(learnMore,20);
 			switchToNewTabNew(learnMore);
 		}
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
@@ -4273,6 +4283,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Validated Rocky Mountian Logo");
 
 		}
+		
+		
 	}
 
 	public void peopleLearnMoreButtonandValidate(String planName) throws InterruptedException {

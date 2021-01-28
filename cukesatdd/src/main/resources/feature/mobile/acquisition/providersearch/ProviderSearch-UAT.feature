@@ -73,7 +73,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     @ProviderSearchCommon_AARP @ProviderSearchCommon_Prod_AARP @ProviderSearchFromVppPlanDetailsPageUlayer
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                | planyear |
-      | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | current  |
+      | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Plan 1 (HMO) | current  |
 
     #@ProviderSearchCommon_UHC @ProviderSearchCommon_Prod_UHC @ProviderSearchFromVppPlanDetailsPageBlayer
     #Examples: 
