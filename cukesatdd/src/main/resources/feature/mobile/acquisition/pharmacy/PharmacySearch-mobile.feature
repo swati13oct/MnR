@@ -79,7 +79,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
       | Is Multi County | <isMultutiCounty> |
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <planType> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
+   # Then user validates plan count for all plan types on plan summary page in the AARP site
     And the user selects the first plan to view plan detail
       | Plan Type | <planType> |
     And the user navigates to pharmacy locator page using Online pharmacy directory link

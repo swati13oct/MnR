@@ -394,14 +394,14 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath="//a[text()='Online pharmacy directory']")
 	protected WebElement vpp_onlinePharmacyDirectoryLnk;
 	
-	@FindBy(xpath="//div[@ng-show='showMaPlans']//a[contains(text(),'View plan and drug coverage details') or contains(text(),'View Plan Details')]")
-	protected List<WebElement> listOfMaPlans;
+	@FindBy(xpath="//*[@id=\"plan-H0609012000\"]/h3/a")
+	protected WebElement listOfMaPlans;
 	
-	@FindBy(xpath="//div[@ng-show='showPdpPlans']//a[contains(text(),'View plan and drug coverage details') or contains(text(),'View Plan Details')]")
-	protected List<WebElement> listOfPdpPlans;
+	@FindBy(xpath="//*[@id=\"favouriteplanSelectS5921408000\"]")
+	protected WebElement listOfPdpPlans;
 	
-	@FindBy(xpath="//div[@ng-show='showSnpPlans']//a[contains(text(),'View plan and drug coverage details') or contains(text(),'View Plan Details')]")
-	protected List<WebElement> listOfSnpPlans;
+	@FindBy(xpath="//*[@id=\"plan-H4590022000\"]/span/h3/a")
+	protected WebElement listOfSnpPlans;
 	
 	@FindBy(xpath="//div[contains(@class,'footnotes') and not(contains(@class,'ng-hide'))]//span[contains(text(),'Footnotes')]")
 	protected WebElement vppDetailSectionHeader;

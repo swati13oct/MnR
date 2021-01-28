@@ -615,15 +615,17 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	}
 
 	public void vppSelectFirstPlanViewDetail(String planType) {
-		List<WebElement> testElementList=listOfMaPlans;
+		WebElement testElementList= listOfMaPlans;
 		if (planType.equalsIgnoreCase("PDP")) 
 			testElementList=listOfPdpPlans;
 		else if (planType.equalsIgnoreCase("SNP"))
 			testElementList=listOfSnpPlans;
-		Assert.assertTrue("PROBLEM - unable to locate plan for planType='"+planType+"'", testElementList.size()>0);
-		testElementList.get(0).click();
+		Assert.assertTrue("PROBLEM - unable to locate plan for planType='"+planType+"'", testElementList.isDisplayed());
+		jsClickNew(testElementList);
 		CommonUtility.checkPageIsReady(driver);
+		waitForPageLoadSafari();
 	}
+
 
 	/**
 	 * Click online directory link from the plan detail page to access the pharmacy locator page
@@ -635,10 +637,11 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 */
 	public void clickDirectoryLnk(String isMultiCounty, String countyName) {
 		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 5);
-		moveMouseToElement(vppDetailSectionHeader);
+		scrollToView(vpp_onlinePharmacyDirectoryLnk);
 		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));
-		vpp_onlinePharmacyDirectoryLnk.click();
+		//vpp_onlinePharmacyDirectoryLnk.click();
+		jsClickMobile(vpp_onlinePharmacyDirectoryLnk);
 		CommonUtility.checkPageIsReady(driver);
 		//	Thread.sleep(2000); //note: keep this for the page to load
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());

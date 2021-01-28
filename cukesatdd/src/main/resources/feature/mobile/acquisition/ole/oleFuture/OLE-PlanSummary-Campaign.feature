@@ -6,13 +6,17 @@
     	|Site| <site>|
      # | PageName | <pageName> |
       | PagePath | <path>     |
+       When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
   	And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
     	|Plan Year	| <planyear>|
 		And the user validates the available plans for selected plan types
-    #Then the user clicks on Enroll Now for AARP site to start the OLE flow
-    Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+   # Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
@@ -100,16 +104,17 @@
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from  Acquisition PDP Campaign URL VPP Plan Summary
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|
-		Given the user navigates to following Campaign acquisition site page
-     # | PageName | <pageName> |
-      | PagePath | <path>     |
+    	   When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
   	And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
     	|Plan Year	| <planyear>|
 		And the user validates the available plans for selected plan types
-    #Then the user clicks on Enroll Now for AARP site to start the OLE flow
-    Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+#    Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail

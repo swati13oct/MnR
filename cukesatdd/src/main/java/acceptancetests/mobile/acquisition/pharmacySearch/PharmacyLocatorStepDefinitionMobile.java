@@ -143,7 +143,36 @@ public class PharmacyLocatorStepDefinitionMobile {
 		pharmacySearchPage = pharmacySearchPage.validatePharmacyErrormessages(language, inputZip);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
+	@Then("^the user navigates to pharmacy locator page using Online pharmacy directory link$")
+	public void clickOnlinePharmacyDirectoryLink(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String isMultiCounty = inputAttributesMap.get("Is Multi County");
+		String countyName = inputAttributesMap.get("County Name");
+		//note: do not remove following two lines - otherwise will get NPE
+		WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPageMobile pharmacySearchPage=new PharmacySearchPageMobile(testDriver);
+		//tbd PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		//tbd 		.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickDirectoryLnk(isMultiCounty, countyName);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, testDriver);
+	}
 	
+	
+	@Then("^the user selects the first plan to view plan detail$")
+	public void selectFirstPlanViewDetail(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		String planType = inputAttributesMap.get("Plan Type");
+		//note: do not remove following two lines - otherwise will get NPE
+		WebDriver testDriver=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PharmacySearchPageMobile pharmacySearchPage=new PharmacySearchPageMobile(testDriver);
+		//tbd PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+		//tbd 		.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.vppSelectFirstPlanViewDetail(planType);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
+				pharmacySearchPage);
+		//note: do not remove following line - otherwise will get NPE
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, testDriver);
+	}
 	/** user enters following details for pharmacy search */
 	@And("^the user enters following detail for pharmacy search mobile$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable inputAttributes) {
