@@ -3,12 +3,9 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 #######################Script 1: Direct traffic########################################
    @Scenario_1_2_DirectTraffic__UHC_UAT @UATRegression 
   Scenario Outline: <scenario>  Verify TFN in VPP Plan Details and OLE pages, DCE,
-    #Given the user is on the uhcmedicaresolutions site landing page
-    #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Given the user is on medicare acquisition site landing page
+   Given the user is on medicare acquisition site landing page
    		|Site| <site>|
-   #	Given the user is on the uhcmedicaresolutions site landing page
-		And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+  And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
@@ -36,14 +33,10 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
   Then the user validates TFN Number
        | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-   #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-   	 # | Zip Code        | <zipcode>|
-   	 Then the user navigates back to page
+    Then the user navigates back to page
      Then the user navigates to plan tab for any plan
         | Plan Type | <MSplantype> |
-  #Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
-      #| Plan Type | <MSplantype> |  
-   	Then the user validates TFN Number
+ Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |
     Then the user navigates to plan tab for any plan
@@ -59,27 +52,26 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
        | TFN No | <TFNNo> |
         | TFN Xpath | <EnrollTFNxpath> |
     Then the user navigates back to page
- #Then the user navigates to PDP Plan Details Page and validates Federal TFN
- 	#| Zip Code        | <zipcode>|
- #Then the user navigates to PDP OLE Page and validates Federal TFN
- #	| Zip Code        | <zipcode>|
  Then the user navigates to homepage validates Federal TFN
-  #And the user selects the state drop down value in AARP home page
-    # | State | <state> |
    #And the user clicks on the shopping cart icon in UHC site
    And the user clicks on the shopping cart icon
-  	#And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
+  	Then the user validates PSC code
       | PSC Code | <pscCode> |
  		Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
+	 #---------------commenting the lines from 1.09 to 1.12 as mentioned by UAT related to Authenticated user -----------------#
+		Then the user signs in with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
 	And the user clicks on the add plans button in the profile
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-   # And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    Then the user validates PSC code
+  Then the user validates PSC code
       | PSC Code | <pscCode> | 
      Then the user navigates to plan tab for any plan
         | Plan Type | <MAplantype> |  
@@ -93,11 +85,12 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <DCETFNxpath> |
-
+ 		#---------------Removing the above lines from 1.09 to 1.12-----------------#
+  	
 
     Examples: 
-      | scenario         | site |zipcode|TFNNo          |isMultutiCounty | county                |pscCode | maUrl                     | pdpUrl                        |  snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                |  medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype|MAplantype|TFNxpath                         |MedsuppTFNxpath                  |DCETFNxpath|MSplantype|EnrollTFNxpath|
- 			| Scenario 1 - UMS | UHC  |90210  |1-877-596-3258 |NO              | Baldwin County        | 880180 | enroll/ma-enrollment.html |  shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true  |  medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP        |MA        |(//a[contains(@class, 'tel')])[1]|//*[contains(@class,'tel right')]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|MS|(//a[contains(@class, 'tel')])[3] |
+      | scenario         | site |zipcode|TFNNo          |isMultutiCounty | county                |pscCode | maUrl                     | pdpUrl                        |  snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                |  medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype|MAplantype|TFNxpath                         |MedsuppTFNxpath                  |DCETFNxpath|MSplantype|EnrollTFNxpath|userName|password |
+ 			| Scenario 1 - UMS | UHC  |90210  |1-877-596-3258 |NO              | Baldwin County        | 880180 | enroll/ma-enrollment.html |  shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true  |  medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP        |MA        |(//a[contains(@class, 'tel')])[1]|//*[contains(@class,'tel right')]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|MS|(//a[contains(@class, 'tel')])[3] |TiggerOptumID39 | TiggerTigger1  |
      
   
    #######################Script 2: Campaign traffic########################################
@@ -249,6 +242,12 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
 	#And the user clicks on the add plans button in the profile
+	Then the user signs in with optum Id credentials in UHC site
+      | User Name | <userName> |
+      | Password  | <password> |
+    Then the user validates TFN Number
+        | TFN No | <TFNNo> |
+        | TFN Xpath | <TFNxpath> |
 	And the user clicks on the add plans button in the guest profile in UHC site
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
@@ -287,6 +286,6 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
       | PSC Code | <pscCode> | 
     Examples:  
        |scenario                       |site   |state    | pscCode | campaignUrl                                                                                                                                                                                                                                       | medEdURL1                                            | medEdTFN                                                | shoppagesUrl                          |  userName|password |TFNNo                |TFNxpath                         | EnrollTFNxpath                   | ShopTFNxpath                     |
-       |Scenerio 6-ExternalLink - UMS 	|blayer |Alabama  |8002977  | health-plans/medicare-advantage-plans/available-plans.html?zipcode=10001&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary             |   /medicare-articles.html                            |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html  |mnrqavd11|Password@1| 1-877-755-5345      |(//a[contains(@class, 'tel')])[1]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |  
+       |Scenerio 6-ExternalLink - UMS 	|blayer |Alabama  |8002977  | health-plans/medicare-advantage-plans/available-plans.html?zipcode=10001&WT.mc_id=8002977&county=420&state=36&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary             |   /medicare-articles.html                            |         (//span[@class='heading-6']//u)[1]              |  shop/medicare-supplement-plans.html  |TiggerOptumID39 | TiggerTigger1  | 1-877-755-5345      |(//a[contains(@class, 'tel')])[1]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |  
       
         

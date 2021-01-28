@@ -8,47 +8,90 @@ Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    #Then the user navigates to following MA Plan Page URL and validate Federal TFN
-      #| MA URL    | <maUrl> |
-     # | TFN Xpath | <maTFN> |
-     Then the user navigates to homepage validates Federal TFN
-     Then the user navigates to MA Plan Details Page and validates Federal TFN 
-          | Zip Code    | <zipcode>    |
+     Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath2> |
+     When the user performs plan search using Shop Pages for campaign Links
+     | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> | 
+     #Then the user navigates to plan tab for any plan
+       # | Plan Type | <MAplantype> | 
+      Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
      And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |  
+     Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
     Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedEd URL | <medicareeduUrl> |
       | TFN Xpath   | <medicareeduTFN> |
-      Then the user validates PSC code
-      | PSC Code | <pscCode> | 
+      Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
       Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedEd URL | <medicarearicleUrl> |
       | TFN Xpath   | <medicarearicleTFN> |
+      Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath2> |
        Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedEd URL | <medicareMadeclearUrl> |
       | TFN Xpath   | <medicareMadeclearTFN> |
+      Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath2> |
        Then the user navigate to following MedED Pages URL and validate Federal TFN
       | MedEd URL | <medicareEligibilityUrl> |
       | TFN Xpath   | <medicareEligibilityTFN> |
-      Given the user Starts WebDriver
+      Then the user validates TFN Number
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath2> |
+     #Given the user Starts WebDriver
     Given user is on Bing and search UHC Medicare Advantage Plan to navigate to navigate to UHC page
+    Then the user navigates to refresh page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
    Then the user validates PSC code
       | PSC Code | <Precedence1PSC> | 
-     Then the user navigates to homepage validates Federal TFN
-   	Then the user navigates to MA Plan Details Page and validates Federal TFN
-   	       | Zip Code    | <zipcode>    |
+      Then the user validates TFN Number
+       | TFN No | <TFNNo2> |
+       | TFN Xpath | <TFNxpath2> |
+     #Then the user navigates to homepage validates Federal TFN
+   	#Then the user navigates to MA Plan Details Page and validates Federal TFN
+   	      # | Zip Code    | <zipcode>    |
    	#Then the user validates PSC code
       #| PSC Code | <Precedence1PSC> | 
-   	Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-      Then the user navigates to PDP Plan Details Page and validates Federal TFN
-     Then the user navigate to following MedED Pages URL and validate Federal TFN
+    When the user performs plan search using Shop Pages for campaign Links
+     | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> | 
+     #Then the user navigates to plan tab for any plan
+       # | Plan Type | <MAplantype> | 
+      Then the user validates TFN Number
+       | TFN No | <TFNNo2> |
+       | TFN Xpath | <TFNxpath> |
+       Then the user navigates to plan tab for any plan
+        | Plan Type | <MSplantype> |
+ 		Then the user validates TFN Number
+       | TFN No | <MedsuppTFNNo> |
+       | TFN Xpath | <MedsuppTFNxpath> |
+    Then the user navigates to plan tab for any plan
+        | Plan Type | <PDPplantype> |
+     Then the user validates TFN Number
+       | TFN No | <TFNNo2> |
+       | TFN Xpath | <TFNxpath> |
+   	Then the user navigate to following MedED Pages URL and validate Federal TFN
        | MedEd URL | <medicareeduUrl> |
       | TFN Xpath   | <medicareeduTFN> |
+      Then the user validates TFN Number
+       | TFN No    | <TFNNo2>    |
+       | TFN Xpath | <TFNxpath> |
     Examples: 
-   |scenario       | pscCode | Precedence1PSC|zipcode|maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                                  |medicarearicleUrl|medicarearicleTFN|medicareMadeclearUrl|medicareMadeclearTFN|medicareEligibilityUrl|medicareEligibilityTFN|
-   |Sc. 3.08 - AMP |  880188 |  880187       |90210  | shop/medicare-advantage-plans.html     | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]     |health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |/contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]      | /medicare-articles.html                 |  (//a[contains(@class, 'tel')])[1]               |   medicare-articles/medicare-made-clear.html                 |     (//a[contains(@class, 'tel')])[1]              |    medicare-articles/eligibility-and-enrollment.html                 |        (//a[contains(@class, 'tel')])[1]                |
+   |scenario       | pscCode | Precedence1PSC|zipcode|county           |isMultutiCounty|maUrl                                  |  medicareeduUrl                                                                | shoppages        |medicarearicleUrl        |medicareMadeclearUrl                            |medicareEligibilityUrl                              |MAplantype  | MSplantype | PDPplantype |TFNNo          | MedsuppTFNNo     | TFNNo2         |TFNxpath                            | MedsuppTFNxpath                    | TFNxpath2                           |
+   |Sc. 3.08 - UMS |  880188 |  880187       |90210  | New York County | NO            |shop/medicare-advantage-plans.html     |  /medicare-education/medicare-advantage-plans.html                             |  /contact-us.html| /medicare-articles.html |   medicare-articles/medicare-made-clear.html   |medicare-articles/eligibility-and-enrollment.html    |   MA       | MS         | PDP         |1-800-607-2877 | 1-888-378-0849   | 1-800-811-2341 | (//a[contains(@class, 'tel')])[1] | //*[contains(@class,'tel right')]  | (//a[contains(@class, 'tel')])[1]/u |
    
   @Scenario_4_1to8_Precedence_1_UHC_UAT @UATRegression
   Scenario Outline: <scenario> Campaign Precedence Logic No 1 for UHC

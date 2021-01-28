@@ -21,11 +21,12 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
 		Given user is on Bing and search AARP Medicare Advantage Plan to navigate to navigate to AARP page
+    Then the user navigates to refresh page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
    Then the user validates PSC code
       | PSC Code | <Precedence1PSC> | 
    	Then the user validates TFN Number
-       | TFN No | <TFNNo> |
+       | TFN No | <TFNNo1> |
        | TFN Xpath | <TFNxpath> |
      #Then the user enter zipcode in homepage
     		# | Zip Code        | <zipcode>         |
@@ -37,14 +38,14 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
      Then the user navigates to MA Plan Details Page and validates Federal TFN
      	| Zip Code        | <zipcode>|
    	Then the user validates TFN Number
-       | TFN No | <TFNNo> |
+       | TFN No | <TFNNo1> |
        | TFN Xpath | <TFNxpath> |	
      Then the user navigates to plan tab for any plan
         | Plan Type | <MSplantype> |
  # Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
       #| Plan Type | <MSplantype> |  
    	Then the user validates TFN Number
-       | TFN No | <TFNNo> |
+       | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |
            And the user retrieves TFNSessionCookie and Federal and MedSupp TFN	
    	Then the user validates PSC code
@@ -66,22 +67,22 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
   Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
       | Plan Type | <PDPplantype> |
      Then the user validates TFN Number
-        | TFN No | <TFNNo> |
+        | TFN No | <TFNNo1> |
         | TFN Xpath | <TFNxpath> |
   Then the user navigates to shop pages Page and validates Federal TFN
      | SHOPPAGES URL   | <shoppages> |
      	Then the user validates PSC code
       | PSC Code | <Precedence1PSC> | 
     Then the user validates TFN Number
-        | TFN No | <TFNNo> |
+        | TFN No | <TFNNo1> |
         | TFN Xpath | <TFNxpath> |
      Then the user navigate to following MedED Pages URL and validate Federal TFN
        | MedEd URL | <medicareeduUrl> |
      Then the user validates TFN Number
-        | TFN No | <TFNNo> |
+        | TFN No | <TFNNo1> |
         | TFN Xpath | <TFNxpath> |
     Examples: 
-    |scenario       | pscCode | Precedence1PSC|zipcode| maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                |TFNNo          |TFNxpath                              |TFNNo1              | TFNNo2         | MedsuppTFNxpath |
+    |scenario       | pscCode | Precedence1PSC|zipcode| maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                |TFNNo          |TFNxpath                              |TFNNo1              		| MedsuppTFNNo         | MedsuppTFNxpath |
     |Sc. 3.08 - AMP |  810106 |  810104       |90210  |shop/medicare-advantage-plans.html     | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]|health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]  |1-800-850-6807 |  (//a[contains(@class, 'tel')])[1]  | 1-877-608-5598     | 1-866-327-1593 | //*[contains(@class,'tel right')] |
 	
 

@@ -26,7 +26,8 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 	
-	@FindBy(css = "div.signupCTA a:first-child")
+//	@FindBy(css = "div.signupCTA a:first-child")
+	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign In']")
 	private WebElement signIn;
 	
 	@FindBy(css = "div.signupCTA a.profileBtn")
@@ -361,15 +362,16 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void signIn(String username,String password) {
 		try {
-			validate(signIn, 5);
 			jsClickNew(signIn);
 			waitForPageLoadSafari();
-			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+		//	driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+			//.sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
-			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");
@@ -384,8 +386,8 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
-			
+		//	CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}

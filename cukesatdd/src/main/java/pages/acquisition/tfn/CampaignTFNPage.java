@@ -120,9 +120,11 @@ public class CampaignTFNPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
 	private WebElement zipCodeShopField;
-	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
+	//@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
 	//@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
+	@FindBy(xpath = "//span[contains(text(),'Find Plans')]")
 	private WebElement ShopEnrollButton;
+	
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
 	private WebElement zipcodeChangeLink;
 	@FindBy(xpath = "//div[@class='modal-title']")
@@ -877,6 +879,14 @@ public class CampaignTFNPage extends UhcDriver {
 				driver.navigate().refresh();
 			}	
 			
+			
+public void validatecloseandReopenbroswer() throws InterruptedException {
+				
+			//	Thread.sleep(2000);
+				driver.close();
+		//
+			}
+			
 			@FindBy(xpath="(//button//span[contains(text(),'View plan') or contains(text(),'View Plan Details')])[1]")
 			private WebElement firstPlanDetailsLinkdce;
 
@@ -1063,5 +1073,43 @@ public class CampaignTFNPage extends UhcDriver {
 				jsClickNew(cancelButtonPopUp);
 				System.out.println("Cancel application has been clicked on the pop up");
 				return ResumeKey;
-			}			
+			}	
+			
+			public void closeOriginalTabAndOpenNewTab() {
+				
+			    //get original tab handler
+				String winHandleBefore = driver.getWindowHandle();
+				
+				System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
+				//open new tab
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+			    js.executeScript("window.open('about:blank','_blank');");
+				for(String winHandle : driver.getWindowHandles()){
+					if(!winHandle.equals(winHandleBefore)) {
+						driver.switchTo().window(winHandle);
+					}
+				}
+				String winHandleTmp = driver.getWindowHandle();
+				System.out.println("Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+				driver.switchTo().window(winHandleBefore);
+				driver.close();
+			    
+				driver.switchTo().window(winHandleTmp);
+				System.out.println("Proceed to open the acquisition url in new tab");
+			    js.executeScript("window.open('"+AARP_ACQISITION_PAGE_URL+"','_blank');");
+
+			    for(String winHandle : driver.getWindowHandles()){
+			    	if(!winHandle.equals(winHandleTmp)) {
+			    		driver.switchTo().window(winHandle);
+			    	}
+				}
+				String winHandleNew = driver.getWindowHandle();
+
+				System.out.println("Proceed to close the placeholder blank tab");
+				driver.switchTo().window(winHandleTmp);
+				driver.close();
+
+				System.out.println("Proceed to use this newly opened tab for remaining validation");
+				driver.switchTo().window(winHandleNew);
+			 }
 }

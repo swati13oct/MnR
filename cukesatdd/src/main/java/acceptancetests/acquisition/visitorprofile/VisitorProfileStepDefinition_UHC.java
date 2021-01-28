@@ -181,6 +181,7 @@ public class VisitorProfileStepDefinition_UHC {
 		
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.signIn(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 	
 	@And("^user delets all the added drugs on visitor profile page of UHC site$")

@@ -452,7 +452,8 @@ public class VisitorProfilePage extends UhcDriver {
 		try {
 			jsClickNew(signIn);
 			waitForPageLoadSafari();
-			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+		//	driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
@@ -472,7 +473,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+		//	CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");

@@ -999,6 +999,16 @@ public void the_user_navigates_to_Homepage() throws Throwable {
 	tfnPage.NavigateToHome();
 	
 }
+
+@Then("^the user close and reopen the broswer$")
+public void the_user_close_reopen_broswer() {
+		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+		//CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);		
+		tfnPage.closeOriginalTabAndOpenNewTab();
+	}
+
+
 }
 
 
