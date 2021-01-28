@@ -3421,7 +3421,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	private WebElement comparePgnHeader;
 
 	public ComparePlansPageMobile clickFirstComparePlanBtn(String plantype) {
-		firstComparePlanButton.click();
+		
+		jsClickMobile(firstComparePlanButton);
 		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);

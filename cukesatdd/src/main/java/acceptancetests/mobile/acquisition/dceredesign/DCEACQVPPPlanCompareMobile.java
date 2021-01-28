@@ -97,7 +97,7 @@ public class DCEACQVPPPlanCompareMobile {
 			plansummaryPage.checkAllPDPlans();
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(planType);
+		pages.mobile.acquisition.commonpages.ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(planType);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
