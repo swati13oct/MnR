@@ -3157,6 +3157,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
+		scrollToView(planOverviewChangeZipCodeLink);
 		Actions action = new Actions(driver);
 		action.moveToElement(planOverviewChangeZipCodeLink).build().perform();
 		try {
