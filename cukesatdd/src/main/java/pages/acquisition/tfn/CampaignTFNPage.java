@@ -1076,32 +1076,33 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 			}	
 			
 			public void closeOriginalTabAndOpenNewTab() {
-				
-			    //get original tab handler
+
+				// get original tab handler
 				String winHandleBefore = driver.getWindowHandle();
-				
+
 				System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
-				//open new tab
+				// open new tab
 				JavascriptExecutor js = (JavascriptExecutor) driver;
-			    js.executeScript("window.open('about:blank','_blank');");
-				for(String winHandle : driver.getWindowHandles()){
-					if(!winHandle.equals(winHandleBefore)) {
+				js.executeScript("window.open('about:blank','_blank');");
+				for (String winHandle : driver.getWindowHandles()) {
+					if (!winHandle.equals(winHandleBefore)) {
 						driver.switchTo().window(winHandle);
 					}
 				}
 				String winHandleTmp = driver.getWindowHandle();
-				System.out.println("Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+				System.out.println(
+						"Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
 				driver.switchTo().window(winHandleBefore);
 				driver.close();
-			    
+
 				driver.switchTo().window(winHandleTmp);
 				System.out.println("Proceed to open the acquisition url in new tab");
-			    js.executeScript("window.open('"+AARP_ACQISITION_PAGE_URL+"','_blank');");
+				js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
 
-			    for(String winHandle : driver.getWindowHandles()){
-			    	if(!winHandle.equals(winHandleTmp)) {
-			    		driver.switchTo().window(winHandle);
-			    	}
+				for (String winHandle : driver.getWindowHandles()) {
+					if (!winHandle.equals(winHandleTmp)) {
+						driver.switchTo().window(winHandle);
+					}
 				}
 				String winHandleNew = driver.getWindowHandle();
 
@@ -1111,5 +1112,5 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 
 				System.out.println("Proceed to use this newly opened tab for remaining validation");
 				driver.switchTo().window(winHandleNew);
-			 }
+			}
 }

@@ -28,15 +28,15 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
    	Then the user validates TFN Number
        | TFN No | <TFNNo1> |
        | TFN Xpath | <TFNxpath> |
-     #Then the user enter zipcode in homepage
-    		# | Zip Code        | <zipcode>         |
-    		 #   | Plan Type | <MAplantype> | 
-    	#Then the user navigates to plan tab for any plan
-       # | Plan Type | <MAplantype> |
+     Then the user enter zipcode in homepage
+    		 | Zip Code        | <zipcode>         |
+        | Plan Type | <MAplantype> | 
+    	Then the user navigates to plan tab for any plan
+        | Plan Type | <MAplantype> |
   #Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
       #| Plan Type | <MAplantype> |  
-     Then the user navigates to MA Plan Details Page and validates Federal TFN
-     	| Zip Code        | <zipcode>|
+    # Then the user navigates to MA Plan Details Page and validates Federal TFN
+     #	| Zip Code        | <zipcode>|
    	Then the user validates TFN Number
        | TFN No | <TFNNo1> |
        | TFN Xpath | <TFNxpath> |	
@@ -82,8 +82,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
         | TFN No | <TFNNo1> |
         | TFN Xpath | <TFNxpath> |
     Examples: 
-    |scenario       | pscCode | Precedence1PSC|zipcode| maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                |TFNNo          |TFNxpath                              |TFNNo1              		| MedsuppTFNNo         | MedsuppTFNxpath |
-    |Sc. 3.08 - AMP |  810106 |  810104       |90210  |shop/medicare-advantage-plans.html     | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]|health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]  |1-800-850-6807 |  (//a[contains(@class, 'tel')])[1]  | 1-877-608-5598     | 1-866-327-1593 | //*[contains(@class,'tel right')] |
+    |scenario       | pscCode | Precedence1PSC|zipcode| maUrl                                  | maTFN                                                               | medicareeduUrl                                                                | medicareeduTFN                        |decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |shoppages       |shoppagesTFN                                |TFNNo          |TFNxpath                              |TFNNo1              		| MedsuppTFNNo         | MedsuppTFNxpath |UHCUrl|
+    |Sc. 3.08 - AMP |  810106 |  810104       |90210  |shop/medicare-advantage-plans.html     | (//*[contains(@class,'call')]//a[contains(@class,'tel')])[2] | /medicare-education/medicare-advantage-plans.html                              | (//a[contains(@class, 'tel')])[1]|health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] |contact-us.html|(//*[contains(@class,'call')]//a[contains(@class,'tel')])[1]  |1-800-850-6807 |  (//a[contains(@class, 'tel')])[1]  | 1-877-608-5598     | 1-866-327-1593 | //*[contains(@class,'tel right')] |https://www.myuhcagent.com/|
 	
 
   #######################Script 6a: Campaign Precedence Logic#######################################
@@ -182,7 +182,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
         | TFN No | <TFNNo1> |
         | TFN Xpath | <MedSuppTFNxpath> |
     ################ # Precedence 6.13 - Visit AMP using Campign URL , PSC code 8001533################
-      Then the user close and reopen the broswer
+      #Then the user close and reopen the broswer
       Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
       | Campaign URL | <campaign4Url> |
@@ -192,11 +192,11 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
        And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
       Then the user validates PSC code
       | PSC Code | <Precedence7PSC> |
-      Then the user navigates to MA Plan Details Page and validates Federal TFN 
-     		| Zip Code        | <zipcode>|
-     	Then the user validates TFN Number
-        | TFN No | <TFNNo5> |
-        | TFN Xpath | <TFNxpath> |
+      #Then the user navigates to MA Plan Details Page and validates Federal TFN 
+     		#| Zip Code        | <zipcode>|
+     	#Then the user validates TFN Number
+       # | TFN No    | <TFNNo5> |
+        #| TFN Xpath | <TFNxpath> |
       Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
       | MedSupp URL | <medSuppUrl> |
       | TFN Xpath   | <medSuppTFN> | 

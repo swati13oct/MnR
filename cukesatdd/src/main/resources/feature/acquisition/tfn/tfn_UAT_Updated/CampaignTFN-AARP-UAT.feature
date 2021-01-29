@@ -121,7 +121,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | SHOPPAGES URL |<medSuppUrl> |
         Then the user validates TFN Number
         | TFN No | <MedsuppTFNNo> |
-        | TFN Xpath | <MedsuppShopTFNxpath> |
+        | TFN Xpath | <ShopTFNxpath> |
     Then the user navigates back to page    
    When the user performs plan search using Shop Pages for campaign Links
      | Zip Code        | <zipcode>         |
@@ -192,8 +192,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
         | TFN Xpath | <TFNxpath> |
 
     Examples: 
-   	|scenario             |planyear|zipcode|MSplantype|DOB       |UHCUrl                      | planName                                         |MAplantype|PDPplantype|isMultutiCounty | county            | pscCode  | site  |campaignUrl                                                                 | maUrl                       |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |medSuppUrl                           |shoppages       |campaignUrl2      |TFNNo          |TFNxpath                             |MedsuppTFNNo              |MedsuppTFNxpath1                     | MedsuppTFNxpath                  | EnrollTFNxpath                    |MedsuppShopTFNxpath|
-    |Scenario 2 - AMP 	  | future  |90210 | MS       |10/11/1952|https://www.myuhcagent.com/ | AARP Medicare Advantage Freedom Plus (HMO-POS)   |MA        |PDP        |NO              | Baldwin County | 8001038     | ulayer|/shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038               | enroll/ma-enrollment.html   |  //*[contains(@class,'call')]//a[contains(@class,'tel')]      | enroll/pdp-enrollment.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] | shop/medicare-supplement-plans.html |/contact-us.html|/?wt.mc_id=8001038|1-877-541-7755 | (//a[contains(@class, 'tel')])[1]   |1-844-877-2813            |  //*[contains(@class,'tel right')]  |(//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[3] |(//a[contains(@class, 'tel')])[2]|
+   	|scenario             |planyear|zipcode|MSplantype|DOB       |UHCUrl                      | planName                                         |MAplantype|PDPplantype|isMultutiCounty | county            | pscCode  | site  |campaignUrl                                                                 | maUrl                       |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |medSuppUrl                           |shoppages       |campaignUrl2      |TFNNo          |TFNxpath                             |MedsuppTFNNo              |MedsuppTFNxpath1                     | MedsuppTFNxpath                  | EnrollTFNxpath                    |MedsuppShopTFNxpath|ShopTFNxpath|
+    |Scenario 2 - AMP 	  | future  |90210 | MS       |10/11/1952|https://www.myuhcagent.com/ | AARP Medicare Advantage Freedom Plus (HMO-POS)   |MA        |PDP        |NO              | Baldwin County | 8001038     | ulayer|/shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038               | enroll/ma-enrollment.html   |  //*[contains(@class,'call')]//a[contains(@class,'tel')]      | enroll/pdp-enrollment.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] | shop/medicare-supplement-plans.html |/contact-us.html|/?wt.mc_id=8001038|1-877-541-7755 | (//a[contains(@class, 'tel')])[1]   |1-844-877-2813            |  //*[contains(@class,'tel right')]  |(//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[3] |(//a[contains(@class, 'tel')])[2]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
    
    
     ############################ Script 4: AMS Referral Traffic & Referral Visit###########################################
@@ -285,7 +285,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       # | TFN Xpath | <TFNxpath> |
       #Given the user is on AARP medicare acquisition site landing page
       #Then the user navigates to homepage validates Federal TFN
-   Then the user close and reopen the broswer
+   	#Then the user close and reopen the broswer
+   	Given the user is on AARP medicare acquisition site landing page
     Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
@@ -611,5 +612,22 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Examples:  
     |scenario                         |zipcode|MAplantype| pscCode |state| campaignUrl                                                                                      | medEdURL1                                     | medEdTFN                                        | shoppagesUrl                           |      shoppagesTFN                                                                 |userName|password   |TFNNo               |TFNxpath                         | EnrollTFNxpath                   | ShopTFNxpath                     	|
     |Scenerio 9-ExternalLink - AMP 	  | 10001 |MA        | 8000158 |Alabama| health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html |         (//span[@class='heading-6']//u)[1]      |  shop/medicare-supplement-plans.html   |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|TiggerOptumID39 | TiggerTigger1 | 1-844-850-6592      |(//a[contains(@class, 'tel')])[1]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |  
-       
+     
+     
+   @Scenario_2_CampaignTrafficdummy
+  Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
+   	Given the user Starts WebDriver
+     Given the user is on following acquisition site from Campaign Traffic
+      | Site         | <site>         |
+      | Campaign URL | <MedsuppUrl>  	|   
+      #And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+      Then the user close and reopen the broswer
+       Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
+      | Plan Type | <SNPplantype> |  
+      
+ Examples: 
+   	| scenario            | site   |zipcode|pscCode  | shoppages       |     shoppagesTFN                  |shoppagescompare   |             shoppagescompareTFN  |shoppagesdsnp                       |   shoppagesdsnpTFN                |connect                |    connectTFN                                                       |    maUrl                    |maTFN                              |         MedsuppUrl                                                                                                                                                                       |     DOB     | Firstname | Lastname  | MedsuppTFNNo    |TFNNo          |MedsuppTFNxpath                  | ShopTFNxpath1                     |ShopTFNxpath2                     |ShopTFNxpath3                     | TFNxpath                         | connectTFNxpath                 |   MedsuppOLETFNxpath |     PDPplantype |     MAplantype|                                                                                                                                                                                                                                   
+	  | Sc. 04.01 - 4.02    |  ulayer|90210  |8003093  |   shop.html     | (//a[contains(@class, 'tel')])[1] | shop/compare/compare-ms.html |(//a[contains(@class, 'tel')])[1] |shop/dual-special-needs-plans.html  | (//a[contains(@class, 'tel')])[1] |  contact-us.html      |(//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]  |enroll/ma-enrollment.html    |(//a[contains(@class, 'tel')])[2]  |health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary  |  11/13/1940 | John      | Carry     |1-866-242-0247   |1-855-888-1640 |//*[contains(@class,'tel right')]|  (//a[contains(@class, 'tel')])[4]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |(//a[contains(@class, 'tel')])[1] |(//a[contains(@class, 'tel')])[2]| (//span[contains(@class,'telephone')])[1] | PDP| MA|
+    
+	    
      
