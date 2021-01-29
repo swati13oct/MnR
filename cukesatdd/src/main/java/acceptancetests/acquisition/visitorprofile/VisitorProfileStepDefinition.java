@@ -131,7 +131,8 @@ public class VisitorProfileStepDefinition {
 		}
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateAddedPlans(savePlanNames);
+//		visitorProfile.validateAddedPlans(savePlanNames);
+		visitorProfile.validateAddedPlansNew(savePlanNames);
 	}
 	
 	@And("^user validates the added Ms plans on visitor profile page$")

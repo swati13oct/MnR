@@ -4676,6 +4676,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToNewVisitorProfilePage() {
+		waitForPageLoadSafari();
 		try {
 			if (savedPlansPopup.isDisplayed()) {
 				savedPlansPopupCloseIcon.click();
@@ -4686,6 +4687,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 		shoppingCartIcon.click();
 		guestProfileLink.click();
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("profile")) {
 			System.out.println("Navigated to Visitor profile page");

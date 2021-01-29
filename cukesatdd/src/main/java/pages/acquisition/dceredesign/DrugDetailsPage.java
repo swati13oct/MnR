@@ -1039,17 +1039,18 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	public void savePlan(String planName)
 	{
-		WebElement savePlan = driver
-				.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+		/*WebElement savePlan = driver
+				.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));*/
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", saveBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", saveBtn);
 
 //		Actions action = new Actions(driver);
 //		WebElement element = favoriteIcon;
 //		action.moveToElement(element).perform();
-		jsMouseOver(favoriteIcon);
+//		jsMouseOver(favoriteIcon);
 //		waitforElementNew(favoriteSuccess,5);
-		System.out.println(favoriteSuccess.getText());
+//		System.out.println(favoriteSuccess.getText());
+		validate(savedBtn);
 
 	}
 	
