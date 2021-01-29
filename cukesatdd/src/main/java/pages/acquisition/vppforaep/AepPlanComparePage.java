@@ -179,11 +179,16 @@ public class AepPlanComparePage extends UhcDriver {
         //result.putAll(readBenefitsData("prescription-drug-table", ""));
 
         HashMap<String, String> pdresult = new HashMap<String, String>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             try {
                 pdresult = readBenefitsData("prescription-drug-table", "");
                 int benefitUICnt = pdresult.size();
                 System.out.println("prescription-drug-table - Attempt - " + (i + 1) + ", Benefits Map count - " + benefitUICnt);
+                if(i==3)
+                {
+                    result.putAll(pdresult);
+                    break;
+                }
                 if (benefitUICnt == 0 ||benefitUICnt == 6 ) {
                     driver.navigate().refresh();
                     threadsleep(2000);
