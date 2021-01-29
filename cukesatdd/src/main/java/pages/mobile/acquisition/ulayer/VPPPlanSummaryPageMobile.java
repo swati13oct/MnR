@@ -1027,44 +1027,48 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void viewPlanSummary(String planType) {
-
 		if (planType.equalsIgnoreCase("PDP")) {
-			scrollToView(pdpPlansViewLink);
-			// note: add sleep for timing issue, tried increase timeout from
-			// waitForPageLoadNew but didn't work
-			jsClickNew(pdpPlansViewLink);
-			// sleepBySec(2);
-			System.out.println("PDP Plan Type Clicked");
-			validateNew(planListContainer, 30);
-		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			int maPlans = Integer.valueOf(maPlansCount.getText().trim().replace(" Plans", ""));
-			if (maPlans == 0) {
-				scrollToView(maPlansViewLink);
-				jsClickNew(maPlansViewLink);
-				sleepBySec(2);
-				validateNew(planListContainer, 30);
-				handlePlanYearSelectionPopup();
-				sleepBySec(5);
-			} else {
-				System.out.println("MA plans are available");
-			}
-			validateNew(maPlansViewLink, 30);
-			jsClickNew(maPlansViewLink);
-			sleepBySec(3);
-			validateNew(planListContainer, 30);
-		} else if (planType.equalsIgnoreCase("MS")) {
-			validateNew(msPlansViewLink, 30);
-			jsClickNew(msPlansViewLink);
 			sleepBySec(2);
-			validateNew(medSuppZipCode, 30);
-
-		} else if (planType.equalsIgnoreCase("SNP") || planType.equalsIgnoreCase("D-SNP")) {
-
-			scrollToView(snpPlansViewLink);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", pdpPlansViewLink);
+//			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+			// sleepBySec(2); // note: add sleep for timing issue, tried increase timeout
+			// from
+			// waitForPageLoadNew but didn't work
+			scrollToView(pdpPlansViewLink);
+			jsClickNew(pdpPlansViewLink);
+			System.out.println("PDP Plan Type Clicked");
 			pageloadcomplete();
+//			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+//			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+			pageloadcomplete();
+			scrollToView(maPlansViewLink);
+			jsClickNew(maPlansViewLink);
+			pageloadcomplete();
+//			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+		} else if (planType.equalsIgnoreCase("MS")) {
+//			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			pageloadcomplete();
+			scrollToView(msPlansViewLink);
+			jsClickNew(msPlansViewLink);
+			pageloadcomplete();
+//			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			/*
+			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
+			 * medSuppPlanList.get(0), 30);
+			 */
+		} else if (planType.equalsIgnoreCase("SNP")) {
+			pageloadcomplete();
+			scrollToView(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
 			pageloadcomplete();
-			validateNew(planListContainer, 30);
+//			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 	}
@@ -2851,8 +2855,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
-			WebDriverWait d = new WebDriverWait(driver, 20);
-			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			mobileswipeHorizantal("50%", true);
+//			WebDriverWait d = new WebDriverWait(driver, 20);
+//			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
