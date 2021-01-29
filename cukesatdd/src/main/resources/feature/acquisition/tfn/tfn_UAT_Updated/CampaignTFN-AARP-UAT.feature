@@ -273,23 +273,11 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
         Then the user validates TFN Number
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
-     # Then the user navigates to homepage validates Federal TFN
-     #Given the user is on AARP medicare acquisition site landing page
-       #Then the user validates TFN Number
-      # | TFN No | <TFNNo> |
-      # | TFN Xpath | <TFNxpath> |
-     #Then the user navigates to MA Plan Details Page and validates Federal TFN
-     #	| Zip Code        | <zipcode>|
+   	Then the user close and reopen the broswer
+   #	Given the user is on AARP medicare acquisition site landing page
     #Then the user validates TFN Number
-      # | TFN No | <TFNNo> |
+     # | TFN No | <TFNNo> |
       # | TFN Xpath | <TFNxpath> |
-      #Given the user is on AARP medicare acquisition site landing page
-      #Then the user navigates to homepage validates Federal TFN
-   	#Then the user close and reopen the broswer
-   	Given the user is on AARP medicare acquisition site landing page
-    Then the user validates TFN Number
-       | TFN No | <TFNNo> |
-       | TFN Xpath | <TFNxpath> |
  	Then the user enter zipcode in homepage
     		 | Zip Code        | <zipcode>         |
     		    | Plan Type | <MAplantype> | 

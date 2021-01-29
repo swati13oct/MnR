@@ -30,6 +30,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.tfn.CampaignTFNPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
@@ -964,7 +965,7 @@ public void user_fills_all_details_medsupp_TFN(DataTable givenAttributes) throws
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	tfnPage.MedSupFormValidationTFN(DateOfBirth);
 	
-	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, tfnPage);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
 }
 
 
@@ -1008,6 +1009,12 @@ public void the_user_close_reopen_broswer() {
 		tfnPage.closeOriginalTabAndOpenNewTab();
 	}
 
+@Then("^the user clicks on Request a Free Decision Guide$")
+public void the_user_clicks_on_Request_a_Free_Decision() throws Throwable {
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	tfnPage.clickOnRequestADecisionGuide();
+	
+	}
 
 }
 

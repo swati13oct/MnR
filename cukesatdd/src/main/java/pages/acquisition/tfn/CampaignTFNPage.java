@@ -25,6 +25,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 
 
 
@@ -981,7 +982,8 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 			private WebElement startDrpDwnOption;
 			
 
-			@FindBy(id = "msVppDOB")
+			//@FindBy(id = "msVppDOB")
+			@FindBy(xpath = "//input[contains(@id,'msVppDOB')]")
 			private WebElement DOB;
 			
 			public void MedSupFormValidationTFN(String DateOfBirth) throws InterruptedException {
@@ -1097,8 +1099,11 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 
 				driver.switchTo().window(winHandleTmp);
 				System.out.println("Proceed to open the acquisition url in new tab");
-				js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
-
+				if (MRScenario.environment.equalsIgnoreCase("prod")) {
+						js.executeScript("window.open('" + AARP_ACQISITION_PROD_PAGE_URL + "','_blank');");
+				}else {
+					js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
+				}
 				for (String winHandle : driver.getWindowHandles()) {
 					if (!winHandle.equals(winHandleTmp)) {
 						driver.switchTo().window(winHandle);
@@ -1113,4 +1118,19 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				System.out.println("Proceed to use this newly opened tab for remaining validation");
 				driver.switchTo().window(winHandleNew);
 			}
+			
+			@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
+			private WebElement DecisionGuideLink;
+			
+			public void clickOnRequestADecisionGuide() {
+				Assert.assertTrue("Decision Guide Link is not displayed on Med Supp VPP Plan Summary Page",
+						validate(DecisionGuideLink));
+				// jsClickNew(DecisionGuideLink);
+				switchToNewTabNew(DecisionGuideLink);
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (driver.getCurrentUrl().contains("medicare-information.html")) {
+					
+				}	
+			}
+
 }
