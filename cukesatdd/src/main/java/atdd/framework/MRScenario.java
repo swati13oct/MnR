@@ -267,7 +267,7 @@ public class MRScenario {
 
 			String tagName = it.next();
 
-			if (environment.contains("team-ci")) {
+			if (environment.contains("mnr-acq-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
 
 			} else if ((environment.equalsIgnoreCase("team-e"))
