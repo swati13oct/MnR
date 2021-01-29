@@ -81,7 +81,8 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 
 	public void savedHeartFirstPlanOnSummaryPage() {
 		Assert.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
-		firstSaveHeartOnActiveSummaryPlanPage.click();
+		jsClickMobile(firstSaveHeartOnActiveSummaryPlanPage);
+		
 	}
 	
 	public void validatePrintOptionExistOnSummaryPage(String planType) {

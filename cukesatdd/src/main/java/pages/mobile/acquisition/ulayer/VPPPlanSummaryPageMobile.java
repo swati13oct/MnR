@@ -5250,4 +5250,15 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * return wait.until(jQueryLoad) && wait.until(jsLoad); }
 	 */
 
+	/*public pages.mobile.acquisition.ulayer.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
+		// TODO Auto-generated method stub
+		
+			jsClickMobile(firstComparePlanButton);
+			CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
+			if (currentUrl().contains("/health-plans.html#/plan-compare"))
+				return new pages.mobile.acquisition.ulayer.ComparePlansPageMobile(driver);
+			return null;
+		
+	}*/
+
 }

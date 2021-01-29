@@ -295,7 +295,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	public void clickOnBackToAllPlansFromCompareBackToSummaryPage() {
 		Assert.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page",
 				validate(backToAllPlansLnk));
-		backToAllPlansLnk.click();
+		jsClickMobile(backToAllPlansLnk);
 		CommonUtility.checkPageIsReady(driver);
 		try {
 			Thread.sleep(3000);
@@ -311,7 +311,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("Validate there are " + plansForCompare + " number of plans added for compare");
 		boolean result = true;
 		for (int i = 0; i < Integer.parseInt(plansForCompare); i++) {
-			if (!compareChkBoxes.get(i).getText().contains(expectedTxt)) {
+			if (!compareChkBoxes.get(1).getText().contains(expectedTxt)) {
 				System.out.println(
 						"PROBLEM - plan with index " + i + " doesn't contain expected text '" + expectedTxt + "'");
 				result = false;
