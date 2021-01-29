@@ -749,7 +749,7 @@ public class VppPlanCompareMobile {
 			plansForCompare = plansummaryPage.checkAllPDPlans();
 		}
 		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
-		pages.mobile.acquisition.commonpages.ComparePlansPageMobile comparePlansPage = plansummaryPage.clickOnCompareLinkAARP(plantype);
+		ComparePlansPageMobile comparePlansPage = plansummaryPage.clickOnCompareLinkAARP(plantype);
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
 			// comparePlansPage.backToVPPPage();
@@ -997,7 +997,7 @@ public class VppPlanCompareMobile {
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 
-		pages.mobile.acquisition.commonpages.ComparePlansPageMobile comparePlansPage = plansummaryPage.selectplantocompare(PlanType, PlanName);
+		ComparePlansPageMobile comparePlansPage = plansummaryPage.selectplantocompare(PlanType, PlanName);
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 			Assert.assertTrue(true);
@@ -1441,7 +1441,7 @@ public class VppPlanCompareMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pages.mobile.acquisition.commonpages.ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(null);
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(null);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -1462,7 +1462,7 @@ public class VppPlanCompareMobile {
 			plansummaryPage.checkAllPDPlans();
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
-		pages.mobile.acquisition.commonpages.ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(planType);
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(planType);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -2765,7 +2765,7 @@ public class VppPlanCompareMobile {
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		}
 
-		pages.mobile.acquisition.commonpages.ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(Counter);
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(Counter);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -2778,7 +2778,7 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickon3rdPlan();
-		pages.mobile.acquisition.commonpages.ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(null);
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(null);
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -4441,7 +4441,7 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickon3rdPlan();
-		pages.mobile.acquisition.commonpages.ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -4606,7 +4606,7 @@ public class VppPlanCompareMobile {
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		}
 
-		pages.mobile.acquisition.commonpages.ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();

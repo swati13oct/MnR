@@ -53,7 +53,6 @@ import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
 import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
-import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -5245,7 +5244,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * return wait.until(jQueryLoad) && wait.until(jsLoad); }
 	 */
 
-	public pages.mobile.acquisition.ulayer.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
+	/*public pages.mobile.acquisition.ulayer.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
 		// TODO Auto-generated method stub
 		
 			jsClickMobile(firstComparePlanButton);
@@ -5254,6 +5253,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				return new pages.mobile.acquisition.ulayer.ComparePlansPageMobile(driver);
 			return null;
 		
-	}
+	}*/
 
 }

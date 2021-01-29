@@ -49,7 +49,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		//WebDriver wDriver = (WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		wDriver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile)getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+		pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile plansummaryPage = (pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		int plansForCompare = 0;
 		if (planType.equalsIgnoreCase("MA")) {
@@ -63,7 +63,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 			util.waitForComparePageToLoad();
 		}
 		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
-		pages.mobile.acquisition.ulayer.ComparePlansPageMobile comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
+		ComparePlansPageMobile comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
 		Assert.assertTrue("Error in loading the compare plans page", comparePlansPage != null);
 		wDriver = comparePlansPage.driver;
 		//getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, wDriver);
