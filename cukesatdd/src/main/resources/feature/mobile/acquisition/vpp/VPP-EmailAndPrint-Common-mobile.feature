@@ -22,7 +22,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then the user validate the email link option in plan compare on site
     Then the user validate thank you message in plan compare for selected plan on site
     Then I click back to all plans button and verify that all plans are still selected on summary page on site
-    Then user loads page using email deeplink and validate vpp compare page content on site
+   # Then user loads page using email deeplink and validate vpp compare page content on site
 
     @VppEmailandPrintCommon_AARP_1 
     Examples: 
@@ -61,7 +61,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then the user validates the functionality of print button on the plan Details Page on site
     Then the user validate the email link on the plan Details Page on site
     Then the user validates the functionality of email button on the plan Details Page on site
-    Then user loads page using email deeplink and validate vpp detail page content on site
+    #Then user loads page using email deeplink and validate vpp detail page content on site
 
     @VppEmailandPrintCommon_AARP_2
     Examples: 
@@ -103,7 +103,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then user validates print functionality for selected plan on plan summary page on site
     Then user validates email option for selected plan on plan summary page on site
     Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on site
-    Then user loads page using email deeplink for plan and validate vpp summary page content on site
+    #Then user loads page using email deeplink for plan and validate vpp summary page content on site
 
     @VppEmailandPrintCommon_AARP_3
     Examples: 

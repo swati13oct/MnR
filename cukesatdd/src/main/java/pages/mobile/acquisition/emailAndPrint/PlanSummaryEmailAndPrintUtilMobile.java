@@ -311,7 +311,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("Validate there are " + plansForCompare + " number of plans added for compare");
 		boolean result = true;
 		for (int i = 0; i < Integer.parseInt(plansForCompare); i++) {
-			if (!compareChkBoxes.get(i).getText().contains(expectedTxt)) {
+			if (!compareChkBoxes.get(1).getText().contains(expectedTxt)) {
 				System.out.println(
 						"PROBLEM - plan with index " + i + " doesn't contain expected text '" + expectedTxt + "'");
 				result = false;
