@@ -2357,6 +2357,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * }
 	 */
 	public void toolTipForPremium0(String planName) {
+		pageloadcomplete();
 		WebElement toolTip = driver.findElement(By.xpath(
 				"//*[contains(text(),'+planName+ ')]/ancestor::div[contains(@class, 'module-plan-overview')]//descendant :: span[contains(@class, 'standalone')]//*[name()='svg']"));
 
@@ -3019,7 +3020,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		 * planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
 		 * planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
 		 */
+		scrollToView(planOverviewZipCodeFieldBox);
 		planOverviewZipCodeFieldBox.clear();
+		
 
 		// enter zipcode
 		planOverviewZipCodeFieldBox.sendKeys(zipcode);

@@ -11,6 +11,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
@@ -88,8 +89,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodeErrorMessage();
-		
-		
+
 	}
 
 	@When("^user selects plan year on UHC$")
@@ -106,7 +106,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
 		// aquisitionhomepage.validateCallSamContent();
-		//aquisitionhomepage.validateCallpopup();
+		// aquisitionhomepage.validateCallpopup();
 
 	}
 
@@ -168,9 +168,9 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 
 	@Then("^user should be navigated to Review drug cost estimate page$")
 	public void user_should_be_navigated_to_Review_drug_cost_estimate_page_in_AARP() {
-		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		DrugSummaryPageMobile zipCodePlanYearPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		zipCodePlanYearPage.verifyReviewDrugCostPageDisplayed();
 	}
 
@@ -203,7 +203,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
 		// aquisitionhomepage.validateCallSamContent();
-		//aquisitionhomepage.validateCallpopup();
+		// aquisitionhomepage.validateCallpopup();
 		/*
 		 * if(returnval==null){ Assert.fail("No TFN found"); }else{
 		 * Assert.assertTrue(true); }

@@ -54,7 +54,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//p[contains(@class,'text-normal')]")
 	public WebElement ModalBodyText;
 
-	@FindBy(xpath = "//*[contains(text(), '90-day supply') and @class='d-inline text-bold']")
+	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), '90-day supply')]")
 	public WebElement Tier5_90Day_Text;
 
 	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), 'mail service pharmacy')]")
@@ -1369,7 +1369,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 		}
 	}
-	
+
 	public void verifyReturnToProfileDisplayed() {
 		try {
 			if (returnToProfileLink.isDisplayed()) {
@@ -1382,7 +1382,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button//span[text()='Back to Profile']")
 	public List<WebElement> backToProfileBtn;
-	
+
 	public void clickBackToProfileBtn() {
 		try {
 			backToProfileBtn.get(1).click();
@@ -1391,6 +1391,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assert.fail("Back to profile not displayed ");
 		}
 	}
+
 	public void validateNotCoveredPharmacyView() {
 		if (validate(YourDrugs_Table) || validate(LinktoEditDrugList) || validate(MonthlyDrugStage_Header)
 				|| validate(MonthlyDrugStage_InitialCoverageStagerTbl)

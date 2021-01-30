@@ -46,31 +46,31 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(css = "a#backtoplansummarypage")
 	private WebElement BackToAllPlan;
-	
+
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
-	
+
 	@FindBy(id = "backtoplansummarypage")
 	private WebElement backToAllPlansLink;
-	
-	@FindBy(xpath=".//*[@id='printComparison']")
+
+	@FindBy(xpath = ".//*[@id='printComparison']")
 	private WebElement validateprintbutton;
-	
-	@FindBy(xpath=".//*[@id='emailComparison']")
+
+	@FindBy(xpath = ".//*[@id='emailComparison']")
 	private WebElement validateemailbutton;
-	
-	@FindBy(xpath=".//*[@id='emailcompareDescription']")
+
+	@FindBy(xpath = ".//*[@id='emailcompareDescription']")
 	private WebElement leavingcomapreplansitepopup;
-	
-	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[1]")
+
+	@FindBy(xpath = ".//*[@id='form-valid']/div[2]/button[1]")
 	private WebElement cancelButtonEmailPlanComparePopUp;
-	
-	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[2]")
+
+	@FindBy(xpath = ".//*[@id='form-valid']/div[2]/button[2]")
 	private WebElement sendButtonEmailPlanComparePopUp;
-	
-	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
+
+	@FindBy(xpath = ".//*[@id='emailSuccessMsgPopUp']")
 	private WebElement validatesuccesspopup;
-	
+
 	@FindBy(xpath = "//p[text()='Drug Costs from Formulary']/parent::td/following::td[1]//a")
 	private WebElement dceLink;
 
@@ -88,175 +88,171 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Edit') and contains(text(),'Provider')]")
 	public WebElement EditproviderlistLink;
-	
+
 	@FindBy(xpath = "//td[contains(@class,'estimatedrugcost')][1]//div")
 	public WebElement VerifyEstimatedDrugCost;
-	
-	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
+
+	@FindBy(xpath = ".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
 	private WebElement closeButtonthankyoumessagepopup;
 
 	@FindBy(xpath = "//button[@id='sam-call-button-mobile']")
-   	private WebElement callsam;
-   	
-   	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
-   	private WebElement callsamtooltip;
-   	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div")
-   	private WebElement callSamPopup;
-   	
-   	
-   	@FindBy(xpath ="//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
-   	private WebElement CallSamModel;
-   	
-   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
-   	private WebElement CallSamTFN;
-   	
-   	@FindBy(xpath ="//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
-   	private WebElement CallSamTFNClose;
-   	
-   	String CallSam= "Call a Licensed Insurance Agent";
-   	@FindBy(xpath = "//div[@id='sp-chat-label-text']")
-   	private WebElement chatsam;
-   	
-   	@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[1]")
-   	private WebElement chatsamtooltip;
-   	
-   	@FindBy(xpath ="//*[@id='inner-chat']")
-   	private WebElement chatSamPopup;
-   	
-   	
-   	@FindBy(xpath ="//*[@id='agent-name']")
-   	private WebElement ChatSamHead;
-   	
-   	@FindBy(xpath ="//*[@id='sp-close-frame']")
-   	private WebElement ChatSamTFNClose;
-	
-   	String ChatSamText= "Chat with a Licensed Insurance Agent";
-   	
-   	@FindBy(xpath="//*[contains(@class,'remove')]")
+	private WebElement callsam;
+
+	@FindBy(xpath = "//*[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text')]")
+	private WebElement callsamtooltip;
+
+	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div")
+	private WebElement callSamPopup;
+
+	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div/div[2]/p[1]/a[1]")
+	private WebElement CallSamModel;
+
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]")
+	private WebElement CallSamTFN;
+
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
+	private WebElement CallSamTFNClose;
+
+	String CallSam = "Call a Licensed Insurance Agent";
+	@FindBy(xpath = "//div[@id='sp-chat-label-text']")
+	private WebElement chatsam;
+
+	@FindBy(xpath = "//*[@id='sam-button--chat']/div/span[1]")
+	private WebElement chatsamtooltip;
+
+	@FindBy(xpath = "//*[@id='inner-chat']")
+	private WebElement chatSamPopup;
+
+	@FindBy(xpath = "//*[@id='agent-name']")
+	private WebElement ChatSamHead;
+
+	@FindBy(xpath = "//*[@id='sp-close-frame']")
+	private WebElement ChatSamTFNClose;
+
+	String ChatSamText = "Chat with a Licensed Insurance Agent";
+
+	@FindBy(xpath = "//*[contains(@class,'remove')]")
 	private WebElement removeLink;
-	
-	@FindBy(xpath="//span[@class='remove-button removebtn3']")
+
+	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplan;
-	
-	@FindBy(xpath="//span[@class='remove-button removebtn3']")
+
+	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
-	
-	@FindBy(xpath="//thead/tr[1]/th[5]/div[1]/a[1]")
+
+	@FindBy(xpath = "//thead/tr[1]/th[5]/div[1]/a[1]")
 	private WebElement Newremove4thplan;
-	
-	
-	@FindBy(xpath="//div[contains(@class,'align-items-lg-start')]//div)[4]")
+
+	@FindBy(xpath = "//div[contains(@class,'align-items-lg-start')]//div)[4]")
 	private WebElement Newremove4thplanName;
-	
-	@FindBy(xpath="//a[@id='addanotherplanbutton2']")
+
+	@FindBy(xpath = "//a[@id='addanotherplanbutton2']")
 	private WebElement add3Plan;
-	
-	@FindBy(xpath="//button[@id='addanotherplanbutton']")
+
+	@FindBy(xpath = "//button[@id='addanotherplanbutton']")
 	private WebElement addPlanButton;
-	
-	@FindBy(xpath="//h3[@id='favouriteplanSelect2']")
+
+	@FindBy(xpath = "//h3[@id='favouriteplanSelect2']")
 	private WebElement plan3added;
-	
-	@FindBy(xpath="//*[contains(@id,'yourhospitalsheading')]")
+
+	@FindBy(xpath = "//*[contains(@id,'yourhospitalsheading')]")
 	private WebElement yourHospitalsBanner;
-	
-	@FindBy(xpath="//a[text()='Add Hospitals']")
+
+	@FindBy(xpath = "//a[text()='Add Hospitals']")
 	private WebElement addHospitalsLink;
-	
-	@FindBy(xpath="//a[text()='Edit Hospitals']")
+
+	@FindBy(xpath = "//a[text()='Edit Hospitals']")
 	private WebElement editHospitalsLink;
-	
-	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']")
+
+	@FindBy(xpath = "//*[normalize-space(text())='Hospital Summary']")
 	private WebElement HospitalSummaryHeader;
-	
-	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::td[1]")
+
+	@FindBy(xpath = "//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::td[1]")
 	private WebElement HospitalSummaryCoverageHeader;
 
-	@FindBy(xpath="//tr[contains(@ng-repeat,'hospital')]//th//*[contains(@class,'provider-name')]")
+	@FindBy(xpath = "//tr[contains(@ng-repeat,'hospital')]//th//*[contains(@class,'provider-name')]")
 	private WebElement HospitalProviderName;
-	
-	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//td[1]")
-	private WebElement HospitalProviderCoverageText;	
-	
-	@FindBy(xpath="//*[contains(@id,'yourdoctorsheading')]")
+
+	@FindBy(xpath = "//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//td[1]")
+	private WebElement HospitalProviderCoverageText;
+
+	@FindBy(xpath = "//*[contains(@id,'yourdoctorsheading')]")
 	private WebElement yourDoctorsBanner;
-	
-	@FindBy(xpath="//a[text()='Add Doctors']")
+
+	@FindBy(xpath = "//a[text()='Add Doctors']")
 	private WebElement addDoctorsLink;
-	
-	@FindBy(xpath="//a[text()='Edit Doctors']")
+
+	@FindBy(xpath = "//a[text()='Edit Doctors']")
 	private WebElement editDoctorsLink;
-	
-	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']")
+
+	@FindBy(xpath = "//*[contains(@class,'provider') and text()='Summary']")
 	private WebElement providerSumamryHeader;
-	
-	@FindBy(xpath="//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::td[1]")
+
+	@FindBy(xpath = "//*[contains(@class,'provider') and text()='Summary']/ancestor::th/following::td[1]")
 	private WebElement providerSumamryHeaderCount;
-	
-	@FindBy(xpath="//th//*[contains(@class,'provider-name')]")
+
+	@FindBy(xpath = "//th//*[contains(@class,'provider-name')]")
 	private WebElement FirstProviderName;
-	
-	@FindBy(xpath="//*[contains(@id,'viewLocationLink-0')]")
-	private WebElement viewlocationsLink;	
-	
-	@FindBy(xpath="//h2[@id='yourdrugsheading']")
+
+	@FindBy(xpath = "//*[contains(@id,'viewLocationLink-0')]")
+	private WebElement viewlocationsLink;
+
+	@FindBy(xpath = "//h2[@id='yourdrugsheading']")
 	private WebElement yourDrugsBanner;
-	
-	@FindBy(xpath="//a[contains(text(),'Add Drugs')]")
+
+	@FindBy(xpath = "//a[contains(text(),'Add Drugs')]")
 	private WebElement addDrugsLink;
-	
-	@FindBy(xpath="//*[normalize-space(text())='Edit Drugs']")
+
+	@FindBy(xpath = "//*[normalize-space(text())='Edit Drugs']")
 	private WebElement editDrugsLink;
-	
-	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']")
+
+	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']")
 	private WebElement DrugSummaryHeader;
-	
-	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
+
+	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
 	private WebElement DrugSummaryCoverageHeader;
 
-	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'drugtext')]")
+	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'drugtext')]")
 	private WebElement DrugName;
 
-	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
-	private WebElement DrugCoverageText;	
-		
-	@FindBy(css="div.member-info-status>p:nth-child(2)")
+	@FindBy(xpath = "//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
+	private WebElement DrugCoverageText;
+
+	@FindBy(css = "div.member-info-status>p:nth-child(2)")
 	private WebElement memberName;
-	
-	@FindBy(css="div.member-info-status>p:last-child")
+
+	@FindBy(css = "div.member-info-status>p:last-child")
 	private WebElement memberMBI;
-	
-	@FindBy(xpath="//div[@class='member-info-status']/following::p[contains(text(),'DOB')]")
+
+	@FindBy(xpath = "//div[@class='member-info-status']/following::p[contains(text(),'DOB')]")
 	private WebElement memberDOB;
-	
+
 	@FindBy(css = "div#CSRLoginAlert>div")
 	private WebElement agentModeBanner;
-	
-	@FindBy(xpath="//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
+
+	@FindBy(xpath = "//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
 	private WebElement enrolledPlanName;
-	
-	@FindBy(xpath="//div[contains(text(),'Status')]/preceding-sibling::div/span[1]")
+
+	@FindBy(xpath = "//div[contains(text(),'Status')]/preceding-sibling::div/span[1]")
 	private WebElement nonMemberName;
-	
-	@FindBy(xpath="//div[contains(text(),'Status')]/following::div[contains(text(),'DOB')]")
+
+	@FindBy(xpath = "//div[contains(text(),'Status')]/following::div[contains(text(),'DOB')]")
 	private WebElement nonMemberDOB;
-	
-	@FindBy(css="#changes-submitted button")
+
+	@FindBy(css = "#changes-submitted button")
 	private WebElement popupAccept;
-	
-	@FindBy(css="input.uhc-switch__input")
+
+	@FindBy(css = "input.uhc-switch__input")
 	private WebElement currentPlanToggle;
-	
+
 	@FindBys(value = { @FindBy(css = "table#your-doctors-table tbody>tr") })
 	private List<WebElement> providersList;
-	
+
 	@FindBys(value = { @FindBy(css = "table#your-drugs-table tbody>tr") })
 	private List<WebElement> drugList;
-	
-	@FindBy(id="dupIconFlyOut")
+
+	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
-	
 
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
@@ -496,23 +492,21 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public WelcomePageMobile Enroll_OLE_Plancompare() throws InterruptedException {
 		WebElement enrollForPlan = null;
-  		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']"));
-  		if(enrollForPlan!=null){
-  			//validateNew(enrollForPlan);
-//  			enrollForPlan.click();
-  			jsClickNew(enrollForPlan);
-  			waitForPageLoadSafari();
-  		}
-  		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
-  		System.out.println(driver.getCurrentUrl());
-  		if(driver.getCurrentUrl().contains("welcome"))
-  		{
-  			System.out.println("OLE Welcome Page is Displayed");
-  			return new WelcomePageMobile(driver);
-  		}
-  		return null;
-  	  	}
-
+		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']"));
+		if (enrollForPlan != null) {
+			// validateNew(enrollForPlan);
+			// enrollForPlan.click();
+			jsClickNew(enrollForPlan);
+			waitForPageLoadSafari();
+		}
+		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		System.out.println(driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePageMobile(driver);
+		}
+		return null;
+	}
 
 	public PlanDetailsPageMobile navigateToPlanDetailfromplanCompare() {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -562,38 +556,40 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validateCallSamContent() throws InterruptedException {
-		
+
 		scrollToView(callsam);
 		String callsamtext = callsam.getText();
-		if(callsamtext.contentEquals("1-877-699-5710"))
+		if (callsamtext.contentEquals("1-877-699-5710"))
 			System.out.println("Mobile callsam icon verified successfully");
 
-//		Actions action = new Actions(driver);
-//		WebElement element = callsam;
-//		action.moveToElement(element).perform();
-//		String toolTipText = callsamtooltip.getText();
-//		System.out.println("====================================================================");
-//		System.out.println(toolTipText);
-//		System.out.println("====================================================================");
-//		if (CallSam.equalsIgnoreCase(toolTipText)) {
-//			System.out.println("Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent");
-//		} else
-//			System.out.println(
-//					"No Call sticky action menu didn't roll out and doesn't contain the text Call a Licensed Insurance Agent");
+		// Actions action = new Actions(driver);
+		// WebElement element = callsam;
+		// action.moveToElement(element).perform();
+		// String toolTipText = callsamtooltip.getText();
+		// System.out.println("====================================================================");
+		// System.out.println(toolTipText);
+		// System.out.println("====================================================================");
+		// if (CallSam.equalsIgnoreCase(toolTipText)) {
+		// System.out.println("Call sticky action menu roll out and contain the text
+		// Call a Licensed Insurance Agent");
+		// } else
+		// System.out.println(
+		// "No Call sticky action menu didn't roll out and doesn't contain the text Call
+		// a Licensed Insurance Agent");
 	}
 
 	public void validateCallpopup() throws InterruptedException {
 		// CommonUtility.checkPageIsReady(driver);
 		callsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-//		driver.switchTo().activeElement();
-//		if (CallSamTFN.getText().isEmpty()) {
-//			// return null;
-//			Assert.fail("TFN number was not found on the SAM call Popup");
-//		} else {
-//			CallSamTFNClose.click();
-//			validateNew(callsam);
-//		}
+		// driver.switchTo().activeElement();
+		// if (CallSamTFN.getText().isEmpty()) {
+		// // return null;
+		// Assert.fail("TFN number was not found on the SAM call Popup");
+		// } else {
+		// CallSamTFNClose.click();
+		// validateNew(callsam);
+		// }
 	}
 
 	public ComparePlansPageMobile validateChatSam() throws InterruptedException {
@@ -645,6 +641,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validatePlanComparePage() {
+		pageloadcomplete();
 		validateNew(backToAllPlansLink);
 		validateNew(validateprintbutton);
 		validateNew(validateemailbutton);
@@ -656,7 +653,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void clickOnNewRemoveLink() {
-		waitforElement(Newremove4thplan);
+		pageloadcomplete();
 		scrollToView(Newremove4thplan);
 		validateNew(Newremove4thplan);
 		String PlanName = Newremove4thplanName.getText();
@@ -693,10 +690,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Clicked on Back to plans");
 	}
 
-	public VPPPlanSummaryPage clickOnNewAddIcon() {
+	public VPPPlanSummaryPageMobile clickOnNewAddIcon() {
 
 		validateNew(addPlanButton);
-		addPlanButton.click();
+
+		jsClickNew(addPlanButton);
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -704,7 +702,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (currentUrl().contains("#/plan-summary"))
-			return new VPPPlanSummaryPage(driver);
+			return new VPPPlanSummaryPageMobile(driver);
 		return null;
 	}
 
@@ -867,23 +865,24 @@ public class ComparePlansPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		scrollToView(addDoctorsLink);
 		validate(addDoctorsLink);
 		String ParentWindow = driver.getTitle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDoctorsLink);
-		
+
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		switchToNewTabNew(addDoctorsLink);
-		
+
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			//driver.manage().window().maximize();
+			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElementNew(FindCareLink,30);
+			waitforElement(FindCareLink);
 		} else {
-		System.out.println("Not found Expected window");
-		driver.switchTo().window(ParentWindow);
-	}
+			System.out.println("Not found Expected window");
+			driver.switchTo().window(ParentWindow);
+		}
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
@@ -904,19 +903,19 @@ public class ComparePlansPageMobile extends UhcDriver {
 		String ParentWindow = driver.getTitle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addHospitalsLink);
-		
+
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		switchToNewTabNew(addHospitalsLink);
-		
+
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			// driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
-		System.out.println("Not found Expected window");
-		driver.switchTo().window(ParentWindow);
-	}
+			System.out.println("Not found Expected window");
+			driver.switchTo().window(ParentWindow);
+		}
 		waitforElement(FindCareLink);
 		if (validate(FindCareLink)) {
 			System.out.println("User is on Find care Page");
@@ -1182,16 +1181,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[@id='globalContentIdForSkipLink']/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[4]/div[1]/div[1]/div[1]/div[1]/div[1]/div[10]/div[5]/div[1]/div[4]/div[1]/div[2]/div[2]/div[1]/div[2]/div[2]/div[2]/div[1]/div[1]/div[2]/div[1]/div[1]/h4[1]/a[1]")
 	public WebElement enterDrugInformation;
-	
-	@FindBy(xpath="//div[contains(text(),'Available')]")
+
+	@FindBy(xpath = "//div[contains(text(),'Available')]")
 	public static WebElement planComparePlansAvailableLabel;
-	
-	@FindBy(xpath="//button[@id='viewallplansBtnId']")
+
+	@FindBy(xpath = "//button[@id='viewallplansBtnId']")
 	public static WebElement viewAllplansButton;
 
 	public GetStartedPageMobile navigateToDCERedesign() {
-		
-		validateNew(addDrugsLink,30);
+
+		validateNew(addDrugsLink, 30);
 		scrollToView(addDrugsLink);
 		jsClickNew(addDrugsLink);
 		if (validateNew(getStartedTab)) {
@@ -1200,78 +1199,94 @@ public class ComparePlansPageMobile extends UhcDriver {
 		} else
 			return null;
 	}
-	
-	@FindBy(xpath="//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
+
+	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
 	public static WebElement medicalBenefitsOONToggle;
-	
-	@FindBy (xpath="//h2[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+
+	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
 	public static WebElement medicalBenefitsOONLabel;
-	
-	@FindBy(xpath="//h2[contains(text(),'Additional Benefits')]/following::div[@class='uhc-switch__slider']")
+
+	@FindBy(xpath = "//h2[contains(text(),'Additional Benefits')]/following::div[@class='uhc-switch__slider']")
 	public static WebElement additionalBenefitsOONToggle;
-	
-	@FindBy(xpath="//h2[contains(text(),'Additional Benefits')]/following::div[contains(@class,'uhc-switch__label')]")
+
+	@FindBy(xpath = "//h2[contains(text(),'Additional Benefits')]/following::div[contains(@class,'uhc-switch__label')]")
 	public static WebElement additionalBenefitsOONLabel;
-	
-	@FindBy(xpath="//td[contains(@class,'show-out-of-network')]")
+
+	@FindBy(xpath = "//td[contains(@class,'show-out-of-network')]")
 	public static WebElement outOfNetworkStyle;
-	
-	@FindBy(xpath="//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
+
+	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
 	public static WebElement medicalBenefitsOONToggleNotDisplayed;
-	
-	public void validateOONDDisplayed() throws Exception
-	{
-		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits", medicalBenefitsOONToggle.isDisplayed());
-		Assert.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",  "View Out-of-Network Benefits",medicalBenefitsOONLabel.getText().trim());
+
+	public void validateOONDDisplayed() throws Exception {
+		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
+				medicalBenefitsOONToggle.isDisplayed());
+		Assert.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
+				"View Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		medicalBenefitsOONToggle.click();
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
-		Assert.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",  "View In-Network Benefits",medicalBenefitsOONLabel.getText().trim());
+		Assert.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits",
+				medicalBenefitsOONLabel.getText().trim());
 		Assert.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
 		medicalBenefitsOONToggle.click();
-		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits", additionalBenefitsOONToggle.isDisplayed());
-		Assert.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits", "View Out-of-Network Benefits",additionalBenefitsOONLabel.getText().trim());
-//		additionalBenefitsOONToggle.click();
+		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits",
+				additionalBenefitsOONToggle.isDisplayed());
+		Assert.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
+				"View Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
-		Assert.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
+		Assert.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits",
+				additionalBenefitsOONLabel.getText().trim());
 		Assert.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
-//		additionalBenefitsOONToggle.click();
+		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 	}
-	
-	public void validateOONNotDisplayed()
-	{
-		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
-		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
+
+	public void validateOONNotDisplayed() {
+		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
+				driver.findElements(By.xpath(
+						"//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']"))
+						.isEmpty());
+		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits",
+				driver.findElements(By.xpath(
+						"//h2[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']"))
+						.isEmpty());
 	}
-	
-	public void clickOnSelectedRemoveLink(String planIndices){
+
+	public void clickOnSelectedRemoveLink(String planIndices) {
 		WebElement ele;
-		 TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(","))); 
-		for(String index:(TreeSet<String>)mySet.descendingSet())
-		{
-		ele=driver.findElement(By.xpath("(//button[contains(@class,'removePlan')])["+Integer.parseInt(index)+"]"));
-		validateNew(ele,20);
-		ele.click();
-		System.out.println("Clicked on Remove Link on plan Compare page");
+		TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(",")));
+		for (String index : (TreeSet<String>) mySet.descendingSet()) {
+			ele = driver.findElement(
+					By.xpath("(//button[contains(@class,'removePlan')])[" + Integer.parseInt(index) + "]"));
+			scrollToView(ele);
+			validateNew(ele,10);
+			jsClickNew(ele);
+			System.out.println("Clicked on Remove Link on plan Compare page");
 		}
 	}
-	
-	public void validateOptionalRidersSectionHidden(){
-	   	 Assert.assertFalse("Optional Service Section must not be visible", driver.findElements(By.xpath("//h2[@id='optionalservicesheading']")).size()>0);
+
+	public void validateOptionalRidersSectionHidden() {
+		Assert.assertFalse("Optional Service Section must not be visible",
+				driver.findElements(By.xpath("//h2[@id='optionalservicesheading']")).size() > 0);
 	}
-	
-	public void validateAllPlansShown(){
-	   	System.out.println(planComparePlansAvailableLabel.getText());
-	   	int planCount=Integer.parseInt(planComparePlansAvailableLabel.getText().substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")).trim());
-	    System.out.println("Count of plans Available="+planCount);
-	   System.out.println("Count of plans on compare Before button is clicked"+driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
-	   Assert.assertTrue("View All button should be displayed", viewAllplansButton.isDisplayed());
-	   viewAllplansButton.click();
-	   System.out.println("Count of plans on compare after button is clicked"+driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
-	   Assert.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
-	   Assert.assertEquals("Plan Counts mismatch", planCount, driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
-	    }
+
+	public void validateAllPlansShown() {
+		System.out.println(planComparePlansAvailableLabel.getText());
+		int planCount = Integer.parseInt(planComparePlansAvailableLabel.getText()
+				.substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")).trim());
+		System.out.println("Count of plans Available=" + planCount);
+		System.out.println("Count of plans on compare Before button is clicked"
+				+ driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
+		Assert.assertTrue("View All button should be displayed", viewAllplansButton.isDisplayed());
+		viewAllplansButton.click();
+		System.out.println("Count of plans on compare after button is clicked"
+				+ driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
+		Assert.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
+		Assert.assertEquals("Plan Counts mismatch", planCount,
+				driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
+	}
 
 	/**
 	 * Navigate to Visitor Profile Page
@@ -1288,28 +1303,26 @@ public class ComparePlansPageMobile extends UhcDriver {
 			return null;
 		}
 	}
-	
-	
-	@FindBy(xpath="//tr[contains(@ng-repeat,'uniqueDoctorProviders')]//child::span[contains(@class,'provider-name')][1]")
+
+	@FindBy(xpath = "//tr[contains(@ng-repeat,'uniqueDoctorProviders')]//child::span[contains(@class,'provider-name')][1]")
 	private WebElement firstDoctorNameLabel;
-	
+
 	@FindBy(css = "#viewLocationLink-0")
 	private WebElement viewLocationLink;
-	
-	@FindBy(xpath="//h2[@id='viewLocationTitle']")
+
+	@FindBy(xpath = "//h2[@id='viewLocationTitle']")
 	private WebElement viewLocationPopupProviderName;
-	
-	public void validateViewLocation()
-	{
+
+	public void validateViewLocation() {
 		System.out.println(firstDoctorNameLabel.getText());
-		String firstDoctorName=firstDoctorNameLabel.getText();
+		String firstDoctorName = firstDoctorNameLabel.getText();
 		jsClickNew(viewLocationLink);
-		//viewLocationLink.click();
-		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName, viewLocationPopupProviderName.getText());
+		// viewLocationLink.click();
+		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName,
+				viewLocationPopupProviderName.getText());
 	}
-	
-	
-	public void CounterDentalFlyerLink(String counter,String Documentcode) throws Exception{
+
+	public void CounterDentalFlyerLink(String counter, String Documentcode) throws Exception {
 		String ParentWindow = driver.getTitle();
 		WebElement DentalFlyerLink;
 		if (counter.equals("1023")) {
@@ -1344,6 +1357,6 @@ public class ComparePlansPageMobile extends UhcDriver {
 				driver.switchTo().window(ParentWindow);
 			}
 		}
-		
+
 	}
 }

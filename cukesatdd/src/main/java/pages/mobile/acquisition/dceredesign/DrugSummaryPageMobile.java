@@ -388,10 +388,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//span[contains(text(),'Return to Profile')]")
+	@FindBy(xpath = "//*[text()='Return to Profile']")
 	public WebElement returnToProfileLink;
 
 	public void verifyReturnToProfileDisplayed() {
+		pageloadcomplete();
 		validateNew(returnToProfileLink, 3);
 		scrollToView(returnToProfileLink);
 		try {
@@ -427,14 +428,17 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public void validatePremiumForPlan(String premium, String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
+			scrollToView(mapdPlanToggle);
 			validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
 		} else if (plantype.equalsIgnoreCase("PDP")) {
+			scrollToView(pdpPlanToggle);
 			validateNew(pdpPlanToggle);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
 		} else {
+			scrollToView(snpPlanToggle);
 			validateNew(snpPlanToggle);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
@@ -448,5 +452,16 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			Assert.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
 					+ PremiumDisplayed);
 		}
+	}
+	
+	
+	public void verifyReviewDrugCostPageDisplayed() {
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		if (validateNew(reviewDrugCostPageHeading)) {
+			Assert.assertTrue("Review drug cost page not displayed", true);
+		} else {
+			Assert.assertTrue("Review drug cost page not displayed", false);
+		}
+
 	}
 }
