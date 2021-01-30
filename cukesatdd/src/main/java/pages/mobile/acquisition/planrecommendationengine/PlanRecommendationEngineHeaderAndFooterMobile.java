@@ -88,14 +88,14 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_1']")
 	private WebElement headerNavigationBarHomeTab;
-	
+
 	// DCE elements
-	
-		@FindBy(css = "#addDrug")
-		private WebElement drugAddBtn;
-		
-		@FindBy(css = "h1#progressHeader")
-		private WebElement dceTitle;
+
+	@FindBy(css = "#addDrug")
+	private WebElement drugAddBtn;
+
+	@FindBy(css = "h1#progressHeader")
+	private WebElement dceTitle;
 
 	@FindBy(css = "a[dtmname*='Shop For a Plan']")
 	private WebElement headerNavigationBarShopForaPlanTab;
@@ -609,13 +609,11 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 		}
 	}
 
-
-
 	// Navigating Plan RecommendationEngine via Shop for a plan
 	// -->Shop-->Tools-->Get Help Choosing
 	public void navigationToPlanRecommendationEngineViaShopTools() {
 		MobileMenuShopTool();
-		
+
 		scrollToView(GetRecommendationsbtn);
 		jsClickNew(GetRecommendationsbtn);
 
@@ -758,34 +756,29 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 			Assert.assertTrue(false);
 		}
 	}
-	
 
-	
-	//Navigating Plan RecommendationEngine via Get Plan Recommendation	
-		public void navigationToPlanRecommendationEngine() {
-			validate(headerNavigationBarShopForaPlanTab, 45);
-			jsMouseOver(headerNavigationBarShopForaPlanTab);
-//			jsClickNew(headerNavigationBarShopForaPlanTab);
-			jsClickNew(headerGetaPlanRecommendationLink);
-			validate(landingpageHeader, 30);
-		}
+	// Navigating Plan RecommendationEngine via Get Plan Recommendation
+	public void navigationToPlanRecommendationEngine() {
+		validate(headerNavigationBarShopForaPlanTab, 45);
+		MobileMenuAndGetPlanRecom();
+	}
 
 	public void browserBack() {
 
 		driver.navigate().back();
 	}
-	
-//	Navigate to DCE
-	
+
+	// Navigate to DCE
+
 	public void navigationToDrugCostEstimatorViaShopTools() {
 		MobileMenuAccessDCE(); // mobile method to access DCE
-//		jsClickNew(headerNavigationBarHomeTab);
-//		threadsleep(2000);
-//		validate(headerNavigationBarShopForaPlanTab, 45);
-//		jsMouseOver(headerNavigationBarShopForaPlanTab);
-////		jsClickNew(headerNavigationBarShopForaPlanTab);
-//		jsClickNew(headerDrugcostLink);
-//		threadsleep(2000);
+		// jsClickNew(headerNavigationBarHomeTab);
+		// threadsleep(2000);
+		// validate(headerNavigationBarShopForaPlanTab, 45);
+		// jsMouseOver(headerNavigationBarShopForaPlanTab);
+		//// jsClickNew(headerNavigationBarShopForaPlanTab);
+		// jsClickNew(headerDrugcostLink);
+		// threadsleep(2000);
 		validate(drugAddBtn, 30);
 		validate(dceTitle, 30);
 		Assert.assertTrue(dceTitle.getText().contains("Drug Cost Estimator"));

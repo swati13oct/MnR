@@ -636,7 +636,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * @param countyName
 	 */
 	public void clickDirectoryLnk(String isMultiCounty, String countyName) {
-		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 5);
+		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 10);
 		scrollToView(vpp_onlinePharmacyDirectoryLnk);
 		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));

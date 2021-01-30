@@ -91,57 +91,59 @@ public class PlanRecommendationStepDefinitionMobile {
 			System.out.println("Current PRE Flow : " + PREflow);
 		}
 	}
-	
+
 	@And("^user validate druglist in Drug Cost Estimator page$")
 	public void Druglist_DCE() {
-		ACQDrugCostEstimatorPage dceDrugs =  new ACQDrugCostEstimatorPage(wd);
+		ACQDrugCostEstimatorPage dceDrugs = new ACQDrugCostEstimatorPage(wd);
 		dceDrugs.getDruglist();
 	}
-	
+
 	@Then("^user verify drug list are same in DCE VS Drug page$")
-  	public void verify_drugs_dce_vs_drug_page(DataTable givenAttributes) {
-  		readfeaturedataMobile(givenAttributes);
-  		PlanRecommendationEngineDrugsPageMobile planSelectorDrugspage =  new PlanRecommendationEngineDrugsPageMobile(wd);
-  		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
-  		planSelectorDrugspage.comparingDrugsDCEvsPRE();
-  	}
-	
+	public void verify_drugs_dce_vs_drug_page(DataTable givenAttributes) {
+		readfeaturedataMobile(givenAttributes);
+		PlanRecommendationEngineDrugsPageMobile planSelectorDrugspage = new PlanRecommendationEngineDrugsPageMobile(wd);
+		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
+		planSelectorDrugspage.comparingDrugsDCEvsPRE();
+	}
+
 	@Then("^user validate navigate to Get a Plan Recomendation page$")
 	public void navigate_PRE() {
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter =  new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.navigationToPlanRecommendationEngine();
 	}
-	
+
 	@When("^user validate navigate to Drug Cost Estimator page$")
 	public void navigate_DCE() {
-		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter =  new PlanRecommendationEngineHeaderAndFooterMobile(wd);
+		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
+				wd);
 		headerAndFooter.navigationToDrugCostEstimatorViaShopTools();
 	}
 
 	@Then("^user save recommendation results and validate in VP$")
-   	public void save_results(DataTable givenAttributes) {
+	public void save_results(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		PlanRecommendationEngineEditResponsePageMobile preEditpage =  new PlanRecommendationEngineEditResponsePageMobile(wd);
+		PlanRecommendationEngineEditResponsePageMobile preEditpage = new PlanRecommendationEngineEditResponsePageMobile(
+				wd);
 		checkpopup();
 		preEditpage.validateSaveResults(inputValues.get("Plan Type"));
 	}
-	
 
 	@Then("^user selects priority in priorities page$")
 	public void user_selects_priorities(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
-		PlanRecommendationEnginePrioritiesPageMobile priorities =  new PlanRecommendationEnginePrioritiesPageMobile(wd);
-		priorities.prioritiesFunctional(inputValues.get("Priority Option"),inputValues.get("Priorities"));
+		PlanRecommendationEnginePrioritiesPageMobile priorities = new PlanRecommendationEnginePrioritiesPageMobile(wd);
+		priorities.prioritiesFunctional(inputValues.get("Priority Option"), inputValues.get("Priorities"));
 		priorities.continuePriority();
 	}
 
 	@Then("^user validate drugs details from VPP to DCE page$")
 	public void drugs_VPP_DCE_page() {
-		PlanRecommendationEngineResultsPageMobile planSelectorResultspage =  new PlanRecommendationEngineResultsPageMobile(wd);
+		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
+				wd);
 		planSelectorResultspage.DrugsDetailsVPPtoDCE();
 	}
-	
-	
+
 	@Given("^the user is on UHC medicare acquisition site mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
 		wd = getLoginScenario().getMobileDriver();
@@ -705,13 +707,13 @@ public class PlanRecommendationStepDefinitionMobile {
 		else
 			planSelectorResultspage.checkVPP(false);
 	}
-	
+
 	@Then("^user adds Drugs in Drug Cost Estimator page$")
-   	public void add_drugs_DCE_page(DataTable givenAttributes) {
+	public void add_drugs_DCE_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(wd);
 		dce.useraddDrugsDCEWithoutVPP(inputValues.get("Drug Details"));
-   	}
+	}
 
 	@When("^user navigates to PRE landing page menu mobile$")
 	public void user_navigates_PRE_landingpage_menu_mobile() {
@@ -758,12 +760,12 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void edit_coverage_editResponse_page(DataTable givenAttributes) {
 		readfeaturedataMobile(givenAttributes);
 		EditResponseMobilePage preEditMobile = new EditResponseMobilePage(wd);
-		preEditMobile.changeCoverage(inputValues);}
-
+		preEditMobile.changeCoverage(inputValues);
+	}
 
 	@Then("^user validate elements in priorities page mobile$")
 	public void user_validate_prioritiesElements() {
-		PrioritiesMobilePage prioritiesMobile =  new PrioritiesMobilePage(wd);
+		PrioritiesMobilePage prioritiesMobile = new PrioritiesMobilePage(wd);
 		prioritiesMobile.prioritiesElementsMobile();
 
 	}
@@ -852,7 +854,7 @@ public class PlanRecommendationStepDefinitionMobile {
 			planSelectorhomepage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
 		}
 	}
-	
+
 	@And("^I select my Response and go to Next Questionnaire$")
 	public void I_click_questionnaire_first() throws Throwable {
 		PlanSelectorNewPageMobile planSelectorNewPage = (PlanSelectorNewPageMobile) getLoginScenario()
@@ -1372,7 +1374,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
 		planSelectorResultspage.drugsDetailsPREtoVPP();
-		//planSelectorResultspage.MobileMenu();
+		// planSelectorResultspage.MobileMenu();
 	}
 
 	@Then("^user validate removed drugs details updated from VPP to PRE page$")
@@ -1446,7 +1448,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
 		planSelectorResultspage.vppToPre();
-		planSelectorResultspage.MobileMenuAndGetStarted();
+		//planSelectorResultspage.MobileMenuAndGetStarted();
 		PlanRecommendationEngineLandingAndZipcodeMobilePages planSelectorhomepage = new PlanRecommendationEngineLandingAndZipcodeMobilePages(
 				wd);
 		planSelectorhomepage.navigatezipcodepage();
@@ -1515,7 +1517,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
-		//planSelectorResultspage.vppToPre();
+		// planSelectorResultspage.vppToPre();
 		planSelectorResultspage.MobileMenuAndGetStarted();
 		planSelectorResultspage.validateZipcodePage(zip, county, isMultiCounty);
 	}
@@ -1530,7 +1532,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String isMultiCounty = inputValues.get("Is Multi County");
-		
+
 		planSelectorResultspage.vppToPreStartOver();
 		planSelectorResultspage.validateZipcodePage(zip, county, isMultiCounty);
 	}

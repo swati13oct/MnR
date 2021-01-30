@@ -236,7 +236,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities   | 1stRecommendation | Rankingplan | 2ndRecommendation |
       |   94203 | NO            | Sacramento | MAPD          | None         | withinUS | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | 1st            | Travel, None | MA                | Assure      | MS                |
 
-  @PRE @planrecommendation @deleteDocZipChange @F428517 @PRERegression4
+  @PRE @planrecommendation @deleteDocZipChange @F428517 @PRERegression4 @Auto
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate provider removal on zip change in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -371,7 +371,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              |
       |   35034 | Yes           | Bibb County | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO |
 
-  @PRE @planrecommendation @DruglistSessionStorageDCEtoPRE @F537262 @PRERegression8
+  @PRE @planrecommendation @DruglistSessionStorageDCEtoPRE @F537262 @PRERegression8 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug list are same DCE vs PRE
     Given the user is on UHC medicare acquisition site landing page
     When user validate navigate to Drug Cost Estimator page

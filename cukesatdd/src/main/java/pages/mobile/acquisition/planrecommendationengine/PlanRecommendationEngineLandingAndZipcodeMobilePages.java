@@ -164,14 +164,21 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 	public void navigatezipcodepage() {
 		pageloadcomplete();
-		scrollToView(getStartedBtn);
-		jsClickNew(getStartedBtn);
-		// getStartedBtn.click();
+//		if (!getStartedBtn.isDisplayed()) {
+//			MobileMenuAndGetPlanRecom();
+//			scrollToView(getStartedBtn);
+//			jsClickNew(getStartedBtn);
+//		} else
+//			pageloadcomplete();
+//		scrollToView(getStartedBtn);
+//		jsClickNew(getStartedBtn);
+//		// getStartedBtn.click();
 		validate(zipCode, 30);
 	}
 
 	// SingleCounty Method Mobile
 	public void quizStartsAndRunQuestionnaire(String zipcode) throws InterruptedException {
+		pageloadcomplete();
 		validateNew(getStartedBtn, 10);
 		if (getStartedBtn.isDisplayed()) {
 			jsClickNew(getStartedBtn);
@@ -187,7 +194,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 			waitforElementVisibilityInTime(coverageTitle, 30);
 			Assert.assertTrue(coverageTitle.getText().contains("coverage"));
 		} else {
-			
+
 			System.out.println("After clicking GetStarted");
 			zipcodePage();
 			waitforElementVisibilityInTime(zipCode, 45);
