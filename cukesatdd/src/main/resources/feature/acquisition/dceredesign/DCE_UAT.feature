@@ -130,8 +130,14 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Generic Drug | <genericDrug2> |
    Then the user validates following expected Premium on DCE Details Page
       | Premium | <premium> |
-   Then the user verify the Retail chain pharmacy on detail page   
+   Then the user verify the Retail chain pharmacy on detail page 
+   Then the user Captures Drug costs on Drug Details Page  
    And the user validates link to Drug Summary Page
+   And the user validates functional tool tips for the given plan
+      | Plan Name | <planname> |
+   And the user Captures Drug costs on Drug Summary Page for the given plan
+      | Plan Name | <planname> |
+    And the user compares drug costs for drug details and drug summary pages
      
     
     

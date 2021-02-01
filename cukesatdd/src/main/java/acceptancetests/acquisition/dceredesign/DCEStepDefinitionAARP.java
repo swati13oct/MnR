@@ -1591,6 +1591,22 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validatePremiumForPlan(Premium, PlanType, PlanName);
 	}
+	
+	@Then("^the user validates functional tool tips for the given plan$")
+	public void the_user_validates_functional_tool_tips_for_Given_plan(DataTable attributes)
+	throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for(int i=0 ; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0) ,
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("Plan Name");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.captureFunctionalToolTips(planName);
+		
+	}
 
 	@Then("^the user Captures Drug costs on Drug Summary Page for the given plan$")
 	public void the_user_Captures_Drug_costs_on_Drug_Summary_Page_For_Given_Plan(DataTable attributes)

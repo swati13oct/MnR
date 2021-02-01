@@ -287,6 +287,10 @@ public class DrugSummaryPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		validateNew(PlanName_PlanDetails);
 	}
+	
+	public void captureFunctionalToolTips(String planName) {
+		
+	}
 
 	public DrugSummaryPage verifyDefaultPlanType(String planType) {
 		validateNew(planTypeHeading);
