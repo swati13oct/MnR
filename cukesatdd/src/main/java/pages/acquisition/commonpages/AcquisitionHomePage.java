@@ -4497,10 +4497,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void MedicareAdvantagePlans() {
-		threadsleep(6);
+//		threadsleep(6);
+		threadsleep(5000);
 		// MedicareAdvantagePlans.click();
 		jsClickNew(MedicareAdvantagePlans);
-		threadsleep(5);
+		threadsleep(5000);
 		if (driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
 			Assert.assertTrue(true);
 			System.out.println("MA Plan Page open: URL-->  " + driver.getCurrentUrl());
@@ -4611,10 +4612,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void Accessibility() {
 
-		threadsleep(6);
+//		threadsleep(6);
+		threadsleep(5000);
 //			Accessibility.click();
 		jsClickNew(Accessibility);
-		threadsleep(5);
+		threadsleep(5000);
 		// Assert.assertEquals(driver.getCurrentUrl(),
 		// "https://www.uhc.com/legal/accessibility");
 		if (driver.getCurrentUrl().contains("accessibility")) {
@@ -4623,7 +4625,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
-		threadsleep(8);
+//		threadsleep(8);
+		threadsleep(5000);
 //			UnitedHealthcareMedicareSolutions.click();
 		jsClickNew(UnitedHealthcareMedicareSolutions);
 	}
