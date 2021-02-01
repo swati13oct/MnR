@@ -3284,7 +3284,6 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = null;
@@ -3546,6 +3545,19 @@ public class VppCommonStepDefinition {
 	public void user_ends_current_session() throws Throwable {
 		WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
-		
+	}
+	
+	@Then("^user should be navigated to VPP summary page$")
+	public void user_should_be_navigated_to_VPP_summary_page() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateVPPSummaryPage();
+	}
+	@Then("^user should be navigated to VPP detail page$")
+	public void user_should_be_navigated_to_VPP_details_page() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validateVPPDetailsPage();
 	}
 }
+

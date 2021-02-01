@@ -6288,6 +6288,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("No providers in plan card");
 		}
 	}
+
 	public void medsuppOLEBenefitsTable() throws InterruptedException {
 		validateNew(RightRail_BenefitsTable);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_BenefitsTable, 30);
@@ -6302,7 +6303,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
-
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
@@ -6510,5 +6510,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.switchTo().window(parentWindow);
 
 	}
-	
+
+	public void enternewZip(String zipCode) {
+	ChangeLocationLink.click();
+	validate(ZipCodeTxtBx);
+	ZipCodeTxtBx.click();
+	ZipCodeTxtBx.clear();
+	ZipCodeTxtBx.sendKeys(zipCode);
+	validate(FIndPlansButton);
+	FIndPlansButton.click();
+	CommonUtility.checkPageIsReadyNew(driver);
+}
+
+public void validateVPPSummaryPage() {
+	Assert.assertTrue("user not navigated to VPP Page",driver.getCurrentUrl().contains("plan-summary"));
+}
 }
