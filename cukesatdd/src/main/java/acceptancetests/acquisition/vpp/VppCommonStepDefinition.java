@@ -3432,7 +3432,7 @@ public class VppCommonStepDefinition {
 		String parentDirectory = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+DateCreated+".xls";
+		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 		
 		//Reading Excel.xls file
 		File InputFile = new File(InputFilePath);
