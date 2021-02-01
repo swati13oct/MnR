@@ -938,7 +938,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
 	private WebElement providerListPlanCard;
 	
-	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']")
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']/parent::button")
 	private List<WebElement> removeProviderListPlanCard;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
@@ -1092,6 +1092,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
+		scrollToView(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -3186,6 +3187,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
 		sleepBySec(3);
+		waitForPageLoadSafari();
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -6303,9 +6305,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void removeProvidersFromPlanCard() {
 		try {
 			providerListPlanCard.click();
-			Actions action = new Actions(driver);
+//			Actions action = new Actions(driver);
 		while(removeProviderListPlanCard.size()!=0) {
-			action.moveToElement(removeProviderListPlanCard.get(0)).build().perform();
+//			action.moveToElement(removeProviderListPlanCard.get(0)).build().perform();
+			scrollToView(removeProviderListPlanCard.get(0));
 			removeProviderListPlanCard.get(0).click();
 //			jsClickNew(removeProviderListPlanCard.get(0));
 			System.out.println("Removed providers in plan card");
