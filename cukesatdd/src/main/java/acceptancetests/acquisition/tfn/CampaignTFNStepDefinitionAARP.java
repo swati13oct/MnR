@@ -1010,11 +1010,61 @@ public void the_user_close_reopen_broswer() {
 	}
 
 @Then("^the user clicks on Request a Free Decision Guide$")
-public void the_user_clicks_on_Request_a_Free_Decision() throws Throwable {
+public void the_user_clicks_on_Request_a_Free_Decision(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-	tfnPage.clickOnRequestADecisionGuide();
+	String TFNXpath = inputAttributesMap.get("TFN Xpath");
+	String ExpecetdTFNNo = inputAttributesMap.get("TFN No");
+//	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	//tfnPage.validateFederalTFNNo(TFNXpath,ExpecetdTFNNo);
+	tfnPage.clickOnRequestADecisionGuide(TFNXpath,ExpecetdTFNNo);
+	
 	
 	}
+
+
+@When("^the user clicks on Agent link for MedsuppPage$")
+public void User_navigate_through_Medsupp_EBRC(DataTable arg1) throws InterruptedException {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);	
+	if(myUHCAgentURL!=null){
+		tfnPage.clickonFindanAgentlinkMedsupp(myUHCAgentURL);
+		Assert.assertTrue(true);
+	}else
+		Assert.fail("Error in loading the UHC Agent Page");
+}
+
+@When("^the user performs plan search using Shop Pages for Medsupp Page$")
+public void Shop_Standalone_zipcode_details_MedsuppPage(DataTable givenAttributes) throws InterruptedException {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String zipcode = memberAttributesMap.get("Zip Code");
+	String county = memberAttributesMap.get("County Name");
+	String isMultiCounty = memberAttributesMap.get("Is Multi County");
+	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+	getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+	getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	VPPPlanSummaryPage plansummaryPage = null;
+	if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+		plansummaryPage = tfnPage.searchPlansWithOutCountyShopEnrollMedsupp(zipcode);
+	} else {
+		plansummaryPage = tfnPage.searchPlansShopEnrollMedsupp(zipcode, county);
+	}
+
+	if (plansummaryPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+	} else {
+		Assert.fail("Error Loading VPP plan summary page");
+	}
+}
 
 }
 

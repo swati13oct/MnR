@@ -360,6 +360,8 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param username
 	 * @param password
 	 */
+	//input[contains(@id,'passwdId_input')]
+	//By.xpath("//input[contains(@id,'SignIn')]"))
 	public void signIn(String username,String password) {
 		try {
 			jsClickNew(signIn);
@@ -367,8 +369,8 @@ public class VisitorProfilePage extends UhcDriver {
 		//	driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
 			//.sendKeys(username);
-			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			driver.findElement(By.xpath("//input[contains(@id,'passwdId_input')]")).sendKeys(password);
+			jsClickNew(driver.findElement(By.xpath("//input[contains(@id,'SignIn')]")));
 			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));

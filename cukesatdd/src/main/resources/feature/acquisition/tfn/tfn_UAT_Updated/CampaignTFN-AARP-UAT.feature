@@ -111,9 +111,6 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>        |
       | Campaign URL | <campaignUrl> |
-    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-   # Then the user validates PSC code
-    #  | PSC Code | <pscCode> |
        Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
@@ -122,14 +119,12 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
         Then the user validates TFN Number
         | TFN No | <MedsuppTFNNo> |
         | TFN Xpath | <ShopTFNxpath> |
-    Then the user navigates back to page    
-   When the user performs plan search using Shop Pages for campaign Links
+   # Then the user navigates back to page    
+   #When the user performs plan search using Shop Pages for campaign Links
+   When the user performs plan search using Shop Pages for Medsupp Page
      | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |   
-   # And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
-    #Then the user validates PSC code
-      #| PSC Code | <pscCode> |
 		 Then the user navigates to plan tab for any plan
         | Plan Type | <MAplantype> |
      Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
@@ -141,37 +136,26 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     | Plan Type | <MAplantype> |
      Then the user validates TFN Number
         | TFN No | <TFNNo> |
-        | TFN Xpath | <EnrollTFNxpath > |
-    #Then the user validates PSC code
-     # | PSC Code | <pscCode> |
-    #Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
-    	#| Zip Code        | <zipcode>|
-    	Then the user navigates back to page
-    	   Then the user navigates to plan tab for any plan
-        | Plan Type | <MSplantype> |
-     Then the user validates TFN Number
+        | TFN Xpath | <EnrollTFNxpath> |
+ 	Then the user navigates back to page
+ 	Then the user navigates to refresh page
+ 	Then the user navigates back to page
+ 	Then the user navigates to refresh page
+	#Then the user navigates to plan tab for any plan
+      #  | Plan Type | <MSplantype> |
+   	Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath1> |
-    # Then the site user fills all the details in MedsuppPage
-   		#| DOB           | <DOB>         | 
-   		Then the user enters and  saves the entered information in Pre-entry page for validation on IS form
+    Then the site user fills all the details in MedsuppPage for TFN
       | DOB | <dob> |
       Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath1> |
-      When the user clicks on Agent link and validates the correct URL is loaded
+      When the user clicks on Agent link for MedsuppPage
       |UHC Agent URL|  <UHCUrl>  |   
-     Then the user navigates back to page  
-    Then the user clicks on Request a Free Decision Guide on the Raight Rail on VPP PLan Summary Page for Med Supp Plans
-   		 Then the user validates TFN Number
-       | TFN No | <MedsuppTFNNo> |
+    Then the user clicks on Request a Free Decision Guide
+       | TFN No    | <MedsuppTFNNo> |
        | TFN Xpath | <TFNxpath> |
-  #Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
-      #| MedSupp URL | <agentApptUrl> |
-     # | TFN Xpath   | <agentApptTFN> |
-    #Then the user navigate to following Med Supp Plan URL and validate MedSupp TFN
-     # | MedSupp URL | <decisionGuideUrl> |
-     # | TFN Xpath   | <decisionGuideTFN> |
     Then the user navigates to plan tab for any plan
         | Plan Type | <PDPplantype> |
   Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
@@ -193,7 +177,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 
     Examples: 
    	|scenario             |planyear|zipcode|MSplantype|DOB       |UHCUrl                      | planName                                         |MAplantype|PDPplantype|isMultutiCounty | county            | pscCode  | site  |campaignUrl                                                                 | maUrl                       |   maTFN                                                       | pdpUrl                                  | pdpTFN                                                         | snpUrl                                                                                                                                                                                                                                                                                                                      | snpTFN                       | decisionGuideUrl                                                          | decisionGuideTFN     | agentApptUrl                                                     | agentApptTFN   |medSuppUrl                           |shoppages       |campaignUrl2      |TFNNo          |TFNxpath                             |MedsuppTFNNo              |MedsuppTFNxpath1                     | MedsuppTFNxpath                  | EnrollTFNxpath                    |MedsuppShopTFNxpath|ShopTFNxpath|
-    |Scenario 2 - AMP 	  | future  |90210 | MS       |10/11/1952|https://www.myuhcagent.com/ | AARP Medicare Advantage Freedom Plus (HMO-POS)   |MA        |PDP        |NO              | Baldwin County | 8001038     | ulayer|/shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038               | enroll/ma-enrollment.html   |  //*[contains(@class,'call')]//a[contains(@class,'tel')]      | enroll/pdp-enrollment.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] | shop/medicare-supplement-plans.html |/contact-us.html|/?wt.mc_id=8001038|1-877-541-7755 | (//a[contains(@class, 'tel')])[1]   |1-844-877-2813            |  //*[contains(@class,'tel right')]  |(//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[3] |(//a[contains(@class, 'tel')])[2]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
+    |Scenario 2 - AMP 	  | future  |90210 | MS       |01/01/1950|https://www.myuhcagent.com/ | AARP Medicare Advantage Freedom Plus (HMO-POS)   |MA        |PDP        |NO              | Baldwin County | 8001038     | ulayer|/shop/medicare-advantage-plans?zipcode=90210&WT.mc_id=8001038               | enroll/ma-enrollment.html   |  //*[contains(@class,'call')]//a[contains(@class,'tel')]      | enroll/pdp-enrollment.html              | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | //a[contains(@class, 'tel')] | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | //*[@id='tfn']       | health-plans/medicare-supplement-plans/agent-appointment.html    | //*[@id='tfn'] | shop/medicare-supplement-plans.html |/contact-us.html|/?wt.mc_id=8001038|1-877-541-7755 | (//a[contains(@class, 'tel')])[1]   |1-844-887-2813            |  //*[contains(@class,'tel right')]  |(//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[3] |(//a[contains(@class, 'tel')])[2]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
    
    
     ############################ Script 4: AMS Referral Traffic & Referral Visit###########################################
@@ -455,7 +439,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
         | TFN Xpath | <EnrollTFNxpath> |
     Given the user is on following acquisition site from Campaign Traffic
       | Site         | <site>         |
-      | Campaign URL | <campaignUrl2> |
+      | Campaign URL | <campaignUrl1> |
     Then the user validates TFN Number
        | TFN No | <TFNNo> |
         | TFN Xpath | <DCETFNxpath> |

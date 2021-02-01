@@ -56,11 +56,9 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
       Then the user validates TFN Number
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <MedsuppTFNxpath> |
-      When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
+      When the user clicks on Agent link for MedsuppPage
       |UHC Agent URL|  <UHCUrl>  |   
-     Then the user navigates back to page  
-    Then the user clicks on Request a Free Decision Guide on the Raight Rail on VPP PLan Summary Page for Med Supp Plans
-   		 Then the user validates TFN Number
+    Then the user clicks on Request a Free Decision Guide
        | TFN No | <MedsuppTFNNo> |
        | TFN Xpath | <TFNxpath> |
     Then the user navigates to plan tab for any plan
