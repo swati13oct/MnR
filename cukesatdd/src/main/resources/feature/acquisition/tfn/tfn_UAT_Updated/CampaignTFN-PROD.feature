@@ -153,34 +153,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows
       | PSC Code | <pscCode> |
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
-        | TFN Xpath | <TFNxpath> |
-	 #---------------commenting the lines from 1.09 to 1.12 as mentioned by UAT related to Authenticated user -----------------#
-		Then the user signs in with optum Id credentials
-      | User Name | <userName> |
-      | Password  | <password> |
-     Then the user validates TFN Number
-        | TFN No | <TFNNo> |
-        | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile
-	  Then the user validates TFN Number
-        | TFN No | <TFNNo> |
-        | TFN Xpath | <TFNxpath> |
-  Then the user validates PSC code
-      | PSC Code | <pscCode> | 
-     Then the user navigates to plan tab for any plan
-        | Plan Type | <MAplantype> |  
-    Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
-      | Plan Type | <MAplantype> |
-     Then the user validates TFN Number
-        | TFN No | <TFNNo> |
-        | TFN Xpath | <TFNxpath> |
-    Then the user navigates to following  DCE Page URL and validate Federal TFN
-      | DCE URL | <dceUrl> |
-    Then the user validates TFN Number
-        | TFN No | <TFNNo> |
-        | TFN Xpath | <DCETFNxpath> |
- 		#---------------Removing the above lines from 1.09 to 1.12-----------------#
-  	
+        | TFN Xpath | <TFNxpath> |	
 
     Examples: 
       | scenario         | site |zipcode|TFNNo          |isMultutiCounty | county                |pscCode | maUrl                     | pdpUrl                        |  snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                |  medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype|MAplantype|TFNxpath                         |MedsuppTFNxpath                  |DCETFNxpath|MSplantype|EnrollTFNxpath|userName|password |
