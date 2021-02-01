@@ -167,7 +167,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     | Plan Type | <PDPplantype> |
      Then the user validates TFN Number
         | TFN No | <TFNNo> |
-        | TFN Xpath | <EnrollTFNxpath > |
+        | TFN Xpath | <EnrollTFNxpath> |
     Then the user navigates to shop pages Page and validates Federal TFN
       | SHOPPAGES URL | <shoppages>    |
       | TFN Xpath     | <shoppagesTFN> |
