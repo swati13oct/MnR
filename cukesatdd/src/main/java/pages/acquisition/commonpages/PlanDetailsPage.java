@@ -1294,9 +1294,9 @@ public class PlanDetailsPage extends UhcDriver {
 			}else if(pdfType.contains("Prior Auth")) {
 				documentCode = "Prior Authorization";
 			}else if(pdfType.contains("Formulary Additions")){
-				documentCode = "Formulary Additions";
+				documentCode = "FORMULARY ADDITIONS";
 			}else if(pdfType.contains("Formulary Deletions")){
-				documentCode = "Formulary Deletions";
+				documentCode = "FORMULARY DELETIONS";
 			}else {
 				try {
 					Thread.sleep(1000);
