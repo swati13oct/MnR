@@ -17,7 +17,7 @@ detailedReport = true, detailedAggregatedReport = true, overviewReport = true, t
 outputFolder = "target/RunMRATDDAcquisitionCampaignTFNAARPUATStage")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn/tfn_UAT_Updated/CampaignTFN-AARP-UAT.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNAARPUATStage.json" }, tags = {"@Scenario_1_2_DirectTraffic_UAT,@Scenario_9_External_Link_UAT"})
-
+//
 public class RunMRATDDAcquisitionCampaignTFNAARPUATStage {
 
 }
