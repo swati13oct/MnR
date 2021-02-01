@@ -146,9 +146,9 @@ public class VppPlanValidationStepDefinition {
 									  
 									  if(sheetName.contains("PDP")) {
 										  if(!row.getCell(6).getStringCellValue().contains("NA")) {
-											  planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
-											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
-											  planDetailsPage.editDrugListAndRemoveDrug();
+											  //planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
+											  //benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
+											  //planDetailsPage.editDrugListAndRemoveDrug();
 										  }else 
 											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
 									  }else

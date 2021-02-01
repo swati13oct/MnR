@@ -33,7 +33,6 @@ import atdd.framework.MRScenario;
 import org.testng.Assert;
 
 import pages.acquisition.commonpages.EnterZipCodePage;
-import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -3721,9 +3720,6 @@ action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink)
 
 		}
 
-		public DCETestHarnessPage GetDCEtestHarnessPage() {
-			return new DCETestHarnessPage(driver);
-		}
 		
 		public GetStartedPage navigateToDCERedesignFromHome() throws InterruptedException {
 			validateNew(getStarted);

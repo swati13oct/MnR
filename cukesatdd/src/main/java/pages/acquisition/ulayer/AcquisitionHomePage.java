@@ -32,7 +32,6 @@ import atdd.framework.MRScenario;
 import org.testng.Assert;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.bluelayer.EnterZipCodePage;
-import pages.acquisition.dce.ulayer.DCETestHarnessPage;
 import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -1915,9 +1914,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public DCETestHarnessPage GetDCEtestHarnessPage() {
-		return new DCETestHarnessPage(driver);
-	}
 
 	public ZipcodeLookupHomePage looksupforZipcodes() {
 

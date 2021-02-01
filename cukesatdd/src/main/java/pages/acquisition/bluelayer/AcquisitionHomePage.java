@@ -29,7 +29,6 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 
 import org.testng.Assert;
@@ -2133,10 +2132,6 @@ private WebElement vppTop;
 
 	public String getTestSiteUrl() {
 		return testSiteUrl;
-	}
-
-	public DCETestHarnessPage GetDCEtestHarnessPage() {
-		return new DCETestHarnessPage(driver);
 	}
 
 	public void fixPrivateConnection() {

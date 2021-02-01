@@ -18,7 +18,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.dce.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -693,25 +692,5 @@ public class AepPlanDetailsPage extends UhcDriver {
 		return result;
 	}
 	
-	public void navigateToDCEandAddDrug(String drugName) throws InterruptedException {
-		
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
-	
-		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
-		dcePage.addDrug(drugName);
-		dcePage.clickOnReturnLink();
-	}
-
-	public void editDrugListAndRemoveDrug() {
-		validateNew(editDrugListLink);
-		editDrugListLink.click();
-		validateNew(deleteDrugLink);
-		deleteDrugLink.click();
-		validateNew(confirmDeleteDrug);
-		confirmDeleteDrug.click();
-		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
-		dcePage.clickOnReturnLink();
-	}
 
 }
