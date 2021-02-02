@@ -1039,18 +1039,17 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	public void savePlan(String planName)
 	{
-		/*WebElement savePlan = driver
-				.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));*/
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", saveBtn);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", saveBtn);
+		WebElement savePlan = driver
+				.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 
 //		Actions action = new Actions(driver);
 //		WebElement element = favoriteIcon;
 //		action.moveToElement(element).perform();
-//		jsMouseOver(favoriteIcon);
+		jsMouseOver(favoriteIcon);
 //		waitforElementNew(favoriteSuccess,5);
-//		System.out.println(favoriteSuccess.getText());
-		validate(savedBtn);
+		System.out.println(favoriteSuccess.getText());
 
 	}
 	
@@ -1827,7 +1826,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
-		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().trim().equals(expectedMsg));
 	}
 
 	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']/parent::button")
