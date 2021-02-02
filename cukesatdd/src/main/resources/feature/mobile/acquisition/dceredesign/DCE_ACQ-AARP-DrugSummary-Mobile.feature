@@ -23,6 +23,36 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
       |   10001 | MAPD     | none   | no              | Emsam    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
+  @dceNBADrugSummaryPage @F465679 @decRelease
+  Scenario Outline: Test to Verify that DCE NBA on Drug summary page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
+      | ZipCode | <zipcode> |
+    # And user selects plan year in AARP
+    And user clicks on continue button in Zip Entry Page
+    #Then load screen should be displayed in AARP
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see Medicare Advantage plan by default
+    And verify DCE NBA is displayed on drug summary page
+
+    @dceNBADrugSummaryPage_AARP
+    Examples: 
+      | site | zipcode | county | isMultutiCounty | drug1   |
+      | AARP |   10001 | none   | no              | Orkambi |
+
+    @dceNBADrugSummaryPage_UHC
+    Examples: 
+      | site | zipcode | county | isMultutiCounty | drug1   |
+      | UHC  |   10001 | none   | no              | Orkambi |
+
   @DCE_DrugSummary_ValidatePage_AARP @OnlyProd
   Scenario Outline: Test to verify the Drug summary page
     Given the user is on medicare acquisition site landing page
@@ -48,8 +78,6 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Examples: 
       | site | path                                             | pageName                   | drugName | zipCode |
       | AARP | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started | Lipitor  |   10001 |
-
-  
 
   @drugSummary_SAM_Icon_AARP
   Scenario Outline: Test to verify SAM icon is visible on Drug summary page

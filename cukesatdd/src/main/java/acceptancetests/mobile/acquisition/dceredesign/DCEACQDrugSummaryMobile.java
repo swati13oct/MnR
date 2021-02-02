@@ -71,20 +71,19 @@ public class DCEACQDrugSummaryMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPath(path);
 	}
-	
-	
+
 	@When("^I access the acquisition DCE tool from home page$")
 	public void I_access_the_DCE_tool_home_page() throws InterruptedException {
 
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) acquisitionHomePage.navigateToDCEToolFromHome();
+		DrugCostEstimatorPageMobile dcePage = (DrugCostEstimatorPageMobile) acquisitionHomePage
+				.navigateToDCEToolFromHome();
 		if (null != dcePage) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dcePage);
 		} else
 			Assert.fail("DCE page object not loaded");
 	}
-	
 
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
@@ -94,15 +93,16 @@ public class DCEACQDrugSummaryMobile {
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		aquisitionhomepage.openMobileURL();
-		//aquisitionhomepage.openPRE();
-		
+		// aquisitionhomepage.openPRE();
+
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
-	
+
 	@When("^the user navigates to following medicare acquisition site page$")
-	public void the_user_navigates_to_following_AARP_medicare_acquisition_page(DataTable givenAttributes) throws Throwable {
+	public void the_user_navigates_to_following_AARP_medicare_acquisition_page(DataTable givenAttributes)
+			throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -111,7 +111,7 @@ public class DCEACQDrugSummaryMobile {
 		}
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : "+path);
+		System.out.print("Path to Acq page : " + path);
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPath(path);
@@ -119,10 +119,11 @@ public class DCEACQDrugSummaryMobile {
 
 	@When("^user verify the drug summary page$")
 	public void user_verify_the_drug_summary_page() throws InterruptedException {
-		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateDrugSummaryPage();
 	}
-	
+
 	@Then("^the user validates Get Started Page for UHC$")
 	public void the_user_validates_Get_Started_Page_UHC() throws Throwable {
 		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -196,26 +197,42 @@ public class DCEACQDrugSummaryMobile {
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.clickContinueBtn();
 	}
-	
+
 	@Then("^load screen should be displayed on UHC$")
 	public void load_screen_should_be_displayed_on_uhc() {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		// zipCodePlanYearPage.verifyLoadScreen();
 	}
-	
+
 	@Then("^user should be navigated to Review drug cost estimate page on UHC$")
 	public void user_should_be_navigated_to_Review_drug_cost_estimate_page_UHC() {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.verifyReviewDrugCostPageDisplayed();
 	}
-	
+
 	@Then("^user verify the drug summary page on UHC$")
 	public void user_verify_the_drug_summary_page_uhc() throws InterruptedException {
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		drugSummaryPage.validateDrugSummaryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@When("^user should be able to see Medicare Advantage plan by default$")
+	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		// drugSummaryPage.verifyDefaultPlanType();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+
+	@Then("^verify DCE NBA is displayed on drug summary page$")
+	public void verify_dce_NBA_is_displayed_on_summary_page() {
+		
+
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateDCENBAModal();
 	}
 
 }

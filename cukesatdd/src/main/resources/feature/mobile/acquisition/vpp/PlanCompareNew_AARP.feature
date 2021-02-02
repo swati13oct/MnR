@@ -14,6 +14,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
     	|Plan Year	| <planyear>|
     Then verify plan compare checkbox is not visible on plan summary on AARP
 
+
     Examples: 
       | TID   | zipcode | isMultiCounty | county           | plantype |planyear|
       | 00001 |   96799 | NO            | Western District | PDP      |current|

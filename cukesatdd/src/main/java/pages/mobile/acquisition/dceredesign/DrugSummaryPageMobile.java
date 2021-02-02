@@ -24,6 +24,18 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
 	public WebElement reviewDrugCostPageHeading;
+	
+	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
+	public WebElement dceNBAModal;
+
+	@FindBy(xpath = "//*[@id='guest-flow-widget-head' and text()='Save your work for later']")
+	public WebElement dceNBAModalMsg;
+
+	@FindBy(xpath = "//button/*[text()='Create Your Profile']")
+	public WebElement dceNBAModalBtn;
+	
+	@FindBy(id = "SignIn")
+	public WebElement signInBtn;
 
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
 	public WebElement planTypeToggle;
@@ -454,6 +466,20 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 	}
 	
+	
+	public void validateDCENBAModal() {
+		pageloadcomplete();
+		scrollToView(dceNBAModal);
+		if (validateNew(dceNBAModal)) {
+			validateNew(dceNBAModalMsg);
+			validateNew(dceNBAModalBtn);
+			
+			jsClickNew(dceNBAModalBtn);
+			waitforElement(signInBtn);
+			Assert.assertTrue("user not navigated to login page",
+					driver.getCurrentUrl().contains("app/index.html#/login"));
+		}
+	}
 	
 	public void verifyReviewDrugCostPageDisplayed() {
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);

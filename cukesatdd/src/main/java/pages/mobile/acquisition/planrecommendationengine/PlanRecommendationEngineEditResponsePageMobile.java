@@ -88,9 +88,9 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 
 	@FindBy(css = "#plan-list-4 button#editMyAnswers")
 	private WebElement snpEditResponseButton;
-	
-	//Save Results elements
-	
+
+	// Save Results elements
+
 	@FindBy(css = "#plan-list-1 button#updateSaveRecommendationBtn")
 	private WebElement mapdSaveResultsButton;
 
@@ -99,16 +99,16 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 
 	@FindBy(css = "#plan-list-4 button#updateSaveRecommendationBtn")
 	private WebElement snpSaveResultsButton;
-	
+
 	@FindBy(css = "#saveResultConfirmationTitle")
 	private WebElement saveResultsTitle;
-	
+
 	@FindBy(css = "#saveResultPopupClose")
 	private WebElement saveResultsPopupClose;
-	
+
 	@FindBy(css = "button#keepShoppingBtn")
 	private WebElement KeepShoppingPlansButton;
-	
+
 	@FindBy(css = "button#viewPlanBtn")
 	private WebElement ViewProfileButton;
 
@@ -196,10 +196,11 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
 	}
-	
+
 	public void navigateSaveResultsPage(String flow) {
+		pageloadcomplete();
 		if (flow.equalsIgnoreCase("pdp")) {
-			//pdpSaveResultsButton.click();
+
 			jsClickNew(pdpSaveResultsButton);
 		} else {
 			if (validate(mapdSaveResultsButton, 10))
@@ -457,7 +458,8 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 			}
 			checkContent("drugs");
 		} else if (section.equalsIgnoreCase("special")) {
-			PlanRecommendationEngineSpecialNeedsPageMobile snp = new PlanRecommendationEngineSpecialNeedsPageMobile(driver);
+			PlanRecommendationEngineSpecialNeedsPageMobile snp = new PlanRecommendationEngineSpecialNeedsPageMobile(
+					driver);
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
 			jsClickNew(saveBtn);
 			checkContent("special");
@@ -473,7 +475,8 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 			jsClickNew(saveBtn);
 			checkContent("additional");
 		} else if (section.equalsIgnoreCase("cost")) {
-			PlanRecommendationEngineCostPreferencesPageMobile cost = new PlanRecommendationEngineCostPreferencesPageMobile(driver);
+			PlanRecommendationEngineCostPreferencesPageMobile cost = new PlanRecommendationEngineCostPreferencesPageMobile(
+					driver);
 			cost.edit_cost(inputValues.get("Preference Option"));
 			jsClickNew(saveBtn);
 			checkContent("cost");
@@ -481,14 +484,15 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 			PlanRecommendationEngineDoctorsPage doc = new PlanRecommendationEngineDoctorsPage(driver);
 			doc.edit_doctor(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
 					inputValues.get("Multi Doctor"));
-//			jsClickNew(saveBtn);
+			// jsClickNew(saveBtn);
 			checkContent("doctor");
 			if (inputValues.get("Doctors").contains(("look"))) {
 				checkDrugDocInfo("doctor", false);
 				docEdit = true;
 			}
 		} else if (section.equalsIgnoreCase("priorities")) {
-			PlanRecommendationEnginePrioritiesPageMobile priority = new PlanRecommendationEnginePrioritiesPageMobile(driver);
+			PlanRecommendationEnginePrioritiesPageMobile priority = new PlanRecommendationEnginePrioritiesPageMobile(
+					driver);
 			priority.prioritiesFunctional(inputValues.get("Priority Option"), inputValues.get("Priorities"));
 			jsClickNew(saveBtn);
 			checkContent("priorities");
@@ -513,7 +517,8 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 		inputValues = userInput;
 		verifyClickEditButton("coverage", true);
 		validate(progressInfo, 10);
-		PlanRecommendationEngineCoverageOptionPageMobile coverage = new PlanRecommendationEngineCoverageOptionPageMobile(driver);
+		PlanRecommendationEngineCoverageOptionPageMobile coverage = new PlanRecommendationEngineCoverageOptionPageMobile(
+				driver);
 		coverage.chooseCoverageOption(inputValues.get("Plan Type").toUpperCase().replace("PDPTOMAPD", "MAPD"));
 		jsClickNew(saveBtn);
 	}
@@ -527,14 +532,14 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 		inputValues = userInput;
 		editValue("drugs");
 	}
-	
+
 	public void validateSaveResults(String plantype) {
 		System.out.println("Validating Save Results : ");
 		pageloadcomplete();
 		navigateSaveResultsPage(plantype);
 		jsClickNew(ViewProfileButton);
 		threadsleep(5000);
-//		savedrecommendationVP();
+		// savedrecommendationVP();
 	}
 
 }
