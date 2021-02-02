@@ -133,15 +133,23 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
    Then the user verify the Retail chain pharmacy on detail page 
    Then the user Captures Drug costs on Drug Details Page  
    And the user validates link to Drug Summary Page
-   And the user validates functional tool tips for the given plan
-      | Plan Name | <planname> |
-   And the user Captures Drug costs on Drug Summary Page for the given plan
-      | Plan Name | <planname> |
+  # And the user validates functional tool tips for the given plan
+   #   | Plan Name | <planname> |
+    And the user Captures Drug costs on Drug Summary Page for the given plan
+       | Plan Name | <planname> |
     And the user compares drug costs for drug details and drug summary pages
+    Then the user click on return to plan summary on DCE summary page
+    And user changes the new zipcode on vpp summary page
+     | New Zip Code        | <newzipcode> |
+    And the user views the plans of the below plan type
+      | Plan Type | <newplantype> |  
+   And the user clicks on drug dropdown on plan summary page and navigates to DCE
+      | Plan Type | <newplantype> |
+      | Plan Name | <newplanname> |
      
     
     
      Examples: 
-      | Scenario           | site  | path                                                                                   | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium |                     
-      | E2E Scenario 4_UMS | AARP  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 
+      | Scenario           | site  | path                                                                                   | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | newzipcode |  newplantype |  newplanname                                        |             
+      | E2E Scenario 4_UMS | AARP  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |
     
