@@ -85,6 +85,7 @@ public class DCEACQHomeMobile {
 	public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Build_DrugList() throws Throwable {
 		GetStartedPageMobile DCEgetStarted = (GetStartedPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		BuildYourDrugListMobile DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		//druglist = "";

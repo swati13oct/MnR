@@ -333,7 +333,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Hospitals, 30);
 		Hospitals.click();
 
-		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
+		pageloadcomplete();
 		jsClickNew(selectProviderBtn);
 		
 		if (validate(selectLocationOption)) {

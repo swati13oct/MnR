@@ -2907,7 +2907,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// } else {
 		// Assert.fail("Visitor Profile elements are not present on home page");
 		// }
-
+		pageloadcomplete();
+		scrollToView(visitorprofileicon);
 		jsClickNew(visitorprofileicon);
 		WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
 		// CheckPageLoad();
@@ -3176,8 +3177,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void Accessibility() {
 
-		threadsleep(6);
+		pageloadcomplete();
 		// Accessibility.click();
+		scrollToView(Accessibility);
 		jsClickNew(Accessibility);
 		threadsleep(5);
 		// Assert.assertEquals(driver.getCurrentUrl(),

@@ -193,23 +193,23 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
 			drugsearchBox.clear();
-			jsSendkeys(drugsearchBox, drugName);
+			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
-			jsClickNew(drugsearchButton);
-			//Select modal
-			validate(searchList.get(0), 30);
-			threadsleep(2000);
-			for(WebElement elm:searchList) {
-				if(elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
-					jsClickNew(elm.findElement(By.cssSelector("button")));
-					break;
+				jsClickNew(drugsearchButton);
+				// Select modal
+				validate(searchList.get(0), 30);
+				threadsleep(2000);
+				for (WebElement elm : searchList) {
+					if (elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
+						jsClickNew(elm.findElement(By.cssSelector("button")));
+						break;
+					}
 				}
+				threadsleep(2000);
+			} else {
+				threadsleep(10000);
+				jsClickNew(drugsAutoList.get(0));
 			}
-			threadsleep(2000);
-		} else {
-			threadsleep(10000);
-			jsClickNew(drugsAutoList.get(0));
-		}
 
 			validate(modalDosageSelect, 30);
 			threadsleep(2000);
@@ -258,8 +258,26 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public void useraddDrugsDCEWithoutVPP(String drugDetails) {
 		threadsleep(5000);
 		drugsHandlerWithdetails(drugDetails);
-		getDrugsDCE();
+		getDrugNamesDCE();
 	}
+	
+	@FindBy(css = "table[class*='yourDrugsTable'] tbody >tr")
+	private List<WebElement> drugsNamesinDCE; 
+	
+	public ArrayList<String> getDrugNamesDCE() {
+		threadsleep(5000);
+		int count = drugsNamesinDCE.size();
+		DCEDrugsResults = new ArrayList<String>();
+		for (int i = count-1; i >= 0; i--){
+			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div[class='align-items-start'] span:nth-of-type(1)")).getText().trim().replace("(Brand)", "").toUpperCase()+ "" +
+					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("Qty ", "").replace(", refill", "").toUpperCase());
+		}
+		Collections.sort(DCEDrugsResults);
+		System.out.println("DrugsList in DCE Size is : "+DCEDrugsResults.size());
+		System.out.println("DrugList in DCE Content is : "+DCEDrugsResults);
+		return DCEDrugsResults;
+	}
+	
 
 	public ArrayList<String> getDrugsDCE() {
 		threadsleep(5000);

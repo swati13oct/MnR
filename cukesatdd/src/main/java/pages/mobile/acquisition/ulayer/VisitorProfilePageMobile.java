@@ -462,7 +462,6 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		validate(backToDrugCostEstimatorLink);
 	}
 
-	
 	public void validateAddedPlansNew(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		CommonUtility.checkPageIsReadyNew(driver);

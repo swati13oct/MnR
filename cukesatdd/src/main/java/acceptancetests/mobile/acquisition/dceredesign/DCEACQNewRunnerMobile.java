@@ -366,7 +366,7 @@ public class DCEACQNewRunnerMobile {
 	@Then("^the user clicks PrescriptionBenifit Tab on Plan Details Page$")
 	public void the_user_clicks_PrescriptionBenifit_Tab_on_Plan_Details_Page() throws Throwable {
 
-		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
+		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
 		DrugDetailsPageMobile drugDetailsPage = plandetailspage.clickPrescriptionBenifitTab();

@@ -557,7 +557,9 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	//	sendkeys(HomephoneNumberField, HomeNumber);
 		HomephoneNumberField.sendKeys(HomeNumber);
 		validateNew(MobileNumberField);
-		sendkeys(MobileNumberField, MobileNumber);
+		scrollToView(MobileNumberField);
+		//sendkeys(MobileNumberField, MobileNumber);
+		jsSendkeys(MobileNumberField, MobileNumber);
 		//sendkeysNew(MiddleNameField, MiddleName);
 		MiddleNameField.sendKeys(MiddleName);
 		//sendkeys(Email, EmailAddress);

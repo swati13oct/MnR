@@ -287,7 +287,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	private List<WebElement> DrugsNames;
 
 	@FindBy(xpath = "//*[contains(@class,'get-started-banner')]//button[contains(text(),'Get Started')]")
-	private  WebElement StartNowButton;
+	private WebElement StartNowButton;
 
 	// Start Over Popup
 
@@ -363,11 +363,9 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "input#currentYear[class*='selected']")
 	private WebElement currentPlanYearSelected;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
 	private WebElement adddrugbtn;
-	
-	
 
 	// Result Loading Page Element Verification Method
 
@@ -387,7 +385,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		pageloadcomplete();
 
 		validate(planZipInfo, 60);
-		//waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		// waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		Assert.assertTrue(planZipInfo.getText().contains(zip), "Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
@@ -431,7 +429,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 			jsClickNew(continueBtn);
 
 		} else {
-			
+
 			Assert.assertTrue(zipCode.getAttribute("ng-reflect-model").contains(zip), "Invalid Zip");
 			if (isMultiCounty.equalsIgnoreCase("NO")) {
 				validate(countyInfo, 20);
@@ -733,17 +731,19 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> drug, ArrayList<String> drugListVPP) {
-
-		if (drug.size() == drugListVPP.size() && count == drug.size()) {
-			String druglist = drug.toString();
-			String vppdruglist = drugListVPP.toString();
-			if (druglist.contains(vppdruglist)) {
+		pageloadcomplete();
+		if(drug.size()==drugListVPP.size() && count==drug.size()) {
+			String druglist =drug.toString().toUpperCase();
+			String vppdruglist =drugListVPP.toString();
+			if(druglist.contains(vppdruglist)) {
 				System.out.println("Drug and Modal Result's Content matched");
-			} else {
+			}
+			else {
 				System.out.println("Drug and Modal Result's Content mismatch");
 				Assert.assertTrue(false);
 			}
-		} else {
+		}
+		else {
 			System.out.println("Drug and Modal Results Count mismatch");
 			Assert.assertTrue(false);
 		}
@@ -773,7 +773,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	public void validateDrugPage(String plan, boolean removedrug) {
 		System.out.println("Validating Drugs in Drug Page");
-	
+
 		scrollToView(getStartedBtn);
 		jsClickNew(getStartedBtn);
 		threadsleep(2000);
