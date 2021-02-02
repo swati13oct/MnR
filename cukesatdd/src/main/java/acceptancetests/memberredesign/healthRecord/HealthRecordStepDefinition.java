@@ -413,16 +413,22 @@ public class HealthRecordStepDefinition {
 		HealthRecordPage healthRecordPage = new HealthRecordPage(wd);
 		wd=healthRecordPage.navigateToBenefitsPage(memberType);
 
-		//note: consumerDetail only show up on secondary page, get all the info now for later use
-		String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
-		boolean isComboUser=memberType.toLowerCase().contains("combo");
-		String lookForPlanCategory=planType;
-		if (planType.toUpperCase().contains("SHIP")) {
-			String[] tmp=planType.split("_");
-			Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
-			lookForPlanCategory=tmp[1];
+		boolean hasPaymentTab=false;
+		//note: for Safari, localStorage may not be supported, workaround it by just checking if paymnet tab is on page
+		if (MRScenario.browserName.equalsIgnoreCase("Chrome")) {
+			//note: consumerDetail only show up on secondary page, get all the info now for later use
+			String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
+			boolean isComboUser=memberType.toLowerCase().contains("combo");
+			String lookForPlanCategory=planType;
+			if (planType.toUpperCase().contains("SHIP")) {
+				String[] tmp=planType.split("_");
+				Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
+				lookForPlanCategory=tmp[1];
+			}
+			hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
+		} else {
+			hasPaymentTab=healthRecordPage.hasPaymentTabOnPage();
 		}
-		boolean hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
 		getLoginScenario().saveBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB, hasPaymentTab);
 
 		boolean expHealthRecordLnk=(Boolean) getLoginScenario().getBean(HealthRecordCommonConstants.EXPECT_IHR_LINK);	
@@ -646,16 +652,20 @@ public class HealthRecordStepDefinition {
 		if (getLoginScenario().getBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB)==null) {
 			wd=healthRecordPage.navigateToBenefitsPage(memberType);
 
-			//note: consumerDetail only show up on secondary page, get all the info now for later use
-			String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
-			boolean isComboUser=memberType.toLowerCase().contains("combo");
-			String lookForPlanCategory=planType;
-			if (planType.toUpperCase().contains("SHIP")) {
-				String[] tmp=planType.split("_");
-				Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
-				lookForPlanCategory=tmp[1];
+			if (MRScenario.browsername.equalsIgnoreCase("FireFox")) {
+				//note: consumerDetail only show up on secondary page, get all the info now for later use
+				String consumerDetailStr=healthRecordPage.getConsumerDetailsFromlocalStorage();
+				boolean isComboUser=memberType.toLowerCase().contains("combo");
+				String lookForPlanCategory=planType;
+				if (planType.toUpperCase().contains("SHIP")) {
+					String[] tmp=planType.split("_");
+					Assert.assertTrue("PROBLEM - for SHIP user planType value needs to have format SHIP_<planCategory>, please update input in feature file", tmp.length>1);
+					lookForPlanCategory=tmp[1];
+				}
+				hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
+			} else {
+				hasPaymentTab=healthRecordPage.hasPaymentTabOnPage();
 			}
-			hasPaymentTab=healthRecordPage.getPremiumPaymentInConsumerDetails(isComboUser, lookForPlanCategory, consumerDetailStr);
 			getLoginScenario().saveBean(HealthRecordCommonConstants.HAS_PAYMENT_TAB, hasPaymentTab);
 
 		} else {

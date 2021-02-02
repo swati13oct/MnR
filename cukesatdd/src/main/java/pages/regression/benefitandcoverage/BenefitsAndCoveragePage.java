@@ -326,47 +326,112 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Look Up Drugs Button", LookUpDrugsButton);
 		scrollElementToCenterScreen(LookUpDrugsButton);
 		String actHref=LookUpDrugsButton.getAttribute("href");
+		String initialUrl = driver.getCurrentUrl();
+		LookUpDrugsButton.click();
 		if (MRScenario.environment.contains("team-a")) {
 			//note: can't click Rally pages on team env
 			String expHref="/pharmacy-uhc/drugs";
 			Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
 					+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
 					actHref.contains(expHref));
-			return;
-		}
-		LookUpDrugsButton.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
-			if (actHref.contains("/pharmacy-uhc/drugs")) {
-				String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
-				String actUrl=driver.getCurrentUrl();
-				Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
-			} else { //note: assume still the old DCE page if not the new Rally DCE
-				CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
-				Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
-						validate(oldDcePgHeader,0) );
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-		} else {
-			if (driver.getCurrentUrl().contains("/pharmacy-uhc/drugs")) {
-				if (validate(newDcePrePgCloseBtn,0)) {
-					newDcePrePgCloseBtn.click();
-					CommonUtility.checkPageIsReadyNew(driver);
-				} else {
-					CommonUtility.waitForPageLoad(driver, newDcePgSearchBtn, 5);
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
+				if (actHref.contains("/pharmacy-uhc/drugs")) {
+					String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
+					String actUrl=driver.getCurrentUrl();
+					Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+					driver.get(initialUrl);
+					Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+initialUrl+"' | Actual URL='"+initialUrl+"'", initialUrl.contains("member/benefits/overview.html"));
+				} else { //note: assume still the old DCE page if not the new Rally DCE
+					CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
 					Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
-							validate(newDcePgSearchBtn,0) );
+							validate(oldDcePgHeader,0) );
 				}
 			} else {
-				CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
-				Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
-						validate(oldDcePgHeader,0) );
+				if (driver.getCurrentUrl().contains("/pharmacy-uhc/drugs")) {
+					if (validate(newDcePrePgCloseBtn,0)) {
+						newDcePrePgCloseBtn.click();
+						CommonUtility.checkPageIsReadyNew(driver);
+					} else {
+						CommonUtility.waitForPageLoad(driver, newDcePgSearchBtn, 5);
+						Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+								validate(newDcePgSearchBtn,0) );
+					}
+				} else {
+					CommonUtility.waitForPageLoad(driver, oldDcePgHeader, 5);
+					Assert.assertTrue("PROBLEM - unable to locate the DCE page header", 
+							validate(oldDcePgHeader,0) );
+				}
 			}
-		}
-		driver.navigate().back();
-		CommonUtility.checkPageIsReadyNew(driver);
-		checkModelPopup(driver,2);
-	}
-
+		} else if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("offline") || MRScenario.environment.contains("prod") ) {
+			String expUrl="medicare/member/drug-lookup/overview.html#/drug-cost-estimator";
+			String actUrl=driver.getCurrentUrl();
+			Assert.assertTrue("PROBLEM - not getting expected URL. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			driver.get(initialUrl);
+	    }
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+		/* Time being added , will modify when changes at stage ,offline prod and prod 
+		 * if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("offline") || MRScenario.environment.contains("prod")) {
+			String expHref = null;
+			if(MRScenario.environment.contains("stage") && plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
+				expHref="https://member.int.uhc.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}else if(MRScenario.environment.contains("stage") && plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("MEDICA")) {
+				expHref="https://member.int.mymedicareaccount.uhc.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}
+			if(MRScenario.environment.contains("offline") && !MRScenario.isTestHarness.equalsIgnoreCase("YES") && plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
+				expHref="https://member.uat.uhc.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}else if(MRScenario.environment.contains("offline")&& !MRScenario.isTestHarness.equalsIgnoreCase("YES")  && plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("MEDICA")) {
+				expHref="https://member.uat.mymedicareaccount.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}
+			if(MRScenario.environment.contains("prod") && !MRScenario.isTestHarness.equalsIgnoreCase("YES") && plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("PDP")) {
+				expHref=" https://member.uhc.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}else if(MRScenario.environment.contains("prod") && !MRScenario.isTestHarness.equalsIgnoreCase("YES") && plantype.equalsIgnoreCase("PCP") || plantype.equalsIgnoreCase("MEDICA")) {
+				expHref="https://member.mymedicareaccount.com/pharmacy-uhc/drugs";
+				Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+						+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+						actHref.contains(expHref));
+			}
+			LookUpDrugsButton.click();
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
+				String expUrl=expHref;
+				String actUrl=driver.getCurrentUrl();
+				Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+			}
+		} */	
+	} 
+	
 	public void validategrouplookupdrugsbutton() 
 	{
 		validateNew(LookUpDrugsButton,0);
@@ -440,10 +505,48 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 	/**
 	 * Validates the text in locate a pharmacy section
+	 * @throws InterruptedException 
 	 */
-	public void validate_locateapharmacysection(String plantype) {
-		validateWithValue("PHARMACY LOCATOR",locateapharmacysection);
-		validateWithValue("LOCATE A PHARMACY button",locateapharmacybutton);
+	public void validate_locateapharmacysection(String plantype) throws InterruptedException {
+	
+		String actHref=locateapharmacybutton.getAttribute("href");
+		String initialUrl = driver.getCurrentUrl();
+		
+		if (MRScenario.environment.contains("team-a")) {
+			//note: can't click Rally pages on team env
+			String expHref="/pharmacy-uhc/pharmacies";
+			Assert.assertTrue("PROBLEM - env: '"+MRScenario.environment+"' - href value is not as expected for '' link.  "
+					+ "Expected to contain '"+expHref+"' | Actual href value='"+actHref+"'", 
+					actHref.contains(expHref));
+			CommonUtility.checkPageIsReadyNew(driver);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (MRScenario.isTestHarness.equalsIgnoreCase("YES")) { //note: new DCE is a Rally page, access via testharness will land on myuhc.com login page
+				if (actHref.contains("/pharmacy-uhc/pharmacies")) {
+					locateapharmacybutton.click();
+					Thread.sleep(5000);
+					String expUrl="https://www.myuhc.com/member/prelogoutLayout.do?reason=logout&currentLanguageFromPreCheck=en";
+					String actUrl=driver.getCurrentUrl();
+					Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+expUrl+"' | Actual URL='"+actUrl+"'", actUrl.contains(expUrl));
+					driver.get(initialUrl);
+					Assert.assertTrue("PROBLEM - not getting expected URL. From team or stage env. Expect to contains '"+initialUrl+"' | Actual URL='"+initialUrl+"'", initialUrl.contains("member/benefits/overview.html"));
+				} else { //note: assume still the old pharmacy  page if not the new Rally pharmacy
+					CommonUtility.waitForPageLoad(driver,oldPharmacyLocatorHeader, 5);
+					Assert.assertTrue("PROBLEM - unable to locate the Pharmacy Locator page header", 
+							validate(oldPharmacyLocatorHeader,0) );
+				}
+			} else if (driver.getCurrentUrl().contains("/pharmacy-uhc/pharmacies")) {
+					validate(rallyPharmacyResultsHeader,0);
+					CommonUtility.checkPageIsReadyNew(driver);
+				} 
+		}	
+		else if (MRScenario.environment.contains("stage") || MRScenario.environment.contains("offline") || MRScenario.environment.contains("prod")) {
+				validateWithValue("PHARMACY LOCATOR",locateapharmacysection);
+				validateWithValue("LOCATE A PHARMACY button",locateapharmacybutton);
+		}
 	}
 
 	/**
@@ -1278,7 +1381,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		targetDocName="VIEW OTHER DOCUMENTS AND RESOURCES";
 		System.out.println("Proceed to validate '"+targetDocName+"' link");
 		validateNew(Viewotherdocsinpdfpdp);
-		String expHref="/content/medicare/member/documents/overview.html";
+		String expHref="/member/documents/overview.html";
 		String actHref=Viewotherdocsinpdfpdp.getAttribute("href");
 		Assert.assertTrue("PROBLEM - '"+targetDocName+"' link href value is not as expected.  Expected to contain '"+expHref+"' | Actual = '"+actHref+"'", actHref.contains(expHref));
 		/* keep re-activate this validation if planDoc page ever load faster...
@@ -2736,8 +2839,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		validateWithValue("Drug cost table is diplaying for PDP GROUP NON LIS", drugTbl);
 		scrollElementToCenterScreen(drugTbl);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", drugTbl);
-		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage*\n"
-				+"Tier 1 \n"
+		//note: online-stage and prod content was slightly different by extra space
+		String pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage*\n";
+		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod")) {
+			pdpGroupTable_2021="Annual Deductible Stage Initial Coverage Stage Coverage Gap Stage Catastrophic Coverage Stage*\n";
+		}
+		pdpGroupTable_2021=pdpGroupTable_2021+
+				"Tier 1 \n"
 				+"No Deductible\n"
 				+"$10.00\n"
 				+"$10.00\n"
@@ -2768,7 +2876,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 			System.err.println(">>>>>>>>Problem<<<<<<<<<<<<<<<The data in the drug cost table is not displaying correctly<<<<<<<<<<<<<");
 
 			testNote.add("The data in the drug cost table is not displaying correctly. table='"+tbl+"'");
-			testNote.add("The data in the drug cost table is not displaying correctly");
+			//tbd testNote.add("The data in the drug cost table is not displaying correctly");
 			testNote.add("\n>>>>>>>>>>>>>The Expected Table  value is<<<<<<<<<<<<<<<<< \n"+pdpGroupTable);
 			testNote.add("\n>>>>>>>>>>>>>The Actual Table value is<<<<<<<<<<<<<<<<<<<< \n"+drugTbl.getText());
 		} 
@@ -3777,7 +3885,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -3854,7 +3962,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -3901,7 +4009,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"100% until the $275.00 deductible is met.*\n"
 				+"$95.00\n"
 				+"$95.00\n"
@@ -3950,7 +4058,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$275.00\n"
 				+"$35.00\n"
 				+"$35.00\n"
@@ -4002,7 +4110,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"100% until the $275.00 deductible is met.*\n"
 				+"$35.00\n"
 				+"$35.00\n"
@@ -4054,7 +4162,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -4103,7 +4211,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"$12.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4186,7 +4294,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"$20.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4240,7 +4348,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$10.00\n"
 				+"$10.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4292,7 +4400,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$105.00\n"
 				+"$105.00\n"
 				+"Tier 3\n"
@@ -4516,7 +4624,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		+"Tier 2\n"
 		+"$0.00\n"
 		+"$0.00\n"
-		+"Select Insulin Drugs Tier 3\n"
+		+"Tier 3: Select Insulin Drugs \n"
 		+"$15.00\n"
 		+"$15.00\n"
 		+"Tier 3\n"
@@ -4597,7 +4705,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4822,7 +4930,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$15.00\n"
 				+"$15.00\n"
 				+"Tier 3\n"
@@ -4903,7 +5011,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -4952,7 +5060,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -5003,7 +5111,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$20.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5057,7 +5165,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"$0.00\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5373,7 +5481,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$0.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$95.00\n"
 				+"$95.00\n"
 				+"Tier 3\n"
@@ -5424,7 +5532,7 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 				+"Tier 2\n"
 				+"$12.00\n"
 				+"no more than 25% for generic drugs or 25% for brand name drugs\n"
-				+"Select Insulin Drugs Tier 3\n"
+				+"Tier 3: Select Insulin Drugs \n"
 				+"$35.00\n"
 				+"$35.00\n"
 				+"Tier 3\n"
@@ -5745,13 +5853,13 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 		Learnmoretierslink.click();
 		if (insulinFlag.equalsIgnoreCase("nonInsulin")) {
 			Assert.assertTrue("PROBLEM, unable to locate the 'Learn More About Drug Tiers' link content'", validate(LearnmoretierslinkInsulinContent,0));
-			String expText="Select Insulin Drugs Tier 3";
+			String expText="Tier 3 - Select Insulin Drugs";
 			String actText=LearnmoretierslinkInsulinContent.getText();
 			System.out.println("TEST - actText="+actText);
 			Assert.assertTrue("PROBLEM - user with no insulin should NOT be able to locate text '"+expText+"' from the 'Learn more tiers link' content",!actText.contains(expText));
 		} else {
 			Assert.assertTrue("PROBLEM, unable to locate the 'Learn More About Drug Tiers' link content'", validate(LearnmoretierslinkInsulinContent,0));
-			String expText="Select Insulin Drugs Tier 3";
+			String expText="Tier 3 - Select Insulin Drugs";
 			String actText=LearnmoretierslinkInsulinContent.getText();
 			System.out.println("TEST - actText="+actText);
 			Assert.assertTrue("PROBLEM - unable to locate expected text '"+expText+"' from the 'Learn more tiers link' content",actText.contains(expText));
@@ -5928,12 +6036,32 @@ public class BenefitsAndCoveragePage extends BenefitsAndCoverageBase {
 
 		//------- validate uhcmedicaredentistsearch.com link ---------------------------
 		Assert.assertTrue("PROBLEM - unable to locate the Assistance link in tile contnet", validate(riderAssistanceLnk,0));
-		expUrl="https%3A~2F~2Fdentalsearch.yourdentalplan.com~2Fprovidersearch";
-		//TODO - which one is the correct expected URL destination??
-		//note: href="https://member.uhc.com/internal-redirect?deepLink=https%3A~2F~2Fconnect.werally.com~2FdentalProvider~2Froot%3FshowBackButton%3Dtrue"
+		expUrl="werally.com~2FdentalProvider~2Froot%3FshowBackButton%3Dtrue";
 		actUrl=riderAssistanceLnk.getAttribute("href");
-		Assert.assertTrue("PROBLEM - KNOWN ISSUE INC19517618 - Assistance link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
-		//TODO - click it and validate it land on the right page:  https://dentalsearch.yourdentalplan.com/providersearch
+		Assert.assertTrue("PROBLEM - Assistance link URL is not as expected. Expect to contain '"+expUrl+"' | Actual href='"+actUrl+"'", actUrl.contains(expUrl));
+		if ((MRScenario.environment.contains("stage") && !MRScenario.isTestHarness.equalsIgnoreCase("YES"))
+			|| MRScenario.environment.equals("prod")) {
+			winHandleBefore = driver.getWindowHandle();
+			beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			beforeClicked_numTabs=beforeClicked_tabs.size();	
+
+			riderAssistanceLnk.click();
+
+			afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			afterClicked_numTabs=afterClicked_tabs.size();
+			Assert.assertTrue("PROBLEM - Did not get expected new tab after clicking 'Assistance' link", (afterClicked_numTabs-beforeClicked_numTabs)==1);
+
+			driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+
+			
+			CommonUtility.checkPageIsReady(driver);
+			CommonUtility.waitForPageLoad(driver, rallyDentalSearchHeader, 5);
+			Assert.assertTrue("PROBLEM - unable to locate 'Dental Care' header text on Rally dental care search page after clicking the rider assistance link", validate(rallyDentalSearchHeader,0));
+			
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+
+		}
 
 		
 	}

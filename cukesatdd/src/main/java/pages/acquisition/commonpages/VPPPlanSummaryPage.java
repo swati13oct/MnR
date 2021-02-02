@@ -2528,29 +2528,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsMouseOut(toolTip);
 	}
 
-	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName) {
-		WebElement DCELink = null;
-
-		if (planName.contains("SNP")) {
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
-		} else if (planName.contains("PDP")) {
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')]"));
-		} else
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
-
-		Actions action = new Actions(driver);
-		action.moveToElement(DCELink).build().perform();
-		DCELink.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("drug-cost-estimator")) {
-			System.out.println("DCE Page is loaded");
-			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
-		} else
-			return null;
-	}
 
 	/* Navigation to DCE for all plan types having a plan name */
 	public DrugCostEstimatorPage navigatetoDCEVPP(String planName) {
@@ -6311,6 +6288,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("No providers in plan card");
 		}
 	}
+
 	public void medsuppOLEBenefitsTable() throws InterruptedException {
 		validateNew(RightRail_BenefitsTable);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_BenefitsTable, 30);
@@ -6325,7 +6303,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
-
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
@@ -6533,5 +6510,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		driver.switchTo().window(parentWindow);
 
 	}
-	
+
+	public void enternewZip(String zipCode) {
+	ChangeLocationLink.click();
+	validate(ZipCodeTxtBx);
+	ZipCodeTxtBx.click();
+	ZipCodeTxtBx.clear();
+	ZipCodeTxtBx.sendKeys(zipCode);
+	validate(FIndPlansButton);
+	FIndPlansButton.click();
+	CommonUtility.checkPageIsReadyNew(driver);
+}
+
+public void validateVPPSummaryPage() {
+	Assert.assertTrue("user not navigated to VPP Page",driver.getCurrentUrl().contains("plan-summary"));
+}
 }
