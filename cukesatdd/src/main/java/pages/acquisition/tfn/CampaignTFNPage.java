@@ -994,10 +994,12 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 			private WebElement DOB;
 			
 			public void MedSupFormValidationTFN(String DateOfBirth) throws InterruptedException {
-
+				CheckPageLoad();
+				CheckiPerseptions();
 				validateNew(DOB, 30);
 				System.out.println("MedSup page form is displayed");
-				DOB.click();
+				//DOB.click();
+				jsClickNew(DOB);
 				DOB.sendKeys(DateOfBirth);
 				System.out.println("Date of birth is entered");
 				Thread.sleep(2000);
