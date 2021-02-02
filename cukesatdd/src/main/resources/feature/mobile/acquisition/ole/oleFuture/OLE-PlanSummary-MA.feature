@@ -56,7 +56,7 @@ Feature: 1.05.1. OLE common tool flow E2E MA
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
       | Email              | <email>             |
-    Then the user validates TFN in Medicare Info OLE Right Rail
+    #Then the user validates TFN in Medicare Info OLE Right Rail
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     #    Then the user navigates to Preliminary Questions Page
     #Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
