@@ -1275,8 +1275,8 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				
 				public void enterZipDistanceDetails(String zipcode, String distance, String county, String planName) throws InterruptedException {
 					// TODO Auto-generated method stub
-					//CheckPageLoad();
-					//CheckiPerseptions();
+					CheckPageLoad();
+					CheckiPerseptions();
 					
 					validateNew(ZipcodePharmacy);
 					CommonUtility.waitForPageLoadNew(driver, ZipcodePharmacy, 30);
