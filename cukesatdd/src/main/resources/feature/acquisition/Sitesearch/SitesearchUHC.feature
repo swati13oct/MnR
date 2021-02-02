@@ -43,7 +43,7 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
    | 15652 |   19019 | No  | Iowa County    | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO)       |Medicare    |pharmacy|
 
     
- @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC
+ @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC 
  Scenario Outline: Verify search results in UHC site for Error - search value -<NewSearchValue>
    Given the user is on the uhcmedicaresolutions site landing page
    Then the user enter the searchValue in the search text box and hits enter on UHC Site
@@ -106,3 +106,22 @@ Feature:2.03 Acq-To verify Sitesearch results in UMS site
     Examples: 
       | searchValue        |url|
       | Provider search    |https://connect.werally.com/county-plan-selection/uhc.mnr/zip|
+  
+  
+  @vbfGate
+  Scenario Outline: Verify search results on Homepage - <searchValue> - <newsearchvalue>
+    Given the user is on medicare acquisition site landing page
+     	|Site| <site>|
+   Then the user enter the searchValue in the search text box and hits enter
+       |search Value|<searchValue>| 
+   Then the user should see fifteen results before pagination
+   Then the user validates count of results aganist the total shown at top of the page
+   Then the user validates pagination and results displayed
+   Then the user validates the secondary search by providing newsearchvalue in the text box
+        |NewSearchValue|<newsearchvalue>|
+   Then the user validates pagination and results displayed
+   
+   
+     Examples: 
+     |Scenario           |site | searchValue |newsearchvalue|
+     |E2E Scenario 1_AMP |AARP  | Medicare    |Pharmacy|
