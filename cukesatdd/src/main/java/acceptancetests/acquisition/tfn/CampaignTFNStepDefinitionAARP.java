@@ -1077,6 +1077,29 @@ public void Shop_Standalone_zipcode_details_MedsuppPage(DataTable givenAttribute
 	}
 }
 
+@Then("^the user navigate to Pharmacy page$")
+public void user_navigate_pharmacy_page(DataTable givenAttributes) throws Throwable {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	
+	String zipcode = memberAttributesMap.get("Zip Code");
+	String distance = memberAttributesMap.get("Distance");
+	String county = memberAttributesMap.get("County Name");
+	String planName = memberAttributesMap.get("Plan Name");
+	
+	if (county == null)
+		county = "None";
+	
+	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);	
+	tfnPage.enterZipDistanceDetails(zipcode,distance,county,planName);
+
+}
+
 }
 
 

@@ -1,8 +1,12 @@
 package pages.acquisition.tfn;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -1256,4 +1260,64 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				}
 				return null;
 			}	
+				
+				@FindBy(xpath = "//input[@id='zipcodeTxt']")
+				private WebElement ZipcodePharmacy;
+				
+				@FindBy(xpath = "//select[@id='plan-type']")
+				private WebElement seletPlandropdown;
+				
+				@FindBy(xpath = "(//button/span)[1]")	
+				private WebElement ContinuePharmacy;
+								
+				@FindBy(xpath = "//p//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
+				private WebElement PreferredRetailedPharmacy;
+				
+				public void enterZipDistanceDetails(String zipcode, String distance, String county, String planName) throws InterruptedException {
+					// TODO Auto-generated method stub
+					CheckPageLoad();
+					CheckiPerseptions();
+					
+					validateNew(ZipcodePharmacy);
+					CommonUtility.waitForPageLoadNew(driver, ZipcodePharmacy, 30);
+					ZipcodePharmacy.sendKeys("zipcode");
+					scrollToView(seletPlandropdown);
+					waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
+//					seletPlandropdown.click();
+					jsClickNew(seletPlandropdown);
+					sleepBySec(1);
+					selectFromDropDownByText(driver, seletPlandropdown, planName);
+					sleepBySec(2);
+					jsClickNew(ContinuePharmacy);
+					try {
+						Thread.sleep(5000);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					jsClickNew(PreferredRetailedPharmacy);
+			
+					CommonUtility.checkPageIsReadyNew(driver);
+					String CurrentRailURL = driver.getCurrentUrl();
+					System.out.println("Actual  URL: " + CurrentRailURL);
+
+					if (CurrentRailURL.contains("estimate-drug-costs.html#/drug-cost-estimator")) {
+						System.out.println("****************  ***************");
+
+						Assert.assertTrue(true);
+					} else {
+						Assert.fail("****************  ***************");
+					}
+					CheckPageLoad();
+					CheckiPerseptions();
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				
+
+	}
 }
