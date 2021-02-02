@@ -16,10 +16,8 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
@@ -29,7 +27,6 @@ import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
 import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 /**
@@ -168,12 +165,20 @@ public class VisitorProfileMobileStepDefinition {
 		}
 	}
 	
+//	@Then("^Navigate to Visitor Profile page$")
+//	public void navigate_to_Visitor_Profile_page() {
+//		ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
+//				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+//		getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+//		VisitorProfilePageMobile visitorProfilePage = comparePlansPage.navigateToVisitorProfilePage();
+//		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+//	}
+	
 	@Then("^Navigate to Visitor Profile page$")
-	public void navigate_to_Visitor_Profile_page() {
-		ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		VisitorProfilePageMobile visitorProfilePage = comparePlansPage.navigateToVisitorProfilePage();
+	public void navigate_to_Visitor_Profile_page_on_AARP_site() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		VisitorProfilePageMobile visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage1();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
@@ -389,7 +394,7 @@ public class VisitorProfileMobileStepDefinition {
 		}
 		String planName = plannameAttributesMap.get("PlanName");
 
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		Assert.assertTrue("Provider coverage Info not updated", visitorProfile.providerinfo(planName));
 	}
 	

@@ -155,6 +155,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public DrugSummaryPageMobile verifyDefaultPlanType() {
+		scrollToView(planTypeHeading);
 		validateNew(planTypeHeading);
 		if (planTypeHeading.getText().contains("Medicare Advantage Plans")) {
 			return new DrugSummaryPageMobile(driver);

@@ -94,7 +94,7 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 	@FindBy(css = "#plan-list-1 button#updateSaveRecommendationBtn")
 	private WebElement mapdSaveResultsButton;
 
-	@FindBy(css = "#plan-list-3 button#updateSaveRecommendationBtn")
+	@FindBy(xpath = "//div[@data-rel='#plan-list-3']")
 	private WebElement pdpSaveResultsButton;
 
 	@FindBy(css = "#plan-list-4 button#updateSaveRecommendationBtn")

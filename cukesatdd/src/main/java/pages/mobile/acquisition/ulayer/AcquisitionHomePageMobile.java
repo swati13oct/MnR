@@ -51,7 +51,7 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
  */
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
-	@FindBy(xpath = "//input[@id='cta-zipcode']")
+	@FindBy(css = "#cta-zipcode")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -1497,9 +1497,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
 		pageloadcomplete();
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+//		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 
-		sendkeysNew(zipCodeField, zipcode);
+		scrollToView(zipCodeField);
+		//sendkeysNew(zipCodeField, zipcode);
+		jsSendkeys(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
 
 		pageloadcomplete();

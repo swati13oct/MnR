@@ -222,6 +222,7 @@ public class DCEACQDrugSummaryMobile {
 	@When("^user should be able to see Medicare Advantage plan by default$")
 	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		drugSummaryPage.verifyDefaultPlanType();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
@@ -230,7 +231,7 @@ public class DCEACQDrugSummaryMobile {
 	public void verify_dce_NBA_is_displayed_on_summary_page() {
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
-		
+
 		drugSummaryPage.validateDCENBAModal();
 	}
 

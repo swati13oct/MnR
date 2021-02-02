@@ -795,6 +795,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+	
+	@FindBy(css = "a#visitor-profile-header")
+	private WebElement lnkProfile;
 
 	@FindBy(css = "div#drugsBanner>div")
 	private WebElement prescriptions;
@@ -4815,6 +4818,25 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			return null;
 		}
 	}
+	
+	/**
+	 * Navigate to Visitor Profile Page
+	 * 
+	 * @return
+	 */
+	public pages.mobile.acquisition.commonpages.VisitorProfilePageMobile navigateToVisitorProfilePage1() {
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new pages.mobile.acquisition.commonpages.VisitorProfilePageMobile(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+
 
 	public ComparePlansPageMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
