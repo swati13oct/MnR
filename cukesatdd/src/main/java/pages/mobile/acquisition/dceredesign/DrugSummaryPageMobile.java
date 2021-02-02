@@ -468,7 +468,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	
 	
 	public void validateDCENBAModal() {
-		pageloadcomplete();
+	
 		scrollToView(dceNBAModal);
 		if (validateNew(dceNBAModal)) {
 			validateNew(dceNBAModalMsg);

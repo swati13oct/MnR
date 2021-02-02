@@ -41,10 +41,10 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       | UHC  |   80002 | PDP      | future   | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
-  ############ DCE Plan Compare Regression scenarios  ##############
-  ############ - Add Drug, edit Drug, View Drug Info Modal - DCE - Return
-  ############ - Validate Drug list on Plan Compare and Drug Info Modal.
-  ############ - Compare drug costs View Drug info and DCE details page
+  ########### DCE Plan Compare Regression scenarios  ##############
+  ########### - Add Drug, edit Drug, View Drug Info Modal - DCE - Return
+  ########### - Validate Drug list on Plan Compare and Drug Info Modal.
+  ########### - Compare drug costs View Drug info and DCE details page
   @DCE_Redesign_VPP_PlanCompare1
   Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare from vpp Plan Compare View Drug Info Modal
     Given the user is on medicare acquisition site landing page
@@ -100,7 +100,7 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1  | drug2                | drug3   | planname                        |
       | UHC  |   80002 | PDP      | future   | Adams County | yes             | Ativan | diclofenac potassium | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
-  ############ END - DCE Plan Compare Regression scenarios  ##############
+  ########### END - DCE Plan Compare Regression scenarios  ##############
   @DCE_Redesign_VPP_PlanCompare3
   Scenario Outline: 1.10.3.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Compare View Drug Info Modal
     Given the user is on medicare acquisition site landing page
