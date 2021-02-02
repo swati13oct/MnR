@@ -2,7 +2,7 @@
 @globalfooter
 Feature:2.03-VBF-Acq-To test Global Footer links in UMS site
 
-@globalfooterBLayerSmoke @vbfGate
+@globalfooterBLayerSmoke 
 Scenario:To verify links displayed in Global footer section in UMS site
 	Given the user is on the uhcmedicaresolutions site landing page
 	When user accesses global footer UHC Medicaresolutions Site

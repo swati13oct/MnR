@@ -465,13 +465,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@dtmname='pagination:next']")
 	private WebElement NextBtn;
 
-//	@FindBy(xpath = "//button[@class='btn button-transparent clear-button']")
+	//@FindBy(xpath = "//button[@class='btn button-transparent clear-button']")
 	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]")
 	private WebElement SecondaryClearBtn;
 
 	@FindBy(xpath = "//input[@id='secondarySearchInput']")
 	private WebElement SecondarySearchInput;
 
+	//@FindBy(xpath = "//button[@class='btn button-transparent clear-button']/following::button[1]")
 	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]/following::button[1]")
 	private WebElement SecondarySearchBtn;
 
