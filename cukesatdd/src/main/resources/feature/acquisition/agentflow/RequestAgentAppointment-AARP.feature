@@ -32,19 +32,21 @@ Examples:
 | TCID    | zipcode    | 
 | F266872 |  90002     |  
 
-@agentAppointmentAgentUlayerSmoke
-Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow for Agent name in AARP site
-Given the user is on AARP medicare acquisition site landing page
-When the user navigates to request more help and information in AARP site
-When the user navigates to request appointment with an agent in AARP site and validates page is loaded
-Then the user fills the form out and submits the agent appointment application
-| First Name | <firstName> |
-| Last Name  | <lastName>  |
-| State  	 | <state>  |
+@vbfGate
+Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow for Agent name in <site> site
+Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+When the user navigates to request more help and information
+When the user navigates to request appointment with an agent and validates page is loaded
 
-Examples: 
-| TCID    | firstName 	   | lastName | state |
-| F266872 | CHRISTINE      | LEE      | CA    | 
+
+	Examples: 
+		| TCID     | site|
+		| F266872   | AARP |
+		
+	Examples:
+		| TCID	| site|
+		|	F266872			| UHC |
 
 @Request_Agent_Appointment_Right_Rail_AARP
   Scenario Outline: UID: <UID> - To Test Request Agent Appointment E2E on AARP site
