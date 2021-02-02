@@ -4,7 +4,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
   @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators
   Scenario Outline:TID: <TID> -plantype: <plantype> - Verify print and email for plan compare page in AARP site
     Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    When the user performs plan search using following information in the aarp site
       | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | County Name     | <county>        |
@@ -26,6 +26,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | 15523 | Ulayer | 90210   | MA       | NO            |
 
   #@prodRegression
+  @VppEmailandPrintProdSanity_AARP
     Examples:
       | TID   | site   | zipcode | plantype | isMultiCounty |
       | 15523 | Ulayer | 90210   | PDP      | NO            |
@@ -33,7 +34,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
   @emailAndPrint_AARP2 @emailAndPrintplanDetails @predators @decRelease2018 @RegressionPredators
   Scenario Outline:TID: <TID> -plantype: <plantype> - Verify email and Print plan functionalities on Plan Details page in AARP site
     Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    When the user performs plan search using following information in the aarp site
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
@@ -55,6 +56,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | 15531 | Ulayer | 80001   | PDP      | No              |current  |
 
   #@prodRegression
+  @VppEmailandPrintProdSanity_AARP
     Examples:
       | TID   | site   | zipcode | plantype | isMultutiCounty |planyear |
       | 15531 | Ulayer | 80001   | SNP      | No            |current  |
@@ -63,7 +65,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
   @emailAndPrint_AARP3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @predators @Apr_release_2019
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
+    When the user performs plan search using following information in the aarp site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
@@ -86,6 +88,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page on AARP
       | 1598166 | Ulayer | SNP      | 80001   | NO            | Jefferson County | current  |
 
  # @prodRegression
+ @VppEmailandPrintProdSanity_AARP
     Examples:
       | UID     | site   | plantype | zipcode | isMultiCounty | county           | planyear |
       | 1598166 | Ulayer | MA       | 80001   | NO            | Jefferson County | current  |

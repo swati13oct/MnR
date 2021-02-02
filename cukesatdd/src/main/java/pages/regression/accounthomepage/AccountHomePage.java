@@ -4834,7 +4834,11 @@ public class AccountHomePage extends UhcDriver {
 						TestHarness.checkForIPerceptionModel(driver);
 						BenefitsandCoverageTab.click();
 					}
-					else 
+					else if(MRScenario.environment.equals("offline"))
+					{
+						driver.navigate().to("https://offline.medicare.uhc.com/retiree/member/documents/overview.html");
+					}
+					else
 					{
 						driver.navigate().to("https://www.medicare.uhc.com/retiree/member/documents/overview.html");
 						System.out.println(driver.getCurrentUrl());
