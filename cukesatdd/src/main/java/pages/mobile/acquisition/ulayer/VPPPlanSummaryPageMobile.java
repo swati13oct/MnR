@@ -5253,7 +5253,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * return wait.until(jQueryLoad) && wait.until(jsLoad); }
 	 */
 
-	/*public pages.mobile.acquisition.ulayer.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
+	public pages.mobile.acquisition.ulayer.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
 		// TODO Auto-generated method stub
 		
 			jsClickMobile(firstComparePlanButton);
@@ -5262,6 +5262,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				return new pages.mobile.acquisition.ulayer.ComparePlansPageMobile(driver);
 			return null;
 		
-	}*/
+	}
 
 }
