@@ -66,24 +66,24 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     @VppEmailandPrintCommon_AARP_2
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | planyear |
-      | 15531 | AARP |   80001 | MA       | No              | future  |
-      | 15531 | AARP |   80001 | PDP      | No              | future  |
+      | 15531 | AARP |   80001 | MA       | No              | next  |
+      | 15531 | AARP |   80001 | PDP      | No              | next  |
 
     @VppEmailandPrintCommon_UHC_2 
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | planyear |
-      | 15531 | UHC  |   80001 | MA       | No              | future  |
-      | 15531 | UHC  |   80001 | PDP      | No              | future  |
+      | 15531 | UHC  |   80001 | MA       | No              | next  |
+      | 15531 | UHC  |   80001 | PDP      | No              | next  |
 
     @prodRegression_AARP @VppEmailandPrintCommon_AARP_2 @VppEmailandPrintProdSanity_AARP
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | planyear |
-      | 15531 | AARP |   80001 | SNP      | No              | future  |
+      | 15531 | AARP |   80001 | SNP      | No              | next  |
 
     @prodRegression_UHC @VppEmailandPrintCommon_UHC_2 @VppEmailandPrintProdSanity_UHC
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | planyear |
-      | 15531 | UHC  |   80001 | SNP      | No              | future  |
+      | 15531 | UHC  |   80001 | SNP      | No              | next  |
 
   # @emailAndPrint_AARP3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailAarp @predators @Apr_release_2019 @emailAndPrint_UHC3 @emailAndPrintplanSummary @feature-F265872 @us1598166 @vppEmailRegression @vppFavoritePlanEmailUhc @predators @Apr_release_2019
   Scenario Outline: UID: <UID> -plantype: <plantype> - Verify user can invoke the email button and the print button on view plan preview page on AARP site
@@ -108,21 +108,21 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     @VppEmailandPrintCommon_AARP_3
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | AARP | PDP      |   80001 | NO            | Jefferson County | future  |
-      | 1598166 | AARP | SNP      |   80001 | NO            | Jefferson County | future  |
+      | 1598166 | AARP | PDP      |   80001 | NO            | Jefferson County | next  |
+      | 1598166 | AARP | SNP      |   80001 | NO            | Jefferson County | next  |
 
     @VppEmailandPrintCommon_UHC_3
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | UHC  | PDP      |   80001 | NO            | Jefferson County | future  |
-      | 1598166 | UHC  | SNP      |   80001 | NO            | Jefferson County | future  |
+      | 1598166 | UHC  | PDP      |   80001 | NO            | Jefferson County | next  |
+      | 1598166 | UHC  | SNP      |   80001 | NO            | Jefferson County | next  |
 
     @prodRegression_AARP @VppEmailandPrintCommon_AARP_3 @VppEmailandPrintProdSanity_AARP
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | future  |
+      | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | next  |
 
     @prodRegression_UHC @VppEmailandPrintCommon_UHC_3 @VppEmailandPrintProdSanity_UHC
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | future  |
+      | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | next  |
