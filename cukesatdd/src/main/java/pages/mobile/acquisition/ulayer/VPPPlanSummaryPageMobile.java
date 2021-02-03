@@ -888,22 +888,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			checkModelPopup(driver, 45);
 		else
 			checkModelPopup(driver, 10);
-		handleChatPopup();
-		// waitforElement(maPlansCount);
-		// scrollToView(maPlansCount);
-		// validateNew(maPlansCount);
-		//
-		// waitforElement(msPlansCount);
-		// scrollToView(msPlansCount);
-		// validateNew(msPlansCount);
-		//
-		// waitforElement(pdpPlansCount);
-		// scrollToView(pdpPlansCount);
-		// validateNew(pdpPlansCount);
-		//
-		// waitforElement(snpPlansCount);
-		// scrollToView(snpPlansCount);
-		// validateNew(snpPlansCount);
+//		handleChatPopup();
+//		validateNew(maPlansCount);
+//		validateNew(msPlansCount);
+//		validateNew(pdpPlansCount);
+//		validateNew(snpPlansCount);
 	}
 
 	public boolean validateTimeoutPopup() {

@@ -852,9 +852,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
 		validateNew(getLnkBackToAllPlans());
 		jsClickNew(getLnkBackToAllPlans());
-		// getLnkBackToAllPlans().click();
-		pageloadcomplete();
-		// waitForPageLoadSafari();
+	
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			jsClickNew(ReturnToMainPlanList);
 			return new VPPPlanSummaryPageMobile(driver);

@@ -55,7 +55,6 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]/span[text()='Save']") })
 	private List<WebElement> SaveBtns;
 
-	
 	@FindBys(value = {
 			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
 	private List<WebElement> MulitpleSaveBtns;
@@ -273,7 +272,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		Physician.click();
 		scrollToView(selectProviderBtn);
-		//CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption, 10)) {
@@ -335,7 +334,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		pageloadcomplete();
 		jsClickNew(selectProviderBtn);
-		
+
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();
 			validateNew(saveBtn2);
@@ -351,7 +350,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		else if (driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0) {
 			Viewsavebtn.click();
 			if (driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0) {
-				ViewSavedProvidersLink.click();
+
+				jsClickNew(ViewSavedProvidersLink);
 			} else
 				System.out.println("New Rally page not displayed");
 
@@ -488,10 +488,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 		jsClickNew(Physician);
-		
 
 		for (WebElement element : MulitpleSaveBtns) {
-			//CommonUtility.waitForPageLoadNew(driver, element, 45);
+			// CommonUtility.waitForPageLoadNew(driver, element, 45);
 			jsClickNew(element);
 
 			if (validate(selectLocationOption)) {
@@ -522,7 +521,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		}
 
-	//	CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
+		// CommonUtility.waitForPageLoadNew(driver, Savedproviders, 30);
 		/*
 		 * Old Changes
 		 * 
@@ -541,7 +540,6 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return new VPPPlanSummaryPageMobile(driver);
 
 	}
-
 
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),

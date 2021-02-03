@@ -50,7 +50,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 
-	@FindBy(id = "backtoplansummarypage")
+	@FindBy(css = "#backtoplansummarypage")
 	private WebElement backToAllPlansLink;
 
 	@FindBy(xpath = ".//*[@id='printComparison']")
@@ -140,10 +140,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
 
-	@FindBy(xpath = "//thead/tr[1]/th[5]/div[1]/a[1]")
+	@FindBy(xpath = "(//div[contains(@class,'align-items-lg-start')]//button)[4]")
 	private WebElement Newremove4thplan;
 
-	@FindBy(xpath = "//div[contains(@class,'align-items-lg-start')]//div)[4]")
+	@FindBy(xpath = "(//div[contains(@class,'align-items-lg-start')]//div)[4]")
 	private WebElement Newremove4thplanName;
 
 	@FindBy(xpath = "//a[@id='addanotherplanbutton2']")
@@ -691,10 +691,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile clickOnNewAddIcon() {
-
+		pageloadcomplete();
+		scrollToView(addPlanButton);
 		validateNew(addPlanButton);
-
 		jsClickNew(addPlanButton);
+
 		try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
@@ -1256,14 +1257,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public void clickOnSelectedRemoveLink(String planIndices) {
 		WebElement ele;
-		TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(",")));
-		for (String index : (TreeSet<String>) mySet.descendingSet()) {
-			ele = driver.findElement(
-					By.xpath("(//button[contains(@class,'removePlan')])[" + Integer.parseInt(index) + "]"));
-			scrollToView(ele);
-			validateNew(ele,10);
-			jsClickNew(ele);
-			System.out.println("Clicked on Remove Link on plan Compare page");
+		 TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(","))); 
+		for(String index:(TreeSet<String>)mySet.descendingSet())
+		{
+		ele=driver.findElement(By.xpath("(//button[contains(@class,'removePlan')])["+Integer.parseInt(index)+"]"));
+		validateNew(ele,10);
+		jsClickNew(ele);
+		System.out.println("Clicked on Remove Link on plan Compare page");
 		}
 	}
 
