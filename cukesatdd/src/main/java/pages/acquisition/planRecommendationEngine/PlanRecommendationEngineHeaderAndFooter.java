@@ -620,6 +620,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 //		jsClickNew(headerNavigationBarShopForaPlanTab);
+		threadsleep(1000);							//E2E : Adding additional wait for element to be visible
+		validate(headerGetaPlanRecommendationLink);
 		jsClickNew(headerGetaPlanRecommendationLink);
 		validate(landingpageHeader, 30);
 	}
