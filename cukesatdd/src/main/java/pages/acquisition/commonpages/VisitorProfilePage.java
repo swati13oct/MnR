@@ -26,6 +26,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
+//import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -203,7 +204,7 @@ public class VisitorProfilePage extends UhcDriver {
 
 	public AcquisitionHomePage addPlan() {
 
-		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+	/*	if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
 //			jsClickNew(addplans);			//Commented since addplans button not available, locator same as else part add plans
@@ -221,6 +222,16 @@ public class VisitorProfilePage extends UhcDriver {
 			return new AcquisitionHomePage(driver, page);
 		}
 		return null;
+	}*/
+		
+		jsClickNew(addPlans);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new AcquisitionHomePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 
 	public void validateAddedDrugAndPharmacy(String drug) {
@@ -444,7 +455,8 @@ public class VisitorProfilePage extends UhcDriver {
 		try {
 			jsClickNew(signIn);
 			waitForPageLoadSafari();
-			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+		//	driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
@@ -464,7 +476,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+		//	CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");

@@ -6448,6 +6448,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public void medsuppOLEViewPrescriptionDrugPlans() throws InterruptedException {
 		validateNew(ViewPrescriptionDrugPlans);
+		scrollToView(ViewPrescriptionDrugPlans);
 		CommonUtility.waitForPageLoadNew(driver, ViewPrescriptionDrugPlans, 30);
 		String parentWindow = driver.getWindowHandle();
 		ViewPrescriptionDrugPlans.click();

@@ -1,6 +1,12 @@
 package pages.acquisition.tfn;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -11,6 +17,7 @@ import org.openqa.selenium.By;
  */
 
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +29,9 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 
 
 
@@ -115,7 +125,83 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/health-plans/shop/medicare-advantage-plans.html')or contains(@href,'https://www.uhcmedicaresolutions.com/health-plans.html') or contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plans.html')]")
 	public WebElement UHCSearchLinkfromBing;
 
+	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
+	@FindBy(xpath = "//input[contains(@id,'zipcodemeded-0')]")
+	private WebElement zipCodeShopField;
+	//@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
+	//@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
+	@FindBy(xpath = "//span[contains(text(),'Find Plans')]")
+	
+	private WebElement ShopEnrollButton;
+	
+	@FindBy(xpath = "//span[contains(text(),'Shop Plans')]")	
+	private WebElement ShopEnrollMedsuppButton;
+	
+	@FindBy(xpath = "//*[contains(@id,'change-location')]")
+	private WebElement zipcodeChangeLink;
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
+	@FindBy(xpath = "//div[@class='overview-main']//h2")
+	private WebElement vppTop;
+	
+	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
+	private WebElement ArticlesEnrollButton;
+	
+	@FindBy(id = "msVppZipCode")
+	private WebElement medSuppZipCode;
 
+	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
+	private WebElement viewPlansBtnMedSupp;
+
+	@FindBy(id = "mpaed-month")
+	private WebElement part_A_monthDrpDwn;
+
+	@FindBy(id = "mpaed-year")
+	private WebElement part_A_yearDrpDwn;
+
+	@FindBy(xpath = "//*[@id='mpaed-month']/option[2]")
+	private WebElement Part_A_monthDrpDwnOption;
+
+	@FindBy(xpath = "//*[@id='mpaed-year']/option[3]")
+	private WebElement Part_A_yearDrpDwnOption;
+
+	@FindBy(id = "mpbed-month")
+	private WebElement part_B_monthDrpDwn;
+
+	@FindBy(id = "mpbed-year")
+	private WebElement part_B_yearDrpDwn;
+
+	@FindBy(xpath = "//*[@id='mpbed-month']/option[2]")
+	private WebElement Part_B_monthDrpDwnOption;
+
+	@FindBy(xpath = "//*[@id='mpbed-year']/option[3]")
+	private WebElement Part_B_yearDrpDwnOption;
+
+	@FindBy(xpath = "//*[contains(@class,'viewPlans')]")
+	WebElement ViewPlanMedSupPage;
+	
+	@FindBy(xpath = "(//*[contains(@for,'Gender_2')])[2]")
+	private WebElement femaleGender;
+
+	@FindBy(xpath = "(//*[contains(@for,'Gender_1')])[2]")
+	private WebElement MaleGender;
+	
+	@FindBy(xpath = "(//button[contains(text(),'Start application')])[1]")
+	//@FindBy(xpath = "(//*[contains(@class,'swiper-content')]//*[contains(text(),'Start application')])[1]")
+	private WebElement Start_ApplicationBtn;
+	
+	@FindBy(xpath = "//input[@id='CurrentlyInsured_2']//..")
+	private WebElement insuredStatus;
+
+	@FindBy(xpath = "//button[@class='cta-button next-button action_next']")
+	private WebElement nextButton;
+	
+	@FindBy(id = "FirstName")
+	private WebElement firstName;
+
+	@FindBy(id = "LastName")
+	private WebElement lastName;
+	
 	public CampaignTFNPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -462,10 +548,18 @@ public class CampaignTFNPage extends UhcDriver {
 	private WebElement OurPlansLink1;
 
 	@FindBy(id = "zipcodebtn")
+	//@FindBy(id = "//button[contains(@id,'zipcodebtn')]")
 	private WebElement findPlansButton;
 	
+	@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
+	private WebElement findPlansButtonExternalLinks;
+	
 	@FindBy(id="cta-zipcode")
+	//@FindBy(xpath = "//input[contains(@id,'cta-zipcode')]")
 	private WebElement HomePage_EnterZip;
+	
+	@FindBy(xpath="(//input[contains(@id,'zipcode')])[2]")
+	private WebElement HomePageExternalLinks_EnterZip;
 
 	@FindBy(id = "nav-zipcode")
 	private WebElement OurPlans_zipfield;
@@ -473,7 +567,14 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id = 'nav-zipcode']/following-sibling::button[@class = 'zip-button']")
 	public WebElement OurPlans_viewPlansButton;
 	
-
+	//@FindBy(id="cta-zipcode")
+	@FindBy(xpath = "//input[contains(@id,'cta-zipcode')]")
+	private WebElement HomePageOLE_EnterZip;
+	
+	//@FindBy(id = "zipcodebtn")
+	@FindBy(id = "//button[contains(@id,'zipcodebtn')]")
+	private WebElement findPlansButtonOLE;
+	
 	public void SubNavPlanSearch(String zip) {
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -507,6 +608,24 @@ public class CampaignTFNPage extends UhcDriver {
 		findPlansButton.click();
 	}
 	
+	
+	public void HomepagePlanSearchOLE(String zip) {
+		CheckPageLoad();
+		CheckiPerseptions();
+
+		//validateNew(OurPlansLink1);
+		// Hover over text
+		//Actions action = new Actions(driver);
+		//action.moveToElement(OurPlansLink1).build().perform();
+		// action.click().build().perform();
+		//validateNew(OurPlansLink1);
+		validate(HomePageOLE_EnterZip);
+		HomePageOLE_EnterZip.click();
+		HomePageOLE_EnterZip.sendKeys(zip);
+		validate(findPlansButtonOLE);
+		findPlansButtonOLE.click();
+	}
+	
 	@FindBy(id = "plan-list-1")
 	private WebElement maPlanList;
 
@@ -531,8 +650,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
 	private WebElement pdpPlansViewLink;
 
-	@FindBy(id="msVppZipCode")
-	private WebElement medSuppZipCode;
+	//@FindBy(id="msVppZipCode")
+	//private WebElement medSuppZipCode;
 
 
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
@@ -662,4 +781,543 @@ public class CampaignTFNPage extends UhcDriver {
 				jsClickNew(CurrentYearPlansBtn);	
 			}
 		}
+	
+
+	public VPPPlanSummaryPage searchPlansWithOutCountyShopEnroll(String zipcode) throws InterruptedException {
+
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		jsClickNew(ShopEnrollButton);
+		waitForPageLoadSafari();
+		// }
+		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		} else
+			return null;
+	}
+		public VPPPlanSummaryPage searchPlansShopEnroll(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		jsClickNew(ShopEnrollButton);
+		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
 		}
+		return null;
+	}	
+		
+		public VPPPlanSummaryPage searchPlansWithOutCountyArticlePage(String zipcode) throws InterruptedException {
+
+			CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+			sendkeys(zipCodeShopField, zipcode);
+			jsClickNew(ArticlesEnrollButton);
+			waitForPageLoadSafari();
+			// }
+			CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+			if (driver.getCurrentUrl().contains("health-plans")) {
+				return new VPPPlanSummaryPage(driver);
+			} else
+				return null;
+		}
+			public VPPPlanSummaryPage searchPlansShopArticlePage(String zipcode, String countyName) {
+			CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+			sendkeys(zipCodeShopField, zipcode);
+			jsClickNew(ArticlesEnrollButton);
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			if (validate(countyModal))
+				jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			if (driver.getCurrentUrl().contains("plan-summary")) {
+				return new VPPPlanSummaryPage(driver);
+			}
+			return null;
+		}
+			
+			@FindBy(xpath="//a[contains(text(),'Enroll in plan')]")
+			private WebElement EnrollPlanLink;
+			
+			public void NavigateToOLEEnroll(String planType) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				CommonUtility.waitForPageLoadNew(driver, EnrollPlanLink, 30);
+				jsClickNew(EnrollPlanLink);
+				waitForPageLoadSafari();
+				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
+						CommonUtility.checkPageIsReadyNew(driver);
+						if (driver.getCurrentUrl().contains("welcome")) {	
+							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+						}
+						else {
+							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+						}
+			}
+			
+			public void validateFederalTFNNo(String TFNXpath, String ExpecetdTFNNo) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+				validateNew(ActualTFNelement);	
+			//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+					if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+					System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());
+				
+				}
+				
+				else {
+					Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
+				}
+				
+			}	
+			
+			public void validatebackpage() {
+				
+				driver.navigate().back();
+			}
+			
+			
+			public void validateRefreshpage() throws InterruptedException {
+				
+				Thread.sleep(2000);
+				driver.navigate().refresh();
+			}	
+			
+			
+public void validatecloseandReopenbroswer() throws InterruptedException {
+				
+			//	Thread.sleep(2000);
+				driver.close();
+		//
+			}
+			
+			@FindBy(xpath="(//button//span[contains(text(),'View plan') or contains(text(),'View Plan Details')])[1]")
+			private WebElement firstPlanDetailsLinkdce;
+
+			public void NavigateToPlanDetailsdce(String planType) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLinkdce, 30);
+				jsClickNew(firstPlanDetailsLinkdce);
+				waitForPageLoadSafari();
+				CommonUtility.checkPageIsReadyNew(driver);
+				System.out.println("View Plan Details Link is clicked for first plan for "+planType);
+						CommonUtility.checkPageIsReadyNew(driver);
+						if (driver.getCurrentUrl().contains("#/details")) {	
+							Assert.assertTrue("Plan Details is displayed for Plan Type : "+planType, true);
+						}
+						else {
+							Assert.assertTrue("Plan Details NOT Diaplyed for Plan Type : "+planType, false);
+						}
+			
+			}
+			
+			@FindBy(xpath = "(//a[contains(text(),'Estimate your drug costs at a Walgreens preferred retail pharmacy')])[2]")
+			private WebElement DCELink;
+			
+			public void NavigateToDCE() throws InterruptedException {
+			
+					validateNew(DCELink);
+					JavascriptExecutor executor = (JavascriptExecutor) driver;
+					executor.executeScript("arguments[0].scrollIntoView(true);", DCELink);
+					DCELink.click();
+					Thread.sleep(2000);
+			}
+			
+			@FindBy(xpath="//a//span[contains(text(),'Enroll in plan')]")
+			private WebElement EnrollPlanLinkDSNP;
+			
+			public void NavigateToOLEEnrollDSNP(String planType) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				CommonUtility.waitForPageLoadNew(driver,EnrollPlanLinkDSNP, 30);
+				jsClickNew(EnrollPlanLinkDSNP);
+				waitForPageLoadSafari();
+				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
+						CommonUtility.checkPageIsReadyNew(driver);
+						if (driver.getCurrentUrl().contains("welcome")) {	
+							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+						}
+						else {
+							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+						}
+			}
+			public void HomepagePlanSearchExternalLinks(String zip) {
+				CheckPageLoad();
+				CheckiPerseptions();
+
+				//validateNew(OurPlansLink1);
+				// Hover over text
+				//Actions action = new Actions(driver);
+				//action.moveToElement(OurPlansLink1).build().perform();
+				// action.click().build().perform();
+				//validateNew(OurPlansLink1);
+				validate(HomePageExternalLinks_EnterZip);
+				HomePageExternalLinks_EnterZip.click();
+				HomePageExternalLinks_EnterZip.sendKeys(zip);
+				validate(findPlansButtonExternalLinks);
+				findPlansButtonExternalLinks.click();
+			}
+			
+			@FindBy(xpath="(//div[contains(@class,'plan-list show active')]//div[contains(@class,'module-plan-overview')][1]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'view plans') or contains(text(),'Enroll in Plan')])[2]")
+			private WebElement VPPEnrollPlanLinkOLE;
+			
+			public void EnrollonVPPPage(String planType) {
+				CheckPageLoad();
+				CheckiPerseptions();
+				CommonUtility.waitForPageLoadNew(driver, VPPEnrollPlanLinkOLE, 30);
+				jsClickNew(VPPEnrollPlanLinkOLE);
+				waitForPageLoadSafari();
+				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
+						CommonUtility.checkPageIsReadyNew(driver);
+						if (driver.getCurrentUrl().contains("welcome")) {	
+							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+						}
+						else {
+							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+						}
+			}
+			
+			@FindBy(id = "msVppdpsd")
+			private WebElement startDrpDwn;
+
+			@FindBy(xpath = "//select[@id='msVppdpsd']//option[2]")
+			private WebElement startDrpDwnOption;
+			
+
+			//@FindBy(id = "msVppDOB")
+			@FindBy(xpath = "//input[contains(@id,'msVppDOB')]")
+			private WebElement DOB;
+			
+			public void MedSupFormValidationTFN(String DateOfBirth) throws InterruptedException {
+				CheckPageLoad();
+				CheckiPerseptions();
+				validateNew(DOB, 30);
+				System.out.println("MedSup page form is displayed");
+				//DOB.click();
+				jsClickNew(DOB);
+				DOB.sendKeys(DateOfBirth);
+				System.out.println("Date of birth is entered");
+				Thread.sleep(2000);
+				jsClickNew(MaleGender);
+				Thread.sleep(2000);
+				part_A_monthDrpDwn.click();
+				Thread.sleep(2000);
+				Part_A_monthDrpDwnOption.click();
+				Thread.sleep(2000);
+				System.out.println("Effective date- month value selected");
+				jsClickNew(part_A_yearDrpDwn);
+				Thread.sleep(2000);
+				Part_A_yearDrpDwnOption.click();
+				System.out.println("Effective date- year value selected");
+				Thread.sleep(2000);
+				part_B_monthDrpDwn.click();
+				Thread.sleep(2000);
+				Part_B_monthDrpDwnOption.click();
+				Thread.sleep(2000);
+				part_B_yearDrpDwn.click();
+				Thread.sleep(2000);
+				Part_B_yearDrpDwnOption.click();
+				Thread.sleep(2000);
+				scrollToView(startDrpDwn);
+				jsClickNew(startDrpDwn);
+				Thread.sleep(2000);
+				startDrpDwnOption.click();
+				System.out.println("Plan to start date selected");
+				Thread.sleep(15000);
+				jsMouseOver(ViewPlanMedSupPage);
+				jsClickNew(ViewPlanMedSupPage);
+			}
+
+			@FindBy(xpath = "//a[@class='cancel-button modal-link']")
+			private WebElement cancelButton;
+
+			@FindBy(xpath = "(//a[contains(text(),'Cancel Application')])[3]")
+			private WebElement cancelButtonPopUp;
+
+			@FindBy(xpath = "(//a[contains(text(),'Return to Application')])[3]")
+			private WebElement ReturntoApplicationButton;
+			
+			@FindBy(xpath = "//p[contains(text(),'Return to this application using the code below')]//..//span")
+			private WebElement resumeKey;
+			
+			public String StartApplicationTFN(String FirstName, String LastName) throws InterruptedException {
+				Thread.sleep(4000);
+				CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 20);
+				jsClickNew(Start_ApplicationBtn);
+				System.out.println("Start application button is clicked on application page");
+				Thread.sleep(4000);
+				CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+				insuredStatus.click();
+				Thread.sleep(2000);
+				jsClickNew(nextButton);
+				Thread.sleep(2000);
+				jsClickNew(nextButton);
+				Thread.sleep(2000);
+				jsClickNew(nextButton);
+				Thread.sleep(2000);
+				jsClickNew(nextButton);
+				Thread.sleep(2000);
+				firstName.sendKeys(FirstName);
+				lastName.sendKeys(LastName);
+				jsClickNew(nextButton);
+			/*	Thread.sleep(2000);
+				String ResumeKey = resumeKey.getText();
+				System.out.println("The return to the application code is- " + ResumeKey);
+				jsClickNew(cancelButton);
+				CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
+				jsClickNew(cancelButtonPopUp);
+				System.out.println("Cancel application has been clicked on the pop up");*/
+				return LastName;
+			}	
+			
+			
+			public String CancelApplicationTFN(String FirstName, String LastName) throws InterruptedException {
+				String ResumeKey = resumeKey.getText();
+				System.out.println("The return to the application code is- " + ResumeKey);
+				jsClickNew(cancelButton);
+				CommonUtility.waitForPageLoad(driver, cancelButtonPopUp, 30);
+				jsClickNew(cancelButtonPopUp);
+				System.out.println("Cancel application has been clicked on the pop up");
+				return ResumeKey;
+			}	
+			
+			public void closeOriginalTabAndOpenNewTab() {
+
+				// get original tab handler
+				String winHandleBefore = driver.getWindowHandle();
+
+				System.out.println("Proceed to open a new blank tab as placeholder so the driver won't close");
+				// open new tab
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("window.open('about:blank','_blank');");
+				for (String winHandle : driver.getWindowHandles()) {
+					if (!winHandle.equals(winHandleBefore)) {
+						driver.switchTo().window(winHandle);
+					}
+				}
+				String winHandleTmp = driver.getWindowHandle();
+				System.out.println(
+						"Proceed to close the original tab that has plans saved, should left with a blank tab afterward");
+				driver.switchTo().window(winHandleBefore);
+				driver.close();
+
+				driver.switchTo().window(winHandleTmp);
+				System.out.println("Proceed to open the acquisition url in new tab");
+				if (MRScenario.environment.equalsIgnoreCase("prod")) {
+						js.executeScript("window.open('" + AARP_ACQISITION_PROD_PAGE_URL + "','_blank');");
+				}else {
+					js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
+				}
+				for (String winHandle : driver.getWindowHandles()) {
+					if (!winHandle.equals(winHandleTmp)) {
+						driver.switchTo().window(winHandle);
+					}
+				}
+				String winHandleNew = driver.getWindowHandle();
+
+				System.out.println("Proceed to close the placeholder blank tab");
+				driver.switchTo().window(winHandleTmp);
+				driver.close();
+
+				System.out.println("Proceed to use this newly opened tab for remaining validation");
+				driver.switchTo().window(winHandleNew);
+			}
+			
+			@FindBy(xpath = "//a[contains(text(),'Click here to get your Decision Guide')]")
+			private WebElement DecisionGuideLink;
+			
+			public void clickOnRequestADecisionGuide(String TFNXpath,String ExpecetdTFNNo) {
+				
+				validateNew(DecisionGuideLink);
+				CommonUtility.waitForPageLoadNew(driver, DecisionGuideLink, 30);
+				String parentWindow = driver.getWindowHandle();
+				DecisionGuideLink.click();
+				sleepBySec(3);
+				Set<String> tabs_windows = driver.getWindowHandles();
+				Iterator<String> itr = tabs_windows.iterator();
+				while (itr.hasNext()) {
+					String window = itr.next();
+					if (!parentWindow.equals(window)) {
+						driver.switchTo().window(window);
+					}
+				}
+
+				CommonUtility.checkPageIsReadyNew(driver);
+				String CurrentRailURL = driver.getCurrentUrl();
+				System.out.println("Actual  URL: " + CurrentRailURL);
+
+				if (CurrentRailURL.contains("medicare-information.html")) {
+					System.out.println("****************  ***************");
+
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("****************  ***************");
+				}
+				CheckPageLoad();
+				CheckiPerseptions();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+				validateNew(ActualTFNelement);	
+			//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+					if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+					System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());
+				
+				}
+				
+				else {
+					Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
+				}
+				
+				driver.switchTo().window(parentWindow);
+
+}
+
+	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+			private WebElement RightRail_FindAnAgentMedsupp;
+			
+			public void sleepBySec(int sec) {
+				try {
+					Thread.sleep(sec * 1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+
+
+			
+			public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
+
+				validateNew(RightRail_FindAnAgentMedsupp);
+				CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgentMedsupp, 30);
+				String parentWindow = driver.getWindowHandle();
+				jsClickNew(RightRail_FindAnAgentMedsupp);
+				sleepBySec(3);
+				Set<String> tabs_windows = driver.getWindowHandles();
+				Iterator<String> itr = tabs_windows.iterator();
+				while (itr.hasNext()) {
+					String window = itr.next();
+					if (!parentWindow.equals(window)) {
+						driver.switchTo().window(window);
+					}
+				}
+
+				CommonUtility.checkPageIsReadyNew(driver);
+				String CurrentUHCAgentURL = driver.getCurrentUrl();
+				String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
+				System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);
+				System.out.println("Expected myuhcagent URL: " + ExpectedUHCAgentURL);
+				System.out.println("Actual myuhcagent URL: " + ActualCurrentUHCAgentURL);
+
+				if (ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+					System.out.println("****************myuhcagent Page is displayed  ***************");
+
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("****************myuhcagent Page is not loaded ***************");
+				}
+				driver.switchTo().window(parentWindow);
+			}
+			
+			public VPPPlanSummaryPage searchPlansWithOutCountyShopEnrollMedsupp(String zipcode) throws InterruptedException {
+
+				CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+				sendkeys(zipCodeShopField, zipcode);
+				jsClickNew(ShopEnrollMedsuppButton);
+				waitForPageLoadSafari();
+				// }
+				CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
+				if (driver.getCurrentUrl().contains("health-plans")) {
+					return new VPPPlanSummaryPage(driver);
+				} else
+					return null;
+			}
+				public VPPPlanSummaryPage searchPlansShopEnrollMedsupp(String zipcode, String countyName) {
+				CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+				sendkeys(zipCodeShopField, zipcode);
+				jsClickNew(ShopEnrollMedsuppButton);
+				CommonUtility.waitForPageLoad(driver, countyModal, 45);
+				if (validate(countyModal))
+					jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+				CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+				if (driver.getCurrentUrl().contains("plan-summary")) {
+					return new VPPPlanSummaryPage(driver);
+				}
+				return null;
+			}	
+				
+				@FindBy(xpath = "//input[@id='zipcodeTxt']")
+				private WebElement ZipcodePharmacy;
+				
+				@FindBy(xpath = "//select[@id='plan-type']")
+				private WebElement seletPlandropdown;
+				
+				@FindBy(xpath = "(//button/span)[1]")	
+				private WebElement ContinuePharmacy;
+								
+				@FindBy(xpath = "//p//a[contains(text(),'Estimate your drug costs at a preferred retail pharmacy')]")
+				private WebElement PreferredRetailedPharmacy;
+				
+				public void enterZipDistanceDetails(String zipcode, String distance, String county, String planName) throws InterruptedException {
+					// TODO Auto-generated method stub
+					CheckPageLoad();
+					CheckiPerseptions();
+					
+					validateNew(ZipcodePharmacy);
+					CommonUtility.waitForPageLoadNew(driver, ZipcodePharmacy, 30);
+					ZipcodePharmacy.sendKeys("zipcode");
+					scrollToView(seletPlandropdown);
+					waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
+//					seletPlandropdown.click();
+					jsClickNew(seletPlandropdown);
+					sleepBySec(1);
+					selectFromDropDownByText(driver, seletPlandropdown, planName);
+					sleepBySec(2);
+					jsClickNew(ContinuePharmacy);
+					try {
+						Thread.sleep(5000);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					jsClickNew(PreferredRetailedPharmacy);
+			
+					CommonUtility.checkPageIsReadyNew(driver);
+					String CurrentRailURL = driver.getCurrentUrl();
+					System.out.println("Actual  URL: " + CurrentRailURL);
+
+					if (CurrentRailURL.contains("estimate-drug-costs.html#/drug-cost-estimator")) {
+						System.out.println("****************  ***************");
+
+						Assert.assertTrue(true);
+					} else {
+						Assert.fail("****************  ***************");
+					}
+					CheckPageLoad();
+					CheckiPerseptions();
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				
+
+	}
+}
