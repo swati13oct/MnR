@@ -106,35 +106,26 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public WebElement FindPlans;
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
-		// validateNew(zipCodeTxtbox);
-		// validateNew(zipCodeTxtbox, 4000);
-		// zipCodeTxtbox.clear();
-		// zipCodeTxtbox.click();
-
-		Thread.sleep(2000);
-		jsClickMobile(zipCodeTxtbox);
-
-		// Thread.sleep(1000);
+		validateNew(zipCodeTxtbox);
 		sendkeys(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
-				CommonUtility.waitForPageLoad(driver, countyRows, 30);
+				CommonUtility.waitForPageLoad(driver,countyRows , 30);
 				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
-				/* Clicking on Select Plan year drop down header */
-				driver.findElement(By.xpath("//label[contains(text(),'Select Plan Year')]")).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
+		validateNew(continueBtn);
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
 		validateNew(continueBtn);
 		jsClickNew(continueBtn);
-		// continueBtn.click();
-		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+
+		validateNew(reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
@@ -145,6 +136,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public ZipCodeAndPlanYearCapturePageMobile validateZipCodePlanYearCapturePageNonAEP() {
 		try {
+
 
 			mobileUtils.mobileLocateElement(zipCodeTxtbox);
 			mobileUtils.mobileLocateElement(countyDropdown);
