@@ -175,8 +175,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// @FindBy(xpath = ".//*[contains(@class,
 	// 'meded-article-content__section')]//*[contains(text(), 'Request an
 	// Appointment')]")
-	@FindBy(xpath = "//a[contains(text(),'Find an Agent')]")
-	private WebElement requestAgentApptDropdown;
+	@FindBy(xpath = "//*[contains(@class,'uhc-tempo-button') and contains(text(),'Find an Agent')]")
+	private WebElement requestAgentBtn;
 
 	@FindBy(xpath = "//*[@class='textalign']//p[2]/a")
 	private WebElement county;
@@ -1241,8 +1241,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
-		if (validate(requestAgentApptDropdown)) {
+		//CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
+		if (validateNew(requestAgentBtn)) {
 			return new RequestHelpAndInformationPage(driver);
 		}
 		return null;
