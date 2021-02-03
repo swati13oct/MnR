@@ -139,17 +139,31 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
        | Plan Name | <planname> |
     And the user compares drug costs for drug details and drug summary pages
     Then the user click on return to plan summary on DCE summary page
-    And user changes the new zipcode on vpp summary page
-     | New Zip Code        | <newzipcode> |
+    Then user changes zipcode within VPP page
+      | Zip Code        | <NewZipCode>      |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <newplantype> |  
    And the user clicks on drug dropdown on plan summary page and navigates to DCE
       | Plan Type | <newplantype> |
       | Plan Name | <newplanname> |
+   Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
+   Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
+   Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
+      | CoveredDrug | <drug1> |
+  # Then the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
+  #Then the user searches and adds the following Drug to Drug List
+   #   | DrugName | <insulinDrug> |
+  # Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
+   #   | InsulinCopay | <insulinCopay> |
+    #  | Insulin Drug | <insulinDrug>  |
      
+     
+  
     
     
      Examples: 
-      | Scenario           | site  | path                                                                                   | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | newzipcode |  newplantype |  newplanname                                        |             
-      | E2E Scenario 4_UMS | AARP  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |
+      | Scenario           | site  | path                                                                                   | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | NewZipCode |  newplantype |  newplanname                                        |  isMultutiCounty |  county     |         
+      | E2E Scenario 4_UMS | AARP  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |   NO             |Miami-Dade County |
     
