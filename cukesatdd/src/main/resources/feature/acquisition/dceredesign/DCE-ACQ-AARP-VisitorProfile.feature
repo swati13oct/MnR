@@ -249,8 +249,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Type | <plantype> |
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
-    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
-    Then the user validates planName matches plan Name in VPP
+    And user should be able to see Back to profile button on details page
 
     @DCEShopperProfileAddDrugsGlobally_AARP @F539025AARP
     Examples: 
