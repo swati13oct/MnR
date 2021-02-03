@@ -853,7 +853,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		validateNew(getLnkBackToAllPlans());
 		jsClickNew(getLnkBackToAllPlans());
 		// getLnkBackToAllPlans().click();
-		CommonUtility.checkPageIsReadyNew(driver);
+		pageloadcomplete();
 		// waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			jsClickNew(ReturnToMainPlanList);

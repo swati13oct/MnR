@@ -16,7 +16,8 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
 features = { "src/main/resources/feature/mobile/acquisition/vpp/" },  plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVPPPlanDetailsAARP01.json" },
-tags = { "@VppPlanDetailsCommon_AARP01"}, dryRun=false)//"@vppPlanDetailsAARPRun01","@vppPlanDetailsAARPRegression" })
+tags = { "@Auto"}, dryRun=false)//"@vppPlanDetailsAARPRun01","@vppPlanDetailsAARPRegression" })
 public class RunMRATDDAcquisitionVPPPlanDetailsAARP01 { 
  
 }
+//@VppPlanDetailsCommon_AARP01"

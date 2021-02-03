@@ -38,6 +38,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import io.appium.java_client.AppiumDriver;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.ProviderSearchPage;
 import pages.acquisition.dceredesign.GetStartedPage;
@@ -89,10 +90,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]/div/span/span[@class='ng-binding']")
 	private WebElement snpPlansNumber;
 
-	@FindBy(xpath = "//*[@id=\"globalContentIdForSkipLink\"]/div/div[1]/div/div/div/div[2]/div[1]/div[1]/div/div[1]/div[2]/div/div[3]/div[1]/div/a")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement maPlansViewLink;
 
-	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@dtmname,'SNP')]/following-sibling::a")
+	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[contains(@class,'trigger-closed')]")
 	private WebElement snpPlansViewLink;
 
 	@FindBy(id = "plan-list-1")
@@ -3024,7 +3025,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		 * planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
 		 */
 		scrollToView(planOverviewZipCodeFieldBox);
-		planOverviewZipCodeFieldBox.clear();
+		//planOverviewZipCodeFieldBox.clear();
+
 		
 
 		// enter zipcode
@@ -3898,8 +3900,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
+		scrollToView(planCompareCheckBox);
 		validate(planCompareCheckBox);
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		JavascriptExecutor js = (JavascriptExecutor)driver;
 		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
 		System.out.println("Plan compare checkbox status:" + CheckStatus);
 		Assert.assertEquals("false", CheckStatus.trim());
@@ -4291,6 +4294,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
 			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
+			pageloadcomplete();
 			scrollToView(rockyMountainLogo);
 			validateNew(rockyMountainLogo, 2);
 			System.out.println("Validated Rocky Mountian Logo");
