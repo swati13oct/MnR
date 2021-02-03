@@ -87,7 +87,7 @@ public class VisitorProfileStepDefinition_UHC {
 	
 	
 	@And("^the user clicks on the add plans button in the guest profile in UHC site$")
-	public void the_user_clicks_on_the_add_plans_button_in_the_guest_profile_in_UHC_site() {
+	public void the_user_clicks_on_the_add_plans_button_in_the_guest_profile_in_UHC_site() throws InterruptedException {
 		
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -181,6 +181,7 @@ public class VisitorProfileStepDefinition_UHC {
 		
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.signIn(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 	
 	@And("^user delets all the added drugs on visitor profile page of UHC site$")
