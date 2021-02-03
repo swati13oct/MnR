@@ -215,6 +215,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 			pdpEditResponseButton.click();
 		} else {
 			if(activeTabName.contains("Medicare Special Needs Plans")) {
+				validate(snpEditResponseButton, 10);
 				waitTillElementClickableInTime(snpEditResponseButton, 15);
 				snpEditResponseButton.click();
 			} else {
