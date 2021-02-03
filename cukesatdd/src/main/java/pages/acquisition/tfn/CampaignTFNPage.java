@@ -1280,7 +1280,7 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 					
 					validateNew(ZipcodePharmacy);
 					CommonUtility.waitForPageLoadNew(driver, ZipcodePharmacy, 30);
-					ZipcodePharmacy.sendKeys("zipcode");
+					sendkeys(ZipcodePharmacy, zipcode);
 					scrollToView(seletPlandropdown);
 					waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 //					seletPlandropdown.click();
@@ -1301,7 +1301,7 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 					String CurrentRailURL = driver.getCurrentUrl();
 					System.out.println("Actual  URL: " + CurrentRailURL);
 
-					if (CurrentRailURL.contains("estimate-drug-costs.html#/drug-cost-estimator")) {
+					if (CurrentRailURL.contains("estimate-drug-costs.html#/reviewdrugcosts"))   {
 						System.out.println("****************  ***************");
 
 						Assert.assertTrue(true);
