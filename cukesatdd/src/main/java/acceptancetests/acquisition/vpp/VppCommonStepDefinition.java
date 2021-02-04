@@ -3560,5 +3560,17 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validateVPPDetailsPage();
 	}
+	
+	@Given("^user access the campaign external link$")
+	public void user_access_the_campaign_external_link(DataTable givenAttributes) throws Throwable {
+		wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String site = memberAttributesMap.get("Site");
+	}
 }
 

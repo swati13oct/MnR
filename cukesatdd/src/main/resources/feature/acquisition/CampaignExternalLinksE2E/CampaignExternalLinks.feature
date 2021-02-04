@@ -1,4 +1,4 @@
- Feature: 1.05.5. UAT Scripts OLE Flow from External Links
+ Feature: 1.05.5. UAT Scripts Campaign External Links
 
   Scenario Outline: TID: <Scenario> -plan type: <plantype> - OLE End to end from external Links
  
@@ -62,3 +62,11 @@
       | Scenario                               | site|PlanType   |path                                                                                 |planyear|planYear|zipcode | isMultutiCounty | county          | MAplantype |planyear| MAplanName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |  healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
       | E2E Scenario 6_aarp-medicare-plans-11  | AARP |MAPD-MBI  | /health-plans.html?zipcode=33111&WT.mc_id=8000158&county=120&state=12#/plan-summary |future  |future  |			10001 | NO              | New York County | MAPD       |future|AARP Medicare Advantage (HMO-POS) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      0123456789  | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false      |                   | NO      | NO |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
 			
+			@Test
+			Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
+
+			Given user access the campaign external link
+			|External Site| <site>|
+			Examples: 
+      | Scenario                               |site|
+      |Campaign External Links - E2E Scenario 1_AMP_English|https://ma.aarpmedicareplans.com/aarp-medicare-advantage|
