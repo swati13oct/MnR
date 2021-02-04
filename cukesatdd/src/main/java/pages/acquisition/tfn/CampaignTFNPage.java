@@ -1300,14 +1300,14 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 					CommonUtility.checkPageIsReadyNew(driver);
 					String CurrentRailURL = driver.getCurrentUrl();
 					System.out.println("Actual  URL: " + CurrentRailURL);
-
+/*
 					if (CurrentRailURL.contains("estimate-drug-costs.html#/reviewdrugcosts"))   {
 						System.out.println("****************  ***************");
 
 						Assert.assertTrue(true);
 					} else {
 						Assert.fail("****************  ***************");
-					}
+					}*/
 					CheckPageLoad();
 					CheckiPerseptions();
 					try {
