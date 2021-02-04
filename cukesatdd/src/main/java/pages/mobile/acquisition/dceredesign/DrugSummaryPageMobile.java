@@ -405,7 +405,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement returnToProfileLink;
 
 	public void verifyReturnToProfileDisplayed() {
-		pageloadcomplete();
+	
 		validateNew(returnToProfileLink, 3);
 		scrollToView(returnToProfileLink);
 		try {

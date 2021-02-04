@@ -109,7 +109,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     # | Plan Type | <plantype> |
     Then the user clicks on both top and bottom back to plans link and validate its redirection
 
-    @VppPlanDetailsCommon_AARP02 @OnlyProd
+    @VppPlanDetailsCommon_AARP02 
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planName                              | planyear |
       | 00004 | AARP |   90210 | NO            | Los Angeles County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
@@ -294,7 +294,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then click add to compare checkbox on plan details page and navigate to compare page
     Then verify plan compare page is loaded
 
-    @VppPlanDetailsCommon_AARP03 @VppPlanDetailsCommon_AARP01 @OnlyProd
+    @VppPlanDetailsCommon_AARP03 @VppPlanDetailsCommon_AARP01 
     Examples: 
       | TCID   | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear | planIndices |
       | 000018 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |         1,3 |
