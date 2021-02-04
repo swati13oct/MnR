@@ -64,9 +64,10 @@
 			
 			@Test
 			Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
-
 			Given user access the campaign external link
-			|External Site| <site>|
+			|External Site|<site>|
+			
+			@CampaignExternal_Scenario1_AARP
 			Examples: 
-      | Scenario                               |site|
+      |Scenario                               |site|
       |Campaign External Links - E2E Scenario 1_AMP_English|https://ma.aarpmedicareplans.com/aarp-medicare-advantage|
