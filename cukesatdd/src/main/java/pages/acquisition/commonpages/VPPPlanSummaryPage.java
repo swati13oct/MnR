@@ -941,6 +941,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']/parent::button")
 	private List<WebElement> removeProviderListPlanCard;
 
+	@FindBy(id = "agreeButton")
+	private WebElement OptumSignInAgreeButton;
+
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
@@ -3925,6 +3928,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(Submit);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
+
+		try {
+			validateNew(OptumSignInAgreeButton, 5);
+			jsClickNew(OptumSignInAgreeButton);
+			waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
+
+		}
+
+		catch (Exception e) {
+			System.out.println("Onehealthcareid Agree page is skipped");
+		}
+
 		String CurrentSupplementURL = driver.getCurrentUrl();
 		System.out.println(
 				"Submit application button has been clicked successfully after entering the data on resume application page : "
@@ -3952,7 +3968,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("#challengeSecurityAnswerId > input"));
+			WebElement securityAnswer = driver.findElement(By.xpath("//input[@id='UnrecognizedSecAns_input']"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");
