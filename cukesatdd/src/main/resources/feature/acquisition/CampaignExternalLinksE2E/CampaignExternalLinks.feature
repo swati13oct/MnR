@@ -51,7 +51,8 @@
       | MedicaidNumber           | <medicaidnumber>         |
    	Then the user validates whether SAM icons on a page
 		Then the user validates cancellation and Save Return Later modal for OLE Page
-    
+		Then the user navigate back to external link of aarp medicare plans11 page
+   	Then the user validates whether SAM icons on a page
 	 
 		@CampaignExternalLink_E2E_Scenario_6
     Examples: 

@@ -83,5 +83,12 @@ public class CampaignExternalLinkStepDefinition {
 			
 			campaignExternalLinkspage.clickOnMorganstanleyLinks();
 		}
+	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
+	public void navigate_back_aarp_medicare11() throws InterruptedException {
 	
+			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			
+			campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
+		}
 }

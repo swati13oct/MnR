@@ -70,6 +70,17 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ArticlesEnrollButton;
 	
+	@FindBy(xpath = "//input[contains(@id,'find-plans-zip')]")
+	private WebElement zipcodeEnter;
+	
+	@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
+	private WebElement submit;
+	
+	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/medicare-education.html')]")
+	private WebElement LearnAboutMedicareLink;
+	
+	@FindBy(xpath = "//span[contains(text(),'Privacy')]")
+	private WebElement privacylink;
 	
 	public CampaignExternalLinks(WebDriver driver) {
 		super(driver);
@@ -177,11 +188,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 			
-			@FindBy(xpath = "//input[contains(@id,'find-plans-zip')]")
-			private WebElement zipcodeEnter;
-			
-			@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
-			private WebElement submit;
+		
 			
 			public void clickOnmedicareplans11Link(String zipcode) {
 				
@@ -234,8 +241,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 			}
 			
-			@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/medicare-education.html')]")
-			private WebElement LearnAboutMedicareLink;
+		
 			
 			public void clickOnMorganstanleyLinks() {
 				
@@ -276,4 +282,42 @@ public class CampaignExternalLinks extends UhcDriver {
 				
 			}
 
+public void clickOnmedicareplans11PrivacyLink() {
+				
+				
+				validateNew(privacylink);
+				CommonUtility.waitForPageLoadNew(driver, privacylink, 30);
+				String parentWindow = driver.getWindowHandle();
+				jsClickNew(privacylink);
+				sleepBySec(3);
+				Set<String> tabs_windows = driver.getWindowHandles();
+				Iterator<String> itr = tabs_windows.iterator();
+				while (itr.hasNext()) {
+					String window = itr.next();
+					if (!parentWindow.equals(window)) {
+						driver.switchTo().window(window);
+					}
+				}
+
+				CommonUtility.checkPageIsReadyNew(driver);
+				String CurrentRailURL = driver.getCurrentUrl();
+				System.out.println("Actual  URL: " + CurrentRailURL);
+
+				if (CurrentRailURL.contains("&WT.mc_id=8000158")) {
+					System.out.println("****************Page is displayed  ***************" +CurrentRailURL);
+
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("**************** Page is not displayed ***************");
+				}
+				CheckPageLoad();
+				CheckiPerseptions();
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+}
 			}
