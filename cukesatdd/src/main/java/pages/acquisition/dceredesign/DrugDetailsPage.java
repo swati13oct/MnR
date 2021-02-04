@@ -1555,7 +1555,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateLISBuyDown_CopaySection_LISAlert() {
 		if(validateNew(LIS_CopaySection)  &&
 		validateNew(LIS_BuyDown_Copay) &&
-		!validate(LIS_CopayHeader) &&
+		validateNew(LIS_CopayHeader) &&
 		validateNew(LIS_Deductible) &&
 		validateNew(LIS_DeductibleLISLink) &&
 		validateNew(LIS_Alert)
@@ -1571,7 +1571,8 @@ public class DrugDetailsPage extends UhcDriver {
 		else
 			Assert.fail("***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
 	}
-
+	
+	
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'No LIS')]//parent::div")
 	public WebElement NonLIS_CopayHeader;
 	

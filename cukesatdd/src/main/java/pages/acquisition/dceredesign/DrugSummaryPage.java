@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.github.mkolisnyk.cucumber.reporting.types.breakdown.matchers.Matcher;
 import com.google.common.collect.Ordering;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PlanDetailsPage;
@@ -616,7 +617,7 @@ public class DrugSummaryPage extends UhcDriver {
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
-
+ 
 	@FindBy(xpath = "//*[contains(@class, 'pharmacy-plan-desc')]")
 	private WebElement PharmacyNameText;
 
@@ -1127,6 +1128,26 @@ public class DrugSummaryPage extends UhcDriver {
 		waitForPageLoadSafari();
 		return new PlanDetailsPage(driver);
 	}
+	
+    public void validateLISBanner_LISBuydownPlan_DrugSummary(String planName) {
+    	WebElement LISBanner = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'level of Extra Help')]"));
+    	if(validateNew(LISBanner)){
+    		WebElement ExtraHelpLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'Learn more')]"));
+    		System.out.println("Clicking on learn more about extra help link");
+    		switchToNewTabNew(ExtraHelpLink);
+    		CommonUtility.checkPageIsReadyNew(driver);
+    		if(driver.getCurrentUrl().contains("extra-help")){
+    			WebElement ExtraHelpText = driver.findElement(By.xpath("//h2[contains(text(),'Extra Help')]"));
+                validateNew(ExtraHelpText);
+                System.out.println("Extra Help page is displayed");
+    		}
+    		driver.close();
+    		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+    		System.out.println("Navigated back to drug summary page");
+    	}
+		
+	}
+
 
 	public void validateBreadCrumb(String breadCrumb) {
 		Assert.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",

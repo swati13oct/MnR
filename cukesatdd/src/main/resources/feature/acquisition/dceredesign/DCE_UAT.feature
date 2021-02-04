@@ -104,40 +104,40 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-      Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug3> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug4> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug5> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug6> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug7> |
-    Then the user edits supply length to three months for following drug  
-      | EditDrug | <drug5> |
+   #   Then the user searches and adds the following Drug to Drug List
+   #   | DrugName | <drug2> |
+   # Then the user searches and adds the following Drug to Drug List
+   #   | DrugName | <drug3> |
+   # Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug4> |
+   # Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug5> |
+  #  Then the user searches and adds the following Drug to Drug List
+   #   | DrugName | <drug6> |
+  #  Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug7> |
+  #  Then the user edits supply length to three months for following drug  
+   #   | EditDrug | <drug5> |
     Then the user validates all added drugs in DrugList  
     Then the user clicks on Review Drug Costs to Land on Drug Details Page   
     Then the user validates planName matches plan Name in VPP
-    Then the user Captures Drug costs on Drug Details Page
-    Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
-      | Brand Drug   | <brandDrug1>   |
-      | Generic Drug | <genericDrug1> |
-    Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
-      | Brand Drug   | <brandDrug2>   |
-      | Generic Drug | <genericDrug2> |
+  #  Then the user Captures Drug costs on Drug Details Page
+  #  Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+   #   | Brand Drug   | <brandDrug1>   |
+    #  | Generic Drug | <genericDrug1> |
+  #  Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+   #   | Brand Drug   | <brandDrug2>   |
+    #  | Generic Drug | <genericDrug2> |
    Then the user validates following expected Premium on DCE Details Page
       | Premium | <premium> |
-   Then the user verify the Retail chain pharmacy on detail page 
-   Then the user Captures Drug costs on Drug Details Page  
+ #  Then the user verify the Retail chain pharmacy on detail page 
+  # Then the user Captures Drug costs on Drug Details Page  
    And the user validates link to Drug Summary Page
   # And the user validates functional tool tips for the given plan
    #   | Plan Name | <planname> |
-    And the user Captures Drug costs on Drug Summary Page for the given plan
-       | Plan Name | <planname> |
-    And the user compares drug costs for drug details and drug summary pages
+   # And the user Captures Drug costs on Drug Summary Page for the given plan
+    #   | Plan Name | <planname> |
+   # And the user compares drug costs for drug details and drug summary pages
     Then the user click on return to plan summary on DCE summary page
     Then user changes zipcode within VPP page
       | Zip Code        | <NewZipCode>      |
@@ -149,9 +149,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Plan Type | <newplantype> |
       | Plan Name | <newplanname> |
    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
+  # Then the user validates learn more about extra help page in separate tab
    Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug1> |
+   And the user validates link to Drug Summary Page
+   Then the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page
+   | Plan Name | <newplanname> |
   # Then the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
   #Then the user searches and adds the following Drug to Drug List
    #   | DrugName | <insulinDrug> |
