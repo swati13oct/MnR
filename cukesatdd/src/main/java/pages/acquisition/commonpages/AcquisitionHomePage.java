@@ -5113,6 +5113,27 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
+	
+		/*WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);	
+		jsClickNew(ActualTFNelement);
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+	//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+			if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+			System.out.println("TFN number was  found macthing with the SAM call Popup : "+ActualTFNelement.getText());		
+		}
+		
+		else {
+			Assert.fail("TFN number was  not found macthing with the SAM call Popup  : "+TFNXpath);
+		}*/
+		
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);	
 	//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
@@ -5124,25 +5145,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else {
 			Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
 		}
-		//validate(callsamtooltip);
-		validate(ActualTFNelement);
-		String ActualCallSAMTFN = ActualTFNelement.getText();
-		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
 		jsClickNew(ActualTFNelement);
-		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-		driver.switchTo().activeElement();
-		validate(CallSamTFN);
-		String ExpectedCallSAMTFN = CallSamTFN.getText();
-		System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
-		if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
-			System.out
-					.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
-
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
-					+ ExpectedCallSAMTFN);
-		}
 		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
@@ -5158,9 +5161,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
 		}
 		String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
-		// ActualCallSamTFNMember.replace("", " ");
-		// WebElement strCallSamTFNMember=
-		// driver.findElement(By.xpath("//p[contains(text(),'Already a member?')]"));
 		validate(CallSamTFNMember);
 		String ActualCallSamTFNMember = CallSamTFNMember.getText();
 		System.out.println(ExpectedCallSamTFNMember);
@@ -5175,12 +5175,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		validate(CallSamTFNClose);
 		jsClickNew(CallSamTFNClose);
-		/*
-		 * validate(callsamtooltip); CheckiPerseptions(); callsam.click();
-		 * System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-		 * driver.switchTo().activeElement(); System.out.println(CallSamTFN.getText());
-		 * CallSamTFNClose.click(); validateNew(callsam); return null;
-		 */
-		//return null;
+		
 	}
 }

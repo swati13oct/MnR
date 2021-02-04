@@ -138,7 +138,7 @@ public class SAMIconsCommonStepDefinition {
 		aquisitionhomepage.validatevisitorprofile();
 	}
 	
-	@Then("^Then the user validates whether call icon on a page$")
+	@Then("^the user validates whether SAM icons on a page$")
 	public void the_user_validates_whether_callicon_page(DataTable givenAttributes) throws InterruptedException {
 		
 		List<DataTableRow> memberAttributesRow = givenAttributes
@@ -153,6 +153,7 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	String TFNXpath = memberAttributesMap.get("TFN Xpath");
 	String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.validateCallSam();
 		aquisitionhomepage.validateCallpopuponapage(TFNXpath,ExpecetdTFNNo);
 	
