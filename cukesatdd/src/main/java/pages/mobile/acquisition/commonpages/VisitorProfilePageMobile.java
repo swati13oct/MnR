@@ -239,12 +239,12 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public boolean providerinfo(String planName)
 	{
-		WebElement ProviderSearchLink = driver.findElement
-				(By.xpath("//*[contains(text(),'"+planName+"')]/following::div[contains(@class, 'providers--drugs')][1]//div[contains(@class,'provider-list added')]/div/button"));
-		String mproviderinfo=ProviderSearchLink.getText();
+		WebElement ProviderSearchLink = driver
+				.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'" + planName
+						+ "')]/following::button[contains(@aria-controls, 'plan-providers')][1]/span/span"));
+		String mproviderinfo = ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		if(mproviderinfo.toLowerCase().contains("providers covered"))
-		{
+		if (mproviderinfo.toLowerCase().contains("providers covered")) {
 			return true;
 		}
 		return false;
