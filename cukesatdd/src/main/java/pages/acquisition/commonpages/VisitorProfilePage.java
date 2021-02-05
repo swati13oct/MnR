@@ -207,7 +207,8 @@ public class VisitorProfilePage extends UhcDriver {
 	/*	if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			jsClickNew(addplans);
+//			jsClickNew(addplans);			//Commented since addplans button not available, locator same as else part add plans
+			jsClickNew(addPlans);
 		} else {
 			jsClickNew(addPlans);
 		}
@@ -287,15 +288,17 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 
 	public void validateAddedDrugs(String druglist) {
-		expandDrugBlock.click();
+//		expandDrugBlock.click();
 
 		String[] DrugListItems = druglist.split(":");
 		System.out.println("Added Drug Count : " + DrugListItems.length);
 		for (String currentDrug : DrugListItems) {
 			System.out.println("Current Added Drug Name : " + currentDrug);
-			List<WebElement> DrugName = driver.findElements(By.xpath(
-					"//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"));
+			/*List<WebElement> DrugName = driver.findElements(By.xpath(
+					"//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"));*/
 
+			List<WebElement> DrugName = driver.findElements(By.xpath("//ul[@class='drugs-list']//*[contains(@id,'DrugName')]"));
+			
 			for (int j = 0; j < DrugName.size(); j++) {
 				String drugInfo = DrugName.get(j).getText();
 				System.out.println("Drug name seen on Plan Summary: " + drugInfo);
@@ -687,16 +690,20 @@ public class VisitorProfilePage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
 			System.out.println(plan);
-			System.out.println(driver.findElement(By.xpath(
+			WebElement addedPlan = driver.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			/*System.out.println(driver.findElement(By.xpath(
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());
-			Assert.assertEquals(plan, driver.findElement(By.xpath(
+					.getText());*/
+			System.out.println(addedPlan.getText());
+			/*Assert.assertEquals(plan, driver.findElement(By.xpath(
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());
-			Assert.assertTrue(driver
+					.getText().trim());*/
+			Assert.assertEquals(plan, addedPlan.getText().trim());
+			/*Assert.assertTrue(driver
 					.findElement(By.xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 							+ plan + "')]/following::button[1]"))
-					.isDisplayed());
+					.isDisplayed());*/
+			Assert.assertTrue(addedPlan.findElement(By.xpath("./following::button[1]")).isDisplayed());
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}
