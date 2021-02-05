@@ -490,6 +490,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget",
 						!pharmacyValidate(widget_walgreens));
 				expUrl = "health-plans/estimate-drug-costs.html#/drug-cost-estimator";
+//				expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
 				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 			}
 		} else {
@@ -502,7 +503,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				if (language.equalsIgnoreCase("English")) {
 					Assert.assertTrue("PROBLEM - user has Walgreens plan should see '" + testWidget + "' widget",
 							pharmacyValidate(widget_walgreens));
-					expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+//					expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+					expUrl = "health-plans/estimate-drug-costs.html#/drug-cost-estimator";
 					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 				} else {
 					System.out.println(

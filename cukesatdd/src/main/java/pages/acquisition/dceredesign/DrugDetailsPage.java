@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -209,9 +210,11 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")
 	public WebElement Disclaimer_Accordian;
 
-	@FindBy(id = "selectaPharmacyHeader")
+//	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 	
+//	@FindBy(id = "selectPharmcyModalCloseLink")
 	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 	
@@ -257,7 +260,8 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
 	////button[contains(@aria-label,'Select ALIXARX - MN')]
-	@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
+	//@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
+	@FindBy(xpath = "//span[text()='ROCK PHARMACY']/../../preceding-sibling::button")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
@@ -584,13 +588,15 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void ValidatesDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length-1;
+//		int DrugCount_Total = DrugListItems.length-1;		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(By.xpath("//h2[contains(text(), '"+DrugCount_Total+" Covered)') and contains(text(), 'Your Drugs')]"));
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		for(i=1; i<=DrugCount_Total; i++) {
+//		for(i=1; i<=DrugCount_Total; i++) {					//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for(i=0; i<DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]"));
@@ -811,13 +817,13 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Initial Coverage')]/ancestor::table//td[contains(text(), '"+currentDrug+"')]"));
 
-			if(validateNew(DrugName)) {
+			if(validateNew(DrugName, 5)) {
 				System.out.println("Current Drug Displayed in Drug Details Page, Monthly Drug Costs by Stage Drug List : "+currentDrug);
 			}
 			else
 				Assert.fail("Drug Details Page, Monthly Drug Costs by Stage Drug List Validation FAILED for Drug : "+currentDrug);
-		}		
-		
+		}
+
 	}
 
 	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
@@ -923,7 +929,7 @@ public class DrugDetailsPage extends UhcDriver {
 			catastrophicCoverage.click();
 			System.out.println(coverageMsg.getText());
 			System.out.println(message);
-			String catastrophicCoverage=coverageMsg.getText();
+			String catastrophicCoverage=StringUtils.normalizeSpace(coverageMsg.getText());
 			modalCloseIcon.click();
 			Assert.assertTrue("Catastrophic coverage message is incorrect",catastrophicCoverage.equals(message));
 		}
@@ -1808,7 +1814,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateInvalidZipErrCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText());
-		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
@@ -1823,7 +1829,7 @@ public class DrugDetailsPage extends UhcDriver {
 		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().trim().equals(expectedMsg));
 	}
 
-	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']")
+	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']/parent::button")
 	public WebElement saveBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Saved ']")
@@ -1835,10 +1841,12 @@ public class DrugDetailsPage extends UhcDriver {
 		validate(savedBtn);
 	}
 	
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+//	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement preferredPharmacyTab;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+//	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+	@FindBy(xpath = "//span[contains(text(),'Standard Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement standardPharmacyTab;
 	
 	public void validatePreferredTab() {
