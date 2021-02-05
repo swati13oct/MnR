@@ -243,7 +243,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	}
 
-	public void clickOnLearnAboutMedicareBtn() {
+	public AcquisitionHomePage clickOnLearnAboutMedicareBtn() {
 		validateNew(LearnAboutMedicareBtn);
 		CommonUtility.waitForPageLoadNew(driver, LearnAboutMedicareBtn, 30);
 		String parentWindow = driver.getWindowHandle();
@@ -264,18 +264,15 @@ public class CampaignExternalLinks extends UhcDriver {
 
 		if (CurrentRailURL.contains("=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group")) {
 			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
-			Assert.assertTrue(true);
-		} else {
-			Assert.fail("**************** Page is not displayed ***************");
+			CheckiPerseptions();
+			return new AcquisitionHomePage(driver);
 		}
-		CheckPageLoad();
-		CheckiPerseptions();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		return null;
+		/*
+		 * else Assert.fail("**************** Page is not displayed ***************");
+		 * CheckPageLoad(); try { Thread.sleep(3000); } catch (InterruptedException e) {
+		 * // TODO Auto-generated catch block e.printStackTrace(); }
+		 */
 	}
 
 	public void clickOnmedicareplans11PrivacyLink() {

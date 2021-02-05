@@ -88,7 +88,7 @@ public class CampaignExternalLinkStepDefinition {
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 
 		campaignExternalLinkspage.validateMorganStanleyExternalPage(TFNXpath, ExpectedTFNNo);
-		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
+		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
 	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
 	public void navigate_back_aarp_medicare11() throws InterruptedException {
@@ -118,8 +118,8 @@ public class CampaignExternalLinkStepDefinition {
 	public void the_user_clicks_on_Learn_About_Medicare_button_on_Morgan_Stanley_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-		campaignExternalLinkspage.clickOnLearnAboutMedicareBtn();
-
+		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnLearnAboutMedicareBtn();
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
 	
 	@Then("^user verify TFN on AARP external links page$")
