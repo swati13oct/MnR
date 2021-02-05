@@ -2,24 +2,23 @@
 
   Scenario Outline: TID: <Scenario> -plan type: <plantype> - OLE End to end from external Links
  
-  Given the user is on medicare acquisition site landing page fro campaign Traffic
-    	|Site| <site>|
-		Given the user navigates to following Campaign acquisition site page
-      | PagePath | <path>     |  	
-  	Then the user validates whether call icon is visible 
-		Then the user validates whether chat icon is visible
+  Given user is on campaign external Links page
+    	|External Link| <externallink>|
+		Then the user validate aarp medicare plans11 page external link
+       | Zip Code        | <zipcode>         | 	
+	Then the user validates whether SAM icons on a page
+	 			| TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath> |
   	And the user views the plans of the below plan type
       | Plan Type | <MAplantype> |
     And the user selects plan year
     	|Plan Year	| <planyear>|
-		And the user validates plan summary for the below plan
-      | Plan Name | <planName> |
-   	 Then the user validates whether call icon is visible 
-			Then the user validates whether chat icon is visible
+	#And the user validates plan summary for the below plan
+     # | Plan Name | <planName> |
+   	Then the user validates whether SAM icons on a page
      And the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
-    Then the user validates whether call icon is visible 
-			Then the user validates whether chat icon is visible
+    Then the user validates whether SAM icons on a page
     #And I select "<plantype>" plans to compare and click on compare plan link
     #----------------
     And the user clicks on compare plans button on plan details page and navigate to compare page
@@ -30,13 +29,11 @@
 #    Then user should be able to see the Select Plan for Enroll Modal with saved plans
 #      | Test Plans | <testplans> |
   #  When user clicks on Enroll in plan button on the select plan modal on vpp summary page
-    Then the user validates whether call icon is visible 
-		Then the user validates whether chat icon is visible
+   Then the user validates whether SAM icons on a page
     Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <MAplanName> |
     Then the user validates the Plan details on OLE
-     Then the user validates whether call icon is visible 
-		Then the user validates whether chat icon is visible
+    Then the user validates whether SAM icons on a page
      Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name         | <firstname>         |
@@ -52,22 +49,23 @@
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
-    Then the user validates whether call icon is visible 
-		Then the user validates whether chat icon is visible
+   	Then the user validates whether SAM icons on a page
 		Then the user validates cancellation and Save Return Later modal for OLE Page
-    
+		Then the user navigate back to external link of aarp medicare plans11 page
+   	Then the user validates whether SAM icons on a page
 	 
 		@CampaignExternalLink_E2E_Scenario_6
     Examples: 
-      | Scenario                               | site|PlanType   |path                                                                                 |planyear|planYear|zipcode | isMultutiCounty | county          | MAplantype |planyear| MAplanName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |  healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-      | E2E Scenario 6_aarp-medicare-plans-11  | AARP |MAPD-MBI  | /health-plans.html?zipcode=33111&WT.mc_id=8000158&county=120&state=12#/plan-summary |future  |future  |			10001 | NO              | New York County | MAPD       |future|AARP Medicare Advantage (HMO-POS) | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      0123456789  | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false      |                   | NO      | NO |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+      | Scenario                               | site|PlanType   |externallink                                               |planyear|planYear|zipcode | isMultutiCounty | county            | MAplantype |planyear| MAplanName                                | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |  healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType                 |TFNNo          |TFNxpath                                                                                        |
+      | E2E Scenario 6_aarp-medicare-plans-11  | AARP |MAPD-MBI  | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 |future  |future  |33111   | NO              | Miami-Dade County | MAPD       |future  |AARP Medicare Advantage Choice (PPO)       | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      0123456789  | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | FL           |      33111 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false      |                   | NO      | NO |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid    |1-855-264-3792 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]     |
 			
-			@Test
+			
 			Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
-			Given user access the campaign external link
-			|External Site|<site>|
+			
+			Given user is on campaign external Links page
+    	|External Link| <externallink>|
 			
 			@CampaignExternal_Scenario1_AARP
 			Examples: 
-      |Scenario                               |site|
+      |Scenario                               |externallink|
       |Campaign External Links - E2E Scenario 1_AMP_English|https://ma.aarpmedicareplans.com/aarp-medicare-advantage|
