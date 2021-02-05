@@ -82,8 +82,8 @@ public class GlobalComponentsCommonStepDefinition {
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
-		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, null);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, null);
 		aquisitionhomepage.validateSubtitle();
 	}
 
