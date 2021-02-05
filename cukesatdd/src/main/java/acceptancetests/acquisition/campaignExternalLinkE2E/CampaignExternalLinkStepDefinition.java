@@ -7,10 +7,13 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.commonpages.CampaignExternalLinkPage;
 
 /**
  * Functionality: Validate different Campaign External Links
@@ -37,5 +40,8 @@ public class CampaignExternalLinkStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String site = memberAttributesMap.get("External Site");
+		CampaignExternalLinkPage campaignExternalLinkPage = new CampaignExternalLinkPage(wd,site);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINK_PAGE, campaignExternalLinkPage);
 	}
 }
