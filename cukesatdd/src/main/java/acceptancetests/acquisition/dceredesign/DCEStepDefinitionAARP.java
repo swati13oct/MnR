@@ -2541,6 +2541,13 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.verifyBackToProfileBtnDisplayed();
 	}
+	
+	@Then("^the user verifies NBA modal for creating profile on drug summary page$")
+	public void user_verifies_NBAmodal_creating_profile_on_drug_summary() {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateNBAModal();
+	}
 
 	@Then("^user click on breadcrumb \"([^\"]*)\" on get started page$")
 	public void user_click_breadcrumb_on_get_started_page(String breadCrumb) {

@@ -962,6 +962,11 @@ public class DrugSummaryPage extends UhcDriver {
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
+	
+	public void validateNBAModal() {
+		validateNew(dceNBAModal);
+		validateNew(dceNBAModalBtn);
+	}
 
 	public static String selectedPharmacyName;
 

@@ -138,6 +138,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     And the user Captures Drug costs on Drug Summary Page for the given plan
        | Plan Name | <planname> |
     And the user compares drug costs for drug details and drug summary pages
+    Then the user verifies NBA modal for creating profile on drug summary page
     Then the user click on return to plan summary on DCE summary page
     Then user changes zipcode within VPP page
       | Zip Code        | <NewZipCode>      |
@@ -178,8 +179,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Drug cost estimator link and validates Drug Details Page
     
     
-    
+    @DCE_E2E_Scenario6_UAT_AARP
      Examples: 
-      | Scenario           | site  | path                                                                                   | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | NewZipCode |  newplantype |  newplanname                                        |  isMultutiCounty |  county          |  updateplanname                       |   insulinDrug1 | insulinDrug2 									| insulinCopay  |    
-      | E2E Scenario 4_UMS | AARP  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |   NO             |Miami-Dade County |  AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen |  $35          |
+      | Scenario            | site  | path                                                                                   | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | NewZipCode |  newplantype |  newplanname                                        |  isMultutiCounty |  county          |  updateplanname                       |   insulinDrug1 | insulinDrug2 									| insulinCopay  |    
+      | E2E Scenario 6_AARP | AARP  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |   NO             |Miami-Dade County |  AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen |  $35          |
+      
+      @DCE_E2E_Scenario6_UAT_UMS
+     Examples: 
+      | Scenario            | site  | path                                                                                  | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | NewZipCode |  newplantype |  newplanname                                        |  isMultutiCounty |  county          |  updateplanname                       |   insulinDrug1 | insulinDrug2 									| insulinCopay  |    
+      | E2E Scenario 6_UMS  | UHC  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |   NO             |Miami-Dade County |  AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen |  $35          | 
     
