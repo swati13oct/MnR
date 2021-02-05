@@ -91,5 +91,22 @@ public class CampaignExternalLinkStepDefinition {
 			
 			campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
 		}
+	
+	@When("^user clicks on Find Plans and Pricing to open a new tab$")
+	public void user_clicks_on_Find_Plans_and_Pricing_to_open_a_new_tab() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickFindPlansPricing();
+	}
+
+	@Then("^user should be navigated on Shop for a plan page$")
+	public void user_should_be_navigated_on_Shop_for_a_plan_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		AcquisitionHomePage acquisitionHomePage=campaignExternalLinkspage.validateShopForPlanLoaded();
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+	}
 }
+
+
 

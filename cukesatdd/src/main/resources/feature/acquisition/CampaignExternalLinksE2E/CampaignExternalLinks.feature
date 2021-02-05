@@ -64,6 +64,9 @@
 			
 			Given user is on campaign external Links page
     	|External Link| <externallink>|
+    	#Then user verify TFN on campaign external links page
+    	When user clicks on Find Plans and Pricing to open a new tab
+    	Then user should be navigated on Shop for a plan page
 			
 			@CampaignExternal_Scenario1_AARP
 			Examples: 

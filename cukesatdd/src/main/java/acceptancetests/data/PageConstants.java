@@ -769,9 +769,5 @@ public static final String GUEST_PAYMENTS_HOME_PAGE = "guestPaymentsHomePage";
 	public static final String KEEP_CARD_ON_FILE_IND = "keepCardOnFileIndFromGPSDatabase";
 	public static final String PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE="PRODvirtualVisitdeeplinklogin";
 	
-	/*
-	 * Campaign External Pages
-	 */
-	public static final String CAMPAIGN_EXTERNAL_LINK_PAGE="campaignExternalLinkPage";
 }
 
