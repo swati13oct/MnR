@@ -1872,4 +1872,30 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 
+	public void validateOptumRxConsistentDisplay_PharmacyPage() {
+		//Zip code for No retail pharmacy results
+		String pharmacyZipCode = "89405";
+		clickChangePharmacyLinkDetailsPage();
+		validateSelectPharmacyPage();
+		validateNew(Pharmacy_ZipCodeTxt);
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+		validateNew(Pharmacy_SearchBtn);
+		Pharmacy_SearchBtn.click();
+		System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+				+ Pharmacy_ZipCodeTxt.getText());
+		validateNew(preferredMailPharmacy);
+		validateNew(noResultsMessage);
+		if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
+			System.out.println("OptumRx Pharmacy Displayed for Zip not returning any retail Pharmacy results");
+			System.out.println("No results message displayed : "+noResultsMessage.getText());
+			validateNew(selectPharmacyModalCloseBtn);
+			System.out.println("Closing Pharmacy page");
+			selectPharmacyModalCloseBtn.click();
+			validateNew(DrugDetails_ChangePharmacyLnk);
+		}
+		else 
+			Assert.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
+	
+	}
 }

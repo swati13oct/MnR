@@ -25,10 +25,12 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
+    Then the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then the user validates planName matches plan Name in VPP
+    Then the user validates OptumRx consistently displays on DCE Details - Pharmacy Page
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
     Then the user validates Monthly Drug Costs by Stage Section

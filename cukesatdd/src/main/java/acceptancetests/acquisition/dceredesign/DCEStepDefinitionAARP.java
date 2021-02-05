@@ -2526,4 +2526,20 @@ public class DCEStepDefinitionAARP {
 
 	}
 
+
+	@Then("^the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page$")
+	public void the_user_validates_OptumRx_consistently_displays_on_DCE_Summary_Pharmacy_Page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateOptumRxConsistentDisplay_PharmacyPage();
+	
+	}
+
+	@Then("^the user validates OptumRx consistently displays on DCE Details - Pharmacy Page$")
+	public void the_user_validates_OptumRx_consistently_displays_on_DCE_Details_Pharmacy_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateOptumRxConsistentDisplay_PharmacyPage();
+	}
+
 }
