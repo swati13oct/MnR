@@ -1414,6 +1414,7 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = plandetailspage.returnToReviewDrugCost();
 
 	}
+	
 
 	@Then("^the user selects View plan details for following plantype and PlanName$")
 	public void the_user_selects_View_plan_details_for_following_plantype_and_PlanName(DataTable attributes)
@@ -2378,6 +2379,29 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateLISBuyDown_CopaySection_LISAlert();
 	}
 
+	@Then("^the user validates learn more about extra help page in separate tab$")
+	public void the_user_validates_learn_more_about_extra_help() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		//drugDetailsPage.validateLearnMoreAboutExtraHelp();
+	}
+	
+	@Then("^the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page$")
+	public void the_user_validates_LISBanner_for_LISBuydown_Plan(DataTable Planname) throws Throwable {
+		List<DataTableRow> memberAttributesRow = Planname.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("Plan Name");
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateLISBanner_LISBuydownPlan_DrugSummary(planName);
+		
+		
+	}
+	
 	@Then("^the user validates correct Copay section view and LIS message for LIS Non Buydown Plan on DCE details Page$")
 	public void the_user_validates_correct_Copay_section_view_and_LIS_message_for_LIS_NonBuydown_Plan_on_DCE_details_Page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -2553,6 +2577,13 @@ public class DCEStepDefinitionAARP {
 	public void user_should_be_able_to_see_Back_to_profile_button_on_details_page() {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.verifyBackToProfileBtnDisplayed();
+	}
+	
+	@Then("^the user verifies NBA modal for creating profile on drug summary page$")
+	public void user_verifies_NBAmodal_creating_profile_on_drug_summary() {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.validateNBAModal();
 	}
 
 	@Then("^user click on breadcrumb \"([^\"]*)\" on get started page$")

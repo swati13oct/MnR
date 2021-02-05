@@ -1577,7 +1577,8 @@ public class DrugDetailsPage extends UhcDriver {
 		else
 			Assert.fail("***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
 	}
-
+	
+	
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'No LIS')]//parent::div")
 	public WebElement NonLIS_CopayHeader;
 	
