@@ -69,7 +69,10 @@ public class CampaignExternalLinkStepDefinition {
 			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 			
-			campaignExternalLinkspage.clickOnmedicareplans11Link(zipcode);
+			
+			
+			AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11Link(zipcode);
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 		}
 	
 	@Then("^the user validate links and other options on morganstanley external link page$")
@@ -91,12 +94,20 @@ public class CampaignExternalLinkStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
 	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
-	public void navigate_back_aarp_medicare11() throws InterruptedException {
-	
+	public void navigate_back_aarp_medicare11_page(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+			String zipcode = memberAttributesMap.get("Zip Code");
 			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-			
-			campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
+	
+			AcquisitionHomePage acquisitionHomePage = 	campaignExternalLinkspage.clickOnmedicareplans11backLink(zipcode);
+
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 		}
 	
 	@When("^user clicks on Find Plans and Pricing to open a new tab$")
@@ -137,6 +148,35 @@ public class CampaignExternalLinkStepDefinition {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.validateAARPExternalPage(TFNXpath, ExpectedTFNNo,ExpectedWorkingHrs);
+	}
+	
+	@Then("^the user navigate back to aarp medicare plans11 page privacy link$")
+	public void navigate_aarp_medicare11_privacy_links() throws InterruptedException {
+	
+			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			
+			AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
+			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+		}
+	
+	@Then("^the user validate links and other options on aarp medicare plans11 external link page$")
+	public void validate_linkson_ExternalPage_aarp_medicare_plans11(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
+
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+
+		campaignExternalLinkspage.validateAARPMedicarePlans11ExternalPage(TFNXpath, ExpectedTFNNo);
+		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
 }
 

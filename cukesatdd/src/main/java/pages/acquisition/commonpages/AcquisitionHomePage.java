@@ -2479,7 +2479,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			 * 
 			 * public GetStartedPage navigateToPrescriptionDrug() {
 			 * enterYourDrugListButton.click(); if (getTitle().
-			 * equalsIgnoreCase("Our Medicare Plan Types | AARP� Medicare Plans from UnitedHealthcare�"
+			 * equalsIgnoreCase("Our Medicare Plan Types | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½"
 			 * )) { return new GetStartedPage(driver); } else { return null; } }
 			 * 
 			 * public DrugCostEstimatorPage navigateToDCEToolFromHome() throws
@@ -2677,7 +2677,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * 
 	 * public GetStartedPage navigateToPrescriptionDrug() {
 	 * enterYourDrugListButton.click(); if (getTitle().
-	 * equalsIgnoreCase("Our Medicare Plan Types | AARP� Medicare Plans from UnitedHealthcare�"
+	 * equalsIgnoreCase("Our Medicare Plan Types | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½"
 	 * )) { return new GetStartedPage(driver); } else { return null; } }
 	 * 
 	 * public DrugCostEstimatorPage navigateToDCEToolFromHome() throws
@@ -3004,7 +3004,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m.  8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m.  8 p.m. Monday  Friday, 8 a.m.  5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -5108,20 +5108,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
 	
-		/*WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
-		validateNew(ActualTFNelement);	
-		jsClickNew(ActualTFNelement);
-		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
-		driver.switchTo().activeElement();
-	//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
-			if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
-			System.out.println("TFN number was  found macthing with the SAM call Popup : "+ActualTFNelement.getText());		
-		}
-		
-		else {
-			Assert.fail("TFN number was  not found macthing with the SAM call Popup  : "+TFNXpath);
-		}*/
-		
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
@@ -5142,7 +5128,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
 
 		jsClickNew(ActualTFNelement);
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m.  8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m.  8 p.m. Monday  Friday, 8 a.m.  5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
@@ -5171,6 +5157,92 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		validate(CallSamTFNClose);
 		jsClickNew(CallSamTFNClose);
+		
+	}
+	
+	@FindBy(xpath = "(//span[contains(text(),'Call UnitedHealthcare at')])[1]")
+	private WebElement footertextsectioncallus;
+	
+	@FindBy(xpath = "(//span[contains(text(),'Hours: 8 a.m. – 8 p.m.')]")
+	private WebElement footertextsectionTFNtimezone;
+	
+	
+	@FindBy(xpath = "(//span[contains(text(),'7 days a week')])")
+	private WebElement footertextsectionTFNtimezone1;
+	
+	
+public void validatefootercallussection(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
+		
+		driver.navigate().refresh();
+		CommonUtility.checkPageIsReady(driver);
+		CheckiPerseptions();
+	
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("Expected TFN No: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No: " + ActualTFNelement.getText());
+	//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+			if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+			System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());
+		}
+		
+		else
+			Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
+
+		jsClickNew(ActualTFNelement);
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m.  8 p.m.";
+		validate(CallSamTFNtimezone);
+		String ActualCallSamTFNtimezone = footertextsectionTFNtimezone.getText();
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+		if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
+			System.out.println(
+					"****************call us Timezone Content was  found macthing with the SAM call Popup  ***************");
+			
+		} else {
+			System.out.println(
+					"****************call us Timezone Content was not found macthing with the SAM call Popup  ***************");
+		}
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at";
+		validate(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText();
+		System.out.println(ExpectedCallSamTFNMember);
+		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember.replace(" ", "").replace("\n", ""))) {
+			System.out.println(
+					"****************call us Content was  found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+		}
+		
+		String ExpectedCallSamTFNtimezone1 = "7 days a week";
+		validate(CallSamTFNtimezone);
+		String ActualCallSamTFNtimezone1 = footertextsectionTFNtimezone1.getText();
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone1);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone1);
+		if (ExpectedCallSamTFNtimezone1.replace(" ", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone1.replace(" ", "").replace("\n", ""))) {
+			System.out.println(
+					"****************call us Timezone1 Content was  found macthing with the SAM call Popup  ***************");
+			
+		} else {
+			System.out.println(
+					"****************call us Timezone1 Content was not found macthing with the SAM call Popup  ***************");
+		}
+		
+		validate(CallSamTFNClose);
+		jsClickNew(CallSamTFNClose);
+		
 		
 	}
 }

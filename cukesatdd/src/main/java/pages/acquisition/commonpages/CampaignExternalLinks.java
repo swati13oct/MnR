@@ -192,7 +192,8 @@ public class CampaignExternalLinks extends UhcDriver {
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 	}
 
-	public void clickOnmedicareplans11Link(String zipcode) {
+	
+	public AcquisitionHomePage clickOnmedicareplans11Link(String zipcode) {
 
 		validateNew(zipcodeEnter);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
@@ -229,9 +230,12 @@ public class CampaignExternalLinks extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return new AcquisitionHomePage(driver);
+		}
+		  return null;
 		}
 
-	}
+	
 
 	public void sleepBySec(int sec) {
 		try {
@@ -275,7 +279,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		 */
 	}
 
-	public void clickOnmedicareplans11PrivacyLink() {
+	public AcquisitionHomePage clickOnmedicareplans11PrivacyLink() {
 
 		validateNew(privacylink);
 		CommonUtility.waitForPageLoadNew(driver, privacylink, 30);
@@ -309,7 +313,9 @@ public class CampaignExternalLinks extends UhcDriver {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return new AcquisitionHomePage(driver);
 		}
+		return null;
 
 	}
 	
@@ -385,5 +391,74 @@ public class CampaignExternalLinks extends UhcDriver {
 		if(validate(workingHrs)) {
 			Assert.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
 		}
+	}
+	public AcquisitionHomePage clickOnmedicareplans11backLink(String zipcode) {
+		driver.close();
+		validateNew(zipcodeEnter);
+		CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
+		sendkeys(zipcodeEnter, zipcode);
+		validateNew(zipcodeEnter);
+		CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(submit);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("/plan-summary")) {
+			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("**************** Page is not displayed ***************");
+		}
+		CheckPageLoad();
+		CheckiPerseptions();
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new AcquisitionHomePage(driver);
+		}
+		  return null;
+		}
+	
+	public void validateAARPMedicarePlans11ExternalPage(String tfnXpath, String expTfnNo) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("info.aarpmedicareplans.com/aarp-medicare-plans-11")) {
+			Assert.assertTrue(true);
+			System.out.println("AARP Medicare plans11 External Link Page opens successsfully");
+		} else
+			Assert.fail("AARP Medicare plans11 External Link page is not opening up");
+		validateNew(zipcodeEnter);
+		validateNew(submit);
+		validateNew(privacylink);
+	//	validateNew(locateZipcodeLink);
+		validateNew(tfnHeader);
+		
+		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+		String actualTfnNo = TFNelement.getText();
+		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
+			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
+		else
+			Assert.fail("TFN elemnet is not found / TFN no is not same on page");
+
+		System.out.println(tfnHeader.getText());
+		System.out.print(TFNelement.getText());
+
+		validateNew(accessibilitylink);
+		validateNew(footerInfo);
 	}
 }
