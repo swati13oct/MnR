@@ -611,18 +611,18 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
-		List <WebElement> Tier1Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 1')]"));
-		List <WebElement> Tier2Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 2')]"));
-		List <WebElement> Tier3Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 3')]"));
-		List <WebElement> Tier4Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 4')]"));
-		List <WebElement> Tier5Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 5')]"));
-		List <WebElement> NotCoveredDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Not Covered')]"));
-		List <WebElement> PADrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Prior Authorization')]"));
-		List <WebElement> STDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Step Therapy')]"));
-		List <WebElement> QLDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Quantity Limit')]"));
-		List <WebElement> SevenDayDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Seven Day')]"));
-		List <WebElement> LADrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Limited Access')]"));
-		List <WebElement> DLDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Dispensing Limits')]"));
+		List <WebElement> Tier1Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 1')]"));
+		List <WebElement> Tier2Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 2')]"));
+		List <WebElement> Tier3Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 3')]"));
+		List <WebElement> Tier4Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 4')]"));
+		List <WebElement> Tier5Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 5')]"));
+		List <WebElement> NotCoveredDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Not Covered')]"));
+		List <WebElement> PADrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Prior Authorization')]"));
+		List <WebElement> STDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Step Therapy')]"));
+		List <WebElement> QLDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Quantity Limit')]"));
+		List <WebElement> SevenDayDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Seven Day')]"));
+		List <WebElement> LADrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Limited Access')]"));
+		List <WebElement> DLDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Dispensing Limits')]"));
 		if(Tier1Drugs.size()>0) {
 			System.out.println("Total No. of Tier 1 Drugs Added: "+Tier1Drugs.size());
 		}
@@ -1555,7 +1555,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateLISBuyDown_CopaySection_LISAlert() {
 		if(validateNew(LIS_CopaySection)  &&
 		validateNew(LIS_BuyDown_Copay) &&
-		!validate(LIS_CopayHeader) &&
+		//!validate(LIS_CopayHeader) &&
 		validateNew(LIS_Deductible) &&
 		validateNew(LIS_DeductibleLISLink) &&
 		validateNew(LIS_Alert)
