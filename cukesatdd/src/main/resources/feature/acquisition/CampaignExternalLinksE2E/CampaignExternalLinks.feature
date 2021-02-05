@@ -60,15 +60,17 @@
       | E2E Scenario 6_aarp-medicare-plans-11  | AARP |MAPD-MBI  | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 |future  |future  |33111   | NO              | Miami-Dade County | MAPD       |future  |AARP Medicare Advantage Choice (PPO)       | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false|   09011997 |  11012002 |      0123456789  | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    |               |             | FL           |      33111 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false      |                   | NO      | NO |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid    |1-855-264-3792 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]     |
 			
 			
-			Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
-			
+	Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
 			Given user is on campaign external Links page
     	|External Link| <externallink>|
-    	#Then user verify TFN on campaign external links page
+    	Then user verify TFN on AARP external links page
+    	| TFN No | <TFNNo> |
+      | TFN Xpath | <TFNxpath1> |
+      |	Working hrs | <workingHrs>|
     	When user clicks on Find Plans and Pricing to open a new tab
     	Then user should be navigated on Shop for a plan page
     	#Then verify SAM Icons
-    	When the user performs plan search using following information in the AARP site
+    	When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
@@ -76,5 +78,22 @@
 			
 			@CampaignExternal_Scenario1_AARP
 			Examples: 
-      |Scenario                               |externallink|zipcode|isMultutiCounty|county|MAplantype|
-      |Campaign External Links - E2E Scenario 1_AMP_English|https://ma.aarpmedicareplans.com/aarp-medicare-advantage|33111|No|Miami-Dade County|MAPD|
+      |Scenario                               |externallink|zipcode|isMultutiCounty|county|MAplantype|TFNNo						|	TFNxpath1																			|workingHrs|
+      |Campaign External Links - E2E Scenario 1_AMP_English|https://ma.aarpmedicareplans.com/aarp-medicare-advantage|33111|No|Miami-Dade County|MAPD|1-855-264-3792	|	//a[contains(@class,'js-tel js-track-event')]	|Hours: 8 a.m. to 8 p.m., 7 days a week*|
+      
+  Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in MA, Medsupp page, PRE, VPP Plan Summary from External link: <externallink>
+  	Given user is on campaign external Links page
+    	|External Link| <externallink>|
+   	And the user validate links and other options on morganstanley external link page
+   		| TFN No | <TFNNo> |
+      | TFN Xpath | <TFNxpath1> |
+    Then the user clicks on Learn About Medicare button on Morgan Stanley external link page
+  	#And the user validates whether SAM icons on a page
+	 		#| TFN No | <TFNNo> |
+      #| TFN Xpath | <TFNxpath2> |
+  	#Then the user check Still have a question
+  
+  @Scenario5_AARP
+  Examples: 
+      | Scenario                   			|	externallink															|	TFNNo						|	TFNxpath1																			|
+      | E2E Scenario 5_ morganstanley		|	https://www.myuhcplans.com/morganstanley	|	1-877-755-5345	|	//a[contains(@class,'js-tel js-track-event')]	|

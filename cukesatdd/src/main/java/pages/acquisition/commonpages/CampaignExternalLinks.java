@@ -1,27 +1,13 @@
 package pages.acquisition.commonpages;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
-
-/**
- * @author sdwaraka
- *
- */
-
-import org.openqa.selenium.Cookie;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -29,9 +15,6 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 
 public class CampaignExternalLinks extends UhcDriver {
 
@@ -51,7 +34,6 @@ public class CampaignExternalLinks extends UhcDriver {
 	public static String MEDSUPP_TFN = "medsupptfn";
 
 	@FindBy(xpath = "//span[contains(text(),'Find Plans')]")
-
 	private WebElement ShopEnrollButton;
 
 	@FindBy(xpath = "//span[contains(text(),'Shop Plans')]")
@@ -59,8 +41,10 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
 	private WebElement zipcodeChangeLink;
+
 	@FindBy(xpath = "//div[@class='modal-title']")
 	private WebElement countyModal;
+
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
@@ -74,13 +58,37 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement submit;
 
 	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/medicare-education.html')]")
-	private WebElement LearnAboutMedicareLink;
+	private WebElement LearnAboutMedicareBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Privacy')]")
 	private WebElement privacylink;
 
 	@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
 	private WebElement findPlansPricing;
+
+	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::input[contains(@id,'find-plans-zip')]")
+	private WebElement zipcodeEnterFld;
+
+	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/medicare-plans.html')]")
+	private WebElement getHelpFindingPlanBtn;
+
+	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::a[contains(@href,'#modal--zip-finder')]")
+	private WebElement locateZipcodeLink;
+
+	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::button[contains(text(),'Find a Plan')]")
+	private WebElement findPlanSubmitBtn;
+
+	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__headline')]")
+	private WebElement tfnHeader;
+
+	@FindBy(xpath = "//span[contains(text(),'Accessibility')]")
+	private WebElement accessibilitylink;
+
+	@FindBy(xpath = "//div[contains(@aria-label,'Disclaimer Information')]")
+	private WebElement footerInfo;
+	
+	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
+	private WebElement workingHrs;
 
 	public CampaignExternalLinks(WebDriver driver) {
 		super(driver);
@@ -235,12 +243,11 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	}
 
-	public void clickOnMorganstanleyLinks() {
-
-		validateNew(LearnAboutMedicareLink);
-		CommonUtility.waitForPageLoadNew(driver, LearnAboutMedicareLink, 30);
+	public void clickOnLearnAboutMedicareBtn() {
+		validateNew(LearnAboutMedicareBtn);
+		CommonUtility.waitForPageLoadNew(driver, LearnAboutMedicareBtn, 30);
 		String parentWindow = driver.getWindowHandle();
-		jsClickNew(LearnAboutMedicareLink);
+		jsClickNew(LearnAboutMedicareBtn);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -257,7 +264,6 @@ public class CampaignExternalLinks extends UhcDriver {
 
 		if (CurrentRailURL.contains("=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group")) {
 			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
-
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("**************** Page is not displayed ***************");
@@ -270,7 +276,6 @@ public class CampaignExternalLinks extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void clickOnmedicareplans11PrivacyLink() {
@@ -330,5 +335,58 @@ public class CampaignExternalLinks extends UhcDriver {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
+	}
+
+	public void validateMorganStanleyExternalPage(String tfnXpath, String expTfnNo) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("myuhcplans.com/morganstanley")) {
+			Assert.assertTrue(true);
+			System.out.println("Morgan Stanley External Link Page opens successsfully");
+		} else
+			Assert.fail("Morgan Stanley External Link page is not opening up");
+		validateNew(LearnAboutMedicareBtn);
+		validateNew(getHelpFindingPlanBtn);
+		validateNew(zipcodeEnterFld);
+		validateNew(locateZipcodeLink);
+		validateNew(findPlanSubmitBtn);
+		validateNew(tfnHeader);
+
+		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+		String actualTfnNo = TFNelement.getText();
+		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
+			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
+		else
+			Assert.fail("TFN elemnet is not found / TFN no is not same on page");
+
+		System.out.println(tfnHeader.getText());
+		System.out.print(TFNelement.getText());
+
+		validateNew(accessibilitylink);
+		validateNew(footerInfo);
+	}
+	
+	public void validateAARPExternalPage(String tfnXpath, String expTfnNo, String expWorkingHrs) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("ma.aarpmedicareplans.com/")) {
+			Assert.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else
+			Assert.fail("AARP External Link page is not opening up");
+		validateNew(tfnHeader);
+
+		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+		String actualTfnNo = TFNelement.getText();
+		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
+			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
+		else
+			Assert.fail("TFN elemnet is not found / TFN no is not same on page");
+
+		System.out.println(tfnHeader.getText());
+		System.out.print(TFNelement.getText());
+		if(validate(workingHrs)) {
+			Assert.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
+		}
 	}
 }
