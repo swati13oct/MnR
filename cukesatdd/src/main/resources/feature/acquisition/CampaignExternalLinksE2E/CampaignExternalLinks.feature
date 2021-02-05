@@ -14,14 +14,14 @@
        | TFN Xpath | <TFNxpath> |
   	And the user views the plans of the below plan type
       | Plan Type | <MAplantype> |
-    And the user selects plan year
-    	|Plan Year	| <planyear>|
+   # And the user selects plan year
+    #	|Plan Year	| <planyear>|
    	Then the user validates SAM icons on the page
    			| TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
-   	Then the user validates the right rail
-    Then the user validates the Need Help Section in the right rail
-    Then the user validates the TFN in the Need Help Section
+   	 Then the user validates TFN Number on Right Rail
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath3> |
     And the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
    Then the user validates SAM icons on the page
@@ -59,7 +59,7 @@
        | TFN Xpath | <TFNxpath> |
    		Then the user validates TFN Number on Right Rail
        | TFN No | <TFNNo> |
-       | TFN Xpath | <TFNxpath2> |
+       | TFN Xpath | <TFNxpath3> |
     And the user views plan details of the above selected plan and validates
       | Plan Name | <PDPplanName> |
    Then the user validates SAM icons on the page
@@ -114,9 +114,9 @@
    	Then the user validates SAM icons on the page
    			| TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
-   	Then the user validates the right rail
-    Then the user validates the Need Help Section in the right rail
-    Then the user validates the TFN in the Need Help Section
+    		Then the user validates TFN Number on Right Rail
+       | TFN No | <TFNNo> |
+       | TFN Xpath | <TFNxpath2> |
     And the user views plan details of the above selected plan and validates
       | Plan Name | <SNPplanName> |
    Then the user validates SAM icons on the page
@@ -157,8 +157,8 @@
    
 		@CampaignExternalLink_E2E_Scenario_6
     Examples: 
-      | Scenario                               | site |PlanType   |externallink                                               |planyear|planYear|zipcode | isMultutiCounty | county            | MAplantype |planyear| MAplanName                                | cardtype |  TFNNo          |TFNxpath                                                                                    |TFNxpath1                                     |PDPplantype |SNPplantype |MSplantype |PDPplanName                     |SNPplanName                                               |TFNxpath2|
-      | E2E Scenario 6_aarp-medicare-plans-11  | AARP |MAPD-MBI  | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 |future  |future  |33111   | NO              | Miami-Dade County | MAPD        |future  |AARP Medicare Advantage Choice (PPO)       | MBI      | 1-844-850-6592  | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]  |(//a[contains(@class,'js-tel js-track-event')])[1] |PDP         |SNP         |MS         |AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP)  |//*[contains(@class,'tel right')] |
+      | Scenario                               | site |PlanType   |externallink                                               |planyear|planYear|zipcode | isMultutiCounty | county            | MAplantype |planyear| MAplanName                                | cardtype |  TFNNo          |TFNxpath                                                                                    |TFNxpath1                                     |PDPplantype |SNPplantype |MSplantype |PDPplanName                     |SNPplanName                                               |TFNxpath2|TFNxpath3 |
+      | E2E Scenario 6_aarp-medicare-plans-11  | AARP |MAPD-MBI  | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 |future  |future  |33111   | NO              | Miami-Dade County | MAPD        |future  |AARP Medicare Advantage Choice (PPO)       | MBI      | 1-844-850-6592  | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]  |(//a[contains(@class,'js-tel js-track-event')])[1] |PDP         |SNP         |MS         |AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP)  |//*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |
 			
 			
 	Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
