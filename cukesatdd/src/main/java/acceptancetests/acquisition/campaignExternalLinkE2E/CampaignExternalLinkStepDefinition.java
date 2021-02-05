@@ -1,7 +1,6 @@
 package acceptancetests.acquisition.campaignExternalLinkE2E;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,8 +17,6 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.CampaignExternalLinks;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.tfn.CampaignTFNPage;
 
 /**
  * Functionality: Validate different Campaign External Links
@@ -75,14 +72,24 @@ public class CampaignExternalLinkStepDefinition {
 			campaignExternalLinkspage.clickOnmedicareplans11Link(zipcode);
 		}
 	
-	@Then("^the user validate morganstanley page external link$")
-	public void validate_linkson_ExternalPage_morganstanley() throws InterruptedException {
-	
-			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
-					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-			
-			campaignExternalLinkspage.clickOnMorganstanleyLinks();
+	@Then("^the user validate links and other options on morganstanley external link page$")
+	public void validate_linkson_ExternalPage_morganstanley(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
+
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+
+		campaignExternalLinkspage.validateMorganStanleyExternalPage(TFNXpath, ExpectedTFNNo);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
+	}
 	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
 	public void navigate_back_aarp_medicare11() throws InterruptedException {
 	
@@ -105,6 +112,14 @@ public class CampaignExternalLinkStepDefinition {
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		AcquisitionHomePage acquisitionHomePage=campaignExternalLinkspage.validateShopForPlanLoaded();
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+	}
+
+	@Then("^the user clicks on Learn About Medicare button on Morgan Stanley external link page$")
+	public void the_user_clicks_on_Learn_About_Medicare_button_on_Morgan_Stanley_external_link_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickOnLearnAboutMedicareBtn();
+
 	}
 }
 

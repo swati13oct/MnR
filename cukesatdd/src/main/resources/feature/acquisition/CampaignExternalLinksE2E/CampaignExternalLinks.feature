@@ -72,3 +72,20 @@
 			Examples: 
       |Scenario                               |externallink|
       |Campaign External Links - E2E Scenario 1_AMP_English|https://ma.aarpmedicareplans.com/aarp-medicare-advantage|
+      
+  Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in MA, Medsupp page, PRE, VPP Plan Summary from External link: <externallink>
+  	Given user is on campaign external Links page
+    	|External Link| <externallink>|
+   	And the user validate links and other options on morganstanley external link page
+   		| TFN No | <TFNNo> |
+      | TFN Xpath | <TFNxpath1> |
+    Then the user clicks on Learn About Medicare button on Morgan Stanley external link page
+  	#And the user validates whether SAM icons on a page
+	 		#| TFN No | <TFNNo> |
+      #| TFN Xpath | <TFNxpath2> |
+  	#Then the user check Still have a question
+  
+  @Scenario5_AARP
+  Examples: 
+      | Scenario                   			|	externallink															|	TFNNo						|	TFNxpath1																			|
+      | E2E Scenario 5_ morganstanley		|	https://www.myuhcplans.com/morganstanley	|	1-877-755-5345	|	//a[contains(@class,'js-tel js-track-event')]	|
