@@ -1,5 +1,6 @@
 package acceptancetests.acquisition.callChat;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.CampaignExternalLinks;
 
 public class SAMIconsCommonStepDefinition {
 
@@ -153,6 +155,26 @@ public class SAMIconsCommonStepDefinition {
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
 
+	}
+	
+	@Then("^the user validates TFN Number on Right Rail$")
+	public void validate_TFN_On_Right_Rail(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+
+		aquisitionhomepage.validateTFNNoonRightRail(TFNXpath, ExpectedTFNNo);
+	
 	}
 
 }

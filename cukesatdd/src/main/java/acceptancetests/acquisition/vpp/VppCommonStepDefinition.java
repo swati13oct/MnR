@@ -182,12 +182,12 @@ public class VppCommonStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String plantype = givenAttributesMap.get("Plan Type");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,(new VPPPlanSummaryPage(wd)));
 
 		plansummaryPage.viewPlanSummary(plantype);
 
@@ -853,22 +853,31 @@ public class VppCommonStepDefinition {
 
 	@Then("^the user validates the right rail$")
 	public void user_validates_rightRail() {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
+
 		plansummaryPage.validateRightRailSection();
 	}
 
 	@Then("^the user validates the Need Help Section in the right rail$")
 	public void validate_needHelp_rightRail() {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
+
 		plansummaryPage.validateNeedHelpRightRail();
 	}
 
 	@Then("^the user validates the TFN in the Need Help Section$")
 	public void validate_TFN_inRIghtRail_aarp() {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
+
 		plansummaryPage.GetTFNforPlanType();
 	}
 

@@ -3056,10 +3056,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			present = false;
 		}
 		if (present) {
-			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+			System.out.println("@@@@@@@@@ Able to find  Chat TFN widget @@@@@@@@@");
 
 		} else
-			Assert.fail("@@@@@@@@@ No TFN widget @@@@@@@@@");
+			Assert.fail("@@@@@@@@@ No Chat TFN widget @@@@@@@@@");
 
 	}
 
@@ -5245,4 +5245,31 @@ public void validatefootercallussection(String TFNXpath, String ExpecetdTFNNo) t
 		
 		
 	}
+
+public void validateTFNNoonRightRail(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
+	
+	driver.navigate().refresh();
+	CommonUtility.checkPageIsReady(driver);
+	CheckiPerseptions();
+
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+	validateNew(ActualTFNelement);
+
+	System.out.println("Expected TFN No: " + ExpecetdTFNNo);
+	System.out.println("Actual TFN No: " + ActualTFNelement.getText());
+//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+		if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
+		System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());
+	}
+	
+	else
+		Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
+}
+
 }

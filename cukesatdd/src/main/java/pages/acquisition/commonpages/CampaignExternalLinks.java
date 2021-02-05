@@ -227,10 +227,11 @@ public class CampaignExternalLinks extends UhcDriver {
 		CheckiPerseptions();
 		try {
 			Thread.sleep(3000);
+			return new AcquisitionHomePage(driver);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new AcquisitionHomePage(driver);
+	
 		}
 		  return null;
 		}
