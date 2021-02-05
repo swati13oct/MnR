@@ -11,11 +11,11 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionFooter
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionFooterAARP.json",detailedReport = true, detailedAggregatedReport = true, 
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionFooterAARP")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
-features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, 
+features = { "src/main/resources/feature/mobile/acquisition/globalComponents" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooterAARP.json" }, tags = { "@FooterLinks_GlobalCompsAARP" })
 public class RunMRATDDAcquisitionFooterLinksAARP {
 

@@ -2803,7 +2803,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
-
 	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
@@ -2849,10 +2848,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
-			mobileswipeHorizantal("50%", true);
-//			WebDriverWait d = new WebDriverWait(driver, 20);
-//			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
-			
+			WebDriverWait d = new WebDriverWait(driver, 20);
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
@@ -2915,6 +2912,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 	}
 
+
+	
+	
+	
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String planTypePath = "";
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
@@ -3019,7 +3020,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		
 
 		// enter zipcode
-		planOverviewZipCodeFieldBox.sendKeys(zipcode);
+		jsSendkeys(planOverviewZipCodeFieldBox, zipcode);
 		jsClickNew(planOverviewFindPlanButton);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
@@ -4272,20 +4273,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public void RockyLearnMoreButtonandValidate(String planName) throws InterruptedException {
+		
 		WebElement learnMore = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		Thread.sleep(6000);
 		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
 		if (learnMore != null) {
-			validateNew(learnMore, 20);
+			validateNew(learnMore);
 			switchToNewTabNew(learnMore);
 		}
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
 			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
-			pageloadcomplete();
-			scrollToView(rockyMountainLogo);
-			validateNew(rockyMountainLogo, 2);
+			validateNew(rockyMountainLogo);
 			System.out.println("Validated Rocky Mountian Logo");
 
 		}
