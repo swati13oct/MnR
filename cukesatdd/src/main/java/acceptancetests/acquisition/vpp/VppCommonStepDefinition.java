@@ -2689,6 +2689,8 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
+		
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, plansummaryPage);
 	}
 
 	@Then("^the site user clicks on continue application until confirmaion page$")
@@ -3264,7 +3266,7 @@ public class VppCommonStepDefinition {
 		plansummaryPage.medsuppOLERulesandDisclosures();
 		plansummaryPage.medsuppOLEHealthInsurance();
 		plansummaryPage.medsuppOLEAARPSupplementPlans();
-		plansummaryPage.medsuppOLEPrintandSaveApplication();
+	//	plansummaryPage.medsuppOLEPrintandSaveApplication();
 		plansummaryPage.medsuppOLEViewPrescriptionDrugPlans();
 	
 		}
@@ -3433,7 +3435,7 @@ public class VppCommonStepDefinition {
 		String parentDirectory = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+DateCreated+".xls";
+		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 		
 		//Reading Excel.xls file
 		File InputFile = new File(InputFilePath);

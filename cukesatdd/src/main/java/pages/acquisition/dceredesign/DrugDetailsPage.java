@@ -212,7 +212,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "selectaPharmacyHeader")
 	public WebElement selectPharmacyHeader;
 	
-	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 	
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -1536,7 +1536,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]")
 	public WebElement LIS_CopaySection;
 
-	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Qualify for LIS')]//parent::div")
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Initial Coverage Stage')]//parent::div")
 	public WebElement LIS_CopayHeader;
 
 	@FindBy(xpath = "//*[contains(@id, 'lisbuydown')]//*[contains(text(), 'All covered drugs:')]")
@@ -1820,7 +1820,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
-		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().trim().equals(expectedMsg));
 	}
 
 	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']")

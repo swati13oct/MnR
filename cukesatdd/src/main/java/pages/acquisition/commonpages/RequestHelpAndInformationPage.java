@@ -20,7 +20,7 @@ import atdd.framework.UhcDriver;
 public class RequestHelpAndInformationPage extends UhcDriver {
 	
 	
-	@FindBy(xpath =".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
+	@FindBy(xpath ="//*[contains(@class,'uhc-tempo-button') and contains(text(),'Find an Agent')]")
 	private WebElement ma_requestAgentAppointmentLink;
 	                 
 	@FindBy(xpath =".//*[@id='article_mededaccordion2']//*[contains(text(),'Find UnitedHealthcare')]")
@@ -48,7 +48,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	private WebElement firstNameAgentAppt; //agent appointment page
 	
 	
-	@FindBy(id = "zipcodemeded")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemed')]")
 	private WebElement zipCodeMedEd;
 	
 	@FindBy(id = "lookzip")
@@ -73,7 +73,7 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 	@FindBy(xpath="//div[contains(@class,'uhc-container')]//div[contains(@class,'segment-title')]//*[contains(text(),'Need')]")
 	private WebElement needHelpHeader;
 	
-	@FindBy(xpath="//a[contains(@class,'tel')][contains(@class, 'tfn')]")
+	@FindBy(xpath="//*[contains(@ng-show,'fedTfn')]//a[contains(@class,'tel tfn')]")
 	private WebElement needHelpTFN;
 	
 	@FindBy(id = "proceed")
@@ -87,10 +87,10 @@ public class RequestHelpAndInformationPage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validateNew(needHelpHeader);
+		//validateNew(needHelpHeader);
 		validateNew(needHelpTFN);
 		validateNew(zipCodeMedEd);
-		validateNew(lookUpZipLink);
+		//validateNew(lookUpZipLink);
 		
 
 	}

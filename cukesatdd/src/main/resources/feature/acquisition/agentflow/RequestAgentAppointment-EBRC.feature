@@ -33,7 +33,7 @@ When the user clicks on Agent link and validates the correct URL is loaded
     Examples: 
       |	site	| path                            | pageName                    | UHCUrl|
       |	AARP	| shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/| 
-      |	AARP	| shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/| 
+     # |	AARP	| shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/| 
   	  |	AARP	| shop/connect                    | ShopPlan: Request more Info |	https://www.myuhcagent.com/| 													
      # |	AARP	| shop/compare.html               | ShopPlan: Compare           |	https://www.myuhcagent.com/| 											
      # |	AARP	| shop/estimate.html              | ShopPlan: Estimate          |	https://www.myuhcagent.com/| 												
@@ -49,7 +49,7 @@ When the user clicks on Agent link and validates the correct URL is loaded
     Examples: 
       |	site	| path                            | pageName                    | UHCUrl|
       |	UHC		| shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/| 
-      |	UHC		| shop.html                       | ShopPlan: Shop              |https://www.myuhcagent.com/| 
+     # |	UHC		| shop.html                       | ShopPlan: Shop              |https://www.myuhcagent.com/| 
   	  |	UHC		| shop/connect                    | ShopPlan: Request more Info |	https://www.myuhcagent.com/| 													
       #|	UHC		| shop/compare.html               | ShopPlan: Compare           |	https://www.myuhcagent.com/| 											
      # |	UHC		| shop/estimate.html              | ShopPlan: Estimate          |	https://www.myuhcagent.com/| 													

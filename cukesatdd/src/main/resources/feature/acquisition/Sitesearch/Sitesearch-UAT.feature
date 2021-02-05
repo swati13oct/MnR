@@ -28,12 +28,12 @@ Feature:1.08 UAT-Site Search Flows
      |E2E Scenario 1_UMS  |UHC  |Medicare|MEDICARE PART D CLAIM FORM(PDF)|
      |E2E Scenario 1_UMS  |UHC  |Dental coverage| Drug cost estimator|
      
-  @prodSanity_AARP
+  @prodSanity_AARP @vbfGateAARP
   	Examples: 
      |Scenario           |site 	| searchValue |newsearchvalue	|
      |E2E Scenario 1_AMP |AARP  | Medicare    |Pharmacy				|
      
-  @prodSanity_UHC
+  @prodSanity_UHC @vbfGateUHC
   	Examples: 
      |Scenario           	|site	| searchValue |newsearchvalue	|
      |E2E Scenario 1_UMS  |UHC	| Medicare    |Pharmacy				|
