@@ -4290,34 +4290,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void clickVisitAARPFooterLink() {
-		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-			jsClickNew(visitAARPFooterLink);
-			// waitForPageLoadSafari();
-			Set<String> winHandles = driver.getWindowHandles();
-			for (String win : winHandles) {
-				if (!win.equals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)) {
-					driver.switchTo().window(win);
-					proceedToLeaveAARP();
-					if (!driver.getCurrentUrl().contains("aarp.org")) {
-						Assert.fail("Visit AARP link did not lead to the right page");
-					} else {
-						Assert.assertTrue(true, "Navigated to AARP org page");
-					}
-					driver.close();
-					break;
-				}
-			}
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-		}
-		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-	}
-
+        if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+            CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+            jsClickNew(visitAARPFooterLink);
+            // waitForPageLoadSafari();
+            Set<String> winHandles = driver.getWindowHandles();
+            for (String win : winHandles) {
+                if (!win.equals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION)) {
+                    driver.switchTo().window(win);
+                    proceedToLeaveAARP();
+                    if (!driver.getCurrentUrl().contains("aarp.org")) {
+                        Assert.fail("Visit AARP link did not lead to the right page");
+                    } else {
+                        Assert.assertTrue(true, "Navigated to AARP org page");
+                    }
+                    driver.close();
+                    break;
+                }
+            }
+            driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+        }
+    }
+	
 	public void proceedToLeaveAARP() {
 		if (validate(leaveAARPMedicarePlansDialog)) {
 			jsClickNew(proceedLeaveAARPMedicare);
 			waitForPageLoadSafari();
-			sleepBySec(10);
+			sleepBySec(5);
 //				CommonUtility.checkPageIsReadyNew(driver);
 		}
 	}
@@ -4507,10 +4506,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void MedicareAdvantagePlans() {
-		threadsleep(6);
+//		threadsleep(6);
+		threadsleep(5000);
 		// MedicareAdvantagePlans.click();
 		jsClickNew(MedicareAdvantagePlans);
-		threadsleep(5);
+		threadsleep(5000);
 		if (driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
 			Assert.assertTrue(true);
 			System.out.println("MA Plan Page open: URL-->  " + driver.getCurrentUrl());
@@ -4621,10 +4621,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void Accessibility() {
 
-		threadsleep(6);
+//		threadsleep(6);
+		threadsleep(5000);
 //			Accessibility.click();
 		jsClickNew(Accessibility);
-		threadsleep(5);
+		threadsleep(5000);
 		// Assert.assertEquals(driver.getCurrentUrl(),
 		// "https://www.uhc.com/legal/accessibility");
 		if (driver.getCurrentUrl().contains("accessibility")) {
@@ -4633,7 +4634,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
-		threadsleep(8);
+//		threadsleep(8);
+		threadsleep(5000);
 //			UnitedHealthcareMedicareSolutions.click();
 		jsClickNew(UnitedHealthcareMedicareSolutions);
 	}
@@ -4686,6 +4688,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToNewVisitorProfilePage() {
+		waitForPageLoadSafari();
 		try {
 			if (savedPlansPopup.isDisplayed()) {
 				savedPlansPopupCloseIcon.click();
@@ -4696,6 +4699,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 		shoppingCartIcon.click();
 		guestProfileLink.click();
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("profile")) {
 			System.out.println("Navigated to Visitor profile page");
