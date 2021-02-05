@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -17,106 +17,102 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class SAMIconsCommonStepDefinition {
-	
+
 	@Autowired
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	/**
 	 * @Functionality:SAM Icons
 	 */
 	@Then("^user opens the page to validate$")
 	public void the_user_opens_the_page_to_validate(DataTable givenAttributes) throws InterruptedException {
-		
-		List<DataTableRow> memberAttributesRow = givenAttributes
-					.getGherkinRows();
-			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-						.get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			String pagename = memberAttributesMap.get("pagename");
-		
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String pagename = memberAttributesMap.get("pagename");
+
 		System.out.println(pagename);
-	
+
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPage(pagename);
 	}
-	
+
 	@Then("^the user validates whether call icon is visible$")
 	public void the_user_validates_whether_callicon_isvisible() throws InterruptedException {
-		
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
-		//aquisitionhomepage.validateCallSamContent();
+		// aquisitionhomepage.validateCallSamContent();
 		aquisitionhomepage.validateCallpopup();
 		/*
 		 * if(returnval==null){ Assert.fail("No TFN found"); }else{
 		 * Assert.assertTrue(true); }
 		 */
 	}
-	
+
 	@Then("^the user validates whether chat icon is visible")
 	public void the_user_validates_whether_chaticon_isvisible() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.verifyChatpopup();
-	//	aquisitionhomepage.validateProActiveChatpopupconnect();
-		aquisitionhomepage.validateChatpopupconnect();	
-		
+		// aquisitionhomepage.validateProActiveChatpopupconnect();
+		aquisitionhomepage.validateChatpopupconnect();
+
 	}
-	
+
 	@Then("^the user validates proactive chat popup")
 	public void the_user_validates_proactive_chat_popup() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	
+
 		aquisitionhomepage.validateProActiveChatpopupconnect();
-		
-		
+
 	}
 
 	@Then("^user validates whether chat Agent is not Available")
 	public void the_user_validates_whether_chat_Agent_is_not_visible() throws Throwable {
-	boolean flag= false;
+		boolean flag = false;
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	flag=aquisitionhomepage.validateChatNonHours();
+		flag = aquisitionhomepage.validateChatNonHours();
 
-		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
-		
+		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours", flag);
+
 	}
-	
-			
+
 	@Then("^user opens the page to validate M&R Sites$")
 	public void the_user_opens_the_page_to_validate_Sites(DataTable givenAttributes) throws InterruptedException {
-		
-		List<DataTableRow> memberAttributesRow = givenAttributes
-					.getGherkinRows();
-			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-						.get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			String pagename = memberAttributesMap.get("pagename");
-		
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String pagename = memberAttributesMap.get("pagename");
+
 		System.out.println(pagename);
-	
+
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPage(pagename);
 	}
-	
+
 	@And("^user clicks on Sign in link on home page on site$")
 	public void click_signIn() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -130,33 +126,53 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.headerRegisterLink();
 	}
-	
+
 	@Then("^user validates visitor profile on home page site$")
 	public void the_user_validates_visitor_profile() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatevisitorprofile();
 	}
-	
+
 	@Then("^the user validates whether SAM icons on a page$")
 	public void the_user_validates_whether_callicon_page(DataTable givenAttributes) throws InterruptedException {
-		
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
-					.get(0), memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
 		}
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	String TFNXpath = memberAttributesMap.get("TFN Xpath");
-	String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.validateCallSam();
-		aquisitionhomepage.validateCallpopuponapage(TFNXpath,ExpecetdTFNNo);
-	
+		aquisitionhomepage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
+
+	}
+
+	@Then("^the user validates SAM icons on the page$")
+	public void the_user_validates_SAM_icons_on_the_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateCallSam();
+		aquisitionhomepage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
+
 	}
 
 }

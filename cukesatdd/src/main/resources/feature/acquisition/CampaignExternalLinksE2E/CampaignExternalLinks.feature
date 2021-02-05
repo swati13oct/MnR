@@ -80,12 +80,11 @@
    		| TFN No | <TFNNo> |
       | TFN Xpath | <TFNxpath1> |
     Then the user clicks on Learn About Medicare button on Morgan Stanley external link page
-  	#And the user validates whether SAM icons on a page
-	 		#| TFN No | <TFNNo> |
-      #| TFN Xpath | <TFNxpath2> |
+  	And the user validates SAM icons on the page
+      | TFN Xpath | <TFNxpath2> |
   	#Then the user check Still have a question
   
   @Scenario5_AARP
   Examples: 
-      | Scenario                   			|	externallink															|	TFNNo						|	TFNxpath1																			|
-      | E2E Scenario 5_ morganstanley		|	https://www.myuhcplans.com/morganstanley	|	1-877-755-5345	|	//a[contains(@class,'js-tel js-track-event')]	|
+      | Scenario                   			|	externallink															|	TFNNo						|	TFNxpath1																			|	TFNxpath2	|
+      | E2E Scenario 5_ morganstanley		|	https://www.myuhcplans.com/morganstanley	|	1-877-755-5345	|	//a[contains(@class,'js-tel js-track-event')]	|	//span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')]	|
