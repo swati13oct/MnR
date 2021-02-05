@@ -134,25 +134,6 @@ public class SAMIconsCommonStepDefinition {
 		aquisitionhomepage.validatevisitorprofile();
 	}
 
-	@Then("^the user validates whether SAM icons on a page$")
-	public void the_user_validates_whether_callicon_page(DataTable givenAttributes) throws InterruptedException {
-
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		String TFNXpath = memberAttributesMap.get("TFN Xpath");
-		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
-		aquisitionhomepage.validateChatSam();
-		aquisitionhomepage.validateCallSam();
-		aquisitionhomepage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
-
-	}
 
 	@Then("^the user validates SAM icons on the page$")
 	public void the_user_validates_SAM_icons_on_the_page(DataTable givenAttributes) throws InterruptedException {
@@ -170,7 +151,6 @@ public class SAMIconsCommonStepDefinition {
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 		aquisitionhomepage.validateChatSam();
-		aquisitionhomepage.validateCallSam();
 		aquisitionhomepage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
 
 	}
