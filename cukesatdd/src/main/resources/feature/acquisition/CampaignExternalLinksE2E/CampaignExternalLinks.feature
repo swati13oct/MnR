@@ -67,8 +67,14 @@
     	#Then user verify TFN on campaign external links page
     	When user clicks on Find Plans and Pricing to open a new tab
     	Then user should be navigated on Shop for a plan page
+    	#Then verify SAM Icons
+    	When the user performs plan search using following information in the AARP site
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+
 			
 			@CampaignExternal_Scenario1_AARP
 			Examples: 
-      |Scenario                               |externallink|
-      |Campaign External Links - E2E Scenario 1_AMP_English|https://ma.aarpmedicareplans.com/aarp-medicare-advantage|
+      |Scenario                               |externallink|zipcode|isMultutiCounty|county|MAplantype|
+      |Campaign External Links - E2E Scenario 1_AMP_English|https://ma.aarpmedicareplans.com/aarp-medicare-advantage|33111|No|Miami-Dade County|MAPD|
