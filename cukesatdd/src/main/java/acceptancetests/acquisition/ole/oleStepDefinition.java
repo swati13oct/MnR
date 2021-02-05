@@ -2,6 +2,7 @@ package acceptancetests.acquisition.ole;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -3435,9 +3436,13 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				}						
 				//---------------------------------------------------//	
 			//------------Added for Jenkins Report---------------//
+				List<String> testNote=new ArrayList<String>();
+			//	testNote.add("===================================================");
 				
-				Map<String,String> matched = new HashMap<String,String>();
-				Map<String,String> mismatched = new HashMap<String,String>();
+			//	testNote.add("\tValidation for able to print all the values from the GPS");
+				
+				Map <String, String> matched = new HashMap<>();
+				Map <String, String> mismatched = new HashMap<>();
 				//------------Added for Jenkins Report---------------//	
 				boolean Validation_Status = OLEGPSValidation.validate_GPS_for_Plantype(DetailsMap,matched,mismatched);
 				if (Validation_Status) {
@@ -3446,7 +3451,7 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 					
 				//	getLoginScenario().saveBean(oleCommonConstants.TEST_RESULT_NOTE,testNote1);
 					Assert.assertTrue(true);
-					
+				//	testNote.addAll(matched);
 					
 				} else {
 					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");

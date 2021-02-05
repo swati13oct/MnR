@@ -938,8 +938,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
 	private WebElement providerListPlanCard;
 	
-	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']")
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']/parent::button")
 	private List<WebElement> removeProviderListPlanCard;
+
+	@FindBy(id = "agreeButton")
+	private WebElement OptumSignInAgreeButton;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -1092,6 +1095,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
+		scrollToView(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -3134,6 +3138,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public VPPPlanSummaryPage navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
+		scrollToView(planOverviewChangeZipCodeLink);
 		Actions action = new Actions(driver);
 		action.moveToElement(planOverviewChangeZipCodeLink).build().perform();
 		try {
@@ -3162,6 +3167,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		}
 		sleepBySec(3);
+		waitForPageLoadSafari();
 		if (driver.findElement(By.xpath("//*[contains(text(),'" + zipcode + " " + countyName + "')]")).isDisplayed()) {
 			return new VPPPlanSummaryPage(driver);
 		}
@@ -3899,6 +3905,19 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(Submit);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
+
+		try {
+			validateNew(OptumSignInAgreeButton, 5);
+			jsClickNew(OptumSignInAgreeButton);
+			waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
+
+		}
+
+		catch (Exception e) {
+			System.out.println("Onehealthcareid Agree page is skipped");
+		}
+
 		String CurrentSupplementURL = driver.getCurrentUrl();
 		System.out.println(
 				"Submit application button has been clicked successfully after entering the data on resume application page : "
@@ -3926,7 +3945,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("#challengeSecurityAnswerId > input"));
+			WebElement securityAnswer = driver.findElement(By.xpath("//input[@id='UnrecognizedSecAns_input']"));
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");
@@ -4180,8 +4199,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		jsClickNew(drugLinkDropdown);
 
+		/*WebElement drugInfoDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//*[contains(@id,'DrugName')]"));*/
+		
 		WebElement drugInfoDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//*[contains(@id,'DrugName')]"));
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//div[@class='drug-info-container']"));
 
 		String drugInfo = drugInfoDropdown.getText();
 		System.out.println(drugInfo);
@@ -6276,9 +6298,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void removeProvidersFromPlanCard() {
 		try {
 			providerListPlanCard.click();
-			Actions action = new Actions(driver);
+//			Actions action = new Actions(driver);
 		while(removeProviderListPlanCard.size()!=0) {
-			action.moveToElement(removeProviderListPlanCard.get(0)).build().perform();
+//			action.moveToElement(removeProviderListPlanCard.get(0)).build().perform();
+			scrollToView(removeProviderListPlanCard.get(0));
 			removeProviderListPlanCard.get(0).click();
 //			jsClickNew(removeProviderListPlanCard.get(0));
 			System.out.println("Removed providers in plan card");
@@ -6418,6 +6441,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public void medsuppOLEViewPrescriptionDrugPlans() throws InterruptedException {
 		validateNew(ViewPrescriptionDrugPlans);
+		scrollToView(ViewPrescriptionDrugPlans);
 		CommonUtility.waitForPageLoadNew(driver, ViewPrescriptionDrugPlans, 30);
 		String parentWindow = driver.getWindowHandle();
 		ViewPrescriptionDrugPlans.click();

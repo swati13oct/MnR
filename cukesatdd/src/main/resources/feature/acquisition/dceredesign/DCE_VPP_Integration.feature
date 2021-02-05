@@ -116,4 +116,9 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
    Examples: 
       |	site	| zipcode | planyear	|	plantype | county | isMultutiCounty |	planname																													|	drug1		|
       |	AARP	|   10001 | future		| MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)	|	Orkambi	|
-      
+     
+      @VPP_NBA_DCE_Redesign_Integration_UHC   
+   Examples: 
+      |	site	| zipcode | planyear	|	plantype | county | isMultutiCounty |	planname																													|	drug1		|
+      |	UHC	|   10001 | future		| MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)	|	Orkambi	|
+       

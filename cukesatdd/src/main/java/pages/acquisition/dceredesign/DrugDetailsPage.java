@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -209,10 +210,12 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")
 	public WebElement Disclaimer_Accordian;
 
-	@FindBy(id = "selectaPharmacyHeader")
+//	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 	
-	@FindBy(id = "selectPharmcyModalCloseLink")
+//	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 	
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -257,7 +260,8 @@ public class DrugDetailsPage extends UhcDriver {
 	
 	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
 	////button[contains(@aria-label,'Select ALIXARX - MN')]
-	@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
+	//@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
+	@FindBy(xpath = "//span[text()='ROCK PHARMACY']/../../preceding-sibling::button")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
@@ -584,13 +588,15 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void ValidatesDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length-1;
+//		int DrugCount_Total = DrugListItems.length-1;		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(By.xpath("//h2[contains(text(), '"+DrugCount_Total+" Covered)') and contains(text(), 'Your Drugs')]"));
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		for(i=1; i<=DrugCount_Total; i++) {
+//		for(i=1; i<=DrugCount_Total; i++) {					//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for(i=0; i<DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]"));
@@ -611,18 +617,18 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 
 	public void ValidatesDrugsTier_LimitsDisplayed() {
-		List <WebElement> Tier1Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 1')]"));
-		List <WebElement> Tier2Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 2')]"));
-		List <WebElement> Tier3Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 3')]"));
-		List <WebElement> Tier4Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 4')]"));
-		List <WebElement> Tier5Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Tier 5')]"));
-		List <WebElement> NotCoveredDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Not Covered')]"));
-		List <WebElement> PADrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Prior Authorization')]"));
-		List <WebElement> STDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Step Therapy')]"));
-		List <WebElement> QLDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Quantity Limit')]"));
-		List <WebElement> SevenDayDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Seven Day')]"));
-		List <WebElement> LADrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Limited Access')]"));
-		List <WebElement> DLDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//p[contains(text(), 'Dispensing Limits')]"));
+		List <WebElement> Tier1Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 1')]"));
+		List <WebElement> Tier2Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 2')]"));
+		List <WebElement> Tier3Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 3')]"));
+		List <WebElement> Tier4Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 4')]"));
+		List <WebElement> Tier5Drugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Tier 5')]"));
+		List <WebElement> NotCoveredDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Not Covered')]"));
+		List <WebElement> PADrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Prior Authorization')]"));
+		List <WebElement> STDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Step Therapy')]"));
+		List <WebElement> QLDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Quantity Limit')]"));
+		List <WebElement> SevenDayDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Seven Day')]"));
+		List <WebElement> LADrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Limited Access')]"));
+		List <WebElement> DLDrugs = driver.findElements(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//li[contains(text(), 'Dispensing Limits')]"));
 		if(Tier1Drugs.size()>0) {
 			System.out.println("Total No. of Tier 1 Drugs Added: "+Tier1Drugs.size());
 		}
@@ -811,13 +817,13 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Initial Coverage')]/ancestor::table//td[contains(text(), '"+currentDrug+"')]"));
 
-			if(validateNew(DrugName)) {
+			if(validateNew(DrugName, 5)) {
 				System.out.println("Current Drug Displayed in Drug Details Page, Monthly Drug Costs by Stage Drug List : "+currentDrug);
 			}
 			else
 				Assert.fail("Drug Details Page, Monthly Drug Costs by Stage Drug List Validation FAILED for Drug : "+currentDrug);
-		}		
-		
+		}
+
 	}
 
 	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
@@ -923,7 +929,7 @@ public class DrugDetailsPage extends UhcDriver {
 			catastrophicCoverage.click();
 			System.out.println(coverageMsg.getText());
 			System.out.println(message);
-			String catastrophicCoverage=coverageMsg.getText();
+			String catastrophicCoverage=StringUtils.normalizeSpace(coverageMsg.getText());
 			modalCloseIcon.click();
 			Assert.assertTrue("Catastrophic coverage message is incorrect",catastrophicCoverage.equals(message));
 		}
@@ -1555,7 +1561,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateLISBuyDown_CopaySection_LISAlert() {
 		if(validateNew(LIS_CopaySection)  &&
 		validateNew(LIS_BuyDown_Copay) &&
-		validateNew(LIS_CopayHeader) &&
+		//!validate(LIS_CopayHeader) &&
 		validateNew(LIS_Deductible) &&
 		validateNew(LIS_DeductibleLISLink) &&
 		validateNew(LIS_Alert)
@@ -1809,7 +1815,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateInvalidZipErrCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText());
-		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
@@ -1821,10 +1827,10 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
-		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().trim().equals(expectedMsg));
 	}
 
-	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']")
+	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']/parent::button")
 	public WebElement saveBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Saved ']")
@@ -1836,10 +1842,12 @@ public class DrugDetailsPage extends UhcDriver {
 		validate(savedBtn);
 	}
 	
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+//	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement preferredPharmacyTab;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+//	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+	@FindBy(xpath = "//span[contains(text(),'Standard Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement standardPharmacyTab;
 	
 	public void validatePreferredTab() {
@@ -1873,4 +1881,30 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 	}
 
+	public void validateOptumRxConsistentDisplay_PharmacyPage() {
+		//Zip code for No retail pharmacy results
+		String pharmacyZipCode = "89405";
+		clickChangePharmacyLinkDetailsPage();
+		validateSelectPharmacyPage();
+		validateNew(Pharmacy_ZipCodeTxt);
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+		validateNew(Pharmacy_SearchBtn);
+		Pharmacy_SearchBtn.click();
+		System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+				+ Pharmacy_ZipCodeTxt.getText());
+		validateNew(preferredMailPharmacy);
+		validateNew(noResultsMessage);
+		if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
+			System.out.println("OptumRx Pharmacy Displayed for Zip not returning any retail Pharmacy results");
+			System.out.println("No results message displayed : "+noResultsMessage.getText());
+			validateNew(selectPharmacyModalCloseBtn);
+			System.out.println("Closing Pharmacy page");
+			selectPharmacyModalCloseBtn.click();
+			validateNew(DrugDetails_ChangePharmacyLnk);
+		}
+		else 
+			Assert.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
+	
+	}
 }
