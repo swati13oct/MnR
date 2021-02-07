@@ -38,6 +38,9 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  *
  */
 public class AcquisitionHomePage extends GlobalWebElements {
+	
+	@FindBy(id = "zipcode")
+	private WebElement externalzipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
@@ -5270,6 +5273,50 @@ public void validateTFNNoonRightRail(String TFNXpath, String ExpecetdTFNNo) thro
 	
 	else
 		Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
+}
+
+public VPPPlanSummaryPage searchPlansWithOutCountyForExternalLink(String zipcode) throws InterruptedException {
+
+	waitForPageLoadSafari();
+	CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
+//		sendkeys(zipCodeField, zipcode);
+	sendkeysNew(externalzipCodeField, zipcode);
+	jsClickNew(viewPlansButton);
+	// }
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+	waitForPageLoadSafari();
+
+//		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+	validateNew(vppTop, 30);
+	if (driver.getCurrentUrl().contains("health-plans")) {
+		return new VPPPlanSummaryPage(driver);
+	} else
+		return null;
+}
+
+public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName) {
+	waitForPageLoadSafari();
+	if (isHealthPlan) {
+		CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
+		sendkeys(zipCode, zipcode);
+
+		jsClickNew(btnGO);
+	} else {
+		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
+		sendkeys(externalzipCodeField, zipcode);
+
+		jsClickNew(viewPlansButton);
+	}
+
+	CommonUtility.waitForPageLoad(driver, countyModal, 45);
+	if (validate(countyModal))
+		jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+	CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+	if (driver.getCurrentUrl().contains("plan-summary")) {
+		return new VPPPlanSummaryPage(driver);
+	}
+	return null;
 }
 
 }
