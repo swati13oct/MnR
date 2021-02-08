@@ -91,7 +91,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
        @DCE_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link
-   Given the user is on medicare acquisition site landing page
+      Given the user is on medicare acquisition site landing page
     	|Site| <site>|
 		Given the user navigates to following Campaign acquisition site page     
       | PagePath | <path>     |
@@ -133,8 +133,10 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
    Then the user verify the Retail chain pharmacy on detail page 
    Then the user Captures Drug costs on Drug Details Page  
    And the user validates link to Drug Summary Page
-  # And the user validates functional tool tips for the given plan
-   #   | Plan Name | <planname> |
+   And the user validates functional tool tips for the given plan
+      | Plan Name | <planname> |
+   Then the user validates View Drug Pricing modal for the given plan
+      | Plan Name | <planname> |
     And the user Captures Drug costs on Drug Summary Page for the given plan
        | Plan Name | <planname> |
     And the user compares drug costs for drug details and drug summary pages
@@ -153,7 +155,19 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
    Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug4> |
-   And the user validates link to Drug Summary Page
+   Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
+      | CoveredDrug | <genericDrug1> | 	  
+   Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
+      | CoveredDrug | <genericDrug2> | 	  	  
+   Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+      | NotCoveredDrug | <drug2> |	  
+   Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+       | NotCoveredDrug | <drug3> |	  
+   Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+       | NotCoveredDrug | <drug7> |	  	   
+   Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+       | NotCoveredDrug | <drug6> |	  	   	   
+    And the user validates link to Drug Summary Page
    Then the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page
    | Plan Name | <newplanname> |
    Then the user selects View Drug details for following plantype and PlanName
@@ -177,7 +191,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     And user validates the plans on new visitor profile page of AARP site
       | Test Plans | <updateplanname> |
     Then the user clicks on Drug cost estimator link and validates Drug Details Page
-    
+    Then the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page
+       | Site | <site> |   
     
     @DCE_E2E_Scenario6_UAT_AARP
      Examples: 

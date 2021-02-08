@@ -36,7 +36,11 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class DrugDetailsPage extends UhcDriver {
 
-
+	@FindBy(id = "aarpSVGLogo")
+	public WebElement aarpLogo;
+	
+	@FindBy(id = "uhcSVGLogo")
+	public WebElement uhcLogo;
 
 	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
 	public WebElement DrugDetails_ChangePharmacyLnk;
@@ -1906,5 +1910,21 @@ public class DrugDetailsPage extends UhcDriver {
 		else 
 			Assert.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
 	
+	}
+	
+	public void clickingSiteLogoDrugDetail(String siteName){
+		System.out.println(siteName);
+		if (siteName.equalsIgnoreCase("AARP")){
+			
+		validateNew(aarpLogo);
+		jsClickNew(aarpLogo);
+		}
+		else {
+			validateNew(uhcLogo);
+			jsClickNew(uhcLogo);	
+		}
+		waitForPageLoadSafari();
+		String Title = driver.getTitle();
+		System.out.println(Title);
 	}
 }

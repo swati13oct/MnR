@@ -294,6 +294,19 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 	
 	public void captureFunctionalToolTips(String planName) {
+		WebElement WhyAverage = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
+		jsMouseOver(WhyAverage);
+		//WebElement WhyAverageContent = driver.findElement(By.xpath("//h4[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'averageLinkBtn')]/following-sibling::*[contains(@id , 'averageTooltipContent')]"));
+		//String WhyAverageContent = WhyAverageContent.getAttribute("textContent").trim();
+		//if (validateNew(WhyAverageContent)) {
+ 		//	System.out.println("Why Average ToolTip text is present");
+		//	Assert.assertTrue(true);
+	//	} else
+		//	Assert.fail("Why Average ToolTip text is not present");
+		jsMouseOut(WhyAverage);
+	WebElement WhatsIncluded = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
+	jsMouseOver(WhatsIncluded);
+	jsMouseOut(WhatsIncluded);
 		
 	}
 
@@ -658,6 +671,16 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void clickViewDrugCostBtn() {
 		viewDrugCostBtn.click();
+	}
+	
+	public void viewDrugPricingModal(String planName){
+	  WebElement viewDrugPricingLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'priceLinkBtn')]"));
+	  validateNew(viewDrugPricingLink);
+	  jsClickNew(viewDrugPricingLink);
+	  validateNew(DrugPricing_Header);
+	  validateNew(DrugPricing_CloseBtn);
+	  jsClickNew(DrugPricing_CloseBtn);
+	  
 	}
 
 	public void validatePremiumForPlan(String premium, String plantype, String planName) {
