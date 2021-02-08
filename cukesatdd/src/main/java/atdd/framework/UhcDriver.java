@@ -522,6 +522,7 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
+		mobileswipe("50", 1, true);
 		//jsClickNew(Element);
 		Element.click();
 		waitForPageLoadSafari();
