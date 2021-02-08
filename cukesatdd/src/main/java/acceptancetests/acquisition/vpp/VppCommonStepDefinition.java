@@ -1512,7 +1512,8 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		System.out.println("plan name"+planName);
+		System.out.println("plan name"+planType);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -3600,6 +3601,43 @@ public class VppCommonStepDefinition {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
+	
+	@When("^user clicks on Add to compare checkbox on plan detail page$")
+	public void user_clicks_on_compare_checknox_on_plan_details_page() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.clickCompareBox();
+	}
+	
+	@Then("^verify the Add to compare checkbox is checked for selected plan$")
+	public void verify_the_Add_to_compare_checkbox_is_checked_for_selected_plan(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String planIndex = memberAttributesMap.get("Plan index");
+		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex);
+	}
+
+	@When("^user select \"([^\"]*)\" plans to compare$")
+	public void user_select_plans_to_compare(String planIndex)  {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.addPlanToCompareByIndex(planIndex);
+	}
+	
+	@Then("^user clicks on compare button$")
+	public void user_clicks_on_compare_button() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		ComparePlansPage planComparePage = plansummaryPage.clickCompareButton();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+
 }
 
 

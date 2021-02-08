@@ -168,19 +168,28 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | Working hrs | <workingHrs> |
     When user clicks on Find Plans and Pricing to open a new tab
     Then user should be navigated on Shop for a plan page
-    #Then verify SAM Icons
+    Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
     When the user performs plan search using following information using external link
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
     When verify Call SAM icon is visible
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
-    Then the user navigates to the plan details for the given plan type
-      | Plan Type | <plantype> |
+    Then the user view plan details of the above selected plan in site vpp
       | Plan Name | <planname> |
+      | Plan Type | <plantype> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+    When user clicks on Add to compare checkbox on plan detail page
+    And the user clicks on back to all plans link and validates its redirection to Plan Summary
+    Then verify the Add to compare checkbox is checked for selected plan
+    	|Plan index| <planIndex>|
+    When user select "<planIndex1>" plans to compare
+    And user clicks on compare button
+    Then verify plan compare page is loaded
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -188,8 +197,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
 
     @CampaignExternal_Scenario1_AARP
     Examples: 
-      | Scenario                                             | externallink                                             | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | Plan Type  | MAplanName                           | TFNxpath                                                                                   |
-      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAplantype | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |
+      | Scenario                                             | externallink                                             | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype  | planname                           | TFNxpath                                                                                   |planIndex|planIndex1|
+      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |1|2|
 
   Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in MA, Medsupp page, PRE, VPP Plan Summary from External link: <externallink>
     Given user is on campaign external Links page
@@ -204,5 +213,5 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     #Then the user check Still have a question
     @Scenario5_AARP
     Examples: 
-      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                                          |
+      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                                          |TFNxpath2|
       | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] |

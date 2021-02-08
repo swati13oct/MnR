@@ -865,7 +865,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
 	private WebElement nextBestActionModalSelectPlanBtn;
 
-	@FindBy(xpath = "(//button[text()='Compare'])[1]")
+	//@FindBy(xpath = "(//button[contains(text,'Compare plans'])[1]")
+	@FindBy(xpath = "(//button[contains(text(),'Compare plans')])[1]")
 	private WebElement compareButton;
 
 	@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
@@ -943,6 +944,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "agreeButton")
 	private WebElement OptumSignInAgreeButton;
+	
+	@FindBy(id = "back-to-plans")
+	private WebElement backToPlanComparePage;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -6564,5 +6568,31 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 public void validateVPPSummaryPage() {
 	Assert.assertTrue("user not navigated to VPP Page",driver.getCurrentUrl().contains("plan-summary"));
+}
+
+public void verifyPlanCompareCheckboxIsChecked(String planIndex) {
+	validate(planCompareCheckBox);
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	String CheckStatus = js.executeScript("return document.getElementById('compare-plan-"+planIndex+"').checked;").toString();
+	System.out.println("Plan compare checkbox status:" + CheckStatus);
+	Assert.assertEquals("true", CheckStatus.trim());
+	System.out.println("Verified Plan Compare checkbox is checked");
+
+}
+
+public void addPlanToCompareByIndex(String planIndex) {
+	WebElement Checkbox = driver.findElement(By
+			.xpath("//input[contains(@id,'compare-plan-"+planIndex+"')]/ancestor::div[contains(@class,'compare-box')]//label"));
+	JavascriptExecutor js = (JavascriptExecutor) driver;
+	js.executeScript("arguments[0].click();", Checkbox);
+}
+
+public ComparePlansPage clickCompareButton() {
+	validateNew(compareButton);
+	compareButton.click();
+	CommonUtility.waitForPageLoad(driver, backToPlanComparePage, 30);
+	if (currentUrl().contains("/plan-compare"))
+		return new ComparePlansPage(driver);
+	return null;
 }
 }
