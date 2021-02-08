@@ -1,19 +1,40 @@
 package pages.acquisition.pharmacyLocator;
 
+import static org.junit.Assert.fail;
+
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.pdfbox.cos.COSDocument;
+import org.apache.pdfbox.io.RandomAccessRead;
+import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import com.itextpdf.text.pdf.codec.Base64.InputStream;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -56,10 +77,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	/**
 	 * Verify PDF results
+	 * @param testPlanName 
 	 * 
 	 * @throws InterruptedException
 	 */
-	public PharmacySearchPage ValidateSearchPdfResults() throws InterruptedException {
+	public PharmacySearchPage ValidateSearchPdfResults(String testPlanName) throws InterruptedException {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 20);
 		Assert.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", pharmacyValidate(viewsearchpdf));
@@ -68,8 +90,6 @@ public class PharmacySearchPage extends PharmacySearchBase {
 //		viewsearchpdf.click();
 		jsClickNew(viewsearchpdf);
 		Thread.sleep(5000); // note: keep this for the page to load
-		if (MRScenario.environment.contains("team-a"))
-			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int i = 0;
 		while (i < 3) {
@@ -100,6 +120,77 @@ public class PharmacySearchPage extends PharmacySearchBase {
 //		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = " + driver.getTitle());
 		String currentURL = driver.getCurrentUrl();
+		System.out.println("Current URL is : " + currentURL);
+		
+		
+		//Moving to PDF body and copying pdf content to clipboard
+		
+		driver.switchTo().activeElement();
+
+		Actions actions = new Actions(driver);
+        actions.keyDown(Keys.CONTROL);
+        actions.sendKeys("a");
+        actions.keyUp(Keys.CONTROL);
+        actions.build().perform();
+        
+        // Copy the Current Address using CTRL + C
+        actions.keyDown(Keys.CONTROL);
+        actions.sendKeys("c");
+        actions.keyUp(Keys.CONTROL);
+        actions.build().perform();
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        String PDFText = "";
+
+        try {
+        	PDFText = (String) clipboard.getData(DataFlavor.stringFlavor);
+        	System.out.println(PDFText);
+		} catch (UnsupportedFlavorException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+		/*
+		 * Transferable contents = clipboard.getContents(null); try { PDFText = (String)
+		 * contents.getTransferData(DataFlavor.stringFlavor);
+		 * System.out.println(PDFText); } catch (UnsupportedFlavorException e) {
+		 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
+		 */		 
+        
+        if(!PDFText.contains(testPlanName)){
+        	System.out.println("PDF text contains expected Expected Plan Name : "+testPlanName); //document.close(); } else //document.close();
+        	Assert.fail("PDF does not contain Plan Name text");
+        }
+        /*
+		 * try { URL TestURL = new URL(currentURL.replace("blob:", ""));
+		 * System.out.println("Current URL is : " + TestURL); TestURL.openConnection();
+		 * 
+		 * InputStream is = (InputStream) TestURL.openStream(); //BufferedInputStream
+		 * TestFile = new BufferedInputStream(TestURL.openStream());
+		 * 
+		 * BufferedInputStream TestFile = new BufferedInputStream(is); //URLConnection
+		 * testUrlConnect = TestURL.openConnection(); //testUrlConnect.
+		 * //BufferedInputStream TestFile = new
+		 * BufferedInputStream(testUrlConnect.getInputStream()); PDDocument document =
+		 * PDDocument.load(TestFile); //PDFParser TestPDFparser = new
+		 * PDFParser((RandomAccessRead) document); //String PDFText =
+		 * doc_Parsed.toString(); String PDFText = new
+		 * PDFTextStripper().getText(document);
+		 * System.out.println("PDF text : "+PDFText);
+		 * 
+		 * if(PDFText.contains(testPlanName)){
+		 * System.out.println("PDF text contains expected Expected Plan Name : "
+		 * +testPlanName); //document.close(); } else //document.close();
+		 * Assert.fail("PDF does not contain Plan Name text");
+		 * 
+		 * } catch (MalformedURLException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); }
+		 * 
+		 */
+		
 		String expectedURL = "member/pharmacy-locator";
 		Assert.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, " + "URL should not contain '"
 				+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
@@ -645,5 +736,15 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void clickReturnToPharamcySearch() {
 		validateNew(returntoPharmacySearch);
 		returntoPharmacySearch.click();
+	}
+
+	
+	public void validatePlanNameInResultsSection(String testPlanName) {
+		WebElement PlanNameText = driver.findElement(By.xpath("//h2[contains(@class, 'planname') and contains(text(), '"+testPlanName+"')]"));
+		if(validateNew(PlanNameText)) {
+			System.out.println("Ecpected Plan Name displayed in Pharmacy Results section : "+PlanNameText.getText());
+		}
+		else
+			Assert.fail("Plan Name is NOT Displayed in Pharmacy Results Section");
 	}
 }

@@ -304,7 +304,9 @@ public class PharmacySearchCommonStepDefinition {
 	public void viewsSearchResultPdf() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults();
+		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults(testPlanName);
+		
 		Assert.assertTrue("PROBLEM - PDF Results Page Not Displayed", pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("PDF Result Page is Displayed");
@@ -575,4 +577,16 @@ public class PharmacySearchCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateHomePage();
 	}
+
+
+	@Then("^the user validates Selected Plan Name in Results Section on Pharmacy page$")
+	public void the_user_validates_Selected_Plan_Name_in_Results_Section_on_Pharmacy_page() throws Throwable {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		pharmacySearchPage.validatePlanNameInResultsSection(testPlanName);
+		
+	}
+
+		
 }
