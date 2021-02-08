@@ -1498,6 +1498,20 @@ public class DCEStepDefinitionAARP {
 		drugSummaryPage.ValidatesDrugsList(druglist);
 
 	}
+	
+	@Then("^the user validates View Drug Pricing modal for the given plan$")
+	public void user_validates_ViewDrugPricing_modal(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		String planName = memberAttributesMap.get("Plan Name");
+		drugSummaryPage.viewDrugPricingModal(planName);
+	}
 
 	@Then("^the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page$")
 	public void the_user_clicks_Edit_Drug_on_Drug_Details_Page_and_validates_user_navigates_to_Build_your_drug_list_Page()
@@ -2608,6 +2622,22 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateOptumRxConsistentDisplay_PharmacyPage();
+	}
+	
+	@Then("^the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page$")
+	public void user_clicks_site_logo_on_drugdetail_returns_Acquisition_home_page(DataTable attributes ) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String siteName = memberAttributesMap.get("Site");
+		drugDetailsPage.clickingSiteLogoDrugDetail(siteName);
+		
 	}
 
 }
