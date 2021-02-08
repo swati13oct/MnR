@@ -151,16 +151,19 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		try {
 			Transferable contents = clipboard.getContents(null);
 
-			if (contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+			if (contents!=null && contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 					PDFText = (String) contents.getTransferData(DataFlavor.stringFlavor);
 					System.out.println(PDFText);
+			}
+			else {
+				System.out.println("Transferable contents is NULL or no STring data found");
 
 			}
 		} catch (UnsupportedFlavorException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Unsupported Flavor Exception - NO STring data found");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("IOExceptionn - Failed to get Cliboard Contents");
 			e.printStackTrace();
 		}
 		
