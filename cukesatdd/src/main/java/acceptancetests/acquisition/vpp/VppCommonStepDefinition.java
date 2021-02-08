@@ -212,6 +212,7 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 
 	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")
@@ -2923,7 +2924,7 @@ public class VppCommonStepDefinition {
 		plansummaryPage.clickGetStartedBtnOnNba();
 	}
 
-	@And("^user validate Find a Provider NBA on VPP$")
+	@And("^user validate Find a Provider NBA on VPP|user be able to see the Find a Provider NBA on VPP$")
 	public void user_validate_Find_a_Provider_NBA_on_VPP() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -3096,6 +3097,7 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("plan ytpe" +planType);
 		allPlanNames = plansummaryPage.getAllPlanNames(planType);
 		plansummaryPage.clickSelectPlanButton();
 	}
@@ -3560,5 +3562,20 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validateVPPDetailsPage();
 	}
+	
+	@Then("^user should be able to see the NBA modal to add drugs on the VPP summary page$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_add_drugs_on_the_VPP_summary_page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCost();
+	}
+	
+	@Then("^user verify NBA is not displayed on the VPP page$")
+	public void user_verify_NBA_is_not_displayed_on_the_VPP_page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNBAModalNotDisplayed();
+	}
+	
 }
 
