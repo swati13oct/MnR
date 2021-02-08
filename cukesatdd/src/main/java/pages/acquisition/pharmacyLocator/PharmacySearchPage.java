@@ -140,25 +140,30 @@ public class PharmacySearchPage extends PharmacySearchBase {
         actions.build().perform();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         String PDFText = "";
-
-        try {
-        	PDFText = (String) clipboard.getData(DataFlavor.stringFlavor);
-        	System.out.println(PDFText);
-		} catch (UnsupportedFlavorException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
         
 		/*
-		 * Transferable contents = clipboard.getContents(null); try { PDFText = (String)
-		 * contents.getTransferData(DataFlavor.stringFlavor);
-		 * System.out.println(PDFText); } catch (UnsupportedFlavorException e) {
-		 * e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
-		 */		 
+		 * try { PDFText = (String) clipboard.getData(DataFlavor.stringFlavor);
+		 * System.out.println(PDFText); } catch (UnsupportedFlavorException e1) { //
+		 * TODO Auto-generated catch block e1.printStackTrace(); } catch (IOException
+		 * e1) { // TODO Auto-generated catch block e1.printStackTrace(); }
+		 */
         
+		try {
+			Transferable contents = clipboard.getContents(null);
+
+			if (contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+					PDFText = (String) contents.getTransferData(DataFlavor.stringFlavor);
+					System.out.println(PDFText);
+
+			}
+		} catch (UnsupportedFlavorException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
         if(!PDFText.contains(testPlanName)){
         	System.out.println("PDF text contains expected Expected Plan Name : "+testPlanName); //document.close(); } else //document.close();
         	Assert.fail("PDF does not contain Plan Name text");
