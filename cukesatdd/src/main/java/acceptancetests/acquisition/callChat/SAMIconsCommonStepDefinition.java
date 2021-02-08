@@ -16,7 +16,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.CampaignExternalLinks;
 
 public class SAMIconsCommonStepDefinition {
 
@@ -175,6 +174,25 @@ public class SAMIconsCommonStepDefinition {
 
 		aquisitionhomepage.validateTFNNoonRightRail(TFNXpath, ExpectedTFNNo);
 	
+	}
+
+	@Then("^the user validates TFN Number in Still have Questions section at bottom of page$")
+	public void the_user_validates_TFN_Number_in_Still_have_Questions_section_at_bottom_of_page(
+			DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validatefootercallussection(TFNXpath, ExpecetdTFNNo);
+
 	}
 
 }

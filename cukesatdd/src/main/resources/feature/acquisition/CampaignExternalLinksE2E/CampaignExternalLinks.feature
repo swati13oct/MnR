@@ -209,9 +209,13 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user clicks on Learn About Medicare button on Morgan Stanley external link page
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-
-    #Then the user check Still have a question
+    Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
+    Then the user validates TFN Number in Still have Questions section at bottom of page
+    	| TFN Xpath | <TFNxpath3> |
+    	
     @Scenario5_AARP
     Examples: 
-      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                                          |TFNxpath2|
-      | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] |
+      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                                          |	TFNxpath3	|
+      | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] |	(//a[contains(@class, 'tel')])[1]	|
