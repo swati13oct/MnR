@@ -3829,4 +3829,67 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		else
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
 	}
+	
+	@Then("^the user navigates to clicks on Enroll Now from Plan Compare page to start the OLE flow$")
+	public void the_user_navgates_to_clicks_on_Enroll_Now_compare_page_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String PlanName = givenAttributesMap.get("Plan Name");
+		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		WelcomePage welcomePage;
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		VPPPlanSummaryPage comparePlansPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
+			welcomePage = comparePlansPage.Enroll_OLE_PlanComparePlan(PlanName);
+
+		if (welcomePage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
+					welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Error in validating the OLE Welcome Page");
+
+	}
+	
+	
+	@Then("^the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow$")
+	public void the_user_navgates_to_clicks_on_Enroll_Now_plandetails_page_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+
+		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+	//	String PlanName = givenAttributesMap.get("Plan Name");
+		String PlanType = givenAttributesMap.get("Plan Type");
+		//String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		WelcomePage welcomePage;
+		VPPPlanSummaryPage PlanDetailsPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+			welcomePage = PlanDetailsPage.NavigateToOLEEnrollDSNPPlanDetails(PlanType);
+
+		if (welcomePage != null) {
+
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
+					welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assert.assertTrue(true);
+		}
+		else
+			Assert.fail("Error in validating the OLE Welcome Page");
+
+	}
 }

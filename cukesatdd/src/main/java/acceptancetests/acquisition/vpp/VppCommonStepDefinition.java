@@ -1510,8 +1510,12 @@ public class VppCommonStepDefinition {
 		String planName = memberAttributesRow.get(0).getCells().get(1);
 		String planType = memberAttributesRow.get(1).getCells().get(1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		//VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			//	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		System.out.println("plan name"+planName);
 		System.out.println("plan name"+planType);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
@@ -3611,24 +3615,31 @@ public class VppCommonStepDefinition {
 	
 	@Then("^verify the Add to compare checkbox is checked for selected plan$")
 	public void verify_the_Add_to_compare_checkbox_is_checked_for_selected_plan(DataTable givenAttributes) {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String planIndex = memberAttributesMap.get("Plan index");
+		
 		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex);
 	}
 
 	@When("^user select \"([^\"]*)\" plans to compare$")
 	public void user_select_plans_to_compare(String planIndex)  {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		plansummaryPage.addPlanToCompareByIndex(planIndex);
 	}
 	
 	@Then("^user clicks on compare button$")
 	public void user_clicks_on_compare_button() {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		
 		ComparePlansPage planComparePage = plansummaryPage.clickCompareButton();
 		if (planComparePage != null) {

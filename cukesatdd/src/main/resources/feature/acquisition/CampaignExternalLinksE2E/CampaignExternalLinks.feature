@@ -21,18 +21,23 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views plan details of the above selected plan and validates
-      | Plan Name | <planName> |
+    Then the user view plan details of the above selected plan in site vpp
+      | Plan Name | <MAplanName> |
+      | Plan Type | <MAplantype> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #And I select "<plantype>" plans to compare and click on compare plan link
-    #----------------
-    And the user clicks on compare plans button on plan details page and navigate to compare page
+    When user clicks on Add to compare checkbox on plan detail page
+    And the user clicks on back to all plans link and validates its redirection to Plan Summary
+    Then verify the Add to compare checkbox is checked for selected plan
+    	|Plan index| <planIndex>|
+    When user select "<planIndex1>" plans to compare
+    And user clicks on compare button
     Then verify plan compare page is loaded
-    Then the user clicks on back on all plan link in Plan Compare page
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
+    Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+    Then the user navigates to clicks on Enroll Now from Plan Compare page to start the OLE flow
       | Plan Name | <MAplanName> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
@@ -41,7 +46,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates cancellation and Save Return Later modal for OLE Page
+    #Then the user validates cancellation and Save Return Later modal for OLE Page
+    Then the user cancels enrollment and navigates to homepage
     Then the user navigate back to external link of aarp medicare plans11 page
     #----------Repeat the steps for PDP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
@@ -156,8 +162,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
 
     @CampaignExternalLink_E2E_Scenario_6
     Examples: 
-      | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         |
-      | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |
+      | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         |planIndex|planIndex1|
+      | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |1|2|
 
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
     Given user is on campaign external Links page

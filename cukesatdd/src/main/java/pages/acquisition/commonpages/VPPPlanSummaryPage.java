@@ -4445,6 +4445,28 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
+	
+	@FindBy(xpath="(//button//div[contains(text(),'Enroll')])[1]")
+	private WebElement EnrollPlanLinkComparePage;
+	
+public WelcomePage Enroll_OLE_PlanComparePlan(String planName) throws InterruptedException {
+
+	CommonUtility.waitForPageLoadNew(driver,EnrollPlanLinkComparePage, 30);
+	jsClickNew(EnrollPlanLinkComparePage);
+	waitForPageLoadSafari();
+	System.out.println("Enroll In Plan Link is clicked for first plan for "+planName);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("welcome")) {	
+				Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planName, true);
+			}
+			else {
+				Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planName, false);
+			}
+
+			return new WelcomePage(driver);
+		}
+	//	return null;
+
 	public GetStartedPage navigateToDCEFromNBA(String planType, String planName) {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
@@ -6594,5 +6616,24 @@ public ComparePlansPage clickCompareButton() {
 	if (currentUrl().contains("/plan-compare"))
 		return new ComparePlansPage(driver);
 	return null;
+}
+
+@FindBy(xpath="//a//span[contains(text(),'Enroll in plan')]")
+private WebElement EnrollPlanLinkDSNP;
+
+public WelcomePage NavigateToOLEEnrollDSNPPlanDetails(String planType) {
+	
+	CommonUtility.waitForPageLoadNew(driver,EnrollPlanLinkDSNP, 30);
+	jsClickNew(EnrollPlanLinkDSNP);
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("welcome")) {	
+				Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+			}
+			else {
+				Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+			}
+			return new WelcomePage(driver);
+			//return null;
 }
 }

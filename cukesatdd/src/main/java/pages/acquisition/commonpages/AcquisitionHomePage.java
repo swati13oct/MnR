@@ -5114,7 +5114,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallpopuponapage(String TFNXpath, String ExpecetdTFNNo) {
 
 		System.out.println("########Validating TFN on Call SAM icon and Call popup#######");
-		driver.navigate().refresh();
+	//	driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
 
@@ -5148,7 +5148,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("TFN elemnet is not found / displayed on Call popup icon : ");
 
 		System.out.println("#######Validating TFN time zone on Call Popup#######");
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 
@@ -5197,7 +5197,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public void validatefootercallussection(String TFNXpath, String ExpecetdTFNNo) {
 		
-		driver.navigate().refresh();
+	//	driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
 
@@ -5235,7 +5235,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m.";
 		String ActualCallSamTFNtimezone = footertextsectionTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer scetion########");
@@ -5272,7 +5272,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 public void validateTFNNoonRightRail(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
 	
-	driver.navigate().refresh();
+//	driver.navigate().refresh();
 	CommonUtility.checkPageIsReady(driver);
 	CheckiPerseptions();
 
