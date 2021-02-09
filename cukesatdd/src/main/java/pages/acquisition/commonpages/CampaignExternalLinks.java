@@ -491,11 +491,13 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 	public AcquisitionHomePage clickOnmedicareplans11backLink(String zipcode) {
 		driver.close();
-		validateNew(zipcodeEnter);
+		driver.switchTo().window(parentWindow);
+		
 		CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
-		sendkeys(zipcodeEnter, zipcode);
-		validateNew(zipcodeEnter);
-		CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
+		CommonUtility.waitForPageLoadNew(driver, submit, 30);
+	//	sendkeys(zipcodeEnter, zipcode);
+	//	validateNew(zipcodeEnter);
+	//	CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(submit);
 		sleepBySec(3);
@@ -582,7 +584,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	
 	public void closeCurrentTabSwitchToParentTab() {
 		driver.close();
-	//	driver.switchTo().window(parentWindow);
+		driver.switchTo().window(parentWindow);
 		/*
 		 * Set<String> tabs_windows = driver.getWindowHandles(); Iterator<String> itr =
 		 * tabs_windows.iterator(); while (itr.hasNext()) { String window = itr.next();

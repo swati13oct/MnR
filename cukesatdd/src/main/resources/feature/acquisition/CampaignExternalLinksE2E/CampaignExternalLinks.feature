@@ -48,6 +48,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     #Then the user validates cancellation and Save Return Later modal for OLE Page
     #Then the user cancels enrollment and navigates to homepage
     Then the user navigate back to external link of aarp medicare plans11 page
+      | Zip Code | <zipcode> |
     #----------Repeat the steps for PDP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
       | Zip Code | <zipcode> |
@@ -89,6 +90,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     Then the user navigate back to external link of aarp medicare plans11 page
+      | Zip Code | <zipcode> |
     #----------Repeat the steps for SNP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
       | Zip Code | <zipcode> |
@@ -111,7 +113,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow$
+    Then the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow
       | Plan Type | <SNPplantype> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
@@ -122,6 +124,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN Xpath | <TFNxpath> |
    # Then the user validates cancellation and Save Return Later modal for OLE Page
     Then the user navigate back to external link of aarp medicare plans11 page
+      | Zip Code | <zipcode> |
     #-------------------Repeat the steps for Medsupp Plan----------------------------------------------
     Then the user validate aarp medicare plans11 page external link
       | Zip Code | <zipcode> |
@@ -139,6 +142,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates the Need Help Section in the right rail
     Then the user validates the TFN in the Need Help Section
      Then the user navigate back to external link of aarp medicare plans11 page
+       | Zip Code | <zipcode> |
     #---------------------Privacy link in Medicare plans 11 page--------------------
     Then the user navigate back to aarp medicare plans11 page privacy link
     Then the user validates SAM icons on the page
