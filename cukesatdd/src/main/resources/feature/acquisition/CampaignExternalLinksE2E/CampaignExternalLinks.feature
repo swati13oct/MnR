@@ -37,8 +37,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user navigates to clicks on Enroll Now from Plan Compare page to start the OLE flow
-      | Plan Name | <MAplanName> |
+    Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -47,7 +46,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     #Then the user validates cancellation and Save Return Later modal for OLE Page
-    Then the user cancels enrollment and navigates to homepage
+    #Then the user cancels enrollment and navigates to homepage
     Then the user navigate back to external link of aarp medicare plans11 page
     #----------Repeat the steps for PDP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
@@ -57,27 +56,31 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN Xpath | <TFNxpath> |
     And the user views the plans of the below plan type
       | Plan Type | <PDPplantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
+    # And the user selects plan year
+    #	|Plan Year	| <planyear>|
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views plan details of the above selected plan and validates
+    Then the user view plan details of the above selected plan in site vpp
       | Plan Name | <PDPplanName> |
+      | Plan Type | <PDPplantype> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #And I select "<plantype>" plans to compare and click on compare plan link
-    #----------------
-    And the user clicks on compare plans button on plan details page and navigate to compare page
+    When user clicks on Add to compare checkbox on plan detail page
+    And the user clicks on back to all plans link and validates its redirection to Plan Summary
+    Then verify the Add to compare checkbox is checked for selected plan
+    	|Plan index| <planIndex>|
+    When user select "<planIndex1>" plans to compare
+    And user clicks on compare button
     Then verify plan compare page is loaded
-    Then the user clicks on back on all plan link in Plan Compare page
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <PDPplanName> |
+    Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+    Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -85,26 +88,6 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates cancellation and Save Return Later modal for OLE Page
-    Then the user navigate back to external link of aarp medicare plans11 page
-    Then the user validates SAM icons on the page
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
-    # #----------Repeat the steps for PDP Plan-----------------#
-    And the user clicks on compare plans button on plan details page and navigate to compare page
-    Then verify plan compare page is loaded
-    Then the user clicks on back on all plan link in Plan Compare page
-    Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
-    Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <SNPplanName> |
-    Then the user validates SAM icons on the page
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
-    Then the user navigates to Personal Information Page
-    Then the user validates SAM icons on the page
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
-    Then the user validates cancellation and Save Return Later modal for OLE Page
     Then the user navigate back to external link of aarp medicare plans11 page
     #----------Repeat the steps for SNP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
@@ -114,21 +97,22 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN Xpath | <TFNxpath> |
     And the user views the plans of the below plan type
       | Plan Type | <SNPplantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
+    # And the user selects plan year
+    #	|Plan Year	| <planyear>|
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath2> |
-    And the user views plan details of the above selected plan and validates
-      | Plan Name | <SNPplanName> |
+      | TFN Xpath | <TFNxpath3> |
+    Then the user view plan details of the above selected plan in site vpp
+       | Plan Name | <SNPplanName> |
+      | Plan Type | <SNPplantype> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user navigates to clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <SNPplanName> |
+    Then the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow$
+      | Plan Type | <SNPplantype> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -136,7 +120,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates cancellation and Save Return Later modal for OLE Page
+   # Then the user validates cancellation and Save Return Later modal for OLE Page
     Then the user navigate back to external link of aarp medicare plans11 page
     #-------------------Repeat the steps for Medsupp Plan----------------------------------------------
     Then the user validate aarp medicare plans11 page external link
@@ -154,6 +138,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates the right rail
     Then the user validates the Need Help Section in the right rail
     Then the user validates the TFN in the Need Help Section
+     Then the user navigate back to external link of aarp medicare plans11 page
     #---------------------Privacy link in Medicare plans 11 page--------------------
     Then the user navigate back to aarp medicare plans11 page privacy link
     Then the user validates SAM icons on the page

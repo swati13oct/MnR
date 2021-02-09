@@ -582,7 +582,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	
 	public void closeCurrentTabSwitchToParentTab() {
 		driver.close();
-		driver.switchTo().window(parentWindow);
+	//	driver.switchTo().window(parentWindow);
 		/*
 		 * Set<String> tabs_windows = driver.getWindowHandles(); Iterator<String> itr =
 		 * tabs_windows.iterator(); while (itr.hasNext()) { String window = itr.next();

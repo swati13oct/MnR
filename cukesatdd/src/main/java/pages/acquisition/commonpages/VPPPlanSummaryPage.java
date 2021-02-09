@@ -6595,4 +6595,22 @@ public ComparePlansPage clickCompareButton() {
 		return new ComparePlansPage(driver);
 	return null;
 }
+@FindBy(xpath="//a//span[contains(text(),'Enroll in plan')]")
+private WebElement EnrollPlanLinkDSNP;
+
+public WelcomePage NavigateToOLEEnrollDSNPPlanDetails(String planType) {
+	
+	CommonUtility.waitForPageLoadNew(driver,EnrollPlanLinkDSNP, 30);
+	jsClickNew(EnrollPlanLinkDSNP);
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("welcome")) {	
+				Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+			}
+			else {
+				Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+			}
+			return new WelcomePage(driver);
+			//return null;
+}
 }
