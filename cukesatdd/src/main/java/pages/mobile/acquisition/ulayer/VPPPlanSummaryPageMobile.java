@@ -796,7 +796,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
-	
+
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement lnkProfile;
 
@@ -888,11 +888,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			checkModelPopup(driver, 45);
 		else
 			checkModelPopup(driver, 10);
-//		handleChatPopup();
-//		validateNew(maPlansCount);
-//		validateNew(msPlansCount);
-//		validateNew(pdpPlansCount);
-//		validateNew(snpPlansCount);
+		// handleChatPopup();
+		// validateNew(maPlansCount);
+		// validateNew(msPlansCount);
+		// validateNew(pdpPlansCount);
+		// validateNew(snpPlansCount);
 	}
 
 	public boolean validateTimeoutPopup() {
@@ -1023,7 +1023,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", pdpPlansViewLink);
-//			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
+			// CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
 			// sleepBySec(2); // note: add sleep for timing issue, tried increase timeout
 			// from
 			// waitForPageLoadNew but didn't work
@@ -1031,21 +1031,21 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
 			pageloadcomplete();
-//			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-//			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
+			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			pageloadcomplete();
 			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
-//			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
-//			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
+			// CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			pageloadcomplete();
 			scrollToView(msPlansViewLink);
 			jsClickNew(msPlansViewLink);
 			pageloadcomplete();
-//			CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
+			// CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
 			/*
 			 * msPlansViewLink.click(); CommonUtility.waitForPageLoadNew(driver,
 			 * medSuppPlanList.get(0), 30);
@@ -1055,7 +1055,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			scrollToView(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
 			pageloadcomplete();
-//			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
+			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
@@ -2803,6 +2803,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
+
 	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
 
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
@@ -2912,10 +2913,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-
-	
-	
-	
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String planTypePath = "";
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
@@ -3015,9 +3012,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		 * planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
 		 */
 		scrollToView(planOverviewZipCodeFieldBox);
-		//planOverviewZipCodeFieldBox.clear();
-
-		
+		// planOverviewZipCodeFieldBox.clear();
 
 		// enter zipcode
 		jsSendkeys(planOverviewZipCodeFieldBox, zipcode);
@@ -3892,7 +3887,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void verifyPlanComapreCheckboxIsUncheckedforFirstPlan() {
 		scrollToView(planCompareCheckBox);
 		validate(planCompareCheckBox);
-		JavascriptExecutor js = (JavascriptExecutor)driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-1').checked;").toString();
 		System.out.println("Plan compare checkbox status:" + CheckStatus);
 		Assert.assertEquals("false", CheckStatus.trim());
@@ -4273,14 +4268,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public void RockyLearnMoreButtonandValidate(String planName) throws InterruptedException {
-		
+
 		WebElement learnMore = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		Thread.sleep(6000);
 		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
+
 		if (learnMore != null) {
 			validateNew(learnMore);
+			//jsClickNew(learnMore);
 			switchToNewTabNew(learnMore);
 		}
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
@@ -4811,7 +4808,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Navigate to Visitor Profile Page
 	 * 
@@ -4829,7 +4826,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			return null;
 		}
 	}
-
 
 	public ComparePlansPageMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
@@ -5270,13 +5266,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public pages.mobile.acquisition.ulayer.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
 		// TODO Auto-generated method stub
-		
-			jsClickMobile(firstComparePlanButton);
-			CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
-			if (currentUrl().contains("/health-plans.html#/plan-compare"))
-				return new pages.mobile.acquisition.ulayer.ComparePlansPageMobile(driver);
-			return null;
-		
+
+		jsClickMobile(firstComparePlanButton);
+		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new pages.mobile.acquisition.ulayer.ComparePlansPageMobile(driver);
+		return null;
+
 	}
 
 }

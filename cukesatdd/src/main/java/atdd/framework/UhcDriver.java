@@ -1,6 +1,7 @@
 package atdd.framework;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -30,13 +32,17 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+
 import com.google.common.base.Predicate;
+import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -45,9 +51,12 @@ import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.ActionOptions;
+import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
@@ -85,11 +94,9 @@ public abstract class UhcDriver {
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
-	
+
 	@FindBy(xpath = "//span[text()='Back']")
 	private WebElement MobileMenuBackBtn;
-	
-
 
 	public void MobileMenu() {
 		jsClickNew(MenuMobile);
@@ -109,18 +116,18 @@ public abstract class UhcDriver {
 		jsClickNew(GetPlanRecoMobile);
 		jsClickNew(getStartedBtn);
 	}
-	
+
 	public void MobileMenuAndGetPlanRecom() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(GetPlanRecoMobile);
-		
+
 	}
 
 	public void MobileMenuShopTool() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
-		//jsClickNew(ShopTool);
+		// jsClickNew(ShopTool);
 	}
 
 	public void MobileMenuAccessDCE() {
@@ -178,10 +185,61 @@ public abstract class UhcDriver {
 	}
 
 	public static void sendkeys(WebElement element, String message) {
-		element.click();
-		element.clear();
-		element.sendKeys(message);
+		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
+			element.click();
+			element.clear();
+			element.sendKeys(message);
+		} else {
+			element.click();
+			element.clear();
+			element.sendKeys(message);
+		}
 
+	}
+
+	/*To handle iOS specific sendkeys problem
+	By: Harshal Ahire*/
+	public void sendkeysMobile(WebElement element, String message) {
+		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
+
+			//jsMouseOver(element);
+			// jsClickNew(element);
+			
+			//element.clear();
+			
+			//((AppiumDriver) driver).getKeyboard().sendKeys(message);
+			//((IOSDriver) driver).getKeyboard().pressKey(message);
+//			jsSendkeys(element, message);
+//			JavascriptExecutor js = (JavascriptExecutor) (AppiumDriver)driver;
+//			js.executeScript("const TAP= new Event('tap', {bubbles: true}); arguments[0].dispatchEvent(TAP);", element);
+		
+			//jsSendkeys(element, message);
+			//jsMouseOut(element);
+			//element.sendKeys(Keys.ENTER);
+			
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			sendKeys_IOS(element, message);
+			element.sendKeys(Keys.BACK_SPACE);
+			
+			
+
+		} else {
+			element.click();
+			element.clear();
+			element.sendKeys(message);
+		}
+
+	}
+	
+	/*To handle iOS specific sendkeys problem
+	By: Harshal Ahire*/
+	public void sendKeys_IOS(WebElement webElement, String valueToSend) {
+		((JavascriptExecutor) driver).executeScript("let input = arguments[0];var setValue = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;setValue.call(input, '" + valueToSend + "');var e = new Event('input', { bubbles: true });input.dispatchEvent(e);", webElement);
 	}
 
 	public void select(WebElement element, String message) {
@@ -522,8 +580,6 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		mobileswipe("50", 1, true);
-		//jsClickNew(Element);
 		Element.click();
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
@@ -975,6 +1031,7 @@ public abstract class UhcDriver {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			Actions act = new Actions(driver); // Works only for Android driver
 			act.click(element).sendKeys(keys).perform();
+
 		} else {
 			// element.setValue("10001");
 			// ((JavascriptExecutor)webDriver).executeScript("arguments[0].value='100011';",
@@ -1293,7 +1350,7 @@ public abstract class UhcDriver {
 
 		return true;
 	}
-	
+
 	public int countOfNewWindowTab() {
 		return driver.getWindowHandles().size();
 	}

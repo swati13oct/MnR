@@ -164,15 +164,15 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 	public void navigatezipcodepage() {
 		pageloadcomplete();
-//		if (!getStartedBtn.isDisplayed()) {
-//			MobileMenuAndGetPlanRecom();
-//			scrollToView(getStartedBtn);
-//			jsClickNew(getStartedBtn);
-//		} else
-//			pageloadcomplete();
-//		scrollToView(getStartedBtn);
-//		jsClickNew(getStartedBtn);
-//		// getStartedBtn.click();
+		// if (!getStartedBtn.isDisplayed()) {
+		// MobileMenuAndGetPlanRecom();
+		// scrollToView(getStartedBtn);
+		// jsClickNew(getStartedBtn);
+		// } else
+		// pageloadcomplete();
+		// scrollToView(getStartedBtn);
+		// jsClickNew(getStartedBtn);
+		// // getStartedBtn.click();
 		validate(zipCode, 30);
 	}
 
@@ -186,7 +186,9 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 			zipcodePage();
 			waitforElementVisibilityInTime(zipCode, 45);
 
-			sendkeys(zipCode, zipcode);
+			// sendkeys(zipCode, zipcode);
+			sendkeysMobile(zipCode, zipcode);
+			
 
 			waitforElementVisibilityInTime(countyInfo, 45);
 			threadsleep(5000);
@@ -199,7 +201,9 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 			zipcodePage();
 			waitforElementVisibilityInTime(zipCode, 45);
 
-			sendkeys(zipCode, zipcode);
+//			sendkeys(zipCode, zipcode);
+			sendkeysMobile(zipCode, zipcode);
+			
 
 			waitforElementVisibilityInTime(countyInfo, 45);
 			threadsleep(5000);
