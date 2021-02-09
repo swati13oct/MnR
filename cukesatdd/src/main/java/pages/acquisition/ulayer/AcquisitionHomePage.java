@@ -45,7 +45,8 @@ import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	//@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeField;
 	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
