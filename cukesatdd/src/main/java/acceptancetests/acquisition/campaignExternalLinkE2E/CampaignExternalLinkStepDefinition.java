@@ -180,6 +180,31 @@ public class CampaignExternalLinkStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
 	
+	@Then("^user navigate back to external url for medicare advatnatge plan$")
+	public void user_vavigate_Bakc_externallinks(DataTable givenAttributes) throws Exception  {
+		wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+	
+		String url = memberAttributesMap.get("External Link");
+		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
+		
+		campaignExternalLinkspage.navigateBacktoExternalurl(url);
+	
+	}
+	@When("^user clicks on Find Plans in your area to open a new tab$")
+	public void user_clicks_on_Find_Plans_in_your_Area_to_open_a_new_tab() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickFindPlansinyourArea();
+	}
 }
 
 

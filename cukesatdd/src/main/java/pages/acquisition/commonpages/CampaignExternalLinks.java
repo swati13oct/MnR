@@ -462,4 +462,26 @@ public class CampaignExternalLinks extends UhcDriver {
 		validateNew(accessibilitylink);
 		validateNew(footerInfo);
 	}
+	
+	public void navigateBacktoExternalurl(String url) {
+		// TODO Auto-generated method stub
+		start(url);
+	}
+	
+	@FindBy(xpath = "//*[@id='button-959817150']")
+	private WebElement clickFindPlansinyourArea;
+	
+	public void clickFindPlansinyourArea() {
+		String parentWindow = driver.getWindowHandle();
+		clickFindPlansinyourArea.click();
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+	}
+
 }
