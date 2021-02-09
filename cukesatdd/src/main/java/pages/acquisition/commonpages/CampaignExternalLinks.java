@@ -320,8 +320,9 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	}
 	
+	public static String parentWindow;
 	public void clickFindPlansPricing() {
-		String parentWindow = driver.getWindowHandle();
+		parentWindow = driver.getWindowHandle();
 		findPlansPricing.click();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -482,6 +483,16 @@ public class CampaignExternalLinks extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
+	}
+	
+	public void closeCurrentTabSwitchToParentTab() {
+		driver.close();
+		driver.switchTo().window(parentWindow);
+		/*
+		 * Set<String> tabs_windows = driver.getWindowHandles(); Iterator<String> itr =
+		 * tabs_windows.iterator(); while (itr.hasNext()) { String window = itr.next();
+		 * if (!parentWindow.equals(window)) { driver.switchTo().window(window); } }
+		 */
 	}
 
 }

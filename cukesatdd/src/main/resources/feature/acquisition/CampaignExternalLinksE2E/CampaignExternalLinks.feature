@@ -201,24 +201,21 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN Xpath | <TFNxpath> |
    #And I access the DCE Redesign from Plan Details for the plan
    Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
+   Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
    #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-     Then the user navigates to Personal Information Page
+    Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
      | TFN No    | <TFNNo>    |
      | TFN Xpath | <TFNxpath> |
-    Then the user validates cancellation and Save Return Later modal for OLE Page
+    And user closes current tab and navigate to previous tab
   #PDP Plan#
   
-  Then user navigate back to external url for medicare advatnatge plan 
-      | External Link | <externallink> |
-    Then user verify TFN on AARP external links page
-      | TFN No      | <TFNNo>      |
-      | TFN Xpath   | <TFNxpath1>  |
-      | Working hrs | <workingHrs> |
- When user clicks on Find Plans and Pricing to open a new tab
+ 	 When user clicks on Find Plans and Pricing to open a new tab
     Then user should be navigated on Shop for a plan page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |

@@ -205,6 +205,14 @@ public class CampaignExternalLinkStepDefinition {
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.clickFindPlansinyourArea();
 	}
+	
+
+@Then("^user closes current tab and navigate to previous tab$")
+public void user_closes_current_tab_and_navigate_to_previous_tab() {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	campaignExternalLinkspage.closeCurrentTabSwitchToParentTab();
+}
 }
 
 
