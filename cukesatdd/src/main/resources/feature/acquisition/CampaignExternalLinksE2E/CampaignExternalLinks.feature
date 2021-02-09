@@ -290,3 +290,45 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Examples: 
       | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                                          | TFNxpath3                         |
       | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class, 'tel')])[1] |
+
+         Scenario Outline: <Scenario>: Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links.
+    Given user is on campaign external Links page
+      | External Link | <externallink> |
+    And the user validate links and other options on medicare prescription drug external link page
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath1> |
+    Then User able to land  Shop for a plan page in new tab
+    And the user validates SAM icons on the page
+      | TFN Xpath | <TFNxpath2> |
+    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
+  	Then the user validates PSC code
+      | PSC Code | <pscCode> |
+    When the user performs plan search using following information using external link
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    When verify Call SAM icon is visible
+    And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
+     Then the user view plan details of the above selected plan in site vpp
+      | Plan Name | <planname> |
+      | Plan Type | <PDPplantype> |
+    Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+    When user clicks on Add to compare checkbox on plan detail page
+    And the user clicks on back to all plans link and validates its redirection to Plan Summary
+    Then verify the Add to compare checkbox is checked for selected plan
+      | Plan index | <planIndex> |
+    When user select "<planIndex1>" plans to compare
+    And user clicks on compare button
+    Then verify plan compare page is loaded
+    Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+   
+    #Then the user check Still have a question
+    @Scenario7_AARP
+    Examples: 
+      | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                                          |	pscCode | zipcode | isMultutiCounty | county            | PDPplantype|	planname	|	planyear	|	TFNxpath3	|	planIndex	|	planIndex1	|	TFNxpath	|
+      | E2E Scenario 7 _medicare-prescription-drug-plans-52 | https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | 1-866-308-8818 | //*[@id="tfn-614028214"]/p[2]/span[1]/a | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] |8001024|36016|	Yes	|	Barbour County	|	PDP	|	AARP MedicareRx Walgreens (PDP)	|	future	|(//a[contains(@class, 'tel')])[1] |1|2|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]	|
+     
