@@ -3,7 +3,7 @@ Feature: 1.05.8. OLE PRE Integration Flow
 	Scenario Outline: To validate MA plans through PRE
      Given the user is on medicare acquisition site landing page for PRE
       | Site | <site> |
-    #When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
     And clicks on get started button and runs a questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
@@ -25,7 +25,8 @@ Feature: 1.05.8. OLE PRE Integration Flow
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option on cost preferences page
       | Preference Option | <costPreferenceOption> |
-    #Then user validate elements in loading results page
+    And verify continue function in "Priorities" page
+    Then user validate elements on loading results page
     #And the user views the plans of the below plan type and select Next year
      # | Plan Type | <plantype> |
 		#And the user views the plans of the below plan type
