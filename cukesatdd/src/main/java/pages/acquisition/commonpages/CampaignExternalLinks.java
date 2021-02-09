@@ -490,11 +490,17 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 	}
 	public AcquisitionHomePage clickOnmedicareplans11backLink(String zipcode) {
-		driver.close();
-		driver.switchTo().window(parentWindow);
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("info.aarpmedicareplans.com/aarp-medicare-plans-11")) {
+			System.out.println("aarpmedicareplans External Link naviagted back successsfully");
+		}
+			
+		validateNew(zipcodeEnter);
+		validateNew(submit);
 		
-		CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
-		CommonUtility.waitForPageLoadNew(driver, submit, 30);
+	//	CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
+	//	CommonUtility.waitForPageLoadNew(driver, submit, 30);
 	//	sendkeys(zipcodeEnter, zipcode);
 	//	validateNew(zipcodeEnter);
 	//	CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);

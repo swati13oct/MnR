@@ -47,6 +47,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN Xpath | <TFNxpath> |
     #Then the user validates cancellation and Save Return Later modal for OLE Page
     #Then the user cancels enrollment and navigates to homepage
+    Then user closes current tab and navigate to previous tab
     Then the user navigate back to external link of aarp medicare plans11 page
       | Zip Code | <zipcode> |
     #----------Repeat the steps for PDP Plan-----------------#
