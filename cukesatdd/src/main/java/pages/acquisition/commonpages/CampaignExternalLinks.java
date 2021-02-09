@@ -90,6 +90,34 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
 	private WebElement workingHrs;
 
+	//--- locators for scenario 7 
+
+	@FindBy(xpath = "//*[@id=\"button-94902407\"]")
+	private WebElement planAndPricing;
+	
+	@FindBy(xpath = "//*[@id=\"button-127872393\"]")
+	private WebElement estimateDrugCost;
+
+	@FindBy(xpath = "//*[@id=\"card-62690855\"]/div[1]/h3")
+	private WebElement lookupDrugs;
+
+
+	@FindBy(xpath ="//*[@id=\"card-64402169\"]/div[1]/h3")
+	private WebElement findPharmacy;
+	
+	@FindBy(xpath ="//*[@id=\"button-356498815\"]")
+	private WebElement startnow;
+	
+	@FindBy(xpath ="//*[@id=\"card-943837503\"]/div[1]/h3")
+	private WebElement comparePlanCost;
+	
+	@FindBy(xpath ="//*[@id=\"button-1708542647\"]")
+	private WebElement planAndPricingbuttoncompare;
+	
+	@FindBy(xpath = "//*[@id=\"button-127872393\"]")
+	private WebElement estimateDrugCostButton;
+	
+	
 	public CampaignExternalLinks(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -279,6 +307,38 @@ public class CampaignExternalLinks extends UhcDriver {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
 	}
+	
+	public AcquisitionHomePage clickOnPlanandPricingBtn() {
+		validateNew(planAndPricing);
+		CommonUtility.waitForPageLoadNew(driver, planAndPricing, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(planAndPricing);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27#/plan-summary")) {
+			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
+			CheckiPerseptions();
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
+		/*
+		 * else Assert.fail("**************** Page is not displayed ***************");
+		 * CheckPageLoad(); try { Thread.sleep(3000); } catch (InterruptedException e) {
+		 * // TODO Auto-generated catch block e.printStackTrace(); }
+		 */
+	}
 
 	public AcquisitionHomePage clickOnmedicareplans11PrivacyLink() {
 
@@ -370,6 +430,41 @@ public class CampaignExternalLinks extends UhcDriver {
 		validateNew(accessibilitylink);
 		validateNew(footerInfo);
 	}
+
+	public void validateMedicarePrescriptionDrugExternalPage(String tfnXpath, String expTfnNo) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		if (driver.getCurrentUrl().contains("/medicare-prescription-drug-plans-52")) {
+			Assert.assertTrue(true);
+			System.out.println("Medicare Prescription Drugs External Link Page opens successsfully");
+		} else
+			Assert.fail("Medicare Prescription Drugs External  Link page is not opening up");
+		
+		validateNew(planAndPricing);
+		validateNew(estimateDrugCost);
+		validateNew(lookupDrugs);
+		validateNew(findPharmacy);
+	
+		validateNew(comparePlanCost);
+		validateNew(planAndPricingbuttoncompare);
+		validateNew(estimateDrugCostButton);
+		validateNew(startnow);
+				
+
+		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+		String actualTfnNo = TFNelement.getText();
+		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
+			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
+		else
+			Assert.fail("TFN elemnet is not found / TFN no is not same on page");
+
+		System.out.println(tfnHeader.getText());
+		System.out.print(TFNelement.getText());
+
+		validateNew(accessibilitylink);
+		validateNew(footerInfo);
+	}
+
 	
 	public void validateAARPExternalPage(String tfnXpath, String expTfnNo, String expWorkingHrs) {
 		CommonUtility.checkPageIsReadyNew(driver);

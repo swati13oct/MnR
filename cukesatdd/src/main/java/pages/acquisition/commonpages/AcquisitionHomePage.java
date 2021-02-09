@@ -382,6 +382,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //   	String CallSam= "Call a Licensed Insurance Agent";
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
+	String CallSam1866 = "1-866";
 
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
@@ -2969,6 +2970,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Call sticky action menu roll out and contain the text: " + toolTipText);
 
 		} else if (toolTipText.contains(CallSam1855)) {
+			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
+		}else if (toolTipText.contains(CallSam1866)) {
 			System.out.println("Call sticky action menu roll out and contain the text" + toolTipText);
 		}
 
