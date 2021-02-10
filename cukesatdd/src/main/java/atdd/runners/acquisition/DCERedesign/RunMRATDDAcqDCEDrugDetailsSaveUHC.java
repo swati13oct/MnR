@@ -13,10 +13,10 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcqDCEDetailsPreferredCopayAARP - Scenario for DCE Details Page copay section Preferred Pharmacy copays validation
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber- RunMRATDDAcqDCEDrugDetailsSaveUHC.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/ RunMRATDDAcqDCEDrugDetailsSaveUHC")
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEDrugDetailsSaveUHC.json",detailedReport = true,
+ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEDrugDetailsSaveUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber- RunMRATDDAcqDCEDrugDetailsSaveUHC.json" }, tags = { "@dceDrugDetailSaveUHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDrugDetailsSaveUHC.json" }, tags = { "@dceDrugDetailSaveUHC" })
 
 public class RunMRATDDAcqDCEDrugDetailsSaveUHC {
  
