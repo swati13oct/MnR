@@ -27,6 +27,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.AuthorizationPage;
@@ -49,7 +50,7 @@ import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
+//import pages.acquisition.ulayer.PlanDetailsPage;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -3843,22 +3844,14 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 	//	String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
 		//String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-		WelcomePage welcomePage;
-		VPPPlanSummaryPage PlanDetailsPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		
-			welcomePage = PlanDetailsPage.NavigateToOLEEnrollDSNPPlanDetails(PlanType);
+		PlanDetailsPage vppPlanDetailsPage= (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		WelcomePage welcomeOLEPage= vppPlanDetailsPage.NavigateToOLEEnrollDSNPPlanDetails(PlanType);
 
-		if (welcomePage != null) {
-
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
-					welcomePage);
-			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+		if (welcomeOLEPage != null) {
+			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		} else {
+			Assert.fail("Error Loading Welcome Page for OLE");
 		}
-		else
-			Assert.fail("Error in validating the OLE Welcome Page");
-
 	}
-
 }
