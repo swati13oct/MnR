@@ -1,7 +1,7 @@
-#Author: Danthoori shiva
+#Author: Naveen BK
 #created Date:2/12/2019
-@Test @AARPvisitorprofile
-Feature: 1.08. ACQ- Visitor profile
+@VisitorProfileUnAuthenticated
+Feature: 1.08. UAT - Visitor profile Un-Authenticated
 
   @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @DCE_Regression_Ulayer_VisitorProfile
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip - <zipCode>
@@ -28,7 +28,6 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | state        | drug1   | zipCode | site |
       | Alabama      | Lipitor |   90210 | AARP |
-      | Pennsylvania | Lipitor |   15001 | AARP |
       
     @prodRegression_AARP
     Examples: 
@@ -39,7 +38,6 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | state        | drug1   | zipCode | site |
       | Alabama      | Lipitor |   90210 | UHC  |
-      | Pennsylvania | Lipitor |   15001 | UHC  |
       
     @prodRegression_UHC
     Examples: 
@@ -70,13 +68,11 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | state    | drug1   | zipCode | site |
       | Alabama  | Lipitor |   90210 | AARP |
-      | Virginia | Lipitor |   22320 | AARP |
 
     @VisitorProfile_UHC
     Examples: 
       | state    | drug1   | zipCode | site |
       | Alabama  | Lipitor |   90210 | UHC  |
-      | Virginia | Lipitor |   22320 | UHC  |
 
   @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
@@ -110,45 +106,22 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | AARP | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      | AARP | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
 
 		@prodRegression_AARP
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | AARP | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
+      | AARP | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | UHC  | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      | UHC  | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
       
     @prodRegression_UHC
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | UHC  | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
+      | UHC  | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-  @addPlansVPP
-  Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
-    Given the user is on AARP medicare acquisition site landing page
-    When the user performs plan search using following information in the AARP site
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the AARP site
-    Then user saves two plans as favorite on AARP site
-      | Plan Type  | <plantype>  |
-      | Test Plans | <testPlans> |
-    Then user gets a create profile prompt on AARP site
-    Then user click on continue as guest button on AARP site
-    And user validates the added plans on visitor profile page of AARP site
-      | Test Plans | <testPlans> |
-
-    # The steps for this scenario are being covered by the next sceanrio, hence, commenting this one out
-    Examples: 
-      | state | UID | zipcode | isMultiCounty | county | plantype | testPlans |
-
-  #      | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
   @addPlansPlanDetail @visitorProfileRegressionAARP
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
@@ -187,7 +160,6 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
-      | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)           | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
       
     @prodRegression_AARP
     Examples: 
@@ -198,7 +170,6 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
-      | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)           | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
       
     @prodRegression_UHC
     Examples: 
@@ -340,53 +311,12 @@ Feature: 1.08. ACQ- Visitor profile
     Examples: 
       | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | AARP | Alabama     |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
-      | AARP | Puerto Rico |   00641 | NO            | MS       | future   | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | UHC  | Alabama     |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
-      | UHC  | Puerto Rico |   00641 | NO            | MS       | future   | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
 
-  @vpMSSavePlanAuthenticated
-  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    When the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    Then user fills out medsup form and proceeds to next pages
-      | Zip Code | <zipcode> |
-      | DOB      | <DOB>     |
-    Then user saves two ms plans as favorite
-      | MS Test Plans | <MS_testPlans> |
-    Then user gets a create profile prompt
-    Then user click on continue as guest button
-    Then the user signs in with optum Id credentials
-      | User Name | <userName> |
-      | Password  | <password> |
-    And user validates the added Ms plans on visitor profile page
-      | MS Test Plans | <MS_testPlans> |
-    And user delets the added Ms plans on visitor profile page
-      | MS Test Plans | <MS_testPlans> |
-
-    #No pdf link is avialable now
-    #And user validate pdf link
-    #| MS Test Plans | <MS_testPlans> |
-    @VisitorProfile_AARP
-    Examples: 
-      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
-      | AARP | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |
-
-    @VisitorProfile_UHC
-    Examples: 
-      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
-      | UHC  | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
@@ -432,76 +362,6 @@ Feature: 1.08. ACQ- Visitor profile
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
       | UHC  | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
-  @addDrugAuthenticated
-  Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
-    And the user clicks on the shopping cart icon
-    Then the user signs in with optum Id credentials
-      | User Name | <userName> |
-      | Password  | <password> |
-    And the user clicks on the add drugs button in the profile
-    Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-    When user enters valid zipcode and county
-      | ZipCode | <zipCode> |
-    And user clicks on continue button in Zip Entry Page
-    And the user clicks on the shopping cart icon on DCE page
-    Then the user should be able to see the Drug information in the guest profile page
-      | Drugname | <drug1> |
-    And user clicks on Edit Drug and Pharmacy on visitor profile page
-    Then the user clicks on Remove button on Drug List page on DCE to delete drug
-      | DrugName | <drug1> |
-
-    @VisitorProfile_AARP
-    Examples: 
-      | site | state   | userName | password   | drug1   | zipCode |
-      | AARP | Alabama | mnrqavd4 | Password@2 | Lipitor |   90210 |
-
-    @VisitorProfile_UHC
-    Examples: 
-      | site | state   | userName | password   | drug1   | zipCode |
-      | UHC  | Alabama | mnrqavd4 | Password@2 | Lipitor |   90210 |
-
-  @providerFlowAuthenticated
-  Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
-    And the user clicks on the shopping cart icon
-    Then the user signs in with optum Id credentials
-      | User Name | <userName> |
-      | Password  | <password> |
-    And the user back to VPP plan summary page
-    When the user views the plans of the below plan type and select Next year
-      | Plan Type | <plantype> |
-    When the user Click on Is my Provider covered link
-      | PlanName | <planname> |
-    When user selects a provider and retuns to VPP page
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page
-      | PlanName | <planname> |
-    Then Navigate to Visitor Profile page
-    Then Verify X out of Y provider covered information is displayed on visitor profile page
-      | PlanName | <planname> |
-    And user delets all the added providers on visitor profile page
-      | PlanName | <planname> |
-
-    @VisitorProfile_AARP
-    Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
-
-    @VisitorProfile_UHC
-    Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
-
   @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
     Given the user is on medicare acquisition site landing page
@@ -538,72 +398,3 @@ Feature: 1.08. ACQ- Visitor profile
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
       | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-  @oleAuthenticatedValidations
-  Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user clicks on the shopping cart icon
-    Then the user signs in with optum Id credentials
-      | User Name | <userName> |
-      | Password  | <password> |
-    Then validate OLE details
-      | Plan Name       | <planname>       |
-      | Zip Code        | <zipcode>        |
-      | Status          | <status>         |
-      | Monthly Premium | <monthlyPremium> |
-
-    @VisitorProfile_AARP
-    Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
-
-    @VisitorProfile_UHC
-    Examples: 
-      | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
-
-  @vpPartialOLEAndRemove
-  Scenario Outline: <UID> - Verify Partial enrollment and cancel or remove the enrollment from profile page
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user clicks on the shopping cart icon
-    Then the user signs in with optum Id credentials
-      | User Name | <userName> |
-      | Password  | <password> |
-    And the user cancel the enrollment
-      | Plan Name | <planName> |  
-    And the user navigates to clicks on Enroll Now from visitor profile to start OLE flow
-      | Plan Name       | <planName>       |
-      | Plan Type       | <plantype>       |
-      | Zip Code        | <zipcode>        |
-      | County Name     | <county>         |
-      | Monthly Premium | <monthlyPremium> |
-    Then the user validates the Plan details on OLE
-    Then the user navigates to Personal Information Page
-    Then the user enters following required information in Personal Information Page
-      | First Name               | <firstname>              |
-      | Last Name                | <lastname>               |
-      | DOB                      | <dob>                    |
-      | Gender                   | <gender>                 |
-      | Perm_Street              | <permstreet>             |
-      | Perm_city                | <permcity>               |
-      | Mailing Address Question | <mailingaddressquestion> |
-      | Mailing_Street           | <mailingstreet>          |
-      | Mailing_City             | <mailingcity>            |
-      | Mailing_State            | <mailingstate>           |
-      | Mailing_Zip              | <mailingzip>             |
-      | Email                    | <email>                  |
-      | MedicaidNumber           | <medicaidnumber>         |
-    Then the user clicks on save and return later to profile page
-    And validate OLE details
-      | Plan Name       | <planName>       |
-      | Zip Code        | <zipcode>        |
-      | Status          | <status>         |
-      | Monthly Premium | <monthlyPremium> |
-    And the user cancel the enrollment
-      | Plan Name | <planName> |
-
-    @VisitorProfile_AARP
-    Examples: 
-      | UID       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
-      | US1770330 | AARP | New York | mnrvd5   | Password@1 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |

@@ -60,7 +60,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "div.drug-list-accordion.open div.drug-info-container span:first-child")
 	private WebElement drugname;
 
-	@FindBy(css = "ul.drugs-list>li>div>span:first-child")
+	@FindBy(css = "ul.drugs-list>li>div>div>div>div:first-child")
 	private WebElement drugName;
 
 	@FindBy(css = "ul.drugs-list>li:last-child>span")
@@ -187,6 +187,17 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[@id='navLinks']/a[1]")
 	private WebElement breadCrumbLink;
+	
+	//Shopper profile UI version 2
+	
+	@FindBy(xpath="//span[text()='Add Drugs']/parent::button")
+	private WebElement addDrugsBtn;
+	
+	@FindBy(xpath = "//button[contains(text(),'View Drug Pricing')]")
+	private WebElement viewDrugPricingLink;
+	
+	
+	
 
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -326,7 +337,7 @@ public class VisitorProfilePage extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
 			jsClickNew(addrugs);
 		} else {
-			jsClickNew(drugGetStarted);
+			jsClickNew(addDrugsBtn);
 		}
 		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
@@ -846,5 +857,27 @@ public class VisitorProfilePage extends UhcDriver {
 
 	public void verifyBreadCrumb(String breadCrumb) {
 		Assert.assertTrue("Expected breadcrumb "+breadCrumb+ "not displayed",breadCrumbLink.getText().equals(breadCrumb));
+	}
+	
+	public void validateViewDrugPricingModel(DataTable drugInfo) {
+		
+		List<DataTableRow> givenAttributesRow = drugInfo.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = givenAttributesMap.get("Plan Name");
+		String zipCode = givenAttributesMap.get("Zip Code");
+		String status = givenAttributesMap.get("Status");
+		String monthlyPremium = givenAttributesMap.get("Monthly Premium");
+
+		
+		viewDrugPricingLink.click();
+		Assert.assertTrue(validate(driver.findElement(By.xpath("//h1[contains(text(),'"+planName+"')]"))));
+		
+		
+		
 	}
 }
