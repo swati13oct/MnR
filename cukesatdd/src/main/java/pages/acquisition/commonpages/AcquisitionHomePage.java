@@ -545,7 +545,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement cancelLeaveAARPMedicare;
 
 	//@FindBy(xpath = "//a[contains(text(),'Learn More')]")
-	@FindBy(xpath="(//*[contains(text(),'Learn More')])[1]")
+	@FindBy(xpath="//a[contains(text(),'Learn More') or contains(@title,'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
