@@ -117,6 +117,10 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"button-127872393\"]")
 	private WebElement estimateDrugCostButton;
 	
+//	--- locators for scenario 5
+
+	@FindBy(xpath = "//span[@class='card-link__arrow' and contains(text(),'Medicare Supplement')]")
+	private WebElement MedicareSupplementInsurancePlans;
 	
 	public CampaignExternalLinks(WebDriver driver) {
 		super(driver);
@@ -596,6 +600,21 @@ public class CampaignExternalLinks extends UhcDriver {
 		 * tabs_windows.iterator(); while (itr.hasNext()) { String window = itr.next();
 		 * if (!parentWindow.equals(window)) { driver.switchTo().window(window); } }
 		 */
+	}
+
+	public MedicareSupplementInsurancePlansPage medicareSupplementInsurancePlans() {
+		scrollToView(MedicareSupplementInsurancePlans);
+		jsClickNew(MedicareSupplementInsurancePlans);
+		threadsleep(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_SUPPLEMENT_INSURANCE_PLANS)) {
+			System.out.println("MS Insurance Plans Page opened successfully: URL-->" + driver.getCurrentUrl());
+			CheckiPerseptions();
+			return new MedicareSupplementInsurancePlansPage(driver);
+		} else
+			Assert.fail("Error loading MS Insurance Plans Page");
+		return null;
 	}
 
 }

@@ -17,6 +17,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.CampaignExternalLinks;
+import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
 
 /**
  * Functionality: Validate different Campaign External Links
@@ -243,6 +244,16 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 	campaignExternalLinkspage.closeCurrentTabSwitchToParentTab();
 }
+
+	@When("^the user clicks on Medicare Education Supplement Insurance Plans Link$")
+	public void the_user_clicks_on_Medicare_Supplement_Insurance_Plans_Link() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		MedicareSupplementInsurancePlansPage medicareSupplementInsurancePlansPage = campaignExternalLinkspage
+				.medicareSupplementInsurancePlans();
+		getLoginScenario().saveBean(PageConstants.MEDICARE_SUPPLEMENT_INSURANCE_PLANS_PAGE,
+				medicareSupplementInsurancePlansPage);
+	}
 }
 
 

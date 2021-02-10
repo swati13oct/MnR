@@ -345,11 +345,17 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user clicks on Learn About Medicare button on Morgan Stanley external link page
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    Then the user validates TFN Number on Right Rail
-      | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath3> |
     Then the user validates TFN Number in Still have Questions section at bottom of page
       | TFN Xpath | <TFNxpath3> |
+    #Then the user validates TFN Number on Right Rail
+      #| TFN No    | <TFNNo>     |
+      #| TFN Xpath | <TFNxpath3> |
+    And the user clicks on Medicare Education Supplement Insurance Plans Link
+    And the user validates SAM icons on Medsupp page
+      | TFN Xpath | <TFNxpath2> |
+    Then the user validates TFN Number in Still have Questions section at bottom of page
+      | TFN Xpath | <TFNxpath3> |
+    And user closes current tab and navigate to previous tab
 
     @Scenario5_AARP
     Examples: 
