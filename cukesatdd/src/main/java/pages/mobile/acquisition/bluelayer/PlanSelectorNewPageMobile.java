@@ -185,7 +185,8 @@ public class PlanSelectorNewPageMobile extends UhcDriver {
 		//AcquisitionHomePage.clickIfElementPresentInTime(driver, proactiveChatExitBtn,5);
 		getStartedBtn.click();
 		waitforElementVisibilityInTime(zipCode, 45);
-		sendkeys(zipCode, zip_code);
+		//sendkeys(zipCode, zip_code);
+		sendkeysMobile(zipCode, zip_code);
 		TypeOfCoverageOption.click();
 		System.out.println("'I don't know option' radio button should be selected");
 		continueBtn.click();
@@ -201,7 +202,8 @@ public class PlanSelectorNewPageMobile extends UhcDriver {
 		waitTillElementClickableInTime(getStartedBtn, 45);
 		getStartedBtn.click();
 		waitforElementVisibilityInTime(zipCode, 45);
-		sendkeys(zipCode, zip_code);
+		//sendkeys(zipCode, zip_code);
+		sendkeysMobile(zipCode, zip_code);
 		Thread.sleep(2000);
 		waitforElementVisibilityInTime(PSTCounty, 45);
 		selectFromDropDownByText(driver, PSTCounty, County);

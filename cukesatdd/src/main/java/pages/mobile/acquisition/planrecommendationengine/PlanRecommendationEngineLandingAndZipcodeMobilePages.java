@@ -188,7 +188,6 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 
 			// sendkeys(zipCode, zipcode);
 			sendkeysMobile(zipCode, zipcode);
-			
 
 			waitforElementVisibilityInTime(countyInfo, 45);
 			threadsleep(5000);
@@ -201,9 +200,8 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 			zipcodePage();
 			waitforElementVisibilityInTime(zipCode, 45);
 
-//			sendkeys(zipCode, zipcode);
+			// sendkeys(zipCode, zipcode);
 			sendkeysMobile(zipCode, zipcode);
-			
 
 			waitforElementVisibilityInTime(countyInfo, 45);
 			threadsleep(5000);
@@ -244,7 +242,8 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		jsClickNew(getStartedBtn);
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
-		sendkeys(zipCode, zip_code);
+		sendkeysMobile(zipCode, zip_code);
+		// sendkeys(zipCode, zip_code);
 		Thread.sleep(2000);
 		zipcodePagemultiCounty();
 		waitforElementVisibilityInTime(PRECounty, 45);
@@ -354,7 +353,8 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		getStartedBtn.click();
 		zipcodePage();
 		waitforElementVisibilityInTime(zipCode, 45);
-		sendkeys(zipCode, zip_code);
+		//sendkeys(zipCode, zip_code);
+		sendkeysMobile(zipCode, zip_code);
 		Thread.sleep(2000);
 		zipcodePagemultiCounty();
 		continueBtn.click();

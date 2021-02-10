@@ -197,26 +197,12 @@ public abstract class UhcDriver {
 
 	}
 
-	/*To handle iOS specific sendkeys problem
-	By: Harshal Ahire*/
+	/*
+	 * To handle iOS specific sendkeys problem By: Harshal Ahire
+	 */
 	public void sendkeysMobile(WebElement element, String message) {
 		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
 
-			//jsMouseOver(element);
-			// jsClickNew(element);
-			
-			//element.clear();
-			
-			//((AppiumDriver) driver).getKeyboard().sendKeys(message);
-			//((IOSDriver) driver).getKeyboard().pressKey(message);
-//			jsSendkeys(element, message);
-//			JavascriptExecutor js = (JavascriptExecutor) (AppiumDriver)driver;
-//			js.executeScript("const TAP= new Event('tap', {bubbles: true}); arguments[0].dispatchEvent(TAP);", element);
-		
-			//jsSendkeys(element, message);
-			//jsMouseOut(element);
-			//element.sendKeys(Keys.ENTER);
-			
 			try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
@@ -224,9 +210,10 @@ public abstract class UhcDriver {
 				e.printStackTrace();
 			}
 			sendKeys_IOS(element, message);
-			element.sendKeys(Keys.BACK_SPACE);
-			
-			
+			element.getText().replaceAll("\u00A00", " ").trim();
+			element.sendKeys(Keys.ENTER);
+
+			// element.sendKeys(Keys.BACK_SPACE);
 
 		} else {
 			element.click();
@@ -235,11 +222,16 @@ public abstract class UhcDriver {
 		}
 
 	}
-	
-	/*To handle iOS specific sendkeys problem
-	By: Harshal Ahire*/
+
+	/*
+	 * To handle iOS specific sendkeys problem By: Harshal Ahire
+	 */
 	public void sendKeys_IOS(WebElement webElement, String valueToSend) {
-		((JavascriptExecutor) driver).executeScript("let input = arguments[0];var setValue = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;setValue.call(input, '" + valueToSend + "');var e = new Event('input', { bubbles: true });input.dispatchEvent(e);", webElement);
+
+		((JavascriptExecutor) driver).executeScript(
+				"let input = arguments[0];var setValue = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;setValue.call(input, '"
+						+ valueToSend + "');var e = new Event('input', { bubbles: true });input.dispatchEvent(e);",
+				webElement);
 	}
 
 	public void select(WebElement element, String message) {
