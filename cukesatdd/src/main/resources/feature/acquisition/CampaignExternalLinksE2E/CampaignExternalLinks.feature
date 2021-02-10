@@ -189,12 +189,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #And I access the DCE Redesign from Plan Details for the plan
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
@@ -219,9 +217,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | Plan Type | <PDPplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    #Then the user validates SAM icons on the page
-    # | TFN No    | <TFNNo>    |
-    #| TFN Xpath | <TFNxpath> |
+    When verify Call SAM icon is visible
+    And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
@@ -242,12 +239,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #And I access the DCE Redesign from Plan Details for the plan
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
@@ -272,26 +267,11 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | Plan Type | <Medsupplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    #Then the user validates SAM icons on the page
-    # | TFN No    | <TFNNo>    |
-    #| TFN Xpath | <TFNxpath> |
+    When verify Call SAM icon is visible
+    And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
-      | Plan Type | <planname> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    Then the user validates SAM icons on the page
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
-    And the user views the plans of the below plan type
-      | Plan Type | <PDPplanName> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    Then the user validates SAM icons on the page
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
     And user closes current tab and navigate to previous tab
     #Find Plans in your Area and SNP plantype*****#
     When user clicks on Find Plans in your area to open a new tab
@@ -316,25 +296,13 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN Xpath | <TFNxpath> |
     And the user views the plans of the below plan type
       | Plan Type | <planname> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    Then the user validates SAM icons on the page
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
-    And the user views the plans of the below plan type
-      | Plan Type | <PDPplanName> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    Then the user validates SAM icons on the page
-      | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
     And user closes current tab and navigate to previous tab
 
     #DCE###
     @CampaignExternal_Scenario1_AARP
     Examples: 
-      | Scenario                                             | externallink                                             | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans |                                                   |
-      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] |                | MS          | SNP       | UnitedHealthcare Dual Complete Choice (PPO D-SNP) |
+      | Scenario                                             | externallink                                             | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         |
+      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) |
 
   Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in MA, Medsupp page, PRE, VPP Plan Summary from External link: <externallink>
     Given user is on campaign external Links page
@@ -348,8 +316,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates TFN Number in Still have Questions section at bottom of page
       | TFN Xpath | <TFNxpath3> |
     #Then the user validates TFN Number on Right Rail
-      #| TFN No    | <TFNNo>     |
-      #| TFN Xpath | <TFNxpath3> |
+    #| TFN No    | <TFNNo>     |
+    #| TFN Xpath | <TFNxpath3> |
     And the user clicks on Medicare Education Supplement Insurance Plans Link
     And the user validates SAM icons on Medsupp page
       | TFN Xpath | <TFNxpath2> |
