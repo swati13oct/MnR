@@ -8,33 +8,35 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
       | ExcelFile     | <excelPath> |
       | WorkSheetName | <workSheet> |
       | Site					| <site>			|
+      | ExcelFileDocLog| <excelDocLog>|
+      | WorkSheetNameDocLog| <sheetDocLog>|
 
     @pdfDocLogAARP01
     Examples: 
-      | excelPath                | workSheet | site |
-      | PlanDocs_Validation_Data | Sheet1    | AARP |
+      | excelPath                | workSheet | site | excelDocLog | sheetDocLog |
+      | PlanDocs_Validation_Data | Sheet1    | AARP | MADocLog		| Doc Log	|
       
       @pdfDocLogAARP02
     Examples: 
-      | excelPath                | workSheet | site |
-      | PlanDocs_Validation_Data | Sheet2    | AARP |
+      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
+      | PlanDocs_Validation_Data | Sheet2    | AARP |MADocLog		| Doc Log	|
       
          @pdfDocLogAARP03
     Examples: 
-      | excelPath                | workSheet | site |
-      | PlanDocs_Validation_Data | Sheet3    | AARP |
+      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
+      | PlanDocs_Validation_Data | Sheet3    | AARP |MADocLog		| Doc Log	|
       
       @pdfDocLogUHC01
     Examples: 
-      | excelPath                | workSheet | site |
-      | PlanDocs_Validation_Data | Sheet1    | UHC |
+      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
+      | PlanDocs_Validation_Data | Sheet1    | UHC |MADocLog		| Doc Log	|
       
        @pdfDocLogUHC02
     Examples: 
-      | excelPath                | workSheet | site |
-      | PlanDocs_Validation_Data | Sheet2    | UHC |
+      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
+      | PlanDocs_Validation_Data | Sheet2    | UHC |MADocLog		| Doc Log	|
       
        @pdfDocLogUHC03
     Examples: 
-      | excelPath                | workSheet | site |
-      | PlanDocs_Validation_Data | Sheet3    | UHC |
+      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
+      | PlanDocs_Validation_Data | Sheet3    | UHC |MADocLog		| Doc Log	|

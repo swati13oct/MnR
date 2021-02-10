@@ -3420,7 +3420,9 @@ public class VppCommonStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String ExcelName = givenAttributesMap.get("ExcelFile");
+		String ExcelNameDocLog = givenAttributesMap.get("ExcelFileDocLog");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
+		String sheetNameDocLog = givenAttributesMap.get("WorkSheetNameDocLog");
 		String siteType = givenAttributesMap.get("Site");
 		System.out.println("Set of TFNs from Sheet : "+sheetName);
 		
@@ -3434,14 +3436,23 @@ public class VppCommonStepDefinition {
 		String parentDirectory = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
+		String InputFilePathDocLog = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelNameDocLog+".xls";
+
 		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 		
-		//Reading Excel.xls file
+		//Reading the input file
 		File InputFile = new File(InputFilePath);
 		FileInputStream inputStream = new FileInputStream(InputFile);
 		Workbook workbook = new HSSFWorkbook(inputStream);
 		Sheet sheet = workbook.getSheet(sheetName);
 		int lastRow = sheet.getLastRowNum();
+		
+		//Reading the DocLog file
+		File InputFileDocLog = new File(InputFilePathDocLog);
+		FileInputStream inputStreamDocLog = new FileInputStream(InputFileDocLog);
+		Workbook workbookDocLog = new HSSFWorkbook(inputStreamDocLog);
+		Sheet sheetDocLog = workbookDocLog.getSheet(sheetNameDocLog);
+		int lastRowDocLog = sheetDocLog.getLastRowNum();
 		
 		//Creating the results excel book
 		Workbook ResultWorkbook = new HSSFWorkbook();
@@ -3461,6 +3472,34 @@ public class VppCommonStepDefinition {
 			 String currentCellValue = "";
 			 String currentColName = "";
 			 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
+			 HashMap <String, Integer> colNamesMap = new HashMap<String, Integer>(); 
+			 
+			
+			
+				 HSSFRow rowDocLog1 = (HSSFRow) sheetDocLog.getRow(0);
+				 Iterator<Cell> cellIteratorDocLog = rowDocLog1.cellIterator();
+				 HSSFRow rowDocLog2 = (HSSFRow) sheetDocLog.getRow(1);
+				 
+				 String header = "";
+	             int ci =0;
+	             while(cellIteratorDocLog.hasNext()) {
+	            	 HSSFCell cell = (HSSFCell) cellIteratorDocLog.next();
+	            	 if(cell.getStringCellValue()!=null)
+	            		 header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
+	            	 try {
+	            		 //System.out.println("header "+ci+" : "+header);
+	            	 colNamesMap.put(header, ci);
+	            	 }catch (Exception e) {
+	            		 System.out.println("Error in getting cell values from Doc log headers");
+	            	 }
+	            	 ci++;
+	             }
+	         
+             int docTypeColIndex = colNamesMap.get("DocType");
+             int langColIndex = colNamesMap.get("OCP/ODP");
+             int componentCodeIndex = colNamesMap.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+             int planIDIndexDocLog = colNamesMap.get("Contract-PBP-SegmentID");
+
 			 
 			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 	            {
@@ -3470,12 +3509,13 @@ public class VppCommonStepDefinition {
 				 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 	                Iterator<Cell> cellIterator = row.cellIterator();
 	                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
-
+	              
 	                //looping through columns until an empty column is found
 	                while (cellIterator.hasNext()) 
 	                {
 	                	 HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
 	                	 boolean valueMatches = true; 
+	                	 
 	                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 			             
 	                	 try {
@@ -3488,6 +3528,7 @@ public class VppCommonStepDefinition {
 		                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
 						 if(rowIndex==0) {
 							 newCell.setCellValue(cell.getStringCellValue()); 
+							 
 						 }
 						 if(rowIndex!=0) { //skip the header row
 							 if(cellIndex==0) { 
@@ -3496,12 +3537,43 @@ public class VppCommonStepDefinition {
 								  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page	
 								  planDetailsPage = new PlanDetailsPage(wd);
 							 }
+							 
+							 ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
+							 int rowIndexOfDocCode = 0; String planId= "";
+							 
+							 if(currentColName.equalsIgnoreCase("plan id"))
+								 planId = cell.getStringCellValue();
+								 
+							 boolean flag = false; String failedMessage = "";
 							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
-							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName);
-								
-							  	if (resultMap.containsKey(true)) {
-									newCell.setCellStyle(stylePassed);
-									newCell.setCellValue(resultMap.get(true));
+							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName); //method returns true/false value along with the document code in hashmap
+							   
+								  	if (resultMap.containsKey(true)) {
+								  		
+									  		//loops through all of the rows in the DOCLog excel file for the column that contains the component code and checks if the code exists. if it does, then it returns the index of that row 
+									  		for(int rowIndexDocLog=2; rowIndexDocLog<=lastRowDocLog; rowIndexDocLog++) {
+									  			 String cellValueOfCompCode = sheetDocLog.getRow(rowIndexDocLog).getCell(componentCodeIndex).getStringCellValue();
+									  			if(cellValueOfCompCode.contains(resultMap.get(true))){
+									  				rowIndexOfDocCode = rowIndexDocLog;break;
+									  			}		
+											  }
+									  		 
+									  		 if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue()).contains(docLangList.get(0))){
+										  			if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue()).contains(docLangList.get(1))){
+											  				if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue()).contains(planId)) {
+											  					flag = true;
+											  					newCell.setCellStyle(stylePassed);
+																newCell.setCellValue(resultMap.get(true));
+													  		 }else
+													  			 failedMessage = "Failed to match the component code with the plan ID";
+												  	}else
+												  		failedMessage =  "Failed to match the component code with the Language";
+									  		 }else
+									  			 failedMessage = "Failed to match the component code with the document type";
+								  	}else {
+								  			newCell.setCellStyle(styleFailed);
+											newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+								  	}
 								} else {
 									newCell.setCellStyle(styleFailed);
 									newCell.setCellValue(resultMap.get(false));
@@ -3513,7 +3585,7 @@ public class VppCommonStepDefinition {
 						 }
 						 
 						 cellIndex++;
-	                }
+	                
 	            }
 			File OutputFile = new File(OutputFilePath);
 			FileOutputStream outputStream = new FileOutputStream(OutputFile);
