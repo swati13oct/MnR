@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionCampaignTFNUHCUAT.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionCampaignTFNUHCUAT")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, monochrome = true, features = { "src/main/resources/feature/acquisition/tfn/tfn_UAT_Updated/CampaignTFN-UHC-UAT.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNUHCUAT.json" }, tags = {"@Scenario_1_2_DirectTraffic__UHC_UAT,@Scenario_2_CampaignTraffic_UHC_UAT"})
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionCampaignTFNUHCUAT.json" }, tags = {"@Scenario_2_CampaignTraffic_UHC_UAT"})
 
 public class RunMRATDDAcquisitionCampaignTFNUHCUAT {
 

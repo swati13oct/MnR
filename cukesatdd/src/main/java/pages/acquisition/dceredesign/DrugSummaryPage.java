@@ -107,10 +107,12 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-	@FindBy(id = "selectaPharmacyHeader")
+//	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 
-	@FindBy(xpath = "//*[@id='modal']//*[@id='cancelicon']/img")
+//	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -498,7 +500,9 @@ public class DrugSummaryPage extends UhcDriver {
 		validateNew(drugTitle);
 		//validateNew(switchToGenericBtn);
 		validateNew(drugPricingDeductText);
-		Assert.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
+		String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
+//		Assert.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
+		Assert.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
 		validateNew(drugClose);
 		jsClickNew(drugClose);
 	}
@@ -738,11 +742,13 @@ public class DrugSummaryPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
 		validateNew(DrugPricing_Header);
 		String[] Drugs = druglistObject.split("&");
-		int DrugCount_Total = Drugs.length - 1;
+//		int DrugCount_Total = Drugs.length - 1;			//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = Drugs.length;
 		String currentAddedDrug;
 		int i;
 		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		for (i = 1; i <= DrugCount_Total; i++) {
+//		for (i = 1; i <= DrugCount_Total; i++) {		//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for (i = 0; i < DrugCount_Total; i++) {	
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//span[contains(text(), '" + currentAddedDrug + "')]"));

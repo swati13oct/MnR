@@ -26,6 +26,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
+//import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -214,10 +215,11 @@ public class VisitorProfilePage extends UhcDriver {
 
 	public AcquisitionHomePage addPlan() {
 
-		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+	/*	if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			jsClickNew(addplans);
+//			jsClickNew(addplans);			//Commented since addplans button not available, locator same as else part add plans
+			jsClickNew(addPlans);
 		} else {
 			jsClickNew(addPlans);
 		}
@@ -231,6 +233,16 @@ public class VisitorProfilePage extends UhcDriver {
 			return new AcquisitionHomePage(driver, page);
 		}
 		return null;
+	}*/
+		
+		jsClickNew(addPlans);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("profile")) {
+			return new AcquisitionHomePage(driver);
+		}else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
 	}
 
 	public void validateAddedDrugAndPharmacy(String drug) {
@@ -287,15 +299,17 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 
 	public void validateAddedDrugs(String druglist) {
-		expandDrugBlock.click();
+//		expandDrugBlock.click();
 
 		String[] DrugListItems = druglist.split(":");
 		System.out.println("Added Drug Count : " + DrugListItems.length);
 		for (String currentDrug : DrugListItems) {
 			System.out.println("Current Added Drug Name : " + currentDrug);
-			List<WebElement> DrugName = driver.findElements(By.xpath(
-					"//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"));
+			/*List<WebElement> DrugName = driver.findElements(By.xpath(
+					"//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"));*/
 
+			List<WebElement> DrugName = driver.findElements(By.xpath("//ul[@class='drugs-list']//*[contains(@id,'DrugName')]"));
+			
 			for (int j = 0; j < DrugName.size(); j++) {
 				String drugInfo = DrugName.get(j).getText();
 				System.out.println("Drug name seen on Plan Summary: " + drugInfo);
@@ -452,7 +466,8 @@ public class VisitorProfilePage extends UhcDriver {
 		try {
 			jsClickNew(signIn);
 			waitForPageLoadSafari();
-			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+		//	driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
@@ -472,7 +487,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+		//	CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
@@ -686,16 +701,20 @@ public class VisitorProfilePage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
 			System.out.println(plan);
-			System.out.println(driver.findElement(By.xpath(
+			WebElement addedPlan = driver.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			/*System.out.println(driver.findElement(By.xpath(
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());
-			Assert.assertEquals(plan, driver.findElement(By.xpath(
+					.getText());*/
+			System.out.println(addedPlan.getText());
+			/*Assert.assertEquals(plan, driver.findElement(By.xpath(
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());
-			Assert.assertTrue(driver
+					.getText().trim());*/
+			Assert.assertEquals(plan, addedPlan.getText().trim());
+			/*Assert.assertTrue(driver
 					.findElement(By.xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 							+ plan + "')]/following::button[1]"))
-					.isDisplayed());
+					.isDisplayed());*/
+			Assert.assertTrue(addedPlan.findElement(By.xpath("./following::button[1]")).isDisplayed());
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}
