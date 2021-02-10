@@ -45,7 +45,8 @@ import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	//@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeField;
 	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -248,7 +249,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
 	
-	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
+	@FindBy(xpath = "//h1//span[contains(text(),'Health Insurance Broker')]")
 	public WebElement brokerHeader;
 	
 	/* LearnAboutMedicare link */

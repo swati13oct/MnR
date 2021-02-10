@@ -17,10 +17,10 @@ import acceptancetests.util.CommonUtility;
 
 public class AboutUsAARPPage extends GlobalWebElements{
 
-	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
+	@FindBy(xpath = "(//*[contains(@class,'layout-container')]//p//span[@class='paragraph'])[1]")
 	public static WebElement abountUsBodyParaSection;
 	
 	
