@@ -122,6 +122,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//span[@class='card-link__arrow' and contains(text(),'Medicare Supplement')]")
 	private WebElement MedicareSupplementInsurancePlans;
 	
+	public static String parentWindow;
+	
 	public CampaignExternalLinks(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -232,7 +234,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		sendkeys(zipcodeEnter, zipcode);
 		validateNew(zipcodeEnter);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeEnter, 30);
-		String parentWindow = driver.getWindowHandle();
+		parentWindow = driver.getWindowHandle();
 		jsClickNew(submit);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -283,7 +285,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	public AcquisitionHomePage clickOnLearnAboutMedicareBtn() {
 		validateNew(LearnAboutMedicareBtn);
 		CommonUtility.waitForPageLoadNew(driver, LearnAboutMedicareBtn, 30);
-		String parentWindow = driver.getWindowHandle();
+		parentWindow = driver.getWindowHandle();
 		jsClickNew(LearnAboutMedicareBtn);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -315,7 +317,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	public AcquisitionHomePage clickOnPlanandPricingBtn() {
 		validateNew(planAndPricing);
 		CommonUtility.waitForPageLoadNew(driver, planAndPricing, 30);
-		String parentWindow = driver.getWindowHandle();
+		parentWindow = driver.getWindowHandle();
 		jsClickNew(planAndPricing);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -348,7 +350,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 		validateNew(privacylink);
 		CommonUtility.waitForPageLoadNew(driver, privacylink, 30);
-		String parentWindow = driver.getWindowHandle();
+		parentWindow = driver.getWindowHandle();
 		jsClickNew(privacylink);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -384,7 +386,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	}
 	
-	public static String parentWindow;
+	
 	public void clickFindPlansPricing() {
 		parentWindow = driver.getWindowHandle();
 		findPlansPricing.click();
