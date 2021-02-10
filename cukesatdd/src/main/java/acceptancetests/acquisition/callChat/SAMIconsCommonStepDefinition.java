@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -25,7 +26,8 @@ public class SAMIconsCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	
+	WebDriver wd;
 	/**
 	 * @Functionality:SAM Icons
 	 */
@@ -146,8 +148,11 @@ public class SAMIconsCommonStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
+		
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
 
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
