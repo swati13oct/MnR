@@ -48,8 +48,6 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     #Then the user validates cancellation and Save Return Later modal for OLE Page
     #Then the user cancels enrollment and navigates to homepage
     Then user closes current tab and navigate to previous tab
-    Then the user navigate back to external link of aarp medicare plans11 page
-      | Zip Code | <zipcode> |
     #----------Repeat the steps for PDP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
       | Zip Code | <zipcode> |
@@ -90,8 +88,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user navigate back to external link of aarp medicare plans11 page
-      | Zip Code | <zipcode> |
+    Then user closes current tab and navigate to previous tab
     #----------Repeat the steps for SNP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
       | Zip Code | <zipcode> |
@@ -124,8 +121,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     # Then the user validates cancellation and Save Return Later modal for OLE Page
-    Then the user navigate back to external link of aarp medicare plans11 page
-      | Zip Code | <zipcode> |
+    Then user closes current tab and navigate to previous tab
     #-------------------Repeat the steps for Medsupp Plan----------------------------------------------
     Then the user validate aarp medicare plans11 page external link
       | Zip Code | <zipcode> |
@@ -136,20 +132,20 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | Plan Type | <MSplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    Then the user validates SAM icons on the page
+    Then the user validates SAM icons on Medsupp page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates the right rail
-    Then the user validates the Need Help Section in the right rail
-    Then the user validates the TFN in the Need Help Section
-    Then the user navigate back to external link of aarp medicare plans11 page
-      | Zip Code | <zipcode> |
+    Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath2> |
+  	Then user closes current tab and navigate to previous tab
     #---------------------Privacy link in Medicare plans 11 page--------------------
     Then the user navigate back to aarp medicare plans11 page privacy link
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-
+    Then user closes current tab and navigate to previous tab
+      
     @CampaignExternalLink_E2E_Scenario_6
     Examples: 
       | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |
