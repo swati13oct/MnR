@@ -5163,7 +5163,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
 
 		if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")
-				.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
+				.contains(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
 			System.out.println(
 					"****************TFN Timezone Content was found macthing with the SAM call Popup  ***************");
 
