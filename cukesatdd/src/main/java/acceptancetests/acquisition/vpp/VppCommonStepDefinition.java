@@ -1518,6 +1518,7 @@ public class VppCommonStepDefinition {
 			//	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		System.out.println("plan name"+planName);
 		System.out.println("plan name"+planType);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE,planType);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -3623,7 +3624,9 @@ public class VppCommonStepDefinition {
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String planIndex = memberAttributesMap.get("Plan index");
-		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex);
+		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("plan type"+plantype);
+		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex,plantype);
 	}
 
 	@When("^user select \"([^\"]*)\" plans to compare$")
@@ -3632,8 +3635,8 @@ public class VppCommonStepDefinition {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
-
-		plansummaryPage.addPlanToCompareByIndex(planIndex);
+		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		plansummaryPage.addPlanToCompareByIndex(planIndex,plantype);
 	}
 	
 	@Then("^user clicks on compare button$")
@@ -3642,7 +3645,6 @@ public class VppCommonStepDefinition {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
-
 		ComparePlansPage planComparePage = plansummaryPage.clickCompareButton();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);

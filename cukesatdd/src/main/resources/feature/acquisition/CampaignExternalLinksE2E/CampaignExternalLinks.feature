@@ -167,7 +167,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-    When verify Call SAM icon is visible
+      When verify Call SAM icon is visible
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then the user view plan details of the above selected plan in site vpp
       | Plan Name | <planname> |
@@ -223,8 +223,6 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    And the user clicks on compare plans button on plan details page and navigate to compare page
-    Then verify plan compare page is loaded
     When user clicks on Add to compare checkbox on plan detail page
     And the user clicks on back to all plans link and validates its redirection to Plan Summary
     Then verify the Add to compare checkbox is checked for selected plan
