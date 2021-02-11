@@ -14,10 +14,10 @@ import org.openqa.selenium.support.PageFactory;
  */
 public class AgentsnBrokersAARPPage extends GlobalWebElements{
 	
-	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//div[contains(@class,'mededoverviewcontainer')]//div[contains(@class,'meded-medicare-overview__title')]")
+	@FindBy(xpath = "(//*[contains(@class,'layout-container')]//ul)[1]")
 	public static WebElement medicareOverviewTableTitle;
 	
 	

@@ -567,4 +567,10 @@ public class HealthRecordPage  extends HealthRecordBase {
 		return noWaitValidate(sorryError);
 	}
 
+	
+	public boolean hasPaymentTabOnPage() {
+		return noWaitValidate(paymentTopMenuLnk);
+	}
+
+
 }

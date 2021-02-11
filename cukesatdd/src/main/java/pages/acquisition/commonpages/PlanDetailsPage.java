@@ -1285,72 +1285,82 @@ public class PlanDetailsPage extends UhcDriver {
 	public HashMap<Boolean,String> clickAndValidatePDFText_URL(String pdfType) {
 		List <WebElement> PDFlink = driver.findElements(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pdfType+"')]"));
 		String documentCode = "",pdfHref ="";
+		boolean validationFlag = true; String validationString = "NA";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
-		if(pdfType.contains("Step Therapy")) {
-			documentCode = "Step Therapy";
-		}else if(pdfType.contains("Prior Auth")) {
-			documentCode = "Prior Authorization";
-		}else if(pdfType.contains("Formulary Additions")){
-			documentCode = "Formulary Additions";
-		}else if(pdfType.contains("Formulary Deletions")){
-			documentCode = "Formulary Deletions";
-		}else {
-		
-			pdfHref = PDFlink.get(0).getAttribute("href");
-			String a = "/";
-			 int posA = pdfHref.lastIndexOf(a);
-		     int adjustedPosA = posA + a.length();
-		     documentCode = pdfHref.substring(adjustedPosA);  
-		}
-		
-		System.out.println("Expected Document code :"+documentCode);
-
 		String parentHandle = driver.getWindowHandle();
 		
-
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink.get(0));
-		executor.executeScript("arguments[0].click();", PDFlink.get(0));
-		int initialCount = driver.getWindowHandles().size();
-		//PDFlink.click();
-
-		//waitForCountIncrement(initialCount);
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		//String currentHandle = null;
-		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
-		}
-		//System.out.println("Switched to new window : Passed");
-		CommonUtility.checkPageIsReadyNew(driver);
-
-		boolean validationFlag = false; String validationString = "FAILED";
-		
-		try {
-			URL TestURL = new URL(driver.getCurrentUrl());
-			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-			PDDocument document = PDDocument.load(TestFile);
-			/*PDFParser TestPDF = new PDFParser(document);
-			TestPDF.parse();*/
-			String PDFText = new PDFTextStripper().getText(document);
-			if(PDFText.contains(documentCode)){
-				 System.out.println("PASSED - PDF : " +pdfType+" text contains expected Document code : "+documentCode);
-				 validationFlag= true;
-				 validationString = "PASSED";
-			 }
-			 else{
-				 System.out.println("FAILED - PDF: " +pdfType+" text DOES NOT contains expected Document code : "+documentCode);
-				 if(PDFText.contains("PDF coming soon"))
-					 validationString = "PDF coming soon";
-			 }
-
-		} catch (MalformedURLException e) {
-			 System.out.println("FAILURE, Exception in Reading PDF");
-		} catch (IOException e) {
-			 System.out.println("FAILURE, Exception in Reading PDF");
+		if(PDFlink.size()!=0) {
+			if(pdfType.contains("Step Therapy")) {
+				documentCode = "Step Therapy";
+			}else if(pdfType.contains("Prior Auth")) {
+				documentCode = "Prior Authorization";
+			}else if(pdfType.contains("Formulary Additions")){
+				documentCode = "FORMULARY ADDITIONS";
+			}else if(pdfType.contains("Formulary Deletions")){
+				documentCode = "FORMULARY DELETIONS";
+			}else {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					pdfHref = PDFlink.get(0).getAttribute("href");
+					String a = "/";
+					 int posA = pdfHref.lastIndexOf(a);
+				     int adjustedPosA = posA + a.length();
+				     documentCode = pdfHref.substring(adjustedPosA);  
+			}
+			
+			System.out.println("Expected Document code :"+documentCode);
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink.get(0));
+			executor.executeScript("arguments[0].click();", PDFlink.get(0));
+			int initialCount = driver.getWindowHandles().size();
+			//PDFlink.click();
+	
+			//waitForCountIncrement(initialCount);
+			ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+			//String currentHandle = null;
+			for(String winHandle : driver.getWindowHandles()){
+			    driver.switchTo().window(winHandle);
+			}
+			//System.out.println("Switched to new window : Passed");
+			CommonUtility.checkPageIsReadyNew(driver);
+	
+			
+			
+			try {
+				URL TestURL = new URL(driver.getCurrentUrl());
+				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+				PDDocument document = PDDocument.load(TestFile);
+				/*PDFParser TestPDF = new PDFParser(document);
+				TestPDF.parse();*/
+				String PDFText = new PDFTextStripper().getText(document);
+				if(PDFText.contains(documentCode)){
+					 System.out.println("PASSED - PDF : " +pdfType+" text contains expected Document code : "+documentCode);
+					 validationFlag= true;
+					 validationString = "PASSED";
+				 }
+				 else{
+					 System.out.println("FAILED - PDF: " +pdfType+" text DOES NOT contains expected Document code : "+documentCode);
+					 if(PDFText.contains("PDF coming soon"))
+						 validationString = "PDF coming soon";
+					 else
+						 validationString = "FAILED";
+					 validationFlag = false;
+				 }
+	
+			} catch (MalformedURLException e) {
+				 System.out.println("FAILURE, Exception in Reading PDF");
+			} catch (IOException e) {
+				 System.out.println("FAILURE, Exception in Reading PDF");
+			}
+			driver.close();
+			driver.switchTo().window(parentHandle);
 		}
 		comparedResult.put(validationFlag, validationString);
-		driver.close();
-		driver.switchTo().window(parentHandle);
+		
 		return comparedResult;
 	}
 
@@ -1532,6 +1542,7 @@ public class PlanDetailsPage extends UhcDriver {
 		validateNew(backtoDrugEstBtn);
 		backtoDrugEstBtn.click();
 	}
+
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
@@ -1889,4 +1900,8 @@ public class PlanDetailsPage extends UhcDriver {
 
 		return result;
 	}
+
+	public void validateVPPDetailsPage() {
+	Assert.assertTrue("user not navigated to VPP Details Page",driver.getCurrentUrl().contains("details"));
+}
 }

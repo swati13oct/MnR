@@ -9,9 +9,9 @@ Feature: 1.14 Member Branding functionality
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
-    And verify that correct logo is displayed on the home page or test harness page
-      | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
-      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+    #And verify that correct logo is displayed on the home page or test harness page
+    #  | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
+    #  | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that correct logo is displayed on the secondary page
@@ -67,9 +67,9 @@ Feature: 1.14 Member Branding functionality
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
-    And verify that correct logo is displayed on the home page or test harness page
-      | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
-      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+    #And verify that correct logo is displayed on the home page or test harness page
+    #  | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
+    #  | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that correct logo is displayed on the secondary page
@@ -94,9 +94,9 @@ Feature: 1.14 Member Branding functionality
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
-    And verify that correct logo is displayed on the home page or test harness page
-      | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
-      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+    #And verify that correct logo is displayed on the home page or test harness page
+    #  | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
+    #  | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that correct logo is displayed on the secondary page
@@ -115,11 +115,11 @@ Feature: 1.14 Member Branding functionality
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
-    And verify that correct logo and cologo are displayed on the home page or test harness page
-      | Dashboard Logo        | <logoToBeDisplayedOnDashboard>       |
-      | Dashboard CoLogo      | <cologoToBeDisplayedOnDashboard>     |
-      | Secondary Page Logo   | <logoToBeDisplayedOnSecondaryPage>   |
-      | Secondary Page CoLogo | <cologoToBeDisplayedOnSecondaryPage> |
+    #And verify that correct logo and cologo are displayed on the home page or test harness page
+    #  | Dashboard Logo        | <logoToBeDisplayedOnDashboard>       |
+    #  | Dashboard CoLogo      | <cologoToBeDisplayedOnDashboard>     |
+    #  | Secondary Page Logo   | <logoToBeDisplayedOnSecondaryPage>   |
+    #  | Secondary Page CoLogo | <cologoToBeDisplayedOnSecondaryPage> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that correct logo and cologo are displayed on the secondary page
@@ -143,11 +143,11 @@ Feature: 1.14 Member Branding functionality
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
-    And verify that correct logo and cologo are displayed on the home page or test harness page
-      | Dashboard Logo        | <logoToBeDisplayedOnDashboard>       |
-      | Dashboard CoLogo      | <cologoToBeDisplayedOnDashboard>     |
-      | Secondary Page Logo   | <logoToBeDisplayedOnSecondaryPage>   |
-      | Secondary Page CoLogo | <cologoToBeDisplayedOnSecondaryPage> |
+    #And verify that correct logo and cologo are displayed on the home page or test harness page
+    #  | Dashboard Logo        | <logoToBeDisplayedOnDashboard>       |
+    #  | Dashboard CoLogo      | <cologoToBeDisplayedOnDashboard>     |
+    #  | Secondary Page Logo   | <logoToBeDisplayedOnSecondaryPage>   |
+    #  | Secondary Page CoLogo | <cologoToBeDisplayedOnSecondaryPage> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that correct logo and cologo are displayed on the secondary page
@@ -256,11 +256,11 @@ Feature: 1.14 Member Branding functionality
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
-    And verify that correct logo and cologo are displayed on the home page or test harness page
-      | Dashboard Logo        | <logoToBeDisplayedOnDashboard>       |
-      | Dashboard CoLogo      | <cologoToBeDisplayedOnDashboard>     |
-      | Secondary Page Logo   | <logoToBeDisplayedOnSecondaryPage>   |
-      | Secondary Page CoLogo | <cologoToBeDisplayedOnSecondaryPage> |
+    #And verify that correct logo and cologo are displayed on the home page or test harness page
+    #  | Dashboard Logo        | <logoToBeDisplayedOnDashboard>       |
+    #  | Dashboard CoLogo      | <cologoToBeDisplayedOnDashboard>     |
+    #  | Secondary Page Logo   | <logoToBeDisplayedOnSecondaryPage>   |
+    #  | Secondary Page CoLogo | <cologoToBeDisplayedOnSecondaryPage> |
     And Terminated user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that correct logo and cologo are displayed on the secondary page
@@ -282,9 +282,9 @@ Feature: 1.14 Member Branding functionality
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
-    And verify that correct logo is displayed on the home page or test harness page
-      | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
-      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+    #And verify that correct logo is displayed on the home page or test harness page
+    #  | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
+    #  | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that correct logo is displayed on the secondary page
@@ -303,9 +303,9 @@ Feature: 1.14 Member Branding functionality
     And Member Enters the Username he wants to search
       | MemUsername | <member> |
     And user clicks on member to select
-    And verify that correct logo is displayed on the home page or test harness page
-      | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
-      | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
+    #And verify that correct logo is displayed on the home page or test harness page
+    #  | Dashboard Logo      | <logoToBeDisplayedOnDashboard>     |
+    #  | Secondary Page Logo | <logoToBeDisplayedOnSecondaryPage> |
     And user clicks on benefits and coverage tab on home page or test harness page
       | PlanType | <planType> |
     And verify that correct logo is displayed on the secondary page

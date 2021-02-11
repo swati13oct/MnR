@@ -244,12 +244,12 @@ Feature: 1.04.2 To Test DREAM EOB for Members - E2E
     @dreamEob01e_maCosmos 
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 05    | MA       | COSMOS_DEOB       | old C                             | false       |
+      | 05    | MA       | COSMOS_DEOB       | old C                             | true        |
 
     @dreamEob01f_maNice  @devRegression
     Examples: 
       | index | planType | memberType        | note                              | flagZeroEob |
-      | 06    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | false       |
+      | 06    | MA       | MA_NICE_DEOB      | 1 new C, 1 old C                  | true        |
 
     @dreamEob01g_pdpComboShipFed 
     Examples: 

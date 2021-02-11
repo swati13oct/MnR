@@ -68,13 +68,10 @@ Feature: 1.01 Member  benefits and Coverage page
 
   #TC11_Benefits_for_Ship_member
   #note: this scenario covers multiple testcases TID 15094,15240
-<<<<<<< HEAD
-  @benefitsAndCoverage22 @CMShip @BnC_Part3_regressionMember @bnc_Stage_sanity_ship
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
-=======
+
   @benefitsAndCoverage05 @CMShip @BnC_Part3_regressionMember 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify that Page Headers are in place on Benefits and Coverage page
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
     Given login with following details logins in the member portal and validate elements
       | Plan Type   | <planType>   |
       | Member Type | <memberType> |
@@ -118,13 +115,10 @@ Feature: 1.01 Member  benefits and Coverage page
     ### note: number of benefits tile may change if swap user
 	@bnc_Stage_sanity_ship 
     Examples: 
-<<<<<<< HEAD
-      | index | TID   | planType | memberType        | language |  numberOfBenefitCards | Identifier           | count | rider   |
-      | 05    | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  5                    | EffectiveShipMedSupp |     3 | NoRider |
-=======
+
       | index | TID   | planType | memberType        | language |  numberOfBenefitCards | Identifier           | count | rider   | planCode | stateCode |
       | 05    | 15094 | SHIP      | SHIP_BnC         | ENGLISH  |  7                    | EffectiveShipMedSupp |     3 | NoRider | F01      |  AR       |
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
 
   #TC13_Benefits_for_MA_SSUP_MEDSUPMember
   @benefitsAndCoverage06 @BenefitsForMAMedsupSSUPMember @regression  @BnC_Part3_regressionMember
@@ -263,7 +257,13 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+
+   # And the user validated the Look up Drugs link
+     And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> |
+    And user validates to not display pharmacy out-of-pocket maximum beside drug lookup
+      | Type   | <type>   |
+
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
@@ -300,7 +300,9 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+   # And the user validated the Look up Drugs link
+     And the user validates Look Up Drugs button should be visible
+      | Plan Type | <planType> | 
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
@@ -353,13 +355,10 @@ Feature: 1.01 Member  benefits and Coverage page
       | 15248 | PDP      | PDPLIS_Bnc  | LIS 3        |
       
   #TC25_Group members_MAPD_LIS(3,4)
-<<<<<<< HEAD
-  @benefitsAndCoverage1 @BnC_Part6_regressionMember @CMGroupmembersTC25 @bnc_Stage_Sanity_mapd
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
-=======
+
   @benefitsAndCoverage13 @CMGroupmembersTC25 @BnC_Part6_regressionMember 
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify Group LIS 3/4 on Benefits and Coverage page
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -370,7 +369,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+   # And the user validated the Look up Drugs link
+    And the user validates group Look Up Drugs button should be visible
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
     And the drugcost dropdown should not display
@@ -406,7 +406,8 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates the Learn More section link for stage
     And the user validates tier link should not display
     And the user view the Drug Cost header and text
-    And the user validated the Look up Drugs link
+  #  And the user validated the Look up Drugs link
+     And the user validates group Look Up Drugs button should be visible
     And the user validates text for the Locate a Pharmacy section
     And the user validates Locate a Pharmacy button should be visible
       | Plan Type | <planType> |
@@ -646,7 +647,7 @@ Feature: 1.01 Member  benefits and Coverage page
   #TC22_NON LIS Ind plan member(MAPD)- Drug Cost table
   @benefitsAndCoverage14 @CMFedDrugNonLis @deprecated
   Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> -language: <language> - Verify all sections for Ind NonLIS member on Benefits and Coverage page
-=======
+
   #TC21_MAPD_LIS(1,2)- Retail Drug Cost Table   - same as the one above but shorten for sanity run only
   @bnc_Stage_Sanity_mapdIndividual  
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify PDF section is in place on Benefits and Coverage page for Lis user
@@ -840,20 +841,13 @@ Feature: 1.01 Member  benefits and Coverage page
     And the user validates contactus section
 
     Examples: 
-<<<<<<< HEAD
-      | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | extrahelp            |
-      | 15244 | PDP      | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | RABI' MALORY | 0182197901 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
-    
-      #TC22_NON LIS Ind Village_member_ Drug Cost table
-  @benefitsAndCoverage18 @CMFedNonLisVillage  @deprecated
-  Scenario Outline: TID: <TID> -plan: <planType> -memberType: <memberType> - Verify the Village nonLis member validates text in table
-=======
+
       | index | TID   | planType | memberType     | copayCategory | language | SummaryofBenefits   | EvidenceofCoverage   | ComprehensiveFormularyDrug List     | AlternativeDrugList   | name        | memberid   | effectivedate | monthlypremium | extrahelp            |
       | 24    | 15244 | PDP      | Individual_BnC | LIS 1         | ENGLISH  | Summary of Benefits | Evidence of Coverage | Comprehensive Formulary - Drug List | Alternative Drug List | RABI' MALORY | 0182197901 | 01/01/2019    | Not Available  | Extra Help Level : 1 |
 
   @benefitsAndCoverage22 @DSNP_CnS
   Scenario Outline: Index: <index> -FID: <FID> -plan: <planType> -memberType: <memberType> - Verify  Medical copays or coinsurance section and Out-of-pocket maximum section for DSNP members
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
     Given login with following details logins in the member portal and validate elements
       | Plan Type      | <planType>      |
       | Member Type    | <memberType>    |
@@ -997,9 +991,7 @@ Feature: 1.01 Member  benefits and Coverage page
     #  | index  | FID    | planType  | memberType     | copayCategory | deductible   | insulin      |
     #  | 34-I09 | 478830 | MAPD      | Individual_BnC | NON LIS       | T12345       | nonInsulin   | 
 
-<<<<<<< HEAD
- ###############################Regression Scenarios END Here ########################################
-=======
+
   #note: if FED_SHIP_SHIP_BnC user stop working, replace with any FED+SHIP combo user would do, coverage is for combo with federal priority
   @benefitsAndCoverage24 @api
   Scenario Outline: Index: <index> -TID: <TID> -plan: <planType> -memberType: <memberType> - Verify UCPBenefits API not having undefined input value for COMBO user

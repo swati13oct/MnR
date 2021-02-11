@@ -57,6 +57,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
+import pages.acquisition.commonpages.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
@@ -254,7 +255,7 @@ public class PlanRecommendationEngineCommonStepDefinition {
    	public void elements_results_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorResultspage.resultsloadingpage();
    	}
 	
@@ -283,6 +284,12 @@ public class PlanRecommendationEngineCommonStepDefinition {
    		planSelectorDrugspage.drugsInitiate(givenAttributesMap.get("Drug Selection"));
    		planSelectorDrugspage.drugsHandlerWithdetails(givenAttributesMap.get("Drug Details"));
    		planSelectorDrugspage.continueNextpage();
+   	}
+	
+	@Then("^verify continue function in \"([^\"]*)\" page$")
+   	public void proceed_next_page(String page) {
+		PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility(wd);
+		commonutli.continueNextpage(page.trim().toUpperCase(),false);
    	}
 
 }

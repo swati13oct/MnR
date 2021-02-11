@@ -252,13 +252,13 @@ public class VisitorProfileStepDefinition_AARP {
 		}
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
-
+		
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		System.out.println("credentials"+username+ password);
 
 		visitorProfile.signIn(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 
 

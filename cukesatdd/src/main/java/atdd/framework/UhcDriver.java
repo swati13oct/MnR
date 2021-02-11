@@ -682,11 +682,11 @@ public abstract class UhcDriver {
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
 		mobileSelectOption(dropdownElement, value, true);
-		//dropdown.selectByValue(value);
+		// dropdown.selectByValue(value);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
-	if(!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
-		Assert.fail("Expected value is not present in dropdown");
+		if (!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
+			Assert.fail("Expected value is not present in dropdown");
 	}
 
 	public void waitUntilSelectOptionsPopulated(final Select select) {
@@ -1275,7 +1275,10 @@ public abstract class UhcDriver {
 				loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
 						return driver.findElements(By.xpath(
-								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner') and not(contains(@style,'none')))]"));
+
+								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='spinner' or @id='loader' or @class='uhc-spinner') and not(contains(@style,'none')))]"));
+						// @class='loading-block' ==> Old spinner locator on pharmacy search page.
+
 					}
 				});
 			} catch (Exception e) {

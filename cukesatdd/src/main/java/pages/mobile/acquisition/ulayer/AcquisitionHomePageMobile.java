@@ -51,7 +51,7 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
  */
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
-	@FindBy(css = "#cta-zipcode")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -153,7 +153,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
-	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
+	// @FindBy(xpath =
+	// ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button
+	// secondary')and contains(text(),'Get')]")
+	@FindBy(xpath = "//a[contains(@title,'Drug Cost Estimator Tool')]")
 	public WebElement getStarted;
 
 	@FindBy(id = "redirect_content")
@@ -207,7 +210,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -998,26 +1001,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPageMobile searchPlans(String zipcode, String countyName) {
+		waitForPageLoadSafari();
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
 			sendkeys(zipCode, zipcode);
 
-			// btnGO.click();
 			jsClickNew(btnGO);
 		} else {
-			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
-			scrollToView(zipCode1);
-			jsSendkeys(zipCodeField, zipcode);
-			// sendkeys(zipCodeField, zipcode);
+			//CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+			scrollToView(zipCodeField);
+			sendkeys(zipCodeField, zipcode);
 
-			// viewPlansButton.click();
 			jsClickNew(viewPlansButton);
 		}
 
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
-		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -1497,10 +1498,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public VPPPlanSummaryPageMobile searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
 		pageloadcomplete();
-//		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 
 		scrollToView(zipCodeField);
-		//sendkeysNew(zipCodeField, zipcode);
+		// sendkeysNew(zipCodeField, zipcode);
 		jsSendkeys(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
 
@@ -2774,7 +2775,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(learnAboutMedicareLink);
-		validateNew(viewAllDisclaimerInformationLink,10);
+		validateNew(viewAllDisclaimerInformationLink, 10);
 
 	}
 

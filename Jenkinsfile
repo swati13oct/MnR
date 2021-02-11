@@ -3,8 +3,8 @@
 //modified for M&R by Olga Mackevica          
 // Global Variables
 def pom, fullGitCommit, pipelineVersion
-def credentialsId = 'c35e98d4-5b20-4607-854e-ddc6f0fd8ba4'
-def gitHubRepoUrl = 'https://github.optum.com/consumer-portals/mratdd.git'
+def credentialsId = '603efe34-7b74-4e26-8ef8-5273f07139ae'
+def gitHubRepoUrl = 'https://github.optum.com/gov-prog-digital/mratdd.git'
 def gitBranch = "${env.BRANCH_NAME}"
 def mvnParams = "-Dgit.branch=${gitBranch} -Dbuild.number=${env.BUILD_NUMBER} -Dbuild.time=${env.BUILD_TIMESTAMP} -Dgit.url=${gitHubRepoUrl}"
 def pomLocation = "cukesatdd/pom.xml"
