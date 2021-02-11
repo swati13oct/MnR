@@ -138,6 +138,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
         actions.sendKeys("c");
         actions.keyUp(Keys.CONTROL);
         actions.build().perform();
+        Thread.sleep(1000);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         String PDFText = "";
         
