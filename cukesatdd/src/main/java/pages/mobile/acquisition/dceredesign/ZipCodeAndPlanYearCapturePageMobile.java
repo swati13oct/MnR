@@ -108,7 +108,8 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
 		//getkeypad();
-		sendkeys(zipCodeTxtbox, zipcode);
+		//sendkeys(zipCodeTxtbox, zipcode);
+		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
 			if (countyDropdown.isDisplayed()) {
