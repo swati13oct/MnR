@@ -68,6 +68,9 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
 	private WebElement planListContainer;
+	
+	@FindBy(xpath = "//*[contains(@class,'plan-detail-table')]")
+	private WebElement lisPlanTable;
 
 	String sheetName = "";
 	int rowIndex;
@@ -228,6 +231,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String headerPremiumXpath = planCard+"//*[contains(@class,'monthly-cost')]";
 		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
 		String headerPremiumText = "Header not found";
+		String learnMoreLink = planCard + "//*[contains(@ng-click,'lispopup')]";
+		
+		List<WebElement> learnMoreAboutLink = driver.findElements(By.xpath(learnMoreLink));
+		
 		if(planName.contains("PDP"))
 			rowXpath = planCard+"//*[contains(@class,'pdpbenefittable')]//ul//li";
 		else {
@@ -272,7 +279,22 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			 result.put(key, value);
 			 
 		}
+		
+		if(learnMoreAboutLink.size()!= 0) {
+			String value = "";
+			jsClickNew(learnMoreAboutLink.get(0));
+			validateNew(lisPlanTable);
+			for(int i =2; i<=5;i++) {
+				WebElement lisValueFirstCol = driver.findElement(By.xpath("//*[contains(@class,'plan-detail-table')]//tr["+i+"]//td[1]"));
+				WebElement lisValueSecondCol = driver.findElement(By.xpath("//*[contains(@class,'plan-detail-table')]//tr["+i+"]//td[2]"));
 
+				key = lisValueFirstCol.getText();
+				value = lisValueSecondCol.getText();
+				result.put(key, value);
+				
+			}
+		}
+		
 		//commenting the below lines of coe to reduce the log on Jenkins job
 		
 		for(String keyValue : result.keySet()) {
@@ -334,7 +356,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			key = key.toLowerCase().trim();
 			//key = key.replace(",", "");
 			columnName = columnName.toLowerCase().trim();
-			
+			if(columnName.contains("%"))
+				System.out.println();
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A"))) {
 				counter++;
 				if(key.contains(columnName)) {
@@ -396,6 +419,19 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 							break;
 						}
 					
+				}else if(columnName.contains(key)) {
+					counter++;
+					columnName= columnName.replace("\n", "").replaceAll("\\s+", "");
+					key = key.replace("\n", "").replaceAll("\\s+", "");
+					if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						flag = true;break;
+					}else {
+						flag = false;
+						System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+						tmpUIString2 = tmpUIString1;
+						break;
+					}
+							
 				}
 			}
 		
