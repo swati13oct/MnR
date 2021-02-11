@@ -678,13 +678,15 @@ public abstract class UhcDriver {
 	}
 
 	public void selectFromDropDownByValue(WebElement dropdownElement, String value) {
+		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
-		dropdown.selectByValue(value);
+		mobileSelectOption(dropdownElement, value, true);
+		//dropdown.selectByValue(value);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
-		if (!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
-			Assert.fail("Expected value is not present in dropdown");
+	if(!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
+		Assert.fail("Expected value is not present in dropdown");
 	}
 
 	public void waitUntilSelectOptionsPopulated(final Select select) {

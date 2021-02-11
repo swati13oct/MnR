@@ -1992,6 +1992,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
+		waitForPageLoadSafari();
+		scrollToView(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
 	}
 
