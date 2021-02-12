@@ -254,7 +254,12 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		getLoginScenario().saveBean(PageConstants.MEDICARE_SUPPLEMENT_INSURANCE_PLANS_PAGE,
 				medicareSupplementInsurancePlansPage);
 	}
+	@When ("user clicks on Estimate Your Prescription Drug Costs from external page")
+	public void user_clicks_on_Estimate_Prescription_Drug_Costto_open_a_new_tab() {
+			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			campaignExternalLinkspage.navigateToDCERedesignFromExternalPage();
+
 }
-
-
+}
 
