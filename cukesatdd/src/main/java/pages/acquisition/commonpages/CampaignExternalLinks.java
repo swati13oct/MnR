@@ -411,6 +411,10 @@ public class CampaignExternalLinks extends UhcDriver {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePage(driver);
 		}
+		else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
+			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+			return new AcquisitionHomePage(driver);
+		}
 		return null;
 	}
 
@@ -484,8 +488,11 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (driver.getCurrentUrl().contains("ma.aarpmedicareplans.com/")) {
 			Assert.assertTrue(true);
 			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("ma.uhcmedicaresolutions.com/")) {
+			Assert.assertTrue(true);
+			System.out.println("UHC External Link Page opens successsfully");
 		} else
-			Assert.fail("AARP External Link page is not opening up");
+			Assert.fail("AARP/UHC External Link page is not opening up");
 		validateNew(tfnHeader);
 
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
