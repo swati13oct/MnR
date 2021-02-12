@@ -4613,8 +4613,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(VerificationAgree);
 		jsClickNew(nextButton);
 
-		validateNew(VerificationAgree2);
-		jsClickNew(VerificationAgree2);
+		//validateNew(VerificationAgree2);
+	//	jsClickNew(VerificationAgree2);
 		jsClickNew(nextButton);
 		validateNew(VerificationAgree3);
 		Thread.sleep(3000);
