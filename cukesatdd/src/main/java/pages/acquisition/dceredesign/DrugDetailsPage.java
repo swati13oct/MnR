@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -37,7 +38,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 
 
-	@FindBy(xpath = "//button[contains(@id,'changePharmacyLink')]")
+	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
@@ -209,10 +210,12 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'disclaimer-accordion-wrap')]")
 	public WebElement Disclaimer_Accordian;
 
-	@FindBy(id = "selectaPharmacyHeader")
+//	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 	
-	@FindBy(id = "selectPharmcyModalCloseLink")
+//	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 	
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -256,8 +259,9 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement pharmacyName;
 	
 	//@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
-	
-	@FindBy(xpath ="//*[@id='selectPharmacyBtn3']")
+	////button[contains(@aria-label,'Select ALIXARX - MN')]
+	//@FindBy(xpath ="//*[@id='selectPharmacyBtn2']")
+	@FindBy(xpath = "//span[text()='ROCK PHARMACY']/../../preceding-sibling::button")
 	public WebElement selectRockPharm;
 	
 	@FindBy(xpath = "//*[@class='uhc-button__text'][contains(text(),'Save and Update Drug Costs')]")
@@ -374,6 +378,11 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
+	@FindBy(xpath = "(//a[contains(@class,'uhc-link-button')])[3]")
+	private WebElement breaCrumbLink;
+	
+	@FindBy(xpath = "//button/span[text()='Back To Profile']")
+	private WebElement backToProfileBtn;
 	
 	public DrugDetailsPage(WebDriver driver) {
 		super(driver);
@@ -579,13 +588,15 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void ValidatesDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length-1;
+//		int DrugCount_Total = DrugListItems.length-1;		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(By.xpath("//h2[contains(text(), '"+DrugCount_Total+" Covered)') and contains(text(), 'Your Drugs')]"));
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		for(i=1; i<=DrugCount_Total; i++) {
+//		for(i=1; i<=DrugCount_Total; i++) {					//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for(i=0; i<DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentDrug+"')]"));
@@ -806,13 +817,13 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Initial Coverage')]/ancestor::table//td[contains(text(), '"+currentDrug+"')]"));
 
-			if(validateNew(DrugName)) {
+			if(validateNew(DrugName, 5)) {
 				System.out.println("Current Drug Displayed in Drug Details Page, Monthly Drug Costs by Stage Drug List : "+currentDrug);
 			}
 			else
 				Assert.fail("Drug Details Page, Monthly Drug Costs by Stage Drug List Validation FAILED for Drug : "+currentDrug);
-		}		
-		
+		}
+
 	}
 
 	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
@@ -918,7 +929,7 @@ public class DrugDetailsPage extends UhcDriver {
 			catastrophicCoverage.click();
 			System.out.println(coverageMsg.getText());
 			System.out.println(message);
-			String catastrophicCoverage=coverageMsg.getText();
+			String catastrophicCoverage=StringUtils.normalizeSpace(coverageMsg.getText());
 			modalCloseIcon.click();
 			Assert.assertTrue("Catastrophic coverage message is incorrect",catastrophicCoverage.equals(message));
 		}
@@ -1529,29 +1540,37 @@ public class DrugDetailsPage extends UhcDriver {
 
 
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]")
-	public WebElement LIS_Buydown_CopaySection;
+	public WebElement LIS_CopaySection;
 
-	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Qualify for LIS')]")
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Qualify for LIS')]//parent::div")
+	public WebElement LIS_CopayHeader;
+
+	@FindBy(xpath = "//*[contains(@id, 'lisbuydown')]//*[contains(text(), 'All covered drugs:')]")
 	public WebElement LIS_BuyDown_Copay;
+	
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//parent::div")
+	public WebElement LIS_Deductible;
 
-	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]")
-	public WebElement LIS_BuyDown_Deductible;
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//following::a[contains(text(), 'Learn more about Extra Help')]")
+	public WebElement LIS_DeductibleLISLink;
 
 	@FindBy(xpath = "//*[contains(@alt, 'alert')]//following::*[contains(text(), 'level of Extra Help')]")
 	public WebElement LIS_Alert;
 
 
 	public void validateLISBuyDown_CopaySection_LISAlert() {
-		if(validateNew(LIS_Buydown_CopaySection)  &&
+		if(validateNew(LIS_CopaySection)  &&
 		validateNew(LIS_BuyDown_Copay) &&
-		validateNew(LIS_BuyDown_Deductible) &&
+		!validate(LIS_CopayHeader) &&
+		validateNew(LIS_Deductible) &&
+		validateNew(LIS_DeductibleLISLink) &&
 		validateNew(LIS_Alert)
 		) {
 			System.out.println("***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
-			System.out.println("***** $0 Copay and Coinsurance for LIS Buydown *****");
+			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Buydown Plan *****");
 			System.out.println(LIS_BuyDown_Copay.getText());
-			System.out.println("***** Deductible for LIS Buydown *****");
-			System.out.println(LIS_BuyDown_Deductible.getText());
+			System.out.println("***** Deductible for LIS Buydown and LIS link Displayed *****");
+			System.out.println(LIS_Deductible.getText());
 			System.out.println("***** Alert Displayed for LIS Buydown *****");
 			System.out.println(LIS_Alert.getText());
 		}
@@ -1559,6 +1578,31 @@ public class DrugDetailsPage extends UhcDriver {
 			Assert.fail("***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
 	}
 
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'No LIS')]//parent::div")
+	public WebElement NonLIS_CopayHeader;
+	
+
+	public void validateLISonly_CopaySection_LISAlert() {
+		if(validateNew(LIS_CopaySection)  &&
+		validateNew(NonLIS_CopayHeader) &&
+		validateNew(LIS_CopayHeader) &&
+		validateNew(LIS_Deductible) &&
+		validateNew(LIS_DeductibleLISLink) &&
+		validateNew(LIS_Alert)
+		) {
+			System.out.println("***** DCE Details Page validation Passed for LIS Non BuyDown Plan - Alert and LIS copay Section *****");
+			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Non Buydown Plan *****");
+			System.out.println(NonLIS_CopayHeader.getText());
+			System.out.println(LIS_CopayHeader.getText() );
+			System.out.println("***** Deductible for LIS Non Buydown and LIS link Displayed *****");
+			System.out.println(LIS_Deductible.getText());
+			System.out.println("***** Alert Displayed for LIS Buydown *****");
+			System.out.println(LIS_Alert.getText());
+		}
+		else
+			Assert.fail("***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
+			
+	}
 	
 	@FindBy(xpath = "//div[@id='monthlycostdetails']")
 	public WebElement MonthlyDrug_Tbl;
@@ -1770,7 +1814,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateInvalidZipErrCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText());
-		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
@@ -1782,10 +1826,10 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
-		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().trim().equals(expectedMsg));
 	}
 
-	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']")
+	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']/parent::button")
 	public WebElement saveBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Saved ']")
@@ -1797,10 +1841,12 @@ public class DrugDetailsPage extends UhcDriver {
 		validate(savedBtn);
 	}
 	
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+//	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
+	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement preferredPharmacyTab;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+//	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
+	@FindBy(xpath = "//span[contains(text(),'Standard Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement standardPharmacyTab;
 	
 	public void validatePreferredTab() {
@@ -1819,4 +1865,19 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(pharmacyName);
 		Assert.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
 	}
+	
+	public void validateBreadCrumb(String breadCrumb) {
+		Assert.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().trim().equals(breadCrumb));
+	}
+	
+	public void verifyBackToProfileBtnDisplayed() {
+		try {
+			if (backToProfileBtn.isDisplayed()) {
+				System.out.println("Back to profile button is displayed");
+			}
+		} catch (Exception e) {
+			Assert.fail("Back to profile button is not displayed");
+		}
+	}
+
 }

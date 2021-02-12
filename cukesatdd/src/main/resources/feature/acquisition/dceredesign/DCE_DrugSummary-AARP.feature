@@ -106,7 +106,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| drug1 | zipCode |
       |UHC| Lipitor  |   90210 |
 
-  @drugSummary_PlanToggle @F477157 @F472327 @F493728
+  @drugSummary_PlanToggle @F477157 @F472327 @F493728 @F504721
   Scenario Outline: Test to verify plan toggle functionality on Drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -123,7 +123,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on continue button in Zip Entry Page
     #Then load screen should be displayed in AARP
     And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     And user should be able to toggle between plan types
 
 		@drugSummary_PlanToggle_AARP
@@ -569,12 +569,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     @dCERedesign_ChangePharmacyModal_AARP
     Examples: 
       |site| drug1 | zipCode |message|zipCode1|zipCode2|
-      |AARP| Lipitor  |   90001 |There were no results found for the requested search.Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
+      |AARP| Lipitor  |   90001 |Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
 
 		@dCERedesign_ChangePharmacyModal_UHC
  		Examples: 
       |site| drug1 | zipCode |message|zipCode1|zipCode2|
-      |UHC| Lipitor  |   90001 |There were no results found for the requested search.Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
+      |UHC| Lipitor  |   90001 |Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|96799|78456|
 
       
       @dCERedesign_ChangePharmacyNoResults @F426569 @F489207 @decRelease
@@ -606,12 +606,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     @dCERedesign_ChangePharmacyNoResults_AARP
     Examples: 
       |site| drug1 | zipCode |message|zipCode1|
-      |AARP| Lipitor  |   90001 |Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy|78006|
+      |AARP| Lipitor  |   90001 |Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|78006|
       
       @dCERedesign_ChangePharmacyNoResults_UHC
        Examples: 
       |site| drug1 | zipCode |message|zipCode1|
-      |UHC| Lipitor  |   90001 |Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy|78006|
+      |UHC| Lipitor  |   90001 |Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|78006|
       
       
       @DCERedesign_DCE-VPPDetails_DrugSummary
@@ -682,4 +682,32 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       Examples: 
       |site| zipCode | plantype | county       | isMultutiCounty | drug1     |defaultPharmacy|
       |UHC|   10001 | MAPD     | Bexar County | yes             | Lipitor |Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)|
+      
+      
+      @drugSummary_DefaultPlanType @F504721
+  Scenario Outline: Test to verify plan toggle functionality on Drug summary page when no MAPD plans available
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    When the user clicks on Add drugs button
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    And clicks on Review drug cost button
+    Then user should be navigated to zipcode and plan year capture page for AEP
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+     And user clicks on continue button in Zip Entry Page
+    And user should be navigated to Review drug cost estimate page
+    And user should be able to see "Medicare Prescription Drug Plans" by default
+
+		@drugSummary_DefaultPlanType_AARP
+    Examples: 
+      |site| drug1 | zipCode |
+      |AARP| Lipitor  |   41311 |
+      
+      @drugSummary_DefaultPlanType_UHC
+      Examples: 
+      |site| drug1 | zipCode |
+      |UHC| Lipitor  |   41311 |
       

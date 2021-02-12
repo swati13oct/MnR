@@ -73,7 +73,7 @@ Background: Feature security flag needs to be true before ATDD script execution
 
     Examples: 
       | TID   | username  | password  | member              | routingNo | confirmRoutingNo | accountNo | confirmAccountNo | firstName | middleName | lastName |
-      | 15118 | qavgogine | qavgogine | q3_Payment_060      | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
+      | 15118 | qavgogine | qavgogine | PerfCCM_01903       | 123123123 |        123123123 |     12345 |            12345 | first     | second     | third    |
 
   #Test Case 21 - Any member will work - Member Auth - FED - Error message on submitting payment - One time EFT
   @regressionMember

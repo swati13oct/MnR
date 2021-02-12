@@ -395,18 +395,25 @@ public Connection createDataBaseConnection() {
 		return connection;
 		}	*/
 	
-	public Connection createDataBaseConnection() {
+/*	public Connection createDataBaseConnection() {
 		Connection connection = null;
 		try {
 			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
-			 if(MRScenario.environment.equalsIgnoreCase("stage")) 
+			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
 			 {
-			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL);
+			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT20);
 			 }
-			 else {
-		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_TEAM_URL);
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT19);
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT18); 
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_STAGE);
 				 } 
 			 if(connection!=null) {
+				 
 				 System.out.println("Connection successful");
 
 			 }
@@ -417,7 +424,7 @@ public Connection createDataBaseConnection() {
 		
 		return connection;
 			
-}
+}*/
 	
 /*	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
 		boolean flag = false;
@@ -472,7 +479,39 @@ public Connection createDataBaseConnection() {
 		return flag;
 	}
 */	
-	public boolean validate_GPS_for_Plantype(Map<String,String> map) {
+	
+	public Connection createDataBaseConnection() {
+		Connection connection = null;
+		try {
+			 Class.forName(CommonConstants.DB_ORACLE_DRIVER).newInstance();
+			 if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")) 
+			 {
+			 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT20);
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT19);
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+				 connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_UAT18); 
+			 }
+			if(MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme")){
+		     connection = DriverManager.getConnection(CommonConstants.CONNECTION_URL_STAGE);
+				 } 
+			 if(connection!=null) {
+				 
+				 System.out.println("Connection successful");
+
+			 }
+		}
+			 catch (Exception e) {
+			 e.printStackTrace();
+		}
+		
+		return connection;
+			
+}
+	
+	public boolean validate_GPS_for_Plantype(Map<String,String> map,Map<String,String> matched,Map<String,String> mismatched) {
 		boolean flag = false;
 		//try {
 			String confirmation_no = confirmationNumber.getText();
@@ -480,10 +519,11 @@ public Connection createDataBaseConnection() {
 			map.put("Confirmation No", confirmation_no);
 			Map<String,String> gpsdatamap = retrieve_GPS_data(confirmation_no);
 			Map <String, String> gpsmap = new HashMap<>();
+			Map<String,String> validateGPS = new HashMap<String, String>();
 			String defaultValue = "";
 			gpsmap = null_vals(gpsdatamap, defaultValue);
-			Map <String, String> matched = new HashMap<>();
-			Map <String, String> mismatched = new HashMap<>();
+		//	Map <String, String> matched = new HashMap<>();
+		//	Map <String, String> mismatched = new HashMap<>();
 			for (String keySource : map.keySet()) {
 				String strSource = map.get(keySource);
 				if (gpsmap.containsKey(keySource)) {
@@ -531,7 +571,8 @@ public Connection createDataBaseConnection() {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		return flag;
+    return flag;
+	//return Validation_Status;
 	}
 	
 
@@ -562,7 +603,6 @@ public Connection createDataBaseConnection() {
 	      })
 	      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	      return my_map;
-	   }
-
+	   }	
 }
 	

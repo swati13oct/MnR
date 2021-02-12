@@ -2,11 +2,14 @@ package acceptancetests.acquisition.dceredesign;
 
 import gherkin.formatter.model.DataTableRow;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
@@ -25,6 +29,7 @@ import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -87,9 +92,11 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		/*
-		 * if(null == druglist) { druglist = ""; }
-		 */
+		
+		if (druglist == null) {
+			druglist = "";
+		}
+		 
 		System.out.println("Setting Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
@@ -289,10 +296,17 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_TellUsAboutDrug);
 		BuildYourDrugList DCEbuildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		if (null == druglist) {
+		/*if (null == druglist) {
 			druglist = "";
 		}
-		druglist = druglist + "&" + drugName;
+		druglist = druglist + "&" + drugName;*/
+		
+		if(StringUtils.isEmpty(druglist)) {
+			druglist = drugName;
+		} else {
+			druglist = druglist + "&" + drugName;
+		}
+		
 		System.out.println("Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 	}
@@ -385,9 +399,18 @@ public class DCEStepDefinitionAARP {
 	public void clicks_on_Review_drug_cost_button_Detail_Page() {
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		buildDrugList.clickReviewDrugCostBtn();
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = buildDrugList.navigateToDrugDetailsPage();
+		
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+	
+	@When("^clicks on Review drug cost button to land on drug summary page$")
+	public void clicks_on_Review_drug_cost_for_drug_summary_Page() {
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugSummaryPage drugSummaryPage = buildDrugList.navigateToDrugSummaryPage();
+		
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@Then("^load screen should be displayed$")
@@ -412,12 +435,16 @@ public class DCEStepDefinitionAARP {
 		TellUsAboutDrug tellUsAboutDrug = buildDrugList.SearchaddDrugs(drugName);
 		buildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		/*
-		 * if(druglist.isEmpty()) { druglist = ""; }
-		 */
+		
+		 
 		System.out.println("Drugs List : " + druglist);
 
-		druglist = druglist + "&" + drugName;
+//		if (druglist.isEmpty()) {
+		if(StringUtils.isEmpty(druglist)) {
+			druglist = drugName;
+		} else {
+			druglist = druglist + "&" + drugName;
+		}
 		System.out.println("Drugs List after Drug " + drugName + " , Added : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
@@ -533,6 +560,14 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = DCEbuildDrugList.navigateToZipEntryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+	}
+
+	@Then("^the user clicks on Review Drug Costs button to Land on Drug Summary Page$")
+	public void the_user_clicks_on_Review_Drug_Costs_button_to_Land_on_Drug_Summary_Page() throws Throwable {
+		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		DrugSummaryPage drugSummaryPage = DCEbuildDrugList.navigateToDrugSummay();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
 	@When("^adds drugs in drug list page$")
@@ -672,7 +707,16 @@ public class DCEStepDefinitionAARP {
 		} else
 			Assert.fail("VPP Plan Details not loaded");
 	}
-
+	
+	@Then("^the user clicks view plan details button for first plan from Drug Summary Page$")
+	public void the_user_clicks_plan_details_button_on_Drug_Details_Page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		
+		PlanDetailsPage plandetailspage = drugSummaryPage.clickViewPlanDetails();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
+		
+	}
 	@Then("^the user clicks on return to compare link on build drug list page to returns to plan compare$")
 	public void the_user_Clicks_button_to_VPP_Plan_Compare_Page_from_Drug_details_Page() throws Throwable {
 		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario()
@@ -1480,7 +1524,28 @@ public class DCEStepDefinitionAARP {
 		buildDrugListPage.deleteDrug(DeleteDrug);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		System.out.println("Drug List before Delete Drug : " + druglist);
-		druglist = druglist.replace("&" + DeleteDrug, "");
+//		druglist = druglist.replace("&" + DeleteDrug, "");
+		
+		//Get the current drug list into an Arraylist
+		try {
+			List<String> drugListBeforeRemoving = new ArrayList<String>(Arrays.asList(druglist.split("&")));
+
+			//Update the arraylist by removing the deleted drug
+			if(drugListBeforeRemoving.contains(DeleteDrug)) {
+				drugListBeforeRemoving.remove(DeleteDrug);
+			}
+			//Get the updated list of drugs in druglist variable
+			druglist = String.join("&", drugListBeforeRemoving);
+		}catch(UnsupportedOperationException e) {
+			System.out.println("Initiliaze the List correctly !");
+			
+			/**When using Arrays.asList, arraylist has to be initialized as
+			List<String> listName = new ArrayList<String>(Arrays.asList(String.split("delimiter")));
+			*/
+		}
+		
+		
+		
 		System.out.println("Updated Drugs List after Delete Drug : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
@@ -2297,6 +2362,12 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateLISBuyDown_CopaySection_LISAlert();
 	}
 
+	@Then("^the user validates correct Copay section view and LIS message for LIS Non Buydown Plan on DCE details Page$")
+	public void the_user_validates_correct_Copay_section_view_and_LIS_message_for_LIS_NonBuydown_Plan_on_DCE_details_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateLISonly_CopaySection_LISAlert();
+	}
+
 	@Then("^the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page$")
 	public void the_user_validates_Monthly_Costs_are_not_displayed_for_LIS_Buydown_plan_on_DCE_details_Page()
 			throws Throwable {
@@ -2442,4 +2513,38 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
 		drugDetailsPage.validateStandardTab();
 	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" on get started page$")
+	public void user_verify_breadcrumb_on_get_started_page(String breadCrumb) {
+		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		DCEgetStarted.validateBreadCrumb(breadCrumb);
+	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" on drug summary page$")
+	public void user_verify_breadcrumb_on_drug_summary_page(String breadCrumb) {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validateBreadCrumb(breadCrumb);
+	}
+
+	@Then("^user verify breadcrumb \"([^\"]*)\" on drug details page$")
+	public void user_verify_breadcrumb_on_drug_details_page(String breadCrumb) {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateBreadCrumb(breadCrumb);
+	}
+
+	@Then("^user should be able to see Back to profile button on details page$")
+	public void user_should_be_able_to_see_Back_to_profile_button_on_details_page() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.verifyBackToProfileBtnDisplayed();
+	}
+
+	@Then("^user click on breadcrumb \"([^\"]*)\" on get started page$")
+	public void user_click_breadcrumb_on_get_started_page(String breadCrumb) {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickReturnToPharamcySearch();
+
+	}
+
 }

@@ -5,6 +5,7 @@ package pages.acquisition.planRecommendationEngine;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,12 +20,15 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -87,6 +91,29 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	@FindBy(css = "#plan-list-4 button#editMyAnswers")
 	private WebElement snpEditResponseButton;
+	
+	//Save Results elements
+	
+	@FindBy(css = "#plan-list-1 button#updateSaveRecommendationBtn")
+	private WebElement mapdSaveResultsButton;
+
+	@FindBy(css = "#plan-list-3 button#updateSaveRecommendationBtn")
+	private WebElement pdpSaveResultsButton;
+
+	@FindBy(css = "#plan-list-4 button#updateSaveRecommendationBtn")
+	private WebElement snpSaveResultsButton;
+	
+	@FindBy(css = "#saveResultConfirmationTitle")
+	private WebElement saveResultsTitle;
+	
+	@FindBy(css = "#saveResultPopupClose")
+	private WebElement saveResultsPopupClose;
+	
+	@FindBy(css = "button#keepShoppingBtn")
+	private WebElement KeepShoppingPlansButton;
+	
+	@FindBy(css = "button#viewPlanBtn")
+	private WebElement ViewProfileButton;
 
 	// Edit Responses page Elements
 
@@ -117,6 +144,11 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	@FindBy(css = "#modal button[class*='primary']")
 	private WebElement locationModalConfirm;
 
+	// Results loading page Elements
+	
+	@FindBy(css = ".loading-container .container>div>div>div:nth-of-type(2)>img")
+	private WebElement svgAnimation;
+	
 	// Variables
 
 	public HashMap<String, String> inputValues;
@@ -144,6 +176,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		checkContent("drugs");
 		checkContent("additional");
 		checkContent("cost");
+		checkContent("priorities");
 		verifyClickEditButton("location", false);
 		verifyClickEditButton("coverage", false);
 		verifyClickEditButton("special", false);
@@ -152,6 +185,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		verifyClickEditButton("drugs", false);
 		verifyClickEditButton("additional", false);
 		verifyClickEditButton("cost", false);
+		verifyClickEditButton("priorities", false);
 		checkDrugDocInfo("drugs", false);
 		checkDrugDocInfo("doctor", false);
 		editCancel(inputValues.get("Plan Type").toLowerCase());
@@ -159,20 +193,63 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	}
 
 	public void navigateEditResponsePage(String flow) {
+		//E2E : Added additional wait for Safari browser alongwith check for svg animation icon
+		validate(svgAnimation, 30);
+		waitForPageLoadSafari();
+		
+		/** E2E : Since the edit response button is not instantly visible and scripts fail
+		  	Using fluent wait to get the active plan type tab name (only MAPD and SNP)
+		  	and wait until the respective plan type edit response button is click able.
+		*/
+		By recommendedPlanTypeName = By.xpath("//div[contains(@class,'overview-tabs')]/div[contains(@class,'active')]//span[@class='title']//small");
+		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+				.withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofMillis(100))
+				.ignoring(NoSuchElementException.class)
+				.ignoring(TimeoutException.class);
+		String activeTabName = wait.until(ExpectedConditions.visibilityOfElementLocated(recommendedPlanTypeName)).getText();
+		System.out.println("Active plan type tab - " +activeTabName);
 		if (flow.equalsIgnoreCase("pdp")) {
-//			pdpEditResponseButton.click();				//E2E: .click does not work in Safari
-			jsClickNew(pdpEditResponseButton);
+			validate(pdpEditResponseButton, 10);
+			waitTillElementClickableInTime(pdpEditResponseButton, 15);
+			pdpEditResponseButton.click();
 		} else {
-			if (validate(mapdEditResponseButton, 10))
-//				mapdEditResponseButton.click();
-				jsClickNew(mapdEditResponseButton);
-			else
-//				snpEditResponseButton.click();
-				jsClickNew(snpEditResponseButton);
+			if(activeTabName.contains("Medicare Special Needs Plans")) {
+				validate(snpEditResponseButton, 10);
+				waitTillElementClickableInTime(snpEditResponseButton, 15);
+				snpEditResponseButton.click();
+			} else {
+				validate(mapdEditResponseButton, 10);
+				waitTillElementClickableInTime(mapdEditResponseButton, 15);
+				mapdEditResponseButton.click();
+			}
+			
+			
+			/*if (validate(mapdEditResponseButton, 10)) {
+//				waitTillElementClickableInTime(mapdEditResponseButton, 15);
+				mapdEditResponseButton.click();
+			} else {
+				waitTillElementClickableInTime(snpEditResponseButton, 15);
+				snpEditResponseButton.click();
+			}*/
 		}
-		waitForPageLoadSafari();						//E2E: additional wait for page to load in Safari browser only
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
+	}
+	
+	public void navigateSaveResultsPage(String flow) {
+		if (flow.equalsIgnoreCase("pdp")) {
+			pdpSaveResultsButton.click();
+		} else {
+			if (validate(mapdSaveResultsButton, 10))
+				mapdSaveResultsButton.click();
+			else
+				snpSaveResultsButton.click();
+		}
+		validate(saveResultsTitle);
+		validate(saveResultsPopupClose, 30);
+		validate(KeepShoppingPlansButton, 30);
+		validate(ViewProfileButton, 30);
 	}
 
 	public void checkContent(String section) {
@@ -225,8 +302,9 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 			// Works for all Yes or all No
 		} else if (section.equalsIgnoreCase("cost")) {
 			UIValue = inputValues.get("Preference Option");
+		} else if (section.equalsIgnoreCase("priorities")) {
+			UIValue = inputValues.get("Priorities");
 		}
-
 		return UIValue.toLowerCase();
 	}
 
@@ -243,6 +321,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
+		waitForPageLoadSafari();
 		for (WebElement elem : allQuestionSection) {
 			String tempTxt = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
 			System.out.println("tempTxt : " + tempTxt);
@@ -251,16 +330,12 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 				if (click) {// Edit button Click
 					if (section.equalsIgnoreCase("location")) {
 						boolean lookup = validate(changeDocLink, 5);
-//						elem.findElement(By.cssSelector("button")).click();
-						jsClickNew(elem.findElement(By.cssSelector("button")));
+						elem.findElement(By.cssSelector("button")).click();
 						if (lookup)
-//							locationModalConfirm.click();
-							jsClickNew(locationModalConfirm);
+							locationModalConfirm.click();
 					} else {
-//						elem.findElement(By.cssSelector("button")).click();
-						jsClickNew(elem.findElement(By.cssSelector("button")));
+						elem.findElement(By.cssSelector("button")).click();
 					}
-					waitForPageLoadSafari();			//E2E: additional wait for page to load in Safari browser only
 				}
 				break;
 			}
@@ -270,16 +345,16 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	public void returnVPP(String button) {
 		if (button.toLowerCase().contains("update"))
-//			viewUpdateButton.click();
-			jsClickNew(viewUpdateButton);
+			viewUpdateButton.click();
 		else
-//			returnToPlanLink.click();
-			jsClickNew(returnToPlanLink);
+			returnToPlanLink.click();
+		waitForPageLoadSafari();
 	}
 
 	public void checkDrugDocInfo(String section, boolean modifiedValue) {
 		String UIInfo = getUISectionValue(section);
 		String givenInfo = null;
+		waitForPageLoadSafari();
 		if (section.contains("drugs")) {
 			if (modifiedValue)
 				givenInfo = inputValues.get("Drug Details").split(",")[2].toLowerCase();
@@ -305,6 +380,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		mapd.put(5, "drugs");
 		mapd.put(6, "additional");
 		mapd.put(7, "cost");
+		mapd.put(8, "priorities");
 
 		ma = new HashMap<Integer, String>();
 		ma.put(0, "location");
@@ -314,6 +390,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		ma.put(4, "doctor");
 		ma.put(5, "additional");
 		ma.put(6, "cost");
+		ma.put(7, "priorities");
 
 		pdp = new HashMap<Integer, String>();
 		pdp.put(0, "location");
@@ -354,7 +431,6 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	}
 
-	
 	public void editCancel(String flow) {
 		System.out.println("Flow : " + flow);
 		int randomEdit = chooseRandomQuesNum(flow);
@@ -366,12 +442,10 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		String progressText = progressInfo.getText().toLowerCase();
 		Assert.assertTrue(progressText.contains(randomSection) && progressText.contains("100%"),
 				"Progres Bar does not have required Info");
-//		cancelButton.click();
-		jsClickNew(cancelButton);
+		cancelButton.click();
 		Assert.assertTrue(validate(returnToPlanLink, 10), "Invalid cancel action");
 	}
 
-	
 	public void editUserResponse(HashMap<String, String> userInput) {
 		System.out.println("Edit User Response: ");
 		inputValues = userInput;
@@ -429,49 +503,48 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		} else if (section.equalsIgnoreCase("special")) {
 			PlanRecommendationEngineSpecialNeedsPage snp = new PlanRecommendationEngineSpecialNeedsPage(driver);
 			snp.edit_specialneeds(inputValues.get("SNP Options"));
-			waitForPageLoadSafari();
 			jsClickNew(saveBtn);
 			checkContent("special");
 		} else if (section.equalsIgnoreCase("travel")) {
 			PlanRecommendationEngineTravelPage travel = new PlanRecommendationEngineTravelPage(driver);
 			travel.edit_travel(inputValues.get("Travel Options"));
-			waitForPageLoadSafari();
 			jsClickNew(saveBtn);
 			checkContent("travel");
 		} else if (section.equalsIgnoreCase("additional")) {
 			PlanRecommendationEngineAdditionalServicesPage add = new PlanRecommendationEngineAdditionalServicesPage(
 					driver);
 			add.edit_additional(inputValues.get("Additional Option"));
-			waitForPageLoadSafari();
 			jsClickNew(saveBtn);
 			checkContent("additional");
 		} else if (section.equalsIgnoreCase("cost")) {
 			PlanRecommendationEngineCostPreferencesPage cost = new PlanRecommendationEngineCostPreferencesPage(driver);
 			cost.edit_cost(inputValues.get("Preference Option"));
-			waitForPageLoadSafari();
 			jsClickNew(saveBtn);
 			checkContent("cost");
 		} else if (section.equalsIgnoreCase("doctor")) {
 			PlanRecommendationEngineDoctorsPage doc = new PlanRecommendationEngineDoctorsPage(driver);
 			doc.edit_doctor(inputValues.get("Doctors"), inputValues.get("Doctors Search Text"),
 					inputValues.get("Multi Doctor"));
-			waitForPageLoadSafari();
-			jsClickNew(saveBtn);
+//			jsClickNew(saveBtn);
 			checkContent("doctor");
 			if (inputValues.get("Doctors").contains(("look"))) {
 				checkDrugDocInfo("doctor", false);
 				docEdit = true;
 			}
+		} else if (section.equalsIgnoreCase("priorities")) {
+			PlanRecommendationEnginePrioritiesPage priority = new PlanRecommendationEnginePrioritiesPage(driver);
+			priority.prioritiesFunctional(inputValues.get("Priority Option"), inputValues.get("Priorities"));
+			jsClickNew(saveBtn);
+			checkContent("priorities");
 		}
 	}
-	
+
 	public void addDoctorEditResponse(HashMap<String, String> userInput) {
 		System.out.println("Add Provider: ");
 		inputValues = userInput;
 		pageloadcomplete();
 		navigateEditResponsePage(inputValues.get("Plan Type"));
-//		changeDocLink.click();
-		jsClickNew(changeDocLink);
+		changeDocLink.click();
 		PlanRecommendationEngineDoctorsPage doc = new PlanRecommendationEngineDoctorsPage(driver);
 		doc.addProviderEdit(inputValues.get("Doctors Search Text"));
 		checkContent("doctor");
@@ -484,19 +557,28 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		inputValues = userInput;
 		verifyClickEditButton("coverage", true);
 		validate(progressInfo, 10);
-		PlanRecommendationEngineCoverageOptionPage coverage =  new PlanRecommendationEngineCoverageOptionPage(driver);
-		coverage.chooseCoverageOption(inputValues.get("Plan Type"));
+		PlanRecommendationEngineCoverageOptionPage coverage = new PlanRecommendationEngineCoverageOptionPage(driver);
+		coverage.chooseCoverageOption(inputValues.get("Plan Type").toUpperCase().replace("PDPTOMAPD", "MAPD"));
 		jsClickNew(saveBtn);
 	}
-	
+
 	public void checkCoveragevalue(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		checkContent("coverage");
 	}
-	
+
 	public void addDrugs(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		editValue("drugs");
+	}
+	
+	public void validateSaveResults(String plantype) {
+		System.out.println("Validating Save Results : ");
+		pageloadcomplete();
+		navigateSaveResultsPage(plantype);
+		jsClickNew(ViewProfileButton);
+		threadsleep(5000);
+//		savedrecommendationVP();
 	}
 
 }

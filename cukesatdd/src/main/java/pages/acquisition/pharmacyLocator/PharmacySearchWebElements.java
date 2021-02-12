@@ -16,8 +16,8 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//input[@id='zipcodeTxt']")
 	protected WebElement zipcodeField;
 
-	@FindBy(xpath="//button[@id='zipcode-button']")
-	protected WebElement searchbtn;;
+	@FindBy(xpath="//*[@id='zipcode-wrapper']//button[@class='uhc-button']")
+	protected WebElement searchbtn;
 
 	@FindBy(id = "selectmultycounty_box")
 	protected WebElement countyPopOut;
@@ -118,7 +118,8 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//h1[@id='pharmacylocatorheader_id']")
 	protected WebElement pharmacylocatorheader;
 
-	@FindBy(className = "loading-block")
+//	@FindBy(className = "loading-block")
+	@FindBy(className = "uhc-spinner")
 	protected List<WebElement> loadingBlock;
 
 	@FindBy(xpath = "//img[@alt='Standard Network']")
@@ -226,10 +227,12 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//div[@id='collapseInfo' and @aria-hidden='false']")
 	protected WebElement moreInfoText_show;
 
-	@FindBy(className = "loading-block")
+	//@FindBy(className = "loading-block")
+	@FindBy(className = "uhc-spinner")
 	protected WebElement loadingImage;
 	
-	protected By loadingSpinner = By.className("loading-block");
+//	protected By loadingSpinner = By.className("loading-block");
+	protected By loadingSpinner = By.className("uhc-spinner");
 
 	@FindBy(xpath="//a[@id='filter_toggle_id']")
 	protected WebElement moveAwayFromTooltip;
@@ -403,5 +406,11 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 	}
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
+	public WebElement returntoPharmacySearch;
+	
+	public void clickReturnToPharamcySearch() {
+		validateNew(returntoPharmacySearch);
+		returntoPharmacySearch.click();
 }
-
+}

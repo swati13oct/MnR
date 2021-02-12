@@ -112,7 +112,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                               | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       #| qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
       | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                           | YES                | YES           |            |
-      | qavgogine | qavgogine | API@MEMBERDD.COM      | None          | current  |          10001 | hearing,vision,travel,lowpremium,drug,doctor | YES                | YES           |            |
+      | qavgogine | qavgogine | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,travel,lowpremium,drug,doctor | YES                | YES           |            |
 
   @ARE @deleteaddplans @F487396
   Scenario Outline: - <Email> To Verify agent login and validate deleted plans reordering in ARE

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -119,19 +120,24 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'NewCustomRTE')]//span[contains(@class,'heading-3')]")
 	List<WebElement> findurPlanOptions;
 	
-	@FindBy(xpath = "//a[contains(text(),'Compare')]")
+	//@FindBy(xpath = "//a[contains(text(),'Compare')]")
+	@FindBy(xpath="//a[contains(@href,'/shop/compare')]")
 	private WebElement comparePlanBtn;
 
-	@FindBy(xpath = "//a[contains(text(),'Learn')]")
+	//@FindBy(xpath = "//a[contains(text(),'Learn')]")
+	@FindBy(xpath="//a[contains(@href,'/shop/estimate')]")
 	private WebElement LearnEstimateCosts;
 
-	@FindBy(xpath = "//a[contains(text(),'How To')]")
+	//@FindBy(xpath = "//a[contains(text(),'How To')]")
+	@FindBy(xpath = "//a[contains(@href,'/shop/switch')]")
 	private WebElement howToSwitchPlans;
 
-	@FindBy(xpath = "//a[contains(text(),'Learn More')]")
+	//@FindBy(xpath = "//a[contains(text(),'Learn More')]")
+	@FindBy(xpath = "//a[contains(@href,'/safe-shopping')]")
 	private WebElement learnSafeShopping;
 
-	@FindBy(xpath = "//a[contains(text(),'Get Resources')]")
+	//@FindBy(xpath = "//a[contains(text(),'Get Resources')]")
+	@FindBy(xpath = "(//a[contains(@href,'/resources')])[2]")
 	private WebElement getMemberResources;
 
 	@FindBy(xpath = "//span[@class='heading-1' and contains(text(),'Personalize Your Results')]")
@@ -146,6 +152,9 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Locate a Pharmacy')]")
 	private WebElement locatePharmacyBtn;
 
+	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
+	private WebElement FindAnAgent; 
+	
 	public ShopPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -389,8 +398,9 @@ public class ShopPage extends UhcDriver {
 	public void memberResources() {
 		validateNew(getMemberResources);
 		jsClickNew(getMemberResources);
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
-		if (!driver.getCurrentUrl().contains("resources.html#/NEM"))
+		if (!driver.getCurrentUrl().contains("resources.html"))
 			Assert.fail("Get Member Resources page did not load properly");
 	}
 
@@ -427,6 +437,9 @@ public class ShopPage extends UhcDriver {
 				Thread.sleep(2000);
 			}
 		}
+		
+		driver.close();
+		driver.switchTo().window(parentWindow);
 
 	}
 
@@ -457,5 +470,64 @@ public class ShopPage extends UhcDriver {
 			validateNew(errorMessage);
 			System.out.println("Error message validated! :" + errorMessage.getText());
 		}
+	}
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void clickonFindanAgentlinkfromShop(String ExpectedUHCAgentURL ) {
+		
+		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
+		validateNew(FindAnAgent);
+		String parentWindow = driver.getWindowHandle();
+//		FindAnAgent.click();
+		jsClickNew(FindAnAgent);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while(itr.hasNext()) {
+			String window = itr.next();
+			if(!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+		
+		/*CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentUHCAgentURL = driver.getCurrentUrl();
+		System.out.println("myuhcagent Page is displayed : "+CurrentUHCAgentURL);
+		System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
+		
+		if(ExpectedUHCAgentURL.equalsIgnoreCase(CurrentUHCAgentURL)) {
+			System.out.println("****************myuhcagent Page is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************myuhcagent Page is not loaded ***************");
+		}*/
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentUHCAgentURL = driver.getCurrentUrl();
+		String ActualCurrentUHCAgentURL=CurrentUHCAgentURL.substring(0, 27).trim();
+		System.out.println("myuhcagent Page is displayed : "+ActualCurrentUHCAgentURL);
+		System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
+		System.out.println("Actual myuhcagent URL: "+ActualCurrentUHCAgentURL);
+
+		if(ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+			System.out.println("****************myuhcagent Page is displayed  ***************");
+
+			Assert.assertTrue(true);
+		}
+		else {
+			Assert.fail("****************myuhcagent Page is not loaded ***************");
+		}
+		
+		driver.close();
+		driver.switchTo().window(parentWindow);
+	
 	}
 }

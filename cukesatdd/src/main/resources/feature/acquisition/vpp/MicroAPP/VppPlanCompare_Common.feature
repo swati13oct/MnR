@@ -160,12 +160,12 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @VppPlanCompareCommon_AARP01
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |
-      | 00010 | AARP |   90210 | NO            | Los Angeles County | MAPD     |     1 | future   |
+      | 00010 | AARP |   90210 | NO            | Los Angeles County | MAPD     |     2 | future   |
 
     @VppPlanCompareCommon_UHC01
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |
-      | 00010 | UHC  |   90210 | NO            | Los Angeles County | MAPD     |     1 | future   |
+      | 00010 | UHC  |   90210 | NO            | Los Angeles County | MAPD     |     2 | future   |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add provider from VPP and Edit provider from plan compare page for <site> site
     Given the user is on medicare acquisition site landing page

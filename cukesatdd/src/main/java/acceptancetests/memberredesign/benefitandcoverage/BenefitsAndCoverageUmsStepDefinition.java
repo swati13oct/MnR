@@ -803,10 +803,11 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	}
 
 	/** 
+	 * @throws InterruptedException 
 	 * @toDo : Validates the Locate a Pharmacy button 
 	 */
 	@And("^the user validates Locate a Pharmacy button should be visible$")
-	public void user_validate_locatepharmacybutton(DataTable memberAttributes) {
+	public void user_validate_locatepharmacybutton(DataTable memberAttributes) throws InterruptedException {
 		System.out.println("***the user validates Locate a Pharmacy button should be visible***");
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
@@ -993,10 +994,10 @@ public class BenefitsAndCoverageUmsStepDefinition {
 		}	
 	}
 	
-	@And("the NON-LIS PDP group user should see drug cost table for Lis members")
+	@And("the NON-LIS PDP group user should see drug cost table for non Lis members")
 	public void user_validate_drugcosttablePDP_NONLIS_Group() {
 		String dateStr=(String)getLoginScenario().getBean(BenefitsAndCoverageCommonConstants.TEST_DATE_STR);
-		System.out.println("***the NON-LIS PDP group user should see drug cost table for Lis members***");
+		System.out.println("***the NON-LIS PDP group user should see drug cost table for non Lis members***");
 		BenefitsAndCoveragePage benefitsCoveragePage = (BenefitsAndCoveragePage) getLoginScenario()
 				.getBean(PageConstantsMnR.BENEFITS_AND_COVERAGE_PAGE);
 		
@@ -1100,7 +1101,7 @@ public class BenefitsAndCoverageUmsStepDefinition {
 	/** 
 	 * @toDo : Validates the  Plan overview section for  a Non lis member Ind Member
 	 */
-	@And("the user validates Ind plan overview")
+	@And("^the user validates Ind plan overview$")
 	public void user_validate_IndplanOverviewsection(DataTable givenAttributes) {
 		System.out.println("***the user validates Ind plan overview***");
 		List<DataTableRow> memberAttributesRow = givenAttributes

@@ -682,15 +682,15 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then no results message should be displayed from drug details
       | NoResultsMessage | <message> |
 
-    @dCERedesign_ChangePharmacyDetailsNoResults_AARP111 @drugDetailschangePharmacyAARP
+    @dCERedesign_ChangePharmacyDetailsNoResults_AARP @drugDetailschangePharmacyAARP
     Examples: 
-      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | message                                                                                                    | planname                                           |
-      | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 |    78456 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planname                                           |
+      | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
     @dCERedesign_ChangePharmacyDetailsNoResults_UHC @drugDetailschangePharmacyAARP
     Examples: 
-      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | message                                                                                                    | planname                                           |
-      | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 |    78456 | Prescription drug home delivery is available through OptumRx. Learn more about OptumRx Mail Order Pharmacy | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planname                                           |
+      | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @dCERedesign_PlanSave_AARP @F476042 @decRelease
   Scenario Outline: Test to verify unauthenticated user save the plan on drug details page and see the saved plan on guest profile

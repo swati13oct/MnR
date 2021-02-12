@@ -69,7 +69,7 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.verifyChatpopup();
-		aquisitionhomepage.validateProActiveChatpopupconnect();
+	//	aquisitionhomepage.validateProActiveChatpopupconnect();
 		aquisitionhomepage.validateChatpopupconnect();	
 		
 	}
@@ -137,4 +137,25 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validatevisitorprofile();
 	}
+	
+	@Then("^Then the user validates whether call icon on a page$")
+	public void the_user_validates_whether_callicon_page(DataTable givenAttributes) throws InterruptedException {
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+					.get(0), memberAttributesRow.get(i).getCells().get(1));
+		}
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	String TFNXpath = memberAttributesMap.get("TFN Xpath");
+	String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		aquisitionhomepage.validateCallSam();
+		aquisitionhomepage.validateCallpopuponapage(TFNXpath,ExpecetdTFNNo);
+	
+	}
+
 }
