@@ -3538,7 +3538,7 @@ public class VppCommonStepDefinition {
 								  planDetailsPage = new PlanDetailsPage(wd);
 							 }
 							 
-							 ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
+							// ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
 							 int rowIndexOfDocCode = 0; String planId= "";
 							 
 							 if(currentColName.equalsIgnoreCase("plan id"))
@@ -3548,7 +3548,7 @@ public class VppCommonStepDefinition {
 							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
 							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName); //method returns true/false value along with the document code in hashmap
 							   
-								  	if (resultMap.containsKey(true)) {
+							  /*	if (resultMap.containsKey(true)) {// if the validatePDF returns True
 								  		
 									  		//loops through all of the rows in the DOCLog excel file for the column that contains the component code and checks if the code exists. if it does, then it returns the index of that row 
 									  		for(int rowIndexDocLog=2; rowIndexDocLog<=lastRowDocLog; rowIndexDocLog++) {
@@ -3564,29 +3564,40 @@ public class VppCommonStepDefinition {
 											  					flag = true;
 											  					newCell.setCellStyle(stylePassed);
 																newCell.setCellValue(resultMap.get(true));
-													  		 }else
+													  		 }else// else for plan id check
 													  			 failedMessage = "Failed to match the component code with the plan ID";
-												  	}else
+											  					newCell.setCellStyle(styleFailed);
+											  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+												  	}else //else for language check in the DOclog
 												  		failedMessage =  "Failed to match the component code with the Language";
-									  		 }else
+										  				newCell.setCellStyle(styleFailed);
+										  				newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+									  		 }else { //else for document code check in the doclog
 									  			 failedMessage = "Failed to match the component code with the document type";
-								  	}else {
-								  			newCell.setCellStyle(styleFailed);
-											newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
-								  	}
+									  		 	newCell.setCellStyle(styleFailed);
+									  		 	newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+									  		 }
+								  	} else { //else for if the valiatePDF method returns false
+								  		newCell.setCellStyle(styleFailed);
+								  		newCell.setCellValue(resultMap.get(false));
+								  	}*/
+							  if (resultMap.containsKey(true)) {
+									newCell.setCellStyle(stylePassed);
+									newCell.setCellValue(resultMap.get(true));
 								} else {
 									newCell.setCellStyle(styleFailed);
 									newCell.setCellValue(resultMap.get(false));
 								
 								}
-							 }else {
+							 }else { //else for if the columns are the first few columns where validation is not needed. e.x link, plan name, etc.
 								 newCell.setCellValue(cell.getStringCellValue());
 							 }
 						 }
 						 
 						 cellIndex++;
 	                
-	            }
+	                }// while loop end
+	            }// for loop end
 			File OutputFile = new File(OutputFilePath);
 			FileOutputStream outputStream = new FileOutputStream(OutputFile);
 			ResultWorkbook.write(outputStream);
