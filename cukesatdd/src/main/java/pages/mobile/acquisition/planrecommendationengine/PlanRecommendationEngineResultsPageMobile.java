@@ -315,13 +315,13 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Continue')]")
 	private WebElement continueBtn;
 
-	@FindBy(css = "input#cta-zipcode")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	private WebElement homePageZiptxt;
 
 	@FindBy(css = "#ghn_lnk_1>span")
 	private WebElement headerNavigationBarHomeTab;
 
-	@FindBy(css = "button#zipcodebtn")
+	@FindBy(className = "zip-button")
 	private WebElement homePageFindPlans;
 
 	// Zipcode Page
@@ -731,19 +731,17 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> drug, ArrayList<String> drugListVPP) {
-		pageloadcomplete();
-		if(drug.size()==drugListVPP.size() && count==drug.size()) {
-			String druglist =drug.toString().toUpperCase();
-			String vppdruglist =drugListVPP.toString();
-			if(druglist.contains(vppdruglist)) {
+
+		if (drug.size() == drugListVPP.size() && count == drug.size()) {
+			String druglist = drug.toString();
+			String vppdruglist = drugListVPP.toString();
+			if (druglist.equalsIgnoreCase(vppdruglist)) {
 				System.out.println("Drug and Modal Result's Content matched");
-			}
-			else {
+			} else {
 				System.out.println("Drug and Modal Result's Content mismatch");
 				Assert.assertTrue(false);
 			}
-		}
-		else {
+		} else {
 			System.out.println("Drug and Modal Results Count mismatch");
 			Assert.assertTrue(false);
 		}

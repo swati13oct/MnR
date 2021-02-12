@@ -480,7 +480,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
     Examples: 
       | TID       | zipcode | isMultutiCounty | county        | plantype | planName                              | planyear |
-      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS) | current  |
+      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO) | current  |
       #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
       #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
       #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |

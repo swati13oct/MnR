@@ -2776,7 +2776,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(learnAboutMedicareLink);
-		validateNew(viewAllDisclaimerInformationLink, 10);
+		validateNew(viewAllDisclaimerInformationLink, 20);
 
 	}
 

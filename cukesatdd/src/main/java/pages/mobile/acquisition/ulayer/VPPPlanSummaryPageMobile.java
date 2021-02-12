@@ -4268,16 +4268,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * @throws InterruptedException
 	 */
 	public void RockyLearnMoreButtonandValidate(String planName) throws InterruptedException {
-
 		WebElement learnMore = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		Thread.sleep(6000);
 		learnMore = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 				+ "')]/ancestor::div/ancestor::*[contains(@class,'module-plan-overview')]//a[contains(@class,'learn-more-link')]"));
-
 		if (learnMore != null) {
 			validateNew(learnMore);
-			//jsClickNew(learnMore);
 			switchToNewTabNew(learnMore);
 		}
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
@@ -4286,7 +4283,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Validated Rocky Mountian Logo");
 
 		}
-
 	}
 
 	public void peopleLearnMoreButtonandValidate(String planName) throws InterruptedException {

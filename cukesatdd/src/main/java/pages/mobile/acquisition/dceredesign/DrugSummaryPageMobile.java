@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class DrugSummaryPageMobile extends UhcDriver {
 
@@ -316,44 +317,42 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	public DrugDetailsPageMobile clickViewDrugDetailsForPlan(String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
-			selectFromDropDownByValue(ToggleDropDown, "MAPD");
-			// validateNew(mapdPlanToggle);
-			// jsClickNew(mapdPlanToggle);
+			pageloadcomplete();
+			validateNew(mapdPlanToggle);
+			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(
+			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
 							+ "')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for MAPD Plan : " + planName);
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for MAPD Plan : " + planName);
 
 		} else if (plantype.equalsIgnoreCase("PDP")) {
-			selectFromDropDownByValue(ToggleDropDown, "PDP");
-			// validateNew(pdpPlanToggle);
-			// jsClickNew(pdpPlanToggle);
+			validateNew(pdpPlanToggle);
+			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(
+			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
 							+ "')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for PDP Plan : " + planName);
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for PDP Plan : " + planName);
 
 		} else {
-			selectFromDropDownByValue(ToggleDropDown, "SNP");
-			// validateNew(snpPlanToggle);
-			// jsClickNew(snpPlanToggle);
+			validateNew(snpPlanToggle);
+			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
-			WebElement DrugDetailsLinkforPlan = driver.findElement(
+			WebElement DrugCostsLinkforPlan = driver.findElement(
 					By.xpath("//button[contains(@aria-label, 'View Drug Costs') and contains(@aria-label, '" + planName
 							+ "')]"));
-			validateNew(DrugDetailsLinkforPlan);
-			jsClickNew(DrugDetailsLinkforPlan);
-			System.out.println("View Drug Details Clicked for SNP Plan : " + planName);
-
+			validateNew(DrugCostsLinkforPlan);
+			jsClickNew(DrugCostsLinkforPlan);
+			System.out.println("View Drug Costs Clicked for SNP Plan : " + planName);
 		}
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
+		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
 			return new DrugDetailsPageMobile(driver);
 		} else {
 			Assert.fail("Drug Details Page is NOT Displayed");

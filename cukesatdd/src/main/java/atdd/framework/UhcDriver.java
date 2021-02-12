@@ -216,7 +216,7 @@ public abstract class UhcDriver {
 			// element.sendKeys(Keys.BACK_SPACE);
 
 		} else {
-		    jsClickNew(element);
+			jsClickNew(element);
 			element.clear();
 			element.sendKeys(message);
 		}
@@ -572,7 +572,7 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		Element.click();
+		jsClickNew(Element);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
