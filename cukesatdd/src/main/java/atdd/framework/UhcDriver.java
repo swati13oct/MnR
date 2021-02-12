@@ -216,7 +216,7 @@ public abstract class UhcDriver {
 			// element.sendKeys(Keys.BACK_SPACE);
 
 		} else {
-			element.click();
+		    jsClickNew(element);
 			element.clear();
 			element.sendKeys(message);
 		}
