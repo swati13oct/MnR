@@ -261,8 +261,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | Plan Type | <Medsupplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    When verify Call SAM icon is visible
-    And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
+   Then the user validates SAM icons on Medsupp page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
