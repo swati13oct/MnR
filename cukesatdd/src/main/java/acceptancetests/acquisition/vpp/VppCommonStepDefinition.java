@@ -188,6 +188,7 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,(new VPPPlanSummaryPage(wd)));
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,plansummaryPage);
 
 		plansummaryPage.viewPlanSummary(plantype);
 
@@ -1510,10 +1511,10 @@ public class VppCommonStepDefinition {
 		String planName = memberAttributesRow.get(0).getCells().get(1);
 		String planType = memberAttributesRow.get(1).getCells().get(1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
 
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		//VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 			//	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		System.out.println("plan name"+planName);
@@ -3630,21 +3631,20 @@ public class VppCommonStepDefinition {
 	}
 
 	@When("^user select \"([^\"]*)\" plans to compare$")
-	public void user_select_plans_to_compare(String planIndex)  {
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
+	public void user_select_plans_to_compare(String planIndex)  {		
+		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		plansummaryPage.addPlanToCompareByIndex(planIndex,plantype);
+		
 	}
 	
 	@Then("^user clicks on compare button$")
 	public void user_clicks_on_compare_button() {
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
+		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		ComparePlansPage planComparePage = plansummaryPage.clickCompareButton();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
