@@ -3618,10 +3618,9 @@ public class VppCommonStepDefinition {
 	
 	@Then("^verify the Add to compare checkbox is checked for selected plan$")
 	public void verify_the_Add_to_compare_checkbox_is_checked_for_selected_plan(DataTable givenAttributes) {
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String planIndex = memberAttributesMap.get("Plan index");
