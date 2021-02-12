@@ -138,14 +138,14 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath2> |
-  	Then user closes current tab and navigate to previous tab
+    Then user closes current tab and navigate to previous tab
     #---------------------Privacy link in Medicare plans 11 page--------------------
     Then the user navigate back to aarp medicare plans11 page privacy link
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     Then user closes current tab and navigate to previous tab
-      
+
     @CampaignExternalLink_E2E_Scenario_6
     Examples: 
       | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |
@@ -167,7 +167,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-      When verify Call SAM icon is visible
+    When verify Call SAM icon is visible
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then the user view plan details of the above selected plan in site vpp
       | Plan Name | <planname> |
@@ -261,12 +261,17 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
       | Plan Type | <Medsupplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
+<<<<<<< HEAD
    Then the user validates SAM icons on Medsupp page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+=======
+    And the user validates SAM icons on Medsupp page
+      | TFN Xpath | <TFNxpath2> |
+>>>>>>> branch 'feature-F569047' of https://github.optum.com/gov-prog-digital/mratdd.git
     Then the user validates TFN Number on Right Rail
       | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath3> |
+      | TFN Xpath | <TFNxpath2> |
     And user closes current tab and navigate to previous tab
     #Find Plans in your Area and SNP plantype*****#
     When user clicks on Find Plans in your area to open a new tab
@@ -292,12 +297,51 @@ Feature: 1.05.5. UAT Scripts Campaign External Links
     And the user views the plans of the below plan type
       | Plan Type | <planname> |
     And user closes current tab and navigate to previous tab
-
     #DCE###
+    When user clicks on Estimate Your Prescription Drug Costs from external page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug4> |
+    Then the user validates whether call icon is visible
+    Then the user validates whether chat icon is visible
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    And user verify the drug summary page
+    Then the user validates whether call icon is visible
+    Then the user validates whether chat icon is visible
+    And user should be able to see Medicare Advantage plan by default
+    And user should be able to toggle between plan types
+    When user clicks on change pharmacy link from summary page
+    Then change pharmacy modal should be displayed
+    And user verify change pharmacy modal
+    When user saves and updates pharmacy from list
+    Then the pharmacy name should be updated on summary page
+    And user closes current tab and navigate to previous tab
+    #PRE Flow##
+    When user clicks on Start Now to get start the PRE flow from external page
+    And clicks on get started button and runs a questionnaire
+      | Zip Code        | <zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+
     @CampaignExternal_Scenario1_AARP
     Examples: 
-      | Scenario                                             | externallink                                             | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         |
-      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) |
+      | Scenario                                             | externallink                                             | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |
+      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | emsam | Lipitor | orfadin | humalog |   27053 |
+
+    @CampaignExternal_Scenario1_UHC
+    Examples: 
+      | Scenario                                             | externallink                                                | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |
+      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | emsam | Lipitor | orfadin | humalog |   27053 |
 
   Scenario Outline: <Scenario>: Validate TFN and SAM Call popup in MA, Medsupp page, PRE, VPP Plan Summary from External link: <externallink>
     Given user is on campaign external Links page

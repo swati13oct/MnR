@@ -117,6 +117,12 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"button-127872393\"]")
 	private WebElement estimateDrugCostButton;
 	
+	@FindBy(xpath = "//*[@id='button-1095029748']")
+	private WebElement dceExternalLink;
+	
+	@FindBy(xpath = "//*[@id='button-565183562']")
+	private WebElement preExternalLink;
+	
 //	--- locators for scenario 5
 
 	@FindBy(xpath = "//span[@class='card-link__arrow' and contains(text(),'Medicare Supplement')]")
@@ -405,6 +411,10 @@ public class CampaignExternalLinks extends UhcDriver {
 			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
 			return new AcquisitionHomePage(driver);
 		}
+		else if (driver.getCurrentUrl().contains("WT.mc_id=8012870")) {
+			System.out.println("****************Page is displayed  ***************" + driver.getCurrentUrl());
+			return new AcquisitionHomePage(driver);
+		}
 		return null;
 	}
 
@@ -478,8 +488,11 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (driver.getCurrentUrl().contains("ma.aarpmedicareplans.com/")) {
 			Assert.assertTrue(true);
 			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("ma.uhcmedicaresolutions.com/")) {
+			Assert.assertTrue(true);
+			System.out.println("UHC External Link Page opens successsfully");
 		} else
-			Assert.fail("AARP External Link page is not opening up");
+			Assert.fail("AARP/UHC External Link page is not opening up");
 		validateNew(tfnHeader);
 
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
@@ -618,5 +631,29 @@ public class CampaignExternalLinks extends UhcDriver {
 			Assert.fail("Error loading MS Insurance Plans Page");
 		return null;
 	}
-
+	
+	public void navigateToDCERedesignFromExternalPage() {
+		parentWindow = driver.getWindowHandle();
+		dceExternalLink.click();
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+		}
+		public void navigateToPREGetStarted() {
+			parentWindow = driver.getWindowHandle();
+			preExternalLink.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+	}
 }
