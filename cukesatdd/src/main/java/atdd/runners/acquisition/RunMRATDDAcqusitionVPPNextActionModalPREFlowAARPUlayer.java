@@ -12,12 +12,11 @@ import cucumber.api.CucumberOptions;
  * RunMRATDDAcquisitionVppPlanSummaryNextBestActionModal
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPNextActionModalBlayerPDP02.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPNextActionModalBlayerPDP02")
+@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcqusitionVPPNextActionModalPREFlowAARPUlayer.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqusitionVPPNextActionModalPREFlowAARPUlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = {
 		"src/main/resources/feature/acquisition/vpp/NextBestActionModal.feature" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionVPPNextActionModalBlayerPDP02.json" }, tags = {
-						" @NBA_PDP_UHC02" })
+				"json:target/cucumber-RunMRATDDAcqusitionVPPNextActionModalPREFlowAARPUlayer.json" }, tags = { "@NBA_PRE_AARP01" })
 
-public class RunMRATDDAcquisitionVPPNextActionModalBlayerPDP02 {
+public class RunMRATDDAcqusitionVPPNextActionModalPREFlowAARPUlayer {
 
 }
