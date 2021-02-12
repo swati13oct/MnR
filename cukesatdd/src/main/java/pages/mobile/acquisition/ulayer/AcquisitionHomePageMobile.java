@@ -1004,13 +1004,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitForPageLoadSafari();
 		if (isHealthPlan) {
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
-			sendkeys(zipCode, zipcode);
+			scrollToView(zipCodeField);
+			sendkeysMobile(zipcodeField, zipcode);
 
 			jsClickNew(btnGO);
 		} else {
-			//CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+			// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 			scrollToView(zipCodeField);
-			sendkeys(zipCodeField, zipcode);
+			sendkeysMobile(zipcodeField, zipcode);
 
 			jsClickNew(viewPlansButton);
 		}

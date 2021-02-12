@@ -381,17 +381,17 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		verifyConfirmationmodalResults(drugNamesinPRE.size(), drugNamesinPRE, drugNamesStartOver);
 	}
 
-	// Validating Result Count
-	public void validateResultsCount() {
+	  //Validating Result Count
+    public void validateResultsCount() {
+    	pageloadcomplete();
 		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
 		if (drugsList.size() == confirmationSize) {
-			System.out.println("Resutls and Count matched");
+			System.out.println("Results and Count matched");
 		} else {
-			System.out.println("Resutls and Count mismatch");
+			System.out.println("Results and Count mismatch");
 			Assert.assertTrue(false);
 		}
 	}
-
 	// Check Remove Count
 	public void checkRemove(int count) {
 		if (count > 2)
