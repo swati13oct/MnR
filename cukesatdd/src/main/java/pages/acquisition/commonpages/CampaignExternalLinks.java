@@ -69,23 +69,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::input[contains(@id,'find-plans-zip')]")
 	private WebElement zipcodeEnterFld;
 
-	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/medicare-plans.html')]")
-	private WebElement getHelpFindingPlanBtn;
-
 	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::a[contains(@href,'#modal--zip-finder')]")
 	private WebElement locateZipcodeLink;
-
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::button[contains(text(),'Find a Plan')]")
-	private WebElement findPlanSubmitBtn;
-
-	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__headline')]")
-	private WebElement tfnHeader;
-
-	@FindBy(xpath = "//span[contains(text(),'Accessibility')]")
-	private WebElement accessibilitylink;
-
-	@FindBy(xpath = "//div[contains(@aria-label,'Disclaimer Information')]")
-	private WebElement footerInfo;
 	
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
 	private WebElement workingHrs;
@@ -128,6 +113,21 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//span[@class='card-link__arrow' and contains(text(),'Medicare Supplement')]")
 	private WebElement MedicareSupplementInsurancePlans;
 	
+	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/medicare-plans.html')]")
+	private WebElement getHelpFindingPlanBtn;
+
+	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::button[contains(text(),'Find a Plan')]")
+	private WebElement findPlanSubmitBtn;
+
+	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__headline')]")
+	private WebElement tfnHeader;
+
+	@FindBy(xpath = "//span[contains(text(),'Accessibility')]")
+	private WebElement accessibilitylink;
+
+	@FindBy(xpath = "//div[contains(@aria-label,'Disclaimer Information')]")
+	private WebElement footerInfo;
+
 	public static String parentWindow;
 	
 	public CampaignExternalLinks(WebDriver driver) {
@@ -643,17 +643,45 @@ public class CampaignExternalLinks extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
-		}
-		public void navigateToPREGetStarted() {
-			parentWindow = driver.getWindowHandle();
-			preExternalLink.click();
-			Set<String> tabs_windows = driver.getWindowHandles();
-			Iterator<String> itr = tabs_windows.iterator();
-			while (itr.hasNext()) {
-				String window = itr.next();
-				if (!parentWindow.equals(window)) {
-					driver.switchTo().window(window);
-				}
+	}
+
+	public void navigateToPREGetStarted() {
+		parentWindow = driver.getWindowHandle();
+		preExternalLink.click();
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
 			}
+		}
+	}
+
+	public AcquisitionHomePage clickOnGetHelpFindingAPlanBtn() {
+		validateNew(getHelpFindingPlanBtn);
+		CommonUtility.waitForPageLoadNew(driver, getHelpFindingPlanBtn, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(getHelpFindingPlanBtn);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://www.uhcmedicaresolutions.com/plan-recommendation-engine.html")) {
+			System.out.println("****************PRE Page is displayed***************" + CurrentRailURL);
+			checkModelPopup(driver, 10);
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
 	}
 }
