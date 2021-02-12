@@ -304,7 +304,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 AMP | AARP | shop/prescription-drug-plans.html | Shop Medicare Prescription Drug Plans                |
       #| E2E Scenario_2 AMP | AARP | shop/connect.html                 | Connect with UnitedHealthcare                        |
       | E2E Scenario_2 AMP | AARP | shop/connect/agentebrc.html       | Request an Appointment with a Health Insurance Agent |
-      | E2E Scenario_2 AMP | AARP | shop/connect/inquirykit.html      | Order Medicare Part D Enrollment Materials           |
+      #| E2E Scenario_2 AMP | AARP | shop/connect/inquirykit.html      | Order Medicare Part D Enrollment Materials           |
       | E2E Scenario_2 AMP | AARP | shop/connect/attend.html          | Find UnitedHealthcare in Your Community              |
       | E2E Scenario_2 AMP | AARP | shop/compare.html                 | Shop: Compare Plans                                  |
 
@@ -398,7 +398,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | shop/prescription-drug-plans.html | Shop Medicare Prescription Drug Plans                |
      # | E2E Scenario_2 UMS | UHC  | shop/connect.html                 | Connect with UnitedHealthcare                        |
       | E2E Scenario_2 UMS | UHC  | shop/connect/agentebrc.html       | Request an Appointment with a Health Insurance Agent |
-      | E2E Scenario_2 UMS | UHC  | shop/connect/inquirykit.html      | Order Medicare Part D Enrollment Materials           |
+     # | E2E Scenario_2 UMS | UHC  | shop/connect/inquirykit.html      | Order Medicare Part D Enrollment Materials           |
       | E2E Scenario_2 UMS | UHC  | shop/connect/attend.html          | Find UnitedHealthcare in Your Community              |
       | E2E Scenario_2 UMS | UHC  | shop/compare.html                 | Shop: Compare Plans                                  |
 
