@@ -351,7 +351,37 @@ public class CampaignExternalLinks extends UhcDriver {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
 	}
+	public AcquisitionHomePage estimateDrugCostButton() {
+		validateNew(estimateDrugCost);
+		CommonUtility.waitForPageLoadNew(driver, estimateDrugCost, 30);
+		parentWindow = driver.getWindowHandle();
+		jsClickNew(estimateDrugCost);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
 
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27#/getstarted")) {
+			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
+			CheckiPerseptions();
+			return new AcquisitionHomePage(driver);
+		}
+		return null;
+		/*
+		 * else Assert.fail("**************** Page is not displayed ***************");
+		 * CheckPageLoad(); try { Thread.sleep(3000); } catch (InterruptedException e) {
+		 * // TODO Auto-generated catch block e.printStackTrace(); }
+		 */
+	}
 	public AcquisitionHomePage clickOnmedicareplans11PrivacyLink() {
 
 		validateNew(privacylink);

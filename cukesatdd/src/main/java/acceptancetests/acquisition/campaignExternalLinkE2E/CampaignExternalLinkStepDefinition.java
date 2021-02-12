@@ -123,6 +123,13 @@ public class CampaignExternalLinkStepDefinition {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
 	
+	@Then("^User able to land on Drug cost page in new tab$")
+	public void the_user_clicks_on_Estimate_Drug_Cost_button_on_external_link_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.estimateDrugCostButton();
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+	}
 	
 	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
 	public void navigate_back_aarp_medicare11_page(DataTable givenAttributes) throws InterruptedException {
