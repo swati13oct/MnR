@@ -81,8 +81,8 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     @DCE_DrugDetailsValidation_UHC
     Examples: 
       | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
-      | ativ                 | Humalog | Fanapt |         20 | Week        | Every 1 Month |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $30          |
-      | ativ                 | Humalog | Fanapt |        200 | Month       | Every 3 Months |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $15          |
+      | ativ                 | Humalog | Fanapt |        20 | Week       | Every 1 Month  |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $30          |
+      | ativ                 | Humalog | Fanapt |       200 | Month      | Every 3 Months |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $15          |
 
   @DCE_DrugDetailsDynamicCopay_Preferred
   Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Preferred Pharmacy Copay
