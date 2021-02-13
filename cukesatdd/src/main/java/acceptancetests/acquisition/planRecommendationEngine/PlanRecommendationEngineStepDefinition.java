@@ -20,7 +20,6 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.PlanSelectorNewPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
@@ -215,7 +214,8 @@ public class PlanRecommendationEngineStepDefinition {
 	@And("^user selects plan type in coverage options page$")
 	public void select_plan_type_coverage_page(DataTable givenAttributes) throws Throwable {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage =  new PlanRecommendationEngineCoverageOptionPage(wd);
+		PlanRecommendationEngineCoverageOptionPage planSelectorCoverageepage = new PlanRecommendationEngineCoverageOptionPage(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		String plantype = inputValues.get("Plan Type");
 		if (!(plantype.isEmpty())) {
 			planSelectorCoverageepage.coverageOptionpageFunctional(plantype);
@@ -370,7 +370,8 @@ public class PlanRecommendationEngineStepDefinition {
        @Then("^user selects add drug option in Drug page$")
    	public void add_drugs_page(DataTable givenAttributes) {
    		readfeaturedata(givenAttributes);
-   		PlanRecommendationEngineDrugsPage planSelectorDrugspage =  new PlanRecommendationEngineDrugsPage(wd);
+		PlanRecommendationEngineDrugsPage planSelectorDrugspage = new PlanRecommendationEngineDrugsPage(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
    		planSelectorDrugspage.drugsInitiate(inputValues.get("Drug Selection"));
    		planSelectorDrugspage.drugsHandlerWithdetails(inputValues.get("Drug Details"));
    		planSelectorDrugspage.continueNextpage();
@@ -536,8 +537,10 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Then("^user validate elements in loading results page$")
    	public void elements_results_page() {
-		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
-		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
+		PlanRecommendationEngineResultsPage planSelectorResultspage = new PlanRecommendationEngineResultsPage(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter = new PlanRecommendationEngineHeaderAndFooter(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 //   		headerAndFooter.breadCrumbs();
    		planSelectorResultspage.resultsloadingpage();
    	}
@@ -545,7 +548,8 @@ public class PlanRecommendationEngineStepDefinition {
 	@Then("^user validate recommendations in results page$")
    	public void view_recommendations_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		PlanRecommendationEngineResultsPage planSelectorResultspage = new PlanRecommendationEngineResultsPage(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		String zip = inputValues.get("Zip Code");
 		String county = inputValues.get("County Name");
 		String r1 = inputValues.get("1st Recommendation");
