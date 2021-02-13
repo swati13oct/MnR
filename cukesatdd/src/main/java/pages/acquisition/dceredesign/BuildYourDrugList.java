@@ -348,4 +348,21 @@ public class BuildYourDrugList extends UhcDriver {
 		
 		return new DrugSummaryPage(driver);
 	}
+
+	public void validateDetailsForDrug(String drugName, String drugQuantity, String drugFrequency,
+			String drugSupplyLen) {
+		System.out.println("Current Added Drug Name : " + drugName);
+		WebElement DrugName = driver
+				.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName + "')]"));
+		WebElement DrugDetailsText = driver.findElement(
+				By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName +"')]//following-sibling::p[contains(text(), 'per') and contains(text(), 'refill')]"));
+		String DrugText = DrugDetailsText.getText();
+		if (validateNew(DrugName) && validateNew(DrugDetailsText)
+				 && DrugText.contains(drugQuantity) && DrugText.contains(drugFrequency)
+				 && DrugText.contains(drugSupplyLen)) {
+			System.out.println("Drug List Drug Quantity, Frequency and Supply Length Validation PASSED for Drug : " + drugName);
+			System.out.println("Displayed Drug Details Text: "+DrugText);
+		} else
+			Assert.fail("Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug : " + drugName);
+	}
 }
