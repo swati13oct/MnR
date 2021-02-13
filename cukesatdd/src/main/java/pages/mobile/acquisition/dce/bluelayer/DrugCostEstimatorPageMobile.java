@@ -1656,7 +1656,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		 * 
 		 * driver.get(NewDCEUrl);
 		 */
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		getStarted.click();
 
 		Thread.sleep(15000);
@@ -1677,7 +1677,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		 * 
 		 * driver.get(NewDCEUrl);
 		 */
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		zipcodetxt.sendKeys(zipcode);
 		zipcodeFindPlans.click();
 

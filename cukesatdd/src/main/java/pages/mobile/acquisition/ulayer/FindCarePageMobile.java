@@ -189,7 +189,7 @@ public class FindCarePageMobile extends UhcDriver {
 				System.out.println("Window title is : " + title);
 				if (title.contains("Compare Medicare Plans")) {
 					System.out.println("We are on Compare Medicare Plans winodow opened");
-					driver.manage().window().maximize();
+					//driver.manage().window().maximize();
 					Thread.sleep(3000);
 					waitforElement(EditproviderlistLink);
 					break;

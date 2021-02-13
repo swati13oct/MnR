@@ -819,7 +819,7 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 		//tbd-remove		txtZipCode.clear();
 		validate(txtZipCode);
 		txtZipCode.sendKeys(zipCode);
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		System.out.println("Zip code entered for Pharmacy Search : "+txtZipCode.getText());
 		try {
 			Thread.sleep(2000);

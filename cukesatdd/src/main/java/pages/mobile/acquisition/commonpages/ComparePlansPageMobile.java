@@ -395,7 +395,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 				System.out.println("Window title is : " + title);
 				if (title.contains("Find Care")) {
 					System.out.println("We are on Find Care winodow opened");
-					driver.manage().window().maximize();
+					//driver.manage().window().maximize();
 					Thread.sleep(3000);
 					waitforElement(FindCareLink);
 					break;
@@ -792,7 +792,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
@@ -825,7 +825,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
@@ -859,7 +859,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
@@ -892,7 +892,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {

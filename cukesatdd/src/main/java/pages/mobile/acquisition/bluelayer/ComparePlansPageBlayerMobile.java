@@ -398,14 +398,14 @@ public class ComparePlansPageBlayerMobile extends UhcDriver {
 				System.out.println("Window title is : " + title);
 				if (title.contains("Find Care")) {
 					System.out.println("We are on Find Care winodow opened");
-					driver.manage().window().maximize();
+					//driver.manage().window().maximize();
 					Thread.sleep(3000);
 					waitforElement(FindCareLink);
 					break;
 				}
 			} else {
 				System.out.println("Not found Expected window");
-				driver.switchTo().window(ParentWindow);
+				//driver.switchTo().window(ParentWindow);
 			}
 
 		}
@@ -682,7 +682,7 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
@@ -723,7 +723,7 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
@@ -757,7 +757,7 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
@@ -790,7 +790,7 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			driver.manage().window().maximize();
+			//driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {

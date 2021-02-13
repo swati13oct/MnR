@@ -1536,7 +1536,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 	public void navigateToDCEToolFromHome() throws InterruptedException {
 
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		getStarted.click();
 
 	}
@@ -1556,7 +1556,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		 * 
 		 * driver.get(NewDCEUrl);
 		 */
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		zipcodeBtn.sendKeys(zipcode);
 		zipcodeFindPlans.click();
 

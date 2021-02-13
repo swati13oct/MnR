@@ -983,7 +983,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
-			driver.manage().window().maximize();    
+			//driver.manage().window().maximize();    
 			driver.navigate().refresh();
 			CommonUtility.waitForPageLoad(driver, backToPlansBtn, 60);
 			validateNew(backToPlansBtn);

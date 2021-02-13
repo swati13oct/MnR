@@ -544,7 +544,7 @@ public void comparePlanslnk() throws InterruptedException{
 			 return null;	 
 		}
 		public Rallytool_Page navigateToRallyPage(String planName) { 
-			driver.manage().window().maximize(); 
+			//driver.manage().window().maximize(); 
 			//a[contains(text(),'Is my provider covered?')]
 			int i=0;
 			 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP MedicareComplete')]"));
@@ -988,13 +988,13 @@ public void comparePlanslnk() throws InterruptedException{
 				
 				public void enterZipandVAlidateError(String actualZipcode, 
 						String invalidzipcode){
- 					driver.manage().window().maximize();
+ 					//driver.manage().window().maximize();
 					if(changeLoationLink.isDisplayed()){
- 						driver.manage().window().maximize();
+ 						//driver.manage().window().maximize();
 						changeLoationLink.click();
 						try{
 							System.out.println("User clicks changelocation and enters error zipcode");
- 							driver.manage().window().maximize();
+ 							//driver.manage().window().maximize();
 						//	zipCodeField.sendKeys(invalidzipcode);
  							Actions action = new Actions(driver);
  							PageFactory.initElements(driver, this);
@@ -1012,7 +1012,7 @@ public void comparePlanslnk() throws InterruptedException{
  							action.sendKeys(Keys.ENTER).perform();
   							if(!errmsgcolor.getAttribute("class").contains("ng-hide")){
 								 System.out.println("Displayed Error message is "+errorMessageincorrect.getText());
- 									driver.manage().window().maximize();
+ 									//driver.manage().window().maximize();
 								 if(errorMessageincorrect.getText().equals("Please enter a valid ZIP code.")){
 									 System.out.println("Error message content displayed correctly");
 								 }else{

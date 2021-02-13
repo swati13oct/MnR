@@ -539,7 +539,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL + testharurl;
@@ -547,13 +547,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 				startNew(AARP_ACQISITION_PROD_PAGE_URL + testharurl);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + testharurl;
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + testharurl;
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_PAGE_URL + testharurl;
@@ -563,19 +563,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		} else if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL + testharurl;
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_PROD_PAGE_URL + testharurl;
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.manage().window().maximize();
+				//driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_PAGE_URL + testharurl;

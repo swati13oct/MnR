@@ -763,7 +763,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 	}
 
 	public void select_first_pharmacy() throws InterruptedException {
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		Thread.sleep(10000);
 
 		//waitforElement(select_btn_first);
@@ -1412,7 +1412,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		 * 
 		 * driver.get(NewDCEUrl);
 		 */
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		getStarted.click();
 
 		Thread.sleep(15000);
@@ -1434,7 +1434,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 		 * 
 		 * driver.get(NewDCEUrl);
 		 */
-		driver.manage().window().maximize();
+		//driver.manage().window().maximize();
 		zipcodeBtn.sendKeys(zipcode);
 		zipcodeFindPlans.click();
 
