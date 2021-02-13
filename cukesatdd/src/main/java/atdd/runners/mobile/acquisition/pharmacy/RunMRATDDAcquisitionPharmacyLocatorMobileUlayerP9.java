@@ -16,7 +16,7 @@ detailedReport = true, detailedAggregatedReport = true, overviewReport = true, t
 @CucumberOptions(glue = { "atdd.framework","acceptancetests.mobile.acquisition" }, 
 features = { "src/main/resources/feature/mobile/acquisition/pharmacy/PharmacySearch-mobile.feature" }, 
 plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPharmacyLocatorUlayerP9.json" }, 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPharmacyLocatorMobileUlayerP9.json" }, 
 tags = { "@pharmacylocatorulayer07" })
 public class RunMRATDDAcquisitionPharmacyLocatorMobileUlayerP9{ 
  
