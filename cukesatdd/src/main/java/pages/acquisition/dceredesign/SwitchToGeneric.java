@@ -150,8 +150,8 @@ public class SwitchToGeneric extends UhcDriver {
 
 
 	public void validateSwitchPage(String genericDrug, String brandDrug) {
-		WebElement GenericDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '"+genericDrug+"')]"));
-		WebElement BrandDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '"+brandDrug+"')]"));
+		WebElement GenericDrugText = driver.findElement(By.xpath("//h3//*[contains(text(), '"+genericDrug+"')]"));
+		WebElement BrandDrugText = driver.findElement(By.xpath("//h3//*[contains(text(), '"+brandDrug+"')]"));
 		WebElement SavingsText = driver.findElement(By.xpath("//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
 		openAndValidate();
 		if(!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
