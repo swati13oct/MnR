@@ -295,46 +295,43 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		jsClickNew(continueBtn);
 		validate(drugsearchBox);
 	}
-	// Drug Adding details in Drug Page
-
-	public void drugsHandlerWithdetails(String drugsDetails) {
-		String drugName = "";
-		boolean searchButtonClick = false;
-		String dosage = "";
-		String packageName = "";
-		String count = "";
-		boolean threeeMonthfrequency = false;
-		boolean GenericDrug = false;
-		boolean switchGeneric = false;
-
-		String[] drugslist = drugsDetails.split(":");
-		for (int i = 0; i < drugslist.length; i++) {
+	//Drug Adding details in Drug Page   
+    public void drugsHandlerWithdetails(String drugsDetails) {
+		String drugName="";
+		boolean searchButtonClick=false;
+		String dosage="";
+		String packageName="";
+		String count="";
+		boolean threeeMonthfrequency=false;
+		boolean GenericDrug=false;
+		boolean switchGeneric=false;
+		
+		String[] drugslist=drugsDetails.split(":");
+		for(int i=0;i<drugslist.length;i++) {
 			String drugInfo = drugslist[i];
-			if (drugInfo.trim().length() > 0) {
-				String[] drugDetails = drugInfo.split(",");
+			if(drugInfo.trim().length()>0) {
+				String[] drugDetails=drugInfo.split(",");
 				drugName = drugDetails[0];
-				if (drugDetails[1].toUpperCase().equals("NO"))
+				if(drugDetails[1].toUpperCase().equals("NO"))
 					searchButtonClick = true;
-				dosage = drugDetails[2];
-				packageName = drugDetails[3];
-				count = drugDetails[4];
-				if (drugDetails[5].toUpperCase().equals("3"))
+				dosage=drugDetails[2];
+				packageName=drugDetails[3];
+				count=drugDetails[4];
+				if(drugDetails[5].toUpperCase().equals("3"))
 					threeeMonthfrequency = true;
-				if (drugDetails[6].toUpperCase().equals("YES"))
+				if(drugDetails[6].toUpperCase().equals("YES"))
 					GenericDrug = true;
-				if (drugDetails[7].toUpperCase().equals("YES"))
+				if(drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 
-				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
-						GenericDrug, switchGeneric);
+				addDrugbySearch(drugName,searchButtonClick,dosage,packageName,count,threeeMonthfrequency,GenericDrug,switchGeneric);
 			}
 		}
 		validateResultsCount();
-		// checkRemove(drugslist.length);
+//		checkRemove(drugslist.length);
 		validateResultsCount();
-
+		
 	}
-
 	// Continue Function
 
 	public void continueNextpage() {
@@ -383,7 +380,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 
 	  //Validating Result Count
     public void validateResultsCount() {
-    	pageloadcomplete();
+    	waitforElementVisibilityInTime(modaldrugsCount, 10);
 		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
 		if (drugsList.size() == confirmationSize) {
 			System.out.println("Results and Count matched");
@@ -505,7 +502,6 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 			drugsearchBox.clear();
 			drugsearchBox.sendKeys(drugName);
 			if (searchButtonClick) {
-				// drugsearchButton.click();
 				jsClickNew(drugsearchButton);
 				threadsleep(6000);
 				validate(modalSelcetedDrug, 30);
@@ -514,11 +510,10 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 						"Drug name is not Matched :" + drugName);
 				// Select modal
 				threadsleep(2000);
-				// modalcontinue.click();
 				jsClickNew(modalcontinue);
 				threadsleep(2000);
 			} else {
-				drugsAutoList.get(0).click();
+				jsClickNew(drugsAutoList.get(0));
 			}
 
 			validate(modalDosageSelect, 30);
@@ -540,7 +535,6 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 				freq.selectByVisibleText("Every 3 Months");
 
 			threadsleep(4000);
-			// modalcontinue.click();
 			jsClickNew(modalcontinue);
 
 			if (GenericDrug) {
@@ -552,7 +546,6 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 					drugName = modalGenericDrug.getText();
 				}
 				threadsleep(2000);
-				// modalcontinue.click();
 				jsClickNew(modalcontinue);
 			}
 
@@ -561,7 +554,6 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 			System.out.println("Unable to add drug");
 		}
 	}
-
 	// Clicking Switch Drug Model
 
 	public void clickSwitchdrug() {
