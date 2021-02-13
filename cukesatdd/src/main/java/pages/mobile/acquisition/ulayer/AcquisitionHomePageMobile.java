@@ -646,7 +646,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL + testharurl;
@@ -654,13 +654,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNew(AARP_ACQISITION_PROD_PAGE_URL + testharurl);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + testharurl;
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + testharurl;
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_PAGE_URL + testharurl;
@@ -670,19 +670,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL + testharurl;
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_PROD_PAGE_URL + testharurl;
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_PAGE_URL + testharurl;
@@ -2138,12 +2138,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		MobileMenuMain();
 
 		jsClickNew(headerSignInLink);
-
-		validate(registerLink, 10);
-		if (driver.getCurrentUrl().contains("medicare.uhc.com/aarp")) {
+		waitForPageLoadSafari();
+		validateNew(signIn);
+		if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
 			Assert.assertTrue(true);
 			System.out.println("Signin page is loaded");
-			driver.navigate().back();
+			// driver.navigate().back();
+			clickBrowserBackButton();
 			CommonUtility.waitForPageLoad(driver, healthPlansZipcode, 30);
 			System.out.println("Home Page is loaded");
 		} else {
@@ -2892,48 +2893,56 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validatevisitorprofile() {
-
-		// if (visitorprofileicon.isDisplayed()) {
-		//// Actions actions = new Actions(driver);
-		//// actions.moveToElement(visitorprofileicon).perform();
-		// jsClickNew(visitorprofileicon);
-		// System.out.println("Hover over visitor profile completed");
-		// }
+		if (visitorprofileicon.isDisplayed()) {
+			scrollToView(visitorprofileicon);
+			Actions actions = new Actions(driver);
+			actions.moveToElement(visitorprofileicon).perform();
+//				jsMouseOver(visitorprofileicon);
+//				visitorprofileicon.click();
+			System.out.println("Hover over visitor profile completed");
+		}
 		// WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(),
 		// 'Create Profile')]"));
-		// WebElement VPSignIn = driver.findElement(
-		// By.xpath("//a[.='Sign In ']"));
-		// scrollToView(CreateProfile);
-		// validateNew(CreateProfile);
-		// scrollToView(VPSignIn);
-		// validateNew(VPSignIn);
-		// if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
-		// Assert.assertTrue(true);
-		// System.out.println("Visitor Profile elements are present on home page");
-		// } else {
-		// Assert.fail("Visitor Profile elements are not present on home page");
-		// }
-		pageloadcomplete();
-		scrollToView(visitorprofileicon);
-		jsClickNew(visitorprofileicon);
-		WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(), 'Your Guest Profile')]"));
-		// CheckPageLoad();
-		// CheckiPerseptions();
-		scrollToView(GuestProfile);
+		WebElement CreateProfile = driver.findElement(By.xpath("//h3[@id='guest-profile']"));
+		WebElement VPSignIn = driver.findElement(
+				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+		validateNew(CreateProfile);
+		validateNew(VPSignIn);
+		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
+			Assert.assertTrue(true);
+			System.out.println("Visitor Profile elements are present on home page");
+		} else {
+			Assert.fail("Visitor Profile elements are not present on home page");
+		}
+		visitorprofileicon.click();
+		jsClickNew(CreateProfile);
+		CommonUtility.checkPageIsReadyNew(driver);
+//			driver.navigate().refresh();
+		// sleepBySec(3);
+		// WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(),
+		// 'Your Guest Profile')]"));
+		/*
+		 * WebElement GuestProfile =
+		 * driver.findElement(By.xpath("//h2[contains(text(), 'Your Guest Profile')]"));
+		 * CheckPageLoad(); waitForPageLoadSafari(); CheckiPerseptions();
+		 * CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
+		 */
 		if (driver.getCurrentUrl().contains("profile")) {
 			Assert.assertTrue(true);
 			System.out.println("Visitor Profile Page opens successsfully");
 		} else {
 			Assert.fail("Visitor Profile page is not opening up");
 		}
-		// clickBrowserBackButton();
-		// CheckPageLoad();
+		/*
+		 * driver.navigate().back(); CommonUtility.checkPageIsReady(driver);
+		 */
+		/* CheckPageLoad(); */
+		// waitForPageLoadSafari();
 		// CheckiPerseptions();
-		jsClickNew(AARPlogo);
-		validate(findPlansButton);
 
 		// CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
 	}
+
 
 	public void validateLogo() {
 		// TODO Auto-generated method stub
@@ -3183,11 +3192,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void Accessibility() {
 
-		pageloadcomplete();
-		// Accessibility.click();
-		scrollToView(Accessibility);
+//		threadsleep(6);
+		threadsleep(5000);
+//			Accessibility.click();
 		jsClickNew(Accessibility);
-		threadsleep(5);
+		threadsleep(5000);
 		// Assert.assertEquals(driver.getCurrentUrl(),
 		// "https://www.uhc.com/legal/accessibility");
 		if (driver.getCurrentUrl().contains("accessibility")) {
