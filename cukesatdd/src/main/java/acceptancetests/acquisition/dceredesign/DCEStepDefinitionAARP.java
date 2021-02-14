@@ -492,6 +492,13 @@ public class DCEStepDefinitionAARP {
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		buildDrugList.ValidateAddedDrugsList(druglist);
 	}
+	
+	@Then("^the user validates Drug Recommendation section$")
+	public void the_user_validates_Drug_Recommendation_section() throws Throwable {
+		BuildYourDrugList buildYourDrugsListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		buildYourDrugsListPage.validateDrugRecommendationSection(druglist);
+	}
 
 
 	@Then("^the user searches and adds the following Drug for following quantity, frequency and Supplylength to Drug List$")
