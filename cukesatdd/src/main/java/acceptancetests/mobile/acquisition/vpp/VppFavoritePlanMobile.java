@@ -361,7 +361,7 @@ public class VppFavoritePlanMobile {
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		plansummaryPage=plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("90210","Los Angeles County","NO");
+		plansummaryPage=plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("80001","Jefferson County","NO");
 
 		if (plansummaryPage != null) {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
@@ -407,7 +407,7 @@ public class VppFavoritePlanMobile {
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		plansummaryPage=plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("90210","Los Angeles County","NO");
+		plansummaryPage=plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("80001","Jefferson County","NO");
 
 		if (plansummaryPage != null) {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
