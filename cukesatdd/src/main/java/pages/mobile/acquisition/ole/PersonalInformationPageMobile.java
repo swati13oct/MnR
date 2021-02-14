@@ -196,62 +196,43 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
+		// String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
 		String Perm_city = memberDetailsMap.get("Perm_city");
 		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
 		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
+		String Mailing_Aptno = memberDetailsMap.get("Mailing_Aptno");
 		String Mailing_City = memberDetailsMap.get("Mailing_City");
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
 
-		/*
-		 * sendkeysNew(firstNameField, FirstName); sendkeysNew(lastNameField, LastName);
-		 * 
-		 */
-		jsClickMobile(firstNameField);
-		System.out.println("test is here");
-		// jsSendkeys(firstNameField,FirstName);
-		firstNameField.sendKeys(FirstName);
-		Thread.sleep(10);
-		// sendkeys(firstNameField,FirstName);
-		System.out.println("test is here after send keys");
+		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(lastNameField, LastName);
 
-		jsClickMobile(lastNameField);
-		// jsSendkeys(lastNameField,LastName);
-		lastNameField.sendKeys(LastName);
-
-		jsClickMobile(DOBtxtFld);
-		DOBtxtFld.clear();
-		// jsSendkeys(DOBtxtFld,DOB);
-		DOBtxtFld.sendKeys(DOB);
+		sendkeys(DOBtxtFld, DOB);
 		if (Gender.contains("Male")) {
 			// GenderSelectMale.click();
-			jsClickMobile(GenderSelectMale);
+			jsClickNew(GenderSelectMale);
 		} else {
 			// GenderSelectFemale.click();
 			jsClickNew(GenderSelectFemale);
 		}
-		// jsSendkeys(PermanentAdd_Street,Perm_Street);
-		PermanentAdd_Street.sendKeys(Perm_Street);
-
-		// jsSendkeys(PermanentAdd_City,Perm_city);
-
-		PermanentAdd_City.sendKeys(Perm_city);
+		sendkeys(PermanentAdd_Street, Perm_Street);
+		// sendkeys(PermanentAdd_Aptno,Perm_Aptno);
+		sendkeys(PermanentAdd_City, Perm_city);
 		System.out.println("Mailing Question : " + MailingQuestion);
 		if (MailingQuestion.equalsIgnoreCase("no")) {
-			// SameMailingAddressNo.click();
 			jsClickNew(SameMailingAddressNo);
 			// CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
-			JavascriptExecutor jse = (JavascriptExecutor) driver;
-			jse.executeScript("window.scrollBy(0,100)", "");
-			MailingAdd_Street.sendKeys(Mailing_Street);
-			MailingAdd_City.sendKeys(Mailing_City);
-			selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
-			// jsSendkeys(MailingAdd_Zip, Mailing_Zip);
-			MailingAdd_Zip.sendKeys(Mailing_Zip);
-
+			sendkeysNew(MailingAdd_Street, Mailing_Street);
+			// sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
+			sendkeys(MailingAdd_City, Mailing_City);
+			Select SelectState = new Select(MailingAdd_State_DropDown);
+			SelectState.selectByValue(Mailing_State);
+			sendkeysNew(MailingAdd_Zip, Mailing_Zip);
 		}
-		Email.sendKeys(EmailAddress);
+		sendkeys(Email, EmailAddress);
+
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
 			return true;
@@ -554,17 +535,17 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String MiddleName = memberDetailsMap.get("Middle Name");
 
 		validateNew(HomephoneNumberField);
-	//	sendkeys(HomephoneNumberField, HomeNumber);
+		// sendkeys(HomephoneNumberField, HomeNumber);
 		HomephoneNumberField.sendKeys(HomeNumber);
 		validateNew(MobileNumberField);
 		scrollToView(MobileNumberField);
-		//sendkeys(MobileNumberField, MobileNumber);
+		// sendkeys(MobileNumberField, MobileNumber);
 		jsSendkeys(MobileNumberField, MobileNumber);
-		//sendkeysNew(MiddleNameField, MiddleName);
+		// sendkeysNew(MiddleNameField, MiddleName);
 		MiddleNameField.sendKeys(MiddleName);
-		//sendkeys(Email, EmailAddress);
-		//Email.sendKeys(EmailAddress);
-		
+		// sendkeys(Email, EmailAddress);
+		// Email.sendKeys(EmailAddress);
+
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
 			return true;
@@ -593,7 +574,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 				scrollToView(NextBtn);
 				jsClickNew(NextBtn);
-				//waitForPageLoadSafari();
+				// waitForPageLoadSafari();
 				if (driver.getCurrentUrl().contains("special")) {
 					System.out.println("OLE SEP Page is Displayed");
 				} else {
@@ -635,9 +616,9 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
-			//sendkeysNew(partAStartDateField, PartAeffectiveDate);
+			// sendkeysNew(partAStartDateField, PartAeffectiveDate);
 			jsSendkeys(partAStartDateField, PartAeffectiveDate);
-			//sendkeysNew(partBStartDateField, PartBeffectiveDate);
+			// sendkeysNew(partBStartDateField, PartBeffectiveDate);
 			jsSendkeys(partBStartDateField, PartBeffectiveDate);
 			// sendkeysNew(medicaidNumberField,MedicaidNo);
 		}

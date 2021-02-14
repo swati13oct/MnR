@@ -431,7 +431,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[@dtmname='pagination:next']")
 	private WebElement NextBtn;
 
-	@FindBy(xpath = "//button[@class='btn button-transparent clear-button']")
+	@FindBy(xpath = "//button[contains(@class,'btn button-transparent clear-button')]")
 	private WebElement SecondaryClearBtn;
 
 	@FindBy(xpath = "//input[@id='secondarySearchInput']")
@@ -1994,8 +1994,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
-		waitForPageLoadSafari();
-		scrollToView(stateDropDown);
+		pageloadcomplete();
 		selectFromDropDownByValue(stateDropDown, state);
 	}
 
