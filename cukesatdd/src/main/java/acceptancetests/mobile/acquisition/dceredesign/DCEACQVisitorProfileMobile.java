@@ -7,9 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
@@ -93,8 +96,17 @@ public class DCEACQVisitorProfileMobile {
 		TellUsAboutDrugMobile tellUsAboutDrug = buildDrugList.SearchaddDrugs(drugName);
 		buildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		druglist = druglist + "&" + drugName;
+		
+		 
 		System.out.println("Drugs List : " + druglist);
+
+//		if (druglist.isEmpty()) {
+		if(StringUtils.isEmpty(druglist)) {
+			druglist = drugName;
+		} else {
+			druglist = druglist + "&" + drugName;
+		}
+		System.out.println("Drugs List after Drug " + drugName + " , Added : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
