@@ -4,7 +4,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
     Given user is on campaign external Links page
       | External Link | <externallink> |
-     Then user verify TFN on AARP external links page
+    Then user verify TFN on AARP external links page
       | TFN No      | <TFNNo>      |
       | TFN Xpath   | <TFNxpath1>  |
       | Working hrs | <workingHrs> |
@@ -15,7 +15,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath | <TFNxpath> |
     When the user performs plan search using following information using external link
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
  When verify Call SAM icon is visible
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
@@ -59,7 +59,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath | <TFNxpath> |
     When the user performs plan search using following information using external link
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     When verify Call SAM icon is visible
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
@@ -111,7 +111,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath | <TFNxpath> |
     When the user performs plan search using following information using external link
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     When verify Call SAM icon is visible
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
@@ -134,7 +134,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath | <TFNxpath> |
     When the user performs plan search using following information using external link
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     When verify Call SAM icon is visible
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
@@ -199,14 +199,43 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | CountyDropDown  | <county>        |
       And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-
+      And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And the user validates SAM icons on the page
+    	| TFN Xpath | <TFNxpath2> |
+    	Then user selects add drug option in Drug page
+      | Drug Selection | <Drug Selection>                                                       |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      Then user validate elements in loading results page
+      And the user validates SAM icons on the page
+    	| TFN Xpath | <TFNxpath2> |
+    	And the user views the plans of the below plan type
+      | Plan Type | <MAplantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+       And the user views plan details of the above selected plan and validates
+      | Plan Name | <planname> |
+		Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
+     Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+    Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
+    And user closes current tab and navigate to previous tab
    @CampaignExternal_Scenario1_AARP
     Examples: 
-      | Scenario                                             | externallink                                             | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |TFNNo1|pscCode|
-      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 |1-866-408-5545|8012869|
+      | Scenario                                             | externallink                                             | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |TFNNo1|pscCode|Drug Selection	|	DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch|specialNeeds|isCoverageOpt|
+      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 |1-866-408-5545|8012869|Yes							|	Lipitor,YES,Lipitor TAB 20MG,,60,1,YES,NO:morphine sulfate/sodium chloride,NO,,,20,3,NO,NO|None|PDP|
 
     @CampaignExternal_Scenario1_UHC
     Examples: 
-      | Scenario                                             | externallink                                                | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |
+      | Scenario                                             | externallink                                                | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |
       | Campaign External Links - E2E Scenario 1_UMS_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 |
   

@@ -172,9 +172,9 @@ public class SAMIconsCommonStepDefinition {
 		}
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
-
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
 
 
 		aquisitionhomepage.validateTFNNoonRightRail(TFNXpath, ExpectedTFNNo);
