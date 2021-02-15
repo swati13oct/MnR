@@ -92,6 +92,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Silver Sneakers')]/ancestor::label")
 	private WebElement silverSneakersCheckbox;
 	
+	@FindBy(xpath="//h2[contains(@class,'ng-binding')]")
+	private WebElement planName;
+	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
 	private static String AARP_ACQISITION_PROD_PAGE_URL = MRConstants.AARP_URL_PROD;
@@ -606,7 +609,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
 		HashMap<String, String> result=new HashMap<String, String>();
-
+		
+		result.put("Plan Name", planName.getText());
 		String key="Total Tabs";
 		String value = "";
 		result.put(key, String.valueOf(listOfTabHeaders.size()));
