@@ -175,6 +175,8 @@ public class AepPlanComparePage extends UhcDriver {
         System.out.println("Proceed to collect the info on vpp compare page =====");
         HashMap<String, String> result = new HashMap<String, String>();
 
+        result.putAll(readPlanName());
+
         //Read prescription Drug Benefits table
         //result.putAll(readBenefitsData("prescription-drug-table", ""));
 
@@ -242,6 +244,31 @@ public class AepPlanComparePage extends UhcDriver {
             }
         }
         System.out.println("Finished collecting the info on vpp compare page =====");
+        return result;
+    }
+
+    private HashMap<String, String> readPlanName() {
+
+
+        HashMap<String, String> result = new HashMap<String, String>();
+
+        String planNameXPath = "//table[contains(@id,'compare-table')]//thead/tr/th[2]/div/div";
+        WebElement planNameElement = driver.findElement(By.xpath(planNameXPath));
+
+        if (planNameElement == null ) {
+            System.out.println("No PLan Name data found");
+            return result;
+        }
+        else
+        {
+            try {
+                result.put("Plan Name", planNameElement.getText());
+            }
+            catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }
         return result;
     }
 
