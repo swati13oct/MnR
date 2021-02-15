@@ -5147,7 +5147,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
 
-		System.out.println("Expected TFN No: " + ExpecetdTFNNo);
+		System.out.println("Expected TFN No on Call SAM icon: " + ExpecetdTFNNo);
 		System.out.println("Actual TFN No on Call SAM icon: " + ActualTFNelement.getText());
 
 		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
@@ -5165,7 +5165,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(CallSamModalMember);
 		System.out.println(CallSamModalMember.getText());
 
-		System.out.println("######Validating TFN number -on Call Popup########");
+		System.out.println("######Validating TFN number on Call Popup########");
 		if (ExpecetdTFNNo.contains(CallSamTFN.getText()))
 			System.out.println("TFN is validated successfully on the call popup : " + CallSamTFNInfo.getText());
 		else
@@ -5485,4 +5485,81 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
 	}
 
+	
+	public void validateCallpopuponaprivacypage(String TFNXpath, String ExpecetdTFNNo) {
+		try {
+		System.out.println("########Validating TFN on Call SAM icon and Call popup#######");
+		//driver.navigate().refresh();
+		CommonUtility.checkPageIsReady(driver);
+		checkModelPopup(driver, 10);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("Expected TFN No on Call SAM icon: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Call SAM icon: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is validated successfully on the SAM call icon : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN elemnet is not found / displayed on SAM icon : " + TFNXpath);
+		
+		driver.navigate().refresh();
+		
+		jsClickNew(ActualTFNelement);
+		
+		System.out.println("#######Validating TFN info on Call Popup#######");
+		validateNew(CallSamModalHeader, 5);
+		System.out.println(CallSamModalHeader.getText());
+
+		validateNew(CallSamModalMember);
+		System.out.println(CallSamModalMember.getText());
+
+		System.out.println("######Validating TFN number on Call Popup########");
+		if (ExpecetdTFNNo.contains(CallSamTFN.getText()))
+			System.out.println("TFN is validated successfully on the call popup : " + CallSamTFNInfo.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Call popup icon : ");
+
+		System.out.println("#######Validating TFN time zone on Call Popup#######");
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Â– 8 p.m. Monday Â– Friday, 8 a.m. Â– 5 p.m. Saturday and Sunday.";
+		validate(CallSamTFNtimezone);
+		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
+		System.out.println("TFN Timezone Content for Expected Values:"+ ExpectedCallSamTFNtimezone);
+		System.out.println("TFN Timezone Content for Actual Values  :"+ ActualCallSamTFNtimezone);
+		if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
+			System.out.println(
+					"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+			// Assert.assertTrue(true);
+		} else {
+			// Assert.fail("*****************TFN Timezone Content was not found macthing
+			// with the SAM call Popup ***************"+ActualCallSamTFNtimezone);
+			System.out.println(
+					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+		}
+
+		String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
+		validate(CallSamTFNMember);
+		String ActualCallSamTFNMember = CallSamTFNMember.getText();
+		System.out.println("TFN Member on CAll popup: " + ExpectedCallSamTFNMember);
+		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************TFN Member Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(
+					"*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+		}
+		validate(CallSamTFNClose);
+		jsClickNew(CallSamTFNClose);
+
+	//}
+	} 
+		catch (Exception e) {
+		System.out.println("Proactive chat popup not displayed");
+		}
+	}
+	
 }

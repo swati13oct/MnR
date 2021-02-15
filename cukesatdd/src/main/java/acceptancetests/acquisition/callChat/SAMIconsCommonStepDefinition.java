@@ -240,4 +240,25 @@ public class SAMIconsCommonStepDefinition {
 
 	}
 
+	
+	@Then("^the user validates SAM icons on privacy page$")
+	public void the_user_validates_SAM_icons_on_privacy_Page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateCallpopuponaprivacypage(TFNXpath, ExpecetdTFNNo);
+
+	}
 }
