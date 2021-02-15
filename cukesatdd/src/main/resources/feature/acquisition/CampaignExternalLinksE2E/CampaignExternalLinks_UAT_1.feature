@@ -1,5 +1,4 @@
 Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_UMS_English
-
   
 	@Scenario1
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via the different deep links
@@ -49,6 +48,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath | <TFNxpath> |
     And user closes current tab and navigate to previous tab
     #PDP Plan#
+    Then user verify TFN on AARP external links page
+      | TFN No      | <TFNNo>      |
+      | TFN Xpath   | <TFNxpath1>  |
+      | Working hrs | <workingHrs> |
     When user clicks on Find Plans and Pricing to open a new tab
     Then user should be navigated on Shop for a plan page
     Then the user validates SAM icons on the page
@@ -97,6 +100,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath | <TFNxpath> |
     And user closes current tab and navigate to previous tab
     #Med Sup Plan#
+    Then user verify TFN on AARP external links page
+      | TFN No      | <TFNNo>      |
+      | TFN Xpath   | <TFNxpath1>  |
+      | Working hrs | <workingHrs> |
     When user clicks on Find Plans and Pricing to open a new tab
     Then user should be navigated on Shop for a plan page
     Then the user validates SAM icons on the page
@@ -146,6 +153,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath | <TFNxpath> |
     And user closes current tab and navigate to previous tab
     #DCE###
+    Then user verify TFN on AARP external links page
+      | TFN No      | <TFNNo>      |
+      | TFN Xpath   | <TFNxpath1>  |
+      | Working hrs | <workingHrs> |
     When user clicks on Estimate Your Prescription Drug Costs from external page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -177,11 +188,17 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     Then the pharmacy name should be updated on summary page
     And user closes current tab and navigate to previous tab
     #PRE Flow##
+    Then user verify TFN on AARP external links page
+      | TFN No      | <TFNNo>      |
+      | TFN Xpath   | <TFNxpath1>  |
+      | Working hrs | <workingHrs> |
     When user clicks on Start Now to get start the PRE flow from external page
     And clicks on get started button and runs a questionnaire
       | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | CountyDropDown  | <county>        |
+      And the user validates SAM icons on the page
+      | TFN Xpath | <TFNxpath2> |
 
    @CampaignExternal_Scenario1_AARP
     Examples: 
@@ -192,5 +209,4 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     Examples: 
       | Scenario                                             | externallink                                                | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |
       | Campaign External Links - E2E Scenario 1_UMS_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 |
-
   
