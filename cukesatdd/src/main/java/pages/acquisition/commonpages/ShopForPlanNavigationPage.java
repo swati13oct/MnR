@@ -87,7 +87,8 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	
 	@FindBy(xpath = "(//a[contains(@href,'/medicare-education/medicare-supplement-plans.html')])[1]")
 	private WebElement MedicareSupplementLink;
-	
+	@FindBy(xpath="//a[contains(text(),'Member Resources')]")
+	private WebElement ResourcesLink;
 	
 	public ShopForPlanNavigationPage(WebDriver driver) {
 		super(driver);
@@ -241,5 +242,16 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 		}
 		return RequestPlanIInformation_Validation;
 
+	}
+
+	public ResourcesPage clickMemberResourceLink() {
+		waitforElement(ResourcesLink);
+		jsClickNew(ResourcesLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("/resources.html")) {
+			return new ResourcesPage(driver);
+		}else {
+			return null;
+		}
 	}
 }
