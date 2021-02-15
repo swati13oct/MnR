@@ -5331,7 +5331,7 @@ public VPPPlanSummaryPage searchPlansWithOutCountyForExternalLink(String zipcode
 	CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
 //		sendkeys(zipCodeField, zipcode);
 	sendkeysNew(externalzipCodeField, zipcode);
-	jsClickNew(viewPlansButton);
+	jsClickNew(findPlansBtn);
 	// }
 //		while(validate(overlayFilm, 10)) {/**wait*/}
 //		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
