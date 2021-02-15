@@ -765,6 +765,7 @@ try {
 				if(IPerceptionsPopup.isDisplayed())	{
 					//driver.switchTo().frame(IPerceptionsFrame);
 					IPerceptionPopuNoBtn.click();
+				System.out.println("IPerception popup closed successfully");
 					//driver.switchTo().defaultContent();
 				}
 			}catch(Exception e){
@@ -776,6 +777,7 @@ try {
 //						IPerceptionNoBtn.click();
 						threadsleep(1);
 						jsClickNew(IPerceptionNoBtn);
+					System.out.println("IPerception frame closed successfully");
 						threadsleep(1);
 						driver.switchTo().defaultContent();
 					}
