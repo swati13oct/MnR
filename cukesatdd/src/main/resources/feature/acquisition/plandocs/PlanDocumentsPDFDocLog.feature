@@ -8,35 +8,34 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
       | ExcelFile     | <excelPath> |
       | WorkSheetName | <workSheet> |
       | Site					| <site>			|
-      | ExcelFileDocLog| <excelDocLog>|
-      | WorkSheetNameDocLog| <sheetDocLog>|
+
 
     @pdfDocLogAARP01
     Examples: 
-      | excelPath                | workSheet | site | excelDocLog | sheetDocLog |
-      | PlanDocs_Validation_Data | Sheet1    | AARP | MADocLog		| Doc Log	|
+      | excelPath                | workSheet | site | 
+      | PlanDocs_Validation_Data | Sheet1    | AARP | 
       
       @pdfDocLogAARP02
     Examples: 
-      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
-      | PlanDocs_Validation_Data | Sheet2    | AARP |MADocLog		| Doc Log	|
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet2    | AARP |
       
          @pdfDocLogAARP03
     Examples: 
-      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
-      | PlanDocs_Validation_Data | Sheet3    | AARP |MADocLog		| Doc Log	|
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet3    | AARP |
       
       @pdfDocLogUHC01
     Examples: 
-      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
-      | PlanDocs_Validation_Data | Sheet1    | UHC |MADocLog		| Doc Log	|
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet1    | UHC |
       
        @pdfDocLogUHC02
     Examples: 
-      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
-      | PlanDocs_Validation_Data | Sheet2    | UHC |MADocLog		| Doc Log	|
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet2    | UHC |
       
        @pdfDocLogUHC03
     Examples: 
-      | excelPath                | workSheet | site |excelDocLog | sheetDocLog |
-      | PlanDocs_Validation_Data | Sheet3    | UHC |MADocLog		| Doc Log	|
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet3    | UHC |

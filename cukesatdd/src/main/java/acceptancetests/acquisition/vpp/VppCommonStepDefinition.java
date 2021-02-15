@@ -3422,7 +3422,7 @@ public class VppCommonStepDefinition {
 		String ExcelName = givenAttributesMap.get("ExcelFile");
 		String ExcelNameDocLog = givenAttributesMap.get("ExcelFileDocLog");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
-		String sheetNameDocLog = givenAttributesMap.get("WorkSheetNameDocLog");
+		String sheetNameDocLog = "Doc Log";
 		String siteType = givenAttributesMap.get("Site");
 		System.out.println("Set of TFNs from Sheet : "+sheetName);
 		
@@ -3434,9 +3434,11 @@ public class VppCommonStepDefinition {
 		Date RunDate = new Date();
 		String DateCreated = dateFormat.format(RunDate);
 		String parentDirectory = null;
+		Sheet sheetDocLog = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-		String InputFilePathDocLog = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelNameDocLog+".xls";
+		String InputFilePathDocLog = parentDirectory+"/src/main/resources/database/PlanDocs/MADocLog.xls";
+		String InputFilePathDocLogPDP = parentDirectory+"/src/main/resources/database/PlanDocs/PDPDocLog.xls";
 
 		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
 		
@@ -3447,12 +3449,19 @@ public class VppCommonStepDefinition {
 		Sheet sheet = workbook.getSheet(sheetName);
 		int lastRow = sheet.getLastRowNum();
 		
-		//Reading the DocLog file
+		//Reading the MADocLog file
 		File InputFileDocLog = new File(InputFilePathDocLog);
 		FileInputStream inputStreamDocLog = new FileInputStream(InputFileDocLog);
 		Workbook workbookDocLog = new HSSFWorkbook(inputStreamDocLog);
-		Sheet sheetDocLog = workbookDocLog.getSheet(sheetNameDocLog);
-		int lastRowDocLog = sheetDocLog.getLastRowNum();
+		Sheet sheetDocLogMA = workbookDocLog.getSheet(sheetNameDocLog);
+		int lastRowDocLogMA = sheetDocLogMA.getLastRowNum();
+		
+		//Reading the PDPDocLog file
+		File InputFileDocLogPDP = new File(InputFilePathDocLogPDP);
+		FileInputStream inputStreamDocLogPDP = new FileInputStream(InputFileDocLogPDP);
+		Workbook workbookDocLogPDP = new HSSFWorkbook(inputStreamDocLogPDP);
+		Sheet sheetDocLogPDP = workbookDocLog.getSheet(sheetNameDocLog);
+		int lastRowDocLogPDP = sheetDocLogPDP.getLastRowNum();
 		
 		//Creating the results excel book
 		Workbook ResultWorkbook = new HSSFWorkbook();
@@ -3472,34 +3481,64 @@ public class VppCommonStepDefinition {
 			 String currentCellValue = "";
 			 String currentColName = "";
 			 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
-			 HashMap <String, Integer> colNamesMap = new HashMap<String, Integer>(); 
+			 HashMap <String, Integer> colNamesMapMA = new HashMap<String, Integer>(); 
+			 HashMap <String, Integer> colNamesMapPDP = new HashMap<String, Integer>(); 
 			 
 			
 			
-				 HSSFRow rowDocLog1 = (HSSFRow) sheetDocLog.getRow(0);
+				 HSSFRow rowDocLog1 = (HSSFRow) sheetDocLogMA.getRow(0);
 				 Iterator<Cell> cellIteratorDocLog = rowDocLog1.cellIterator();
-				 HSSFRow rowDocLog2 = (HSSFRow) sheetDocLog.getRow(1);
+				 HSSFRow rowDocLogPDP = (HSSFRow) sheetDocLogPDP.getRow(0);
+				 Iterator<Cell> cellIteratorDocLogPDP = rowDocLog1.cellIterator();
 				 
 				 String header = "";
-	             int ci =0;
+	             int ci =0, ci1=0;
+	             //loops around column headers for MADoclog file and puts the header names in a map with an integer for each
 	             while(cellIteratorDocLog.hasNext()) {
 	            	 HSSFCell cell = (HSSFCell) cellIteratorDocLog.next();
 	            	 if(cell.getStringCellValue()!=null)
 	            		 header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
 	            	 try {
 	            		 //System.out.println("header "+ci+" : "+header);
-	            	 colNamesMap.put(header, ci);
+	            	 colNamesMapMA.put(header, ci);
 	            	 }catch (Exception e) {
 	            		 System.out.println("Error in getting cell values from Doc log headers");
 	            	 }
 	            	 ci++;
 	             }
-	         
-             int docTypeColIndex = colNamesMap.get("DocType");
-             int langColIndex = colNamesMap.get("OCP/ODP");
-             int componentCodeIndex = colNamesMap.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
-             int planIDIndexDocLog = colNamesMap.get("Contract-PBP-SegmentID");
+	             //loops around column headers for PDPDoclog file and puts the header names in a map with an integer for each
+	             header = "";
+	             while(cellIteratorDocLogPDP.hasNext()) {
+	            	 HSSFCell cell = (HSSFCell) cellIteratorDocLogPDP.next();
+	            	 if(cell.getStringCellValue()!=null)
+	            		 header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
+	            	 try {
+	            		 //System.out.println("header "+ci+" : "+header);
+	            	 colNamesMapPDP.put(header, ci1);
+	            	 }catch (Exception e) {
+	            		 System.out.println("Error in getting cell values from Doc log headers");
+	            	 }
+	            	 ci1++;
+	             }
+	             
+	             
+	             int docTypeColIndex = 0;
+	             int langColIndex = 0;
+	             int componentCodeIndex =0;
+	             int planIDIndexDocLog = 0;
+	             
+	         //getting the respective col numbers for the following headers in MADocLog
+             int docTypeColIndexMA = colNamesMapMA.get("DocType");
+             int langColIndexMA = colNamesMapMA.get("OCP/ODP");
+             int componentCodeIndexMA = colNamesMapMA.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+             int planIDIndexDocLogMA = colNamesMapMA.get("Contract-PBP-SegmentID");
 
+             
+             //getting the respective col numbers for the following headers in PDPDocLog
+             int docTypeColIndexPDP = colNamesMapMA.get("DocType");
+             int langColIndexPDP = colNamesMapMA.get("OCP/ODP");
+             int componentCodeIndexPDP = colNamesMapMA.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+             int planIDIndexDocLogPDP = colNamesMapMA.get("Contract-PBP-SegmentID");
 			 
 			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 	            {
@@ -3538,57 +3577,90 @@ public class VppCommonStepDefinition {
 								  planDetailsPage = new PlanDetailsPage(wd);
 							 }
 							 
-							// ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
-							 int rowIndexOfDocCode = 0; String planId= "";
+							 ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
+							 int rowIndexOfDocCode = 0; String planId= "", planType = "";
 							 
 							 if(currentColName.equalsIgnoreCase("plan id"))
 								 planId = cell.getStringCellValue();
+							 else if(currentColName.equalsIgnoreCase("plan id"))
+								 planType = cell.getStringCellValue();
 								 
 							 boolean flag = false; String failedMessage = "";
 							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
 							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName); //method returns true/false value along with the document code in hashmap
 							   
-							  /*	if (resultMap.containsKey(true)) {// if the validatePDF returns True
-								  		
-									  		//loops through all of the rows in the DOCLog excel file for the column that contains the component code and checks if the code exists. if it does, then it returns the index of that row 
-									  		for(int rowIndexDocLog=2; rowIndexDocLog<=lastRowDocLog; rowIndexDocLog++) {
+							  	if(resultMap.containsKey(true) && resultMap.get(true).equalsIgnoreCase("NA")) {
+							  		newCell.setCellStyle(stylePassed);
+							  		newCell.setCellValue(resultMap.get(true));
+							  	}else if (resultMap.containsKey(true)) {// if the validatePDF returns True
+							  		int lastRowDocLog = 0;
+									  		if(planType.equalsIgnoreCase("PDP")) {
+									  			lastRowDocLog = lastRowDocLogPDP;
+									  			sheetDocLog = sheetDocLogPDP;
+									  			docTypeColIndex = docTypeColIndexPDP;
+									  			langColIndex = langColIndexPDP;
+									  			componentCodeIndex = componentCodeIndexPDP;
+									  			planIDIndexDocLog = planIDIndexDocLogPDP;
+									  		}else {
+									  			lastRowDocLog = lastRowDocLogMA;
+									  			sheetDocLog = sheetDocLogMA; 
+									  			docTypeColIndex = docTypeColIndexMA;
+									  			langColIndex = langColIndexMA;
+									  			componentCodeIndex = componentCodeIndexMA;
+									  			planIDIndexDocLog = planIDIndexDocLogMA;
+									  		}
+	
+							  				
+											//loops through all of the rows in the DOCLog (either PDP or MA based on plantype) excel file for the column that contains the component code and checks if the code exists. if it does, then it returns the index of that row 
+									  		for(int rowIndexDocLog=2; rowIndexDocLog<=lastRowDocLog ; rowIndexDocLog++) {
 									  			 String cellValueOfCompCode = sheetDocLog.getRow(rowIndexDocLog).getCell(componentCodeIndex).getStringCellValue();
 									  			if(cellValueOfCompCode.contains(resultMap.get(true))){
 									  				rowIndexOfDocCode = rowIndexDocLog;break;
 									  			}		
 											  }
 									  		 
+									  		//checks if the doc type matches for this component code
 									  		 if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue()).contains(docLangList.get(0))){
+									  			 //checks if the language matches for this component code
 										  			if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue()).contains(docLangList.get(1))){
+										  				//checks if plan id matches for the component code
 											  				if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue()).contains(planId)) {
 											  					flag = true;
 											  					newCell.setCellStyle(stylePassed);
 																newCell.setCellValue(resultMap.get(true));
-													  		 }else// else for plan id check
+													  		 }else{// else for plan id check
 													  			 failedMessage = "Failed to match the component code with the plan ID";
 											  					newCell.setCellStyle(styleFailed);
 											  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
-												  	}else //else for language check in the DOclog
+													  		 }
+												  	}else { //else for language check in the DOclog
 												  		failedMessage =  "Failed to match the component code with the Language";
 										  				newCell.setCellStyle(styleFailed);
 										  				newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+												  	}
 									  		 }else { //else for document code check in the doclog
 									  			 failedMessage = "Failed to match the component code with the document type";
 									  		 	newCell.setCellStyle(styleFailed);
 									  		 	newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
 									  		 }
+									  		 
+									  		 if(failedMessage!= "")
+									  			 System.out.println("Excel comparison Failed: "+failedMessage);
+									  		 else
+									  			 System.out.println("Excel comparison Passed for "+ resultMap.get(true));
+									  		 
 								  	} else { //else for if the valiatePDF method returns false
 								  		newCell.setCellStyle(styleFailed);
 								  		newCell.setCellValue(resultMap.get(false));
-								  	}*/
-							  if (resultMap.containsKey(true)) {
+								  	}
+							  /*if (resultMap.containsKey(true)) {
 									newCell.setCellStyle(stylePassed);
 									newCell.setCellValue(resultMap.get(true));
 								} else {
 									newCell.setCellStyle(styleFailed);
 									newCell.setCellValue(resultMap.get(false));
 								
-								}
+								}*/
 							 }else { //else for if the columns are the first few columns where validation is not needed. e.x link, plan name, etc.
 								 newCell.setCellValue(cell.getStringCellValue());
 							 }
