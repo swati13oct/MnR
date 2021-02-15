@@ -89,7 +89,8 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='accordion-1-button']")
 	public WebElement disclaimer;
 
-	@FindBy(xpath = "//*[@class='heading-4 mb-10']")
+	//@FindBy(xpath = "//*[@class='heading-4 mb-10']")
+	@FindBy(xpath = "//*[contains(@class,'uhc-filter--selected')]/span")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")

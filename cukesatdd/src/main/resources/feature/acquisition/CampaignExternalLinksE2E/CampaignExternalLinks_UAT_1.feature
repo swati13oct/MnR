@@ -112,9 +112,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | Plan Type | <Medsupplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    #And the user validates SAM icons on Medsupp page
-    	#| TFN No    | <TFNNo1>     |
-      #| TFN Xpath | <TFNxpath2> |
+    And the user validates SAM icons on Medsupp page from External page
+    	| TFN No    | <TFNNo1>     |
+      | TFN Xpath | <TFNxpath2> |
     #Then the user validates TFN Number on Right Rail
      # | TFN No    | <TFNNo1>     |
       #| TFN Xpath | <TFNxpath2> |
@@ -165,9 +165,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     And user verify the drug summary page
-    Then the user validates whether call icon is visible
-    Then the user validates whether chat icon is visible
-    And user should be able to see Medicare Advantage plan by default
+    Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+    And user should be able to see "Medicare Advantage Plans" by default
     And user should be able to toggle between plan types
     When user clicks on change pharmacy link from summary page
     Then change pharmacy modal should be displayed

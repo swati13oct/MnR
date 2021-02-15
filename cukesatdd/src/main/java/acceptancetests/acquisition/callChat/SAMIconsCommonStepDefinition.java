@@ -219,5 +219,25 @@ public class SAMIconsCommonStepDefinition {
 		aquisitionhomepage.validateCallpopuponMedsupppage(TFNXpath, ExpecetdTFNNo);
 
 	}
+	
+	@Then("^the user validates SAM icons on Medsupp page from External page$")
+	public void the_user_validates_SAM_icons_on_medsupp_page_from_external_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateCallpopuponMedsupppage(TFNXpath, ExpecetdTFNNo);
+
+	}
 
 }
