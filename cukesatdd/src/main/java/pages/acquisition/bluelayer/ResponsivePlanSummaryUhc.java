@@ -27,8 +27,6 @@ import acceptancetests.util.CommonUtility;
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.PageTitleConstants;
-import pages.dashboard_deprecated.member.blayer.DrugCostEstimatorPage;
-import pages.member_deprecated.ulayer.Rallytool_Page;
 
 public class ResponsivePlanSummaryUhc extends UhcDriver{
 	
@@ -1059,7 +1057,7 @@ public void comparePlanslnk(){
 					}
 					
 				}
-				public Rallytool_Page navigateToRallyPage(String planName) { 
+				/*public Rallytool_Page navigateToRallyPage(String planName) { 
                     driver.manage().window().maximize(); 
                     //a[contains(text(),'Is my provider covered?')]
                     int i=0;
@@ -1097,7 +1095,7 @@ public void comparePlanslnk(){
                                  }
                           i++;                
                            return null;
-                    }
+                    }*/
 
 				public ResponsivePlanSummaryUhc validateBlueBanner(String timePeriod, String currentYear, String futureYear, String planType, String planName){
 					if(timePeriod.equalsIgnoreCase("AEP")){
