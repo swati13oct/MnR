@@ -41,6 +41,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 
@@ -944,6 +945,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "agreeButton")
 	private WebElement OptumSignInAgreeButton;
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
+	private WebElement nextBestActionModalGetStartedBtn;
 
 	@FindBy(id = "back-to-plans")
 	private WebElement backToPlanComparePage;
@@ -4617,8 +4621,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(VerificationAgree);
 		jsClickNew(nextButton);
 
-		validateNew(VerificationAgree2);
-		jsClickNew(VerificationAgree2);
+		//validateNew(VerificationAgree2);
+	//	jsClickNew(VerificationAgree2);
 		jsClickNew(nextButton);
 		validateNew(VerificationAgree3);
 		Thread.sleep(3000);
@@ -6624,4 +6628,45 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return new WelcomePage(driver);
 		// return null;
 	}
+//}
+
+/**
+ * @author rravind8 This method verifies the NBA Modal for Drug Cost
+ */
+public void verifyNextBestActionModalForDrugCost() {
+	waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
+	try {
+		if (nextBestActionModal.isDisplayed()) {
+			if (nextBestActionModalMsg.size() > 1) {
+			Assert.assertTrue(
+					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
+							+ "\n Actual message" + nextBestActionModalMsg.get(1).getText(),
+					nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+		}else {
+			Assert.assertTrue(
+					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
+							+ "\n Actual message" + nextBestActionModalMsg.get(0).getText(),
+					nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+		}
+		}
+	} catch (Exception ex) {
+		System.out.println("NBA modal not found");
+	}
+}
+
+public void verifyNBAModalNotDisplayed() {
+	Assert.assertTrue("NBA modal should not be displayed",validateNonPresenceOfElement(nextBestActionModal));
+}
+
+@FindBy(xpath = "//a[contains(@class,'meet-agent')]")
+private WebElement InsuranceAgentLink;
+public IsInsuranceAgent clickOnRequestInsuranceAgent() {
+	Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
+	jsClickNew(InsuranceAgentLink);
+	CommonUtility.checkPageIsReadyNew(driver);
+	if (driver.getCurrentUrl().contains("agent-appointment.html"))
+		return new IsInsuranceAgent(driver);
+	else
+		return null;
+}
 }

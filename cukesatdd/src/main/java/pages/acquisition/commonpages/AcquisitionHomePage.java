@@ -30,6 +30,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
@@ -43,7 +44,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement externalzipCodeField;
 
 	//@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
+	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -216,8 +218,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	//@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
 	//@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -4423,6 +4426,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
+	public String fetchEnvironmentUrlsUMS() {
+		if (MRScenario.environment.equals("offline")) {
+			testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
+			return testSiteUrl;
+		} else if (MRScenario.environment.equals("prod")) {
+			testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
+			return testSiteUrl;
+		} else if (MRScenario.environment.contains("stage-0")) {
+			testSiteUrl = UMS_ACQISITION_PAGE_URL_NEW;
+			return testSiteUrl;
+		}else
+			testSiteUrl = UMS_ACQISITION_PAGE_URL;
+		return testSiteUrl;
+	}
+	
 	public void clickonmemberSignInStagelink(String ExpectedmemberSigninURL) {
 		validateNew(memberSignInPage);
 		CommonUtility.waitForPageLoadNew(driver, memberSignInPage, 30);
@@ -5656,6 +5674,29 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 		 * "****************call us Timezone Content was not found matching with the SAM call Popup  ***************"
 		 * );
 		 */
+	}
+	
+	public IsInsuranceAgent navigateToISPath(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		//return IsInsuranceAgent;
+		return new IsInsuranceAgent(driver);
+	
+
 	}
 
 }

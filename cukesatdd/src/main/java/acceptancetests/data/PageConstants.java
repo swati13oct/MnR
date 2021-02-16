@@ -768,6 +768,6 @@ public static final String GUEST_PAYMENTS_HOME_PAGE = "guestPaymentsHomePage";
 	public static final String Confirm_OneTime_Guest_Payments_Page = "confirmOneTimeGuestPaymentsPage";
 	public static final String KEEP_CARD_ON_FILE_IND = "keepCardOnFileIndFromGPSDatabase";
 	public static final String PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE="PRODvirtualVisitdeeplinklogin";
-	
+	public static final String RESOURCE_PAGE = "resourcePage";
 }
 
