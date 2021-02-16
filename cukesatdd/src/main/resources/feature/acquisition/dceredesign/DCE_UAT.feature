@@ -272,6 +272,39 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | E2E Scenario 1_UMS | UHC     | 85001 |   Maricopa County    |    NO           |PDP     |        Lipitor| Ibuprofen | Nicomide | insulin lispro  | Fanapt |  AARP MedicareRx Walgreens (PDP)|Every 3 Months    | Lipitor    |  atorvastatin calcium |
     
      @DCE_E2E_Scenario3_UAT
+    Scenario Outline: <Scenario> : Verify that user get started from home page and can search for a plan, verify the drug summary page  and change pharmacy on drug summary and navigate back to vpp plan details page
+     Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug4> |
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    Then the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page
+    And user clicks on change pharmacy link from summary page
+    Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
+      | PharmacyZipCode | <pharmacyZipCode> |
+    Then the user selects following pharmacy and returns to DCE Summary page
+      | SelectPharmacy | <SelectPharmacy> |
+    
+    
+    
+    @DCE_E2E_Scenario3_AARP 
+   Examples: 
+      | Scenario           | site     |zipcode| county               |isMultutiCounty|plantype|       drug1   | drug2    | drug3 | drug4  | drug5   | planname                       |  supplyLength    |brandDrug1 |  genericDrug1          |                             
+      | E2E Scenario 3_AMP | AARP     | 55344 |   Hennepin County    |    NO         |PDP     |        Orfadin| Humalog  | Emsam | Lipitor| Fanapt |  AARP MedicareRx Walgreens (PDP)|Every 3 Months    | Lipitor    |  atorvastatin calcium |
+    
+    
     
     
     
