@@ -95,13 +95,22 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanButton;
 
-	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
+//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
+//	public WebElement mapdPlanToggle;
+//
+//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Prescription Drug Plans')]")
+//	public WebElement pdpPlanToggle;
+//
+//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Special Needs Plans')]")
+//	public WebElement snpPlanToggle;
+	
+	@FindBy(xpath = "//label[@for='ma-plans-radio']//span[contains(text(),'Medicare Advantage Plans')]")
 	public WebElement mapdPlanToggle;
 
-	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Prescription Drug Plans')]")
+	@FindBy(xpath = "//label[@for='pdp-plans-radio']//span[contains(text(),'Medicare Prescription Drug Plans')]")
 	public WebElement pdpPlanToggle;
 
-	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Special Needs Plans')]")
+	@FindBy(xpath = "//label[@for='snp-plans-radio']//span[contains(text(),'Medicare Special Needs Plans')]")
 	public WebElement snpPlanToggle;
 
 	@FindBy(id = "changePharmacyLink")

@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEDetailsPremiumValidationAAR
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCEDetailsPremiumValidationAARPMobile.json" }, 
-tags = { "@DCE_DrugDetailsPremiumValidation_AARP" }, dryRun=false)
+tags = { "@DCE_DrugDetailsPremiumValidation_AARP" }, dryRun=true)
 
 public class RunMRATDDAcquisitionDCEDetailsPremiumValidationAARPMobile {
 //,@DCE_DrugDetailsValidation_AARP, @DCE_DrugDetailsPremiumValidation_AARP
