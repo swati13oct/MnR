@@ -2546,5 +2546,16 @@ public class DCEStepDefinitionAARP {
 		pharmacySearchPage.clickReturnToPharamcySearch();
 
 	}
+	
+	@When("^user toggle to PDP plan type on drug summary page$")
+	public void user_toggle_to_PDP_plan_type_on_drug_summary_page() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyPDPPlanToggle();
+	}
 
+	@When("^user toggle to SNP plan type on drug summary page$")
+	public void user_toggle_to_SNP_plan_type_on_drug_summary_page() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifySNPPlanToggle();
+	}
 }

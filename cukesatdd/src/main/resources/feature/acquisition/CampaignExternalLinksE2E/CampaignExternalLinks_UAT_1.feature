@@ -10,6 +10,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | Working hrs | <workingHrs> |
     When user clicks on Find Plans and Pricing to open a new tab
     Then user should be navigated on Shop for a plan page
+    Then the user validates TFN Number on Right Rail
+     | TFN No    | <TFNNo1>     |
+    | TFN Xpath | <TFNxpath3> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -98,6 +101,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+      Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath4> |
     And user closes current tab and navigate to previous tab
     #Med Sup Plan#
     Then user verify TFN on AARP external links page
@@ -181,11 +187,21 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath | <TFNxpath> |
     And user should be able to see "Medicare Advantage Plans" by default
     And user should be able to toggle between plan types
+    Then the user verify the default Retail chain pharmacy on drug summary page
+    	|DefaultPharmacy| <defaultPharmacy>|
     When user clicks on change pharmacy link from summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
     When user saves and updates pharmacy from list
     Then the pharmacy name should be updated on summary page
+    When user toggle to PDP plan type on drug summary page
+     Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
+     When user toggle to SNP plan type on drug summary page
+     Then the user validates SAM icons on the page
+      | TFN No    | <TFNNo>    |
+      | TFN Xpath | <TFNxpath> |
     And user closes current tab and navigate to previous tab
     #PRE Flow##
     Then user verify TFN on AARP external links page
@@ -231,10 +247,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     And user closes current tab and navigate to previous tab
     @CampaignExternal_Scenario1_AARP
     Examples: 
-      | Scenario                                             | externallink                                             | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                       | specialNeeds | isCoverageOpt | TFNxpath4             |TFNxpath5|
-      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No            | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012869 | Yes            | Lipitor,YES,Lipitor TAB 20MG,,60,1,YES,NO:morphine sulfate/sodium chloride,NO,,,20,3,NO,NO | None         | PDP           | //*[@id='tty-number'] |(//span[contains(@class, 'tel')])[1]|
+      | Scenario                                             | externallink                                             | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                       | specialNeeds | isCoverageOpt | TFNxpath4             |TFNxpath5|defaultPharmacy|
+      | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No            | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012869 | Yes            | Lipitor,YES,Lipitor TAB 20MG,,60,1,YES,NO:morphine sulfate/sodium chloride,NO,,,20,3,NO,NO | None         | PDP           | //*[@id='tty-number'] |(//span[contains(@class, 'tel')])[1]|Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)|
 
     @CampaignExternal_Scenario1_UHC
     Examples: 
-      | Scenario                                             | externallink                                                | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                       | specialNeeds | isCoverageOpt | TFNxpath4             |TFNxpath5|
-      | Campaign External Links - E2E Scenario 1_UMS_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   33111 | No            | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-888-378-0254 | 8012870 | Yes            | Lipitor,YES,Lipitor TAB 20MG,,60,1,YES,NO:morphine sulfate/sodium chloride,NO,,,20,3,NO,NO | None         | PDP           | //*[@id='tty-number'] |(//span[contains(@class, 'tel')])[1]|
+      | Scenario                                             | externallink                                                | zipcode | isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                       | specialNeeds | isCoverageOpt | TFNxpath4             |TFNxpath5|defaultPharmacy|
+      | Campaign External Links - E2E Scenario 1_UMS_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   33111 | No            | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-888-378-0254 | 8012870 | Yes            | Lipitor,YES,Lipitor TAB 20MG,,60,1,YES,NO:morphine sulfate/sodium chloride,NO,,,20,3,NO,NO | None         | PDP           | //*[@id='tty-number'] |(//span[contains(@class, 'tel')])[1]|Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)|
