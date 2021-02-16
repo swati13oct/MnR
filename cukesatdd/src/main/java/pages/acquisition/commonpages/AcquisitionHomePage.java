@@ -35,6 +35,7 @@ import org.testng.Assert;
 import pages.acquisition.commonpages.EnterZipCodePage;
 import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
@@ -5208,4 +5209,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 */
 		//return null;
 	}
+	
+	public IsInsuranceAgent navigateToISPath(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		//CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		//return IsInsuranceAgent;
+		return new IsInsuranceAgent(driver);
+	
+
+	}
+
 }

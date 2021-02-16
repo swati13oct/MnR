@@ -41,6 +41,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 
@@ -6602,5 +6603,17 @@ public void verifyNextBestActionModalForDrugCost() {
 
 public void verifyNBAModalNotDisplayed() {
 	Assert.assertTrue("NBA modal should not be displayed",validateNonPresenceOfElement(nextBestActionModal));
+}
+
+@FindBy(xpath = "//a[contains(@class,'meet-agent')]")
+private WebElement InsuranceAgentLink;
+public IsInsuranceAgent clickOnRequestInsuranceAgent() {
+	Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
+	jsClickNew(InsuranceAgentLink);
+	CommonUtility.checkPageIsReadyNew(driver);
+	if (driver.getCurrentUrl().contains("agent-appointment.html"))
+		return new IsInsuranceAgent(driver);
+	else
+		return null;
 }
 }
