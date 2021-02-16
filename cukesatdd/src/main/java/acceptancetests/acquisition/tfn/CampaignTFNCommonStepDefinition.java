@@ -39,7 +39,7 @@ import pages.acquisition.ulayer.UlayerTFNPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 
-public class CampaignTFNStepDefinitionAARP {
+public class CampaignTFNCommonStepDefinition {
 
 	@Autowired
 	MRScenario loginScenario;
@@ -1097,6 +1097,37 @@ public void user_navigate_pharmacy_page(DataTable givenAttributes) throws Throwa
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);	
 	tfnPage.enterZipDistanceDetails(zipcode,distance,county,planName);
+
+}
+
+@Given("^the user is on UHC medicare solutions acquisition site from Campaign Traffic$")
+public void the_user_lands_on_UHC_from_Campaign_Traffic(DataTable arg1) throws Throwable  {
+	WebDriver wd = getLoginScenario().getWebDriverNew();
+	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+	getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+	String EnvironmentUrl = aquisitionhomepage.fetchEnvironmentUrlsUMS();
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String URLpath = inputAttributesMap.get("Campaign URL");
+	String TFN_Xpath = inputAttributesMap.get("TFN Xpath");
+	CampaignTFNPage tfnPage = new CampaignTFNPage(wd);
+	getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
+	tfnPage.navigateToCampaignURL(URLpath , EnvironmentUrl);
+}
+
+@Then("^the user navigates to following memeber signin page and navigate to view medicare plans link UHC$")
+public void the_user_navigates_to_following_memeber_signin_page_UHC(DataTable arg1) throws Throwable {
+	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
+	String memberSignINURL = inputAttributesMap.get("Member Signin URL");
+	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	
+	
+	if(memberSignINURL!=null){
+		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
+		Assert.assertTrue(true);
+	}else
+		Assert.fail("Error in loading the UHC Agent Page");
+	//tfnPage.validateFederalTFN(TFN_Xpath);
 
 }
 
