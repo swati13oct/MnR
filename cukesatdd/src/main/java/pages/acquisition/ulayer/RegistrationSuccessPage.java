@@ -13,7 +13,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.member_deprecated.ulayer.AccountHomePage;
 
 /**
  * @author pperugu
@@ -47,7 +46,7 @@ public class RegistrationSuccessPage extends UhcDriver {
 		return registrationSuccessContent.getText(); // get page id
 	}
 
-	public AccountHomePage navigateToHomePage() {
+/*	public AccountHomePage navigateToHomePage() {
 		homePageLink.click();
 		if (getTitle().equalsIgnoreCase(
 				"AARP Medicare Plans | My Account Home"))
@@ -55,7 +54,7 @@ public class RegistrationSuccessPage extends UhcDriver {
 		else
 			return null;
 
-	}
+	}*/
 
 	public void logOut() {
 		logOut.click();

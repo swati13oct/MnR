@@ -943,6 +943,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "agreeButton")
 	private WebElement OptumSignInAgreeButton;
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
+	private WebElement nextBestActionModalGetStartedBtn;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -6571,5 +6574,33 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 public void validateVPPSummaryPage() {
 	Assert.assertTrue("user not navigated to VPP Page",driver.getCurrentUrl().contains("plan-summary"));
+}
+
+/**
+ * @author rravind8 This method verifies the NBA Modal for Drug Cost
+ */
+public void verifyNextBestActionModalForDrugCost() {
+	waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
+	try {
+		if (nextBestActionModal.isDisplayed()) {
+			if (nextBestActionModalMsg.size() > 1) {
+			Assert.assertTrue(
+					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
+							+ "\n Actual message" + nextBestActionModalMsg.get(1).getText(),
+					nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+		}else {
+			Assert.assertTrue(
+					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
+							+ "\n Actual message" + nextBestActionModalMsg.get(0).getText(),
+					nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+		}
+		}
+	} catch (Exception ex) {
+		System.out.println("NBA modal not found");
+	}
+}
+
+public void verifyNBAModalNotDisplayed() {
+	Assert.assertTrue("NBA modal should not be displayed",validateNonPresenceOfElement(nextBestActionModal));
 }
 }
