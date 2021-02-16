@@ -134,6 +134,14 @@ public class CampaignExternalLinkStepDefinition {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
 	
+	@When("^user click on Estimate your Drug Cost button under Look up your drugs title$")
+	public void the_user_clicks_on_Look_up_drug_button_on_external_link_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.lookUpDrugButton();
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+	}
+	
 	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
 	public void navigate_back_aarp_medicare11_page(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -278,6 +286,12 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 			campaignExternalLinkspage.navigateToPREGetStarted();
 		}
 
+	@When ("user clicks on Start Now to get start the Pharmacy flow from external page")
+	public void user_clicks_on_Start_Now_to_Get_Started_Pharmacy_Flow() {
+			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			campaignExternalLinkspage.navigateToPharmacyGetStarted();
+		}
 	@Then("^the user clicks on Get Help Finding a Plan button on Morgan Stanley external link page$")
 	public void the_user_clicks_on_Get_Help_Finding_a_Plan_button_on_Morgan_Stanley_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
