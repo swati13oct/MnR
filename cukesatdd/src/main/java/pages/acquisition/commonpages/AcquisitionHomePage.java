@@ -5277,7 +5277,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week";
 		String ActualCallSamTFNtimezone = footertextsectionTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer scetion########");
@@ -5287,24 +5287,26 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")
 				.contains(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
 			System.out.println(
-					"****************call us Timezone Content was found macthing with the SAM call Popup  ***************");
+					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
 		else
 			Assert.fail(
-					"****************call us Timezone Content was not found macthing with the SAM call Popup  ***************");
+					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
 		
-		String ExpectedCallSamTFNtimezone1 = "7 days a week";
-		String ActualCallSamTFNtimezone1 = footertextsectionTFNtimezone1.getText();
-		
-		
-		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone1);
-		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone1);
-		if (ActualCallSamTFNtimezone1.replace(" ", "").replace("\n", "")
-				.contains(ExpectedCallSamTFNtimezone1.replace(" ", "").replace("\n", "")))
-			System.out.println(
-					"****************call us Timezone1 Content was  found macthing with the SAM call Popup  ***************");
-		else
-			Assert.fail(
-					"****************call us Timezone1 Content was not found macthing with the SAM call Popup  ***************");
+		/*
+		 * String ExpectedCallSamTFNtimezone1 = "7 days a week"; String
+		 * ActualCallSamTFNtimezone1 = footertextsectionTFNtimezone1.getText();
+		 * 
+		 * 
+		 * System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone1);
+		 * System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone1); if
+		 * (ActualCallSamTFNtimezone1.replace(" ", "").replace("\n", "")
+		 * .contains(ExpectedCallSamTFNtimezone1.replace(" ", "").replace("\n", "")))
+		 * System.out.println(
+		 * "****************call us Timezone1 Content was  found macthing with the SAM call Popup  ***************"
+		 * ); else Assert.fail(
+		 * "****************call us Timezone1 Content was not found macthing with the SAM call Popup  ***************"
+		 * );
+		 */
 		
 //		validate(CallSamTFNClose);
 //		jsClickNew(CallSamTFNClose);
