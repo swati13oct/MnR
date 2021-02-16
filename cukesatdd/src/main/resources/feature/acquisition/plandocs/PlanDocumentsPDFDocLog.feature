@@ -9,10 +9,11 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
       | WorkSheetName | <workSheet> |
       | Site					| <site>			|
 
+
     @pdfDocLogAARP01
     Examples: 
-      | excelPath                | workSheet | site |
-      | PlanDocs_Validation_Data | Sheet1    | AARP |
+      | excelPath                | workSheet | site | 
+      | PlanDocs_Validation_Data | Sheet1    | AARP | 
       
       @pdfDocLogAARP02
     Examples: 

@@ -483,7 +483,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | Plan Name    | <ny_planName> |
    	Then the user validates TFN Number
        | TFN No    | <TFNNo>    |
-       | TFN Xpath | <TFNxpath> | 
+       | TFN Xpath | <DCETFNxpath> | 
     #-##########-----------------------------------------------------------------------###########
    	  Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
       | MedEd URL    | <medEdURL1> |
@@ -590,7 +590,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | Plan Name    | <ny_planName> |
    	Then the user validates TFN Number
        | TFN No    | <TFNNo>    |
-       | TFN Xpath | <TFNxpath> | 
+       | TFN Xpath | <DCETFNxpath> | 
     #-##########-----------------------------------------------------------------------###########
    	  Then the user navigates to following MedEd Plan Page URL and validate Federal TFN
       | MedEd URL    | <medEdURL1> |

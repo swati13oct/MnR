@@ -18,10 +18,10 @@ import acceptancetests.util.CommonUtility;
  */
 public class DisclaimersAARPPage extends GlobalWebElements{
 	
-	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
 	public static WebElement header;
 	
-	@FindBy(xpath = "//div[contains(@class,'meded-accordion')]/div[contains(@class,'meded-accordion__item')]//a")
+	@FindBy(xpath = "//div[contains(@class,'uhc-accordion__head')]")
 	public static List<WebElement> mededAccordianList;
 
 	

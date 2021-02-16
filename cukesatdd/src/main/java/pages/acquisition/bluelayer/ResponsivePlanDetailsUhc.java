@@ -10,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.ulayer.ResponsivePlanDetails;
-import pages.member_deprecated.ulayer.Rallytool_Page;
 import atdd.framework.UhcDriver;
 
 public class ResponsivePlanDetailsUhc extends UhcDriver {
@@ -124,7 +123,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 		
 	}
 	
-	public Rallytool_Page validateRallyPage(){
+	/*public Rallytool_Page validateRallyPage(){
 		providerLink.click();
 		try {
 			Thread.sleep(3000);
@@ -148,7 +147,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 
          }
 		return null;
-	}
+	}*/
 	
 	public ResponsivePlanDetailsUhc valiadateOptionalServices(String optionalDental, String highOptionalDental){
 		
