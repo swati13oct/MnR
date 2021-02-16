@@ -1069,7 +1069,7 @@ public abstract class UhcDriver {
 	 *         on visible text mobile
 	 */
 	public void mobileSelectOption(WebElement selectElement, String option, boolean clickElement) {
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID") || MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
 			Select element = new Select(selectElement);
 			element.selectByVisibleText(option);
 		} else {
