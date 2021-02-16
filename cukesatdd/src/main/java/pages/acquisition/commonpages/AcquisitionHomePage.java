@@ -5218,18 +5218,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement footertextsectionTFNtimezone1;
 	
 	@FindBy(xpath = "(//div[@class='label-icon']/h5)[1]")
-	private WebElement footertextsectionHeader;
+	private WebElement footertextsectionTFNHeader;
+
+	@FindBy(xpath = "(//div[@class='uhc-container']//h2)[1]")
+	private WebElement rightRailSectionTFNHeader;
+
+	@FindBy(xpath = "(//div[@class='label-icon']//h3)[1]")
+	private WebElement rightRailSectionTFNHeader1;
+
+	@FindBy(xpath = "//div[@class='label-icon']//following-sibling::div/div")
+	private WebElement rightRailsectionTFNtimezone;
+
+	@FindBy(xpath = "(//div[@class='uhc-container']//h4)[3]")
+	private WebElement rightRailSectionTFNHeaderMedsupp;
+
+	@FindBy(xpath = "(//div[@class='label-icon']//h5)[1]")
+	private WebElement rightRailSectionTFNHeaderMedsupp1;
+
+	@FindBy(xpath = "//span[contains(@class,'size14 day')]")
+	private WebElement rightRailsectionTFNtimezoneMedsupp;
 	
 	public void validatefootercallussection(String TFNXpath, String ExpecetdTFNNo) {
-		
-	//	driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver, 10);
 
 		System.out.println("########Validating TFN member in Footer section########");
-		if (validate(footertextsectionHeader)) {
-			scrollToView(footertextsectionHeader);
-			System.out.println(footertextsectionHeader.getText());
+		if (validate(footertextsectionTFNHeader)) {
+			scrollToView(footertextsectionTFNHeader);
+			System.out.println(footertextsectionTFNHeader.getText());
 		}
 
 		String ExpectedCallSamTFNMember = "Call UnitedHealthcare: 1-877-755-5345 (TTY 711)";
@@ -5297,31 +5312,63 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 
-public void validateTFNNoonRightRail(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
-	
-	//driver.navigate().refresh();
-	CommonUtility.checkPageIsReady(driver);
-	CheckiPerseptions();
+	public void validateTFNNoonRightRail(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
 
-	try {
-		Thread.sleep(3000);
-	} catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
-	validateNew(ActualTFNelement);
+		CommonUtility.checkPageIsReady(driver);
+//			checkModelPopup(driver, 10);
+//			CheckiPerseptions();
 
-	System.out.println("Expected TFN No: " + ExpecetdTFNNo);
-	System.out.println("Actual TFN No: " + ActualTFNelement.getText());
-//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
-		if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
-		System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());
+		System.out.println("########Validating TFN Info in RIght Rail section########");
+
+		if (validate(rightRailSectionTFNHeader)) {
+			scrollToView(rightRailSectionTFNHeader);
+			System.out.println(rightRailSectionTFNHeader.getText());
+			System.out.println(rightRailSectionTFNHeader1.getText());
+		}
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at 1-877-755-5345 (TTY 711)";
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText();
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week";
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+
+		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+				.contains(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
+			System.out.println(
+					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
+		else
+			Assert.fail(
+					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
 	}
-	
-	else
-		Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
-}
 
 public VPPPlanSummaryPage searchPlansWithOutCountyForExternalLink(String zipcode) throws InterruptedException {
 
@@ -5370,9 +5417,7 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 	public void validateCallpopuponMedsupppage(String TFNXpath, String ExpecetdTFNNo) {
 
 		System.out.println("########Validating TFN on Call SAM icon and Call popup for Medsupp#######");
-		// driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
-		checkModelPopup(driver, 10);
 
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);
@@ -5562,4 +5607,51 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 		}
 	}
 	
+	public void validateTFNNoonRightRailforMedsupp(String TFNXpath, String ExpecetdTFNNo) {
+
+		CommonUtility.checkPageIsReady(driver);
+//		checkModelPopup(driver, 10);
+
+		System.out.println("########Validating TFN Info in RIght Rail section for Medsupp########");
+
+		if (validate(rightRailSectionTFNHeaderMedsupp)) {
+			scrollToView(rightRailSectionTFNHeaderMedsupp);
+			System.out.println(rightRailSectionTFNHeaderMedsupp.getText());
+			System.out.println(rightRailSectionTFNHeaderMedsupp1.getText());
+		}
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezoneMedsupp.getText();
+
+		/*
+		 * String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week";
+		 * String ActualCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		 * 
+		 * System.out.
+		 * println("########Validating TFN Time zone in Right Rail section for Medsupp#####"
+		 * ); System.out.println("Expected TFN time zone: " +
+		 * ExpectedCallSamTFNtimezone); System.out.println("Actual TFN time zone: " +
+		 * ActualCallSamTFNtimezone);
+		 * 
+		 * if (ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+		 * .contains(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
+		 * System.out.println(
+		 * "****************call us Timezone Content was found matching with the SAM call Popup  ***************"
+		 * ); else Assert.fail(
+		 * "****************call us Timezone Content was not found matching with the SAM call Popup  ***************"
+		 * );
+		 */
+	}
+
 }

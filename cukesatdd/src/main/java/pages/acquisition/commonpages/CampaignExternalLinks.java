@@ -65,12 +65,6 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "//a[@data-asset-name='Find Plans & Pricing']")
 	private WebElement findPlansPricing;
-
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::input[contains(@id,'find-plans-zip')]")
-	private WebElement zipcodeEnterFld;
-
-	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::a[contains(@href,'#modal--zip-finder')]")
-	private WebElement locateZipcodeLink;
 	
 	@FindBy(xpath = "//p[contains(@class,'c-tfn-fragment__hours')]")
 	private WebElement workingHrs;
@@ -110,6 +104,12 @@ public class CampaignExternalLinks extends UhcDriver {
 	
 //	--- locators for scenario 5
 
+	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::input[contains(@id,'find-plans-zip')]")
+	private WebElement zipcodeEnterFld;
+
+	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::a[contains(@href,'#modal--zip-finder')]")
+	private WebElement locateZipcodeLink;
+
 	@FindBy(xpath = "//span[@class='card-link__arrow' and contains(text(),'Medicare Supplement')]")
 	private WebElement MedicareSupplementInsurancePlans;
 	
@@ -127,6 +127,9 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@aria-label,'Disclaimer Information')]")
 	private WebElement footerInfo;
+
+	@FindBy(xpath = "(//div[@class='modal-body'])[1]")
+	private WebElement countyModalVpp;
 
 	public static String parentWindow;
 	
@@ -713,5 +716,57 @@ public class CampaignExternalLinks extends UhcDriver {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;
+	}
+
+	public VPPPlanSummaryPage searchPlansWithOutCountyForMorganStanley(String zipcode) {
+
+		waitForPageLoadSafari();
+		checkModelPopup(driver, 10);
+
+		validateNew(vppTop, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		} else
+			return null;
+	}
+
+	public VPPPlanSummaryPage searchPlanswithCountyForMorganStanley(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoad(driver, countyModalVpp, 15);
+		if (validate(countyModalVpp))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+
+		checkModelPopup(driver, 10);
+
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+
+	public void enterZipcodeFindPlan(String zipcode) {
+		validateNew(zipcodeEnterFld);
+		sendkeysNew(zipcodeEnterFld, zipcode);
+
+		String parentWindow = driver.getWindowHandle();
+
+		jsClickNew(findPlanSubmitBtn);
+		waitForPageLoadSafari();
+
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("health-plans"))
+			System.out.println("****************Vpp Page is displayed***************" + CurrentRailURL);
 	}
 }

@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -18,6 +20,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.CampaignExternalLinks;
 import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 /**
  * Functionality: Validate different Campaign External Links
@@ -283,23 +286,39 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
 
-	@Then("^the user validates TFN Number in Still have Questions section at bottom of Medsupp page$")
-	public void the_user_validates_TFN_Number_in_Still_have_Questions_section_at_bottom_of_Medsupp_page(
-			DataTable givenAttributes) {
+	@When("^the user performs plan search using following information on Morgan Stanley external link page$")
+	public void the_user_performs_plan_search_using_following_information_on_Morgan_Stanley_external_link_page(
+			DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		campaignExternalLinkspage.enterZipcodeFindPlan(zipcode);
 
-		String TFNXpath = memberAttributesMap.get("TFN Xpath");
-		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
-		aquisitionhomepage.validateMedsuppfootercallussection(TFNXpath, ExpecetdTFNNo);
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = campaignExternalLinkspage.searchPlansWithOutCountyForMorganStanley(zipcode);
+		} else {
+			plansummaryPage = campaignExternalLinkspage.searchPlanswithCountyForMorganStanley(zipcode, county);
+		}
 
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
 	}
 
 }

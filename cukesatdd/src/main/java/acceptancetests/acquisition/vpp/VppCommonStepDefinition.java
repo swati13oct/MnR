@@ -184,7 +184,7 @@ public class VppCommonStepDefinition {
 		}
 		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		System.out.println("Select PlanType to view Plans for entered Zip: " + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,(new VPPPlanSummaryPage(wd)));
