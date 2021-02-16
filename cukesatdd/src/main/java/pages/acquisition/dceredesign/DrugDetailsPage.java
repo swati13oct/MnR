@@ -406,9 +406,14 @@ public class DrugDetailsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
-		validateNew(DrugDetails_DrugCostsHeading);
-		if(!CurrentFlow.equalsIgnoreCase("compare"))
-			validateNew(LinkToDrugSummary);
+        validateNew(DrugDetails_DrugCostsHeading);
+        validateNew(LinktoExitScenario);
+        if(!LinktoExitScenario.getText().contains("Compare")) {
+            validateNew(LinkToDrugSummary);
+        }
+        /*
+         * if(!CurrentFlow.equalsIgnoreCase("compare")) validateNew(LinkToDrugSummary);
+         */
 		validateNew(LinktoExitScenario);
 		validateNew(LinktoEditDrugList);
 	}
