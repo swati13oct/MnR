@@ -102,10 +102,10 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//*[@id=\"button-127872393\"]")
 	private WebElement estimateDrugCostButton;
 	
-	@FindBy(xpath = "//*[@id='button-1095029748']")
+	@FindBy(xpath = "//a[contains(@data-asset-name,'Estimate Your Prescription')]")
 	private WebElement dceExternalLink;
 	
-	@FindBy(xpath = "//*[@id='button-565183562']")
+	@FindBy(xpath = "//a[contains(@data-asset-name,'Start Now')]")
 	private WebElement preExternalLink;
 	
 //	--- locators for scenario 5
@@ -621,7 +621,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		start(url);
 	}
 	
-	@FindBy(xpath = "//*[@id='button-959817150']")
+	@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
 	private WebElement clickFindPlansinyourArea;
 	
 	public void clickFindPlansinyourArea() {
