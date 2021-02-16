@@ -135,7 +135,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on Medsupp page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates TFN Number on Right Rail
+    Then the user validates TFN Number on Right Rail for Medsupp page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath2> |
     Then user closes current tab and navigate to previous tab
