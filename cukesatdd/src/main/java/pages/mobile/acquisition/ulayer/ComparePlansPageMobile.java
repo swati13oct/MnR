@@ -83,6 +83,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Find Care']")
 	public WebElement FindCareLink;
 
+	@FindBy(xpath = "//span[text()='Find Urgent Care']")
+	public WebElement FindUrgentCareLink;
+
 	@FindBy(xpath = "//span[text()='1 out of 1 providers covered']")
 	public WebElement VerifyProviderCount;
 
@@ -398,7 +401,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 				System.out.println("Window title is : " + title);
 				if (title.contains("Find Care")) {
 					System.out.println("We are on Find Care winodow opened");
-					//driver.manage().window().maximize();
+					// driver.manage().window().maximize();
 					Thread.sleep(3000);
 					waitforElement(FindCareLink);
 					break;
@@ -809,15 +812,15 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			//driver.manage().window().maximize();
+			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindCareLink);
+			waitforElement(FindUrgentCareLink);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(FindCareLink);
-		if (validate(FindCareLink)) {
+		waitforElement(FindUrgentCareLink);
+		if (validate(FindUrgentCareLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -842,7 +845,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 		if (driver.getCurrentUrl().contains("werally")) {
 			System.out.println("We are on Find Care winodow opened");
-			//driver.manage().window().maximize();
+			// driver.manage().window().maximize();
 			Thread.sleep(3000);
 			waitforElement(FindCareLink);
 		} else {
@@ -879,13 +882,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindCareLink);
+			waitforElement(FindUrgentCareLink);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(FindCareLink);
-		if (validate(FindCareLink)) {
+		waitforElement(FindUrgentCareLink);
+		if (validate(FindUrgentCareLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -912,13 +915,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindCareLink);
+			waitforElement(FindUrgentCareLink);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(FindCareLink);
-		if (validate(FindCareLink)) {
+		waitforElement(FindUrgentCareLink);
+		if (validate(FindUrgentCareLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1257,13 +1260,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	public void clickOnSelectedRemoveLink(String planIndices) {
 		WebElement ele;
-		 TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(","))); 
-		for(String index:(TreeSet<String>)mySet.descendingSet())
-		{
-		ele=driver.findElement(By.xpath("(//button[contains(@class,'removePlan')])["+Integer.parseInt(index)+"]"));
-		validateNew(ele,10);
-		jsClickNew(ele);
-		System.out.println("Clicked on Remove Link on plan Compare page");
+		TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(",")));
+		for (String index : (TreeSet<String>) mySet.descendingSet()) {
+			ele = driver.findElement(
+					By.xpath("(//button[contains(@class,'removePlan')])[" + Integer.parseInt(index) + "]"));
+			scrollToView(ele);
+			validateNew(ele, 10);
+			jsClickNew(ele);
+			System.out.println("Clicked on Remove Link on plan Compare page");
 		}
 	}
 
@@ -1334,7 +1338,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			switchToNewTabNew(DentalFlyerLink);
 			if (driver.getCurrentUrl().contains(Documentcode)) {
 				System.out.println("We able to 1023  Document loaded");
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				Thread.sleep(3000);
 			} else {
 				System.out.println("Not found Expected window");
@@ -1350,7 +1354,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 			if (driver.getCurrentUrl().contains(Documentcode)) {
 				System.out.println("We able to 1025  Document loaded");
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				Thread.sleep(3000);
 			} else {
 				System.out.println("Not found Expected window");
