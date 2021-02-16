@@ -874,6 +874,8 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acquisitionHomePage.navigateToShopPDPpage();
 		GetStartedPage getStartedPage = acquisitionHomePage.clickDCERedesignLinkonShopPDPpage();
+		String plantype="PDP";
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
