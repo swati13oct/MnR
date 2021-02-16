@@ -27,7 +27,7 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import pages.AEM.CQPage;
-import pages.regression.sso.*;
+import pages.AEM.*;
 
 
 /**

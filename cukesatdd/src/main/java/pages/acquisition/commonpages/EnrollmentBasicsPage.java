@@ -55,6 +55,9 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@href,'pdp-enrollment')]")
 	private WebElement pdpLeanHowToEnrollLink;
 	
+	@FindBy(xpath = "//a[contains(@href,'ms-apply')]")
+	private WebElement msLeanHowToEnrollLink;
+	
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
 	private WebElement EnrollmentLink;
 	
@@ -215,6 +218,73 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		
 	}
 	
+	public void clickMAEnrolllink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(maLeanHowToEnrollLink);
+		jsClickNew(maLeanHowToEnrollLink);
+		System.out.println("MA Enrollment Button Clicked");
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("/enroll/ma-enrollment.html")) {
+			System.out.println("MA Enrollment Page opened Successfully : "+ driver.getCurrentUrl());
+		}else {
+			Assert.fail("MA Enrollment Page did not opened Successfully");
+		}
+	}
+	
+	public void clickPDPEnrolllink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(pdpLeanHowToEnrollLink);
+		jsClickNew(pdpLeanHowToEnrollLink);
+		System.out.println("PDP Enrollment Button Clicked");
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("/enroll/pdp-enrollment")) {
+			System.out.println("PDP Enrollment Page opened Successfully : "+ driver.getCurrentUrl());
+		}else {
+			Assert.fail("PDP Enrollment Page did not opened Successfully");
+		}
+	}
+	public void clickMedSupEnrolllink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		scrollToView(msLeanHowToEnrollLink);
+		jsClickNew(msLeanHowToEnrollLink);
+		System.out.println("MedSup Enrollment Button Clicked");
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("/enroll/ms-apply")) {
+			System.out.println("MedSup Enrollment Page opened Successfully: " + driver.getCurrentUrl());
+		}else {
+			Assert.fail("MedSup Enrollment Page did not opened Successfully");
+		}
+	}
+	
+	public void clickMedicareEligibilityLink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement lnkMedEligibility=driver.findElement(By.xpath("//span//a[contains(@href,'/medicare-eligibility.html')]"));
+		scrollToView(lnkMedEligibility);
+		jsClickNew(lnkMedEligibility);
+		System.out.println("Learn About Eligiblity link Clicked.");
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("medicare-education/medicare-eligibility.html")) {
+			Assert.assertTrue(true);
+			System.out.println("Learn About Eligiblity link opened successfully.\n "+ driver.getCurrentUrl());
+		}else {
+			Assert.fail("Learn About Eligiblity link did not opened successfully.");
+		}
+	}
+	
+	public void clickLearnEnrollmentLink() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement lnkEnrollBasics=driver.findElement(By.xpath("//span//a[contains(@href,'enrollment-and-changing-plans.html')]"));
+		scrollToView(lnkEnrollBasics);
+		jsClickNew(lnkEnrollBasics);
+		System.out.println("Learn About Enrollment link Clicked.");
+		CommonUtility.checkPageIsReadyNew(driver);
+		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html")) {
+			Assert.assertTrue(true);
+			System.out.println("Learn About Enrollment link opened successfully.\n"+ driver.getCurrentUrl());
+		}else {
+			Assert.fail("Learn About Enrollment link did not opened successfully.");
+		}
+	}
 
 	
 }
