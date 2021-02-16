@@ -403,4 +403,12 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 		
 	}
+
+	public void validateDrugRecommendationSectionNOTdisplayed(String druglist) {
+		if(!validate(DrugRecommendationHeader) && DrugRecommendationDrugList.isEmpty()) {
+			System.out.println("Validation PASSED : Drug Recommendation NOT displayed when 25 Drugs added to cabinet ");
+		}
+		else
+			Assert.fail("Validation FAILED : Drug Recommendation displayed when 25 Drugs added to cabinet");
+	}
 }

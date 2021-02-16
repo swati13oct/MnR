@@ -500,6 +500,12 @@ public class DCEStepDefinitionAARP {
 		buildYourDrugsListPage.validateDrugRecommendationSection(druglist);
 	}
 
+	@Then("^the user validates Drug Recommendation section is not Displayed after adding twenty five drugs$")
+	public void the_user_validates_Drug_Recommendation_section_does_not_dispaly() throws Throwable {
+		BuildYourDrugList buildYourDrugsListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		buildYourDrugsListPage.validateDrugRecommendationSectionNOTdisplayed(druglist);
+	}
 
 	@Then("^the user searches and adds the following Drug for following quantity, frequency and Supplylength to Drug List$")
 	public void the_user_searches_and_adds_the_following_Drug_for_following_quantity_frequency_and_Supplylength_to_Drug_List(DataTable givenAttributes) throws Throwable {
