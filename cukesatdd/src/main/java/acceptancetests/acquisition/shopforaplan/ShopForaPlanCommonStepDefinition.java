@@ -19,6 +19,7 @@ import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.EnrollmentBasicsPage;
+import pages.acquisition.commonpages.ResourcesPage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.acquisition.commonpages.ShopPage;
 
@@ -293,5 +294,105 @@ public class ShopForaPlanCommonStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		return memberAttributesMap;
+	}
+	
+	@Then("^the user click on Enroll link and lands on Enroll Page$")
+	public void clicks_on_enroll_link() throws Throwable {
+		ShopForPlanNavigationPage shopaplan = (ShopForPlanNavigationPage) getLoginScenario()
+				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
+		EnrollmentBasicsPage enrollPage = shopaplan.enrollLinkOnShopPlan();
+		if (enrollPage != null) {
+			getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollPage);
+			System.out.println("Enroll Link opened Successfully");
+		}
+		else
+			Assert.fail("Enroll page is not loaded");
+	}
+	@Then("^the user click on MA Enroll Start button on Enroll Page$")
+	public void the_user_click_on_MA_Enroll_Start_button_on_Enroll_Page(){
+		EnrollmentBasicsPage enrollPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollPage.clickMAEnrolllink();
+	}
+	
+	@Then("^the user click on PDP Enroll Start button on Enroll Page$")
+	public void the_user_click_on_PDP_Enroll_Start_button_on_Enroll_Page(){
+		EnrollmentBasicsPage enrollPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollPage.clickPDPEnrolllink();
+	}
+	
+	@Then("^the user click on MedSupp Enroll Start button on Enroll Page$")
+	public void the_user_click_on_MedSupp_Enroll_Start_button_on_Enroll_Page(){
+		EnrollmentBasicsPage enrollPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollPage.clickMedSupEnrolllink();
+	}
+	
+	@Then("^the user clicks on Learn About Eligibility link on Enroll Page$")
+	public void the_user_clicks_on_Learn_About_Eligibility_link_on_Enroll_Page() {
+		EnrollmentBasicsPage enrollPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollPage.clickMedicareEligibilityLink();
+	}
+	
+	@Then("^the user clicks on Learn About Enrollment link on Enroll Page$")
+	public void the_user_clicks_on_Learn_About_Enrollment_link_on_Enroll_Page() {
+		EnrollmentBasicsPage enrollPage=(EnrollmentBasicsPage)getLoginScenario().getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+		enrollPage.clickLearnEnrollmentLink();
+	}
+	
+	@Then("^the user clicks on Member Resources link and lands on Resource Page$")
+	public void the_user_clicks_on_Member_Resources_link_and_lands_on_Resource_Page() {
+		
+		ShopForPlanNavigationPage shopaplan = (ShopForPlanNavigationPage) getLoginScenario()
+				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
+		ResourcesPage resourcePage = shopaplan.clickMemberResourceLink();
+		if (resourcePage != null) {
+			getLoginScenario().saveBean(PageConstants.RESOURCE_PAGE, resourcePage);
+			System.out.println("Resource Page not loaded");
+		}
+		else {
+			System.out.println("Resource Page is not loaded");
+		}		
+	}
+	
+	@Then("^the user clicks on Search Now button to land on Plan Doc search Page$")
+	public void the_user_clicks_on_Search_Now_button_to_land_on_Plan_Doc_search_Page() {
+		
+		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
+		resourcePage.clickOnSearchNowPlanDoc();
+	}
+	
+	@Then("^user click on Find Information button and Plan Info page$")
+	public void user_click_on_Find_Information_button_and_Plan_Info_page() {
+		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
+		resourcePage.clickOnFindInfoButton();		
+	}
+	
+	@Then("^user click on Plan Benefit link$")
+	public void user_click_on_Plan_Benefit_link() {
+		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
+		resourcePage.clickOnPlanBenefitLink();
+	}
+	
+	@Then("^user click on Wellness Resources link$")
+	public void user_click_on_Wellness_Resources_link() {
+		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
+		resourcePage.clickOnWellnessResourcesLink();
+	}
+	
+	@Then("^user click on Clinical Program link$")
+	public void user_click_on_Clinical_Program_link() {
+		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
+		resourcePage.clickOnClinicalProgramLink();
+	}
+	
+	@Then("^user click on Learn more link for mail order pharmacy$")
+	public void user_click_on_Learn_more_link_for_mail_order_pharmacy() {
+		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
+		resourcePage.clickOnLearnmoreLinkForMailOrderPharmacy();
+	}
+	
+	@Then("^user click on Get Informed button for Preventing Medical Fraud link$")
+	public void user_click_on_Get_Informed_button_for_Preventing_Medical_Fraud_link() {
+		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
+		resourcePage.clickOnGetInformedMedicalFraudLink();
 	}
 }

@@ -120,19 +120,24 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'NewCustomRTE')]//span[contains(@class,'heading-3')]")
 	List<WebElement> findurPlanOptions;
 	
-	@FindBy(xpath = "//a[contains(text(),'Compare')]")
+	//@FindBy(xpath = "//a[contains(text(),'Compare')]")
+	@FindBy(xpath="//a[contains(@href,'/shop/compare')]")
 	private WebElement comparePlanBtn;
 
-	@FindBy(xpath = "//a[contains(text(),'Learn')]")
+	//@FindBy(xpath = "//a[contains(text(),'Learn')]")
+	@FindBy(xpath="//a[contains(@href,'/shop/estimate')]")
 	private WebElement LearnEstimateCosts;
 
-	@FindBy(xpath = "//a[contains(text(),'How To')]")
+	//@FindBy(xpath = "//a[contains(text(),'How To')]")
+	@FindBy(xpath = "//a[contains(@href,'/shop/switch')]")
 	private WebElement howToSwitchPlans;
 
-	@FindBy(xpath = "//a[contains(text(),'Learn More')]")
+	//@FindBy(xpath = "//a[contains(text(),'Learn More')]")
+	@FindBy(xpath = "//a[contains(@href,'/safe-shopping')]")
 	private WebElement learnSafeShopping;
 
-	@FindBy(xpath = "//a[contains(text(),'Get Resources')]")
+	//@FindBy(xpath = "//a[contains(text(),'Get Resources')]")
+	@FindBy(xpath = "(//a[contains(@href,'/resources')])[2]")
 	private WebElement getMemberResources;
 
 	@FindBy(xpath = "//span[@class='heading-1' and contains(text(),'Personalize Your Results')]")
@@ -393,8 +398,9 @@ public class ShopPage extends UhcDriver {
 	public void memberResources() {
 		validateNew(getMemberResources);
 		jsClickNew(getMemberResources);
+		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
-		if (!driver.getCurrentUrl().contains("resources.html#/NEM"))
+		if (!driver.getCurrentUrl().contains("resources.html"))
 			Assert.fail("Get Member Resources page did not load properly");
 	}
 
