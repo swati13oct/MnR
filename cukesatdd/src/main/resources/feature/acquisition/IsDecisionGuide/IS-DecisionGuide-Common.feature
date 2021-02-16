@@ -10,8 +10,8 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
       | County Name     | <county>          |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
+    #And the user selects plan year
+     # | Plan Year | <planyear> |
     #    Then the user enters valid information for the pre entry form on AARP site
     #      | DOB							|	<dob>								|
     Then the user enters and  saves the entered information in Pre-entry page for validation on IS form

@@ -13,8 +13,8 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "RunMRATDDAcquisitionInsuranceAgentBlayer.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionInsuranceAgentBlayer")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/IsInsuranceAgent" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionInsuranceAgentBlayer.json" }, tags = { "@IS_InsuranceAgent_UHC" })
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/IsInsuranceAgent/IS-InsuranceAgent-Common.feature" }, plugin = {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionInsuranceAgentBlayer.json" }, tags = { "@IS_InsuranceAgent_Common_UHC" })
 public class RunMRATDDAcquisitionInsuranceAgentBlayer{ 
  
 }
