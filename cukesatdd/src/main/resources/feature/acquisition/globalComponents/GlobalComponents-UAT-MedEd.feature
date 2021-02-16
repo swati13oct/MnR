@@ -8,10 +8,10 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    When user accesses global header of the Medicare Plans home page
-    When user accesses global footer of the Medicare Plans All page
-    Then the User validates Shop for a Plan Navigation link
-    Then the user validates Medicare Education Navigation link
+    #When user accesses global header of the Medicare Plans home page
+    #When user accesses global footer of the Medicare Plans All page
+    #Then the User validates Shop for a Plan Navigation link
+    #Then the user validates Medicare Education Navigation link
     Then the user validate ZipCode Components on the page using ZipCode "10001"
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
@@ -79,6 +79,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then user clicks on Medicare Annual Enrollment Period Link and comes back
     Then the user validate ZipCode Components on the page using ZipCode "10001"
     Then the user come back to Med-ed page
+    Then the user check Still have a question
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -123,6 +124,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user click on video transcript link
     Then the user validate ZipCode Components on the page using ZipCode "19019"
     Then the user come back to Med-ed page
+    Then the user check Still have a question
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -160,6 +162,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | PageName | <pageName> |
     Then user clicks on  Medicare Part A and Part B Coverage dropdown
     Then user clicks on the plan dropdowns
+    Then the user check Still have a question
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -194,6 +197,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user click on video transcript link
     Then the user navigates through learn extra links on Cost Basic page
     Then the user check Medicare Savings Program link
+    Then the user check Still have a question
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -235,6 +239,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then user click on see plan in your area link
     Then the user gather medicare info through video
     Then the user click on video transcript link
+    Then the user check Still have a question
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
@@ -262,6 +267,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user click on see all plan link on Enrollment Basic Page
     Then the user validate ZipCode Components on the page using ZipCode "19019"
     Then the user come back to Med-ed page
+    Then the user check Still have a question
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |

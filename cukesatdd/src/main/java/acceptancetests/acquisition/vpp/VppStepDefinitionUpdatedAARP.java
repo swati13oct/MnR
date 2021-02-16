@@ -9,11 +9,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -52,6 +58,8 @@ import pages.acquisition.ulayer.VPPTestHarnessPage;
 import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.ulayer.ZipcodeLookupHomePage;
+import pages.acquisition.vppforaep.AepPlanDetailsPage;
+import pages.acquisition.vppforaep.VppCommonPage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -73,10 +81,11 @@ public class VppStepDefinitionUpdatedAARP {
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-		aquisitionhomepage.validateSubtitle();
+//		aquisitionhomepage.validateSubtitle();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
+	
 	@Given("^the user is on UHC medicare acquisition site page$")
 	public void the_user_on_uhc_medicares_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -102,37 +111,37 @@ public class VppStepDefinitionUpdatedAARP {
 	 * @throws InterruptedException 
 	 * @toDo: user performs plan search using following information
 	 */
-	@When("^the user performs plan search using following information in the AARP site$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = null;
-		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
-		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-		}
-		
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assert.fail("Error Loading VPP plan summary page");
-		}
-	}
+//	@When("^the user performs plan search using following information in the AARP site$")
+//	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//		String zipcode = memberAttributesMap.get("Zip Code");
+//		String county = memberAttributesMap.get("County Name");
+//		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+//		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+//		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+//		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+//
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		VPPPlanSummaryPage plansummaryPage = null;
+//		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+//			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
+//		} else {
+//			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
+//		}
+//		
+//		if (plansummaryPage != null) {
+//			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+//
+//		} else {
+//			Assert.fail("Error Loading VPP plan summary page");
+//		}
+//	}
 	
 	@When("^the user enters zipcode on health plans page in the AARP site$")
 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
@@ -3032,109 +3041,109 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 	
-	@Then("^the user enter the searchValue in the search text box and hits enter$")
-	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
-			throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("search Value");
-		System.out.println("Search value" + InputValue);
-		Thread.sleep(3000);
-
-		aquisitionhomepage.enterSearchtextvalue(InputValue);
-
-	}
-	
-
-@Then("^the user validates the secondary search by providing newsearchvalue in the text box$")
-public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
-	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-	Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-	for (int i = 0; i < AttributesRow.size(); i++) {
-
-		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-	}
-	String InputValue = urlAttributesMap.get("NewSearchValue");
-	System.out.println("NewSearchValue" + InputValue);
-	Thread.sleep(3000);
-	
-	aquisitionhomepage.enterSecondarySearchValue(InputValue);
- 
-}
-
-	@Then("^the user should see fifteen results before pagination$")
-	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateFifteenResults();
-
-	}
-
-	@Then("^the user validates count of results aganist the total shown at top of the page$")
-	public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCountResults();
-	}
-
-	@Then("^the user validates pagination and results displayed$")
-	public void the_user_validates_pagination_and_results_displayed() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validatePaginationofSearchResults();
-	}
-
-	@Then("^the user validates Error message$")
-	public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		
-
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String error = urlAttributesMap.get("Error");
-		String newSearchValue=urlAttributesMap.get("NewSearchValue");
-		System.out.println("Error : " + error);
-		Thread.sleep(3000);
-		aquisitionhomepage.validateErrorMsg(error,newSearchValue);
-	}
-
-	@Then("^the user clear secondary search box and insert new search value$")
-	public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String InputValue = urlAttributesMap.get("New Search Value");
-		System.out.println("New Search Value" + InputValue);
-		Thread.sleep(3000);
-		aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
-
-	}
-	
-	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
+//	@Then("^the user enter the searchValue in the search text box and hits enter$")
+//	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter(DataTable inputvalue)
+//			throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//		for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//		}
+//		String InputValue = urlAttributesMap.get("search Value");
+//		System.out.println("Search value" + InputValue);
+//		Thread.sleep(3000);
+//
+//		aquisitionhomepage.enterSearchtextvalue(InputValue);
+//
+//	}
+//	
+//
+//@Then("^the user validates the secondary search by providing newsearchvalue in the text box$")
+//public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//	for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//	}
+//	String InputValue = urlAttributesMap.get("NewSearchValue");
+//	System.out.println("NewSearchValue" + InputValue);
+//	Thread.sleep(3000);
+//	
+//	aquisitionhomepage.enterSecondarySearchValue(InputValue);
+// 
+//}
+//
+//	@Then("^the user should see fifteen results before pagination$")
+//	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateFifteenResults();
+//
+//	}
+//
+//	@Then("^the user validates count of results aganist the total shown at top of the page$")
+//public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateCountResults();
+//	}
+//
+//	@Then("^the user validates pagination and results displayed$")
+//	public void the_user_validates_pagination_and_results_displayed() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validatePaginationofSearchResults();
+//	}
+//
+//	@Then("^the user validates Error message$")
+//	public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+//
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		
+//
+//		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//		for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//		}
+//		String error = urlAttributesMap.get("Error");
+//		String newSearchValue=urlAttributesMap.get("NewSearchValue");
+//		System.out.println("Error : " + error);
+//		Thread.sleep(3000);
+//		aquisitionhomepage.validateErrorMsg(error,newSearchValue);
+//	}
+//
+//	@Then("^the user clear secondary search box and insert new search value$")
+//	public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//
+//		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//		for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//		}
+//		String InputValue = urlAttributesMap.get("New Search Value");
+//		System.out.println("New Search Value" + InputValue);
+//		Thread.sleep(3000);
+//		aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
+//
+//	}
+//	
+	/*@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
 	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -3145,8 +3154,13 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String ExcelName = givenAttributesMap.get("ExcelFile");
-		String SheetName = givenAttributesMap.get("WorkSheetName");
-		System.out.println("Set of TFNs from Sheet : "+SheetName);
+		String sheetName = givenAttributesMap.get("WorkSheetName");
+		String siteType = givenAttributesMap.get("Site");
+		System.out.println("Set of TFNs from Sheet : "+sheetName);
+		
+		 WebDriver wd = getLoginScenario().getWebDriverNew();
+		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
 		//Getting Date
 		DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
 		Date RunDate = new Date();
@@ -3154,112 +3168,93 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		String parentDirectory = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+SheetName+"_"+DateCreated+".xls";
+		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+DateCreated+".xls";
+		
 		//Reading Excel.xls file
 		File InputFile = new File(InputFilePath);
 		FileInputStream inputStream = new FileInputStream(InputFile);
 		Workbook workbook = new HSSFWorkbook(inputStream);
-		Sheet sheet = workbook.getSheet(SheetName);
+		Sheet sheet = workbook.getSheet(sheetName);
 		int lastRow = sheet.getLastRowNum();
+		
+		//Creating the results excel book
 		Workbook ResultWorkbook = new HSSFWorkbook();
-		Sheet ResultsSheet = ResultWorkbook.createSheet(SheetName);
-		//Setting First Row for Results excel
-		Row resultsRow = ResultsSheet.createRow(0);
-		resultsRow.createCell(0).setCellValue((String) "Zipcode");
-		resultsRow.createCell(1).setCellValue((String) "PlanName");
-		resultsRow.createCell(2).setCellValue((String) "pdfType");
-		resultsRow.createCell(3).setCellValue((String) "docCode");
-		resultsRow.createCell(4).setCellValue((String) "Plan Summary Loaded PASS/FAIL");
-		resultsRow.createCell(5).setCellValue((String) "Plan Details Loaded PASS/FAIL");
-
-		resultsRow.createCell(6).setCellValue((String) "PDF Link Validated PASS/FAIL");
-		resultsRow.createCell(7).setCellValue((String) "PDF URL/Text validated PASS/FAIL");
-		//Looping over entire row
+		Sheet ResultsSheet = ResultWorkbook.createSheet(sheetName);
+		
+		
+		//Creating styles to use to highlight cells with colors
+		CellStyle stylePassed = ResultWorkbook.createCellStyle();
+		stylePassed.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+		stylePassed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		
+		CellStyle styleFailed = ResultWorkbook.createCellStyle();
+		styleFailed.setFillForegroundColor(IndexedColors.RED.getIndex());
+		styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		try {
-			for(int i=1; i<=lastRow; i++){
-				//Get input data Row
-				Row row = sheet.getRow(i);
-				double zipcodeint = row.getCell(0).getNumericCellValue();
-				
-				String zipcode = String.valueOf(zipcodeint);
-				String isMultiCounty = row.getCell(1).getStringCellValue().trim();
-				String county = row.getCell(2).getStringCellValue().trim();
-				String plantype = row.getCell(3).getStringCellValue().trim();
-				String planName = row.getCell(4).getStringCellValue().trim();
-				String pdfType = row.getCell(5).getStringCellValue().trim();
-				String docCode = row.getCell(6).getStringCellValue().trim();
+			 PlanDetailsPage planDetailsPage = null;
+			 String currentCellValue = "";
+			 String currentColName = "";
+			  
+			 HashMap <String, String> benefitsMap = new HashMap<String, String>();
+			 System.out.println(sheetName+ " SAUCE URL: "+ MRScenario.returnJobURL());
+			 
+			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+	            {
+				 	int failureCounter = 0;
+				 	int cellIndex = 0;
+				 	
+				 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
+	                Iterator<Cell> cellIterator = row.cellIterator();
+	                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
 
-				System.out.println("Excel data Row # : "+i);
-
-				System.out.println("Zipcode : "+zipcode);
-				System.out.println("Plan Type : "+plantype);
-				System.out.println("Plan Name : "+planName);
-				System.out.println("PDF Type : "+pdfType);
-				System.out.println("Document Code : "+docCode);
-
-				//Create Results Row
-				resultsRow = ResultsSheet.createRow(i);
-				resultsRow.createCell(0).setCellValue((String) zipcode);
-				resultsRow.createCell(1).setCellValue((String) planName);
-				resultsRow.createCell(2).setCellValue((String) pdfType);
-				resultsRow.createCell(3).setCellValue((String) docCode);
-				
-				WebDriver wd = getLoginScenario().getWebDriverNew();
-				AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-				getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-				
-				getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-				getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-				getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-				VPPPlanSummaryPage plansummaryPage = null;
-				if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-					plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
-				} else {
-					plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-				}
-
-				if (plansummaryPage != null) {
-					resultsRow.createCell(4).setCellValue((String) "PASS");
-
-				} else {
-					resultsRow.createCell(4).setCellValue((String) "FAIL");
-				}
-				
-				plansummaryPage.viewPlanSummary(plantype);
-				plansummaryPage.CheckClick_CurrentYear_Plans();
-				
-				PlanDetailsPage vppPlanDetailsPage = plansummaryPage.navigateToPlanDetails(planName, plantype);
-				if (vppPlanDetailsPage != null) {
-					resultsRow.createCell(5).setCellValue((String) "PASS");
-				} else
-					resultsRow.createCell(5).setCellValue((String) "FAIL");
-				boolean pdfLinkFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(pdfType,docCode);
-				if (pdfLinkFlag) {
-					resultsRow.createCell(6).setCellValue((String) "PASS");
-				} else
-					resultsRow.createCell(6).setCellValue((String) "FAIL");
-				boolean pdfFlag = vppPlanDetailsPage.ClickValidatePDFText_URL_ForDocCode(pdfType, docCode);
-				if (pdfFlag) {
-					resultsRow.createCell(7).setCellValue((String) "PASS");
-				} else
-					resultsRow.createCell(7).setCellValue((String) "FAIL");
-				
-				//wd.close();
-				wd.quit();
-				//getLoginScenario().nullifyWebDriverNew();
-
-			}
+	                //looping through columns until an empty column is found
+	                while (cellIterator.hasNext()) 
+	                {
+	                	 HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
+	                	 boolean valueMatches = true;
+	                	 HSSFCell cell = (HSSFCell) cellIterator.next();
+			             
+	                	 try {
+	                		 currentCellValue = cell.getStringCellValue();
+	                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+	                	 }catch (Exception e) {
+	                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
+	                		 System.out.println(e);
+	                	 }
+		                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
+						 if(rowIndex==0) {
+							 newCell.setCellValue(cell.getStringCellValue()); 
+						 }
+						 if(rowIndex!=0) { //skip the header row
+							 if(cellIndex==0) { 
+								 
+								  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
+								  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page	
+								  planDetailsPage = new PlanDetailsPage(wd);
+							 }
+							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
+							 boolean pdfFlag = planDetailsPage.clickAndValidatePDFText_URL(currentColName, currentCellValue);
+								if (pdfFlag) {
+									newCell.setCellStyle(stylePassed);
+									newCell.setCellValue("PASS");
+								} else {
+									newCell.setCellStyle(styleFailed);
+									newCell.setCellValue("FAIL");
+								
+								}
+							 }
+							 
+						 }
+						 
+						 cellIndex++;
+	                }
+	            }
 			File OutputFile = new File(OutputFilePath);
 			FileOutputStream outputStream = new FileOutputStream(OutputFile);
 			ResultWorkbook.write(outputStream);
 			inputStream.close();
-			outputStream.flush();
-			
+			outputStream.flush();			
 			outputStream.close();
-
-			//softAssertions.assertAll();
 		} catch (Exception e) {
 			File OutputFile = new File(OutputFilePath);
 			FileOutputStream outputStream = new FileOutputStream(OutputFile);
@@ -3267,11 +3262,10 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 			inputStream.close();
 			outputStream.flush();
 			outputStream.close();
-			//softAssertions.assertAll();
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
@@ -3823,22 +3817,22 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 				}
 		vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
 	}
-	@Then("^the user clicks on the united health care medicare solutions link$")
-	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
-	    
-	}
-	
-	@Then("^ther user validates the \"([^\"]*)\"$")
-	public void ther_user_validates_the(String url) throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateUrl(url);
-		
-	}
-	
+//	@Then("^the user clicks on the united health care medicare solutions link$")
+//	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+//	    
+//	}
+//	
+//	@Then("^ther user validates the \"([^\"]*)\"$")
+//	public void ther_user_validates_the(String url) throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateUrl(url);
+//		
+//	}
+//	
 	@Given("^the user is on AARP medicare acquisition site hits Campaign URL$")
 	public void the_user_on_aarpmedicareplans_hits_Campaign_landing_page(DataTable planAttributes) throws Throwable {
 
@@ -3957,11 +3951,84 @@ public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_
 		}
 
 	
-//
-	
-	
 	}
 	
 	
+	@Then("^user should see the Get started NBA$")
+	public void user_should_see_the_Get_started_NBA() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+				plansummaryPage);
+	}
+		
+		
 
+	@When("^user clicks on Saved items$")
+	public void user_clicks_on_Saved_items() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+		plansummaryPage.clickSavedItems();
+	}
+
+	@Then("^user should be navigated to visitor profile$")
+	public void user_should_be_navigated_to_visitor_profile() throws Throwable {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateVisitorProfilePageDisplayed();
+	}
+
+	@Then("^user changes the new zipcode on vpp summary page$")
+	public void user_changes_the_new_zipcode_on_vpp_summary_page(DataTable givenAttributes) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String zipCode = memberAttributesMap.get("New Zip Code");
+		
+		plansummaryPage.enternewZip(zipCode);
+	}
+	@Then("^user navigate to Drug Summary page$")
+	public void user_navigate_to_Drug_Summary_page() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		DrugDetailsPage drugDetails= plansummaryPage.clickonDrugSummary();
+		if (null != drugDetails) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetails);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");		
+	}
+
+	@And("^user click on view saved plans button on AARP site$")
+	public void user_click_on_view_saved_plans_button_on_AARP_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		VisitorProfilePage visitorProfilePage = plansummaryPage.viewSavedPlans();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+
+	@And("^user validate Saved items and Get started$")
+	public void user_validate_Saved_items_and_Get_started() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.getValidate();
+	}
+	
+	@And("^user validate Find a Provider NBA$")
+	public void user_validate_Find_a_Provider() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.validateProviderNBA();
+	}
+	
+	@And("^user click on get started on AARP site$")
+	public void user_click_Get_started() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.clickOnButtonInPlanSummaryPage("Get Started");
+	}
 }

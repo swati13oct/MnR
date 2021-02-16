@@ -34,18 +34,24 @@ public class GetStartedPage extends UhcDriver {
 
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
-	
-	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(), 'Return to')]")
+
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
-	
+
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
-	
-	@FindBy(css="a#visitor-profile-header")
-    private WebElement lnkProfile;
+
+	@FindBy(xpath = "//body/div[@id='overlay']")
+	private WebElement overlayFilm;
+
+	@FindBy(css = "a#visitor-profile-header")
+	private WebElement lnkProfile;
+
+	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
+	private WebElement breaCrumbLink;
 
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
@@ -57,14 +63,15 @@ public class GetStartedPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver,45);
-		else 
-			checkModelPopup(driver,10);
+			checkModelPopup(driver, 45);
+		else
+			checkModelPopup(driver, 10);
 		validateNew(getStartedTab);
 	}
 
 	public BuildYourDrugList clickAddsDrugs() {
-		if(validate(AddMyDrugsBtn))
+
+		if (validate(AddMyDrugsBtn))
 //			AddMyDrugsBtn.click();
 			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
@@ -76,18 +83,17 @@ public class GetStartedPage extends UhcDriver {
 		return null;
 	}
 
-
 	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 //		while(validate(overlayFilm, 10)) {/**wait*/}
 //		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
-		
+
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new VPPPlanSummaryPage(driver);	
+			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
 	}
@@ -96,11 +102,11 @@ public class GetStartedPage extends UhcDriver {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);	
+			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}
-		return null;	
+		return null;
 	}
-	
+
 	public VisitorProfilePage clickOnShoppingCart() {
 		jsClickNew(shoppingCartIcon);
 		jsClickNew(lnkProfile);
@@ -112,15 +118,30 @@ public class GetStartedPage extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	public PrescriptionsProvidersBenefitsPage clickReturnToAcqHomePAge() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
+
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("medicare-education")) {
-			return new PrescriptionsProvidersBenefitsPage(driver);	
+			return new PrescriptionsProvidersBenefitsPage(driver);
 		}
-		return null;	
-		
+		return null;
+
 	}
+
+	public VPPPlanSummaryPage ClickReturnToPlanSummary() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+
+	public void validateBreadCrumb(String breadCrumb) {
+		Assert.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().equals(breadCrumb));
+		        }
+
 }

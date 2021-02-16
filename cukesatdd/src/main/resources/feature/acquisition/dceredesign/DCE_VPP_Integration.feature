@@ -73,12 +73,12 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     @DCE_Redesign_VPP_PlanSummary_Integration_MAPD_AARP
     Examples: 
       |	site	| zipcode | planyear|plantype | county | isMultutiCounty | drug1   |	drug2		| planname                                           |supplyLength|
-      |	AARP	|   90210 | current| MAPD     | none   | no              | Orkambi | Lipitor	|AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
+      |	AARP	|   90210 | future	| MAPD     | none   | no              | Orkambi | Lipitor	|AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
 
 		@DCE_Redesign_VPP_PlanSummary_MAPD_UHC
     Examples: 
       |	site	| zipcode | planyear|plantype | county | isMultutiCounty | drug1   |	drug2		|planname                                           |supplyLength|
-      |	UHC		|   90210 | current| MAPD     | none   | no              | Orkambi |	Lipitor	| AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
+      |	UHC		|   90210 | future	| MAPD     | none   | no              | Orkambi |	Lipitor	| AARP Medicare Advantage SecureHorizons Focus (HMO) |Every 3 Months|
        
      
     Scenario Outline: To test the NBA - to -DCE Redesign flow for PlanType :  <plantype> from vpp Plan Summary
@@ -115,5 +115,10 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
    @VPP_NBA_DCE_Redesign_Integration_AARP   
    Examples: 
       |	site	| zipcode | planyear	|	plantype | county | isMultutiCounty |	planname																													|	drug1		|
-      |	AARP	|   10001 | current		| MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)	|	Orkambi	|
-      
+      |	AARP	|   10001 | future		| MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)	|	Orkambi	|
+     
+      @VPP_NBA_DCE_Redesign_Integration_UHC   
+   Examples: 
+      |	site	| zipcode | planyear	|	plantype | county | isMultutiCounty |	planname																													|	drug1		|
+      |	UHC	|   10001 | future		| MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO)	|	Orkambi	|
+       

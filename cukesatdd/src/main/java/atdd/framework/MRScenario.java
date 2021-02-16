@@ -141,6 +141,7 @@ public class MRScenario {
 	// public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+	public static final String mobileURL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.us-west-1.saucelabs.com/wd/hub";
 
 	public void saveBean(String id, Object object) {
 		scenarioObjectMap.put(id, object);
@@ -149,6 +150,7 @@ public class MRScenario {
 	public void flushBeans() {
 		if (!scenarioObjectMap.isEmpty()) {
 			scenarioObjectMap.clear();
+			System.out.println("Flushing all saved beans !");
 		}
 	}
 
@@ -266,21 +268,21 @@ public class MRScenario {
 
 			String tagName = it.next();
 
-			if (environment.contains("team-ci")) {
+			if (environment.contains("mnr-acq-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
 
-			} else if ((environment.contains("team-a")
-					|| (//(environment.equalsIgnoreCase("team-h")) || Team-h condition added separately to take username as login
-							(environment.equalsIgnoreCase("team-e"))
+			} else if ((environment.equalsIgnoreCase("team-e"))
 							|| (environment.equalsIgnoreCase("team-f")) || (environment.equalsIgnoreCase("team-g"))
-							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers") || (environment.equalsIgnoreCase("team-avengers-plm"))))))) {
+							|| (environment.equalsIgnoreCase("team-c")) || (environment.equalsIgnoreCase("team-acme")) 
+							|| (environment.equalsIgnoreCase("team-voc"))|| (environment.equalsIgnoreCase("team-t")) 
+							|| (environment.equalsIgnoreCase("team-chargers")) || (environment.equalsIgnoreCase("team-avengers-plm")) 
+							|| (environment.equalsIgnoreCase("chargers-qa")) || (environment.equalsIgnoreCase("team-uhc-rx"))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
-			} else if (environment.equalsIgnoreCase("team-h")) {
+			} else if (environment.equalsIgnoreCase("team-h") || environment.equalsIgnoreCase("team-atest")) {
 				csvName = "UMS-Member-Type.csv";
-			}
-			/*
+			}			/*
 			 * note: Dec2018 - comment out because this section caused stage run not to use
 			 * UMS-Member-Type.csv else{ if
 			 * (tagName.equalsIgnoreCase("@benefitsAndCoverage")) { csvName =
@@ -640,8 +642,9 @@ try {
 		}else{
 		if(environment.contains("stage"))
 		domain = "uhc.com";
-		else if(environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers")||environment.equals("team-avengers-plm") ||environment.contains("team-avengers-plm"))
+		else if(environment.contains("mnr-acq-ci") || environment.equals("team-atest") || environment.equals("team-e")||environment.equals("team-t")||environment.equals("team-v1")||environment.equals("team-acme")|| environment.equals("team-voc") ||environment.equals("team-acme") ||environment.contains("digital-uat") ||environment.equals("team-chargers") ||environment.contains("chargers")||environment.equals("team-avengers-plm") ||environment.contains("team-avengers-plm")||environment.contains("chargers-qa") ||environment.contains("team-uhc-rx"))
 		domain = "ocp-elr-core-nonprod.optum.com";
+			
 		else if(environment.contains("mnr-acq"))
 			domain = "origin-elr-dmz.optum.com";
 		else 
@@ -1029,7 +1032,6 @@ try {
 				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 				//System.setProperty("webdriver.chrome.driver", pathToBinary);
 				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
-
 				webDriver = new ChromeDriver();
 				saveBean(CommonConstants.WEBDRIVER, webDriver);
 				return webDriver;
@@ -1106,7 +1108,7 @@ try {
 				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
-				browserOptions.setCapability("platformName", "macOS 10.15");
+				browserOptions.setCapability("platformName", "macOS 11.00");
 				browserOptions.setCapability("browserVersion", browserVersion);
 				browserOptions.setCapability("sauce:options", sauceOptions);
 				capabilities.merge(browserOptions);
@@ -1206,7 +1208,7 @@ try {
 		System.out.println("Launching Device : "+mobileDeviceName);
 		isSauceLabSelected = true;
 		DesiredCapabilities capabilities = new DesiredCapabilities();
-		capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
+		//capabilities.setCapability("testobject_api_key", TESTOBJECTAPIKEY);
 		capabilities.setCapability("privateDevicesOnly", "true");
 		capabilities.setCapability("noReset", "false");
 		// max 30 mins for device allocation - mobileSessionTimeout
@@ -1215,10 +1217,8 @@ try {
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
 		// Offline prod and prod env. should not use tunnels
 		System.out.println("sauceLabsMobileTunnelIdentifier : "+sauceLabsMobileTunnelIdentifier);
-		if(!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE")) {
-			//capabilities.setCapability("parentTunnel", "optumtest");
-			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
-		}
+		capabilities.setCapability("parentTunnel", "optumtest");
+		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
@@ -1234,18 +1234,18 @@ try {
 		try {
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
-				mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+				//mobileDriver = new AndroidDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+				mobileDriver = new AndroidDriver(new URL(mobileURL), capabilities);
 			}
 			else {
 				capabilities.setCapability("browserName", "Safari");
-				mobileDriver = new IOSDriver(new URL("https://us1.appium.testobject.com:443/wd/hub"), capabilities);
+				mobileDriver = new IOSDriver(new URL(mobileURL), capabilities);
 			}
 			System.out.println("Session ID --- " + mobileDriver.getSessionId());
-			System.out.println(mobileDeviceName + " JobURL  --- "
-					+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 			JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
+			System.out.println(mobileDeviceName + " JobURL  --- " + JobURL);
 			// System.out.println("JobReportURL ---
-			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_url"));
+			// "+mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 			// System.out.println("APIURL ---
 			// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
 			System.out.println(mobileDriver.getContext());
@@ -1266,18 +1266,19 @@ try {
 
 			String env = HSID_ENV;
 			String user = "UHG_000611921";  
-			String pwd = "Passx&9e";
-			//PLEASE DO NOT CHANGE THIS CODE BELOW WITHOUT INFORMING CT TEAM (JITESH AND KAPIL)
-			
+			String pwd = "Passy&0f";
 			
 			//Below is GPS UAT URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0039.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts14svc.uhc.com)))"; 
 			//Below is GPS UAT2 URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))"; 
+			
 			//Below is GPS UAT3 URL (enable/disable based on GPS env that you want to connect)
+			
+			//PLEASE DO NOT CHANGE THIS CODE BELOW WITHOUT INFORMING CT TEAM (JITESH AND KAPIL)  
 		
-			//PLEASE DO NOT CHANGE THIS CODE BELOW WITHOUT INFORMING CT TEAM (JITESH AND KAPIL)
 			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))"; 
+			
 			//Below is GPS UAT4 URL (enable/disable based on GPS env that you want to connect)
 			//String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0103)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19)))"; 
 						
@@ -1301,4 +1302,3 @@ try {
 	}
 
 }
-

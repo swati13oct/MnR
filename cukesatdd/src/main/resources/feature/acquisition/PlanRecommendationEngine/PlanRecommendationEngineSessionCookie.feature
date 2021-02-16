@@ -22,12 +22,13 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -63,12 +64,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
@@ -79,15 +83,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user validate removed drugs details updated from VPP to PRE page
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                 | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   94203 | NO            | Sacramento | MAPD          | None         | withinUS | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,YES:Actiq,NO,,,,1,YES,NO | Retail         | Yes,No,No,Yes                 | Lower                | MA                | Assure      | MS                |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                 | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities        | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   94203 | NO            | Sacramento | MAPD          | None         | withinUS | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,YES:Actiq,NO,,,,1,YES,NO | Retail         | Yes,No,No,Yes                 | Lower                | both           | Drug Cost, Dental | MA                | Assure      | MS                |
 
   @PRE @planrecommendation @DrugVPPtoDCEandPRE @F358830 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> -  To validate Drugs details are reflecting from VPP to DCE and PRE Page
     Given the user is on UHC medicare acquisition site landing page
     And user navigates to vpp summary page
       | Zip Code | <Zipcode> |
-   When user adds Drugs in vpp summary page
+    When user adds Drugs in vpp summary page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to VPP and PRE page
     And clicks on get started button and runs questionnaire
@@ -150,18 +154,21 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     And user verifies doctors session in VPP page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | None         | withinUS | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel   | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities        |
+      |   10003 | NO            | New York | MAPD          | None         | withinUS | Lookup  | sue         | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | None           | Drug Cost, Dental |
 
   @PRE @planrecommendation @startNowZipcode @F428517 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - - To validate Zipcode session from VPP to PRE Using StartNow
@@ -201,12 +208,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate recommendations in results page
       | Zip Code           | <Zipcode>           |
       | County Name        | <county>            |
@@ -216,14 +226,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user navigate to PRE using StartNow button and verify drugs details in PRE page
     Then user proceed page navigation till VPP page after Start Now button
       | Plan Type | <isCoverageOpt> |
-#    And verify continue function on "Pharmacy" page
+    #    And verify continue function on "Pharmacy" page
     And verify continue function on "Additional Services" page
     And verify continue function on "Cost Preferences" page
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
-      |   94203 | NO            | Sacramento | MAPD          | None         | withinUS | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | MA                | Assure      | MS                |
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities   | 1stRecommendation | Rankingplan | 2ndRecommendation |
+      |   94203 | NO            | Sacramento | MAPD          | None         | withinUS | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | 1st            | Travel, None | MA                | Assure      | MS                |
 
   @PRE @planrecommendation @deleteDocZipChange @F428517 @PRERegression4
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate provider removal on zip change in PRE
@@ -246,12 +257,15 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    Then user selects priority in priorities page
+      | Priority Option | <priorityOption> |
+      | Priorities      | <priorities>     |
     Then user validate elements in loading results page
     When user navigates to Zip Code page from vpp plans
     And verify continue function on "Location" page
@@ -262,15 +276,16 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user verifies existing PRE provider session using startnow
       | Multi Doctor | <isMultiDoctor> |
     And user verifies exisitng PRE drug session using startnow
-#    And verify continue function on "Pharmacy" page
+    #    And verify continue function on "Pharmacy" page
     And verify continue function on "Additional Services" page
     And verify continue function on "Cost Preferences" page
+    And verify continue function on "Priorities" page
     And user validate elements in loading results page
     And user navigates to Zip Code page from vpp plans
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | None         | regular | Lookup  | john        | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
+      |   10003 | NO            | New York | MAPD          | None         | regular | Lookup  | sue         | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | 1st            | Drug Cost, None |
 
   @PRE @planrecommandonation @EmailList @PDPEmailPlans @F452764 @PRERegression4
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
@@ -317,6 +332,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
     Then user validate email plan list from vpp
       | Recommendation | <primaryRecommendation> |
@@ -326,3 +342,51 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | primaryRecommendation | Email                  |
       |   32111 | No            | Marion   | MAPD          | Medicaid     | outsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               | SNP                   | julia_dowden@optum.com |
       |   10001 | No            | New York | MAPD          | None         | None      | UHGNetwork      |             |               | No             | No,No,No,Yes                  | Lower                | MA                    | julia_dowden@optum.com |
+
+  @PRE @planrecommendation @DruglistSessionStoragePREtoDCE @F537262 @PRERegression8
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug list are same PRE vs DCE
+    Given the user is on UHC medicare acquisition site landing page
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects SNP options in Special Needs Page
+      | SNP Options | <specialNeeds> |
+    And user selects Travel options in Care Away From Home Page
+      | Travel Options | <travel> |
+    And user selects doctors in doctors page
+      | Doctors             | <doctors>       |
+      | Doctors Search Text | <DoctorsName>   |
+      | Multi Doctor        | <isMultiDoctor> |
+    Then user selects add drug option in Drug page
+      | Drug Selection | <Drug Selection>                                                       |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+    When user validate navigate to Drug Cost Estimator page
+    And user validate druglist in Drug Cost Estimator page
+
+    Examples: 
+      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              |
+      |   35034 | Yes           | Bibb County | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO |
+
+  @PRE @planrecommendation @DruglistSessionStorageDCEtoPRE @F537262 @PRERegression8
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug list are same DCE vs PRE
+    Given the user is on UHC medicare acquisition site landing page
+    When user validate navigate to Drug Cost Estimator page
+    Then user adds Drugs in Drug Cost Estimator page
+      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+    Then user validate navigate to Get a Plan Recomendation page
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    Then user verify drug list are same in DCE VS Drug page
+      | Drug Selection | <Drug Selection> |
+
+    Examples: 
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
+      |   10001 | NO            | Sacramento | PDP           | Yes            | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |

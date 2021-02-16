@@ -33,7 +33,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | planname                             | year     |
-      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | current |
+      |   10001 | AARP Medicare Advantage Plan 2 (HMO) | future |
 
   @ProviderSearchFromGlobalHeaderUlayer1 
   Scenario Outline: Verify Provider Search plan count in AARP site from Global Header -plan count-<plancount>
@@ -47,12 +47,12 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
     #@AcqRegressionProviderSearchUlayer
     Examples: 
       | zipcode | plancount | year|
-      |   10001 |        12 |current|
+      |   10001 |        12 |future|
       
     Examples: 
       | zipcode | plancount |year|
-      |   55344 |         7 |current|
-      |   04011 |         6 |current|
+      |   55344 |         7 |future|
+      |   04011 |         6 |future|
 
   @ProviderSearchFromWidgetUlayer 
   Scenario Outline: Verify Provider Search plan count in AARP site from Home Page 
@@ -66,12 +66,12 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 	#@AcqRegressionProviderSearchUlayer
     Examples: 
       | zipcode | plancount | year|
-      |   10001 |        12 |current|
+      |   10001 |        12 |future|
       
     Examples: 
       | zipcode | plancount | year|
-      |   55344 |         7 |current|
-      |   04011 |         6 |current|
+      |   55344 |         7 |future|
+      |   04011 |         6 |future|
 
   @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
@@ -93,7 +93,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | PlanName | <planname> |
     Examples: 
       | zipcode | isMultutiCounty | county          | plantype | planname                             |planyear|
-      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |current|
+      |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |future|
 
   @ProviderSearchFromVppPlanDetailsPageUlayer @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
@@ -114,7 +114,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | isMultutiCounty | county          | plantype | planName                                |planyear|
-      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) |current|
+      |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) |future|
 
   @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression
   Scenario Outline: Verify Provider Search  in AARP site from Home Page

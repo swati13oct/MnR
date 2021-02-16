@@ -838,7 +838,7 @@ try {
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
 		//tbd String urlGetSysTime=testSiteUrl+ "/DCERestWAR/dcerest/profiledetail/bConnected";
-		String urlGetSysTime=testSiteUrl+ "/PlanBenefitsWAR/profiledetail/aarp";
+		String urlGetSysTime=testSiteUrl+ "PharmacySearchWAR/pharmacyrest/profiledetail/aarp";
 		System.out.println("test env URL for getting time: "+urlGetSysTime);
 		//open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1221,7 +1221,8 @@ try {
     			loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
 						return driver.findElements(By.xpath(
-								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='loading-block' or @class='spinner' or @id='loader') and not(contains(@style,'none')))]"));
+								"//div[(((@id='overlay' and not(./ancestor::footer)) or @id='loading_fader' or @class='spinner' or @id='loader' or @class='uhc-spinner') and not(contains(@style,'none')))]"));
+						// @class='loading-block'  ==> Old spinner locator on pharmacy search page. 
 					}
     			});
     		} catch (Exception e) {}
@@ -1288,6 +1289,11 @@ try {
 		}
 
 		return true;
+	}
+	
+	
+	public int countOfNewWindowTab() {
+		return driver.getWindowHandles().size();
 	}
 	
 }

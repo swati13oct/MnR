@@ -25,12 +25,13 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10001 | NO            |        | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,No,No                  | Higher               |
-      
+
   @PRE @planrecommendation @MAPDFlow @Performance @F471404
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Plan Names in VPP Summary vs Details Pages using MAPD flow in PRE
     Given the user is on UHC medicare acquisition site landing page
@@ -52,12 +53,13 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                       |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-#    And user selects pharmacy option in pharmacy page
-#      | Pharmacy Type | <pharmacyoption> |
+    #    And user selects pharmacy option in pharmacy page
+    #      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
+    And verify continue function on "Priorities" page
     Then user validate elements in loading results page
     Then user validate MA Plan Names in VPP Summary VS Details in results page
     Then user validate PDP Plan Names in VPP Summary VS Details in results page
@@ -66,3 +68,23 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
+      
+  @PRE @planrecommandonation @SaveResult @F543314 @PRERegression8
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
+    Given the user is on UHC medicare acquisition site landing page
+    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
+    And clicks on get started button and runs questionnaire
+      | Zip Code        | <Zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
+    And user selects plan type in coverage options page
+      | Plan Type | <isCoverageOpt> |
+    And user selects skip option in Drug page
+      | Drug Selection | <Drug Selection> |
+    Then user validate elements in loading results page
+    Then user save recommendation results and validate in VP
+    	| Plan Type | <isCoverageOpt> |
+      
+    Examples: 
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
+      |   10003 | NO            | New York | PDP           | No             |

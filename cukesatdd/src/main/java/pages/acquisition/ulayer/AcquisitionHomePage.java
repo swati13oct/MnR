@@ -1,3 +1,4 @@
+
 package pages.acquisition.ulayer;
 
 import static org.junit.Assert.assertTrue;
@@ -44,7 +45,8 @@ import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	//@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeField;
 	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -143,7 +145,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
-	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
+	//@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
+	@FindBy(xpath = "//a[contains(@title,'Drug Cost Estimator Tool')]")
 	public WebElement getStarted;
 
 	//@FindBy(xpath = ".//*[contains(@class, 'meded-article-content__section')]//*[contains(text(), 'Request an Appointment')]")
@@ -189,7 +192,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	//@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -247,7 +251,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
 	
-	@FindBy(xpath = "//*[@class='container meded-article-header']//span[contains(text(),'Health Insurance Broker')]")
+	@FindBy(xpath = "//h1//span[contains(text(),'Health Insurance Broker')]")
 	public WebElement brokerHeader;
 	
 	/* LearnAboutMedicare link */
@@ -423,33 +427,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Medicare Solutions | Provider Search')]")
 	private WebElement UnitedHealthcareMedicareSolutions;
 	
-	@FindBy(xpath = "//span[contains(text(),'Submit')]")
-	private WebElement SubmitEmail;
-	
-	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
-	private WebElement SignUpEmail;
-		
-	@FindBy(xpath = "//*[contains(text(),'Please enter First Name')]")
-	private WebElement ErrorFirstName;
-	
-	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
-	private WebElement ErrorLastName;
-	
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
-	private WebElement ErrorEmailAddress;
-	
-	@FindBy(xpath = "//input[@name='newsletter-input1']")
-	private WebElement EmailFirstName;
-	
-	@FindBy(xpath = "//input[@name='newsletter-input2']")
-	private WebElement EmailLastName;
-	
-	@FindBy(xpath = "//input[@name='newsletter-input3']")
-	private WebElement EmailAddress;
-	
-	@FindBy(xpath = "//div[@class='confirmationtext']/p[1]/b")
-	private WebElement Thankyou;
-	
+//	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+//	private WebElement SubmitEmail;
+//	
+//	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
+//	private WebElement SignUpEmail;
+//		
+//	@FindBy(xpath = "//*[contains(text(),'Please enter First Name')]")
+//	private WebElement ErrorFirstName;
+//	
+//	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
+//	private WebElement ErrorLastName;
+//	
+//	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
+//	private WebElement ErrorEmailAddress;
+//	
+//	@FindBy(xpath = "//input[@name='newsletter-input1']")
+//	private WebElement EmailFirstName;
+//	
+//	@FindBy(xpath = "//input[@name='newsletter-input2']")
+//	private WebElement EmailLastName;
+//	
+//	@FindBy(xpath = "//input[@name='newsletter-input3']")
+//	private WebElement EmailAddress;
+//	
+//	@FindBy(xpath = "//div[@class='confirmationtext']/p[1]/b")
+//	private WebElement Thankyou;
+//	
 	
 	
 	@FindBy(xpath = "//body/div[@id='overlay']")
@@ -457,6 +461,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
     private WebElement UHCICSubTiltle;
+	
+	@FindBy(id = "logged-username")
+	private WebElement guestProfileLink;
+
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
 
    	//String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText= "Chat Now";
@@ -1288,11 +1301,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
 
-		Actions actions = new Actions(driver);
+		/*Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		jsMouseOver(ourPlansHoverLink);
+		jsMouseOver(moreHelpInfoLink);
+		jsClickNew(moreHelpInfoLink);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validate(requestAgentApptDropdown)) {
@@ -2622,45 +2639,45 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 	}
 	
-	public void enterAndvalidateEmail() {
-		
-		threadsleep(8);
-		
-		//if(SubmitEmail.isDisplayed()) {
-		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
-		System.out.println("size of sign up"+size);
-		if(size>0){
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
-			threadsleep(4);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
-			threadsleep(4);
-			EmailFirstName.sendKeys("abc");
-			EmailLastName.sendKeys("def");
-			EmailAddress.sendKeys("a@gmail.com");
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
-		}else {
-			SubmitEmail.click();
-			threadsleep(4);
-			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
-			threadsleep(2);
-			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
-			threadsleep(2);
-			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
-			threadsleep(4);
-			EmailFirstName.sendKeys("abc");
-			EmailLastName.sendKeys("def");
-			EmailAddress.sendKeys("a@gmail.com");
-			SubmitEmail.click();
-		}
-		
-			threadsleep(4);
-			if(Thankyou.getText().equalsIgnoreCase("Thank you!")) {
-				assertTrue(true);
-			}
-			
-			
-						
-		}
+//	public void enterAndvalidateEmail() {
+//		
+//		threadsleep(8);
+//		
+//		//if(SubmitEmail.isDisplayed()) {
+//		int size=driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
+//		System.out.println("size of sign up"+size);
+//		if(size>0){
+//			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+//			threadsleep(4);
+//			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+//			threadsleep(4);
+//			EmailFirstName.sendKeys("abc");
+//			EmailLastName.sendKeys("def");
+//			EmailAddress.sendKeys("a@gmail.com");
+//			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+//		}else {
+//			SubmitEmail.click();
+//			threadsleep(4);
+//			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
+//			threadsleep(2);
+//			Assert.assertEquals(ErrorLastName.getText(), "Please enter Last Name");
+//			threadsleep(2);
+//			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
+//			threadsleep(4);
+//			EmailFirstName.sendKeys("abc");
+//			EmailLastName.sendKeys("def");
+//			EmailAddress.sendKeys("a@gmail.com");
+//			SubmitEmail.click();
+//		}
+//		
+//			threadsleep(4);
+//			if(Thankyou.getText().equalsIgnoreCase("Thank you!")) {
+//				assertTrue(true);
+//			}
+//			
+//			
+//						
+//		}
 		
 	
 		public VPPPlanSummaryPage searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
@@ -2791,5 +2808,34 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						e.printStackTrace();
 			}		
 
-				}	
+				}
+	
+	/**
+	 * This method used to navigate to new visitor profile dashboard
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePage navigateToNewVisitorProfilePage() {
+		try {
+			if (savedPlansPopup.isDisplayed()) {
+				savedPlansPopupCloseIcon.click();
+			}
+		} catch (Exception e) {
+			System.out.println("Saved Plans modal not displayed");
+		}
+		waitforElement(shoppingCartIcon);
+		shoppingCartIcon.click();
+		guestProfileLink.click();
+		// Actions actions = new Actions(driver);
+		// actions.moveToElement(guestProfileLink);
+		// actions.click().build().perform();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }
+

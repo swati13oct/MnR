@@ -1,3 +1,4 @@
+
 package pages.acquisition.commonpages;
 
 import org.openqa.selenium.WebDriver;
@@ -89,8 +90,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
 	 public static WebElement viewAllDisclaimerInformationLink;
 	
-	@FindBy(linkText = "Hide disclaimer information")
-	 public static WebElement hideDiscliamerInformation;
+	//@FindBy(linkText = "Hide disclaimer information")
+	@FindBy(xpath="//a[contains(@class,'disclaimer hideLink')]") 
+	public static WebElement hideDiscliamerInformation;
 	
 	@FindBy(css = "a.backtotop1.hideLink")
 	 public static WebElement disclaimerBackToTopLink;
@@ -217,6 +219,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public static WebElement proactiveChatExitBtn;
 	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	public static WebElement proactiveChatChatBtn;
+	
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
 	
@@ -235,7 +240,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	 public static WebElement visitorprofileicon;
 	
-	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	//@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	@FindBy(xpath="//*[contains(@onclick,\"jumpToHSIDSignIn('body')\")]")
 	public static WebElement signIn;
 	
 	@FindBy(xpath="//*[@id='planTypesColumn']/h3[3]/a")

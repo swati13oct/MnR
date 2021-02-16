@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeSet;
 
@@ -24,6 +23,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
+import acceptancetests.acquisition.dce.DceCommonConstants;
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -292,6 +293,15 @@ public class ComparePlansPage extends UhcDriver {
 	
 	@FindBy(xpath="//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
 	public static WebElement medicalBenefitsOONToggleNotDisplayed;
+	
+	@FindBy(css = "#viewLocationLink-0")
+	private WebElement viewLocationLink;
+	
+	@FindBy(xpath="//tr[contains(@ng-repeat,'uniqueDoctorProviders')]//child::span[contains(@class,'provider-name')][1]")
+	private WebElement firstDoctorNameLabel;
+	
+	@FindBy(xpath="//h2[@id='viewLocationTitle']")
+	private WebElement viewLocationPopupProviderName;
 
 
 	public ComparePlansPage(WebDriver driver) {
@@ -563,6 +573,7 @@ public class ComparePlansPage extends UhcDriver {
   			//validateNew(enrollForPlan);
 //  			enrollForPlan.click();
   			jsClickNew(enrollForPlan);
+  			waitForPageLoadSafari();
   		}
   		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
   		System.out.println(driver.getCurrentUrl());
@@ -1100,6 +1111,7 @@ public class ComparePlansPage extends UhcDriver {
 					System.out.println("#########"+drugList.get(i+1).findElement(By.cssSelector("th>span>span")).getText().trim()+"#########");
 				}
 			}
+			
 		}else {
 			System.out.println("#########No Drugs available for this member#########");
 		}
@@ -1292,13 +1304,15 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void ValidatesAddedDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		int DrugCount_Total = DrugListItems.length-1;
+//		int DrugCount_Total = DrugListItems.length-1; 		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(By.xpath("//*[contains(@class, 'drugcoveredalignment')][contains(text(), 'Covered')]"));
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		for(i=1; i<=DrugCount_Total; i++) {
+//		for(i=1; i<=DrugCount_Total; i++) {					//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for (i = 0; i < DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//h2[contains(@id, 'yourdrugsheading')]//following::*[contains(text(), '"+currentDrug+"')]"));
@@ -1371,7 +1385,15 @@ public class ComparePlansPage extends UhcDriver {
 		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
 		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits", driver.findElements(By.xpath("//h2[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")).isEmpty());
 	}
-	
+			
+	public void validateViewLocation()
+	{
+		System.out.println(firstDoctorNameLabel.getText());
+		String firstDoctorName=firstDoctorNameLabel.getText();
+		viewLocationLink.click();
+		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName, viewLocationPopupProviderName.getText());
+	}
+
 	public void CounterDentalFlyerLink(String counter,String Documentcode) throws Exception{
 		String ParentWindow = driver.getTitle();
 		WebElement DentalFlyerLink;

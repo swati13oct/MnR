@@ -1,5 +1,7 @@
 package pages.acquisition.commonpages;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,8 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-
-import java.util.List;
 
 public class MedicareEligibilityPage extends GlobalWebElements {
 
@@ -188,9 +188,8 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		WebElement lnkIEP=driver.findElement(By.xpath("//a[contains(text(),'Initial Enrollment Period')]"));
 		validateNew(lnkIEP);
 		jsClickNew(lnkIEP);
-		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
 		{
 			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));

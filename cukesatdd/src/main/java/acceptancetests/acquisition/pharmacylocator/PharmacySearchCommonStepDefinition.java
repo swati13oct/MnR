@@ -24,6 +24,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.dceredesign.GetStartedPage;
 
 public class PharmacySearchCommonStepDefinition {
 
@@ -65,7 +66,7 @@ public class PharmacySearchCommonStepDefinition {
 	public void userNavigatesToPharmacySearchPage() {
 		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
+//		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -83,7 +84,7 @@ public class PharmacySearchCommonStepDefinition {
 		String state = inputAttributesMap.get("State");
 		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		aquisitionhomepage.selectState(state);
+//		aquisitionhomepage.selectState(state);
 		System.out.println("Selected state '" + state + "' on home page");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -518,4 +519,60 @@ public class PharmacySearchCommonStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 
 	}*/
+	
+	@Then("^click on DCE Link on Pharmacy Page$")
+	public void clickonDCELink() throws InterruptedException {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		GetStartedPage getStartedPage = pharmacySearchPage.navigateToDCE();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
+	}
+	
+	/** user is on the Medicare Site landing page */
+	@And("^the user navigate to pharmacy search page from plan type pdp navigation bar$")
+	public void userNavigatesFromplantypeToPharmacySearchPage() {
+		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+//		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
+		System.out.println("Unselected state on home page for more predictable result");
+		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PharmacySearchPage pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocatorFromPlanType();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+
+	}
+	
+	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
+	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validateBreadCrumb(breadCrumb);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	}
+	
+	@When("^user clicks on home tab$")
+	public void user_clicks_on_home_tab() {
+		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		WebDriver wd = ( WebDriver)getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		aquisitionhomepage.clickHomeTab();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+	}
+	
+
+	@When("^user clicks on breadcrumb on pharmacy search page$")
+	public void user_clicks_on_breadcrumb_on_pharmacy_search_page()  {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.clickBreadCrumb();
+	}
+	
+	@Then("^user should be navigated to home page$")
+	public void user_should_be_navigated_to_home_page() {
+		AcquisitionHomePage aquisitionhomepage= (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateHomePage();
+	}
 }
