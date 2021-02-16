@@ -492,6 +492,95 @@ public class DCEStepDefinitionAARP {
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		buildDrugList.ValidateAddedDrugsList(druglist);
 	}
+	
+	@Then("^the user validates Drug Recommendation section$")
+	public void the_user_validates_Drug_Recommendation_section() throws Throwable {
+		BuildYourDrugList buildYourDrugsListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		buildYourDrugsListPage.validateDrugRecommendationSection(druglist);
+	}
+
+
+	@Then("^the user searches and adds the following Drug for following quantity, frequency and Supplylength to Drug List$")
+	public void the_user_searches_and_adds_the_following_Drug_for_following_quantity_frequency_and_Supplylength_to_Drug_List(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("DrugName");
+		String drugQuantity = memberAttributesMap.get("Quantity");
+		String drugFrequency = memberAttributesMap.get("Frequency");
+		String drugSupplyLen = memberAttributesMap.get("SupplyLen");
+		System.out.println("DrugName"+drugName);
+		System.out.println("Quantiry"+drugQuantity);
+		System.out.println("Frequency"+drugFrequency);
+		System.out.println("SupplyLength"+drugSupplyLen);
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		TellUsAboutDrug tellUsAboutDrug = buildDrugList.SearchaddDrugs(drugName);
+		tellUsAboutDrug.selectQuantity(drugQuantity);
+		tellUsAboutDrug.selectFrequency(drugFrequency);
+		tellUsAboutDrug.selectSupplyLength(drugSupplyLen);
+		buildDrugList = tellUsAboutDrug.ClickAddDrug();
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		
+		 
+		System.out.println("Drugs List : " + druglist);
+
+//		if (druglist.isEmpty()) {
+		if(StringUtils.isEmpty(druglist)) {
+			druglist = drugName;
+		} else {
+			druglist = druglist + "&" + drugName;
+		}
+		System.out.println("Drugs List after Drug " + drugName + " , Added : " + druglist);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+}
+
+	@Then("^the user validates qty, frequency and Supply Length for following drug in DrugList Page$")
+	public void the_user_validates_qty_frequency_and_Supply_Length_for_following_drug_in_DrugList_Page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("DrugName");
+		String drugQuantity = memberAttributesMap.get("Quantity");
+		String drugFrequency = memberAttributesMap.get("Frequency");
+		String drugSupplyLen = memberAttributesMap.get("SupplyLen");
+		System.out.println("DrugName : "+drugName);
+		System.out.println("Quantiry : "+drugQuantity);
+		System.out.println("Frequency : "+drugFrequency);
+		System.out.println("SupplyLength : "+drugSupplyLen);
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		buildDrugList.validateDetailsForDrug(drugName,drugQuantity,drugFrequency,drugSupplyLen);
+		
+	}
+
+	@Then("^the user validates qty, frequency and Supply Length for following drug in DCE Details Page$")
+	public void the_user_validates_qty_frequency_and_Supply_Length_for_following_drug_in_DCE_Details_Page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("DrugName");
+		String drugQuantity = memberAttributesMap.get("Quantity");
+		String drugFrequency = memberAttributesMap.get("Frequency");
+		String drugSupplyLen = memberAttributesMap.get("SupplyLen");
+		System.out.println("DrugName : "+drugName);
+		System.out.println("Quantiry : "+drugQuantity);
+		System.out.println("Frequency : "+drugFrequency);
+		System.out.println("SupplyLength : "+drugSupplyLen);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDetailsForDrugInYourDrugs(drugName,drugQuantity,drugFrequency,drugSupplyLen);}
 
 	@And("^I access the DCE Redesign from Plan Summary for mentioned plan$")
 	public void accessDCERign_PlanSummaryforPlan(DataTable attributes) {

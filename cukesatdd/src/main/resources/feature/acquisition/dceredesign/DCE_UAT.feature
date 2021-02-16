@@ -104,33 +104,33 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-      Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug3> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug4> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug5> |
-     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug6> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug7> |
-    Then the user edits supply length to three months for following drug  
-      | EditDrug | <drug5> |
-    Then the user validates all added drugs in DrugList  
+    #Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug2> |
+    #Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug3> |
+    #Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug4> |
+    #Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug5> |
+    # Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug6> |
+    #Then the user searches and adds the following Drug to Drug List
+    #  | DrugName | <drug7> |
+    #Then the user edits supply length to three months for following drug  
+    #  | EditDrug | <drug5> |
+    #Then the user validates all added drugs in DrugList  
     Then the user clicks on Review Drug Costs to Land on Drug Details Page   
     Then the user validates planName matches plan Name in VPP
    # Then the user Captures Drug costs on Drug Details Page
-    Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
-      | Brand Drug   | <brandDrug1>   |
-      | Generic Drug | <genericDrug1> |
-    Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
-      | Brand Drug   | <brandDrug2>   |
-      | Generic Drug | <genericDrug2> |
+    #Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+    #  | Brand Drug   | <brandDrug1>   |
+    #  | Generic Drug | <genericDrug1> |
+    #Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+    #  | Brand Drug   | <brandDrug2>   |
+    #  | Generic Drug | <genericDrug2> |
    Then the user validates following expected Premium on DCE Details Page
       | Premium | <premium> |
-   Then the user verify the Retail chain pharmacy on detail page 
+   #Then the user verify the Retail chain pharmacy on detail page 
    Then the user Captures Drug costs on Drug Details Page  
    And the user validates link to Drug Summary Page
    And the user validates functional tool tips for the given plan

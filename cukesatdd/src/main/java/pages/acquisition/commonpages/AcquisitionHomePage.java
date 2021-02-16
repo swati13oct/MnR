@@ -44,7 +44,8 @@ import pages.acquisition.commonpages.ProviderSearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	//@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -168,7 +169,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
-	@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
+	@FindBy(xpath = "//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
+	//@FindBy(xpath = "//a[contains(@title,'Drug Cost Estimator Tool')]")
 	public WebElement getStarted;
 
 	// @FindBy(xpath = ".//*[contains(@class,
@@ -216,7 +218,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	//@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -541,7 +544,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cancel")
 	private WebElement cancelLeaveAARPMedicare;
 
-	@FindBy(xpath = "//a[contains(text(),'Learn More')]")
+	//@FindBy(xpath = "//a[contains(text(),'Learn More')]")
+	@FindBy(xpath="//a[contains(text(),'Learn More') or contains(@title,'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
@@ -3009,7 +3013,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -5163,7 +5167,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. ï¿½ 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. ï¿½ 8 p.m. Monday ï¿½ Friday, 8 a.m. ï¿½ 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);

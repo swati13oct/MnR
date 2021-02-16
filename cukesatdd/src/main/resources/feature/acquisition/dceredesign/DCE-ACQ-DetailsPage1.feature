@@ -20,7 +20,19 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | BrandDrugName | <brandDrug> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
+    Then the user validates Drug Recommendation section
+    Then the user searches and adds the following Drug for following quantity, frequency and Supplylength to Drug List
+      | DrugName  | <drug2>      |
+      | Quantity  | <quantity2>  |
+      | Frequency | <frequency2> |
+      | SupplyLen | <supplyLen2> |
     Then the user validates all added drugs in DrugList
+    Then the user validates qty, frequency and Supply Length for following drug in DrugList Page
+      | DrugName  | <drug2>      |
+      | Quantity  | <quantity2>  |
+      | Frequency | <frequency2> |
+      | SupplyLen | <supplyLen2> |
+    Then the user validates Drug Recommendation section
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
@@ -33,6 +45,11 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates OptumRx consistently displays on DCE Details - Pharmacy Page
     Then the user validates Drug Costs section
     Then the user validates Your Drugs sections
+    Then the user validates qty, frequency and Supply Length for following drug in DCE Details Page
+      | DrugName  | <drug2>      |
+      | Quantity  | <quantity2>  |
+      | Frequency | <frequency2> |
+      | SupplyLen | <supplyLen2> |
     Then the user validates Monthly Drug Costs by Stage Section
     Then the user validates Monthly Drug Costs by Stage Info Modals
     Then the user validates Monthly Drug Costs
@@ -53,21 +70,21 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | InsulinCopay | <insulinCopay> |
       | Insulin Drug | <insulinDrug>  |
     Then the user validates Important information section
+
     #Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     #Then the user clicks PrescriptionBenifit Tab on Plan Details Page
     #Then the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page
     #Then the user validates planName on LearnMore page matches plan Name in VPP
-
     @DCE_DrugDetailsValidation_AARP
     Examples: 
-      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
-      | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $35          |
+      | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
+      | ativ                 | Humalog | Fanapt |         2 | Day        | Every 3 Months |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $35          |
 
     @DCE_DrugDetailsValidation_UHC
     Examples: 
-      | drugnameAutocomplete | drug1   | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
-      | ativ                 | Humalog |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $30          |
-      | ativ                 | Humalog |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $15          |
+      | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
+      | ativ                 | Humalog | Fanapt |        20 | Week       | Every 1 Month  |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $30          |
+      | ativ                 | Humalog | Fanapt |       200 | Month      | Every 3 Months |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $15          |
 
   @DCE_DrugDetailsDynamicCopay_Preferred
   Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Preferred Pharmacy Copay

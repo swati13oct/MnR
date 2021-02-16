@@ -1932,4 +1932,21 @@ public class DrugDetailsPage extends UhcDriver {
 		String Title = driver.getTitle();
 		System.out.println(Title);
 	}
+
+	public void validateDetailsForDrugInYourDrugs(String drugName, String drugQuantity, String drugFrequency,
+			String drugSupplyLen) {
+		System.out.println("Current Added Drug Name : " + drugName);
+		WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+drugName+"')]"));
+		WebElement DrugDetailsText = driver.findElement(
+				By.xpath("(//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+drugName+"')]//following::ul[contains(@class, 'yourdrugs')]//li[contains(text(), 'per') and contains(text(), 'refill')])[1]"));
+		String DrugText = DrugDetailsText.getText();
+		if (validateNew(DrugName) && validateNew(DrugDetailsText)
+				 && DrugText.contains(drugQuantity) && DrugText.contains(drugFrequency)
+				 && DrugText.contains(drugSupplyLen)) {
+			System.out.println("Drug List Drug Quantity, Frequency and Supply Length Validation PASSED for Drug on DCE Details Page : " + drugName);
+			System.out.println("Displayed Drug Details Text: "+DrugText);
+		} else
+			Assert.fail("Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug on DCE Details Page : " + drugName);
+		
+	}
 }
