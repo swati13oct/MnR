@@ -30,7 +30,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-      Then the user validates TFN Number on Right Rail
+      Then the user validates TFN Number on Right Rail Plan Details page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
     When user clicks on Add to compare checkbox on plan detail page
@@ -43,9 +43,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-       Then the user validates TFN Number on Right Rail
-      | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath3> |
+     #Then the user validates TFN Number on Right Rail
+      #| TFN No    | <TFNNo>     |
+      #| TFN Xpath | <TFNxpath3> |
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
@@ -88,7 +88,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-       Then the user validates TFN Number on Right Rail
+      Then the user validates TFN Number on Right Rail Plan Details page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
     When user clicks on Add to compare checkbox on plan detail page
@@ -101,9 +101,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-       Then the user validates TFN Number on Right Rail
-      | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath3> |
+      # Then the user validates TFN Number on Right Rail
+    #  | TFN No    | <TFNNo>     |
+    #  | TFN Xpath | <TFNxpath3> |
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
@@ -138,7 +138,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user view plan details of the above selected plan in site vpp
       | Plan Name | <SNPplanName> |
       | Plan Type | <SNPplantype> |
-    Then the user validates SAM icons on the page
+    Then the user validates TFN Number on Right Rail Plan Details page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     Then the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow
