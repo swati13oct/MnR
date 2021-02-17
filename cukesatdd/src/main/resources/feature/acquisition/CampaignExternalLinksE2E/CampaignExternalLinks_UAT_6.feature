@@ -11,6 +11,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+      Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> | 
     And the user views the plans of the below plan type
       | Plan Type | <MAplantype> |
     # And the user selects plan year
@@ -27,6 +30,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+      Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
     When user clicks on Add to compare checkbox on plan detail page
     And the user clicks on back to all plans link and validates its redirection to Plan Summary
     Then verify the Add to compare checkbox is checked for selected plan
@@ -37,6 +43,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+       Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
@@ -60,6 +69,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+     Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
     And the user views the plans of the below plan type
       | Plan Type | <PDPplantype> |
     # And the user selects plan year
@@ -76,6 +88,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+       Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
     When user clicks on Add to compare checkbox on plan detail page
     And the user clicks on back to all plans link and validates its redirection to Plan Summary
     Then verify the Add to compare checkbox is checked for selected plan
@@ -86,6 +101,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+       Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
@@ -146,6 +164,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+      Then the user validates TFN Number on Right Rail
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
     And the user views the plans of the below plan type
       | Plan Type | <MSplantype> |
     And the user selects plan year

@@ -131,6 +131,10 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "(//div[@class='modal-body'])[1]")
 	private WebElement countyModalVpp;
 
+	@FindBy(xpath = "//span[contains(@id,'plans_zip_head')]//h2")
+	private WebElement zipcodeonpage;
+	
+	
 	public static String parentWindow;
 	
 	public CampaignExternalLinks(WebDriver driver) {
@@ -261,10 +265,22 @@ public class CampaignExternalLinks extends UhcDriver {
 
 		if (CurrentRailURL.contains("/plan-summary")) {
 			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
+		//Added Lines for zipcode
+			
+			String ExpectedZipcode = "33111";
+			validateNew(zipcodeonpage);
+			String ActualZipcode = zipcodeonpage.getText();
 
+			System.out.println("Expected TFN time zone: " + ExpectedZipcode);
+			System.out.println("Actual TFN time zone: " + ActualZipcode);
+
+			if (ExpectedZipcode.contains(ActualZipcode))
+				System.out.println(
+						"****************Zipcode  was found macthing ***************");	
+			//
 			Assert.assertTrue(true);
 		} else {
-			Assert.fail("**************** Page is not displayed ***************");
+			Assert.fail("**************** Zipcode is not displayed ***************");
 		}
 		CheckPageLoad();
 		CheckiPerseptions();
