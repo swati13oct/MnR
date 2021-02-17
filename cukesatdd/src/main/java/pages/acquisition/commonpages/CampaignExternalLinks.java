@@ -271,8 +271,8 @@ public class CampaignExternalLinks extends UhcDriver {
 			validateNew(zipcodeonpage);
 			String ActualZipcode = zipcodeonpage.getText();
 
-			System.out.println("Expected TFN time zone: " + ExpectedZipcode);
-			System.out.println("Actual TFN time zone: " + ActualZipcode);
+			System.out.println("Expected Zip code on a page: " + ExpectedZipcode);
+			System.out.println("Actual Zip code on a page: " + ActualZipcode);
 
 			if (ExpectedZipcode.contains(ActualZipcode))
 				System.out.println(
