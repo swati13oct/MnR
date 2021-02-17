@@ -5201,10 +5201,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
 			System.out.println(
 					"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
-			// Assert.assertTrue(true);
+		
 		} else {
-			// Assert.fail("*****************TFN Timezone Content was not found macthing
-			// with the SAM call Popup ***************"+ActualCallSamTFNtimezone);
+			
 			System.out.println(
 					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
 		}
@@ -5397,10 +5396,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
 		System.out.println(
 				"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
-		// Assert.assertTrue(true);
+		
 	} else {
-		// Assert.fail("*****************TFN Timezone Content was not found macthing
-		// with the SAM call Popup ***************"+ActualCallSamTFNtimezone);
+		
 		System.out.println(
 				"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
 		}
@@ -5613,10 +5611,9 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 				.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
 			System.out.println(
 					"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
-			// Assert.assertTrue(true);
+			
 		} else {
-			// Assert.fail("*****************TFN Timezone Content was not found macthing
-			// with the SAM call Popup ***************"+ActualCallSamTFNtimezone);
+			
 			System.out.println(
 					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
 		}
@@ -5774,7 +5771,7 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 			System.out.println(
 					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
 		else
-			//Assert.fail(
+
 			System.out.println(
 					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
 	}
@@ -5826,27 +5823,8 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 
-	/*	String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m., 7 days a week";
-		String ExpectedCallSamTFNtimezone1 ="Hours: 8 a.m. - 8 p.m., 7 days a week";
-		//String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week";
-//		String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
-		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezonePlanDetails.getText();
-
-		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
-		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
-		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
-
-		if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "").contains(ActualCallSamTFNtimezone.replace(" ", "")) || ExpectedCallSamTFNtimezone1.replace(" ", "").replace("\n", "")
-				.contains(ActualCallSamTFNtimezone.replace(" ", "")))
-			System.out.println(
-					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
-		else
-			Assert.fail(
-					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
-	}
-	*/
-	String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m.,7 days a week";
-	String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,7 days a week";
+	String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m.,\n7 days a week";
+	String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a week";
 	String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
 //	String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
 	String ActualCallSamTFNtimezone = rightRailsectionTFNtimezonePlanDetails.getText();
@@ -5855,14 +5833,16 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 	System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
 	System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
 
-if (ExpectedCallSamTFNtimezone.contains(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))|| ExpectedCallSamTFNtimezone1
-		.contains(ActualCallSamTFNtimezone)|| ExpectedCallSamTFNtimezone2
-		.contains(ActualCallSamTFNtimezone)) {
-	System.out.println(
-			"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
-}else
-//	Assert.fail(
-	System.out.println(
-			"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
+	if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "").equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")) || ExpectedCallSamTFNtimezone1.replace(" ", "").replace("\n", "")
+			.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))|| ExpectedCallSamTFNtimezone2.replace(" ", "").replace("\n", "")
+			.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
+		System.out.println(
+				"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+		// Assert.assertTrue(true);
+	} else {
+		System.out.println(
+				"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+		}
 	}
+	
 }
