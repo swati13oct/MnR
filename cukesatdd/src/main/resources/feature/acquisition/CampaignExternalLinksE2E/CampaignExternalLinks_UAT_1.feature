@@ -10,9 +10,6 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | Working hrs | <workingHrs> |
     When user clicks on Find Plans and Pricing to open a new tab
     Then user should be navigated on Shop for a plan page
-    Then the user validates TFN Number on Right Rail
-     | TFN No      | <TFNNo>      |
-    | TFN Xpath | <TFNxpath3> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
@@ -128,7 +125,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     And the user validates SAM icons on Medsupp page from External page
       | TFN No    | <TFNNo1>    |
       | TFN Xpath | <TFNxpath2> |
-    Then the user validates TFN Number on Right Rail
+    Then the user validates TFN Number on Right Rail for Medsupp page
      | TFN No    | <TFNNo1>     |
     | TFN Xpath | <TFNxpath5> |
     And user closes current tab and navigate to previous tab
