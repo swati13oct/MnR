@@ -43,11 +43,14 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN Xpath | <TFNxpath> |
     Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath2> |
+      | TFN Xpath | <TFNxpath4> |
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+     Then the user validates TFN Number on Right Rail OLE page
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath4> |
     #Then the user validates cancellation and Save Return Later modal for OLE Page
     #Then the user cancels enrollment and navigates to homepage
     Then user closes current tab and navigate to previous tab
@@ -89,14 +92,14 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN Xpath | <TFNxpath> |
     Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath2> |
+      | TFN Xpath | <TFNxpath4> |
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates TFN Number on Right Rail OLE page
+      Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath2> |
+      | TFN Xpath | <TFNxpath4> |
     Then user closes current tab and navigate to previous tab
     #----------Repeat the steps for SNP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
@@ -127,12 +130,14 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN Xpath | <TFNxpath> |
     Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
-      | TFN Xpath | <TFNxpath2> |
+      | TFN Xpath | <TFNxpath4> |
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
-      | TFN Xpath | <TFNxpath> |
-      
+      | TFN Xpath | <TFNxpath> |  
+      Then the user validates TFN Number on Right Rail OLE page
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath4> |   
     # Then the user validates cancellation and Save Return Later modal for OLE Page
     Then user closes current tab and navigate to previous tab
     #-------------------Repeat the steps for Medsupp Plan----------------------------------------------
@@ -161,8 +166,8 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
 		
     @CampaignExternalLink_E2E_Scenario_6
     Examples: 
-      | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |
-      | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |         1 |          2 |
+      | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |TFNxpath4                          |
+      | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |         1 |          2 | (//a[contains(@class, 'tel')])[3] |
 
 	Scenario Outline: TID: <Scenario> -plan type: <plantype> - OLE End to end from external Links
 	Given the user is on medicare acquisition site landing page fro campaign Traffic
