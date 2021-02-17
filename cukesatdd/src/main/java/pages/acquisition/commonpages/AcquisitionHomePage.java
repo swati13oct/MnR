@@ -33,7 +33,6 @@ import atdd.framework.MRScenario;
 import org.testng.Assert;
 
 import pages.acquisition.commonpages.EnterZipCodePage;
-import pages.acquisition.dce.DCETestHarnessPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.WelcomePage;
@@ -172,7 +171,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
-	//@FindBy(xpath = ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
+	//@FindBy(xpath = "//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
 	@FindBy(xpath = "//a[contains(@title,'Drug Cost Estimator Tool')]")
 	public WebElement getStarted;
 
@@ -3154,10 +3153,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public DCETestHarnessPage GetDCEtestHarnessPage() {
-		return new DCETestHarnessPage(driver);
-	}
-
 	public GetStartedPage navigateToDCERedesignFromHome() throws InterruptedException {
 		validateNew(getStarted);
 //			getStarted.click();
@@ -4061,7 +4056,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
-	}
+		}
+		
+		public VPPPlanSummaryPage navigateToPathNew(String path) {
+
+			String CurrentURL = driver.getCurrentUrl();
+			System.out.println("Current URL : " + CurrentURL);
+
+			String NavigateToURL = CurrentURL + path;
+			System.out.println("Navigating to URL : " + NavigateToURL);
+			driver.navigate().to(NavigateToURL);
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+			System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+			if(driver.getCurrentUrl().contains("plan-summary")){
+				return new VPPPlanSummaryPage(driver);
+			}
+			else {
+				System.out.println("Navigation to vpp plan summary page is failed");
+				return null;
+			}
+			}
+
 
 	public void insertValueIntoSecondSearchBox(String inputValue) {
 		System.out.println("Click on clear button");

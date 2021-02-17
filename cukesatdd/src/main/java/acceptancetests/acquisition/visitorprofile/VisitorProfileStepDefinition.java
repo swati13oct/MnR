@@ -25,6 +25,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
@@ -423,6 +424,18 @@ public void user_should_see_back_to_drug_cost_estimator_link_on_visitor_profile_
 	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 	visitorProfile.validateBackToDceLink();
+}
+
+@Then("^the user clicks on Drug cost estimator link and validates Drug Details Page$")
+public void user_clicks_DCELink_and_validates_drugdetail_page() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.validateBackToDceLink();
+	DrugDetailsPage drugDetailsPage =  visitorProfile.clickBackToDCELink();
+	if (null != drugDetailsPage) {
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	} else
+		Assert.fail("Drug Details page not loaded");
 }
 
 @When("^user clicks on edit drugs button from plan card$")
