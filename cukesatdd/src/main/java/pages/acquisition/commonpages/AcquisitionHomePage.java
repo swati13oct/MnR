@@ -5158,7 +5158,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallpopuponapage(String TFNXpath, String ExpecetdTFNNo) {
 
 		System.out.println("########Validating TFN on Call SAM icon and Call popup#######");
-		//driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		checkModelPopup(driver, 10);
 
