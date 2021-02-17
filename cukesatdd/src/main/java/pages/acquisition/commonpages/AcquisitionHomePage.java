@@ -5752,7 +5752,9 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m.,\n7 days a week";
+		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a week";
+		//String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week";
 //		String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
 		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezoneOLE.getText();
 
@@ -5760,8 +5762,8 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
 		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
 
-		if (ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")
-				.contains(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
+		if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "").equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")) || ExpectedCallSamTFNtimezone1.replace(" ", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
 			System.out.println(
 					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
 		else
