@@ -41,6 +41,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+    Then the user validates TFN Number on Right Rail OLE page
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath2> |
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
@@ -84,10 +87,16 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+    Then the user validates TFN Number on Right Rail OLE page
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath2> |
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+    Then the user validates TFN Number on Right Rail OLE page
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath2> |
     Then user closes current tab and navigate to previous tab
     #----------Repeat the steps for SNP Plan-----------------#
     Then the user validate aarp medicare plans11 page external link
@@ -116,10 +125,14 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+    Then the user validates TFN Number on Right Rail OLE page
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath2> |
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+      
     # Then the user validates cancellation and Save Return Later modal for OLE Page
     Then user closes current tab and navigate to previous tab
     #-------------------Repeat the steps for Medsupp Plan----------------------------------------------
@@ -145,7 +158,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     Then user closes current tab and navigate to previous tab
-
+		
     @CampaignExternalLink_E2E_Scenario_6
     Examples: 
       | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |
