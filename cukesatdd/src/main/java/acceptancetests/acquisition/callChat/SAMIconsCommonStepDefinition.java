@@ -317,7 +317,7 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
 
 
-		aquisitionhomepage.validateTFNNoonRightRail(TFNXpath, ExpectedTFNNo);
+		aquisitionhomepage.validateTFNNoonRightRailForOLE(TFNXpath, ExpectedTFNNo);
 	
 	}
 
