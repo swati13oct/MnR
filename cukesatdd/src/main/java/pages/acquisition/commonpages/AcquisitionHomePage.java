@@ -5189,7 +5189,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("TFN element is not found / displayed on Call popup icon : ");
 
 		System.out.println("#######Validating TFN time zone on Call Popup#######");
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Â– 8 p.m. Monday Â– Friday, 8 a.m. Â– 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println("TFN Timezone Content for Expected Values :" + ExpectedCallSamTFNtimezone);
@@ -5297,7 +5297,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week.";
 		String ActualCallSamTFNtimezone = footertextsectionTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer section########");
@@ -5375,7 +5375,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week";
 //		String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
 		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
 
@@ -5536,7 +5536,7 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 		else
 			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
 
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.\nHours: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week.\nHours: 8 a.m. Â– 8 p.m. Monday Â– Friday, 8 a.m. Â– 5 p.m. Saturday and Sunday.";
 		String ActualCallSamTFNtimezone = footertextsectionMedsuppTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Footer scetion########");
