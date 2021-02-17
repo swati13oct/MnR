@@ -299,4 +299,25 @@ public class SAMIconsCommonStepDefinition {
 		aquisitionhomepage.validateTFNNoonRightRailforMedsupp(TFNXpath, ExpectedTFNNo);
 
 	}
+	
+	@Then("^the user validates TFN Number on Right Rail OLE page$")
+	public void validate_TFN_On_Right_Rail_OLE_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+
+
+		aquisitionhomepage.validateTFNNoonRightRailOLE(TFNXpath, ExpectedTFNNo);
+	
+	}
+
 }

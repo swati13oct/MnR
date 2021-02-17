@@ -42,7 +42,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates TFN Number on Right Rail
+    Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath4> |
     Then the user navigates to Personal Information Page
@@ -94,14 +94,14 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates TFN Number on Right Rail
+    Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath4> |
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-      Then the user validates TFN Number on Right Rail
+      Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath4> |
     And user closes current tab and navigate to previous tab
@@ -241,7 +241,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates TFN Number on Right Rail
+    Then the user validates TFN Number on Right Rail OLE page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath4> |
     And user closes current tab and navigate to previous tab

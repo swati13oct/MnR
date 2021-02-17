@@ -5256,6 +5256,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//span[contains(@class,'size14 day')]")
 	private WebElement rightRailsectionTFNtimezoneMedsupp;
 	
+	@FindBy(xpath = "//div[contains(@class,'label-icon')]//following-sibling::div/p")
+	private WebElement rightRailsectionTFNtimezoneOLE;
+	
 	public void validatefootercallussection(String TFNXpath, String ExpecetdTFNNo) {
 		CommonUtility.checkPageIsReady(driver);
 
@@ -5697,6 +5700,67 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 		return new IsInsuranceAgent(driver);
 	
 
+	}
+	
+	public void validateTFNNoonRightRailOLE(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
+
+		CommonUtility.checkPageIsReady(driver);
+//			checkModelPopup(driver, 10);
+//			CheckiPerseptions();
+
+		System.out.println("########Validating TFN Info in RIght Rail section########");
+
+		if (validate(rightRailSectionTFNHeader)) {
+			scrollToView(rightRailSectionTFNHeader);
+			System.out.println(rightRailSectionTFNHeader.getText());
+			System.out.println(rightRailSectionTFNHeader1.getText());
+		}
+
+	//	String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at 1-877-755-5345 (TTY 711)";
+		String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText();
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., 7 days a week\n" + 
+				"(Alaska and Hawaii: 8 a.m. – 8 p.m. Monday – Friday, 8 a.m. – 5 p.m. Saturday – Sunday)";
+		//String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezoneOLE.getText();
+
+		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+				.contains(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
+			System.out.println(
+					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
+		else
+			Assert.fail(
+					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
 	}
 
 }
