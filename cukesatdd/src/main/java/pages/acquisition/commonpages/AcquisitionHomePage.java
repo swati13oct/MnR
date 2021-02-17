@@ -5377,8 +5377,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		else
 			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
 
-	//	String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week";
-		String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Ã‚â€“ 8 p.m., 7 days a week";
+//		String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
 		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
 
 		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
