@@ -3462,7 +3462,7 @@ public class VppCommonStepDefinition {
 		File InputFileDocLogPDP = new File(InputFilePathDocLogPDP);
 		FileInputStream inputStreamDocLogPDP = new FileInputStream(InputFileDocLogPDP);
 		Workbook workbookDocLogPDP = new HSSFWorkbook(inputStreamDocLogPDP);
-		Sheet sheetDocLogPDP = workbookDocLog.getSheet(sheetNameDocLog);
+		Sheet sheetDocLogPDP = workbookDocLogPDP.getSheet(sheetNameDocLog);
 		int lastRowDocLogPDP = sheetDocLogPDP.getLastRowNum();
 		
 		//Creating the results excel book
@@ -3541,7 +3541,7 @@ public class VppCommonStepDefinition {
              int langColIndexPDP = colNamesMapMA.get("OCP/ODP");
              int componentCodeIndexPDP = colNamesMapMA.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
              int planIDIndexDocLogPDP = colNamesMapMA.get("Contract-PBP-SegmentID");
-			 
+			 String  planType = "";
 			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 	            {
 				 
@@ -3579,23 +3579,26 @@ public class VppCommonStepDefinition {
 								  planDetailsPage = new PlanDetailsPage(wd);
 							 }
 							 
+							 //based on the column headers, determines the equivalent name of the pdf in the doclog file and the language for that pdf to match in the doclog file
 							 ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
-							 int rowIndexOfDocCode = 0; String planId= "", planType = "";
+							 int rowIndexOfDocCode = 0; String planId= "";
 							 
 							 if(currentColName.equalsIgnoreCase("plan id"))
 								 planId = cell.getStringCellValue();
-							 else if(currentColName.equalsIgnoreCase("plan id"))
+							 else if(currentColName.equalsIgnoreCase("plan type"))
 								 planType = cell.getStringCellValue();
 								 
 							 boolean flag = false; String failedMessage = "";
 							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
 							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName); //method returns true/false value along with the document code in hashmap
 							   
-							  	if(resultMap.containsKey(true) && resultMap.get(true).equalsIgnoreCase("NA")) {
+							  	if(resultMap.containsKey(true) && (resultMap.get(true).equalsIgnoreCase("NA")||currentColName.contains("Step Therapy") || currentColName.contains("Prior Auth") ||currentColName.contains("Formulary Additions")||currentColName.contains("Formulary Deletions"))) {
 							  		newCell.setCellStyle(stylePassed);
 							  		newCell.setCellValue(resultMap.get(true));
 							  	}else if (resultMap.containsKey(true)) {// if the validatePDF returns True
+							  	
 							  		int lastRowDocLog = 0;
+							  		String compCode = resultMap.get(true);
 									  		if(planType.equalsIgnoreCase("PDP")) {
 									  			lastRowDocLog = lastRowDocLogPDP;
 									  			sheetDocLog = sheetDocLogPDP;
@@ -3614,34 +3617,39 @@ public class VppCommonStepDefinition {
 	
 							  				
 											//loops through all of the rows in the DOCLog (either PDP or MA based on plantype) excel file for the column that contains the component code and checks if the code exists. if it does, then it returns the index of that row 
-									  		for(int rowIndexDocLog=2; rowIndexDocLog<=lastRowDocLog ; rowIndexDocLog++) {
+									  		for(int rowIndexDocLog=1; rowIndexDocLog<=lastRowDocLog ; rowIndexDocLog++) {
 									  			 String cellValueOfCompCode = sheetDocLog.getRow(rowIndexDocLog).getCell(componentCodeIndex).getStringCellValue();
-									  			if(cellValueOfCompCode.contains(resultMap.get(true))){
+									  			if(cellValueOfCompCode.contains(compCode)){
 									  				rowIndexOfDocCode = rowIndexDocLog;break;
 									  			}		
 											  }
 									  		 
+									  		String docTypeDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue(); // document type value from the doclog file
+									  		String langDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue(); //language value from doclog file
+									  		String planIDDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue(); //plan id from the doclog file
+									  		
+									  		
 									  		//checks if the doc type matches for this component code
-									  		 if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue()).contains(docLangList.get(0))){
+									  		 if(docTypeDocLog.contains(docLangList.get(0))){
 									  			 //checks if the language matches for this component code
-										  			if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue()).contains(docLangList.get(1))){
+										  			if(langDocLog.contains(docLangList.get(1))){
 										  				//checks if plan id matches for the component code
-											  				if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue()).contains(planId)) {
+											  				if(planIDDocLog.contains(planId)) {
 											  					flag = true;
 											  					newCell.setCellStyle(stylePassed);
 																newCell.setCellValue(resultMap.get(true));
 													  		 }else{// else for plan id check
-													  			 failedMessage = "Failed to match the component code with the plan ID";
+													  			 failedMessage = "Failed to match the component code with the plan ID: "+planIDDocLog;
 											  					newCell.setCellStyle(styleFailed);
 											  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
 													  		 }
 												  	}else { //else for language check in the DOclog
-												  		failedMessage =  "Failed to match the component code with the Language";
+												  		failedMessage =  "Failed to match the component code with the Language: "+langDocLog;
 										  				newCell.setCellStyle(styleFailed);
 										  				newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
 												  	}
 									  		 }else { //else for document code check in the doclog
-									  			 failedMessage = "Failed to match the component code with the document type";
+									  			 failedMessage = "Failed to match the component code with the document type: "+docTypeDocLog;
 									  		 	newCell.setCellStyle(styleFailed);
 									  		 	newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
 									  		 }

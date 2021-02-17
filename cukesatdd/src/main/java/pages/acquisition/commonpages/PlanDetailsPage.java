@@ -1337,6 +1337,7 @@ public class PlanDetailsPage extends UhcDriver {
 				TestPDF.parse();*/
 				String PDFText = new PDFTextStripper().getText(document);
 				
+			
 				validationString = documentCode;
 	
 				if(PDFText.contains(documentCode)){
@@ -1359,6 +1360,8 @@ public class PlanDetailsPage extends UhcDriver {
 			driver.close();
 			driver.switchTo().window(parentHandle);
 		}
+		//changing the component codes for these formularies to match with what's in the Doclog files
+		
 		comparedResult.put(validationFlag, validationString);
 		
 		return comparedResult;
@@ -1922,7 +1925,7 @@ public class PlanDetailsPage extends UhcDriver {
 		else if(colName.contains("Step Therapy Criteria")) {lang = english;docName = "Formulary";}
 		else if(colName.contains("Formulary Additions")) {lang = english;docName = "Formulary";}
 		else if(colName.contains("Formulary Deletions")) {lang = english;docName = "Directory";}
-		else if(colName.contains("Alternative Drugs List")) {lang = spanish;docName = "Drugs"; }
+		else if(colName.contains("Alternative Drugs List")) {lang = english;docName = "Drugs"; }
 		else if(colName.contains("Formulario de Inscripción")) {lang = spanish;docName = "Application"; }
 		else if(colName.contains("Resumen de Beneficios")) {lang = spanish;docName = "Summary of Benefits"; }
 		else if(colName.contains("Comprobante de Cobertura")) {lang = spanish;docName = "Evidence of Coverage"; }
