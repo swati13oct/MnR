@@ -296,6 +296,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public void captureFunctionalToolTips(String planName) {
 		WebElement WhyAverage = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhyAverage);
+/*
 		scrollToView(WhyAverage);
 		jsMouseOver(WhyAverage);
 		jsClickNew(WhyAverage);
@@ -307,10 +308,11 @@ public class DrugSummaryPage extends UhcDriver {
 		} else
 			Assert.fail("Why Average ToolTip text is not present");
 		jsMouseOut(WhyAverageContent);
+		*/
 		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhatsIncluded);
 		scrollToView(WhyAverage);
-		jsMouseOver(WhatsIncluded);
+/*		jsMouseOver(WhatsIncluded);
 		jsClickNew(WhatsIncluded);
 		WebElement WhatsIncludedContent = driver.findElement(By.xpath("//h4[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'includeLinkBtn')]/following-sibling::*[contains(@id , 'TooltipContent')]"));
 		validateNew(WhatsIncludedContent);
@@ -320,6 +322,7 @@ public class DrugSummaryPage extends UhcDriver {
 		} else
 			Assert.fail("Whats Included ToolTip text is not present");
 		jsMouseOut(WhatsIncludedContent);
+		*/
 		
 	}
 
