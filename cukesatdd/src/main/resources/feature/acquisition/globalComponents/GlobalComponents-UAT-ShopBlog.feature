@@ -69,7 +69,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
 
-    @ShopPages12_Shop5_GlobalCompsAARP
+    @ShopPages12_Shop5_GlobalCompsAARP @ShopPages16_Shop16_GlobalCompsAARP
     Examples: 
       | Scenario           | site | path                                                | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 3_AMP | AARP | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
@@ -81,7 +81,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/renew-active.html                              | Renew Active            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
       | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html | MA Plan benefits        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
-    @ShopPages12_Shop5_GlobalCompsUHC
+    @ShopPages12_Shop5_GlobalCompsUHC @ShopPages16_Shop16_GlobalCompsUHC
     Examples: 
       | Scenario           | site | path                                                | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 3_UMS | UHC  | shop/estimate/pdp-costs.html                        | Estimate PDP            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
@@ -93,7 +93,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 4_UMS | UHC  | shop/compare/compare-ma-ms.html                     | ShopPlan: Compare MA MS | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
       | E2E Scenario 4_UMS | UHC  | safe-shopping.html                                  | ShopPlan: Shop          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
-    @ShopPages12_Shop6_GlobalCompsAARP
+    @ShopPages12_Shop6_GlobalCompsAARP @ShopPages17_Shop17_GlobalCompsAARP
     Examples: 
       | Scenario           | site | path                                      | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 5_AMP | AARP | shop/compare/compare-ma.html              | Compare MA              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
@@ -104,7 +104,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
 
-    @ShopPages12_Shop6_GlobalCompsUHC
+    @ShopPages12_Shop6_GlobalCompsUHC @ShopPages17_Shop17_GlobalCompsUHC
     Examples: 
       | Scenario           | site | path                                      | pageName                | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 5_UMS | UHC  | shop/compare/compare-ma.html              | Compare MA              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
