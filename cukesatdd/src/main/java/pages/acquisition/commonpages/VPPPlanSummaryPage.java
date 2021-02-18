@@ -41,6 +41,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
+import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 
@@ -2535,29 +2536,6 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsMouseOut(toolTip);
 	}
 
-	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName) {
-		WebElement DCELink = null;
-
-		if (planName.contains("SNP")) {
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
-		} else if (planName.contains("PDP")) {
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')]"));
-		} else
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
-
-		Actions action = new Actions(driver);
-		action.moveToElement(DCELink).build().perform();
-		DCELink.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("drug-cost-estimator")) {
-			System.out.println("DCE Page is loaded");
-			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
-		} else
-			return null;
-	}
 
 	/* Navigation to DCE for all plan types having a plan name */
 	public DrugCostEstimatorPage navigatetoDCEVPP(String planName) {
@@ -4284,13 +4262,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public DrugDetailsPage navigateToDCEFromDrugDropdown(String planType, String planName) {
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("SNP")) {
-			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//*[contains(text(),'" + planName
+			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//a[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
 
 			if (drugLinkDropdown.size() > 0)
 				jsClickNew(drugLinkDropdown.get(0));
 
-			WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+			WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//a[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]/a"));
 
 			jsClickNew(drugSummaryLinkDropdown);
@@ -4616,8 +4594,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(VerificationAgree);
 		jsClickNew(nextButton);
 
-		validateNew(VerificationAgree2);
-		jsClickNew(VerificationAgree2);
+		//validateNew(VerificationAgree2);
+	//	jsClickNew(VerificationAgree2);
 		jsClickNew(nextButton);
 		validateNew(VerificationAgree3);
 		Thread.sleep(3000);
@@ -6602,5 +6580,17 @@ public void verifyNextBestActionModalForDrugCost() {
 
 public void verifyNBAModalNotDisplayed() {
 	Assert.assertTrue("NBA modal should not be displayed",validateNonPresenceOfElement(nextBestActionModal));
+}
+
+@FindBy(xpath = "//a[contains(@class,'meet-agent')]")
+private WebElement InsuranceAgentLink;
+public IsInsuranceAgent clickOnRequestInsuranceAgent() {
+	Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
+	jsClickNew(InsuranceAgentLink);
+	CommonUtility.checkPageIsReadyNew(driver);
+	if (driver.getCurrentUrl().contains("agent-appointment.html"))
+		return new IsInsuranceAgent(driver);
+	else
+		return null;
 }
 }
