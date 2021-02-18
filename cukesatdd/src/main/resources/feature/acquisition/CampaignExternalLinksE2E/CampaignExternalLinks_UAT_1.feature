@@ -130,6 +130,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     | TFN Xpath | <TFNxpath5> |
     And user closes current tab and navigate to previous tab
     #Find Plans in your Area and SNP plantype*****#
+    Then user verify TFN on AARP external links page
+      | TFN No      | <TFNNo>      |
+      | TFN Xpath   | <TFNxpath1>  |
+      | Working hrs | <workingHrs> |
     When user clicks on Find Plans in your area to open a new tab
     Then user should be navigated on Shop for a plan page
     Then the user validates SAM icons on the page
