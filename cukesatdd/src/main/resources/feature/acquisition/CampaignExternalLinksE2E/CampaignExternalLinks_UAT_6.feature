@@ -72,7 +72,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-     Then the user validates TFN Number on Right Rail
+     Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
     And the user views the plans of the below plan type
@@ -128,6 +128,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+     Then the user validates TFN Number on Zipcode component
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
     And the user views the plans of the below plan type
       | Plan Type | <SNPplantype> |
     # And the user selects plan year
@@ -167,7 +170,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-      Then the user validates TFN Number on Right Rail
+     Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
     And the user views the plans of the below plan type
