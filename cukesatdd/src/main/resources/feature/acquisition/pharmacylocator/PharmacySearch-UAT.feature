@@ -25,7 +25,7 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the Pharmacies available
+   # Then the user validates the Pharmacies available
       | Language | English |
     And the user validates pharmacy widgets on page
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
@@ -89,7 +89,7 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the Pharmacies available
+   # Then the user validates the Pharmacies available
       | Language | English |
     And the user validates pharmacy widgets on page
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
@@ -126,7 +126,7 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the Pharmacies available
+   # Then the user validates the Pharmacies available
       | Language | English |
     And the user validates pharmacy widgets on page
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
