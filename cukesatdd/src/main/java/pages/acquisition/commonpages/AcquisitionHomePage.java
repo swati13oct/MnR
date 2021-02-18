@@ -5720,10 +5720,10 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 			System.out.println(rightRailSectionTFNHeader1.getText());
 		}
 
-		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at "+ExpecetdTFNNo+" (TTY 711)";
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:"+ExpecetdTFNNo+" (TTY 711)";
 		//String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
 		validateNew(footertextsectioncallus);
-		String ActualCallSamTFNMember = footertextsectioncallus.getText();
+		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
 
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
