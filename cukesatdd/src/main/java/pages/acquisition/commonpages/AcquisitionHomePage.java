@@ -5389,12 +5389,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
 
 		if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
-				.equalsIgnoreCase(ActualCallSamTFNtimezone.replace("[^A-Za-z0-9:.]", "").replace("\n", "")))
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")))
 		System.out.println(
-				"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+					"****************TFN Timezone Content was  found matching with the SAM call Popup  ***************");
 		else
 			Assert.fail(
-					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+					"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
 	}
 	
 public VPPPlanSummaryPage searchPlansWithOutCountyForExternalLink(String zipcode) throws InterruptedException {
