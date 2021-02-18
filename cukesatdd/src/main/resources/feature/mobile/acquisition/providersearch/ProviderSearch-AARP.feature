@@ -51,10 +51,10 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | plancount | year    |
-      |   55344 |         7 | current |
-      |   04011 |         6 | current |
+      |   55344 |         8 | current |
+      |   04011 |         7 | current |
 
-  @ProviderSearchFromWidgetUlayer
+  @ProviderSearchFromWidgetUlayer 
   Scenario Outline: Verify Provider Search plan count in AARP site from Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page
@@ -70,8 +70,8 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
     Examples: 
       | zipcode | plancount | year    |
-      |   55344 |         7 | current |
-      |   04011 |         6 | current |
+      |   55344 |         8 | current |
+      |   04011 |         7 | current |
 
   @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression @OnlyProd
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page

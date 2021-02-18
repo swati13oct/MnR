@@ -131,6 +131,7 @@ public class DCEACQMedEdMobile {
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
+		
 	}
 
 	@And("^enduser clicks on continue button in Zip Entry Page$")

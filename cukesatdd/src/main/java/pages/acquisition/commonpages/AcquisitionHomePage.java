@@ -2765,6 +2765,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
+		
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);

@@ -283,7 +283,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
-	@FindBy(xpath = "//*[contains(@class,'cta-button secondary') and contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//a[text()='Provider Search']")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -1740,6 +1740,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public pages.mobile.acquisition.ulayer.ProviderSearchPageMobile clicksOnRallyToolFromHomePages() {
+		MobileMenu();
+		MobileMenuShopTool();
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
@@ -1754,6 +1756,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
+		MobileMenuMain();
+		MobileMenuShopTool();
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);

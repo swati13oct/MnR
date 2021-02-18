@@ -318,7 +318,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public DrugDetailsPageMobile clickViewDrugDetailsForPlan(String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			pageloadcomplete();
-			validateNew(mapdPlanToggle);
+			scrollToView(mapdPlanToggle);
+			//validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
 			WebElement DrugCostsLinkforPlan = driver.findElement(
@@ -329,7 +330,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			System.out.println("View Drug Costs Clicked for MAPD Plan : " + planName);
 
 		} else if (plantype.equalsIgnoreCase("PDP")) {
-			validateNew(pdpPlanToggle);
+			scrollToView(pdpPlanToggle);
+			//validateNew(pdpPlanToggle);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
 			WebElement DrugCostsLinkforPlan = driver.findElement(
@@ -340,7 +342,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			System.out.println("View Drug Costs Clicked for PDP Plan : " + planName);
 
 		} else {
-			validateNew(snpPlanToggle);
+			scrollToView(snpPlanToggle);
+			//validateNew(snpPlanToggle);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
 			WebElement DrugCostsLinkforPlan = driver.findElement(

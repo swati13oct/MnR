@@ -12,6 +12,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.ulayer.ProviderSearchPage;
 import pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile;
 //import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
 import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
@@ -163,9 +165,8 @@ public class SiteSearchMobile {
 
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
-				.clicksOnRallyToolFromHomePages();
+		
+		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);

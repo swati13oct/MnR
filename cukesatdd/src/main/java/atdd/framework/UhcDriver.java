@@ -217,7 +217,7 @@ public abstract class UhcDriver {
 
 		} else {
 			jsClickNew(element);
-			element.clear();
+			//element.clear();
 			element.sendKeys(message);
 		}
 
