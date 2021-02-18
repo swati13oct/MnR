@@ -5859,9 +5859,12 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
 
-		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
-			System.out.println(
-					"****************call us Content was found macthing with the SAM call Popup  ***************");
+	//	if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+		//	System.out.println(
+		if (ExpectedCallSamTFNMember.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNMember.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", ""))) {
+			
+			System.out.println("****************call us Content was found macthing with the SAM call Popup  ***************");
 			Assert.assertTrue(true);
 		} else
 			Assert.fail(
