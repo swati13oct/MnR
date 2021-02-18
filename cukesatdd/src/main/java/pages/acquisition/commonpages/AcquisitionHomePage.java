@@ -5826,15 +5826,14 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 	System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
 	System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
 
-	if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "").equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")) || ExpectedCallSamTFNtimezone1.replace(" ", "").replace("\n", "")
-			.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))|| ExpectedCallSamTFNtimezone2.replace(" ", "").replace("\n", "")
-			.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
+	if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+			.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", ""))) {
 		System.out.println(
 				"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
 		// Assert.assertTrue(true);
 	} else {
-		System.out.println(
-				"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+		Assert.fail(
+				"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
 		}
 	}
 	
