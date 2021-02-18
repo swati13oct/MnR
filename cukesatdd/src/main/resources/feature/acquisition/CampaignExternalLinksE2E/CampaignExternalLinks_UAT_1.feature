@@ -25,6 +25,9 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+    Then the user validates TFN Number on Right Rail Plan Details page
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
     When user clicks on Add to compare checkbox on plan detail page
     And the user clicks on back to all plans link and validates its redirection to Plan Summary
     Then verify the Add to compare checkbox is checked for selected plan
