@@ -152,14 +152,14 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user validates TFN Number on Right Rail OLE page
+    Then the user validates TFN Number on SNP Right Rail OLE page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath4> |
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |  
-      Then the user validates TFN Number on Right Rail OLE page
+      Then the user validates TFN Number on SNP Right Rail OLE page
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath4> |   
     # Then the user validates cancellation and Save Return Later modal for OLE Page
