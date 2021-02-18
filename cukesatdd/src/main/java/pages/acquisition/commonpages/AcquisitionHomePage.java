@@ -5349,7 +5349,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println(rightRailSectionTFNHeader1.getText());
 		}
 
-		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at 1-877-755-5345 (TTY 711)";
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at "+ExpecetdTFNNo+" (TTY 711)";
 //		String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
 		validateNew(footertextsectioncallus);
 		String ActualCallSamTFNMember = footertextsectioncallus.getText();
@@ -5720,8 +5720,8 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 			System.out.println(rightRailSectionTFNHeader1.getText());
 		}
 
-	//	String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at 1-877-755-5345 (TTY 711)";
-		String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at "+ExpecetdTFNNo+" (TTY 711)";
+		//String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
 		validateNew(footertextsectioncallus);
 		String ActualCallSamTFNMember = footertextsectioncallus.getText();
 
@@ -5787,8 +5787,8 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 			System.out.println(rightRailSectionTFNHeader1.getText());
 		}
 
-	//	String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at 1-877-755-5345 (TTY 711)";
-		String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at "+ExpecetdTFNNo+" (TTY 711)";
+		//String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
 		validateNew(footertextsectioncallus);
 		String ActualCallSamTFNMember = footertextsectioncallus.getText();
 
