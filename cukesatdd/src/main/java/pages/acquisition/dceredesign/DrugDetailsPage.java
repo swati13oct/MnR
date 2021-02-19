@@ -860,6 +860,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_AnnualEstTotal_Amount);
 		validateNew(MonthlyDrugStage_Header);
 
+		CommonUtility.waitForPageLoad(driver, YourDrugs_Header, 20);
 		String AVG_MONTHLY = DrugCosts_AvgMonDrugCost_Amount.getText();
 		String MONTHLY_PREMIUM = DrugCosts_MonthlyPremium_Amount.getText();
 		String ANNUAL_ESTIMATED_TOTAL = DrugCosts_AnnualEstTotal_Amount.getText();
