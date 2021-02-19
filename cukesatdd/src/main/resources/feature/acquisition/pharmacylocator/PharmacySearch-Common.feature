@@ -27,8 +27,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    #Then the user validates the Pharmacies available
-    #  | Language | English |
+    Then the user validates the Pharmacies available
+      | Language | English |
     And the user validate tooltips on filters
       | Language                                   | English                 |
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
@@ -107,8 +107,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     And the user selects Pharmacy Types to Filter pharmacies
       | Pharmacy Type | <pharmacyType> |
       | Language      | English        |
-   # Then the user validates the Pharmacies available
-   #   | Language | English |
+    Then the user validates the Pharmacies available
+      | Language | English |
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
@@ -202,8 +202,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | Chinese        |
-   # Then the user validates the Pharmacies available
-   #   | Language | Chinese |
+    Then the user validates the Pharmacies available
+      | Language | Chinese |
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
@@ -244,8 +244,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     And the user selects Pharmacy Types to Filter pharmacies
       | Pharmacy Type | <pharmacyType> |
       | Language      | Chinese        |
-    #Then the user validates the Pharmacies available
-    #  | Language | Chinese |
+    Then the user validates the Pharmacies available
+      | Language | Chinese |
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
@@ -290,8 +290,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    #Then the user validates the Pharmacies available
-    #  | Language | Spanish |
+    Then the user validates the Pharmacies available
+      | Language | Spanish |
     And the user validate tooltips on filters
       | Language                                   | Spanish                 |
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
@@ -338,8 +338,8 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     And the user selects Pharmacy Types to Filter pharmacies
       | Pharmacy Type | <pharmacyType> |
       | Language      | Spanish        |
-   # Then the user validates the Pharmacies available
-   #   | Language | Spanish |
+    Then the user validates the Pharmacies available
+      | Language | Spanish |
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
