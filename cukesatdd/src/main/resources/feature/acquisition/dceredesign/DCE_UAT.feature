@@ -1,7 +1,7 @@
 @UATRegression
 Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
-  @DCE_ShopForPlanPage_PDPpage
+  @DCE_ShopForPlanPage_PDPpage  
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Shop PDP page on
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -203,4 +203,109 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
      Examples: 
       | Scenario            | site  | path                                                                                  | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | NewZipCode |  newplantype |  newplanname                                        |  isMultutiCounty |  county          |  updateplanname                       |   insulinDrug1 | insulinDrug2 									| insulinCopay  |    
       | E2E Scenario 6_UMS  | UHC  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |   NO             |Miami-Dade County |  AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen |  $35          | 
+    
+    
+    @DCE_E2E_Scenario1_UAT
+    Scenario Outline: <Scenario> : To verify that user can search for a plan, verify the drug costs and enroll in plan
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | County Name     | <county>          |
+      | Is Multi County | <isMultutiCounty> |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And I select "<plantype>" plans to compare and click on compare plan link
+    And I access the DCE Redesign from Plan compare page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug4> |
+    Then the user searches and adds the following Drug to Drug List
+     | DrugName | <drug5> |
+     Then the user edits supply length to three months for following drug  
+      | EditDrug | <drug3> |
+    Then the user validates all added drugs in DrugList 
+    Then the user clicks on return to compare link on build drug list page to returns to plan compare
+    #Then the user validates all added Drugs on Plan Compare
+    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+      | PlanName | <planname> |
+    Then the user validates planName matches plan Name in VPP
+    Then the user Captures Drug costs on Drug Details Page
+    And the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
+    Then the user deletes the following drug from Drug list
+     | DrugName | <drug4> |
+      And the user clicks on Edit button on Drug List page on DCE
+      | DrugName | <drug2> |
+    And the user changes the supply length
+      | Supply Length | <supplyLength> |
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    #Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+      #| Brand Drug   | <brandDrug1>   |
+      #| Generic Drug | <genericDrug1> |
+     #Then the user validates Drug Costs section
+   Then the user validates Your Drugs sections
+   Then the user validates Monthly Drug Costs by Stage Section
+   Then the user validates Monthly Drug Costs by Stage Info Modals
+   Then the user validates Monthly Drug Costs
+   Then the user validates Important information section
+   # Then the user clicks on return to compare link on build drug list page to returns to plan compare
+   Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
+   Then the user closes the Drug Info Modal on Plan Compare page
+    #Then the user validates all added Drugs on Plan Compare
+    Then clicks on back to plans on plan compare page for AARP
+    Then should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
+    
+    
+   @DCE_E2E_Scenario1_AARP 
+   Examples: 
+      | Scenario           | site     |zipcode| county               |isMultutiCounty|plantype |       drug1   | drug2     | drug3    | drug4           | drug5   | planname                        |  supplyLength    |brandDrug1 |  genericDrug1          |                             
+      | E2E Scenario 1_AMP | AARP     | 85001 |   Maricopa County    |    NO         |PDP     |        Lipitor| Ibuprofen | Nicomide | insulin lispro  | Fanapt |  AARP MedicareRx Walgreens (PDP)|Every 3 Months    | Lipitor    |  atorvastatin calcium |
+    
+    @DCE_E2E_Scenario1_UHC 
+    Examples: 
+      | Scenario           | site     |zipcode| county               |isMultutiCounty|plantype |       drug1   | drug2     | drug3    | drug4           | drug5   | planname                        |  supplyLength    |brandDrug1 |  genericDrug1          |                             
+      | E2E Scenario 1_UMS | UHC     | 85001 |   Maricopa County    |    NO           |PDP     |        Lipitor| Ibuprofen | Nicomide | insulin lispro  | Fanapt |  AARP MedicareRx Walgreens (PDP)|Every 3 Months    | Lipitor    |  atorvastatin calcium |
+    
+     @DCE_E2E_Scenario3_UAT
+    Scenario Outline: <Scenario> : Verify that user get started from home page and can search for a plan, verify the drug summary page  and change pharmacy on drug summary and navigate back to vpp plan details page
+     Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When I access the acquisition DCE Redesign from home page
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug4> |
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    Then the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page
+    And user clicks on change pharmacy link from summary page
+    Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
+      | PharmacyZipCode | <pharmacyZipCode> |
+    Then the user selects following pharmacy and returns to DCE Summary page
+      | SelectPharmacy | <SelectPharmacy> |
+    
+    
+    
+    @DCE_E2E_Scenario3_AARP 
+   Examples: 
+      | Scenario           | site     |zipcode| county               |isMultutiCounty|plantype|       drug1   | drug2    | drug3 | drug4  | drug5   | planname                       |  supplyLength    |brandDrug1 |  genericDrug1          |                             
+      | E2E Scenario 3_AMP | AARP     | 55344 |   Hennepin County    |    NO         |PDP     |        Orfadin| Humalog  | Emsam | Lipitor| Fanapt |  AARP MedicareRx Walgreens (PDP)|Every 3 Months    | Lipitor    |  atorvastatin calcium |
+    
+    
+    
+    
+    
     

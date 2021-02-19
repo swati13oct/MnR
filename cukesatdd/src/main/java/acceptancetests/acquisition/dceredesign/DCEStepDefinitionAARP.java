@@ -2720,7 +2720,18 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateOptumRxConsistentDisplay_PharmacyPage();
 	}
-	
+	@Then("^clicks on back to plans on plan compare page for AARP$")
+	public void clicks_on_back_to_plans_on_plan_compare_page_for_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.clickOnBacktoPlans();
+	}
+	@Then("^should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site$")
+	public void should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page_in_UMS_site() {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForEnrollPlan();
+	}
 	@Then("^the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page$")
 	public void user_clicks_site_logo_on_drugdetail_returns_Acquisition_home_page(DataTable attributes ) throws Throwable {
 		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
