@@ -1382,6 +1382,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
 		planSelectorResultspage.removedDrugsDetailsVPPtoPRE();
+		
 	}
 
 	@Then("^user navigate to PRE using StartNow button and verify drugs details in PRE page$")
@@ -1389,6 +1390,8 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
 		planSelectorResultspage.startnowtilldrugs();
+		
+		
 	}
 
 	@Then("^user proceed page navigation till VPP page after Start Now button$")

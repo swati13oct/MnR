@@ -521,7 +521,7 @@ public abstract class UhcDriver {
 			js.executeScript("arguments[0].scrollIntoView();", element);
 		} catch (Exception e) {
 
-			Assert.fail("The element " + element.getText() + "is not  found");
+			Assert.fail("The element " + element + "is not  found");
 			return false;
 		}
 

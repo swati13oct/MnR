@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with session cookies
 
-  @PRE @planrecommendation @DrugPREtoVPPtoDCE @F375045 @PRERegression1
+  @PRE @planrecommendation @DrugPREtoVPPtoDCE @F375045 @PRERegression1 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs details from PRE to VPP Page
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -43,7 +43,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                 | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | 1stRecommendation | Rankingplan | 2ndRecommendation |
       |   94203 | NO            | Sacramento | MAPD          | None         | withinUS | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO:Imuran,YES,Imuran TAB 50MG,,25,1,YES,YES:Actiq,NO,,,,1,YES,NO | Retail         | Yes,No,No,Yes                 | Lower                | MA                | Assure      | MS                |
 
-  @PRE @planrecommendation @DrugVPPtoPRE @F358830 @PRERegression1
+  @PRE @planrecommendation @DrugVPPtoPRE @F358830 @PRERegression1 @proharsh
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> -  To validate removed Drugs details are reflecting from VPP to PRE Page
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

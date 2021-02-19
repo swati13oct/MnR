@@ -25,12 +25,11 @@ import cucumber.api.CucumberOptions;
 		glue = { "atdd.framework", "acceptancetests.mobile" }, 
 		features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression1UlayerMobile.json" }, 
-		tags = {"@PRERegression1"}, dryRun=false)
+		tags = { "@PRERegression1"}, dryRun=false)
 public class RunMRATDDAcquisitionPlanRecommendationEngineRegression1UlayerMobile {
 
 }
 
 
 
-//note: these tags are for  
-	//	@Community_Meeting_AARP @Community_Meeting_UHC @PRERegression1 "@PRERegression1"
+//"@PRERegression1"

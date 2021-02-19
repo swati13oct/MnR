@@ -76,7 +76,7 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
+		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
 				.clicksOnRallyToolFromGlobalHeader();
 
 		if (providerSearchPage != null) {
@@ -84,6 +84,17 @@ public class SiteSearchMobile {
 		} else {
 			Assert.fail("Error Loading Rally tool from Global Header");
 		}
+		
+//		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		
+//		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnProviderToolFromGlobalHeader();
+//
+//		if (providerSearchPage != null) {
+//			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+//		} else {
+//			Assert.fail("Error Loading Rally tool from Global Header");
+//		}
 	}
 
 	/**

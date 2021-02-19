@@ -39,6 +39,7 @@ import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.keywordSearchAARP;
@@ -1725,7 +1726,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsMouseOver(ourPlansHoverLink);
 		MobileMenuShopTool();
 		scrollToView(providerSearchFromGlobalHeader);
-		jsClickNew(providerSearchFromGlobalHeader);
+		providerSearchFromGlobalHeader.click();
+		//jsClickNew(providerSearchFromGlobalHeader);
 		// (providerSearchFromGlobalHeader);
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
@@ -3420,6 +3422,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
+	
+	public ProviderSearchPageMobile clicksOnProviderToolFromGlobalHeader() {
+
+//		Actions action = new Actions(driver);
+//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		jsMouseOver(navigationSectionHomeLink);
+		jsMouseOver(ourPlansHoverLink);
+		validateNew(providerSearchFromGlobalHeader);
+
+		switchToNewTabNew(providerSearchFromGlobalHeader);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+
+			return new ProviderSearchPageMobile(driver);
+
+		}
+		return null;
+	}
 
 	public void backtotop() {
 		threadsleep(6);
@@ -3432,6 +3453,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
+	
+	
 
 	public void clickVisitAARPFooterLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
