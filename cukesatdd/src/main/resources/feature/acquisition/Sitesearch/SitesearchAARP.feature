@@ -1,7 +1,7 @@
 @SiteSearchResultsAARP @F448210
 Feature:1.03 Acq-To test Sitesearch results in AMP site
 
-@SiteSearchAARP @SiteSearchRegressionAARP @vbfGate @Sitesearchhome
+@SiteSearchAARP @SiteSearchRegressionAARP @Sitesearchhome
  Scenario Outline: Verify search results in AARP site -search value -<newsearchvalue>
    Given the user is on AARP medicare acquisition site landing page
    Then the user enter the searchValue in the search text box and hits enter
@@ -40,7 +40,7 @@ Feature:1.03 Acq-To test Sitesearch results in AMP site
     |Medicare|InvalidCharacter|ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj|
     |Medicare|InvalidCharacter|Unicorn|
     
- @SiteSearchResultsVPPUlayer  @SiteSearchRegressionAARP @vbfGate
+ @SiteSearchResultsVPPUlayer  @SiteSearchRegressionAARP
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

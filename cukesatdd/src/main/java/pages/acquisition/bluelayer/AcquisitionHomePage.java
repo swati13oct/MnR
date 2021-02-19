@@ -29,7 +29,6 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import pages.acquisition.dce.bluelayer.DCETestHarnessPage;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 
 import org.testng.Assert;
@@ -67,13 +66,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "picktopicbtn")
 	private WebElement picktopicbtn;
 
-	@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	//@FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeField;
 
 	@FindBy(id = "zipcode")
 	private WebElement zipCodeHealthPlans;
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	//@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
 	private WebElement viewPlansButton;
 	
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -2133,10 +2134,6 @@ private WebElement vppTop;
 
 	public String getTestSiteUrl() {
 		return testSiteUrl;
-	}
-
-	public DCETestHarnessPage GetDCEtestHarnessPage() {
-		return new DCETestHarnessPage(driver);
 	}
 
 	public void fixPrivateConnection() {

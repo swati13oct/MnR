@@ -158,6 +158,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public ZipCodePlanYearCapturePage navigateToZipEntryPage() {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
 		if (validateNew(zipCodeTxtbox)) {
 			return new ZipCodePlanYearCapturePage(driver);
@@ -171,6 +172,7 @@ public class BuildYourDrugList extends UhcDriver {
 	public DrugSummaryPage navigateToDrugSummay() {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, reviewDrugCostPageHeading, 20);
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);
@@ -186,6 +188,7 @@ public class BuildYourDrugList extends UhcDriver {
 		EnterDrugNameTxt.sendKeys(drugName);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
@@ -257,10 +260,11 @@ public class BuildYourDrugList extends UhcDriver {
 		String[] DrugListItems = druglist.split("&");
 		int i;
 		String currentDrug;
-		int DrugCount_Total = DrugListItems.length - 1;
-		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		for (i = 1; i <= DrugCount_Total; i++) {
+		//int DrugCount_Total = DrugListItems.length-1;   	//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = DrugListItems.length;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		//for(i=1; i<=DrugCount_Total; i++) {				//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for(i=0; i<DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : " + currentDrug);
 			WebElement DrugName = driver
@@ -343,5 +347,68 @@ public class BuildYourDrugList extends UhcDriver {
 		waitForPageLoadSafari();
 		
 		return new DrugSummaryPage(driver);
+	}
+
+	public void validateDetailsForDrug(String drugName, String drugQuantity, String drugFrequency,
+			String drugSupplyLen) {
+		System.out.println("Current Added Drug Name : " + drugName);
+		WebElement DrugName = driver
+				.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName + "')]"));
+		WebElement DrugDetailsText = driver.findElement(
+				By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName +"')]//following-sibling::p[contains(text(), 'per') and contains(text(), 'refill')]"));
+		String DrugText = DrugDetailsText.getText();
+		if (validateNew(DrugName) && validateNew(DrugDetailsText)
+				 && DrugText.contains(drugQuantity) && DrugText.contains(drugFrequency)
+				 && DrugText.contains(drugSupplyLen)) {
+			System.out.println("Drug List Drug Quantity, Frequency and Supply Length Validation PASSED for Drug : " + drugName);
+			System.out.println("Displayed Drug Details Text: "+DrugText);
+		} else
+			Assert.fail("Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug : " + drugName);
+	}
+
+
+
+	@FindBy(xpath = "//h3[contains(text(), 'You might also take')]")
+	public WebElement DrugRecommendationHeader;
+
+	@FindBy(xpath = "//h3[contains(text(), 'You might also take')]//parent::div//following-sibling::ul//li//*")
+	public List <WebElement> DrugRecommendationDrugList;
+	
+	public void validateDrugRecommendationSection(String druglist) {
+		if(validate(DrugRecommendationHeader) && DrugRecommendationDrugList.size()>0 && DrugRecommendationDrugList.size()<=5) {
+			System.out.println("Drug Recommendation section Displayed for Drugs Added");
+			System.out.println("Drug Recommendation Displays " +DrugRecommendationDrugList.size()+ " No of Drugs");
+			System.out.println("Checking that Drug Recommendation does not display any added drug");
+			
+			String[] DrugListItems = druglist.split("&");
+			int i;
+			String currentDrug;
+			//int DrugCount_Total = DrugListItems.length-1;   	//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+			int DrugCount_Total = DrugListItems.length;
+			System.out.println("Total Added Drug Count : "+DrugCount_Total);
+			//for(i=1; i<=DrugCount_Total; i++) {				//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+			for(i=0; i<DrugCount_Total; i++) {
+				currentDrug = DrugListItems[i];
+				for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
+					if (CurrentDrugRecommendation.getText().contains(currentDrug)) {
+						Assert.fail(currentDrug+" is also Displayed in Drug Recommendations - Validation FAILED");
+					}
+				}
+				System.out.println(currentDrug+" is NOT Displayed in Drug Recommendations - Validation PASSED for Drug");
+			}
+			System.out.println("Drug Recommendations List : ");
+			for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
+			System.out.println(CurrentDrugRecommendation.getText());}
+			System.out.println("Drug Cabinet is NOT displayed in Drug Recommendation  - Validation PASSED");
+		}
+		
+	}
+
+	public void validateDrugRecommendationSectionNOTdisplayed(String druglist) {
+		if(!validate(DrugRecommendationHeader) && DrugRecommendationDrugList.isEmpty()) {
+			System.out.println("Validation PASSED : Drug Recommendation NOT displayed when 25 Drugs added to cabinet ");
+		}
+		else
+			Assert.fail("Validation FAILED : Drug Recommendation displayed when 25 Drugs added to cabinet");
 	}
 }

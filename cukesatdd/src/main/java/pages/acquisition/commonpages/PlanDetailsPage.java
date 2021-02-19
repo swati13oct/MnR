@@ -1284,72 +1284,83 @@ public class PlanDetailsPage extends UhcDriver {
 	public HashMap<Boolean,String> clickAndValidatePDFText_URL(String pdfType) {
 		List <WebElement> PDFlink = driver.findElements(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '"+pdfType+"')]"));
 		String documentCode = "",pdfHref ="";
+		boolean validationFlag = true; String validationString = "NA";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
-		if(pdfType.contains("Step Therapy")) {
-			documentCode = "Step Therapy";
-		}else if(pdfType.contains("Prior Auth")) {
-			documentCode = "Prior Authorization";
-		}else if(pdfType.contains("Formulary Additions")){
-			documentCode = "Formulary Additions";
-		}else if(pdfType.contains("Formulary Deletions")){
-			documentCode = "Formulary Deletions";
-		}else {
-		
-			pdfHref = PDFlink.get(0).getAttribute("href");
-			String a = "/";
-			 int posA = pdfHref.lastIndexOf(a);
-		     int adjustedPosA = posA + a.length();
-		     documentCode = pdfHref.substring(adjustedPosA);  
-		}
-		
-		System.out.println("Expected Document code :"+documentCode);
-
 		String parentHandle = driver.getWindowHandle();
 		
-
-		JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink.get(0));
-		executor.executeScript("arguments[0].click();", PDFlink.get(0));
-		int initialCount = driver.getWindowHandles().size();
-		//PDFlink.click();
-
-		//waitForCountIncrement(initialCount);
-		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-		//String currentHandle = null;
-		for(String winHandle : driver.getWindowHandles()){
-		    driver.switchTo().window(winHandle);
-		}
-		//System.out.println("Switched to new window : Passed");
-		CommonUtility.checkPageIsReadyNew(driver);
-
-		boolean validationFlag = false; String validationString = "FAILED";
-		
-		try {
-			URL TestURL = new URL(driver.getCurrentUrl());
-			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-			PDDocument document = PDDocument.load(TestFile);
-			/*PDFParser TestPDF = new PDFParser(document);
-			TestPDF.parse();*/
-			String PDFText = new PDFTextStripper().getText(document);
-			if(PDFText.contains(documentCode)){
-				 System.out.println("PASSED - PDF : " +pdfType+" text contains expected Document code : "+documentCode);
-				 validationFlag= true;
-				 validationString = "PASSED";
-			 }
-			 else{
-				 System.out.println("FAILED - PDF: " +pdfType+" text DOES NOT contains expected Document code : "+documentCode);
-				 if(PDFText.contains("PDF coming soon"))
-					 validationString = "PDF coming soon";
-			 }
-
-		} catch (MalformedURLException e) {
-			 System.out.println("FAILURE, Exception in Reading PDF");
-		} catch (IOException e) {
-			 System.out.println("FAILURE, Exception in Reading PDF");
+		if(PDFlink.size()!=0) {
+			if(pdfType.contains("Step Therapy")) {
+				documentCode = "Step Therapy";
+			}else if(pdfType.contains("Prior Auth")) {
+				documentCode = "Prior Authorization";
+			}else if(pdfType.contains("Formulary Additions")){
+				documentCode = "FORMULARY ADDITIONS";
+			}else if(pdfType.contains("Formulary Deletions")){
+				documentCode = "FORMULARY DELETIONS";
+			}else {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+					pdfHref = PDFlink.get(0).getAttribute("href");
+					String a = "/";
+					 int posA = pdfHref.lastIndexOf(a);
+				     int adjustedPosA = posA + a.length();
+				     documentCode = pdfHref.substring(adjustedPosA);  
+			}
+			
+			System.out.println("Expected Document code :"+documentCode);
+			JavascriptExecutor executor = (JavascriptExecutor)driver;
+			executor.executeScript("arguments[0].scrollIntoView(true);", PDFlink.get(0));
+			executor.executeScript("arguments[0].click();", PDFlink.get(0));
+			int initialCount = driver.getWindowHandles().size();
+			//PDFlink.click();
+	
+			//waitForCountIncrement(initialCount);
+			ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+			//String currentHandle = null;
+			for(String winHandle : driver.getWindowHandles()){
+			    driver.switchTo().window(winHandle);
+			}
+			//System.out.println("Switched to new window : Passed");
+			CommonUtility.checkPageIsReadyNew(driver);
+	
+			
+			
+			try {
+				URL TestURL = new URL(driver.getCurrentUrl());
+				BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+				PDDocument document = PDDocument.load(TestFile);
+				/*PDFParser TestPDF = new PDFParser(document);
+				TestPDF.parse();*/
+				String PDFText = new PDFTextStripper().getText(document);
+				
+				validationString = documentCode;
+	
+				if(PDFText.contains(documentCode)){
+					 System.out.println("PASSED - PDF : " +pdfType+" text contains expected Document code : "+documentCode);
+					 validationFlag= true;
+					// validationString = "PASSED";
+				 }
+				 else{
+					 System.out.println("FAILED - PDF: " +pdfType+" text DOES NOT contains expected Document code : "+documentCode);
+					 if(PDFText.contains("PDF coming soon"))
+						 validationString = "PDF coming soon";
+					 validationFlag = false;
+				 }
+	
+			} catch (MalformedURLException e) {
+				 System.out.println("FAILURE, Exception in Reading PDF");
+			} catch (IOException e) {
+				 System.out.println("FAILURE, Exception in Reading PDF");
+			}
+			driver.close();
+			driver.switchTo().window(parentHandle);
 		}
 		comparedResult.put(validationFlag, validationString);
-		driver.close();
-		driver.switchTo().window(parentHandle);
+		
 		return comparedResult;
 	}
 
@@ -1890,6 +1901,51 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 	public void validateVPPDetailsPage() {
-	Assert.assertTrue("user not navigated to VPP Details Page",driver.getCurrentUrl().contains("details"));
-}
+		Assert.assertTrue("user not navigated to VPP Details Page",driver.getCurrentUrl().contains("details"));
+	}
+	
+	public ArrayList<String> getDocNameAndLanguage(String colName){
+		String english = "English", spanish = "Spanish", chinese = "Chinese", lang = "", docName = "";
+		ArrayList<String> result=new ArrayList<String>();
+		
+		if(colName.contains("Enrollment")) { lang = english;docName = "Application";	}
+		else if(colName.contains("Summary of Benefits")) { lang = english; docName = "Summary of Benefits";}
+		else if(colName.contains("Evidence of Coverage")) {lang = english;docName = "Evidence of Coverage"; }
+		else if(colName.contains("ANOC")) {lang = english;docName = "ANOC";}
+		else if(colName.contains("UnitedHealth Passport Program")) {lang = english;docName = "Passport";}
+		else if(colName.contains("Star Ratings")) {lang = english;docName = "Star Ratings";}
+		else if(colName.contains("Benefit Highlights")) {lang = english;docName = "Benefit Highlights";}
+		else if(colName.contains("Provider Directory")) {lang = english;docName = "Directory";}
+		else if(colName.contains("Vendor Information Sheet")) {lang = english;docName = "Vendor Information Sheet";}
+		else if(colName.contains("Comprehensive Formulary")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Prior Authorization Criteria")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Step Therapy Criteria")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Formulary Additions")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Formulary Deletions")) {lang = english;docName = "Directory";}
+		else if(colName.contains("Alternative Drugs List")) {lang = spanish;docName = "Drugs"; }
+		else if(colName.contains("Formulario de Inscripción")) {lang = spanish;docName = "Application"; }
+		else if(colName.contains("Resumen de Beneficios")) {lang = spanish;docName = "Summary of Benefits"; }
+		else if(colName.contains("Comprobante de Cobertura")) {lang = spanish;docName = "Evidence of Coverage"; }
+		else if(colName.contains("Clasificación de la Calidad del Plan")) {lang = spanish;docName = "Star Ratings"; }
+		else if(colName.contains("Programa UnitedHealth Passport")) {lang = spanish;docName = "Passport"; }
+		else if(colName.contains("Aviso Annual de Cambios")) {lang = spanish;docName = "ANOC"; }
+		else if(colName.contains("Beneficios Importantes")) {lang = spanish;docName = "Benefit Highlights"; }
+		else if(colName.contains("Directorio de Proveedores")) {lang = spanish;docName = "Directory"; }
+		else if(colName.contains("Información sobre proveedores")) {lang = spanish;docName = "Evidence of Coverage"; }
+		else if(colName.contains("註冊表格")) {lang = english;docName = "Application"; }
+		else if(colName.contains("福利概覽")) {lang = english;docName = "Summary of Benefits"; }
+		else if(colName.contains("承保證書")) {lang = english;docName = "Evidence of Coverage"; }
+		else if(colName.contains("星級評定")) {lang = english;docName = "Star Ratings"; }
+		else if(colName.contains("年度變更通知")) {lang = english;docName = "ANOC"; }
+		else if(colName.contains("福利摘要")) {lang = english;docName = "Benefit Highlights"; }
+		else if(colName.contains("醫生名冊")) {lang = english;docName = "Directory"; }
+		else if(colName.contains("供應商資訊表")) {lang = english;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("綜合處方藥一覽表")) {lang = english;docName = "Formulary"; }
+		else if(colName.contains("替代藥物清單")) {lang = english;docName = "Drugs"; }
+			
+		result.add(0, docName);
+		result.add(1,lang);
+		return result;
+	}
+	
 }

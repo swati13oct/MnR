@@ -26,6 +26,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.github.mkolisnyk.cucumber.reporting.types.breakdown.matchers.Matcher;
 import com.google.common.collect.Ordering;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PlanDetailsPage;
@@ -107,10 +108,12 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-	@FindBy(id = "selectaPharmacyHeader")
+//	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 
-	@FindBy(xpath = "//*[@id='modal']//*[@id='cancelicon']/img")
+//	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -125,10 +128,10 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'Search')]")
 	public WebElement pharmacySearchBtn;
 
-	@FindBy(id = "mailSelectPharmacyBtn0")
+	@FindBy(xpath = "//*[contains(@id, 'mailSelectPharmacyBtn')]")
 	public WebElement preferredMailPharmacy;
 
-	@FindBy(id = "optumRxTxt")
+	@FindBy(xpath = "//img[contains(@alt, 'OptumRX')]")
 	public WebElement optumRxMsg;
 
 	@FindBy(xpath = "//*[@role='list']")
@@ -288,6 +291,39 @@ public class DrugSummaryPage extends UhcDriver {
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
 		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		validateNew(PlanName_PlanDetails);
+	}
+	
+	public void captureFunctionalToolTips(String planName) {
+		WebElement WhyAverage = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
+		validateNew(WhyAverage);
+/*
+		scrollToView(WhyAverage);
+		jsMouseOver(WhyAverage);
+		jsClickNew(WhyAverage);
+		WebElement WhyAverageContent = driver.findElement(By.xpath("//h4[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'averageLinkBtn')]/following-sibling::*[contains(@id , 'averageTooltipContent')]"));
+		validateNew(WhyAverageContent);
+		String WhyAverageContentText = WhyAverageContent.getText().trim();
+		if (validateNew(WhyAverageContent)) {
+			System.out.println("Why Average ToolTip text is present"+WhyAverageContentText);
+		} else
+			Assert.fail("Why Average ToolTip text is not present");
+		jsMouseOut(WhyAverageContent);
+		*/
+		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
+		validateNew(WhatsIncluded);
+		scrollToView(WhyAverage);
+/*		jsMouseOver(WhatsIncluded);
+		jsClickNew(WhatsIncluded);
+		WebElement WhatsIncludedContent = driver.findElement(By.xpath("//h4[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'includeLinkBtn')]/following-sibling::*[contains(@id , 'TooltipContent')]"));
+		validateNew(WhatsIncludedContent);
+		String WhatsIncludedContentText = WhatsIncludedContent.getText().trim();
+		if (validateNew(WhatsIncludedContent)) {
+			System.out.println("Whats Included ToolTip text is present"+WhatsIncludedContentText);
+		} else
+			Assert.fail("Whats Included ToolTip text is not present");
+		jsMouseOut(WhatsIncludedContent);
+		*/
+		
 	}
 
 	public DrugSummaryPage verifyDefaultPlanType(String planType) {
@@ -498,7 +534,9 @@ public class DrugSummaryPage extends UhcDriver {
 		validateNew(drugTitle);
 		//validateNew(switchToGenericBtn);
 		validateNew(drugPricingDeductText);
-		Assert.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
+		String DrugPricingMsg = drugPricingDeductText.getText().replaceAll("\u00A0", " ").trim();
+//		Assert.assertTrue("Expected text not displayed on Drug pricing modal", drugPricingDeductText.getText().equals(LIS_MESSAGE_DRUG_PRICING));
+		Assert.assertTrue("Expected text not displayed on Drug pricing modal", DrugPricingMsg.equals(LIS_MESSAGE_DRUG_PRICING));
 		validateNew(drugClose);
 		jsClickNew(drugClose);
 	}
@@ -612,7 +650,7 @@ public class DrugSummaryPage extends UhcDriver {
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
-
+ 
 	@FindBy(xpath = "//*[contains(@class, 'pharmacy-plan-desc')]")
 	private WebElement PharmacyNameText;
 
@@ -649,6 +687,16 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void clickViewDrugCostBtn() {
 		viewDrugCostBtn.click();
+	}
+	
+	public void viewDrugPricingModal(String planName){
+	  WebElement viewDrugPricingLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'priceLinkBtn')]"));
+	  validateNew(viewDrugPricingLink);
+	  jsClickNew(viewDrugPricingLink);
+	  validateNew(DrugPricing_Header);
+	  validateNew(DrugPricing_CloseBtn);
+	  jsClickNew(DrugPricing_CloseBtn);
+	  
 	}
 
 	public void validatePremiumForPlan(String premium, String plantype, String planName) {
@@ -738,11 +786,13 @@ public class DrugSummaryPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
 		validateNew(DrugPricing_Header);
 		String[] Drugs = druglistObject.split("&");
-		int DrugCount_Total = Drugs.length - 1;
+//		int DrugCount_Total = Drugs.length - 1;			//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = Drugs.length;
 		String currentAddedDrug;
 		int i;
 		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		for (i = 1; i <= DrugCount_Total; i++) {
+//		for (i = 1; i <= DrugCount_Total; i++) {		//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for (i = 0; i < DrugCount_Total; i++) {	
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//span[contains(text(), '" + currentAddedDrug + "')]"));
@@ -957,6 +1007,11 @@ public class DrugSummaryPage extends UhcDriver {
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
+	
+	public void validateNBAModal() {
+		validateNew(dceNBAModal);
+		validateNew(dceNBAModalBtn);
+	}
 
 	public static String selectedPharmacyName;
 
@@ -1123,9 +1178,56 @@ public class DrugSummaryPage extends UhcDriver {
 		waitForPageLoadSafari();
 		return new PlanDetailsPage(driver);
 	}
+	
+    public void validateLISBanner_LISBuydownPlan_DrugSummary(String planName) {
+    	WebElement LISBanner = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'level of Extra Help')]"));
+    	if(validateNew(LISBanner)){
+    		WebElement ExtraHelpLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'Learn more')]"));
+    		System.out.println("Clicking on learn more about extra help link");
+    		switchToNewTabNew(ExtraHelpLink);
+    		CommonUtility.checkPageIsReadyNew(driver);
+    		if(driver.getCurrentUrl().contains("extra-help")){
+    			WebElement ExtraHelpText = driver.findElement(By.xpath("//h2[contains(text(),'Extra Help')]"));
+                validateNew(ExtraHelpText);
+                System.out.println("Extra Help page is displayed");
+    		}
+    		driver.close();
+    		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+    		System.out.println("Navigated back to drug summary page");
+    	}
+		
+	}
+
 
 	public void validateBreadCrumb(String breadCrumb) {
 		Assert.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
 				breaCrumbLink.getText().equals(breadCrumb));
+	}
+
+	public void validateOptumRxConsistentDisplay_PharmacyPage() {
+		//Zip code for No retail pharmacy results
+		String pharmacyZipCode = "89405";
+		clickChangePharmacy();
+		validateSelectPharmacyPage();
+		validateNew(Pharmacy_ZipCodeTxt);
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+		validateNew(Pharmacy_SearchBtn);
+		Pharmacy_SearchBtn.click();
+		System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+				+ Pharmacy_ZipCodeTxt.getText());
+		validateNew(preferredMailPharmacy);
+		validateNew(noResultsMessage);
+		if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
+			System.out.println("OptumRx Pharmacy Displayed for Zip not returning any retail Pharmacy results");
+			System.out.println("No results message displayed : "+noResultsMessage.getText());
+			validateNew(selectPharmacyModalCloseBtn);
+			System.out.println("Closing Pharmacy page");
+			selectPharmacyModalCloseBtn.click();
+			validateDrugSummaryPage();
+		}
+		else 
+			Assert.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
+	
 	}
 }

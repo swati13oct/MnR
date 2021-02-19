@@ -25,6 +25,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
@@ -131,7 +132,8 @@ public class VisitorProfileStepDefinition {
 		}
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.validateAddedPlans(savePlanNames);
+//		visitorProfile.validateAddedPlans(savePlanNames);
+		visitorProfile.validateAddedPlansNew(savePlanNames);
 	}
 	
 	@And("^user validates the added Ms plans on visitor profile page$")
@@ -424,6 +426,18 @@ public void user_should_see_back_to_drug_cost_estimator_link_on_visitor_profile_
 	visitorProfile.validateBackToDceLink();
 }
 
+@Then("^the user clicks on Drug cost estimator link and validates Drug Details Page$")
+public void user_clicks_DCELink_and_validates_drugdetail_page() {
+	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+			.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+	visitorProfile.validateBackToDceLink();
+	DrugDetailsPage drugDetailsPage =  visitorProfile.clickBackToDCELink();
+	if (null != drugDetailsPage) {
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	} else
+		Assert.fail("Drug Details page not loaded");
+}
+
 @When("^user clicks on edit drugs button from plan card$")
 public void user_clicks_on_edit_drugs_button_from_plan_card() {
 	VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
@@ -465,9 +479,9 @@ public void the_user_navigates_to_visitor_profile_page() {
 	AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-//	VisitorProfilePage visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
+	VisitorProfilePage visitorProfilePage = acqHomePage.navigateToNewVisitorProfilePage();
 
-//	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 }
 
 @And("^the user login with optum Id credentials$")

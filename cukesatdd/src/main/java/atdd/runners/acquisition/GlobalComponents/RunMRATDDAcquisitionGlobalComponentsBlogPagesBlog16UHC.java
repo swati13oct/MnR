@@ -11,12 +11,12 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog16UHC
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog16UHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog16UHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog16UHC.json" }, tags = { " @BlogPages_Blog16_GlobalCompsUHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog16UHC.json" }, tags = { " @BlogPages_Blog16_GlobalCompsUHC,@ShopPages14_Shop14_GlobalCompsUHC" })
 public class RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog16UHC {
 
 }

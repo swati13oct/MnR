@@ -154,9 +154,11 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		selectFromDropDownByText(driver, seletPlandropdown, planName);
 		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
-			waitforElementDisapper(By.className("loading-block"), 90);
+//			waitforElementDisapper(By.className("loading-block"), 90);
+			waitforElementDisapper(loadingSpinner, 90);
 		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
-			waitforElementDisapper(By.className("loading-block"), 30);
+//			waitforElementDisapper(By.className("loading-block"), 30);
+			waitforElementDisapper(loadingSpinner, 90);
 		sleepBySec(1); //note: let the page settle down
 //		searchbtn.click();
 		jsClickNew(searchbtn);

@@ -33,6 +33,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | Language                                   | English                 |
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
     And the user validates map section contents
+    Then the user validates Selected Plan Name in Results Section on Pharmacy page
     And the user validate show on map link
     And the user validate get direction link
     And the user validate more information content based on plan type
@@ -43,10 +44,10 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      | 15582 | AARP |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   00602 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   96950 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
+ #     | 15582 | AARP |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+ #     | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+ #     | 15582 | AARP |   00602 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
+ #     | 15582 | AARP |   96950 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
 
     # @PharmacyLocatorCommonProd_AARP
     Examples: 
@@ -463,7 +464,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     And I select "<plantype>" plans to compare and click on compare plan link
     Then verify plan compare page is loaded
     When the user navigate to pharmacy search page from the navigation bar
-    Then user verify breadcrumb "Return to Compare" displayed on pharmacy search page
+    Then user verify breadcrumb "Return to compare" displayed on pharmacy search page
     When user clicks on breadcrumb on pharmacy search page
     Then verify plan compare page is loaded
 
@@ -480,8 +481,6 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
   Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When I access the acquisition DCE Redesign from home page
-    Then the user validates Get Started Page
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
@@ -627,9 +626,9 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     @breadcrumbPharmacySearch_UHC
     Examples: 
       | site | planyear | zipcode | isMultutiCounty | county             | plantype | planName                        | path                                                                                                      |
-      | UHC  | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-application/aarp-medicarerx-online-application.html/welcome |
+      | UHC  | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | health-plans/prescription-drug-plans/medicare-enrollment/medicare-prescription-drug-plans-online-application.html/welcome |
 
-  Scenario Outline: To verify breadcrumbs on pharmacy search page through home page for Preferred Retail Pharmacy on acquisition <site> site
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through Preferred Retail Pharmacy on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to pharmacy search page from the navigation bar

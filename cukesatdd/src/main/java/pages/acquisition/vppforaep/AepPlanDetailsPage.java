@@ -18,7 +18,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.dce.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -91,6 +90,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Silver Sneakers')]/ancestor::label")
 	private WebElement silverSneakersCheckbox;
+	
+	@FindBy(xpath="//h2[contains(@class,'ng-binding')]")
+	private WebElement planName;
 	
 	private static String AARP_ACQISITION_PAGE_URL = MRConstants.AARP_URL;
 	private static String AARP_ACQISITION_OFFLINE_PAGE_URL = MRConstants.AARP_URL_OFFLINE;
@@ -346,25 +348,26 @@ public class AepPlanDetailsPage extends UhcDriver {
 			benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI; 												//storing the original benefit value before string manipulation
 			tmpKeyString = key; 														//storing the original key value (benefit name from the UI) before string manipulation
-			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", ""); 	//replace all the next lines and spaces from the string
-			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 		//replace all the next lines and spaces from the string
+			benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 	//replace all the next lines and spaces from the string
+			benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", "").replaceAll("\\*",""); 		//replace all the next lines and spaces from the string
 			
 			if(key.contains("Passport"))
 				key = key.replaceAll("\\u00AE", "").replace("(","").replace(")","");   //removes special characters like the Registered symbol
 
 			key = key.toLowerCase(); 
 			columnName = columnName.toLowerCase();
-
+			benefitValue = benefitValue.toLowerCase();
+			benefitValueUI = benefitValueUI.toLowerCase();
 			if(columnName.startsWith("tier") && !columnName.contains(":") && key.startsWith("tier"))
 				key = key.replace(":","");
-
 			
 			if(key.endsWith("1"))
 				key = 	StringUtils.trimTrailingCharacter(key, '1');
 			else if(key.endsWith("2"))
 				key = 	StringUtils.trimTrailingCharacter(key, '2');
 			
-			//removing all the footnote words from the string as they represent footnote
+			
+			//removing all the footnote words from the UI string and the superscripts
 			if(!(key.equalsIgnoreCase("monthly premium")||key.contains("plan premium")||key.contains("optional rider")||key.contains("estimated annual total") || key.contains("part b"))) {
 				if(benefitValueUI.endsWith("footnote2"))
 					benefitValueUI = benefitValueUI.replace("footnote2", "");
@@ -377,16 +380,21 @@ public class AepPlanDetailsPage extends UhcDriver {
 				else if(benefitValueUI.contains("Out-of-NetworkBenefits")&&columnName.equalsIgnoreCase("Out-of-Network Benefits")) {
 					benefitValueUI = benefitValueUI.replace("Opensinanewwindow", "");
 					benefitValue = benefitValue.replace("Opensinanewwindow", "");
-				}else if(key.equalsIgnoreCase("Dental")&&benefitValueUI.contains("$")) {
-					benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
-					benefitValueUI = benefitValueUI.replace("-Opensinnewwindow", "");
+				}else if(key.equalsIgnoreCase("Routine Dental")||key.equalsIgnoreCase("Out-of-Network Benefits")) {
+					//benefitValueUI = benefitValueUI.replace("Ismydentistcoveredforthisplan?", "");
+					benefitValueUI = benefitValueUI.replace("-opensinnewwindow", "");
+					benefitValueUI = benefitValueUI.replace("opensinanewwindow", "");
+				}
+
+				if(columnName.contains("eye exam")&&benefitValue.endsWith("1")) {
+					benefitValue = 	StringUtils.trimTrailingCharacter(benefitValue, '1');
 				}
 			}
 			//removing footnote values from the end of the key values if any
 			
 		
 			//if excel marks NA for the benefit then the following code validates the benefit isn't showing on the UI
-			if((benefitValue.equalsIgnoreCase("NA")||benefitValue.equalsIgnoreCase("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
+			if((benefitValue.equalsIgnoreCase("NA")||benefitValue.equalsIgnoreCase("N/A"))) {
 				counter++;
 				if(columnName.equalsIgnoreCase("Part B Premium Reduction") || columnName.equalsIgnoreCase("Platinum DentalPS") || columnName.equalsIgnoreCase("Optional Dental") ||columnName.equalsIgnoreCase("High Option Dental") ||columnName.equalsIgnoreCase("Footnotes") ||columnName.equalsIgnoreCase("Dental Platinum") ||columnName.equalsIgnoreCase("SilverSneakers") ||columnName.equalsIgnoreCase("Silver SneakersPS") || columnName.equalsIgnoreCase("Optional DentalPS") ||columnName.equalsIgnoreCase("High Option DentalPS")) {
 					columnName = columnName.replace("PS","");
@@ -455,7 +463,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 					//key = key.replaceAll(".", "");
 					benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); //.replaceAll("-", "").replaceAll(".", "");
 					benefitValue = benefitValue.toLowerCase();
-					benefitValue = benefitValue.replaceAll("\\*", "");
+					benefitValue = benefitValue.replaceAll("\\*", "").replace("footnotes2", "");
+					benefitValue = benefitValue.replace("footnotes", "");
 					if(key.contains(benefitValue)) {
 						flag = true;break;
 					}else {
@@ -477,7 +486,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						break;
 					}
 				}
-			}else if(columnName.equalsIgnoreCase("Monthly Premium") ||columnName.equalsIgnoreCase("Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network")){
+			}else if(columnName.equalsIgnoreCase("Monthly Premium") ||columnName.equalsIgnoreCase("Routine Dental") || columnName.equalsIgnoreCase("Coverage Gap Stage")|| columnName.equalsIgnoreCase("Preferred Retail Pharmacy Network")){
 				
 				counter++;
 				if(key.equalsIgnoreCase("Preferred Retail Pharmacy Network") ) {
@@ -491,11 +500,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 					else if(benefitValueUI.contains(".1"))
 						benefitValueUI = benefitValueUI.replace(".1", ".");
 				}
-					if(key.equalsIgnoreCase(columnName)) {	
+
+				benefitValue = benefitValue.replace("-opensinnewwindow", "");
+					if(key.equalsIgnoreCase(columnName)) {
 						
-						if(key.equalsIgnoreCase("Dental")) {
-							
-						}
+						benefitValueUI = benefitValueUI.replace("/", "");
 						
 						 if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 								flag = true;break;
@@ -523,15 +532,19 @@ public class AepPlanDetailsPage extends UhcDriver {
 							benefitValueUI = benefitValueUI.replaceAll("1/", "");
 						else if(benefitValueUI.contains("2/"))
 							benefitValueUI = benefitValueUI.replaceAll("2/", "");
-						else if(benefitValueUI.contains("/") && !benefitValueUI.contains("Ismydoctor"))
-							benefitValueUI = benefitValueUI.replaceAll("/", "");
-						
+						else if(benefitValueUI.contains("/") &&!benefitValueUI.contains("mydoctor"))
+							benefitValueUI =benefitValueUI.replaceAll("/", "");
+
+						/*if(key.equalsIgnoreCase("Walgreens – Preferred Retail Pharmacy")) {
+							 if(benefitValueUI.contains(".1"))
+								benefitValueUI = benefitValueUI.replace(".1", "");
+						}*/
 						
 						//the following code is only needed for the specific benefit values where we have to remove the footnote values form the end
 						if( key.equalsIgnoreCase("Preferred Mail Home Delivery through OptumRx")) {
 							 if(benefitValueUI.contains(".2"))
 								benefitValueUI = benefitValueUI.replace(".2", ".");
-						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")) {
+						}else if(columnName.equalsIgnoreCase("Estimated Annual Total")||columnName.equalsIgnoreCase("Preventive services")) {
 							if(benefitValueUI.contains(benefitValue)) {
 								flag=true; break;
 							}else {
@@ -565,12 +578,38 @@ public class AepPlanDetailsPage extends UhcDriver {
 			return comparedResult;
 		
 	}
-	
+
+	public HashMap<String, String> collectInfoVppPlanDetailPg(String sheetName, int rowIndex) {
+		HashMap<String, String> result=new HashMap<String, String>();
+
+		for (int i = 0; i < 5; i++) {
+			try {
+				result = collectInfoVppPlanDetailPg();
+				int benefitUICnt = result.size();
+				System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Benefits Map count - " + benefitUICnt);
+				if (benefitUICnt < 1) {
+					driver.navigate().refresh();
+					System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Page Refreshed");
+					continue;
+				} else {
+					return result;
+				}
+			} catch (Exception ex) {
+				driver.navigate().refresh();
+				System.out.println(sheetName + "_" + rowIndex + " - Attempt - " + (i + 1) + ", Page Refreshed after Exception");
+				continue;
+			}
+
+		}
+		return result;
+	}
+
 	public HashMap<String, String> collectInfoVppPlanDetailPg() {
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
 		HashMap<String, String> result=new HashMap<String, String>();
-
+		
+		result.put("Plan Name", planName.getText());
 		String key="Total Tabs";
 		String value = "";
 		result.put(key, String.valueOf(listOfTabHeaders.size()));
@@ -629,7 +668,6 @@ public class AepPlanDetailsPage extends UhcDriver {
 						else
 							cellsPerRowXpath="//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td[not(contains(@class,'ng-hide'))]";
 						
-						
 						List<WebElement> listOfCellsPerRow=driver.findElements(By.xpath(cellsPerRowXpath));
 						
 						for (int cellIndex=1; cellIndex<=listOfCellsPerRow.size(); cellIndex++) {
@@ -648,12 +686,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 								silverSneakersCheckbox.click();
 							
 							if(listOfCellsPerRow.size()==2) {
-									if(cellIndex==1 && e.getText().contains("High Option Dental") && e.getText().contains("Optional Dental") ) {
+								System.out.println(e.getText());
+									if(cellIndex==1 && e.getText().contains("High Option Dental") && e.getText().contains("Optional Rider") ) {
 										highOptionDentalCheckbox.click();
 										key=e.getText();
 										WebElement g = driver.findElement(By.xpath("//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td["+(cellIndex+1)+"]"));
 										value = g.getText();
-										optionalDentalCheckbox.click();
+										//optionalDentalCheckbox.click();
 										
 									}else if(cellIndex==1) {
 										key=e.getText();//System.out.println("key :"+ key);
@@ -668,9 +707,11 @@ public class AepPlanDetailsPage extends UhcDriver {
 								else 
 									 value= value+e.getText();
 							}else {
-								if(cellIndex==1)
+								if(cellIndex==1) {
 									key=e.getText();
-								else {
+									value= e.getText();
+								
+								}else {
 								   value= value+e.getText();
 								
 								}
@@ -693,25 +734,5 @@ public class AepPlanDetailsPage extends UhcDriver {
 		return result;
 	}
 	
-	public void navigateToDCEandAddDrug(String drugName) throws InterruptedException {
-		
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
-	
-		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
-		dcePage.addDrug(drugName);
-		dcePage.clickOnReturnLink();
-	}
-
-	public void editDrugListAndRemoveDrug() {
-		validateNew(editDrugListLink);
-		editDrugListLink.click();
-		validateNew(deleteDrugLink);
-		deleteDrugLink.click();
-		validateNew(confirmDeleteDrug);
-		confirmDeleteDrug.click();
-		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
-		dcePage.clickOnReturnLink();
-	}
 
 }
