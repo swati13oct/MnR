@@ -1886,6 +1886,23 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, drugYouPaylist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
+	
+	@Then("^the user validates Estimated Drug Cost for the following plan to DCE details page estimated Drug Costs$")
+	public void the_user_validates_estimated_drug_cost_for_plan_on_compare_page_to_DCEdetails_page_captured_estimated_drug_cost(
+			DataTable arg1) throws Throwable {
+		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = memberAttributesMap.get("PlanName");
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		String Expected_Estimated_Drug_Cost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
+		planComparePage.validateEstimatedDrugCostForPlan(planName, Expected_Estimated_Drug_Cost);
+
+	}
 
 	@Then("^the user clicks on View Plan Compare button and validates Plan Compare page, Drug Info Modal$")
 	public void the_user_clicks_on_View_Plan_Compare_button_and_validates_Plan_Compare_page() throws Throwable {
@@ -1905,14 +1922,20 @@ public class DCEStepDefinitionAARP {
 	public void the_user_clicks_on_Back_to_Compare_link_and_validates_Plan_Compare_page() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		String drugYouPaylist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS);
-		drugDetailsPage.validateDrugListYouPay_FromComparePage(druglist, drugYouPaylist);
 		ComparePlansPage planComparePage = drugDetailsPage.clickViewBackCompareLink_ReturnToCompare_ViewDrugModal();
 		if (null != planComparePage) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		} else
 			Assert.fail("VPP Plan Compare not loaded");
+	}
+	
+	@Then("^the user Validates Drug you pay on DCE details page to Compare page Drug Info Modal$")
+	public void the_user_validates_drugyoupay_onDCEdetails_toCompareDrugInfoModal() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		String drugYouPaylist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS);
+		drugDetailsPage.validateDrugListYouPay_FromComparePage(druglist, drugYouPaylist);
 	}
 
 	@Then("^the user closes the Drug Info Modal on Plan Compare page$")
