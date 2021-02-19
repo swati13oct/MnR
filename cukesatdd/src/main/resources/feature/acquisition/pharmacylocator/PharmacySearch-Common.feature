@@ -33,6 +33,7 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
       | Language                                   | English                 |
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
     And the user validates map section contents
+    Then the user validates Selected Plan Name in Results Section on Pharmacy page
     And the user validate show on map link
     And the user validate get direction link
     And the user validate more information content based on plan type
@@ -43,10 +44,10 @@ Feature: 1.11. ACQ-Pharmacy Locator Test Scripts
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      | 15582 | AARP |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   00602 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
-      | 15582 | AARP |   96950 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
+ #     | 15582 | AARP |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+ #     | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+ #     | 15582 | AARP |   00602 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
+ #     | 15582 | AARP |   96950 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
 
     # @PharmacyLocatorCommonProd_AARP
     Examples: 

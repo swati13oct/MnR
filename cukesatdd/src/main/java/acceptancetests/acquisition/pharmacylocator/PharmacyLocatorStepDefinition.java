@@ -295,7 +295,8 @@ public class PharmacyLocatorStepDefinition {
 	public void viewsSearchResultPdf() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults();
+		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults(testPlanName);
 		Assert.assertTrue("PROBLEM - PDF Results Page Not Displayed", 
 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);

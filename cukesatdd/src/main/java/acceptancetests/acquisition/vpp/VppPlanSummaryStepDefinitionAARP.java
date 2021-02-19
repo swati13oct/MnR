@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.bluelayer.KeywordSearch;
 //import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
@@ -672,16 +671,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 			Assert.fail("Error in validating the Plan Summary Page");
 	}
 
-	@Then("^the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site$")
-	public void User_clicks_returnToPlanSummary_validates_redirection_PlanSummary_aarp() {
-		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (!planType.equals("MA")) {
-			DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage) getLoginScenario()
-					.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-			drugCostEstimatorPage.navigateBackToPlanSummaryPage();
 
-		}
-	}
 
 	/*
 	 * @When("^the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site$"
@@ -733,23 +723,6 @@ public class VppPlanSummaryStepDefinitionAARP {
 	 * 
 	 * }
 	 */
-	@Then("^the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site$")
-	public void the_user_clicks_enterDrugInformation_validates_dceHomePage_AARP() {
-		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (!planType.equals("MA")) {
-			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			DrugCostEstimatorPage drugCostEstimatorPage = plansummaryPage.navigatetoDCEPage(planName);
-			if (drugCostEstimatorPage != null) {
-				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
-
-			} else {
-				Assert.fail("Error Loading DCE page");
-			}
-
-		}
-	}
 
 	@Then("^the user validates Add to compare checkbox is not present for DSNP Plans in AARP$")
 	public void addToCompareNotPresentForDSNP() {
