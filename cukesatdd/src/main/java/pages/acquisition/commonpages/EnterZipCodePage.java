@@ -16,16 +16,16 @@ import pages.acquisition.commonpages.PageTitleConstants;
 
 public class EnterZipCodePage extends UhcDriver {
 
-	//@FindBy(xpath = "//form[contains(@class,'zipForm')]")
-	@FindBy(xpath = "//form[contains(@class,'zip-form')]")
+	//@FindBy(xpath = "//form[contains(@class,'zip-form')]")
+	@FindBy(xpath = "//*[contains(@class,'zipCode') or contains(@class, 'zip-form med')]")
 	List<WebElement> zipForm;
 
-	//@FindBy(xpath = "(//form[contains(@class,'zipForm')]//input[contains(@class,'zip-input')])")
-	@FindBy(xpath = "(//form[contains(@class,'zip-form')]//input)[2]")
+	//@FindBy(xpath = "(//form[contains(@class,'zip-form')]//input)[2]")
+	@FindBy(xpath = "//*[contains(@class,'zipCode') or contains(@class, 'zip-form med')]//input[(contains(@class,'zip-input') or contains(@id,'zipcodemed'))]")
 	List<WebElement> ZipCodeText;
 
-	//@FindBy(xpath = "(//form[contains(@class,'zipForm')]//button[contains(@class,'uhc-zip-button')])")
-	@FindBy(xpath = "(//form[contains(@class,'zip-form')]//button[contains(@class,'zip-button')])[2]")
+	//@FindBy(xpath = "(//form[contains(@class,'zip-form')]//button[contains(@class,'zip-button')])[2]")
+	@FindBy(xpath = "//*[contains(@class,'zipCode') or contains(@class, 'zip-form med')]//button[(contains(@class,'zip-button'))]")
 	List<WebElement> ZipcodeButton;
 
 	@FindBy(xpath = "//li[@class='expandable'][1]")
