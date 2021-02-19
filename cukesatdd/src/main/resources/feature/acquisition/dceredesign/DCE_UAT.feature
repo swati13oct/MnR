@@ -1,7 +1,7 @@
 @UATRegression
 Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
-  @DCE_ShopForPlanPage_PDPpage
+  @dce_ShopPDP_E2E_Scenario2_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Shop PDP page on
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -39,17 +39,17 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | DrugName | <drug2> |
     And the user verifies the added pharmacy on prescription drug tab
 
-    @dce_redesign_ShopPDP_AARP
+    @dce_ShopPDP_E2E_Scenario2_UAT_AARP
     Examples: 
       | Scenario           | site | drug1   | drug2                | zipCode | planType | planName                        | supplyLength   |
       | E2E Scenario 2_AMP | AARP | Lipitor | atorvastatin calcium |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
 
-    @dce_redesign_ShopPDP_UHC
+    @dce_ShopPDP_E2E_Scenario2_UAT_UHC
     Examples: 
       | Scenario           | site | drug1   | drug2                | zipCode | planType | planName                        | supplyLength   |
       | E2E Scenario 2_UMS | UHC  | Lipitor | atorvastatin calcium |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
 
-  @DCE_MedEdPage
+  @DCE_MedEdPage_E2E_Scenario4_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Med Ed page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -79,12 +79,12 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user Captures Drug costs on Drug Details Page
     And the user compares drug costs for drug details and drug summary pages
 
-    @DCE_MedEdPage_AARP
+    @DCE_MedEdPage_E2E_Scenario4_UAT_AARP
     Examples: 
       | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
       | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-    @DCE_MedEdPage_UHC
+    @DCE_MedEdPage_E2E_Scenario4_UAT_UHC
     Examples: 
       | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
       | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
