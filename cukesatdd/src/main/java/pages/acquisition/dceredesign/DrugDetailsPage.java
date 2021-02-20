@@ -412,9 +412,16 @@ public class DrugDetailsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
-		validateNew(DrugDetails_DrugCostsHeading);
-		if (!CurrentFlow.equalsIgnoreCase("compare"))
-			validateNew(LinkToDrugSummary);
+
+        validateNew(DrugDetails_DrugCostsHeading);
+        validateNew(LinktoExitScenario);
+        if(!LinktoExitScenario.getText().contains("Compare")) {
+            validateNew(LinkToDrugSummary);
+        }
+        /*
+         * if(!CurrentFlow.equalsIgnoreCase("compare")) validateNew(LinkToDrugSummary);
+         */
+
 		validateNew(LinktoExitScenario);
 		validateNew(LinktoEditDrugList);
 	}
@@ -434,8 +441,12 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_AvgMonDrugCost);
 		validateNew(DrugCosts_MonthlyPremium);
 		validateNew(DrugCosts_AnnualEstTotal);
-		validateNew(DrugCosts_PlanDetailsBtn);
-		// validateNew(DrugCosts_SaveBtn);
+
+        if(!LinktoExitScenario.getText().contains("Compare")) {
+        	validateNew(DrugCosts_PlanDetailsBtn);
+        }
+		//validateNew(DrugCosts_SaveBtn);
+
 		validateNew(DrugCosts_TFN);
 	}
 
@@ -881,6 +892,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_AnnualEstTotal_Amount);
 		validateNew(MonthlyDrugStage_Header);
 
+		CommonUtility.waitForPageLoad(driver, YourDrugs_Header, 20);
 		String AVG_MONTHLY = DrugCosts_AvgMonDrugCost_Amount.getText();
 		String MONTHLY_PREMIUM = DrugCosts_MonthlyPremium_Amount.getText();
 		String ANNUAL_ESTIMATED_TOTAL = DrugCosts_AnnualEstTotal_Amount.getText();
@@ -1370,14 +1382,12 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Total Added Drug Count : " + DrugCount_Total);
 		for (i = 1; i <= DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
-			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
-							+ currentAddedDrug + "')]"));
-			WebElement DrugYouPay = driver.findElement(
-					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
-							+ currentAddedDrug + "')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
-			String currentDrugYouPay = DrugYouPay.getText().trim();
+
+			System.out.println("Current Added Drug Name : "+currentAddedDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentAddedDrug+"')]"));
+			WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentAddedDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+			String currentDrugYouPay = DrugYouPay.getText().trim().replace(",", "");
+
 			String ExpectedYouPay = Drugs_YouPay[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
 			System.out.println("Displayed Current Drug You Pay : " + currentDrugYouPay);
