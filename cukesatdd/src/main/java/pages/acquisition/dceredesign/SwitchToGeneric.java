@@ -85,12 +85,15 @@ public class SwitchToGeneric extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
 	public WebElement LinkToDrugSummary;
-
+	
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Return to')]")
+	public WebElement LinktoExitScenario;
+	
 	public DrugDetailsPage ClickSwitch_ReturnDetailsPage() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinkToDrugSummary)) {
+		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinktoExitScenario)) {
 			Assert.assertTrue("Naviagted to DCE Drug Details Page", true);
 			return new DrugDetailsPage(driver);
 		}
