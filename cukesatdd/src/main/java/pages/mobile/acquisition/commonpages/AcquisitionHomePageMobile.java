@@ -4,32 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import org.testng.Assert;
-
 import pages.acquisition.commonpages.EnterZipCodePage;
-import pages.acquisition.dce.DCETestHarnessPage;
+
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 
 /**
  * @author pperugu
@@ -1594,8 +1590,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 
 	}
 
-	public DCETestHarnessPage GetDCEtestHarnessPage() {
-		return new DCETestHarnessPage(driver);
+	public DCETestHarnessPageMobile GetDCEtestHarnessPage() {
+		return new DCETestHarnessPageMobile(driver);
 	}
 
 	public GetStartedPage navigateToDCERedesignFromHome() throws InterruptedException {

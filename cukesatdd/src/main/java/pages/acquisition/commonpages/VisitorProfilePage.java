@@ -29,6 +29,7 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 //import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.acquisition.ulayer.VPPTestHarnessPage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -723,6 +724,16 @@ public class VisitorProfilePage extends UhcDriver {
 
 	public void validateBackToDceLink() {
 		validate(backToDrugCostEstimatorLink);
+	}
+	
+	public DrugDetailsPage clickBackToDCELink() {
+		jsClickNew(backToDrugCostEstimatorLink);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("drugdetails")){
+			return new DrugDetailsPage(driver);
+		}
+		else 
+		return null;
 	}
 
 	/**

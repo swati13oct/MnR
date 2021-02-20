@@ -602,22 +602,7 @@ public class Deprecated_PharmacySearchPage extends UhcDriver {
 			}
 		} else if (("zh").equalsIgnoreCase(language)) {
 			Assert.fail("Temporarily commented code. Please select Spanish or English!!!");
-			/* tbd-remove the following */
-			/*String headingText = pharmacylocatorheader.getText();
-<<<<<<< HEAD
-				if (!headingText.contains("ÃƒÂ¥Ã‚Â°Ã¢â‚¬Â¹ÃƒÂ¦Ã¢â‚¬Â°Ã‚Â¾ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¦Ã‹â€ Ã‚Â¿"))
-=======
-				if (!headingText.contains("Ã¥Â°â€¹Ã¦â€°Â¾Ã¨â€”Â¥Ã¦Ë†Â¿"))
->>>>>>> refs/remotes/origin/RELEASE-19-1-0
-					return false;
-				if (!pharmacyBodyContentChinese.isDisplayed())
-					return false;
-<<<<<<< HEAD
-				if (!btnContinue.getText().contains("ÃƒÂ§Ã‚Â¹Ã‚Â¼ÃƒÂ§Ã‚ÂºÃ…â€™"))
-=======
-				if (!btnContinue.getText().contains("Ã§Â¹Â¼Ã§ÂºÅ’"))
->>>>>>> refs/remotes/origin/RELEASE-19-1-0
-					return false;*/
+			return false;
 		} else {
 			Assert.fail("Please select a valid language!!!");
 			return false;

@@ -772,5 +772,7 @@ public static final String GUEST_PAYMENTS_HOME_PAGE = "guestPaymentsHomePage";
 
 	public static final String PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE="PRODvirtualVisitdeeplinklogin";
 
+	public static final String RESOURCE_PAGE = "resourcePage";
+
 }
 

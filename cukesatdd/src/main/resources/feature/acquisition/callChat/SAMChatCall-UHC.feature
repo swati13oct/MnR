@@ -110,11 +110,9 @@ Then the user validates whether call icon is visible on UHC
 #Then the user validates whether chat icon is visible on UHC
 Then the user validates whether chat Agent is Available on UHC
 
-<<<<<<< HEAD
-@samChatCallRegressionUHC @samChatRegressionUHC1
-=======
+
 @samChatCallRegressionUHC11 @samChatRegressionUHC11
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
 Examples: 
 			| pagename |
 			|/| 
@@ -128,13 +126,10 @@ Examples:
       | medicare-education/medicare-costs.html                | 
       | medicare-education/enrollment-and-changing-plans.html | 
       | medicare-education/medicare-faq.html                  | 
-<<<<<<< HEAD
-     
-      @samChatCallRegressionUHC @samChatRegressionUHC2
-=======
+
       
       @samChatCallRegressionUHC11 @samChatRegressionUHC21
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
 			Examples:
 			| pagename |
       | shop.html          | 
@@ -158,11 +153,9 @@ Examples:
       | enroll/ma-enrollment.html  |
       | enroll/pdp-enrollment.html | 
       
-<<<<<<< HEAD
-      @samChatCallRegressionUHC @samChatRegressionUHC3
-=======
+
       @samChatCallRegressionUHC11 @samChatRegressionUHC31
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
 			Examples:
 			| pagename |
       | resources.html                                       |
@@ -184,11 +177,9 @@ Examples:
       #| health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html | 
       | resources/disenrollment-information.html                                            | 
       
-<<<<<<< HEAD
-      @samChatCallRegressionUHC @samChatRegressionUHC4
-=======
+
       @samChatCallRegressionUHC11 @samChatRegressionUHC411
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+
 			Examples:
 			| pagename |
       | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details |                              

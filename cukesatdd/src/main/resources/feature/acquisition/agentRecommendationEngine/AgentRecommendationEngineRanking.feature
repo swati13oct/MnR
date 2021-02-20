@@ -135,8 +135,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           |            |
-<<<<<<< HEAD
-=======
+
 
   @ARE @PlansReorder @MCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for MCE
@@ -182,4 +181,4 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | User      | Pass      | Email                    | IfMultiCounty | PlanYear | EstimateMC | RankingOptions |
       | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM    | None          | current  | NO         | mce            |
       | qavgogine | qavgogine | ATDD2STG@NONMEMBERDD.COM | None          | current  | NO         | mce            |
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
+

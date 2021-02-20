@@ -32,38 +32,9 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AgentsAndBrokersPage;
-import pages.acquisition.bluelayer.ComparePlansPageBlayer;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.AboutUsAARPPage;
-import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.ContactUsAARPPage;
-import pages.acquisition.commonpages.DisclaimersAARPPage;
-import pages.acquisition.commonpages.FindCarePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
-import pages.acquisition.commonpages.SiteMapAARPPage;
-import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.bluelayer.AgentsAndBrokersPageMobile;
 import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
-//import pages.acquisition.tfn.CampaignTFNPage;
-//import pages.acquisition.ulayer.AboutUsAARPPage;
-//import pages.acquisition.ulayer.AddDrugDetails;
-//import pages.acquisition.ulayer.ContactUsAARPPage;
-//import pages.acquisition.ulayer.DrugCostEstimatorPage;
-//import pages.acquisition.ulayer.ProviderSearchPage;
-//import pages.acquisition.ulayer.RequestHelpAndInformationPage;
-//import pages.acquisition.ulayer.RequestMailedInformation;
-//import pages.acquisition.ulayer.SavingsOppurtunity;
-//import pages.acquisition.ulayer.SiteMapAARPPage;
-//import pages.acquisition.ulayer.VisitorProfilePage;
-//import pages.acquisition.ulayer.ZipcodeLookupHomePage;
-import pages.mobile.acquisition.bluelayer.SiteMapUMSPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
@@ -4189,10 +4160,12 @@ public class VppPlanCompareMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		// plansummaryPage.viewPlanSummary(plantype);
-		pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile dce = plansummaryPage
-				.navigatetoDCEPage(planName);
-
+		plansummaryPage.viewPlanSummary(plantype);
+		if (!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
+		// DrugCostEstimatorPage
+		// dce=plansummaryPage.navigateToDCEFromVPP(plantype,planName);
+		pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile dce = plansummaryPage.navigateToDCE(planName);
 		if (dce != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, dce);
 		}

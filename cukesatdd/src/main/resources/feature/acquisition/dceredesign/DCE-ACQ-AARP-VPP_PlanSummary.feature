@@ -157,19 +157,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
     Then the user validates planName matches plan Name in VPP
     Then the user click on return to plan summary on DCE summary page
-<<<<<<< HEAD
-    And user changes the new zipcode on vpp summary page
-      | New Zip Code | <newzipcode> |
-    And user navigate to Drug Summary page
-    Then user save the plan on drug detail page
-    When the user navigate to Visitor profile page
-    And user validates the plans on new visitor profile page of AARP site
-      | Test Plans | <mapdtestPlans> |
 
-    Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
-      | AARP |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
-=======
     And user updates the new zipcode on vpp summary page
       | New Zip Code | <newzipcode> |
     And user navigate to Drug Summary page
@@ -340,4 +328,4 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     Examples: 
       | site | zipcode | county | isMultutiCounty | drug1   |
       | UHC  |   90210 | none   | no              | Orkambi |
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd
+

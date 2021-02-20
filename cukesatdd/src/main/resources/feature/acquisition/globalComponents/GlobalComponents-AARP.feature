@@ -88,29 +88,32 @@ Feature: 1.12 ACQ - Global Components AARP
     Examples: 
       | site | path                                              | pageName                              | tfnXpath                                                             | tfnFlag |
       | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |
       | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
 
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
       | site | path                                              | pageName                            | tfnXpath                                                             | tfnFlag |
       | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //div[contains(@class,'ums')]//a[contains(@class,'tel')]             | true    |
       | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
 
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
       | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
-      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //span[contains(@style,'inline')]//a[contains(@class, 'tel')]        | true    |
+      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |
       | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
       | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
 
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
-      
-      @ShopPlan_Shop1_GlobalCompsAARP
-      Examples:
+      | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
+      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //div[contains(@class,'ums')]//a[contains(@class,'tel')]             | true    |
+      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
 
+    @ShopPlan_Shop1_GlobalCompsAARP
+    Examples: 
       | site | path                            | pageName                    | tfnXpath                                                                                  | tfnFlag |
       | AARP | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]                       | true    |
       | AARP | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3]                       | true    |
@@ -387,6 +390,11 @@ Feature: 1.12 ACQ - Global Components AARP
     Then the user hover over Shop for a Plan and validates zipcode component
     Then the user validate ZipCode Components on SubNav using ZipCode "10001"
 
+    @Global_Comps_ZipSubNav_AARP2
+    Examples: 
+      | site | path      | pageName           |
+      | AARP | shop.html | ShopPlan: Homepage |
+
     @Global_Comps_ZipSubNav_AARP
     Examples: 
       | site | path                                                                                    | pageName                        |
@@ -475,7 +483,7 @@ Feature: 1.12 ACQ - Global Components AARP
   #| UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English                                                      | Pharmacy Search Page            |
   #| UHC  | health-plans/medicare-supplement-plans/agent-appointment.html                                                | MS Agent Appointment Page       |
   #| UHC  | https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-supplement-plans/medicare-information.html | Agent Appointment Page          |
-  @ShopTest @GlobalComponentsAARPPages
+  @GlobalComponentsAARPPages
   Scenario Outline: To verify the components present on the Shop page on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -520,9 +528,7 @@ Feature: 1.12 ACQ - Global Components AARP
     Examples: 
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | UHC  | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
-<<<<<<< HEAD
->>>>>>> branch 'develop' of https://github.optum.com/Consumer-Portals/MRATDD
-=======
+
 
   @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
@@ -591,4 +597,62 @@ Feature: 1.12 ACQ - Global Components AARP
       | UHC  | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html | ShopPlan: Resources MA Appeals         | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources PDP Disenrollment  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources Disenrollment Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+
+
+  @GlobalComponentsAARPPages
+  Scenario Outline: To verify the components present on the Enroll page on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user hovers screen over the shop for a plan
+    Then the user click on Enroll link and lands on Enroll Page
+    Then the user click on MA Enroll Start button on Enroll Page
+    Then the user clicks on browser back button
+    Then the user click on PDP Enroll Start button on Enroll Page
+    Then the user clicks on browser back button
+    Then the user click on MedSupp Enroll Start button on Enroll Page
+    Then the user clicks on browser back button
+    Then the user clicks on Learn About Eligibility link on Enroll Page
+    Then the user clicks on browser back button
+    Then the user clicks on Learn About Enrollment link on Enroll Page
+
+    @ShopPlan_Shop1_GlobalCompsAARP
+    Examples: 
+      | site |
+      | AARP |
+
+    @ShopPlan_Shop1_GlobalCompsUHC @TestEnroll
+    Examples: 
+      | site |
+      | UHC  |
+
+  @GlobalComponentsAARPPages
+  Scenario Outline: To verify the components present on the Resources page on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user hovers screen over the shop for a plan
+    Then the user clicks on Member Resources link and lands on Resource Page
+    Then the user clicks on Search Now button to land on Plan Doc search Page
+    Then the user clicks on browser back button
+    Then user click on Find Information button and Plan Info page
+    Then the user clicks on browser back button
+    Then user click on Plan Benefit link
+    Then the user clicks on browser back button
+    Then user click on Wellness Resources link
+    Then the user clicks on browser back button
+    Then user click on Clinical Program link
+    Then the user clicks on browser back button
+    Then user click on Learn more link for mail order pharmacy
+    Then the user clicks on browser back button
+    Then user click on Get Informed button for Preventing Medical Fraud link
+    Then the user clicks on browser back button
+
+    @ShopPlan_Resources2_GlobalCompsAARP
+    Examples: 
+      | site |
+      | AARP |
+
+    @ShopPlan_Resources2_GlobalCompsUHC
+    Examples: 
+      | site |
+      | UHC  |
 

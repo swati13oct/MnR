@@ -749,7 +749,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile drugCostEstimatorPage = plansummaryPage.navigatetoDCEPage(planName);
+			pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile drugCostEstimatorPage = plansummaryPage.navigateToDCE(planName);
 			if (drugCostEstimatorPage != null) {
 				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 

@@ -23,7 +23,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
-import acceptancetests.acquisition.dce.DceCommonConstants;
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;

@@ -95,7 +95,7 @@ public class EditDrugDetailsMobile extends UhcDriver {
 //		Thread.sleep(12000);
 //		return new SavingsOppurtunity(driver);
 //		}
-//	
+	
 	public DrugCostEstimatorPageMobile updateEditDrugDetails() throws InterruptedException{
 		waitforElement(updateButton);
 		updateButton.click();

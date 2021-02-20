@@ -22,7 +22,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.member_deprecated.bluelayer.SelectPharmacyPage;
 
 /**
 * @author pjaising
@@ -97,7 +96,7 @@ public class ManageDrugPageMobile extends UhcDriver {
        }
 
 
-       public SelectPharmacyPage navigateToPharmacyPage() {
+       public SelectPharmacyPageMobile navigateToPharmacyPage() {
               pharmacySearchButton.click();
               try {
                      if (pharmacySearchButton.isDisplayed()) {
@@ -113,7 +112,7 @@ public class ManageDrugPageMobile extends UhcDriver {
               }
 
               if (currentUrl().contains("selectPharmacy")) {
-                     return new SelectPharmacyPage(driver);
+                     return new SelectPharmacyPageMobile(driver);
               } else {
                      return null;
               }
@@ -438,9 +437,9 @@ public class ManageDrugPageMobile extends UhcDriver {
               selectPharmacyTab.click();
        }
        
-       public SelectPharmacyPage navigateToUpdatedPharmacyPage() {
+       public SelectPharmacyPageMobile navigateToUpdatedPharmacyPage() {
               if (currentUrl().contains("selectPharmacy")) {
-                     return new SelectPharmacyPage(driver);
+                     return new SelectPharmacyPageMobile(driver);
               } else {
                      return null;
               }

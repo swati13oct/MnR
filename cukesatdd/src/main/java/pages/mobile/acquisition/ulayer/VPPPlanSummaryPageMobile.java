@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.concurrent.TimeUnit;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -25,8 +23,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
@@ -38,22 +34,10 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import io.appium.java_client.AppiumDriver;
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.MultiCountyModalPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
-import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
-import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -2385,32 +2369,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			Assert.fail("Tool Tip is not working");
 	}
 
-	public DrugCostEstimatorPageMobile navigatetoDCEPage(String planName) {
-		WebElement DCELink = null;
 
-		if (planName.contains("SNP")) {
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
-		} else if (planName.contains("PDP")) {
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')]"));
-		} else
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
 
-		Actions action = new Actions(driver);
-		action.moveToElement(DCELink).build().perform();
-		// DCELink.click();
-		jsClickNew(DCELink);
-		CommonUtility.checkPageIsReadyNew(driver);
-		if (driver.getCurrentUrl().contains("drug-costs")) {
-			System.out.println("DCE Page is loaded");
-			return new pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile(driver);
-		} else
-			return null;
-	}
+	public void validateRightRailSection(){
 
-	public void validateRightRailSection() {
 		validateNew(RightRailSection);
 	}
 

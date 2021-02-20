@@ -1,6 +1,5 @@
 package pages.acquisition.ulayer;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -17,17 +16,16 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.member_deprecated.ulayer.Rallytool_Page;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidgetMobile;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPageMobile;
-import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidgetMobile;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPageMobile;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.PlanComparePage;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidgetMobile;
+import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPageMobile;
+import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidgetMobile;
+import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPageMobile;
 
 public class ResponsivePlanSummary extends UhcDriver{
 	
@@ -543,7 +541,7 @@ public void comparePlanslnk() throws InterruptedException{
 			 }
 			 return null;	 
 		}
-		public Rallytool_Page navigateToRallyPage(String planName) { 
+		/*public Rallytool_Page navigateToRallyPage(String planName) { 
 			driver.manage().window().maximize(); 
 			//a[contains(text(),'Is my provider covered?')]
 			int i=0;
@@ -581,7 +579,7 @@ public void comparePlanslnk() throws InterruptedException{
 					 }
 				 i++;			 
 				 return null;
-			}
+			}*/
 		 public void selectPlansToCompareTwoPlans(String planName1, String planName2){
 				// int i=0;
 				 List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')]"));

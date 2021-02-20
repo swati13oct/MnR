@@ -2190,7 +2190,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			Assert.fail("Tool Tip is not working");
 	}
 
-	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName) {
+	public DrugCostEstimatorPage navigatetoDCEPage(String planName) {
 		WebElement DCELink = null;
 
 		if (planName.contains("SNP")) {
@@ -2209,7 +2209,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("drug-cost-estimator")) {
 			System.out.println("DCE Page is loaded");
-			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPage(driver);
 		} else
 			return null;
 	}

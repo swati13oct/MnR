@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import pages.regression.pharmacylocator.PharmacySearchPage;
 
 public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 

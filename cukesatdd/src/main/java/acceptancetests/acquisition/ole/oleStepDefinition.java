@@ -19,7 +19,6 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.memberredesign.providerSearch.ProviderSearchCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.Scenario;

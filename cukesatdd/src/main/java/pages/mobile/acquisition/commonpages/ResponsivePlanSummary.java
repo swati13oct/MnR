@@ -18,7 +18,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import pages.acquisition.bluelayer.PlanComparePage;
-import pages.member_deprecated.ulayer.Rallytool_Page;
+import pages.acquisition.uhcretiree.Rallytool_Page;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidgetMobile;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPageMobile;
 import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidgetMobile;

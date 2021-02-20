@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.AddDrugDetails;
 public class AddNewDrugModal extends UhcDriver {
 
 	private PageData addnewdrug;
@@ -72,13 +73,13 @@ public class AddNewDrugModal extends UhcDriver {
 		validateNew(searchButton);
 	}
 
-	public AddDrugDetails searchDrugWithoutAutoComplete(String DrugName) throws InterruptedException {
+	public pages.acquisition.commonpages.AddDrugDetails searchDrugWithoutAutoComplete(String DrugName) throws InterruptedException {
 
 		sendkeys(drugsearchinput, DrugName.toLowerCase());
 		searchButton.click();
 		CommonUtility.waitForPageLoadNew(driver, drugList, 30);
 		continueButton.click();
-		return new AddDrugDetails(driver);
+		return new pages.acquisition.commonpages.AddDrugDetails(driver);
 
 	}
 	
@@ -156,6 +157,17 @@ public class AddNewDrugModal extends UhcDriver {
 	{
 		waitforElement(atleast_4_mesg);
 		
+	}
+	public pages.acquisition.commonpages.AddDrugDetails clickonSearchButton(String DrugName) {
+		//drugsearchinput.click();
+		drugsearchinput.sendKeys(DrugName.toLowerCase());
+		searchButton.click();     
+		waitforElement(continueButton);
+		continueButton.click();
+		//if (driver.getTitle().equalsIgnoreCase("ADD A NEW DRUG")) {
+			return new pages.acquisition.commonpages.AddDrugDetails(driver);
+		//}
+		//return null;
 	}
 }
 

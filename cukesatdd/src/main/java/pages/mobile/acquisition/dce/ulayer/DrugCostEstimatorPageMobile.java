@@ -21,10 +21,10 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.dce.ulayer.AddDrugDetails;
-import pages.acquisition.dce.ulayer.AddNewDrugModal;
-import pages.acquisition.dce.ulayer.EditDrugDetails;
-import pages.acquisition.dce.ulayer.SavingsOppurtunity;
+import pages.acquisition.commonpages.AddDrugDetails;
+import pages.acquisition.commonpages.AddNewDrugModal;
+import pages.acquisition.commonpages.EditDrugDetails;
+import pages.acquisition.commonpages.SavingsOppurtunity;
 import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.ulayer.PlanDetailsPage;
 import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -954,7 +954,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 
 		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
 		AddDrugDetails addDrugDetails = addNewDrugModal.clickonSearchButton(drug);
-		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetailsModal();
+		SavingsOppurtunity savingsOppurtunity = addDrugDetails.continueAddDrugDetails();
 		savingsOppurtunity.savedrugbutton();
 		Thread.sleep(2000);
 

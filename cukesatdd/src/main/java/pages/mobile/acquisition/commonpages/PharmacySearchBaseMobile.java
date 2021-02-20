@@ -20,7 +20,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
-import pages.regression.pharmacylocator.PharmacySearchPage;
 
 public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 

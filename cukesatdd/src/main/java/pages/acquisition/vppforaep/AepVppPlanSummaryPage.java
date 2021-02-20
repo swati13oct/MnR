@@ -69,6 +69,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
 	private WebElement planListContainer;
 	
+	@FindBy(xpath = "//*[contains(@class,'plan-detail-table')]")
+	private WebElement lisPlanTable;
+
+	String sheetName = "";
+	int rowIndex;
+
 	public AepVppPlanSummaryPage(WebDriver driver) {
 		super(driver);
 		
@@ -216,93 +222,224 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 	public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
-		System.out.println("Proceed to collect the plan benefits info on vpp summary page");
+		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the plan benefits info on vpp summary page");
 
 		HashMap<String, String> result=new HashMap<String, String>();
 		String planCard = "//*[contains(text(), '"+planName+"') and contains(@class,'ng-binding')]/ancestor::*[contains(@class,'module-plan-overview module')]";
+		System.out.println("Plan card xpath : "+ planCard);
 		String rowXpath = "";
+		String headerPremiumXpath = planCard+"//*[contains(@class,'monthly-cost')]";
+		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
+		String headerPremiumText = "Header not found";
+		String learnMoreLink = planCard + "//*[contains(@ng-click,'lispopup')]";
+		
+		List<WebElement> learnMoreAboutLink = driver.findElements(By.xpath(learnMoreLink));
+		
 		if(planName.contains("PDP"))
 			rowXpath = planCard+"//*[contains(@class,'pdpbenefittable')]//ul//li";
-		else
+		else {
 			rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
-		
+			List<WebElement> headerPremium = driver.findElements(By.xpath(headerPremiumXpath));
+			if(headerPremium.size()!=0) {
+				 headerPremiumText = headerPremium.get(0).getText(); //this variable will be stored as value for the header premium value
+				
+			}
+			result.put(headerPrem, headerPremiumText);
+		}
 		List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
 		
 		String key = "";
 		
+		
+		
 		for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
-			String cellsXpath="";
-			String value = "";
+			String cellsXpath="",benefitValueXpath ="";
+			String value = "",rowText ="" ,benefitValueText = "";
 			
-			 cellsXpath = rowXpath+"["+rowIndex+"]";
-			
+			 cellsXpath = rowXpath+"["+rowIndex+"]"; //index xpath for each row in the table
+			benefitValueXpath = cellsXpath + "//*[contains(@class,'float-right')]";// xpath for the benefit value for the cell
 			 
+			 // the below code gets the benefit name from the table before the : symbol
 			 WebElement e=driver.findElement(By.xpath(cellsXpath));
-			 String rowText = e.getText();
-			 if(e.getText().contains("Tier 1"))
-				 System.out.println("Text: "+e.getText());
+			 rowText = e.getText();
 			 String [] parts = rowText.split(":");
 			 key = parts[0];
-			 for (int i = 1; i < parts.length; i++) {
-				 value = value + parts[i];
-				 
-			 }
 			 
+			 //the below code gets the benefit value from the table after the : symbol
+			 List <WebElement> j = driver.findElements(By.xpath(benefitValueXpath));
+			 if(j.size()!=0)
+				 benefitValueText = j.get(0).getText();
+			 
+			 /*for (int i = 1; i < parts.length; i++) {
+				 value = value + parts[i]; 
+			 }*/
+			 value = benefitValueText;
 			 
 			 
 			 result.put(key, value);
 			 
 		}
 		
+		if(learnMoreAboutLink.size()!= 0) {
+			String value = "";
+			jsClickNew(learnMoreAboutLink.get(0));
+			validateNew(lisPlanTable);
+			for(int i =2; i<=5;i++) {
+				WebElement lisValueFirstCol = driver.findElement(By.xpath("//*[contains(@class,'plan-detail-table')]//tr["+i+"]//td[1]"));
+				WebElement lisValueSecondCol = driver.findElement(By.xpath("//*[contains(@class,'plan-detail-table')]//tr["+i+"]//td[2]"));
+
+				key = lisValueFirstCol.getText();
+				value = lisValueSecondCol.getText();
+				result.put(key, value);
+				
+			}
+		}
+		
+		//commenting the below lines of coe to reduce the log on Jenkins job
+		
 		for(String keyValue : result.keySet()) {
 			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
-			  System.out.println("_________________________________________________________________________________________________"); 
+			  System.out.println("_________________________________________________________________________________________________");
 		}
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		System.out.println(sheetName+"_"+rowIndex+" - Finished to collect the plan benefits info on vpp summary page - Benefits Map count - " + result.size());
 		return result;
 	}
+
+    public HashMap<String, String> collectInfoVppPlanSummaryPg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
+		this.sheetName = sheetName;
+		this.rowIndex = rowIndex;
+
+        HashMap<String, String> result=new HashMap<String, String>();
+        int minBenefitListCnt = 5;
+
+        if(planName.contains("(PDP)"))
+		{
+			minBenefitListCnt = 2;
+		}
+
+        for(int i=0;i<5;i++)
+        {
+            checkForMultiCountyPopup(countyName);
+            selectYearOption(planYear);
+            result = collectInfoVppPlanSummaryPg(planName);
+            int benefitUICnt = result.size();
+            System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Benefits Map count - " + benefitUICnt +", Plan - "+planName);
+            if(benefitUICnt < minBenefitListCnt )
+            {
+                driver.navigate().refresh();
+                System.out.println(sheetName+"_"+rowIndex+" - Attempt - "+(i+1)+", Page Refreshed");
+                continue;
+            }
+            else
+            {
+                return result;
+            }
+        }
+
+        return result;
+    }
 	
 	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, HashMap<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
-		String tmpUIString1 = "",tmpUIString2="",benefitValueUI="";
+		String tmpUIString1 = "",tmpUIString2="",benefitValueUI="", headerPremiumString="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
+		headerPremiumString = benefitsMap.get("header premium"); //gets the value for the header premium that was stored from the UI
+		
+		if(headerPremiumString!=null) //the header monthly premium value is not there for PDP plans so in case of PDP plans this value will be null
+			headerPremiumString = headerPremiumString.replace("\n", "").replaceAll("\\s+", ""); //removing spaces and next lines if any
+		
 		for(String key : benefitsMap.keySet()) {
 			 benefitValueUI = benefitsMap.get(key);
 			tmpUIString1 = benefitValueUI;
-			key = key.toLowerCase();
+			key = key.toLowerCase().trim();
 			//key = key.replace(",", "");
-			columnName = columnName.toLowerCase();
-			if(columnName.contains("tier"))
+			columnName = columnName.toLowerCase().trim();
+			if(columnName.contains("%"))
 				System.out.println();
-			
-			if((benefitValue.contains("NA")||benefitValue.contains("N/A")||benefitValue.equalsIgnoreCase("No coverage"))) {
+			if((benefitValue.contains("NA")||benefitValue.contains("N/A"))) {
 				counter++;
-				//if(key.contains(columnName)) {
-						flag= true;break;
-				//	}
+				if(key.contains(columnName)) {
+						flag= false;
+						tmpUIString2 = tmpUIString1;
+						break;
+				}
+				
+				
 			
 			}else if(key.contains(columnName)) {
 						counter++;
 						benefitValueUI = benefitValueUI.replace("\n", "").replaceAll("\\s+", "");
 						benefitValue = benefitValue.replace("\n", "").replaceAll("\\s+", ""); 
 						
-						//the following code is used to remove the footnote values from the benefit value string. 
+						//the following code is used to remove the footnote values from the benefit value string.
+
+						benefitValue = benefitValue.trim();
+						benefitValueUI = benefitValueUI.trim();
 						
-						if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						if(key.contains("monthly premium")) {
+							if(benefitValueUI.equalsIgnoreCase(benefitValue)) { //if the UI value and the excel value matches
+								if(benefitValueUI.equalsIgnoreCase(headerPremiumString)){
+										flag = true;break;
+								}else if(headerPremiumString == null ) { //for PDP plans this will be null
+										flag = true; break;
+								}
+								else {
+										flag = false;
+										System.out.println(sheetName+"_"+rowIndex+" - header premium value didn't match with the box for: "+columnName+" Excel: "+headerPremiumString+" | UI: "+benefitValueUI);
+										tmpUIString2 = tmpUIString1 +" / Header Value: "+headerPremiumString;
+										break;
+								}
+							
+							}else {
+								flag = false;
+								System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:1 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+								tmpUIString2 = tmpUIString1+" / Header Value: "+headerPremiumString;
+								break;
+							}
+						}
+						else if(key.contains("primary care physician")||key.contains("specialist")||key.contains("out of pocket")) {
+							if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+								flag = true;break;
+							}else {
+								flag = false;
+								System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:2 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+								tmpUIString2 = tmpUIString1;
+								break;
+							}
+									
+						}
+						else if(benefitValueUI.contains(benefitValue)||benefitValueUI.equalsIgnoreCase(benefitValue)) {
 							flag = true;break;
 						}else {
 							flag = false;
-							System.out.println("Values did not match for col:1 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+							System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:3 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
 							tmpUIString2 = tmpUIString1;
 							break;
 						}
 					
+				}else if(columnName.contains(key)) {
+					counter++;
+					columnName= columnName.replace("\n", "").replaceAll("\\s+", "");
+					key = key.replace("\n", "").replaceAll("\\s+", "");
+					if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
+						flag = true;break;
+					}else {
+						flag = false;
+						System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: "+benefitValueUI);
+						tmpUIString2 = tmpUIString1;
+						break;
+					}
+							
 				}
 			}
 		
+		
+		
 		if(counter == 0) {
 			flag = false;
-			System.out.println("Values did not match for col:2 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
+			System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
 			tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
 		}
 		
@@ -318,7 +455,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			validateNew(zipcodeChangeLink,20);
 			flag = true;
 		}
-		
+
 		return flag;
 	}
 
