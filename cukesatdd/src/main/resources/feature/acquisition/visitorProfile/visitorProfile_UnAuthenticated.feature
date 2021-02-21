@@ -18,7 +18,7 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user selects plan year
+    #And user selects plan year
     And user clicks on continue button in Zip Entry Page
     And the user clicks on the shopping cart icon on DCE page
     Then the user should be able to see the Drug information in the guest profile page
@@ -26,23 +26,23 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
 
     @VisitorProfile_AARP
     Examples: 
-      | state        | drug1   | zipCode | site |
-      | Alabama      | Lipitor |   90210 | AARP |
-      
+      | state   | drug1   | zipCode | site |
+      | Alabama | Lipitor |   90210 | AARP |
+
     @prodRegression_AARP
     Examples: 
-      | state        | drug1   | zipCode | site |
-      | Alabama      | Lipitor |   90210 | AARP |
+      | state   | drug1   | zipCode | site |
+      | Alabama | Lipitor |   90210 | AARP |
 
     @VisitorProfile_UHC
     Examples: 
-      | state        | drug1   | zipCode | site |
-      | Alabama      | Lipitor |   90210 | UHC  |
-      
+      | state   | drug1   | zipCode | site |
+      | Alabama | Lipitor |   90210 | UHC  |
+
     @prodRegression_UHC
     Examples: 
-      | state        | drug1   | zipCode | site |
-      | Alabama      | Lipitor |   90210 | UHC  |
+      | state   | drug1   | zipCode | site |
+      | Alabama | Lipitor |   90210 | UHC  |
 
   @addDrugsDCE1
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipCode>
@@ -66,13 +66,13 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
 
     @VisitorProfile_AARP
     Examples: 
-      | state    | drug1   | zipCode | site |
-      | Alabama  | Lipitor |   90210 | AARP |
+      | state   | drug1   | zipCode | site |
+      | Alabama | Lipitor |   90210 | AARP |
 
     @VisitorProfile_UHC
     Examples: 
-      | state    | drug1   | zipCode | site |
-      | Alabama  | Lipitor |   90210 | UHC  |
+      | state   | drug1   | zipCode | site |
+      | Alabama | Lipitor |   90210 | UHC  |
 
   @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
@@ -104,23 +104,23 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
 
     @VisitorProfile_AARP
     Examples: 
-      | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | AARP | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      | AARP | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-		@prodRegression_AARP
+    @prodRegression_AARP
     Examples: 
-      | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | AARP | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      | AARP | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | UHC  | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      
+      | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      | UHC  | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+
     @prodRegression_UHC
     Examples: 
-      | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | UHC  | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
+      | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
+      | UHC  | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
   @addPlansPlanDetail @visitorProfileRegressionAARP
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
@@ -158,23 +158,23 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
 
     @VisitorProfile_AARP
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
-      
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+
     @prodRegression_AARP
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
-      
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+
     @prodRegression_UHC
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
   @vpOLE
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
@@ -188,9 +188,6 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | Is Multi County | <isMultiCounty> |
     Then user validates plan count for all plan types on plan summary page
     And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
       | Plan Type | <plantype> |
     Then user saves two plans as favorite
       | Plan Type  | <plantype>  |
@@ -224,6 +221,13 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
       | MedicaidNumber           | <medicaidnumber>         |
+    Then the user enters following information in Personal Information Page
+      | Email Confirmation | <emailConfirmation> |
+      | Go Green           | <goGreen>           |
+      | Email              | <email>             |
+      | Home Number        | <phoneno>           |
+      | Mobile Number      | <mobileno>          |
+      | Middle Name        | <middlename>        |
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
@@ -235,9 +239,9 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | Go Green           | <goGreen>           |
       | Email              | <email>             |
     Then the user validates the Plan details in Medicare Info OLE Right Rail
-    #Then the user validates requierd ESRD on Medicare Info Page
-    #  | MedicaidNumber | <medicaidnumber> |
-     # | Plan Year      | <planyear>       |
+    Then the user validates Medicaid Number in confirm Eligibility Page
+      | MedicaidNumber | <medicaidnumber> |
+      | Plan Year      | <planYear>       |
     Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
       | PDP Question      | <pdpFlag>      |
@@ -251,36 +255,51 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
     Then the user navigates to SEP Page
-      | Input Data | <inputdataType> |
-      | PartA Date | <partadate>     |
-      | PartB Date | <partbdate>     |
+      | Input Data     | <inputdataType>  |
+      | PartA Date     | <partadate>      |
+      | PartB Date     | <partbdate>      |
+      | MedicaidNumber | <medicaidnumber> |
+    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
+    #    Then the user navigates to Coverage and Health Information Page
     Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
-    Then the user validates required fields for Authorization Page
+    #Then the user validates required fields for Authorization Page
+    Then the user validates required fields for Authorization Page Representative
+      | authorizationFirstname      | <authorizefirstN>       |
+      | authorizationLastname       | <authorizelastN>        |
+      | authorizationAddress        | <authorizeaddress>      |
+      | authorizationApartmentSuite | <authorizeapartment>    |
+      | authorizationCity           | <authorizecity>         |
+      | authorizationZip            | <authorizezip>          |
+      | authorizationPhoneNo        | <authorizephonenumber>  |
+      | authorizationRelationship   | <authorizeRelationship> |
+      | authorizationStateDisplay   | <authorizestate>        |
+      | authorizationAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    Then the user validates the Plan and Member details on Review and Submit Page
+    #Then the user validates the Plan and Member details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
 
     @VisitorProfile_AARP
     Examples: 
-      | UID       | site | state    | zipcode | isMultiCounty | county       | planyear | testPlans                                                                                | plantype | planName                                  | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
-      | US1770330 | AARP | New York |   66843 | Yes           | Chase County | future   | UnitedHealthcare MedicareDirect Rx (PFFS),UnitedHealthcare MedicareDirect Patriot (PFFS) | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 | 3A33C22YK22    | true     | 01011941 | Female | 003 Morris Rd | Los Angeles | Yes                    |               |             | KS           |      66843 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
+      | site | state             | zipcode | isMultiCounty | testPlans                                                                      | plantype | planName                                  | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag |
+      | AARP | Miami-Dade County |   33143 | Yes           | AARP Medicare Advantage Choice (PPO),Medica HealthCare Plans MedicareMax (HMO) | MAPD     | Medica HealthCare Plans MedicareMax (HMO) | future   |   33143 | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |            | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     |
 
     @VisitorProfile_UHC
     Examples: 
-      | UID       | site | state    | zipcode | isMultiCounty | county          | planyear | testPlans                                                                                | plantype | planName                            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType |
-      | US1770330 | UHC  | New York |   10001 | NO            | New York County | Next     | UnitedHealthcare MedicareDirect Rx (PFFS),UnitedHealthcare MedicareDirect Patriot (PFFS) | MAPD     | AARP Medicare Advantage Prime (HMO) | MBI      | John      | Doe      | 2n22C33YK33    | false   |  09011997 |  11012002 | 3A33C22YK22    | true     | 01011941 | Female | 003 Morris Rd | Los Angeles | Yes                    |               |             | KS           |      66843 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | true      | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |
+      | site | state             | zipcode | isMultiCounty | testPlans                                                                      | plantype | planName                                  | planYear | zipcode | county            | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag |
+      | UHC  | Miami-Dade County |   33143 | Yes           | AARP Medicare Advantage Choice (PPO),Medica HealthCare Plans MedicareMax (HMO) | MAPD     | Medica HealthCare Plans MedicareMax (HMO) | future   |   33143 | Miami-Dade County | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                     | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     | yes          | false     | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         |            | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     |
 
   @vpMSSavePlan
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
@@ -309,14 +328,13 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     #| MS Test Plans | <MS_testPlans> |
     @VisitorProfile_AARP
     Examples: 
-      | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
-      | AARP | Alabama     |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
+      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
+      | AARP | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | state       | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
-      | UHC  | Alabama     |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
-
+      | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
+      | UHC  | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
 
   @providerFlow
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
@@ -362,7 +380,7 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
       | UHC  | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
-  @planCompare @planCompareULayerSmoke @visitorProfileRegressionAARP
+  @planCompareTest @planCompareULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -397,4 +415,3 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
       | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
-

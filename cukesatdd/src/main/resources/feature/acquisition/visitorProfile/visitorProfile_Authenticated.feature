@@ -63,19 +63,18 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     And the user clicks on the shopping cart icon on DCE page
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
-    And user clicks on Edit Drug and Pharmacy on visitor profile page
-    Then the user clicks on Remove button on Drug List page on DCE to delete drug
+    Then the user deletes all the added drugs from profile page
       | DrugName | <drug1> |
 
     @VisitorProfile_AARP
     Examples: 
       | site | state   | userName | password   | drug1   | zipCode |
-      | AARP | Alabama | mnrqavd4 | Password@2 | Lipitor |   90210 |
+      | AARP | Alabama | mnrqavd4 | Password@3 | Lipitor |   90210 |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state   | userName | password   | drug1   | zipCode |
-      | UHC  | Alabama | mnrqavd4 | Password@2 | Lipitor |   90210 |
+      | UHC  | Alabama | mnrqavd4 | Password@3 | Lipitor |   90210 |
 
   @providerFlowAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -104,12 +103,12 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     @VisitorProfile_AARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
 
   @oleAuthenticatedValidations
@@ -129,12 +128,12 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     @VisitorProfile_AARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@2 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
   @vpPartialOLEAndRemove
   Scenario Outline:  Verify Partial enrollment and cancel or remove the enrollment from profile page
@@ -180,4 +179,4 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     @VisitorProfile_AARP
     Examples: 
       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
-      | AARP | New York | mnrvd5   | Password@1 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
+      | AARP | New York | mnrvd5   | Password@2 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
