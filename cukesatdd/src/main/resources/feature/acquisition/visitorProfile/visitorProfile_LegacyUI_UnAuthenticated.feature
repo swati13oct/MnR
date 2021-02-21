@@ -4,7 +4,7 @@
 
 Feature: 1.08. UAT - Legacy Visitor profile UI Un Authenticated
 
-  @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @DCE_Regression_Ulayer_VisitorProfile
+  @addDrugsUnAuth @addDrugsULayerSmoke @visitorProfileRegressionAARP @DCE_Regression_Ulayer_VisitorProfile
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip - <zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -19,7 +19,7 @@ Feature: 1.08. UAT - Legacy Visitor profile UI Un Authenticated
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
-    And user selects plan year
+    #And user selects plan year
     And user clicks on continue button in Zip Entry Page
     And the user clicks on the shopping cart icon on DCE page
     Then the user should be able to see the Drug information in the guest profile page
@@ -45,7 +45,7 @@ Feature: 1.08. UAT - Legacy Visitor profile UI Un Authenticated
       | state        | drug1   | zipCode | site |
       | Pennsylvania | Lipitor |   15001 | UHC  |
 
-  @addDrugsDCE1
+  @addDrugsDCEUnAuth
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -75,7 +75,7 @@ Feature: 1.08. UAT - Legacy Visitor profile UI Un Authenticated
       | state    | drug1   | zipCode | site |
       | Virginia | Lipitor |   22320 | UHC  |
 
-  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
+  @addPlansUnAuth @addPlansULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -123,7 +123,7 @@ Feature: 1.08. UAT - Legacy Visitor profile UI Un Authenticated
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | UHC  | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
 
-  @addPlansPlanDetail @visitorProfileRegressionAARP
+  @addPlansPlanDetailUnAuth @visitorProfileRegressionAARP
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -177,7 +177,7 @@ Feature: 1.08. UAT - Legacy Visitor profile UI Un Authenticated
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)           | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
 
-  @vpMSSavePlan
+  @vpMSSavePlanUnAuth
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

@@ -69,12 +69,12 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     @VisitorProfile_AARP
     Examples: 
       | site | state   | userName | password   | drug1   | zipCode |
-      | AARP | Alabama | mnrqavd4 | Password@3 | Lipitor |   90210 |
+      | AARP | Alabama | mnrqevd4 | Password@1 | Lipitor |   90210 |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state   | userName | password   | drug1   | zipCode |
-      | UHC  | Alabama | mnrqavd4 | Password@3 | Lipitor |   90210 |
+      | UHC  | Alabama | mnrqevd4 | Password@1 | Lipitor |   90210 |
 
   @providerFlowAuthenticated
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -103,12 +103,12 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     @VisitorProfile_AARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | AARP | New York |   10001 | NO              | New York County | mnrqevd4 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
-      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
+      | UHC  | New York |   10001 | NO              | New York County | mnrqevd4 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
 
   @oleAuthenticatedValidations
@@ -128,12 +128,12 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     @VisitorProfile_AARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
-      | AARP | New York |   10001 | NO              | New York County | mnrqavd4 | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | AARP | New York |   10001 | NO              | New York County | mnrqevd4 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
-      | UHC  | New York |   10001 | NO              | New York County | mnrqavd4 | Password@3 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
+      | UHC  | New York |   10001 | NO              | New York County | mnrqevd4 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
   @vpPartialOLEAndRemove
   Scenario Outline:  Verify Partial enrollment and cancel or remove the enrollment from profile page
