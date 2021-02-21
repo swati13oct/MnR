@@ -20,7 +20,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | BrandDrugName | <brandDrug> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    #Then the user validates Drug Recommendation section
+    Then the user validates Drug Recommendation section
     Then the user searches and adds the following Drug for following quantity, frequency and Supplylength to Drug List
       | DrugName  | <drug2>      |
       | Quantity  | <quantity2>  |
