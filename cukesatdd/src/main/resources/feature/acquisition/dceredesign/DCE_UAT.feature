@@ -1,7 +1,7 @@
 @UATRegression
 Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
-  @DCE_ShopForPlanPage_PDPpage  
+  @dce_ShopPDP_E2E_Scenario2_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Shop PDP page on
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -39,17 +39,17 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | DrugName | <drug2> |
     And the user verifies the added pharmacy on prescription drug tab
 
-    @dce_redesign_ShopPDP_AARP
+    @dce_ShopPDP_E2E_Scenario2_UAT_AARP
     Examples: 
       | Scenario           | site | drug1   | drug2                | zipCode | planType | planName                        | supplyLength   |
       | E2E Scenario 2_AMP | AARP | Lipitor | atorvastatin calcium |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
 
-    @dce_redesign_ShopPDP_UHC
+    @dce_ShopPDP_E2E_Scenario2_UAT_UHC
     Examples: 
       | Scenario           | site | drug1   | drug2                | zipCode | planType | planName                        | supplyLength   |
       | E2E Scenario 2_UMS | UHC  | Lipitor | atorvastatin calcium |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
 
-  @DCE_MedEdPage
+  @DCE_MedEdPage_E2E_Scenario4_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Med Ed page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -79,32 +79,32 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user Captures Drug costs on Drug Details Page
     And the user compares drug costs for drug details and drug summary pages
 
-    @DCE_MedEdPage_AARP
+    @DCE_MedEdPage_E2E_Scenario4_UAT_AARP
     Examples: 
       | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
-      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-    @DCE_MedEdPage_UHC
+    @DCE_MedEdPage_E2E_Scenario4_UAT_UHC
     Examples: 
       | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
-      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | AHF PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
 
-       @DCE_E2E_Scenario6_UAT
+  @DCE_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link
-      Given the user is on medicare acquisition site landing page
-    	|Site| <site>|
-		Given the user navigates to following Campaign acquisition site page     
-      | PagePath | <path>     |
-     And the user views the plans of the below plan type
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Given the user navigates to following Campaign acquisition site page
+      | PagePath | <path> |
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
-      And I access the DCE Redesign from Plan Summary for mentioned plan
+    And I access the DCE Redesign from Plan Summary for mentioned plan
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-      Then the user searches and adds the following Drug to Drug List
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug3> |
@@ -112,33 +112,33 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | DrugName | <drug4> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug5> |
-     Then the user searches and adds the following Drug to Drug List
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug6> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug7> |
-    Then the user edits supply length to three months for following drug  
+    Then the user edits supply length to three months for following drug
       | EditDrug | <drug5> |
-    Then the user validates all added drugs in DrugList  
-    Then the user clicks on Review Drug Costs to Land on Drug Details Page   
+    Then the user validates all added drugs in DrugList
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user validates planName matches plan Name in VPP
-   # Then the user Captures Drug costs on Drug Details Page
+    # Then the user Captures Drug costs on Drug Details Page
     Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
       | Brand Drug   | <brandDrug1>   |
       | Generic Drug | <genericDrug1> |
     Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
       | Brand Drug   | <brandDrug2>   |
       | Generic Drug | <genericDrug2> |
-   Then the user validates following expected Premium on DCE Details Page
+    Then the user validates following expected Premium on DCE Details Page
       | Premium | <premium> |
-   Then the user verify the Retail chain pharmacy on detail page 
-   Then the user Captures Drug costs on Drug Details Page  
-   And the user validates link to Drug Summary Page
-   And the user validates functional tool tips for the given plan
+    Then the user verify the Retail chain pharmacy on detail page
+    Then the user Captures Drug costs on Drug Details Page
+    And the user validates link to Drug Summary Page
+    And the user validates functional tool tips for the given plan
       | Plan Name | <planname> |
-   Then the user validates View Drug Pricing modal for the given plan
+    Then the user validates View Drug Pricing modal for the given plan
       | Plan Name | <planname> |
     And the user Captures Drug costs on Drug Summary Page for the given plan
-       | Plan Name | <planname> |
+      | Plan Name | <planname> |
     And the user compares drug costs for drug details and drug summary pages
     Then the user verifies NBA modal for creating profile on drug summary page
     Then the user click on return to plan summary on DCE summary page
@@ -147,34 +147,34 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
     And the user views the plans of the below plan type
-      | Plan Type | <newplantype> |  
-   And the user clicks on drug dropdown on plan summary page and navigates to DCE
+      | Plan Type | <newplantype> |
+    And the user clicks on drug dropdown on plan summary page and navigates to DCE
       | Plan Type | <newplantype> |
       | Plan Name | <newplanname> |
-   Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
-   Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
-   Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
+    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
+    Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
+    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug4> |
-   Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
-      | CoveredDrug | <genericDrug1> | 	  
-   Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
-      | CoveredDrug | <genericDrug2> | 	  	  
-   Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
-      | NotCoveredDrug | <drug2> |	  
-   Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
-       | NotCoveredDrug | <drug3> |	  
-   Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
-       | NotCoveredDrug | <drug7> |	  	   
-   Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
-       | NotCoveredDrug | <drug6> |	  	   	   
+    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
+      | CoveredDrug | <genericDrug1> |
+    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
+      | CoveredDrug | <genericDrug2> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+      | NotCoveredDrug | <drug2> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+      | NotCoveredDrug | <drug3> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+      | NotCoveredDrug | <drug7> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+      | NotCoveredDrug | <drug6> |
     And the user validates link to Drug Summary Page
-   Then the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page
-   | Plan Name | <newplanname> |
-   Then the user selects View Drug details for following plantype and PlanName
+    Then the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page
+      | Plan Name | <newplanname> |
+    Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <plantype>       |
       | Plan Name | <updateplanname> |
-   Then the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
-   Then the user searches and adds the following Drug to Drug List
+    Then the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
+    Then the user searches and adds the following Drug to Drug List
       | DrugName | <insulinDrug1> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <insulinDrug2> |
@@ -182,7 +182,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
       | InsulinCopay | <insulinCopay> |
-      | Insulin Drug | <insulinDrug1> | 
+      | Insulin Drug | <insulinDrug1> |
     Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
       | InsulinCopay | <insulinCopay> |
       | Insulin Drug | <insulinDrug2> |
@@ -192,21 +192,20 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Test Plans | <updateplanname> |
     Then the user clicks on Drug cost estimator link and validates Drug Details Page
     Then the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page
-       | Site | <site> |   
-    
+      | Site | <site> |
+
     @DCE_E2E_Scenario6_UAT_AARP
-     Examples: 
-      | Scenario            | site  | path                                                                                   | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | NewZipCode |  newplantype |  newplanname                                        |  isMultutiCounty |  county          |  updateplanname                       |   insulinDrug1 | insulinDrug2 									| insulinCopay  |    
-      | E2E Scenario 6_AARP | AARP  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |   NO             |Miami-Dade County |  AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen |  $35          |
-      
-      @DCE_E2E_Scenario6_UAT_UMS
-     Examples: 
-      | Scenario            | site  | path                                                                                  | plantype | planname                                         |  drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 |  genericDrug1         |  brandDrug2 |  genericDrug2 | premium | NewZipCode |  newplantype |  newplanname                                        |  isMultutiCounty |  county          |  updateplanname                       |   insulinDrug1 | insulinDrug2 									| insulinCopay  |    
-      | E2E Scenario 6_UMS  | UHC  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary     |  MAPD    | UnitedHealthcare Medicare Advantage Assure (HMO) |  Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    |  atorvastatin calcium |   Xanax     |   alprazolam  | $0 - $  | 33111      |  SNP         |   UnitedHealthcare Dual Complete Choice (PPO D-SNP) |   NO             |Miami-Dade County |  AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen |  $35          | 
-    
-    
-    @DCE_E2E_Scenario1_UAT
-    Scenario Outline: <Scenario> : To verify that user can search for a plan, verify the drug costs and enroll in plan
+    Examples: 
+      | Scenario            | site | path                                                                               | plantype | planname                                         | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county            | updateplanname                       | insulinDrug1   | insulinDrug2                                    | insulinCopay |
+      | E2E Scenario 6_AARP | AARP | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO) | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |
+
+    @DCE_E2E_Scenario6_UAT_UMS
+    Examples: 
+      | Scenario           | site | path                                                                               | plantype | planname                                         | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county            | updateplanname                       | insulinDrug1   | insulinDrug2                                    | insulinCopay |
+      | E2E Scenario 6_UMS | UHC  | health-plans.html?zipcode=90210&WT.mc_id=8000158&county=200&state=06#/plan-summary | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO) | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |
+
+  @DCE_E2E_Scenario1_UAT
+  Scenario Outline: <Scenario> : To verify that user can search for a plan, verify the drug costs and enroll in plan
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -226,54 +225,64 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
     Then the user searches and adds the following Drug to Drug List
-     | DrugName | <drug5> |
-     Then the user edits supply length to three months for following drug  
+      | DrugName | <drug5> |
+    Then the user edits supply length to three months for following drug
       | EditDrug | <drug3> |
-    Then the user validates all added drugs in DrugList 
+    Then the user validates all added drugs in DrugList
     Then the user clicks on return to compare link on build drug list page to returns to plan compare
     #Then the user validates all added Drugs on Plan Compare
     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
       | PlanName | <planname> |
     Then the user validates planName matches plan Name in VPP
+    Then the user Validates Drug you pay on DCE details page to Compare page Drug Info Modal
     Then the user Captures Drug costs on Drug Details Page
     And the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
     Then the user deletes the following drug from Drug list
-     | DrugName | <drug4> |
-      And the user clicks on Edit button on Drug List page on DCE
+      | DrugName | <drug4> |
+    And the user clicks on Edit button on Drug List page on DCE
       | DrugName | <drug2> |
     And the user changes the supply length
       | Supply Length | <supplyLength> |
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
-    #Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
-      #| Brand Drug   | <brandDrug1>   |
-      #| Generic Drug | <genericDrug1> |
-     #Then the user validates Drug Costs section
-   Then the user validates Your Drugs sections
-   Then the user validates Monthly Drug Costs by Stage Section
-   Then the user validates Monthly Drug Costs by Stage Info Modals
-   Then the user validates Monthly Drug Costs
-   Then the user validates Important information section
-   # Then the user clicks on return to compare link on build drug list page to returns to plan compare
-   Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
-   Then the user closes the Drug Info Modal on Plan Compare page
-    #Then the user validates all added Drugs on Plan Compare
-    Then clicks on back to plans on plan compare page for AARP
-    Then should be able to see the NBA modal to Enroll Plan on the VPP summary page in AARP site
-    
-    
-   @DCE_E2E_Scenario1_AARP 
-   Examples: 
-      | Scenario           | site     |zipcode| county               |isMultutiCounty|plantype |       drug1   | drug2     | drug3    | drug4           | drug5   | planname                        |  supplyLength    |brandDrug1 |  genericDrug1          |                             
-      | E2E Scenario 1_AMP | AARP     | 85001 |   Maricopa County    |    NO         |PDP     |        Lipitor| Ibuprofen | Nicomide | insulin lispro  | Fanapt |  AARP MedicareRx Walgreens (PDP)|Every 3 Months    | Lipitor    |  atorvastatin calcium |
-    
-    @DCE_E2E_Scenario1_UHC 
+    Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+      | Brand Drug   | <brandDrug1>   |
+      | Generic Drug | <genericDrug1> |
+    Then the user validates Drug Costs section
+    Then the user validates Your Drugs sections
+    Then the user validates Monthly Drug Costs by Stage Section
+    Then the user validates Monthly Drug Costs by Stage Info Modals
+    Then the user validates Monthly Drug Costs
+    Then the user validates Important information section
+    Then the user Captures Drug costs on Drug Details Page
+    Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
+    Then the user closes the Drug Info Modal on Plan Compare page
+    Then the user validates Estimated Drug Cost for the following plan to DCE details page estimated Drug Costs
+      | PlanName | <planname> |
+    Then the user validates all added Drugs on Plan Compare
+    Then the user clicks on back on all plan linnk in Plan Compare page
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planname> |
+    Then the user validates the Plan details on OLE
+    Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates Learn more modal for Welcome OLE
+    Then the user validates Leave OLE modal for Welcome OLE
+    Then the user validates cancellation modal for Welcome OLE
+    Then the user navigates to Personal Information Page
+    And the user cancels enrollment and navigates to homepage
+
+    @DCE_E2E_Scenario1_UAT_AARP
     Examples: 
-      | Scenario           | site     |zipcode| county               |isMultutiCounty|plantype |       drug1   | drug2     | drug3    | drug4           | drug5   | planname                        |  supplyLength    |brandDrug1 |  genericDrug1          |                             
-      | E2E Scenario 1_UMS | UHC     | 85001 |   Maricopa County    |    NO           |PDP     |        Lipitor| Ibuprofen | Nicomide | insulin lispro  | Fanapt |  AARP MedicareRx Walgreens (PDP)|Every 3 Months    | Lipitor    |  atorvastatin calcium |
-    
-     @DCE_E2E_Scenario3_UAT
-    Scenario Outline: <Scenario> : Verify that user get started from home page and can search for a plan, verify the drug summary page  and change pharmacy on drug summary and navigate back to vpp plan details page
-     Given the user is on medicare acquisition site landing page
+      | Scenario           | site | zipcode | county          | isMultutiCounty | plantype | drug1   | drug2     | drug3    | drug4          | drug5  | planname                        | supplyLength   | brandDrug1 | genericDrug1         |
+      | E2E Scenario 1_AMP | AARP |   85001 | Maricopa County | NO              | PDP      | Lipitor | Ibuprofen | Nicomide | insulin lispro | Fanapt | AARP MedicareRx Walgreens (PDP) | Every 3 Months | Lipitor    | atorvastatin calcium |
+
+    @DCE_E2E_Scenario1_UAT_UHC
+    Examples: 
+      | Scenario           | site | zipcode | county          | isMultutiCounty | plantype | drug1   | drug2     | drug3    | drug4          | drug5  | planname                        | supplyLength   | brandDrug1 | genericDrug1         |
+      | E2E Scenario 1_UMS | UHC  |   85001 | Maricopa County | NO              | PDP      | Lipitor | Ibuprofen | Nicomide | insulin lispro | Fanapt | AARP MedicareRx Walgreens (PDP) | Every 3 Months | Lipitor    | atorvastatin calcium |
+
+  @DCE_E2E_Scenario3_UAT
+  Scenario Outline: <Scenario> : Verify that user get started from home page and can search for a plan, verify the drug summary page  and change pharmacy on drug summary and navigate back to vpp plan details page
+    Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
@@ -296,16 +305,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | PharmacyZipCode | <pharmacyZipCode> |
     Then the user selects following pharmacy and returns to DCE Summary page
       | SelectPharmacy | <SelectPharmacy> |
-    
-    
-    
-    @DCE_E2E_Scenario3_AARP 
-   Examples: 
-      | Scenario           | site     |zipcode| county               |isMultutiCounty|plantype|       drug1   | drug2    | drug3 | drug4  | drug5   | planname                       |  supplyLength    |brandDrug1 |  genericDrug1          |                             
-      | E2E Scenario 3_AMP | AARP     | 55344 |   Hennepin County    |    NO         |PDP     |        Orfadin| Humalog  | Emsam | Lipitor| Fanapt |  AARP MedicareRx Walgreens (PDP)|Every 3 Months    | Lipitor    |  atorvastatin calcium |
-    
-    
-    
-    
-    
-    
+
+    @DCE_E2E_Scenario3_AARP
+    Examples: 
+      | Scenario           | site | zipcode | county          | isMultutiCounty | plantype | drug1   | drug2   | drug3 | drug4   | drug5  | planname                        | supplyLength   | brandDrug1 | genericDrug1         |
+      | E2E Scenario 3_AMP | AARP |   55344 | Hennepin County | NO              | PDP      | Orfadin | Humalog | Emsam | Lipitor | Fanapt | AARP MedicareRx Walgreens (PDP) | Every 3 Months | Lipitor    | atorvastatin calcium |
