@@ -104,12 +104,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | DrugName | <drug23> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug24> |
-    #Then the user validates Drug Recommendation section
+    Then the user validates Drug Recommendation section
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug25> |
     Then the user tries to add following drug over cabinet limit and validates error modal
       | DrugName | <drug26> |
-    #Then the user validates Drug Recommendation section is not Displayed after adding twenty five drugs
+    Then the user validates Drug Recommendation section is not Displayed after adding twenty five drugs
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
