@@ -56,7 +56,7 @@ public class VisitorProfileStepDefinition {
 
 		CommonConstants.SELECTED_STATE = state;
 
-//		acqHomePage.selectState(state);
+		acqHomePage.selectState(state);
 	}
 
 	@And("^the user clicks on the shopping cart icon$")
@@ -569,5 +569,22 @@ public class VisitorProfileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deleteAllDrugs(drugs);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+	}
+	
+	@Then("^Verify X out of Y provider covered information is displayed on legacy visitor profile page$")
+	public void verify_providers_covered_legacy_visitor_profile(DataTable Planname) {
+
+		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = plannameAttributesMap.get("PlanName");
+
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		Assert.assertTrue(visitorProfile.legacyProviderinfo(planName));
 	}
 }
