@@ -535,7 +535,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					Assert.assertTrue("PROBLEM - user has Walgreens plan should see '" + testWidget + "' widget",
 							pharmacyValidate(widget_walgreens));
 //					expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
-					expUrl = "health-plans/estimate-drug-costs.html#/drug-cost-estimator";
+					expUrl = "health-plans/estimate-drug-costs.html";
 					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 				} else {
 					System.out.println(

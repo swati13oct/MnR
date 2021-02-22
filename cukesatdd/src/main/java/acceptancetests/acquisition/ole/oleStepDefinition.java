@@ -30,6 +30,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -3823,5 +3824,13 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		}
 		else
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
+	}
+	
+	@And("^the user clicks on the heart icon on ole confirmation page$")
+	public void the_user_clicks_on_the_shopping_cart_icon_on_Drug_details_page() {
+		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+		VisitorProfilePage visitorProfilePage = oleConfirmationPage.clickOnShoppingCart();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 }

@@ -3566,7 +3566,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		jsClickNew(alternatemailingAddressBtn);
-		emailAddress.sendKeys("John_Kerry@test.com");
+		emailAddress.sendKeys("venkata.kanagala@optum.com");
 		phoneNumber.sendKeys("1234567890");
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -4501,7 +4501,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		alternatemailingAddressBtn.click();
-		emailAddress.sendKeys("test123@test.com");
+		emailAddress.sendKeys("venkata.kanagala@optum.com");
 		phoneNumber.sendKeys("1234567890");
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -6593,6 +6593,26 @@ public IsInsuranceAgent clickOnRequestInsuranceAgent() {
 		return new IsInsuranceAgent(driver);
 	else
 		return null;
+}
+
+@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+private WebElement RightRail_FindAnAgentMedsupp;
+
+public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
+
+	validateNew(RightRail_FindAnAgentMedsupp);
+	CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgentMedsupp, 30);
+	String parentWindow = driver.getWindowHandle();
+	jsClickNew(RightRail_FindAnAgentMedsupp);
+	sleepBySec(3);
+	Set<String> tabs_windows = driver.getWindowHandles();
+	Iterator<String> itr = tabs_windows.iterator();
+	while (itr.hasNext()) {
+		String window = itr.next();
+		if (!parentWindow.equals(window)) {
+			driver.switchTo().window(window);
+		}
+	}
 }
 }
 

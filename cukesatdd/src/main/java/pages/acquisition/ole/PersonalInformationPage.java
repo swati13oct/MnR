@@ -636,6 +636,7 @@ public class PersonalInformationPage extends UhcDriver{
 		jsClickNew(enrollProfileYes);
 		jsClickNew(enrollSavedClose);
 		jsClickNew(aarpLogo);
+		waitforElement(shoppingCartIcon);
 		jsClickNew(shoppingCartIcon);
 		jsClickNew(lnkProfile);
 		if(driver.getCurrentUrl().contains("profile")) {

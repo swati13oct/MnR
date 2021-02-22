@@ -1133,7 +1133,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty) {
 		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
 		sendkeys(healthPlansZipcode, zipcode);
-		jsClickNew(viewPlansButton);
+		jsClickNew(findPlansBtn);
 		waitForPageLoadSafari();
 		if (isMultiCounty.equalsIgnoreCase("YES")) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);

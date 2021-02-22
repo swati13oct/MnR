@@ -64,6 +64,9 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
+import java.security.*;
+import javax.crypto.*;
+
 /**
  * 
  * @author schak38
@@ -91,6 +94,7 @@ public class MRScenario {
 
 	public static String environment = System.getProperty("environment");
 	public static String browsername = "chrome";
+	public static String browserName;
 	public static String isTestHarness;
 	public static String environmentMedicare;
 	public static String isHSIDCompatible;
@@ -150,6 +154,8 @@ public class MRScenario {
 	public void flushBeans() {
 		if (!scenarioObjectMap.isEmpty()) {
 			scenarioObjectMap.clear();
+			System.out.println("Flushing all saved beans !");
+
 		}
 	}
 
@@ -158,7 +164,20 @@ public class MRScenario {
 	public Object getBean(String id) {
 		Object result = scenarioObjectMap.get(id);
 		if (result == null) {
-			System.out.println("Object not initialized");
+			System.out.println("Object not initialized - " + id);
+		}
+		return result;
+
+	}
+
+	public Object getBean(String id, Object defaultValue) {
+
+		Object result = getBean(id);
+
+		if (result == null) {
+
+			return defaultValue;
+
 		}
 		return result;
 
@@ -272,18 +291,24 @@ public class MRScenario {
 
 			String tagName = it.next();
 
-			if (environment.contains("team-ci")) {
+			if (environment.contains("mnr-acq-ci")) {
 				csvName = "MemberRedesign-VBF-Teamci.csv";
 
-			} else if ((environment.contains("team-a") || ((environment.equalsIgnoreCase("team-h"))
-					|| (environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f"))
+			} else if ((environment.equalsIgnoreCase("team-e")) || (environment.equalsIgnoreCase("team-f"))
 					|| (environment.equalsIgnoreCase("team-g")) || (environment.equalsIgnoreCase("team-c"))
 					|| (environment.equalsIgnoreCase("team-acme")) || (environment.equalsIgnoreCase("team-voc"))
-					|| (environment.equalsIgnoreCase("team-t") || (environment.equalsIgnoreCase("team-chargers")))))) {
+					|| (environment.equalsIgnoreCase("team-t"))
+
+					|| (environment.equalsIgnoreCase("team-chargers"))
+					|| (environment.equalsIgnoreCase("team-avengers-plm"))
+					|| (environment.equalsIgnoreCase("chargers-qa")) || (environment.equalsIgnoreCase("team-uhc-rx"))) {
 				csvName = "MemberRedesign-UUID.csv";
 			} else if (tagName.equalsIgnoreCase("@MemberVBF") && environment.contains("stage")) {
 				csvName = "MemberRedesign-VBF.csv";
+			} else if (environment.equalsIgnoreCase("team-h") || environment.equalsIgnoreCase("team-atest")) {
+				csvName = "UMS-Member-Type.csv";
 			}
+
 			/*
 			 * note: Dec2018 - comment out because this section caused stage run not to use
 			 * UMS-Member-Type.csv else{ if
@@ -421,6 +446,7 @@ public class MRScenario {
 		try {
 			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName
 					+ "'";
+
 			rs1 = stmt.executeQuery(sql);
 			rs1.first();
 			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
@@ -428,6 +454,7 @@ public class MRScenario {
 		} catch (Exception e) {
 			System.out.println("Already data not available in the mbr DB");
 		} finally {
+
 			rs1.close();
 			stmt.close();
 			con.close();
@@ -610,15 +637,19 @@ public class MRScenario {
 		Properties prop = new Properties();
 		String propertiesFileToPick = environment;
 		System.out.println("Using properties for environment ...." + propertiesFileToPick);
+
 		if (StringUtils.isBlank(propertiesFileToPick)) {
+
 			System.out.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 
 			// Read properties from classpath
 			StringBuffer propertyFilePath = new StringBuffer(CommonConstants.PROPERTY_FILE_FOLDER);
+
 			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
 					.append(CommonConstants.PROPERTY_FILE_NAME);
 			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
+
 			try {
 				prop.load(is);
 			} catch (IOException e) {
@@ -636,6 +667,7 @@ public class MRScenario {
 			}
 			return props;
 		} else {
+
 			if (environment.contains("stage") || environment.equals("stage-aarp")
 					|| environment.equals("offline-stage-aarp"))
 				domain = "uhc.com";
@@ -645,6 +677,7 @@ public class MRScenario {
 					|| environment.contains("digital-uat") || environment.equals("team-chargers")
 					|| environment.contains("chargers"))
 				domain = "ocp-elr-core-nonprod.optum.com";
+
 			else if (environment.contains("mnr-acq"))
 				domain = "origin-elr-dmz.optum.com";
 			else
@@ -791,6 +824,7 @@ public class MRScenario {
 		 * new ChromeDriver(options); webDriver.manage().window().maximize(); return
 		 * webDriver;
 		 */
+
 	}
 
 	public WebDriver getIEDriver() {
@@ -969,7 +1003,7 @@ public class MRScenario {
 
 		// if the browsername is passed in from Jenkins then use that, otherwise use the
 		// one from the CI config properties file
-		String browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
+		browserName = (null == System.getProperty(CommonConstants.BROWSER_NAME) ? browsername
 				: System.getProperty(CommonConstants.BROWSER_NAME));
 
 		// if the browser version is passed in from Jenkins then use that, otherwise use
@@ -977,7 +1011,7 @@ public class MRScenario {
 		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after " + browserVersion);
-
+		
 		String screenResolution = (null == System.getProperty(CommonConstants.SCREEN_RESOLUTION) ? "1920x1080"
 				: System.getProperty(CommonConstants.SCREEN_RESOLUTION));
 
@@ -1021,17 +1055,16 @@ public class MRScenario {
 
 			webDriver.get("google.com");
 
-		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-			Map<String, Object> chromeOptions = new HashMap<String, Object>();
-			// chromeOptions.put("binary", pathToBinary);
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-			// System.setProperty("webdriver.chrome.driver", pathToBinary);
-			System.setProperty("webdriver.chrome.driver",
-					"C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
-			webDriver = new ChromeDriver();
-			saveBean(CommonConstants.WEBDRIVER, webDriver);
-			return webDriver;
+			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+				Map<String, Object> chromeOptions = new HashMap<String, Object>();
+				//chromeOptions.put("binary", pathToBinary);
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+				//System.setProperty("webdriver.chrome.driver", pathToBinary);
+				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
+				webDriver = new ChromeDriver();
+				saveBean(CommonConstants.WEBDRIVER, webDriver);
+				return webDriver;
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -1095,16 +1128,17 @@ public class MRScenario {
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("maxDuration", "3600");
-			} else if (browserName.equalsIgnoreCase("safari")) {
+			}else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				capabilities.setCapability("maxDuration", "3600");
-
+				
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
+				sauceOptions.setCapability("maxDuration", 5400);
+				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
-				browserOptions.setCapability("platformName", "macOS 10.14");
+				browserOptions.setCapability("platformName", "macOS 11.00");
 				browserOptions.setCapability("browserVersion", browserVersion);
 				browserOptions.setCapability("sauce:options", sauceOptions);
 				capabilities.merge(browserOptions);
@@ -1148,7 +1182,7 @@ public class MRScenario {
 		return webDriver;
 
 	}
-
+	
 	public String getSessionId() {
 		return sessionId;
 	}
@@ -1285,7 +1319,7 @@ public class MRScenario {
 		}
 		return mobileDriver;
 	}
-
+	
 	public static Connection getGPSuat3Connection() throws SQLException {
 
 		Connection con = null;
@@ -1296,7 +1330,7 @@ public class MRScenario {
 
 			String env = HSID_ENV;
 			String user = "UHG_000611921";
-			String pwd = "Passx&9e";
+			String pwd = "Passy&0f";
 
 			// Below is GPS UAT URL (enable/disable based on GPS env that you want to
 			// connect)
@@ -1306,13 +1340,20 @@ public class MRScenario {
 			// connect)
 			// String url =
 			// "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))";
+
 			// Below is GPS UAT3 URL (enable/disable based on GPS env that you want to
 			// connect)
-			// String url =
-			// "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))";
+
+			// PLEASE DO NOT CHANGE THIS CODE BELOW WITHOUT INFORMING CT TEAM (JITESH AND
+			// KAPIL)
+
+			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0102)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts18)))";
+
 			// Below is GPS UAT4 URL (enable/disable based on GPS env that you want to
 			// connect)
-			String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0103)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19)))";
+
+			// String url =
+			// "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0103)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts19)))";
 
 			con = DriverManager.getConnection(url, user, pwd);
 			System.out.println("Oracle Database Connection established**********");

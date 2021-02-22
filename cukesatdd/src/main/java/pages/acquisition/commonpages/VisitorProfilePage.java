@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 //import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
@@ -38,6 +39,9 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign In']")
 	private WebElement signIn;
+	
+	@FindBy(css = "div.signupCTA a.signin-font")
+	private WebElement signInLegacy;
 
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
@@ -63,7 +67,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "div.drug-list-accordion.open div.drug-info-container span:first-child")
 	private WebElement drugname;
 
-	@FindBy(css = "ul.drugs-list>li>div>span:first-child")
+	@FindBy(css = "ul.drugs-list>li>div>div>div>div:first-child")
 	private WebElement drugName;
 
 	@FindBy(css = "ul.drugs-list>li:last-child>span")
@@ -98,6 +102,9 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(css = "div#navLinks>a:first-child")
 	private WebElement backToPlans;
+	
+	@FindBy(css="div.print-back>a:first-child")
+	private WebElement legacyBackToPlans;
 
 	@FindBy(xpath = "//div[@class='multi-year-select']")
 	private WebElement profileMultiYear;
@@ -187,10 +194,39 @@ public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@class,'remove-button') and contains(@aria-label,'Delete')]")
 	private List<WebElement> deletePlan;
-	
+
 	@FindBy(xpath = "//*[@id='navLinks']/a[1]")
 	private WebElement breadCrumbLink;
+	
+	@FindBy(xpath = "(//div[@class='provider-accordion'])[1]")
+	private WebElement providerAccordin;
+	
+	@FindBy(xpath = "//button[@id='ProviderDelete-noplan-0']")
+	private WebElement legactRemoveProvider;
 
+	// Shopper profile UI version 2
+
+	@FindBy(xpath = "//span[text()='Add Drugs']/parent::button")
+	private WebElement addDrugsBtn;
+
+	@FindBy(xpath = "//button[contains(text(),'View Drug Pricing')]")
+	private WebElement viewDrugPricingLink;
+	
+	@FindBy(xpath = "//button[text()='Yes, Remove']")
+	private WebElement removeDrugBtn;
+	
+	@FindBy(xpath = "//h2[@id='saved-drugs-and-doctors']/following::a[contains(text(),'Import')]")
+	private WebElement importLnk;
+	
+	@FindAll({ @FindBy(xpath = "//div[contains(@id,'DrugName')]") })
+	private List<WebElement> savedDrugsList;
+	
+	@FindAll({ @FindBy(xpath = "//div[contains(@id,'ProviderName')]") })
+	private List<WebElement> savedProvidersList;
+	
+	@FindBy(xpath = "//img[@class='uhc-modal__close']/parent::button")
+	private WebElement modalClose;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -206,36 +242,30 @@ public class VisitorProfilePage extends UhcDriver {
 
 	public AcquisitionHomePage addPlan() {
 
-	/*	if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+		if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-//			jsClickNew(addplans);			//Commented since addplans button not available, locator same as else part add plans
-			jsClickNew(addPlans);
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
+				
+			jsClickNew(addplans);
 		} else {
 			jsClickNew(addPlans);
 		}
-
-//			addPlans.click();
-
-		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
 			return new AcquisitionHomePage(driver, page);
 		}
 		return null;
-	}*/
-		
-		jsClickNew(addPlans);
-		waitForPageLoadSafari();
-		if(driver.getCurrentUrl().contains("profile")) {
-			return new AcquisitionHomePage(driver);
-		}else {
-			System.out.println("Navigation to visitor profile is failed");
-			return null;
-		}
 	}
 
+	/*
+	 * jsClickNew(addPlans); waitForPageLoadSafari();
+	 * if(driver.getCurrentUrl().contains("profile")) { return new
+	 * AcquisitionHomePage(driver); }else {
+	 * System.out.println("Navigation to visitor profile is failed"); return null; }
+	 * 
+	 * }
+	 */
 	public void validateAddedDrugAndPharmacy(String drug) {
 
 		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
@@ -296,11 +326,15 @@ public class VisitorProfilePage extends UhcDriver {
 		System.out.println("Added Drug Count : " + DrugListItems.length);
 		for (String currentDrug : DrugListItems) {
 			System.out.println("Current Added Drug Name : " + currentDrug);
-			/*List<WebElement> DrugName = driver.findElements(By.xpath(
-					"//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"));*/
+			/*
+			 * List<WebElement> DrugName = driver.findElements(By.xpath(
+			 * "//div[contains(@class,'drug-list-accordion')]//button[contains(@class,'add-drugs')]/following-sibling::div//*[contains(@id,'DrugName')]"
+			 * ));
+			 */
 
-			List<WebElement> DrugName = driver.findElements(By.xpath("//ul[@class='drugs-list']//*[contains(@id,'DrugName')]"));
-			
+			List<WebElement> DrugName = driver
+					.findElements(By.xpath("//ul[@class='drugs-list']//*[contains(@id,'DrugName')]"));
+
 			for (int j = 0; j < DrugName.size(); j++) {
 				String drugInfo = DrugName.get(j).getText();
 				System.out.println("Drug name seen on Plan Summary: " + drugInfo);
@@ -342,7 +376,7 @@ public class VisitorProfilePage extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
 			jsClickNew(addrugs);
 		} else {
-			jsClickNew(drugGetStarted);
+			jsClickNew(addDrugsBtn);
 		}
 		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
@@ -371,21 +405,26 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 
 		try {
-			if (driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0) {
+			if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE)
+					&& (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))) {
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan : listOfTestPlans) {
-					if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
-							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-						jsClickNew(driver.findElement(By.xpath("//h4[text()='" + plan + "']/preceding::button[1]")));
-					} else {
-						jsClickNew(driver.findElement(By.xpath("//h3[contains(text(),'" + plan
-								+ "')]/preceding::button[contains(@class,'remove')][1]")));
-					}
+					jsClickNew(driver.findElement(By.xpath("//h4[text()='" + plan + "']/preceding::button[1]")));
+					Thread.sleep(5000);
+				}
+
+			} else if (driver.findElements(By.xpath("//span[contains(text(),'Plan Summary')]")).size() > 0) {
+				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+				for (String plan : listOfTestPlans) {
+					jsClickNew(driver.findElement(By.xpath(
+							"//h3[contains(text(),'" + plan + "')]/preceding::button[contains(@class,'remove')][1]")));
 					Thread.sleep(5000);
 				}
 			} else
 				System.out.println("##############No saved plans available here##############");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -430,7 +469,54 @@ public class VisitorProfilePage extends UhcDriver {
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * Get the added provider information
+	 * 
+	 * @param planName
+	 * @return
+	 */
+	public boolean legacyProviderinfo(String planName) {
+		WebElement ProviderSearchLink = driver
+				.findElement(By.xpath("//button[contains(@class,'remove')]/following::h4[contains(text(),'" + planName
+						+ "')]/following::div[@class='provider-accordion']/button"));
+		String mproviderinfo = ProviderSearchLink.getText();
+		System.out.println(mproviderinfo);
+		if (mproviderinfo.toLowerCase().contains("providers covered")) {
+			return true;
+		}
+		return false;
+	}
 
+	/**
+	 * Get the added provider information
+	 * 
+	 * @param planName
+	 * @return
+	 */
+	public void validteProviderinfo(String planName) {
+		try {
+			WebElement viewProviders = driver.findElement(By.xpath(
+					"//h3[contains(text(),'" + planName + "')]/following::button[text()=' View Providers '][1]"));
+			viewProviders.click();
+			Thread.sleep(2000);
+			String mproviderinfo = driver
+					.findElement(By.xpath(
+							"//table//td/div/div/div[@id='ProviderName-noplan-undefined']"))
+					.getText().trim();
+			
+			String rallyProviderName = MRConstants.PROV_NAME;
+			rallyProviderName = rallyProviderName.replaceAll(".", "").replaceAll(",", "");
+			mproviderinfo = mproviderinfo.replaceAll(".", "").replaceAll(",", "");
+			System.out.println(mproviderinfo);
+			Assert.assertTrue(mproviderinfo.contains(rallyProviderName));
+			modalClose.click();
+
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -455,15 +541,25 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void signIn(String username, String password) {
 		try {
-			jsClickNew(signIn);
+			if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
+				Thread.sleep(3000);
+				signInLegacy.click();
+				
+			}else {
+				jsClickNew(signIn);
+			}
+			System.out.println();
 			waitForPageLoadSafari();
-		//	driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
 			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+			waitforElement(securityAnswer);
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");
@@ -478,7 +574,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-		//	CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			// CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
@@ -575,7 +671,12 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public VPPPlanSummaryPage backToPlans() {
 		try {
-			backToPlans.click();
+			if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
+				legacyBackToPlans.click();
+			}else
+				backToPlans.click();
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
@@ -665,14 +766,15 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param planName
 	 */
 	public void cancelEnrollment(String planName) {
-		
-		if(driver.findElements(By.xpath("//button[@aria-label='Remove " + planName + "']")).size()>0) {
-			WebElement removeEnrolledPlan = driver.findElement(By.xpath("//button[@aria-label='Remove " + planName + "']"));
+
+		if (driver.findElements(By.xpath("//button[@aria-label='Remove " + planName + "']")).size() > 0) {
+			WebElement removeEnrolledPlan = driver
+					.findElement(By.xpath("//button[@aria-label='Remove " + planName + "']"));
 			jsClickNew(removeEnrolledPlan);
 			waitforElement(cancelEnrollment);
 			jsClickNew(cancelEnrollment);
 			waitforElementDisapper(By.xpath("//button[@aria-label='Remove " + planName + "']"), 5);
-		}else {
+		} else {
 			System.out.println("#############No saved Enrollment found#############");
 		}
 	}
@@ -692,20 +794,29 @@ public class VisitorProfilePage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
 			System.out.println(plan);
-			WebElement addedPlan = driver.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
-			/*System.out.println(driver.findElement(By.xpath(
-					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());*/
+			WebElement addedPlan = driver
+					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			/*
+			 * System.out.println(driver.findElement(By.xpath(
+			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+			 * + plan + "')]")) .getText());
+			 */
 			System.out.println(addedPlan.getText());
-			/*Assert.assertEquals(plan, driver.findElement(By.xpath(
-					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText().trim());*/
+			/*
+			 * Assert.assertEquals(plan, driver.findElement(By.xpath(
+			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+			 * + plan + "')]")) .getText().trim());
+			 */
 			Assert.assertEquals(plan, addedPlan.getText().trim());
-			/*Assert.assertTrue(driver
-					.findElement(By.xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
-							+ plan + "')]/following::button[1]"))
-					.isDisplayed());*/
-			Assert.assertTrue(addedPlan.findElement(By.xpath("./following::button[1]")).isDisplayed());
+			/*
+			 * Assert.assertTrue(driver .findElement(By.
+			 * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+			 * + plan + "')]/following::button[1]")) .isDisplayed());
+			 */
+			Assert.assertTrue(driver
+					.findElement(By.xpath(
+							"//*[contains(@id,'planName') and contains(text(),'" + plan + "')]/./following::button[1]"))
+					.isDisplayed());
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}
@@ -725,15 +836,14 @@ public class VisitorProfilePage extends UhcDriver {
 	public void validateBackToDceLink() {
 		validate(backToDrugCostEstimatorLink);
 	}
-	
+
 	public DrugDetailsPage clickBackToDCELink() {
 		jsClickNew(backToDrugCostEstimatorLink);
 		waitForPageLoadSafari();
-		if(driver.getCurrentUrl().contains("drugdetails")){
+		if (driver.getCurrentUrl().contains("drugdetails")) {
 			return new DrugDetailsPage(driver);
-		}
-		else 
-		return null;
+		} else
+			return null;
 	}
 
 	/**
@@ -790,12 +900,12 @@ public class VisitorProfilePage extends UhcDriver {
 			if (expandDrugsPlanCard.isDisplayed()) {
 				expandDrugsPlanCard.click();
 				System.out.println(removeDrugsPlanCard.size());
-				while (removeDrugsPlanCard.size() != 0){ 
+				while (removeDrugsPlanCard.size() != 0) {
 					removeDrugsPlanCard.get(0).click();
 					expandDrugsPlanCard.click();
 					System.out.println(removeDrugsPlanCard.size());
 					System.out.println("Removed drugs");
-										
+
 				}
 				/*
 				 * while (removeDrugsPlanCard.size() != 0) {
@@ -876,7 +986,69 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 
 	public void verifyBreadCrumb(String breadCrumb) {
-		Assert.assertTrue("Expected breadcrumb "+breadCrumb+ "not displayed",breadCrumbLink.getText().equals(breadCrumb));
+		Assert.assertTrue("Expected breadcrumb " + breadCrumb + "not displayed",
+				breadCrumbLink.getText().equals(breadCrumb));
+	}
+
+	public void validateViewDrugPricingModel(DataTable drugInfo) {
+
+		List<DataTableRow> givenAttributesRow = drugInfo.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String planName = givenAttributesMap.get("Plan Name");
+		String zipCode = givenAttributesMap.get("Zip Code");
+		String status = givenAttributesMap.get("Status");
+		String monthlyPremium = givenAttributesMap.get("Monthly Premium");
+
+		viewDrugPricingLink.click();
+		Assert.assertTrue(validate(driver.findElement(By.xpath("//h1[contains(text(),'" + planName + "')]"))));
+
+	}
+	
+	/**
+	 * Delete all the drugs from the profile
+	 */
+	public void deleteAllDrugs(String drugList) {
+		CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
+		if(drugList.contains(",")) {
+			String drugs[] = drugList.split(",");
+			for(String drugName:drugs) {
+				driver.findElement(By.xpath("//div[contains(text(),'"+drugName+"')]/following::button[text()='Remove']")).click();
+				removeDrugBtn.click();
+			}
+		}else {
+			driver.findElement(By.xpath("//div[contains(text(),'"+drugList+"')]/following::button[text()='Remove']")).click();
+			removeDrugBtn.click();
+		}
+		
+		
+		CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
+		Assert.assertTrue(importLnk.isDisplayed());
+	}
+	
+	/**
+	 * Delete all the providers from the profile
+	 */
+	public void deleteProviders() {
+		if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
+			providerAccordin.click();
+			legactRemoveProvider.click();
+			
+		}else {
+			CommonUtility.waitForPageLoadNew(driver, savedProvidersList.get(0), 45);
+			for (WebElement provider : savedProvidersList) {
+				driver.findElement(By.xpath("//div[contains(text(),'"+provider.getText().trim()+"')]/following::button[text()='Remove']")).click();
+				removeDrugBtn.click();
+			}
+			CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
+			Assert.assertTrue(importLnk.isDisplayed());
+		}
 	}
 }
 

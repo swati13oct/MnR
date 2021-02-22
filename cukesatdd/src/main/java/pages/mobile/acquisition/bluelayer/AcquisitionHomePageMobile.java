@@ -169,7 +169,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	}
 
 	/**
-	 * @author Rathulya This method is used to open the URL on the mobile device
+	 * @author Harshal This method is used to open the URL on the mobile device
 	 */
 	public void openMobileURL() {
 		//boolean offline_prod = false;

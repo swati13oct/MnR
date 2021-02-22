@@ -37,7 +37,8 @@ import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 
 public class CampaignTFNPage extends UhcDriver {
 
-	@FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
+	//@FindBy(xpath= "//*[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
 	public String testSiteUrl;
@@ -57,11 +58,11 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='tsf']/div[2]/div/div[3]/center/input[1]")
 	public WebElement GoogleSearchButton;
 
-	//@FindBy(xpath = "//h3[contains(text(),'AARP® Medicare Plans from UnitedHealthcare®')]")
+	//@FindBy(xpath = "//h3[contains(text(),'AARPï¿½ Medicare Plans from UnitedHealthcareï¿½')]")
 	@FindBy(xpath = "//a[contains(@href, 'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans.html')][1]")
 	public WebElement AARPSearchLinkfromGoogle;
 	
-	//@FindBy(xpath = "//h3[contains(text(),'AARP® Medicare Advantage (Part C) Plans ...')]")
+	//@FindBy(xpath = "//h3[contains(text(),'AARPï¿½ Medicare Advantage (Part C) Plans ...')]")
 	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')]")	
 	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHea')]")
 	//@FindBy(xpath = "//a[@href='https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html']")
@@ -82,7 +83,7 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "(//a[contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plan')])[3]")
 	public WebElement UHCSearchLinkfromGoogle;
 
-	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcare®')])[2]")
+	@FindBy(xpath = "(//*[contains(text(),'Find Medicare Plans Available From UnitedHealthcareï¿½')])[2]")
 	public WebElement UHCSearchLinkfromGoogle1;
 
 //	@FindBy(xpath = "//*[@id='uh-search-box']")
@@ -96,7 +97,7 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
 	public WebElement YahooSearchBttn;
 
-	//@FindBy(xpath = "//h3//a[contains(text(),'AARP® Medicare Advantage (Part C) Plans')]")
+	//@FindBy(xpath = "//h3//a[contains(text(),'AARPï¿½ Medicare Advantage (Part C) Plans')]")
 	//@FindBy(xpath = "//h3//a[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare')]")
 	//@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans/shop/medicare-advantage-plans/ma-plan-benefits.html')]")
 	@FindBy(xpath = "//a[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
@@ -549,15 +550,16 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement OurPlansLink1;
 
-	@FindBy(id = "zipcodebtn")
+	//@FindBy(id = "zipcodebtn")
 	//@FindBy(id = "//button[contains(@id,'zipcodebtn')]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement findPlansButton;
 	
 	@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
 	private WebElement findPlansButtonExternalLinks;
 	
-	@FindBy(id="cta-zipcode")
-	//@FindBy(xpath = "//input[contains(@id,'cta-zipcode')]")
+	//@FindBy(id="cta-zipcode")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement HomePage_EnterZip;
 	
 	@FindBy(xpath="(//input[contains(@id,'zipcode')])[2]")
@@ -570,7 +572,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement OurPlans_viewPlansButton;
 	
 	//@FindBy(id="cta-zipcode")
-	@FindBy(xpath = "//input[contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement HomePageOLE_EnterZip;
 	
 	//@FindBy(id = "zipcodebtn")
