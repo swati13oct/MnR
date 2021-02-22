@@ -145,7 +145,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath="//*[@id='form-valid']/div[2]//div[text()='Send']")
 	protected WebElement sendButtonEmailPlanComparePopUp;
 	
-	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
+	@FindBy(xpath=".//*[@id='emailSuccess']")
 	protected WebElement validatesuccesspopup;
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetail']")
