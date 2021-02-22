@@ -55,7 +55,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@type,'submit') and contains(text(), 'Send')]")
 	protected WebElement emailPlanSummarySendButton;
 
-	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")
+	@FindBy(xpath = "//a[@id='closepopup']")
 	protected WebElement emailPlanSummaryCancelButton;
 
 	@FindBy(xpath = "//*[@id='emailSuccess']") 
@@ -139,10 +139,10 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailcompareDescription']")
 	protected WebElement leavingcomapreplansitepopup;
 	
-	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[1]")
+	@FindBy(xpath=".//*[@id='form-valid']/div[2]//div[text()='Cancel']")
 	protected WebElement cancelButtonEmailPlanComparePopUp;
 	
-	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[2]")
+	@FindBy(xpath="//*[@id='form-valid']/div[2]//div[text()='Send']")
 	protected WebElement sendButtonEmailPlanComparePopUp;
 	
 	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
@@ -157,7 +157,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='closepopup']")
 	protected WebElement cancelButtonEmailPlanDetailsPopUp;
 
-	@FindBy(xpath = ".//*[@id='form-valid']//button[2]")
+	@FindBy(xpath = ".//*[@id='form-valid']/div[2]//button[text()='Send']")
 	protected WebElement sendButtonEmailPlanDetailsPopUp;
 
 	@FindBy(xpath="//a[contains(@dtmname,'Enroll in Plan')]")
