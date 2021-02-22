@@ -231,7 +231,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String headerPremiumXpath = planCard+"//*[contains(@class,'monthly-cost')]";
 		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
 		String headerPremiumText = "Header not found";
-		String learnMoreLink = planCard + "//*[contains(@ng-click,'lispopup')]";
+		String learnMoreLink = planCard + "//span[contains(@ng-if,'!= 0')]//*[contains(@ng-click,'lispopup')]";
 		
 		List<WebElement> learnMoreAboutLink = driver.findElements(By.xpath(learnMoreLink));
 		
@@ -356,8 +356,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			key = key.toLowerCase().trim();
 			//key = key.replace(",", "");
 			columnName = columnName.toLowerCase().trim();
-			if(columnName.contains("%"))
-				System.out.println();
+			if(key.contains("%"))
+				key = key.replaceAll("\\s+", "");
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A"))) {
 				counter++;
 				if(key.contains(columnName)) {
@@ -421,8 +421,6 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					
 				}else if(columnName.contains(key)) {
 					counter++;
-					columnName= columnName.replace("\n", "").replaceAll("\\s+", "");
-					key = key.replace("\n", "").replaceAll("\\s+", "");
 					if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 						flag = true;break;
 					}else {
@@ -439,7 +437,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 		if(counter == 0) {
 			flag = false;
-			System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:4 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
+			System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:5 "+columnName+" Excel: "+benefitValue+" | UI: BENEFIT NOT FOUND");
 			tmpUIString2 = "BENEFIT NOT FOUND ON THE UI";
 		}
 		
