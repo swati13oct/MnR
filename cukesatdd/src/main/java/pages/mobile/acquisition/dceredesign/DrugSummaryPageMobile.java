@@ -453,17 +453,17 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void validatePremiumForPlan(String premium, String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			scrollToView(mapdPlanToggle);
-			validateNew(mapdPlanToggle);
+			//validateNew(mapdPlanToggle,10);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
 		} else if (plantype.equalsIgnoreCase("PDP")) {
 			scrollToView(pdpPlanToggle);
-			validateNew(pdpPlanToggle);
+			//validateNew(pdpPlanToggle,10);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
 		} else {
 			scrollToView(snpPlanToggle);
-			validateNew(snpPlanToggle);
+			//validateNew(snpPlanToggle,10);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
 		}

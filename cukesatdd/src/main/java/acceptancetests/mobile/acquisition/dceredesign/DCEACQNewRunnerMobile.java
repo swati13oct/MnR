@@ -368,6 +368,7 @@ public class DCEACQNewRunnerMobile {
 
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 
 		DrugDetailsPageMobile drugDetailsPage = plandetailspage.clickPrescriptionBenifitTab();
 	}
@@ -527,8 +528,7 @@ public class DCEACQNewRunnerMobile {
 
 	@Then("^user should be able to see Return to profile link on summary page$")
 	public void user_should_be_able_to_see_Return_to_profile_link_on_summary_page() {
-		
-		
+
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);

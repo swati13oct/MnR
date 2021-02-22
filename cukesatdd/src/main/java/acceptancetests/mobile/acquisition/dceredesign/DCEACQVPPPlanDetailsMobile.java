@@ -221,6 +221,8 @@ public class DCEACQVPPPlanDetailsMobile {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
 		} else
 			Assert.fail("VPP Plan Details not loaded");
+		
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails,drugDetailsPage);
 
 	}
 

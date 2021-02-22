@@ -125,10 +125,10 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public DrugSummaryPageMobile clickContinueBtn() {
 		validateNew(continueBtn);
 		jsClickNew(continueBtn);
+		waitForPageLoadSafari();
+		//CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
-		validateNew(reviewDrugCostPageHeading, 30);
-
-		if (validateNew(reviewDrugCostPageHeading)) {
+		if(validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
 		}
 		Assert.fail("DCE - Drug Summary Page is not displayed");
@@ -180,7 +180,8 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			jsClickNew(planYearDropdown);
 			Select planYear = new Select(planYearDropdown);
 			planYear.selectByIndex(1);
-		}
+		}else
+			return ;
 	}
 
 	public void enterZipCode(String zipcode) {

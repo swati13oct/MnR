@@ -44,6 +44,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
+	
+
+	@FindBy(xpath = "//span[text()='Add Drugs']/parent::button")
+	private WebElement addDrugsBtn;
 
 	@FindBy(css = "a.add-provider")
 	private WebElement addprovider;
@@ -116,13 +120,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public AcquisitionHomePageMobile addPlan() {
-		//addPlans.click();
+		// addPlans.click();
 		scrollToView(addPlans);
 		jsClickMobile(addPlans);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
-		//	System.out.println("validating zipcode and returning value-----------------------------------------------------");
+			// System.out.println("validating zipcode and returning
+			// value-----------------------------------------------------");
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
@@ -187,12 +192,17 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@dtmid,'acq_visitor_profile')]//span[contains(text(),'Get Started')]")
 	private WebElement GetStartedDrug;
-	
 
 	public GetStartedPageMobile addDrug_DCERedesign() {
 
-		// addrugs.click();
-		jsClickNew(GetStartedDrug);
+		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			jsClickNew(addrugs);
+		} else {
+			jsClickNew(addDrugsBtn);
+		}
+		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
@@ -205,7 +215,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public void deletePlans(String plans) {
 		if (validate(profileMultiYear, 10)) {
-		//	profileNxtYrPlans.click();
+			// profileNxtYrPlans.click();
 			jsClickMobile(profileNxtYrPlans);
 			if (driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0)
 				driver.findElement(By.xpath(
@@ -411,10 +421,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public VPPPlanSummaryPageMobile backToPlans() {
 		try {
-			//Thread.sleep(10000);
-			//SbackToPlans.click();
+			// Thread.sleep(10000);
+			// SbackToPlans.click();
 			jsClickMobile(backToPlans);
-		
+
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/plan-summary")) {
 				return new VPPPlanSummaryPageMobile(driver);
@@ -434,22 +444,23 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 		return null;
 	}
-	
-	@FindBy(xpath = "//*[@id='saved-drugs']/../..//*[text()='Get Started']/..")
+
+	@FindBy(xpath = "//span[text()='Add Drugs']")
 	public WebElement addDrugsGlobal;
-	
+
 	public void clickAddDrugsGlobal() {
+		pageloadcomplete();
 		validateNew(addDrugsGlobal);
-		//addDrugsGlobal.click();
+		// addDrugsGlobal.click();
 		jsClickNew(addDrugsGlobal);
 	}
 
 	@FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]/img")
 	public WebElement expandDrugsPlanCard;
-	
+
 	@FindBy(xpath = "//*[text()='Edit Drugs']")
 	public WebElement editDrugsPlanCard;
-	
+
 	/**
 	 * click edit drugs from plan card
 	 */
@@ -457,17 +468,17 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		expandDrugsPlanCard.click();
 		editDrugsPlanCard.click();
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
 	public WebElement enterDrugInfoPlanCard;
-	
+
 	/**
 	 * click add drugs from plan card
 	 */
 	public void clickAddDrugsPlancardNew() {
 		enterDrugInfoPlanCard.click();
 	}
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
 	public WebElement backToDrugCostEstimatorLink;
 
@@ -493,8 +504,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}
-	
-	
+
 	public void validateAddedMsPlans(String planNames) {
 		try {
 			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
@@ -511,8 +521,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public VisitorProfilePageMobile validateVisitorProfilePage() {
 		if (driver.getCurrentUrl().contains("profile")) {
 			validate(btnCreateProfile);
