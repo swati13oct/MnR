@@ -1,4 +1,3 @@
-
 package acceptancetests.acquisition.agentflow;
 
 import java.util.HashMap;
@@ -159,5 +158,4 @@ public class RequestAgentApptCommonStepDefinition {
 	}
 	
 }
-
 

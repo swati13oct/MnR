@@ -1997,14 +1997,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public ComparePlansPageBlayerMobile clickOnCompareLink() {
+	public ComparePlansPageBlayer clickOnCompareLink() {
 
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
 		compareLinks.get(1).click();
 
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
-			return new ComparePlansPageBlayerMobile(driver);
+			return new ComparePlansPageBlayer(driver);
 		return null;
 	}
 

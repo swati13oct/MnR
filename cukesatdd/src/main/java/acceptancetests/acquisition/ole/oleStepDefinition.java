@@ -1,5 +1,3 @@
-
-  
 package acceptancetests.acquisition.ole;
 
 import java.util.ArrayList;
@@ -1655,7 +1653,10 @@ public class oleStepDefinition {
 		/*	
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 			SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page(arg1, null);
+
+
 			if (specialElectionPeriodPage != null) {
+
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 						specialElectionPeriodPage);
 				System.out.println("OLE SEP Page is Displayed");
@@ -3607,7 +3608,10 @@ public void the_user_navigates_to_SEP_Page_Medicaid_Effective_Date(DataTable Med
 	/*	
 	PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.navigate_to_SEP_page(arg1, null);
+
+
 		if (specialElectionPeriodPage != null) {
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 					specialElectionPeriodPage);
 			System.out.println("OLE SEP Page is Displayed");

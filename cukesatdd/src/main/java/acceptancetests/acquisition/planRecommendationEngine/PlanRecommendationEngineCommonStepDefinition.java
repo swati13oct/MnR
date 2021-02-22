@@ -1,40 +1,4 @@
-
 package acceptancetests.acquisition.planRecommendationEngine;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
-import org.openqa.selenium.WebDriver;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineSpecialNeedsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineTravelPage;
-
-import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
-
-
 
 import java.util.HashMap;
 import java.util.List;
@@ -61,7 +25,7 @@ import pages.acquisition.commonpages.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-
+import pages.acquisition.commonpages.PlanRecommendationEngineDrugsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
@@ -294,4 +258,3 @@ public class PlanRecommendationEngineCommonStepDefinition {
 
 }
 	
-

@@ -1,4 +1,3 @@
-
 package acceptancetests.acquisition.callChat;
 
 import java.util.LinkedHashMap;
@@ -160,4 +159,3 @@ public class SAMIconsCommonStepDefinition {
 	}
 
 }
-

@@ -3149,6 +3149,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
@@ -3205,6 +3206,7 @@ public class VppStepDefinitionUpdatedAARP {
 				 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
 	                Iterator<Cell> cellIterator = row.cellIterator();
 	                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
+
 	                //looping through columns until an empty column is found
 	                while (cellIterator.hasNext()) 
 	                {
@@ -3262,6 +3264,7 @@ public class VppStepDefinitionUpdatedAARP {
 			outputStream.close();
 			e.printStackTrace();
 		}
+
 	}*/
 
 	//--------------------------------------------

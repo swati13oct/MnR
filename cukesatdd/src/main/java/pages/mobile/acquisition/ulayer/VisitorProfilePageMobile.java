@@ -137,24 +137,37 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public void validateAddedPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		
-		if(StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania") || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico") || 
-				StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			
-			for (String plan: listOfTestPlans) {
-				Assert.assertEquals(plan, driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]")).getText().trim());
-				Assert.assertTrue(driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]/following::a[contains(@class,'add-provider')][1]")).isDisplayed());
-				System.out.println(driver.findElement(By.xpath("//h4[contains(text(),'"+plan+"')]")).getText());
+
+		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+
+			for (String plan : listOfTestPlans) {
+				Assert.assertEquals(plan,
+						driver.findElement(By.xpath("//h4[contains(text(),'" + plan + "')]")).getText().trim());
+				Assert.assertTrue(driver.findElement(By.xpath(
+						"//h4[contains(text(),'" + plan + "')]/following::a[contains(@class,'add-provider')][1]"))
+						.isDisplayed());
+				System.out.println(driver.findElement(By.xpath("//h4[contains(text(),'" + plan + "')]")).getText());
 			}
-		}else {
-			for (String plan: listOfTestPlans) {
-				Assert.assertEquals(plan, driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]")).getText().trim());
-				Assert.assertTrue(driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]/following::span[contains(@class,'search-provider')]")).isDisplayed());
-				System.out.println(driver.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+plan+"')]")).getText());
+		} else {
+			for (String plan : listOfTestPlans) {
+				Assert.assertEquals(plan,
+						driver.findElement(By.xpath(
+								"//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
+								.getText().trim());
+				Assert.assertTrue(driver
+						.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"
+								+ plan + "')]/following::span[contains(@class,'search-provider')]"))
+						.isDisplayed());
+				System.out.println(driver
+						.findElement(By.xpath(
+								"//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
+						.getText());
 			}
 		}
 	}
-	
+
 	public PlanDetailsPageMobile navigateToPlanDetails(String planName) {
 		try {
 			driver.findElement(By.xpath("//h4[text()='" + planName + "']")).click();

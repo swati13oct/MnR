@@ -307,22 +307,22 @@ public class MRScenario {
 				csvName = "MemberRedesign-VBF.csv";
 			} else if (environment.equalsIgnoreCase("team-h") || environment.equalsIgnoreCase("team-atest")) {
 				csvName = "UMS-Member-Type.csv";
-			}
-
-			/*
-			 * note: Dec2018 - comment out because this section caused stage run not to use
-			 * UMS-Member-Type.csv else{ if
-			 * (tagName.equalsIgnoreCase("@benefitsAndCoverage")) { csvName =
-			 * "benefitsAndCoverage.csv"; }
-			 * 
-			 * else if (tagName.equalsIgnoreCase("@profileAndPreferences")) { csvName =
-			 * "profileAndPreferences.csv"; }
-			 * 
-			 * else if (tagName.equalsIgnoreCase("@claimsSummary")) { csvName =
-			 * "claimsSummary.csv"; }
-			 * 
-			 * }
-			 */
+			} /*
+				 * 
+				 * 
+				 * note: Dec2018 - comment out because this section caused stage run not to use
+				 * UMS-Member-Type.csv else{ if
+				 * (tagName.equalsIgnoreCase("@benefitsAndCoverage")) { csvName =
+				 * "benefitsAndCoverage.csv"; }
+				 * 
+				 * else if (tagName.equalsIgnoreCase("@profileAndPreferences")) { csvName =
+				 * "profileAndPreferences.csv"; }
+				 * 
+				 * else if (tagName.equalsIgnoreCase("@claimsSummary")) { csvName =
+				 * "claimsSummary.csv"; }
+				 * 
+				 * }
+				 */
 		}
 		if (csvName != null)
 			return csvName;
@@ -454,7 +454,6 @@ public class MRScenario {
 		} catch (Exception e) {
 			System.out.println("Already data not available in the mbr DB");
 		} finally {
-
 			rs1.close();
 			stmt.close();
 			con.close();
@@ -671,11 +670,14 @@ public class MRScenario {
 			if (environment.contains("stage") || environment.equals("stage-aarp")
 					|| environment.equals("offline-stage-aarp"))
 				domain = "uhc.com";
-			else if (environment.equals("team-atest") || environment.equals("team-e") || environment.equals("team-t")
-					|| environment.equals("team-v1") || environment.equals("team-acme")
-					|| environment.equals("team-voc") || environment.equals("team-acme")
-					|| environment.contains("digital-uat") || environment.equals("team-chargers")
-					|| environment.contains("chargers"))
+			else if (environment.contains("mnr-acq-ci") || environment.equals("team-atest")
+					|| environment.equals("team-e") || environment.equals("team-t") || environment.equals("team-v1")
+					|| environment.equals("team-acme") || environment.equals("team-voc")
+					|| environment.equals("team-acme") || environment.contains("digital-uat")
+					|| environment.equals("team-chargers") || environment.contains("chargers")
+					|| environment.equals("team-avengers-plm") || environment.contains("team-avengers-plm")
+					|| environment.contains("chargers-qa") || environment.contains("team-uhc-rx"))
+
 				domain = "ocp-elr-core-nonprod.optum.com";
 
 			else if (environment.contains("mnr-acq"))
@@ -801,7 +803,9 @@ public class MRScenario {
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		try {
-			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+			webDriver = new
+
+			RemoteWebDriver(new URL(URL), capabilities);
 			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
 			System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
 			getJobURL(getSessionId());
@@ -1011,7 +1015,7 @@ public class MRScenario {
 		String browserVersion = (null == System.getProperty(CommonConstants.BROWSER_VERSION) ? "latest"
 				: System.getProperty(CommonConstants.BROWSER_VERSION));
 		System.out.println("browser version after " + browserVersion);
-		
+
 		String screenResolution = (null == System.getProperty(CommonConstants.SCREEN_RESOLUTION) ? "1920x1080"
 				: System.getProperty(CommonConstants.SCREEN_RESOLUTION));
 
@@ -1055,16 +1059,17 @@ public class MRScenario {
 
 			webDriver.get("google.com");
 
-			} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
-				Map<String, Object> chromeOptions = new HashMap<String, Object>();
-				//chromeOptions.put("binary", pathToBinary);
-				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-				//System.setProperty("webdriver.chrome.driver", pathToBinary);
-				System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
-				webDriver = new ChromeDriver();
-				saveBean(CommonConstants.WEBDRIVER, webDriver);
-				return webDriver;
+		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
+			Map<String, Object> chromeOptions = new HashMap<String, Object>();
+			// chromeOptions.put("binary", pathToBinary);
+			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
+			// System.setProperty("webdriver.chrome.driver", pathToBinary);
+			System.setProperty("webdriver.chrome.driver",
+					"C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
+			webDriver = new ChromeDriver();
+			saveBean(CommonConstants.WEBDRIVER, webDriver);
+			return webDriver;
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -1128,10 +1133,10 @@ public class MRScenario {
 				capabilities.setCapability("version", browserVersion);
 				capabilities.setCapability("screenResolution", "1920x1080");
 				capabilities.setCapability("maxDuration", "3600");
-			}else if (browserName.equalsIgnoreCase("safari")) {
+			} else if (browserName.equalsIgnoreCase("safari")) {
 				System.out.println("Inside safari");
 				capabilities = DesiredCapabilities.safari();
-				
+
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
 				sauceOptions.setCapability("maxDuration", 5400);
@@ -1182,7 +1187,7 @@ public class MRScenario {
 		return webDriver;
 
 	}
-	
+
 	public String getSessionId() {
 		return sessionId;
 	}

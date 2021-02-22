@@ -67,8 +67,8 @@ public class SAMIconsStepDefinitionUHC {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
-		
 		aquisitionhomepage.verifyChatpopup();
+		aquisitionhomepage.validateChatpopupconnect();	
 		
 	}
 

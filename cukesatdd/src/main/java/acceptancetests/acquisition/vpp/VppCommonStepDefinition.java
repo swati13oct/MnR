@@ -50,18 +50,15 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
-
 import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
-
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.vppforaep.VppCommonPage;
-
 
 /**
  * Functionality: VPP flow for AARP site
@@ -212,7 +209,7 @@ public class VppCommonStepDefinition {
 		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
@@ -350,7 +347,17 @@ public class VppCommonStepDefinition {
 
 	}
 
+	@Then("^the user clicks on back to all plans link and validates its redirection to Plan Summary$")
+	public void User_clicks_BackToPlansLink_and_validates_redirection() {
 
+		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+		if (plansummaryPage != null) {
+			Assert.assertTrue(true);
+		} else
+			Assert.fail("Error in validating the Plan Summary Page");
+	}
 
 	@Then("^the user validates below plan benefit values for the above selected plan$")
 	public void user_validates_planBenefitValues_inAARP(DataTable givenAttributes) {
@@ -383,14 +390,10 @@ public class VppCommonStepDefinition {
 			plansummaryPage.validatesOutOfPocketMaximum(planName, outOfPocketMaximum);
 
 		} else {
-			plansummaryPage.validateAnnualDeductible(planName, annualDeductible);}
+			plansummaryPage.validateAnnualDeductible(planName, annualDeductible);
 
 		}
-
-		
-	/*	@Then("^the user clicks on back to all plans link and validates its redirection to Plan Summary$")
-		public void User_clicks_BackToPlansLink_and_validates_redirection() {*/
-
+	}
 
 	@Then("^the user hover overs the tool tip for Why is my premium 0 and validates the text$")
 	public void toolTip_premium0_validateText() throws Throwable {
@@ -2129,28 +2132,6 @@ public class VppCommonStepDefinition {
 		} else {
 			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
 		}
-	
-				/*@Then("^user validates the resume application URL$")
-		public void resume_application_processed(DataTable givenAttributes) throws Throwable{
-			System.out.println("***The user validates the resume application processed***");
-			List<DataTableRow> memberAttributesRow = givenAttributes
-					.getGherkinRows();
-			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-						memberAttributesRow.get(i).getCells().get(1));
-			}
-			String FirstName = memberAttributesMap.get("Firstname");
-			String LastName = memberAttributesMap.get("Lastname");
-			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.ResumeApplicationButtonValidation(FirstName, LastName);
-
-		}*/
-		
-	
-		
-		
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);

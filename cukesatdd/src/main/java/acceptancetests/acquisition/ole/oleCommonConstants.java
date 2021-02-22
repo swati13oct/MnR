@@ -17,7 +17,7 @@ public class oleCommonConstants {
 	public static final String OLE_COUNTY = "county";
 	public static final String OLE_PLAN_YEAR = "planyear";
 	public static final String OLE_PLAN_PREMIUM = "premium";
-	public static final String OLE_TFN = "tty";
+	public static final String OLE_TFN = "tfn";
 	public static final String ACQ_SITE_NAME = "acq_site";
 	public static final String ALREADY_ENROLLED_FLAG = "true";
 	//member details

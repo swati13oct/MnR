@@ -1,14 +1,4 @@
-
 package acceptancetests.acquisition.dceredesign;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
-
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +28,4 @@ public class DCERedesignCommonConstants {
 	public static final String YOUPAYLIST_ALLDRUGS = "youpaylistalldrugs";
 	public static final String PLANTYPE = "plantype";
 	public static final String PLANNAME = "planname";
-	public static final String SELECT_GENERIC_FLOW_NAME = null;
 }
-

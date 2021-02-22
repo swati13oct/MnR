@@ -1654,7 +1654,7 @@ public class VppPlanDetailMobile {
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_YEAR);
 
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		plansummaryPage = plansummaryPage.navagateToShopAPlanAndFindZipcode("90210", "Los Angeles County", "NO");
+		plansummaryPage = plansummaryPage.navagateToShopAPlanAndFindZipcode("80001", "Jefferson County", "NO");
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
@@ -1710,7 +1710,7 @@ public class VppPlanDetailMobile {
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_YEAR);
 
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		plansummaryPage = plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("90210", "Los Angeles County",
+		plansummaryPage = plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("80001", "Jefferson County",
 				"NO");
 
 		if (plansummaryPage != null) {
@@ -1847,7 +1847,7 @@ public class VppPlanDetailMobile {
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_YEAR);
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		plansummaryPage = plansummaryPage.navagateToShopAPlanAndFindZipcode("90210", "Los Angeles County", "NO");
+		plansummaryPage = plansummaryPage.navagateToShopAPlanAndFindZipcode("80001", "Jefferson County", "NO");
 
 		if (plansummaryPage != null) {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
@@ -1892,7 +1892,7 @@ public class VppPlanDetailMobile {
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_YEAR);
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		plansummaryPage = plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("90210", "Los Angeles County",
+		plansummaryPage = plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("80001", "Jefferson County",
 				"NO");
 
 		if (plansummaryPage != null) {

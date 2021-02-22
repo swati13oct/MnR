@@ -79,15 +79,12 @@ public class VisitorProfileStepDefinition_AARP {
 	@And("^the user clicks on the add plans button in the profile in AARP site$")
 	public void the_user_clicks_on_the_add_plans_button_in_the_profile_in_AARP_site() throws Exception {
 
-
-
-
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		//AcquisitionHomePage acqPage = visitorProfilePage.addPlan();
 		AcquisitionHomePage acqPage = visitorProfilePage.findPlans();
-
+		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acqPage);
 	}
 
@@ -133,9 +130,7 @@ public class VisitorProfileStepDefinition_AARP {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("Test Plans");
-
 		System.out.println("Plan names"+savePlanNames);
-
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedPlans(savePlanNames);
@@ -255,12 +250,9 @@ public class VisitorProfileStepDefinition_AARP {
 		
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-
-
 		visitorProfile.signIn(username, password);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
-
 
 	@Then("^user clicks on back to plan on VP authenticated AARP site$")
 
@@ -293,7 +285,6 @@ public class VisitorProfileStepDefinition_AARP {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans();
 	}
-
 
 	@And("^enroll In Plan should not be clickable on Visitor Profile page in Agent mode on aarp$")
 	public void next_button_should_not_be_clickable_on_OLE_welcome_page_in_Agent_mode() {
@@ -388,7 +379,6 @@ public class VisitorProfileStepDefinition_AARP {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummary);
 	}
 
-
 	@And("^user clicks on home on VP authenticated AARP site$")
 	public void user_clicks_on_home_on_VP_authenticated_AARP_site() {
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
@@ -410,5 +400,4 @@ public class VisitorProfileStepDefinition_AARP {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateBackToDceLink();
 	}
-
 }

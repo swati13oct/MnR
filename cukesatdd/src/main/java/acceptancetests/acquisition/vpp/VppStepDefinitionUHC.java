@@ -25,6 +25,8 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.bluelayer.FindCarePage;
 import pages.acquisition.bluelayer.MultiCountyModalPage;
 import pages.acquisition.bluelayer.PlanComparePage;
 import pages.acquisition.bluelayer.PlanDetailsPage;
@@ -36,11 +38,6 @@ import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.ulayer.ComparePlansPage;
-import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
-import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
-import pages.mobile.acquisition.ulayer.FindCarePageMobile;
 
 /**
  * Functionality: VPP UHC site
@@ -67,10 +64,8 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
-
 	@Given("^the user navigates to following UHC medicare solutions site page$")
-	public void the_user_navigates_to_following_UHC_medicare_acquisition_site_page(DataTable givenAttributes)
-			throws Throwable {
+	public void the_user_navigates_to_following_UHC_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -79,22 +74,11 @@ public class VppStepDefinitionUHC {
 		}
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : " + path);
+		System.out.print("Path to Acq page : "+path);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPath(path);
 	}
-
-	@Given("^the user is on the medicare site landing page$")
-	public void the_user_on_UHC_Medicaresolutions_WebSite() {
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	}
-
 	/**
 	 * @toDo : the user enters the zip code to search plans
 	 */
@@ -130,7 +114,7 @@ public class VppStepDefinitionUHC {
 		}
 
 	}
-
+	
 	@When("^the user enters zipcode on health plans page in UMS site$")
 	public void enters_zipcode_details_in_UMS_site(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -149,7 +133,7 @@ public class VppStepDefinitionUHC {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		VPPPlanSummaryPage plansummaryPage = null;
-		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode, county, isMultiCounty);
+		plansummaryPage = aquisitionhomepage.searchPlanOnHealthPlansPage(zipcode,county,isMultiCounty);
 
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
@@ -219,14 +203,16 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		plansummaryPage.viewPlanSummary(plantype);
-		// plansummaryPage.handlePlanYearSelectionPopup();
+		//plansummaryPage.handlePlanYearSelectionPopup();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
-
+	
+	
 	@When("user views plans of the below plan type in UMS site for current year$")
 	public void user_performs_planSearch_in_UMS_site_current_year(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -238,17 +224,18 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		
 		plansummaryPage.viewPlanSummary(plantype);
 		plansummaryPage.CheckClick_CurrentYear_Plans();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
-
+	
 	@When("user views plans of the below plan type in UMS site for next year$")
 	public void user_performs_planSearch_in_UMS_site_next_year(DataTable givenAttributes) {
-
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+	
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -260,22 +247,25 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/*
-		 * try { Thread.sleep(7000); } catch (InterruptedException e) { // TODO
-		 * Auto-generated catch block e.printStackTrace(); }
-		 */
+		/*try {
+			Thread.sleep(7000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		plansummaryPage.viewPlanSummary(plantype);
-		// plansummaryPage.CheckClick_NextYear_Plans();
-		if (!plantype.equalsIgnoreCase("MS"))
+		//plansummaryPage.CheckClick_NextYear_Plans();
+		if(!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 	}
-
+	
 	@When("the user selects plan year for the UMS site$")
 	public void user_selects_plan_year(DataTable givenAttributes) {
-
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+	
+		List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -287,10 +277,10 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 	}
-
+	
 	@And("^the user selects future plan year for the UHC site$")
 	public void user_selects_future_plan_year_UHC_Sites(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -302,7 +292,7 @@ public class VppStepDefinitionUHC {
 		}
 
 		String planYear = givenAttributesMap.get("Plan Year");
-
+		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
@@ -356,8 +346,7 @@ public class VppStepDefinitionUHC {
 	}
 
 	@Then("^the user validates following PDF link is displayes with correct document code for UHC$")
-	public void the_user_validates_following_PDF_link_is_displayes_with_correct_document_code_for_UHC(
-			DataTable givenAttributes) throws Throwable {
+	public void the_user_validates_following_PDF_link_is_displayes_with_correct_document_code_for_UHC(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -372,15 +361,13 @@ public class VppStepDefinitionUHC {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
-		boolean validationFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(PDFtype, DocumentCode);
-		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",
-				validationFlag);
+		boolean validationFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(PDFtype,DocumentCode);
+		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",validationFlag);
 
 	}
-
+	
 	@Then("^the user click on PDF link and validates document code in URL for UHC$")
-	public void the_user_click_on_PDF_link_and_validates_document_code_in_URL_for_UHC(DataTable givenAttributes)
-			throws Throwable {
+	public void the_user_click_on_PDF_link_and_validates_document_code_in_URL_for_UHC(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -394,10 +381,10 @@ public class VppStepDefinitionUHC {
 
 		String DocumentCode = memberAttributesMap.get("DocumentCode");
 		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlink(PDFtype, DocumentCode);
-		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ", validationFlag);
+		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ",validationFlag);
 
 	}
-
+	
 	@When("^the user validates the pdf section for uhc$")
 	public void userValidatesPDFSection() {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
@@ -405,10 +392,9 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatePdfSection(planType);
 	}
-
+	
 	@Then("^the user validates the document code is present in the PDF for UHC$")
-	public void the_user_click_on_PDF_link_and_validates_document_code_in_PDF_for_UHC(DataTable givenAttributes)
-			throws Throwable {
+	public void the_user_click_on_PDF_link_and_validates_document_code_in_PDF_for_UHC(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -422,13 +408,12 @@ public class VppStepDefinitionUHC {
 
 		String DocumentCode = memberAttributesMap.get("DocumentCode");
 		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFText_ForDocCode(PDFtype, DocumentCode);
-		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF Text ", validationFlag);
+		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF Text ",validationFlag);
 
 	}
 
 	@Then("^the user view plan details of the above selected plan in UMS site vpp$")
-	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes)
-			throws InterruptedException {
+	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) throws InterruptedException {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
@@ -436,9 +421,9 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName, planType);
+		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName,planType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-
+		
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -446,7 +431,7 @@ public class VppStepDefinitionUHC {
 		} else
 			Assert.fail("Error in Loading the Plan Details Page");
 	}
-
+	
 	@Then("^the user view plan details of the first plan in the given plan type in UMS site vpp$")
 	public void the_user_view_plan_details_of_the_first_plan_in_UMS_site_vpp() {
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -459,6 +444,7 @@ public class VppStepDefinitionUHC {
 		} else
 			Assert.fail("Error in Loading the Plan Details Page");
 	}
+
 
 	@Then("^the user clicks on both top and bottom back to plans link and validates its redirection$")
 	public void the_user_clicks_on_both_topand_bottom_back_to_plans_link_and_validates_its_redirection()
@@ -538,8 +524,8 @@ public class VppStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:user clicks on add to compare box and validates that info shows 2 plans
-	 *            added
+	 * @toDo:user clicks on add to compare box and validates that info shows 2
+	 *            plans added
 	 */
 	@Then("^the user clicks on add to compare box and validates that info shows 2 plans added$")
 	public void I_check_compare_box_and_verify_2_plans() {
@@ -661,7 +647,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageBlayerMobile comparePlansPageblayer = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayer comparePlansPageblayer = plansummaryPage.clickOnCompareLink();
 		if (comparePlansPageblayer != null) {
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPageblayer);
 			// comparePlansPage.backToVPPPage();
@@ -675,7 +661,7 @@ public class VppStepDefinitionUHC {
 	@When("^the user validate the print and email link option in plan compare in UHS site$")
 	public void user_validate_print_and_email_link_option_in_plan_compare() {
 
-		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validateprintandemail();
 	}
@@ -686,7 +672,7 @@ public class VppStepDefinitionUHC {
 	@Then("^the user validating email and print option in plan compare in UHS site$")
 	public void user_validating_print_and_email_option_in_plan_compare() {
 
-		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingprintandemail();
 	}
@@ -697,20 +683,20 @@ public class VppStepDefinitionUHC {
 	@When("^the user validate thank you message in plan compare in UHS site$")
 	public void user_validate_thank_you_message_in_plan_compare() {
 
-		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatingthankyoumessage();
 	}
 
 	/**
-	 * @toDo:user clicks on back to all plans link and validate all three plans are
-	 *            selected
+	 * @toDo:user clicks on back to all plans link and validate all three plans
+	 *            are selected
 	 */
 
 	@Then("^the user clicks on back to all plans link and validates all three plans are selected$")
 	public void the_user_clicks_on_back_to_plans_link_and_validates_plans_are_selected() {
 
-		ComparePlansPageBlayerMobile comparePlansPage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer comparePlansPage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.TeamC_Plan_Compare_Page);
 		comparePlansPage.validatetopbacktoplanslink();
 	}
@@ -773,7 +759,7 @@ public class VppStepDefinitionUHC {
 				plansummaryPage.validateVPPPlanSummaryPage());
 		String SiteName = "UHG_ACQ";
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-
+	
 	}
 
 	/**
@@ -917,7 +903,7 @@ public class VppStepDefinitionUHC {
 	public void I_select_all_3_plans_to_compare_UHC() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		
 		plansummaryPage.checkAllMAPlans();
 		try {
 			Thread.sleep(3000);
@@ -925,7 +911,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -938,16 +924,16 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		if (planType.equals("MAPD")) {
-			// plansummaryPage.clickonViewPlans();
+			//plansummaryPage.clickonViewPlans();
 			plansummaryPage.checkAllMAPlans();
 			System.out.println("Selected All MAPD plans for Plan Compare");
 		} else if (planType.equals("PDP")) {
-			// plansummaryPage.clickOnPDPPlans();
+			//plansummaryPage.clickOnPDPPlans();
 			plansummaryPage.clickCompareChkBoxPDP();
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
-
-		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		
+		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -957,7 +943,7 @@ public class VppStepDefinitionUHC {
 
 	@And("^I Click on DCE link on Plan compare$")
 	public void I_Click_On_DCE_link_on_Plan_Compare() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -965,7 +951,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
+		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -975,7 +961,7 @@ public class VppStepDefinitionUHC {
 
 	@And("^I Click on Look up your doctor link on Plan compare$")
 	public void I_Click_on_Look_up_your_doctor_link_on_Plan_compare() throws InterruptedException {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -983,7 +969,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		FindCarePageMobile findCarePage = planComparePage.clickonLookUpYourDoctor();
+		FindCarePage findCarePage = planComparePage.clickonLookUpYourDoctor();
 		if (findCarePage != null) {
 			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			// comparePlansPage.backToVPPPage();
@@ -993,14 +979,14 @@ public class VppStepDefinitionUHC {
 
 	@And("^I click on Get Started on and Add Provider from find care page$")
 	public void I_click_on_Get_Started_and_Add_Provider_from_find_care_page() throws Exception {
-		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ComparePlansPageMobile planComparePage = findCarePage.getstarted();
+		ComparePlansPageBlayer planComparePage = findCarePage.getstarted();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -1010,7 +996,7 @@ public class VppStepDefinitionUHC {
 
 	@Then("^Verify provider is count is updated on plan compare page$")
 	public void Verify_provider_is_count_is_updated_on_plan_compare_page() throws Exception {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1052,9 +1038,10 @@ public class VppStepDefinitionUHC {
 		} else
 			Assert.fail("Error in validating the OLE Campaign Landing");
 	}
-
+	
 	@Given("^the user is on UHC medicare acquisition site VPP page after hits Campaign URL$")
 	public void the_user_on_aarpmedicareplans_VPPPlanSummaryPage_Campaign_landing_page() throws Throwable {
+
 
 		String County = "St. Louis County";
 		String ZipCode = "63043";
@@ -1078,8 +1065,8 @@ public class VppStepDefinitionUHC {
 			Assert.assertTrue(true);
 		} else
 			Assert.fail("Error in validating the OLE Campaign Landing");
-
-	}
+		 
+		}
 
 	@Then("^the user validates the following Medical Benefits for the plan in Plan Compare Page on UHC$")
 	public void the_user_validates_the_following_Medical_benefits_for_the_plan_in_Plan_Compare_Page(
@@ -1117,6 +1104,7 @@ public class VppStepDefinitionUHC {
 		return memberAttributesMap;
 	}
 
+
 	@Then("^user validates selected plans can be saved as favorite on UHC site$")
 	public void user_validates_selected_plan_can_be_saved_as_favorite_on_AARP_site(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -1127,8 +1115,8 @@ public class VppStepDefinitionUHC {
 		String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 		String planYear = memberAttributesMap.get("Plan Year");
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
-
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR,planYear);
+		
 		// ----- MA plan type ----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
@@ -1182,7 +1170,7 @@ public class VppStepDefinitionUHC {
 			break;
 		}
 	}
-
+	
 	@Then("^user saves two MS plans as favorite on UHC site$")
 	public void user_saves_two_MS_plans_as_favorite_on_UHC_site(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -1216,7 +1204,7 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 
 	}
-
+	
 	@And("^user validate pdf link on UHC Site$")
 	public void user_validate_pdf_link_on_AARP_Site(DataTable planNames) {
 		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
@@ -1227,8 +1215,7 @@ public class VppStepDefinitionUHC {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("MS Test Plans");
-		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
-				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedPlansPDFLinks(savePlanNames);
 	}
 
@@ -1246,7 +1233,7 @@ public class VppStepDefinitionUHC {
 		String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
-
+		
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
@@ -1291,7 +1278,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site$")
@@ -1307,7 +1294,7 @@ public class VppStepDefinitionUHC {
 		String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
-
+		
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
 		plansummaryPage = plansummaryPage.navagateToShopAPlanAndFindZipcode("90210", "Los Angeles County", "NO");
 
@@ -1347,7 +1334,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change within VPP page on UHC site$")
@@ -1363,7 +1350,7 @@ public class VppStepDefinitionUHC {
 		String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
-
+		
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
 		plansummaryPage = plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("90210", "Los Angeles County",
 				"NO");
@@ -1394,7 +1381,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 
 	@Then("^user validates ability to unsave a saved plan on UHC site$")
@@ -1406,7 +1393,7 @@ public class VppStepDefinitionUHC {
 		String pdp_plans = memberAttributesMap.get("PDP Test Plans");
 		String snp_plans = memberAttributesMap.get("SNP Test Plans");
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
-
+		
 		// note: the second plan in the list will be unsaved
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
@@ -1423,8 +1410,8 @@ public class VppStepDefinitionUHC {
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
-		plansummaryPage.validateAbilityToUnSavePlans(snp_plans, planType);
+		System.out.println("Proceed to unsave the " + planType + " second plan from the input"); 
+		plansummaryPage.validateAbilityToUnSavePlans(snp_plans, planType); 
 	}
 
 	@Then("^user validates unsave favorite plans will be stored within same session after zipcode change from Home on UHC site$")
@@ -1440,7 +1427,7 @@ public class VppStepDefinitionUHC {
 		String pdp_savePlanNames = memberAttributesMap.get("PDP Test Plans");
 		String snp_savePlanNames = memberAttributesMap.get("SNP Test Plans");
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
-
+		
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
@@ -1485,7 +1472,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("Proceed to validate " + planType + " unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
+		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType); 
 	}
 
 	@Then("^user validates unsave favorite plans will be stored within same session after zipcode change from Shop For a Plan on UHC site$")
@@ -1530,7 +1517,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
+		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType); 
 	}
 
 	@Then("^user validates unsave favorite plans will be stored within same session after zipcode change within VPP page on UHC site$")
@@ -1580,7 +1567,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
+		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType); 
 	}
 
 	@Then("^user validates email option on UHC site$")
@@ -1703,7 +1690,7 @@ public class VppStepDefinitionUHC {
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
-		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
+		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType); 
 	}
 	// ^^^ note: added for US1598162
 
@@ -1730,17 +1717,17 @@ public class VppStepDefinitionUHC {
 	}
 
 	@Then("^the user clicks on resume application button")
-	public void click_resume_application() throws Throwable {
-
+	public void click_resume_application()throws Throwable {
+		
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.ResumeApplicationButton();
 
 	}
-
+	
 	@Then("^the user navigates to next page to locate resume application button")
-	public void click_resume_application(DataTable givenAttributes) throws Throwable {
+	public void click_resume_application(DataTable givenAttributes)throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1754,15 +1741,11 @@ public class VppStepDefinitionUHC {
 		System.out.println("***the user clicks on resume application button***");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		// plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
-
 		plansummaryPage.MedSupFormValidation_2ndTime(DateOfBirth, zipcode);
-
 		plansummaryPage.ResumeApplicationButton();
 
 	}
-
+	
 	@And("^the user signs in with optum Id credentials to resume application in UHC site$")
 	public void the_user_signs_in_with_optum_Id_credentials_resume_application_in_AARP_site(DataTable credentials) {
 		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
@@ -1774,14 +1757,13 @@ public class VppStepDefinitionUHC {
 		}
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
-
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		// plansummaryPage.signIn(username, password);
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		//plansummaryPage.signIn(username, password);
 	}
 
 	@Then("^the user will navigate to locate resume application button")
-	public void click_resume_application_3(DataTable givenAttributes) throws Throwable {
+	public void click_resume_application_3(DataTable givenAttributes)throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1799,9 +1781,9 @@ public class VppStepDefinitionUHC {
 		plansummaryPage.ResumeApplicationButton();
 
 	}
-
+	
 	@Then("^the user will proceed to next pages")
-	public void the_user_will_proceed_to_next_pages(DataTable givenAttributes) throws Throwable {
+	public void the_user_will_proceed_to_next_pages(DataTable givenAttributes)throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -1838,10 +1820,9 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		/*
-		 * if (applicationType.equalsIgnoreCase("Retrieve")) { ApplicationID =
-		 * memberAttributesMap.get("ApplicationID"); }
-		 */
+		/*if (applicationType.equalsIgnoreCase("Retrieve")) {
+			ApplicationID = memberAttributesMap.get("ApplicationID");
+		}*/
 		plansummaryPage.EnterDataForResumeApp(ApplicationID, DOB, zipcode);
 
 	}
@@ -1884,7 +1865,7 @@ public class VppStepDefinitionUHC {
 
 	@And("^I Click on DCE link on Plan compare for UHC$")
 	public void I_Click_On_DCE_link_on_Plan_Compare_for_UHC() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1892,7 +1873,7 @@ public class VppStepDefinitionUHC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
+		DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -1909,8 +1890,8 @@ public class VppStepDefinitionUHC {
 	}
 
 	/**
-	 * @toDo:the user validates the functionality of email and print buttons on the
-	 *           plan Details Page
+	 * @toDo:the user validates the functionality of email and print buttons on
+	 *           the plan Details Page
 	 */
 	@Then("^the user validates the functionality of email and print buttons on the plan Details Page on uhc site$")
 	public void user_validates_the_functionality_of_emailandprintbuttons_on_the_plan_Details_Page() {
@@ -1934,7 +1915,7 @@ public class VppStepDefinitionUHC {
 
 	@Then("^user validates Drug information is reflected on plan compare page in UHC$")
 	public void user_validates_Drug_information_is_reflected_on_plan_compare_page_in_UHC() throws Exception {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		try {
 			Thread.sleep(3000);
@@ -1984,64 +1965,61 @@ public class VppStepDefinitionUHC {
 		}
 	}
 
+	
+	
 	@When("^verify Call SAM icon is visible or not on Plan Comapare on UHC site$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_UHC_Site() throws InterruptedException {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSam();
 	}
-
+	
+	
 	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site$")
-	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC()
-			throws InterruptedException {
-
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC() throws InterruptedException {
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSamContent();
-
+		
 	}
-
+	
+	
 	@Then("^user verify the popup and content on Plan Comapare on UHC site$")
 	public void user_verify_the_popup_and_content_PlanCompare_UHC() throws InterruptedException {
-
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateCallpopup();
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateCallpopup();	
 	}
-
+	
 	@When("^verify Chat SAM icon is visible or not on Plan Comapare on UHC site$")
 	public void verify_Chat_SAM_icon_is_visible_or_not_PlanCompare_UHC() throws InterruptedException {
-
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		ComparePlansPageBlayerMobile ChatIcon = planComparePage.validateChatSam();
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+		ComparePlansPageBlayer ChatIcon  = planComparePage.validateChatSam();
 		if (ChatIcon != null) {
 			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, ChatIcon);
 			Assert.assertTrue(true);
 			System.out.println("TFN Widget is Displayed");
-		} else {
+		}
+		else{
 			Assert.fail("TFN Widget is NOT Displayed");
 		}
 	}
-
+	
 	@And("^verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site$")
-	public void verify_Chat_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC()
-			throws InterruptedException {
-
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	public void verify_Chat_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC() throws InterruptedException {
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateChatSamContent();
-
+		
 	}
-
+	
+	
 	@Then("^user verify the Chat original state on UHC site$")
 	public void user_verify_the_Chat_original_state_PlanCompare_UHC() throws InterruptedException {
-
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+				
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateChatSam();
 	}
-
 	@Then("^the user validates the following Additional Benefits of Plan for the plan in UMS$")
 	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_UMS(
 			DataTable givenAttributes) throws Throwable {
@@ -2083,7 +2061,7 @@ public class VppStepDefinitionUHC {
 		Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "
 				+ monthlyPremium + " " + yearlyPremium, validationFlag);
 	}
-
+	
 	@Then("^the user click on Prescription Drug Benefits and validates in UHC site$")
 	public void the_user_click_on_Prescription_Drug_Benefits_and_validates_in_UHC_site() throws Throwable {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
@@ -2141,53 +2119,53 @@ public class VppStepDefinitionUHC {
 		plansummaryPage.CheckClick_CurrentYear_Plans();
 	}
 
+	
 	@Then("^verify plan compare page is loaded on UHC$")
 	public void verify_plan_compare_page_is_loaded_on_UHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlanComparePage();
 	}
-
+	
 	@Then("^click on back to plans on plan compare page for UHC$")
 	public void click_on_back_to_plans_on_plan_compare_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnBacktoPlans();
 	}
-
+	
 	@Then("^Verify the Plan compare checkbox should be unchecked for the removed plan for UHC$")
 	public void verify_the_Plan_compare_checkbox_should_be_unchecked_for_the_removed_plan_for_UHC() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyPlanComapreCheckboxIsUnchecked();
 	}
-
+	
 	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare and click on compare plan link in UHC$")
-	public void i_select_plans_and_plans_to_compare_and_click_on_compare_plan_link_in_UHC(String planType,
-			String Counter) throws Throwable {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		int counter = Integer.parseInt(Counter);
-		if (planType.equals("MAPD")) {
-			// plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(counter);
-			System.out.println("Selected All MAPD plans for Plan Compare");
-		}
-
-		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
+	public void i_select_plans_and_plans_to_compare_and_click_on_compare_plan_link_in_UHC(String planType, String Counter) throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+    int counter=Integer.parseInt(Counter);
+	if (planType.equals("MAPD")) {
+		//plansummaryPage.clickonViewPlans();
+		plansummaryPage.checkMAPlansOnly(counter);
+		System.out.println("Selected All MAPD plans for Plan Compare");
+	} 
+	
+	ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
+	if (planComparePage != null) {
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+		// comparePlansPage.backToVPPPage();
+	} else
+		Assert.fail("Error in loading the compare plans page");
+}
+	
 	@Then("^check one plan and add it to plancompare for UHC$")
 	public void check_one_plan_and_add_it_to_plancompare_for_UHC() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickon3rdPlan();
-		ComparePlansPageBlayerMobile planComparePage = plansummaryPage.clickOnCompareLink();
+		ComparePlansPageBlayer planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
@@ -2201,49 +2179,47 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.checkOneCheckboxVerifyAutoSelection("true");
 		plansummaryPage.checkOneCheckboxVerifyAutoSelection("false");
-
+		
 	}
-
+	
 	@Then("^verify plan compare checkbox is not visible on plan summary on UHC$")
 	public void verify_plan_compare_checkbox_is_not_visible_on_plan_summary_on_UHC() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean validationFlag = plansummaryPage.verifyPlanCompareCheckboxNotVisible();
-		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ", validationFlag);
+		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ",validationFlag);
 
 	}
-
+	
 	@Then("^the user clicks on Enroll in plan for UHC site and validates the Welcome to OLE Page on new Plan Compare")
-	public void user_clicks_enrollInPlan_newPlanCompare_UHC() throws InterruptedException {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		WelcomePageMobile welcomeOLEPage = planComparePage.Enroll_OLE_newPlancompare_UHC();
-		if (welcomeOLEPage != null) {
+	  public void user_clicks_enrollInPlan_newPlanCompare_UHC() throws InterruptedException{
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  WelcomePage  welcomeOLEPage = planComparePage.Enroll_OLE_newPlancompare_UHC();
+	   if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
 			Assert.fail("Error Loading Welcome Page for OLE");
 		}
-	}
-
+	  }
+	
 	@Then("^the user clicks on Plan details link in new Plan Compare page on UHC")
-	public void user_clicks_planDetails_newPlanCompare_UHC() throws InterruptedException {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		ComparePlansPageBlayerMobile vppPlanDetailsPage = planComparePage.navigateToPlanDetailfromplanCompare();
-		if (vppPlanDetailsPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			Assert.assertTrue(true);
-		} else
-			Assert.fail("Error in Loading the Plan Details Page");
-
-	}
+	  public void user_clicks_planDetails_newPlanCompare_UHC() throws InterruptedException{
+		  ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE); 
+		  ComparePlansPageBlayer vppPlanDetailsPage=planComparePage.navigateToPlanDetailfromplanCompare();
+			if (vppPlanDetailsPage != null) {
+					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
+					Assert.assertTrue(true);
+				} 
+			else
+				Assert.fail("Error in Loading the Plan Details Page");
+		
+	  }
 
 	@When("^verify Call sticky action menu icon is visible or not$")
 	public void verify_Call_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSam();
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		 aquisitionhomepage.validateCallSam();
 		/*
 		 * if (Aquisitionhomepage != null) {
 		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
@@ -2252,30 +2228,26 @@ public class VppStepDefinitionUHC {
 		 * Assert.fail("TFN Widget is NOT Displayed"); }
 		 */
 	}
-
+	
 	@And("^verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
-	public void verify_Call_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent()
-			throws InterruptedException {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	public void verify_Call_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSamContent();
 	}
-
+		
 	@Then("^user verify the popup and content in popup$")
 	public void user_verify_the_popup_and_content_in_popup() throws InterruptedException {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallpopup();
-
+		
 	}
-
+	
 	@When("^verify Chat sticky action menu icon is visible or not$")
 	public void verify_Chat_sticky_action_menu_icon_is_visible_or_not() throws InterruptedException {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
 		/*
 		 * if (Aquisitionhomepage != null) {
@@ -2285,24 +2257,22 @@ public class VppStepDefinitionUHC {
 		 * Assert.fail("TFN Widget is NOT Displayed"); }
 		 */
 	}
-
+	
+	
 	@And("^verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
-	public void verify_Chat_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent()
-			throws InterruptedException {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	public void verify_Chat_sticky_action_menu_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent() throws InterruptedException {
+				
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSamContent();
-
+		
 	}
-
+	
 	@Then("^user verify the Chat at its original state$")
 	public void user_verify_the_Chat_at_its_original_state() throws InterruptedException {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
 	}
-
+	
 	@When("^the user clicks on Lookup zipcode on UHC$")
 	public void the_user_clicks_on_Lookup_zipcode_on_UHC() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -2361,8 +2331,8 @@ public class VppStepDefinitionUHC {
 
 		}
 
-	}
-
+	}	
+	
 	@Then("^user clicks on Change Zip code link in UMS site$")
 	public void user_clicks_on_Change_Zip_code_link_in_UMS_site() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -2414,114 +2384,103 @@ public class VppStepDefinitionUHC {
 
 		}
 	}
-
-	/** user is on the Medicare Site landing page for VPP Testharness */
+	
+	/** user is on the Medicare Site landing page for VPP Testharness*/
 	@Given("^the user is on VPP TestHarness page$")
 	public void validateUserIsOnUMS_VPPTestharnessPage(DataTable inputAttributes) {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
 		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, siteName, TestharnessPage);
-		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
-		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) aquisitionhomepage.GetVPPTestHarnessPage();
-		getLoginScenario().saveBean(PageConstants.VPP_TESTHARNESS_PAGE, vppTestHarnessPage);
+		getLoginScenario().saveBean(PageConstants.VPP_TESTHARNESS_PAGE,vppTestHarnessPage);
 	}
-
+	
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}
 		return memberAttributesMap;
 	}
-
+	
 	@When("^the user enters following information in the UMS Acquisition Site VPPZipcode TestHarness page$")
-	public void the_user_enters_following_information_in_the_UMS_Site_VPPZipcode_TestHarness_page(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void the_user_enters_following_information_in_the_UMS_Site_VPPZipcode_TestHarness_page(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterVppZipcode(ZipCode);
-		if (isMultutiCounty.equalsIgnoreCase("YES")) {
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
 			vppTestHarnessPage.SelectCounty(CountyName);
 		}
 		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
-		if (plansummaryPage != null) {
+		if(plansummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
-
+		
 	}
-
+	
 	@When("^the user clicks on Lookup zipcode and enters following information in the UHC Acquisition Site VPPZipcode TestHarness page$")
-	public void the_user_clicks_on_Lookup_zipcode_and_enters_following_information_in_the_UHC_Site_VPPZipcode_TestHarness_page(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void the_user_clicks_on_Lookup_zipcode_and_enters_following_information_in_the_UHC_Site_VPPZipcode_TestHarness_page(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
 		String Address = inputAttributesMap.get("Address");
 		String City = inputAttributesMap.get("City");
 		String State = inputAttributesMap.get("State");
-
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterAddressDetails(Address, City, State);
-		if (isMultutiCounty.equalsIgnoreCase("YES")) {
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
 			vppTestHarnessPage.SelectCounty(CountyName);
 		}
 		VPPPlanSummaryPage planSummaryPage = vppTestHarnessPage.navigateToVPP();
-		if (planSummaryPage != null) {
+		if(planSummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummaryPage);
 		}
 	}
-
+	
 	@When("^the user click on Go botton without entering Zipcode and enters zipcode from shop for a plan on the UHC Acquisition Site VPPZipcode TestHarness page$")
-	public void user_enters_zipcodefromshopforaplan_on_the_UHC_AcquisitionSiteVPPZipcodeTestHarnesspage(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void user_enters_zipcodefromshopforaplan_on_the_UHC_AcquisitionSiteVPPZipcodeTestHarnesspage(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
-
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		VPPPlanSummaryPage planSummaryPage = vppTestHarnessPage.navigateToShopPlanenterZipcodeToVPP(ZipCode, CountyName,
-				isMultutiCounty);
-		if (planSummaryPage != null) {
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		VPPPlanSummaryPage planSummaryPage = vppTestHarnessPage.navigateToShopPlanenterZipcodeToVPP(ZipCode,CountyName,isMultutiCounty);
+		if(planSummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, planSummaryPage);
 		}
 	}
-
+	
 	@When("^the user enters zipcode on plan summary deep link and clik on deeplink navigates to VPP plan summary for UHC$")
-	public void user_enters_zipcode_on_plan_summary_deep_link_and_clik_on_deeplink_navigates_to_VPP_plan_summary_for_UHC(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void user_enters_zipcode_on_plan_summary_deep_link_and_clik_on_deeplink_navigates_to_VPP_plan_summary_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterZipcodeforPlanSummaryDeepLink(ZipCode);
-		if (isMultutiCounty.equalsIgnoreCase("YES")) {
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
 			vppTestHarnessPage.SelectCounty(CountyName);
 		}
 		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
-		if (plansummaryPage != null) {
+		if(plansummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
 	}
-
+	
 	@When("^the user enters Mandatory fields on Connector Model and clik on deeplink navigates to VPP plan summary for UHC$")
-	public void user_enters_Mandatory_fields_on_Connector_Model_and_clik_on_deeplink_navigates_to_VPP_plan_summary_for_UHC(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void user_enters_Mandatory_fields_on_Connector_Model_and_clik_on_deeplink_navigates_to_VPP_plan_summary_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
@@ -2530,47 +2489,42 @@ public class VppStepDefinitionUHC {
 		String WTMCID = inputAttributesMap.get("WTMCID");
 		String OrgSite = inputAttributesMap.get("OrgSite");
 		String Subdomain = inputAttributesMap.get("Subdomain");
-
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		vppTestHarnessPage.enterMandatoryforConnectorModelDeepLink(ZipCode, StateCode, CountyCode, OrgSite, WTMCID,
-				Subdomain);
-		if (isMultutiCounty.equalsIgnoreCase("YES")) {
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterMandatoryforConnectorModelDeepLink(ZipCode, StateCode, CountyCode, OrgSite, WTMCID, Subdomain);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
 			vppTestHarnessPage.SelectCounty(CountyName);
 		}
 		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
-		if (plansummaryPage != null) {
+		if(plansummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
 	}
-
+	
 	@When("^the user enters Mandatory fields on plan summary email deeplink and clik on deeplink navigates to VPP plan summary for UHC$")
-	public void user_enters_Mandatory_fields_on_plan_summary_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_summary_for_UHC(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void user_enters_Mandatory_fields_on_plan_summary_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_summary_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
 		String Deeplink = inputAttributesMap.get("Deeplink");
 		String PlanType = inputAttributesMap.get("Plan Type");
 		String PlanYear = inputAttributesMap.get("Year");
-
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterEmailPlanSummaryDeepLink(ZipCode, Deeplink, PlanType, PlanYear);
-		if (isMultutiCounty.equalsIgnoreCase("YES")) {
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
 			vppTestHarnessPage.SelectCounty(CountyName);
 		}
 		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
-		if (plansummaryPage != null) {
+		if(plansummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
 	}
-
+	
 	@When("^the user enters Mandatory fields on plan compare deeplink and clik on deeplink navigates to VPP plan Compare for UHC$")
-	public void user_enters_Mandatory_fields_on_plan_compare_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_Compare_for_UHC(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void user_enters_Mandatory_fields_on_plan_compare_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_Compare_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
@@ -2579,24 +2533,21 @@ public class VppStepDefinitionUHC {
 		String PlanYear = inputAttributesMap.get("Plan Year");
 		String PlanType = inputAttributesMap.get("Plan Type");
 		String fisCountyCode = inputAttributesMap.get("fisCountyCode");
-
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		vppTestHarnessPage.enterEmailPlanCompareDeepLink(ZipCode, ContractPBP, ExpiryDate, PlanType, PlanYear,
-				fisCountyCode);
-		if (isMultutiCounty.equalsIgnoreCase("YES")) {
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterEmailPlanCompareDeepLink(ZipCode, ContractPBP, ExpiryDate, PlanType, PlanYear, fisCountyCode);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
 			vppTestHarnessPage.SelectCounty(CountyName);
 		}
 		ComparePlansPageBlayer planComparePage = vppTestHarnessPage.navigateToPlanCompare();
-		if (planComparePage != null) {
+		if(planComparePage!=null){
 			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		}
 	}
-
+	
 	@When("^the user enters Mandatory fields on plan details deeplink and clik on deeplink navigates to VPP plan details for UHC$")
-	public void user_enters_Mandatory_fields_on_plan_details_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_UHC(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void user_enters_Mandatory_fields_on_plan_details_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
@@ -2606,18 +2557,17 @@ public class VppStepDefinitionUHC {
 		String fisCountyCode = inputAttributesMap.get("fisCountyCode");
 		String plantype = inputAttributesMap.get("Plan Type");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		vppTestHarnessPage.enterEmailPlanDetailsDeepLink(ZipCode, ContractPBP, PlanYear, Deeplink, fisCountyCode);
-		if (isMultutiCounty.equalsIgnoreCase("YES")) {
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterEmailPlanDetailsDeepLink(ZipCode, ContractPBP, PlanYear,Deeplink, fisCountyCode);
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
 			vppTestHarnessPage.SelectCountyforplanDetails(CountyName);
 		}
 		PlanDetailsPage vppPlanDetailsPage = vppTestHarnessPage.navigateToPlanDetails();
-		if (vppPlanDetailsPage != null) {
+		if(vppPlanDetailsPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 		}
 	}
-
+	
 	@Then("^the user view plan details of the above selected plan in UMS site and validates from Deeplink$")
 	public void user_views_plandetails_selected_plan_ums_form_deepLink(DataTable givenAttributes) {
 
@@ -2627,13 +2577,12 @@ public class VppStepDefinitionUHC {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.verifyPlanName(planName);
-
+		
 	}
-
+	
 	@When("^the user enters Mandatory fields on plan selector deeplink and clik on deeplink navigates to VPP plan details for UHC$")
-	public void user_enters_Mandatory_fields_on_plan_selector_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_UHC(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void user_enters_Mandatory_fields_on_plan_selector_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
@@ -2642,23 +2591,21 @@ public class VppStepDefinitionUHC {
 		String PbpNumber = inputAttributesMap.get("PbpNumber");
 		String PlanYear = inputAttributesMap.get("Plan Year");
 		String CountyCode = inputAttributesMap.get("CountyCode");
-		String UserGroup = inputAttributesMap.get("User Group");
+		String UserGroup  = inputAttributesMap.get("User Group");
 		String plantype = inputAttributesMap.get("Plan Type");
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		vppTestHarnessPage.enterEmailPlanSelectorDeepLink(ContractNum, CountyCode, PbpNumber, SegmentID, PlanYear,
-				ZipCode, UserGroup, isMultutiCounty, CountyName);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterEmailPlanSelectorDeepLink(ContractNum, CountyCode, PbpNumber, SegmentID, PlanYear, ZipCode, UserGroup,isMultutiCounty,CountyName);
 		PlanDetailsPage vppPlanDetailsPage = vppTestHarnessPage.navigateToPlanDetails();
-		if (vppPlanDetailsPage != null) {
+		if(vppPlanDetailsPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 		}
 	}
-
+	
+	
 	@When("^the user enters Mandatory fields on MedSup deeplink and clik on deeplink navigates to VPP plan details for UHC$")
-	public void user_enters_Mandatory_fields_on_MedSup_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_UHC(
-			DataTable inputAttributes) throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void user_enters_Mandatory_fields_on_MedSup_email_deeplink_and_clik_on_deeplink_navigates_to_VPP_plan_details_for_UHC(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
@@ -2666,23 +2613,20 @@ public class VppStepDefinitionUHC {
 		String mpbed = inputAttributesMap.get("MPBED");
 		String ebrc = inputAttributesMap.get("EBRC");
 		String dpsd = inputAttributesMap.get("DPSD");
-		String intref = inputAttributesMap.get("Intref");
+		String intref  = inputAttributesMap.get("Intref");
 		String mpaed = inputAttributesMap.get("MPAED");
 		String genderCode = inputAttributesMap.get("GenderCode");
 		String tobaccoUser = inputAttributesMap.get("TobaccoUser");
-		String dob = inputAttributesMap.get("DOB");
-
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		vppTestHarnessPage.enterMedSupDetailsDeepLink(ZipCode, ebrc, intref, mpbed, dpsd, mpaed, dob, uri, genderCode,
-				tobaccoUser);
+		String dob = inputAttributesMap.get("DOB");		
+				
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		vppTestHarnessPage.enterMedSupDetailsDeepLink(ZipCode, ebrc, intref, mpbed, dpsd, mpaed, dob, uri, genderCode, tobaccoUser);
 		vppTestHarnessPage.navigateToMedSupPlans();
-		getLoginScenario().saveBean(PageConstants.VPP_TESTHARNESS_PAGE, vppTestHarnessPage);
+		getLoginScenario().saveBean(PageConstants.VPP_TESTHARNESS_PAGE,vppTestHarnessPage);
 	}
-
+	
 	@And("^the user validates plan summary for the below plan in UMS site for Medsup Deeplink$")
-	public void user_validates_plan_summary_ums_for_medsup_deepLink(DataTable planAttributes)
-			throws InterruptedException {
+	public void user_validates_plan_summary_ums_for_medsup_deepLink(DataTable planAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -2693,14 +2637,13 @@ public class VppStepDefinitionUHC {
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.validateMedSupSpecificPlanInfo(planName);
-	}
-
+		}
+	
+	
 	@And("^the user enters Mandatory fields on ProviderSearch Navigates to provider Page for UHC$")
-	public void user_enters_Mandatory_fields_on_ProviderSearch_Navigates_to_provider_Page_for_UHC(
-			DataTable planAttributes) throws Exception {
+	public void user_enters_Mandatory_fields_on_ProviderSearch_Navigates_to_provider_Page_for_UHC(DataTable planAttributes) throws Exception {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -2712,67 +2655,62 @@ public class VppStepDefinitionUHC {
 		String zipCode = givenAttributesMap.get("Zip Code");
 		String planYear = givenAttributesMap.get("Plan Year");
 		String planID = givenAttributesMap.get("Plan ID");
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
-		ProviderSearchPage providerSearchPage = vppTestHarnessPage.enterMandatoryFieldsToProviderSearch(zipCode, planID,
-				planYear);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		ProviderSearchPage providerSearchPage = vppTestHarnessPage.enterMandatoryFieldsToProviderSearch(zipCode,planID,planYear);
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
-	}
-
+		}
+	
+	
 	@And("^user click on LaunhVPP on testharness page and navigated to VPP on UHC$")
 	public void user_click_on_LaunhVPP_on_testharness_page_and_navigated_to_VPP_on_UHC() throws InterruptedException {
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.clickOnLaunchVVP();
 		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
-		if (plansummaryPage != null) {
+		if(plansummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
-
+	
 	}
-
+	
 	@And("^user selects helper mode for Navigate to VPP with Providers data on UHC$")
 	public void user_selects_helper_mode_for_NavigatetoVPPwith_Providers_data_on_UHC() throws Exception {
-
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.navigatetoVPPwithProvidersdata();
 		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
-		if (plansummaryPage != null) {
+		if(plansummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
-	}
-
+		}
+	
 	@When("^the user enters following information in the UMS Acquisition Site VPPDCE TestHarness page$")
-	public void the_user_enters_following_information_in_the_UMS_Site_VPPDCE_TestHarness_page(DataTable inputAttributes)
-			throws Throwable {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+	public void the_user_enters_following_information_in_the_UMS_Site_VPPDCE_TestHarness_page(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String ZipCode = inputAttributesMap.get("Zip Code");
 		String CountyName = inputAttributesMap.get("County Name");
 		String isMultutiCounty = inputAttributesMap.get("Is Multi County");
 		String planName = inputAttributesMap.get("Plan Name");
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.enterZipandSearch(ZipCode);
-		if (isMultutiCounty.equalsIgnoreCase("YES")) {
+		if(isMultutiCounty.equalsIgnoreCase("YES")) {
 			vppTestHarnessPage.SelectCountyDCE(CountyName);
 		}
 		vppTestHarnessPage.selectPlan(planName);
-	}
-
+		}	
+	
+	
 	@And("^user selects helper mode for Redirect to VPP from DCE on UHC$")
 	public void user_selects_helper_mode_for_Redirect_to_VPP_from_DCE_on_UHC() throws Exception {
-		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario
-				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
+		VPPTestHarnessPage vppTestHarnessPage = (VPPTestHarnessPage) loginScenario.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.redirecttoVPPfromDCE();
 		VPPPlanSummaryPage plansummaryPage = vppTestHarnessPage.navigateToVPP();
-		if (plansummaryPage != null) {
+		if(plansummaryPage!=null){
 			loginScenario.saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		}
-	}
-
+		}
+	
 	@Then("^Verify X out of Y drugs covered information is displayed on Plan Summary page ums$")
 	public void verify_drugs_covered_ums(DataTable Planname) {
 
@@ -2789,23 +2727,21 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
 	}
-
-	/** user is on the Medicare Site landing page for Visitorprofile Testharness */
+	/** user is on the Medicare Site landing page for Visitorprofile Testharness*/
 	@Given("^the user is on VistorProfile TestHarness page for UHC$")
 	public void validateUserIsOnAARP_VPTestharnessPage_for_UHC(DataTable inputAttributes) {
-		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
 		String TestharnessPage = inputAttributesMap.get("TestHarnessPage");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, siteName, TestharnessPage);
-		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
-		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName,TestharnessPage);
+		String testSiteUrl=aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL,testSiteUrl);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) aquisitionhomepage
-				.GetVisitorProfileTestHarnessPage();
-		getLoginScenario().saveBean(PageConstants.VP_TESTHARNESS_PAGE, vpTestHarnessPage);
+		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) aquisitionhomepage.GetVisitorProfileTestHarnessPage();
+		getLoginScenario().saveBean(PageConstants.VP_TESTHARNESS_PAGE,vpTestHarnessPage);
 	}
-
+	
 	@And("^user selects helper mode for Save plans in Guest profile to VP with plans data on UHC$")
 	public void user_selects_helper_mode_for_Save_plans_in_Guest_profile_to_VP_with_plans_data_on_UHC()
 			throws Exception {
@@ -2876,8 +2812,7 @@ public class VppStepDefinitionUHC {
 		String Zipcode = inputAttributesMap.get("Zip Code");
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
-		ComparePlansPageBlayer planComparePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Zipcode,
-				Plancompare);
+		ComparePlansPageBlayer planComparePage = vpTestHarnessPage.NavigateToPlanCompareFromVpTest(Zipcode, Plancompare);
 
 		if (planComparePage != null) {
 			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
@@ -2889,7 +2824,7 @@ public class VppStepDefinitionUHC {
 
 	@Then("^verify plans added in plan compare on visitor Profile for UHC$")
 	public void verify_plans_addedin_plan_compare_on_visitor_Profile_forUHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
+		ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatePlansAddedonPlancompareforVisitorProfile();
 	}
@@ -2919,8 +2854,7 @@ public class VppStepDefinitionUHC {
 	}
 
 	@And("^user selects helper mode for Launch OLE for Guest profile on UHC$")
-	public void user_selects_helper_mode_for_Launch_OLE_for_Guest_profile_on_UHC(DataTable givenAttributes)
-			throws Exception {
+	public void user_selects_helper_mode_for_Launch_OLE_for_Guest_profile_on_UHC(DataTable givenAttributes) throws Exception {
 
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -2934,13 +2868,15 @@ public class VppStepDefinitionUHC {
 		String PlanName = memberAttributesMap.get("Plan Name");
 		String PlanYear = memberAttributesMap.get("Plan Year");
 		String PlanType = memberAttributesMap.get("Plan Type");
-
+		
+		
+		
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, zipcode);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, county);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
-
+		
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
 		WelcomePage welcomePage = vpTestHarnessPage.NavigateToOLEfromVP();
@@ -2950,9 +2886,10 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading OLE Welcome page");
 		}
 	}
-
+	
 	@And("^user selects Delete Drug and Pharamcy on the Authenticated profile on UHC site$")
-	public void user_selects_DeleteDrugandPharamcyontheAuthenticatedprofile_on_UHC() throws Exception {
+	public void user_selects_DeleteDrugandPharamcyontheAuthenticatedprofile_on_UHC()
+			throws Exception {
 
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
@@ -2964,7 +2901,7 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
-
+	
 	@And("^user selects Delete Provider on the Authenticated profile on UHC site$")
 	public void user_selects_DeleteProviderontheAuthenticatedprofile_on_AARP()
 			throws Exception {
@@ -2979,52 +2916,140 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error Loading on visitor Profile page");
 		}
 	}
+//	@Then("^the user enter the searchValue in the search text box and hits enter on UHC site$")
+//	public void the_user_enter_the_searchValue_in_the_search_text_box_and_hits_enter_on_UHC_site(DataTable inputvalue) throws Throwable {
+//	/*	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);*/
+//
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		List<DataTableRow> AttributesRow = inputvalue
+//				.getGherkinRows();
+//		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//		
+//		for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//			urlAttributesMap .put(AttributesRow.get(i).getCells()
+//					.get(0), AttributesRow.get(i).getCells().get(1));
+//		}
+//		String InputValue = urlAttributesMap.get("search Value");
+//		System.out.println("Search value"+InputValue );
+//		Thread.sleep(3000);
+//		
+//		aquisitionhomepage.enterSearchtextvalue(InputValue);
+//
+//	}
+//	
+//	@Then("^the user should see fifteen results before pagination on UHC Site$")
+//	public void the_user_should_see_fifteen_results_before_pagination() throws Throwable {
+//		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		aquisitionhomepage.validateFifteenResults();
+//	   
+//	}
+//	
+//
+//@Then("^the user validates count of results aganist the total shown at top of the page on UHC Site$")
+//public void the_user_validates_count_of_results_aganist_the_total_shown_at_top_of_the_page() throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateCountResults();
+//}
+//
+//
+//@Then("^the user validates pagination and results displayed on UHC Site$")
+//public void the_user_validates_pagination_and_results_displayed() throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE); 
+//	aquisitionhomepage.validatePaginationofSearchResults();
+//}
+//
+//
+//@Then("^the user validates the secondary search by providing newsearchvalue in the text box on UHC Site$")
+//public void the_user_validates_the_secondary_search_by_providing_newsearchvalue_in_the_text_box(DataTable inputvalue) throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//	for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//	}
+//	String InputValue = urlAttributesMap.get("NewSearchValue");
+//	System.out.println("NewSearchValue" + InputValue);
+//	Thread.sleep(3000);
+//	
+//	aquisitionhomepage.enterSecondarySearchValue(InputValue);
+// 
+//}
+//
+//@Then("^the user clear secondary search box and insert new search value on UHC Site$")
+//public void the_user_clea_seacondary_search_box_and_insert_new_search_value(DataTable inputvalue) throws Exception {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//
+//	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//	for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//	}
+//	String InputValue = urlAttributesMap.get("New Search Value");
+//	System.out.println("New Search Value" + InputValue);
+//	Thread.sleep(3000);
+//	aquisitionhomepage.insertValueIntoSecondSearchBox(InputValue);
+//
+//}
+//
+//@Then("^the user validates Error message on UHC site$")
+//public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
+//
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	
+//
+//	List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+//	Map<String, String> urlAttributesMap = new HashMap<String, String>();
+//
+//	for (int i = 0; i < AttributesRow.size(); i++) {
+//
+//		urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+//	}
+//	String error = urlAttributesMap.get("Error");
+//	String newSearchValue=urlAttributesMap.get("NewSearchValue");
+//	System.out.println("Error : " + error);
+//	Thread.sleep(3000);
+//	aquisitionhomepage.validateErrorMsg(error,newSearchValue);
+//}
+//
+//
+//@Then("^the user clicks on the united health care medicare solutions link on UHC site$")
+//public void the_user_clicks_on_the_united_health_care_medicare_solutions_link_on_UHC_site() throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+//    
+//}
+//
+//@Then("^ther user validates the \"([^\"]*)\" on UHC site$")
+//public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
+//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+//			.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//	aquisitionhomepage.validateUrl(url);
+//}
 
-
-	@Then("^the user validates Error message on UHC site$")
-	public void the_user_validates_pagination_and_results_displayed(DataTable inputvalue) throws Throwable {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
-		String error = urlAttributesMap.get("Error");
-		String newSearchValue = urlAttributesMap.get("NewSearchValue");
-		System.out.println("Error : " + error);
-		Thread.sleep(3000);
-		aquisitionhomepage.validateErrorMsg(error, newSearchValue);
-	}
-
-	@Then("^the user clicks on the united health care medicare solutions link on UHC site$")
-	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link_on_UHC_site() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
-
-	}
-
-	@Then("^ther user validates the \"([^\"]*)\" on UHC site$")
-	public void ther_user_validates_the_on_UHC_site(String url) throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateUrl(url);
-	}
 
 	@Then("^user saves all plans as favorite on UHC site$")
 	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+	
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String savePlanNames = memberAttributesMap.get("Test Plans");
 		String planType = memberAttributesMap.get("Plan Type");
-
+	
 		switch (planType) {
 		case "MAPD":
 			plansummaryPage.viewPlanSummary(planType);
@@ -3042,265 +3067,262 @@ public class VppStepDefinitionUHC {
 			plansummaryPage.viewPlanSummary(planType);
 			plansummaryPage.saveAllPlans(savePlanNames, planType);
 			break;
-
+	
 		default:
 			break;
 		}
 	}
-
+	
 	@Then("^Navigate to Visitor Profile page on UHC site$")
 	public void navigate_to_Visitor_Profile_page_on_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		VisitorProfilePage visitorProfilePage = plansummaryPage.navigateToVisitorProfilePage();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
-	}
-
-	// New plan compare related
-	@And("^I click on Get Started on and Add PrimaryCare PCP from find care page in UHC$")
-	public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page_in_UHC() throws Exception {
-		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		ComparePlansPageMobile planComparePage = findCarePage.providerfromPrimaryCare();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@Then("^remove one plan from new plan compare page for UHC$")
-	public void remove_one_plan_from_new_plan_compare_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnNewRemoveLink();
-	}
-
-	@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for UHC$")
-	public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_UHC()
-			throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.clickOnNewAddIcon();
-	}
-
-	@Then("^Verify newly added plan displayed on new plan compare page for UHC$")
-	public void verify_newly_added_plan_displayed_on_new_plan_compare_page_for_UHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validatenewlyAddPlanonNewPlanComapre();
-	}
-
-	@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page UHC$")
-	public void verify_doctors_covered_uhc() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateDoctors();
-	}
-
-	@Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page UHC$")
-	public void verify_Hospital_covered_uhc() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateEditHospitals();
-	}
-
-	@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page UHC$")
-	public void verify_Add_doctors_covered_uhc() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateAddDoctors();
-	}
-
-	@Then("^verify Add Hospitals is loaded without summary on Plan Compare page UHC$")
-	public void verify_Add_Hospitals_covered_uhc() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateAddHospitals();
-	}
-
-	@And("^click on Add your doctors link and Navigate to Rally page for UHC$")
-	public void clickOnAddyourdocits_UHC() throws Exception {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		FindCarePageMobile findCarePage = planComparePage.clickonAddYourDoctors();
-		if (findCarePage != null) {
-			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@And("^click on Add your Hospitals link and Navigate to Rally page for UHC$")
-	public void clickOnAddyourHospitals_UHC() throws Exception {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		FindCarePageMobile findCarePage = planComparePage.clickonAddYourHospitals();
-		if (findCarePage != null) {
-			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@And("^click on Edit your doctors link and Navigate to Rally page for UHC$")
-	public void clickONEdityourdocits_UHC() throws Exception {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		FindCarePageMobile findCarePage = planComparePage.clickonEditYourDoctors();
-		if (findCarePage != null) {
-			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@And("^click on Edit your Hospitals link and Navigate to Rally page for UHC$")
-	public void clickONEdityourHospitals_UHC() throws Exception {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		FindCarePageMobile findCarePage = planComparePage.clickonEditYourHosptials();
-		if (findCarePage != null) {
-			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@And("^user selects a provider from medical group and retuns to plan compare page in UHC$")
-	public void selectsproviderfrommedicalGroupforUHC() throws Exception {
-		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	
+	//New plan compare related
+		@And("^I click on Get Started on and Add PrimaryCare PCP from find care page in UHC$")
+		public void I_click_on_Get_Started_and_Add_PrimaryCarePCP_find_care_page_in_UHC() throws Exception {
+			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPageBlayer planComparePage = findCarePage.providerfromPrimaryCare();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
 		}
-		ComparePlansPageMobile planComparePage = findCarePage.providerfromMedicalGroup();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@And("^user selects a Hospitals from Clinical and retuns to plan compare page in UHC$")
-	public void selectsproviderfromPrimaryCareClinicforUHC() throws Exception {
-		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		@Then("^remove one plan from new plan compare page for UHC$")
+		public void remove_one_plan_from_new_plan_compare_page_for_UHC() throws Throwable {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.clickOnNewRemoveLink();
 		}
-		ComparePlansPageMobile planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@And("^I click on Get Started on and Add Places from Hospitals find care page in UHC$")
-	public void I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page_in_UHC() throws Exception {
-		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		@Then("^Click on Add Icon on new Plan Compare and verify it navigates to plan summary page for UHC$")
+		public void click_on_Add_Icon_newPlanCompare_and_verify_it_navigates_to_plan_summary_page_for_UHC() throws Throwable {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.clickOnNewAddIcon();
 		}
-		ComparePlansPageMobile planComparePage = findCarePage.placesfromHospital();
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@Then("^verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC$")
-	public void verify_Edit_your_Drugswithsummary_covered_uhc() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateEditDrugs();
-	}
-
-	@And("^click on Edit Drug link on plan compare for UHC site$")
-	public void clickonEditDruglinkonplancompareforUHCsite() {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		@Then("^Verify newly added plan displayed on new plan compare page for UHC$")
+		public void verify_newly_added_plan_displayed_on_new_plan_compare_page_for_UHC() throws Throwable {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validatenewlyAddPlanonNewPlanComapre();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonEdityourDrugs();
-		if (drugCostEstimatorPage != null) {
-			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
-			// comparePlansPage.backToVPPPage();
-		} else
-			Assert.fail("Error in loading the compare plans page");
-	}
-
-	@Then("^Click on view more plans for right navigaton on UHC$")
-	public void ClickonviewmoreplansforrightnavigatononUHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateViewMoreplansComparePage();
-	}
-
-	@Then("^Click on view less plans for left navigaton on UHC$")
-	public void ClickonviewlessplansforrightnavigatononUHC() throws Throwable {
-		ComparePlansPageBlayerMobile planComparePage = (ComparePlansPageBlayerMobile) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		planComparePage.validateViewlessplansComparePage();
-	}
-
-	@And("^the user signs in with optum Id in medsup flow for uhc$")
-	public void the_user_signs_in_with_optum_Id(DataTable credentials) {
-		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
-		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
+		
+		@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page UHC$")
+		public void verify_doctors_covered_uhc() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateDoctors();
 		}
-		String username = plannameAttributesMap.get("User Name");
-		String password = plannameAttributesMap.get("Password");
-
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.signInOptumId(username, password);
-	}
-
-	@Then("^the user click on Dental Cover Popup he must be able to validate plan defaults in UHC$")
-	public void the_user_click_on_Optional_Services_tab_and_validate_PlanDefaults(DataTable givenAttributes)
-			throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
+		
+		@Then("^verify Your Hospital is loaded with doctor summary on Plan Compare page UHC$")
+		public void verify_Hospital_covered_uhc() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateEditHospitals();
 		}
-		String planName = memberAttributesMap.get("Plan Name");
-
-		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		boolean optionalRiderFlag;
-		if (memberAttributesMap.get("Optional Rider").isEmpty())
-			optionalRiderFlag = false;
-		else {
-			String optionalRiderPremium = vppPlanDetailsPage
-					.addOptionalRider(memberAttributesMap.get("Optional Rider"));
-			optionalRiderFlag = true;
+		
+		@Then("^verify Add doctors is loaded with doctor summary on Plan Compare page UHC$")
+		public void verify_Add_doctors_covered_uhc() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateAddDoctors();
 		}
-		vppPlanDetailsPage.validateDentalPopupDefaults(planName, optionalRiderFlag);
-	}
+		
+		@Then("^verify Add Hospitals is loaded without summary on Plan Compare page UHC$")
+		public void verify_Add_Hospitals_covered_uhc() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateAddHospitals();
+		}
+		
+		@And("^click on Add your doctors link and Navigate to Rally page for UHC$")
+		public void clickOnAddyourdocits_UHC() throws Exception {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			FindCarePage findCarePage = planComparePage.clickonAddYourDoctors();
+			if (findCarePage != null) {
+				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@And("^click on Add your Hospitals link and Navigate to Rally page for UHC$")
+		public void clickOnAddyourHospitals_UHC() throws Exception {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			FindCarePage findCarePage = planComparePage.clickonAddYourHospitals();
+			if (findCarePage != null) {
+				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@And("^click on Edit your doctors link and Navigate to Rally page for UHC$")
+		public void clickONEdityourdocits_UHC() throws Exception {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			FindCarePage findCarePage = planComparePage.clickonEditYourDoctors();
+			if (findCarePage != null) {
+				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@And("^click on Edit your Hospitals link and Navigate to Rally page for UHC$")
+		public void clickONEdityourHospitals_UHC() throws Exception {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);		
+			FindCarePage findCarePage = planComparePage.clickonEditYourHosptials();
+			if (findCarePage != null) {
+				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@And("^user selects a provider from medical group and retuns to plan compare page in UHC$")
+		public void selectsproviderfrommedicalGroupforUHC() throws Exception {
+			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPageBlayer planComparePage = findCarePage.providerfromMedicalGroup();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@And("^user selects a Hospitals from Clinical and retuns to plan compare page in UHC$")
+		public void selectsproviderfromPrimaryCareClinicforUHC() throws Exception {
+			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPageBlayer planComparePage = findCarePage.providerfromPrimaryCareClinicButton();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@And("^I click on Get Started on and Add Places from Hospitals find care page in UHC$")
+		public void I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page_in_UHC() throws Exception {
+			FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ComparePlansPageBlayer planComparePage = findCarePage.placesfromHospital();
+			if (planComparePage != null) {
+				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@Then("^verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC$")
+		public void verify_Edit_your_Drugswithsummary_covered_uhc() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateEditDrugs();
+		}
+		
+		@And("^click on Edit Drug link on plan compare for UHC site$")
+		public void clickonEditDruglinkonplancompareforUHCsite() {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			DrugCostEstimatorPage drugCostEstimatorPage = planComparePage.clickonEdityourDrugs();
+			if (drugCostEstimatorPage != null) {
+				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
+				// comparePlansPage.backToVPPPage();
+			} else
+				Assert.fail("Error in loading the compare plans page");
+		}
+		
+		@Then("^Click on view more plans for right navigaton on UHC$")
+		public void ClickonviewmoreplansforrightnavigatononUHC() throws Throwable {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewMoreplansComparePage();
+		}
+		
+		@Then("^Click on view less plans for left navigaton on UHC$")
+		public void ClickonviewlessplansforrightnavigatononUHC() throws Throwable {
+			ComparePlansPageBlayer planComparePage = (ComparePlansPageBlayer) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			planComparePage.validateViewlessplansComparePage();
+		}
+		
+		@And("^the user signs in with optum Id in medsup flow for uhc$")
+		public void the_user_signs_in_with_optum_Id(DataTable credentials) {
+			List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < plannameAttributesRow.size(); i++) {
+		
+				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+						plannameAttributesRow.get(i).getCells().get(1));
+			}
+			String username = plannameAttributesMap.get("User Name");
+			String password = plannameAttributesMap.get("Password");
+			
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.signInOptumId(username, password);
+		}
+		
+		@Then("^the user click on Dental Cover Popup he must be able to validate plan defaults in UHC$")
+		public void the_user_click_on_Optional_Services_tab_and_validate_PlanDefaults(DataTable givenAttributes)
+				throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
-	@When("^the user performs plan search using Standalone information in the UHC site$")
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String planName = memberAttributesMap.get("Plan Name");
+
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+			boolean optionalRiderFlag;
+					if(memberAttributesMap.get("Optional Rider").isEmpty())
+						optionalRiderFlag=false;
+					else {
+						String optionalRiderPremium = vppPlanDetailsPage.addOptionalRider(memberAttributesMap.get("Optional Rider"));
+						optionalRiderFlag=true;
+					}
+			vppPlanDetailsPage.validateDentalPopupDefaults(planName,optionalRiderFlag);
+		}
+	
+		@When("^the user performs plan search using Standalone information in the UHC site$")
 	public void Standalone_Shop_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -3323,7 +3345,7 @@ public class VppStepDefinitionUHC {
 		} else {
 			plansummaryPage = aquisitionhomepage.searchPlansShop(zipcode, county);
 		}
-
+		
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
@@ -3332,3 +3354,4 @@ public class VppStepDefinitionUHC {
 		}
 	}
 }
+

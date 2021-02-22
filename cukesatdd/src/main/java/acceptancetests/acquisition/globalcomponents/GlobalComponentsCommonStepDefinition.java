@@ -1,4 +1,3 @@
-
 package acceptancetests.acquisition.globalcomponents;
 
 import java.util.HashMap;
@@ -55,16 +54,6 @@ public class GlobalComponentsCommonStepDefinition {
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
-	}
-	
-	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		return memberAttributesMap;
 	}
 
 	@When("^user accesses global header of the Medicare Plans home page$")
@@ -932,6 +921,16 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickonFindanAgentlinkfromArticle(myUHCAgentURL);
 
+	}
+
+	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		return memberAttributesMap;
 	}
 
 	@Then("^user should be navigated to the previous page$")

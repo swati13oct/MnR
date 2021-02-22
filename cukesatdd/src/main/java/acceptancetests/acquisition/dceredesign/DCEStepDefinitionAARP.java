@@ -967,11 +967,7 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.clickOnBacktoDrugBtn();
 	}
 
-
-	//@Then("^the user click on view plan summary on vpp detail page in AARP$")
-
 	@Then("^the user click on view plan summary on vpp detail page$")
-
 	public void the_user_click_on_drug_cost_estimator_details() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -1179,10 +1175,7 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user click on view plan details on drug summary page$")
 	public void user_click_on_view_plan_details_on_drug_summary_page() throws Throwable {
-
-
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-
 		drugSummaryPage.clickOnViewPlan();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
@@ -1462,7 +1455,6 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
-
 	@Then("^user saves plan as favorite on drug summary page$")
 	public void user_saves_plan_as_favorite_on_drug_summary(DataTable givenAttributes) throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
@@ -1546,7 +1538,6 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 
 	}
-
 
 	@Then("^the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page$")
 	public void the_user_validates_Switch_to_generic_for_following_Brand_Drug_and_validate_Generic_drug_on_Details_Page(
@@ -2589,14 +2580,17 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateLISBuyDown_NotCoveredDrugCost(NotCoveredDrug);
 	}
 
+	@Then("^user verify and click on standard tab from drug details")
+	public void user_click_on_standard_tab_to_update_the_distance_to_durg_details() {
+		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		drugDetailsPage.validateStandardTab();
+	}
 
 	@Then("^verify the default tab displayed on VPP details page$")
 	public void verify_the_default_tab_displayed_on_VPP_details_page(DataTable attributes) {
 		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
@@ -2694,7 +2688,6 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateStandardTab();
 	}
 
-
 	@Then("^user verify breadcrumb \"([^\"]*)\" on get started page$")
 	public void user_verify_breadcrumb_on_get_started_page(String breadCrumb) {
 		GetStartedPage DCEgetStarted = (GetStartedPage) getLoginScenario()
@@ -2777,6 +2770,5 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.clickingSiteLogoDrugDetail(siteName);
 		
 	}
-
 
 }

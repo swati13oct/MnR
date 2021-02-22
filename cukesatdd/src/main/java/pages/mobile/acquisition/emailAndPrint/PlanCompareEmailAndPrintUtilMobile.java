@@ -127,7 +127,8 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		//Validating email cancel button
 		validate(cancelButtonEmailPlanComparePopUp);
 		System.out.println("!!!Cancel Button is displayed ===>"+cancelButtonEmailPlanComparePopUp.isDisplayed());
-		cancelButtonEmailPlanComparePopUp.click();
+		//cancelButtonEmailPlanComparePopUp.click();
+		jsClickNew(cancelButtonEmailPlanComparePopUp);
 		System.out.println("Success click of cancel email");
 		//Validating email send button
 		validateemailbutton.click();
