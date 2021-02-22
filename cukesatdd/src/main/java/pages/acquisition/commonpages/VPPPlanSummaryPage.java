@@ -6593,4 +6593,24 @@ public IsInsuranceAgent clickOnRequestInsuranceAgent() {
 	else
 		return null;
 }
+
+@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+private WebElement RightRail_FindAnAgentMedsupp;
+
+public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
+
+	validateNew(RightRail_FindAnAgentMedsupp);
+	CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgentMedsupp, 30);
+	String parentWindow = driver.getWindowHandle();
+	jsClickNew(RightRail_FindAnAgentMedsupp);
+	sleepBySec(3);
+	Set<String> tabs_windows = driver.getWindowHandles();
+	Iterator<String> itr = tabs_windows.iterator();
+	while (itr.hasNext()) {
+		String window = itr.next();
+		if (!parentWindow.equals(window)) {
+			driver.switchTo().window(window);
+		}
+	}
+}
 }
