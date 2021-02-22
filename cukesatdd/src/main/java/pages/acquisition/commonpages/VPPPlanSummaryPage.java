@@ -3565,7 +3565,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		jsClickNew(alternatemailingAddressBtn);
-		emailAddress.sendKeys("John_Kerry@test.com");
+		emailAddress.sendKeys("venkata.kanagala@optum.com");
 		phoneNumber.sendKeys("1234567890");
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -4500,7 +4500,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		alternatemailingAddressBtn.click();
-		emailAddress.sendKeys("test123@test.com");
+		emailAddress.sendKeys("venkata.kanagala@optum.com");
 		phoneNumber.sendKeys("1234567890");
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
