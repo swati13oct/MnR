@@ -401,6 +401,10 @@ public class BuildYourDrugList extends UhcDriver {
 			System.out.println(CurrentDrugRecommendation.getText());}
 			System.out.println("Drug Cabinet is NOT displayed in Drug Recommendation  - Validation PASSED");
 		}
+		else {
+			System.out.println(" ***************** Drug Recommendations section is not displayed *****************");
+
+		}
 		
 	}
 

@@ -193,6 +193,40 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | email             | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers |
       | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        |
 
+  @searchProfileAndVPPPlanDetail
+  Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
+    Given I am an agent logged into the cloak in tool
+      | User Name | <username> |
+      | Password  | <password> |
+    Then I ask the shopper calling in to provide me with the Email Address and Search
+      | Email | <email> |
+    And the profile is found and i click on the CLOAK IN button
+    Then I land on the plan compare page
+      | Enrolled Plan Name | <enrolledplanName> |
+      | Plan Name          | <planName>         |
+      | Drugs              | <drugNames>        |
+      | Providers          | <providers>        |
+      | First Name         | <fname>            |
+      | Last Name          | <lname>            |
+      | DOB                | <dob>              |
+      | MBI                | <mbi>              |
+    Then Navigate to Visitor Profile page from compare page
+    And user clicks on plan name
+      | Test Plans | <planName> |
+    Then the user validates the following Additional Benefits of Plan for the plan
+      | Eye Wear Benefit Type           | <eyeWearBenefitType>          |
+      | Eye Wear Expected Text          | <eyeWearExpectedText>         |
+      | Eye Exam Benefit Type           | <eyeExamBenefitType>          |
+      | Eye Exam Expected Text          | <eyeExamExpectedText>         |
+      | Foot Care Routine Benefit Type  | <footCareRoutineBenefitType>  |
+      | Foot Care Routine Expected Text | <footCareRoutineExpectedText> |
+      | Hearing Exam Benefit Type       | <hearingExamBenefitType>      |
+      | Hearing Exam Expected Text      | <hearingExamExpectedText>     |
+
+    Examples: 
+      | username  | password  | email             | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        | Eyewear            | $0 copay every 2 years; up to $150 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
     Given I am an agent logged into the cloak in tool
