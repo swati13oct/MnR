@@ -122,7 +122,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 4_AMP | AARP | enroll.html                         | ShopPlan: Enroll             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 4_AMP | AARP | shop.html                           | ShopPlan: Shop Hub           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 4_AMP | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 4_AMP | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
       | E2E Scenario 4_AMP | AARP | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 4_AMP | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_AMP | AARP | shop/estimate.html                  | Estimate                     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | false   |
@@ -131,7 +131,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Examples: 
       | Scenario           | site | path                                | pageName                     | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 4_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 4_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
       | E2E Scenario 4_UMS | UHC  | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 4_UMS | UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
       | E2E Scenario 5_UMS | UHC  | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
@@ -307,24 +307,24 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     Then the user validates TFN on need help section of Shop pages
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
-
+    
     @ShopPages78_Shop7_GlobalCompsAARP @ShopPages15_Shop15_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                | pageName                     | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 5_AMP | AARP | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 4_AMP | AARP | enroll.html                         | ShopPlan: Enroll             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 4_AMP | AARP | shop.html                           | ShopPlan: Shop Hub           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 4_AMP | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 4_AMP | AARP | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 4_AMP | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 5_AMP | AARP | shop/estimate.html                  | Estimate                     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | false   |
+      | Scenario           | site | path                                | pageName                     | UHCUrl                      | tfnXpath                                                           | tfnFlag | hoursxpath                                                                   | hoursFlag |
+      | E2E Scenario 2_AMP | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    | (//div[contains(@ng-show,'fedTfn') or contains(@ng-show,'medSupTfn')])[1]//p | true      |
+      | E2E Scenario 5_AMP | AARP | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    | (//div[contains(@ng-show,'fedTfn') or contains(@ng-show,'medSupTfn')])[1]//p | true      |
+      | E2E Scenario 4_AMP | AARP | enroll.html                         | ShopPlan: Enroll             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    | (//div[contains(@ng-show,'fedTfn') or contains(@ng-show,'medSupTfn')])[1]//p | true      |
+      | E2E Scenario 4_AMP | AARP | shop.html                           | ShopPlan: Shop Hub           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    | (//div[contains(@ng-show,'fedTfn') or contains(@ng-show,'medSupTfn')])[1]//p | true      |
+      | E2E Scenario 4_AMP | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[2] | true    | (//div[contains(@ng-show,'medSupTfn')])[1]//p                                | true      |
+      | E2E Scenario 4_AMP | AARP | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    | (//div[contains(@ng-show,'fedTfn') or contains(@ng-show,'medSupTfn')])[1]//p | true      |
+      | E2E Scenario 4_AMP | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    | (//div[contains(@ng-show,'fedTfn') or contains(@ng-show,'medSupTfn')])[1]//p | true      |
+      | E2E Scenario 5_AMP | AARP | shop/estimate.html                  | Estimate                     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | false   | (//div[contains(@ng-show,'fedTfn') or contains(@ng-show,'medSupTfn')])[1]//p | true      |
 
     @ShopPages78_Shop7_GlobalCompsUHC @ShopPages15_Shop15_GlobalCompsUHC
     Examples: 
       | Scenario           | site | path                                | pageName                     | UHCUrl                      | tfnXpath                                                           | tfnFlag |
       | E2E Scenario 2_UMS | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 4_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 4_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[2] | true    |
       | E2E Scenario 4_UMS | UHC  | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
       | E2E Scenario 4_UMS | UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
       | E2E Scenario 5_UMS | UHC  | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
@@ -347,16 +347,18 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     #@BlogPages_GlobalCompsAARP
     @BlogPages_Blog10_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      |
-      | E2E Scenario 1_AMP | AARP | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ |
-      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      |
+      | E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ |
+      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ |
 
     #@BlogPages_GlobalCompsUHC
     @BlogPages_Blog10_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      |
-      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ |
-      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      |
+      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ |
+      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ |
 
     #@BlogPages_GlobalCompsAARP
     @BlogPages_Blog10_GlobalCompsAARP
@@ -375,24 +377,22 @@ Feature: 1.13 UAT - Shop Blog Pages flows
     #@BlogPages_GlobalCompsAARP
     @BlogPages_Blog9_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
     #@BlogPages_GlobalCompsUHC
     @BlogPages_Blog9_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
   @GlobalComponentsAARPBlogPages12
   Scenario Outline: <Scenario>- To verify TFN on medicare article pages for the page mentioned on <site> site <pageName> : <path>
@@ -408,15 +408,17 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @BlogPages12_GlobalCompsAARP @BlogPages_Blog8_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 1_AMP | AARP | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
     @BlogPages12_GlobalCompsUHC @BlogPages_Blog8_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
     @BlogPages12_GlobalCompsAARP @BlogPages_Blog8_GlobalCompsAARP
     Examples: 
@@ -432,23 +434,21 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @BlogPages12_GlobalCompsAARP @BlogPages_Blog7_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
     @BlogPages12_GlobalCompsUHC @BlogPages_Blog7_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
   @GlobalComponentsAARPBlogPages34
   Scenario Outline: <Scenario>- To verify proactive chat popup on medicare article pages for the page mentioned on <site> site <pageName> : <path>
@@ -462,15 +462,17 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @BlogPages34_GlobalCompsAARP @BlogPages_Blog6_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      |
-      | E2E Scenario 1_AMP | AARP | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ |
-      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      |
+      | E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ |
+      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ |
 
     @BlogPages34_GlobalCompsUHC @BlogPages_Blog6_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      |
-      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ |
-      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      |
+      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ |
+      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ |
 
     @BlogPages34_GlobalCompsAARP @BlogPages_Blog6_GlobalCompsAARP
     Examples: 
@@ -486,23 +488,21 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @BlogPages34_GlobalCompsAARP @BlogPages_Blog5_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
     @BlogPages34_GlobalCompsUHC @BlogPages_Blog5_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
   @GlobalComponentsAARPBlogPages56
   Scenario Outline: <Scenario>- To verify chat icon on medicare article pages for the page mentioned on <site> site <pageName> : <path>
@@ -516,15 +516,17 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @BlogPages56_GlobalCompsAARP @BlogPages_Blog4_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      |
-      | E2E Scenario 1_AMP | AARP | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ |
-      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      |
+      | E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ |
+      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ |
 
     @BlogPages56_GlobalCompsUHC @BlogPages_Blog4_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      |
-      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ |
-      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      |
+      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | UHC  | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ |
+      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ |
 
     @BlogPages56_GlobalCompsAARP @BlogPages_Blog4_GlobalCompsAARP
     Examples: 
@@ -540,23 +542,21 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @BlogPages56_GlobalCompsAARP @BlogPages_Blog3_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
     @BlogPages56_GlobalCompsUHC @BlogPages_Blog3_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
   @GlobalComponentsAARPBlogPages78
   Scenario Outline: <Scenario>- To verify call icon on medicare article pages for the page mentioned on <site> site <pageName> : <path>
@@ -570,15 +570,17 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @BlogPages78_GlobalCompsAARP @BlogPages2_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      |
-      | E2E Scenario 1_AMP | AARP | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ |
-      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      |
+      | E2E Scenario 1_AMP | AARP | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ |
+      | E2E Scenario 5_AMP | AARP | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ |
 
     @BlogPages78_GlobalCompsUHC @BlogPages2_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                       | pageName               | UHCUrl                      |
-      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                     | Medicare Articles Home | https://www.myuhcagent.com/ |
-      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html | MMC page               | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                              | pageName               | UHCUrl                      |
+      | E2E Scenario 1_UMS | UHC  | medicare-articles.html                            | Medicare Articles Home | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html | Sample Category Page   | https://www.myuhcagent.com/ |
+      | E2E Scenario 5_UMS | UHC  | medicare-articles/medicare-made-clear.html        | MMC page               | https://www.myuhcagent.com/ |
 
     @BlogPages78_GlobalCompsAARP @BlogPages2_GlobalCompsAARP
     Examples: 
@@ -594,23 +596,21 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @BlogPages78_GlobalCompsAARP @BlogPages1_GlobalCompsAARP
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_AMP | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
     @BlogPages78_GlobalCompsUHC @BlogPages1_GlobalCompsUHC
     Examples: 
-      | Scenario           | site | path                                                  | pageName             | UHCUrl                      |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/eligibility-and-enrollment.html     | Sample Category Page | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page        | https://www.myuhcagent.com/ |
-      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page        | https://www.myuhcagent.com/ |
+      | Scenario           | site | path                                                  | pageName      | UHCUrl                      |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-costs.html                 | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
+      | E2E Scenario 2_UMS | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
 
   @GlobalComponentsAARPBlogPages99
   Scenario Outline: <Scenario>- To verify TFN on right rail of medicare article pages for the page mentioned on <site> site <pageName> : <path>
