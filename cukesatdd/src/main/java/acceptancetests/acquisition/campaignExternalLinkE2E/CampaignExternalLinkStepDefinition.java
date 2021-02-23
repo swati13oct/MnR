@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -21,6 +22,8 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.CampaignExternalLinks;
 import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
  * Functionality: Validate different Campaign External Links
@@ -118,7 +121,7 @@ public class CampaignExternalLinkStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpectedTFNNo);
 	}
 	
-	@Then("^User able to land  Shop for a plan page in new tab$")
+	@Then("^User able to land on Shop for a plan page in new tab$")
 	public void the_user_clicks_on_plan_and_pricing_button_on_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
@@ -126,20 +129,26 @@ public class CampaignExternalLinkStepDefinition {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
 	
-	@Then("^User able to land on Drug cost page in new tab$")
+	@Then("^the user clicks on Estimate your drug costs to land on Drug cost page from External link$")
 	public void the_user_clicks_on_Estimate_Drug_Cost_button_on_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.estimateDrugCostButton();
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+		GetStartedPage getStartedPage = campaignExternalLinkspage.estimateDrugCostButton();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
 	}
 	
 	@When("^user click on Estimate your Drug Cost button under Look up your drugs title$")
 	public void the_user_clicks_on_Look_up_drug_button_on_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.lookUpDrugButton();
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+		GetStartedPage getStartedPage = campaignExternalLinkspage.lookUpDrugButton();
+		if (null != getStartedPage) {
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+		} else
+			Assert.fail("DCE Redesign page object not loaded");
 	}
 	
 	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
@@ -286,12 +295,14 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 			campaignExternalLinkspage.navigateToPREGetStarted();
 		}
 
-	@When ("user clicks on Start Now to get start the Pharmacy flow from external page")
+	@When("user clicks on Start Now to get start the Pharmacy flow from external page")
 	public void user_clicks_on_Start_Now_to_Get_Started_Pharmacy_Flow() {
-			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
-					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-			campaignExternalLinkspage.navigateToPharmacyGetStarted();
-		}
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		PharmacySearchPage pharmacySearchPage = campaignExternalLinkspage.navigateToPharmacyGetStarted();
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	}
+
 	@Then("^the user clicks on Get Help Finding a Plan button on Morgan Stanley external link page$")
 	public void the_user_clicks_on_Get_Help_Finding_a_Plan_button_on_Morgan_Stanley_external_link_page() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
@@ -333,6 +344,15 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
+	}
+
+	@When("^the user should be able to see \"([^\"]*)\" expanded by default$")
+	public void the_user_should_be_able_to_see_expanded_by_default(String planType) {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyDefaultPlanType(planType);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
 	}
 
 }

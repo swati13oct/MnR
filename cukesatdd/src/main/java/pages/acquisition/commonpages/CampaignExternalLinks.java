@@ -15,6 +15,8 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 public class CampaignExternalLinks extends UhcDriver {
 
@@ -370,9 +372,10 @@ public class CampaignExternalLinks extends UhcDriver {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
 	}
-	public AcquisitionHomePage estimateDrugCostButton() {
+
+	public GetStartedPage estimateDrugCostButton() {
 		validateNew(estimateDrugCost);
-		CommonUtility.waitForPageLoadNew(driver, estimateDrugCost, 30);
+		CommonUtility.waitForPageLoadNew(driver, estimateDrugCost, 10);
 		parentWindow = driver.getWindowHandle();
 		jsClickNew(estimateDrugCost);
 		sleepBySec(3);
@@ -390,9 +393,9 @@ public class CampaignExternalLinks extends UhcDriver {
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
 		if (CurrentRailURL.contains("estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27#/getstarted")) {
-			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
-			CheckiPerseptions();
-			return new AcquisitionHomePage(driver);
+			System.out.println("****************DCE Page is displayed***************" + CurrentRailURL);
+//			checkModelPopup(driver, 10);
+			return new GetStartedPage(driver);
 		}
 		return null;
 		/*
@@ -402,9 +405,9 @@ public class CampaignExternalLinks extends UhcDriver {
 		 */
 	}
 	
-	public AcquisitionHomePage lookUpDrugButton() {
+	public GetStartedPage lookUpDrugButton() {
 		validateNew(estimateDrugCostButton);
-		CommonUtility.waitForPageLoadNew(driver, estimateDrugCostButton, 30);
+		CommonUtility.waitForPageLoadNew(driver, estimateDrugCostButton, 10);
 		parentWindow = driver.getWindowHandle();
 		jsClickNew(estimateDrugCostButton);
 		sleepBySec(3);
@@ -423,8 +426,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 		if (CurrentRailURL.contains("estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27")) {
 			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
-			CheckiPerseptions();
-			return new AcquisitionHomePage(driver);
+			return new GetStartedPage(driver);
 		}
 		return null;
 		/*
@@ -739,7 +741,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 	}
 
-	public void navigateToPharmacyGetStarted() {
+	public PharmacySearchPage navigateToPharmacyGetStarted() {
 		parentWindow = driver.getWindowHandle();
 		startnow.click();
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -750,6 +752,10 @@ public class CampaignExternalLinks extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
+		if (driver.getTitle().toLowerCase().contains("Locate a Pharmacy Near You | UnitedHealthcare")) {
+				return new PharmacySearchPage(driver);
+		}
+		return null;
 	}
 
 	public AcquisitionHomePage clickOnGetHelpFindingAPlanBtn() {

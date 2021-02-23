@@ -218,9 +218,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	//@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
 	//@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
-	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
+//	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -5417,29 +5417,24 @@ public VPPPlanSummaryPage searchPlansWithOutCountyForExternalLink(String zipcode
 		return null;
 }
 
-public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName) {
-	waitForPageLoadSafari();
-	if (isHealthPlan) {
-		CommonUtility.waitForPageLoadNew(driver, zipCode, 30);
-		sendkeys(zipCode, zipcode);
-
-		jsClickNew(btnGO);
-	} else {
+	public VPPPlanSummaryPage externalsearchPlans(String zipcode, String countyName) {
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
 		sendkeys(externalzipCodeField, zipcode);
-
 		jsClickNew(viewPlansButton);
-	}
 
-	CommonUtility.waitForPageLoad(driver, countyModal, 45);
-	if (validate(countyModal))
-		jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
-	CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
-	if (driver.getCurrentUrl().contains("plan-summary")) {
-		return new VPPPlanSummaryPage(driver);
+		CommonUtility.waitForPageLoad(driver, countyModal, 15);
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+
+		checkModelPopup(driver, 10);
+
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
-	return null;
-}
 
 	public void validateCallpopuponMedsupppage(String TFNXpath, String ExpecetdTFNNo) {
 
@@ -5843,13 +5838,7 @@ public VPPPlanSummaryPage exteranlsearchPlans(String zipcode, String countyName)
 //			checkModelPopup(driver, 10);
 //			CheckiPerseptions();
 
-		System.out.println("########Validating TFN Info in RIght Rail section########");
-
-		if (validate(rightRailSectionTFNHeader)) {
-			scrollToView(rightRailSectionTFNHeader);
-			System.out.println(rightRailSectionTFNHeader.getText());
-			System.out.println(rightRailSectionTFNHeader1.getText());
-		}
+		System.out.println("########Validating TFN Info in ZipCode Component section########");
 
 		String ExpectedCallSamTFNMember = "Need Help? Call UnitedHealthcare at "+ExpecetdTFNNo+" (TTY 711) toll free, 8 a.m. – 8 p.m., 7 days a week.";
 		//String ExpectedCallSamTFNMember = footertextsectioncallus.getText();

@@ -1516,10 +1516,8 @@ public class VppCommonStepDefinition {
 
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		//VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-			//	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		System.out.println("plan name"+planName);
-		System.out.println("plan name"+planType);
+		System.out.println("Plan Name: " + planName);
+		System.out.println("Plan Type: " + planType);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE,planType);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
@@ -3770,7 +3768,7 @@ public class VppCommonStepDefinition {
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyForExternalLink(zipcode);
 		} else {
-			plansummaryPage = aquisitionhomepage.exteranlsearchPlans(zipcode, county);
+			plansummaryPage = aquisitionhomepage.externalsearchPlans(zipcode, county);
 		}
 
 		if (plansummaryPage != null) {

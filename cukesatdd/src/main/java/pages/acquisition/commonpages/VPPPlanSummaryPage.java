@@ -945,12 +945,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "agreeButton")
 	private WebElement OptumSignInAgreeButton;
-	
+
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement nextBestActionModalGetStartedBtn;
 
 	@FindBy(id = "back-to-plans")
 	private WebElement backToPlanComparePage;
+
+	@FindBy(xpath = "//*[contains(@class,'plan_type_head ng-scope')]")
+	public WebElement planTypeHeading;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -4230,9 +4233,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		jsClickNew(drugLinkDropdown);
 
-		/*WebElement drugInfoDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//*[contains(@id,'DrugName')]"));*/
-		
+		/*
+		 * WebElement drugInfoDropdown =
+		 * driver.findElement(By.xpath("//*[contains(text(),'" + planName +
+		 * "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//*[contains(@id,'DrugName')]"
+		 * ));
+		 */
+
 		WebElement drugInfoDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'collapse drug')]//div[@class='drug-info-container']"));
 
@@ -4621,8 +4628,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(VerificationAgree);
 		jsClickNew(nextButton);
 
-		//validateNew(VerificationAgree2);
-	//	jsClickNew(VerificationAgree2);
+		// validateNew(VerificationAgree2);
+		// jsClickNew(VerificationAgree2);
 		jsClickNew(nextButton);
 		validateNew(VerificationAgree3);
 		Thread.sleep(3000);
@@ -6316,10 +6323,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		try {
 			providerListPlanCard.click();
 //			Actions action = new Actions(driver);
-		while(removeProviderListPlanCard.size()!=0) {
+			while (removeProviderListPlanCard.size() != 0) {
 //			action.moveToElement(removeProviderListPlanCard.get(0)).build().perform();
-			scrollToView(removeProviderListPlanCard.get(0));
-			removeProviderListPlanCard.get(0).click();
+				scrollToView(removeProviderListPlanCard.get(0));
+				removeProviderListPlanCard.get(0).click();
 //			jsClickNew(removeProviderListPlanCard.get(0));
 				System.out.println("Removed providers in plan card");
 			}
@@ -6573,7 +6580,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void verifyPlanCompareCheckboxIsChecked(String planIndex, String plantype) {
 		validate(planCompareCheckBox);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		System.out.println("Plan type"+plantype);
+		System.out.println("Plan type" + plantype);
 		if (plantype.equals("MAPD")) {
 			String CheckStatus = js
 					.executeScript("return document.getElementById('compare-plan-" + planIndex + "').checked;")
@@ -6581,8 +6588,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("Plan compare checkbox status:" + CheckStatus);
 			Assert.assertEquals("true", CheckStatus.trim());
 		} else {
-			boolean CheckStatus = driver.findElement(By.xpath("//*[@class='compare-box']//*[@for='compare-plan-" + planIndex + "']/..//following-sibling::span")).getAttribute("class").contains("show");
-			//boolean CheckStatus=driver.findElement(By.cssSelector("#plan-list-3 > div > div.swiper-container > div > div:nth-child("+ planIndex + ") > div.content-secondary.favourite > div > div.compare-box > span.ng-scope > label::after")).isDisplayed();
+			boolean CheckStatus = driver.findElement(By.xpath(
+					"//*[@class='compare-box']//*[@for='compare-plan-" + planIndex + "']/..//following-sibling::span"))
+					.getAttribute("class").contains("show");
+			// boolean CheckStatus=driver.findElement(By.cssSelector("#plan-list-3 > div >
+			// div.swiper-container > div > div:nth-child("+ planIndex + ") >
+			// div.content-secondary.favourite > div > div.compare-box > span.ng-scope >
+			// label::after")).isDisplayed();
 			System.out.println("Plan compare checkbox status:" + CheckStatus);
 			Assert.assertTrue(CheckStatus);
 		}
@@ -6594,10 +6606,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void addPlanToCompareByIndex(String planIndex, String plantype) {
 		WebElement Checkbox;
 		if (plantype.equals("MAPD"))
-		Checkbox = driver.findElement(By.xpath("//input[contains(@id,'compare-plan-" + planIndex
-				+ "')]/ancestor::div[contains(@class,'compare-box')]//label"));
+			Checkbox = driver.findElement(By.xpath("//input[contains(@id,'compare-plan-" + planIndex
+					+ "')]/ancestor::div[contains(@class,'compare-box')]//label"));
 		else
-			Checkbox =driver.findElement(By.xpath("//*[@class='compare-box']//*[@for='compare-plan-" + planIndex + "']"));
+			Checkbox = driver
+					.findElement(By.xpath("//*[@class='compare-box']//*[@for='compare-plan-" + planIndex + "']"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", Checkbox);
 	}
@@ -6630,43 +6643,55 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 //}
 
-/**
- * @author rravind8 This method verifies the NBA Modal for Drug Cost
- */
-public void verifyNextBestActionModalForDrugCost() {
-	waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
-	try {
-		if (nextBestActionModal.isDisplayed()) {
-			if (nextBestActionModalMsg.size() > 1) {
-			Assert.assertTrue(
-					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
-							+ "\n Actual message" + nextBestActionModalMsg.get(1).getText(),
-					nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
-		}else {
-			Assert.assertTrue(
-					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
-							+ "\n Actual message" + nextBestActionModalMsg.get(0).getText(),
-					nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+	/**
+	 * @author rravind8 This method verifies the NBA Modal for Drug Cost
+	 */
+	public void verifyNextBestActionModalForDrugCost() {
+		waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				if (nextBestActionModalMsg.size() > 1) {
+					Assert.assertTrue(
+							"The Drug Cost message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(1).getText(),
+							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				} else {
+					Assert.assertTrue(
+							"The Drug Cost message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(0).getText(),
+							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
 		}
-		}
-	} catch (Exception ex) {
-		System.out.println("NBA modal not found");
 	}
-}
 
-public void verifyNBAModalNotDisplayed() {
-	Assert.assertTrue("NBA modal should not be displayed",validateNonPresenceOfElement(nextBestActionModal));
-}
+	public void verifyNBAModalNotDisplayed() {
+		Assert.assertTrue("NBA modal should not be displayed", validateNonPresenceOfElement(nextBestActionModal));
+	}
 
-@FindBy(xpath = "//a[contains(@class,'meet-agent')]")
-private WebElement InsuranceAgentLink;
-public IsInsuranceAgent clickOnRequestInsuranceAgent() {
-	Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page", validate(InsuranceAgentLink));
-	jsClickNew(InsuranceAgentLink);
-	CommonUtility.checkPageIsReadyNew(driver);
-	if (driver.getCurrentUrl().contains("agent-appointment.html"))
-		return new IsInsuranceAgent(driver);
-	else
+	@FindBy(xpath = "//a[contains(@class,'meet-agent')]")
+	private WebElement InsuranceAgentLink;
+
+	public IsInsuranceAgent clickOnRequestInsuranceAgent() {
+		Assert.assertTrue("InsuranceAgent Link is not displayed on Med Supp VPP Plan Summary Page",
+				validate(InsuranceAgentLink));
+		jsClickNew(InsuranceAgentLink);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("agent-appointment.html"))
+			return new IsInsuranceAgent(driver);
+		else
+			return null;
+	}
+
+	public VPPPlanSummaryPage verifyDefaultPlanType(String planType) {
+		validateNew(planTypeHeading);
+		if (planTypeHeading.getText().contains(planType)) {
+			return new VPPPlanSummaryPage(driver);
+		}
 		return null;
-}
+	}
 }
