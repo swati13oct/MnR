@@ -25,6 +25,7 @@ import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.VisitorProfilePage;
 
 /**
  *@author sdwaraka
@@ -50,6 +51,12 @@ public class OLEconfirmationPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='pdptextbtn']")
 	private WebElement NextSteps_PDPBtn;
+	
+	@FindBy(id = "dupIconFlyOut")
+	private WebElement shoppingCartIcon;
+
+	@FindBy(css = "a#visitor-profile-header")
+	private WebElement lnkProfile;
 
 	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
 	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
@@ -603,6 +610,18 @@ public Connection createDataBaseConnection() {
 	      })
 	      .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 	      return my_map;
-	   }	
+	   }
+	
+	public VisitorProfilePage clickOnShoppingCart() {
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
+		threadsleep(2000);
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 }
 	
