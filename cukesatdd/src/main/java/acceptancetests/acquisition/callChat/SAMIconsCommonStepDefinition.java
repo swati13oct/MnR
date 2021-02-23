@@ -237,7 +237,6 @@ public class SAMIconsCommonStepDefinition {
 		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.validateCallpopuponMedsupppage(TFNXpath, ExpecetdTFNNo);
-		getLoginScenario().saveBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO, ExpecetdTFNNo);
 
 	}
 
