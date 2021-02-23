@@ -5171,7 +5171,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
 			System.out.println("TFN is validated successfully on the SAM call icon : " + ActualTFNelement.getText());
 		else
-			Assert.fail("TFN elemnet is not found / displayed on SAM icon : " + TFNXpath);
+			Assert.fail("TFN number validation failed on SAM icon : " + TFNXpath);
 
 		jsClickNew(ActualTFNelement);
 		

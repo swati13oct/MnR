@@ -154,7 +154,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     And user verify the drug summary page
-    And user should be able to see Medicare Advantage plan by default
+    And user should be able to see "Medicare Advantage Plans" by default
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     Then the user verify the default Retail chain pharmacy on drug summary page
