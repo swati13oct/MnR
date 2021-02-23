@@ -796,7 +796,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
 
-	@FindBy(xpath = "//header/nav[2]/div[2]/a[1]/img[1]")
+	@FindBy(xpath = "//body[1]/header[1]/nav[2]/div[2]/a[1]/img[1]")
 	private WebElement rockyMountainLogo;
 
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
@@ -1434,12 +1434,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
 			// planName);
 		} else if (planName.contains("HMO")) {
+			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
 			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
 			// planName);
+			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
 		}
 		/*

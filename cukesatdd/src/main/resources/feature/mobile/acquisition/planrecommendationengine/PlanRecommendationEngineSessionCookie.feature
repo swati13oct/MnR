@@ -343,7 +343,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       |   32111 | No            | Marion   | MAPD          | Medicaid     | outsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               | SNP                   | julia_dowden@optum.com |
       |   10001 | No            | New York | MAPD          | None         | None      | UHGNetwork      |             |               | No             | No,No,No,Yes                  | Lower                | MA                    | julia_dowden@optum.com |
 
-  @PRE @planrecommendation @DruglistSessionStoragePREtoDCE @F537262 @PRERegression8
+  @PRE @planrecommendation @DruglistSessionStoragePREtoDCE @F537262 @PRERegression8 @CP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug list are same PRE vs DCE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

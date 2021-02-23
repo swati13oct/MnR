@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
@@ -366,11 +367,15 @@ public class DCEACQNewRunnerMobile {
 	@Then("^the user clicks PrescriptionBenifit Tab on Plan Details Page$")
 	public void the_user_clicks_PrescriptionBenifit_Tab_on_Plan_Details_Page() throws Throwable {
 
-		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+//		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
+//				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+//		plandetailspage.clickPrescriptionBenifitTab();
+		
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 
-		DrugDetailsPageMobile drugDetailsPage = plandetailspage.clickPrescriptionBenifitTab();
+		
+		PlanDetailsPageMobile plandetailspage = drugDetailsPage.clickPrescriptionBenifitTab();
 	}
 
 	@Then("^the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page$")

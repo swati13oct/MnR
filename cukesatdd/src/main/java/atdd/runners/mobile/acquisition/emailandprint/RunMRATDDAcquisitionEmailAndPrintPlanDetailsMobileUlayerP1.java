@@ -17,6 +17,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobile
 overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP1")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = {
 		"src/main/resources/feature/mobile/acquisition/vpp" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP1.json" }, tags = { "@VppEmailandPrintCommon_AARP_1"})//@emailAndPrint_AARP","@emailAndPrintplancompare" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP1.json" }, 
+				tags = { "@VppEmailandPrintCommon_AARP_1"})//@emailAndPrint_AARP","@emailAndPrintplancompare" })
 public class RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP1 {
 }

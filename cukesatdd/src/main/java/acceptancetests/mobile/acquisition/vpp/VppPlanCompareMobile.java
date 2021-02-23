@@ -1803,21 +1803,21 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 
@@ -1833,19 +1833,19 @@ public class VppPlanCompareMobile {
 		// note: the second plan in the list will be unsaved
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(snp_plans, planType);
 	}

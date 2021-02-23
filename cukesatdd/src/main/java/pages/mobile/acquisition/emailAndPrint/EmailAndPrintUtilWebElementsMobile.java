@@ -130,7 +130,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath="//a[@id='backtoplansummarypage']")
 	protected WebElement backToAllPlansLnk;
 
-	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
+	@FindBy(xpath="//button[@ng-click='closeEmailSuccessMsgPopUp()']")
 	protected WebElement closeButtonthankyoumessagepopup;
 
 	@FindBy(xpath=".//*[@id='emailComparison']")
@@ -142,10 +142,10 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[1]")
 	protected WebElement cancelButtonEmailPlanComparePopUp;
 	
-	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[2]")
+	@FindBy(xpath="//button[@class='uhc-button sendbutton close-modal secondary']")
 	protected WebElement sendButtonEmailPlanComparePopUp;
 	
-	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
+	@FindBy(css="#emailSuccess")
 	protected WebElement validatesuccesspopup;
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetail']")

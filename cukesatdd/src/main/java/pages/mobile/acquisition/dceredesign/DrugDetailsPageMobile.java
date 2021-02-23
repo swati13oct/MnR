@@ -1349,8 +1349,9 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	private WebElement prescriptionTab;
 
 	// LearnMore changes Start
-	public void clickPrescriptionBenifitTab() {
+	public PlanDetailsPageMobile clickPrescriptionBenifitTab() {
 		jsClickNew(prescriptionTab);
+		return null ;
 
 	}
 
