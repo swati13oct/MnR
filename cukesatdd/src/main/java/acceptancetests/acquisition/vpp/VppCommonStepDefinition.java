@@ -3733,5 +3733,25 @@ public class VppCommonStepDefinition {
 		plansummaryPage.verifyNBAModalNotDisplayed();
 	}
 	
+	@Then("^the site user clicks on continue application until confirmaion page for vpp pages$")
+	public void conitnue_application_until_confirmation_page_vpp_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPagevpppages(Medicarenumber);
+		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+
+	}
+
+	
 }
 
