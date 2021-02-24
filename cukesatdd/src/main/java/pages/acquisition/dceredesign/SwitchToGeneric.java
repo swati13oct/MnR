@@ -85,12 +85,15 @@ public class SwitchToGeneric extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'plans in your area')]")
 	public WebElement LinkToDrugSummary;
-
+	
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Return to')]")
+	public WebElement LinktoExitScenario;
+	
 	public DrugDetailsPage ClickSwitch_ReturnDetailsPage() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinkToDrugSummary)) {
+		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinktoExitScenario)) {
 			Assert.assertTrue("Naviagted to DCE Drug Details Page", true);
 			return new DrugDetailsPage(driver);
 		}
@@ -150,10 +153,10 @@ public class SwitchToGeneric extends UhcDriver {
 
 
 	public void validateSwitchPage(String genericDrug, String brandDrug) {
-		WebElement GenericDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '"+genericDrug+"')]"));
-		WebElement BrandDrugText = driver.findElement(By.xpath("//h2//*[contains(text(), '"+brandDrug+"')]"));
+		WebElement GenericDrugText = driver.findElement(By.xpath("//h3//*[contains(text(), '"+genericDrug+"')]"));
+		WebElement BrandDrugText = driver.findElement(By.xpath("//h3//*[contains(text(), '"+brandDrug+"')]"));
 		WebElement SavingsText = driver.findElement(By.xpath("//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
-		
+		openAndValidate();
 		if(!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
 			Assert.fail("Switch To Generic Page Validation Failed");
 		}

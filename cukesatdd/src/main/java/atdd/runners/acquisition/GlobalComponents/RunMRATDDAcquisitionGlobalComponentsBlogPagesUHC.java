@@ -11,7 +11,7 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsBlogPagesBlog1UHC
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=2,screenShotSize="", screenShotLocation="/screenshots/",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsBlogPagesUHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
 outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsBlogPagesUHC")

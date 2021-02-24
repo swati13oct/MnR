@@ -2119,29 +2119,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 
-	public pages.acquisition.dce.ulayer.DrugCostEstimatorPage navigatetoDCEPage(String planName){
-		WebElement DCELink = null;
-		
-		if(planName.contains("SNP")){
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
-		}else if(planName.contains("PDP")){
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li//*[contains(@id,'pdpDrugCostEstimatorLink')]"));
-		}else
-			DCELink = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'add-drug')]"));
-
-
-		Actions action = new Actions(driver);
-		action.moveToElement(DCELink).build().perform();
-		DCELink.click();
-		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("drug-cost-estimator")){
-			System.out.println("DCE Page is loaded");
-			return new pages.acquisition.dce.ulayer.DrugCostEstimatorPage(driver);
-		}	
-		else
-			return null;  
-	}
-
 
 	public void validateRightRailSection(){
 		validateNew(RightRailSection);
