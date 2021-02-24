@@ -3528,19 +3528,24 @@ public class VppCommonStepDefinition {
 	             int langColIndex = 0;
 	             int componentCodeIndex =0;
 	             int planIDIndexDocLog = 0;
+	             int planNameIndexDocLog = 0;
+	             int yearIndexDocLog = 0;
 	             
 	         //getting the respective col numbers for the following headers in MADocLog
              int docTypeColIndexMA = colNamesMapMA.get("DocType");
              int langColIndexMA = colNamesMapMA.get("OCP/ODP");
              int componentCodeIndexMA = colNamesMapMA.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
              int planIDIndexDocLogMA = colNamesMapMA.get("Contract-PBP-SegmentID");
-
+             int planNameIndexDocLogMA = colNamesMapMA.get("DocumentDescription");
+             int yearIndexDocLogMA = colNamesMapMA.get("Year");
              
              //getting the respective col numbers for the following headers in PDPDocLog
-             int docTypeColIndexPDP = colNamesMapMA.get("DocType");
-             int langColIndexPDP = colNamesMapMA.get("OCP/ODP");
-             int componentCodeIndexPDP = colNamesMapMA.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
-             int planIDIndexDocLogPDP = colNamesMapMA.get("Contract-PBP-SegmentID");
+             int docTypeColIndexPDP = colNamesMapPDP.get("DocType");
+             int langColIndexPDP = colNamesMapPDP.get("OCP/ODP");
+             int componentCodeIndexPDP = colNamesMapPDP.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+             int planIDIndexDocLogPDP = colNamesMapPDP.get("Contract-PBP-SegmentID");
+             int planNameIndexDocLogPDP = colNamesMapPDP.get("DocumentDescription");
+             int yearIndexDocLogPDP = colNamesMapMA.get("Year");
 			 String  planType = "";
 			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 	            {
@@ -3581,15 +3586,19 @@ public class VppCommonStepDefinition {
 							 
 							 //based on the column headers, determines the equivalent name of the pdf in the doclog file and the language for that pdf to match in the doclog file
 							 ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
-							 int rowIndexOfDocCode = 0; String planId= "";
+							 int rowIndexOfDocCode = 0; String planId= "", planYear ="", planName = "";
 							 
 							 if(currentColName.equalsIgnoreCase("plan id"))
 								 planId = cell.getStringCellValue();
 							 else if(currentColName.equalsIgnoreCase("plan type"))
 								 planType = cell.getStringCellValue();
+							 else if(currentColName.equalsIgnoreCase("year"))
+								 planYear = cell.getStringCellValue();
+							 else if(currentColName.equalsIgnoreCase("plan name"))
+								 planName = cell.getStringCellValue();
 								 
 							 boolean flag = false; String failedMessage = "";
-							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
+							 if(!(currentColName.contains("Link")||currentColName.contains("Year")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
 							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName); //method returns true/false value along with the document code in hashmap
 							   
 							  	if(resultMap.containsKey(true) && (resultMap.get(true).equalsIgnoreCase("NA")||currentColName.contains("Step Therapy") || currentColName.contains("Prior Auth") ||currentColName.contains("Formulary Additions")||currentColName.contains("Formulary Deletions"))) {
@@ -3606,6 +3615,8 @@ public class VppCommonStepDefinition {
 									  			langColIndex = langColIndexPDP;
 									  			componentCodeIndex = componentCodeIndexPDP;
 									  			planIDIndexDocLog = planIDIndexDocLogPDP;
+									  			planNameIndexDocLog = planNameIndexDocLogPDP;
+									  			yearIndexDocLog = yearIndexDocLogPDP;
 									  		}else {
 									  			lastRowDocLog = lastRowDocLogMA;
 									  			sheetDocLog = sheetDocLogMA; 
@@ -3613,6 +3624,8 @@ public class VppCommonStepDefinition {
 									  			langColIndex = langColIndexMA;
 									  			componentCodeIndex = componentCodeIndexMA;
 									  			planIDIndexDocLog = planIDIndexDocLogMA;
+									  			planNameIndexDocLog = planNameIndexDocLogMA;
+									  			yearIndexDocLog = yearIndexDocLogMA;
 									  		}
 	
 							  				
@@ -3627,17 +3640,34 @@ public class VppCommonStepDefinition {
 									  		String docTypeDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue(); // document type value from the doclog file
 									  		String langDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue(); //language value from doclog file
 									  		String planIDDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue(); //plan id from the doclog file
-									  		
-									  		
+									  		String planNameDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planNameIndexDocLog).getStringCellValue(); //plan name from the doclog file
+									  		double yearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getNumericCellValue(); //plan year from the doclog file
+									  		String planYearDocLog = String.valueOf(yearDocLog);
+									  		planYearDocLog = planYearDocLog.substring(0, planYearDocLog.indexOf("."));
 									  		//checks if the doc type matches for this component code
 									  		 if(docTypeDocLog.contains(docLangList.get(0))){
 									  			 //checks if the language matches for this component code
 										  			if(langDocLog.contains(docLangList.get(1))){
 										  				//checks if plan id matches for the component code
 											  				if(planIDDocLog.contains(planId)) {
-											  					flag = true;
-											  					newCell.setCellStyle(stylePassed);
-																newCell.setCellValue(resultMap.get(true));
+											  					//checks if plan name matches for the component code
+											  						if(planNameDocLog.contains(planName)) {
+											  							//checks if plan year matches the component code
+											  								if(planYearDocLog.contains(planYear)) {
+											  									flag = true;
+															  					newCell.setCellStyle(stylePassed);
+																				newCell.setCellValue(resultMap.get(true));
+											  								}else {
+											  									failedMessage = "Failed to match the component code with the plan year: "+planYearDocLog;
+															  					newCell.setCellStyle(styleFailed);
+															  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+											  								}
+											  						}else {
+											  							failedMessage = "Failed to match the component code with the plan name: "+planNameDocLog;
+													  					newCell.setCellStyle(styleFailed);
+													  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+											  						}
+											  					
 													  		 }else{// else for plan id check
 													  			 failedMessage = "Failed to match the component code with the plan ID: "+planIDDocLog;
 											  					newCell.setCellStyle(styleFailed);
