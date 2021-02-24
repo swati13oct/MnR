@@ -857,11 +857,13 @@ public class VisitorProfilePage extends UhcDriver {
 		try {
 
 			loginLink.click();
+			waitForPageLoadSafari();
 			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			System.out.println("before signin");
 			driver.findElement(By.cssSelector("input#SignIn")).click();
 			System.out.println("before wait");
+			waitForPageLoadSafari();
 			waitforElement(driver.findElement(By.cssSelector("#securityQues")));
 			System.out.println("after wait");
 			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();

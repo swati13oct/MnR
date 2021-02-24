@@ -6154,14 +6154,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					Assert.assertTrue(
 							"The Drug cost message is not displayed on NBA.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
-									+ nextBestActionModalMsg.get(1).getText(),
-							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
 				} else {
 					Assert.assertTrue(
 							"The Drug cost message is not displayed on NBA.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
-									+ nextBestActionModalMsg.get(0).getText(),
-							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+									+ nextBestActionModalMsg.get(0).getText().trim(),
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
 				}
 			}
 		} catch (Exception ex) {
@@ -6234,8 +6234,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				Assert.assertTrue(
 						"The Continue Enrollment message is not displayed.../n Expected Message"
 								+ NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT + "\n Actual message"
-								+ nextBestActionModalMsgAuthenticated.getText(),
-						nextBestActionModalMsgAuthenticated.getText()
+								+ nextBestActionModalMsgAuthenticated.getText().trim(),
+						nextBestActionModalMsgAuthenticated.getText().trim()
 								.equals(NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT));
 			}
 		} catch (Exception ex) {
@@ -6263,8 +6263,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				Assert.assertTrue(
 						"The Continue Enrollment message is not displayed.../n Expected Message"
 								+ NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT + "\n Actual message"
-								+ nextBestActionModalMsgAuthenticated.getText(),
-						nextBestActionModalMsgAuthenticated.getText()
+								+ nextBestActionModalMsgAuthenticated.getText().trim(),
+						nextBestActionModalMsgAuthenticated.getText().trim()
 								.equals(NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT));
 			}
 		} catch (Exception ex) {
