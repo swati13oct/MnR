@@ -1,5 +1,6 @@
 package acceptancetests.acquisition.campaignExternalLinkE2E;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -300,7 +302,7 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		PharmacySearchPage pharmacySearchPage = campaignExternalLinkspage.navigateToPharmacyGetStarted();
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 	}
 
 	@Then("^the user clicks on Get Help Finding a Plan button on Morgan Stanley external link page$")
@@ -313,7 +315,7 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 
 	@When("^the user performs plan search using following information on Morgan Stanley external link page$")
 	public void the_user_performs_plan_search_using_following_information_on_Morgan_Stanley_external_link_page(
-			DataTable givenAttributes) throws InterruptedException {
+			DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -352,6 +354,52 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyDefaultPlanType(planType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+	}
+
+	@And("^the user enters following details on Pharmacy search page$")
+	public void the_user_enters_following_details_on_Pharmacy_search_page(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String distance = memberAttributesMap.get("Distance");
+		String county = memberAttributesMap.get("County Name");
+
+		if (county == null)
+			county = "None";
+
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.DISTANCE, distance);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.COUNTY, county);
+
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
+
+		List<String> noteList = new ArrayList<String>();
+		noteList.add("");
+		noteList.add("===== TEST NOTE ================================================");
+
+		String testSiteUrl = "https://www.aarpmedicareplans.com/";
+		String currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
+		noteList.add("test run at stage time =" + currentEnvTime);
+
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
+
+		String[] tmpDateAndTime = currentEnvTime.split(" ");
+		String[] tmpDate = tmpDateAndTime[0].split("/");
+		String envTimeYear = tmpDate[tmpDate.length - 1];
+		System.out.println("TEST - sysTimeYear=" + envTimeYear);
+
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
+
+		List<String> testNote = pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+		noteList.addAll(testNote);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 
 	}
 

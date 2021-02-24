@@ -752,7 +752,7 @@ public class CampaignExternalLinks extends UhcDriver {
 				driver.switchTo().window(window);
 			}
 		}
-		if (driver.getTitle().toLowerCase().contains("Locate a Pharmacy Near You | UnitedHealthcare")) {
+		if (driver.getTitle().equalsIgnoreCase("Locate a Pharmacy Near You | UnitedHealthcare")) {
 				return new PharmacySearchPage(driver);
 		}
 		return null;
