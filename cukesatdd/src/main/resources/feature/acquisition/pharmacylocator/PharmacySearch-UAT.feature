@@ -46,10 +46,7 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
-      | ZipCode | <zipCode> |
-    And user clicks on continue button in Zip Entry Page
-    When user enters valid zipcode and county
-      | ZipCode | <zipCode> |
+      | ZipCode | <zipcode> |
     And user clicks on continue button in Zip Entry Page
     And user verify the drug summary page
     And user should be able to see Medicare Advantage plan by default
