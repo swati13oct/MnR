@@ -231,7 +231,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String headerPremiumXpath = planCard+"//*[contains(@class,'monthly-cost')]";
 		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
 		String headerPremiumText = "Header not found";
-		String learnMoreLink = planCard + "//span[contains(@ng-if,'!= 0')]//*[contains(@ng-click,'lispopup')]";
+		String learnMoreLink = "";
+		if(planName.contains("PDP"))
+			learnMoreLink = planCard + "//span[contains(@ng-if,'!= 0')]//*[contains(@ng-click,'lispopup')]";
+		else
+			learnMoreLink = planCard + "//*[contains(@ng-click,'lispopup')]";
 		
 		List<WebElement> learnMoreAboutLink = driver.findElements(By.xpath(learnMoreLink));
 		
@@ -358,6 +362,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			columnName = columnName.toLowerCase().trim();
 			if(key.contains("%"))
 				key = key.replaceAll("\\s+", "");
+			if(columnName.contains("%"))
+				columnName = columnName.replaceAll("\\s+", "");
 			if((benefitValue.contains("NA")||benefitValue.contains("N/A"))) {
 				counter++;
 				if(key.contains(columnName)) {
@@ -421,6 +427,8 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					
 				}else if(columnName.contains(key)) {
 					counter++;
+					benefitValueUI = benefitValueUI.replaceAll("\\s+", "");
+					benefitValue = benefitValue.replaceAll("\\s+", ""); 
 					if(benefitValueUI.equalsIgnoreCase(benefitValue)) {
 						flag = true;break;
 					}else {
