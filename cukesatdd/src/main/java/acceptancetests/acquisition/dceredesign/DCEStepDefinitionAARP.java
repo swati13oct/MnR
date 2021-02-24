@@ -1134,7 +1134,8 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user should be able to toggle between plan types$")
 	public void user_should_be_able_to_toggle_between_plan_types() throws InterruptedException {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.verifyPDPPlanToggle();
 		drugSummaryPage.verifySNPPlanToggle();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -1318,7 +1319,8 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user click on PDP plan to view drug pricing$")
 	public void User_click_on_PDP_plan_in_AARP() throws Throwable {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.clickOnPdpPlan();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
@@ -2479,7 +2481,8 @@ public class DCEStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String pharmacyName = memberAttributesMap.get("DefaultPharmacy");
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateDefaultPharmacyName(pharmacyName);
 	}
 
