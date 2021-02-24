@@ -1146,10 +1146,11 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	}
 
 	// Learn More changes Start
-	public void validatePlanNameLearnMore(String planName) {
+	public void validatePlanNameLearnMore(String PlanName) {
+		
+		System.out.println("Plan Name : " + PlanName);
 
-		System.out.println("Plan Name : " + planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(),'" + PlanName + "')]"));
 		if (validateNew(PlanNameElement)) {
 			Assert.assertTrue("Plan Name is correct for Learn More Page" + PlanNameElement.getText(), true);
 		} else
@@ -1351,7 +1352,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	// LearnMore changes Start
 	public PlanDetailsPageMobile clickPrescriptionBenifitTab() {
 		jsClickNew(prescriptionTab);
-		return null ;
+		return new PlanDetailsPageMobile(driver);
 
 	}
 

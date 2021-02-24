@@ -188,6 +188,7 @@ public class DCEACQHomeMobile {
 
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanName(PlanName);
+	    getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, PlanName);
 	}
 
 	@Then("^the user validates Drug Costs section$")

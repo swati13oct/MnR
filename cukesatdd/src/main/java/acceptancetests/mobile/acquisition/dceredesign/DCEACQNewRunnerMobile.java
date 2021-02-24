@@ -358,7 +358,7 @@ public class DCEACQNewRunnerMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 
-		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanNameLearnMore(PlanName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
@@ -376,15 +376,20 @@ public class DCEACQNewRunnerMobile {
 
 		
 		PlanDetailsPageMobile plandetailspage = drugDetailsPage.clickPrescriptionBenifitTab();
+		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_INFO, plandetailspage);
 	}
 
 	@Then("^the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page$")
 	public void the_user_clicks_Learn_More_button_on_Prescription_Drug_Costs_Tab_on_Plan_Details_Page()
 			throws Throwable {
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		DrugDetailsPageMobile drugDetailsPage = plandetailspage.clickLearnMore();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+				.getBean(PageConstants.DETAIL_PAGE_INFO);
+		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		plandetailspage.clickLearnMore();
+		
+//		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+//		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
+		
 	}
 
 	@Then("^the user validates Insulin savings on Copay section, Your Drugs and Important Information Section$")
