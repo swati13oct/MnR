@@ -90,7 +90,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     Then the user validates PCP page for MA and MAPD PFFS plans
     Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
-    Then user selects payment type
+    Then the user selects payment type
     | Payment Type | <paymentType> |
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
