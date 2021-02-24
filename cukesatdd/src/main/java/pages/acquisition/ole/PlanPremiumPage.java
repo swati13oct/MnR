@@ -3,6 +3,10 @@
  */
 package pages.acquisition.ole;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -60,6 +65,24 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='ole-form-content']//*[contains(@for,'premiumAgree')]")
 	private WebElement agreeBtn;
 	
+	@FindBy(id = "premiumPaymentQstnPBM")
+	private WebElement payByMail;
+	
+	@FindBy(id = "premiumPaymentQstnCC")
+	private WebElement creditCard;
+	
+	@FindBy(id = "premiumPaymentQstnSSRRB")
+	private WebElement socialSecurity;
+	
+	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
+	private WebElement payByMailText;
+	
+	@FindBy(id = "div_cardInfo")
+	private WebElement creditCardText;
+	
+	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
+	private WebElement socialSecurityText;
+	
 	public PlanPremiumPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -106,8 +129,76 @@ public class PlanPremiumPage extends UhcDriver{
 			System.out.println("OLE Authorization page is Displayed : Navigation from Plan Premium Page Failed");
 			return null;
 		}
-	}	
+	}
+	
+	public boolean validatePayByMail(String paymentType) {
+		boolean flag = false;
+		String actualText = null;
+		String expectedText = null;
+		try {
+		if(payByMail.isDisplayed())	{
+			actualText = payByMailText.getText().trim();
+			expectedText = CommonConstants.PAY_BY_MAIL_TEXT;
+			flag = actualText.equalsIgnoreCase(expectedText);
+			
+		}
+			
+			
+		} catch (Exception e) {
+			System.out.println("=====PayByMail FAILED=====");
+		}
 
+			
+    return flag;
+	
+	}
+	
+	public boolean validateCreditCard(String paymentType) {
+		boolean flag = false;
+		String actualText = null;
+		String expectedText = null;
+		
+		try {
+			if(creditCard.isDisplayed())	{
+				actualText = creditCardText.getText().trim();
+				expectedText = CommonConstants.CREDIT_CARD_TEXT;
+				flag = actualText.equalsIgnoreCase(expectedText);
+				
+			}
+				
+				
+			} catch (Exception e) {
+				System.out.println("=====CreditCard FAILED=====");
+			}
 
+				
+	    return flag;
+		
+		}
+	
+	public boolean validateSocialSecurity(String paymentType) {
+		boolean flag = false;
+		String actualText = null;
+		String expectedText = null;
+		
+		try {
+			if(socialSecurity.isDisplayed())	{
+				actualText = socialSecurityText.getText().trim();
+				expectedText = CommonConstants.SOCIAL_SECURITY_TEXT;
+				flag = actualText.equalsIgnoreCase(expectedText);
+				
+			}
+				
+				
+			} catch (Exception e) {
+				System.out.println("=====SocialSecurity FAILED=====");
+			}
+
+				
+	    return flag;
+		
+		}
 
 }
+
+

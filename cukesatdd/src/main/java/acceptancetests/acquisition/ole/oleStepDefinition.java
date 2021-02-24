@@ -3837,4 +3837,34 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		VisitorProfilePage visitorProfilePage = oleConfirmationPage.clickOnShoppingCart();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+	
+	@Then("^the user selects payment type$")
+	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
+		boolean flag = false;
+		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> paymentTypeMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			paymentTypeMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String payType = paymentTypeMap.get("Payment Type");
+		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
+		if(payType.equalsIgnoreCase("PayByMail")) {
+		flag = planPremiumPage.validatePayByMail(payType);
+		}else if(payType.equalsIgnoreCase("CreditCard")) {
+			flag = planPremiumPage.validateCreditCard(payType);	
+		}else if(payType.equalsIgnoreCase("SocialSecurity")) {
+			flag = planPremiumPage.validateSocialSecurity(payType);	
+		}
+		if (flag) {
+			System.out.println("Payment is passed");
+			Assert.assertTrue(true);
+		}
+		else {
+			System.out.println("Payment is failed");
+			Assert.fail("Payment is failed");
+	}
+		
+	}
+
 }
