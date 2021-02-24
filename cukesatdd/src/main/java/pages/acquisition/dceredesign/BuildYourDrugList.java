@@ -189,7 +189,7 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 		waitForPageLoadSafari();
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);;
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
 		validateNew(SelectDrug);
