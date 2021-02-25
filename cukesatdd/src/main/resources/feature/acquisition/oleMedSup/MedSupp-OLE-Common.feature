@@ -37,12 +37,12 @@ Feature: 1.05.9 -OLE MedSupp Flow
     #  | Firstname     | <Firstname>   |
     #  | Lastname      | <Lastname>    |
   
-   #@MedSupp_OLE_Common_AARP 
+   @MedSupp_OLE_Regression_AARP 
    Examples: 
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |TiggerOptumID40 | TiggerTigger1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
 	
-	#@MedSupp_OLE_Common_UHC
+	@MedSupp_OLE_Regression_AARP
    Examples: 
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |TiggerOptumID40 | TiggerTigger1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
@@ -105,12 +105,12 @@ Feature: 1.05.9 -OLE MedSupp Flow
    @MedSupp_OLE_Regression_AARP
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
-      |Yes|1		                  |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
+      |No|1		                  |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
 	
 	@MedSupp_OLE_Regression_UHC
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
-      |Yes|1		                  |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
+      |No|1		                  |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
   
   @MedSupp_OLE_Common
   Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count is reflecting correctly
@@ -138,12 +138,12 @@ Feature: 1.05.9 -OLE MedSupp Flow
    @MedSupp_OLE_Regression_AARP
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
-      |Yes			    |4		                    |2|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
+      |No			    |4		                    |2|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
 	
 	@MedSupp_OLE_Regression_UHC
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
-      |Yes			    |4		                  |2		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
+      |No			    |4		                  |2		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
   
   @MedSupp_OLE_Common
   Scenario Outline: Med sup Plans saved in summary page not reflecting in Plans compare page
@@ -245,12 +245,12 @@ Feature: 1.05.9 -OLE MedSupp Flow
        And user clicks on view saved plans land on shopper profile page
        Then user clicks on view plan details button and validates plan name start application button and benefit link
       
-   @MedSupp_OLE_Regression_AARP
+   #@MedSupp_OLE_Regression_AARP1
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |Yes			    |4		                    |2|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
 	
-	@MedSupp_OLE_Regression_UHC
+	#@MedSupp_OLE_Regression_UHC1
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |Yes			    |4		                  |2		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
