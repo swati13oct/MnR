@@ -151,7 +151,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 	@FindBy(css = "#modal #Quantity")
 	private WebElement modalQuantity;
 
-	@FindBy(css = "#modal #frequency-select")
+	@FindBy(css = "#new-drug-refill")
 	private WebElement modalFrequencySelect;
 
 	@FindBy(css = "#modal uhc-alert")
@@ -297,39 +297,41 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 	}
 	//Drug Adding details in Drug Page   
     public void drugsHandlerWithdetails(String drugsDetails) {
-		String drugName="";
-		boolean searchButtonClick=false;
-		String dosage="";
-		String packageName="";
-		String count="";
-		boolean threeeMonthfrequency=false;
-		boolean GenericDrug=false;
-		boolean switchGeneric=false;
-		
-		String[] drugslist=drugsDetails.split(":");
-		for(int i=0;i<drugslist.length;i++) {
+    	String drugName = "";
+		boolean searchButtonClick = false;
+		String dosage = "";
+		String packageName = "";
+		String count = "";
+		boolean threeeMonthfrequency = false;
+		boolean GenericDrug = false;
+		boolean switchGeneric = false;
+
+		String[] drugslist = drugsDetails.split(":");
+		for (int i = 0; i < drugslist.length; i++) {
 			String drugInfo = drugslist[i];
-			if(drugInfo.trim().length()>0) {
-				String[] drugDetails=drugInfo.split(",");
+			if (drugInfo.trim().length() > 0) {
+				String[] drugDetails = drugInfo.split(",");
 				drugName = drugDetails[0];
-				if(drugDetails[1].toUpperCase().equals("NO"))
+				if (drugDetails[1].toUpperCase().equals("NO"))
 					searchButtonClick = true;
-				dosage=drugDetails[2];
-				packageName=drugDetails[3];
-				count=drugDetails[4];
-				if(drugDetails[5].toUpperCase().equals("3"))
+				dosage = drugDetails[2];
+				packageName = drugDetails[3];
+				count = drugDetails[4];
+				if (drugDetails[5].toUpperCase().equals("3"))
 					threeeMonthfrequency = true;
-				if(drugDetails[6].toUpperCase().equals("YES"))
+				if (drugDetails[6].toUpperCase().equals("YES"))
 					GenericDrug = true;
-				if(drugDetails[7].toUpperCase().equals("YES"))
+				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 
-				addDrugbySearch(drugName,searchButtonClick,dosage,packageName,count,threeeMonthfrequency,GenericDrug,switchGeneric);
+				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
+						GenericDrug, switchGeneric);
 			}
 		}
 		validateResultsCount();
-//		checkRemove(drugslist.length);
+//                            		checkRemove(drugslist.length);
 		validateResultsCount();
+
 		
 	}
 	// Continue Function
@@ -378,17 +380,18 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		verifyConfirmationmodalResults(drugNamesinPRE.size(), drugNamesinPRE, drugNamesStartOver);
 	}
 
-	  //Validating Result Count
-    public void validateResultsCount() {
-    	waitforElementVisibilityInTime(modaldrugsCount, 10);
-		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
-		if (drugsList.size() == confirmationSize) {
-			System.out.println("Results and Count matched");
-		} else {
-			System.out.println("Results and Count mismatch");
-			Assert.assertTrue(false);
+	//Validating Result Count
+		public void validateResultsCount() {
+			validate(modaldrugsCount, 10);			//E2E : Adding validate since scripts failing intermittently while fetching the confirmation size
+			int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
+			if (drugsList.size() == confirmationSize) {
+				System.out.println("Resutls and Count matched");
+			} else {
+				System.out.println("Resutls and Count mismatch");
+				Assert.assertTrue(false);
+			}
 		}
-	}
+
 	// Check Remove Count
 	public void checkRemove(int count) {
 		if (count > 2)
@@ -554,6 +557,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 			System.out.println("Unable to add drug");
 		}
 	}
+	
 	// Clicking Switch Drug Model
 
 	public void clickSwitchdrug() {

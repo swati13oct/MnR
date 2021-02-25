@@ -147,9 +147,11 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			}
 			summary_printButton.click();
 		} else if (pageType.equalsIgnoreCase("compare")) {
-			compare_validateprintbutton.click();
+			//compare_validateprintbutton.click();
+			jsClickNew(compare_validateprintbutton);
 		} else if (pageType.equalsIgnoreCase("detail")) {
-			validatePrintButtonOnPlanDetails.click();
+			//validatePrintButtonOnPlanDetails.click();
+			jsClickNew(validatePrintButtonOnPlanDetails);
 		} else {
 			Assert.assertTrue("PROBLEM - need to code Print Option for this page type: "+pageType, false);
 		}

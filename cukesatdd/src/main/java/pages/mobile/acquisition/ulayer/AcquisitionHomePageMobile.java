@@ -2004,6 +2004,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void selectState(String state) {
 		pageloadcomplete();
 		selectFromDropDownByValue(stateDropDown, state);
+		
 	}
 
 	/**

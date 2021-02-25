@@ -682,7 +682,7 @@ public abstract class UhcDriver {
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
 		mobileSelectOption(dropdownElement, value, true);
-		// dropdown.selectByValue(value);
+		dropdown.selectByValue(value);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
 		if (!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))

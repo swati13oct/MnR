@@ -654,6 +654,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		// vppToPre();
 		MobileMenuAndGetPlanRecom();
 		validateDrugPage(flow, true);
+		
 	}
 
 	public void startnowtilldrugs() {
@@ -740,6 +741,20 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 			}
 		}
 		else {
+			System.out.println("Drug and Modal Results Count mismatch");
+			Assert.assertTrue(false);
+		}
+		
+		if (drug.size() == drugListVPP.size() && count == drug.size()) {
+			String druglist = drug.toString();
+			String vppdruglist = drugListVPP.toString();
+			if (druglist.equalsIgnoreCase(vppdruglist)) {
+				System.out.println("Drug and Modal Result's Content matched");
+			} else {
+				System.out.println("Drug and Modal Result's Content mismatch");
+				Assert.assertTrue(false);
+			}
+		} else {
 			System.out.println("Drug and Modal Results Count mismatch");
 			Assert.assertTrue(false);
 		}
@@ -1036,6 +1051,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	}
 
 	public void sendEmail(String plan, String email) {
+		pageloadcomplete();
 		System.out.println("Email Plan list from VPP : ");
 		plansLoader();
 		if (plan.equalsIgnoreCase("PDP")) {
@@ -1053,7 +1069,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		jsSendkeys(emailText, email);
 		jsClickNew(emailSendButton);
 		validate(emailSuccess, 15);
-		jsClickNew(emailCloseButton);
+		//jsClickNew(emailCloseButton);
 	}
 
 	public void validateUIAPIRecommendations() {
@@ -1226,6 +1242,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 					"Invalid Plan Ranking between API and UI : " + vppPlans.get(i) + "<-> " + APIRankings.get(i));
 		}
 		System.out.println("API vs UI Plan Ranking Successful");
+		
+		
 	}
 
 	public String getplanId(WebElement plan) {
