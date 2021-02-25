@@ -384,18 +384,21 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		noteList.add("");
 		noteList.add("===== TEST NOTE ================================================");
 
-		String testSiteUrl = "https://www.aarpmedicareplans.com/";
-		String currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
-		noteList.add("test run at stage time =" + currentEnvTime);
-
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
-
-		String[] tmpDateAndTime = currentEnvTime.split(" ");
-		String[] tmpDate = tmpDateAndTime[0].split("/");
-		String envTimeYear = tmpDate[tmpDate.length - 1];
-		System.out.println("TEST - sysTimeYear=" + envTimeYear);
-
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
+		/*
+		 * String testSiteUrl = "https://www.aarpmedicareplans.com/"; String
+		 * currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
+		 * noteList.add("test run at stage time =" + currentEnvTime);
+		 * 
+		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME,
+		 * currentEnvTime);
+		 * 
+		 * String[] tmpDateAndTime = currentEnvTime.split(" "); String[] tmpDate =
+		 * tmpDateAndTime[0].split("/"); String envTimeYear = tmpDate[tmpDate.length -
+		 * 1]; System.out.println("TEST - sysTimeYear=" + envTimeYear);
+		 * 
+		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR,
+		 * envTimeYear);
+		 */
 
 		List<String> testNote = pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
 		noteList.addAll(testNote);
