@@ -2170,7 +2170,7 @@ public class oleStepDefinition {
 			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 
-			if(!planType.contentEquals("PDP")){
+		/*	if(!planType.contentEquals("PDP")){
 				PlanPremiumPage  planPremiumPage = (PlanPremiumPage) pcpPage.navigate_to_Plan_Premium_Page();
 				if (planPremiumPage != null) {
 
@@ -2180,7 +2180,17 @@ public class oleStepDefinition {
 				}
 				else
 					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
-			}
+			}*/
+				PlanPremiumPage  planPremiumPage = (PlanPremiumPage) pcpPage.navigate_to_Plan_Premium_Page();
+				if (planPremiumPage != null) {
+
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE,
+							planPremiumPage);
+					System.out.println("PCP Page is not Displayed : OLE Monthly Plan Premium Page is Displayed for Plantype : "+planType);
+				}
+				else
+					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
+			
 		//}
 	}
 
