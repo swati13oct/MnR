@@ -11,7 +11,8 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
   And the user clicks on the Shop button for Medicare Advantage Plan and navigates to MA plans page
   And the user validate ZipCode Components on Shop pages using ZipCode "80001"
   And the user clicks on See more benefits link on shop page
-  And the user closes the new browser tab
+  #And the user closes the new browser tab
+  And the user clicks on browser back button
   And the user clicks on Agent link and validates the correct URL is loaded
       |UHC Agent URL|  <UHCUrl>  |
   And the user closes the new browser tab
@@ -190,12 +191,12 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     	Then the user navigates to Medicare Information Page
     	And the user cancels enrollment and navigates to homepage
     
-    @vppE2EScenario5  @vppPlanSummaryCommonAARP01
+   @vppE2EScenario5  @vppPlanSummaryCommonAARP01
    Examples: 
       |Scenario              | site | zipcode |zipcode2| isMultutiCounty | county        |county2    | plantype | plantype1 | drug1   | drug2    | drug3   |  planyear |planname                         |planname1													|firstname | lastname |dob      | gender | permstreet     | permcity    | mailingaddressquestion | mailingstreet        | mailingcity | mailingstate | mailingzip		 | email         | emailConfirmation | goGreen | phoneno   | mobileno |  middlename|                                               
       |VPP-E2E Scenario5_AMP |AARP |   33111 |90210| No              | Miami-Dade County |Los Angeles| PDP      | MAPD      | Lipitor | Ibuprofen| Nicomide|next       |AARP MedicareRx Walgreens (PDP)  |AARP Medicare Advantage Choice (PPO)|GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami        | No                    |  123 Test             |  Miami 		| FL          	|  33111       |test@test.com |  yes               | yes     | 1234567890|2345678901| Test_Middle|
       
-       @vppPlanSummaryCommonUHC01 
+   @vppPlanSummaryCommonUHC01 
    Examples: 
       |Scenario              | site | zipcode |zipcode2| isMultutiCounty | county        |county2    | plantype | plantype1 | drug1   | drug2    | drug3   |  planyear |planname                         |planname1													|firstname | lastname |dob      | gender | permstreet     | permcity    | mailingaddressquestion | mailingstreet        | mailingcity | mailingstate | mailingzip		 | email         | emailConfirmation | goGreen | phoneno   | mobileno |  middlename|                                               
       |VPP-E2E Scenario5_UMS |UHC |   33111 |90210| No              | Miami-Dade County |Los Angeles| PDP      | MAPD      | Lipitor | Ibuprofen| Nicomide|next       |AARP MedicareRx Walgreens (PDP)  |AARP Medicare Advantage Choice (PPO)|GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami        | No                    |  123 Test             |  Miami 		| FL          	|  33111       |test@test.com |  yes               | yes     | 1234567890|2345678901| Test_Middle|
