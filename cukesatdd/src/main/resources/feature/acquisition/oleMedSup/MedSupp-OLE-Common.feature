@@ -79,7 +79,7 @@ Feature: 1.05.9 -OLE MedSupp Flow
   
   
 @MedSupp_OLE_Common
-  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count is reflecting correctly
+  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count <NoOfSavedPlansOnComparePage> is reflecting correctly
    Given the user is on medicare acquisition site landing page
    		|Site| <site>|
 		When the user performs plan search using following information
@@ -113,7 +113,7 @@ Feature: 1.05.9 -OLE MedSupp Flow
       |No|1		                  |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
   
   @MedSupp_OLE_Common
-  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count is reflecting correctly
+  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count <NoOfSavedPlansOnComparePage> is reflecting correctly
    Given the user is on medicare acquisition site landing page
    		|Site| <site>|
 		When the user performs plan search using following information
