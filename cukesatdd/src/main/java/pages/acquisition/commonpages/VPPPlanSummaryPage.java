@@ -933,7 +933,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'drug-list-title')]")
 	private WebElement drugListPlanCard;
 	
-	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-drug']")
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-icon']")
 	private List<WebElement> removeDrugListPlanCard;
 	
 	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
@@ -947,6 +947,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement nextBestActionModalGetStartedBtn;
+	
+	@FindBy(xpath = "//*[contains(@id,'drug-list-title') and contains(@aria-expanded,'true')]")
+	private WebElement expandedDruglistPlanCard;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -1040,8 +1043,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			// sleepBySec(2);
+			
 			jsClickNew(maPlansViewLink);
+			//sleepBySec(2);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
@@ -6288,10 +6292,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public void removeDrugsFromPlanCard() {
 		try {
-			drugListPlanCard.click();
+			validate(drugListPlanCard);
+			//drugListPlanCard.click();
+			jsClickNew(drugListPlanCard);
+			validate(expandedDruglistPlanCard);
+			//scrollToView(expandedDruglistPlanCard);
 		while(removeDrugListPlanCard.size()!=0) {
+			//scrollToView(removeDrugListPlanCard.get(0));
 			removeDrugListPlanCard.get(0).click();
 			System.out.println("Removed drugs in plan card");
+			driver.navigate().refresh();
 		}
 		}
 		catch(Exception e) {
