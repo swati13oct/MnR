@@ -933,7 +933,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'drug-list-title')]")
 	private WebElement drugListPlanCard;
 	
-	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-drug']")
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-icon']")
 	private List<WebElement> removeDrugListPlanCard;
 	
 	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
@@ -947,6 +947,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement nextBestActionModalGetStartedBtn;
+	
+	@FindBy(xpath = "//*[contains(@id,'drug-list-title') and contains(@aria-expanded,'true')]")
+	private WebElement expandedDruglistPlanCard;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -1040,8 +1043,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
-			// sleepBySec(2);
+			
 			jsClickNew(maPlansViewLink);
+			//sleepBySec(2);
 			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
@@ -4596,7 +4600,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		//validateNew(VerificationAgree2);
 	//	jsClickNew(VerificationAgree2);
-		jsClickNew(nextButton);
+	//	jsClickNew(nextButton);
 		validateNew(VerificationAgree3);
 		Thread.sleep(3000);
 		jsClickNew(VerificationAgree3);
@@ -4617,6 +4621,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return Medicarenumber;
 	}
+	
+	
+	
 
 	public void medsuppOLERightRail() throws InterruptedException {
 		validateNew(RightRail_yourGuide);
@@ -6288,10 +6295,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	public void removeDrugsFromPlanCard() {
 		try {
-			drugListPlanCard.click();
+			validate(drugListPlanCard);
+			//drugListPlanCard.click();
+			jsClickNew(drugListPlanCard);
+			validate(expandedDruglistPlanCard);
+			//scrollToView(expandedDruglistPlanCard);
 		while(removeDrugListPlanCard.size()!=0) {
+			//scrollToView(removeDrugListPlanCard.get(0));
 			removeDrugListPlanCard.get(0).click();
 			System.out.println("Removed drugs in plan card");
+			driver.navigate().refresh();
 		}
 		}
 		catch(Exception e) {
@@ -6612,5 +6625,97 @@ public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
 			driver.switchTo().window(window);
 		}
 	}
+}
+
+public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) throws InterruptedException {
+
+	// CommonUtility.waitForPageLoadNew(driver, MedicareNumber, 20);
+	MedicareNumber.sendKeys(Medicarenumber);
+	clickGender();
+//	Gender.click();
+	// jsClickNew(Gender);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(nextButton);
+	jsClickNew(CoverageMedicaid);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoveragePartc);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoverageSupplementPlans);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoverageotherInsurance);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoverageVerification);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoverageVerification1);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoverageVerification2);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoverageVerification2);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoverageVerification);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(CoverageVerificationAcknowledge);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(paymentOption);
+	jsClickNew(nextButton);
+	Thread.sleep(2000);
+	jsClickNew(DocumentDelivery);
+	jsClickNew(nextButton);
+
+	///////////////////////// New to add another Method
+	validateNew(EmailAddressNo);
+	jsClickNew(EmailAddressNo);
+	jsClickNew(nextButton);
+	validateNew(ReadAgreement);
+	jsClickNew(ReadAgreement);
+	jsClickNew(nextButton);
+
+	validateNew(ProceedAuthorization);
+	((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ProceedAuthorization);
+	jsClickNew(ProceedAuthorization);
+	validateNew(VerificationAgree);
+	jsClickNew(VerificationAgree);
+	jsClickNew(nextButton);
+//----------Added Lines for vpp pages-------------------
+	//validateNew(VerificationAgree2);
+//	jsClickNew(VerificationAgree2);
+	////////////---------------
+	//jsClickNew(nextButton);
+	validateNew(VerificationAgree3);
+	Thread.sleep(3000);
+	jsClickNew(VerificationAgree3);
+	jsClickNew(nextButton);
+
+	if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+		validateNew(SubmitApplication);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", SubmitApplication);
+		jsClickNew(SubmitApplication);
+		validateNew(submitconfirmation);
+		String SubmitConfirmation = submitconfirmation.getText();
+		System.out.println("The return to the application code is- " + SubmitConfirmation);
+		Thread.sleep(2000);
+
+		// jsClickNew(ViewPrescriptionDrugPlans);
+		// Thread.sleep(2000);
+		return SubmitConfirmation;
+	}
+	return Medicarenumber;
 }
 }
