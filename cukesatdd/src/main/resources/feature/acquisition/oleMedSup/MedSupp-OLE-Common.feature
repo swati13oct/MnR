@@ -37,12 +37,12 @@ Feature: 1.05.9 -OLE MedSupp Flow
     #  | Firstname     | <Firstname>   |
     #  | Lastname      | <Lastname>    |
   
-   #@MedSupp_OLE_Common_AARP 
+   #@MedSupp_OLE_Regression_AARP 
    Examples: 
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |TiggerOptumID40 | TiggerTigger1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
 	
-	#@MedSupp_OLE_Common_UHC
+	#@MedSupp_OLE_Regression_UHC
    Examples: 
       | zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
       |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |TiggerOptumID40 | TiggerTigger1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
@@ -79,7 +79,7 @@ Feature: 1.05.9 -OLE MedSupp Flow
   
   
 @MedSupp_OLE_Common
-  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count is reflecting correctly
+  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count <NoOfSavedPlansOnComparePage> is reflecting correctly
    Given the user is on medicare acquisition site landing page
    		|Site| <site>|
 		When the user performs plan search using following information
@@ -102,18 +102,18 @@ Feature: 1.05.9 -OLE MedSupp Flow
        Then user clicks on Save icon for all the plans and validate count in cart should match to plans 
        | No Of Saved Plans On Compare Page      | <NoOfSavedPlansOnComparePage>         | 
       
-   @MedSupp_OLE_Regression_AARP
+   @MedSupp_OLE_Regression_AARP @MedSupp_OLE_Regression_AARP_1
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
-      |Yes|1		                  |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
+      |yes              |1		                    |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
 	
 	@MedSupp_OLE_Regression_UHC
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
-      |Yes|1		                  |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
+      |yes|1		                  |1		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
   
   @MedSupp_OLE_Common
-  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count is reflecting correctly
+  Scenario Outline: Med Sup Heart icon should save  on VPP summary page when the cart count <NoOfSavedPlansOnComparePage> is reflecting correctly
    Given the user is on medicare acquisition site landing page
    		|Site| <site>|
 		When the user performs plan search using following information
@@ -138,12 +138,12 @@ Feature: 1.05.9 -OLE MedSupp Flow
    @MedSupp_OLE_Regression_AARP
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
-      |Yes			    |4		                    |2|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
+      |yes			    |4		                    |2|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|AARP|
 	
 	@MedSupp_OLE_Regression_UHC
    Examples: 
       |NavigateToCompare|NoOfSavedPlansOnComparePage|NoOfPlans| zipcode | isMultutiCounty | AARPUrl																					| county             | plantype | DOB      | Firstname | Lastname|  ApplicationID | applicationType | username | password |AARPUrl-stg|site|
-      |Yes			    |4		                  |2		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
+      |yes			    |4		                  |2		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
   
   @MedSupp_OLE_Common
   Scenario Outline: Med sup Plans saved in summary page not reflecting in Plans compare page
@@ -202,7 +202,7 @@ Feature: 1.05.9 -OLE MedSupp Flow
       |Yes			    |4		                  |2		|   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html|Los Angeles County | MS       | 11/13/1940 | John      | Carry   |    ABCD        | Resume          |mnrqavd11 | Password@1|https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html|UHC|
   
    @MedSupp_OLE_Common
-  Scenario Outline: Shopper Profile selection of View Plan Details Navigated to Med Supp Plan Details Page
+  Scenario Outline: Shopper Profile selection of View Plan Details Navigated to Med Supp Plan Compare Page
    Given the user is on medicare acquisition site landing page
    		|Site| <site>|
 		When the user performs plan search using following information

@@ -869,7 +869,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[text()='Compare'])[1]")
 	private WebElement compareButton;
 
-	@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
+	//@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
+	@FindBy(xpath = "//span[contains(@class,'semiBoldText colorPrimaryBlue')]")
 	private WebElement comparePageHeader;
 
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
