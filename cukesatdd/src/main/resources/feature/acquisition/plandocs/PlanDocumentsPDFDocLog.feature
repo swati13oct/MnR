@@ -25,6 +25,16 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
       | excelPath                | workSheet | site |
       | PlanDocs_Validation_Data | Sheet3    | AARP |
       
+          @pdfDocLogAARP04
+    Examples: 
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet4    | AARP |
+      
+          @pdfDocLogAARP05
+    Examples: 
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet5    | AARP |
+      
       @pdfDocLogUHC01
     Examples: 
       | excelPath                | workSheet | site |
@@ -39,3 +49,13 @@ Feature: test Plan Documents PDFs on Plan Deatils Page
     Examples: 
       | excelPath                | workSheet | site |
       | PlanDocs_Validation_Data | Sheet3    | UHC |
+      
+        @pdfDocLogUHC04
+    Examples: 
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet4    | UHC |
+      
+        @pdfDocLogUHC05
+    Examples: 
+      | excelPath                | workSheet | site |
+      | PlanDocs_Validation_Data | Sheet5    | UHC |
