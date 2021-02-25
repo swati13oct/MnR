@@ -3,7 +3,7 @@ Feature: 1.05.8. OLE PRE Integration Flow
 	Scenario Outline: To validate MA plans through PRE
      Given the user is on medicare acquisition site landing page for PRE
       | Site | <site> |
-    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
+#    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
     And clicks on get started button and runs a questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
