@@ -1213,6 +1213,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
 		Actions action = new Actions(driver);
+		scrollToView(navigationSectionHomeLink);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		validate(pharmacylocator, 5);
 		pharmacylocator.click();

@@ -6188,14 +6188,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					Assert.assertTrue(
 							"The Provider NBA message is not displayed on NBA.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
-									+ nextBestActionModalMsg.get(1).getText(),
-							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
 				} else {
 					Assert.assertTrue(
 							"The Provider NBA message is not displayed on NBA.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
-									+ nextBestActionModalMsg.get(0).getText(),
-							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+									+ nextBestActionModalMsg.get(0).getText().trim(),
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
 				}
 			}
 		} catch (Exception ex) {
@@ -6246,6 +6246,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void clickNextBestActionModalContinueEnrollmentBtn() {
 		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 30);
 		nextBestActionModalContinueEnrollmentBtn.click();
+		waitForPageLoadSafari();
 	}
 
 	public void verifyNavigationToOLEPage() {

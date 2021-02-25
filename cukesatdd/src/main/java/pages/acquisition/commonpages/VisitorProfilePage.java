@@ -676,6 +676,8 @@ public class VisitorProfilePage extends UhcDriver {
 				legacyBackToPlans.click();
 			}else
 				backToPlans.click();
+			
+			waitForPageLoadSafari();
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/plan-summary")) {
 				return new VPPPlanSummaryPage(driver);
