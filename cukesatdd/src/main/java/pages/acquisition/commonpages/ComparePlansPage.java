@@ -1,11 +1,11 @@
 package pages.acquisition.commonpages;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.Arrays;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -23,22 +23,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
-import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ole.WelcomePage;
-
-import pages.acquisition.commonpages.FindCarePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 public class ComparePlansPage extends UhcDriver {
 
 	
@@ -737,15 +730,19 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void CounterNewRemoveLink(String counter){
-		WebElement removelink = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"));
-		WebElement removePlanName = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//div[contains(@ng-if,'planName')]"));
+		WebElement removelink = driver.findElement(By.xpath("//th[contains(@ng-repeat,'plan in count')][" + counter
+				+ "]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"));
+		WebElement removePlanName = driver.findElement(By.xpath(
+				"//th[contains(@ng-repeat,'plan in count')][" + counter + "]//div[contains(@ng-if,'planName')]"));
 		String PlanName=removePlanName.getText();
 		System.out.println("3rd plan name is : " + PlanName );
 //		removelink.click();
 		jsClickNew(removelink);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 		
-	    Assert.assertTrue(!(driver.findElements(By.xpath("//th[@ng-repeat='plan in count'][1]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]")).size()>0));
+		Assert.assertTrue(!(driver.findElements(By.xpath(
+				"//th[contains(@ng-repeat,'plan in count')][1]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"))
+				.size() > 0));
 		System.out.println("remove icon is not Displaying in plan compare page");
 
 
