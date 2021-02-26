@@ -4126,7 +4126,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement memberSignInPage;
 
 	// @FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
-	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com') or contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
+	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com') or contains(@href,'https://www.aarpmedicareplans.com/?WT.mc_id=8009508')]")
 	private WebElement ViewMedicareplanlinks;
 
 	public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {
