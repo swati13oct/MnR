@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcqusitionVPPNextActionModalShopFlowAARP.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqusitionVPPNextActionModalShopFlowAARP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = {
 		"src/main/resources/feature/acquisition/vpp/NextBestActionModal.feature" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcqusitionVPPNextActionModalShopFlowAARP.json" }, tags = { "@dce_NBA_ShopPagesPDP_UHC" })
+				"json:target/cucumber-RunMRATDDAcqusitionVPPNextActionModalShopFlowAARP.json" }, tags = { "@dce_NBA_ShopPagesPDP_AARP" })
 
 public class RunMRATDDAcqusitionVPPNextActionModalShopFlowAARP {
 
