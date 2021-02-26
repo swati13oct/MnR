@@ -5207,15 +5207,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (nextBestActionModal.isDisplayed()) {
 				if (nextBestActionModalMsg.size() > 1) {
 					Assert.assertTrue(
-							"The Continue Enrollment message is not displayed.../n Expected Message"
-									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message"
-									+ nextBestActionModalMsg.get(1).getText(),
-							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+							"The Continue Enrollment message is not displayed.../n Expected Message "
+									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message "
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
 				} else {
 					Assert.assertTrue(
-							"The Continue Enrollment message is not displayed.../n Expected Message"
-									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message"
-									+ nextBestActionModalMsg.get(0).getText(),
+							"The Continue Enrollment message is not displayed.../n Expected Message "
+									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message "
+									+ nextBestActionModalMsg.get(0).getText().trim(),
 							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
 				}
 			}
