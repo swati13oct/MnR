@@ -129,6 +129,9 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 
 	@FindBy(css = "uhc-checkbox.checkbox-checked")
 	private WebElement checkedSNP;
+	
+	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-4-input'] >span:nth-child(1) .checkbox-check")
+	private WebElement checkedSNPNoneOption;
 
 //Special Needs Page Element Verification Method 
 
@@ -253,6 +256,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	}
 
 	public void edit_specialneeds(String options) {
+		if(checkedSNPNoneOption.isDisplayed())
+			jsClickNew(snpNone);
 		String snpoptions[] = options.split(",");
 		for (String option : snpoptions) {
 			specialNeedspageFunctional(option);

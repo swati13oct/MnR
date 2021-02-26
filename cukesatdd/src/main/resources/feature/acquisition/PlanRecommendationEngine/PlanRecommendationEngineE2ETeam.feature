@@ -5,7 +5,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
   Scenario Outline: <Zipcode> - To validate e2e flow in PRE-VPP-DCE
     Given the user is on medicare acquisition site landing page for PRE
       | Site | <site> |
-    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
+    #    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
     And clicks on get started button and runs a questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
@@ -27,7 +27,6 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option on cost preferences page
       | Preference Option | <costPreferenceOption> |
-    And verify continue function in "Priorities" page
     Then user validate elements on loading results page
     Then user validate UI and API recommendation rankings on results page
     #And the user views the plans of the below plan type and select Next year
@@ -68,7 +67,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
   Scenario Outline: <Zipcode> - <plantype> - To validate integration of DCE with PRE in Vpp Plan Summary
     Given the user is on medicare acquisition site landing page for PRE
       | Site | <site> |
-    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
+    #    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
     And clicks on get started button and runs a questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
@@ -90,7 +89,6 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option on cost preferences page
       | Preference Option | <costPreferenceOption> |
-    And verify continue function in "Priorities" page
     Then user validate elements on loading results page
     Then user validate UI and API recommendation rankings on results page
     And the user selects plan year
@@ -110,12 +108,9 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
     Then the user Captures Drug costs on Drug Details Page
     Then user saves plan as favorite on drug details page
       | Test Plans | <planname> |
-    #Then the user clicks on the heart icon on Drug Details page
-    Then the user navigates to Visitor profile page
+    Then the user clicks on the heart icon on Drug Details page
     And user validates the added plans on visitor profile page
       | Test Plans | <planname> |
-      #And user validates the plans on new visitor profile page of AARP site
-      #| Test Plans | <planname> |
     Then the user should be able to see all the added Drugs information in the guest profile page
       | Drugs Added | <drugsadded> |
 

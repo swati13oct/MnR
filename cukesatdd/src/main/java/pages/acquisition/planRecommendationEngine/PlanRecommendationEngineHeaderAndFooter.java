@@ -221,7 +221,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#gfn_lnk_row2_1 > span")
 	private WebElement footerMedicareAdvantagePlansLink;
 		
-	@FindBy(css = "#_9h82fwc49")
+	@FindBy(css = "#gfn_lnk_row2_3 span:nth-of-type(2)")
 	private WebElement footerMedicareSupplementInsurancePlansLink;
 	
 	@FindBy(css = "#gfn_lnk_row2_5 > span")
@@ -620,8 +620,6 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 //		jsClickNew(headerNavigationBarShopForaPlanTab);
-		threadsleep(1000);							//E2E : Adding additional wait for element to be visible
-		validate(headerGetaPlanRecommendationLink);
 		jsClickNew(headerGetaPlanRecommendationLink);
 		validate(landingpageHeader, 30);
 	}
