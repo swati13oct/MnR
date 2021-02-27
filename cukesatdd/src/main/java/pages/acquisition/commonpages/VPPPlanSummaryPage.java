@@ -6299,15 +6299,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void removeDrugsFromPlanCard() {
 		try {
 			validate(drugListPlanCard);
-			//drugListPlanCard.click();
 			jsClickNew(drugListPlanCard);
 			validate(expandedDruglistPlanCard);
-			//scrollToView(expandedDruglistPlanCard);
 		while(removeDrugListPlanCard.size()!=0) {
-			//scrollToView(removeDrugListPlanCard.get(0));
 			removeDrugListPlanCard.get(0).click();
 			System.out.println("Removed drugs in plan card");
-			driver.navigate().refresh();
 		}
 		}
 		catch(Exception e) {
