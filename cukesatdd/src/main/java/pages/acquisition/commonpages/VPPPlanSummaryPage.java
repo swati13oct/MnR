@@ -6293,6 +6293,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickContinueEnrollmentBtnOnModal() {
 		selectPlanModalContinueEnrollmentBtnList.get(0).click();
+		waitForPageLoadSafari();
 	}
 	
 	public void removeDrugsFromPlanCard() {
