@@ -204,7 +204,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 
 //'Get Help Choosing' is Inside Shop Menu
     
-    @FindBy(xpath = "//div[contains(@class,'aem-Grid')]/div[contains(@class,'aem-GridColumn')]//a[contains(text(),'Learn More')]")
+//    @FindBy(xpath = "//div[contains(@class,'aem-Grid')]/div[contains(@class,'aem-GridColumn')]//a[contains(text(),'Learn More')]")	//E2E : Updated locator for Learn More
+    @FindBy(xpath = "//div[contains(@class,'aem-Grid')]/div[contains(@class,'aem-GridColumn')]//a[@title='Learn More']")
 	private WebElement HeaderShopFromHomeInFindYourPlan;
     
     @FindBy(xpath = "//a[contains(text(),'Get Recommendations')]")
@@ -629,6 +630,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 //Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing	
 	public void navigationToPlanRecommendationEngineViaShopTools() {
+		waitForPageLoadSafari();
 		validate(headerNavigationBarShopForaPlanTab, 45);
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		//desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);

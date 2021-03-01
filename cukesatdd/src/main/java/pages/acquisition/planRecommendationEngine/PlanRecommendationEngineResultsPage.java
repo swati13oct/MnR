@@ -212,10 +212,12 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(css = "#emailPlanSummaryPopUp button[type='submit']")
 	private WebElement emailSendButton;
 	
-	@FindBy(css = "#emailSuccessSummaryMsgPopUp #emailSuccess")
+//	@FindBy(css = "#emailSuccessSummaryMsgPopUp #emailSuccess") 	//E2E : Updated locator for email Success popup
+	@FindBy(css = "#emailPlanSummarySuccessPopUp #emailSuccess")
 	private WebElement emailSuccess;
 	
-	@FindBy(css = "#emailSuccessSummaryMsgPopUp button")
+//	@FindBy(css = "#emailSuccessSummaryMsgPopUp button") 			//E2E : Updated locator for email Success popup
+	@FindBy(css = "#emailPlanSummarySuccessPopUp button")
 	private WebElement emailCloseButton;
 
 	@FindBy(css = "#plan-list-3 .swiper-container .module-plan-overview:nth-of-type(1)")
@@ -334,7 +336,8 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'Continue')]")
 	private WebElement continueBtn;
 	
-	@FindBy(css = "input#cta-zipcode")
+//	@FindBy(css = "input#cta-zipcode")		//E2E: Updated css selector for zipcode field[Ref: AcquisitionHomePage]
+	@FindBy(css = "input#cta-zipcode, input[id*=zipcodemeded]")
 	private WebElement homePageZiptxt;
 	
 	@FindBy(css = "#ghn_lnk_1>span")
