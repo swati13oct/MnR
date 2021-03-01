@@ -621,6 +621,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 //		jsClickNew(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerGetaPlanRecommendationLink);
+		jsMouseOut(headerNavigationBarShopForaPlanTab); // Chargers: Added jsMouseOut to avoid clickIntercept exceptions
 		validate(landingpageHeader, 30);
 	}
 	

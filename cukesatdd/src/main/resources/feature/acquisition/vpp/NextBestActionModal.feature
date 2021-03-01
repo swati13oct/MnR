@@ -518,12 +518,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     @NBA_PRE_AARP01
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear |prioritiesOption|
-      | AARP |   10001 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | John        |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |Doctors|
+      | AARP |   10001 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork  |         |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |Doctors|
 
     @NBA_PRE_UHC01
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear |prioritiesOption|
-      | UHC  |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | John        |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |Doctors|
+      | UHC  |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork  |         |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |Doctors|
 
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for PDP Plan when drugs added from SNP plan card
     Given the user is on medicare acquisition site landing page
