@@ -149,7 +149,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	@FindBy(css = "#modal #Quantity")
 	private WebElement modalQuantity;
 
-	@FindBy(css = "#modal #frequency-select")
+//	@FindBy(css = "#modal #frequency-select") 	//E2E : Updated locator for drug Frequency select
+	@FindBy(css = "#modal #new-drug-refill")		
 	private WebElement modalFrequencySelect;
 
 	@FindBy(css = "#modal uhc-alert")
