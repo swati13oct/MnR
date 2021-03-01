@@ -149,8 +149,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	@FindBy(css = "#modal #Quantity")
 	private WebElement modalQuantity;
 
-//	@FindBy(css = "#modal #frequency-select") 	//E2E : Updated locator for drug Frequency select
-	@FindBy(css = "#modal #new-drug-refill")		
+	@FindBy(css = "#modal #frequency-select")
 	private WebElement modalFrequencySelect;
 
 	@FindBy(css = "#modal #new-drug-refill")
@@ -379,6 +378,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 
 //Validating Result Count
 	public void validateResultsCount() {
+		validate(modaldrugsCount, 10);			//E2E : Adding validate since scripts failing intermittently while fetching the confirmation size
 		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
 		if (drugsList.size() == confirmationSize) {
 			System.out.println("Resutls and Count matched");
