@@ -1700,6 +1700,17 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
 	}
+	@Then("^the user selects Mail Pharmacy and returns to DCE Summary page$")
+	public void the_user_selects_Mail_Pharmacy_and_returns_to_DCE_Summary_page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = (DrugSummaryPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		drugSummaryPage.selectMailOrderPharmacy();
+		//getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		String pharmacy = "Preferred Mail Service Pharmacy";
+		drugSummaryPage.validatePharmacyName(pharmacy);
+		getLoginScenario().saveBean(PageConstants.PHARMACY_NAME, pharmacy);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+}
 
 	@Then("^the user selects following Standard pharmacy and returns to DCE Details page$")
 	public void the_user_selects_following_Standard_pharmacy_and_returns_to_DCE_Details_page(DataTable givenAttributes)
@@ -2283,6 +2294,19 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user search with incorrect zipcode$")
 	public void user_search_with_incorrect_zipcode(DataTable attributes) {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipCode = memberAttributesMap.get("ZipCode");
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
+	}
+	@When("^user search with correct zipcode$")
+	public void user_search_with_correct_zipcode(DataTable attributes) {
 		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {

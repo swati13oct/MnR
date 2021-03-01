@@ -290,23 +290,96 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
+     | DrugName | <drug2> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug3> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+   When user enter invalid zipcode
+      | inValidzipCode | <invalidzipcode2> |
+    Then error message should be displayed
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     Then the user validates OptumRx consistently displays on DCE Summary - Pharmacy Page
-    And user clicks on change pharmacy link from summary page
+    When user clicks on change pharmacy link from summary page
+    Then the user selects Mail Pharmacy and returns to DCE Summary page
+    When user clicks on change pharmacy link from summary page
     Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
       | PharmacyZipCode | <pharmacyZipCode> |
-    Then the user selects following pharmacy and returns to DCE Summary page
-      | SelectPharmacy | <SelectPharmacy> |
-
+      Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
+      | PharmacyZipCode | <pharmacyZipCode2> |
+     When user clicks on Keep Using This Pharmacy link on change pharmacy modal
+     When user verify the drug summary page
+      And user should be able to see Medicare Advantage plan by default
+    And user click on View Drug Pricing Modal
+    Then the user validates Switch to generic for following Brand Drug to Generic from Drug Summary - Drug Pricing Modal
+      | Brand Drug   | <drug4>        |
+      | Generic Drug | <genericDrug1> |
+    #And user click on PDP plan to view drug pricing
+    And the user Captures Drug costs on Drug Summary Page for the given plan
+      | Plan Name | <planName> |
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+    Then the user Captures Drug costs on Drug Details Page
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page
+    Then the user click on drug cost estimator on vpp plan detail page in AARP
+    Then the user validates link to Drug Summary Page
+    When user clicks on change pharmacy link from summary page
+    Then change pharmacy modal should be displayed
+	  And user verify change pharmacy modal
+	  Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal
+	  And user verify the default distance on change pharmacy modal
+    When user sort the pharmacy list by "A to Z"
+    Then pharmacy list should be displayed in ascending order
+    When user sort the pharmacy list by "Z to A"
+    Then pharmacy list should be displayed in descending order
+	  When user clicks on next button on change pharmacy modal
+    Then user should be navigated to second page of pharmacy list
+    When user clicks on back button on change pharmacy modal
+    Then user should be navigated to first page of pharmacy list
+	  When user search with incorrect zipcode
+    | ZipCode | <zipCode2> |
+    Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal
+    When user search with correct zipcode
+    | ZipCode | <zipCode3> |
+    When user saves and updates pharmacy from list
+    Then the pharmacy name should be updated on summary page
+    When user clicks on change pharmacy link from summary page
+    When user clicks on Keep Using This Pharmacy link on change pharmacy modal
+    When user clicks on change pharmacy link from summary page
+    When user selects Preferred mail order pharmacy
+    Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal
+    And user verify the default distance on change pharmacy modal
+    Then the user selects Mail Pharmacy and returns to DCE Summary page
+    When user clicks on change pharmacy link from summary page
+    When user search with zipcode with no pharamacies
+    | ZipCode | <zipCode4> |
+    Then no results message should be displayed
+    | NoResultsMessage | <message> |
+    Then user clicks on Keep Using This Pharmacy link on change pharmacy modal
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType2> |
+      | Plan Name | <planName2> |
+    And user clicks on change pharmacy link from details page
+    Then the user selects following Standard pharmacy and returns to DCE Details page
+      | SelectStandardPharmacy | <SelectStandardPharmacy> |
+    And the user validates link to Drug Summary Page
+    When user verify the drug summary page
+    And the user Captures Drug costs on Drug Summary Page for the given plan
+      | Plan Name | <planName2> |
+     And user click on return to home on drug summary in AARP site
+      
     @DCE_E2E_Scenario3_AARP
     Examples: 
-      | Scenario           | site | zipcode | county          | isMultutiCounty | plantype | drug1   | drug2   | drug3 | drug4   | drug5  | planname                        | supplyLength   | brandDrug1 | genericDrug1         |
-      | E2E Scenario 3_AMP | AARP |   55344 | Hennepin County | NO              | PDP      | Orfadin | Humalog | Emsam | Lipitor | Fanapt | AARP MedicareRx Walgreens (PDP) | Every 3 Months | Lipitor    | atorvastatin calcium |
+      | Scenario           | site | zipCode | county          |invalidzipcode2| isMultutiCounty |pharmacyZipCode| pharmacyZipCode2|SelectPharmacy                    |SelectStandardPharmacy |planType | drug1   | drug2   | drug3 | drug4   | planName                                 | planType2 | planName2                      | zipCode2|zipCode3|zipCode4| brandDrug1  | genericDrug1         |message|
+      | E2E Scenario 3_AMP | AARP |   55344 | Hennepin County |00000          |NO               | 99619         |   55344         |Preferred Mail Service Pharmacy   |CVS PHARMACY           |  MAPD     | Orfadin| Humalog | Emsam | Lipitor |  AARP Medicare Advantage Headwaters (PPO) | PDP      | AARP MedicareRx Walgreens (PDP) |78456   |12345   |96799   | Lipitor    | atorvastatin calcium |Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|
+
+      
+    @DCE_E2E_Scenario3_UHC
+    Examples: 
+     | Scenario           | site | zipCode | county          |invalidzipcode2| isMultutiCounty |pharmacyZipCode| pharmacyZipCode2|SelectPharmacy                    |SelectStandardPharmacy |planType | drug1   | drug2   | drug3 | drug4   | planName                                 | planType2 | planName2                      | zipCode2|zipCode3|zipCode4| brandDrug1  | genericDrug1        |message|
+     | E2E Scenario 3_UMS | UHC |   55344 | Hennepin County |00000          |NO               | 99619         |   55344         |Preferred Mail Service Pharmacy   |CVS PHARMACY           |  MAPD     | Orfadin| Humalog | Emsam | Lipitor |  AARP Medicare Advantage Headwaters (PPO) | PDP      | AARP MedicareRx Walgreens (PDP) |78456   |12345   |96799   | Lipitor    | atorvastatin calcium |Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result.|
