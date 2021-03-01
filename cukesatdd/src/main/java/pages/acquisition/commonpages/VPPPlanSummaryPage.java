@@ -6576,13 +6576,13 @@ public void verifyNextBestActionModalForDrugCost() {
 			if (nextBestActionModalMsg.size() > 1) {
 			Assert.assertTrue(
 					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
-							+ "\n Actual message" + nextBestActionModalMsg.get(1).getText(),
-					nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+							+ "\n Actual message" + nextBestActionModalMsg.get(1).getText().trim(),
+					nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
 		}else {
 			Assert.assertTrue(
 					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
-							+ "\n Actual message" + nextBestActionModalMsg.get(0).getText(),
-					nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+							+ "\n Actual message" + nextBestActionModalMsg.get(0).getText().trim(),
+					nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
 		}
 		}
 	} catch (Exception ex) {
