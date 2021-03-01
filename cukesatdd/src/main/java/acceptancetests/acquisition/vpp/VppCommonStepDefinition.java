@@ -3643,6 +3643,8 @@ public class VppCommonStepDefinition {
 									  		String langDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue(); //language value from doclog file
 									  		String planIDDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue(); //plan id from the doclog file
 									  		String planNameDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planNameIndexDocLog).getStringCellValue(); //plan name from the doclog file
+									  		
+									  		// if plan year cell contains a numeric value then converts to a string 
 									  		if(sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getCellType() == Cell.CELL_TYPE_NUMERIC) {
 									  			yearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getNumericCellValue(); //plan year from the doclog file
 									  			planYearDocLog = String.valueOf(yearDocLog);
