@@ -291,7 +291,8 @@ public class SAMIconsCommonStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
-		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
+				//(String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
