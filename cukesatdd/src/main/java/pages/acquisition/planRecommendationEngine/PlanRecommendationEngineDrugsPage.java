@@ -153,6 +153,9 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	@FindBy(css = "#modal #new-drug-refill")		
 	private WebElement modalFrequencySelect;
 
+	@FindBy(css = "#modal #new-drug-refill")
+	private WebElement modalSLengthSelect;
+	
 	@FindBy(css = "#modal uhc-alert")
 	private WebElement modalError;
 
@@ -272,6 +275,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 //Drug option selects in Drug page
 
 	public void drugsInitiate(String drugSelection) {
+		threadsleep(3000);
 		drugpageOptions(drugSelection);
 		jsClickNew(continueBtn);
 		validate(drugsearchBox);
@@ -285,7 +289,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 		String dosage = "";
 		String packageName = "";
 		String count = "";
-		boolean threeeMonthfrequency = false;
+		String frequency = "";
+		boolean threeeMonthSLength = false;
 		boolean GenericDrug = false;
 		boolean switchGeneric = false;
 
@@ -300,14 +305,15 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 				dosage = drugDetails[2];
 				packageName = drugDetails[3];
 				count = drugDetails[4];
-				if (drugDetails[5].toUpperCase().equals("3"))
-					threeeMonthfrequency = true;
-				if (drugDetails[6].toUpperCase().equals("YES"))
-					GenericDrug = true;
+				frequency = drugDetails[5];
+				if (drugDetails[6].toUpperCase().equals("3"))
+					threeeMonthSLength = true;
 				if (drugDetails[7].toUpperCase().equals("YES"))
+					GenericDrug = true;
+				if (drugDetails[8].toUpperCase().equals("YES"))
 					switchGeneric = true;
 
-				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
+				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, frequency, threeeMonthSLength,
 						GenericDrug, switchGeneric);
 			}
 		}
@@ -373,7 +379,6 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 
 //Validating Result Count
 	public void validateResultsCount() {
-		validate(modaldrugsCount, 10);			//E2E : Adding validate since scripts failing intermittently while fetching the confirmation size
 		int confirmationSize = Integer.parseInt(modaldrugsCount.getText().trim().split(" ")[2]);
 		if (drugsList.size() == confirmationSize) {
 			System.out.println("Resutls and Count matched");
@@ -413,8 +418,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			threadsleep(1000);
 			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim()
 					.toUpperCase() + " "
-					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim()				//E2E : Added trim()
-					.toUpperCase());
+					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
 		}
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
@@ -427,7 +431,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 
 		String drugName = drugInfo.split(",")[0];
 		boolean generic = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			generic = true;
 		drugsSearchpageElements();
 
@@ -490,7 +494,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 //Adding Drug Functionality
 
 	public void addDrugbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
-			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
+			String count, String frequency, boolean threeeMonthSLength, boolean GenericDrug, boolean switchGeneric) {
 		try {
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
@@ -515,7 +519,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			threadsleep(2000);
 			Select dos = new Select(modalDosageSelect);
 			Select freq = new Select(modalFrequencySelect);
-
+			Select slen = new Select(modalSLengthSelect);
+			
 			if (!dosage.isEmpty())
 				dos.selectByVisibleText(dosage);
 			if (!packageName.isEmpty()) {
@@ -526,8 +531,11 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 				modalQuantity.clear();
 				modalQuantity.sendKeys(count);
 			}
-			if (threeeMonthfrequency)
-				freq.selectByVisibleText("Every 3 Months");
+			
+			freq.selectByVisibleText(frequency);
+			
+			if (threeeMonthSLength)
+				slen.selectByVisibleText("Every 3 Months");
 
 			threadsleep(4000);
 			jsClickNew(modalcontinue);
@@ -597,7 +605,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			generic = true;
 		String count = drugInfo.split(",")[4];
 		boolean GenericDrug = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			GenericDrug = true;
 		System.out.println("Validating Modal Error functionalities");
 
@@ -641,7 +649,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	public void drugChoose(String searchText, String drugInfo) {
 		String drugName = drugInfo.split(",")[0];
 		boolean generic = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			generic = true;
 		validate(drugsearchBox, 30);
 		drugsearchBox.sendKeys(searchText);
