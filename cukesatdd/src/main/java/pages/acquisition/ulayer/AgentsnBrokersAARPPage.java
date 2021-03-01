@@ -4,6 +4,8 @@
 package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 /**
@@ -11,7 +13,14 @@ import org.openqa.selenium.support.PageFactory;
  *
  */
 public class AgentsnBrokersAARPPage extends GlobalWebElements{
-	 
+	
+	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
+	public static WebElement header;
+	
+	@FindBy(xpath = "(//*[contains(@class,'layout-container')]//ul)[1]")
+	public static WebElement medicareOverviewTableTitle;
+	
+	
 	public AgentsnBrokersAARPPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -20,27 +29,10 @@ public class AgentsnBrokersAARPPage extends GlobalWebElements{
 
 	@Override
 	public void openAndValidate() {
-		validate(footerHomeLink);
+		//CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(header);
 		
 	}
 
-	public AcquisitionHomePage homeFooterClick() {
-		validate(footerHomeLink);
-		footerHomeLink.click();
-		validate(footerHomeLink);
-		if (driver.getTitle().equalsIgnoreCase("AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new AcquisitionHomePage(driver);
-		}
-		return null;
-	}
-	
-	public boolean validatHomeLink(){
-		boolean flag = true;
-		
-		if(!footerHomeLink.isDisplayed())
-			flag = false;
-		
-		return flag;
-	}
 
 }

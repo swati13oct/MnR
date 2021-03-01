@@ -18,6 +18,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 
 /**
@@ -120,6 +121,7 @@ public class PortfolioPageUhc extends UhcDriver {
 
 		validate(OurPlansLink);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(OurPlansLink).build().perform();
 		validate(OurPlansLink);
 	}
@@ -168,6 +170,7 @@ public class PortfolioPageUhc extends UhcDriver {
 	public AcquisitionHomePage ErrorMessage() {
 		validate(errormessage);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(errormessage);
 
 		validate(errormessage);
@@ -189,6 +192,7 @@ public class PortfolioPageUhc extends UhcDriver {
 	public AcquisitionHomePage errormessage() {
 		validate(errormessage);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(errormessage);
 
 		validate(errormessage);
@@ -269,7 +273,7 @@ public ResponsivePlanSummaryUhc searchPlans(String zipcode, String CountyName) {
 	    		break;
 	    	}
 	    }
-		if (driver.getTitle().contains("Our Medicare Plan Types | UnitedHealthcare")) {
+		if (driver.getTitle().contains(PageTitleConstants.BLAYER_OUR_MEDICARE_PLAN_TYPES_UNTEDHEALTHCARE)) {
 			return new ResponsivePlanSummaryUhc(driver);
 		} 
 		return null;

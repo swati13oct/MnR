@@ -1,11 +1,10 @@
 #!groovy
 //original author: Brian Wyka
-//modified for M&R by Olga Mackevica
-
+//modified for M&R by Olga Mackevica          
 // Global Variables
 def pom, fullGitCommit, pipelineVersion
-def credentialsId = 'c35e98d4-5b20-4607-854e-ddc6f0fd8ba4'
-def gitHubRepoUrl = 'https://github.optum.com/consumer-portals/mratdd.git'
+def credentialsId = '603efe34-7b74-4e26-8ef8-5273f07139ae'
+def gitHubRepoUrl = 'https://github.optum.com/gov-prog-digital/mratdd.git'
 def gitBranch = "${env.BRANCH_NAME}"
 def mvnParams = "-Dgit.branch=${gitBranch} -Dbuild.number=${env.BUILD_NUMBER} -Dbuild.time=${env.BUILD_TIMESTAMP} -Dgit.url=${gitHubRepoUrl}"
 def pomLocation = "cukesatdd/pom.xml"
@@ -14,11 +13,16 @@ def pomLocation = "cukesatdd/pom.xml"
  *
  * @param closure - the closure to execute
  */
+
+
+
+
 def withJavaAndMaven(Closure closure) {
-    withEnv(['JAVA_VERSION=1.7.0', "JAVA_HOME=${tool 'java'}", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
+    withEnv(['JAVA_VERSION=11', "JAVA_HOME=${tool 'java'}", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
         closure()
     }
 }
+
 
 /**
  * Run a closure on the docker-maven-slave with
@@ -32,6 +36,7 @@ def withDockerMavenSlave(Closure closure) {
             closure()
     }
 }
+
 
 /**
  * Run a closure with the given credentials
@@ -73,7 +78,7 @@ def updatePipelineVersion(String gitBranch, String pipelineVersion){
 		pipelineVersion = "${version}-${env.BUILD_NUMBER}"
    } else if (gitBranch=="develop"){
 	   echo "Branch name is develop. Use global Jenkins variable UCP_DEVELOP_RELEASE_VERSION to set version to ${UCP_DEVELOP_RELEASE_VERSION}"
-	   pipelineVersion = "${UCP_DEVELOP_RELEASE_VERSION}-d{env.BUILD_NUMBER}"
+	   pipelineVersion = "${UCP_DEVELOP_RELEASE_VERSION}-d${env.BUILD_NUMBER}"
    }
 	echo "New version: ${pipelineVersion}"
 	return pipelineVersion
@@ -110,7 +115,7 @@ node('docker-maven-slave') {
 		writeBuildPropertiesFile(gitBranch, gitHubRepoUrl, pipelineVersion)		
 
         // Set build display name and description
-		currentBuild.displayName = "#${env.BUILD_NUMBER} - ${pipelineVersion}"
+		currentBuild.displayName = "${pipelineVersion}"
         currentBuild.description = "Git commit: ${fullGitCommit.take(6)}"
 
         echo "Building version: ${env.BUILD_NUMBER} from commit: ${fullGitCommit}"
@@ -118,15 +123,18 @@ node('docker-maven-slave') {
 
     stage ('Build') {
         echo "Building source code"
+       
+		withDockerMavenSlave {
+			unstash 'source'
+			sh "mvn -f ${pomLocation} -U -B clean compile ${mvnParams}"
+		}
 
-        withDockerMavenSlave {
-            unstash 'source'
-            sh "mvn -f ${pomLocation} -U -B clean compile ${mvnParams}"
-        }
-
-        echo "Build complete"
-		archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties', fingerprint: true
-    }
+		echo "Build complete"
+			archiveArtifacts artifacts: '**/target/*.war , **/target/*.ear, **/build/*.zip, **/build_info.txt, **/build.properties, **/target/*pmd.xml', fingerprint: true
+   
+	}
+		
+      
     echo "Build complete"
 	
 	stage('Trigger Downstream TestSuite'){

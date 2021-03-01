@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class BLayerPlanComparePage extends UhcDriver {
 	
@@ -103,7 +104,7 @@ public class BLayerPlanComparePage extends UhcDriver {
 		Thread.sleep(1000);			
 		ComparePlansLink.click();
 		Thread.sleep(5000);
-		 if(driver.getTitle().contains("Our Medicare Plan Types")){
+		 if(driver.getTitle().contains(PageTitleConstants.BLAYER_OUR_MEDICARE_PLAN_TYPES)){
 			 return new BLayerPlanComparePage(driver);
 		 }
 		 return null;	 
@@ -123,7 +124,7 @@ public BLayerPlanComparePage SelectThePlan() throws InterruptedException {
 		Thread.sleep(1000);
 		ComparePlanLink.click();
 		Thread.sleep(5000);
-		 if(driver.getTitle().contains("Our Medicare Plan Types")){
+		 if(driver.getTitle().contains(PageTitleConstants.BLAYER_OUR_MEDICARE_PLAN_TYPES)){
 			 return new BLayerPlanComparePage(driver);
 		 }
 		 return null;	 

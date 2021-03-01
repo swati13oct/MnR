@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class VPPAarpNeedHelpWidgetPage extends UhcDriver{
 	
@@ -90,7 +91,7 @@ public class VPPAarpNeedHelpWidgetPage extends UhcDriver{
 				driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
                 System.out.println(driver.getTitle());
 				if(driver.getTitle().equals(
-						"Health Insurance Agent Appointment Request | AARP�� Medicare Plans from UnitedHealthcare��")){
+						PageTitleConstants.BLAYER_HEALTH_INSURANCE_AGENT_APPOINTMENT_REQUEST)){
 					System.out.println("---Page Displayed correctly------");
 				}			 		 
 			}else{

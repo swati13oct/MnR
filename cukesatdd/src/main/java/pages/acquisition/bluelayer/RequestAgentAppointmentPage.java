@@ -3,18 +3,13 @@
  */
 package pages.acquisition.bluelayer;
 
-import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -22,121 +17,127 @@ import atdd.framework.UhcDriver;
  * @author pgrover1
  *
  */
-public class RequestAgentAppointmentPage extends UhcDriver{
-	
-	@FindBy(id="first_name")
+public class RequestAgentAppointmentPage extends UhcDriver {
+
+	@FindBy(xpath = "//input[contains(@id,'firstNameField')]")
 	private WebElement firstName;
-	
-	@FindBy(id="last_name")
+
+	@FindBy(xpath = "//input[contains(@id,'lastNameField')]")
 	private WebElement lastName;
-	
-	@FindBy(id="address1")
+
+	@FindBy(xpath = "//input[contains(@id,'address1Field')]")
 	private WebElement address;
-	
-	@FindBy(id="city")
+
+	@FindBy(xpath = "//input[contains(@id,'cityField')]")
 	private WebElement city;
-	
-	@FindBy(id="state")
+
+	@FindBy(xpath = "//select[contains(@id,'stateField')]")
 	private WebElement state;
-	
-	@FindBy(id="zip")
+
+	@FindBy(xpath = "//input[contains(@id,'zipcodeField')]")
 	private WebElement zip;
-	
-	@FindBy(id="areacode")
-	private WebElement areacode;
-	
-	@FindBy(id="phone1")
-	private WebElement phone1;
-	
-	@FindBy(id="phone2")
-	private WebElement phone2;
-	
-	@FindBy(id="confirm_areacode")
-	private WebElement confirmAreacode;
-	
-	@FindBy(id="confirm_phone1")
-	private WebElement confirmPhone1;
-	
-	@FindBy(id="confirm_phone2")
-	private WebElement confirmPhone2;
-	
-	@FindBy(xpath="//div[@id='submit-row']/a")
+
+	@FindBy(xpath = "//input[contains(@id,'phoneNumberField')]")
+	private WebElement phoneField;
+
+	@FindBy(xpath = "//button[contains(@class,'c-button')]")
 	private WebElement requestAppointmentButton;
 
+	@FindBy(xpath = "//a[contains(text(),'Find plans')]")
+	private WebElement findPlansBtn;
+
+	@FindBy(xpath = "//div[contains(@class,'rightrail')]//div[contains(@class,'segment-title')]//*[contains(text(),'Need Help')]")
+	private WebElement rightRailNeedHelpHeading;
+
+	@FindBy(id = "tfn")
+	private WebElement rightRailNeedHelpTelePhone;
+
+	@FindBy(xpath = "//div[@id='ebcformErrorContainer']")
+	private WebElement errorMessageHeading;
+
+	@FindBy(xpath = "//span[contains(text(),'Enter a first name and must contain only letters, spaces, hyphens (-) and apostrophes')]")
+	private WebElement errorMessageFN;
+
+	@FindBy(xpath = "//span[contains(text(),'Enter a last name and must contain only letters, spaces, hyphens (-) and apostrophes')]")
+	private WebElement errorMessageLN;
+
+	@FindBy(xpath = "//div[@class='trail breadcrumb']")
+	private WebElement breadCrumb;
+
+	@FindBy(xpath = "//span[contains(text(),'Enter an address that contains only numbers, letters, apostrophe')]")
+	private WebElement errorMessageAddress;
+
+	@FindBy(xpath = "//span[contains(text(),'Enter a city that only contains non-numeric characters, apostrophe')]")
+	private WebElement errorMessageCity;
+
+	@FindBy(xpath = "//span[contains(text(),'Select a state')]")
+	private WebElement errorMessageState;
+
+	@FindBy(xpath = "//span[text()='Enter a valid 5-digit ZIP code in the format 12345.']")
+	private WebElement errorMessageZip;
+
+	@FindBy(xpath = "//span[contains(text(),'Enter a valid 10-digit phone number (format xxx-xxx-xxxx).')]")
+	private WebElement errorMessagePhone;
 	public RequestAgentAppointmentPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		validate(firstName);
-		validate(lastName);
-		validate(address);
-		validate(city);
-		validate(state);
-		validate(zip);
-		validate(areacode);
-		validate(phone1);
-		validate(phone2);
-		validate(confirmAreacode);
-		validate(confirmPhone1);
-		validate(confirmPhone2);
-		validate(requestAppointmentButton);
-		
+		CommonUtility.waitForPageLoadNew(driver, firstName, 60);
+		validateNew(lastName);
+		validateNew(requestAppointmentButton);
+		validateNew(rightRailNeedHelpHeading);
+		validateNew(rightRailNeedHelpTelePhone);
+
 	}
-	
-	public AgentAppointmentConfirmationPage requestAgentAppointment(Map<String,String> personalDetails)
+
+	public boolean submitAgentAppointment(Map<String,String> personalDetails)
 	{
 		sendkeys(firstName, personalDetails.get("First Name"));
 		sendkeys(lastName, personalDetails.get("Last Name"));
-		sendkeys(address, personalDetails.get("Address"));
 		sendkeys(city, personalDetails.get("City"));
-		ElementData elementData = new ElementData("select:id", "state");
-		List<WebElement> stateOptions = findElements(elementData);
-		for(WebElement element : stateOptions)
-		{
-			if(personalDetails.get("State").equalsIgnoreCase(element.getText()))
-			{
-				element.click();
-			}
-		}
-		sendkeys(zip, personalDetails.get("ZipCode"));
-		
+		selectFromDropDownByValue(state, personalDetails.get("State"));
+		sendkeys(zip, personalDetails.get("Zipcode"));
 		String phone = personalDetails.get("Phone");
-		if(phone.contains("-"))
-		{
-			String[] phoneNumbers = phone.split("-");
-			
-			sendkeys(areacode, phoneNumbers[0]);
-			sendkeys(phone1, phoneNumbers[1]);
-			sendkeys(phone2, phoneNumbers[2]);
-			
-			sendkeys(confirmAreacode, phoneNumbers[0]);
-			sendkeys(confirmPhone1, phoneNumbers[1]);
-			sendkeys(confirmPhone2, phoneNumbers[2]);
-			
+		sendkeys(phoneField, phone);
+		sendkeys(address, personalDetails.get("Address"));
+		SubmitForm();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, findPlansBtn, 60);
+		if (findPlansBtn.isDisplayed()) {
+			validateNew(rightRailNeedHelpHeading);
+			validateNew(rightRailNeedHelpTelePhone);
+			return true;
 		}
-		
-		requestAppointmentButton.click();
-		try {
-			if (requestAppointmentButton.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, requestAppointmentButton,
-						CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("requestAppointmentButton not found");
-		} catch (TimeoutException ex) {
-			System.out.println("requestAppointmentButton not found");
-		} catch (Exception e) {
-			System.out.println("requestAppointmentButton not found");
-		}
-		if(currentUrl().contains("medicare-advantage-plans/request-information/agentebrc.html"))
-		{
-			return new AgentAppointmentConfirmationPage(driver);
-		}
-		
-		return null;
+
+		return false;
 	}
 
+	public void SubmitForm() {
+		validateNew(requestAppointmentButton);
+		requestAppointmentButton.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+	}
+
+	public boolean validateErrorMessages() {
+
+		if (validateNew(errorMessageHeading)) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean validateBreadcrumb() {
+		validateNew(breadCrumb);
+		String breadCrumbText = breadCrumb.getText();
+		System.out.println(breadCrumbText);
+		if (breadCrumbText.equals(
+				"Home / Shop for a Plan / Shop / Connect / Request an Appointment with a Health Insurance Agent")) {
+			return true;
+		}
+		return false;
+	}
 }

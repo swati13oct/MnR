@@ -3,13 +3,27 @@
  */
 package pages.acquisition.ulayer;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.util.CommonUtility;
 
 /**
  * @author rkodumur
  *
  */
+
+
 public class AboutUsAARPPage extends GlobalWebElements{
+
+	@FindBy(xpath = "//*[contains(@class,'heading-1')]")
+	public static WebElement header;
+	
+	@FindBy(xpath = "(//*[contains(@class,'layout-container')]//p//span[@class='paragraph'])[1]")
+	public static WebElement abountUsBodyParaSection;
+	
+	
 	
 	public AboutUsAARPPage(WebDriver driver) {
 		super(driver);
@@ -19,18 +33,11 @@ public class AboutUsAARPPage extends GlobalWebElements{
 
 	@Override
 	public void openAndValidate() {
-		validate(footerContactUsLink);
 		
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(abountUsBodyParaSection);
 	}
 
-	public ContactUsAARPPage contactUsFooterClick() {
-		validate(footerContactUsLink);
-		footerContactUsLink.click();
-		validate(footerContactUsLink);
-		if (driver.getTitle().equalsIgnoreCase("Contact UnitedHealthcare® | AARP® Medicare Plans from UnitedHealthcare")) {
-			return new ContactUsAARPPage(driver);
-		}
-		return null;
-	}
+	
 
 }

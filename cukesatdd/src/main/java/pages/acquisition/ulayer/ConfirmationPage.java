@@ -80,7 +80,7 @@ public class ConfirmationPage extends UhcDriver{
 		}
 		
 		// Perform the actions on new window
-		if(driver.getTitle().equalsIgnoreCase("AARP Medicare Plans - Print"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_PRINT))
 		{
 			
 			print.isEnabled();
@@ -111,3 +111,5 @@ public class ConfirmationPage extends UhcDriver{
 	}
 
 }
+
+

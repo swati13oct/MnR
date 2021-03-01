@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class VPPAarpNeedAStepBackWidget extends UhcDriver{
 	
@@ -48,7 +49,7 @@ public class VPPAarpNeedAStepBackWidget extends UhcDriver{
 				}
 				//validate start plan selector button				
 					if(planSelectorButton.isDisplayed()){
- 						driver.getTitle().equalsIgnoreCase("Plan Selector");
+ 						driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_SELECTOR);
  						planSelectorButton.click();
  						try {
 							Thread.sleep(5000);
@@ -56,7 +57,7 @@ public class VPPAarpNeedAStepBackWidget extends UhcDriver{
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
- 						if(driver.getTitle().equals("Plan Selector"))
+ 						if(driver.getTitle().equals(PageTitleConstants.BLAYER_PLAN_SELECTOR))
 						System.out.println("---------plan selector page displayed successfuly-------");
 					}else{
 					     Assert.fail("----------plan selector page not displayed-----------------");

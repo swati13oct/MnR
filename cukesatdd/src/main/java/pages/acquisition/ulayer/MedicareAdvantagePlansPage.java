@@ -23,7 +23,7 @@ public class MedicareAdvantagePlansPage extends GlobalWebElements {
 		medicareSupplementInsurancePlansLink.click();
 		validate(medicareSupplementInsurancePlansLink);
 		
-		if (driver.getTitle().equalsIgnoreCase("AARP Medicare Supplement Insurance Plans")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_SUPPLEMENT_INSURANCE_PLANS)) {
 			return new MedicareSupplementInsurancePlansPage(driver);
 		}else{
 		
@@ -38,7 +38,7 @@ public class MedicareAdvantagePlansPage extends GlobalWebElements {
 		validate(medicareAdvantagePlansRequestMoreHelpLink);
 		medicareAdvantagePlansRequestMoreHelpLink.click();
 		validate(medicareAdvantagePlansRequestMoreHelpLink);
-		if(driver.getTitle().equalsIgnoreCase("Request AARP® MA Plan Information | AARP® Medicare Plans from UnitedHealthcare®")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_REQUEST_AARP_MA_PLAN_INFORMATION)){
 			return new MedicareAdvantageRequestMoreHelpPage(driver);
 		}
 	

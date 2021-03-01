@@ -8,7 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author saduri
@@ -16,8 +18,11 @@ import atdd.framework.UhcDriver;
  */
 public class PrivacyPolicyUmsPage extends UhcDriver{
 	
-	@FindBy(id = "gf_lnk_6")
-	private WebElement termsOfUseLink;
+	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	public static WebElement header;
+	
+	@FindBy(xpath = "(//section[contains(@class,'meded-article-content')]//p)[1]")
+	public static WebElement pageContent_Para1;
 
 	public PrivacyPolicyUmsPage(WebDriver driver) {
 		super(driver);
@@ -27,19 +32,10 @@ public class PrivacyPolicyUmsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(termsOfUseLink);
-		
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(pageContent_Para1);	
 	}
 	
-	public TermsOfUseUmsPage termsOfUseClick() {
-		validate(termsOfUseLink);
-		termsOfUseLink.click();
-		validate(termsOfUseLink);
-		if(driver.getTitle().equalsIgnoreCase("Terms of Use | UnitedHealthcare®")){
-			return new TermsOfUseUmsPage(driver);
-		}
-		return null;
-			
-		}
+	
 
 }

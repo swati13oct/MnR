@@ -20,6 +20,10 @@ public class GlobalWebElements  extends UhcDriver{
 		
 		
 	}
+	
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	public static WebElement menuShop;
+	
 
 	@FindBy(id = "gf_lnk_1")
 	public static WebElement footerHomeLink;
@@ -46,24 +50,29 @@ public class GlobalWebElements  extends UhcDriver{
 	public static WebElement footerAgentsnBrokersLink;
 	
 	/** Request for assistance link **/
-	@FindBy(id="gf_lnk_9")
+	@FindBy(id="gf_lnk_10")
 	public static WebElement footerRequestforAssistancelink;
 	
+	@FindBy(id="gf_lnk_9")
+	public static WebElement footerAccessibilitylink;
 	
-	@FindBys(value = { @FindBy(xpath = "(//a[contains(text(),'Visit AARP.org')])[2]") })
+	@FindBys(value = { @FindBy(xpath = "//div[contains(@class,'globalfooternav')]//a[contains(text(),'Visit AARP.org')]") })
 	public static WebElement aarpOrgLink;
 	
 	@FindBys(value = { @FindBy(id = "footnotes1" )})
 	public static WebElement footnotesContent;
 	
 			
-	@FindBy(id = "gfn_lnk_row2_1")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Medicare Advantage')]")
 	 public static WebElement medicareAdvantagePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_2")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Special Needs')]")
+	 public static WebElement medicareSpecialNeedsPlansLink;
+	
+	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@href, 'prescription-drug')]")
 	 public static WebElement medicarePrescriptionDrug_PlansLink;
 	
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -81,7 +90,7 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(linkText = "Back to Top")
 	 public static WebElement footerNavigationBackToTopLink;
 	
-	@FindBy(linkText = "View all disclaimer information")
+	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
 	 public static WebElement viewAllDisclaimerInformationLink;
 	
 	@FindBy(linkText = "Hide disclaimer information")
@@ -105,8 +114,15 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id = "gfn_lnk_row2_5")
 	 public static WebElement medicareSpecialNeedPlansLink;
 	
-	@FindBy(xpath = "//h1[@class='logo']/a")
+	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	 public static WebElement visitorprofileicon;
+	
+	//@FindBy(xpath = "//h1[@class='logo']/a")
+	@FindBy(id = "logo")
 	 public static WebElement logoLink;
+	
+	@FindBy(id = "aarpSVGLogo")
+	 public static WebElement AARPlogo;
 	
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	 public static WebElement importantDisclosuresLink;
@@ -141,6 +157,9 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
 	 public static WebElement registerHereLink;
 	
+	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	 public static WebElement headerRegisterLink;
+	
 	@FindBy(className = "not-registered-text")
 	 public static WebElement notRegisteredText;
 	
@@ -173,7 +192,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
 	 public static WebElement signInButton;
 	
-	
+	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	public static WebElement signIn;
 
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
 	public static WebElement prescriptiondrugPlansRequestMoreHelpLink;
@@ -190,6 +210,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
 	public static WebElement medicareSelectHosipitalDirectoryLink;
 	
+	@FindBy(xpath="(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
+	public static WebElement headerSignInLink;
 		
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")
@@ -211,10 +233,15 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id="cover")
 	public static WebElement RequestforAssistancepopup;
 	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public static WebElement proactiveChatExitBtn;
 	
+	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
+	public static WebElement headerDrugCostEstimatorLink;
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ourPlansDropdownText);
 		actions.click();

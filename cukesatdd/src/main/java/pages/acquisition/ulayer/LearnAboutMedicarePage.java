@@ -58,7 +58,7 @@ public PrepareforInitialEnrollmentPage prepareforInitialEnrollmentFooterClick() 
 		validate(medicareSupplementInsurancePlansLink);
 		prepareForInitialEnrollment.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Initial Enrollment Period | AARP® Medicare Plans from UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
 			return new PrepareforInitialEnrollmentPage(driver);
 		}else{
 		
@@ -71,11 +71,12 @@ public PrepareforInitialEnrollmentPage prepareforInitialEnrollmentFooterClick() 
 public ExploreChangingPlansPage exploreChangingPlansClick() {
 	validate(navigationSectionMedicareEducationLink);
 	Actions actions = new Actions(driver);
+	PageFactory.initElements(driver, this);
     actions.moveToElement(navigationSectionMedicareEducationLink);
     actions.moveToElement(exploreChangingPlansMedicareEducationLink);
     actions.click().build().perform();
     validate(navigationSectionMedicareEducationLink);
-	if (driver.getTitle().equalsIgnoreCase("Change Medicare Plans | AARP® Medicare Plans from UnitedHealthcare®")) {
+	if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_CHANGE_MEDICARE_PLANS)) {
 		return new ExploreChangingPlansPage(driver);
 	}else{
 	

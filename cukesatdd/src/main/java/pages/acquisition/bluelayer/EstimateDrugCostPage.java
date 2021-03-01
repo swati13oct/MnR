@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 public class EstimateDrugCostPage extends UhcDriver {
 	
 	@FindBy(linkText = "Get started")
@@ -23,7 +24,7 @@ public class EstimateDrugCostPage extends UhcDriver {
 
 	public EnterZipCodePage getStarted() {
 		getStartedLink.click();
-		if(driver.getTitle().equalsIgnoreCase("Our Medicare Plan Types | UnitedHealthcare®"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE))
 		{
 			return new EnterZipCodePage(driver);
 		}

@@ -14,7 +14,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.acquisitionvbf.dce.DceCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -141,16 +140,7 @@ public class SelectGenericPage extends UhcDriver {
 
 	public JSONObject getExpectedData(String drugName, String drugDosageWithQty)
 	{
-		String fileName = drugName;
-		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY+File.separator+CommonConstants.SITE_BLUELAYER+File.separator+DceCommonConstants.SELECT_GENERIC_FLOW_NAME+File.separator;
-		JSONObject selectGeneric = MRScenario.readExpectedJson(fileName, directory);
 		JSONObject selectGenericExpectedJson = null;
-		try {
-			selectGenericExpectedJson = selectGeneric.getJSONObject(drugDosageWithQty);
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return selectGenericExpectedJson;
 	}
 

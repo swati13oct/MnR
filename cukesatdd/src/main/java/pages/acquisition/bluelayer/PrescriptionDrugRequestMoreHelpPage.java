@@ -6,6 +6,8 @@ package pages.acquisition.bluelayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.PageTitleConstants;
+
 /**
  * @author rkodumur
  *
@@ -29,7 +31,7 @@ public class PrescriptionDrugRequestMoreHelpPage extends GlobalWebElements {
 		validate(headerMedicareSupplementPlansLink);
 		headerMedicareSupplementPlansLink.click();
 		validate(headerMedicareSupplementPlansLink);
-		if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_UNITEDHEALTHCARE_MEDICARE_SOLUTIONS)){
 			return new MedicareSupplementPlansuhcPage(driver);
 		}
 		return null;

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -54,7 +55,7 @@ public class SearchEnginePage {
 			googelSearchFeild.submit();
 			CommonUtility.checkPageIsReady(driver);
 			if (driver.getTitle().equalsIgnoreCase(
-					"UHC medicare solutions - Google Search")) {
+					PageTitleConstants.BLAYER_UHC_MEDICARE_SOLUTIONS)) {
 				return new SearchResultsPage(driver);
 			}
 			return null;
@@ -68,7 +69,7 @@ public class SearchEnginePage {
 			yahooSubmitFeild.click();
 			CommonUtility.checkPageIsReady(driver);
 			if (driver.getTitle().equalsIgnoreCase(
-					"UHC medicare solutions - Yahoo Search Results")) {
+					PageTitleConstants.BLAYER_UHC_MEDICARE_SOLUTIONS_YAHOO)) {
 				return new SearchResultsPage(driver);
 			}
 			return null;

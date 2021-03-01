@@ -93,10 +93,20 @@ public class PlanInformationPage extends UhcDriver {
 
         public BeneficiaryInformationPage navigateToNextStep() {
                 enrollmentNext.click();
+
+                try {
+        			Thread.sleep(30000);
+        		} catch (InterruptedException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+
                 if(pageHeading.getText().contains("Beneficiary Information"))
                 {	
+                	
                         return new BeneficiaryInformationPage(driver);
                 }
+                System.out.println("Beneficiary INFO Page not Displayed");
                 return null;
                 
         }

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 /**
@@ -16,8 +17,18 @@ import atdd.framework.UhcDriver;
  */
 public class ContactUsUmsPage extends UhcDriver{
 	
-	@FindBy(id = "gf_lnk_5")
-	private WebElement privacyPolicyLink;
+	@FindBy(xpath = "//*[contains(@class,'header') and contains(text(),'Contact')]")
+	public static WebElement header;
+	
+	@FindBy(xpath = "//*[contains(text(),'PROVIDERS ONLY')]")
+	public static WebElement rightRailSection_ProvidersOnly;
+	
+	@FindBy(id = "collapse2heading_article_mededaccordion0")
+	public static WebElement ma_AccordialCollapsed;
+	
+	@FindBy(xpath = "//div[contains(@class,'disclaimer-box')]/p")
+	public static WebElement disclaimerBox_Para;
+	
 
 	public ContactUsUmsPage(WebDriver driver) {
 		super(driver);
@@ -30,20 +41,14 @@ public class ContactUsUmsPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		validate(privacyPolicyLink);
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(rightRailSection_ProvidersOnly);
+		//validateNew(ma_AccordialCollapsed);
+		//validateNew(disclaimerBox_Para);
 		
 		
 	}
 	
-	public PrivacyPolicyUmsPage privacyPolicyClick() {
-		validate(privacyPolicyLink);
-		privacyPolicyLink.click();
-		validate(privacyPolicyLink);
-		if(driver.getTitle().equalsIgnoreCase("Privacy Policy | UnitedHealthcare®")){
-			return new PrivacyPolicyUmsPage(driver);
-		}
-		return null;
-			
-		}
+	
 
 }

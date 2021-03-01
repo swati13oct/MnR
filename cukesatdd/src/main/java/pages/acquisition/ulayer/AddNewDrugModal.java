@@ -1,7 +1,6 @@
 package pages.acquisition.ulayer;
 import java.util.List;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 public class AddNewDrugModal extends UhcDriver {
 
@@ -45,45 +45,46 @@ public class AddNewDrugModal extends UhcDriver {
 	@FindBy(xpath = "//span[@class='color-red']")
 	public WebElement atleast_4_mesg;
 	
+	@FindBy(id = "dialogHeading1")
+	public WebElement modalHeading;
+	
+	@FindBy(xpath = "//div[contains(@class,'autocomplete-suggestions')]/div[@class='autocomplete-suggestion']")
+	public List<WebElement> autoCompleteSuggestionList;
+	
+	@FindBy(xpath = "//div[@class='loading-dialog'][not (contains(@style,'display: none;'))]")
+	public List<WebElement> loadingDialog;
+	
+	@FindBy(xpath = "//input[starts-with(@id,'drugs-')]/parent::div[contains(@class,'radio-block')]/label")
+	public WebElement drugList;
+
+	@FindBy(id = "closeDrugPopup")
+	public WebElement cancel;
+	
 	
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//openAndValidate();
+		openAndValidate();
 	}
 	@Override
 	public void openAndValidate() {
-
-		
-		JSONObject jsonObject = new JSONObject();
-		for (String key : addnewdrug.getExpectedData().keySet()) {
-			WebElement element = findElement(addnewdrug.getExpectedData()
-					.get(key));
-			if (null != element) {
-				validate(element);
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		addnewdrugJson = jsonObject;
-		System.out.println("addDrugJson----->"+addnewdrugJson);
-	
-		
+		validateNew(modalHeading);
+		validateNew(searchButton);
 	}
 
-	public AddDrugDetails clickonSearchButton(String DrugName) throws InterruptedException {
+	public AddDrugDetails searchDrugWithoutAutoComplete(String DrugName) throws InterruptedException {
 
-		drugsearchinput.sendKeys(DrugName);
-		Thread.sleep(3000);
-		searchButton.click();  
-		waitforElement(continueButton);
+		sendkeys(drugsearchinput, DrugName.toLowerCase());
+		searchButton.click();
+		CommonUtility.waitForPageLoadNew(driver, drugList, 30);
 		continueButton.click();
-			return new AddDrugDetails(driver);
-		
+		return new AddDrugDetails(driver);
+
+	}
+	
+	public void closeModalWindow() {
+		cancel.click();
+		waitforElementDisapper(By.id("closeDrugPopup"), 30);
 	}
 	
 	public void typeDrugName(String DrugName) {
@@ -102,15 +103,18 @@ public class AddNewDrugModal extends UhcDriver {
 	public void verifyerror(){
 		errorMessage.isDisplayed();
 	}
-	public void selectAdrugFromAutoCompleteSuggestions(String drug){
-		List<WebElement> elements = driver.findElements(By.className("autocomplete-suggestions"));
-		for(WebElement element : elements){
-			
-			if(drug.equalsIgnoreCase(element.getText())){
-				element.click();
+
+	public AddDrugDetails searchDrugWithAutoComplete(String drug) {
+		sendkeys(drugsearchinput, drug.toLowerCase());
+		for (WebElement currentSuggestion : autoCompleteSuggestionList) {
+
+			if (drug.equalsIgnoreCase(currentSuggestion.getText().trim())) {
+				currentSuggestion.click();
 				break;
 			}
 		}
+		return new AddDrugDetails(driver);
+
 	}
 	public AddDrugDetails submit() throws InterruptedException{
 //		if(searchButton.isDisplayed()){

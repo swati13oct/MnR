@@ -3,12 +3,16 @@
  */
 package pages.acquisition.bluelayer;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author saduri
@@ -16,11 +20,16 @@ import atdd.framework.UhcDriver;
  */
 public class DisclaimersPage extends UhcDriver{
 	
-	@FindBy(id = "gf_lnk_8")
-	private WebElement agentAndBrokersLink;
-	
-	@FindBy(xpath = "//h1[@class='logo']/a/p/img")
+
+
+	@FindBy(id = "logo")
 	private WebElement unitedHealthCareLogo;
+	
+	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
+	public static WebElement header;
+	
+	@FindBy(xpath = "//div[contains(@class,'meded-accordion')]/div[contains(@class,'meded-accordion__item')]//a")
+	public static List<WebElement> mededAccordianList;
 
 	public DisclaimersPage(WebDriver driver) {
 		super(driver);
@@ -30,20 +39,10 @@ public class DisclaimersPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
-		validate(unitedHealthCareLogo);
-		
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(mededAccordianList.get(0));		
 	}
-	public AgentsAndBrokersPage agentsAndBrokersClick() {
-		validate(agentAndBrokersLink);
-		agentAndBrokersLink.click();
-		validate(agentAndBrokersLink);
-		if(driver.getTitle().equalsIgnoreCase("Health Insurance Broker & Agent Resources | UnitedHealthcare®")){
-			return new AgentsAndBrokersPage(driver);
-		}
-		return null;
-			
-		}
+	
 	
 	public AcquisitionHomePage unitedHealthCareLogoClick() {
 		validate(unitedHealthCareLogo);
@@ -52,7 +51,7 @@ public class DisclaimersPage extends UhcDriver{
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
-						"Medicare Plans for Different Needs | UnitedHealthcare®")) {
+						PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)) {
 			return new AcquisitionHomePage(driver);
 		}
 		return null;

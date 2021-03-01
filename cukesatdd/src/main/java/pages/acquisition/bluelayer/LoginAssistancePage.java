@@ -15,6 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.LoginCommonConstants;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class LoginAssistancePage extends GlobalWebElements {
 	
@@ -72,7 +73,7 @@ public class LoginAssistancePage extends GlobalWebElements {
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(0));
 		validate(forgotUsernameLink);
-		if(driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®"))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS))
 		{
 			return new AcquisitionHomePage(driver);
 		}

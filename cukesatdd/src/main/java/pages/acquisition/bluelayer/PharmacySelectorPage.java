@@ -10,6 +10,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.PageTitleConstants;
+
 public class PharmacySelectorPage {
 
 	@FindBy(xpath = "//div[@class='pharmacyListScroll']")
@@ -69,7 +71,7 @@ public class PharmacySelectorPage {
 		if (driver
 				.getTitle()
 				.equalsIgnoreCase(
-						"Our Medicare Plan Types | UnitedHealthcare®")) {
+						PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new AddDrugPage(driver);
 		} else {
 			return null;

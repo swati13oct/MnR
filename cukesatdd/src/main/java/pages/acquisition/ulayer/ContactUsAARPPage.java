@@ -1,10 +1,25 @@
 package pages.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import acceptancetests.util.CommonUtility;
 
 public class ContactUsAARPPage extends GlobalWebElements{
 	 
+	@FindBy(xpath = "//span[contains(text(),'Connect') or contains(text(),'Contact')]")
+	public static WebElement header;
+	
+	@FindBy(xpath = "//*[contains(text(),'PROVIDERS ONLY')]")
+	public static WebElement rightRailSection_ProvidersOnly;
+	
+	@FindBy(id = "collapse2heading_article_mededaccordion0")
+	public static WebElement ma_AccordialCollapsed;
+	
+	@FindBy(xpath = "//div[contains(@class,'disclaimer-box')]/p")
+	public static WebElement disclaimerBox_Para;
 	
 	
 	public ContactUsAARPPage(WebDriver driver) {
@@ -15,19 +30,14 @@ public class ContactUsAARPPage extends GlobalWebElements{
 
 	@Override
 	public void openAndValidate() {
-		validate(footerSiteMapLink);
-		
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(rightRailSection_ProvidersOnly);
+		//validateNew(ma_AccordialCollapsed);
+		//validateNew(disclaimerBox_Para);
+			
 	}
 
-	public SiteMapAARPPage siteMapFooterClick() {
-		validate(footerSiteMapLink);
-		footerSiteMapLink.click();
-		validate(footerSiteMapLink);
-		if (driver.getTitle().equalsIgnoreCase("Site Map | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new SiteMapAARPPage(driver);
-		}
-		return null;
-	}
+	
 	
 	
 

@@ -10,7 +10,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.AddDrugDetails;
 public class AddNewDrugModal extends UhcDriver {
 
 	private PageData addnewdrug;
@@ -45,46 +47,35 @@ public class AddNewDrugModal extends UhcDriver {
 	@FindBy(xpath = "//span[@class='color-red']")
 	public WebElement atleast_4_mesg;
 	
+	@FindBy(id = "dialogHeading1")
+	public WebElement modalHeading;
+	
+	@FindBy(xpath = "//input[starts-with(@id,'drugs-')]/parent::div[contains(@class,'radio-block')]/label")
+	public WebElement drugList;
+	
+	@FindBy(id = "closeDrugPopup")
+	public WebElement cancel;
+	
+	@FindBy(xpath = "//div[contains(@class,'autocomplete-suggestions')]/div[@class='autocomplete-suggestion']")
+	public List<WebElement> autoCompleteSuggestionList;
 	
 	public AddNewDrugModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	
-		//openAndValidate();
+		openAndValidate();
 	}
 	@Override
 	public void openAndValidate() {
-
-		
-		JSONObject jsonObject = new JSONObject();
-		for (String key : addnewdrug.getExpectedData().keySet()) {
-			WebElement element = findElement(addnewdrug.getExpectedData()
-					.get(key));
-			if (null != element) {
-				validate(element);
-				try {
-					jsonObject.put(key, element.getText());
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		addnewdrugJson = jsonObject;
-		System.out.println("addDrugJson----->"+addnewdrugJson);
+		validateNew(modalHeading);
+		validateNew(searchButton);
 	
 		
 	}
 
-	/*public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
-
-		JSONObject addnewdrugExpectedJson = expectedDataMap.get(CommonConstants.ADD_NEW_DRUG_MODAL);
-
-		return addnewdrugExpectedJson;
-	}*/
 	public AddDrugDetails clickonSearchButton(String DrugName) {
 		//drugsearchinput.click();
-		drugsearchinput.sendKeys(DrugName);
+		drugsearchinput.sendKeys(DrugName.toLowerCase());
 		searchButton.click();     
 		waitforElement(continueButton);
 		continueButton.click();
@@ -160,6 +151,34 @@ public class AddNewDrugModal extends UhcDriver {
 	{
 		waitforElement(atleast_4_mesg);
 		
+	}
+	
+	public AddDrugDetails searchDrugWithoutAutoComplete(String DrugName) throws InterruptedException {
+
+		sendkeys(drugsearchinput, DrugName.toLowerCase());
+		searchButton.click();
+		CommonUtility.waitForPageLoadNew(driver, drugList, 30);
+		continueButton.click();
+		return new AddDrugDetails(driver);
+
+	}
+	
+	public void closeModalWindow() {
+		cancel.click();
+		waitforElementDisapper(By.id("closeDrugPopup"), 30);
+	}
+	
+	public AddDrugDetails searchDrugWithAutoComplete(String drug) {
+		sendkeys(drugsearchinput, drug.toLowerCase());
+		for (WebElement currentSuggestion : autoCompleteSuggestionList) {
+
+			if (drug.equalsIgnoreCase(currentSuggestion.getText().trim())) {
+				currentSuggestion.click();
+				break;
+			}
+		}
+		return new AddDrugDetails(driver);
+
 	}
 }
 

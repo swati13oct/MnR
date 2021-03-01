@@ -47,20 +47,40 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id = "gf_lnk_8")
 	public static WebElement footerAgentsnBrokersLink;
 	
-	@FindBy(id = "gf_lnk_9")
-	public static WebElement footerRequestforAssistanceLink;
+	/** Request for assistance link **/
+	@FindBy(id="gf_lnk_10")
+	public static WebElement footerRequestforAssistancelink;
+	
+	@FindBy(id="gf_lnk_9")
+	public static WebElement footerAccessibilitylink;
 	
 	@FindBys(value = { @FindBy(id = "footnotes1" )})
 	public static WebElement footnotesContent;
 	
 	
+	@FindBy(xpath="(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
+	public static WebElement headerSignInLink;
+	
+	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	 public static WebElement headerRegisterLink;
+	
+	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	 public static WebElement visitorprofileicon;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	public static WebElement signIn;
+
 	@FindBy(id = "gfn_lnk_row2_1")
 	 public static WebElement medicareAdvantagePlansLink;
 	
 	@FindBy(id = "gfn_lnk_row2_2")
+	 public static WebElement medicareSpecialNeedsPlansLink;
+	
+	//@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
 	 public static WebElement medicareSupplementInsurancePlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(id = "gfn_lnk_row2_4")
 	 public static WebElement medicarePrescriptionDrug_PlansLink;
 	
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -78,7 +98,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(linkText = "Back to Top")
 	 public static WebElement footerNavigationBackToTopLink;
 	
-	@FindBy(linkText = "View all disclaimer information")
+	@FindBy(xpath= ".//*[contains(@class, 'viewLink disclaimer')]")
 	 public static WebElement viewAllDisclaimerInformationLink;
 	
 	@FindBy(linkText = "Hide discliamer information")
@@ -202,7 +222,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id="nav-zipcode")
 	public static WebElement zipcodeField;
 	
-	@FindBy(className="zip-button")
+	@FindBy(id="zipcodebtn")
 	public static WebElement findPlansButton;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/form/span/span")
@@ -220,7 +240,12 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
 	 public static WebElement alreadyMemberInvalidCredsErrorMessage;
 
-
+	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
+	public static WebElement headerDrugCostEstimatorLink;
+	
+	@FindBy(xpath="//*[@id='planTypesColumn']/h3[4]/a")
+	public static WebElement menuShop;
+	
 	@Override
 	public void openAndValidate() {
 		// TODO Auto-generated method stub
@@ -229,6 +254,7 @@ public class GlobalWebElements extends UhcDriver {
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(ourPlansDropdownText);
 		actions.click();

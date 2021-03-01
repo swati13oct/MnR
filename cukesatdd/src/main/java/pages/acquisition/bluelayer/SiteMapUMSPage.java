@@ -4,6 +4,7 @@
 package pages.acquisition.bluelayer;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,11 +13,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.uhcretiree.Rallytool_Page;
 
 /**
  * @author saduri
@@ -33,15 +34,17 @@ public class SiteMapUMSPage extends UhcDriver{
 	@FindBy(id="PO7link")
 	private WebElement SearchforaProviderFacility ;
 	
-	@FindBy(id = "gf_lnk_2") 
-	private WebElement aboutUsLink;
-	
 	
 	private PageData siteMap;
 
 	public JSONObject siteMapJson;
 	
+	 
+	@FindBy(xpath = "//div[@id='medicareTitle']/*")
+	public static WebElement header;
 	
+	@FindBy(xpath = "//div[contains(@class,'med_cont')]/ul[contains(@class,'bullet_list')]/li")
+	public static List<WebElement> siteMapList;
 	
 	public SiteMapUMSPage(WebDriver driver) {
 		super(driver);
@@ -53,11 +56,8 @@ public class SiteMapUMSPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
-		validate(siteMapTable);
-		validate(medicareTitle);
-		
-		
+		CommonUtility.waitForPageLoadNew(driver, header, 30);
+		validateNew(siteMapList.get(0));	
 		
 	}
 	
@@ -89,16 +89,7 @@ public JSONObject siteMap() {
 		
 	}
 
-public AboutUsPage aboutUsClick() {
-	validate(aboutUsLink);
-	aboutUsLink.click();
-	validate(aboutUsLink);
-	if(driver.getTitle().equalsIgnoreCase("About UnitedHealthcare® | UnitedHealthcare")){
-		return new AboutUsPage(driver);
-	}
-	return null;
-		
-	}
+
 
 public Rallytool_Page lookupproviderclick() {
 	validate(SearchforaProviderFacility);

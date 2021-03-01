@@ -6,6 +6,8 @@ package pages.acquisition.bluelayer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.PageTitleConstants;
+
 /**
  * @author rkodumur
  *
@@ -27,7 +29,7 @@ public AcquisitionHomePage acquisitionHomeFooterClick() {
 		
 		footerHomeLink.click();
 		validate(footerHomeLink);
-		if (driver.getTitle().equalsIgnoreCase("Medicare Plans for Different Needs | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)) {
 			return new AcquisitionHomePage(driver);
 		}else{
 		

@@ -26,8 +26,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 // import acceptancetests.planName.bluelayer.PlanNamesStepDefinition;
 import atdd.framework.UhcDriver;
-import pages.dashboard.member.blayer.DrugCostEstimatorPage;
-import pages.member.ulayer.Rallytool_Page;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 public class ResponsivePlanSummaryUhc extends UhcDriver{
 	
@@ -441,7 +440,7 @@ public BLayerPlanComparePage TeamCviewPlanSummary(String planType) throws Interr
 			}else if(planType.equalsIgnoreCase("MS")){
 		           showMsPlans.click();
 		           System.out.println(driver.getTitle());
-		           if(driver.getTitle().equals("UnitedHealthcare Medicare Solutions | AARP Medicare Supplement Plans")){
+		           if(driver.getTitle().equals(PageTitleConstants.BLAYER_UNITEDHEALTHCARE_MEDICARE_SOLUTIONS)){
 		return new BLayerPlanComparePage(driver);
 		           }else{
 		        	   Assert.fail();
@@ -561,7 +560,7 @@ public void comparePlanslnk(){
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			 if(driver.getTitle().equalsIgnoreCase("Plan Selector")){
+			 if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PLAN_SELECTOR)){
 				 return new PlanSelectorPage(driver);
 			 }
 			 return null;	 
@@ -708,7 +707,7 @@ public void comparePlanslnk(){
 									e.printStackTrace();
 								}
 				                System.out.println(driver.getTitle());
-				                if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Enrollment | AARP® Medicare Plans from UnitedHealthcare®")){
+				                if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 				                	System.out.println("Page displayed successfully");
 				                	Assert.assertTrue(true);
 				                }else{
@@ -948,6 +947,7 @@ public void comparePlanslnk(){
  					executor.executeScript("document.getElementById('zipcode').click()");
 					System.out.println("clicked inside tet box");
  					Actions action = new Actions(driver);
+ 					PageFactory.initElements(driver, this);
 					action.moveToElement(zipCodeField).perform();
 					action.doubleClick();
 					action.perform();
@@ -1019,6 +1019,7 @@ public void comparePlanslnk(){
  							driver.manage().window().maximize();
 						//	zipCodeField.sendKeys(invalidzipcode);
  							Actions action = new Actions(driver);
+ 							PageFactory.initElements(driver, this);
  							action.moveToElement(zipCodeField).perform();
  							action.doubleClick();
  							action.perform();
@@ -1056,7 +1057,7 @@ public void comparePlanslnk(){
 					}
 					
 				}
-				public Rallytool_Page navigateToRallyPage(String planName) { 
+				/*public Rallytool_Page navigateToRallyPage(String planName) { 
                     driver.manage().window().maximize(); 
                     //a[contains(text(),'Is my provider covered?')]
                     int i=0;
@@ -1094,7 +1095,7 @@ public void comparePlanslnk(){
                                  }
                           i++;                
                            return null;
-                    }
+                    }*/
 
 				public ResponsivePlanSummaryUhc validateBlueBanner(String timePeriod, String currentYear, String futureYear, String planType, String planName){
 					if(timePeriod.equalsIgnoreCase("AEP")){
@@ -1191,7 +1192,7 @@ public void comparePlanslnk(){
 		               for(int i=0; i<plans.size();i++){
 		                      if(plans.get(i).getText().equalsIgnoreCase(planName)){
 		                    	  learnMoreLinks.get(i).click();
-		                            if(driver.getTitle().equalsIgnoreCase("Medicare Advantage Plan Enrollment Information | UnitedHealthcare®")){
+		                            if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_PLAN_ENROLLMENT_INFORMATION)){
 		                                   try {
 		                                          Thread.sleep(5000);
 		                                   } catch (InterruptedException e) {

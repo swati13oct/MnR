@@ -159,7 +159,7 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		String sameMailingAdress = personalAttributesMap.get("Same Mailing Address");
 		sendkeys(emailAddressField,emailAddress);
 		sendkeys(primaryPhoneNumberField, mainPhoneNumber);
-		if(getTitle().equalsIgnoreCase("AARP Medicare Complete Online Application")){
+		if(getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP)){
 		alternatePhoneNumberlink.click();
 		sendkeys(alternatePhoneNumberField,otherPhoneNumber);
 		}
@@ -267,7 +267,7 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		enrollmentNext.click();
 		System.out.println("step2Part2PageHeading::"+step2Part2PageHeading);
 		if (step2Part2PageHeading.getText().equalsIgnoreCase(
-				"Special Election Period")) {
+				PageTitleConstants.ULAYER_SPECIAL_ELECTION_PERIOD)) {
 			return new SpecialElectionPeriodPage(driver);
 		}
 		return null;
@@ -277,7 +277,7 @@ public class BeneficiaryInformationPage extends UhcDriver{
 		enrollmentNext.click();
 		System.out.println("step2Part2PageHeading::"+step2Part2PageHeading);
 		if (step2Part2PageHeading.getText().equalsIgnoreCase(
-				"Special Election Period")) {
+				PageTitleConstants.ULAYER_SPECIAL_ELECTION_PERIOD)) {
 			return new AdditionalInformationPage(driver, planName);
 		}
 		return null;

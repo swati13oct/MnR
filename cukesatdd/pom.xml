@@ -9,7 +9,7 @@
 
 
 	<properties>
-		<selenium.version>2.53.0</selenium.version>
+		<selenium.version>3.141.59</selenium.version>
 		<cucumber.version>1.2.5</cucumber.version>
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
@@ -28,13 +28,36 @@
 		</resources>
 
 		<plugins>
+		
+			 <plugin>
+			      <artifactId>maven-assembly-plugin</artifactId>
+			      <configuration>
+			        <archive>
+			          <manifest>
+			            <mainClass>fully.qualified.MainClass</mainClass>
+			          </manifest>
+			        </archive>
+			        <descriptorRefs>
+			          <descriptorRef>jar-with-dependencies</descriptorRef>
+			        </descriptorRefs>
+			      </configuration>
+			      <executions>
+					    <execution>
+					      <id>make-assembly</id> <!-- this is used for inheritance merges -->
+					      <phase>package</phase> <!-- bind to the packaging phase -->
+					      <goals>
+					        <goal>single</goal>
+					      </goals>
+					    </execution>
+					  </executions>
+    		</plugin>
 		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.5.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<debug>true</debug>
 					<debuglevel>lines,vars,source</debuglevel>
 				</configuration>
@@ -45,7 +68,6 @@
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.0.0</version>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -82,7 +104,7 @@
 					<reuseForks>true</reuseForks>
 					<testSourceDirectory>${basedir}/src/main/java/</testSourceDirectory>
 					<testClassesDirectory>${project.build.directory}/classes/</testClassesDirectory>
-					<argLine>-Xmx512m -XX:MaxPermSize=512m</argLine>
+					<argLine>-Xmx512m -XX:MaxPermSize=1024m</argLine>
 					<systemPropertyVariables>
 						<environment>${environment}</environment>
 						<webdriverhost>${webdriverhost}</webdriverhost>
@@ -90,6 +112,7 @@
 				</configuration>
 				
 			</plugin>
+			<!--
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
@@ -107,7 +130,7 @@
 					<executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable>
 				</configuration>
 			</plugin>
-			
+			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
@@ -232,13 +255,6 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.3.4.RELEASE</version>
 		</dependency>
-
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.3.0</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -384,6 +400,73 @@
 			<artifactId>phantomjsdriver</artifactId>
 			<version>1.2.1</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>javax.mail-api</artifactId>
+		    <version>1.5.5</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.sun.mail</groupId>
+		    <artifactId>javax.mail</artifactId>
+		    <version>1.5.5</version>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.jsoup</groupId>
+    		<artifactId>jsoup</artifactId>
+    		<version>1.11.2</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+		<dependency>
+    <groupId>com.saucelabs</groupId>
+    <artifactId>saucerest</artifactId>
+    <version>1.0.38</version>
+    <scope>test</scope>
+  </dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>2.0.21</version>
+		</dependency>
+	<dependency>
+    <groupId>io.appium</groupId>
+    <artifactId>java-client</artifactId>
+    <version>7.3.0</version>
+	</dependency>		
+		<dependency>
+    <groupId>jdbcJar</groupId>
+    <artifactId>ojdbc6</artifactId>
+    <scope>system</scope>
+    <version>11.2.0.4.0</version>
+    <systemPath>${basedir}/src/main/resources/lib/ojdbc6.jar</systemPath>
+</dependency>
+
+    <dependency>
+        <groupId>javax.xml.bind</groupId>
+        <artifactId>jaxb-api</artifactId>
+        <version>2.3.0</version>
+    </dependency>
+    <dependency>
+        <groupId>com.sun.xml.bind</groupId>
+        <artifactId>jaxb-impl</artifactId>
+        <version>2.3.0</version>
+    </dependency>
+    <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-runtime</artifactId>
+        <version>2.3.0</version>
+    </dependency>
+    <dependency>
+        <groupId>javax.activation</groupId>
+        <artifactId>activation</artifactId>
+        <version>1.1.1</version>
+    </dependency>
+
 
 	</dependencies>
 	

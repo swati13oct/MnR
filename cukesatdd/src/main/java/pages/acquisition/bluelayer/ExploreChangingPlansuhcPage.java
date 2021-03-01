@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.ulayer.PageTitleConstants;
+
 /**
  * @author rkodumur
  *
@@ -39,11 +41,12 @@ public class ExploreChangingPlansuhcPage extends GlobalWebElements{
 	public PrepareForInitialEnrollmentuhcPage prepareForInitialEnrollmentClick() {
 		validate(prepareForInitialEnrollmentMedicareEducationLink);
 		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
 	    actions.moveToElement(navigationSectionMedicareEducationLink);
 	    actions.moveToElement(prepareForInitialEnrollmentMedicareEducationLink);
 	    actions.click().build().perform();
 	    validate(navigationSectionMedicareEducationLink);
-		if (driver.getTitle().equalsIgnoreCase("Prepare for Your Medicare Initial Enrollment Period | UnitedHealthcare®")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PREPARE_FOR_YOUR_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
 			return new PrepareForInitialEnrollmentuhcPage(driver);
 		}else{
 		

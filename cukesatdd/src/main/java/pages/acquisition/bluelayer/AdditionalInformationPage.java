@@ -14,6 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ulayer.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -230,7 +231,7 @@ public class AdditionalInformationPage extends UhcDriver{
 		}
 		String text = providerSearchpageTitle.getText();
 		System.out.println(text);
-		if(!providerSearchpageTitle.getText().equalsIgnoreCase("PRIMARY CARE PROVIDER SELECTION: "+planName))
+		if(!providerSearchpageTitle.getText().equalsIgnoreCase(PageTitleConstants.BLAYER_PRIMARY_CARE_PROVIDER_SELECTION+planName))
 			flag = false;
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
@@ -240,7 +241,7 @@ public class AdditionalInformationPage extends UhcDriver{
 	public ReviewApplicationPage navigatesToNextStep(String planName) {
 		enrollmentNext.click();
 		if (pageHeading.getText().equalsIgnoreCase(
-				"Step 4: Review Application")) {
+				PageTitleConstants.BLAYER_PRIMARY_CARE_PROVIDER_SELECTI)) {
 			return new ReviewApplicationPage(driver,planName);
 		}
 		return null;

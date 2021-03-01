@@ -9,9 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.UhcDriver;
 import pages.acquisition.ulayer.ResponsivePlanDetails;
-import pages.member.ulayer.Rallytool_Page;
+import atdd.framework.UhcDriver;
 
 public class ResponsivePlanDetailsUhc extends UhcDriver {
 
@@ -39,8 +38,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 	@FindBy(xpath="//div[2][@class='riders-box']/label")
 	private WebElement highOptionalDentalCheckBox;
 	
-	@FindBy(xpath="	//div[2][@class='riders-box']/p[3]/b")
-	private WebElement highOptionalDentalDollarValue;
+
 		
 	@FindBy(xpath="//span[@class='title' and text()='Plan Costs']")
 	private WebElement planCostsTab;
@@ -125,7 +123,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 		
 	}
 	
-	public Rallytool_Page validateRallyPage(){
+	/*public Rallytool_Page validateRallyPage(){
 		providerLink.click();
 		try {
 			Thread.sleep(3000);
@@ -149,7 +147,7 @@ public class ResponsivePlanDetailsUhc extends UhcDriver {
 
          }
 		return null;
-	}
+	}*/
 	
 	public ResponsivePlanDetailsUhc valiadateOptionalServices(String optionalDental, String highOptionalDental){
 		

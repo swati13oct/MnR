@@ -6,9 +6,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.bluelayer.ZipcodeLookupPage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.ZipcodeLookupPage;
 
 /**
  * @author pperugu
@@ -25,8 +25,6 @@ public class OurPlansPage extends UhcDriver {
 	@FindBy(id = "goBtn")
 	private WebElement goButton;
 
-	@FindBy(id = "nav-zipcode")
-	private WebElement zipfield;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/span")
 	private WebElement errormessage;
@@ -37,6 +35,9 @@ public class OurPlansPage extends UhcDriver {
 	@FindBy(id = "subnav_2")
 	public static WebElement ourPlansDropdown;
 
+	@FindBy(id = "nav-zipcode")
+	private WebElement zipfield;
+
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
 	public WebElement FindPlansButton;
 
@@ -45,7 +46,7 @@ public class OurPlansPage extends UhcDriver {
 	public OurPlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+//		openAndValidate();
 	}
 
 	public ZipcodeLookupPage looksupforZipcodes() {
@@ -74,6 +75,7 @@ public class OurPlansPage extends UhcDriver {
 
 		validate(OurPlansLink);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(OurPlansLink).build().perform();
 		validate(OurPlansLink);
 	}
@@ -92,6 +94,7 @@ public class OurPlansPage extends UhcDriver {
 	public AcquisitionHomePage ErrorMessage() {
 		validate(errormessage);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(errormessage);
 
 		validate(errormessage);
@@ -113,6 +116,7 @@ public class OurPlansPage extends UhcDriver {
 	public AcquisitionHomePage errormessage() {
 		validate(errormessage);
 		Actions action = new Actions(driver);
+		PageFactory.initElements(driver, this);
 		action.moveToElement(errormessage);
 
 		validate(errormessage);

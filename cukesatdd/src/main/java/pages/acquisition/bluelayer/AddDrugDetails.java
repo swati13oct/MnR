@@ -1,5 +1,4 @@
 package pages.acquisition.bluelayer;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -8,9 +7,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-
 import acceptancetests.data.PageData;
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+import pages.acquisition.ulayer.PageTitleConstants;
+import pages.acquisition.bluelayer.SavingsOppurtunity;
 
 public class AddDrugDetails extends UhcDriver {
 
@@ -35,34 +37,28 @@ public class AddDrugDetails extends UhcDriver {
 	
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
+	
+	@FindBy(id = "addheadDetails_id")
+	public WebElement addDrugDetailsPageHeading;
+	
+	@FindBy(xpath = "//*[contains(@id,'dosage')]//select")
+	public WebElement dosageDropdown;
+	
+	@FindBy(xpath = "//*[@id=\"alt-search-radios\"]/div/div[1]//label")
+	public WebElement btndrugName;
+	
 	public AddDrugDetails(WebDriver driver) {
 		super(driver);
-		PageFactory.initElements(driver, this);
-		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		
-		//openAndValidate();
+		PageFactory.initElements(driver, this);	
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-
-		JSONObject jsonObject = new JSONObject();
-		for (String key : adddrugdetails.getExpectedData().keySet()) {
-			WebElement element = findElement(adddrugdetails.getExpectedData().get(key));
-			if (null != element) {
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				
-				e.printStackTrace();
-			}
-
-		}
-	}
-		adddrugdetailsJson = jsonObject;
-
-		System.out.println("addnewdrugJson----->" + adddrugdetailsJson);
+		CommonUtility.waitForPageLoadNew(driver, addDrugDetailsPageHeading, 45);
+		validateNew(selectYourFrequencyDropdown);
+		validateNew(quantityField);
+		//validateNew(dosageDropdown);
 	}
 
 	/*public JSONObject getExpectedData(Map<String, JSONObject> expectedDataMap) {
@@ -73,25 +69,23 @@ public class AddDrugDetails extends UhcDriver {
 	}*/
 	public void selectDosage(String dosage){
 	
-		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
-		if(!element.isSelected()){
-			element.click();
-		}
+		/*WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
+		drugDosage.click();*/
+		selectFromDropDownByText(driver, dosageDropdown, dosage);  //this can be used if select dropdown is brought back
+
+	}
+	
+	public void selectDosageAttribute(String dosage) throws InterruptedException{
+		if(btndrugName.getText().equalsIgnoreCase(dosage))
+			btndrugName.click();
 	}
 
 	public void selectQnty(String qnty){
-		waitforElement(quantityField);
-		sendkeys(quantityField, qnty);
+		sendkeysNew(quantityField, qnty);
 	}
 
 	public void selectFrequency(String frquency){
-		Select options = new Select(selectYourFrequencyDropdown);
-		if(frquency.equalsIgnoreCase("Every 1 month")){
-			options.selectByValue("30");
-		}
-		if(frquency.equalsIgnoreCase("Every 3 months")){
-			options.selectByValue("90");
-		}
+		selectFromDropDownByText(driver, selectYourFrequencyDropdown, frquency);
 	}
 
 	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
@@ -112,7 +106,7 @@ public class AddDrugDetails extends UhcDriver {
 		
 		waitforElement(continueButton);
 		continueButton.click();
-		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunity(driver);
 		}
 		return null;
@@ -124,5 +118,16 @@ public class AddDrugDetails extends UhcDriver {
 	public void validateThePage(){
 		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
 	}
-
+	public SavingsOppurtunity continueAddDrugDetailsModWithSaving() throws InterruptedException{
+		scrollToView(continueButton);
+		continueButton.click();
+		
+		return new SavingsOppurtunity(driver);
+		}
+	
+	public DrugCostEstimatorPage continueAddDrugDetailsModNoSaving() throws InterruptedException{
+		validateNew(continueButton);
+		continueButton.click();
+		return new DrugCostEstimatorPage(driver);
+		}
 }
