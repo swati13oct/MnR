@@ -49,8 +49,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
     And user selects add drug option in Drug page mobile
-      | Drug Selection | <DrugSelection>                                                        |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      | Drug Selection | <DrugSelection>                                                                |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #And user selects Pharmacy in Pharmacy page mobile
     #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
@@ -62,8 +62,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     Then user verifies doctors session in VPP page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | None         | WithinUS     | lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10003 | NO            | New York | MAPD          | None         | WithinUS     | lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Retail            | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @drugsessionPREtoVPP @F375045
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate drug session from PRE to VPP in MAPD flow with drug functions for MA plans in PRE Mobile
@@ -84,7 +84,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Doctors Search Text | <DoctorsName>      |
       | Multi Doctor        | <isMultiDoctor>    |
     And user adds drugs in Drug page mobile
-      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #And user selects Pharmacy in Pharmacy page mobile
     #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
@@ -96,8 +96,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     Then user verifies drugs session in VPP page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   94203 | NO            | Sacramento | MAPD          | None         | WithinUS     | lookup           | robert      | NO            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County     | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   94203 | NO            | Sacramento | MAPD          | None         | WithinUS     | lookup           | robert      | NO            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Retail            | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @zipsessionVPPtoPRE @F428517
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty>  - To validate zip code session from VPP to PRE in Mobile
@@ -141,7 +141,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
   #| Multi Doctor        | <isMultiDoctor>    |
   #And user selects add drug option in Drug page mobile
   #| Drug Selection | <DrugSelection>                                                        |
-  #| Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+  #| Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
   #And user selects Pharmacy in Pharmacy page mobile
   #  | Pharmacy Selection | <PharmacySelection> |
   #And user selects additional services option in additional services page mobile
@@ -193,7 +193,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
   #And user navigates to Zip Code page from vpp plans using startover mobile
   #
   #Examples:
-  #| Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+  #| Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
   #|   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | YES           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
   @PRE @planrecommandonationmobile @startnowmobile @F427582
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate start now function in PRE Mobile
@@ -214,8 +214,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Doctors Search Text | <DoctorsName>      |
       | Multi Doctor        | <isMultiDoctor>    |
     And user selects add drug option in Drug page mobile
-      | Drug Selection | <DrugSelection>                                                        |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      | Drug Selection | <DrugSelection>                                                                |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #And user selects Pharmacy in Pharmacy page mobile
     #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
@@ -245,8 +245,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     And user navigates to Zip Code page from vpp plans mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10003 | NO            | New York | MAPD          | None         | Regular      | lookup           | sue         | NO            | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Retail            | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @deleteDocZipChange @F428517
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate provider removal on zip change in PRE Mobile
@@ -267,8 +267,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Doctors Search Text | <DoctorsName>      |
       | Multi Doctor        | <isMultiDoctor>    |
     And user selects add drug option in Drug page mobile
-      | Drug Selection | <DrugSelection>                                                        |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      | Drug Selection | <DrugSelection>                                                                |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #And user selects Pharmacy in Pharmacy page mobile
     #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
@@ -298,8 +298,8 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     And user navigates to Zip Code page from vpp plans mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | Zipcode1 | isMultiCounty1 | County1  | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DoctorsName1 | isMultiDoctor1 | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York |    10001 | NO             | New York | MAPD          | None         | Regular      | lookup           | sue         | Yes           | john         | No             | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            | Yes,No,No,Yes                 | Lower                |
+      | Zipcode | isMultiCounty | County   | Zipcode1 | isMultiCounty1 | County1  | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DoctorsName1 | isMultiDoctor1 | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10003 | NO            | New York |    10001 | NO             | New York | MAPD          | None         | Regular      | lookup           | sue         | Yes           | john         | No             | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,Week,1,YES,NO                                  | Retail            | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonationmobile @EmailListmobile @PDPEmailPlans @F452764
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -DrugOption: <DrugSelection> - To validate Email Plan List PDP plans in PRE Mobile
@@ -365,7 +365,7 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
       | Is Multi County | <isMultiCounty> |
       | County Name     | <County>        |
     When user adds Drugs in vpp summary page mobile
-      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     And user navigates to Zip Code page from vpp mobile
     And runs questionnaire at zipcode page mobile
       | Zip Code        | <Zipcode>       |
@@ -384,5 +384,5 @@ Feature: Plan Recommendation Engine - Verify PRE Session Cookies functionalities
     Then user navigate drugs list page and verifies drugs session in Drugs page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   10001 | NO            | New York | MAPD          | None         | OutsideUS    | UHCNetwork       |             |               | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch |
+      |   10001 | NO            | New York | MAPD          | None         | OutsideUS    | UHCNetwork       |             |               | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                |
