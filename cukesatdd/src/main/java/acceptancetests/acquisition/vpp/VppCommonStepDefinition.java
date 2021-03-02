@@ -3796,6 +3796,44 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
 	}
+	
+	@Then("^verify all links on plan compare page is loaded$")
+	public void verify_alllinks_on_plan_compare_page_is_loaded_on_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateALLFiledsPlanComparePage();
+	}
+	
+	@Then("^verify view all plan button is not displayed$")
+	public void verifyviewallplanbuttonisnotdisplayed() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewALLplanButtonNotDisplayed();
+	}
+	
+	@And("^I click on Add Places from Hospitals find care page$")
+	public void I_click_on_Add_Hospitals_on_plan_compare_and_Add_PlacesfromHospitals_find_care_page() throws Exception {
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = findCarePage.HospitalPlaces();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^user click on close button on Drug info Modal popup")
+	public void user_clicks_close_plan_PlanCompare_page() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.dceModelClosepopup();
+	}
 
 	
 }

@@ -13,16 +13,16 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
     And user selects plan type in coverage options page mobile
       | Plan Type | <isCoverageOpt> |
     And user selects add drug option in Drug page mobile
-      | Drug Selection | <DrugSelection>                                                        |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      | Drug Selection | <DrugSelection>                                                                |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     # When user selects Pharmacy in Pharmacy page mobile
     #   | Pharmacy Selection | <PharmacySelection> |
     And user validate elements in loading page mobile
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | PharmacySelection |
-      |   10001 | NO            | New York | PDP           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail            |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | PharmacySelection |
+      |   10001 | NO            | New York | PDP           | Yes           | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Retail            |
 
   @PRE @Rankingmobile @MAPDAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate API ranking with UI plans in PRE Mobile
@@ -43,8 +43,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
       | Doctors Search Text | <DoctorsName>      |
       | Multi Doctor        | <isMultiDoctor>    |
     And user selects add drug option in Drug page mobile
-      | Drug Selection | <DrugSelection>                                                        |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      | Drug Selection | <DrugSelection>                                                                |
+      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #And user selects Pharmacy in Pharmacy page mobile
     #  | Pharmacy Selection | <PharmacySelection> |
     And user selects additional services option in additional services page mobile
@@ -58,8 +58,8 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE Business flows with API
     Then user validate UI and API recommendation rankings in results page mobile
 
     Examples: 
-      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
-      |   10001 | NO            | New York | MAPD          | None         | OutsideUS    | UHCNetwork       |             |               | Yes           | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO:Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO | Online            | No,Yes,Yes,No                 | Lower                | both           | Travel,Doctors |
+      | Zipcode | isMultiCounty | County   | isCoverageOpt | SpecialNeeds | TravelOption | DoctorsSelection | DoctorsName | isMultiDoctor | DrugSelection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                               | PharmacySelection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
+      |   10001 | NO            | New York | MAPD          | None         | OutsideUS    | UHCNetwork       |             |               | Yes           | morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO:Lipitor,NO,Lipitor TAB 10MG,,,Week,1,YES,NO | Online            | No,Yes,Yes,No                 | Lower                | both           | Travel,Doctors |
 
   @PRE @Rankingmobile @IDKAPIUIRanking @APIRankingmobile @F358846
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> -SNP: <SpecialNeeds> -Travel: <TravelOption> -Doctors: <DoctorsSelection> -AdditionalOption: <Dental-Hearing-Vision-Fitness> -CostPreferenceSelection: <costPreferenceOption> - To validate API ranking with UI plans in PRE Mobile

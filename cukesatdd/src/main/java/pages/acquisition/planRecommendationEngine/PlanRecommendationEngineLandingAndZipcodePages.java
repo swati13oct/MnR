@@ -347,4 +347,16 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
  		threadsleep(3000);
  	}
 	
+//  Click on Get Started and Click on Continue Button
+  public void getStartedContinueZipcode()  {
+      System.out.println("Click on GetStarted and Click on Continue Button in Zipcode:");
+      waitTillElementClickableInTime(getStartedBtn, 45);
+      waitTillElementClickableInTime(getStartedBtn1, 45);
+      getStartedBtn.click();
+      threadsleep(3000);
+      zipcodePage();
+      waitforElementVisibilityInTime(continueBtn, 45);
+      continueBtn.click();
+      threadsleep(5000);
+  }
 }

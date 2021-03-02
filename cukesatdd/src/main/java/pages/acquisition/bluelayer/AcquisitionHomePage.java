@@ -1964,6 +1964,12 @@ private WebElement vppTop;
 		boolean offline_prod = false;
 		String browser = MRScenario.browserName;
 		if (!(MRScenario.getProps() == null)) {// If running from local
+			if (MRScenario.environment.equalsIgnoreCase("digital-devv2-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-devv2-aarp", "digital-devv2")
+						.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("digital-devv2")) {
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+			}
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
 						.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
@@ -2001,12 +2007,16 @@ private WebElement vppTop;
 			String jenkinsRunnerFiles = MRScenario.runnerFiles;
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
-					|| MRScenario.environment.equalsIgnoreCase("offline-stage"))
-			{
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin")
+					|| MRScenario.environment.equalsIgnoreCase("digital-devv2")
+					|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")) {
 				for (String rname : jenkinsRunnerFiles.split(",")) {
 					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("ULAYER")) {
-						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+								|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
+								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
 							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 									.replace("www.", ""), browser);
 						else
@@ -2016,7 +2026,9 @@ private WebElement vppTop;
 					}
 					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("BLAYER")) {
-						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+								|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
+								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
 							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 									.replace("www.", ""), browser);
 						else
