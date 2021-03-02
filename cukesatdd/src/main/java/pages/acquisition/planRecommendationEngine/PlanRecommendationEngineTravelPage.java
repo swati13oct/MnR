@@ -74,6 +74,9 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	
 	@FindBy(css = "#errorMessage>span:nth-child(2)")
 	private WebElement errorMessage;
+	
+	@FindBy(css = "label[for*='checkbox-8-input'] >span:nth-child(1) .checkbox-check")
+	private WebElement checkedTravelNoneOption;
 
 
 //Travel Page Element Verification Method 
@@ -164,6 +167,8 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	}
 	
 	public void edit_travel(String options) {
+		if(checkedTravelNoneOption.isDisplayed())
+			jsClickNew(travelNone);
 		String snpoptions[] = options.split(",");
 		for(String option:snpoptions) {
 			travelpageFunctional(option);

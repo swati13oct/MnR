@@ -133,7 +133,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | vigabatrin | Fanapt |   80001 | PDP      | AARP MedicareRx Walgreens (PDP) | UHC  | Preferred Retail | Preferred Mail   | KING SOOPERS PHARMACY  | Standard Retail      |
 
   @DCE_DrugDetailsDynamicCopay_Standard
-  Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Standard Pharmacy Copay and Not covered Pharmacy View
+  Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Standard Pharmacy Copay and Not covered Pharmacy View - <planType>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
