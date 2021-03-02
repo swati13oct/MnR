@@ -114,7 +114,7 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds             | travel                     | doctors | DoctorsName | isMultiDoctor |
       |   90201 | NO            |             | None          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | Lookup  | John        | YES           |
-      |   10002 | NO            | New York    | MAPD          | nursing                  | regular                    | Lookup  | John        | YES           |
+      |   10002 | NO            | New York    | MAPD          | nursing                  | regular                    | Lookup  | julie       | YES           |
 #     |   35034 | YES           | Bibb County | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | Lookup  | John        | NO            |
 
   @PRE @planrecommandonation @doctorspage @doctorspagepagecancel @F372731

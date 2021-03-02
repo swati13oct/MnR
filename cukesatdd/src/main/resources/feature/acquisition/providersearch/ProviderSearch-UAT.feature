@@ -21,7 +21,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-  Scenario Outline: <Scenario> : Verify Provider Search  in <site> site from Plan Details page
+  Scenario Outline: <Scenario> : Verify Provider Search  in <site> site from Plan Details page for <plantype> plantype
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -68,7 +68,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     @ProviderSearchCommon_UHC @ProviderSearchCommon_Prod_UHC @ProviderSearchFromGlobalHeaderBlayer
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
-      | Provider Search - E2E Scenario 4_AMP |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | next |
+      | Provider Search - E2E Scenario 4_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | next |
 
   Scenario Outline: <Scenario> : Verify Provider Search  in <site> site from plan summary page
     Given the user is on medicare acquisition site landing page
@@ -114,7 +114,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     @ProviderSearchCommon_UHC @ProviderSearchCommon_Prod_UHC @ProviderSearchFromVppPlanSummaryPageBlayer
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode |
-      | Provider Search - E2E Scenario 5_AMP |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |
+      | Provider Search - E2E Scenario 5_UHC |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |
 
   Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
     Given the user is on medicare acquisition site landing page
