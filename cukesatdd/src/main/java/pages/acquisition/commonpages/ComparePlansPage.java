@@ -127,7 +127,7 @@ public class ComparePlansPage extends UhcDriver {
 	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
    	
-   	@FindBy(xpath="//*[contains(@class,'remove')]")
+   	@FindBy(xpath="//*[contains(@class,'delete-plan ng-scope')]")
 	private WebElement removeLink;
 	
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
@@ -298,6 +298,21 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='modal-body']/span")
 	private WebElement allSetDrugsProvidersInfo;
 
+	@FindBy(xpath="//*[text()='View Plan Details']")
+	private WebElement viewPlanDetailslink;
+	
+	@FindBy(xpath="//button[contains(@id,'headerSavePlan')]//img[contains(@class,'liked savePlanIcon')][1]")
+	private WebElement viewSaveIcon;
+	
+	@FindBy(xpath="//button[contains(@id,'headerSavePlan')]//img[contains(@class,'unliked savePlanIcon')][1]")
+	private WebElement viewUnSaveIcon;
+	
+	@FindBy(xpath="//*[@id='viewallplansBtnId']")
+	private WebElement ViewAllPlans;
+	
+	@FindBy(xpath="//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
+	private WebElement DceClosebutton;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1464,6 +1479,31 @@ public class ComparePlansPage extends UhcDriver {
 		}
 		else
 			Assert.fail("DIsplayed Estimated Annual Drug Costs DOES NOT Match the same displayed on DCE details page for the plan : "+PlanName);
+		
+	}
+	
+	public void validateALLFiledsPlanComparePage() {
+		validateNew(backToAllPlansLink);
+		validateNew(validateprintbutton);
+		validateNew(validateemailbutton);
+		validateNew(removeLink);
+		validateNew(viewPlanDetailslink);
+		validateNew(viewUnSaveIcon);
+		validateNew(ViewAllPlans);
+		validateNew(addPlanButton);
+		System.out.println("Validated all links plan compare");
+		
+	}
+	
+	public void validateViewALLplanButtonNotDisplayed() {
+		 Assert.assertFalse("view all plans button must not be visible", !(driver.findElements(By.xpath("//*[@id='viewallplansBtnId' and contains(@class,'ng-hide')]")).size()>0));		
+		 System.out.println("Validated view all plans link not displayed on plan compare");
+	}
+	
+	public void dceModelClosepopup(){
+		validateNew(DceClosebutton);
+		jsClickNew(DceClosebutton);
+		System.out.println("Clicked on Close button on DCE model popup");
 		
 	}
 }
