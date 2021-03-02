@@ -557,7 +557,7 @@ public class CampaignTFNPage extends UhcDriver {
 	private WebElement findPlansButtonExternalLinks;
 	
 	//@FindBy(id="cta-zipcode")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0') or contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	
 	private WebElement HomePage_EnterZip;
 	
