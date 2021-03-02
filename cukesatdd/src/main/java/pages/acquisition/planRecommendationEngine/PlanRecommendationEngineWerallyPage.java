@@ -86,6 +86,18 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	@FindBy(css = "label#label_unsaved_selectedLocation0")
 	private WebElement firstLocation;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation1")
+	private WebElement secondLocation;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation2")
+	private WebElement thirdLocation;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation3")
+	private WebElement fourthLocation;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation4")
+	private WebElement fivthLocation;
 
 	@FindBy(css = "button[aria-describedby*='locationRequired']")
 	private WebElement locationSave;
@@ -99,7 +111,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 	@FindBy(css = "a[track='Saved']")
 	private WebElement viewSavedbutton;
 	
-	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
+	public ArrayList<String> werallySearch(String type, String searchParameter, int count, int locationCount) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
 		ArrayList<String> doctorsSPecialtyName = new ArrayList<String>();
@@ -140,6 +152,8 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						jsClickNew(saveButton);
 						threadsleep(3000);
 //						doctorsName.add(doctorNameinWerally.getText().trim());
+						if(locationCount >= 5 )
+							chooseFiveLocation();
 						chooseFirstLocation();
 //						saveModalCloseContinueSearchbutton.click();
 						jsClickNew(saveModalCloseContinueSearchbutton);
@@ -183,6 +197,24 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 		if (validate(firstLocation, 5)) {
 //			firstLocation.click();
 			jsClickNew(firstLocation);
+			threadsleep(1000);
+			jsClickNew(locationSave);
+			threadsleep(2000);
+		}
+	}
+	
+	public void chooseFiveLocation() {
+		if (validate(firstLocation, 5)) {
+//			firstLocation.click();
+			jsClickNew(firstLocation);
+			threadsleep(1000);
+			jsClickNew(secondLocation);
+			threadsleep(1000);
+			jsClickNew(thirdLocation);
+			threadsleep(1000);
+			jsClickNew(fourthLocation);
+			threadsleep(1000);
+			jsClickNew(fivthLocation);
 			threadsleep(1000);
 			jsClickNew(locationSave);
 			threadsleep(2000);

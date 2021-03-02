@@ -144,6 +144,7 @@ public class ShopForaPlanCommonStepDefinition {
 	public void clicks_on_MA_shop_button() {
 		ShopPage shopPage = (ShopPage) getLoginScenario().getBean(PageConstants.SHOP_PAGE);
 		shopPage.clickOnMAShopButton();
+		getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
 
 	}
 
@@ -151,14 +152,14 @@ public class ShopForaPlanCommonStepDefinition {
 	public void clicks_on_PDP_shop_button() {
 		ShopPage shopPage = (ShopPage) getLoginScenario().getBean(PageConstants.SHOP_PAGE);
 		shopPage.clickOnPDPShopButton();
-
+		getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
 	}
 
 	@And("^the user clicks on the Shop button for Medicare DSNP Plan and navigates to DSNP plans page$")
 	public void clicks_on_SNP_shop_button() {
 		ShopPage shopPage = (ShopPage) getLoginScenario().getBean(PageConstants.SHOP_PAGE);
 		shopPage.clickOnSNPShopButton();
-
+		getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
 	}
 
 	@And("^click on provider search link on shop pages$")
