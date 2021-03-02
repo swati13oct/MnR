@@ -422,4 +422,51 @@ public ComparePlansPage placesfromHospital() throws Exception {
 
 }
 
+	public ComparePlansPage HospitalPlaces() throws Exception {
+		String ParentWindow = null;
+		CommonUtility.waitForPageLoadNew(driver, LocationLink, 45);
+		System.out.println("in find care page");
+		validate(LocationLink);
+		validate(ChangeLocationButton);
+		jsClickNew(PlacesButton);
+		CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
+		jsClickNew(HospitalsButton);
+		waitforElement(ResultsHeader);
+		String HospName = FirstHospitalRecord.getText();
+		System.out.println("Text is :: " + HospName);
+		jsClickNew(FirstHospitalRecord);
+		validate(Facilityicon);
+		jsClickNew(selectProviderBtn);
+		if (validate(addressCheckBox)) {
+			jsClickNew(addressCheckBox);
+			jsClickNew(addressSaveButton);
+		}
+		String GreatText = GreatHeaderText.getText();
+		System.out.println("Text is :: " + GreatText);
+
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
+		
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
+			System.out.println("OLD Rally page displayed");
+			ParentWindow = driver.getTitle();
+			jsClickNew(CheckProviderCoverageButton);
+		} else if (driver
+				.findElements(By
+						.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
+			System.out.println("NEW Rally page displayed");
+			ParentWindow = driver.getTitle();
+			jsClickNew(FinishButton);
+		} else
+			System.out.println("Issue with Xpath");
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+
+	}
+
 }
