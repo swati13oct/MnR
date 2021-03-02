@@ -174,6 +174,9 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath="//*[contains(@id,'yourdoctorsheading')]")
 	private WebElement yourDoctorsBanner;
 	
+	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
+	public WebElement addProviderBanner;
+	
 	@FindBy(xpath="//a[text()='Add Doctors']")
 	private WebElement addDoctorsLink;
 	
@@ -861,13 +864,13 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			//driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindCareLink);
+			waitforElement(addProviderBanner);
 		} else {
 		System.out.println("Not found Expected window");
 		driver.switchTo().window(ParentWindow);
 	}
-		waitforElement(FindCareLink);
-		if (validate(FindCareLink)) {
+		waitforElement(addProviderBanner);
+		if (validate(addProviderBanner)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePage(driver);
 		} else

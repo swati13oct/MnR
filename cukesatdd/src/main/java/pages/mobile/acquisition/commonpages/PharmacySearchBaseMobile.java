@@ -190,7 +190,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	}
 
 	public void selectsPlanName(String planName) {
-		System.out.println("is it reaching here or not lets check that");
+		System.out.println("Starting Select Plan flow");
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		// seletPlandropdown.click();
 

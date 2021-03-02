@@ -78,7 +78,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | planyear |
       | 15550 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | current  |
 
-  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression  @HPA
   Scenario Outline: 7UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

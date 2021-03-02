@@ -50,9 +50,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 
-	@FindBy(css = "#backtoplansummarypage")
+	@FindBy(xpath = "//a[@id='backtoplansummarypage']")
 	private WebElement backToAllPlansLink;
-
+	
+	@FindBy(xpath = "//div/div[@class='text-semibold text-small text-lg-normal mb-20 ng-binding ng-scope']")
+	private WebElement planAvailableText;
+	
 	@FindBy(xpath = ".//*[@id='printComparison']")
 	private WebElement validateprintbutton;
 
@@ -83,8 +86,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Find Care']")
 	public WebElement FindCareLink;
 
-	@FindBy(xpath = "//span[text()='Find Urgent Care']")
+	@FindBy(xpath = "//div[@id='urgentCareNode']")
 	public WebElement FindUrgentCareLink;
+	
+	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
+	public WebElement addProviderBanner;
+	
 
 	@FindBy(xpath = "//span[text()='1 out of 1 providers covered']")
 	public WebElement VerifyProviderCount;
@@ -143,7 +150,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[@class='remove-button removebtn3']")
 	private WebElement remove4thplanName;
 
-	@FindBy(xpath = "(//div[contains(@class,'align-items-lg-start')]//button)[4]")
+	@FindBy(css = "th:nth-child(5) > div:nth-child(1) > a")
 	private WebElement Newremove4thplan;
 
 	@FindBy(xpath = "(//div[contains(@class,'align-items-lg-start')]//div)[4]")
@@ -260,12 +267,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver, 20);
+		checkModelPopup(driver, 10);
 
 	}
 
@@ -525,6 +532,11 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		return null;
 	}
+	
+//	To avoid Application idle timeout issue 
+	public void clickPlanAvailableText() {
+		jsClickNew(planAvailableText);
+	}
 
 	public VPPPlanSummaryPageMobile navigateBackToAllPlans() {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -696,7 +708,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public VPPPlanSummaryPageMobile clickOnNewAddIcon() {
 		pageloadcomplete();
 		scrollToView(addPlanButton);
-		validateNew(addPlanButton);
+		//validateNew(addPlanButton);
 		jsClickNew(addPlanButton);
 
 		try {
@@ -740,6 +752,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void validateDoctors() {
+	
+		scrollToView(backToAllPlansLink);
 		validateNew(backToAllPlansLink);
 		validateNew(yourDoctorsBanner);
 		validateNew(editDoctorsLink);
@@ -847,14 +861,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindCareLink);
+			waitforElement(FindUrgentCareLink);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
 
-		waitforElement(FindCareLink);
-		if (validate(FindCareLink)) {
+		waitforElement(FindUrgentCareLink);
+		if (validate(FindUrgentCareLink)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -882,13 +896,15 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("We are on Find Care winodow opened");
 			// driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindUrgentCareLink);
+			scrollToView(addProviderBanner);
+			waitforElement(addProviderBanner);
 		} else {
 			System.out.println("Not found Expected window");
 			driver.switchTo().window(ParentWindow);
 		}
-		waitforElement(FindUrgentCareLink);
-		if (validate(FindUrgentCareLink)) {
+		//waitforElement(FindUrgentCareLink);
+		scrollToView(addProviderBanner);
+		if (validate(addProviderBanner)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
@@ -1265,11 +1281,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 			ele = driver.findElement(
 					By.xpath("(//button[contains(@class,'removePlan')])[" + Integer.parseInt(index) + "]"));
 			scrollToView(ele);
-			validateNew(ele, 10);
+			//validateNew(ele, 10);
 			jsClickNew(ele);
 			System.out.println("Clicked on Remove Link on plan Compare page");
 		}
 	}
+	
 
 	public void validateOptionalRidersSectionHidden() {
 		Assert.assertFalse("Optional Service Section must not be visible",

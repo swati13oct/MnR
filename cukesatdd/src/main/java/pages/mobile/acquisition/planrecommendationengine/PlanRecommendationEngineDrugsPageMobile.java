@@ -420,8 +420,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 		drugNames = new ArrayList<String>();
 		for (int i = count - 1; i >= 0; i--) {
 			threadsleep(1000);
-			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim()
-					.toUpperCase() + " "
+			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim().toUpperCase() + " "
 					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim().toUpperCase());
 		}
 		Collections.sort(drugNames);

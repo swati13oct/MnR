@@ -78,6 +78,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
 	public static String PREflow = "";
+	public static String PlanType = "";
 
 	public void readfeaturedataMobile(DataTable data) {
 		inputRow = new ArrayList(data.getGherkinRows());
@@ -893,7 +894,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
 		headerAndFooter.navigationToPlanRecommendationEngineViaShopTools();
-		// headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 
 	}
 
@@ -992,6 +993,8 @@ public class PlanRecommendationStepDefinitionMobile {
 		if (!(plantype.isEmpty())) {
 			planSelectorCoverageepage.coverageOptionpageFunctional(plantype);
 		}
+		
+		getLoginScenario().saveBean(plantype, planSelectorCoverageepage);
 	}
 
 	@And("^user not selects plan type in coverage options page$")
@@ -1339,7 +1342,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanRecommendationEngineHeaderAndFooterMobile headerAndFooter = new PlanRecommendationEngineHeaderAndFooterMobile(
 				wd);
 		// headerAndFooter.MobileMenu();
-		// headerAndFooter.breadCrumbs();
+		//headerAndFooter.breadCrumbs();
 		planSelectorResultspage.resultsloadingpage();
 	}
 
@@ -1379,9 +1382,20 @@ public class PlanRecommendationStepDefinitionMobile {
 
 	@Then("^user validate removed drugs details updated from VPP to PRE page$")
 	public void view_removed_drugs_VPP_PRE_page() {
+		
+		//PlanRecommendationEngineCoverageOptionPageMobile planSelectorCoverageepage = null;
+		PlanRecommendationEngineCoverageOptionPageMobile planSelectorCoverageepage = new PlanRecommendationEngineCoverageOptionPageMobile(
+				wd);
+		
+		String plantype = inputValues.get("Plan Type");
+		getLoginScenario().getBean(plantype, planSelectorCoverageepage);
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
 		planSelectorResultspage.removedDrugsDetailsVPPtoPRE();
+		
+		
+		
+		
 		
 	}
 

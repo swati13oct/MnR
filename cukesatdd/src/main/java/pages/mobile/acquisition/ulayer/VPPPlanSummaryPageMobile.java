@@ -34,6 +34,8 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.ios.IOSDriver;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -4896,6 +4898,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			mobileswipeHorizantal("50", true);
 			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
 			scrollToView(MAmoreDetailsLink);
+			
 			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 

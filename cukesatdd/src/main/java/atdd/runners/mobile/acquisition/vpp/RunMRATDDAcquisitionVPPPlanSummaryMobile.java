@@ -24,4 +24,4 @@ public class RunMRATDDAcquisitionVPPPlanSummaryMobile {
  
 }
 
-//@OnlyProd","@vppPlanSummaryUHC","@vppPlanSummaryUHCRegressionMobile","@vppPlanSummaryUHCRegression"
+//@VPP123

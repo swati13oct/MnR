@@ -6,6 +6,7 @@ package pages.mobile.acquisition.planrecommendationengine;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -24,10 +25,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
+import acceptancetests.data.PageConstants;
 import acceptancetests.mobile.acquisition.planrecommendationengine.PlanRecommendationStepDefinitionMobile;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import cucumber.api.DataTable;
+import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.bluelayer.AcquisitionHomePage;
 //import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineDoctorsPageMobile;
@@ -322,7 +326,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@FindBy(css = "#ghn_lnk_1>span")
 	private WebElement headerNavigationBarHomeTab;
 
-	@FindBy(className = "zip-button")
+	@FindBy(xpath = "//span[text()='Get Started']")
 	private WebElement homePageFindPlans;
 
 	// Zipcode Page
@@ -645,16 +649,18 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	public void removedDrugsDetailsVPPtoPRE() {
 		System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
+		String plantype = PlanRecommendationStepDefinitionMobile.PlanType;
+		
 		flow = PlanRecommendationStepDefinitionMobile.PREflow;
 		DrugsInPRE = PlanRecommendationEngineDrugsPageMobile.drugNames;
 		boolean remove = true;
 		int count = DrugsInPRE.size();
-		drugsCoveredInVPP(count);
+		drugsCoveredInVPP(count,plantype);
 		removeDrugs(count);
 		// vppToPre();
 		MobileMenuAndGetPlanRecom();
 		validateDrugPage(flow, true);
-		
+
 	}
 
 	public void startnowtilldrugs() {
@@ -683,44 +689,93 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		int beforeRemove = DrugsList.size();
 		threadsleep(5000);
 		drugcoveredsession();
-//		DrugsNames.get(count-1).findElement(By.cssSelector("button[class*='remove-icon']")).click();
-		jsClickNew(DrugsNames.get(count-1).findElement(By.cssSelector("button[class*='remove-icon']")));
+		// DrugsNames.get(count-1).findElement(By.cssSelector("button[class*='remove-icon']")).click();
+		jsClickNew(DrugsNames.get(count - 1).findElement(By.cssSelector("button[class*='remove-icon']")));
 		threadsleep(8000);
-//		drugcoveredsession();
+		// drugcoveredsession();
 		pageloadcomplete();
 		drugcoveredsession();
-		drugsCoveredInVPP(count-1);
+		drugsCoveredInVPP(count - 1);
 		int afterRemove = DrugsList.size();
-		if(beforeRemove!=afterRemove) {
+		if (beforeRemove != afterRemove) {
 			System.out.println("Remove Results Count mismatch");
-			
-		}else {
+
+		} else {
 			System.out.println("Remove Results Count matching and Remove is not removed");
 			Assert.assertTrue(false);
 		}
 	}
+
+	@FindBy(xpath = "//a[@aria-describedby='recommendation_ma']")
+	private WebElement maPlansViewLink;
+
 	public ArrayList<String> drugsCoveredInVPP(int count) {
-		System.out.println("Clicking on Drugs Details in Plan Type: "+count);
+		System.out.println("Clicking on Drugs Details in Plan Type: " + count);
 		DrugsList = new ArrayList<String>();
-		validate(MAPlanCount,60);			
+		validate(MAPlanCount, 60);
 		WebElement drugImageVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='drug-list-toggle'] img"));
-		validate(drugImageVPP,20);
+		validate(drugImageVPP, 20);
 		threadsleep(5000);
 		drugcoveredsession();
-		for (int i = count-1; i >= 0; i--) {
+
+		for (int i = count - 1; i >= 0; i--) {
 			threadsleep(1000);
-			DrugsList.add(DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(1)")).getText().trim().toUpperCase() + " " +
-					DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(2)")).getText().trim().replace("Qty ", "").toUpperCase());
+			DrugsList.add(
+					DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(1)"))
+							.getText().trim().toUpperCase()
+							+ " "
+							+ DrugsNames.get(i)
+									.findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(2)"))
+									.getText().trim().replace("Qty ", "").toUpperCase());
 			WebElement RemoveIcon = DrugsNames.get(i).findElement(By.cssSelector("button[class*='remove-icon']"));
 			WebElement coveredIcon = MA1stPlanList.get(i).findElement(By.cssSelector(".drugs-list div[id*='Covered']"));
-			validate(RemoveIcon,20);
-			validate(coveredIcon,20);
+			validate(RemoveIcon, 20);
+			validate(coveredIcon, 20);
 		}
 		Collections.sort(DrugsList);
 		jsClickNew(drugCoveredeVPP);
-		System.out.println("DrugsList Size is : "+DrugsList.size());
-		System.out.println("DrugList Content is : "+DrugsList);
+		System.out.println("DrugsList Size is : " + DrugsList.size());
+		System.out.println("DrugList Content is : " + DrugsList);
 		return DrugsList;
+	}
+	
+	public ArrayList<String> drugsCoveredInVPP(int count, String plantype) {
+		System.out.println("Clicking on Drugs Details in Plan Type: " + count);
+		DrugsList = new ArrayList<String>();
+		validate(MAPlanCount, 60);
+		WebElement drugImageVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='drug-list-toggle'] img"));
+		validate(drugImageVPP, 20);
+		threadsleep(5000);
+		drugcoveredsession();
+		
+		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("MA")){
+			jsClickNew(MAViewPlansLink);
+		}
+
+		for (int i = count - 1; i >= 0; i--) {
+			threadsleep(1000);
+			DrugsList.add(
+					DrugsNames.get(i).findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(1)"))
+							.getText().trim().toUpperCase()
+							+ " "
+							+ DrugsNames.get(i)
+									.findElement(By.cssSelector("div[class*='flex-col drug-info'] span:nth-child(2)"))
+									.getText().trim().replace("Qty ", "").toUpperCase());
+			WebElement RemoveIcon = DrugsNames.get(i).findElement(By.cssSelector("button[class*='remove-icon']"));
+			WebElement coveredIcon = MA1stPlanList.get(i).findElement(By.cssSelector(".drugs-list div[id*='Covered']"));
+			validate(RemoveIcon, 20);
+			validate(coveredIcon, 20);
+		}
+		Collections.sort(DrugsList);
+		jsClickNew(drugCoveredeVPP);
+		System.out.println("DrugsList Size is : " + DrugsList.size());
+		System.out.println("DrugList Content is : " + DrugsList);
+		return DrugsList;
+	}
+
+	private MRScenario getLoginScenario() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public void drugcoveredsession() {
@@ -728,23 +783,21 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		jsClickNew(drugCoveredeVPP);
 	}
 
-	public void verifyConfirmationmodalResults(int count,ArrayList<String> drug,ArrayList<String> drugListVPP) {
-		if(drug.size()==drugListVPP.size() && count==drug.size()) {
-			String druglist =drug.toString().toUpperCase();
-			String vppdruglist =drugListVPP.toString().toUpperCase();
-			if(druglist.contains(vppdruglist)) {
+	public void verifyConfirmationmodalResults(int count, ArrayList<String> drug, ArrayList<String> drugListVPP) {
+		if (drug.size() == drugListVPP.size() && count == drug.size()) {
+			String druglist = drug.toString().toUpperCase();
+			String vppdruglist = drugListVPP.toString().toUpperCase();
+			if (druglist.contains(vppdruglist)) {
 				System.out.println("Drug and Modal Result's Content matched");
-			}
-			else {
+			} else {
 				System.out.println("Drug and Modal Result's Content mismatch");
 				Assert.assertTrue(false);
 			}
-		}
-		else {
+		} else {
 			System.out.println("Drug and Modal Results Count mismatch");
 			Assert.assertTrue(false);
 		}
-		
+
 		if (drug.size() == drugListVPP.size() && count == drug.size()) {
 			String druglist = drug.toString();
 			String vppdruglist = drugListVPP.toString();
@@ -902,7 +955,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 			}
 		}
 		System.out.println("Doctors Name validation Result " + result);
-		Assert.assertTrue(result, "Providers name mismatch");
+		Assert.assertTrue(result,"Providers name mismatch");
 		return result;
 	}
 
@@ -960,7 +1013,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 			selectFromDropDown(multiCounty, county);
 		}
 		validate(planZipInfo, 60);
-		waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		//waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		Assert.assertTrue(planZipInfo.getText().contains(zip), "Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
@@ -1069,7 +1122,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		jsSendkeys(emailText, email);
 		jsClickNew(emailSendButton);
 		validate(emailSuccess, 15);
-		//jsClickNew(emailCloseButton);
+		// jsClickNew(emailCloseButton);
 	}
 
 	public void validateUIAPIRecommendations() {
@@ -1242,8 +1295,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 					"Invalid Plan Ranking between API and UI : " + vppPlans.get(i) + "<-> " + APIRankings.get(i));
 		}
 		System.out.println("API vs UI Plan Ranking Successful");
-		
-		
+
 	}
 
 	public String getplanId(WebElement plan) {

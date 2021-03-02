@@ -1727,7 +1727,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		MobileMenuShopTool();
 		scrollToView(providerSearchFromGlobalHeader);
 		providerSearchFromGlobalHeader.click();
-		//jsClickNew(providerSearchFromGlobalHeader);
+		// jsClickNew(providerSearchFromGlobalHeader);
 		// (providerSearchFromGlobalHeader);
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
@@ -2004,7 +2004,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void selectState(String state) {
 		pageloadcomplete();
 		selectFromDropDownByValue(stateDropDown, state);
-		
+
 	}
 
 	/**
@@ -2785,7 +2785,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(learnAboutMedicareLink);
-		validateNew(viewAllDisclaimerInformationLink, 20);
+		//validateNew(viewAllDisclaimerInformationLink, 20);
 
 	}
 
@@ -2902,7 +2902,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void validatevisitorprofile() {
 		pageloadcomplete();
-	
+
+		
+
 		if (visitorprofileicon.isDisplayed()) {
 			scrollToView(visitorprofileicon);
 			Actions actions = new Actions(driver);
@@ -2911,46 +2913,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			// visitorprofileicon.click();
 			System.out.println("Hover over visitor profile completed");
 		}
-		// WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(),
-		// 'Create Profile')]"));
+	
 		WebElement CreateProfile = driver.findElement(By.xpath("//h3[@id='guest-profile']"));
-		WebElement VPSignIn = driver.findElement(
-				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
-		// validateNew(CreateProfile,10);
-		// validateNew(VPSignIn);
-		// if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
-		// Assert.assertTrue(true);
-		// System.out.println("Visitor Profile elements are present on home page");
-		// } else {
-		// Assert.fail("Visitor Profile elements are not present on home page");
-		// }
-		visitorprofileicon.click();
-		// jsClickNew(CreateProfile);
-		// CommonUtility.checkPageIsReadyNew(driver);
-		// driver.navigate().refresh();
-		// sleepBySec(3);
-		// WebElement GuestProfile = driver.findElement(By.xpath("//*[contains(text(),
-		// 'Your Guest Profile')]"));
-		/*
-		 * WebElement GuestProfile =
-		 * driver.findElement(By.xpath("//h2[contains(text(), 'Your Guest Profile')]"));
-		 * CheckPageLoad(); waitForPageLoadSafari(); CheckiPerseptions();
-		 * CommonUtility.waitForPageLoadNew(driver, GuestProfile, 30);
-		 */
+		WebElement VPSignIn = driver.findElement(By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+		
+		jsClickNew(visitorprofileicon);
+		
 		if (driver.getCurrentUrl().contains("profile")) {
 			Assert.assertTrue(true);
 			System.out.println("Visitor Profile Page opens successsfully");
 		} else {
 			Assert.fail("Visitor Profile page is not opening up");
 		}
-		/*
-		 * driver.navigate().back(); CommonUtility.checkPageIsReady(driver);
-		 */
-		/* CheckPageLoad(); */
-		// waitForPageLoadSafari();
-		// CheckiPerseptions();
-
-		// CommonUtility.waitForPageLoadNew(driver, findPlansButton, 30);
+	
 	}
 
 	public void validateLogo() {
@@ -3423,11 +3398,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
-	
+
 	public ProviderSearchPageMobile clicksOnProviderToolFromGlobalHeader() {
 
-//		Actions action = new Actions(driver);
-//		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
+		// Actions action = new Actions(driver);
+		// action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		jsMouseOver(navigationSectionHomeLink);
 		jsMouseOver(ourPlansHoverLink);
 		validateNew(providerSearchFromGlobalHeader);
@@ -3454,8 +3429,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
-	
-	
 
 	public void clickVisitAARPFooterLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {

@@ -86,31 +86,31 @@ public class GlobalWebElements extends UhcDriver {
 	public static WebElement footerNavigationBackToTopLink;
 
 	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
-	 public static WebElement viewAllDisclaimerInformationLink;
+	public static WebElement viewAllDisclaimerInformationLink;
 
 	@FindBy(linkText = "Hide disclaimer information")
 	public static WebElement hideDiscliamerInformation;
-	
+
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
-    private WebElement MedicareAdvantagePlans;
-	
+	private WebElement MedicareAdvantagePlans;
+
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
 	private WebElement DualSpecialNeedsPlans;
-	
+
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
-    private WebElement MedicareSupplementInsurancePlans;
-	
+	private WebElement MedicareSupplementInsurancePlans;
+
 	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
-    private WebElement MedicarePrescriptionDrugPlans;
-	
-	@FindBy(xpath="//a[@id='gfn_lnk_row2_5']")
+	private WebElement MedicarePrescriptionDrugPlans;
+
+	@FindBy(xpath = "//a[@id='gfn_lnk_row2_5']")
 	private WebElement footerMedicarePrescriptionDrugPlans;
-	
+
 	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
-    private WebElement MedicareEducation;
-	
+	private WebElement MedicareEducation;
+
 	@FindBy(xpath = "//a[@class='back-to-top']")
-    private WebElement BackToTop;
+	private WebElement BackToTop;
 
 	@FindBy(css = "a.backtotop1.hideLink")
 	public static WebElement disclaimerBackToTopLink;
@@ -132,6 +132,9 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
 	public static WebElement visitorprofileicon;
+
+	@FindBy(xpath = "//button[text()='Register']")
+	public static WebElement register;
 
 	// @FindBy(xpath = "//h1[@class='logo']/a")
 	@FindBy(id = "logo")
@@ -174,12 +177,10 @@ public class GlobalWebElements extends UhcDriver {
 	public static WebElement registerHereLink;
 
 	@FindBy(xpath = "//a[@role='button' and @class='disableExternalPopup ']")
-	 public static WebElement headerRegisterLink;
-	
+	public static WebElement headerRegisterLink;
+
 	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
-	 public static WebElement MenuCrossMobile;
-	
-	
+	public static WebElement MenuCrossMobile;
 
 	@FindBy(className = "not-registered-text")
 	public static WebElement notRegisteredText;
@@ -214,7 +215,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[@class='uhc-tempo-link uhc-tempo-link--medium linkBtn'][normalize-space()='Sign In']")
 	public static WebElement signIn;
 
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
+	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
 	public static WebElement prescriptiondrugPlansRequestMoreHelpLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[2]/div/p[2]/a[3]")
@@ -234,10 +235,9 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/a")
 	public static WebElement takeQuizButton;
-	
+
 	@FindBy(css = "button[onclick=\"jumpToHSIDRegistration('header')\"]")
 	public static WebElement registerLink;
-	
 
 	@FindBy(id = "nav-zipcode")
 	public static WebElement zipcodeField;

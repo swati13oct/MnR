@@ -1,23 +1,19 @@
 package atdd.framework;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
@@ -32,17 +28,12 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-
-import com.google.common.base.Predicate;
-import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -50,17 +41,11 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.touch.ActionOptions;
-import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-
-import java.util.regex.Pattern;
 
 /**
  * @author pjaising
@@ -115,6 +100,7 @@ public abstract class UhcDriver {
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(GetPlanRecoMobile);
 		jsClickNew(getStartedBtn);
+
 	}
 
 	public void MobileMenuAndGetPlanRecom() {
@@ -217,7 +203,7 @@ public abstract class UhcDriver {
 
 		} else {
 			jsClickNew(element);
-			//element.clear();
+			// element.clear();
 			element.sendKeys(message);
 		}
 
@@ -1069,7 +1055,8 @@ public abstract class UhcDriver {
 	 *         on visible text mobile
 	 */
 	public void mobileSelectOption(WebElement selectElement, String option, boolean clickElement) {
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID") || MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
 			Select element = new Select(selectElement);
 			element.selectByVisibleText(option);
 		} else {

@@ -18,12 +18,15 @@ public class FindCarePageMobile extends UhcDriver {
 	public FindCarePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		openAndValidate();
+		//openAndValidate();
 
 	}
 
 	@FindBy(xpath = "//span[text()='Find Care']")
 	public WebElement FindCareLink;
+	
+	@FindBy(xpath = "//div[@id='urgentCareNode']")
+	public WebElement FindUrgentCareLink;
 
 	@FindBy(xpath = "//button[@class='action-btn getStarted']")
 	public WebElement GetstartedButton;
@@ -71,7 +74,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[text()='All Primary Care Providers']")
 	public WebElement AllPrimaryCareProviders;
 	
-	@FindBy(xpath = "//h1//span[text()='Results for ']")
+	@FindBy(xpath = "//h1//span[text()='Results for']")
 	public WebElement ResultsHeader;
 
 	@FindBy(xpath = "(//*[contains(@data-test-id,'provider-name-link')])[1]")
@@ -219,7 +222,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("selected Provder Name is : " + HospName);
 		validate(Medicalgroupicon);
-		selectProviderBtn.click();		
+			
+		jsClickNew(selectProviderBtn);
 		if(validate(addressCheckBox)){
 			addressCheckBox.click();
 			addressSaveButton.click();
@@ -273,7 +277,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
 		validate(Facilityicon);
-		selectProviderBtn.click();		
+		//selectProviderBtn.click();	
+		jsClickNew(selectProviderBtn);
 		if(validate(addressCheckBox)){
 			addressCheckBox.click();
 			addressSaveButton.click();
@@ -429,8 +434,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 	@Override
 	public void openAndValidate() {
 
-		CommonUtility.waitForPageLoadNew(driver, FindCareLink, 30);
-		validate(FindCareLink);
+		//CommonUtility.waitForPageLoadNew(driver, FindCareLink, 30);
+		validateNew(FindUrgentCareLink);
 
 	}
 

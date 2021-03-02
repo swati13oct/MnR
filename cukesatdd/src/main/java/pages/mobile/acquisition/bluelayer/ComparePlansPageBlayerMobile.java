@@ -69,6 +69,9 @@ public class ComparePlansPageBlayerMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[text()='Find Care']")
 	public WebElement FindCareLink;
+	
+	@FindBy(xpath = "//h1[text()='Welcome to provider search']")
+	public WebElement addProviderBanner;
 
 	@FindBy(xpath = "//span[text()='1 out of 1 providers covered']")
 	public WebElement VerifyProviderCount;
@@ -684,13 +687,13 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 			System.out.println("We are on Find Care winodow opened");
 			//driver.manage().window().maximize();
 			Thread.sleep(3000);
-			waitforElement(FindCareLink);
+			waitforElement(addProviderBanner);
 		} else {
 		System.out.println("Not found Expected window");
 		driver.switchTo().window(ParentWindow);
 	}
-		waitforElement(FindCareLink);
-		if (validate(FindCareLink)) {
+		waitforElement(addProviderBanner);
+		if (validate(addProviderBanner)) {
 			System.out.println("User is on Find care Page");
 			return new FindCarePageMobile(driver);
 		} else
