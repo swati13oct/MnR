@@ -79,6 +79,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       
     @SanityPRE_03
     Examples:
+    	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName              | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
       |   15537 | NO            | Bedford    | MAPD          | None         | None   | UHGNetwork      |                          |               | NO             | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
 
   @PRE @planrecommendation @APIRanking @MAFlowRanking @SanityTest @PRERegression6 @SanityPRE
