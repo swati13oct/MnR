@@ -1057,7 +1057,13 @@ public class DrugSummaryPage extends UhcDriver {
 		waitforElement(preferredMailPharmacy);
 		preferredMailPharmacy.click();
 	}
-
+	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'Select Preferred Mail Service Pharmacy')]")
+	public WebElement MailPharmacy;
+	public void selectMailOrderPharmacy() {
+		jsClickNew(MailPharmacy);
+		validateNew(saveDrugBtn);
+		saveDrugBtn.click();
+	}
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
 		waitforElement(mailOrderPharmacyMsg);
 		Assert.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
