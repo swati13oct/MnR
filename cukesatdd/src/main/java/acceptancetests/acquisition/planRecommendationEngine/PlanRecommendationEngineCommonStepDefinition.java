@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -19,12 +19,13 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanRecommendationEngineCommonutility;
+import pages.acquisition.commonpages.PlanRecommendationEngineDrugsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCostPreferencesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.commonpages.PlanRecommendationEngineDrugsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
@@ -218,7 +219,7 @@ public class PlanRecommendationEngineCommonStepDefinition {
    	public void elements_results_page() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter(wd);
-   		headerAndFooter.breadCrumbs();
+//   		headerAndFooter.breadCrumbs();
    		planSelectorResultspage.resultsloadingpage();
    	}
 	
@@ -248,6 +249,12 @@ public class PlanRecommendationEngineCommonStepDefinition {
    		planSelectorDrugspage.drugsHandlerWithdetails(givenAttributesMap.get("Drug Details"));
    		planSelectorDrugspage.continueNextpage();
    	}
+	
+	@Then("^verify continue function in \"([^\"]*)\" page$")
+    public void proceed_next_page(String page) {
+     PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility(wd);
+     commonutli.continueNextpage(page.trim().toUpperCase(),false);
+    }
 
 }
 	
