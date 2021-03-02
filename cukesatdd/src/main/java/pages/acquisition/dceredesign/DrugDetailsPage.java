@@ -837,12 +837,15 @@ public class DrugDetailsPage extends UhcDriver {
 
 	}
 
+	@FindBy(xpath = "//*[contains(@id, 'plancosts')]")
+	private WebElement planCostsTab;
+	
 	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
-		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
 			System.out.println("Plan Details Page displayed for current Plan : "+planName);
 			return new PlanDetailsPage(driver);
