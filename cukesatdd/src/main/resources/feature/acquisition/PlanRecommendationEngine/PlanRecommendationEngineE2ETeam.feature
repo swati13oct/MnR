@@ -5,7 +5,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
   Scenario Outline: <Zipcode> - To validate e2e flow in PRE-VPP-DCE
     Given the user is on medicare acquisition site landing page for PRE
       | Site | <site> |
-    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
+#    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
     And clicks on get started button and runs a questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
@@ -68,7 +68,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
   Scenario Outline: <Zipcode> - <plantype> - To validate integration of DCE with PRE in Vpp Plan Summary
     Given the user is on medicare acquisition site landing page for PRE
       | Site | <site> |
-    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
+#    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
     And clicks on get started button and runs a questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
