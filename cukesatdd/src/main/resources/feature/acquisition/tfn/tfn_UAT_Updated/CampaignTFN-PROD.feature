@@ -54,8 +54,8 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
       | Member Signin URL STG     | <memberSignInstage>   |
       | Member Signin URL Offline | <memberSignInOffline> |
     Then the user validates TFN Number
-      | TFN No | <memberTFNNo> |
-      #| TFN No    | <TFNNo>    |
+      #| TFN No | <memberTFNNo> |
+      | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
 
     #Then the user validates PSC code
