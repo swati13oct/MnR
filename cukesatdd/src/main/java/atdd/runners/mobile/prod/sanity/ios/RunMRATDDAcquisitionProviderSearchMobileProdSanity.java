@@ -17,7 +17,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionProviderSearchMobileProdSanity
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/providersearch" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchMobileProdSanity.json" }, 
-tags = {  "@OnlyProd","@fixedTestCaseTest"}, dryRun=false)
+tags = {  "@ios"}, dryRun=false)
 public class RunMRATDDAcquisitionProviderSearchMobileProdSanity { 
  
 }

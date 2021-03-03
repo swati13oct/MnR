@@ -798,7 +798,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(css = "div#providersBanner>div")
 	private WebElement existingProviders;
 
-	@FindBy(xpath = "//body[1]/header[1]/nav[2]/div[2]/a[1]/img[1]")
+	@FindBy(xpath = "//a[@href='https://www.rmhp.org:443/']/following::img[@class='rm-logo']")
 	private WebElement rockyMountainLogo;
 
 	@FindBy(xpath = "//div[contains(@class,'container')]//img[@alt='Peoples Health']")
@@ -855,7 +855,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
 		System.out.println("******************>>>>>>>> " + element.getText());
-		if (element.getText().contains(planName)) {
+		if (element.getText().trim().contains(planName)) {
 			return true;
 		} else {
 			return false;
@@ -4245,6 +4245,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
 			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
+			scrollToView(rockyMountainLogo);
 			validateNew(rockyMountainLogo);
 			System.out.println("Validated Rocky Mountian Logo");
 

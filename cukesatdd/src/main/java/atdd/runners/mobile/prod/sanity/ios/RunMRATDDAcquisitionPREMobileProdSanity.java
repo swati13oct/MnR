@@ -18,7 +18,7 @@ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFold
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/planrecommendationengine" }, plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionPREMobileProdSanity.json" }, tags = {
-						"@OnlyProd","@landingpage"}, dryRun=false)
+						"@ios"}, dryRun=false)
 
 public class RunMRATDDAcquisitionPREMobileProdSanity {
 

@@ -18,7 +18,7 @@ detailedReport = true, detailedAggregatedReport = true, overviewReport = true, t
 outputFolder = "target/RunMRATDDAcquisitionDCEVPPPlanDetailsMobileProdSanity")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, monochrome = true, features = {
 		"/src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionDCEVPPPlanDetailsMobileProdSanity.json" }, tags = { "@DCE_Redesign_VPP_PlanDetails", "@OnlyProd" })
+				"json:target/cucumber-RunMRATDDAcquisitionDCEVPPPlanDetailsMobileProdSanity.json" }, tags = { "@ios" })
 
 public class RunMRATDDAcquisitionDCEVPPPlanDetailsMobileProdSanity {
 

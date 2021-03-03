@@ -19,7 +19,7 @@ outputFolder = "target/RunMRATDDAcquisitionFooterAARPMobileProSanity")
 features = { "src/main/resources/feature/mobile/acquisition/globalComponents" }, 
 plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooterAARPMobileProSanity.json" }, 
-tags = { "@globalfooter_AARP" }, dryRun=false)
+tags = { "@ios" }, dryRun=false)
 public class RunMRATDDAcquisitionFooterAARPMobileProSanity {
 
 }

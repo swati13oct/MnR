@@ -1726,9 +1726,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsMouseOver(ourPlansHoverLink);
 		MobileMenuShopTool();
 		scrollToView(providerSearchFromGlobalHeader);
-		providerSearchFromGlobalHeader.click();
-		// jsClickNew(providerSearchFromGlobalHeader);
-		// (providerSearchFromGlobalHeader);
+		//providerSearchFromGlobalHeader.click();
+
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
 
