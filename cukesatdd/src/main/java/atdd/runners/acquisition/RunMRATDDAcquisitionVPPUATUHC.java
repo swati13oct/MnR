@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPUATUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp/MicroAPP" }, plugin = {
 				"pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryAARP01.json" }, tags = {
+				"json:target/cucumber-RunMRATDDAcquisitionVPPUATUHC.json" }, tags = {
 						"@VppPlanCompareCommon_UHC01New" }) // "@vppPlanSummaryAARPRun01" })
 public class RunMRATDDAcquisitionVPPUATUHC { 
  
