@@ -50,12 +50,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
       | UHC  |   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
 
-    @DCE_Redesign_VPP_PlanSummary_SNP_AARP
+    @DCE_Redesign_VPP_PlanSummary_SNP_AARP	@prodRegression_AARP
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                                   |
       | AARP |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
-    @DCE_Redesign_VPP_PlanSummary_SNP_UHC
+    @DCE_Redesign_VPP_PlanSummary_SNP_UHC	@prodRegression_UHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                                   |
       | UHC  |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
