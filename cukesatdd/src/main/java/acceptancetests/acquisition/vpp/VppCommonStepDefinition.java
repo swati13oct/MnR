@@ -3638,14 +3638,20 @@ public class VppCommonStepDefinition {
 									  				rowIndexOfDocCode = rowIndexDocLog;break;
 									  			}		
 											  }
-									  		 
+									  		double yearDocLog=0; String planYearDocLog = "";
 									  		String docTypeDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue(); // document type value from the doclog file
 									  		String langDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue(); //language value from doclog file
 									  		String planIDDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue(); //plan id from the doclog file
 									  		String planNameDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planNameIndexDocLog).getStringCellValue(); //plan name from the doclog file
-									  		double yearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getNumericCellValue(); //plan year from the doclog file
-									  		String planYearDocLog = String.valueOf(yearDocLog);
-									  		planYearDocLog = planYearDocLog.substring(0, planYearDocLog.indexOf("."));
+									  		
+									  		// if plan year cell contains a numeric value then converts to a string 
+									  		if(sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getCellType() == Cell.CELL_TYPE_NUMERIC) {
+									  			yearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getNumericCellValue(); //plan year from the doclog file
+									  			planYearDocLog = String.valueOf(yearDocLog);
+									  			planYearDocLog = planYearDocLog.substring(0, planYearDocLog.indexOf("."));
+									  		}else {
+									  			planYearDocLog  = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getStringCellValue();
+									  		}
 									  		//checks if the doc type matches for this component code
 									  		 if(docTypeDocLog.contains(docLangList.get(0))){
 									  			 //checks if the language matches for this component code
@@ -3789,6 +3795,44 @@ public class VppCommonStepDefinition {
 		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPagevpppages(Medicarenumber);
 		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
+	}
+	
+	@Then("^verify all links on plan compare page is loaded$")
+	public void verify_alllinks_on_plan_compare_page_is_loaded_on_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateALLFiledsPlanComparePage();
+	}
+	
+	@Then("^verify view all plan button is not displayed$")
+	public void verifyviewallplanbuttonisnotdisplayed() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewALLplanButtonNotDisplayed();
+	}
+	
+	@And("^I click on Add Places from Hospitals find care page$")
+	public void I_click_on_Add_Hospitals_on_plan_compare_and_Add_PlacesfromHospitals_find_care_page() throws Exception {
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = findCarePage.HospitalPlaces();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^user click on close button on Drug info Modal popup")
+	public void user_clicks_close_plan_PlanCompare_page() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.dceModelClosepopup();
 	}
 
 	
