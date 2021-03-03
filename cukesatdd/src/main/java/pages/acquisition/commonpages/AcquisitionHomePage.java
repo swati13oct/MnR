@@ -4929,8 +4929,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		while (itr.hasNext()) {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(parentWindow);
+				driver.close();
 				driver.switchTo().window(window);
-			}
+			} 
 		}
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -4952,6 +4954,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);

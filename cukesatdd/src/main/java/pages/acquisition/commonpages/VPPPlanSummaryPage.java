@@ -4645,6 +4645,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4667,6 +4668,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -4683,6 +4685,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4705,6 +4708,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -4753,6 +4757,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4769,6 +4774,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -4785,6 +4791,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4801,6 +4808,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -4817,6 +4825,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4833,6 +4842,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -5276,7 +5286,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			action.moveToElement(compareButton).build().perform();
 			compareButton.click();
 			Thread.sleep(2000);
-			action.moveToElement(comparePageHeader).build().perform();
+//			action.moveToElement(comparePageHeader).build().perform();		//Failing on Safari browser
+			scrollToView(comparePageHeader);
 			if (comparePageHeader.isDisplayed()) {
 				flag = true;
 			}
@@ -5330,10 +5341,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		} else {
 			Thread.sleep(2000);
-			action.moveToElement(ViewPlanMedSupPage).build().perform();
+//			action.moveToElement(ViewPlanMedSupPage).build().perform();
+			scrollToView(ViewPlanMedSupPage);
 			ViewPlanMedSupPage.click();
 			Thread.sleep(2000);
-			action.moveToElement(compareButton).build().perform();
+			waitForPageLoadSafari();
+//			action.moveToElement(compareButton).build().perform();
+			scrollToView(compareButton);
 			if (compareLink.isDisplayed()) {
 				flag = true;
 			}
@@ -5429,6 +5443,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		Thread.sleep(2000);
 		jsClickNew(viewSavedPlansBtn);
+		waitForPageLoadSafari();
 		Thread.sleep(2000);
 		if(shopperProfilePageHeader.isDisplayed()) {
 			flag = true;
@@ -5609,6 +5624,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		
 		jsClickNew(viewPlanDetailsBtn);
+		waitForPageLoadSafari();
 		Thread.sleep(2000);
 		
 		System.out.println("Validating user navigated to plan details----------");
@@ -5684,6 +5700,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		
 		jsClickNew(comparePlansLink);
+		waitForPageLoadSafari();
 		Thread.sleep(2000);
 		
 		System.out.println("Validating user navigated to plan compare----------");
@@ -6347,6 +6364,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -6362,6 +6380,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Benefits Table is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6378,6 +6397,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6394,6 +6414,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Guide to Health Insurance for People with Medicare is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6410,6 +6431,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6426,6 +6448,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Your Guide to AARP Medicare Supplement Insurance Plans is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6475,6 +6498,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6505,6 +6529,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6521,6 +6546,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("**************** PlanOverview is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6538,6 +6564,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6554,6 +6581,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("**************** Rules and Disclosures is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
