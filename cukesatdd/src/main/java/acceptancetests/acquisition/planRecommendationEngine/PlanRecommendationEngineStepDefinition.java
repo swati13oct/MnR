@@ -147,6 +147,13 @@ public class PlanRecommendationEngineStepDefinition {
 //		headerAndFooter.breadCrumbs();
 }
 	
+	@When("^user navigate Plan Recommendation Engine Using Get Started From Medicare Articles$")
+	public void navigate_PRE_tool_MedicareArticles() {
+		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		headerAndFooter.navigationToPlanRecommendationEngineViaMedicareArticles();
+}
+	
 	@Then("^user validate Header elements and Link Validation of Plan Recommendation Engine$")
 	public void user_check_header_Plan_Selector_tool() {
 		PlanRecommendationEngineHeaderAndFooter headerAndFooter =  new PlanRecommendationEngineHeaderAndFooter((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
