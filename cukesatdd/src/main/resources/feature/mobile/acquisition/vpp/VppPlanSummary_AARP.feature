@@ -192,7 +192,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | site | zipcode | isMultiCounty | county             | plantype | planName                                       | planyear |
       | AARP |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) | future   |
 
-  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @ios
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -221,7 +221,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
   #Examples:
   #| zipcode | isMultutiCounty | plantype | planName                    |
   #|   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @ios
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -251,7 +251,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultutiCounty | county             |
       | F322478 |   90210 | NO              | Los Angeles County |
 
-  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @ios
   Scenario Outline: To verify links displayed in the global footer of AARP site on vpp
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

@@ -240,8 +240,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public boolean providerinfo(String planName)
 	{
 		WebElement ProviderSearchLink = driver
-				.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'" + planName
-						+ "')]/following::button[contains(@aria-controls, 'plan-providers')][1]/span/span"));
+				.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'\\\"+planName+\\\"')]/following::button[contains(text(),' View Providers ')][1]"));
 		String mproviderinfo = ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		if (mproviderinfo.toLowerCase().contains("providers covered")) {

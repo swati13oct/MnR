@@ -162,8 +162,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 								"//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
 								.getText().trim());
 				Assert.assertTrue(driver
-						.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"
-								+ plan + "')]/following::span[contains(@class,'search-provider')]"))
+						.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+ plan  +"')]"))
 						.isDisplayed());
 				System.out.println(driver
 						.findElement(By.xpath(

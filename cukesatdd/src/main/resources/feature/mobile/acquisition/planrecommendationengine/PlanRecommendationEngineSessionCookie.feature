@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with session cookies
 
-  @PRE @planrecommendation @DrugPREtoVPPtoDCE @F375045 @PRERegression1 
+  @PRE @planrecommendation @DrugPREtoVPPtoDCE @F375045 @PRERegression1 @ios
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Drugs details from PRE to VPP Page
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -287,7 +287,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
       |   10003 | NO            | New York | MAPD          | None         | regular | Lookup  | sue         | YES           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                | 1st            | Drug Cost, None |
 
-  @PRE @planrecommandonation @EmailList @PDPEmailPlans @F452764 @PRERegression4 
+  @PRE @planrecommandonation @EmailList @PDPEmailPlans @F452764 @PRERegression4 @ios
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -308,7 +308,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | primaryRecommendation | Email                  |
       |   10003 | NO            | New York | PDP           | No             | PDP                   | julia_dowden@optum.com |
 
-  @PRE @planrecommandonation @EmailList @F452764 @PRERegression4
+  @PRE @planrecommandonation @EmailList @F452764 @PRERegression4 @ios
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate Email plan list in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -371,7 +371,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                              |
       |   35034 | Yes           | Bibb County | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,3,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,1,NO,NO |
  
-  @PRE @planrecommendation @DruglistSessionStorageDCEtoPRE @F537262 @PRERegression8 
+  @PRE @planrecommendation @DruglistSessionStorageDCEtoPRE @F537262 @PRERegression8 @ios
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> - To validate Drug list are same DCE vs PRE
     Given the user is on UHC medicare acquisition site landing page
     When user validate navigate to Drug Cost Estimator page
