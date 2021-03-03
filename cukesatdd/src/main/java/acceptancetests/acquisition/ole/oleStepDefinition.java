@@ -3574,7 +3574,9 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
 		DetailsMap.put("Disclosure Provider PhoneNumber", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER));
 		
+		//--------------------------Added for payment plan--------------------------------------------------------------
 		
+		DetailsMap.put("Payment Plan", (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_PLAN));
 
 		boolean Validation_Status = reviewSubmitPage.OnlineEnrollment_Review_Page_details(DetailsMap);
 		if(Validation_Status){
@@ -3866,11 +3868,15 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		String cardHolderName = cardHolderFirstName+cardHolderLastName;
 		System.out.println("The payment type selected is"+payType);
 		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
-		if(payType.equalsIgnoreCase("PayByMail")) {
+		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
+		System.out.println("validate premium value");
+		boolean result = planPremiumPage.validatePremiumValue();
+		if(!result)	{
+		if(payType.equalsIgnoreCase("Pay by Mail")) {
 		flag = planPremiumPage.validatePayByMail();
-		}else if(payType.equalsIgnoreCase("CreditCard")) {
+		}else if(payType.equalsIgnoreCase("Credit Card")) {
 			flag = planPremiumPage.validateCreditCard(cardNo, cardExpirationMonth, cardExpirationYear, cardHolderName);	
-		}else if(payType.equalsIgnoreCase("SocialSecurity")) {
+		}else if(payType.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
 			flag = planPremiumPage.validateSocialSecurity();	
 		}
 		if (flag) {
@@ -3881,7 +3887,12 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 			System.out.println("Payment is failed");
 			Assert.fail("Payment is failed");
 	}
+	
+		}
 		
+		else {
+			flag = planPremiumPage.validateNoMonthlyPremium();
+		}
 	}
 
 }

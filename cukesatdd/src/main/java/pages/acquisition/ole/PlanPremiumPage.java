@@ -68,6 +68,10 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(id = "premiumPaymentQstnPBM")
 	private WebElement payByMail;
 	
+	@FindBy(xpath = "//li[@id='ole-premium']")
+	private WebElement premium;
+	
+	
 	@FindBy(id = "premiumPaymentQstnCC")
 	private WebElement creditCard;
 	
@@ -106,6 +110,27 @@ public class PlanPremiumPage extends UhcDriver{
 	
 	@FindBy(xpath="(//div[@id='upgResultsHtml'])[1]")
 	private WebElement upgResultsMessage;
+	
+	@FindBy(xpath="//*[contains(text(),'The plan')]")
+	private WebElement noMonthlyPremium;
+	
+	@FindBy(xpath="//p[contains(text(),'enrollment penality')]")
+	private WebElement lastEnrollmentPenalty;
+	
+	@FindBy(xpath="//p[contains(text(),'Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA)')]")
+	private WebElement partdincome;
+	
+	@FindBy(xpath="//ul[@class='zeroPremium']/li[1]")
+	private WebElement ss;
+	
+	@FindBy(xpath="//ul[@class='zeroPremium']/li[2]")
+	private WebElement medicare;
+	
+	@FindBy(xpath="//ul[@class='zeroPremium']/li[3]")
+	private WebElement raildroad;
+	
+	@FindBy(xpath="//ul[@class='zeroPremium']/parent::div/p[4]")
+	private WebElement partdirmaa;
 	
 	public PlanPremiumPage(WebDriver driver) {
 		super(driver);
@@ -276,6 +301,91 @@ public class PlanPremiumPage extends UhcDriver{
 	    return flag;
 		
 		}
+	
+	public boolean validatePremiumValue() {
+		boolean flag = false;
+		String actualText = null;
+		String expectedText = "0.00";
+		try {
+		if(premium.isDisplayed())	{
+			Thread.sleep(1000);
+			actualText = premium.getText().trim();
+			flag = actualText.contains(expectedText);
+			
+		}
+			
+			
+		} catch (Exception e) {
+			System.out.println("=====Premium is greater than 0=====");
+		}
+
+			
+    return flag;
+	
+	}
+	
+	public boolean validateNoMonthlyPremium() {
+		boolean flag = false;
+		String actualText = null;
+		String expectedText = null;
+		try {
+			System.out.println("Validate no monthly premium text");
+			actualText = noMonthlyPremium.getText();
+			expectedText = CommonConstants.NO_MONTHLY_PREMIUM_TEXT;
+			flag = actualText.contains(expectedText);
+				if(flag) {
+					System.out.println("Validate last enrollment penalty text");
+					actualText = lastEnrollmentPenalty.getText();
+					expectedText = CommonConstants.LAST_ENROLLMENT_PENALITY_TEXT;
+					flag = actualText.contains(expectedText);
+					if(flag) {
+						System.out.println("Validate part d income text");
+						actualText = partdincome.getText();
+						expectedText = CommonConstants.PART_D_INCOME_TEXT;
+						flag = actualText.contains(expectedText);
+						if(flag) {
+							System.out.println("Validate ss text");
+							actualText = ss.getText();
+							expectedText = CommonConstants.SS_TEXT;
+							flag = actualText.contains(expectedText);
+							if(flag) {
+								System.out.println("Validate medicare text");
+								actualText = medicare.getText();
+								expectedText = CommonConstants.MEDICARE_TEXT;
+								flag = actualText.contains(expectedText);
+								if(flag) {
+									System.out.println("Validate railroad text");
+									actualText = raildroad.getText();
+									expectedText = CommonConstants.RAILROAD_TEXT;
+									flag = actualText.contains(expectedText);
+									if(flag) {
+										System.out.println("Validate partdirmaa tex");
+										actualText = partdirmaa.getText();
+										expectedText = CommonConstants.PARTDIRMAA_TEXT;
+										flag = actualText.contains(expectedText);
+							
+									}
+						
+						
+								}
+								
+					
+						}
+		}
+					}	
+			
+		}
+		}catch (Exception e) {
+			System.out.println("=====No monthly premium text validation failed=====");
+		}
+
+			
+    return flag;
+	
+	}
+	
+
+
 
 }
 
