@@ -30,12 +30,12 @@ Feature: 1.08. UAT - Legacy Visitor profile UI Authenticated
     @VisitorProfile_AARP
     Examples: 
       | site | state        | userName | password   | drug1   | zipCode |
-      | AARP | Pennsylvania | mnrqevd5 | Password@1 | Lipitor |   15001 |
+      | AARP | Virginia | mnrqevd5 | Password@1 | Lipitor |   20120 |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state        | userName | password   | drug1   | zipCode |
-      | UHC  | Pennsylvania | mnrqevd5 | Password@1 | Lipitor |   15001 |
+      | UHC  | Virginia | mnrqevd5 | Password@1 | Lipitor |   20120 |
 
   @providerFlowAuthenticatedLeagcy
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
@@ -60,13 +60,12 @@ Feature: 1.08. UAT - Legacy Visitor profile UI Authenticated
       | PlanName | <planname> |
     And user delets all the added providers on visitor profile page
       | PlanName | <planname> |
-
     @VisitorProfile_AARP
     Examples: 
       | site | state        | zipcode | isMultutiCounty | county        | userName | password   | plantype | planname                             |
-      | AARP | Pennsylvania |   15001 | NO              | Beaver County | mnrqevd5 | Password@1 | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+      | AARP | Virginia |   20120 | NO              | Beaver County | mnrqevd5 | Password@1 | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
-    @VisitorProfile_UHC
+   @VisitorProfile_UHC
     Examples: 
       | site | state        | zipcode | isMultutiCounty | county        | userName | password   | plantype | planname                             |
-      | UHC  | Pennsylvania |   15001 | NO              | Beaver County | mnrqevd5 | Password@1 | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
+      | UHC  | Virginia |   20120 | NO              | Beaver County | mnrqevd5 | Password@1 | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
