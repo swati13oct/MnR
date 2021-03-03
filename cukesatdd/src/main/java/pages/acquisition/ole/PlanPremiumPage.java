@@ -65,23 +65,29 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath=".//*[@id='ole-form-content']//*[contains(@for,'premiumAgree')]")
 	private WebElement agreeBtn;
 	
-	@FindBy(id = "premiumPaymentQstnPBM")
+	//@FindBy(id = "premiumPaymentQstnPBM")
+	
+	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnPBM')])[1]")
 	private WebElement payByMail;
 	
 	@FindBy(xpath = "//li[@id='ole-premium']")
 	private WebElement premium;
 	
 	
-	@FindBy(id = "premiumPaymentQstnCC")
+	//@FindBy(id = "premiumPaymentQstnCC")
+	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnCC')])[1]")
 	private WebElement creditCard;
 	
-	@FindBy(id = "premiumPaymentQstnSSRRB")
+	//@FindBy(id = "premiumPaymentQstnSSRRB")
+	
+	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnSSRRB')])[1]")
 	private WebElement socialSecurity;
 	
 	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
 	private WebElement payByMailText;
 	
-	@FindBy(id = "div_cardInfo")
+//	@FindBy(id = "div_cardInfo")
+	@FindBy(xpath="//h2//span[contains(text(), 'Credit Card Information')]")
 	private WebElement creditCardText;
 	
 	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
@@ -93,10 +99,12 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath="//div[@id='sessionTimeoutNotice']")
 	private WebElement sessionTimeoutNotice;
 	
-	@FindBy(id="cardholderName")
+//	@FindBy(id="cardholderName")
+	@FindBy(xpath="(//input[contains(@id,'holderName')])[1]")
 	private WebElement cardholderName;
 	
-	@FindBy(id="accountNumber")
+	//@FindBy(id="accountNumber")
+	@FindBy(xpath="(//input[contains(@id,'accountNumber')])[1]")
 	private WebElement accountNumber;
 	
 	@FindBy(xpath="//select[@id='month']")
@@ -105,7 +113,8 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath="//select[@id='year']")
 	private WebElement cardExpirationYear;
 	
-	@FindBy(id="storeCardBtn")
+	//@FindBy(id="storeCardBtn")
+	@FindBy(xpath="(//button[contains(@id,'btnSubmit')])[1]")
 	private WebElement btnSubmit;
 	
 	@FindBy(xpath="(//div[@id='upgResultsHtml'])[1]")
@@ -204,28 +213,29 @@ public class PlanPremiumPage extends UhcDriver{
 	
 	}
 	
-	public boolean validateCreditCard(String cardNumber, String year, String month , String name ) {
+	public boolean validateCreditCard(String cardNumber, String year, String month , String name ) throws InterruptedException {
 		boolean flag = false;
-		String actualText = null;
-		String expectedText = null;
+		//String actualText = null;
+		//String expectedText = null;
 		
-		try {
+		validateNew(creditCard);
+	//	try {
 			if(creditCard.isDisplayed())	{
 				jsClickNew(creditCard);
 				Thread.sleep(5000);
-				actualText = creditCardText.getText().trim();
-				expectedText = CommonConstants.CREDIT_CARD_TEXT;
+				String	actualText = creditCardText.getText().trim();
+				String expectedText = CommonConstants.CREDIT_CARD_TEXT;
 				flag = actualText.equalsIgnoreCase(expectedText);
 					if(flag) {
 						flag = enterCreditCardInformation(cardNumber, year, month, name);
 					}
 			}
 			
-		} catch (Exception e) {
+	/*	} catch (Exception e) {
 				System.out.println("=====CreditCard FAILED=====");
 			}
 
-				
+		*/		
 	    return flag;
 		
 		}

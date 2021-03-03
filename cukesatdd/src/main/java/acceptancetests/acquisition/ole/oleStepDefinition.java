@@ -3866,7 +3866,7 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		String cardHolderFirstName = paymentInformationMap.get("Card Holder First Name");
 		String cardHolderLastName = paymentInformationMap.get("Card Holder Last Name");
 		String cardHolderName = cardHolderFirstName+cardHolderLastName;
-		System.out.println("The payment type selected is"+payType);
+		System.out.println("The payment type selected is" +payType);
 		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
 		System.out.println("validate premium value");
