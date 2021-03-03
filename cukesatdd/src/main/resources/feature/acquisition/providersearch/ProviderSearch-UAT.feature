@@ -38,16 +38,26 @@ Feature: 1.07.2 UAT-Provider Search Flows
     When user selects a provider and retuns to VPP plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
 
-    @ProviderSearchCommon_AARP @ProviderSearchCommon_Prod_AARP @ProviderSearchFromVppPlanDetailsPageUlayer
+    @ProviderSearchCommon_AARP	@ProviderSearchFromVppPlanDetailsPageUlayer
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | future   |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
+      
+    @ProviderSearchCommon_Prod_AARP
+    Examples: 
+      | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
+      | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | future   |
 
     @ProviderSearchCommon_UHC @ProviderSearchCommon_Prod_UHC @ProviderSearchFromVppPlanDetailsPageBlayer
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | future   |
+      | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
+
+    @ProviderSearchCommon_Prod_UHC
+    Examples: 
+      | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
   Scenario Outline: <Scenario> : Verify Provider Search  in <site> site from Global Header
