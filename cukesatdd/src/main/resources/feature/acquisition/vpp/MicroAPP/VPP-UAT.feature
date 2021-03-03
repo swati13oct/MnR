@@ -203,10 +203,8 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
   Scenario Outline: TID: <Scenario> - Plan Type: <plantype> - Validate that M&R Prospective client has the ability to add drugs through VPP Plan details <site> site.
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
-      | County Name     | <county>          |
+    Then the user hover over Shop for a Plan and validates zipcode component
+    Then the user validate ZipCode Components on SubNav using ZipCode "<zipcode>"
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -280,10 +278,10 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
 
     @VppPlanCompareCommon_AARP01New
     Examples: 
-      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             |
-      | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) |
+      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             |pdfType               | docCode                 | planyear |
+      | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) |Step Therapy Criteria | Step_Therapy_MCORE_2020 | current  |
 
     @VppPlanCompareCommon_UHC01New
     Examples: 
-      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             |
-      | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) |
+      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             |pdfType               | docCode                 | planyear |
+      | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) |Step Therapy Criteria | Step_Therapy_MCORE_2020 | current  |
