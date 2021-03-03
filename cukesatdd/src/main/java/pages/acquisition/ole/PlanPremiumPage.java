@@ -83,6 +83,30 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
 	private WebElement socialSecurityText;
 	
+	@FindBy(xpath="//span[@id='acceptedCardsSpan']")
+	private WebElement acceptedCards;
+	
+	@FindBy(xpath="//div[@id='sessionTimeoutNotice']")
+	private WebElement sessionTimeoutNotice;
+	
+	@FindBy(id="cardholderName")
+	private WebElement cardholderName;
+	
+	@FindBy(id="accountNumber")
+	private WebElement accountNumber;
+	
+	@FindBy(xpath="//select[@id='month']")
+	private WebElement cardExpirationMonth;
+	
+	@FindBy(xpath="//select[@id='year']")
+	private WebElement cardExpirationYear;
+	
+	@FindBy(id="storeCardBtn")
+	private WebElement btnSubmit;
+	
+	@FindBy(xpath="(//div[@id='upgResultsHtml'])[1]")
+	private WebElement upgResultsMessage;
+	
 	public PlanPremiumPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -131,12 +155,14 @@ public class PlanPremiumPage extends UhcDriver{
 		}
 	}
 	
-	public boolean validatePayByMail(String paymentType) {
+	public boolean validatePayByMail() {
 		boolean flag = false;
 		String actualText = null;
 		String expectedText = null;
 		try {
 		if(payByMail.isDisplayed())	{
+			jsClickNew(payByMail);
+			Thread.sleep(1000);
 			actualText = payByMailText.getText().trim();
 			expectedText = CommonConstants.PAY_BY_MAIL_TEXT;
 			flag = actualText.equalsIgnoreCase(expectedText);
@@ -153,18 +179,67 @@ public class PlanPremiumPage extends UhcDriver{
 	
 	}
 	
-	public boolean validateCreditCard(String paymentType) {
+	public boolean validateCreditCard(String cardNumber, String year, String month , String name ) {
 		boolean flag = false;
 		String actualText = null;
 		String expectedText = null;
 		
 		try {
 			if(creditCard.isDisplayed())	{
+				jsClickNew(creditCard);
+				Thread.sleep(5000);
 				actualText = creditCardText.getText().trim();
 				expectedText = CommonConstants.CREDIT_CARD_TEXT;
 				flag = actualText.equalsIgnoreCase(expectedText);
-				
+					if(flag) {
+						flag = enterCreditCardInformation(cardNumber, year, month, name);
+					}
 			}
+			
+		} catch (Exception e) {
+				System.out.println("=====CreditCard FAILED=====");
+			}
+
+				
+	    return flag;
+		
+		}
+	
+	public boolean enterCreditCardInformation(String cardNo, String month, String year , String cardHolderName) {
+		boolean flag = false;
+		String actualText = null;
+		String expectedText = null;
+		
+		try {
+			System.out.println("Validate accepted cards");
+			actualText = acceptedCards.getText();
+			expectedText = CommonConstants.ACCEPTED_CARDS_TEXT;
+			flag = actualText.equalsIgnoreCase(expectedText);
+				if(flag) {
+					System.out.println("Validate session timeout notice");
+					actualText = sessionTimeoutNotice.getText();
+					expectedText = CommonConstants.SESSION_TIMEOUT_TEXT;
+					flag = actualText.equalsIgnoreCase(expectedText);
+					if(flag) {
+						System.out.println("Validate Holder Name");
+						actualText = cardholderName.getText();
+						expectedText = cardHolderName;
+						flag = actualText.equalsIgnoreCase(expectedText);
+							if(flag) {
+							System.out.println("Enter Account Information");
+							jsSendkeys(accountNumber, cardNo);
+							jsSendkeys(cardExpirationMonth, month);
+							jsSendkeys(cardExpirationYear, year);
+							jsClickNew(btnSubmit);
+							Thread.sleep(5000);
+							System.out.println("Validate card details stored successfully message");
+							actualText = upgResultsMessage.getText();
+							expectedText = CommonConstants.CARD_STORED_SUCCESSFULLY_TEXT;
+							flag = actualText.equalsIgnoreCase(expectedText);
+					}
+				}
+		}
+			
 				
 				
 			} catch (Exception e) {
@@ -175,14 +250,17 @@ public class PlanPremiumPage extends UhcDriver{
 	    return flag;
 		
 		}
+
 	
-	public boolean validateSocialSecurity(String paymentType) {
+	public boolean validateSocialSecurity() {
 		boolean flag = false;
 		String actualText = null;
 		String expectedText = null;
 		
 		try {
 			if(socialSecurity.isDisplayed())	{
+				jsClickNew(socialSecurity);
+				Thread.sleep(1000);
 				actualText = socialSecurityText.getText().trim();
 				expectedText = CommonConstants.SOCIAL_SECURITY_TEXT;
 				flag = actualText.equalsIgnoreCase(expectedText);

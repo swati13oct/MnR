@@ -3852,19 +3852,26 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
 		boolean flag = false;
 		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		Map<String, String> paymentTypeMap = new HashMap<String, String>();
+		Map<String, String> paymentInformationMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			paymentTypeMap.put(givenAttributesRow.get(i).getCells().get(0),
+			paymentInformationMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		String payType = paymentTypeMap.get("Payment Type");
+		String payType = paymentInformationMap.get("Payment Type");
+		String cardNo = paymentInformationMap.get("Card No");
+		String cardExpirationMonth = paymentInformationMap.get("Card Expiration Month");
+		String cardExpirationYear =  paymentInformationMap.get("Card Expiration Year");
+		String cardHolderFirstName = paymentInformationMap.get("Card Holder First Name");
+		String cardHolderLastName = paymentInformationMap.get("Card Holder Last Name");
+		String cardHolderName = cardHolderFirstName+cardHolderLastName;
+		System.out.println("The payment type selected is"+payType);
 		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 		if(payType.equalsIgnoreCase("PayByMail")) {
-		flag = planPremiumPage.validatePayByMail(payType);
+		flag = planPremiumPage.validatePayByMail();
 		}else if(payType.equalsIgnoreCase("CreditCard")) {
-			flag = planPremiumPage.validateCreditCard(payType);	
+			flag = planPremiumPage.validateCreditCard(cardNo, cardExpirationMonth, cardExpirationYear, cardHolderName);	
 		}else if(payType.equalsIgnoreCase("SocialSecurity")) {
-			flag = planPremiumPage.validateSocialSecurity(payType);	
+			flag = planPremiumPage.validateSocialSecurity();	
 		}
 		if (flag) {
 			System.out.println("Payment is passed");

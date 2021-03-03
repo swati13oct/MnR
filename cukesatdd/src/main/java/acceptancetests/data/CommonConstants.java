@@ -992,5 +992,10 @@ public class CommonConstants {
 	public static String CREDIT_CARD_TEXT = "Credit Card Information";
 	
 	public static String SOCIAL_SECURITY_TEXT = "We will bill you directly until the Social Security Administration or Railroad Retirement Board approves the deduction. It could take up to 90 days after the approval for the first deduction to occur, so please continue to make payments. If the Social Security Administration or Railroad Retirement Board does not approve your request for automatic deduction, we will notify you and continue to send a paper bill for your monthly premiums.";
+	
+	public static String ACCEPTED_CARDS_TEXT = "Accepted Cards are Mastercard, VISA, and Discover";
 
+	public static String SESSION_TIMEOUT_TEXT = "Please submit the below details within 15 minutes to avoid session timeout period";
+	
+	public static String CARD_STORED_SUCCESSFULLY_TEXT = "Thank You!. Your Card details has been stored successfully.";
 }
