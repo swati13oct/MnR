@@ -78,7 +78,6 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  |planyear|
       | 15550 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com |current|
 
-  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: 7UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -439,48 +438,4 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
 
-  @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from AARP site from plan summary page
-    Given the user is on the AARP medicare acquisition site landing page
-    When the user does plan search using the following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
-      | County Name     | <county>          |
-    And the user views the plans of the below plan type in AARP site
-      | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
-    	|Plan Year	| <planyear>|
-    #And the user validates available plans for selected plan types in the AARP site
-    And the user validates plan summary for the below plan in AARP site
-      | Plan Name | <planName> |
-    Then the user clicks on Learn More AARP for Rocky Mountain plans
-      | Plan Name | <planName> |
-
-    Examples: 
-      | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              |planyear|
-      | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) |current|
-
-  @vppPlanSummaryAARP17 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
-  Scenario Outline: TID: <TID> -plan type: <plantype> - plan name: -<planName> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
-    Given the user is on the AARP medicare acquisition site landing page
-    When the user does plan search using the following information in the AARP site
-      | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
-      | County Name     | <county>          |
-   And the user views the plans of the below plan type in AARP site
-      | Plan Type | <plantype> |
-    And the user selects plan year for the AARP site
-    	|Plan Year	| <planyear>|
-    #And the user validates available plans for selected plan types in the AARP site
-    And the user validates plan summary for the below plan in AARP site
-      | Plan Name | <planName> |
-    Then the user clicks on Learn More AARP for people Health plans
-      | Plan Name | <planName> |
-
-    Examples: 
-      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                                 |planyear|
-      | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO-POS)    |current|
-      #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
-      #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|
-      #| US2567133 |   70718 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
-      #| US2567133 |   70420 | YES             | Ascension Parish | MAPD     | Peoples Health Choices 65 "#14 (HMO)"    |
+  
