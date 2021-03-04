@@ -406,9 +406,14 @@ public class DrugDetailsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validateNew(DrugDetails_ChangePharmacyLnk);
-		validateNew(DrugDetails_DrugCostsHeading);
-		if(!CurrentFlow.equalsIgnoreCase("compare"))
-			validateNew(LinkToDrugSummary);
+        validateNew(DrugDetails_DrugCostsHeading);
+        validateNew(LinktoExitScenario);
+        if(!LinktoExitScenario.getText().contains("Compare")) {
+            validateNew(LinkToDrugSummary);
+        }
+        /*
+         * if(!CurrentFlow.equalsIgnoreCase("compare")) validateNew(LinkToDrugSummary);
+         */
 		validateNew(LinktoExitScenario);
 		validateNew(LinktoEditDrugList);
 	}
@@ -429,7 +434,9 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_AvgMonDrugCost);
 		validateNew(DrugCosts_MonthlyPremium);
 		validateNew(DrugCosts_AnnualEstTotal);
-		validateNew(DrugCosts_PlanDetailsBtn);
+        if(!LinktoExitScenario.getText().contains("Compare")) {
+        	validateNew(DrugCosts_PlanDetailsBtn);
+        }
 		//validateNew(DrugCosts_SaveBtn);
 		validateNew(DrugCosts_TFN);
 	}
@@ -830,12 +837,15 @@ public class DrugDetailsPage extends UhcDriver {
 
 	}
 
+	@FindBy(xpath = "//*[contains(@id, 'plancosts')]")
+	private WebElement planCostsTab;
+	
 	public PlanDetailsPage ClickandNavigate_VPPPlanDetails(String planName) {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
-		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
 			System.out.println("Plan Details Page displayed for current Plan : "+planName);
 			return new PlanDetailsPage(driver);
@@ -853,6 +863,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_AnnualEstTotal_Amount);
 		validateNew(MonthlyDrugStage_Header);
 
+		CommonUtility.waitForPageLoad(driver, YourDrugs_Header, 20);
 		String AVG_MONTHLY = DrugCosts_AvgMonDrugCost_Amount.getText();
 		String MONTHLY_PREMIUM = DrugCosts_MonthlyPremium_Amount.getText();
 		String ANNUAL_ESTIMATED_TOTAL = DrugCosts_AnnualEstTotal_Amount.getText();
@@ -1349,7 +1360,7 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println("Current Added Drug Name : "+currentAddedDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentAddedDrug+"')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"+currentAddedDrug+"')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
-			String currentDrugYouPay = DrugYouPay.getText().trim();
+			String currentDrugYouPay = DrugYouPay.getText().trim().replace(",", "");
 			String ExpectedYouPay = Drugs_YouPay[i];
 			System.out.println("Current Added Drug Name : "+currentAddedDrug);
 			System.out.println("Displayed Current Drug You Pay : "+currentDrugYouPay);

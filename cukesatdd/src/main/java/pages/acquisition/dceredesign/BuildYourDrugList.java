@@ -189,7 +189,7 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 		waitForPageLoadSafari();
-		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);;
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
 		validateNew(SelectDrug);
@@ -400,6 +400,10 @@ public class BuildYourDrugList extends UhcDriver {
 			for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
 			System.out.println(CurrentDrugRecommendation.getText());}
 			System.out.println("Drug Cabinet is NOT displayed in Drug Recommendation  - Validation PASSED");
+		}
+		else {
+			System.out.println(" ***************** Drug Recommendations section is not displayed *****************");
+
 		}
 		
 	}

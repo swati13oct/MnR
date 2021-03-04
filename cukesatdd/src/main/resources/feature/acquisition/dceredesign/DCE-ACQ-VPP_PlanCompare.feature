@@ -79,6 +79,7 @@ Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare In
     Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
       | PlanName | <planname> |
     Then the user validates planName matches plan Name in VPP
+		Then the user Validates Drug you pay on DCE details page to Compare page Drug Info Modal    
     Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
 
     @DCE_Redesign_VPP_PlanCompare1_AARP
