@@ -12,15 +12,15 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionFooterAARPMobileProSanity.json",detailedReport = true,
+jsonReport = "target/cucumber-RunMRATDDAcquisitionFooterAARPMobileProSanityIOS.json",detailedReport = true,
 detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionFooterAARPMobileProSanity")
+outputFolder = "target/RunMRATDDAcquisitionFooterAARPMobileProSanityIOS")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
 features = { "src/main/resources/feature/mobile/acquisition/globalComponents" }, 
 plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooterAARPMobileProSanity.json" }, 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFooterAARPMobileProSanityIOS.json" }, 
 tags = { "@ios" }, dryRun=false)
-public class RunMRATDDAcquisitionFooterAARPMobileProSanity {
+public class RunMRATDDAcquisitionFooterAARPMobileProSanityIOS {
 
 }
 //@globalfooter_AARP

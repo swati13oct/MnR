@@ -12,13 +12,13 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionProviderSearchMobileProdSanity.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProviderSearchMobileProdSanity")
+jsonReport = "target/cucumber-RunMRATDDAcquisitionProviderSearchMobileProdSanityIOS.json",detailedReport = true,
+ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProviderSearchMobileProdSanityIOS")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/providersearch" }, 
 plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchMobileProdSanity.json" }, 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProviderSearchMobileProdSanityIOS.json" }, 
 tags = {  "@ios"}, dryRun=false)
-public class RunMRATDDAcquisitionProviderSearchMobileProdSanity { 
+public class RunMRATDDAcquisitionProviderSearchMobileProdSanityIOS { 
  
 }
 

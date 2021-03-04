@@ -9,17 +9,17 @@ import cucumber.api.CucumberOptions;
 
 /**
  * this file is to run test cases for
- * RunMRATDDAcquisitionPREMobileProdSanity
+ * RunMRATDDAcquisitionSiteSearchMobileProdSanity
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", 
-jsonReport = "target/cucumber-RunMRATDDAcquisitionPREMobileProdSanity.json", detailedReport = true, 
-detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPREMobileProdSanity")
+jsonReport = "target/cucumber-RunMRATDDAcquisitionSiteSearchMobileProdSanityIOS.json", detailedReport = true, 
+detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionSiteSearchMobileProdSanityIOS")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, monochrome = true, features = {
 		"src/main/resources/feature/mobile/acquisition/planrecommendationengine" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionPREMobileProdSanity.json" }, tags = {
+				"json:target/cucumber-RunMRATDDAcquisitionSiteSearchMobileProdSanityIOS.json" }, tags = {
 						"@ios"}, dryRun=false)
 
-public class RunMRATDDAcquisitionPREMobileProdSanity {
+public class RunMRATDDAcquisitionSiteSearchMobileProdSanityIOS {
 
 }

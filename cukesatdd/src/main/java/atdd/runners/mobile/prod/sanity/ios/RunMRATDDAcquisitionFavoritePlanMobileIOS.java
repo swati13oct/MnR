@@ -12,15 +12,15 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionFavoritePlanMobileProdSanity.json",detailedReport = true,
+jsonReport = "target/cucumber-RunMRATDDAcquisitionFavoritePlanMobileIOS.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
- outputFolder = "target/RunMRATDDAcquisitionFavoritePlanMobileProdSanity")
+ outputFolder = "target/RunMRATDDAcquisitionFavoritePlanMobileIOS")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
 features = { "src/main/resources/feature/mobile/acquisition/FavoritePlan" },
 plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFavoritePlanMobileProdSanity.json" }, 
-tags = {"ios"}, dryRun=false)
-public class RunMRATDDAcquisitionFavoritePlanMobileProdSanity { 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionFavoritePlanMobileIOS.json" }, 
+tags = {"@ios"}, dryRun=false)
+public class RunMRATDDAcquisitionFavoritePlanMobileIOS { 
  
 }
 

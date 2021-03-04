@@ -12,10 +12,12 @@ import cucumber.api.CucumberOptions;
  * RunMRATDDAcquisitionVPPPlanSummaryMobileProd
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity")
+@ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", 
+jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanityIOS.json", detailedReport = true, 
+detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanityIOS")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
 		"src/main/resources/feature/mobile/acquisition/vpp/" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json" }, tags = { "@ios" })
-public class RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity {
+				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanityIOS.json" }, tags = { "@ios" })
+public class RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanityIOS {
 
 }
