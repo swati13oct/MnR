@@ -3306,12 +3306,21 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
 				
 				//------------------------------------------------------------------------------------------------------------------------------------------------
-
-				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
-
-				//Proposed Effective Date
 				
-						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+				//Credit Card Details
+				System.out.println("--------------------Storing Data for Credit Card Started----------------------");
+				String creditCardNumber = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NUMBER);
+				DetailsMap.put("Credit Card Number", creditCardNumber);
+				String creditCardNameOnCreditCard = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD);
+				DetailsMap.put("Credit Card Name On Card", creditCardNameOnCreditCard);
+				String creditCardExpirationDate = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE);
+				DetailsMap.put("Credit Card Expiration Date", creditCardExpirationDate);
+				System.out.println("--------------------Storing Data for Credit Card Ended----------------------");
+				
+				//Proposed Effective Date
+				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
+				
+				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				proposedEffectiveDate = proposedEffectiveDate.substring(0, 10);
 				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
 				proposedEffectiveDate=OLEGPSValidation.converttogpsDate1(proposedEffectiveDate);
@@ -3861,12 +3870,16 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		}
 		String payType = paymentInformationMap.get("Payment Type");
 		String cardNo = paymentInformationMap.get("Card No");
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo.substring(cardNo.length()-4));
 		String cardExpirationMonth = paymentInformationMap.get("Card Expiration Month");
 		String cardExpirationYear =  paymentInformationMap.get("Card Expiration Year");
+		String cardExpirationDate = cardExpirationMonth + cardExpirationYear;
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE, cardExpirationDate);
 		String cardHolderFirstName = paymentInformationMap.get("Card Holder First Name");
 		String cardHolderLastName = paymentInformationMap.get("Card Holder Last Name");
-		String cardHolderName = cardHolderFirstName+cardHolderLastName;
-		System.out.println("The payment type selected is" +payType);
+		String cardHolderName = cardHolderFirstName+" "+cardHolderLastName;
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD, cardHolderName);
+		System.out.println("The payment type selected is "+payType);
 		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
 		System.out.println("validate premium value");
@@ -3892,7 +3905,14 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		
 		else {
 			flag = planPremiumPage.validateNoMonthlyPremium();
+			if (flag) {
+				System.out.println("No Monthly Premium validation is passed");
+				Assert.assertTrue(true);
+			}
+			else {
+				System.out.println("No Monthly Premium validation is failed");
+				Assert.fail("No Monthly Premium validation is failed");
+			}
 		}
 	}
-
 }

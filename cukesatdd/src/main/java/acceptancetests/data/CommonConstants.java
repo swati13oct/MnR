@@ -977,6 +977,9 @@ public class CommonConstants {
 			"AUTHORIZED_REP_MAILING_ZIP_CD,\n" + 
 			"AUTHORIZED_REP_DAYTIME_PHONE,\n" + 
 			"SIGNATURE_PRESENCE,\n" + 
+			"CREDIT_CARD_NUMBER,\n" +
+			"CREDIT_CARD_NAME_ON_CARD,\n" +
+			"CREDIT_CARD_EXPIRATION_DATE,\n" +
 			"XEROX_STAGE_ID\n" + 
 			"from Xerox_stage where xerox_stage_id = ";
 	

@@ -17,6 +17,7 @@ import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -86,8 +87,7 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
 	private WebElement payByMailText;
 	
-//	@FindBy(id = "div_cardInfo")
-	@FindBy(xpath="//h2//span[contains(text(), 'Credit Card Information')]")
+	@FindBy(id = "div_cardInfo")
 	private WebElement creditCardText;
 	
 	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
@@ -155,7 +155,13 @@ public class PlanPremiumPage extends UhcDriver{
 	}
 
 	public SupplementalBenefitsPage navigate_to_Supplemental_Riders_Page() {
-		agreeBtn.click();
+		//This button is removed from payment page on team environment
+
+		if (MRScenario.environment.equalsIgnoreCase("stage") || (MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod")))
+		{
+			agreeBtn.click();
+		}
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -215,27 +221,28 @@ public class PlanPremiumPage extends UhcDriver{
 	
 	public boolean validateCreditCard(String cardNumber, String year, String month , String name ) throws InterruptedException {
 		boolean flag = false;
-		//String actualText = null;
-		//String expectedText = null;
+		String actualText = null;
+		String expectedText = null;
 		
 		validateNew(creditCard);
-	//	try {
+		try {
 			if(creditCard.isDisplayed())	{
 				jsClickNew(creditCard);
 				Thread.sleep(5000);
-				String	actualText = creditCardText.getText().trim();
-				String expectedText = CommonConstants.CREDIT_CARD_TEXT;
+				driver.switchTo().frame("ole_credit_payment");
+				actualText = creditCardText.getText();
+				expectedText = CommonConstants.CREDIT_CARD_TEXT;
 				flag = actualText.equalsIgnoreCase(expectedText);
 					if(flag) {
 						flag = enterCreditCardInformation(cardNumber, year, month, name);
 					}
 			}
 			
-	/*	} catch (Exception e) {
+		} catch (Exception e) {
 				System.out.println("=====CreditCard FAILED=====");
 			}
 
-		*/		
+				
 	    return flag;
 		
 		}
@@ -254,10 +261,10 @@ public class PlanPremiumPage extends UhcDriver{
 					System.out.println("Validate session timeout notice");
 					actualText = sessionTimeoutNotice.getText();
 					expectedText = CommonConstants.SESSION_TIMEOUT_TEXT;
-					flag = actualText.equalsIgnoreCase(expectedText);
+					flag = actualText.contains(expectedText);
 					if(flag) {
 						System.out.println("Validate Holder Name");
-						actualText = cardholderName.getText();
+						actualText = cardholderName.getAttribute("value");
 						expectedText = cardHolderName;
 						flag = actualText.equalsIgnoreCase(expectedText);
 							if(flag) {
@@ -268,6 +275,7 @@ public class PlanPremiumPage extends UhcDriver{
 							jsClickNew(btnSubmit);
 							Thread.sleep(5000);
 							System.out.println("Validate card details stored successfully message");
+							driver.switchTo().defaultContent();
 							actualText = upgResultsMessage.getText();
 							expectedText = CommonConstants.CARD_STORED_SUCCESSFULLY_TEXT;
 							flag = actualText.equalsIgnoreCase(expectedText);
@@ -317,16 +325,13 @@ public class PlanPremiumPage extends UhcDriver{
 		String actualText = null;
 		String expectedText = "0.00";
 		try {
-		if(premium.isDisplayed())	{
-			Thread.sleep(1000);
-			actualText = premium.getText().trim();
+			actualText = premium.getText();
 			flag = actualText.contains(expectedText);
-			
-		}
-			
-			
-		} catch (Exception e) {
+			if(!flag) {
 			System.out.println("=====Premium is greater than 0=====");
+			}
+		} catch (Exception e) {
+			
 		}
 
 			
