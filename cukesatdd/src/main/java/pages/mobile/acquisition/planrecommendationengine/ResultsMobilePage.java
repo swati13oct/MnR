@@ -175,10 +175,10 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='uhc-container']//h4[contains(text(),'Need Help?')]")
 	private WebElement needhelptxtMS;
 
-	@FindBy(css = "input#cta-zipcode")
+	@FindBy(css = "input#zipcodemeded-0")
 	private WebElement homePageZiptxt;
 
-	@FindBy(css = "button#zipcodebtn")
+	@FindBy(css = "button[class*='uhc-zip-button']")
 	private WebElement homePageFindPlans;
 
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-provider")
@@ -389,13 +389,13 @@ public class ResultsMobilePage extends UhcDriver {
 		Select temp = new Select(MSPlanPartAMonth);
 		mobileSelectOption(MSPlanPartAMonth, "January 1",true);
 		temp = new Select(MSPlanPartAYear);
-		mobileSelectOption(MSPlanPartAYear, "2021",true);
+		mobileSelectOption(MSPlanPartAYear, "2022",true);
 		temp = new Select(MSPlanPartBMonth);
 		mobileSelectOption(MSPlanPartBMonth, "January 1",true);
 		temp = new Select(MSPlanPartBYear);
-		mobileSelectOption(MSPlanPartBYear, "2021",true);
+		mobileSelectOption(MSPlanPartBYear, "2022",true);
 		temp = new Select(MSPlanStartMonth);
-		mobileSelectOption(MSPlanStartMonth, "January 1, 2021",true);
+		mobileSelectOption(MSPlanStartMonth, "January 1, 2022",true);
 		mobileUtils.mobileLocateElement(MSViewPlanButton);
 		mobileUtils.mobileLocateElementClick(MSViewPlanButton);
 	}

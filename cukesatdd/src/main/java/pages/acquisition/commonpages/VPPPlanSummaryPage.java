@@ -869,7 +869,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[text()='Compare'])[1]")
 	private WebElement compareButton;
 
-	@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
+	//@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
+	@FindBy(xpath = "//span[contains(@class,'semiBoldText colorPrimaryBlue')]")
 	private WebElement comparePageHeader;
 
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
@@ -4601,10 +4602,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//validateNew(VerificationAgree2);
 	//	jsClickNew(VerificationAgree2);
 	//	jsClickNew(nextButton);
-		validateNew(VerificationAgree3);
-		Thread.sleep(3000);
-		jsClickNew(VerificationAgree3);
-		jsClickNew(nextButton);
+		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
+			validateNew(VerificationAgree2);
+			Thread.sleep(3000);
+			jsClickNew(VerificationAgree2);
+			jsClickNew(nextButton);
+		} else {
+			validateNew(VerificationAgree3);
+			Thread.sleep(3000);
+			jsClickNew(VerificationAgree3);
+			jsClickNew(nextButton);
+		}
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			validateNew(SubmitApplication);
@@ -6296,15 +6304,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void removeDrugsFromPlanCard() {
 		try {
 			validate(drugListPlanCard);
-			//drugListPlanCard.click();
 			jsClickNew(drugListPlanCard);
 			validate(expandedDruglistPlanCard);
-			//scrollToView(expandedDruglistPlanCard);
 		while(removeDrugListPlanCard.size()!=0) {
-			//scrollToView(removeDrugListPlanCard.get(0));
 			removeDrugListPlanCard.get(0).click();
 			System.out.println("Removed drugs in plan card");
-			driver.navigate().refresh();
 		}
 		}
 		catch(Exception e) {
