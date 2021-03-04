@@ -27,8 +27,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
-//import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
+import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class VisitorProfilePage extends UhcDriver {

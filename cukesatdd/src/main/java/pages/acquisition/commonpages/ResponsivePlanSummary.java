@@ -17,7 +17,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.PlanComparePage;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
 import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
@@ -1111,9 +1111,9 @@ public void comparePlanslnk() throws InterruptedException{
                  return null;
          }
 				 
-				 public PlanComparePage navigateToPlanCompare(String planName){
+				 public ComparePlansPage navigateToPlanCompare(String planName){
 						driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span/following-sibling::p")).click();
-							return new PlanComparePage(driver);
+							return new ComparePlansPage(driver);
 					
 					}
 					

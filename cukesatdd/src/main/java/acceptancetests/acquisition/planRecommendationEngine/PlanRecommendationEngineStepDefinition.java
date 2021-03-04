@@ -18,9 +18,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.PlanSelectorNewPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.*;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
@@ -69,7 +67,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
 		wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
 		if_offline_prod = aquisitionhomepage.openPRE();
 //		aquisitionhomepage.fixPrivateConnection();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
@@ -955,7 +953,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void the_user_on_external_Site(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
 		wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE",true);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE");
 		aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
