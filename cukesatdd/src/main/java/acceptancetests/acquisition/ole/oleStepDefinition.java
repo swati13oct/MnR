@@ -2170,7 +2170,7 @@ public class oleStepDefinition {
 			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 
-			if(!planType.contentEquals("PDP")){
+		/*	if(!planType.contentEquals("PDP")){
 				PlanPremiumPage  planPremiumPage = (PlanPremiumPage) pcpPage.navigate_to_Plan_Premium_Page();
 				if (planPremiumPage != null) {
 
@@ -2180,7 +2180,17 @@ public class oleStepDefinition {
 				}
 				else
 					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
-			}
+			}*/
+				PlanPremiumPage  planPremiumPage = (PlanPremiumPage) pcpPage.navigate_to_Plan_Premium_Page();
+				if (planPremiumPage != null) {
+
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE,
+							planPremiumPage);
+					System.out.println("PCP Page is not Displayed : OLE Monthly Plan Premium Page is Displayed for Plantype : "+planType);
+				}
+				else
+					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
+			
 		//}
 	}
 
@@ -3296,12 +3306,21 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
 				
 				//------------------------------------------------------------------------------------------------------------------------------------------------
-
-				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
-
-				//Proposed Effective Date
 				
-						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+				//Credit Card Details
+				System.out.println("--------------------Storing Data for Credit Card Started----------------------");
+				String creditCardNumber = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NUMBER);
+				DetailsMap.put("Credit Card Number", creditCardNumber);
+				String creditCardNameOnCreditCard = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD);
+				DetailsMap.put("Credit Card Name On Card", creditCardNameOnCreditCard);
+				String creditCardExpirationDate = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE);
+				DetailsMap.put("Credit Card Expiration Date", creditCardExpirationDate);
+				System.out.println("--------------------Storing Data for Credit Card Ended----------------------");
+				
+				//Proposed Effective Date
+				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
+				
+				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				proposedEffectiveDate = proposedEffectiveDate.substring(0, 10);
 				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
 				proposedEffectiveDate=OLEGPSValidation.converttogpsDate1(proposedEffectiveDate);
@@ -3564,7 +3583,9 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
 		DetailsMap.put("Disclosure Provider PhoneNumber", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER));
 		
+		//--------------------------Added for payment plan--------------------------------------------------------------
 		
+		DetailsMap.put("Payment Plan", (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_PLAN));
 
 		boolean Validation_Status = reviewSubmitPage.OnlineEnrollment_Review_Page_details(DetailsMap);
 		if(Validation_Status){
@@ -3836,5 +3857,62 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 				.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 		VisitorProfilePage visitorProfilePage = oleConfirmationPage.clickOnShoppingCart();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	@Then("^the user selects payment type$")
+	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
+		boolean flag = false;
+		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> paymentInformationMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			paymentInformationMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String payType = paymentInformationMap.get("Payment Type");
+		String cardNo = paymentInformationMap.get("Card No");
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo.substring(cardNo.length()-4));
+		String cardExpirationMonth = paymentInformationMap.get("Card Expiration Month");
+		String cardExpirationYear =  paymentInformationMap.get("Card Expiration Year");
+		String cardExpirationDate = cardExpirationMonth + cardExpirationYear;
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE, cardExpirationDate);
+		String cardHolderFirstName = paymentInformationMap.get("Card Holder First Name");
+		String cardHolderLastName = paymentInformationMap.get("Card Holder Last Name");
+		String cardHolderName = cardHolderFirstName+" "+cardHolderLastName;
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD, cardHolderName);
+		System.out.println("The payment type selected is "+payType);
+		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
+		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
+		System.out.println("validate premium value");
+		boolean result = planPremiumPage.validatePremiumValue();
+		if(!result)	{
+		if(payType.equalsIgnoreCase("Pay by Mail")) {
+		flag = planPremiumPage.validatePayByMail();
+		}else if(payType.equalsIgnoreCase("Credit Card")) {
+			flag = planPremiumPage.validateCreditCard(cardNo, cardExpirationMonth, cardExpirationYear, cardHolderName);	
+		}else if(payType.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
+			flag = planPremiumPage.validateSocialSecurity();	
+		}
+		if (flag) {
+			System.out.println("Payment is passed");
+			Assert.assertTrue(true);
+		}
+		else {
+			System.out.println("Payment is failed");
+			Assert.fail("Payment is failed");
+	}
+	
+		}
+		
+		else {
+			flag = planPremiumPage.validateNoMonthlyPremium();
+			if (flag) {
+				System.out.println("No Monthly Premium validation is passed");
+				Assert.assertTrue(true);
+			}
+			else {
+				System.out.println("No Monthly Premium validation is failed");
+				Assert.fail("No Monthly Premium validation is failed");
+			}
+		}
 	}
 }
