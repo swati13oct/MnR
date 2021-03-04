@@ -157,11 +157,11 @@ public class PlanPremiumPage extends UhcDriver{
 	public SupplementalBenefitsPage navigate_to_Supplemental_Riders_Page() {
 		//This button is removed from payment page on team environment
 
-		if (MRScenario.environment.equalsIgnoreCase("stage") || (MRScenario.environment.equalsIgnoreCase("offline")
+	/*	if (MRScenario.environment.equalsIgnoreCase("stage") || (MRScenario.environment.equalsIgnoreCase("offline")
 				|| MRScenario.environment.equalsIgnoreCase("prod")))
 		{
 			agreeBtn.click();
-		}
+		}*/
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
