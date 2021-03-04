@@ -15,7 +15,7 @@ import cucumber.api.CucumberOptions;
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProdPharmacyLocatorUlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = {
 		"src/main/resources/feature/acquisition/pharmacylocator/PharmacySearch-Common.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProdPharmacyLocatorUlayer.json" }, tags = { "@prodRegression" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProdPharmacyLocatorUlayer.json" }, tags = { "@prodRegression_AARP" })
 public class RunMRATDDAcquisitionProdPharmacyLocatorUlayer{ 
  
 }
