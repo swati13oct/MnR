@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PRERegression
+@PlanRecommendationEngine @PREVPPRegression
 Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan Recommendation Engine
 
   @PRE @planrecommandonation @PREVPPPage @F527967

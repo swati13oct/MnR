@@ -75,7 +75,16 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	@FindBy(css = "#errorMessage>span:nth-child(2)")
 	private WebElement errorMessage;
 	
-	@FindBy(css = "label[for*='checkbox-8-input'] >span:nth-child(1) .checkbox-check")
+	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-17-input']>span:nth-child(1) .checkbox-check")
+	private WebElement checkedTravelWithinOption;
+	
+	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-18-input']>span:nth-child(1) .checkbox-check")
+	private WebElement checkedTravelOutsideOption;
+	
+	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-19-input']>span:nth-child(1) .checkbox-check")
+	private WebElement checkedTravelRegularOption;
+	
+	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-20-input']>span:nth-child(1) .checkbox-check")
 	private WebElement checkedTravelNoneOption;
 
 
@@ -167,8 +176,15 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	}
 	
 	public void edit_travel(String options) {
-		if(checkedTravelNoneOption.isDisplayed())
+		if(checkedTravelWithinOption.isDisplayed())
+			jsClickNew(travelWithin);
+		else if(checkedTravelOutsideOption.isDisplayed())
+			jsClickNew(travelAnotherpart);
+		else if(checkedTravelRegularOption.isDisplayed())
+			jsClickNew(travelPrimary);
+		else if(checkedTravelNoneOption.isDisplayed())
 			jsClickNew(travelNone);
+		
 		String snpoptions[] = options.split(",");
 		for(String option:snpoptions) {
 			travelpageFunctional(option);
