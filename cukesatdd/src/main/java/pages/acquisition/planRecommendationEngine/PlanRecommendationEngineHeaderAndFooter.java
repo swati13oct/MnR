@@ -201,10 +201,42 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     
     @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(2) li:nth-of-type(2)>a")
     private WebElement headerFAQLink;
+    
+    @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(1)>a")
+    private WebElement headerMedicareArticles;
+    
+    @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(1)")
+    private WebElement headerEligibilityEnrollment;
+    
+    @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(2)")
+    private WebElement headerBenefitsCoverage;
+    
+    @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(3)")
+    private WebElement headerMedicareCosts;
 
+    @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(4)")
+    private WebElement headerShoppingforMedicare;
+    
+    @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(5)")
+    private WebElement headerWorkingPast65;
+    
+    @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(6)")
+    private WebElement headerMedicareTipsFAQs;
+    
+//'Read More' is Inside Medicare Articles Menu
+    
+    @FindBy(css = "div[class*='breadcrumb']")
+	private WebElement HeaderBreadcrumb;
+    
+    @FindBy(css = "div a[title='Read more about Medicare and COBRA']")
+	private WebElement HeaderReadMoreLinkInMedicareArticles;
+    
+    @FindBy(css = "div a[class*='uhc-tempo-button--primary']")
+	private WebElement HeaderGetStartedMedicareArticles;
+    
 //'Get Help Choosing' is Inside Shop Menu
     
-    @FindBy(xpath = "//div[contains(@class,'aem-Grid')]/div[contains(@class,'aem-GridColumn')]//a[contains(text(),'Learn More')]")
+    @FindBy(css = "div[class*='aem-GridColumn'] a[title='Learn More']")
 	private WebElement HeaderShopFromHomeInFindYourPlan;
     
     @FindBy(xpath = "//a[contains(text(),'Get Recommendations')]")
@@ -221,7 +253,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#gfn_lnk_row2_1 > span")
 	private WebElement footerMedicareAdvantagePlansLink;
 		
-	@FindBy(css = "#_9h82fwc49")
+	@FindBy(css = "#gfn_lnk_row2_3 span:nth-of-type(2)")
 	private WebElement footerMedicareSupplementInsurancePlansLink;
 	
 	@FindBy(css = "#gfn_lnk_row2_5 > span")
@@ -378,6 +410,14 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerMedicareprescriptionLink, 30);
 		validate(headerEnrollment, 30);
 		validate(headerFAQLink, 30);  //GeoTargeting Element
+		validate(headerMedicareArticles, 30);
+		Assert.assertTrue(headerMedicareArticles.getText().contains("Medicare Articles"));
+		validate(headerEligibilityEnrollment, 30);
+		validate(headerBenefitsCoverage, 30);
+		validate(headerMedicareCosts, 30);
+		validate(headerShoppingforMedicare, 30);
+		validate(headerWorkingPast65, 30);
+		validate(headerMedicareTipsFAQs, 30);
 	}
 	
 	
@@ -482,7 +522,28 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		}catch(Exception e) {
 			System.out.println("Geo targetting link 'Medicare FAQ' is not available");
 		}
-		
+		validate(headerNavigationBarLearnAboutMedicareTab, 45);
+		desktopCommonUtils.MouseOver(headerNavigationBarLearnAboutMedicareTab, Browsername);
+		headerMedicareArticles.click();
+		validateLinks("/medicare-articles.html");
+		backtolearnmoremodicare();
+		headerEligibilityEnrollment.click();
+		validateLinks("/medicare-articles/eligibility-and-enrollment.html");
+		backtolearnmoremodicare();
+		headerBenefitsCoverage.click();
+		validateLinks("/medicare-articles/medicare-benefits-and-coverage.html");
+		backtolearnmoremodicare();
+		headerMedicareCosts.click();
+		validateLinks("/medicare-articles/medicare-costs.html");
+		backtolearnmoremodicare();
+		headerShoppingforMedicare.click();
+		validateLinks("/medicare-articles/shopping-for-medicare.html");
+		backtolearnmoremodicare();
+		headerWorkingPast65.click();
+		validateLinks("/medicare-articles/medicare-when-working-past-65.html");
+		backtolearnmoremodicare();
+		headerMedicareTipsFAQs.click();
+		validateLinks("/medicare-articles/medicare-tips-and-faqs.html");
 		}
 		
 // PRE BreadCrumbs in Header	
@@ -620,8 +681,6 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 //		jsClickNew(headerNavigationBarShopForaPlanTab);
-		threadsleep(1000);							//E2E : Adding additional wait for element to be visible
-		validate(headerGetaPlanRecommendationLink);
 		jsClickNew(headerGetaPlanRecommendationLink);
 		jsMouseOut(headerNavigationBarShopForaPlanTab); // Chargers: Added jsMouseOut to avoid clickIntercept exceptions
 		validate(landingpageHeader, 30);
@@ -635,13 +694,34 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerShopLink);
+		scrollToView(HeaderShopFromHomeInFindYourPlan);
 		validate(HeaderShopFromHomeInFindYourPlan, 30);
 		jsClickNew(HeaderShopFromHomeInFindYourPlan);
+		scrollToView(HeaderGetRecommendationInShop);
 		validate(HeaderGetRecommendationInShop, 30);
 		jsClickNew(HeaderGetRecommendationInShop);
 		validate(landingpageHeader, 30);
 		Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
 	}
+	
+//Navigating Plan RecommendationEngine via Learning About Medicare --> Medicare Articles-->Get Started
+		public void navigationToPlanRecommendationEngineViaMedicareArticles() {
+			validate(headerNavigationBarLearnAboutMedicareTab, 45);
+			jsMouseOver(headerNavigationBarLearnAboutMedicareTab);
+			jsClickNew(headerNavigationBarLearnAboutMedicareTab);
+			jsClickNew(headerMedicareArticles);
+			validate(HeaderBreadcrumb, 30);
+			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Medicare Articles"), "Medicare Articles page not opened");
+			validate(HeaderReadMoreLinkInMedicareArticles, 30);
+			jsClickNew(HeaderReadMoreLinkInMedicareArticles);
+			validate(HeaderBreadcrumb, 30);
+			Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Medicare Articles / Medicare and COBRA"), "Medicare and COBRA page not opened");
+			scrollToView(HeaderGetStartedMedicareArticles);
+			validate(HeaderGetStartedMedicareArticles, 30);
+			jsClickNew(HeaderGetStartedMedicareArticles);
+			validate(landingpageHeader, 30);
+			Assert.assertTrue(landingpageHeader.getText().contains("Plan"));
+		}
 	
 //	Navigate to DCE
 	
