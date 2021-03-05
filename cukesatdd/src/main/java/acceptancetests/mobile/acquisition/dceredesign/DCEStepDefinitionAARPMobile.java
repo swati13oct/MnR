@@ -18,7 +18,6 @@ import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCaptureMobilePage;
 

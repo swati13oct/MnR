@@ -24,7 +24,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
+import pages.acquisition.commonpages.VisitorProfileTestHarnessPage;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 
 /**
