@@ -48,8 +48,8 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
     And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
       | Language      | <language>     |
-    Then the user validates the Pharmacies available
-      | Language | <language> |
+#    Then the user validates the Pharmacies available
+#      | Language | <language> |
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
