@@ -228,7 +228,7 @@ public class PlanPremiumPage extends UhcDriver{
 		try {
 			if(creditCard.isDisplayed())	{
 				jsClickNew(creditCard);
-				Thread.sleep(5000);
+				Thread.sleep(10000);
 				driver.switchTo().frame("ole_credit_payment");
 				actualText = creditCardText.getText();
 				expectedText = CommonConstants.CREDIT_CARD_TEXT;
