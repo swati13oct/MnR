@@ -180,7 +180,7 @@ public class PlanPremiumPage extends UhcDriver{
 	}	
 
 	public AuthorizationPage navigate_to_Authorization_Page() {
-	//	agreeBtn.click();
+		//agreeBtn.click();
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
