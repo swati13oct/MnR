@@ -18,11 +18,6 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
 
 
 /**
@@ -42,7 +37,7 @@ public class ProviderSearchStepDefinitionAARP {
 	/**
 	 * @toDo: user is on AARP Ulayer medicare acquisition site
 	 */
-	@Given("^the user is on AARP Ulayer medicare acquisition site landing page$")
+	/*@Given("^the user is on AARP Ulayer medicare acquisition site landing page$")
 	public void user_AARP_Medicare()
 	{
 		WebDriver wd = getLoginScenario().getWebDriver();
@@ -54,9 +49,9 @@ public class ProviderSearchStepDefinitionAARP {
 		
 	}
 	
-	/**
+	*//**
 	 * @toDo:user performs plan search using following information 
-	 */
+	 *//*
 	@When("^the user performs plan search using following information in the Ulayer AARP site$")
 	public void zipcode_details_in_AARP_site(DataTable givenAttributes) 
 	{
@@ -88,9 +83,9 @@ public class ProviderSearchStepDefinitionAARP {
 		
 	}
 	
-	/**
+	*//**
 	 * @toDo:user Click on Show Plans link 
-	 */
+	 *//*
 	@When("^the user Click on Show Plans link Ulayer$")
 	public void clickonshowplans(DataTable planTypeAttribute)
 	{
@@ -118,9 +113,9 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 	}
 	
-	/**
+	*//**
 	 * @toDo:user Click on Is my Provider covered link 
-	 */
+	 *//*
 		@When("^the user Click on Is my Provider covered link Ulayer$")
 		public void clickonProvidercoveredlink(DataTable Planname ){
 		{
@@ -144,9 +139,9 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 		}
 		
-	/**
+	*//**
 	 * @toDo:user user selects a provider
-	 */
+	 *//*
 	@When("^user selects a provider and retuns to VPP page in ulayer$")
 	public void user_selects_provider_and_return_vpp_page_ulayer() {
 		{
@@ -170,10 +165,10 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 			
 			
-	/**
+	*//**
 	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
 	 *              Summary page
-	 */
+	 *//*
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page Ulayer$")
 	public void verify_providers_covered_ulayer(DataTable Planname) {
 
@@ -191,10 +186,10 @@ public class ProviderSearchStepDefinitionAARP {
 		plansummaryPage.verifyproviderName(planName);
 	}
 	
-	/**
+	*//**
 	 * @toDo:Verify provider covered information is displayed on Plan
 	 *              Summary page
-	 */
+	 *//*
 	@Then("^Verify provider name is displayed on Plan Summary page Ulayer$")
 	public void verify_provider_covered_ulayer(DataTable Planname) {
 
@@ -214,9 +209,9 @@ public class ProviderSearchStepDefinitionAARP {
 	
 	
 	
-	/**
+	*//**
 	 * @toDo: user performs plan search using following information
-	 */
+	 *//*
 	@When("^the user clicks on Provider Search on the global header$")
 	public void zipcode_details_in_aarp_site() {
 		
@@ -232,9 +227,9 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 	}
 	
-	/**
+	*//**
 	 * @toDo: user Enters a zipcode
-	 */
+	 *//*
 	@When("^the user enters the zipcode and select a plan on the Rally tool$")
 	public void user_enters_the_zipcode_on_the_Rally_tool(DataTable givenAttributes) {
 
@@ -259,9 +254,9 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 	}
 	
-	/**
+	*//**
 	 * @toDo: user Enters a zipcode
-	 */
+	 *//*
 	@When("^the user enters the zipcode and counts the plan Ulayer$")
 	public void user_enters_the_zipcode_and_counts_plan(DataTable givenAttributes) {
 
@@ -295,9 +290,9 @@ public class ProviderSearchStepDefinitionAARP {
 	
 	
 		
-	/**
+	*//**
 	 * @toDo:user user selects a provider
-	 */
+	 *//*
 	@When("^user selects a provider and saves it$")
 	public void user_selects_provider_and_saves_it() {
 		{
@@ -309,9 +304,9 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 	
 	
-	/**
+	*//**
 	 * @toDo:user user selects a provider on Vpp Plan Details page
-	 */
+	 *//*
 	@When("^user selects a provider and retuns to VPP plan details page in ulayer$")
 	public void user_selects_provider_and_return_vpp_Plan_details_page_ulayer() {
 		{
@@ -323,10 +318,10 @@ public class ProviderSearchStepDefinitionAARP {
 		}
 	}
 	
-	/**
+	*//**
 	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
 	 *              Summary page
-	 */
+	 *//*
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Details page Ulayer$")
 	public void verify_providers_covered_ulayer_planDetails() {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
@@ -334,9 +329,9 @@ public class ProviderSearchStepDefinitionAARP {
 		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
 	}
 	
-	/**
+	*//**
 	 * @toDo: user performs plan search using following information
-	 */
+	 *//*
 	@When("^the user clicks on Provider Search on the Home Page$")
 	public void providerSearch_details_in_aarp_site_from_HomePage() {
 		
@@ -382,7 +377,7 @@ public class ProviderSearchStepDefinitionAARP {
 	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 			.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	
-	/*ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
+	ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
 	plansummaryPage.setStringList(providers);
 	Assert.assertFalse("Providers not added",providers.isEmpty());
 	
@@ -394,7 +389,7 @@ public class ProviderSearchStepDefinitionAARP {
 	Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
 	System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
 	// Line End for Marketing bullet points
-	*/
+	
 	ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
 	Assert.assertFalse("Providers not added",providers.isEmpty());
 	System.out.println("List of Providers in OLE page is: " + providers);
@@ -411,9 +406,9 @@ public class ProviderSearchStepDefinitionAARP {
 	}
 		
 
-/**
+*//**
 * @toDo:user user selects a Multiple providers
-*/
+*//*
 @When("^user selects a multiple providers and retuns to VPP page in Ulayer$")
 public void user_selects_a_multiple_providers_and_retuns_to_VPP_page_in_Ulayer() {
 {
@@ -423,6 +418,6 @@ public void user_selects_a_multiple_providers_and_retuns_to_VPP_page_in_Ulayer()
 	Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 }
-}
+}*/
 
 }		

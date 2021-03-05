@@ -58,7 +58,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.vppforaep.VppCommonPage;
+import pages.acquisition.vpp.VppCommonPage;
 
 /**
  * Functionality: VPP flow for AARP site

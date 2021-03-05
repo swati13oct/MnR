@@ -18,7 +18,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
+import pages.acquisition.vpp.*;
 
 /**
  * @author pperugu

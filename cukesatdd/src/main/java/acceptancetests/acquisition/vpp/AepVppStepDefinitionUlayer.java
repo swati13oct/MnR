@@ -14,9 +14,10 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.vppforaep.AepPlanDetailsPage;
-import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
-import pages.acquisition.vppforaep.DCEdatechangePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.vpp.AepPlanDetailsPage;
+import pages.acquisition.vpp.AepVppPlanSummaryPage;
+import pages.acquisition.vpp.DCEdatechangePage;
 
 /**
  * Functionality: VPP flow for AARP site 
@@ -66,7 +67,7 @@ public class AepVppStepDefinitionUlayer {
 
 	@Then("^the user validates Current year and next year links in VPP$")
 	public void the_user_validates_Current_year_and_next_year_links_in_VPP() throws Throwable {
-		pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String AEP_Flag = "true";
 		getLoginScenario().saveBean(VPPCommonConstants.AEP_FLAG, AEP_Flag);
@@ -86,9 +87,9 @@ public class AepVppStepDefinitionUlayer {
 		}
 	}
 
-	@Then("^the user validates Current year and next year links in Blayer VPP$")
+	/*@Then("^the user validates Current year and next year links in Blayer VPP$")
 	public void the_user_validates_Current_year_and_next_year_links_in_VPP_BlueLayer() throws Throwable {
-		pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String AEP_Flag = "true";
 		getLoginScenario().saveBean(VPPCommonConstants.AEP_FLAG, AEP_Flag);
@@ -106,7 +107,7 @@ public class AepVppStepDefinitionUlayer {
 			else
 				Assert.fail("VPP Page for AEP Period is not Displayed");
 		}
-	}
+	}*/
 
 	@Then("^the user validates Next year Plan summary Page for pre-AEP for below plan$")
 	public void the_user_validates_Next_year_Plan_summary_Page_for_pre_AEP_for_below_plan(DataTable arg1) throws Throwable {

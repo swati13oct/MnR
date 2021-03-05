@@ -30,6 +30,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
+import pages.acquisition.ole.OLETestHarnessPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
@@ -285,7 +286,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
-	@FindBy(xpath = "//*[contains(@class,'cta-button secondary') and contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//a[@title='Provider Search Tool']/span[contains(text(),'Find a Provider')]")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -693,26 +694,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
-			} else {
+			}else {
 				start(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
 				checkModelPopup(driver, 10);
 			}
+		}else if(site.equalsIgnoreCase("PRE")||site.equalsIgnoreCase("ARE")) {
+			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); //added on 3/3/21 as part of AARP/UHC cleanup
 		}
 
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Current page URL: " + driver.getCurrentUrl());
-		// checkModelPopup(driver,15);
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
-																			// we're not trying to fail the test if it
-																			// isn't found
-		try {
-			if (proactiveChatExitBtn.isDisplayed())
-				jsClickNew(proactiveChatExitBtn);
-		} catch (Exception e) {
-			System.out.println("Proactive chat popup not displayed");
+		if(!(site.equalsIgnoreCase("PRE")||site.equalsIgnoreCase("ARE"))) { //adding this condition temporarily to bypass PRE/ARE flows
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			// checkModelPopup(driver,15);
+			CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
+			CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+																				// we're not trying to fail the test if it
+																				// isn't found
+			try {
+				if (proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
 		}
 	}
 
@@ -2884,7 +2889,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new VPPPlanSummaryPage(driver);
 	}
 
-	public keywordSearchAARP searchfield() {
+	public KeywordSearchPage searchfield() {
 		validate(searchfield);
 		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());
 		validate(searchbutton);
@@ -2899,7 +2904,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			e.printStackTrace();
 		}
 		if (driver.getCurrentUrl().contains("medicare.html?q=medicare"))
-			return new keywordSearchAARP(driver);
+			return new KeywordSearchPage(driver);
 		return null;
 	}
 
@@ -5248,5 +5253,104 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 
 	}
+	public void openExternalLinkPRE(String site) {
+		String browser = MRScenario.browserName;
+		if (site.equalsIgnoreCase("Myuhcplans")) {
+			startNewPRE("https://myuhcplans.com/steelcase",browser);
+		}
+		if (site.equalsIgnoreCase("uhcandwellmedsa")) {
+			startNewPRE("https://www.uhcandwellmedsa.com/",browser);
+		}
+		if (site.equalsIgnoreCase("mauhcmedicaresolutions")) {
+			startNewPRE("https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage",browser);
+		}
+		if (site.equalsIgnoreCase("maaarpmedicareplans")) {
+			startNewPRE("https://ma.aarpmedicareplans.com/aarp-medicare-advantage",browser);
+		}
+		if (site.equalsIgnoreCase("uhcmedicaresolutions")) {
+			startNewPRE("https://www.uhcmedicaresolutions.com/",browser);
+		}
+		if (site.equalsIgnoreCase("aarpmedicareplans")) {
+			startNewPRE("https://www.aarpmedicareplans.com/",browser);
+		}
+	}
+	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
 
+		jsClickNew(lnkLearnAboutMedicare);
+		validateNonPresenceOfElement(zipCodeField);
+		return new LearnAboutMedicareHomePage(driver);
+	}
+	public boolean isValidatePageLoadError() {
+
+		String url = driver.getCurrentUrl();
+		System.out.println("Current page URL: " + url);
+		if (driver.findElements(By.id("medicareTitle")).isEmpty()) {
+			// if(driver.findElement(By.xpath("//*[@id='medicareTitle']/h1").id(id)){
+			System.out.println("if");
+			return false;
+		} else {
+			System.out.println("else");
+			return true;
+		}
+
+	}
+	public boolean isValidateContent(String file) {
+		if (file.contains("robot")) {
+
+			WebElement xpathvar = driver.findElement(By.xpath("/html/body/pre"));
+			String strFileContent = xpathvar.getText();
+			boolean strSiteMap = strFileContent.contains("Sitemap");
+
+			if (xpathvar.isDisplayed() && strSiteMap) {
+				System.out.println("file loaded");
+				return true;
+			} else {
+				System.out.println("file not loaded");
+				return false;
+			}
+		} else if (file.contains("sitemap")) {
+
+			WebElement xpathvar = driver.findElement(By.xpath("//*[@id='folder1']"));
+			System.out.println("xpath==" + xpathvar.getText());
+
+			if (xpathvar.isDisplayed()) {
+				System.out.println("xml id found");
+				return true;
+			} else {
+				System.out.println("xml id not found");
+				return false;
+			}
+		}
+		return false;
+	}
+	public void openTelesalesAgentPortal() {
+		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+		}else if (MRScenario.environment.contains("digital-uatv2")) {
+			startNew(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_Team);
+		}
+	}
+	
+	public void fixPrivateConnection() {
+		try {
+			// String URL = "https://self-signed.badssl.com/";
+			threadsleep(1000);
+			if (driver.findElement(By.cssSelector("body.ssl h1")).getText()
+					.contains("Your connection is not private")) {
+				driver.findElement(By.cssSelector("button#details-button")).click();
+				threadsleep(1000);
+				driver.findElement(By.cssSelector("a#proceed-link")).click();
+				threadsleep(1000);
+				pageloadcomplete();
+			}
+		} catch (Exception e) {
+			System.out.println("No SSL error / Exception");
+		}
+
+	}
+	public OLETestHarnessPage GetOLETestHarnessPage() {
+		return new OLETestHarnessPage(driver);
+	}
 }
