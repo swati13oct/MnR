@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 
 Feature: 1.12 ACQ - Global Components AARP
+=======
+@GlobalComponentsAARP
+Feature: 1.12 ACQ - Global Components Validation
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd
 
   @globalfooterULayer
   Scenario Outline: To verify links displayed in the global footer of AARP site
@@ -50,7 +55,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | UHC  |
 
   @GlobalComponentsAARPPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
+  Scenario Outline: To verify Global Components for the page mentioned of <site> site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page

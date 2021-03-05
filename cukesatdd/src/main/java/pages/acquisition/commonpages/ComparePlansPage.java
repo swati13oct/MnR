@@ -1,11 +1,11 @@
 package pages.acquisition.commonpages;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.Arrays;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -23,22 +23,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
-import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ole.WelcomePage;
-
-import pages.acquisition.commonpages.FindCarePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 public class ComparePlansPage extends UhcDriver {
 
 	
@@ -134,7 +127,7 @@ public class ComparePlansPage extends UhcDriver {
 	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
    	
-   	@FindBy(xpath="//*[contains(@class,'remove')]")
+   	@FindBy(xpath="//*[contains(@class,'delete-plan ng-scope')]")
 	private WebElement removeLink;
 	
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
@@ -305,6 +298,21 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='modal-body']/span")
 	private WebElement allSetDrugsProvidersInfo;
 
+	@FindBy(xpath="//*[text()='View Plan Details']")
+	private WebElement viewPlanDetailslink;
+	
+	@FindBy(xpath="//button[contains(@id,'headerSavePlan')]//img[contains(@class,'liked savePlanIcon')][1]")
+	private WebElement viewSaveIcon;
+	
+	@FindBy(xpath="//button[contains(@id,'headerSavePlan')]//img[contains(@class,'unliked savePlanIcon')][1]")
+	private WebElement viewUnSaveIcon;
+	
+	@FindBy(xpath="//*[@id='viewallplansBtnId']")
+	private WebElement ViewAllPlans;
+	
+	@FindBy(xpath="//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
+	private WebElement DceClosebutton;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -737,15 +745,19 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void CounterNewRemoveLink(String counter){
-		WebElement removelink = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"));
-		WebElement removePlanName = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//div[contains(@ng-if,'planName')]"));
+		WebElement removelink = driver.findElement(By.xpath("//th[contains(@ng-repeat,'plan in count')][" + counter
+				+ "]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"));
+		WebElement removePlanName = driver.findElement(By.xpath(
+				"//th[contains(@ng-repeat,'plan in count')][" + counter + "]//div[contains(@ng-if,'planName')]"));
 		String PlanName=removePlanName.getText();
 		System.out.println("3rd plan name is : " + PlanName );
 //		removelink.click();
 		jsClickNew(removelink);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 		
-	    Assert.assertTrue(!(driver.findElements(By.xpath("//th[@ng-repeat='plan in count'][1]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]")).size()>0));
+		Assert.assertTrue(!(driver.findElements(By.xpath(
+				"//th[contains(@ng-repeat,'plan in count')][1]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"))
+				.size() > 0));
 		System.out.println("remove icon is not Displaying in plan compare page");
 
 
@@ -1467,6 +1479,31 @@ public class ComparePlansPage extends UhcDriver {
 		}
 		else
 			Assert.fail("DIsplayed Estimated Annual Drug Costs DOES NOT Match the same displayed on DCE details page for the plan : "+PlanName);
+		
+	}
+	
+	public void validateALLFiledsPlanComparePage() {
+		validateNew(backToAllPlansLink);
+		validateNew(validateprintbutton);
+		validateNew(validateemailbutton);
+		validateNew(removeLink);
+		validateNew(viewPlanDetailslink);
+		validateNew(viewUnSaveIcon);
+		validateNew(ViewAllPlans);
+		validateNew(addPlanButton);
+		System.out.println("Validated all links plan compare");
+		
+	}
+	
+	public void validateViewALLplanButtonNotDisplayed() {
+		 Assert.assertFalse("view all plans button must not be visible", !(driver.findElements(By.xpath("//*[@id='viewallplansBtnId' and contains(@class,'ng-hide')]")).size()>0));		
+		 System.out.println("Validated view all plans link not displayed on plan compare");
+	}
+	
+	public void dceModelClosepopup(){
+		validateNew(DceClosebutton);
+		jsClickNew(DceClosebutton);
+		System.out.println("Clicked on Close button on DCE model popup");
 		
 	}
 }

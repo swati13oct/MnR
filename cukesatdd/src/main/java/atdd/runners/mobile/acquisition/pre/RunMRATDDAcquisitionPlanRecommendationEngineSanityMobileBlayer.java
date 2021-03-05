@@ -14,7 +14,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=0, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition.planrecommendationengine" }, features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/"}, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer.json" }, 
-tags = {"@MobileVerifyEdit"})
+tags = {"@PDPdrugmobile"})
 public class RunMRATDDAcquisitionPlanRecommendationEngineSanityMobileBlayer {
 
 }

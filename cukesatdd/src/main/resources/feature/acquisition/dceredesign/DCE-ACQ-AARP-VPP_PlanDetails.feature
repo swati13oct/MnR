@@ -688,10 +688,10 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planname                                           |
       | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @dCERedesign_ChangePharmacyDetailsNoResults_UHC @drugDetailschangePharmacyAARP
+    @dCERedesign_ChangePharmacyDetailsNoResults_UHC @drugDetailschangePharmacyUHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | zipCode1 | message                                                                                                    | planname                                           |
-      | AARP |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | AARP Medicare Advantage SecureHorizons Focus (HMO) |
+      | UHC	 |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @dCERedesign_PlanSave_AARP @F476042 @decRelease
   Scenario Outline: Test to verify unauthenticated user save the plan on drug details page and see the saved plan on guest profile
@@ -780,7 +780,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | planyear | planname                        |
       | AARP |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | future   | AARP MedicareRx Walgreens (PDP) |
 
-    @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP_UHC @drugDetailschangePharmacyAARP
+    @dce_Redesign_VPP_PlanDetails_Pharmacy_PDP_UHC @drugDetailschangePharmacyUHC
     Examples: 
       | site | zipcode | planyear | planyear | plantype | county       | isMultutiCounty | drug1     | zipCode1 | planyear | planname                        |
       | UHC  |   80002 | current  | future   | PDP      | Adams County | yes             | meloxicam |    78006 | future   | AARP MedicareRx Walgreens (PDP) |
