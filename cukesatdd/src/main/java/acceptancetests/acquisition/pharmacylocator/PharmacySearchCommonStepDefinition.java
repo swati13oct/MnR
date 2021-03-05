@@ -24,6 +24,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 
 public class PharmacySearchCommonStepDefinition {
@@ -588,5 +589,19 @@ public class PharmacySearchCommonStepDefinition {
 		
 	}
 
-		
+	@Then("^the user clicks on the following language Pharmacy Directory Link$")
+	public void the_user_clicks_on_the_following_language_Pharmacy_Directory_Link(DataTable inputAttributes) throws Throwable {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String Language = inputAttributesMap.get("Language");
+		String County = inputAttributesMap.get("County");
+		WebDriver testDriver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		PlanDetailsPage vppPlanDetailsPage = new PlanDetailsPage(testDriver);
+		PharmacySearchPage pharmacySearchPage = vppPlanDetailsPage.planDetails_ClickPharmacyDirectoryforLanguage(Language, County);
+		if(null!=pharmacySearchPage) {
+			getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		}
+		else
+			Assert.fail("Navigation to Pharmacy Page for Language - "+Language+" FAILED");
+	}
+
 }

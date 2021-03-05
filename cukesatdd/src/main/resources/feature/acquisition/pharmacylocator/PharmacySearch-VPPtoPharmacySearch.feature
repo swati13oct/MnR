@@ -7,7 +7,8 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
       | PageName | <pageName> |
       | PagePath | <path>     |
     Then the user clicks on the following language Pharmacy Directory Link
-      | Language | <language> |
+      | Language | <language>             |
+      | County   | <countyForPlanDetails> |
     #	Then the user validates following language Pharmacy page is displayed
     #		| Language | <language> |
     And the user validates header section content on site
@@ -54,5 +55,5 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
 
     @Pharmacy_FromVPP_PharmacyDirectory_AARP
     Examples: 
-      | TID                | site | language | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | Chinese - Pharmacy | AARP | Chinese  | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | Chinese - Pharmacy | UHC | Chinese  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
