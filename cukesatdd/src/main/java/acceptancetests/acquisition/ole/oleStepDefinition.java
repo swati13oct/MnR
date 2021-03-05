@@ -3870,7 +3870,7 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		}
 		String payType = paymentInformationMap.get("Payment Type");
 		String cardNo = paymentInformationMap.get("Card No");
-		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo.substring(cardNo.length()-4));
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo);   //.substring(cardNo.length()-4));
 		String cardExpirationMonth = paymentInformationMap.get("Card Expiration Month");
 		String cardExpirationYear =  paymentInformationMap.get("Card Expiration Year");
 		String cardExpirationDate = cardExpirationMonth + cardExpirationYear;
