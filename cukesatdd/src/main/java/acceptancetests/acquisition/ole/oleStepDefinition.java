@@ -2181,6 +2181,7 @@ public class oleStepDefinition {
 				else
 					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
 			}*/
+			if(!planType.contentEquals("PDP")){
 				PlanPremiumPage  planPremiumPage = (PlanPremiumPage) pcpPage.navigate_to_Plan_Premium_Page();
 				if (planPremiumPage != null) {
 
@@ -2191,7 +2192,7 @@ public class oleStepDefinition {
 				else
 					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
 			
-		//}
+		}
 	}
 
 	@Then("^the user navigates to Optional Benefits Page for following plans with available Riders$")
