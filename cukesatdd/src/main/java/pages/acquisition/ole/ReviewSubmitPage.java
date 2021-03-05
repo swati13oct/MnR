@@ -663,6 +663,8 @@ public class ReviewSubmitPage extends UhcDriver{
 				String DisclosureProviderZipDisplay= detailsMap.get("Disclosure Provider Zip");
 				String DisclosureProviderPhoneNumberDisplay= detailsMap.get("Disclosure Provider PhoneNumber");
 				
+				String expectedText = "0.00";
+				
 				String paymentPlan = detailsMap.get("Payment Plan");
 				
 				boolean flag = true;
@@ -725,7 +727,12 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(MailStreetDisplays,Mailing_Street);		
 				//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
 				flag&=validateText(MailCityDisplay,Mailing_City);
-				flag&=validateText(paymentPlanDisplay,paymentPlan);
+				
+				
+				if(!expectedText.contains("0.00")) {
+					flag&=validateText(paymentPlanDisplay,paymentPlan);
+					}
+				
 				
 				//-------------Adding the Line for CSNP Plans-------------------------//
 				
