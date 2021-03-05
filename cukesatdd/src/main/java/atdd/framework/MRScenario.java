@@ -226,11 +226,13 @@ public class MRScenario {
 				.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER)
 						? CommonConstants.SAUCELABS_DEFAULT_MOBILE_TUNNEL
 						: System.getProperty(CommonConstants.SAUCELABS_MOBILE_TUNNEL_IDENTIFIER));
-		
+
 		appiumVersion = mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT)
 				? CommonConstants.APPIUM_DEFAULT_VERSION
 				: (null == props ? System.getProperty(CommonConstants.APPIUM_VERSION)
 						: props.get(CommonConstants.APPIUM_VERSION));
+
+	
 
 		/*
 		 * appiumVersion = (null == System.getProperty(CommonConstants.APPIUM_VERSION) ?
@@ -1065,8 +1067,8 @@ public class MRScenario {
 			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 			// System.setProperty("webdriver.chrome.driver", pathToBinary);
-			System.setProperty("webdriver.chrome.driver",
-					"C:\\Users\\hahire\\Downloads\\driver\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\hahire\\Downloads\\driver\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
 			webDriver = new ChromeDriver();
 			saveBean(CommonConstants.WEBDRIVER, webDriver);
 			return webDriver;
@@ -1324,7 +1326,7 @@ public class MRScenario {
 		}
 		return mobileDriver;
 	}
-	
+
 	public static Connection getGPSuat3Connection() throws SQLException {
 
 		Connection con = null;
