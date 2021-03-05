@@ -19,8 +19,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.acquisition.commonpages.*;
 
 /**
  * @author pgrover1
@@ -130,7 +129,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 	}
 
 	
-	public ZipcodeLookupHomePage looksupforZipcodes() {
+	/*public ZipcodeLookupHomePage looksupforZipcodes() {
 		lookzip.click();
 		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
 		System.out.println(zipCodeSearchPopupHeading.getText());
@@ -139,7 +138,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 			return new ZipcodeLookupHomePage(driver);
 		}
 		return null;
-	}
+	}*/
 	
 	public void validatesplandropdown(String planname)
 	{
@@ -241,7 +240,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 			Assert.fail("Plan year dropdown not displayed");
 	}
 	
-	public Rallytool_Page navigatetoRally()
+	/*public Rallytool_Page navigatetoRally()
 	{
 		providerLink.click();
 		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
@@ -253,7 +252,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 	    else
 	    	return null;
 		
-	}
+	}*/
 
 	
 	public JSONObject getActualPdfLinksData() {

@@ -18,7 +18,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.ulayer.PageTitleConstants;
 
 public class BuildYourDrugList extends UhcDriver {
 

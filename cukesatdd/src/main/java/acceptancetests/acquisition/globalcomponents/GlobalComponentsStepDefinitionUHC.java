@@ -17,15 +17,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.AboutUsPage;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AgentsAndBrokersPage;
-import pages.acquisition.bluelayer.ContactUsUmsPage;
-import pages.acquisition.bluelayer.DisclaimersPage;
-import pages.acquisition.bluelayer.EnterZipCodePage;
-import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
-import pages.acquisition.bluelayer.SiteMapUMSPage;
-import pages.acquisition.bluelayer.TermsOfUseUmsPage;
+
 
 /**
  * Functionality: Global Header Footer
@@ -42,19 +34,19 @@ public class GlobalComponentsStepDefinitionUHC {
 	/**
 	 * @toDo:the user is on the UHC Medicaresolutions Site
 	 */
-	@Given("^the user is on the UHC Medicaresolutions Site$")
+	/*@Given("^the user is on the UHC Medicaresolutions Site$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+	//	AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		//getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 
-	/**
+	*//**
 	 * @toDo:user accesses global footer
-	 */
+	 *//*
 	@When("^user accesses global footer UHC Medicaresolutions Site$")
 	public void the_user_accesses_GlobalFooter_UHC_Medicaresolutions_Site() {
 
@@ -69,9 +61,9 @@ public class GlobalComponentsStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:user clicks on Sitemap link from home page footer
-	 */
+	 *//*
 	@And("^the user clicks on Sitemap link from home page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Sitemap_links_ums() {
 
@@ -87,9 +79,9 @@ public class GlobalComponentsStepDefinitionUHC {
 		}
 	}
 
-	/**
+	*//**
 	 * @toDo:user clicks on Aboutus link from home page footer
-	 */
+	 *//*
 	@And("^the user clicks on Aboutus link from home page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Aboutus_links_ums() {
 
@@ -107,9 +99,9 @@ public class GlobalComponentsStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:user clicks on Contactus link from about us page footer
-	 */
+	 *//*
 	@And("^the user clicks on Contactus link from about us page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Contactus_link_ums() {
 
@@ -126,9 +118,9 @@ public class GlobalComponentsStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:user clicks on Privacy Policy link from Contactus page footer
-	 */
+	 *//*
 	@And("^the user clicks on Privacy Policy link from Contactus page footer UHC Medicaresolutions Site$")
 	public void user_clicks_PrivacyPolicy_link_ums() {
 
@@ -143,11 +135,11 @@ public class GlobalComponentsStepDefinitionUHC {
 			Assert.fail("Error in Private policy page");
 		}
 
-	}
-
-	/**
+	}*/
+/*
+	*//**
 	 * @toDo:user clicks on Terms of use link from Privacy Policy page footer
-	 */
+	 *//*
 	@And("^the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site$")
 	public void user_clicks_TermsOfUse_link_ums() {
 
@@ -164,9 +156,9 @@ public class GlobalComponentsStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:user clicks on Disclaimers link from Terms of use page footer
-	 */
+	 *//*
 	@And("^the user clicks on Disclaimers link from Terms of use page footer UHC Medicaresolutions Site$")
 	public void user_clicks_Disclaimers_link_ums() {
 
@@ -182,9 +174,9 @@ public class GlobalComponentsStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:user clicks on Agents & Brokers link from Disclaimers page footer
-	 */
+	 *//*
 	@And("^the user clicks on Agents & Brokers link from Disclaimers page footer UHC Medicaresolutions Site$")
 	public void user_clicks_AgentsAndBrokers_link_ums() {
 
@@ -199,7 +191,7 @@ public class GlobalComponentsStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:user verifies home link of agents&brokers
 	 *//*
 		 * @And("^user verifies home link of agents&brokers page bluelayer$") public
@@ -210,10 +202,10 @@ public class GlobalComponentsStepDefinitionUHC {
 		 * AcquisitionHomePage aquisitionHomePageReload =
 		 * aquisitionhomepage.homeFooterClick();
 		 * Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); }
-		 */
-	/**
+		 
+	*//**
 	 * @toDo:user clicks on Request Assistance and validates modal window
-	 */
+	 *//*
 	@And("^user clicks on Request Assistance and validates modal window bluelayer$")
 	public void user_clicks_on_Request_Assistance_and_validates_modal_window_blayer() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -301,9 +293,9 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 		aquisitionhomepage.navigateToPath(path);
 	}
 
-	/**
+	*//**
 	 * @toDo:user accesses global footer
-	 */
+	 *//*
 	@When("^user accesses global footer of the UHC Medicare Solutions All page$")
 	public void access_global_footer_uhc_all_pages() {
 
@@ -415,5 +407,5 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatIcon();
-	}
+	}*/
 }
