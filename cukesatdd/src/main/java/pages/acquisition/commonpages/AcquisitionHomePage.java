@@ -5468,7 +5468,7 @@ public VPPPlanSummaryPage searchPlansWithOutCountyForExternalLink(String zipcode
 			Assert.fail("TFN elemet is not found / displayed on Call popup icon : ");
 
 		System.out.println("#######Validating TFN time zone on Call Popup#######");
-		String ExpectedCallSamTFNtimezone = "7AM-11PM ET, Monday-Friday\n9AM-5PM ET, Saturday";
+		String ExpectedCallSamTFNtimezone = "7 a.m. – 11 p.m. ET, Monday-Friday\n9 a.m. – 5 p.m. ET, Saturday";
 		validateNew(CallSamTFNMedsupptimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNMedsupptimezone.getText();
 
