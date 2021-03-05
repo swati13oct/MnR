@@ -31,8 +31,8 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-    Then the user validates the pharmacies available
-      | Language | <language> |
+    #Then the user validates the pharmacies available
+    #  | Language | <language> |
     And the user validate tooltips on filters
       | Language                                   | <language>              |
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
