@@ -18,7 +18,7 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.agentRecommendationEngine.AREAgentLoginSearch;
 import pages.acquisition.agentRecommendationEngine.AREPlanRanking;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class AgentRecommendationEngineStepDefinition {
 
@@ -46,7 +46,7 @@ public class AgentRecommendationEngineStepDefinition {
 	@Given("^the agent is on shopper profile login page$")
 	public void the_agent_on_shopperprofile_login_site() {
 		wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "ARE", true);
+		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "ARE"); //changed on 3/3/21 as part of AARP/UHC cleanup
 		aquisitionhomepage.openTelesalesAgentPortal();
 		aquisitionhomepage.fixPrivateConnection();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
