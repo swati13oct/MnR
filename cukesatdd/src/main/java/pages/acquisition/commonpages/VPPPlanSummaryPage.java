@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -6029,7 +6030,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public List<String> getAllPlanNames(String planType) {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
-			if(planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+			if(planType.equals("PDP") && MRScenario.browsername.equalsIgnoreCase("Safari")) {
 				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
 			} else {
 				allPlanNames.add(plan.getText().trim());
@@ -6734,3 +6735,4 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 			return null;
 }
 }
+

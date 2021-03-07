@@ -17,11 +17,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+
 import pages.acquisition.commonpages.ComparePlansPage;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidget;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPage;
-import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidget;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPage;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -517,18 +515,7 @@ public void comparePlanslnk() throws InterruptedException{
 			
 		}
 
-		public VPPAarpNeedAStepBackWidget validateStepBackWidget(){
-			 return new VPPAarpNeedAStepBackWidget(driver);
-		}
-		public VPPAarpNeedHelpWidgetPage validateNeedHelpWidget(){
-			 return new VPPAarpNeedHelpWidgetPage(driver);
-		}
-		public VPPNeedMoreInformationWidget validateNeedMoreInformationWidget(){
-			 return new VPPNeedMoreInformationWidget(driver);
-		}
-		public VPPRequestSendEmailPage validateEmailWidget(){
-			 return new VPPRequestSendEmailPage(driver);
-		}
+		
 		public PlanSelectorPage navigateToPlanSelectorPage(){
 			 planSelector.click();
 			 try {
