@@ -17,11 +17,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidgetMobile;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPageMobile;
-import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidgetMobile;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPageMobile;
+
+import pages.acquisition.commonpages.ComparePlansPage;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -517,18 +515,7 @@ public void comparePlanslnk() throws InterruptedException{
 			
 		}
 
-		public VPPAarpNeedAStepBackWidgetMobile validateStepBackWidget(){
-			 return new VPPAarpNeedAStepBackWidgetMobile(driver);
-		}
-		public VPPAarpNeedHelpWidgetPageMobile validateNeedHelpWidget(){
-			 return new VPPAarpNeedHelpWidgetPageMobile(driver);
-		}
-		public VPPNeedMoreInformationWidgetMobile validateNeedMoreInformationWidget(){
-			 return new VPPNeedMoreInformationWidgetMobile(driver);
-		}
-		public VPPRequestSendEmailPageMobile validateEmailWidget(){
-			 return new VPPRequestSendEmailPageMobile(driver);
-		}
+		
 		public PlanSelectorPage navigateToPlanSelectorPage(){
 			 planSelector.click();
 			 try {
@@ -1111,9 +1098,9 @@ public void comparePlanslnk() throws InterruptedException{
                  return null;
          }
 				 
-				 public PlanComparePage navigateToPlanCompare(String planName){
+				 public ComparePlansPage navigateToPlanCompare(String planName){
 						driver.findElement(By.xpath("//*[@id='compare-"+planName+"']/parent::span/following-sibling::p")).click();
-							return new PlanComparePage(driver);
+							return new ComparePlansPage(driver);
 					
 					}
 					

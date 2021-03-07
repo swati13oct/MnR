@@ -19,8 +19,8 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
+import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
+
 
 /**
  * @author pgrover1
@@ -130,13 +130,13 @@ public class PlanPreviewPage extends GlobalWebElementsMobile {
 	}
 
 	
-	public ZipcodeLookupHomePage looksupforZipcodes() {
+	public ZipcodeLookupHomePageMobile looksupforZipcodes() {
 		lookzip.click();
 		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
 		System.out.println(zipCodeSearchPopupHeading.getText());
 		if (zipCodeSearchPopupHeading.getText().equalsIgnoreCase("Find a ZIP code")) {
 			System.out.println("zipCodeSearchPopupHeading");
-			return new ZipcodeLookupHomePage(driver);
+			return new ZipcodeLookupHomePageMobile(driver);
 		}
 		return null;
 	}

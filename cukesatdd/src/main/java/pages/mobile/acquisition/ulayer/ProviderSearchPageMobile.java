@@ -20,7 +20,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.PlanDetailsPage;
+
 
 /**
  * @author pperugu

@@ -1,6 +1,6 @@
 package pages.mobile.acquisition.commonpages;
 
-/*@author pagarwa5*/
+/*@author eb*/
 
 import java.io.File;
 import java.util.List;
@@ -8,8 +8,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -45,43 +43,6 @@ public class SelectGenericPage extends UhcDriver {
 		genericDrug = CommonUtility.readPageData(fileName,
 				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
 		openAndValidate();
-	}
-
-	public ManageDrugPage selectGeneric(String drugDosage) {
-		for (WebElement dosage : drugs) {		
-				if (dosage.getText().equalsIgnoreCase(drugDosage) && !dosage.isSelected()) {
-
-					dosage.click();
-					System.out.println("not selected");
-
-				}
-		}
-		
-		continueButton.click();
-		try {
-			if (genericDrugSection.isDisplayed()) {
-				CommonUtility.waitForElementToDisappear(driver, genericDrugSection,
-						CommonConstants.TIMEOUT_30);
-			}
-		} catch (NoSuchElementException e) {
-			System.out.println("Generic Drug Section not found"+e);
-		}
-		catch (TimeoutException ex)
-		{
-			System.out.println("Generic Drug Section not found"+ex);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Generic Drug Section not found"+e);
-		}
-		if (currentUrl().contains("manageDrugList")) {
-			return new ManageDrugPage(driver);
-		} else {
-			return null;
-		}
-
-		
-		
 	}
 
 	@Override
@@ -136,25 +97,10 @@ public class SelectGenericPage extends UhcDriver {
 		
 		
 	}
-	
+
 	public JSONObject getExpectedData(String drugName, String drugDosageWithQty)
 	{
 		JSONObject selectGenericExpectedJson = null;
 		return selectGenericExpectedJson;
 	}
-
-//	public JSONObject getExpectedData(String drugName, String drugDosageWithQty)
-//	{
-//		String fileName = drugName;
-//		String directory = CommonConstants.ACQUISITION_EXPECTED_DIRECTORY+File.separator+CommonConstants.SITE_ULAYER+File.separator+DceCommonConstants.SELECT_GENERIC_FLOW_NAME+File.separator;
-//		JSONObject selectGeneric = MRScenario.readExpectedJson(fileName, directory);
-//		JSONObject selectGenericExpectedJson = null;
-//		try {
-//			selectGenericExpectedJson = selectGeneric.getJSONObject(drugDosageWithQty);
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return selectGenericExpectedJson;
-//	}
 }

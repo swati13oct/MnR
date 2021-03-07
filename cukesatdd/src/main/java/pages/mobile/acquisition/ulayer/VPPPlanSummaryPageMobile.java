@@ -39,9 +39,9 @@ import io.appium.java_client.ios.IOSDriver;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
-import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
-import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+
+import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.vpp.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
@@ -4834,7 +4834,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public DrugCostEstimatorPageMobile navigateToDCE(String plantype) {
+	public pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile navigateToDCE(String plantype) {
 
 		if (plantype.equals("MA") || plantype.equals("MAPD")) {
 
@@ -4850,7 +4850,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, step1, 30);
 		validateNew(step1);
 		if (currentUrl().contains("/drug-cost-estimator"))
-			return new DrugCostEstimatorPageMobile(driver);
+			return new pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile(driver);
 		return null;
 
 	}

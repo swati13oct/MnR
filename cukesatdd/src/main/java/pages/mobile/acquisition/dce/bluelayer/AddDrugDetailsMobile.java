@@ -16,9 +16,8 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.SavingsOppurtunity;
-import pages.acquisition.ulayer.PageTitleConstants;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
+import pages.mobile.acquisition.commonpages.PageTitleConstants;
 
 public class AddDrugDetailsMobile extends UhcDriver {
 

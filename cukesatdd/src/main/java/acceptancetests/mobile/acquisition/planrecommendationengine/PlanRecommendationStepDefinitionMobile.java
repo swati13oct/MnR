@@ -8,29 +8,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineEditResponsePage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePrioritiesPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
-import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
-import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage;
-import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
-import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.EditResponseMobilePage;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.mobile.acquisition.vpp.VPPCommonConstantsMobile;
@@ -47,9 +24,20 @@ import cucumber.api.java.en.When;
 
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.bluelayer.PlanSelectorNewPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.ACQDrugCostEstimatorPage;
+import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
+import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.EditResponseMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
+import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineAdditionalServicesPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineCommonutilityMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineCostPreferencesPageMobile;
@@ -64,6 +52,10 @@ import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngin
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineResultsPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineSpecialNeedsPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineTravelPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
 
 public class PlanRecommendationStepDefinitionMobile {
 

@@ -26,14 +26,14 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AddDrugDetails;
-import pages.acquisition.bluelayer.AddNewDrugModal;
-import pages.acquisition.bluelayer.ComparePlansPageBlayer;
-import pages.acquisition.bluelayer.EditDrugDetails;
-import pages.acquisition.bluelayer.SavingsOppurtunity;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.VisitorProfilePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.mobile.acquisition.commonpages.AddDrugDetails;
+import pages.mobile.acquisition.commonpages.AddNewDrugModal;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.EditDrugDetails;
+import pages.mobile.acquisition.commonpages.SavingsOppurtunity;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
@@ -2035,21 +2035,21 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		}
 	}
 	
-	public ComparePlansPageBlayer clickBtnBackToPlancompare() throws InterruptedException {
+	public ComparePlansPageMobile clickBtnBackToPlancompare() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, VerifyEstimatedDrugCost, 60);
-		return new ComparePlansPageBlayer(driver);
+		return new ComparePlansPageMobile(driver);
 		
 	}	
 	
-	public ComparePlansPageBlayer clickBtnBackToPlancomparenew() throws InterruptedException {
+	public ComparePlansPageMobile clickBtnBackToPlancomparenew() throws InterruptedException {
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, planCompareVerifyEstimatedDrugCostValue, 60);
-		return new ComparePlansPageBlayer(driver);
+		return new ComparePlansPageMobile(driver);
 
 	}
 	

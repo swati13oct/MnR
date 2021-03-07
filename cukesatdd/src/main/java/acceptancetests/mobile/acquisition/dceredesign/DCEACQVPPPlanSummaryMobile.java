@@ -12,17 +12,12 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
@@ -314,7 +309,7 @@ public class DCEACQVPPPlanSummaryMobile {
 
 		//plansummaryPage.viewPlanSummary(plantype);
 
-		GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
+		pages.mobile.acquisition.ulayer.GetStartedPageMobile getStartedPage = plansummaryPage.navigateToDCERedesignFromVPPPlanCard(plantype, planName);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
 		if (null != getStartedPage) {

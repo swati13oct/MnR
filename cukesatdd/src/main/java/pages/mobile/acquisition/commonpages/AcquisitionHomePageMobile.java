@@ -2049,5 +2049,40 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		validateNew(backToTop);
 		backToTop.click();
 	}
+	
+	public void validateChatProActive() {
+		boolean present;
+		CommonUtility.waitForPageLoadNew(driver, ProActivePopup, 30);
+		validateNew(ProActivePopup);
+		validateNew(ProActivePopup_Close);
+		validateNew(ProActivePopup_ExitBtn);
+		validateNew(ProActivePopup_ChatBtn);
+		present = true;
+		if (ProActivePopup.isEnabled() && ProActivePopup_Close.isEnabled() && ProActivePopup_ExitBtn.isEnabled()
+				&& ProActivePopup_ChatBtn.isEnabled()) {
+			System.out.println("@@@@@@@@@ Able to find Pro-Active Chat widget @@@@@@@@@");
+		} else {
+			System.out.println("@@@@@@@@@ No Pro-Active widget @@@@@@@@@");
+			Assert.fail();
+		}
+	}
+	
+	public void validateProActiveChatpopup() {
+		validateNew(ProActivePopup_ChatBtn);
+		jsClickNew(ProActivePopup_ChatBtn);
+		System.out.println("@@@@@@@@@@@@@@@ Pro-Avtive Chat Button Clicked @@@@@@@@@@@@@@@");
+		validateandcloseChat();
+	}
+	
+	private void validateandcloseChat() {
+		driver.switchTo().activeElement();
+		validateNew(ProActivechatPopup);
+		validateNew(ChatSamTFNClose);
+		System.out.println(ProActivechatPopup.getText());
+		jsClickNew(ChatSamTFNClose);
+		System.out.println("Exiting Chat");
+		validateNew(chatsam);
+
+	}
 
 }

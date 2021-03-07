@@ -1,7 +1,4 @@
 
-
-
-
 package pages.mobile.acquisition.ulayer;
 
 import java.util.List;
@@ -22,7 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.ZipcodeLookupPage;
+import pages.acquisition.commonpages.ZipcodeLookupPage;
 
 /**
  * @author pperugu

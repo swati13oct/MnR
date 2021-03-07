@@ -20,7 +20,6 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;

@@ -31,12 +31,6 @@ import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.FindCarePage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -276,7 +270,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	}
 
-	public VPPPlanSummaryPage backToVPPPage() {
+	public pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile backToVPPPage() {
 		backToAllPlansLink.click();
 		try {
 			Thread.sleep(4000);
@@ -285,7 +279,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (currentUrl().contains("#/plan-summary"))
-			return new VPPPlanSummaryPage(driver);
+			return new pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile(driver);
 		return null;
 	}
 
@@ -623,7 +617,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public ComparePlansPage validateChatSamContent() throws InterruptedException {
+	public ComparePlansPageMobile validateChatSamContent() throws InterruptedException {
 
 		Actions action = new Actions(driver);
 		WebElement element = chatsam;
@@ -636,14 +630,14 @@ public class ComparePlansPageMobile extends UhcDriver {
 		if (ChatSamText.equalsIgnoreCase(ChattoolTipText)) {
 			System.out.println(
 					"Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
-			return new ComparePlansPage(driver);
+			return new ComparePlansPageMobile(driver);
 		} else
 			System.out.println(
 					"No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
 		return null;
 	}
 
-	public ComparePlansPage validateChatpopup() throws InterruptedException {
+	public ComparePlansPageMobile validateChatpopup() throws InterruptedException {
 		// CommonUtility.checkPageIsReady(driver);
 		chatsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
@@ -1342,6 +1336,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName,
 				viewLocationPopupProviderName.getText());
 	}
+	
+	
 
 	public void CounterDentalFlyerLink(String counter, String Documentcode) throws Exception {
 		String ParentWindow = driver.getTitle();

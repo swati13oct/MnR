@@ -16,7 +16,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+
 
 public class VPPTestHarnessPageMobile extends UhcDriver {
 

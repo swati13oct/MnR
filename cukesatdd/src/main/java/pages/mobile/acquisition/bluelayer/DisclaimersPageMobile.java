@@ -12,7 +12,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.PageTitleConstants;
+import pages.mobile.acquisition.commonpages.PageTitleConstants;
+
 
 /**
  * @author saduri

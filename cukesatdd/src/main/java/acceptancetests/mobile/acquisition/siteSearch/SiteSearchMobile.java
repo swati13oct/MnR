@@ -1,8 +1,5 @@
 package acceptancetests.mobile.acquisition.siteSearch;
 
-import gherkin.formatter.model.DataTableRow;
-import io.appium.java_client.AppiumDriver;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -12,23 +9,22 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile;
-//import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import gherkin.formatter.model.DataTableRow;
+import io.appium.java_client.AppiumDriver;
+import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
+import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+//import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
+import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
+import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
 /**
  * Functionality: VPP flow for AARP site

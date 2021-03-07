@@ -31,11 +31,8 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.PlanInformationPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.mobile.acquisition.commonpages.PlanInformationPage;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -365,11 +362,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public VPPPlanSummaryPage backtoPlanSummary(String planType) {
+	public VPPPlanSummaryPageMobile backtoPlanSummary(String planType) {
 		validate(backToAllPlans);
 		if (backToAllPlans != null) {
 			backToAllPlans.click();
-			return new VPPPlanSummaryPage(driver, planType);
+			return new VPPPlanSummaryPageMobile(driver, planType);
 		}
 
 		return null;

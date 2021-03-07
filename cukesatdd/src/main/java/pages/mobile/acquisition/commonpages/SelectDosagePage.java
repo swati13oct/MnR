@@ -1,6 +1,6 @@
 package pages.mobile.acquisition.commonpages;
 
-/*@author pagarwa5*/
+/*@author eb*/
 
 import java.util.List;
 
@@ -35,6 +35,9 @@ public class SelectDosagePage extends UhcDriver {
 	@FindBy(name = "Quantity")
 	WebElement quantityField;
 
+	@FindBy(id = "content")
+	WebElement drugDetails;
+	
 	@FindBy(linkText = "Continue")
 	WebElement continueButton;
 
@@ -51,11 +54,11 @@ public class SelectDosagePage extends UhcDriver {
 	public SelectDosagePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		CommonUtility.waitForPageLoad(driver, quantityField,
-				CommonConstants.TIMEOUT_30);
+		CommonUtility.waitForPageLoad(driver, drugDetails,
+				6);
 		String fileName = CommonConstants.DRUG_DOSAGE_PAGE_DATA;
 		drugDosageInfo = CommonUtility.readPageData(fileName,
-				CommonConstants.PAGE_OBJECT_DIRECTORY_ULAYER_ACQ);
+				CommonConstants.RETIREE_PAGE_OBJECT_DIRECTORY);
 		openAndValidate();
 	}
 
@@ -120,9 +123,7 @@ public class SelectDosagePage extends UhcDriver {
 		}
 		if (currentUrl().contains("selectGeneric")) {
 			return new SelectGenericPage(driver);
-		} else if(currentUrl().contains("manageDrugList")) {
-			return new ManageDrugPage(driver);
-		}
+		} 
 		else
 		{
 			return null;
@@ -148,8 +149,8 @@ public class SelectDosagePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		validate(quantityField);
-		validate(continueButton);
+		//validate(quantityField);
+		//validate(continueButton);
 		JSONObject jsonObject = new JSONObject();
 		for (String key : drugDosageInfo.getExpectedData().keySet()) {
 			List<WebElement> elements = findElements(drugDosageInfo

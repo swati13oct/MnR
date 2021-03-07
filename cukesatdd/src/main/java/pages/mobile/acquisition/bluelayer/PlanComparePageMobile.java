@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.PlanComparePage;
+
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
@@ -52,14 +52,14 @@ public class PlanComparePageMobile extends UhcDriver{
 		
 	}
 
-	public PlanComparePage validateHaderAndFooter(){
+	public PlanComparePageMobile validateHaderAndFooter(){
 		validate(homeLink);
 		validate(ourPlansLink);
 		validate(medicareEducationLink);
 		validate(searchTextBox);
 		validate(backToTopLink);
 		validate(homeFooterLink);
-		return new PlanComparePage(driver);
+		return new PlanComparePageMobile(driver);
 	}
 	
 	/**

@@ -9,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 
 public class PlanRecommendationEngineCostPreferencesPageMobile extends UhcDriver {
 
@@ -21,7 +22,7 @@ public class PlanRecommendationEngineCostPreferencesPageMobile extends UhcDriver
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, AcquisitionHomePageMobile.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 

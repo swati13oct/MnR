@@ -9,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
-import pages.acquisition.bluelayer.GlobalWebElements;
+import pages.acquisition.commonpages.GlobalWebElements;
+
 
 /**
  * @author saduri

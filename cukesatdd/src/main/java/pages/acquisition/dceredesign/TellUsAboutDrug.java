@@ -16,7 +16,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.PageTitleConstants;
 
 public class TellUsAboutDrug extends UhcDriver {
 

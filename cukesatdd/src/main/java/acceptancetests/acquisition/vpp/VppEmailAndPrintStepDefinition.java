@@ -17,8 +17,10 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
-import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.commonpages.ComparePlansPage;
 
 /**
  * Functionality: VPP flow for Acquisition
@@ -128,20 +130,13 @@ public class VppEmailAndPrintStepDefinition {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 
 		if (site.equalsIgnoreCase("ulayer")) {
-			pages.acquisition.ulayer.VPPPlanSummaryPage vppPlanSummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+			VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			pages.acquisition.ulayer.PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
+			PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
 			Assert.assertTrue("Error in Loading the Plan Details Page", vppPlanDetailsPage != null);
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			wDriver=vppPlanSummaryPage.driver;
-		} else {
-			pages.acquisition.bluelayer.VPPPlanSummaryPage vppPlanSummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			pages.acquisition.bluelayer.PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
-			Assert.assertTrue("Error in Loading the Plan Details Page", vppPlanDetailsPage != null);
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			wDriver=vppPlanSummaryPage.driver;
-		}
+		} 
 		getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, wDriver);
 	}
 
@@ -151,8 +146,8 @@ public class VppEmailAndPrintStepDefinition {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		if (site.equalsIgnoreCase("ulayer")) {
-			pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+		
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			int plansForCompare=0;
 			if (planType.equalsIgnoreCase("MA")) {
@@ -166,28 +161,13 @@ public class VppEmailAndPrintStepDefinition {
 				util.waitForComparePageToLoad();
 			}
 			getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
-			pages.acquisition.ulayer.ComparePlansPage comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
-			Assert.assertTrue("Error in loading the compare plans page", comparePlansPage != null);
-			wDriver=comparePlansPage.driver;
-		} else {
-			pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			int plansForCompare=0;
-			if (planType.equalsIgnoreCase("MA")) {
-				plansForCompare=plansummaryPage.checkAllMAPlansCount();
-			} else {  //note: if not MA then it's PDP
-				CommonUtility.checkPageIsReady(wDriver);
-				util.waitForSummaryPageToLoad();
-				plansForCompare=plansummaryPage.checkAllPDPlans();
-				CommonUtility.checkPageIsReady(wDriver);
-				util.waitForComparePageToLoad();
-			}
-			getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
 			ComparePlansPage comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
 			Assert.assertTrue("Error in loading the compare plans page", comparePlansPage != null);
+			wDriver=comparePlansPage.driver;
+		
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
 			wDriver=comparePlansPage.driver;
-		}
+		
 		getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, wDriver);
 
 	}
@@ -322,21 +302,14 @@ public class VppEmailAndPrintStepDefinition {
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		getLoginScenario().saveBean(PageConstants.ACQ_PAGE_TYPE, site);
-		if (site.equalsIgnoreCase("ulayer")) {
-			pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+		
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.viewPlanSummary(plantype);
 			EmailAndPrintUtil util=new EmailAndPrintUtil(plansummaryPage.driver);
 			util.handlePlanYearSelectionPopup(plantype);
 			getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, plansummaryPage.driver);
-		} else {
-			pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.viewPlanSummary(plantype);
-			EmailAndPrintUtil util=new EmailAndPrintUtil(plansummaryPage.driver);
-			util.handlePlanYearSelectionPopup(plantype);
-			getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, plansummaryPage.driver);
-		}
+		
 	}
 
 	@Then("^the user validate the email link on the plan Details Page on test site$")

@@ -13,7 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import pages.acquisition.ulayer.PageTitleConstants;
+import pages.mobile.acquisition.commonpages.PageTitleConstants;
+
 
 /**
  * @author saduri

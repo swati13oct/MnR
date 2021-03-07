@@ -21,13 +21,13 @@ public class PlanRecommendationEnginePrioritiesPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		}
+	}
 
 	String page = "Priorities";
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
-// Priorities page Elements
+	// Priorities page Elements
 
 	@FindBy(css = "#progress-bar-title")
 	private WebElement planSelectorPageTilte;
@@ -52,13 +52,13 @@ public class PlanRecommendationEnginePrioritiesPageMobile extends UhcDriver {
 
 	@FindBy(css = "select#topPriority")
 	private WebElement topSelect;
-	
+
 	@FindBy(css = "select#secondPriority")
 	private WebElement secondSelect;
-	
+
 	@FindBy(css = "button.addAnotherLink")
 	private WebElement addAnotherLink;
-	
+
 	public void prioritiesElements() {
 		System.out.println("Validating Priorities Page: ");
 		String currentPageUrl = driver.getCurrentUrl();
@@ -80,15 +80,15 @@ public class PlanRecommendationEnginePrioritiesPageMobile extends UhcDriver {
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());
 	}
 
-// Selecting Priority options
+	// Selecting Priority options
 
-	public void priorityOptions(boolean top,String value) {
+	public void priorityOptions(boolean top, String value) {
 		System.out.println("Priorities option selection");
 		if (top) {
 			selectFromDropDownByText(driver, topSelect, value);
 			System.out.println("Top Priority value " + value + " selected");
 		} else {
-			if(validate(addAnotherLink)) {
+			if (validate(addAnotherLink)) {
 				jsClickNew(addAnotherLink);
 				threadsleep(1000);
 			}
@@ -96,10 +96,10 @@ public class PlanRecommendationEnginePrioritiesPageMobile extends UhcDriver {
 			System.out.println("Second Priority value " + value + " selected");
 		}
 	}
-	
+
 	public void priorityOptions2nd(String value) {
 		System.out.println("Priorities 2nd option alone selection");
-		String mandatoryOpt1 = "Doctors",mandatoryOpt2 = "Health Cost",defaultVal = "Select Priority";
+		String mandatoryOpt1 = "Doctors", mandatoryOpt2 = "Health Cost", defaultVal = "Select Priority";
 		if (value.toLowerCase().contains(mandatoryOpt1.toLowerCase())) {
 			selectFromDropDownByText(driver, topSelect, mandatoryOpt2);
 			System.out.println("Top Priority value " + mandatoryOpt2 + " selected");
@@ -117,22 +117,19 @@ public class PlanRecommendationEnginePrioritiesPageMobile extends UhcDriver {
 		System.out.println("Top Priority value " + defaultVal + " selected");
 	}
 
-	public void prioritiesFunctional(String option,String value) {
-		if(option.equalsIgnoreCase("Both")) {
-			priorityOptions(true,value.split(",")[0].trim());
-			priorityOptions(false,value.split(",")[1].trim());
-		}
-		else if(option.equalsIgnoreCase("1st")) {
-			priorityOptions(true,value.split(",")[0].trim());
-		}
-		else if(option.equalsIgnoreCase("2nd")) {
+	public void prioritiesFunctional(String option, String value) {
+		if (option.equalsIgnoreCase("Both")) {
+			priorityOptions(true, value.split(",")[0].trim());
+			priorityOptions(false, value.split(",")[1].trim());
+		} else if (option.equalsIgnoreCase("1st")) {
+			priorityOptions(true, value.split(",")[0].trim());
+		} else if (option.equalsIgnoreCase("2nd")) {
 			priorityOptions2nd(value.split(",")[1].trim());
-		}
-		else {
+		} else {
 			System.out.println("Not selecting Priorities");
 		}
 	}
-	
+
 	public void continuePriority() {
 		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");

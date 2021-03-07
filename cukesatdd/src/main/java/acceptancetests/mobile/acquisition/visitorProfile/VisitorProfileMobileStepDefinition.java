@@ -20,10 +20,9 @@ import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.commonpages.VisitorProfileTestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
-
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;

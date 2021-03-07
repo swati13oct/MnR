@@ -32,13 +32,13 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
 //import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.mobile.acquisition.planrecommendationengine.PlanRecommendationEngineDoctorsPageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
@@ -52,7 +52,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, AcquisitionHomePageMobile.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 

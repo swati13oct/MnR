@@ -16,7 +16,7 @@ import org.testng.Assert;
 
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 
 public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 
@@ -30,7 +30,7 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, AcquisitionHomePageMobile.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		// validate(getStartedBtn, 30);
 

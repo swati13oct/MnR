@@ -19,9 +19,10 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
+
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 public class VisitorProfilePageMobile extends UhcDriver {

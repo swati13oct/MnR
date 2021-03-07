@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
-import pages.acquisition.ulayer.GlobalWebElements;
+
 
 public class PrivacyPolicyAARPPageMobile extends GlobalWebElements{
 	 

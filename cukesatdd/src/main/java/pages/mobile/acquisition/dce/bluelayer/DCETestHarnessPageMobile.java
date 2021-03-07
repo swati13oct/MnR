@@ -14,7 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
+
 public class DCETestHarnessPageMobile extends UhcDriver{
 	private PageData switchgeneric;
 

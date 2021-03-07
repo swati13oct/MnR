@@ -18,7 +18,8 @@ import org.testng.Assert;
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 
 public class PlanRecommendationEngineCommonutilityMobile extends UhcDriver {
 	
@@ -32,7 +33,7 @@ public class PlanRecommendationEngineCommonutilityMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, AcquisitionHomePageMobile.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 
 	}

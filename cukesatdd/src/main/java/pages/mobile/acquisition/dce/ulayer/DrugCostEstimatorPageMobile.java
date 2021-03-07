@@ -20,14 +20,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.AddDrugDetails;
 import pages.acquisition.commonpages.AddNewDrugModal;
 import pages.acquisition.commonpages.EditDrugDetails;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.SavingsOppurtunity;
-import pages.acquisition.ulayer.PageTitleConstants;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
+import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
 
@@ -1755,7 +1755,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 			return true;
 		return false;
 	}
-	public VPPPlanSummaryPage navigateBackToPlanSummaryPage() {	
+	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPage() {	
 		
 		//WebElement returnToPlanSummaryLink = driver.findElement(By.xpath(".//*[@id='returnLink']"));	
 		WebElement returnToPlanSummaryLink = driver.findElement(By.xpath("//*[@id='returnLink']"));	
@@ -1772,7 +1772,7 @@ sendkeys(zipcodeInput, zipcode); // not sure what webelement to use
 */		
 	CommonUtility.checkPageIsReadyNew(driver);
 	if (driver.getCurrentUrl().contains("plan-summary")) {
-	return new VPPPlanSummaryPage(driver);	
+	return new VPPPlanSummaryPageMobile(driver);	
 			}
 			return null;
 		}

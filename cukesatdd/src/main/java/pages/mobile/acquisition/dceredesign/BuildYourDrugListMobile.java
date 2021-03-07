@@ -18,7 +18,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumFluentWait;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
+
 import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
 import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
 

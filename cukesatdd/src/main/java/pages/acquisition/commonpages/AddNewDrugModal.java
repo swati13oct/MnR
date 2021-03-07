@@ -11,7 +11,6 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AddDrugDetails;
 public class AddNewDrugModal extends UhcDriver {
 
 	private PageData addnewdrug;

@@ -18,15 +18,10 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.bluelayer.AboutUsPage;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.AgentsAndBrokersPage;
-import pages.acquisition.bluelayer.ContactUsUmsPage;
-import pages.acquisition.bluelayer.DisclaimersPage;
-import pages.acquisition.bluelayer.EnterZipCodePage;
-import pages.acquisition.bluelayer.PrivacyPolicyUmsPage;
-import pages.acquisition.bluelayer.SiteMapUMSPage;
-import pages.acquisition.bluelayer.TermsOfUseUmsPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.EnterZipCodePage;
+import pages.mobile.acquisition.ulayer.TermsnConditionsAARPPageMobile;
 
 /**
  * Functionality: Global Header Footer
@@ -49,7 +44,7 @@ public class GlobalComponentsStepDefinitionUHC {
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -65,7 +60,7 @@ public class GlobalComponentsStepDefinitionUHC {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		if (aquisitionhomepage != null) {
 
-			aquisitionhomepage.validateFooterLinks();
+			aquisitionhomepage.validateGlobalFooterLinks();
 		} else {
 			Assert.fail("Error in Home page");
 		}
@@ -148,24 +143,24 @@ public class GlobalComponentsStepDefinitionUHC {
 //
 //	}
 
-	/**
-	 * @toDo:user clicks on Terms of use link from Privacy Policy page footer
-	 */
-	@And("^the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site$")
-	public void user_clicks_TermsOfUse_link_ums() {
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		TermsOfUseUmsPage termsOfUseUmsPage = aquisitionhomepage.termsOfUseClick();
-		if (termsOfUseUmsPage != null) {
-			getLoginScenario().saveBean(PageConstants.TERMS_OF_USE_PAGE, termsOfUseUmsPage);
-			Assert.assertTrue(true);
-
-		} else {
-			Assert.fail("Error in terms of use page");
-		}
-
-	}
+//	/**
+//	 * @toDo:user clicks on Terms of use link from Privacy Policy page footer
+//	 */
+//	@And("^the user clicks on Terms of use link from Privacy Policy page footer UHC Medicaresolutions Site$")
+//	public void user_clicks_TermsOfUse_link_ums() {
+//
+//		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+//				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+//		TermsnConditionsAARPPageMobile termsOfUseUmsPage = aquisitionhomepage.termsOfUseClick();
+//		if (termsOfUseUmsPage != null) {
+//			getLoginScenario().saveBean(PageConstants.TERMS_OF_USE_PAGE, termsOfUseUmsPage);
+//			Assert.assertTrue(true);
+//
+//		} else {
+//			Assert.fail("Error in terms of use page");
+//		}
+//
+//	}
 
 	/**
 	 * @toDo:user clicks on Disclaimers link from Terms of use page footer
@@ -219,7 +214,7 @@ public class GlobalComponentsStepDefinitionUHC {
 	 */
 	@And("^user clicks on Request Assistance and validates modal window bluelayer$")
 	public void user_clicks_on_Request_Assistance_and_validates_modal_window_blayer() {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickRequestAsistancce();
 	}
@@ -240,7 +235,7 @@ public class GlobalComponentsStepDefinitionUHC {
 	public void user_verifies_the_uhc_logo_on_home_page() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateUHClogo();
+		aquisitionhomepage.validateLogo();
 	}
 
 	@And("^user clicks on Sign in link on home page on UHC site$")
@@ -364,7 +359,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 		//EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
 				AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 						.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-				EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
+				pages.acquisition.commonpages.EnterZipCodePage enterZipCodePage=aquisitionhomepage.enterZipCode();
 				enterZipCodePage.validateZipComp(zipCode);
 	}
 	
@@ -378,7 +373,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 	
 	@Then("^the user validates Pro-active Chat on UHC site$")
 	public void the_user_validates_Pro_active_Chat_uhc() throws Throwable {
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatProActive();
 		aquisitionhomepage.validateProActiveChatpopup();

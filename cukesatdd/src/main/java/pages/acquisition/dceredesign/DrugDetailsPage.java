@@ -34,7 +34,7 @@ import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
+
 
 public class DrugDetailsPage extends UhcDriver {
 

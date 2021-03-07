@@ -16,7 +16,7 @@ import org.testng.Assert;
 
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 
 public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDriver {
 
@@ -28,7 +28,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, AcquisitionHomePageMobile.proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 

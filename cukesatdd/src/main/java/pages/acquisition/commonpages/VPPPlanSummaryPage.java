@@ -43,8 +43,9 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
+import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
+import pages.acquisition.vpp.AepVppPlanSummaryPage;
 
 /**
  * @author
@@ -6722,6 +6723,16 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		return SubmitConfirmation;
 	}
 	return Medicarenumber;
+	
+	}
+	public MedSuppOLEPage clickOnStartApplication() {
+	
+		jsClickNew(Start_ApplicationBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validate(insuredStatus, 45))
+			return new MedSuppOLEPage(driver);
+		else
+			return null;
 }
 }
 
