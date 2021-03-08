@@ -49,7 +49,7 @@ public class CQLoginPage extends UhcDriver {
 		
 		if(MRScenario.environment.contains("sot")){
 			start(AUTHOR_URL);
-		}else if(MRScenario.environment.contains("avengers")) {
+		}else if(MRScenario.environment.contains("team-avengers-6-5")) {
 			
 			start(AVENGERS_AEM_URL);
 			driver.manage().deleteAllCookies();

@@ -113,8 +113,36 @@ public class CQPage extends UhcDriver{
 	@FindBy(xpath="//coral-select[@id='dynamic_app_views']//coral-selectlist-item[contains(@role,'option')]")
 	private List<WebElement> selectViewOptions;
 	
+	@FindBy(xpath="//div[contains(@id,'esult')]//table//tbody//tr//td//button")
+	private List<WebElement>editButtons;
 	
+
+	@FindBy(xpath="//div[@id='myModal']")
+	WebElement editAssetModalPopUp;
 	
+	@FindBy(xpath="//div[contains(@class,'Modal-header')]")
+	WebElement modalHeader;
+	
+	@FindBy(xpath="//input[@id='coral-id-15']")
+	WebElement checkboxAnalytics;
+	
+	@FindBy(xpath="//label[contains(text(),'Asset Name')]")
+	WebElement assetName;
+	
+	@FindBy(xpath="//input[@id='dl-asset-name']")
+	WebElement inputAssetName;
+	
+	@FindBy(xpath="//label[@id='label-aligned-inputgroup-other-keys']")
+	WebElement otherKeyValuePairs;
+	
+	@FindBy(xpath="//textarea[@id='dl-other-keys']")
+	WebElement inputOtherKeyValuePairs;
+	
+	@FindBy(xpath="//button[@id='closeModal']")
+	WebElement btnClose;
+	
+	@FindBy(xpath="//button[@id='saveData']")
+	WebElement btnSavePublish;
 
 	
 	public CQPage(WebDriver driver) {
@@ -357,6 +385,7 @@ public class CQPage extends UhcDriver{
 			System.out.println("Show Usage Button Clicked");
 			sleepBySec(4);
 			checkResult();
+			validateEditAssetModalPopUp();
 			
 		}
 	}
@@ -403,12 +432,14 @@ public class CQPage extends UhcDriver{
 						x.click();
 						sleepBySec(3);
 						checkResult();
+						validateEditAssetModalPopUp();
 					}
 					/*selectViewDropDown.click();
 					selectViewOptions.get(1).click();*/
 					
 				}else {
 				checkResult();
+				validateEditAssetModalPopUp();
 				}
 			}
 		}
@@ -436,53 +467,29 @@ public class CQPage extends UhcDriver{
 		}
 	}
 	
-	/*@FindBy(xpath="//div[@id='myModal']")
-	WebElement editAssetModalPopUp;
-	
-	@FindBy(xpath="//div[contains(@class,'Modal-header')]")
-	WebElement modalHeader;
-	
-	@FindBy(xpath="//input[@id='coral-id-15']")
-	WebElement checkboxAnalytics;
-	
-	@FindBy(xpath="//label[contains(text(),'Asset ID')]")
-	WebElement assetId;
-	
-	@FindBy(xpath="//input[@id='dl-assetid']")
-	WebElement inputAssetId;
-	
-	@FindBy(xpath="//label[contains(text(),'Event Type')]")
-	WebElement eventType;
-	
-	@FindBy(xpath="//button[@id='coral-id-19']//span")
-	WebElement inputEventType;
-	
-	@FindBy(xpath="//label[contains(text(),'Asset Name')]")
-	WebElement assetName;
-	
-	@FindBy(xpath="")
-	WebElement inputAssetName;
-	
-	@FindBy(xpath="")
-	WebElement assetContainer;
-	
-	@FindBy(xpath="")
-	WebElement inputAssetContainer;
-	
-	@FindBy(xpath="")
-	WebElement otherKeyValuePairs;
-	
-	@FindBy(xpath="")
-	WebElement inputOtherKeyValuePairs;
-	
-	@FindBy(xpath="")
-	WebElement btnClose;
-	
-	@FindBy(xpath="")
-	WebElement btnSavePublish;
 	
 	public void validateEditAssetModalPopUp() {
-		
-	}*/
-
+		CommonUtility.checkPageIsReadyNew(driver);
+		int i=1;
+		for(WebElement edit:editButtons) {
+			jsClickNew(edit);
+			sleepBySec(2);
+			if(editAssetModalPopUp.isDisplayed()) {
+				System.out.println("Edit Asset Visible: "+i);
+				validateNew(modalHeader);	
+				validateNew(checkboxAnalytics);
+				validate(assetName);
+				validateNew(inputAssetName);
+				validateNew(otherKeyValuePairs);
+				validateNew(inputOtherKeyValuePairs);
+				validateNew(btnClose);
+				validateNew(btnSavePublish);
+				sleepBySec(2);
+				System.out.println("All Elements present in Edit Asset Pop-Up "+i);
+				jsClickNew(btnClose);
+				i++;
+				sleepBySec(1);
+			}
+		}
+	}
 }
