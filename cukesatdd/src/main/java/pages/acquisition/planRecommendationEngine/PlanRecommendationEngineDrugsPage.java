@@ -1,6 +1,4 @@
-/**
-* 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
@@ -754,3 +752,4 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	}
 
 }
+
