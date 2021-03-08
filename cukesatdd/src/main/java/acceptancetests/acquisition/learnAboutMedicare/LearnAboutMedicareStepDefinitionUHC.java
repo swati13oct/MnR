@@ -12,12 +12,12 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import junit.framework.Assert;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.LearnAboutMedicareHomePage;
-import pages.acquisition.bluelayer.MedicareAdvantagePartCPlansPage;
-import pages.acquisition.bluelayer.MedicareEligibilityPage;
-import pages.acquisition.bluelayer.MedicarePrescriptionDrugPartDPlansPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
+import pages.acquisition.commonpages.MedicareAdvantagePartCPlansPage;
+import pages.acquisition.commonpages.MedicareEligibilityPage;
+import pages.acquisition.commonpages.MedicarePrescriptionDrugPartDPlansPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 /**
  * Functionality: Medicare flow
@@ -248,11 +248,11 @@ public class LearnAboutMedicareStepDefinitionUHC {
 
 		if (planType.equals("MA")) {
 
-			vpp.clickOnViewPlans(planType);
+			vpp.viewPlanSummary(planType);
 
 		} else if (planType.equals("PDP")) {
 
-			vpp.clickOnViewPlans(planType);
+			vpp.viewPlanSummary(planType);
 
 		}
 

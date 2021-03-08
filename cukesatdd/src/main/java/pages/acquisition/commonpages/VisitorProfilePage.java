@@ -1,3 +1,4 @@
+
 package pages.acquisition.commonpages;
 
 import java.util.Arrays;
@@ -27,8 +28,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
-//import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
+import pages.acquisition.vpp.VPPTestHarnessPage;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class VisitorProfilePage extends UhcDriver {
@@ -555,7 +555,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}else {
 				jsClickNew(signIn);
 			}
-			System.out.println();
+			Thread.sleep(3000);
 			waitForPageLoadSafari();
 			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
@@ -579,7 +579,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			// CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
@@ -1063,3 +1063,4 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 	}
 }
+

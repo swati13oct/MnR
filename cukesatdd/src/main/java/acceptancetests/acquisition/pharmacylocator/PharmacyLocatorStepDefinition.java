@@ -23,7 +23,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 /**
  *Functionality:PharmacyLocator

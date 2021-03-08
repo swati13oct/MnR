@@ -2075,7 +2075,7 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^I access the DCE Redesign from Plan Details$")
 	public void the_user_navigates_plan_details() throws Throwable {
-		pages.acquisition.ulayer.PlanDetailsPage plandetailspage = (pages.acquisition.ulayer.PlanDetailsPage) getLoginScenario()
+		PlanDetailsPage plandetailspage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_DETAILS_PAGE);
 		GetStartedPage getStartedPage = plandetailspage.navigateToDCERedesign();
 		if (null != getStartedPage) {

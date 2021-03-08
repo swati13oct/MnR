@@ -25,6 +25,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email                    | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                               | DisplayCurrentPlan | ChangeInOrder | PlansOrder                                                                                                                              |
       | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM    | None          | future   |          10001 | fitness,lowpremium                           | YES                | YES           |                                                                                                                                         |
+
       | qavgogine | qavgogine | ATDD3STG@NONMEMBERDD.COM | None          | future   |          10001 | hearing,vision,travel,lowpremium,drug,doctor | NO                | YES           | Choice(PPO),Plan1(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO),Plan3(RegionalPPO),Prime(HMO),Patriot(HMO),Plan2(HMO),Plan1(HMO) |
 
   @ARE @EstimateMedicalCostFuture @F441593 @F487422
@@ -50,3 +51,4 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | future   | YES        |          10001 | mce,lowpremium | YES                | YES           |            |
+
