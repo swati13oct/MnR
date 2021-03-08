@@ -53,7 +53,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(css = "#buildyourdruglist button:nth-of-type(2)")
 	private List<WebElement> drugpageButtons;
-	
+
 	@FindBy(css = "#modal uhc-radio-group uhc-radio")
 	private List<WebElement> modalSelcetedDrugsList;
 
@@ -62,7 +62,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(.,'Remove')]")
 	private List<WebElement> drugDeleteButtons;
-	
+
 	// Dosage Modal
 
 	@FindBy(css = "#drugModal #popup3 section>h2")
@@ -82,7 +82,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(css = "#new-drug-refill")
 	private WebElement modalSupplySelect;
-	
+
 	@FindBy(css = ".content-section button[type='submit']")
 	private WebElement addDrugButton;
 
@@ -135,8 +135,8 @@ public class DCEPage extends UhcDriver {
 				if (drugDetails[7].toUpperCase().equals("YES"))
 					switchGeneric = true;
 				threadsleep(2000);
-				addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
-						GenericDrug, switchGeneric);
+				//addDrugbySearchDCE(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
+						//GenericDrug, switchGeneric);
 			}
 		}
 
@@ -147,58 +147,6 @@ public class DCEPage extends UhcDriver {
 		drugpageButtons.get(0).click();
 		pageloadcomplete();
 		threadsleep(2000);
-	}
-
-	public void addDrugbySearchDCE(String drugName, boolean searchButtonClick, String dosage, String packageName,
-			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
-		try {
-			validate(drugsearchBox, 30);
-			threadsleep(2000);
-			drugsearchBox.clear();
-			drugsearchBox.sendKeys(drugName);
-			if (searchButtonClick) {
-			jsClickNew(drugsearchButton);
-			//Select modal
-			validate(searchList.get(0), 30);
-			threadsleep(2000);
-			for(WebElement elm:searchList) {
-				if(elm.findElement(By.cssSelector("span")).getText().trim().equalsIgnoreCase(drugName)) {
-					jsClickNew(elm.findElement(By.cssSelector("button")));
-					break;
-				}
-			}
-			threadsleep(2000);
-		} else {
-			threadsleep(10000);
-			jsClickNew(drugsAutoList.get(0));
-		}
-
-			validate(modalDosageSelect, 30);
-			threadsleep(2000);
-			Select dos = new Select(modalDosageSelect);
-			Select supply = new Select(modalSupplySelect);
-
-			if (!dosage.isEmpty())
-				dos.selectByVisibleText(dosage);
-			if (!packageName.isEmpty()) {
-				Select pack = new Select(modalPackageSelect);
-				pack.selectByVisibleText(packageName);
-			}
-			if (!count.isEmpty()) {
-				modalQuantity.clear();
-				modalQuantity.sendKeys(count);
-			}
-			if (threeeMonthfrequency)
-				supply.selectByVisibleText("Every 3 Months");
-
-			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
-					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
-			threadsleep(2000);
-			jsClickNew(addDrugButton);
-			// Not Covered switch generic as it is not DD scope in DCE page
-		} catch (Exception e) {
-			System.out.println("Unable to add drug");
-		}
 	}
 
 	public void deletedrugsHandlerWithdetails(String drugsDetails) {
@@ -219,15 +167,16 @@ public class DCEPage extends UhcDriver {
 	public void delete(String dosage) {
 		validate(drugsearchBox, 30);
 		WebElement deleteLink = driver
-				.findElement(By.xpath("//uhc-list-item[contains(.,'"+dosage+"')]//button[2]"));
+				.findElement(By.xpath("//uhc-list-item[contains(.,'" + dosage + "')]//button[2]"));
 		jsClickNew(deleteLink);
+
 		threadsleep(2000);
 		pageloadcomplete();
 	}
-	
+
 	public void deleteAllDrugs() {
-		int drugLimit = drugDeleteButtons.size(); 
-		for(int i=0;i<drugLimit;i++) {
+		int drugLimit = drugDeleteButtons.size();
+		for (int i = 0; i < drugLimit; i++) {
 			drugDeleteButtons.get(0).click();
 			threadsleep(2000);
 		}

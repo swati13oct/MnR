@@ -37,29 +37,31 @@ Scenario Outline: <scenario> Verify request an appointment through <pageName>
       
 
 Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode UHC SIte
-Given the user is on UHC medicare acquisition site page
-When the user navigates to request more help and information in AARP site
-When the user navigates to request appointment with an agent in AARP site and validates page is loaded
-Then the user fills the form out and submits the agent appointment application
-| Zipcode    | <zipcode>   |
-
-@agentFlowEBRCBlayer @UATRegression
-Examples: 
-| scenario           | zipcode    | site|
-| E2E Scenario 3_UMS |  90002     |  UHC|
+	Given the user is on medicare acquisition site landing page
+		      | Site | <site> |
+	When the user navigates to request more help and information
+	When the user navigates to request appointment with an agent in and validates page is loaded
+	Then the user fills the form out and submits the agent appointment application
+	| Zipcode    | <zipcode>   |
+	
+	@agentFlowEBRCBlayer @UATRegression
+	Examples: 
+	| scenario           | zipcode    | site|
+	| E2E Scenario 3_UMS |  90002     |  UHC|
 
 
 Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode AARP SIte
-Given the user is on AARP medicare acquisition site landing page
-When the user navigates to request more help and information in AARP site
-When the user navigates to request appointment with an agent in AARP site and validates page is loaded
-Then the user fills the form out and submits the agent appointment application
-| Zipcode    | <zipcode>   |
+	Given the user is on medicare acquisition site landing page
+	      | Site | <site> |
+	When the user navigates to request more help and information
+	When the user navigates to request appointment with an agent and validates page is loaded
+	Then the user fills the form out and submits the agent appointment application
+	| Zipcode    | <zipcode>   |
 
-@agentFlowEBRCUlayer @UATRegression
-Examples: 
-| scenario           | zipcode    | site|
-| E2E Scenario 3_AMP |  90002     |  AARP|
+	@agentFlowEBRCUlayer @UATRegression
+	Examples: 
+	| scenario           | zipcode    | site|
+	| E2E Scenario 3_AMP |  90002     |  AARP|
 
 
 
