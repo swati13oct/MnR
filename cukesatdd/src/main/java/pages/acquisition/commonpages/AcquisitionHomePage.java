@@ -599,6 +599,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@id='sp-root-container']/div[@id='sp-chat-frame']/div[@id='sp-side-bar']/div[@id='sp-close-frame']/*[1]")
 	private WebElement CloseChat;
 	
+	@FindBy(id = "autocomplete-list")
+	private WebElement autoCompleteSuggestion;
+	
+	@FindBy(id = "searchresults-item0")
+	private WebElement firstAutoCompleteSuggestion;
+	
+	@FindBy(id = "listPop")
+	private WebElement autoCompleteSuggestionSiteSearch;
+	
+	@FindBy(xpath = "(//*[@id='listPop']//*[contains(@class,'uhc-autocomplete')])[1]")
+	private WebElement firstAutoCompleteSuggestionSiteSearch;
+	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -5354,6 +5366,33 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	public OLETestHarnessPage GetOLETestHarnessPage() {
 		return new OLETestHarnessPage(driver);
+	}
+	
+	public void enterSiteSearchValue(String inputvalue) {
+		CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
+		EnterSearch.sendKeys(inputvalue);
+	}
+	
+	public void validateAutoCompleteSuggestion() {
+		waitforElement(autoCompleteSuggestion);
+		validate(autoCompleteSuggestion);
+	}
+	
+	public void clickFirstSuggestion() {
+		//firstAutoCompleteSuggestion.click();
+		jsClickNew(firstAutoCompleteSuggestion);
+	}
+	
+	public void enterSecondarySiteSearchValue(String str) {
+		System.out.println("@@@inside secondary search validation method@@@");
+		CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
+		SecondaryClearBtn.click();
+		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
+		SecondarySearchInput.sendKeys(str);
+		}
+	
+	public void validateAutoCompleteSuggestionSiteSearchPage() {
+		validate(firstAutoCompleteSuggestionSiteSearch);
 	}
 }
 
