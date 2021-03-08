@@ -1,3 +1,4 @@
+
 Feature: 1.05.4 OLE common tool flow E2E DSNP
 
  # @SNP_OLE_AARP @acquisitionRegression @junerelease2018 @september_release_2018 @december_release_2018 @OLE_DNSP_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
@@ -281,3 +282,4 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
      # | TID   | site|PlanType        | Plan Year|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber| partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |inputdataType|
      # | 15576 | UHC|DSNP-MBI        | future|future|  10001 | NO              | New York County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)           | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET34    | false   |   11012002 |  01012006 |     0523456789 | true     | 04261944 | Female | 004 Morris Rd | New York    | Yes                    | 803 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |Valid|
  		
+

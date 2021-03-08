@@ -1314,7 +1314,7 @@ public class ComparePlansPage extends UhcDriver {
 			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
 			//DrugYouPay.getText will get child element text as well in Safari browser which fails the scripts ahead
-			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
+			if (!MRScenario.browsername.equalsIgnoreCase("Safari")) {
 				drugYouPay = DrugYouPay.getText().trim();
 			} else {
 				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
