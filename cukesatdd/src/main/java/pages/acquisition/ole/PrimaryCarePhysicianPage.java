@@ -396,8 +396,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		//Assert.assertEquals("PCP selected is not shown in blue box", expectedProvider, actualProvider);
 		Assert.assertTrue("PCP selected is not shown in blue box", actualProvider.contains(expectedProvider));
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
-		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+	//	validateNew(NextBtn);
+	//	jsClickNew(NextBtn);
 		
 		return null;
 	}	
