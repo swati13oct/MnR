@@ -272,7 +272,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='zip-radios']/div[2]/label")
 	public WebElement countySelection;
-	
+
 	@FindBy(xpath = "//*[contains(@id,'drugModalPharmacy')]")
 	public WebElement countyPopup;
 
@@ -314,13 +314,13 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	@FindBy(xpath = ".//*[@id='acqsummary']//a[contains(@class,'show-pharm-selector')]/p")
 	public WebElement findPlansButton;
-	
-	@FindBy(xpath="//*[@id='zip-radios']/div[1]")
+
+	@FindBy(xpath = "//*[@id='zip-radios']/div[1]")
 	public WebElement findPlansRadioButton;
-	
-	@FindBy(xpath="//button[contains(text(),'Search')]")
+
+	@FindBy(xpath = "//button[contains(text(),'Search')]")
 	public WebElement SearchButton;
-	
+
 	@FindBy(xpath = "//*[contains(@name,'county')]")
 	List<WebElement> counties;
 
@@ -1658,9 +1658,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		checkModelPopup(driver);
 		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
-		
 
-		if (validate(countyPopup)&& counties.size() > 1) {
+		if (validate(countyPopup) && counties.size() > 1) {
 			for (WebElement countyElement : counties) {
 				String elementId = countyElement.getAttribute("id");
 				if (elementId.contains(county)) {
@@ -1672,7 +1671,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);
 		return new VPPPlanSummaryPage(driver);
-		
+
 	}
 
 	public void populateZipCode(String zipcode) {
@@ -2011,8 +2010,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void validateLocalStorage(Map<String, String> dCEAttributesMap) {
-		
-		
+
 		validateNew(getBtnBackToPlans());
 		getBtnBackToPlans().click();
 		try {
@@ -2021,7 +2019,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 
 		String ZipCode = dCEAttributesMap.get("Zip Code");
 		String DrugName1 = dCEAttributesMap.get("Drug Name1");
@@ -2035,32 +2033,31 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		System.out.println(PharmacyName);
 
 		WebStorage webStorage = (WebStorage) new Augmenter().augment(driver);
-		LocalStorage localStorage = webStorage.getLocalStorage();		
+		LocalStorage localStorage = webStorage.getLocalStorage();
 
 		String DCE_aarpacquisition = localStorage.getItem("aarpacquisition");
 		System.out.println("AARP ACQ info from Local Storage");
 		System.out.println(DCE_aarpacquisition);
-		boolean validation_Flag=false;
+		boolean validation_Flag = false;
 		boolean Validate_ZipPharmacy = false;
-		if(DCE_aarpacquisition.contains(DrugName1) && DCE_aarpacquisition.contains(DrugName2) 
+		if (DCE_aarpacquisition.contains(DrugName1) && DCE_aarpacquisition.contains(DrugName2)
 				&& DCE_aarpacquisition.contains(DrugName3) && DCE_aarpacquisition.contains(PharmacyName)) {
 			Validate_ZipPharmacy = true;
-			validation_Flag=true;
-			System.out.println("AARP ACQ info from Local Storage validated : "+Validate_ZipPharmacy);
+			validation_Flag = true;
+			System.out.println("AARP ACQ info from Local Storage validated : " + Validate_ZipPharmacy);
 		}
-		
+
 		String DCEDrugList = localStorage.getItem("drugList");
 		System.out.println("AARP DrugList from Local Storage");
 		System.out.println(DCEDrugList);
 		boolean Validate_DrugList = false;
-		if(DCEDrugList.contains(DrugName1) && DCEDrugList.contains(DrugName2) 
-				&& DCEDrugList.contains(DrugName3) && DCEDrugList.contains(PharmacyName)
-				 && DCEDrugList.contains(ZipCode)) {
+		if (DCEDrugList.contains(DrugName1) && DCEDrugList.contains(DrugName2) && DCEDrugList.contains(DrugName3)
+				&& DCEDrugList.contains(PharmacyName) && DCEDrugList.contains(ZipCode)) {
 			Validate_DrugList = true;
-			validation_Flag = (validation_Flag)?true:false;
-			System.out.println("AARP DrugList from Local Storage validated : "+Validate_DrugList);
+			validation_Flag = (validation_Flag) ? true : false;
+			System.out.println("AARP DrugList from Local Storage validated : " + Validate_DrugList);
 		}
-		System.out.println("AARP Local Storage Validation Status : "+validation_Flag);
-		Assert.assertTrue("AARP Local Storage Validation Failed",validation_Flag);		
+		System.out.println("AARP Local Storage Validation Status : " + validation_Flag);
+		Assert.assertTrue("AARP Local Storage Validation Failed", validation_Flag);
 	}
 }

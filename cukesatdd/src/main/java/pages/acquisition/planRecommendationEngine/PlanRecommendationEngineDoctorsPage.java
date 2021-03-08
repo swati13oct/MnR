@@ -1,6 +1,4 @@
-/**
-* 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
@@ -272,8 +270,10 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
 //Switch to Werally Window Page
 
+
 	public ArrayList<String> validateLinksanotherWindow(String primaryWindow, String type, String search, int count, int locationCount) {
 		String browser = MRScenario.browserName;				//E2E: the browser name is stored in browserName variable in getWebDriverNew method of MRScenario 
+
 		String env = MRScenario.environment;
 		threadsleep(2000);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
@@ -569,3 +569,4 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	}
 
 }
+
