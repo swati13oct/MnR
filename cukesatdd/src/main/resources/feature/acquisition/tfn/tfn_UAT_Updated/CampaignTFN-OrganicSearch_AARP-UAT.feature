@@ -151,7 +151,8 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
         | TFN No | <TFNNo6> |
         | TFN Xpath | <MedSuppTFNxpath> |
       ################# Precedence 6.9 - Visit AMP using direct URL , PSC code 810027########################
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence5PSC> |

@@ -20,15 +20,12 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
     Then user selects add drug option in Drug page
-<<<<<<< HEAD
-      | Drug Selection | <Drug Selection>                                                       |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-=======
+
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #    And user selects pharmacy option in pharmacy page
     #      | Pharmacy Type | <pharmacyoption> |
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd
+
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
@@ -154,15 +151,12 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     And user selects plan type in coverage options page
       | Plan Type | <isCoverageOpt> |
     And user selects add drug option in Drug page
-<<<<<<< HEAD
-      | Drug Selection | <Drug Selection>                                                       |
-      | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-=======
+
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #    And user selects pharmacy option in pharmacy page
     #      | Pharmacy Type | <pharmacyoption> |
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd
+
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
