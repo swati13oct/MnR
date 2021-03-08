@@ -102,4 +102,6 @@ public class AddDrugDetails extends UhcDriver {
 		Assert.assertTrue(addDrugDetailsPageHeading.isDisplayed());
 	}
 
+	
+
 }

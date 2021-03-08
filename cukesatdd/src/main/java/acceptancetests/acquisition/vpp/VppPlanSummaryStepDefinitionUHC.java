@@ -7,7 +7,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import pages.acquisition.commonpages.KeywordSearchPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
@@ -17,14 +17,13 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 //import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.KeywordSearch;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.VisitorProfilePage;
+import pages.acquisition.commonpages.DrugCostEstimatorPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
 
 /**
@@ -75,7 +74,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = null;
+		/*VPPPlanSummaryPage plansummaryPage = null;
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
@@ -87,7 +86,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
-		}
+		}*/
 	}
 
 	/**
@@ -151,9 +150,9 @@ public class VppPlanSummaryStepDefinitionUHC {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.validateAndClickAddtoCompareinUMS(planType, planName);
+			/*plansummaryPage.validateAndClickAddtoCompareinUMS(planType, planName);
 			plansummaryPage.compareTextAfterclickingAddtoCompareinUMS(planName);
-			plansummaryPage.deselectAddToCompareinAARP(planName);
+			plansummaryPage.deselectAddToCompareinAARP(planName);*/
 		}
 	}
 
@@ -619,18 +618,18 @@ public class VppPlanSummaryStepDefinitionUHC {
 
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = planDetailsPage
-				.navigateBackToPlanSummaryPage();
+		/*pages.acquisition.commonpages.VPPPlanSummaryPage plansummaryPage = planDetailsPage
+				.navigateBackToPlanSummaryPage();*/
 		// VPPPlanSummaryPage plansummaryPage =
 		// planDetailsPage.navigateBackToPlanSummaryPage();
 
 		// VPPPlanSummaryPage plansummaryPage =
 		// planDetailsPage.navigateBackToPlanSummaryPage();
 
-		if (plansummaryPage != null) {
+		/*if (plansummaryPage != null) {
 			Assert.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the Plan Summary Page");
+			Assert.fail("Error in validating the Plan Summary Page");*/
 	}
 
 	@Then("^the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in UMS Site$")
@@ -717,13 +716,13 @@ public class VppPlanSummaryStepDefinitionUHC {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			DrugCostEstimatorPage drugCostEstimatorPage = plansummaryPage.navigatetoDCEPage(planName);
+			/*DrugCostEstimatorPage drugCostEstimatorPage = plansummaryPage.navigatetoDCEPage(planName);
 			if (drugCostEstimatorPage != null) {
 				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 
 			} else {
 				Assert.fail("Error Loading DCE page");
-			}
+			}*/
 		}
 
 	}
@@ -758,7 +757,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		plansummaryPage.validateAndClickLearnMoreAboutExtraHelpInUMS(planType, planName);
+	//	plansummaryPage.validateAndClickLearnMoreAboutExtraHelpInUMS(planType, planName);
 	}
 
 	@Then("^the user validates Is my provider covered link for MA , MAPD and DSNP Plans and it should not be displayed for PDP Plans in UMS Site$")
@@ -769,7 +768,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 			plansummaryPage.clickOnViewMoreForPlan(planName);
-			plansummaryPage.validateIsMyProviderCoveredLinkInUMS(planType, planName);
+		//	plansummaryPage.validateIsMyProviderCoveredLinkInUMS(planType, planName);
 		}
 	}
 
@@ -780,7 +779,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.clicksOnIsProviderCoveredUMS(planName);
+			//plansummaryPage.clicksOnIsProviderCoveredUMS(planName);
 		}
 	}
 
@@ -969,14 +968,13 @@ public class VppPlanSummaryStepDefinitionUHC {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Thread.sleep(10000);
-		// acquisitionHomePage.searchfield(acquisitionHomePage.driver);
-		KeywordSearch kws = acquisitionHomePage.searchfield();
+		KeywordSearchPage kws = acquisitionHomePage.searchfield();
 		getLoginScenario().saveBean(PageConstants.Keyword_Search, kws);
 	}
 
 	@Then("^the member lands on the result page$")
 	public void I_land_on_result_page() {
-		KeywordSearch kws = (KeywordSearch) getLoginScenario().getBean(PageConstants.Keyword_Search);
+		KeywordSearchPage kws = (KeywordSearchPage) getLoginScenario().getBean(PageConstants.Keyword_Search);
 		kws.url();
 		if (kws != null)
 			getLoginScenario().saveBean(PageConstants.Keyword_Search, kws);
@@ -1053,11 +1051,11 @@ public class VppPlanSummaryStepDefinitionUHC {
 	public void user_clicks_on_Get_Started_button_in_UMS_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage) plansummaryPage
+		/*DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage) plansummaryPage
 				.clickNextBestActionModalGetStartedBtn();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
-		}
+		}*/
 	}
 
 	@Then("^user should be navigated to DCE page in UMS site$")
@@ -1065,7 +1063,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 
 		DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-		drugCostEstimatorPage.validateDCEPageDisplayed();
+		//drugCostEstimatorPage.validateDCEPageDisplayed();
 		drugCostEstimatorPage.validateDceLandingPage();
 	}
 
@@ -1121,7 +1119,7 @@ public class VppPlanSummaryStepDefinitionUHC {
 	public void user_clicks_on_Continue_Enrollment_button_in_UMS_Site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		allPlanNames = plansummaryPage.getAllPlanNames();
+		//allPlanNames = plansummaryPage.getAllPlanNames();
 		plansummaryPage.clickContinueEnrollmentBtn();
 	}
 
