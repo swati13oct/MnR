@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 
-Feature: 1.12 ACQ - Global Components AARP
-=======
 @GlobalComponentsAARP
 Feature: 1.12 ACQ - Global Components Validation
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd
+
 
   @globalfooterULayer
   Scenario Outline: To verify links displayed in the global footer of AARP site
