@@ -9,7 +9,7 @@ import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.medsuppole.MedSuppOLEPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;

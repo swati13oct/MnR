@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 
 public class ZipCodePlanYearCapturePage extends UhcDriver {
 

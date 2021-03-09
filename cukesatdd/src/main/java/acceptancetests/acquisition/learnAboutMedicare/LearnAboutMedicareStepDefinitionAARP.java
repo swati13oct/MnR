@@ -4,12 +4,12 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.LearnAboutMedicareHomePage;
-import pages.acquisition.ulayer.MedicareAdvantagePartCPlansPage;
-import pages.acquisition.ulayer.MedicareEligibilityPage;
-import pages.acquisition.ulayer.MedicarePrescriptionDrugPartDPlansPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
+import pages.acquisition.commonpages.MedicareAdvantagePartCPlansPage;
+import pages.acquisition.commonpages.MedicareEligibilityPage;
+import pages.acquisition.commonpages.MedicarePrescriptionDrugPartDPlansPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;

@@ -18,7 +18,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
+import pages.acquisition.vpp.*;
 
 /**
  * @author pperugu
@@ -157,6 +157,9 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="(//button[contains(text(),'Finish')])[2]")
 	private WebElement Finish;
+	
+	@FindBy(xpath="//*[text()='Finish & Return']")
+	private WebElement FinishReturnButton;
 
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -613,5 +616,21 @@ public class ProviderSearchPage extends UhcDriver {
 	public void removeExistingProviderIfAny()
 	{
 		removeExistingProvider.click();
+	}
+	
+	public PlanDetailsPage navigatebacktoPlanDetails() {
+		// TODO Auto-generated method stub
+
+		CommonUtility.waitForPageLoadNew(driver, FinishReturnButton, 45);
+		validateNew(FinishReturnButton);
+		jsClickNew(FinishReturnButton);		
+		
+		//note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+		
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+		return new PlanDetailsPage(driver);
+
 	}
 }

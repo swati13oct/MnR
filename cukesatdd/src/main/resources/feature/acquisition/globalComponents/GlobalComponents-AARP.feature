@@ -1,5 +1,7 @@
+
 @GlobalComponentsAARP
-Feature: 1.12 ACQ - Global Components AARP
+Feature: 1.12 ACQ - Global Components Validation
+
 
   @globalfooterULayer
   Scenario Outline: To verify links displayed in the global footer of AARP site
@@ -50,7 +52,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | UHC  |
 
   @GlobalComponentsAARPPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
+  Scenario Outline: To verify Global Components for the page mentioned of <site> site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
@@ -529,6 +531,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | UHC  | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
 
+
   @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -597,6 +600,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources PDP Disenrollment  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources Disenrollment Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
+
   @GlobalComponentsAARPPages
   Scenario Outline: To verify the components present on the Enroll page on the <site> site
     Given the user is on medicare acquisition site landing page
@@ -653,3 +657,4 @@ Feature: 1.12 ACQ - Global Components AARP
     Examples: 
       | site |
       | UHC  |
+

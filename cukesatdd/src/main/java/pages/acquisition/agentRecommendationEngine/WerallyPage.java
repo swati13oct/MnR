@@ -190,6 +190,7 @@ public class WerallyPage extends UhcDriver {
 								newRally = true; */
 							saveModalCloseContinueSearchbutton.click();
 							}
+
 						//desktopLogo.click();
 						jsClickNew(desktopLogo);
 						//viewSavedbutton1.click();
@@ -197,6 +198,7 @@ public class WerallyPage extends UhcDriver {
 						threadsleep(3000);
 						//savedFinishReturnButton.click();
 						jsClickNew(savedFinishReturnButton);
+
 						}
 						try {
 							WebDriverWait wait = new WebDriverWait(driver, 2);

@@ -203,10 +203,8 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
   Scenario Outline: TID: <Scenario> - Plan Type: <plantype> - Validate that M&R Prospective client has the ability to add drugs through VPP Plan details <site> site.
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
-      | County Name     | <county>          |
+    Then the user hover over Shop for a Plan and validates zipcode component
+    Then the user validate ZipCode Components on SubNav using ZipCode "<zipcode>"
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -271,6 +269,22 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Plan Name | <planname> |
     And the user views plan details of the above selected plan and validates
       | Plan Name | <planname> |
+    Then validate all subtabs displayed on plan details
+    Then User click on provider link on Medical tab and navigates to rally page
+    Then user click on Finish Retun button on rally page navigates to plan details page
+    Then Verify X out of Y provider covered information is displayed on Plan Details page
+    Then the user click on Plan costs tab and validates in site
+      | Monthly Premium | <MonthlyPremium> |
+      | Yearly Premium  | <yearlyPremium>  |
+    Then the user click on Prescription Drug Benefits and validates
+    When the user clicks on Edit drug on plan details page and navigates to DCE
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user click on Prescription Drug Benefits and validates
+    Then the user clicks on Edit drug on plan details page and navigates to DCE
+    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    Then the user click on Optional Services tab and add the rider on site
+      | Optional Rider  | <optionalRider>  |
+      | Monthly Premium | <monthlyPremium> |
     Then the user validates following PDF link is displayed with correct document code
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
@@ -280,10 +294,10 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
 
     @VppPlanCompareCommon_AARP01New
     Examples: 
-      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             |
-      | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) |
+      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                 | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
+      | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCORE_2021 | current  | $45            | $540          | Dental Platinum | $40            |
 
     @VppPlanCompareCommon_UHC01New
     Examples: 
-      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             |
-      | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) |
+      | Scenario                | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                 | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
+      | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCORE_2021 | current  | $45            | $540          | Dental Platinum | $40            |
