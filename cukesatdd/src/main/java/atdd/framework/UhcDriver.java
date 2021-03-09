@@ -667,7 +667,7 @@ public abstract class UhcDriver {
 		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
-		mobileSelectOption(dropdownElement, value, true);
+		//mobileSelectOption(dropdownElement, value, true);
 		dropdown.selectByValue(value);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
