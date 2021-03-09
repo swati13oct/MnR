@@ -304,7 +304,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Scenario                | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                  | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
       | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | current  | $45            | $540          | Dental Platinum | $40            |
 
-    Scenario Outline: <Scenario> : Validate that M&R Prospective client has the ability to navigate to Plan summary page and Enroll in a Plan
+  Scenario Outline: <Scenario> : Validate that M&R Prospective client has the ability to navigate to Plan summary page and Enroll in a Plan
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -353,7 +353,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user validates Is my provider covered link
     Then the user clicks on Enroll Now and validates the Welcome to OLE Page
     And the user clicks on browser back button
-   And the user validates plan summary for the below plan
+    And the user validates plan summary for the below plan
       | Plan Name | <MAplanName> |
     Then the user validates the right rail
     Then the user validates the Need Help Section in the right rail
@@ -409,14 +409,12 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     And the user clicks on browser back button
     Then verify plan compare page is loaded
 
-		@VppPlanCompareCommon_AARP01New
+    @VppPlanCompareCommon_AARP01New @VPP_E2E_Scenario1_AARP
     Examples: 
-      | Scenario                  | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                                          | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount |
-      | VPP - E2E Scenario 1_AARP | AARP |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $41.60            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |
-		
-		@VppPlanCompareCommon_UHC01New
-    Examples: 
-      | Scenario                 | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                                          | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount |
-      | VPP - E2E Scenario 1_UHC | UHC  |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $41.60            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |
+      | Scenario                  | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                           | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount |
+      | VPP - E2E Scenario 1_AARP | AARP |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | $20            | $10  copay           | $45  copay | No               | $6,700.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $37.90            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |
 
-      
+    @VppPlanCompareCommon_UHC01New
+    Examples: 
+      | Scenario                 | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                           | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount |
+      | VPP - E2E Scenario 1_UHC | UHC  |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | $20            | $10  copay           | $45  copay | No               | $6,700.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $37.90            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |

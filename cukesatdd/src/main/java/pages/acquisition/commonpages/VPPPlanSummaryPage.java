@@ -980,6 +980,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath="//span[contains(text(),'View Saved Plans')]")
 	private WebElement savedPlansPopup;
+	
+	@FindBy(xpath="//button[@id='pop-btn-1']")
+	private WebElement savedPlansContinueShoppingButton;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -6817,6 +6820,6 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		}
 		Assert.assertEquals("Shopping cart count not updated with save plan count", Integer.parseInt(shoppingCartSaveCount.getText()), count);
 		if(count>=2)
-			savedPlansPopup.click();
+			savedPlansContinueShoppingButton.click();
 	}	
 }
