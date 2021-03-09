@@ -3,7 +3,6 @@
 @VisitorProfileAuthenticated
 Feature: 1.08. UAT - Visitor profile Authenticated
 
-
   @vpMSSavePlanAuthenticated
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
@@ -110,7 +109,6 @@ Feature: 1.08. UAT - Visitor profile Authenticated
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
       | UHC  | New York |   10001 | NO              | New York County | mnrqevd4 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
-
   @oleAuthenticatedValidations
   Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
@@ -136,7 +134,7 @@ Feature: 1.08. UAT - Visitor profile Authenticated
       | UHC  | New York |   10001 | NO              | New York County | mnrqevd4 | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
   @vpPartialOLEAndRemove
-  Scenario Outline:  Verify Partial enrollment and cancel or remove the enrollment from profile page
+  Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -144,7 +142,7 @@ Feature: 1.08. UAT - Visitor profile Authenticated
       | User Name | <userName> |
       | Password  | <password> |
     And the user cancel the enrollment
-      | Plan Name | <planName> |  
+      | Plan Name | <planName> |
     And the user navigates to clicks on Enroll Now from visitor profile to start OLE flow
       | Plan Name       | <planName>       |
       | Plan Type       | <plantype>       |
@@ -180,3 +178,84 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     Examples: 
       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
       | AARP | New York | mnrvd5   | Password@2 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
+
+  @prePopulateEmailFieldPlanSummaryAuthenticated
+  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
+    And the user clicks on the shopping cart icon
+    Then the user signs in with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    And the user back to VPP plan summary page
+    When the user views the plans of the below plan type and select Next year
+      | Plan Type | <plantype> |
+    And the user click the Email Plan List envelope icon or text on Plan summary page
+    Then user want the email address associated to my profile prepopulated in the text box on plan summary page
+      | User Name | <userName> |
+
+    @VisitorProfile_AARP
+    Examples: 
+      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
+      | AARP | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+
+    @VisitorProfile_UHC
+    Examples: 
+      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
+      | UHC  | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+
+  @prePopulateEmailFieldPlanDetailAuthenticated
+  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan detail page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
+    And the user clicks on the shopping cart icon
+    Then the user signs in with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    And user clicks on plan name
+      | Test Plans | <planname> |
+    And the user click the Email Plan List envelope icon or text on Plan details page
+    Then user want the email address associated to my profile prepopulated in the text box on plan detail page
+      | User Name | <userName> |
+
+    @VisitorProfile_AARP
+    Examples: 
+      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
+      | AARP | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+
+    @VisitorProfile_UHC
+    Examples: 
+      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
+      | UHC  | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+
+  @prePopulateEmailFieldPlanCompareAuthenticated
+  Scenario Outline: Verify email prepopulate flow for authenticated profile on plan compare page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user selects the state drop down value in home page
+      | State | <state> |
+    And the user clicks on the shopping cart icon
+    Then the user signs in with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    And the user back to VPP plan summary page
+    When the user views the plans of the below plan type and select Next year
+      | Plan Type | <plantype> |
+    And I select "<plantype>" plans to compare and click on compare plan link
+    And the user click the Email Plan List envelope icon or text on Plan compare page
+    Then user want the email address associated to my profile prepopulated in the text box on plan compare page
+      | User Name | <userName> |
+
+    @VisitorProfile_AARP
+    Examples: 
+      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
+      | AARP | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+
+    @VisitorProfile_UHC
+    Examples: 
+      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
+      | UHC  | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
