@@ -30,7 +30,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='action-btn getStarted']")
 	public WebElement GetstartedButton;
 
-	@FindBy(xpath = "//span[@class='location']")
+	@FindBy(xpath = "//*[@class='location']")
 	public WebElement LocationLink;
 
 	@FindBy(xpath = "//span[text()='Change Location']")
@@ -45,7 +45,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//h1[text()='Which type of place?']")
 	public WebElement Whichtypeofplace;
 
-	@FindBy(xpath = "//h1//span[text()='Results for ']")
+	@FindBy(xpath = "//h2//span[text()='Results for ']")
 	public WebElement ResultsHeader;
 
 	@FindBy(xpath = "(//*[contains(@data-test-id,'provider-name-link')])[1]")
