@@ -303,3 +303,120 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Examples: 
       | Scenario                | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                  | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
       | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | current  | $45            | $540          | Dental Platinum | $40            |
+
+    Scenario Outline: <Scenario> : Validate that M&R Prospective client has the ability to navigate to Plan summary page and Enroll in a Plan
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode1>         |
+      | Is Multi County | <isMultutiCounty1> |
+      | County Name     | <county1>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    Then user changes zipcode within VPP page
+      | Zip Code        | <zipcode2>         |
+      | Is Multi County | <isMultutiCounty2> |
+      | County Name     | <county2>          |
+    #user has to click on cancel button on popup
+    When user clicks on Change Zip code link
+    Then user clicks on Select by Address and Enter fileds
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state>   |
+    And the user clicks on Find plans on vpp using following information
+      | County Name2     | <county3>        |
+      | Is Multi County2 | <isMultiCounty3> |
+    And the user validates plan summary for the below plan
+      | Plan Name | <MAplanName> |
+    Then the user validates marketing bullets of the plan
+    Then the user validates and clicks Add to compare checkbox for the above selected plan for MA, MAPD , PDP Plans
+    Then the user views plan details of the above selected plan and validates
+      | Plan Name | <MAplanName> |
+    Then the user clicks on back to all plans link and validates its redirection to Plan Summary
+    Then the user validates below plan benefit values for the above selected plan
+      | Monthly Premium            | <monthlyPremium>         |
+      | Primary Care Physician     | <primaryCarePhysician>   |
+      | Specialist                 | <specialist>             |
+      | Referral Required          | <referralRequired>       |
+      | Out Of Pocket Maximum      | <outOfPocketMaximum>     |
+      | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
+      | Plan Type                  | <plantype>               |
+      | Annual Deductible          | <annualDeductible>       |
+    And I save "<plantype>" plans and "<SavePlansCount>" plans and verify the count update on shopping cart
+    Then the user hover overs the tool tip for Why is my premium 0 and validates the text
+    # New steps for DCE Redesign
+    And I access the DCE Redesign from Plan Summary for mentioned plan
+      | Plan Type | <plantype>   |
+      | Plan Name | <MAplanName> |
+    Then the user validates Get Started Page
+    Then the user click on return to plan summary from Get Started Page to return to VPP Plan Summary
+    Then the user validates Is my provider covered link
+    Then the user clicks on Enroll Now and validates the Welcome to OLE Page
+    And the user clicks on browser back button
+   And the user validates plan summary for the below plan
+      | Plan Name | <MAplanName> |
+    Then the user validates the right rail
+    Then the user validates the Need Help Section in the right rail
+    Then the user validates the TFN in the Need Help Section
+    And the user views the plans of the below plan type
+      | Plan Type | <PDPplantype> |
+    And the user validates plan summary for the below plan
+      | Plan Name | <PDPplanName> |
+    Then the user validates marketing bullets of the plan
+    Then the user validates and clicks Add to compare checkbox for the above selected plan for MA, MAPD , PDP Plans
+    Then the user validates below plan benefit values for the above selected plan
+      | Monthly Premium            | <PDPmonthlyPremium>         |
+      | Primary Care Physician     | <PDPprimaryCarePhysician>   |
+      | Specialist                 | <PDPspecialist>             |
+      | Referral Required          | <PDPreferralRequired>       |
+      | Out Of Pocket Maximum      | <PDPoutOfPocketMaximum>     |
+      | Prescription Drugs, Tier 1 | <PDPprescriptionDrugsTier1> |
+      | Plan Type                  | <PDPplantype>               |
+      | Annual Deductible          | <PDPannualDeductible>       |
+    Then the user hover overs the tool tip for Why is my premium 0 and validates the text
+    And the user validates plan summary for the below plan
+      | Plan Name | <PDPplanName> |
+    Then I select "<PDPplantype>" plans and "<planIndices>" plans to compare and click on compare plan link
+    Then verify plan compare page is loaded
+    Then remove "<removePlanIndices>" plan from new plan compare page
+    Then validate all available plans are shown on click of view all plans
+    And I access the DCE Redesign from Plan compare page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user clicks on return to compare link on build drug list page to returns to plan compare
+    Then the user validates all added Drugs on Plan Compare
+    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+      | PlanName | <PDPplanName> |
+    Then the user validates planName matches plan Name in VPP
+    Then the user clicks on View Plan Compare button and validates Plan Compare page, Drug Info Modal
+    Then the user closes the Drug Info Modal on Plan Compare page
+    Then the user clicks on Edit Drug link and validates user lands on DCE Build Drug List Page
+    Then the user deletes the following drug from Drug list
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user clicks on return to compare link on build drug list page to returns to plan compare
+    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
+      | PlanName | <PDPplanName> |
+    Then the user validates planName matches plan Name in VPP
+    Then the user Validates Drug you pay on DCE details page to Compare page Drug Info Modal
+    Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
+    Then user click on close button on Drug info Modal popup
+    Then verify plan compare page is loaded
+    Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
+    And the user clicks on browser back button
+    Then verify plan compare page is loaded
+
+		@VppPlanCompareCommon_AARP01New
+    Examples: 
+      | Scenario                  | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                                          | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount |
+      | VPP - E2E Scenario 1_AARP | AARP |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $41.60            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |
+		
+		@VppPlanCompareCommon_UHC01New
+    Examples: 
+      | Scenario                 | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                                          | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount |
+      | VPP - E2E Scenario 1_UHC | UHC  |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $41.60            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |
+
+      

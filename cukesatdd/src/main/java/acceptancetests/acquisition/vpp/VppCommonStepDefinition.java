@@ -3855,6 +3855,69 @@ public class VppCommonStepDefinition {
 
 	}
 
+	@Then("^user clicks on Change Zip code link$")
+	public void user_clicks_on_Change_Zip_code_link() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnChangeZipCode();
+	}
+
+	@When("^the user clicks on Find plans on vpp using following information$")
+	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String county2 = memberAttributesMap.get("County Name2");
+		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			if (plansummaryPage.validateVPPPlanSummaryPage())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating the Plan Summary Page");
+
+		}
+	}
 	
+	@Then("^user clicks on Select by Address and Enter fileds$")
+	public void user_clicks_on_Select_by_Address_and_Enter_fileds(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String address = memberAttributesMap.get("Address");
+		String city = memberAttributesMap.get("City");
+		String state = memberAttributesMap.get("State");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.enterAddressDetails(address, city, state);
+	}
+
+	@Then("^I save \"([^\"]*)\" plans and \"([^\"]*)\" plans and verify the count update on shopping cart$")
+	public void i_save_plans_and_verify_plan_count(String planType, String Counter)
+			throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		switch(planType.toUpperCase()){
+		case "MAPD":
+		case "MA":
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,"MA");break;
+			default: plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,planType.toUpperCase());break;
+		}
+	}	
 }
 
