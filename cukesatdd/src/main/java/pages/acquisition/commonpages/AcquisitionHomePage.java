@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,7 +23,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -3576,7 +3576,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(ResourceLink);
 
 		validateNew(MAplansLink);
-		Assert.assertTrue(MedSuppPlansLink.size() > 0, "No Med Sup link found in the header navigation");
+		Assert.assertTrue("No Med Sup link found in the header navigation", MedSuppPlansLink.size() > 0);
 		validateNew(PDPplansLink);
 		validateNew(SNPplansLink);
 
@@ -3676,7 +3676,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		System.out.println("State selected : California");
 		System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
-		Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
+		Assert.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase("CA"));
 	}
 
 	public void validateDisclaimer() {
@@ -3691,7 +3691,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(visitAARPFooterLink);
 			String hRef = visitAARPFooterLink.getAttribute("href");
 			System.out.println("href for Visit AARP.org link : " + hRef);
-			Assert.assertTrue(hRef.contains("www.aarp.org"), "Incorrect href for Visit AARP.org : " + hRef);
+			Assert.assertTrue("Incorrect href for Visit AARP.org : " + hRef, hRef.contains("www.aarp.org"));
 			visitAARPFooterLink.isEnabled();
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
@@ -4335,7 +4335,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                     if (!driver.getCurrentUrl().contains("aarp.org")) {
                         Assert.fail("Visit AARP link did not lead to the right page");
                     } else {
-                        Assert.assertTrue(true, "Navigated to AARP org page");
+                        Assert.assertTrue("Navigated to AARP org page", true);
                     }
                     driver.close();
                     break;
