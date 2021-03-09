@@ -278,9 +278,11 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Yearly Premium  | <yearlyPremium>  |
     Then the user click on Prescription Drug Benefits and validates
     When the user clicks on Edit drug on plan details page and navigates to DCE
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user click on Prescription Drug Benefits and validates
     Then the user clicks on Edit drug on plan details page and navigates to DCE
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user click on Optional Services tab and add the rider on site
       | Optional Rider  | <optionalRider>  |
