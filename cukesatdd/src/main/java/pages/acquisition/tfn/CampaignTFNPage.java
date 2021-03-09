@@ -133,7 +133,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement UHCSearchLinkfromBing;
 
 	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
-	@FindBy(xpath = "//input[contains(@id,'zipcodemeded-0')]")
+	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeShopField;
 	//@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
 	//@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
@@ -565,6 +565,7 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	//@FindBy(id="cta-zipcode")
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	
 	private WebElement HomePage_EnterZip;
 	
 	@FindBy(xpath="(//input[contains(@id,'zipcode')])[2]")
