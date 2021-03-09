@@ -23,7 +23,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+/*import pages.acquisition.bluelayer.AcquisitionHomePage;
 import pages.acquisition.bluelayer.ComparePlansPageBlayer;
 import pages.acquisition.bluelayer.DrugCostEstimatorPage;
 import pages.acquisition.bluelayer.FindCarePage;
@@ -37,7 +37,7 @@ import pages.acquisition.bluelayer.VisitorProfilePage;
 import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
 import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
+import pages.acquisition.ulayer.ComparePlansPage;*/
 
 /**
  * Functionality: VPP UHC site
@@ -55,7 +55,7 @@ public class VppStepDefinitionUHC {
 	/**
 	 * @toDo:user is on the uhcmedicaresolutions site landing page
 	 */
-	@Given("^the user is on the uhcmedicaresolutions site landing page$")
+	/*@Given("^the user is on the uhcmedicaresolutions site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 
@@ -79,9 +79,9 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.navigateToPath(path);
 	}
-	/**
+	*//**
 	 * @toDo : the user enters the zip code to search plans
-	 */
+	 *//*
 	@When("^the user performs plan search using following information in UMS site$")
 	public void zipcode_details_in_UMS_site(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -144,9 +144,9 @@ public class VppStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo : the user enters the zip code to search plans on team-c
-	 */
+	 *//*
 	@When("^the user performs plan search TeamC using following information in UMS site$")
 	public void zipcode_details_in_TeamC_site(DataTable givenAttributes) {
 
@@ -163,10 +163,10 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 
-		/*
+		
 		 * TeamCAcqHome aquisitionhomepage = (TeamCAcqHome) getLoginScenario()
 		 * .getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		 */
+		 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		// VPPPlanSummaryPage plansummaryPage =
@@ -183,10 +183,10 @@ public class VppStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @throws InterruptedException
 	 * @toDo:user views plans of the below plan type
-	 */
+	 *//*
 	@When("user views plans of the below plan type in UMS site$")
 	public void user_performs_planSearch_in_UMS_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -247,12 +247,12 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/*try {
+		try {
 			Thread.sleep(7000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 		plansummaryPage.viewPlanSummary(plantype);
 		//plansummaryPage.CheckClick_NextYear_Plans();
 		if(!plantype.equalsIgnoreCase("MS"))
@@ -324,9 +324,9 @@ public class VppStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:user view plan details of the above selected plan
-	 */
+	 *//*
 	@Then("^the user view plan details of the above selected plan in UMS site and validates$")
 	public void user_views_plandetails_selected_plan_ums(DataTable givenAttributes) {
 
@@ -459,9 +459,9 @@ public class VppStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:access the vpp page
-	 */
+	 *//*
 	@When("^I access the vpp page$")
 	public void I_access_the_vpp_page(DataTable memberAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
@@ -482,9 +482,9 @@ public class VppStepDefinitionUHC {
 		}
 	}
 
-	/**
+	*//**
 	 * @toDo:click on add to compare checkbox and click on view details
-	 */
+	 *//*
 	@And("^I click on add to compare checkbox and click on view details link$")
 	public void I_click_on_compare_checkbox() {
 		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
@@ -497,9 +497,9 @@ public class VppStepDefinitionUHC {
 		}
 	}
 
-	/**
+	*//**
 	 * @toDo:select pdp plans and go to view details page
-	 */
+	 *//*
 	@And("^I select pdp plans and go to view details page$")
 	public void I_select_pdp_plans_and_go_to_view_details_page() {
 		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
@@ -511,9 +511,9 @@ public class VppStepDefinitionUHC {
 		}
 	}
 
-	/**
+	*//**
 	 * @toDo:check compare box and verify right info is shown
-	 */
+	 *//*
 	@Then("^I check compare box and verify right info is shown$")
 	public void I_check_compare_box_and_verify() {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -523,10 +523,10 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in validating the compare checkbox message and/or link");
 	}
 
-	/**
+	*//**
 	 * @toDo:user clicks on add to compare box and validates that info shows 2
 	 *            plans added
-	 */
+	 *//*
 	@Then("^the user clicks on add to compare box and validates that info shows 2 plans added$")
 	public void I_check_compare_box_and_verify_2_plans() {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -536,10 +536,10 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in validating the compare checkbox message and/or link");
 	}
 
-	/**
+	*//**
 	 * @toDo:uncheck and recheck the compare box and verify the message and link
 	 *               exists
-	 */
+	 *//*
 	@Then("^I uncheck and recheck the compare box and verify the message and link exists$")
 	public void verifyPlanDetailsPage() {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -549,9 +549,9 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in validating the compare checkbox message and/or link");
 	}
 
-	/**
+	*//**
 	 * @toDo:uncheck and go back to the vpp page to validate
-	 */
+	 *//*
 	@Then("^I uncheck and go back to the vpp page to validate$")
 	public void uncheck_and_validate_vpp_page() {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -566,9 +566,9 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in loading the vpp plan summary page");
 	}
 
-	/**
+	*//**
 	 * @toDo:isAlertPresent
-	 */
+	 *//*
 	public static boolean isAlertPresent(FirefoxDriver wd) {
 		try {
 			wd.switchTo().alert();
@@ -631,9 +631,9 @@ public class VppStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:select all 3 plans to compare in MA and click on compare plan link
-	 */
+	 *//*
 	@And("^I select all 3 plans to compare in MA and click on compare plan link in UHS site$")
 	public void I_select_all_3_plans_to_compare() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -655,9 +655,9 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in loading the compare plans page");
 	}
 
-	/**
+	*//**
 	 * @toDo:user validate the print and email link option in plan compare
-	 */
+	 *//*
 	@When("^the user validate the print and email link option in plan compare in UHS site$")
 	public void user_validate_print_and_email_link_option_in_plan_compare() {
 
@@ -666,9 +666,9 @@ public class VppStepDefinitionUHC {
 		comparePlansPage.validateprintandemail();
 	}
 
-	/**
+	*//**
 	 * @toDo:the user validating email and print option in plan compare
-	 */
+	 *//*
 	@Then("^the user validating email and print option in plan compare in UHS site$")
 	public void user_validating_print_and_email_option_in_plan_compare() {
 
@@ -677,9 +677,9 @@ public class VppStepDefinitionUHC {
 		comparePlansPage.validatingprintandemail();
 	}
 
-	/**
+	*//**
 	 * @toDo:user validate thank you message in plan compare
-	 */
+	 *//*
 	@When("^the user validate thank you message in plan compare in UHS site$")
 	public void user_validate_thank_you_message_in_plan_compare() {
 
@@ -688,10 +688,10 @@ public class VppStepDefinitionUHC {
 		comparePlansPage.validatingthankyoumessage();
 	}
 
-	/**
+	*//**
 	 * @toDo:user clicks on back to all plans link and validate all three plans
 	 *            are selected
-	 */
+	 *//*
 
 	@Then("^the user clicks on back to all plans link and validates all three plans are selected$")
 	public void the_user_clicks_on_back_to_plans_link_and_validates_plans_are_selected() {
@@ -747,9 +747,9 @@ public class VppStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:user validates plan count for all plan types on plan summary page
-	 */
+	 *//*
 	@Then("^user validates plan count for all plan types on plan summary page in the UMS site$")
 	public void user_validates_following_benefits_ui_ums() {
 
@@ -762,9 +762,9 @@ public class VppStepDefinitionUHC {
 	
 	}
 
-	/**
+	*//**
 	 * @toDo:user view plan details of the above selected plan
-	 */
+	 *//*
 	@Then("^User clicks on Back to Plans link and navigate back to plan summary in UMS site$")
 	public void User_clicks_BackToPlansLink_and_navigate_back_to_plan_summary_in_UMS_site() {
 
@@ -778,9 +778,9 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in validating the Plan Summary Page");
 	}
 
-	/**
+	*//**
 	 * @toDo:click on add to compare checkbox and click on view details
-	 */
+	 *//*
 	@And("^User click on add to compare checkbox and click on view details link on UMS$")
 	public void user_click_on_compare_checkbox_ums() {
 		VPPPlanSummaryPage vppplansummarypage = (VPPPlanSummaryPage) loginScenario
@@ -896,9 +896,9 @@ public class VppStepDefinitionUHC {
 			Assert.fail("Error in validating the Plan Details Page");
 	}
 
-	/**
+	*//**
 	 * @toDo:select all 3 plans to compare and click on compare plan link
-	 */
+	 *//*
 	@And("^I select all 3 plans to compare and click on compare plan link in UHC$")
 	public void I_select_all_3_plans_to_compare_UHC() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -1008,10 +1008,10 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 	}
 
-	/**
+	*//**
 	 * @toDo:the user is on UHC medicare acquisition site VPP Plan Summary page
 	 *           after hits Campaign URL
-	 */
+	 *//*
 	@Given("^the user is on UHC medicare acquisition site VPP Plan Summary page after hits Campaign URL$")
 	public void the_user_on_aarpmedicareplans_Campaign_landing_page() throws Throwable {
 
@@ -1820,9 +1820,9 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		/*if (applicationType.equalsIgnoreCase("Retrieve")) {
+		if (applicationType.equalsIgnoreCase("Retrieve")) {
 			ApplicationID = memberAttributesMap.get("ApplicationID");
-		}*/
+		}
 		plansummaryPage.EnterDataForResumeApp(ApplicationID, DOB, zipcode);
 
 	}
@@ -1889,10 +1889,10 @@ public class VppStepDefinitionUHC {
 		vppPlanDetailsPage.validatePrintandEmailOnPlanDetails();
 	}
 
-	/**
+	*//**
 	 * @toDo:the user validates the functionality of email and print buttons on
 	 *           the plan Details Page
-	 */
+	 *//*
 	@Then("^the user validates the functionality of email and print buttons on the plan Details Page on uhc site$")
 	public void user_validates_the_functionality_of_emailandprintbuttons_on_the_plan_Details_Page() {
 
@@ -2220,13 +2220,13 @@ public class VppStepDefinitionUHC {
 				
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		 aquisitionhomepage.validateCallSam();
-		/*
+		
 		 * if (Aquisitionhomepage != null) {
 		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 		 * Aquisitionhomepage); Assert.assertTrue(true);
 		 * System.out.println("TFN Widget is Displayed"); } else{
 		 * Assert.fail("TFN Widget is NOT Displayed"); }
-		 */
+		 
 	}
 	
 	@And("^verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent$")
@@ -2249,13 +2249,13 @@ public class VppStepDefinitionUHC {
 				
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
-		/*
+		
 		 * if (Aquisitionhomepage != null) {
 		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 		 * Aquisitionhomepage); Assert.assertTrue(true);
 		 * System.out.println("TFN Widget is Displayed"); } else{
 		 * Assert.fail("TFN Widget is NOT Displayed"); }
-		 */
+		 
 	}
 	
 	
@@ -2385,7 +2385,7 @@ public class VppStepDefinitionUHC {
 		}
 	}
 	
-	/** user is on the Medicare Site landing page for VPP Testharness*/
+	*//** user is on the Medicare Site landing page for VPP Testharness*//*
 	@Given("^the user is on VPP TestHarness page$")
 	public void validateUserIsOnUMS_VPPTestharnessPage(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
@@ -2727,7 +2727,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
 	}
-	/** user is on the Medicare Site landing page for Visitorprofile Testharness*/
+	*//** user is on the Medicare Site landing page for Visitorprofile Testharness*//*
 	@Given("^the user is on VistorProfile TestHarness page for UHC$")
 	public void validateUserIsOnAARP_VPTestharnessPage_for_UHC(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
@@ -3041,7 +3041,7 @@ public class VppStepDefinitionUHC {
 //}
 
 
-	@Then("^user saves all plans as favorite on UHC site$")
+	/*@Then("^user saves all plans as favorite on UHC site$")
 	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -3352,6 +3352,6 @@ public class VppStepDefinitionUHC {
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
-	}
+	}*/
 }
 

@@ -58,7 +58,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.vppforaep.VppCommonPage;
+import pages.acquisition.vpp.VppCommonPage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -3834,7 +3834,99 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.dceModelClosepopup();
 	}
+	
+	@Then("^validate all subtabs displayed on plan details$")
+	public void validateplandetaillinks() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatealllinksonPlanDetails();
+	}
+	
+	@Then("^User click on provider link on Medical tab and navigates to rally page$")
+	public void user_EditProvider_on_PlanDetailsPage() {
 
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateEditDocotrsProviderButton();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+
+	}
+
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan summary page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_summary_page() throws InterruptedException {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan summary page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_summary_page(DataTable givenAttributes) throws InterruptedException {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		plansummaryPage.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan details page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_details_page() throws InterruptedException {
+		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		planDetails.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan detail page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_detail_page(DataTable givenAttributes) throws InterruptedException {
+		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		planDetails.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan compare page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_compare_page() throws InterruptedException {
+		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planCompare.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan compare page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_compare_page(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		planCompare.validatePrepopulatedEmail(email);
+	}
 	
 }
 

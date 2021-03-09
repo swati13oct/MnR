@@ -169,13 +169,16 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
+
 		waitForPageLoadSafari();
 		scrollToView(mapToggleElement);
 //		moveMouseToElement(mapToggleElement);
 		jsMouseOver(mapToggleElement);
+
 		String targetTooltipName = "Standard Network Pharmacy";
 		String testXpath = "//input[@id='pharmacy-standard']/../span//*[local-name() = 'svg']";
 		String expTxt = "Standard Network Pharmacy A pharmacy where you get the prescription drug benefits provided by your plan.";
+
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		if (hasPrefRetailPharmacyWidget) {
@@ -227,8 +230,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '" + targetTooltipName + "' element...");
 		scrollToView(testTooltip);
+
 //		moveMouseToElement(testTooltip);//note: then move mouse over to target element
+
 		jsMouseOver(testTooltip); // note: then move mouse over to target element
+
 		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) {
 			Pattern expectedTxt = Pattern.compile(expTxt);
@@ -238,8 +244,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - pharmacies text is not as expected. " + "Expected to contain '" + expectedTxt
 					+ "' | Actual='" + actualTxt + "'", expectedTxt.matcher(actualTxt).find());
 		}
+
 //		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
 		jsMouseOut(testTooltip);
+
 	}
 
 	public void validateHeaderSection() {
@@ -582,8 +590,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				if (!pharmacyValidate(contactUnitedHealthCare))
 					contactUsLink = contactUnitedHealthCare_ol;
 				scrollToView(contactUsLink);
+
 //				moveMouseToElement(contactUsLink);
 				jsMouseOver(contactUsLink);
+
 				sleepBySec(3);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
 				sleepBySec(3);
@@ -609,9 +619,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element",
 						pharmacyValidate(resultNavTooltip));
 				scrollToView(resultNavTooltip);
+
 //				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
 				jsMouseOver(resultNavTooltip);
+
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over",
+
 						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
 					String expTxt1 = "Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
@@ -629,9 +642,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 									+ "Expected='" + expTxt2 + "' | " + "Actual-'" + actualTxt2 + "'",
 							expTxt2.equals(actualTxt2));
 				}
+
 				jsMouseOut(resultNavTooltip); // note: mouse out from tooltip for it to disappear
+
 //				scrollToView(moveAwayFromTooltip);
 //				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
+
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
 						!pharmacyValidate(pagination));

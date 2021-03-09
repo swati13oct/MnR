@@ -34,8 +34,8 @@ import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.tfn.CampaignTFNPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.ulayer.GlobalWebElements;
-import pages.acquisition.ulayer.UlayerTFNPage;
+import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.commonpages.UlayerTFNPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 

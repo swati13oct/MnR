@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -42,8 +43,9 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
+import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
+import pages.acquisition.vpp.AepVppPlanSummaryPage;
 
 /**
  * @author
@@ -353,6 +355,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
+	
+	@FindBy(xpath = "//ul[contains(@class,'printemail')]//a[@class='emailsummary']")
+	protected WebElement summary_maEmailOption;
 
 	@FindBy(xpath = "//button[@class='cta-button cta-button sendbtn']")
 	private WebElement emailPlanSummarySendButton;
@@ -6028,7 +6033,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public List<String> getAllPlanNames(String planType) {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
-			if(planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+			if(planType.equals("PDP") && MRScenario.browsername.equalsIgnoreCase("Safari")) {
 				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
 			} else {
 				allPlanNames.add(plan.getText().trim());
@@ -6721,5 +6726,28 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		return SubmitConfirmation;
 	}
 	return Medicarenumber;
+	
+	}
+	public MedSuppOLEPage clickOnStartApplication() {
+	
+		jsClickNew(Start_ApplicationBtn);
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validate(insuredStatus, 45))
+			return new MedSuppOLEPage(driver);
+		else
+			return null;
 }
+	public void clickOnEmailField() {
+		
+		summary_maEmailOption.click();
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = "+populatedEmail);
+		Assert.assertEquals(email, populatedEmail);
+	}
 }
+

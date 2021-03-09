@@ -313,6 +313,12 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
 	private WebElement DceClosebutton;
 	
+	@FindBy(css = "a#emailComparison")
+	protected WebElement summary_maEmailOption;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1314,7 +1320,7 @@ public class ComparePlansPage extends UhcDriver {
 			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
 			//DrugYouPay.getText will get child element text as well in Safari browser which fails the scripts ahead
-			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
+			if (!MRScenario.browsername.equalsIgnoreCase("Safari")) {
 				drugYouPay = DrugYouPay.getText().trim();
 			} else {
 				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
@@ -1505,6 +1511,19 @@ public class ComparePlansPage extends UhcDriver {
 		jsClickNew(DceClosebutton);
 		System.out.println("Clicked on Close button on DCE model popup");
 		
+	}
+	
+	public void clickOnEmailField() {
+		
+		summary_maEmailOption.click();
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = "+populatedEmail);
+		Assert.assertEquals(email, populatedEmail);
 	}
 }
 

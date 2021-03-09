@@ -14,7 +14,6 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.UlayerTFNPage;
 
 
 public class tfnStepDefinitionUHC {
@@ -22,7 +21,7 @@ public class tfnStepDefinitionUHC {
 	@Autowired
 	MRScenario loginScenario;
 
-	public MRScenario getLoginScenario() {
+	/*public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
 	WebDriver wd;
@@ -625,7 +624,7 @@ public void user_verify_VPP_TFN(DataTable givenAttributes) throws Throwable {
 		Assert.fail("TFN is not displaying the right number  "+ maVPPTabTFN_UI);
 	}
 	
-}
+}*/
 
 
 

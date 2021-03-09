@@ -186,7 +186,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
    #######################Script 5: Email Validation########################################
    @Scenario_5_2_DirectTraffic_Email_UHC_UAT @UATRegression
   Scenario Outline: <scenario>  Verify TFN through Email validation
-   Given the user is on the uhcmedicaresolutions site landing page
+   Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> | 
@@ -219,8 +220,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
        | TFN No | <MedicareSupplementTFNNo> |
        | TFN Xpath | <MedicareSupplementTFNxpath> |
     Examples:  
-      |scenario                  | pscCode |pscCode1| emailLinkUrl                                                      |  medicareUrl                                   |  shoppagesUrl                        |  TFNNo         |TFNxpath                         |EmailTFNNo    |MedicareSupplementTFNNo|MedicareSupplementTFNxpath         |EmailTFNxpath                                                                             |    
-      |Scenario 5-Email - UMS 	|  880180 | 8014300|?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |medicare-articles.html                          |  shop/medicare-supplement-plans.html  |1-877-596-3258|(//a[contains(@class, 'tel')])[1]  |1-855-569-9796|1-866-253-1495         | (//a[contains(@class, 'tel')])[2]   |//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
+      |scenario                  |site|pscCode |pscCode1| emailLinkUrl                                                      |  medicareUrl                                   |  shoppagesUrl                        |  TFNNo         |TFNxpath                         |EmailTFNNo    |MedicareSupplementTFNNo|MedicareSupplementTFNxpath         |EmailTFNxpath                                                                             |    
+      |Scenario 5-Email - UMS 	|UHC|880180 | 8014300|?WT.mc_id=8014300&mrcid=em:Acq:MR%7CNTM6501%7CEGEM3108%7C::8014300 |medicare-articles.html                          |  shop/medicare-supplement-plans.html  |1-877-596-3258|(//a[contains(@class, 'tel')])[1]  |1-855-569-9796|1-866-253-1495         | (//a[contains(@class, 'tel')])[2]   |//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
      
            #######################Script 6: External Link########################################
    @Scenario_6_External_Link_UHC_UAT @UATRegression
