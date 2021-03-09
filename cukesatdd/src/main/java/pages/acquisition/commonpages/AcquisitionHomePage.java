@@ -5374,12 +5374,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public void validateAutoCompleteSuggestion() {
-		waitforElement(autoCompleteSuggestion);
 		validate(autoCompleteSuggestion);
 	}
 	
 	public void clickFirstSuggestion() {
-		//firstAutoCompleteSuggestion.click();
 		jsClickNew(firstAutoCompleteSuggestion);
 	}
 	
@@ -5392,7 +5390,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	
 	public void validateAutoCompleteSuggestionSiteSearchPage() {
-		validate(firstAutoCompleteSuggestionSiteSearch);
+		validate(autoCompleteSuggestionSiteSearch);
+		waitTillElementClickableInTime(firstAutoCompleteSuggestionSiteSearch, 30);
+	}
+	
+	public void clickFirstSuggestionSiteSearch() {
+		jsClickNew(firstAutoCompleteSuggestionSiteSearch);
 	}
 }
 

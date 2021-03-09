@@ -3898,7 +3898,7 @@ public class VppCommonStepDefinition {
 	public void the_user_clicks_on_the_first_auto_complete_suggestion_site_search_page(){
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateAutoCompleteSuggestionSiteSearchPage();
+		aquisitionhomepage.clickFirstSuggestionSiteSearch();
 	}
 }
 

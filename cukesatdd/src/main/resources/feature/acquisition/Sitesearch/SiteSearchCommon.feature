@@ -139,9 +139,9 @@ Feature: 1.03 Acq-To test Sitesearch results site
     @SiteSearchAutoComplete_AARP
     Examples: 
       | site | searchValue | newsearchvalue |
-      | AARP | Medicare    | pharmacy    |
+      | AARP | Medicare    | plans    |
 
     @SiteSearchAutoComplete_UHC
     Examples: 
       | site | searchValue | newsearchvalue |
-      | UHC  | Medicare    | pharmacy       |
+      | UHC  | Medicare    | plans       |
