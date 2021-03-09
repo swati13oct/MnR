@@ -359,7 +359,19 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Silver Sneakers')]/ancestor::label")
 	private WebElement silverSneakersCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-box'][1]")
+	private WebElement palncompareCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-link'][1]")
+	private WebElement palncompareLink;
 
+	@FindBy(css = "a#emailPlanDetail")
+	protected WebElement summary_maEmailOption;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
+	
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
 	}
@@ -1953,6 +1965,40 @@ public class PlanDetailsPage extends UhcDriver {
 		result.add(0, docName);
 		result.add(1,lang);
 		return result;
+	}
+	
+	public void clickOnEmailField() {
+		
+		summary_maEmailOption.click();
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = "+populatedEmail);
+		Assert.assertEquals(email, populatedEmail);
+	}
+
+		public void validatealllinksonPlanDetails() {
+		validateNew(medBenefitsTab.get(0));
+		validateNew(presDrugTab1.get(0));
+		validateNew(optionalServicesTab);
+		validateNew(planCostsTab);
+		validateNew(EnrollinPlan);
+		validateNew(palncompareCheckbox);
+		validateNew(palncompareLink);
+	}
+	
+	public ProviderSearchPage validateEditDocotrsProviderButton() {
+		// TODO Auto-generated method stub
+		validateNew(editProviderButtonOnPlanDetails);
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(editProviderButtonOnPlanDetails);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
 	}
 	
 }

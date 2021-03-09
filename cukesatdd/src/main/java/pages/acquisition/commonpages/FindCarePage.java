@@ -30,7 +30,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//button[@class='action-btn getStarted']")
 	public WebElement GetstartedButton;
 
-	@FindBy(xpath = "//span[@class='location']")
+	@FindBy(xpath = "//*[@class='location']")
 	public WebElement LocationLink;
 
 	@FindBy(xpath = "//span[text()='Change Location']")
@@ -45,7 +45,7 @@ public class FindCarePage extends UhcDriver {
 	@FindBy(xpath = "//h1[text()='Which type of place?']")
 	public WebElement Whichtypeofplace;
 
-	@FindBy(xpath = "//h1//span[text()='Results for ']")
+	@FindBy(xpath = "//h2//span[text()='Results for ']")
 	public WebElement ResultsHeader;
 
 	@FindBy(xpath = "(//*[contains(@data-test-id,'provider-name-link')])[1]")
@@ -137,7 +137,7 @@ public class FindCarePage extends UhcDriver {
 		PlacesButton.click();
 		waitforElement(Whichtypeofplace);
 		HospitalsButton.click();
-		waitforElement(ResultsHeader);
+		waitforElementNew(ResultsHeader, 20);
 		String HospName = FirstHospitalRecord.getText();
 		FirstHospitalRecord.click();
 		validate(Facilityicon);
@@ -203,7 +203,7 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		jsClickNew(PeopleButton);
 		waitforElement(Whoareyoulookingfor);
 		jsClickNew(MedicalGroupsButton);
-		waitforElement(ResultsHeader);
+		waitforElementNew(ResultsHeader, 20);
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("selected Provder Name is : " + HospName);
 		validate(Medicalgroupicon);
@@ -261,7 +261,7 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 	jsClickNew(PrimaryCareButton);
 	waitforElement(Whichtypeofprimarycareprovider);
 	jsClickNew(AllPrimaryCareProviders);
-	waitforElement(ResultsHeader);
+	waitforElementNew(ResultsHeader, 20);
 	String HospName = FirstHospitalRecord.getText();
 	System.out.println("Text is :: " + HospName);
 	jsClickNew(FirstHospitalRecord);
@@ -319,7 +319,7 @@ public ComparePlansPage providerfromPrimaryCareClinicButton() throws Exception {
 	jsClickNew(ClinicsButton);
 	waitforElement(Whichtypeofclinic);
 	jsClickNew(PrimaryCareClinicButton);
-	waitforElement(ResultsHeader);
+	waitforElementNew(ResultsHeader, 20);
 	String HospName = FirstHospitalRecord.getText();
 	System.out.println("Text is :: " + HospName);
 	validate(Facilityicon);
@@ -375,7 +375,7 @@ public ComparePlansPage placesfromHospital() throws Exception {
 	jsClickNew(PlacesButton);
 	CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
 	jsClickNew(HospitalsButton);
-	waitforElement(ResultsHeader);
+	waitforElementNew(ResultsHeader, 20);
 	String HospName = FirstHospitalRecord.getText();
 	System.out.println("Text is :: " + HospName);
 	jsClickNew(FirstHospitalRecord);
@@ -431,7 +431,7 @@ public ComparePlansPage placesfromHospital() throws Exception {
 		jsClickNew(PlacesButton);
 		CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
 		jsClickNew(HospitalsButton);
-		waitforElement(ResultsHeader);
+		waitforElementNew(ResultsHeader, 20);
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
 		jsClickNew(FirstHospitalRecord);

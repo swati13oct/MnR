@@ -62,7 +62,8 @@ Feature: To test Organic Search Campaign TFN on UHC site
   Scenario Outline: 4.1 to 4.8 Campaign Precedence Logic No 1 for UHC
     #------------------------**********---------------------------------
     # Precedence 4.1 - Visit UHC using Direct URL , PSC code 880180
-    Given the user is on the uhcmedicaresolutions site landing page
+   Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <Precedence1PSC> |
