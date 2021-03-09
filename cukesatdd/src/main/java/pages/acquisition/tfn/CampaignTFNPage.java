@@ -52,7 +52,10 @@ public class CampaignTFNPage extends UhcDriver {
 	public static String PSC_CODE = "psccode";
 	public static String FEDERAL_TFN = "federaltfn";
 	public static String MEDSUPP_TFN = "medsupptfn";
-	@FindBy(xpath = "//*[contains(@title,'Search')]")
+	
+	//@FindBy(xpath = "//*[contains(@title,'Search')]")
+	
+	@FindBy(xpath ="//*[contains(@class,'gLFyf gsfi')]")
 	public WebElement GoogleSearchField;
 
 	@FindBy(xpath = "//*[@id='tsf']/div[2]/div/div[3]/center/input[1]")
@@ -418,6 +421,7 @@ public class CampaignTFNPage extends UhcDriver {
 	
 
 	public void googleSearchAARP() {
+		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 30);
 		validateNew(GoogleSearchField);
 		GoogleSearchField.sendKeys("AARP Medicare Advantage Plan" + Keys.ENTER);
 		System.out.println("Google Search entered for : AARP Medicare Advantage Plan");
