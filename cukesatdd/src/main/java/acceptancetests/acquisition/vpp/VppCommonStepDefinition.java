@@ -3834,6 +3834,26 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.dceModelClosepopup();
 	}
+	
+	@Then("^validate all subtabs displayed on plan details$")
+	public void validateplandetaillinks() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatealllinksonPlanDetails();
+	}
+	
+	@Then("^User click on provider link on Medical tab and navigates to rally page$")
+	public void user_EditProvider_on_PlanDetailsPage() {
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateEditDocotrsProviderButton();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+
+	}
 
 	
 }
