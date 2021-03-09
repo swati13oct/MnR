@@ -667,8 +667,13 @@ public abstract class UhcDriver {
 		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
-		mobileSelectOption(dropdownElement, value, true);
-		dropdown.selectByValue(value);
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("IOS")
+				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
+			mobileSelectOption(dropdownElement, value, true);
+		} else {
+			dropdown.selectByValue(value);
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
 		if (!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
@@ -1247,7 +1252,8 @@ public abstract class UhcDriver {
 	 */
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
-		if (MRScenario.browsername.equalsIgnoreCase("Safari")) {
+		if (MRScenario.browsername.equalsIgnoreCase("Safari") &&
+                !MRScenario.mobileDeviceOSVersion.equalsIgnoreCase("iOS"))  {
 			// Sets FluentWait Setup
 			List<WebElement> loadingScreen = null;
 			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
