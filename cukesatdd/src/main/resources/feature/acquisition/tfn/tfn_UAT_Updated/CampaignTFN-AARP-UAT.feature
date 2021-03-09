@@ -351,7 +351,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
   #######################Script 7: Email Validation########################################
   @Scenario_7_DirectTraffic_Email_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN through Email Validation
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -388,8 +389,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN No | <MedicareSupplementTFNNo> |
        | TFN Xpath | <MedicareSupplementTFNxpath> |
     Examples: 
-      | scenario               | pscCode | zipcode|pscCode1 | emailLinkUrl                                                      | emailLinkTFN                      | medicareUrl            | medicareTFN                                                                         | shoppagesUrl                        | shoppagesTFN                                                                      |TFNNo         |TFNxpath                         |EmailTFNNo    |MedicareSupplementTFNNo|MedicareSupplementTFNxpath         |EmailTFNxpath|
- 			| Scenario 7-Email - AMP |  810027 | 90210  | 8013925 | /?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 | (//a[contains(@class, 'tel')])[1] | medicare-articles.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |1-877-699-5710|(//a[contains(@class, 'tel')])[1]|1-855-593-6479|1-866-324-0819         | (//a[contains(@class, 'tel')])[2] |//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
+      | scenario               | site|pscCode | zipcode|pscCode1 | emailLinkUrl                                                      | emailLinkTFN                      | medicareUrl            | medicareTFN                                                                         | shoppagesUrl                        | shoppagesTFN                                                                      |TFNNo         |TFNxpath                         |EmailTFNNo    |MedicareSupplementTFNNo|MedicareSupplementTFNxpath         |EmailTFNxpath|
+ 			| Scenario 7-Email - AMP | AARP|810027 | 90210  | 8013925 | /?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 | (//a[contains(@class, 'tel')])[1] | medicare-articles.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |1-877-699-5710|(//a[contains(@class, 'tel')])[1]|1-855-593-6479|1-866-324-0819         | (//a[contains(@class, 'tel')])[2] |//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
    
   #######################Script 8: External Link PDP########################################
   @Scenario_8_External_Link_PDP_UAT @UATRegression

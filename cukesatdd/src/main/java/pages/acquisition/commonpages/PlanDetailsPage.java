@@ -40,6 +40,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 /**
@@ -358,6 +359,12 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Silver Sneakers')]/ancestor::label")
 	private WebElement silverSneakersCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-box'][1]")
+	private WebElement palncompareCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-link'][1]")
+	private WebElement palncompareLink;
 
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
@@ -1439,8 +1446,9 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 //      LearnMore changes Start
-	public void clickPrescriptionBenifitTab() {
+	public DrugDetailsPageMobile clickPrescriptionBenifitTab() {
 		jsClickNew(prescriptionTab);
+		return null;
 
 	}
 
@@ -1951,6 +1959,28 @@ public class PlanDetailsPage extends UhcDriver {
 		result.add(0, docName);
 		result.add(1,lang);
 		return result;
+	}
+	
+	public void validatealllinksonPlanDetails() {
+		validateNew(medBenefitsTab.get(0));
+		validateNew(presDrugTab1.get(0));
+		validateNew(optionalServicesTab);
+		validateNew(planCostsTab);
+		validateNew(EnrollinPlan);
+		validateNew(palncompareCheckbox);
+		validateNew(palncompareLink);
+	}
+	
+	public ProviderSearchPage validateEditDocotrsProviderButton() {
+		// TODO Auto-generated method stub
+		validateNew(editProviderButtonOnPlanDetails);
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(editProviderButtonOnPlanDetails);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
+
 	}
 	
 }

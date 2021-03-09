@@ -44,22 +44,22 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.tfn.CampaignTFNPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.ulayer.FindCarePage;
-import pages.acquisition.ulayer.MultiCountyModalPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.RequestHelpAndInformationPage;
-import pages.acquisition.ulayer.RequestMailedInformation;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VPPTestHarnessPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
-import pages.acquisition.ulayer.VisitorProfileTestHarnessPage;
-import pages.acquisition.ulayer.ZipcodeLookupHomePage;
-import pages.acquisition.vppforaep.AepPlanDetailsPage;
-import pages.acquisition.vppforaep.VppCommonPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.DrugCostEstimatorPage;
+import pages.acquisition.commonpages.FindCarePage;
+import pages.acquisition.commonpages.MultiCountyModalPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
+import pages.acquisition.commonpages.RequestHelpAndInformationPage;
+import pages.acquisition.commonpages.RequestMailedInformation;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.vpp.VPPTestHarnessPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.commonpages.VisitorProfileTestHarnessPage;
+//import pages.acquisition.commonpages.ZipcodeLookupHomePage;
+import pages.acquisition.vpp.AepPlanDetailsPage;
+import pages.acquisition.vpp.VppCommonPage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -77,7 +77,7 @@ public class VppStepDefinitionUpdatedAARP {
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
-	@Given("^the user is on AARP medicare acquisition site landing page$")
+	/*@Given("^the user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
@@ -107,10 +107,10 @@ public class VppStepDefinitionUpdatedAARP {
 				aquisitionhomepage);
 	}
 
-	/**
+	*//**
 	 * @throws InterruptedException 
 	 * @toDo: user performs plan search using following information
-	 */
+	 *//*
 //	@When("^the user performs plan search using following information in the AARP site$")
 //	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 //		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -172,7 +172,7 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 
-	/*@When("^the user adds plan from plan search using following information in the AARP site$")
+	@When("^the user adds plan from plan search using following information in the AARP site$")
 	public void the_user_adds_plan_from_plan_search_using_following_information_in_the_AARP_site(DataTable givenAttributes) {
 		
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -200,11 +200,11 @@ public class VppStepDefinitionUpdatedAARP {
 		} else {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
-	}*/
+	}
 
-	/**
+	*//**
 	 * @toDo:user validates plan count for all plan types on plan summary page
-	 */
+	 *//*
 	@Then("^user validates plan count for all plan types on plan summary page in the AARP site$")
 	public void user_validates_following_benefits_ui_aarp() {
 
@@ -216,9 +216,9 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 	}
 
-	/**
+	*//**
 	 * @toDo:user views the plans of the below plan type
-	 */
+	 *//*
 	@And("^the user views the plans of the below plan type in AARP site$")
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
 		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -241,9 +241,9 @@ public class VppStepDefinitionUpdatedAARP {
 			plansummaryPage.handlePlanYearSelectionPopup();
 	}
 
-	/**
+	*//**
 	 * @toDo:user views the plans of the below plan type and select current year for AEP
-	 */
+	 *//*
 	
 	@And("^the user views the plans of the below plan type in AARP site and select Current year$")
 	public void user_performs_planSearch_in_aarp_site_current_year(DataTable givenAttributes) {
@@ -319,12 +319,12 @@ public class VppStepDefinitionUpdatedAARP {
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearFutureSelectionPopup(planYear);
 	}
 
-	/**
+	*//**
 	 * @toDo:select multiple plans to compare in MA and click on compare plan link
-	 */
+	 *//*
 	@And("^I select multiple plans to compare in MA and click on compare plan link$")
 	public void I_select_all_3_plans_to_compare(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -357,9 +357,9 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in loading the compare plans page");
 	}
 
-	/**
+	*//**
 	 * @toDo:user validate the print and email link option in plan compare
-	 */
+	 *//*
 	@When("^the user validate the print and email link option in plan compare$")
 	public void user_validate_print_and_email_link_option_in_plan_compare() {
 
@@ -368,9 +368,9 @@ public class VppStepDefinitionUpdatedAARP {
 		comparePlansPage.validateprintandemail();
 	}
 
-	/**
+	*//**
 	 * @toDo:the user validating email and print option in plan compare
-	 */
+	 *//*
 	@Then("^the user validating email and print option in plan compare$")
 	public void user_validating_print_and_email_option_in_plan_compare() {
 
@@ -379,10 +379,10 @@ public class VppStepDefinitionUpdatedAARP {
 		comparePlansPage.validatingprintandemail();
 	}
 
-	/**
+	*//**
 	 * @toDo:click back to all plans button and verify that all plans are
 	 *              still selected
-	 */
+	 *//*
 	@Then("^I click back to all plans button and verify that all plans are still selected$")
 	public void verifyAllPlansStillSelected() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -396,10 +396,10 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in validating all plans are still selected");
 	}
 
-	/**
+	*//**
 	 * @toDo:user view plan details of the above selected plan in AARP site and
 	 *            validates
-	 */
+	 *//*
 	@When("^the user view plan details of the above selected plan in AARP site and validates$")
 	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -476,9 +476,9 @@ public class VppStepDefinitionUpdatedAARP {
 			vppsummarypage.verifyPlanComapreCheckboxIsUncheckedforFirstPlan();
 	}
 	
-	/**
+	*//**
 	 * @toDo:user validates the available plans for selected plan types
-	 */
+	 *//*
 	@Then("^the user validates the available plans for selected plan types in the AARP site$")
 	public void user_validates_available_plans_aarp() {
 
@@ -495,10 +495,10 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 
-	/**
+	*//**
 	 * @throws InterruptedException
 	 * @toDo:user validates plan summary for the below plan
-	 */
+	 *//*
 	@And("^the user validates plan summary for the below plan in the AARP site$")
 	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
 		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
@@ -612,10 +612,10 @@ public class VppStepDefinitionUpdatedAARP {
 		vppPlanDetailsPage.validatePrintandEmailOnPlanDetails();
 	}
 
-	/**
+	*//**
 	 * @toDo:the user validates the functionality of email and print buttons on
 	 *           the plan Details Page
-	 */
+	 *//*
 	@Then("^the user validates the functionality of email and print buttons on the plan Details Page$")
 	public void user_validates_the_functionality_of_emailandprintbuttons_on_the_plan_Details_Page() {
 
@@ -867,7 +867,7 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error Loading VPP plan summary page");
 		}
 	}
-	/*	@When("^the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site$")
+		@When("^the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site$")
 	public void the_user_goes_to_PDP_Landing_and_performs_zipcode_search_using_widget_to_welcome_OLE_Page_using_widget_on_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -905,7 +905,7 @@ public class VppStepDefinitionUpdatedAARP {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		boolean validationFlag = vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(benefitType, expectedText);
 		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - "+benefitType,validationFlag);
-	}	*/
+	}	
 	@Then ("^User validates the VPP promowidjet for specifc plans$")
 	public void User_validates_the_promo_widjet(DataTable givenAttributes)
 	{
@@ -921,9 +921,9 @@ public class VppStepDefinitionUpdatedAARP {
 			Assert.fail("Error in validating the Plan Details Page");
 
 	}
-	/**
+	*//**
 	 * @toDo:the user is on AARP medicare acquisition site VPP Plan Summary page after hits Campaign URL
-	 */
+	 *//*
 	@Given("^the user is on AARP medicare acquisition site VPP Plan Summary page after hits Campaign URL$")
 	public void the_user_on_aarpmedicareplans_Campaign_landing_page() throws Throwable {
 
@@ -1063,9 +1063,9 @@ public class VppStepDefinitionUpdatedAARP {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:select all 3 plans to compare and click on compare plan link
-	 */
+	 *//*
 	@And("^I select all 3 plans to compare and click on compare plan link in AARP$")
 	public void I_select_all_3_plans_to_compare_AARP() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -2170,13 +2170,13 @@ public class VppStepDefinitionUpdatedAARP {
 				
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		 aquisitionhomepage.validateCallSam();
-		/*
+		
 		 * if (Aquisitionhomepage != null) {
 		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 		 * Aquisitionhomepage); Assert.assertTrue(true);
 		 * System.out.println("TFN Widget is Displayed"); } else{
 		 * Assert.fail("TFN Widget is NOT Displayed"); }
-		 */
+		 
 	}
 	
 	
@@ -2201,13 +2201,13 @@ public class VppStepDefinitionUpdatedAARP {
 				
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateChatSam();
-		/*
+		
 		 * if (Aquisitionhomepage != null) {
 		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 		 * Aquisitionhomepage); Assert.assertTrue(true);
 		 * System.out.println("Chat Widget is Displayed"); } else{
 		 * Assert.fail("Chat Widget is NOT Displayed"); }
-		 */
+		 
 	}
 	
 	@And("^verify Chat SAM roll out and contain the text Call a Licensed Insurance Agent$")
@@ -2266,7 +2266,7 @@ public class VppStepDefinitionUpdatedAARP {
 		
 	  }
 	
-		/*
+		
 		 * @Then("^the user clicks on back on all plan linnk in Plan Compare page")
 		 * public void user_clicks_back_to_all_plan_PlanCompare_AARP() throws
 		 * InterruptedException{ ComparePlansPage planComparePage = (ComparePlansPage)
@@ -2279,7 +2279,7 @@ public class VppStepDefinitionUpdatedAARP {
 		 * Assert.fail("Error in navigating back to Plan Summary Page");
 		 * 
 		 * }
-		 */
+		 
 	@When("^verify Call SAM icon is visible or not on Plan Comapare$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare() throws InterruptedException {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -2516,7 +2516,7 @@ public class VppStepDefinitionUpdatedAARP {
 		}
 	}
 	
-	/** user is on the Medicare Site landing page for VPP Testharness*/
+	*//** user is on the Medicare Site landing page for VPP Testharness*//*
 	@Given("^the user is on VPP TestHarness page for AARP$")
 	public void validateUserIsOnUMS_VPPTestharnessPage_for_AARP(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
@@ -2851,7 +2851,7 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 	
-	/** user is on the Medicare Site landing page for Visitorprofile Testharness*/
+	*//** user is on the Medicare Site landing page for Visitorprofile Testharness*//*
 	@Given("^the user is on VistorProfile TestHarness page for AARP$")
 	public void validateUserIsOnAARP_VPTestharnessPage_for_AARP(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
@@ -3143,7 +3143,7 @@ public class VppStepDefinitionUpdatedAARP {
 //
 //	}
 //	
-	/*@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
+	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
 	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
@@ -3265,11 +3265,11 @@ public class VppStepDefinitionUpdatedAARP {
 			e.printStackTrace();
 		}
 
-	}*/
+	}
 
 	//--------------------------------------------
 	//note: begin - added for deeplink validaton
-	/* tbd 
+	 tbd 
 	@Then("^user saves first plan on AARP site$")
 	public void saveFirtPlan() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -3477,7 +3477,7 @@ public class VppStepDefinitionUpdatedAARP {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		getLoginScenario().saveBean(PageConstants.ACQ_PAGE_TYPE, site);
 		if (site.equalsIgnoreCase("ulayer")) {
-			pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+			pages.acquisition.commonpages.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.commonpages.VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.viewPlanSummary(plantype);
 			plansummaryPage.handlePlanYearSelectionPopup();
@@ -3486,7 +3486,7 @@ public class VppStepDefinitionUpdatedAARP {
 			System.exit(0);
 		}
 	}
-	*/
+	
 	
 	//note: end- added for deeplink validaton
 	//--------------------------------------------
@@ -4030,5 +4030,5 @@ public class VppStepDefinitionUpdatedAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 	plansummaryPage.clickOnButtonInPlanSummaryPage("Get Started");
-	}
+	}*/
 }
