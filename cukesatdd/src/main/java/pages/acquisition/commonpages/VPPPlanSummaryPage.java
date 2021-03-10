@@ -6779,7 +6779,6 @@ public void clickOnEmailField() {
 		System.out.println("populatedEmail = "+populatedEmail);
 		Assert.assertEquals(email, populatedEmail);
 	}
-}
 
 	public void clickOnChangeZipCode() {
 		validateNew(changeLocationBtn);
