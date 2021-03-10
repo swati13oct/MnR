@@ -71,14 +71,14 @@ public class AepPlanComparePage extends UhcDriver {
 
             benefitValue = benefitValue.trim();
 
-            if (benefitValue.contains("NA") || benefitValue.contains("N/A")) {
+            if (benefitValue.equals("NA") || benefitValue.equals("N/A")) {
                 counter++;
                 if (!key.trim().equals(columnName.trim())) {
                     flag = true;
                     continue;
                 }
 
-                if ((key.trim().equals(columnName.trim())) && benefitValueUI.contains("N/A")) {
+                if ((key.trim().equals(columnName.trim())) && benefitValueUI.equals("N/A")) {
                     flag = true;
                     break;
                 }
