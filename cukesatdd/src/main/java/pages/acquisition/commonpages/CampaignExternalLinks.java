@@ -73,29 +73,29 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	//--- locators for scenario 7 
 
-	@FindBy(xpath = "//*[@id=\"button-94902407\"]")
+	@FindBy(xpath = "//*[@id='button-94902407']")
 	private WebElement planAndPricing;
 	
-	@FindBy(xpath = "//*[@id=\"button-127872393\"]")
+	@FindBy(xpath = "//*[@id='button-127872393']")
 	private WebElement estimateDrugCost;
 
-	@FindBy(xpath = "//*[@id=\"card-62690855\"]/div[1]/h3")
+	@FindBy(xpath = "//*[@id='card-62690855']/div[1]/h3")
 	private WebElement lookupDrugs;
 
 
-	@FindBy(xpath ="//*[@id=\"card-64402169\"]/div[1]/h3")
+	@FindBy(xpath = "//*[@id='card-64402169']/div[1]/h3")
 	private WebElement findPharmacy;
 	
-	@FindBy(xpath ="//*[@id=\"button-356498815\"]")
+	@FindBy(xpath = "//*[@id='button-356498815']")
 	private WebElement startnow;
 	
-	@FindBy(xpath ="//*[@id=\"card-943837503\"]/div[1]/h3")
+	@FindBy(xpath = "//*[@id='card-943837503']/div[1]/h3")
 	private WebElement comparePlanCost;
 	
-	@FindBy(xpath ="//*[@id=\"button-1708542647\"]")
+	@FindBy(xpath = "//*[@id='button-1708542647']")
 	private WebElement planAndPricingbuttoncompare;
 	
-	@FindBy(xpath = "//*[@id=\"button-127872393\"]")
+	@FindBy(xpath = "//*[@id='button-127872393']")
 	private WebElement estimateDrugCostButton;
 	
 	@FindBy(xpath = "//a[contains(@data-asset-name,'Estimate Your Prescription')]")
@@ -104,6 +104,12 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@data-asset-name,'Start Now')]")
 	private WebElement preExternalLink;
 	
+	@FindBy(id = "zipcode")
+	private WebElement ZipCodeTxtBx;
+
+	@FindBy(id = "submit")
+	private WebElement FindPlansButton;
+
 //	--- locators for scenario 5
 
 	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::input[contains(@id,'find-plans-zip')]")
@@ -835,5 +841,65 @@ public class CampaignExternalLinks extends UhcDriver {
 
 		if (CurrentRailURL.contains("health-plans"))
 			System.out.println("****************Vpp Page is displayed***************" + CurrentRailURL);
+	}
+
+	public void viewPlansAndPricing() {
+		validateNew(planAndPricingbuttoncompare);
+
+		String parentWindow = driver.getWindowHandle();
+
+		jsClickNew(planAndPricingbuttoncompare);
+		waitForPageLoadSafari();
+
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("health-plans"))
+			System.out.println("****************Vpp Page is displayed***************" + CurrentRailURL);
+	}
+
+	public VPPPlanSummaryPage searchPlansWithOutCountyForPDPExternalPage(String zipcode) {
+		validateNew(ZipCodeTxtBx);
+		sendkeysNew(ZipCodeTxtBx, zipcode);
+
+		jsClickNew(FindPlansButton);
+
+		waitForPageLoadSafari();
+		checkModelPopup(driver, 10);
+
+		validateNew(vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		} else
+			return null;
+	}
+
+	public VPPPlanSummaryPage searchPlanswithCountyForPDPExternalPage(String zipcode, String county) {
+		validateNew(ZipCodeTxtBx);
+		sendkeysNew(ZipCodeTxtBx, zipcode);
+
+		jsClickNew(FindPlansButton);
+
+		CommonUtility.waitForPageLoad(driver, countyModalVpp, 15);
+		if (validate(countyModalVpp))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")));
+
+		checkModelPopup(driver, 10);
+
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
 }

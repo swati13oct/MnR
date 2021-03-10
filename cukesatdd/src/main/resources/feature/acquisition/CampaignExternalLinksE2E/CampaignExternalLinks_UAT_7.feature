@@ -59,7 +59,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user views the plans of the below plan type
-      | Plan Type | <MAplantype> |  
+      | Plan Type | <MAplantype> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user validates TFN Number on Right Rail
@@ -169,19 +169,50 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
  		#--------------------------DCE from Look Up your Drugs---------------------##
     When user click on Estimate your Drug Cost button under Look up your drugs title
    	#And the user validates Get Started Page
-    And the user validates SAM icons on the page
+   	And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user closes the new browser tab
     ##--------------------------------- pharmacyflow from External Link------------------------##
    	When user clicks on Start Now to get start the Pharmacy flow from external page
-   	And the user validates SAM icons on the page
-      | TFN Xpath | <TFNxpath2> |
-   And the user enters following details on Pharmacy search page
+    And the user enters following details on Pharmacy search page
       | Zip Code    | <zipcode>		|
       | Distance    | <distance>	|
       | County Name | <county> 		|
+    And the user validates SAM icons on the page
+    	| TFN Xpath | <TFNxpath2> |
+    And the user chooses a plan from dropdown
+      | Current Year Plan Name | <cy_planName> |
+      | Current Year Plan Year | <cy_planYear> |
+      | Next Year Plan Name    | <ny_planName> |
+      | Next Year Plan Year    | <ny_planYear> |
+    Then the user validates the pharmacies available
+      | Language | English |
+    And the user validates tooltips on filters
+      | Language                                   | English                 |
+      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+    And the user validates map section content
+    And the user validates show on map link
+    And the user validates get direction link
+    And the user validates more information content based on plan type
+    And the user validates view search PDF link
+    And the user validates pharmacy widgets
+      | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
+      | Has Walgreens plan                         | <hasWalgreensPlan>      |
+      | Has Preferred Mail Service Pharmacy plan   | <hasPrefdMailServPlan>  |
+    And the user selects Pharmacy Types to Filter
+      | Pharmacy Type | <pharmacyType> |
+      | Language      | English        | 
+    Then the user validates the question widget
+    And the user validates SAM icons on the page
+    	| TFN Xpath | <TFNxpath2> |
+    And the user closes the new browser tab
+    ##--------------------------------- Vpp flow from External Link------------------------##
+    And the user clicks on View Plans and Pricing button on PDP external page
+    	| Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty>	|
+      | County Name     | <county>          |
       
    @Scenario7_AARP
     Examples: 
-      | Scenario                                            | externallink                                                          | TFNNo          | TFNxpath1                               | TFNxpath2                                                                                          | pscCode | zipcode | isMultutiCounty | county         | PDPplantype | PDPplanname                     | TFNxpath3                         | planIndex | planIndex1 | TFNxpath4                         |	MAplantype	| MAplanname														|	SNPPlanType	|	SNPPlanName																				|	drug1 | drug2   | drug3   | drug4 	| zipCode	|	Medsupplantype	|	TFNNo1					|	defaultPharmacy																																							|	testPlans																	|	distance	|
-      | E2E Scenario 7 _medicare-prescription-drug-plans-52 | https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | 1-866-308-8818 | //*[@id="tfn-614028214"]/p[2]/span[1]/a | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | 8001024 |   36016 | Yes             | Barbour County | PDP         | AARP MedicareRx Walgreens (PDP) | (//a[contains(@class, 'tel')])[3] |         1 |          2 | (//a[contains(@class, 'tel')])[1] |	MAPD				|	AARP Medicare Advantage Plan 1 (HMO)	|	SNP					|	UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)	|	Emsam | Lipitor | Orfadin | Humalog | 27053		|	MS							|	1-844-895-7228 	|	Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)	|	AARP Medicare Advantage Plan 2 (HMO-POS)	|	15				|
+      | Scenario                                            | externallink                                                          | TFNNo          | TFNxpath1                               | TFNxpath2                                                                                          | pscCode | zipcode | isMultutiCounty | county         | PDPplantype | PDPplanname                     | TFNxpath3                         | planIndex | planIndex1 | TFNxpath4                         |	MAplantype	| MAplanname														|	SNPPlanType	|	SNPPlanName																				|	drug1 | drug2   | drug3   | drug4 	| zipCode	|	Medsupplantype	|	TFNNo1					|	defaultPharmacy																																							|	testPlans																	|	zipcode1	|	distance	|	cy_planYear | cy_planName                     | ny_planYear | ny_planName                     |	pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | E2E Scenario 7 _medicare-prescription-drug-plans-52 | https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | 1-866-308-8818 | //*[@id="tfn-614028214"]/p[2]/span[1]/a | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | 8001024 |   36016 | Yes             | Barbour County | PDP         | AARP MedicareRx Walgreens (PDP) | (//a[contains(@class, 'tel')])[3] |         1 |          2 | (//a[contains(@class, 'tel')])[1] |	MAPD				|	AARP Medicare Advantage Plan 1 (HMO)	|	SNP					|	UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)	|	Emsam | Lipitor | Orfadin | Humalog | 27053		|	MS							|	1-844-895-7228 	|	Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)	|	AARP Medicare Advantage Plan 2 (HMO-POS)	|	90210			|	15				|	       2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | E-Prescribing | True                  | True            | True                 |

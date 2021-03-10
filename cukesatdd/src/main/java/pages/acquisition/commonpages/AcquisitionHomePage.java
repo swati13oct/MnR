@@ -5419,6 +5419,7 @@ public VPPPlanSummaryPage searchPlansWithOutCountyForExternalLink(String zipcode
 
 	public VPPPlanSummaryPage externalsearchPlans(String zipcode, String countyName) {
 		waitForPageLoadSafari();
+		checkModelPopup(driver, 10);
 		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
 		sendkeys(externalzipCodeField, zipcode);
 		jsClickNew(viewPlansButton);

@@ -51,16 +51,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 
-		scrollToView(distanceDropownID);
-		selectFromDropDownByText(driver, distanceDropownID, distance);
-
-		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
-
-		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
-		validateNoresultsZipcodeError(zipcode);
-		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
-		// searchbtn.click();
+		System.out.println("initialZipVal is : " + initialZipVal);
 
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
@@ -76,20 +68,31 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 							"PROBLEM - expects zipcode '" + zipcode
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
-					jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")));
+					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
-				} else {
-					Assert.assertTrue(
-							"PROBLEM - this is not first time entering zip for multicounty or changing from zip that was not, should NOT see multicounty popup",
-							!pharmacyValidate(countyModal));
+				} else if (validate(countyModal)) {
+					pharmacyValidate(countyModal);
+					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					CommonUtility.checkPageIsReadyNew(driver);
+					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
+																							// afterward
 				}
 			}
-			System.out.println("*****Zipcode, distance and County details are entered******");
+			System.out.println("*****County details are entered******");
 		} else {
-			System.out.println("*****Zipcode, distance details are entered but zip format is not right******");
+			System.out.println("*****Zip format is not right******");
 		}
+
+		scrollToView(distanceDropownID);
+		selectFromDropDownByText(driver, distanceDropownID, distance);
+
+		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
+		validateNoresultsZipcodeError(zipcode);
+		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
+		// searchbtn.click();
+
 		return testNote;
 	}
 
@@ -194,6 +197,9 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 						pharmacyValidate(pharmacyCount));
 			}
 		}
+		else
+			System.out.println("Pharmacy Count: " + pharmacyCount.getText());
+
 		CommonUtility.checkPageIsReady(driver);
 	}
 
@@ -245,12 +251,15 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 //		pdfLink.click();
 		Thread.sleep(2000); //note: keep this for the page to load
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		for(String tab : afterClicked_tabs) {
-			if(!tab.equals(winHandleBefore)) {
-				driver.switchTo().window(tab);
-				break;
-			}
-		}
+		int noOfWindows = afterClicked_tabs.size();
+		String tab = null;
+		for (int i = 0; i < noOfWindows; i++)
+			if (i == noOfWindows - 1) {
+				tab = afterClicked_tabs.get(i);
+						driver.switchTo().window(tab);
+						break;
+					}
+
 //		int afterClicked_numTabs=afterClicked_tabs.size();					
 //		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		String currentURL=driver.getCurrentUrl();

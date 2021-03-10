@@ -165,12 +165,12 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_INPUT_NEXT_YEAR_PLAN_YEAR, ny_planYear);
 		
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 
 		List<String> noteList=(ArrayList<String>) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
 
-		String envTimeYear=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
-		int envTimeYearValue=Integer.valueOf(envTimeYear);
+//		String envTimeYear=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
+//		int envTimeYearValue=Integer.valueOf(envTimeYear);
 		int actualYearValue = Calendar.getInstance().get(Calendar.YEAR); 
 		//note: if plan year dropdown is showing, select next year
 		//note: if no plan year dropdown but env has year in next year, select next year
@@ -186,11 +186,13 @@ public class PharmacyLocatorStepDefinition {
 			noteList.add("Has plan year dropdown, testing for year="+testPlanYear+" and plan name="+testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
 			
-		} else if (!pharmacySearchPage.isPlanYear() && envTimeYearValue>actualYearValue){
+		} else if (!pharmacySearchPage.isPlanYear()) {
 			testPlanYear=ny_planYear;
 			testPdfLinkTextDate=cy_planYear;
 			testPlanName=ny_planName;
-			noteList.add("Has NO plan year dropdown and env date is on next year. \nActual Year='"+actualYearValue+"' | Env Year='"+envTimeYearValue+"'. \nWill test with next year plan name, testing for year="+testPlanYear+" and plan name="+testPlanName+"\n");
+			noteList.add("Has NO plan year dropdown and env date is on next year. \nActual Year='" + actualYearValue
+					+ "' \nWill test with next year plan name, testing for year=" + testPlanYear + " and plan name="
+					+ testPlanName + "\n");
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, false);
 		} else { //note: no plan year drop down but env year is next year
 			testPdfLinkTextDate=cy_planYear;
@@ -213,7 +215,7 @@ public class PharmacyLocatorStepDefinition {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String language = inputAttributesMap.get("Language");
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String planName=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
 		String testPlanYear=(String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_YEAR);
 		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
@@ -247,14 +249,14 @@ public class PharmacyLocatorStepDefinition {
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validateAllTooltips(language, hasPrefRetailPharmacy);
 	}
 	
 	@And("^the user validates map section content$")
 	public void verifyMapSectionContent() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validateMapSectionContent();
 	}
 
@@ -262,7 +264,7 @@ public class PharmacyLocatorStepDefinition {
 	@Then("^the user validates show on map link$")
 	public void viewsShowOnMapResult() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
 		Assert.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed",
 				pharmacySearchPage != null);
@@ -272,7 +274,7 @@ public class PharmacyLocatorStepDefinition {
 	@Then("^the user validates get direction link$")
 	public void getDirectionResult() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validateGetDirectionLinks();
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
@@ -281,7 +283,7 @@ public class PharmacyLocatorStepDefinition {
 	@And("^the user validates more information content based on plan type$")
 	public void validateMoreInformationContent() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validateMoreInfoContent();
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("More Info Disclaimer is Displayed");
@@ -294,7 +296,7 @@ public class PharmacyLocatorStepDefinition {
 	@Then("^the user validates view search PDF link$")
 	public void viewsSearchResultPdf() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults();
 		Assert.assertTrue("PROBLEM - PDF Results Page Not Displayed", 
 				pharmacySearchPage != null);
@@ -336,7 +338,7 @@ public class PharmacyLocatorStepDefinition {
 		inputMap.put("county", county);
 		inputMap.put("language", language);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		pharmacySearchPage.validatePharmacyWidgets(hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ, inputMap, testSiteUrl);
 	}
@@ -349,9 +351,9 @@ public class PharmacyLocatorStepDefinition {
 		String language = inputAttributesMap.get("Language");
 		System.out.println("Filter Type to Select : "+pharmacyType);
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
+		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
 	}
 	
 	@Then("^the user validates error message displayed when filter results in no match$")
@@ -365,7 +367,7 @@ public class PharmacyLocatorStepDefinition {
 	@Then("^the user validates the question widget$")
 	public void validateQuestionWidget() {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
 		pharmacySearchPage.validateQuestionsWidget();
 	}
 
