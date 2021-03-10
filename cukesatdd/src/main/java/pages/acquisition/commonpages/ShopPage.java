@@ -427,6 +427,7 @@ public class ShopPage extends UhcDriver {
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(findAProviderBtn);
 		Thread.sleep(4000);
+		waitForPageLoadSafari();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
