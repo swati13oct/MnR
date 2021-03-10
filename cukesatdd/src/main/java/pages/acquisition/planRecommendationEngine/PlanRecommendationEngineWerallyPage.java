@@ -55,7 +55,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 	@FindBy(css = ".results>h4")
 	private WebElement serachResultsCount;
 
-	@FindBy(css = "div>div[data-test-id*='search-result-person']")
+	@FindBy(css= "div>div[data-test-id*='search-result-person']")
 	private List<WebElement> searchResults;
 
 	// div>div[data-test-id*='search-result-person']:nth-of-type(1) h2
@@ -139,14 +139,14 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
 						threadsleep(5000);
-						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
+						doctorsName.add(searchResults.get(i).findElement(By.xpath("//*[contains(@class,'providerName')]")).getText().trim());
 						doctorsSPecialtyName.add(searchResults.get(i)
 								.findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
 						WebElement saveButton = searchResults.get(i)
-								.findElement(By.cssSelector("div[class*='hidden'] button"));
+								.findElement(By.xpath("//*[contains(@data-test-id,'saved-provider-button')]"));
 						if (count > 1) {
 							if (i != 0) {
-								WebElement doc = searchResults.get(i - 1).findElement(By.cssSelector("h2"));
+								WebElement doc = searchResults.get(i - 1).findElement(By.xpath("//*[contains(@class,'providerName')]"));
 								scrollToView(doc);
 							} else
 								scrollToView(serachResultsCount);
@@ -159,7 +159,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						chooseFirstLocation();
 
 //						saveModalCloseContinueSearchbutton.click();
-						jsClickNew(saveModalCloseContinueSearchbutton);
+						jsClickNew(finishReturnButton);
 
 					}
 				} else {
