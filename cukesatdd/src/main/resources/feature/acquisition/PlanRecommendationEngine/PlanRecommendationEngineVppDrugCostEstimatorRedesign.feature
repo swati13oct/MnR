@@ -38,7 +38,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user Captures Drug costs on Drug Details Page
     Then the user validates Drug Costs section

@@ -745,11 +745,11 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.validateRankingPlans(recom,plansorder);
    	}
 	
-	@Then("^verify continue function on \"([^\"]*)\" page$")
-   	public void proceed_next_page(String page) {
-		PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		commonutli.continueNextpage(page.trim().toUpperCase(),false);
-   	}
+	@Then("^verify continue function in \"([^\"]*)\" page$")
+    public void proceed_next_page(String page) {
+     PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility(wd);
+     commonutli.continueNextpage(page.trim().toUpperCase(),false);
+    }
 	
 	@And("^user verifies existing PRE provider session using startnow$")
    	public void verify_exisitng_pre_doctors_session_doctors_startnow_page(DataTable givenAttributes) {

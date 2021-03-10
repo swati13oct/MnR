@@ -120,7 +120,7 @@ public class WerallyMobilePage extends UhcDriver {
 						for (int i = count - 1; i >= 0; i--) {
 							threadsleep(5000);
 							doctorsName
-									.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim() + " "
+									.add(searchResults.get(i).findElement(By.cssSelector("h3")).getText().trim() + " "
 											+ searchResults.get(i)
 													.findElement(By.cssSelector("span[data-test-id='specialty']"))
 													.getText().trim());
