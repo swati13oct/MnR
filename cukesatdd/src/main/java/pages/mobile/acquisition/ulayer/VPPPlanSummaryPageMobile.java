@@ -1431,19 +1431,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		boolean isSpecificPlanInfoPresent = false;
 		if (planName.contains("SNP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsMA");
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
 			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
 			// planName);
 		} else if (planName.contains("HMO")) {
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
 			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
 			// planName);
-			Thread.sleep(4000);
+			Thread.sleep(3000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
 		}
 		/*
@@ -3792,7 +3792,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (validate(planYearPopup)) {
 			if (validate(nextYearSelection)) {
 				nextYearSelection.click();
-				CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				//CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
 				planYearPopupGoButton.click();
 
 			}
@@ -4246,7 +4246,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
 			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
 			scrollToView(rockyMountainLogo);
-			validateNew(rockyMountainLogo);
+			//validateNew(rockyMountainLogo);
 			System.out.println("Validated Rocky Mountian Logo");
 
 		}

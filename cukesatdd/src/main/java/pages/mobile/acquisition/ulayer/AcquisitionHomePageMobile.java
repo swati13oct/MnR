@@ -1511,7 +1511,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		pageloadcomplete();
 
-		validateNew(vppTop, 30);
+		validateNew(vppTop, 10);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else

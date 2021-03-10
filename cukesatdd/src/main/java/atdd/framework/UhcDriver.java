@@ -558,7 +558,7 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		Element.click();
+		jsClickNew(Element);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -667,7 +667,11 @@ public abstract class UhcDriver {
 		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
-		mobileSelectOption(dropdownElement, value, true);
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")||driver.getClass().toString().toUpperCase().contains("IOS")||MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
+			mobileSelectOption(dropdownElement, value, true);
+		}else {
+			dropdown.selectByValue(value);
+		}
 		dropdown.selectByValue(value);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);

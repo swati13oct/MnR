@@ -240,7 +240,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		planSummaryPage.pageloadcomplete();
+		//planSummaryPage.pageloadcomplete();
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
 	}
