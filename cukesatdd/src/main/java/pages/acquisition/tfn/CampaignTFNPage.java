@@ -71,8 +71,9 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "//a[@href='https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html']")
 	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 
-	@FindBy(xpath = "(//h3//span[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'Shop AARP Medicare Advantage Plans from UnitedHealthcare')])[1]")
+	//@FindBy(xpath = "(//h3//span[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'Shop AARP Medicare Advantage Plans from UnitedHealthcare')])[1]")
 
+	@FindBy(xpath = "//*[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	//@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
@@ -132,7 +133,7 @@ public class CampaignTFNPage extends UhcDriver {
 	public WebElement UHCSearchLinkfromBing;
 
 	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
-	@FindBy(xpath = "//input[contains(@id,'zipcodemeded-0')]")
+	@FindBy(xpath = "//input[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeShopField;
 	//@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
 	//@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
@@ -564,6 +565,7 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	//@FindBy(id="cta-zipcode")
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	
 	private WebElement HomePage_EnterZip;
 	
 	@FindBy(xpath="(//input[contains(@id,'zipcode')])[2]")
