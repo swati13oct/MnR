@@ -74,7 +74,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site | path                                                     | pageName                              | tfnXpath                                                             | tfnFlag |
       | AARP | medicare-education.html                                  | Understanding Medicare                | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[@class='amp']//a[contains(@class, 'tel')]                        | true    |
+      | AARP | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[@class='ums']//a[contains(@class, 'tel')]                        | true    |
       | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
       | AARP | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
 
