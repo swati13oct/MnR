@@ -6777,10 +6777,7 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		validateNew(addressInput);
 		sendkeys(addressInput, address);
 		sendkeys(cityInput, city);
-//		stateDropDownValues.get(0).click();
-//		
-//		selectFromDropDown(stateDropDownValues, state.toUpperCase());
-		selectFromDropDownByValue(stateDropDown, state.toUpperCase());
+		selectFromDropDownByText(driver,stateDropDown,state.toUpperCase());
 		System.out.println("dropdown value selected");
 	}
 
