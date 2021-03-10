@@ -501,11 +501,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Preference Option | <costPreferenceOption> |
     #Then user selects priorities option on your priorities page
      # | Priorities Option | <prioritiesOption> |
-    # Then user selects priority in priorities page
-     # | Priority Option | <priorityOption> |
-      #| Priorities      | <priorities>     |
-    And verify continue function in "Priorities" page
-    Then user validate elements on loading results page
+    Then user selects priority in priorities page
+     | Priority Option | <priorityOption> |
+     | Priorities      | <priorities>     |
+    #And verify continue function in "Priorities" page
+    #Then user validate elements on loading results page
+    Then user validate elements in loading results page
       And the user selects plan year
       | Plan Year | <planyear> |
     Then user verify NBA is not displayed on the VPP page
@@ -517,13 +518,13 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
 
     @NBA_PRE_AARP01
     Examples: 
-      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear |prioritiesOption|
-      | AARP |   10001 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork  |         |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |Doctors|
+      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear |prioritiesOption| priorities|
+      | AARP |   10001 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork  |         |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |1st|Doctors, None|
 
     @NBA_PRE_UHC01
     Examples: 
-      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear |prioritiesOption|
-      | UHC  |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork  |         |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |Doctors|
+      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear |prioritiesOption| priorities|
+      | UHC  |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork  |         |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |1st|Doctors, None|
 
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for PDP Plan when drugs added from SNP plan card
     Given the user is on medicare acquisition site landing page
