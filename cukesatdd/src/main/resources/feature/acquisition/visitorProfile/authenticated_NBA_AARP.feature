@@ -162,19 +162,19 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @authenticatedNBAMAPDAARP01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |
+      | AARP | chargersqa@3 | Password@5 | NO            |   55344 | Hennepin County | MAPD     |
 
     @continueEnrollmentNBA_PDP_AARP @authenticatedNBAPDPAARP01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
+      | AARP | chargersqa@3 | Password@5 | NO            |   55344 | Hennepin County | PDP      |
 
     @continueEnrollmentNBA__MAPD_UHC01 @authenticatedNBAMAPDUHC01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |
+      | UHC  | chargersqa@3 | Password@5 | NO            |   55344 | Hennepin County | MAPD     |
 
     @continueEnrollmentNBA__PDP_UHC01 @authenticatedNBAPDPUHC02
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
+      | UHC  | chargersqa@3 | Password@5 | NO            |   55344 | Hennepin County | PDP      |
