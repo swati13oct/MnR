@@ -313,6 +313,12 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
 	private WebElement DceClosebutton;
 	
+	@FindBy(css = "a#emailComparison")
+	protected WebElement summary_maEmailOption;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1505,6 +1511,19 @@ public class ComparePlansPage extends UhcDriver {
 		jsClickNew(DceClosebutton);
 		System.out.println("Clicked on Close button on DCE model popup");
 		
+	}
+	
+	public void clickOnEmailField() {
+		
+		summary_maEmailOption.click();
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = "+populatedEmail);
+		Assert.assertEquals(email, populatedEmail);
 	}
 }
 
