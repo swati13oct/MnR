@@ -1861,12 +1861,14 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// int counter = Integer.parseInt(Counter);
-		if (planType.equals("MAPD")) {
-			// plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(Counter);
-			System.out.println("Selected All MAPD plans for Plan Compare");
-		}
-
+//		if (planType.equals("MAPD")) {
+//			// plansummaryPage.clickonViewPlans();
+//			plansummaryPage.checkMAPlansOnly(Counter);
+//			System.out.println("Selected All MAPD plans for Plan Compare");
+//		}
+//		else
+		plansummaryPage.checkPlansForCompare(Counter,planType);
+		
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
