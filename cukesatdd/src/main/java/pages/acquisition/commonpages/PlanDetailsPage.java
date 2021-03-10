@@ -366,6 +366,12 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-link'][1]")
 	private WebElement palncompareLink;
 
+	@FindBy(css = "a#emailPlanDetail")
+	protected WebElement summary_maEmailOption;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
+	
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
 	}
@@ -1961,7 +1967,20 @@ public class PlanDetailsPage extends UhcDriver {
 		return result;
 	}
 	
-	public void validatealllinksonPlanDetails() {
+	public void clickOnEmailField() {
+		
+		summary_maEmailOption.click();
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = "+populatedEmail);
+		Assert.assertEquals(email, populatedEmail);
+	}
+
+		public void validatealllinksonPlanDetails() {
 		validateNew(medBenefitsTab.get(0));
 		validateNew(presDrugTab1.get(0));
 		validateNew(optionalServicesTab);
@@ -1980,7 +1999,6 @@ public class PlanDetailsPage extends UhcDriver {
 			return new ProviderSearchPage(driver);
 		}
 		return null;
-
 	}
 	
 }

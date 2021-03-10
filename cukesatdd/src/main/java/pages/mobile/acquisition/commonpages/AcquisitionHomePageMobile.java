@@ -443,6 +443,23 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		openAndValidate(siteOrPage, testharnessurl);
 	}
 
+	public void fixPrivateConnectionMobile() {
+		try {
+			// String URL = "https://self-signed.badssl.com/";
+			threadsleep(1000);
+			if (driver.findElement(By.cssSelector("body.ssl h1")).getText()
+					.contains("Your connection is not private")) {
+				driver.findElement(By.cssSelector("button#details-button")).click();
+				threadsleep(1000);
+				driver.findElement(By.cssSelector("a#proceed-link")).click();
+				threadsleep(1000);
+				pageloadcomplete();
+			}
+		} catch (Exception e) {
+			System.out.println("No SSL error / Exception");
+		}
+	}
+	
 	public void openAndValidate(String site) {
 		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
 			if (MRScenario.environment.equals("offline")) {

@@ -278,9 +278,11 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Yearly Premium  | <yearlyPremium>  |
     Then the user click on Prescription Drug Benefits and validates
     When the user clicks on Edit drug on plan details page and navigates to DCE
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user click on Prescription Drug Benefits and validates
     Then the user clicks on Edit drug on plan details page and navigates to DCE
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user click on Optional Services tab and add the rider on site
       | Optional Rider  | <optionalRider>  |
@@ -294,10 +296,10 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
 
     @VppPlanCompareCommon_AARP01New
     Examples: 
-      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                 | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
-      | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCORE_2021 | current  | $45            | $540          | Dental Platinum | $40            |
+      | Scenario                 | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                  | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
+      | VPP -E2E Scenario 2_AARP | AARP |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | current  | $45            | $540          | Dental Platinum | $40            |
 
     @VppPlanCompareCommon_UHC01New
     Examples: 
-      | Scenario                | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                 | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
-      | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCORE_2021 | current  | $45            | $540          | Dental Platinum | $40            |
+      | Scenario                | site | zipcode | isMultiCounty | county           | plantype | count | planyear | drug1  | drug2                | drug3   | planname                             | pdfType               | docCode                  | planyear | MonthlyPremium | yearlyPremium | optionalRider   | monthlyPremium |
+      | VPP -E2E Scenario 2_UHC | UHC  |   98012 | NO            | Snohomish County | MAPD     |     2 | future   | Ativan | diclofenac potassium | Lipitor | AARP Medicare Advantage Plan 3 (HMO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | current  | $45            | $540          | Dental Platinum | $40            |

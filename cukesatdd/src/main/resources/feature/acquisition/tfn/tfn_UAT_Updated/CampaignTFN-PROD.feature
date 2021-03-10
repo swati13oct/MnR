@@ -45,7 +45,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user enter zipcode in homepage
       | Zip Code  | <zipcode>    |
       | Plan Type | <MAplantype> |
-    And the user clicks on the shopping cart icon in AARP site
+    And the user clicks on the shopping cart icon
     #And the user clicks on the shsopping cart icon in AARP site
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
