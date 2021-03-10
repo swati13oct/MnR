@@ -254,4 +254,45 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Examples: 
       | TID       | site | zipcode | isMultutiCounty | county        | plantype | planName                          | planyear |
       | US2567133 | UHC  |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO) | future   |
-  
+      
+   #@vppPlanSummaryAARP15 @vppPlanSummaryAARPRun02
+  Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    Then user clicks on Change Zip code link
+    Then user clicks on Select by Address and Enter fileds
+      | Address | <address> |
+      | City    | <city>    |
+      | State   | <state>   |
+    When the user clicks on Find plans on vpp using following information
+      | County Name2     | <county2>        |
+      | Is Multi County2 | <isMultiCounty2> |
+    And the user views the plans of the below plan type and select Next year
+      | Plan Type | <plantype> |
+    Then the user validates the right rail
+    Then the user validates the Need Help Section in the right rail
+    Then the user validates the TFN in the Need Help Section
+    And the user validates and clicks on Find an agent
+    Then the user validates Get a free medicare Guide section in the right rail
+    Then the user enters the following information in the Get a free medicare Guide section
+      | First Name    | <firstName>    |
+      | Last Name     | <lastName>     |
+      | Email Address | <emailAddress> |
+    Then the user validates Plan Selector Tool section in the right rail
+    Then the user validates Plan Selector Page after clicking on Start Plan Selector button
+
+    @vppPlanSummaryCommonAARP02
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |
+      | 15550 | AARP |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
+      | 15550 | UHC  |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
+
+    @vppPlanSummaryCommonUHC02
+    Examples: 
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |
+      | 15550 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
+      | 15550 | UHC  |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |

@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/vpp/MicroAPP" }, plugin = {
 				"pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionVPPUATAARP.json" }, tags = {
-						"@VppPlanCompareCommon_AARP01New" }) // "@vppPlanSummaryAARPRun01" })
+						"@VppPlanCompareCommon_AARP01News" }) // "@vppPlanSummaryAARPRun01" })
 public class RunMRATDDAcquisitionVPPUATAARP { 
  
 }
