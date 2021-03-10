@@ -4,7 +4,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
  #######################Script 1: Direct traffic########################################
    @Scenario_1_2_DirectTraffic_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
-   Given the user is on AARP medicare acquisition site landing page
+   Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates TFN Number
        | TFN No | <TFNNo> |
@@ -41,19 +42,19 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
  Then the user navigates to homepage validates Federal TFN
-    And the user clicks on the shopping cart icon in AARP site
-   #And the user clicks on the shopping cart icon
+   #And the user clicks on the shopping cart icon in AARP site
+   And the user clicks on the shopping cart icon
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
    #---------------commenting the lines from 1.08 to 1.11 in production as mentioned by UAT related to Authenticated user -----------------#
-		And the user signs in with optum Id credentials in AARP site
+		And the user signs in with optum Id credentials
 		     | User Name | <userName> |
       | Password  | <password> |
     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-		And the user clicks on the add plans button in the profile in AARP site
+		And the user clicks on the add plans button in the profile
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
