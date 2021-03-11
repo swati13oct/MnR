@@ -6813,7 +6813,7 @@ public void clickOnEmailField() {
 	
 	
 	
-	public void savePlansOnSummaryAndVerifyCountOnCart(String counter,String planType) throws Exception {
+	public void savePlansOnSummaryAndVerifyCountOnCart(String counter,String planType) {
 		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
 		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
 		if (count == 0)
@@ -6828,13 +6828,34 @@ public void clickOnEmailField() {
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
 				jsClickNew(allPlans.get(i));
-				Thread.sleep(10000);
+				System.out.println(i);
+				if(i==1)
+				{
+					savedPlansContinueShoppingButton.click();
+				}
 			}
 		}
-		Assert.assertEquals("Shopping cart count not updated with save plan count", Integer.parseInt(shoppingCartSaveCount.getText()), count);
-		if(count>=2)
-			savedPlansContinueShoppingButton.click();
+		Assert.assertEquals("Shopping cart count not updated with save plan count", count,Integer.parseInt(shoppingCartSaveCount.getText()));
 	}	
+	@FindBy(xpath="(//span[@class='view--less'])[1]")
+	private WebElement viewLessLink;
 	
+	@FindBy(xpath="(//span[@class='view--less'])[1]")
+	private WebElement viewMoreLink;
 	
+	@FindBy(xpath="(//*[contains(text(),' 	View Plan Details')])[1]")
+	private WebElement viewPlanDetailsLink;
+
+	
+	public void validateViewMoreAndLessLinks()
+	{
+		viewLessLink.click();
+		System.out.println("view less link clicked");
+		Assert.assertEquals("On click of view less link plan card is not collapsed", 1, driver.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
+		//Assert.assertFalse("view Less link not working properly", viewPlanDetailsLink.isDisplayed());
+		viewMoreLink.click();
+		System.out.println("view More link clicked");
+		Assert.assertEquals("On click of view More link plan card is not collapsed", 0, driver.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
+		
+	}	
 }

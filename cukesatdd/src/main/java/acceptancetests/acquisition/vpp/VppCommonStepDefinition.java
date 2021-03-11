@@ -3993,5 +3993,13 @@ public class VppCommonStepDefinition {
 			default: plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,planType.toUpperCase());break;
 		}
 	}	
+	@Then("^I validate view more and view less links on plan summary$")
+	public void i_validate_viewMore_and_viewLess()
+			throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateViewMoreAndLessLinks();
+	}	
+
 }
 
