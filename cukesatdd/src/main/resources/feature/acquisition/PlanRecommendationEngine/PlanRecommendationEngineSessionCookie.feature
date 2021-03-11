@@ -91,6 +91,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Given the user is on UHC medicare acquisition site landing page
     And user navigates to vpp summary page
       | Zip Code | <Zipcode> |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
     When user adds Drugs in vpp summary page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to VPP and PRE page
@@ -112,6 +114,8 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Given the user is on UHC medicare acquisition site landing page
     And user navigates to vpp summary page
       | Zip Code | <Zipcode> |
+      | Is Multi County | <isMultiCounty> |
+      | CountyDropDown  | <county>        |
     And user verifies "VPP" page
     Then user adds Doctors in vpp summary page
       | Doctors Search Text | <DoctorsName>   |

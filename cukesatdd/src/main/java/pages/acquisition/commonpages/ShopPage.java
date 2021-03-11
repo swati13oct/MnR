@@ -84,7 +84,7 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@href,'/shop/dual-special-needs-plans.html')and contains(text(),'Shop')]")
 	private WebElement dsnpShopLink;
 	
-	@FindBy(xpath = "//*[contains(@href,'/shop/prescription-drug-plans.html')and contains(text(),'Shop')]")
+	@FindBy(xpath = "//*[contains(@href,'/shop/prescription-drug-plans')and contains(text(),'Shop')]")
 	private WebElement pdpShopLink;
 	
 	@FindBy(xpath = "//*[contains(@href,'/shop/medicare-advantage-plans') and contains(text(),'Shop')]")
