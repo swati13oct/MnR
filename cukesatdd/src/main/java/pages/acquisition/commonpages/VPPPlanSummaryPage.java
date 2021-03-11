@@ -6840,7 +6840,7 @@ public void clickOnEmailField() {
 	@FindBy(xpath="(//span[@class='view--less'])[1]")
 	private WebElement viewLessLink;
 	
-	@FindBy(xpath="(//span[@class='view--less'])[1]")
+	@FindBy(xpath="(//span[@class='view--more'])[1]")
 	private WebElement viewMoreLink;
 	
 	@FindBy(xpath="(//*[contains(text(),' 	View Plan Details')])[1]")
