@@ -26,7 +26,9 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     And the user validates plan summary for the below plan
       | Plan Name | <MAplanName> |
     Then the user validates marketing bullets of the plan
-    Then user saves first plan on plan summary page on site
+    #Then user saves first plan on plan summary page on site
+    And I validate view more and view less links on plan summary
+    Then I save "<plantype>" plans and "<SavePlansCount>" plans and verify the count update on shopping cart
      Then user validates print option for selected plan on plan summary page on site
     Then user validates print functionality for selected plan on plan summary page on site
     Then user validates email option for selected plan on plan summary page on site
@@ -50,9 +52,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
       | Plan Type                  | <plantype>               |
       | Annual Deductible          | <annualDeductible>       |
-    And I save "<plantype>" plans and "<SavePlansCount>" plans and verify the count update on shopping cart
-    And I validate view more and view less links on plan summary
-    Then the user hover overs the tool tip for Why is my premium 0 and validates the text
+   Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
       | Plan Type | <plantype>   |
@@ -127,12 +127,12 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     @VppPlanCompareCommon_AARP01New
     Examples: 
       | Scenario                  | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                           | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount | planIndices | drug1  | drug2                | drug3   | removePlanIndices |
-      | VPP - E2E Scenario 1_AARP | AARP |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | $20            | $10  copay           | $45  copay | No               | $6,700.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $37.90            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |             1 |           3 | Ativan | diclofenac potassium | Lipitor |               2,3 |
+      | VPP - E2E Scenario 1_AARP | AARP |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | $20            | $10  copay           | $45  copay | No               | $6,700.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $37.90            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |             3  |           3 | Ativan | diclofenac potassium | Lipitor |               2,3 |
 
     @VppPlanCompareCommon_UHC01New
     Examples: 
       | Scenario                 | site | zipcode1 | isMultutiCounty1 | county1     | zipcode2 | isMultutiCounty2 | county2      | plantype | MAplanName                           | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | PDPplantype | PDPplanName                     | PDPmonthlyPremium | PDPprimaryCarePhysician | PDPspecialist | PDPreferralRequired | PDPoutOfPocketMaximum | PDPprescriptionDrugsTier1 | PDPannualDeductible                                   | address          | city   | state   | county3 | isMultiCounty3 | SavePlansCount | planIndices | drug1  | drug2                | drug3   | removePlanIndices |
-      | VPP - E2E Scenario 1_UHC | UHC  |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | $20            | $10  copay           | $45  copay | No               | $6,700.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $37.90            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              1 |           3 | Ativan | diclofenac potassium | Lipitor |               2,3 |
+      | VPP - E2E Scenario 1_UHC | UHC  |    90210 | No               | Los Angeles |    78006 | Yes              | Bexar County | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | $20            | $10  copay           | $45  copay | No               | $6,700.00          | $2  copay              |                  | PDP         | AARP MedicareRx Walgreens (PDP) | $37.90            |                         |               |                     |                       | $0  copay                 | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | 1062 Nbranchroad | ripton | Vermont | Addison | No             |              3 |           3 | Ativan | diclofenac potassium | Lipitor |               2,3 |
 
   Scenario Outline: TID: <Scenario> - Plan Type: <plantype> - Validate that M&R Prospective client has the ability to add drugs through VPP Plan details <site> site.
     Given the user is on medicare acquisition site landing page
