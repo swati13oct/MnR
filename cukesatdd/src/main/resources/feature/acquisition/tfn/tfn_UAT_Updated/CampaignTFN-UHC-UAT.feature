@@ -67,7 +67,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
      Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile
+	#And the user clicks on the add plans button in the profile
+	 And the user clicks on the add plans button in the profile in agent mode
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
@@ -249,7 +250,8 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile
+	#And the user clicks on the add plans button in the profile
+	 And the user clicks on the add plans button in the profile in agent mode
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |

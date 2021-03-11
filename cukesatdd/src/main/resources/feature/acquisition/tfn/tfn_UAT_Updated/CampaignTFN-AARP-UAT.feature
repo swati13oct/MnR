@@ -2,7 +2,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 
  
  #######################Script 1: Direct traffic########################################
-   @Scenario_1_2_DirectTraffic_UAT @UATRegression
+   @Scenario_1_2_DirectTraffic_UAT1 @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
    Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -54,7 +54,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-		And the user clicks on the add plans button in the profile
+		#And the user clicks on the add plans button in the profile
+	  And the user clicks on the add plans button in the profile in agent mode
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
@@ -77,9 +78,10 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Member Signin URL | <memberSignIn>               |
       | Member Signin URL STG | <memberSignInstage>      |
       | Member Signin URL Offline| <memberSignInOffline> |
+ 		  Then the user navigates to refresh page
  		 Then the user validates TFN Number
-        #| TFN No | <memberTFNNo> |
-        | TFN No    | <TFNNo>     |
+        | TFN No | <memberTFNNo> |
+        #| TFN No    | <TFNNo>     |
         | TFN Xpath | <TFNxpath> |   
     	#Then the user validates PSC code
       #| PSC Code | <Precedence2PSC> |
@@ -535,12 +537,16 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile
-	  Then the user validates TFN Number
+	And the user clicks on the add plans button in the profile in agent mode
+	#And the user clicks on the add plans button in the profile  
+    #Then user validates plan count for all plan types on plan summary page
+    Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
    Then the user validates PSC code
       | PSC Code | <pscCode> | 
+    #And the user views the plans of the below plan type
+      #| Plan Type | <plantype> |
      Then the user navigates to plan tab for any plan
         | Plan Type | <MAplantype> |  
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
