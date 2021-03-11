@@ -26,9 +26,18 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     And the user validates plan summary for the below plan
       | Plan Name | <MAplanName> |
     Then the user validates marketing bullets of the plan
+    Then user validates print functionality for selected plan on plan summary page on site
+    Then user validates email option for selected plan on plan summary page on site
+    Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on site
+    Then user loads page using email deeplink for plan and validate vpp summary page content on site
     Then the user validates and clicks Add to compare checkbox for the above selected plan for MA, MAPD , PDP Plans
     Then the user views plan details of the above selected plan and validates
       | Plan Name | <MAplanName> |
+    Then the user validate the print link on the plan Details Page on site
+    Then the user validates the functionality of print button on the plan Details Page on site
+    Then the user validate the email link on the plan Details Page on site
+    Then the user validates the functionality of email button on the plan Details Page on site
+    Then user loads page using email deeplink and validate vpp detail page content on site
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
     Then the user validates below plan benefit values for the above selected plan
       | Monthly Premium            | <monthlyPremium>         |
@@ -102,6 +111,12 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
     Then user click on close button on Drug info Modal popup
     Then verify plan compare page is loaded
+    Then the user validate the print link option in plan compare on site
+    Then the user validates the functionality of print button on the plan compare Page on site
+    Then the user validate the email link option in plan compare on site
+    Then the user validate thank you message in plan compare for selected plan on site
+    Then I click back to all plans button and verify that all plans are still selected on summary page on site
+    Then user loads page using email deeplink and validate vpp compare page content on site
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     And the user clicks on browser back button
     Then verify plan compare page is loaded
@@ -125,6 +140,10 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
+    Then user validates print functionality for selected plan on plan summary page on site
+    Then user validates email option for selected plan on plan summary page on site
+    Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on site
+    Then user loads page using email deeplink for plan and validate vpp summary page content on site
     And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link
     Then verify all links on plan compare page is loaded
     Then validate all available plans are shown on click of view all plans
@@ -136,6 +155,12 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user clicks on Plan details link in new Plan Compare page
     Then the user clicks on compare plans button on plan details page and navigate to compare page
     Then verify plan compare page is loaded
+    Then the user validate the print link option in plan compare on site
+    Then the user validates the functionality of print button on the plan compare Page on site
+    Then the user validate the email link option in plan compare on site
+    Then the user validate thank you message in plan compare for selected plan on site
+    Then I click back to all plans button and verify that all plans are still selected on summary page on site
+    Then user loads page using email deeplink and validate vpp compare page content on site
     Then verify Add doctors is loaded with doctor summary on Plan Compare page
     And click on Add your doctors link and Navigate to Rally page
     And I click on Get Started on and Add PrimaryCare PCP from find care page
@@ -189,6 +214,11 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then User click on provider link on Medical tab and navigates to rally page
     Then user click on Finish Retun button on rally page navigates to plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
+    Then the user validate the print link on the plan Details Page on site
+    Then the user validates the functionality of print button on the plan Details Page on site
+    Then the user validate the email link on the plan Details Page on site
+    Then the user validates the functionality of email button on the plan Details Page on site
+    Then user loads page using email deeplink and validate vpp detail page content on site
     Then the user click on Plan costs tab and validates in site
       | Monthly Premium | <MonthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
