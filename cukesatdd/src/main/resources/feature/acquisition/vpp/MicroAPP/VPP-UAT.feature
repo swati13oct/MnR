@@ -26,6 +26,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     And the user validates plan summary for the below plan
       | Plan Name | <MAplanName> |
     Then the user validates marketing bullets of the plan
+    Then user saves first plan on plan summary page on site
      Then user validates print option for selected plan on plan summary page on site
     Then user validates print functionality for selected plan on plan summary page on site
     Then user validates email option for selected plan on plan summary page on site
@@ -141,6 +142,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
+    Then user saves first plan on plan summary page on site
     Then user validates print option for selected plan on plan summary page on site
     Then user validates print functionality for selected plan on plan summary page on site
     Then user validates email option for selected plan on plan summary page on site
