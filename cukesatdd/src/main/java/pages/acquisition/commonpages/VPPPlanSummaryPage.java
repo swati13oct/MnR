@@ -6813,7 +6813,7 @@ public void clickOnEmailField() {
 	
 	
 	
-	public void savePlansOnSummaryAndVerifyCountOnCart(String counter,String planType) {
+	public void savePlansOnSummaryAndVerifyCountOnCart(String counter,String planType) throws Exception {
 		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
 		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
 		if (count == 0)
@@ -6828,10 +6828,13 @@ public void clickOnEmailField() {
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
 				jsClickNew(allPlans.get(i));
+				Thread.sleep(10000);
 			}
 		}
 		Assert.assertEquals("Shopping cart count not updated with save plan count", Integer.parseInt(shoppingCartSaveCount.getText()), count);
 		if(count>=2)
 			savedPlansContinueShoppingButton.click();
 	}	
+	
+	
 }
