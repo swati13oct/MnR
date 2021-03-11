@@ -956,6 +956,36 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'drug-list-title') and contains(@aria-expanded,'true')]")
 	private WebElement expandedDruglistPlanCard;
+	
+	@FindBy(id = "change-location")
+	private WebElement changeLocationBtn;
+
+	@FindBy(xpath = "//div[@class='change-zip-link']//a[@class='search-by-address']")
+	private WebElement searchByAddressButton;
+
+	@FindBy(xpath = "//input[@id='address']")
+	private WebElement addressInput;
+
+	@FindBy(xpath = "//input[@id='city']")
+	private WebElement cityInput;
+
+	@FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
+	private List<WebElement> stateDropDownValues;
+
+	@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
+	private WebElement findPlansButton;
+	
+	@FindBy(xpath="//select[@id='statedrpdwn']")
+	private WebElement stateDropDown;
+	
+	@FindBy(xpath="//span[@id='header-number']")
+	private WebElement shoppingCartSaveCount;
+	
+	@FindBy(xpath="//span[contains(text(),'View Saved Plans')]")
+	private WebElement savedPlansPopup;
+	
+	@FindBy(xpath="//button[@id='pop-btn-1']")
+	private WebElement savedPlansContinueShoppingButton;
 
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -6779,5 +6809,59 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		System.out.println("populatedEmail = "+populatedEmail);
 		Assert.assertEquals(email, populatedEmail);
 	}
-}
 
+	public void clickOnChangeZipCode() {
+		validateNew(changeLocationBtn);
+		changeLocationBtn.click();
+
+	}
+
+	public void enterAddressDetails(String address, String city, String state) {
+		validateNew(searchByAddressButton);
+		searchByAddressButton.click();
+		validateNew(addressInput);
+		sendkeys(addressInput, address);
+		sendkeys(cityInput, city);
+		selectFromDropDownByText(driver,stateDropDown,state.toUpperCase());
+		System.out.println("dropdown value selected");
+	}
+
+	public void searchPlansCounty(String countyName, String ismultiCounty) {
+		findPlansButton.click();
+		CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
+
+		if (ismultiCounty.contains("YES") && validate(countyModal)) {
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			System.out.println("County should be selected : " + countyName);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+		} else {
+			System.out.println("No County to be selected ");
+		}
+	}
+	
+	
+	
+	public void savePlansOnSummaryAndVerifyCountOnCart(String counter,String planType) {
+		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
+		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
+		if (count == 0)
+			for (String index : counter.split(",")) {
+				selectPlanIndexes.add(Integer.parseInt(index));count++;
+			}
+		else
+			for (int i = 0; i < count; i++)
+				selectPlanIndexes.add(i);
+		List<WebElement> allPlans = driver
+				.findElements(By.xpath("(//a[contains(@dtmname,'"+planType+":Favorite') and not(@style)])"));
+		if (allPlans != null) {
+			for (int i : selectPlanIndexes) {
+				jsClickNew(allPlans.get(i));
+			}
+		}
+		Assert.assertEquals("Shopping cart count not updated with save plan count", Integer.parseInt(shoppingCartSaveCount.getText()), count);
+		if(count>=2)
+			savedPlansContinueShoppingButton.click();
+	}	
+}

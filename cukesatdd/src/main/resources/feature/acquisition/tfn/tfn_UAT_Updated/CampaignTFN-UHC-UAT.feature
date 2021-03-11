@@ -236,20 +236,20 @@ Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
        | TFN No | <TFNNo> |
        | TFN Xpath | <TFNxpath> |
     	#And the user clicks on the shopping cart icon in AARP site
-    	And the user clicks on the shopping cart icon in UHC site
+    	And the user clicks on the shopping cart icon
   		Then the user validates PSC code
       | PSC Code | <pscCode> |
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
 	#And the user clicks on the add plans button in the profile
-	Then the user signs in with optum Id credentials in UHC site
+	Then the user signs in with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the guest profile in UHC site
+	And the user clicks on the add plans button in the profile
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
