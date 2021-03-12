@@ -26,21 +26,10 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     And the user validates plan summary for the below plan
       | Plan Name | <MAplanName> |
     Then the user validates marketing bullets of the plan
-    #Then user saves first plan on plan summary page on site
     And I validate view more and view less links on plan summary
-    Then user validates print option for selected plan on plan summary page on site
-    Then user validates print functionality for selected plan on plan summary page on site
-    Then user validates email option for selected plan on plan summary page on site
-    Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on site
-    Then user loads page using email deeplink for plan and validate vpp summary page content on site
     Then the user validates and clicks Add to compare checkbox for the above selected plan for MA, MAPD , PDP Plans
     Then the user views plan details of the above selected plan and validates
       | Plan Name | <MAplanName> |
-    Then the user validate the print link on the plan Details Page on site
-    Then the user validates the functionality of print button on the plan Details Page on site
-    Then the user validate the email link on the plan Details Page on site
-    Then the user validates the functionality of email button on the plan Details Page on site
-    Then user loads page using email deeplink and validate vpp detail page content on site
     Then the user clicks on back to all plans link and validates its redirection to Plan Summary
     Then the user validates below plan benefit values for the above selected plan
       | Monthly Premium            | <monthlyPremium>         |
@@ -51,7 +40,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Prescription Drugs, Tier 1 | <prescriptionDrugsTier1> |
       | Plan Type                  | <plantype>               |
       | Annual Deductible          | <annualDeductible>       |
-   #Then I save "<plantype>" plans and "<SavePlansCount>" plans and verify the count update on shopping cart
+   Then I save "<plantype>" plans and "<SavePlansCount>" plans and verify the count update on shopping cart
    Then the user hover overs the tool tip for Why is my premium 0 and validates the text
     # New steps for DCE Redesign
     And I access the DCE Redesign from Plan Summary for mentioned plan
@@ -143,21 +132,7 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
       | Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
-    Then user saves first plan on plan summary page on site
-    Then user validates print option for selected plan on plan summary page on site
-    Then user validates print functionality for selected plan on plan summary page on site
-    Then user validates email option for selected plan on plan summary page on site
-    Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on site
-    Then user loads page using email deeplink for plan and validate vpp summary page content on site
-    #And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link
-    Then user saves first plan on plan summary page on site
-    Then I select multiple plans to compare for selected plan and click on compare plan link on the site
-      | plan type | <plantype> |
-     Then the user validate the print link option in plan compare on site
-    Then the user validates the functionality of print button on the plan compare Page on site
-    Then the user validate the email link option in plan compare on site
-    Then the user validate thank you message in plan compare for selected plan on site
-    Then user loads page using email deeplink and validate vpp compare page content on site
+    And I select "<plantype>" plans and "<count>" plans to compare and click on compare plan link
     Then verify all links on plan compare page is loaded
     Then validate all available plans are shown on click of view all plans
     Then verify view all plan button is not displayed
@@ -226,11 +201,6 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then User click on provider link on Medical tab and navigates to rally page
     Then user click on Finish Retun button on rally page navigates to plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
-    Then the user validate the print link on the plan Details Page on site
-    Then the user validates the functionality of print button on the plan Details Page on site
-    Then the user validate the email link on the plan Details Page on site
-    Then the user validates the functionality of email button on the plan Details Page on site
-    Then user loads page using email deeplink and validate vpp detail page content on site
     Then the user click on Plan costs tab and validates in site
       | Monthly Premium | <MonthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
