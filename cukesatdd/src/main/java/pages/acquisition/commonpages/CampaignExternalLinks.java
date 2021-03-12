@@ -467,7 +467,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("&WT.mc_id=8000158")) {
+		if (CurrentRailURL.contains("privacy-policy.html?")) {
 			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
 
 			Assert.assertTrue(true);
