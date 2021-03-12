@@ -11,14 +11,14 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDPharmacyLocatorVPPLanguageLinksEnglishAARP
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDPharmacyLocatorVPPLanguageLinksEnglishAARP.json",
-detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDPharmacyLocatorVPPLanguageLinksEnglishAARP")
+@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDPharmacyLocatorVPPLanguageLinksSpanishAARP.json",
+detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDPharmacyLocatorVPPLanguageLinksSpanishAARP")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator" },
 plugin = {
 		"pretty", "html:reports/test-report", 
-		"json:target/cucumber-RunMRATDDPharmacyLocatorVPPLanguageLinksEnglishAARP.json" }, 
-		tags = { "@Pharmacy_FromVPP_PharmacyDirectory_AARP" })
+		"json:target/cucumber-RunMRATDDPharmacyLocatorVPPLanguageLinksSpanishAARP.json" }, 
+		tags = { "@Pharmacy_FromVPP_PharmacyDirectory_Spanish_AARP" })
 
-public class RunMRATDDPharmacyLocatorVPPLanguageLinksEnglishAARP{ 
+public class RunMRATDDPharmacyLocatorVPPLanguageLinksSpanishAARP{ 
  
 }

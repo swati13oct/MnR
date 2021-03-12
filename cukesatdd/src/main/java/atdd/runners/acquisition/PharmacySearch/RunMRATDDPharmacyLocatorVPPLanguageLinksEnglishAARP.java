@@ -17,7 +17,7 @@ detailedReport = true, detailedAggregatedReport = true, overviewReport = true, t
 plugin = {
 		"pretty", "html:reports/test-report", 
 		"json:target/cucumber-RunMRATDDPharmacyLocatorVPPLanguageLinksEnglishAARP.json" }, 
-		tags = { "@Pharmacy_FromVPP_PharmacyDirectory_AARP" })
+		tags = { "@Pharmacy_FromVPP_PharmacyDirectory_English_AARP" })
 
 public class RunMRATDDPharmacyLocatorVPPLanguageLinksEnglishAARP{ 
  
