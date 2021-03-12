@@ -146,5 +146,5 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | Doctors         | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                  | DisplayCurrentPlan |
-      | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM | None          | current  | Emily Adams, NP | Palmer, John, MD | YES          | YES           |            | doctor         | NO             | Emily Adams, NP:Palmer, John, MD | YES                |
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | Doctors             | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                      | DisplayCurrentPlan |
+      | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM | None          | current  | Adams, Susan E, AUD | Palmer, John, MD | YES          | YES           |            | doctor         | NO             | Adams, Susan E, AUD:Palmer, John, MD | YES                |
