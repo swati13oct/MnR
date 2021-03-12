@@ -103,12 +103,6 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
     Then user click on close button on Drug info Modal popup
     Then verify plan compare page is loaded
-    Then the user validate the print link option in plan compare on site
-    Then the user validates the functionality of print button on the plan compare Page on site
-    Then the user validate the email link option in plan compare on site
-    Then the user validate thank you message in plan compare for selected plan on site
-    Then I click back to all plans button and verify that all plans are still selected on summary page on site
-    Then user loads page using email deeplink and validate vpp compare page content on site
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     And the user clicks on browser back button
     Then verify plan compare page is loaded
@@ -143,11 +137,6 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user clicks on Plan details link in new Plan Compare page
     Then the user clicks on compare plans button on plan details page and navigate to compare page
     Then verify plan compare page is loaded
-    Then the user validate the print link option in plan compare on site
-    Then the user validates the functionality of print button on the plan compare Page on site
-    Then the user validate the email link option in plan compare on site
-    Then the user validate thank you message in plan compare for selected plan on site
-    Then user loads page using email deeplink and validate vpp compare page content on site
     Then verify Add doctors is loaded with doctor summary on Plan Compare page
     And click on Add your doctors link and Navigate to Rally page
     And I click on Get Started on and Add PrimaryCare PCP from find care page
