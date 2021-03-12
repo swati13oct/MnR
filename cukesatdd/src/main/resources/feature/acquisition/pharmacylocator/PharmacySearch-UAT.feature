@@ -98,12 +98,12 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
-    @UATAARP01
+    @UATAARP02
     Examples: 
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 2_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @UATUHC01
+    @UATUHC02
     Examples: 
       | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 2_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
@@ -135,12 +135,12 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
-    @UATAARP01
+    @UATAARP03
     Examples: 
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 3_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @UATUHC01
+    @UATUHC03
     Examples: 
       | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 3_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
