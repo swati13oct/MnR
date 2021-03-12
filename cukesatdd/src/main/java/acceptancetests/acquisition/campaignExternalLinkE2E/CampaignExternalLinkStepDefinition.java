@@ -441,5 +441,40 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		}
 
 	}
+
+	@Then("^the user clicks on View Plans and Pricing link on PDP external page$")
+	public void the_user_clicks_on_View_Plans_and_Pricing_link_on_PDP_external_page(DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		campaignExternalLinkspage.linkToViewPlansAndPricing();
+
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = campaignExternalLinkspage.searchPlansWithOutCountyForPDPExternalPage(zipcode);
+		} else {
+			plansummaryPage = campaignExternalLinkspage.searchPlanswithCountyForPDPExternalPage(zipcode, county);
+		}
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+
+	}
 }
 

@@ -93,7 +93,10 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement comparePlanCost;
 	
 	@FindBy(xpath = "//*[@id='button-1708542647']")
-	private WebElement planAndPricingbuttoncompare;
+	private WebElement ViewPlanAndPricingButton;
+
+	@FindBy(xpath = "//div[@class='cmp-text']//a[@data-asset-name='View Plans & Pricing']")
+	private WebElement ViewPlanAndPricingLink;
 	
 	@FindBy(xpath = "//*[@id='button-127872393']")
 	private WebElement estimateDrugCostButton;
@@ -138,6 +141,9 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "(//div[@class='modal-body'])[1]")
 	private WebElement countyModalVpp;
+
+	@FindBy(id = "multiCountyCancelBtn")
+	private WebElement cancelCountyModal;
 
 	@FindBy(xpath = "//span[contains(@id,'plans_zip_head')]//h2")
 	private WebElement zipcodeonpage;
@@ -551,7 +557,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		validateNew(findPharmacy);
 	
 		validateNew(comparePlanCost);
-		validateNew(planAndPricingbuttoncompare);
+		validateNew(ViewPlanAndPricingButton);
 		validateNew(estimateDrugCostButton);
 		validateNew(startnow);
 				
@@ -844,11 +850,36 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	public void viewPlansAndPricing() {
-		validateNew(planAndPricingbuttoncompare);
+		validateNew(ViewPlanAndPricingButton);
 
 		String parentWindow = driver.getWindowHandle();
 
-		jsClickNew(planAndPricingbuttoncompare);
+		jsClickNew(ViewPlanAndPricingButton);
+		waitForPageLoadSafari();
+
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("health-plans"))
+			System.out.println("****************Vpp Page is displayed***************" + CurrentRailURL);
+	}
+
+	public void linkToViewPlansAndPricing() {
+		validateNew(ViewPlanAndPricingLink);
+
+		String parentWindow = driver.getWindowHandle();
+
+		jsClickNew(ViewPlanAndPricingLink);
 		waitForPageLoadSafari();
 
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -869,7 +900,12 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage searchPlansWithOutCountyForPDPExternalPage(String zipcode) {
+		if (validate(countyModalVpp))
+			jsClickNew(cancelCountyModal);
+		threadsleep(3);
+
 		validateNew(ZipCodeTxtBx);
+		ZipCodeTxtBx.clear();
 		sendkeysNew(ZipCodeTxtBx, zipcode);
 
 		jsClickNew(FindPlansButton);
@@ -885,7 +921,12 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage searchPlanswithCountyForPDPExternalPage(String zipcode, String county) {
+		if (validate(countyModalVpp))
+			jsClickNew(cancelCountyModal);
+		threadsleep(3);
+
 		validateNew(ZipCodeTxtBx);
+		ZipCodeTxtBx.clear();
 		sendkeysNew(ZipCodeTxtBx, zipcode);
 
 		jsClickNew(FindPlansButton);

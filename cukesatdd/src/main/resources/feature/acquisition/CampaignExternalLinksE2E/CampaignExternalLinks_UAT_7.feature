@@ -206,11 +206,27 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
     And the user validates SAM icons on the page
     	| TFN Xpath | <TFNxpath2> |
     And the user closes the new browser tab
-    ##--------------------------------- Vpp flow from External Link------------------------##
+    ##--------------------------------- Vpp flow from External Link Page------------------------##
     And the user clicks on View Plans and Pricing button on PDP external page
     	| Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty>	|
       | County Name     | <county>          |
+    And the user validates SAM icons on the page
+      | TFN Xpath | <TFNxpath2> |
+    And the user closes the new browser tab
+    ##--------------------------------- Vpp flow from Vpp link on External Page------------------------##
+    And the user clicks on View Plans and Pricing link on PDP external page
+    	| Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty>	|
+      | County Name     | <county>          |
+    And the user validates SAM icons on the page
+      | TFN Xpath | <TFNxpath2> |
+    And the user closes the new browser tab
+    ##--------------------------------- Privacy Policy from External Page------------------------##
+    Then the user navigate back to aarp medicare plans11 page privacy link
+    And the user validates SAM icons on the page
+      | TFN Xpath | <TFNxpath2> |
+    And the user closes the new browser tab
       
    @Scenario7_AARP
     Examples: 
