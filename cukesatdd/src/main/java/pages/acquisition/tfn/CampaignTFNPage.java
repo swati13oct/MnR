@@ -141,7 +141,8 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	private WebElement ShopEnrollButton;
 	
-	@FindBy(xpath = "//span[contains(text(),'Shop Plans')]")	
+	//@FindBy(xpath = "//span[contains(text(),'Shop Plans')]")
+	@FindBy(xpath = "//*[contains(@class,'zipCompForm-0')]//button[contains(@class,'uhc-zip-button')]")
 	private WebElement ShopEnrollMedsuppButton;
 	
 	@FindBy(xpath = "//*[contains(@id,'change-location')]")
