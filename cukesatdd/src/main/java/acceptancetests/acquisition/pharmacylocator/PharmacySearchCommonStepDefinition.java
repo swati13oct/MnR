@@ -603,5 +603,12 @@ public class PharmacySearchCommonStepDefinition {
 		else
 			Assert.fail("Navigation to Pharmacy Page for Language - "+Language+" FAILED");
 	}
+	
+	@Then("^the user validates ITU, Home Infusion, LTC filter Message and anchor link$")
+	public void the_user_validates_ITU_Home_Infusion_LTC_filter_Message_and_anchor_link() throws Throwable {
+		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validateITU_HS_LTC_Messaging();
 
+	}
 }
