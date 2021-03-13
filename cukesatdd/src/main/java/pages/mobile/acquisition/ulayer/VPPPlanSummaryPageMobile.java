@@ -76,7 +76,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]/div/span/span[@class='ng-binding']")
 	private WebElement snpPlansNumber;
 
-	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
+	@FindBy(xpath = "//a[@aria-label='Medicare Advantage (Part C) Plans: View Plans']")
 	private WebElement maPlansViewLink;
 
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[contains(@class,'trigger-closed')]")
@@ -1021,6 +1021,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			pageloadcomplete();
+			validateNew(maPlansViewLink, 10);
 			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
@@ -2373,9 +2374,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			Assert.fail("Tool Tip is not working");
 	}
 
-
-
-	public void validateRightRailSection(){
+	public void validateRightRailSection() {
 
 		validateNew(RightRailSection);
 	}
@@ -2816,7 +2815,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
 			WebDriverWait d = new WebDriverWait(driver, 20);
-			//d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			// d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
@@ -3792,7 +3791,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (validate(planYearPopup)) {
 			if (validate(nextYearSelection)) {
 				nextYearSelection.click();
-				//CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
+				// CommonUtility.waitForPageLoadNew(driver, planYearPopupGoButton, 10);
 				planYearPopupGoButton.click();
 
 			}
@@ -4246,7 +4245,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (driver.getCurrentUrl().contains("rmhp.org")) {
 			System.out.println("We are in rocky mountain Page : " + driver.getCurrentUrl());
 			scrollToView(rockyMountainLogo);
-			//validateNew(rockyMountainLogo);
+			// validateNew(rockyMountainLogo);
 			System.out.println("Validated Rocky Mountian Logo");
 
 		}
@@ -4895,11 +4894,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]"
+					+ "//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			mobileswipeHorizantal("50", true);
 			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
 			scrollToView(MAmoreDetailsLink);
-			
+
 			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
 
@@ -5231,7 +5231,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public pages.mobile.acquisition.ulayer.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
 		// TODO Auto-generated method stub
 
-		jsClickMobile(firstComparePlanButton);
+		jsClickNew(firstComparePlanButton);
 		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new pages.mobile.acquisition.ulayer.ComparePlansPageMobile(driver);

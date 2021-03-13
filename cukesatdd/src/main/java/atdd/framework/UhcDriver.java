@@ -3,6 +3,7 @@ package atdd.framework;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -29,6 +30,7 @@ import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -41,6 +43,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -488,10 +491,16 @@ public abstract class UhcDriver {
 	}
 
 	public void jsClickNew(WebElement element) {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", element);
-		// System.out.println("The WebElement === " + getidentifier(element) + " : is
-		// Clicked");
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
+		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+			iOSClick(element);
+
+		}
+		
 	}
 
 	public static String getidentifier(WebElement element) {
@@ -500,17 +509,30 @@ public abstract class UhcDriver {
 
 	}
 
+	public void iOSClick(WebElement element) {
+
+		
+		element.click();
+		
+
+	}
+
 	public boolean scrollToView(WebElement element) {
-		try {
 
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView();", element);
-		} catch (Exception e) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			System.out.println("Scoll finished to element on IOS device");
+		} else {
+			try {
 
-			Assert.fail("The element " + element + "is not  found");
-			return false;
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView();", element);
+			} catch (Exception e) {
+
+				Assert.fail("The element " + element + "is not  found");
+				return false;
+			}
+
 		}
-
 		return true;
 	}
 
@@ -667,9 +689,11 @@ public abstract class UhcDriver {
 		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")||driver.getClass().toString().toUpperCase().contains("IOS")||MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("IOS")
+				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
 			mobileSelectOption(dropdownElement, value, true);
-		}else {
+		} else {
 			dropdown.selectByValue(value);
 		}
 		dropdown.selectByValue(value);

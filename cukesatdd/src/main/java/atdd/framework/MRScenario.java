@@ -1285,6 +1285,7 @@ public class MRScenario {
 		capabilities.setCapability("recordMp4", true);
 		capabilities.setCapability("appiumVersion", appiumVersion);
 		capabilities.setCapability("forceMjsonwp", true);
+		capabilities.setCapability("locationContextEnabled", true);
 		// capabilities.setCapability("autoAcceptAlerts", true);
 		try {
 
