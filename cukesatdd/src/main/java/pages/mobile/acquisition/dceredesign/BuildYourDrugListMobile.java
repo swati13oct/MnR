@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.itextpdf.awt.geom.misc.RenderingHints.Key;
 import com.itextpdf.text.Document;
 
 import acceptancetests.util.CommonUtility;
@@ -29,6 +31,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button[(@id= 'search')]")
 	public WebElement SearchBtn;
+	
+	@FindBy(css = "#heading")
+	public WebElement AddmyDrugHeader;
 
 	@FindBy(xpath = "//button[(@id= 'previousButton')]")
 	public WebElement PreviousBtn;
@@ -199,13 +204,18 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	}
 
-	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) {
+	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) throws InterruptedException {
 		validateNew(EnterDrugNameTxt);
-		EnterDrugNameTxt.sendKeys(drugName);
+		//EnterDrugNameTxt.sendKeys(drugName);
+		mobileactionsendkeys(EnterDrugNameTxt, drugName);
+		AddmyDrugHeader.click();
+		
+		Thread.sleep(1000);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
+		
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
 		validateNew(SelectDrug);

@@ -23,7 +23,7 @@ import cucumber.api.CucumberOptions;
 		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegression8UlayerMobile")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.mobile" }, 
-		features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, 
+		features = { "src/main/resources/feature/mobile/acquisition/preE2E" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression8UlayerMobile.json" }, 
 		tags = {"@PRERegression8"})
 public class RunMRATDDAcquisitionPlanRecommendationEngineRegression8UlayerMobile {

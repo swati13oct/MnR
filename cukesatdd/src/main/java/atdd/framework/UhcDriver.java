@@ -1102,6 +1102,7 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
 		}
 	}
+	
 
 	public void clickTextIOSNative(String text) {
 		String curHandle = ((IOSDriver) driver).getContext();

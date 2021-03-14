@@ -460,6 +460,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		}
 	}
 	
+	
+	public void openMobileURL() {
+		if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		} else
+			startNewMobile(AARP_ACQISITION_PAGE_URL);
+		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+	}
 	public void openAndValidate(String site) {
 		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
 			if (MRScenario.environment.equals("offline")) {

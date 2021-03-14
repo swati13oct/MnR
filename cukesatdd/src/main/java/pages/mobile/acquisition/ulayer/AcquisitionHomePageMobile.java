@@ -159,7 +159,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath =
 	// ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button
 	// secondary')and contains(text(),'Get')]")
-	@FindBy(xpath = "//a[contains(@title,'Drug Cost Estimator Tool')]")
+	@FindBy(xpath = "//span[text()='Get Started']")
 	public WebElement getStarted;
 
 	@FindBy(id = "redirect_content")
@@ -2550,8 +2550,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement AddMyDrugsBtn;
 
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
+		MobileMenuAccessDCE();
 		validateNew(getStarted);
-		jsClickNew(getStarted);
+		//jsClickNew(getStarted);
 
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
