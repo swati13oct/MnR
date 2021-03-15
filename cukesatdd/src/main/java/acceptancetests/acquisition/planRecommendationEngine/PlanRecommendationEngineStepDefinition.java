@@ -632,6 +632,13 @@ public class PlanRecommendationEngineStepDefinition {
 //		planSelectorResultspage.vppToPre();
    	}
 	
+	@Then("^user navigate to PRE from vpp page$")
+   	public void PRE_VPP_page() {
+		checkpopup();
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		planSelectorResultspage.vppToPre();
+   	}
+	
 	@Then("^user navigate Doctors lookup session in Doctors page$")
 	public void navigate_doctors_lookup_session() {
 		PlanRecommendationEngineDoctorsPage planSelectorDoctorspage =  new PlanRecommendationEngineDoctorsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
@@ -747,7 +754,7 @@ public class PlanRecommendationEngineStepDefinition {
 	
 	@Then("^verify continue function on \"([^\"]*)\" page$")
     public void proceed_next_page(String page) {
-     PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility(wd);
+     PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
      commonutli.continueNextpage(page.trim().toUpperCase(),false);
     }
 	
@@ -1033,7 +1040,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@Then("^user validate elements in new PRE results page$")
    	public void elements_new_results_page(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage(wd);
+		PlanRecommendationEngineNewResultsPage planSelectorNewResultspage =  new PlanRecommendationEngineNewResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		checkpopup();
 		planSelectorNewResultspage.preResultsUI(inputValues.get("Zip Code"),inputValues.get("CountyDropDown"));
    	}
@@ -1041,13 +1048,13 @@ public class PlanRecommendationEngineStepDefinition {
 	@Then("^user select plans in VPP Summary and navigate to Plan Compare page$")
    	public void verify_Plans_compare_page() {
 		checkpopup();
-		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage(wd);
+		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.validateMAPlanNamesPlanCompare();
 	}
 	
 	@Then("^user creates a \"([^\"]*)\" tab from PRE$")
    	public void create_tab(String tabtype) {
-		PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility(wd);
+		PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 //		commonutli.creatingTab(tabtype.toUpperCase());
    	}
 	

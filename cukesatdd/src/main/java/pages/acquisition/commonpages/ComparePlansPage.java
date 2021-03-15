@@ -1494,7 +1494,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(validateemailbutton);
 		validateNew(removeLink);
 		validateNew(viewPlanDetailslink);
-		validateNew(viewUnSaveIcon);
+//		validateNew(viewUnSaveIcon);
 		validateNew(ViewAllPlans);
 		validateNew(addPlanButton);
 		System.out.println("Validated all links plan compare");
