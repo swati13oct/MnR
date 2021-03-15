@@ -4637,17 +4637,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//validateNew(VerificationAgree2);
 	//	jsClickNew(VerificationAgree2);
 	//	jsClickNew(nextButton);
-		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
-			validateNew(VerificationAgree2);
-			Thread.sleep(3000);
-			jsClickNew(VerificationAgree2);
-			jsClickNew(nextButton);
-		} else {
+		/*
+		 * if (MRScenario.environment.equalsIgnoreCase("offline") ||
+		 * MRScenario.environment.equalsIgnoreCase("prod")) {
+		 * validateNew(VerificationAgree2); Thread.sleep(3000);
+		 * jsClickNew(VerificationAgree2); jsClickNew(nextButton); } else {
+		 */
 			validateNew(VerificationAgree3);
 			Thread.sleep(3000);
 			jsClickNew(VerificationAgree3);
 			jsClickNew(nextButton);
-		}
+//		}
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			validateNew(SubmitApplication);
