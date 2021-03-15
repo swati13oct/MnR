@@ -419,5 +419,17 @@ public class ProviderSearchCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
 		Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 	}
+	
+	@When("^user click on Finish Retun button on rally page navigates to plan details page$")
+	public void userclickonFinishRetunbuttononrallypagenavigatestoplandetailspage() {
+		{
+			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			PlanDetailsPage planDetailsPage = providerSearchPage.navigatebacktoPlanDetails();
+			Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+
+		}
+	}
+	
 	}
 

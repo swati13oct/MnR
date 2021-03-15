@@ -157,6 +157,9 @@ public class ProviderSearchPage extends UhcDriver {
 	
 	@FindBy(xpath="(//button[contains(text(),'Finish')])[2]")
 	private WebElement Finish;
+	
+	@FindBy(xpath="//*[text()='Finish & Return']")
+	private WebElement FinishReturnButton;
 
 	public ProviderSearchPage(WebDriver driver) {
 		super(driver);
@@ -532,9 +535,11 @@ public class ProviderSearchPage extends UhcDriver {
 			jsClickNew(element);
 
 			if (validate(selectLocationOption,10)) {
-				selectLocationOption.click();
+			//	selectLocationOption.click();
+				jsClickNew(selectLocationOption);
 				validateNew(saveBtn2);
-				saveBtn2.click();
+				jsClickNew(saveBtn2);
+				//saveBtn2.click();
 			}
 			/*New Changes
 			 */
@@ -561,7 +566,8 @@ public class ProviderSearchPage extends UhcDriver {
 		
 	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 		System.out.println("OLD Rally page displayed");
-		Checkcoverage.click();
+	//	Checkcoverage.click();
+		jsClickNew(Checkcoverage);
 	}	
 	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
 		System.out.println("NEW Rally page displayed");
@@ -613,5 +619,21 @@ public class ProviderSearchPage extends UhcDriver {
 	public void removeExistingProviderIfAny()
 	{
 		removeExistingProvider.click();
+	}
+	
+	public PlanDetailsPage navigatebacktoPlanDetails() {
+		// TODO Auto-generated method stub
+
+		CommonUtility.waitForPageLoadNew(driver, FinishReturnButton, 45);
+		validateNew(FinishReturnButton);
+		jsClickNew(FinishReturnButton);		
+		
+		//note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
+		
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+
+		return new PlanDetailsPage(driver);
+
 	}
 }

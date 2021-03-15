@@ -2,9 +2,10 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 
  
  #######################Script 1: Direct traffic########################################
-   @Scenario_1_2_DirectTraffic_UAT @UATRegression
+   @Scenario_1_2_DirectTraffic_UAT1 @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
-   Given the user is on AARP medicare acquisition site landing page
+   Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates TFN Number
        | TFN No | <TFNNo> |
@@ -41,19 +42,20 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
  Then the user navigates to homepage validates Federal TFN
-    And the user clicks on the shopping cart icon in AARP site
-   #And the user clicks on the shopping cart icon
+   #And the user clicks on the shopping cart icon in AARP site
+   And the user clicks on the shopping cart icon
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
    #---------------commenting the lines from 1.08 to 1.11 in production as mentioned by UAT related to Authenticated user -----------------#
-		And the user signs in with optum Id credentials in AARP site
+		And the user signs in with optum Id credentials
 		     | User Name | <userName> |
       | Password  | <password> |
     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-		And the user clicks on the add plans button in the profile in AARP site
+		#And the user clicks on the add plans button in the profile
+	  And the user clicks on the add plans button in the profile in agent mode
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
@@ -76,9 +78,10 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Member Signin URL | <memberSignIn>               |
       | Member Signin URL STG | <memberSignInstage>      |
       | Member Signin URL Offline| <memberSignInOffline> |
+ 		  Then the user navigates to refresh page
  		 Then the user validates TFN Number
-        #| TFN No | <memberTFNNo> |
-        | TFN No    | <TFNNo>     |
+        | TFN No | <memberTFNNo> |
+        #| TFN No    | <TFNNo>     |
         | TFN Xpath | <TFNxpath> |   
     	#Then the user validates PSC code
       #| PSC Code | <Precedence2PSC> |
@@ -351,7 +354,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
   #######################Script 7: Email Validation########################################
   @Scenario_7_DirectTraffic_Email_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN through Email Validation
-    Given the user is on AARP medicare acquisition site landing page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
@@ -388,8 +392,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN No | <MedicareSupplementTFNNo> |
        | TFN Xpath | <MedicareSupplementTFNxpath> |
     Examples: 
-      | scenario               | pscCode | zipcode|pscCode1 | emailLinkUrl                                                      | emailLinkTFN                      | medicareUrl            | medicareTFN                                                                         | shoppagesUrl                        | shoppagesTFN                                                                      |TFNNo         |TFNxpath                         |EmailTFNNo    |MedicareSupplementTFNNo|MedicareSupplementTFNxpath         |EmailTFNxpath|
- 			| Scenario 7-Email - AMP |  810027 | 90210  | 8013925 | /?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 | (//a[contains(@class, 'tel')])[1] | medicare-articles.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |1-877-699-5710|(//a[contains(@class, 'tel')])[1]|1-855-593-6479|1-866-324-0819         | (//a[contains(@class, 'tel')])[2] |//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
+      | scenario               | site|pscCode | zipcode|pscCode1 | emailLinkUrl                                                      | emailLinkTFN                      | medicareUrl            | medicareTFN                                                                         | shoppagesUrl                        | shoppagesTFN                                                                      |TFNNo         |TFNxpath                         |EmailTFNNo    |MedicareSupplementTFNNo|MedicareSupplementTFNxpath         |EmailTFNxpath|
+ 			| Scenario 7-Email - AMP | AARP|810027 | 90210  | 8013925 | /?WT.mc_id=8013925&mrcid=em:Acq:MR%7CNTM65%7CEGEM3107%7C::8013925 | (//a[contains(@class, 'tel')])[1] | medicare-articles.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] | shop/medicare-supplement-plans.html | //button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')] |1-877-699-5710|(//a[contains(@class, 'tel')])[1]|1-855-593-6479|1-866-324-0819         | (//a[contains(@class, 'tel')])[2] |//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|
    
   #######################Script 8: External Link PDP########################################
   @Scenario_8_External_Link_PDP_UAT @UATRegression
@@ -533,12 +537,16 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile
-	  Then the user validates TFN Number
+	And the user clicks on the add plans button in the profile in agent mode
+	#And the user clicks on the add plans button in the profile  
+    #Then user validates plan count for all plan types on plan summary page
+    Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
    Then the user validates PSC code
       | PSC Code | <pscCode> | 
+    #And the user views the plans of the below plan type
+      #| Plan Type | <plantype> |
      Then the user navigates to plan tab for any plan
         | Plan Type | <MAplantype> |  
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN 

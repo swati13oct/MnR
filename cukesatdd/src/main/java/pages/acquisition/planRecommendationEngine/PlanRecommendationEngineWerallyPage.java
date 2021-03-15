@@ -130,21 +130,23 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 			if (type.toUpperCase().contains("DOCTORS")) {
 				searchBox.sendKeys(searchParameter);
 				threadsleep(2000);
+
 //				searchButton.click();
 				jsClickNew(searchButton);
 				validate(serachResultsCount, 30);
+
 				int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
 						threadsleep(5000);
-						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
+						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h3")).getText().trim());
 						doctorsSPecialtyName.add(searchResults.get(i)
 								.findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
 						WebElement saveButton = searchResults.get(i)
-								.findElement(By.cssSelector("div[class*='hidden'] button"));
+								.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
 						if (count > 1) {
 							if (i != 0) {
-								WebElement doc = searchResults.get(i - 1).findElement(By.cssSelector("h2"));
+								WebElement doc = searchResults.get(i - 1).findElement(By.cssSelector("h3"));
 								scrollToView(doc);
 							} else
 								scrollToView(serachResultsCount);
@@ -155,8 +157,10 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						if(locationCount >= 5 )
 							chooseFiveLocation();
 						chooseFirstLocation();
+
 //						saveModalCloseContinueSearchbutton.click();
 						jsClickNew(saveModalCloseContinueSearchbutton);
+
 					}
 				} else {
 					System.out.println("Required search Results is not Returned");
@@ -164,15 +168,19 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				}
 
 			}
+
 //			desktopLogo.click();
 			jsClickNew(desktopLogo);
+
 		}
+
 //		viewSavedbutton.click();
 		jsClickNew(viewSavedbutton);
 		threadsleep(3000);
 //		savedFinishReturnButton.click();
 		jsClickNew(savedFinishReturnButton);
 		waitForPageLoadSafari();
+
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 2);
 			if (wait.until(ExpectedConditions.alertIsPresent()) == null) {
@@ -195,8 +203,10 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	public void chooseFirstLocation() {
 		if (validate(firstLocation, 5)) {
+
 //			firstLocation.click();
 			jsClickNew(firstLocation);
+
 			threadsleep(1000);
 			jsClickNew(locationSave);
 			threadsleep(2000);

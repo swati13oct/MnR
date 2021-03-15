@@ -1,3 +1,4 @@
+
 package pages.acquisition.commonpages;
 
 import static org.junit.Assert.assertTrue;
@@ -168,7 +169,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement vppTop;
 
 	//@FindBy(xpath = "//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
-	@FindBy(xpath = "//a[contains(@title,'Drug Cost Estimator Tool')]")
+	@FindBy(xpath = "(//*[contains(@href,'drug-cost-estimator')])[2]")
 	public WebElement getStarted;
 
 	// @FindBy(xpath = ".//*[contains(@class,
@@ -543,8 +544,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cancel")
 	private WebElement cancelLeaveAARPMedicare;
 
-	//@FindBy(xpath = "//a[contains(text(),'Learn More')]")
-	@FindBy(xpath="//a[contains(text(),'Learn More') or contains(@title,'Learn More About Medicare')]")
+	//@FindBy(xpath="//a[contains(text(),'Learn More') or contains(@title,'Learn More About Medicare')]")
+	@FindBy(xpath="//span[contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
@@ -2766,6 +2767,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
+		
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
@@ -2911,7 +2913,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		// driver.navigate().refresh();
-		if (MRScenario.browserName.equalsIgnoreCase("Safari")) { // Adding because Safari 13 fails to locate element
+		if (MRScenario.browsername.equalsIgnoreCase("Safari")) { // Adding because Safari 13 fails to locate element
 																	// after navigate back
 			driver.navigate().refresh();
 			sleepBySec(2);
@@ -3701,8 +3703,14 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public boolean openPRE() {
 		boolean offline_prod = false;
-		String browser = MRScenario.browsername;
+		String browser = MRScenario.browserName;
 		if (!(MRScenario.getProps() == null)) {// If running from local
+			if (MRScenario.environment.equalsIgnoreCase("digital-devv2-aarp")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-devv2-aarp", "digital-devv2")
+						.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+			} else if (MRScenario.environment.equalsIgnoreCase("digital-devv2")) {
+				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+			}
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
 						.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
@@ -3740,11 +3748,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String jenkinsRunnerFiles = MRScenario.runnerFiles;
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
-					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage")
+					|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin")
+					|| MRScenario.environment.equalsIgnoreCase("digital-devv2")
+					|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")) {
 				for (String rname : jenkinsRunnerFiles.split(",")) {
 					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("ULAYER")) {
-						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+								|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
+								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
 							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 									.replace("www.", ""), browser);
 						else
@@ -3754,7 +3767,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					}
 					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("BLAYER")) {
-						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
+						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
+								|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
+								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
 							startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
 									.replace("www.", ""), browser);
 						else
@@ -4184,7 +4199,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		// Added refresh and wait as elements are not located in Safari 13 browser after
 		// using navigate back
-		if (MRScenario.browserName.equalsIgnoreCase("Safari")) {
+		if (MRScenario.browsername.equalsIgnoreCase("Safari")) {
 			// driver.navigate().refresh();
 			waitForPageLoadSafari();
 		}
@@ -5354,3 +5369,4 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		return new OLETestHarnessPage(driver);
 	}
 }
+

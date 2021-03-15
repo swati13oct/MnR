@@ -1,3 +1,4 @@
+
 package pages.acquisition.commonpages;
 
 import java.util.Arrays;
@@ -554,13 +555,14 @@ public class VisitorProfilePage extends UhcDriver {
 			}else {
 				jsClickNew(signIn);
 			}
-			System.out.println();
+			Thread.sleep(3000);
 			waitForPageLoadSafari();
 			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
+			Thread.sleep(3000);
 			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
 			waitforElement(securityAnswer);
@@ -578,7 +580,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			// CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
@@ -1062,3 +1064,4 @@ public class VisitorProfilePage extends UhcDriver {
 		}
 	}
 }
+

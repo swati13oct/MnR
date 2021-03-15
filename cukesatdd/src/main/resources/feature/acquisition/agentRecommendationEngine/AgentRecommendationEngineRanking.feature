@@ -12,14 +12,12 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     And agent selects county and plan year in plancompare page
       | Multi County | <IfMultiCounty> |
       | Plan Year    | <PlanYear>      |
+    Then agent validates plan ranking drop down UI plancompare page
 
-    #Then agent validates plan ranking drop down UI plancompare page
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear |
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |
 
-  #| qavgogine | qavgogine | LEONEL@MEMBER.COM  |
-  #| qavgogine | qavgogine | xamegy@getnada.com |
   @ARE @EnrolledNonMAPD @nodropdownUI @F496111
   Scenario Outline: - <Email> To Verify agent login and validate ARE No dropdown UI
     Given the agent is on shopper profile login page
