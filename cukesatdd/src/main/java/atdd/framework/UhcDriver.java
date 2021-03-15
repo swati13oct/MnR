@@ -86,6 +86,9 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//span[text()='Back']")
 	private WebElement MobileMenuBackBtn;
 
+	@FindBy(xpath = "//a[.='Back to Top']")
+	private WebElement backToTop;
+
 	public void MobileMenu() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
@@ -500,7 +503,7 @@ public abstract class UhcDriver {
 			iOSClick(element);
 
 		}
-		
+
 	}
 
 	public static String getidentifier(WebElement element) {
@@ -511,16 +514,36 @@ public abstract class UhcDriver {
 
 	public void iOSClick(WebElement element) {
 
+		// Sets FluentWait Setup
 		
-		element.click();
-		
+		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
+				.ignoring(TimeoutException.class);
+
+		// First checking to see if the loading indicator is found
+		// we catch and throw no exception here in case they aren't ignored
+		try {
+			threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
+			System.out.println("Waiting to check if element is present");
+			fwait.until(ExpectedConditions.visibilityOf(element));
+			element.click();
+		}
+
+		catch (Exception e) {
+			System.out.println("Unable to click on element for IOS");
+		}
+
+		// ((IOSDriver) driver).findElement(MobileBy.
 
 	}
 
 	public boolean scrollToView(WebElement element) {
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+			backToTop.isDisplayed();
 			System.out.println("Scoll finished to element on IOS device");
+
 		} else {
 			try {
 
@@ -1102,7 +1125,6 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
 		}
 	}
-	
 
 	public void clickTextIOSNative(String text) {
 		String curHandle = ((IOSDriver) driver).getContext();

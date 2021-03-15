@@ -208,6 +208,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		validateNew(EnterDrugNameTxt);
 		//EnterDrugNameTxt.sendKeys(drugName);
 		mobileactionsendkeys(EnterDrugNameTxt, drugName);
+		scrollToView(AddmyDrugHeader);
 		AddmyDrugHeader.click();
 		
 		Thread.sleep(1000);

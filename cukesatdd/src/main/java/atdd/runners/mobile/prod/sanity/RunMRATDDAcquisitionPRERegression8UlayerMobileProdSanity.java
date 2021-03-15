@@ -15,18 +15,18 @@ import cucumber.api.CucumberOptions;
 		retryCount=0, 
 		screenShotSize="", 
 		screenShotLocation="/screenshots/",
-		jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression8BlayerMobile.json",
+		jsonReport = "target/cucumber-RunMRATDDAcquisitionPRERegression8UlayerMobileProdSanity.json",
 		detailedReport = true, 
 		detailedAggregatedReport = true, 
 		overviewReport = true, 
 		toPDF = true, 
-		outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegression8BlayerMobile")
+		outputFolder = "target/RunMRATDDAcquisitionPRERegression8UlayerMobileProdSanity")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.mobile" }, 
 		features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, 
-		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegression8BlayerMobile.json" }, 
+		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPRERegression8UlayerMobileProdSanity.json" }, 
 		tags = {"@PRERegression8"})
-public class RunMRATDDAcquisitionPlanRecommendationEngineRegression8BlayerMobile {
+public class RunMRATDDAcquisitionPRERegression8UlayerMobileProdSanity {
 
 }
 

@@ -388,7 +388,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		pageloadcomplete();
 
 		validate(planZipInfo, 60);
-		// waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		Assert.assertTrue(planZipInfo.getText().contains(zip), "Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
