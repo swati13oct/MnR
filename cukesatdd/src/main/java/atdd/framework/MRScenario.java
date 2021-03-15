@@ -686,7 +686,6 @@ public class MRScenario {
 				domain = "origin-elr-dmz.optum.com";
 			else if (environment.contains("stage-0"))
 				domain = "ocp-elr-dmz-nonprod.optum.com";
-
 			else
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
 			System.out.println("env chosen is: " + environment);
