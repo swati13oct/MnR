@@ -143,7 +143,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						doctorsSPecialtyName.add(searchResults.get(i)
 								.findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
 						WebElement saveButton = searchResults.get(i)
-								.findElement(By.cssSelector("div[class*='hidden'] button"));
+								.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
 						if (count > 1) {
 							if (i != 0) {
 								WebElement doc = searchResults.get(i - 1).findElement(By.cssSelector("h3"));
