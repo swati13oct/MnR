@@ -69,6 +69,7 @@ public class AgentRecommendationEngineStepDefinition {
 	@Then("^agent validates plan ranking drop down UI plancompare page$")
 	public void agent_verify_planrankingUI() {
 		AREPlanRanking planRank = new AREPlanRanking(wd);
+		planRank.confirmAlert(60);
 		planRank.validateUIElements();
 	}
 	
