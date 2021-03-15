@@ -986,7 +986,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath="//button[@id='pop-btn-1']")
 	private WebElement savedPlansContinueShoppingButton;
+	
+	@FindBy(xpath="(//span[@class='view--less'])[1]")
+	private WebElement viewLessLink;
+	
+	@FindBy(xpath="(//span[@class='view--more'])[1]")
+	private WebElement viewMoreLink;
+	
+	@FindBy(xpath="(//*[contains(text(),' 	View Plan Details')])[1]")
+	private WebElement viewPlanDetailsLink;
+	
+	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+	private WebElement RightRail_FindAnAgentMedsupp;
 
+	@FindBy(xpath = "//a[contains(@class,'plan-name-heading')]")
+	List<WebElement> mapdOrSnpPlansNameOnSummary;
+	@FindBy(xpath = "//h3[contains(@id,'favouriteplanSelect')]")
+	List<WebElement> pdpPlansNameOnSummary;
+	
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
@@ -6646,9 +6663,6 @@ public IsInsuranceAgent clickOnRequestInsuranceAgent() {
 		return null;
 }
 
-@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
-private WebElement RightRail_FindAnAgentMedsupp;
-
 public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
 
 	validateNew(RightRail_FindAnAgentMedsupp);
@@ -6767,8 +6781,9 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		else
 			return null;
 }
-public void clickOnEmailField() {
-		
+
+	public void clickOnEmailField() {
+
 		summary_maEmailOption.click();
 	}
 	
@@ -6836,16 +6851,7 @@ public void clickOnEmailField() {
 			}
 		}
 		Assert.assertEquals("Shopping cart count not updated with save plan count", count,Integer.parseInt(shoppingCartSaveCount.getText()));
-	}	
-	@FindBy(xpath="(//span[@class='view--less'])[1]")
-	private WebElement viewLessLink;
-	
-	@FindBy(xpath="(//span[@class='view--more'])[1]")
-	private WebElement viewMoreLink;
-	
-	@FindBy(xpath="(//*[contains(text(),' 	View Plan Details')])[1]")
-	private WebElement viewPlanDetailsLink;
-
+	}
 	
 	public void validateViewMoreAndLessLinks()
 	{
@@ -6857,12 +6863,7 @@ public void clickOnEmailField() {
 		System.out.println("view More link clicked");
 		Assert.assertEquals("On click of view More link plan card is not collapsed", 0, driver.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
 		
-	}	
-	
-	@FindBy(xpath = "//a[contains(@class,'plan-name-heading')]")
-	List<WebElement> mapdOrSnpPlansNameOnSummary;
-	@FindBy(xpath = "//h3[contains(@id,'favouriteplanSelect')]")
-	List<WebElement> pdpPlansNameOnSummary;
+	}
 
 	public void validatePlanNames(String planType, String planList) {
 		List<String> expectedPlanNames = new ArrayList<String>();
