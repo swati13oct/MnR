@@ -96,6 +96,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     When user adds Drugs in vpp summary page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then user validate drugs details from DCE to VPP and PRE page
+    Then user navigate to PRE from vpp page
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
@@ -120,7 +121,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
     Then user adds Doctors in vpp summary page
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
-    When user navigates to Zip Code page from vpp plans
+    Then user navigate to PRE from vpp page
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
