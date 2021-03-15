@@ -225,8 +225,10 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
     ##--------------------------------- Privacy Policy from External Page------------------------##
     Then the user navigate back to aarp medicare plans11 page privacy link
     And the user validates SAM icons on the page
+    | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath2> |
-    And the user closes the new browser tab
+    #And the user closes the new browser tab
+    Then user closes current tab and navigate to previous tab
       
    @Scenario7_AARP
     Examples: 
