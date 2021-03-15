@@ -474,40 +474,36 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
   ################################################# Additional Flows ##########################################################
   
   Scenario Outline: UserStory: Test to verify the Next action modal is not displayed on VPP summary page when user navigates from PRE
-      Given the user is on medicare acquisition site landing page for PRE
+    Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When user navigate to Plan Recommendation Engine and Check Breadcrumbs
+   # When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
    #When user navigate to Plan Recommendation Engine Tool
-    And clicks on get started button and runs a questionnaire
+   When user navigate Plan Recommendation Engine Using Shop From Home in Find Your Plan
+    And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
      | Is Multi County | <isMultiCounty> |
       | CountyDropDown  | <county>        |
-    And user selects a plan type in coverage options page
+    And user selects plan type in coverage options page
       | Plan Type | <isCoverageOpt> |
-    And user selects SNP options on Special Needs Page
+    And user selects SNP options in Special Needs Page
       | SNP Options | <specialNeeds> |
-    And user selects Travel options on Care Away From Home Page
+    And user selects Travel options in Care Away From Home Page
       | Travel Options | <travel> |
-    And user selects doctors on doctors page
+    And user selects doctors in doctors page
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
      | Multi Doctor        | <isMultiDoctor> |
-    And user selects skip option on Drug page
-      | Plan Type      | <isCoverageOpt>  |
+    And user selects skip option in Drug page
       | Drug Selection | <Drug Selection> |
-    And user selects additional services option on additional services page
+    And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
-    Then user selects cost preferences option on cost preferences page
+    Then user selects cost preferences option in cost preferences page
       | Preference Option | <costPreferenceOption> |
-    #Then user selects priorities option on your priorities page
-     # | Priorities Option | <prioritiesOption> |
     Then user selects priority in priorities page
      | Priority Option | <priorityOption> |
      | Priorities      | <priorities>     |
-    #And verify continue function in "Priorities" page
-    #Then user validate elements on loading results page
     Then user validate elements in loading results page
-      And the user selects plan year
+    And the user selects plan year
       | Plan Year | <planyear> |
     Then user verify NBA is not displayed on the VPP page
     When the user views the plans of the below plan type

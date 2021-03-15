@@ -562,6 +562,7 @@ public class VisitorProfilePage extends UhcDriver {
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
+			Thread.sleep(3000);
 			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
 			waitforElement(securityAnswer);

@@ -107,11 +107,19 @@ public class CQPage extends UhcDriver{
 	@FindBy(xpath="//coral-select[@id='dynamic_app']//coral-selectlist-item[contains(@role,'option')]")
 	private List<WebElement> selectAppOptions;
 	
-	@FindBy(xpath="//coral-select[@id='dynamic_app_views']")
+	//@FindBy(xpath="//coral-select[@id='dynamic_app_views']")
+	@FindBy(xpath="//*[contains(@class,'dynamic_app_view')]")
 	private WebElement selectViewDropDown;
 	
 	@FindBy(xpath="//coral-select[@id='dynamic_app_views']//coral-selectlist-item[contains(@role,'option')]")
 	private List<WebElement> selectViewOptions;
+	
+	//@FindBy(xpath="//coral-select[@id='dynamic_app_subviews']")
+	@FindBy(xpath="//*[contains(@class,'dynamic_app_subview')]")
+	private WebElement selectSubViewDropDown;
+	
+	@FindBy(xpath="//coral-select[@id='dynamic_app_subviews']//coral-selectlist-item[contains(@role,'option')]")
+	private List<WebElement> selectSubViewOptions;
 	
 	@FindBy(xpath="//div[contains(@id,'esult')]//table//tbody//tr//td//button")
 	private List<WebElement>editButtons;
@@ -123,7 +131,7 @@ public class CQPage extends UhcDriver{
 	@FindBy(xpath="//div[contains(@class,'Modal-header')]")
 	WebElement modalHeader;
 	
-	@FindBy(xpath="//input[@id='coral-id-15']")
+	@FindBy(xpath="//input[@type='checkbox']")
 	WebElement checkboxAnalytics;
 	
 	@FindBy(xpath="//label[contains(text(),'Asset Name')]")
@@ -425,19 +433,36 @@ public class CQPage extends UhcDriver{
 				e.click();
 				sleepBySec(2);
 				if(selectViewDropDown.isDisplayed()) {
+					sleepBySec(1);
 					System.out.println("Select View Dropdown is visible");
 					for(WebElement x:selectViewOptions) {
 						selectViewDropDown.click();
 						System.out.println(x.getText()+" from View dropdown is selected");
 						x.click();
-						sleepBySec(3);
-						checkResult();
-						validateEditAssetModalPopUp();
+						sleepBySec(2);
+						if(selectSubViewDropDown.isDisplayed()) {
+							sleepBySec(1);
+							System.out.println("Select Sub View Dropdown is visible");
+							for(WebElement sub:selectSubViewOptions) {
+								selectSubViewDropDown.click();
+								System.out.println(sub.getText()+" from Sub View dropdown is selected");
+								sub.click();
+								sleepBySec(3);
+								checkResult();
+								validateEditAssetModalPopUp();
+							}
+						}else {
+							System.out.println("Select Sub View Dropdown is not visible");
+							sleepBySec(3);
+							checkResult();
+							validateEditAssetModalPopUp();
+						}
 					}
 					/*selectViewDropDown.click();
 					selectViewOptions.get(1).click();*/
 					
 				}else {
+					System.out.println("Select View Dropdown is not visible");
 				checkResult();
 				validateEditAssetModalPopUp();
 				}

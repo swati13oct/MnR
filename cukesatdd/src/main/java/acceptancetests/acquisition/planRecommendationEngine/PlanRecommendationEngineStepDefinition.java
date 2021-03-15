@@ -745,7 +745,7 @@ public class PlanRecommendationEngineStepDefinition {
 		planSelectorResultspage.validateRankingPlans(recom,plansorder);
    	}
 	
-	@Then("^verify continue function in \"([^\"]*)\" page$")
+	@Then("^verify continue function on \"([^\"]*)\" page$")
     public void proceed_next_page(String page) {
      PlanRecommendationEngineCommonutility commonutli =  new PlanRecommendationEngineCommonutility(wd);
      commonutli.continueNextpage(page.trim().toUpperCase(),false);

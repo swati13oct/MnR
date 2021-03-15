@@ -672,7 +672,6 @@ public abstract class UhcDriver {
 		}else {
 			dropdown.selectByValue(value);
 		}
-		dropdown.selectByValue(value);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
 		if (!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
