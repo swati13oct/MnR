@@ -526,7 +526,9 @@ public abstract class UhcDriver {
 			threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
 			System.out.println("Waiting to check if element is present");
 			fwait.until(ExpectedConditions.visibilityOf(element));
-			element.click();
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
+			//element.click();
 		}
 
 		catch (Exception e) {
