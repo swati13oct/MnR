@@ -535,9 +535,11 @@ public class ProviderSearchPage extends UhcDriver {
 			jsClickNew(element);
 
 			if (validate(selectLocationOption,10)) {
-				selectLocationOption.click();
+			//	selectLocationOption.click();
+				jsClickNew(selectLocationOption);
 				validateNew(saveBtn2);
-				saveBtn2.click();
+				jsClickNew(saveBtn2);
+				//saveBtn2.click();
 			}
 			/*New Changes
 			 */
@@ -564,7 +566,8 @@ public class ProviderSearchPage extends UhcDriver {
 		
 	if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
 		System.out.println("OLD Rally page displayed");
-		Checkcoverage.click();
+	//	Checkcoverage.click();
+		jsClickNew(Checkcoverage);
 	}	
 	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
 		System.out.println("NEW Rally page displayed");

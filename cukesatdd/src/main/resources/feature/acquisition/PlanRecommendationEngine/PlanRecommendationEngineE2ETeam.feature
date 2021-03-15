@@ -27,7 +27,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option on cost preferences page
       | Preference Option | <costPreferenceOption> |
-    And verify continue function in "Priorities" page
+    And verify continue function on "Priorities" page
     Then user validate elements on loading results page
     Then user validate UI and API recommendation rankings on results page
     #And the user views the plans of the below plan type and select Next year
@@ -90,7 +90,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option on cost preferences page
       | Preference Option | <costPreferenceOption> |
-    And verify continue function in "Priorities" page
+    And verify continue function on "Priorities" page
     Then user validate elements on loading results page
     Then user validate UI and API recommendation rankings on results page
     And the user selects plan year

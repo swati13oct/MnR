@@ -1,7 +1,7 @@
 @UATRegression
 Feature: 1.07.2 UAT-Provider Search Flows
 
-  Scenario Outline: <Scenario> : Verify Provider Search  in AARP site from Home Page
+  Scenario Outline: <Scenario> : Verify Provider Search  in <site> site from Home Page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user click on Provider Search on the Home Page
@@ -11,12 +11,12 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @ProviderSearchCommon_Prod_AARP @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
+    @ProviderSearchCommon_AARP @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-    @ProviderSearchCommon_UHC @ProviderSearchCommon_Prod_UHC @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke
+    @ProviderSearchCommon_UHC  @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
