@@ -2770,7 +2770,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		validateNew(providerSearchFromHomeScreen);
 
-		switchToNewTabNew(providerSearchFromHomeScreen);
+		jsClickNew(providerSearchFromHomeScreen);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
