@@ -70,7 +70,8 @@ public class SavingsOppurtunityMobile extends UhcDriver{
 	public pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile savedrugbutton() throws InterruptedException {
 		Thread.sleep(10000);
 		waitforElement(savedrugbutton);
-		savedrugbutton.click();
+		jsClickNew(savedrugbutton);
+		
 		Thread.sleep(15000);
 		// TODO Auto-generated method stub
 		return null;

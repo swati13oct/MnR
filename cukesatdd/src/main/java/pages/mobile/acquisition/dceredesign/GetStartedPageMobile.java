@@ -109,7 +109,8 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public VisitorProfilePageMobile clickOnShoppingCart() {
-		shoppingCartIcon.click();
+		//shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {

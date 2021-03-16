@@ -138,14 +138,15 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	
 	public DrugCostEstimatorPageMobile addDrug() {
 
-		addrugs.click();
+		
+		jsClickNew(addrugs);
 		if (currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 
 	public void clickReviewDrugCostBtn() {
-		// reviewDrugCost.click();
+		
 		jsClickMobile(reviewDrugCost);
 	}
 
@@ -209,7 +210,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		//EnterDrugNameTxt.sendKeys(drugName);
 		mobileactionsendkeys(EnterDrugNameTxt, drugName);
 		scrollToView(AddmyDrugHeader);
-		AddmyDrugHeader.click();
+		jsClickNew(AddmyDrugHeader);
+		
 		
 		Thread.sleep(1000);
 		validateNew(SearchBtn);

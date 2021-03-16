@@ -3069,6 +3069,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public DrugCostEstimatorPageMobile navigateToDCEToolFromHome() {
+		MobileMenuAccessDCE();
 		validateNew(getStarted);
 		jsClickNew(getStarted);
 		waitForPageLoadSafari();

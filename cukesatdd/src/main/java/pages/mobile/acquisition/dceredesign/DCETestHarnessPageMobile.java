@@ -71,7 +71,8 @@ public class DCETestHarnessPageMobile extends UhcDriver{
 		validateNew(CountyDropDown);		
 		jsClickNew(CountyDropDown);
 		WebElement CountySelection = driver.findElement(By.xpath("//option[contains(text(), '"+countyName+"')]"));
-		CountySelection.click();
+		
+		jsClickNew(CountySelection);
 		
 	}
 
@@ -80,7 +81,7 @@ public class DCETestHarnessPageMobile extends UhcDriver{
 		validateNew(PlanDropDown);		
 		jsClickNew(PlanDropDown);
 		WebElement CountySelection = driver.findElement(By.xpath("//option[contains(text(), '"+planName+"')]"));
-		CountySelection.click();	
+		jsClickNew(CountySelection);
 	}
 
 

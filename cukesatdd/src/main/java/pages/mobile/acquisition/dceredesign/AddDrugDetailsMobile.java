@@ -111,15 +111,15 @@ public class AddDrugDetailsMobile extends UhcDriver {
 
 	public SavingsOppurtunityMobile continueAddDrugDetailsModal() throws InterruptedException {
 		waitforElement(continueButton);
-		continueButton.click();
-		// continueButton.click();
+		jsClickNew(continueButton);
+
 		Thread.sleep(12000);
 		return new SavingsOppurtunityMobile(driver);
 	}
 
 	public DrugCostEstimatorPageMobile continueAddDrugDetailsMod() throws InterruptedException {
 		waitforElement(continueButton);
-		continueButton.click();
+		jsClickNew(continueButton);
 		Thread.sleep(12000);
 		return new DrugCostEstimatorPageMobile(driver);
 	}
@@ -127,7 +127,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 	public SavingsOppurtunityMobile continueAddDrugDetails() {
 
 		waitforElement(continueButton);
-		continueButton.click();
+		jsClickNew(continueButton);
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunityMobile(driver);
 		}
@@ -135,7 +135,8 @@ public class AddDrugDetailsMobile extends UhcDriver {
 	}
 
 	public AddNewDrugModalMobile backToSeach() {
-		backToSearchBtn.click();
+
+		jsClickNew(backToSearchBtn);
 		return new AddNewDrugModalMobile(driver);
 	}
 
@@ -145,20 +146,20 @@ public class AddDrugDetailsMobile extends UhcDriver {
 
 	public SavingsOppurtunityMobile continueAddDrugDetailsModWithSaving() throws InterruptedException {
 		scrollToView(continueButton);
-		continueButton.click();
+		jsClickNew(continueButton);
 
 		return new SavingsOppurtunityMobile(driver);
 	}
 
 	public DrugCostEstimatorPage continueAddDrugDetailsModNoSaving() throws InterruptedException {
 		validateNew(continueButton);
-		continueButton.click();
+		jsClickNew(continueButton);
 		return new DrugCostEstimatorPage(driver);
 	}
 
 	public void selectDosageAttribute(String dosage) throws InterruptedException {
 		if (btndrugName.getText().equalsIgnoreCase(dosage))
-			btndrugName.click();
+			jsClickNew(btndrugName);
 	}
 
 }
