@@ -19,9 +19,6 @@ import cucumber.api.CucumberOptions;
 				"json:target/cucumber-RunMRATDDAcquisitionProdOLEUlayerSNPplan.json" }, tags = {
 						"@prodRegression_AARP" })
 
-
-
-
 public class RunMRATDDAcquisitionProdOLEUlayerSNPplan {
 
 }

@@ -18,9 +18,6 @@ import cucumber.api.CucumberOptions;
 				"json:target/cucumber-RunMRATDDAcquisitionProdOLEBlayerSNPplan.json" }, tags = {
 						"@prodRegression_UHC" })
 
-
-
-
 public class RunMRATDDAcquisitionProdOLEBlayerSNPplan {
 
 }
