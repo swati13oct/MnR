@@ -169,7 +169,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement vppTop;
 
 	//@FindBy(xpath = "//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
-	@FindBy(xpath = "//a[contains(@title,'Drug Cost Estimator Tool')]")
+	@FindBy(xpath = "(//*[contains(@href,'drug-cost-estimator')])[2]")
 	public WebElement getStarted;
 
 	// @FindBy(xpath = ".//*[contains(@class,
@@ -545,8 +545,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "cancel")
 	private WebElement cancelLeaveAARPMedicare;
 
-	//@FindBy(xpath = "//a[contains(text(),'Learn More')]")
-	@FindBy(xpath="//a[contains(text(),'Learn More') or contains(@title,'Learn More About Medicare')]")
+	//@FindBy(xpath="//a[contains(text(),'Learn More') or contains(@title,'Learn More About Medicare')]")
+	@FindBy(xpath="//span[contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
@@ -4150,7 +4150,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement memberSignInPage;
 
 	// @FindBy(xpath="//a[contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
-	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com') or contains(@href,'https://www.aarpmedicareplans.com/health-plans.html?WT.mc_id=8009508')]")
+	@FindBy(xpath = "//a[contains(@href,'https://www.aarpmedicareplans.com') or contains(@href,'https://www.aarpmedicareplans.com/?WT.mc_id=8009508')]")
 	private WebElement ViewMedicareplanlinks;
 
 	public void clickonmemberSignInlink(String ExpectedmemberSigninURL) {

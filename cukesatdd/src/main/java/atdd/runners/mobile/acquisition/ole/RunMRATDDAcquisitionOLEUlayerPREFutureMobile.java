@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEUlayerPREFutureMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEUlayerPREFutureMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, 
-features = { "src/main/resources/feature/mobile/acquisition/ole" }, plugin = {
+features = { "src/main/resources/feature/mobile/acquisition/ole/oleFuture" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEUlayerPREFutureMobile.json" }, 
 tags = { "@PRE_E2E_AARP_future" }, dryRun=false)
 
