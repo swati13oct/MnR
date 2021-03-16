@@ -127,7 +127,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       |   10001 | NO            | New York | PDP           | No             |
 
-  @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PRERegression6 @SanityPRE @ios
+  @PRE @planrecommendation @APIRanking @PDPFlowRanking @SanityTest @PRERegression6 @SanityPRE 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> - To validate PDP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
