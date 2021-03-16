@@ -249,6 +249,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | CoveredDrug | <drug1> |
     Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
       | NotCoveredDrug | <drug2> |
+		Then the user validates LIS text for coverages stages popup on DCE details page      
 
     @DCE_DrugDetailsLISBuyDown_AARP
     Examples: 
