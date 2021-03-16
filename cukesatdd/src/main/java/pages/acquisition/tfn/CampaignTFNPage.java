@@ -976,6 +976,7 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				//validateNew(OurPlansLink1);
 				validate(HomePageExternalLinks_EnterZip);
 				HomePageExternalLinks_EnterZip.click();
+				HomePageExternalLinks_EnterZip.clear();
 				HomePageExternalLinks_EnterZip.sendKeys(zip);
 				validate(findPlansButtonExternalLinks);
 				findPlansButtonExternalLinks.click();

@@ -182,7 +182,7 @@ public class WelcomePageMobile extends UhcDriver{
 	public PersonalInformationPageMobile navigate_to_Personal_Information_page() {
 		
 		validateNew(NextBtn);
-		NextBtn.click();
+		jsClickMobile(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal')]")))){			
 			System.out.println("OLE Personal Information Page is Displayed");
