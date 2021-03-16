@@ -1025,7 +1025,7 @@ public class PlanRecommendationStepDefinitionMobile {
 		checkpopup();
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
-		planSelectorResultspage.checkPlanyear("future");
+		//planSelectorResultspage.checkPlanyear("future");
 		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
 		planSelectorResultspage.changePlanyear("current");
