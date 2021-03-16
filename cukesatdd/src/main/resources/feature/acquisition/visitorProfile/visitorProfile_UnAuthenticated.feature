@@ -370,12 +370,12 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
 
-    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02
+    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |  |
       | AARP | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |  |
 
-    @VisitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02
+    @VisitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
       | UHC  | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
