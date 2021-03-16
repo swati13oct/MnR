@@ -2337,7 +2337,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
 		}
 
-		MobileMenuBackBtn.click();
+		//MobileMenuBackBtn.click();
+		jsClickNew(MobileMenuBackBtn);
 
 	}
 

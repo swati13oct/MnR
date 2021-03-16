@@ -308,7 +308,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | primaryRecommendation | Email                  |
       |   10003 | NO            | New York | PDP           | No             | PDP                   | julia_dowden@optum.com |
 
-  @PRE @planrecommandonation @EmailList @F452764 @PRERegression4 @ios
+  @PRE @planrecommandonation @EmailList @F452764 @PRERegression4 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate Email plan list in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
