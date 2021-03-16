@@ -1427,34 +1427,6 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	@Then("^the user verifies the catastrophic coverage message$")
-	public void the_user_verifies_the_catastrophic_coverage_message(DataTable givenAttributes) throws Throwable {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String catastrophicMessage = memberAttributesMap.get("catastrophicCoverage");
-		drugDetailsPage.validateCatastrophicCoverageMessage(catastrophicMessage);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
-	}
-
-	@Then("^the user verifies the coverage gap message$")
-	public void the_user_verifies_the_coverage_gap_message(DataTable givenAttributes) throws Throwable {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String coverageGapMessage = memberAttributesMap.get("coverageGap");
-		drugDetailsPage.validateCoverageGapMessage(coverageGapMessage);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
-	}
-
 	@Then("^user saves plan as favorite on drug summary page$")
 	public void user_saves_plan_as_favorite_on_drug_summary(DataTable givenAttributes) throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
@@ -2795,4 +2767,18 @@ public class DCEStepDefinitionAARP {
 		
 	}
 
+	@Then("^the user validates LIS text for coverages stages popups on DCE details page$")
+	public void the_user_validates_LIS_text_for_coverages_stages_popups_on_DCE_details_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDrugStageInfoModals_LISbuydownPlans();
+	}
+
+	@Then("^the user validates Non-LIS text for coverages stages popups on DCE details page$")
+	public void the_user_validates_NonLIS_text_for_coverages_stages_popups_on_DCE_details_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDrugStageInfoModals_NonLISbuydownPlans();
+	}
+	
 }

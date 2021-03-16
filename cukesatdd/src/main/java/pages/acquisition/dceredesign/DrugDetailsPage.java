@@ -964,33 +964,6 @@ public class DrugDetailsPage extends UhcDriver {
 		keepUsingPharmBtn.click();
 	}
 
-	public void validateCatastrophicCoverageMessage(String message) {
-		if (validateNew(catastrophicCoverage)) {
-			catastrophicCoverage.click();
-			System.out.println(coverageMsg.getText());
-			System.out.println(message);
-			String catastrophicCoverage = StringUtils.normalizeSpace(coverageMsg.getText());
-			modalCloseIcon.click();
-			Assert.assertTrue("Catastrophic coverage message is incorrect", catastrophicCoverage.equals(message));
-		} else {
-			Assert.fail("Catastrophic coverage Modal not displayed");
-		}
-	}
-
-	public void validateCoverageGapMessage(String message) throws InterruptedException {
-		if (validateNew(coverageGap)) {
-			waitforElementNew(coverageGap, 30);
-			coverageGap.click();
-			System.out.println(coverageMsg.getText());
-			System.out.println(message);
-			String coverageGap = coverageMsg.getText();
-			modalCloseIcon.click();
-			Assert.assertTrue("Coverage gap message is incorrect", coverageGap.equals(message));
-		} else {
-			Assert.fail("Coverage gap Modal not displayed");
-		}
-	}
-
 	@FindBy(xpath = "//div[@class='text-normal']")
 	private WebElement retailChainPharmacy;
 
@@ -1986,6 +1959,90 @@ public class DrugDetailsPage extends UhcDriver {
 
 	}
 
+	public void validateDrugStageInfoModals_LISbuydownPlans() {
+		validateNew(MonthlyDrugStage_InitialCoverageLink);
+		jsClickNew(MonthlyDrugStage_InitialCoverageLink);
+		String LIS_BuyDownText = "pays all of the costs for your covered drugs";
+		validateNew(StageInfo_Modal);
+		WebElement CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Initial")) {
+			System.out.println(
+					"Correct text displayed for Initial Coverage Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assert.fail(
+					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
 
+		validateNew(MonthlyDrugStage_CoverageGapLink);
+		jsClickNew(MonthlyDrugStage_CoverageGapLink);
+		validateNew(StageInfo_Modal);
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Coverage Gap")) {
+			System.out.println(
+					"Correct text displayed for Coverage Gap Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assert.fail(
+					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
 
+		validateNew(MonthlyDrugStage_CatastropheLink);
+		jsClickNew(MonthlyDrugStage_CatastropheLink);
+		validateNew(StageInfo_Modal);
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Catastrophic")) {
+			System.out.println(
+					"Correct text displayed for Catastrophic Coverage Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assert.fail(
+					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
+	}
+
+	public void validateDrugStageInfoModals_NonLISbuydownPlans() {
+		validateNew(MonthlyDrugStage_InitialCoverageLink);
+		jsClickNew(MonthlyDrugStage_InitialCoverageLink);
+		String LIS_BuyDownText = "will pay a copay or coinsurance";
+		validateNew(StageInfo_Modal);
+		WebElement CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Initial")) {
+			System.out.println(
+					"Correct text displayed for Initial Coverage Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assert.fail(
+					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
+
+		validateNew(MonthlyDrugStage_CoverageGapLink);
+		jsClickNew(MonthlyDrugStage_CoverageGapLink);
+		validateNew(StageInfo_Modal);
+		LIS_BuyDownText = "will pay no more than 25% of the total cost";
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Coverage Gap")) {
+			System.out.println(
+					"Correct text displayed for Coverage Gap Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assert.fail(
+					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
+
+		validateNew(MonthlyDrugStage_CatastropheLink);
+		jsClickNew(MonthlyDrugStage_CatastropheLink);
+		validateNew(StageInfo_Modal);
+		LIS_BuyDownText = "$3.70 copay for generic drugs, $9.20 copay for brand name drugs or a 5% coinsurance, whichever is greater";
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Catastrophic")) {
+			System.out.println(
+					"Correct text displayed for Catastrophic Coverage Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assert.fail(
+					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
+		
+	}
 }
