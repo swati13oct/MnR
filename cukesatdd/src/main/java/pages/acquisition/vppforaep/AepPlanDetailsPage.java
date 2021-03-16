@@ -538,6 +538,9 @@ public class AepPlanDetailsPage extends UhcDriver {
 						else if(key.equalsIgnoreCase("plan name")) {
 							benefitValueUI = benefitValueUI.substring(0, benefitValueUI.indexOf(")")+1);
 						}
+                        else if(benefitValueUI.contains("monthlyvaries2")) {
+								benefitValueUI = benefitValueUI.replaceAll("monthlyvaries2", "monthlyvaries");	
+						}
 
 						/*if(key.equalsIgnoreCase("Walgreens – Preferred Retail Pharmacy")) {
 							 if(benefitValueUI.contains(".1"))
