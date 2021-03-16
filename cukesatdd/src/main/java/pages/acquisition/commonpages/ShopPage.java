@@ -13,7 +13,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -85,7 +84,7 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@href,'/shop/dual-special-needs-plans.html')and contains(text(),'Shop')]")
 	private WebElement dsnpShopLink;
 	
-	@FindBy(xpath = "//*[contains(@href,'/shop/prescription-drug-plans.html')and contains(text(),'Shop')]")
+	@FindBy(xpath = "//*[contains(@href,'/shop/prescription-drug-plans')and contains(text(),'Shop')]")
 	private WebElement pdpShopLink;
 	
 	@FindBy(xpath = "//*[contains(@href,'/shop/medicare-advantage-plans') and contains(text(),'Shop')]")
@@ -100,7 +99,7 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//span[@class='heading-1']")
 	private WebElement ShopHeader;
 	
-	@FindBy(xpath = "//a[contains(text(),'See more benefits')]")
+	@FindBy(xpath = "//*[contains(text(),'See more benefits')]")
 	private WebElement seeMoreBenefitsLink;
 	
 	@FindBy(xpath = "//form[contains(@class,'zipForm')]")
@@ -243,6 +242,8 @@ public class ShopPage extends UhcDriver {
 	}
 	
 	public void clickOnPDPShopButton() {
+		waitForPageLoadSafari();
+		scrollToView(MAShopLink);
 		validateNew(pdpShopLink);
 		jsClickNew(pdpShopLink);
 		waitForPageLoadSafari();

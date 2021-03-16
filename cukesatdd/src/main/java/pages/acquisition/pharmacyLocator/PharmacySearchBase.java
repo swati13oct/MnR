@@ -1,3 +1,4 @@
+
 package pages.acquisition.pharmacyLocator;
 
 import java.util.ArrayList;
@@ -615,4 +616,5 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 	}
 
 }
+
 

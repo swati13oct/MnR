@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pages.acquisition.agentRecommendationEngine;
 
 import java.text.DateFormat;
@@ -209,10 +207,10 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = ".multi-year-select button:nth-child(2)")
 	private WebElement futurePlanYear;
 	
-	@FindBy(css = "#plan-summary-table tr:nth-child(7)")
+	@FindBy(css = "#plan-summary-table tr:nth-child(8)")
 	private WebElement estimateMedicalCost;
 	
-	@FindBy(css = "#plan-summary-table tr:nth-child(7) div.text-small span")
+	@FindBy(css = "#plan-summary-table tr:nth-child(8) div.text-small span")
 	private List<WebElement> estimateMedicalCostvalue;
 
 	@FindBy(css = "div#multiSelect label[for='estimated_medical_costs']")
@@ -1191,3 +1189,4 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 }
+

@@ -58,7 +58,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.vppforaep.VppCommonPage;
+import pages.acquisition.vpp.VppCommonPage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -182,15 +182,15 @@ public class VppCommonStepDefinition {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
 		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip: " + plantype);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,(new VPPPlanSummaryPage(wd)));
-		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,plansummaryPage);
-
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		plansummaryPage.viewPlanSummary(plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,plansummaryPage);
 
 	}
 
@@ -856,30 +856,24 @@ public class VppCommonStepDefinition {
 	@Then("^the user validates the right rail$")
 	public void user_validates_rightRail() {
 		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
-
 		plansummaryPage.validateRightRailSection();
 	}
 
 	@Then("^the user validates the Need Help Section in the right rail$")
 	public void validate_needHelp_rightRail() {
 		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
-
 		plansummaryPage.validateNeedHelpRightRail();
 	}
 
 	@Then("^the user validates the TFN in the Need Help Section$")
 	public void validate_TFN_inRIghtRail_aarp() {
 		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
-
 		plansummaryPage.GetTFNforPlanType();
 	}
 
@@ -1181,8 +1175,9 @@ public class VppCommonStepDefinition {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		aquisitionhomepage.navigateToPath(path);
-		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToPathNew(path);
+		//Thread.sleep(5000);
+		//VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		//	getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
@@ -1512,12 +1507,8 @@ public class VppCommonStepDefinition {
 		String planName = memberAttributesRow.get(0).getCells().get(1);
 		String planType = memberAttributesRow.get(1).getCells().get(1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-		
-
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		System.out.println("Plan Name: " + planName);
-		System.out.println("Plan Type: " + planType);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE,planType);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
@@ -1873,12 +1864,14 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// int counter = Integer.parseInt(Counter);
-		if (planType.equals("MAPD")) {
-			// plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(Counter);
-			System.out.println("Selected All MAPD plans for Plan Compare");
-		}
-
+//		if (planType.equals("MAPD")) {
+//			// plansummaryPage.clickonViewPlans();
+//			plansummaryPage.checkMAPlansOnly(Counter);
+//			System.out.println("Selected All MAPD plans for Plan Compare");
+//		}
+//		else
+		plansummaryPage.checkPlansForCompare(Counter,planType);
+		
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
@@ -2049,6 +2042,7 @@ public class VppCommonStepDefinition {
 		WelcomePage welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
 			Assert.fail("Error Loading Welcome Page for OLE");
 		}
@@ -3199,7 +3193,6 @@ public class VppCommonStepDefinition {
 		WelcomePage welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
 			Assert.fail("Error Loading Welcome Page for OLE");
 		}
@@ -3477,7 +3470,7 @@ public class VppCommonStepDefinition {
 		File InputFileDocLogPDP = new File(InputFilePathDocLogPDP);
 		FileInputStream inputStreamDocLogPDP = new FileInputStream(InputFileDocLogPDP);
 		Workbook workbookDocLogPDP = new HSSFWorkbook(inputStreamDocLogPDP);
-		Sheet sheetDocLogPDP = workbookDocLog.getSheet(sheetNameDocLog);
+		Sheet sheetDocLogPDP = workbookDocLogPDP.getSheet(sheetNameDocLog);
 		int lastRowDocLogPDP = sheetDocLogPDP.getLastRowNum();
 		
 		//Creating the results excel book
@@ -3543,20 +3536,25 @@ public class VppCommonStepDefinition {
 	             int langColIndex = 0;
 	             int componentCodeIndex =0;
 	             int planIDIndexDocLog = 0;
+	             int planNameIndexDocLog = 0;
+	             int yearIndexDocLog = 0;
 	             
 	         //getting the respective col numbers for the following headers in MADocLog
              int docTypeColIndexMA = colNamesMapMA.get("DocType");
              int langColIndexMA = colNamesMapMA.get("OCP/ODP");
              int componentCodeIndexMA = colNamesMapMA.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
              int planIDIndexDocLogMA = colNamesMapMA.get("Contract-PBP-SegmentID");
-
+             int planNameIndexDocLogMA = colNamesMapMA.get("DocumentDescription");
+             int yearIndexDocLogMA = colNamesMapMA.get("Year");
              
              //getting the respective col numbers for the following headers in PDPDocLog
-             int docTypeColIndexPDP = colNamesMapMA.get("DocType");
-             int langColIndexPDP = colNamesMapMA.get("OCP/ODP");
-             int componentCodeIndexPDP = colNamesMapMA.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
-             int planIDIndexDocLogPDP = colNamesMapMA.get("Contract-PBP-SegmentID");
-			 
+             int docTypeColIndexPDP = colNamesMapPDP.get("DocType");
+             int langColIndexPDP = colNamesMapPDP.get("OCP/ODP");
+             int componentCodeIndexPDP = colNamesMapPDP.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+             int planIDIndexDocLogPDP = colNamesMapPDP.get("Contract-PBP-SegmentID");
+             int planNameIndexDocLogPDP = colNamesMapPDP.get("DocumentDescription");
+             int yearIndexDocLogPDP = colNamesMapMA.get("Year");
+			 String  planType = "";
 			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 	            {
 				 
@@ -3594,23 +3592,30 @@ public class VppCommonStepDefinition {
 								  planDetailsPage = new PlanDetailsPage(wd);
 							 }
 							 
+							 //based on the column headers, determines the equivalent name of the pdf in the doclog file and the language for that pdf to match in the doclog file
 							 ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
-							 int rowIndexOfDocCode = 0; String planId= "", planType = "";
+							 int rowIndexOfDocCode = 0; String planId= "", planYear ="", planName = "";
 							 
 							 if(currentColName.equalsIgnoreCase("plan id"))
 								 planId = cell.getStringCellValue();
-							 else if(currentColName.equalsIgnoreCase("plan id"))
+							 else if(currentColName.equalsIgnoreCase("plan type"))
 								 planType = cell.getStringCellValue();
+							 else if(currentColName.equalsIgnoreCase("year"))
+								 planYear = cell.getStringCellValue();
+							 else if(currentColName.equalsIgnoreCase("plan name"))
+								 planName = cell.getStringCellValue();
 								 
 							 boolean flag = false; String failedMessage = "";
-							 if(!(currentColName.contains("Link")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
+							 if(!(currentColName.contains("Link")||currentColName.contains("Year")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
 							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName); //method returns true/false value along with the document code in hashmap
 							   
-							  	if(resultMap.containsKey(true) && resultMap.get(true).equalsIgnoreCase("NA")) {
+							  	if(resultMap.containsKey(true) && (resultMap.get(true).equalsIgnoreCase("NA")||currentColName.contains("Step Therapy") || currentColName.contains("Prior Auth") ||currentColName.contains("Formulary Additions")||currentColName.contains("Formulary Deletions"))) {
 							  		newCell.setCellStyle(stylePassed);
 							  		newCell.setCellValue(resultMap.get(true));
 							  	}else if (resultMap.containsKey(true)) {// if the validatePDF returns True
+							  	
 							  		int lastRowDocLog = 0;
+							  		String compCode = resultMap.get(true);
 									  		if(planType.equalsIgnoreCase("PDP")) {
 									  			lastRowDocLog = lastRowDocLogPDP;
 									  			sheetDocLog = sheetDocLogPDP;
@@ -3618,6 +3623,8 @@ public class VppCommonStepDefinition {
 									  			langColIndex = langColIndexPDP;
 									  			componentCodeIndex = componentCodeIndexPDP;
 									  			planIDIndexDocLog = planIDIndexDocLogPDP;
+									  			planNameIndexDocLog = planNameIndexDocLogPDP;
+									  			yearIndexDocLog = yearIndexDocLogPDP;
 									  		}else {
 									  			lastRowDocLog = lastRowDocLogMA;
 									  			sheetDocLog = sheetDocLogMA; 
@@ -3625,38 +3632,68 @@ public class VppCommonStepDefinition {
 									  			langColIndex = langColIndexMA;
 									  			componentCodeIndex = componentCodeIndexMA;
 									  			planIDIndexDocLog = planIDIndexDocLogMA;
+									  			planNameIndexDocLog = planNameIndexDocLogMA;
+									  			yearIndexDocLog = yearIndexDocLogMA;
 									  		}
 	
 							  				
 											//loops through all of the rows in the DOCLog (either PDP or MA based on plantype) excel file for the column that contains the component code and checks if the code exists. if it does, then it returns the index of that row 
-									  		for(int rowIndexDocLog=2; rowIndexDocLog<=lastRowDocLog ; rowIndexDocLog++) {
+									  		for(int rowIndexDocLog=1; rowIndexDocLog<=lastRowDocLog ; rowIndexDocLog++) {
 									  			 String cellValueOfCompCode = sheetDocLog.getRow(rowIndexDocLog).getCell(componentCodeIndex).getStringCellValue();
-									  			if(cellValueOfCompCode.contains(resultMap.get(true))){
+									  			if(cellValueOfCompCode.contains(compCode)){
 									  				rowIndexOfDocCode = rowIndexDocLog;break;
 									  			}		
 											  }
-									  		 
+									  		double yearDocLog=0; String planYearDocLog = "";
+									  		String docTypeDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue(); // document type value from the doclog file
+									  		String langDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue(); //language value from doclog file
+									  		String planIDDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue(); //plan id from the doclog file
+									  		String planNameDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planNameIndexDocLog).getStringCellValue(); //plan name from the doclog file
+									  		
+									  		// if plan year cell contains a numeric value then converts to a string 
+									  		if(sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getCellType() == Cell.CELL_TYPE_NUMERIC) {
+									  			yearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getNumericCellValue(); //plan year from the doclog file
+									  			planYearDocLog = String.valueOf(yearDocLog);
+									  			planYearDocLog = planYearDocLog.substring(0, planYearDocLog.indexOf("."));
+									  		}else {
+									  			planYearDocLog  = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getStringCellValue();
+									  		}
 									  		//checks if the doc type matches for this component code
-									  		 if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue()).contains(docLangList.get(0))){
+									  		 if(docTypeDocLog.contains(docLangList.get(0))){
 									  			 //checks if the language matches for this component code
-										  			if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue()).contains(docLangList.get(1))){
+										  			if(langDocLog.contains(docLangList.get(1))){
 										  				//checks if plan id matches for the component code
-											  				if((sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue()).contains(planId)) {
-											  					flag = true;
-											  					newCell.setCellStyle(stylePassed);
-																newCell.setCellValue(resultMap.get(true));
+											  				if(planIDDocLog.contains(planId)) {
+											  					//checks if plan name matches for the component code
+											  						if(planNameDocLog.contains(planName)) {
+											  							//checks if plan year matches the component code
+											  								if(planYearDocLog.contains(planYear)) {
+											  									flag = true;
+															  					newCell.setCellStyle(stylePassed);
+																				newCell.setCellValue(resultMap.get(true));
+											  								}else {
+											  									failedMessage = "Failed to match the component code with the plan year: "+planYearDocLog;
+															  					newCell.setCellStyle(styleFailed);
+															  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+											  								}
+											  						}else {
+											  							failedMessage = "Failed to match the component code with the plan name: "+planNameDocLog;
+													  					newCell.setCellStyle(styleFailed);
+													  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
+											  						}
+											  					
 													  		 }else{// else for plan id check
-													  			 failedMessage = "Failed to match the component code with the plan ID";
+													  			 failedMessage = "Failed to match the component code with the plan ID: "+planIDDocLog;
 											  					newCell.setCellStyle(styleFailed);
 											  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
 													  		 }
 												  	}else { //else for language check in the DOclog
-												  		failedMessage =  "Failed to match the component code with the Language";
+												  		failedMessage =  "Failed to match the component code with the Language: "+langDocLog;
 										  				newCell.setCellStyle(styleFailed);
 										  				newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
 												  	}
 									  		 }else { //else for document code check in the doclog
-									  			 failedMessage = "Failed to match the component code with the document type";
+									  			 failedMessage = "Failed to match the component code with the document type: "+docTypeDocLog;
 									  		 	newCell.setCellStyle(styleFailed);
 									  		 	newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
 									  		 }
@@ -3747,6 +3784,235 @@ public class VppCommonStepDefinition {
 		plansummaryPage.verifyNBAModalNotDisplayed();
 	}
 	
+	@Then("^the site user clicks on continue application until confirmaion page for vpp pages$")
+	public void conitnue_application_until_confirmation_page_vpp_page(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPagevpppages(Medicarenumber);
+		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+
+	}
+	
+	@Then("^verify all links on plan compare page is loaded$")
+	public void verify_alllinks_on_plan_compare_page_is_loaded_on_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateALLFiledsPlanComparePage();
+	}
+	
+	@Then("^verify view all plan button is not displayed$")
+	public void verifyviewallplanbuttonisnotdisplayed() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateViewALLplanButtonNotDisplayed();
+	}
+	
+	@And("^I click on Add Places from Hospitals find care page$")
+	public void I_click_on_Add_Hospitals_on_plan_compare_and_Add_PlacesfromHospitals_find_care_page() throws Exception {
+		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ComparePlansPage planComparePage = findCarePage.HospitalPlaces();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+			// comparePlansPage.backToVPPPage();
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
+	@Then("^user click on close button on Drug info Modal popup")
+	public void user_clicks_close_plan_PlanCompare_page() throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.dceModelClosepopup();
+	}
+	
+	@Then("^validate all subtabs displayed on plan details$")
+	public void validateplandetaillinks() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatealllinksonPlanDetails();
+	}
+	
+	@Then("^User click on provider link on Medical tab and navigates to rally page$")
+	public void user_EditProvider_on_PlanDetailsPage() {
+
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateEditDocotrsProviderButton();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+
+	}
+
+	@Then("^user clicks on Change Zip code link$")
+	public void user_clicks_on_Change_Zip_code_link() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnChangeZipCode();
+	}
+
+	@When("^the user clicks on Find plans on vpp using following information$")
+	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String county2 = memberAttributesMap.get("County Name2");
+		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			if (plansummaryPage.validateVPPPlanSummaryPage())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating the Plan Summary Page");
+
+		}
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan summary page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_summary_page() throws InterruptedException {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan summary page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_summary_page(DataTable givenAttributes) throws InterruptedException {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		plansummaryPage.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan details page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_details_page() throws InterruptedException {
+		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		planDetails.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan detail page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_detail_page(DataTable givenAttributes) throws InterruptedException {
+		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		planDetails.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan compare page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_compare_page() throws InterruptedException {
+		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planCompare.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan compare page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_compare_page(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		planCompare.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^user clicks on Select by Address and Enter fileds$")
+	public void user_clicks_on_Select_by_Address_and_Enter_fileds(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String address = memberAttributesMap.get("Address");
+		String city = memberAttributesMap.get("City");
+		String state = memberAttributesMap.get("State");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.enterAddressDetails(address, city, state);
+	}
+
+	@Then("^I save \"([^\"]*)\" plans and \"([^\"]*)\" plans and verify the count update on shopping cart$")
+	public void i_save_plans_and_verify_plan_count(String planType, String Counter)
+			throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		switch(planType.toUpperCase()){
+		case "MAPD":
+		case "MA":
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,"MA");break;
+			default: plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,planType.toUpperCase());break;
+		}
+	}	
+	@Then("^I validate view more and view less links on plan summary$")
+	public void i_validate_viewMore_and_viewLess()
+			throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateViewMoreAndLessLinks();
+	}	
+	
+	@Then("^I validate \"([^\"]*)\" plans with names \"([^\"]*)\" are listed correctly on summary page")
+	public void I_validate_planNames_on_planSummary(String planType, String planNames)
+	throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.validatePlanNames(planType,planNames) ;
+	}
+	
 	@When("^the user performs plan search using following information using external link$")
 	public void zipcode_details_in_aarp_external_site(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -3823,6 +4089,3 @@ public class VppCommonStepDefinition {
 	}
 
 }
-
-
-

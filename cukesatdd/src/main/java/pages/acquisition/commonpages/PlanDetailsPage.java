@@ -40,6 +40,7 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 /**
@@ -358,7 +359,19 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Silver Sneakers')]/ancestor::label")
 	private WebElement silverSneakersCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-box'][1]")
+	private WebElement palncompareCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-link'][1]")
+	private WebElement palncompareLink;
 
+	@FindBy(css = "a#emailPlanDetail")
+	protected WebElement summary_maEmailOption;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
+	
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
 	}
@@ -1337,6 +1350,7 @@ public class PlanDetailsPage extends UhcDriver {
 				TestPDF.parse();*/
 				String PDFText = new PDFTextStripper().getText(document);
 				
+			
 				validationString = documentCode;
 	
 				if(PDFText.contains(documentCode)){
@@ -1348,6 +1362,8 @@ public class PlanDetailsPage extends UhcDriver {
 					 System.out.println("FAILED - PDF: " +pdfType+" text DOES NOT contains expected Document code : "+documentCode);
 					 if(PDFText.contains("PDF coming soon"))
 						 validationString = "PDF coming soon";
+					 else if(PDFText.contains("404")||PDFText.contains("Not Found"))
+						 validationString = "404 Not Found";
 					 validationFlag = false;
 				 }
 	
@@ -1359,6 +1375,8 @@ public class PlanDetailsPage extends UhcDriver {
 			driver.close();
 			driver.switchTo().window(parentHandle);
 		}
+		//changing the component codes for these formularies to match with what's in the Doclog files
+		
 		comparedResult.put(validationFlag, validationString);
 		
 		return comparedResult;
@@ -1434,8 +1452,9 @@ public class PlanDetailsPage extends UhcDriver {
 	}
 
 //      LearnMore changes Start
-	public void clickPrescriptionBenifitTab() {
+	public DrugDetailsPageMobile clickPrescriptionBenifitTab() {
 		jsClickNew(prescriptionTab);
+		return null;
 
 	}
 
@@ -1922,7 +1941,7 @@ public class PlanDetailsPage extends UhcDriver {
 		else if(colName.contains("Step Therapy Criteria")) {lang = english;docName = "Formulary";}
 		else if(colName.contains("Formulary Additions")) {lang = english;docName = "Formulary";}
 		else if(colName.contains("Formulary Deletions")) {lang = english;docName = "Directory";}
-		else if(colName.contains("Alternative Drugs List")) {lang = spanish;docName = "Drugs"; }
+		else if(colName.contains("Alternative Drugs List")) {lang = english;docName = "Drugs"; }
 		else if(colName.contains("Formulario de Inscripción")) {lang = spanish;docName = "Application"; }
 		else if(colName.contains("Resumen de Beneficios")) {lang = spanish;docName = "Summary of Benefits"; }
 		else if(colName.contains("Comprobante de Cobertura")) {lang = spanish;docName = "Evidence of Coverage"; }
@@ -1931,21 +1950,55 @@ public class PlanDetailsPage extends UhcDriver {
 		else if(colName.contains("Aviso Annual de Cambios")) {lang = spanish;docName = "ANOC"; }
 		else if(colName.contains("Beneficios Importantes")) {lang = spanish;docName = "Benefit Highlights"; }
 		else if(colName.contains("Directorio de Proveedores")) {lang = spanish;docName = "Directory"; }
-		else if(colName.contains("Información sobre proveedores")) {lang = spanish;docName = "Evidence of Coverage"; }
-		else if(colName.contains("註冊表格")) {lang = english;docName = "Application"; }
-		else if(colName.contains("福利概覽")) {lang = english;docName = "Summary of Benefits"; }
-		else if(colName.contains("承保證書")) {lang = english;docName = "Evidence of Coverage"; }
-		else if(colName.contains("星級評定")) {lang = english;docName = "Star Ratings"; }
-		else if(colName.contains("年度變更通知")) {lang = english;docName = "ANOC"; }
-		else if(colName.contains("福利摘要")) {lang = english;docName = "Benefit Highlights"; }
-		else if(colName.contains("醫生名冊")) {lang = english;docName = "Directory"; }
-		else if(colName.contains("供應商資訊表")) {lang = english;docName = "Vendor Information Sheet"; }
-		else if(colName.contains("綜合處方藥一覽表")) {lang = english;docName = "Formulary"; }
-		else if(colName.contains("替代藥物清單")) {lang = english;docName = "Drugs"; }
+		else if(colName.contains("Información sobre proveedores")) {lang = spanish;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("註冊表格")) {lang = chinese;docName = "Application"; }
+		else if(colName.contains("福利概覽")) {lang = chinese;docName = "Summary of Benefits"; }
+		else if(colName.contains("承保證書")) {lang = chinese;docName = "Evidence of Coverage"; }
+		else if(colName.contains("星級評定")) {lang = chinese;docName = "Star Ratings"; }
+		else if(colName.contains("年度變更通知")) {lang = chinese;docName = "ANOC"; }
+		else if(colName.contains("福利摘要")) {lang = chinese;docName = "Benefit Highlights"; }
+		else if(colName.contains("醫生名冊")) {lang = chinese;docName = "Directory"; }
+		else if(colName.contains("供應商資訊表")) {lang = chinese;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("綜合處方藥一覽表")) {lang = chinese;docName = "Formulary"; }
+		else if(colName.contains("替代藥物清單")) {lang = chinese;docName = "Drugs"; }
 			
 		result.add(0, docName);
 		result.add(1,lang);
 		return result;
+	}
+	
+	public void clickOnEmailField() {
+		
+		summary_maEmailOption.click();
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = "+populatedEmail);
+		Assert.assertEquals(email, populatedEmail);
+	}
+
+		public void validatealllinksonPlanDetails() {
+		validateNew(medBenefitsTab.get(0));
+		validateNew(presDrugTab1.get(0));
+		validateNew(optionalServicesTab);
+		validateNew(planCostsTab);
+		validateNew(EnrollinPlan);
+		validateNew(palncompareCheckbox);
+		validateNew(palncompareLink);
+	}
+	
+	public ProviderSearchPage validateEditDocotrsProviderButton() {
+		// TODO Auto-generated method stub
+		validateNew(editProviderButtonOnPlanDetails);
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(editProviderButtonOnPlanDetails);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
 	}
 	
 	

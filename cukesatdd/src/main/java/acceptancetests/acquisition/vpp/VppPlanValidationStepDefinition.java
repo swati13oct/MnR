@@ -24,10 +24,10 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
-import pages.acquisition.vppforaep.AepPlanComparePage;
-import pages.acquisition.vppforaep.AepPlanDetailsPage;
-import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
-import pages.acquisition.vppforaep.VppCommonPage;
+import pages.acquisition.vpp.AepPlanComparePage;
+import pages.acquisition.vpp.AepPlanDetailsPage;
+import pages.acquisition.vpp.AepVppPlanSummaryPage;
+import pages.acquisition.vpp.VppCommonPage;
 
 /**
  * Functionality: VPP flow for Acquisition
@@ -146,9 +146,9 @@ public class VppPlanValidationStepDefinition {
 									  
 									/*  if(sheetName.contains("PDP")) {
 										  if(!row.getCell(6).getStringCellValue().contains("NA")) {
-											  planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
-											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
-											  planDetailsPage.editDrugListAndRemoveDrug();
+											  //planDetailsPage.navigateToDCEandAddDrug(row.getCell(6).getStringCellValue());
+											  //benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg();
+											  //planDetailsPage.editDrugListAndRemoveDrug();
 										  }else 
 											  benefitsMap = planDetailsPage.collectInfoVppPlanDetailPg(sheetName,rowIndex);
 									  }else*/

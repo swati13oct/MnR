@@ -1,19 +1,40 @@
 package pages.acquisition.pharmacyLocator;
 
+import static org.junit.Assert.fail;
+
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.pdfbox.cos.COSDocument;
+import org.apache.pdfbox.io.RandomAccessRead;
+import org.apache.pdfbox.pdfparser.PDFParser;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+
+import com.itextpdf.text.pdf.codec.Base64.InputStream;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
@@ -53,10 +74,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	/**
 	 * Verify PDF results
+	 * @param testPlanName 
 	 * 
 	 * @throws InterruptedException
 	 */
-	public PharmacySearchPage ValidateSearchPdfResults() throws InterruptedException {
+	public PharmacySearchPage ValidateSearchPdfResults(String testPlanName) throws InterruptedException {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 20);
 		Assert.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", pharmacyValidate(viewsearchpdf));
@@ -65,8 +87,6 @@ public class PharmacySearchPage extends PharmacySearchBase {
 //		viewsearchpdf.click();
 		jsClickNew(viewsearchpdf);
 		Thread.sleep(5000); // note: keep this for the page to load
-		if (MRScenario.environment.contains("team-a"))
-			Thread.sleep(3000);
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int i = 0;
 		while (i < 3) {
@@ -102,6 +122,9 @@ public class PharmacySearchPage extends PharmacySearchBase {
 //		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = " + driver.getTitle());
 		String currentURL = driver.getCurrentUrl();
+		System.out.println("Current URL is : " + currentURL);
+		
+
 		String expectedURL = "member/pharmacy-locator";
 		Assert.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, " + "URL should not contain '"
 				+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
@@ -148,13 +171,16 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	}
 
 	public void validateAllTooltips(String language, boolean hasPrefRetailPharmacyWidget) {
+
 		waitForPageLoadSafari();
 		scrollToView(mapToggleElement);
 //		moveMouseToElement(mapToggleElement);
 		jsMouseOver(mapToggleElement);
+
 		String targetTooltipName = "Standard Network Pharmacy";
 		String testXpath = "//input[@id='pharmacy-standard']/../span//*[local-name() = 'svg']";
 		String expTxt = "Standard Network Pharmacy A pharmacy where you get the prescription drug benefits provided by your plan.";
+
 		validateOneTooltip(language, targetTooltipName, testXpath, expTxt);
 
 		if (hasPrefRetailPharmacyWidget) {
@@ -206,8 +232,11 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				pharmacyValidate(testTooltip));
 		System.out.println("Proceed to mouse over '" + targetTooltipName + "' element...");
 		scrollToView(testTooltip);
+
 //		moveMouseToElement(testTooltip);//note: then move mouse over to target element
+
 		jsMouseOver(testTooltip); // note: then move mouse over to target element
+
 		Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", pharmacyValidate(tooltip));
 		if (language.equalsIgnoreCase("English")) {
 			Pattern expectedTxt = Pattern.compile(expTxt);
@@ -217,8 +246,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			Assert.assertTrue("PROBLEM - pharmacies text is not as expected. " + "Expected to contain '" + expectedTxt
 					+ "' | Actual='" + actualTxt + "'", expectedTxt.matcher(actualTxt).find());
 		}
+
 //		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
 		jsMouseOut(testTooltip);
+
 	}
 
 	public void validateHeaderSection() {
@@ -491,7 +522,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 				Assert.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget",
 						!pharmacyValidate(widget_walgreens));
-				expUrl = "health-plans/estimate-drug-costs.html#/drug-cost-estimator";
+				expUrl = "health-plans/estimate-drug-costs.html";
 //				expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
 				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 			}
@@ -506,7 +537,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 					Assert.assertTrue("PROBLEM - user has Walgreens plan should see '" + testWidget + "' widget",
 							pharmacyValidate(widget_walgreens));
 //					expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
-					expUrl = "health-plans/estimate-drug-costs.html#/drug-cost-estimator";
+					expUrl = "health-plans/estimate-drug-costs.html";
 					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
 				} else {
 					System.out.println(
@@ -561,8 +592,10 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				if (!pharmacyValidate(contactUnitedHealthCare))
 					contactUsLink = contactUnitedHealthCare_ol;
 				scrollToView(contactUsLink);
+
 //				moveMouseToElement(contactUsLink);
 				jsMouseOver(contactUsLink);
+
 				sleepBySec(3);
 				Assert.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
 				sleepBySec(3);
@@ -588,9 +621,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 				Assert.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element",
 						pharmacyValidate(resultNavTooltip));
 				scrollToView(resultNavTooltip);
+
 //				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
 				jsMouseOver(resultNavTooltip);
+
 				Assert.assertTrue("PROBLEM - unable to locate tooltip display after mouse over",
+
 						pharmacyValidate(tooltip));
 				if (language.equalsIgnoreCase("English")) {
 					String expTxt1 = "Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
@@ -608,9 +644,12 @@ public class PharmacySearchPage extends PharmacySearchBase {
 									+ "Expected='" + expTxt2 + "' | " + "Actual-'" + actualTxt2 + "'",
 							expTxt2.equals(actualTxt2));
 				}
+
 				jsMouseOut(resultNavTooltip); // note: mouse out from tooltip for it to disappear
+
 //				scrollToView(moveAwayFromTooltip);
 //				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
+
 			} else {
 				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
 						!pharmacyValidate(pagination));
@@ -647,5 +686,15 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	public void clickReturnToPharamcySearch() {
 		validateNew(returntoPharmacySearch);
 		returntoPharmacySearch.click();
+	}
+
+	
+	public void validatePlanNameInResultsSection(String testPlanName) {
+		WebElement PlanNameText = driver.findElement(By.xpath("//h2[contains(@class, 'planname') and contains(text(), '"+testPlanName+"')]"));
+		if(validateNew(PlanNameText)) {
+			System.out.println("Ecpected Plan Name displayed in Pharmacy Results section : "+PlanNameText.getText());
+		}
+		else
+			Assert.fail("Plan Name is NOT Displayed in Pharmacy Results Section");
 	}
 }

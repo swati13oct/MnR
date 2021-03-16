@@ -1,3 +1,4 @@
+
 package pages.acquisition.dceredesign;
 
 import java.util.Map;
@@ -18,7 +19,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.PageTitleConstants;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
@@ -98,14 +98,14 @@ public class GetStartedPage extends UhcDriver {
 		return null;
 	}
 
-	public pages.acquisition.bluelayer.VPPPlanSummaryPage ClickReturnToBtnToVPPSummary_UHC() {
+	/*public pages.acquisition.bluelayer.VPPPlanSummaryPage ClickReturnToBtnToVPPSummary_UHC() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new pages.acquisition.bluelayer.VPPPlanSummaryPage(driver);
 		}
 		return null;
-	}
+	}*/
 
 	public VisitorProfilePage clickOnShoppingCart() {
 		jsClickNew(shoppingCartIcon);
@@ -145,3 +145,4 @@ public class GetStartedPage extends UhcDriver {
 		        }
 
 }
+

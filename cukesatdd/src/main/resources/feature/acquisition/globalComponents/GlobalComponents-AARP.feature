@@ -1,5 +1,7 @@
+
 @GlobalComponentsAARP
-Feature: 1.12 ACQ - Global Components AARP
+Feature: 1.12 ACQ - Global Components Validation
+
 
   @globalfooterULayer
   Scenario Outline: To verify links displayed in the global footer of AARP site
@@ -50,7 +52,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | UHC  |
 
   @GlobalComponentsAARPPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
+  Scenario Outline: To verify Global Components for the page mentioned of <site> site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
@@ -108,9 +110,9 @@ Feature: 1.12 ACQ - Global Components AARP
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
       | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
-      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //div[contains(@class,'ums')]//a[contains(@class,'tel')]             | true    |
-      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //div[contains(@class,'ums')]//a[contains(@class,'tel')]             | true    |
+      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
@@ -243,7 +245,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | AARP | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  | //a[contains(@class, 'tel')]                           | true    |
       | AARP | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | //a[contains(@class, 'tel')]                           | true    |
       | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                           | false   |
-      | AARP | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | //a[contains(@href ,'tel') and contains(@class,'tel')] | true    |
+      | AARP | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
 
     # Replace any "#" chars in the deeplink with "!"
     @VPP_Deeplinks_GlobalCompsUHC
@@ -254,7 +256,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | UHC  | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  | //a[contains(@class, 'tel')]                           | true    |
       | UHC  | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | //a[contains(@class, 'tel')]                           | true    |
       | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                           | false   |
-      | UHC  | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | //a[contains(@href ,'tel') and contains(@class,'tel')] | true    |
+      | UHC  | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
 
     @MiscellaneousLinks_GlobalCompsAARP
     Examples: 
@@ -529,6 +531,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | UHC  | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
 
+
   @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -597,6 +600,7 @@ Feature: 1.12 ACQ - Global Components AARP
       | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources PDP Disenrollment  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources Disenrollment Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
+
   @GlobalComponentsAARPPages
   Scenario Outline: To verify the components present on the Enroll page on the <site> site
     Given the user is on medicare acquisition site landing page
@@ -653,3 +657,4 @@ Feature: 1.12 ACQ - Global Components AARP
     Examples: 
       | site |
       | UHC  |
+

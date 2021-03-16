@@ -2,7 +2,7 @@
 Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
   @getStartedNBA @decRelease
-  Scenario Outline: Verify get started NBA for authenticated user on VPP page
+  Scenario Outline: Verify get started NBA for authenticated user on VPP page for <plantype> plantype
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to Visitor profile page
@@ -26,25 +26,25 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @getStartedNBA_MAPD_AARP @authenticatedNBAMAPDAARP01
     Examples: 
       | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@23 | Password@3 | NO            |   10001 | New York County | MAPD     |
+      | AARP | chargersqa@23 | Password@5 | NO            |   10001 | New York County | MAPD     |
 
     @getStartedNBA_PDP_AARP @authenticatedNBAPDPAARP01
     Examples: 
       | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@23 | Password@3 | NO            |   10001 | New York County | PDP      |
+      | AARP | chargersqa@23 | Password@5 | NO            |   10001 | New York County | PDP      |
 
     @getStartedNBA_MAPD_UHC01 @authenticatedNBAMAPDUHC01
     Examples: 
       | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@23 | Password@3 | NO            |   10001 | New York County | MAPD     |
+      | UHC  | chargersqa@23 | Password@5 | NO            |   10001 | New York County | MAPD     |
 
     @getStartedNBA_PDP_UHC02 @authenticatedNBAPDPUHC02
     Examples: 
       | site | userName      | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@23 | Password@3 | NO            |   10001 | New York County | PDP      |
+      | UHC  | chargersqa@23 | Password@5 | NO            |   10001 | New York County | PDP      |
 
   @NBAAuthenticatedMAPD @decRelease
-  Scenario Outline: Verify NBA for authenticated Visitor Profile VPP summary page
+  Scenario Outline: Verify NBA for authenticated Visitor Profile VPP summary page for <plantype> plantype
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to Visitor profile page
@@ -86,15 +86,15 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @authenticatedNBA_MAPD_AARP @authenticatedNBAMAPDAARP01
     Examples: 
       | site | userName      | password   | isMultiCounty | zipcode | county          | plantype | drugName | testPlans                            |
-      | AARP | chargersqa@23 | Password@3 | NO            |   10001 | New York County | MAPD     | Lipitor  | AARP Medicare Advantage Prime (HMO) |
+      | AARP | chargersqa@23 | Password@5 | NO            |   10001 | New York County | MAPD     | Lipitor  | AARP Medicare Advantage Prime (HMO) |
 
     @authenticatedNBA_MAPD_UHC01 @authenticatedNBAMAPDUHC01
     Examples: 
       | site | userName      | password   | isMultutiCounty | zipcode | county          | plantype | drugName | dosage   | quantity | frequency     | zipcode | radius   | quantity | frequency     | branded | testPlans                            |
-      | UHC  | chargersqa@23 | Password@3 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Prime (HMO) |
+      | UHC  | chargersqa@23 | Password@5 | NO              |   10001 | New York County | MAPD     | Lipitor  | TAB 10MG |       30 | Every 1 month |   90210 | 15 miles |       30 | Every 1 month | yes     | AARP Medicare Advantage Prime (HMO) |
 
   @continueEnrollmentNBA @decRelease
-  Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for single plan
+  Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for single plan for <plantype> plantype
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to Visitor profile page
@@ -118,25 +118,25 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @continueEnrollmentNBA_MAPD_AARP @authenticatedNBAMAPDAARP01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@2 | Password@2 | NO            |   55344 | Hennepin County | MAPD     |
+      | AARP | chargersqa@2 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |
 
     @authenticatedNBAPDPAARP01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@2 | Password@2 | NO            |   55344 | Hennepin County | PDP      |
+      | AARP | chargersqa@2 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
 
     @continueEnrollmentNBA__MAPD_UHC @authenticatedNBAMAPDUHC01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@2 | Password@2 | NO            |   55344 | Hennepin County | MAPD     |
+      | UHC  | chargersqa@2 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |
 
     @authenticatedNBAPDPUHC02
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@2 | Password@2 | NO            |   55344 | Hennepin County | PDP      |
+      | UHC  | chargersqa@2 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
 
   @continueEnrollmentNBAMultiplePlan @decRelease
-  Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for multiple plan
+  Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for multiple plan for <plantype> plantype
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to Visitor profile page
@@ -162,19 +162,19 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @authenticatedNBAMAPDAARP01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |
+      | AARP | chargersqa@3 | Password@5 | NO            |   55344 | Hennepin County | MAPD     |
 
     @continueEnrollmentNBA_PDP_AARP @authenticatedNBAPDPAARP01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
+      | AARP | chargersqa@3 | Password@5 | NO            |   55344 | Hennepin County | PDP      |
 
     @continueEnrollmentNBA__MAPD_UHC01 @authenticatedNBAMAPDUHC01
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | MAPD     |
+      | UHC  | chargersqa@3 | Password@5 | NO            |   55344 | Hennepin County | MAPD     |
 
     @continueEnrollmentNBA__PDP_UHC01 @authenticatedNBAPDPUHC02
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@3 | Password@3 | NO            |   55344 | Hennepin County | PDP      |
+      | UHC  | chargersqa@3 | Password@5 | NO            |   55344 | Hennepin County | PDP      |

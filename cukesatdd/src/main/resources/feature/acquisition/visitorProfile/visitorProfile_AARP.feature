@@ -29,22 +29,22 @@ Feature: 1.08. ACQ- Visitor profile
       | state        | drug1   | zipCode | site |
       | Alabama      | Lipitor |   90210 | AARP |
       | Pennsylvania | Lipitor |   15001 | AARP |
-      
-    @prodRegression_AARP
+
+    @prodRegression_AARP_03
     Examples: 
-      | state        | drug1   | zipCode | site |
-      | Alabama      | Lipitor |   90210 | AARP |
+      | state   | drug1   | zipCode | site |
+      | Alabama | Lipitor |   90210 | AARP |
 
     @VisitorProfile_UHC
     Examples: 
       | state        | drug1   | zipCode | site |
       | Alabama      | Lipitor |   90210 | UHC  |
       | Pennsylvania | Lipitor |   15001 | UHC  |
-      
-    @prodRegression_UHC
+
+    @prodRegression_UHC_03
     Examples: 
-      | state        | drug1   | zipCode | site |
-      | Alabama      | Lipitor |   90210 | UHC  |
+      | state   | drug1   | zipCode | site |
+      | Alabama | Lipitor |   90210 | UHC  |
 
   @addDrugsDCE1
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipCode>
@@ -112,21 +112,21 @@ Feature: 1.08. ACQ- Visitor profile
       | AARP | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | AARP | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
 
-		@prodRegression_AARP
+    @prodRegression_AARP
     Examples: 
-      | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | AARP | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
+      | site | state    | UID       | planyear | zipcode | isMultiCounty | county          | plantype | testPlans                                                                 |
+      | AARP | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS) |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | UHC  | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
       | UHC  | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
-      
+
     @prodRegression_UHC
     Examples: 
-      | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
-      | UHC  | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city  | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)                              |
+      | site | state    | UID       | planyear | zipcode | isMultiCounty | county          | plantype | testPlans                                                                 |
+      | UHC  | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS) |
 
   @addPlansVPP
   Scenario Outline: Verify user is save plans from VPP to the unauthenticated visitor profile
@@ -188,22 +188,22 @@ Feature: 1.08. ACQ- Visitor profile
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
       | AARP | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)           | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
-      
+
     @prodRegression_AARP
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | AARP | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
     @VisitorProfile_UHC
     Examples: 
       | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
       | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)           | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
-      
+
     @prodRegression_UHC
     Examples: 
-      | site | state    | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+      | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
   @vpOLE
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
@@ -266,7 +266,7 @@ Feature: 1.08. ACQ- Visitor profile
     Then the user validates the Plan details in Medicare Info OLE Right Rail
     #Then the user validates requierd ESRD on Medicare Info Page
     #  | MedicaidNumber | <medicaidnumber> |
-     # | Plan Year      | <planyear>       |
+    # | Plan Year      | <planyear>       |
     Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
     Then the user answers following questions in Medicare Information Page
       | PDP Question      | <pdpFlag>      |
@@ -422,12 +422,12 @@ Feature: 1.08. ACQ- Visitor profile
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
 
-    @VisitorProfile_AARP @prodRegression_AARP
+    @VisitorProfile_AARP @prodRegression_AARP_03
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |  |
       | AARP | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |  |
 
-    @VisitorProfile_UHC @prodRegression_UHC
+    @VisitorProfile_UHC @prodRegression_UHC_03
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
       | UHC  | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
@@ -571,7 +571,7 @@ Feature: 1.08. ACQ- Visitor profile
       | User Name | <userName> |
       | Password  | <password> |
     And the user cancel the enrollment
-      | Plan Name | <planName> |  
+      | Plan Name | <planName> |
     And the user navigates to clicks on Enroll Now from visitor profile to start OLE flow
       | Plan Name       | <planName>       |
       | Plan Type       | <plantype>       |

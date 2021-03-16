@@ -16,7 +16,6 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ulayer.PageTitleConstants;
 
 public class TellUsAboutDrug extends UhcDriver {
 
@@ -59,7 +58,7 @@ public class TellUsAboutDrug extends UhcDriver {
 	public WebElement QuantityTxt;
 	
 //	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
-	@FindBy(id="selectdosage")
+	@FindBy(xpath="//select[contains(@id, 'drugfrequency')]")
 	public WebElement FrequentyDrpDwn;
 	
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
@@ -77,7 +76,7 @@ public class TellUsAboutDrug extends UhcDriver {
 		validateNew(TellUsABoutCloseBtn);
 		validateNew(AddDrugBtn);
 		validateNew(supplyLengthDrpDwn);
-//		validateNew(FrequentyDrpDwn);
+		validateNew(FrequentyDrpDwn);
 		validateNew(QuantityTxt);
 	}
 
@@ -155,14 +154,17 @@ public class TellUsAboutDrug extends UhcDriver {
 	
 	public void selectQuantity(String Quantity) {
 		validateNew(QuantityTxt);
+		QuantityTxt.clear();
 		QuantityTxt.sendKeys(Quantity);
+		System.out.println("Entered Quantity : "+QuantityTxt.getText());
 	}
 
 	public void selectFrequency(String Frequency) {
 		validateNew(FrequentyDrpDwn);
-		jsClickNew(FrequentyDrpDwn);
-		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-frequency']//option[contains(text(), '"+Frequency+"')]"));
-		jsClickNew(element);
+		FrequentyDrpDwn.click();
+		WebElement frequencyelement = driver.findElement(By.xpath("//select[@id='drugfrequency']//option[contains(text(), '"+Frequency+"')]"));
+		frequencyelement.click();
+		System.out.println("Selected Frequency : "+frequencyelement.getText());
 	}
 
 	public void selectSupplyLength(String SupplyLength) {
@@ -173,6 +175,5 @@ public class TellUsAboutDrug extends UhcDriver {
 //		jsClickNew(SupplyLengthelement);
 		SupplyLengthelement.click();
 		System.out.println("Selected Supply Length : "+supplyLengthDrpDwn.getText());
-	
 	}
 }

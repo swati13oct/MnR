@@ -52,7 +52,8 @@ Scenario Outline: <scenario> MedSup E2E Flow through VPP Pages
       | DOB           | <DOB>         |
       | Firstname     | <Firstname>   |
       | Lastname      | <Lastname>    |
-    Then the site user clicks on continue application until confirmaion page
+   # Then the site user clicks on continue application until confirmaion page
+   Then the site user clicks on continue application until confirmaion page for vpp pages
     | MedicareNumber | <medicarenumber> |
     #Then the user validate on medsupp plans confirmation page 
        

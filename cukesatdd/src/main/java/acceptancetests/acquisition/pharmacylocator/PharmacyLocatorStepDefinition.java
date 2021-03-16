@@ -23,7 +23,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 /**
  *Functionality:PharmacyLocator
@@ -296,8 +296,9 @@ public class PharmacyLocatorStepDefinition {
 	@Then("^the user validates view search PDF link$")
 	public void viewsSearchResultPdf() throws InterruptedException {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
-				.getBean(PageConstants.PHARMACY_SEARCH_PAGE);
-		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults();
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
+		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults(testPlanName);
 		Assert.assertTrue("PROBLEM - PDF Results Page Not Displayed", 
 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);

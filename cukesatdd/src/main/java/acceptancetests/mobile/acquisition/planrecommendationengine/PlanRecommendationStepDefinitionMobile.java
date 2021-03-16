@@ -11,12 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePrioritiesPage;
-import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
@@ -28,6 +24,7 @@ import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;

@@ -25,10 +25,10 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -47,9 +47,8 @@ import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.SupplementalBenefitsPage;
 import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-//import pages.acquisition.ulayer.PlanDetailsPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -350,7 +349,7 @@ public class oleStepDefinition {
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
 
-			pages.acquisition.bluelayer.PlanDetailsPage vppPlanDetailsPage = (pages.acquisition.bluelayer.PlanDetailsPage) getLoginScenario()
+			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
 			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
@@ -403,7 +402,7 @@ public class oleStepDefinition {
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
 
-			pages.acquisition.bluelayer.PlanComparePage comparePlansPage = (PlanComparePage) getLoginScenario()
+			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
 		}
@@ -3830,27 +3829,35 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 			Assert.fail("OLE Cancellation Modal is NOT Displayed");
 	}
 	
-	@Then("^the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow$")
-	public void the_user_navgates_to_clicks_on_Enroll_Now_plandetails_page_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
-
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-	//	String PlanName = givenAttributesMap.get("Plan Name");
-		String PlanType = givenAttributesMap.get("Plan Type");
-		//String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-		PlanDetailsPage vppPlanDetailsPage= (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		WelcomePage welcomeOLEPage= vppPlanDetailsPage.NavigateToOLEEnrollDSNPPlanDetails(PlanType);
-
-		if (welcomeOLEPage != null) {
-			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
-		} else {
-			Assert.fail("Error Loading Welcome Page for OLE");
-		}
+	@And("^the user clicks on the heart icon on ole confirmation page$")
+	public void the_user_clicks_on_the_shopping_cart_icon_on_Drug_details_page() {
+		OLEconfirmationPage oleConfirmationPage = (OLEconfirmationPage) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
+		VisitorProfilePage visitorProfilePage = oleConfirmationPage.clickOnShoppingCart();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+
+@Then("^the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow$")
+public void the_user_navgates_to_clicks_on_Enroll_Now_plandetails_page_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+
+	List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+//	String PlanName = givenAttributesMap.get("Plan Name");
+	String PlanType = givenAttributesMap.get("Plan Type");
+	//String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+	PlanDetailsPage vppPlanDetailsPage= (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+	WelcomePage welcomeOLEPage= vppPlanDetailsPage.NavigateToOLEEnrollDSNPPlanDetails(PlanType);
+
+	if (welcomeOLEPage != null) {
+		getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+	} else {
+		Assert.fail("Error Loading Welcome Page for OLE");
+	}
+}
 }

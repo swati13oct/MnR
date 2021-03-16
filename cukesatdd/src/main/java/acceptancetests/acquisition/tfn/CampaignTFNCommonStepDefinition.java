@@ -34,8 +34,8 @@ import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.tfn.CampaignTFNPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.ulayer.GlobalWebElements;
-import pages.acquisition.ulayer.UlayerTFNPage;
+import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.commonpages.UlayerTFNPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 
@@ -298,13 +298,13 @@ public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
 	String Zip = inputAttributesMap.get("Zip Code");
-	//tfnPage.HomepagePlanSearch(Zip);
-	tfnPage.HomepagePlanSearchOLE(Zip);
+	tfnPage.HomepagePlanSearch(Zip);
+	//tfnPage.HomepagePlanSearchOLE(Zip);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
 
 }
 

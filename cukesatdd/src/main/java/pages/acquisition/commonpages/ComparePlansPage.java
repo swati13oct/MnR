@@ -1,11 +1,11 @@
 package pages.acquisition.commonpages;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.Arrays;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
@@ -23,23 +23,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Strings;
 import com.mysql.jdbc.StringUtils;
 
-import acceptancetests.acquisition.dce.DceCommonConstants;
-import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ole.WelcomePage;
-
-import pages.acquisition.commonpages.FindCarePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 public class ComparePlansPage extends UhcDriver {
 
 	
@@ -135,7 +127,7 @@ public class ComparePlansPage extends UhcDriver {
 	
    	String ChatSamText= "Chat with a Licensed Insurance Agent";
    	
-   	@FindBy(xpath="//*[contains(@class,'remove')]")
+   	@FindBy(xpath="//*[contains(@class,'delete-plan ng-scope')]")
 	private WebElement removeLink;
 	
 	@FindBy(xpath="//span[@class='remove-button removebtn3']")
@@ -303,7 +295,30 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//h2[@id='viewLocationTitle']")
 	private WebElement viewLocationPopupProviderName;
 
+	@FindBy(xpath = "//div[@class='modal-body']/span")
+	private WebElement allSetDrugsProvidersInfo;
 
+	@FindBy(xpath="//*[text()='View Plan Details']")
+	private WebElement viewPlanDetailslink;
+	
+	@FindBy(xpath="//button[contains(@id,'headerSavePlan')]//img[contains(@class,'liked savePlanIcon')][1]")
+	private WebElement viewSaveIcon;
+	
+	@FindBy(xpath="//button[contains(@id,'headerSavePlan')]//img[contains(@class,'unliked savePlanIcon')][1]")
+	private WebElement viewUnSaveIcon;
+	
+	@FindBy(xpath="//*[@id='viewallplansBtnId']")
+	private WebElement ViewAllPlans;
+	
+	@FindBy(xpath="//button[contains(@ng-click,'closeDrugInfopopup')]//*[text()='Close']")
+	private WebElement DceClosebutton;
+	
+	@FindBy(css = "a#emailComparison")
+	protected WebElement summary_maEmailOption;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -736,15 +751,19 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void CounterNewRemoveLink(String counter){
-		WebElement removelink = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"));
-		WebElement removePlanName = driver.findElement(By.xpath("//th[@ng-repeat='plan in count']["+counter+"]//div[contains(@ng-if,'planName')]"));
+		WebElement removelink = driver.findElement(By.xpath("//th[contains(@ng-repeat,'plan in count')][" + counter
+				+ "]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"));
+		WebElement removePlanName = driver.findElement(By.xpath(
+				"//th[contains(@ng-repeat,'plan in count')][" + counter + "]//div[contains(@ng-if,'planName')]"));
 		String PlanName=removePlanName.getText();
 		System.out.println("3rd plan name is : " + PlanName );
 //		removelink.click();
 		jsClickNew(removelink);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 		
-	    Assert.assertTrue(!(driver.findElements(By.xpath("//th[@ng-repeat='plan in count'][1]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]")).size()>0));
+		Assert.assertTrue(!(driver.findElements(By.xpath(
+				"//th[contains(@ng-repeat,'plan in count')][1]//*[contains(@class,'uhc-link-button d-none d-lg-inline-block')]"))
+				.size() > 0));
 		System.out.println("remove icon is not Displaying in plan compare page");
 
 
@@ -1052,7 +1071,7 @@ public class ComparePlansPage extends UhcDriver {
 		String dob = givenAttributesMap.get("DOB");
 		String mbi = givenAttributesMap.get("MBI");
 		
-		allSet();
+		allSet(providers,drugs);
 		
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
@@ -1138,7 +1157,7 @@ public class ComparePlansPage extends UhcDriver {
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
 		
-		allSet();
+		allSet(providers,drugs);
 		
 		System.out.println("######### "+agentModeBanner.getText().trim()+"#########");
 		Assert.assertEquals("You are in Agent mode viewing "+fname+" "+lname+" profile", agentModeBanner.getText().trim());
@@ -1182,8 +1201,28 @@ public class ComparePlansPage extends UhcDriver {
 		}
 	}
 	
-	public void allSet() {
+	public void allSet(String providers, String drugs) {
 		try {
+			System.out.println("#####################");
+			System.out.println(allSetDrugsProvidersInfo.getText().trim());
+			System.out.println("#####################");
+			if(!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("no")) {
+				String[] provider = providers.split(";");
+				String[] drugName = drugs.split(",");
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of providers loaded: "+provider.length));
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of drugs loaded: "+drugName.length));
+			}else if(!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("yes")){
+				String[] provider = providers.split(";");
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of providers loaded: "+provider.length));
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of drugs loaded: "+"0"));
+			}else if(!providers.equalsIgnoreCase("yes") && !drugs.equalsIgnoreCase("no")){
+				String[] drugName = drugs.split(",");
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of providers loaded: "+"0"));
+				Assert.assertTrue(allSetDrugsProvidersInfo.getText().trim().contains("Number of drugs loaded: "+drugName.length));
+			}
+			else {
+				Assert.assertEquals("No data within 12 months of order date.",allSetDrugsProvidersInfo.getText().trim());
+			}
 			CommonUtility.waitForPageLoad(driver, popupAccept, 100);
 			popupAccept.click();
 			Thread.sleep(30000);
@@ -1281,7 +1320,7 @@ public class ComparePlansPage extends UhcDriver {
 			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
 			//DrugYouPay.getText will get child element text as well in Safari browser which fails the scripts ahead
-			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
+			if (!MRScenario.browsername.equalsIgnoreCase("Safari")) {
 				drugYouPay = DrugYouPay.getText().trim();
 			} else {
 				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
@@ -1430,6 +1469,61 @@ public class ComparePlansPage extends UhcDriver {
 			}
 		}
 		
+	}
+
+
+	public void validateEstimatedDrugCostForPlan(String PlanName, String expected_Estimated_Drug_Cost2) {
+		int i = findindexofPlan_PlanCompare(PlanName);
+		i +=1;
+		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath("(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["+i+"]"));
+		
+		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();
+		if(validateNew(Plan_Displayed_EstimatedDrugCosts) && Displayed_DrugCostsText.contains(expected_Estimated_Drug_Cost2)) {
+			System.out.println("DIsplayed Estimated Annual Drug Costs Matches the same displayed on DCE details page for the plan : "+PlanName);
+			System.out.println("Expected Estimated Annual Drug Costs  : "+expected_Estimated_Drug_Cost2);
+			System.out.println("Displayed Estimated Annual Drug Costs  : "+Displayed_DrugCostsText);
+		}
+		else
+			Assert.fail("DIsplayed Estimated Annual Drug Costs DOES NOT Match the same displayed on DCE details page for the plan : "+PlanName);
+		
+	}
+	
+	public void validateALLFiledsPlanComparePage() {
+		validateNew(backToAllPlansLink);
+		validateNew(validateprintbutton);
+		validateNew(validateemailbutton);
+		validateNew(removeLink);
+		validateNew(viewPlanDetailslink);
+//		validateNew(viewUnSaveIcon);
+		validateNew(ViewAllPlans);
+		validateNew(addPlanButton);
+		System.out.println("Validated all links plan compare");
+		
+	}
+	
+	public void validateViewALLplanButtonNotDisplayed() {
+		 Assert.assertFalse("view all plans button must not be visible", !(driver.findElements(By.xpath("//*[@id='viewallplansBtnId' and contains(@class,'ng-hide')]")).size()>0));		
+		 System.out.println("Validated view all plans link not displayed on plan compare");
+	}
+	
+	public void dceModelClosepopup(){
+		validateNew(DceClosebutton);
+		jsClickNew(DceClosebutton);
+		System.out.println("Clicked on Close button on DCE model popup");
+		
+	}
+	
+	public void clickOnEmailField() {
+		
+		summary_maEmailOption.click();
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = "+populatedEmail);
+		Assert.assertEquals(email, populatedEmail);
 	}
 }
 

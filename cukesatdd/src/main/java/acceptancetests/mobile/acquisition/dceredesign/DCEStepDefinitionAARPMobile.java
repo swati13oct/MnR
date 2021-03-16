@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -16,11 +15,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
 import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCaptureMobilePage;
+import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
 
 public class DCEStepDefinitionAARPMobile {
 	
@@ -62,25 +58,25 @@ public class DCEStepDefinitionAARPMobile {
 	@Then("^the user validates Get Started Page in mobile$")
 	public void the_user_validates_Get_Started_Page_in_mobile() {
 		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		ZipCodeAndPlanYearCaptureMobilePage zipCodePlanYearPage = new ZipCodeAndPlanYearCaptureMobilePage(wd);
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
 	@When("^the user clicks on Add drugs button in mobile$")
 	public void the_user_clicks_on_Add_drugs_button_in_mobile() throws Throwable {
-		ZipCodeAndPlanYearCaptureMobilePage zipCodePlanYearPage=(ZipCodeAndPlanYearCaptureMobilePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage=(ZipCodeAndPlanYearCapturePageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.clickAddDrugsBtn();
 	}
 
 	@Then("^user should be navigated to zipcode and plan year capture page for NonAEP in mobile$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_NonAEP_in_mobile() throws Throwable {
-		ZipCodeAndPlanYearCaptureMobilePage zipCodePlanYearPage=(ZipCodeAndPlanYearCaptureMobilePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage=(ZipCodeAndPlanYearCapturePageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 	}
 
 	@Then("^plan year dropdown should be not displayed during NonAEP in mobile$")
 	public void plan_year_dropdown_should_not_be_displayed_during_AEP_in_mobile() throws Throwable {
-		ZipCodeAndPlanYearCaptureMobilePage zipCodePlanYearPage=(ZipCodeAndPlanYearCaptureMobilePage) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage=(ZipCodeAndPlanYearCapturePageMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.validatePlanYearDrpDownNonAEP();
 	}
 }

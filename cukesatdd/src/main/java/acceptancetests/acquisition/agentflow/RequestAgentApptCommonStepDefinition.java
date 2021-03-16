@@ -20,8 +20,8 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.RequestAgentAppointmentPage;
 import pages.acquisition.commonpages.RequestHelpAndInformationPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+//import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 
 /**
@@ -57,11 +57,12 @@ public class RequestAgentApptCommonStepDefinition {
 	public void User_navigate_EBRC_Links_through_Medsupp(DataTable arg1) throws InterruptedException {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	//	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
-		
-		if(myUHCAgentURL!=null){
-			aquisitionhomepage.clickonFindanAgentlinkMedsupp(myUHCAgentURL);
+		if(plansummaryPage!=null){
+			plansummaryPage.clickonFindanAgentlinkMedsupp(myUHCAgentURL);
 			Assert.assertTrue(true);
 		}else
 			Assert.fail("Error in loading the UHC Agent Page");

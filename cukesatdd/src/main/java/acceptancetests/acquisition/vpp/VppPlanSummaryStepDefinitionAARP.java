@@ -10,20 +10,18 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.KeywordSearch;
-//import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
-import pages.acquisition.dce.ulayer.DrugCostEstimatorPage;
+//import pages.acquisition.dce.commonpages.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.ComparePlansPage;
-import pages.acquisition.ulayer.MultiCountyModalPage;
-import pages.acquisition.ulayer.OurPlansPage;
-import pages.acquisition.ulayer.PlanDetailsPage;
-import pages.acquisition.ulayer.ProviderSearchPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
-import pages.acquisition.ulayer.VisitorProfilePage;
-import pages.acquisition.ulayer.keywordSearchAARP;
-//import pages.acquisition.ulayer.keywordSearch;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.MultiCountyModalPage;
+import pages.acquisition.commonpages.OurPlansPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.commonpages.KeywordSearchPage;
+//import pages.acquisition.commonpages.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -139,7 +137,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 	public void user_clicks_on_select_a_plan_button_in_aarp_Site() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		allPlanNames = plansummaryPage.getAllPlanNames();
+	//	allPlanNames = plansummaryPage.getAllPlanNames();
 		plansummaryPage.clickContinueEnrollmentBtn();
 	}
 
@@ -190,9 +188,9 @@ public class VppPlanSummaryStepDefinitionAARP {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.validateAndClickAddtoCompareinAARP(planType, planName);
+			//plansummaryPage.validateAndClickAddtoCompareinAARP(planType, planName);
 			plansummaryPage.compareTextAfterclickingAddtoCompareinAARP(planName);
-			plansummaryPage.deselectAddToCompareinAARP(planName);
+			//plansummaryPage.deselectAddToCompareinAARP(planName);
 		}
 	}
 
@@ -672,16 +670,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 			Assert.fail("Error in validating the Plan Summary Page");
 	}
 
-	@Then("^the user clicks on Return to Plan Summary link and validates its redirection to Plan Summary Page for MAPD, PDP , DSNP Plan in AARP Site$")
-	public void User_clicks_returnToPlanSummary_validates_redirection_PlanSummary_aarp() {
-		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (!planType.equals("MA")) {
-			DrugCostEstimatorPage drugCostEstimatorPage = (DrugCostEstimatorPage) getLoginScenario()
-					.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
-			drugCostEstimatorPage.navigateBackToPlanSummaryPage();
 
-		}
-	}
 
 	/*
 	 * @When("^the user goes to PDP Landing and performs zipcode search using widget to welcome OLE Page using widget on the AARP site$"
@@ -733,23 +722,6 @@ public class VppPlanSummaryStepDefinitionAARP {
 	 * 
 	 * }
 	 */
-	@Then("^the user clicks on enter drug information link in the benefits table and validate the DCE Home Page for MAPD, PDP , DSNP Plan in AARP site$")
-	public void the_user_clicks_enterDrugInformation_validates_dceHomePage_AARP() {
-		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (!planType.equals("MA")) {
-			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			DrugCostEstimatorPage drugCostEstimatorPage = plansummaryPage.navigatetoDCEPage(planName);
-			if (drugCostEstimatorPage != null) {
-				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
-
-			} else {
-				Assert.fail("Error Loading DCE page");
-			}
-
-		}
-	}
 
 	@Then("^the user validates Add to compare checkbox is not present for DSNP Plans in AARP$")
 	public void addToCompareNotPresentForDSNP() {
@@ -793,7 +765,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 			plansummaryPage.clickOnViewMoreForPlan(planName);
-			plansummaryPage.validateIsMyProviderCoveredLinkInAarp(planType, planName);
+			//plansummaryPage.validateIsMyProviderCoveredLinkInAarp(planType, planName);
 		}
 	}
 
@@ -804,7 +776,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.ValidateclicksOnIsProviderCovered(planName);
+			//plansummaryPage.ValidateclicksOnIsProviderCovered(planName);
 		}
 	}
 
@@ -1005,7 +977,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acquisitionHomePage.searchfield();
-		keywordSearchAARP newkeywordsearchpage = new keywordSearchAARP(acquisitionHomePage.driver);
+		KeywordSearchPage newkeywordsearchpage = new KeywordSearchPage(acquisitionHomePage.driver);
 		getLoginScenario().saveBean(PageConstants.Keyword_Search, newkeywordsearchpage);
 	}
 
@@ -1013,7 +985,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 	public void I_land_on_result_page() {
 		{
 
-			keywordSearchAARP newkeywordsearchpage = (keywordSearchAARP) loginScenario
+			KeywordSearchPage newkeywordsearchpage = (KeywordSearchPage) loginScenario
 					.getBean(PageConstants.Keyword_Search);
 			newkeywordsearchpage.url();
 			if (newkeywordsearchpage != null)

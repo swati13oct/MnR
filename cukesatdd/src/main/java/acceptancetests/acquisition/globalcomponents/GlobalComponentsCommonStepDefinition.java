@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 
 import acceptancetests.data.CommonConstants;
@@ -76,11 +78,18 @@ public class GlobalComponentsCommonStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String site = memberAttributesMap.get("Site");
-
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, null);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, null);
+		if("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS"))
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "UHC_ACQ");
+		else
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
+
 		aquisitionhomepage.validateSubtitle();
 	}
 
