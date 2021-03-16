@@ -29,7 +29,7 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
 
-    @VP_ProdRegression_AARP @prodRegression_AARP_02
+    @VP_ProdRegression_AARP
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
@@ -39,7 +39,7 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
 
-    @VP_ProdRegression_UHC @prodRegression_UHC_02
+    @VP_ProdRegression_UHC
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
@@ -64,12 +64,12 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-    @VisitorProfile_AARP @VP_ProdRegression_AARP
+    @VisitorProfile_AARP @VP_ProdRegression_AARP	@prodRegression_AARP_02
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
 
-    @VisitorProfile_UHC @VP_ProdRegression_UHC
+    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_02
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
@@ -161,7 +161,7 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
-    @VP_ProdRegression_AARP @prodRegression_AARP_02
+    @VP_ProdRegression_AARP
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | AARP | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
@@ -171,7 +171,7 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
       | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
-    @VP_ProdRegression_UHC @prodRegression_UHC_02
+    @VP_ProdRegression_UHC
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
@@ -326,12 +326,12 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     #No pdf link is avialable now
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
-    @VisitorProfile_AARP @VP_ProdRegression_AARP
+    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | AARP | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
 
-    @VisitorProfile_UHC @VP_ProdRegression_UHC
+    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_02
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | UHC  | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
@@ -370,12 +370,12 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
 
-    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04
+    @VisitorProfile_AARP @VP_ProdRegression_AARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |  |
       | AARP | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |  |
 
-    @VisitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_04
+    @VisitorProfile_UHC @VP_ProdRegression_UHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
       | UHC  | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
@@ -406,12 +406,12 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     Then verify the plans on plan compare page
       | Test Plans | <testPlans> |
 
-    @VisitorProfile_AARP @VP_ProdRegression_AARP
+    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
       | AARP | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-    @VisitorProfile_UHC @VP_ProdRegression_UHC
+    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_04
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
       | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
