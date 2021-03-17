@@ -870,7 +870,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
 	private WebElement nextBestActionModalSelectPlanBtn;
 
-	@FindBy(xpath = "(//button[text()='Compare'])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'show active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare plans')])[1]")
 	private WebElement compareButton;
 
 	//@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
