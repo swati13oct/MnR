@@ -92,6 +92,10 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 
 	@FindBy(xpath = "//input[contains(@class, 'city') and contains(@id, 'form-city') and contains(@name, 'city')]")
 	private WebElement CityTxt;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public static WebElement proactiveChatExitBtn;
+	
 
 	@FindBy(xpath = "//*[contains(@id, '-form-error-city')]")
 	private WebElement CityError;
@@ -426,15 +430,35 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		return flag;
 	
 	}
+	
+	private void CheckPageLoad() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		checkModelPopup(driver, 20);
 
+	}
+
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+																			// we're not trying to fail the test if it
+																			// isn't found
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}
+	
 	public void enterUserInfoStep1(Map<String, String> memberAttributesMap) {
 		String FirstName = memberAttributesMap.get("FirstName");
 		String LastName = memberAttributesMap.get("LastName");
 		String DistributionMethod = memberAttributesMap.get("DistributionMethod");
 		String Email = memberAttributesMap.get("Email");
-		FirstNameTxt.clear();
-		LastNameTxt.clear();
-		EmailTxt.clear();
+	//	FirstNameTxt.clear();
+	//	LastNameTxt.clear();
+	//	EmailTxt.clear();
+		driver.navigate().refresh();
 		FirstNameTxt.sendKeys(FirstName);
 		LastNameTxt.sendKeys(LastName);
 		if(DistributionMethod.equalsIgnoreCase("email")){

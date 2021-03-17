@@ -3,6 +3,7 @@
  */
 package pages.acquisition.isdecisionguide;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Assert;
@@ -115,7 +116,40 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@id, 'findplansbtn')]")
 	private WebElement FindPlanBtn;
 
+	@FindBy(xpath = "//input[contains(@class, 'dob')]")
+	private WebElement DOB;
 
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_mm')]")
+	private WebElement monthDrpDwn_PartA;
+
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredateparta_yy')]")
+	private WebElement yearDrpDwn_PartA;
+	
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_mm')]/option[2]")
+	private WebElement monthDrpDwnOption;
+	
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredateparta_yy')]/option[2]")
+	private WebElement yearDrpDwnOption;
+
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_mm')]/option[2]")
+	private WebElement monthBDrpDwnOption;
+
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_yy')]/option[3]")
+	private WebElement yearBDrpDwnOption;
+	
+
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_mm')]")
+	private WebElement monthBDrpDwn;
+
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_yy')]")
+	private WebElement yearBDrpDwn;
+	
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-startdate')]")
+	private WebElement startDrpDwn;
+
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-startdate')]//option[2]")
+	private WebElement startDrpDwnOption;
+	
 	
 	public IsDecisionGuideStep2(WebDriver driver) {
 		super(driver);
@@ -384,6 +418,115 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 
 	}
 	
+	
+	
+	
+	public  Map<String, String>  CapturePreEntryPageInfoISDecisionGuide(String DateOfBirth) {
+
+		validateNew(DOB, 30);
+		System.out.println("MedSup page form is displayed");
+		jsClickNew(DOB);
+		DOB.sendKeys(DateOfBirth);
+		System.out.println("Date of birth is entered");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		monthDrpDwn_PartA.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		monthDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Effective date- month value selected");
+		yearDrpDwn_PartA.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		yearDrpDwnOption.click();
+		System.out.println("Effective date- year value selected");
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		monthBDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		monthBDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		yearBDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		yearBDrpDwnOption.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		startDrpDwn.click();
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		startDrpDwnOption.click();
+		System.out.println("Plan to start date selected");
+
+		validateNew(DOB, 30);
+		Map<String, String> EnteredData = new HashMap<String, String>();
+		String DOBEntered = DOB.getAttribute("value");
+		System.out.println("Enetered DOB" + DOBEntered);
+		EnteredData.put("DOB", DOBEntered);
+		String part_A_Month_Entered = monthDrpDwn_PartA.getAttribute("value");
+		EnteredData.put("part_A_Month_Entered", part_A_Month_Entered);
+		String part_A_Year_Entered = yearDrpDwn_PartA.getAttribute("value");
+		EnteredData.put("part_A_Year_Entered", part_A_Year_Entered);
+		String part_B_Month_Entered = monthBDrpDwn.getAttribute("value");
+		EnteredData.put("part_B_Month_Entered", part_B_Month_Entered);
+		String part_B_Year_Entered = yearBDrpDwn.getAttribute("value");
+		EnteredData.put("part_B_Year_Entered", part_B_Year_Entered);
+		String startDateEntered = startDrpDwn.getAttribute("value");
+		EnteredData.put("startDateEntered", startDateEntered);
+	/*	try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}*/
+		return EnteredData;
+
+	}
 	
 	@FindBy(xpath = "//button[contains(text(), 'Find Plans in Your Area')]")
 	private WebElement FindPlansAreaButton;
