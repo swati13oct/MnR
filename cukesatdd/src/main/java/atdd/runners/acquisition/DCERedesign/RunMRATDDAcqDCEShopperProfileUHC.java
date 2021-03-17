@@ -14,9 +14,9 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCEShopperProfileUHC.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCEShopperProfileUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEShopperProfileUHC.json" }, tags = { "@DCEShopperProfileAddDrugsGlobally_UHC, @DCEShopperProfileAddDrugsPlancard_UHC, @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEShopperProfileUHC.json" }, tags = { "@DCEShopperProfileAddDrugsGlobally_UHC, @DCEShopperProfileAddDrugsPlancard_UHC" })
 
-
+//, @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC - Removing Authenticated flow tag. Will create new runner to separate out
 public class RunMRATDDAcqDCEShopperProfileUHC {
 
 }

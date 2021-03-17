@@ -77,7 +77,7 @@ Examples:
 @healthplanspdpUHC_3 @samChatCall_2
 Examples:
 | pagename |
-|health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html|
+#|health-plans/resources/pdp-resources-materials/pdp-information-forms/medicare-disenrollment.html|
 |health-plans/resources/prescription-drug-transition.html|
 |health-plans/resources/prescription-drug-costs-help.html|
 |health-plans/resources/prescription_drug_appeals.html|
@@ -158,4 +158,4 @@ Examples:
 | pagename |
 |shop-medicare-coverage.html|
 |about-our-plans.html| 
-|sitesearch.html|
+|site-search.html|

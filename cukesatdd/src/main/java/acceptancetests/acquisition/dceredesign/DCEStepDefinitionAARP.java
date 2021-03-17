@@ -1382,23 +1382,6 @@ public class DCEStepDefinitionAARP {
 			Assert.fail("DCE Redesign page object not loaded");
 	}
 
-	@When("^user change the pharmacy to view no prescription coverage$")
-	public void user_change_pharmacy_from_details_page_in_AARP() throws InterruptedException {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		drugDetailsPage.changePharmacyAndSave();
-		drugDetailsPage.validatePharmVlaues();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
-	}
-
-	/*
-	 * @When("^user validate the monthly premium value on detail page$") public void
-	 * user_validate_monthly_value_in_AARP() throws InterruptedException {
-	 * DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-	 * drugDetailsPage.validatePharmVlaues();
-	 * getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails,
-	 * drugDetailsPage); }
-	 */
-
 	@When("^user clicks on Keep Using This Pharmacy on change pharmacy page")
 	public void user_clicks_on_keep_using_pharmacy() throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
@@ -1425,34 +1408,6 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.clicklipitorswitchToGeneric();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
-	}
-
-	@Then("^the user verifies the catastrophic coverage message$")
-	public void the_user_verifies_the_catastrophic_coverage_message(DataTable givenAttributes) throws Throwable {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String catastrophicMessage = memberAttributesMap.get("catastrophicCoverage");
-		drugDetailsPage.validateCatastrophicCoverageMessage(catastrophicMessage);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
-	}
-
-	@Then("^the user verifies the coverage gap message$")
-	public void the_user_verifies_the_coverage_gap_message(DataTable givenAttributes) throws Throwable {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String coverageGapMessage = memberAttributesMap.get("coverageGap");
-		drugDetailsPage.validateCoverageGapMessage(coverageGapMessage);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^user saves plan as favorite on drug summary page$")
@@ -2795,4 +2750,18 @@ public class DCEStepDefinitionAARP {
 		
 	}
 
+	@Then("^the user validates LIS text for coverages stages popups on DCE details page$")
+	public void the_user_validates_LIS_text_for_coverages_stages_popups_on_DCE_details_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDrugStageInfoModals_LISbuydownPlans();
+	}
+
+	@Then("^the user validates Non-LIS text for coverages stages popups on DCE details page$")
+	public void the_user_validates_NonLIS_text_for_coverages_stages_popups_on_DCE_details_page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDrugStageInfoModals_NonLISbuydownPlans();
+	}
+	
 }
