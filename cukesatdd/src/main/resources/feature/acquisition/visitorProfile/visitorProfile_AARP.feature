@@ -30,7 +30,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Alabama      | Lipitor |   90210 | AARP |
       | Pennsylvania | Lipitor |   15001 | AARP |
 
-    @prodRegression_AARP
+    @prodRegression_AARP_03
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
@@ -41,7 +41,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Alabama      | Lipitor |   90210 | UHC  |
       | Pennsylvania | Lipitor |   15001 | UHC  |
 
-    @prodRegression_UHC
+    @prodRegression_UHC_03
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
