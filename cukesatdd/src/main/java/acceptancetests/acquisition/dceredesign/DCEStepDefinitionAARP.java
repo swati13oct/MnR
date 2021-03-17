@@ -1382,23 +1382,6 @@ public class DCEStepDefinitionAARP {
 			Assert.fail("DCE Redesign page object not loaded");
 	}
 
-	@When("^user change the pharmacy to view no prescription coverage$")
-	public void user_change_pharmacy_from_details_page_in_AARP() throws InterruptedException {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-		drugDetailsPage.changePharmacyAndSave();
-		drugDetailsPage.validatePharmVlaues();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
-	}
-
-	/*
-	 * @When("^user validate the monthly premium value on detail page$") public void
-	 * user_validate_monthly_value_in_AARP() throws InterruptedException {
-	 * DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
-	 * drugDetailsPage.validatePharmVlaues();
-	 * getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails,
-	 * drugDetailsPage); }
-	 */
-
 	@When("^user clicks on Keep Using This Pharmacy on change pharmacy page")
 	public void user_clicks_on_keep_using_pharmacy() throws InterruptedException {
 		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);

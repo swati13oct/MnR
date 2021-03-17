@@ -35,6 +35,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then the user selects following pharmacy and returns to DCE Summary page
       | SelectPharmacy | <SelectPharmacy> |
     Then the user validates Covered Drug display for NC Pharmacy selection
+    And verify DCE NBA is displayed on drug summary page
 
     @dce_DrugSummary_Page_AARP
     Examples: 
@@ -286,38 +287,6 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| drug1 | zipCode |
       |UHC| Lipitor  |   90001 |
 
-  @dceRedesignExtraHelpAlert @F477268 @F470669
-  Scenario Outline: Test to Verify that Extra help Warning messgae on view drug pricing modal up
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When I access the acquisition DCE Redesign from home page
-    Then the user validates Get Started Page
-    When the user clicks on Add drugs button
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP
-    When user enters valid zipcode and county
-      | ZipCode | <zipCode> |
-    #And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page
-    #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
-    And user should verify the Extra help on SNP plan type
-    And user click on View Drug Pricing Modal
-    And user should verify the drug extra qualification in drug pricing popup
-
-		@dceRedesignExtraHelpAlert_AARP @extraHelpSNPAARP
-    Examples: 
-      |site| zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
-      |AARP|   10001 | MAPD     | none   | no              | Lipitor    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-     
-     @dceRedesignExtraHelpAlert_UHC @extraHelpSNPUHC
-      Examples: 
-      |site| zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
-      |UHC|   10001 | MAPD     | none   | no              | Lipitor    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-
   @dceNoPharmaciesZipCode @F492296 @F493728
   Scenario Outline: Test to Verify that user can Handle Zip Codes with No Pharmacies Returned
     Given the user is on medicare acquisition site landing page
@@ -383,36 +352,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       |site| drug1   | zipCode | testPlans                                                        | pdptestPlans                    | snptestPlans                               |testPlansName|
       |UHC| Orkambi |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP MedicareRx Preferred (PDP),UnitedHealthcare Dual Complete (HMO D-SNP)|
       
-  @dceNBADrugSummaryPage @F465679 @decRelease
-  Scenario Outline: Test to Verify that DCE NBA on Drug summary page 
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When I access the acquisition DCE Redesign from home page
-    Then the user validates Get Started Page
-    When the user clicks on Add drugs button
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    And clicks on Review drug cost button
-    Then user should be navigated to zipcode and plan year capture page for AEP
-    When user enters valid zipcode and county
-      | ZipCode | <zipcode> |
-    # And user selects plan year in AARP
-    And user clicks on continue button in Zip Entry Page
-    #Then load screen should be displayed in AARP
-    And user should be navigated to Review drug cost estimate page
-    And user should be able to see Medicare Advantage plan by default
-    And verify DCE NBA is displayed on drug summary page
-
-		@dceNBADrugSummaryPage_AARP
-    Examples: 
-      |site| zipcode | county | isMultutiCounty | drug1   |
-      |AARP|   10001 | none   | no              | Orkambi |
-      
-      @dceNBADrugSummaryPage_UHC
-      Examples: 
-      |site| zipcode | county | isMultutiCounty | drug1   |
-      |UHC|   10001 | none   | no              | Orkambi |
-      
+     
      @dcecovereduncoveredDrugSummayPage @F531892 @decRelease
      Scenario Outline: To verify drug pricing modal popup for covered/noncovered drug for DSNP on drug summary page  
      Given the user is on medicare acquisition site landing page

@@ -207,6 +207,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates planName matches plan Name in VPP
     Then the user validates following expected Premium on DCE Details Page
       | Premium | <premium> |
+    And verify DCE NBA is displayed on drug details page
 
     @DCE_DrugDetailsPremiumValidation_AARP
     Examples: 
@@ -287,6 +288,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates planName matches plan Name in VPP
     Then the user validates correct Copay section view and LIS message for LIS Non Buydown Plan on DCE details Page
 		Then the user validates Non-LIS text for coverages stages popups on DCE details page      
+    And verify DCE NBA is displayed on drug details page
 
     @DCE_DrugDetailsNonBuyDownLIS_AARP
     Examples: 

@@ -1,7 +1,13 @@
 package acceptancetests.acquisition.dceredesign;
 
+import static org.junit.Assert.assertTrue;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
+
+import acceptancetests.data.PageConstants;
+import cucumber.api.java.en.When;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class DCEStepDefinition_Depricated_ToberemovedSteps {
 
@@ -54,5 +60,35 @@ public class DCEStepDefinition_Depricated_ToberemovedSteps {
 	 * Assert.assertTrue("Coverage gap message is incorrect",
 	 * coverageGap.equals(message)); } else {
 	 * Assert.fail("Coverage gap Modal not displayed"); } }
+	 */
+	
+	
+
+	/*
+	 * @When("^user change the pharmacy to view no prescription coverage$") public
+	 * void user_change_pharmacy_from_details_page_in_AARP() throws
+	 * InterruptedException { DrugDetailsPage drugDetailsPage = new
+	 * DrugDetailsPage(driver); drugDetailsPage.changePharmacyAndSave();
+	 * drugDetailsPage.validatePharmVlaues();
+	 * getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails,
+	 * drugDetailsPage); }
+	 */
+	/*
+	 * @When("^user validate the monthly premium value on detail page$") public void
+	 * user_validate_monthly_value_in_AARP() throws InterruptedException {
+	 * DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+	 * drugDetailsPage.validatePharmVlaues();
+	 * getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails,
+	 * drugDetailsPage); }
+	 */
+
+	/*
+	 * public void changePharmacyAndSave() { validateNew(selectRockPharm);
+	 * selectRockPharm.click(); validateNew(saveDrugBtn); saveDrugBtn.click(); }
+	 * 
+	 * public void validatePharmVlaues() { validateNew(rockPharmAlertText);
+	 * System.out.println(rockPharmAlertText.getText()); validateNew(monthlyValue);
+	 * assertTrue(monthlyValue.getText() != "");
+	 * System.out.println("Monthly Value: " + monthlyValue.getText()); }
 	 */
 }

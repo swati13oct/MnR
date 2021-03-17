@@ -938,20 +938,7 @@ public class DrugDetailsPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
 	}
 
-	public void changePharmacyAndSave() {
-		validateNew(selectRockPharm);
-		selectRockPharm.click();
-		validateNew(saveDrugBtn);
-		saveDrugBtn.click();
-	}
 
-	public void validatePharmVlaues() {
-		validateNew(rockPharmAlertText);
-		System.out.println(rockPharmAlertText.getText());
-		validateNew(monthlyValue);
-		assertTrue(monthlyValue.getText() != "");
-		System.out.println("Monthly Value: " + monthlyValue.getText());
-	}
 
 	public void validatePharmacy() {
 		validateNew(pharmacyName);
