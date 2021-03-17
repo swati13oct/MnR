@@ -216,7 +216,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN Xpath   | <TFNxpath1>  |
       | Working hrs | <workingHrs> |
     When user clicks on Start Now to get start the PRE flow from external page
-    And clicks on get started button and runs a questionnaire
+    And clicks on get started button and runs questionnaire
       | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | CountyDropDown  | <county>        |
