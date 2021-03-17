@@ -2773,7 +2773,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(providerSearchFromHomeScreen);
 
 //		switchToNewTabNew(providerSearchFromHomeScreen);
-		providerSearchFromHomeScreen.click();
+		jsClickNew(providerSearchFromHomeScreen);
 		waitForPageLoadSafari();
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -3022,7 +3022,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
@@ -5212,7 +5212,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
 		validate(CallSamTFNtimezone);
 		String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
 		System.out.println(ExpectedCallSamTFNtimezone);
