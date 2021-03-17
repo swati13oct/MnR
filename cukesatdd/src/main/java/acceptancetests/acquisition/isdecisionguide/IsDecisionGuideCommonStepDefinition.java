@@ -130,7 +130,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		String part_B_Month_Entered = PreEntryPageInfo.get("part_B_Month_Entered");
 		String part_B_Year_Entered = PreEntryPageInfo.get("part_B_Year_Entered");
 		String start_Date_Entered =PreEntryPageInfo.get("startDateEntered");
-		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,PreEntryPageInfo);
+		//getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
 		
 	}
 	

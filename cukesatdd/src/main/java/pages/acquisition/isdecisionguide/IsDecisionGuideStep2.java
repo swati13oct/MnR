@@ -363,11 +363,20 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		AARP_MembershipNo.sendKeys(aarpNo);
 	}
 
-	public DGR_ThankYouPage NavigateNext_DGRthankYouPage() {
-		if( validate(SubmitBtn)){
+	public DGR_ThankYouPage NavigateNext_DGRthankYouPage() throws InterruptedException {
+	/*	if( validate(SubmitBtn)){
 			jsClickNew(SubmitBtn);
 			
-		}
+		}*/
+		
+		Thread.sleep(2000);
+		
+		if(validateNew(SubmitBtn)&& SubmitBtn.isDisplayed())
+		jsClickNew(SubmitBtn);
+		
+		System.out.println("Submit Button Clicked on decision guide page");
+		
+		
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -378,7 +387,9 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 			System.out.println("Submit Button Clicked : DGR Thank You Page is Displayed");
 			return new DGR_ThankYouPage(driver);
 		}
-		return null;	}
+		return null;	
+		
+	}
 
 	public void validatePreEntryPageData(Map<String, String> PreEntryPageInfo) {
 		validateNew(DateOfBirthTxt);
