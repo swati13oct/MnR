@@ -108,5 +108,6 @@ public class oleCommonConstants {
 	public static final String CREDIT_CARD_NUMBER="creditcardnumber";
 	public static final String CREDIT_CARD_NAME_ON_CARD="creditcardnameoncard";
 	public static final String CREDIT_CARD_EXPIRATION_DATE="creditcardexpirationdate";
+	public static final String PAYMENT_METHOD = "paymentmethod";
 
 }

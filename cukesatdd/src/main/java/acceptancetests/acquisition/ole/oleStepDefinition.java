@@ -3306,6 +3306,18 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
 				
 				//------------------------------------------------------------------------------------------------------------------------------------------------
+				//Payment type
+				System.out.println("--------------------Storing Data for Plan Premium Page ----------------------");
+				String paymentPlan = (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_METHOD);
+				if(paymentPlan.equalsIgnoreCase("Pay By Mail")) {
+					DetailsMap.put("payment type is Pay by mail: ", "0");
+					}
+					else if(paymentPlan.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
+					DetailsMap.put("payment type is SSN: ", "1");	
+					}
+					else {
+						DetailsMap.put("payment type is Credit Card: ", "2");		
+					}
 				
 				//Credit Card Details
 				System.out.println("--------------------Storing Data for Credit Card Started----------------------");
@@ -3882,6 +3894,7 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 		System.out.println("The payment type selected is "+payType);
 		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
+		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_METHOD, payType);
 		System.out.println("validate premium value");
 		boolean result = planPremiumPage.validatePremiumValue();
 		if(!result)	{
