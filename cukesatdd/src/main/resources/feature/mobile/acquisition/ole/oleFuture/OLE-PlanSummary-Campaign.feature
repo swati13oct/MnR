@@ -1,4 +1,4 @@
- Feature: 1.05.5. OLE Flow from Campaign URL
+ Feature: 1.05.5. OLE Mobile Flows from Campaign URL
 
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from UHC Acquisition site VPP Plan Summary
   #Given the user is on VPP Plan Summary page after hits Campaign URL

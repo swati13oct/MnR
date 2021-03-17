@@ -1,4 +1,4 @@
-Feature: 1.05.1 OLE common tool flow E2E Piedmont
+Feature: 1.05.1 OLE common tool Mobile Flow E2E Piedmont
 
   #@acquisitionRegression @Piedmont_OLE_AARP @decrelease2019 @OLE_Regression_Ulayer @F365255
   Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Summary for Piedmont plans

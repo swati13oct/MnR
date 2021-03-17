@@ -1,4 +1,4 @@
-Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
+Feature: 1.05.9 OLE Common tool Mobile Flow E2E Shop Pages
 
   	Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from E2E Shop Pages-MA,SNP PLans
 		Given the user is on medicare acquisition site landing page

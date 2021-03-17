@@ -1,4 +1,4 @@
-Feature: 1.05.6. OLE PCP Flow
+Feature: 1.05.6. OLE PCP Mobile Flow
  
  Scenario Outline: TID: <TID> - plan type: <PlanType> - OLE Landing from AARP Acquisition site VPP Plan Summary
   Given the user is on medicare acquisition site landing page

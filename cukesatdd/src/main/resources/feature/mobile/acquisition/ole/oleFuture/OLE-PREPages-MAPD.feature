@@ -1,4 +1,4 @@
-Feature: 1.05.8. OLE PRE Integration Flow
+Feature: 1.05.8. OLE PRE Integration Mobile Flow
 
 	Scenario Outline: To validate MA plans through PRE
     Given the user is on medicare acquisition site landing page

@@ -59,9 +59,9 @@ public class ProviderSearchPage extends UhcDriver {
 	private List<WebElement> SaveBtns;
 
 	@FindBys(value = {
-		//	@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
-			@FindBy(xpath = "//button[contains(@class,'saved-provider-button')]") })	
-	private List<WebElement> MulitpleSaveBtns;
+			//	@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
+				@FindBy(xpath = "//button[contains(@class,'saved-provider-button')]") })	
+		private List<WebElement> MulitpleSaveBtns;
 
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
 	private WebElement Viewsavebtn;
@@ -512,6 +512,7 @@ public class ProviderSearchPage extends UhcDriver {
 		return new VPPTestHarnessPage(driver);
 	}
 /*
+	/*
 	public VPPPlanSummaryPage MultipleselectsProvider() {
 		GetStarted.click();
 
@@ -658,6 +659,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 	return new VPPPlanSummaryPage(driver);
 }
+
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
