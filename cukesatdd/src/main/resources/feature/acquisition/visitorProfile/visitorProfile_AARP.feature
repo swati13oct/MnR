@@ -30,7 +30,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Alabama      | Lipitor |   90210 | AARP |
       | Pennsylvania | Lipitor |   15001 | AARP |
 
-    @prodRegression_AARP
+    @prodRegression_AARP_03
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
@@ -41,7 +41,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Alabama      | Lipitor |   90210 | UHC  |
       | Pennsylvania | Lipitor |   15001 | UHC  |
 
-    @prodRegression_UHC
+    @prodRegression_UHC_03
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
@@ -422,12 +422,12 @@ Feature: 1.08. ACQ- Visitor profile
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
 
-    @VisitorProfile_AARP @prodRegression_AARP
+    @VisitorProfile_AARP @prodRegression_AARP_03
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |  |
       | AARP | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |  |
 
-    @VisitorProfile_UHC @prodRegression_UHC
+    @VisitorProfile_UHC @prodRegression_UHC_03
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | plantype | planyear | planname                             | testPlans                                                                 |
       | UHC  | New York |   10001 | NO              | New York County | MAPD     | future   | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
