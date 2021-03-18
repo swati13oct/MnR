@@ -19,5 +19,5 @@ import cucumber.api.CucumberOptions;
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCEDetailsLISBuyDownAARP.json" }, tags = { "@DCE_DrugDetailsLISBuyDown_AARP" })
 
 public class RunMRATDDAcqDCEDetailsLISBuyDownAARP {
-//,@DCE_DrugDetailsValidation_AARP, @DCE_DrugDetailsPremiumValidation_AARP
+
 }
