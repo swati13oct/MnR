@@ -131,7 +131,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "h2#saved-drugs-and-doctors")
 	public WebElement savedDrugsAndDoctorsHeader;
 
-	@FindBy(xpath = "//h3[@id='saved-drugs']/following-sibling::a")
+	@FindBy(xpath = "//h3[@id='saved-drugs']/following::button[contains(@dtmname,'Add Drugs')]")
 	public WebElement editDrugsPharmacy;
 
 	// OLE Details
@@ -150,10 +150,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Yes, cancel application']/..")
 	public WebElement cancelEnrollment;
 
-	@FindBy(xpath = "//*[@id='saved-drugs']/../..//*[text()='Get Started']/..")
+	@FindBy(xpath = "//*[contains(@dtmname,'Add Drugs') and contains(@dtmid, 'visitor_profile')]")
 	public WebElement addDrugsGlobal;
 
-	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
+	@FindBy(xpath = "(//button[contains(@dtmname,'Add drugs') and contains(@dtmid, 'visitor_profile')]/*[contains(text(), 'Add')])[1]")
 	public WebElement enterDrugInfoPlanCard;
 
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
@@ -208,7 +208,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Add Drugs']/parent::button")
 	private WebElement addDrugsBtn;
 
-	@FindBy(xpath = "//button[contains(text(),'View Drug Pricing')]")
+	@FindBy(xpath = "(//button[contains(text(),'View Drug Pricing')])[1]")
 	private WebElement viewDrugPricingLink;
 	
 	@FindBy(xpath = "//button[text()='Yes, Remove']")
@@ -839,8 +839,16 @@ public class VisitorProfilePage extends UhcDriver {
 	/**
 	 * click add drugs from plan card
 	 */
+
+	@FindBy(xpath = "//*[contains(@class, 'add-drug-doctor-dropdown')]//button[contains(@dtmname,'Add Drugs')]")
+	private WebElement PlanCard_AddDrugProvider_AddDrugbtn;
+
+	
 	public void clickAddDrugsPlancardNew() {
+		validateNew(enterDrugInfoPlanCard);
 		enterDrugInfoPlanCard.click();
+		validateNew(PlanCard_AddDrugProvider_AddDrugbtn);
+		jsClickNew(PlanCard_AddDrugProvider_AddDrugbtn);
 	}
 
 	public void validateBackToDceLink() {
@@ -859,9 +867,22 @@ public class VisitorProfilePage extends UhcDriver {
 	/**
 	 * click edit drugs from plan card
 	 */
+	@FindBy(xpath = "//*[contains(@class, 'plan-drug-doctor')]//a[contains(@dtmname, 'Update your drugs')]")
+	private WebElement DrugPricingModal_EditDrugslink;
+
+	
 	public void clickEditDrugsPlancard() {
-		expandDrugsPlanCard.click();
-		editDrugsPlanCard.click();
+		//validateNew(expandDrugsPlanCard);
+		//expandDrugsPlanCard.click();
+		// New Plan Card does not have Edit drugs
+		//		editDrugsPlanCard.click();
+
+		validateNew(viewDrugPricingLink);
+		viewDrugPricingLink.click();
+		System.out.println("View Drug Pricing is clicked for Plan Card");
+		validateNew(DrugPricingModal_EditDrugslink);
+		jsClickNew(DrugPricingModal_EditDrugslink);
+		System.out.println("View Drug Pricing - Edit Drugs link is clicked for Plan Card");
 	}
 
 	public void logIn(String username, String password) {
