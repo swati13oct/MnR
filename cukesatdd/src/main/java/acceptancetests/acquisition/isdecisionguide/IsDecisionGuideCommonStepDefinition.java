@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -37,8 +35,7 @@ public class IsDecisionGuideCommonStepDefinition {
 	
 	//F266875 - IS Decision Guide Agency Feature : Adding new Step to Navigate to Step 1 page for IS Decision Guide.
 	
-	WebDriver wd;
-	
+		
 	/*@Then("^the user enters valid information for the pre entry form on AARP site$")
 	public void the_user_enters_valid_information_for_the_pre_entry_form_on_AARP_site(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -82,10 +79,8 @@ public class IsDecisionGuideCommonStepDefinition {
 	}
 
 	@Then("^the user validates Decision Guide Step (\\d+) page info is same as the saved information from Pre-entry page on site$")
-	public void the_user_validates_Decision_Guide_Step_page_info_is_same_as_the_saved_information_from_Pre_entry_page(int givenAttributes) throws Throwable {
-		
-	//public void the_user_validates_Decision_Guide_Step_page_info_is_same_as_the_saved_information_from_Pre_entry_page(int arg1) throws Throwable {
-	/*	IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+	public void the_user_validates_Decision_Guide_Step_page_info_is_same_as_the_saved_information_from_Pre_entry_page(int arg1) throws Throwable {
+		IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
 		String DOBEntered = (String) getLoginScenario().getBean(MedSuppCommonConstants.DOB);
 		String part_A_Month_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.PARTA_MONTH);
 		String part_A_Year_Entered = (String) getLoginScenario().getBean(MedSuppCommonConstants.PARTA_YEAR);
@@ -101,36 +96,6 @@ public class IsDecisionGuideCommonStepDefinition {
 		EnteredData.put("part_B_Year_Entered",part_B_Year_Entered);
 		EnteredData.put("startDateEntered",start_Date_Entered);
 		DecisionGuideStep2Page.validatePreEntryPageData(EnteredData);
-		
-	*/
-	
-	/*	String dateOfBirth= (String) getLoginScenario().getBean(MedSuppCommonConstants.DOB);
-		
-		IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
-		Map<String, String> PreEntryPageInfo = new HashMap<String, String>();
-		PreEntryPageInfo = DecisionGuideStep2Page.CapturePreEntryPageInfoISDecisionGuide(dateOfBirth);
-		String DOBEntered = PreEntryPageInfo.get("DOB");
-		String part_A_Month_Entered = PreEntryPageInfo.get("part_A_Month_Entered");
-		String part_A_Year_Entered = PreEntryPageInfo.get("part_A_Year_Entered");
-		String part_B_Month_Entered = PreEntryPageInfo.get("part_B_Month_Entered");
-		String part_B_Year_Entered = PreEntryPageInfo.get("part_B_Year_Entered");
-		String start_Date_Entered = PreEntryPageInfo.get("startDateEntered");
-		
-		getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,PreEntryPageInfo);*/
-		
-		
-		String dateOfBirth= (String) getLoginScenario().getBean(MedSuppCommonConstants.DOB);
-		
-		IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
-		Map<String, String> PreEntryPageInfo=  new HashMap<String, String>();
-		PreEntryPageInfo = DecisionGuideStep2Page.CapturePreEntryPageInfoISDecisionGuide(dateOfBirth);
-		String DOBEntered = PreEntryPageInfo.get("DOB");
-		String part_A_Month_Entered = PreEntryPageInfo.get("part_A_Month_Entered");
-		String part_A_Year_Entered = PreEntryPageInfo.get("part_A_Year_Entered");
-		String part_B_Month_Entered = PreEntryPageInfo.get("part_B_Month_Entered");
-		String part_B_Year_Entered = PreEntryPageInfo.get("part_B_Year_Entered");
-		String start_Date_Entered =PreEntryPageInfo.get("startDateEntered");
-		//getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
 		
 	}
 	
@@ -268,11 +233,8 @@ public class IsDecisionGuideCommonStepDefinition {
 
 	@Then("^the user clicks Submit to submit Decision Guide$")
 	public void the_user_clicks_Submit_to_submit_Decision_Guide() throws Throwable {
-		//wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-	
 		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
 		DGR_ThankYouPage dgrThankYouPage = DecisionGuideStep2Page.NavigateNext_DGRthankYouPage();
-	   
 		if (dgrThankYouPage != null) {
 			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,dgrThankYouPage);
@@ -280,6 +242,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		} else {
 			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
+
 	}
 
 	@Then("^the user validates Thank You Page$")
@@ -329,5 +292,28 @@ public class IsDecisionGuideCommonStepDefinition {
 			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
 
+	}
+	
+	
+	@Then("^the user fill details on the IS pages and click on submit button back to vpp page$")
+	public void the_user_fill_details_on_IS_page_submit_button_findplans_button_and_navigate_to_vpp_page() throws Throwable {
+			
+		IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		String dateOfBirth= (String) getLoginScenario().getBean(MedSuppCommonConstants.DOB);
+		Map<String, String> PreEntryPageInfo=  new HashMap<String, String>();
+		PreEntryPageInfo = DecisionGuideStep2Page.CapturePreEntryPageInfoISDecisionGuide(dateOfBirth);
+		String DOBEntered = PreEntryPageInfo.get("DOB");
+		String part_A_Month_Entered = PreEntryPageInfo.get("part_A_Month_Entered");
+		String part_A_Year_Entered = PreEntryPageInfo.get("part_A_Year_Entered");
+		String part_B_Month_Entered = PreEntryPageInfo.get("part_B_Month_Entered");
+		String part_B_Year_Entered = PreEntryPageInfo.get("part_B_Year_Entered");
+		String start_Date_Entered =PreEntryPageInfo.get("startDateEntered");
+		//getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+		if (DecisionGuideStep2Page != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+		} else {
+			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
 	}
 }

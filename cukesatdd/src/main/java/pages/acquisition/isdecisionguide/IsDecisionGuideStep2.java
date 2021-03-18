@@ -119,13 +119,13 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 	@FindBy(xpath = "//input[contains(@class, 'dob')]")
 	private WebElement DOB;
 
-	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_mm')]")
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredateparta_mm')]")
 	private WebElement monthDrpDwn_PartA;
 
 	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredateparta_yy')]")
 	private WebElement yearDrpDwn_PartA;
 	
-	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredate_mm')]/option[2]")
+	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredateparta_mm')]/option[2]")
 	private WebElement monthDrpDwnOption;
 	
 	@FindBy(xpath = "//select[contains(@id, 'ebrc-2step-form-medicaredateparta_yy')]/option[2]")
@@ -383,11 +383,14 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(validate(FindPlanBtn) && validate(ThankYouPageHeader)){
+	/*	if(validate(FindPlanBtn) && validate(ThankYouPageHeader)){
 			System.out.println("Submit Button Clicked : DGR Thank You Page is Displayed");
 			return new DGR_ThankYouPage(driver);
-		}
-		return null;	
+		}*/
+		
+		return new DGR_ThankYouPage(driver);
+		
+	//	return null;	
 		
 	}
 
@@ -439,77 +442,25 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		jsClickNew(DOB);
 		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		monthDrpDwn_PartA.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		monthDrpDwnOption.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		System.out.println("Effective date- month value selected");
 		yearDrpDwn_PartA.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		yearDrpDwnOption.click();
 		System.out.println("Effective date- year value selected");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		monthBDrpDwn.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 		monthBDrpDwnOption.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		yearBDrpDwn.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		yearBDrpDwnOption.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		startDrpDwn.click();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
 
@@ -528,25 +479,27 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		EnteredData.put("part_B_Year_Entered", part_B_Year_Entered);
 		String startDateEntered = startDrpDwn.getAttribute("value");
 		EnteredData.put("startDateEntered", startDateEntered);
-	/*	try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		
+			validateNew(SubmitBtn);
 			
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			//jsClickNew(SubmitBtn);
+			SubmitBtn.click();
+		//	jsClickNew(SubmitBtn);
+	/*	if(validate(FindPlanBtn) && validate(ThankYouPageHeader)){
+			System.out.println("Submit Button Clicked : DGR Thank You Page is Displayed");
+		
 		}*/
-		return EnteredData;
-
-	}
-	
-	@FindBy(xpath = "//button[contains(text(), 'Find Plans in Your Area')]")
-	private WebElement FindPlansAreaButton;
-	
-	public  VPPPlanSummaryPage NavigateNext_vppMedsuppPage() {
-		if( validate(FindPlansAreaButton)){
-			jsClickNew(FindPlansAreaButton);
-			
-		}
+		
+		validateNew(FindPlansAreaButton);
+		//FindPlansAreaButton.click();
+		jsClickNew(FindPlansAreaButton);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -557,7 +510,33 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 		String checkUrl=driver.getCurrentUrl();
 		if(checkUrl.contains("health-plans.html?product=medsup#/plan-summary")) {
 			System.out.println("Submit Button Clicked : Plan summary Page is Displayed");
+		}
+		return EnteredData;
+
+	}
+	
+	@FindBy(xpath = "//button[contains(text(), 'Find Plans in Your Area')]")
+	private WebElement FindPlansAreaButton;
+	
+	public  VPPPlanSummaryPage NavigateNext_vppMedsuppPage() {
+		try {
+			Thread.sleep(2000);
+		if( validate(FindPlansAreaButton)){
+			jsClickNew(FindPlansAreaButton);
+			
+		}
+		
+		
+		CommonUtility.checkPageIsReadyNew(driver);	
+		String checkUrl=driver.getCurrentUrl();
+		if(checkUrl.contains("health-plans.html?product=medsup#/plan-summary")) {
+			System.out.println("Submit Button Clicked : Plan summary Page is Displayed");
 			return new VPPPlanSummaryPage(driver);
+		}
+		
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return null;	
 		}
