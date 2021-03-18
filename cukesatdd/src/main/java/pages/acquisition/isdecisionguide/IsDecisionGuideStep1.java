@@ -603,6 +603,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	//	FirstNameTxt.clear();
 	//	LastNameTxt.clear();
 	//	EmailTxt.clear();
+		driver.navigate().refresh();
 		FirstNameTxt.sendKeys(FirstName);
 		LastNameTxt.sendKeys(LastName);
 		if(DistributionMethod.equalsIgnoreCase("email")){
