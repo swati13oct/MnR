@@ -600,9 +600,9 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		String LastName = memberAttributesMap.get("LastName");
 		String DistributionMethod = memberAttributesMap.get("DistributionMethod");
 		String Email = memberAttributesMap.get("Email");
-		FirstNameTxt.clear();
-		LastNameTxt.clear();
-		EmailTxt.clear();
+	//	FirstNameTxt.clear();
+	//	LastNameTxt.clear();
+	//	EmailTxt.clear();
 		FirstNameTxt.sendKeys(FirstName);
 		LastNameTxt.sendKeys(LastName);
 		if(DistributionMethod.equalsIgnoreCase("email")){
