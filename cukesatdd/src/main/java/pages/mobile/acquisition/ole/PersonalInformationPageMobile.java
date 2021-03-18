@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -206,32 +207,49 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
 
-		sendkeysNew(firstNameField, FirstName);
-		sendkeysNew(lastNameField, LastName);
-
-		sendkeys(DOBtxtFld, DOB);
+		firstNameField.sendKeys(Keys.TAB);
+		
+		jsSendkeys(firstNameField, FirstName);
+		
+		
+		
+		scrollToView(lastNameField);
+		
+		jsSendkeys(lastNameField, LastName);
+		
+		
+		jsSendkeys(DOBtxtFld, DOB);
 		if (Gender.contains("Male")) {
-			// GenderSelectMale.click();
+		//	scrollToView(GenderSelectMale);
 			jsClickNew(GenderSelectMale);
 		} else {
-			// GenderSelectFemale.click();
+			
 			jsClickNew(GenderSelectFemale);
 		}
-		sendkeys(PermanentAdd_Street, Perm_Street);
-		// sendkeys(PermanentAdd_Aptno,Perm_Aptno);
-		sendkeys(PermanentAdd_City, Perm_city);
+		
+	
+		jsSendkeys(PermanentAdd_Street, Perm_Street);
+		
+		
+		jsSendkeys(PermanentAdd_City, Perm_city);
 		System.out.println("Mailing Question : " + MailingQuestion);
 		if (MailingQuestion.equalsIgnoreCase("no")) {
+			
+		
 			jsClickNew(SameMailingAddressNo);
-			// CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
-			sendkeysNew(MailingAdd_Street, Mailing_Street);
-			// sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
-			sendkeys(MailingAdd_City, Mailing_City);
+			
+			jsSendkeys(MailingAdd_Street, Mailing_Street);
+			
+			jsSendkeys(MailingAdd_City, Mailing_City);
+			//scrollToView(MailingAdd_State_DropDown);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
-			sendkeysNew(MailingAdd_Zip, Mailing_Zip);
+			
+			
+			jsSendkeys(MailingAdd_Zip, Mailing_Zip);
 		}
-		sendkeys(Email, EmailAddress);
+		
+		jsSendkeys(Email, EmailAddress);
 
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
