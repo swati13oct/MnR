@@ -690,7 +690,6 @@ public class DrugSummaryPage extends UhcDriver {
 				&& validateNew(nextBtn)) {
 			return new DrugSummaryPage(driver);
 		}
-
 		return null;
 	}
 
