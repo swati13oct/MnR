@@ -226,10 +226,16 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//img[@class='uhc-modal__close']/parent::button")
 	private WebElement modalClose;
 	
+	@FindBy(xpath = "(//a[text()='Sign Out'])[2]")
+	private WebElement lnkSignOut;
+	
+	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public static WebElement proactiveChatExitBtn;
+	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-
+		handleChatPopup();
 		openAndValidate();
 	}
 
@@ -580,8 +586,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
-
+			CommonUtility.waitForPageLoadNew(driver, lnkSignOut, 15);
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
@@ -1082,6 +1087,18 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
 			Assert.assertTrue(importLnk.isDisplayed());
+		}
+	}
+	
+	public void handleChatPopup() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+		try {
+			if (proactiveChatExitBtn.isDisplayed()) {
+				jsClickNew(proactiveChatExitBtn);
+				System.out.println("Clicked Exit button on chat");
+			}
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
 		}
 	}
 }

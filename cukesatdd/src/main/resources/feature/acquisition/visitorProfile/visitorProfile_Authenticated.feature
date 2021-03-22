@@ -198,13 +198,13 @@ Feature: 1.08. UAT - Visitor profile Authenticated
 
     @VisitorProfile_AARP
     Examples: 
-      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
-      | AARP | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
+      | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
-      | UHC  | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
+      | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @prePopulateEmailFieldPlanDetailAuthenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan detail page
@@ -224,13 +224,13 @@ Feature: 1.08. UAT - Visitor profile Authenticated
 
     @VisitorProfile_AARP
     Examples: 
-      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
-      | AARP | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
+      | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
-      | UHC  | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
+      | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
   @prePopulateEmailFieldPlanCompareAuthenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan compare page
@@ -252,10 +252,10 @@ Feature: 1.08. UAT - Visitor profile Authenticated
 
     @VisitorProfile_AARP
     Examples: 
-      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
-      | AARP | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
+      | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
     @VisitorProfile_UHC
     Examples: 
-      | site | state   | zipcode | isMultutiCounty | county             | userName              | password   | plantype | planname                                       |
-      | UHC  | Alabama |   90210 | NO              | Los Angeles County | priyaruth@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Freedom Plus (HMO-POS) |
+      | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
+      | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
