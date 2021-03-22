@@ -598,7 +598,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "msVppZipCode")
 	private WebElement medSuppZipCode;
-
+	
+	@FindBy(xpath = "//input[@id='msVppZipCode']")
+	private WebElement medSuppZipCode1;
+	
+	
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
 	private WebElement viewPlansBtnMedSupp;
 
@@ -881,7 +885,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
 	private WebElement savePlanButton;
 	
-	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
+	//@FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
+	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[1]")
 	private WebElement close;
 
 
@@ -5508,18 +5513,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		Thread.sleep(2000);
 		
-		String zip = "90202";
-		String dob = "11/13/1940";
+		String zip = "90210";
+		String dob = "11/01/1951";
 		
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		
 		System.out.println("Validating zip code is editable----------");
-		medSuppZipCode.clear();
-		medSuppZipCode.sendKeys(zip);
-		medSuppZipCode.sendKeys(Keys.TAB);
+		medSuppZipCode1.clear();
+		medSuppZipCode1.sendKeys(zip);
+		medSuppZipCode1.sendKeys(Keys.TAB);
 		Thread.sleep(2000);
-		String actualzip = medSuppZipCode.getAttribute("value");
+		String actualzip = medSuppZipCode1.getAttribute("value");
 		flag = actualzip.equalsIgnoreCase(zip);
 		if(flag) {
 			System.out.println("---------zip code is editable----------");
