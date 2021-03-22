@@ -42,7 +42,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
     Then user clicks on Keep Using This Pharmacy link on change pharmacy modal
-    //And verify DCE NBA is displayed on drug summary page
+    #And verify DCE NBA is displayed on drug summary page
     Then user saves plan as favorite on drug summary page AARP site
       | Test Plans | <testPlans> |
     Then user save PDP plan as favorite on drug summary page AARP site
