@@ -1252,6 +1252,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentBtn)) {
@@ -2920,7 +2921,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		// driver.navigate().refresh();
-		if (MRScenario.browsername.equalsIgnoreCase("Safari")) { // Adding because Safari 13 fails to locate element
+		if (MRScenario.browserName.equalsIgnoreCase("Safari")) { // Adding because Safari 13 fails to locate element
 																	// after navigate back
 			driver.navigate().refresh();
 			sleepBySec(2);
@@ -4206,7 +4207,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		// Added refresh and wait as elements are not located in Safari 13 browser after
 		// using navigate back
-		if (MRScenario.browsername.equalsIgnoreCase("Safari")) {
+		if (MRScenario.browserName.equalsIgnoreCase("Safari")) {
 			// driver.navigate().refresh();
 			waitForPageLoadSafari();
 		}
