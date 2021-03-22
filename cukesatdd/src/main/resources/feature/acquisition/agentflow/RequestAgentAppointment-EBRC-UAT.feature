@@ -44,7 +44,7 @@ Scenario Outline: <scenario> Verify request an appointment with an agent flow fo
 	Then the user fills the form out and submits the agent appointment application
 	| Zipcode    | <zipcode>   |
 	
-	@agentFlowEBRCBlayer @UATRegression
+	#@agentFlowEBRCBlayer @UATRegression
 	Examples: 
 	| scenario           | zipcode    | site|
 	| E2E Scenario 3_UMS |  90002     |  UHC|
@@ -58,7 +58,7 @@ Scenario Outline: <scenario> Verify request an appointment with an agent flow fo
 	Then the user fills the form out and submits the agent appointment application
 	| Zipcode    | <zipcode>   |
 
-	@agentFlowEBRCUlayer @UATRegression
+	#@agentFlowEBRCUlayer @UATRegression
 	Examples: 
 	| scenario           | zipcode    | site|
 	| E2E Scenario 3_AMP |  90002     |  AARP|

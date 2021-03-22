@@ -70,10 +70,11 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHea')]")
 	//@FindBy(xpath = "//a[@href='https://www.aarpmedicareplans.com/shop/medicare-advantage-plans.html']")
 	//@FindBy(xpath = "//h3[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
-
-	//@FindBy(xpath = "(//h3//span[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'Shop AARP Medicare Advantage Plans from UnitedHealthcare')])[1]")
-
-	@FindBy(xpath = "//*[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+    //@FindBy(xpath = "(//h3//span[contains(text(),'AARP Medicare Advantage (Part C) Plans | UnitedHealthcare') or contains(text(),'Shop AARP Medicare Advantage Plans from UnitedHealthcare')])[1]")
+    //@FindBy(xpath = "//*[contains(text(),'AARP Medicare Plans from UnitedHealthcare')]")
+	
+	@FindBy(xpath = "//h3[contains(text(),'Shop AARP Medicare Advantage Plans from UnitedHealthcare')]")
+	
 	public WebElement AARPSearchLinkfromGoogle_alternative;
 
 	//@FindBy(xpath = "(//a[contains(@href,'medicaresolutions')])[3]")
