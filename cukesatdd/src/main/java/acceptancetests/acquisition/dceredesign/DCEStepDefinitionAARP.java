@@ -1228,7 +1228,6 @@ public class DCEStepDefinitionAARP {
 	public void user_verify_change_pharmacy_modal_in_AARP() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.validateSelectPharmacyPage();
-		drugSummaryPage.clickKeepUsingPharmacyLink();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
