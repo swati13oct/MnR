@@ -1726,8 +1726,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsMouseOver(ourPlansHoverLink);
 		MobileMenuShopTool();
 		scrollToView(providerSearchFromGlobalHeader);
-		//providerSearchFromGlobalHeader.click();
-
+		// providerSearchFromGlobalHeader.click();
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
 
@@ -2259,26 +2258,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	//
 
 	public void validateSubNavShopPlanLinks() {
-		CheckPageLoad();
-		// CheckiPerseptions();
-
-		// waitforElement(ShopForaplan);
+		pageloadcomplete();
 
 		MobileMenuShopTool();
 
-		// MobileMenuMain();
-		// scrollToView(ShopForaplan);
-		// validateNew(ShopForaplan, 5);
-		// if (ShopForaplan.isDisplayed()) {
-		// Actions actions = new Actions(driver);
-		// actions.moveToElement(ShopForaplan);
-		// actions.build().perform();
-		// System.out.println("Hover over Shop for a Plan completed");
-		//
-		// //
-		// waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
-		// // System.out.println("Submit button is displayed");
-		// }
 		WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
 		WebElement FindPlansBtn = driver.findElement(By.xpath("//button[@dtmid='acq_top_nav']"));
 		WebElement RequestMoreInfoLink = driver
@@ -2337,7 +2320,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
 		}
 
-		//MobileMenuBackBtn.click();
+		// MobileMenuBackBtn.click();
 		jsClickNew(MobileMenuBackBtn);
 
 	}
@@ -2360,6 +2343,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// actions.build().perform();
 		// System.out.println("Hover over Learn about Medicare completed");
 		// }
+		pageloadcomplete();
 		WebElement EligibilityTxt = driver.findElement(
 				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-eligibility')]"));
 		WebElement ChoicesBtn = driver.findElement(By.xpath(
@@ -2553,7 +2537,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
 		MobileMenuAccessDCE();
 		validateNew(getStarted);
-		//jsClickNew(getStarted);
+		// jsClickNew(getStarted);
 
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
@@ -2786,7 +2770,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(learnAboutMedicareLink);
-		//validateNew(viewAllDisclaimerInformationLink, 20);
+		// validateNew(viewAllDisclaimerInformationLink, 20);
 
 	}
 
@@ -2904,8 +2888,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validatevisitorprofile() {
 		pageloadcomplete();
 
-		
-
 		if (visitorprofileicon.isDisplayed()) {
 			scrollToView(visitorprofileicon);
 			Actions actions = new Actions(driver);
@@ -2914,19 +2896,20 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			// visitorprofileicon.click();
 			System.out.println("Hover over visitor profile completed");
 		}
-	
+
 		WebElement CreateProfile = driver.findElement(By.xpath("//h3[@id='guest-profile']"));
-		WebElement VPSignIn = driver.findElement(By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
-		
+		WebElement VPSignIn = driver.findElement(
+				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
+
 		jsClickNew(visitorprofileicon);
-		
+
 		if (driver.getCurrentUrl().contains("profile")) {
 			Assert.assertTrue(true);
 			System.out.println("Visitor Profile Page opens successsfully");
 		} else {
 			Assert.fail("Visitor Profile page is not opening up");
 		}
-	
+
 	}
 
 	public void validateLogo() {
