@@ -110,17 +110,14 @@ public class GlobalTearDown {
 	/*@After
 	public void tearDown(Scenario scenario) 
 	//{
-
 		if (null != getLoginScenario() && null != getLoginScenario().getBean(CommonConstants.WEBDRIVER)) {
 			//To get the report embedded in the report
 			getLoginScenario().CaptureScreenshot(scenario);
-
 			// Clean up the existing webdriver.
 			getLoginScenario().nullifyWebDriverNew();
 		} else {
 			Assert.fail("Screenshot not captured and webdriver not quitted...");
     }
-
 	}*/
 
 }

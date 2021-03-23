@@ -23,6 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
@@ -2815,7 +2816,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
 			WebDriverWait d = new WebDriverWait(driver, 20);
-			// d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
@@ -2877,7 +2878,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ listOfAppearedSavedText.size() + "'", listOfAppearedSavedText.size() == expMatch);
 		}
 	}
-
+	
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String planTypePath = "";
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
@@ -4896,7 +4897,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]"
 					+ "//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
-			mobileswipeHorizantal("50", true);
+			//mobileswipeHorizantal("50", true);
 			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
 			scrollToView(MAmoreDetailsLink);
 
@@ -4907,7 +4908,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			// CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			mobileswipeHorizantal("50", true);
+			//mobileswipeHorizantal("50", true);
 			scrollToView(PDPmoreDetailsLink);
 			// PDPmoreDetailsLink.click();
 			jsClickNew(PDPmoreDetailsLink);
@@ -4917,7 +4918,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
 			// CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			mobileswipeHorizantal("50", true);
+			//mobileswipeHorizantal("50", true);
 			scrollToView(SNPmoreDetailsLink);
 			// SNPmoreDetailsLink.click();
 			jsClickNew(SNPmoreDetailsLink);
