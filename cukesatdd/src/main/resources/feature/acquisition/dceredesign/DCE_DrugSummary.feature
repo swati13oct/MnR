@@ -41,9 +41,9 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user clicks on change pharmacy link on alert message from plan card on drug summary page
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
-    Then user clicks on Keep Using This Pharmacy link on change pharmacy modal
+    Then the user selects Mail Pharmacy and returns to DCE Summary page
     #And verify DCE NBA is displayed on drug summary page
-    Then user saves plan as favorite on drug summary page AARP site
+    Then user saves MAPD plan as favorite on drug summary page AARP site
       | Test Plans | <testPlans> |
     Then user save PDP plan as favorite on drug summary page AARP site
       | PDP Plans | <pdptestPlans> |
@@ -57,13 +57,13 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
     @dce_DrugSummary_Page_AARP
     Examples: 
-      | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                           | pdptestPlans                    | snptestPlans                               |
-      | AARP |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Prime (HMO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
+      | AARP |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
     @dce_DrugSummary_Page_UHC
     Examples: 
-      | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                           | pdptestPlans                    | snptestPlans                               |
-      | UHC  |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Prime (HMO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
+      | UHC  |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   ############# END - DCE Summary Regression Scenario #################
   
