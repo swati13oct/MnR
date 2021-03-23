@@ -803,9 +803,10 @@ public class VisitorProfilePage extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
-			System.out.println(plan);
+			System.out.println("Checking Saved Plan on VP for : "+plan);
 			WebElement addedPlan = driver
-					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+					.findElement(By.xpath("//*[contains(@dtmid,'acq_visitor_profile') and contains(@dtmname,'"+ plan +"')]"));
+			validateNew(addedPlan);
 			/*
 			 * System.out.println(driver.findElement(By.xpath(
 			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
@@ -823,10 +824,11 @@ public class VisitorProfilePage extends UhcDriver {
 			 * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 			 * + plan + "')]/following::button[1]")) .isDisplayed());
 			 */
-			Assert.assertTrue(driver
+/*			Assert.assertTrue(driver
 					.findElement(By.xpath(
 							"//*[contains(@id,'planName') and contains(text(),'" + plan + "')]/./following::button[1]"))
 					.isDisplayed());
+*/			
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}
