@@ -75,16 +75,16 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	@FindBy(css = "#errorMessage>span:nth-child(2)")
 	private WebElement errorMessage;
 	
-	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-17-input']>span:nth-child(1) .checkbox-check")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-checkbox.checkbox-checked label>span:nth-child(1)")
 	private WebElement checkedTravelWithinOption;
 	
-	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-18-input']>span:nth-child(1) .checkbox-check")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-checkbox.checkbox-checked label>span:nth-child(1)")
 	private WebElement checkedTravelOutsideOption;
 	
-	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-19-input']>span:nth-child(1) .checkbox-check")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-checkbox.checkbox-checked label>span:nth-child(1)")
 	private WebElement checkedTravelRegularOption;
 	
-	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-20-input']>span:nth-child(1) .checkbox-check")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(5)>uhc-checkbox.checkbox-checked label>span:nth-child(1)")
 	private WebElement checkedTravelNoneOption;
 
 
@@ -176,14 +176,19 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	}
 	
 	public void edit_travel(String options) {
-		if(checkedTravelWithinOption.isDisplayed())
-			jsClickNew(travelWithin);
-		else if(checkedTravelOutsideOption.isDisplayed())
+		if(validate(checkedTravelWithinOption, 20)) {
+			validate(travelWithin, 30);
+			jsClickNew(travelWithin);	
+		}else if(validate(checkedTravelOutsideOption, 20)) {
+			validate(travelAnotherpart, 30);
 			jsClickNew(travelAnotherpart);
-		else if(checkedTravelRegularOption.isDisplayed())
-			jsClickNew(travelPrimary);
-		else if(checkedTravelNoneOption.isDisplayed())
+		}else if(validate(checkedTravelRegularOption, 20)) {
+			validate(travelPrimary, 30);
+			jsClickNew(travelPrimary);	
+		}else if(validate(checkedTravelNoneOption, 20)) {
+			validate(travelNone, 30);
 			jsClickNew(travelNone);
+		}
 		
 		String snpoptions[] = options.split(",");
 		for(String option:snpoptions) {
