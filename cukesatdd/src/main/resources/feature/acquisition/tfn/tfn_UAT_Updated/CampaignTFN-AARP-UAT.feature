@@ -2,7 +2,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 
  
  #######################Script 1: Direct traffic########################################
-   @Scenario_1_2_DirectTraffic_UAT1 @UATRegression
+   @Scenario_1_2_DirectTraffic_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
    Given the user is on medicare acquisition site landing page
       | Site | <site> |
