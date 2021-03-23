@@ -168,6 +168,9 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
       | NotCoveredDrug | <drug6> |
     And the user validates link to Drug Summary Page
+    And user should verify the Extra help on SNP plan type
+    And user click on View Drug Pricing Modal
+    And user should verify the drug extra qualification in drug pricing popup
     Then the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page
       | Plan Name | <newplanname> |
     Then the user selects View Drug details for following plantype and PlanName
@@ -326,6 +329,9 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user Captures Drug costs on Drug Details Page
     And the user compares drug costs for drug details and drug summary pages
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
+    And verify the default tab displayed on VPP details page
+      | TabName | <tabName> |
+    Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
     Then the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page
     Then the user click on drug cost estimator on vpp plan detail page in AARP
     Then the user validates link to Drug Summary Page
