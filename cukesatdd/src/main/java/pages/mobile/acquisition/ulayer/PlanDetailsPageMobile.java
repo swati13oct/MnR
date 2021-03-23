@@ -544,7 +544,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	//
-	public pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile navigateToDCEThroughPlanCost() {
+	public DrugCostEstimatorPageMobile navigateToDCEThroughPlanCost() {
 
 		try {
 			Thread.sleep(2000);
@@ -563,7 +563,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (currentUrl().contains("/estimate-drug-costs.html"))
-			return new pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 

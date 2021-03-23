@@ -22,7 +22,7 @@ import io.appium.java_client.AppiumDriver;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
-import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 
 public class ClickToCallStepDefinition {
 

@@ -33,6 +33,7 @@ import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
 
 /**
  * @author gumeshna
@@ -440,7 +441,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-	public DrugCostEstimatorPage navigateToDCE() {
+	public DrugCostEstimatorPageMobile navigateToDCE() {
 
 		try {
 			Thread.sleep(2000);
@@ -459,7 +460,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (currentUrl().contains("/estimate-drug-costs.html"))
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 	

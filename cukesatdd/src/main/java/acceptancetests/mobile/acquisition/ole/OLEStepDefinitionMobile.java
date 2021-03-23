@@ -24,7 +24,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
+import pages.mobile.acquisition.ulayer.PlanComparePageMobile;
 import pages.mobile.acquisition.ole.AuthorizationPageMobile;
 import pages.mobile.acquisition.ole.CancelOLEModalMobile;
 import pages.mobile.acquisition.ole.CoverageInformationPageMobile;

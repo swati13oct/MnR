@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mobile.acquisition.bluelayer;
+package pages.mobile.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -28,14 +28,16 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import org.testng.Assert;
 
-import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
-import pages.mobile.acquisition.bluelayer.AgentsAndBrokersPageMobile;
-import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
-import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
+import pages.mobile.acquisition.ulayer.AboutUsPageMobile;
+import pages.mobile.acquisition.ulayer.AgentsAndBrokersPageMobile;
+import pages.mobile.acquisition.ulayer.ContactUsUmsPageMobile;
+import pages.mobile.acquisition.ulayer.DisclaimersPageMobile;
+import pages.mobile.acquisition.ulayer.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.commonpages.EnterZipCodePage;
 import pages.mobile.acquisition.commonpages.PageTitleConstants;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
+import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
+import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 import pages.mobile.acquisition.commonpages.keywordSearchAARP;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
@@ -54,6 +56,7 @@ import pages.mobile.acquisition.ole.WelcomePageMobile;
  */
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
+	String CallSamPopupTitle = "Need Help? Call us.";
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	private WebElement zipCodeField;
 
@@ -281,6 +284,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
 	private WebElement lnkLearnAboutMedicare;
 
+	@FindBy(xpath = "//*[@id='sam-call-modal']//h3[@id='sam-call-modal__title']")
+	private WebElement callSamPopupTitle;
+
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
@@ -360,6 +366,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
 	private WebElement chatsam;
 
+	String ChatSam = "Chat with a Licensed Insurance Agent";
+	
+	@FindBy(xpath = "//*[@id='sam-button--chat']/div//a[@class='sam__button__text']")
+	private WebElement chatSamTooltip;
+	
 	@FindBy(xpath = "//div[@class='sam']")
 	private WebElement samdiv;
 
@@ -642,6 +653,29 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
+	
+	public AcquisitionHomePageMobile verifyChatpopupOnTablet() {
+		chatsam.click();
+		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
+		return null;
+	}
+	public AcquisitionHomePageMobile validateChatSamContentOnTablet() throws InterruptedException {
+		Actions action = new Actions(driver);
+		action.moveToElement(chatsam).perform();
+		String toolTipText = chatSamTooltip.getText();
+		System.out.println("====================================================================");
+		System.out.println(toolTipText);
+		System.out.println("====================================================================");
+
+		if (ChatSam.equalsIgnoreCase(toolTipText)) {
+			System.out.println(
+					"Chat sticky action menu roll out and contain the text Chat with a Licensed Insurance Agent");
+			return new AcquisitionHomePageMobile(driver);
+		} else
+			System.out.println(
+					"No Chat sticky action menu didn't roll out and doesn't contain the text Chat with a Licensed Insurance Agent");
+		return null;
+	}
 
 	public void openAndValidate(String siteOrPage, String testharnessurl) {
 		String testharurl = "content/" + testharnessurl + "testharnesspage.html";
@@ -715,6 +749,22 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 	}
+	
+	public AcquisitionHomePageMobile validateChatSamOnTablet() throws InterruptedException {
+		boolean present;
+		try {
+			validateNew(chatsam);
+			present = true;
+		} catch (NoSuchElementException e) {
+			present = false;
+		}
+		if (present) {
+			System.out.println("@@@@@@@@@ Able to find Chat widget @@@@@@@@@");
+			return new AcquisitionHomePageMobile(driver);
+		} else
+			System.out.println("@@@@@@@@@ No Chat widget @@@@@@@@@");
+		return null;
+	}
 	// public AcquisitionHomePageMobile(WebDriver driver, boolean alreadyOnSite) {
 	// super(driver);
 	// PageFactory.initElements(driver, this);
@@ -737,6 +787,67 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else
 			testSiteUrl = AARP_ACQISITION_PAGE_URL;
 		return testSiteUrl;
+	}
+
+	public void validateTFN(String tfnXpath) {
+
+		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
+		validateNew(TFNelement, 45);
+		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
+			System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
+			scrollToView(TFNelement);
+			jsClickMobile(TFNelement);
+			System.out.println("@@@@@@@@@@@@@@@ TFN Clicked @@@@@@@@@@@@@@@");
+			threadsleep(3000);
+			verifyTFNPopUp(TFNelement);
+		} else {
+			org.testng.Assert.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
+		}
+
+	}
+	
+	public void verifyTFNPopUp(WebElement TFNelement) {
+		Alert alert;
+		try {
+			alert = driver.switchTo().alert();
+			System.out.println("Alert message : " + alert.getText());
+			String TFN = driver.switchTo().alert().getText().replace(" (", "-").replace(") ", "-");
+			System.out.println(TFN);
+			if (TFN.contains(TFNelement.getText())) {
+				System.out.println("The Call Alert is displayed with correct TFN : VALIDATION PASSED");
+				alert.dismiss();
+			} else {
+
+				System.out.println("The Call Alert is displayed with INCORRECT TFN : Validation FAILED");
+				alert.dismiss();
+			}
+
+		} catch (Exception e) {
+
+			System.out.println("TFN Call pop-up NOT Displayed");
+		}
+	}
+
+	public AcquisitionHomePageMobile validateCallpopupOnTablet() throws InterruptedException {
+		boolean present;
+		callsam.click();
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+		// System.out.println(CallSamTFN.getText());
+		String toolTipText = callSamPopupTitle.getText();
+		try {
+			validateNew(callSamPopup);
+		} catch (NoSuchElementException e) {
+			System.out.println("Call popup not displayed");
+		}
+		CallSamTFNClose.click();
+		present = validateNew(callsam);
+		if (present && (CallSamPopupTitle.equalsIgnoreCase(toolTipText))) {
+			System.out.println("@@@@@@@@@ Able to find TFN widget @@@@@@@@@");
+			return new AcquisitionHomePageMobile(driver);
+		} else
+			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
+		return null;
 	}
 
 	public void openAndValidate(String site) {

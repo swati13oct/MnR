@@ -28,8 +28,8 @@ import io.appium.java_client.AppiumDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
-import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
+import pages.mobile.acquisition.ulayer.ComparePlansPageBlayerMobile;
+import pages.mobile.acquisition.ulayer.PlanComparePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -43,7 +43,7 @@ import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
 import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ulayer.VisitorProfileTestHarnessPageMobile;
-import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 
 /**
  * Functionality: VPP UHC site

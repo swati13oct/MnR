@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.bluelayer;
+package pages.mobile.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

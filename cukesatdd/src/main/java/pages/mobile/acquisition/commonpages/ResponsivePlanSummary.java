@@ -17,7 +17,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
+import pages.mobile.acquisition.ulayer.PlanComparePageMobile;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidgetMobile;
 import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPageMobile;
 import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidgetMobile;
