@@ -1183,18 +1183,21 @@ public void validateUIAPIRankingPlans() {
 	List<String> maAPIRankings = getAPIPlansRanking(rankingJSON,"MA");
 	if(maAPIRankings.size()>0) {
 	validate(MA1stPlanName, 60);
+	click_ViewPlanLink(MAViewPlansLink);
 	verifyAPIRankings(MAPlansId,maAPIRankings);
 	driver.navigate().refresh();
 	plansLoader();
 	}
 	List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON,"PDP");
 	validate(PDP1stPlanName, 60);
+	click_ViewPlanLink(PDPViewPlansLink);
 	verifyAPIRankings(PDPPlansId,pdpAPIRankings);
 	driver.navigate().refresh();
 	plansLoader();
 	List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON,"SNP");
 	if(snpAPIRankings.size()>0) {
 	validate(SNP1stPlanName, 60);
+	click_ViewPlanLink(SNPViewPlansLink);
 	verifyAPIRankings(SNPPlansId,snpAPIRankings);
 	}
 }
@@ -1878,6 +1881,18 @@ public String verifyplanNameCompare(WebElement plan,WebElement planCompare) {
     planCompare.click();
     pageloadcomplete();
     return exceptedplanName;
+}
+
+public boolean click_ViewPlanLink(WebElement plantype) {
+	boolean viewlink_presents = false;
+	System.out.println("Checking viewlink Status...");
+	if(validate(plantype, 20)) {
+		threadsleep(1000);
+		jsClickNew(plantype);
+		threadsleep(1000);
+		viewlink_presents = true;
+	}
+	return viewlink_presents;
 }
 
 }

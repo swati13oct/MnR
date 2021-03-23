@@ -668,8 +668,10 @@ public class MRScenario {
 			}
 			return props;
 		} else {
-
-			if (environment.contains("stage") || environment.equals("stage-aarp")
+			
+			if (environment.contains("stage-0"))
+				domain = "ocp-elr-dmz-nonprod.optum.com";
+			else if (environment.contains("stage") || environment.equals("stage-aarp")
 					|| environment.equals("offline-stage-aarp"))
 				domain = "uhc.com";
 			else if (environment.contains("mnr-acq-ci") || environment.equals("team-atest")

@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEBlayerPCPFutureMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEBlayerPCPFutureMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, 
-features = { "src/main/resources/feature/mobile/acquisition/ole" }, plugin = {
+features = { "src/main/resources/feature/mobile/acquisition/ole/oleFuture" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEBlayerPCPFutureMobile.json" }, 
 tags = { "@MA_OLE_UHC_PCP_Future" }, dryRun=false)
 

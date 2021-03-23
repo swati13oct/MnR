@@ -598,7 +598,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "msVppZipCode")
 	private WebElement medSuppZipCode;
-
+	
+	@FindBy(xpath = "//input[@id='msVppZipCode']")
+	private WebElement medSuppZipCode1;
+	
+	
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
 	private WebElement viewPlansBtnMedSupp;
 
@@ -881,7 +885,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
 	private WebElement savePlanButton;
 	
-	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
+	//@FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
+	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[1]")
 	private WebElement close;
 
 
@@ -956,7 +961,54 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'drug-list-title') and contains(@aria-expanded,'true')]")
 	private WebElement expandedDruglistPlanCard;
+	
+	@FindBy(id = "change-location")
+	private WebElement changeLocationBtn;
 
+	@FindBy(xpath = "//div[@class='change-zip-link']//a[@class='search-by-address']")
+	private WebElement searchByAddressButton;
+
+	@FindBy(xpath = "//input[@id='address']")
+	private WebElement addressInput;
+
+	@FindBy(xpath = "//input[@id='city']")
+	private WebElement cityInput;
+
+	@FindBys(value = { @FindBy(xpath = "//select[@id='statedrpdwn']/option") })
+	private List<WebElement> stateDropDownValues;
+
+	@FindBy(xpath = "//button[@class='cta-button zip-lookup-button plan-summary-btn']")
+	private WebElement findPlansButton;
+	
+	@FindBy(xpath="//select[@id='statedrpdwn']")
+	private WebElement stateDropDown;
+	
+	@FindBy(xpath="//span[@id='header-number']")
+	private WebElement shoppingCartSaveCount;
+	
+	@FindBy(xpath="//span[contains(text(),'View Saved Plans')]")
+	private WebElement savedPlansPopup;
+	
+	@FindBy(xpath="//button[@id='pop-btn-1']")
+	private WebElement savedPlansContinueShoppingButton;
+	
+	@FindBy(xpath="(//span[@class='view--less'])[1]")
+	private WebElement viewLessLink;
+	
+	@FindBy(xpath="(//span[@class='view--more'])[1]")
+	private WebElement viewMoreLink;
+	
+	@FindBy(xpath="(//*[contains(text(),' 	View Plan Details')])[1]")
+	private WebElement viewPlanDetailsLink;
+	
+	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+	private WebElement RightRail_FindAnAgentMedsupp;
+
+	@FindBy(xpath = "//a[contains(@class,'plan-name-heading')]")
+	List<WebElement> mapdOrSnpPlansNameOnSummary;
+	@FindBy(xpath = "//h3[contains(@id,'favouriteplanSelect')]")
+	List<WebElement> pdpPlansNameOnSummary;
+	
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
 	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
@@ -4607,17 +4659,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		//validateNew(VerificationAgree2);
 	//	jsClickNew(VerificationAgree2);
 	//	jsClickNew(nextButton);
-		if (MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")) {
-			validateNew(VerificationAgree2);
-			Thread.sleep(3000);
-			jsClickNew(VerificationAgree2);
-			jsClickNew(nextButton);
-		} else {
+		/*
+		 * if (MRScenario.environment.equalsIgnoreCase("offline") ||
+		 * MRScenario.environment.equalsIgnoreCase("prod")) {
+		 * validateNew(VerificationAgree2); Thread.sleep(3000);
+		 * jsClickNew(VerificationAgree2); jsClickNew(nextButton); } else {
+		 */
 			validateNew(VerificationAgree3);
 			Thread.sleep(3000);
 			jsClickNew(VerificationAgree3);
 			jsClickNew(nextButton);
-		}
+//		}
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			validateNew(SubmitApplication);
@@ -5446,18 +5498,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		Thread.sleep(2000);
 		
-		String zip = "90202";
-		String dob = "11/13/1940";
+		String zip = "90210";
+		String dob = "11/01/1951";
 		
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		
 		System.out.println("Validating zip code is editable----------");
-		medSuppZipCode.clear();
-		medSuppZipCode.sendKeys(zip);
-		medSuppZipCode.sendKeys(Keys.TAB);
+		medSuppZipCode1.clear();
+		medSuppZipCode1.sendKeys(zip);
+		medSuppZipCode1.sendKeys(Keys.TAB);
 		Thread.sleep(2000);
-		String actualzip = medSuppZipCode.getAttribute("value");
+		String actualzip = medSuppZipCode1.getAttribute("value");
 		flag = actualzip.equalsIgnoreCase(zip);
 		if(flag) {
 			System.out.println("---------zip code is editable----------");
@@ -6616,9 +6668,6 @@ public IsInsuranceAgent clickOnRequestInsuranceAgent() {
 		return null;
 }
 
-@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
-private WebElement RightRail_FindAnAgentMedsupp;
-
 public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
 
 	validateNew(RightRail_FindAnAgentMedsupp);
@@ -6737,8 +6786,9 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		else
 			return null;
 }
+
 	public void clickOnEmailField() {
-		
+
 		summary_maEmailOption.click();
 	}
 	
@@ -6749,5 +6799,90 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		System.out.println("populatedEmail = "+populatedEmail);
 		Assert.assertEquals(email, populatedEmail);
 	}
-}
 
+	public void clickOnChangeZipCode() {
+		validateNew(changeLocationBtn);
+		changeLocationBtn.click();
+
+	}
+
+	public void enterAddressDetails(String address, String city, String state) {
+		validateNew(searchByAddressButton);
+		searchByAddressButton.click();
+		validateNew(addressInput);
+		sendkeys(addressInput, address);
+		sendkeys(cityInput, city);
+		selectFromDropDownByText(driver,stateDropDown,state.toUpperCase());
+		System.out.println("dropdown value selected");
+	}
+
+	public void searchPlansCounty(String countyName, String ismultiCounty) {
+		findPlansButton.click();
+		CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
+
+		if (ismultiCounty.contains("YES") && validate(countyModal)) {
+			CommonUtility.waitForPageLoad(driver, countyModal, 45);
+			System.out.println("County should be selected : " + countyName);
+			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			CommonUtility.waitForPageLoadNew(driver, vppTop, 35);
+
+		} else {
+			System.out.println("No County to be selected ");
+		}
+	}
+	
+	
+	
+	public void savePlansOnSummaryAndVerifyCountOnCart(String counter,String planType) {
+		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
+		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
+		if (count == 0)
+			for (String index : counter.split(",")) {
+				selectPlanIndexes.add(Integer.parseInt(index));count++;
+			}
+		else
+			for (int i = 0; i < count; i++)
+				selectPlanIndexes.add(i);
+		List<WebElement> allPlans = driver
+				.findElements(By.xpath("(//a[contains(@dtmname,'"+planType+":Favorite') and not(@style)])"));
+		if (allPlans != null) {
+			for (int i : selectPlanIndexes) {
+				jsClickNew(allPlans.get(i));
+				System.out.println(i);
+				if(i==1)
+				{
+					savedPlansContinueShoppingButton.click();
+				}
+			}
+		}
+		Assert.assertEquals("Shopping cart count not updated with save plan count", count,Integer.parseInt(shoppingCartSaveCount.getText()));
+	}
+	
+	public void validateViewMoreAndLessLinks()
+	{
+		viewLessLink.click();
+		System.out.println("view less link clicked");
+		Assert.assertEquals("On click of view less link plan card is not collapsed", 1, driver.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
+		//Assert.assertFalse("view Less link not working properly", viewPlanDetailsLink.isDisplayed());
+		viewMoreLink.click();
+		System.out.println("view More link clicked");
+		Assert.assertEquals("On click of view More link plan card is not collapsed", 0, driver.findElements(By.xpath("//span[@class='view--less']/parent::a[contains(@class,'collapsed')]")).size());
+		
+	}
+
+	public void validatePlanNames(String planType, String planList) {
+		List<String> expectedPlanNames = new ArrayList<String>();
+		List<String> actualPlanNames = new ArrayList<String>();
+		List<WebElement> actualPlanElments;
+		for (String planName : planList.split(",")) {
+			expectedPlanNames.add(planName);
+		}
+		actualPlanElments = planType.equalsIgnoreCase("PDP") ? pdpPlansNameOnSummary : mapdOrSnpPlansNameOnSummary;
+		for (WebElement ele : actualPlanElments) {
+			actualPlanNames.add(ele.getText());
+		}
+		Assert.assertTrue(
+				"Plan listed are not shown correctly expected:" + expectedPlanNames + " Actual: " + actualPlanNames,
+				actualPlanNames.containsAll(expectedPlanNames));
+	}
+}
