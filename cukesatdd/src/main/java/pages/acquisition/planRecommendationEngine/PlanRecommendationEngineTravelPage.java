@@ -176,16 +176,16 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	}
 	
 	public void edit_travel(String options) {
-		if(checkedTravelWithinOption.isDisplayed()) {
+		if(validate(checkedTravelWithinOption, 20)) {
 			validate(travelWithin, 30);
 			jsClickNew(travelWithin);	
-		}else if(checkedTravelOutsideOption.isDisplayed()) {
+		}else if(validate(checkedTravelOutsideOption, 20)) {
 			validate(travelAnotherpart, 30);
 			jsClickNew(travelAnotherpart);
-		}else if(checkedTravelRegularOption.isDisplayed()) {
+		}else if(validate(checkedTravelRegularOption, 20)) {
 			validate(travelPrimary, 30);
 			jsClickNew(travelPrimary);	
-		}else if(checkedTravelNoneOption.isDisplayed()) {
+		}else if(validate(checkedTravelNoneOption, 20)) {
 			validate(travelNone, 30);
 			jsClickNew(travelNone);
 		}

@@ -265,16 +265,16 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	}
 
 	public void edit_specialneeds(String options) {
-		if(checkedSNPDSNPOption.isDisplayed()){
+		if(validate(checkedSNPDSNPOption, 20)){
 			validate(snpMedicaid, 30);
 			jsClickNew(snpMedicaid);
-		}else if(checkedSNPCSNPOption.isDisplayed()){
+		}else if(validate(checkedSNPCSNPOption, 20)){
 			validate(snpConditions, 30);
 			jsClickNew(snpConditions);
-		}else if(checkedSNPISNPOption.isDisplayed()) {
+		}else if(validate(checkedSNPISNPOption, 20)) {
 			validate(snpNursinghome, 30);
 			jsClickNew(snpNursinghome);
-		}else if(checkedSNPNoneOption.isDisplayed()) {
+		}else if(validate(checkedSNPNoneOption, 20)) {
 			validate(snpNone, 30);
 			jsClickNew(snpNone);
 		}
