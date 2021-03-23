@@ -774,10 +774,13 @@ public abstract class UhcDriver {
 	/* logic to simulate hover over functionality */
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		Actions actions = new Actions(driver);
+		/*Actions actions = new Actions(driver);
 		actions.moveToElement(hdrMenuElement);
 		actions.moveToElement(menuDropListItem);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		jsMouseOver(hdrMenuElement);
+		jsMouseOver(menuDropListItem);
+		menuDropListItem.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 
 	}
