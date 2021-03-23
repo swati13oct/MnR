@@ -1721,7 +1721,7 @@ public class DrugDetailsPage extends UhcDriver {
 		Assert.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
 	}
 
-	public void clickEdit() throws InterruptedException {
+	public void vppdetails_clickEditPharmacy() throws InterruptedException {
 		Thread.sleep(6000);
 		validate(prescriptiondrugTab);
 		prescriptiondrugTab.click();
