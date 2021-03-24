@@ -667,9 +667,11 @@ public abstract class UhcDriver {
 		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")||driver.getClass().toString().toUpperCase().contains("IOS")||MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("IOS")
+				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
 			mobileSelectOption(dropdownElement, value, true);
-		}else {
+		} else {
 			dropdown.selectByValue(value);
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -772,10 +774,13 @@ public abstract class UhcDriver {
 	/* logic to simulate hover over functionality */
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		Actions actions = new Actions(driver);
+		/*Actions actions = new Actions(driver);
 		actions.moveToElement(hdrMenuElement);
 		actions.moveToElement(menuDropListItem);
-		actions.click().build().perform();
+		actions.click().build().perform();*/
+		jsMouseOver(hdrMenuElement);
+		jsMouseOver(menuDropListItem);
+		menuDropListItem.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 
 	}
@@ -895,8 +900,12 @@ public abstract class UhcDriver {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
 		for (String winHandle : driver.getWindowHandles()) {
-			driver.switchTo().window(winHandle);
+			if(!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+				break;
+			}
 		}
+		threadsleep(2000);
 		WebElement currentSysTimeElement = timeJson;
 		String currentSysTimeStr = currentSysTimeElement.getText();
 		System.out.println("currentSysTimeStr=" + currentSysTimeStr);
@@ -1250,7 +1259,8 @@ public abstract class UhcDriver {
 	 */
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
-		if (MRScenario.browsername.equalsIgnoreCase("Safari")) {
+		if (MRScenario.browserName.equalsIgnoreCase("Safari") &&
+				driver.getClass().getSimpleName().contains("WebDriver")) {
 			// Sets FluentWait Setup
 			List<WebElement> loadingScreen = null;
 			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))

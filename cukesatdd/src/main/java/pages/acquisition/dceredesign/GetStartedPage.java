@@ -134,6 +134,7 @@ public class GetStartedPage extends UhcDriver {
 	public VPPPlanSummaryPage ClickReturnToPlanSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}
