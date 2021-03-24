@@ -226,16 +226,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//img[@class='uhc-modal__close']/parent::button")
 	private WebElement modalClose;
 	
-	@FindBy(xpath = "(//a[text()='Sign Out'])[2]")
-	private WebElement lnkSignOut;
-	
-	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
-	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		handleChatPopup();
+
 		openAndValidate();
 	}
 
@@ -586,7 +580,8 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, lnkSignOut, 15);
+			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
 		}
@@ -808,9 +803,10 @@ public class VisitorProfilePage extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
-			System.out.println(plan);
+			System.out.println("Checking Saved Plan on VP for : "+plan);
 			WebElement addedPlan = driver
-					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+					.findElement(By.xpath("//*[contains(@dtmid,'acq_visitor_profile') and contains(@dtmname,'"+ plan +"')]"));
+			validateNew(addedPlan);
 			/*
 			 * System.out.println(driver.findElement(By.xpath(
 			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
@@ -828,10 +824,11 @@ public class VisitorProfilePage extends UhcDriver {
 			 * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 			 * + plan + "')]/following::button[1]")) .isDisplayed());
 			 */
-			Assert.assertTrue(driver
+/*			Assert.assertTrue(driver
 					.findElement(By.xpath(
 							"//*[contains(@id,'planName') and contains(text(),'" + plan + "')]/./following::button[1]"))
 					.isDisplayed());
+*/			
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}
@@ -1087,18 +1084,6 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
 			Assert.assertTrue(importLnk.isDisplayed());
-		}
-	}
-	
-	public void handleChatPopup() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
-		try {
-			if (proactiveChatExitBtn.isDisplayed()) {
-				jsClickNew(proactiveChatExitBtn);
-				System.out.println("Clicked Exit button on chat");
-			}
-		} catch (Exception e) {
-			System.out.println("Proactive chat popup not displayed");
 		}
 	}
 }

@@ -679,11 +679,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	public void clickBreadCrumb() {
 		breadCrumbLink.click();
+		waitForPageLoadSafari();
 	}
 
 	public void clickReturnToPharamcySearch() {
 		validateNew(returntoPharmacySearch);
 		returntoPharmacySearch.click();
+		waitForPageLoadSafari();
 	}
 
 	

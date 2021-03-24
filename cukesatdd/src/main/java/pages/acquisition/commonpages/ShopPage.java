@@ -428,6 +428,7 @@ public class ShopPage extends UhcDriver {
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(findAProviderBtn);
 		Thread.sleep(4000);
+		waitForPageLoadSafari();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -484,8 +485,8 @@ public class ShopPage extends UhcDriver {
 	
 	public void clickonFindanAgentlinkfromShop(String ExpectedUHCAgentURL ) {
 		
-		validateNew(FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
+		validateNew(FindAnAgent);
 		String parentWindow = driver.getWindowHandle();
 //		FindAnAgent.click();
 		jsClickNew(FindAnAgent);
