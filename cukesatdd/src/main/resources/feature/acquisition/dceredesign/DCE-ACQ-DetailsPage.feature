@@ -169,6 +169,10 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user selects following pharmacy and returns to DCE Details page
       | SelectPharmacy | <SelectPharmacy> |
     Then the user validates Not Covered Pharmacy view for DCE Details Page
+    And the user validates link to Drug Summary Page
+    And user clicks on change pharmacy link on alert message from plan card on drug summary page
+    Then change pharmacy modal should be displayed
+    And user verify change pharmacy modal
 
     @DCE_DrugDetailsCopay_Standard_AARP
     Examples: 
