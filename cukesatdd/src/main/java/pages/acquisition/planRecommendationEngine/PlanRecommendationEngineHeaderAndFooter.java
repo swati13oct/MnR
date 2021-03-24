@@ -736,6 +736,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //		jsClickNew(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerDrugcostLink);
 		threadsleep(2000);
+		waitForPageLoadSafari();
 		validate(drugAddBtn, 30);
 		validate(dceTitle, 30);
 		Assert.assertTrue(dceTitle.getText().contains("Drug Cost Estimator"));
