@@ -133,7 +133,7 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @authenticatedNBAPDPUHC02
     Examples: 
       | site | userName     | password   | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@2 | Password@6 | NO            |   55344 | Hennepin County | PDP      |
+      | UHC  | chargersqa@2 | Password@06 | NO            |   55344 | Hennepin County | PDP      |
 
   @continueEnrollmentNBAMultiplePlan @decRelease
   Scenario Outline: Verify NBA for Continue Enrollment for authenticated Visitor Profile VPP summary page for multiple plan for <plantype> plantype
