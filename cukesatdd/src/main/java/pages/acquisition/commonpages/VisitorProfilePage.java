@@ -26,10 +26,10 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.VPPTestHarnessPage;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -805,7 +805,7 @@ public class VisitorProfilePage extends UhcDriver {
 		for (String plan : listOfTestPlans) {
 			System.out.println("Checking Saved Plan on VP for : "+plan);
 			WebElement addedPlan = driver
-					.findElement(By.xpath("//*[contains(@dtmid,'acq_visitor_profile') and contains(@dtmname,'"+ plan +"')]"));
+					.findElement(By.xpath("//*[contains(@id,'planName') and contains(@dtmname,'" + plan + "')]"));
 			validateNew(addedPlan);
 			/*
 			 * System.out.println(driver.findElement(By.xpath(
