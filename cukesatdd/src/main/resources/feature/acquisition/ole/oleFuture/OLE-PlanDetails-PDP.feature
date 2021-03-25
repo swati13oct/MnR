@@ -1,21 +1,21 @@
 Feature: 1.05.3 OLE common tool flow E2E PDP
 
   #@acquisitionRegression @PDP_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_DNSP_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
-  Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from <site> Acquisition site VPP Plan Summary
-     Given the user is on medicare acquisition site landing page
-    	|Site| <site>|
+  Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from <site> Acquisition site VPP Plan Details Page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | Is Multi County | <isMultutiCounty> |
       | County Name     | <county>          |
-		And the user views the plans of the below plan type
+    And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
-    	|Plan Year	| <planyear>|
-		And the user validates the available plans for selected plan types
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Year | <planyear> |
+    And the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
-    Then the user validates the Plan details on OLE
+    Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
+    Then The User validates the Plan details on OLE page
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
@@ -105,7 +105,7 @@ Feature: 1.05.3 OLE common tool flow E2E PDP
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type
   
   
-  @PDP_OLE_Ulayer_Future
+  @PDP_OLE_Ulayer_Future_PD
     Examples: 
       | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county             | plantype | planName                         | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|middlename|authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|authflag|paymentType|cardno|cardexpirationmonth|cardexpirationyear|
      # | 15522 | PDP-MBI  |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)  | MBI      | MARDI     | HOMRIGHAUS | 2E83G82MM17    | false   |  02012003 |           |                | false  |09141951  | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |Valid |
