@@ -20,12 +20,12 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.commonpages.GetStartedPage;
-import pages.mobile.acquisition.commonpages.IntroductionInformationPage;
-import pages.mobile.acquisition.commonpages.ManageDrugPage;
-import pages.mobile.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.commonpages.PlanInformationPage;
-import pages.mobile.acquisition.commonpages.ProviderSearchPage;
+import pages.mobile.acquisition.ulayer.GetStartedPage;
+import pages.mobile.acquisition.ulayer.IntroductionInformationPageMobile;
+import pages.mobile.acquisition.ulayer.ManageDrugPageMobile;
+//import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.mobile.acquisition.ulayer.PlanInformationPageMobile;
+import pages.mobile.acquisition.ulayer.ProviderSearchPage;
 
 
 public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
@@ -318,7 +318,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 	}
 
 
-	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) { 
+	public IntroductionInformationPageMobile clicksOnEnrollInplanLink(String planName) { 
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
 				if (plan.getText().contains(planName)) {
@@ -340,10 +340,10 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 				break;
 			}
 		}
-			return new IntroductionInformationPage(driver);
+			return new IntroductionInformationPageMobile(driver);
 	}	
 	
-	public PlanInformationPage navigatetoEnrollInplanLink(String planName)
+	public PlanInformationPageMobile navigatetoEnrollInplanLink(String planName)
 	{
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
@@ -364,12 +364,12 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
-			return new PlanInformationPage(driver,planName);
+			return new PlanInformationPageMobile(driver,planName);
 		}
 		
 		return null;
 	}
-	public IntroductionInformationPage navigatetoEnrollInplanLinkpage(String planName)
+	public IntroductionInformationPageMobile navigatetoEnrollInplanLinkpage(String planName)
 	{
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
@@ -390,7 +390,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (driver.getTitle().equalsIgnoreCase(
 				"AARP Medicare Complete Online Application") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)) {
-			return new IntroductionInformationPage(driver);
+			return new IntroductionInformationPageMobile(driver);
 		}
 		
 		return null;
@@ -404,7 +404,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 		return new GetStartedPage(driver);
 	}
 
-    public ManageDrugPage navigateToEditDrugList(String planName) {
+    public ManageDrugPageMobile navigateToEditDrugList(String planName) {
 		
 		if (planName.contains("HMO")) {
 			ElementData elementData = new ElementData("id", "editDrugMA");
@@ -427,7 +427,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 		}
 		CommonUtility.checkPageIsReady(driver);
 		if (currentUrl().contains("manageDrugList")) {
-			return new ManageDrugPage(driver);
+			return new ManageDrugPageMobile(driver);
 		}
 
 		return null;

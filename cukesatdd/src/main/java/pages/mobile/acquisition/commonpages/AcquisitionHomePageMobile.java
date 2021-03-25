@@ -26,6 +26,22 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
+import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
+import pages.mobile.acquisition.ulayer.AgentsnBrokersAARPPageMobile;
+import pages.mobile.acquisition.ulayer.ContactUsAARPPageMobile;
+import pages.mobile.acquisition.ulayer.DisclaimersAARPPageMobile;
+import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.ulayer.KeywordSearchAARPMobile;
+import pages.mobile.acquisition.ulayer.LearnAboutMedicareHomePageMobile;
+import pages.mobile.acquisition.ulayer.MultiCountyModalPageMobile;
+import pages.mobile.acquisition.ulayer.PDPRequestHelpAndInformationPageMobile;
+import pages.mobile.acquisition.ulayer.PageTitleConstantsMobile;
+import pages.mobile.acquisition.ulayer.PrivacyPolicyAARPPageMobile;
+import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
+import pages.mobile.acquisition.ulayer.RequestHelpAndInformationPageMobile;
+import pages.mobile.acquisition.ulayer.ShopforaplanAARPlayerMobile;
+import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
+import pages.mobile.acquisition.ulayer.TermsnConditionsAARPPageMobile;
 
 /**
  * @author pperugu
@@ -762,7 +778,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		if (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
+		if (getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
 		return null;
@@ -1097,14 +1113,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		pharmacylocator.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().toLowerCase()
-				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
+				.contains((PageTitleConstantsMobile.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;
 
 	}
 
-	public PDPRequestHelpAndInformationPage navigateToPDPMoreHelpAndInfo() {
+	public PDPRequestHelpAndInformationPageMobile navigateToPDPMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -1112,14 +1128,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		actions.moveToElement(pdp_moreHelpInfoLink);
 		actions.click().build().perform();
 		if (currentUrl().contains("prescription-drug-plans/request-information.html")) {
-			return new PDPRequestHelpAndInformationPage(driver);
+			return new PDPRequestHelpAndInformationPageMobile(driver);
 		}
 
 		return null;
 
 	}
 
-	public RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
+	public RequestHelpAndInformationPageMobile navigateToMaMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -1129,17 +1145,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validate(requestAgentApptDropdown)) {
-			return new RequestHelpAndInformationPage(driver);
+			return new RequestHelpAndInformationPageMobile(driver);
 		}
 		return null;
 	}
 
-	public AboutUsAARPPage aboutUsFooterClick() {
+	public AboutUsAARPPageMobile aboutUsFooterClick() {
 		validateNew(footerAboutUsLink);
 		footerAboutUsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (getTitle().contains("About UnitedHealthcare")) {
-			return new AboutUsAARPPage(driver);
+			return new AboutUsAARPPageMobile(driver);
 		}
 		return null;
 	}
@@ -1164,65 +1180,65 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 
 	}
 
-	public ContactUsAARPPage contactUsFooterClick() {
+	public ContactUsAARPPageMobile contactUsFooterClick() {
 		validateNew(footerContactUsLink);
 		footerContactUsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("contact-us")) {
-			return new ContactUsAARPPage(driver);
+			return new ContactUsAARPPageMobile(driver);
 		}
 		return null;
 	}
 
-	public SiteMapAARPPage siteMapFooterClick() {
+	public SiteMapAARPPageMobile siteMapFooterClick() {
 		validateNew(footerSiteMapLink);
 		footerSiteMapLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
-			return new SiteMapAARPPage(driver);
+			return new SiteMapAARPPageMobile(driver);
 		}
 		return null;
 	}
 
-	public PrivacyPolicyAARPPage privacypolicyFooterClick() {
+	public PrivacyPolicyAARPPageMobile privacypolicyFooterClick() {
 		validateNew(footerPrivacyPolicyLink);
 		footerPrivacyPolicyLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(privacyHeader);
 		if (driver.getCurrentUrl().contains("privacy-policy.html")) {
-			return new PrivacyPolicyAARPPage(driver);
+			return new PrivacyPolicyAARPPageMobile(driver);
 		}
 		return null;
 	}
 
-	public TermsnConditionsAARPPage termsnconditionsFooterClick() {
+	public TermsnConditionsAARPPageMobile termsnconditionsFooterClick() {
 		validate(footerTermsnConditionsLink);
 		footerTermsnConditionsLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("terms-of-use")) {
-			return new TermsnConditionsAARPPage(driver);
+			return new TermsnConditionsAARPPageMobile(driver);
 		}
 		return null;
 	}
 
-	public DisclaimersAARPPage disclaimersFooterClick() {
+	public DisclaimersAARPPageMobile disclaimersFooterClick() {
 		validate(footerDisclaimersLink);
 		footerDisclaimersLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("disclaimer")) {
-			return new DisclaimersAARPPage(driver);
+			return new DisclaimersAARPPageMobile(driver);
 		}
 		return null;
 	}
 
-	public AgentsnBrokersAARPPage agentsnbrokersFooterClick() {
+	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
 		validate(footerAgentsnBrokersLink);
 		footerAgentsnBrokersLink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(brokerHeader);
 		if (driver.getCurrentUrl().contains("health-insurance-brokers")) {
-			return new AgentsnBrokersAARPPage(driver);
+			return new AgentsnBrokersAARPPageMobile(driver);
 		}
 		return null;
 	}
@@ -1274,12 +1290,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		}
 	}
 
-	public DrugCostEstimatorPage navigateToDCEToolFromHome() throws InterruptedException {
+	public DrugCostEstimatorPageMobile navigateToDCEToolFromHome() throws InterruptedException {
 		validateNew(getStarted);
 		getStarted.click();
 
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 
@@ -1319,14 +1335,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		return null;
 	}
 
-	public MultiCountyModalPage ValidateMultiCOuntyPopUp(String zipcode) {
+	public MultiCountyModalPageMobile ValidateMultiCOuntyPopUp(String zipcode) {
 		CommonUtility.waitForPageLoad(driver, zipCodeField, 30);
 		sendkeys(zipCodeField, zipcode);
 
 		viewPlansButton.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (countyModal.isDisplayed()) {
-			return new MultiCountyModalPage(driver);
+			return new MultiCountyModalPageMobile(driver);
 		}
 		return null;
 	}
@@ -1335,14 +1351,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		return lnkLearnAboutMedicare;
 	}
 
-	public LearnAboutMedicareHomePage openLearnAboutMedicarePage() {
+	public LearnAboutMedicareHomePageMobile openLearnAboutMedicarePage() {
 
 		getLnkLearnAboutMedicare().click();
 		validateNonPresenceOfElement(zipCodeField);
-		return new LearnAboutMedicareHomePage(driver);
+		return new LearnAboutMedicareHomePageMobile(driver);
 	}
 
-	public MultiCountyModalPage SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
+	public MultiCountyModalPageMobile SubNav_ValidateMultiCOuntyPopUp(String zipcode) {
 		hoverourplanslink();
 		validate(OurPlans_zipfield);
 		OurPlans_zipfield.click();
@@ -1351,12 +1367,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		OurPlans_viewPlansButton.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (countyModal.isDisplayed()) {
-			return new MultiCountyModalPage(driver);
+			return new MultiCountyModalPageMobile(driver);
 		}
 		return null;
 	}
 
-	public ProviderSearchPage clicksOnRallyToolFromGlobalHeader() {
+	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
 		Actions action = new Actions(driver);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
@@ -1367,13 +1383,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
-			return new ProviderSearchPage(driver);
+			return new ProviderSearchPageMobile(driver);
 
 		}
 		return null;
 	}
 
-	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
+	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
@@ -1381,24 +1397,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
-			return new ProviderSearchPage(driver);
+			return new ProviderSearchPageMobile(driver);
 
 		}
 		return null;
 	}
 
-	public DrugCostEstimatorPage navigationDrugCostEstimator() {
+	public DrugCostEstimatorPageMobile navigationDrugCostEstimator() {
 		navigateToMenuLinks(ShopForaplan, headerDrugCostEstimatorLink);
 
-		return new DrugCostEstimatorPage(driver);
+		return new DrugCostEstimatorPageMobile(driver);
 	}
 
-	public ShopforaplanAARPlayer Hoveronaplan() throws InterruptedException {
+	public ShopforaplanAARPlayerMobile Hoveronaplan() throws InterruptedException {
 		waitforElement(ShopForaplan);
 		if (ShopForaplan.isDisplayed()) {
 			Actions action = new Actions(driver);
 			action.moveToElement(ShopForaplan).build().perform();
-			return new ShopforaplanAARPlayer(driver);
+			return new ShopforaplanAARPlayerMobile(driver);
 		} else {
 			return null;
 		}
@@ -1493,7 +1509,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		return new VPPPlanSummaryPageMobile(driver);
 	}
 
-	public keywordSearchAARP searchfield() {
+	public KeywordSearchAARPMobile searchfield() {
 		validate(searchfield);
 		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());
 		validate(searchbutton);
@@ -1508,7 +1524,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 			e.printStackTrace();
 		}
 		if (driver.getCurrentUrl().contains("medicare.html?q=medicare"))
-			return new keywordSearchAARP(driver);
+			return new KeywordSearchAARPMobile(driver);
 		return null;
 	}
 
@@ -1610,7 +1626,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		thpharmacyGoButton.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getTitle().toLowerCase()
-				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
+				.contains((PageTitleConstantsMobile.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
 			return new PharmacySearchPage(driver);
 		}
 		return null;

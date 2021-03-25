@@ -18,7 +18,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.Rallytool_Page;
+import pages.mobile.acquisition.ulayer.Rallytool_Page;
 
 /**
  * @author saduri

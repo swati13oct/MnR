@@ -13,7 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import pages.mobile.acquisition.commonpages.PageTitleConstants;
+//import pages.mobile.acquisition.ulayer.PageTitleConstants;
 
 
 /**
@@ -51,7 +51,7 @@ public class AgentsAndBrokersPageMobile extends GlobalWebElementsMobile{
 		validate(footerHomeLink);
 		footerHomeLink.click();
 		validate(footerHomeLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_PLANS_FOR_DIFFERENT_NEEDS)) {
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;

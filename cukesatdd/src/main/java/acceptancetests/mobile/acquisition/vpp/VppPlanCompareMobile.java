@@ -59,7 +59,7 @@ import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
 import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ulayer.VisitorProfileTestHarnessPageMobile;
-import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
 
 /**
  * Functionality: VPP flow for AARP site

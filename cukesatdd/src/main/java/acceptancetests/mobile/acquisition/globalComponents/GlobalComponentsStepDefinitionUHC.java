@@ -20,7 +20,7 @@ import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.EnterZipCodePage;
+import pages.mobile.acquisition.ulayer.EnterZipCodePage;
 import pages.mobile.acquisition.ulayer.TermsnConditionsAARPPageMobile;
 
 /**

@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.mobile.acquisition.commonpages.keywordSearchAARP;
+import pages.mobile.acquisition.ulayer.KeywordSearchAARPMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
@@ -1013,7 +1013,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acquisitionHomePage.searchfield();
-		keywordSearchAARP newkeywordsearchpage = new keywordSearchAARP(acquisitionHomePage.driver);
+		KeywordSearchAARPMobile newkeywordsearchpage = new KeywordSearchAARPMobile(acquisitionHomePage.driver);
 		getLoginScenario().saveBean(PageConstants.Keyword_Search, newkeywordsearchpage);
 	}
 
@@ -1021,7 +1021,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 	public void I_land_on_result_page() {
 		{
 
-			keywordSearchAARP newkeywordsearchpage = (keywordSearchAARP) loginScenario
+			KeywordSearchAARPMobile newkeywordsearchpage = (KeywordSearchAARPMobile) loginScenario
 					.getBean(PageConstants.Keyword_Search);
 			newkeywordsearchpage.url();
 			if (newkeywordsearchpage != null)

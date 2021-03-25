@@ -43,6 +43,10 @@ import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
+import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.ulayer.IntroductionInformationPageMobile;
+import pages.mobile.acquisition.ulayer.MultiCountyModalPageMobile;
+import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
 import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPageMobile;
 
 /**
@@ -743,7 +747,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return new VPPPlanSummaryPageMobile(driver, planType);
 	}
 
-	public ProviderSearchPage clicksOnIsProviderCovered(String planName) {
+	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 
@@ -752,7 +756,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		if (driver.getCurrentUrl().contains("werally")) {
-			return new ProviderSearchPage(driver);
+			return new ProviderSearchPageMobile(driver);
 		}
 		return null;
 	}
@@ -1065,7 +1069,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	}
 
-	public IntroductionInformationPage clicksOnEnrollInplanLink(String planName) {
+	public IntroductionInformationPageMobile clicksOnEnrollInplanLink(String planName) {
 
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlans) {
@@ -1152,7 +1156,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (driver.getCurrentUrl().contains("aarp-medicare-complete-online-application.html")) {
-			return new IntroductionInformationPage(driver);
+			return new IntroductionInformationPageMobile(driver);
 		} else {
 			return null;
 		}
@@ -1315,7 +1319,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return result;
 	}
 
-	public DrugCostEstimatorPage navigateToDCE(String plantype) {
+	public DrugCostEstimatorPageMobile navigateToDCE(String plantype) {
 
 		if (plantype.equals("MA") || plantype.equals("MAPD")) {
 
@@ -1331,7 +1335,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoad(driver, step1, 30);
 		validateNew(step1);
 		if (currentUrl().contains("/drug-cost-estimator"))
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 
 	}
@@ -1589,7 +1593,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public DrugCostEstimatorPage navigateToDCEFromVPP(String plantype, String planName) {
+	public DrugCostEstimatorPageMobile navigateToDCEFromVPP(String plantype, String planName) {
 		if (plantype.equals("MA") || plantype.equals("MAPD")) {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide ng-scope')]/descendant::a[contains(text(),'Enter drug information')]"));
@@ -1600,7 +1604,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 
 		if (currentUrl().contains("/estimate-drug-costs.html#/drug-cost-estimator"))
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 
@@ -1757,7 +1761,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	}
 
-	public MultiCountyModalPage VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
+	public MultiCountyModalPageMobile VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
 		ChangeLocationLink.click();
 		validate(ZipCodeTxtBx);
 		ZipCodeTxtBx.click();
@@ -1767,7 +1771,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		FIndPlansButton.click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		if (countyModal.isDisplayed()) {
-			return new MultiCountyModalPage(driver);
+			return new MultiCountyModalPageMobile(driver);
 		}
 		return null;
 	}
@@ -2190,7 +2194,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			Assert.fail("Tool Tip is not working");
 	}
 
-	public DrugCostEstimatorPage navigatetoDCEPage(String planName) {
+	public DrugCostEstimatorPageMobile navigatetoDCEPage(String planName) {
 		WebElement DCELink = null;
 
 		if (planName.contains("SNP")) {
@@ -2209,13 +2213,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("drug-cost-estimator")) {
 			System.out.println("DCE Page is loaded");
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		} else
 			return null;
 	}
 
 	/* Navigation to DCE for all plan types having a plan name */
-	public DrugCostEstimatorPage navigatetoDCEVPP(String planName) {
+	public DrugCostEstimatorPageMobile navigatetoDCEVPP(String planName) {
 
 		// WebElement dcedropdown
 		// =driver.findElement(By.xpath("//*[contains(text(),'"+planName+"')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,
@@ -2238,7 +2242,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("drug-cost-estimator")) {
 			System.out.println("DCE Page is loaded");
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		} else
 			return null;
 	}

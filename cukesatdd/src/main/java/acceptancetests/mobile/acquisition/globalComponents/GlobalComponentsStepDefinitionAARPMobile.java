@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.mobile.acquisition.commonpages.EnterZipCodePage;
+import pages.mobile.acquisition.ulayer.EnterZipCodePage;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
@@ -399,7 +399,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		// EnterZipCodePageMobile enterZipCodePage= new EnterZipCodePageMobile(driver);
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		EnterZipCodePage enterZipCodePage = aquisitionhomepage.enterZipCode();
+		pages.mobile.acquisition.ulayer.EnterZipCodePage enterZipCodePage = aquisitionhomepage.enterZipCode();
 		enterZipCodePage.validateZipComp(zipCode);
 	}
 

@@ -33,12 +33,12 @@ import pages.mobile.acquisition.ulayer.AgentsAndBrokersPageMobile;
 import pages.mobile.acquisition.ulayer.ContactUsUmsPageMobile;
 import pages.mobile.acquisition.ulayer.DisclaimersPageMobile;
 import pages.mobile.acquisition.ulayer.PrivacyPolicyUmsPageMobile;
-import pages.mobile.acquisition.commonpages.EnterZipCodePage;
-import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.mobile.acquisition.ulayer.EnterZipCodePage;
+//import pages.mobile.acquisition.commonpages.PageTitleConstants;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
-import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
-import pages.mobile.acquisition.commonpages.keywordSearchAARP;
+import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.ulayer.KeywordSearchAARPMobile;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
@@ -2639,7 +2639,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public keywordSearchAARP searchfield() {
+	public KeywordSearchAARPMobile searchfield() {
 		validate(searchfield);
 		System.out.println("search field is seen on AARP site  ==>" + searchfield.isDisplayed());
 		validate(searchbutton);
@@ -2654,9 +2654,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			e.printStackTrace();
 		}
 		if (driver.getCurrentUrl().contains("medicare.html?q=medicare"))
-			return new keywordSearchAARP(driver);
+			return new KeywordSearchAARPMobile(driver);
 		return null;
 	}
+	
+	
+
 
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;

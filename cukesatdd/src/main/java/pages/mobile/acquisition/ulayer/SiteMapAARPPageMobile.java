@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
-import pages.mobile.acquisition.commonpages.Rallytool_Page;
+import pages.mobile.acquisition.ulayer.Rallytool_Page;
 
 /**
  * @author rkodumur

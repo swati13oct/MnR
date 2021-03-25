@@ -31,8 +31,8 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.mobile.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.commonpages.PlanInformationPage;
+import pages.mobile.acquisition.ulayer.PageTitleConstants;
+import pages.mobile.acquisition.ulayer.PlanInformationPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -349,14 +349,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-	public PlanInformationPage navigatetoenrollinplanlink(String planName) {
+	public PlanInformationPageMobile navigatetoenrollinplanlink(String planName) {
 		enrollInPlanBtn.click();
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP)
 				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)
 				|| driver.getTitle().equalsIgnoreCase("Enrollment Information")) {
 			System.out.println("in if");
-			return new PlanInformationPage(driver, planName);
+			return new PlanInformationPageMobile(driver, planName);
 		}
 
 		return null;

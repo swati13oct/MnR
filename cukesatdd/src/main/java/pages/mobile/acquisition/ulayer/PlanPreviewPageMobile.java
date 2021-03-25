@@ -19,8 +19,8 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import pages.mobile.acquisition.commonpages.Rallytool_Page;
-import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.ulayer.Rallytool_Page;
+import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
 
 /**
  * @author pgrover1

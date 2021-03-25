@@ -34,6 +34,9 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.ulayer.PageTitleConstantsMobile;
+import pages.mobile.acquisition.ulayer.PlanInformationPageMobile;
+import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
 
 /**
  * @author gumeshna
@@ -315,14 +318,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 
-	public PlanInformationPage navigatetoenrollinplanlink(String planName) {
+	public PlanInformationPageMobile navigatetoenrollinplanlink(String planName) {
 		enrollInPlanBtn.click();
 		System.out.println(driver.getTitle());
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP)
-				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP)
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_AARP_MEDICARERX_ONLINE_APPLICATION)
 				|| driver.getTitle().equalsIgnoreCase("Enrollment Information")) {
 			System.out.println("in if");
-			return new PlanInformationPage(driver, planName);
+			return new PlanInformationPageMobile(driver, planName);
 		}
 
 		return null;
@@ -506,7 +509,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	}
 	//
-	public DrugCostEstimatorPage navigateToDCEThroughPlanCost() {
+	public DrugCostEstimatorPageMobile navigateToDCEThroughPlanCost() {
 
 		try {
 			Thread.sleep(2000);
@@ -525,7 +528,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (currentUrl().contains("/estimate-drug-costs.html"))
-			return new DrugCostEstimatorPage(driver);
+			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 
@@ -773,13 +776,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return validationFlag;
 	}
 
-	public ProviderSearchPage validateLookUpYourProviderButton() {
+	public ProviderSearchPageMobile validateLookUpYourProviderButton() {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		switchToNewTabNew(lookUpYourProviderButton);
 		if (driver.getCurrentUrl().contains("werally")) {
-			return new ProviderSearchPage(driver);
+			return new ProviderSearchPageMobile(driver);
 		}
 		return null;
 

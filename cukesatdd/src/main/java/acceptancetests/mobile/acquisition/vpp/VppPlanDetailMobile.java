@@ -43,7 +43,7 @@ import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
 import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ulayer.VisitorProfileTestHarnessPageMobile;
-import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
 
 /**
  * Functionality: VPP UHC site
@@ -1312,7 +1312,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
+		pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -2233,7 +2233,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
+		pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
