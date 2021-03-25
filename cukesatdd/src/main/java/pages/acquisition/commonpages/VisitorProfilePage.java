@@ -805,7 +805,7 @@ public class VisitorProfilePage extends UhcDriver {
 		for (String plan : listOfTestPlans) {
 			System.out.println("Checking Saved Plan on VP for : "+plan);
 			WebElement addedPlan = driver
-					.findElement(By.xpath("//*[contains(@id,'planName') and contains(@dtmname,'" + plan + "')]"));
+					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
 			validateNew(addedPlan);
 			/*
 			 * System.out.println(driver.findElement(By.xpath(
