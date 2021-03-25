@@ -1156,8 +1156,8 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void validateInvalidZipCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
-		System.out.println(invalidZipCodeMsg.getText());
-		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
+		System.out.println(invalidZipCodeMsg.getText().trim());
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 
 	public void updateDistance(String distanceValue) throws InterruptedException {
