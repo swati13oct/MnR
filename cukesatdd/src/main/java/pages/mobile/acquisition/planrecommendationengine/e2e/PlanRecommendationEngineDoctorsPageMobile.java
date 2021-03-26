@@ -313,7 +313,7 @@ public class PlanRecommendationEngineDoctorsPageMobile extends UhcDriver {
 					else
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.in"),
 								"Non Prod Connected to Incorrect Rally");
-					werallyResults = werally.werallySearch(type, search, count);
+					werallyResults = werally.werallySearch(type, search, count, count);
 					System.out.println("werallyResults Size is : " + werallyResults.size());
 					System.out.println("werallyResults Content is : " + werallyResults);
 				}

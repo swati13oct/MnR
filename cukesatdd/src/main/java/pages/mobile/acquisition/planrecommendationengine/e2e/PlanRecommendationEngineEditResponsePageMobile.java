@@ -94,7 +94,7 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 	@FindBy(css = "#plan-list-1 button#updateSaveRecommendationBtn")
 	private WebElement mapdSaveResultsButton;
 
-	@FindBy(xpath = "//div[@data-rel='#plan-list-3']")
+	@FindBy(css = "#saved-label")
 	private WebElement pdpSaveResultsButton;
 
 	@FindBy(css = "#plan-list-4 button#updateSaveRecommendationBtn")
@@ -109,7 +109,7 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 	@FindBy(css = "button#keepShoppingBtn")
 	private WebElement KeepShoppingPlansButton;
 
-	@FindBy(css = "button#viewPlanBtn")
+	@FindBy(css = "#saved-label")
 	private WebElement ViewProfileButton;
 
 	// Edit Responses page Elements
@@ -202,6 +202,7 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 		if (flow.equalsIgnoreCase("pdp")) {
 
 			jsClickNew(pdpSaveResultsButton);
+			
 		} else {
 			if (validate(mapdSaveResultsButton, 10))
 				mapdSaveResultsButton.click();
@@ -536,7 +537,7 @@ public class PlanRecommendationEngineEditResponsePageMobile extends UhcDriver {
 	public void validateSaveResults(String plantype) {
 		System.out.println("Validating Save Results : ");
 		pageloadcomplete();
-		navigateSaveResultsPage(plantype);
+		//navigateSaveResultsPage(plantype);
 		jsClickNew(ViewProfileButton);
 		threadsleep(5000);
 		// savedrecommendationVP();

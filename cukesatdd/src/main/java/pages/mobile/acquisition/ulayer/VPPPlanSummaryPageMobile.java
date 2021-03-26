@@ -4873,7 +4873,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
 			if (validate(dceLink))
-				scrollToView(dceLink);
+			scrollToView(dceLink);
 			jsClickNew(dceLink);
 
 		} else {
@@ -4883,6 +4883,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			jsClickNew(dceLink);
 
 		}
+		
+		
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;

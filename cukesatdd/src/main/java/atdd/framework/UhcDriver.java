@@ -544,7 +544,7 @@ public abstract class UhcDriver {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 
 			backToTop.isDisplayed();
-			System.out.println("Scoll finished to element on IOS device");
+			System.out.println("Scroll finished to element on IOS device");
 
 		} else {
 			try {
