@@ -3,7 +3,9 @@ package pages.mobile.acquisition.ulayer;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.Scrollable;
@@ -472,6 +474,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	String CallSam = "1-877";
 	// String CallSam= "Call a Licensed Insurance Agent";
 	// String CallSam= "Call UnitedHealthcare Ins. Co.";
+	
+	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
+	private WebElement FindAnAgent;
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
 
@@ -2806,16 +2811,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		int size = driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
 		System.out.println("size of sign up" + size);
 		if (size > 0) {
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			jsClickNew(driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")));
 			threadsleep(4);
 			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			jsClickNew(driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")));
 		} else {
-			SubmitEmail.click();
+			jsClickNew(SubmitEmail);
 			threadsleep(4);
 			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
 			threadsleep(2);
@@ -2826,7 +2831,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			SubmitEmail.click();
+			jsClickNew(SubmitEmail);
 		}
 
 		threadsleep(4);
@@ -3427,6 +3432,57 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			}
 		}
+
+	}
+	
+	public void clickonFindanAgentlinkfromArticle(String ExpectedUHCAgentURL) {
+
+		validateNew(FindAnAgent);
+		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
+		String parentWindow = driver.getWindowHandle();
+//			FindAnAgent.click();
+		scrollToView(FindAnAgent);
+		jsClickNew(FindAnAgent);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		/*
+		 * CommonUtility.checkPageIsReadyNew(driver); String CurrentUHCAgentURL =
+		 * driver.getCurrentUrl();
+		 * System.out.println("myuhcagent Page is displayed : "+CurrentUHCAgentURL);
+		 * System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
+		 * 
+		 * if(ExpectedUHCAgentURL.equalsIgnoreCase(CurrentUHCAgentURL)) { System.out.
+		 * println("****************myuhcagent Page is displayed  ***************");
+		 * 
+		 * Assert.assertTrue(true); } else {
+		 * Assert.fail("****************myuhcagent Page is not loaded ***************");
+		 * }
+		 */
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentUHCAgentURL = driver.getCurrentUrl();
+		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
+		System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);
+		System.out.println("Expected myuhcagent URL: " + ExpectedUHCAgentURL);
+		System.out.println("Actual myuhcagent URL: " + ActualCurrentUHCAgentURL);
+
+		if (ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+			System.out.println("****************myuhcagent Page is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("****************myuhcagent Page is not loaded ***************");
+		}
+
+		driver.close();
+		driver.switchTo().window(parentWindow);
 
 	}
 

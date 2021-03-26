@@ -20,7 +20,6 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
     Then user selects add drug option in Drug page
-
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #    And user selects pharmacy option in pharmacy page
@@ -151,7 +150,6 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     And user selects plan type in coverage options page
       | Plan Type | <isCoverageOpt> |
     And user selects add drug option in Drug page
-
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #    And user selects pharmacy option in pharmacy page

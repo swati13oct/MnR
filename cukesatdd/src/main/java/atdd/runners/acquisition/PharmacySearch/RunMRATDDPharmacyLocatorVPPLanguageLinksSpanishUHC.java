@@ -11,7 +11,7 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDPharmacyLocatorVPPLanguageLinksSpanishUHC
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDPharmacyLocatorVPPLanguageLinksSpanishUHC.json",
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDPharmacyLocatorVPPLanguageLinksSpanishUHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDPharmacyLocatorVPPLanguageLinksSpanishUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/pharmacylocator" },
 plugin = {
