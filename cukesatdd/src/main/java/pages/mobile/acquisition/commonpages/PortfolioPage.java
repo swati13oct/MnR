@@ -2,7 +2,7 @@
 
 
 
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;

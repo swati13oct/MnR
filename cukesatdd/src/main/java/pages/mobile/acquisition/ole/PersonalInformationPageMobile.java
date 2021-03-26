@@ -19,7 +19,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.ConfirmYourEligibilityPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 
 /**
  * @author sdwaraka

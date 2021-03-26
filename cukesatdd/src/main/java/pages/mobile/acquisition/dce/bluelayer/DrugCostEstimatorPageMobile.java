@@ -26,8 +26,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-//import pages.mobile.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.ulayer.PageTitleConstantsMobile;
+import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
 
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {

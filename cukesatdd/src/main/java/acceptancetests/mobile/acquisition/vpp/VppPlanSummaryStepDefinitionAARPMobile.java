@@ -11,12 +11,12 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.mobile.acquisition.ulayer.KeywordSearchAARPMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.KeywordSearchAARPMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 //import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;

@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.awt.AWTException;
 import java.io.BufferedInputStream;
@@ -31,8 +31,8 @@ import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.mobile.acquisition.ulayer.PageTitleConstants;
-import pages.mobile.acquisition.ulayer.PlanInformationPageMobile;
+import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.mobile.acquisition.commonpages.PlanInformationPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;

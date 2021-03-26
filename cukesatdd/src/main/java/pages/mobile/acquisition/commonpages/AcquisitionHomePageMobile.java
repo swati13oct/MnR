@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,21 +28,19 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import org.testng.Assert;
 
-import pages.mobile.acquisition.ulayer.AboutUsPageMobile;
-import pages.mobile.acquisition.ulayer.AgentsAndBrokersPageMobile;
-import pages.mobile.acquisition.ulayer.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.ulayer.DisclaimersPageMobile;
-import pages.mobile.acquisition.ulayer.PrivacyPolicyUmsPageMobile;
-import pages.mobile.acquisition.ulayer.EnterZipCodePage;
-//import pages.mobile.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.ulayer.PharmacySearchPageMobile;
-import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
-import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
-import pages.mobile.acquisition.ulayer.KeywordSearchAARPMobile;
+import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
+import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
+import pages.mobile.acquisition.commonpages.DisclaimersPageMobile;
+import pages.mobile.acquisition.commonpages.EnterZipCodePage;
+import pages.mobile.acquisition.commonpages.KeywordSearchAARPMobile;
+import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
+import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile;
+import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -1848,7 +1846,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public pages.mobile.acquisition.ulayer.ProviderSearchPageMobile clicksOnRallyToolFromHomePages() {
+	public pages.mobile.acquisition.commonpages.ProviderSearchPageMobile clicksOnRallyToolFromHomePages() {
 		MobileMenu();
 		MobileMenuShopTool();
 		validateNew(providerSearchFromHomeScreen);
@@ -1858,7 +1856,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 
-			return new pages.mobile.acquisition.ulayer.ProviderSearchPageMobile(driver);
+			return new pages.mobile.acquisition.commonpages.ProviderSearchPageMobile(driver);
 
 		}
 		return null;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

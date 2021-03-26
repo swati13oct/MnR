@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -5228,13 +5228,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * return wait.until(jQueryLoad) && wait.until(jsLoad); }
 	 */
 
-	public pages.mobile.acquisition.ulayer.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
+	public pages.mobile.acquisition.commonpages.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
 		// TODO Auto-generated method stub
 
 		jsClickNew(firstComparePlanButton);
 		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
-			return new pages.mobile.acquisition.ulayer.ComparePlansPageMobile(driver);
+			return new pages.mobile.acquisition.commonpages.ComparePlansPageMobile(driver);
 		return null;
 
 	}

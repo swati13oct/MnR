@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
-import pages.mobile.acquisition.ulayer.ComparePlansPageBlayerMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageBlayerMobile;
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
 

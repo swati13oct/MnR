@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 
 
 /**

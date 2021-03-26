@@ -20,9 +20,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumFluentWait;
 import pages.acquisition.dceredesign.TellUsAboutDrug;
-
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 
 public class BuildYourDrugListMobile extends UhcDriver {
 

@@ -14,13 +14,12 @@ import org.openqa.selenium.support.ui.Select;
 
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class GetStartedPageMobile extends UhcDriver {

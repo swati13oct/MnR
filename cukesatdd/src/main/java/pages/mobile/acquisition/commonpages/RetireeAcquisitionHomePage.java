@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +23,8 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.UHCRetireeSiteMapPage;
-import pages.mobile.acquisition.ulayer.UhcRetireePharmacyLocatorPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeSiteMapPage;
+import pages.mobile.acquisition.commonpages.UhcRetireePharmacyLocatorPage;
 
 /**
  * @author ckoppura

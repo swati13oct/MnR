@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.PageTitleConstantsMobile;
+import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
 
 /**
  * @author pperugu

@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 
@@ -6,12 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.UHCRetireeASRSPage;
-import pages.mobile.acquisition.ulayer.UHCRetireeASRSProviderPage;
-import pages.mobile.acquisition.ulayer.UHCRetireeEdisionProviderPage;
-import pages.mobile.acquisition.ulayer.UHCRetireeEdisonPage;
-import pages.mobile.acquisition.ulayer.UHCRetireeSHBPPage;
-import pages.mobile.acquisition.ulayer.UHCRetireeSHBPProviderPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeASRSPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeASRSProviderPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeEdisionProviderPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeEdisonPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeSHBPPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeSHBPProviderPage;
 
 
 /**

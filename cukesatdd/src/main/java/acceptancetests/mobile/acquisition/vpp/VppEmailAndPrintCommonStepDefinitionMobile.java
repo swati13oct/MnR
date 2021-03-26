@@ -18,8 +18,8 @@ import io.appium.java_client.AppiumDriver;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.emailAndPrint.EmailAndPrintUtilMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
 public class VppEmailAndPrintCommonStepDefinitionMobile {
 
@@ -60,7 +60,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 			util.waitForComparePageToLoad();
 		}
 		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
-		pages.mobile.acquisition.ulayer.ComparePlansPageMobile comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
+		pages.mobile.acquisition.commonpages.ComparePlansPageMobile comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
 		Assert.assertTrue("Error in loading the compare plans page", comparePlansPage != null);
 		wDriver = (AppiumDriver) comparePlansPage.driver;
 		//getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, wDriver);

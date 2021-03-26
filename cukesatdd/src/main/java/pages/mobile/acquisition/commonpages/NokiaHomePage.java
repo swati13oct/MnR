@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.SalesforceSitePage;
+import pages.mobile.acquisition.commonpages.SalesforceSitePage;
 
 
 public class NokiaHomePage extends UhcDriver {

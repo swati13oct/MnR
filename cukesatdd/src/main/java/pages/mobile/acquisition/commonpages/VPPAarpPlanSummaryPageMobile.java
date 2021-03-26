@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 
 import java.util.ArrayList;
@@ -20,12 +20,11 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.ulayer.GetStartedPage;
-import pages.mobile.acquisition.ulayer.IntroductionInformationPageMobile;
-import pages.mobile.acquisition.ulayer.ManageDrugPageMobile;
-//import pages.mobile.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.ulayer.PlanInformationPageMobile;
-import pages.mobile.acquisition.ulayer.ProviderSearchPage;
+import pages.mobile.acquisition.commonpages.GetStartedPage;
+import pages.mobile.acquisition.commonpages.IntroductionInformationPageMobile;
+import pages.mobile.acquisition.commonpages.ManageDrugPageMobile;
+import pages.mobile.acquisition.commonpages.PlanInformationPageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPage;
 
 
 public class VPPAarpPlanSummaryPageMobile extends UhcDriver {

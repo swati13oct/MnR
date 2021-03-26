@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

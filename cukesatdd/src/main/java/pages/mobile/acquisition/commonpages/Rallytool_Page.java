@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 
@@ -6,19 +6,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.KTRSHomePage;
-import pages.mobile.acquisition.ulayer.MetlifeFindaProviderPage;
-import pages.mobile.acquisition.ulayer.MetlifeHomePage;
-import pages.mobile.acquisition.ulayer.NcshpFindaProviderPage;
-import pages.mobile.acquisition.ulayer.NcshpHomePage;
-import pages.mobile.acquisition.ulayer.PfizerFindaProviderPage;
-import pages.mobile.acquisition.ulayer.PfizerHomePage;
-import pages.mobile.acquisition.ulayer.SanFranciscoHomePage;
-import pages.mobile.acquisition.ulayer.SanfranciscoFindaProviderPage;
-import pages.mobile.acquisition.ulayer.SdceraFindaProviderPage;
-import pages.mobile.acquisition.ulayer.SdceraHomePage;
-import pages.mobile.acquisition.ulayer.UawHomePage;
-import pages.mobile.acquisition.ulayer.UawProviderPage;
+import pages.mobile.acquisition.commonpages.KTRSHomePage;
+import pages.mobile.acquisition.commonpages.MetlifeFindaProviderPage;
+import pages.mobile.acquisition.commonpages.MetlifeHomePage;
+import pages.mobile.acquisition.commonpages.NcshpFindaProviderPage;
+import pages.mobile.acquisition.commonpages.NcshpHomePage;
+import pages.mobile.acquisition.commonpages.PfizerFindaProviderPage;
+import pages.mobile.acquisition.commonpages.PfizerHomePage;
+import pages.mobile.acquisition.commonpages.SanFranciscoHomePage;
+import pages.mobile.acquisition.commonpages.SanfranciscoFindaProviderPage;
+import pages.mobile.acquisition.commonpages.SdceraFindaProviderPage;
+import pages.mobile.acquisition.commonpages.SdceraHomePage;
+import pages.mobile.acquisition.commonpages.UawHomePage;
+import pages.mobile.acquisition.commonpages.UawProviderPage;
 
 
 public class Rallytool_Page extends UhcDriver {

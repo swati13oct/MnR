@@ -19,9 +19,9 @@ import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.EnterZipCodePage;
-import pages.mobile.acquisition.ulayer.TermsnConditionsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.EnterZipCodePage;
+import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 
 /**
  * Functionality: Global Header Footer

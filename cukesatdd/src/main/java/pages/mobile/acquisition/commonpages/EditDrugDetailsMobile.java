@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;

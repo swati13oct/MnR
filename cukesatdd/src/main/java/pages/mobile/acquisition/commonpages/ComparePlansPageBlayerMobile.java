@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -19,12 +19,12 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.ulayer.FindCarePage;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.FindCarePage;
+import pages.mobile.acquisition.commonpages.FindCarePageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 //import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.FindCarePageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
 public class ComparePlansPageBlayerMobile extends UhcDriver {
 

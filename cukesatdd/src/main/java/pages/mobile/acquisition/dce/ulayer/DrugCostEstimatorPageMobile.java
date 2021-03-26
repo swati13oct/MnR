@@ -25,10 +25,8 @@ import pages.acquisition.commonpages.AddNewDrugModal;
 import pages.acquisition.commonpages.EditDrugDetails;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.SavingsOppurtunity;
-//import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
-//import pages.mobile.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.PageTitleConstantsMobile;
+import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
 
@@ -467,10 +465,10 @@ if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle
 	@FindBy(xpath ="//div[@id='plan-name-div']/div/div/div/p")
 	private WebElement dceplanname;
 	
-	public pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile verifyplanname(String planname) {
+	public pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile verifyplanname(String planname) {
 
 		if(dceplanname.equals(planname)){
-				return new pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile(driver);
+				return new pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile(driver);
 		}else{
 
 			return null;

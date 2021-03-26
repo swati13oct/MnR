@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,16 +17,16 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.mobile.acquisition.ulayer.PlanComparePageMobile;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidgetMobile;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPageMobile;
-import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidgetMobile;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPageMobile;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
+import pages.mobile.acquisition.commonpages.VPPAarpNeedAStepBackWidgetMobile;
+import pages.mobile.acquisition.commonpages.VPPAarpNeedHelpWidgetPageMobile;
+import pages.mobile.acquisition.commonpages.VPPNeedMoreInformationWidgetMobile;
+import pages.mobile.acquisition.commonpages.VPPRequestSendEmailPageMobile;
 
 public class ResponsivePlanSummary extends UhcDriver{
 	

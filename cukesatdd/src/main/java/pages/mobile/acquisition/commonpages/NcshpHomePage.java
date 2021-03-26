@@ -1,7 +1,7 @@
 /**
  * 
  */
-package pages.mobile.acquisition.ulayer;
+package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.SalesforceSitePage;
+import pages.mobile.acquisition.commonpages.SalesforceSitePage;
 
 
 /**

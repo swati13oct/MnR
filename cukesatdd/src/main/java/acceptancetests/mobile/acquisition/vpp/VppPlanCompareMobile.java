@@ -35,31 +35,31 @@ import io.appium.java_client.AppiumDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.mobile.acquisition.ulayer.AgentsAndBrokersPageMobile;
-import pages.mobile.acquisition.ulayer.ComparePlansPageBlayerMobile;
+import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.AddDrugDetailsMobile;
+import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
+import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageBlayerMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.ContactUsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.DisclaimersAARPPageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.FindCarePageMobile;
+import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.PrivacyPolicyAARPPageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.RequestHelpAndInformationPageMobile;
+import pages.mobile.acquisition.commonpages.RequestMailedInformationMobile;
+import pages.mobile.acquisition.commonpages.SavingsOppurtunityMobile;
+import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfileTestHarnessPageMobile;
+import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.AddDrugDetailsMobile;
-import pages.mobile.acquisition.ulayer.AgentsnBrokersAARPPageMobile;
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
-import pages.mobile.acquisition.ulayer.ContactUsAARPPageMobile;
-import pages.mobile.acquisition.ulayer.DisclaimersAARPPageMobile;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.ulayer.FindCarePageMobile;
-import pages.mobile.acquisition.ulayer.MultiCountyModalPageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.PrivacyPolicyAARPPageMobile;
-import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.ulayer.RequestHelpAndInformationPageMobile;
-import pages.mobile.acquisition.ulayer.RequestMailedInformationMobile;
-import pages.mobile.acquisition.ulayer.SavingsOppurtunityMobile;
-import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfileTestHarnessPageMobile;
-import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -3246,7 +3246,7 @@ public class VppPlanCompareMobile {
 
 	@And("^user selects helper mode for Redirect to VPP from DCE on AARP$")
 	public void user_selects_helper_mode_for_Redirect_to_VPP_from_DCE_on_AARP() throws Exception {
-		pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile vppTestHarnessPage = (pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile) loginScenario
+		pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile vppTestHarnessPage = (pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile) loginScenario
 				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.redirecttoVPPfromDCE();
 		VPPPlanSummaryPageMobile plansummaryPage = vppTestHarnessPage.navigateToVPP();
