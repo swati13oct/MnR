@@ -37,6 +37,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
+import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
@@ -72,6 +73,9 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
+	
+	@FindBy(css = ".footer-top>ul>li>a.back-to-top")
+	public WebElement footerBackToTopLink;
 
 	// Results loading page Elements
 
@@ -91,6 +95,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "body>div#overlay")
 	private WebElement planLoaderscreen;
+	
 
 	@FindBy(css = "span.title small")
 	private WebElement planname;
@@ -648,12 +653,12 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	public void removedDrugsDetailsVPPtoPRE() {
 		System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
 		String plantype = PlanRecommendationStepDefinitionMobile.PlanType;
-		
+
 		flow = PlanRecommendationStepDefinitionMobile.PREflow;
 		DrugsInPRE = PlanRecommendationEngineDrugsPageMobile.drugNames;
 		boolean remove = true;
 		int count = DrugsInPRE.size();
-		drugsCoveredInVPP(count,plantype);
+		drugsCoveredInVPP(count, plantype);
 		removeDrugs(count);
 		// vppToPre();
 		MobileMenuAndGetPlanRecom();
@@ -736,7 +741,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		System.out.println("DrugList Content is : " + DrugsList);
 		return DrugsList;
 	}
-	
+
 	public ArrayList<String> drugsCoveredInVPP(int count, String plantype) {
 		System.out.println("Clicking on Drugs Details in Plan Type: " + count);
 		DrugsList = new ArrayList<String>();
@@ -745,8 +750,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		validate(drugImageVPP, 20);
 		threadsleep(5000);
 		drugcoveredsession();
-		
-		if(plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("MA")){
+
+		if (plantype.equalsIgnoreCase("MAPD") || plantype.equalsIgnoreCase("MA")) {
 			jsClickNew(MAViewPlansLink);
 		}
 
@@ -953,7 +958,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 			}
 		}
 		System.out.println("Doctors Name validation Result " + result);
-		Assert.assertTrue(result,"Providers name mismatch");
+		Assert.assertTrue(result, "Providers name mismatch");
 		return result;
 	}
 
@@ -1011,7 +1016,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 			selectFromDropDown(multiCounty, county);
 		}
 		validate(planZipInfo, 60);
-		//waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		// waitforElementInvisibilityInTime(planLoaderscreen, 60);
 		Assert.assertTrue(planZipInfo.getText().contains(zip), "Invalid Zip");
 		Assert.assertTrue(planZipInfo.getText().toUpperCase().contains(county.toUpperCase()), "Invalid County");
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[2]) > 0, "Total Plan count is less than 1");
@@ -1172,26 +1177,67 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		System.out.println("API vs UI Plan Recommendation Successful");
 	}
 
+	
+
+	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
+	
+
+	@FindBy(css = "div[data-rel='#plan-list-1'] .title small")
+	private WebElement MAViewPlansTab;
+	
 	public void validateUIAPIRankingPlans() {
 		System.out.println("Validating UI vs API Plans Ranking : ");
 		plansLoader();
 		String rankingJSON = returnDriverStorageJS("Session Storage", "ucp_planRecommendationResults");
 		List<String> maAPIRankings = getAPIPlansRanking(rankingJSON, "MA");
 		if (maAPIRankings.size() > 0) {
+			mobileUtils.mobileLocateElementClick(MAViewPlansTab);
 			validate(MA1stPlanName, 60);
+			mobileUtils.mobileLocateElement(MA1stPlanEnroll);
 			verifyAPIRankings(MAPlansId, maAPIRankings);
+			// mobileFindElement(backtoPlans,3,false);
+			// backtoPlans.click();
 			driver.navigate().refresh();
 			plansLoader();
+			backtoTop();
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
+		mobileUtils.mobileLocateElement(PDPViewPlansLink);
+		jsClickMobile(PDPViewPlansLink);
 		validate(PDP1stPlanName, 60);
+		mobileUtils.mobileLocateElement(PDP1stPlanEnroll);
 		verifyAPIRankings(PDPPlansId, pdpAPIRankings);
+		// mobileFindElement(backtoPlans,3,false);
+		// backtoPlans.click();
 		driver.navigate().refresh();
 		plansLoader();
+		backtoTop();
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
+			mobileUtils.mobileLocateElement(SNPViewPlansLink);
+			jsClickMobile(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
+			mobileUtils.mobileLocateElement(SNP1stPlanEnroll);
 			verifyAPIRankings(SNPPlansId, snpAPIRankings);
+		}
+	}
+	
+
+
+	private void backtoTop() {
+		boolean checkElemPosition = mobileUtils.mobileCheckElementBeforeCallBanner(footerBackToTopLink);
+		// System.out.println(checkElemPosition);
+		// checkElemPosition =
+		// mobileUtils.mobileCheckElementBeforeCallBanner(MAViewPlansLink);
+		// System.out.println(checkElemPosition);
+		if (!checkElemPosition)
+			mobileUtils.mobileLocateElement(footerBackToTopLink);
+		try {//This single JSclick line is enough instead of this method
+			jsClickMobile(footerBackToTopLink);
+			//footerBackToTopLink.click();
+			threadsleep(2000);
+		} catch (Exception e) {
+
 		}
 	}
 
@@ -1293,7 +1339,6 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 					"Invalid Plan Ranking between API and UI : " + vppPlans.get(i) + "<-> " + APIRankings.get(i));
 		}
 		System.out.println("API vs UI Plan Ranking Successful");
-
 	}
 
 	public String getplanId(WebElement plan) {

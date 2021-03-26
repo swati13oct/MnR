@@ -115,7 +115,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                                               |
       |   35034 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,1,NO,NO |
 
-  @PRE @planrecommandonation @SNPPlansRanking @F358846 @PRERegression6 
+  @PRE @planrecommandonation @SNPPlansRanking @F358846 @PRERegression6 @31st
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate SNP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
