@@ -23,7 +23,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.VisitorProfileTestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
-import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;

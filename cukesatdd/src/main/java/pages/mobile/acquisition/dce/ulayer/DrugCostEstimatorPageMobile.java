@@ -27,7 +27,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.SavingsOppurtunity;
 //import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
 //import pages.mobile.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.ulayer.PageTitleConstantsMobile;
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {

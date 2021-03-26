@@ -19,7 +19,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
-import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 

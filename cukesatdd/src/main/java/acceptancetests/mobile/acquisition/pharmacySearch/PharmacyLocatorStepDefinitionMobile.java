@@ -21,7 +21,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
+import pages.mobile.acquisition.ulayer.PharmacySearchPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 
 

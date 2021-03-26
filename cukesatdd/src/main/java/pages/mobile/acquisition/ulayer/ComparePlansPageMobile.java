@@ -31,7 +31,7 @@ import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
-import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -270,7 +270,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	}
 
-	public pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile backToVPPPage() {
+	public VPPPlanSummaryPageMobile backToVPPPage() {
 		backToAllPlansLink.click();
 		try {
 			Thread.sleep(4000);
@@ -279,7 +279,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (currentUrl().contains("#/plan-summary"))
-			return new pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile(driver);
+			return new VPPPlanSummaryPageMobile(driver);
 		return null;
 	}
 

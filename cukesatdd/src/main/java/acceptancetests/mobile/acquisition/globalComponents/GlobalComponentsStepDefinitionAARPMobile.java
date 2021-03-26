@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.ulayer.EnterZipCodePage;
-import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
+import pages.mobile.acquisition.ulayer.PharmacySearchPageMobile;
 import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.ulayer.AgentsnBrokersAARPPageMobile;

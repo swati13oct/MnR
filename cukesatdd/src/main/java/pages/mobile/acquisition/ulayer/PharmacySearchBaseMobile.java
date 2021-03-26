@@ -1,4 +1,4 @@
-package pages.mobile.acquisition.commonpages;
+package pages.mobile.acquisition.ulayer;
 
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -4776,13 +4776,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * 
 	 * @return
 	 */
-	public pages.mobile.acquisition.commonpages.VisitorProfilePageMobile navigateToVisitorProfilePage1() {
+	public VisitorProfilePageMobile navigateToVisitorProfilePage1() {
 		jsClickNew(shoppingCartIcon);
 		jsClickNew(lnkProfile);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
-			return new pages.mobile.acquisition.commonpages.VisitorProfilePageMobile(driver);
+			return new VisitorProfilePageMobile(driver);
 		} else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;

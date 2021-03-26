@@ -5,6 +5,7 @@ package pages.mobile.acquisition.ulayer;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -234,6 +235,18 @@ public class GlobalWebElementsMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
 	 public static WebElement alreadyMemberInvalidCredsErrorMessage;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public static WebElement proactiveChatExitBtn;
+	
+	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	public static WebElement visitAARPLink;
+	
+	 @FindBys(value = { @FindBy(xpath = "//div[contains(@class,'globalfooternav')]//a[contains(text(),'Visit AARP.org')]") })
+	 public static WebElement aarpOrgLink;
+	 
+	@FindBy(id = "aarpSVGLogo")
+	public static WebElement AARPlogo;
 
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public static WebElement headerDrugCostEstimatorLink;
@@ -244,5 +257,15 @@ public class GlobalWebElementsMobile extends UhcDriver {
 	
 	@FindBy(css = "div.sam")
 	public WebElement footerCallbannerSection;
+	
+	public void ourPlansHover() {
+		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(ourPlansDropdownText);
+		actions.click();
+		actions.perform();
+		
+	}
 
 }

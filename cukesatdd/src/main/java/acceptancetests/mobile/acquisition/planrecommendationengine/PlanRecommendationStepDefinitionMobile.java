@@ -24,7 +24,7 @@ import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
