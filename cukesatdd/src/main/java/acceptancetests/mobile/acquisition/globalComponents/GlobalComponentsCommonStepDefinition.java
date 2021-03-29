@@ -1,6 +1,7 @@
 package acceptancetests.mobile.acquisition.globalComponents;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ import pages.mobile.acquisition.ulayer.PrivacyPolicyAARPPageMobile;
 import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.ulayer.TermsnConditionsAARPPageMobile;
 import pages.acquisition.commonpages.AboutUsAARPPage;
+
 
 
 public class GlobalComponentsCommonStepDefinition {
@@ -338,6 +340,64 @@ public class GlobalComponentsCommonStepDefinition {
 		  aquisitionhomepage.clickBrowserBackButton();
 		  
 	  }
+	  
+	  @Then("^the user clicks on Agent link and validates the correct URL is loaded from article page$")
+		public void the_user_clicks_on_Agent_link_and_validates_the_correct_URL_is_loaded_from_articles_page(DataTable arg1)
+				throws InterruptedException {
+			Map<String, String> inputAttributesMap = parseInputArguments(arg1);
+			String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
+			AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			aquisitionhomepage.clickonFindanAgentlinkfromArticle(myUHCAgentURL);
+
+		}
+	  public Map<String, String> parseInputArguments(DataTable memberAttributes) {
+			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			return memberAttributesMap;
+		}
+
+		@Then("^the user validates TFN on need help section of Shop pages$")
+		public void the_user_validates_TFN_on_need_help_section_of_Shop_pages(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String tfnXpath = memberAttributesMap.get("TFNxpath");
+			String tfnFlag = memberAttributesMap.get("TFNflag");
+
+			// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+			AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			if (tfnFlag.equalsIgnoreCase("true")) {
+				aquisitionhomepage.validateTFNelement(tfnXpath);
+			}
+
+		}
+		@Then("^the user validates TFN on right rail Medicare Article$")
+		public void the_user_validates_TFN_on_right_rail_Medicare_article(DataTable givenAttributes) throws Throwable {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String tfnXpath = memberAttributesMap.get("TFNxpath");
+			String tfnFlag = memberAttributesMap.get("TFNflag");
+
+			// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
+			AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			if (tfnFlag.equalsIgnoreCase("true")) {
+				aquisitionhomepage.validateTFNelement(tfnXpath);
+			}
+		}
 
 }
 

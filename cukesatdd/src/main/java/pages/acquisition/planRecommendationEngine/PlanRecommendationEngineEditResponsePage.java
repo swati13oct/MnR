@@ -187,6 +187,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	}
 
 	public void navigateEditResponsePage(String flow) {
+		waitForPageLoadSafari();
 		if (flow.equalsIgnoreCase("pdp")) {
 			pdpEditResponseButton.click();
 		} else {
@@ -562,6 +563,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	public void validateSaveResults(String plantype) {
 		System.out.println("Validating Save Results : ");
 		pageloadcomplete();
+		waitForPageLoadSafari();
 		navigateSaveResultsPage(plantype);
 		jsClickNew(ViewProfileButton);
 		threadsleep(5000);
