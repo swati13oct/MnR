@@ -3527,7 +3527,7 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
 		DetailsMap.put("PartB Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE));
 
-		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		//DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
 		DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
 		DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));

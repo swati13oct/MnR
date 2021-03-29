@@ -108,7 +108,7 @@ public class oleCommonStepDefinition {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 
-		String ZipCode = "";
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 				//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = "";
 				//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
