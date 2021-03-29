@@ -1298,10 +1298,12 @@ public class MRScenario {
 
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
+				browserName="Chrome";
 				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
 
 			} else {
 				capabilities.setCapability("browserName", "Safari");
+				browserName="Safari";
 				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
 			}
 
