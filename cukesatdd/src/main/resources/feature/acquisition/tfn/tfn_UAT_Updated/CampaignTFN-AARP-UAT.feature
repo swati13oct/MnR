@@ -4,7 +4,8 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
  #######################Script 1: Direct traffic########################################
    @Scenario_1_2_DirectTraffic_UAT @UATRegression
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
-   Given the user is on AARP medicare acquisition site landing page
+   Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates TFN Number
        | TFN No | <TFNNo> |
@@ -41,19 +42,20 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
        | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
  Then the user navigates to homepage validates Federal TFN
-    And the user clicks on the shopping cart icon in AARP site
-   #And the user clicks on the shopping cart icon
+   #And the user clicks on the shopping cart icon in AARP site
+   And the user clicks on the shopping cart icon
  		Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
    #---------------commenting the lines from 1.08 to 1.11 in production as mentioned by UAT related to Authenticated user -----------------#
-		And the user signs in with optum Id credentials in AARP site
+		And the user signs in with optum Id credentials
 		     | User Name | <userName> |
       | Password  | <password> |
     Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-		And the user clicks on the add plans button in the profile in AARP site
+		#And the user clicks on the add plans button in the profile
+	  And the user clicks on the add plans button in the profile in agent mode
 	  Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
@@ -76,9 +78,10 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Member Signin URL | <memberSignIn>               |
       | Member Signin URL STG | <memberSignInstage>      |
       | Member Signin URL Offline| <memberSignInOffline> |
+ 		  Then the user navigates to refresh page
  		 Then the user validates TFN Number
-        #| TFN No | <memberTFNNo> |
-        | TFN No    | <TFNNo>     |
+        | TFN No | <memberTFNNo> |
+        #| TFN No    | <TFNNo>     |
         | TFN Xpath | <TFNxpath> |   
     	#Then the user validates PSC code
       #| PSC Code | <Precedence2PSC> |
@@ -86,7 +89,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 
     Examples: 
       | scenario         | site |zipcode|TFNNo          |memberTFNNo   |memberSignIn                  |memberSignInstage               |memberSignInOffline              | pscCode | maUrl                     | pdpUrl                        |  snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                |  medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype|MAplantype|TFNxpath                         |MedsuppTFNxpath                  |DCETFNxpath|MSplantype|userName|password |
- 			| Scenario 1 - AMP | AARP |90210  |1-877-699-5710 |1-855-349-3447|https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/|https://offline.medicare.uhc.com/| 810027  | enroll/ma-enrollment.html |  shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true  |  medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP        |MA        |(//a[contains(@class, 'tel')])[1]|//*[contains(@class,'tel right')]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|MS|TiggerOptumID39 | TiggerTigger1  |
+ 			| Scenario 1 - AMP | AARP |90210  |1-877-699-5710 |1-855-349-3447|https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/|https://offline.medicare.uhc.com/| 810027  | enroll/ma-enrollment.html |  shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true  |  medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP        |MA        |(//a[contains(@class, 'tel')])[1]|//*[contains(@class,'tel right')]|//button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]|MS|TiggerOptumID39 | TiggerTigger2  |
      
   #######################Script 2: Campaign traffic########################################
   @Scenario_2_CampaignTraffic_UAT @UATRegression
@@ -534,12 +537,16 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
-	And the user clicks on the add plans button in the profile
-	  Then the user validates TFN Number
+	And the user clicks on the add plans button in the profile in agent mode
+	#And the user clicks on the add plans button in the profile  
+    #Then user validates plan count for all plan types on plan summary page
+    Then the user validates TFN Number
         | TFN No | <TFNNo> |
         | TFN Xpath | <TFNxpath> |
    Then the user validates PSC code
       | PSC Code | <pscCode> | 
+    #And the user views the plans of the below plan type
+      #| Plan Type | <plantype> |
      Then the user navigates to plan tab for any plan
         | Plan Type | <MAplantype> |  
     Then the user navigates to Plan Details Page for any plan and validates Federal TFN 
@@ -572,7 +579,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | PSC Code | <pscCode> | 
     Examples:  
     |scenario                         |zipcode|MAplantype| pscCode |state| campaignUrl                                                                                      | medEdURL1                                     | medEdTFN                                        | shoppagesUrl                           |      shoppagesTFN                                                                 |userName|password   |TFNNo               |TFNxpath                         | EnrollTFNxpath                   | ShopTFNxpath                     	|
-    |Scenerio 9-ExternalLink - AMP 	  | 10001 |MA        | 8000158 |Alabama| health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html |         (//span[@class='heading-6']//u)[1]      |  shop/medicare-supplement-plans.html   |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|TiggerOptumID39 | TiggerTigger1 | 1-844-850-6592      |(//a[contains(@class, 'tel')])[1]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |  
+    |Scenerio 9-ExternalLink - AMP 	  | 10001 |MA        | 8000158 |Alabama| health-plans.html?zipcode=10001&WT.mc_id=8000158&county=420&state=36#/plan-summary               |   medicare-articles/medicare-made-clear.html |         (//span[@class='heading-6']//u)[1]      |  shop/medicare-supplement-plans.html   |//button[@id='sam-call-button']//span[contains(@class,'sam__button__text desktop')]|TiggerOptumID39 | TiggerTigger2 | 1-844-850-6592      |(//a[contains(@class, 'tel')])[1]| (//a[contains(@class, 'tel')])[3]|(//a[contains(@class, 'tel')])[2] |  
      
      
    @Scenario_2_CampaignTrafficdummy

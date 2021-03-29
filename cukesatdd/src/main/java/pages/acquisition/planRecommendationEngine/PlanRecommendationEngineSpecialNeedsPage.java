@@ -130,7 +130,16 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	@FindBy(css = "uhc-checkbox.checkbox-checked")
 	private WebElement checkedSNP;
 	
-	@FindBy(css = "uhc-checkbox.checkbox-checked label[for*='checkbox-4-input'] >span:nth-child(1) .checkbox-check")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2) uhc-checkbox.checkbox-checked>label>span:nth-child(1)")
+	private WebElement checkedSNPDSNPOption;
+	
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3) uhc-checkbox.checkbox-checked>label>span:nth-child(1)")
+	private WebElement checkedSNPCSNPOption;
+	
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4) uhc-checkbox.checkbox-checked>label>span:nth-child(1)")
+	private WebElement checkedSNPISNPOption;
+	
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(5) uhc-checkbox.checkbox-checked>label>span:nth-child(1)")
 	private WebElement checkedSNPNoneOption;
 
 //Special Needs Page Element Verification Method 
@@ -256,8 +265,20 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	}
 
 	public void edit_specialneeds(String options) {
-		if(checkedSNPNoneOption.isDisplayed())
+		if(validate(checkedSNPDSNPOption, 20)){
+			validate(snpMedicaid, 30);
+			jsClickNew(snpMedicaid);
+		}else if(validate(checkedSNPCSNPOption, 20)){
+			validate(snpConditions, 30);
+			jsClickNew(snpConditions);
+		}else if(validate(checkedSNPISNPOption, 20)) {
+			validate(snpNursinghome, 30);
+			jsClickNew(snpNursinghome);
+		}else if(validate(checkedSNPNoneOption, 20)) {
+			validate(snpNone, 30);
 			jsClickNew(snpNone);
+		}
+			
 		String snpoptions[] = options.split(",");
 		for (String option : snpoptions) {
 			specialNeedspageFunctional(option);

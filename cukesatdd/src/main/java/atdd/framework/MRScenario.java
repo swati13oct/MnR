@@ -143,7 +143,7 @@ public class MRScenario {
 	// public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
 	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
-	public static final String RealDeviceURL = "https://us1.appium.testobject.com:443/wd/hub";
+	public static final String RealDeviceURL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.us-west-1.saucelabs.com/wd/hub";
 	public static final String VirtualDeviceURL = "http://" + USERNAME + ":" + ACCESS_KEY
 			+ "@ondemand.saucelabs.com:80/wd/hub";
 
@@ -668,8 +668,10 @@ public class MRScenario {
 			}
 			return props;
 		} else {
-
-			if (environment.contains("stage") || environment.equals("stage-aarp")
+			
+			if (environment.contains("stage-0"))
+				domain = "ocp-elr-dmz-nonprod.optum.com";
+			else if (environment.contains("stage") || environment.equals("stage-aarp")
 					|| environment.equals("offline-stage-aarp"))
 				domain = "uhc.com";
 			else if (environment.contains("mnr-acq-ci") || environment.equals("team-atest")
@@ -1268,10 +1270,10 @@ public class MRScenario {
 		capabilities.setCapability("testobject_session_creation_timeout", mobileSessionTimeout);
 		// capabilities.setCapability("testobject_suite_name", "PRE");
 		// capabilities.setCapability("testobject_test_name", mobileTestName);
-		// Offline prod and prod env. should not use tunnels
+		// Either Optum-Prd or Optum-Stage tunnels to be used
 		System.out.println("sauceLabsMobileTunnelIdentifier : " + sauceLabsMobileTunnelIdentifier);
-		if (!sauceLabsMobileTunnelIdentifier.equalsIgnoreCase("NONE"))
-			capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
+		capabilities.setCapability("parentTunnel", "optumtest");
+		capabilities.setCapability("tunnelIdentifier", sauceLabsMobileTunnelIdentifier);
 		capabilities.setCapability("nativeWebTap", true);
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
@@ -1304,10 +1306,12 @@ public class MRScenario {
 			System.out.println("Session ID --- " + mobileDriver.getSessionId());
 
 			if (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT)) {
-
-				System.out.println(mobileDeviceName + " JobURL  --- "
-						+ mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 				JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
+				System.out.println(mobileDeviceName + " JobURL  --- " + JobURL);
+				// System.out.println("JobReportURL ---
+				// "+mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
+				// System.out.println("APIURL ---
+				// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
 				System.out.println(mobileDriver.getContext());
 			} else {
 

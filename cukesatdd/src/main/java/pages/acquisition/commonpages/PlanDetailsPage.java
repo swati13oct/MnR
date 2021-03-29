@@ -359,7 +359,19 @@ public class PlanDetailsPage extends UhcDriver {
 	
 	@FindBy(xpath="//*[contains(@class,'optionalServicesPlanCosts') and not(contains(@class,'ng-hide'))]//*[contains(text(),'Silver Sneakers')]/ancestor::label")
 	private WebElement silverSneakersCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-box'][1]")
+	private WebElement palncompareCheckbox;
+	
+	@FindBy(xpath="//div[@class='module-plan-summary module'][1]//*[@class='compare-link'][1]")
+	private WebElement palncompareLink;
 
+	@FindBy(css = "a#emailPlanDetail")
+	protected WebElement summary_maEmailOption;
+	
+	@FindBy(xpath = "//input[@id='email']")
+	private WebElement emailPlanSummaryFieldBox;
+	
 	public WebElement getLnkEnterDrugInformation() {
 		return lnkEnterDrugInformation;
 	}
@@ -612,7 +624,8 @@ public class PlanDetailsPage extends UhcDriver {
 
 	/* extracting cost from prescription tab */
 	public String costComparisonPrescriptionDrugFromDCE() {
-
+		validateNew(prescriptionTab);
+		jsClickNew(prescriptionTab);
 		CommonUtility.waitForPageLoad(driver, getValPrescritionDrugEstimatedTotalAnnualCost(), 30);
 		scrollToView(getValPrescritionDrugEstimatedTotalAnnualCost());
 		return getValPrescritionDrugEstimatedTotalAnnualCost().getText().trim();
@@ -1145,6 +1158,44 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 
+	public PharmacySearchPage planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
+		WebElement PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-"+language+"')]"));
+		CommonUtility.waitForPageLoad(driver, PharmacyLink, 45);
+		String winHandleBefore = driver.getWindowHandle();
+		switchToNewTabNew(PharmacyLink);
+		String winHandleCurrent = driver.getWindowHandle();
+		driver.switchTo().window(winHandleBefore);
+		driver.close();
+		driver.switchTo().window(winHandleCurrent);
+
+		if (!county.equalsIgnoreCase("None")) {
+			CommonUtility.waitForPageLoad(driver, countyPopOut, 50);
+			try {
+				if (validateNew(countyPopOut)) {
+					for (WebElement webElement : countyList) {
+						if (webElement.getText().contains(county)) {
+							WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
+							countylink.click();
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
+				System.out.println("Exception!!! County does not exists." + e.getMessage());
+				Assert.fail("Exception!!! County does not exists");
+			}
+		}
+		CommonUtility.waitForPageLoad(driver, distanceDropownID, 45);
+		if (validateNew(distanceDropownID) && driver.getCurrentUrl().contains(language)) {
+			System.out.println("Pharmacy locator page for Language : "+language+" is loaded");
+			System.out.println("Current URL : "+driver.getCurrentUrl());
+			return new PharmacySearchPage(driver);
+		} else 
+			System.out.println("Pharmacy locator page not loaded");
+
+		return null;
+	}
+	
 	public void validatePdfSection(String planType) {
 
 		if (planType.contains("MAPD")) {
@@ -1930,29 +1981,63 @@ public class PlanDetailsPage extends UhcDriver {
 		else if(colName.contains("Formulary Additions")) {lang = english;docName = "Formulary";}
 		else if(colName.contains("Formulary Deletions")) {lang = english;docName = "Directory";}
 		else if(colName.contains("Alternative Drugs List")) {lang = english;docName = "Drugs"; }
-		else if(colName.contains("Formulario de Inscripción")) {lang = spanish;docName = "Application"; }
+		else if(colName.contains("Formulario de InscripciÃƒÂ³n")) {lang = spanish;docName = "Application"; }
 		else if(colName.contains("Resumen de Beneficios")) {lang = spanish;docName = "Summary of Benefits"; }
 		else if(colName.contains("Comprobante de Cobertura")) {lang = spanish;docName = "Evidence of Coverage"; }
-		else if(colName.contains("Clasificación de la Calidad del Plan")) {lang = spanish;docName = "Star Ratings"; }
+		else if(colName.contains("ClasificaciÃƒÂ³n de la Calidad del Plan")) {lang = spanish;docName = "Star Ratings"; }
 		else if(colName.contains("Programa UnitedHealth Passport")) {lang = spanish;docName = "Passport"; }
 		else if(colName.contains("Aviso Annual de Cambios")) {lang = spanish;docName = "ANOC"; }
 		else if(colName.contains("Beneficios Importantes")) {lang = spanish;docName = "Benefit Highlights"; }
 		else if(colName.contains("Directorio de Proveedores")) {lang = spanish;docName = "Directory"; }
-		else if(colName.contains("Información sobre proveedores")) {lang = spanish;docName = "Vendor Information Sheet"; }
-		else if(colName.contains("註冊表格")) {lang = chinese;docName = "Application"; }
-		else if(colName.contains("福利概覽")) {lang = chinese;docName = "Summary of Benefits"; }
-		else if(colName.contains("承保證書")) {lang = chinese;docName = "Evidence of Coverage"; }
-		else if(colName.contains("星級評定")) {lang = chinese;docName = "Star Ratings"; }
-		else if(colName.contains("年度變更通知")) {lang = chinese;docName = "ANOC"; }
-		else if(colName.contains("福利摘要")) {lang = chinese;docName = "Benefit Highlights"; }
-		else if(colName.contains("醫生名冊")) {lang = chinese;docName = "Directory"; }
-		else if(colName.contains("供應商資訊表")) {lang = chinese;docName = "Vendor Information Sheet"; }
-		else if(colName.contains("綜合處方藥一覽表")) {lang = chinese;docName = "Formulary"; }
-		else if(colName.contains("替代藥物清單")) {lang = chinese;docName = "Drugs"; }
+		else if(colName.contains("InformaciÃƒÂ³n sobre proveedores")) {lang = spanish;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("Ã¨Â¨Â»Ã¥â€ Å Ã¨Â¡Â¨Ã¦Â Â¼")) {lang = chinese;docName = "Application"; }
+		else if(colName.contains("Ã§Â¦ï¿½Ã¥Ë†Â©Ã¦Â¦â€šÃ¨Â¦Â½")) {lang = chinese;docName = "Summary of Benefits"; }
+		else if(colName.contains("Ã¦â€°Â¿Ã¤Â¿ï¿½Ã¨Â­â€°Ã¦â€ºÂ¸")) {lang = chinese;docName = "Evidence of Coverage"; }
+		else if(colName.contains("Ã¦ËœÅ¸Ã§Â´Å¡Ã¨Â©â€¢Ã¥Â®Å¡")) {lang = chinese;docName = "Star Ratings"; }
+		else if(colName.contains("Ã¥Â¹Â´Ã¥ÂºÂ¦Ã¨Â®Å Ã¦â€ºÂ´Ã©â‚¬Å¡Ã§Å¸Â¥")) {lang = chinese;docName = "ANOC"; }
+		else if(colName.contains("Ã§Â¦ï¿½Ã¥Ë†Â©Ã¦â€˜ËœÃ¨Â¦ï¿½")) {lang = chinese;docName = "Benefit Highlights"; }
+		else if(colName.contains("Ã©â€ Â«Ã§â€�Å¸Ã¥ï¿½ï¿½Ã¥â€ Å ")) {lang = chinese;docName = "Directory"; }
+		else if(colName.contains("Ã¤Â¾â€ºÃ¦â€¡â€°Ã¥â€¢â€ Ã¨Â³â€¡Ã¨Â¨Å Ã¨Â¡Â¨")) {lang = chinese;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("Ã§Â¶Å“Ã¥ï¿½Ë†Ã¨â„¢â€¢Ã¦â€“Â¹Ã¨â€”Â¥Ã¤Â¸â‚¬Ã¨Â¦Â½Ã¨Â¡Â¨")) {lang = chinese;docName = "Formulary"; }
+		else if(colName.contains("Ã¦â€ºÂ¿Ã¤Â»Â£Ã¨â€”Â¥Ã§â€°Â©Ã¦Â¸â€¦Ã¥â€“Â®")) {lang = chinese;docName = "Drugs"; }
 			
 		result.add(0, docName);
 		result.add(1,lang);
 		return result;
+	}
+	
+	public void clickOnEmailField() {
+		
+		summary_maEmailOption.click();
+	}
+	
+	public void validatePrepopulatedEmail(String email) {
+		emailPlanSummaryFieldBox.click();
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		String populatedEmail = js.executeScript("return document.getElementById('email').value").toString();
+		System.out.println("populatedEmail = "+populatedEmail);
+		Assert.assertEquals(email, populatedEmail);
+	}
+
+		public void validatealllinksonPlanDetails() {
+		validateNew(medBenefitsTab.get(0));
+		validateNew(presDrugTab1.get(0));
+		validateNew(optionalServicesTab);
+		validateNew(planCostsTab);
+		validateNew(EnrollinPlan);
+		validateNew(palncompareCheckbox);
+		validateNew(palncompareLink);
+	}
+	
+	public ProviderSearchPage validateEditDocotrsProviderButton() {
+		// TODO Auto-generated method stub
+		validateNew(editProviderButtonOnPlanDetails);
+		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		switchToNewTabNew(editProviderButtonOnPlanDetails);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
 	}
 	
 }

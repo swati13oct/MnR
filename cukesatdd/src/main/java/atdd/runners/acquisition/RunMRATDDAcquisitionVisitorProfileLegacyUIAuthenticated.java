@@ -11,10 +11,11 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcquisitionVisitorProfileUlayer
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionVisitorProfileUlayer.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVisitorProfileUlayer")
+@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionVisitorProfileLegacyUIAuthenticated.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVisitorProfileLegacyUIAuthenticated")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/visitorProfile" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionVisitorProfileUlayer.json" }, tags = { "@VisitorProfileLegacyUIAuthenticated" })
+				"pretty", "html:reports/test-report",
+				"json:target/cucumber-RunMRATDDAcquisitionVisitorProfileLegacyUIAuthenticated.json" }, tags = {
+						"@VisitorProfileLegacyUIAuthenticated" })
 public class RunMRATDDAcquisitionVisitorProfileLegacyUIAuthenticated { 
  
 }

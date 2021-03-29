@@ -681,6 +681,8 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerNavigationBarShopForaPlanTab, 45);
 		jsMouseOver(headerNavigationBarShopForaPlanTab);
 //		jsClickNew(headerNavigationBarShopForaPlanTab);
+		threadsleep(1000);							//E2E : Adding additional wait for element to be visible
+		validate(headerGetaPlanRecommendationLink);
 		jsClickNew(headerGetaPlanRecommendationLink);
 		jsMouseOut(headerNavigationBarShopForaPlanTab); // Chargers: Added jsMouseOut to avoid clickIntercept exceptions
 		validate(landingpageHeader, 30);
@@ -688,6 +690,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 //Navigating Plan RecommendationEngine via Shop for a plan -->Shop-->Tools-->Get Help Choosing	
 	public void navigationToPlanRecommendationEngineViaShopTools() {
+		waitForPageLoadSafari();
 		validate(headerNavigationBarShopForaPlanTab, 45);
 //		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
 		//desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
@@ -733,6 +736,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 //		jsClickNew(headerNavigationBarShopForaPlanTab);
 		jsClickNew(headerDrugcostLink);
 		threadsleep(2000);
+		waitForPageLoadSafari();
 		validate(drugAddBtn, 30);
 		validate(dceTitle, 30);
 		Assert.assertTrue(dceTitle.getText().contains("Drug Cost Estimator"));

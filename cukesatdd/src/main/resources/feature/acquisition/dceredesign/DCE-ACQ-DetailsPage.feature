@@ -62,14 +62,9 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | DrugName | <deleteDrug> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <addDrug1> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <insulinDrug> |
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user validates Drug List in Your Drugs Section on Drug Details Page
-    Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
-      | InsulinCopay | <insulinCopay> |
-      | Insulin Drug | <insulinDrug>  |
     Then the user validates Important information section
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user clicks PrescriptionBenifit Tab on Plan Details Page
@@ -78,14 +73,14 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
 
     @DCE_DrugDetailsValidation_AARP
     Examples: 
-      | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
-      | ativ                 | Humalog | Fanapt |         2 | Day        | Every 3 Months |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $35          |
+      | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 |
+      | ativ                 | Humalog | Fanapt |         2 | Day        | Every 3 Months |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  |
 
     @DCE_DrugDetailsValidation_UHC
     Examples: 
-      | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
-      | ativ                 | Humalog | Fanapt |        20 | Week       | Every 1 Month  |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $30          |
-      | ativ                 | Humalog | Fanapt |       200 | Month      | Every 3 Months |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $15          |
+      | drugnameAutocomplete | drug1   | drug2  | quantity2 | frequency2 | supplyLen2     | zipCode | planType | planName                                      | site | brandDrug | genericDrug | deleteDrug | addDrug1 |
+      | ativ                 | Humalog | Fanapt |        20 | Week       | Every 1 Month  |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
+      | ativ                 | Humalog | Fanapt |       200 | Month      | Every 3 Months |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Ativan    | orazepam    | Humalog    | Lipitor  |
 
   @DCE_DrugDetailsDynamicCopay_Preferred
   Scenario Outline: To verify DCE Details Page  <site> site - for Dynamic copay section for Preferred Pharmacy Copay
@@ -145,6 +140,8 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | DrugName | <drug2> |
     Then the user edits supply length to three months for following drug
       | EditDrug | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <insulinDrug> |
     Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
@@ -156,8 +153,14 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates planName matches plan Name in VPP
     Then the user validates Dynamic Copay Section for following Pharmacy selection
       | Pharmacy Selection | <DefaultSelected> |
+    Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
+      | InsulinCopay | <insulinCopay> |
+      | Insulin Drug | <insulinDrug>  |
     And user clicks on change pharmacy link from details page
     Then the user selects Mail Pharmacy and returns to DCE Details page
+    Then the user validates Insulin savings on Copay section, Your Drugs and Important Information Section
+      | InsulinCopay | <insulinCopay2> |
+      | Insulin Drug | <insulinDrug>   |
     Then the user validates Dynamic Copay Section for following Pharmacy selection
       | Pharmacy Selection | <MailPharSelected> |
     And user clicks on change pharmacy link from details page
@@ -166,18 +169,22 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user selects following pharmacy and returns to DCE Details page
       | SelectPharmacy | <SelectPharmacy> |
     Then the user validates Not Covered Pharmacy view for DCE Details Page
+    And the user validates link to Drug Summary Page
+    And user clicks on change pharmacy link on alert message from plan card on drug summary page
+    Then change pharmacy modal should be displayed
+    And user verify change pharmacy modal
 
     @DCE_DrugDetailsCopay_Standard_AARP
     Examples: 
-      | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy |
-      | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  |
-      | vigabatrin | Fanapt |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  |
+      | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
+      | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $35          | $105          |
+      | vigabatrin | Fanapt |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP)       | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $15          | $45           |
 
     @DCE_DrugDetailsCopay_Standard_UHC
     Examples: 
-      | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy |
-      | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  |
-      | vigabatrin | Fanapt |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | UHC  | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  |
+      | drug1      | drug2  | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
+      | vigabatrin | Fanapt |   33111 | MAPD     | Medica HealthCare Plans MedicareMax (HMO)     | UHC  | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $30          | $90           |
+      | vigabatrin | Fanapt |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $15          | $45           |
 
   @DCE_DrugDetailsPremiumValidation
   Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium
@@ -204,6 +211,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates planName matches plan Name in VPP
     Then the user validates following expected Premium on DCE Details Page
       | Premium | <premium> |
+    And verify DCE NBA is displayed on drug details page
 
     @DCE_DrugDetailsPremiumValidation_AARP
     Examples: 
@@ -246,6 +254,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | CoveredDrug | <drug1> |
     Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
       | NotCoveredDrug | <drug2> |
+		Then the user validates LIS text for coverages stages popups on DCE details page      
 
     @DCE_DrugDetailsLISBuyDown_AARP
     Examples: 
@@ -282,6 +291,8 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | Plan Name | <planName> |
     Then the user validates planName matches plan Name in VPP
     Then the user validates correct Copay section view and LIS message for LIS Non Buydown Plan on DCE details Page
+		Then the user validates Non-LIS text for coverages stages popups on DCE details page      
+    And verify DCE NBA is displayed on drug details page
 
     @DCE_DrugDetailsNonBuyDownLIS_AARP
     Examples: 

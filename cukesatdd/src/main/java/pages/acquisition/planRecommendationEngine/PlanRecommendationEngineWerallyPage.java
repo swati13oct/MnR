@@ -139,14 +139,14 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
 						threadsleep(5000);
-						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
+						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h3")).getText().trim());
 						doctorsSPecialtyName.add(searchResults.get(i)
 								.findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
 						WebElement saveButton = searchResults.get(i)
-								.findElement(By.cssSelector("div[class*='hidden'] button"));
+								.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
 						if (count > 1) {
 							if (i != 0) {
-								WebElement doc = searchResults.get(i - 1).findElement(By.cssSelector("h2"));
+								WebElement doc = searchResults.get(i - 1).findElement(By.cssSelector("h3"));
 								scrollToView(doc);
 							} else
 								scrollToView(serachResultsCount);
