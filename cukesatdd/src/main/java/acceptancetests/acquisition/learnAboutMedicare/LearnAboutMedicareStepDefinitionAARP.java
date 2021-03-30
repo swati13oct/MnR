@@ -1,22 +1,23 @@
 package acceptancetests.acquisition.learnAboutMedicare;
 
 import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.MedicareAdvantagePartCPlansPage;
 import pages.acquisition.commonpages.MedicareEligibilityPage;
 import pages.acquisition.commonpages.MedicarePrescriptionDrugPartDPlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import junit.framework.Assert;
 
 /**
  * Functionality: Medicare flow
@@ -110,7 +111,7 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		MedicareEligibilityPage medicareEligibilityPage = (MedicareEligibilityPage) learnAboutMedicareHomePage
 				.navigateToMedicareEligibility();
 
-		Assert.assertTrue("Medicare Eligibility page isn't loaded",
+		Assertion.assertTrue("Medicare Eligibility page isn't loaded",
 				medicareEligibilityPage.getHdrMedicareEligibility().isDisplayed());
 
 		getLoginScenario().saveBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE, medicareEligibilityPage);
@@ -157,12 +158,14 @@ public class LearnAboutMedicareStepDefinitionAARP {
 
 	}
 
+	//To be Verified
 	@SuppressWarnings("deprecation")
 	@And("^then user selects Minnesota from the dropDown on aarp site$")
 	public void user_selects_Minnesota_from_the_dropDown(DataTable attributes) {
 		MedicareEligibilityPage medicareEligibilityPage = (MedicareEligibilityPage) getLoginScenario()
 				.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
-		List<List<String>> data = attributes.raw();
+//		List<List<String>> data = attributes.raw();
+		List<List<String>> data = attributes.asLists();
 		String State = data.get(0).get(1).toString();
 		medicareEligibilityPage.stateSelection(State);
 
@@ -176,11 +179,13 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		medicareEligibilityPage.typeOfUnitedHealthcareInsuranceCompanyPlans();
 	}
 
+	//To be Verified
 	@And("^then user selects Alabama from the dropDown on aarp site$")
 	public void user_selects_Albama_from_the_dropDown(DataTable attributes) {
 		MedicareEligibilityPage medicareEligibilityPage = (MedicareEligibilityPage) getLoginScenario()
 				.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
-		List<List<String>> data = attributes.raw();
+//		List<List<String>> data = attributes.raw();
+		List<List<String>> data = attributes.asLists();
 		String State = data.get(0).get(1).toString();
 		medicareEligibilityPage.stateSelection(State);
 
@@ -194,10 +199,12 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		medicareEligibilityPage.typeOfUnitedHealthcareInsuranceCompanyPlans();
 	}
 
+	//To be Verified
 	@And("^verifies plan search with a valid zipcode on aarp site$")
 	public void verifies_plan_search_with_a_valid_zipcode(DataTable attributes) {
 
-		List<List<String>> data = attributes.raw();
+//		List<List<String>> data = attributes.raw();
+		List<List<String>> data = attributes.asLists();
 		String zipCode = data.get(0).get(1).toString();
 		String option = data.get(1).get(1).toString();
 		if (option.contains("ME")) {
@@ -225,13 +232,15 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vpp);
 	}
 
+	//To be verified
 	@And("^views plan of a particular type on aarp site$")
 	public void clicks_on_medicare_advantage_tab(DataTable attributes) {
 		 VPPPlanSummaryPage vpp = (VPPPlanSummaryPage)
 		 getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		wd.navigate().refresh();
-		List<List<String>> data = attributes.raw();
+//		List<List<String>> data = attributes.raw();
+		List<List<String>> data = attributes.asLists();
 		String planType = data.get(0).get(1).toString();
 		vpp.viewPlanSummary(planType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vpp);
@@ -239,9 +248,11 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		
 	}
 	
+	//To be verified
 	@And("^verifies plantype on aarp site$")
 	public void verifies_plantype_on_aarp_site(DataTable attributes) {
-		List<List<String>> data = attributes.raw();
+//		List<List<String>> data = attributes.raw();
+		List<List<String>> data = attributes.asLists();
 		String planType = data.get(0).get(1).toString();
 		VPPPlanSummaryPage vpp = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
@@ -260,19 +271,21 @@ public class LearnAboutMedicareStepDefinitionAARP {
 	
 
 	/* Medicare Advantage */
+	//To be Verified
 	@SuppressWarnings("deprecation")
 	@And("^user selects a plan from the learn about medicare dropList on aarp site$")
 	public void user_selects_plan_from_the_learn_about_medicare_dropList(DataTable attributes) {
 		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
 				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
-		List<List<String>> data = attributes.raw();
+//		List<List<String>> data = attributes.raw();
+		List<List<String>> data = attributes.asLists();
 		String planType = data.get(0).get(1).toString();
 
 //		learnAboutMedicareHomePage
 //				.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicareTitle().get(1));
 
 		if (planType.equals("MA")) {
-//			Assert.assertTrue("Medicare Advantage link isn't displayed",
+//			Assertion.assertTrue("Medicare Advantage link isn't displayed",
 //					learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(4).getText().contains("Advantage"));
 
 			learnAboutMedicareHomePage
@@ -281,12 +294,12 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		if (planType.equals("PDP")) {
 			learnAboutMedicareHomePage.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicareTitle().get(1));
 			if (learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(6).getText().contains("Prescription")) {
-				Assert.assertTrue("Medicare Prescription Drug Plan link isn't displayed",
+				Assertion.assertTrue("Medicare Prescription Drug Plan link isn't displayed",
 						learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(6).isDisplayed());
 				learnAboutMedicareHomePage
 						.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(6));
 			} else {
-				Assert.assertTrue("Medicare Prescription Drug Plan link isn't displayed",
+				Assertion.assertTrue("Medicare Prescription Drug Plan link isn't displayed",
 						learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(5).isDisplayed());
 				learnAboutMedicareHomePage
 						.navigateToMedicareMenuLinks(learnAboutMedicareHomePage.getLstLearnAboutMedicare().get(5));
@@ -295,9 +308,11 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		}
 	}
 
+	//To be verified
 	@And("^clicks on plans available option on aarp site$")
 	public void clicks_on_plans_available_option(DataTable attributes) {
-		List<List<String>> data = attributes.raw();
+//		List<List<String>> data = attributes.raw();
+		List<List<String>> data = attributes.asLists();
 		String planType = data.get(0).get(1).toString();
 		if (planType.equals("MA")) {
 			MedicareAdvantagePartCPlansPage medicareAdvantagePartCPlansPage = new MedicareAdvantagePartCPlansPage(wd);
@@ -316,9 +331,11 @@ public class LearnAboutMedicareStepDefinitionAARP {
 
 	}
 
+	//To be verified
 	@And("^user selects a plan from the learn about medicare homePage on aarp site$")
 	public void user_selects_a_plan_from_the_learn_about_medicare_homePage(DataTable attributes) {
-		List<List<String>> data = attributes.raw();
+//		List<List<String>> data = attributes.raw();
+		List<List<String>> data = attributes.asLists();
 		String planType = data.get(0).get(1).toString();
 		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
 				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);

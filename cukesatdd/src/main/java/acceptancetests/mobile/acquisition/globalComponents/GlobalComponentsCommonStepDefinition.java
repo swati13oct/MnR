@@ -4,26 +4,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.commonpages.EnterZipCodePage;
-import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
-import pages.acquisition.commonpages.ContactUsAARPPage;
-import pages.acquisition.commonpages.DisclaimersAARPPage;
-import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
-import pages.acquisition.commonpages.SiteMapAARPPage;
-import pages.acquisition.commonpages.TermsnConditionsAARPPage;
-import pages.acquisition.dceredesign.GetStartedPage;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
@@ -33,7 +23,6 @@ import pages.mobile.acquisition.ulayer.DisclaimersAARPPageMobile;
 import pages.mobile.acquisition.ulayer.PrivacyPolicyAARPPageMobile;
 import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.ulayer.TermsnConditionsAARPPageMobile;
-import pages.acquisition.commonpages.AboutUsAARPPage;
 
 
 public class GlobalComponentsCommonStepDefinition {
@@ -55,7 +44,7 @@ public class GlobalComponentsCommonStepDefinition {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateHeaderLinks();
 		} else {
-			Assert.fail("Home page not found");
+			Assertion.fail("Home page not found");
 		}
 	}
 	
@@ -68,7 +57,7 @@ public class GlobalComponentsCommonStepDefinition {
 			aquisitionhomepage.validateGlobalFooterLinks();
 			//aquisitionhomepage.clickBrowserBackButton();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 	
@@ -113,7 +102,7 @@ public class GlobalComponentsCommonStepDefinition {
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
-			Assert.fail("DCE Redesign page object not loaded");
+			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
 //	@Given("^the user navigates to following medicare acquisition site page$")
@@ -141,7 +130,7 @@ public class GlobalComponentsCommonStepDefinition {
 			
 			aquisitionhomepage.validateSubNavShopPlanLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 	
@@ -152,18 +141,19 @@ public class GlobalComponentsCommonStepDefinition {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateSubNavMedEdLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 	
 	@Then("^the user validates TFN on the page$") 
 	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -223,9 +213,9 @@ public class GlobalComponentsCommonStepDefinition {
 		if(aboutUsAARPPage!= null){
 			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE,
 					aboutUsAARPPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("Aboutus page not found");
+			Assertion.fail("Aboutus page not found");
 		}
 	}
 	
@@ -237,9 +227,9 @@ public class GlobalComponentsCommonStepDefinition {
 		ContactUsAARPPageMobile contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
 		if (contactUsAARPPage != null) {
 			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("contactus page not found");
+			Assertion.fail("contactus page not found");
 		}
 	}
 
@@ -253,9 +243,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE,
 					siteMapAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("sitemap page not found");
+			Assertion.fail("sitemap page not found");
 		}
 	}
 	
@@ -269,9 +259,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE,
 					privacyPolicyAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("privacypolicy page not found");
+			Assertion.fail("privacypolicy page not found");
 		}
 	}
 
@@ -285,9 +275,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_TERMS_AND_CONDITIONS_PAGE,
 					termsnConditionsAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("terms&conditions page not found");
+			Assertion.fail("terms&conditions page not found");
 		}
 	}
 
@@ -300,9 +290,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE,
 					disclaimersAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("disclaimers page not found");
+			Assertion.fail("disclaimers page not found");
 		}
 	}
 
@@ -315,9 +305,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE,
 					agentsnBrokersAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("agents&brokers page not found");
+			Assertion.fail("agents&brokers page not found");
 		}
 	}
 
@@ -328,7 +318,7 @@ public class GlobalComponentsCommonStepDefinition {
 		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		  AcquisitionHomePageMobile aquisitionHomePageReload =
 		  aquisitionhomepage.homeFooterClick();
-		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
+		  Assertion.assertTrue("home page not found", aquisitionHomePageReload!= null); 
 	  }
 
 	  @And("^the user clicks on browser back button$")

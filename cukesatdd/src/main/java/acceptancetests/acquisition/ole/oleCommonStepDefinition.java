@@ -1,26 +1,23 @@
 package acceptancetests.acquisition.ole;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.util.Strings;
 
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
 
 public class oleCommonStepDefinition {
 	
@@ -34,13 +31,14 @@ public class oleCommonStepDefinition {
 	@Then("^the user navigates to clicks on Enroll Now from visitor profile to start OLE flow$")
 	public void the_user_navgates_to_clicks_on_Enroll_Now_From_VisitorProfile_flow(DataTable planAttributes) throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String ZipCode = givenAttributesMap.get("Zip Code");
@@ -98,10 +96,10 @@ public class oleCommonStepDefinition {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 @Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
@@ -147,9 +145,9 @@ public class oleCommonStepDefinition {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 
 	}
 
@@ -168,10 +166,10 @@ public class oleCommonStepDefinition {
 		if (Validation_Status) {
 			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 	}
 

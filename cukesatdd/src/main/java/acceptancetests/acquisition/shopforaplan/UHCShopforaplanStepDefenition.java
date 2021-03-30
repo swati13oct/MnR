@@ -1,23 +1,8 @@
 package acceptancetests.acquisition.shopforaplan;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.EnrollmentBasicsPage;
-import pages.acquisition.commonpages.ProviderSearchPage;
 
 
 public class UHCShopforaplanStepDefenition {
@@ -39,7 +24,7 @@ public class UHCShopforaplanStepDefenition {
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_UHCLAYER, shop);
 		}
 		else {
-			Assert.fail("Issue in selecting a plan drop down");
+			Assertion.fail("Issue in selecting a plan drop down");
 		}
 
 	}*/

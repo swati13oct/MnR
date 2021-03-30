@@ -1,24 +1,22 @@
 package acceptancetests.acquisition.planRecommendationEngine;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.*;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanSelectorNewPage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
@@ -46,17 +44,18 @@ public class PlanRecommendationEngineStepDefinition {
 		return loginScenario;
 	}
 	WebDriver wd;
-	List<DataTableRow> inputRow;
+//	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
 	public static String PREflow="";
 	
 	public void readfeaturedata(DataTable data) {
-		inputRow = new ArrayList(data.getGherkinRows());
+//		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
-		for (int i = 0; i < inputRow.size(); i++) {
+		inputValues = getLoginScenario().readDataTableAsMaps(data);
+		/*for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0),
 			inputRow.get(i).getCells().get(1));
-		}
+		}*/
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
@@ -101,7 +100,7 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
 		boolean isResultsPage = planSelectorNewPage.JumpLink();
-		Assert.assertTrue("Plan Results Page not loaded", isResultsPage);
+		Assertion.assertTrue("Plan Results Page not loaded", isResultsPage);
 	}
 	
 
@@ -111,7 +110,7 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
 		boolean isPlanDetailsPage = planSelectorNewPage.navigateToPlanDetails(County);
-		Assert.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
+		Assertion.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
 
 	}
 

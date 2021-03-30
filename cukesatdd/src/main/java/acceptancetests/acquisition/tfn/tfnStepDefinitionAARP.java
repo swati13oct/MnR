@@ -1,30 +1,8 @@
 package acceptancetests.acquisition.tfn;
 
-/**
- * @author Tamzid
- *
- */
-
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class tfnStepDefinitionAARP {
 
@@ -65,7 +43,7 @@ public class tfnStepDefinitionAARP {
 				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, tfnPage);
 			}
 			else{
-				Assert.fail("Error validating TFN in  VPP plan summary page");
+				Assertion.fail("Error validating TFN in  VPP plan summary page");
 			}
 
 
@@ -90,7 +68,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MA Tab displaying correct TFN");
 		}
 		else{
-			Assert.fail("TFN in  VPP plan summary page DID NOT Match");
+			Assertion.fail("TFN in  VPP plan summary page DID NOT Match");
 		}	
 	}
 	
@@ -102,7 +80,7 @@ public class tfnStepDefinitionAARP {
 		if(tfnPage.learnAboutmedicareTFN()==true){
 			System.out.println("TFN displaying properly on Learn abot medicare page");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -114,7 +92,7 @@ public class tfnStepDefinitionAARP {
 		if(tfnPage.MedSupTFN()==true){
 			System.out.println("TFN displaying properly on Med Sup Right Rail ");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 	}
 
@@ -124,7 +102,7 @@ public class tfnStepDefinitionAARP {
 		if(tfnPage.PDPTFN()==true){
 			System.out.println("TFN displaying properly on PDP Right Rail ");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 	}
 
@@ -134,7 +112,7 @@ public class tfnStepDefinitionAARP {
 		if(tfnPage.PDPplanDrugCvrg()==true){
 			System.out.println("TFN displaying properly on PDP Plancand Drug coverafe Right Rail ");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 		
 	}
@@ -145,7 +123,7 @@ public class tfnStepDefinitionAARP {
 		if(tfnPage.PdpOleTFN()==true){
 			System.out.println("TFN displaying properly on PDP Plancand Drug coverafe Right Rail ");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 	}
 	
@@ -206,7 +184,7 @@ public class tfnStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, tfnPage);
 		}
 		else{
-			Assert.fail("MA-TAB Page TFN Did Not Match the Expected TFN");
+			Assertion.fail("MA-TAB Page TFN Did Not Match the Expected TFN");
 		}
 
 
@@ -229,7 +207,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -250,7 +228,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -272,7 +250,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -309,7 +287,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Home Page displaying proper number");
 		}
 		else{
-			Assert.fail("Error validating plans in  Acqusition homepage TFN");
+			Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 		}
 		
 	}
@@ -332,7 +310,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Med Sup Tab displaying correct number");
 		}
 		else{
-			Assert.fail("Error validating plans in  VPP plan summary page");
+			Assertion.fail("Error validating plans in  VPP plan summary page");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -361,7 +339,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Home Page displaying proper number");
 		}
 		else{
-			Assert.fail("Error validating plans in  Acqusition homepage TFN");
+			Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 		}
 	}
 	
@@ -381,7 +359,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MedSup Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN ");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN ");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -405,7 +383,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MA-Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("MA-TAB Page TFN did not Match Expected TFN");
+			Assertion.fail("MA-TAB Page TFN did not Match Expected TFN");
 		}
 
 	}
@@ -429,7 +407,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MA-Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("MA-TAB Page TFN did not Match Expected TFN");
+			Assertion.fail("MA-TAB Page TFN did not Match Expected TFN");
 		}
 		
 	}
@@ -455,7 +433,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Home Page displaying proper number");
 		}
 		else{
-			Assert.fail("Error validating plans in  Acqusition homepage TFN");
+			Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 		}
 	}
 	
@@ -477,7 +455,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MA-Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("MA-TAB Page TFN did not Match Expected TFN");
+			Assertion.fail("MA-TAB Page TFN did not Match Expected TFN");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -497,7 +475,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -518,7 +496,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -539,7 +517,7 @@ public class tfnStepDefinitionAARP {
 				System.out.println("MedSup Page displaying proper number "+ medsuptfn );
 			}
 			else{
-				Assert.fail("TFN did not match in  MedSup plan summary page");
+				Assertion.fail("TFN did not match in  MedSup plan summary page");
 			}
 	}
 
@@ -585,7 +563,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Home Page displaying proper number");
 		}
 		else{
-			Assert.fail("Error validating plans in  Acqusition homepage TFN");
+			Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 		}
 		
 	}
@@ -609,7 +587,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Med Sup Page is displaying the correct number:  "+ medsuptfn);
 		}
 		else{
-			Assert.fail("Error validating plans in  VPP plan summary page");
+			Assertion.fail("Error validating plans in  VPP plan summary page");
 		}
 	}
 	
@@ -646,7 +624,7 @@ public class tfnStepDefinitionAARP {
 				System.out.println("Medical Eligibility  Page displaying proper number "+ eligibiltyTFN );
 			}
 			else{
-				Assert.fail("TFN did not match in Medical Eligibility page "+ eligibiltyTFN);
+				Assertion.fail("TFN did not match in Medical Eligibility page "+ eligibiltyTFN);
 			}
 	}
 
@@ -666,7 +644,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MA Tab displaying proper number:  "+maTFN);
 		}
 		else{
-			Assert.fail("TFN did not match in  VPP plan summary page"+ maTFN);
+			Assertion.fail("TFN did not match in  VPP plan summary page"+ maTFN);
 		}
 	}
 	@Then("^navigate to MedSup via direct url towards med sup to varify TFN$")
@@ -687,7 +665,7 @@ public class tfnStepDefinitionAARP {
 				Thread.sleep(15000);
 			}
 			else{
-				Assert.fail("TFN did not match in  MedSup plan summary page");
+				Assertion.fail("TFN did not match in  MedSup plan summary page");
 			}
 	}
 	
@@ -709,7 +687,7 @@ public class tfnStepDefinitionAARP {
 				Thread.sleep(15000);
 			}
 			else{
-				Assert.fail("TFN did not match in  MedSup plan summary page");
+				Assertion.fail("TFN did not match in  MedSup plan summary page");
 			}
 	}*/
 }

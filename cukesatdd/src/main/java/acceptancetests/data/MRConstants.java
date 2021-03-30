@@ -17,9 +17,9 @@ public class MRConstants {
 	// "https://www.awe-"+MRScenario.environment+"-aarpmedicareplans." + getDomain()
 	// + "/";
 	public static final String AARP_URL = "https://www." + MRScenario.environment + "-aarpmedicareplans." + getDomain()
-			+ "/";
+	+ "/";
 	public static final String AARP_URL_NEW = "https://" + MRScenario.environment + "-aarpmedicareplans." + getDomain()
-			+ "/";
+	+ "/";
 
 	public static final String AARP_URL_OFFLINE = "https://offline.aarpmedicareplans.com/";
 	public static final String AARP_URL_PROD = "https://www.aarpmedicareplans.com/";
@@ -445,7 +445,7 @@ public class MRConstants {
 	// "https://"+MRScenario.environment+"-generic."+
 	// getDomain()+"/content/medicare/memberauth.html#/memberAuthLogin";
 	public static final String MEMBER_AUTH = "https://" + MRScenario.environment + "-mnrgeneric2." + getDomain()
-			+ "/content/medicare/memberauth.html#/memberAuthLogin";
+	+ "/content/medicare/memberauth.html#/memberAuthLogin";
 
 	public static final String MEMBER_AUTH_STAGE = "https://" + MRScenario.environment
 			+ "-generic.uhc.com/content/medicare/memberauth.html#/memberAuthLogin";

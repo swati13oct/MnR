@@ -4,16 +4,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 
 public class SAMIconsCommonStepDefinition {
@@ -31,16 +29,18 @@ public class SAMIconsCommonStepDefinition {
 	@Then("^user opens the page to validate$")
 	public void the_user_opens_the_page_to_validate(DataTable givenAttributes) throws InterruptedException {
 		
-		List<DataTableRow> memberAttributesRow = givenAttributes
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
-			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 						.get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
-
-			String pagename = memberAttributesMap.get("pagename");
+			}*/
+		
+		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		
+		String pagename = memberAttributesMap.get("pagename");
 		
 		System.out.println(pagename);
 	
@@ -58,8 +58,8 @@ public class SAMIconsCommonStepDefinition {
 		//aquisitionhomepage.validateCallSamContent();
 		aquisitionhomepage.validateCallpopup();
 		/*
-		 * if(returnval==null){ Assert.fail("No TFN found"); }else{
-		 * Assert.assertTrue(true); }
+		 * if(returnval==null){ Assertion.fail("No TFN found"); }else{
+		 * Assertion.assertTrue(true); }
 		 */
 	}
 	
@@ -91,7 +91,7 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	flag=aquisitionhomepage.validateChatNonHours();
 
-		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
+		Assertion.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
 		
 	}
 	
@@ -99,16 +99,17 @@ public class SAMIconsCommonStepDefinition {
 	@Then("^user opens the page to validate M&R Sites$")
 	public void the_user_opens_the_page_to_validate_Sites(DataTable givenAttributes) throws InterruptedException {
 		
-		List<DataTableRow> memberAttributesRow = givenAttributes
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
-			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 						.get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 
-			String pagename = memberAttributesMap.get("pagename");
+		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		String pagename = memberAttributesMap.get("pagename");
 		
 		System.out.println(pagename);
 	
@@ -141,14 +142,15 @@ public class SAMIconsCommonStepDefinition {
 	@Then("^Then the user validates whether call icon on a page$")
 	public void the_user_validates_whether_callicon_page(DataTable givenAttributes) throws InterruptedException {
 		
-		List<DataTableRow> memberAttributesRow = givenAttributes
-				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
+				.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
+		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
 	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	String TFNXpath = memberAttributesMap.get("TFN Xpath");
