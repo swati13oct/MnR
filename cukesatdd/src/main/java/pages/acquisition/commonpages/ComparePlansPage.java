@@ -319,7 +319,8 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
 	
-	@FindBy(xpath = "//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']")
+//	@FindBy(xpath = "//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']")
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']//button//*[text()='Enroll']")
 	private WebElement EnrollinPlanCompare;
 	
 	public ComparePlansPage(WebDriver driver) {
