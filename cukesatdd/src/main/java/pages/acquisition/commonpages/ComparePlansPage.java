@@ -1320,7 +1320,7 @@ public class ComparePlansPage extends UhcDriver {
 			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
 			//DrugYouPay.getText will get child element text as well in Safari browser which fails the scripts ahead
-			if (!MRScenario.browsername.equalsIgnoreCase("Safari")) {
+			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
 				drugYouPay = DrugYouPay.getText().trim();
 			} else {
 				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
@@ -1494,7 +1494,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(validateemailbutton);
 		validateNew(removeLink);
 		validateNew(viewPlanDetailslink);
-		validateNew(viewUnSaveIcon);
+//		validateNew(viewUnSaveIcon);
 		validateNew(ViewAllPlans);
 		validateNew(addPlanButton);
 		System.out.println("Validated all links plan compare");

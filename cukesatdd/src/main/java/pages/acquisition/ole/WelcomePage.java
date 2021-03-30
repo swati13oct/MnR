@@ -20,7 +20,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
@@ -120,7 +119,7 @@ public class WelcomePage extends UhcDriver{
 		
 		System.out.println("Validating Welcome Page for OLE");
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver,45);
+			checkModelPopup(driver, 30);
 		else 
 			checkModelPopup(driver,10);
 		validateNew(WelcomePageHeader);
@@ -358,8 +357,9 @@ public MedicareInformationPage navigate_to_medicare_info_page() {
 	}
 
 	public PharmacySearchPage clickPharamcyLinkAndSwitchTab() {
-		pharmacyLink.click();
-		switchToNewTab();
+		/*pharmacyLink.click();
+		switchToNewTab();*/
+		switchToNewTabNew(pharmacyLink);
 		if (driver.getCurrentUrl().contains("health-plans/aarp-pharmacy.html#/Pharmacy-Search-English")) {
 			return new PharmacySearchPage(driver);
 		}

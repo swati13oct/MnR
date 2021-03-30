@@ -27,7 +27,8 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
     #Then the user validated invalid address error message for next button on Step1 on AARP site
     Then the user validates address autocomplete on Step1
     Then user clicks Next to Navigate to Second Step
-   Then the user validates Decision Guide Step 2 page info is same as the saved information from Pre-entry page on site
+   #Then the user validates Decision Guide Step 2 page info is same as the saved information from Pre-entry page on site
+   Then the user fill details on the IS pages and click on submit button back to vpp page
     #Then the user validates all the required fields for blank validation on Second Step on AARP site
     #Then the user validated all fields for invalid validation on Second Step on AARP site
     # Then the user provides all valid information for Second Step on AARP site
@@ -40,8 +41,9 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
     # | MobileFlag | <mobileFlag> |
     #Then the user clicks Submit to submit Decision Guide on AARP site
     #Then the user validates Thank You Page
-     Then the user clicks Submit to submit Decision Guide
-    Then the user validates Thank You Page and land on Medsupp Page
+    #Then the user clicks Submit to submit Decision Guide
+    #Then the user validates Thank You Page and land on Medsupp Page
+     
 
     @IS_DecisionGuide_Common_AARP @UATRegression
     Examples: 
@@ -78,7 +80,8 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
     #Then the user validated invalid address error message for next button on Step1 on AARP site
     Then the user validates address autocomplete on Step1
      Then user clicks Next to Navigate to IS Second Step
-    Then the user validates Decision Guide Step 2 page info is same as the saved information from Pre-entry page on site
+    #Then the user validates Decision Guide Step 2 page info is same as the saved information from Pre-entry page on site
+     Then the user fill details on the IS pages and click on submit button back to vpp page
     #Then the user validates all the required fields for blank validation on Second Step on AARP site
     #Then the user validated all fields for invalid validation on Second Step on AARP site
     # Then the user provides all valid information for Second Step on AARP site
@@ -89,8 +92,8 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
     #  | AARPno     | <aarpNo>     |
     #  | PhNo       | <phNo>       |
     # | MobileFlag | <mobileFlag> |
-    Then the user clicks Submit to submit Decision Guide
-    Then the user validates Thank You Page and land on Medsupp Page
+    #Then the user clicks Submit to submit Decision Guide
+    #Then the user validates Thank You Page and land on Medsupp Page
 
     @IS_DecisionGuide_Common_AARP @UATRegression
     Examples: 

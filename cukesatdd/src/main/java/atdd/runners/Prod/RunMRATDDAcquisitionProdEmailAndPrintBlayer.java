@@ -15,6 +15,8 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionProdEmailAndPrintBlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionProdEmailAndPrintBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = {
 		"src/main/resources/feature/acquisition/vpp/VPP-EmailAndPrint-Common.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionProdEmailAndPrintBlayer.json" }, tags = { "@VppEmailandPrintProdSanity_UHC" })
+				"pretty", "html:reports/test-report",
+				"json:target/cucumber-RunMRATDDAcquisitionProdEmailAndPrintBlayer.json" }, tags = {
+						"@prodRegression_UHC" })
 public class RunMRATDDAcquisitionProdEmailAndPrintBlayer {
 }
