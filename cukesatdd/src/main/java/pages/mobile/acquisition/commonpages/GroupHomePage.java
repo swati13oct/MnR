@@ -2,7 +2,6 @@ package pages.mobile.acquisition.commonpages;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 
@@ -72,7 +72,7 @@ public class GroupHomePage extends UhcDriver {
 	}
 	
 	public void validateSignInOrRegisterbtn(){
-		//Assert.assertTrue("signInOrRegisterbtn is not displayed in group page",signInOrRegisterbtn.isDisplayed());
+		//Assertion.assertTrue("signInOrRegisterbtn is not displayed in group page",signInOrRegisterbtn.isDisplayed());
 	}
 	
 	public void clickSignInOrRegisterbtn(){
@@ -80,9 +80,9 @@ public class GroupHomePage extends UhcDriver {
 		WebElement signInOrRegisterbtn = driver.findElement(By.id("cq-imagebutton-jsp-/content/gr/en/"+groupname+"/right_column/jcr:content/parsys/titledtext_0/parsys/events/parsys/imagebutton"));
 		signInOrRegisterbtn.click();
 		if(driver.getCurrentUrl().contains("medicare.uhc.com")){
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}else{
-			Assert.assertFalse("Signin Or Registration button is not redirected to HSID",true);
+			Assertion.assertFalse("Signin Or Registration button is not redirected to HSID",true);
 		}
 	}
 

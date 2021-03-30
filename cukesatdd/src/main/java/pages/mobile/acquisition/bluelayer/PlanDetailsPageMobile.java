@@ -33,7 +33,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AddDrugPage;
@@ -1022,7 +1021,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public pages.mobile.acquisition.ulayer.ProviderSearchPageMobile validateLookUpYourProviderButton() {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(lookUpYourProviderButton);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new pages.mobile.acquisition.ulayer.ProviderSearchPageMobile(driver);
@@ -1057,7 +1057,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @param additionalBenefits --> Data table which has the different benefit types
 	 * To validate all the additional benefits given in the feature file
 	 */
-	public void validatingAdditionalBenefitTextInPlanDetails(List<DataTableRow> additionalBenefits) {
+	public void validatingAdditionalBenefitTextInPlanDetails(List<List<String>> additionalBenefits) {
 		
 		//boolean validationFlag = true;
 		WebElement AdditionalBenefitType;
@@ -1065,24 +1065,24 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		String displayedText;
 		
 		for(int i=0;i<additionalBenefits.size();i=i+2) {
-			if(additionalBenefits.get(i).getCells().get(1).contains("Fitness")) {
-				AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+			if(additionalBenefits.get(i).get(1).contains("Fitness")) {
+				AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
-				ActualTextforBenefit =  driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
+				ActualTextforBenefit =  driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
-				if(!displayedText.contains(additionalBenefits.get(i+1).getCells().get(1))){
+				if(!displayedText.contains(additionalBenefits.get(i+1).get(1))){
 					Assert.fail("Proper value not found");
 				}
 			}else {
-				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
-				ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
+				ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
-				if(!displayedText.contains(additionalBenefits.get(i+1).getCells().get(1))){
+				if(!displayedText.contains(additionalBenefits.get(i+1).get(1))){
 					Assert.fail("Proper value not found");
 				}
 			}
@@ -1095,20 +1095,20 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @param medicalBenefits --> Data table which has the different benefit types
 	 * To validate all the medical benefits given in the feature file
 	 */
-	public void validatingMedicalBenefitTextInPlanDetails(List<DataTableRow> medicalBenefits) {
+	public void validatingMedicalBenefitTextInPlanDetails(List<List<String>> medicalBenefits) {
 		
 		WebElement medicalBenefitType;
 		WebElement ActualTextforBenefit;
 		String displayedText;
 		
 		for(int i=0;i<medicalBenefits.size();i=i+2) {
-				medicalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+medicalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				medicalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+medicalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : "+medicalBenefitType.getText());
-				ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+medicalBenefits.get(i).getCells().get(1)+"'))]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[contains(@class,'medical-benefits')]/span"));
+				ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+medicalBenefits.get(i).get(1)+"'))]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[contains(@class,'medical-benefits')]/span"));
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
-				if(!displayedText.contains(medicalBenefits.get(i+1).getCells().get(1))){
+				if(!displayedText.contains(medicalBenefits.get(i+1).get(1))){
 					Assert.fail("Proper value not found");
 				}
 		}

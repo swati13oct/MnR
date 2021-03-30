@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,6 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.mobile.acquisition.commonpages.PageTitleConstants;
@@ -138,7 +138,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 	}
 
 	public void validateThePage() {
-		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
+		Assertion.assertTrue(addDrugDetailsPage.isDisplayed());
 	}
 
 	public SavingsOppurtunityMobile continueAddDrugDetailsModWithSaving() throws InterruptedException {

@@ -9,10 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
+public class PlanRecommendationEnginePharmacyPage extends GlobalWebElements {
 
                 public PlanRecommendationEnginePharmacyPage(WebDriver driver) {
                                 super(driver);
@@ -22,7 +21,7 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                 @Override
                 public void openAndValidate() {
                                 checkModelPopup(driver);
-                                clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+                                clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
                                 waitTillFrameAvailabeAndSwitch(iframePst, 45);
                 }
                 
@@ -83,19 +82,19 @@ public class PlanRecommendationEnginePharmacyPage extends UhcDriver {
                                                 String currentPageUrl = driver.getCurrentUrl(); 
                                                 currentPageUrl.contains("/plan-recommendation-engine.html/");
                                                 validate(planSelectorPageTilte);
-//                                                Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//                                                Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
                                                 validate(pageStepsNumberName, 30);
                                                 validate(pageProgressPercentage, 30);
                                                 desktopCommonUtils.currentPageValidation(page.toUpperCase());
                                                 validate(pageRequiredInfo);
-//                                                Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//                                                Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
                                                 validate(pharmacyTitle);
-//                                                Assert.assertTrue(pharmacyTitle.getText().contains("pharmacy"));
+//                                                Assertion.assertTrue(pharmacyTitle.getText().contains("pharmacy"));
                                                 validate(pharmacyPagePrimaryQuestionMark);
                                                 validate(onlinePharmacy, 30);
-//                                                Assert.assertTrue(onlinePharmacy.getText().contains("Online"));
+//                                                Assertion.assertTrue(onlinePharmacy.getText().contains("Online"));
                                                 validate(retailPharmacy, 30);
-//                                                Assert.assertTrue(retailPharmacy.getText().contains("Retail"));
+//                                                Assertion.assertTrue(retailPharmacy.getText().contains("Retail"));
                                                 previousBtn.click();
                                                 System.out.println("Validating "+page+" page Previous button functionality");
                                                 desktopCommonUtils.previousPageValidation(page.toUpperCase());

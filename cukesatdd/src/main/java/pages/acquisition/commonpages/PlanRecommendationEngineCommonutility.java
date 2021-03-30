@@ -3,9 +3,6 @@
  */
 package pages.acquisition.commonpages;
 
-import java.util.concurrent.TimeUnit;
-
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,11 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
-import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 
-public class PlanRecommendationEngineCommonutility extends UhcDriver {
+public class PlanRecommendationEngineCommonutility extends GlobalWebElements {
 	
 	Actions actions = new Actions(driver);
 
@@ -32,7 +27,7 @@ public class PlanRecommendationEngineCommonutility extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 
 	}

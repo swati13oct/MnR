@@ -38,7 +38,7 @@ public class LoadingMobilePage extends UhcDriver {
 		// String currentPageUrl = driver.getCurrentUrl();
 		// currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(loadingText, 10);
-		// Assert.assertTrue(loadingText.getText().contains(""));
+		// Assertion.assertTrue(loadingText.getText().contains(""));
 		// validate(loadingDesktopImage,3);
 		// validate(loadingLoaderImage,3);
 		try {

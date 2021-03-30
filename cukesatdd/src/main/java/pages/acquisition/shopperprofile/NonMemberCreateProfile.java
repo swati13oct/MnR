@@ -1,8 +1,6 @@
 package pages.acquisition.shopperprofile;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
@@ -13,8 +11,6 @@ import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.ComparePlansPage;
 
 
@@ -79,15 +75,15 @@ public class NonMemberCreateProfile extends UhcDriver {
 	 * @param details
 	 * @return
 	 */
-	public ComparePlansPage createProfile(DataTable details) {
-		
-		List<DataTableRow> givenAttributesRow = details.getGherkinRows();
+	public ComparePlansPage createProfile(HashMap<String, String> givenAttributesMap) {
+		//Handled dataTable from step definition
+		/*List<DataTableRow> givenAttributesRow = details.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String emailID = givenAttributesMap.get("Email");
 		
 		String DOB = givenAttributesMap.get("DOB");

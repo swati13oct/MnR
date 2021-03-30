@@ -8,10 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
+public class PlanRecommendationEngineCostPreferencesPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineCostPreferencesPage(WebDriver driver) {
 		super(driver);
@@ -21,7 +20,7 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -82,21 +81,21 @@ public class PlanRecommendationEngineCostPreferencesPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
-//		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//		Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
 		validate(pageProgressPercentage, 30);
 		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
-//		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//		Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(preferencesTitle);
-//		Assert.assertTrue(preferencesTitle.getText().contains("cost"));
+//		Assertion.assertTrue(preferencesTitle.getText().contains("cost"));
 		validate(costPagePrimaryQuestionMark);
 		validate(preferencesTitleInfo);
-//		Assert.assertTrue(preferencesTitleInfo.getText().contains("cost"));
+//		Assertion.assertTrue(preferencesTitleInfo.getText().contains("cost"));
 		validate(lowerPremium, 30);
-//		Assert.assertTrue(lowerPremium.getText().contains("lower"));
+//		Assertion.assertTrue(lowerPremium.getText().contains("lower"));
 		validate(higherPremium, 30);
-//		Assert.assertTrue(higherPremium.getText().contains("higher"));
+//		Assertion.assertTrue(higherPremium.getText().contains("higher"));
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());

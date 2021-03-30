@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
-import junit.framework.Assert;
+import atdd.framework.Assertion;
 
 public class EnrollmentBasicsPage extends GlobalWebElements {
 
@@ -185,14 +185,15 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		switchToNewTabNew(lnkSocialSecurity);
 		
 		if(driver.getCurrentUrl().contains("https://www.ssa.gov/benefits/medicare/")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Social Security Link open Successfully\tURL: "+driver.getCurrentUrl());
 			sleepBySec(5);
 			driver.close();
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 			
 		}else {
-			Assert.fail("Social Security Link did not open Successfully");
+			Assertion.fail("Social Security Link did not open Successfully");
 		}	
 	}
 	@FindBy(xpath="//p[contains(text(),'See plans available in your area')]")
@@ -206,14 +207,15 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		sleepBySec(10);
 		if(driver.getCurrentUrl().contains("/health-plans.html#/plan-summary")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Plan Summary Page open Successfully");
 			waitForPageLoadSafari();
 			sleepBySec(5);
 			driver.close();
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);			
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		}else {
-			Assert.fail("Plan Summary Page did not open Successfully");
+			Assertion.fail("Plan Summary Page did not open Successfully");
 		}
 		
 	}
@@ -227,7 +229,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		if(driver.getCurrentUrl().contains("/enroll/ma-enrollment.html")) {
 			System.out.println("MA Enrollment Page opened Successfully : "+ driver.getCurrentUrl());
 		}else {
-			Assert.fail("MA Enrollment Page did not opened Successfully");
+			Assertion.fail("MA Enrollment Page did not opened Successfully");
 		}
 	}
 	
@@ -240,7 +242,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		if(driver.getCurrentUrl().contains("/enroll/pdp-enrollment")) {
 			System.out.println("PDP Enrollment Page opened Successfully : "+ driver.getCurrentUrl());
 		}else {
-			Assert.fail("PDP Enrollment Page did not opened Successfully");
+			Assertion.fail("PDP Enrollment Page did not opened Successfully");
 		}
 	}
 	public void clickMedSupEnrolllink() {
@@ -252,7 +254,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		if(driver.getCurrentUrl().contains("/enroll/ms-apply")) {
 			System.out.println("MedSup Enrollment Page opened Successfully: " + driver.getCurrentUrl());
 		}else {
-			Assert.fail("MedSup Enrollment Page did not opened Successfully");
+			Assertion.fail("MedSup Enrollment Page did not opened Successfully");
 		}
 	}
 	
@@ -264,10 +266,10 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		System.out.println("Learn About Eligiblity link Clicked.");
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("medicare-education/medicare-eligibility.html")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Learn About Eligiblity link opened successfully.\n "+ driver.getCurrentUrl());
 		}else {
-			Assert.fail("Learn About Eligiblity link did not opened successfully.");
+			Assertion.fail("Learn About Eligiblity link did not opened successfully.");
 		}
 	}
 	
@@ -279,10 +281,10 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		System.out.println("Learn About Enrollment link Clicked.");
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Learn About Enrollment link opened successfully.\n"+ driver.getCurrentUrl());
 		}else {
-			Assert.fail("Learn About Enrollment link did not opened successfully.");
+			Assertion.fail("Learn About Enrollment link did not opened successfully.");
 		}
 	}
 

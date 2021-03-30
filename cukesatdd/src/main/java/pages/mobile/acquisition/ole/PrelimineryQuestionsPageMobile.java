@@ -3,8 +3,6 @@
  */
 package pages.mobile.acquisition.ole;
 
-import static org.junit.Assert.fail;
-
 import java.util.Map;
 
 import org.openqa.selenium.By;

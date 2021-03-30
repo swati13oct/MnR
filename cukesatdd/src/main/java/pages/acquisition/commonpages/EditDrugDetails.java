@@ -1,7 +1,6 @@
 package pages.acquisition.commonpages;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.PageData;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 public class EditDrugDetails extends UhcDriver {
@@ -116,7 +116,7 @@ public class EditDrugDetails extends UhcDriver {
 //		return new AddNewDrugModal(driver);
 //	}
 	public void validateThePage(){
-		Assert.assertTrue(editDrugDetailsPage.isDisplayed());
+		Assertion.assertTrue(editDrugDetailsPage.isDisplayed());
 	}
 
 }

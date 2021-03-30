@@ -3,7 +3,6 @@ package pages.mobile.acquisition.commonpages;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
@@ -74,7 +74,7 @@ public class DrugLookUpPage extends UhcDriver {
 			System.out.println("User is on Drug Look Up Page");
 			return true;
 		}
-		Assert.assertTrue(false);
+		Assertion.assertTrue(false);
 		return false;
 	}
 
@@ -102,7 +102,7 @@ public class DrugLookUpPage extends UhcDriver {
 		drugLink.click();
 		impliciWait(formularyDrugTable, 10);
 		} catch (TimeoutException e) {
-			Assert.assertTrue("PROBLEM - unable to locate the formularyDrugTable element", false);
+			Assertion.assertTrue("PROBLEM - unable to locate the formularyDrugTable element", false);
 		}
 	}
 

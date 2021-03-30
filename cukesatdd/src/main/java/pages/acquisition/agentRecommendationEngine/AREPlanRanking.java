@@ -789,7 +789,7 @@ public class AREPlanRanking extends UhcDriver {
 		int planstart = 0;
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planstart = 1;
-//			Assert.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+//			Assertion.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		System.out.println("Verify Drug and Doctors Session Storage");
@@ -899,7 +899,7 @@ public class AREPlanRanking extends UhcDriver {
 		pageloadcomplete();
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planStartCount = 1;
-//			Assert.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+//			Assertion.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		List<String> newplansDetails = new ArrayList<String>();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1079,7 +1079,7 @@ public class AREPlanRanking extends UhcDriver {
 		int planStartCount = 0;
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planStartCount = 1;
-//			Assert.assertTrue(originalplanNames.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+//			Assertion.assertTrue(originalplanNames.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		List<String> newplansDetails = new ArrayList<String>();
 

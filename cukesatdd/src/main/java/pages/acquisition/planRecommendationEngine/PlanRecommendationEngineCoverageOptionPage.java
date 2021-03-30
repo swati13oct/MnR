@@ -9,10 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
+public class PlanRecommendationEngineCoverageOptionPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineCoverageOptionPage(WebDriver driver) {
 		super(driver);
@@ -22,7 +21,7 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -84,22 +83,22 @@ public class PlanRecommendationEngineCoverageOptionPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
-//		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//		Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
 		validate(pageProgressPercentage, 30);
 		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
-//		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//		Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(coverageTitle);
-//		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+//		Assertion.assertTrue(coverageTitle.getText().contains("coverage"));
 		validate(plantypeMAPD, 30);
-//		Assert.assertTrue(plantypeMAPD.getText().contains("and"));
+//		Assertion.assertTrue(plantypeMAPD.getText().contains("and"));
 		validate(plantypeMA, 30);
-//		Assert.assertTrue(plantypeMA.getText().contains("Medical"));
+//		Assertion.assertTrue(plantypeMA.getText().contains("Medical"));
 		validate(plantypePDP, 30);
-//		Assert.assertTrue(plantypePDP.getText().contains("Prescription"));
+//		Assertion.assertTrue(plantypePDP.getText().contains("Prescription"));
 		validate(plantypeNone, 30);
-//		Assert.assertTrue(plantypeNone.getText().contains("don't"));
+//		Assertion.assertTrue(plantypeNone.getText().contains("don't"));
 //		previousBtn.click();
 		jsClickNew(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");

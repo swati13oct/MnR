@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
-import junit.framework.Assert;
+import atdd.framework.Assertion;
 
 @SuppressWarnings({ "deprecation" })
 public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
@@ -200,7 +200,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 		navigateToMenuLinks(getLnkLearnAboutMedicare(), getLstLearnAboutMedicareTitle().get(0));
 		for (int i = 0; i < getLstLearnAboutMedicareTitle().size(); i++) {
 			System.out.println(getLstLearnAboutMedicareTitle().get(i).getText());
-			Assert.assertTrue("Medicare-Menu-header-mismatch, incorrect header displayed",
+			Assertion.assertTrue("Medicare-Menu-header-mismatch, incorrect header displayed",
 					getLstLearnAboutMedicareTitle().get(i).getText().contains(medicareMenuHeaders()[i]));
 
 		}
@@ -209,14 +209,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 			if (getLstLearnAboutMedicare().get(i).isEnabled()) {
 
 				if (getLstLearnAboutMedicare().get(i).getText().contains("Supplement")) {
-					Assert.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
+					Assertion.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
 							getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
 				}
 				else
 					if((medicareMenuText()[i]).contains("Supplement"))
 						continue;
 				else
-					Assert.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
+					Assertion.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
 							getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
 				System.out.println(getLstLearnAboutMedicare().get(i).getText());
 			}
@@ -227,7 +227,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 	/* logic to check title of a page */
 	public void checkTitle(String title) {
 
-		Assert.assertTrue("Title mismatch, incorrect page loaded", getTitle().contains(title));
+		Assertion.assertTrue("Title mismatch, incorrect page loaded", getTitle().contains(title));
 		System.out.println(getTitle());
 	}
 
@@ -240,7 +240,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 	/* logic to compare URL */
 	public void checkURL(String url) {
 
-		Assert.assertTrue("URL mismatch, incorrect page loaded", currentUrl().contains(url));
+		Assertion.assertTrue("URL mismatch, incorrect page loaded", currentUrl().contains(url));
 		System.out.println(currentUrl());
 
 	}

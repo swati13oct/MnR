@@ -1,7 +1,6 @@
 package pages.mobile.acquisition.commonpages;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,12 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 
 public class UhcRetireePharmacyLocatorPage extends UhcDriver {
@@ -238,7 +235,7 @@ public class UhcRetireePharmacyLocatorPage extends UhcDriver {
 			} catch (Exception e) {
 
 				System.out.println("Exception!!! County does not exists." + e.getMessage());
-				Assert.fail("Exception!!! County does not exists");
+				Assertion.fail("Exception!!! County does not exists");
 			}
 
 		}

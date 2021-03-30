@@ -342,7 +342,7 @@ public class ResultsMobilePage extends UhcDriver {
 		if (R1.equalsIgnoreCase("MA")) {
 			mobileUtils.mobileLocateElementClick(MAViewPlansLink);
 			validate(MA1stPlanName, 60);
-			// Assert.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+			// Assertion.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "MA Invalid Plan Ranking");
 			clickEnrollmobile(MA1stPlanEnroll, needhelptxt);
 		}
@@ -350,21 +350,21 @@ public class ResultsMobilePage extends UhcDriver {
 			mobileUtils.mobileLocateElementClick(MSViewPlansLink);
 			submitMSform();
 			validate(MS1stPlanName, 60);
-			// Assert.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+			// Assertion.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "MS Invalid Plan Ranking");
 			clickEnrollmobile(MS1stPlanEnroll, needhelptxtMS);
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
 			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
 			validate(PDP1stPlanName, 60);
-			// Assert.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+			// Assertion.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "PDP Invalid Plan Ranking");
 			clickEnrollmobile(PDP1stPlanEnroll, needhelptxt);
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
 			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
-			// Assert.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+			// Assertion.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "SNP Invalid Plan Ranking");
 			// System.out.println("Ranking Plan Name : "+SNP1stPlanName.getText());
 			if (SNP1stPlanName.getText().toUpperCase().contains("D-SNP"))

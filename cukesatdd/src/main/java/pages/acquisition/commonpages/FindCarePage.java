@@ -242,7 +242,8 @@ public ComparePlansPage providerfromMedicalGroup() throws Exception {
 		//note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 	
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;
@@ -302,7 +303,8 @@ public ComparePlansPage providerfromPrimaryCare() throws Exception {
 	//note: setting the implicit wait back to default value - 10
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	
-	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+	driver.switchTo().window(CommonConstants.getMainWindowHandle());
 	if (currentUrl().contains("/health-plans.html#/plan-compare"))
 		return new ComparePlansPage(driver);
 	return null;
@@ -358,7 +360,8 @@ public ComparePlansPage providerfromPrimaryCareClinicButton() throws Exception {
 	//note: setting the implicit wait back to default value - 10
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+	driver.switchTo().window(CommonConstants.getMainWindowHandle());
 	if (currentUrl().contains("/health-plans.html#/plan-compare"))
 		return new ComparePlansPage(driver);
 	return null;
@@ -415,7 +418,8 @@ public ComparePlansPage placesfromHospital() throws Exception {
 	//note: setting the implicit wait back to default value - 10
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		
-	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+	driver.switchTo().window(CommonConstants.getMainWindowHandle());
 	if (currentUrl().contains("/health-plans.html#/plan-compare"))
 		return new ComparePlansPage(driver);
 	return null;
@@ -462,7 +466,8 @@ public ComparePlansPage placesfromHospital() throws Exception {
 		// note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPage(driver);
 		return null;

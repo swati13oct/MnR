@@ -1,25 +1,15 @@
 
 package pages.acquisition.dceredesign;
 
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
@@ -76,10 +66,10 @@ public class GetStartedPage extends UhcDriver {
 			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugList(driver);
 		}
-		Assert.fail("Did not Navigate to Build Drug List Page");
+		Assertion.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
 
@@ -89,7 +79,7 @@ public class GetStartedPage extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 
 //		while(validate(overlayFilm, 10)) {/**wait*/}
-//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+//		waitForElementToDisappear(driver, overlayFilm, 75);
 		waitForPageLoadSafari();
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
@@ -142,7 +132,7 @@ public class GetStartedPage extends UhcDriver {
 	}
 
 	public void validateBreadCrumb(String breadCrumb) {
-		Assert.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().equals(breadCrumb));
+		Assertion.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().equals(breadCrumb));
 		        }
 
 }

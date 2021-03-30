@@ -88,13 +88,13 @@ public class PharmacyMobilePage extends UhcDriver {
 		validate(pageRequiredInfo);
 		validate(pageRequiredInfoAsteriskMark);
 		validate(pharmacyPagePrimaryQuestion);
-		//Assert.assertTrue(pharmacyPagePrimaryQuestion.getText().contains("pharmacy"));
+		//Assertion.assertTrue(pharmacyPagePrimaryQuestion.getText().contains("pharmacy"));
 		validate(pharmacyPagePrimaryQuestionMark);
 		validate(pharmacyPagePrimaryQuestionMark);
 		validate(pharmacyOnlineOption, 30);
-		//Assert.assertTrue(pharmacyOnlineOption.getText().contains("Online"));
+		//Assertion.assertTrue(pharmacyOnlineOption.getText().contains("Online"));
 		validate(pharmacyRetailOption, 30);
-		//Assert.assertTrue(pharmacyRetailOption.getText().contains("Retail"));
+		//Assertion.assertTrue(pharmacyRetailOption.getText().contains("Retail"));
 		mobileUtils.mobileLocateElementClick(pharmacyOnlineOption);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");

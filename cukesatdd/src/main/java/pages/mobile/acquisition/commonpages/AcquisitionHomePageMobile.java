@@ -21,7 +21,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.EnterZipCodePage;
-
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -514,7 +513,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		checkModelPopup(driver, 15);
 		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to CommonUtility.waitForPageLoadNew as
 																			// we're not trying to fail the test if it
 																			// isn't found
 		try {
@@ -668,7 +667,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
 			}
 		} else { // For jenkins job
-			String jenkinsRunnerFiles = MRScenario.runnerFiles;
+			String jenkinsRunnerFiles = MRScenario.getRunnerFileName();
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
@@ -1800,7 +1799,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	}
 
 	public void CheckiPerseptions() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to CommonUtility.waitForPageLoadNew as
 																			// we're not trying to fail the test if it
 																			// isn't found
 		try {

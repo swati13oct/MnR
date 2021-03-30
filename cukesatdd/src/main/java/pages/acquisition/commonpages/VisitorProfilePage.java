@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,14 +21,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.VPPTestHarnessPage;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -273,16 +272,16 @@ public class VisitorProfilePage extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
 		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
 			jsClickNew(expandDrugBlock);
-			Assert.assertTrue(drugname.getText().trim().contains(drug));
+			Assertion.assertTrue(drugname.getText().trim().contains(drug));
 		} else {
 			CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-			Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
+			Assertion.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
 			jsClickNew(drugHeader);
-			Assert.assertTrue(drugName.getText().trim().contains(drug));
-			Assert.assertEquals("Drugs (1) / Pharmacy", savedDrugsHeader.getText().trim());
-			Assert.assertEquals("Saved Drugs (1) / Pharmacy and Doctors/Providers (0)",
+			Assertion.assertTrue(drugName.getText().trim().contains(drug));
+			Assertion.assertEquals("Drugs (1) / Pharmacy", savedDrugsHeader.getText().trim());
+			Assertion.assertEquals("Saved Drugs (1) / Pharmacy and Doctors/Providers (0)",
 					savedDrugsAndDoctorsHeader.getText().trim());
-			Assert.assertTrue(pharmacyAddress.isDisplayed());
+			Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		}
 	}
 
@@ -294,20 +293,20 @@ public class VisitorProfilePage extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
 		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
 			for (String plan : listOfTestPlans) {
-				Assert.assertEquals(plan,
+				Assertion.assertEquals(plan,
 						driver.findElement(By.xpath("//h4[contains(text(),'" + plan + "')]")).getText().trim());
-				Assert.assertTrue(driver.findElement(By.xpath(
+				Assertion.assertTrue(driver.findElement(By.xpath(
 						"//h4[contains(text(),'" + plan + "')]/following::a[contains(@class,'add-provider')][1]"))
 						.isDisplayed());
 				System.out.println(driver.findElement(By.xpath("//h4[contains(text(),'" + plan + "')]")).getText());
 			}
 		} else {
 			for (String plan : listOfTestPlans) {
-				Assert.assertEquals(plan,
+				Assertion.assertEquals(plan,
 						driver.findElement(By.xpath(
 								"//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
 								.getText().trim());
-				Assert.assertTrue(driver
+				Assertion.assertTrue(driver
 						.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"
 								+ plan + "')]/following::span[contains(@class,'search-provider')]"))
 						.isDisplayed());
@@ -342,7 +341,7 @@ public class VisitorProfilePage extends UhcDriver {
 					System.out.println(currentDrug + ": Drug name matched");
 				else if (j > DrugName.size()) {
 					System.out.println("========Drug name not matched=====");
-					Assert.fail("Drug List Validation FAILED for Drug : " + currentDrug);
+					Assertion.fail("Drug List Validation FAILED for Drug : " + currentDrug);
 				}
 			}
 		}
@@ -432,7 +431,7 @@ public class VisitorProfilePage extends UhcDriver {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
+		Assertion.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
 	}
 
 	/**
@@ -446,7 +445,7 @@ public class VisitorProfilePage extends UhcDriver {
 		 * drug.findElement(By.xpath("//button")).click(); }
 		 */
 		CommonUtility.waitForPageLoadNew(driver, addrugs, 45);
-		Assert.assertTrue(addrugs.isDisplayed());
+		Assertion.assertTrue(addrugs.isDisplayed());
 	}
 
 	public BuildYourDrugList clickOnEditDrugAndPharmacy() {
@@ -514,7 +513,7 @@ public class VisitorProfilePage extends UhcDriver {
 			rallyProviderName = rallyProviderName.replaceAll(".", "").replaceAll(",", "");
 			mproviderinfo = mproviderinfo.replaceAll(".", "").replaceAll(",", "");
 			System.out.println(mproviderinfo);
-			Assert.assertTrue(mproviderinfo.contains(rallyProviderName));
+			Assertion.assertTrue(mproviderinfo.contains(rallyProviderName));
 			modalClose.click();
 
 		} catch (InterruptedException e) {
@@ -583,7 +582,7 @@ public class VisitorProfilePage extends UhcDriver {
 			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
-			Assert.fail("###############Optum Id Sign In failed###############");
+			Assertion.fail("###############Optum Id Sign In failed###############");
 		}
 
 	}
@@ -636,14 +635,15 @@ public class VisitorProfilePage extends UhcDriver {
 	 * @param plancount
 	 */
 	public void validatePlanCountOnCartIcon(String plancount) {
-		Assert.assertEquals(plancount, shoppingCartNumber.getText());
+		Assertion.assertEquals(plancount, shoppingCartNumber.getText());
 		System.out.println("count mapped on Shopping cart icon with : " + plancount);
 
 	}
 
 	public VPPTestHarnessPage switchBackToVPTestharness() {
 		driver.close();
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		System.out.println("Switching back to MainWindow");
 		if (driver.getCurrentUrl().contains("visitorprofiletestharness")) {
 			System.out.println("visitorprofiletestharness Page is Displayed");
@@ -667,7 +667,7 @@ public class VisitorProfilePage extends UhcDriver {
 			System.out.println("Navigation to Plan Compare page is Passed");
 			return new ComparePlansPage(driver);
 		} else {
-			Assert.fail("Navigation to Plan Compare page is failed");
+			Assertion.fail("Navigation to Plan Compare page is failed");
 		}
 		return null;
 	}
@@ -717,14 +717,14 @@ public class VisitorProfilePage extends UhcDriver {
 						|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
 						|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
 				if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-					Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
-					Assert.assertTrue(driver.findElement(By
+					Assertion.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
+					Assertion.assertTrue(driver.findElement(By
 							.xpath("//div/a[contains(@aria-describedby,'" + plan + "')] [contains(@class,'pdf-link')]"))
 							.isDisplayed());
 				} else {
-					Assert.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
+					Assertion.assertEquals(plan, driver.findElement(By.xpath("//h2[text()='" + plan + "']")).getText());
 					// No pdf link is availbel now
-					// Assert.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')]
+					// Assertion.assertTrue(driver.findElement(By.xpath("//div/a[contains(@aria-describedby,'"+plan+"')]
 					// [contains(@class,'pdf-link')]")).isDisplayed());
 				}
 			}
@@ -736,7 +736,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public void validateAddedPlansPDFLinks(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		for (String plan : listOfTestPlans) {
-			Assert.assertTrue(driver
+			Assertion.assertTrue(driver
 					.findElement(By
 							.xpath("//div/a[contains(@aria-describedby,'" + plan + "')] [contains(@class,'pdf-link')]"))
 					.isDisplayed());
@@ -748,25 +748,25 @@ public class VisitorProfilePage extends UhcDriver {
 	 * 
 	 * @param oleDetails
 	 */
-	public void validateOLEDetails(DataTable oleDetails) {
-
-		List<DataTableRow> givenAttributesRow = oleDetails.getGherkinRows();
+	public void validateOLEDetails(Map<String, String> givenAttributesMap) {
+		//Handled data table in step definition
+		/*List<DataTableRow> givenAttributesRow = oleDetails.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String planName = givenAttributesMap.get("Plan Name");
 		String zipCode = givenAttributesMap.get("Zip Code");
 		String status = givenAttributesMap.get("Status");
 		String monthlyPremium = givenAttributesMap.get("Monthly Premium");
 
-		Assert.assertEquals(planName, enrolledPlanName.getText().trim());
-		Assert.assertEquals(zipCode, enrolledPlanZipcode.getText().trim());
-		Assert.assertEquals(status, enrolledStatus.getText().trim());
+		Assertion.assertEquals(planName, enrolledPlanName.getText().trim());
+		Assertion.assertEquals(zipCode, enrolledPlanZipcode.getText().trim());
+		Assertion.assertEquals(status, enrolledStatus.getText().trim());
 		waitforElementVisibilityInTime(enrolledMonthlyPremium, 10);
-		Assert.assertEquals(monthlyPremium, enrolledMonthlyPremium.getText().trim());
+		Assertion.assertEquals(monthlyPremium, enrolledMonthlyPremium.getText().trim());
 
 	}
 
@@ -794,7 +794,7 @@ public class VisitorProfilePage extends UhcDriver {
 			validate(btnCreateProfile);
 			return new VisitorProfilePage(driver);
 		} else {
-			Assert.fail("Navigation to visitor profile is failed");
+			Assertion.fail("Navigation to visitor profile is failed");
 		}
 		return null;
 	}
@@ -814,17 +814,17 @@ public class VisitorProfilePage extends UhcDriver {
 			 */
 			System.out.println(addedPlan.getText());
 			/*
-			 * Assert.assertEquals(plan, driver.findElement(By.xpath(
+			 * Assertion.assertEquals(plan, driver.findElement(By.xpath(
 			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 			 * + plan + "')]")) .getText().trim());
 			 */
-			Assert.assertEquals(plan, addedPlan.getText().trim());
+			Assertion.assertEquals(plan, addedPlan.getText().trim());
 			/*
-			 * Assert.assertTrue(driver .findElement(By.
+			 * Assertion.assertTrue(driver .findElement(By.
 			 * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 			 * + plan + "')]/following::button[1]")) .isDisplayed());
 			 */
-/*			Assert.assertTrue(driver
+/*			Assertion.assertTrue(driver
 					.findElement(By.xpath(
 							"//*[contains(@id,'planName') and contains(text(),'" + plan + "')]/./following::button[1]"))
 					.isDisplayed());
@@ -918,7 +918,7 @@ public class VisitorProfilePage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, signOutLink, 20);
 
 		} catch (Exception e) {
-			Assert.fail("###############Optum Id Sign In failed###############");
+			Assertion.fail("###############Optum Id Sign In failed###############");
 		}
 
 	}
@@ -1004,7 +1004,7 @@ public class VisitorProfilePage extends UhcDriver {
 				jsClickNew(driver.findElement(By.xpath(
 						"//h2[contains(text(),'" + planName + "')]/preceding::button[contains(@class,'remove')][1]")));
 			}
-			Assert.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
+			Assertion.assertTrue(!(driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0));
 		} catch (Exception e) {
 		}
 	}
@@ -1021,26 +1021,27 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 
 	public void verifyBreadCrumb(String breadCrumb) {
-		Assert.assertTrue("Expected breadcrumb " + breadCrumb + "not displayed",
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + "not displayed",
 				breadCrumbLink.getText().equals(breadCrumb));
 	}
 
-	public void validateViewDrugPricingModel(DataTable drugInfo) {
+	public void validateViewDrugPricingModel(Map<String, String> givenAttributesMap) {
 
-		List<DataTableRow> givenAttributesRow = drugInfo.getGherkinRows();
+		//Handled from step definition file
+		/*List<DataTableRow> givenAttributesRow = drugInfo.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String planName = givenAttributesMap.get("Plan Name");
 		String zipCode = givenAttributesMap.get("Zip Code");
 		String status = givenAttributesMap.get("Status");
 		String monthlyPremium = givenAttributesMap.get("Monthly Premium");
 
 		viewDrugPricingLink.click();
-		Assert.assertTrue(validate(driver.findElement(By.xpath("//h1[contains(text(),'" + planName + "')]"))));
+		Assertion.assertTrue(validate(driver.findElement(By.xpath("//h1[contains(text(),'" + planName + "')]"))));
 
 	}
 	
@@ -1062,7 +1063,7 @@ public class VisitorProfilePage extends UhcDriver {
 		
 		
 		CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
-		Assert.assertTrue(importLnk.isDisplayed());
+		Assertion.assertTrue(importLnk.isDisplayed());
 	}
 	
 	/**
@@ -1083,7 +1084,7 @@ public class VisitorProfilePage extends UhcDriver {
 				removeDrugBtn.click();
 			}
 			CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
-			Assert.assertTrue(importLnk.isDisplayed());
+			Assertion.assertTrue(importLnk.isDisplayed());
 		}
 	}
 }

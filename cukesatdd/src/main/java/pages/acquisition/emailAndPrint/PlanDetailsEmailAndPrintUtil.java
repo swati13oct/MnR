@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 
 public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
@@ -291,7 +291,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			}
 		}
 		System.out.println("Finished validation for the original page content vs page content from email deeplnk for plan detail ===========");
-		Assert.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , detail_finalResult);
+		Assertion.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , detail_finalResult);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return testNote;
 	}		
@@ -313,7 +313,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		System.out.println("!!!Entered valid Email ");
 		sendButtonEmailPlanDetailsPopUp.click();
 		System.out.println("Email has success fully send to user");
-		Assert.assertTrue("PROBLEM - unable to get successful message after clicking send", validate(validatesuccesspopup));
+		Assertion.assertTrue("PROBLEM - unable to get successful message after clicking send", validate(validatesuccesspopup));
 		//validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
 		closeButtonthankyoumessagepopup.click();
@@ -341,7 +341,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
 		System.out.println("Proceed to validate the new window content for print");
 		String printPreviewPageTitle=driver.getTitle();
-		Assert.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
+		Assertion.assertTrue("PROBLEM - print preview page title should be empty (untitled).  Actual='"+printPreviewPageTitle+"'", printPreviewPageTitle.equals(""));
 
 		System.out.println("Proceed to close the print preview window");
 		driver.close();
@@ -351,7 +351,7 @@ public class PlanDetailsEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
 		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
 		String pageTitleAfterClosingPrintPreview=driver.getTitle();
-		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+		Assertion.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 	}
 	
 	public void validatePrintPlanDetails() {

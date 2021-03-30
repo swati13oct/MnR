@@ -1049,7 +1049,7 @@ public class UlayerTFNPageMobile extends UhcDriver {
 		//checkChatWindowOnPage();
 		try {
 			CommonUtility.waitForPageLoad(driver, LearnAboutMedicareTFNumber,20);
-			// do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			// do not change this to CommonUtility.waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

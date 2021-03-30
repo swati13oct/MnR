@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -27,9 +26,9 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -556,11 +555,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		topbackToPlanslink.click();
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 		else
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 
 	}
 
@@ -570,11 +569,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		downbackToPlanslink.click();
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("health-plans.html#/plan-summary")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 		else
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 
 	}
 
@@ -696,7 +695,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		System.out.println("!!!Entered valid Email ");
 		sendButtonEmailPlanDetailsPopUp.click();
 		System.out.println("Email has success fully send to user");
-		Assert.assertTrue("PROBLEM - unable to locate success message after clicking send", validate(validatesuccesspopup));
+		Assertion.assertTrue("PROBLEM - unable to locate success message after clicking send", validate(validatesuccesspopup));
 	    //validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
 
@@ -775,7 +774,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public ProviderSearchPage validateLookUpYourProviderButton() {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(lookUpYourProviderButton);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPage(driver);
@@ -821,7 +821,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @param additionalBenefits --> Data table which has the different benefit types
 	 * To validate all the additional benefits given in the feature file
 	 */
-	public void validatingAdditionalBenefitTextInPlanDetails(List<DataTableRow> additionalBenefits) {
+	public void validatingAdditionalBenefitTextInPlanDetails(List<List<String>> additionalBenefits) {
 
 		//boolean validationFlag = true;
 		WebElement AdditionalBenefitType;
@@ -829,25 +829,25 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		String displayedText;
 
 		for(int i=0;i<additionalBenefits.size();i=i+2) {
-			if(additionalBenefits.get(i).getCells().get(1).contains("Fitness")) {
-				AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+			if(additionalBenefits.get(i).get(1).contains("Fitness")) {
+				AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
-				ActualTextforBenefit =  driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
+				ActualTextforBenefit =  driver.findElement(By.xpath("//div[contains(text(), '"+additionalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[(not (contains(@class, 'ng-hide')))]"));
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
-				if(!displayedText.contains(additionalBenefits.get(i+1).getCells().get(1))){
-					Assert.fail("Proper value not found");
+				if(!displayedText.contains(additionalBenefits.get(i+1).get(1))){
+					Assertion.fail("Proper value not found");
 				}
 			}else {
-				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : "+AdditionalBenefitType.getText());
-				ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
+				ActualTextforBenefit =  driver.findElement(By.xpath("//p[contains(text(), '"+additionalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td"));
 				displayedText = ActualTextforBenefit.getText();
 				System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 				System.out.println(displayedText);
-				if(!displayedText.contains(additionalBenefits.get(i+1).getCells().get(1))){
-					Assert.fail("Proper value not found");
+				if(!displayedText.contains(additionalBenefits.get(i+1).get(1))){
+					Assertion.fail("Proper value not found");
 				}
 			}
 
@@ -859,21 +859,21 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @param medicalBenefits --> Data table which has the different benefit types
 	 * To validate all the medical benefits given in the feature file
 	 */
-	public void validatingMedicalBenefitTextInPlanDetails(List<DataTableRow> medicalBenefits) {
+	public void validatingMedicalBenefitTextInPlanDetails(List<List<String>> medicalBenefits) {
 
 		WebElement medicalBenefitType;
 		WebElement ActualTextforBenefit;
 		String displayedText;
 
 		for(int i=0;i<medicalBenefits.size();i=i+2) {
-			medicalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+medicalBenefits.get(i).getCells().get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+			medicalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"+medicalBenefits.get(i).get(1)+"')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 			System.out.println("The additional Benefit to Valuidate : "+medicalBenefitType.getText());
-			ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+medicalBenefits.get(i).getCells().get(1)+"'))]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[contains(@class,'medical-benefits')]/span"));
+			ActualTextforBenefit =  driver.findElement(By.xpath("//p[(contains(text(), '"+medicalBenefits.get(i).get(1)+"'))]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[contains(@class,'medical-benefits')]/span"));
 			displayedText = ActualTextforBenefit.getText();
 			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
 			System.out.println(displayedText);
-			if(!displayedText.contains(medicalBenefits.get(i+1).getCells().get(1))){
-				Assert.fail("Proper value not found: "+medicalBenefits.get(i+1).getCells().get(1));
+			if(!displayedText.contains(medicalBenefits.get(i+1).get(1))){
+				Assertion.fail("Proper value not found: "+medicalBenefits.get(i+1).get(1));
 			}
 		}
 	}
@@ -948,7 +948,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			} catch (Exception e) {
 
 				System.out.println("Exception!!! County does not exists." + e.getMessage());
-				Assert.fail("Exception!!! County does not exists");
+				Assertion.fail("Exception!!! County does not exists");
 			}
 
 			CommonUtility.waitForPageLoad(driver, distanceDropownID, 45);

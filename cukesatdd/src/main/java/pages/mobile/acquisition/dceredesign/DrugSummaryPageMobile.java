@@ -3,7 +3,6 @@ package pages.mobile.acquisition.dceredesign;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -12,8 +11,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class DrugSummaryPageMobile extends UhcDriver {
 
@@ -219,7 +218,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		 * System.out.println(drugNames.get(i).getText()); }
 		 */
 		System.out.println(drugNames);
-		Assert.assertTrue("Drug not switched to generic", drugNames.getText().contains(genericDrug));
+		Assertion.assertTrue("Drug not switched to generic", drugNames.getText().contains(genericDrug));
 	}
 
 	@FindBy(id = "sign-up-modal-header")
@@ -358,7 +357,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
 			return new DrugDetailsPageMobile(driver);
 		} else {
-			Assert.fail("Drug Details Page is NOT Displayed");
+			Assertion.fail("Drug Details Page is NOT Displayed");
 			return null;
 		}
 	}
@@ -399,7 +398,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			backToProfileBtn.get(1).click();
 			System.out.println("Back to profile clicked");
 		} catch (Exception e) {
-			Assert.fail("Back to profile not displayed ");
+			Assertion.fail("Back to profile not displayed ");
 		}
 	}
 
@@ -415,7 +414,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				System.out.println("Return to profile displayed");
 			}
 		} catch (Exception e) {
-			Assert.fail("Return to profile not displayed");
+			Assertion.fail("Return to profile not displayed");
 		}
 	}
 
@@ -428,7 +427,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				System.out.println("Back to profile displayed for each plan card");
 			}
 		} catch (Exception e) {
-			Assert.fail("Back to profile not displayed for each plan card");
+			Assertion.fail("Back to profile not displayed for each plan card");
 		}
 	}
 
@@ -473,7 +472,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		String PremiumDisplayed = PremiumforPlan.getText();
 		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
 		if (!PremiumDisplayed.contains(premium)) {
-			Assert.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
+			Assertion.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
 					+ PremiumDisplayed);
 		}
 	}
@@ -488,7 +487,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			
 			jsClickNew(dceNBAModalBtn);
 			waitforElement(signInBtn);
-			Assert.assertTrue("user not navigated to login page",
+			Assertion.assertTrue("user not navigated to login page",
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
@@ -496,9 +495,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void verifyReviewDrugCostPageDisplayed() {
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		if (validateNew(reviewDrugCostPageHeading)) {
-			Assert.assertTrue("Review drug cost page not displayed", true);
+			Assertion.assertTrue("Review drug cost page not displayed", true);
 		} else {
-			Assert.assertTrue("Review drug cost page not displayed", false);
+			Assertion.assertTrue("Review drug cost page not displayed", false);
 		}
 
 	}

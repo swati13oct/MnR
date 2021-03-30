@@ -132,15 +132,15 @@ public class DoctorsMobilePage extends UhcDriver {
 		validate(pageRequiredInfo);
 		validate(pageRequiredInfoAsteriskMark);
 		validate(doctorPagePrimaryQuestion);
-		//Assert.assertTrue(doctorPagePrimaryQuestion.getText().contains("doctors"));
+		//Assertion.assertTrue(doctorPagePrimaryQuestion.getText().contains("doctors"));
 		validate(doctorPagePrimaryQuestionMark);
 		validate(doctorPagePrimaryQuestionDecsription);
 		validate(doctorUHCNetworkOption, 30);
-		//Assert.assertTrue(doctorUHCNetworkOption.getText().contains("network"));
+		//Assertion.assertTrue(doctorUHCNetworkOption.getText().contains("network"));
 		validate(doctorWantOption, 30);
-		//Assert.assertTrue(doctorWantOption.getText().contains("want"));
+		//Assertion.assertTrue(doctorWantOption.getText().contains("want"));
 		validate(doctorLookupOption, 30);
-		//Assert.assertTrue(doctorLookupOption.getText().contains("lookup"));
+		//Assertion.assertTrue(doctorLookupOption.getText().contains("lookup"));
 		mobileUtils.mobileLocateElementClick(doctorWantOption);
 		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
@@ -201,20 +201,20 @@ public class DoctorsMobilePage extends UhcDriver {
 
 	public void doctorModellookupElements() {
 		validate(modalDescription);
-		//Assert.assertTrue(modalDescription.getText().contains("Save"));
+		//Assertion.assertTrue(modalDescription.getText().contains("Save"));
 		validate(modalTitle);
 		Assert.assertTrue(modalTitle.getText().contains("browser"));
 		validate(modalCancel);
 		Assert.assertTrue(modalCancel.getText().contains("Cancel"));
 		validate(modalFinddoctors);
-		//Assert.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
+		//Assertion.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
 	}
 
 	public void doctorConfirmationModellookupElements() {
 		validate(modalTitle);
-		//Assert.assertTrue(modalTitle.getText().contains("Your Doctors"));
+		//Assertion.assertTrue(modalTitle.getText().contains("Your Doctors"));
 		validate(modalDoctorsCount);
-		//Assert.assertTrue(modalDoctorsCount.getText().contains("doctor(s)"));
+		//Assertion.assertTrue(modalDoctorsCount.getText().contains("doctor(s)"));
 		validate(modalCancel);
 		Assert.assertTrue(modalCancel.getText().contains("Cancel"));
 		validate(modalContinuedoctors);

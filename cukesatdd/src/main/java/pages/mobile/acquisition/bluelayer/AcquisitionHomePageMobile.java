@@ -1,22 +1,10 @@
 package pages.mobile.acquisition.bluelayer;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-/*@author pagarwa5*/
-
-import acceptancetests.data.MRConstants;
-import atdd.framework.MRScenario;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-
-import org.junit.Assert;
-import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -106,7 +94,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
 			}
 		} else { // For jenkins job
-			String jenkinsRunnerFiles = MRScenario.runnerFiles;
+//			String jenkinsRunnerFiles = MRScenario.runnerFiles;
+			String jenkinsRunnerFiles = MRScenario.getRunnerFileName();
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {

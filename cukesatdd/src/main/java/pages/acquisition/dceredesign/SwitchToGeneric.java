@@ -1,21 +1,12 @@
 package pages.acquisition.dceredesign;
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 public class SwitchToGeneric extends UhcDriver {
@@ -93,10 +84,10 @@ public class SwitchToGeneric extends UhcDriver {
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
 		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinktoExitScenario)) {
-			Assert.assertTrue("Naviagted to DCE Drug Details Page", true);
+			Assertion.assertTrue("Naviagted to DCE Drug Details Page", true);
 			return new DrugDetailsPage(driver);
 		}
-		Assert.fail("Did not Navigate to DCE Drug Details Page");
+		Assertion.fail("Did not Navigate to DCE Drug Details Page");
 		return null;
 	}
 	
@@ -111,7 +102,7 @@ public class SwitchToGeneric extends UhcDriver {
 		if(validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);
 		}
-		Assert.fail("DCE - Drug Summary Page is not displayed");
+		Assertion.fail("DCE - Drug Summary Page is not displayed");
 		return null;
 	}
 	
@@ -157,8 +148,8 @@ public class SwitchToGeneric extends UhcDriver {
 		WebElement SavingsText = driver.findElement(By.xpath("//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
 		openAndValidate();
 		if(!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
-			Assert.fail("Switch To Generic Page Validation Failed");
+			Assertion.fail("Switch To Generic Page Validation Failed");
 		}
-		Assert.assertTrue("Switch To Generic Page Validation Passed", true);
+		Assertion.assertTrue("Switch To Generic Page Validation Passed", true);
 	}
 }

@@ -3,40 +3,18 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
+public class PlanRecommendationEngineNewResultsPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineNewResultsPage(WebDriver driver) {
 		super(driver);
@@ -46,7 +24,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 	
@@ -182,7 +160,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 		Assert.assertTrue(Integer.parseInt(planZipInfo.getText().split(" ")[4])>0,"Total Plan count is less than 1");
 		Assert.assertTrue(sortByLabel.getText().contains("Sort By :"),"Invalid Sort Text");
 		Assert.assertTrue(resourcesTitle.getText().contains("Resources"),"Invalid Resources Text");
-//		Assert.assertTrue(returnToBeginning.get(0).getText().contains("Return to beginning"),"Invalid Return to beginning Text");
+//		Assertion.assertTrue(returnToBeginning.get(0).getText().contains("Return to beginning"),"Invalid Return to beginning Text");
 		Assert.assertTrue(moreAboutPlanTypesTitle.getText().contains("More About Plan Types"),"Invalid More About Plan Types Text");
 		validate(moreAboutPlanTypesPara,60);
 		Assert.assertTrue(mapdPlanTypesTitle.getText().contains("Medicare Advantage Plans (Part C)"),"Invalid MAPD Text");

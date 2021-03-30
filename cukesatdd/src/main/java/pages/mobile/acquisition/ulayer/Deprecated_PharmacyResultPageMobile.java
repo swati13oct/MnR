@@ -7,12 +7,12 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 /**
@@ -61,7 +61,7 @@ public class Deprecated_PharmacyResultPageMobile extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 
-		Assert.assertTrue(pharmacySearchResultsHeading.isDisplayed());
+		Assertion.assertTrue(pharmacySearchResultsHeading.isDisplayed());
 	}
 	public boolean validatePharmacyResultpage(JSONObject jsonObject, String zipcode, String planName){
 		boolean flag = true;

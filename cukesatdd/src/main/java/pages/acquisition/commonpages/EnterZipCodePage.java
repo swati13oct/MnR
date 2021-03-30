@@ -1,6 +1,6 @@
 package pages.acquisition.commonpages;
 
-import static org.junit.Assert.assertTrue;
+import static atdd.framework.Assertion.assertTrue;
 
 import java.util.List;
 import java.util.Set;
@@ -12,7 +12,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.PageTitleConstants;
 
 public class EnterZipCodePage extends UhcDriver {
 

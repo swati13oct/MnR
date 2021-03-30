@@ -8,10 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineTravelPage extends UhcDriver {
+public class PlanRecommendationEngineTravelPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineTravelPage(WebDriver driver) {
 		super(driver);
@@ -21,7 +20,7 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 	String page = "Travel";
@@ -95,20 +94,20 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 			String currentPageUrl = driver.getCurrentUrl();	
 			currentPageUrl.contains("/plan-recommendation-engine.html/");
 			validate(planSelectorPageTilte);
-//			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//			Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 			validate(pageStepsNumberName, 30);
 			validate(pageProgressPercentage, 30);
 			desktopCommonUtils.currentPageValidation(page.toUpperCase());
 			validate(pageRequiredInfo);
-//			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//			Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 			validate(travelWithin);
-//			Assert.assertTrue(travelWithin.getText().contains("within"));
+//			Assertion.assertTrue(travelWithin.getText().contains("within"));
 			validate(travelAnotherpart, 30);
-//			Assert.assertTrue(travelAnotherpart.getText().contains("another"));
+//			Assertion.assertTrue(travelAnotherpart.getText().contains("another"));
 			validate(travelPrimary, 30);
-//			Assert.assertTrue(travelPrimary.getText().contains("primary"));
+//			Assertion.assertTrue(travelPrimary.getText().contains("primary"));
 			validate(travelNone, 30);
-//			Assert.assertTrue(travelNone.getText().contains("None"));
+//			Assertion.assertTrue(travelNone.getText().contains("None"));
 			previousBtn.click();
 			System.out.println("Validationg "+page+" page Previous button functionality");
 			desktopCommonUtils.previousPageValidation(page.toUpperCase());

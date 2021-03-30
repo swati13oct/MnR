@@ -259,7 +259,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			System.out.println("Issue with Xpath");
 	
 		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 
 	return new VPPPlanSummaryPageMobile(driver);
@@ -316,7 +317,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}else
 		System.out.println("Issue with Xpath");
 	waitForCountDecrement(2);
-	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+	driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 	return new VPPPlanSummaryPageMobile(driver);
 	}
@@ -378,7 +380,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		 * validateNew(Checkcoverage); Checkcoverage.click();
 		 */
 		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -493,7 +496,8 @@ public PlanDetailsPageMobile selectsProviderFromVppPlanDetailsPage() {
 			FinishButton.click();
 		}else
 			System.out.println("Issue with Xpath");
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new PlanDetailsPageMobile(driver);
 }
@@ -540,7 +544,8 @@ public PlanDetailsPageMobile selectsProviderFromVppPlanDetailsPage() {
 		}else
 			System.out.println("Issue with Xpath");
 		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new VPPTestHarnessPageMobile(driver);
 	}
