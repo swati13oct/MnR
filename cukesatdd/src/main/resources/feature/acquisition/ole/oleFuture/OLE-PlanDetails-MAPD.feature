@@ -1,5 +1,5 @@
 
-Feature: 1.05.1. OLE common tool flow E2E MAPD
+Feature: 1.05.1. OLE common tool flow E2E Plan Details Page
 
   	Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from AARP Acquisition site VPP Plan Details Page
   Given the user is on medicare acquisition site landing page

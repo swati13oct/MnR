@@ -1,4 +1,4 @@
-Feature: 1.05.3 OLE common tool flow E2E PDP
+Feature: 1.05.3 OLE common tool flow E2E PDP Plan Details Page
 
   #@acquisitionRegression @PDP_OLE_AARP @junerelease2018 @september_release_2018 @december_release_2018 @OLE_DNSP_AARP @MACRAvalidation @OEP_CHANGES @OLE_Regression_Ulayer
   Scenario Outline: TID: <TID> -plan type: <plantype> - OLE End to end from <site> Acquisition site VPP Plan Details Page
