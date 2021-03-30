@@ -319,6 +319,9 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
 	
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']")
+	private WebElement EnrollinPlanCompare;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1525,5 +1528,41 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("populatedEmail = "+populatedEmail);
 		Assert.assertEquals(email, populatedEmail);
 	}
+	
+public WelcomePage Enroll_OLE_Plan_Compare(String planName) throws InterruptedException {
+		
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	System.out.println("Enroll in Plan for Plan : " + planName);
+	try {
+		if (validate(EnrollinPlanCompare))
+			System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+		else
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+
+	} catch (Exception e) {
+		System.out.println("Enroll in Plan Button is Not Displayed ");
+	}
+
+	jsClickNew(EnrollinPlanCompare);
+
+	try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	// if (driver.getCurrentUrl().contains("enrollment"))
+	if (driver.getCurrentUrl().contains("welcome")) {
+		System.out.println("OLE Welcome Page is Displayed");
+		return new WelcomePage(driver);
+	}
+	return null;
 }
 
+}

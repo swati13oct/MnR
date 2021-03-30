@@ -386,11 +386,12 @@ public class oleStepDefinition {
 		else
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
-
+	
+	
 
 	@Then("^the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow$")
-	public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+	public void the_user_get_Plan_Details_for_the_following_Plan() throws Throwable {
+	/*	List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -398,22 +399,48 @@ public class oleStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String PlanName = givenAttributesMap.get("Plan Name");
-		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
+		String PlanPremium = "";
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		//String TFN;
+		String SiteName;
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		//-----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;
 		if(SiteName.contains("UHC_ACQ")){
-
 			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
-			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+			//TFN = comparePlansPage.GetTFNforPlanType();
+			welcomePage = comparePlansPage.Enroll_OLE_Plan_Compare(PlanName);
 		}
 		else{
-			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
-
-			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+					.getBean(PageConstants.PLAN_COMPARE_PAGE);
+			welcomePage = comparePlansPage.Enroll_OLE_Plan_Compare(PlanName);
 		}
 
-		if (welcomePage != null) {
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+	//	getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		System.out.println("Plan Name is : "+PlanName);
+		System.out.println("Plan Type is : "+PlanType);
+		System.out.println("Plan Zip Code is : "+ZipCode);
+		System.out.println("Plan County Name is : "+County);
+		System.out.println("Plan Plan Premium is : "+PlanPremium);
+	//	System.out.println("TFN for Plan Type is : "+TFN);
+		System.out.println("Plan Year is : "+PlanYear);
+		System.out.println("OLE is being started from Acquisition Site : "+SiteName);
 
+		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
@@ -421,9 +448,57 @@ public class oleStepDefinition {
 		}
 		else
 			Assert.fail("Error in validating the OLE Welcome Page");
-
 	}
+	*/
+	
+	String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+	String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 
+	String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+			//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+	String County = "";
+			//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+	String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+	// String SiteName= (String)
+	// getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+
+	/*
+	 * WelcomePage welcomePage; if(SiteName.contains("UHC_ACQ")){ PlanDetailsPage
+	 * vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+	 * .getBean(PageConstants.VPP_PLAN_DETAILS_PAGE); TFN =
+	 * vppPlanDetailsPage.GetTFNforPlanType(); welcomePage =
+	 * vppPlanDetailsPage.Enroll_OLE_Plan(PlanName); } else{
+	 */
+	ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	
+	WelcomePage welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare(PlanName);
+	// }
+	String PlanPremium = "";
+			//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+	// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+
+	System.out.println("Plan Name is : " + PlanName);
+	System.out.println("Plan Type is : " + PlanType);
+	System.out.println("Plan Zip Code is : " + ZipCode);
+	System.out.println("Plan County Name is : " + County);
+	System.out.println("Plan Plan Premium is : " + PlanPremium);
+	System.out.println("Plan Year is : " + PlanYear);
+	// System.out.println("OLE is being started from Acquisition Site : "+SiteName);
+	if (welcomePage != null) {
+
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		System.out.println("OLE Welcome Page is Displayed");
+		Assert.assertTrue(true);
+	} else
+		Assert.fail("Error in validating the OLE Welcome Page");
+
+}
 	/**
 	 * @author sdwaraka
 	 * To Validate the Plan Details carried forward from VPP on Welcome Page of VPP

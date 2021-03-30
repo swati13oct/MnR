@@ -16,7 +16,8 @@ Feature: 1.05.1. OLE common tool flow E2E Plan Compare Page MAPD
     Then verify plan compare page is loaded
     #Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
     Then the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow
-    Then The User validates the Plan details on OLE page
+    #Then The User validates the Plan details on OLE page
+    Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
