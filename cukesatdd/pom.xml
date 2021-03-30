@@ -91,7 +91,7 @@
 							<properties>
 								<property>
 									<name>dataproviderthreadcount</name>
-									<value>30</value>
+									<value>100</value>
 								</property>
 								<property>
 									<name>testnames</name>
