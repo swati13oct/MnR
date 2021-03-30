@@ -1,19 +1,9 @@
 package acceptancetests.acquisition.tfn;
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
 
 
 public class tfnStepDefinitionUHC {
@@ -51,7 +41,7 @@ public void user_is_on_UMS_Prod_and_varify_TFN(DataTable givenAttributes) throws
 		System.out.println("Acqusition Home Page displaying proper number:  "+ tfn );
 	}
 	else{
-		Assert.fail("Error validating plans in  VPP plan summary page");
+		Assertion.fail("Error validating plans in  VPP plan summary page");
 	}
 }
 
@@ -70,7 +60,7 @@ public void user_navigate_to_Medicare_Edu_and_varify_TFN_on_Righ_Rail(DataTable 
 		System.out.println("Learn About Medicare Education Page displaying proper number:  "+ MedEducationTFN );
 	}
 	else{
-		Assert.fail("Error validating TFN in Medicare Education page" + MedEducationTFN );
+		Assertion.fail("Error validating TFN in Medicare Education page" + MedEducationTFN );
 	}
 }
 
@@ -89,7 +79,7 @@ public void user_enter_zip_on_bottom_of_MEd_Ed_page_and_click_to_view_MA_Plans_a
 		System.out.println(" VPP Page displaying proper number:  "+ maVppTfn );
 	}
 	else{
-		Assert.fail("Error validating TFN in  VPP plan summary page" + maVppTfn );
+		Assertion.fail("Error validating TFN in  VPP plan summary page" + maVppTfn );
 	}
 }
 
@@ -108,7 +98,7 @@ public void user_varifies_Med_Sup_tab_TFN(DataTable givenAttributes) throws Thro
 		System.out.println(" Med Sup Page displaying proper number:  "+ medSupTfn_UI );
 	}
 	else{
-		Assert.fail("Error validating TFN in  Med Sup page" + medSupTfn_UI );
+		Assertion.fail("Error validating TFN in  Med Sup page" + medSupTfn_UI );
 	}
 }
 
@@ -127,7 +117,7 @@ public void user_varifies_PDP_Tab_TFN(DataTable givenAttributes) throws Throwabl
 		System.out.println(" PDP Page displaying proper number:  "+ pdpTFN_UI );
 	}
 	else{
-		Assert.fail("Error validating TFN in  PDP page" + pdpTFN_UI );
+		Assertion.fail("Error validating TFN in  PDP page" + pdpTFN_UI );
 	}
 }
 
@@ -146,7 +136,7 @@ public void user_click_the_View_plan_and_drug_coverage_details_button_for_any_PD
 		System.out.println(" PDP Plan and Drug cvrg displaying proper number:  "+ pdpTFN_UI );
 	}
 	else{
-		Assert.fail("Error validating TFN in PDP Plan and Drug cvrg page" + pdpTFN_UI );
+		Assertion.fail("Error validating TFN in PDP Plan and Drug cvrg page" + pdpTFN_UI );
 	}
 }
 
@@ -165,7 +155,7 @@ public void user_Verify_the_Right_Rail_TFN_on_PDP_OLE(DataTable givenAttributes)
 		System.out.println(" PDP OLE Page displaying proper number:  "+ pdpTFN_UI );
 	}
 	else{
-		Assert.fail("Error validating TFN in PDP OLE page" + pdpTFN_UI );
+		Assertion.fail("Error validating TFN in PDP OLE page" + pdpTFN_UI );
 	}
 }
 	
@@ -192,7 +182,7 @@ public void user_is_on_Google_and_search_UHC_Medicare_Advantage_Plan_to_navigate
 		System.out.println("Acqusition Home Page displaying correct number  "+hometfn);
 	}
 	else{
-		Assert.fail("TFN Displayed did not Match expected TFN in Acqusition homepage " + hometfn);
+		Assertion.fail("TFN Displayed did not Match expected TFN in Acqusition homepage " + hometfn);
 	}	
 }
 @Then("^user navigate to MedSup from Google to varify TFN$")
@@ -212,7 +202,7 @@ public void user_navigate_to_MedSup_from_Google_to_varify_TFN(DataTable givenAtt
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
 	else{
-		Assert.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
+		Assertion.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
 	}
 }
 
@@ -237,7 +227,7 @@ public void user_is_on_Bing_and_search_UHC_Medicare_Advantage_Plan_to_navigate_t
 		System.out.println("Acqusition Home Page displaying correct number  "+hometfn);
 	}
 	else{
-		Assert.fail("Error validating TFN in  Acqusition homepage TFN  " + hometfn);
+		Assertion.fail("Error validating TFN in  Acqusition homepage TFN  " + hometfn);
 	}	
 }
 
@@ -258,7 +248,7 @@ public void user_navigate_to_MedSup_from_Bing_to_varify_TFN(DataTable givenAttri
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
 	else{
-		Assert.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
+		Assertion.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
 	}
 }
 
@@ -278,7 +268,7 @@ public void user_navigate_to_PDP_to_varify_TFN_via_Bing(DataTable givenAttribute
 		System.out.println("PDP TAB displaying correct TFN on UI  "+pdptfn_UI);
 	}
 	else{
-		Assert.fail("PDP TAB TFN is not displaying the right number  "+ pdptfn_UI);
+		Assertion.fail("PDP TAB TFN is not displaying the right number  "+ pdptfn_UI);
 	}
 }
 
@@ -303,7 +293,7 @@ public void user_visits_UMS_site_using_Direct_URL_and_varify_TFN(DataTable given
 		System.out.println("Home Page displaying proper number");
 	}
 	else{
-		Assert.fail("Error validating plans in  Acqusition homepage TFN");
+		Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 	}
 }
 	
@@ -323,7 +313,7 @@ public void user_navigate_to_MedSup_from_direct_to_varify_TFN(DataTable givenAtt
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
 	else{
-		Assert.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
+		Assertion.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
 	}
 }	
 	
@@ -349,7 +339,7 @@ public void user_visits_UMS_using_specific_URL_and_varify_TFN(DataTable givenAtt
 		System.out.println("TFN on MA Tab is displaying correct number:  "+ hometfn);
 	}
 	else{
-		Assert.fail("MA tab not displaying correct number"+ hometfn);
+		Assertion.fail("MA tab not displaying correct number"+ hometfn);
 	}
 }
 
@@ -369,7 +359,7 @@ public void navigate_to_MedSup_to_varify_TFN_from_specific_UMS_url(DataTable giv
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
 	else{
-		Assert.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
+		Assertion.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
 	}
 }	
 
@@ -407,7 +397,7 @@ public void user_navigates_to_MA_VPP_tab_to_vaify_TFN(DataTable givenAttributes)
 		System.out.println("MA TAB displaying correct TFN on UI  "+maVPPTabTFN_UI);
 	}
 	else{
-		Assert.fail("MA Tab TFN is not displaying the right number  "+ maVPPTabTFN_UI);
+		Assertion.fail("MA Tab TFN is not displaying the right number  "+ maVPPTabTFN_UI);
 	}
 }
 
@@ -428,7 +418,7 @@ public void user_varifies_Med_Sup_tab_TFN_from_this_specific_url(DataTable given
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
 	else{
-		Assert.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
+		Assertion.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
 	}
 }
 @Given("^user is on Google  search UHC Medicare Advantage Plan to navigate to AMP page and varify TFN$")
@@ -452,7 +442,7 @@ public void user_is_on_Google_search_UHC_Medicare_Advantage_Plan_to_navigate_to_
 		System.out.println("Home Page displaying proper number");
 	}
 	else{
-		Assert.fail("Error validating plans in  Acqusition homepage TFN");
+		Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 	}
 	
 }
@@ -474,7 +464,7 @@ public void navigate_from_Google_via_uhc_site_to_MedSup_to_varify_TFN(DataTable 
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
 	else{
-		Assert.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
+		Assertion.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
 	}
 }
 
@@ -501,7 +491,7 @@ public void user_is_on_Yahoo_search_UHC_Medicare_Advantage_Plan_to_navigate_to_A
 		System.out.println("Home Page displaying proper number");
 	}
 	else{
-		Assert.fail("Error validating plans in  Acqusition homepage TFN");
+		Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 	}
 	
 }
@@ -522,7 +512,7 @@ public void navigate_from_yahoo_via_uhc_site_to_MedSup_to_varify_TFN(DataTable g
 		System.out.println("Med Sup TAB displaying correct TFN on UI  "+medsuptfn);
 	}
 	else{
-		Assert.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
+		Assertion.fail("Med Sup TFN is not displaying the right number  "+ medsuptfn);
 	}
 }
 
@@ -578,7 +568,7 @@ public void user_navigates_to_MA_VPP_tab_to_vaify_TFN_from_this_specific_url(Dat
 		System.out.println("MA TAB displaying correct TFN on UI  "+maVPPTabTFN_UI);
 	}
 	else{
-		Assert.fail("MA Tab TFN is not displaying the right number  "+ maVPPTabTFN_UI);
+		Assertion.fail("MA Tab TFN is not displaying the right number  "+ maVPPTabTFN_UI);
 	}
 	
 	
@@ -600,7 +590,7 @@ public void user_verify_TFN(DataTable givenAttributes) throws Throwable {
 		System.out.println("TAB displaying correct TFN on UI  "+maVPPTabTFN_UI);
 	}
 	else{
-		Assert.fail("TFN is not displaying the right number  "+ maVPPTabTFN_UI);
+		Assertion.fail("TFN is not displaying the right number  "+ maVPPTabTFN_UI);
 	}
 	
 }
@@ -621,7 +611,7 @@ public void user_verify_VPP_TFN(DataTable givenAttributes) throws Throwable {
 		System.out.println("TAB displaying correct TFN on UI  "+maVPPTabTFN_UI);
 	}
 	else{
-		Assert.fail("TFN is not displaying the right number  "+ maVPPTabTFN_UI);
+		Assertion.fail("TFN is not displaying the right number  "+ maVPPTabTFN_UI);
 	}
 	
 }*/
