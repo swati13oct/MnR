@@ -1529,6 +1529,7 @@ public class ComparePlansPage extends UhcDriver {
 		Assert.assertEquals(email, populatedEmail);
 	}
 	
+	
 public WelcomePage Enroll_OLE_Plan_Compare(String planName) throws InterruptedException {
 		
 	try {
