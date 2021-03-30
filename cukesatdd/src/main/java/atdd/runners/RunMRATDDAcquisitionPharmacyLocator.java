@@ -3,6 +3,7 @@ package atdd.runners;
 import org.testng.annotations.Test;
 
 import atdd.framework.BaseTestConfig;
+import atdd.framework.RetryCountIfFailed;
 import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
@@ -16,6 +17,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@regression")
 
+@RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionPharmacyLocator extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
