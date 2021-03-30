@@ -406,13 +406,23 @@ public class oleStepDefinition {
 			//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 	String County = "";
 			//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+	String PlanPremium = "";
+	//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+	WelcomePage welcomePage;
+	if(PlanType.contains("MAPD")){
 	ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 			.getBean(PageConstants.PLAN_COMPARE_PAGE);
 	
-	WelcomePage welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare(PlanName);
-	// }
-	String PlanPremium = "";
-			//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+	 welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare_MAPD(PlanName);
+	}else {
+		
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+		.getBean(PageConstants.PLAN_COMPARE_PAGE);
+
+		welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare_PDP(PlanName);
+
+	}
+
 	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 	getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
