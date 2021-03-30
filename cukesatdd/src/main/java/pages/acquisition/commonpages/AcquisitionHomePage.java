@@ -615,7 +615,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	private PageData globalFooter;
 
-	public static boolean isHealthPlan = false;
+	public boolean isHealthPlan = false;
 
 	public String testSiteUrl;
 
