@@ -139,7 +139,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00007 | AARP |   24571 | YES             | Bedford County     | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 2 (PPO) | future   |
       | 00008 | AARP |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)              | future   |
 
-    @prodRegression_AARP
+    @prod_regression
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
       | 00005 | AARP |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
@@ -152,7 +152,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00007 | UHC  |   24571 | YES             | Bedford County     | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 2 (PPO) | future   |
       | 00008 | UHC  |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)              | future   |
 
-    @prodRegression_UHC
+    @prod_regression
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
       | 00005 | UHC  |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
@@ -174,12 +174,12 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     When user selects a provider and retuns to VPP plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
 
-    @VppPlanDetailsCommon_AARP02 @prodRegression_AARP
+    @VppPlanDetailsCommon_AARP02 @prod_regression
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
       | 00009 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
 
-    @VppPlanDetailsCommon_UHC02 @prodRegression_UHC
+    @VppPlanDetailsCommon_UHC02 @prod_regression
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
       | 00009 | UHC  |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |

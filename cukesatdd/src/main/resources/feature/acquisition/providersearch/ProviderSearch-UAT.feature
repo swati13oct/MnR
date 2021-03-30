@@ -11,7 +11,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @ProviderSearchCommon_Prod_AARP	@ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
+    @ProviderSearchCommon_AARP @prod_regression	@ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
@@ -54,7 +54,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | future   |
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
-    @ProviderSearchCommon_Prod_UHC
+    @prod_regression
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
@@ -74,7 +74,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | next |
 
-    @ProviderSearchCommon_UHC @ProviderSearchCommon_Prod_UHC @ProviderSearchFromGlobalHeaderBlayer
+    @ProviderSearchCommon_UHC @prod_regression @ProviderSearchFromGlobalHeaderBlayer
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | next |
@@ -115,7 +115,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
     Then Verify provider name is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    @ProviderSearchCommon_AARP @ProviderSearchCommon_Prod_AARP @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1
+    @ProviderSearchCommon_AARP @prod_regression @ProviderSearchFromVppPlanSummaryPageUlayer @Dummy1
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode |
       | Provider Search - E2E Scenario 5_AMP |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |

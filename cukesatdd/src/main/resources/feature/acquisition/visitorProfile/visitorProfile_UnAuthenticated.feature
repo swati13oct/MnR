@@ -64,12 +64,12 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-    @VisitorProfile_AARP @VP_ProdRegression_AARP	@prodRegression_AARP_02
+    @VisitorProfile_AARP @VP_ProdRegression_AARP	@prodRegression_AARP_02 @prod_regression
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
 
-    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_02
+    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_02 @prod_regression
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
@@ -326,12 +326,12 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     #No pdf link is avialable now
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
-    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02
+    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_02 @prod_regression
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | AARP | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
 
-    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_02
+    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_02 @prod_regression
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  |
       | UHC  | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A |
@@ -406,12 +406,12 @@ Feature: 1.08. UAT - Visitor profile Un-Authenticated
     Then verify the plans on plan compare page
       | Test Plans | <testPlans> |
 
-    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04
+    @VisitorProfile_AARP @VP_ProdRegression_AARP @prodRegression_AARP_04 @prod_regression
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
       | AARP | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_04
+    @VisitorProfile_UHC @VP_ProdRegression_UHC	@prodRegression_UHC_04 @prod_regression
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | county           | plantype | planyear | testPlans                                                                                                                                                                                                 |
       | UHC  | Alabama | US1770330 |   90210 | NO            | Jefferson County | MAPD     | Next     | AARP Medicare Advantage Freedom Plus (HMO-POS),AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |

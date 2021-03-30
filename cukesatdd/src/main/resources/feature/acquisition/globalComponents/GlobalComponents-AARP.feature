@@ -258,7 +258,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                           | false   |
       | UHC  | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
 
-    @MiscellaneousLinks_GlobalCompsAARP
+    @MiscellaneousLinks_GlobalCompsAARP @prod_regression
     Examples: 
       | site | path                                                       | pageName                | tfnXpath                                                       | tfnFlag |
       | AARP | health-plans/estimate-drug-costs.html!/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
@@ -266,7 +266,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-plans.html                                        | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | AARP | profile/guest                                              | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |
 
-    @MiscellaneousLinks_GlobalCompsUHC
+    @MiscellaneousLinks_GlobalCompsUHC @prod_regression
     Examples: 
       | site | path                                                       | pageName                | tfnXpath                                                       | tfnFlag |
       | UHC  | health-plans/estimate-drug-costs.html!/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
