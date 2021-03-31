@@ -72,7 +72,7 @@ public class VppCommonStepDefinition {
 		return loginScenario;
 	}
 
-	WebDriver wd;
+//	WebDriver wd;
 	public static String PREflow = "";
 
 	/**
@@ -103,7 +103,7 @@ public class VppCommonStepDefinition {
 
 	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
 	public void the_user_on__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
-		wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -191,7 +191,7 @@ public class VppCommonStepDefinition {
 		}*/
 
 		String plantype = givenAttributesMap.get("Plan Type");
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -215,7 +215,7 @@ public class VppCommonStepDefinition {
 
 		String planYear = givenAttributesMap.get("Plan Year");
 
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
@@ -2657,7 +2657,7 @@ public class VppCommonStepDefinition {
 	/** user is on the AARP Medicare Site landing page */
 	@Given("^the user is on Acquisition Site landing page and navigate to pharmacy search page$")
 	public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable givenAttributes) {
-		wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -3361,7 +3361,7 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		aquisitionhomepage.navigateToPath(path);
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
@@ -3471,7 +3471,7 @@ public class VppCommonStepDefinition {
 		String siteType = givenAttributesMap.get("Site");
 		System.out.println("Set of TFNs from Sheet : "+sheetName);
 		
-		 wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		
 		//Getting Date
@@ -3788,7 +3788,7 @@ public class VppCommonStepDefinition {
 	
 	@Then("^the user quits the session$")
 	public void user_ends_current_session() throws Throwable {
-		wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 	}
 	
