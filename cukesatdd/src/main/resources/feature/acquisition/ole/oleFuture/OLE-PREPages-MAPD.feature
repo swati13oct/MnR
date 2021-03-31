@@ -26,7 +26,7 @@ Feature: 1.05.8. OLE PRE Integration Flow
     Then user selects priority in priorities page
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
-    Then user validate elements on loading results page
+    Then user validate elements in loading results page
     #And the user views the plans of the below plan type and select Next year
      # | Plan Type | <plantype> |
 		#And the user views the plans of the below plan type
