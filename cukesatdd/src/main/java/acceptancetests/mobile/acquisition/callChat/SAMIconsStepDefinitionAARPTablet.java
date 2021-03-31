@@ -1,7 +1,6 @@
 package acceptancetests.mobile.acquisition.callChat;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
@@ -25,11 +25,11 @@ public class SAMIconsStepDefinitionAARPTablet {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+//	AppiumDriver wd;
 
 	@Given("^the user is on the AARP medicare site landing page on Tablet$")
 	public void the_user_is_on_the_AARP_medicare_site_landing_page_on_Tablet() {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
@@ -40,7 +40,7 @@ public class SAMIconsStepDefinitionAARPTablet {
 	@Given("^user opens the page to validate on AARP Tablet$")
 	public void user_opens_the_page_to_validate_on_AARP_Tablet(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -47,7 +48,7 @@ public class AARPShopForaPlanStepDefenition {
 	@Given("^click on Learn how to enroll plan on enroll page for AARP$")
 	public void click_on_Learn_how_to_enroll_plan_on_enroll_page_for_AARP(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {

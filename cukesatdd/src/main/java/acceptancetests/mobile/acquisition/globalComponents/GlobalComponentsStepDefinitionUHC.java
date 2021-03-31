@@ -1,7 +1,6 @@
 package acceptancetests.mobile.acquisition.globalComponents;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
@@ -283,7 +283,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 	public void the_user_navigates_to_following_uhc_medicare_acquisition_site_page(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -337,7 +337,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 	@Then("^the user validates TFN on page on UHC site$")
 	public void the_user_validates_TFN_on_page_uhc(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),

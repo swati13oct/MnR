@@ -24,6 +24,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
@@ -120,7 +121,7 @@ public class VppPlanCompareMobile {
 	public void verify_providers_covered_ulayer(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(Planname);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
 		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -152,7 +153,7 @@ public class VppPlanCompareMobile {
 	public void clickonProvidercoveredlink(DataTable Planname) {
 		{
 			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-			plannameAttributesMap = getLoginScenario().readDataTableAsMaps(Planname);
+			plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
 			/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 			for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -179,7 +180,7 @@ public class VppPlanCompareMobile {
 	@When("^the user performs plan search using following information in the AARP site$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -267,7 +268,7 @@ public class VppPlanCompareMobile {
 	@When("^the user enters zipcode on health plans page in the AARP site$")
 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -343,7 +344,7 @@ public class VppPlanCompareMobile {
 	@And("^the user views the plans of the below plan type in AARP site$")
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -371,7 +372,7 @@ public class VppPlanCompareMobile {
 	@And("^the user views the plans of the below plan type in AARP site and select Current year$")
 	public void user_performs_planSearch_in_aarp_site_current_year(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -392,7 +393,7 @@ public class VppPlanCompareMobile {
 	@And("^the user views the plans of the below plan type in AARP site and select Next year$")
 	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -562,7 +563,7 @@ public class VppPlanCompareMobile {
 	public void user_successfully_adds_drug(DataTable data) throws InterruptedException {
 
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(data);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
 		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -660,7 +661,7 @@ public class VppPlanCompareMobile {
 	@And("^I access the DCE tool on aarp site$")
 	public void accessDCETool(DataTable attributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -681,7 +682,7 @@ public class VppPlanCompareMobile {
 	public void the_user_selects_plan_year(DataTable givenAttributes) {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -702,7 +703,7 @@ public class VppPlanCompareMobile {
 	@And("^the user selects plan year for AARP site$")
 	public void user_selects_plan_year_AARP(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -727,7 +728,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -901,7 +902,7 @@ public class VppPlanCompareMobile {
 	@And("^the user validates plan summary for the below plan in the AARP site$")
 	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -958,7 +959,7 @@ public class VppPlanCompareMobile {
 			DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -1032,7 +1033,7 @@ public class VppPlanCompareMobile {
 	public void the_user_performs_zipcode_search_using_widget_following_information_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1061,7 +1062,7 @@ public class VppPlanCompareMobile {
 	public void the_user_goes_to_MA_Landing_and_performs_zipcode_search_using_widget_following_information_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1091,7 +1092,7 @@ public class VppPlanCompareMobile {
 	public void the_user_goes_to_PDP_Landing_and_performs_zipcode_search_using_widget_following_information_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1121,7 +1122,7 @@ public class VppPlanCompareMobile {
 	public void the_user_validates_the_following_Additional_Benefits_Plan_details_for_the_plan(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1145,7 +1146,7 @@ public class VppPlanCompareMobile {
 	public void the_user_validates_the_following_Medical_benefits_Plan_details_for_the_plan(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1170,7 +1171,7 @@ public class VppPlanCompareMobile {
 	public void the_user_validates_the_following_Medical_benefits_for_the_plan_in_Plan_Compare_Page(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1198,7 +1199,7 @@ public class VppPlanCompareMobile {
 	public void the_user_performs_plan_search_using_following_MultiCounty_Zip_information_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1240,7 +1241,7 @@ public class VppPlanCompareMobile {
 	public void the_user_performs_plan_search_using_following_MultiCounty_Zip_in_Header_Sun_Nav_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1268,7 +1269,7 @@ public class VppPlanCompareMobile {
 	public void the_user_performs_Change_Location_on_Plan_Summary_Page_using_following_MultiCounty_Zip_information_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1567,7 +1568,7 @@ public class VppPlanCompareMobile {
 	// vvv note: added for US1598162
 	public Map<String, String> prepareTestInput(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -2197,7 +2198,7 @@ public class VppPlanCompareMobile {
 			RequestMailedInformationMobile requestmailedinformation = (RequestMailedInformationMobile) getLoginScenario()
 					.getBean(PageConstants.REQUEST_MAILED_INFORMATION);
 			Map<String, String> givenAttributesMap = new HashMap<String, String>();
-			givenAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+			givenAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 			/*List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
 			for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -2219,7 +2220,7 @@ public class VppPlanCompareMobile {
 	@Then("^the AARP site user clicks on Start Application Button proceed to next pages for getting resume application key")
 	public void Start_application_button(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2241,7 +2242,7 @@ public class VppPlanCompareMobile {
 	@Then("^user clicks on resume application button in the AARP site")
 	public void click_resume_application(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2265,7 +2266,7 @@ public class VppPlanCompareMobile {
 	@And("^the user signs in with optum Id credentials to resume application in AARP site$")
 	public void the_user_signs_in_with_optum_Id_credentials_resume_application_in_AARP_site(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(credentials);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
 		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -2284,7 +2285,7 @@ public class VppPlanCompareMobile {
 	public void enters_data_to_resume_application(DataTable givenAttributes) throws Throwable {
 		System.out.println("***the user enters data to resume the application***");
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2312,7 +2313,7 @@ public class VppPlanCompareMobile {
 	public void resume_application_processed(DataTable givenAttributes) throws Throwable {
 		System.out.println("***The user validates the resume application processed***");
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2331,7 +2332,7 @@ public class VppPlanCompareMobile {
 	public void retrive_application_processed(DataTable givenAttributes) throws Throwable {
 		System.out.println("***The user validates the Retrive application***");
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2350,7 +2351,7 @@ public class VppPlanCompareMobile {
 	public void the_user_performs_plan_search_using_Standalone_Zipcode_information_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2411,7 +2412,7 @@ public class VppPlanCompareMobile {
 	public void the_user_click_on_Plan_costs_tab_and_validates_in_AARP_site(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2440,7 +2441,7 @@ public class VppPlanCompareMobile {
 	public void the_user_click_on_Optional_Services_tab_and_add_the_rider_in_AARP_site(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2460,7 +2461,7 @@ public class VppPlanCompareMobile {
 	public void the_user_click_on_Plan_costs_tab_and_validate_riders_monthly_and_yearly_premium_in_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2497,7 +2498,7 @@ public class VppPlanCompareMobile {
 	public void the_user_validates_following_PDF_link_is_displayes_with_correct_document_code(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2521,7 +2522,7 @@ public class VppPlanCompareMobile {
 	public void the_user_click_on_PDF_link_and_validates_document_code_in_URL(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2542,7 +2543,7 @@ public class VppPlanCompareMobile {
 	public void the_user_click_on_PDF_link_and_validates_document_code_in_PDF(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2845,7 +2846,7 @@ public class VppPlanCompareMobile {
 	public void verify_find_a_zipcode_popup_displpayed_and_Enter_values_and_click_on_LookupZipcode_on_AARP(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -2865,7 +2866,7 @@ public class VppPlanCompareMobile {
 	@When("^the user performs plan search using following information in the aarp site$")
 	public void lookUpzipcode_details_in_aarp_site(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -2898,7 +2899,7 @@ public class VppPlanCompareMobile {
 	@When("^the user performs plan search using following information$")
 	public void zipcode_details_in_the_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -2939,7 +2940,7 @@ public class VppPlanCompareMobile {
 	public void user_clicks_on_Select_by_Address_and_Enter_fileds_in_UMS_Site(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -2958,7 +2959,7 @@ public class VppPlanCompareMobile {
 	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information_in_the_AARP_site(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -3000,7 +3001,7 @@ public class VppPlanCompareMobile {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(memberAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
 		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -3228,7 +3229,7 @@ public class VppPlanCompareMobile {
 	public void user_validates_plan_summary_AARP_for_medsup_deepLink(DataTable planAttributes)
 			throws InterruptedException {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3247,7 +3248,7 @@ public class VppPlanCompareMobile {
 	public void user_enters_Mandatory_fields_on_ProviderSearch_Navigates_to_provider_Page_for_AARP(
 			DataTable planAttributes) throws Exception {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3323,7 +3324,7 @@ public class VppPlanCompareMobile {
 	public void verify_drugs_covered_AARP(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(Planname);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
 		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -3478,7 +3479,7 @@ public class VppPlanCompareMobile {
 			throws Exception {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -3541,7 +3542,7 @@ public class VppPlanCompareMobile {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-		urlAttributesMap = getLoginScenario().readDataTableAsMaps(inputvalue);
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
 		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
@@ -3561,7 +3562,7 @@ public class VppPlanCompareMobile {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-		urlAttributesMap = getLoginScenario().readDataTableAsMaps(inputvalue);
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
 		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
@@ -3604,7 +3605,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-		urlAttributesMap = getLoginScenario().readDataTableAsMaps(inputvalue);
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
 		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
@@ -3623,7 +3624,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-		urlAttributesMap = getLoginScenario().readDataTableAsMaps(inputvalue);
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
 		
 		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 		for (int i = 0; i < AttributesRow.size(); i++) {
@@ -3641,7 +3642,7 @@ public class VppPlanCompareMobile {
 	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3781,7 +3782,7 @@ public class VppPlanCompareMobile {
 	@And("^the user views the plans of the below plan type$")
 	public void user_performs_planSearch_in_aarp_sites(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3803,7 +3804,7 @@ public class VppPlanCompareMobile {
 	@Then("^user fills out medsup form and proceeds to next pages mobile$")
 	public void fillOutMedSuppForm(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -4095,7 +4096,7 @@ public class VppPlanCompareMobile {
 	@And("^the user signs in with optum Id in medsup flow$")
 	public void the_user_signs_in_with_optum_Id(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(credentials);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
 		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -4187,7 +4188,7 @@ public class VppPlanCompareMobile {
 	public void the_user_click_on_Optional_Services_tab_and_validate_PlanDefaults(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -4223,7 +4224,7 @@ public class VppPlanCompareMobile {
 	@When("^user access DCE tool on UMS site$")
 	public void accessDCEToolUMS(DataTable attributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -4761,7 +4762,7 @@ public class VppPlanCompareMobile {
 	@Then("^Click on Dental Flyer Link$")
 	public void clickonDentalFlyerLink(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 

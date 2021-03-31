@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
@@ -45,7 +46,7 @@ public class isDecisionGuideStepDefenitionUHC    {
 	@Then("^the user enters valid information for the pre entry form on UMS site$")
 	public void the_user_enters_valid_information_for_the_pre_entry_form_on_UMS_site(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -62,7 +63,7 @@ public class isDecisionGuideStepDefenitionUHC    {
 	@Then("^the user enters and  saves the entered information in Pre entry page for validation on IS forms on UMS site$")
 	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_IS_form_on_UMS_site(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -162,7 +163,7 @@ public class isDecisionGuideStepDefenitionUHC    {
 	public void the_user_enters_valid_information_for_the_following_fields_on_UMS_site(DataTable givenAttributes) throws Throwable {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -229,7 +230,7 @@ public class isDecisionGuideStepDefenitionUHC    {
 	public void the_user_provides_all_valid_information_for_Second_Step_on_UMS_site(DataTable givenAttributes) throws Throwable {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 

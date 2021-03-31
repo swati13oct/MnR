@@ -9,6 +9,7 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -43,7 +44,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	WebDriver wd;
+//	WebDriver wd;
 //	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
 	public static String PREflow="";
@@ -51,7 +52,7 @@ public class PlanRecommendationEngineStepDefinition {
 	public void readfeaturedata(DataTable data) {
 //		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
-		inputValues = getLoginScenario().readDataTableAsMaps(data);
+		inputValues = DataTableParser.readDataTableAsMaps(data);
 		/*for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0),
 			inputRow.get(i).getCells().get(1));
@@ -65,7 +66,7 @@ public class PlanRecommendationEngineStepDefinition {
 	boolean if_offline_prod = false, popup_clicked = false;
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
-		wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
 		if_offline_prod = aquisitionhomepage.openPRE();
@@ -166,6 +167,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
 	public void user_check_header_footer_Actions_Plan_Selector_tool(DataTable givenAttributes) throws Throwable{
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String actualpageurl = wd.getCurrentUrl();
 		readfeaturedata(givenAttributes);
 		String zipcode = inputValues.get("Zip Code");
@@ -959,7 +961,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@Given("^the user is on external acquisition site landing page$")
 	public void the_user_on_external_Site(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE");
 		aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

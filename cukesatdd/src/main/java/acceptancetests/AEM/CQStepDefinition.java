@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -23,7 +24,8 @@ import pages.AEM.CQPage;
  */
 public class CQStepDefinition {
 	
-	static int iRedirectionCounter = 0;
+	//Use Atomic integer for thread safety, refer RetryAnalyzer
+	int iRedirectionCounter = 0;
 
 	@Autowired
 	MRScenario loginScenario;
@@ -91,7 +93,7 @@ public class CQStepDefinition {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(data);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
 		/*List<DataTableRow> AttributesRow = data
 				.getGherkinRows();
 		
@@ -121,7 +123,7 @@ public class CQStepDefinition {
 	@Then("^the user validates the static tab components$")
 	public void the_user_validates_the_static_tab_components(DataTable data) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(data);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
 		/*List<DataTableRow> AttributesRow = data
 				.getGherkinRows();
 		

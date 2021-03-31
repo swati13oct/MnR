@@ -1,7 +1,6 @@
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
@@ -59,7 +59,7 @@ public class DCEACQVPPPlanDetailsMobile {
 	@When("^the consumer performs plan search using following information$")
 	public void enters_zipcode_details_in_UMS_site(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -120,7 +120,7 @@ public class DCEACQVPPPlanDetailsMobile {
 	@Then("^the consumer searches and adds the following Drug to Drug List$")
 	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),

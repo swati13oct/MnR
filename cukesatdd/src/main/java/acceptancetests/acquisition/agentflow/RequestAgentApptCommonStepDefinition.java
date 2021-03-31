@@ -2,13 +2,13 @@ package acceptancetests.acquisition.agentflow;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -72,7 +72,7 @@ public class RequestAgentApptCommonStepDefinition {
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
 		}*/
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(memberAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
 		return memberAttributesMap;
 	}
 	
@@ -119,7 +119,7 @@ public class RequestAgentApptCommonStepDefinition {
 				givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 						givenAttributesRow.get(i).getCells().get(1));
 			}*/
-			givenAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+			givenAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 			boolean isFormSubmitted = requestAgentAppointmentPage.submitAgentAppointment(givenAttributesMap);
 			if (isFormSubmitted) {
 				System.out.println("Successfully submitted the Appointment form");

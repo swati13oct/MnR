@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -38,7 +39,7 @@ public class ShopperProfileStepDefinition {
 	public void i_am_an_agent_logged_into_the_cloak_in_tool(DataTable userData){
 		
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(userData);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(userData);
 		/*List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -63,7 +64,7 @@ public class ShopperProfileStepDefinition {
 	public void i_ask_the_shopper_calling_in_to_provide_me_with_the_Name_And_Search(DataTable email){
 	    
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(email);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(email);
 		/*List<DataTableRow> givenAttributesRow = email.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -97,7 +98,7 @@ public class ShopperProfileStepDefinition {
 	public void i_land_on_the_plan_summary_page_of_VPP(DataTable planName){
 		
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planName);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planName);
 		/*List<DataTableRow> givenAttributesRow = planName.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -124,7 +125,7 @@ public class ShopperProfileStepDefinition {
 	public void i_land_on_the_plan_compare_page(DataTable userData){
 		
 		HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(userData);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(userData);
 		/*List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -143,7 +144,7 @@ public class ShopperProfileStepDefinition {
 	public void i_ask_the_shopper_calling_in_to_provide_me_with_the_Email_Address_And_Search(DataTable email){
 	    
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(email);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(email);
 		/*List<DataTableRow> givenAttributesRow = email.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -171,7 +172,7 @@ public class ShopperProfileStepDefinition {
 	public void validate_invalid_email(DataTable email){
 	    
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(email);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(email);
 		/*List<DataTableRow> givenAttributesRow = email.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -191,7 +192,7 @@ public class ShopperProfileStepDefinition {
 	public void validate_invalid_first_name_and_last_name(DataTable email){
 	    
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(email);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(email);
 		/*List<DataTableRow> givenAttributesRow = email.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -212,7 +213,7 @@ public class ShopperProfileStepDefinition {
 	public void i_ask_the_shopper_calling_in_to_provide_me_with_the_Email_Address(DataTable details){
 	    
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(details);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(details);
 		/*List<DataTableRow> givenAttributesRow = details.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -244,7 +245,7 @@ public class ShopperProfileStepDefinition {
 	@Then("^create a profile with the following details$")
 	public void create_a_profile_with_the_following_details(DataTable details){
 		HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(details);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(details);
 		try {
 			MemberCreateProfile createProfile = (MemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.MEMBER_CREATE_A_PROFILE);
@@ -270,7 +271,7 @@ public class ShopperProfileStepDefinition {
 	@Then("^create a profile with the following details for NonMember$")
 	public void create_a_profile_with_the_following_details_for_NonMember(DataTable details){
 		HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(details);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(details);
 		try {
 			NonMemberCreateProfile createProfile = (NonMemberCreateProfile) getLoginScenario()
 					.getBean(PageConstants.NON_MEMBER_CREATE_A_PROFILE);
@@ -285,7 +286,7 @@ public class ShopperProfileStepDefinition {
 	public void i_land_on_the_plan_summary_page_of_VPP_for_NonMember(DataTable planName){
 		
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planName);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planName);
 		/*List<DataTableRow> givenAttributesRow = planName.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -307,7 +308,7 @@ public class ShopperProfileStepDefinition {
 	@Then("^I ask the shopper calling in to provide me with the Email Address for NonMember$")
 	public void i_ask_the_shopper_calling_in_to_provide_me_with_the_Email_Address_Non_Member(DataTable memberDetails){
 		HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(memberDetails);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(memberDetails);
 		ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 				.getBean(PageConstants.PROFILE_SEARCH);
 		
@@ -319,7 +320,7 @@ public class ShopperProfileStepDefinition {
 	public void i_land_on_the_plan_compare_page_For_Non_Member(DataTable userData){
 		
 		HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(userData);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(userData);
 		/*List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 

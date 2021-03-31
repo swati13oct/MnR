@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
@@ -42,7 +43,7 @@ public class DeploymentFilesStepDefinitionUHC {
 	@Then("^the user validates whether correct content is visible on UHC")
 	public void the_user_validates_whether_content_is_visible_UHC(DataTable arg1) throws Throwable {
 		Map<String, String> personalAttributesMap = new HashMap<String, String>();
-		personalAttributesMap = getLoginScenario().readDataTableAsMaps(arg1);
+		personalAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> personalAttributesRow = arg1
 				.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {

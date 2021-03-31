@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -68,7 +69,7 @@ public class ShopForaPlanCommonStepDefinition {
 	@Given("^click on Learn how to enroll on enroll page$")
 	public void click_on_Learn_how_to_enroll_plan_on_enroll_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -97,7 +98,7 @@ public class ShopForaPlanCommonStepDefinition {
 	@Given("^click on how to enroll shop pages$")
 	public void click_on_how_to_enroll_Shopplan(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -290,7 +291,7 @@ public class ShopForaPlanCommonStepDefinition {
 	
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(memberAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
 		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));

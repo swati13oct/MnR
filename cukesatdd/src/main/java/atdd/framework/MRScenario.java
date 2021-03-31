@@ -62,7 +62,6 @@ import acceptancetests.data.CommonConstants;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.Scenario;
 
 @Component
@@ -826,7 +825,7 @@ public class MRScenario {
 		}
 	}
 	
-	public HashMap<String, String> readDataTableAsMaps(DataTable inputTestData) {
+	/*public HashMap<String, String> readDataTableAsMaps(DataTable inputTestData) {
 		List<Map<String, String>> inputDataTable = inputTestData.transpose().asMaps();
 		HashMap<String, String> inputData = new HashMap<String, String>();
 		for(Map<String, String> map : inputDataTable) {
@@ -843,7 +842,7 @@ public class MRScenario {
 			inputData.put(inputDataTable.get(row).get(0), inputDataTable.get(row).get(1));
 		}
 		return inputData;
-	}
+	}*/
 
 	public WebDriver getWebDriver() {
 

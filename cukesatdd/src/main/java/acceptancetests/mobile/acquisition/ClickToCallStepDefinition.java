@@ -1,13 +1,13 @@
 package acceptancetests.mobile.acquisition;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
@@ -91,7 +91,7 @@ public class ClickToCallStepDefinition {
 	@Given("^the user navigates to following medicare acquisition site page on mobile$")
 	public void the_user_navigates_to_following_AARP_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -112,7 +112,7 @@ public class ClickToCallStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		Map<String, String> tfnAttributesMap = new HashMap<String, String>();
-		tfnAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		tfnAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> tfnAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < tfnAttributesRow.size(); i++) {
 			tfnAttributesMap.put(tfnAttributesRow.get(i).getCells().get(0),

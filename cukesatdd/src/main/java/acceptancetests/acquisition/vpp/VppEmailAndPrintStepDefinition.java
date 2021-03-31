@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
@@ -294,7 +295,7 @@ public class VppEmailAndPrintStepDefinition {
 	@And("^the user views the plans of the below plan type on test site$")
 	public void user_performs_planSearch(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 

@@ -1,13 +1,13 @@
 package acceptancetests.acquisition.callChat;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -38,7 +38,7 @@ public class SAMIconsCommonStepDefinition {
 						.get(0), memberAttributesRow.get(i).getCells().get(1));
 			}*/
 		
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		
 		String pagename = memberAttributesMap.get("pagename");
 		
@@ -108,7 +108,7 @@ public class SAMIconsCommonStepDefinition {
 						.get(0), memberAttributesRow.get(i).getCells().get(1));
 			}*/
 
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String pagename = memberAttributesMap.get("pagename");
 		
 		System.out.println(pagename);
@@ -150,7 +150,7 @@ public class SAMIconsCommonStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 					.get(0), memberAttributesRow.get(i).getCells().get(1));
 		}*/
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 	AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	String TFNXpath = memberAttributesMap.get("TFN Xpath");

@@ -2,7 +2,6 @@ package acceptancetests.acquisition.plandocs;
 
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -36,7 +36,7 @@ public class PlanDocsStepDefinition {
 	public void the_user_opens_the_page_to_validate(DataTable givenAttributes) throws InterruptedException {
 
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -104,7 +104,7 @@ public class PlanDocsStepDefinition {
 	public void the_user_validates_the_label_for_zipcode_and_enters_zipcode_on_UHC(DataTable givenAttributes) throws InterruptedException {
 
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
 		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
@@ -153,7 +153,7 @@ public class PlanDocsStepDefinition {
 	public void user_enters_zipcode_with_nonmulticounty_and_continue_button_is_clicked(DataTable givenAttributes) throws InterruptedException {
 
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -180,7 +180,7 @@ public class PlanDocsStepDefinition {
 	public void user_enters_zipcode_and_county_and_continue_button_is_clicked(DataTable givenAttributes) throws InterruptedException {
 
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -207,7 +207,7 @@ public class PlanDocsStepDefinition {
 	public void the_user_should_be_able_to_see_the_pdf(DataTable givenAttributes) throws InterruptedException {
 
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
@@ -34,7 +35,7 @@ public class DCEACQDrugSummaryMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+//	AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -44,7 +45,7 @@ public class DCEACQDrugSummaryMobile {
 	public void the_user_navigates_to_following_AARP_medicare_acquisition_site_page(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -76,7 +77,7 @@ public class DCEACQDrugSummaryMobile {
 	 */
 	@Given("^the user is on the AARP medicare site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		aquisitionhomepage.openMobileURL();
 		// aquisitionhomepage.openPRE();
@@ -90,7 +91,7 @@ public class DCEACQDrugSummaryMobile {
 	public void the_user_navigates_to_following_AARP_medicare_acquisition_page(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -113,7 +114,7 @@ public class DCEACQDrugSummaryMobile {
 
 	@Then("^the user validates Get Started Page for UHC$")
 	public void the_user_validates_Get_Started_Page_UHC() throws Throwable {
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEgetStarted);
 
@@ -131,7 +132,7 @@ public class DCEACQDrugSummaryMobile {
 	@When("^adds drugs in drug list page on UHC$")
 	public void adds_drugs_in_drug_list_page_UHC(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -139,6 +140,7 @@ public class DCEACQDrugSummaryMobile {
 		}*/
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println("zipcode" + drugName);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		BuildYourDrugListMobile buildDrugList = new BuildYourDrugListMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 		buildDrugList.addDrugs(drugName);
@@ -160,6 +162,7 @@ public class DCEACQDrugSummaryMobile {
 		 * .getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		 * zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		 */
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
@@ -168,7 +171,7 @@ public class DCEACQDrugSummaryMobile {
 	@When("^user enters valid zipcode and county on UHC$")
 	public void user_enter_valid_zipcode_UHC(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -203,6 +206,7 @@ public class DCEACQDrugSummaryMobile {
 
 	@Then("^user verify the drug summary page on UHC$")
 	public void user_verify_the_drug_summary_page_uhc() throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		drugSummaryPage.validateDrugSummaryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -210,7 +214,7 @@ public class DCEACQDrugSummaryMobile {
 
 	@When("^user should be able to see Medicare Advantage plan by default$")
 	public void user_should_be_able_to_see_Medicare_Advantage_plan_by_default() throws Throwable {
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		drugSummaryPage.verifyDefaultPlanType();
@@ -219,6 +223,7 @@ public class DCEACQDrugSummaryMobile {
 
 	@Then("^verify DCE NBA is displayed on drug summary page$")
 	public void verify_dce_NBA_is_displayed_on_summary_page() {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 

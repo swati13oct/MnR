@@ -17,6 +17,7 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -42,7 +43,7 @@ public class CampaignTFNCommonStepDefinition {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(memberAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
 		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
@@ -521,7 +522,7 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_MA_Plans(DataTable 
 @And("^the user signs in with optum Id credentials for campaign TFN$")
 public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site_campaign_tfn(DataTable credentials) {
 	Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-	plannameAttributesMap = getLoginScenario().readDataTableAsMaps(credentials);
+	plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
 	/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 	for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -593,7 +594,7 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_DCE_Page(DataTable 
 public void the_user_selects_View_plan_details_for_following_plantype_and_PlanName_DCE_Page(DataTable attributes)
 		throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -684,7 +685,7 @@ public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate
 @Then("^the user navigates to plan tab on VPP and validates Federal TFN$")
 public void the_user_navigates_to_plan_tab_on_VPP_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -706,7 +707,7 @@ public void the_user_navigates_to_plan_tab_on_VPP_and_validates_Federal_TFN(Data
 @Then("^the user navigates to Plan Details Page for any plan and validates Federal TFN$")
 public void the_user_navigates_to_Plan_Details_Page_any_plan_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -725,7 +726,7 @@ public void the_user_navigates_to_Plan_Details_Page_any_plan_and_validates_Feder
 @Then("^the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN$")
 public void the_user_navigates_to_Plan_Details_Page_any_plan_Enroll_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -746,7 +747,7 @@ public void the_user_navigates_to_Plan_Details_Page_any_plan_Enroll_and_validate
 @When("^the user performs plan search using Shop Pages for campaign Links$")
 public void Standalone_zipcode_details_shop_camapign_TFN(DataTable givenAttributes) throws InterruptedException {
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -778,7 +779,7 @@ public void Standalone_zipcode_details_shop_camapign_TFN(DataTable givenAttribut
 @When("^the user performs plan search using Medicare articles pages for campaign Links$")
 public void Standalone_zipcode_details_shop_camapign_TFN_medicare_article(DataTable givenAttributes) throws InterruptedException {
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -819,7 +820,7 @@ public void the_user_validates_TFN(DataTable inputAttributes) throws Throwable {
 @Then("^the user navigates to plan tab for any plan$")
 public void the_user_navigates_to_Plan_tab_plan(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -844,7 +845,7 @@ public void the_user_navigates_back_page() throws Throwable {
 @Then("^the user enter zipcode in homepage$")
 public void the_user_enter_zipcode(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -863,7 +864,7 @@ public void the_user_enter_zipcode(DataTable attributes) throws Throwable {
 @Then("^the user navigates to Plan Details Page for DCE Flow$")
 public void the_user_navigates_to_Plan_Details_Page_DCE_FLOW(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -890,7 +891,7 @@ public void clickonDCELink_Pharmacy_page() throws InterruptedException {
 @Then("^the user navigates to Plan Details Page for any SNP plan for Enroll and validates Federal TFN$")
 public void the_user_navigates_to_Plan_Details_Page_any_SNP_plan_Enroll_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -911,7 +912,7 @@ public void the_user_navigates_to_Plan_Details_Page_any_SNP_plan_Enroll_and_vali
 @Then("^the user enter zipcode in homepage for External Links$")
 public void the_user_enter_zipcode_External_Link(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -930,7 +931,7 @@ public void the_user_enter_zipcode_External_Link(DataTable attributes) throws Th
 @Then("^the user Enroll for any plan on plan summary page$")
 public void the_user_enroll_for_plan_summary_page(DataTable attributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(attributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -970,7 +971,7 @@ public void the_user_navigates_refresh_page() throws Throwable {
 @Then("^the site user fills all the details in MedsuppPage for TFN$")
 public void user_fills_all_details_medsupp_TFN(DataTable givenAttributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -991,7 +992,7 @@ public void user_fills_all_details_medsupp_TFN(DataTable givenAttributes) throws
 @Then("^the site user clicks on Start Application Button and proceed few Pages$")
 public void Start_application_button_proceed_next_few_pages(DataTable givenAttributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1057,7 +1058,7 @@ public void User_navigate_through_Medsupp_EBRC(DataTable arg1) throws Interrupte
 @When("^the user performs plan search using Shop Pages for Medsupp Page$")
 public void Shop_Standalone_zipcode_details_MedsuppPage(DataTable givenAttributes) throws InterruptedException {
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -1089,7 +1090,7 @@ public void Shop_Standalone_zipcode_details_MedsuppPage(DataTable givenAttribute
 @Then("^the user navigate to Pharmacy page$")
 public void user_navigate_pharmacy_page(DataTable givenAttributes) throws Throwable {
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 

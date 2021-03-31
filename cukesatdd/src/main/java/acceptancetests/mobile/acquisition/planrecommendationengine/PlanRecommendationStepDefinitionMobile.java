@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 
 /**
@@ -52,7 +53,7 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void readfeaturedataMobile(DataTable data) {
 //		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
-		inputValues = getLoginScenario().readDataTableAsMaps(data);
+		inputValues = DataTableParser.readDataTableAsMaps(data);
 		/*for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
 		}*/

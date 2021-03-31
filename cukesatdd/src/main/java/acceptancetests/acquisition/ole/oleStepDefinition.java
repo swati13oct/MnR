@@ -15,6 +15,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
@@ -70,7 +71,7 @@ public class oleStepDefinition {
 	public void the_user_lands_on_OLE_Welcome_Page_wity_following_Plan_Details(DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -121,7 +122,7 @@ public class oleStepDefinition {
 	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -194,7 +195,7 @@ public class oleStepDefinition {
 	public void the_user_navgates_to_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -264,7 +265,7 @@ public class oleStepDefinition {
 	public void the_user_navgates_to_clicks_on_Enroll_Now_From_VisitorProfile_flow(DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -392,7 +393,7 @@ public class oleStepDefinition {
 	@Then("^the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow$")
 	public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -573,7 +574,7 @@ public class oleStepDefinition {
 
 		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -649,7 +650,7 @@ public class oleStepDefinition {
 	@Then("^the user enters following required Medicare Informations$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_pages(DataTable planAttributes) throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -689,7 +690,7 @@ public class oleStepDefinition {
 	@Then("^the user enters following required Medicare Information$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -919,7 +920,7 @@ public class oleStepDefinition {
 
 
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
-		PreliminaryFlagsMap = getLoginScenario().readDataTableAsMaps(Flags);
+		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
 		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
@@ -954,7 +955,7 @@ public class oleStepDefinition {
 
 
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
-		PreliminaryFlagsMap = getLoginScenario().readDataTableAsMaps(Flags);
+		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
 		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
@@ -995,7 +996,7 @@ public class oleStepDefinition {
 	public void the_user_validates_not_requierd_fields_for_ESRD_Medicare_Questions_Page(DataTable Flags) throws Throwable {
 
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(Flags);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Flags);
 		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			MedicareDetailsMap.put(personalAttributesRow.get(i)
@@ -1041,7 +1042,7 @@ public class oleStepDefinition {
 	@Then("^the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page$")
 	public void user_navigates_to_use_and_disclosure_page(DataTable planAttributes)throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -1084,7 +1085,7 @@ public class oleStepDefinition {
 	public void user_fill_information_Preliminary_Questions_page(
 			DataTable personalAttributes) {
 		Map<String, String> personalAttributesMap = new HashMap<String, String>();
-		personalAttributesMap = getLoginScenario().readDataTableAsMaps(personalAttributes);
+		personalAttributesMap = DataTableParser.readDataTableAsMaps(personalAttributes);
 		/*List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			personalAttributesMap.put(personalAttributesRow.get(i)
@@ -1333,7 +1334,7 @@ public class oleStepDefinition {
 		 * Assertion.assertTrue(true); } else{
 		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);	
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);	
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 			for (int i = 0; i < givenAttributesRow.size(); i++) {
 				MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -1390,7 +1391,7 @@ public class oleStepDefinition {
 		 * Assertion.assertTrue(true); } else{
 		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);	
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);	
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 			for (int i = 0; i < givenAttributesRow.size(); i++) {
 				MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -1429,7 +1430,7 @@ public class oleStepDefinition {
 		 * Assertion.assertTrue(true); } else{
 		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);	
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);	
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 			for (int i = 0; i < givenAttributesRow.size(); i++) {
 				MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -1679,7 +1680,7 @@ public class oleStepDefinition {
 		//}*/
 
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(Medicareoptions);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
 		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -1912,7 +1913,7 @@ public class oleStepDefinition {
 		 * Assertion.assertTrue(true); } else{
 		 */
 		Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
-		SEPoptionsFlagMap = getLoginScenario().readDataTableAsMaps(SEPoptions);	
+		SEPoptionsFlagMap = DataTableParser.readDataTableAsMaps(SEPoptions);	
 		/*List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {
 				SEPoptionsFlagMap.put(personalAttributesRow.get(i)
@@ -2002,7 +2003,7 @@ public class oleStepDefinition {
 		 * Assertion.assertTrue(true); } else{
 		 */
 		Map<String, String> QuestionMap = new HashMap<String, String>();
-		QuestionMap = getLoginScenario().readDataTableAsMaps(arg1);
+		QuestionMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> personalAttributesRow = arg1.getGherkinRows();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {
 				QuestionMap.put(personalAttributesRow.get(i)
@@ -2213,7 +2214,7 @@ public class oleStepDefinition {
 		 */
 
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
-		RiderFlagMap = getLoginScenario().readDataTableAsMaps(Flags);
+		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
 
 		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {
@@ -2250,7 +2251,7 @@ public class oleStepDefinition {
 		 * Assertion.assertTrue(true); } else{
 		 */
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
-		RiderFlagMap = getLoginScenario().readDataTableAsMaps(Flags);	
+		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);	
 		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 			for (int i = 0; i < personalAttributesRow.size(); i++) {
 				RiderFlagMap.put(personalAttributesRow.get(i)
@@ -2326,7 +2327,7 @@ public class oleStepDefinition {
 		 * Assertion.assertTrue(true); } else{
 		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -2574,7 +2575,7 @@ public class oleStepDefinition {
 	public void the_user_validates_the_presence_for_Preliminary_Questions_on_Page(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -2649,7 +2650,7 @@ public class oleStepDefinition {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(memberAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
 		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -2662,7 +2663,7 @@ public class oleStepDefinition {
 	public void user_navigates_toOLEWelcomePageusingfollowinginformation(DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -2766,7 +2767,7 @@ public class oleStepDefinition {
 	//public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes, String planName) {
 	public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -2823,7 +2824,7 @@ public class oleStepDefinition {
 	public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_AARP_VPP_displayed(DataTable givenAttributes) {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -2881,7 +2882,7 @@ public class oleStepDefinition {
 	@Then("^the User Validates Marketing Bullets for Welcome OLE$")
 	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -2921,7 +2922,7 @@ public class oleStepDefinition {
 	@Then("^the User Validates Marketing Bullets for Welcome OLE Blayer$")
 	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE_Blayer(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3000,7 +3001,7 @@ public class oleStepDefinition {
 	@Then("^the user enters following required Medicare Informations for DSNP$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_pages_DSNP(DataTable planAttributes) throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3047,7 +3048,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page(DataTable arg1) throws Throwable {
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -3073,7 +3074,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medicare_Information_Page(DataTable arg1) throws Throwable {
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -3099,7 +3100,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1) throws Throwable {
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -3612,7 +3613,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	@Then("^the user validates Medicaid Number in confirm Eligibility Page$")
 	public void the_user_validates_Medicaid_Number_Confirm_Eligibility_Page(DataTable arg1) throws Throwable {
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = getLoginScenario().readDataTableAsMaps(arg1);
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
@@ -3653,7 +3654,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	//}*/
 
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(Medicareoptions);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
 		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3689,7 +3690,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow_plan_details_page(DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3760,7 +3761,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	@Then("^the user navigates to Disclosure Authorization Page for Medicaid and Effective date CSNP Plans$")
 	public void the_user_navigates_to_Disclosure_Authorization_Page_Medicaid_Effective_Date_CSNP_Plans(DataTable Medicareoptions) throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(Medicareoptions);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
 		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -3786,7 +3787,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	@Then("^the user validate on Review Page and click on Edit information for Medicare Information Page$")
 	public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_Page(DataTable Medicareoptions) throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
-		MedicareDetailsMap = getLoginScenario().readDataTableAsMaps(Medicareoptions);
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
 		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 

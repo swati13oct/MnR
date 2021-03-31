@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
@@ -42,7 +43,7 @@ public class AepVppStepDefinitionUlayer {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		DCEdatechangePage dceDateChangePage = new DCEdatechangePage(wd);
 		Map<String, String> DateChangeMap = new HashMap<String, String>();
-		DateChangeMap = getLoginScenario().readDataTableAsMaps(arg1);
+		DateChangeMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> datechangerow = arg1
 				.getGherkinRows();
 		for (int i = 0; i < datechangerow.size(); i++) {
@@ -111,7 +112,7 @@ public class AepVppStepDefinitionUlayer {
 	@Then("^the user validates Next year Plan summary Page for pre-AEP for below plan$")
 	public void the_user_validates_Next_year_Plan_summary_Page_for_pre_AEP_for_below_plan(DataTable arg1) throws Throwable {
 		Map<String, String> PlanNameMap = new HashMap<String, String>();
-		PlanNameMap = getLoginScenario().readDataTableAsMaps(arg1);
+		PlanNameMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> planNamerow = arg1
 				.getGherkinRows();
 		for (int i = 0; i < planNamerow.size(); i++) {
@@ -189,7 +190,7 @@ public class AepVppStepDefinitionUlayer {
 	@Then("^the user validates Current year Plan Summary Page for pre-AEP$")
 	public void the_user_validates_Current_year_Plan_Summary_Page_for_pre_AEP(DataTable arg1) throws Throwable {
 		Map<String, String> PlanNameMap = new HashMap<String, String>();
-		PlanNameMap = getLoginScenario().readDataTableAsMaps(arg1);
+		PlanNameMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> planNamerow = arg1
 				.getGherkinRows();
 		for (int i = 0; i < planNamerow.size(); i++) {
@@ -220,7 +221,7 @@ public class AepVppStepDefinitionUlayer {
 	@Then("^the user validates Next year Plan summary Page for AEP enrollment period for below plan$")
 	public void the_user_validates_Next_year_Plan_summary_Page_for_AEP_enrollment_period_for_below_plan(DataTable arg1) throws Throwable {
 		Map<String, String> PlanNameMap = new HashMap<String, String>();
-		PlanNameMap = getLoginScenario().readDataTableAsMaps(arg1);
+		PlanNameMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> planNamerow = arg1
 				.getGherkinRows();
 		for (int i = 0; i < planNamerow.size(); i++) {
@@ -252,7 +253,7 @@ public class AepVppStepDefinitionUlayer {
 	@Then("^the user validates Current year Plan Summary Page for AEP enrollment period$")
 	public void the_user_validates_Current_year_Plan_Summary_Page_for_AEP_enrollment_period(DataTable arg1) throws Throwable {
 		Map<String, String> PlanNameMap = new HashMap<String, String>();
-		PlanNameMap = getLoginScenario().readDataTableAsMaps(arg1);
+		PlanNameMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*List<DataTableRow> planNamerow = arg1
 				.getGherkinRows();
 		for (int i = 0; i < planNamerow.size(); i++) {

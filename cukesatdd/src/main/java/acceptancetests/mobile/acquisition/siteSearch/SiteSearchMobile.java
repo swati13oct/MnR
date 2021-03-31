@@ -2,7 +2,6 @@ package acceptancetests.mobile.acquisition.siteSearch;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
@@ -13,6 +12,7 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
@@ -99,7 +99,7 @@ public class SiteSearchMobile {
 	public void user_enters_the_zipcode_on_the_Rally_tool(DataTable givenAttributes) {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -139,7 +139,7 @@ public class SiteSearchMobile {
 	public void user_enters_the_zipcode_and_counts_plan(DataTable givenAttributes) {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -209,7 +209,7 @@ public class SiteSearchMobile {
 	public void user_enters_the_zipcode_on_the_Rally_tool1(DataTable givenAttributes) {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -244,7 +244,7 @@ public class SiteSearchMobile {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(memberAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
 		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -259,7 +259,7 @@ public class SiteSearchMobile {
 	@When("^the user Click on Is my Provider covered link$")
 	public void clickonProvidercoveredlink(DataTable Planname) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(Planname);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
 		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -297,7 +297,7 @@ public class SiteSearchMobile {
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page$")
 	public void verify_providers_covered_ulayer(DataTable Planname) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(Planname);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
 		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -320,7 +320,7 @@ public class SiteSearchMobile {
 	public void verify_provider_covered_ulayer(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(Planname);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
 		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 

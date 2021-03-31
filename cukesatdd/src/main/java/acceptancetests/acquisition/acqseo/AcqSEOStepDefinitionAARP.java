@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -52,7 +53,7 @@ public class AcqSEOStepDefinitionAARP {
 					.get(0), AttributesRow.get(i).getCells().get(1));
 		}*/
 		
-		urlAttributesMap = getLoginScenario().readDataTableAsMaps(Url);
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(Url);
 		String url = urlAttributesMap.get("URL");
 		
        try{

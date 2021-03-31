@@ -23,6 +23,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
@@ -60,7 +61,7 @@ public class VppPlanValidationStepDefinition {
 	@Then("^the user navigates to plan details and compares benefits value from excel to UI and reports into excel$")
 	public void exceldataValidation_planDetails(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		
@@ -206,7 +207,7 @@ public class VppPlanValidationStepDefinition {
 	@Then("^the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel$")
 	public void exceldataValidation_planCompare(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
@@ -462,7 +463,7 @@ public class VppPlanValidationStepDefinition {
 	@Then("^the user navigates to plan summary page and compares benefits value from excel to UI and reports into excel$")
 	public void exceldataValidation_planSummary(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes
 				.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {

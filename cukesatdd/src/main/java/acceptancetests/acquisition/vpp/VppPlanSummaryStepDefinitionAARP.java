@@ -13,6 +13,7 @@ import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -60,7 +61,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -98,7 +99,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 	@And("^the user views plans of the below plan type in AARP site$")
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -217,7 +218,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 	@And("^the user validates plan summary for the below plan in AARP site$")
 	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -797,7 +798,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		if (!planType.equals("PDP")) {
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -829,7 +830,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		if (planType.equals("PDP")) {
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -921,7 +922,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
@@ -1001,7 +1002,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 			throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -1021,7 +1022,7 @@ public class VppPlanSummaryStepDefinitionAARP {
 			throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 

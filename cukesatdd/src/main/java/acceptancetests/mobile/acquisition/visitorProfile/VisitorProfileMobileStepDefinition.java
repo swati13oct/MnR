@@ -10,6 +10,7 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
@@ -43,7 +44,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user selects the state drop down value in home page mobile$")
 	public void the_user_selects_the_state_drop_down_value_in_AARP_home_page(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -63,7 +64,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^user delets the added plans on visitor profile page$")
 	public void user_delets_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planNames);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
 		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -136,7 +137,7 @@ public class VisitorProfileMobileStepDefinition {
 	@When("^the user enters zipcode on health plans page$")
 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
@@ -207,7 +208,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^user validates the added plans on visitor profile page$")
 	public void user_validates_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planNames);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
 		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -222,7 +223,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^user validates the added Ms plans on visitor profile page$")
 	public void user_validates_the_added_Ms_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planNames);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
 		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -246,7 +247,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^user validate pdf link$")
 	public void user_validate_pdf_link_on_AARP_Site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planNames);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
 		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -268,7 +269,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^user clicks on plan name$")
 	public void user_clicks_on_plan_name_in_AARP(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planNames);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
 		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -289,7 +290,7 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells()
@@ -333,7 +334,7 @@ public class VisitorProfileMobileStepDefinition {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
@@ -379,7 +380,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^user delets all the added providers on visitor profile page$")
 	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_AARP_site(DataTable Planname) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(Planname);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
 		/*List<DataTableRow> plannameAttributesRow = Planname
 				.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
@@ -396,7 +397,7 @@ public class VisitorProfileMobileStepDefinition {
 	public void verify_providers_covered_ulayer_visitor_profile(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(Planname);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
 		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -412,7 +413,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user signs in with optum Id credentials$")
 	public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(credentials);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
 		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -436,7 +437,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^user verifies plan count on shopping cart Icon$")
 	public void user_validates_plan_count_on_shopping_cart_Icon_on_AARP_site(DataTable givenAttributes) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -459,7 +460,7 @@ public class VisitorProfileMobileStepDefinition {
 	public void user_EntersPlanidandclickondeleteplantoDeleteplaninVisitorProfile_on_AARP_site(
 			DataTable givenAttributes) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(givenAttributes);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
@@ -476,7 +477,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^user selects four plans to compare from visitor Profile$")
 	public void user_clicks_compare_plans_from_visitor_Profile_on_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planNames);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
 		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -497,7 +498,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^verify the plans on plan compare page$")
 	public void verify_the_plans_on_plan_compare_page_on_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(planNames);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
 		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
@@ -525,7 +526,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^validate OLE details$")
 	public void validate_OLE_details(DataTable oleDetails) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = getLoginScenario().readDataTableAsMaps(oleDetails);
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(oleDetails);
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateOLEDetails(givenAttributesMap);
 		
@@ -535,7 +536,7 @@ public class VisitorProfileMobileStepDefinition {
 	public void the_user_cance_the_enrollments(DataTable cancelOLEDetails) {
 		
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
-		plannameAttributesMap = getLoginScenario().readDataTableAsMaps(cancelOLEDetails);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(cancelOLEDetails);
 		/*List<DataTableRow> plannameAttributesRow = cancelOLEDetails.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
@@ -19,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -47,7 +47,7 @@ public class AcqSEOStepDefinitionUHC {
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-		urlAttributesMap = getLoginScenario().readDataTableAsMaps(Url);
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(Url);
 		/*List<DataTableRow> AttributesRow = Url
 				.getGherkinRows();
 		
