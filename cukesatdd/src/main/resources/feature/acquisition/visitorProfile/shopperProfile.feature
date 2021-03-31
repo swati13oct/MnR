@@ -194,7 +194,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        |
 
   @searchProfileAndVPPPlanDetail
-  Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
+  Scenario Outline: Telesales agent searching for the profile using first name and last name and validate additional benefits on Plan Details
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
