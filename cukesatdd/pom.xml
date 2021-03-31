@@ -80,10 +80,9 @@
 							<goal>verify</goal>
 						</goals>
 						<configuration>
-							<daemon>true</daemon>
-						<!--<useSystemClassLoader>false</useSystemClassLoader>
+							<useSystemClassLoader>false</useSystemClassLoader>
 							<forkCount>20</forkCount>
-							<reuseForks>false</reuseForks> -->
+							<reuseForks>true</reuseForks>
 							<suiteXmlFiles>
 								<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 							</suiteXmlFiles>
@@ -91,7 +90,7 @@
 							<properties>
 								<property>
 									<name>dataproviderthreadcount</name>
-									<value>100</value>
+									<value>50</value>
 								</property>
 								<property>
 									<name>testnames</name>
