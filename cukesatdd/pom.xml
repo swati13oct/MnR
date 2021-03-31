@@ -97,7 +97,7 @@
 									<value>${testnames}</value>
 								</property>
 							</properties>
-							<parallel>classes</parallel>
+							<parallel>methods</parallel>
 							<useUnlimitedThreads>true</useUnlimitedThreads>
 							<argLine>-Xmx512m -XX:MaxPermSize=1024m</argLine>
 							<systemPropertyVariables>
