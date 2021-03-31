@@ -3969,5 +3969,12 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 			Assert.fail();
 		}
 	}
-
+	
+	@Then("^the user validates Footer links on Welcome OLE Page$")
+	public void the_user_validates_footer_links_welcome_OLE_Page() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+	//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		welcomePage.ValidateFooterEnrollmentChecklistLink();
+		welcomePage.ValidateFooterListaVerificationLink();
+	}
 }

@@ -20,6 +20,7 @@ Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from E2E Sh
       | Plan Name | <planName> |
    Then the user validates the Plan details on OLE
     Then the user validates TFN in Welcome OLE Right Rail
+     #Then the user validates Footer links on Welcome OLE Page
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
