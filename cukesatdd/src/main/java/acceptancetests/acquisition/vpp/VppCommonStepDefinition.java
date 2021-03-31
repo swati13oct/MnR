@@ -1205,6 +1205,7 @@ public class VppCommonStepDefinition {
 		// getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 		// plansummaryPage);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planYear);
 
 	}
 
@@ -1221,12 +1222,16 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = givenAttributesMap.get("Plan Type");
+		String site = givenAttributesMap.get("Site");
+		
 		// String planType = (String)
 		// getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		if (plansummaryPage.validatePlanNames(planType)) {
 			// String SiteName = "AARP_ACQ";
 			// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+			
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");

@@ -26,15 +26,11 @@ Feature: 1.05.8. OLE PRE Integration Flow
     Then user selects priority in priorities page
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
-    Then user validate elements in loading results page
-    #And the user views the plans of the below plan type and select Next year
-     # | Plan Type | <plantype> |
-		#And the user views the plans of the below plan type
-     # | Plan Type | <plantype> |
   	And the user selects plan year for PRE Flow
-  # And the user selects plan year
       | Plan Year | <planyear> |
-		And the user validates the available plans for selected plan types
+		And the user validates the available plans for selected plan types PRE
+		| Plan Type | <plantype> |
+		 | Site | <site> |
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
@@ -117,7 +113,7 @@ Feature: 1.05.8. OLE PRE Integration Flow
       | Rider Flag | <riderflag> |
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
-        Then the user validates the Plan and Member details on Review and Submit Page
+    Then the user validates the Plan and Member details on Review and Submit Page
    # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     #Then the user validates Plan and Member Details on Confirmation Page
