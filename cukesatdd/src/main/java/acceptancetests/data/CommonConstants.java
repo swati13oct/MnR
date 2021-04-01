@@ -937,6 +937,8 @@ public class CommonConstants {
 
 	public static final String DB_ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	
+	public static final String CAMPAIGN_EXTERNAL_LINK_TFNNO = "campaignExternalLinkTfnNo";
 	
 }
+
 

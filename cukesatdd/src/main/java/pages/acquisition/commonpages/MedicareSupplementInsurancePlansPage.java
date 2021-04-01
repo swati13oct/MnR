@@ -14,6 +14,7 @@ public class MedicareSupplementInsurancePlansPage extends GlobalWebElements {
 	@Override
 	public void openAndValidate() {
 		validate(medicareSupplementInsurancePlansLink);
+		validate(medicareSupplementInsurancePlansHeader);
 		
 	}
 	
