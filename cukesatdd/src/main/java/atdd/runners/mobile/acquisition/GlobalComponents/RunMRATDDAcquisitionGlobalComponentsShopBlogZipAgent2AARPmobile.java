@@ -15,7 +15,7 @@ outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsShopBlogZipAgent2AARP
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, 
 features = { "src/main/resources/feature/mobile/acquisition/globalComponents" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsShopBlogZipAgent2AARPmobile.json" }, 
-tags = { "@ShopBlog_AgentZip_AARP_4,@ShopBlog_AgentZip_AARP_5,@ShopBlog_AgentZip_AARP_6" })
+tags = { "@ShopBlog_AgentZip_AARP_3,@ShopBlog_AgentZip_AARP_4" })
 
 public class RunMRATDDAcquisitionGlobalComponentsShopBlogZipAgent2AARPmobile {
 

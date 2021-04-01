@@ -125,13 +125,13 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_TFN_AARP_14
     Examples: 
-      | site | path                                                         | pageName                | tfnXpath                                                       | tfnFlag |  |
-      | AARP | health-plans/estimate-drug-costs.html!/drug-cost-estimator   | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |  |
-      | AARP | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English     | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |  |
-      | AARP | medicare-plans.html                                          | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |  |
-      | AARP | profile/guest                                                | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |  |
-      | AARP | medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide          | //*[@id='tfn']                                                 | true    |  |
-      | AARP | medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | //*[@id='tfn']                                                 | true    |  |
+      | site | path                                                                      | pageName                | tfnXpath                                                       | tfnFlag |  |
+      | AARP | health-plans/estimate-drug-costs.html!/drug-cost-estimator                | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |  |
+      | AARP | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English                  | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |  |
+      | AARP | medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |  |
+      | AARP | profile/guest                                                             | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |  |
+      | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide          | //*[@id='tfn']                                                 | true    |  |
+      | AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | //*[@id='tfn']                                                 | true    |  |
 
     @ShopBlog_TFN_AARP_15
     Examples: 
@@ -308,7 +308,6 @@ Feature: Shop Blog Page Script
     @ShopBlog_AgentZip_AARP_3
     Examples: 
       | site | path                         | pageName                    | UHCUrl                      |
-      | AARP | shop/estimate.html           | ShopPlan: Estimate          | https://www.myuhcagent.com/ |
       | AARP | shop/estimate/ma-costs.html  | ShopPlan: Estimate MA Plan  | https://www.myuhcagent.com/ |
       | AARP | shop/estimate/pdp-costs.html | ShopPlan: Estimate PDP Plan | https://www.myuhcagent.com/ |
       | AARP | shop/estimate/ms-costs.html  | ShopPlan: Estimate          | https://www.myuhcagent.com/ |
@@ -326,9 +325,9 @@ Feature: Shop Blog Page Script
       | site | path                                                      | pageName                        | UHCUrl                      |
       | AARP | shop/medicare-advantage-plans/wellness-discounts.html     | ShopPlan: Welness Discount      | https://www.myuhcagent.com/ |
       | AARP | shop/medicare-advantage-plans/health-care-management.html | ShopPlan: Healthcare management | https://www.myuhcagent.com/ |
-      | AARP | shop/switch.html                                          | ShopPlan: Switch                | https://www.myuhcagent.com/ |
-      | AARP | safe-shopping.html                                        | ShopPlan: Shop                  | https://www.myuhcagent.com/ |
       | AARP | shop/renew-active.html                                    | ShopPlan: Renew-Active          | https://www.myuhcagent.com/ |
+      | AARP | about-us.html                                             | Footer: About Us                | https://www.myuhcagent.com/ |
+      | AARP | contact-us.html                                           | Footer: Contact Us              | https://www.myuhcagent.com/ |
 
     @ShopBlog_AgentZip_AARP_6
     Examples: 
@@ -350,35 +349,6 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_AgentZip_AARP_8
     Examples: 
-      | site | path                                                         | pageName                                | UHCUrl                      |
-      | AARP | resources.html                                               | ShopPlan: Resources                     | https://www.myuhcagent.com/ |
-      | AARP | resources/ma-resources-materials/ma-information-forms.html   | ShopPlan: Resources MA Plans Info       | https://www.myuhcagent.com/ |
-      | AARP | resources/pdp-resources-materials.html                       | ShopPlan: Resources PDP Plans           | https://www.myuhcagent.com/ |
-      | AARP | resources/pdp-resources-materials/pdp-information-forms.html | ShopPlan: Resources PDP Plans Info      | https://www.myuhcagent.com/ |
-      | AARP | resources/mail-order-pharmacy.html                           | ShopPlan: Resources Mail Order Pharmacy | https://www.myuhcagent.com/ |
-      | AARP | resources/ma-resources-materials.html                        | ShopPlan: Resources MA Plans            | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_AARP_9
-    Examples: 
-      | site | path                                                                              | pageName                             | UHCUrl                      |
-      | AARP | resources/medication-therapy-management-program.html                              | ShopPlan: Resources Therapy          | https://www.myuhcagent.com/ |
-      | AARP | resources/how-to-appoint-a-representative.html                                    | ShopPlan: Resources Appoint Rep      | https://www.myuhcagent.com/ |
-      | AARP | resources/prescription-drug-costs-help.html                                       | ShopPlan: Resources Rx cost Help     | https://www.myuhcagent.com/ |
-      | AARP | resources/healthcare-fraud.html                                                   | ShopPlan: Resources Healthcare Fraud | https://www.myuhcagent.com/ |
-      | AARP | resources/how-to-pay-your-premium.html                                            | ShopPlan: Resources Pay Premium      | https://www.myuhcagent.com/ |
-      | AARP | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | ShopPlan: Resources PDP EOB          | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_AARP_10
-    Examples: 
-      | site | path                                                                       | pageName                                         | UHCUrl                      |
-      | AARP | resources/prescription-drug-appeals.html                                   | ShopPlan: Resources Prescription Drug Appeal     | https://www.myuhcagent.com/ |
-      | AARP | resources/prescription-drug-transition.html                                | ShopPlan: Resources Prescription Drug Transition | https://www.myuhcagent.com/ |
-      | AARP | resources/ma-resources-materials/ma-information-forms/member-rights.html   | ShopPlan: Resources MA Member Rights             | https://www.myuhcagent.com/ |
-      | AARP | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html | ShopPlan: Resources MA Appeals                   | https://www.myuhcagent.com/ |
-      | AARP | resources/disenrollment-information.html                                   | ShopPlan: Resources PDP Disenrollment            | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_AARP_11
-    Examples: 
       | site | path                                                                                    | pageName               | UHCUrl                      |
       | AARP | medicare-articles.html                                                                  | Medicare Articles Home | https://www.myuhcagent.com/ |
       | AARP | medicare-articles/eligibility-and-enrollment.html                                       | Sample Category Page   | https://www.myuhcagent.com/ |
@@ -386,7 +356,7 @@ Feature: Shop Blog Page Script
       | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Article page 1         | https://www.myuhcagent.com/ |
       | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | Article page 2         | https://www.myuhcagent.com/ |
 
-    @ShopBlog_AgentZip_AARP_12
+    @ShopBlog_AgentZip_AARP_9
     Examples: 
       | site | path                                                  | pageName      | UHCUrl                      |
       | AARP | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
@@ -394,27 +364,6 @@ Feature: Shop Blog Page Script
       | AARP | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
       | AARP | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
       | AARP | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_AARP_13
-    Examples: 
-      | site | path                                                         | pageName                | UHCUrl                      |
-      | AARP | health-plans/estimate-drug-costs.html!/drug-cost-estimator   | Drug Cost Estimator     | https://www.myuhcagent.com/ |
-      | AARP | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English     | Pharmacy Search         | https://www.myuhcagent.com/ |
-      | AARP | medicare-plans.html                                          | ShopPlan: Plan Selector | https://www.myuhcagent.com/ |
-      | AARP | profile/guest                                                | Visitor Profile: Guest  | https://www.myuhcagent.com/ |
-      | AARP | medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide          | https://www.myuhcagent.com/ |
-      | AARP | medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_AARP_14
-    Examples: 
-      | site | path                          | pageName                   | UHCUrl                      |
-      | AARP | about-us.html                 | Footer: About Us           | https://www.myuhcagent.com/ |
-      | AARP | sitemap.html                  | Footer: Site Map           | https://www.myuhcagent.com/ |
-      | AARP | terms-of-use.html             | Footer: Terms of Use       | https://www.myuhcagent.com/ |
-      | AARP | disclaimer.html               | Footer: Disclaimers        | https://www.myuhcagent.com/ |
-      | AARP | health-insurance-brokers.html | Footer: Agents and Brokers | https://www.myuhcagent.com/ |
-      | AARP | contact-us.html               | Footer: Contact Us         | https://www.myuhcagent.com/ |
-      | AARP | privacy-policy.html           | Footer: Privacy Policy     | https://www.myuhcagent.com/ |
 
     @ShopBlog_AgentZip_UHC_1
     Examples: 
@@ -437,7 +386,6 @@ Feature: Shop Blog Page Script
     @ShopBlog_AgentZip_UHC_3
     Examples: 
       | site | path                         | pageName                    | UHCUrl                      |
-      | UHC  | shop/estimate.html           | ShopPlan: Estimate          | https://www.myuhcagent.com/ |
       | UHC  | shop/estimate/ma-costs.html  | ShopPlan: Estimate MA Plan  | https://www.myuhcagent.com/ |
       | UHC  | shop/estimate/pdp-costs.html | ShopPlan: Estimate PDP Plan | https://www.myuhcagent.com/ |
       | UHC  | shop/estimate/ms-costs.html  | ShopPlan: Estimate          | https://www.myuhcagent.com/ |
@@ -455,9 +403,9 @@ Feature: Shop Blog Page Script
       | site | path                                                      | pageName                        | UHCUrl                      |
       | UHC  | shop/medicare-advantage-plans/wellness-discounts.html     | ShopPlan: Welness Discount      | https://www.myuhcagent.com/ |
       | UHC  | shop/medicare-advantage-plans/health-care-management.html | ShopPlan: Healthcare management | https://www.myuhcagent.com/ |
-      | UHC  | shop/switch.html                                          | ShopPlan: Switch                | https://www.myuhcagent.com/ |
-      | UHC  | safe-shopping.html                                        | ShopPlan: Shop                  | https://www.myuhcagent.com/ |
       | UHC  | shop/renew-active.html                                    | ShopPlan: Renew-Active          | https://www.myuhcagent.com/ |
+      | UHC  | about-us.html                                             | Footer: About Us                | https://www.myuhcagent.com/ |
+      | UHC  | contact-us.html                                           | Footer: Contact Us              | https://www.myuhcagent.com/ |
 
     @ShopBlog_AgentZip_UHC_6
     Examples: 
@@ -479,35 +427,6 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_AgentZip_UHC_8
     Examples: 
-      | site | path                                                         | pageName                                | UHCUrl                      |
-      | UHC  | resources.html                                               | ShopPlan: Resources                     | https://www.myuhcagent.com/ |
-      | UHC  | resources/ma-resources-materials/ma-information-forms.html   | ShopPlan: Resources MA Plans Info       | https://www.myuhcagent.com/ |
-      | UHC  | resources/pdp-resources-materials.html                       | ShopPlan: Resources PDP Plans           | https://www.myuhcagent.com/ |
-      | UHC  | resources/pdp-resources-materials/pdp-information-forms.html | ShopPlan: Resources PDP Plans Info      | https://www.myuhcagent.com/ |
-      | UHC  | resources/mail-order-pharmacy.html                           | ShopPlan: Resources Mail Order Pharmacy | https://www.myuhcagent.com/ |
-      | UHC  | resources/ma-resources-materials.html                        | ShopPlan: Resources MA Plans            | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_UHC_9
-    Examples: 
-      | site | path                                                                              | pageName                             | UHCUrl                      |
-      | UHC  | resources/medication-therapy-management-program.html                              | ShopPlan: Resources Therapy          | https://www.myuhcagent.com/ |
-      | UHC  | resources/how-to-appoint-a-representative.html                                    | ShopPlan: Resources Appoint Rep      | https://www.myuhcagent.com/ |
-      | UHC  | resources/prescription-drug-costs-help.html                                       | ShopPlan: Resources Rx cost Help     | https://www.myuhcagent.com/ |
-      | UHC  | resources/healthcare-fraud.html                                                   | ShopPlan: Resources Healthcare Fraud | https://www.myuhcagent.com/ |
-      | UHC  | resources/how-to-pay-your-premium.html                                            | ShopPlan: Resources Pay Premium      | https://www.myuhcagent.com/ |
-      | UHC  | resources/pdp-resources-materials/pdp-information-forms/explanation-benefits.html | ShopPlan: Resources PDP EOB          | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_UHC_10
-    Examples: 
-      | site | path                                                                       | pageName                                         | UHCUrl                      |
-      | UHC  | resources/prescription-drug-appeals.html                                   | ShopPlan: Resources Prescription Drug Appeal     | https://www.myuhcagent.com/ |
-      | UHC  | resources/prescription-drug-transition.html                                | ShopPlan: Resources Prescription Drug Transition | https://www.myuhcagent.com/ |
-      | UHC  | resources/ma-resources-materials/ma-information-forms/member-rights.html   | ShopPlan: Resources MA Member Rights             | https://www.myuhcagent.com/ |
-      | UHC  | resources/ma-resources-materials/ma-information-forms/medicare-appeal.html | ShopPlan: Resources MA Appeals                   | https://www.myuhcagent.com/ |
-      | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources PDP Disenrollment            | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_UHC_11
-    Examples: 
       | site | path                                                                                    | pageName               | UHCUrl                      |
       | UHC  | medicare-articles.html                                                                  | Medicare Articles Home | https://www.myuhcagent.com/ |
       | UHC  | medicare-articles/eligibility-and-enrollment.html                                       | Sample Category Page   | https://www.myuhcagent.com/ |
@@ -515,7 +434,7 @@ Feature: Shop Blog Page Script
       | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | Article page 1         | https://www.myuhcagent.com/ |
       | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | Article page 2         | https://www.myuhcagent.com/ |
 
-    @ShopBlog_AgentZip_UHC_12
+    @ShopBlog_AgentZip_UHC_9
     Examples: 
       | site | path                                                  | pageName      | UHCUrl                      |
       | UHC  | medicare-articles/medicare-benefits-and-coverage.html | Category page | https://www.myuhcagent.com/ |
@@ -523,27 +442,6 @@ Feature: Shop Blog Page Script
       | UHC  | medicare-articles/shopping-for-medicare.html          | Category page | https://www.myuhcagent.com/ |
       | UHC  | medicare-articles/medicare-when-working-past-65.html  | Category page | https://www.myuhcagent.com/ |
       | UHC  | medicare-articles/medicare-tips-and-faqs.html         | Category page | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_UHC_13
-    Examples: 
-      | site | path                                                         | pageName                | UHCUrl                      |
-      | UHC  | health-plans/estimate-drug-costs.html!/drug-cost-estimator   | Drug Cost Estimator     | https://www.myuhcagent.com/ |
-      | UHC  | health-plans/UHC-pharmacy.html!/Pharmacy-Search-English      | Pharmacy Search         | https://www.myuhcagent.com/ |
-      | UHC  | medicare-plans.html                                          | ShopPlan: Plan Selector | https://www.myuhcagent.com/ |
-      | UHC  | profile/guest                                                | Visitor Profile: Guest  | https://www.myuhcagent.com/ |
-      | UHC  | medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide          | https://www.myuhcagent.com/ |
-      | UHC  | medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | https://www.myuhcagent.com/ |
-
-    @ShopBlog_AgentZip_UHC_14
-    Examples: 
-      | site | path                          | pageName                   | UHCUrl                      |
-      | UHC  | about-us.html                 | Footer: About Us           | https://www.myuhcagent.com/ |
-      | UHC  | sitemap.html                  | Footer: Site Map           | https://www.myuhcagent.com/ |
-      | UHC  | terms-of-use.html             | Footer: Terms of Use       | https://www.myuhcagent.com/ |
-      | UHC  | disclaimer.html               | Footer: Disclaimers        | https://www.myuhcagent.com/ |
-      | UHC  | health-insurance-brokers.html | Footer: Agents and Brokers | https://www.myuhcagent.com/ |
-      | UHC  | contact-us.html               | Footer: Contact Us         | https://www.myuhcagent.com/ |
-      | UHC  | privacy-policy.html           | Footer: Privacy Policy     | https://www.myuhcagent.com/ |
 
   Scenario Outline: To verify Need Help Section TFN for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
