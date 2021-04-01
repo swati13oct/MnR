@@ -1,6 +1,6 @@
 Feature: 1.14 Med Supp Plans (IS) Insurance Agent  flow
 
-  @IS_InsuranceAgent_AARP1
+  #@IS_InsuranceAgent_AARP1
   Scenario Outline: UID: <UID> - To Test IS Insurance Agent E2E on <site> site
     Given the user is on medicare acquisition site landing page
 	| Site | <site> |
@@ -24,19 +24,19 @@ Feature: 1.14 Med Supp Plans (IS) Insurance Agent  flow
      | PhNo       | <phNo>       |
     Then the user clicks Submit to submit Licensed Insurance Agent and validates Thank You Page
     
-	@IS_InsuranceAgent_Common_AARP1
+		#@IS_InsuranceAgent_Common_AARP1
     Examples: 
       |site| UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender| 
       |AARP|     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |
       |AARP|     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | email              | test@test.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |
 	
-	@IS_InsuranceAgent_Common_UHC1
+	#@IS_InsuranceAgent_Common_UHC1
      Examples: 
       |site| UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender| 
       |UHC|     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 04/07/1932 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |
       |UHC|     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | email              | test@test.com | 08/09/1940 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |
 
-       @IS_InsuranceAgent_AARP
+       #@IS_InsuranceAgent_AARP
      Scenario Outline: UID: <UID> - To Test IS Insurance Agent E2E on <site> site
     Given the user is on medicare acquisition site landing page
 	| Site | <site> |
