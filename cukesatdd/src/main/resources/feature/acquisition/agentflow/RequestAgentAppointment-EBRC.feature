@@ -81,27 +81,21 @@ When the user clicks on Agent link and validates the correct URL is loaded
       |	UHC	  | medicare-articles/medicare-when-working-past-65.html                    |medicare-articles: medicare-when-working-past-65.html         | https://www.myuhcagent.com/| 
       |	UHC	  | medicare-articles/medicare-tips-and-faqs.html                           | medicare-articles: medicare-tips-and-faqs.html               | https://www.myuhcagent.com/|      
 			
-    @agentFlowEBRCUlayer
-    Examples: 
-      |	site	| path                                             | pageName                     |UHCUrl|
-#      |	AARP	| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       |  https://www.myuhcagent.com/| 
-      |	AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/| 
-      |	AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
-      |	AARP	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 		 
-      |	AARP	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 
-      |	AARP	| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/| 	 	 
-			|	AARP	| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/| 
-			
-		@agentFlowEBRCBlayer
-    Examples: 
-      |	site	| path                                             | pageName                     | UHCUrl|
-#      |	UHC		| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
-      |	UHC		| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |  https://www.myuhcagent.com/| 
-      |	UHC		| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |  https://www.myuhcagent.com/| 
-      |	UHC		| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/| 
-      |	UHC		| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 
-      |	UHC		| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/|     
-			|	UHC		| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/|
+    #@agentFlowEBRCUlayer
+    #Examples: 
+    #  |	site	| path                                             | pageName                     |UHCUrl|
+   #  |	AARP	| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       |  https://www.myuhcagent.com/| 
+     # |	AARP	| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/| 
+    # |	AARP	| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 		 
+     #|	AARP	| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/| 	 	 
+		
+		#@agentFlowEBRCBlayer
+    #Examples: 
+     # |	site	| path                                             | pageName                     | UHCUrl|
+     # |	UHC		| shop/medicare-advantage-plans.html               | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/| 
+     # |	UHC		| shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |  https://www.myuhcagent.com/| 
+     # |	UHC		| shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/| 
+     # |	UHC		| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan     |  https://www.myuhcagent.com/|     
 			
 Scenario Outline: Verify request an appointment with an agent flow for <pageName>
 Given the user is on medicare acquisition site landing page
