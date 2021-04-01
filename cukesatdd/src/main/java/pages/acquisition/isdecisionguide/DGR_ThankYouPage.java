@@ -84,22 +84,22 @@ public class DGR_ThankYouPage extends UhcDriver{
 	private WebElement FindPlansAreaButton;
 	
 	public  VPPPlanSummaryPage NavigateNext_vppMedsuppPage() {
-	//	if( validate(FindPlansAreaButton)){
-		validateNew(FindPlansAreaButton);
-		//FindPlansAreaButton.click();
-		jsClickNew(FindPlansAreaButton);
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CommonUtility.checkPageIsReadyNew(driver);	
-		String checkUrl=driver.getCurrentUrl();
-		if(checkUrl.contains("health-plans.html?product=medsup#/plan-summary")) {
-			System.out.println("Submit Button Clicked : Plan summary Page is Displayed");
-			return new VPPPlanSummaryPage(driver);
-		}
-		return null;	
-		}
-}
+		//	if( validate(FindPlansAreaButton)){
+			validateNew(FindPlansAreaButton);
+			//FindPlansAreaButton.click();
+			jsClickNew(FindPlansAreaButton);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			CommonUtility.checkPageIsReadyNew(driver);	
+			String checkUrl=driver.getCurrentUrl();
+			if(checkUrl.contains("health-plans.html?product=medsup#/plan-summary")) {
+				System.out.println("Submit Button Clicked : Plan summary Page is Displayed");
+				return new VPPPlanSummaryPage(driver);
+			}
+			return null;	
+			}
+	}

@@ -71,9 +71,11 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 		validate(continueBtn);
 		validate(previousBtn);
 		Assert.assertTrue(validate(topSelect, 30));
-		validate(addAnotherLink, 30);
+		selectFromDropDownByText(driver, topSelect, "Doctors");
+ 		validate(addAnotherLink, 30);
 		jsClickNew(addAnotherLink);
 		Assert.assertTrue(validate(secondSelect, 30));
+		selectFromDropDownByText(driver, secondSelect, "Health Care Premium");
 		jsClickNew(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());
@@ -98,7 +100,7 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 	
 	public void priorityOptions2nd(String value) {
 		System.out.println("Priorities 2nd option alone selection");
-		String mandatoryOpt1 = "Doctors",mandatoryOpt2 = "Health Cost",defaultVal = "Select Priority";
+		String mandatoryOpt1 = "Doctors",mandatoryOpt2 = "Health Care Premium",defaultVal = "None";
 		if (value.toLowerCase().contains(mandatoryOpt1.toLowerCase())) {
 			selectFromDropDownByText(driver, topSelect, mandatoryOpt2);
 			System.out.println("Top Priority value " + mandatoryOpt2 + " selected");

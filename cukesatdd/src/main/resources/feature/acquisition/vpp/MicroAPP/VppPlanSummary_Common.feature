@@ -47,7 +47,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                                      | planyear |
       | 00001 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              |                                                       | future   |
-      | 00002 |   28105 | AARP | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 |                        |                                                       | future   |
+      | 00002 |   28105 | AARP | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 | No drug coverage       |                                                       | future   |
       | 00003 |   90210 | AARP | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $41.60         |                      |            |                  |                    | $0  copay              | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | future   |
 
     @prodRegression_AARP_01
@@ -59,7 +59,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                                      | planyear |
       | 00001 |   90210 | UHC  | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              |                                                       | future   |
-      | 00002 |   28105 | UHC  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 |                        |                                                       | future   |
+      | 00002 |   28105 | UHC  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 | No drug coverage       |                                                       | future   |
       | 00003 |   90210 | UHC  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $41.60         |                      |            |                  |                    | $0  copay              | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | future   |
 
     @prodRegression_UHC_01
@@ -254,9 +254,9 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Examples: 
       | TID       | site | zipcode | isMultutiCounty | county        | plantype | planName                          | planyear |
       | US2567133 | UHC  |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO) | future   |
-      
-   #@vppPlanSummaryAARP15 @vppPlanSummaryAARPRun02
-  Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page
+
+  #@vppPlanSummaryAARP15 @vppPlanSummaryAARPRun02
+  Scenario Outline: TID: <TID> -plan type: <plantype> - TID: <TID> -plan type: <plantype> - Verify Loopup Zipcode is navigation to VPP page for zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -289,7 +289,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | address                    | city      | state       | firstName | lastName | emailAddress  | isMultiCounty2 | county2          |
       | 15550 | AARP |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
-      | 15550 | UHC  |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
+      | 15550 | AARP |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
 
     @vppPlanSummaryCommonUHC02
     Examples: 

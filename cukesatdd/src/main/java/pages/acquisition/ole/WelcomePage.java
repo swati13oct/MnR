@@ -357,8 +357,9 @@ public MedicareInformationPage navigate_to_medicare_info_page() {
 	}
 
 	public PharmacySearchPage clickPharamcyLinkAndSwitchTab() {
-		pharmacyLink.click();
-		switchToNewTab();
+		/*pharmacyLink.click();
+		switchToNewTab();*/
+		switchToNewTabNew(pharmacyLink);
 		if (driver.getCurrentUrl().contains("health-plans/aarp-pharmacy.html#/Pharmacy-Search-English")) {
 			return new PharmacySearchPage(driver);
 		}

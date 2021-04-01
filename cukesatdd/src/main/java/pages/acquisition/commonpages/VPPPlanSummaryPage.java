@@ -597,7 +597,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(id = "msVppZipCode")
 	private WebElement medSuppZipCode;
-
+	
+	@FindBy(xpath = "//input[@id='msVppZipCode']")
+	private WebElement medSuppZipCode1;
+	
+	
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
 	private WebElement viewPlansBtnMedSupp;
 
@@ -880,7 +884,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button[@class='unliked buttonIntoText'])[1]")
 	private WebElement savePlanButton;
 	
-	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
+	//@FindBy(xpath = "(//img[@class='uhc-modal__close'])[2]")
+	@FindBy(xpath = "(//img[@class='uhc-modal__close'])[1]")
 	private WebElement close;
 
 
@@ -4702,6 +4707,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4724,6 +4730,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -4740,6 +4747,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4762,6 +4770,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -4810,6 +4819,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4826,6 +4836,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -4842,6 +4853,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4858,6 +4870,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -4874,6 +4887,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -4890,6 +4904,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Rail Rail is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -5271,15 +5286,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			if (nextBestActionModal.isDisplayed()) {
 				if (nextBestActionModalMsg.size() > 1) {
 					Assert.assertTrue(
-							"The Continue Enrollment message is not displayed.../n Expected Message"
-									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message"
-									+ nextBestActionModalMsg.get(1).getText(),
-							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+							"The Continue Enrollment message is not displayed.../n Expected Message "
+									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message "
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
 				} else {
 					Assert.assertTrue(
-							"The Continue Enrollment message is not displayed.../n Expected Message"
-									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message"
-									+ nextBestActionModalMsg.get(0).getText(),
+							"The Continue Enrollment message is not displayed.../n Expected Message "
+									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message "
+									+ nextBestActionModalMsg.get(0).getText().trim(),
 							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
 				}
 			}
@@ -5333,7 +5348,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			action.moveToElement(compareButton).build().perform();
 			compareButton.click();
 			Thread.sleep(2000);
-			action.moveToElement(comparePageHeader).build().perform();
+//			action.moveToElement(comparePageHeader).build().perform();		//Failing on Safari browser
+			scrollToView(comparePageHeader);
 			if (comparePageHeader.isDisplayed()) {
 				flag = true;
 			}
@@ -5387,10 +5403,13 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		} else {
 			Thread.sleep(2000);
-			action.moveToElement(ViewPlanMedSupPage).build().perform();
+//			action.moveToElement(ViewPlanMedSupPage).build().perform();
+			scrollToView(ViewPlanMedSupPage);
 			ViewPlanMedSupPage.click();
 			Thread.sleep(2000);
-			action.moveToElement(compareButton).build().perform();
+			waitForPageLoadSafari();
+//			action.moveToElement(compareButton).build().perform();
+			scrollToView(compareButton);
 			if (compareLink.isDisplayed()) {
 				flag = true;
 			}
@@ -5486,6 +5505,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		Thread.sleep(2000);
 		jsClickNew(viewSavedPlansBtn);
+		waitForPageLoadSafari();
 		Thread.sleep(2000);
 		if(shopperProfilePageHeader.isDisplayed()) {
 			flag = true;
@@ -5498,18 +5518,18 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		boolean flag = false;
 		Thread.sleep(2000);
 		
-		String zip = "90202";
-		String dob = "11/13/1940";
+		String zip = "90210";
+		String dob = "11/01/1951";
 		
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		
 		System.out.println("Validating zip code is editable----------");
-		medSuppZipCode.clear();
-		medSuppZipCode.sendKeys(zip);
-		medSuppZipCode.sendKeys(Keys.TAB);
+		medSuppZipCode1.clear();
+		medSuppZipCode1.sendKeys(zip);
+		medSuppZipCode1.sendKeys(Keys.TAB);
 		Thread.sleep(2000);
-		String actualzip = medSuppZipCode.getAttribute("value");
+		String actualzip = medSuppZipCode1.getAttribute("value");
 		flag = actualzip.equalsIgnoreCase(zip);
 		if(flag) {
 			System.out.println("---------zip code is editable----------");
@@ -5666,6 +5686,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		
 		jsClickNew(viewPlanDetailsBtn);
+		waitForPageLoadSafari();
 		Thread.sleep(2000);
 		
 		System.out.println("Validating user navigated to plan details----------");
@@ -5741,6 +5762,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		Thread.sleep(2000);
 		
 		jsClickNew(comparePlansLink);
+		waitForPageLoadSafari();
 		Thread.sleep(2000);
 		
 		System.out.println("Validating user navigated to plan compare----------");
@@ -6085,7 +6107,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public List<String> getAllPlanNames(String planType) {
 		List<String> allPlanNames = new ArrayList<String>();
 		for (WebElement plan : planNames) {
-			if(planType.equals("PDP") && MRScenario.browsername.equalsIgnoreCase("Safari")) {
+			if(planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
 				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
 			} else {
 				allPlanNames.add(plan.getText().trim());
@@ -6226,14 +6248,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					Assert.assertTrue(
 							"The Drug cost message is not displayed on NBA.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
-									+ nextBestActionModalMsg.get(1).getText(),
-							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
 				} else {
 					Assert.assertTrue(
 							"The Drug cost message is not displayed on NBA.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
-									+ nextBestActionModalMsg.get(0).getText(),
-							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+									+ nextBestActionModalMsg.get(0).getText().trim(),
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
 				}
 			}
 		} catch (Exception ex) {
@@ -6260,14 +6282,14 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					Assert.assertTrue(
 							"The Provider NBA message is not displayed on NBA.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
-									+ nextBestActionModalMsg.get(1).getText(),
-							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
 				} else {
 					Assert.assertTrue(
 							"The Provider NBA message is not displayed on NBA.../n Expected Message"
 									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
-									+ nextBestActionModalMsg.get(0).getText(),
-							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+									+ nextBestActionModalMsg.get(0).getText().trim(),
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
 				}
 			}
 		} catch (Exception ex) {
@@ -6306,8 +6328,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				Assert.assertTrue(
 						"The Continue Enrollment message is not displayed.../n Expected Message"
 								+ NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT + "\n Actual message"
-								+ nextBestActionModalMsgAuthenticated.getText(),
-						nextBestActionModalMsgAuthenticated.getText()
+								+ nextBestActionModalMsgAuthenticated.getText().trim(),
+						nextBestActionModalMsgAuthenticated.getText().trim()
 								.equals(NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT));
 			}
 		} catch (Exception ex) {
@@ -6318,6 +6340,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void clickNextBestActionModalContinueEnrollmentBtn() {
 		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 30);
 		nextBestActionModalContinueEnrollmentBtn.click();
+		waitForPageLoadSafari();
 	}
 
 	public void verifyNavigationToOLEPage() {
@@ -6335,8 +6358,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				Assert.assertTrue(
 						"The Continue Enrollment message is not displayed.../n Expected Message"
 								+ NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT + "\n Actual message"
-								+ nextBestActionModalMsgAuthenticated.getText(),
-						nextBestActionModalMsgAuthenticated.getText()
+								+ nextBestActionModalMsgAuthenticated.getText().trim(),
+						nextBestActionModalMsgAuthenticated.getText().trim()
 								.equals(NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT));
 			}
 		} catch (Exception ex) {
@@ -6356,6 +6379,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	public void clickContinueEnrollmentBtnOnModal() {
 		selectPlanModalContinueEnrollmentBtnList.get(0).click();
+		waitForPageLoadSafari();
 	}
 	
 	public void removeDrugsFromPlanCard() {
@@ -6402,6 +6426,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -6417,6 +6442,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Benefits Table is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6433,6 +6459,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6449,6 +6476,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Guide to Health Insurance for People with Medicare is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6465,6 +6493,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6481,6 +6510,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("****************Your Guide to AARP Medicare Supplement Insurance Plans is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6530,6 +6560,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6560,6 +6591,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6576,6 +6608,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("**************** PlanOverview is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6593,6 +6626,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 
@@ -6609,6 +6643,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		} else {
 			Assert.fail("**************** Rules and Disclosures is not loaded ***************");
 		}
+		driver.close();
 		driver.switchTo().window(parentWindow);
 
 	}
@@ -6627,6 +6662,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 public void validateVPPSummaryPage() {
 	Assert.assertTrue("user not navigated to VPP Page",driver.getCurrentUrl().contains("plan-summary"));
 }
+
 
 
 public void verifyNBAModalNotDisplayed() {
