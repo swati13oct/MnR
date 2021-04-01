@@ -16,7 +16,7 @@ Feature: 1.05.4 OLE common tool flow E2E CSNP
       | Plan Name | <planName> |
    Then the user validates the Plan details on OLE
    Then the user validates TFN in Welcome OLE Right Rail
-   Then the user validates Footer links on Welcome OLE Page
+   #Then the user validates Footer links on Welcome OLE Page
    Then the user validates Learn more modal for Welcome OLE
    Then the user validates Leave OLE modal for Welcome OLE
    Then the user validates cancellation modal for Welcome OLE
