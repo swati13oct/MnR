@@ -258,13 +258,13 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_TFN_UHC_14
     Examples: 
-      | site | path                                                         | pageName                | tfnXpath                                                       | tfnFlag |  |
-      | UHC  | health-plans/estimate-drug-costs.html!/drug-cost-estimator   | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |  |
-      | UHC  | health-plans/UHC-pharmacy.html!/Pharmacy-Search-English      | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |  |
-      | UHC  | medicare-plans.html                                          | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |  |
-      | UHC  | profile/guest                                                | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |  |
-      | UHC  | medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide          | //*[@id='tfn']                                                 | true    |  |
-      | UHC  | medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | //*[@id='tfn']                                                 | true    |  |
+      | site | path                                                                      | pageName                | tfnXpath                                                       | tfnFlag |  |
+      | UHC  | health-plans/estimate-drug-costs.html!/drug-cost-estimator                | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |  |
+      | UHC  | health-plans/UHC-pharmacy.html!/Pharmacy-Search-English                   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |  |
+      | UHC  | medicare-plans.html                                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |  |
+      | UHC  | profile/guest                                                             | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |  |
+      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide          | //*[@id='tfn']                                                 | true    |  |
+      | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment       | //*[@id='tfn']                                                 | true    |  |
 
     @ShopBlog_TFN_UHC_15
     Examples: 
@@ -343,7 +343,7 @@ Feature: Shop Blog Page Script
     Examples: 
       | site | path                                              | pageName                              | UHCUrl                      |
       | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | https://www.myuhcagent.com/ |
-      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | https://www.myuhcagent.com/ |
+      #| AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | https://www.myuhcagent.com/ |
       | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | https://www.myuhcagent.com/ |
       | AARP | medicare-education/medicare-faq.html              | Medicare FAQ                          | https://www.myuhcagent.com/ |
 
@@ -421,7 +421,7 @@ Feature: Shop Blog Page Script
     Examples: 
       | site | path                                              | pageName                              | UHCUrl                      |
       | UHC  | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | https://www.myuhcagent.com/ |
-      | UHC  | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | https://www.myuhcagent.com/ |
+      #| UHC  | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | https://www.myuhcagent.com/ |
       | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | https://www.myuhcagent.com/ |
       | UHC  | medicare-education/medicare-faq.html              | Medicare FAQ                          | https://www.myuhcagent.com/ |
 
