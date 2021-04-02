@@ -4088,5 +4088,71 @@ public class VppCommonStepDefinition {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
+	
+	@Then("^the user enter the searchValue in the search text box$")
+	public void the_user_enter_the_searchValue_in_the_search_text_box(DataTable inputvalue)
+			throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String InputValue = urlAttributesMap.get("search Value");
+		System.out.println("Search value" + InputValue);
+		Thread.sleep(3000);
+		aquisitionhomepage.enterSiteSearchValue(InputValue);
+
+	}
+	
+	@Then("^the user should see the auto complete suggestions$")
+	public void the_user_should_see_the_auto_complete_suggestions() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateAutoCompleteSuggestion();
+	}
+
+	@Then("^the user clicks on the first auto complete suggestion$")
+	public void the_user_clicks_on_the_first_auto_complete_suggestion(){
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickFirstSuggestion();
+	}
+	
+	@Then("^the user enter the secondary searchValue in the search text box$")
+	public void the_user_enter_the_secondary_searchValue_in_the_search_text_box(
+			DataTable inputvalue) throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+
+		for (int i = 0; i < AttributesRow.size(); i++) {
+
+			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
+		}
+		String InputValue = urlAttributesMap.get("NewSearchValue");
+		System.out.println("NewSearchValue" + InputValue);
+		Thread.sleep(3000);
+
+		aquisitionhomepage.enterSecondarySiteSearchValue(InputValue);
+	}
+	
+	@Then("^the user should see the auto complete suggestions site search page$")
+	public void the_user_should_see_the_auto_complete_suggestions_site_search_page() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateAutoCompleteSuggestionSiteSearchPage();
+	}
+	
+	@Then("^the user clicks on the first auto complete suggestion site search page$")
+	public void the_user_clicks_on_the_first_auto_complete_suggestion_site_search_page(){
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickFirstSuggestionSiteSearch();
+	}
 
 }
