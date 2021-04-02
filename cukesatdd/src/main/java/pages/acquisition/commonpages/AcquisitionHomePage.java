@@ -5238,8 +5238,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public void validateCallpopuponapage(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
-		
-		driver.navigate().refresh();
+		//driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));

@@ -2057,6 +2057,7 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user should be able to see \"([^\"]*)\" by default$")
 	public void user_should_be_able_to_see_by_default(String planType) throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyDefaultPlanType(planType);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
