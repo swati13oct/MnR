@@ -80,25 +80,21 @@
 							<goal>verify</goal>
 						</goals>
 						<configuration>
-							<useSystemClassLoader>false</useSystemClassLoader>
-							<forkCount>20</forkCount>
-							<reuseForks>true</reuseForks>
+							<!-- <useSystemClassLoader>false</useSystemClassLoader> -->
+							<forkCount>5C</forkCount> <!-- Total of 5 * number of CPU core's concurrent JVM process will be created -->
+							<reuseForks>false</reuseForks>
 							<suiteXmlFiles>
 								<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 							</suiteXmlFiles>
 							<testFailureIgnore>true</testFailureIgnore>
+							<parallel>methods</parallel>
+							<threadCount>100</threadCount>
 							<properties>
-								<property>
-									<name>dataproviderthreadcount</name>
-									<value>50</value>
-								</property>
 								<property>
 									<name>testnames</name>
 									<value>${testnames}</value>
 								</property>
 							</properties>
-							<parallel>methods</parallel>
-							<useUnlimitedThreads>true</useUnlimitedThreads>
 							<argLine>-Xmx512m -XX:MaxPermSize=1024m</argLine>
 							<systemPropertyVariables>
 								<microapps>${microapp}</microapps>
