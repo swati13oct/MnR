@@ -24,7 +24,12 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
+import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ole.AuthorizationPageMobile;
 import pages.mobile.acquisition.ole.CancelOLEModalMobile;
 import pages.mobile.acquisition.ole.CoverageInformationPageMobile;
@@ -42,11 +47,6 @@ import pages.mobile.acquisition.ole.SpecialElectionPeriodPagemobile;
 import pages.mobile.acquisition.ole.SupplementalBenefitsPageMobile;
 import pages.mobile.acquisition.ole.UseAndDisclosureAuthorizationPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
-import pages.mobile.acquisition.ulayer.ProposedEffectiveDatePageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 
 /**
  * @author sdwaraka Functionality:OLE Common Tool for both AAPR and UHC
@@ -3041,7 +3041,7 @@ public class OLEStepDefinitionMobile {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
 			if (providerSearchPage != null) {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 			}
@@ -3052,7 +3052,7 @@ public class OLEStepDefinitionMobile {
 	@When("^user selects a multiple providers and retuns to VPP page$")
 	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page() {
 		{
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.MultipleselectsProvider();
 			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);

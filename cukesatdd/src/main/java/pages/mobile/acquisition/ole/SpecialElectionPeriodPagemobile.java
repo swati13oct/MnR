@@ -15,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.ProposedEffectiveDatePageMobile;
+import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
 
 /**
  * @author sdwaraka

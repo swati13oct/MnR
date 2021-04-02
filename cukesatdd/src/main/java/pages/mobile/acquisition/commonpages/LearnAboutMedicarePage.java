@@ -54,12 +54,12 @@ public class LearnAboutMedicarePage extends GlobalWebElementsMobile {
 	}
 
 
-public PrepareforInitialEnrollmentPage prepareforInitialEnrollmentFooterClick() {
+public PrepareforInitialEnrollmentPageMobile prepareforInitialEnrollmentFooterClick() {
 		validate(medicareSupplementInsurancePlansLink);
 		prepareForInitialEnrollment.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
-			return new PrepareforInitialEnrollmentPage(driver);
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
+			return new PrepareforInitialEnrollmentPageMobile(driver);
 		}else{
 		
 			return null;
@@ -76,7 +76,7 @@ public ExploreChangingPlansPage exploreChangingPlansClick() {
     actions.moveToElement(exploreChangingPlansMedicareEducationLink);
     actions.click().build().perform();
     validate(navigationSectionMedicareEducationLink);
-	if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_CHANGE_MEDICARE_PLANS)) {
+	if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_CHANGE_MEDICARE_PLANS)) {
 		return new ExploreChangingPlansPage(driver);
 	}else{
 	

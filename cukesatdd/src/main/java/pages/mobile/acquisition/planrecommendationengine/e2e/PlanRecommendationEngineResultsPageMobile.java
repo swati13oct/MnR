@@ -32,12 +32,13 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
+
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 

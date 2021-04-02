@@ -23,6 +23,8 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.commonpages.UHCRetireeSiteMapPage;
+import pages.mobile.acquisition.commonpages.UhcRetireePharmacyLocatorPage;
 
 /**
  * @author ckoppura
@@ -151,7 +153,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 
 		return browserCheckJson;
 	}
-
+/*
 	public AlcatelLucentHomePage selectAlcatelLucent_dropdown() {
 		validate(alcatelLucentSelect);
 		Select dropdown = new Select(alcatelLucentSelect);
@@ -161,7 +163,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 		}
 
 		return null;
-	}
+	}*/
 
 	public UHCRetireeSiteMapPage clicksitemap() {
 

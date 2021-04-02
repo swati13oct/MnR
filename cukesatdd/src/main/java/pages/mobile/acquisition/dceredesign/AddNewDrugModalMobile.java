@@ -14,7 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 public class AddNewDrugModalMobile extends UhcDriver {
 
 	private PageData addnewdrug;

@@ -6,6 +6,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.commonpages.KTRSHomePage;
+import pages.mobile.acquisition.commonpages.MetlifeFindaProviderPage;
+import pages.mobile.acquisition.commonpages.MetlifeHomePage;
+import pages.mobile.acquisition.commonpages.NcshpFindaProviderPage;
+import pages.mobile.acquisition.commonpages.NcshpHomePage;
+import pages.mobile.acquisition.commonpages.PfizerFindaProviderPage;
+import pages.mobile.acquisition.commonpages.PfizerHomePage;
+import pages.mobile.acquisition.commonpages.SanFranciscoHomePage;
+import pages.mobile.acquisition.commonpages.SanfranciscoFindaProviderPage;
+import pages.mobile.acquisition.commonpages.SdceraFindaProviderPage;
+import pages.mobile.acquisition.commonpages.SdceraHomePage;
+import pages.mobile.acquisition.commonpages.UawHomePage;
+import pages.mobile.acquisition.commonpages.UawProviderPage;
 
 
 public class Rallytool_Page extends UhcDriver {
@@ -27,7 +40,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CALPERS_RETIREES_HOME))
+			if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_CALPERS_RETIREES_HOME))
 			{
 				return new CalpersHomePage(driver);
 			}
@@ -40,7 +53,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SDCERA_GROUP_RETIREE))
+			if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_SDCERA_GROUP_RETIREE))
 			{
 				return new SdceraHomePage(driver);
 			}
@@ -52,7 +65,7 @@ public class Rallytool_Page extends UhcDriver {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			
-			if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_CALPERS_RETIREES_PROVIDER))
+			if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_CALPERS_RETIREES_PROVIDER))
 			{
 				return new CalperFindaProviderPage(driver);
 			}
@@ -77,7 +90,7 @@ public class Rallytool_Page extends UhcDriver {
 			return null;
 		}
 		
-		public AlcatelLucentHomePage switchBackToAlcatelLucentHomePage() {
+		/*public AlcatelLucentHomePage switchBackToAlcatelLucentHomePage() {
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(0));
 			if(driver.getTitle().equalsIgnoreCase("Alcatel-Lucent Group Retiree - Home"))
@@ -95,7 +108,7 @@ public class Rallytool_Page extends UhcDriver {
 				return new AlcatelLucentFindProviderPage(driver);
 			}
 			return null;
-		}
+		}*/
 
 	    public MetlifeHomePage metlifeswitchBack() {
 			

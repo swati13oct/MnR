@@ -133,8 +133,8 @@ public class ReviewAndSubmitPage extends UhcDriver{
 	public void editReviewAndSubmitIntroduction(ReviewAndSubmitPage reviewandSubmitPage,String premium,String plantype){
 		editIntroBtn.click();
 		new IntroductionInformationPage(driver).navigatesToNextStep();
-		new BeneficiaryInformationPage(driver).navigatesToStep2Part2();
-		new SpecialElectionPeriodPage(driver).navigatesToNextStepMAorMAPD();
+		new BeneficiaryInformationPageMobile(driver).navigatesToStep2Part2();
+		new SpecialElectionPeriodPageMobile(driver).navigatesToNextStepMAorMAPD();
 		if(plantype.equalsIgnoreCase("MA")||plantype.equalsIgnoreCase("MAPD")){
 			new ESRDPage(driver).navigatesToNextStep();
 		}
@@ -156,12 +156,12 @@ public class ReviewAndSubmitPage extends UhcDriver{
 		new ProposedEffectiveDatePage(driver).clickOnSaveAndContinue(plantype);
 	}
 	
-	public BeneficiaryInformationPage editReviewAndSubmitBeneficiary(){
-		return new BeneficiaryInformationPage(driver);
+	public BeneficiaryInformationPageMobile editReviewAndSubmitBeneficiary(){
+		return new BeneficiaryInformationPageMobile(driver);
 	}
 	
-	public SpecialElectionPeriodPage editReviewAndSubmitSEP(){
-		return new SpecialElectionPeriodPage(driver);
+	public SpecialElectionPeriodPageMobile editReviewAndSubmitSEP(){
+		return new SpecialElectionPeriodPageMobile(driver);
 	}
 	
 	public PrimaryCareProviderPage editReviewAndSubmitPrimaryCareProvider(){

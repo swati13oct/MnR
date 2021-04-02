@@ -24,8 +24,8 @@ import cucumber.api.java.en.When;
 
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.mobile.acquisition.bluelayer.PlanSelectorNewPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.PlanSelectorNewPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.e2e.ACQDrugCostEstimatorPage;
 import pages.mobile.acquisition.planrecommendationengine.e2e.AdditionalServicesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.e2e.CommonutilitiesMobile;
