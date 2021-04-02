@@ -6050,6 +6050,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
+		checkModelPopup(driver, 10);
 //		sendkeys(zipCodeField, zipcode);
 		sendkeysNew(externalzipCodeField, zipcode);
 		jsClickNew(findPlansBtn);
