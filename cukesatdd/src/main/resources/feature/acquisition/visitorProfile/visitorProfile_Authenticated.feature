@@ -176,8 +176,8 @@ Feature: 1.08. UAT - Visitor profile Authenticated
 
     @VisitorProfile_AARP
     Examples: 
-      | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
-      | AARP | New York | mnrvd5   | Password@3 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
+      | site | state    | userName | password    | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
+      | AARP | New York | mnrvd5   | Password@30 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
 
   @prePopulateEmailFieldPlanSummaryAuthenticated
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page
