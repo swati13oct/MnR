@@ -218,7 +218,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	//@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
 	//@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
-	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
+	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -5250,8 +5250,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public void validateCallpopuponapage(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
-		
-		driver.navigate().refresh();
+		//driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
@@ -6063,6 +6062,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
+		checkModelPopup(driver, 10);
 //		sendkeys(zipCodeField, zipcode);
 		sendkeysNew(externalzipCodeField, zipcode);
 		jsClickNew(findPlansBtn);
