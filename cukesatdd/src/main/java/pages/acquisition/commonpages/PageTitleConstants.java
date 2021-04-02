@@ -43,7 +43,7 @@ public class PageTitleConstants {
 	public static final String BLAYER_UHC_MEDICARE_SOLUTIONS = "UHC medicare solutions - Google Search";
 	public static final String BLAYER_HEALTH_INSURANCE_AGENT_APPOINTMENT_REQUEST = "Health Insurance Agent Appointment Request | AARPï¿½ï¿½ Medicare Plans from UnitedHealthcareï¿½ï¿½";
 	public static final String BLAYER_UHC_MEDICARE_SOLUTIONS_YAHOO = "UHC medicare solutions - Yahoo Search Results";
-	public static final String BLAYER_MEDICARE_SUPPLEMENT_INSURANCE_PLANS = "Medicare Supplement Insurance Plans";
+	public static final String BLAYER_MEDICARE_SUPPLEMENT_INSURANCE_PLANS = "Medicare Supplement Insurance Plans | UnitedHealthcare";
 	public static final String BLAYER_DISCLAIMERS = "Disclaimers | UnitedHealthcare®";
 	public static final String BLAYER_MEDICARE_PLAN_DRUG_COSTS = "Medicare Plan Drug Costs | AARP® Medicare Plans from UnitedHealthcare®";
 	public static final String BLAYER_MY_BENEFITS_COVERAGES = "My Benefits & Coverage";

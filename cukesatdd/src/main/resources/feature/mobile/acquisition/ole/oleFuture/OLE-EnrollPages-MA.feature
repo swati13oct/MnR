@@ -1,4 +1,4 @@
-Feature: 1.05.7 OLE common tool flow E2E ENROLL Pages
+Feature: 1.05.7 OLE common tool Mobile Flows E2E ENROLL Pages
 
   Scenario Outline: Verify Zip code serch from Standlaone zipcode to OLE
     Given the user is on medicare acquisition site landing page

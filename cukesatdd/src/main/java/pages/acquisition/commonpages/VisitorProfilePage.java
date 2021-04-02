@@ -26,10 +26,10 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.VPPTestHarnessPage;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class VisitorProfilePage extends UhcDriver {
 
@@ -78,7 +78,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 
-	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign Out']")
+	@FindBy(xpath = "(//a[text()='Sign Out'])[2]")
 	private WebElement signOut;
 
 	@FindBy(id = "enrollment-next-button")
@@ -131,7 +131,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(css = "h2#saved-drugs-and-doctors")
 	public WebElement savedDrugsAndDoctorsHeader;
 
-	@FindBy(xpath = "//h3[@id='saved-drugs']/following-sibling::a")
+	@FindBy(xpath = "//h3[@id='saved-drugs']/following::button[contains(@dtmname,'Add Drugs')]")
 	public WebElement editDrugsPharmacy;
 
 	// OLE Details
@@ -150,10 +150,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Yes, cancel application']/..")
 	public WebElement cancelEnrollment;
 
-	@FindBy(xpath = "//*[@id='saved-drugs']/../..//*[text()='Get Started']/..")
+	@FindBy(xpath = "//*[contains(@dtmname,'Add Drugs') and contains(@dtmid, 'visitor_profile')]")
 	public WebElement addDrugsGlobal;
 
-	@FindBy(xpath = "//*[contains(@class,'add-drug')]")
+	@FindBy(xpath = "(//button[contains(@dtmname,'Add drugs') and contains(@dtmid, 'visitor_profile')]/*[contains(text(), 'Add')])[1]")
 	public WebElement enterDrugInfoPlanCard;
 
 	@FindBy(xpath = "//a[contains(text(),'Back to Drug Cost Estimator')]")
@@ -208,7 +208,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Add Drugs']/parent::button")
 	private WebElement addDrugsBtn;
 
-	@FindBy(xpath = "//button[contains(text(),'View Drug Pricing')]")
+	@FindBy(xpath = "(//button[contains(text(),'View Drug Pricing')])[1]")
 	private WebElement viewDrugPricingLink;
 	
 	@FindBy(xpath = "//button[text()='Yes, Remove']")
@@ -555,13 +555,14 @@ public class VisitorProfilePage extends UhcDriver {
 			}else {
 				jsClickNew(signIn);
 			}
-			System.out.println();
+			Thread.sleep(3000);
 			waitForPageLoadSafari();
 			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
 			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
 			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
 			waitForPageLoadSafari();
+			Thread.sleep(3000);
 			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
 			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
 			waitforElement(securityAnswer);
@@ -579,7 +580,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			// CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
@@ -802,9 +803,10 @@ public class VisitorProfilePage extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
-			System.out.println(plan);
+			System.out.println("Checking Saved Plan on VP for : "+plan);
 			WebElement addedPlan = driver
 					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			validateNew(addedPlan);
 			/*
 			 * System.out.println(driver.findElement(By.xpath(
 			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
@@ -822,10 +824,11 @@ public class VisitorProfilePage extends UhcDriver {
 			 * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 			 * + plan + "')]/following::button[1]")) .isDisplayed());
 			 */
-			Assert.assertTrue(driver
+/*			Assert.assertTrue(driver
 					.findElement(By.xpath(
 							"//*[contains(@id,'planName') and contains(text(),'" + plan + "')]/./following::button[1]"))
 					.isDisplayed());
+*/			
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}
@@ -838,8 +841,16 @@ public class VisitorProfilePage extends UhcDriver {
 	/**
 	 * click add drugs from plan card
 	 */
+
+	@FindBy(xpath = "//*[contains(@class, 'add-drug-doctor-dropdown')]//button[contains(@dtmname,'Add Drugs')]")
+	private WebElement PlanCard_AddDrugProvider_AddDrugbtn;
+
+	
 	public void clickAddDrugsPlancardNew() {
+		validateNew(enterDrugInfoPlanCard);
 		enterDrugInfoPlanCard.click();
+		validateNew(PlanCard_AddDrugProvider_AddDrugbtn);
+		jsClickNew(PlanCard_AddDrugProvider_AddDrugbtn);
 	}
 
 	public void validateBackToDceLink() {
@@ -858,9 +869,22 @@ public class VisitorProfilePage extends UhcDriver {
 	/**
 	 * click edit drugs from plan card
 	 */
+	@FindBy(xpath = "//*[contains(@class, 'plan-drug-doctor')]//a[contains(@dtmname, 'Update your drugs')]")
+	private WebElement DrugPricingModal_EditDrugslink;
+
+	
 	public void clickEditDrugsPlancard() {
-		expandDrugsPlanCard.click();
-		editDrugsPlanCard.click();
+		//validateNew(expandDrugsPlanCard);
+		//expandDrugsPlanCard.click();
+		// New Plan Card does not have Edit drugs
+		//		editDrugsPlanCard.click();
+
+		validateNew(viewDrugPricingLink);
+		viewDrugPricingLink.click();
+		System.out.println("View Drug Pricing is clicked for Plan Card");
+		validateNew(DrugPricingModal_EditDrugslink);
+		jsClickNew(DrugPricingModal_EditDrugslink);
+		System.out.println("View Drug Pricing - Edit Drugs link is clicked for Plan Card");
 	}
 
 	public void logIn(String username, String password) {

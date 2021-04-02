@@ -520,6 +520,10 @@ public class DrugSummaryPage extends UhcDriver {
 		validateNew(clickPdpplan);
 		jsClickNew(clickPdpplan);
 	}
+	public void clickOnMAPDPlan() {
+		validateNew(mapdPlanToggle);
+		jsClickNew(mapdPlanToggle);
+	}
 
 	@FindBy(xpath = "//div[contains(text(),'If you receive')]")
 	public WebElement drugPricingDeductText;
@@ -690,7 +694,6 @@ public class DrugSummaryPage extends UhcDriver {
 				&& validateNew(nextBtn)) {
 			return new DrugSummaryPage(driver);
 		}
-
 		return null;
 	}
 
@@ -1153,8 +1156,8 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void validateInvalidZipCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
-		System.out.println(invalidZipCodeMsg.getText());
-		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().equals(expectedMsg));
+		System.out.println(invalidZipCodeMsg.getText().trim());
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 
 	public void updateDistance(String distanceValue) throws InterruptedException {
@@ -1169,7 +1172,8 @@ public class DrugSummaryPage extends UhcDriver {
 	public void clickChangePharmacyFromAltMsg() {
 		waitforElement(changePharmacyAltMsg);
 		validate(changePharmacyAltMsg);
-		changePharmacyAltMsg.click();
+		jsClickNew(changePharmacyAltMsg);
+		//changePharmacyAltMsg.click();
 	}
 
 	public void clickViewPlanDetails(String planName) {

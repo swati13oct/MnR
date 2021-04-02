@@ -189,8 +189,8 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
-
 		plansummaryPage.viewPlanSummary(plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,plansummaryPage);
 
 	}
 
@@ -855,22 +855,25 @@ public class VppCommonStepDefinition {
 
 	@Then("^the user validates the right rail$")
 	public void user_validates_rightRail() {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		plansummaryPage.validateRightRailSection();
 	}
 
 	@Then("^the user validates the Need Help Section in the right rail$")
 	public void validate_needHelp_rightRail() {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		plansummaryPage.validateNeedHelpRightRail();
 	}
 
 	@Then("^the user validates the TFN in the Need Help Section$")
 	public void validate_TFN_inRIghtRail_aarp() {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, (new VPPPlanSummaryPage(wd)));
 		plansummaryPage.GetTFNforPlanType();
 	}
 
@@ -1506,7 +1509,7 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE,planType);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -1861,12 +1864,14 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// int counter = Integer.parseInt(Counter);
-		if (planType.equals("MAPD")) {
-			// plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(Counter);
-			System.out.println("Selected All MAPD plans for Plan Compare");
-		}
-
+//		if (planType.equals("MAPD")) {
+//			// plansummaryPage.clickonViewPlans();
+//			plansummaryPage.checkMAPlansOnly(Counter);
+//			System.out.println("Selected All MAPD plans for Plan Compare");
+//		}
+//		else
+		plansummaryPage.checkPlansForCompare(Counter,planType);
+		
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
@@ -2037,6 +2042,7 @@ public class VppCommonStepDefinition {
 		WelcomePage welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
 			Assert.fail("Error Loading Welcome Page for OLE");
 		}
@@ -3187,6 +3193,7 @@ public class VppCommonStepDefinition {
 		WelcomePage welcomeOLEPage = planComparePage.Enroll_OLE_Plancompare();
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
 			Assert.fail("Error Loading Welcome Page for OLE");
 		}
@@ -3834,7 +3841,254 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.dceModelClosepopup();
 	}
+	
+	@Then("^validate all subtabs displayed on plan details$")
+	public void validateplandetaillinks() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.validatealllinksonPlanDetails();
+	}
+	
+	@Then("^User click on provider link on Medical tab and navigates to rally page$")
+	public void user_EditProvider_on_PlanDetailsPage() {
 
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
+		ProviderSearchPage providerSearchPage = vppPlanDetailsPage.validateEditDocotrsProviderButton();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+
+	}
+
+	@Then("^user clicks on Change Zip code link$")
+	public void user_clicks_on_Change_Zip_code_link() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnChangeZipCode();
+	}
+
+	@When("^the user clicks on Find plans on vpp using following information$")
+	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information(
+			DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String county2 = memberAttributesMap.get("County Name2");
+		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			if (plansummaryPage.validateVPPPlanSummaryPage())
+				Assert.assertTrue(true);
+			else
+				Assert.fail("Error in validating the Plan Summary Page");
+
+		}
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan summary page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_summary_page() throws InterruptedException {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan summary page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_summary_page(DataTable givenAttributes) throws InterruptedException {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		plansummaryPage.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan details page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_details_page() throws InterruptedException {
+		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		planDetails.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan detail page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_detail_page(DataTable givenAttributes) throws InterruptedException {
+		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		planDetails.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^the user click the Email Plan List envelope icon or text on Plan compare page")
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_compare_page() throws InterruptedException {
+		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planCompare.clickOnEmailField();
+	}
+	
+	@Then("^user want the email address associated to my profile prepopulated in the text box on plan compare page")
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_compare_page(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		String email = memberAttributesMap.get("User Name");
+		planCompare.validatePrepopulatedEmail(email);
+	}
+	
+	@Then("^user clicks on Select by Address and Enter fileds$")
+	public void user_clicks_on_Select_by_Address_and_Enter_fileds(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String address = memberAttributesMap.get("Address");
+		String city = memberAttributesMap.get("City");
+		String state = memberAttributesMap.get("State");
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.enterAddressDetails(address, city, state);
+	}
+
+	@Then("^I save \"([^\"]*)\" plans and \"([^\"]*)\" plans and verify the count update on shopping cart$")
+	public void i_save_plans_and_verify_plan_count(String planType, String Counter)
+			throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		switch(planType.toUpperCase()){
+		case "MAPD":
+		case "MA":
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,"MA");break;
+			default: plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,planType.toUpperCase());break;
+		}
+	}	
+	@Then("^I validate view more and view less links on plan summary$")
+	public void i_validate_viewMore_and_viewLess()
+			throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateViewMoreAndLessLinks();
+	}	
+	
+	@Then("^I validate \"([^\"]*)\" plans with names \"([^\"]*)\" are listed correctly on summary page")
+	public void I_validate_planNames_on_planSummary(String planType, String planNames)
+	throws Throwable {
+	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+	plansummaryPage.validatePlanNames(planType,planNames) ;
+	}
+	
+	@When("^the user performs plan search using following information using external link$")
+	public void zipcode_details_in_aarp_external_site(DataTable givenAttributes) throws InterruptedException {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		VPPPlanSummaryPage plansummaryPage = null;
+		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+			plansummaryPage = aquisitionhomepage.searchPlansWithOutCountyForExternalLink(zipcode);
+		} else {
+			plansummaryPage = aquisitionhomepage.externalsearchPlans(zipcode, county);
+		}
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		} else {
+			Assert.fail("Error Loading VPP plan summary page");
+		}
+	}
+	
+	@When("^user clicks on Add to compare checkbox on plan detail page$")
+	public void user_clicks_on_compare_checknox_on_plan_details_page() throws Throwable {
+		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+		vppPlanDetailsPage.clickCompareBox();
+	}
+	
+	@Then("^verify the Add to compare checkbox is checked for selected plan$")
+	public void verify_the_Add_to_compare_checkbox_is_checked_for_selected_plan(DataTable givenAttributes) {
+
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String planIndex = memberAttributesMap.get("Plan index");
+		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("plan type"+plantype);
+		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex,plantype);
+	}
+
+	@When("^user select \"([^\"]*)\" plans to compare$")
+	public void user_select_plans_to_compare(String planIndex)  {		
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		plansummaryPage.addPlanToCompareByIndex(planIndex,plantype);
+		
+	}
+	
+	@Then("^user clicks on compare button$")
+	public void user_clicks_on_compare_button() {
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ComparePlansPage planComparePage = plansummaryPage.clickCompareButton();
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+		} else
+			Assert.fail("Error in loading the compare plans page");
+	}
+	
 	@Then("^the user enter the searchValue in the search text box$")
 	public void the_user_enter_the_searchValue_in_the_search_text_box(DataTable inputvalue)
 			throws Throwable {
@@ -3900,5 +4154,5 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickFirstSuggestionSiteSearch();
 	}
-}
 
+}

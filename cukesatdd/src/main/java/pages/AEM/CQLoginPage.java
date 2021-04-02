@@ -42,12 +42,20 @@ public class CQLoginPage extends UhcDriver {
 	
 	private static String STAGE_SSO_TESTHANESS_URL = MRConstants.STAGE_SSO_TESTHANESS_URL;
 	
+	private static String AVENGERS_AEM_URL= "http://author-team-avengers-6-5.ocp-ctc-dmz-nonprod.optum.com/";
+	
 	 /*This method will open CQ SSO Test Harness page */
 	public CQLoginPage navigateToLoginURL(){
 		
 		if(MRScenario.environment.contains("sot")){
 			start(AUTHOR_URL);
-		}else{
+		}else if(MRScenario.environment.contains("team-avengers-6-5")) {
+			
+			start(AVENGERS_AEM_URL);
+			driver.manage().deleteAllCookies();
+			CommonUtility.waitForPageLoad(driver, cqusername, 60);
+		}
+		else{
 			start(STAGE_SSO_TESTHANESS_URL);
 			driver.manage().deleteAllCookies();
 			//driver.get("http://apsr8048:4500/cf#/content/admin-tools/sso-test.html");
