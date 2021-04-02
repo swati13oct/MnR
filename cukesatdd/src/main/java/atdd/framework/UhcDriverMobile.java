@@ -55,10 +55,10 @@ public abstract class UhcDriverMobile {
 	private long defaultTimeoutInSec=15;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
-	public static WebElement IPerceptionsFrame;
+	public WebElement IPerceptionsFrame;
 	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
-	public static WebElement IPerceptionNoBtn;
+	public WebElement IPerceptionNoBtn;
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

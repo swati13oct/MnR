@@ -74,7 +74,7 @@ public class VppCommonStepDefinition {
 	}
 
 //	WebDriver wd;
-	public static String PREflow = "";
+	public String PREflow = "";
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page

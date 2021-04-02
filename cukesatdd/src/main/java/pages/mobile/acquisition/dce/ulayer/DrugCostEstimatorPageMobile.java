@@ -36,7 +36,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, SaveDrugPage, 10);
 		//String fileName = CommonConstants.SAVE_DRUG_PAGE_DATA;
-		// savedrugpage = readPageData(fileName,
+		// savedrugpage = CommonUtility.readPageData(fileName,
 		// CommonConstants.PAGE_OBJECT_DIRECTORY_BLAYER_MEMBER);
 		// openAndValidate();
 	}

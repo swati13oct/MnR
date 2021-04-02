@@ -160,10 +160,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement hoverhealthandwellnesslink;
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/a")
-	public static WebElement forgotusernamepasswordlink;
+	public WebElement forgotusernamepasswordlink;
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
-	public static WebElement registerherelink;
+	public WebElement registerherelink;
 
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
@@ -322,7 +322,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement searchbutton;
 
 	@FindBy(id = "search-field")
-	private static WebElement searchfield;
+	private WebElement searchfield;
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;

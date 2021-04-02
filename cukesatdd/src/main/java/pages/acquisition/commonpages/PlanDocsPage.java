@@ -19,10 +19,10 @@ import atdd.framework.Assertion;
 public class PlanDocsPage extends GlobalWebElements{	
 
 	@FindBy(xpath = "//h1")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//h2")
-	public static WebElement subtitle;
+	public WebElement subtitle;
 	
 	@FindBy( xpath= ".//label[@for='zip-code']")
 	private WebElement labelZipCode;

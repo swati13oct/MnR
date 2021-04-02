@@ -167,9 +167,9 @@ public class MRScenario {
 
 	private WebDriver webDriver;
 
-	private static final ThreadLocal<WebDriver> threadSafeDriver = new ThreadLocal<>();
+	private static ThreadLocal<WebDriver> threadSafeDriver = new ThreadLocal<>();
 	
-	public synchronized WebDriver getThreadSafeDriver() {
+	public static synchronized WebDriver getThreadSafeDriver() {
 		return threadSafeDriver.get();
 	}
 	
@@ -178,7 +178,7 @@ public class MRScenario {
 	}
 	
 	
-	private static final ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
+	private static ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
 	
 	public synchronized AppiumDriver getThreadSafeMobileDriver() {
 		return threadSafeMobileDriver.get();
@@ -1219,7 +1219,7 @@ public class MRScenario {
 				capabilities = DesiredCapabilities.safari();
 
 				MutableCapabilities sauceOptions = new MutableCapabilities();
-				sauceOptions.setCapability("screenResolution", "1400x1050");
+				sauceOptions.setCapability("screenResolution", "1920x1440");
 				sauceOptions.setCapability("maxDuration", 7200);
 				sauceOptions.setCapability("idleTimeout", 200);
 

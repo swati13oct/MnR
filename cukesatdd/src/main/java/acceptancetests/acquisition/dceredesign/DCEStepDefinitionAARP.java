@@ -50,7 +50,7 @@ public class DCEStepDefinitionAARP {
 		return loginScenario;
 	}
 
-	WebDriver driver;
+	private WebDriver driver;
 
 	@Then("^the user validates Get Started Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {

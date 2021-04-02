@@ -46,7 +46,7 @@ public class PortfolioPage extends UhcDriver {
 	private WebElement OurPlansLink;
 
 	@FindBy(id = "subnav_2")
-	public static WebElement ourPlansDropdown;
+	public WebElement ourPlansDropdown;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/form/span/button")
 	public WebElement findPlansButton;

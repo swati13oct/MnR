@@ -43,7 +43,7 @@ public class ProfileSearch extends UhcDriver {
 	private WebElement btnCloakIn;
 	
 	@FindBy(id = "aarpSVGLogo")
-	public static WebElement AARPlogo;
+	public WebElement AARPlogo;
 	
 	@FindBy(css="input#visitorsEmail+div.invalid-field")
 	private WebElement emailError;

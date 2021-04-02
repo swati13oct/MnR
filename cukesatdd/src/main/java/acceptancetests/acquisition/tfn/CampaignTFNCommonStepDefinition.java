@@ -52,7 +52,7 @@ public class CampaignTFNCommonStepDefinition {
 	}
 
 	
-	WebDriver driver;
+	private WebDriver driver;
 	@Given("^the user Starts WebDriver$")
 	public void Start_WebDriver() {
 		driver = getLoginScenario().getWebDriverNew();

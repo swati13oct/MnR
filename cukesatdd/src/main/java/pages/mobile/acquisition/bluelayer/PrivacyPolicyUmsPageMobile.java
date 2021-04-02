@@ -19,10 +19,10 @@ import atdd.framework.UhcDriver;
 public class PrivacyPolicyUmsPageMobile extends UhcDriver{
 	
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "(//section[contains(@class,'meded-article-content')]//p)[1]")
-	public static WebElement pageContent_Para1;
+	public WebElement pageContent_Para1;
 
 	public PrivacyPolicyUmsPageMobile(WebDriver driver) {
 		super(driver);

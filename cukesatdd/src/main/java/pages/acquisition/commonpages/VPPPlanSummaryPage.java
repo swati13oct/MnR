@@ -583,7 +583,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement btnClose;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 
 	@FindBy(xpath = "//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")
 	// @FindBy(xpath="//div[@class='popup-modal
@@ -660,16 +660,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement rockyMountainLogo;
 
 	@FindBy(id = "aarpSVGLogo")
-	public static WebElement AARPlogo;
+	public WebElement AARPlogo;
 
 	@FindBy(id = "addDrugComponentWrap")
-	public static WebElement addDrugComponentWrap;
+	public WebElement addDrugComponentWrap;
 
 	@FindBy(xpath = "//*[@id='addDrugComponentWrap']//button[text()='Get Started']")
-	public static WebElement getStartedAddDrugNBA;
+	public WebElement getStartedAddDrugNBA;
 
 	@FindBy(id = "findProvidersComponentWrap")
-	public static WebElement findProvidersComponentWrap;
+	public WebElement findProvidersComponentWrap;
 
 	@FindBy(xpath = "//*[@id='MedicareClaimNum']")
 	private WebElement MedicareNumber;

@@ -227,7 +227,7 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 	
 	public void CheckiPerseptions() {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,10); // do not change this to CommonUtility.waitForPageLoadNew as we're not trying to fail the test if it isn't found

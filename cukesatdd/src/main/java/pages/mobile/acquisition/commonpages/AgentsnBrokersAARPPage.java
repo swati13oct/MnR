@@ -15,10 +15,10 @@ import org.openqa.selenium.support.PageFactory;
 public class AgentsnBrokersAARPPage extends GlobalWebElementsMobile{
 	
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'mededoverviewcontainer')]//div[contains(@class,'meded-medicare-overview__title')]")
-	public static WebElement medicareOverviewTableTitle;
+	public WebElement medicareOverviewTableTitle;
 	
 	
 	public AgentsnBrokersAARPPage(WebDriver driver) {

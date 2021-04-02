@@ -20,7 +20,7 @@ public class DisclaimersAARPPageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
 	@FindBy(xpath = "//span[contains(@class,'heading-1')]")
-	public static WebElement header;
+	public WebElement header;
 
 	// @FindBy(xpath =
 	// "//div[contains(@class,'meded-accordion')]/div[contains(@class,'meded-accordion__item')]//a")
@@ -43,7 +43,7 @@ public class DisclaimersAARPPageMobile extends GlobalWebElements {
 	}
 
 	@FindBy(id = "logo")
-	public static WebElement logoLink;
+	public WebElement logoLink;
 
 	public AcquisitionHomePageMobile logoClick() {
 		validate(logoLink);

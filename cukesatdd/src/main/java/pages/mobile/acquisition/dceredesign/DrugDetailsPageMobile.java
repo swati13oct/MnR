@@ -897,7 +897,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 
 		// while(validate(overlayFilm, 10)) {/**wait*/}
-		// waitForElementToDisappear(driver, overlayFilm, 75);
+		// CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);

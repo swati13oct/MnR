@@ -101,7 +101,8 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
 		aquisitionhomepage.navigateToPharmacyLocator();
-		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+//		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(wd);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 				pharmacySearchPage);
 
@@ -458,7 +459,8 @@ public class PharmacyLocatorStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
-		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+//		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+		PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(wd);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
 				pharmacySearchPage);
 	}

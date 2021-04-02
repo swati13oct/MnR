@@ -975,11 +975,12 @@ public class VppPlanSummaryStepDefinitionAARP {
 
 	@When("^the member validates the search engine$")
 	public void I_validate_search_box() throws InterruptedException {
-
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acquisitionHomePage.searchfield();
-		KeywordSearchPage newkeywordsearchpage = new KeywordSearchPage(acquisitionHomePage.driver);
+//		KeywordSearchPage newkeywordsearchpage = new KeywordSearchPage(acquisitionHomePage.driver);
+		KeywordSearchPage newkeywordsearchpage = new KeywordSearchPage(wd);
 		getLoginScenario().saveBean(PageConstants.Keyword_Search, newkeywordsearchpage);
 	}
 

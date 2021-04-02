@@ -16,12 +16,12 @@ public class AgentsnBrokersAARPPageMobile extends GlobalWebElements {
 
 	// @FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
 	@FindBy(xpath = "//h1//*[contains(text(),'Health Insurance Broker & Agent Tools')]")
-	public static WebElement header;
+	public WebElement header;
 
 	// @FindBy(xpath =
 	// "//div[contains(@class,'mededoverviewcontainer')]//div[contains(@class,'meded-medicare-overview__title')]")
 	@FindBy(xpath = "(//div[contains(@class,'CustomRTE')]//ul)[1]")
-	public static WebElement medicareOverviewTableTitle;
+	public WebElement medicareOverviewTableTitle;
 
 	public AgentsnBrokersAARPPageMobile(WebDriver driver) {
 		super(driver);

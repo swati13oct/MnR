@@ -409,7 +409,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	private WebElement maPlansCount;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 
 	@FindBy(xpath = "//*[contains(@class,'cta-button pharmacy-tab-show')]")
 	private WebElement btnNextPickAPharmacy;

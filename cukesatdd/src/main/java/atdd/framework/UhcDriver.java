@@ -53,6 +53,7 @@ import io.appium.java_client.touch.offset.PointOption;
 public abstract class UhcDriver {
 
 	public WebDriver driver;
+	
 	private long defaultTimeoutInSec = 45;
 
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
@@ -143,11 +144,13 @@ public abstract class UhcDriver {
 	}
 
 	public WebDriver switchToNewIframe(String iframeName) {
+
 		return driver.switchTo().frame(iframeName);
 
 	}
 
 	public WebDriver switchToNewIframe(WebElement iframeElement) {
+
 		return driver.switchTo().frame(iframeElement);
 
 	}
@@ -169,7 +172,7 @@ public abstract class UhcDriver {
 		return false;
 	}
 
-	public static void sendkeys(WebElement element, String message) {
+	public void sendkeys(WebElement element, String message) {
 		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
 			element.click();
 			element.clear();
@@ -278,6 +281,7 @@ public abstract class UhcDriver {
 	}
 
 	public WebElement findElement(ElementData elementData) {
+
 		WebElement element = null;
 		try {
 			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
@@ -308,6 +312,7 @@ public abstract class UhcDriver {
 	}
 
 	public WebElement findChildElement(ElementData elementData, WebElement parentElement) {
+		
 		WebElement element = null;
 		try {
 			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
@@ -340,6 +345,7 @@ public abstract class UhcDriver {
 	}
 
 	public List<WebElement> findChildElements(ElementData elementData, WebElement parentElement) {
+		
 		List<WebElement> element = null;
 		try {
 			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
@@ -370,6 +376,7 @@ public abstract class UhcDriver {
 	}
 
 	public List<WebElement> findElements(ElementData elementData) {
+		
 		List<WebElement> element = null;
 		try {
 			if (elementData.getIdentifier().equalsIgnoreCase("id")) {
@@ -408,6 +415,7 @@ public abstract class UhcDriver {
 
 	public WebElement findDynamicElement(By locator) {
 		WebElement element = null;
+		
 		FluentWait<WebDriver> wait = new WebDriverWait(driver, Long.parseLong(System.getProperty("base.timeout", "1")))
 				.withTimeout(Long.parseLong(System.getProperty("base.timeout", "1")), TimeUnit.SECONDS);
 		try {
@@ -420,14 +428,17 @@ public abstract class UhcDriver {
 	}
 
 	public String currentUrl() {
+		
 		return driver.getCurrentUrl();
 	}
 
 	public String getTitle() {
+		
 		return driver.getTitle();
 	}
 
 	public Cookie getCookieName(String cookieName) {
+		
 		return driver.manage().getCookieNamed(cookieName);
 	}
 
@@ -443,6 +454,7 @@ public abstract class UhcDriver {
 	 * tags variable and their path dtmDir: Path to the dtmFilePath
 	 */
 	public JSONObject getDTMPageJson(String fileName, String filePath, String dtmFilePath, String dtmDir) {
+		
 		PageData pageData = CommonUtility.readPageData(fileName, filePath);
 		JSONObject jsonObject = new JSONObject();
 		for (String key : pageData.getExpectedData().keySet()) {
@@ -487,21 +499,22 @@ public abstract class UhcDriver {
 	}
 
 	public void jsClickNew(WebElement element) {
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
 		// System.out.println("The WebElement === " + getidentifier(element) + " : is
 		// Clicked");
 	}
 
-	public static String getidentifier(WebElement element) {
+	public String getidentifier(WebElement element) {
 		String elementStr = element.toString();
 		return "[" + elementStr.substring(elementStr.indexOf("->") + 3);
 
 	}
 
 	public boolean scrollToView(WebElement element) {
+		
 		try {
-
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].scrollIntoView();", element);
 		} catch (Exception e) {
@@ -519,6 +532,7 @@ public abstract class UhcDriver {
 	 * @param url
 	 */
 	public void startNewPRE(String url, String browser) {
+		
 		System.out.println("Browser Name: " + browser);
 		if (browser.equalsIgnoreCase("safari"))
 			driver.get(url);
@@ -530,6 +544,7 @@ public abstract class UhcDriver {
 	}
 
 	public void startNew(String url) {
+		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		driver.get(url);
@@ -542,6 +557,7 @@ public abstract class UhcDriver {
 	 * @param element
 	 */
 	public void waitforElementNew(WebElement element, long timeoutInSec) {
+		
 		WebDriverWait wait = new WebDriverWait(driver, timeoutInSec);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
@@ -554,6 +570,7 @@ public abstract class UhcDriver {
 	 * @param Element
 	 */
 	public void switchToNewTabNew(WebElement Element) {
+		
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
@@ -576,6 +593,7 @@ public abstract class UhcDriver {
 	 * @param initialCount
 	 */
 	public void waitForCountIncrement(int initialCount) {
+		
 		System.out.println("Waiting for new window to get open");
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(initialCount + 1));
@@ -587,6 +605,7 @@ public abstract class UhcDriver {
 	 * @param initialCount
 	 */
 	public void waitForCountDecrement(int initialCount) {
+		
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(initialCount - 1));
 	}
@@ -614,6 +633,7 @@ public abstract class UhcDriver {
 	 */
 	public boolean validateNew(WebElement element, long timeoutInSec) {
 		// scrollToView(element);
+		
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-50)", "");
 		try {
@@ -663,6 +683,7 @@ public abstract class UhcDriver {
 	}
 
 	public void selectFromDropDownByValue(WebElement dropdownElement, String value) {
+		
 		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
@@ -680,6 +701,7 @@ public abstract class UhcDriver {
 	}
 
 	public void waitUntilSelectOptionsPopulated(final Select select) {
+		
 		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver).withTimeout(60, TimeUnit.SECONDS).pollingEvery(2,
 				TimeUnit.MILLISECONDS);
 		wait.until(new Function<WebDriver, WebElement>() {
@@ -696,6 +718,7 @@ public abstract class UhcDriver {
 	 * @param element
 	 */
 	public void waitforElementDisapper(By by, long timeout) {
+		
 		System.out.println("Waiting for element to disappear!!!");
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(by));
@@ -728,6 +751,7 @@ public abstract class UhcDriver {
 	 * @param element
 	 */
 	public void waitforElementVisibilityInTime(WebElement element, long timeout) {
+		
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.visibilityOf(element));
 
@@ -740,6 +764,7 @@ public abstract class UhcDriver {
 	 * @param element
 	 */
 	public void waitTillElementClickableInTime(WebElement element, long timeout) {
+		
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.elementToBeClickable(element));
 
@@ -753,6 +778,7 @@ public abstract class UhcDriver {
 	 * @param timeout
 	 */
 	public void waitTllOptionsAvailableInDropdown(WebElement element, long timeout) {
+		
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(element, By.tagName("option")));
 
@@ -765,6 +791,7 @@ public abstract class UhcDriver {
 	 * @param element
 	 */
 	public void waitTillFrameAvailabeAndSwitch(WebElement element, long timeout) {
+		
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(element));
 
@@ -777,15 +804,17 @@ public abstract class UhcDriver {
 		 * Actions actions = new Actions(driver); actions.moveToElement(hdrMenuElement);
 		 * actions.moveToElement(menuDropListItem); actions.click().build().perform();
 		 */
+		
 		jsMouseOver(hdrMenuElement);
 		jsMouseOver(menuDropListItem);
 		menuDropListItem.click();
+//		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
-
 	}
 
-	public static void clickIfElementPresentInTime(WebDriver driver, WebElement element, int timeInSec) {
+	public void clickIfElementPresentInTime(WebDriver driver, WebElement element, int timeInSec) {
 		System.out.println("Waiting for element to load...");
+//		CommonUtility.waitForPageLoad(driver, element, timeInSec);
 		CommonUtility.waitForPageLoad(driver, element, timeInSec);
 		try {
 			if (element.isDisplayed()) {
@@ -846,6 +875,7 @@ public abstract class UhcDriver {
 	protected WebElement timeJson;
 
 	public String getMemTestEnvSysTime() {
+		
 		String timeStr = "";
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
@@ -888,6 +918,7 @@ public abstract class UhcDriver {
 	}
 
 	public String getAcqTestEnvSysTime(String testSiteUrl) {
+		
 		String timeStr = "";
 		String winHandleBefore = driver.getWindowHandle();
 		System.out.println("Proceed to open a new blank tab to check the system time");
@@ -926,6 +957,7 @@ public abstract class UhcDriver {
 	}
 
 	public void startNewMobile(String url) {
+		
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
@@ -936,6 +968,7 @@ public abstract class UhcDriver {
 	 */
 	public boolean mobileswipe(String percentage, boolean swipeup) {
 		boolean swipeSuccess = true;
+		
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		Dimension size = mobiledriver.manage().window().getSize();
@@ -986,6 +1019,7 @@ public abstract class UhcDriver {
 	 */
 	@SuppressWarnings("rawtypes")
 	public void hidekeypad() {
+		
 		try {
 			threadsleep(2000);
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) // wd.getClass().toString().toUpperCase().contains("IOS"))
@@ -1002,6 +1036,7 @@ public abstract class UhcDriver {
 	}
 
 	public void getkeypad() {
+		
 		threadsleep(1000);
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID"))
 			((AndroidDriver) driver).getKeyboard();
@@ -1011,6 +1046,7 @@ public abstract class UhcDriver {
 	}
 
 	public void mobileactiontap(WebElement element) {
+		
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			Actions act = new Actions(driver); // Works only for Android driver
 			act.click(element).perform();
@@ -1019,6 +1055,7 @@ public abstract class UhcDriver {
 	}
 
 	public void mobileactionsendkeys(WebElement element, String keys) {
+		
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			Actions act = new Actions(driver); // Works only for Android driver
 			act.click(element).sendKeys(keys).perform();
@@ -1036,6 +1073,7 @@ public abstract class UhcDriver {
 	}
 
 	public void jsSendkeys(WebElement searchBox, String keys) {
+		
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].value='" + keys + "';", searchBox);
 	}
@@ -1066,6 +1104,7 @@ public abstract class UhcDriver {
 	 *         on visible text mobile
 	 */
 	public void mobileSelectOption(WebElement selectElement, String option, boolean clickElement) {
+		
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
 			Select element = new Select(selectElement);
@@ -1087,6 +1126,7 @@ public abstract class UhcDriver {
 	}
 
 	public void clickTextIOSNative(String text) {
+		
 		String curHandle = ((IOSDriver) driver).getContext();
 		System.out.println("curHandle - " + curHandle);
 		try {
@@ -1102,6 +1142,7 @@ public abstract class UhcDriver {
 	}
 
 	public void fixFormResubmissionAndroid(boolean positive) {
+		
 		String curHandle = ((AndroidDriver) driver).getContext();
 		System.out.println("curHandle - " + curHandle);
 		System.out.println(((AndroidDriver) driver).getContextHandles());
@@ -1124,6 +1165,7 @@ public abstract class UhcDriver {
 	 *         arises mobile
 	 */
 	public void fixFormResubmission(boolean positive) {
+		
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID"))
 			fixFormResubmissionAndroid(positive);
 	}
@@ -1156,6 +1198,7 @@ public abstract class UhcDriver {
 	 *         screen
 	 */
 	public boolean mobileswipeHorizantal(String percentage, boolean swiperight) {
+		
 		boolean swipeSuccess = true;
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
@@ -1208,12 +1251,14 @@ public abstract class UhcDriver {
 
 	public void waitforElementInvisibilityInTime(WebElement element, long timeout) {
 		System.out.println("Checking Element Invisibility");
+		
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
 
 	public void mobileactiondragdrop(WebElement dragelement, WebElement dropelement, boolean swipeVertical) {
 		System.out.println("Drag Drop");
+		
 		AppiumDriver mobiledriver = (AppiumDriver) driver;
 		TouchAction mact = new TouchAction(mobiledriver);
 		int dragx = dragelement.getLocation().getX();
@@ -1226,12 +1271,14 @@ public abstract class UhcDriver {
 	}
 
 	public void jsClickMobile(WebElement element) {
+		
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click();", element);
 	}
 
 	public String returnDriverStorageJS(String StorageType, String StorageKey) {
 		String ReturnValue = "";
+		
 		JavascriptExecutor js = ((JavascriptExecutor) driver);
 		if (StorageType.equalsIgnoreCase("local storage") || StorageType.equalsIgnoreCase("localstorage")) {
 			ReturnValue = (String) js
@@ -1258,6 +1305,7 @@ public abstract class UhcDriver {
 	 */
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
+		
 		if (MRScenario.browserName.equalsIgnoreCase("Safari")
 				&& driver.getClass().getSimpleName().contains("WebDriver")) {
 			// Sets FluentWait Setup
@@ -1315,6 +1363,7 @@ public abstract class UhcDriver {
 	 *         Note: Use in combination with jsMouseOver
 	 */
 	public boolean jsMouseOut(WebElement element) {
+		
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$(arguments[0]).mouseout();", element);
@@ -1336,6 +1385,7 @@ public abstract class UhcDriver {
 	 *         Note: use the jsMouseOut if using jsMouseOver for tooltip
 	 */
 	public boolean jsMouseOver(WebElement element) {
+		
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("$(arguments[0]).mouseover();", element);
@@ -1348,6 +1398,7 @@ public abstract class UhcDriver {
 	}
 
 	public int countOfNewWindowTab() {
+		
 		return driver.getWindowHandles().size();
 	}
 

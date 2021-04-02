@@ -686,7 +686,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	private WebElement btnClose;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 	/*
 	 * @FindBy(
 	 * xpath="//div[@class='popup-modal active']//h2[@id='plan-year-modal-header']")

@@ -27,7 +27,7 @@ public class VppEmailAndPrintCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	WebDriver wDriver;
+	private WebDriver wDriver;
 	
 	@Then("^user saves first plan on plan summary page on site$")
 	public void saveFirtPlan() {
@@ -61,7 +61,7 @@ public class VppEmailAndPrintCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
 		ComparePlansPage comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
 		Assertion.assertTrue("Error in loading the compare plans page", comparePlansPage != null);
-		wDriver = comparePlansPage.driver;
+//		wDriver = comparePlansPage.driver;
 		//getLoginScenario().saveBean(PageConstants.ACQ_PAGE_DRIVER, wDriver);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wDriver);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);

@@ -41,7 +41,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElementsMobile {
 	 */
 
 	@FindBy(xpath = "//button[contains(@class,'proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 
 	@FindBy(xpath = "//*[@id='sam-call-modal']/div/div/div[1]/a")
 	private WebElement CallSamTFNClose;

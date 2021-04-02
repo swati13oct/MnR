@@ -92,7 +92,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	private WebElement CityTxt;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 	
 
 	@FindBy(xpath = "//*[contains(@id, '-form-error-city')]")

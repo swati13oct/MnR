@@ -29,10 +29,10 @@ public class AgentsAndBrokersPageMobile extends GlobalWebElementsMobile{
 	private WebElement agentsAndBrokersTitle;
 
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//h1//*[contains(@class,'meded-article-header__title')]")
-	public static WebElement brokerAgentHeader;
+	public WebElement brokerAgentHeader;
 
 
 	public AgentsAndBrokersPageMobile(WebDriver driver) {

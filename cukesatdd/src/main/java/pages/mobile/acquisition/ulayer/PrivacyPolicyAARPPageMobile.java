@@ -11,10 +11,10 @@ import acceptancetests.util.CommonUtility;
 public class PrivacyPolicyAARPPageMobile extends GlobalWebElements{
 	 
 		@FindBy(xpath = "//span[@class='heading-1']")
-		public static WebElement header;
+		public WebElement header;
 		
 		@FindBy(xpath = "//h2//span[contains(@class,'paragraph')]")
-		public static WebElement pageContent_Para1;
+		public WebElement pageContent_Para1;
 		
 		public PrivacyPolicyAARPPageMobile(WebDriver driver) {
 			super(driver);

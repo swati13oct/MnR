@@ -18,10 +18,10 @@ import acceptancetests.util.CommonUtility;
 public class AboutUsAARPPage extends GlobalWebElementsMobile{
 
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
-	public static WebElement abountUsBodyParaSection;
+	public WebElement abountUsBodyParaSection;
 	
 	
 	

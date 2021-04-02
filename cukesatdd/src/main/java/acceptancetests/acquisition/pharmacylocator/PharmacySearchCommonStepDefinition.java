@@ -90,7 +90,8 @@ public class PharmacySearchCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		aquisitionhomepage.navigateToPharmacyLocator();
-		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(aquisitionhomepage.driver);
+//		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(aquisitionhomepage.driver);
+		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(wd);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 
 	}

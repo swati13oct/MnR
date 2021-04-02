@@ -18,10 +18,10 @@ import acceptancetests.util.CommonUtility;
 public class AboutUsAARPPageMobile extends GlobalWebElements{
 
 	@FindBy(xpath = "//div[contains(@class,'breadcrumb aem-GridColumn aem-GridColumn--default--12')]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//span[contains(text(),'UnitedHealthcare is dedicated to helping people li')]")
-	public static WebElement abountUsBodyParaSection;
+	public WebElement abountUsBodyParaSection;
 	
 	
 	

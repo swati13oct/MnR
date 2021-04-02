@@ -120,16 +120,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement enroll;
 
 	@FindBy(id = "ghn_lnk_1")
-	public static WebElement navigationSectionHomeLink;
+	public WebElement navigationSectionHomeLink;
 
 	@FindBy(id = "ghn_lnk_2")
-	public static WebElement ourPlansHoverLink;
+	public WebElement ourPlansHoverLink;
 
 	@FindBy(id = "subnav_2")
-	public static WebElement ourPlansDropdownText;
+	public WebElement ourPlansDropdownText;
 
 	@FindBy(xpath = "//html[@id='ctl00_MasterHtmlTag']/head/title")
-	public static WebElement test;
+	public WebElement test;
 
 	@FindBy(id = "provider")
 	private WebElement po7Link;
@@ -141,10 +141,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement hoverhealthandwellnesslink;
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/a")
-	public static WebElement forgotusernamepasswordlink;
+	public WebElement forgotusernamepasswordlink;
 
 	@FindBy(xpath = "//*[@id='subnav_4']/div/div/div[2]/div/span[2]/a")
-	public static WebElement registerherelink;
+	public WebElement registerherelink;
 
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
@@ -305,7 +305,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement searchbutton;
 
 	@FindBy(id = "search-field")
-	private static WebElement searchfield;
+	private WebElement searchfield;
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
