@@ -10,6 +10,8 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 
+import io.cucumber.testng.FeatureWrapper;
+import io.cucumber.testng.PickleWrapper;
 import io.cucumber.testng.TestNGCucumberRunner;
 
 @Configuration
@@ -19,6 +21,8 @@ public abstract class BaseTestConfig {
 	protected TestNGCucumberRunner testNGCucumberRunner;
 	
 	protected final String ScenarioDataProvider = "scenarios";
+	
+	public abstract void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper);
 	
 	@BeforeSuite(alwaysRun = true)
 	public void setupSuite(ITestContext context) {
@@ -32,7 +36,7 @@ public abstract class BaseTestConfig {
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
 	}
 	
-	@DataProvider(parallel = true, name = ScenarioDataProvider)
+	@DataProvider(parallel = true)
 	public Object[][] scenarios(){
 		if (testNGCucumberRunner == null) {
 			testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());

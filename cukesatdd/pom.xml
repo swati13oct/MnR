@@ -81,14 +81,15 @@
 						</goals>
 						<configuration>
 							<!-- <useSystemClassLoader>false</useSystemClassLoader> -->
-							<forkCount>5C</forkCount> <!-- Total of 5 * number of CPU core's concurrent JVM process will be created -->
+							<!-- <forkCount>2.5C</forkCount> --> <!-- Total of 2.5 * number of CPU core's concurrent JVM process will be created -->
+							<forkCount>5</forkCount>
 							<reuseForks>false</reuseForks>
 							<suiteXmlFiles>
 								<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 							</suiteXmlFiles>
 							<testFailureIgnore>true</testFailureIgnore>
-							<parallel>methods</parallel>
-							<threadCount>100</threadCount>
+							<!-- <parallel>methods</parallel> -->
+							<!-- <threadCount>100</threadCount> -->
 							<properties>
 								<property>
 									<name>testnames</name>
