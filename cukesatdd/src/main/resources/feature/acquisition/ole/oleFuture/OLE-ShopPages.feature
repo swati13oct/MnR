@@ -153,7 +153,8 @@ Scenario Outline: TID: <TID> -plan type: <PlanType> - OLE End to end from E2E Sh
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
-		And the user views the plans of the below plan type
+		#And the user views the plans of the below plan type
+		And the user views the plans of the below plan type for shop pages
       | Plan Type | <plantype> |
    	And the user selects plan year
     	|Plan Year	| <planyear>|
