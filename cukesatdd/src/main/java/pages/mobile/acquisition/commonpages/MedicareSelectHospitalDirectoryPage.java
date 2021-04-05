@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
  * @author snagpa4
  *
  */
-public class MedicareSelectHospitalDirectoryPage extends GlobalWebElementsMobile {
+public class MedicareSelectHospitalDirectoryPage extends GlobalWebElements {
 
 	public MedicareSelectHospitalDirectoryPage(WebDriver driver) {
 		super(driver);
@@ -24,13 +24,13 @@ public class MedicareSelectHospitalDirectoryPage extends GlobalWebElementsMobile
 			
 		}
 
-	public ResumeYourSavedApplicationPage resumeYourSavedApplicationClick() {
+	public ResumeYourSavedApplicationPageMobile resumeYourSavedApplicationClick() {
 		ourPlansHover();
 		validate(resumeYourSavedApplicationLink);
 		resumeYourSavedApplicationLink.click();
 		validate(resumeYourSavedApplicationLink);
 		if(driver.getTitle().equalsIgnoreCase("Resume")){
-			return new ResumeYourSavedApplicationPage(driver);
+			return new ResumeYourSavedApplicationPageMobile(driver);
 		}
 		return null;
 	}

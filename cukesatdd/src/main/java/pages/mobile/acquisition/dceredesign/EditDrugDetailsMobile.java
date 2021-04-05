@@ -1,4 +1,5 @@
 package pages.mobile.acquisition.dceredesign;
+
 import java.util.Map;
 
 import org.json.JSONException;
@@ -33,16 +34,17 @@ public class EditDrugDetailsMobile extends UhcDriver {
 
 	@FindBy(id = "quantity")
 	public WebElement quantityField;
-	
+
 	@FindBy(id = "drug-alt-back-button")
 	public WebElement backToSearchBtn;
-	
+
 	@FindBy(id = "frequency")
 	public WebElement selectYourFrequencyDropdown;
+
 	public EditDrugDetailsMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
-		//CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
+		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
 		String fileName = CommonConstants.ADD_DRUG_DETAILS_PAGE_DATA;
 		editdrugdetails = CommonUtility.readPageData(fileName, CommonConstants.PAGE_OBJECT_DIRECTORY_DCE_MEMBER);
 		openAndValidate();
@@ -55,16 +57,16 @@ public class EditDrugDetailsMobile extends UhcDriver {
 		for (String key : editdrugdetails.getExpectedData().keySet()) {
 			WebElement element = findElement(editdrugdetails.getExpectedData().get(key));
 			if (null != element) {
-			validate(element);
-			try {
-				jsonObject.put(key, element.getText());
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				validate(element);
+				try {
+					jsonObject.put(key, element.getText());
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
+			}
 		}
-	}
 		editdrugdetailsJson = jsonObject;
 
 		System.out.println("addnewdrugJson----->" + editdrugdetailsJson);
@@ -76,57 +78,61 @@ public class EditDrugDetailsMobile extends UhcDriver {
 
 		return addDrugDetailsPageExpectedJson;
 	}
-	public void selectDosage(String dosage){
-	
-		WebElement element = driver.findElement(By.xpath("//input[@value='"+dosage+"']/following-sibling::label"));
-		if(!element.isSelected()){
-			element.click();
+
+	public void selectDosage(String dosage) {
+
+		WebElement element = driver.findElement(By.xpath("//input[@value='" + dosage + "']/following-sibling::label"));
+		if (!element.isSelected()) {
+			jsClickNew(element);
 		}
 	}
 
-	public void selectQnty(String qnty){
+	public void selectQnty(String qnty) {
 		waitforElement(quantityField);
 		sendkeys(quantityField, qnty);
 	}
 
-	public void selectFrequency(String frquency){
+	public void selectFrequency(String frquency) {
 		Select options = new Select(selectYourFrequencyDropdown);
-		if(frquency.equalsIgnoreCase("Every 1 month")){
+		if (frquency.equalsIgnoreCase("Every 1 month")) {
 			options.selectByValue("30");
 		}
-		if(frquency.equalsIgnoreCase("Every 3 months")){
+		if (frquency.equalsIgnoreCase("Every 3 months")) {
 			options.selectByValue("90");
 		}
 	}
 
-//	public SavingsOppurtunity continueAddDrugDetailsModal() throws InterruptedException{
-//		waitforElement(continueButton);
-//		continueButton.click();
-//		continueButton.click();
-//		Thread.sleep(12000);
-//		return new SavingsOppurtunity(driver);
-//		}
-//	
-	public DrugCostEstimatorPageMobile updateEditDrugDetails() throws InterruptedException{
+	// public SavingsOppurtunity continueAddDrugDetailsModal() throws
+	// InterruptedException{
+	// waitforElement(continueButton);
+	// continueButton.click();
+	// continueButton.click();
+	// Thread.sleep(12000);
+	// return new SavingsOppurtunity(driver);
+	// }
+	//
+	public DrugCostEstimatorPageMobile updateEditDrugDetails() throws InterruptedException {
 		waitforElement(updateButton);
-		updateButton.click();
+
+		jsClickNew(updateButton);
 		Thread.sleep(12000);
 		return new DrugCostEstimatorPageMobile(driver);
-		}
-//	public SavingsOppurtunity continueAddDrugDetails(){
-//		
-//		waitforElement(updateButton);
-//		updateButton.click();
-//		if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
-//			return new SavingsOppurtunity(driver);
-//		}
-//		return null;
-//	}
-//	public AddNewDrugModal backToSeach(){
-//		backToSearchBtn.click();
-//		return new AddNewDrugModal(driver);
-//	}
-	public void validateThePage(){
+	}
+
+	// public SavingsOppurtunity continueAddDrugDetails(){
+	//
+	// waitforElement(updateButton);
+	// updateButton.click();
+	// if (driver.getTitle().equalsIgnoreCase("SAVINGS OPPORTUNITY")) {
+	// return new SavingsOppurtunity(driver);
+	// }
+	// return null;
+	// }
+	// public AddNewDrugModal backToSeach(){
+	// backToSearchBtn.click();
+	// return new AddNewDrugModal(driver);
+	// }
+	public void validateThePage() {
 		Assert.assertTrue(editDrugDetailsPage.isDisplayed());
 	}
 

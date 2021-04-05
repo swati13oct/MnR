@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -875,7 +874,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
 	private WebElement nextBestActionModalSelectPlanBtn;
 
-	@FindBy(xpath = "(//button[text()='Compare'])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'show active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare plans')])[1]")
 	private WebElement compareButton;
 
 	//@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
@@ -1008,6 +1007,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	List<WebElement> mapdOrSnpPlansNameOnSummary;
 	@FindBy(xpath = "//h3[contains(@id,'favouriteplanSelect')]")
 	List<WebElement> pdpPlansNameOnSummary;
+	
+	@FindBy(id = "back-to-plans")
+	private WebElement backToPlanComparePage;
+
+	@FindBy(xpath = "//*[contains(@class,'plan_type_head ng-scope')]")
+	public WebElement planTypeHeading;
 	
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -6658,29 +6663,7 @@ public void validateVPPSummaryPage() {
 	Assert.assertTrue("user not navigated to VPP Page",driver.getCurrentUrl().contains("plan-summary"));
 }
 
-/**
- * @author rravind8 This method verifies the NBA Modal for Drug Cost
- */
-public void verifyNextBestActionModalForDrugCost() {
-	waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
-	try {
-		if (nextBestActionModal.isDisplayed()) {
-			if (nextBestActionModalMsg.size() > 1) {
-			Assert.assertTrue(
-					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
-							+ "\n Actual message" + nextBestActionModalMsg.get(1).getText().trim(),
-					nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
-		}else {
-			Assert.assertTrue(
-					"The Drug Cost message is not displayed.../n Expected Message" + NEXT_ACTION_MODAL_MSG_DRUG_COST
-							+ "\n Actual message" + nextBestActionModalMsg.get(0).getText().trim(),
-					nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
-		}
-		}
-	} catch (Exception ex) {
-		System.out.println("NBA modal not found");
-	}
-}
+
 
 public void verifyNBAModalNotDisplayed() {
 	Assert.assertTrue("NBA modal should not be displayed",validateNonPresenceOfElement(nextBestActionModal));
@@ -6914,5 +6897,105 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 		Assert.assertTrue(
 				"Plan listed are not shown correctly expected:" + expectedPlanNames + " Actual: " + actualPlanNames,
 				actualPlanNames.containsAll(expectedPlanNames));
+	}
+
+	public void verifyPlanCompareCheckboxIsChecked(String planIndex, String plantype) {
+		validate(planCompareCheckBox);
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		System.out.println("Plan type" + plantype);
+		if (plantype.equals("MAPD")) {
+			String CheckStatus = js
+					.executeScript("return document.getElementById('compare-plan-" + planIndex + "').checked;")
+					.toString();
+			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			Assert.assertEquals("true", CheckStatus.trim());
+		} else {
+			boolean CheckStatus = driver.findElement(By.xpath(
+					"//*[@class='compare-box']//*[@for='compare-plan-" + planIndex + "']/..//following-sibling::span"))
+					.getAttribute("class").contains("show");
+			// boolean CheckStatus=driver.findElement(By.cssSelector("#plan-list-3 > div >
+			// div.swiper-container > div > div:nth-child("+ planIndex + ") >
+			// div.content-secondary.favourite > div > div.compare-box > span.ng-scope >
+			// label::after")).isDisplayed();
+			System.out.println("Plan compare checkbox status:" + CheckStatus);
+			Assert.assertTrue(CheckStatus);
+		}
+
+		System.out.println("Verified Plan Compare checkbox is checked");
+
+	}
+
+	public void addPlanToCompareByIndex(String planIndex, String plantype) {
+		WebElement Checkbox;
+		if (plantype.equals("MAPD"))
+			Checkbox = driver.findElement(By.xpath("//input[contains(@id,'compare-plan-" + planIndex
+					+ "')]/ancestor::div[contains(@class,'compare-box')]//label"));
+		else
+			Checkbox = driver
+					.findElement(By.xpath("//*[@class='compare-box']//*[@for='compare-plan-" + planIndex + "']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click();", Checkbox);
+	}
+
+	public ComparePlansPage clickCompareButton() {
+		validateNew(compareButton);
+		compareButton.click();
+		CommonUtility.waitForPageLoad(driver, backToPlanComparePage, 30);
+		if (currentUrl().contains("/plan-compare"))
+			return new ComparePlansPage(driver);
+		return null;
+	}
+
+	@FindBy(xpath = "//a//span[contains(text(),'Enroll in plan')]")
+	private WebElement EnrollPlanLinkDSNP;
+
+	public WelcomePage NavigateToOLEEnrollDSNPPlanDetails(String planType) {
+
+		CommonUtility.waitForPageLoadNew(driver, EnrollPlanLinkDSNP, 30);
+		jsClickNew(EnrollPlanLinkDSNP);
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("welcome")) {
+			Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : " + planType, true);
+		} else {
+			Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : " + planType, false);
+		}
+		return new WelcomePage(driver);
+		// return null;
+	}
+//}
+
+	/**
+	 * @author rravind8 This method verifies the NBA Modal for Drug Cost
+	 */
+	public void verifyNextBestActionModalForDrugCost() {
+		waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				if (nextBestActionModalMsg.size() > 1) {
+					Assert.assertTrue(
+							"The Drug Cost message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(1).getText(),
+							nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				} else {
+					Assert.assertTrue(
+							"The Drug Cost message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(0).getText(),
+							nextBestActionModalMsg.get(0).getText().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+
+	public VPPPlanSummaryPage verifyDefaultPlanType(String planType) {
+		validateNew(planTypeHeading);
+		if (planTypeHeading.getText().contains(planType)) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
 	}
 }

@@ -16,8 +16,8 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
-import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
 
 public class AddDrugDetailsMobile extends UhcDriver {
 
@@ -126,7 +126,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 
 		waitforElement(continueButton);
 		continueButton.click();
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunityMobile(driver);
 		}
 		return null;
@@ -148,10 +148,10 @@ public class AddDrugDetailsMobile extends UhcDriver {
 		return new SavingsOppurtunityMobile(driver);
 	}
 
-	public DrugCostEstimatorPage continueAddDrugDetailsModNoSaving() throws InterruptedException {
+	public DrugCostEstimatorPageMobile continueAddDrugDetailsModNoSaving() throws InterruptedException {
 		validateNew(continueButton);
 		continueButton.click();
-		return new DrugCostEstimatorPage(driver);
+		return new DrugCostEstimatorPageMobile(driver);
 	}
 
 	public void selectDosageAttribute(String dosage) throws InterruptedException {

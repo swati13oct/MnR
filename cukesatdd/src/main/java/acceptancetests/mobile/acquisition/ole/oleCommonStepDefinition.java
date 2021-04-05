@@ -16,9 +16,9 @@ import cucumber.api.DataTable;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.ole.WelcomePage;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 

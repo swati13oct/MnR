@@ -25,7 +25,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
 	public WebElement reviewDrugCostPageHeading;
-	
+
 	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
 	public WebElement dceNBAModal;
 
@@ -34,7 +34,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button/*[text()='Create Your Profile']")
 	public WebElement dceNBAModalBtn;
-	
+
 	@FindBy(id = "SignIn")
 	public WebElement signInBtn;
 
@@ -136,7 +136,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		//validateNew(reviewDrugCostPageHeading);
+		// validateNew(reviewDrugCostPageHeading);
 
 	}
 
@@ -165,7 +165,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public DrugSummaryPageMobile verifyPDPPlanToggle() {
-		pdpPlanToggle.click();
+
+		jsClickNew(pdpPlanToggle);
 		if (planTypeHeading.getText().contains("Medicare Prescription Drug Plans")) {
 			return new DrugSummaryPageMobile(driver);
 		}
@@ -173,7 +174,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public DrugSummaryPageMobile verifySNPPlanToggle() {
-		snpPlanToggle.click();
+
+		jsClickNew(snpPlanToggle);
 		if (planTypeHeading.getText().contains("Medicare Special Needs Plans")) {
 			return new DrugSummaryPageMobile(driver);
 		}
@@ -199,16 +201,19 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		// validate(viewProceBtn);
 		// viewProceBtn.click();
 		validate(drugPricingLink);
-		drugPricingLink.click();
+
+		jsClickNew(drugPricingLink);
 	}
 
 	public void clickswitchToGeneric() throws InterruptedException {
 		Thread.sleep(6000);
 		validate(drugTitle);
 		validate(switchToGenericBtn);
-		switchToGenericBtn.click();
+
+		jsClickNew(switchToGenericBtn);
 		validate(switchToGenericSubmitBtn);
-		switchToGenericSubmitBtn.click();
+
+		jsClickNew(switchToGenericSubmitBtn);
 	}
 
 	public void verifyDrugListsUpdated(String genericDrug) throws InterruptedException {
@@ -319,7 +324,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			pageloadcomplete();
 			scrollToView(mapdPlanToggle);
-			//validateNew(mapdPlanToggle);
+			// validateNew(mapdPlanToggle);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
 			WebElement DrugCostsLinkforPlan = driver.findElement(
@@ -331,7 +336,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 		} else if (plantype.equalsIgnoreCase("PDP")) {
 			scrollToView(pdpPlanToggle);
-			//validateNew(pdpPlanToggle);
+			// validateNew(pdpPlanToggle);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
 			WebElement DrugCostsLinkforPlan = driver.findElement(
@@ -343,7 +348,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 		} else {
 			scrollToView(snpPlanToggle);
-			//validateNew(snpPlanToggle);
+			// validateNew(snpPlanToggle);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
 			WebElement DrugCostsLinkforPlan = driver.findElement(
@@ -407,7 +412,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement returnToProfileLink;
 
 	public void verifyReturnToProfileDisplayed() {
-	
+
 		validateNew(returnToProfileLink, 3);
 		scrollToView(returnToProfileLink);
 		try {
@@ -432,15 +437,21 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 	}
 
-//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
-//	public WebElement mapdPlanToggle;
-//
-//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Prescription Drug Plans')]")
-//	public WebElement pdpPlanToggle;
-//
-//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Special Needs Plans')]")
-//	public WebElement snpPlanToggle;
-	
+	// @FindBy(xpath =
+	// "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare
+	// Advantage Plans')]")
+	// public WebElement mapdPlanToggle;
+	//
+	// @FindBy(xpath =
+	// "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare
+	// Prescription Drug Plans')]")
+	// public WebElement pdpPlanToggle;
+	//
+	// @FindBy(xpath =
+	// "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare
+	// Special Needs Plans')]")
+	// public WebElement snpPlanToggle;
+
 	@FindBy(xpath = "//label[@for='ma-plans-radio']//span[contains(text(),'Medicare Advantage Plans')]")
 	public WebElement mapdPlanToggle;
 
@@ -453,17 +464,17 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void validatePremiumForPlan(String premium, String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			scrollToView(mapdPlanToggle);
-			//validateNew(mapdPlanToggle,10);
+			// validateNew(mapdPlanToggle,10);
 			jsClickNew(mapdPlanToggle);
 			System.out.println("MAPD Plan Toggle Clicked");
 		} else if (plantype.equalsIgnoreCase("PDP")) {
 			scrollToView(pdpPlanToggle);
-			//validateNew(pdpPlanToggle,10);
+			// validateNew(pdpPlanToggle,10);
 			jsClickNew(pdpPlanToggle);
 			System.out.println("PDP Plan Toggle Clicked");
 		} else {
 			scrollToView(snpPlanToggle);
-			//validateNew(snpPlanToggle,10);
+			// validateNew(snpPlanToggle,10);
 			jsClickNew(snpPlanToggle);
 			System.out.println("SNP Plan Toggle Clicked");
 		}
@@ -477,22 +488,21 @@ public class DrugSummaryPageMobile extends UhcDriver {
 					+ PremiumDisplayed);
 		}
 	}
-	
-	
+
 	public void validateDCENBAModal() {
-	
+
 		scrollToView(dceNBAModal);
 		if (validateNew(dceNBAModal)) {
 			validateNew(dceNBAModalMsg);
 			validateNew(dceNBAModalBtn);
-			
+
 			jsClickNew(dceNBAModalBtn);
 			waitforElement(signInBtn);
 			Assert.assertTrue("user not navigated to login page",
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
-	
+
 	public void verifyReviewDrugCostPageDisplayed() {
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		if (validateNew(reviewDrugCostPageHeading)) {
