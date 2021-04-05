@@ -1069,7 +1069,7 @@ public class DrugSummaryPage extends UhcDriver {
 		waitforElement(preferredMailPharmacy);
 		preferredMailPharmacy.click();
 	}
-	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'Select Preferred Mail Service Pharmacy')]")
+	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'OptumRx Mail Service Pharmacy')]")
 	public WebElement MailPharmacy;
 	public void selectMailOrderPharmacy() {
 		jsClickNew(MailPharmacy);
