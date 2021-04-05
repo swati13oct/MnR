@@ -12,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.commonpages.SalesforceSitePage;
 
 
 /**

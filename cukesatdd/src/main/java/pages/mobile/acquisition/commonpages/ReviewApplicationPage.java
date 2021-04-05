@@ -14,6 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.SubmitApplicationPage;
 
 /**
  * @author pperugu
@@ -71,11 +72,11 @@ public class ReviewApplicationPage extends UhcDriver{
 		
 	}
 
-	public SubmitApplicationPage navigatesToNextStep() {
+	public SubmitApplicationPageMobile navigatesToNextStep() {
 		enrollmentNext.click();
 		if (pageHeading.getText().equalsIgnoreCase(
 				"Step 5: Submit Application")) {
-			return new SubmitApplicationPage(driver);
+			return new SubmitApplicationPageMobile(driver);
 		}
 		return null;
 		

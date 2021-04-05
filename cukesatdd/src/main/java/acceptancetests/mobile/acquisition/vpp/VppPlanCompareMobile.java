@@ -35,31 +35,31 @@ import io.appium.java_client.AppiumDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.FindCarePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.mobile.acquisition.bluelayer.AgentsAndBrokersPageMobile;
-import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
+import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.AddDrugDetailsMobile;
+import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
+import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageBlayerMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.ContactUsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.DisclaimersAARPPageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.FindCarePageMobile;
+import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.PrivacyPolicyAARPPageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.RequestHelpAndInformationPageMobile;
+import pages.mobile.acquisition.commonpages.RequestMailedInformationMobile;
+import pages.mobile.acquisition.commonpages.SavingsOppurtunityMobile;
+import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfileTestHarnessPageMobile;
+import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.AddDrugDetailsMobile;
-import pages.mobile.acquisition.ulayer.AgentsnBrokersAARPPageMobile;
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
-import pages.mobile.acquisition.ulayer.ContactUsAARPPageMobile;
-import pages.mobile.acquisition.ulayer.DisclaimersAARPPageMobile;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.ulayer.FindCarePageMobile;
-import pages.mobile.acquisition.ulayer.MultiCountyModalPageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.PrivacyPolicyAARPPageMobile;
-import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.ulayer.RequestHelpAndInformationPageMobile;
-import pages.mobile.acquisition.ulayer.RequestMailedInformationMobile;
-import pages.mobile.acquisition.ulayer.SavingsOppurtunityMobile;
-import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfileTestHarnessPageMobile;
-import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -510,7 +510,8 @@ public class VppPlanCompareMobile {
 		dce.verifyPharmacyResults();
 		for (int i = 0; i < dce.getLstPharmacyNames().size(); i++)
 			if (dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
-				dce.getLstSelectPharmacy().get(i).click();
+				// dce.getLstSelectPharmacy().get(i).click();
+				dce.jsClickNew(dce.getLstSelectPharmacy().get(i));
 				break;
 			}
 
@@ -674,7 +675,7 @@ public class VppPlanCompareMobile {
 
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		getLoginScenario().saveBean(planYear, plansummaryPage);
-		
+
 	}
 
 	@And("^the user selects plan year for AARP site$")
@@ -714,11 +715,11 @@ public class VppPlanCompareMobile {
 		int plansForCompare = 0;
 		if (plantype.equalsIgnoreCase("MedicareAdvantage")) {
 			plansummaryPage.clickonViewPlans();
-			//plansummaryPage.handlePlanYearSelectionPopup();
+			// plansummaryPage.handlePlanYearSelectionPopup();
 			plansForCompare = plansummaryPage.checkAllMAPlans();
 		} else {
 			plansummaryPage.clickOnPDPPlans();
-			//plansummaryPage.handlePlanYearSelectionPopup();
+			// plansummaryPage.handlePlanYearSelectionPopup();
 			plansForCompare = plansummaryPage.checkAllPDPlans();
 		}
 		getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
@@ -1591,8 +1592,8 @@ public class VppPlanCompareMobile {
 		case "MAPD":
 			plansummaryPage.viewPlanSummary(planType);
 			if (!planType.equalsIgnoreCase("MS"))
-				//plansummaryPage.handlePlanYearSelectionPopup();
-			plansummaryPage.savePlans(savePlanNames, planType);
+				// plansummaryPage.handlePlanYearSelectionPopup();
+				plansummaryPage.savePlans(savePlanNames, planType);
 			break;
 		case "MA":
 			plansummaryPage.viewPlanSummary(planType);
@@ -1702,7 +1703,7 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
@@ -1715,7 +1716,7 @@ public class VppPlanCompareMobile {
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
-		//plansummaryPage.viewPlanSummary(planType);
+		// plansummaryPage.viewPlanSummary(planType);
 		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
@@ -1758,21 +1759,21 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 
@@ -1805,21 +1806,21 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(snp_savePlanNames, planType);
 	}
 
@@ -1835,19 +1836,19 @@ public class VppPlanCompareMobile {
 		// note: the second plan in the list will be unsaved
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the " + planType + " second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(snp_plans, planType);
 	}
@@ -1895,21 +1896,21 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
 	}
 
@@ -1941,20 +1942,20 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
 	}
@@ -1992,21 +1993,21 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
 		planType = "SNP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
 	}
 
@@ -2017,17 +2018,17 @@ public class VppPlanCompareMobile {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOptionExistOnPage(planType);
 	}
 
@@ -2038,17 +2039,17 @@ public class VppPlanCompareMobile {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOptionExistOnPage(planType);
 	}
 
@@ -2059,17 +2060,17 @@ public class VppPlanCompareMobile {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOption(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOption(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateEmailOption(planType);
 	}
 
@@ -2080,17 +2081,17 @@ public class VppPlanCompareMobile {
 		// ----- MA plan type -----------------------------
 		String planType = "MA";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 		// ----- PDP plan type ----------------------------
 		planType = "PDP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 		// ----- SNP plan type ----------------------------
 		planType = "SNP";
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePrintOption(planType);
 	}
 
@@ -2115,14 +2116,14 @@ public class VppPlanCompareMobile {
 		String planType = "MA";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		// ----- PDP plan type --------------------------
 		planType = "PDP";
 		System.out.println("Proceed to validate " + planType + " saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		//plansummaryPage.handlePlanYearSelectionPopup();
+		// plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validatePlansAreSaved(pdp_savePlanNames, planType);
 
 		// ----- SNP plan type --------------------------
@@ -2644,7 +2645,7 @@ public class VppPlanCompareMobile {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			Assert.assertTrue(true);
-			//plansummaryPage.handlePlanYearSelectionPopup();
+			// plansummaryPage.handlePlanYearSelectionPopup();
 		} else
 			Assert.fail("Error in navigating back to Plan Summary Page");
 
@@ -3245,7 +3246,7 @@ public class VppPlanCompareMobile {
 
 	@And("^user selects helper mode for Redirect to VPP from DCE on AARP$")
 	public void user_selects_helper_mode_for_Redirect_to_VPP_from_DCE_on_AARP() throws Exception {
-		pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile vppTestHarnessPage = (pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile) loginScenario
+		pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile vppTestHarnessPage = (pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile) loginScenario
 				.getBean(PageConstants.VPP_TESTHARNESS_PAGE);
 		vppTestHarnessPage.redirecttoVPPfromDCE();
 		VPPPlanSummaryPageMobile plansummaryPage = vppTestHarnessPage.navigateToVPP();
@@ -3729,7 +3730,7 @@ public class VppPlanCompareMobile {
 		if (!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 	}
-	
+
 	@Then("^user fills out medsup form and proceeds to next pages mobile$")
 	public void fillOutMedSuppForm(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -3744,10 +3745,9 @@ public class VppPlanCompareMobile {
 		String zipCode = memberAttributesMap.get("Zip Code");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.fillDetails(zipCode,DateOfBirth);
-		
+		plansummaryPage.fillDetails(zipCode, DateOfBirth);
+
 	}
-	
 
 	@Then("^agent saves two plans as favorite on AARP site for user$")
 	public void agent_saves_two_plans_as_favorite_on_AARP_site_for_user(DataTable givenAttributes) {
@@ -4227,7 +4227,7 @@ public class VppPlanCompareMobile {
 		}
 
 	}
-	
+
 	@And("^user clicks on disclaimers link of terms & conditions page$")
 	public void click_disclaimers1() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -4241,7 +4241,7 @@ public class VppPlanCompareMobile {
 			Assert.fail("disclaimers page not found");
 		}
 	}
-	
+
 	@Then("^the user clicks on back on all plan link in Plan Compare page")
 	public void user_clicks_back_to_all_plan_PlanCompare_page() throws InterruptedException {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4250,12 +4250,12 @@ public class VppPlanCompareMobile {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			Assert.assertTrue(true);
-			//plansummaryPage.handlePlanYearSelectionPopup();
+			// plansummaryPage.handlePlanYearSelectionPopup();
 		} else
 			Assert.fail("Error in navigating back to Plan Summary Page");
 
 	}
-	
+
 	@Then("^verify plan compare page is loaded$")
 	public void verify_plan_compare_page_is_loaded_on_AARP1() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4284,7 +4284,7 @@ public class VppPlanCompareMobile {
 		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
 		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
 	}
-	
+
 	@And("^user clicks on privacy policy link of sitemap page$")
 	public void click_privacypolicy1() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -4298,7 +4298,7 @@ public class VppPlanCompareMobile {
 			Assert.fail("privacypolicy page not found");
 		}
 	}
-	
+
 	@And("^user clicks on sitemap link of contact us page$")
 	public void click_sitemap1() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -4312,7 +4312,7 @@ public class VppPlanCompareMobile {
 			Assert.fail("sitemap page not found");
 		}
 	}
-	
+
 	@And("^user clicks on contact us link of aboutus page$")
 	public void click_contact_us() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -4325,7 +4325,6 @@ public class VppPlanCompareMobile {
 			Assert.fail("contactus page not found");
 		}
 	}
-	
 
 	@And("^user clicks on About us link from footer of the Medicare Plans home page$")
 	public void click_about_us() {
@@ -4340,7 +4339,7 @@ public class VppPlanCompareMobile {
 		}
 
 	}
-	
+
 	@Then("^user verify the popup and content on Plan Comapare Page$")
 	public void user_verify_the_popup_and_content_PlanCompare_Page() throws InterruptedException {
 
@@ -4348,7 +4347,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallpopup();
 	}
-	
+
 	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_Page()
 			throws InterruptedException {
@@ -4358,7 +4357,7 @@ public class VppPlanCompareMobile {
 		planComparePage.validateCallSamContent();
 
 	}
-	
+
 	@Then("^validate OON Toggle is displayed on medical and additional benefits$")
 	public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4372,7 +4371,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateOONNotDisplayed();
 	}
-	
+
 	@Then("^remove \"([^\"]*)\" plan from new plan compare page$")
 	public void remove_plan_from_new_plan_compare_page_for_UHC(String planIndices) throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4393,7 +4392,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateAllPlansShown();
 	}
-	
+
 	@And("^I click on Get Started on and Add Places from Hospitals find care page$")
 	public void I_click_on_Get_Started_and_Add_PlacesfromHospitals_find_care_page() throws Exception {
 		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
@@ -4410,7 +4409,7 @@ public class VppPlanCompareMobile {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
-	
+
 	@Then("^check one plan and add it to plancompare")
 	public void check_one_plan_and_add_it_to_plancompare() throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -4423,7 +4422,7 @@ public class VppPlanCompareMobile {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
-	
+
 	@When("^user selects a Hospitals and retuns to VPP page$")
 	public void user_selects_Hospitals_and_return_vpp_page() {
 		{
@@ -4434,15 +4433,15 @@ public class VppPlanCompareMobile {
 
 		}
 	}
-	
+
 	@Then("^verify Your doctors is loaded with doctor summary on Plan Compare page$")
 	public void verify_doctors_covered() {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		
+
 		planComparePage.validateDoctors();
 		planComparePage.clickPlanAvailableText();
-		
+
 	}
 
 	@And("^click on Edit your doctors link and Navigate to Rally page$")
@@ -4455,17 +4454,15 @@ public class VppPlanCompareMobile {
 		} else
 			Assert.fail("Error in loading the compare plans page");
 	}
-	
-
 
 	@And("^user selects a provider from medical group and retuns to plan compare page$")
 	public void selectsproviderfrommedicalGroup() throws Exception {
 		FindCarePageMobile findCarePage = (FindCarePageMobile) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
-		
+
 		ComparePlansPageMobile planComparePage = findCarePage.providerfromMedicalGroup();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-			
+
 			// comparePlansPage.backToVPPPage();
 		} else
 			Assert.fail("Error in loading the compare plans page");
@@ -4560,16 +4557,13 @@ public class VppPlanCompareMobile {
 			Assert.fail("Error in loading the compare plans page");
 	}
 
-
-	
-	
 	@Then("^Verify newly added plan displayed on new plan compare page$")
 	public void verify_newly_added_plan_displayed_on_new_plan_compare_page() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validatenewlyAddPlanonNewPlanComapre();
 	}
-	
+
 	@Given("^I select \"([^\"]*)\" plans and \"([^\"]*)\" plans to compare and click on compare plan link$")
 	public void i_select_plans_and_plans_to_compare_and_click_on_compare_plan_link(String planType, String Counter)
 			throws Throwable {
@@ -4596,28 +4590,28 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnNewAddIcon();
 	}
-	
+
 	@Then("^remove one plan from new plan compare page$")
 	public void remove_one_plan_from_new_plan_compare_page() throws Throwable {
-		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile ) getLoginScenario()
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnNewRemoveLink();
 	}
 
 	@Then("^click on back to plans on plan compare page$")
 	public void click_on_back_to_plans_on_plan_compare_page() throws Throwable {
-		ComparePlansPageMobile  planComparePage = (ComparePlansPageMobile ) getLoginScenario()
+		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.clickOnBacktoPlans();
 	}
 
 	@Then("^Verify the Plan compare checkbox should be unchecked for the removed plan$")
 	public void verify_the_Plan_compare_checkbox_should_be_unchecked_for_the_removed_plan() throws Throwable {
-		VPPPlanSummaryPageMobile  plansummaryPage = (VPPPlanSummaryPageMobile ) getLoginScenario()
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyPlanComapreCheckboxIsUnchecked();
 	}
-	
+
 	@When("^verify Call SAM icon is visible or not on Plan Comapare Page$")
 	public void verify_Call_SAM_icon_is_visible_or_not_PlanCompare_Page() throws InterruptedException {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4627,7 +4621,7 @@ public class VppPlanCompareMobile {
 		Assert.assertTrue(true);
 		System.out.println("TFN Widget is Displayed");
 	}
-	
+
 	@Then("^verify plan compare checkbox is not visible on plan summary$")
 	public void verify_plan_compare_checkbox_is_not_visible_on_plan_summary() throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -4636,7 +4630,7 @@ public class VppPlanCompareMobile {
 		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ", validationFlag);
 
 	}
-	
+
 	@Then("^the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare")
 	public void user_clicks_enrollInPlan_newPlanCompare() throws InterruptedException {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
@@ -4698,7 +4692,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.CounterDentalFlyerLink(PDFtype, DocCode);
 	}
-	
+
 	@Then("^validate view locations popup on compare page$")
 	public void validate_view_locations_popup_on_compare_page() throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()

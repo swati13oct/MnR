@@ -6,6 +6,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.commonpages.UHCRetireeASRSPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeASRSProviderPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeEdisionProviderPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeEdisonPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeSHBPPage;
+import pages.mobile.acquisition.commonpages.UHCRetireeSHBPProviderPage;
 
 
 /**

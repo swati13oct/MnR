@@ -43,7 +43,7 @@ public class CreateAccountPage extends UhcDriver{
 		openAndValidate();
 	}
 
-	public RegistrationSuccessPage createAccount(
+	public RegistrationSuccessPageMobile createAccount(
 			Map<String, String> memberAttributesMap) {
 
 		String userName = memberAttributesMap.get("Create a username");
@@ -74,7 +74,7 @@ public class CreateAccountPage extends UhcDriver{
 		}
 
 		if (currentUrl().contains("/home/register-success.html")) {
-			return new RegistrationSuccessPage(driver);
+			return new RegistrationSuccessPageMobile(driver);
 		}
 		return null;
 

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.LocationSearchPage;
 
 
 public class GetStartedPage extends UhcDriver {
@@ -27,11 +28,11 @@ public class GetStartedPage extends UhcDriver {
 	       openAndValidate();
 	}
 
-	public LocationSearchPage getStarted() {
+	public LocationSearchPageMobile getStarted() {
 		getStartedLink.click();
 		if(currentUrl().contains("enterZipCode"))
 		{
-			return new LocationSearchPage(driver);
+			return new LocationSearchPageMobile(driver);
 		}
 		else
 			return null;
@@ -44,14 +45,14 @@ public class GetStartedPage extends UhcDriver {
 		
 	}
 	
-	public AddDrugPage navigateToDCE(){
+	public AddDrugPageMobile navigateToDCE(){
 		enterDrugLink.click();
 		getStartedLink.click();
-		return new AddDrugPage(driver);
+		return new AddDrugPageMobile(driver);
 		
 	}
 		  
-	public AddDrugPage clicksOnGetStarted() {
+	public AddDrugPageMobile clicksOnGetStarted() {
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -64,7 +65,7 @@ public class GetStartedPage extends UhcDriver {
 		}catch(Exception e){
 			System.out.println("phantomjs doesn't support the element on switched iframe");
 		}
-		return new AddDrugPage(driver);
+		return new AddDrugPageMobile(driver);
 	}	 
 
 }

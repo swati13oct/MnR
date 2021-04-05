@@ -23,11 +23,11 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.VisitorProfileTestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 /**
  * @author bnaveen4
  * Functionality:Visitor Profile for both AAPR and UHC acquisition sites
@@ -70,7 +70,7 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savedPlanNames = givenAttributesMap.get("Test Plans");
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
 	
@@ -79,14 +79,14 @@ public class VisitorProfileMobileStepDefinition {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
 		
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 	
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page mobile$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site1() throws InterruptedException {
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesign();
@@ -112,7 +112,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user clicks on the add plans button in the profile$")
 	public void the_user_clicks_on_the_add_plans_button_in_the_profile_in_AARP_site() throws Exception {
 		
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		AcquisitionHomePageMobile acqPage = visitorProfilePage.addPlan();
@@ -211,7 +211,7 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("Test Plans");
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedPlans(savePlanNames);
 	}
 	
@@ -225,7 +225,7 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String savePlanNames = givenAttributesMap.get("MS Test Plans");
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfile = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedMsPlans(savePlanNames);
 	}
 	
@@ -268,7 +268,7 @@ public class VisitorProfileMobileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String planName = givenAttributesMap.get("Test Plans");
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		PlanDetailsPageMobile planDetails = visitorProfilePage.navigateToPlanDetails(planName.split(",")[0]);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, planDetails);
 		System.out.println(planDetails);
@@ -349,7 +349,7 @@ public class VisitorProfileMobileStepDefinition {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = plansummaryPage.continueAsGuest();
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfilePage = plansummaryPage.continueAsGuest();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 
 	}
@@ -496,7 +496,7 @@ public class VisitorProfileMobileStepDefinition {
 	@And("^the user back to VPP plan summary page$")
 	public void the_user_back_to_VPP_plan_summary_page_in_aarp() {
 		
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		VPPPlanSummaryPageMobile planSummary = visitorProfilePage.backToPlans();
