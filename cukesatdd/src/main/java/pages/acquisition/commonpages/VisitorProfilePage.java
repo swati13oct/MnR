@@ -78,7 +78,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 
-	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign Out']")
+	@FindBy(xpath = "(//a[text()='Sign Out'])[2]")
 	private WebElement signOut;
 
 	@FindBy(id = "enrollment-next-button")
@@ -580,7 +580,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");

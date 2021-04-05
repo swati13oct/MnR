@@ -24,7 +24,8 @@ import cucumber.api.CucumberOptions;
 		outputFolder = "target/RunMRATDDAcquisitionSanityPlanRecommendationEngineBlayer01")
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" },
-		features = { "src/main/resources/feature/acquisition/PlanRecommendationEngine" },
+		features = {
+				"src/main/resources/feature/acquisition/PlanRecommendationEngine/PlanRecommendationEngineBusinessScenarios.feature" },
 		plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionSanityPlanRecommendationEngineBlayer01.json" }, tags = {
 						"@SanityPRE_01" })

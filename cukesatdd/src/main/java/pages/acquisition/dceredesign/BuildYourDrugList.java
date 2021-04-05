@@ -389,7 +389,7 @@ public class BuildYourDrugList extends UhcDriver {
 			for(i=0; i<DrugCount_Total; i++) {
 				currentDrug = DrugListItems[i];
 				for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
-					if (CurrentDrugRecommendation.getText().contains(currentDrug)) {
+					if (currentDrug.contains(CurrentDrugRecommendation.getText())) {
 						Assert.fail(currentDrug+" is also Displayed in Drug Recommendations - Validation FAILED");
 					}
 				}
