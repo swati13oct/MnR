@@ -868,7 +868,7 @@ public class CommonConstants {
 	public static final String CONNECTION_URL_UAT19 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0103:1521/gpsts19";
 	public static final String CONNECTION_URL_UAT18 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
 	public static final String CONNECTION_URL_UAT20 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0104:1521/gpsts20";
-	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
+	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@es08-scan01:1521/gpsst04_1svc_trn.uhc.com";
 	
 	
 	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Stage";// or Optum-Prd;
@@ -957,6 +957,7 @@ public class CommonConstants {
 
 	public static final String DB_ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	
+	public static final String CAMPAIGN_EXTERNAL_LINK_TFNNO = "campaignExternalLinkTfnNo";
 
 	public static String SELECTED_STATE = null;
 	
@@ -986,3 +987,5 @@ public class CommonConstants {
 	//
 	public static String PARTDIRMAA_TEXT    = "Please DO NOT pay the plan the Part D-IRMAA at this time.";
 }
+
+

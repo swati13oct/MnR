@@ -10,10 +10,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import acceptancetests.data.PageConstants;

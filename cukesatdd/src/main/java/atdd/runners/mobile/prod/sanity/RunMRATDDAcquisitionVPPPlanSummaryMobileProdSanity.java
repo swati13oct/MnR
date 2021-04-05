@@ -12,10 +12,13 @@ import cucumber.api.CucumberOptions;
  * RunMRATDDAcquisitionVPPPlanSummaryMobileProd
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity")
+@ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", 
+jsonReport = "target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json", detailedReport = true, 
+detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
 		"src/main/resources/feature/mobile/acquisition/vpp/" }, plugin = { "pretty", "html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json" }, tags = { "@vppPlanSummaryAARP", "@OnlyProd" })
+				"json:target/cucumber-RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity.json" }, tags = {  "@vppPlanSummaryAARP", "@OnlyProd"})
 public class RunMRATDDAcquisitionVPPPlanSummaryMobileProdSanity {
 
 }
+//"@vppPlanSummaryAARP", "@OnlyProd" "@ATAT"

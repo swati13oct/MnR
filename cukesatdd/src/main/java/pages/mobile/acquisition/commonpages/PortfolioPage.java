@@ -246,7 +246,7 @@ public class PortfolioPage extends UhcDriver {
 		return null;
  }
 
-public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) throws InterruptedException {
+public ResponsivePlanSummaryMobile searchPlans(String zipcode, String CountyName) throws InterruptedException {
 	  driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 //    WebDriverWait wait = new WebDriverWait(driver, 40);
 //    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.id("zipcode")));
@@ -284,7 +284,7 @@ public ResponsivePlanSummary searchPlans(String zipcode, String CountyName) thro
             }
     }
         if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
-                 return new ResponsivePlanSummary(driver);
+                 return new ResponsivePlanSummaryMobile(driver);
         } 
         return null;
 	}

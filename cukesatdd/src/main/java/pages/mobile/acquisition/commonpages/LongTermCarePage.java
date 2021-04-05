@@ -128,9 +128,9 @@ public class LongTermCarePage extends UhcDriver{
 				return new MedicaidPage(driver);
 		}
 	
-	public PlanPaymentOptions navigatesToNextStepPDP() {
+	public PlanPaymentOptionsMobile navigatesToNextStepPDP() {
 		longtermcaredsaveandcontinue.click();
-			return new PlanPaymentOptions(driver);
+			return new PlanPaymentOptionsMobile(driver);
 		
 	}
 		

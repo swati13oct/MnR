@@ -21,6 +21,12 @@ Scenario Outline: <scenario> Verify request an appointment through <pageName>
 	  	|E2E Scenario 2_UMS	    |UHC	  | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
       |E2E Scenario 2_UMS     |	UHC	  | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 		 
       	
+   		@agentFlowEBRCBlayer @UATRegression @ISAgentAppointmentUHC
+   		Examples:
+   		|scenario               |	site	| path                                                        | pageName                     | UHCUrl                     |
+   		|E2E Scenario 2_UMS	   |UHC	      | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
+   	
+   	
    	@agentFlowEBRCUlayer @UATRegression
     Examples: 
       |scenario               |	site	| path                                                        | pageName                     | UHCUrl                     | 
@@ -32,7 +38,6 @@ Scenario Outline: <scenario> Verify request an appointment through <pageName>
 	 		|E2E Scenario 2_AMP	    |AARP	  | shop/medicare-supplement-plans.html              | ShopPlan: Shop Med Supp Plan |	 https://www.myuhcagent.com/| 		
       |E2E Scenario 2_AMP     |AARP	  | shop/prescription-drug-plans.html                | ShopPlan: Shop PDP Plan      |  https://www.myuhcagent.com/| 		 
       |E2E Scenario 2_AMP     | AARP	| shop/dual-special-needs-plans.html               | ShopPlan: Shop DSNP Plan      |  https://www.myuhcagent.com/| 		 
-      
       
       
 
@@ -79,12 +84,12 @@ Given the user is on medicare acquisition site landing page
    		When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
       |UHC Agent URL|  <UHCUrl>  |
 
-@agentFlowEBRCBlayer  @UATRegression  		
+@agentFlowEBRCBlayer  @UATRegression  @ISAgentAgentAppointmentUHC		
   Examples: 
     |scenario            | zipcode | isMultutiCounty |  county             | plantype | DOB      | Firstname | Lastname|  site|UHCUrl                     |
     |E2E Scenario 4_UMS  |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |  AARP  |https://www.myuhcagent.com/|   
 	
-@agentFlowEBRCUlayer @UATRegression
+@agentFlowEBRCUlayer @UATRegression @ISAgentAgentAppointmentAARP	
    Examples: 
    |scenario            | zipcode | isMultutiCounty |  county             | plantype | DOB      | Firstname | Lastname|  site|UHCUrl                     |
     |E2E Scenario 4_AMP  |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry   |  AARP  |https://www.myuhcagent.com/|   

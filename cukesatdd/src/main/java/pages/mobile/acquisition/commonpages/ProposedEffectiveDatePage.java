@@ -67,7 +67,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 		proposedDate.click();
 	}
 	
-	public ReviewAndSubmitPage clickOnSaveAndContinue(String plantype){
+	public ReviewAndSubmitPageMobile clickOnSaveAndContinue(String plantype){
 		//if(segmentHeading.getText().contains("Proposed Effective Date")){
 			saveAndContinue.click();
 			try {
@@ -76,7 +76,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 				    //Handle exception
 				}
 			
-			return new ReviewAndSubmitPage(driver,plantype);	
+			return new ReviewAndSubmitPageMobile(driver,plantype);	
 		//}
 		//return null;
 	}

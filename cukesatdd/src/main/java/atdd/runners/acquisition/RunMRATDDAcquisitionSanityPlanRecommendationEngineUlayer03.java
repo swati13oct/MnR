@@ -25,7 +25,7 @@ import cucumber.api.CucumberOptions;
 @CucumberOptions(
 		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" },
 		features = {
-				"src/main/resources/feature/acquisition/PlanRecommendationEnginePlanRecommendationEngineBusinessScenarios.feature" },
+				"src/main/resources/feature/acquisition/PlanRecommendationEngine/PlanRecommendationEngineBusinessScenarios.feature" },
 		plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionSanityPlanRecommendationEngineUlayer03.json" },
 		tags = { "@SanityPRE_03" })
