@@ -1,12 +1,19 @@
 package acceptancetests.acquisition.campaignExternalLinkE2E;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
@@ -358,7 +365,7 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 	}
 
 	@And("^the user enters following details on Pharmacy search page$")
-	public void the_user_enters_following_details_on_Pharmacy_search_page(DataTable givenAttributes) {
+	public void the_user_enters_following_details_on_Pharmacy_search_page(DataTable givenAttributes) throws InterruptedException {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
@@ -384,9 +391,13 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		noteList.add("");
 		noteList.add("===== TEST NOTE ================================================");
 
+		
+		
+		  String testSiteUrl = "https://www.aarpmedicareplans.com/"; 
 		/*
-		 * String testSiteUrl = "https://www.aarpmedicareplans.com/"; String
-		 * currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
+		 * String currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
+		 * 
+		 * 
 		 * noteList.add("test run at stage time =" + currentEnvTime);
 		 * 
 		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME,
@@ -399,11 +410,56 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR,
 		 * envTimeYear);
 		 */
+		  
+		  	String timeStr = "";
+			String winHandleBefore = wd.getWindowHandle();
+			System.out.println("Proceed to open a new blank tab to check the system time");
+			// tbd String urlGetSysTime=testSiteUrl+
+			// "/DCERestWAR/dcerest/profiledetail/bConnected";
+			String urlGetSysTime = testSiteUrl + "/PlanBenefitsWAR/profiledetail/aarp";
+			System.out.println("test env URL for getting time: " + urlGetSysTime);
+			// open new tab
+			JavascriptExecutor js = (JavascriptExecutor) wd;
+			js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
+			//String winHandleAfter = wd.getWindowHandle();
+			for (String winHandle : wd.getWindowHandles()) {
+				
+				wd.switchTo().window(winHandle);
+				if(wd.getTitle().equalsIgnoreCase(""))
+					break;
+				}
+			
+			Thread.sleep(2000);
+			WebElement currentSysTimeElement = wd.findElement(By.xpath("//body"));
+			String currentSysTimeStr = currentSysTimeElement.getText();
+			System.out.println("currentSysTimeStr=" + currentSysTimeStr);
+			JSONParser parser = new JSONParser();
+			org.json.simple.JSONObject jsonObj;
+			try {
+				jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+				org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj;
+
+				org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data");
+				timeStr = (String) dataObj.get("systemDate");
+			} catch (ParseException e) {
+				e.printStackTrace();
+				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+			}
+			wd.close();
+			wd.switchTo().window(winHandleBefore);
+		
+			String[] tmpDateAndTime = timeStr.split(" "); 
+			String[] tmpDate =tmpDateAndTime[0].split("/"); 
+			String envTimeYear = tmpDate[tmpDate.length - 1]; 
+			System.out.println("TEST - sysTimeYear=" + envTimeYear);
+		 
 
 		List<String> testNote = pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
 		noteList.addAll(testNote);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
 
 	}
 
