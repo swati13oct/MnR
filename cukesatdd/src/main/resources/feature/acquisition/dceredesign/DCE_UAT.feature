@@ -179,7 +179,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates the LIS Banner for the below LIS Buydown plan on Drug Summary Page
       | Plan Name | <newplanname> |
     Then the user selects View Drug details for following plantype and PlanName
-      | Plan Type | <plantype>       |
+      | Plan Type | <plantype0>       |
       | Plan Name | <updateplanname> |
     Then the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
     Then the user searches and adds the following Drug to Drug List
@@ -204,13 +204,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
     @DCE_E2E_Scenario6_UAT_AARP
     Examples: 
-      | Scenario            | site | path                                                                                                                      | zipcode | county             | isMultutiCounty |plantype | planname                                         | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county2            | updateplanname                       | insulinDrug1   | insulinDrug2                                    | insulinCopay |
-     | E2E Scenario 6_AARP  | AARP  | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary| 90210   | Los Angeles County | NO              |PDP      | AARP MedicareRx Walgreens (PDP)                   | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |
+      | Scenario            | site | path                                                                                                                      | zipcode | county             | isMultutiCounty |plantype | planname                                         | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county2            | plantype0 | updateplanname                      | insulinDrug1   | insulinDrug2                                    | insulinCopay |
+     | E2E Scenario 6_AARP  | AARP  | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary| 90210   | Los Angeles County | NO              |PDP      | AARP MedicareRx Walgreens (PDP)                   | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | MAPD     |AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |
 
     @DCE_E2E_Scenario6_UAT_UHC
     Examples: 
-     | Scenario            | site | path                                                                                                                      | zipcode | county             | isMultutiCounty |plantype | planname                                         | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county2            | updateplanname                       | insulinDrug1   | insulinDrug2                                    | insulinCopay |
-     | E2E Scenario 6_UMS  | UHC  | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary| 90210   | Los Angeles County | NO              |PDP      | AARP MedicareRx Walgreens (PDP)                   | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |
+      | Scenario            | site | path                                                                                                                      | zipcode | county             | isMultutiCounty |plantype | planname                                         | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county2            | plantype0 | updateplanname                      | insulinDrug1   | insulinDrug2                                    | insulinCopay |
+     | E2E Scenario 6_UMS  |UHC  | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary| 90210   | Los Angeles County | NO              |PDP      | AARP MedicareRx Walgreens (PDP)                   | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | MAPD     |AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |
 
   @DCE_E2E_Scenario1_UAT
   Scenario Outline: <Scenario> : To verify that user navigates VPP Compare to DCE Add drug, then Drugin modal to DCE details, verify the drug costs and enroll in plan
@@ -224,6 +224,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Plan Type | <plantype> |
     And I select "<plantype>" plans to compare and click on compare plan link
     And I access the DCE Redesign from Plan compare page
+    Then the user validates error message for blank search
+    Then the user validates No Drug found error message for search
      Then user enter the following drug info and validates drug autocomplete
       | DrugNameAutoComplete | <drugnameAutocomplete> |
     Then the user selects the following Brand Name drug from the dropdown
@@ -307,18 +309,18 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug3> |
+    #Then the user searches and adds the following Drug to Drug List
+      #| DrugName | <drug1> |
+    #Then the user searches and adds the following Drug to Drug List
+      #| DrugName | <drug2> |
+    #Then the user searches and adds the following Drug to Drug List
+      #| DrugName | <drug3> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-    When user enter invalid zipcode
-      | inValidzipCode | <invalidzipcode2> |
-    Then error message should be displayed
+    #When user enter invalid zipcode
+      #| inValidzipCode | <invalidzipcode2> |
+   # Then error message should be displayed
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
@@ -345,7 +347,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates Switch to generic for following Brand Drug to Generic from Drug Summary - Drug Pricing Modal
       | Brand Drug   | <drug4>        |
       | Generic Drug | <genericDrug1> |
-    #And user click on PDP plan to view drug pricing
+    ##And user click on PDP plan to view drug pricing
     And the user Captures Drug costs on Drug Summary Page for the given plan
       | Plan Name | <planName> |
     Then the user selects View Drug details for following plantype and PlanName
@@ -410,9 +412,9 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     @DCE_E2E_Scenario3_UAT_AARP
     Examples: 
       | Scenario           | site | zipCode | county          | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy                  | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                                 | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
-      | E2E Scenario 3_AMP | AARP |   78006 | Bexar County    |           00000 | YES            |           99619 |            55344   |  ROCK PHARMACY                   | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
+      | E2E Scenario 3_AMP | AARP |   78006 | Bexar County    |           00000 | YES            |           99619 |            55344   |  ROCK PHARMACY                  | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
 
     @DCE_E2E_Scenario3_UAT_UHC
     Examples: 
       | Scenario           | site | zipCode | county          | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy                  | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                                 | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
-      | E2E Scenario 3_UMS | UHC |   78006  | Bexar County    |           00000 | YES            |           99619 |            55344   |  ROCK PHARMACY                   | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
+      | E2E Scenario 3_UMS | UHC |   78006  | Bexar County    |           00000 | YES            |           99619 |            55344   |  ROCK PHARMACY                   | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
