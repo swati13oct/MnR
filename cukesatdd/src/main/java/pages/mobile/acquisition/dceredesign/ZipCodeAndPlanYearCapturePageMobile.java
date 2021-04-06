@@ -107,15 +107,19 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
-		
+
 		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
 		try {
 			if (countyDropdown.isDisplayed()) {
-				//countyDropdown.click();
-				jsClickNew(countyDropdown);
-				CommonUtility.waitForPageLoad(driver,countyRows , 30);
-				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
+
+//				countyDropdown.click();
+//				jsClickNew(countyDropdown);
+//				CommonUtility.waitForPageLoad(driver, countyRows, 30);
+				WebElement countyValue = driver.findElements(By.xpath("//select[@id='county']/option")).get(1);
+				String cvalue = countyValue.getText();
+				mobileSelectOption(countyDropdown, cvalue, true);
+
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
@@ -127,9 +131,9 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		validateNew(continueBtn);
 		jsClickNew(continueBtn);
 		waitForPageLoadSafari();
-		//CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		// CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
-		if(validateNew(reviewDrugCostPageHeading)) {
+		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
 		}
 		Assert.fail("DCE - Drug Summary Page is not displayed");
@@ -138,7 +142,6 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public ZipCodeAndPlanYearCapturePageMobile validateZipCodePlanYearCapturePageNonAEP() {
 		try {
-
 
 			mobileUtils.mobileLocateElement(zipCodeTxtbox);
 			mobileUtils.mobileLocateElement(countyDropdown);
@@ -181,8 +184,8 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			jsClickNew(planYearDropdown);
 			Select planYear = new Select(planYearDropdown);
 			planYear.selectByIndex(1);
-		}else
-			return ;
+		} else
+			return;
 	}
 
 	public void enterZipCode(String zipcode) {

@@ -1,7 +1,7 @@
 @DCE_Redesign_VPP_Details
 Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan Details in AARP site
 
-  @DCE_Redesign_VPP_PlanDetails @OnlyProd
+  @DCE_Redesign_VPP_PlanDetails 
   Scenario Outline: 1.10.2.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Details
     Given the user is on medicare acquisition site landing page
     	|Site| <site>|

@@ -1,3 +1,4 @@
+
 /**
  * 
  */
@@ -7,7 +8,6 @@ import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,7 +20,7 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.ConfirmYourEligibilityPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 
 /**
  * @author sdwaraka
@@ -207,49 +207,32 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
 
-		firstNameField.sendKeys(Keys.TAB);
-		
-		jsSendkeys(firstNameField, FirstName);
-		
-		
-		
-		scrollToView(lastNameField);
-		
-		jsSendkeys(lastNameField, LastName);
-		
-		
-		jsSendkeys(DOBtxtFld, DOB);
+		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(lastNameField, LastName);
+
+		sendkeys(DOBtxtFld, DOB);
 		if (Gender.contains("Male")) {
-		//	scrollToView(GenderSelectMale);
+			// GenderSelectMale.click();
 			jsClickNew(GenderSelectMale);
 		} else {
-			
+			// GenderSelectFemale.click();
 			jsClickNew(GenderSelectFemale);
 		}
-		
-	
-		jsSendkeys(PermanentAdd_Street, Perm_Street);
-		
-		
-		jsSendkeys(PermanentAdd_City, Perm_city);
+		sendkeys(PermanentAdd_Street, Perm_Street);
+		// sendkeys(PermanentAdd_Aptno,Perm_Aptno);
+		sendkeys(PermanentAdd_City, Perm_city);
 		System.out.println("Mailing Question : " + MailingQuestion);
 		if (MailingQuestion.equalsIgnoreCase("no")) {
-			
-		
 			jsClickNew(SameMailingAddressNo);
-			
-			jsSendkeys(MailingAdd_Street, Mailing_Street);
-			
-			jsSendkeys(MailingAdd_City, Mailing_City);
-			//scrollToView(MailingAdd_State_DropDown);
+			// CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
+			sendkeysNew(MailingAdd_Street, Mailing_Street);
+			// sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
+			sendkeys(MailingAdd_City, Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
-			
-			
-			jsSendkeys(MailingAdd_Zip, Mailing_Zip);
+			sendkeysNew(MailingAdd_Zip, Mailing_Zip);
 		}
-		
-		jsSendkeys(Email, EmailAddress);
+		sendkeys(Email, EmailAddress);
 
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
@@ -645,3 +628,4 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	}
 
 }
+

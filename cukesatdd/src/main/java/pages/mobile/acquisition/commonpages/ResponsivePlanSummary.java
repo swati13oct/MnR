@@ -17,16 +17,16 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedAStepBackWidgetMobile;
-import pages.mobile.acquisition.ulayer.VPPAarpNeedHelpWidgetPageMobile;
-import pages.mobile.acquisition.ulayer.VPPNeedMoreInformationWidgetMobile;
-import pages.mobile.acquisition.ulayer.VPPRequestSendEmailPageMobile;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
+import pages.mobile.acquisition.commonpages.VPPAarpNeedAStepBackWidgetMobile;
+import pages.mobile.acquisition.commonpages.VPPAarpNeedHelpWidgetPageMobile;
+import pages.mobile.acquisition.commonpages.VPPNeedMoreInformationWidgetMobile;
+import pages.mobile.acquisition.commonpages.VPPRequestSendEmailPageMobile;
 
 public class ResponsivePlanSummary extends UhcDriver{
 	
@@ -476,7 +476,7 @@ public void comparePlanslnk() throws InterruptedException{
 	 }
 	 */
 	 
-	 public ResponsivePlanDetails viewPlanDetails(String planName)
+	 public ResponsivePlanDetailsMobile viewPlanDetails(String planName)
 	 {
 	               List<WebElement> plans = driver.findElements(By.xpath("//h2[contains(text(),'AARP')][1]"));
 	               System.out.println("PLANS SIZE :: "+plans.size());
@@ -493,7 +493,7 @@ public void comparePlanslnk() throws InterruptedException{
 	                                          // TODO Auto-generated catch block
 	                                          e.printStackTrace();
 	                                   }
-	                                   return new ResponsivePlanDetails(driver);
+	                                   return new ResponsivePlanDetailsMobile(driver);
 	                            }
 	                            break;
 	                      }
@@ -1035,11 +1035,11 @@ public void comparePlanslnk() throws InterruptedException{
 					
 				}
 				
-				public AddDrugPage addDrug(){
+				public AddDrugPageMobile addDrug(){
                     driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
                     addaDrug.click();
                     System.out.println("Add a new drug popup should appear");
-                    return new AddDrugPage(driver);
+                    return new AddDrugPageMobile(driver);
             }
 				
 				public VPPPlanSummaryPageMobile clicksOnEnterDrugInformationLink(String planName) {
@@ -1122,8 +1122,8 @@ public void comparePlanslnk() throws InterruptedException{
 		 				 System.out.println("========="+planName+" is selected to compare===========");
 						 }
 					 
-					 public ULayerVASPage navigateToULayerVASPage(){
+					 public ULayerVASPageMobile navigateToULayerVASPage(){
 						 vasButton.click();
-		 				 return new ULayerVASPage(driver);
+		 				 return new ULayerVASPageMobile(driver);
 }
 }			 

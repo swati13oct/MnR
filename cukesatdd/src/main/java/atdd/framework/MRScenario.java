@@ -1286,7 +1286,9 @@ public class MRScenario {
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		capabilities.setCapability("appiumVersion", appiumVersion);
+		capabilities.setCapability("setJavascriptEnabled", true);
 		capabilities.setCapability("forceMjsonwp", true);
+		capabilities.setCapability("locationContextEnabled", true);
 		// capabilities.setCapability("autoAcceptAlerts", true);
 		try {
 
@@ -1296,10 +1298,12 @@ public class MRScenario {
 
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
+				browserName="Chrome";
 				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
 
 			} else {
 				capabilities.setCapability("browserName", "Safari");
+				browserName="Safari";
 				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
 			}
 
