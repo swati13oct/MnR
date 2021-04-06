@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="MNR Acquisition Portals Test Suite" data-provider-thread-count="20">
+<suite name="MNR Acquisition Portals Test Suite" data-provider-thread-count="1000">
 	<listeners>
 		<listener class-name="atdd.framework.TestNGMethodListener" />
 	</listeners>
-	<test name="Desktop" parallel="methods" thread-count="100" preserve-order="false">
+	<test name="Desktop">
 		<packages>
 			<package name="atdd.runners" />
 		</packages>
 	</test>
-	<test name="Mobile" parallel="methods" thread-count="100" preserve-order="false">
+	<test name="Mobile">
 		<packages>
 			<package name="atdd.mobile.runners" />
 		</packages>

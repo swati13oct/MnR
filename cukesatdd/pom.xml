@@ -88,7 +88,8 @@
 								<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 							</suiteXmlFiles>
 							<testFailureIgnore>true</testFailureIgnore>
-							<!-- <parallel>methods</parallel> -->
+							<parallel>methods</parallel>
+							<threadCountMethods>1000</threadCountMethods>
 							<!-- <threadCount>100</threadCount> -->
 							<properties>
 								<property>

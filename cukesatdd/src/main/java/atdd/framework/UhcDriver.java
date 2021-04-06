@@ -534,7 +534,7 @@ public abstract class UhcDriver {
 	public void startNewPRE(String url, String browser) {
 		
 		System.out.println("Browser Name: " + browser);
-		if (browser.equalsIgnoreCase("safari"))
+		if (browser.equals("safari"))
 			driver.get(url);
 		else {
 			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
