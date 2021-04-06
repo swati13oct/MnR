@@ -1576,7 +1576,7 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.SelectMailPharmacy();
-		String pharmacy = "Preferred Mail Service Pharmacy";
+		String pharmacy = "OptumRx Mail Service Pharmacy";
 		drugDetailsPage.validatePharmacyName(pharmacy);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_NAME, pharmacy);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
@@ -1588,7 +1588,7 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.selectMailOrderPharmacy();
 		//getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
-		String pharmacy = "Preferred Mail Service Pharmacy";
+		String pharmacy = "OptumRx Mail Service Pharmacy";
 		drugSummaryPage.validatePharmacyName(pharmacy);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_NAME, pharmacy);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
