@@ -22,6 +22,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -301,6 +302,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "state-select")
 	private WebElement stateDropDown;
+	
+	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
+	private WebElement MedicareClassicUrl;
 
 	@FindBy(xpath = "//a[contains(@class, 'backtotop1')]")
 	private WebElement backToTop_Disclaimer;
@@ -3560,6 +3564,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
 	}
+	
+	public void validateClassicurlandState(String state) {
+		if(state.equalsIgnoreCase("Oregon")||state.equalsIgnoreCase("U.S. Virgin Islands")||state.equalsIgnoreCase("Alaska")) {
+			validateNew(stateDropDown);
+			validateNew(MedicareClassicUrl);
+			System.out.println("State is: "+state);
+			System.out.println("Medicare Supplement Url is: "+MedicareClassicUrl.getAttribute("href"));
+			Assert.assertTrue(MedicareClassicUrl.getAttribute("href").equalsIgnoreCase("/shop/medicare-supplement-plans-classic.html"));
+		} else {
+			Assert.assertTrue(MedicareClassicUrl.getAttribute("href").equalsIgnoreCase("/shop/medicare-supplement-plans.html"));
+		}
+	}
 
 	public void validateGlobalFooterLinks() {
 		scrollToView(footerHomeLink);
@@ -3735,6 +3751,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
+	public void validatestatedropDown(String state, String code) {
+		validateNew(stateDropDown);
+		selectFromDropDownByValue(stateDropDown, state);
+
+		// String StateSessionStorage = ReturnDriverStorage(driver, "sessionStorage",
+		// "ucp_geotrackingState");
+
+		String StateSessionStorage = returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+
+		// ReturnDriverStorage(driver, "sessionStorage", "ucp_geotrackingState");
+
+		System.out.println("State selected : "+state);
+		System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
+		Assert.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase(code));
+	}
+	
 	public void validateStateDropDown() {
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, "California");
@@ -6127,5 +6159,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	public void clickFirstSuggestionSiteSearch() {
 		jsClickNew(firstAutoCompleteSuggestionSiteSearch);
+	
 	}
 }

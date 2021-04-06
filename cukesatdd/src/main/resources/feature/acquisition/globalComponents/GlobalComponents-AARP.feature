@@ -658,16 +658,43 @@ Feature: 1.12 ACQ - Global Components Validation
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user vaidates the state drop down link on the home page
-    And user select state for geotargeting from global footer on homepage
+    | State | <state> |
+      | Code | <code> |
+    #And user select state for geotargeting from global footer on homepage
     Then the user hovers screen over the shop for a plan
     Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
+    Then user validate the geotag and Medicare supplement url
+    | State | <state> |
+    Then the user clicks on browser back button
+    When user vaidates the state drop down link on the home page
+    | State | <state1> |
+      | Code | <code1> |
+      Then the user hovers screen over the shop for a plan
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>   |
+      
+       Then user validate the geotag and Medicare supplement url
+    | State | <state1> |
+    Then the user clicks on browser back button
+     When user vaidates the state drop down link on the home page
+    | State | <state2> |
+      | Code | <code2> |
+      Then the user hovers screen over the shop for a plan
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>   |
+      
+       Then user validate the geotag and Medicare supplement url
+    | State | <state2> |
+    
 
     @GeoTarget_MedSup_GlobalCompsAARP
     Examples: 
-      | site | path                                | pageName               |
-      | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop MS Plan |
+      | site | path                                | pageName               |state|code|state1|code1|state2|code2|
+      | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop MS Plan |U.S. Virgin Islands|VI|Oregon|OR|Alaska|AK|
 
     @GeoTarget_MedSup_GlobalCompsUHC
     Examples: 

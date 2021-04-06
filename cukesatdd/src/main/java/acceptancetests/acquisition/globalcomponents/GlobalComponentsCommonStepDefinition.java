@@ -39,6 +39,7 @@ import pages.acquisition.commonpages.DisclaimersAARPPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.EnrollmentBasicsPage;
 import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
+import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.acquisition.commonpages.ShopPage;
 import pages.acquisition.commonpages.SiteMapAARPPage;
 import pages.acquisition.commonpages.TermsnConditionsAARPPage;
@@ -167,6 +168,20 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.navigateToPath(path);
 	}
 
+	@Then("^user validate the geotag and Medicare supplement url$")
+	public void user_validate_the_geotag_and_Medicare_supplement_url(DataTable givenAttributes) throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String state = memberAttributesMap.get("State");
+		aquisitionhomepage.validateClassicurlandState(state);
+	}
+	
 	@Then("^the User validates Shop for a Plan Navigation link$")
 	public void the_USer_validates_Shop_for_a_Plan_Navigation_links() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -225,10 +240,18 @@ public class GlobalComponentsCommonStepDefinition {
 	}
 
 	@When("^user vaidates the state drop down link on the home page$")
-	public void user_vaidates_the_state_drop_down_link_on_home_page() throws Throwable {
+	public void user_vaidates_the_state_drop_down_link_on_home_page(DataTable givenAttributes) throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateStateDropDown();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String state = memberAttributesMap.get("State");
+		String code = memberAttributesMap.get("Code");
+		aquisitionhomepage.validatestatedropDown(state,code);
 	}
 
 	@When("^user clicks on View all disclaimer information link on the home page$")
