@@ -282,15 +282,15 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | PlanName | <planname> |
     Then the user validates all added Drugs on Plan Compare
     Then the user clicks on back on all plan linnk in Plan Compare page
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <planname> |
-    Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
-    Then the user navigates to Personal Information Page
-    And the user cancels enrollment and navigates to homepage
+    #Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      #| Plan Name | <planname> |
+    #Then the user validates the Plan details on OLE
+    #Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates Learn more modal for Welcome OLE
+    #Then the user validates Leave OLE modal for Welcome OLE
+    #Then the user validates cancellation modal for Welcome OLE
+    #Then the user navigates to Personal Information Page
+    #And the user cancels enrollment and navigates to homepage
 
     @DCE_E2E_Scenario1_UAT_AARP
     Examples: 
@@ -309,18 +309,18 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    #Then the user searches and adds the following Drug to Drug List
-      #| DrugName | <drug1> |
-    #Then the user searches and adds the following Drug to Drug List
-      #| DrugName | <drug2> |
-    #Then the user searches and adds the following Drug to Drug List
-      #| DrugName | <drug3> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug4> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-    #When user enter invalid zipcode
-      #| inValidzipCode | <invalidzipcode2> |
-   # Then error message should be displayed
+    When user enter invalid zipcode
+      | inValidzipCode | <invalidzipcode2> |
+    Then error message should be displayed
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
@@ -333,8 +333,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then change pharmacy modal should be displayed
     And user verify change pharmacy modal
     Then the user selects Mail Pharmacy and returns to DCE Summary page
-    #When user clicks on change pharmacy link from summary page
-    #Then the user selects Mail Pharmacy and returns to DCE Summary page
+    When user clicks on change pharmacy link from summary page
+    Then the user selects Mail Pharmacy and returns to DCE Summary page
     When user clicks on change pharmacy link from summary page
     Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
       | PharmacyZipCode | <pharmacyZipCode> |
@@ -347,7 +347,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates Switch to generic for following Brand Drug to Generic from Drug Summary - Drug Pricing Modal
       | Brand Drug   | <drug4>        |
       | Generic Drug | <genericDrug1> |
-    ##And user click on PDP plan to view drug pricing
+    #And user click on PDP plan to view drug pricing
     And the user Captures Drug costs on Drug Summary Page for the given plan
       | Plan Name | <planName> |
     Then the user selects View Drug details for following plantype and PlanName
