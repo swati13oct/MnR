@@ -3565,15 +3565,18 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 	
-	public void validateClassicurlandState(String state) {
+	public void validateMedupsStateUrl(String state, String code) {
 		if(state.equalsIgnoreCase("Oregon")||state.equalsIgnoreCase("U.S. Virgin Islands")||state.equalsIgnoreCase("Alaska")) {
+			if(code.equalsIgnoreCase("OR")||code.equalsIgnoreCase("VI")||code.equalsIgnoreCase("AK")) {
 			validateNew(stateDropDown);
 			validateNew(MedicareClassicUrl);
 			System.out.println("State is: "+state);
+			System.out.println("State is: "+code);
 			System.out.println("Medicare Supplement Url is: "+MedicareClassicUrl.getAttribute("href"));
 			Assert.assertTrue(MedicareClassicUrl.getAttribute("href").equalsIgnoreCase("/shop/medicare-supplement-plans-classic.html"));
 		} else {
 			Assert.assertTrue(MedicareClassicUrl.getAttribute("href").equalsIgnoreCase("/shop/medicare-supplement-plans.html"));
+		}
 		}
 	}
 

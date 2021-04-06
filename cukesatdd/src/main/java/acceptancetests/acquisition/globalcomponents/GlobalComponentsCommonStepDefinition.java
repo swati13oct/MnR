@@ -168,7 +168,7 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.navigateToPath(path);
 	}
 
-	@Then("^user validate the geotag and Medicare supplement url$")
+	@Then("^user validate the url in footer for Medicare Supplement Insurance Plans$")
 	public void user_validate_the_geotag_and_Medicare_supplement_url(DataTable givenAttributes) throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
@@ -179,7 +179,8 @@ public class GlobalComponentsCommonStepDefinition {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String state = memberAttributesMap.get("State");
-		aquisitionhomepage.validateClassicurlandState(state);
+		String code = memberAttributesMap.get("Code");
+		aquisitionhomepage.validateMedupsStateUrl(state,code);
 	}
 	
 	@Then("^the User validates Shop for a Plan Navigation link$")
@@ -239,7 +240,7 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.enterAndvalidateEmail();
 	}
 
-	@When("^user vaidates the state drop down link on the home page$")
+	@When("^user updates the state drop down value on the home page$")
 	public void user_vaidates_the_state_drop_down_link_on_home_page(DataTable givenAttributes) throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);

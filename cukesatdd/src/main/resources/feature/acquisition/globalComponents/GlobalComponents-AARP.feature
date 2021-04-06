@@ -6,7 +6,9 @@ Feature: 1.12 ACQ - Global Components Validation
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user accesses global footer of the Medicare Plans All page
-    And user vaidates the state drop down link on the home page
+    When user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
     And user clicks on View all disclaimer information link on the home page
     And user verifies visit aarp.org link on home page
     And user clicks on Aboutus link from footer of the Medicare Plans home page
@@ -21,13 +23,13 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @globalfooter
     Examples: 
-      | site |
-      | AARP |
+      | site |state|code|
+      | AARP |California|CA|
 
     @globalfooter
     Examples: 
-      | site |
-      | UHC  |
+      | site |state|code|
+      | UHC  |California|CA|
 
   @globalheaderULayer
   Scenario Outline: To verify links displayed in the global header of AARP site
@@ -657,46 +659,47 @@ Feature: 1.12 ACQ - Global Components Validation
   Scenario Outline: To verify the Geo Targeting Link for Medicare Supplement Plans on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When user vaidates the state drop down link on the home page
-    | State | <state> |
-      | Code | <code> |
+    When user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
     #And user select state for geotargeting from global footer on homepage
+    Then the user hovers screen over the shop for a plan
+    #And the user clicks on the Shop button for Medicare Supplement Plan and navigates to MedSup plans page
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then user validate the url in footer for Medicare Supplement Insurance Plans
+      | State | <state> |
+      | State | <code> |
+    Then the user clicks on browser back button
+    When user updates the state drop down value on the home page
+      | State | <state1> |
+      | Code  | <code1>  |
     Then the user hovers screen over the shop for a plan
     Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
-    Then user validate the geotag and Medicare supplement url
-    | State | <state> |
+    Then user validate the url in footer for Medicare Supplement Insurance Plans
+      | State | <state1> |
+      | State | <code1> |
     Then the user clicks on browser back button
-    When user vaidates the state drop down link on the home page
-    | State | <state1> |
-      | Code | <code1> |
-      Then the user hovers screen over the shop for a plan
+    When user updates the state drop down value on the home page
+      | State | <state2> |
+      | Code  | <code2>  |
+    Then the user hovers screen over the shop for a plan
     Given the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
-      | PagePath | <path>   |
-      
-       Then user validate the geotag and Medicare supplement url
-    | State | <state1> |
-    Then the user clicks on browser back button
-     When user vaidates the state drop down link on the home page
-    | State | <state2> |
-      | Code | <code2> |
-      Then the user hovers screen over the shop for a plan
-    Given the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>   |
-      
-       Then user validate the geotag and Medicare supplement url
-    | State | <state2> |
-    
+      | PagePath | <path>     |
+    Then user validate the url in footer for Medicare Supplement Insurance Plans
+      | State | <state2> |
+      | State | <code2> |
 
     @GeoTarget_MedSup_GlobalCompsAARP
     Examples: 
-      | site | path                                | pageName               |state|code|state1|code1|state2|code2|
-      | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop MS Plan |U.S. Virgin Islands|VI|Oregon|OR|Alaska|AK|
+      | site | path                                | pageName               | state               | code | state1 | code1 | state2 | code2 |
+      | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop MS Plan | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    |
 
     @GeoTarget_MedSup_GlobalCompsUHC
     Examples: 
-      | site |
-      | UHC  |
+      | site | path                                | pageName               | state               | code | state1 | code1 | state2 | code2 |
+      | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop MS Plan | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    |
