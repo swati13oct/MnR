@@ -96,12 +96,10 @@ Feature: 1.05.3 OLE common tool flow E2E PDP Plan Details Page
     Then the user validates the Plan and Member details on Review and Submit Page
     #Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-		#Then the user validates the OLE Submission Details in GPS
-    	#| Plan Type | <plantype> |
-		# | Rider Flag | <riderflag> |
-		 #| Mailing Address Question | <mailingaddressquestion> |
-		
-    
+		Then the user validates the OLE Submission Details in GPS
+     | Plan Type | <plantype> |
+      | Auth Flag | <authflag> |
+	 | Mailing Address Question | <mailingaddressquestion> |
     # Then the user validates Plan and Member Details on Confirmation Page
     #Then the user Validates Next Steps in Confirmation Page for the Plan Type
   
