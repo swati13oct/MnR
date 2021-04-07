@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package pages.mobile.acquisition.commonpages;
 
 import org.openqa.selenium.WebDriver;
@@ -9,18 +12,13 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-public class GlobalWebElementsMobile  extends UhcDriver{
+public class GlobalWebElementsMobile extends UhcDriver {
+	
 	public GlobalWebElementsMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 	}
 	
-	@Override
-	public void openAndValidate() {
-		
-		
-	}
-
 	@FindBy(id = "gf_lnk_1")
 	public WebElement footerHomeLink;
 	
@@ -52,20 +50,30 @@ public class GlobalWebElementsMobile  extends UhcDriver{
 	@FindBy(id="gf_lnk_9")
 	public WebElement footerAccessibilitylink;
 	
-	@FindBys(value = { @FindBy(xpath = "//div[contains(@class,'globalfooternav')]//a[contains(text(),'Visit AARP.org')]") })
-	public WebElement aarpOrgLink;
-	
 	@FindBys(value = { @FindBy(id = "footnotes1" )})
 	public WebElement footnotesContent;
 	
-			
+	
+	@FindBy(xpath="(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
+	public WebElement headerSignInLink;
+	
+	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	 public WebElement headerRegisterLink;
+	
+	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	 public WebElement visitorprofileicon;
+	
+	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	public WebElement signIn;
+
 	@FindBy(id = "gfn_lnk_row2_1")
 	 public WebElement medicareAdvantagePlansLink;
 	
-	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Special Needs')]")
+	@FindBy(id = "gfn_lnk_row2_2")
 	 public WebElement medicareSpecialNeedsPlansLink;
 	
-	@FindBy(id = "gfn_lnk_row2_2")
+	//@FindBy(id = "gfn_lnk_row2_3")
+	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
 	 public WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(id = "gfn_lnk_row2_4")
@@ -86,10 +94,10 @@ public class GlobalWebElementsMobile  extends UhcDriver{
 	@FindBy(linkText = "Back to Top")
 	 public WebElement footerNavigationBackToTopLink;
 	
-	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
+	@FindBy(xpath= ".//*[contains(@class, 'viewLink disclaimer')]")
 	 public WebElement viewAllDisclaimerInformationLink;
 	
-	@FindBy(linkText = "Hide disclaimer information")
+	@FindBy(linkText = "Hide discliamer information")
 	 public WebElement hideDiscliamerInformation;
 	
 	@FindBy(css = "a.backtotop1.hideLink")
@@ -104,24 +112,26 @@ public class GlobalWebElementsMobile  extends UhcDriver{
 	@FindBy(id = "gf_lnk_8")
 	public WebElement footerAgentsAndBrokersLink;
 	
-	@FindBy(id = "gfn_lnk_row3_3")
+	@FindBy(id = "gfn_lnk_row3_2")
 	 public WebElement prepareForInitialEnrollmentLink;
 	
-	@FindBy(id = "gfn_lnk_row2_5")
+	@FindBy(id = "gfn_lnk_row2_4")
 	 public WebElement medicareSpecialNeedPlansLink;
 	
-	//@FindBy(xpath = "//h1[@class='logo']/a")
-	@FindBy(id = "logo")
-	 public WebElement logoLink;
-	
-	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
+	@FindBy(xpath = "//ul[@class='menu-links']/li/a")
 	 public WebElement importantDisclosuresLink;
 	
-	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
-	 public WebElement visitAARPLink;
-
-	@FindBy(id = "proceed")
-	 public WebElement proceedLink;
+	@FindBy(id = "ghn_lnk_1")
+	 public WebElement navigationSectionHomeLink;
+	
+	@FindBy(id = "ghn_lnk_2")
+	 public WebElement navigationSectionOurPlansLink;
+	
+	@FindBy(id = "ghn_lnk_3")
+	 public WebElement navigationSectionmedicareEducationLink;
+	
+	@FindBy(id = "search-field")
+	 public WebElement navigationSectionEnterSearch;
 	
 	@FindBy(className = "menu-dropdown")
 	 public WebElement alreadyPlanMemberButtonInactive;
@@ -138,6 +148,9 @@ public class GlobalWebElementsMobile  extends UhcDriver{
 	@FindBy(id = "top-user")
 	 public WebElement usernameField;
 	
+	@FindBy(xpath = "//*[@id='site-wrapper']/header/div/div/div[2]/div/div/div[2]/div/form/span[1]/p")
+	 public WebElement errormessage;
+	
 	@FindBy(id = "top-pass")
 	 public WebElement passwordField;
 	
@@ -150,16 +163,8 @@ public class GlobalWebElementsMobile  extends UhcDriver{
 	@FindBy(className = "not-registered-text")
 	 public WebElement notRegisteredText;
 	
-	@FindBy(id = "nav")
-	 public WebElement navigationSectionEnterSearch;
-	
-	@FindBy(id = "ghn_lnk_2")
-	 public WebElement navigationSectionOurPlansLink;
-	
-	
 	@FindBy(id = "ghn_lnk_3")
 	 public WebElement navigationSectionMedicareEducationLink;
-	
 	
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3/a/span")
 	 public WebElement learnAboutMedicareMedicareEducationLink;
@@ -173,27 +178,39 @@ public class GlobalWebElementsMobile  extends UhcDriver{
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3[2]/a/span")
 	 public WebElement discoverMoreResourcesMedicareEducationLink;
 	
-	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
-	 public WebElement alreadyMemberInvalidCredsErrorMessage;
+	@FindBy(id="ghn_lnk_2")
+	public WebElement ourPlansHoverLink;
 	
-	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
-	 public WebElement signInButton;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
-	public WebElement prescriptiondrugPlansRequestMoreHelpLink;
+	@FindBy(id="subnav_2")
+	public WebElement ourPlansDropdownText;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div/p[2]/a[3]")
-	public WebElement resumeYourSavedApplicationLink;
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/h3/a")
+	public WebElement headerMedicareAdvantagePlansLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div/h3/a/span")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/h3/a")
+	public WebElement headerMedicarePrescriptionDrugPlansLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div/h3/a/span")
 	public WebElement headerMedicareSupplementPlansLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[2]/div[2]/h3/a")
+	public WebElement headerMedicareSpecialNeedPlansLink;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/p[2]/a")
 	public WebElement medicareAdvantagePlansRequestMoreHelpLink;
 	
-	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
+	public WebElement prescriptiondrugPlansRequestMoreHelpLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a/span")
 	public WebElement medicareSelectHosipitalDirectoryLink;
-			
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
+	public WebElement resumeYourSavedApplicationLink;
+	
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div/div[2]/div[2]/p[2]/a")
+	public WebElement specialNeedPlansGetEnrollmentInformationLink;
 	
 	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/a")
 	public WebElement takeQuizButton;
@@ -201,39 +218,45 @@ public class GlobalWebElementsMobile  extends UhcDriver{
 	@FindBy(id="nav-zipcode")
 	public WebElement zipcodeField;
 	
-	@FindBy(className="zip-button")
+	@FindBy(id="zipcodebtn")
 	public WebElement findPlansButton;
 	
-	@FindBy(id="ghn_lnk_2")
-	public WebElement ourPlansHoverLink;
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/form/span/span")
+	public WebElement errorMsg;  
 	
-	@FindBy(id="subnav_2")
-	public WebElement ourPlansDropdownText;
+	@FindBy(xpath="//div[@id='subnav_2']/div/div/div[2]/div/a")
+	public WebElement lookupZipcodeLink;
 	
-	/** Request for assistance model window**/
-	@FindBy(id="cover")
-	public WebElement RequestforAssistancepopup;
+	@FindBy(xpath="//div[@id='findazip_box']")
+	public WebElement findaZipBox;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
+	 public WebElement signInButton;
+	
+	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
+	 public WebElement alreadyMemberInvalidCredsErrorMessage;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 	
+	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	public WebElement visitAARPLink;
+	
+	 @FindBys(value = { @FindBy(xpath = "//div[contains(@class,'globalfooternav')]//a[contains(text(),'Visit AARP.org')]") })
+	 public WebElement aarpOrgLink;
+	 
+	@FindBy(id = "aarpSVGLogo")
+	public WebElement AARPlogo;
+
 	@FindBy(xpath="//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public WebElement headerDrugCostEstimatorLink;
+
+	@Override
+	public void openAndValidate() {	
+	}
 	
-	@FindBy(xpath="(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
-	public WebElement headerSignInLink;
-	
-	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
-	 public WebElement headerRegisterLink;
-	
-	@FindBy(id = "aarpSVGLogo")
-	 public WebElement AARPlogo;
-	
-	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
-	 public WebElement visitorprofileicon;
-	
-	@FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
-	public WebElement signIn;
+	@FindBy(css = "div.sam")
+	public WebElement footerCallbannerSection;
 	
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);

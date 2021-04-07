@@ -19,7 +19,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
-import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
+import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 
 
 /**

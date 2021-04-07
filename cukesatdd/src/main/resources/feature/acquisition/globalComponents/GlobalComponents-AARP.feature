@@ -1,4 +1,3 @@
-
 @GlobalComponentsAARP
 Feature: 1.12 ACQ - Global Components Validation
 
@@ -21,7 +20,7 @@ Feature: 1.12 ACQ - Global Components Validation
     And user verifies home link of agents&brokers page
     Then user clicks on back to top link of home page
 
-    @globalfooter
+    @globalfooter1
     Examples: 
       | site |
       | AARP |

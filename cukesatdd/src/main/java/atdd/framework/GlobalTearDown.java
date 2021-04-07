@@ -1,5 +1,8 @@
 package atdd.framework;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
 import io.cucumber.java.After;
 import io.cucumber.java.Scenario;
+import io.appium.java_client.AppiumDriver;
 
 /**
  * This class will take a screen shot of the last screen executed by cucumber

@@ -63,6 +63,14 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.cucumber.java.Scenario;
+import java.security.*;
+import javax.crypto.*;
+
+/**
+ * 
+ * @author schak38
+ *
+ */
 
 @Component
 public class MRScenario {
@@ -824,25 +832,6 @@ public class MRScenario {
 			return null;
 		}
 	}
-	
-	/*public HashMap<String, String> readDataTableAsMaps(DataTable inputTestData) {
-		List<Map<String, String>> inputDataTable = inputTestData.transpose().asMaps();
-		HashMap<String, String> inputData = new HashMap<String, String>();
-		for(Map<String, String> map : inputDataTable) {
-			inputData.putAll(map);
-		}
-		return inputData;
-	}
-	
-	public HashMap<String, String> readDataTableAsList(DataTable inputTestData) {
-		List<List<String>> inputDataTable = inputTestData.asLists();
-		HashMap<String, String> inputData = new HashMap<String, String>();
-		
-		for(int row = 0; row < inputDataTable.size(); row ++) {
-			inputData.put(inputDataTable.get(row).get(0), inputDataTable.get(row).get(1));
-		}
-		return inputData;
-	}*/
 
 	public WebDriver getWebDriver() {
 
@@ -1099,7 +1088,7 @@ public class MRScenario {
 		System.out.println("New WebDriver CREATED");
 
 		// Choose your browser based on name. The name value is what is in
-		//
+		// CommonConstants.
 		// If the browser isn't configured (null) or it's set to HTMLUNIT,
 		// use HTMLUNIT.
 		// This is the default browser when I checked out the code, so it's
@@ -1139,8 +1128,7 @@ public class MRScenario {
 			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 			// System.setProperty("webdriver.chrome.driver", pathToBinary);
-//			System.setProperty("webdriver.chrome.driver", "C:\\Users\\hahire\\Downloads\\driver\\chromedriver.exe");
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\amahale\\Driver\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\hahire\\Downloads\\driver\\chromedriver.exe");
 			//System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
 //			webDriver = new ChromeDriver();
 			threadSafeDriver.set(new ChromeDriver());
@@ -1379,11 +1367,13 @@ public class MRScenario {
 
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
+				browserName="Chrome";
 //				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
 				threadSafeMobileDriver.set(new AndroidDriver(new URL(SauceLabsURL), capabilities));
 
 			} else {
 				capabilities.setCapability("browserName", "Safari");
+				browserName="Safari";
 //				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
 				threadSafeMobileDriver.set(new IOSDriver(new URL(SauceLabsURL), capabilities));
 			}

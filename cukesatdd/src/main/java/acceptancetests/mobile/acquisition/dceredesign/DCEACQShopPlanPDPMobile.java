@@ -17,13 +17,20 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
-//import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
+//import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 
 /**
  * Functionality:DCE Acquisition

@@ -15,13 +15,19 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
+import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
+import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
 
 /**
  * Functionality:DCE Acquisition

@@ -1,6 +1,7 @@
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.List;
+import io.appium.java_client.AppiumDriver;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,13 +15,16 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.MRScenario;
 
 /**
  * Functionality:DCE Acquisition

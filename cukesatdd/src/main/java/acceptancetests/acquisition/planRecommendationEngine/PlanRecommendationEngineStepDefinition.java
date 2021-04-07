@@ -93,6 +93,9 @@ public class PlanRecommendationEngineStepDefinition {
 		} else {
 			planSelectorhomepage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
 		}
+
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 	}
 	
 	

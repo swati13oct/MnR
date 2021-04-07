@@ -3,16 +3,22 @@ package pages.mobile.acquisition.dceredesign;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
+import io.appium.java_client.AppiumFluentWait;
+import pages.acquisition.dceredesign.TellUsAboutDrug;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 
 public class BuildYourDrugListMobile extends UhcDriver {
 
@@ -21,6 +27,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button[(@id= 'search')]")
 	public WebElement SearchBtn;
+	
+	@FindBy(css = "#heading")
+	public WebElement AddmyDrugHeader;
 
 	@FindBy(xpath = "//button[(@id= 'previousButton')]")
 	public WebElement PreviousBtn;
@@ -125,14 +134,15 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	
 	public DrugCostEstimatorPageMobile addDrug() {
 
-		addrugs.click();
+		
+		jsClickNew(addrugs);
 		if (currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPageMobile(driver);
 		return null;
 	}
 
 	public void clickReviewDrugCostBtn() {
-		// reviewDrugCost.click();
+		
 		jsClickMobile(reviewDrugCost);
 	}
 
@@ -191,13 +201,20 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	}
 
-	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) {
+	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) throws InterruptedException {
 		validateNew(EnterDrugNameTxt);
-		EnterDrugNameTxt.sendKeys(drugName);
+		//EnterDrugNameTxt.sendKeys(drugName);
+		mobileactionsendkeys(EnterDrugNameTxt, drugName);
+		scrollToView(AddmyDrugHeader);
+		jsClickNew(AddmyDrugHeader);
+		
+		
+		Thread.sleep(1000);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
+		
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
 		validateNew(SelectDrug);

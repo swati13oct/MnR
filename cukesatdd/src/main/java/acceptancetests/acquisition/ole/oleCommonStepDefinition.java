@@ -21,14 +21,14 @@ import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 public class oleCommonStepDefinition {
-	
+
 	@Autowired
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	@Then("^the user navigates to clicks on Enroll Now from visitor profile to start OLE flow$")
 	public void the_user_navgates_to_clicks_on_Enroll_Now_From_VisitorProfile_flow(DataTable planAttributes) throws Throwable {
 
@@ -48,36 +48,36 @@ public class oleCommonStepDefinition {
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
-		
+
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, premium);
-		
+
 		String SiteName;
 		String PlanPremium = "";
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		System.out.println("Site Name is : " + SiteName);
 		//-----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;			
-			if(SiteName.contains("UHC_ACQ")){
-				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
-						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-				//TFN = planSummaryPage.GetTFNforPlanType();
+		if(SiteName.contains("UHC_ACQ")){
+			VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+			//TFN = planSummaryPage.GetTFNforPlanType();
 
-				welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+			welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
 
-			}
-			else{
-				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
-						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-				//TFN = planSummaryPage.GetTFNforPlanType();
+		}
+		else{
+			VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+			//TFN = planSummaryPage.GetTFNforPlanType();
 
-				welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+			welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
 
-			}
-			
+		}
+
 		//--------------------------------------------------------------------------------------------------------------------
-		
+
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -102,7 +102,7 @@ public class oleCommonStepDefinition {
 		else
 			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
-@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site$")
+	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
@@ -158,7 +158,7 @@ public class oleCommonStepDefinition {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
-		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		//PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));

@@ -2109,6 +2109,7 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user should be able to see \"([^\"]*)\" by default$")
 	public void user_should_be_able_to_see_by_default(String planType) throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyDefaultPlanType(planType);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -2756,6 +2757,18 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDrugStageInfoModals_NonLISbuydownPlans();
+	}
+	
+	@When("^user toggle to PDP plan type on drug summary page$")
+	public void user_toggle_to_PDP_plan_type_on_drug_summary_page() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyPDPPlanToggle();
+	}
+
+	@When("^user toggle to SNP plan type on drug summary page$")
+	public void user_toggle_to_SNP_plan_type_on_drug_summary_page() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifySNPPlanToggle();
 	}
 	
 }

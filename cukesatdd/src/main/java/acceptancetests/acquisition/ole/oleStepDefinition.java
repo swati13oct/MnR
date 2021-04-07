@@ -1,6 +1,8 @@
 package acceptancetests.acquisition.ole;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,11 +26,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.CoverageInformationPage;
@@ -47,6 +48,8 @@ import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.acquisition.ole.SupplementalBenefitsPage;
 import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.acquisition.ole.WelcomePage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanDetailsPage;
 /**
  * @author sdwaraka
  * Functionality:OLE Common Tool for both AAPR and UHC acquisition sites
@@ -3677,7 +3680,6 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 			Assertion.fail("OLE SEP Page is NOT Displayed");
 	}
 
-
 	@Then("^the user clicks on save and return later to profile page$")
 	public void the_user_clicks_on_save_and_return_later_to_profile_page() {
 
@@ -3764,7 +3766,6 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
 		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}*/
@@ -3874,4 +3875,28 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 		VisitorProfilePage visitorProfilePage = oleConfirmationPage.clickOnShoppingCart();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+
+@Then("^the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow$")
+public void the_user_navgates_to_clicks_on_Enroll_Now_plandetails_page_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+
+	List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+//	String PlanName = givenAttributesMap.get("Plan Name");
+	String PlanType = givenAttributesMap.get("Plan Type");
+	//String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+	PlanDetailsPage vppPlanDetailsPage= (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+	WelcomePage welcomeOLEPage= vppPlanDetailsPage.NavigateToOLEEnrollDSNPPlanDetails(PlanType);
+
+	if (welcomeOLEPage != null) {
+		getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+	} else {
+		Assert.fail("Error Loading Welcome Page for OLE");
+	}
+}
 }

@@ -543,10 +543,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
-	public AddNewDrugModal clickOnAddDrug() throws InterruptedException {
+	public AddNewDrugModalMobile clickOnAddDrug() throws InterruptedException {
 		addDrug.click();
 		if (validateNew(drugsearchinput)) {
-			return new AddNewDrugModal(driver);
+			return new AddNewDrugModalMobile(driver);
 		}
 		return null;
 	}
@@ -613,7 +613,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	public void addDrugs(int count, String drug) throws InterruptedException {
 		for (int i = 1; i <= count; i++) {
-			AddNewDrugModal addNewDrugModal = clickOnAddDrug();
+			AddNewDrugModalMobile addNewDrugModal = clickOnAddDrug();
 			if ((getDrugsCount()) == 25 || i == 26) {
 				System.out.println("Exceeded the limit");
 				addNewDrugModal.verifyExceededError();
@@ -622,10 +622,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 			addNewDrugModal.typeDrugName(drug);
 			addNewDrugModal.submit();
 			// addNewDrugModal.selectDrug(drug);
-			AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+			AddDrugDetailsMobile addDrugDetails = new AddDrugDetailsMobile(driver);
 			addDrugDetails.selectQnty(i + "");
 			addDrugDetails.continueAddDrugDetails();
-			SavingsOppurtunity savingsOppurtunity = new SavingsOppurtunity(driver);
+			SavingsOppurtunityMobile savingsOppurtunity = new SavingsOppurtunityMobile(driver);
 			savingsOppurtunity.savedrugbutton();
 			Thread.sleep(3000);
 		}
@@ -726,14 +726,14 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 	}
 
-	public EditDrugDetails navigateToEditDrug(String drug) throws Exception {
+	public EditDrugDetailsMobile navigateToEditDrug(String drug) throws Exception {
 		// editDrug.click();
 		Thread.sleep(10000);
 		WebElement editDrug = driver.findElement(By.xpath("//div[@class='drug-container']//p[contains(text(),'" + drug
 				+ "')]/parent::section//a[@class='edit-drug']"));
 		editDrug.click();
 		Thread.sleep(15000);
-		return new EditDrugDetails(driver);
+		return new EditDrugDetailsMobile(driver);
 	}
 
 	public boolean validateAddedDrug(String args1, String arg2, String arg3) {
@@ -1060,9 +1060,9 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		}
 	}
 
-	public AddDrugDetails addDrug(String drug) throws InterruptedException {
+	public AddDrugDetailsMobile addDrug(String drug) throws InterruptedException {
 
-		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
+		AddNewDrugModalMobile addNewDrugModal = clickOnAddDrug();
 		return addNewDrugModal.searchDrugWithoutAutoComplete(drug);
 		/*
 		 * addNewDrugModal.closeModalWindow(); clickOnAddDrug();
@@ -1125,7 +1125,7 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public void addGenericDrug(String drug) throws InterruptedException {
-		AddNewDrugModal addNewDrugModal = clickOnAddDrug();
+		AddNewDrugModalMobile addNewDrugModal = clickOnAddDrug();
 		if ((getDrugsCount()) == 25) {
 			addNewDrugModal.verifyExceededError();
 			// break;
@@ -1133,10 +1133,10 @@ public class DrugCostEstimatorPage extends UhcDriver {
 		addNewDrugModal.typeDrugName(drug);
 		addNewDrugModal.submit();
 		// addNewDrugModal.selectDrug(drug);
-		AddDrugDetails addDrugDetails = new AddDrugDetails(driver);
+		AddDrugDetailsMobile addDrugDetails = new AddDrugDetailsMobile(driver);
 		// addDrugDetails.selectQnty(60 + "");
 		addDrugDetails.continueAddDrugDetails();
-		SavingsOppurtunity savingsOppurtunity1 = new SavingsOppurtunity(driver);
+		SavingsOppurtunityMobile savingsOppurtunity1 = new SavingsOppurtunityMobile(driver);
 		savingsOppurtunity1.switchToGeneric();
 		savingsOppurtunity1.savedrugbutton();
 		Thread.sleep(3000);

@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
 
+import javax.swing.Scrollable;
+
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -31,6 +33,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 
 /**
  * @author pjaising
@@ -451,17 +454,17 @@ public class CommonUtility {
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}			
+				}
 			}
 			Assertion.fail("TimeOut!!! Page not loaded");
 		} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
 			Alert alert = driver.switchTo().alert();
-			System.out.println("Alert text="+alert.getText());
+			System.out.println("Alert text=" + alert.getText());
 			if (alert.getText().contains("an error while processing your information")) {
-				Assertion.assertTrue("***** Got Alert message: "+alert.getText(), false);
-			} 
+				Assertion.assertTrue("***** Got Alert message: " + alert.getText(), false);
+			}
 		} catch (WebDriverException e) {
-			Assertion.assertTrue("PROBLEM - got webdriver exception: "+e, false);
+			Assertion.assertTrue("PROBLEM - got webdriver exception: " + e, false);
 			return false;
 		}
 		return false;

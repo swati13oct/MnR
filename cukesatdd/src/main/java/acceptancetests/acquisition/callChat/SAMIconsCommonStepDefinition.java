@@ -1,10 +1,14 @@
 package acceptancetests.acquisition.callChat;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
@@ -157,6 +161,248 @@ public class SAMIconsCommonStepDefinition {
 	String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
 		aquisitionhomepage.validateCallSam();
 		aquisitionhomepage.validateCallpopuponapage(TFNXpath,ExpecetdTFNNo);
+	}
+
+	@Then("^the user validates SAM icons on the page$")
+	public void the_user_validates_SAM_icons_on_the_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateCallpopuponapage(TFNXpath, ExpecetdTFNNo);
+
+	}
+	
+	@Then("^the user validates TFN Number on Right Rail$")
+	public void validate_TFN_On_Right_Rail(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+
+
+		aquisitionhomepage.validateTFNNoonRightRail(TFNXpath, ExpectedTFNNo);
+	
+	}
+
+	@Then("^the user validates TFN Number in Still have Questions section at bottom of page$")
+	public void the_user_validates_TFN_Number_in_Still_have_Questions_section_at_bottom_of_page(
+			DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validatefootercallussection(TFNXpath, ExpecetdTFNNo);
+
+	}
+
+	@Then("^the user validates SAM icons on Medsupp page$")
+	public void the_user_validates_SAM_icons_on_medsupp_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateCallpopuponMedsupppage(TFNXpath, ExpecetdTFNNo);
+
+	}
+	
+	@Then("^the user validates SAM icons on Medsupp page from External page$")
+	public void the_user_validates_SAM_icons_on_medsupp_page_from_external_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateCallpopuponMedsupppage(TFNXpath, ExpecetdTFNNo);
+
+	}
+
+	
+	@Then("^the user validates SAM icons on privacy page$")
+	public void the_user_validates_SAM_icons_on_privacy_Page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE,(new AcquisitionHomePage(wd)));
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = memberAttributesMap.get("TFN No");
+		aquisitionhomepage.validateChatSam();
+		aquisitionhomepage.validateCallpopuponaprivacypage(TFNXpath, ExpecetdTFNNo);
+
+	}
+
+	@Then("^the user validates TFN Number in Still have Questions section at bottom of Medsupp page$")
+	public void the_user_validates_TFN_Number_in_Still_have_Questions_section_at_bottom_of_Medsupp_page(
+			DataTable givenAttributes) {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpecetdTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		aquisitionhomepage.validateMedsuppfootercallussection(TFNXpath, ExpecetdTFNNo);
+	}
+
+	@Then("^the user validates TFN Number on Right Rail for Medsupp page$")
+	public void the_user_validates_TFN_Number_on_Right_Rail_for_Medsupp_page(DataTable givenAttributes)
+			throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
+				//(String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+
+		aquisitionhomepage.validateTFNNoonRightRailforMedsupp(TFNXpath, ExpectedTFNNo);
+
+	}
+	
+	@Then("^the user validates TFN Number on Right Rail OLE page$")
+	public void validate_TFN_On_Right_Rail_OLE_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+
+
+		aquisitionhomepage.validateTFNNoonRightRailForOLE(TFNXpath, ExpectedTFNNo);
+	
+	}
+	
+	@Then("^the user validates TFN Number on Right Rail Plan Details page$")
+	public void validate_TFN_On_Right_Rail_plan_details_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+
+
+		aquisitionhomepage.validateTFNNoonRightRailForPlanDetailsPage(TFNXpath, ExpectedTFNNo);
+	
+	}
+	
+	@Then("^the user validates TFN Number on Zipcode component$")
+	public void the_user_validates_TFN_Number_on_Zipcode_component(DataTable givenAttributes)
+			throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+
+		aquisitionhomepage.validateTFNNoonZipCodeComponent(TFNXpath, ExpectedTFNNo);
+
+	}
+	
+	@Then("^the user validates TFN Number on SNP Right Rail OLE page$")
+	public void validate_TFN_On_SNP_Right_Rail_OLE_page(DataTable givenAttributes) throws InterruptedException {
+
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String TFNXpath = memberAttributesMap.get("TFN Xpath");
+		String ExpectedTFNNo = (String) getLoginScenario().getBean(CommonConstants.CAMPAIGN_EXTERNAL_LINK_TFNNO);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE, (new AcquisitionHomePage(wd)));
+
+
+		aquisitionhomepage.validateTFNNoonSNPRightRailForOLE(TFNXpath, ExpectedTFNNo);
 	
 	}
 

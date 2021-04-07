@@ -1,6 +1,7 @@
 package acceptancetests.mobile.acquisition.callChat;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 
 public class SAMIconsStepDefinitionUHCTablet {
 

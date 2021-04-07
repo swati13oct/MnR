@@ -3,6 +3,7 @@ package atdd.framework;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +29,7 @@ import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -40,6 +42,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
+import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -82,6 +85,9 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//span[text()='Back']")
 	private WebElement MobileMenuBackBtn;
+
+	@FindBy(xpath = "//a[.='Back to Top']")
+	private WebElement backToTop;
 
 	public void MobileMenu() {
 		jsClickNew(MenuMobile);
@@ -172,7 +178,7 @@ public abstract class UhcDriver {
 		return false;
 	}
 
-	public void sendkeys(WebElement element, String message) {
+	public static void sendkeys(WebElement element, String message) {
 		if (MRScenario.mobileDeviceOSName.equalsIgnoreCase("IOS")) {
 			element.click();
 			element.clear();
@@ -499,11 +505,16 @@ public abstract class UhcDriver {
 	}
 
 	public void jsClickNew(WebElement element) {
-		
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", element);
-		// System.out.println("The WebElement === " + getidentifier(element) + " : is
-		// Clicked");
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
+		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+			iOSClick(element);
+
+		}
+
 	}
 
 	public String getidentifier(WebElement element) {
@@ -512,17 +523,48 @@ public abstract class UhcDriver {
 
 	}
 
-	public boolean scrollToView(WebElement element) {
-		
-		try {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView();", element);
-		} catch (Exception e) {
+	public void iOSClick(WebElement element) {
 
-			Assertion.fail("The element " + element + "is not  found");
-			return false;
+		// Sets FluentWait Setup
+		
+		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
+				.ignoring(TimeoutException.class);
+
+		// First checking to see if the loading indicator is found
+		// we catch and throw no exception here in case they aren't ignored
+		try {
+			threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
+			System.out.println("Waiting to check if element is present");
+			fwait.until(ExpectedConditions.visibilityOf(element));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
+			//element.click();
 		}
 
+		catch (Exception e) {
+			System.out.println("Unable to click on element for IOS");
+		}
+
+		// ((IOSDriver) driver).findElement(MobileBy.
+
+	}
+	public boolean scrollToView(WebElement element) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			backToTop.isDisplayed();
+			System.out.println("Scroll finished to element on IOS device");
+
+		} else {
+			try {
+
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].scrollIntoView();", element);
+			} catch (Exception e) {
+	
+				Assertion.fail("The element " + element + "is not  found");
+				return false;
+			}
+		}
 		return true;
 	}
 
@@ -800,21 +842,18 @@ public abstract class UhcDriver {
 	/* logic to simulate hover over functionality */
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		/*
-		 * Actions actions = new Actions(driver); actions.moveToElement(hdrMenuElement);
-		 * actions.moveToElement(menuDropListItem); actions.click().build().perform();
-		 */
-		
+		/*Actions actions = new Actions(driver);
+		actions.moveToElement(hdrMenuElement);
+		actions.moveToElement(menuDropListItem);
+		actions.click().build().perform();*/
 		jsMouseOver(hdrMenuElement);
 		jsMouseOver(menuDropListItem);
 		menuDropListItem.click();
-//		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void clickIfElementPresentInTime(WebDriver driver, WebElement element, int timeInSec) {
 		System.out.println("Waiting for element to load...");
-//		CommonUtility.waitForPageLoad(driver, element, timeInSec);
 		CommonUtility.waitForPageLoad(driver, element, timeInSec);
 		try {
 			if (element.isDisplayed()) {
