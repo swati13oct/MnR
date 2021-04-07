@@ -597,6 +597,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
    		| City        								 | <providercity>       |
    		| Zip                          | <providerzipcode>   |
    		| Provider Phone Number        | <providernumber>     |
+   		  		| Mailing_State            | <mailingstate>           |
    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
