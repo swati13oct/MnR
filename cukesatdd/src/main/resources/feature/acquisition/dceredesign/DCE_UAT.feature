@@ -69,6 +69,9 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     And user clicks on change pharmacy link from summary page
     Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
       | PharmacyZipCode | <pharmacyZipCode> |
+    Then the user validates Pharmacy Filter - Error message and x cancel function is working on Summary page - Change Pharmacy Page
+    Then the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy> |
     Then the user selects following pharmacy and returns to DCE Summary page
       | SelectPharmacy | <SelectPharmacy> |
     And the user Captures Drug costs on Drug Summary Page for the given plan
@@ -78,16 +81,24 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Plan Name | <planName> |
     Then the user Captures Drug costs on Drug Details Page
     And the user compares drug costs for drug details and drug summary pages
+    Then user clicks on change pharmacy link from details page
+    Then the user validates distance dropdown and Zipcode change on DCE Details page - Change Pharmacy Page
+      | PharmacyZipCode | <pharmacyZipCode> |
+    Then the user validates Pharmacy Filter - Error message and x cancel function is working on Details page - Change Pharmacy Page
+    Then the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | <PharmacyFilterPreferred> |
+    Then the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page
+      | PharmacyFilterText | <SelectPharmacy> |
 
     @DCE_MedEdPage_E2E_Scenario4_UAT_AARP
     Examples: 
-      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
-      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
+      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
     @DCE_MedEdPage_E2E_Scenario4_UAT_UHC
     Examples: 
-      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        |
-      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) |
+      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
+      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
   @DCE_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link
@@ -384,10 +395,10 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
     @DCE_E2E_Scenario3_UAT_AARP
     Examples: 
-      | Scenario           | site | zipCode | county          | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy                  | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                                 | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
+      | Scenario           | site | zipCode | county          | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy                | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                                 | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
       | E2E Scenario 3_AMP | AARP |   55344 | Hennepin County |           00000 | NO              |           99619 |            55344 | OptumRx Mail Service Pharmacy | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
 
     @DCE_E2E_Scenario3_UAT_UHC
     Examples: 
-      | Scenario           | site | zipCode | county          | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy                  | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                                 | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
+      | Scenario           | site | zipCode | county          | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy                | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                                 | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
       | E2E Scenario 3_UMS | UHC  |   55344 | Hennepin County |           00000 | NO              |           99619 |            55344 | OptumRx Mail Service Pharmacy | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
