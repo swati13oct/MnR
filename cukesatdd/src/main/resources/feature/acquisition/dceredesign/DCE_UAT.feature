@@ -2,7 +2,7 @@
 Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
   @dce_ShopPDP_E2E_Scenario2_UAT
-  Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Shop PDP page on
+  Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Shop PDP page, Drug Recommendation to Drug Search for Base drug on
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user navigates to Shop plans for PDP Page and clicks on DCE link fto land on DCE Redesign
@@ -10,6 +10,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drugForRecommendation> |
+    Then the user selects the following drug recommendation and validates Drug Search page is displayed and add drug
+      | SelectDrugRecommendation | <selectDrugRecommendation> |
+    Then the user validates Drug Recommendation section
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
@@ -17,7 +22,9 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |
       | Plan Name | <planName> |
-    And user click on Switch To Generic
+    Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
+      | Brand Drug   | <drug1>   |
+      | Generic Drug | <drug2> |
     And user clicks on change pharmacy link from details page
     And the user selects Mail Pharmacy and returns to DCE Details page
     And the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
@@ -41,13 +48,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
     @dce_ShopPDP_E2E_Scenario2_UAT_AARP
     Examples: 
-      | Scenario           | site | drug1   | drug2                | zipCode | planType | planName                        | supplyLength   |
-      | E2E Scenario 2_AMP | AARP | Lipitor | atorvastatin calcium |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
+      | Scenario           | site | drug1   | drug2                | drugForRecommendation | selectDrugRecommendation | zipCode | planType | planName                        | supplyLength   |
+      | E2E Scenario 2_AMP | AARP | Lipitor | atorvastatin calcium | Synthroid             | levothyroxine sodium     |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
 
     @dce_ShopPDP_E2E_Scenario2_UAT_UHC
     Examples: 
-      | Scenario           | site | drug1   | drug2                | zipCode | planType | planName                        | supplyLength   |
-      | E2E Scenario 2_UMS | UHC  | Lipitor | atorvastatin calcium |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
+      | Scenario           | site | drug1   | drug2                | drugForRecommendation | selectDrugRecommendation | zipCode | planType | planName                        | supplyLength   |
+      | E2E Scenario 2_UMS | UHC  | Lipitor | atorvastatin calcium | Synthroid             | levothyroxine sodium     |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
 
   @DCE_MedEdPage_E2E_Scenario4_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Med Ed page

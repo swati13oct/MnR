@@ -8,6 +8,7 @@ import org.junit.Assert;
 import acceptancetests.data.PageConstants;
 import cucumber.api.java.en.When;
 import pages.acquisition.dceredesign.DrugDetailsPage;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 
 public class DCEStepDefinition_Depricated_ToberemovedSteps {
 
@@ -91,4 +92,22 @@ public class DCEStepDefinition_Depricated_ToberemovedSteps {
 	 * assertTrue(monthlyValue.getText() != "");
 	 * System.out.println("Monthly Value: " + monthlyValue.getText()); }
 	 */
+	
+/*
+	@When("^user click on Switch To Generic$")
+	public void User_click_on_Switch_To_Generic_in_AARP() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.clickswitchToGeneric();
+
+	}*/
+	
+/*
+	@When("^user click on Switch To Generic on drug summary$")
+	public void User_click_on_Switch_To_Generic_drug_summary() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.clickswitchToGeneric();
+
+	}*/
+	
 }

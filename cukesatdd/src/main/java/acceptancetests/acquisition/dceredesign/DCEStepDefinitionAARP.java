@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -1268,13 +1269,6 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	@When("^user click on Switch To Generic$")
-	public void User_click_on_Switch_To_Generic_in_AARP() throws Throwable {
-		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.clickswitchToGeneric();
-
-	}
 
 	@When("^user verify drug can switch to generic drug$")
 	public void user_verify_drug_can_switch_to_generic_drug_aarp(DataTable givenAttributes) throws Throwable {
@@ -2582,12 +2576,6 @@ public class DCEStepDefinitionAARP {
 		visitorProfilePage.clickAddDrugsGlobal();
 	}
 
-	@When("^user click on Switch To Generic on drug summary$")
-	public void User_click_on_Switch_To_Generic_drug_summary() throws Throwable {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.clickswitchToGeneric();
-
-	}
 
 	@Then("^user click on standard tab from drug details$")
 	public void user_click_on_standard_tab_from_drug_details() {
@@ -2767,4 +2755,41 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateStandardTab();
 		drugDetailsPage.ApplyPharmacyFilter(FilterText);
 	}
+	
+
+	@Then("^the user selects the following drug recommendation and validates Drug Search page is displayed and add drug$")
+	public void the_user_selects_the_following_drug_recommendation_and_validates_Drug_Search_page_is_displayed_and_add_drug(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("SelectDrugRecommendation");
+		System.out.println(drugName);
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+
+		boolean drugRecommendationDisplayed;
+		drugRecommendationDisplayed = buildDrugList.ClickAddDrugRecommended(drugName);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		System.out.println("Drugs List : " + druglist);
+		if(drugRecommendationDisplayed) {
+			String DrugName = driver.findElement(By.xpath("//h4[contains(text(), '"+drugName+"')]")).getText();
+//			if (druglist.isEmpty()) {
+			if(StringUtils.isEmpty(druglist)) {
+				System.out.println("Added Drug : "+DrugName+", for Drug recommendation : "+drugName);
+				druglist = DrugName;
+			} else {
+				druglist = druglist + "&" + DrugName;
+			}
+			System.out.println("Drugs List after Drug " + DrugName + " , Added : " + druglist);
+		}
+		else {
+			System.out.println("Drug Recommendation is not displayed : Drug is not added");
+		}
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+	}
+
 }
