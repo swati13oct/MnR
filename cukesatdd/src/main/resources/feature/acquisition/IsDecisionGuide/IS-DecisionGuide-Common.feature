@@ -45,7 +45,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
     #Then the user validates Thank You Page and land on Medsupp Page
      
 
-    @IS_DecisionGuide_Common_AARP @UATRegression @regressionAARP 
+    @IS_DecisionGuide_Common_AARP @UATRegression @regressionAARP  @sanity
     Examples: 
       | Scenario    | site | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email                      | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
      | IS Decision Guide Request - E2E Scenario_AARP | AARP |   90210 | NO              | Los Angeles County | MS       | MNRtestSai		| MNRtestKumar | mail               |                            | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
@@ -95,7 +95,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
     #Then the user clicks Submit to submit Decision Guide
     #Then the user validates Thank You Page and land on Medsupp Page
 
-    @IS_DecisionGuide_Common_AARP @UATRegression @regressionAARP
+    @IS_DecisionGuide_Common_AARP @UATRegression @regressionAARP 
     Examples: 
       |Scenario  										| site | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email                      | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
       | IS Decision Guide Request - E2E Scenario 1_AARP | AARP |   90210 | NO              | Los Angeles County | MS       | MNRtestSai		| MNRtestKumar| mail               |                            | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
