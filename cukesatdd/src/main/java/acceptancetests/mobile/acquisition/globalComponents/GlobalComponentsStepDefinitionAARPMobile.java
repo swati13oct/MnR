@@ -17,10 +17,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.EnterZipCodePage;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.TermsnConditionsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 
 /**
  * Functionality:Global Header Footer

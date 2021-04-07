@@ -14,15 +14,15 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
+import pages.mobile.acquisition.commonpages.ContactUsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.DisclaimersAARPPageMobile;
+import pages.mobile.acquisition.commonpages.PrivacyPolicyAARPPageMobile;
+import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
+import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import pages.mobile.acquisition.ulayer.AboutUsAARPPageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.AgentsnBrokersAARPPageMobile;
-import pages.mobile.acquisition.ulayer.ContactUsAARPPageMobile;
-import pages.mobile.acquisition.ulayer.DisclaimersAARPPageMobile;
-import pages.mobile.acquisition.ulayer.PrivacyPolicyAARPPageMobile;
-import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
-import pages.mobile.acquisition.ulayer.TermsnConditionsAARPPageMobile;
 
 
 public class GlobalComponentsCommonStepDefinition {
