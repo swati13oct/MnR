@@ -12,11 +12,11 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionHeaderFooterGeoTargetLink.json",detailedReport = true,
+jsonReport = "target/cucumber-RunMRATDDAcquisitionHeaderFooterGeoTargetLinkUHC.json",detailedReport = true,
 detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionHeaderFooterGeoTargetLink")
+outputFolder = "target/RunMRATDDAcquisitionHeaderFooterGeoTargetLinkUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionHeaderFooterGeoTargetLink.json" }, tags = { " @GeoTarget_MedSup_GlobalCompsAARP" })
-public class RunMRATDDAcquisitionHeaderFooterGeoTargetLink {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionHeaderFooterGeoTargetLinkUHC.json" }, tags = { " @GeoTarget_MedSup_GlobalCompsUHC" })
+public class RunMRATDDAcquisitionHeaderFooterGeoTargetLinkUHC {
 
 }

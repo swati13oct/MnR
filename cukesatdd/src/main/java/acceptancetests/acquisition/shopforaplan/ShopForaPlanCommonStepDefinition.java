@@ -396,4 +396,11 @@ public class ShopForaPlanCommonStepDefinition {
 		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
 		resourcePage.clickOnGetInformedMedicalFraudLink();
 	}
+	
+	@Given("^the user clicks on medicare supplement plans from shop for a plan$")
+	public void the_user_clicks_screen_over_the_shop_for_a_plan() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickMedSupp();
+	}
 }
