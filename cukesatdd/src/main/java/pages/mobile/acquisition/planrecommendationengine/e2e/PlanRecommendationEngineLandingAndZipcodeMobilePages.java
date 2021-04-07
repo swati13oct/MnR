@@ -6,7 +6,6 @@ package pages.mobile.acquisition.planrecommendationengine.e2e;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,11 +13,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
-import io.appium.java_client.AppiumDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDriver {
+public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends GlobalWebElements {
 
 	public PlanRecommendationEngineLandingAndZipcodeMobilePages(WebDriver driver) {
 		super(driver);
@@ -28,7 +25,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 

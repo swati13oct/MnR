@@ -6,7 +6,6 @@ package pages.mobile.acquisition.planrecommendationengine.e2e;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -25,24 +24,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
-import acceptancetests.data.PageConstants;
 import acceptancetests.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationStepDefinitionMobile;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
-
-public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
+public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements {
 
 	public PlanRecommendationEngineResultsPageMobile(WebDriver driver) {
 		super(driver);
@@ -52,7 +43,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 

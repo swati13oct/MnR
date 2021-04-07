@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.AddNewDrugModal;
 
 public class AddDrugDetails extends UhcDriver {
 

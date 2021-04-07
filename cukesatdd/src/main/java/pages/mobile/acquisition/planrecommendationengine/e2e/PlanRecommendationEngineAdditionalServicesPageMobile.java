@@ -3,25 +3,15 @@
  */
 package pages.mobile.acquisition.planrecommendationengine.e2e;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
-
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.touch.ScrollAction;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDriver {
+public class PlanRecommendationEngineAdditionalServicesPageMobile extends GlobalWebElements {
 
 	public PlanRecommendationEngineAdditionalServicesPageMobile(WebDriver driver) {
 		super(driver);
@@ -32,7 +22,7 @@ public class PlanRecommendationEngineAdditionalServicesPageMobile extends UhcDri
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 

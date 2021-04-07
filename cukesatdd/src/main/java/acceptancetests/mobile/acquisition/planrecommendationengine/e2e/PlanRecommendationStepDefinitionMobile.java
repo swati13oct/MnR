@@ -4,40 +4,28 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.mobile.acquisition.vpp.VPPCommonConstantsMobile;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * @author Harshal Ahire
  */
 
-import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PlanSelectorNewPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.e2e.ACQDrugCostEstimatorPage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.AdditionalServicesMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.CommonutilitiesMobile;
-import pages.mobile.acquisition.planrecommendationengine.e2e.CostPreferencesMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.CoverageOptionsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.DrugMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.EditResponseMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.HeaderFooterMobile;
-import pages.mobile.acquisition.planrecommendationengine.e2e.LandingAndZipcodeMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.LoadingMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.PharmacyMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationEngineAdditionalServicesPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationEngineCommonutilityMobile;
 import pages.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationEngineCostPreferencesPageMobile;
@@ -52,10 +40,6 @@ import pages.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationE
 import pages.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationEngineResultsPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationEngineSpecialNeedsPageMobile;
 import pages.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationEngineTravelPageMobile;
-import pages.mobile.acquisition.planrecommendationengine.e2e.PrioritiesMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.ResultsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.SpecialNeedsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.e2e.TravelMobilePage;
 
 public class PlanRecommendationStepDefinitionMobile {
 

@@ -21,22 +21,21 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
-import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
-import pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile;
-//import pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
+import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
+import pages.mobile.acquisition.commonpages.DisclaimersPageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
 import pages.mobile.acquisition.dce.bluelayer.SavingsOppurtunityMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.emailAndPrint.EmailAndPrintUtilMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -112,7 +111,7 @@ public class VppPlanSummaryMobile {
 		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName, planType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 
-		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
+		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
 				.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -678,7 +677,7 @@ public class VppPlanSummaryMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
 		// plansummaryPage.viewPlanSummary(planType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile plandetailspage = plansummaryPage
+		PlanDetailsPageMobile plandetailspage = plansummaryPage
 				.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
@@ -703,11 +702,11 @@ public class VppPlanSummaryMobile {
 		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(1);*/
 		String drug = data.cell(1, 1);
-		pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile dce = (pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile) getLoginScenario()
+		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		boolean isDrugPresent = dce.isDrugPresent(drug);
 		if (!isDrugPresent) {
-			pages.mobile.acquisition.ulayer.AddDrugDetailsMobile addDrugDetails = dce.addDrug(drug.split(" ")[0]);
+			pages.mobile.acquisition.commonpages.AddDrugDetailsMobile addDrugDetails = dce.addDrug(drug.split(" ")[0]);
 			if (null != addDrugDetails) {
 				getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
 			} else
