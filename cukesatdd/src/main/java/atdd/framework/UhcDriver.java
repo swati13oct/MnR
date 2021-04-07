@@ -11,6 +11,7 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -29,6 +30,7 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.FindBy;
@@ -515,7 +517,7 @@ public abstract class UhcDriver {
 	public void iOSClick(WebElement element) {
 
 		// Sets FluentWait Setup
-		
+
 		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
 				.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 				.ignoring(TimeoutException.class);
@@ -526,9 +528,13 @@ public abstract class UhcDriver {
 			threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
 			System.out.println("Waiting to check if element is present");
 			fwait.until(ExpectedConditions.visibilityOf(element));
+
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript("arguments[0].click();", element);
-			//element.click();
+			if (element.isDisplayed()) {
+				element.click();
+			}
+
 		}
 
 		catch (Exception e) {
@@ -542,7 +548,9 @@ public abstract class UhcDriver {
 	public boolean scrollToView(WebElement element) {
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-
+			
+			Actions ac = new Actions(driver);
+			ac.moveToElement(element);
 			backToTop.isDisplayed();
 			System.out.println("Scroll finished to element on IOS device");
 
@@ -821,10 +829,10 @@ public abstract class UhcDriver {
 	/* logic to simulate hover over functionality */
 	public void navigateToMenuLinks(WebElement hdrMenuElement, WebElement menuDropListItem) {
 
-		/*Actions actions = new Actions(driver);
-		actions.moveToElement(hdrMenuElement);
-		actions.moveToElement(menuDropListItem);
-		actions.click().build().perform();*/
+		/*
+		 * Actions actions = new Actions(driver); actions.moveToElement(hdrMenuElement);
+		 * actions.moveToElement(menuDropListItem); actions.click().build().perform();
+		 */
 		jsMouseOver(hdrMenuElement);
 		jsMouseOver(menuDropListItem);
 		menuDropListItem.click();
@@ -947,7 +955,7 @@ public abstract class UhcDriver {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
 		for (String winHandle : driver.getWindowHandles()) {
-			if(!winHandle.equals(winHandleBefore)) {
+			if (!winHandle.equals(winHandleBefore)) {
 				driver.switchTo().window(winHandle);
 				break;
 			}
@@ -1306,8 +1314,8 @@ public abstract class UhcDriver {
 	 */
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
-		if (MRScenario.browserName.equalsIgnoreCase("Safari") &&
-				driver.getClass().getSimpleName().contains("WebDriver")) {
+		if (MRScenario.browserName.equalsIgnoreCase("Safari")
+				&& driver.getClass().getSimpleName().contains("WebDriver")) {
 			// Sets FluentWait Setup
 			List<WebElement> loadingScreen = null;
 			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))

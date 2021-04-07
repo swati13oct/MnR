@@ -1987,8 +1987,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public boolean compareTextAfterclickingAddtoCompareinAARP(String planName) throws InterruptedException {
-		WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-				+ "')]/ancestor::div[contains(@class,'compare-add')]//span[contains(@class,'single-added-text')]"));
+		pageloadcomplete();
+		WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '"+ planName +"' )]/ancestor::div[contains(@class,'compare-add')]//span[contains(@class,'single-added-text')]"));
+
 		if (compareText.getText().contains("1 plan added")) {
 			System.out.println("1 plan has been selected for comparison");
 			return true;

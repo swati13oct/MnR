@@ -1616,13 +1616,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 
 		scrollToView(zipCodeField);
-		// sendkeysNew(zipCodeField, zipcode);
-		jsSendkeys(zipCodeField, zipcode);
+		sendkeysNew(zipCodeField, zipcode);
+		sendkeysMobile(zipCodeField, zipcode);
 		jsClickNew(viewPlansButton);
 
 		pageloadcomplete();
 
-		validateNew(vppTop, 10);
+		//validateNew(vppTop, 10);
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		} else
