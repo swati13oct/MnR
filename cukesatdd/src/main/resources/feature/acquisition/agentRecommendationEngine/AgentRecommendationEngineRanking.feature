@@ -1,4 +1,4 @@
-@AgentRecommendationEngine @ARERegression
+@AgentRecommendationEngine @ARERegression @regressionAARP
 Feature: Agent Recommendation Engine - Verify ARE elements
 
   @ARE @AREElements @dropdownUI @F439411

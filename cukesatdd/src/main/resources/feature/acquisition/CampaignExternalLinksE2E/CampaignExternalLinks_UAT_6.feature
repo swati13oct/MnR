@@ -1,3 +1,4 @@
+@campaignExtenralLinks
 Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medicare-plans-11 
 
   Scenario Outline: TID: <Scenario> -plan type: <plantype> - OLE End to end from external Links
@@ -191,7 +192,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN Xpath | <TFNxpath> |
     Then user closes current tab and navigate to previous tab
 		
-    @CampaignExternalLink_E2E_Scenario_6
+    @CampaignExternalLink_E2E_Scenario_6 @regressionAARP
     Examples: 
       | Scenario                              | site | PlanType | externallink                                              | planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |TFNxpath4                          |pscCode|
       | E2E Scenario 6_aarp-medicare-plans-11 | AARP | MAPD-MBI | https://info.aarpmedicareplans.com/aarp-medicare-plans-11 | future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |         1 |          2 | (//a[contains(@class, 'tel')])[3] |8000158|
@@ -336,7 +337,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | TFN Xpath | <TFNxpath> |
     Then user closes current tab and navigate to previous tab
 
-    @CampaignExternalLink_E2E_Scenario_6_Stage
+    @CampaignExternalLink_E2E_Scenario_6_Stage @regressionAARP
     Examples: 
       | Scenario                              | site | PlanType | path                                                                               	|path2                                 |  planyear | planYear | zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                           | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 |
       | E2E Scenario 6_aarp-medicare-plans-11_stage | AARP | MAPD-MBI | /health-plans.html?zipcode=33111&WT.mc_id=8000158&county=120&state=12#/plan-summary | privacy-policy.html?WT.mc_id=8000158 |future   | future   |   33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-844-850-6592 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class,'js-tel js-track-event')])[1] | PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |         1 |          2 |
@@ -524,12 +525,12 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
       | Is Multi County | <isMultiCounty> |
       | CountyDropDown  | <county>        |
 
-   @CampaignExternal_Scenario1_AARP1
+   @CampaignExternal_Scenario1_AARP1 @regressionAARP
     Examples: 
       | Scenario                                             | externallink                                             | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |TFNNo1|pscCode|
       | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 |1-866-408-5545|8012869|
 
-    @CampaignExternal_Scenario1_UHC1
+    @CampaignExternal_Scenario1_UHC1 @regressionUHC
     Examples: 
       | Scenario                                             | externallink                                                | zipcode | isMultutiCounty | county            | MAplantype | TFNNo          | TFNxpath1                                     | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode |
       | Campaign External Links - E2E Scenario 1_UMS_English | https://ma.uhcmedicaresolutions.com/aarp-medicare-advantage |   33111 | No              | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[contains(@class,'js-tel js-track-event')] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 |
@@ -574,7 +575,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     And the user closes the new browser tab
     #---------------------VPP from Morgan Stanley page-------------------
 
-    @Scenario5_AARP1
+    @Scenario5_AARP1 @regressionAARP
     Examples: 
       | Scenario                      | externallink                             | TFNNo          | TFNxpath1                                     | TFNxpath2                                                                                          | TFNxpath3                         |	TFNxpath4													|	pscCode	|	Zipcode	|	isMultiCounty	|	county						|	isCoverageOpt	|
       | E2E Scenario 5_ morganstanley | https://www.myuhcplans.com/morganstanley | 1-877-755-5345 | //a[contains(@class,'js-tel js-track-event')] | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class, 'tel')])[1] |	(//a[contains(@class, 'tel')])[2]	|	8002977	|	65656		|	YES						|	Christian County	|	PDP						|
@@ -739,7 +740,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
      ## pharmacyflow##
      
     #Then the user check Still have a question
-    @Scenario7_AARP1
+    @Scenario7_AARP1 @regressionAARP
     Examples: 
       | Scenario                                            | externallink                                                          | TFNNo          | TFNxpath1                               | TFNxpath2                                                                                          | pscCode | zipcode | isMultutiCounty | county         | PDPplantype | planname                        | planyear | TFNxpath3                         | planIndex | planIndex1 | TFNxpath                                                                                   |	MAplantype	| MAplanname	|	SNPPlanName	|	 drug1 | drug2   | drug3   | drug4 | zipCode	|
       | E2E Scenario 7 _medicare-prescription-drug-plans-52 | https://pdp.aarpmedicareplans.com/medicare-prescription-drug-plans-52 | 1-866-308-8818 | //*[@id="tfn-614028214"]/p[2]/span[1]/a | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | 8001024 |   36016 | Yes             | Barbour County | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] |         1 |          2 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |	MAPD	|	AARP Medicare Advantage Plan 1 (HMO)	|	UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP)	|	Emsam | Lipitor | Orfadin | Humalog | 27053	|
