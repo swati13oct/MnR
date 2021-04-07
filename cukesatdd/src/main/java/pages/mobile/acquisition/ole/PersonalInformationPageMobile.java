@@ -207,10 +207,14 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
 
-		sendkeysNew(firstNameField, FirstName);
-		sendkeysNew(lastNameField, LastName);
+		//sendkeysNew(firstNameField, FirstName);
+		sendkeysMobile(firstNameField, FirstName);
+		//sendkeysNew(lastNameField, LastName);
+		sendkeysMobile(lastNameField, LastName);
 
-		sendkeys(DOBtxtFld, DOB);
+		//sendkeys(DOBtxtFld, DOB);
+		sendkeysMobile(DOBtxtFld, DOB);
+		
 		if (Gender.contains("Male")) {
 			// GenderSelectMale.click();
 			jsClickNew(GenderSelectMale);
