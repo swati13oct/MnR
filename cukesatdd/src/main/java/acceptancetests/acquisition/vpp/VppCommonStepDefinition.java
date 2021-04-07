@@ -4059,12 +4059,13 @@ public class VppCommonStepDefinition {
 	
 	@When("^the user performs plan search using following information using external link$")
 	public void zipcode_details_in_aarp_external_site(DataTable givenAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -4137,13 +4138,13 @@ public class VppCommonStepDefinition {
 			throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
+		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
 			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String InputValue = urlAttributesMap.get("search Value");
 		System.out.println("Search value" + InputValue);
 		Thread.sleep(3000);
@@ -4170,13 +4171,13 @@ public class VppCommonStepDefinition {
 			DataTable inputvalue) throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
-
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
+		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
 			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String InputValue = urlAttributesMap.get("NewSearchValue");
 		System.out.println("NewSearchValue" + InputValue);
 		Thread.sleep(3000);

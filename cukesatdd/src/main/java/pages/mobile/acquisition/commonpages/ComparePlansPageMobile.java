@@ -1198,10 +1198,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public WebElement enterDrugInformation;
 
 	@FindBy(xpath = "//div[contains(text(),'Available')]")
-	public static WebElement planComparePlansAvailableLabel;
+	public WebElement planComparePlansAvailableLabel;
 
 	@FindBy(xpath = "//button[@id='viewallplansBtnId']")
-	public static WebElement viewAllplansButton;
+	public WebElement viewAllplansButton;
 
 	public GetStartedPageMobile navigateToDCERedesign() {
 
@@ -1216,22 +1216,22 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
-	public static WebElement medicalBenefitsOONToggle;
+	public WebElement medicalBenefitsOONToggle;
 
 	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
-	public static WebElement medicalBenefitsOONLabel;
+	public WebElement medicalBenefitsOONLabel;
 
 	@FindBy(xpath = "//h2[contains(text(),'Additional Benefits')]/following::div[@class='uhc-switch__slider']")
-	public static WebElement additionalBenefitsOONToggle;
+	public WebElement additionalBenefitsOONToggle;
 
 	@FindBy(xpath = "//h2[contains(text(),'Additional Benefits')]/following::div[contains(@class,'uhc-switch__label')]")
-	public static WebElement additionalBenefitsOONLabel;
+	public WebElement additionalBenefitsOONLabel;
 
 	@FindBy(xpath = "//td[contains(@class,'show-out-of-network')]")
-	public static WebElement outOfNetworkStyle;
+	public WebElement outOfNetworkStyle;
 
 	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
-	public static WebElement medicalBenefitsOONToggleNotDisplayed;
+	public WebElement medicalBenefitsOONToggleNotDisplayed;
 
 	public void validateOONDDisplayed() throws Exception {
 		Assertion.assertTrue("OON Toggle Should be Displayed for Medical Benefits",

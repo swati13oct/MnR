@@ -25,8 +25,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-//import org.testng.Assert;
+//import org.testng.Assertion;
 import org.springframework.util.StringUtils;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -425,17 +426,17 @@ public class PlanDetailsPage extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		if (planType.equalsIgnoreCase("MA")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			org.testng.Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
+			Assert.assertTrue(0 == presDrugTab2.size(), "Prescription Drug tab not displayed for MA plans");
 
 		} else if (planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			org.testng.Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
+			Assert.assertTrue(1 == presDrugTab1.size(), "Prescription Drug tab displayed for MAPD plans");
 		} else if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			org.testng.Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
+			Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			org.testng.Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
+			Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
 					"Medical Benefit tab not displayed for SNP plans");
 		} /* Added for SNP as well */
 		validateNew(planCostsTab);
@@ -899,7 +900,7 @@ public class PlanDetailsPage extends UhcDriver {
 		presDrugTab.get(0).click();
 		validateNew(yourDrugListHeading);
 		String actualDrug = addedDrug.getText().trim();
-		org.testng.Assert.assertTrue(actualDrug.contains(expectedDrugName),
+		Assert.assertTrue(actualDrug.contains(expectedDrugName),
 				"Expected drug not matches with actual drug");
 	}
 
@@ -2051,10 +2052,10 @@ public class PlanDetailsPage extends UhcDriver {
 
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("welcome")) {	
-					Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+					Assertion.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
 				}
 				else {
-					Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+					Assertion.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
 				}
 				return new WelcomePage(driver);
 				//return null;

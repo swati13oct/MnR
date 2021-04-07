@@ -41,7 +41,7 @@ public class DisclaimersAARPPage extends GlobalWebElementsMobile{
 	}
 
 	@FindBy(id = "logo")
-	public static WebElement logoLink;
+	public WebElement logoLink;
 	
 	public AcquisitionHomePageMobile logoClick() {
 		validate(logoLink);

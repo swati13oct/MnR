@@ -70,7 +70,7 @@ public class GlobalWebElements  extends UhcDriver{
 	 public WebElement medicareSupplementInsurancePlansLink;
 	
 	@FindBy(xpath = "//span[@class='meded-article-header__title' and contains(text(),'Medicare Supplement')]")
-	public static WebElement medicareSupplementInsurancePlansHeader;
+	public WebElement medicareSupplementInsurancePlansHeader;
 
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2_5') and contains(@dtmname, 'Medicare Prescription')]")
 	 public WebElement medicarePrescriptionDrug_PlansLink;
