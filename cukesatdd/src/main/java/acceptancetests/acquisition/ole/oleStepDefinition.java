@@ -1063,7 +1063,7 @@ public class oleStepDefinition {
 		}
 		
 		String diclsoureCheckbox="true";
-		String diclsourestate ="AK";
+	//	String diclsourestate ="AK";
 		
 		UseAndDisclosureAuthorizationPage useranddisclosure = (UseAndDisclosureAuthorizationPage) getLoginScenario()
 	.getBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE);
@@ -1085,10 +1085,10 @@ public class oleStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS, MedicareDetailsMap.get("Provider Street Address"));
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY, MedicareDetailsMap.get("City"));
-		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, diclsourestate);
+		//getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, diclsourestate);
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP,  MedicareDetailsMap.get("Zip"));
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER, MedicareDetailsMap.get("Provider Phone Number"));
-
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, MedicareDetailsMap.get("Mailing_State"));
 	}
 	/**
 	 * @toDo:user fill following information in Preliminary Questions Page 
@@ -3996,9 +3996,11 @@ public void the_user_navgates_to_clicks_on_Enroll_Now_plandetails_page_to_start_
 	
 	@Then("^the user validates Footer links on Welcome OLE Page$")
 	public void the_user_validates_footer_links_welcome_OLE_Page() throws Throwable {
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 	//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		welcomePage.ValidateFooterEnrollmentChecklistLink();
 		welcomePage.ValidateFooterListaVerificationLink();
+		}
 	}
 }

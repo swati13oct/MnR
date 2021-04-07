@@ -17,7 +17,7 @@ Feature: 1.05.1. OLE common tool flow E2E Plan Details Page
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
     Then The User validates the Plan details on OLE page
     Then the user validates TFN in Welcome OLE Right Rail
-    #Then the user validates Footer links on Welcome OLE Page
+    Then the user validates Footer links on Welcome OLE Page
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
    Then the user validates cancellation modal for Welcome OLE
