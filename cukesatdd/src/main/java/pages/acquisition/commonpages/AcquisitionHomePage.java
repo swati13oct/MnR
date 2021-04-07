@@ -91,7 +91,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement pharmacyNearLink;
 
 	// @FindBy(className = "zip-button")
-	@FindBy(xpath = "(//*[@class='zip-button'])[1]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-button') and contains(text(),'Find Plans')]")
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
@@ -3750,12 +3750,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement PDPplansLink = driver.findElement(
 				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-part-d')]"));
 
+		
+		WebElement EnrollmentBasicsLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
+		 
 		/*
-		 * WebElement EnrollmentBasicsLink = driver.findElement(By.xpath(
-		 * "//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"
+		 * WebElement glossaryLink=driver.findElement(By.
+		 * xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'aarpmedicareplans/en.html#')]"
 		 * ));
 		 */
-		WebElement glossaryLink=driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'aarpmedicareplans/en.html#')]"));
 		WebElement FAQLink = driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-faq')]"));
 
 		validateNew(EligibilityTxt);
@@ -3767,12 +3770,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(MedSuppPlansLink);
 		validateNew(PDPplansLink);
 
-		validateNew(glossaryLink);
+		validateNew(EnrollmentBasicsLink);
 		validateNew(FAQLink);
 
 		if (EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() && PresProvidersBenefitsLink.isDisplayed()
 				&& CostbasicsLink.isDisplayed() && MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed()
-				&& PDPplansLink.isDisplayed() && glossaryLink.isDisplayed() && FAQLink.isDisplayed()) {
+				&& PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed() && FAQLink.isDisplayed()) {
 			// && FAQLink.isDisplayed()
 			Assert.assertTrue(true);
 			System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
