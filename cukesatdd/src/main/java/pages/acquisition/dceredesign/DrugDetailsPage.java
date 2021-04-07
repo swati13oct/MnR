@@ -2083,6 +2083,7 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(PharmacyFilterApplyBtn);
 		System.out.println("Apply button clicked for filter text"+filterText);
 		for (WebElement PharmacyName : pharmacyNameList) {
+			System.out.println("Pharmacy Name : "+PharmacyName.getText());
 			if(!PharmacyName.getText().contains(filterText)) {
 				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "+PharmacyName+ "  Filter Text : "+filterText);
 			}
