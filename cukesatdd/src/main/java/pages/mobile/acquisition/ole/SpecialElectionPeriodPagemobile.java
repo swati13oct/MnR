@@ -15,6 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.ProposedEffectiveDatePage;
 import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
 
 /**
@@ -143,6 +144,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
 	private WebElement pedHeader;
+
 
 	@FindBy(xpath = "//*[contains(text(),'new to Medicare')]/parent::span/input")
 	private WebElement pedHeader1;
@@ -472,16 +474,12 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public ProposedEffectiveDatePageMobile navigate_to_Proposed_Effective_Date_Page() {
 
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
-		/*
-		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
-		 * executor.executeScript("arguments[0].click();", NextBtn);
-		 */
-		//*[@id="new"]
-		jsClickMobile(trial);
-		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
-		if (validateNew(pedHeader)) {
+		jsClickNew(NextBtn);
+		waitForPageLoadSafari();
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
+		
+		if(validateNew(pedHeader)){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePageMobile(driver);
 		}
