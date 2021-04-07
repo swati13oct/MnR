@@ -3622,7 +3622,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		waitforElement(ShopForaplan);
 		if (ShopForaplan.isDisplayed()) {
 			scrollToView(ShopForaplan);
-			//threadsleep(2000);
 			/*
 			 * Actions actions = new Actions(driver); actions.moveToElement(ShopForaplan);
 			 * actions.build().perform();
