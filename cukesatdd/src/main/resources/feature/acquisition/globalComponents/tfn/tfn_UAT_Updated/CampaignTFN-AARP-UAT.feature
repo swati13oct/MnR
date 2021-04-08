@@ -1,3 +1,4 @@
+@campaignTFN @regressionAARP
 Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
 
   #######################Script 1: Direct traffic########################################

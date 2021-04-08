@@ -1,3 +1,4 @@
+@campapaignTFN @regressionUHC
 Feature: UAT-SCripts To test Campaign TFN in all flows on UHC site
 
   #######################Script 1: Direct traffic########################################

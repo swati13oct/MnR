@@ -1,3 +1,4 @@
+@campaignTFN @regressionUHC
 Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
 
   ################################Script 3: Organic Search via Google and Bing######################################
