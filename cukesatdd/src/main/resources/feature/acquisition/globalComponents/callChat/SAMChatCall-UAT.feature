@@ -1,4 +1,5 @@
-Feature: UAT Scripts-2.13 ACQ M&R- To test SAM Icons
+@globalComponent @samIcons
+Feature: 1.14 - UAT Scripts - To test SAM Icons
 
   Scenario Outline: <scenario> 1.19.1.1 To test the SAM icons on Acq site on <site> Homepage
     Given the user is on medicare acquisition site landing page
@@ -9,12 +10,12 @@ Feature: UAT Scripts-2.13 ACQ M&R- To test SAM Icons
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
-    @samChatCallulayer @UATRegression
+    @samChatCallulayer @UATRegression @regressionAARP 
     Examples: 
       | pagename | site | scenario           |
       | /        | AARP | E2E Scenario 1_AMP |
 
-    @samChatCallblayer @UATRegression
+    @samChatCallblayer @UATRegression  @regressionUHC
     Examples: 
       | pagename | site | scenario           |
       | /        | UHC  | E2E Scenario 1_UMS |
@@ -30,12 +31,12 @@ Feature: UAT Scripts-2.13 ACQ M&R- To test SAM Icons
     Then the user validates whether call icon is visible
     Then the user validates whether chat icon is visible
 
-    @samChatCallulayer @UATRegression
+    @samChatCallulayer @UATRegression @regressionAARP 
     Examples: 
       | pagename | site | scenario           |
       | /        | AARP | E2E Scenario 3_AMP |
 
-    @samChatCallblayer @UATRegression
+    @samChatCallblayer @UATRegression  @regressionUHC
     Examples: 
       | pagename | site | scenario           |
       | /        | UHC  | E2E Scenario 3_UMS |
@@ -50,7 +51,7 @@ Feature: UAT Scripts-2.13 ACQ M&R- To test SAM Icons
     And the user hovers screen over the shop for a plan
     And click on provider search link on shop pages
 
-    @samChatnonhoursulayer @UATRegression
+    @samChatnonhoursulayer @UATRegression @regressionAARP 
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site | scenario           |  |
       | /                                                                                                                                                                                                                                                                                                                             | AARP | E2E Scenario 4_AMP |  |
@@ -114,7 +115,7 @@ Feature: UAT Scripts-2.13 ACQ M&R- To test SAM Icons
       | contact-us.html                                                                                                                                                                                                                                                                                                               | AARP | E2E Scenario 4_AMP |  |
       | privacy-policy.html                                                                                                                                                                                                                                                                                                           | AARP | E2E Scenario 4_AMP |  |
 
-    @samChatnonhoursblayer @UATRegression
+    @samChatnonhoursblayer @UATRegression  @regressionUHC
     Examples: 
       | pagename                                                                                                                                                                                                                                                                                                                      | site | scenario           |  |
       | /                                                                                                                                                                                                                                                                                                                             | UHC  | E2E Scenario 4_UMS |  |

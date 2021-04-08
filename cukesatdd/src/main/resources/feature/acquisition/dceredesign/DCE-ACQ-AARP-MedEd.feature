@@ -1,4 +1,4 @@
-@dce_redesign_MedEd
+@DCE @dce_redesign_MedEd
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion Page to NEW DCE Flows
 
   @DCE_MedEdPage
@@ -23,11 +23,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion 
     And user clicks on continue button in Zip Entry Page
 
 		#@DCE_MedEdPage_AARP
+		 @regressionAARP 
     Examples: 
       |	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
       | AARP	| Orkambi | Fanapt | Humalog | Adderall |   80002 |
     
-    #@DCE_MedEdPage_UHC  
+    #@DCE_MedEdPage_UHC 
+      @regressionUHC 
     Examples: 
       |	site	| drug1   | drug2  | drug3   | drug4    | zipCode |
       | UHC		| Orkambi | Fanapt | Humalog | Adderall |   80002 |

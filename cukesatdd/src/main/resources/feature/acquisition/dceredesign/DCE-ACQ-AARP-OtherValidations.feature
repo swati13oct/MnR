@@ -1,4 +1,4 @@
-@dce_redesign_home
+@DCE @dce_redesign_home
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
   @DCE_ErrorMessages
@@ -38,12 +38,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     # | path                                  | pageName                   | drugnameAutocomplete | brandDrugName | CheckGeneric | drug1         | zipCode | planType | planName                                            |
     # | health-plans/estimate-drug-costs.html | DCE Redesign - Get Started | ativ                 | Ativan        | Lorazepam    | buprenorphine |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 		
-		@DCE_ErrorMessages_AEP_AARP
+		@DCE_ErrorMessages_AEP_AARP @regressionAARP 
     Examples: 
       | drugnameAutocomplete | brandDrugName | CheckGeneric | drug1         | zipCode | planType | planName                                            |site|
       | ativ                 | Ativan        | Lorazepam    | buprenorphine |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |AARP|
 		
-		@DCE_ErrorMessages_AEP_UHC
+		@DCE_ErrorMessages_AEP_UHC  @regressionUHC
     Examples: 
       | drugnameAutocomplete | brandDrugName | CheckGeneric | drug1         | zipCode | planType | planName                                            |site|
       | ativ                 | Ativan        | Lorazepam    | buprenorphine |   90210 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |UHC|
@@ -132,12 +132,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
-    @DCE_DrugListTiersLimits_AEP_AARP
+    @DCE_DrugListTiersLimits_AEP_AARP @regressionAARP 
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | drug5   | drug6   | drug7     | drug8                | drug9           | drug10    | drug11           | drug12     | drug13        | drug14     | drug15               | drug16        | drug17  | drug18 | drug19 | drug20  | drug21 | drug22     | drug23     | drug24          | drug25  | drug26  | zipCode | planType | planName                                            |site|
       | Orkambi | Fanapt | Humalog | Adderall | Orfadin | Lipitor | meloxicam | diclofenac potassium | codeine sulfate | Duramorph | fentanyl citrate | febuxostat | buprenorphine | vigabatrin | fentanyl transdermal | Advair Diskus | Tylenol | Bumex  | Ativan | Adcirca | Emsam  | droperidol | dronabinol | E.E.S. Granules | Aimovig | Vraylar |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |AARP|
 
-		@DCE_DrugListTiersLimits_AEP_UHC
+		@DCE_DrugListTiersLimits_AEP_UHC  @regressionUHC
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | drug5   | drug6   | drug7     | drug8                | drug9           | drug10    | drug11           | drug12     | drug13        | drug14     | drug15               | drug16        | drug17  | drug18 | drug19 | drug20  | drug21 | drug22     | drug23     | drug24          | drug25  | drug26  | zipCode | planType | planName                                            |site|
       | Orkambi | Fanapt | Humalog | Adderall | Orfadin | Lipitor | meloxicam | diclofenac potassium | codeine sulfate | Duramorph | fentanyl citrate | febuxostat | buprenorphine | vigabatrin | fentanyl transdermal | Advair Diskus | Tylenol | Bumex  | Ativan | Adcirca | Emsam  | droperidol | dronabinol | E.E.S. Granules | Aimovig | Vraylar |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |UHC|

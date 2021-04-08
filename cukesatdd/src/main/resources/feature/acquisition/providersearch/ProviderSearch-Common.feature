@@ -1,5 +1,6 @@
 #File Name: ProviderSearch-Common.feature
 #@fixedTestCaseTest
+@providerSearch
 Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
 
   Scenario Outline: Verify Provider Search  in <site> site
@@ -136,13 +137,13 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Year      | <year>      |
 
     #@ProviderSearchFromGlobalHeaderUlayer1
-    @ProviderSearchCommon_AARP
+    @ProviderSearchCommon_AARP @regressionAARP 
     Examples: 
       | zipcode | site | plancount | year    |
       |   10001 | AARP |        12 | future |
 
     #@ProviderSearchFromGlobalHeaderBlayer1
-    @ProviderSearchCommon_UHC
+    @ProviderSearchCommon_UHC  @regressionUHC
     Examples: 
       | zipcode | site | plancount | year    |
       |   10001 | UHC  |        12 | future |
@@ -170,13 +171,13 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Year      | <year>      |
 
     #@ProviderSearchFromWidgetUlayer
-    @ProviderSearchCommon_AARP
+    @ProviderSearchCommon_AARP @regressionAARP 
     Examples: 
       | zipcode | site | plancount	| year		|
       |   10001 | AARP |        9 	| future	|
 
     #@ProviderSearchFromWidgetBlayer
-    @ProviderSearchCommon_UHC
+    @ProviderSearchCommon_UHC  @regressionUHC
     Examples: 
       | zipcode | site | plancount	| year		|
       |   10001 | UHC  |        9 	| future	|

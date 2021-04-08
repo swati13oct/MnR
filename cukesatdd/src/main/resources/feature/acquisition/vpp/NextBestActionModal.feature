@@ -1,4 +1,4 @@
-@VPPNBAValidations_unauthenticatedUser
+@VPPNBAValidations_unauthenticatedUser @nextBestAction @VPP
 Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
 
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
@@ -16,12 +16,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on get started button on NBA
     Then user should be navigated to first step of DCE Page
 
-    @NBA_MAPD_AARP01
+    @NBA_MAPD_AARP01 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     |
 
-    @NBA_MAPD_UHC01
+    @NBA_MAPD_UHC01  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     |
@@ -50,12 +50,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Find a Provider button on NBA
     Then user should be redirected to Provider search Rally page
 
-    @NBA_MAPD_AARP01
+    @NBA_MAPD_AARP01 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
 
-    @NBA_MAPD_UHC01
+    @NBA_MAPD_UHC01  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
@@ -85,12 +85,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user selects a provider and retuns to VPP page
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_MAPD_AARP01 @NBA_MAPD_Sanity_AARP @prod_regression
+    @NBA_MAPD_AARP01 @NBA_MAPD_Sanity_AARP @prod_regression @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
 
-    @NBA_MAPD_UHC01
+    @NBA_MAPD_UHC01  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
@@ -115,12 +115,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Find a Provider button on NBA
     Then user should be redirected to Provider search Rally page
 
-    @NBA_MAPD_AARP02
+    @NBA_MAPD_AARP02 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
 
-    @NBA_MAPD_UHC02
+    @NBA_MAPD_UHC02  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
@@ -143,12 +143,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on get started button on NBA
     Then user should be navigated to first step of DCE Page
 
-    @NBA_MAPD_AARP02
+    @NBA_MAPD_AARP02 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | planname                             |
       | AARP |   10001 | No              | New York County | MAPD     | next     | Lipitor | AARP Medicare Advantage Plan 2 (HMO) |
 
-    @NBA_MAPD_UHC02
+    @NBA_MAPD_UHC02  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | planname                             |
       | UHC  |   10001 | No              | New York County | MAPD     | next     | Lipitor | AARP Medicare Advantage Plan 2 (HMO) |
@@ -185,12 +185,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
     Then user should be navigated to OLE page
 
-    @NBA_MAPD_AARP02
+    @NBA_MAPD_AARP02 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                            |
       | AARP |   10001 | No              | New York County | MAPD     | next     | Lipitor | AARP Medicare Advantage Plan 2 (HMO) |
 
-    @NBA_MAPD_UHC02
+    @NBA_MAPD_UHC02  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                            |
       | UHC  |   10001 | No              | New York County | MAPD     | next     | Lipitor | AARP Medicare Advantage Plan 2 (HMO) |
@@ -224,12 +224,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
     Then user should be navigated to OLE page
 
-    @NBA_MAPD_AARP01
+    @NBA_MAPD_AARP01 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | AARP |   10001 | No              | New York County | MAPD     | next     | Lipitor |
 
-    @NBA_MAPD_UHC01 @NBA_MAPD_Sanity_UHC @prod_regression
+    @NBA_MAPD_UHC01 @NBA_MAPD_Sanity_UHC @prod_regression  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | UHC  |   10001 | No              | New York County | MAPD     | next     | Lipitor |
@@ -261,12 +261,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Year | <planyear> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_MAPD_AARP02	@NBA_MAPD_Sanity_AARP_01 @prod_regression
+    @NBA_MAPD_AARP02	@NBA_MAPD_Sanity_AARP_01 @prod_regression @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
       | AARP |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor | next     |
 
-    @NBA_MAPD_UHC02
+    @NBA_MAPD_UHC02  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
       | UHC  |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor | next     |
@@ -287,12 +287,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on get started button on NBA
     Then user should be navigated to first step of DCE Page
 
-    @NBA_PDP_AARP01
+    @NBA_PDP_AARP01 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | AARP |   19019 | No              | Iowa County | PDP      | next     |
 
-    @NBA_PDP_UHC01
+    @NBA_PDP_UHC01  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | UHC  |   19019 | No              | Iowa County | PDP      | next     |
@@ -319,12 +319,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Return to plan summary page link in DCE
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_PDP_AARP01
+    @NBA_PDP_AARP01 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
 
-    @NBA_PDP_UHC01
+    @NBA_PDP_UHC01  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
@@ -349,12 +349,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Type | <plantype> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_PDP_AARP01 @NBA_PDP_Sanity_AARP @prod_regression
+    @NBA_PDP_AARP01 @NBA_PDP_Sanity_AARP @prod_regression @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
 
-    @NBA_PDP_UHC01 @NBA_PDP_Sanity_UHC @prod_regression
+    @NBA_PDP_UHC01 @NBA_PDP_Sanity_UHC   @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
@@ -388,12 +388,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
     Then user should be navigated to OLE page
 
-    @NBA_PDP_AARP02 @NBA_PDP_Sanity_AARP @prod_regression
+    @NBA_PDP_AARP02 @NBA_PDP_Sanity_AARP  @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                       |
       | AARP |   10001 | No              | New York County | PDP      | next     | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
-    @NBA_PDP_UHC02 @NBA_PDP_Sanity_UHC @prod_regression
+    @NBA_PDP_UHC02 @NBA_PDP_Sanity_UHC @prod_regression  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                       |
       | UHC  |   10001 | No              | New York County | PDP      | next     | Lipitor | AARP MedicareRx Walgreens (PDP) |
@@ -424,12 +424,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Enroll in plan button on the select plan modal on vpp summary page
     Then user should be navigated to OLE page
 
-    @NBA_PDP_AARP02
+    @NBA_PDP_AARP02 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | AARP |   10001 | No              | New York County | PDP      | next     | Lipitor |
 
-    @NBA_PDP_UHC02
+    @NBA_PDP_UHC02  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | UHC  |   10001 | No              | New York County | PDP      | next     | Lipitor |
@@ -461,12 +461,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Year | <planyear> |
     Then user should be able to see the NBA modal to add providers on the VPP summary page
 
-    @NBA_PDP_AARP02
+    @NBA_PDP_AARP02 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
       | AARP |   19019 | No              | Iowa County | PDP      | MAPD      | Lipitor | next     |
 
-    @NBA_PDP_UHC02
+    @NBA_PDP_UHC02  @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
       | UHC  |   19019 | No              | Iowa County | PDP      | MAPD      | Lipitor | next     |
@@ -512,12 +512,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     #  | Plan Year | <planyear> |
     Then user verify NBA is not displayed on the VPP page
 
-    @NBA_PRE_AARP01
+    @NBA_PRE_AARP01 @regressionAARP 
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear |prioritiesOption| priorities|
       | AARP |   10001 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork  |         |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |1st|Doctors, None|
 
-    @NBA_PRE_UHC01
+    @NBA_PRE_UHC01  @regressionUHC
     Examples: 
       | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planyear |prioritiesOption| priorities|
       | UHC  |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork  |         |               | No             | Yes,No,No,No                  | Higher               | PDP      | Orkambi | next   |1st|Doctors, None|
@@ -549,12 +549,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Type | <plantype2> |
     Then user be able to see the Find a Provider NBA on VPP
     
-    @NBA_AARP03
+    @NBA_AARP03 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |planname|plantype1|drug1|plantype2|
       | AARP |   19019 | No              | Iowa County | SNP     | next     |UnitedHealthcare Dual Complete - PA (HMO D-SNP)|PDP|Lipitor|MAPD|
       
-    @NBA_UHC03
+    @NBA_UHC03  @regressionUHC
       Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |planname|plantype1|drug1|plantype2|
       | UHC |   19019 | No              | Iowa County | SNP     | next     |UnitedHealthcare Dual Complete - PA (HMO D-SNP)|PDP|Lipitor|MAPD|
@@ -581,12 +581,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Select a plan button on NBA
     Then user should be able to see the Select Plan for Enroll Modal with all plans on vpp summary page
 
-    @dce_NBA_ShopPagesPDP_AARP
+    @dce_NBA_ShopPagesPDP_AARP @regressionAARP 
     Examples: 
       | drug1   | zipCode | site |plantype|
       | Orkambi | 80002 | AARP |PDP|
 
-    @dce_NBA_ShopPagesPDP_UHC
+    @dce_NBA_ShopPagesPDP_UHC  @regressionUHC
     Examples: 
       | drug1   | zipCode | site |plantype|
       | Orkambi | 80002 | UHC  |PDP|
@@ -620,12 +620,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Type | <plantype1> |
     Then user should see the Get started NBA on VPP
 
-    @dce_NBA_ShopPagesPDP_AARP
+    @dce_NBA_ShopPagesPDP_AARP @regressionAARP 
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site | plantype | planyear | plantype1 |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP | MAPD     | next     | PDP       |
 
-    @dce_NBA_ShopPagesPDP_UHC
+    @dce_NBA_ShopPagesPDP_UHC  @regressionUHC
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site | plantype | planyear | plantype1 |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | UHC  | MAPD     | next     | PDP       |

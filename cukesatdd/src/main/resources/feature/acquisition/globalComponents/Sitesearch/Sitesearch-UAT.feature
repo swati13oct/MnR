@@ -1,4 +1,4 @@
-@UATRegression @F513647 @siteSearch
+@UATRegression @F513647 @siteSearch @globalComponent
 Feature: 1.08 UAT-Site Search Flows
 
   @SiteSearchULayer @UATRegression

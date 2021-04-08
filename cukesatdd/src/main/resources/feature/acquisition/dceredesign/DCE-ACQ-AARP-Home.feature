@@ -34,12 +34,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     #Then the user validates Disclaimers section
 		Then the user validates link to Drug Summary Page
 
-    @DCE_HomeIcon_AEP_AARP	@prodRegression_AARP @prod_regression
+    @DCE_HomeIcon_AEP_AARP	@prodRegression_AARP @prod_regression @regressionAARP 
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |AARP|
 
-	 @DCE_HomeIcon_AEP_UHC	@prodRegression_UHC @prod_regression
+	 @DCE_HomeIcon_AEP_UHC	@prodRegression_UHC   @regressionUHC
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |UHC|
@@ -67,12 +67,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     
-		@DCE_HomeSubNav_AEP_AARP
+		@DCE_HomeSubNav_AEP_AARP @regressionAARP 
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |AARP|
 		
-		@DCE_HomeSubNav_AEP_UHC
+		@DCE_HomeSubNav_AEP_UHC  @regressionUHC
 		Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |UHC|

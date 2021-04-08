@@ -1,4 +1,5 @@
 #@SiteSearchResultsAARP @F294024
+@siteSearch @globalComponent
 Feature: 1.03 Acq-To test Sitesearch results site
 
   #@SiteSearchAARP @SiteSearchRegressionAARP @vbfGate @SiteSearchUHC  @SiteSearchRegressionUHC

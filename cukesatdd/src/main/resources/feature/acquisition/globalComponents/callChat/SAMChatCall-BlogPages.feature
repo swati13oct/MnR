@@ -1,4 +1,5 @@
-Feature: 2.13 ACQ M&R- To test SAM Icons in Blog Pages
+@globalComponent @samIcons
+Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
 
 Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site>
  Given the user is on medicare acquisition site landing page
@@ -9,7 +10,7 @@ Then the user validates whether call icon is visible
 #Then the user validates whether chat icon is visible on UHC
 Then the user validates whether chat icon is visible
 
- @samChatRegressionAARPblog1
+ @samChatRegressionAARPblog1  @regressionAARP 
 			Examples:
 			| pagename |site|
 			|medicare-articles.html                                 |AARP|
@@ -34,7 +35,7 @@ Then the user validates whether chat icon is visible
       |medicare-articles/6-timely-medicare-tips-for-turning-65      |AARP|
       
 			
-   @samChatRegressionAARPblog2 
+   @samChatRegressionAARPblog2  @regressionAARP 
    	Examples:
 			| pagename |site|  
       |medicare-articles/should-i-get-part-b-if-im-working-past-65 |AARP|
@@ -58,7 +59,7 @@ Then the user validates whether chat icon is visible
 |medicare-articles/what-is-the-medicare-annual-enrollment-period |AARP|
 |medicare-articles/aep-change-or-renew |AARP|
 
-@samChatRegressionAARPblog3
+@samChatRegressionAARPblog3 @regressionAARP 
 Examples:
 | pagename |site|
 |medicare-articles/can-you-switch-between-original-medicare-and-medicare-advantage-during-the-annual-enrollment-period |AARP|
@@ -83,7 +84,7 @@ Examples:
 |medicare-articles/how-do-tricare-and-medicare-work-together |AARP|
 |medicare-articles/youre-65-working-medicare |AARP|
 
-@samChatRegressionAARPblog4
+@samChatRegressionAARPblog4 @regressionAARP 
 	Examples:
 | pagename |site|
 |medicare-articles/how-to-get-dental-and-vision-care-coverage-when-you-have-medicare |AARP|
@@ -111,7 +112,7 @@ Examples:
 |medicare-articles/whats-the-difference-between-a-skilled-nursing-facility-and-a-nursing-home |AARP|
 |medicare-articles/what-s-the-difference-between-medicare-and-medicaid |AARP|
 |medicare-articles/how-to-appeal-a-medicare-decision |AARP|
-   @samChatRegressionAARPblog5
+   @samChatRegressionAARPblog5 @regressionAARP 
    	Examples:
 			| pagename |site| 
 |medicare-articles/how-avoid-paying-more-prescription-drug-coverage |AARP|
@@ -136,7 +137,7 @@ Examples:
 |medicare-articles/what-medicare-medical-savings-account-plan |AARP|
 |medicare-articles/copd-medicare |AARP|
 
-   @samChatRegressionAARPblog6
+   @samChatRegressionAARPblog6 @regressionAARP 
    	Examples:
 | pagename |site|
 |medicare-articles/decoding-medicare |AARP|
@@ -156,7 +157,7 @@ Examples:
 |medicare-articles/how-to-become-a-medicare-authorized-representative |AARP|
 |medicare-articles/what-is-a-transition-refill |AARP|
 
- @samChatRegressionAARPblog7
+ @samChatRegressionAARPblog7 @regressionAARP 
  Examples:
 | pagename |site| 
 |medicare-articles/got-coverage-for-the-new-year |AARP|
@@ -179,7 +180,7 @@ Examples:
 |medicare-articles/medicare-part-a-the-basics |AARP|
 |medicare-articles/medicare-part-c-basics |AARP|
 
- @samChatRegressionAARPblog8
+ @samChatRegressionAARPblog8 @regressionAARP 
  Examples:
 | pagename |site| 
 |medicare-articles/does-medicare-cover-a-chiropractor |AARP|
@@ -203,7 +204,7 @@ Examples:
 |medicare-articles/how-to-compare-medicare-advantage-plan-costs |AARP|
 			
 			
- @samChatRegressionUHCblog1
+ @samChatRegressionUHCblog1  @regressionUHC
    	Examples:
 			| pagename |site|
 			|medicare-articles.html                                 |UHC|
@@ -228,7 +229,7 @@ Examples:
       |medicare-articles/6-timely-medicare-tips-for-turning-65      |UHC|
    
    
- @samChatRegressionUHCblog2
+ @samChatRegressionUHCblog2  @regressionUHC
    	Examples:
 			| pagename |site|     
 |medicare-articles/should-i-get-part-b-if-im-working-past-65 |UHC|
@@ -252,7 +253,7 @@ Examples:
 |medicare-articles/what-is-the-medicare-annual-enrollment-period |UHC|
 |medicare-articles/aep-change-or-renew |UHC|
 
-@samChatRegressionUHCblog3
+@samChatRegressionUHCblog3  @regressionUHC
    	Examples:
 			| pagename |site|
 |medicare-articles/can-you-switch-between-original-medicare-and-medicare-advantage-during-the-annual-enrollment-period |UHC|
@@ -289,7 +290,7 @@ Examples:
 |medicare-articles/wheres-my-original-medicare-card |UHC|
 |medicare-articles/the-truth-your-medicare-part-b-premium |UHC|
 
-@samChatRegressionUHCblog4
+@samChatRegressionUHCblog4  @regressionUHC
    	Examples:
 			| pagename |site|  
 |medicare-articles/dos-and-donts-cancelling-a-marketplace-health-plan |UHC|
@@ -320,7 +321,7 @@ Examples:
 |medicare-articles/10-tips-choosing-primary-care-doctor |UHC|
 |medicare-articles/avoid-sticker-shock-medicare-billing |UHC|
 
-@samChatRegressionUHCblog5
+@samChatRegressionUHCblog5 @regressionUHC
    	Examples:
 			| pagename |site|
 |medicare-articles/does-medicare-part-a-cost-anything |UHC|
@@ -341,7 +342,7 @@ Examples:
 |medicare-articles/how-often-should-a-woman-over-65-have-a-pap-smear |UHC|
 |medicare-articles/medicare-transportation-services |UHC|
 
-@samChatRegressionUHCblog6
+@samChatRegressionUHCblog6  @regressionUHC
    	Examples:
 			| pagename |site| 
 |medicare-articles/are-you-living-with-chronic-heart-failure |UHC|
@@ -360,7 +361,7 @@ Examples:
 |medicare-articles/medicare-beneficiaries-needing-hospice-care-may-be-covered |UHC|
 |medicare-articles/medicare-coverage-for-inpatient-rehabilitation |UHC|
 
-@samChatRegressionUHCblog7
+@samChatRegressionUHCblog7  @regressionUHC
    	Examples:
 			| pagename |site|
 |medicare-articles/medicare-coverage-for-outpatient-rehabilitation-therapy |UHC|
@@ -377,7 +378,7 @@ Examples:
 |medicare-articles/what-does-medicare-cover-after-a-stroke |UHC|
 |medicare-articles/dual-special-needs-plans |UHC|
 
-@samChatRegressionUHCblog8
+@samChatRegressionUHCblog8  @regressionUHC
    	Examples:
 			| pagename |site|    
 |medicare-articles/cual-es-la-diferencia-entre-medicare-y-medicaid |UHC|

@@ -1,4 +1,4 @@
-@dce_redesign_ShopPDP
+@DCE @dce_redesign_ShopPDP
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Shop Plans -> PDP page to NEW DCE Flows
 
   @DCE_ShopForPlanPage_PDPpage
@@ -21,12 +21,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Shop Plans -> PDP page to NEW DC
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
 		Then user should be able to see "Medicare Prescription Drug Plans" by default
-		@dce_redesign_ShopPDP
+		
+		@dce_redesign_ShopPDP @regressionAARP 
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |AARP|
      
-     @dce_redesign_ShopPDP
+     @dce_redesign_ShopPDP  @regressionUHC
      Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |UHC| 

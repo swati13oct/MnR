@@ -1,3 +1,4 @@
+@DCE
 Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan Details in AARP site
 
   @DCE_Redesign_VPP_PlanDetailsLearnMore
@@ -27,6 +28,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks PrescriptionBenifit Tab on Plan Details Page
     Then the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page
     Then the user validates planName on LearnMore page matches plan Name in VPP
+     @regressionAARP 
     Examples: 
       | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected |
       | vigabatrin | Lipitor |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)        | AARP | Standard Retail | Standard Mail    |

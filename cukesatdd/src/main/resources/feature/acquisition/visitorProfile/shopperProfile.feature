@@ -1,7 +1,7 @@
 #Author: Naveen BK
 #created Date:04/06/2020
-@ShopperProfile
-Feature: 1.08. ACQ- Shopper Profile
+@ShopperProfile @regressionAARP
+Feature: 1.09. ACQ- Shopper Profile
 
   @searchProfileEmail @SanitySP
   Scenario Outline: Telesales agent searching for the profile using Email

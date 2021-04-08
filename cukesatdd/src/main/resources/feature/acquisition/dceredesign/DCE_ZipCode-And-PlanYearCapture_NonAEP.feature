@@ -1,4 +1,4 @@
-@dce_redesign_zipcode_planyear_capture_NonAEP
+@DCE @dce_redesign_zipcode_planyear_capture_NonAEP
 Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page in New DCE flow during NonAEP
 
   @DCE_ZipCodePlanYear_NonAEP
