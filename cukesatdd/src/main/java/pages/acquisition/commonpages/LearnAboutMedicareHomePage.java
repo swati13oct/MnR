@@ -175,8 +175,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	/* logic to check URL and Title of learn About Medicare */
 	public void checkMedicareURLAndTitle() {
-		String titleAARP = "AARP® Medicare Plans from UnitedHealthcare®";
-		String titleUHC = "Medicare Coverage Options from UnitedHealthcare®";
+		String titleAARP = "AARPï¿½ Medicare Plans from UnitedHealthcareï¿½";
+		String titleUHC = "Medicare Coverage Options from UnitedHealthcareï¿½";
 		String baseUrlTitle = getTitle();
 		for (int i = 0; i < getLstLearnAboutMedicare().size(); i++) {
 			if (getLstLearnAboutMedicare().get(i).isEnabled()) {
@@ -338,7 +338,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	}
 	public PrescriptionsProvidersBenefitsPage selectBenifitsEducation() {
 		
-		WebElement medBenifits= driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[3]"));
+		WebElement medBenifits= driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[2]"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();
