@@ -15,7 +15,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionPharmacyLocator.json",
 						"timeline:target" },
-				tags = "@regression")
+				tags = "@regressionAARP")
 
 @RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionPharmacyLocator extends BaseTestConfig {
