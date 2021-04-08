@@ -662,27 +662,24 @@ Feature: 1.12 ACQ - Global Components Validation
     When user updates the state drop down value on the home page
       | State | <state> |
       | Code  | <code>  |
-    Then the user hovers screen over the shop for a plan
     Then the user clicks on medicare supplement plans from shop for a plan
-    Then user validate the url in footer for Medicare Supplement Insurance Plans
+    Then user validates the url for Medicare Supplement Insurance Plans
       | State | <state> |
       | Code  | <code>  |
     Then the user clicks on browser back button
     When user updates the state drop down value on the home page
       | State | <state1> |
       | Code  | <code1>  |
-    Then the user hovers screen over the shop for a plan
     Then the user clicks on medicare supplement plans from shop for a plan
-    Then user validate the url in footer for Medicare Supplement Insurance Plans
+    Then user validates the url for Medicare Supplement Insurance Plans
       | State | <state1> |
       | Code  | <code1>  |
     Then the user clicks on browser back button
     When user updates the state drop down value on the home page
       | State | <state2> |
       | Code  | <code2>  |
-    Then the user hovers screen over the shop for a plan
     Then the user clicks on medicare supplement plans from shop for a plan
-    Then user validate the url in footer for Medicare Supplement Insurance Plans
+    Then user validates the url for Medicare Supplement Insurance Plans
       | State | <state2> |
       | Code  | <code2>  |
 

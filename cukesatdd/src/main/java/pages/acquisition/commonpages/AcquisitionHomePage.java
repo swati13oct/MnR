@@ -297,10 +297,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ShopForaplan;
-	
+
 	@FindBy(xpath = "//a[text()='Medicare Supplement Plans']")
 	private WebElement MedSuppPlan;
-	
+
 	@FindBy(id = "ghn_lnk_3")
 	private WebElement learnaboutMedicare;
 
@@ -3590,6 +3590,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Medicare Supplement Url is: " + MedicareClassicUrl.getAttribute("href"));
 			Assert.assertTrue(
 					MedicareClassicUrl.getAttribute("href").contains("/shop/medicare-supplement-plans-classic.html"));
+			String CurrentURL = driver.getCurrentUrl();
+			System.out.println("Current URL : " + CurrentURL);
+			Assert.assertTrue(CurrentURL.contains("/shop/medicare-supplement-plans-classic.html"));
 		} else {
 			validate(stateDropDown);
 			validate(MedicareSuppUrl);
@@ -3597,6 +3600,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Code is: " + code);
 			System.out.println("Medicare Supplement Url is: " + MedicareSuppUrl.getAttribute("href"));
 			Assert.assertTrue(MedicareSuppUrl.getAttribute("href").contains("/shop/medicare-supplement-plans.html"));
+			String CurrentURL = driver.getCurrentUrl();
+			System.out.println("Current URL : " + CurrentURL);
+			Assert.assertTrue(CurrentURL.contains("/shop/medicare-supplement-plans.html"));
 		}
 	}
 
@@ -3649,7 +3655,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			 * Actions actions = new Actions(driver); actions.moveToElement(ShopForaplan);
 			 * actions.build().perform();
 			 */
-			
+
 			jsMouseOver(ShopForaplan);
 			/*
 			 * JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -3667,23 +3673,23 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement ShopLink = driver.findElement(By.xpath("//a[contains(@href,'shop.html')]"));
 		WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
 
-		WebElement MAplansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'section-2')]//a[contains(@href,'medicare-advantage-plans.html')]"));
+		WebElement MAplansLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'section-2')]//a[contains(@href,'medicare-advantage-plans.html')]"));
 		List<WebElement> MedSuppPlansLink = driver.findElements(By.xpath(
 				"//*[contains(@class, 'section-2')]//*[contains(@href,'medicare-supplement-plans.html') or contains(@href,'medicare-supplement-plans-classic.html')]"));
-		WebElement PDPplansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'section-2')]//a[contains(@href,'prescription-drug-plans.html')]"));
+		WebElement PDPplansLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'section-2')]//a[contains(@href,'prescription-drug-plans.html')]"));
 		WebElement SNPplansLink = driver.findElement(
 				By.xpath("//*[contains(@class, 'section-2')]//a[contains(@href,'special-needs-plans.html')]"));
 
-		WebElement PlanSelectorLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'section-3')]//a[contains(@href,'plan-recommendation-engine.html')]"));
-		WebElement DCELink = driver.findElement(
-				By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'drug-cost-estimator')]"));
-		WebElement PharmacySearchLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'aarp-pharmacy.html')]"));
-		WebElement ProviderSearchLink = driver.findElement(By
-				.xpath("//*[contains(@class, 'section-3')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
+		WebElement PlanSelectorLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'plan-recommendation-engine.html')]"));
+		WebElement DCELink = driver
+				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'drug-cost-estimator')]"));
+		WebElement PharmacySearchLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'aarp-pharmacy.html')]"));
+		WebElement ProviderSearchLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'section-3')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
 
 		validateNew(ZipCodeTxt);
 		validateNew(FindPlansBtn);
@@ -3734,32 +3740,32 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			waitForPageLoadSafari();
 			System.out.println("Hover over Learn about Medicare completed");
 		}
-		WebElement EligibilityTxt = driver.findElement(
-				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-eligibility')]"));
-		WebElement ChoicesBtn = driver.findElement(By.xpath(
-				"//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-parts-and-medigap-plans')]"));
-		WebElement PresProvidersBenefitsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-benefits')]"));
-		WebElement CostbasicsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-costs')]"));
+		WebElement EligibilityTxt = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-eligibility')]"));
+		WebElement ChoicesBtn = driver.findElement(
+				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-parts-and-medigap-plans')]"));
+		WebElement PresProvidersBenefitsLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-benefits')]"));
+		WebElement CostbasicsLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-costs')]"));
 
-		WebElement MAplansLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-advantage-plans')]"));
-		WebElement MedSuppPlansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-supplement-plans.html')]"));
-		WebElement PDPplansLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-part-d')]"));
+		WebElement MAplansLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-advantage-plans')]"));
+		WebElement MedSuppPlansLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-supplement-plans.html')]"));
+		WebElement PDPplansLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-part-d')]"));
 
-		
 		WebElement EnrollmentBasicsLink = driver.findElement(
 				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
-		 
+
 		/*
 		 * WebElement glossaryLink=driver.findElement(By.
 		 * xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'aarpmedicareplans/en.html#')]"
 		 * ));
 		 */
-		WebElement FAQLink = driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-faq')]"));
+		WebElement FAQLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-faq')]"));
 
 		validateNew(EligibilityTxt);
 		validateNew(ChoicesBtn);
@@ -6207,13 +6213,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(firstAutoCompleteSuggestionSiteSearch);
 
 	}
-	
+
 	public void clickMedSupp() throws InterruptedException {
 		waitforElement(ShopForaplan);
 		validate(ShopForaplan);
-           Actions action = new Actions(driver);
-            action.moveToElement(ShopForaplan).moveToElement(MedSuppPlan).click().build().perform();
-			
-			
+		Actions action = new Actions(driver);
+		action.moveToElement(ShopForaplan).moveToElement(MedSuppPlan).click().build().perform();
+
 	}
 }
