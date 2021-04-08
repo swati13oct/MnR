@@ -30,32 +30,32 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
-    @DCE_Redesign_VPP_PlanSummary_MAPD_AARP @regressionAARP 
+    @DCE_Redesign_VPP_PlanSummary_MAPD_AARP @regressionAARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                           |
       | AARP |   90210 | MAPD     | future   | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @DCE_Redesign_VPP_PlanSummary_MAPD_UHC  @regressionUHC
+    @DCE_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1   | planname                                           |
       | UHC  |   90210 | MAPD     | future   | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @DCE_Redesign_VPP_PlanSummary_PDP_AARP @regressionAARP 
+    @DCE_Redesign_VPP_PlanSummary_PDP_AARP @regressionAARP
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
       | AARP |   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
 
-    @DCE_Redesign_VPP_PlanSummary_PDP_UHC  @regressionUHC
+    @DCE_Redesign_VPP_PlanSummary_PDP_UHC @regressionUHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                        |
       | UHC  |   80002 | PDP      | Adams County | yes             | Orkambi | AARP MedicareRx Walgreens (PDP) |
 
-    @DCE_Redesign_VPP_PlanSummary_SNP_AARP	@prodRegression_AARP  @regressionAARP 
+    @DCE_Redesign_VPP_PlanSummary_SNP_AARP @prodRegression_AARP @regressionAARP
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                                   |
       | AARP |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
-    @DCE_Redesign_VPP_PlanSummary_SNP_UHC	@prodRegression_UHC @prod_regression  @regressionUHC
+    @DCE_Redesign_VPP_PlanSummary_SNP_UHC @prodRegression_UHC @prod_regression @regressionUHC
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                                                   |
       | UHC  |   78006 | SNP      | Bexar County | yes             | Orkambi | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
@@ -157,7 +157,6 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     Then the user clicks on Review Drug Costs to Land on Drug DetailsP Page
     Then the user validates planName matches plan Name in VPP
     Then the user click on return to plan summary on DCE summary page
-
     And user updates the new zipcode on vpp summary page
       | New Zip Code | <newzipcode> |
     And user navigate to Drug Summary page
@@ -166,15 +165,15 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     And user validates the plans on new visitor profile page of AARP site
       | Test Plans | <mapdtestPlans> |
 
- 		@regressionAARP 
+    @regressionAARP
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
       | AARP |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
 
-		  @regressionUHC
+    @regressionUHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
-      | UHC |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
+      | UHC  |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
 
   @drugSummary_InitialZipCodeRetained @F539025
   Scenario Outline: To verify intial zipcode infomraiton retained while navigating to DCE from VPP summary
@@ -325,8 +324,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
       | site | zipcode | county | isMultutiCounty | drug1   |
       | AARP |   90210 | none   | no              | Orkambi |
 
-   @F549665
+    @F549665
     Examples: 
       | site | zipcode | county | isMultutiCounty | drug1   |
       | UHC  |   90210 | none   | no              | Orkambi |
-

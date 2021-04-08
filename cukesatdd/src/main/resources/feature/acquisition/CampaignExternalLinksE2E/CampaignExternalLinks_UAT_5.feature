@@ -83,7 +83,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | TFN Xpath | <TFNxpath2> |
     And the user validates TFN Number on Right Rail
       | TFN Xpath | <TFNxpath3> |
-      Then the user navigates to refresh page
+    Then the user navigates to refresh page
     And the user views the plans of the below plan type
       | Plan Type | <plantypeMS> |
     And the user validates SAM icons on Medsupp page
