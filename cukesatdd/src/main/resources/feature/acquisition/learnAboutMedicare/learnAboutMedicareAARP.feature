@@ -16,7 +16,7 @@
 #""
 ## (Comments)
 #MultilineComments ctrl + /
-@gladiators @acquisitionRegression @learnAboutMedicare 
+@gladiators @acquisitionRegression @learnAboutMedicare
 Feature: 1.01-Acq-To test learn about medicare flow in AARP site
 
   @learnAboutMedicare1 @regressionMember @aarp
@@ -27,7 +27,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in AARP site
     And verifies URL, title of pages navigable from menu on aarp site
     When user clicks on learn about medicare link on aarp site
     And verifies navigation to learn about medicare homePage
-#    And verifies accessibility of links using tabkey, back button on every page navigable from homepage on aarp site
+    #    And verifies accessibility of links using tabkey, back button on every page navigable from homepage on aarp site
     And app navigates to medicare eligibility page on aarp site
     And verifies default value of state drop down on aarp site
     And verifies presence of video, sideLinks, back button and next button on medicare eligibility page on aarp site
@@ -43,10 +43,10 @@ Feature: 1.01-Acq-To test learn about medicare flow in AARP site
       | Option  | <option>  |
     And verifies Shop For a Plan Homepage on aarp site
     And views plan of a particular type on aarp site
-    |PlanType|<planType>|
+      | PlanType | <planType> |
     ##MA MS SNP PDP
     And verifies plantype on aarp site
-    |PlanType|<planType>|
+      | PlanType | <planType> |
 
     #TestCaseId:15527,15528,15529
     Examples: 
@@ -63,7 +63,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in AARP site
       | PlanType | <planType> |
 
     ##MA MS SNP PDP
-	#TestCaseId:15527,15528,15529
+    #TestCaseId:15527,15528,15529
     Examples: 
       | zipcode | planType |
       |   90002 | MA       |
@@ -77,7 +77,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in AARP site
     And clicks on plans available option on aarp site
       | PlanType | <planType> |
 
-	#TestCaseId:15527,15528,15529
+    #TestCaseId:15527,15528,15529
     Examples: 
       | zipcode | planType |
       |   90002 | PDP      |
@@ -93,12 +93,13 @@ Feature: 1.01-Acq-To test learn about medicare flow in AARP site
       | PlanType | <planType> |
     And verifies Shop For a Plan Homepage on aarp site
     And verifies plantype on aarp site
-    |PlanType|<planType>|
-	#TestCaseId:15527,15528,15529
+      | PlanType | <planType> |
+
+    #TestCaseId:15527,15528,15529
     Examples: 
       | zipcode | planType |
       |   90002 | MA       |
-		
+
   @learnAboutMedicare5 @regressionMember @aarp
   Scenario Outline: Verify precscription drug plan flow from learn about medicare homePage
     Given user is on AARP medicare acquisition site landing page
@@ -108,10 +109,11 @@ Feature: 1.01-Acq-To test learn about medicare flow in AARP site
     And verifies plan search with a valid zipcode on aarp site
       | ZipCode  | <zipcode>  |
       | PlanType | <planType> |
-	And verifies Shop For a Plan Homepage on aarp site
+    And verifies Shop For a Plan Homepage on aarp site
     And verifies plantype on aarp site
-    |PlanType|<planType>|
-	#TestCaseId:15527,15528,15529
+      | PlanType | <planType> |
+
+    #TestCaseId:15527,15528,15529
     Examples: 
       | zipcode | planType |
       |   90002 | PDP      |
