@@ -655,6 +655,8 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		// vppToPre();
 		MobileMenuAndGetPlanRecom();
 		validateDrugPage(flow, true);
+		
+		
 
 	}
 

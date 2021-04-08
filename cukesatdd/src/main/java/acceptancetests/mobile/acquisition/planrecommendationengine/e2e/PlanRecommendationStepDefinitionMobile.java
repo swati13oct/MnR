@@ -11,6 +11,8 @@ import org.testng.Assert;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.mobile.acquisition.vpp.VPPCommonConstantsMobile;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 
 /**
@@ -51,21 +53,22 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 
 	AppiumDriver wd;
-	List<DataTableRow> inputRow;
+//	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
-	public static String PREflow = "";
-	public static String PlanType = "";
+	public static  String PREflow="";
+	public static  String PlanType;
 
 	public void readfeaturedataMobile(DataTable data) {
-		inputRow = new ArrayList(data.getGherkinRows());
+//		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
-		for (int i = 0; i < inputRow.size(); i++) {
+		inputValues = DataTableParser.readDataTableAsMaps(data);
+		/*for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
-		}
+		}*/
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-			System.out.println("Current PRE Flow : " + PREflow);
+			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}
 
@@ -225,7 +228,9 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanSelectorNewPageMobile planSelectorNewPage = (PlanSelectorNewPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
 		boolean isResultsPage = planSelectorNewPage.JumpLink();
-		Assert.assertTrue("Plan Results Page not loaded", isResultsPage);
+		//Assert.assertTrue("Plan Results Page not loaded", isResultsPage);
+		Assertion.assertTrue("Plan Results Page not loaded", isResultsPage);
+		
 	}
 
 	@When("^I click plan detail button$")
@@ -234,7 +239,8 @@ public class PlanRecommendationStepDefinitionMobile {
 		PlanSelectorNewPageMobile planSelectorNewPage = (PlanSelectorNewPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
 		boolean isPlanDetailsPage = planSelectorNewPage.navigateToPlanDetails(County);
-		Assert.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
+		//Assert.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
+		Assertion.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
 
 	}
 
