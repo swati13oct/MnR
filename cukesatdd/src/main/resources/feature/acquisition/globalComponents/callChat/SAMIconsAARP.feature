@@ -13,12 +13,12 @@ Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
     #Then the user validates whether chat Agent is Available on AARP
     @header_1 @samChatCall_1 @samChatRegression @samChatRegression_AARP @prod_regression @globalfooter1
     Examples: 
-      | site | pagename                              |
-      | AARP | /                                     |
-      #| AARP | plan-recommendation-engine.html       |
-      #| AARP | health-plans/estimate-drug-costs.html |
-      #| AARP | health-plans/aarp-pharmacy.html       |
+      | site | pagename |
+      | AARP | /        |
 
+    #| AARP | plan-recommendation-engine.html       |
+    #| AARP | health-plans/estimate-drug-costs.html |
+    #| AARP | health-plans/aarp-pharmacy.html       |
     @header_1 @samChatCall_1 @samChatRegression @samChatRegression_UHC @prod_regression
     Examples: 
       | site | pagename                              |
@@ -63,10 +63,10 @@ Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
 
     @healthplansma_3 @samChatCall_2
     Examples: 
-      | pagename                                                                              |                             |
-      | health-plans/resources/ma-resources-materials/ma-information-forms/member-rights.html |                             |
-      | health-plans/shop/medicare-advantage-plans/wellness-discounts.html                    |                             |
-      | health-plans/shop/medicare-advantage-plans                                            | health-care-management.html |
+      | pagename                                                                              |
+      | health-plans/resources/ma-resources-materials/ma-information-forms/member-rights.html |
+      | health-plans/shop/medicare-advantage-plans/wellness-discounts.html                    |
+      | health-plans/shop/medicare-advantage-plans/health-care-management.html                |
 
     @healthplanspdp_1 @samChatCall_2
     Examples: 
@@ -114,11 +114,11 @@ Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
 
     @healthplansothers_3 @samChatCall_3
     Examples: 
-      | pagename                                                          |                       |
-      | health-plans/resources/how_to_pay_your_premium.html               |                       |
-      | health-plans/resources/how_to_appoint_a_representative.html       |                       |
-      | health-plans/resources/medication_therapy_management_program.html |                       |
-      | health-plans/resources                                            | healthcare-fraud.html |
+      | pagename                                                          |
+      | health-plans/resources/how_to_pay_your_premium.html               |
+      | health-plans/resources/how_to_appoint_a_representative.html       |
+      | health-plans/resources/medication_therapy_management_program.html |
+      | health-plans/resources/healthcare-fraud.html                      |
 
     @medicareeducation_1 @samChatCall_3
     Examples: 

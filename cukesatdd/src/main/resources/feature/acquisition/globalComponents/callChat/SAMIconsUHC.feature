@@ -54,11 +54,11 @@ Feature: 2.13 ACQ UHC- To test SAM Icons in UHC site
 
     @healthplansmaUHC_3 @samChatCall_2
     Examples: 
-      | pagename                                                                                |                             |
-      | health-plans/resources/ma-resources-materials/ma-information-forms/medicare-appeal.html |                             |
-      | health-plans/resources/ma-resources-materials/ma-information-forms/member-rights.html   |                             |
-      | health-plans/shop/medicare-advantage-plans/wellness-discounts.html                      |                             |
-      | health-plans/shop/medicare-advantage-plans                                              | health-care-management.html |
+      | pagename                                                                                |
+      | health-plans/resources/ma-resources-materials/ma-information-forms/medicare-appeal.html |
+      | health-plans/resources/ma-resources-materials/ma-information-forms/member-rights.html   |
+      | health-plans/shop/medicare-advantage-plans/wellness-discounts.html                      |
+      | health-plans/shop/medicare-advantage-plans/health-care-management.html                  |
 
     @healthplanspdpUHC_1 @samChatCall_2
     Examples: 
@@ -106,11 +106,11 @@ Feature: 2.13 ACQ UHC- To test SAM Icons in UHC site
 
     @healthplansothersUHC_3 @samChatCall_3
     Examples: 
-      | pagename                                                          |                       |
-      | health-plans/resources/how_to_pay_your_premium.html               |                       |
-      | health-plans/resources/how_to_appoint_a_representative.html       |                       |
-      | health-plans/resources/medication_therapy_management_program.html |                       |
-      | health-plans/resources                                            | healthcare-fraud.html |
+      | pagename                                                          |
+      | health-plans/resources/how_to_pay_your_premium.html               |
+      | health-plans/resources/how_to_appoint_a_representative.html       |
+      | health-plans/resources/medication_therapy_management_program.html |
+      | health-plans/resources/healthcare-fraud.html                      |
 
     @medicareeducationUHC_1 @samChatCall_3
     Examples: 

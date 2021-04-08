@@ -40,13 +40,13 @@ Feature: 1.03 Acq-To test Sitesearch results site
     @SiteSearchCommon_AARP
     Examples: 
       | site | searchValue | Error            | NewSearchValue |
-      | AARP | Medicare    | Empty            |                |
+      | AARP | Medicare    | Empty            | [blank]        |
       | AARP | Medicare    | InvalidCharacter | medicareeee    |
 
     @SiteSearchCommon_UHC
     Examples: 
       | site | searchValue | Error            | NewSearchValue |
-      | UHC  | Medicare    | Empty            |                |
+      | UHC  | Medicare    | Empty            | [blank]        |
       | UHC  | Medicare    | InvalidCharacter | medicareeee    |
 
   #@SiteSearchResultsVPPUlayer  @SiteSearchRegressionAARP @vbfGate @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC @vbfGate
@@ -122,8 +122,8 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | site | searchValue | newsearchvalue |
       | UHC  | Medicare    | pharmacy       |
 
-    @SiteSearchAutoComplete  
-    Scenario Outline: To verify site search auto complete suggestions in <site> site
+  @SiteSearchAutoComplete
+  Scenario Outline: To verify site search auto complete suggestions in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user enter the searchValue in the search text box
@@ -132,17 +132,17 @@ Feature: 1.03 Acq-To test Sitesearch results site
     Then the user clicks on the first auto complete suggestion
     Then the user validates pagination and results displayed
     Then the user enter the secondary searchValue in the search text box
-        |NewSearchValue|<newsearchvalue>|
+      | NewSearchValue | <newsearchvalue> |
     Then the user should see the auto complete suggestions site search page
-     Then the user clicks on the first auto complete suggestion site search page
+    Then the user clicks on the first auto complete suggestion site search page
     Then the user validates pagination and results displayed
 
     @SiteSearchAutoComplete_AARP
     Examples: 
       | site | searchValue | newsearchvalue |
-      | AARP | Medicare    | plans    |
+      | AARP | Medicare    | plans          |
 
     @SiteSearchAutoComplete_UHC
     Examples: 
       | site | searchValue | newsearchvalue |
-      | UHC  | Medicare    | plans       |
+      | UHC  | Medicare    | plans          |
