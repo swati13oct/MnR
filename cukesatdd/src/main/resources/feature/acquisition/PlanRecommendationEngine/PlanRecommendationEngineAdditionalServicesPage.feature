@@ -26,7 +26,7 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page in pl
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection |
-      |   10001 | NO            |        | None          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             |
+      |   10001 | NO            | [blank]|   None        | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |    [blank]  |   [blank]     | No             |
 
   @PRE @planrecommendation @additionalservicespage @additionalservicespageselection @F374227
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Function in Additional services using Single County in Plan Recommendation Engine
@@ -53,7 +53,7 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page in pl
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness |
-      |   10001 | NO            |        | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,Yes,Yes                |
+      |   10001 | NO            |[blank] | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,Yes,Yes                |
 
   @PRE @planrecommendation @additionalservicespage @additionalserviceserror @F374227
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Error Function in Additional services using Single County in Plan Recommendation Engine
@@ -80,4 +80,4 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page in pl
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness |
-      |   10001 | NO            |        | None          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,No,No                  |
+      |   10001 | NO            | [blank]| None          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |[blank]      | [blank]       | No             | Yes,No,No,No                  |

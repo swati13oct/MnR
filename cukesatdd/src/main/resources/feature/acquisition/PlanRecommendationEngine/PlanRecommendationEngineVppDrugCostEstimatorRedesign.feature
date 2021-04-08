@@ -52,9 +52,9 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
     Examples: 
       |	site	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |	plantype | drug1   | planname                                           	|
       |	AARP	|   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | John             |               | No             | Yes,No,No,No                  | Higher               |	MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |
-      #|	AARP	|   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
+      #|	AARP	|   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare | [blank]                    |  [blank]                | No             | Yes,No,No,No                  | Higher               |
 
     #@PRE_VPP_DCE_E2E_UHC
     Examples: 
       |	site	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |	plantype | drug1   | planname                                           	|
-      |	UHC	|   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | John             |               | No             | Yes,No,No,No                  | Higher               |	MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | 
+      |	UHC	|   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | John             |  [blank]                | No             | Yes,No,No,No                  | Higher               |	MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | 

@@ -301,7 +301,7 @@ Feature: 1.09. ACQ- Shopper Profile
     Examples: 
       | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
       | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
-      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                           | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
+      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |[blank]        | LEONEL  | DREHMER    |   10010 |  [blank]                                  | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>
