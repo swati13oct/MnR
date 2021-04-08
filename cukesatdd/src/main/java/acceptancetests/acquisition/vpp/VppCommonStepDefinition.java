@@ -161,10 +161,12 @@ public class VppCommonStepDefinition {
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
 			throws Throwable {
 //		wd.manage().window().maximize(); //Can be handled from MRScenario
+		//Remove the commented code
 		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName = memberAttributesRow.get(1).getCells().get(1);*/
 		
+		//Value from a datatable column can be fetched using asLists approach
 		List<List<String>> memberAttributesRow = data.asLists();
 		String planType = memberAttributesRow.get(0).get(1);
 		String planName = memberAttributesRow.get(1).get(1);
@@ -1506,13 +1508,15 @@ public class VppCommonStepDefinition {
 
 	@Then("^the user view plan details of the above selected plan in site vpp$")
 	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {
-
+		//Remove the commented code 
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String planName = memberAttributesRow.get(0).getCells().get(1);
 		String planType = memberAttributesRow.get(1).getCells().get(1);*/
 		
+		//Add code to fetch the value of a DataTable column directly using cell(rowNum, columnNum)
 		String planName = givenAttributes.cell(0, 1);		//row 0, column 1
 		String planType = givenAttributes.cell(1, 1);		//row 1, column 1
+		
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
