@@ -15,4 +15,3 @@ bin/
 cukesatdd/.classpath
 cukesatdd/src/main/resources/config/ci/config.properties
 /cukesatdd/*.classpath
-cukesatdd/src/main/java/atdd/runners/
