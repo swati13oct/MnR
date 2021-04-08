@@ -2,10 +2,14 @@ package pages.mobile.acquisition.commonpages;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import acceptancetests.util.CommonUtility;
+
 
 public class PrescriptionsProvidersBenefitsPageMobile extends GlobalWebElements {
 
@@ -73,6 +77,51 @@ public class PrescriptionsProvidersBenefitsPageMobile extends GlobalWebElements 
 
 	public Object backMedicareEducationHome() {
 		getLnkBackMedicareEducationHome().click();
+		return null;
+	}
+public void clickMedicareAnnualEnrollment() {
+		
+		WebElement annualEnrll=driver.findElement(By.xpath("//a[contains(text(),'Medicare Annual Enrollment Period')]"));
+		jsClickNew(annualEnrll);
+		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+		
+		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"))
+		{
+			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			waitforElementNew(pageHeader);
+			System.out.println("Annual Enrollment Period Page open correctly");
+			
+		}else {
+			System.out.println("Annual Enrollment Period Page did not open correctly");
+		}
+		
+		driver.navigate().back();
+		
+	}
+	public ProviderSearchPageMobile clicksOnRallyToolFromMedEdPage() {
+		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//p[contains(text(),'Look up your providers')]"));
+		validateNew(providerSearchFromMedEd);
+	
+		switchToNewTabNew(providerSearchFromMedEd);
+	
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (driver.getCurrentUrl().contains("werally")) {
+	
+			return new ProviderSearchPageMobile(driver);
+		}
+		return null;
+	}
+
+	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
+		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
+		validateNew(DCELink);
+		jsClickNew(DCELink);
+		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement AddMyDrugsBtn=driver.findElement(By.xpath("//button[contains(@id,'addDrug')]"));
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPageMobile(driver);
 		return null;
 	}
 

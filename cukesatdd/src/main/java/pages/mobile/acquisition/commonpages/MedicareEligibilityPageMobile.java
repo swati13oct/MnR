@@ -2,13 +2,16 @@ package pages.mobile.acquisition.commonpages;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
 
 public class MedicareEligibilityPageMobile extends GlobalWebElements {
 
@@ -117,7 +120,7 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 		return txtsideBarLinks;
 
 	}
-	
+
 	/*default value of dropdown on secondary pages of Learn about medicare*/
 	public String defaultValueDropDown() {
 		Select dropdown = new Select(getDropDownState());
@@ -161,13 +164,13 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 		Assertion.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
 
 	}
-	
+
 	public void stateSelection(String value) {
-		
+
 		selectFromDropDownByText(driver,dropDownState,value);
 
 	}
-	
+
 	/*logic:search for a plan with valid zipcode*/
 	public WebDriver planSearch(String zipCode) {
 		validateNew(getTxtZipcode());
@@ -178,12 +181,110 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 		//btnZipcode.click();
 		validateNonPresenceOfElement(btnZipcode);
 		return driver;
-		
+
+	}
+	public void clickOnIEP() {
+
+		WebElement lnkIEP=driver.findElement(By.xpath("//a[contains(text(),'Initial Enrollment Period')]"));
+		validateNew(lnkIEP);
+		jsClickNew(lnkIEP);
+		CommonUtility.checkPageIsReadyNew(driver);
+		waitForPageLoadSafari();
+		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
+		{
+			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			waitforElementNew(pageHeader);
+			Assertion.assertTrue(true);
+			System.out.println("Initial Enrollment Period Page open correctly");
+
+		}else {
+			Assertion.fail("Initial Enrollment Period Page did not open correctly");
+		}
+
+		driver.navigate().back();
+		//Adding the below code as elements are not located in Safari browser after using navigate back
+		if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+			driver.navigate().refresh();
+			threadsleep(2000);
+		}
 	}
 
-	
-	
-	
-	
+	public void checkLeftRailPlanLinks(String plan) {
+		WebElement lnkplan=null;
+		WebElement lnkMededNavMobile=driver.findElement(By.xpath("//a[contains(@class,'meded-article-nav__title')]"));
+		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+		jsClickMobile(lnkMededNavMobile);
+		sleepBySec(2);
+		System.out.println("Med Ed Navigation Opened Successfully");
+		if(plan=="MA") {
+			lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-advantage') and contains(@class,'sidebar')]"));
+		}else if(plan=="MS") {
+			lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-supplement') and contains(@class,'sidebar')]"));
+		}else if(plan=="PDP") {
+			lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-part-d') and contains(@class,'sidebar')]"));
+		}
+		validateNew(lnkplan);
+		jsClickNew(lnkplan);
+
+		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+		String checkUrl=driver.getCurrentUrl();
+
+		WebElement pageHeader=null;
+
+		if(plan=="MA" && checkUrl.contains("medicare-education/medicare-advantage-plans.html")) {
+			pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Medicare Advantage')]"));			
+		}else if(plan=="MS" && checkUrl.contains("medicare-education/medicare-supplement-plans.html")) {
+			pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Medicare Supplement')]"));
+		}else if(plan=="PDP" && checkUrl.contains("medicare-education/medicare-part-d.html")) {
+
+			pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Medicare Prescription')]"));
+		}
+		if (pageHeader!=null)
+		{
+			Assertion.assertTrue(true);	
+			waitforElementNew(pageHeader,8);
+			System.out.println(pageHeader.getText()+" page is displayed");
+			driver.navigate().back();
+			//Adding the below code as elements are not located in Safari browser after using navigate back
+			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
+				driver.navigate().refresh();
+				threadsleep(2000);
+			}
+		}else {
+			Assertion.fail(plan+" MEd Ed page not displayed");
+		}
+
+	}
+
+	public CoverageChoicesPageMobile clickonCoverageChoicesLink() {
+		WebElement lnkcvrgChoice=driver.findElement(By.xpath("//p[contains(@class,'meded-next')]"));
+		validateNew(lnkcvrgChoice);
+		jsClickNew(lnkcvrgChoice);
+		CommonUtility.checkPageIsReadyNew(driver);
+
+		String checkUrl=driver.getCurrentUrl();
+		if(checkUrl.contains("medicare-education/medicare-parts-and-medigap-plans.html")) {
+			return new CoverageChoicesPageMobile(driver);
+		}else
+		{
+			return null;
+		}
+	}
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+
+
+
+
 
 }
