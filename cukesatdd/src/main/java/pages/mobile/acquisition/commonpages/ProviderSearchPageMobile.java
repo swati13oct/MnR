@@ -560,7 +560,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	public AcquisitionHomePageMobile returnToAcqHomePage() {
 		// TODO Auto-generated method stub
 		driver.close();
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		return new AcquisitionHomePageMobile(driver);
 	}
 }
