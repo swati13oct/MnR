@@ -168,7 +168,7 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.navigateToPath(path);
 	}
 
-	@Then("^user validate the url in footer for Medicare Supplement Insurance Plans$")
+	@Then("^user validates the url for Medicare Supplement Insurance Plans$")
 	public void user_validate_the_geotag_and_Medicare_supplement_url(DataTable givenAttributes) throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
