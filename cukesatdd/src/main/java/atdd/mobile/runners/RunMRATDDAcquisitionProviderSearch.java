@@ -1,4 +1,4 @@
-package atdd.runners.mobile;
+package atdd.mobile.runners;
 
 import org.testng.annotations.Test;
 
@@ -10,16 +10,16 @@ import io.cucumber.testng.PickleWrapper;
 
 
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
-				features = {"src/main/resources/feature/mobile/acquisition/vpp"},
+				features = {"src/main/resources/feature/mobile/acquisition/providersearch"},
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",
-						"json:target/cucumber-RunMRATDDAcquisitionVPP.json",
+						"json:target/cucumber-RunMRATDDAcquisitionProviderSearch.json",
 						"timeline:target" },
 				tags = "@regression")
 
 @RetryCountIfFailed(1)
-public class RunMRATDDAcquisitionVPP extends BaseTestConfig {
+public class RunMRATDDAcquisitionProviderSearch extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());

@@ -1,4 +1,4 @@
-package atdd.runners.mobile;
+package atdd.mobile.runners;
 
 import org.testng.annotations.Test;
 
@@ -9,16 +9,16 @@ import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
-				features = {"src/main/resources/feature/mobile/acquisition/globalComponents"},
+				features = {"src/main/resources/feature/mobile/acquisition/visitorProfile"},
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",
-						"json:target/cucumber-RunMRATDDAcquisitionGlobalComponents.json",
+						"json:target/cucumber-RunMRATDDAcquisitionVisitorProfile.json",
 						"timeline:target" },
-				tags = "@globalfooter1")												
+				tags = "@regression")
 
-@RetryCountIfFailed(0)
-public class RunMRATDDAcquisitionGlobalComponents extends BaseTestConfig{
+@RetryCountIfFailed(1)
+public class RunMRATDDAcquisitionVisitorProfile extends BaseTestConfig{
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());

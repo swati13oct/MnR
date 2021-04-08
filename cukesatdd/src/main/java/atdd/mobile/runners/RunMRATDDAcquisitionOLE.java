@@ -1,4 +1,4 @@
-package atdd.runners.mobile;
+package atdd.mobile.runners;
 
 import org.testng.annotations.Test;
 
@@ -8,18 +8,18 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
-
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
-				features = {"src/main/resources/feature/mobile/acquisition/preE2E"},
+				features = {"src/main/resources/feature/mobile/acquisition/ole"},
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",
-						"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngine.json",
+						"json:target/cucumber-RunMRATDDAcquisitionOLE.json",
 						"timeline:target" },
 				tags = "@regression")
 
+
 @RetryCountIfFailed(1)
-public class RunMRATDDAcquisitionPlanRecommendationEngine extends BaseTestConfig {
+public class RunMRATDDAcquisitionOLE extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
