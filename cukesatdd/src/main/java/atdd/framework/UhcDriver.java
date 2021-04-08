@@ -551,7 +551,7 @@ public abstract class UhcDriver {
 			
 			Actions ac = new Actions(driver);
 			ac.moveToElement(element);
-			backToTop.isDisplayed();
+			//backToTop.isDisplayed();
 			System.out.println("Scroll finished to element on IOS device");
 
 		} else {
