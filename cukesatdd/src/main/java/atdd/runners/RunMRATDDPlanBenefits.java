@@ -14,12 +14,12 @@ import io.cucumber.testng.PickleWrapper;
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",
-						"json:target/cucumber-RunMRATDDPlanSummaryBenefits.json",
+						"json:target/cucumber-RunMRATDDPlanBenefits.json",
 						"timeline:target" },
-				tags = "@planSummaryBenefits")
+				tags = "@planDetailsBenefits")
 
 @RetryCountIfFailed(0)
-public class RunMRATDDPlanSummaryBenefits extends BaseTestConfig {
+public class RunMRATDDPlanBenefits extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
