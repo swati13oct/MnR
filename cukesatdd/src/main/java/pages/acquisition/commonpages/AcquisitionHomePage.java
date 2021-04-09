@@ -4737,7 +4737,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		threadsleep(6);
 //        	DualSpecialNeedsPlans.click();
 		jsClickNew(DualSpecialNeedsPlans);
-		threadsleep(5);
+		threadsleep(1000);
 		if (driver.getCurrentUrl().contains("shop/dual-special-needs-plans.html")) {
 			Assert.assertTrue(true);
 			System.out.println("DSNP Plan Page open: URL--> " + driver.getCurrentUrl());
