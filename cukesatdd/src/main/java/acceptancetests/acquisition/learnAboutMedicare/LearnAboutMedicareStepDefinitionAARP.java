@@ -232,7 +232,6 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vpp);
 	}
 
-	//To be verified
 	@And("^views plan of a particular type on aarp site$")
 	public void clicks_on_medicare_advantage_tab(DataTable attributes) {
 		 VPPPlanSummaryPage vpp = (VPPPlanSummaryPage)
@@ -248,7 +247,6 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		
 	}
 	
-	//To be verified
 	@And("^verifies plantype on aarp site$")
 	public void verifies_plantype_on_aarp_site(DataTable attributes) {
 //		List<List<String>> data = attributes.raw();
@@ -271,7 +269,6 @@ public class LearnAboutMedicareStepDefinitionAARP {
 	
 
 	/* Medicare Advantage */
-	//To be Verified
 	@SuppressWarnings("deprecation")
 	@And("^user selects a plan from the learn about medicare dropList on aarp site$")
 	public void user_selects_plan_from_the_learn_about_medicare_dropList(DataTable attributes) {
@@ -308,7 +305,6 @@ public class LearnAboutMedicareStepDefinitionAARP {
 		}
 	}
 
-	//To be verified
 	@And("^clicks on plans available option on aarp site$")
 	public void clicks_on_plans_available_option(DataTable attributes) {
 //		List<List<String>> data = attributes.raw();
@@ -331,7 +327,6 @@ public class LearnAboutMedicareStepDefinitionAARP {
 
 	}
 
-	//To be verified
 	@And("^user selects a plan from the learn about medicare homePage on aarp site$")
 	public void user_selects_a_plan_from_the_learn_about_medicare_homePage(DataTable attributes) {
 //		List<List<String>> data = attributes.raw();
