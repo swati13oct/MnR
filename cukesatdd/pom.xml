@@ -82,7 +82,7 @@
 						<configuration>
 							<!-- <useSystemClassLoader>false</useSystemClassLoader> -->
 							<!-- <forkCount>2.5C</forkCount> --> <!-- Total of 2.5 * number of CPU core's concurrent JVM process will be created -->
-							<forkCount>5</forkCount>
+							<forkCount>3</forkCount>
 							<reuseForks>false</reuseForks>
 							<suiteXmlFiles>
 								<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
@@ -97,7 +97,7 @@
 									<value>${testnames}</value>
 								</property>
 							</properties>
-							<argLine>-Xmx512m -XX:MaxPermSize=1024m</argLine>
+							<argLine>-Xmx1g -XX:+UseParallelGC -XX:MaxPermSize=1024m</argLine>
 							<systemPropertyVariables>
 								<microapps>${microapp}</microapps>
 								<environment>${environment}</environment>
