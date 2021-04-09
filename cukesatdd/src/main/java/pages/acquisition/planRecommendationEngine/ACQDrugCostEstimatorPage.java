@@ -269,7 +269,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public void Pharmacytype() {
 		threadsleep(5000);
     	validate(PharmacyType);
-    	Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"), "Pharmacy is not default online");    			
+    	Assert.assertTrue(PharmacyType.getText().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
 	}
 	
 	public void getDruglist(){

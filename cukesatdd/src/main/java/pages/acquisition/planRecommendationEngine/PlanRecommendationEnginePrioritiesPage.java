@@ -7,8 +7,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
 public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
@@ -70,12 +72,16 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 		validate(priorityDescription);
 		validate(continueBtn);
 		validate(previousBtn);
+		Assert.assertFalse(validate(addAnotherLink, 30));
+		Assert.assertFalse(validate(secondSelect, 30));
 		Assert.assertTrue(validate(topSelect, 30));
 		selectFromDropDownByText(driver, topSelect, "Doctors");
+		Assert.assertFalse(selectFromDropDownByText(topSelect, "Select Priority"));
  		validate(addAnotherLink, 30);
 		jsClickNew(addAnotherLink);
 		Assert.assertTrue(validate(secondSelect, 30));
 		selectFromDropDownByText(driver, secondSelect, "Health Care Premium");
+		Assert.assertFalse(selectFromDropDownByText(secondSelect, "Select Priority"));
 		jsClickNew(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());
@@ -137,6 +143,21 @@ public class PlanRecommendationEnginePrioritiesPage extends UhcDriver {
 	public void continuePriority() {
 		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
+	}
+	
+	public boolean selectFromDropDownByText(WebElement dropdownElement, String value) {
+		Select dropdown = new Select(dropdownElement);
+		boolean selectText = false;
+		waitUntilSelectOptionsPopulated(dropdown);
+		try {
+			dropdown.selectByVisibleText(value);
+			System.out.println(dropdown.getFirstSelectedOption().getText().trim());
+			if(dropdown.getFirstSelectedOption().getText().trim().equals(value))
+				selectText = true;
+		}catch (Exception e) {
+			System.out.println("Element not found/not visible");
+		}
+		return selectText;
 	}
 
 }
