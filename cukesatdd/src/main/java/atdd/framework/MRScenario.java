@@ -211,6 +211,7 @@ public class MRScenario {
 	
 	public void flushThreadLocals() {
 		flushThreadSafeDriver();
+		flushThreadSafeMobileDriver();
 		flushSessionID();
 		flushJobUrl();
 		flushRunnerFileName();
