@@ -16,11 +16,11 @@ Feature: 1.05.3 OLE common tool flow E2E PDP Plan Details Page
       | Plan Name | <planName> |
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
     Then The User validates the Plan details on OLE page
-    #Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates TFN in Welcome OLE Right Rail
     #Then the user validates Footer links on Welcome OLE Page
-    #Then the user validates Learn more modal for Welcome OLE
-    #Then the user validates Leave OLE modal for Welcome OLE
-    #Then the user validates cancellation modal for Welcome OLE
+    Then the user validates Learn more modal for Welcome OLE
+    Then the user validates Leave OLE modal for Welcome OLE
+    Then the user validates cancellation modal for Welcome OLE
       Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name         | <firstname>         |
@@ -46,7 +46,7 @@ Feature: 1.05.3 OLE common tool flow E2E PDP Plan Details Page
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
-    Then the user validates Medicare Information Page required fields
+   # Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information    
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
