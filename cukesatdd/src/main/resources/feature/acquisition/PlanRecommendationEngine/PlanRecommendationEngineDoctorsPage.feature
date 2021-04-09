@@ -17,8 +17,8 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
     Then user validate elements in doctors page
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel                     |
-      |   90201 | NO            | [blank]| MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular |
+      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds             | travel                     |
+      |   90201 | NO            | [blank] | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular |
 
   @PRE @planrecommendation @doctorspage @doctorpageoptionselection @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate Doctors page positive scenarios in Plan Recommendation Engine
@@ -41,10 +41,10 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | travel                     | doctors         | DoctorsName | isMultiDoctor |
-      |   90201 | NO            |[blank]           | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork      | [blank]     |  [blank]      |
-      |   12345 | NO            |[blank]           | MAPD          | None                     | None                       | AcceptsMedicare | [blank]     |  [blank]      |
-      |   36035 | YES           | Pike County      | None          | Medicaid,chronic         | withinUS,outsideUS         | UHGNetwork      |[blank]     |  [blank]      |
-      |   21212 | YES           | Baltimore County | None          | nursing                  | regular                    | AcceptsMedicare |[blank]     |  [blank]      |
+      |   90201 | NO            | [blank]          | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork      | [blank]     | [blank]       |
+      |   12345 | NO            | [blank]          | MAPD          | None                     | None                       | AcceptsMedicare | [blank]     | [blank]       |
+      |   36035 | YES           | Pike County      | None          | Medicaid,chronic         | withinUS,outsideUS         | UHGNetwork      | [blank]     | [blank]       |
+      |   21212 | YES           | Baltimore County | None          | nursing                  | regular                    | AcceptsMedicare | [blank]     | [blank]       |
 
   @PRE @planrecommendation @doctorspage @doctorspageerrorScenario @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate Doctors page error scenarios in Plan Recommendation Engine
@@ -65,8 +65,8 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | travel   | doctors |
-      |   90201 | NO            | [blank]      | MAPD          | Medicaid                 | withinUS |[blank]         |
-      |   78006 | YES           | Bexar County | None          | Medicaid,chronic,nursing | withinUS | [blank]        |
+      |   90201 | NO            | [blank]      | MAPD          | Medicaid                 | withinUS | [blank] |
+      |   78006 | YES           | Bexar County | None          | Medicaid,chronic,nursing | withinUS | [blank] |
 
   @PRE @planrecommendation @doctorspage @previousfunctionbeforeContinue @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate Previous Button functionality before Click continue of doctors page in Plan Recommendation Engine
@@ -89,8 +89,8 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | travel                     | doctors         | DoctorsName | isMultiDoctor |
-      |   78006 | YES           | Bexar County | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork      |  [blank]    |  [blank]      |
-      |   45634 | NO            | [blank]      | None          | None                     | None                       | AcceptsMedicare |    [blank]  |  [blank]      |
+      |   78006 | YES           | Bexar County | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | UHGNetwork      | [blank]     | [blank]       |
+      |   45634 | NO            | [blank]      | None          | None                     | None                       | AcceptsMedicare | [blank]     | [blank]       |
 
   @doctorspage @doctorspage @doctorspageConfirmationmodel @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate doctors page Confirmation Model scenarios in Plan Recommendation Engine
@@ -112,11 +112,11 @@ Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommend
       | Multi Doctor        | <isMultiDoctor> |
 
     Examples: 
-      | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds             | travel                     | doctors | DoctorsName | isMultiDoctor |
-      |   90201 | NO            | [blank]     | None          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | Lookup  | John        | YES           |
-      |   10002 | NO            | New York    | MAPD          | nursing                  | regular                    | Lookup  | julie       | YES           |
-#     |   35034 | YES           | Bibb County | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | Lookup  | John        | NO            |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds             | travel                     | doctors | DoctorsName | isMultiDoctor |
+      |   90201 | NO            | [blank]  | None          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | Lookup  | John        | YES           |
+      |   10002 | NO            | New York | MAPD          | nursing                  | regular                    | Lookup  | julie       | YES           |
 
+  #     |   35034 | YES           | Bibb County | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular | Lookup  | John        | NO            |
   @PRE @planrecommandonation @doctorspage @doctorspagepagecancel @F372731
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctor> - To validate Doctors page modal cancel functions in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page

@@ -1,7 +1,6 @@
 @vppPlanCompareAARPNew
 Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
 
-
   @vppPlanCompareAARP03 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on AARP medicare acquisition site landing page
@@ -12,14 +11,14 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
     And the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     And the user selects plan year for the AARP site
-    	|Plan Year	| <planyear>|
+      | Plan Year | <planyear> |
     When the user views the plans of the below plan type in AARP site
       | Plan Type | <plantype> |
     Then user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare for AARP
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county         | plantype |planyear|
-      | 00006 |   35616 | NO            | Colbert County | MAPD     |current|
+      | TID   | zipcode | isMultiCounty | county         | plantype | planyear |
+      | 00006 |   35616 | NO            | Colbert County | MAPD     | current  |
 
   @vppPlanCompareAARP12 @vppPlanCompareAARPRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for AARP
@@ -31,7 +30,7 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
-    	|Plan Year	| <planyear>| 
+      | Plan Year | <planyear> |
     And I access the DCE tool on aarp site
       | Plan Type | <plantype> |
     Then user adds drug to drug cost estimator flow for the given plan name in AARP site
@@ -87,7 +86,5 @@ Feature: 1.01.3-Vpp to plan Compare AARP Scenarios
     Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page AARP
 
     Examples: 
-      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear |planyear|
-      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          |current|
-
- 
+      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | planyear |
+      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | current  |

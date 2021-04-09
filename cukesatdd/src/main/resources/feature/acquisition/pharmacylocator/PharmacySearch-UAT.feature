@@ -1,5 +1,5 @@
 @pharmacyLocator
-Feature:1.11 UAT - Pharmacy Locator
+Feature: 1.11 UAT - Pharmacy Locator
 
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - To verify end-to-end behavior for pharmacy locator page in English on acquisition <site> site
     Given the user is on medicare acquisition site landing page
@@ -26,7 +26,7 @@ Feature:1.11 UAT - Pharmacy Locator
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-   #Then the user validates the Pharmacies available
+    #Then the user validates the Pharmacies available
     #  | Language | English |
     And the user validates pharmacy widgets on page
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
@@ -52,12 +52,12 @@ Feature:1.11 UAT - Pharmacy Locator
     And user verify the drug summary page
     And user should be able to see Medicare Advantage plan by default
 
-    @UATAARP01  @regressionAARP 
+    @UATAARP01 @regressionAARP
     Examples: 
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
       | E2E Scenario 1_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |
 
-    @UATUHC01  @regressionUHC
+    @UATUHC01 @regressionUHC
     Examples: 
       | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan | drug1  | drug2   |
       | E2E Scenario 1_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 | Fanapt | Lipitor |
@@ -87,8 +87,8 @@ Feature:1.11 UAT - Pharmacy Locator
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-   # Then the user validates the Pharmacies available
-   #   | Language | English |
+    # Then the user validates the Pharmacies available
+    #   | Language | English |
     And the user validates pharmacy widgets on page
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
@@ -99,12 +99,12 @@ Feature:1.11 UAT - Pharmacy Locator
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
-    @UATAARP02 @regressionAARP 
+    @UATAARP02 @regressionAARP
     Examples: 
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 2_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @UATUHC02  @regressionUHC
+    @UATUHC02 @regressionUHC
     Examples: 
       | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 2_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
@@ -124,8 +124,8 @@ Feature:1.11 UAT - Pharmacy Locator
       | Current Year Plan Year | <cy_planYear> |
       | Next Year Plan Name    | <ny_planName> |
       | Next Year Plan Year    | <ny_planYear> |
-   # Then the user validates the Pharmacies available
-   #   | Language | English |
+    # Then the user validates the Pharmacies available
+    #   | Language | English |
     And the user validates pharmacy widgets on page
       | Has Preferred Retail Pharmacy network plan | <hasPrefRetailPharPlan> |
       | Has Walgreens plan                         | <hasWalgreensPlan>      |
@@ -136,12 +136,12 @@ Feature:1.11 UAT - Pharmacy Locator
     And the user validate more information content based on plan type
     And the user validate view search PDF link
 
-    @UATAARP03 @regressionAARP 
+    @UATAARP03 @regressionAARP
     Examples: 
       | TID                 | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 3_AARP | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @UATUHC03  @regressionUHC
+    @UATUHC03 @regressionUHC
     Examples: 
       | TID                | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | E2E Scenario 3_UHC | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |

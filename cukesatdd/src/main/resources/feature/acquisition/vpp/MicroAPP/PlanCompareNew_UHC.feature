@@ -1,7 +1,6 @@
 @vppPlanCompareUHC
 Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
 
-  
   @vppPlanCompareUHC03 @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify for zipcode with 2 plans when 1 is selected then the other plan is auto-selected and De-selection
     Given the user is on the uhcmedicaresolutions site landing page
@@ -9,17 +8,16 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-   When user views plans of the below plan type in UMS site
+    When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     And the user selects plan year for the UMS site
-    	|Plan Year | <planyear> |
+      | Plan Year | <planyear> |
     Then user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare
 
     Examples: 
-      | TID   | zipcode | isMultiCounty | county         | plantype |planyear|
-      | 00006 |   35616 | NO            | Colbert County | MAPD     |current|
+      | TID   | zipcode | isMultiCounty | county         | plantype | planyear |
+      | 00006 |   35616 | NO            | Colbert County | MAPD     | current  |
 
-  
   @vppPlanCompareUHC12 @vppPlanCompareUHCRun01New @vppPlanCompareUHCRegression
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - valiadation of Add drug from plan compare and Edit drug from plan compare page for UHC
     Given the user is on the uhcmedicaresolutions site landing page
@@ -30,7 +28,7 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     When user views plans of the below plan type in UMS site
       | Plan Type | <plantype> |
     And the user selects plan year for the UMS site
-    	|Plan Year | <planyear> |
+      | Plan Year | <planyear> |
     And user access DCE tool on UMS site
       | Plan Type | <plantype> |
       | PlanName  | <planName> |
@@ -87,5 +85,5 @@ Feature: 2.01.3-Vpp to plan Compare UHC Scenarios
     Then verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC
 
     Examples: 
-      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 |planyear|
-      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | atorvastatin |current|
+      | TID   | zipcode | drugName1 | dosage   | plantype | county             | isMultiCounty | quantity | frequency     | branded | drugInitials2 | drugName2  | drugInitials3 | drugName3     | pharmacyType     | distance | pharmacyName   | plantype | planName                                           | quantity | frequency     | newPharmacyType | genericName1 | genricName3 | aep | currentyear | genericName1 | planyear |
+      | 00015 |   90002 | Lipitor   | TAB 10MG | MAPD     | Los Angeles County | no            |       30 | Every 1 month | yes     | dron          | dronabinol | Adva          | Advair Diskus | Standard Network | 15 miles | BRAVO PHARMACY | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO) |       30 | Every 1 month | Mail Order      | atorvastatin | fluticasone | no  | no          | atorvastatin | current  |

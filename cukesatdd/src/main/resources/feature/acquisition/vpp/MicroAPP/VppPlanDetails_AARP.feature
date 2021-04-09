@@ -1,8 +1,6 @@
 @vppPlanDetailsAARP
 Feature: 1.01.2-Vpp to plan Details AARP Scenarios
 
-
-
   @vppPlanDetailsAARP08
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> -  To Verify the drug cost estimator flow for <plantype> through plan details page's Plan Costs tab
     Given the user is on the AARP medicare site landing page

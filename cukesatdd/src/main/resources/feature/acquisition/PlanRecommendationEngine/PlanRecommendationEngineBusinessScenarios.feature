@@ -113,7 +113,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     @SanityPRE_02 @prod_regression
     Examples: 
       | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork | [blank]         |[blank]        | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
+      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork | [blank]         | [blank]       | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
 
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Lower                | -->Tie Scenario

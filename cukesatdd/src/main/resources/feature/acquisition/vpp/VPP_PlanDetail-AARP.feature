@@ -10,7 +10,7 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Is Multi County | <isMultutiCounty> |
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user validates the following Additional Benefits of Plan for the plan in AARP
@@ -30,11 +30,11 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Membership in Health Club / Fitness Classes Expected Text | <membershipinHealthClubFitnessExpectedText>       |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                 | eyeWearBenefitType | eyeWearExpectedText                                                                          | dentalBenefitType | dentalExpectedText                                                     | transportationBenefitType | transportationExpectedText                                                       | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                   |
-     | 15652 |   19019 | No              | Iowa County    | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO)       | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Dental            | Preventive Services Covered. Contact plan for details.                 | Transportation            | 24 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay               | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
-     | 15653 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years                                | Dental            | $3,000 per year towards covered preventive and comprehensive services. | Transportation            | 48 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $0 copay                    | Hearing Exam           | $0 copay                | Fitness Program through Renew Active     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost  |
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                    | eyeWearBenefitType | eyeWearExpectedText                                           | dentalBenefitType | dentalExpectedText                                                     | transportationBenefitType | transportationExpectedText                                                       | eyeExamBenefitType | eyeExamExpectedText | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText | membershipinHealthClubFitnessClassesBenefitType | membershipinHealthClubFitnessExpectedText                                                                  |
+      | 15652 |   19019 | No              | Iowa County    | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO) | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Dental            | Preventive Services Covered. Contact plan for details.                 | Transportation            | 24 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                | Membership in Health Club / Fitness Classes     | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
+      | 15653 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)  | Eyewear            | Eyewear has a plan benefit limit up to $200 per every 2 years | Dental            | $3,000 per year towards covered preventive and comprehensive services. | Transportation            | 48 one-way trips per year to or from approved locations with no additional cost. | Eye Exam           | $0 copay            | Foot Care - Routine        | $0 copay                    | Hearing Exam           | $0 copay                | Fitness Program through Renew Active            | Fitness Membership Only: Basic membership in a fitness program at a network location at no additional cost |
 
-  @vppPlanDetailsRegressionMedical @vppPlanDetailsRegression_1 
+  @vppPlanDetailsRegressionMedical @vppPlanDetailsRegression_1
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Medical Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -43,7 +43,7 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Is Multi County | <isMultutiCounty> |
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user validates the following Medical Benefits of Plan for the plan in AARP
@@ -65,14 +65,14 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Urgent Care Expected Text                  | <urgentCareExpectedText>                 |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                     | primaryCareProviderCopayBenefitType | primaryCareProviderCopayExpectedText | specialistCopayBenefitType | specialistCopayExpectedText | ambulatorySurgicalCenterBenefitType | ambulatorySurgicalCenterExpectedText | outpatientHospitalServicesBenefitType | outpatientHospitalServicesExpectedText | diabetesMonitoringSuppliesBenefitType | diabetesMonitoringSuppliesExpectedText | groundAmbulanceServicesBenefitType | groundAmbulanceServicesExpectedText | airAmbulanceServicesBenefitType | airAmbulanceServicesExpectedText | urgentCareBenefitType | urgentCareExpectedText |
-      | 15672 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Primary Care Provider               | $0 copay                            | Specialist                 | $50 copay                   | Ambulatory Surgical Center          | $0 copay - $335 copay                           | Outpatient Hospital Services          | $0 copay - $335 copay                             | Diabetes Monitoring Supplies          | $0 copay                               | Ground Ambulance Services          | $275 copay                          | Air Ambulance Services          | $275 copay                       | Urgent Care           | $30 - $40 copay        |
-      | 15671 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | Primary Care Provider               | $0 copay                             | Specialist                 | $45 copay                   | Ambulatory Surgical Center          | $0 copay - $390 copay                      | Outpatient Hospital Services          | $0 copay - $390 copay                       | Diabetes Monitoring Supplies          | $0 copay                               | Ground Ambulance Services          | $250 copay                          | Air Ambulance Services          | $250 copay                       | Urgent Care           | $30 - $40 copay        |
-     
-     @prodRegression 
-      Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                     | primaryCareProviderCopayBenefitType | primaryCareProviderCopayExpectedText | specialistCopayBenefitType | specialistCopayExpectedText | ambulatorySurgicalCenterBenefitType | ambulatorySurgicalCenterExpectedText | outpatientHospitalServicesBenefitType | outpatientHospitalServicesExpectedText | diabetesMonitoringSuppliesBenefitType | diabetesMonitoringSuppliesExpectedText | groundAmbulanceServicesBenefitType | groundAmbulanceServicesExpectedText | airAmbulanceServicesBenefitType | airAmbulanceServicesExpectedText | urgentCareBenefitType | urgentCareExpectedText |
-      | 15675 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | Primary Care Provider               | $0 copay - 20% of the cost          | Specialist                 | $0 copay - 20% of the cost     | Ambulatory Surgical Center          | $0 copay - 20% of the cost           | Outpatient Hospital Services          | $0 copay - 20% of the cost             | Diabetes Monitoring Supplies          | $0 copay                               | Ground Ambulance Services          | $0 copay - 20% of the cost          | Air Ambulance Services          | $0 copay - 20% of the cost       | Urgent Care           | $0 copay - $65 copay   |
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | primaryCareProviderCopayBenefitType | primaryCareProviderCopayExpectedText | specialistCopayBenefitType | specialistCopayExpectedText | ambulatorySurgicalCenterBenefitType | ambulatorySurgicalCenterExpectedText | outpatientHospitalServicesBenefitType | outpatientHospitalServicesExpectedText | diabetesMonitoringSuppliesBenefitType | diabetesMonitoringSuppliesExpectedText | groundAmbulanceServicesBenefitType | groundAmbulanceServicesExpectedText | airAmbulanceServicesBenefitType | airAmbulanceServicesExpectedText | urgentCareBenefitType | urgentCareExpectedText |
+      | 15672 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | Primary Care Provider               | $0 copay                             | Specialist                 | $50 copay                   | Ambulatory Surgical Center          | $0 copay - $335 copay                | Outpatient Hospital Services          | $0 copay - $335 copay                  | Diabetes Monitoring Supplies          | $0 copay                               | Ground Ambulance Services          | $275 copay                          | Air Ambulance Services          | $275 copay                       | Urgent Care           | $30 - $40 copay        |
+      | 15671 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | Primary Care Provider               | $0 copay                             | Specialist                 | $45 copay                   | Ambulatory Surgical Center          | $0 copay - $390 copay                | Outpatient Hospital Services          | $0 copay - $390 copay                  | Diabetes Monitoring Supplies          | $0 copay                               | Ground Ambulance Services          | $250 copay                          | Air Ambulance Services          | $250 copay                       | Urgent Care           | $30 - $40 copay        |
+
+    @prodRegression
+    Examples: 
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                   | primaryCareProviderCopayBenefitType | primaryCareProviderCopayExpectedText | specialistCopayBenefitType | specialistCopayExpectedText | ambulatorySurgicalCenterBenefitType | ambulatorySurgicalCenterExpectedText | outpatientHospitalServicesBenefitType | outpatientHospitalServicesExpectedText | diabetesMonitoringSuppliesBenefitType | diabetesMonitoringSuppliesExpectedText | groundAmbulanceServicesBenefitType | groundAmbulanceServicesExpectedText | airAmbulanceServicesBenefitType | airAmbulanceServicesExpectedText | urgentCareBenefitType | urgentCareExpectedText |
+      | 15675 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | Primary Care Provider               | $0 copay - 20% of the cost           | Specialist                 | $0 copay - 20% of the cost  | Ambulatory Surgical Center          | $0 copay - 20% of the cost           | Outpatient Hospital Services          | $0 copay - 20% of the cost             | Diabetes Monitoring Supplies          | $0 copay                               | Ground Ambulance Services          | $0 copay - 20% of the cost          | Air Ambulance Services          | $0 copay - 20% of the cost       | Urgent Care           | $0 copay - $65 copay   |
 
   @vppPlanDetailsRegressionPlanCosts @vppPlanDetailsRegression_2
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan
@@ -83,7 +83,7 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Is Multi County | <isMultutiCounty> |
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user click on Plan costs tab and validates in AARP site
@@ -91,8 +91,8 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                     | monthlyPremium | yearlyPremium |
-      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564         |
+      | TID   | zipcode | isMultutiCounty | county         | plantype | planName                                       | monthlyPremium | yearlyPremium |
+      | 15638 |   53503 | No              | Iowa County    | MAPD     | UnitedHealthcare Medicare Advantage Open (PPO) | $47            | $564          |
       | 15640 |   99210 | No              | Spokane County | MA       | AARP Medicare Advantage Essential (HMO)        | $0             | $0            |
       | 15641 |   99210 | No              | Spokane County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)     | $25            | $300          |
 
@@ -105,7 +105,7 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Is Multi County | <isMultutiCounty> |
     When the user views the plans of the below plan type in AARP site and select Next year
       | Plan Type | <plantype> |
-#    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
+    #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     Then the user view plan details of the above selected plan in AARP site and validates
       | Plan Name | <planName> |
     Then the user click on Optional Services tab and add the rider in AARP site
@@ -116,11 +116,11 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Yearly Premium  | <yearlyPremium>  |
 
     Examples: 
-      | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                          | optionalRider   | monthlyPremium | yearlyPremium |
-#      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
-      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Essential (Regional PPO) | Dental Platinum | $0            | $0        |
-#      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
+      | TID   | zipcode | isMultutiCounty | county        | plantype | planName                                                     | optionalRider   | monthlyPremium | yearlyPremium |
+      #      | 15658 |   11516 | No              | Nassau County | MA       | UnitedHealthcare MedicareComplete Choice Essential (Regional PPO) | Dental Platinum | $32            | $384          |
+      | 15662 |   11516 | No              | Nassau County | MAPD     | UnitedHealthcare Medicare Advantage Essential (Regional PPO) | Dental Platinum | $0             | $0            |
 
+  #      | 15661 |   53910 | No              | Adams County  | SNP      | UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)                | Dental Platinum | $14            | $168          |
   @OTC_HealthCatalog @F338035 @F303834 @vppPlanDetailsRegression_3
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify OTC - health product catalog Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
@@ -138,9 +138,9 @@ Feature: 1.03-ACQ-Plan details in vpp flow AARP
       | Expected Text | <expectedText> |
 
     Examples: 
-      | UID                                         | zipcode | isMultutiCounty | county          | plantype | planName                                                         | benefitType                        | expectedText                                                                |
-      | F338035 - MAPD-AARP                         |   35616 | No              | Colbert County  | MAPD     | AARP Medicare Advantage Plan 1 (HMO)                             | Health & Wellness Products Catalog | credit per quarter to use on approved health products                       |
-      | F338035 - SNP-AARP                          |   38603 | Yes             | Benton County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                       | Health & Wellness Products Card    | credit per quarter to use on approved health products                       |
-      | F338035 - MA-AARP                           |   99001 | No              | Spokane County  | MA       | AARP Medicare Advantage Essential (HMO)                          | Health & Wellness Products Catalog | credit per quarter to use on approved health products                       |
-     | F303834 - US1967861 -  Additional Telehealth Services |   65058 | Yes             | Maries County   | MAPD       | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Virtual Medical Visits             | Speak to network telehealth providers using your computer or mobile device          |
-      |F303834- US1967861 -  Additional Telehealth Services |   22206 | Yes             | Alexandria city | MAPD       | AARP Medicare Advantage Plan 2 (HMO)                             | Virtual Mental Health Visits       | $0 copay ; Speak to network telehealth providers using your computer or mobile device |
+      | UID                                                   | zipcode | isMultutiCounty | county          | plantype | planName                                                         | benefitType                        | expectedText                                                                          |
+      | F338035 - MAPD-AARP                                   |   35616 | No              | Colbert County  | MAPD     | AARP Medicare Advantage Plan 1 (HMO)                             | Health & Wellness Products Catalog | credit per quarter to use on approved health products                                 |
+      | F338035 - SNP-AARP                                    |   38603 | Yes             | Benton County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)                       | Health & Wellness Products Card    | credit per quarter to use on approved health products                                 |
+      | F338035 - MA-AARP                                     |   99001 | No              | Spokane County  | MA       | AARP Medicare Advantage Essential (HMO)                          | Health & Wellness Products Catalog | credit per quarter to use on approved health products                                 |
+      | F303834 - US1967861 -  Additional Telehealth Services |   65058 | Yes             | Maries County   | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Virtual Medical Visits             | Speak to network telehealth providers using your computer or mobile device            |
+      | F303834- US1967861 -  Additional Telehealth Services  |   22206 | Yes             | Alexandria city | MAPD     | AARP Medicare Advantage Plan 2 (HMO)                             | Virtual Mental Health Visits       | $0 copay ; Speak to network telehealth providers using your computer or mobile device |

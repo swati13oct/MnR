@@ -30,12 +30,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And user delets the added Ms plans on visitor profile page
       | MS Test Plans | <MS_testPlans> |
 
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password    |
       | AARP | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@20 |
 
-    @VisitorProfile_UHC  @regressionUHC
+    @VisitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password    |
       | UHC  | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@20 |
@@ -65,12 +65,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then the user deletes all the added drugs from profile page
       | DrugName | <drug1> |
 
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP
     Examples: 
       | site | state   | userName | password    | drug1   | zipCode |
       | AARP | Alabama | mnrqevd4 | Password@10 | Lipitor |   90210 |
 
-    @VisitorProfile_UHC  @regressionUHC
+    @VisitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | userName | password    | drug1   | zipCode |
       | UHC  | Alabama | mnrqevd4 | Password@10 | Lipitor |   90210 |
@@ -99,12 +99,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And user delets all the added providers on visitor profile page
       | PlanName | <planname> |
 
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password    | plantype | planname                             |
       | AARP | New York |   10001 | NO              | New York County | mnrqevd4 | Password@10 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
-    @VisitorProfile_UHC  @regressionUHC
+    @VisitorProfile_UHC @regressionUHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password    | plantype | planname                             |
       | UHC  | New York |   10001 | NO              | New York County | mnrqevd4 | Password@10 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
@@ -123,12 +123,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | Status          | <status>         |
       | Monthly Premium | <monthlyPremium> |
 
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password    | plantype | planname                             | status      | monthlyPremium |
       | AARP | New York |   10001 | NO              | New York County | mnrqevd4 | Password@10 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
-    @VisitorProfile_UHC  @regressionUHC
+    @VisitorProfile_UHC @regressionUHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password    | plantype | planname                             | status      | monthlyPremium |
       | UHC  | New York |   10001 | NO              | New York County | mnrqevd4 | Password@10 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
@@ -174,7 +174,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And the user cancel the enrollment
       | Plan Name | <planName> |
 
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP
     Examples: 
       | site | state    | userName | password    | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
       | AARP | New York | mnrvd5   | Password@30 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
@@ -196,12 +196,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then user want the email address associated to my profile prepopulated in the text box on plan summary page
       | User Name | <userName> |
 
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @VisitorProfile_UHC  @regressionUHC
+    @VisitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
@@ -222,12 +222,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then user want the email address associated to my profile prepopulated in the text box on plan detail page
       | User Name | <userName> |
 
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @VisitorProfile_UHC  @regressionUHC
+    @VisitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
@@ -250,12 +250,12 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then user want the email address associated to my profile prepopulated in the text box on plan compare page
       | User Name | <userName> |
 
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @VisitorProfile_UHC  @regressionUHC
+    @VisitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
