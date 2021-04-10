@@ -175,7 +175,7 @@ public class MRScenario {
 
 	private WebDriver webDriver;
 
-	private static ThreadLocal<WebDriver> threadSafeDriver = new ThreadLocal<>();
+	private static final ThreadLocal<WebDriver> threadSafeDriver = new ThreadLocal<>();
 	
 	public static synchronized WebDriver getThreadSafeDriver() {
 		return threadSafeDriver.get();
@@ -186,7 +186,7 @@ public class MRScenario {
 	}
 	
 	
-	private static ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
+	private static final ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
 	
 	public synchronized AppiumDriver getThreadSafeMobileDriver() {
 		return threadSafeMobileDriver.get();
@@ -1268,7 +1268,8 @@ public class MRScenario {
 
 	public synchronized String returnJobURL() {
 //		return JobURL;
-		if (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_VIRTUAL)) {
+		if (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_VIRTUAL) && 
+				getThreadSafeMobileDriver() != null) {
 			return JobURLVD.get();
 		} else {
 			return JobURL.get();
