@@ -80,16 +80,16 @@
 							<goal>verify</goal>
 						</goals>
 						<configuration>
-							<!-- <useSystemClassLoader>false</useSystemClassLoader> -->
+							<useSystemClassLoader>false</useSystemClassLoader>
 							<!-- <forkCount>2.5C</forkCount> --> <!-- Total of 2.5 * number of CPU core's concurrent JVM process will be created -->
-							<!-- <forkCount>3</forkCount>
-							<reuseForks>false</reuseForks> -->
+							<forkCount>3</forkCount>
+							<reuseForks>false</reuseForks>
 							<suiteXmlFiles>
 								<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 							</suiteXmlFiles>
 							<testFailureIgnore>true</testFailureIgnore>
 							<parallel>methods</parallel>
-							<threadCountMethods>1000</threadCountMethods>
+							<!-- <threadCountMethods>1000</threadCountMethods> -->
 							<!-- <threadCount>100</threadCount> -->
 							<properties>
 								<property>

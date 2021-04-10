@@ -4,7 +4,7 @@
 	<listeners>
 		<listener class-name="atdd.framework.TestNGMethodListener" />
 	</listeners>
-	<test name="Desktop">
+	<test name="Desktop" parallel="methods" thread-count="1000" preserve-order="false">
 		<packages>
 			<package name="atdd.runners" />
 		</packages>
