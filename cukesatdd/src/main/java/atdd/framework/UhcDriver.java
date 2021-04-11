@@ -39,6 +39,8 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
@@ -49,6 +51,7 @@ import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 
@@ -528,14 +531,22 @@ public abstract class UhcDriver {
 			threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
 			System.out.println("Waiting to check if element is present");
 			fwait.until(ExpectedConditions.visibilityOf(element));
+			
+		if(element.isDisplayed()) {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].click();", element);
+				System.out.println("JsClick worked");
 
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].click();", element);
-			if (element.isDisplayed()) {
-				element.click();
-			}
+				if(element.isDisplayed())
+				try {
+					element.click();
+					System.out.println("Click worked");
+				} catch (Exception e) {
+					System.out.println("Unable to click on element for IOS");
+				}
 
-		}
+			
+		}}
 
 		catch (Exception e) {
 			System.out.println("Unable to click on element for IOS");
@@ -548,10 +559,10 @@ public abstract class UhcDriver {
 	public boolean scrollToView(WebElement element) {
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			
+
 			Actions ac = new Actions(driver);
 			ac.moveToElement(element);
-			//backToTop.isDisplayed();
+			// backToTop.isDisplayed();
 			System.out.println("Scroll finished to element on IOS device");
 
 		} else {
@@ -1094,12 +1105,16 @@ public abstract class UhcDriver {
 	public void jsSendkeys(WebElement searchBox, String keys) {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].value='" + keys + "';", searchBox);
+		
+	
 	}
 
 	public void pageloadcomplete() {
 		new WebDriverWait(driver, 30).until(
 				driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
 		System.out.println("Page load completed");
+		
+		
 	}
 
 	public void mobileFindElement(WebElement element, int swipeCount, boolean swipeUp) {

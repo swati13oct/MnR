@@ -433,7 +433,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement SubmitBtn;
 
 	@FindBy(xpath = "//h1[contains(text(),'Search Results')]")
-	// @FindBy(xpath = "//h1[contains(@class,'search-results-title')]")
 	private WebElement SearchResults;
 
 	@FindBy(xpath = "//h2[@class='search-results-count']")
@@ -2071,7 +2070,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// driver.switchTo().defaultContent();
 		// CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
 		// EnterSearch.sendKeys(sv);
-		jsSendkeys(EnterSearch, sv);
+		//jsSendkeys(EnterSearch, sv);
+		MobileMenuMain();
+		sendkeysMobile(EnterSearch, sv);
 		// CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
 		scrollToView(SubmitBtn);
 		// SubmitBtn.click();
