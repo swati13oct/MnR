@@ -53,7 +53,7 @@ Feature: 1.08 UAT-Site Search Flows
     @SiteSearch_AARP_02 @regressionAARP
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
-      | E2E Scenario 1_AMP | AARP | Medicare    | Empty            |                                                                             |
+      | E2E Scenario 1_AMP | AARP | Medicare    | Empty            | [blank]                                                                     |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | medicareeee                                                                 |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | Unicorn                                                                     |
@@ -61,7 +61,7 @@ Feature: 1.08 UAT-Site Search Flows
     @SiteSearch_UHC_02 @regressionUHC
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
-      | E2E Scenario 1_UMS | UHC  | Medicare    | Empty            |                                                                             |
+      | E2E Scenario 1_UMS | UHC  | Medicare    | Empty            | [blank]                                                                     |
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | medicareeee                                                                 |
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj |
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | Unicorn                                                                     |
@@ -139,7 +139,7 @@ Feature: 1.08 UAT-Site Search Flows
     @SiteSearch_AARP @regressionAARP
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
-      | E2E Scenario 1_AMP | AARP | Medicare    | Empty            |                                                                             |
+      | E2E Scenario 1_AMP | AARP | Medicare    | Empty            | [blank]                                                                     |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | medicareeee                                                                 |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | Unicorn                                                                     |
@@ -147,7 +147,7 @@ Feature: 1.08 UAT-Site Search Flows
     @SiteSearch_UHC @regressionUHC
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
-      | E2E Scenario 1_UMS | UHC  | Medicare    | Empty            |                                                                             |
+      | E2E Scenario 1_UMS | UHC  | Medicare    | Empty            | [blank]                                                                     |
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | medicareeee                                                                 |
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj |
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | Unicorn                                                                     |
