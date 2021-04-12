@@ -18,7 +18,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ English -----------------------------------
     And the user validates header section content
     When the user enters following details for pharmacy search
@@ -61,12 +61,12 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ Chinese -----------------------------------
     When the user selects Chinese Language
     And the user validates header section content
     When the user enters following details for pharmacy search
-      | Zip Code |            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in pharmacy locator page
       | Language | Chinese |
@@ -115,12 +115,12 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
     And the user validates header section content
     When the user enters following details for pharmacy search
-      | Zip Code |            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in pharmacy locator page
       | Language | Spanish |

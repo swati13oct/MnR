@@ -180,7 +180,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     When the user selects Chinese Language
     And the user validates header section content
     When the user enters following details for pharmacy search
-      | Zip Code |[blank]            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in pharmacy locator page
       | Language | Chinese |
@@ -256,7 +256,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     When the user selects Spanish Language
     And the user validates header section content
     When the user enters following details for pharmacy search
-      | Zip Code |[blank]            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in pharmacy locator page
       | Language | Spanish |

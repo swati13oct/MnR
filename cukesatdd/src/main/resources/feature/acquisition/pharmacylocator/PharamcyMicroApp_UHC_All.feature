@@ -17,7 +17,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ English -----------------------------------
     And the user validates header section content
     When the user enters following details for pharmacy search
@@ -111,7 +111,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ Chinese -----------------------------------
     When the user selects Chinese Language
     And the user validates header section content
@@ -191,7 +191,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
     And the user validates header section content

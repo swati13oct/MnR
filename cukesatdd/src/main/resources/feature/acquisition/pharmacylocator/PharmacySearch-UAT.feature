@@ -8,7 +8,7 @@ Feature: 1.11 UAT - Pharmacy Locator
     #------ English -----------------------------------
     And the user validates header section content on site
     When the user enters following details for the pharmacy search
-      | Zip Code |            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in Pharmacy locator page
       | Language | English |
@@ -69,7 +69,7 @@ Feature: 1.11 UAT - Pharmacy Locator
     #------ English -----------------------------------
     And the user validates header section content on site
     When the user enters following details for the pharmacy search
-      | Zip Code |            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in Pharmacy locator page
       | Language | English |
