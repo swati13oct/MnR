@@ -65,6 +65,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "(//button[text()='Select'])[1]")
 	public WebElement selectBtn;
 
+	
 	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
 	public WebElement addToDrugList;
 
@@ -124,6 +125,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		 * if(validate(SearchBtn)) SearchBtn.click(); if(validate(selectBtn))
 		 * selectBtn.click();
 		 */
+		Thread.sleep(2000);
 		validateNew(addToDrugList);
 		Thread.sleep(2000);
 		jsClickMobile(addToDrugList);

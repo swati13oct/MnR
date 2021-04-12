@@ -27,6 +27,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
@@ -86,8 +87,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
 
-	@FindBy(xpath = "//a[@id='prescriptiondrug' and contains(@class,'active')]")
+	@FindBy(xpath = "//*[contains(@id,'prescriptiondrug')]")
+	// @FindBy(xpath="//a[contains(@id,'prescriptiondrug') and
+	// contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
+
+	@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
 
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
@@ -98,7 +104,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 
-	@FindBy(xpath = "//*[contains(text(),'Plan Costs')]")
+	@FindBy(id = "plancosts")
 	private WebElement planCostsTab;
 
 	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
@@ -333,19 +339,37 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void openAndValidate(String planType) {
-		if (planType.equalsIgnoreCase("MA")) {
-			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			org.testng.Assert.assertTrue(0 == presDrugTab1.size(), "Prescription Drug tab not displayed for MA plans");
+		if (planType.equalsIgnoreCase("MA") || (planType.equalsIgnoreCase("MAPD"))) {
+			if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+				checkModelPopup(driver, 45);
+			else
+				checkModelPopup(driver, 10);
 
-		} else if (planType.equalsIgnoreCase("PDP")) {
-			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			org.testng.Assert.assertTrue(0 == medBenefitsTab.size(), "Medical Benefit tab not displayed for PDP plans");
-		} else if (planType.equalsIgnoreCase("SNP")) {
-			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			org.testng.Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
-					"Medical Benefit tab not displayed for SNP plans");
-		} /* Added for SNP as well */
-		validate(planCostsTab);
+			// note: setting the implicit wait to 0 as it fails because of TimeoutException
+			// while finding List<WebElement> of the different tabs on Plan detail page
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+			if (planType.equalsIgnoreCase("MA")) {
+				CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+				org.testng.Assert.assertTrue(0 == presDrugTab2.size(),
+						"Prescription Drug tab not displayed for MA plans");
+
+			} else if (planType.equalsIgnoreCase("MAPD")) {
+				CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+				org.testng.Assert.assertTrue(1 == presDrugTab1.size(),
+						"Prescription Drug tab displayed for MAPD plans");
+			} else if (planType.equalsIgnoreCase("PDP")) {
+				CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+				org.testng.Assert.assertTrue(0 == medBenefitsTab.size(),
+						"Medical Benefit tab not displayed for PDP plans");
+			} else if (planType.equalsIgnoreCase("SNP")) {
+				CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+				org.testng.Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
+						"Medical Benefit tab not displayed for SNP plans");
+			} /* Added for SNP as well */
+			//validateNew(planCostsTab);
+			// note: setting the implicit wait back to default value - 10
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		}
 
 	}
 
@@ -847,11 +871,21 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
+//		validateNew(getLnkBackToAllPlans());
+//		jsClickNew(getLnkBackToAllPlans());
+//
+//		if (driver.getCurrentUrl().contains("plan-summary")) {
+//			jsClickNew(ReturnToMainPlanList);
+//			return new VPPPlanSummaryPageMobile(driver);
+//
+//		}
+//		return null;
+		
 		validateNew(getLnkBackToAllPlans());
 		jsClickNew(getLnkBackToAllPlans());
-	
+		// getLnkBackToAllPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			jsClickNew(ReturnToMainPlanList);
 			return new VPPPlanSummaryPageMobile(driver);
 
 		}
@@ -1104,8 +1138,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		WebElement PDFlink = driver
 				.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '" + pDFtype + "')]"));
 
-		WebElement PDFCode = driver
-				.findElement(By.xpath("//a[@href='/online_documents/ovation/pdf/mapd/en/2021/Step_Therapy_MCOREE_2021.pdf']"));
+		WebElement PDFCode = driver.findElement(
+				By.xpath("//a[@href='/online_documents/ovation/pdf/mapd/en/2021/Step_Therapy_MCOREE_2021.pdf']"));
 
 		// On mobile chrome when user clicks on pdf link it asks for phone memory access
 		// on SauceLabs hence verifying code via @href

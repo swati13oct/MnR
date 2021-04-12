@@ -1081,7 +1081,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		scrollToView(ProviderSearchLink);
-		//validateNew(ProviderSearchLink);
+		// validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1771,7 +1771,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
 		scrollToView(premiumForPlan);
-		//CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 40);
+		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 40);
 		String PlanPremium = premiumForPlan.getText();
 
 		System.out.println("Premium for Plan : " + PlanPremium);
@@ -1988,7 +1988,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public boolean compareTextAfterclickingAddtoCompareinAARP(String planName) throws InterruptedException {
 		pageloadcomplete();
-		WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '"+ planName +"' )]/ancestor::div[contains(@class,'compare-add')]//span[contains(@class,'single-added-text')]"));
+		WebElement compareText = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+				+ "' )]/ancestor::div[contains(@class,'compare-add')]//span[contains(@class,'single-added-text')]"));
 
 		if (compareText.getText().contains("1 plan added")) {
 			System.out.println("1 plan has been selected for comparison");
@@ -4868,12 +4869,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public WebElement changeZipCodeLink;
 
 	public GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
-
+		
 		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
-			if (validate(dceLink))
-				scrollToView(dceLink);
+			// if (validate(dceLink))
+			scrollToView(dceLink);
 			jsClickNew(dceLink);
 
 		} else {
