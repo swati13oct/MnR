@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -401,6 +402,7 @@ public class ShopForaPlanCommonStepDefinition {
 	public void the_user_clicks_screen_over_the_shop_for_a_plan() throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		acqusitionHomePage.clickMedSupp();
+		String stateSelected=(String) getLoginScenario().getBean(CommonConstants.STATE_SELECTED);
+		acqusitionHomePage.clickMedSupp(stateSelected);
 	}
 }

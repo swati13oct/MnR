@@ -8,7 +8,7 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionHeaderUHC
+ * this file is to run test cases for RunMRATDDAcquisitionHeaderFooterGeoTargetLinkAARP
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",

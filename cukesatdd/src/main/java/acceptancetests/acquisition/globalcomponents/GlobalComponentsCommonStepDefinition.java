@@ -253,6 +253,7 @@ public class GlobalComponentsCommonStepDefinition {
 		String state = memberAttributesMap.get("State");
 		String code = memberAttributesMap.get("Code");
 		aquisitionhomepage.validatestatedropDown(state,code);
+		getLoginScenario().saveBean(CommonConstants.STATE_SELECTED, state);
 	}
 
 	@When("^user clicks on View all disclaimer information link on the home page$")

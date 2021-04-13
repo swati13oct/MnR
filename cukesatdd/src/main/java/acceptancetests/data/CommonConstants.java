@@ -939,6 +939,8 @@ public class CommonConstants {
 	
 	public static final String CAMPAIGN_EXTERNAL_LINK_TFNNO = "campaignExternalLinkTfnNo";
 	
+	
+	public static final String STATE_SELECTED = "state";
 }
 
 

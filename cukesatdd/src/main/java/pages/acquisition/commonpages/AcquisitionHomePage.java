@@ -311,9 +311,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
-	private WebElement MedicareClassicUrl;
+	private WebElement MedSuppClassicUrl;
 
-	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans.html' and contains(@id,'gfn_lnk')]")
+	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans.html']")
 	private WebElement MedicareSuppUrl;
 
 	@FindBy(xpath = "//a[contains(@class, 'backtotop1')]")
@@ -3584,12 +3584,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateMedupsStateUrl(String state, String code) {
 		if (state.equalsIgnoreCase("Oregon") || state.equalsIgnoreCase("U.S. Virgin Islands")) {
 			validate(stateDropDown);
-			validate(MedicareClassicUrl);
+			validate(MedSuppClassicUrl);
 			System.out.println("State is: " + state);
 			System.out.println("Code is: " + code);
-			System.out.println("Medicare Supplement Url is: " + MedicareClassicUrl.getAttribute("href"));
+			System.out.println("Medicare Supplement Url is: " + MedSuppClassicUrl.getAttribute("href"));
 			Assert.assertTrue(
-					MedicareClassicUrl.getAttribute("href").contains("/shop/medicare-supplement-plans-classic.html"));
+					MedSuppClassicUrl.getAttribute("href").contains("/shop/medicare-supplement-plans-classic.html"));
 			String CurrentURL = driver.getCurrentUrl();
 			System.out.println("Current URL : " + CurrentURL);
 			Assert.assertTrue(CurrentURL.contains("/shop/medicare-supplement-plans-classic.html"));
@@ -3689,7 +3689,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement PharmacySearchLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'aarp-pharmacy.html')]"));
 		WebElement ProviderSearchLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'section-3')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
+				By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'https://connect.werally.com')]"));
 
 		validateNew(ZipCodeTxt);
 		validateNew(FindPlansBtn);
@@ -6214,11 +6214,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public void clickMedSupp() throws InterruptedException {
-		waitforElement(ShopForaplan);
+	public void clickMedSupp(String state) throws InterruptedException {
+		scrollToView(ShopForaplan);
+		//waitforElement(ShopForaplan);
+		//driver.navigate().refresh();
 		validate(ShopForaplan);
-		Actions action = new Actions(driver);
-		action.moveToElement(ShopForaplan).moveToElement(MedSuppPlan).click().build().perform();
-
+		/*
+		 * Actions action = new Actions(driver);
+		 * action.moveToElement(ShopForaplan).moveToElement(MedSuppPlan).click().build()
+		 * .perform();
+		 */
+		jsMouseOver(ShopForaplan);
+		//waitforElementNew(MedSuppPlan);
+		if(state.equalsIgnoreCase("Oregon") || state.equalsIgnoreCase("U.S. Virgin Islands"))
+			MedSuppClassicUrl.click();
+		else
+			MedicareSuppUrl.click();
 	}
 }
