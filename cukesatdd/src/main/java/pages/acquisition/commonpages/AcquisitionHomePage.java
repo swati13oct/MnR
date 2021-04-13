@@ -3749,7 +3749,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement CostbasicsLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-costs')]"));
 		WebElement MAplansLink = driver
-				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-advantage-plans')]/strong"));
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'/medicare-education/medicare-advantage-plans')]"));
 		WebElement MedSuppPlansLink = driver.findElement(
 				//By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-supplement-plans.html')]"));
 		By.xpath("//*[contains(@class, 'sctn')]//a[contains(text(),'Medicare Supplement Insurance Plans')]"));
