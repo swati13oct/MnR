@@ -74,7 +74,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath="//span[contains(text(),'Saved')]")
 	private WebElement ViewSavedProvidersLink;
 
-	@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
+	//@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
+	@FindBy(xpath = "//label[contains(@id,'unsaved_selectedLocation0')]")
 	private WebElement selectLocationOption;
 
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
@@ -110,7 +111,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[contains(@class,'searchData')]//*[contains(@data-test-id,'provider-name-link')])[2]")
 	private WebElement PrimaryCarePhysician;
 
-	@FindBy(xpath = "//*[@id=\"savedProviders\"]/div[2]/div[2]/div[2]/a/span")
+	@FindBy(xpath = "//*[contains(@class,'action-btn negative print')]")
 	private WebElement PrintEmailBtn;
 
 	@FindBy(xpath = "//span[contains(@ng-switch-when, 'false') and (text()='Save')]")
@@ -435,21 +436,27 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		scrollToView(selectProviderBtn);
 		jsClickNew(selectProviderBtn);
 
+
 		if (validate(selectLocationOption)) {
 			selectLocationOption.click();
 			validateNew(saveBtn2);
 			saveBtn2.click();
 		}
-
-		CommonUtility.waitForPageLoadNew(driver, ViewsaveProviderbtn, 30);
-		ViewsaveProviderbtn.click();
-		if (validate(EditSavedButton)) {
+	
+		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+			ViewsaveOldbtn.click();
+		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
+			Viewsavebtn.click();
+		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
 			ViewSavedProvidersLink.click();
 		}
-		// scrollToView(providerNameText);
-		// validateNew(providerNameText);
+		else
+			System.out.println("New Rally page not displayed");
+		 
+		}
+		//CommonUtility.waitForPageLoadNew(driver, PrintEmailBtn, 30);
+		//validateNew(providerCard);
 		validateNew(PrintEmailBtn);
-
 	}
 
 	/*

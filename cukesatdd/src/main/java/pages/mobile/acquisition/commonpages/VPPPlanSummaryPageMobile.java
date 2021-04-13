@@ -36,6 +36,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.ios.IOSDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -5238,6 +5239,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new pages.mobile.acquisition.commonpages.ComparePlansPageMobile(driver);
 		return null;
+		
+		
 
 	}
 

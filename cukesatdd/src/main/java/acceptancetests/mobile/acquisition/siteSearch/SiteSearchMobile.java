@@ -125,7 +125,8 @@ public class SiteSearchMobile {
 	@When("^user selects a provider and saves it$")
 	public void user_selects_provider_and_saves_it() {
 		{
-			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = 
+					(pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
 
