@@ -67,7 +67,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | TFNxpath | <tfnXpath> |
       | TFNflag  | <tfnFlag>  |
     # Then the user validates Pro-active Chat
-    #Then the user validates whether call icon is visible
+    Then the user validates whether call icon is visible
     # Then the user validates SAM re-active Chat
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
