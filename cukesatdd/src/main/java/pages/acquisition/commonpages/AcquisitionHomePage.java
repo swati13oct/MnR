@@ -3582,7 +3582,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void validateMedupsStateUrl(String state, String code) {
-		if (state.equalsIgnoreCase("Oregon") || state.equalsIgnoreCase("U.S. Virgin Islands")) {
+		if (state.equalsIgnoreCase("Oregon")) {
 			validate(stateDropDown);
 			validate(MedSuppClassicUrl);
 			System.out.println("State is: " + state);
@@ -6226,7 +6226,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 */
 		jsMouseOver(ShopForaplan);
 		//waitforElementNew(MedSuppPlan);
-		if(state.equalsIgnoreCase("Oregon") || state.equalsIgnoreCase("U.S. Virgin Islands"))
+		if(state.equalsIgnoreCase("Oregon") )
 			MedSuppClassicUrl.click();
 		else
 			MedicareSuppUrl.click();
