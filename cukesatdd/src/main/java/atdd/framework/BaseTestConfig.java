@@ -26,6 +26,7 @@ public abstract class BaseTestConfig {
 	
 	@BeforeSuite(alwaysRun = true)
 	public void setupSuite(ITestContext context) {
+		System.out.println("Dataprovider thread count set to : " + context.getSuite().getXmlSuite().getDataProviderThreadCount());
 		for(ITestNGMethod method : context.getAllTestMethods()) {
 			method.setRetryAnalyzer(new RetryAnalyzer());
 		}
