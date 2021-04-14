@@ -24,6 +24,8 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
@@ -3689,7 +3691,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement PharmacySearchLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'aarp-pharmacy.html')]"));
 		WebElement ProviderSearchLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'https://connect.werally.com')]"));
+				By.xpath("//*[contains(@class, 'section-3')]//a[contains(text(),'Provider Search')]"));
 
 		validateNew(ZipCodeTxt);
 		validateNew(FindPlansBtn);
@@ -4264,7 +4266,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
 					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			System.out.println("Your search - \"" + newSearchValue + "\" - did not match any documents.");
+			assertTrue(invalidSearch.contains("Your search - \"" + newSearchValue + "\" - did not match any documents."));
 			// assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
