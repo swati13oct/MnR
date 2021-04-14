@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="MNR Acquisition Portals Test Suite" data-provider-thread-count="1000">
+<suite name="MNR Acquisition Portals Test Suite" data-provider-thread-count="300">
 	<listeners>
 		<listener class-name="atdd.framework.TestNGMethodListener" />
 	</listeners>
-	<test name="Desktop" parallel="methods" thread-count="1000" preserve-order="false">
+	<test name="Desktop" parallel="methods" preserve-order="false">
 		<packages>
 			<package name="atdd.runners" />
 		</packages>
