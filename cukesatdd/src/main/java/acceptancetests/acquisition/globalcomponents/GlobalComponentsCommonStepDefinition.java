@@ -180,7 +180,9 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 		String state = memberAttributesMap.get("State");
 		String code = memberAttributesMap.get("Code");
-		aquisitionhomepage.validateMedupsStateUrl(state,code);
+		String classic = memberAttributesMap.get("ClassicUrl");
+		String generic = memberAttributesMap.get("GenericUrl");
+		aquisitionhomepage.validateMedupsStateUrl(state,code,classic,generic);
 	}
 	
 	@Then("^the User validates Shop for a Plan Navigation link$")

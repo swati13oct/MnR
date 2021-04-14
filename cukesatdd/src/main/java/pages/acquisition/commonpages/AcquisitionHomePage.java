@@ -3581,7 +3581,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	}
 
-	public void validateMedupsStateUrl(String state, String code) {
+	public void validateMedupsStateUrl(String state, String code, String classicStates, String AllStates) {
 		if (state.equalsIgnoreCase("Oregon")) {
 			validate(stateDropDown);
 			validate(MedSuppClassicUrl);
@@ -3589,20 +3589,20 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Code is: " + code);
 			System.out.println("Medicare Supplement Url is: " + MedSuppClassicUrl.getAttribute("href"));
 			Assert.assertTrue(
-					MedSuppClassicUrl.getAttribute("href").contains("/shop/medicare-supplement-plans-classic.html"));
+					MedSuppClassicUrl.getAttribute("href").contains(classicStates));
 			String CurrentURL = driver.getCurrentUrl();
 			System.out.println("Current URL : " + CurrentURL);
-			Assert.assertTrue(CurrentURL.contains("/shop/medicare-supplement-plans-classic.html"));
+			Assert.assertTrue(CurrentURL.contains(classicStates));
 		} else {
 			validate(stateDropDown);
 			validate(MedicareSuppUrl);
 			System.out.println("State is: " + state);
 			System.out.println("Code is: " + code);
 			System.out.println("Medicare Supplement Url is: " + MedicareSuppUrl.getAttribute("href"));
-			Assert.assertTrue(MedicareSuppUrl.getAttribute("href").contains("/shop/medicare-supplement-plans.html"));
+			Assert.assertTrue(MedicareSuppUrl.getAttribute("href").contains(AllStates));
 			String CurrentURL = driver.getCurrentUrl();
 			System.out.println("Current URL : " + CurrentURL);
-			Assert.assertTrue(CurrentURL.contains("/shop/medicare-supplement-plans.html"));
+			Assert.assertTrue(CurrentURL.contains(AllStates));
 		}
 	}
 

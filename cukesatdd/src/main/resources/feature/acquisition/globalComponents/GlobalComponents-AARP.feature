@@ -68,6 +68,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | TFNflag  | <tfnFlag>  |
     # Then the user validates Pro-active Chat
     Then the user validates whether call icon is visible
+
     # Then the user validates SAM re-active Chat
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
@@ -663,31 +664,37 @@ Feature: 1.12 ACQ - Global Components Validation
       | Code  | <code>  |
     Then the user clicks on medicare supplement plans from shop for a plan
     Then user validates the url for Medicare Supplement Insurance Plans
-      | State | <state> |
-      | Code  | <code>  |
+      | State      | <state>      |
+      | Code       | <code>       |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
     Then the user clicks on browser back button
     When user updates the state drop down value on the home page
       | State | <state1> |
       | Code  | <code1>  |
     Then the user clicks on medicare supplement plans from shop for a plan
     Then user validates the url for Medicare Supplement Insurance Plans
-      | State | <state1> |
-      | Code  | <code1>  |
+      | State      | <state1>     |
+      | Code       | <code1>      |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
     Then the user clicks on browser back button
     When user updates the state drop down value on the home page
       | State | <state2> |
       | Code  | <code2>  |
     Then the user clicks on medicare supplement plans from shop for a plan
     Then user validates the url for Medicare Supplement Insurance Plans
-      | State | <state2> |
-      | Code  | <code2>  |
+      | State      | <state2>     |
+      | Code       | <code2>      |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
 
     @GeoTarget_MedSup_GlobalCompsAARP
     Examples: 
-      | site | state               | code | state1 | code1 | state2 | code2 |
-      | AARP | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    |
+      | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
+      | AARP | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
 
     @GeoTarget_MedSup_GlobalCompsUHC
     Examples: 
-      | site | state               | code | state1 | code1 | state2 | code2 |
-      | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    |
+      | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
+      | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
