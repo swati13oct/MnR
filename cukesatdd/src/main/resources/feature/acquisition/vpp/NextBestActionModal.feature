@@ -21,7 +21,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     |
 
-    @NBA_MAPD_UHC01 @regressionUHC
+    @NBA_MAPD_UHC01 @regressionUHC 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     |
@@ -50,7 +50,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user clicks on Find a Provider button on NBA
     Then user should be redirected to Provider search Rally page
 
-    @NBA_MAPD_AARP01 @regressionAARP
+    @NBA_MAPD_AARP01 @regressionAARP 
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
@@ -120,7 +120,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
 
-    @NBA_MAPD_UHC02 @regressionUHC
+    @NBA_MAPD_UHC02 @regressionUHC @prod_regression
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |

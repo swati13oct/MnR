@@ -54,7 +54,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                           |
       | UHC  |   90210 | future   | MAPD     | none   | no              | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    @DCE_Redesign_VPP_PlanDetails_PDP_AARP @regressionAARP
+    @DCE_Redesign_VPP_PlanDetails_PDP_AARP @regressionAARP @prod_regression
     Examples: 
       | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       | AARP |   80002 | future   | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
@@ -69,7 +69,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                                   |
       | AARP |   78006 | future   | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
-    @DCE_Redesign_VPP_PlanDetails_SNP_UHC @regressionUHC
+    @DCE_Redesign_VPP_PlanDetails_SNP_UHC @regressionUHC @prod_regression
     Examples: 
       | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                                   |
       | UHC  |   78006 | future   | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
@@ -105,7 +105,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user click on drug cost estimator on vpp plan detail page in AARP
     Then User validates planName matches plan Name in DCE detail page in AARP
 
-    @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD @regressionAARP @regressionUHC
+    @DCE_Redesign_DCE_Detail_to_Vpp_Details_MAPD @regressionAARP @regressionUHC @prod_regression
     Examples: 
       | zipcode | site | plantype | county | isMultutiCounty | drug1     | planname                                           | planyear |
       |   90210 | AARP | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage SecureHorizons Focus (HMO) | future   |

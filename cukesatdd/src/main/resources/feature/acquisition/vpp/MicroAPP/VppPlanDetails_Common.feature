@@ -21,12 +21,12 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
 
-    @VppPlanDetailsCommon_AARP01 @regressionAARP
+    @VppPlanDetailsCommon_AARP01
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | pdfType               | docCode                  | planyear |
       | 00001 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | future   |
 
-    @VppPlanDetailsCommon_UHC01 @regressionUHC
+    @VppPlanDetailsCommon_UHC01
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | pdfType               | docCode                  | planyear |
       | 00001 | UHC  |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | future   |
@@ -53,7 +53,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
       | 00002 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $29            | $348          | future   |
 
-    @VppPlanDetailsCommon_UHC01 @regressionUHC
+    @VppPlanDetailsCommon_UHC01 @regressionUHC @prod_regression
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
       | 00002 | UHC  |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $29            | $348          | future   |
@@ -232,7 +232,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then User click on add to compare checkbox and click on view details link
     Then I uncheck and go back to the vpp page to validate for site
 
-    @VppPlanDetailsCommon_AARP03 @regressionAARP
+    @VppPlanDetailsCommon_AARP03 @regressionAARP @prod_regression
     Examples: 
       | TCID   | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
       | 000013 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |

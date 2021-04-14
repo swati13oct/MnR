@@ -1,4 +1,4 @@
-@dce_redesign_home
+@dce_redesign_home @DCE
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
   @DCE_HomeIcon
@@ -63,7 +63,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
 
-    @DCE_HomeSubNav_AEP_AARP @regressionAARP
+    @DCE_HomeSubNav_AEP_AARP @regressionAARP @prod_regression
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP |

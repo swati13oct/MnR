@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user selects plan year
     And user clicks on continue button in Zip Entry Page
 
-    @DCE_VisitorProfile_AARP @regressionAARP
+    @DCE_VisitorProfile_AARP @regressionAARP @prod_regression
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP |
@@ -69,7 +69,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | AARP | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-    @DCEShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC
+    @DCEShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC @prod_regression
     Examples: 
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | UHC  | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
@@ -109,7 +109,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @DCEShopperProfileAddDrugsPlancard_AARP @regressionAARP
+    @DCEShopperProfileAddDrugsPlancard_AARP @regressionAARP @prod_regression
     Examples: 
       | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
       | AARP | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
