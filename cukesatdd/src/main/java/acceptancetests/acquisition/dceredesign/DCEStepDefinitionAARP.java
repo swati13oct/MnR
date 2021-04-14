@@ -109,7 +109,7 @@ public class DCEStepDefinitionAARP {
 			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 					plannameAttributesRow.get(i).getCells().get(1));
 		}*/
-		DataTableParser.readDataTableAsMaps(Attributes);
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Attributes);
 		String drug = plannameAttributesMap.get("DrugName");
 		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
