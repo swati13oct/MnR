@@ -82,8 +82,8 @@
 						<configuration>
 							<useSystemClassLoader>false</useSystemClassLoader>
 							<!-- <forkCount>2.5C</forkCount> --> <!-- Total of 2.5 * number of CPU core's concurrent JVM process will be created -->
-							<forkCount>3</forkCount>
-							<reuseForks>true</reuseForks>
+							<!-- <forkCount>3</forkCount>
+							<reuseForks>true</reuseForks> -->
 							<suiteXmlFiles>
 								<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
 							</suiteXmlFiles>
@@ -92,6 +92,10 @@
 							<!-- <threadCountMethods>1000</threadCountMethods> -->
 							<!-- <threadCount>100</threadCount> -->
 							<properties>
+								<property>
+									<name>dataproviderthreadcount</name>
+									<value>300</value>
+								</property>
 								<property>
 									<name>testnames</name>
 									<value>${testnames}</value>
