@@ -298,9 +298,11 @@ public class DCEStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String zipcode = memberAttributesMap.get("ZipCode");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
+		
 	}
 
 	@When("^user selects plan year$")
