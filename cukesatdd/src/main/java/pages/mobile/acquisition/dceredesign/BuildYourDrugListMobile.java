@@ -115,7 +115,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		// EnterDrugNameTxt.click();
 		// jsClickNew(EnterDrugNameTxt);
 		// EnterDrugNameTxt.sendKeys(drugName);
-		sendkeys(EnterDrugNameTxt, drugName);
+		//sendkeys(EnterDrugNameTxt, drugName);
+		sendkeysMobile(EnterDrugNameTxt, drugName);
 
 		Thread.sleep(5000);
 		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]"));
@@ -128,7 +129,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		Thread.sleep(2000);
 		validateNew(addToDrugList);
 		Thread.sleep(2000);
-		jsClickMobile(addToDrugList);
+		jsClickNew(addToDrugList);
 
 		// addToDrugList.click();
 		// reviewDrugCost.click();

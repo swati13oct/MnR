@@ -53,6 +53,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
 /**
@@ -533,6 +534,12 @@ public abstract class UhcDriver {
 			fwait.until(ExpectedConditions.visibilityOf(element));
 
 			if (element.isDisplayed()) {
+
+//				 TouchActions action = new TouchActions(driver);
+//				 action.longPress(element);
+//				 singleTap(element);
+//				 action.perform();
+
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click();", element);
 				System.out.println("JsClick worked");
@@ -544,6 +551,10 @@ public abstract class UhcDriver {
 					} catch (Exception e) {
 						System.out.println("Unable to click on element for IOS");
 					}
+
+				// new
+				// TouchAction((AppiumDriver)driver).tap(TapOptions.tapOptions().withElement((ElementOption)
+				// element)).perform();
 
 			}
 		}
@@ -560,9 +571,9 @@ public abstract class UhcDriver {
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 
-//			// clickAndHold(element);
-//			TouchAction ta = new TouchAction((AppiumDriver)driver);
-//			ta.moveTo(moveToOptions)
+			// // clickAndHold(element);
+			// TouchAction ta = new TouchAction((AppiumDriver)driver);
+			// ta.moveTo(moveToOptions)
 
 			Actions ac = new Actions(driver);
 			ac.moveToElement(element);
@@ -638,6 +649,15 @@ public abstract class UhcDriver {
 			currentHandle = driver.getWindowHandle();
 			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
 				break;
+		}
+	}
+
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

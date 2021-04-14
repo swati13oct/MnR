@@ -2390,16 +2390,25 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void validateAgentEBRCPage() {
 		validateNew(RightRail_AgentInYourArea);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
-		// RightRail_AgentInYourArea.click();
+		String parentWindow = driver.getWindowHandle();
 		jsClickNew(RightRail_AgentInYourArea);
-		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs_windows.get(1));
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
 		CommonUtility.checkPageIsReadyNew(driver);
+		pageloadcomplete();
 		if (driver.getCurrentUrl().contains("myuhcagent")) {
 			System.out.println("myuhcagent Page is displayed");
 			Assert.assertTrue(true);
 			// driver.navigate().back();
-			driver.switchTo().window(tabs_windows.get(0));
+			driver.switchTo().window(parentWindow);
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back on VPP Plan Summary Page");
@@ -2409,6 +2418,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else
 			Assert.fail("Unable to load Myuhcagent Page");
 	}
+
 
 	public void validateMedicareGuideRightRail() {
 		validateNew(MedicareGuideRightRail);
@@ -4814,12 +4824,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				e.printStackTrace();
 			}
 			List<WebElement> compareLinks = driver
-					.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
+					.findElements(By.xpath("//label[@for='compare-plan-1']"));
 			moveMouseToElement(compareLinks.get(1));
 			compareLinks.get(1).click();
 		} else {
 			WebElement compareLinks2 = driver
-					.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));
+					.findElement(By.xpath("//label[@for='compare-plan-2']"));
 			// compareLinks2.click();
 			jsClickMobile(compareLinks2);
 		}
@@ -4831,7 +4841,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			e.printStackTrace();
 
 		}
-		if (currentUrl().contains("/health-plans.html#/plan-compare"))
+		//if (currentUrl().contains("/health-plans.html#/plan-compare"))
+			if (currentUrl().contains("/health-plans.html#/plan-summary"))
 			return new ComparePlansPageMobile(driver);
 		return null;
 	}
