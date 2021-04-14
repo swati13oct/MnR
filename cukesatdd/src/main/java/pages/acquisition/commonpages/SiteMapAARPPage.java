@@ -24,7 +24,7 @@ public class SiteMapAARPPage extends GlobalWebElements {
 	public WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'med_cont')]/ul[contains(@class,'bullet_list')]/li")
-	public static List<WebElement> siteMapList;
+	public List<WebElement> siteMapList;
 	
 	
 	public SiteMapAARPPage(WebDriver driver) {

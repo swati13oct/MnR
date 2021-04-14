@@ -24,7 +24,7 @@ public class DisclaimersAARPPage extends GlobalWebElements{
 	
 	//@FindBy(xpath = "//div[contains(@class,'meded-accordion')]/div[contains(@class,'meded-accordion__item')]//a")
 	@FindBy(xpath="//div[contains(@class,'uhc-accordion')]//div[contains(@class,'uhc-accordion__head')]")
-	public static List<WebElement> mededAccordianList;
+	public List<WebElement> mededAccordianList;
 
 	
 	@FindBy(xpath = "//*[@id='site-wrapper']/div[3]/div[1]/header/div[2]/h1/a/p/img")
