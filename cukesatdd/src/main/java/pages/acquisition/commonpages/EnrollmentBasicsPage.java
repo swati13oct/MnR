@@ -150,29 +150,29 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 
 	public void checkInnerLinks() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkOriginalMedicare=driver.findElement(By.xpath("//a[contains(text(),'When can I enroll in Original Medicare or apply fo')]"));
+		WebElement lnkOriginalMedicare=driver.findElement(By.xpath("//a//span[contains(text(),'When can I enroll in Original Medicare or apply fo')]"));
 		scrollToView(lnkOriginalMedicare);
 		jsClickNew(lnkOriginalMedicare);
 		sleepBySec(3);
-		WebElement lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to top')])[1]"));
+		WebElement lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to Top')])[1]"));
 		scrollToView(lnkBack);
 		jsClickNew(lnkBack);
 		System.out.print("Link Clicked: When can I enroll in Original Medicare or apply for more coverage?");
 		
-		WebElement lnkChangPlans=driver.findElement(By.xpath("//a[contains(text(),'How do I know if I should change plans?')]"));
+		WebElement lnkChangPlans=driver.findElement(By.xpath("//a//span[contains(text(),'How do I know if I should change plans?')]"));
 		scrollToView(lnkChangPlans);
 		jsClickNew(lnkChangPlans);
 		sleepBySec(3);
-		lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to top')])[2]"));
+		lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to Top')])[2]"));
 		scrollToView(lnkBack);
 		jsClickNew(lnkBack);
 		System.out.print("Link Clicked: How do I know if I should change plans?");
 		
-		WebElement lnkAdditionCoverage=driver.findElement(By.xpath("//a[contains(text(),'When can I change my Medicare plan or apply for ad')]"));
+		WebElement lnkAdditionCoverage=driver.findElement(By.xpath("//a//span[contains(text(),'When can I change my Medicare plan or apply for ad')]"));
 		scrollToView(lnkAdditionCoverage);
 		jsClickNew(lnkAdditionCoverage);
 		sleepBySec(3);
-		lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to top')])[3]"));
+		lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to Top')])[3]"));
 		scrollToView(lnkBack);
 		jsClickNew(lnkBack);
 		System.out.print("Link Clicked: When can I change my Medicare plan or apply for additional coverage?");	
@@ -183,7 +183,6 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		validateNew(lnkSocialSecurity);
 		scrollToView(lnkSocialSecurity);
 		switchToNewTabNew(lnkSocialSecurity);
-		
 		if(driver.getCurrentUrl().contains("https://www.ssa.gov/benefits/medicare/")) {
 			Assert.assertTrue(true);
 			System.out.println("Social Security Link open Successfully\tURL: "+driver.getCurrentUrl());
@@ -195,7 +194,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 			Assert.fail("Social Security Link did not open Successfully");
 		}	
 	}
-	@FindBy(xpath="//p[contains(text(),'See plans available in your area')]")
+	@FindBy(xpath="//*[contains(text(),'plans available in your area')]")
 	private WebElement lnkSeePlans;
 	
 	public void clickSeePlans() {

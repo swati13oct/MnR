@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import pages.acquisition.dceredesign.GetStartedPage;
 
@@ -79,8 +80,18 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		getLnkBackMedicareEducationHome().click();
 		return null;
 	}
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void clickMedicareAnnualEnrollment() {
 		
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement annualEnrll=driver.findElement(By.xpath("//a[contains(text(),'Medicare Annual Enrollment Period')]"));
 		jsClickNew(annualEnrll);
 		waitForPageLoadSafari();
@@ -88,19 +99,17 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		
 		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"))
 		{
-			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			WebElement pageHeader=driver.findElement(By.xpath("//span[contains(text(),'Enrollment Basics') and contains(@class,'heading-1')]"));
 			waitforElementNew(pageHeader);
 			System.out.println("Annual Enrollment Period Page open correctly");
 			
 		}else {
 			System.out.println("Annual Enrollment Period Page did not open correctly");
 		}
-		
 		driver.navigate().back();
-		
 	}
 	public ProviderSearchPage clicksOnRallyToolFromMedEdPage() {
-		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//p[contains(text(),'Look up your providers')]"));
+		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//span[contains(text(),'Look up providers in the Provider Search tool')]"));
 		validateNew(providerSearchFromMedEd);
 	
 		switchToNewTabNew(providerSearchFromMedEd);
@@ -114,12 +123,12 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
+		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator')]//span[contains(text(),'drug cost')]"));
 		validateNew(DCELink);
 		jsClickNew(DCELink);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement AddMyDrugsBtn=driver.findElement(By.xpath("//button[contains(@id,'addDrug')]"));
+		WebElement AddMyDrugsBtn=driver.findElement(By.xpath("//*[contains(text(),'Estimate your prescription drug costs')]"));
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
