@@ -3760,7 +3760,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		WebElement EnrollmentBasicsLink = driver.findElement(
 				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
-
+		//WebElement compareMAMSPlans = driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
+		
 		/*
 		 * WebElement glossaryLink=driver.findElement(By.
 		 * xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'aarpmedicareplans/en.html#')]"
@@ -3777,6 +3778,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(MAplansLink);
 		validateNew(MedSuppPlansLink);
 		validateNew(PDPplansLink);
+		//validateNew(compareMAMSPlans);
 
 		validateNew(EnrollmentBasicsLink);
 		validateNew(FAQLink);
@@ -3785,6 +3787,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				&& CostbasicsLink.isDisplayed() && MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed()
 				&& PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed() && FAQLink.isDisplayed()) {
 			// && FAQLink.isDisplayed()
+			// && compareMAMSPlans.isDisplayed()
 			Assert.assertTrue(true);
 			System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
 //				Actions actions = new Actions(driver);

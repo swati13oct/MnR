@@ -90,16 +90,17 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site | path                                              | pageName                              | tfnXpath                                                             | tfnFlag |
       | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |
+      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //div[contains(@class,'content1')]//span[contains(@class,'tel')]     | true    |
       | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-
+			#|AARP| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
       | site | path                                              | pageName                            | tfnXpath                                                             | tfnFlag |
       | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //div[contains(@class,'ums')]//a[contains(@class,'tel')]             | true    |
+      | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //div[contains(@class,'content1')]//span[contains(@class,'tel')]     | true    |
       | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-
+			#|UHC| medicare-education/compare-ma-ms-plans.html|
+			
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
       | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
