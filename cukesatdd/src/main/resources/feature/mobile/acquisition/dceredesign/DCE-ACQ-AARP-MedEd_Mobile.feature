@@ -19,8 +19,9 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion 
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
+      | County  | <county>  |
     And user clicks on continue button in Zip Entry Page
 
     Examples: 
-      | drug1   | drug2  | drug3   | drug4    | zipCode |
-      | Orkambi | Fanapt | Humalog | Adderall |   80002 |
+      | drug1   | drug2  | drug3   | drug4    | zipCode | county           |
+      | Orkambi | Fanapt | Humalog | Adderall |   80002 | Jefferson County |

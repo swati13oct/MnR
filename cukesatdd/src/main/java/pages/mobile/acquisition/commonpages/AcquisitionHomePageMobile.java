@@ -299,7 +299,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
-	@FindBy(xpath = "//select[@id='state-select']")
+	//@FindBy(xpath = "//select[@id='state-select']")
+	@FindBy(css="#state-select")
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
@@ -981,7 +982,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(footerAboutUsLink);
 		CommonUtility.checkPageIsReadyNew(driver);
 		validateNew(footerLinkHeader, 30);
-		if (getTitle().contains("About UnitedHealthcare")) {
+		if (driver.getCurrentUrl().contains("about-us")) {
 			return new AboutUsAARPPageMobile(driver);
 		}
 		return null;
@@ -1750,9 +1751,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitforElement(lnkLearnAboutMedicare);
 
 		if (lnkLearnAboutMedicare.isDisplayed()) {
-			Actions actions = new Actions(driver);
-			actions.moveToElement(lnkLearnAboutMedicare);
-			actions.build().perform();
+//			Actions actions = new Actions(driver);
+//			actions.moveToElement(lnkLearnAboutMedicare);
+//			actions.build().perform();
+			scrollToView(lnkLearnAboutMedicare);
+			jsClickNew(lnkLearnAboutMedicare);
 			System.out.println("Hover over Learn about Medicare completed");
 		}
 
@@ -1760,7 +1763,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// driver.findElement(By.xpath("//*[contains(@class, 'nav-col
 		// nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
 		WebElement PresProvidersBenefitsLink = driver
-				.findElement(By.xpath("//span[contains(text(),'Prescriptions, Providers & Benefits')]"));
+				.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
 		jsClickNew(PresProvidersBenefitsLink);
 	}
 

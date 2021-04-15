@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
@@ -105,18 +106,20 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Find Plans' and @xpath=\"1\"]")
 	public WebElement FindPlans;
 
-	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
+	public void enterZipCodeandcounty(String zipcode, String county) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
 
 		sendkeysMobile(zipCodeTxtbox, zipcode);
+		
+		
 		Thread.sleep(3000);
 		try {
-			if (countyDropdown.isDisplayed()) {
+			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 
-//				countyDropdown.click();
-//				jsClickNew(countyDropdown);
-//				CommonUtility.waitForPageLoad(driver, countyRows, 30);
-				WebElement countyValue = driver.findElements(By.xpath("//select[@id='county']/option")).get(1);
+				mobileSelectOption(countyDropdown, county, true);
+			} else if (countyDropdown.isDisplayed()){
+
+				WebElement countyValue = driver.findElements(By.xpath("//select[@id='county']")).get(1);
 				String cvalue = countyValue.getText();
 				mobileSelectOption(countyDropdown, cvalue, true);
 

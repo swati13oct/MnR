@@ -51,6 +51,7 @@ import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.ElementOption;
@@ -535,10 +536,10 @@ public abstract class UhcDriver {
 
 			if (element.isDisplayed()) {
 
-//				 TouchActions action = new TouchActions(driver);
-//				 action.longPress(element);
-//				 singleTap(element);
-//				 action.perform();
+				// TouchActions action = new TouchActions(driver);
+				// action.longPress(element);
+				// singleTap(element);
+				// action.perform();
 
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click();", element);
@@ -1177,20 +1178,30 @@ public abstract class UhcDriver {
 			Select element = new Select(selectElement);
 			element.selectByVisibleText(option);
 		} else {
+
 			String curHandle = ((IOSDriver) driver).getContext();
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-				selectElement.click();
+
+				//jsClickNew(selectElement);
+			selectElement.click();
+
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
-			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			((WebElement) ((IOSDriver) driver).findElements(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
+			//((IOSDriver) driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			//((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
 			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
 		}
 	}
+
+	// IOSElement picker= (IOSElement) new
+	// WebDriverWait(driver,60).until(ExpectedConditions.elementToBeClickable(By.xpath("//XCUIElementTypePickerWheel")));
+	// picker.setValue(option);
 
 	public void clickTextIOSNative(String text) {
 		String curHandle = ((IOSDriver) driver).getContext();
