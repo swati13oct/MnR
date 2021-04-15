@@ -86,31 +86,31 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @MedEdPages_2_GlobalCompsAARP
     Examples: 
-      | site | path                                              | pageName                              | tfnXpath                                                             | tfnFlag |
-      | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]       | true    |
-      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |
-      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                              | pageName                              | tfnXpath                                                       | tfnFlag |
+      | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
-      | site | path                                              | pageName                            | tfnXpath                                                             | tfnFlag |
-      | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]       | true    |
-      | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //div[contains(@class,'ums')]//a[contains(@class,'tel')]             | true    |
-      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                              | pageName                            | tfnXpath                                                       | tfnFlag |
+      | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
-      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //div[contains(@class,'callus')]//a[contains(@class,'tel')]          | true    |
-      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
+      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
-      | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //div[contains(@class,'callus')]//a[contains(@class,'tel')]          | true    |
-      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
+      | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 

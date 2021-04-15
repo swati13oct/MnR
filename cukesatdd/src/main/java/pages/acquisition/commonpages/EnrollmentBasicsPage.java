@@ -67,7 +67,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	@FindBy(xpath="//a[contains(@class, 'back-to-top')]")
     private WebElement backToTop;
 	
-	@FindBy(xpath="//a[contains(text(),'Social Security website')]")
+	@FindBy(xpath="//a//span[contains(text(),'Social Security website')]")
 	private WebElement lnkSocialSecurity;
 	
 	public WebElement getBtnNext() {

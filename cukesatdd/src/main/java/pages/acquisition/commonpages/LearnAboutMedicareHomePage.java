@@ -616,14 +616,12 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 			Set<String> newWindow = driver.getWindowHandles();
 			for (String parentWindow : newWindow) {
 				if (!parentWindow.equalsIgnoreCase(currentPage)) {
-					waitForPageLoadSafari();
 					driver.switchTo().window(currentPage).close();
 					break;
 				}
 			}
 		}
 		else {
-			waitForPageLoadSafari();
 			driver.navigate().back();
 		}
 	} 
@@ -650,14 +648,16 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		WebElement lnkPlansAvailableInYourArea=driver.findElement(By.xpath("//a[contains(@href,'/health-plans/medicare-advantage-plans/available-plans.html#/zipcode')]"));
 		scrollToView(lnkPlansAvailableInYourArea);
 		Assert.assertTrue("Plans Available link isn't present", lnkPlansAvailableInYourArea.isDisplayed());
-		switchToNewTabNew(lnkPlansAvailableInYourArea);
+		//switchToNewTabNew(lnkPlansAvailableInYourArea);
+		jsClickNew(lnkPlansAvailableInYourArea);
 		sleepBySec(10);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("health-plans")) {
 			Assert.assertTrue(true);
 			System.out.println("Plan Details page displayed Successfully");
-			driver.close();
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			//driver.close();
+			//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.navigate().back();
 		}else {
 			Assert.fail("Plan Details page did not displayed Successfully");
 		}

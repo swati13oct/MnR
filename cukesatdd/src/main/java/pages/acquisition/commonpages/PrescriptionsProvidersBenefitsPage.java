@@ -125,10 +125,10 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
 		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator')]//span[contains(text(),'drug cost')]"));
 		validateNew(DCELink);
-		jsClickNew(DCELink);
+		switchToNewTabNew(DCELink);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement AddMyDrugsBtn=driver.findElement(By.xpath("//*[contains(text(),'Estimate your prescription drug costs')]"));
+		WebElement AddMyDrugsBtn=driver.findElement(By.xpath("//h2[contains(text(),'How much will my drugs cost?')]"));
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPage(driver);
 		return null;
