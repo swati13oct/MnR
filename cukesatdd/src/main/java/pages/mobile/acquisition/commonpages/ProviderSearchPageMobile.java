@@ -553,4 +553,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
 	}
+	public AcquisitionHomePageMobile returnToAcqHomePage() {
+		// TODO Auto-generated method stub
+		driver.close();
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		return new AcquisitionHomePageMobile(driver);
+	}
 }

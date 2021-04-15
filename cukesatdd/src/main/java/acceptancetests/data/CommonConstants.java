@@ -7,7 +7,7 @@ package acceptancetests.data;
  */
 public class CommonConstants {
 	
-	public static String SELECTED_STATE = null;
+//	public static String SELECTED_STATE = null;
 
 	public static final String FLOW_NAME = "registration/planconfirmation";
 
@@ -868,7 +868,7 @@ public class CommonConstants {
 	public static final String CONNECTION_URL_UAT19 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0103:1521/gpsts19";
 	public static final String CONNECTION_URL_UAT18 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
 	public static final String CONNECTION_URL_UAT20 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0104:1521/gpsts20";
-	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
+	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@es08-scan01:1521/gpsst04_1svc_trn.uhc.com";
 	
 	
 	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Stage";// or Optum-Prd;
@@ -929,8 +929,28 @@ public class CommonConstants {
 			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
 			"XEROX_STAGE_ID,\n" +
 			"PRIMARY_CARE_PHYSICIAN,\n" + 
-			"DENTAL_PLATINUM from Xerox_stage where xerox_stage_id =\n" + 
-			"";
+			"DENTAL_PLATINUM,\n" +
+			"PRIMARY_CARE_PHYSICIAN_NUMBER,\n" + 
+			"CURRENTLY_A_PATIENT_OF_THE_PCP,\n" + 
+			"PAYMENT_METHOD,\n" + 
+			"DENTAL_PLATINUM,\n" + 
+			"AUTHORIZED_REPRESENTATIVE_IND,\n" + 
+			"AUTHORIZED_REP_FIRST_NAME,\n" + 
+			"AUTHORIZED_REP_LAST_NAME,\n" + 
+			"AUTHORIZED_REP_RELATIONSHIP,\n" + 
+			"AUTHORIZED_REP_MAILING_ADDR_1,\n" + 
+			"AUTHORIZED_REP_MAILING_ADDR_2,\n" + 
+			"AUTHORIZED_REP_MAILING_CITY,\n" + 
+			"AUTHORIZED_REP_MAILING_STATE,\n" + 
+			"AUTHORIZED_REP_MAILING_ZIP_CD,\n" + 
+			"AUTHORIZED_REP_DAYTIME_PHONE,\n" + 
+			"SIGNATURE_PRESENCE,\n" + 
+			"CREDIT_CARD_NUMBER,\n" +
+			"CREDIT_CARD_NAME_ON_CARD,\n" +
+			"CREDIT_CARD_EXPIRATION_DATE,\n" +
+			"XEROX_STAGE_ID\n" + 
+			"from Xerox_stage where xerox_stage_id = ";
+	
 	public static final String GPS_QUERY_1 ="Select\n" + 
 			"FIRST_NAME,\n" + 
 			"LAST_NAME from Xerox_stage where xerox_stage_id = ";
@@ -938,7 +958,34 @@ public class CommonConstants {
 	public static final String DB_ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
 	
 	public static final String CAMPAIGN_EXTERNAL_LINK_TFNNO = "campaignExternalLinkTfnNo";
+
+	public static String SELECTED_STATE = null;
 	
+	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we'll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
+	
+	public static String CREDIT_CARD_TEXT = "Credit Card Information";
+	
+	public static String SOCIAL_SECURITY_TEXT = "We will bill you directly until the Social Security Administration or Railroad Retirement Board approves the deduction. It could take up to 90 days after the approval for the first deduction to occur, so please continue to make payments. If the Social Security Administration or Railroad Retirement Board does not approve your request for automatic deduction, we will notify you and continue to send a paper bill for your monthly premiums.";
+	
+	public static String ACCEPTED_CARDS_TEXT = "Accepted Cards are Mastercard, VISA, and Discover";
+
+	public static String SESSION_TIMEOUT_TEXT = "Please submit the below details within 15 minutes to avoid session timeout period";
+	
+	public static String CARD_STORED_SUCCESSFULLY_TEXT = "Thank You!. Your Card details has been stored successfully.";
+	
+	public static String NO_MONTHLY_PREMIUM_TEXT = "The plan you have chosen does not have a monthly premium.";
+	
+	public static String LAST_ENROLLMENT_PENALITY_TEXT = "If you need to pay a late enrollment penality(LEP) you will receive a bill in the email.";
+	
+	public static String PART_D_INCOME_TEXT = "If you must pay a Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA) Social Security(SS) will send you a letter and ask you how you want to pay it:";
+	
+	public static String SS_TEXT  = "You can pay it from your SS check";
+	
+	public static String MEDICARE_TEXT  = "Medicare can bill you";
+	
+	public static String RAILROAD_TEXT   = "The Railroad Retirement Board(RRB) can bill you";
+	//
+	public static String PARTDIRMAA_TEXT    = "Please DO NOT pay the plan the Part D-IRMAA at this time.";
 	
 	public static final String STATE_SELECTED = "state";
 }

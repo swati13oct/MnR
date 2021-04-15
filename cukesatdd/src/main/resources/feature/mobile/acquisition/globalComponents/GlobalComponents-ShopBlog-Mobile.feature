@@ -191,10 +191,10 @@ Feature: Shop Blog Page Script
     Examples: 
       | site | path                                                     | pageName                              | tfnXpath                                                             | tfnFlag |  |
       | UHC  | medicare-education.html                                  | Understanding Medicare                | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | UHC  | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[@class='amp']//a[contains(@class, 'tel')]                        | true    |  |
+      | UHC  | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[@class='ums']//a[contains(@class, 'tel')]                        | true    |  |
       | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
       | UHC  | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | UHC  | medicare-education/medicare-costs.html                   | Medicare Cost Basics                  | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |  |
+      | UHC  | medicare-education/medicare-costs.html                   | Medicare Cost Basics                  | //div[contains(@class,'callus')]//a[contains(@class,'tel')]          | true    |  |
 
     @ShopBlog_TFN_UHC_7
     Examples: 
@@ -341,11 +341,11 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_AgentZip_AARP_7
     Examples: 
-      | site | path                                              | pageName                              | UHCUrl                      |
-      | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | https://www.myuhcagent.com/ |
+      | site | path                                             | pageName                             | UHCUrl                      |
+      | AARP | medicare-education/medicare-advantage-plans.html | Learn about Medicare Advantage Plans | https://www.myuhcagent.com/ |
       #| AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | https://www.myuhcagent.com/ |
-      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | https://www.myuhcagent.com/ |
-      | AARP | medicare-education/medicare-faq.html              | Medicare FAQ                          | https://www.myuhcagent.com/ |
+      | AARP | medicare-education/medicare-part-d.html          | Medicare Prescription Drug Plans     | https://www.myuhcagent.com/ |
+      | AARP | medicare-education/medicare-faq.html             | Medicare FAQ                         | https://www.myuhcagent.com/ |
 
     @ShopBlog_AgentZip_AARP_8
     Examples: 
@@ -419,11 +419,11 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_AgentZip_UHC_7
     Examples: 
-      | site | path                                              | pageName                              | UHCUrl                      |
-      | UHC  | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | https://www.myuhcagent.com/ |
+      | site | path                                             | pageName                             | UHCUrl                      |
+      | UHC  | medicare-education/medicare-advantage-plans.html | Learn about Medicare Advantage Plans | https://www.myuhcagent.com/ |
       #| UHC  | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | https://www.myuhcagent.com/ |
-      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | https://www.myuhcagent.com/ |
-      | UHC  | medicare-education/medicare-faq.html              | Medicare FAQ                          | https://www.myuhcagent.com/ |
+      | UHC  | medicare-education/medicare-part-d.html          | Medicare Prescription Drug Plans     | https://www.myuhcagent.com/ |
+      | UHC  | medicare-education/medicare-faq.html             | Medicare FAQ                         | https://www.myuhcagent.com/ |
 
     @ShopBlog_AgentZip_UHC_8
     Examples: 

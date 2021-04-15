@@ -30,6 +30,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import org.testng.Assert;
 
+import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
@@ -477,6 +478,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
 	private WebElement UHCICSubTiltle;
+	
+	@FindBy(xpath="//span[contains(text(),'Learn More About Medicare')]")
+	private WebElement learnAboutMedicareHomeScreen;
 
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
@@ -2936,16 +2940,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		int size = driver.findElements(By.xpath("//span[contains(text(),'Sign Up')]")).size();
 		System.out.println("size of sign up" + size);
 		if (size > 0) {
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			jsClickNew(driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")));
 			threadsleep(4);
 			Assert.assertEquals(ErrorEmailAddress.getText(), "Please enter a valid email address");
 			threadsleep(4);
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
+			jsClickNew(driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")));
 		} else {
-			SubmitEmail.click();
+			//SubmitEmail.click();
+			jsClickNew(SubmitEmail);
 			threadsleep(4);
 			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
 			threadsleep(2);
@@ -2956,7 +2961,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			SubmitEmail.click();
+			//SubmitEmail.click();
+			jsClickNew(SubmitEmail);
 		}
 
 		threadsleep(4);
@@ -3611,6 +3617,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 
+	}
+	public LearnAboutMedicareHomePageMobile clickLearnMoreOnHomePage() {
+
+		validateNew(learnAboutMedicareHomeScreen);
+		jsClickNew(learnAboutMedicareHomeScreen);
+		waitForPageLoadSafari();
+		String urlCheck = driver.getCurrentUrl();
+		if (urlCheck.contains("medicare-education.html")) {
+			return new LearnAboutMedicareHomePageMobile(driver);
+		} else {
+			return null;
+		}
 	}
 
 }

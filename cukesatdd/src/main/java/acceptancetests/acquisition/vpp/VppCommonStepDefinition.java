@@ -1208,6 +1208,7 @@ public class VppCommonStepDefinition {
 		// getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
 		// plansummaryPage);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planYear);
 
 	}
 
@@ -1224,12 +1225,16 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = givenAttributesMap.get("Plan Type");
+		String site = givenAttributesMap.get("Site");
+		
 		// String planType = (String)
 		// getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		if (plansummaryPage.validatePlanNames(planType)) {
 			// String SiteName = "AARP_ACQ";
 			// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+			
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
@@ -4155,4 +4160,29 @@ public class VppCommonStepDefinition {
 		aquisitionhomepage.clickFirstSuggestionSiteSearch();
 	}
 
+	@And("^the user views the plans of the below plan type for shop pages$")
+	public void user_performs_planSearch_in_aarp_sites_on_shop_pages(DataTable givenAttributes) {
+		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("stage"))) {
+			
+		
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.viewPlanSummary(plantype);
+		if (!plantype.equalsIgnoreCase("MS"))
+			plansummaryPage.handlePlanYearSelectionPopup();
+		}
+	}
 }
