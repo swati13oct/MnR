@@ -55,8 +55,8 @@ public class PageTitleConstants {
 	public static final String BLAYER_CONTACT_UNITEDHEALTHCARE_AARP_MEDICARE = "Contact UnitedHealthcare� | AARP� Medicare Plans from UnitedHealthcare";
 	public static final String BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE="UHCMS: Available Plans in Your Area| UnitedHealthcare�";
 	public static final String BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE="Shop for a Plan";
-	//public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARP� Medicare Plans from UnitedHealthcare�";
-	public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARP® Medicare Plans from UnitedHealthcare®";
+	public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARP� Medicare Plans from UnitedHealthcare�";
+	//public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARP® Medicare Plans from UnitedHealthcare®";
 	public static final String ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE="Shop for a Plan";
 	public static final String ULAYER_OUR_MEDICARE_PLANS = "Our Medicare Plans | AARP� Medicare Plans From UnitedHealthcare�";
 	public static final String ULAYER_HEALTH_INSURANCE_BROKER_AGENT_TOOLS = "Health Insurance Broker & Agent Tools | AARP� Medicare Plans from UnitedHealthcare�";
