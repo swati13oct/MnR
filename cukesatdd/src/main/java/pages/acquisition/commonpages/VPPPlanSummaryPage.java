@@ -874,7 +874,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
 	private WebElement nextBestActionModalSelectPlanBtn;
 
-	@FindBy(xpath = "(//*[contains(@class,'show active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare plans')])[1]")
+	//@FindBy(xpath = "(//*[contains(@class,'show active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare plans')])[1]")
+	@FindBy(xpath = "(//button[text()='Compare'])[1]")
 	private WebElement compareButton;
 
 	//@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")
@@ -5327,7 +5328,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	
 	public boolean clickAndVerifyNavigateToPage(String btn, int plans, String shot, String navigateComparePage) throws InterruptedException {
-		boolean flag = false;
+	/*	boolean flag = false;
 		Actions action = new Actions(driver);
 		if (btn.equalsIgnoreCase("Compare")) {
 			if (plans == 1) {
@@ -5410,6 +5411,91 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			waitForPageLoadSafari();
 //			action.moveToElement(compareButton).build().perform();
 			scrollToView(compareButton);
+			if (compareLink.isDisplayed()) {
+				flag = true;
+			}
+
+		}
+		return flag;*/
+		boolean flag = false;
+		Actions action = new Actions(driver);
+		if (btn.equalsIgnoreCase("Compare")) {
+			if (plans == 1) {
+				Thread.sleep(2000);
+				jsClickNew(compareLink);
+				Thread.sleep(10000);
+			} else {
+				while (plans > 0) {
+					Thread.sleep(2000);
+					WebElement comparePlanLink = driver
+							.findElement(By.xpath("(//label[text()='Add to compare'])[" + plans + "]"));
+					jsClickNew(compareLink);
+					Thread.sleep(10000);
+					plans = plans - 1;
+				}
+			}
+			if(navigateComparePage.equalsIgnoreCase("Yes")) {
+			action.moveToElement(compareButton).build().perform();
+			compareButton.click();
+			Thread.sleep(2000);
+			action.moveToElement(comparePageHeader).build().perform();
+			if (comparePageHeader.isDisplayed()) {
+				flag = true;
+			}
+			}
+			if(navigateComparePage.equalsIgnoreCase("No")) {
+				flag = true;
+			}
+		
+			
+		} else if (btn.equalsIgnoreCase("Save")) {
+			if (plans == 1) {
+				Thread.sleep(2000);
+				action.moveToElement(savePlanButton).build().perform();
+				savePlanButton.click();
+				Thread.sleep(2000);
+				flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
+			} else if (shot.equalsIgnoreCase("first")) {
+				while (plans > 0) {
+					Thread.sleep(2000);
+					WebElement savePlanLink = driver
+							.findElement(By.xpath("(//*[@class='unliked buttonIntoText'])[" + plans + "]"));
+					
+					action.moveToElement(savePlanLink).build().perform();
+					savePlanLink.click();
+					Thread.sleep(10000);
+					plans = plans - 1;
+					if(close.isDisplayed()) {
+						close.click();
+					}
+					flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
+				}
+			} else if (shot.equalsIgnoreCase("second")) {
+				Thread.sleep(2000);
+				jsClickNew(savePlanK);
+				Thread.sleep(10000);
+				jsClickNew(savePlanL);
+				Thread.sleep(10000);
+				flag=savePlanImg.getAttribute("class").equalsIgnoreCase("liked");
+				backToPlans.click();
+				Thread.sleep(10000);
+			}
+		} else if (btn.equalsIgnoreCase("Information")) {
+			Thread.sleep(2000);
+			action.moveToElement(editYourInformationLink).build().perform();
+			editYourInformationLink.click();
+			Thread.sleep(2000);
+			action.moveToElement(DOB).build().perform();
+			if (DOB.isDisplayed()) {
+				flag = true;
+			}
+
+		} else {
+			Thread.sleep(2000);
+			action.moveToElement(ViewPlanMedSupPage).build().perform();
+			ViewPlanMedSupPage.click();
+			Thread.sleep(2000);
+			action.moveToElement(compareButton).build().perform();
 			if (compareLink.isDisplayed()) {
 				flag = true;
 			}
