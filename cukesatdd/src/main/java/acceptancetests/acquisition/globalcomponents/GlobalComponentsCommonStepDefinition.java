@@ -765,7 +765,6 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
 		enrollmentBasicsPage.selectStateForGeotargeting();
 		enrollmentBasicsPage.checkInnerLinks();
-		enrollmentBasicsPage.clickSocialSecurity();
 	}
 
 	@Then("^the user check Social Security link on Enrollment Basic Page$")
