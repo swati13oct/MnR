@@ -122,7 +122,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
 	public WebElement drugGetStarted;
 
-	@FindBy(xpath = "//p[contains(@class,'items-count')]//a[contains(text(),'Drugs')]")
+	@FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]/span[2]")
 	public WebElement drugHeader;
 
 	@FindBy(css = "h3#saved-drugs")
@@ -276,11 +276,11 @@ public class VisitorProfilePage extends UhcDriver {
 			Assert.assertTrue(drugname.getText().trim().contains(drug));
 		} else {
 			CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-			Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
+			Assert.assertEquals("Your Saved Drugs (1) & Pharmacy", drugHeader.getText().trim());
 			jsClickNew(drugHeader);
 			Assert.assertTrue(drugName.getText().trim().contains(drug));
-			Assert.assertEquals("Drugs (1) / Pharmacy", savedDrugsHeader.getText().trim());
-			Assert.assertEquals("Saved Drugs (1) / Pharmacy and Doctors/Providers (0)",
+			Assert.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
+			Assert.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
 					savedDrugsAndDoctorsHeader.getText().trim());
 			Assert.assertTrue(pharmacyAddress.isDisplayed());
 		}
