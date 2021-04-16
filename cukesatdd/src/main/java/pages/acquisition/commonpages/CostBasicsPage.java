@@ -82,7 +82,7 @@ public class CostBasicsPage extends GlobalWebElements {
 	}
 	
 	public void navigatesExtraLinks() {
-		WebElement lnkDrugCost=driver.findElement(By.xpath("(//a[contains(@href,'extra-help-program')])[4]"));
+		WebElement lnkDrugCost=driver.findElement(By.xpath("//a[contains(@href,'extra-help-program')]"));
 		validateNew(lnkDrugCost);
 		jsClickNew(lnkDrugCost);
 		waitForPageLoadSafari();
@@ -96,7 +96,7 @@ public class CostBasicsPage extends GlobalWebElements {
 		
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkMedicaid=driver.findElement(By.xpath("(//a[contains(@href,'medicaid-dual')])[3]"));
+		WebElement lnkMedicaid=driver.findElement(By.xpath("//a[contains(@href,'medicaid-dual')]"));
 		validateNew(lnkMedicaid);
 		jsClickNew(lnkMedicaid);
 		waitForPageLoadSafari();
@@ -113,7 +113,7 @@ public class CostBasicsPage extends GlobalWebElements {
 	public void navigatesToMedicareSaving() {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkSavings=driver.findElement(By.xpath("//a[contains(text(),'Find out if you qualify for a Medicare Savings Pro')]"));
+		WebElement lnkSavings=driver.findElement(By.xpath("//span[contains(text(),'Find out if you qualify for a Medicare Savings Pro')]"));
 		validateNew(lnkSavings);
 		switchToNewTabNew(lnkSavings);		
 		CommonUtility.checkPageIsReadyNew(driver);
