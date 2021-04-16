@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -395,5 +396,13 @@ public class ShopForaPlanCommonStepDefinition {
 	public void user_click_on_Get_Informed_button_for_Preventing_Medical_Fraud_link() {
 		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
 		resourcePage.clickOnGetInformedMedicalFraudLink();
+	}
+	
+	@Given("^the user clicks on medicare supplement plans from shop for a plan$")
+	public void the_user_clicks_screen_over_the_shop_for_a_plan() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		String stateSelected=(String) getLoginScenario().getBean(CommonConstants.STATE_SELECTED);
+		acqusitionHomePage.clickMedSupp(stateSelected);
 	}
 }

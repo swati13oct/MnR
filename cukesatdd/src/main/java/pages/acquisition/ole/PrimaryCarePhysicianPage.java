@@ -361,8 +361,9 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
 		*/
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
-			System.out.println("OLE Monthly Plan Premium Page is Displayed");
+		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
+		System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);
 		}
 		else{
@@ -395,8 +396,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		//Assert.assertEquals("PCP selected is not shown in blue box", expectedProvider, actualProvider);
 		Assert.assertTrue("PCP selected is not shown in blue box", actualProvider.contains(expectedProvider));
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
-		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+	//	validateNew(NextBtn);
+	//	jsClickNew(NextBtn);
 		
 		return null;
 	}	

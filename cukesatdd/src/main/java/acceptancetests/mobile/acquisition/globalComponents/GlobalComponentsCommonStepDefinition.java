@@ -8,6 +8,7 @@ import java.util.Map;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
@@ -17,25 +18,26 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.commonpages.EnterZipCodePage;
-import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
-import pages.acquisition.commonpages.ContactUsAARPPage;
-import pages.acquisition.commonpages.DisclaimersAARPPage;
-import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
-import pages.acquisition.commonpages.SiteMapAARPPage;
-import pages.acquisition.commonpages.TermsnConditionsAARPPage;
-import pages.acquisition.dceredesign.GetStartedPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsAARPPageMobile;
+import pages.mobile.acquisition.commonpages.CostBasicsPageMobile;
+import pages.mobile.acquisition.commonpages.CoverageChoicesPageMobile;
 import pages.mobile.acquisition.commonpages.DisclaimersAARPPageMobile;
+import pages.mobile.acquisition.commonpages.EnrollmentBasicsPageMobile;
+import pages.mobile.acquisition.commonpages.LearnAboutMedicareHomePageMobile;
+import pages.mobile.acquisition.commonpages.MedicareAdvantagePartCPlansPageMobile;
+import pages.mobile.acquisition.commonpages.MedicareEligibilityPageMobile;
+import pages.mobile.acquisition.commonpages.MedicarePrescriptionDrugPartDPlansPageMobile;
+import pages.mobile.acquisition.commonpages.MedicareSupplementInsurancePlansPageMobile;
+import pages.mobile.acquisition.commonpages.PrescriptionsProvidersBenefitsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyAARPPageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import pages.acquisition.commonpages.AboutUsAARPPage;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+
 
 
 
@@ -397,6 +399,341 @@ public class GlobalComponentsCommonStepDefinition {
 			if (tfnFlag.equalsIgnoreCase("true")) {
 				aquisitionhomepage.validateTFNelement(tfnXpath);
 			}
+		}
+
+		
+		
+		
+		
+		@Then("^user select state for geotargeting from global footer of the Medicare Plans All page$")
+		public void user_select_state_for_geotargeting() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.selectStateForGeotargeting();
+		}
+
+		@Then("^user check inner page links on the Medicare Education page$")
+		public void user_check_inner_page_links(DataTable givenAttributes) {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String pageName = memberAttributesMap.get("PageName");
+
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.checkInnerPageLinks(pageName);
+		}
+
+		@Then("^user clicks on Medicare Annual Enrollment Period Link and comes back$")
+		public void user_clicks_on_Medicare_Annual_Enrollment_Period_Link() {
+			PrescriptionsProvidersBenefitsPageMobile benefitsPage = (PrescriptionsProvidersBenefitsPageMobile) getLoginScenario()
+					.getBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE);
+			benefitsPage.clickMedicareAnnualEnrollment();
+
+		}
+
+		@When("^the user navigates to Medicare Education Page from homepage$")
+		public void user_navigates_to_Medicare_Education_Page_from_homepage() {
+			AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = aquisitionhomepage.clickLearnMoreOnHomePage();
+			if (learnAboutMedicareHomePage != null) {
+				getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+				System.out.println("Medicare Education Page opened");
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail("Error in opening Medicare Education Page ");
+			}
+		}
+
+		@Then("^the user navigates to Prescriptions, Providers and Benefits page$")
+		public void the_user_navigates_to_Prescriptions_Providers_and_Benefits_page() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			PrescriptionsProvidersBenefitsPageMobile benefitsPage = learnAboutMedicareHomePage.selectBenifitsEducation();
+			if (benefitsPage != null) {
+				getLoginScenario().saveBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE, benefitsPage);
+				System.out.println("Prescriptions, Providers and Benefits page loaded");
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Prescriptions, Providers and Benefits page did not  loaded");
+			}
+
+		}
+
+		@Then("^the user navigates to Medicare Cost Basic page$")
+		public void the_user_navigates_to_Medicare_Cost_Basic_page() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			CostBasicsPageMobile costBasicsPage = learnAboutMedicareHomePage.navigatetoMedicareCostBasic();
+			if (costBasicsPage != null) {
+				getLoginScenario().saveBean(PageConstants.COST_BASICS_PAGE, costBasicsPage);
+				System.out.println("Cost Basics page loaded");
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Cost Basics page did not  loaded");
+			}
+		}
+
+		@Then("^the user navigates to Medicare Eligibility page$")
+		public void the_user_navigates_to_Medicare_Eligibility_page() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			MedicareEligibilityPageMobile eligibilityPage = learnAboutMedicareHomePage.selectMedicareEligibility();
+			if (eligibilityPage != null) {
+				getLoginScenario().saveBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE, eligibilityPage);
+				System.out.println("Medicare Eligibility page loaded");
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Medicare Eligibility Page did not loaded");
+			}
+		}
+
+		@Then("^the user clicks on Coverage Choices link$")
+		public void the_user_clicks_on_Coverage_Choices_link() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			CoverageChoicesPageMobile choicesPage = learnAboutMedicareHomePage.clickonCoverageChoicesLink();
+			if (choicesPage != null) {
+				getLoginScenario().saveBean(PageConstants.COVERAGE_CHOICE_PAGE, choicesPage);
+				System.out.println("Coverage Choices page loaded");
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Coverage Choices Page did not loaded");
+			}
+
+		}
+
+		@Then("^user clicks on  Initial Enrollment Period Link and comes back$")
+		public void user_clicks_on_Initial_Enrollment_Period_Link() {
+
+			MedicareEligibilityPageMobile eligibilityPage = (MedicareEligibilityPageMobile) getLoginScenario()
+					.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
+			eligibilityPage.clickOnIEP();
+
+		}
+
+		@Then("^user checks the plan links on left rail of the page$")
+		public void user_checks_the_plan_links_on_left_rail_of_the_page() {
+			MedicareEligibilityPageMobile eligibilityPage = (MedicareEligibilityPageMobile) getLoginScenario()
+					.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
+			eligibilityPage.checkLeftRailPlanLinks("MA");
+			eligibilityPage.checkLeftRailPlanLinks("MS");
+			eligibilityPage.checkLeftRailPlanLinks("PDP");
+		}
+
+		@Then("^the user clicks on Coverage Choices link on Medicare Eligibility page$")
+		public void the_user_clicks_on_Coverage_Choices_link_from_Med_Elegibility() {
+			MedicareEligibilityPageMobile eligibilityPage = (MedicareEligibilityPageMobile) getLoginScenario()
+					.getBean(PageConstants.MEDICARE_ELIGIBILITY_PAGE);
+			CoverageChoicesPageMobile choicesPage = eligibilityPage.clickonCoverageChoicesLink();
+			if (choicesPage != null) {
+				getLoginScenario().saveBean(PageConstants.COVERAGE_CHOICE_PAGE, choicesPage);
+				System.out.println("Coverage Choices page loaded");
+				Assert.assertTrue(true);
+			} else {
+				System.out.println("Coverage Choices Page did not loaded");
+			}
+
+		}
+
+		@Then("^the user gather medicare info through video$")
+		public void the_user_gather_medicare_info_through_video() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.clickToYoutubeVideo();
+
+		}
+
+		@Then("^the user click on video transcript link$")
+		public void the_user_click_on_video_transcript_link() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.clickVideoTransciptLink();
+
+		}
+
+		@Then("^the user come back to Med-ed page$")
+		public void the_user_come_back_to_Med_ed_page() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.backToMedEdPage();
+		}
+
+		@Then("^user clicks on  Medicare Part A and Part B Coverage dropdown$")
+		public void user_check_coverage_dropdown() {
+			CoverageChoicesPageMobile coverageChoicesPage = (CoverageChoicesPageMobile) getLoginScenario()
+					.getBean(PageConstants.COVERAGE_CHOICE_PAGE);
+			coverageChoicesPage.checkCoverageDropdownAB();
+
+		}
+
+		@Then("^user clicks on the plan dropdowns$")
+		public void user_clicks_on_the_plan_dropdowns() {
+			CoverageChoicesPageMobile coverageChoicesPage = (CoverageChoicesPageMobile) getLoginScenario()
+					.getBean(PageConstants.COVERAGE_CHOICE_PAGE);
+			coverageChoicesPage.checkPlanDropDowns();
+
+		}
+
+		@Then("^the user navigates through learn extra links on Cost Basic page$")
+		public void user_navigates_extra_links() {
+			CostBasicsPageMobile costBasicsPage = (CostBasicsPageMobile) getLoginScenario().getBean(PageConstants.COST_BASICS_PAGE);
+			costBasicsPage.navigatesExtraLinks();
+		}
+
+		@Then("^the user check Medicare Savings Program link$")
+		public void user_check_Medicare_saving_link() {
+			CostBasicsPageMobile costBasicsPage = (CostBasicsPageMobile) getLoginScenario().getBean(PageConstants.COST_BASICS_PAGE);
+			costBasicsPage.navigatesToMedicareSaving();
+		}
+
+		@Then("^the user click on next article link$")
+		public void user_click_next_link() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.clickOnReadNextLink();
+		}
+
+		@Then("^the user navigates to plan information page$")
+		public void user_navigates_to_plan(DataTable givenAttributes) {
+			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}
+			String planType = memberAttributesMap.get("planType");
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			if (planType.equalsIgnoreCase("MA")) {
+				MedicareAdvantagePartCPlansPageMobile MAplanPage = learnAboutMedicareHomePage.planSelectionMA();
+				if (MAplanPage != null) {
+					getLoginScenario().saveBean(PageConstants.MEDICARE_ADVANTAGE_PLANS_PAGE, MAplanPage);
+					getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("MA plan page not loaded");
+				}
+			} else if (planType.equalsIgnoreCase("MS")) {
+				MedicareSupplementInsurancePlansPageMobile MSplanPage = learnAboutMedicareHomePage.planSelectionMS();
+				if (MSplanPage != null) {
+					getLoginScenario().saveBean(PageConstants.MEDICARE_SUPPLEMENT_INSURANCE_PLANS_PAGE, MSplanPage);
+					getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("MS plan page not loaded");
+				}
+			} else if (planType.equalsIgnoreCase("PDP")) {
+				MedicarePrescriptionDrugPartDPlansPageMobile PDPplanPage = learnAboutMedicareHomePage.planSelectionPDP();
+				if (PDPplanPage != null) {
+
+					getLoginScenario().saveBean(PageConstants.MEDICARE_PRESCRIPTION_DRUG_PLANS_PAGE, PDPplanPage);
+					getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
+					Assert.assertTrue(true);
+				} else {
+					Assert.fail("PDP plan page not loaded");
+				}
+			}
+		}
+
+		@Then("^user click on see plan in your area link$")
+		public void user_click_on_see_plan_in_your_area_link() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.clickOnSeePlanLink();
+		}
+
+		@Then("^the user navigates to Enrollment Basics Page$")
+		public void the_user_navigates_to_Enrollment_Basics_Page() {
+
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			EnrollmentBasicsPageMobile enrollmentBasicsPage = learnAboutMedicareHomePage.clickonEnrollmentBasicLink();
+			if (enrollmentBasicsPage != null) {
+				getLoginScenario().saveBean(PageConstants.ENROLLMENT_BASICS_PAGE, enrollmentBasicsPage);
+			}
+
+		}
+
+		@Then("^the user check the inner links on Enrollment Basic Page$")
+		public void check_the_inner_links_on_Enrollment_Basic() {
+			EnrollmentBasicsPageMobile enrollmentBasicsPage = (EnrollmentBasicsPageMobile) getLoginScenario()
+					.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+			enrollmentBasicsPage.selectStateForGeotargeting();
+			enrollmentBasicsPage.checkInnerLinks();
+			enrollmentBasicsPage.clickSocialSecurity();
+		}
+
+		@Then("^the user check Social Security link on Enrollment Basic Page$")
+		public void check_the_socaial_security_link_on_Enrollment_Basic() {
+			EnrollmentBasicsPageMobile enrollmentBasicsPage = (EnrollmentBasicsPageMobile) getLoginScenario()
+					.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+			enrollmentBasicsPage.clickSocialSecurity();
+		}
+
+		@Then("^the user click on see all plan link on Enrollment Basic Page$")
+		public void check_the_see_all_plan_link_on_Enrollment_Basic() {
+			EnrollmentBasicsPageMobile enrollmentBasicsPage = (EnrollmentBasicsPageMobile) getLoginScenario()
+					.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
+			enrollmentBasicsPage.clickSeePlans();
+		}
+		
+		@Then("^the user clicks on Estimate Drug Costs Link from Benefit Page to land on DCE Redesign$")
+		public void the_user_clicks_on_Estimate_Drug_Costs_Link_from_Benefit_page_to_land_on_DCE_Redesign()
+				throws Throwable {
+			PrescriptionsProvidersBenefitsPageMobile benefitsPage = (PrescriptionsProvidersBenefitsPageMobile) getLoginScenario()
+					.getBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE);
+
+			GetStartedPageMobile getStartedPage = benefitsPage.clickDCERedesignLinkonMedEdPage();
+			if (null != getStartedPage) {
+				getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+			} else
+				Assert.fail("DCE Redesign page object not loaded");
+		}
+
+		@Then("the user click on return to MEdEd page from Get Started Page")
+		public void user_click_to_return_to_MedEd_page() {
+			GetStartedPageMobile getStartedPage = (GetStartedPageMobile) getLoginScenario()
+					.getBean(PageConstants.DCE_Redesign_GetStarted);
+			PrescriptionsProvidersBenefitsPageMobile benefitsPage = getStartedPage.clickReturnToAcqHomePAge();
+			if (null != benefitsPage) {
+				getLoginScenario().saveBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE, benefitsPage);
+			} else
+				Assert.fail("Benefit Page not loaded");
+		}
+		
+		@When("^the user click on Provider Search on the Benefit Page$")
+		public void providerSearch_details_in_aarp_site_from_BenefitPage() {
+			
+			PrescriptionsProvidersBenefitsPageMobile benefitsPage= (PrescriptionsProvidersBenefitsPageMobile)getLoginScenario().getBean(PageConstants.PRESCRIPTION_PROVIDER_BENEFITS_PAGE);
+			
+			ProviderSearchPageMobile providerSearchPage = benefitsPage.clicksOnRallyToolFromMedEdPage();
+
+			if (providerSearchPage != null) {
+				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+			} else {
+				Assert.fail("Error Loading Rally tool from Home Page");
+			}
+		}
+		
+		@Then("user go back to MedEd page from Rally tool")
+		public void user_go_back_to_MedEd_page() {  
+			ProviderSearchPageMobile  providerSearchPage  = (ProviderSearchPageMobile) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			
+			AcquisitionHomePageMobile acquisitionHomePage=providerSearchPage.returnToAcqHomePage();
+		
+		}
+
+		@Then("^the user check Still have a question$")
+		public void the_user_check_Still_have_a_question() {
+			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.chechStillHaveQues();
 		}
 
 }

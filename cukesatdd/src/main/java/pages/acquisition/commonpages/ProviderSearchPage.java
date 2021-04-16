@@ -511,7 +511,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 		return new VPPTestHarnessPage(driver);
 	}
-
+/*
 	/*
 	public VPPPlanSummaryPage MultipleselectsProvider() {
 		GetStarted.click();
@@ -659,7 +659,6 @@ public class ProviderSearchPage extends UhcDriver {
 
 	return new VPPPlanSummaryPage(driver);
 }
-
 
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),

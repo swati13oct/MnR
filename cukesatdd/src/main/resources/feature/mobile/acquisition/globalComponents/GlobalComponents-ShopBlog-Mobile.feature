@@ -56,21 +56,21 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_TFN_AARP_6
     Examples: 
-      | site | path                                                     | pageName                              | tfnXpath                                                             | tfnFlag |  |
-      | AARP | medicare-education.html                                  | Understanding Medicare                | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | AARP | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[@class='amp']//a[contains(@class, 'tel')]                        | true    |  |
-      | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | AARP | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | AARP | medicare-education/medicare-costs.html                   | Medicare Cost Basics                  | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |  |
+      | site | path                                                     | pageName                              | tfnXpath                                                       | tfnFlag |  |
+      | AARP | medicare-education.html                                  | Understanding Medicare                | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | AARP | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | AARP | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | AARP | medicare-education/medicare-costs.html                   | Medicare Cost Basics                  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
 
     @ShopBlog_TFN_AARP_7
     Examples: 
-      | site | path                                                  | pageName                              | tfnXpath                                                             | tfnFlag |  |
-      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics            | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | AARP | medicare-education/medicare-advantage-plans.html      | Learn about Medicare Advantage Plans  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | AARP | medicare-education/medicare-supplement-plans.html     | Learn about Medicare Supplement Plans | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |  |
-      | AARP | medicare-education/medicare-part-d.html               | Medicare Prescription Drug Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ                          | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
+      | site | path                                                  | pageName                              | tfnXpath                                                       | tfnFlag |  |
+      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | AARP | medicare-education/medicare-advantage-plans.html      | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | AARP | medicare-education/medicare-supplement-plans.html     | Learn about Medicare Supplement Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | AARP | medicare-education/medicare-part-d.html               | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ                          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
 
     @ShopBlog_TFN_AARP_8
     Examples: 
@@ -189,21 +189,21 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_TFN_UHC_6
     Examples: 
-      | site | path                                                     | pageName                              | tfnXpath                                                             | tfnFlag |  |
-      | UHC  | medicare-education.html                                  | Understanding Medicare                | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | UHC  | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[@class='amp']//a[contains(@class, 'tel')]                        | true    |  |
-      | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | UHC  | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | UHC  | medicare-education/medicare-costs.html                   | Medicare Cost Basics                  | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |  |
+      | site | path                                                     | pageName                              | tfnXpath                                                       | tfnFlag |  |
+      | UHC  | medicare-education.html                                  | Understanding Medicare                | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | UHC  | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | UHC  | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | UHC  | medicare-education/medicare-costs.html                   | Medicare Cost Basics                  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
 
     @ShopBlog_TFN_UHC_7
     Examples: 
-      | site | path                                                  | pageName                              | tfnXpath                                                             | tfnFlag |  |
-      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics            | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | UHC  | medicare-education/medicare-advantage-plans.html      | Learn about Medicare Advantage Plans  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | UHC  | medicare-education/medicare-supplement-plans.html     | Learn about Medicare Supplement Plans | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |  |
-      | UHC  | medicare-education/medicare-part-d.html               | Medicare Prescription Drug Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
-      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ                          | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |  |
+      | site | path                                                  | pageName                              | tfnXpath                                                       | tfnFlag |  |
+      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | UHC  | medicare-education/medicare-advantage-plans.html      | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | UHC  | medicare-education/medicare-supplement-plans.html     | Learn about Medicare Supplement Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | UHC  | medicare-education/medicare-part-d.html               | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ                          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
 
     @ShopBlog_TFN_UHC_8
     Examples: 
@@ -341,11 +341,11 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_AgentZip_AARP_7
     Examples: 
-      | site | path                                              | pageName                              | UHCUrl                      |
-      | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | https://www.myuhcagent.com/ |
+      | site | path                                             | pageName                             | UHCUrl                      |
+      | AARP | medicare-education/medicare-advantage-plans.html | Learn about Medicare Advantage Plans | https://www.myuhcagent.com/ |
       #| AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | https://www.myuhcagent.com/ |
-      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | https://www.myuhcagent.com/ |
-      | AARP | medicare-education/medicare-faq.html              | Medicare FAQ                          | https://www.myuhcagent.com/ |
+      | AARP | medicare-education/medicare-part-d.html          | Medicare Prescription Drug Plans     | https://www.myuhcagent.com/ |
+      | AARP | medicare-education/medicare-faq.html             | Medicare FAQ                         | https://www.myuhcagent.com/ |
 
     @ShopBlog_AgentZip_AARP_8
     Examples: 
@@ -419,11 +419,11 @@ Feature: Shop Blog Page Script
 
     @ShopBlog_AgentZip_UHC_7
     Examples: 
-      | site | path                                              | pageName                              | UHCUrl                      |
-      | UHC  | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | https://www.myuhcagent.com/ |
+      | site | path                                             | pageName                             | UHCUrl                      |
+      | UHC  | medicare-education/medicare-advantage-plans.html | Learn about Medicare Advantage Plans | https://www.myuhcagent.com/ |
       #| UHC  | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | https://www.myuhcagent.com/ |
-      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | https://www.myuhcagent.com/ |
-      | UHC  | medicare-education/medicare-faq.html              | Medicare FAQ                          | https://www.myuhcagent.com/ |
+      | UHC  | medicare-education/medicare-part-d.html          | Medicare Prescription Drug Plans     | https://www.myuhcagent.com/ |
+      | UHC  | medicare-education/medicare-faq.html             | Medicare FAQ                         | https://www.myuhcagent.com/ |
 
     @ShopBlog_AgentZip_UHC_8
     Examples: 
