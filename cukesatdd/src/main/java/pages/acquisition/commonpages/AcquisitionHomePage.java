@@ -6200,4 +6200,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.assertTrue(CurrentURL.contains(AllStates));
 		}
 	}
+	
+	@FindBy(xpath = "//span[contains(text(),'Make an appointment for Medicare Supplement Insura')]")
+	private WebElement clickISlinkMedEDPages;
+	
+	public IsInsuranceAgent clickISlinkMedEDPages() {
+		
+		
+		CommonUtility.waitForPageLoadNew(driver, clickISlinkMedEDPages, 30);
+		jsClickNew(clickISlinkMedEDPages);
+		
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+		driver.navigate().to(CurrentURL);
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		//return IsInsuranceAgent;
+		return new IsInsuranceAgent(driver);
+	}
 }
