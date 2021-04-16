@@ -96,7 +96,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			distance = distance + " miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
-		selectFromDropDownByText(driver, distanceDropownID, distance);
+		//selectFromDropDownByText(driver, distanceDropownID, distance);
+		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
@@ -194,7 +195,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		// seletPlandropdown.click();
 
-		jsClickMobile(seletPlandropdown);
+		
+		//jsClickMobile(seletPlandropdown);
 		sleepBySec(1);
 		//selectFromDropDownByText(driver, seletPlandropdown, planName);
 		/*To handle iOS dropdown */
@@ -756,7 +758,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec = 10;
+		long timeoutInSec = 20;
 		return pharmacyValidate(element, timeoutInSec);
 	}
 

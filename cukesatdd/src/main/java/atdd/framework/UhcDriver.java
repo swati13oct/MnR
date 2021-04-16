@@ -550,7 +550,7 @@ public abstract class UhcDriver {
 				System.out.println("JsClick worked");
 				clickFlag = true;
 
-				if (element.isDisplayed() && (clickFlag = false))
+				if (element.isDisplayed() && (clickFlag = true))
 					try {
 						element.click();
 						System.out.println("Click worked");
@@ -1195,9 +1195,9 @@ public abstract class UhcDriver {
 			
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
-			((WebElement) ((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
+			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
 			//((IOSDriver) driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			//((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			//((WebElement) ((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
 			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
