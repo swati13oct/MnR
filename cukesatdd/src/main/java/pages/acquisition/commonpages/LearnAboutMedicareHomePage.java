@@ -600,6 +600,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		sleepBySec(1);
 		if(driver.findElement(By.xpath("//h4[contains(text(),'Video transcript')]")).isDisplayed()) {
 			System.out.println("Transcipt PDF link open successfully");
+			jsClickNew(lnkVideoTranscipt);
 			Assert.assertTrue(true);
 		}else {
 			Assert.fail("Transcipt PDF link did not open successfully");
@@ -648,16 +649,15 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		WebElement lnkPlansAvailableInYourArea=driver.findElement(By.xpath("//a[contains(@href,'/health-plans/medicare-advantage-plans/available-plans.html#/zipcode')]"));
 		scrollToView(lnkPlansAvailableInYourArea);
 		Assert.assertTrue("Plans Available link isn't present", lnkPlansAvailableInYourArea.isDisplayed());
-		//switchToNewTabNew(lnkPlansAvailableInYourArea);
-		jsClickNew(lnkPlansAvailableInYourArea);
-		sleepBySec(10);
+		switchToNewTabNew(lnkPlansAvailableInYourArea);
 		CommonUtility.checkPageIsReadyNew(driver);
+		sleepBySec(2);
 		if(driver.getCurrentUrl().contains("health-plans")) {
 			Assert.assertTrue(true);
 			System.out.println("Plan Details page displayed Successfully");
-			//driver.close();
-			//driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-			driver.navigate().back();
+			driver.close();
+			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			//driver.navigate().back();
 		}else {
 			Assert.fail("Plan Details page did not displayed Successfully");
 		}
@@ -687,6 +687,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		}else if(plantype.equalsIgnoreCase("PDP")) {
 			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col') and contains(text(),'Prescription Drug')]"));
 		}
+		scrollToView(lnkPlan);
 		navigateToMedicareMenuLinks(lnkPlan);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("PlanType: "+ plantype);
