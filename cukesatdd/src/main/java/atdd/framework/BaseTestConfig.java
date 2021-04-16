@@ -27,6 +27,10 @@ public abstract class BaseTestConfig {
 	@BeforeSuite(alwaysRun = true)
 	public void setupSuite(ITestContext context) {
 		System.out.println("Dataprovider thread count set to : " + context.getSuite().getXmlSuite().getDataProviderThreadCount());
+		System.out.println("Processor count : "+ Runtime.getRuntime().availableProcessors());
+		System.out.println("Free memory ready for new objects : "+ Runtime.getRuntime().freeMemory() + " bytes");
+		System.out.println("Total memory : "+ Runtime.getRuntime().totalMemory() + " bytes");
+		System.out.println("Max memory : "+ Runtime.getRuntime().maxMemory() + " bytes");
 		for(ITestNGMethod method : context.getAllTestMethods()) {
 			method.setRetryAnalyzer(new RetryAnalyzer());
 		}
@@ -34,6 +38,9 @@ public abstract class BaseTestConfig {
 	
 	@BeforeClass(alwaysRun = true)
 	public void setupClass() {
+		long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+		System.out.println("Used memory : "+ usedMemory + " bytes");
+		System.out.println("Free memory : "+ (Runtime.getRuntime().maxMemory() - usedMemory) + " bytes");
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
 	}
 	
