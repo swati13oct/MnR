@@ -3755,7 +3755,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin")
 					|| MRScenario.environment.equalsIgnoreCase("digital-devv2")
-					|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")) {
+					|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
+					|| MRScenario.environment.equalsIgnoreCase("team-f")){
 				for (String rname : jenkinsRunnerFiles.split(",")) {
 					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("ULAYER")) {
