@@ -986,6 +986,8 @@ public class CommonConstants {
 	public static String RAILROAD_TEXT   = "The Railroad Retirement Board(RRB) can bill you";
 	//
 	public static String PARTDIRMAA_TEXT    = "Please DO NOT pay the plan the Part D-IRMAA at this time.";
+	
+	public static final String STATE_SELECTED = "state";
 }
 
 

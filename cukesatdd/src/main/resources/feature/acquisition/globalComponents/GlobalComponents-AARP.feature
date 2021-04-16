@@ -6,7 +6,9 @@ Feature: 1.12 ACQ - Global Components Validation
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user accesses global footer of the Medicare Plans All page
-    And user vaidates the state drop down link on the home page
+    When user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
     And user clicks on View all disclaimer information link on the home page
     And user verifies visit aarp.org link on home page
     And user clicks on Aboutus link from footer of the Medicare Plans home page
@@ -21,13 +23,13 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @globalfooter
     Examples: 
-      | site |
-      | AARP |
+      | site | state  | code |
+      | AARP | Alaska | AK   |
 
     @globalfooter
     Examples: 
-      | site |
-      | UHC  |
+      | site | state  | code |
+      | UHC  | Alaska | AK   |
 
   @globalheaderULayer
   Scenario Outline: To verify links displayed in the global header of AARP site
@@ -90,6 +92,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+			#|AARP| medicare-education/compare-ma-ms-plans.html|
 
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
@@ -97,6 +100,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+			#|UHC| medicare-education/compare-ma-ms-plans.html|
 
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
@@ -653,3 +657,47 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site |
       | UHC  |
+
+  Scenario Outline: To verify the Geo Targeting Link for Medicare Supplement Plans on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state>      |
+      | Code       | <code>       |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+    Then the user clicks on browser back button
+    When user updates the state drop down value on the home page
+      | State | <state1> |
+      | Code  | <code1>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state1>     |
+      | Code       | <code1>      |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+    Then the user clicks on browser back button
+    When user updates the state drop down value on the home page
+      | State | <state2> |
+      | Code  | <code2>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state2>     |
+      | Code       | <code2>      |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+
+    @GeoTarget_MedSup_GlobalCompsAARP
+    Examples: 
+      | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
+      | AARP | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
+
+    @GeoTarget_MedSup_GlobalCompsUHC
+    Examples: 
+      | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
+      | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
+
