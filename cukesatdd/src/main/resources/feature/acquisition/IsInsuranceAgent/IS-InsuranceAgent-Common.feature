@@ -1,6 +1,6 @@
 Feature: 1.14 Med Supp Plans (IS) Insurance Agent  flow
 
-  #@IS_InsuranceAgent_AARP1
+  @IS_InsuranceAgent_AARP1
   Scenario Outline: UID: <UID> - To Test IS Insurance Agent E2E on <site> site
     Given the user is on medicare acquisition site landing page
 	| Site | <site> |
@@ -36,7 +36,7 @@ Feature: 1.14 Med Supp Plans (IS) Insurance Agent  flow
       |UHC|     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 04/07/1932 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |
       |UHC|     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | email              | test@test.com | 08/09/1940 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |
 
-       #@IS_InsuranceAgent_AARP
+       @IS_InsuranceAgent_AARP
      Scenario Outline: UID: <UID> - To Test IS Insurance Agent E2E on <site> site
     Given the user is on medicare acquisition site landing page
 	| Site | <site> |
@@ -53,14 +53,41 @@ Feature: 1.14 Med Supp Plans (IS) Insurance Agent  flow
      | PhNo       | <phNo>       |
     Then the user clicks Submit to submit Licensed Insurance Agent and validates Thank You Page
     
-	#@IS_InsuranceAgent_Common_AARP
+	@IS_InsuranceAgent_Common_AARP
     Examples: 
       |site| UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender|path                                | 
       |AARP| 11112    |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |health-plans/medicare-supplement-plans/agent-appointment.html| 
     #  |AARP|     |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | email              | test@test.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |health-plans/medicare-supplement-plans/agent-appointment.html| 
     
-	#@IS_InsuranceAgent_Common_UHC
+	@IS_InsuranceAgent_Common_UHC
 	Examples: 
       |site| UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender|path                                | 
       |UHC| 11111    |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |health-plans/medicare-supplement-plans/agent-appointment.html| 
     
+     Scenario Outline: UID: <UID> - To Test IS Insurance Agent E2E on <site> site for MedED Pages
+    Given the user is on medicare acquisition site landing page
+	| Site | <site> |
+   Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+     And user click on Insurance agent link on the MedED Pages
+      Then the user enters valid information on Licensed Insurance Agentfor the following fields
+      | FirstName          | <firstname>          |
+      | LastName           | <lastname>           |
+      | DistributionMethod | <distributionmethod> |
+      | Email              | <email>              |
+    Then the user validates address autocomplete on Licensed Agent
+    Then the user provides DOB and Phone Number
+    | DOB        | <dob>        |
+     | PhNo       | <phNo>       |
+    Then the user clicks Submit to submit Licensed Insurance Agent and validates Thank You Page
+    #@IS_InsuranceAgent_Common_AARP
+    Examples: 
+      |site| UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender|path                                | pageName                     |
+      |AARP| 11112    |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |medicare-education.html| medicare-education |
+   
+	#@IS_InsuranceAgent_Common_UHC
+	Examples: 
+      |site| UID | zipcode | isMultutiCounty | county             | plantype | firstname      | lastname      | distributionmethod | email         | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth| partAyear| startDate | gender|path                                | pageName                     |
+      |UHC| 11112    |   90210 | NO              | Los Angeles County | MS       | test-mnr-first | test-mnr-last | mail               |               | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February  | 2020     |   June    | male  |medicare-education.html| medicare-education |
+   
