@@ -131,7 +131,7 @@ public class DCEACQMedEdMobile {
 		String county = memberAttributesMap.get("county");
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		zipCodePlanYearPage.enterZipCodeandcounty(zipcode,county);
+		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 		
 	}
 

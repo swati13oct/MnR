@@ -23,5 +23,5 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion 
     And user clicks on continue button in Zip Entry Page
 
     Examples: 
-      | drug1   | drug2  | drug3   | drug4    | zipCode | county           |
-      | Orkambi | Fanapt | Humalog | Adderall |   80002 | Jefferson County |
+      | drug1   | drug2  | drug3   | drug4    | zipCode | 
+      | Orkambi | Fanapt | Humalog | Adderall |   80001 |

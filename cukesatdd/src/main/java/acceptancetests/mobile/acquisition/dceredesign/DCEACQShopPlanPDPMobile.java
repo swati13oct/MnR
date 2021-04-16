@@ -139,7 +139,7 @@ public class DCEACQShopPlanPDPMobile {
 		String county = memberAttributesMap.get("county");
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
-		zipCodePlanYearPage.enterZipCodeandcounty(zipcode,county);
+		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
 	}
 	@And("^user click on continue button in Zip Entry Page$")
 	public void user_clicks_on_continue_button_ZipENtryPage_in_AARP() {

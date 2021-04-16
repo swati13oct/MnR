@@ -106,28 +106,22 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[text()='Find Plans' and @xpath=\"1\"]")
 	public WebElement FindPlans;
 
-	public void enterZipCodeandcounty(String zipcode, String county) throws InterruptedException {
+	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
-
+		//sendkeys(zipCodeTxtbox, zipcode);
 		sendkeysMobile(zipCodeTxtbox, zipcode);
-		
-		
 		Thread.sleep(3000);
 		try {
-			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-
-				mobileSelectOption(countyDropdown, county, true);
-			} else if (countyDropdown.isDisplayed()){
-
-				WebElement countyValue = driver.findElements(By.xpath("//select[@id='county']")).get(1);
-				String cvalue = countyValue.getText();
-				mobileSelectOption(countyDropdown, cvalue, true);
-
+			if (countyDropdown.isDisplayed()) {
+				countyDropdown.click();
+				CommonUtility.waitForPageLoad(driver,countyRows , 30);
+				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
 		validateNew(continueBtn);
+		//continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
