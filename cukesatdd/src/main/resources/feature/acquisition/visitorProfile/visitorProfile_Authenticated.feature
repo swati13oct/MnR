@@ -40,7 +40,7 @@ Feature: 1.08. UAT - Visitor profile Authenticated
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password    |
       | UHC  | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@20 |
 
-  @addDrugAuthenticatedTest
+  @addDrugAuthenticated
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
