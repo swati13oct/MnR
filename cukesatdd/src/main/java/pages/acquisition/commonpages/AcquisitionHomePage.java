@@ -3713,8 +3713,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-devv2")) {
 				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
-			}
-			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
+			}else if (MRScenario.environment.equalsIgnoreCase("team-f")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+			}else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
 						.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {

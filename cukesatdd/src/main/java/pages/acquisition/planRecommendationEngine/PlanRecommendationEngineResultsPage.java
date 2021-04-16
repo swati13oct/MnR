@@ -1758,10 +1758,18 @@ public void validateDrugProvider() {
 //	Assert.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
 	threadsleep(3000);
 	System.out.println("Drug and provider details successfully validated in VP ");
+	System.out.println("Validate Pharamacy details in VP ");
+	Pharmacytype();
 	scrollToView(Addplans);
 	jsClickNew(Addplans);
 	threadsleep(8000);
 	Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "--- VPP Summary not loaded---");
+}
+
+public void Pharmacytype() {
+	threadsleep(5000);
+	int count = Druglist.size();
+	Assert.assertTrue(Druglist.get(count).findElement(By.cssSelector("span")).getText().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
 }
 
 public void navigatePRE(HashMap<String, String> inputdata) {

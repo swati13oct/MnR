@@ -954,10 +954,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@Then("^user Validate Drug and Provider details in Visitor profile page$")
 	public void user_verify_drug_provider() {
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		planSelectorResultspage.validateDrugProvider();
-		System.out.println("Validating Pharmacy Details in DCE Page: ");
-		dce.Pharmacytype();
 	}
 	
 	@Given("^the user is on external acquisition site landing page$")
