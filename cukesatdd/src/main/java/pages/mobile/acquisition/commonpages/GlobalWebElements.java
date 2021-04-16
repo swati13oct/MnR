@@ -146,7 +146,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public static WebElement importantDisclosuresLink;
 
-	@FindBy(xpath = "//a[@dtmname='Footer:Visit AARP.com']")
+	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
 	public static WebElement visitAARPLink;
 
 	@FindBy(id = "proceed")

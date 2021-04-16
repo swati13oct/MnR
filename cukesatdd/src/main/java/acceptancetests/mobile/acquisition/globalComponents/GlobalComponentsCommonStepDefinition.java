@@ -35,6 +35,7 @@ import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.acquisition.commonpages.AboutUsAARPPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 
 
 
@@ -219,12 +220,11 @@ public class GlobalComponentsCommonStepDefinition {
 	
 	@And("^user clicks on Aboutus link from footer of the Medicare Plans home page$")
 	public void click_aboutus() {
-		AcquisitionHomePageMobile aquisitionhomepage  = (AcquisitionHomePageMobile) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AboutUsAARPPageMobile aboutUsAARPPage = aquisitionhomepage.aboutUsFooterClick();
-		if(aboutUsAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE,
-					aboutUsAARPPage);
+		if (aboutUsAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE, aboutUsAARPPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Aboutus page not found");

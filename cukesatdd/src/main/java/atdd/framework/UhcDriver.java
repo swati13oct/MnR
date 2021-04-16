@@ -1,5 +1,6 @@
 package atdd.framework;
 
+import java.awt.KeyboardFocusManager;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.BrowserType;
@@ -520,6 +522,8 @@ public abstract class UhcDriver {
 	}
 
 	public void iOSClick(WebElement element) {
+		
+		boolean clickFlag = false;
 
 		// Sets FluentWait Setup
 
@@ -544,8 +548,9 @@ public abstract class UhcDriver {
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click();", element);
 				System.out.println("JsClick worked");
+				clickFlag = true;
 
-				if (element.isDisplayed())
+				if (element.isDisplayed() && (clickFlag = false))
 					try {
 						element.click();
 						System.out.println("Click worked");
@@ -640,7 +645,8 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		jsClickNew(Element);
+		//jsClickNew(Element);
+		Element.click();
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -1184,18 +1190,20 @@ public abstract class UhcDriver {
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
 
-				//jsClickNew(selectElement);
-			selectElement.click();
-
+		    jsClickNew(selectElement);
+			//selectElement.click();
+			
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
-			((WebElement) ((IOSDriver) driver).findElements(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
+			((WebElement) ((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
 			//((IOSDriver) driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
 			//((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
 			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
+			
+			
 		}
 	}
 
