@@ -1685,6 +1685,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			}
 		}
 		return plansForCompare;
+		
+		
 	}
 
 	public boolean validateAllPlansChecked(String plansForCompare) {

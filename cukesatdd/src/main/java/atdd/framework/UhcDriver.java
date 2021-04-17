@@ -522,7 +522,7 @@ public abstract class UhcDriver {
 	}
 
 	public void iOSClick(WebElement element) {
-		
+
 		boolean clickFlag = false;
 
 		// Sets FluentWait Setup
@@ -544,19 +544,20 @@ public abstract class UhcDriver {
 				// action.longPress(element);
 				// singleTap(element);
 				// action.perform();
+				checkElementisEnabled(element);
 
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click();", element);
 				System.out.println("JsClick worked");
 				clickFlag = true;
 
-				if (element.isDisplayed() && (clickFlag = true))
-					try {
-						element.click();
-						System.out.println("Click worked");
-					} catch (Exception e) {
-						System.out.println("Unable to click on element for IOS");
-					}
+//				if (element.isDisplayed() && (clickFlag = true))
+//					try {
+//						element.click();
+//						System.out.println("Click worked");
+//					} catch (Exception e) {
+//						System.out.println("Unable to click on element for IOS");
+//					}
 
 				// new
 				// TouchAction((AppiumDriver)driver).tap(TapOptions.tapOptions().withElement((ElementOption)
@@ -570,6 +571,18 @@ public abstract class UhcDriver {
 		}
 
 		// ((IOSDriver) driver).findElement(MobileBy.
+
+	}
+
+	public boolean checkElementisEnabled(WebElement element) {
+		if (element.getAttribute("@disbaled") == "true") {
+			System.out.println("Still Looking for Element to enable .......");
+			sleepBySec(10);
+			return false;
+
+		}
+
+		return true;
 
 	}
 
@@ -645,7 +658,7 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		//jsClickNew(Element);
+		// jsClickNew(Element);
 		Element.click();
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
@@ -1190,20 +1203,21 @@ public abstract class UhcDriver {
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
 
-		    jsClickNew(selectElement);
-			//selectElement.click();
-			
+				jsClickNew(selectElement);
+			// selectElement.click();
+
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			//((IOSDriver) driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			//((WebElement) ((IOSDriver) driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
+			// ((IOSDriver)
+			// driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			// ((WebElement) ((IOSDriver)
+			// driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
 			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
-			
-			
+
 		}
 	}
 
