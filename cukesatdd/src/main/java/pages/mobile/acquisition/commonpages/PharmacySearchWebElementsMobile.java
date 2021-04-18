@@ -14,6 +14,10 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(xpath="//input[@id='zipcodeTxt']")
 	protected WebElement zipcodeField;
+	
+	@FindBy(xpath="//label[@id='plan-type-label']")
+	protected WebElement planTypeDropDownTitle;
+	
 
 	@FindBy(xpath="//button[@dtmid='cta_pharmacylocator']")
 	protected WebElement searchbtn;;

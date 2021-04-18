@@ -458,6 +458,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Then the user clicks on Learn More AARP for Rocky Mountain plans
       | Plan Name | <planName> |
 
+@Rocky
     Examples: 
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              | planyear |
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) | current  |

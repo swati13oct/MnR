@@ -551,13 +551,13 @@ public abstract class UhcDriver {
 				System.out.println("JsClick worked");
 				clickFlag = true;
 
-//				if (element.isDisplayed() && (clickFlag = true))
-//					try {
-//						element.click();
-//						System.out.println("Click worked");
-//					} catch (Exception e) {
-//						System.out.println("Unable to click on element for IOS");
-//					}
+				// if (element.isDisplayed() && (clickFlag = true))
+				// try {
+				// element.click();
+				// System.out.println("Click worked");
+				// } catch (Exception e) {
+				// System.out.println("Unable to click on element for IOS");
+				// }
 
 				// new
 				// TouchAction((AppiumDriver)driver).tap(TapOptions.tapOptions().withElement((ElementOption)
@@ -659,7 +659,7 @@ public abstract class UhcDriver {
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
 		jsClickNew(Element);
-		//Element.click();
+		// Element.click();
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -1152,6 +1152,7 @@ public abstract class UhcDriver {
 			// ((JavascriptExecutor)webDriver).executeScript("arguments[0].value='100011';",
 			// m);
 			// ((AppiumDriver)webDriver).getKeyboard().pressKey(Keys.BACK_SPACE);
+			element.clear();
 			element.click();
 			threadsleep(500);
 			element.click();
@@ -1198,32 +1199,38 @@ public abstract class UhcDriver {
 			element.selectByVisibleText(option);
 		} else {
 
-			String curHandle = ((IOSDriver) driver).getContext();
-			System.out.println("curHandle - " + curHandle);
-			System.out.println(((IOSDriver) driver).getContextHandles());
+			 String curHandle = ((IOSDriver) driver).getContext();
+			 System.out.println("curHandle - " + curHandle);
+			 System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
 
-				jsClickNew(selectElement);
-			// selectElement.click();
-
+			jsClickNew(selectElement);
+			
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			// ((IOSDriver)
-			// driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			// ((WebElement) ((IOSDriver)
-			// driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
 			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
-
 		}
+	}
+
+	public void iosDropDownSelection(String option) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("document.getElementsByClassName('uhc-select ng-pristine ng-valid').value =='" + option + "'");
 	}
 
 	// IOSElement picker= (IOSElement) new
 	// WebDriverWait(driver,60).until(ExpectedConditions.elementToBeClickable(By.xpath("//XCUIElementTypePickerWheel")));
 	// picker.setValue(option);
+
+	// ((IOSDriver)driver).findElement(MobileBy.className("UIAPickerWheel")).sendKeys(option);
+	// ((IOSElement)driver.findElement(By.xpath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATextField[7]"))).setValue(option);
+	// ((WebElement) ((IOSDriver)
+	// driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
+	// ((IOSDriver)driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
 
 	public void clickTextIOSNative(String text) {
 		String curHandle = ((IOSDriver) driver).getContext();
