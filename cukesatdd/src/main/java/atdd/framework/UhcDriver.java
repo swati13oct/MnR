@@ -658,8 +658,8 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		// jsClickNew(Element);
-		Element.click();
+		jsClickNew(Element);
+		//Element.click();
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
