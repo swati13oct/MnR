@@ -1,7 +1,7 @@
 @PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommendation Engine
 
-  @PRE @planrecommendation @zipcodepage @siglecounty @F372735 @F511315 @F591750
+  @PRE @planrecommendation @zipcodepage @siglecounty @F372735 @F511315
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultutiCounty> - To validate Single County in ZipCode Page in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
