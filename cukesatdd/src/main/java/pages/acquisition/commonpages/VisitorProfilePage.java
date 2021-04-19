@@ -36,7 +36,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign In']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
 	private WebElement signIn;
 	
 	@FindBy(css = "div.signupCTA a.signin-font")
