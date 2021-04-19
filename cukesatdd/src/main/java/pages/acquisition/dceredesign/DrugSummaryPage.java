@@ -1207,7 +1207,7 @@ public class DrugSummaryPage extends UhcDriver {
     		switchToNewTabNew(ExtraHelpLink);
     		CommonUtility.checkPageIsReadyNew(driver);
     		if(driver.getCurrentUrl().contains("extra-help")){
-    			WebElement ExtraHelpText = driver.findElement(By.xpath("//h2[contains(text(),'Extra Help')]"));
+    			WebElement ExtraHelpText = driver.findElement(By.xpath("(//h2//*[contains(text(),'Extra Help')])[1]"));
                 validateNew(ExtraHelpText);
                 System.out.println("Extra Help page is displayed");
     		}
