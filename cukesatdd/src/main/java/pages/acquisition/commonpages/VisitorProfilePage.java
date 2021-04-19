@@ -173,10 +173,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='saved-drugs']/../a[contains(text(),'Edit Your Drugs and Pharmacy')]")
 	public WebElement editDrugsGlobal;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign In']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
 	public WebElement loginLink;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign Out']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	public WebElement signOutLink;
 
 	@FindBy(xpath = "//button[@aria-expanded='true']/..//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove drug']")
