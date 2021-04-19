@@ -3265,7 +3265,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Hover over Learn about Medicare completed");
 		}
 		WebElement PresProvidersBenefitsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+				By.xpath("//*[contains(@id, 'learnmore-scroll')]//*[contains(@class, 'desktop')]//a[contains(@href,'medicare-benefits')]"));
 		jsClickNew(PresProvidersBenefitsLink);
 		waitForPageLoadSafari();
 	}
