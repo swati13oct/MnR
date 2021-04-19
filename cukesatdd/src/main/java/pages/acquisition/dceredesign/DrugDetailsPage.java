@@ -243,7 +243,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "optumRxTxt")
 	public WebElement optumRxMsg;
 
-	@FindBy(xpath = "//*[@role='list']")
+	@FindBy(xpath = "//*[@role='tabpanel' or @role='list']")
 	public WebElement pharmacyListSection;
 
 	@FindBy(id = "matchingLbl")
@@ -936,6 +936,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugDetails_ChangePharmacyLnk);
 		jsClickNew(DrugDetails_ChangePharmacyLnk);
 		CommonUtility.waitForPageLoadNew(driver, pharmacyZipcodeSearch, 20);
+		validateSelectPharmacyPage();
 	}
 
 
@@ -1109,7 +1110,7 @@ public class DrugDetailsPage extends UhcDriver {
 		saveDrugBtn.click();
 	}
 
-	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'Select Preferred Mail Service Pharmacy')]")
+	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'Select OptumRx Mail Service Pharmacy')]")
 	public WebElement MailPharmacy;
 
 	public void SelectMailPharmacy() {
@@ -2032,4 +2033,62 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(StageInfo_Modal_DoneBtn);
 		
 	}
+	/*
+	 * Adding code for Pharmacy filter validation
+	 */
+
+	@FindBy(xpath = "//label[contains(@for, 'pharmacy-name-filter')]")
+	public WebElement PharmacyFilterLabel;
+	
+	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
+	public WebElement PharmacyFilterTxtBx;
+
+	@FindBy(xpath = "//button[contains(@dtmname, 'search')]/*[contains(text(), 'Apply')]")
+	public WebElement PharmacyFilterApplyBtn;
+	
+	@FindBy(xpath = "//*[contains(@class, 'inputGroup')]/button/img")
+	public WebElement PharmacyFilterClearTextX;
+
+	@FindBy(xpath = "//*[contains(@id, 'filterError')]")
+	public WebElement PharmacyFilterErrorMsg;
+
+	public void validatePharmacyFilterErrormessage() {
+		validateNew(PharmacyFilterLabel);
+		validateNew(PharmacyFilterTxtBx);
+		validateNew(PharmacyFilterApplyBtn);
+		PharmacyFilterTxtBx.sendKeys("a");
+		System.out.println("FIlter text entered : a");
+		validateNew(PharmacyFilterClearTextX);
+		System.out.println("X button for Filter text clearing is Displayed");
+		jsClickNew(PharmacyFilterClearTextX);
+		System.out.println("Clear Text is clicked for Pharmacy Filter");
+		Assert.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<", PharmacyFilterTxtBx.getText().isEmpty());
+	}
+
+	public void validateXcleartextPharmacyFilter() {
+		validateNew(PharmacyFilterApplyBtn);
+		jsClickNew(PharmacyFilterApplyBtn);
+		System.out.println("Apply button clicked for Blank filter text");
+		validateNew(PharmacyFilterErrorMsg);
+		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
+		Assert.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
+	}
+
+	public void ApplyPharmacyFilter(String filterText) {
+		validateNew(PharmacyFilterTxtBx);
+		PharmacyFilterTxtBx.clear();
+		PharmacyFilterTxtBx.sendKeys(filterText);
+		System.out.println("FIlter text entered : "+filterText);
+		validateNew(PharmacyFilterApplyBtn);
+		jsClickNew(PharmacyFilterApplyBtn);
+		System.out.println("Apply button clicked for filter text"+filterText);
+		for (WebElement PharmacyName : pharmacyNameList) {
+			System.out.println("Pharmacy Name : "+PharmacyName.getText());
+			if(!PharmacyName.getText().contains(filterText)) {
+				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "+PharmacyName+ "  Filter Text : "+filterText);
+			}
+		}
+		System.out.println("All Pharmacy have filter text");
+	}
+
 }
