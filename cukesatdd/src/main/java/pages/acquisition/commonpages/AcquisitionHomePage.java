@@ -3295,7 +3295,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Hover over Shop for a Plan completed");
 		}
 		WebElement PDPplansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+				"//*[contains(@class, 'desktop')]//*[contains(@dtmid,'acq_top_nav')and contains(@href,'prescription-drug-plans.html')]"));
 		jsClickNew(PDPplansLink);
 		waitForPageLoadSafari();
 	}
