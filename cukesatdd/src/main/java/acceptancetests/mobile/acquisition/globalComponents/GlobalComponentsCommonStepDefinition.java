@@ -191,6 +191,7 @@ public class GlobalComponentsCommonStepDefinition {
 	
 	@When("^user vaidates the state drop down link on the home page$")
 	public void user_vaidates_the_state_drop_down_link_on_home_page() throws Throwable {
+		
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateStateDropDown();

@@ -301,8 +301,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
-	// @FindBy(xpath = "//select[@id='state-select']")
-	@FindBy(css = "#state-select")
+	@FindBy(xpath = "//select[@id='state-select']")
+	//@FindBy(css = "#state-select")
 	private WebElement stateDropDown;
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
@@ -1840,13 +1840,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 */
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
-		Actions action = new Actions(driver);
-		// action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		jsMouseOver(navigationSectionHomeLink);
-		jsMouseOver(ourPlansHoverLink);
+		
 		MobileMenuShopTool();
 		scrollToView(providerSearchFromGlobalHeader);
-		// providerSearchFromGlobalHeader.click();
+	    
 
 		switchToNewTabNew(providerSearchFromGlobalHeader);
 
@@ -2222,7 +2219,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateStateDropDown() {
 		scrollToView(stateDropDown);
 		validateNew(stateDropDown);
-		selectFromDropDownByValue(stateDropDown, "California");
+		//selectFromDropDownByValue(stateDropDown, "California");
+		mobileSelectOption(stateDropDown, "California", true);
 		String StateSessionStorage = returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
 		System.out.println("State selected : California");
 		System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
@@ -3483,6 +3481,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void clickVisitAARPHeaderLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			scrollToView(visitAARPLink);
 			jsClickNew(visitAARPHeaderLink);
 			proceedToLeaveAARP();
 			if (!driver.getCurrentUrl().contains("aarp.org"))

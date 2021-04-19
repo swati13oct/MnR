@@ -12,6 +12,7 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.maven.model.Build;
 import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -563,6 +564,10 @@ public abstract class UhcDriver {
 				// TouchAction((AppiumDriver)driver).tap(TapOptions.tapOptions().withElement((ElementOption)
 				// element)).perform();
 
+				// Actions builder = new Actions((IOSDriver)driver);
+				// builder.moveToElement(element).click(element);
+				// builder.perform();
+
 			}
 		}
 
@@ -658,8 +663,9 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		jsClickNew(Element);
-		// Element.click();
+		// jsClickNew(Element);
+		Element.click();
+
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -1199,13 +1205,13 @@ public abstract class UhcDriver {
 			element.selectByVisibleText(option);
 		} else {
 
-			 String curHandle = ((IOSDriver) driver).getContext();
-			 System.out.println("curHandle - " + curHandle);
-			 System.out.println(((IOSDriver) driver).getContextHandles());
+			String curHandle = ((IOSDriver) driver).getContext();
+			System.out.println("curHandle - " + curHandle);
+			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
 
-			jsClickNew(selectElement);
-			
+				jsClickNew(selectElement);
+
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
@@ -1216,10 +1222,18 @@ public abstract class UhcDriver {
 		}
 	}
 
+	/*
+	 * Created By : Harshal Ahire
+	 * 
+	 * @Params: dorpdown option
+	 ** 
+	 * To select value in dropdpwn via JsScript in IOS device
+	 *****/
 	public void iosDropDownSelection(String option) {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("document.getElementsByClassName('uhc-select ng-pristine ng-valid').value =='" + option + "'");
+		js.executeScript(
+				"document.getElementsByClassName('uhc-select ng-pristine ng-valid').value =='" + option + "';");
 	}
 
 	// IOSElement picker= (IOSElement) new

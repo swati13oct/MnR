@@ -21,7 +21,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
-
 /**
  * @author pperugu
  *
@@ -71,11 +70,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@text(),'View Saved')]")
 	private WebElement EditSavedButton;
 
-	@FindBy(xpath="//span[contains(text(),'Saved')]")
+	@FindBy(xpath = "//span[contains(text(),'Saved')]")
 	private WebElement ViewSavedProvidersLink;
 
-	//@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
-	@FindBy(xpath = "//label[contains(@id,'unsaved_selectedLocation0')]")
+	// @FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
+	@FindBy(xpath = "//div[@ng-bind-html='::(tab.mobileTitle || tab.title)'][normalize-space()='Locations']")
 	private WebElement selectLocationOption;
 
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
@@ -114,7 +113,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'action-btn negative print')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(xpath = "//span[contains(@ng-switch-when, 'false') and (text()='Save')]")
+	@FindBy(xpath = "//button[@class='saved-provider-button negative']//span[contains(text(),'Save')]")
 	private WebElement saveBtn2;
 
 	@FindBy(xpath = "//button[text()='Cancel']//following-sibling::button")
@@ -378,7 +377,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		validateNew(zipCodeTextfield);
 		zipCodeTextfield.sendKeys(zipcode);
 		validateNew(continueButton);
-		continueButton.click();
+		// continueButton.click();
+		jsClickNew(continueButton);
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
 				currentYrTile.click();
@@ -389,9 +389,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			if (validate(nextYrTile))
 				nextYrTile.click();
 		}
-		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]"));
+		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]"));
 		validateNew(planNameToBeSelected);
-		planNameToBeSelected.click();
+		// planNameToBeSelected.click();
+		jsClickNew(planNameToBeSelected);
 		// TODO Auto-generated method stub
 
 	}
@@ -412,51 +413,56 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	public void selectsProviderFromGlobaHeader() {
 		pageloadcomplete();
 
-		//CommonUtility.waitForPageLoadNew(driver, People, 30);
+		// CommonUtility.waitForPageLoadNew(driver, People, 30);
 		scrollToView(People);
 		jsClickNew(People);
-		//People.click();
+		// People.click();
 
-		//CommonUtility.waitForPageLoadNew(driver, Primary, 30);
+		// CommonUtility.waitForPageLoadNew(driver, Primary, 30);
 		scrollToView(Primary);
 		jsClickNew(Primary);
-		//Primary.click();
+		// Primary.click();
 
-		//CommonUtility.waitForPageLoadNew(driver, Physician, 30);
+		// CommonUtility.waitForPageLoadNew(driver, Physician, 30);
 		scrollToView(Physician);
 		jsClickNew(Physician);
-		//Physician.click();
+		// Physician.click();
 
-		//CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
+		// CommonUtility.waitForPageLoadNew(driver, PrimaryCarePhysician, 30);
 		scrollToView(PrimaryCarePhysician);
 		jsClickNew(PrimaryCarePhysician);
-		//PrimaryCarePhysician.click();
+		// PrimaryCarePhysician.click();
 
 		// CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 45);
 		scrollToView(selectProviderBtn);
 		jsClickNew(selectProviderBtn);
 
-
 		if (validate(selectLocationOption)) {
-			selectLocationOption.click();
-			validateNew(saveBtn2);
-			saveBtn2.click();
+			//selectLocationOption.click();
+			jsClickNew(selectLocationOption);
+			scrollToView(saveBtn2);
+			//saveBtn2.click();
+			jsClickNew(saveBtn2);
+			// }
+
+			if (driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
+				// ViewsaveOldbtn.click();
+				jsClickNew(ViewsaveOldbtn);
+			else if (driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0) {
+				// Viewsavebtn.click();
+				jsClickNew(Viewsavebtn);
+				if (driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0) {
+					// ViewSavedProvidersLink.click();
+					jsClickNew(ViewSavedProvidersLink);
+				} else
+					System.out.println("New Rally page not displayed");
+
+			}
+			// CommonUtility.waitForPageLoadNew(driver, PrintEmailBtn, 30);
+			// validateNew(providerCard);
+			scrollToView(PrintEmailBtn);
+			validateNew(PrintEmailBtn);
 		}
-	
-		if(driver.findElements(By.xpath("//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-			ViewsaveOldbtn.click();
-		else if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).size() > 0){
-			Viewsavebtn.click();
-		if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).size() > 0){
-			ViewSavedProvidersLink.click();
-		}
-		else
-			System.out.println("New Rally page not displayed");
-		 
-		}
-		//CommonUtility.waitForPageLoadNew(driver, PrintEmailBtn, 30);
-		//validateNew(providerCard);
-		validateNew(PrintEmailBtn);
 	}
 
 	/*
@@ -560,6 +566,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
 	}
+
 	public AcquisitionHomePageMobile returnToAcqHomePage() {
 		// TODO Auto-generated method stub
 		driver.close();

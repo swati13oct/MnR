@@ -237,6 +237,7 @@ public class SiteSearchMobile {
 			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
+			
 
 		}
 	}

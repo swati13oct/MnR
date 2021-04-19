@@ -1685,8 +1685,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			}
 		}
 		return plansForCompare;
-		
-		
+
 	}
 
 	public boolean validateAllPlansChecked(String plansForCompare) {
@@ -2420,7 +2419,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else
 			Assert.fail("Unable to load Myuhcagent Page");
 	}
-
 
 	public void validateMedicareGuideRightRail() {
 		validateNew(MedicareGuideRightRail);
@@ -4825,13 +4823,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<WebElement> compareLinks = driver
-					.findElements(By.xpath("//label[@for='compare-plan-1']"));
+			List<WebElement> compareLinks = driver.findElements(By.xpath("//label[@for='compare-plan-1']"));
 			moveMouseToElement(compareLinks.get(1));
 			compareLinks.get(1).click();
 		} else {
-			WebElement compareLinks2 = driver
-					.findElement(By.xpath("//label[@for='compare-plan-2']"));
+			WebElement compareLinks2 = driver.findElement(By.xpath("//label[@for='compare-plan-2']"));
 			// compareLinks2.click();
 			jsClickMobile(compareLinks2);
 		}
@@ -4843,8 +4839,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			e.printStackTrace();
 
 		}
-		//if (currentUrl().contains("/health-plans.html#/plan-compare"))
-			if (currentUrl().contains("/health-plans.html#/plan-summary"))
+		// if (currentUrl().contains("/health-plans.html#/plan-compare"))
+		if (currentUrl().contains("/health-plans.html#/plan-summary"))
 			return new ComparePlansPageMobile(driver);
 		return null;
 	}
@@ -4883,7 +4879,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public WebElement changeZipCodeLink;
 
 	public GetStartedPageMobile navigateToDCERedesignFromVPPPlanCard(String plantype, String planName) {
-		
+
 		if (plantype.equals("MA") || plantype.equals("MAPD") || plantype.equalsIgnoreCase("SNP")) {
 			WebElement dceLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide plan-card')]//descendant::a[contains(@class,'add-drug')]"));
@@ -4942,6 +4938,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("#/details")) {
 			return new PlanDetailsPageMobile(driver, planType);
+
 		}
 		return null;
 	}
@@ -5252,8 +5249,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new pages.mobile.acquisition.commonpages.ComparePlansPageMobile(driver);
 		return null;
-		
-		
 
 	}
 
