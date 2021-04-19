@@ -36,6 +36,7 @@ import org.openqa.selenium.interactions.Keyboard;
 import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -599,10 +600,15 @@ public abstract class UhcDriver {
 			// TouchAction ta = new TouchAction((AppiumDriver)driver);
 			// ta.moveTo(moveToOptions)
 
-			Actions ac = new Actions(driver);
+			/*Actions ac = new Actions(driver);
 			ac.moveToElement(element);
 			// backToTop.isDisplayed();
-			System.out.println("Scroll finished to element on IOS device");
+			System.out.println("Scroll finished to element on IOS device");*/
+			
+			JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+	        javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+			
+			
 
 		} else {
 			try {
@@ -1223,10 +1229,10 @@ public abstract class UhcDriver {
 	}
 
 	/*
-	 * Created By : Harshal Ahire
+	 * @author : Harshal Ahire
 	 * 
 	 * @Params: dorpdown option
-	 ** 
+	 *
 	 * To select value in dropdpwn via JsScript in IOS device
 	 *****/
 	public void iosDropDownSelection(String option) {
@@ -1234,6 +1240,12 @@ public abstract class UhcDriver {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
 				"document.getElementsByClassName('uhc-select ng-pristine ng-valid').value =='" + option + "';");
+	}
+	
+
+	public void iosScroll(WebElement element) {
+		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+        javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
 	// IOSElement picker= (IOSElement) new

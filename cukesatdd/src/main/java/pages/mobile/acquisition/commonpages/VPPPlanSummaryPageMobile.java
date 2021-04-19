@@ -1679,6 +1679,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (allMAPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
+				iosScroll(allMAPlans.get(i));
 				jsClickNew(allMAPlans.get(i));
 				// allMAPlans.get(i).click();
 				System.out.println("Plan added to compare : " + i);
@@ -1905,7 +1906,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (allPDPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
-				// allPDPlans.get(i).click();
+				iosScroll(allPDPlans.get(i));
 				jsClickNew(allPDPlans.get(i));
 				System.out.println("Plan added to compare : " + i);
 			}
@@ -5243,7 +5244,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public pages.mobile.acquisition.commonpages.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
 		// TODO Auto-generated method stub
-
+		iosScroll(firstComparePlanButton);
 		jsClickNew(firstComparePlanButton);
 		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
