@@ -221,6 +221,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	//@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
 //	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
 	//@FindBy(xpath = "(//button[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
+	//@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]"
 	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
@@ -3639,7 +3640,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //					System.out.println("Submit button is displayed");
 		}
 		WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
-		WebElement FindPlansBtn = driver.findElement(By.xpath("//button//span[text()='Find Plans']"));
+		WebElement FindPlansBtn = driver.findElement(By.xpath("//button[text()='Find Plans']"));
 		WebElement RequestMoreInfoLink = driver
 				.findElement(By.xpath("//a[text()='Request More Help and Information']"));
 		WebElement EnrollLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
@@ -4221,7 +4222,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
 					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			assertTrue(invalidSearch.contains("Your search - \"" + newSearchValue + "\" - did not match any documents."));
+			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
 			// assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
