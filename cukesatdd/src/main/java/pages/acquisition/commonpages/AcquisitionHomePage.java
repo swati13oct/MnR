@@ -3272,7 +3272,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
 		WebElement DCELink = driver.findElement(By
-				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
+				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
 		validateNew(DCELink);
 		jsClickNew(DCELink);
 		if (validateNew(AddMyDrugsBtn))

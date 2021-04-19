@@ -133,77 +133,77 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement MonthlyDrug_PlanPay_heading;
 	@FindBy(xpath = "//div[@id='monthlycostdetails']//th[contains(text(), 'You Pay')]")
 	public WebElement MonthlyDrug_YouPay_heading;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 1']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'January']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month1;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 1']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'January']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month1;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 1']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'January']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month1;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 2']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'February']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month2;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 2']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'February']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month2;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 2']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'February']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month2;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 3']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'March']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month3;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 3']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'March']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month3;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 3']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'March']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month3;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 4']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'April']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month4;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 4']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'April']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month4;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 4']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'April']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month4;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 5']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'May']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month5;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 5']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'May']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month5;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 5']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'May']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month5;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 6']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'June']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month6;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 6']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'June']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month6;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 6']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'June']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month6;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 7']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'July']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month7;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 7']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'July']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month7;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 7']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'July']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month7;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 8']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'August']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month8;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 8']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'August']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month8;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 8']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'August']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month8;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 9']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'September']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month9;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 9']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'September']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month9;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 9']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'September']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month9;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 10']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'October']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month10;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 10']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'October']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month10;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 10']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'October']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month10;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 11']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'November']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month11;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 11']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'November']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month11;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 11']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'November']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month11;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 12']//following-sibling::td[contains(text(), '$')][1]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'December']//following-sibling::td[contains(text(), '$')][1]")
 	public WebElement MonthlyDrug_TotalDrugPrice_month12;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 12']//following-sibling::td[contains(text(), '$')][2]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'December']//following-sibling::td[contains(text(), '$')][2]")
 	public WebElement MonthlyDrug_PlanPay_month12;
-	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'Month 12']//following-sibling::td[contains(text(), '$')][3]")
+	@FindBy(xpath = "//div[@id='monthlycostdetails']//tr//td[text()= 'December']//following-sibling::td[contains(text(), '$')][3]")
 	public WebElement MonthlyDrug_YouPay_month12;
 	@FindBy(xpath = "//*[name()='svg' and @class='monthly-cost-details-chart']//*[local-name()='g']//*[local-name()='rect'][1]")
 	public WebElement Graph_svg;
