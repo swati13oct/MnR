@@ -3266,17 +3266,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Hover over Learn about Medicare completed");
 		}
 		WebElement PresProvidersBenefitsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+				By.xpath("//*[contains(@id, 'learnmore-scroll')]//*[contains(@class, 'desktop')]//a[contains(@href,'medicare-benefits')]"));
 		jsClickNew(PresProvidersBenefitsLink);
 		waitForPageLoadSafari();
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
 		WebElement DCELink = driver.findElement(By
-				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
-		validateNew(DCELink);
-		jsClickNew(DCELink);
-		if (validateNew(AddMyDrugsBtn))
+				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
+		String winHandleBefore = driver.getWindowHandle();
+		switchToNewTabNew(DCELink);
+		String winHandleCurrent = driver.getWindowHandle();
+		driver.switchTo().window(winHandleBefore);
+		driver.close();
+		driver.switchTo().window(winHandleCurrent);
+		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 20);
+		if (driver.getCurrentUrl().contains("drug-cost-estimator"))
 			return new GetStartedPage(driver);
 		return null;
 	}
