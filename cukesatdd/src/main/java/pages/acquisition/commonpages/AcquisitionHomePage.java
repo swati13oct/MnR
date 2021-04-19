@@ -222,7 +222,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	//@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
 //	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
 	//@FindBy(xpath = "(//button[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
-	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	//@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]"
+	@FindBy(xpath = "(//button[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -3635,7 +3636,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //					System.out.println("Submit button is displayed");
 		}
 		WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
-		WebElement FindPlansBtn = driver.findElement(By.xpath("//button//span[text()='Find Plans']"));
+		WebElement FindPlansBtn = driver.findElement(By.xpath("//button[text()='Find Plans']"));
 		WebElement RequestMoreInfoLink = driver
 				.findElement(By.xpath("//a[text()='Request More Help and Information']"));
 		WebElement EnrollLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
@@ -6188,21 +6189,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("State is: " + state);
 			System.out.println("Code is: " + code);
 			System.out.println("Medicare Supplement Url is: " + MedSuppClassicUrl.getAttribute("href"));
-			assertTrue(
+			Assert.assertTrue(
 					MedSuppClassicUrl.getAttribute("href").contains(classicStates));
 			String CurrentURL = driver.getCurrentUrl();
 			System.out.println("Current URL : " + CurrentURL);
-			assertTrue(CurrentURL.contains(classicStates));
+			Assert.assertTrue(CurrentURL.contains(classicStates));
 		} else {
 			validate(stateDropDown);
 			validate(MedicareSuppUrl);
 			System.out.println("State is: " + state);
 			System.out.println("Code is: " + code);
 			System.out.println("Medicare Supplement Url is: " + MedicareSuppUrl.getAttribute("href"));
-			assertTrue(MedicareSuppUrl.getAttribute("href").contains(AllStates));
+			Assert.assertTrue(MedicareSuppUrl.getAttribute("href").contains(AllStates));
 			String CurrentURL = driver.getCurrentUrl();
 			System.out.println("Current URL : " + CurrentURL);
-			assertTrue(CurrentURL.contains(AllStates));
+			Assert.assertTrue(CurrentURL.contains(AllStates));
 		}
 	}
 	

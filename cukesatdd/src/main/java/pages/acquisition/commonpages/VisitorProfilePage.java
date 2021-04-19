@@ -121,7 +121,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
 	public WebElement drugGetStarted;
 
-	@FindBy(xpath = "//p[contains(@class,'items-count')]//a[contains(text(),'Drugs')]")
+	@FindBy(xpath = "//a[contains(@class,'items')]//span[contains(text(),'Drugs')]")
 	public WebElement drugHeader;
 
 	@FindBy(css = "h3#saved-drugs")
@@ -172,10 +172,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='saved-drugs']/../a[contains(text(),'Edit Your Drugs and Pharmacy')]")
 	public WebElement editDrugsGlobal;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign In']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
 	public WebElement loginLink;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign Out']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	public WebElement signOutLink;
 
 	@FindBy(xpath = "//button[@aria-expanded='true']/..//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove drug']")
@@ -275,11 +275,11 @@ public class VisitorProfilePage extends UhcDriver {
 			Assertion.assertTrue(drugname.getText().trim().contains(drug));
 		} else {
 			CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-			Assertion.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
+			Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", drugHeader.getText().trim());
 			jsClickNew(drugHeader);
 			Assertion.assertTrue(drugName.getText().trim().contains(drug));
-			Assertion.assertEquals("Drugs (1) / Pharmacy", savedDrugsHeader.getText().trim());
-			Assertion.assertEquals("Saved Drugs (1) / Pharmacy and Doctors/Providers (0)",
+			Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
+			Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
 					savedDrugsAndDoctorsHeader.getText().trim());
 			Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		}
