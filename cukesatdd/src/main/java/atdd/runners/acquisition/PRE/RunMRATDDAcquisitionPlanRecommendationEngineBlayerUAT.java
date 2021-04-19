@@ -25,7 +25,7 @@ import cucumber.api.CucumberOptions;
 		glue = { "atdd.framework", "acceptancetests.acquisition.planRecommendationEngine" }, 
 		features = { "src/main/resources/feature/acquisition/PlanRecommendationEngine" }, 
 		plugin = {"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineBlayerUAT.json" }, 
-		tags = {"@F583139"})
+		tags = {"@F591750"})
 public class RunMRATDDAcquisitionPlanRecommendationEngineBlayerUAT {
 
 }
