@@ -36,7 +36,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign In']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
 	private WebElement signIn;
 	
 	@FindBy(css = "div.signupCTA a.signin-font")
@@ -122,7 +122,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
 	public WebElement drugGetStarted;
 
-	@FindBy(xpath = "//p[contains(@class,'items-count')]//a[contains(text(),'Drugs')]")
+	@FindBy(xpath = "//a[contains(@class,'items')]//span[contains(text(),'Drugs')]")
 	public WebElement drugHeader;
 
 	@FindBy(css = "h3#saved-drugs")
@@ -173,10 +173,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='saved-drugs']/../a[contains(text(),'Edit Your Drugs and Pharmacy')]")
 	public WebElement editDrugsGlobal;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign In']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
 	public WebElement loginLink;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign Out']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	public WebElement signOutLink;
 
 	@FindBy(xpath = "//button[@aria-expanded='true']/..//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove drug']")
@@ -276,11 +276,11 @@ public class VisitorProfilePage extends UhcDriver {
 			Assert.assertTrue(drugname.getText().trim().contains(drug));
 		} else {
 			CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-			Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
+			Assert.assertEquals("Your Saved Drugs (1) & Pharmacy", drugHeader.getText().trim());
 			jsClickNew(drugHeader);
 			Assert.assertTrue(drugName.getText().trim().contains(drug));
-			Assert.assertEquals("Drugs (1) / Pharmacy", savedDrugsHeader.getText().trim());
-			Assert.assertEquals("Saved Drugs (1) / Pharmacy and Doctors/Providers (0)",
+			Assert.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
+			Assert.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
 					savedDrugsAndDoctorsHeader.getText().trim());
 			Assert.assertTrue(pharmacyAddress.isDisplayed());
 		}
