@@ -3,10 +3,18 @@
  */
 package pages.acquisition.ole;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -96,7 +104,13 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[@id='ole-form-content']//a[contains(@href,'pharmacy.html')]")
 	private WebElement pharmacyLink;
-		
+	
+	@FindBy(xpath = "//a[contains(text(),'Enrollment Checklist - English (PDF)')]")
+	private WebElement EnrollmentChecklistLink;
+	
+	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
+	private WebElement ListaVerificationLink;
+	
 	public WelcomePage(WebDriver driver) {
 		
 		super(driver);
@@ -365,4 +379,107 @@ public MedicareInformationPage navigate_to_medicare_info_page() {
 		}
 		return null;
 	}
+	
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	
+	
+public void ValidateFooterEnrollmentChecklistLink()  throws InterruptedException, IOException{
+		
+	validateNew(EnrollmentChecklistLink);
+	CommonUtility.waitForPageLoadNew(driver, EnrollmentChecklistLink, 30);
+	String parentWindow = driver.getWindowHandle();
+	jsClickNew(EnrollmentChecklistLink);
+	sleepBySec(3);
+	Set<String> tabs_windows = driver.getWindowHandles();
+	Iterator<String> itr = tabs_windows.iterator();
+	while (itr.hasNext()) {
+		String window = itr.next();
+		if (!parentWindow.equals(window)) {
+			driver.switchTo().window(window);
+			break;
+		}
+	}
+
+			URL TestURL = new URL(driver.getCurrentUrl());
+			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+			PDDocument document = PDDocument.load(TestFile);
+			/*PDFParser TestPDF = new PDFParser(document);
+			TestPDF.parse();*/
+			String PDFText = new PDFTextStripper().getText(document);
+			 String ExpectedPDFText = "Enrollment Checklist";
+			 String ExpectedPDFText1 = "Understanding the Benefits";
+			 String ExpectedPDFText2 = "Understanding Important Rules";
+				if(PDFText.contains(ExpectedPDFText) && PDFText.contains(ExpectedPDFText1) && PDFText.contains(ExpectedPDFText2)){
+				 System.out.println("PASSED - PDF : text contains expected Document code : "+ExpectedPDFText);
+			 }
+			 else{
+				 System.out.println("FAILED - PDF: text DOES NOT contains expected Document code : "+ExpectedPDFText);
+				 if(PDFText.contains("PDF coming soon")) {
+					
+			 }
+			 }
+		
+		driver.close();
+		driver.switchTo().window(parentWindow);
+		
+	}
+
+public void ValidateFooterListaVerificationLink() throws InterruptedException, IOException {
+	
+	validateNew(ListaVerificationLink);
+	CommonUtility.waitForPageLoadNew(driver, ListaVerificationLink, 30);
+	String parentWindow = driver.getWindowHandle();
+	jsClickNew(ListaVerificationLink);
+	sleepBySec(3);
+	Set<String> tabs_windows = driver.getWindowHandles();
+	Iterator<String> itr = tabs_windows.iterator();
+	while (itr.hasNext()) {
+		String window = itr.next();
+		if (!parentWindow.equals(window)) {
+			driver.switchTo().window(window);
+			break;
+		}
+	}
+
+	//	try {
+			URL TestURL = new URL(driver.getCurrentUrl());
+			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+			PDDocument document = PDDocument.load(TestFile);
+			/*PDFParser TestPDF = new PDFParser(document);
+			TestPDF.parse();*/
+			String PDFText = new PDFTextStripper().getText(document);
+			 String ExpectedPDFText = "Lista de Verificaci6n de lnscripci6n";
+			 String ExpectedPDFText1 = "Explicaci6n de los beneficios";
+			 String ExpectedPDFText2 = "Explicaci6n de las reglas importantes";
+			if(PDFText.contains(ExpectedPDFText) && PDFText.contains(ExpectedPDFText1) && PDFText.contains(ExpectedPDFText2)){
+				 System.out.println("PASSED - PDF : text contains expected Document code : "+ExpectedPDFText);
+				 Assert.assertTrue(true);
+			 }
+			 else{
+				 System.out.println("FAILED - PDF: text DOES NOT contains expected Document code : "+ExpectedPDFText);
+				 if(PDFText.contains("PDF coming soon")) {
+					
+					 Assert.fail("****************Lista Verification page is not loaded ***************");
+					
+			 }
+			 }
+	/*	} catch (MalformedURLException e) {
+			 System.out.println("FAILURE, Exception in Reading PDF");
+		} catch (IOException e) {
+			 System.out.println("FAILURE, Exception in Reading PDF");
+		}*/
+		driver.close();
+		driver.switchTo().window(parentWindow);
+		
+	}
+
 }

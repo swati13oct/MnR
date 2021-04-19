@@ -1,14 +1,14 @@
-
 @GlobalComponentsAARP
 Feature: 1.12 ACQ - Global Components Validation
-
 
   @globalfooterULayer
   Scenario Outline: To verify links displayed in the global footer of AARP site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user accesses global footer of the Medicare Plans All page
-    And user vaidates the state drop down link on the home page
+    When user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
     And user clicks on View all disclaimer information link on the home page
     And user verifies visit aarp.org link on home page
     And user clicks on Aboutus link from footer of the Medicare Plans home page
@@ -23,13 +23,13 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @globalfooter
     Examples: 
-      | site |
-      | AARP |
+      | site | state  | code |
+      | AARP | Alaska | AK   |
 
     @globalfooter
     Examples: 
-      | site |
-      | UHC  |
+      | site | state  | code |
+      | UHC  | Alaska | AK   |
 
   @globalheaderULayer
   Scenario Outline: To verify links displayed in the global header of AARP site
@@ -72,47 +72,49 @@ Feature: 1.12 ACQ - Global Components Validation
     # Then the user validates SAM re-active Chat
     @MedEdPages_1_GlobalCompsAARP
     Examples: 
-      | site | path                                                     | pageName                              | tfnXpath                                                             | tfnFlag |
-      | AARP | medicare-education.html                                  | Understanding Medicare                | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[@class='amp']//a[contains(@class, 'tel')]                        | true    |
-      | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                                     | pageName                              | tfnXpath                                                       | tfnFlag |
+      | AARP | medicare-education.html                                  | Understanding Medicare                | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-eligibility.html             | Medicare Eligibility                  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @MedEdPages_1_GlobalCompsUHC
     Examples: 
-      | site | path                                                     | pageName                                     | tfnXpath                                                             | tfnFlag |
-      | UHC  | medicare-education.html                                  | Understanding Medicare                       | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | UHC  | medicare-education/medicare-eligibility.html             | Medicare Eligibility                         | //*[@class='ums']//a[contains(@class, 'tel')]                        | true    |
-      | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices        | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | UHC  | medicare-education/medicare-benefits.html                | Medicare Prescriptions, Providers & Benefits | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                                     | pageName                                     | tfnXpath                                                       | tfnFlag |
+      | UHC  | medicare-education.html                                  | Understanding Medicare                       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-eligibility.html             | Medicare Eligibility                         | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-benefits.html                | Medicare Prescriptions, Providers & Benefits | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @MedEdPages_2_GlobalCompsAARP
     Examples: 
-      | site | path                                              | pageName                              | tfnXpath                                                             | tfnFlag |
-      | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |
-      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                              | pageName                              | tfnXpath                                                       | tfnFlag |
+      | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+			#|AARP| medicare-education/compare-ma-ms-plans.html|
 
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
-      | site | path                                              | pageName                            | tfnXpath                                                             | tfnFlag |
-      | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //div[contains(@class,'ums')]//a[contains(@class,'tel')]             | true    |
-      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                              | pageName                            | tfnXpath                                                       | tfnFlag |
+      | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+			#|UHC| medicare-education/compare-ma-ms-plans.html|
 
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
-      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //div[contains(@class,'amp')]//a[contains(@class,'tel')]             | true    |
-      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
+      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @MedEdPages_3_GlobalCompsUHC
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                             | tfnFlag |
-      | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //div[contains(@class,'ums')]//a[contains(@class,'tel')]             | true    |
-      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
-      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ               | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true    |
+      | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
+      | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Shop1_GlobalCompsAARP
     Examples: 
@@ -239,23 +241,23 @@ Feature: 1.12 ACQ - Global Components Validation
     # Replace any "#" chars in the deeplink with "!"
     @VPP_Deeplinks_GlobalCompsAARP
     Examples: 
-      | site | path                                                                                                                                                                                                                                                                                                                          | pageName               | tfnXpath                                               | tfnFlag |
-      | AARP | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD | //a[contains(@class, 'tel')]                           | true    |
-      | AARP | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details DSNP | //a[contains(@class, 'tel')]                           | true    |
-      | AARP | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  | //a[contains(@class, 'tel')]                           | true    |
-      | AARP | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | //a[contains(@class, 'tel')]                           | true    |
-      | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                           | false   |
+      | site | path                                                                                                                                                                                                                                                                                                                          | pageName               | tfnXpath                                                    | tfnFlag |
+      | AARP | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD | //a[contains(@class, 'tel')]                                | true    |
+      | AARP | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details DSNP | //a[contains(@class, 'tel')]                                | true    |
+      | AARP | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  | //a[contains(@class, 'tel')]                                | true    |
+      | AARP | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | //a[contains(@class, 'tel')]                                | true    |
+      | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                                | false   |
       | AARP | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
 
     # Replace any "#" chars in the deeplink with "!"
     @VPP_Deeplinks_GlobalCompsUHC
     Examples: 
-      | site | path                                                                                                                                                                                                                                                                                                                          | pageName               | tfnXpath                                               | tfnFlag |
-      | UHC  | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD | //a[contains(@class, 'tel')]                           | true    |
-      | UHC  | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details DSNP | //a[contains(@class, 'tel')]                           | true    |
-      | UHC  | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  | //a[contains(@class, 'tel')]                           | true    |
-      | UHC  | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | //a[contains(@class, 'tel')]                           | true    |
-      | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                           | false   |
+      | site | path                                                                                                                                                                                                                                                                                                                          | pageName               | tfnXpath                                                    | tfnFlag |
+      | UHC  | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD | //a[contains(@class, 'tel')]                                | true    |
+      | UHC  | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details DSNP | //a[contains(@class, 'tel')]                                | true    |
+      | UHC  | health-plans.html?zipcode=55344&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=S5921370000&planYear=2020&systemYear=2020&zipcode=55344&fipsCode=053&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details PDP  | //a[contains(@class, 'tel')]                                | true    |
+      | UHC  | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | //a[contains(@class, 'tel')]                                | true    |
+      | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | //a[contains(@class, 'tel')]                                | false   |
       | UHC  | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
 
     @MiscellaneousLinks_GlobalCompsAARP
@@ -531,7 +533,6 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | tfnXpath            | tfnFlag                                       |      | UHCUrl                      |
       | UHC  | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
 
-
   @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -600,7 +601,6 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources PDP Disenrollment  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | resources/disenrollment-information.html                                   | ShopPlan: Resources Disenrollment Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-
   @GlobalComponentsAARPPages
   Scenario Outline: To verify the components present on the Enroll page on the <site> site
     Given the user is on medicare acquisition site landing page
@@ -657,4 +657,47 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site |
       | UHC  |
+
+  Scenario Outline: To verify the Geo Targeting Link for Medicare Supplement Plans on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state>      |
+      | Code       | <code>       |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+    Then the user clicks on browser back button
+    When user updates the state drop down value on the home page
+      | State | <state1> |
+      | Code  | <code1>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state1>     |
+      | Code       | <code1>      |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+    Then the user clicks on browser back button
+    When user updates the state drop down value on the home page
+      | State | <state2> |
+      | Code  | <code2>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state2>     |
+      | Code       | <code2>      |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+
+    @GeoTarget_MedSup_GlobalCompsAARP
+    Examples: 
+      | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
+      | AARP | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
+
+    @GeoTarget_MedSup_GlobalCompsUHC
+    Examples: 
+      | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
+      | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
 

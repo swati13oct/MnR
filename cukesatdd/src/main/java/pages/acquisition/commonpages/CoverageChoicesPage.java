@@ -79,40 +79,59 @@ public class CoverageChoicesPage extends GlobalWebElements {
 	
 
 	public void checkCoverageDropdownAB() {
-		WebElement dropDownA=driver.findElement(By.xpath("//h3[contains(text(),'Original Medicare Part A: Hospital coverage')]"));
+		WebElement dropDownA=driver.findElement(By.xpath("//span[contains(text(),'Original Medicare Part A: Hospital coverage')]"));
 		scrollToView(dropDownA);
 		validateNew(dropDownA);
 		jsClickNew(dropDownA);
 		System.out.println("Original Medicare Part A: Hospital coverage DropDown Clicked" );
+		sleepBySec(2);
 		jsClickNew(dropDownA);
-		WebElement dropDownB=driver.findElement(By.xpath("//h3[contains(text(),'Original Medicare Part B: Medical coverage')]"));
+		WebElement dropDownB=driver.findElement(By.xpath("//span[contains(text(),'Original Medicare Part B: Medical coverage')]"));
 		scrollToView(dropDownB);
 		validateNew(dropDownB);
 		jsClickNew(dropDownB);
 		System.out.println("Original Medicare Part B: Medical coverage DropDown Clicked");
+		sleepBySec(2);
 		jsClickNew(dropDownB);		
 	}
 
 	public void checkPlanDropDowns() {
-		WebElement dropDownMA=driver.findElement(By.xpath("//h3[contains(text(),'Medicare Advantage (Part C)')]"));
+		WebElement dropDownMA=driver.findElement(By.xpath("//span[contains(text(),'Medicare Advantage (Part C) plans:')]"));
 		scrollToView(dropDownMA);
 		validateNew(dropDownMA);
 		jsClickNew(dropDownMA);
 		System.out.println("Medicare Advantage Plan DropDown Clicked" );
+		sleepBySec(2);
 		jsClickNew(dropDownMA);
-		WebElement dropDownSNP=driver.findElement(By.xpath("//h3[contains(text(),'Special Needs Plans (SNPs)')]"));
+		WebElement dropDownSNP=driver.findElement(By.xpath("//span[contains(text(),'Special Needs Plans (SNPs):')]"));
 		scrollToView(dropDownSNP);
 		validateNew(dropDownSNP);
 		jsClickNew(dropDownSNP);
 		System.out.println("SNP DropDown Clicked");
+		sleepBySec(2);
 		jsClickNew(dropDownSNP);
-		WebElement dropDownPDP=driver.findElement(By.xpath("//h3[contains(text(),'Prescription Drug')]"));
+		WebElement dropDownPDP=driver.findElement(By.xpath("//span[contains(text(),'Prescription Drug (Part D) plans:')]"));
 		scrollToView(dropDownPDP);
 		validateNew(dropDownPDP);
 		jsClickNew(dropDownPDP);
 		System.out.println("PDP DropDown Clicked");
+		sleepBySec(2);
 		jsClickNew(dropDownPDP);
-		
+		WebElement dropDownMedSup=driver.findElement(By.xpath("//span[contains(text(),'Medicare Supplement insurance plans:')]"));
+		scrollToView(dropDownMedSup);
+		validateNew(dropDownMedSup);
+		jsClickNew(dropDownMedSup);
+		System.out.println("MedSup DropDown Clicked");
+		sleepBySec(2);
+		jsClickNew(dropDownMedSup);
+	}
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

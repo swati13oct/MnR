@@ -200,7 +200,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
 	private WebElement LeaveOnlineApplication;
 
-	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[4]")
 	private WebElement closepopup;
 	
 	public PersonalInformationPage(WebDriver driver) {

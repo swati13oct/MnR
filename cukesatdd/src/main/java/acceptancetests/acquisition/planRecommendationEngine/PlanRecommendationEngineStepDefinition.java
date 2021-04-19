@@ -87,15 +87,18 @@ public class PlanRecommendationEngineStepDefinition {
 			String isMultiCounty = inputValues.get("Is Multi County");
 			System.out.println("Entered Search Key is:"+isMultiCounty);
 			checkpopup();
+			
+			getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+			getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+			getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+			
 		PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
 		if (isMultiCounty.equalsIgnoreCase("NO")) {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
 		} else {
 			planSelectorhomepage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
+			
 		}
-
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
 	}
 	
 	

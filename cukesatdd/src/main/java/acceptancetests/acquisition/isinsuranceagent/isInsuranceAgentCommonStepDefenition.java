@@ -190,6 +190,22 @@ public class isInsuranceAgentCommonStepDefenition    {
 	
 	}
 	
+	
+	@And("^user click on Insurance agent link on the MedED Pages$")
+	public void user_click_on_Insurance_agent_link_MedED_Pages() throws Throwable {
+	
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);	
+		
+		IsInsuranceAgent lispage= aquisitionhomepage.clickISlinkMedEDPages();
+		
+		if (lispage != null) {
+			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE, lispage);
+
+		} else {
+			Assert.fail("Error Loading Insurance Agent page");
+		}
+	}
 } 
 
 
