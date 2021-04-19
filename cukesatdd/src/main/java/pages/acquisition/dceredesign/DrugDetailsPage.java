@@ -1429,7 +1429,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
