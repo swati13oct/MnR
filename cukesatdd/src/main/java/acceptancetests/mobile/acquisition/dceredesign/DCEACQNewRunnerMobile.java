@@ -115,7 +115,7 @@ public class DCEACQNewRunnerMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.SelectMailPharmacy();
-		String pharmacy = "Preferred Mail Service Pharmacy";
+		String pharmacy = "OptumRx Mail Service Pharmacy";
 		drugDetailsPage.validatePharmacyName(pharmacy);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_NAME, pharmacy);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
