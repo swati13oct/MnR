@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 //import pages.acquisition.ulayer.AcquisitionHomePage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
@@ -16,6 +17,7 @@ import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
