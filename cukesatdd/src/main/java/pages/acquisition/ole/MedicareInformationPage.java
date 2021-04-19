@@ -1317,7 +1317,8 @@ public CancelOLEModal OpenCancelOLEPages() {
 		SignIn.isDisplayed();
 		validate(LeaveOnlineApplication);
 		LeaveOnlineApplication.isDisplayed();
-		closepopup.click();
+		//closepopup.click();
+		jsClickNew(closepopup);
 		return new CancelOLEModal(driver);
 	}
 	return null;
@@ -1343,7 +1344,8 @@ public SaveandReturnOLEModal OpensavereturnOLEPages() {
 		validate(SaveSignIn);
 		SaveSignIn.isDisplayed();
 		Saveclosepopup.isDisplayed();
-		Saveclosepopup.click();
+		//Saveclosepopup.click();
+		jsClickNew(Saveclosepopup);
 		return new SaveandReturnOLEModal(driver);
 	}
 	return null;
@@ -1369,7 +1371,8 @@ public CancelOLEModal OpenlearnmoreLogoOLEPages() {
 		SignIn.isDisplayed();
 		validate(LeaveOnlineApplication);
 		LeaveOnlineApplication.isDisplayed();
-		closepopup.click();
+		//closepopup.click();
+		jsClickNew(closepopup);
 		return new CancelOLEModal(driver);
 	}
 	return null;

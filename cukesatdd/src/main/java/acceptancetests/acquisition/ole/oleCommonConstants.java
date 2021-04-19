@@ -104,6 +104,12 @@ public class oleCommonConstants {
 	public static final String DISCLOSURE_PROVIDER_ZIP = "disclosureproviderzip";
 	public static final String DISCLOSURE_PROVIDER_PHONENUMBER = "disclosureproviderphonenumber";
 	public static final String TEST_RESULT_NOTE="test_result_note";
+	public static final String PAYMENT_PLAN="paymentplan";
+	public static final String CREDIT_CARD_NUMBER="creditcardnumber";
+	public static final String CREDIT_CARD_NAME_ON_CARD="creditcardnameoncard";
+	public static final String CREDIT_CARD_EXPIRATION_DATE="creditcardexpirationdate";
+	public static final String PAYMENT_METHOD = "paymentmethod";
 	
+	public static final String PLAN_YEAR = "planYear";
 
 }

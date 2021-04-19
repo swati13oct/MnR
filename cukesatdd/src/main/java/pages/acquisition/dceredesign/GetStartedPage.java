@@ -110,10 +110,10 @@ public class GetStartedPage extends UhcDriver {
 	}
 
 	public PrescriptionsProvidersBenefitsPage clickReturnToAcqHomePAge() {
-		validateNew(LinktoExitScenario);
-		jsClickNew(LinktoExitScenario);
-
+		driver.close();
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		waitForPageLoadSafari();
+		threadsleep(5000);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
 			return new PrescriptionsProvidersBenefitsPage(driver);
 		}

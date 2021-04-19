@@ -383,7 +383,9 @@ public class BuildYourDrugList extends UhcDriver {
 			for(i=0; i<DrugCount_Total; i++) {
 				currentDrug = DrugListItems[i];
 				for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
-					if (currentDrug.contains(CurrentDrugRecommendation.getText())) {
+					if (currentDrug.contains(CurrentDrugRecommendation.getText()) && CurrentDrugRecommendation.getText().contains(currentDrug)) {
+						System.out.println("Current cabinet Drug Name : "+currentDrug);
+						System.out.println("Current recommendations Drug Name : "+CurrentDrugRecommendation.getText());
 						Assertion.fail(currentDrug+" is also Displayed in Drug Recommendations - Validation FAILED");
 					}
 				}
@@ -407,5 +409,51 @@ public class BuildYourDrugList extends UhcDriver {
 		}
 		else
 			Assertion.fail("Validation FAILED : Drug Recommendation displayed when 25 Drugs added to cabinet");
+	}
+
+	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
+	public WebElement AddDrugBtn;
+
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement BuildDrugPage_EnterDrugNameTxt;
+
+	public boolean ClickAddDrugRecommended(String drugName) {
+		try {
+			WebElement RecommendedDrug = driver
+					.findElement(By.xpath("//button[contains(@dtmname, '" + drugName + "')]"));
+					
+			validateNew(RecommendedDrug);
+			jsClickNew(RecommendedDrug);
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);;
+			WebElement SelectDrug = driver
+					.findElement(By.xpath("(//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')])[1]"));
+			System.out.println("Drug Search results page is displayed");
+			validateNew(SelectDrug);
+			jsClickNew(SelectDrug);
+			threadsleep(2000);
+			waitForPageLoadSafari();
+			CommonUtility.checkPageIsReadyNew(driver);
+			CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
+			if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+				validateNew(AddDrugBtn);
+				jsClickNew(AddDrugBtn);
+				waitForPageLoadSafari();
+				CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+				if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+					Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+					return true;
+				}
+				Assertion.fail("Did not Navigate to Build Drug List Page");			
+			} 
+			else {
+				Assertion.fail("Tell Us About Drug Page is NOT Displayed");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Drug Recommendation is not displayed");
+			return false;
+		}
+		return false;
 	}
 }

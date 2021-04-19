@@ -254,7 +254,15 @@ public class OLEconfirmationPage extends UhcDriver{
 				   proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
 				   gpsData.put("Proposed Effective date", proposedeffectiveDate);  					   
 					System.out.println("--------------------Storing Data for Eligibility Page Started----------------------"+proposedeffectiveDate);
-
+					
+				   //Credit Card Details
+				   String creditCardNumber = rs.getString("CREDIT_CARD_NUMBER");
+				   gpsData.put("Credit Card Number", creditCardNumber);
+				   String creditCardNameOnCard = rs.getString("CREDIT_CARD_NAME_ON_CARD");
+				   gpsData.put("Credit Card Name On Card", creditCardNameOnCard);
+				   String creditCardExpirationDate = rs.getString("CREDIT_CARD_EXPIRATION_DATE");
+				   gpsData.put("Credit Card Expiration Date", creditCardExpirationDate);
+				   
 				   //PCP Page
 				   String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
 				   pcpName = pcpName.replaceAll("-", "");

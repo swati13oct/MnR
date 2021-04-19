@@ -193,7 +193,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
 		{
-			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			WebElement pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Enrollment Basics')]"));
 			waitforElementNew(pageHeader);
 			Assertion.assertTrue(true);
 			System.out.println("Initial Enrollment Period Page open correctly");

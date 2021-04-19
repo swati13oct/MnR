@@ -120,7 +120,18 @@ public class IsInsuranceAgent extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class, 'close') and contains(@data-dismiss, 'modal')]")
 	private WebElement closebuttontfn;
 
+	@FindBy(xpath = "//span[contains(text(),'Make an appointment for Medicare Supplement Insura')]")
+	private WebElement clickISlinkMedEDPages;
 	
+	
+	@FindBy(id = "agent-submit-button")
+	private WebElement SubmitBtn;
+	
+	@FindBy(xpath = "//*[contains(@id, 'thankyou')]")
+	private WebElement ThankYouPageHeader;
+
+	@FindBy(xpath = "//*[contains(@id, 'findplansbtn')]")
+	private WebElement FindPlanBtn;
 	
 	public IsInsuranceAgent(WebDriver driver) {
 		super(driver);
@@ -554,14 +565,7 @@ public class IsInsuranceAgent extends UhcDriver{
 		}
 	}
 
-	@FindBy(id = "agent-submit-button")
-	private WebElement SubmitBtn;
 	
-	@FindBy(xpath = "//*[contains(@id, 'thankyou')]")
-	private WebElement ThankYouPageHeader;
-
-	@FindBy(xpath = "//*[contains(@id, 'findplansbtn')]")
-	private WebElement FindPlanBtn;
 	
 	public License_ThankYouPage NavigateNext_LIAthankYouPage() {
 		if( validate(SubmitBtn)){
@@ -576,8 +580,21 @@ public class IsInsuranceAgent extends UhcDriver{
 		}
 		if(validate(FindPlanBtn) && validate(ThankYouPageHeader)){
 			System.out.println("Submit Button Clicked : DGR Thank You Page is Displayed");
+			
+			//FindPlansAreaButton.click();
+			jsClickNew(FindPlanBtn);
+			CommonUtility.checkPageIsReadyNew(driver);	
+			String checkUrl=driver.getCurrentUrl();
+			if(checkUrl.contains("health-plans.html?product=medsupp#/plan-summary")) {
+				System.out.println("Submit Button Clicked : Plan summary Page is Displayed");
+			}
 			return new License_ThankYouPage(driver);
 		}
 		return null;
 	}
+	
+	/*public void clickISlinkMedEDPages() {
+		jsClickNew(clickISlinkMedEDPages);
+	
+	}*/
 }

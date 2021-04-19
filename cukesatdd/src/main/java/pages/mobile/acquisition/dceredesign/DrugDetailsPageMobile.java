@@ -933,7 +933,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'Select Preferred Mail Service Pharmacy')]")
+	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'Select OptumRx Mail Service Pharmacy')]")
 	public WebElement MailPharmacy;
 
 	public void SelectMailPharmacy() {

@@ -163,6 +163,23 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.navigateToPath(path);
 	}
 
+	@Then("^user validates the url for Medicare Supplement Insurance Plans$")
+	public void user_validate_the_geotag_and_Medicare_supplement_url(DataTable givenAttributes) throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String state = memberAttributesMap.get("State");
+		String code = memberAttributesMap.get("Code");
+		String classic = memberAttributesMap.get("ClassicUrl");
+		String generic = memberAttributesMap.get("GenericUrl");
+		aquisitionhomepage.validateMedupsStateUrl(state,code,classic,generic);
+	}
+	
 	@Then("^the User validates Shop for a Plan Navigation link$")
 	public void the_USer_validates_Shop_for_a_Plan_Navigation_links() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -221,11 +238,20 @@ public class GlobalComponentsCommonStepDefinition {
 		aquisitionhomepage.enterAndvalidateEmail();
 	}
 
-	@When("^user vaidates the state drop down link on the home page$")
-	public void user_vaidates_the_state_drop_down_link_on_home_page() throws Throwable {
+	@When("^user updates the state drop down value on the home page$")
+	public void user_vaidates_the_state_drop_down_link_on_home_page(DataTable givenAttributes) throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateStateDropDown();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String state = memberAttributesMap.get("State");
+		String code = memberAttributesMap.get("Code");
+		aquisitionhomepage.validatestatedropDown(state,code);
+		getLoginScenario().saveBean(CommonConstants.STATE_SELECTED, state);
 	}
 
 	@When("^user clicks on View all disclaimer information link on the home page$")
@@ -737,7 +763,6 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
 		enrollmentBasicsPage.selectStateForGeotargeting();
 		enrollmentBasicsPage.checkInnerLinks();
-		enrollmentBasicsPage.clickSocialSecurity();
 	}
 
 	@Then("^the user check Social Security link on Enrollment Basic Page$")
