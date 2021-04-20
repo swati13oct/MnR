@@ -386,7 +386,8 @@ public class oleStepDefinition {
 		else
 			Assert.fail("Error in validating the OLE Welcome Page");
 	}
-
+	
+	
 
 	@Then("^the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow$")
 	public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
@@ -398,32 +399,53 @@ public class oleStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}
 		String PlanName = givenAttributesMap.get("Plan Name");
-		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-		WelcomePage welcomePage;
-		if(SiteName.contains("UHC_ACQ")){
+		String PlanType = givenAttributesMap.get("Plan Type");
+	String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 
-			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
-					.getBean(PageConstants.PLAN_COMPARE_PAGE);
-			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
-		}
-		else{
-			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+	String ZipCode = givenAttributesMap.get("Zip Code");
+			//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+	String County = "";
+			//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+	String PlanPremium = "";
+	//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+	WelcomePage welcomePage;
+	if(PlanType.contains("MAPD")){
+	ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+			.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	
+	 welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare_MAPD(PlanName);
+	}else {
+		
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+		.getBean(PageConstants.PLAN_COMPARE_PAGE);
 
-			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
-		}
-
-		if (welcomePage != null) {
-
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
-					welcomePage);
-			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
-		}
-		else
-			Assert.fail("Error in validating the OLE Welcome Page");
+		welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare_PDP(PlanName);
 
 	}
 
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+	// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+
+	System.out.println("Plan Name is : " + PlanName);
+	System.out.println("Plan Type is : " + PlanType);
+	System.out.println("Plan Zip Code is : " + ZipCode);
+	System.out.println("Plan County Name is : " + County);
+	System.out.println("Plan Plan Premium is : " + PlanPremium);
+	System.out.println("Plan Year is : " + PlanYear);
+	// System.out.println("OLE is being started from Acquisition Site : "+SiteName);
+	if (welcomePage != null) {
+
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		System.out.println("OLE Welcome Page is Displayed");
+		Assert.assertTrue(true);
+	} else
+		Assert.fail("Error in validating the OLE Welcome Page");
+
+}
 	/**
 	 * @author sdwaraka
 	 * To Validate the Plan Details carried forward from VPP on Welcome Page of VPP
@@ -1041,7 +1063,7 @@ public class oleStepDefinition {
 		}
 		
 		String diclsoureCheckbox="true";
-		String diclsourestate ="AK";
+	//	String diclsourestate ="AK";
 		
 		UseAndDisclosureAuthorizationPage useranddisclosure = (UseAndDisclosureAuthorizationPage) getLoginScenario()
 	.getBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE);
@@ -1063,10 +1085,10 @@ public class oleStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS, MedicareDetailsMap.get("Provider Street Address"));
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY, MedicareDetailsMap.get("City"));
-		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, diclsourestate);
+		//getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, diclsourestate);
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP,  MedicareDetailsMap.get("Zip"));
 		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER, MedicareDetailsMap.get("Provider Phone Number"));
-
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, MedicareDetailsMap.get("Mailing_State"));
 	}
 	/**
 	 * @toDo:user fill following information in Preliminary Questions Page 
@@ -2169,6 +2191,17 @@ public class oleStepDefinition {
 			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 			PrimaryCarePhysicianPage pcpPage = (PrimaryCarePhysicianPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 
+		/*	if(!planType.contentEquals("PDP")){
+				PlanPremiumPage  planPremiumPage = (PlanPremiumPage) pcpPage.navigate_to_Plan_Premium_Page();
+				if (planPremiumPage != null) {
+
+					getLoginScenario().saveBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE,
+							planPremiumPage);
+					System.out.println("PCP Page is not Displayed : OLE Monthly Plan Premium Page is Displayed for Plantype : "+planType);
+				}
+				else
+					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
+			}*/
 			if(!planType.contentEquals("PDP")){
 				PlanPremiumPage  planPremiumPage = (PlanPremiumPage) pcpPage.navigate_to_Plan_Premium_Page();
 				if (planPremiumPage != null) {
@@ -2179,8 +2212,8 @@ public class oleStepDefinition {
 				}
 				else
 					Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : "+planType);
-			}
-		//}
+			
+		}
 	}
 
 	@Then("^the user navigates to Optional Benefits Page for following plans with available Riders$")
@@ -3295,12 +3328,33 @@ public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1)
 				System.out.println("--------------------Storing Data for PCP Page Ended----------------------");
 				
 				//------------------------------------------------------------------------------------------------------------------------------------------------
-
-				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
-
-				//Proposed Effective Date
+				//Payment type
+				System.out.println("--------------------Storing Data for Plan Premium Page ----------------------");
+				String paymentPlan = (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_METHOD);
+				if(paymentPlan.equalsIgnoreCase("Pay By Mail")) {
+					DetailsMap.put("payment type is Pay by mail: ", "0");
+					}
+					else if(paymentPlan.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
+					DetailsMap.put("payment type is SSN: ", "1");	
+					}
+					else {
+						DetailsMap.put("payment type is Credit Card: ", "2");		
+					}
 				
-						String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
+				//Credit Card Details
+				System.out.println("--------------------Storing Data for Credit Card Started----------------------");
+				String creditCardNumber = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NUMBER);
+				DetailsMap.put("Credit Card Number", creditCardNumber);
+				String creditCardNameOnCreditCard = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD);
+				DetailsMap.put("Credit Card Name On Card", creditCardNameOnCreditCard);
+				String creditCardExpirationDate = (String) getLoginScenario().getBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE);
+				DetailsMap.put("Credit Card Expiration Date", creditCardExpirationDate);
+				System.out.println("--------------------Storing Data for Credit Card Ended----------------------");
+				
+				//Proposed Effective Date
+				System.out.println("--------------------Storing Data for Proposed Effective Date Started----------------------");
+				
+				String proposedEffectiveDate = (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE);
 				proposedEffectiveDate = proposedEffectiveDate.substring(0, 10);
 				System.out.println("--------------------Storing Data for Proposed Effective Date Ended----------------------" +proposedEffectiveDate);
 				proposedEffectiveDate=OLEGPSValidation.converttogpsDate1(proposedEffectiveDate);
@@ -3495,7 +3549,7 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
 		DetailsMap.put("PartB Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE));
 
-		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		//DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
 		DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
 		DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
@@ -3563,7 +3617,9 @@ public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submi
 		DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
 		DetailsMap.put("Disclosure Provider PhoneNumber", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER));
 		
+		//--------------------------Added for payment plan--------------------------------------------------------------
 		
+		DetailsMap.put("Payment Plan", (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_PLAN));
 
 		boolean Validation_Status = reviewSubmitPage.OnlineEnrollment_Review_Page_details(DetailsMap);
 		if(Validation_Status){
@@ -3835,5 +3891,116 @@ public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_P
 				.getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 		VisitorProfilePage visitorProfilePage = oleConfirmationPage.clickOnShoppingCart();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+
+@Then("^the user navigates to clicks on Enroll Now from Plan details page to start the OLE flow$")
+public void the_user_navgates_to_clicks_on_Enroll_Now_plandetails_page_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
+
+	List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+	Map<String, String> givenAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+		givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+				givenAttributesRow.get(i).getCells().get(1));
+	}
+//	String PlanName = givenAttributesMap.get("Plan Name");
+	String PlanType = givenAttributesMap.get("Plan Type");
+	//String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+	PlanDetailsPage vppPlanDetailsPage= (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+	WelcomePage welcomeOLEPage= vppPlanDetailsPage.NavigateToOLEEnrollDSNPPlanDetails(PlanType);
+
+	if (welcomeOLEPage != null) {
+		getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
+	} else {
+		Assert.fail("Error Loading Welcome Page for OLE");
+	}
+}
+	
+	@Then("^the user selects payment type$")
+	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
+		boolean flag = false;
+		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		Map<String, String> paymentInformationMap = new HashMap<String, String>();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			paymentInformationMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}
+		String payType = paymentInformationMap.get("Payment Type");
+		String cardNo = paymentInformationMap.get("Card No");
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo);   //.substring(cardNo.length()-4));
+		String cardExpirationMonth = paymentInformationMap.get("Card Expiration Month");
+		String cardExpirationYear =  paymentInformationMap.get("Card Expiration Year");
+		String cardExpirationDate = cardExpirationMonth + cardExpirationYear;
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE, cardExpirationDate);
+		String cardHolderFirstName = paymentInformationMap.get("Card Holder First Name");
+		String cardHolderLastName = paymentInformationMap.get("Card Holder Last Name");
+		String cardHolderName = cardHolderFirstName+" "+cardHolderLastName;
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD, cardHolderName);
+		System.out.println("The payment type selected is "+payType);
+		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
+		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
+		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_METHOD, payType);
+		System.out.println("validate premium value");
+		boolean result = planPremiumPage.validatePremiumValue();
+		if(!result)	{
+		if(payType.equalsIgnoreCase("Pay by Mail")) {
+		flag = planPremiumPage.validatePayByMail();
+		}else if(payType.equalsIgnoreCase("Credit Card")) {
+			flag = planPremiumPage.validateCreditCard(cardNo, cardExpirationMonth, cardExpirationYear, cardHolderName);	
+		}else if(payType.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
+			flag = planPremiumPage.validateSocialSecurity();	
+		}
+		if (flag) {
+			System.out.println("Payment is passed");
+			Assert.assertTrue(true);
+		}
+		else {
+			System.out.println("Payment is failed");
+			Assert.fail("Payment is failed");
+	}
+	
+		}
+		
+		else {
+			flag = planPremiumPage.validateNoMonthlyPremium();
+			if (flag) {
+				System.out.println("No Monthly Premium validation is passed");
+				Assert.assertTrue(true);
+			}
+			else {
+				System.out.println("No Monthly Premium validation is failed");
+				Assert.fail("No Monthly Premium validation is failed");
+			}
+		}
+	}
+	
+	@Then("^the user validates TFN in Welcome OLE Right Rail PlanCompare$")
+	public void the_user_validates_TFN_in_Right_Rail_PlanCompare() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		String TFN ="";
+		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		
+		if(Validation_Status){
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			Assert.assertTrue(true);
+		}
+		else{
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
+			Assert.fail();
+		}
+	}
+	
+	@Then("^the user validates Footer links on Welcome OLE Page$")
+	public void the_user_validates_footer_links_welcome_OLE_Page() throws Throwable {
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+	//	String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
+		welcomePage.ValidateFooterEnrollmentChecklistLink();
+		welcomePage.ValidateFooterListaVerificationLink();
+		}
 	}
 }

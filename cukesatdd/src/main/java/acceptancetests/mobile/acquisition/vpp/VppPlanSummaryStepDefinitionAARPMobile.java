@@ -11,12 +11,12 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.mobile.acquisition.commonpages.keywordSearchAARP;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.KeywordSearchAARPMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 //import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -240,7 +240,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		planSummaryPage.pageloadcomplete();
+		//planSummaryPage.pageloadcomplete();
 		Assert.assertTrue("Error loading specific plan summary in VPP plan summary page",
 				planSummaryPage.getSpecificPlanInfo(planName));
 	}
@@ -1013,7 +1013,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acquisitionHomePage.searchfield();
-		keywordSearchAARP newkeywordsearchpage = new keywordSearchAARP(acquisitionHomePage.driver);
+		KeywordSearchAARPMobile newkeywordsearchpage = new KeywordSearchAARPMobile(acquisitionHomePage.driver);
 		getLoginScenario().saveBean(PageConstants.Keyword_Search, newkeywordsearchpage);
 	}
 
@@ -1021,7 +1021,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 	public void I_land_on_result_page() {
 		{
 
-			keywordSearchAARP newkeywordsearchpage = (keywordSearchAARP) loginScenario
+			KeywordSearchAARPMobile newkeywordsearchpage = (KeywordSearchAARPMobile) loginScenario
 					.getBean(PageConstants.Keyword_Search);
 			newkeywordsearchpage.url();
 			if (newkeywordsearchpage != null)

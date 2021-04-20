@@ -43,7 +43,7 @@ public class LoginAssistancePage extends GlobalWebElementsMobile{
 	}
 	
 
-	public PersonalIdentificationPage navigatesToPersonalDetailsPage(String[] choiceSelected) {
+	public PersonalIdentificationPageMobile navigatesToPersonalDetailsPage(String[] choiceSelected) {
 		
 		for(String choice : choiceSelected)
 		{
@@ -59,7 +59,7 @@ public class LoginAssistancePage extends GlobalWebElementsMobile{
 		
 		continueButton.click();
 		if(pageHeading.getText().equalsIgnoreCase("Personal Identification")){
-			return new PersonalIdentificationPage(driver);
+			return new PersonalIdentificationPageMobile(driver);
 		}
 		return null;
 		

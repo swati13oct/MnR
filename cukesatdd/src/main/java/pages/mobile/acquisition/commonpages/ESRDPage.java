@@ -88,9 +88,9 @@ public class ESRDPage extends UhcDriver{
 		}
 		
 	}
-	public PrescriptionDrugCoveragePage navigatesToNextStep() {
+	public PrescriptionDrugCoveragePageMobile navigatesToNextStep() {
 			esrdsaveandcontinue.click();
-				return new PrescriptionDrugCoveragePage(driver);
+				return new PrescriptionDrugCoveragePageMobile(driver);
 		}
 		
 	@FindBy(xpath = ".//*[@id='esrdInfo']/p")

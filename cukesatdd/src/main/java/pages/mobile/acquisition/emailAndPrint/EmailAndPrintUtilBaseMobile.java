@@ -152,10 +152,11 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 		} else if (pageType.equalsIgnoreCase("detail")) {
 			//validatePrintButtonOnPlanDetails.click();
 			jsClickNew(validatePrintButtonOnPlanDetails);
+			
 		} else {
 			Assert.assertTrue("PROBLEM - need to code Print Option for this page type: "+pageType, false);
 		}
-		CommonUtility.checkPageIsReady(driver);
+		//CommonUtility.checkPageIsReady(driver);
 		int numWinHandleAfter=driver.getWindowHandles().size();
 		//note: Store the current window handle
 		Assert.assertTrue("PROBLEM - Print window was never opened after the click",numWinHandleAfter-numWinHandleBefore==1);

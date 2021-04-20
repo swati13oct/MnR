@@ -12,7 +12,8 @@ import cucumber.api.CucumberOptions;
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount = 0, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionAgentFlowAARPSanity.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionAgentFlowAARPSanity")
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/agentflow" }, plugin = {
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = {
+		"src/main/resources/feature/acquisition/agentflow/RequestAgentAppointment-Common.feature" }, plugin = {
 				"pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionAgentFlowAARPSanity.json" }, tags = {
 						"@agentAppointmentByZipSanity_AARP" })

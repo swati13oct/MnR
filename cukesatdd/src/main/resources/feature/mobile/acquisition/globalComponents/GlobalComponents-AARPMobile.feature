@@ -296,7 +296,7 @@ Feature: 1.12 ACQ - Global Components AARP
     #|	UHC		| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English      | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
     #|	UHC		| medicare-plans.html                                           | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
     #|	UHC		| profile/guest                                                 | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
-    @FooterLinks_GlobalCompsAARP @globalfooterULayer @ios
+    @FooterLinks_GlobalCompsAARP @globalfooterULayer 
     Examples: 
       | site | path                          | pageName                   | tfnXpath                     | tfnFlag |
       | AARP | about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |

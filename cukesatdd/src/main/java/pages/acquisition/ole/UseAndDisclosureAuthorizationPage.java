@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
@@ -79,6 +80,7 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 		String Providercity = MedicareDetailsMap.get("City");
 		String ProviderZip = MedicareDetailsMap.get("Zip");
 		String ProviderNumber = MedicareDetailsMap.get("Provider Phone Number");
+		String Mailing_State = MedicareDetailsMap.get("Mailing_State");
 		
 		sendkeysNew(ProviderName, Providername);
 		sendkeysNew(ProviderStreetAddress, ProviderAddress);
@@ -86,7 +88,9 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 		sendkeysNew(ProvidePhoneNumber, ProviderNumber);
 		sendkeysNew(ZipCode, ProviderZip);
 		
-		selectFromDropDownByValue(StateDropDown, "AK");
+		//selectFromDropDownByValue(StateDropDown, "AK");
+		Select SelectState = new Select(StateDropDown);
+		SelectState.selectByValue(Mailing_State);
 		
 		  if (disclosureBox.isDisplayed()){	  
 		    disclosureBox.click();

@@ -77,28 +77,3 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | drug1   | drug2  | drug3   | drug4    | zipCode |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |UHC|
       
-      
-      @drugSummary_DefaultPlanType @F504721
-  Scenario Outline: To verify default plan type on drug summary page when no MAPD plans available -home page -DCE
-    Given the user is on medicare acquisition site landing page
-   		|Site| <site>|
-    When I access the acquisition DCE Redesign from home page
-    Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-    When user enters valid zipcode and county 
-      | ZipCode | <zipCode> |
-    And user clicks on continue button in Zip Entry Page
-    Then user should be able to see "Medicare Prescription Drug Plans" by default
-    
-		@drugSummary_DefaultPlanType_AARP
-    Examples: 
-      | drug1   |zipCode |site|
-      | Orkambi | 74562 |AARP|
-		
-		@drugSummary_DefaultPlanType_UHC
-		Examples: 
-      | drug1   | zipCode |site|
-      | Orkambi | 74562 |UHC|

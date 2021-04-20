@@ -6,11 +6,13 @@ package pages.mobile.acquisition.commonpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.commonpages.PageTitleConstants;
+
 /**
  * @author rkodumur
  *
  */
-public class MedicareAdvantageRequestMoreHelpPage extends GlobalWebElementsMobile {
+public class MedicareAdvantageRequestMoreHelpPage extends GlobalWebElements {
 
 	public MedicareAdvantageRequestMoreHelpPage(WebDriver driver) {
 		super(driver);
@@ -29,7 +31,7 @@ public class MedicareAdvantageRequestMoreHelpPage extends GlobalWebElementsMobil
 		validate(medicarePrescriptionDrug_PlansLink);
 		medicarePrescriptionDrug_PlansLink.click();
 		validate(medicarePrescriptionDrug_PlansLink);
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_PLANS)){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_PRESCRIPTION_DRUG_PLANS)){
 			return new MedicarePrescriptionDrugPlansPage(driver);
 		}
 	

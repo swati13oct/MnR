@@ -120,10 +120,10 @@ public class GetStartedPage extends UhcDriver {
 	}
 
 	public PrescriptionsProvidersBenefitsPage clickReturnToAcqHomePAge() {
-		validateNew(LinktoExitScenario);
-		jsClickNew(LinktoExitScenario);
-
+		driver.close();
+		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		waitForPageLoadSafari();
+		threadsleep(5000);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
 			return new PrescriptionsProvidersBenefitsPage(driver);
 		}
@@ -134,6 +134,7 @@ public class GetStartedPage extends UhcDriver {
 	public VPPPlanSummaryPage ClickReturnToPlanSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
+		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
 		}

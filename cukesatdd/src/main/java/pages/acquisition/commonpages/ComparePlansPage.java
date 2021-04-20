@@ -319,6 +319,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
 	
+//	@FindBy(xpath = "//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']")
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']//button//*[text()='Enroll']")
+	private WebElement EnrollinPlanCompare_MAPD;
+	
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
+	private WebElement EnrollinPlanCompare_PDP;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1320,7 +1327,7 @@ public class ComparePlansPage extends UhcDriver {
 			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
 			//DrugYouPay.getText will get child element text as well in Safari browser which fails the scripts ahead
-			if (!MRScenario.browsername.equalsIgnoreCase("Safari")) {
+			if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
 				drugYouPay = DrugYouPay.getText().trim();
 			} else {
 				drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
@@ -1525,5 +1532,64 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("populatedEmail = "+populatedEmail);
 		Assert.assertEquals(email, populatedEmail);
 	}
+	
+	
+public WelcomePage Enroll_OLE_Plan_Compare_MAPD(String planName) throws InterruptedException {
+		
+	try {
+		Thread.sleep(10000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	System.out.println("Enroll in Plan for Plan : " + planName);
+	try {
+		if (validate(EnrollinPlanCompare_MAPD))
+			System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+		else
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+
+	} catch (Exception e) {
+		System.out.println("Enroll in Plan Button is Not Displayed ");
+	}
+
+	jsClickNew(EnrollinPlanCompare_MAPD);
+
+	try {
+		Thread.sleep(5000);
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	// if (driver.getCurrentUrl().contains("enrollment"))
+	if (driver.getCurrentUrl().contains("welcome")) {
+		System.out.println("OLE Welcome Page is Displayed");
+		return new WelcomePage(driver);
+	}
+	return null;
 }
 
+public WelcomePage Enroll_OLE_Plan_Compare_PDP(String planName) throws InterruptedException {
+	
+	try {
+		if (validate(EnrollinPlanCompare_PDP))
+			System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+		else
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+
+	} catch (Exception e) {
+		System.out.println("Enroll in Plan Button is Not Displayed ");
+	}
+
+	jsClickNew(EnrollinPlanCompare_PDP);
+
+	// if (driver.getCurrentUrl().contains("enrollment"))
+	if (driver.getCurrentUrl().contains("welcome")) {
+		System.out.println("OLE Welcome Page is Displayed");
+		return new WelcomePage(driver);
+	}
+	return null;
+}
+
+}

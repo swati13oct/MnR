@@ -86,7 +86,7 @@ public class SelectPharmacyPage extends UhcDriver {
 	}
 
 
-	public ManageDrugPage selectPharmacy(String pharmacyName,
+	public ManageDrugPageMobile selectPharmacy(String pharmacyName,
 			String pharmacyType) {
 		if (!pharmacyType.equalsIgnoreCase("Preferred Mail Service Pharmacy")) {
 			for (WebElement element : pharmacyRows) {
@@ -118,7 +118,7 @@ public class SelectPharmacyPage extends UhcDriver {
 			System.out.println("pharmacyTable not found");
 		}
 		if (currentUrl().contains("manageDrugList")) {
-			return new ManageDrugPage(driver);
+			return new ManageDrugPageMobile(driver);
 		} else {
 			return null;
 		}

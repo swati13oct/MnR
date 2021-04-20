@@ -26,17 +26,17 @@ import atdd.framework.UhcDriver;
 import cucumber.api.DataTable;
 import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.VPPTestHarnessPage;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class VisitorProfilePage extends UhcDriver {
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign In']")
+	@FindBy(xpath = "//li//a[contains(text(),'Sign In')]")
 	private WebElement signIn;
 	
 	@FindBy(css = "div.signupCTA a.signin-font")
@@ -78,7 +78,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 
-	@FindBy(xpath = "//h2/following-sibling::a[text()='Sign Out']")
+	@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
 	private WebElement signOut;
 
 	@FindBy(id = "enrollment-next-button")
@@ -122,7 +122,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
 	public WebElement drugGetStarted;
 
-	@FindBy(xpath = "//p[contains(@class,'items-count')]//a[contains(text(),'Drugs')]")
+	@FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]/span[2]")
 	public WebElement drugHeader;
 
 	@FindBy(css = "h3#saved-drugs")
@@ -173,10 +173,10 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='saved-drugs']/../a[contains(text(),'Edit Your Drugs and Pharmacy')]")
 	public WebElement editDrugsGlobal;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign In']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
 	public WebElement loginLink;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[text()='Sign Out']")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	public WebElement signOutLink;
 
 	@FindBy(xpath = "//button[@aria-expanded='true']/..//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove drug']")
@@ -276,11 +276,11 @@ public class VisitorProfilePage extends UhcDriver {
 			Assert.assertTrue(drugname.getText().trim().contains(drug));
 		} else {
 			CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
-			Assert.assertEquals("Saved Drugs (1) / Pharmacy", drugHeader.getText().trim());
+			Assert.assertEquals("Your Saved Drugs (1) & Pharmacy", drugHeader.getText().trim());
 			jsClickNew(drugHeader);
 			Assert.assertTrue(drugName.getText().trim().contains(drug));
-			Assert.assertEquals("Drugs (1) / Pharmacy", savedDrugsHeader.getText().trim());
-			Assert.assertEquals("Saved Drugs (1) / Pharmacy and Doctors/Providers (0)",
+			Assert.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
+			Assert.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
 					savedDrugsAndDoctorsHeader.getText().trim());
 			Assert.assertTrue(pharmacyAddress.isDisplayed());
 		}
@@ -580,7 +580,7 @@ public class VisitorProfilePage extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assert.fail("###############Optum Id Sign In failed###############");
@@ -803,9 +803,10 @@ public class VisitorProfilePage extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
-			System.out.println(plan);
+			System.out.println("Checking Saved Plan on VP for : "+plan);
 			WebElement addedPlan = driver
 					.findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+			validateNew(addedPlan);
 			/*
 			 * System.out.println(driver.findElement(By.xpath(
 			 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
@@ -823,10 +824,11 @@ public class VisitorProfilePage extends UhcDriver {
 			 * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
 			 * + plan + "')]/following::button[1]")) .isDisplayed());
 			 */
-			Assert.assertTrue(driver
+/*			Assert.assertTrue(driver
 					.findElement(By.xpath(
 							"//*[contains(@id,'planName') and contains(text(),'" + plan + "')]/./following::button[1]"))
 					.isDisplayed());
+*/			
 			System.out.println("Verified plans are added on visitior profile page");
 		}
 	}

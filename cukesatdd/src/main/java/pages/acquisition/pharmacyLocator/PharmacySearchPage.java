@@ -63,10 +63,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
-			checkModelPopup(driver, 45);
-		else
-			checkModelPopup(driver, 10);
+		checkModelPopup(driver, 10);
 		// CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10);
 	}
 
@@ -110,13 +107,18 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Assert.assertTrue("PROBLEM - expect more browser tabs after clicking pdf. " + "Before="
 				+ beforeClicked_tabs.size() + " | After=" + afterClicked_numTabs,
 				beforeClicked_tabs.size() < afterClicked_numTabs);
-
-		for (String tab : afterClicked_tabs) {
-			if (!tab.equals(winHandleBefore)) {
+		String tab = null;
+		for (int j = 0; j < afterClicked_numTabs; j++) {
+			if (j == afterClicked_numTabs - 1) {
+				tab = afterClicked_tabs.get(j);
 				driver.switchTo().window(tab);
 				break;
 			}
 		}
+		/*
+		 * for (String tab : afterClicked_tabs) { if (!tab.equals(winHandleBefore)) {
+		 * driver.switchTo().window(tab); break; } }
+		 */
 //		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
 		System.out.println("New window = " + driver.getTitle());
 		String currentURL = driver.getCurrentUrl();
@@ -679,11 +681,13 @@ public class PharmacySearchPage extends PharmacySearchBase {
 
 	public void clickBreadCrumb() {
 		breadCrumbLink.click();
+		waitForPageLoadSafari();
 	}
 
 	public void clickReturnToPharamcySearch() {
 		validateNew(returntoPharmacySearch);
 		returntoPharmacySearch.click();
+		waitForPageLoadSafari();
 	}
 
 	

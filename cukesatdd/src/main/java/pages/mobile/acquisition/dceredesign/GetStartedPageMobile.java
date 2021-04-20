@@ -14,13 +14,13 @@ import org.openqa.selenium.support.ui.Select;
 
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.mobile.acquisition.commonpages.PrescriptionsProvidersBenefitsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-
-import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class GetStartedPageMobile extends UhcDriver {
@@ -34,7 +34,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
 	public WebElement BuildDrugPage_verificationTxt;
 
-	@FindBy(xpath = "//span[contains(text(),'Return to plan summary')]")
+	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
 
 	@FindBy(xpath = "//span[contains(text(),'Get Started')]")
@@ -53,7 +53,7 @@ public class GetStartedPageMobile extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		// openAndValidate();
+		openAndValidate();
 	}
 
 	@Override
@@ -109,13 +109,26 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public VisitorProfilePageMobile clickOnShoppingCart() {
-		shoppingCartIcon.click();
+		//shoppingCartIcon.click();
+		jsClickNew(shoppingCartIcon);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {
 			System.out.println("Navigation to visitor profile is failed");
 			return null;
 		}
+	}
+	
+	public PrescriptionsProvidersBenefitsPageMobile clickReturnToAcqHomePAge() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("medicare-education")) {
+			return new PrescriptionsProvidersBenefitsPageMobile(driver);
+		}
+		return null;
+
 	}
 
 }

@@ -511,4 +511,3 @@ public class PharmacyLocatorStepDefinition {
 	}
 }
 
-

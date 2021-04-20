@@ -105,10 +105,10 @@ public class OtherHealthInsurancePage extends UhcDriver {
 		
 			
 		
-	public PrimaryCareProviderPage navigatesToNextStep() {
+	public PrimaryCareProviderPageMobile navigatesToNextStep() {
 		otherhelathinsurancesaveandcontinue.click();
 
-		return new PrimaryCareProviderPage(driver);
+		return new PrimaryCareProviderPageMobile(driver);
 	}
 
 	@FindBy(xpath = ".//*[@id='othInfo']/p")

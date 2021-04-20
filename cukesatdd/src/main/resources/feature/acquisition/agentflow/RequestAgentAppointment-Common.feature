@@ -19,7 +19,7 @@ Feature: 1.06 - To test request an appointment with an agent flow
 			| TCID    | zipcode    | site	|
 			| F266872 |  90002     | UHC	|
 			
-	Scenario Outline: Verify request an appointment with an agent flow for <pageName>
+	Scenario Outline: Verify request an appointment with an agent flow for <pageName> in <site> site
 		Given the user is on medicare acquisition site landing page
     	|Site| <site>|
 		And the user navigates to following medicare acquisition site page

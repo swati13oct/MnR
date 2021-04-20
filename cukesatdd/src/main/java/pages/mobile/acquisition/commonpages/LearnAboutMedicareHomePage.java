@@ -82,7 +82,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 		new CoverageChoicesPage(driver).backMedicareEducationHome();
 
 		backButtonClick(getLstLearnAboutMedicare().get(++i));
-		new PrescriptionsProvidersBenefitsPage(driver).backMedicareEducationHome();
+		new PrescriptionsProvidersBenefitsPageMobile(driver).backMedicareEducationHome();
 
 		backButtonClick(getLstLearnAboutMedicare().get(++i));
 		new CostBasicsPage(driver).backMedicareEducationHome();
@@ -118,7 +118,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 				(new CoverageChoicesPage(driver)).backMedicareEducationHome());
 		fnTabKey(getLstLearnAboutMedicare().get(++j));
 		checkTab(fnEnterKey(getLstLearnAboutMedicare().get(++i)),
-				(new PrescriptionsProvidersBenefitsPage(driver)).backMedicareEducationHome());
+				(new PrescriptionsProvidersBenefitsPageMobile(driver)).backMedicareEducationHome());
 		fnTabKey(getLstLearnAboutMedicare().get(++j));
 		checkTab(fnEnterKey(getLstLearnAboutMedicare().get(++i)),
 				(new CostBasicsPage(driver)).backMedicareEducationHome());

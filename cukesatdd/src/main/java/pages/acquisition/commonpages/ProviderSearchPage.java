@@ -18,7 +18,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.vpp.*;
+import pages.acquisition.vpp.VPPTestHarnessPage;
 
 /**
  * @author pperugu
@@ -84,7 +84,7 @@ public class ProviderSearchPage extends UhcDriver {
 	private WebElement ViewSavedProvidersLink;
 
 	//@FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
-	@FindBy(xpath = "//input[contains(@id,'unsaved_selectedLocation0')]")
+	@FindBy(xpath = "//label[contains(@id,'unsaved_selectedLocation0')]")
 	private WebElement selectLocationOption;
 
 	@FindBy(xpath = "(//button[contains(text(),'Check Provider Coverage')])[1]")
@@ -416,7 +416,7 @@ public class ProviderSearchPage extends UhcDriver {
 		jsClickNew(selectProviderBtn);
 
 		if (validate(selectLocationOption)) {
-			selectLocationOption.click();
+			jsClickNew(selectLocationOption);
 			validateNew(saveBtn2);
 			saveBtn2.click();
 		}
@@ -511,7 +511,7 @@ public class ProviderSearchPage extends UhcDriver {
 
 		return new VPPTestHarnessPage(driver);
 	}
-
+/*
 	/*
 	public VPPPlanSummaryPage MultipleselectsProvider() {
 		GetStarted.click();
@@ -659,7 +659,6 @@ public class ProviderSearchPage extends UhcDriver {
 
 	return new VPPPlanSummaryPage(driver);
 }
-
 
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),

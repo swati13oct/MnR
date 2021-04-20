@@ -20,7 +20,7 @@ public AcquisitionHomePageMobile acquisitionHomeFooterClick() {
 		validate(footerHomeLink);
 		footerHomeLink.click();
 		validate(footerHomeLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MEDICARE_PLANS_AARP_MEDICARE_PLANS )) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MEDICARE_PLANS_AARP_MEDICARE_PLANS )) {
 			return new AcquisitionHomePageMobile(driver);
 		}else{
 		

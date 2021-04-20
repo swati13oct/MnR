@@ -5,7 +5,7 @@ import org.openqa.selenium.support.PageFactory;
 
 
 
-public class MedicarePrescriptionDrugPlansPage extends GlobalWebElementsMobile {
+public class MedicarePrescriptionDrugPlansPage extends GlobalWebElements {
 
 	public MedicarePrescriptionDrugPlansPage(WebDriver driver) {
 		super(driver);
@@ -23,7 +23,7 @@ public LearnAboutMedicarePage learnAboutMedicareFooterClick() {
 		validate(medicareSupplementInsurancePlansLink);
 		learnAboutMedicareLink.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_LEARN_ABOUT_MEDICARE)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_LEARN_ABOUT_MEDICARE)) {
 			return new LearnAboutMedicarePage(driver);
 		}else{
 		
@@ -33,13 +33,13 @@ public LearnAboutMedicarePage learnAboutMedicareFooterClick() {
 		
 	}
 
-public PrescriptionDrugRequestMoreHelpPage requestPersonalhelpInformationClick() {
+public PrescriptionDrugRequestMoreHelpPageMobile requestPersonalhelpInformationClick() {
 	ourPlansHover();
 	validate(prescriptiondrugPlansRequestMoreHelpLink);
 	prescriptiondrugPlansRequestMoreHelpLink.click();
 	validate(prescriptiondrugPlansRequestMoreHelpLink);
-	if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MORE_HELP_INFORMATION)){
-		return new PrescriptionDrugRequestMoreHelpPage(driver);
+	if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MORE_HELP_INFORMATION)){
+		return new PrescriptionDrugRequestMoreHelpPageMobile(driver);
 	}
 	return null;
 }

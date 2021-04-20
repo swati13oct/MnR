@@ -28,22 +28,22 @@ import io.appium.java_client.AppiumDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.bluelayer.ComparePlansPageBlayerMobile;
-import pages.mobile.acquisition.bluelayer.PlanComparePageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageBlayerMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
+import pages.mobile.acquisition.commonpages.FindCarePageMobile;
+import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
+import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
+import pages.mobile.acquisition.commonpages.VisitorProfileTestHarnessPageMobile;
+import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.ComparePlansPageMobile;
-import pages.mobile.acquisition.ulayer.FindCarePageMobile;
-import pages.mobile.acquisition.ulayer.MultiCountyModalPageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.ulayer.VPPTestHarnessPageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfilePageMobile;
-import pages.mobile.acquisition.ulayer.VisitorProfileTestHarnessPageMobile;
-import pages.mobile.acquisition.ulayer.ZipcodeLookupHomePageMobile;
 
 /**
  * Functionality: VPP UHC site
@@ -266,7 +266,7 @@ public class VppPlanDetailMobile {
 		WelcomePageMobile welcomePage;
 		if (SiteName.contains("UHC_ACQ")) {
 
-			pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.ulayer.PlanDetailsPageMobile) getLoginScenario()
+			pages.mobile.acquisition.commonpages.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.commonpages.PlanDetailsPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			TFN = vppPlanDetailsPage.GetTFNforPlanType();
 			welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
@@ -1312,7 +1312,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
+		pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
@@ -2233,7 +2233,7 @@ public class VppPlanDetailMobile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
+		pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile drugCostEstimatorPage = planComparePage.clickonDCE();
 		if (drugCostEstimatorPage != null) {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();

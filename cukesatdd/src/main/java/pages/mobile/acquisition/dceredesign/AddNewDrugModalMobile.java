@@ -14,7 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 public class AddNewDrugModalMobile extends UhcDriver {
 
 	private PageData addnewdrug;
@@ -91,9 +91,9 @@ public class AddNewDrugModalMobile extends UhcDriver {
 	public AddDrugDetailsMobile clickonSearchButton(String DrugName) {
 		//drugsearchinput.click();
 		drugsearchinput.sendKeys(DrugName);
-		searchButton.click();     
+		jsClickNew(searchButton);    
 		waitforElement(continueButton);
-		continueButton.click();
+	jsClickNew(continueButton);
 		//if (driver.getTitle().equalsIgnoreCase("ADD A NEW DRUG")) {
 			return new AddDrugDetailsMobile(driver);
 		//}
@@ -107,10 +107,11 @@ public class AddNewDrugModalMobile extends UhcDriver {
 		String xpath = "//label[contains(text(),'"+drugname+"')]/parent::div/input[contains(@id,'drugs-')]";
 		WebElement rdrug = driver.findElement(By.xpath(xpath));
 		if(!rdrug.isSelected()){
-			rdrug.click();
+			//rdrug.click();
+			jsClickNew(rdrug);
 		}
 		waitforElement(continueButton);
-		continueButton.click();
+	jsClickNew(continueButton);
 		return new AddDrugDetailsMobile(driver);
 	}
 	public void verifyerror(){
@@ -121,7 +122,9 @@ public class AddNewDrugModalMobile extends UhcDriver {
 		for(WebElement element : elements){
 			
 			if(drug.equalsIgnoreCase(element.getText())){
-				element.click();
+				
+				jsClickNew(element);
+
 				break;
 			}
 		}
@@ -134,7 +137,7 @@ public class AddNewDrugModalMobile extends UhcDriver {
 		//waitforElement(continueButton);
 		Thread.sleep(10000);
 		if(continueButton.isDisplayed()){
-			continueButton.click();
+		jsClickNew(continueButton);
 		}
 		
 		Thread.sleep(5000);
@@ -146,7 +149,8 @@ public class AddNewDrugModalMobile extends UhcDriver {
 	}
 	public DrugCostEstimatorPageMobile cancel(){
 		waitforElement(cancelButton);
-		cancelButton.click();
+	
+		jsClickNew(cancelButton);
 		return new DrugCostEstimatorPageMobile(driver);
 	}
 	
@@ -158,7 +162,7 @@ public class AddNewDrugModalMobile extends UhcDriver {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		continueButton.click();
+	jsClickNew(continueButton);
 		return new AddDrugDetailsMobile(driver);
 	}
 	

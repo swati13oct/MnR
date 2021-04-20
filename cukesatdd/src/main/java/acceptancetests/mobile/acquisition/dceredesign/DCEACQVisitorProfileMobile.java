@@ -148,7 +148,7 @@ public class DCEACQVisitorProfileMobile {
 
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page$")
 	public void the_user_clicks_on_the_add_drugs_button_in_the_profile_to_DCE_Redesign_in_AARP_site1() throws InterruptedException {
-		pages.mobile.acquisition.ulayer.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.ulayer.VisitorProfilePageMobile) getLoginScenario().
+		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
 		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesign();

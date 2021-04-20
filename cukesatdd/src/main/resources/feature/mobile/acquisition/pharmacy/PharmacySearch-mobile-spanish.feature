@@ -3,7 +3,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
  
-  @pharmacylocatorblayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression @prodSanity
+  @pharmacylocatorblayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression 
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page mobile
       | Site Name | <siteName> |

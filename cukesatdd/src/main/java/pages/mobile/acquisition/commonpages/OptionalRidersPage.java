@@ -91,9 +91,9 @@ public class OptionalRidersPage extends UhcDriver{
 		}
 	
 
-		public ProposedEffectiveDatePage navigatesToNextStep() {
+		public ProposedEffectiveDatePageMobile navigatesToNextStep() {
 			optionalriderssaveandcontinue.click();
-				return new ProposedEffectiveDatePage(driver);
+				return new ProposedEffectiveDatePageMobile(driver);
 			
 		}
 		

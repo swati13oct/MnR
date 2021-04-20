@@ -120,3 +120,28 @@ Feature: 1.03 Acq-To test Sitesearch results site
     Examples: 
       | site | searchValue | newsearchvalue |
       | UHC  | Medicare    | pharmacy       |
+
+    @SiteSearchAutoComplete  
+    Scenario Outline: To verify site search auto complete suggestions in <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user enter the searchValue in the search text box
+      | search Value | <searchValue> |
+    Then the user should see the auto complete suggestions
+    Then the user clicks on the first auto complete suggestion
+    Then the user validates pagination and results displayed
+    Then the user enter the secondary searchValue in the search text box
+        |NewSearchValue|<newsearchvalue>|
+    Then the user should see the auto complete suggestions site search page
+     Then the user clicks on the first auto complete suggestion site search page
+    Then the user validates pagination and results displayed
+
+    @SiteSearchAutoComplete_AARP
+    Examples: 
+      | site | searchValue | newsearchvalue |
+      | AARP | Medicare    | plans    |
+
+    @SiteSearchAutoComplete_UHC
+    Examples: 
+      | site | searchValue | newsearchvalue |
+      | UHC  | Medicare    | plans       |

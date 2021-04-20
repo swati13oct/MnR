@@ -624,7 +624,8 @@ public class PlanDetailsPage extends UhcDriver {
 
 	/* extracting cost from prescription tab */
 	public String costComparisonPrescriptionDrugFromDCE() {
-
+		validateNew(prescriptionTab);
+		jsClickNew(prescriptionTab);
 		CommonUtility.waitForPageLoad(driver, getValPrescritionDrugEstimatedTotalAnnualCost(), 30);
 		scrollToView(getValPrescritionDrugEstimatedTotalAnnualCost());
 		return getValPrescritionDrugEstimatedTotalAnnualCost().getText().trim();
@@ -1980,25 +1981,25 @@ public class PlanDetailsPage extends UhcDriver {
 		else if(colName.contains("Formulary Additions")) {lang = english;docName = "Formulary";}
 		else if(colName.contains("Formulary Deletions")) {lang = english;docName = "Directory";}
 		else if(colName.contains("Alternative Drugs List")) {lang = english;docName = "Drugs"; }
-		else if(colName.contains("Formulario de InscripciÃ³n")) {lang = spanish;docName = "Application"; }
+		else if(colName.contains("Formulario de InscripciÃƒÂ³n")) {lang = spanish;docName = "Application"; }
 		else if(colName.contains("Resumen de Beneficios")) {lang = spanish;docName = "Summary of Benefits"; }
 		else if(colName.contains("Comprobante de Cobertura")) {lang = spanish;docName = "Evidence of Coverage"; }
-		else if(colName.contains("ClasificaciÃ³n de la Calidad del Plan")) {lang = spanish;docName = "Star Ratings"; }
+		else if(colName.contains("ClasificaciÃƒÂ³n de la Calidad del Plan")) {lang = spanish;docName = "Star Ratings"; }
 		else if(colName.contains("Programa UnitedHealth Passport")) {lang = spanish;docName = "Passport"; }
 		else if(colName.contains("Aviso Annual de Cambios")) {lang = spanish;docName = "ANOC"; }
 		else if(colName.contains("Beneficios Importantes")) {lang = spanish;docName = "Benefit Highlights"; }
 		else if(colName.contains("Directorio de Proveedores")) {lang = spanish;docName = "Directory"; }
-		else if(colName.contains("InformaciÃ³n sobre proveedores")) {lang = spanish;docName = "Vendor Information Sheet"; }
-		else if(colName.contains("è¨»å†Šè¡¨æ ¼")) {lang = chinese;docName = "Application"; }
-		else if(colName.contains("ç¦�åˆ©æ¦‚è¦½")) {lang = chinese;docName = "Summary of Benefits"; }
-		else if(colName.contains("æ‰¿ä¿�è­‰æ›¸")) {lang = chinese;docName = "Evidence of Coverage"; }
-		else if(colName.contains("æ˜Ÿç´šè©•å®š")) {lang = chinese;docName = "Star Ratings"; }
-		else if(colName.contains("å¹´åº¦è®Šæ›´é€šçŸ¥")) {lang = chinese;docName = "ANOC"; }
-		else if(colName.contains("ç¦�åˆ©æ‘˜è¦�")) {lang = chinese;docName = "Benefit Highlights"; }
-		else if(colName.contains("é†«ç”Ÿå��å†Š")) {lang = chinese;docName = "Directory"; }
-		else if(colName.contains("ä¾›æ‡‰å•†è³‡è¨Šè¡¨")) {lang = chinese;docName = "Vendor Information Sheet"; }
-		else if(colName.contains("ç¶œå�ˆè™•æ–¹è—¥ä¸€è¦½è¡¨")) {lang = chinese;docName = "Formulary"; }
-		else if(colName.contains("æ›¿ä»£è—¥ç‰©æ¸…å–®")) {lang = chinese;docName = "Drugs"; }
+		else if(colName.contains("InformaciÃƒÂ³n sobre proveedores")) {lang = spanish;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("Ã¨Â¨Â»Ã¥â€ Å Ã¨Â¡Â¨Ã¦Â Â¼")) {lang = chinese;docName = "Application"; }
+		else if(colName.contains("Ã§Â¦ï¿½Ã¥Ë†Â©Ã¦Â¦â€šÃ¨Â¦Â½")) {lang = chinese;docName = "Summary of Benefits"; }
+		else if(colName.contains("Ã¦â€°Â¿Ã¤Â¿ï¿½Ã¨Â­â€°Ã¦â€ºÂ¸")) {lang = chinese;docName = "Evidence of Coverage"; }
+		else if(colName.contains("Ã¦ËœÅ¸Ã§Â´Å¡Ã¨Â©â€¢Ã¥Â®Å¡")) {lang = chinese;docName = "Star Ratings"; }
+		else if(colName.contains("Ã¥Â¹Â´Ã¥ÂºÂ¦Ã¨Â®Å Ã¦â€ºÂ´Ã©â‚¬Å¡Ã§Å¸Â¥")) {lang = chinese;docName = "ANOC"; }
+		else if(colName.contains("Ã§Â¦ï¿½Ã¥Ë†Â©Ã¦â€˜ËœÃ¨Â¦ï¿½")) {lang = chinese;docName = "Benefit Highlights"; }
+		else if(colName.contains("Ã©â€ Â«Ã§â€�Å¸Ã¥ï¿½ï¿½Ã¥â€ Å ")) {lang = chinese;docName = "Directory"; }
+		else if(colName.contains("Ã¤Â¾â€ºÃ¦â€¡â€°Ã¥â€¢â€ Ã¨Â³â€¡Ã¨Â¨Å Ã¨Â¡Â¨")) {lang = chinese;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("Ã§Â¶Å“Ã¥ï¿½Ë†Ã¨â„¢â€¢Ã¦â€“Â¹Ã¨â€”Â¥Ã¤Â¸â‚¬Ã¨Â¦Â½Ã¨Â¡Â¨")) {lang = chinese;docName = "Formulary"; }
+		else if(colName.contains("Ã¦â€ºÂ¿Ã¤Â»Â£Ã¨â€”Â¥Ã§â€°Â©Ã¦Â¸â€¦Ã¥â€“Â®")) {lang = chinese;docName = "Drugs"; }
 			
 		result.add(0, docName);
 		result.add(1,lang);
@@ -2039,4 +2040,23 @@ public class PlanDetailsPage extends UhcDriver {
 		return null;
 	}
 	
+	
+	@FindBy(xpath="//a//span[contains(text(),'Enroll in plan')]")
+	private WebElement EnrollPlanLinkDSNP;
+
+	public WelcomePage NavigateToOLEEnrollDSNPPlanDetails(String planType) {
+		
+		CommonUtility.waitForPageLoadNew(driver,EnrollPlanLinkDSNP, 30);
+		jsClickNew(EnrollPlanLinkDSNP);
+
+				CommonUtility.checkPageIsReadyNew(driver);
+				if (driver.getCurrentUrl().contains("welcome")) {	
+					Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+				}
+				else {
+					Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+				}
+				return new WelcomePage(driver);
+				//return null;
+	}
 }

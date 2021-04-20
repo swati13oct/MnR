@@ -20,11 +20,11 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-//import pages.mobile.acquisition.bluelayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -112,7 +112,7 @@ public class SiteSearchMobile {
 		String year = memberAttributesMap.get("Year");
 
 		{
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.entersZipcodeAndSelectPlanName(zipcode, planName, year);
 
@@ -125,7 +125,7 @@ public class SiteSearchMobile {
 	@When("^user selects a provider and saves it$")
 	public void user_selects_provider_and_saves_it() {
 		{
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
 
@@ -151,7 +151,7 @@ public class SiteSearchMobile {
 		String planYear = memberAttributesMap.get("Year");
 
 		{
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 
 			int intPlanCounts = providerSearchPage.entersZipcodeAndPlancountblayer(zipcode, planYear);
@@ -191,7 +191,7 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
+		pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
 				.clicksOnRallyToolFromGlobalHeader();
 
 		if (providerSearchPage != null) {
@@ -220,7 +220,7 @@ public class SiteSearchMobile {
 		String year = memberAttributesMap.get("Year");
 
 		{
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.entersZipcodeAndSelectPlanName(zipcode, planName, year);
 
@@ -233,7 +233,7 @@ public class SiteSearchMobile {
 	@When("^user select a provider and save it$")
 	public void user_selects_provider_and_saves_it1() {
 		{
-			pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
 
@@ -267,7 +267,7 @@ public class SiteSearchMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = plansummaryPage
+		pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = plansummaryPage
 				.clicksOnIsProviderCovered(planName);
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
@@ -280,7 +280,7 @@ public class SiteSearchMobile {
 
 	@When("^user selects a provider and retuns to VPP page$")
 	public void user_selects_provider_and_return_vpp_page_ulayer() {
-		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.ulayer.ProviderSearchPageMobile) getLoginScenario()
+		pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
 		Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
@@ -339,7 +339,7 @@ public class SiteSearchMobile {
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		System.out.println("Plan name is " + PlanName + "Plan type is " + planType);
-		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
+		pages.mobile.acquisition.commonpages.PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
 				.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -352,7 +352,7 @@ public class SiteSearchMobile {
 	@Then("^the user Click on Look up your Provider button on Plan Details Page$")
 	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 
-		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.ulayer.PlanDetailsPageMobile) getLoginScenario()
+		pages.mobile.acquisition.commonpages.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.commonpages.PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
 		ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
@@ -367,7 +367,7 @@ public class SiteSearchMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			pages.mobile.acquisition.ulayer.PlanDetailsPageMobile planDetailsPage = providerSearchPage
+			pages.mobile.acquisition.commonpages.PlanDetailsPageMobile planDetailsPage = providerSearchPage
 					.selectsProviderFromVppPlanDetailsPage();
 			Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
 
@@ -376,7 +376,7 @@ public class SiteSearchMobile {
 
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Details page$")
 	public void verify_providers_covered_ulayer_planDetails() {
-		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.ulayer.PlanDetailsPageMobile) getLoginScenario()
+		pages.mobile.acquisition.commonpages.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.commonpages.PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
 	}
@@ -390,7 +390,7 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		pages.mobile.acquisition.ulayer.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
+		pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
 				.clicksOnRallyToolFromHomePage();
 
 		if (providerSearchPage != null) {

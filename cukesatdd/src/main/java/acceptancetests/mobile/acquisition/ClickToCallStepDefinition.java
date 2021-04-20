@@ -18,11 +18,9 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-
-import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
 
 public class ClickToCallStepDefinition {
 

@@ -22,7 +22,7 @@ public class ExploreChangingPlansPage extends GlobalWebElementsMobile {
 		validate(discoverMoreResourcesLink);
 		discoverMoreResourcesLink.click();
 		validate(discoverMoreResourcesLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MORE_MEDICARE_RESOURCES)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MORE_MEDICARE_RESOURCES)) {
 			return new DiscoverMoreResourcesPage(driver);
 		}else{
 		
@@ -32,7 +32,7 @@ public class ExploreChangingPlansPage extends GlobalWebElementsMobile {
 		
 	}
 
-	public PrepareforInitialEnrollmentPage prepareForInitialEnrollmentClick() {
+	public PrepareforInitialEnrollmentPageMobile prepareForInitialEnrollmentClick() {
 		validate(prepareForInitialEnrollmentMedicareEducationLink);
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -40,8 +40,8 @@ public class ExploreChangingPlansPage extends GlobalWebElementsMobile {
 	    actions.moveToElement(prepareForInitialEnrollmentMedicareEducationLink);
 	    actions.click().build().perform();
 	    validate(navigationSectionMedicareEducationLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
-			return new PrepareforInitialEnrollmentPage(driver);
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
+			return new PrepareforInitialEnrollmentPageMobile(driver);
 		}else{
 		
 			return null;

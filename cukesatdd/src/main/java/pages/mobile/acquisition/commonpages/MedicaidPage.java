@@ -95,15 +95,15 @@ public class MedicaidPage extends UhcDriver{
 		}				
 	}
 		
-	public OtherHealthInsurancePage navigatesToNextStepMAorMAPD() {
+	public OtherHealthInsurancePageMobile navigatesToNextStepMAorMAPD() {
 			medicaidsaveandcontinue.click();
-				return new OtherHealthInsurancePage(driver);
+				return new OtherHealthInsurancePageMobile(driver);
 			
 		}
 	
-	public PlanPaymentOptions navigatesToNextStepPDP() {
+	public PlanPaymentOptionsMobile navigatesToNextStepPDP() {
 		medicaidsaveandcontinue.click();
-			return new PlanPaymentOptions(driver);
+			return new PlanPaymentOptionsMobile(driver);
 		
 	}
 	

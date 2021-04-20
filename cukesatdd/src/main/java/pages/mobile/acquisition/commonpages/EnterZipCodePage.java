@@ -30,7 +30,7 @@ public class EnterZipCodePage extends UhcDriver{
 		openAndValidate();
 	}
 	
-	public void validateZipComp(String zipCode) {
+	/*public void validateZipComp(String zipCode) {
 		try {
 			int zipCodeNumber = 1;
 			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
@@ -67,6 +67,72 @@ public class EnterZipCodePage extends UhcDriver{
 				}
 				driver.navigate().back();
 				zipCodeNumber++;
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}*/
+	public void validateZipComp(String zipCode) {
+		try {
+			int zipCodeNumber = 1;
+			System.out.println("Total " + zipForm.size() + " Zip code component[s] display on page");
+
+			while (zipCodeNumber <= zipForm.size()) {
+				Thread.sleep(3000);
+				ZipCodeText.get(zipCodeNumber - 1).clear();
+				ZipCodeText.get(zipCodeNumber - 1).sendKeys(zipCode);
+				waitForPageLoadSafari();
+				jsClickNew(ZipcodeButton.get(zipCodeNumber - 1));
+				System.out.println("Clicked on " + zipCodeNumber + " Zip Code Component");
+				System.out.println("Validating VPP page for Zip code " + zipCode);
+				Thread.sleep(20000);
+				String vppPageTitle = driver.getTitle();
+				if (driver.getWindowHandles().size() > 1) {
+					String currentPage = driver.getWindowHandle();
+					Set<String> newWindow = driver.getWindowHandles();
+					for (String tabs : newWindow) {
+						if (!tabs.equalsIgnoreCase(currentPage))
+							vppPageTitle = driver.switchTo().window(tabs).getTitle();
+					}
+				}
+
+				System.out.println("Actual : " + vppPageTitle);
+				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+					else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+						System.out
+								.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+					else
+						assertTrue("Not redirected to VPP page",
+								vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+				} else {
+					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
+					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+						System.out
+								.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
+					else
+						assertTrue("Not redirected to VPP page",
+								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+				}
+				if (driver.getWindowHandles().size() > 1) {
+					String currentPage = driver.getWindowHandle();
+					Set<String> newWindow = driver.getWindowHandles();
+					for (String parentWindow : newWindow) {
+						if (!parentWindow.equalsIgnoreCase(currentPage)) {
+							driver.switchTo().window(currentPage).close();
+							vppPageTitle = driver.switchTo().window(parentWindow).getTitle();
+							break;
+						}
+					}
+				}
+				else {
+					driver.navigate().back();
+				}
+				zipCodeNumber++;
+				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
+				threadsleep(2000);*/
 			}
 		} catch (Exception e) {
 			System.out.println(e);

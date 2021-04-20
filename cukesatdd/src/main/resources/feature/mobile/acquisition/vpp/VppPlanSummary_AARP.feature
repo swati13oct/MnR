@@ -44,6 +44,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Then the user validates Is my provider covered link
     Then the user clicks on Enroll Now and validates the Welcome to OLE Page
 
+    @ios
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
       | 15545 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next     |
@@ -78,7 +79,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | planyear |
       | 15550 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | current  |
 
-  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression 
+  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
   Scenario Outline: 7UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -192,7 +193,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | site | zipcode | isMultiCounty | county             | plantype | planName                                       | planyear |
       | AARP |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) | future   |
 
-  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @ios
+  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -251,7 +252,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultutiCounty | county             |
       | F322478 |   90210 | NO              | Los Angeles County |
 
-  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @ios
+  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
   Scenario Outline: To verify links displayed in the global footer of AARP site on vpp
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -479,7 +480,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | Plan Name | <planName> |
 
     Examples: 
-      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                              | planyear |
+      | TID       | zipcode | isMultutiCounty | county        | plantype | planName                          | planyear |
       | US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Gold (HMO) | current  |
       #| US2567133 |   70515 | YES             | Acadia Parish | MAPD     | Peoples Health Choices Value (HMO)       |current|
       #| US2567133 |   70515 | YES             | Acadia Parish | SNP      | Peoples Health Secure Health (HMO D-SNP) |current|

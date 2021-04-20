@@ -172,23 +172,23 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     #@ProviderSearchFromWidgetUlayer
     @ProviderSearchCommon_AARP
     Examples: 
-      | zipcode | site | plancount | year    |
-      |   10001 | AARP |        12 | future |
+      | zipcode | site | plancount	| year		|
+      |   10001 | AARP |        9 	| future	|
 
     #@ProviderSearchFromWidgetBlayer
     @ProviderSearchCommon_UHC
     Examples: 
-      | zipcode | site | plancount | year    |
-      |   10001 | UHC  |        12 | future |
+      | zipcode | site | plancount	| year		|
+      |   10001 | UHC  |        9 	| future	|
 
     #@ProviderSearchFromWidgetUlayer
     Examples: 
-      | zipcode | site | plancount | year    |
+      | zipcode | site | plancount | year   |
       |   55344 | AARP |         7 | future |
       |   04011 | AARP |         6 | future |
 
     #@ProviderSearchFromWidgetBlayer
     Examples: 
-      | zipcode | site | plancount | year    |
+      | zipcode | site | plancount | year   |
       |   55344 | UHC  |         7 | future |
       |   04011 | UHC  |         6 | future |

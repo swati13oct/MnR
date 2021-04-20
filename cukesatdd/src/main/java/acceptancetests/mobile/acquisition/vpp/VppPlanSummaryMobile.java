@@ -13,22 +13,21 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.bluelayer.AboutUsPageMobile;
-import pages.mobile.acquisition.bluelayer.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.bluelayer.DisclaimersPageMobile;
-import pages.mobile.acquisition.bluelayer.DrugCostEstimatorPageMobile;
-//import pages.mobile.acquisition.bluelayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.bluelayer.PrivacyPolicyUmsPageMobile;
-import pages.mobile.acquisition.ulayer.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
+import pages.mobile.acquisition.commonpages.DisclaimersPageMobile;
+import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
 import pages.mobile.acquisition.dce.bluelayer.SavingsOppurtunityMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.emailAndPrint.EmailAndPrintUtilMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
-import pages.mobile.acquisition.ulayer.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.ulayer.PlanDetailsPageMobile;
-import pages.mobile.acquisition.ulayer.SiteMapAARPPageMobile;
-import pages.mobile.acquisition.ulayer.VPPPlanSummaryPageMobile;
 //import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -113,7 +112,7 @@ public class VppPlanSummaryMobile {
 		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName, planType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 
-		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
+		pages.mobile.acquisition.commonpages.PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
 				.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -668,7 +667,7 @@ public class VppPlanSummaryMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(wd);
 		// plansummaryPage.viewPlanSummary(planType);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-		pages.mobile.acquisition.ulayer.PlanDetailsPageMobile plandetailspage = plansummaryPage
+		pages.mobile.acquisition.commonpages.PlanDetailsPageMobile plandetailspage = plansummaryPage
 				.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
@@ -692,11 +691,11 @@ public class VppPlanSummaryMobile {
 
 		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String drug = memberAttributesRow.get(1).getCells().get(1);
-		pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile dce = (pages.mobile.acquisition.ulayer.DrugCostEstimatorPageMobile) getLoginScenario()
+		pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile dce = (pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile) getLoginScenario()
 				.getBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE);
 		boolean isDrugPresent = dce.isDrugPresent(drug);
 		if (!isDrugPresent) {
-			pages.mobile.acquisition.ulayer.AddDrugDetailsMobile addDrugDetails = dce.addDrug(drug.split(" ")[0]);
+			pages.mobile.acquisition.commonpages.AddDrugDetailsMobile addDrugDetails = dce.addDrug(drug.split(" ")[0]);
 			if (null != addDrugDetails) {
 				getLoginScenario().saveBean(PageConstants.ADD_DRUG_DETAILS, addDrugDetails);
 			} else
@@ -781,7 +780,8 @@ public class VppPlanSummaryMobile {
 		dce.verifyPharmacyResults();
 		for (int i = 0; i < dce.getLstPharmacyNames().size(); i++)
 			if (dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
-				dce.getLstSelectPharmacy().get(i).click();
+				//dce.getLstSelectPharmacy().get(i).click();
+				dce.jsClickNew(dce.getLstSelectPharmacy().get(i));
 				break;
 			}
 

@@ -193,7 +193,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
 		{
-			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			WebElement pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Enrollment Basics')]"));
 			waitforElementNew(pageHeader);
 			Assert.assertTrue(true);
 			System.out.println("Initial Enrollment Period Page open correctly");
@@ -204,7 +204,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		
 		driver.navigate().back();
 		//Adding the below code as elements are not located in Safari browser after using navigate back
-		if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
+		if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
 			driver.navigate().refresh();
 			threadsleep(2000);
 		}
@@ -245,7 +245,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 			System.out.println(pageHeader.getText()+" page is displayed");
 			driver.navigate().back();
 			//Adding the below code as elements are not located in Safari browser after using navigate back
-			if(MRScenario.browsername.equalsIgnoreCase("Safari")) {
+			if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
 				driver.navigate().refresh();
 				threadsleep(2000);
 			}

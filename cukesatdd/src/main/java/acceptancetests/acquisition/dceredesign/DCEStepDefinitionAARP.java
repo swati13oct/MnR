@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -153,24 +154,7 @@ public class DCEStepDefinitionAARP {
 		BuildYourDrugList DCEbuildDrugList = tellUsAboutDrugPage.ClickAddDrug();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 	}
-	/*
-	 * 
-	 * UnUSed Step...
-	 * 
-	 * @Then("^the user clicks on Build Drug List to navigate to Step (\\d+)$")
-	 * public void the_user_clicks_on_Build_Drug_List_to_navigate_to_Step(int arg1)
-	 * throws Throwable { GetStartedPage DCEgetStarted = (GetStartedPage)
-	 * getLoginScenario() .getBean(PageConstants.DCE_Redesign_GetStarted);
-	 * BuildYourDrugList DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
-	 * getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,
-	 * DCEbuildDrugList);
-	 * 
-	 * ZipCodePlanYearCapturePage zipCodePlanYearPage = new
-	 * ZipCodePlanYearCapturePage(driver);
-	 * zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
-	 * getLoginScenario().saveBean(PageConstants.
-	 * DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage); }
-	 */
+
 
 	@Then("^the user validates error message for blank search$")
 	public void the_user_validates_error_message_for_blank_search() throws Throwable {
@@ -270,11 +254,6 @@ public class DCEStepDefinitionAARP {
 		tellUsAboutDrug.validateBrandDrugPage(BrandDrugName, genericDrugName);
 	}
 
-	@Then("^the user selects following Drug Details$")
-	public void the_user_selects_following_Drug_Details() throws Throwable {
-
-	}
-
 	@Then("^the user validates Blank Drug Quantity error message$")
 	public void the_user_validates_Blank_Quantity_error_message() throws Throwable {
 		TellUsAboutDrug tellUsAboutDrug = (TellUsAboutDrug) getLoginScenario()
@@ -320,9 +299,11 @@ public class DCEStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String zipcode = memberAttributesMap.get("ZipCode");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
+		
 	}
 
 	@When("^user selects plan year$")
@@ -355,23 +336,7 @@ public class DCEStepDefinitionAARP {
 		zipCodePlanYearPage.validateZipCodeErrorMessage();
 	}
 
-	/*
-	 * Need to be removed. Instead, please use - Then the user searches and adds the
-	 * following Drug to Drug List | DrugName | <drug1> |
-	 * 
-	 * 
-	 * @When("^adds drugs in drug list page$") public void
-	 * adds_drugs_in_drug_list_page(DataTable givenAttributes) { List<DataTableRow>
-	 * memberAttributesRow = givenAttributes.getGherkinRows(); Map<String, String>
-	 * memberAttributesMap = new HashMap<String, String>(); for (int i = 0; i <
-	 * memberAttributesRow.size(); i++) {
-	 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-	 * memberAttributesRow.get(i).getCells().get(1)); } String drugName =
-	 * memberAttributesMap.get("DrugName"); System.out.println("zipcode" +
-	 * drugName); BuildYourDrugList buildDrugList = new BuildYourDrugList(driver);
-	 * getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList,
-	 * buildDrugList); buildDrugList.addDrugs(drugName); }
-	 */
+
 
 	@When("^user should verify the Extra help on SNP plan type$")
 	public void user_should_verify_the_Extra_help_in_AARP() {
@@ -531,11 +496,11 @@ public class DCEStepDefinitionAARP {
 		tellUsAboutDrug.selectSupplyLength(drugSupplyLen);
 		buildDrugList = tellUsAboutDrug.ClickAddDrug();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		
-		 
+
+
 		System.out.println("Drugs List : " + druglist);
 
-//		if (druglist.isEmpty()) {
+		//		if (druglist.isEmpty()) {
 		if(StringUtils.isEmpty(druglist)) {
 			druglist = drugName;
 		} else {
@@ -544,7 +509,7 @@ public class DCEStepDefinitionAARP {
 		System.out.println("Drugs List after Drug " + drugName + " , Added : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
-}
+	}
 
 	@Then("^the user validates qty, frequency and Supply Length for following drug in DrugList Page$")
 	public void the_user_validates_qty_frequency_and_Supply_Length_for_following_drug_in_DrugList_Page(DataTable givenAttributes) throws Throwable {
@@ -644,11 +609,6 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.BRAND_DRUG1, DrugName);
 	}
 
-	@Then("^the user does drug search and selects drug for following drug$")
-	public void the_user_does_drug_search_and_selects_drug_for_following_drug(DataTable arg1) throws Throwable {
-
-	}
-
 	@Then("^the user clicks on Review Drug Costs to Land on Zip Entry Page$")
 	public void the_user_clicks_on_Add_Drug() throws Throwable {
 		BuildYourDrugList DCEbuildDrugList = (BuildYourDrugList) getLoginScenario()
@@ -680,38 +640,7 @@ public class DCEStepDefinitionAARP {
 		buildDrugList.addDrugs(drugName);
 	}
 
-	@And("^user should verify drug coverage and you pay value for not covered drug in drug pricing popup$")
-	public void user_should_verify_you_pay_value_for_not_covered_drug_in_drug_pricing_popup() {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.verifyDrugCoverageAndYouPayNotCoveredDrug();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugSummaryPage);
-	}
 
-	@And("^user should verify drug coverage and you pay value for covered drug in drug pricing popup$")
-	public void user_should_verify_drug_coverage_and_you_pay_value_for_covered_drug_in_drug_pricing_popup() {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.verifyDrugCoverageAndYouPayCoveredDrug();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugSummaryPage);
-	}
-
-	@And("^I access the DCE Redesign on aarp site from Plan Summary for first plan$")
-	public void accessDCERign_PlanSummary(DataTable attributes) {
-		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String plantype = memberAttributesMap.get("Plan Type");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		GetStartedPage getStartedPage = plansummaryPage.navigateToDCERedesignFromPlanSummary(plantype);
-		if (null != getStartedPage) {
-			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
-		} else
-			Assert.fail("DCE Redesign page object not loaded");
-	}
 
 	@And("^the user click on return to plan summary from Get Started Page to return to VPP Plan Summary$")
 	public void the_user_clicks_on_returnlink_to_vpp_planSummary_Getstarted() {
@@ -921,7 +850,7 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 
-		drugDetailsPage.clickEdit();
+		drugDetailsPage.vppdetails_clickEditPharmacy();
 	}
 
 	@Then("^user save the plan on drug detail page$")
@@ -1180,13 +1109,14 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	@Then("^user saves plan as favorite on drug summary page AARP site$")
+	@Then("^user saves MAPD plan as favorite on drug summary page AARP site$")
 	public void user_saves_plan_as_favorite_on_drug_summary_AARP_site(DataTable givenAttributes)
 			throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);
 		System.out.println("Plan name" + PlanName);
+		drugSummaryPage.clickOnMAPDPlan();
 		drugSummaryPage.savePlan(PlanName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 		/*
@@ -1341,13 +1271,6 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
-	@When("^user click on Switch To Generic$")
-	public void User_click_on_Switch_To_Generic_in_AARP() throws Throwable {
-		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.clickswitchToGeneric();
-
-	}
 
 	@When("^user verify drug can switch to generic drug$")
 	public void user_verify_drug_can_switch_to_generic_drug_aarp(DataTable givenAttributes) throws Throwable {
@@ -1649,7 +1572,7 @@ public class DCEStepDefinitionAARP {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.SelectMailPharmacy();
-		String pharmacy = "Preferred Mail Service Pharmacy";
+		String pharmacy = "OptumRx Mail Service Pharmacy";
 		drugDetailsPage.validatePharmacyName(pharmacy);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_NAME, pharmacy);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
@@ -1661,7 +1584,7 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.selectMailOrderPharmacy();
 		//getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
-		String pharmacy = "Preferred Mail Service Pharmacy";
+		String pharmacy = "OptumRx Mail Service Pharmacy";
 		drugSummaryPage.validatePharmacyName(pharmacy);
 		getLoginScenario().saveBean(PageConstants.PHARMACY_NAME, pharmacy);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -2130,6 +2053,7 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user should be able to see \"([^\"]*)\" by default$")
 	public void user_should_be_able_to_see_by_default(String planType) throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.verifyDefaultPlanType(planType);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -2654,12 +2578,6 @@ public class DCEStepDefinitionAARP {
 		visitorProfilePage.clickAddDrugsGlobal();
 	}
 
-	@When("^user click on Switch To Generic on drug summary$")
-	public void User_click_on_Switch_To_Generic_drug_summary() throws Throwable {
-		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.clickswitchToGeneric();
-
-	}
 
 	@Then("^user click on standard tab from drug details$")
 	public void user_click_on_standard_tab_from_drug_details() {
@@ -2764,4 +2682,116 @@ public class DCEStepDefinitionAARP {
 		drugDetailsPage.validateDrugStageInfoModals_NonLISbuydownPlans();
 	}
 	
+	@When("^user toggle to PDP plan type on drug summary page$")
+	public void user_toggle_to_PDP_plan_type_on_drug_summary_page() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifyPDPPlanToggle();
+	}
+
+	@When("^user toggle to SNP plan type on drug summary page$")
+	public void user_toggle_to_SNP_plan_type_on_drug_summary_page() {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.verifySNPPlanToggle();
+	}
+
+	/**
+	 * Adding steps to validate filter on change Pharmacy page
+	 * @throws Throwable
+	 */
+
+	@Then("^the user validates Pharmacy Filter - Error message and x cancel function is working on Summary page - Change Pharmacy Page$")
+	public void the_user_validates_Pharmacy_Filter_Error_message_and_x_cancel_function_is_working_on_Summary_page_Change_Pharmacy_Page() throws Throwable {
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.validatePharmacyFilterErrormessage();
+		drugSummaryPage.validateXcleartextPharmacyFilter();
+	}
+
+	@Then("^the user applies pharmacy filter for following text on Summary page - Change Pharmacy Page$")
+	public void the_user_applies_pharmacy_filter_for_following_text_on_Summary_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String FilterText = memberAttributesMap.get("PharmacyFilterText");		
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		drugSummaryPage.ApplyPharmacyFilter(FilterText);
+	}
+
+	@Then("^the user validates Pharmacy Filter - Error message and x cancel function is working on Details page - Change Pharmacy Page$")
+	public void the_user_validates_Pharmacy_Filter_Error_message_and_x_cancel_function_is_working_on_Details_page_Change_Pharmacy_Page() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validatePharmacyFilterErrormessage();
+		drugDetailsPage.validateXcleartextPharmacyFilter();
+	}
+
+	@Then("^the user applies pharmacy filter for following text on Preferred pharmacies Tab, Details page - Change Pharmacy Page$")
+	public void the_user_applies_pharmacy_filter_for_following_text_on_Preferred_pharmacies_Tab_Details_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String FilterText = memberAttributesMap.get("PharmacyFilterText");		
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validatePreferredTab();
+		drugDetailsPage.ApplyPharmacyFilter(FilterText);
+	}
+
+	@Then("^the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page$")
+	public void the_user_applies_pharmacy_filter_for_following_text_on_Standard_pharmacies_Tab_Details_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String FilterText = memberAttributesMap.get("PharmacyFilterText");		
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateStandardTab();
+		drugDetailsPage.ApplyPharmacyFilter(FilterText);
+	}
+	
+
+	@Then("^the user selects the following drug recommendation and validates Drug Search page is displayed and add drug$")
+	public void the_user_selects_the_following_drug_recommendation_and_validates_Drug_Search_page_is_displayed_and_add_drug(DataTable givenAttributes) throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}
+		String drugName = memberAttributesMap.get("SelectDrugRecommendation");
+		System.out.println(drugName);
+		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
+
+		boolean drugRecommendationDisplayed;
+		drugRecommendationDisplayed = buildDrugList.ClickAddDrugRecommended(drugName);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		System.out.println("Drugs List : " + druglist);
+		if(drugRecommendationDisplayed) {
+			String DrugName = driver.findElement(By.xpath("//h4[contains(text(), '"+drugName+"')]")).getText();
+//			if (druglist.isEmpty()) {
+			if(StringUtils.isEmpty(druglist)) {
+				System.out.println("Added Drug : "+DrugName+", for Drug recommendation : "+drugName);
+				druglist = DrugName;
+			} else {
+				druglist = druglist + "&" + DrugName;
+			}
+			System.out.println("Drugs List after Drug " + DrugName + " , Added : " + druglist);
+		}
+		else {
+			System.out.println("Drug Recommendation is not displayed : Drug is not added");
+		}
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+	}
+
 }

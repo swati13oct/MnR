@@ -42,6 +42,8 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     #Then the user validates Disclaimers section
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates Estimated Annual Drug Costs on Prescription Drug Costs Tab on Plan Details Page
+    Then the user verify and edit the Pharmacy from vpp detail page
+    Then user clicks on change pharmacy link from details page
 
     @DCE_Redesign_VPP_PlanDetails_MAPD_AARP
     Examples: 
@@ -94,6 +96,10 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    Then the user verify the Retail chain pharmacy on detail page
+    And user clicks on change pharmacy link from details page
+    Then user clicks on Keep Using This Pharmacy on change pharmacy page
+    Then user validate "WALGREENS" pharmacy on detail page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
@@ -157,41 +163,6 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | zipcode | plantype | county       | isMultutiCounty | drug1     | planname                                              | planyear |
       |   78006 | SNP      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | future   |
 
-  @dceRedesignDrugDetailsDefaultPharmacy @F497405
-  Scenario Outline: Test to Verify default Retail chain pharmacy on detail page
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    Then the user navigates to the plan details for the given plan type
-      | Plan Type | <plantype> |
-      | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details for the plan
-    Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Drug Details Page
-    Then the user verify the Retail chain pharmacy on detail page
-    And user clicks on change pharmacy link from details page
-    Then user clicks on Keep Using This Pharmacy on change pharmacy page
-    Then user validate "WALGREENS" pharmacy on detail page
-
-    @dceRedesignDrugDetailsDefaultPharmacy_MAPD_AARP @drugDetailschangePharmacyAARP
-    Examples: 
-      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
-      | AARP |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-
-    @dceRedesignDrugDetailsDefaultPharmacy_MAPD_UHC @drugDetailschangePharmacyUHC
-    Examples: 
-      | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
-      | UHC  |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @dceRedesing_PlanCost @F501519 @decRelease
   Scenario Outline: Test to Verify Prescription Drug benefit and plan cost tab on vpp details
@@ -283,93 +254,6 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             | planyear |
       | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) | future   |
 
-  @editPharmacyFromVPPDetail @decRelease
-  Scenario Outline: Test to verify user can edit the pharmacy from vpp detail page
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    Then the user navigates to the plan details for the given plan type
-      | Plan Type | <plantype> |
-      | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details for the plan
-    Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Drug Details Page
-    #And clicks on Review drug cost button for detail page
-    Then the user Clicks button to VPP Plan Details Page from Drug Details Page
-    Then the user validates planName matches plan Name in VPP
-    Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
-    Then the user verify and edit the Pharmacy from vpp detail page
-    Then user clicks on change pharmacy link from details page
-
-    @editPharmacyFromVPPDetail_AARP
-    Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1     | planyear | drug3      | drug4         | drug5            | drug6   | planname                                           |
-      | AARP |   90210 | MAPD     | none   | no              | meloxicam | future   | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-
-    @editPharmacyFromVPPDetail_UHC
-    Examples: 
-      | site | zipcode | plantype | county       | isMultutiCounty | drug1   | planname                             | planyear |
-      | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | AARP Medicare Advantage Choice (PPO) | future   |
-
-  @drugDetailPharmacyFunctionality @decRelease
-  Scenario Outline: Test to verify sort, pagination, invalid zipcode error functionality for change pharmacy on drug detail page
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>         |
-      | County Name     | <county>          |
-      | Is Multi County | <isMultutiCounty> |
-    And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    And the user selects plan year
-      | Plan Year | <planyear> |
-    Then the user navigates to the plan details for the given plan type
-      | Plan Type | <plantype> |
-      | Plan Name | <planname> |
-    And I access the DCE Redesign from Plan Details for the plan
-    Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Drug Details Page
-    When user clicks on change pharmacy link from details page
-    Then user verify details page change pharmacy modal
-    When user selects Preferred mail order pharmacy from drug details page
-    Then the message "OptumRx Home Delivery only provides 90-day refill for your drugs." should be displayed on change pharmacy modal from drug detail page
-    And user verify the default distance on change pharmacy modal from drug details
-    When user sort the pharmacy list by "A to Z" from drug details
-    Then pharmacy list should be displayed in ascending order from drug details
-    When user sort the pharmacy list by "Z to A" from drug details
-    Then pharmacy list should be displayed in descending order from drug details
-    When user clicks on next button on change pharmacy modal from drug details
-    Then user should be navigated to second page of pharmacy list from drug details
-    When user clicks on back button on change pharmacy modal from drug details
-    Then user should be navigated to first page of pharmacy list from drug details
-    When user search with zipcode with no pharamacies from drug details
-      | ZipCode | <zipCode1> |
-    When user search with incorrect zipcode from drug details
-      | ZipCode | <zipCode2> |
-    Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal from drug details
-
-    @drugDetailPharmacyFunctionality_AARP @drugDetailschangePharmacyAARP
-    Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | planname                                           |
-      | AARP |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | AARP Medicare Advantage SecureHorizons Focus (HMO) |
-
-    @drugDetailPharmacyFunctionality_UHC @drugDetailschangePharmacyUHC
-    Examples: 
-      | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | drug4         | drug5            | drug6   | planname                                           |
-      | UHC  |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @dCERedesign_ChangePharmacyDetailsNoResults @decRelease
   Scenario Outline: Test to verify no results message displayed for change pharmacy modal on drug details page

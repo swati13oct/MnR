@@ -80,15 +80,15 @@ public class LoginAssitanceMessagePage extends UhcDriver{
 		JavascriptExecutor jse = (JavascriptExecutor)driver;
 		jse.executeScript("window.scrollBy(0,-350)", "");
 		Thread.sleep(1000);
-		GenericErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_SOME_INFORMATION);
+		GenericErrorMessage.getText().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_SOME_INFORMATION);
 		
 		jse.executeScript("window.scrollBy(0,350)", "");
 		Thread.sleep(2000);
-		PlanMemberIDErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_YOUR_MEMBER_ID_WAS_NOT_RECOGINIZED);
-		DatefieldErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_ENTER_DATE_OF_BIRTH);
-		LastNameErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_LAST_NAME);
-		ZipcodeErrorMessage.getText().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_UID_PWD);
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_UID_PWD)){
+		PlanMemberIDErrorMessage.getText().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_YOUR_MEMBER_ID_WAS_NOT_RECOGINIZED);
+		DatefieldErrorMessage.getText().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_ENTER_DATE_OF_BIRTH);
+		LastNameErrorMessage.getText().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_LAST_NAME);
+		ZipcodeErrorMessage.getText().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_PLANS_UID_PWD);
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_PLANS_UID_PWD)){
 			return new LoginAssitanceMessagePage(driver);
 		}
 		return null;

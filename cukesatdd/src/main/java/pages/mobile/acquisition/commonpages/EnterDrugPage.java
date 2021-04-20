@@ -108,11 +108,11 @@ public class EnterDrugPage extends UhcDriver {
 	}
 
 
-	public SelectDosagePage clickDrugName(String drugName, boolean skipClick) {
+	public SelectDosagePageMobile clickDrugName(String drugName, boolean skipClick) {
 		if (skipClick != true){
 			driver.findElement(By.className(drugName.toLowerCase())).click();
 		}
-		return new SelectDosagePage(driver);
+		return new SelectDosagePageMobile(driver);
 	}
 
 }

@@ -27,9 +27,11 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
       | TFN Xpath | <TFNxpath> |
-    Then the user enter zipcode in homepage
-      | Zip Code  | <zipcode>    |
-      | Plan Type | <MAplantype> |
+    #Then the user enter zipcode in homepage
+    # | Zip Code  | <zipcode>    |
+    #| Plan Type | <MAplantype> |
+    Then the user navigates to MA Plan Details Page and validates Federal TFN
+      | Zip Code | <zipcode> |
     #Then the user navigates to plan tab for any plan
     #| Plan Type | <MAplantype> |
     #Then the user navigates to Plan Details Page for any plan and validates Federal TFN
@@ -39,10 +41,12 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <TFNNo1>   |
       | TFN Xpath | <TFNxpath> |
-    Then the user navigates to plan tab for any plan
-      | Plan Type | <MSplantype> |
+    #Then the user navigates to plan tab for any plan
+    #  | Plan Type | <MSplantype> |
     # Then the user navigates to Plan Details Page for any plan and validates Federal TFN
     #| Plan Type | <MSplantype> |
+    Then the user navigates to Medsupp Plans in VPP and validates Medsupp TFN
+      | Zip Code | <zipcode> |
     Then the user validates TFN Number
       | TFN No    | <MedsuppTFNNo>    |
       | TFN Xpath | <MedsuppTFNxpath> |

@@ -151,7 +151,7 @@ public class IntroductionInformationPage extends UhcDriver{
 
 	}
 
-	public BeneficiaryInformationPage navigatesToNextStep() {
+	public BeneficiaryInformationPageMobile navigatesToNextStep() {
 		enrollmentNext.click();
 		
 		try {
@@ -178,7 +178,7 @@ public class IntroductionInformationPage extends UhcDriver{
 		
 		if(null !=findElement(elementData)  && findElement(elementData).getText().equalsIgnoreCase("Step 2: Personal Information"))
 		{
-			return new BeneficiaryInformationPage(driver);
+			return new BeneficiaryInformationPageMobile(driver);
 		}
 		
 		return null;
