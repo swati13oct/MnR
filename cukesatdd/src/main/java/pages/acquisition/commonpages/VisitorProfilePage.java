@@ -35,7 +35,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
+	@FindBy(xpath = "//li//a[contains(text(),'Sign In')]")
 	private WebElement signIn;
 	
 	@FindBy(css = "div.signupCTA a.signin-font")
@@ -77,7 +77,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 
-	@FindBy(xpath = "(//a[text()='Sign Out'])[2]")
+	@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
 	private WebElement signOut;
 
 	@FindBy(id = "enrollment-next-button")
@@ -121,7 +121,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//h4[contains(text(),'drug')]/following::button[1]")
 	public WebElement drugGetStarted;
 
-	@FindBy(xpath = "//a[contains(@class,'items')]//span[contains(text(),'Drugs')]")
+	@FindBy(xpath = "//a[contains(@dtmname,'Saved Drugs')]/span[2]")
 	public WebElement drugHeader;
 
 	@FindBy(css = "h3#saved-drugs")

@@ -56,13 +56,16 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement pcontinue;
 
-	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Enroll']")
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[text()='Enroll']")
 	private WebElement enrollLink;
 	
-	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
+	//@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
+	
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[contains(text(),'Shop')]")
+	
 	private WebElement shopLink;
 	
-	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
 	private WebElement shopLinkMsg;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")

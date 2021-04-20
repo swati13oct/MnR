@@ -299,16 +299,16 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | PlanName | <planname> |
     Then the user validates all added Drugs on Plan Compare
     Then the user clicks on back on all plan linnk in Plan Compare page
+    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+      | Plan Name | <planname> |
+    Then the user validates the Plan details on OLE
+    Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates Learn more modal for Welcome OLE
+    Then the user validates Leave OLE modal for Welcome OLE
+    Then the user validates cancellation modal for Welcome OLE
+    Then the user navigates to Personal Information Page
+    And the user cancels enrollment and navigates to homepage
 
-    #Then the user clicks on Enroll Now for AARP site to start the OLE flow
-    #| Plan Name | <planname> |
-    #Then the user validates the Plan details on OLE
-    #Then the user validates TFN in Welcome OLE Right Rail
-    #Then the user validates Learn more modal for Welcome OLE
-    #Then the user validates Leave OLE modal for Welcome OLE
-    #Then the user validates cancellation modal for Welcome OLE
-    #Then the user navigates to Personal Information Page
-    #And the user cancels enrollment and navigates to homepage
     @DCE_E2E_Scenario1_UAT_AARP @regressionAARP
     Examples: 
       | Scenario           | site | zipcode | county          | isMultutiCounty | plantype | drugnameAutocomplete | brandDrug | genericDrug | drug1   | quantity1 | frequency1 | supplyLen1     | drug2     | drug3    | drug4          | drug5  | planname                        | supplyLength   | brandDrug1 | genericDrug1         |
