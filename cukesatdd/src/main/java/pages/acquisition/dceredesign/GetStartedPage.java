@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
@@ -111,7 +112,8 @@ public class GetStartedPage extends UhcDriver {
 
 	public PrescriptionsProvidersBenefitsPage clickReturnToAcqHomePAge() {
 		driver.close();
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		waitForPageLoadSafari();
 		threadsleep(5000);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
