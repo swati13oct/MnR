@@ -4916,9 +4916,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]"
 					+ "//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
-			mobileswipeHorizantal("50", true);
+			// mobileswipeHorizantal("50", true);
 			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
-			scrollToView(MAmoreDetailsLink);
+			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+				iosScroll(MAmoreDetailsLink);
+			} else {
+				scrollToView(MAmoreDetailsLink);
+			}
 
 			jsClickNew(MAmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
@@ -4927,8 +4931,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement PDPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@id,'viewmoredetlinkpdp')]"));
 			// CommonUtility.waitForPageLoadNew(driver, PDPmoreDetailsLink, 30);
-			mobileswipeHorizantal("50", true);
-			scrollToView(PDPmoreDetailsLink);
+
+			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+				iosScroll(PDPmoreDetailsLink);
+			} else {
+				scrollToView(PDPmoreDetailsLink);
+			}
 			// PDPmoreDetailsLink.click();
 			jsClickNew(PDPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for PDP plan" + planName);
@@ -4937,8 +4945,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			WebElement SNPmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::h3/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(text(),'View Plan')]"));
 			// CommonUtility.waitForPageLoadNew(driver, SNPmoreDetailsLink, 30);
-			mobileswipeHorizantal("50", true);
-			scrollToView(SNPmoreDetailsLink);
+			if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+				iosScroll(SNPmoreDetailsLink);
+			} else {
+				scrollToView(SNPmoreDetailsLink);
+			}
+
 			// SNPmoreDetailsLink.click();
 			jsClickNew(SNPmoreDetailsLink);
 			System.out.println("View Plan Details Link is clicked for MA plan" + planName);
@@ -5216,6 +5228,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
+				iosScroll(allPlans.get(i));
 				jsClickNew(allPlans.get(i));
 			}
 		}

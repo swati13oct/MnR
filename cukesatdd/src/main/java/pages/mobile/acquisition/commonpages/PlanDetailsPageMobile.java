@@ -104,7 +104,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 
-	@FindBy(id = "plancosts")
+	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
 	private WebElement planCostsTab;
 
 	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
@@ -178,6 +178,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
 	private WebElement planMonthlyPremium;
+
+	
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement planYearlyPremium;
 
@@ -978,7 +980,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 */
 	public boolean clickAndValidatePlanCosts(String monthlyPremium, String yearlyPremium) throws Exception {
 		boolean bValidation = false;
-		scrollToView(planCostsTab);
+		//scrollToView(planCostsTab);
+		iosScroll(planCostsTab);
 		// validateNew(planCostsTab);
 		// planCostsTab.click();
 		jsClickNew(planCostsTab);
