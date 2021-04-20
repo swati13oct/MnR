@@ -1500,6 +1500,9 @@ public void useraddDrugsVPP(String drugDetails) {
 }
 
 public void userPreDCE() {
+	if(validate(MAViewPlansLink,15) ) {
+		MAViewPlansLink.click();
+	}
 	threadsleep(10000);
 	drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='add-drug']"));
 	jsClickNew(drugCoveredeVPP);
@@ -1736,7 +1739,8 @@ public void validateDrugProvider() {
 	ArrayList<String> vpProviders = new ArrayList<String>();
 	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 	DocInPRE = PlanRecommendationEngineDoctorsPage.confirmationResults;
-	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1].trim());
+	scrollToView(DrugCount);
+	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("&")[0].split("Drugs")[1].trim());
 	for(int i=0; i<drgcount;i++) {
 		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div[id*='DrugName-noplan']")).getText().trim()
 				.toUpperCase() + " "
@@ -1769,7 +1773,7 @@ public void validateDrugProvider() {
 public void Pharmacytype() {
 	threadsleep(5000);
 	int count = Druglist.size();
-	Assert.assertTrue(Druglist.get(count).findElement(By.cssSelector("span")).getText().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
+	Assert.assertTrue(Druglist.get(count-1).findElement(By.cssSelector("span")).getText().trim().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
 }
 
 public void navigatePRE(HashMap<String, String> inputdata) {
