@@ -1,6 +1,7 @@
 
 package pages.acquisition.dceredesign;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,12 +45,40 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
 	private WebElement breaCrumbLink;
 
+	@FindBy(xpath = "//span[contains(@class,'back-to-view-all-pla')]")
+	private WebElement backToHomeLink;
+	
+	@FindBy(xpath = "//label[text()='Search query']//following-sibling::input[1]")
+	public WebElement YahooSearchField;
+
+	@FindBy(xpath = "//a[contains(text(),'Be right back')]")
+	public WebElement YahooSearchResult;
+	
+	@FindBy(xpath = "//h3[contains(text(),'Estimate Your Drug Costs')]")
+	public WebElement googleSearchResult;
+	
+	@FindBy(xpath = "//button[@type='button']//following-sibling::input[1]")
+	public WebElement YahooSearchBttn;
+	
+	@FindBy(xpath = "//*[contains(@title,'Search')]")
+	public WebElement GoogleSearchField;
+
+	@FindBy(xpath = "//*[@id='tsf']/div[2]/div/div[3]/center/input[1]")
+	public WebElement GoogleSearchButton;
+
 	public GetStartedPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
 		openAndValidate();
 	}
+
+	public GetStartedPage(WebDriver driver, boolean isSearchEngine) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		System.out.println("dce from search engine");
+	}
+
 
 	@Override
 	public void openAndValidate() {
@@ -136,6 +165,72 @@ public class GetStartedPage extends UhcDriver {
 	public void validateBreadCrumb(String breadCrumb) {
 		Assertion.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().equals(breadCrumb));
 		        }
+		        
+		        
+public void yahooSearch(String searchParameter) {
+		
+		CommonUtility.waitForPageLoad(driver, YahooSearchField, 30);
+		YahooSearchField.sendKeys(searchParameter);
+		CommonUtility.waitForPageLoad(driver, YahooSearchBttn, 30);
+		YahooSearchBttn.click();
+		System.out.println("Yahoo Search entered for :"+searchParameter);
+
+		CommonUtility.waitForPageLoad(driver, YahooSearchResult, 30);
+		if(YahooSearchResult.isDisplayed())
+			System.out.println("Yahoo search result found");
+		else {
+			System.out.println("yahoo search result not found");
+			Assertion.assertFalse("no yahoo search result found", false);
+		}
+		YahooSearchResult.click();
+		System.out.println("Yahoo Results - Get started - Link Clicked");
+		switchToNewTab();
+		
+	}
+	
+	public void googleSearch(String searchParameter) {
+		
+		
+
+		CommonUtility.waitForPageLoad(driver, GoogleSearchField, 30);
+		
+		GoogleSearchField.sendKeys(searchParameter + Keys.ENTER);
+		System.out.println("Google Search entered for :"+searchParameter);
+		CommonUtility.waitForPageLoad(driver, googleSearchResult, 30);
+		if(googleSearchResult.isDisplayed())
+			System.out.println("Google search result found");
+		else {
+			System.out.println("Google search result not found");
+			Assertion.assertFalse("no Google search result found", false);
+		}
+		googleSearchResult.click();
+		System.out.println("Google Results - Get started - Link Clicked");
+		//switchToNewTab();
+		
+	}
+	
+	
+	public void openUrl(String url) {
+		// TODO Auto-generated method stub
+		start(url);
+		}
+	
+	public boolean homeLinkIsVisibleAndClicked() {
+		
+		if(backToHomeLink.isDisplayed()){
+			backToHomeLink.click();
+			if(driver.getTitle().contains("ARP Medicare Plans from UnitedHealthcare") || driver.getTitle().contains("Medicare Coverage Options from UnitedHealthcare")){
+				return true;
+			}	else{
+				Assertion.assertTrue("Home page is reached", false);
+				return false;
+			}
+		}else{
+			Assertion.assertTrue("Return to home link is not visible", false);
+			return false;
+		}
+		
+	}
 
 }
 

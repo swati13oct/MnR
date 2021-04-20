@@ -22,6 +22,7 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
@@ -307,6 +308,7 @@ public class DCEStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
 		String zipcode = memberAttributesMap.get("ZipCode");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
@@ -2861,6 +2863,58 @@ public class DCEStepDefinitionAARP {
 		}
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
+	}
+	
+	
+	@Then("^user validates the return to home link is visible and clicked$")
+	public void user_validates_the_return_to_home_link_isvisible(DataTable attributes)
+	throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		/*List<DataTableRow> memberAttributesRow =attributes.getGherkinRows();
+		for(int i=0 ; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0) ,
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		
+		GetStartedPage drugDetailsPage = new GetStartedPage(driver);
+		boolean isDrugDetails = drugDetailsPage.homeLinkIsVisibleAndClicked();
+		if(isDrugDetails)
+			Assertion.assertTrue("DCE return to home link takes to home page",true);
+		else
+			Assertion.fail("DCE return to home does not take to home page 	");
+	}	
+	
+
+	@Given("^user is on Yahoo or google and search UHC drug cost estimator and navigate to dce page$")
+	public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page(DataTable attributes) {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String searchParameter = memberAttributesMap.get("searchParameter");
+		String searchengine = memberAttributesMap.get("searchengine");
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		GetStartedPage dcepage = new GetStartedPage(wd,true);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		if(searchengine.equalsIgnoreCase("yahoo")){
+			String url = "https://www.Yahoo.com/";
+			dcepage.openUrl(url);
+			dcepage.yahooSearch(searchParameter);
+		}else{
+			String url = "https://www.google.com/";
+			dcepage.openUrl(url);
+			dcepage.googleSearch(searchParameter);
+		}
+		
+
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, dcepage);
+
 	}
 
 }
