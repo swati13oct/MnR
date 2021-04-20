@@ -5973,7 +5973,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//h2[text()='Your Guest Profile']")
 	private WebElement shopperProfilePageHeader;
 
-	@FindBy(xpath = "(//input[@id='updates-email'])[2]")
+	@FindBy(xpath = "(//input[@id='updates-email'])")
 	private WebElement requestemailaddress;
 	
 	@FindBy(xpath = "//input[@id='updates-email']")
