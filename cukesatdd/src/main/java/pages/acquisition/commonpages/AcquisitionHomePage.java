@@ -70,7 +70,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ShopdsnpEnrollButton;
 
-	@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
+	//@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
+	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
 	private WebElement LearnMedicareMedsuppEnrollButton;
 
 	@FindBy(id = "zipcode")
