@@ -353,7 +353,7 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 			count = 5;
 		if(confirmationSize==count)
 			System.out.println("Doctors Size is : " + count);
-			jsClickNew(continueBtn);
+			jsClickNew(modalContinuedoctors);
 			threadsleep(3000);
 		}
 

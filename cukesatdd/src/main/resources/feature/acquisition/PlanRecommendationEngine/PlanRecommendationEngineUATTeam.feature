@@ -1,7 +1,7 @@
 @PlanRecommendationEngineUAT
 Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
-  @PRE @planrecommendation @PRE_UAT_VP_DOC_DRUG_PlanName_Scenario-3
+  @PRE @planrecommendation @PRE_UAT_VP_DOC_DRUG_PlanName_Scenario-3 @F583139
   Scenario Outline: <Zipcode> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> , <PlanYear>  - To validate drug and doctors in Visitor profile
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

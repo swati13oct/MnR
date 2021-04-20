@@ -29,7 +29,7 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
       | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness |
       |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  |
 
-  @PRE @planrecommendation @costpreferencespage @costpreferencespageselection @F374228
+  @PRE @planrecommendation @prioritypage @costpreferencespageselection @F374228
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Function in Cost Preferences using Single County in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -58,8 +58,8 @@ Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan 
     Examples: 
       | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
       |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
-      |   90201 | NO            | [blank] | None          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,Yes,Yes                | Lower                |
 
+  #|   90201 | NO            | [blank] | None          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,Yes,Yes                | Lower                |
   @PRE @planrecommendation @costpreferencespage @costpreferenceserror @F374228
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> - To validate Error Function in Cost Preferences using Single County in Plan Recommendation Engine
     Given the user is on UHC medicare acquisition site landing page
