@@ -3640,7 +3640,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //					System.out.println("Submit button is displayed");
 		}
 		WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
-		WebElement FindPlansBtn = driver.findElement(By.xpath("//button[text()='Find Plans']"));
+		WebElement FindPlansBtn = driver.findElement(By.xpath("//button//*[text()='Find Plans']"));
 		WebElement RequestMoreInfoLink = driver
 				.findElement(By.xpath("//a[text()='Request More Help and Information']"));
 		WebElement EnrollLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
