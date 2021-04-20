@@ -581,11 +581,14 @@ public abstract class UhcDriver {
 	}
 
 	public boolean checkElementisEnabled(WebElement element) {
-		if (element.getAttribute("@disbaled") == "true") {
-			System.out.println("Still Looking for Element to enable .......");
-			sleepBySec(10);
-			return false;
+		System.out.println("Looking for Element to enable .......");
+		try {
+			if (element.getAttribute("@disbaled") == "true") {
+				System.out.println("Element is enabled to perform action .......");
 
+			}
+		} catch (Exception e) {
+			System.out.println("Element not enabled hence action failed on screen....");
 		}
 
 		return true;
@@ -600,15 +603,14 @@ public abstract class UhcDriver {
 			// TouchAction ta = new TouchAction((AppiumDriver)driver);
 			// ta.moveTo(moveToOptions)
 
-			/*Actions ac = new Actions(driver);
+			Actions ac = new Actions(driver);
 			ac.moveToElement(element);
 			// backToTop.isDisplayed();
-			System.out.println("Scroll finished to element on IOS device");*/
-			
-			JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-	        javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
-			
-			
+			System.out.println("Scroll finished to element on IOS device");
+
+			// JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+			// javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",
+			// element);
 
 		} else {
 			try {
@@ -669,8 +671,8 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		// jsClickNew(Element);
-		Element.click();
+		 Element.click();
+		 
 
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
@@ -1241,11 +1243,10 @@ public abstract class UhcDriver {
 		js.executeScript(
 				"document.getElementsByClassName('uhc-select ng-pristine ng-valid').value =='" + option + "';");
 	}
-	
 
 	public void iosScroll(WebElement element) {
 		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-        javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+		javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
 	// IOSElement picker= (IOSElement) new

@@ -132,7 +132,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		 */
 		Thread.sleep(2000);
 		validateNew(addToDrugList);
-		Thread.sleep(2000);
+		scrollToView(addToDrugList);
 		jsClickNew(addToDrugList);
 
 		// addToDrugList.click();
