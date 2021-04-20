@@ -838,7 +838,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
@@ -1207,7 +1207,7 @@ public class DrugSummaryPage extends UhcDriver {
     		switchToNewTabNew(ExtraHelpLink);
     		CommonUtility.checkPageIsReadyNew(driver);
     		if(driver.getCurrentUrl().contains("extra-help")){
-    			WebElement ExtraHelpText = driver.findElement(By.xpath("//h2[contains(text(),'Extra Help')]"));
+    			WebElement ExtraHelpText = driver.findElement(By.xpath("(//h2//*[contains(text(),'Extra Help')])[1]"));
                 validateNew(ExtraHelpText);
                 System.out.println("Extra Help page is displayed");
     		}
