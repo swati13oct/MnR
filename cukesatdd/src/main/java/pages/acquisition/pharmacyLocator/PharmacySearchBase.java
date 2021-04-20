@@ -52,8 +52,15 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
 
+		scrollToView(distanceDropownID);
+		selectFromDropDownByText(driver, distanceDropownID, distance);
+		sleepBySec(3);
+
 		String initialZipVal = zipcodeField.getAttribute("value");
 		System.out.println("initialZipVal is : " + initialZipVal);
+		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
+		validateNoresultsZipcodeError(zipcode);
+		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
 
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
@@ -80,19 +87,16 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
 				}
+				else {
+					Assert.assertTrue(
+							"PROBLEM - this is not first time entering zip for multicounty or changing from zip that was not, should NOT see multicounty popup",
+							!pharmacyValidate(countyModal));
+				}
 			}
 			System.out.println("*****County details are entered******");
 		} else {
 			System.out.println("*****Zip format is not right******");
 		}
-
-		scrollToView(distanceDropownID);
-		selectFromDropDownByText(driver, distanceDropownID, distance);
-
-		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
-		validateNoresultsZipcodeError(zipcode);
-		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
-		// searchbtn.click();
 
 		return testNote;
 	}
@@ -179,7 +183,16 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		sleepBySec(1); //note: let the page settle down
 //		searchbtn.click();
 		jsClickNew(searchbtn);
-		sleepBySec(50);
+
+		// let the plans load, wait for the loading symbol to disappear
+		if (!loadingBlock.isEmpty())
+//			waitforElementDisapper(By.className("loading-block"), 90);
+			waitforElementDisapper(loadingSpinner, 90);
+		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
+//			waitforElementDisapper(By.className("loading-block"), 30);
+			waitforElementDisapper(loadingSpinner, 90);
+		sleepBySec(1); // note: let the page settle down
+//		sleepBySec(50);
 		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
