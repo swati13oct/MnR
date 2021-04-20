@@ -2793,8 +2793,9 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
-
-@Then("^user validates the return to home link is visible and clicked$")
+	
+	
+	@Then("^user validates the return to home link is visible and clicked$")
 	public void user_validates_the_return_to_home_link_isvisible(DataTable attributes)
 	throws Throwable {
 		List<DataTableRow> memberAttributesRow =attributes.getGherkinRows();
@@ -2842,4 +2843,5 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, dcepage);
 
 	}
+
 }
