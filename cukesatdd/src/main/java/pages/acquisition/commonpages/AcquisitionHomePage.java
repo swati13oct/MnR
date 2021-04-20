@@ -223,7 +223,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
 	//@FindBy(xpath = "(//button[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
 	//@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]"
-	@FindBy(xpath = "(//button[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
+	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -4218,7 +4218,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
 					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			assertTrue(invalidSearch.contains("Your search - \"" + newSearchValue + "\" - did not match any documents."));
+			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
 			// assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
