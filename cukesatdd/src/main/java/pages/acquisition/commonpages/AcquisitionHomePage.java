@@ -70,6 +70,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ShopdsnpEnrollButton;
 
+//	@FindBy(xpath = "(//button[contains(@class,'zip-button')])")
 	//@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
 	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
 	private WebElement LearnMedicareMedsuppEnrollButton;
@@ -3641,7 +3642,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 //					System.out.println("Submit button is displayed");
 		}
 		WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
-		WebElement FindPlansBtn = driver.findElement(By.xpath("//button[text()='Find Plans']"));
+		WebElement FindPlansBtn = driver.findElement(By.xpath("//button//*[text()='Find Plans']"));
 		WebElement RequestMoreInfoLink = driver
 				.findElement(By.xpath("//a[text()='Request More Help and Information']"));
 		WebElement EnrollLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
@@ -3819,8 +3820,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 						.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-devv2")) {
 				startNewPRE(UMS_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
-			}
-			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
+			}else if (MRScenario.environment.equalsIgnoreCase("team-f")) {
+				startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html"), browser);
+			}else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
 				startNewPRE(AARP_ACQISITION_PAGE_URL.replace("digital-uatv2-aarp", "digital-uatv2")
 						.replace(".com/", ".com/plan-recommendation-engine.html").replace("www.", ""), browser);
 			} else if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")) {
@@ -3860,7 +3862,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin")
 					|| MRScenario.environment.equalsIgnoreCase("digital-devv2")
-					|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")) {
+					|| MRScenario.environment.equalsIgnoreCase("team-avengers-6-5")
+					|| MRScenario.environment.equalsIgnoreCase("team-f")){
 				for (String rname : jenkinsRunnerFiles.split(",")) {
 					if ((rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE") || rname.contains("PRE"))
 							&& rname.toUpperCase().contains("ULAYER")) {

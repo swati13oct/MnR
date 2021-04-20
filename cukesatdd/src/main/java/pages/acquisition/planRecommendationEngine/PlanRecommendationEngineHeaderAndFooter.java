@@ -48,7 +48,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(xpath = "//header[contains(@class,'header')]")
 	private WebElement headerSection;
 	
-	@FindBy(xpath = "//*[@id='aarpSVGLogo']/img")
+	@FindBy(xpath = "//*[@id='aarpSVGLogo']")
 	private WebElement AARPlogoInHeader;
 	
 	@FindBy(css = "#uhcSVGLogo")
@@ -96,10 +96,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "a[dtmname*='Learn About Medicare']")
 	private WebElement headerNavigationBarLearnAboutMedicareTab;
 	
-	@FindBy(xpath = "//*[@id='mobile-nav']/div/div[2]/form/div/input")
+	@FindBy(css = "input#search-field")
 	private WebElement headerNavigationBarEnterSearchTab;
 	
-	@FindBy(css = "#nav_search_icon>svg")
+	@FindBy(css = "button#nav_search_icon")
 	private WebElement headerNavigationBarSearchIconTab;
 	
 //Inside Shop for a Plan Elements
@@ -107,58 +107,58 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@FindBy(css = "#subnav_2 > div.scroll-wrapper > div > div:nth-child(1) > label")
 	private WebElement headerShopForaPlanFindplansinyourarea;
 	
-	@FindBy(css = ".zip-form #nav-zipcode")
+	@FindBy(css = "input#nav-zipcode")
 	private WebElement headerShopForaPlanZipcodeBox;
 	
-	@FindBy(css = ".zip-form .zip-button")
+	@FindBy(css = ".subnav-footer >button> span.uhc-button__text")
 	private WebElement headerShopForaPlanZipcodeButton;
 	
-	@FindBy(xpath = "//*[@id='subnav_2']//*[@class='zip-lookup']")
+	@FindBy(css = "div.zip-help p:nth-child(1)")
 	private WebElement headerShopForaPlanNeedQuestionofZipcode;
 	
-	@FindBy(css = ".zip-lookup>a")
+	@FindBy(css = "div.zip-help p:nth-child(2) a")
 	private WebElement headerShopForaPlanLookupZipcode;
 	
-	@FindBy(css = "#subnav_2 .nav-col>a")
+	@FindBy(css = "div.zip-help p:nth-child(4)>a")
 	private WebElement headerShopForaPlanRequestMoreHelp;
 	
-	@FindBy(xpath = "//*[@id='updates-mobile-form']//*[@class='email-col']/h4")
+	@FindBy(xpath = "div.emailIntro h4")
 	private WebElement headerShopForaPlanMedicareGuide;
 	
-	@FindBy(xpath = "//*[@id='updates-mobile-form']//*[@class='email-col']/p")
+	@FindBy(xpath = "div.emailIntro p")
 	private WebElement headerShopForaPlanMedicareGuideText;
 	
-	@FindBy(css = "#updates-mobile-form > div > div:nth-child(2)>span>input")
+	@FindBy(css = ".email-sctn input#learnmore-email-address")
 	private WebElement headerShopForaPlanEmailBox;
 	
-	@FindBy(css = "#updates-mobile-form > div > div:nth-child(2) > button")
+	@FindBy(css = ".email-sctn button>span.uhc-button__text")
 	private WebElement headerShopForaPlanEmailButton;
 	
-	@FindBy(css = "#subnav_2 > div.nav-col-emailupdate.ng-scope > div")
+	@FindBy(css = "div[class*='thankYouMsg'] h4")
 	private WebElement headerShopForaPlanThankYou;
 	
-	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
+	@FindBy(css = "#shop-scroll div[class*='section-1'] >h3:nth-of-type(1)>a")
     private WebElement headerShopLink;
     
-    @FindBy(css = "#planTypesColumn h3:nth-of-type(2)>a")
+    @FindBy(css = "#shop-scroll div[class*='section-1'] >h3:nth-of-type(2)>a")
     private WebElement headerEnrollLink;
     
-    @FindBy(css = "#planTypesColumn h3:nth-of-type(3)>a")
+    @FindBy(css = "#shop-scroll div[class*='section-1'] >h3:nth-of-type(3)>a")
     private WebElement headerResourcesLink;
     
 //    @FindBy(css = "#planTypesColumn h3:nth-of-type(4)>a")
 //    private WebElement headerResourcesLink;
     
-    @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(1)>a")
+    @FindBy(css = "#shop-scroll div[class*='desktop-sctn section-2']>h3:nth-of-type(1)>a")
     private WebElement headerAdvantageplanLink;
     
-    @FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(2)>a")
+    @FindBy(css = "#shop-scroll div[class*='desktop-sctn section-2']>h3:nth-of-type(2)>strong>a")
 	private WebElement headerDualSpecialLink;
 
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(3)>span:nth-of-type(2)>a")
+	@FindBy(css = "#shop-scroll div[class*='desktop-sctn section-2']>h3:nth-of-type(3)>a>span:nth-child(2)")
     private WebElement headerMedicaresupplementplanLink;
     
-	@FindBy(css = "#subnav_2 div[class$='content-2']>h3:nth-of-type(5)>a")
+	@FindBy(css = "#shop-scroll div[class*='desktop-sctn section-2']>h3:nth-of-type(5)>a")
     private WebElement headerPrescriptionLink;
     
     @FindBy(xpath = "//a[contains(text(),'Get a Plan Recommendation')]")
@@ -175,34 +175,34 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
     
  //Learn about Medicare inner element
         
-    @FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(1)>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(1)[class*='desktop-sctn sctn'] >div>p:nth-child(3)")
     private WebElement headerEligibilityLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(2)>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(1)[class*='desktop-sctn sctn'] >div>p:nth-child(4)")
     private WebElement headerCoverageLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(3)>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(1)[class*='desktop-sctn sctn'] >div>p:nth-child(5)")
     private WebElement headermedicarePrescriptionProviderLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-1'] ul>li:nth-of-type(4)>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(1)[class*='desktop-sctn sctn'] >div>p:nth-child(6)")
     private WebElement headerCostbasicsLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(1) li:nth-of-type(1)>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(3)[class*='desktop-sctn sctn'] >div>p:nth-child(2)")
     private WebElement headerMedicareadvantageLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(1) li:nth-of-type(2)>a") //Geotargetting
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(3)[class*='desktop-sctn sctn'] >div>p:nth-child(3)") //Geotargetting
     private WebElement headerMedicaresupplemnetLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] li:nth-of-type(3)>span>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(3)[class*='desktop-sctn sctn'] >div>p:nth-child(4)")
     private WebElement headerMedicareprescriptionLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(2) li:nth-of-type(1)>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(5)[class*='desktop-sctn sctn'] >div>p:nth-child(2)>a")
     private WebElement headerEnrollment;
     
-    @FindBy(css = "#subnav_3 div[class$='content-2'] ul:nth-of-type(2) li:nth-of-type(2)>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(5)[class*='desktop-sctn sctn'] >div>p:nth-child(3)>a")
     private WebElement headerFAQLink;
     
-    @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(1)>a")
+    @FindBy(css = "#learnmore-scroll div >div:nth-child(5)[class*='desktop-sctn sctn'] >div>p:nth-child(4)>a")
     private WebElement headerMedicareArticles;
     
     @FindBy(css = "#subnav_3 div[class$='content-3']>div:nth-child(2)>ul>li:nth-child(1)")
@@ -362,13 +362,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerShopForaPlanZipcodeButton, 30);
 		Assert.assertTrue(headerShopForaPlanZipcodeButton.getText().contains("Find Plans"));
 		validate(headerShopForaPlanNeedQuestionofZipcode, 30);
-		Assert.assertTrue(headerShopForaPlanNeedQuestionofZipcode.getText().contains("Need help finding a ZIP code? "));
+		Assert.assertTrue(headerShopForaPlanNeedQuestionofZipcode.getText().contains("Need help finding a ZIP code?"));
 		validate(headerShopForaPlanLookupZipcode, 30);
 		validate(headerShopForaPlanRequestMoreHelp, 30);
-		validate(headerShopForaPlanMedicareGuide, 30);
-		validate(headerShopForaPlanMedicareGuideText, 30);
-		validate(headerShopForaPlanEmailBox, 30);
-		validate(headerShopForaPlanEmailButton, 30);
 //2nd column in Shop for a plan		headerNewExistingMemberLink
 		validate(headerShopLink, 30);
 		Assert.assertTrue(headerShopLink.getText().contains("Shop"));
@@ -382,7 +378,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerAdvantageplanLink, 30);
 		Assert.assertTrue(headerAdvantageplanLink.getText().contains("Medicare Advantage Plans"));
 		validate(headerMedicaresupplementplanLink, 30);
-		Assert.assertTrue(headerMedicaresupplementplanLink.getText().contains("Medicare Supplement Plans"));  //GeoTargeting Element
+		Assert.assertTrue(headerMedicaresupplementplanLink.getText().contains("Medicare Supplements Plans"));  //GeoTargeting Element
 		validate(headerPrescriptionLink, 30);
 		Assert.assertTrue(headerPrescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
 		validate(headerGetaPlanRecommendationLink, 30);
@@ -393,7 +389,10 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		Assert.assertTrue(headerPharmacysearchLink.getText().contains("Pharmacy Search"));
 		validate(headerProvidersearchLink, 30);
 		Assert.assertTrue(headerProvidersearchLink.getText().contains("Provider Search"));
-
+		validate(headerShopForaPlanMedicareGuide, 30);
+		validate(headerShopForaPlanMedicareGuideText, 30);
+		validate(headerShopForaPlanEmailBox, 30);
+		validate(headerShopForaPlanEmailButton, 30);
 //MouseOver on Learn About Medicare and Validating Learn About Medicare
 		driver.navigate().refresh();
 		System.out.println("Validating Learn About Medicare Elements: ");
@@ -411,13 +410,13 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerEnrollment, 30);
 		validate(headerFAQLink, 30);  //GeoTargeting Element
 		validate(headerMedicareArticles, 30);
-		Assert.assertTrue(headerMedicareArticles.getText().contains("Medicare Articles"));
-		validate(headerEligibilityEnrollment, 30);
+		Assert.assertTrue(headerMedicareArticles.getText().contains("Articles and Special Topics"));
+/*		validate(headerEligibilityEnrollment, 30);
 		validate(headerBenefitsCoverage, 30);
 		validate(headerMedicareCosts, 30);
 		validate(headerShoppingforMedicare, 30);
 		validate(headerWorkingPast65, 30);
-		validate(headerMedicareTipsFAQs, 30);
+		validate(headerMedicareTipsFAQs, 30);*/
 	}
 	
 	
@@ -527,7 +526,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		headerMedicareArticles.click();
 		validateLinks("/medicare-articles.html");
 		backtolearnmoremodicare();
-		headerEligibilityEnrollment.click();
+/*		headerEligibilityEnrollment.click();
 		validateLinks("/medicare-articles/eligibility-and-enrollment.html");
 		backtolearnmoremodicare();
 		headerBenefitsCoverage.click();
@@ -543,7 +542,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validateLinks("/medicare-articles/medicare-when-working-past-65.html");
 		backtolearnmoremodicare();
 		headerMedicareTipsFAQs.click();
-		validateLinks("/medicare-articles/medicare-tips-and-faqs.html");
+		validateLinks("/medicare-articles/medicare-tips-and-faqs.html");*/
 		}
 		
 // PRE BreadCrumbs in Header	
@@ -759,9 +758,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	
 //Email Function inside Shop for a Plan	
 	public void emailFunctionInShopforaplan(String email) {
-		validate(headerNavigationBarShopForaPlanTab, 45);
-//		actions.clickAndHold(headerNavigationBarShopForaPlanTab).build().perform();
-		desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+		validate(headerNavigationBarLearnAboutMedicareTab, 45);
+//		actions.clickAndHold(headerNavigationBarLearnAboutMedicareTab).build().perform();
+		desktopCommonUtils.MouseOver(headerNavigationBarLearnAboutMedicareTab, Browsername);
 		jsClickNew(headerShopForaPlanEmailBox);
 		headerShopForaPlanEmailBox.sendKeys(email);
 		jsClickNew(headerShopForaPlanEmailButton);

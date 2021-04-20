@@ -62,7 +62,6 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	//@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
 	
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[contains(text(),'Shop')]")
-	
 	private WebElement shopLink;
 	
 	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
@@ -90,6 +89,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	
 	@FindBy(xpath = "(//a[contains(@href,'/medicare-education/medicare-supplement-plans.html')])[1]")
 	private WebElement MedicareSupplementLink;
+
 	@FindBy(xpath="//a[contains(text(),'Member Resources')]")
 	private WebElement ResourcesLink;
 	
