@@ -1,4 +1,4 @@
-package atdd.runners.mobile.acquisition.PRE;
+package atdd.runners.mobile.acquisition.pre;
 
 import org.junit.runner.RunWith;
 
@@ -11,11 +11,11 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for community Meeting User Stories in Acquisition sites
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileUlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileUlayer")
+@ExtendedCucumberOptions(retryCount=1, screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileBlayer.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileBlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition.planrecommendationengine" }, features = { "src/main/resources/feature/mobile/acquisition/planrecommendationengine/"}, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileUlayer.json" }, 
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileBlayer.json" }, 
 tags = {"@PRERegressionMobile"})
-public class RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileUlayer {
+public class RunMRATDDAcquisitionPlanRecommendationEngineRegressionMobileBlayer {
 
 }
 

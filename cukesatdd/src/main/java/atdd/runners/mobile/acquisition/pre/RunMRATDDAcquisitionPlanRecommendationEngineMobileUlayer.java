@@ -1,4 +1,4 @@
-package atdd.runners.mobile.acquisition.PRE;
+package atdd.runners.mobile.acquisition.pre;
 
 import org.junit.runner.RunWith;
 
@@ -12,13 +12,13 @@ import cucumber.api.CucumberOptions;
  * Acquisition sites
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineMobileBlayer.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineMobileBlayer")
+@ExtendedCucumberOptions(retryCount = 1, screenShotSize = "", screenShotLocation = "/screenshots/", jsonReport = "target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineMobileUlayer.json", detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionPlanRecommendationEngineMobileUlayer")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition.planrecommendationengine" }, features = {
 		"src/main/resources/feature/mobile/acquisition/planrecommendationengine/" }, plugin = { "pretty",
 				"html:reports/test-report",
-				"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineMobileBlayer.json" }, 
+				"json:target/cucumber-RunMRATDDAcquisitionPlanRecommendationEngineMobileUlayer.json" }, 
 				tags = {})
-public class RunMRATDDAcquisitionPlanRecommendationEngineMobileBlayer {
+public class RunMRATDDAcquisitionPlanRecommendationEngineMobileUlayer {
 
 }
 
