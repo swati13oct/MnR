@@ -77,3 +77,27 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | drug1   | drug2  | drug3   | drug4    | zipCode |site|
       | Orkambi | Fanapt | Humalog | Adderall |   80002 |UHC|
       
+@searchengine
+  Scenario Outline: To verify DCE REDESIGN flow from <site> home page 
+    Given user is on Yahoo or google and search UHC drug cost estimator and navigate to dce page
+    	|searchParameter |<searchParameter> |
+    	|searchengine 	| <searchengine>|
+    Then the user validates Get Started Page
+    Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug1> |
+    Then the user validates all added drugs in DrugList
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    Then user validates the return to home link is visible and clicked
+    |	homelink	|true|
+  
+    @DCE_HomeIcon_AEP_AARP
+    Examples: 
+      | drug1   |  zipCode | planType | planName                                            |site|searchParameter| searchengine |
+      | Orkambi |  80002   | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |AARP|aarpmedicareplans drug cost estimator| yahoo |
+      | Orkambi |  80002   | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |uhc |uhcmedicaresolutions drug cost estimator| yahoo |
+      | Orkambi |  80002   | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |AARP|aarpmedicareplans drug cost estimator| google |
+      | Orkambi |  80002   | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |uhc |uhcmedicaresolutions drug cost estimator| google |
