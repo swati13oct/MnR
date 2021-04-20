@@ -1,4 +1,3 @@
-
 package pages.acquisition.commonpages;
 
 import static org.junit.Assert.assertTrue;
@@ -11,6 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,7 +22,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -90,7 +89,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement pharmacyNearLink;
 
 	// @FindBy(className = "zip-button")
-	@FindBy(xpath = "(//*[@class='zip-button'])[1]")
+	//@FindBy(xpath = "(//*[@class='zip-button'])[1]")
+	@FindBy(xpath = "//*[contains(@class,'uhc-button') and contains(text(),'Find Plans')]")
 	private WebElement FindPlansButton1;
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
@@ -168,8 +168,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[@class='overview-main']//h2")
 	private WebElement vppTop;
 
-	//@FindBy(xpath = "//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button secondary')and contains(text(),'Get')]")
-	@FindBy(xpath = "(//*[contains(@href,'drug-cost-estimator')])[2]")
+	//Updated xpath for DCE link on Home Page
+	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
 	public WebElement getStarted;
 
 	// @FindBy(xpath = ".//*[contains(@class,
@@ -219,7 +219,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	//@FindBy(xpath = "//*[contains(@id,'zipcodebtn') or (@class='zip-button') and (contains(@dtmid,'plans'))]")
 	//@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
-	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
+//	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
+	//@FindBy(xpath = "(//button[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[2]")
+	//@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]"
+	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -287,7 +290,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
-	@FindBy(xpath = "//a[@title='Provider Search Tool']/span[contains(text(),'Find a Provider')]")
+//	@FindBy(xpath = "//a[@title='Provider Search Tool']/span[contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//a[@title = 'Provider Search Tool']")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -452,7 +456,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//input[@id='search-field']")
 	private WebElement EnterSearch;
 
-	@FindBy(xpath = "//button[@type='submit']")
+	//@FindBy(xpath = "//button[@type='submit']")
+	@FindBy(xpath = "//*[@id='nav_search_icon']")
 	private WebElement SubmitBtn;
 
 	@FindBy(xpath = "//h1[contains(text(),'Search Results')]")
@@ -598,6 +603,84 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	
 	@FindBy(xpath = "//div[@id='sp-root-container']/div[@id='sp-chat-frame']/div[@id='sp-side-bar']/div[@id='sp-close-frame']/*[1]")
 	private WebElement CloseChat;
+	
+	@FindBy(xpath = "//div[@class='label-icon']//following-sibling::div/div")
+	private WebElement rightRailsectionTFNtimezone;
+
+	@FindBy(xpath = "(//div[@class='uhc-container']//h4)[3]")
+	private WebElement rightRailSectionTFNHeaderMedsupp;
+
+	@FindBy(xpath = "(//div[@class='label-icon']//h5)[1]")
+	private WebElement rightRailSectionTFNHeaderMedsupp1;
+
+	@FindBy(xpath = "//span[contains(@class,'size14 day')]")
+	private WebElement rightRailsectionTFNtimezoneMedsupp;
+
+	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[1]")
+	private WebElement rightRailsectionTFNtimezoneOLE;
+	
+	@FindBy(xpath = "(//div[@class='uhc-container']//h2)[1]")
+	private WebElement rightRailSectionTFNHeader;
+
+	@FindBy(xpath = "(//div[@class='label-icon']//h3)[1]")
+	private WebElement rightRailSectionTFNHeader1;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Call UnitedHealthcare')])[1]")
+	private WebElement footertextsectioncallus;
+	
+	@FindBy(xpath = "(//*[contains(text(),'Hours: 8 a.m.')])")
+	private WebElement footertextsectionTFNtimezone;
+	
+	@FindBy(xpath = "(//div[@class='label-icon']/h5)[1]")
+	private WebElement footertextsectionTFNHeader;
+	
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]")
+	private WebElement CallSamTFNMedsupptimezone;
+	
+	@FindBy(xpath = "//h3[@class='sam-callbody-head']")
+	private WebElement CallSamModalMember;
+	
+	@FindBy(xpath = "//*[@id='sam-call-modal__title']")
+	private WebElement CallSamModalHeader;
+	
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]/..")
+	private WebElement CallSamTFNInfo;
+	
+	@FindBy(xpath = "//div[contains(@class,'ums hrs')]")
+	private WebElement footertextsectionMedsuppTFNtimezone;
+
+	@FindBy(xpath = "(//div[@class='label-icon']/h5)[7]")
+	private WebElement footertextsectionHeadermedsupp;
+
+	@FindBy(xpath = "//div[contains(@class,'ums')]/p")
+	private WebElement footertextsectioncallusMedsupp;
+	
+	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[2]")
+	private WebElement rightRailsectionTFNtimezonePlanDetails;
+	
+	@FindBy(id = "zipcode")
+	private WebElement externalzipCodeField;
+	
+	@FindBy(id = "autocomplete-list")
+	private WebElement autoCompleteSuggestion;
+	
+	@FindBy(id = "searchresults-item0")
+	private WebElement firstAutoCompleteSuggestion;
+	
+	@FindBy(id = "listPop")
+	private WebElement autoCompleteSuggestionSiteSearch;
+	
+	@FindBy(xpath = "(//*[@id='listPop']//*[contains(@class,'uhc-autocomplete')])[1]")
+	private WebElement firstAutoCompleteSuggestionSiteSearch;
+	
+	@FindBy(xpath = "//a[text()='Medicare Supplement Plans']")
+	private WebElement MedSuppPlan;
+	
+	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
+	private WebElement MedSuppClassicUrl;
+	
+	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans.html']")
+	private WebElement MedicareSuppUrl;
 	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -1215,6 +1298,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public PharmacySearchPage navigateToPharmacyLocator() {
 		// checkModelPopup(driver);
 		Actions action = new Actions(driver);
+		scrollToView(navigationSectionHomeLink);
 		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
 		validate(pharmacylocator, 5);
 		pharmacylocator.click();
@@ -1250,6 +1334,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		actions.moveToElement(ourPlansHoverLink);
 		actions.moveToElement(moreHelpInfoLink);
 		actions.click().build().perform();
+		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		//CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentBtn)) {
@@ -2773,7 +2858,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		
 		validateNew(providerSearchFromHomeScreen);
 
+//		switchToNewTabNew(providerSearchFromHomeScreen);
 		jsClickNew(providerSearchFromHomeScreen);
+		waitForPageLoadSafari();
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -2916,7 +3003,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		// driver.navigate().refresh();
-		if (MRScenario.browsername.equalsIgnoreCase("Safari")) { // Adding because Safari 13 fails to locate element
+		if (MRScenario.browserName.equalsIgnoreCase("Safari")) { // Adding because Safari 13 fails to locate element
 																	// after navigate back
 			driver.navigate().refresh();
 			sleepBySec(2);
@@ -3179,17 +3266,22 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Hover over Learn about Medicare completed");
 		}
 		WebElement PresProvidersBenefitsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
+				By.xpath("//*[contains(@id, 'learnmore-scroll')]//*[contains(@class, 'desktop')]//a[contains(@href,'medicare-benefits')]"));
 		jsClickNew(PresProvidersBenefitsLink);
 		waitForPageLoadSafari();
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
 		WebElement DCELink = driver.findElement(By
-				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
-		validateNew(DCELink);
-		jsClickNew(DCELink);
-		if (validateNew(AddMyDrugsBtn))
+				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
+		String winHandleBefore = driver.getWindowHandle();
+		switchToNewTabNew(DCELink);
+		String winHandleCurrent = driver.getWindowHandle();
+		driver.switchTo().window(winHandleBefore);
+		driver.close();
+		driver.switchTo().window(winHandleCurrent);
+		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 20);
+		if (driver.getCurrentUrl().contains("drug-cost-estimator"))
 			return new GetStartedPage(driver);
 		return null;
 	}
@@ -3204,7 +3296,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			System.out.println("Hover over Shop for a Plan completed");
 		}
 		WebElement PDPplansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+				"//*[contains(@class, 'desktop')]//*[contains(@dtmid,'acq_top_nav')and contains(@href,'prescription-drug-plans.html')]"));
 		jsClickNew(PDPplansLink);
 		waitForPageLoadSafari();
 	}
@@ -3532,39 +3624,46 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		waitforElement(ShopForaplan);
 		if (ShopForaplan.isDisplayed()) {
-//				Actions actions = new Actions(driver);
-//				actions.moveToElement(ShopForaplan);
-//				actions.build().perform();
+			scrollToView(ShopForaplan);
+			/*
+			 * Actions actions = new Actions(driver); actions.moveToElement(ShopForaplan);
+			 * actions.build().perform();
+			 */
+
 			jsMouseOver(ShopForaplan);
+			/*
+			 * JavascriptExecutor js = (JavascriptExecutor) driver;
+			 * js.executeScript("$('#ghn_lnk_2').mouseover();");
+			 */
 			System.out.println("Hover over Shop for a Plan completed");
 //					waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
 //					System.out.println("Submit button is displayed");
 		}
 		WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
-		WebElement FindPlansBtn = driver.findElement(By.xpath("//button[@dtmid='acq_top_nav']"));
+		WebElement FindPlansBtn = driver.findElement(By.xpath("//button//*[text()='Find Plans']"));
 		WebElement RequestMoreInfoLink = driver
-				.findElement(By.xpath("//a[@dtmname='Top Nav:Our Plans:Request More Help']"));
+				.findElement(By.xpath("//a[text()='Request More Help and Information']"));
 		WebElement EnrollLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
 		WebElement ShopLink = driver.findElement(By.xpath("//a[contains(@href,'shop.html')]"));
 		WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
 
-		WebElement MAplansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
+		WebElement MAplansLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'section-2')]//a[contains(@href,'medicare-advantage-plans.html')]"));
 		List<WebElement> MedSuppPlansLink = driver.findElements(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//*[contains(@href,'medicare-supplement-plans.html') or contains(@href,'medicare-supplement-plans-classic.html')]"));
-		WebElement PDPplansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
+				"//*[contains(@class, 'section-2')]//*[contains(@href,'medicare-supplement-plans.html') or contains(@href,'medicare-supplement-plans-classic.html')]"));
+		WebElement PDPplansLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'section-2')]//a[contains(@href,'prescription-drug-plans.html')]"));
 		WebElement SNPplansLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
+				By.xpath("//*[contains(@class, 'section-2')]//a[contains(@href,'special-needs-plans.html')]"));
 
-		WebElement PlanSelectorLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'plan-recommendation-engine.html')]"));
-		WebElement DCELink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
-		WebElement PharmacySearchLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'aarp-pharmacy.html')]"));
-		WebElement ProviderSearchLink = driver.findElement(By
-				.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
+		WebElement PlanSelectorLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'plan-recommendation-engine.html')]"));
+		WebElement DCELink = driver
+				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'drug-cost-estimator')]"));
+		WebElement PharmacySearchLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'section-3')]//a[contains(@href,'aarp-pharmacy.html')]"));
+		WebElement ProviderSearchLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'section-3')]//a[contains(text(),'Provider Search')]"));
 
 		validateNew(ZipCodeTxt);
 		validateNew(FindPlansBtn);
@@ -3575,7 +3674,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(ResourceLink);
 
 		validateNew(MAplansLink);
-		Assert.assertTrue(MedSuppPlansLink.size() > 0, "No Med Sup link found in the header navigation");
+		Assert.assertTrue("No Med Sup link found in the header navigation", MedSuppPlansLink.size() > 0);
 		validateNew(PDPplansLink);
 		validateNew(SNPplansLink);
 
@@ -3600,7 +3699,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
 		}
 	}
-
+	
 	public void validateSubNavMedEdLinks() {
 		waitForPageLoadSafari();
 		CheckPageLoad();
@@ -3615,25 +3714,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			waitForPageLoadSafari();
 			System.out.println("Hover over Learn about Medicare completed");
 		}
-		WebElement EligibilityTxt = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-eligibility')]"));
-		WebElement ChoicesBtn = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-parts-and-medigap-plans')]"));
-		WebElement PresProvidersBenefitsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
-		WebElement CostbasicsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-costs')]"));
+		WebElement EligibilityTxt = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-eligibility')]"));
+		WebElement ChoicesBtn = driver.findElement(
+				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-parts-and-medigap-plans')]"));
+		WebElement PresProvidersBenefitsLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-benefits')]"));
+		WebElement CostbasicsLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-costs')]"));
+		WebElement MAplansLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'/medicare-education/medicare-advantage-plans')]"));
+		WebElement MedSuppPlansLink = driver.findElement(
+				//By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-supplement-plans.html')]"));
+		By.xpath("//*[contains(@class, 'sctn')]//a[contains(text(),'Medicare Supplement Insurance Plans')]"));
+		WebElement PDPplansLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-part-d')]"));
 
-		WebElement MAplansLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-advantage-plans')]"));
-		WebElement MedSuppPlansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-supplement-plans.html')]"));
-		WebElement PDPplansLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-part-d')]"));
-
-		WebElement EnrollmentBasicsLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'enrollment-and-changing-plans')]"));
-//				WebElement FAQLink = driver.findElement(By.xpath("//*[contains(@class, 'nav-col nav-col-3')]//a[contains(@href,'medicare-faq')]"));
+		WebElement EnrollmentBasicsLink = driver.findElement(
+				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
+		//WebElement compareMAMSPlans = driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
+		
+		WebElement FAQLink = driver
+				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-faq')]"));
 
 		validateNew(EligibilityTxt);
 		validateNew(ChoicesBtn);
@@ -3643,13 +3745,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(MAplansLink);
 		validateNew(MedSuppPlansLink);
 		validateNew(PDPplansLink);
+		//validateNew(compareMAMSPlans);
 
 		validateNew(EnrollmentBasicsLink);
+		validateNew(FAQLink);
 
 		if (EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() && PresProvidersBenefitsLink.isDisplayed()
 				&& CostbasicsLink.isDisplayed() && MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed()
-				&& PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed()) {
+				&& PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed() && FAQLink.isDisplayed()) {
 			// && FAQLink.isDisplayed()
+			// && compareMAMSPlans.isDisplayed()
 			Assert.assertTrue(true);
 			System.out.println("Sub Nav - Learn about Medicare - All links and element displayed on Page");
 //				Actions actions = new Actions(driver);
@@ -3675,7 +3780,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		System.out.println("State selected : California");
 		System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
-		Assert.assertTrue(StateSessionStorage.equalsIgnoreCase("CA"), "Geolocation State validation Failed ");
+		Assert.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase("CA"));
 	}
 
 	public void validateDisclaimer() {
@@ -3690,7 +3795,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			validateNew(visitAARPFooterLink);
 			String hRef = visitAARPFooterLink.getAttribute("href");
 			System.out.println("href for Visit AARP.org link : " + hRef);
-			Assert.assertTrue(hRef.contains("www.aarp.org"), "Incorrect href for Visit AARP.org : " + hRef);
+			Assert.assertTrue("Incorrect href for Visit AARP.org : " + hRef, hRef.contains("www.aarp.org"));
 			visitAARPFooterLink.isEnabled();
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
@@ -4204,7 +4309,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 		// Added refresh and wait as elements are not located in Safari 13 browser after
 		// using navigate back
-		if (MRScenario.browsername.equalsIgnoreCase("Safari")) {
+		if (MRScenario.browserName.equalsIgnoreCase("Safari")) {
 			// driver.navigate().refresh();
 			waitForPageLoadSafari();
 		}
@@ -4349,7 +4454,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
                     if (!driver.getCurrentUrl().contains("aarp.org")) {
                         Assert.fail("Visit AARP link did not lead to the right page");
                     } else {
-                        Assert.assertTrue(true, "Navigated to AARP org page");
+                        Assert.assertTrue("Navigated to AARP org page", true);
                     }
                     driver.close();
                     break;
@@ -4950,8 +5055,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		while (itr.hasNext()) {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(parentWindow);
+				driver.close();
 				driver.switchTo().window(window);
-			}
+			} 
 		}
 		CommonUtility.waitForPageLoadNew(driver, zipcodeChangeLink, 30);
 		if (driver.getCurrentUrl().contains("health-plans")) {
@@ -4973,6 +5080,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String window = itr.next();
 			if (!parentWindow.equals(window)) {
 				driver.switchTo().window(window);
+				break;
 			}
 		}
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
@@ -5176,8 +5284,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public void validateCallpopuponapage(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
-		
-		driver.navigate().refresh();
+		//driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
@@ -5373,5 +5480,758 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public OLETestHarnessPage GetOLETestHarnessPage() {
 		return new OLETestHarnessPage(driver);
 	}
-}
+	
+	public void validateTFNNoonRightRail(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
 
+		CommonUtility.checkPageIsReady(driver);
+//			checkModelPopup(driver, 10);
+//			CheckiPerseptions();
+
+		System.out.println("########Validating TFN Info in RIght Rail section########");
+
+		if (validate(rightRailSectionTFNHeader)) {
+			scrollToView(rightRailSectionTFNHeader);
+			System.out.println(rightRailSectionTFNHeader.getText());
+			System.out.println(rightRailSectionTFNHeader1.getText());
+		}
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at " + ExpecetdTFNNo + " (TTY 711)";
+//		String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText();
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m.,\n7 days a week";
+//		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a week";
+//		String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
+//		String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+
+		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")))
+			System.out.println(
+					"****************TFN Timezone Content was  found matching with the SAM call Popup  ***************");
+		else
+			Assert.fail(
+					"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
+	}
+	
+	public void validatefootercallussection(String TFNXpath, String ExpecetdTFNNo) {
+		CommonUtility.checkPageIsReady(driver);
+
+		System.out.println("########Validating TFN member in Footer section########");
+		if (validate(footertextsectionTFNHeader)) {
+			scrollToView(footertextsectionTFNHeader);
+			System.out.println(footertextsectionTFNHeader.getText());
+		}
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare: 1-877-755-5345 (TTY 711)";
+		validate(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText();
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Footer section########");
+		System.out.println("Expected TFN No: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No: " + ActualTFNelement.getText());
+
+		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Page : " + ActualTFNelement.getText());
+
+		else
+			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
+
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week";
+		String ActualCallSamTFNtimezone = footertextsectionTFNtimezone.getText();
+
+		System.out.println("########Validating TFN Time zone in Footer scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ActualCallSamTFNtimezone.replace("\n", "").replaceAll("[^A-Za-z0-9:.]", "")
+				.contains(ExpectedCallSamTFNtimezone.replace("\n", "").replaceAll("[^A-Za-z0-9:.]", "")))
+			System.out.println(
+					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
+		else
+			Assert.fail(
+					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
+
+		/*
+		 * String ExpectedCallSamTFNtimezone1 = "7 days a week"; String
+		 * ActualCallSamTFNtimezone1 = footertextsectionTFNtimezone1.getText();
+		 * 
+		 * 
+		 * System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone1);
+		 * System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone1); if
+		 * (ActualCallSamTFNtimezone1.replace(" ", "").replace("\n", "")
+		 * .contains(ExpectedCallSamTFNtimezone1.replace(" ", "").replace("\n", "")))
+		 * System.out.println(
+		 * "****************call us Timezone1 Content was  found macthing with the SAM call Popup  ***************"
+		 * ); else Assert.fail(
+		 * "****************call us Timezone1 Content was not found macthing with the SAM call Popup  ***************"
+		 * );
+		 */
+
+//		validate(CallSamTFNClose);
+//		jsClickNew(CallSamTFNClose);
+
+	}
+	
+	public void validateCallpopuponMedsupppage(String TFNXpath, String ExpecetdTFNNo) {
+
+		System.out.println("########Validating TFN on Call SAM icon and Call popup for Medsupp#######");
+		CommonUtility.checkPageIsReady(driver);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("Expected TFN No: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Call SAM icon: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is validated successfully on the SAM call icon : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on SAM icon : " + TFNXpath);
+
+		jsClickNew(ActualTFNelement);
+
+		System.out.println("#######Validating TFN info on Call Popup#######");
+		validateNew(CallSamModalHeader, 5);
+		System.out.println(CallSamModalHeader.getText());
+
+		validateNew(CallSamModalMember);
+		System.out.println(CallSamModalMember.getText());
+
+		System.out.println("######Validating TFN number on Call Popup########");
+		if (ExpecetdTFNNo.contains(CallSamTFN.getText()))
+			System.out.println("TFN is validated successfully on the call popup : " + CallSamTFNInfo.getText());
+		else
+			Assert.fail("TFN elemet is not found / displayed on Call popup icon : ");
+
+		System.out.println("#######Validating TFN time zone on Call Popup#######");
+		String ExpectedCallSamTFNtimezone = "7 a.m. � 11 p.m. ET, Monday-Friday\n9 a.m. � 5 p.m. ET, Saturday";
+		validateNew(CallSamTFNMedsupptimezone);
+		String ActualCallSamTFNtimezone = CallSamTFNMedsupptimezone.getText();
+
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")))
+			System.out.println(
+					"****************TFN Timezone Content was found macthing with the SAM call Popup  ***************");
+
+		else
+			Assert.fail(
+					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+
+		String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
+		validate(CallSamTFNMember);
+		String ActualCallSamTFNMember = CallSamTFNMember.getText();
+		System.out.println("TFN Member on CAll popup: " + ExpectedCallSamTFNMember);
+		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************TFN Member Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail(
+					"*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+		}
+		validate(CallSamTFNClose);
+		jsClickNew(CallSamTFNClose);
+	}
+	
+	public void validateCallpopuponaprivacypage(String TFNXpath, String ExpecetdTFNNo) {
+		try {
+			System.out.println("########Validating TFN on Call SAM icon and Call popup#######");
+			// driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			checkModelPopup(driver, 10);
+
+			WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+			validateNew(ActualTFNelement);
+
+			System.out.println("Expected TFN No on Call SAM icon: " + ExpecetdTFNNo);
+			System.out.println("Actual TFN No on Call SAM icon: " + ActualTFNelement.getText());
+
+			if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+				System.out
+						.println("TFN is validated successfully on the SAM call icon : " + ActualTFNelement.getText());
+			else
+				Assert.fail("TFN elemnet is not found / displayed on SAM icon : " + TFNXpath);
+
+			driver.navigate().refresh();
+
+			jsClickNew(ActualTFNelement);
+
+			System.out.println("#######Validating TFN info on Call Popup#######");
+			validateNew(CallSamModalHeader, 5);
+			System.out.println(CallSamModalHeader.getText());
+
+			validateNew(CallSamModalMember);
+			System.out.println(CallSamModalMember.getText());
+
+			System.out.println("######Validating TFN number on Call Popup########");
+			if (ExpecetdTFNNo.contains(CallSamTFN.getText()))
+				System.out.println("TFN is validated successfully on the call popup : " + CallSamTFNInfo.getText());
+			else
+				Assert.fail("TFN element is not found / displayed on Call popup icon : ");
+
+			System.out.println("#######Validating TFN time zone on Call Popup#######");
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. Â- 8 p.m. Monday � Friday, 8 a.m. Â- 5 p.m. Saturday and Sunday.";
+			validate(CallSamTFNtimezone);
+			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
+			System.out.println("TFN Timezone Content for Expected Values:" + ExpectedCallSamTFNtimezone);
+			System.out.println("TFN Timezone Content for Actual Values  :" + ActualCallSamTFNtimezone);
+			if (ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+					.equalsIgnoreCase(ActualCallSamTFNtimezone.replace(" ", "").replace("\n", ""))) {
+				System.out.println(
+						"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+
+			} else {
+
+				System.out.println(
+						"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+			}
+
+			String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
+			validate(CallSamTFNMember);
+			String ActualCallSamTFNMember = CallSamTFNMember.getText();
+			System.out.println("TFN Member on CAll popup: " + ExpectedCallSamTFNMember);
+			if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+				System.out.println(
+						"****************TFN Member Content was found macthing with the SAM call Popup  ***************");
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail(
+						"*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"
+								+ ActualCallSamTFNMember);
+			}
+			validate(CallSamTFNClose);
+			jsClickNew(CallSamTFNClose);
+
+			// }
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}
+	
+	public void validateMedsuppfootercallussection(String TFNXpath, String ExpecetdTFNNo) {
+		System.out.println("########Validating TFN in Medsupp Footer section########");
+		if (validate(footertextsectionHeadermedsupp))
+			System.out.println(footertextsectionHeadermedsupp.getText());
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare: 1-877-755-5345 (TTY 711)";
+		validateNew(footertextsectioncallusMedsupp);
+		String ActualCallSamTFNMember = footertextsectioncallusMedsupp.getText();
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Footer section########");
+		System.out.println("Expected TFN No: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No: " + ActualTFNelement.getText());
+
+		// if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Medsupp Page footer: " + ActualTFNelement.getText());
+
+		else
+			Assert.fail("TFN element is not found / displayed on page : " + TFNXpath);
+
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.\nHours: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+		String ActualCallSamTFNtimezone = footertextsectionMedsuppTFNtimezone.getText();
+
+		System.out.println("########Validating TFN Time zone in Footer scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.contains(ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")))
+			System.out.println(
+					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
+		else
+			// Assert.fail(
+			System.out.println(
+					"****************call us Timezone Content was not found matching with the SAM call Popup  ***************");
+	}
+	
+	public void validateTFNNoonRightRailforMedsupp(String TFNXpath, String ExpecetdTFNNo) {
+
+		CommonUtility.checkPageIsReady(driver);
+//		checkModelPopup(driver, 10);
+
+		System.out.println("########Validating TFN Info in RIght Rail section for Medsupp########");
+
+		if (validate(rightRailSectionTFNHeaderMedsupp)) {
+			scrollToView(rightRailSectionTFNHeaderMedsupp);
+			System.out.println(rightRailSectionTFNHeaderMedsupp.getText());
+			System.out.println(rightRailSectionTFNHeaderMedsupp1.getText());
+		}
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+//String ActualCallSamTFNtimezone = rightRailsectionTFNtimezoneMedsupp.getText();
+
+		/*
+		 * String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week";
+		 * String ActualCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		 * 
+		 * System.out.
+		 * println("########Validating TFN Time zone in Right Rail section for Medsupp#####"
+		 * ); System.out.println("Expected TFN time zone: " +
+		 * ExpectedCallSamTFNtimezone); System.out.println("Actual TFN time zone: " +
+		 * ActualCallSamTFNtimezone);
+		 * 
+		 * if (ActualCallSamTFNtimezone.replace(" ", "").replace("\n", "")
+		 * .contains(ExpectedCallSamTFNtimezone.replace(" ", "").replace("\n", "")))
+		 * System.out.println(
+		 * "****************call us Timezone Content was found matching with the SAM call Popup  ***************"
+		 * ); else Assert.fail(
+		 * "****************call us Timezone Content was not found matching with the SAM call Popup  ***************"
+		 * );
+		 */
+
+	}
+
+	public void validateTFNNoonRightRailForOLE(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
+		CommonUtility.checkPageIsReady(driver);
+//					checkModelPopup(driver, 10);
+//					CheckiPerseptions();
+
+		System.out.println("########Validating TFN Info in RIght Rail section########");
+
+		if (validate(rightRailSectionTFNHeader)) {
+			scrollToView(rightRailSectionTFNHeader);
+			System.out.println(rightRailSectionTFNHeader.getText());
+			System.out.println(rightRailSectionTFNHeader1.getText());
+		}
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
+		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week\n(Alaska and Hawaii: 8 a.m. Â– 8 p.m. Monday Â– Friday, 8 a.m. Â– 5 p.m. Saturday Â– Sunday)";
+		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m., 7 days a week\n(Alaska and Hawaii: 8 a.m. - 8 p.m. Monday - Friday, 8 a.m. - 5 p.m. Saturday - Sunday)";
+		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week";
+//				String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezoneOLE.getText();
+
+		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")))
+			System.out.println(
+					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
+		else
+
+			Assert.fail(
+					"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
+	}
+	
+	public void validateTFNNoonRightRailForPlanDetailsPage(String TFNXpath, String ExpecetdTFNNo)
+			throws InterruptedException {
+
+		CommonUtility.checkPageIsReady(driver);
+//					checkModelPopup(driver, 10);
+//					CheckiPerseptions();
+
+		System.out.println("########Validating TFN Info in RIght Rail section########");
+
+		if (validate(rightRailSectionTFNHeader)) {
+			scrollToView(rightRailSectionTFNHeader);
+			System.out.println(rightRailSectionTFNHeader.getText());
+			System.out.println(rightRailSectionTFNHeader1.getText());
+		}
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare toll-free at " + ExpecetdTFNNo + " (TTY 711)";
+		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â- 8 p.m.,\n7 days a week";
+		String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m.,\n7 days a week";
+		String ExpectedCallSamTFNtimezone2 = "Hours: 8 a.m. - 8 p.m., 7 days a week";
+//			String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezonePlanDetails.getText();
+
+		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", ""))) {
+			System.out.println(
+					"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+			// Assert.assertTrue(true);
+		} else {
+			Assert.fail(
+					"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
+		}
+	}
+	
+	public void validateTFNNoonZipCodeComponent(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
+
+		CommonUtility.checkPageIsReady(driver);
+//					checkModelPopup(driver, 10);
+//					CheckiPerseptions();
+
+		System.out.println("########Validating TFN Info in ZipCode Component section########");
+
+		String ExpectedCallSamTFNMember = "Need Help? Call UnitedHealthcare at " + ExpecetdTFNNo
+				+ " (TTY 711) toll free, 8 a.m. – 8 p.m., 7 days a week.";
+		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", "");
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		// if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+		// System.out.println(
+		if (ExpectedCallSamTFNMember.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNMember.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", ""))) {
+
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+	}
+	
+	public void validateTFNNoonSNPRightRailForOLE(String TFNXpath, String ExpecetdTFNNo) throws InterruptedException {
+
+		CommonUtility.checkPageIsReady(driver);
+
+		System.out.println("########Validating TFN Info in RIght Rail section########");
+
+		if (validate(rightRailSectionTFNHeader)) {
+			scrollToView(rightRailSectionTFNHeader);
+			System.out.println(rightRailSectionTFNHeader.getText());
+			System.out.println(rightRailSectionTFNHeader1.getText());
+		}
+
+		String ExpectedCallSamTFNMember = "Call UnitedHealthcare at:" + ExpecetdTFNNo + " (TTY 711)";
+		// String ExpectedCallSamTFNMember = footertextsectioncallus.getText();
+		validateNew(footertextsectioncallus);
+		String ActualCallSamTFNMember = footertextsectioncallus.getText().replace("\n", " ");
+
+		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
+		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
+
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+			System.out.println(
+					"****************call us Content was found macthing with the SAM call Popup  ***************");
+			Assert.assertTrue(true);
+		} else
+			Assert.fail(
+					"*****************call us Content was not found macthing with the SAM call Popup  ***************"
+							+ ActualCallSamTFNMember);
+
+		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
+		validateNew(ActualTFNelement);
+
+		System.out.println("########Validating TFN No in Right Rail########");
+		System.out.println("Expected TFN No on Right Rail: " + ExpecetdTFNNo);
+		System.out.println("Actual TFN No on Right Rail: " + ActualTFNelement.getText());
+
+		if (ExpecetdTFNNo.contains(ActualTFNelement.getText()))
+			System.out.println("TFN is Displayed on Right Rail on the Page : " + ActualTFNelement.getText());
+		else
+			Assert.fail("TFN element is not found / displayed on Right rail on the page : ");
+
+		String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. – 8 p.m., local time, 7 days a week";
+		// String ExpectedCallSamTFNtimezone1 = "Hours: 8 a.m. - 8 p.m., 7 days a
+		// week\n(Alaska and Hawaii: 8 a.m. - 8 p.m. Monday - Friday, 8 a.m. - 5 p.m.
+		// Saturday - Sunday)";
+		// String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. Â– 8 p.m., 7 days a week";
+//				String ExpectedCallSamTFNtimezone = rightRailsectionTFNtimezone.getText();
+		String ActualCallSamTFNtimezone = rightRailsectionTFNtimezoneOLE.getText();
+
+		System.out.println("########Validating TFN Time zone in Right Rail scetion########");
+		System.out.println("Expected TFN time zone: " + ExpectedCallSamTFNtimezone);
+		System.out.println("Actual TFN time zone: " + ActualCallSamTFNtimezone);
+
+		if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+				.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")))
+			System.out.println(
+					"****************call us Timezone Content was found matching with the SAM call Popup  ***************");
+		else
+
+			Assert.fail(
+					"****************TFN Timezone Content was not found matching with the SAM call Popup  ***************");
+	}
+	
+	public VPPPlanSummaryPage searchPlansWithOutCountyForExternalLink(String zipcode) throws InterruptedException {
+
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
+		checkModelPopup(driver, 10);
+//		sendkeys(zipCodeField, zipcode);
+		sendkeysNew(externalzipCodeField, zipcode);
+		jsClickNew(findPlansBtn);
+		// }
+//		while(validate(overlayFilm, 10)) {/**wait*/}
+//		CommonUtility.waitForElementToDisappear(driver, overlayFilm, 75);
+		waitForPageLoadSafari();
+
+//		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		validateNew(vppTop, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPage(driver);
+		} else
+			return null;
+	}
+	
+	public VPPPlanSummaryPage externalsearchPlans(String zipcode, String countyName) {
+		waitForPageLoadSafari();
+		checkModelPopup(driver, 10);
+		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
+		sendkeys(externalzipCodeField, zipcode);
+		jsClickNew(viewPlansButton);
+
+		CommonUtility.waitForPageLoad(driver, countyModal, 15);
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+
+		checkModelPopup(driver, 10);
+
+		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPage(driver);
+		}
+		return null;
+	}
+	
+	public void enterSiteSearchValue(String inputvalue) {
+		CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
+		EnterSearch.sendKeys(inputvalue);
+	}
+	
+	public void validateAutoCompleteSuggestion() {
+		validate(autoCompleteSuggestion);
+	}
+	
+	public void clickFirstSuggestion() {
+		jsClickNew(firstAutoCompleteSuggestion);
+	}
+	
+	public void enterSecondarySiteSearchValue(String str) {
+		System.out.println("@@@inside secondary search validation method@@@");
+		CommonUtility.waitForPageLoadNewForClick(driver, SecondaryClearBtn, 30);
+		SecondaryClearBtn.click();
+		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
+		SecondarySearchInput.sendKeys(str);
+		}
+	
+	public void validateAutoCompleteSuggestionSiteSearchPage() {
+		validate(autoCompleteSuggestionSiteSearch);
+		waitTillElementClickableInTime(firstAutoCompleteSuggestionSiteSearch, 30);
+	}
+	
+	public void clickFirstSuggestionSiteSearch() {
+		jsClickNew(firstAutoCompleteSuggestionSiteSearch);
+	}
+	
+	public void clickMedSupp(String state) throws InterruptedException {
+		scrollToView(ShopForaplan);
+		//waitforElement(ShopForaplan);
+		//driver.navigate().refresh();
+		validate(ShopForaplan);
+		jsMouseOver(ShopForaplan);
+		if(state.equalsIgnoreCase("Oregon") )
+			MedSuppClassicUrl.click();
+		else
+			MedicareSuppUrl.click();
+	}
+	
+	public void validatestatedropDown(String state, String code) {
+		validateNew(stateDropDown);
+		selectFromDropDownByValue(stateDropDown, state);
+		String StateSessionStorage = returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+		System.out.println("State selected : " + state);
+		System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
+		Assert.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase(code));
+	}
+	
+	public void validateMedupsStateUrl(String state, String code, String classicStates, String AllStates) {
+		if (state.equalsIgnoreCase("Oregon")) {
+			validate(stateDropDown);
+			validate(MedSuppClassicUrl);
+			System.out.println("State is: " + state);
+			System.out.println("Code is: " + code);
+			System.out.println("Medicare Supplement Url is: " + MedSuppClassicUrl.getAttribute("href"));
+			Assert.assertTrue(
+					MedSuppClassicUrl.getAttribute("href").contains(classicStates));
+			String CurrentURL = driver.getCurrentUrl();
+			System.out.println("Current URL : " + CurrentURL);
+			Assert.assertTrue(CurrentURL.contains(classicStates));
+		} else {
+			validate(stateDropDown);
+			validate(MedicareSuppUrl);
+			System.out.println("State is: " + state);
+			System.out.println("Code is: " + code);
+			System.out.println("Medicare Supplement Url is: " + MedicareSuppUrl.getAttribute("href"));
+			Assert.assertTrue(MedicareSuppUrl.getAttribute("href").contains(AllStates));
+			String CurrentURL = driver.getCurrentUrl();
+			System.out.println("Current URL : " + CurrentURL);
+			Assert.assertTrue(CurrentURL.contains(AllStates));
+		}
+	}
+	
+	@FindBy(xpath = "//span[contains(text(),'Make an appointment for Medicare Supplement Insura')]")
+	private WebElement clickISlinkMedEDPages;
+	
+	public IsInsuranceAgent clickISlinkMedEDPages() {
+		
+		
+		CommonUtility.waitForPageLoadNew(driver, clickISlinkMedEDPages, 30);
+		jsClickNew(clickISlinkMedEDPages);
+		
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+		driver.navigate().to(CurrentURL);
+		
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		//return IsInsuranceAgent;
+		return new IsInsuranceAgent(driver);
+	}
+}

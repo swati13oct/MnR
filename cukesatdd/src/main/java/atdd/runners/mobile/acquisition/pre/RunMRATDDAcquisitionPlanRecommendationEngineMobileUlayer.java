@@ -1,4 +1,4 @@
-package atdd.runners.mobile.acquisition.PRE;
+package atdd.runners.mobile.acquisition.pre;
 
 import org.junit.runner.RunWith;
 
