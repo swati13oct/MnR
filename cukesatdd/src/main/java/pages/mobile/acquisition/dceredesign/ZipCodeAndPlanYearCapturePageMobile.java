@@ -142,7 +142,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 			mobileUtils.mobileLocateElement(zipCodeTxtbox);
 			mobileUtils.mobileLocateElement(countyDropdown);
-			mobileUtils.mobileLocateElement(planYearDropdown);
+		//	mobileUtils.mobileLocateElement(planYearDropdown);
 			mobileUtils.mobileLocateElement(continueBtn);
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		} catch (Exception e) {
