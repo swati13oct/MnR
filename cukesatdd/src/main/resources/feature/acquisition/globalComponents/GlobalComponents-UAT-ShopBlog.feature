@@ -219,7 +219,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_UMS | UHC  | shop/estimate.html                  | Estimate                     | https://www.myuhcagent.com/ |
 
   @GlobalComponentsAARPShopPages56
-  Scenario Outline: To verify Global Components for the page mentioned of <site> site <pageName> : <path>
+  Scenario Outline: To verify Global Components chat icon for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -298,7 +298,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_UMS | UHC  | shop/estimate.html                  | Estimate                     | https://www.myuhcagent.com/ |
 
   @GlobalComponentsAARPShopPages78
-  Scenario Outline: To verify Global Components for the page mentioned of <site> site <pageName> : <path>
+  Scenario Outline: To verify Global Components TFN on need help section for the page mentioned of <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page

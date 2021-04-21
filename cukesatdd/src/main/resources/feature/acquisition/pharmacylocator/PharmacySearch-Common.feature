@@ -290,7 +290,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | site | zipcode | county      | isMultutiCounty | plantype | drug1   |
       | UHC  |   19019 | Iowa County | No              | MAPD     | Lipitor |
 
-  Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP details page on acquisition <site> site
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through VPP details page on acquisition <site> site for plan type -<plantype>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -323,7 +323,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | UHC  |   90210 | Iowa County     | No              | PDP      | future   | AARP MedicareRx Walgreens (PDP)                    |
       | UHC  |   10001 | New York County | No              | SNP      | future   | UnitedHealthcare Dual Complete (HMO D-SNP)         |
 
-  Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site
+  Scenario Outline: To verify breadcrumbs on pharmacy search page through Shop page page on acquisition <site> site for page - <pageName>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page

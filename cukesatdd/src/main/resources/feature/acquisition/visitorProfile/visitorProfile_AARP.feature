@@ -334,7 +334,7 @@ Feature: 1.08. ACQ- Visitor profile
       | UHC  | Puerto Rico |   00641 | NO            | MS       | future   | 11/11/1949 | Utuado Municipio | Plan G,Plan A |
 
   @vpMSSavePlanAuthenticated
-  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+  Scenario Outline: Verify user saves Medsupp plans from VPP to the authenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user selects the state drop down value in home page

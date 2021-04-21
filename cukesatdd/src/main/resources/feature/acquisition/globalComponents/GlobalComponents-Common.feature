@@ -344,7 +344,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | shop/medicare-advantage-plans.html | ShopPlan: Shop MA Plan | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
   @GlobalComponentsAARPShopPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
+  Scenario Outline: To verify Global Components zipcode component for the page mentioned on site -<site> - <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
@@ -385,7 +385,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | medicare-articles/eligibility-and-enrollment.html   | Sample Category Page |
 
   @GlobalComponentsAARPBlogPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
+  Scenario Outline: To verify Global Components subnav zipcode for the page mentioned on site - <site> -  <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
@@ -534,7 +534,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | AARP Medicare Plans | //*[@class='amp']//a[contains(@class, 'tel')] | true | https://www.myuhcagent.com/ |
 
   @GlobalComponentsAARPPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
+  Scenario Outline: To verify Global Components for the page mentioned on site - <site> - <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
