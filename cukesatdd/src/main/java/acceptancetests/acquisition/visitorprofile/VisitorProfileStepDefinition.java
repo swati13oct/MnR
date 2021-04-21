@@ -613,4 +613,12 @@ public class VisitorProfileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		Assertion.assertTrue(visitorProfile.legacyProviderinfo(planName));
 	}
+	
+	@And("^validate the new profile header$")
+	public void validate_the_new_profile_header(DataTable data) {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateNewHeader(data);
+		
+	}
 }

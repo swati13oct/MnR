@@ -77,7 +77,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 
-	@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	private WebElement signOut;
 
 	@FindBy(id = "enrollment-next-button")
@@ -224,6 +224,30 @@ public class VisitorProfilePage extends UhcDriver {
 	
 	@FindBy(xpath = "//img[@class='uhc-modal__close']/parent::button")
 	private WebElement modalClose;
+	
+	@FindBy(xpath = "(//h1)[1]")
+	private WebElement profileName;
+	
+	@FindBy(css="nav.uhc-profile-header-nav ul li:first-child>a>span:nth-child(2)")
+	private WebElement savedInsuredPlans;
+	
+	@FindBy(css="nav.uhc-profile-header-nav ul li:nth-child(2)>a>span:nth-child(2)")
+	private WebElement yourSavedPharmacyAndDrugs;
+	
+	@FindBy(css="nav.uhc-profile-header-nav ul li:nth-child(3)>a>span:nth-child(2)")
+	private WebElement yourSavedDoctorsAndProviders;
+	
+	@FindBy(css="nav.uhc-profile-header-nav ul li:nth-child(4)>a>span:nth-child(2)")
+	private WebElement yourRecommendations;
+	
+	@FindBy(css="nav.uhc-profile-header-nav ul li:last-child>div>a:first-child")
+	private WebElement yourEnrollments;
+	
+	@FindBy(css="nav.uhc-profile-header-nav ul li:last-child>div>a:nth-child(2)")
+	private WebElement manageProfile;
+	
+	@FindBy(css="nav.uhc-profile-header-nav ul li:last-child>div>a:last-child")
+	private WebElement signOutText;
 	
 	public VisitorProfilePage(WebDriver driver) {
 		super(driver);
@@ -1087,5 +1111,24 @@ public class VisitorProfilePage extends UhcDriver {
 			Assertion.assertTrue(importLnk.isDisplayed());
 		}
 	}
+	
+	/**
+	 * Validate the new header
+	 * @param data
+	 */
+	public void validateNewHeader(DataTable data) {
+		Map<String,String> expectedData = data.asMap(String.class, String.class);
+		Assertion.assertEquals("Welcome, "+expectedData.get("Name"), profileName.getText().trim());
+		Assertion.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
+		Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
+		Assertion.assertEquals("Your Saved Doctors & Providers (1)", yourSavedDoctorsAndProviders.getText().trim());
+		Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
+		Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
+		Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
+		Assertion.assertEquals("Sign Out", signOutText.getText().trim());
+		
+	}
+	
+	
 }
 

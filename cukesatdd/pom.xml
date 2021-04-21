@@ -94,7 +94,7 @@
 							<properties>
 								<!-- <property>
 									<name>dataproviderthreadcount</name>
-									<value>300</value>
+									<value>200</value>
 								</property> -->
 								<property>
 									<name>testnames</name>
