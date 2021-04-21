@@ -1118,14 +1118,14 @@ public class VisitorProfilePage extends UhcDriver {
 	 */
 	public void validateNewHeader(DataTable data) {
 		Map<String,String> expectedData = data.asMap(String.class, String.class);
-		Assert.assertEquals("Welcome, "+expectedData.get("Name"), profileName.getText().trim());
-		Assert.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
-		Assert.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
-		Assert.assertEquals("Your Saved Doctors & Providers (1)", yourSavedDoctorsAndProviders.getText().trim());
-		Assert.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
-		Assert.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
-		Assert.assertEquals("Manage Profile", manageProfile.getText().trim());
-		Assert.assertEquals("Sign Out", signOutText.getText().trim());
+		Assertion.assertEquals("Welcome, "+expectedData.get("Name"), profileName.getText().trim());
+		Assertion.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
+		Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
+		Assertion.assertEquals("Your Saved Doctors & Providers (1)", yourSavedDoctorsAndProviders.getText().trim());
+		Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
+		Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
+		Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
+		Assertion.assertEquals("Sign Out", signOutText.getText().trim());
 		
 	}
 	
