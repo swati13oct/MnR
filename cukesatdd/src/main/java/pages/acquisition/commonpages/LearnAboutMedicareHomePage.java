@@ -338,7 +338,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	}
 	public PrescriptionsProvidersBenefitsPage selectBenifitsEducation() {
 		
-		WebElement medBenifits= driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[2]"));
+		WebElement medBenifits= driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[3]"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();
@@ -442,7 +442,9 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		else {
 			Assert.fail("****************myuhcagent Page is not loaded ***************");
 		}
-	
+		
+		driver.close();
+		driver.switchTo().window(parentWindow);
 	}
 	public void sleepBySec(int sec) {
 		try {
@@ -609,7 +611,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	public void backToMedEdPage() {
 		
-		/*CommonUtility.checkPageIsReadyNew(driver);		
+/*		CommonUtility.checkPageIsReadyNew(driver);		
 		waitForPageLoadSafari();
 		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);*/
 		if (driver.getWindowHandles().size() > 1) {
@@ -681,11 +683,11 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	public void hoverToPlanPage(String plantype) {
 		WebElement lnkPlan=null;
 		if(plantype.equalsIgnoreCase("MA")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col')]//span[contains(text(),'Advantage')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Advantage')])[3]"));
 		}else if(plantype.equalsIgnoreCase("MS")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col')]//span[contains(text(),'Supplement')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Supplement')])[1]"));
 		}else if(plantype.equalsIgnoreCase("PDP")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col') and contains(text(),'Prescription Drug')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Prescription Drug')])[3]"));
 		}
 		scrollToView(lnkPlan);
 		navigateToMedicareMenuLinks(lnkPlan);

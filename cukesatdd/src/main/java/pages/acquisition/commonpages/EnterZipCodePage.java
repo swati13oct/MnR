@@ -87,6 +87,7 @@ public class EnterZipCodePage extends UhcDriver {
 					else
 						assertTrue("Not redirected to VPP page",
 								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+					}
 				}
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
@@ -106,7 +107,6 @@ public class EnterZipCodePage extends UhcDriver {
 				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
 				threadsleep(2000);*/
 			}
-		}
 			
 		}catch (Exception e) {
 			System.out.println(e);
