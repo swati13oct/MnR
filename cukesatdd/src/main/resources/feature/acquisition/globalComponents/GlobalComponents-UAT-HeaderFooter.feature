@@ -240,7 +240,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_5 UMS | UHC  |
 
   @globalheaderULayer @UATRegression
-  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages : <pagename> page
+  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages : <pagename> page on site <site>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
@@ -477,7 +477,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | E2E Scenario_2 UMS | UHC  | profile/guest                                                                           | Your Profile      |
 
   @globalheaderULayer @UATRegression
-  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages : <pagename> page
+  Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages : <pagename> page on site <site>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page

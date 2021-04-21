@@ -75,7 +75,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | UHC  |   78006 | future   | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
   @drugDetailsDCEViewPlanSummaryButton
-  Scenario Outline: Test to verify the Drug cost estimator and view plan summary buttons on VPP detail page
+  Scenario Outline: Test to verify the Drug cost estimator and view plan summary buttons on VPP detail page - <plantype>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -292,7 +292,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | UHC  |   90001 | MAPD     | future   | none   | no              | meloxicam |    78006 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
   @dCERedesign_PlanSave_AARP @F476042 @decRelease
-  Scenario Outline: Test to verify unauthenticated user save the plan on drug details page and see the saved plan on guest profile
+  Scenario Outline: Test to verify unauthenticated user save the plan on drug details page and see the saved plan on guest profile - <site> - <plantype>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
