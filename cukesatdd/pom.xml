@@ -92,10 +92,10 @@
 							<!-- <threadCountMethods>1000</threadCountMethods> -->
 							<!-- <threadCount>100</threadCount> -->
 							<properties>
-								<property>
+								<!-- <property>
 									<name>dataproviderthreadcount</name>
 									<value>200</value>
-								</property>
+								</property> -->
 								<property>
 									<name>testnames</name>
 									<value>${testnames}</value>
