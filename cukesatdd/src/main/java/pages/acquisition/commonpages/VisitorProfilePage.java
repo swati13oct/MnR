@@ -78,7 +78,7 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'drug--block card')]//ul")
 	private WebElement drugBlock;
 
-	@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	private WebElement signOut;
 
 	@FindBy(id = "enrollment-next-button")
