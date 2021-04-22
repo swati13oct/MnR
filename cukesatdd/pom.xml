@@ -101,7 +101,7 @@
 									<value>${testnames}</value>
 								</property>
 							</properties>
-							<argLine>-Xmx512m -XX:MaxPermSize=1024m</argLine>
+							<argLine>-Xmx2g -XX:MaxPermSize=1024m -XX:+UseParallelGC</argLine>
 							<systemPropertyVariables>
 								<microapps>${microapp}</microapps>
 								<environment>${environment}</environment>
