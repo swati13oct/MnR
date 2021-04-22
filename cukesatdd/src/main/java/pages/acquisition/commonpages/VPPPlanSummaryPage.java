@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -315,7 +314,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//ul[contains(@class,'primary-nav')]//a[contains(@href,'health-plans.html')]")
 	private WebElement topMenushopForAPlanOption;
 
-	@FindBy(xpath = "//input[contains(@class,'zip-field')]")
+	@FindBy(xpath = "//input[@id='nav-zipcode']")
 	private WebElement shopForAPlanOptionZipcodeFieldBox;
 
 	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
@@ -4292,6 +4291,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planType == "PDP")
 			return true;
 
+		driver.navigate().refresh();
+		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
 
