@@ -1022,8 +1022,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			pageloadcomplete();
-			validateNew(maPlansViewLink, 10);
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", maPlansViewLink);
 			scrollToView(maPlansViewLink);
+			//validateNew(maPlansViewLink, 10);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
