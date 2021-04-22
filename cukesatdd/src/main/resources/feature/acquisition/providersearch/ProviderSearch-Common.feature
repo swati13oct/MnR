@@ -137,7 +137,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Year      | <year>      |
 
     #@ProviderSearchFromGlobalHeaderUlayer1
-    @ProviderSearchCommon_AARP @regressionAARP
+    @ProviderSearchCommon_AARP @regressionAARP @sanity
     Examples: 
       | zipcode | site | plancount | year   |
       |   10001 | AARP |        12 | future |

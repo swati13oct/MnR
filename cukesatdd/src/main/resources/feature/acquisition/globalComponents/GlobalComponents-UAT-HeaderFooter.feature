@@ -60,7 +60,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site |
       | E2E Scenario_1 AMP | AARP |
 
-    @globalfooter_UHC @regressionUHC
+    @globalfooter_UHC @regressionUHC @sanity
     Examples: 
       | Scenario           | site |
       | E2E Scenario_1 UMS | UHC  |

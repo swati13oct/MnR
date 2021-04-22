@@ -30,7 +30,7 @@ Feature: 1.08. ACQ- Visitor profile
       | Alabama      | Lipitor |   90210 | AARP |
       
 
-     @VisitorProfile_AARP @regressionAARP
+     @VisitorProfile_AARP @regressionAARP @sanity
     Examples: 
       | state   | drug1   | zipCode | site |
       | Pennsylvania | Lipitor |   15001 | AARP |
@@ -106,7 +106,7 @@ Feature: 1.08. ACQ- Visitor profile
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | AARP | Alabama  | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-    @VisitorProfile_AARP @regressionAARP @prod_regression
+    @VisitorProfile_AARP @regressionAARP @prod_regression @sanity
     Examples: 
       | site | state    | UID       | planyear | zipcode | isMultiCounty | county          | plantype | testPlans                                                                 |
       | AARP | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS) |
@@ -185,7 +185,7 @@ Feature: 1.08. ACQ- Visitor profile
       | UHC  | Alabama  | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
       | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city  | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS)           | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
 
-    @prod_regression
+    @prod_regression @sanity
     Examples: 
       | site | state   | UID       | zipcode | isMultiCounty | plantype | planyear | county           | testPlans                                                                           | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | UHC  | Alabama | US1770330 |   53503 | NO            | MAPD     | future   | Jefferson County | AARP Medicare Advantage Open Plan 2 (PPO),AARP Medicare Advantage Open Plan 1 (PPO) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
@@ -363,7 +363,7 @@ Feature: 1.08. ACQ- Visitor profile
     #No pdf link is avialable now
     #And user validate pdf link
     #| MS Test Plans | <MS_testPlans> |
-    @VisitorProfile_AARP @regressionAARP 
+    @VisitorProfile_AARP @regressionAARP @sanity
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName   | password   |
       | AARP | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrmedsupp | Password@1 |

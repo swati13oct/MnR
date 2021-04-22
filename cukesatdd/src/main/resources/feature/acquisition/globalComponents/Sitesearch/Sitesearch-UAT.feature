@@ -33,7 +33,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_AMP | AARP | Medicare    | Pharmacy       |
 
-    @prodSanity_UHC @vbfGateUHC
+    @prodSanity_UHC @vbfGateUHC @sanity
     Examples: 
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_UMS | UHC  | Medicare    | Pharmacy       |
@@ -66,7 +66,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | ggahjkllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjj |
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | Unicorn                                                                     |
 
-    @prodSanity_AARP
+    @prodSanity_AARP @sanity
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | medicareeee    |
@@ -85,7 +85,7 @@ Feature: 1.08 UAT-Site Search Flows
     Then the user clicks on the united health care medicare solutions link
     Then the user validates the "<url>"
 
-    @SiteSearch_AARP_03 @prodSanity_AARP @prod_regression @regressionAARP
+    @SiteSearch_AARP_03 @prodSanity_AARP @prod_regression @regressionAARP @sanity
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |

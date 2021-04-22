@@ -50,6 +50,11 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | 00001 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              |                                                       | future   |
       | 00002 |   28105 | AARP | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 | No drug coverage       |                                                       | future   |
       | 00003 |   90210 | AARP | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $41.60         | [blank]              | [blank]    | [blank]          | [blank]            | $0  copay              | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | future   |
+		
+		@sanity
+		Examples: 
+      | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                                      | planyear |
+      | 00003 |   90210 | AARP | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $41.60         | [blank]              | [blank]    | [blank]          | [blank]            | $0  copay              | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | future   |
 
     @vppPlanSummaryCommonUHC01 @regressionUHC
     Examples: 
@@ -58,7 +63,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | 00002 |   28105 | UHC  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 | No drug coverage       |                                                       | future   |
       | 00003 |   90210 | UHC  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $41.60         | [blank]              | [blank]    | [blank]          | [blank]            | $0  copay              | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | future   |
 
-    @prod_regression
+    @prod_regression @sanity
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | planyear |
       | 00001 |   90210 | UHC  | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              | [blank]          | future   |
@@ -187,12 +192,12 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Then Verify provider name is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    @vppPlanSummaryCommonAARP02 @prod_regression @regressionAARP
+    @vppPlanSummaryCommonAARP02 @prod_regression @regressionAARP @sanity
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             | plantype | planname                                            | planyear |
       | 00008 | AARP |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
 
-    @vppPlanSummaryCommonUHC02 @regressionUHC
+    @vppPlanSummaryCommonUHC02 @regressionUHC @sanity
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             | plantype | planname                                            | planyear |
       | 00008 | UHC  |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |

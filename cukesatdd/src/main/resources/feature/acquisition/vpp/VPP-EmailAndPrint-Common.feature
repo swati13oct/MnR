@@ -35,7 +35,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
       | 15523 | UHC  |   90210 | MA       | NO            | next     |
 
-    @prod_regression @VppEmailandPrintCommon_AARP_1
+    @prod_regression @VppEmailandPrintCommon_AARP_1 @sanity
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
       | 15523 | AARP |   90210 | PDP      | NO            | next     |
@@ -81,7 +81,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
       | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
       | 15531 | AARP |   80001 | SNP      | No              | Jefferson County | next     |
 
-    @prod_regression @VppEmailandPrintCommon_UHC_2
+    @prod_regression @VppEmailandPrintCommon_UHC_2 @sanity
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
       | 15531 | UHC  |   80001 | SNP      | No              | Jefferson County | next     |
@@ -118,7 +118,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
       | 1598166 | UHC  | PDP      |   80001 | NO            | Jefferson County | next     |
       | 1598166 | UHC  | SNP      |   80001 | NO            | Jefferson County | next     |
 
-    @prod_regression @VppEmailandPrintCommon_AARP_3
+    @prod_regression @VppEmailandPrintCommon_AARP_3 @sanity
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
       | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | next     |

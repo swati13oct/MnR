@@ -65,7 +65,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     Then the user deletes all the added drugs from profile page
       | DrugName | <drug1> |
 
-    @VisitorProfile_AARP @regressionAARP
+    @VisitorProfile_AARP @regressionAARP @sanity
     Examples: 
       | site | state   | userName  | password   | drug1   | zipCode |
       | AARP | Alabama | mnrqeaarp | Password@1 | Lipitor |   90210 |

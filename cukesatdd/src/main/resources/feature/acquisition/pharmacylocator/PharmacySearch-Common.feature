@@ -40,7 +40,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     And the user validate view search PDF link
 
     #  @pharmacylocatorAARP01a
-    @PharmacyLocatorCommonAARP01a @regressionAARP
+    @PharmacyLocatorCommonAARP01a @regressionAARP @sanity
     Examples: 
       | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
@@ -125,14 +125,14 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | 15583 | AARP |   33321 |       10 | None            |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        |        2021 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
 
     #@pharmacylocatorAARP02a\
-    @PharmacyLocatorCommonUHC02a @regressionUHC
+    @PharmacyLocatorCommonUHC02a @regressionUHC 
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | UHC  |   10980 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
       | 15582 | UHC  |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
       | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
-    @PharmacyLocatorCommonProd_UHC @prod_regression
+    @PharmacyLocatorCommonProd_UHC @prod_regression @sanity
     Examples: 
       | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
@@ -198,7 +198,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     When user clicks on breadcrumb on pharmacy search page
     Then user should be navigated to visitor profile page
 
-    @breadcrumbPharmacySearch_AARP_Part1 @regressionAARP
+    @breadcrumbPharmacySearch_AARP_Part1 @regressionAARP @sanity
     Examples: 
       | site |
       | AARP |

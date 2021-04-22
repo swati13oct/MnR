@@ -19,7 +19,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP |
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 |
 
-  @ARE @SavedSessionDropdown @F457409
+  @ARE @SavedSessionDropdown @F457409 @sanity
   Scenario Outline: - <Email> To Verify agent login and validating session storage in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile

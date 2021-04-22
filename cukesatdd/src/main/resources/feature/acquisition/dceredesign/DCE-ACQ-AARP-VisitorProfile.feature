@@ -28,7 +28,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP |
 
-    @DCE_VisitorProfile_UHC @regressionUHC
+    @DCE_VisitorProfile_UHC @regressionUHC @sanity
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | UHC  |

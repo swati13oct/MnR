@@ -1,6 +1,7 @@
 @UATRegression @providerSearch
 Feature: 1.07.2 UAT-Provider Search Flows
 
+	@sanity
   Scenario Outline: <Scenario> : Verify Provider Search  in <site> site from Home Page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -43,7 +44,8 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | future   |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
-
+ 
+ 		@sanity @prod_regression 
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                            | planyear |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO) | future   |
@@ -54,7 +56,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | future   |
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
-    @prod_regression
+    @prod_regression @sanity
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_UHC |   10001 | UHC  | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
@@ -69,12 +71,12 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @regressionAARP
+    @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @regressionAARP @sanity 
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | next |
 
-    @ProviderSearchCommon_UHC @prod_regression @ProviderSearchFromGlobalHeaderBlayer @regressionUHC
+    @ProviderSearchCommon_UHC @prod_regression @ProviderSearchFromGlobalHeaderBlayer @regressionUHC @sanity 
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | next |

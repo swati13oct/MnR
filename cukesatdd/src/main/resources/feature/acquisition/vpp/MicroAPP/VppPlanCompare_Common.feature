@@ -22,6 +22,11 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | future   |
 
+		@sanity
+		Examples: 
+      | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
+      | 00001 | AARP |   96799 | NO            | Western District | PDP      | future   |
+      
     @VppPlanCompareCommon_UHC01 @regressionUHC
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
@@ -29,6 +34,11 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00002 | UHC  |   78006 | YES           | Bexar County     | SNP      | future   |
       | 00003 | UHC  |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | UHC  |   70072 | NO            | Jefferson Parish | MAPD     | future   |
+      
+      @sanity
+		Examples: 
+      | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
+      | 00002 | UHC  |   78006 | YES           | Bexar County     | SNP      | future   |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify Call sticky action menu on <site> site
     Given the user is on medicare acquisition site landing page
@@ -88,7 +98,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00007 | UHC  |   90210 | No            | Los Angeles County | MAPD     | future   |
-
+	#1a
   Scenario Outline: TID: <TCID> - Plan Type: <plantype> -Navigation for plan comapre to Back to summary page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -112,7 +122,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00008 | UHC  |   90210 | No            | Los Angeles County | MAPD     | future   |
-
+	#1b
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be removed using Remove link from the widget on the top of page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -130,16 +140,16 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And click on back to plans on plan compare page
     Then Verify the Plan compare checkbox should be unchecked for the removed plan
 
-    @VppPlanCompareCommon_AARP01 @regressionAARP
+    @VppPlanCompareCommon_AARP01 @regressionAARP @sanity
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00009 | AARP |   90210 | NO            | Los Angeles County | MAPD     | future   |
 
-    @VppPlanCompareCommon_UHC01 @regressionUHC @prod_regression
+    @VppPlanCompareCommon_UHC01 @regressionUHC @prod_regression @sanity
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00009 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | future   |
-
+	#1c
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - Verify a plan can be added while on plan compare page by using '+Add a plan' widget on <site> site.
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -338,12 +348,12 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then remove "<removePlanIndices>" plan from new plan compare page
     Then validate all available plans are shown on click of view all plans
 
-    @VppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prod_regression
+    @VppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prod_regression @sanity
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County | MAPD     |             4,1,2 | future   |           5 |
 
-    @VppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 @regressionUHC 
+    @VppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 @regressionUHC @sanity
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | UHC  |   55343 | NO            | Hennepin County | MAPD     |               2,1 | future   |           5 |

@@ -1,7 +1,7 @@
 @AgentRecommendationEngine @ARERegression @regressionAARP
 Feature: Agent Recommendation Engine - Verify ARE elements
 
-  @ARE @AREElements @dropdownUI @F439411
+  @ARE @AREElements @dropdownUI @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate ARE dropdown UI
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -36,7 +36,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | ATDD4STG@MEMBERDD.COM | None          | current  |
       | qavgogine | qavgogine | SPOP@NONMEMBER.COM    | None          | current  |
 
-  @ARE @ViewPlanDetailsARE @F439411
+  @ARE @ViewPlanDetailsARE @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate View Plan Details in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile

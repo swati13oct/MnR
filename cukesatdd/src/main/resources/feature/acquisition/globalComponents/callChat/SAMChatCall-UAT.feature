@@ -10,7 +10,7 @@ Feature: 1.14 - UAT Scripts - To test SAM Icons
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
-    @samChatCallulayer @UATRegression 
+    @samChatCallulayer @UATRegression @sanity
     Examples: 
       | pagename | site | scenario           |
       | /        | AARP | E2E Scenario 1_AMP |

@@ -99,12 +99,12 @@ Feature: 1.05.9 -OLE MedSupp Flow
     Then user clicks on Save icon for all the plans and validate count in cart should match to plans
       | No Of Saved Plans On Compare Page | <NoOfSavedPlansOnComparePage> |
 
-    @MedSupp_OLE_Regression_AARP @MedSupp_OLE_Regression_AARP_1 @regressionAARP @IS
+    @MedSupp_OLE_Regression_AARP @MedSupp_OLE_Regression_AARP_1 @regressionAARP @IS 
     Examples: 
       | NavigateToCompare | NoOfSavedPlansOnComparePage | NoOfPlans | zipcode | isMultutiCounty | AARPUrl                                          | county             | plantype | DOB        | Firstname | Lastname | ApplicationID | applicationType | username  | password   | AARPUrl-stg                                                                                     | site |
       | yes               |                           1 |         1 |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | ABCD          | Resume          | mnrqavd11 | Password@1 | https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html | AARP |
 
-    @MedSupp_OLE_Regression_UHC @regressionUHC @IS
+    @MedSupp_OLE_Regression_UHC @regressionUHC @IS 
     Examples: 
       | NavigateToCompare | NoOfSavedPlansOnComparePage | NoOfPlans | zipcode | isMultutiCounty | AARPUrl                                          | county             | plantype | DOB        | Firstname | Lastname | ApplicationID | applicationType | username  | password   | AARPUrl-stg                                                                                     | site |
       | yes               |                           1 |         1 |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | ABCD          | Resume          | mnrqavd11 | Password@1 | https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html | UHC  |
