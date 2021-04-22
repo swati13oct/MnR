@@ -1027,7 +1027,7 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 
 	public void savePlan(String planName) {
-		WebElement savePlan = driver.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));
+		WebElement savePlan = driver.findElement(By.xpath("//button[contains(@dtmname,'save')]"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 

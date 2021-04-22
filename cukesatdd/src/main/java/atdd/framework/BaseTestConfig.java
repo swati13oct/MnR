@@ -27,11 +27,6 @@ public abstract class BaseTestConfig {
 	
 	@BeforeSuite(alwaysRun = true)
 	public void setupSuite(ITestContext context) {
-		System.out.println("Dataprovider thread count set to : " + context.getSuite().getXmlSuite().getDataProviderThreadCount());
-		System.out.println("Processor count : "+ Runtime.getRuntime().availableProcessors());
-//		System.out.println("Free memory ready for new objects : "+ Runtime.getRuntime().freeMemory()/dataSize + " MB");
-		System.out.println("Total memory : "+ Runtime.getRuntime().totalMemory()/dataSize + " MB");
-		System.out.println("Max memory : "+ Runtime.getRuntime().maxMemory()/dataSize + " MB");
 		for(ITestNGMethod method : context.getAllTestMethods()) {
 			method.setRetryAnalyzer(new RetryAnalyzer());
 		}
