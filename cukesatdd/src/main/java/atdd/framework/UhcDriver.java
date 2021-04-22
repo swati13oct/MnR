@@ -85,16 +85,19 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//a[contains(text(),'Drug Cost Estimator')]")
 	public WebElement DCERedesignLink;
 
-	@FindBy(xpath = "//a[text()='Get a Plan Recommendation']")
+	@FindBy(xpath = "//h3//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation' and text()='Get a Plan Recommendation']")
 	public WebElement GetPlanRecoMobile;
 
 	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
 	public WebElement ShopTool;
 
+	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Tools to help you choose a plan']")
+	public WebElement toolsToChoosePlan;
+
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
 
-	@FindBy(xpath = "//span[text()='Back']")
+	@FindBy(xpath = "//body/div/header[@role='banner']/div/div/div/div/div[@role='navigation']/div/div/div/div/ul[@data-role='navigation']/li[2]/div[2]/div[1]/div[1]/span[1]")
 	private WebElement MobileMenuBackBtn;
 
 	@FindBy(xpath = "//a[.='Back to Top']")
@@ -103,6 +106,8 @@ public abstract class UhcDriver {
 	public void MobileMenu() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(toolsToChoosePlan);
+		iosScroll(GetPlanRecoMobile);
 		jsClickNew(GetPlanRecoMobile);
 	}
 
@@ -115,6 +120,7 @@ public abstract class UhcDriver {
 	public void MobileMenuAndGetStarted() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(toolsToChoosePlan);
 		jsClickNew(GetPlanRecoMobile);
 		jsClickNew(getStartedBtn);
 
@@ -123,6 +129,7 @@ public abstract class UhcDriver {
 	public void MobileMenuAndGetPlanRecom() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(toolsToChoosePlan);
 		jsClickNew(GetPlanRecoMobile);
 
 	}
@@ -136,6 +143,7 @@ public abstract class UhcDriver {
 	public void MobileMenuAccessDCE() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(toolsToChoosePlan);
 		jsClickNew(DCERedesignLink);
 	}
 
@@ -549,7 +557,7 @@ public abstract class UhcDriver {
 				checkElementisEnabled(element);
 
 				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("arguments[0].click();", element);
+				js.executeScript("arguments[0].click(true);", element);
 				System.out.println("JsClick worked");
 				clickFlag = true;
 
@@ -671,8 +679,7 @@ public abstract class UhcDriver {
 		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		 Element.click();
-		 
+		Element.click();
 
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
@@ -1217,8 +1224,8 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-
-				jsClickNew(selectElement);
+				iosScroll(selectElement);
+			jsClickNew(selectElement);
 
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");

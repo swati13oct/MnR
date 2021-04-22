@@ -612,10 +612,7 @@ public class PlanRecommendationEngineHeaderAndFooterMobile extends UhcDriver {
 	// Navigating Plan RecommendationEngine via Shop for a plan
 	// -->Shop-->Tools-->Get Help Choosing
 	public void navigationToPlanRecommendationEngineViaShopTools() {
-		MobileMenuShopTool();
-
-		scrollToView(GetRecommendationsbtn);
-		jsClickNew(GetRecommendationsbtn);
+		MobileMenu();
 
 		validate(landingpageHeader, 30);
 		scrollToView(landingpageHeader);
