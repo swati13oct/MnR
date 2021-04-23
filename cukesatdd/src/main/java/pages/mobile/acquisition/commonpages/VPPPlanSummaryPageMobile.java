@@ -1024,7 +1024,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			pageloadcomplete();
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", maPlansViewLink);
 			scrollToView(maPlansViewLink);
-			//validateNew(maPlansViewLink, 10);
+			// validateNew(maPlansViewLink, 10);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -2537,9 +2537,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		String FirstName = memberAttributesMap.get("First Name");
 		String LastName = memberAttributesMap.get("Last Name");
 		String EmailAddress = memberAttributesMap.get("Email Address");
-		iosScroll(firstNameField);
-
-		mobileactionsendkeys(firstNameField, FirstName);
+		scrollToView(firstNameField);
+		jsClickNew(firstNameField);
+		mobileactionsendkeys(lastNameField, LastName);
 
 		mobileactionsendkeys(lastNameField, LastName);
 

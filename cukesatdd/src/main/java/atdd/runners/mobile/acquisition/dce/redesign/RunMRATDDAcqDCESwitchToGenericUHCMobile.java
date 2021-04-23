@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCESwitchToGenericUHCMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCESwitchToGenericUHCMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCESwitchToGenericUHCMobile.json" }, tags = { " @switchtoGenericUHC" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCESwitchToGenericUHCMobile.json" }, tags = { "@switchtoGenericUHC" })
 
 public class RunMRATDDAcqDCESwitchToGenericUHCMobile {
 

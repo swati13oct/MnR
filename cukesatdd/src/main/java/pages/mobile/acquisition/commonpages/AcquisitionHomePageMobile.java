@@ -2570,7 +2570,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void openMobileURL() {
+//		String site = "";
 		if (MRScenario.environment.equalsIgnoreCase("prod")) {
+//			String URL = site.equals("AARP") ? AARP_ACQISITION_PROD_PAGE_URL:MRConstants.UHCM_URL_PROD;
+//			startNewMobile(URL);
 			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
 			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
