@@ -1,4 +1,4 @@
-@UATRegression
+@UATRegression @regressionAARP
 Feature: 1.12 UAT - Medicare Education Pages flows
 
   @GlobalComponentsAARPPages

@@ -43,7 +43,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to see Medicare Advantage plan by default
     And verify DCE NBA is displayed on drug summary page
 
-    @dceNBADrugSummaryPage_AARP @ios
+    @dceNBADrugSummaryPage_AARP @regressionAARP @ios
     Examples: 
       | site | zipcode | county | isMultutiCounty | drug1   |
       | AARP |   10001 | none   | no              | Orkambi |

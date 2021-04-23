@@ -1,7 +1,7 @@
 @dce_redesign_home
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
 
-  @DCE_HomeIcon @OnlyProd
+  @DCE_HomeIcon @OnlyProd @regression
   Scenario Outline: To verify DCE REDESIGN flow from <site> home page
     Given the user is on medicare acquisition site landing page 
       | Site | <site> |

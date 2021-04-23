@@ -1,7 +1,7 @@
 @vppPlanSummaryAARP
 Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
 
-  @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP01 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression @regressionAARP
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -47,10 +47,10 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     @ios
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1                     | annualDeductible | planyear |
-      | 15545 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  |                  | next     |
-      | 15546 |   28105 | AARP | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance |                  | next     |
+      | 15545 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $4  copay                                  | [blank]          | next     |
+      | 15546 |   28105 | AARP | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0 - $6,700.00     | $0, $1.25, $3.40 copay, or 15% coinsurance | [blank]          | next     |
 
-  @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression @VBFTEAMC
+  @vppPlanSummaryAARP02 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression @regressionAARP @VBFTEAMC
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify right rail on plan summary page in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -79,7 +79,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | planyear |
       | 15550 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | current  |
 
-  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP03 @vppPlanSummaryAARPRun01 @vppPlanSummaryAARPRegression @regressionAARP
   Scenario Outline: 7UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -193,7 +193,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | site | zipcode | isMultiCounty | county             | plantype | planName                                       | planyear |
       | AARP |   80001 | NO            | Los Angeles County | SNP      | UnitedHealthcare Nursing Home Plan (PPO I-SNP) | future   |
 
-  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP06 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @regressionAARP
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -222,7 +222,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
   #Examples:
   #| zipcode | isMultutiCounty | plantype | planName                    |
   #|   55344 | NO              | MA       | UnitedHealthcare Sync (PPO) |
-  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @ios
+  @vppPlanSummaryAARP08 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @regressionAARP @ios
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -252,7 +252,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | UID     | zipcode | isMultutiCounty | county             |
       | F322478 |   90210 | NO              | Los Angeles County |
 
-  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP10 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @regressionAARP
   Scenario Outline: To verify links displayed in the global footer of AARP site on vpp
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -296,7 +296,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | 1598166 | Ulayer | PDP      |   80001 | NO            | Jefferson County |
       | 1598166 | Ulayer | SNP      |   80001 | NO            | Jefferson County |
 
-  @vppPlanSummaryAARP12 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP12 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @regressionAARP
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -441,7 +441,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | 15550 |   90210 | NO            | Los Angeles County | MAPD     | 584 MAIN AVE NORWALK       | FAIRFIELD | CONNECTICUT | test      | test     | test@test.com | NO             | Fairfield County |
       | 15550 |   78006 | YES           | Bexar County       | MAPD     | 1750 EPPS BRIDGE RD ATHENS | OCONEE    | GEORGIA     | test      | test     | test@test.com | YES            | Clarke County    |
 
-  @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP16 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @regressionAARP
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify Rocky Mountain Health Learn More lands on Correct site from AARP site from plan summary page
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site
@@ -462,7 +462,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              | planyear |
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) | current  |
 
-  @vppPlanSummaryAARP17 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression
+  @vppPlanSummaryAARP17 @vppPlanSummaryAARPRun02 @vppPlanSummaryAARPRegression @regressionAARP
   Scenario Outline: TID: <TID> -plan type: <plantype> - plan name: -<planName> - Verify People Health plans Learn More lands on Correct site from UHC site from plan summary page
     Given the user is on the AARP medicare acquisition site landing page
     When the user does plan search using the following information in the AARP site

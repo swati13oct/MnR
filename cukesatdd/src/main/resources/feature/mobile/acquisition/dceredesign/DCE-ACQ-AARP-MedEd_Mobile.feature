@@ -1,7 +1,7 @@
 @dce_redesign_MedEd
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion Page to NEW DCE Flows
 
-  @DCE_MedEdPage @OnlyProd
+  @DCE_MedEdPage @OnlyProd @regression
   Scenario Outline: To verify DCE REDESIGN flow from Med Ed page
     Given the user is on AARP medicare acquisition site landing page
     Then the user navigates to Med Ed - Prescription Drugs Page

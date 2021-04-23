@@ -1,7 +1,7 @@
 @dce_redesign_ShopPDP
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Shop Plans -> PDP page to NEW DCE Flows
 
-  @DCE_ShopForPlanPage_PDPpage @OnlyProd
+  @DCE_ShopForPlanPage_PDPpage @OnlyProd @regression
   Scenario Outline: To verify DCE REDESIGN flow from Shop PDP page on
     Given the user is on medicare acquisition site landing page
     		|Site| <site>|

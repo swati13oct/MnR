@@ -48,7 +48,7 @@ Feature: 1.12 ACQ - Global Components AARP
   #Examples:
   #|	site	|
   #|	UHC	|
-  @GlobalComponentsAARPPages 
+  @GlobalComponentsAARPPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -296,7 +296,7 @@ Feature: 1.12 ACQ - Global Components AARP
     #|	UHC		| health-plans/aarp-pharmacy.html!/Pharmacy-Search-English      | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
     #|	UHC		| medicare-plans.html                                           | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
     #|	UHC		| profile/guest                                                 | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                              | true    |
-    @FooterLinks_GlobalCompsAARP @globalfooterULayer 
+    @FooterLinks_GlobalCompsAARP @globalfooterULayer
     Examples: 
       | site | path                          | pageName                   | tfnXpath                     | tfnFlag |
       | AARP | about-us.html                 | Footer: About Us           | //a[contains(@class, 'tel')] | false   |
