@@ -4290,6 +4290,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planType == "PDP")
 			return true;
 
+		driver.navigate().refresh();
+		CommonUtility.checkPageIsReadyNew(driver);
+
 		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')]"));
 

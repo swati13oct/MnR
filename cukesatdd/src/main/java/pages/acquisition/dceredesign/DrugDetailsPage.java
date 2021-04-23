@@ -1,7 +1,6 @@
 package pages.acquisition.dceredesign;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,27 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import org.openqa.selenium.support.ui.Select;
 
 import com.google.common.collect.Ordering;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
@@ -83,7 +74,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")
 	public WebElement DrugCosts_SaveBtn;
 
-	@FindBy(xpath = "//div[contains(text(), 'Need Help?')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-card')]//*[contains(text(), 'Need Help?')]")
 	public WebElement DrugCosts_TFN;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Your Drugs')]")
@@ -1035,7 +1026,7 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 
 	public void savePlan(String planName) {
-		WebElement savePlan = driver.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));
+		WebElement savePlan = driver.findElement(By.xpath("//button[contains(@dtmname,'save')]"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 
