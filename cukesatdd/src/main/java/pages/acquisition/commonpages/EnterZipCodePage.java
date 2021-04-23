@@ -12,7 +12,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.PageTitleConstants;
 
 public class EnterZipCodePage extends UhcDriver {
 
@@ -78,7 +77,7 @@ public class EnterZipCodePage extends UhcDriver {
 						assertTrue("Not redirected to VPP page",
 								vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 				} else {
-					if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+					if (driver.getCurrentUrl().contains("uhcmedicaresolutions"))
 					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
 						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
 					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
@@ -88,6 +87,7 @@ public class EnterZipCodePage extends UhcDriver {
 						assertTrue("Not redirected to VPP page",
 								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 				}
+				
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
 					Set<String> newWindow = driver.getWindowHandles();
@@ -101,12 +101,12 @@ public class EnterZipCodePage extends UhcDriver {
 				}
 				else {
 					driver.navigate().back();
+					threadsleep(20000);
 				}
 				zipCodeNumber++;
 				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
 				threadsleep(2000);*/
 			}
-		}
 			
 		}catch (Exception e) {
 			System.out.println(e);
