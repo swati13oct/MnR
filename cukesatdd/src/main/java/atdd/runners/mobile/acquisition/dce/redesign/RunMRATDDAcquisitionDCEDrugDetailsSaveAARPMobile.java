@@ -13,6 +13,7 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcqDCEDrugDetailsSaveAARPMobile - Scenario for DCE Details Page copay section Preferred Pharmacy copays validation
  */
 @RunWith(ExtendedCucumber.class)
+
 @ExtendedCucumberOptions(retryCount=0,screenShotSize="", screenShotLocation="/screenshots/",
 jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEDrugDetailsSaveAARPMobile.json",detailedReport = true,
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDCEDrugDetailsSaveAARPMobile")
@@ -20,5 +21,6 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionDCEDrugDetailsSaveAARPMobile.j
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCEDrugDetailsSaveAARPMobile.json" }, tags = { "@dceDrugDetailSaveAARP" })
 
 public class RunMRATDDAcquisitionDCEDrugDetailsSaveAARPMobile {
+
  
 }
