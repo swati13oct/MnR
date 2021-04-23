@@ -105,7 +105,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user clicks on Agent link and validates the correct URL is loaded from Med Ed Page
       | UHC Agent URL | <UHCUrl> |
-    Then the user come back to Med-ed page
+    #Then the user come back to Med-ed page
     Then the user click on next article link
 
     @MedEdPages_1_GlobalCompsAARP
