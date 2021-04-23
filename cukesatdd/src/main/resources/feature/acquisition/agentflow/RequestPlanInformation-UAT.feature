@@ -89,12 +89,12 @@ Scenario Outline: <scenario> Verify request an <plantype>appointment through <si
     Then the user enters following information in Request Plan Information Guide through Shop Pages 
           | Email         | <email>       |
    	
-   	@requestPlanInformationUlayer @UATRegression
+   #	@requestPlanInformationUlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request Plan Information - E2E Scenario 3_AARP			|	AARP	|PCP-DSNP-MBI   |future  |future  |			10001 | NO              | New York County | SNP       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
    
-   @requestPlanInformationBlayer @UATRegression
+   #@requestPlanInformationBlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request Plan Information - E2E Scenario 3_UHCMS			|	UHC	|PCP-DSNP-MBI    |future  |future  |			10001 | NO              | New York County | SNP       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
