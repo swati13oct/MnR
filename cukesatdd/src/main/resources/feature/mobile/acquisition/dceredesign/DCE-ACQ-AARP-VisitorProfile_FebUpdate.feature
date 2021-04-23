@@ -66,58 +66,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
 
-<<<<<<< HEAD
-    @DCEShopperProfileAddDrugsGlobally_AARP
-    Examples: 
-      | drug1   | zipCode | site | drug2  | planType | planName                                            |
-      | Orkambi |   80002 | AARP | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-    @DCEShopperProfileAddDrugsGlobally_UHC @regressionAARP
-    Examples: 
-      | drug1   | zipCode | site | drug2  | planType | planName                                            |
-      | Orkambi |   80002 | UHC  | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
-
-  @DCEShopperProfileAddDrugsPlancard @decRelease
-  Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs from plan card
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user performs plan search using following information
-      | Zip Code        | <zipcode>       |
-      | County Name     | <county>        |
-      | Is Multi County | <isMultiCounty> |
-    And the user views the plans of the below plan type
-      | Plan Type | <plantype> |
-    Then user saves two plans as favorite
-      | Plan Type  | <plantype>  |
-      | Test Plans | <testPlans> |
-    Then user gets a create profile prompt
-    Then user click on view saved plans button
-    And user validates the added plans on new visitor profile page
-      | Test Plans | <testPlans> |
-    And the user clicks on the enter drug information button from plan card on Visitor Profile page
-    Then the user validates Get Started Page
-    Then the user clicks on Build Drug List to navigate to Build Drug List Page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug1> |
-    And clicks on Review drug cost button
-    Then user should be able to see Return to profile link on details page
-    When user clicks on Return to profile link on details page
-    Then user should be navigated to shopper profile page
-    And user should see back to drug cost estimator link on visitor profile page
-    When user clicks on edit drugs button from plan card
-    Then user should be navigated to build drug list page
-    Then the user searches and adds the following Drug to Drug List
-      | DrugName | <drug2> |
-    And clicks on Review drug cost button
-    Then user should be able to see Return to profile link on details page
-
-    @DCEShopperProfileAddDrugsPlancard_AARP @regressionAARP
-    Examples: 
-      | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
-      | AARP | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
-
-    @DCEShopperProfileAddDrugsPlancard_UHC @regressionAARP
-=======
     @DCEShopperProfileAddDrugsGlobally_AARP @regressionAARP
     Examples: 
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
@@ -168,7 +117,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | AARP | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
 
     @DCEShopperProfileAddDrugsPlancard_UHC
->>>>>>> branch 'testng_develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
     Examples: 
       | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
       | UHC  | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |

@@ -1,11 +1,7 @@
 @UATRegression @regressionAARP @F513647
 Feature: 1.12 UAT - Header and Footer flows
 
-<<<<<<< HEAD
-  @globalfooterULayer @UATRegression @regressionAARP 
-=======
-  @globalfooterULayer @UATRegression
->>>>>>> branch 'testng_develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+  @globalfooterULayer @UATRegression @regressionAARP
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on home page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

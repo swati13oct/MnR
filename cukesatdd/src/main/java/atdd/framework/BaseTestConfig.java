@@ -19,29 +19,29 @@ import io.cucumber.testng.TestNGCucumberRunner;
 @Listeners(TestNGMethodListener.class)
 public abstract class BaseTestConfig {
 	protected TestNGCucumberRunner testNGCucumberRunner;
-	
+
 	protected final String ScenarioDataProvider = "scenarios";
-	
+
 	public abstract void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper);
+
 	long dataSize = 1024 * 1024;
-	
+
 	@BeforeSuite(alwaysRun = true)
 	public void setupSuite(ITestContext context) {
-		for(ITestNGMethod method : context.getAllTestMethods()) {
+		for (ITestNGMethod method : context.getAllTestMethods()) {
 			method.setRetryAnalyzer(new RetryAnalyzer());
 		}
 	}
-	
+
 	@BeforeClass(alwaysRun = true)
 	public void setupClass() {
 		long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-		System.out.println("Used memory : "+ usedMemory/dataSize + " MB");
-		System.out.println("Total Free memory : "+ (Runtime.getRuntime().maxMemory() - usedMemory)/dataSize + " MB");
+
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
 	}
-	
+
 	@DataProvider(parallel = true)
-	public Object[][] scenarios(){
+	public Object[][] scenarios() {
 		if (testNGCucumberRunner == null) {
 			testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
 		}
