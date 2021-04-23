@@ -6249,4 +6249,54 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
+	
+	@FindBy(xpath = "//a[contains(text(), 'Introduction')]")
+	private WebElement introductionLearnaboutMedicare;
+	
+	public LearnAboutMedicareHomePage learnAboutMedicareintroduction() throws InterruptedException {
+		waitforElement(introductionLearnaboutMedicare);
+		if (introductionLearnaboutMedicare.isDisplayed()) {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+			validate(introductionLearnaboutMedicare);
+			jsClickNew(introductionLearnaboutMedicare);
+			return new LearnAboutMedicareHomePage(driver);
+		} else {
+			return null;
+		}
+	}
+	@FindBy(xpath = "//a[contains(text(), 'Eligibility')]")
+	private WebElement eligibilityLearnaboutMedicare;
+	
+	public LearnAboutMedicareHomePage learnAboutMedicareeligibility() throws InterruptedException {
+		waitforElement(eligibilityLearnaboutMedicare);
+		if (eligibilityLearnaboutMedicare.isDisplayed()) {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+			validate(eligibilityLearnaboutMedicare);
+			waitforElement(eligibilityLearnaboutMedicare);
+			Thread.sleep(5000);
+			//eligibilityLearnaboutMedicare.click();
+			jsClickNew(eligibilityLearnaboutMedicare);
+			return new LearnAboutMedicareHomePage(driver);
+		} else {
+			return null;
+		}
+	}
+	@FindBy(xpath = "//a[contains(text(), 'Options')]")
+	private WebElement coverageOptionsLearnaboutMedicare;
+	
+	public LearnAboutMedicareHomePage learnAboutMedicareCoverageOptions() throws InterruptedException {
+		waitforElement(eligibilityLearnaboutMedicare);
+		if (coverageOptionsLearnaboutMedicare.isDisplayed()) {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+			validate(coverageOptionsLearnaboutMedicare);
+			//eligibilityLearnaboutMedicare.click();
+			jsClickNew(coverageOptionsLearnaboutMedicare);
+			return new LearnAboutMedicareHomePage(driver);
+		} else {
+			return null;
+		}
+	}
 }

@@ -973,4 +973,55 @@ public class GlobalComponentsCommonStepDefinition {
 		String path = memberAttributesMap.get("PagePath");
 		aquisitionhomepage.validatePageNavigated(path);
 	}
+	
+	@Given("^the user hovers over the learn about medicare$")
+	public void the_user_hovers_screen_over_the_learnaboutmedicare() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.HoveronaLearnMedicare();
+		if (learnAboutMedicareHomePage != null) {
+			System.out.println("learn about medicare drop down is opened");
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+		} else {
+			Assert.fail("Issue in selecting a learn about medicare drop down");
+		}
+	}
+
+	@Then("^user click on introduction from learn about medicare$")
+	public void the_user_Click_Introduction() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.learnAboutMedicareintroduction();
+		if (learnAboutMedicareHomePage != null) {
+			System.out.println("learn about medicare drop down is opened");
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+		} else {
+			Assert.fail("Issue in selecting a learn about medicare drop down");
+		}
+	}
+	
+	@Then("^user click on eligibility from learn about medicare$")
+	public void the_user_Click_Eligibility() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.learnAboutMedicareeligibility();
+		if (learnAboutMedicareHomePage != null) {
+			System.out.println("learn about medicare drop down is opened");
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+		} else {
+			Assert.fail("Issue in selecting a learn about medicare drop down");
+		}
+	}
+	@Then("^user click on Coverage Options from learn about medicare$")
+	public void the_user_Click_Coverage_Options() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.learnAboutMedicareCoverageOptions();
+		if (learnAboutMedicareHomePage != null) {
+			System.out.println("learn about medicare drop down is opened");
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+		} else {
+			Assert.fail("Issue in selecting a learn about medicare drop down");
+		}
+	}
 }

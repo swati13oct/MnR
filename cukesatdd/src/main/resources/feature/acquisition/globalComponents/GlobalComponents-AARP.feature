@@ -92,16 +92,16 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-			#|AARP| medicare-education/compare-ma-ms-plans.html|
 
+    #|AARP| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
       | site | path                                              | pageName                            | tfnXpath                                                       | tfnFlag |
       | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-			#|UHC| medicare-education/compare-ma-ms-plans.html|
 
+    #|UHC| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
       | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
@@ -701,3 +701,22 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
       | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
 
+  Scenario Outline: To verify the links under Learn About Medicare on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user hovers over the learn about medicare
+    Then user click on introduction from learn about medicare
+    Then the user hovers over the learn about medicare
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    Then user click on eligibility from learn about medicare
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    Then user click on Coverage Options from learn about medicare
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+
+    @learnAboutMedicare
+    Examples: 
+      | site |
+      | AARP |
