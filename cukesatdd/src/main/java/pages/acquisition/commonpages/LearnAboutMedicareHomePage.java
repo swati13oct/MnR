@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
-import junit.framework.Assert;
+
 
 @SuppressWarnings({ "deprecation" })
 public class LearnAboutMedicareHomePage extends GlobalWebElements {
@@ -90,6 +91,18 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement FindAnAgent; 
+	
+	@FindBy(xpath = "//input[contains(id,'updates-email') or contains(@id,'learnmore-email-address')]")
+	private WebElement requestshoppageemailaddress;
+	
+	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	private WebElement requestplaninformationLearnMedicaresubmit;
+	
+	@FindBy(xpath = "//p[contains(text(),'Your guide will arrive in your inbox')]")
+	private WebElement requestplaninformationLearnMedicaresubmitpopup;
+	
+	@FindBy(xpath = "//span[contains(@id,'learnmore-email-error')]")
+	private WebElement RequestPlanInformationLearnMedicarepages_ErrorMessage;
 	
 	/* logic to navigate to Learn About medicare page from other pages */
 	public void pagebackButton() {
@@ -710,14 +723,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		
 	}
 	
-	@FindBy(xpath = "//input[contains(id,'updates-email') or contains(@id,'learnmore-email-address')]")
-	private WebElement requestshoppageemailaddress;
-	@FindBy(xpath = "//span[contains(text(),'Submit')]")
-	private WebElement requestplaninformationLearnMedicaresubmit;
-	@FindBy(xpath = "//p[contains(text(),'Your guide will arrive in your inbox')]")
-	private WebElement requestplaninformationLearnMedicaresubmitpopup;
-	@FindBy(xpath = "//span[contains(@id,'learnmore-email-error')]")
-	private WebElement RequestPlanInformationLearnMedicarepages_ErrorMessage;
+	
 	
 	public boolean RequestPlanIInformationshoppages(String EmailAddress)
 			throws InterruptedException {
