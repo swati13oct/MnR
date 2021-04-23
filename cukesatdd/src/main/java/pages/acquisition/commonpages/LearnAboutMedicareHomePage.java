@@ -337,7 +337,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	}
 	public PrescriptionsProvidersBenefitsPage selectBenifitsEducation() {
 		
-		WebElement medBenifits= driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[2]"));
+		WebElement medBenifits= driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[3]"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();
