@@ -13,11 +13,11 @@ import cucumber.api.CucumberOptions;
  * this file is to run test cases for RunMRATDDAcqDCESwitchToGenericAARPMobile - Scenario for VPP Page
  */
 @RunWith(ExtendedCucumber.class)
-@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcqDCESwitchToGenericAARPMobile.json",detailedReport = true,
- detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcqDCESwitchToGenericAARPMobile")
+@ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionDCESwitchToGenericAARPMobile.json",detailedReport = true,
+ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionDCESwitchToGenericAARPMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = { "src/main/resources/feature/mobile/acquisition/dceredesign" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcqDCESwitchToGenericAARPMobile.json" }, tags = { "@switchtoGenericAARP" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionDCESwitchToGenericAARPMobile.json" }, tags = { "@switchtoGenericAARP" })
 
-public class RunMRATDDAcqDCESwitchToGenericAARPMobile {
+public class RunMRATDDAcquisitionDCESwitchToGenericAARPMobile {
 
 }

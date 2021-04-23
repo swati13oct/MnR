@@ -91,7 +91,7 @@ public abstract class UhcDriver {
 	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
 	public WebElement ShopTool;
 
-	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Tools to help you choose a plan']")
+	@FindBy(xpath = "//p[@class='dropdown-btn active'][normalize-space()='Tools to help you choose a plan']")
 	public WebElement toolsToChoosePlan;
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
