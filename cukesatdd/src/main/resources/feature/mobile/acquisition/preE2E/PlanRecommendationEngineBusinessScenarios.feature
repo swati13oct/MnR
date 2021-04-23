@@ -68,9 +68,9 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName              | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | Perez, Martha Regina, MD |               | No             | Yes,No,No,No                  | Higher               | None           | Travel, Vision               |
-      |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                          |               | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None                 |
-      |   15537 | NO            | Bedford    | MAPD          | None         | None   | UHGNetwork      |                          |               | NO             | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | Perez, Martha Regina, MD | [blank]       | No             | Yes,No,No,No                  | Higher               | None           | Travel, Vision               |
+      |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare | [blank]                  | [blank]       | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None                 |
+      |   15537 | NO            | Bedford    | MAPD          | None         | None   | UHGNetwork      | [blank]                  | [blank]       | NO             | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
 
   @PRE @planrecommendation @APIRanking @MAFlowRanking @SanityTest @PRERegression6 @regressionAARP @SanityPRE
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
@@ -102,7 +102,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                 |               | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
+      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork | [blank]         | [blank]       | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
 
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Lower                | -->Tie Scenario

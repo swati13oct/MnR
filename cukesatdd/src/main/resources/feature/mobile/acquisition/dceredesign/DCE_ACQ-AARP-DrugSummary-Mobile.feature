@@ -53,7 +53,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | site | zipcode | county | isMultutiCounty | drug1   |
       | UHC  |   10001 | none   | no              | Orkambi |
 
-  @DCE_DrugSummary_ValidatePage_AARP @regressionAARP 
+  @DCE_DrugSummary_ValidatePage_AARP @regressionAARP
   Scenario Outline: Test to verify the Drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
