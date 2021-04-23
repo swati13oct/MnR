@@ -1,4 +1,4 @@
-#@fixedTestCaseTest @vppUlayer
+#@fixedTestCaseTest @vppUlayer @regressionAARP
 #Feature: 1.02-Favorite Plans in vpp flow AARP
 #
   #@feature-F265872 @us1598162 @vppFavoritePlanRegressionUlayer1 @vppFavoritePlanInSession @vppFavoritePlanInSessionAarp @thePredators @Apr_release_2019 @prodRegression

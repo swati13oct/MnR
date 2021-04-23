@@ -1,7 +1,7 @@
-@DCE_Redesign_VPP_Compare
+@DCE_Redesign_VPP_Compare @regressionAARP
 Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare Integration
 
-  @DCE_Redesign_VPP_PlanCompare 
+  @DCE_Redesign_VPP_PlanCompare
   Scenario Outline: 1.10.2.1 To test the DCE Redesignflow for PlanType :  <plantype> from vpp Plan Details
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -23,7 +23,7 @@ Feature: 1.10.3 ACQ-DCERedesign-VPP_PlanCompare - To test DCE - VPP Plan Compare
     Then the user validates drug is displayed on the plan compare page
       | DrugName | <drug1> |
 
-    @DCE_Redesign_VPP_PlanCompare_AARP 
+    @DCE_Redesign_VPP_PlanCompare_AARP
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | planname                                           | planyear |
       | AARP |   90210 | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage SecureHorizons Focus (HMO) | current  |

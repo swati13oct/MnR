@@ -56,7 +56,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page
     Then the user validates planName on LearnMore page matches plan Name in VPP
 
-    @DCE_DrugDetailsValidation_AARP
+    @DCE_DrugDetailsValidation_AARP @regressionAARP
     Examples: 
       | drugnameAutocomplete | drug1   | zipCode | planType | planName                                            | site | brandDrug | genericDrug | deleteDrug | addDrug1 | insulinDrug    | insulinCopay |
       | ativ                 | Humalog |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Ativan    | orazepam    | Humalog    | Lipitor  | insulin lispro | $35          |
@@ -147,13 +147,13 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | SelectPharmacy | <SelectPharmacy> |
     Then the user validates Not Covered Pharmacy view for DCE Details Page
 
-    @DCE_DrugDetailsCopay_Standard_AARP
+    @DCE_DrugDetailsCopay_Standard_AARP @regressionAARP
     Examples: 
       | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy |
       | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  |
       | vigabatrin | Fanapt |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  |
 
-    @DCE_DrugDetailsCopay_Standard_UHC
+    @DCE_DrugDetailsCopay_Standard_UHC @regressionUHC
     Examples: 
       | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy |
       | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  |
@@ -185,14 +185,14 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     Then the user validates following expected Premium on DCE Details Page
       | Premium | <premium> |
 
-    @DCE_DrugDetailsPremiumValidation_AARP
+    @DCE_DrugDetailsPremiumValidation_AARP @regressionAARP
     Examples: 
       | drug1   | zipCode | planType | planName                                                   | site | premium |
       | Orkambi |   90210 | MAPD     | UnitedHealthcare Medicare Advantage Assure (HMO)           | AARP | $0 - $  |
       | Orkambi |   75002 | SNP      | UnitedHealthcare Medicare Silver (Regional PPO C-SNP)      | AARP | $0 - $  |
       | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | AARP | $0      |
 
-    @DCE_DrugDetailsPremiumValidation_UHC
+    @DCE_DrugDetailsPremiumValidation_UHC @regressionUHC
     Examples: 
       | drug1   | zipCode | planType | planName                                                   | site | premium |
       | Orkambi |   75002 | SNP      | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) | UHC  | $0      |

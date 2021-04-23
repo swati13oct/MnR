@@ -1,4 +1,4 @@
-@dce_redesign_MedEd
+@dce_redesign_MedEd @regressionAARP
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Medicare Education Prescriotion Page to NEW DCE Flows
 
   @DCE_MedEdPage @OnlyProd

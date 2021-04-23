@@ -1,4 +1,4 @@
-@DCE_Redesign_VPP_PlanSummary
+@DCE_Redesign_VPP_PlanSummary @regressionAARP
 Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details - DCE Flows in AARP site
 
   @DCE_Redesign_VPP_PlanSummary_Plan 

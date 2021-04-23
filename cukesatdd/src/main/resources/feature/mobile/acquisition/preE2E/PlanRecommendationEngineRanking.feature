@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking
 
-  @PRE @Ranking @MAPlansRanking1 @F358846 @PRERegression1
+  @PRE @Ranking @MAPlansRanking1 @F358846 @PRERegression1 @regressionAARP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -39,7 +39,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   12345 | NO            | Schenectady | MAPD          | None         | withinUS  | UHGNetwork |                     |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Online         | No,No,No,No                   | Lower                | both           | Doctors, Drug Cost |
       |   12345 | NO            | Schenectady | MAPD          | None         | outsideUS | Lookup     | Sherrie L Murray NP | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                               | Retail         | Yes,Yes,Yes,Yes               | Higher               | None           | Doctors, Drug Cost |
 
-  @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1
+  @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1 @regressionAARP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -73,7 +73,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                |
       |   12345 | NO            | Schenectady | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                | 1st            | Health Care Premium, None |
 
-  @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression1
+  @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression1 @regressionAARP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -92,7 +92,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Zipcode | isMultiCounty | county      | isCoverageOpt | Drug Selection |
       |   35034 | Yes           | Bibb County | PDP           | Yes            |
 
-  @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression6
+  @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression6 @regressionAARP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption>, <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -115,7 +115,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       |   35034 | Yes           | Bibb County | PDP           | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,1,YES,NO                                                               |
       |   35034 | Yes           | Bibb County | PDP           | Yes            | Atorvastatin calcium,NO,atorvastatin calcium TAB 10MG,,,1,NO,NO:Aptiom,NO,Aptiom TAB 200MG,,,1,NO,NO |
 
-  @PRE @planrecommandonation @SNPPlansRanking @F358846 @PRERegression6 @31st
+  @PRE @planrecommandonation @SNPPlansRanking @F358846 @PRERegression6 @regressionAARP @31st
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <primaryRecommendation> , <RankingplansOrder> - To validate SNP ranking plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

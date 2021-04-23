@@ -67,7 +67,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | Plan Name | <planName> |
     Then user should be able to see Return to profile link on details page
     
-    @DCEShopperProfileAddDrugsGlobally_AARP
+    @DCEShopperProfileAddDrugsGlobally_AARP @regressionAARP
     Examples: 
       | drug1   | zipCode |site|drug2|planType|planName|
       | Orkambi | 80002 |AARP|Fanapt|MAPD|AARP Medicare Advantage SecureHorizons Plan 2 (HMO)|
@@ -112,7 +112,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And clicks on Review drug cost button
     Then user should be able to see Return to profile link on details page
     
-    @DCEShopperProfileAddDrugsPlancard_AARP
+    @DCEShopperProfileAddDrugsPlancard_AARP @regressionAARP
     Examples: 
       |site| drug1   | drug2|plantype|testPlans|zipcode | isMultiCounty | county|    
       |AARP| Orkambi | Fanapt|MAPD|AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO)|10001 | NO            | New York County|
