@@ -9,7 +9,7 @@
 			<package name="atdd.runners" />
 		</packages>
 	</test>
-	<test name="Mobile">
+	<test name="Mobile" parallel="methods" preserve-order="false">
 		<packages>
 			<package name="atdd.mobile.runners" />
 		</packages>
