@@ -88,6 +88,7 @@ public class EnterZipCodePage extends UhcDriver {
 								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 					}
 				}
+				
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
 					Set<String> newWindow = driver.getWindowHandles();
@@ -101,6 +102,7 @@ public class EnterZipCodePage extends UhcDriver {
 				}
 				else {
 					driver.navigate().back();
+					threadsleep(20000);
 				}
 				zipCodeNumber++;
 				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
