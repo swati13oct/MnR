@@ -1,6 +1,10 @@
 package acceptancetests.acquisition.learnAboutMedicare;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -9,6 +13,7 @@ import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.MedicareAdvantagePartCPlansPage;
 import pages.acquisition.commonpages.MedicareEligibilityPage;
 import pages.acquisition.commonpages.MedicarePrescriptionDrugPartDPlansPage;
+import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
@@ -16,7 +21,9 @@ import atdd.framework.MRScenario;
 import cucumber.api.DataTable;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import junit.framework.Assert;
+import cucumber.api.java.en.Then;
+import gherkin.formatter.model.DataTableRow;
+//import junit.framework.Assert;
 
 /**
  * Functionality: Medicare flow
@@ -342,7 +349,33 @@ public class LearnAboutMedicareStepDefinitionAARP {
 	}
 	
 
-	
-	
+	@Then("^the user enters following information in Request Plan Information Guide through medicare pages$")
+	public void the_user_enters_following__information_in_Request_Plan_Information_Guide_through_medicare_pages(DataTable givenAttributes)
+			throws Throwable {
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}		
+		String EmailAddress = memberAttributesMap.get("Email");
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
+		learnAboutMedicareHomePage.RequestPlanIInformationshoppages(EmailAddress);
+
+	}
+	
+	@Given("^the user hovers screen over the learn medicare for a plan$")
+	public void the_user_hovers_screen_over_the_learnmedicare_for_a_plan() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.HoveronaLearnMedicare();
+		if (learnAboutMedicareHomePage != null) {
+			System.out.println("learn about medicare drop down is opened");
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+		} else {
+			Assert.fail("Issue in selecting a learn about medicare drop down");
+		}
+	}
 }

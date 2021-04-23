@@ -70,7 +70,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ShopdsnpEnrollButton;
 
-	@FindBy(xpath = "(//button[contains(@class,'zip-button')])")
+//	@FindBy(xpath = "(//button[contains(@class,'zip-button')])")
+	//@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
+	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
 	private WebElement LearnMedicareMedsuppEnrollButton;
 
 	@FindBy(id = "zipcode")
@@ -296,7 +298,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ShopForaplan;
-
+	
 	@FindBy(id = "ghn_lnk_3")
 	private WebElement learnaboutMedicare;
 
@@ -6234,4 +6236,17 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		//return IsInsuranceAgent;
 		return new IsInsuranceAgent(driver);
 	}
+	
+	public LearnAboutMedicareHomePage HoveronaLearnMedicare() throws InterruptedException {
+		waitforElement(learnaboutMedicare);
+		if (learnaboutMedicare.isDisplayed()) {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+			jsMouseOver(learnaboutMedicare);
+			return new LearnAboutMedicareHomePage(driver);
+		} else {
+			return null;
+		}
+	}
+
 }
