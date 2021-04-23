@@ -707,5 +707,55 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		}
 		
 	}
+	
+	@FindBy(xpath = "//input[contains(id,'updates-email') or contains(@id,'learnmore-email-address')]")
+	private WebElement requestshoppageemailaddress;
+	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	private WebElement requestplaninformationLearnMedicaresubmit;
+	@FindBy(xpath = "//p[contains(text(),'Your guide will arrive in your inbox')]")
+	private WebElement requestplaninformationLearnMedicaresubmitpopup;
+	@FindBy(xpath = "//span[contains(@id,'learnmore-email-error')]")
+	private WebElement RequestPlanInformationLearnMedicarepages_ErrorMessage;
+	
+	public boolean RequestPlanIInformationshoppages(String EmailAddress)
+			throws InterruptedException {
+
+		boolean RequestPlanIInformation_Validation = true;
+
+		boolean flag = true;
+		
+		requestshoppageemailaddress.clear();
+		requestshoppageemailaddress.sendKeys("(*^*_asb@t.c");
+		requestplaninformationLearnMedicaresubmit.click();
+		if (validate(RequestPlanInformationLearnMedicarepages_ErrorMessage) && RequestPlanInformationLearnMedicarepages_ErrorMessage.isDisplayed()) {
+			if (!RequestPlanInformationLearnMedicarepages_ErrorMessage.getText()
+					.contains("Please enter a valid email address")) {
+				System.out.println(
+						"Email Invalid Error is Not  displayed : " + RequestPlanInformationLearnMedicarepages_ErrorMessage.getText());
+				flag = false;
+			}
+			System.out.println("Email Invalid Error : " + RequestPlanInformationLearnMedicarepages_ErrorMessage.getText());
+
+		} else {
+			System.out.println("Email Invalid Error field is not displayed");
+
+		}
+		validateNew(requestshoppageemailaddress);
+		requestshoppageemailaddress.clear();
+		requestshoppageemailaddress.sendKeys(EmailAddress);
+		System.out.println("Email Address is enetered : " + EmailAddress);
+		validateNew(requestplaninformationLearnMedicaresubmit);
+		jsClickNew(requestplaninformationLearnMedicaresubmit);
+		if (requestplaninformationLearnMedicaresubmitpopup.getText().contains(
+				"Your guide will arrive in your inbox shortly")) {
+			System.out.println("****************Request  information is displayed  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
+		return RequestPlanIInformation_Validation;
+
+	}
 }
 
