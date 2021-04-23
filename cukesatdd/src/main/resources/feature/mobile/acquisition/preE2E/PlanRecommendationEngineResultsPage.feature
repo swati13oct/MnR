@@ -30,7 +30,7 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            |        | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,No,No                  | Higher               |
+      |   10001 | NO            |        | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
 
   @PRE @planrecommendation @MAPDFlow @Performance @F471404
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Plan Names in VPP Summary vs Details Pages using MAPD flow in PRE
@@ -67,9 +67,9 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
-      
-  @PRE @planrecommandonation @SaveResult @F543314 @PRERegression8 
+      |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,1,YES,NO                               | Retail         | Yes,No,No,Yes                 | Lower                |
+
+  @PRE @planrecommandonation @SaveResult @F543314 @PRERegression8 @regressionAARP
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption>  - To validate Email Plan List PDP plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -83,8 +83,8 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
       | Drug Selection | <Drug Selection> |
     Then user validate elements in loading results page
     Then user save recommendation results and validate in VP
-    	| Plan Type | <isCoverageOpt> |
-      
+      | Plan Type | <isCoverageOpt> |
+
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       |   10003 | NO            | New York | PDP           | No             |

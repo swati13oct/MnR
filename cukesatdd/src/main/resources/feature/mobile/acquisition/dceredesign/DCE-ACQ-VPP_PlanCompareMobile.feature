@@ -1,4 +1,4 @@
-@DCE_Redesign_VPP_Compare
+@DCE_Redesign_VPP_Compare @regressionAARP
 Feature: 1.10.3 DCE-Redesign-VPP_PlanCompare - To test DCE - VPP Plan Compare Integration
 
   @DCE_Redesign_VPP_PlanCompare

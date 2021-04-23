@@ -1,4 +1,4 @@
-@dce_redesign_zipcode_planyear_capture_AEP_UHC @F426582
+@dce_redesign_zipcode_planyear_capture_AEP_UHC @F426582 @regressionAARP
 Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in New DCE flow during AEP
 
   @DCE_ZipCodePlanYear_AEP_UHC @OnlyProd
