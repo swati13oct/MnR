@@ -1,17 +1,22 @@
 package acceptancetests.acquisition.learnAboutMedicare;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.MedicareAdvantagePartCPlansPage;
@@ -354,7 +359,34 @@ public class LearnAboutMedicareStepDefinitionAARP {
 	}
 	
 
+	@Then("^the user enters following information in Request Plan Information Guide through medicare pages$")
+	public void the_user_enters_following__information_in_Request_Plan_Information_Guide_through_medicare_pages(DataTable givenAttributes)
+			throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
 	
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/		
+		String EmailAddress = memberAttributesMap.get("Email");
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
+		learnAboutMedicareHomePage.RequestPlanIInformationshoppages(EmailAddress);
 	
+	}
 
+	@Given("^the user hovers screen over the learn medicare for a plan$")
+	public void the_user_hovers_screen_over_the_learnmedicare_for_a_plan() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.HoveronaLearnMedicare();
+		if (learnAboutMedicareHomePage != null) {
+			System.out.println("learn about medicare drop down is opened");
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+		} else {
+			Assert.fail("Issue in selecting a learn about medicare drop down");
+		}
+	}
 }

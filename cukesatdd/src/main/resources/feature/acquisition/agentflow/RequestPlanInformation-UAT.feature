@@ -86,6 +86,23 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     Then the user enters following information in Request Plan Information Guide through Shop Pages
       | Email | <email> |
 
+    #@requestPlanInformationUlayer @UATRegression @regressionAARP
+    Examples: 
+      | scenario                                       | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
+      | Request Plan Information - E2E Scenario 3_AARP | AARP | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+
+    #@requestPlanInformationBlayer @UATRegression @regressionUHC
+    Examples: 
+      | scenario                                        | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
+      | Request Plan Information - E2E Scenario 3_UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+
+  Scenario Outline: <scenario> Verify Request Plan Information through <site> from learn about medicare page
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And the user hovers screen over the learn medicare for a plan
+    Then the user enters following information in Request Plan Information Guide through medicare pages
+      | Email | <email> |
+
     @requestPlanInformationUlayer @UATRegression @regressionAARP
     Examples: 
       | scenario                                       | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
