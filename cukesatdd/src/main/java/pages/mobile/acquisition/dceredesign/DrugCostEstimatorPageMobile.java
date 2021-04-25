@@ -1412,8 +1412,8 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 			Thread.sleep(4000);
 
-			Assert.assertTrue("Preferred Mail Service Pharmacy is not selected",
-					SelectedName.getText().contains("Preferred Mail Service Pharmacy"));
+			Assert.assertTrue("OptumRx Mail Service Pharmacy is not selected",
+					SelectedName.getText().contains("OptumRx Mail Service Pharmacy"));
 		}
 
 	}

@@ -87,7 +87,7 @@ public class CampaignTFNPage extends UhcDriver {
 	//@FindBy(xpath = "//h3[contains(text(),'Find Medicare Plans Available from UnitedHealthcare')]")
 	//@FindBy(xpath = "(//a[contains(@href,'https://www.uhcmedicaresolutions.com/shop/medicare-advantage-plan')])[3]")
 	
-	@FindBy(xpath = "(//*[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - UHC ..')])[2]")
+	@FindBy(xpath = "//*[contains(text(),'Learn More About Medicare Advantage (Part C) Plans - UHC ..')]")
 	
 	public WebElement UHCSearchLinkfromGoogle;
 
@@ -565,7 +565,8 @@ public class CampaignTFNPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement findPlansButton;
 	
-	@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
+	//@FindBy(xpath = "(//button[contains(@class,'zip-button')])[2]")
+	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
 	private WebElement findPlansButtonExternalLinks;
 	
 	//@FindBy(id="cta-zipcode")

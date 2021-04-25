@@ -16,12 +16,12 @@ Scenario Outline: <scenario> Verify request an <plantype> appointment through <s
           | Lastname      | <Lastname>    |
           | Email         | <email>       |
    	
-   	@requestPlanInformationBlayer @UATRegression
+   	@requestPlanInformationUlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request plan information scenario 1 _AARP			|	AARP	|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
    
-   @requestPlanInformationUlayer @UATRegression
+   @requestPlanInformationBlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request plan information scenario 1 _UHCMS			|	UHC 	|MA-MBI   |future  |future  |			10001 | NO              | New York County | MA       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
@@ -43,12 +43,12 @@ Scenario Outline: <scenario> Verify request an <plantype>appointment through <si
           | Lastname      | <Lastname>    |
           | Email         | <email>       |
    	
-   	@requestPlanInformationBlayer @UATRegression
+   	@requestPlanInformationUlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request plan information scenario 1 _AARP			|	AARP	|PDP-MBI   |future  |future  |			10001 | NO              | New York County | PDP        | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
    
-   @requestPlanInformationUlayer @UATRegression
+   @requestPlanInformationBlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request plan information scenario 1 _UHCMS			|	UHC	|PDP-MBI   |future  |future  |			10001 | NO              | New York County | PDP        | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
@@ -71,12 +71,12 @@ Scenario Outline: <scenario> Verify request an <plantype>appointment through <si
           | Lastname      | <Lastname>    |
           | Email         | <email>       |
    	
-   	@requestPlanInformationBlayer @UATRegression
+   	@requestPlanInformationUlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request plan information scenario 1 _AARP			|	AARP	|PCP-DSNP-MBI   |future  |future  |			10001 | NO              | New York County | SNP       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
    
-   @requestPlanInformationUlayer @UATRegression
+   @requestPlanInformationBlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request plan information scenario 1 _UHCMS			|	UHC	|PCP-DSNP-MBI    |future  |future  |			10001 | NO              | New York County | SNP       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
@@ -89,12 +89,30 @@ Scenario Outline: <scenario> Verify request an <plantype>appointment through <si
     Then the user enters following information in Request Plan Information Guide through Shop Pages 
           | Email         | <email>       |
    	
-   	@requestPlanInformationBlayer @UATRegression
+   #	@requestPlanInformationUlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request Plan Information - E2E Scenario 3_AARP			|	AARP	|PCP-DSNP-MBI   |future  |future  |			10001 | NO              | New York County | SNP       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
    
-   @requestPlanInformationUlayer @UATRegression
+   #@requestPlanInformationBlayer @UATRegression
+    Examples: 
+      |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
+      |Request Plan Information - E2E Scenario 3_UHCMS			|	UHC	|PCP-DSNP-MBI    |future  |future  |			10001 | NO              | New York County | SNP       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
+    
+    
+    Scenario Outline: <scenario> Verify Request Plan Information through <site> from learn about medicare page
+		Given the user is on medicare acquisition site landing page
+    	|Site| <site>|
+    And the user hovers screen over the learn medicare for a plan
+    Then the user enters following information in Request Plan Information Guide through medicare pages
+          | Email         | <email>       |
+   	
+   	@requestPlanInformationUlayer @UATRegression
+    Examples: 
+      |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
+      |Request Plan Information - E2E Scenario 3_AARP			|	AARP	|PCP-DSNP-MBI   |future  |future  |			10001 | NO              | New York County | SNP       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|
+   
+   @requestPlanInformationBlayer @UATRegression
     Examples: 
       |scenario                                       |	site	|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear|Firstname|Lastname|email|
       |Request Plan Information - E2E Scenario 3_UHCMS			|	UHC	|PCP-DSNP-MBI    |future  |future  |			10001 | NO              | New York County | SNP       | future |Test_Portals_J|Test_Portals_K|venkata.kanagala@optum.com|

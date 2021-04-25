@@ -56,13 +56,15 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement pcontinue;
 
-	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Enroll']")
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[text()='Enroll']")
 	private WebElement enrollLink;
 	
-	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
+	//@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
+	
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[contains(text(),'Shop')]")
 	private WebElement shopLink;
 	
-	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
 	private WebElement shopLinkMsg;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
@@ -76,7 +78,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-advantage-plans')])[2]")
 	private WebElement maLeanHowToshopLink;
 	
-	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[2]")
+	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[3]")
 	private WebElement msLeanHowToshopLink;
 	
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
@@ -87,6 +89,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	
 	@FindBy(xpath = "(//a[contains(@href,'/medicare-education/medicare-supplement-plans.html')])[1]")
 	private WebElement MedicareSupplementLink;
+
 	@FindBy(xpath="//a[contains(text(),'Member Resources')]")
 	private WebElement ResourcesLink;
 	

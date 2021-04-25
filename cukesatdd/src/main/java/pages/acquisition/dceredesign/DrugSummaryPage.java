@@ -645,6 +645,7 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void clickChangePharmacy() {
 		changePharmacy.click();
+		validateSelectPharmacyPage();
 	}
 
 	// Code change Start - Added by F&F for Change Pharmacy to NC Pharmacy scenario
@@ -654,7 +655,6 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void SelectPharmacy(String PharmacytoSelect) {
 
-		validateSelectPharmacyPage();
 		List<WebElement> PharmacyName = driver
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
@@ -838,7 +838,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
@@ -1062,14 +1062,14 @@ public class DrugSummaryPage extends UhcDriver {
 	public void clickChangePharmacyCoverPrescription() {
 		validate(changePharmacyCoverPrescription);
 		changePharmacyCoverPrescription.click();
-
+		validateSelectPharmacyPage();
 	}
 
 	public void selectPreferredMailOrderPharmacy() {
 		waitforElement(preferredMailPharmacy);
 		preferredMailPharmacy.click();
 	}
-	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'Select Preferred Mail Service Pharmacy')]")
+	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'OptumRx Mail Service Pharmacy')]")
 	public WebElement MailPharmacy;
 	public void selectMailOrderPharmacy() {
 		jsClickNew(MailPharmacy);
@@ -1174,6 +1174,7 @@ public class DrugSummaryPage extends UhcDriver {
 		validate(changePharmacyAltMsg);
 		jsClickNew(changePharmacyAltMsg);
 		//changePharmacyAltMsg.click();
+		validateSelectPharmacyPage();
 	}
 
 	public void clickViewPlanDetails(String planName) {
@@ -1206,7 +1207,7 @@ public class DrugSummaryPage extends UhcDriver {
     		switchToNewTabNew(ExtraHelpLink);
     		CommonUtility.checkPageIsReadyNew(driver);
     		if(driver.getCurrentUrl().contains("extra-help")){
-    			WebElement ExtraHelpText = driver.findElement(By.xpath("//h2[contains(text(),'Extra Help')]"));
+    			WebElement ExtraHelpText = driver.findElement(By.xpath("(//h2//*[contains(text(),'Extra Help')])[1]"));
                 validateNew(ExtraHelpText);
                 System.out.println("Extra Help page is displayed");
     		}
@@ -1248,5 +1249,64 @@ public class DrugSummaryPage extends UhcDriver {
 		else 
 			Assert.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
 	
+	}
+
+	
+	/*
+	 * Adding code for Pharmacy filter validation
+	 */
+
+	@FindBy(xpath = "//label[contains(@for, 'pharmacy-name-filter')]")
+	public WebElement PharmacyFilterLabel;
+	
+	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
+	public WebElement PharmacyFilterTxtBx;
+
+	@FindBy(xpath = "//button[contains(@dtmname, 'search')]/*[contains(text(), 'Apply')]")
+	public WebElement PharmacyFilterApplyBtn;
+	
+	@FindBy(xpath = "//*[contains(@class, 'inputGroup')]/button/img")
+	public WebElement PharmacyFilterClearTextX;
+
+	@FindBy(xpath = "//*[contains(@id, 'filterError')]")
+	public WebElement PharmacyFilterErrorMsg;
+
+	public void validatePharmacyFilterErrormessage() {
+		validateNew(PharmacyFilterLabel);
+		validateNew(PharmacyFilterTxtBx);
+		validateNew(PharmacyFilterApplyBtn);
+		PharmacyFilterTxtBx.sendKeys("a");
+		System.out.println("FIlter text entered : a");
+		validateNew(PharmacyFilterClearTextX);
+		System.out.println("X button for Filter text clearing is Displayed");
+		jsClickNew(PharmacyFilterClearTextX);
+		System.out.println("Clear Text is clicked for Pharmacy Filter");
+		Assert.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<", PharmacyFilterTxtBx.getText().isEmpty());
+	}
+
+	public void validateXcleartextPharmacyFilter() {
+		validateNew(PharmacyFilterApplyBtn);
+		jsClickNew(PharmacyFilterApplyBtn);
+		System.out.println("Apply button clicked for Blank filter text");
+		validateNew(PharmacyFilterErrorMsg);
+		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
+		Assert.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
+	}
+
+	public void ApplyPharmacyFilter(String filterText) {
+		validateNew(PharmacyFilterTxtBx);
+		PharmacyFilterTxtBx.clear();
+		PharmacyFilterTxtBx.sendKeys(filterText);
+		System.out.println("FIlter text entered : "+filterText);
+		validateNew(PharmacyFilterApplyBtn);
+		jsClickNew(PharmacyFilterApplyBtn);
+		System.out.println("Apply button clicked for filter text"+filterText);
+		for (WebElement PharmacyName : pharmacyNameList) {
+			System.out.println("Pharmacy Name : "+PharmacyName.getText());
+			if(!PharmacyName.getText().contains(filterText)) {
+				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "+PharmacyName+ "  Filter Text : "+filterText);
+			}
+		}
+		System.out.println("All Pharmacy have filter text");
 	}
 }
