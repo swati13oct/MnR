@@ -107,7 +107,7 @@ public abstract class UhcDriver {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(toolsToChoosePlan);
-		iosScroll(GetPlanRecoMobile);
+		scrollToView(GetPlanRecoMobile);
 		jsClickNew(GetPlanRecoMobile);
 	}
 
