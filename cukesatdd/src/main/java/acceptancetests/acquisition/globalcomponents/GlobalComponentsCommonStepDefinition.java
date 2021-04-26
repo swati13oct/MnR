@@ -986,42 +986,35 @@ public class GlobalComponentsCommonStepDefinition {
 			Assert.fail("Issue in selecting a learn about medicare drop down");
 		}
 	}
-
-	@Then("^user click on introduction from learn about medicare$")
-	public void the_user_Click_Introduction() throws Throwable {
+		
+	@When("^user click on \"([^\"]*)\" link under learn about medicare$")
+	public void user_click_on_link_under_learn_about_medicare(String linkName) throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.learnAboutMedicareintroduction();
-		if (learnAboutMedicareHomePage != null) {
-			System.out.println("learn about medicare drop down is opened");
-			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-		} else {
-			Assert.fail("Issue in selecting a learn about medicare drop down");
-		}
+		acqusitionHomePage.clickLearnAboutMedicareNavLink(linkName);
+		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+	}
+
+	@Then("^user should be navigated to respective medicare education page$")
+	public void user_should_be_navigated_to_medicare_education_page() throws Throwable {
+		String linkName=(String) getLoginScenario().getBean(CommonConstants.LEARNABOUTMEDICARE_LINK);
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.validateLearnAboutMedicareLinkNavigation(linkName);
 	}
 	
-	@Then("^user click on eligibility from learn about medicare$")
-	public void the_user_Click_Eligibility() throws Throwable {
+	@Then("^user enter email and submit in email section$")
+	public void user_enter_email_and_submit_in_email_section() throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.learnAboutMedicareeligibility();
-		if (learnAboutMedicareHomePage != null) {
-			System.out.println("learn about medicare drop down is opened");
-			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-		} else {
-			Assert.fail("Issue in selecting a learn about medicare drop down");
-		}
+		acqusitionHomePage.validateLearnAboutMedicareEmailSection();
 	}
-	@Then("^user click on Coverage Options from learn about medicare$")
-	public void the_user_Click_Coverage_Options() throws Throwable {
+	
+	@Then("^the message \"([^\"]*)\" should be displayed in email section$")
+	public void the_message_should_be_displayed_in_email_section(String expectedMsg) throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.learnAboutMedicareCoverageOptions();
-		if (learnAboutMedicareHomePage != null) {
-			System.out.println("learn about medicare drop down is opened");
-			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
-		} else {
-			Assert.fail("Issue in selecting a learn about medicare drop down");
-		}
+		acqusitionHomePage.validateEmailSubmissionMessage(expectedMsg);
 	}
 }
+
