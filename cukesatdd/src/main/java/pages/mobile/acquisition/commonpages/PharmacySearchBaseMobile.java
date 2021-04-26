@@ -47,12 +47,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// zipcodeField.clear();
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		// sendkeys(zipcodeField, zipcode);
-		// jsSendkeys(zipcodeField, zipcode);
 
-		// jsClickNew(zipcodeField);
-		// jsSendkeys(zipcodeField, zipcode);
-		zipcodeField.sendKeys(zipcode);
+		mobileactionsendkeys(zipcodeField, zipcode);
 
 		Select select = new Select(distanceDropDownField);
 		String DistanceSelection = distance + " miles";
@@ -66,7 +62,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		// CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 
-		jsClickMobile(searchbtn);
+		jsClickNew(searchbtn);
 		System.out.println("***** entered******");
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
@@ -84,6 +80,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	}
 
 	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
+		
+		mobileactionsendkeys(zipcodeField, zipcode);
+		planTypeDropDownTitle.click();
 		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
 		// List<String> testNote=new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
@@ -96,7 +95,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			distance = distance + " miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
-		selectFromDropDownByText(driver, distanceDropownID, distance);
+		// selectFromDropDownByText(driver, distanceDropownID, distance);
+		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
@@ -139,8 +139,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(8);
 
 		zipcodeField.sendKeys(zipcode);
+		//mobileactionsendkeys(zipcodeField, zipcode);
 		// if(zipcode.length()!=5){
-		distanceOption_15miles.click();
+		// distanceOption_15miles.click();
+		jsClickNew(distanceOption_15miles);
 		// }
 		// searchbtn.click();
 		// CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
@@ -194,10 +196,11 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		// seletPlandropdown.click();
 
-		jsClickMobile(seletPlandropdown);
+		// jsClickMobile(seletPlandropdown);
 		sleepBySec(1);
-		//selectFromDropDownByText(driver, seletPlandropdown, planName);
-		/*To handle iOS dropdown */
+		// selectFromDropDownByText(driver, seletPlandropdown, planName);
+		/* To handle iOS dropdown */
+		planTypeDropDownTitle.click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 
@@ -756,7 +759,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec = 10;
+		long timeoutInSec = 20;
 		return pharmacyValidate(element, timeoutInSec);
 	}
 

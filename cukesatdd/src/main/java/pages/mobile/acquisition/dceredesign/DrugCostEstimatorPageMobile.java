@@ -425,7 +425,8 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 	/* selecting radius */
 	public void selectRadius(WebElement dropDownID, String value) {
-		selectFromDropDownByText(driver, dropDownID, value);
+		//selectFromDropDownByText(driver, dropDownID, value);
+		mobileSelectOption(dropDownID, value, true);
 	}
 
 	@Override

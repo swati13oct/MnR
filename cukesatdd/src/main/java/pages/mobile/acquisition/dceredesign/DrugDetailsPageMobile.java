@@ -92,10 +92,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
+	@FindBy(xpath = "//button[@dlassetid='rd_btn_3_0']")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
-	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")
+	@FindBy(xpath = "//button[@dlassetid='rd_btn_6_0']")
 	public WebElement DrugCosts_SaveBtn;
 
 	@FindBy(xpath = "//div[contains(text(), 'Need Help?')]")
@@ -922,7 +922,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	}
 
 	public void savePlan(String planName) {
-		WebElement savePlan = driver.findElement(By.xpath("//button[contains(@id,'saveBtn')]"));
+		WebElement savePlan = driver.findElement(By.xpath("//*[@dtmname=\"dce:step 3:view drug costs:save\"]"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 
@@ -931,7 +931,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		// action.moveToElement(element).perform();
 		jsMouseOver(favoriteIcon);
 		// waitforElementNew(favoriteSuccess,5);
-		System.out.println(favoriteSuccess.getText());
+	//	System.out.println(favoriteSuccess.getText());
 
 	}
 
@@ -1371,6 +1371,20 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		}
 	}
 
+	@FindBy(xpath = "//*[contains(@id,'drugtable')]//button[contains(text(),'Switch to Generic')]")
+	private WebElement switchToGenericBtn;
+
+	@FindBy(xpath = "//button[contains(@type,'submit')]//*[contains(text(),'Switch to Generic')]")
+	private WebElement switchToGenericSubmitBtn;
+	
+	public void clickswitchToGeneric() throws InterruptedException {
+
+		// validate(drugTitle);
+		validate(switchToGenericBtn);
+		jsClickNew(switchToGenericBtn);
+		validateNew(switchToGenericSubmitBtn);
+		jsClickNew(switchToGenericSubmitBtn);
+	}
 	public void verifyReturnToProfileDisplayed() {
 		try {
 			if (returnToProfileLink.isDisplayed()) {
@@ -1381,6 +1395,21 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		}
 	}
 
+	@FindBy(xpath = "//table/tbody/tr/td[1]/div/div/img[contains(@src,'check-icon@2x.png')]")
+	private WebElement switchToGenericIcon;
+
+
+	public void verifyDrugisSwitchedtoGeneric() throws InterruptedException {
+		Thread.sleep(6000);
+		// validate(drugTitle);
+		/*
+		 * for(int i=0;i<drugNames.size();i++) {
+		 * System.out.println(drugNames.get(i).getText()); }
+		 */
+		validate(switchToGenericIcon);
+
+		Assert.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
+	}
 	@FindBy(xpath = "//button//span[text()='Back to Profile']")
 	public List<WebElement> backToProfileBtn;
 

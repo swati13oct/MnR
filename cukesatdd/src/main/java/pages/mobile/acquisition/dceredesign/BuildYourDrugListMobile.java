@@ -27,6 +27,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='drugsearch']")
 	public WebElement EnterDrugNameTxt;
+	
+
+	@FindBy(xpath = "//button[@id='addDrug']")
+	public WebElement addMyDrugsBtn;
 
 	@FindBy(xpath = "//button[(@id= 'search')]")
 	public WebElement SearchBtn;
@@ -65,6 +69,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "(//button[text()='Select'])[1]")
 	public WebElement selectBtn;
 
+	
 	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
 	public WebElement addToDrugList;
 
@@ -114,7 +119,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		// EnterDrugNameTxt.click();
 		// jsClickNew(EnterDrugNameTxt);
 		// EnterDrugNameTxt.sendKeys(drugName);
-		sendkeys(EnterDrugNameTxt, drugName);
+		//sendkeys(EnterDrugNameTxt, drugName);
+		sendkeysMobile(EnterDrugNameTxt, drugName);
 
 		Thread.sleep(5000);
 		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]"));
@@ -124,9 +130,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		 * if(validate(SearchBtn)) SearchBtn.click(); if(validate(selectBtn))
 		 * selectBtn.click();
 		 */
-		validateNew(addToDrugList);
 		Thread.sleep(2000);
-		jsClickMobile(addToDrugList);
+		validateNew(addToDrugList);
+		scrollToView(addToDrugList);
+		jsClickNew(addToDrugList);
 
 		// addToDrugList.click();
 		// reviewDrugCost.click();
@@ -207,17 +214,11 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) throws InterruptedException {
 		validateNew(EnterDrugNameTxt);
 		//EnterDrugNameTxt.sendKeys(drugName);
-		mobileactionsendkeys(EnterDrugNameTxt, drugName);
-		scrollToView(AddmyDrugHeader);
-		jsClickNew(AddmyDrugHeader);
-		
-		
-		Thread.sleep(1000);
+		sendkeysMobile(EnterDrugNameTxt, drugName);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
 		waitForPageLoadSafari();
-		CommonUtility.checkPageIsReadyNew(driver);
-		
+		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);;
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
 		validateNew(SelectDrug);
@@ -225,7 +226,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		threadsleep(2000);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
+		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
 			return new TellUsAboutDrugMobile(driver);
 		} else {
