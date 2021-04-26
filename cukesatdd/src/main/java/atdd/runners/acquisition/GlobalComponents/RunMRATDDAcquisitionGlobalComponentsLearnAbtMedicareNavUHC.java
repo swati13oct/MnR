@@ -8,15 +8,15 @@ import com.github.mkolisnyk.cucumber.runner.ExtendedCucumberOptions;
 import cucumber.api.CucumberOptions;
 
 /**
- * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNav
+ * this file is to run test cases for RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNavUHC
  */
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",
-jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNav.json",
+jsonReport = "target/cucumber-RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNavUHC.json",
 detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, 
-outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNav")
+outputFolder = "target/RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNavUHC")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.acquisition" }, features = { "src/main/resources/feature/acquisition/globalComponents/GlobalComponents-AARP.feature" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNav.json" }, tags = { "@learnAboutMedicareNav" })
-public class RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNav {
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNavUHC.json" }, tags = { "@learnAboutMedicareNav_UHC" })
+public class RunMRATDDAcquisitionGlobalComponentsLearnAbtMedicareNavUHC {
 
 }
