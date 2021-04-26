@@ -18,7 +18,7 @@ detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFold
 		"src/main/resources/feature/mobile/acquisition/ole/oleFuture" }, plugin = { "pretty", "html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionOLEBlayerMAPDplanFutureMobile.json" }, tags = {
 
-						"@MAPD_OLE_Ulayer_Future" })
+						"@MAPD_OLE_UHC_Future" })
 
 public class RunMRATDDAcquisitionOLEBlayerMAPDplanFutureMobile {
 

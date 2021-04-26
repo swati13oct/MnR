@@ -19,7 +19,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEBlayerSNPplanFutureMobile.j
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, 
 features = { "src/main/resources/feature/mobile/acquisition/ole/oleFuture/OLE-PlanSummary-SNP.feature" }, plugin = {
 		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEBlayerSNPplanFutureMobile.json" }, 
-tags = { "@SNP_OLE_AARP_Future1" }, dryRun=false)
+tags = { "@SNP_OLE_UHC_Future" }, dryRun=false)
 
 
 
