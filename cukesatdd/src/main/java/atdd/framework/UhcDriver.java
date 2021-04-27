@@ -82,7 +82,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
-	@FindBy(xpath = "//a[contains(text(),'Drug Cost Estimator')]")
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
 	public WebElement DCERedesignLink;
 
 	@FindBy(xpath = "//h3//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation' and text()='Get a Plan Recommendation']")
@@ -1224,7 +1224,8 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-				iosScroll(selectElement);
+				scrollToView(selectElement);
+			checkElementisEnabled(selectElement);
 			jsClickNew(selectElement);
 
 			threadsleep(2000);

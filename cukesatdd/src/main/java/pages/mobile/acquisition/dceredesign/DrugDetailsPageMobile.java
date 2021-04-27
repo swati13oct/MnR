@@ -351,11 +351,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(DrugDetails_DrugCostsHeading);
 		validateNew(DrugCosts_AvgMonDrugCost);
 		validateNew(DrugCosts_MonthlyPremium);
-		// scrollToView(DrugCosts_AnnualEstTotal);
-		// validateNew(DrugCosts_AnnualEstTotal);
-		validateNew(DrugCosts_PlanDetailsBtn);
-		validateNew(DrugCosts_SaveBtn);
-		validateNew(DrugCosts_TFN);
+
 	}
 
 	public void validateYourDrugs() {
