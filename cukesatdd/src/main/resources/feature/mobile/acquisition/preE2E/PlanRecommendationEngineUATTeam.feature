@@ -69,7 +69,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     Examples: 
       | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch |
-      |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork |             |               | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |
+      |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,1,YES,NO                              |
 
   @PRE @planrecommendation @PRE_UAT_ExternalLink
   Scenario Outline: <site>  - To validate drug and doctors in Visitor profile

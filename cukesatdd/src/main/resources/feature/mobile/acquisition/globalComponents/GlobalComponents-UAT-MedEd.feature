@@ -1,4 +1,4 @@
-@UATRegression
+@UATRegression @regressionAARP
 Feature: 1.12 UAT - Medicare Education Pages flows
 
   @GlobalComponentsAARPPages
@@ -20,7 +20,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
 
     # Then the user validates SAM re-active Chat
-    @MedEdPages_1_GlobalCompsAARP @ios
+    @MedEdPages_1_GlobalCompsAARP @regressionAARP @ios
     Examples: 
       | Scenario           | site | path                                                     | pageName                              | tfnXpath            | tfnFlag                                                              |      |
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | AARP Medicare Plans | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true |
@@ -30,7 +30,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | path                                                     | pageName                              | tfnXpath         | tfnFlag                                                              |      |
       | E2E Scenario 2_UMS | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices | UnitedHealthcare | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true |
 
-    @MedEdPages_2_GlobalCompsAARP
+    @MedEdPages_2_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                             | pageName                             | tfnXpath            | tfnFlag                                                              |      |
       | E2E Scenario 5_AMP | AARP | medicare-education/medicare-advantage-plans.html | Learn about Medicare Advantage Plans | AARP Medicare Plans | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true |
@@ -40,7 +40,7 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | Scenario           | site | path                                             | pageName                          | tfnXpath         | tfnFlag                                                              |      |
       | E2E Scenario 5_UMS | UHC  | medicare-education/medicare-advantage-plans.html | Medicare Advantage (Part C) Plans | UnitedHealthcare | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true |
 
-    @MedEdPages_3_GlobalCompsAARP
+    @MedEdPages_3_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                                  | pageName                   | tfnXpath            | tfnFlag                                                              |      |
       | E2E Scenario 4_AMP | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | AARP Medicare Plans | //span[contains(@style,'inline')]//a[contains(@class, 'tel')]        | true |

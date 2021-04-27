@@ -1,10 +1,10 @@
 @PlanRecommendationEngineVPPDCE
 Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with VPP validation and DCE Redesign
 
-	@PRE_VPP_DCE_E2E
-	Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <plantype>, <planname>, <drug1> - To validate SNP API ranking plans in PRE
+  @PRE_VPP_DCE_E2E
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <travel>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption>, <plantype>, <planname>, <drug1> - To validate SNP API ranking plans in PRE
     Given the user is on medicare acquisition site landing page for PRE
-    	|Site| <site>|
+      | Site | <site> |
     When user navigate to Plan Recommendation Engine and Check Breadcrumbs
     And clicks on get started button and runs a questionnaire
       | Zip Code        | <Zipcode>       |
@@ -21,7 +21,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
     And user selects skip option on Drug page
-    	| Plan Type | <isCoverageOpt> |
+      | Plan Type      | <isCoverageOpt>  |
       | Drug Selection | <Drug Selection> |
     And user selects additional services option on additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
@@ -30,7 +30,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
     Then user validate elements on loading results page
     Then user validate UI and API recommendation rankings on results page
     #And the user views the plans of the below plan type and select Next year
-     # | Plan Type | <plantype> |
+    # | Plan Type | <plantype> |
     And I access the DCE Redesign from Plan Summary for mentioned plan
       | Plan Type | <plantype> |
       | Plan Name | <planname> |
@@ -48,13 +48,13 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
     #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
-		@PRE_VPP_DCE_E2E_AARP
+    @PRE_VPP_DCE_E2E_AARP
     Examples: 
-      |	site	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |	plantype | drug1   | planname                                           	|
-      |	AARP	|   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | John             |               | No             | Yes,No,No,No                  | Higher               |	MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |
-      #|	AARP	|   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
+      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planname                                             |
+      | AARP |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | John        | [blank]       | No             | Yes,No,No,No                  | Higher               | MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |
 
+    #|	AARP	|   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
     @PRE_VPP_DCE_E2E_UHC
     Examples: 
-      |	site	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName      | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |	plantype | drug1   | planname                                           	|
-      |	UHC	|   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | John             |               | No             | Yes,No,No,No                  | Higher               |	MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | 
+      | site | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planname                                             |
+      | UHC  |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | John        | [blank]       | No             | Yes,No,No,No                  | Higher               | MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) |

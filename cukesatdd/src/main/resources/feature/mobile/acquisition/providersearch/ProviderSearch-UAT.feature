@@ -1,4 +1,4 @@
-@UATRegression
+@UATRegression @regressionAARP
 Feature: 1.07.2 UAT-Provider Search Flows
 
   

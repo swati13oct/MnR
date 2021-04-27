@@ -1,7 +1,7 @@
 @SiteSearchResultsAARP @F294024
 Feature: 1.03 Acq-To test Sitesearch results in AMP site
 
-  @SiteSearchAARP @SiteSearchRegressionAARP @vbfGate @OnlyProd @ios
+  @SiteSearchAARP @SiteSearchRegressionAARP @regressionAARP @vbfGate @OnlyProd @ios
   Scenario Outline: Verify search results in AARP site -search value -<newsearchvalue>
     Given the user is on AARP medicare acquisition site landing page
     Then the user enter the searchValue in the search text box and hits enter
@@ -17,7 +17,7 @@ Feature: 1.03 Acq-To test Sitesearch results in AMP site
       | searchValue | newsearchvalue |
       | Medicare    | pharmacy       |
 
-  @SiteSearchAARPErrorHandling @SiteSearchRegressionAARP @OnlyProd 
+  @SiteSearchAARPErrorHandling @SiteSearchRegressionAARP @regressionAARP @OnlyProd 
   Scenario Outline: Verify search results in AARP site - search value -<NewSearchValue>
     Given the user is on AARP medicare acquisition site landing page
     Then the user enter the searchValue in the search text box and hits enter
@@ -33,7 +33,7 @@ Feature: 1.03 Acq-To test Sitesearch results in AMP site
       | Medicare    | Empty            |                |
       | Medicare    | InvalidCharacter | medicareeee    |
 
-  @SiteSearchResultsVPPUlayer @SiteSearchRegressionAARP @vbfGate 
+  @SiteSearchResultsVPPUlayer @SiteSearchRegressionAARP @regressionAARP @vbfGate 
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -58,7 +58,7 @@ Feature: 1.03 Acq-To test Sitesearch results in AMP site
       | TID   | zipcode | isMultutiCounty | county      | plantype | planName                                    | searchValue | newsearchvalue |
       | 15652 |   19019 | No              | Iowa County | MAPD     | AARP Medicare Advantage Choice Plan 1 (PPO) | Medicare    | pharmacy       |
 
-  #@SiteSearchResultsDCEUlayer  @SiteSearchRegressionAARP
+  #@SiteSearchResultsDCEUlayer  @SiteSearchRegressionAARP @regressionAARP
   #Scenario Outline: 1.10.11 To verify search results in DCE Ulayer page
   #Given the user is on the AARP medicare site landing page
   #When I access the acquisition DCE tool from home page
@@ -74,7 +74,7 @@ Feature: 1.03 Acq-To test Sitesearch results in AMP site
   #| searchValue |newsearchvalue|
   #| Medicare    |pharmacy|
   #
-  @SiteSearchResultsPharmacyLocatorUlayer @SiteSearchRegressionAARP 
+  @SiteSearchResultsPharmacyLocatorUlayer @SiteSearchRegressionAARP @regressionAARP 
   Scenario Outline: To verify search results in pharmacy locator Ulayer page
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |

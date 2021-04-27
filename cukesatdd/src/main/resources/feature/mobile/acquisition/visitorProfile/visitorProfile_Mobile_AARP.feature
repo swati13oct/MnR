@@ -1,4 +1,4 @@
-@Test @AARPvisitorprofile
+@Test @AARPvisitorprofile @regressionAARP
 Feature: 1.08. ACQ- Visitor profile
 
   @VisitorProfile_AARP_mobile @prod

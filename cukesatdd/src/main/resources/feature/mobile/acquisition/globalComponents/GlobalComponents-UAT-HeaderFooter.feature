@@ -1,7 +1,7 @@
-@UATRegression @F513647
+@UATRegression @regressionAARP @F513647
 Feature: 1.12 UAT - Header and Footer flows
 
-  @globalfooterULayer @UATRegression 
+  @globalfooterULayer @UATRegression @regressionAARP
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on home page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -55,7 +55,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on Back to top Link
     And user clicks on visit aarporg link in the footer
 
-    @globalfooter_AARP
+    @globalfooter_AARP @regressionAARP
     Examples: 
       | Scenario           | site |
       | E2E Scenario_1 AMP | AARP |
@@ -64,7 +64,7 @@ Feature: 1.12 UAT - Header and Footer flows
   #Examples:
   #|Scenario          |	site	|
   #|E2E Scenario_1 UMS|	UHC	  |
-  @globalfooterULayer @UATRegression
+  @globalfooterULayer @UATRegression @regressionAARP
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on VPP page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -114,7 +114,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on visit aarporg link in the footer
 
-    @globalfooter_AARP
+    @globalfooter_AARP @regressionAARP
     Examples: 
       | Scenario           | site | zipcode | isMultutiCounty | county    |
       | E2E Scenario_3 AMP | AARP |   80001 | No              | Jefferson |
@@ -123,7 +123,7 @@ Feature: 1.12 UAT - Header and Footer flows
   #Examples:
   #|Scenario					  |	site|zipcode | isMultutiCounty | county   |
   #|E2E Scenario_3 UMS |	UHC	| 80001	 | No							 | Jefferson|
-  @globalfooterULayer @UATRegression
+  @globalfooterULayer @UATRegression @regressionAARP
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on DCE page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -170,7 +170,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on visit aarporg link in the footer
 
-    @globalfooter_AARP
+    @globalfooter_AARP @regressionAARP
     Examples: 
       | Scenario           | site |
       | E2E Scenario_4 AMP | AARP |
@@ -179,7 +179,7 @@ Feature: 1.12 UAT - Header and Footer flows
   #Examples:
   #|Scenario           |	site	|
   #|E2E Scenario_4 UMS |	UHC	  |
-  @globalfooterULayer @UATRegression
+  @globalfooterULayer @UATRegression @regressionAARP
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on Pharmacy page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -235,7 +235,7 @@ Feature: 1.12 UAT - Header and Footer flows
   #Examples:
   #|Scenario          |	site	|
   #|E2E Scenario_5 UMS|	UHC	  |
-  @globalheaderULayer @UATRegression
+  @globalheaderULayer @UATRegression @regressionAARP
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on static pages : <pagename> page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -284,7 +284,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on visit aarporg link in the footer
 
-    @globalheader_AARP
+    @globalheader_AARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                                      | pagename                                                    |
       | E2E Scenario_2 AMP | AARP | health-plans.html#/zipcode                                | Shop for a Plan                                             |

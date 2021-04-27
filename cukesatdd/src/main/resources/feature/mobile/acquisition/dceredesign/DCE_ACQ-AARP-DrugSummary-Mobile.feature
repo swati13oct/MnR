@@ -1,7 +1,7 @@
 @dce_redesign_Drug_summary_AARP @F426576
 Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
-  @DCE_DrugSummary_ValidatePage_AARP @OnlyProd
+  @DCE_DrugSummary_ValidatePage_AARP @regressionAARP @OnlyProd
   Scenario Outline: Test to verify the Drug summary page in AARP
     Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
@@ -43,7 +43,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
     And user should be able to see Medicare Advantage plan by default
     And verify DCE NBA is displayed on drug summary page
 
-    @dceNBADrugSummaryPage_AARP @ios
+    @dceNBADrugSummaryPage_AARP @regressionAARP @ios
     Examples: 
       | site | zipcode | county | isMultutiCounty | drug1   |
       | AARP |   10001 | none   | no              | Orkambi |
@@ -53,7 +53,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | site | zipcode | county | isMultutiCounty | drug1   |
       | UHC  |   10001 | none   | no              | Orkambi |
 
-  @DCE_DrugSummary_ValidatePage_AARP 
+  @DCE_DrugSummary_ValidatePage_AARP @regressionAARP
   Scenario Outline: Test to verify the Drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

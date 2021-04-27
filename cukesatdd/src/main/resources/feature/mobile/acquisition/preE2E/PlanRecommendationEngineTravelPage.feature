@@ -35,11 +35,11 @@ Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommenda
 
     Examples: 
       | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             | travel                     |
-      |   90201 | NO            |              | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular |
+      |   90201 | NO            | [blank]      | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,regular |
       |   78006 | YES           | Bexar County | None          | Medicaid,chronic,nursing | withinUS,outsideUS,regular |
-      |   45634 | NO            |              | MAPD          | chronic,nursing          | withinUS,outsideUS         |
-      |   10001 | NO            |              | None          | nursing                  | withinUS                   |
-      |   12345 | NO            |              | MAPD          | None                     | None                       |
+      |   45634 | NO            | [blank]      | MAPD          | chronic,nursing          | withinUS,outsideUS         |
+      |   10001 | NO            | [blank]      | None          | nursing                  | withinUS                   |
+      |   12345 | NO            | [blank]      | MAPD          | None                     | None                       |
 
   @PRE @planrecommendation @travelpage @travelpageerrorScenario @F372739
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> - To validate travel page error scenarios in Plan Recommendation Engine
@@ -58,5 +58,5 @@ Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommenda
 
     Examples: 
       | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds             | travel                  |
-      |   90201 | NO            |                  | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,None |
-      |   21212 | YES           | Baltimore County | None          | nursing                  |                         |
+      |   90201 | NO            | [blank]          | MAPD          | Medicaid,chronic,nursing | withinUS,outsideUS,None |
+      |   21212 | YES           | Baltimore County | None          | nursing                  | [blank]                 |

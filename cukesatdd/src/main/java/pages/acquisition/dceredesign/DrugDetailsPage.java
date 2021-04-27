@@ -75,7 +75,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")
 	public WebElement DrugCosts_SaveBtn;
 
-	@FindBy(xpath = "//div[contains(text(), 'Need Help?')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-card')]//*[contains(text(), 'Need Help?')]")
 	public WebElement DrugCosts_TFN;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Your Drugs')]")

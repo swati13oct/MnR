@@ -21,7 +21,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
 
-    @VppPlanDetailsCommon_AARP01 @ios
+    @VppPlanDetailsCommon_AARP01 @regressionAARP @ios
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | pdfType               | docCode                  | planyear |
       | 00001 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | future   |
@@ -49,7 +49,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
 
-    @VppPlanDetailsCommon_AARP01 @OnlyProd 
+    @VppPlanDetailsCommon_AARP01 @regressionAARP @OnlyProd
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
       | 15638 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $29            | $348          | future   |
@@ -80,7 +80,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
 
-    @VppPlanDetailsCommon_AARP01
+    @VppPlanDetailsCommon_AARP01 @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county        | plantype | planName                                                   | optionalRider   | monthlyPremium | yearlyPremium | planyear |
       | 15658 | AARP |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | $0             | $0            | future   |
@@ -109,7 +109,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     # | Plan Type | <plantype> |
     Then the user clicks on both top and bottom back to plans link and validate its redirection
 
-    @VppPlanDetailsCommon_AARP02 
+    @VppPlanDetailsCommon_AARP02 @regressionAARP
     Examples: 
       | TCID  | site | zipcode | isMultiCounty | county             | plantype | planName                              | planyear |
       | 00004 | AARP |   90210 | NO            | Los Angeles County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
@@ -136,7 +136,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site
     Then The User validates the Plan details on OLE page
 
-    @VppPlanDetailsCommon_AARP02
+    @VppPlanDetailsCommon_AARP02 @regressionAARP
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                                | planyear |
       | 00005 | AARP |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)     | future   |
@@ -144,11 +144,11 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00007 | AARP |   24571 | YES             | Bedford County     | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 2 (PPO) | future   |
       | 00008 | AARP |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)              | future   |
 
-		@VppPlanDetailsCommon_AARP01 @OnlyProd 
-		Examples: 
-      | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                                | planyear |
-      | 00005 | AARP |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)     | future   |
-		
+    @VppPlanDetailsCommon_AARP01 @regressionAARP @OnlyProd
+    Examples: 
+      | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
+      | 00005 | AARP |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
+
     @VppPlanDetailsCommon_UHC02
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                                | planyear |
@@ -156,11 +156,11 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00006 | UHC  |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                         | future   |
       | 00007 | UHC  |   24571 | YES             | Bedford County     | MAPD     | UnitedHealthcare Medicare Advantage Choice Plan 2 (PPO) | future   |
       | 00008 | UHC  |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)              | future   |
-      
+
     @prodRegression_UHC
     Examples: 
-      | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                                | planyear |
-      | 00005 | UHC  |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)     | future   |
+      | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
+      | 00005 | UHC  |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
 
   # @vppPlanDetailsAARP07 @vppPlanDetailsAARPRun02 @vppPlanDetailsAARPRegression
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Provider Search  in <site> site from Plan Details page
@@ -180,12 +180,12 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     When user selects a provider and retuns to VPP plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
 
-    @VppPlanDetailsCommon_AARP02	@VppPlanDetailsCommon_AARP01 @OnlyProd
+    @VppPlanDetailsCommon_AARP02 @regressionAARP @VppPlanDetailsCommon_AARP01 @regressionAARP @OnlyProd
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
       | 00010 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
 
-    @VppPlanDetailsCommon_UHC02	@prodRegression_UHC
+    @VppPlanDetailsCommon_UHC02 @prodRegression_UHC
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
       | 00010 | UHC  |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
@@ -206,7 +206,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | Plan Name | <planName> |
     Then the user click on Prescription Drug Benefits and validates
 
-    @VppPlanDetailsCommon_AARP03 
+    @VppPlanDetailsCommon_AARP03 @regressionAARP
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county             | plantype | planName                                            | planyear |
       | 00013 | AARP |   90210 | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | future   |
@@ -220,7 +220,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | 00014 | UHC  |   78006 | YES             | Bexar County       | PDP      | AARP MedicareRx Walgreens (PDP)                     | future   |
       | 00015 | UHC  |   78006 | YES             | Bexar County       | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)       | future   |
 
-      @vppPlanDetailsAARP11 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression @Auto
+  @vppPlanDetailsAARP11 @vppPlanDetailsAARPRun03 @vppPlanDetailsAARPRegression @Auto
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -239,7 +239,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then User click on add to compare checkbox and click on view details link
     Then I uncheck and go back to the vpp page to validate for site
 
-    @VppPlanDetailsCommon_AARP03
+    @VppPlanDetailsCommon_AARP03 @regressionAARP
     Examples: 
       | TCID   | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
       | 000017 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
@@ -267,7 +267,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | Optional Rider | <optionalRider> |
       | Plan Name      | <planName>      |
 
-    @VppPlanDetailsCommon_AARP03
+    @VppPlanDetailsCommon_AARP03 @regressionAARP
     Examples: 
       | TID        | site | zipcode | isMultutiCounty | county        | plantype | planName                                                   | optionalRider   | planyear |
       | F435191-01 | AARP |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | future   |
@@ -277,7 +277,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TID        | site | zipcode | isMultutiCounty | county        | plantype | planName                                                   | optionalRider   | planyear |
       | F435191-01 | UHC  |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | future   |
 
-    Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary on <site> site
+  Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify plan details and back to summary and add to compare and uncheck in plan details and verify uncheck in plan summary on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -294,7 +294,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Then click add to compare checkbox on plan details page and navigate to compare page
     Then verify plan compare page is loaded
 
-    @VppPlanDetailsCommon_AARP03 @VppPlanDetailsCommon_AARP01 
+    @VppPlanDetailsCommon_AARP03 @regressionAARP @VppPlanDetailsCommon_AARP01 @regressionAARP
     Examples: 
       | TCID   | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear | planIndices |
       | 000018 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |         1,3 |
