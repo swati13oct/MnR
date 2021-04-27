@@ -21,3 +21,5 @@ tags = { "@VppPlanCompareCommon_AARP01"}, dryRun=false)//"@vppPlanCompareAARPRun
 public class RunMRATDDAcquisitionVPPNEWPlanCompareAARP01Mobile { 
  
 }
+
+//@VBFTEAMC , @VppPlanCompareCommon_AARP01

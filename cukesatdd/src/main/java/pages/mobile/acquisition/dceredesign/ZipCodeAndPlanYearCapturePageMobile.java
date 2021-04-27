@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
@@ -107,24 +108,25 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
-
+		// sendkeys(zipCodeTxtbox, zipcode);
 		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
+		iosScroll(countyDropdown);
 		try {
+
 			if (countyDropdown.isDisplayed()) {
-
-//				countyDropdown.click();
-//				jsClickNew(countyDropdown);
-//				CommonUtility.waitForPageLoad(driver, countyRows, 30);
-				WebElement countyValue = driver.findElements(By.xpath("//select[@id='county']/option")).get(1);
-				String cvalue = countyValue.getText();
-				mobileSelectOption(countyDropdown, cvalue, true);
-
+				countyDropdown.click();
+				// jsClickNew(countyDropdown);
+				//CommonUtility.waitForPageLoad(driver, countyRows, 30);
+				// driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
+				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText().toString();
+				mobileSelectOption(countyDropdown, countyValue, true);
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
 		validateNew(continueBtn);
+		// continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
@@ -145,7 +147,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 			mobileUtils.mobileLocateElement(zipCodeTxtbox);
 			mobileUtils.mobileLocateElement(countyDropdown);
-			mobileUtils.mobileLocateElement(planYearDropdown);
+			// mobileUtils.mobileLocateElement(planYearDropdown);
 			mobileUtils.mobileLocateElement(continueBtn);
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		} catch (Exception e) {

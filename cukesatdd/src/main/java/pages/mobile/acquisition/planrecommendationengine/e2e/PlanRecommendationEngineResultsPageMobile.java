@@ -291,6 +291,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#plan-list-1 div.module-plan-overview")
 	private List<WebElement> MA1stPlanList;
+	
+
 
 	@FindBy(css = "#plan-list-1 div.module-plan-overview:nth-child(1) .drugs-list div[class*='drug-info-container']")
 	private List<WebElement> DrugsNames;
@@ -718,6 +720,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		DrugsList = new ArrayList<String>();
 		validate(MAPlanCount, 60);
 		WebElement drugImageVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='drug-list-toggle'] img"));
+		
 		validate(drugImageVPP, 20);
 		threadsleep(5000);
 		drugcoveredsession();

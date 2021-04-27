@@ -39,7 +39,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
 	public WebElement DrugQuantityTxtBx;
 
-	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
+	@FindBy(xpath = "//span[contains(text(),'Add to drug List')]")
 	public WebElement AddDrugBtn;
 
 	@FindBy(xpath = "//*[@id='quantitycontainer']//*[contains(@class, ' errtext')]")

@@ -168,7 +168,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	/** user enters following details for pharmacy search */
 	@And("^the user enters following detail for pharmacy search mobile$")
 	public void user_enters_zipcode_distance_details_aarp(DataTable inputAttributes) {
-		System.out.println("bla bka bla bla bla bla bla");
+		
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String zipcode = inputAttributesMap.get("Zip Code");
 		String distance = inputAttributesMap.get("Distance");

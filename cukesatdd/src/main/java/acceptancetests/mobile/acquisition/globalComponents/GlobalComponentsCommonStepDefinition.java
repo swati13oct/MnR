@@ -39,6 +39,8 @@ import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 
+
+
 public class GlobalComponentsCommonStepDefinition {
 	
 	@Autowired
@@ -189,6 +191,7 @@ public class GlobalComponentsCommonStepDefinition {
 	
 	@When("^user vaidates the state drop down link on the home page$")
 	public void user_vaidates_the_state_drop_down_link_on_home_page() throws Throwable {
+		
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateStateDropDown();
@@ -220,12 +223,11 @@ public class GlobalComponentsCommonStepDefinition {
 	
 	@And("^user clicks on Aboutus link from footer of the Medicare Plans home page$")
 	public void click_aboutus() {
-		AcquisitionHomePageMobile aquisitionhomepage  = (AcquisitionHomePageMobile) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AboutUsAARPPageMobile aboutUsAARPPage = aquisitionhomepage.aboutUsFooterClick();
-		if(aboutUsAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE,
-					aboutUsAARPPage);
+		if (aboutUsAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE, aboutUsAARPPage);
 			Assert.assertTrue(true);
 		} else {
 			Assert.fail("Aboutus page not found");

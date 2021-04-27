@@ -136,6 +136,7 @@ public class DCEACQShopPlanPDPMobile {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String zipcode = memberAttributesMap.get("ZipCode");
+		String county = memberAttributesMap.get("county");
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
