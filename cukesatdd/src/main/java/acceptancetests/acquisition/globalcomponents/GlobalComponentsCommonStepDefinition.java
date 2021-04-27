@@ -973,4 +973,48 @@ public class GlobalComponentsCommonStepDefinition {
 		String path = memberAttributesMap.get("PagePath");
 		aquisitionhomepage.validatePageNavigated(path);
 	}
+	
+	@Given("^the user hovers over the learn about medicare$")
+	public void the_user_hovers_screen_over_the_learnaboutmedicare() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = acqusitionHomePage.HoveronaLearnMedicare();
+		if (learnAboutMedicareHomePage != null) {
+			System.out.println("learn about medicare drop down is opened");
+			getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+		} else {
+			Assert.fail("Issue in selecting a learn about medicare drop down");
+		}
+	}
+		
+	@When("^user click on \"([^\"]*)\" link under learn about medicare$")
+	public void user_click_on_link_under_learn_about_medicare(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickLearnAboutMedicareNavLink(linkName);
+		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+	}
+
+	@Then("^user should be navigated to respective medicare education page$")
+	public void user_should_be_navigated_to_medicare_education_page() throws Throwable {
+		String linkName=(String) getLoginScenario().getBean(CommonConstants.LEARNABOUTMEDICARE_LINK);
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.validateLearnAboutMedicareLinkNavigation(linkName);
+	}
+	
+	@Then("^user enter email and submit in email section$")
+	public void user_enter_email_and_submit_in_email_section() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.validateLearnAboutMedicareEmailSection();
+	}
+	
+	@Then("^the message \"([^\"]*)\" should be displayed in email section$")
+	public void the_message_should_be_displayed_in_email_section(String expectedMsg) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.validateEmailSubmissionMessage(expectedMsg);
+	}
 }
+

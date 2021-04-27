@@ -684,6 +684,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans.html']")
 	private WebElement MedicareSuppUrl;
 	
+	@FindBy(id = "learnmore-email-address")
+	private WebElement learnMoreMedicareEmailTxtBox;
+	
+	@FindBy(xpath = "//*[@id='learnmore-email-address']/../button")
+	private WebElement learnMoreMedicareEmailSubmitBtn;
+	
+	@FindBy(xpath = "//*[contains(@class,'thankYouMsg')]")
+	private WebElement learnMoreMedicareEmailSubmissionMsg;
+	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -6249,4 +6258,125 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 	}
 
+	
+	@FindBy(xpath = "//a[contains(text(), 'Introduction')]")
+	private WebElement introductionLearnaboutMedicare;
+	
+	public LearnAboutMedicareHomePage learnAboutMedicareintroduction() throws InterruptedException {
+		waitforElement(introductionLearnaboutMedicare);
+		if (introductionLearnaboutMedicare.isDisplayed()) {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+			validate(introductionLearnaboutMedicare);
+			jsClickNew(introductionLearnaboutMedicare);
+			return new LearnAboutMedicareHomePage(driver);
+		} else {
+			return null;
+		}
+	}
+	@FindBy(xpath = "//a[contains(text(), 'Eligibility')]")
+	private WebElement eligibilityLearnaboutMedicare;
+	
+	public LearnAboutMedicareHomePage learnAboutMedicareeligibility() throws InterruptedException {
+		waitforElement(eligibilityLearnaboutMedicare);
+		if (eligibilityLearnaboutMedicare.isDisplayed()) {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+			validate(eligibilityLearnaboutMedicare);
+			waitforElement(eligibilityLearnaboutMedicare);
+			Thread.sleep(5000);
+			//eligibilityLearnaboutMedicare.click();
+			jsClickNew(eligibilityLearnaboutMedicare);
+			return new LearnAboutMedicareHomePage(driver);
+		} else {
+			return null;
+		}
+	}
+	@FindBy(xpath = "//a[contains(text(), 'Options')]")
+	private WebElement coverageOptionsLearnaboutMedicare;
+	
+	public LearnAboutMedicareHomePage learnAboutMedicareCoverageOptions() throws InterruptedException {
+
+		waitforElement(coverageOptionsLearnaboutMedicare);
+		if (coverageOptionsLearnaboutMedicare.isDisplayed()) {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+			validate(coverageOptionsLearnaboutMedicare);
+			//eligibilityLearnaboutMedicare.click();
+			jsClickNew(coverageOptionsLearnaboutMedicare);
+			return new LearnAboutMedicareHomePage(driver);
+		} else {
+			return null;
+		}
+	}
+	
+	public void clickLearnAboutMedicareNavLink(String linkName) {
+		WebElement link=driver.findElement(By.xpath("//div[contains(@id,'learnmore-scroll')]//a[contains(text(),'"+linkName+"')]"));
+		waitforElement(link);
+		jsClickNew(link);
+	}
+
+	
+	public void validateLearnAboutMedicareLinkNavigation(String linkName) {
+		switch (linkName) {
+		
+		case "Introduction":
+				Assert.assertTrue("Navigation to Introduction page failed", driver.getCurrentUrl().contains("/medicare-education.html"));
+				break;
+		case "Eligibility":
+				Assert.assertTrue("Navigation to Eligibility page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-eligibility.html"));
+				break;
+		case "Coverage Options":
+			Assert.assertTrue("Navigation to Coverage Options failed", driver.getCurrentUrl().contains("/medicare-education/medicare-parts-and-medigap-plans.html"));
+			break;
+			
+		case "Prescriptions, Providers & Benefits":
+			Assert.assertTrue("Navigation to Prescriptions, Providers & Benefits page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-benefits.html"));
+			break;
+			
+		case "Medicare Cost Basics":
+			Assert.assertTrue("Navigation to Medicare Cost Basics page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-costs.html"));
+			break;
+			
+		case "Medicare Advantage Plans":
+			Assert.assertTrue("Navigation to Medicare Advantage Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-advantage-plans.html"));
+			break;
+			
+		case "Medicare Supplement Insurance Plans":
+			Assert.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-supplement-plans.html"));
+			break;
+			
+		case "Medicare Prescription Drug Plans":
+			Assert.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-part-d.html"));
+			break;
+			
+		case "Enrollment Basics":
+			Assert.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"));
+			break;
+			
+		case "Medicare FAQ":
+			Assert.assertTrue("Navigation to Medicare FAQ page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-faq.html"));
+			break;
+			
+		case "Articles and Special Topics":
+			Assert.assertTrue("Navigation to Articles and Special Topics page failed", driver.getCurrentUrl().contains("/medicare-articles.html"));
+			break;
+			
+			default:
+				System.out.println("Link not available under Learn about Medicare");
+		}
+	}
+	
+	public void validateLearnAboutMedicareEmailSection() {
+		learnMoreMedicareEmailTxtBox.sendKeys("abc@abc.com");
+		learnMoreMedicareEmailSubmitBtn.click();
+	}
+	
+	public void validateEmailSubmissionMessage(String expectedMsg) {
+		waitforElement(learnMoreMedicareEmailSubmissionMsg);
+		System.out.println(learnMoreMedicareEmailSubmissionMsg.getText().replace("\n", ""));
+		String actualMsg=learnMoreMedicareEmailSubmissionMsg.getText().replace("\n", "");
+		System.out.println(expectedMsg);
+		Assert.assertTrue("Expected message is not displayed", actualMsg.contains(expectedMsg));
+	}
 }
