@@ -130,7 +130,7 @@ public class AuthorizationPageMobile extends UhcDriver{
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : Required fields present");
 			//validateNew(SoU_DisagreeRadio);
-			jsClickNew(SoU_DisagreeRadio);
+			jsClickMobile(SoU_DisagreeRadio);
 			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
 				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
 				validation_Flag = true;
@@ -145,7 +145,7 @@ public class AuthorizationPageMobile extends UhcDriver{
 			if(validate(AuthorizedRepresentativeRadio)){
 				AuthorizedRepresentativeRadio.click();
 			}*/
-			jsClickNew(SoU_AgreeRadio);
+			jsClickMobile(SoU_AgreeRadio);
 			AuthorizedRepresentativeRadio.click();
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
@@ -159,7 +159,7 @@ public class AuthorizationPageMobile extends UhcDriver{
 			}
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
 			Thread.sleep(6000);
-			jsClickNew(ApplicantRadio);
+			jsClickMobile(ApplicantRadio);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;
 				System.out.println("Validation Passed : All required fields are entered");
@@ -178,7 +178,8 @@ public class AuthorizationPageMobile extends UhcDriver{
 
 	public ReviewSubmitPageMobile navigate_to_Review_Submit_Page() {
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		scrollToView(NextBtn);
+		jsClickMobile(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
@@ -209,7 +210,7 @@ public boolean validate_required_field_representative(Map<String, String> Member
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : Required fields present");
 			//validateNew(SoU_DisagreeRadio);
-			jsClickNew(SoU_DisagreeRadio);
+			jsClickMobile(SoU_DisagreeRadio);
 			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
 				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
 				validation_Flag = true;
@@ -224,7 +225,7 @@ public boolean validate_required_field_representative(Map<String, String> Member
 			if(validate(AuthorizedRepresentativeRadio)){
 				AuthorizedRepresentativeRadio.click();
 			}*/
-			jsClickNew(SoU_AgreeRadio);
+			jsClickMobile(SoU_AgreeRadio);
 			AuthorizedRepresentativeRadio.click();
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
@@ -238,9 +239,9 @@ public boolean validate_required_field_representative(Map<String, String> Member
 			}
 			//CommonUtility.waitForPageLoad(driver, ApplicantRadio, 30);
 			Thread.sleep(6000);
-			//jsClickNew(ApplicantRadio);
+			//jsClickMobile(ApplicantRadio);
 			
-			jsClickNew(AuthorizedRepresentativeRadio);
+			jsClickMobile(AuthorizedRepresentativeRadio);
 			
 			Authorized_FirstName.sendKeys(AuthorizationFirstname);
 			Authorized_LastName.sendKeys(AuthorizationLastname);

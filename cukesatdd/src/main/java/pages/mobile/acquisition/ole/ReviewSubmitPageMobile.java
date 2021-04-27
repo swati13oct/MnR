@@ -516,7 +516,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	public OLEconfirmationPageMobile submitEnrollment() {
 
 		validateNew(SubmitApplicationBtn);
-	//	SubmitApplicationBtn.click();
+		scrollToView(SubmitApplicationBtn);
 		jsClickMobile(SubmitApplicationBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		// waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"),
@@ -537,7 +537,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPageMobile(driver);
 		} else if (validate(SubmitApplicationBtn)) {
-			SubmitApplicationBtn.click();
+			jsClickMobile(SubmitApplicationBtn);
 			if (driver.getCurrentUrl().contains("confirmation")) {
 				System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 				return new OLEconfirmationPageMobile(driver);
