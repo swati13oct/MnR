@@ -146,7 +146,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public static WebElement importantDisclosuresLink;
 
-	@FindBy(xpath = "//a[@dtmname='Footer:Visit AARP.com']")
+	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
 	public static WebElement visitAARPLink;
 
 	@FindBy(id = "proceed")
@@ -176,7 +176,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
 	public static WebElement registerHereLink;
 
-	@FindBy(xpath = "//a[@role='button' and @class='disableExternalPopup ']")
+	@FindBy(xpath = "//button[text()='Register']")
 	public static WebElement headerRegisterLink;
 
 	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
@@ -212,7 +212,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
 	public static WebElement signInButton;
 
-	@FindBy(xpath = "//button[@class='uhc-tempo-link uhc-tempo-link--medium linkBtn'][normalize-space()='Sign In']")
+	@FindBy(xpath = "//h1[contains(text(),'Sign In')]")
 	public static WebElement signIn;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")

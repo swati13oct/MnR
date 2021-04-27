@@ -57,7 +57,8 @@ public class AddDrugDetailsMobile extends UhcDriver {
 
 		/*WebElement drugDosage = driver.findElement(By.xpath(".//*[@id='dosage-radios']//label[contains(text(),'"+dosage+"')]"));
 		drugDosage.click();*/
-		selectFromDropDownByText(driver, dosageDropdown, dosage);
+		//selectFromDropDownByText(driver, dosageDropdown, dosage);
+		mobileSelectOption(dosageDropdown, dosage, true);
 	}
 	
 	public void selectDosageAttribute(String dosage) throws InterruptedException{
@@ -70,7 +71,8 @@ public class AddDrugDetailsMobile extends UhcDriver {
 	}
 
 	public void selectFrequency(String frquency){
-		selectFromDropDownByText(driver, selectYourFrequencyDropdown, frquency);
+		//selectFromDropDownByText(driver, selectYourFrequencyDropdown, frquency);
+		mobileSelectOption(selectYourFrequencyDropdown, frquency, true);
 	}
 
 	public SavingsOppurtunityMobile continueAddDrugDetailsModWithSaving() throws InterruptedException{

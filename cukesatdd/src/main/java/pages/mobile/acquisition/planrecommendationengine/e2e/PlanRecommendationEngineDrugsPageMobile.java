@@ -179,7 +179,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 
 	@FindBy(css = "uhc-temp-display p[role='alert']")
 	private WebElement modaldrugsCount;
-
+	
 	@FindBy(css = "uhc-list uhc-list-item")
 	private List<WebElement> drugsList;
 

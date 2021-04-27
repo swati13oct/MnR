@@ -207,10 +207,14 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
 
-		sendkeysNew(firstNameField, FirstName);
-		sendkeysNew(lastNameField, LastName);
+		//sendkeysNew(firstNameField, FirstName);
+		sendkeysMobile(firstNameField, FirstName);
+		//sendkeysNew(lastNameField, LastName);
+		sendkeysMobile(lastNameField, LastName);
 
-		sendkeys(DOBtxtFld, DOB);
+		//sendkeys(DOBtxtFld, DOB);
+		sendkeysMobile(DOBtxtFld, DOB);
+		
 		if (Gender.contains("Male")) {
 			// GenderSelectMale.click();
 			jsClickNew(GenderSelectMale);
@@ -218,21 +222,27 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			// GenderSelectFemale.click();
 			jsClickNew(GenderSelectFemale);
 		}
-		sendkeys(PermanentAdd_Street, Perm_Street);
+		//sendkeys(PermanentAdd_Street, Perm_Street);
+		sendkeysMobile(PermanentAdd_Street, Perm_Street);
 		// sendkeys(PermanentAdd_Aptno,Perm_Aptno);
-		sendkeys(PermanentAdd_City, Perm_city);
+		//sendkeys(PermanentAdd_City, Perm_city);
+		sendkeysMobile(PermanentAdd_City, Perm_city);
 		System.out.println("Mailing Question : " + MailingQuestion);
 		if (MailingQuestion.equalsIgnoreCase("no")) {
 			jsClickNew(SameMailingAddressNo);
 			// CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
-			sendkeysNew(MailingAdd_Street, Mailing_Street);
+			//sendkeysNew(MailingAdd_Street, Mailing_Street);
+			sendkeysMobile(MailingAdd_Street, Mailing_Street);
 			// sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
-			sendkeys(MailingAdd_City, Mailing_City);
+			sendkeysMobile(MailingAdd_City, Mailing_City);
+			//sendkeys(MailingAdd_City, Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
-			sendkeysNew(MailingAdd_Zip, Mailing_Zip);
+			//sendkeysNew(MailingAdd_Zip, Mailing_Zip);
+			sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
 		}
-		sendkeys(Email, EmailAddress);
+		//sendkeys(Email, EmailAddress);
+		sendkeysMobile(Email, EmailAddress);
 
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
