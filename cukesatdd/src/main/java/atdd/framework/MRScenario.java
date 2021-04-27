@@ -1279,6 +1279,7 @@ public class MRScenario {
 		capabilities.setCapability("platformName", mobileDeviceOSName);
 		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
 		//capabilities.setCapability("AUTOMATION_NAME", "XCUITest");
+		capabilities.setCapability("commandTimeout" , 600);
 		capabilities.setCapability("maxDuration", 10000);
 		capabilities.setCapability("idleTimeout", 1000);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));

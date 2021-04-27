@@ -176,7 +176,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
 	public static WebElement registerHereLink;
 
-	@FindBy(xpath = "//a[@role='button' and @class='disableExternalPopup ']")
+	@FindBy(xpath = "//button[text()='Register']")
 	public static WebElement headerRegisterLink;
 
 	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
