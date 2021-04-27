@@ -1,5 +1,6 @@
 package atdd.framework;
 
+import java.awt.KeyboardFocusManager;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.maven.model.Build;
+import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -28,13 +31,18 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Keyboard;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.itextpdf.text.log.SysoCounter;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -46,7 +54,10 @@ import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.ios.IOSElement;
+import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
 /**
@@ -74,19 +85,22 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
-	@FindBy(xpath = "//a[contains(text(),'Drug Cost Estimator')]")
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
 	public WebElement DCERedesignLink;
 
-	@FindBy(xpath = "//a[text()='Get a Plan Recommendation']")
+	@FindBy(xpath = "//h3//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation' and text()='Get a Plan Recommendation']")
 	public WebElement GetPlanRecoMobile;
 
 	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
 	public WebElement ShopTool;
 
+	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Tools to help you choose a plan']")
+	public WebElement toolsToChoosePlan;
+
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
 
-	@FindBy(xpath = "//span[text()='Back']")
+	@FindBy(xpath = "//body/div/header[@role='banner']/div/div/div/div/div[@role='navigation']/div/div/div/div/ul[@data-role='navigation']/li[2]/div[2]/div[1]/div[1]/span[1]")
 	private WebElement MobileMenuBackBtn;
 
 	@FindBy(xpath = "//a[.='Back to Top']")
@@ -589,7 +603,69 @@ public abstract class UhcDriver {
 	}
 
 
+<<<<<<< HEAD
 	
+=======
+		boolean clickFlag = false;
+
+		// Sets FluentWait Setup
+
+		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
+				.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
+				.ignoring(TimeoutException.class);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
+	public boolean checkElementisEnabled(WebElement element) {
+		System.out.println("Looking for Element to enable .......");
+		try {
+<<<<<<< HEAD
+			if (element.getAttribute("@disbaled") == "true") {
+				System.out.println("Element is enabled to perform action .......");
+
+			}
+		} catch (Exception e) {
+			System.out.println("Element not enabled hence action failed on screen....");
+=======
+			threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
+			System.out.println("Waiting to check if element is present");
+			fwait.until(ExpectedConditions.visibilityOf(element));
+
+			if (element.isDisplayed()) {
+
+				// TouchActions action = new TouchActions(driver);
+				// action.longPress(element);
+				// singleTap(element);
+				// action.perform();
+				checkElementisEnabled(element);
+
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].click(true);", element);
+				System.out.println("JsClick worked");
+				clickFlag = true;
+
+				// if (element.isDisplayed() && (clickFlag = true))
+				// try {
+				// element.click();
+				// System.out.println("Click worked");
+				// } catch (Exception e) {
+				// System.out.println("Unable to click on element for IOS");
+				// }
+
+				// new
+				// TouchAction((AppiumDriver)driver).tap(TapOptions.tapOptions().withElement((ElementOption)
+				// element)).perform();
+
+				// Actions builder = new Actions((IOSDriver)driver);
+				// builder.moveToElement(element).click(element);
+				// builder.perform();
+
+			}
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+		}
+
+		return true;
+
+	}
 
 	public boolean checkElementisEnabled(WebElement element) {
 		System.out.println("Looking for Element to enable .......");
@@ -608,8 +684,23 @@ public abstract class UhcDriver {
 
 	public boolean scrollToView(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+<<<<<<< HEAD
 			backToTop.isDisplayed();
+=======
+
+			// // clickAndHold(element);
+			// TouchAction ta = new TouchAction((AppiumDriver)driver);
+			// ta.moveTo(moveToOptions)
+
+			Actions ac = new Actions(driver);
+			ac.moveToElement(element);
+			// backToTop.isDisplayed();
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 			System.out.println("Scroll finished to element on IOS device");
+
+			// JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+			// javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",
+			// element);
 
 		} else {
 			try {
@@ -673,7 +764,8 @@ public abstract class UhcDriver {
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		jsClickNew(Element);
+		Element.click();
+
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -683,6 +775,15 @@ public abstract class UhcDriver {
 			currentHandle = driver.getWindowHandle();
 			if (!currentHandle.contentEquals(CommonConstants.getMainWindowHandle()))
 				break;
+		}
+	}
+
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -881,6 +982,19 @@ public abstract class UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(element, By.tagName("option")));
 
+	}
+
+	/*
+	 * Created By - hahire It will move to the element and clicks (without
+	 * releasing) in the middle of the given element (Use for IOS)
+	 * 
+	 * @param element
+	 */
+
+	public void clickAndHold(WebElement element) {
+		Actions actionProvider = new Actions(driver);
+		// Perform click-and-hold action on the element
+		actionProvider.clickAndHold(element).build().perform();
 	}
 
 	/***
@@ -1161,6 +1275,7 @@ public abstract class UhcDriver {
 			// ((JavascriptExecutor)webDriver).executeScript("arguments[0].value='100011';",
 			// m);
 			// ((AppiumDriver)webDriver).getKeyboard().pressKey(Keys.BACK_SPACE);
+			element.clear();
 			element.click();
 			threadsleep(500);
 			element.click();
@@ -1172,12 +1287,14 @@ public abstract class UhcDriver {
 
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("arguments[0].value='" + keys + "';", searchBox);
+
 	}
 
 	public void pageloadcomplete() {
 		new WebDriverWait(driver, 30).until(
 				driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
 		System.out.println("Page load completed");
+
 	}
 
 	public void mobileFindElement(WebElement element, int swipeCount, boolean swipeUp) {
@@ -1206,20 +1323,53 @@ public abstract class UhcDriver {
 			Select element = new Select(selectElement);
 			element.selectByVisibleText(option);
 		} else {
+
 			String curHandle = ((IOSDriver) driver).getContext();
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-				selectElement.click();
+				scrollToView(selectElement);
+			checkElementisEnabled(selectElement);
+			jsClickNew(selectElement);
+
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
-			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
 			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
 		}
 	}
+
+	/*
+	 * @author : Harshal Ahire
+	 * 
+	 * @Params: dorpdown option
+	 *
+	 * To select value in dropdpwn via JsScript in IOS device
+	 *****/
+	public void iosDropDownSelection(String option) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(
+				"document.getElementsByClassName('uhc-select ng-pristine ng-valid').value =='" + option + "';");
+	}
+
+	public void iosScroll(WebElement element) {
+		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+		javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+
+	// IOSElement picker= (IOSElement) new
+	// WebDriverWait(driver,60).until(ExpectedConditions.elementToBeClickable(By.xpath("//XCUIElementTypePickerWheel")));
+	// picker.setValue(option);
+
+	// ((IOSDriver)driver).findElement(MobileBy.className("UIAPickerWheel")).sendKeys(option);
+	// ((IOSElement)driver.findElement(By.xpath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATextField[7]"))).setValue(option);
+	// ((WebElement) ((IOSDriver)
+	// driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
+	// ((IOSDriver)driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
 
 	public void clickTextIOSNative(String text) {
 
@@ -1401,7 +1551,10 @@ public abstract class UhcDriver {
 	 */
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		if (MRScenario.browserName.equalsIgnoreCase("Safari")
 				&& driver.getClass().getSimpleName().contains("WebDriver")) {
 			// Sets FluentWait Setup

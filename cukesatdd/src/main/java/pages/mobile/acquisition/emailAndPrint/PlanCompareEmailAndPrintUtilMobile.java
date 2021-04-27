@@ -120,7 +120,9 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 	public void validatePlanCompareEmailThankYouMessage() {
-		validateemailbutton.click();
+		pageloadcomplete();
+		//validateemailbutton.click();
+		jsClickNew(validateemailbutton);
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		//Validating email popup
 		validate(leavingcomapreplansitepopup);

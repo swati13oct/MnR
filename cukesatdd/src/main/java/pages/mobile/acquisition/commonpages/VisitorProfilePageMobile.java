@@ -491,11 +491,16 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
-			System.out.println(plan);
+			System.out.println(plan);/*
 			System.out.println(driver.findElement(By.xpath(
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
+<<<<<<< HEAD
 					.getText());
 			Assertion.assertEquals(plan, driver.findElement(By.xpath(
+=======
+					.getText());*/
+			Assert.assertEquals(plan, driver.findElement(By.xpath(
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
 					.getText());
 			Assertion.assertTrue(driver

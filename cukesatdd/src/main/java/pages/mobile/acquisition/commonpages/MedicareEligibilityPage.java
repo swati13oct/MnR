@@ -164,7 +164,8 @@ public class MedicareEligibilityPage extends GlobalWebElementsMobile {
 	
 	public void stateSelection(String value) {
 		
-		selectFromDropDownByText(driver,dropDownState,value);
+		//selectFromDropDownByText(driver,dropDownState,value);
+		mobileSelectOption(dropDownState, value, true);
 
 	}
 	

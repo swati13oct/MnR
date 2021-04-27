@@ -1,4 +1,5 @@
 package pages.mobile.acquisition.emailAndPrint;
+
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -14,7 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 
-public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMobile{
+public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMobile {
 
 	public EmailAndPrintUtilBaseMobile(WebDriver driver) {
 		super(driver);
@@ -26,23 +27,28 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	}
 
 	/**
-	 * Alternative to validate deeplink in email
-	 * Get the deeplink from network's postData from the email plan list request
-	 * Use that deeplink to open page and validate content at later step
+	 * Alternative to validate deeplink in email Get the deeplink from network's
+	 * postData from the email plan list request Use that deeplink to open page and
+	 * validate content at later step
 	 */
 	public String getEmailDeepLink() {
-		String deepLinkEntryLine=null;
+		String deepLinkEntryLine = null;
 		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
 		for (LogEntry entry : entries) {
-			String line=entry.getMessage();
+			String line = entry.getMessage();
 			if (line.toLowerCase().contains("deeplink")) {
-				deepLinkEntryLine=line;
-				System.out.println("TEST found line="+line);
+				deepLinkEntryLine = line;
+				System.out.println("TEST found line=" + line);
 			}
 		}
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
+=======
+		Assert.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value",
+				deepLinkEntryLine != null);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		JSONParser parser = new JSONParser();
-		JSONObject jsobObj=null;
+		JSONObject jsobObj = null;
 		try {
 			jsobObj = (JSONObject) parser.parse(deepLinkEntryLine);
 		} catch (ParseException e) {
@@ -50,17 +56,37 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			Assertion.assertTrue("PROBLEM - unable to convert target string into json object", false);
 		}
 		JSONObject messageObj = (JSONObject) jsobObj.get("message");
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+=======
+		Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj != null);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		JSONObject paramsObj = (JSONObject) messageObj.get("params");
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+=======
+		Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj != null);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		JSONObject requestObj = (JSONObject) paramsObj.get("request");
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
 		System.out.println("TEST - headersObj="+requestObj.toString());
+=======
+		Assert.assertTrue("PROBLEM - unable to locate message json object", requestObj != null);
+		System.out.println("TEST - headersObj=" + requestObj.toString());
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		String postDataStr = (String) requestObj.get("postData");
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
 		String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
 		tmp=tmp.replace("\\\\\"", "\"");
 		System.out.println("TEST - tmp="+tmp);
+=======
+		Assert.assertTrue("PROBLEM - unable to locate postData string", postDataStr != null);
+		String tmp = postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
+		tmp = tmp.replace("\\\\\"", "\"");
+		System.out.println("TEST - tmp=" + tmp);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		try {
 			jsobObj = (JSONObject) parser.parse(tmp);
 		} catch (ParseException e) {
@@ -68,49 +94,83 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			Assertion.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
 		}
 		JSONObject toObj = (JSONObject) jsobObj.get("to");
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
+=======
+		Assert.assertTrue("PROBLEM - unable to locate 'to' json object", toObj != null);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
+=======
+		Assert.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj != null);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
 		System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
+=======
+		Assert.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object",
+				subscriberAttributesObj != null);
+		System.out.println("TEST - subscriberAttributesObj=" + subscriberAttributesObj.toString());
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
 		System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
+=======
+		Assert.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr != null);
+		System.out.println("TEST - *** deepLinkStr=" + deepLinkStr);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		return deepLinkStr;
 	}
 
 	public void savedHeartFirstPlanOnSummaryPage() {
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
+=======
+		Assert.assertTrue("PROBLEM - unable to locate the first save heart on plan page",
+				validate(firstSaveHeartOnActiveSummaryPlanPage));
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		jsClickMobile(firstSaveHeartOnActiveSummaryPlanPage);
-		
+
 	}
-	
+
 	public void validatePrintOptionExistOnSummaryPage(String planType) {
-		WebElement printElement=null;
+		WebElement printElement = null;
 		if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
-			printElement=summary_maPrintOption;
+			printElement = summary_maPrintOption;
 		} else if (planType.equalsIgnoreCase("pdp")) {
-			printElement=summary_pdpPrintOption;
+			printElement = summary_pdpPrintOption;
 		} else if (planType.equalsIgnoreCase("snp")) {
-			printElement=summary_snpPrintOption;
+			printElement = summary_snpPrintOption;
 		} else {
+<<<<<<< HEAD
 			Assertion.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
+=======
+			Assert.assertTrue("PROBLEM - test not coded for this '" + planType + "' planType testing", false);
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 		}
+<<<<<<< HEAD
 		Assertion.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
+=======
+		Assert.assertTrue(
+				"PROBLEM - Unable to locate the print option or the email option. printCheck=" + validate(printElement),
+				validate(printElement));
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 	}
 
 	public void sleepBySec(int sec) {
 		try {
-			Thread.sleep(sec*1000);
+			Thread.sleep(sec * 1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
-		action.moveToElement(targetElement).build().perform(); 
+		action.moveToElement(targetElement).build().perform();
 	}
 
 	public void handlePlanYearSelectionPopup(String planType) {
@@ -128,6 +188,11 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	}
 
 	public void validatePrintOptionOnPage(String pageType, String planType) {
+		
+		if (driver.getClass().toString().toUpperCase().contains("IOS")){
+			System.out.println("Print Funxtionality check skipped on mobile device.....");
+		}
+		else if((driver.getClass().toString().toUpperCase().contains("ANDROID"))){
 		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
 		// for now will only validate the print button will bring up the print preview page
 		CommonUtility.checkPageIsReady(driver);
@@ -181,10 +246,11 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 		String pageTitleAfterClosingPrintPreview=driver.getTitle();
 		Assertion.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 	}
-	
-	/** 
+	}
+	/**
 	 * Need to keep the original sesson on sauce lab alive by refreshing the page
 	 * TODO - look into custom extending the sauce lab session
+	 * 
 	 * @param sessionFrom
 	 * @param targetDriver
 	 */

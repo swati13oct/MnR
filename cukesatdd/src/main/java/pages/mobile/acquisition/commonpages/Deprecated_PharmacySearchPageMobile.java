@@ -421,7 +421,9 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
 		validateNew(distanceDropownID);
 		selectFromDropDownByText(driver, distanceDropownID, distance);
-		sendkeysNew(zipcodeField, zipcode);
+		//mobileSelectOption(distanceDropownID, distance, true);
+		//sendkeysNew(zipcodeField, zipcode);
+		sendkeysMobile(zipcodeField, zipcode);
 		searchbtn.click();
 		try {
 			Thread.sleep(2000);
@@ -450,7 +452,8 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	}
 
 	public void selectsPlanName(String planName) {
-		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		//selectFromDropDownByText(driver, seletPlandropdown, planName);
+		mobileSelectOption(seletPlandropdown, planName, true);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -473,7 +476,8 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 	}
 
 	public void selectsPlanYear(String planYear) {
-		selectFromDropDownByText(driver, drpYear, planYear);
+		//selectFromDropDownByText(driver, drpYear, planYear);
+		mobileSelectOption(drpYear, planYear, true);
 	}
 
 	public boolean selectPharmacyandServices(String pharmacytype) {

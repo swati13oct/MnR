@@ -1,7 +1,9 @@
 package pages.mobile.acquisition.dceredesign;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,6 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import com.google.common.collect.Ordering;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -91,10 +96,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(id = "modal-label")
 	public WebElement selectPharmacyHeader;
 
-	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -319,6 +324,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
 	public WebElement ToggleDropDown;
 
+	
+	public void validateDefaultDistance() {
+		Select distance = new Select(distanceDrpDown);
+		Assert.assertTrue("Default distance is not 15 miles",
+				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
+	}
+
 	public DrugDetailsPageMobile clickViewDrugDetailsForPlan(String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			pageloadcomplete();
@@ -435,6 +447,21 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			Assertion.fail("Back to profile not displayed for each plan card");
 		}
 	}
+	
+	public void sortPharmacies(String sortOption) {
+		Select sort = new Select(sortDrpdown);
+		sort.selectByVisibleText(sortOption);
+	}
+	
+	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']/../../following-sibling::div[1]")
+	private WebElement mailOrderPharmacyMsg;
+	
+	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
+		waitforElement(mailOrderPharmacyMsg);
+		Assert.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
+				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
+	}
+
 
 	// @FindBy(xpath =
 	// "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare
@@ -510,5 +537,87 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			Assertion.assertTrue("Review drug cost page not displayed", false);
 		}
 
+	}
+	public void selectPreferredMailOrderPharmacy() {
+		waitforElement(preferredMailPharmacy);
+	//	preferredMailPharmacy.click();
+		jsClickMobile(preferredMailPharmacy);
+	}
+	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
+	private List<WebElement> pharmacyNameList;
+	
+	public void validatePharmaciesAscendingOrder() {
+		List<String> pharmacListAfterSort = new ArrayList<String>();
+		for (WebElement e : pharmacyNameList) {
+			pharmacListAfterSort.add(e.getText());
+		}
+		System.out.println("After sort" + pharmacListAfterSort);
+		Boolean sorted = Ordering.natural().isOrdered(pharmacListAfterSort);
+		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+	}
+	
+	public void validatePharmaciesDescendingOrder() {
+		List<String> pharmacListAfterSort = new ArrayList<String>();
+		for (WebElement e : pharmacyNameList) {
+			pharmacListAfterSort.add(e.getText());
+		}
+		System.out.println("After sort" + pharmacListAfterSort);
+		Boolean sorted = Ordering.natural().reverse().isOrdered(pharmacListAfterSort);
+		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+	}
+	
+	public void clickNextButton() {
+		jsClickMobile(nextBtn);
+	}
+	@FindBy(xpath = "//*[@class='pagination']/../p")
+	private WebElement pageNumber;
+
+	public void validateSecondPageDisplayed() {
+		String page = pageNumber.getText();
+		Pattern p = Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m = p.matcher(page);
+		if (m.find()) {
+			page = m.group(1);
+		}
+		Assert.assertTrue("Second page not displayed", page.equals("2"));
+	}
+	public void clickBackButton() {
+		jsClickMobile(backBtn);
+	}
+
+	public void validateFirstPageDisplayed() {
+		String page = pageNumber.getText();
+		Pattern p = Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m = p.matcher(page);
+		if (m.find()) {
+			page = m.group(1);
+		}
+		Assert.assertTrue("First page not displayed", page.equals("1"));
+	}
+	
+	public void searchPharmaciesByZipcode(String zipcode) {
+		pharmacyZipcodeSearch.clear();
+		pharmacyZipcodeSearch.sendKeys(zipcode);
+		jsClickMobile(pharmacySearchBtn);
+	}
+
+
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
+	private WebElement noResultsMessage;
+
+	public void validateNoResultsMsg(String expectedMsg) {
+		waitforElement(noResultsMessage);
+		System.out.println(noResultsMessage.getText());
+		System.out.println(expectedMsg);
+		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+	}
+	@FindBy(id = "inValidZipcodeLbl")
+	private WebElement invalidZipCodeMsg;
+
+
+	public void validateInvalidZipCodeMsg(String expectedMsg) {
+		waitforElement(invalidZipCodeMsg);
+		System.out.println(invalidZipCodeMsg.getText().trim());
+		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 }

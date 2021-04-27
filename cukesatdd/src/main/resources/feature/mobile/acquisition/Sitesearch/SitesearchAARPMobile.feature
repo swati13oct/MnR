@@ -33,7 +33,11 @@ Feature: 1.03 Acq-To test Sitesearch results in AMP site
       | Medicare    | Empty            |                |
       | Medicare    | InvalidCharacter | medicareeee    |
 
+<<<<<<< HEAD
   @SiteSearchResultsVPPUlayer @SiteSearchRegressionAARP @regressionAARP @vbfGate 
+=======
+  @SiteSearchResultsVPPUlayer @SiteSearchRegressionAARP @vbfGate @AVE
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

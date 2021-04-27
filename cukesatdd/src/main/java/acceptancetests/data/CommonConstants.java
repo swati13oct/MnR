@@ -995,6 +995,8 @@ public class CommonConstants {
 	public static String PARTDIRMAA_TEXT    = "Please DO NOT pay the plan the Part D-IRMAA at this time.";
 	
 	public static final String STATE_SELECTED = "state";
+	
+	public static final String LEARNABOUTMEDICARE_LINK = "linkName";
 }
 
 

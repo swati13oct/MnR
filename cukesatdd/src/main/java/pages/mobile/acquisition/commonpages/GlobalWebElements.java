@@ -146,8 +146,13 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public WebElement importantDisclosuresLink;
 
+<<<<<<< HEAD
 	@FindBy(xpath = "//a[@dtmname='Footer:Visit AARP.com']")
 	public WebElement visitAARPLink;
+=======
+	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
+	public static WebElement visitAARPLink;
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 
 	@FindBy(id = "proceed")
 	public WebElement proceedLink;
@@ -176,8 +181,13 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
 	public WebElement registerHereLink;
 
+<<<<<<< HEAD
 	@FindBy(xpath = "//a[@role='button' and @class='disableExternalPopup ']")
 	public WebElement headerRegisterLink;
+=======
+	@FindBy(xpath = "//button[text()='Register']")
+	public static WebElement headerRegisterLink;
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 
 	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
 	public WebElement MenuCrossMobile;
@@ -212,8 +222,13 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
 	public WebElement signInButton;
 
+<<<<<<< HEAD
 	@FindBy(xpath = "//button[@class='uhc-tempo-link uhc-tempo-link--medium linkBtn'][normalize-space()='Sign In']")
 	public WebElement signIn;
+=======
+	@FindBy(xpath = "//h1[contains(text(),'Sign In')]")
+	public static WebElement signIn;
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
 	public WebElement prescriptiondrugPlansRequestMoreHelpLink;

@@ -125,7 +125,12 @@ public class SiteSearchMobile {
 	@When("^user selects a provider and saves it$")
 	public void user_selects_provider_and_saves_it() {
 		{
+<<<<<<< HEAD
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+=======
+			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = 
+					(pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
 
@@ -238,6 +243,7 @@ public class SiteSearchMobile {
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
+			
 
 		}
 	}
