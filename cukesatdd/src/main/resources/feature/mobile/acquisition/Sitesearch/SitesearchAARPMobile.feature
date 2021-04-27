@@ -33,7 +33,7 @@ Feature: 1.03 Acq-To test Sitesearch results in AMP site
       | Medicare    | Empty            |                |
       | Medicare    | InvalidCharacter | medicareeee    |
 
-  @SiteSearchResultsVPPUlayer @SiteSearchRegressionAARP @vbfGate 
+  @SiteSearchResultsVPPUlayer @SiteSearchRegressionAARP @vbfGate @AVE
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

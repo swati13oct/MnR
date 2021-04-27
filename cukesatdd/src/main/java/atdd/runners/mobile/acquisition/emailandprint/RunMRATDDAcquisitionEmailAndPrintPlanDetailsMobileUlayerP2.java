@@ -14,6 +14,7 @@ import cucumber.api.CucumberOptions;
 @RunWith(ExtendedCucumber.class)
 @ExtendedCucumberOptions(retryCount=1,screenShotSize="", screenShotLocation="/screenshots/",jsonReport = "target/cucumber-RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP2.json",detailedReport = true, detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP2")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile.acquisition" }, features = { "src/main/resources/feature/mobile/acquisition/vpp" }, plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP2.json" }, tags = { "@VppEmailandPrintCommon_AARP_1"})//"@emailAndPrint_AARP","@emailAndPrintplanDetails" })
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP2.json" }, 
+tags = { "@VppEmailandPrintCommon_AARP_1"})//"@emailAndPrint_AARP","@emailAndPrintplanDetails" })
 public class RunMRATDDAcquisitionEmailAndPrintPlanDetailsMobileUlayerP2 {
 }

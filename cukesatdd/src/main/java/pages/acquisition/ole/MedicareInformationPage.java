@@ -398,7 +398,8 @@ public class MedicareInformationPage extends UhcDriver{
 		} */
 	//	sendkeysNew(firstNameField, FirstName);
 		//sendkeysNew(lastNameField, LastName);
-		sendkeysNew(claimNumberField, MedicareNumber);
+		//sendkeysNew(claimNumberField, MedicareNumber);
+		sendkeysMobile(claimNumberField, MedicareNumber);
 
 
 /*		if(validateNew(firstNameField)){
@@ -428,7 +429,8 @@ public class MedicareInformationPage extends UhcDriver{
 		
 		if(SSNflag.contains("true")){
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
-			sendkeysNew(SSNField, SSNnumber);
+			//sendkeysNew(SSNField, SSNnumber);
+			sendkeysMobile(SSNField, SSNnumber);
 			/*if(validateNew(SSNField)){
 				System.out.println("SSN field is Displayed for NC M&R DSNP");
 				SSNField.sendKeys(SSNnumber);

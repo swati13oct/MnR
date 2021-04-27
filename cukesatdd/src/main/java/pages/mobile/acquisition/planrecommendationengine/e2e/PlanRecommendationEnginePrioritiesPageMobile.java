@@ -85,14 +85,16 @@ public class PlanRecommendationEnginePrioritiesPageMobile extends UhcDriver {
 	public void priorityOptions(boolean top,String value) {
 		System.out.println("Priorities option selection");
 		if (top) {
-			selectFromDropDownByText(driver, topSelect, value);
+			//selectFromDropDownByText(driver, topSelect, value);
+			mobileSelectOption(topSelect, value, true);
 			System.out.println("Top Priority value " + value + " selected");
 		} else {
 			if(validate(addAnotherLink)) {
 				jsClickNew(addAnotherLink);
 				threadsleep(1000);
 			}
-			selectFromDropDownByText(driver, secondSelect, value);
+			//selectFromDropDownByText(driver, secondSelect, value);
+			mobileSelectOption(secondSelect, value, true);
 			System.out.println("Second Priority value " + value + " selected");
 		}
 	}
@@ -101,19 +103,23 @@ public class PlanRecommendationEnginePrioritiesPageMobile extends UhcDriver {
 		System.out.println("Priorities 2nd option alone selection");
 		String mandatoryOpt1 = "Doctors",mandatoryOpt2 = "Health Cost",defaultVal = "Select Priority";
 		if (value.toLowerCase().contains(mandatoryOpt1.toLowerCase())) {
-			selectFromDropDownByText(driver, topSelect, mandatoryOpt2);
+			//selectFromDropDownByText(driver, topSelect, mandatoryOpt2);
+			mobileSelectOption(topSelect, mandatoryOpt2, true);
 			System.out.println("Top Priority value " + mandatoryOpt2 + " selected");
 		} else {
-			selectFromDropDownByText(driver, topSelect, mandatoryOpt1);
+			//selectFromDropDownByText(driver, topSelect, mandatoryOpt1);
+			mobileSelectOption(topSelect, mandatoryOpt1, true);
 			System.out.println("Top Priority value " + mandatoryOpt1 + " selected");
 		}
 		if (validate(addAnotherLink)) {
 			jsClickNew(addAnotherLink);
 			threadsleep(1000);
 		}
-		selectFromDropDownByText(driver, secondSelect, value);
+		//selectFromDropDownByText(driver, secondSelect, value);
+		mobileSelectOption(secondSelect, value, true);
 		System.out.println("Second Priority value " + value + " selected");
-		selectFromDropDownByText(driver, topSelect, defaultVal);
+		//selectFromDropDownByText(driver, topSelect, defaultVal);
+		mobileSelectOption(topSelect, defaultVal, true);
 		System.out.println("Top Priority value " + defaultVal + " selected");
 	}
 
