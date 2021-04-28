@@ -3069,10 +3069,16 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 			System.out.println("Click to close on the create profile popup");
 
-			if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
+			String State = CommonConstants.getSelectedState();
+			
+			/*if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
 				if (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania")
 						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico")
-						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {
+						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {*/
+			if (!StringUtils.isNullOrEmpty(State)) {
+				if (State.equalsIgnoreCase("Pennsylvania")
+						|| State.equalsIgnoreCase("Puerto Rico")
+						|| State.equalsIgnoreCase("Virginia")) {
 					if (validate(closeProfilePopup))
 						jsClickNew(closeProfilePopup);
 				} else {

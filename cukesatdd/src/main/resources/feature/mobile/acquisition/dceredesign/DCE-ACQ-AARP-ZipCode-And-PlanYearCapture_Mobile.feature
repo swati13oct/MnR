@@ -1,7 +1,7 @@
-@dce_redesign_zipcode_planyear_capture_AEP_UHC @F426582 @regressionAARP
+@dce_redesign_zipcode_planyear_capture_AEP_UHC @F426582 @regressionAARP @prod_regression
 Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in New DCE flow during AEP
 
-  @DCE_ZipCodePlanYear_AEP_UHC @OnlyProd
+  @DCE_ZipCodePlanYear_AEP_UHC @OnlyProd @prod_regression
   Scenario Outline: Test to verify the new DCE redesign page displayed for ZipCode and Plan year capture page for AEP
     Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page
@@ -68,7 +68,7 @@ Feature: 1.10.1 DCE-REDESIGN UHC - To test ZipCode and Plan Year capture page in
       | path                                             | pageName                   | zipCode | drugName |
       | health-plans/estimate-drug-costs.html/getstarted | DCE Redesign - Get Started |   90210 | Lipitor  |
 
-  @DCE_ZipCodePlanYear_SamChatCall_AEP_UHC
+  @DCE_ZipCodePlanYear_SamChatCall_AEP_UHC @prod_regression
   Scenario Outline: To verify the SAM icons on DCE Zip code and plan year capture page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user navigates to following UHC medicare solutions site page

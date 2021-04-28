@@ -101,7 +101,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                                   |
       | UHC  |   78006 | future   | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
 
-  @dCERedesign_PlanSave_AARP @F476042 @decRelease
+  @dCERedesign_PlanSave_AARP @F476042 @decRelease @prod_regression
   Scenario Outline: Test to verify unauthenticated user save the plan on drug details page and see the saved plan on guest profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

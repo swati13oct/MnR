@@ -143,10 +143,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public void validateAddedPlans(String planNames) {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 
-		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+		String State = CommonConstants.getSelectedState();
+		/*if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
+		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania")
+				|| StringUtils.equalsIgnoreCase(State, "Puerto Rico")
+				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			for (String plan : listOfTestPlans) {
 				Assertion.assertEquals(plan,
 						driver.findElement(By.xpath("//h4[contains(text(),'" + plan + "')]")).getText().trim());
@@ -195,9 +198,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public GetStartedPageMobile addDrug_DCERedesign() {
 
-		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+		String State = CommonConstants.getSelectedState();
+		/*if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
+		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania")
+				|| StringUtils.equalsIgnoreCase(State, "Puerto Rico")
+				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			jsClickNew(addrugs);
 		} else {
 			jsClickNew(addDrugsBtn);

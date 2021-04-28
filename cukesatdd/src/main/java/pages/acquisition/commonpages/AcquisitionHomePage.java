@@ -507,7 +507,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
-	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	@FindBy(xpath = "(//span[contains(text(),'Submit')])[2]")
 	private WebElement SubmitEmail;
 
 	@FindBy(xpath = "//span[contains(text(),'SignUp')]")
@@ -519,7 +519,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'Please enter Last Name')]")
 	private WebElement ErrorLastName;
 
-	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[3]")
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[1]")
 	private WebElement ErrorEmailAddress;
 
 	@FindBy(xpath = "//input[@name='newsletter-input1']")
@@ -5140,7 +5140,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")).click();
 		} else {
 			threadsleep(8);
-			SubmitEmail.click();
+			//SubmitEmail.click();
+			scrollToView(SubmitEmail);
+			jsClickNew(SubmitEmail);
 			threadsleep(4);
 			Assertion.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
 			threadsleep(2);
@@ -5151,7 +5153,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			SubmitEmail.click();
+			//SubmitEmail.click();
+			jsClickNew(SubmitEmail);
 			threadsleep(4);
 			if (Thankyou.getText().equalsIgnoreCase("Thank you!")) {
 				assertTrue(true);
