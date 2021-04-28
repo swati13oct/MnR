@@ -966,7 +966,17 @@ public class CommonConstants {
 	
 	public static final String CAMPAIGN_EXTERNAL_LINK_TFNNO = "campaignExternalLinkTfnNo";
 
-	public static String SELECTED_STATE = null;
+//	public static String SELECTED_STATE = null;
+	
+	private static ThreadLocal<String> SELECTED_STATE = new ThreadLocal<>();
+
+	public static String getSelectedState() {
+		return SELECTED_STATE.get();
+	}
+
+	public static void setSelectedState(String State) {
+		SELECTED_STATE.set(State);
+	}
 	
 	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we'll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
 	
