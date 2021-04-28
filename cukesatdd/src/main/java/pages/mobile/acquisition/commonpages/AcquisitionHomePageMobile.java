@@ -290,7 +290,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
-	@FindBy(xpath = "//a[text()='Provider Search']")
+	@FindBy(xpath = "(//a[text()='Provider Search'])[2]")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -466,7 +466,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Medicare Solutions | Provider Search')]")
 	private WebElement UnitedHealthcareMedicareSolutions;
 
-	@FindBy(xpath = "//div[@aria-label='menu navigation']")
+	@FindBy(xpath = "//*[@aria-label='menu navigation']")
 	private WebElement menu;
 
 	@FindBy(id = "pharmacylocatorheader_id")
@@ -1427,7 +1427,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacySearchMobile() {
-		waitforElement(menu);
+		waitforElementNew(menu);
 		if (menu.isDisplayed()) {
 			jsClickMobile(menu);
 			if (OurPlans.isDisplayed()) {

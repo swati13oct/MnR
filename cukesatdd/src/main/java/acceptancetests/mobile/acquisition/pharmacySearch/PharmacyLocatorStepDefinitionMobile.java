@@ -93,6 +93,32 @@ public class PharmacyLocatorStepDefinitionMobile {
 				pharmacySearchPage);
 		
 	}
+	
+	@And("Navigate to pharmacy search page mobile")
+	public void navigatetoPharmacySearchMobile() {
+		
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		//wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		/*//aquisitionhomepage.openPRE();
+		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		
+		
+		//aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
+		System.out.println("Unselected state on home page for more predictable result");
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);*/
+		
+		PharmacySearchPageMobile pharmacySearchPage = aquisitionhomepage.navigateToPharmacySearchMobile();
+		 
+		//PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+		
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
+				pharmacySearchPage);
+		
+	}
 	@And("^the user validates header section content mobile")
 	public void verifyHeaderSectionMobile() {
 		/*Map<String, String> inputDataMap=parseInputArguments(inputData);

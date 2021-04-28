@@ -1,7 +1,7 @@
 @DCE_Redesign_VPP_PlanSummary @regressionAARP
 Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details - DCE Flows in AARP site
 
-  @DCE_Redesign_VPP_PlanSummary_Plan
+  @DCE_Redesign_VPP_PlanSummary_Plan @prod_regression
   Scenario Outline: 1.10.2.1 To test the DCE Redesign flow for PlanType :  <plantype> from vpp Plan Details
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

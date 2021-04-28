@@ -55,7 +55,8 @@ public class VisitorProfileStepDefinition {
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		CommonConstants.SELECTED_STATE = state;
+//		CommonConstants.SELECTED_STATE = state;
+		CommonConstants.setSelectedState(state);
 
 		acqHomePage.selectState(state);
 	}
