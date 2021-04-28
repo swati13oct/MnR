@@ -92,6 +92,9 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Tools to help you choose a plan']")
 	public WebElement toolsToChoosePlan;
+	
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
+	public WebElement ProviderSearch;
 
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
@@ -108,6 +111,15 @@ public abstract class UhcDriver {
 		jsClickNew(toolsToChoosePlan);
 		scrollToView(GetPlanRecoMobile);
 		jsClickNew(GetPlanRecoMobile);
+	}
+	
+	
+	public void MobileMenuProviderSearch() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(toolsToChoosePlan);
+		scrollToView(ProviderSearch);
+		jsClickNew(ProviderSearch);
 	}
 
 	public void MobileMenuMain() {
@@ -137,6 +149,14 @@ public abstract class UhcDriver {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		// jsClickNew(ShopTool);
+	}
+	
+	public void MobileMenuToolsToHelp() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		scrollToView(toolsToChoosePlan);
+		jsClickNew(toolsToChoosePlan);
+		
 	}
 
 	public void MobileMenuAccessDCE() {

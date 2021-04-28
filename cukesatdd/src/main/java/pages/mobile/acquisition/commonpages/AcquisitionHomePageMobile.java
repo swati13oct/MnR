@@ -290,6 +290,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
+	@FindBy(xpath = "//*[@id='']")
+	private WebElement searchIcon;
+
 	@FindBy(xpath = "(//a[text()='Provider Search'])[2]")
 	private WebElement providerSearchFromHomeScreen;
 
@@ -655,12 +658,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("No SSL error / Exception");
 		}
 	}
-	
+
 	public AcquisitionHomePageMobile verifyChatpopupOnTablet() {
 		chatsam.click();
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
 		return null;
 	}
+
 	public AcquisitionHomePageMobile validateChatSamContentOnTablet() throws InterruptedException {
 		Actions action = new Actions(driver);
 		action.moveToElement(chatsam).perform();
@@ -685,7 +689,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if ("ULayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL + testharurl;
@@ -693,13 +697,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNew(AARP_ACQISITION_PROD_PAGE_URL + testharurl);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + testharurl;
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_PROD_PAGE_URL + testharurl;
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = AARP_ACQISITION_PAGE_URL + testharurl;
@@ -709,19 +713,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else if ("BLayer".equalsIgnoreCase(siteOrPage)) {
 			if (MRScenario.environment.equals("offline")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL + testharurl;
 			} else if (MRScenario.environment.equals("prod")) {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_PROD_PAGE_URL + testharurl;
 			} else {
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				//driver.manage().window().maximize();
+				// driver.manage().window().maximize();
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				driver.get(testSiteUrl + testharurl);
 				MicroAppSiteUrl = UMS_ACQISITION_PAGE_URL + testharurl;
@@ -751,7 +755,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 	}
-	
+
 	public AcquisitionHomePageMobile validateChatSamOnTablet() throws InterruptedException {
 		boolean present;
 		try {
@@ -807,7 +811,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
-	
+
 	public void verifyTFNPopUp(WebElement TFNelement) {
 		Alert alert;
 		try {
@@ -1831,17 +1835,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * (countyModal.isDisplayed()) { return new MultiCountyModalPage(driver); }
 	 * return null; }
 	 */
+	
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
+	public WebElement ProviderSearch;
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
-		Actions action = new Actions(driver);
-		// action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		jsMouseOver(navigationSectionHomeLink);
-		jsMouseOver(ourPlansHoverLink);
-		MobileMenuShopTool();
-		scrollToView(providerSearchFromGlobalHeader);
-		// providerSearchFromGlobalHeader.click();
+		MobileMenuToolsToHelp();
 
-		switchToNewTabNew(providerSearchFromGlobalHeader);
+		
+		switchToNewTabNew(ProviderSearch);
 
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -2449,7 +2451,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
 		}
 
-		//MobileMenuBackBtn.click();
+		// MobileMenuBackBtn.click();
 		jsClickNew(MobileMenuBackBtn);
 
 	}
@@ -2665,7 +2667,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
 		MobileMenuAccessDCE();
 		validateNew(getStarted);
-		//jsClickNew(getStarted);
+		// jsClickNew(getStarted);
 
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
@@ -2898,7 +2900,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(learnAboutMedicareLink);
-		//validateNew(viewAllDisclaimerInformationLink, 20);
+		// validateNew(viewAllDisclaimerInformationLink, 20);
 
 	}
 
@@ -2943,7 +2945,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			EmailAddress.sendKeys("a@gmail.com");
 			jsClickNew(driver.findElement(By.xpath("//span[contains(text(),'Sign Up')]")));
 		} else {
-			//SubmitEmail.click();
+			// SubmitEmail.click();
 			jsClickNew(SubmitEmail);
 			threadsleep(4);
 			Assert.assertEquals(ErrorFirstName.getText(), "Please enter First Name");
@@ -2955,7 +2957,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			EmailFirstName.sendKeys("abc");
 			EmailLastName.sendKeys("def");
 			EmailAddress.sendKeys("a@gmail.com");
-			//SubmitEmail.click();
+			// SubmitEmail.click();
 			jsClickNew(SubmitEmail);
 		}
 
@@ -3026,20 +3028,20 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			// visitorprofileicon.click();
 			System.out.println("Hover over visitor profile completed");
 		}
-	
+
 		WebElement CreateProfile = driver.findElement(By.xpath("//h3[@id='guest-profile']"));
 		WebElement VPSignIn = driver.findElement(
 				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
 
 		jsClickNew(visitorprofileicon);
-		
+
 		if (driver.getCurrentUrl().contains("profile")) {
 			Assert.assertTrue(true);
 			System.out.println("Visitor Profile Page opens successsfully");
 		} else {
 			Assert.fail("Visitor Profile page is not opening up");
 		}
-	
+
 	}
 
 	public void validateLogo() {
@@ -3608,6 +3610,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
+
 	public LearnAboutMedicareHomePageMobile clickLearnMoreOnHomePage() {
 
 		validateNew(learnAboutMedicareHomeScreen);
