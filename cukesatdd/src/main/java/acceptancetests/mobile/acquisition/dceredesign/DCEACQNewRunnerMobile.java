@@ -336,6 +336,13 @@ public class DCEACQNewRunnerMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
+	@Then("^user verify and click on switch to generic NBA on drug detail page$")
+	public void user_verify_and_click_on_switch_to_generic_NBA_on_drug_detail_page() throws Throwable {
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.clickswitchToGeneric();
+	}
+	
 	@Then("^the user validates Drug List in Your Drugs Section on Drug Details Page$")
 	public void the_user_validates_druglist_yourDrugs_DrugDetailsPageMobile() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
@@ -344,6 +351,49 @@ public class DCEACQNewRunnerMobile {
 		drugDetailsPage.ValidatesDrugsList(druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, drugDetailsPage);
 	}
+	
+
+	@Then("^verify drug is switched to generic on detail page$")
+	public void verify_drug_is_switched_to_generic_on_detail_page() throws Throwable {
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+
+		drugDetailsPage.verifyDrugisSwitchedtoGeneric();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugDetailsPage);
+	}
+
+	@When("^the user saves plan from drug details page$")
+	public void the_user_saves_plan_from_drug_details_page(DataTable givenAttributes) {
+		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String PlanName = memberAttributesMap.get("planname");
+		System.out.println(PlanName);
+		drugDetailsPage.savePlan(PlanName);
+	}
+	@And("^user validates the plans on new visitor profile page of AARP site$")
+	public void user_validates_the_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
+		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+		String savePlanNames = givenAttributesMap.get("Test Plans");
+		VisitorProfilePageMobile visitorProfile =  (VisitorProfilePageMobile)getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.validateAddedPlansNew(savePlanNames);
+	}
+
 
 	@Then("^the user validates planName on LearnMore page matches plan Name in VPP$")
 	public void the_user_validates_planName_on_LearnMore_page_matches_plan_Name_in_VPP() throws Throwable {

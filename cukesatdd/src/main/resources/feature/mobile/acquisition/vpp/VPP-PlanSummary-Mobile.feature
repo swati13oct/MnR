@@ -74,6 +74,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Then the user validates Plan Selector Tool section in the right rail in aarp Site
     Then the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site
 
+@uhgagent
     Examples: 
       | TID   | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | planyear |
       | 15550 |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | current  |
@@ -458,6 +459,7 @@ Feature: 1.01.1-Vpp to plan Summary AARP Scenarios
     Then the user clicks on Learn More AARP for Rocky Mountain plans
       | Plan Name | <planName> |
 
+@Rocky
     Examples: 
       | TID       | zipcode | isMultutiCounty | county      | plantype | planName                                              | planyear |
       | US2567142 |   81501 | NO              | Mesa County | SNP      | Rocky Mountain Health Plans DualCare Plus (HMO D-SNP) | current  |

@@ -23,11 +23,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
 import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.SpecialElectionPeriodPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ole.AuthorizationPageMobile;
@@ -2008,8 +2010,9 @@ public class OLEStepDefinitionMobile {
 		SEPoptionsFlagMap = DataTableParser.readDataTableAsMaps(SEPoptions);
 		/*List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			SEPoptionsFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
+			SEPoptionsFlagMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
 		}*/
 		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
 		String optionsData = SEPoptionsFlagMap.get("Option Data");
@@ -2024,7 +2027,7 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
 
-		// }
+		//}
 	}
 
 	@Then("^the user navigates to Coverage and Health Information Page$")

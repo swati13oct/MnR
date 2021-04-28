@@ -3,7 +3,6 @@ package atdd.framework;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -29,7 +28,6 @@ import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -42,7 +40,6 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -74,10 +71,10 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
-	@FindBy(xpath = "//a[contains(text(),'Drug Cost Estimator')]")
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
 	public WebElement DCERedesignLink;
 
-	@FindBy(xpath = "//a[text()='Get a Plan Recommendation']")
+	@FindBy(xpath = "//h3//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation' and text()='Get a Plan Recommendation']")
 	public WebElement GetPlanRecoMobile;
 
 	@FindBy(css = "#planTypesColumn h3:nth-of-type(1)>a")
@@ -86,7 +83,7 @@ public abstract class UhcDriver {
 	@FindBy(css = "div[class*='get-started-banner'] button")
 	private WebElement getStartedBtn;
 
-	@FindBy(xpath = "//span[text()='Back']")
+	@FindBy(xpath = "//body/div/header[@role='banner']/div/div/div/div/div[@role='navigation']/div/div/div/div/ul[@data-role='navigation']/li[2]/div[2]/div[1]/div[1]/span[1]")
 	private WebElement MobileMenuBackBtn;
 
 	@FindBy(xpath = "//a[.='Back to Top']")
@@ -511,7 +508,25 @@ public abstract class UhcDriver {
 
 		return jsonObject;
 	}
-	
+	public void jsClickNew(WebElement element) {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
+		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+			iOSClick(element);
+
+		}
+
+	}
+
+	public String getidentifier(WebElement element) {
+		String elementStr = element.toString();
+		return "[" + elementStr.substring(elementStr.indexOf("->") + 3);
+
+	}
+
 	public void iOSClick(WebElement element) {
 
 		boolean clickFlag = false;
@@ -569,27 +584,6 @@ public abstract class UhcDriver {
 
 	}
 
-	public void jsClickNew(WebElement element) {
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
-				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].click();", element);
-		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-
-			iOSClick(element);
-
-		}
-
-	}
-
-	public String getidentifier(WebElement element) {
-		String elementStr = element.toString();
-		return "[" + elementStr.substring(elementStr.indexOf("->") + 3);
-
-	}
-
-
-	
 
 	public boolean checkElementisEnabled(WebElement element) {
 		System.out.println("Looking for Element to enable .......");
@@ -608,8 +602,19 @@ public abstract class UhcDriver {
 
 	public boolean scrollToView(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			backToTop.isDisplayed();
+
+			// // clickAndHold(element);
+			// TouchAction ta = new TouchAction((AppiumDriver)driver);
+			// ta.moveTo(moveToOptions)
+
+			Actions ac = new Actions(driver);
+			ac.moveToElement(element);
+			// backToTop.isDisplayed();
 			System.out.println("Scroll finished to element on IOS device");
+
+			// JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+			// javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",
+			// element);
 
 		} else {
 			try {
@@ -673,7 +678,7 @@ public abstract class UhcDriver {
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		jsClickNew(Element);
+		Element.click();
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -683,6 +688,15 @@ public abstract class UhcDriver {
 			currentHandle = driver.getWindowHandle();
 			if (!currentHandle.contentEquals(CommonConstants.getMainWindowHandle()))
 				break;
+		}
+	}
+
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -881,6 +895,19 @@ public abstract class UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(element, By.tagName("option")));
 
+	}
+
+	/*
+	 * Created By - hahire It will move to the element and clicks (without
+	 * releasing) in the middle of the given element (Use for IOS)
+	 * 
+	 * @param element
+	 */
+
+	public void clickAndHold(WebElement element) {
+		Actions actionProvider = new Actions(driver);
+		// Perform click-and-hold action on the element
+		actionProvider.clickAndHold(element).build().perform();
 	}
 
 	/***
@@ -1161,6 +1188,7 @@ public abstract class UhcDriver {
 			// ((JavascriptExecutor)webDriver).executeScript("arguments[0].value='100011';",
 			// m);
 			// ((AppiumDriver)webDriver).getKeyboard().pressKey(Keys.BACK_SPACE);
+			element.clear();
 			element.click();
 			threadsleep(500);
 			element.click();
@@ -1210,16 +1238,48 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-				selectElement.click();
+				scrollToView(selectElement);
+			checkElementisEnabled(selectElement);
+			jsClickNew(selectElement);
+
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
-			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
 			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
 		}
 	}
+
+	/*
+	 * @author : Harshal Ahire
+	 * 
+	 * @Params: dorpdown option
+	 *
+	 * To select value in dropdpwn via JsScript in IOS device
+	 *****/
+	public void iosDropDownSelection(String option) {
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript(
+				"document.getElementsByClassName('uhc-select ng-pristine ng-valid').value =='" + option + "';");
+	}
+
+	public void iosScroll(WebElement element) {
+		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+		javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+
+	// IOSElement picker= (IOSElement) new
+	// WebDriverWait(driver,60).until(ExpectedConditions.elementToBeClickable(By.xpath("//XCUIElementTypePickerWheel")));
+	// picker.setValue(option);
+
+	// ((IOSDriver)driver).findElement(MobileBy.className("UIAPickerWheel")).sendKeys(option);
+	// ((IOSElement)driver.findElement(By.xpath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATextField[7]"))).setValue(option);
+	// ((WebElement) ((IOSDriver)
+	// driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
+	// ((IOSDriver)driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
 
 	public void clickTextIOSNative(String text) {
 

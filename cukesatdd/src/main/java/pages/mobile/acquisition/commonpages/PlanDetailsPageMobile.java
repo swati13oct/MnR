@@ -18,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
@@ -25,13 +26,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.mobile.acquisition.commonpages.PageTitleConstants;
-import pages.mobile.acquisition.commonpages.PlanInformationPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -85,8 +80,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
 
-	@FindBy(xpath = "//a[@id='prescriptiondrug' and contains(@class,'active')]")
+	@FindBy(xpath = "//*[contains(@id,'prescriptiondrug')]")
+	// @FindBy(xpath="//a[contains(@id,'prescriptiondrug') and
+	// contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
+
+	@FindBy(xpath = "//a[contains(@id,'prescriptiondrug') and contains(@class,'active')]")
+	private List<WebElement> presDrugTab2;
 
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
@@ -97,7 +97,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 
-	@FindBy(xpath = "//*[contains(text(),'Plan Costs')]")
+	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
 	private WebElement planCostsTab;
 
 	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
@@ -332,19 +332,37 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void openAndValidate(String planType) {
-		if (planType.equalsIgnoreCase("MA")) {
-			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			Assertion.assertTrue("Prescription Drug tab not displayed for MA plans", 0 == presDrugTab1.size());
+		if (planType.equalsIgnoreCase("MA") || (planType.equalsIgnoreCase("MAPD"))) {
+			if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
+				checkModelPopup(driver, 45);
+			else
+				checkModelPopup(driver, 10);
 
-		} else if (planType.equalsIgnoreCase("PDP")) {
-			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
-			Assertion.assertTrue("Medical Benefit tab not displayed for PDP plans", 0 == medBenefitsTab.size());
-		} else if (planType.equalsIgnoreCase("SNP")) {
-			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
-			Assertion.assertTrue("Medical Benefit tab not displayed for SNP plans",
-					medBenefitsTab.get(0).isDisplayed());
-		} /* Added for SNP as well */
-		validate(planCostsTab);
+			// note: setting the implicit wait to 0 as it fails because of TimeoutException
+			// while finding List<WebElement> of the different tabs on Plan detail page
+			driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+			if (planType.equalsIgnoreCase("MA")) {
+				CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+				Assert.assertTrue(0 == presDrugTab2.size(),
+						"Prescription Drug tab not displayed for MA plans");
+
+			} else if (planType.equalsIgnoreCase("MAPD")) {
+				CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+				Assert.assertTrue(1 == presDrugTab1.size(),
+						"Prescription Drug tab displayed for MAPD plans");
+			} else if (planType.equalsIgnoreCase("PDP")) {
+				CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+				Assert.assertTrue(0 == medBenefitsTab.size(),
+						"Medical Benefit tab not displayed for PDP plans");
+			} else if (planType.equalsIgnoreCase("SNP")) {
+				CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+				Assert.assertTrue(medBenefitsTab.get(0).isDisplayed(),
+						"Medical Benefit tab not displayed for SNP plans");
+			} /* Added for SNP as well */
+			//validateNew(planCostsTab);
+			// note: setting the implicit wait back to default value - 10
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		}
 
 	}
 
@@ -847,11 +865,21 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
+//		validateNew(getLnkBackToAllPlans());
+//		jsClickNew(getLnkBackToAllPlans());
+//
+//		if (driver.getCurrentUrl().contains("plan-summary")) {
+//			jsClickNew(ReturnToMainPlanList);
+//			return new VPPPlanSummaryPageMobile(driver);
+//
+//		}
+//		return null;
+		
 		validateNew(getLnkBackToAllPlans());
 		jsClickNew(getLnkBackToAllPlans());
-	
+		// getLnkBackToAllPlans().click();
+		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
-			jsClickNew(ReturnToMainPlanList);
 			return new VPPPlanSummaryPageMobile(driver);
 
 		}
@@ -944,7 +972,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 */
 	public boolean clickAndValidatePlanCosts(String monthlyPremium, String yearlyPremium) throws Exception {
 		boolean bValidation = false;
-		scrollToView(planCostsTab);
+		//scrollToView(planCostsTab);
+		iosScroll(planCostsTab);
 		// validateNew(planCostsTab);
 		// planCostsTab.click();
 		jsClickNew(planCostsTab);

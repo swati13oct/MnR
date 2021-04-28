@@ -175,7 +175,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends GlobalWebElements {
 
 	@FindBy(css = "uhc-temp-display p[role='alert']")
 	private WebElement modaldrugsCount;
-
+	
 	@FindBy(css = "uhc-list uhc-list-item")
 	private List<WebElement> drugsList;
 

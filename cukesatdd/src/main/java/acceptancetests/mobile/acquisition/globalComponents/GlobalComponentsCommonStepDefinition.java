@@ -221,12 +221,11 @@ public class GlobalComponentsCommonStepDefinition {
 	
 	@And("^user clicks on Aboutus link from footer of the Medicare Plans home page$")
 	public void click_aboutus() {
-		AcquisitionHomePageMobile aquisitionhomepage  = (AcquisitionHomePageMobile) getLoginScenario()
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AboutUsAARPPageMobile aboutUsAARPPage = aquisitionhomepage.aboutUsFooterClick();
-		if(aboutUsAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE,
-					aboutUsAARPPage);
+		if (aboutUsAARPPage != null) {
+			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE, aboutUsAARPPage);
 			Assertion.assertTrue(true);
 		} else {
 			Assertion.fail("Aboutus page not found");

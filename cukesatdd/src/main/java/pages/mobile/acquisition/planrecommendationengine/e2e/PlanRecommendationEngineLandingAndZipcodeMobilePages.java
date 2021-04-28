@@ -244,7 +244,8 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends Global
 		Thread.sleep(2000);
 		zipcodePagemultiCounty();
 		waitforElementVisibilityInTime(PRECounty, 45);
-		selectFromDropDownByText(driver, PRECounty, County);
+		//selectFromDropDownByText(driver, PRECounty, County);
+		mobileSelectOption(PRECounty, County, true);
 		threadsleep(5000);
 		jsClickNew(continueBtn);
 		waitforElementVisibilityInTime(coverageTitle, 30);
@@ -361,10 +362,12 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends Global
 	public void edit_location(String zipcode, String multi, String county) {
 		waitforElementVisibilityInTime(zipCode, 45);
 		zipCode.clear();
-		sendkeys(zipCode, zipcode);
+		//sendkeys(zipCode, zipcode);
+		sendkeysMobile(zipCode, zipcode);
 		if (multi.equalsIgnoreCase("Yes")) {
 			waitforElementVisibilityInTime(PRECounty, 45);
-			selectFromDropDownByText(driver, PRECounty, county);
+			//selectFromDropDownByText(driver, PRECounty, county);
+			mobileSelectOption(PRECounty, county, true);
 		}
 		threadsleep(3000);
 	}

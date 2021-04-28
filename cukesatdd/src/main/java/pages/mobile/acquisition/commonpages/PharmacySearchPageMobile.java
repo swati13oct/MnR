@@ -356,8 +356,10 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				pharmacyValidate(map_mapBtn));
 		Assertion.assertTrue("PROBLEM - unable to locate the 'Satellite' button on the map", 
 				pharmacyValidate(map_satelliteBtn));
+		//This does not display on IOS devices so commented 
+		/*scrollToView(map_fullScreenViewBtn);
 		Assertion.assertTrue("PROBLEM - unable to locate the toggle full screen view button on the map", 
-				pharmacyValidate(map_fullScreenViewBtn));
+				pharmacyValidate(map_fullScreenViewBtn));*/
 		Assertion.assertTrue("PROBLEM - unable to locate the zoom in button on the map", 
 				pharmacyValidate(map_zoomIn));
 		Assertion.assertTrue("PROBLEM - unable to locate the zoom out button on the map", 

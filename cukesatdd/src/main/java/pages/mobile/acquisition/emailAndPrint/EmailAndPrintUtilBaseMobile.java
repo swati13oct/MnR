@@ -14,7 +14,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 
-public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMobile{
+public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMobile {
 
 	public EmailAndPrintUtilBaseMobile(WebDriver driver) {
 		super(driver);
@@ -26,23 +26,24 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	}
 
 	/**
-	 * Alternative to validate deeplink in email
-	 * Get the deeplink from network's postData from the email plan list request
-	 * Use that deeplink to open page and validate content at later step
+	 * Alternative to validate deeplink in email Get the deeplink from network's
+	 * postData from the email plan list request Use that deeplink to open page and
+	 * validate content at later step
 	 */
 	public String getEmailDeepLink() {
-		String deepLinkEntryLine=null;
+		String deepLinkEntryLine = null;
 		List<LogEntry> entries = driver.manage().logs().get(LogType.PERFORMANCE).getAll();
 		for (LogEntry entry : entries) {
-			String line=entry.getMessage();
+			String line = entry.getMessage();
 			if (line.toLowerCase().contains("deeplink")) {
-				deepLinkEntryLine=line;
-				System.out.println("TEST found line="+line);
+				deepLinkEntryLine = line;
+				System.out.println("TEST found line=" + line);
 			}
 		}
-		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value",
+				deepLinkEntryLine != null);
 		JSONParser parser = new JSONParser();
-		JSONObject jsobObj=null;
+		JSONObject jsobObj = null;
 		try {
 			jsobObj = (JSONObject) parser.parse(deepLinkEntryLine);
 		} catch (ParseException e) {
@@ -50,17 +51,17 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			Assertion.assertTrue("PROBLEM - unable to convert target string into json object", false);
 		}
 		JSONObject messageObj = (JSONObject) jsobObj.get("message");
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj != null);
 		JSONObject paramsObj = (JSONObject) messageObj.get("params");
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj != null);
 		JSONObject requestObj = (JSONObject) paramsObj.get("request");
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
-		System.out.println("TEST - headersObj="+requestObj.toString());
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj != null);
+		System.out.println("TEST - headersObj=" + requestObj.toString());
 		String postDataStr = (String) requestObj.get("postData");
-		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
-		String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
-		tmp=tmp.replace("\\\\\"", "\"");
-		System.out.println("TEST - tmp="+tmp);
+		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr != null);
+		String tmp = postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
+		tmp = tmp.replace("\\\\\"", "\"");
+		System.out.println("TEST - tmp=" + tmp);
 		try {
 			jsobObj = (JSONObject) parser.parse(tmp);
 		} catch (ParseException e) {
@@ -68,41 +69,45 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			Assertion.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
 		}
 		JSONObject toObj = (JSONObject) jsobObj.get("to");
-		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj != null);
 		JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
-		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj != null);
 		JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
-		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
-		System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
+		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object",
+				subscriberAttributesObj != null);
+		System.out.println("TEST - subscriberAttributesObj=" + subscriberAttributesObj.toString());
 		String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
-		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
-		System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
+		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr != null);
+		System.out.println("TEST - *** deepLinkStr=" + deepLinkStr);
 		return deepLinkStr;
 	}
 
 	public void savedHeartFirstPlanOnSummaryPage() {
-		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
+		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page",
+				validate(firstSaveHeartOnActiveSummaryPlanPage));
 		jsClickMobile(firstSaveHeartOnActiveSummaryPlanPage);
 		
 	}
 	
 	public void validatePrintOptionExistOnSummaryPage(String planType) {
-		WebElement printElement=null;
+		WebElement printElement = null;
 		if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
-			printElement=summary_maPrintOption;
+			printElement = summary_maPrintOption;
 		} else if (planType.equalsIgnoreCase("pdp")) {
-			printElement=summary_pdpPrintOption;
+			printElement = summary_pdpPrintOption;
 		} else if (planType.equalsIgnoreCase("snp")) {
-			printElement=summary_snpPrintOption;
+			printElement = summary_snpPrintOption;
 		} else {
-			Assertion.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
+			Assertion.assertTrue("PROBLEM - test not coded for this '" + planType + "' planType testing", false);
 		}
-		Assertion.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
+		Assertion.assertTrue(
+				"PROBLEM - Unable to locate the print option or the email option. printCheck=" + validate(printElement),
+				validate(printElement));
 	}
 
 	public void sleepBySec(int sec) {
 		try {
-			Thread.sleep(sec*1000);
+			Thread.sleep(sec * 1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -110,7 +115,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
-		action.moveToElement(targetElement).build().perform(); 
+		action.moveToElement(targetElement).build().perform();
 	}
 
 	public void handlePlanYearSelectionPopup(String planType) {
@@ -128,6 +133,10 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	}
 
 	public void validatePrintOptionOnPage(String pageType, String planType) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")){
+			System.out.println("Print Funxtionality check skipped on mobile device.....");
+		}
+		else if((driver.getClass().toString().toUpperCase().contains("ANDROID"))){
 		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
 		// for now will only validate the print button will bring up the print preview page
 		CommonUtility.checkPageIsReady(driver);
@@ -181,8 +190,8 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 		String pageTitleAfterClosingPrintPreview=driver.getTitle();
 		Assertion.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 	}
-	
-	/** 
+	}
+	/**
 	 * Need to keep the original sesson on sauce lab alive by refreshing the page
 	 * TODO - look into custom extending the sauce lab session
 	 * @param sessionFrom
