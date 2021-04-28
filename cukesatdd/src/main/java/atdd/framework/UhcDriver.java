@@ -1,10 +1,8 @@
 package atdd.framework;
 
-import java.awt.KeyboardFocusManager;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -13,7 +11,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
 
-import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -31,11 +28,7 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -48,14 +41,10 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
 
 /**
@@ -76,7 +65,6 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//div[@class='menu-text']")
 	public WebElement MenuMobile;
-
 
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
@@ -521,7 +509,7 @@ public abstract class UhcDriver {
 
 		return jsonObject;
 	}
-	
+
 	public void iOSClick(WebElement element) {
 
 		boolean clickFlag = false;
@@ -597,17 +585,6 @@ public abstract class UhcDriver {
 		return "[" + elementStr.substring(elementStr.indexOf("->") + 3);
 
 	}
-
-
-
-		boolean clickFlag = false;
-
-		// Sets FluentWait Setup
-
-		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
-				.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
-				.ignoring(TimeoutException.class);
-
 
 	public boolean checkElementisEnabled(WebElement element) {
 		System.out.println("Looking for Element to enable .......");
