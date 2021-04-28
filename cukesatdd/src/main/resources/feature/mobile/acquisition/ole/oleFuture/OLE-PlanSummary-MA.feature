@@ -63,16 +63,14 @@ Feature: 1.05.1. OLE common tool Mobile Flow E2E MA
       | Input Data     | <inputdataType>  |
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
-    Then the user validates the Plan details in SEP Page OLE Right Rail
-    Then the user validates SEP options and Required Fields for PlanType in SEP Page
    Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
    Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-    Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates PCP page for MA and MAPD PFFS plans
+   # Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
      Then the user selects payment type
     | Payment Type | <paymentType> |
@@ -107,9 +105,8 @@ Feature: 1.05.1. OLE common tool Mobile Flow E2E MA
     #Then the user validates the OLE Submission Details in GPS
     #| Plan Type | <plantype> |
     
-    @MAPD_OLE_Ulayer_Future @MA_OLE_UHC_Future
+    @MA_OLE_UHC_Future
     Examples: 
-      | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                  | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                     | optiondata | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |phoneno   | mobileno |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|middlename|authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|authflag|paymentType|cardno|cardexpirationmonth|cardexpirationyear|
-     # | 15557 |AARP| MAPD-PFFS-MBI   |  future|future| 66843| Yes              | Chase County     | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS) | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |      0123456789  | true     | 01011941 | Female | 123 Perm Rd | Los Angeles | Yes                    |               |             | KS           |      66843 | test@test.com | None apply                        |            | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
-      | 15555  |UHC  | Medica-MAPD-MBI | future|future |  33143 | NO              | Miami-Dade County | MAPD     | Medica HealthCare Plans MedicareMax (HMO) | MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |   0123456789              | false    | 01011941 | Female | 123 Perm Rd | Los Angeles | No                   | 876 MailingSt | Mailing LA  | FL           |      33143 | test@test.com | moved outside of the service area |   01012018 | yes     |yes          | false     | NO                | NO      |1234567890|2345678901|HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|    K            |Test_K|Test_M|122 2ND AVE|655|MINNEAPOLIS|55455|1235678901|FRIEND|MN|Agree|566|677|true|Pay By Mail||||
-		
+      | Scenario   | site|PlanType |planyear|planYear|zipcode    | isMultutiCounty | county          | plantype |planyear| planName                                | cardtype | firstname | lastname    | medicarenumber | ssnflag | partadate  | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                                    | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno   | mobileno | healthinsurancename|groupnumber  | membernumber    |prescriptioncoveragename        |pdgroupnumber|pdmembernumber|inputdataType|middlename|authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|medicarenumber1|authflag|paymentType|cardno|cardexpirationmonth|cardexpirationyear|
+       | MA- E2E Scenario 1_UMS | UHC|MA-MBI   |future  |future  |			76543 | NO              | Bell County | MA       |future|AARP Medicare Advantage Patriot (HMO-POS)      | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | false   |   09011997 |  11012002 |      0123456789  | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    |  123 Test             | Irving           |TX          |      76543    | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes           | true      |      yes       | yes     | 1234567890|2345678901|HealthInsurance     |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136    | BCD12345EFG  |Valid       |                 |Test_K|Test_M|122 2ND AVE|655|MINNEAPOLIS|55455|1235678901|FRIEND|MN|Agree|566|677|5N69QY6ET32|true|Pay By Mail||||
+  	

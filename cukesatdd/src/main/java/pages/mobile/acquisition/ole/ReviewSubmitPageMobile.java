@@ -490,7 +490,9 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 			}
 
 		}
-
+		
+		scrollToView(Submit_Disclaimer);
+		scrollToView(Enrollment_Disclaimer_Text);
 		if (validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)) {
 			if (Enrollment_Disclaimer_Text.getText()
 					.contains("Submitting your enrollment application electronically")) {
@@ -500,7 +502,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 				flag = false;
 		} else
 			flag = false;
-
+		scrollToView(SubmitApplicationBtn);
 		if (validate(SubmitApplicationBtn)) {
 			if (SubmitApplicationBtn.isEnabled()) {
 				flag = (!flag) ? false : true;
