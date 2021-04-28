@@ -1,11 +1,12 @@
-@pharmacylocatorblayermobile
+@pharmacylocatorblayermobile @prod_regression
 Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
   @pharmacylocatorblayer01 @shopPlan @English @pharmacylocatorAcquisitionE2E @pharmacyLocatorRegression @prodSanity @regressionAARP
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
-    Given the user is on the Acquisition Site landing page and navigate to pharmacy search page mobile
-      | Site Name | <siteName> |
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    And Navigate to pharmacy search page mobile
     When the user enters following details for pharmacy search mobile
       | Zip Code | [blank]    |
       | Distance | <distance> |
@@ -34,7 +35,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     And the user validates view search PDF link mobile
 
     Examples: 
-      | TID   | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | TID   | Site | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15586 | Blayer   |   10980 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | E-Prescribing   | True                  | True             | True                 |
       | 15586 | Blayer   |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       | 15586 | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
@@ -71,7 +72,8 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
   @pharmacylocatorulayer07 @onlinePharmacyDir @pharmacyLocatorRegression
   Scenario Outline: TID: <TID> -plan: <planType>  - To verify navigation to pharmacy search page from VPP page
-    Given the user is on AARP medicare acquisition site landing page
+     Given the user is on medicare acquisition site landing page
+      | Site | <site> |
     When the user performs plan search using following information in the AARP site
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
