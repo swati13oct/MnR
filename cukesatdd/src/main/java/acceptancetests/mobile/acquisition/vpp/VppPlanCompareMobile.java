@@ -27,18 +27,13 @@ import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
-<<<<<<< HEAD
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-=======
-import pages.acquisition.commonpages.ComparePlansPage;
-import pages.acquisition.commonpages.FindCarePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -808,37 +803,25 @@ public class VppPlanCompareMobile {
 	 */
 	@When("^the user view plan details of the above selected plan in AARP site and validates$")
 	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) throws InterruptedException {
-<<<<<<< HEAD
+
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
 		String PlanName = givenAttributes.cell(0, 1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
 
-=======
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String planName = memberAttributesRow.get(0).getCells().get(1);
-//		String planType = memberAttributesRow.get(1).getCells().get(1);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE,planType);
-		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
+		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-<<<<<<< HEAD
+
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("Error in Loading the Plan Details Page");
-=======
-			// if(vppPlanDetailsPage.validatePlanDetailsPage()){
-			// Assert.assertTrue(true);
-			// }else
-			// Assert.fail("Error in validating the Plan Details Page");
 
-		}
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 
 	}
 	

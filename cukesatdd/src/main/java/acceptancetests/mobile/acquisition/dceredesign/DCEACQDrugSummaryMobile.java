@@ -319,13 +319,15 @@ public class DCEACQDrugSummaryMobile {
 	
 	@When("^user search with zipcode with no pharamacies$")
 	public void user_search_with_zipcode_with_no_pharamacies(DataTable attributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes) ;
 		String zipCode = memberAttributesMap.get("ZipCode");
 		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile)getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.searchPharmaciesByZipcode(zipCode);
@@ -333,13 +335,15 @@ public class DCEACQDrugSummaryMobile {
 	
 	@Then("^no results message should be displayed$")
 	public void no_results_message_should_be_displayed(DataTable attributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes) ;
 		String message = memberAttributesMap.get("NoResultsMessage");
 		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile)getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.validateNoResultsMsg(message);
@@ -347,13 +351,15 @@ public class DCEACQDrugSummaryMobile {
 
 	@When("^user search with incorrect zipcode$")
 	public void user_search_with_incorrect_zipcode(DataTable attributes) {
-		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes) ;
 		String zipCode = memberAttributesMap.get("ZipCode");
 		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile)getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.searchPharmaciesByZipcode(zipCode);

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-<<<<<<< HEAD
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
@@ -15,11 +14,6 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-=======
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
@@ -373,25 +367,27 @@ public class DCEACQNewRunnerMobile {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = memberAttributesMap.get("planname");
 		System.out.println(PlanName);
 		drugDetailsPage.savePlan(PlanName);
 	}
 	@And("^user validates the plans on new visitor profile page of AARP site$")
 	public void user_validates_the_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
-		List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
+		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePageMobile visitorProfile =  (VisitorProfilePageMobile)getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);

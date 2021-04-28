@@ -45,7 +45,6 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
-	
 
 	@FindBy(xpath = "//span[text()='Add Drugs']/parent::button")
 	private WebElement addDrugsBtn;
@@ -163,7 +162,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 								"//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
 								.getText().trim());
 				Assertion.assertTrue(driver
-						.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'"+ plan  +"')]"))
+						.findElement(By.xpath(
+								"//button[contains(@class,'remove')]/following::h3[contains(text(),'" + plan + "')]"))
 						.isDisplayed());
 				System.out.println(driver
 						.findElement(By.xpath(
@@ -382,7 +382,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	public VPPTestHarnessPage switchBackToVPTestharness() {
 		driver.close();
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		System.out.println("Switching back to MainWindow");
 		if (driver.getCurrentUrl().contains("visitorprofiletestharness")) {
@@ -492,15 +492,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
 			System.out.println(plan);/*
-			System.out.println(driver.findElement(By.xpath(
-					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-<<<<<<< HEAD
-					.getText());
+										 * System.out.println(driver.findElement(By.xpath(
+										 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+										 * + plan + "')]")) <<<<<<< HEAD .getText()); Assertion.assertEquals(plan,
+										 * driver.findElement(By.xpath( ======= .getText());
+										 */
 			Assertion.assertEquals(plan, driver.findElement(By.xpath(
-=======
-					.getText());*/
-			Assert.assertEquals(plan, driver.findElement(By.xpath(
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
 					.getText());
 			Assertion.assertTrue(driver

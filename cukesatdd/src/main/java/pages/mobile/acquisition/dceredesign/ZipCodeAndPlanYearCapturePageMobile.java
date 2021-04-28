@@ -8,11 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
-<<<<<<< HEAD
+
 import atdd.framework.Assertion;
-=======
-import atdd.framework.MRScenario;
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 import atdd.framework.UhcDriver;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
@@ -118,9 +116,10 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
 				// jsClickNew(countyDropdown);
-				//CommonUtility.waitForPageLoad(driver, countyRows, 30);
+				// CommonUtility.waitForPageLoad(driver, countyRows, 30);
 				// driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
-				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText().toString();
+				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText()
+						.toString();
 				mobileSelectOption(countyDropdown, countyValue, true);
 			}
 		} catch (Exception e) {

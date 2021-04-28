@@ -18,24 +18,21 @@ import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
-<<<<<<< HEAD
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-=======
-import pages.acquisition.ole.SpecialElectionPeriodPage;
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
+
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
 import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
-<<<<<<< HEAD
+
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
-=======
-import pages.mobile.acquisition.commonpages.SpecialElectionPeriodPageMobile;
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ole.AuthorizationPageMobile;
@@ -2012,7 +2009,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-<<<<<<< HEAD
+
 		Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
 		SEPoptionsFlagMap = DataTableParser.readDataTableAsMaps(SEPoptions);
 		/*List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
@@ -2022,35 +2019,18 @@ public class OLEStepDefinitionMobile {
 		}*/
 		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
 		String optionsData = SEPoptionsFlagMap.get("Option Data");
-=======
-			List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
-			Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				SEPoptionsFlagMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
-			String Selectoptions = SEPoptionsFlagMap.get("Select Options");
-			String optionsData = SEPoptionsFlagMap.get("Option Data");
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 
 			SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 			specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
 			if (specialElectionPeriodPage != null) {
 
-<<<<<<< HEAD
+
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
 			System.out.println("OLE SEP page Options Selected : Next Button enabled");
 		} else
 			Assertion.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
-=======
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
-						specialElectionPeriodPage);
-				System.out.println("OLE SEP page Options Selected : Next Button enabled");
-			}
-			else
-				Assert.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 
 		//}
 	}

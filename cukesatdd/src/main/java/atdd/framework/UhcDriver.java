@@ -12,7 +12,7 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.maven.model.Build;
+
 import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,7 +42,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.itextpdf.text.log.SysoCounter;
+
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -79,8 +79,6 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//div[@class='menu-text']")
 	public WebElement MenuMobile;
 
-	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Tools to help you choose a plan']")
-	public WebElement toolsToChoosePlan;
 
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
@@ -603,9 +601,7 @@ public abstract class UhcDriver {
 	}
 
 
-<<<<<<< HEAD
-	
-=======
+
 		boolean clickFlag = false;
 
 		// Sets FluentWait Setup
@@ -613,61 +609,9 @@ public abstract class UhcDriver {
 		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
 				.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 				.ignoring(TimeoutException.class);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
 
-	public boolean checkElementisEnabled(WebElement element) {
-		System.out.println("Looking for Element to enable .......");
-		try {
-<<<<<<< HEAD
-			if (element.getAttribute("@disbaled") == "true") {
-				System.out.println("Element is enabled to perform action .......");
 
-			}
-		} catch (Exception e) {
-			System.out.println("Element not enabled hence action failed on screen....");
-=======
-			threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
-			System.out.println("Waiting to check if element is present");
-			fwait.until(ExpectedConditions.visibilityOf(element));
-
-			if (element.isDisplayed()) {
-
-				// TouchActions action = new TouchActions(driver);
-				// action.longPress(element);
-				// singleTap(element);
-				// action.perform();
-				checkElementisEnabled(element);
-
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("arguments[0].click(true);", element);
-				System.out.println("JsClick worked");
-				clickFlag = true;
-
-				// if (element.isDisplayed() && (clickFlag = true))
-				// try {
-				// element.click();
-				// System.out.println("Click worked");
-				// } catch (Exception e) {
-				// System.out.println("Unable to click on element for IOS");
-				// }
-
-				// new
-				// TouchAction((AppiumDriver)driver).tap(TapOptions.tapOptions().withElement((ElementOption)
-				// element)).perform();
-
-				// Actions builder = new Actions((IOSDriver)driver);
-				// builder.moveToElement(element).click(element);
-				// builder.perform();
-
-			}
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
-		}
-
-		return true;
-
-	}
-
-	public boolean checkElementisEnabled(WebElement element) {
+		public boolean checkElementisEnabled(WebElement element) {
 		System.out.println("Looking for Element to enable .......");
 		try {
 			if (element.getAttribute("@disbaled") == "true") {
@@ -684,9 +628,7 @@ public abstract class UhcDriver {
 
 	public boolean scrollToView(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-<<<<<<< HEAD
-			backToTop.isDisplayed();
-=======
+
 
 			// // clickAndHold(element);
 			// TouchAction ta = new TouchAction((AppiumDriver)driver);
@@ -695,7 +637,7 @@ public abstract class UhcDriver {
 			Actions ac = new Actions(driver);
 			ac.moveToElement(element);
 			// backToTop.isDisplayed();
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 			System.out.println("Scroll finished to element on IOS device");
 
 			// JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
@@ -1551,10 +1493,8 @@ public abstract class UhcDriver {
 	 */
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		if (MRScenario.browserName.equalsIgnoreCase("Safari")
 				&& driver.getClass().getSimpleName().contains("WebDriver")) {
 			// Sets FluentWait Setup

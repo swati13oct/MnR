@@ -327,7 +327,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	
 	public void validateDefaultDistance() {
 		Select distance = new Select(distanceDrpDown);
-		Assert.assertTrue("Default distance is not 15 miles",
+		Assertion.assertTrue("Default distance is not 15 miles",
 				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
 	}
 
@@ -458,7 +458,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
 		waitforElement(mailOrderPharmacyMsg);
-		Assert.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
+		Assertion.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
 				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
 	}
 
@@ -553,7 +553,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 		System.out.println("After sort" + pharmacListAfterSort);
 		Boolean sorted = Ordering.natural().isOrdered(pharmacListAfterSort);
-		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
 	}
 	
 	public void validatePharmaciesDescendingOrder() {
@@ -563,7 +563,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 		System.out.println("After sort" + pharmacListAfterSort);
 		Boolean sorted = Ordering.natural().reverse().isOrdered(pharmacListAfterSort);
-		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
 	}
 	
 	public void clickNextButton() {
@@ -579,7 +579,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		if (m.find()) {
 			page = m.group(1);
 		}
-		Assert.assertTrue("Second page not displayed", page.equals("2"));
+		Assertion.assertTrue("Second page not displayed", page.equals("2"));
 	}
 	public void clickBackButton() {
 		jsClickMobile(backBtn);
@@ -592,7 +592,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		if (m.find()) {
 			page = m.group(1);
 		}
-		Assert.assertTrue("First page not displayed", page.equals("1"));
+		Assertion.assertTrue("First page not displayed", page.equals("1"));
 	}
 	
 	public void searchPharmaciesByZipcode(String zipcode) {
@@ -609,7 +609,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
 		System.out.println(expectedMsg);
-		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+		Assertion.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
 	}
 	@FindBy(id = "inValidZipcodeLbl")
 	private WebElement invalidZipCodeMsg;
@@ -618,6 +618,6 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void validateInvalidZipCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText().trim());
-		Assert.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
+		Assertion.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 }

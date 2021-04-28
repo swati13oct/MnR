@@ -227,16 +227,11 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AboutUsAARPPageMobile aboutUsAARPPage = aquisitionhomepage.aboutUsFooterClick();
-<<<<<<< HEAD
-		if(aboutUsAARPPage!= null){
-			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE,
-					aboutUsAARPPage);
-			Assertion.assertTrue(true);
-=======
+
 		if (aboutUsAARPPage != null) {
 			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE, aboutUsAARPPage);
 			Assert.assertTrue(true);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		} else {
 			Assertion.fail("Aboutus page not found");
 		}

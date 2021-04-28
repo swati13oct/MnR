@@ -41,12 +41,9 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 				System.out.println("TEST found line=" + line);
 			}
 		}
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
-=======
-		Assert.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value",
-				deepLinkEntryLine != null);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		JSONParser parser = new JSONParser();
 		JSONObject jsobObj = null;
 		try {
@@ -56,37 +53,25 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			Assertion.assertTrue("PROBLEM - unable to convert target string into json object", false);
 		}
 		JSONObject messageObj = (JSONObject) jsobObj.get("message");
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
-=======
-		Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj != null);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		JSONObject paramsObj = (JSONObject) messageObj.get("params");
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
-=======
-		Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj != null);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		JSONObject requestObj = (JSONObject) paramsObj.get("request");
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
 		System.out.println("TEST - headersObj="+requestObj.toString());
-=======
-		Assert.assertTrue("PROBLEM - unable to locate message json object", requestObj != null);
-		System.out.println("TEST - headersObj=" + requestObj.toString());
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		String postDataStr = (String) requestObj.get("postData");
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
 		String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
 		tmp=tmp.replace("\\\\\"", "\"");
 		System.out.println("TEST - tmp="+tmp);
-=======
-		Assert.assertTrue("PROBLEM - unable to locate postData string", postDataStr != null);
-		String tmp = postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
-		tmp = tmp.replace("\\\\\"", "\"");
-		System.out.println("TEST - tmp=" + tmp);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		try {
 			jsobObj = (JSONObject) parser.parse(tmp);
 		} catch (ParseException e) {
@@ -94,44 +79,30 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			Assertion.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
 		}
 		JSONObject toObj = (JSONObject) jsobObj.get("to");
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
-=======
-		Assert.assertTrue("PROBLEM - unable to locate 'to' json object", toObj != null);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
-=======
-		Assert.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj != null);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
 		System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
-=======
-		Assert.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object",
-				subscriberAttributesObj != null);
-		System.out.println("TEST - subscriberAttributesObj=" + subscriberAttributesObj.toString());
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
 		System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
-=======
-		Assert.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr != null);
-		System.out.println("TEST - *** deepLinkStr=" + deepLinkStr);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		return deepLinkStr;
 	}
 
 	public void savedHeartFirstPlanOnSummaryPage() {
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
-=======
-		Assert.assertTrue("PROBLEM - unable to locate the first save heart on plan page",
-				validate(firstSaveHeartOnActiveSummaryPlanPage));
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		jsClickMobile(firstSaveHeartOnActiveSummaryPlanPage);
 
 	}
@@ -145,19 +116,13 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 		} else if (planType.equalsIgnoreCase("snp")) {
 			printElement = summary_snpPrintOption;
 		} else {
-<<<<<<< HEAD
+
 			Assertion.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
-=======
-			Assert.assertTrue("PROBLEM - test not coded for this '" + planType + "' planType testing", false);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 		}
-<<<<<<< HEAD
+
 		Assertion.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
-=======
-		Assert.assertTrue(
-				"PROBLEM - Unable to locate the print option or the email option. printCheck=" + validate(printElement),
-				validate(printElement));
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 	}
 
 	public void sleepBySec(int sec) {

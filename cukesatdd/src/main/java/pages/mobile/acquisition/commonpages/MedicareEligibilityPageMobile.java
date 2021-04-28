@@ -166,14 +166,11 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 	}
 
 	public void stateSelection(String value) {
-<<<<<<< HEAD
 
-		selectFromDropDownByText(driver,dropDownState,value);
-=======
 		
 		//selectFromDropDownByText(driver,dropDownState,value);
 		mobileSelectOption(dropDownState, value, true);
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
+
 
 	}
 
