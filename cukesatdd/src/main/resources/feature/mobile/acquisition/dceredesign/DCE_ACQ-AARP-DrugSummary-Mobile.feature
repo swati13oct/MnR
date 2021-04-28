@@ -1,7 +1,7 @@
-@dce_redesign_Drug_summary_AARP @F426576
+@dce_redesign_Drug_summary_AARP @F426576 
 Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
-  @DCE_DrugSummary_ValidatePage_AARP @regressionAARP @OnlyProd
+  @DCE_DrugSummary_ValidatePage_AARP @regressionAARP @OnlyProd @prod_regression
   Scenario Outline: Test to verify the Drug summary page in AARP
     Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | zipCode | plantype | county | isMultutiCounty | drugName | planname                                           |
       |   10001 | MAPD     | none   | no              | Emsam    | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-  @dceNBADrugSummaryPage @F465679 @decRelease
+  @dceNBADrugSummaryPage @F465679 @decRelease @prod_regression
   Scenario Outline: Test to Verify that DCE NBA on Drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
