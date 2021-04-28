@@ -149,7 +149,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 
 	public SupplementalBenefitsPageMobile navigate_to_Supplemental_Riders_Page() {
 	//	agreeBtn.click();
-		jsClickMobile(agreeBtn);
+		//jsClickMobile(agreeBtn);
 		validateNew(NextBtn);
 		jsClickMobile(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
