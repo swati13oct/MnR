@@ -2,6 +2,7 @@
 Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
   @ProviderSearchUlayerSmoke @ProviderSearchUlayerCurrentSmoke @prod_regression
+
   Scenario Outline: Verify Provider Search  in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -21,7 +22,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county          | plantype | planname                             |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
-  @ProviderSearchFromGlobalHeaderUlayer @AcqRegressionProviderSearchUlayer @regressionAARP @prodRegression 
+  @ProviderSearchFromGlobalHeaderUlayer @AcqRegressionProviderSearchUlayer @regressionAARP @prodRegression @prod_regression
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
@@ -44,7 +45,9 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | Plancount | <plancount> |
       | Year      | <year>      |
 
+
     @AcqRegressionProviderSearchUlayer @regressionAARP 
+
     Examples: 
       | zipcode | plancount | year    |
       |   10001 |        12 | current |

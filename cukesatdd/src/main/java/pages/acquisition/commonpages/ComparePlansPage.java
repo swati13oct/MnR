@@ -154,7 +154,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//a[text()='Add Hospitals']")
 	private WebElement addHospitalsLink;
 	
-	@FindBy(xpath="//a[text()='Edit Hospitals']")
+	@FindBy(xpath="//*[contains(text(),'Edit Hospitals')]")
 	private WebElement editHospitalsLink;
 	
 	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']")

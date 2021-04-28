@@ -1158,12 +1158,12 @@ public class DrugSummaryPage extends UhcDriver {
 		distance.selectByVisibleText(distanceValue);
 	}
 
-	@FindBy(xpath = "//*[@id='changePharmacyLink0']")
+	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
 	public WebElement changePharmacyAltMsg;
 
 	public void clickChangePharmacyFromAltMsg() {
-		waitforElement(changePharmacyAltMsg);
-		validate(changePharmacyAltMsg);
+		//waitforElement(changePharmacyAltMsg); next method already waits to validate the presense of element
+		validate(changePharmacyAltMsg,20);
 		jsClickNew(changePharmacyAltMsg);
 		//changePharmacyAltMsg.click();
 		validateSelectPharmacyPage();
