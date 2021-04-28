@@ -21,7 +21,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | PDF type     | <pdfType> |
       | DocumentCode | <docCode> |
 
-    @VppPlanDetailsCommon_AARP01 @regressionAARP @ios
+    @VppPlanDetailsCommon_AARP01 @regressionAARP @prod_regression
     Examples: 
       | TCID  | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | pdfType               | docCode                  | planyear |
       | 00001 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | future   |
@@ -49,7 +49,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
 
-    @VppPlanDetailsCommon_AARP01 @regressionAARP @OnlyProd
+    @VppPlanDetailsCommon_AARP01 @regressionAARP @prod_regression
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
       | 15638 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $29            | $348          | future   |

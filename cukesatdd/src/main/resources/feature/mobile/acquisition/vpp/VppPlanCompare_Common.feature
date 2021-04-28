@@ -14,7 +14,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | Plan Year | <planyear> |
     Then verify plan compare checkbox is not visible on plan summary
 
-    @VppPlanCompareCommon_AARP01 @regressionAARP @OnlyProd @ios
+    @VppPlanCompareCommon_AARP01 @regressionAARP @prod_regression
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00001 | AARP |   96799 | NO            | Western District | PDP      | future   |

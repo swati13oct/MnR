@@ -19,7 +19,7 @@ Feature: 1.12 ACQ - Global Components AARP
     And user verifies home link of agents&brokers page
     Then user clicks on back to top link of home page
 
-    @globalfooter_AARP @regressionAARP
+    @globalfooter_AARP @regressionAARP @prod_regression
     Examples: 
       | site |
       | AARP |
@@ -95,7 +95,7 @@ Feature: 1.12 ACQ - Global Components AARP
     #      |	UHC		| medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans | UnitedHealthcare       	| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] 		| true    |
     #|	UHC		| medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | UnitedHealthcare 			| //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
     #|	UHC		| medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans | UnitedHealthcare		      | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')]		| true    |
-    @MedEdPages_3_GlobalCompsAARP @regressionAARP
+    @MedEdPages_3_GlobalCompsAARP @regressionAARP @prod_regression
     Examples: 
       | site | path                                 | pageName     | tfnXpath            | tfnFlag                                                              |      |
       | AARP | medicare-education/medicare-faq.html | Medicare FAQ | AARP Medicare Plans | //div[contains(@style,'display: block')]//a[contains(@class, 'tel')] | true |

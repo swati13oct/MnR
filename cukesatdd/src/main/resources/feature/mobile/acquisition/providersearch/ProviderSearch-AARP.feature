@@ -1,7 +1,7 @@
 @fixedTestCaseTest
 Feature: 1.07 .ACQ- Provider Search Flow in AARP
 
-  @ProviderSearchUlayerSmoke @ProviderSearchUlayerCurrentSmoke @OnlyProd
+  @ProviderSearchUlayerSmoke @ProviderSearchUlayerCurrentSmoke @prod_regression
   Scenario Outline: Verify Provider Search  in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -44,7 +44,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | Plancount | <plancount> |
       | Year      | <year>      |
 
-    @AcqRegressionProviderSearchUlayer @regressionAARP
+    @AcqRegressionProviderSearchUlayer @regressionAARP 
     Examples: 
       | zipcode | plancount | year    |
       |   10001 |        12 | current |
@@ -63,7 +63,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | Plancount | <plancount> |
       | Year      | <year>      |
 
-    @AcqRegressionProviderSearchUlayer @regressionAARP
+    @AcqRegressionProviderSearchUlayer @regressionAARP 
     Examples: 
       | zipcode | plancount | year    |
       |   10001 |        12 | current |
@@ -73,7 +73,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   55344 |         8 | current |
       |   04011 |         7 | current |
 
-  @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression @OnlyProd
+  @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression @prod_regression
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

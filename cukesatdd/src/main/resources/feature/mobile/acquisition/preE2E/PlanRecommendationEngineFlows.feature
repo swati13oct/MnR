@@ -1,7 +1,7 @@
 @PlanRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with recommendation
 
-  @PRE @planrecommendation @PDPFlow @PDPskipdrug @PDPTie @F358830 @F432670 @PRERegression2 @regressionAARP
+  @prod_regression @regressionAARP
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> , <1stRecommendation> ,  <Rankingplan> , <2ndRecommendation> - To validate Loading page functions using skip drug option for PDP Tie plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -24,7 +24,7 @@ Feature: Plan Recommendation Engine flow - Verify PRE flows functionalities with
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | 1stRecommendation | 2ndRecommendation |
       |   10003 | NO            | New York | PDP           | No             | PDP               | [blank]           |
 
-  @PRE @planrecommendation @PDPFlow @PDPskipdrug @F358830 @F458224 @PRERegression2 @regressionAARP
+  @prod_regression @regressionAARP
   Scenario Outline: <Zipcode>, <isMultiCounty> ,<county>, <isCoverageOpt> , <Drug Selection> , <1stRecommendation> ,  <Rankingplan> , <2ndRecommendation> - To validate Loading page functions using skip drug option for PDP plans in PRE
     Given the user is on UHC medicare acquisition site landing page
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs

@@ -1,7 +1,7 @@
 @Test @AARPvisitorprofile @regressionAARP
 Feature: 1.08. ACQ- Visitor profile
 
-  @VisitorProfile_AARP_mobile @prod
+  @VisitorProfile_AARP_mobile @prod_regression
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip - <zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
