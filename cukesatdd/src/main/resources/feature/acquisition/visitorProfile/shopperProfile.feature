@@ -3,7 +3,7 @@
 @ShopperProfile @regressionAARP
 Feature: 1.09. ACQ- Shopper Profile
 
-  @searchProfileEmail @SanitySP @sanity
+  @searchProfileEmail @SanitySP @sanity @test123
   Scenario Outline: Telesales agent searching for the profile using Email
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |

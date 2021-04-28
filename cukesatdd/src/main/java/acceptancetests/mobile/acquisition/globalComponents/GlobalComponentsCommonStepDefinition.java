@@ -226,7 +226,7 @@ public class GlobalComponentsCommonStepDefinition {
 		AboutUsAARPPageMobile aboutUsAARPPage = aquisitionhomepage.aboutUsFooterClick();
 		if (aboutUsAARPPage != null) {
 			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE, aboutUsAARPPage);
-			Assertion.assertTrue(true);
+			Assert.assertTrue(true);
 		} else {
 			Assertion.fail("Aboutus page not found");
 		}

@@ -523,8 +523,7 @@ public class VppPlanCompareMobile {
 		dce.verifyPharmacyResults();
 		for (int i = 0; i < dce.getLstPharmacyNames().size(); i++)
 			if (dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
-				// dce.getLstSelectPharmacy().get(i).click();
-				dce.jsClickNew(dce.getLstSelectPharmacy().get(i));
+				dce.getLstSelectPharmacy().get(i).click();
 				break;
 			}
 
@@ -804,22 +803,21 @@ public class VppPlanCompareMobile {
 	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) throws InterruptedException {
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
-		String planName = givenAttributes.cell(0, 1);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		String PlanName = givenAttributes.cell(0, 1);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
 
 		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE,planType);
-		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
+		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			// if(vppPlanDetailsPage.validatePlanDetailsPage()){
-			// Assertion.assertTrue(true);
-			// }else
-			// Assertion.fail("Error in validating the Plan Details Page");
 
-		}
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("Error in Loading the Plan Details Page");
+
 
 	}
 

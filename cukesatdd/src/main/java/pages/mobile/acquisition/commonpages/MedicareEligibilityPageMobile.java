@@ -12,8 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import pages.acquisition.commonpages.CoverageChoicesPage;
-
 
 public class MedicareEligibilityPageMobile extends GlobalWebElements {
 

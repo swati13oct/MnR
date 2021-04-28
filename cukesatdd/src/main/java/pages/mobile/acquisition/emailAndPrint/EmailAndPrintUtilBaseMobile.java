@@ -1,4 +1,5 @@
 package pages.mobile.acquisition.emailAndPrint;
+
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -40,8 +41,9 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 				System.out.println("TEST found line=" + line);
 			}
 		}
-		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value",
-				deepLinkEntryLine != null);
+
+		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
+
 		JSONParser parser = new JSONParser();
 		JSONObject jsobObj = null;
 		try {
@@ -51,17 +53,25 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			Assertion.assertTrue("PROBLEM - unable to convert target string into json object", false);
 		}
 		JSONObject messageObj = (JSONObject) jsobObj.get("message");
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj != null);
+
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+
 		JSONObject paramsObj = (JSONObject) messageObj.get("params");
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj != null);
+
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+
 		JSONObject requestObj = (JSONObject) paramsObj.get("request");
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj != null);
-		System.out.println("TEST - headersObj=" + requestObj.toString());
+
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
+		System.out.println("TEST - headersObj="+requestObj.toString());
+
 		String postDataStr = (String) requestObj.get("postData");
-		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr != null);
-		String tmp = postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
-		tmp = tmp.replace("\\\\\"", "\"");
-		System.out.println("TEST - tmp=" + tmp);
+
+		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
+		String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
+		tmp=tmp.replace("\\\\\"", "\"");
+		System.out.println("TEST - tmp="+tmp);
+
 		try {
 			jsobObj = (JSONObject) parser.parse(tmp);
 		} catch (ParseException e) {
@@ -69,26 +79,34 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			Assertion.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
 		}
 		JSONObject toObj = (JSONObject) jsobObj.get("to");
-		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj != null);
+
+		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
+
 		JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
-		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj != null);
+
+		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
+
 		JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
-		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object",
-				subscriberAttributesObj != null);
-		System.out.println("TEST - subscriberAttributesObj=" + subscriberAttributesObj.toString());
+
+		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
+		System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
+
 		String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
-		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr != null);
-		System.out.println("TEST - *** deepLinkStr=" + deepLinkStr);
+
+		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
+		System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
+
 		return deepLinkStr;
 	}
 
 	public void savedHeartFirstPlanOnSummaryPage() {
-		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page",
-				validate(firstSaveHeartOnActiveSummaryPlanPage));
+
+		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
+
 		jsClickMobile(firstSaveHeartOnActiveSummaryPlanPage);
-		
+
 	}
-	
+
 	public void validatePrintOptionExistOnSummaryPage(String planType) {
 		WebElement printElement = null;
 		if (planType.equalsIgnoreCase("mapd") || planType.equalsIgnoreCase("ma")) {
@@ -98,11 +116,13 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 		} else if (planType.equalsIgnoreCase("snp")) {
 			printElement = summary_snpPrintOption;
 		} else {
-			Assertion.assertTrue("PROBLEM - test not coded for this '" + planType + "' planType testing", false);
+
+			Assertion.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
+
 		}
-		Assertion.assertTrue(
-				"PROBLEM - Unable to locate the print option or the email option. printCheck=" + validate(printElement),
-				validate(printElement));
+
+		Assertion.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
+
 	}
 
 	public void sleepBySec(int sec) {
@@ -112,7 +132,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void moveMouseToElement(WebElement targetElement) {
 		Actions action = new Actions(driver);
 		action.moveToElement(targetElement).build().perform();
@@ -133,6 +153,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	}
 
 	public void validatePrintOptionOnPage(String pageType, String planType) {
+		
 		if (driver.getClass().toString().toUpperCase().contains("IOS")){
 			System.out.println("Print Funxtionality check skipped on mobile device.....");
 		}
@@ -194,6 +215,7 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	/**
 	 * Need to keep the original sesson on sauce lab alive by refreshing the page
 	 * TODO - look into custom extending the sauce lab session
+	 * 
 	 * @param sessionFrom
 	 * @param targetDriver
 	 */

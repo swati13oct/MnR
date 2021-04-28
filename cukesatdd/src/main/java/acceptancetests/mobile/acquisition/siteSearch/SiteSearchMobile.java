@@ -71,8 +71,7 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
-				.clicksOnRallyToolFromGlobalHeader();
+		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
@@ -192,8 +191,7 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
-				.clicksOnRallyToolFromGlobalHeader();
+		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
@@ -271,8 +269,7 @@ public class SiteSearchMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		ProviderSearchPageMobile providerSearchPage = plansummaryPage
-				.clicksOnIsProviderCovered(planName);
+		ProviderSearchPageMobile providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
@@ -311,8 +308,6 @@ public class SiteSearchMobile {
 		plansummaryPage.verifyproviderName(planName);
 	}
 
-	
-	
 	/**
 	 * @toDo:Verify provider covered information is displayed on Plan Summary page
 	 */
@@ -346,8 +341,7 @@ public class SiteSearchMobile {
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		System.out.println("Plan name is " + PlanName + "Plan type is " + planType);
-		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
-				.navigateToPlanDetails(PlanName, planType);
+		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			Assertion.assertTrue(true);
@@ -374,8 +368,7 @@ public class SiteSearchMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			PlanDetailsPageMobile planDetailsPage = providerSearchPage
-					.selectsProviderFromVppPlanDetailsPage();
+			PlanDetailsPageMobile planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
 			Assertion.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
 
 		}
@@ -397,8 +390,7 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
-				.clicksOnRallyToolFromHomePage();
+		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);

@@ -1402,7 +1402,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		 */
 		validate(switchToGenericIcon);
 
-		Assert.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
+		Assertion.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
 	}
 	@FindBy(xpath = "//button//span[text()='Back to Profile']")
 	public List<WebElement> backToProfileBtn;

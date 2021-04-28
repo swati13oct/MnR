@@ -8,11 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+
 import atdd.framework.Assertion;
-import atdd.framework.MRScenario;
+
 import atdd.framework.UhcDriver;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
@@ -113,20 +112,21 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		Thread.sleep(3000);
 		iosScroll(countyDropdown);
 		try {
-			if (countyDropdown.isDisplayed()) {
 
+			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
 				// jsClickNew(countyDropdown);
-				//CommonUtility.waitForPageLoad(driver, countyRows, 30);
+				// CommonUtility.waitForPageLoad(driver, countyRows, 30);
 				// driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
-				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText().toString();
+				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText()
+						.toString();
 				mobileSelectOption(countyDropdown, countyValue, true);
-
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
 		validateNew(continueBtn);
+		// continueBtn.click();
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {

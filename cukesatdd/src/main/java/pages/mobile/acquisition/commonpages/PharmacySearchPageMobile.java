@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -358,7 +359,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 				pharmacyValidate(map_satelliteBtn));
 		//This does not display on IOS devices so commented 
 		/*scrollToView(map_fullScreenViewBtn);
-		Assertion.assertTrue("PROBLEM - unable to locate the toggle full screen view button on the map", 
+		Assert.assertTrue("PROBLEM - unable to locate the toggle full screen view button on the map", 
 				pharmacyValidate(map_fullScreenViewBtn));*/
 		Assertion.assertTrue("PROBLEM - unable to locate the zoom in button on the map", 
 				pharmacyValidate(map_zoomIn));

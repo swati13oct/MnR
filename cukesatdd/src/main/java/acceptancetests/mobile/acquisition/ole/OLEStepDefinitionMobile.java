@@ -2010,17 +2010,16 @@ public class OLEStepDefinitionMobile {
 		SEPoptionsFlagMap = DataTableParser.readDataTableAsMaps(SEPoptions);
 		/*List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			SEPoptionsFlagMap.put(personalAttributesRow.get(i)
-					.getCells().get(0), personalAttributesRow.get(i)
-					.getCells().get(1));
+			SEPoptionsFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
+					personalAttributesRow.get(i).getCells().get(1));
 		}*/
 		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
 		String optionsData = SEPoptionsFlagMap.get("Option Data");
 
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
-				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
-		specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
-		if (specialElectionPeriodPage != null) {
+
+			SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+			specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
+			if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
 			System.out.println("OLE SEP page Options Selected : Next Button enabled");

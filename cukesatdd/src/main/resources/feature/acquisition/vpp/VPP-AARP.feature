@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppUlayer
 Feature: 1.02-Plan summary in vpp flow AARP
 
-  @vppUlayerSmoke @vppUlayerNextYrSmoke @vbfGate
+  @vppUlayerSmoke @vppUlayerNextYrSmoke #@vbfGate
   Scenario Outline: Verify plan summary in AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
