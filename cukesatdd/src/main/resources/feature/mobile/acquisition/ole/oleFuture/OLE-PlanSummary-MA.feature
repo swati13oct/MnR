@@ -17,7 +17,7 @@ Feature: 1.05.1. OLE common tool Mobile Flow E2E MA
     Then the user validates the Plan details on OLE
     Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
+   Then the user validates cancellation modal for Welcome OLE
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
@@ -96,8 +96,8 @@ Feature: 1.05.1. OLE common tool Mobile Flow E2E MA
     #  | authorizationStateDisplay   | <authorizestate>        |
     #  | authorizationAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-     Then the user validates the Plan and Member details on Review and Submit Page
-   # Then the user validates the Online Enrollment details on Review and Submit Page
+  #   Then the user validates the Plan and Member details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
 
     # Then the user validates Plan and Member Details on Confirmation Page

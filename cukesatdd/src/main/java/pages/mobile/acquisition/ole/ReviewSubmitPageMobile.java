@@ -490,7 +490,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 			}
 
 		}
-		
+	
 		scrollToView(Submit_Disclaimer);
 		scrollToView(Enrollment_Disclaimer_Text);
 		if (validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)) {
