@@ -598,17 +598,6 @@ public abstract class UhcDriver {
 
 	}
 
-
-
-		boolean clickFlag = false;
-
-		// Sets FluentWait Setup
-
-		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
-				.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
-				.ignoring(TimeoutException.class);
-
-
 	public boolean checkElementisEnabled(WebElement element) {
 		System.out.println("Looking for Element to enable .......");
 		try {
