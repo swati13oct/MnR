@@ -1431,18 +1431,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacySearchMobile() {
-		waitforElementNew(menu);
-		if (menu.isDisplayed()) {
-			jsClickMobile(menu);
-			if (OurPlans.isDisplayed()) {
-				jsClickMobile(OurPlans);
-				while (!pharmacylocator.isDisplayed()) {
-					JavascriptExecutor jse = (JavascriptExecutor) driver;
-					jse.executeScript("window.scrollBy(0,100)", "");
-				}
-				jsClickMobile(pharmacylocator);
-			}
-		}
+	
+		MobileMenuAccessPharmacy();
 
 		if (locatePharmacy.getText().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE))) {
 			return new PharmacySearchPageMobile(driver);
