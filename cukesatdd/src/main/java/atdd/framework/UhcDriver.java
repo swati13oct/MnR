@@ -173,7 +173,6 @@ public abstract class UhcDriver {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(toolsToChoosePlan);
-		jsClickNew(DCERedesignLink);
 		scrollToView(PharmacyTool);
 		jsClickNew(PharmacyTool);
 	}
