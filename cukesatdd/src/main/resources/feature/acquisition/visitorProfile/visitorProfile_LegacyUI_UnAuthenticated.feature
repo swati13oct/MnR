@@ -35,7 +35,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
       | Pennsylvania | Lipitor |   15001 | UHC  |
 
   @addDrugsDCEUnAuth
-  Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipCode>
+  Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipCode> - Legacy - <state>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user selects the state drop down value in home page
@@ -65,7 +65,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
       | Virginia | Lipitor |   22320 | UHC  |
 
   @addPlansUnAuth @addPlansULayerSmoke @visitorProfileRegressionAARP
-  Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
+  Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>- Legacy - <state>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user selects the state drop down value in home page
@@ -103,7 +103,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
       | UHC  | Virginia | US1770330 | future   |   22320 | NO            | Alexandria city | MAPD     | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS) |
 
   @addPlansPlanDetailUnAuth @visitorProfileRegressionAARP
-  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+  Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>- Legacy - <state>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user selects the state drop down value in home page
@@ -147,7 +147,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Un Authenticated
       | UHC  | Virginia | US1770330 |   22320 | NO            | MAPD     | future   | Alexandria city | AARP Medicare Advantage Walgreens (PPO),AARP Medicare Advantage (HMO-POS) | Eyewear            | $0 copay every 2 years; up to $200 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $35 copay                   | Hearing Exam           | $0 copay                |
 
   @vpMSSavePlanUnAuth
-  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
+  Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>- Legacy - <state>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user selects the state drop down value in home page
