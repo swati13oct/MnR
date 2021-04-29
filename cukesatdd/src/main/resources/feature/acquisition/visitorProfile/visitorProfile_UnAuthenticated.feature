@@ -65,7 +65,8 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
 
-  @addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
+	#commenting this out as it is already there in the UAT feature file for VP
+  #@addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -93,12 +94,12 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @VisitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP
+    #@VisitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP
     Examples: 
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | AARP | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
-      @VisitorProfile_UHC @regressionUHC  @VP_ProdRegression_UHC @prod_regression
+      #@VisitorProfile_UHC @regressionUHC  @VP_ProdRegression_UHC @prod_regression
     Examples: 
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | UHC  | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |

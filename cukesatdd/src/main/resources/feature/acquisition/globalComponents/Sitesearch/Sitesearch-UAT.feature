@@ -36,7 +36,7 @@ Feature: 1.08 UAT-Site Search Flows
     @prodSanity_UHC @vbfGateUHC @sanity @vbfGate
     Examples: 
       | Scenario           | site | searchValue | newsearchvalue |
-      | E2E Scenario 1_UMS | UHC  | Medcare    | Pharmacy       |
+      | E2E Scenario 1_UMS | UHC  | Medicare    | Pharmacy       |
 
   @SiteSearchULayer @UATRegression
   Scenario Outline: <Scenario>: Verify Error handling on Homepage - <searchValue> - <NewSearchValue> - <site>
