@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="MNR Acquisition Portals Test Suite" data-provider-thread-count="300" thread-count="15">
+<suite name="MNR Acquisition Portals Test Suite" data-provider-thread-count="250" thread-count="15">
 	<listeners>
 		<listener class-name="atdd.framework.TestNGMethodListener" />
 	</listeners>
