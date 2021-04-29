@@ -83,6 +83,9 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
 	public WebElement DCERedesignLink;
+	
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
+	public WebElement PharmacyTool;
 
 	@FindBy(xpath = "//h3//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation' and text()='Get a Plan Recommendation']")
 	public WebElement GetPlanRecoMobile;
@@ -164,6 +167,15 @@ public abstract class UhcDriver {
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(toolsToChoosePlan);
 		jsClickNew(DCERedesignLink);
+	}
+	
+	public void MobileMenuAccessPharmacy() {
+		jsClickNew(MenuMobile);
+		jsClickNew(MenuShopForPlanMobile);
+		jsClickNew(toolsToChoosePlan);
+		jsClickNew(DCERedesignLink);
+		scrollToView(PharmacyTool);
+		jsClickNew(PharmacyTool);
 	}
 
 	public void start(String url) {
