@@ -33,7 +33,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_AMP | AARP | Medicare    | Pharmacy       |
 
-    @prodSanity_UHC @vbfGateUHC @sanity
+    @prodSanity_UHC @vbfGateUHC @sanity @vbfGate
     Examples: 
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_UMS | UHC  | Medicare    | Pharmacy       |
