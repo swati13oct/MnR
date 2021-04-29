@@ -219,7 +219,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page
       | Site | <site> |
 
-    @DCE_E2E_Scenario6_UAT_AARP @regressionAARP
+    @DCE_E2E_Scenario6_UAT_AARP @regressionAARP @prod_regression_UAT
     Examples: 
       | Scenario            | site | path                                                                                                                       | zipcode | county             | isMultutiCounty | plantype | planname                        | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county2           | plantype0 | updateplanname                       | insulinDrug1   | insulinDrug2                                    | insulinCopay |
       | E2E Scenario 6_AARP | AARP | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary |   90210 | Los Angeles County | NO              | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | MAPD      | AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |

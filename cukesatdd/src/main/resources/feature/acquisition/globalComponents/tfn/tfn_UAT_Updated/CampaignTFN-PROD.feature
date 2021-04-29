@@ -1,7 +1,7 @@
 Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
   #######################Script 1: Direct traffic########################################
-  @Scenario_1_2_DirectTraffic_UAT_PROD @UATRegression
+  @Scenario_1_2_DirectTraffic_UAT_PROD @UATRegression @prod_regression_UAT
   Scenario Outline: <scenario> 1.0 Verify TFN in VPP Plan Details and OLE pages, DCE,
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -67,7 +67,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
       | Scenario 1 - AMP | AARP |   90210 | 1-877-699-5710 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[1] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | TiggerOptumID39 | TiggerTigger1 |
 
   #######################Script 9: External Link Plan 11########################################
-  @Scenario_9_External_Link_UAT_PROD @UATRegression
+  @Scenario_9_External_Link_UAT_PROD @UATRegression @prod_regression_UAT
   Scenario Outline: <scenario> 1.0 Verify TFN through External Links
     Given the user Starts WebDriver
     Given the user is on AARP medicare acquisition site from External Link and Land on MA Plans

@@ -91,7 +91,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Scenario 1 - AMP | AARP |   90210 | 1-877-699-5710 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[1] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | TiggerOptumID39 | TiggerTigger2 |
 
   #######################Script 2: Campaign traffic########################################
-  @Scenario_2_CampaignTraffic_UAT @UATRegression
+  @Scenario_2_CampaignTraffic_UAT @UATRegression @prod_regression_UAT
   Scenario Outline: <scenario> Verify TFN for different plan types through Campaign Traffic
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
@@ -288,7 +288,7 @@ Feature: UAT Scripts-To test Campaign TFN in all flows on AARP site
       | Sc. 04.01 - 4.02 | ulayer |   90210 | 8003093 | shop.html | (//a[contains(@class, 'tel')])[1] | shop/compare/compare-ms.html | (//a[contains(@class, 'tel')])[1] | shop/dual-special-needs-plans.html | (//a[contains(@class, 'tel')])[1] | contact-us.html | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1] | enroll/ma-enrollment.html | (//a[contains(@class, 'tel')])[2] | health-plans.html?product=medsup&EBRC=https://www.aarpmedicaresupplement.com/medicare-information-guide.html&intref=AARPMedicareSupplement.com&zipcode=90210&WT.mc_id=23W&#/plan-summary | 11/13/1940 | John      | Carry    | 1-866-242-0247 | 1-855-888-1640 | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[4] | (//a[contains(@class, 'tel')])[3] | (//a[contains(@class, 'tel')])[2] | (//a[contains(@class, 'tel')])[1] | (//a[contains(@class, 'tel')])[2] | (//span[contains(@class,'telephone')])[1] | PDP         | MA         | MS             | next     |
 
   #######################Script 5: Portfolio Campaign Traffic to Med Ed########################################
-  @Scenario_5_Portfolio_CampaignTraffic_MedEd1_UAT @UATRegression
+  @Scenario_5_Portfolio_CampaignTraffic_MedEd1_UAT @UATRegression @prod_regression_UAT
   Scenario Outline: <scenario>1.0 Verify TFN in MedEd Pages and VPP
     Given the user Starts WebDriver
     Given the user is on following acquisition site from Campaign Traffic
