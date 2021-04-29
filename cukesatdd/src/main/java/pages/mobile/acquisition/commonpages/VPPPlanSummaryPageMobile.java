@@ -1155,12 +1155,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void verifyproviderName(String planName) {
-		sleepBySec(2);
+		sleepBySec(5);
 		String rallyProviderName = MRConstants.PROV_NAME;
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//h4[contains(@ng-keydown,'dropDownCollapseCheck')]"));
-		jsClickNew(ProviderSearchLink);
-
+		ProviderSearchLink.click();
 		WebElement ProviderName = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//div[contains(@id,'ProviderName')]"));
 
