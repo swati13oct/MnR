@@ -249,12 +249,10 @@ Feature: 1.05.4 OLE common tool Mobile Flow E2E SNP
       | Plan Type | <plantype> |
     And the user selects plan year
     	|Plan Year	| <planyear>|
-		#And the user validates the available plans for selected plan types
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+	Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
+  Then the user validates Learn more modal for Welcome OLE
     Then the user validates Leave OLE modal for Welcome OLE
     Then the user validates cancellation modal for Welcome OLE
      Then the user navigates to Personal Information Page
@@ -275,21 +273,16 @@ Feature: 1.05.4 OLE common tool Mobile Flow E2E SNP
     Then the user validates the Plan details in Personal Information Page OLE Right Rail
     Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
-   # Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information    
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
       | SSN Number         | <SSNnumber>       	 |
-    #  | PartA Date         | <partadate>         |
-    #  | PartB Date         | <partbdate>         |
       | Card Type          | <cardtype>          |
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
       | Email              | <email>             |
-    Then the user validates TFN in Medicare Info OLE Right Rail
-    Then the user validates the Plan details in Medicare Info OLE Right Rail
-#    Then the user navigates to Preliminary Questions Page
-	Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
+  Then the user validates the Plan details in Medicare Info OLE Right Rail
+Then the user validates Medicare Number and not required ESRD question on Medicare Info Page
       | MedicaidNumber | <medicaidnumber> |
      |Plan Year | <planYear> |
 #    Then the user validates the Plan details in Preliminary Questions Pag OLE Right Rail
@@ -312,17 +305,22 @@ Feature: 1.05.4 OLE common tool Mobile Flow E2E SNP
    			 | MedicaidNumber | <medicaidnumber> |
     Then the user validates the Plan details in SEP Page OLE Right Rail
     Then the user validates SEP options and Required Fields for PlanType in SEP Page
-    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
-#    Then the user navigates to Coverage and Health Information Page   
-    Then the user navigates to Proposed Effective Date Page
+Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
    # Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
+    Then the user selects payment type
+    | Payment Type | <paymentType> |
+    | Card No | <cardno> |
+    | Card Expiration Month | <cardexpirationmonth> |
+    | Card Expiration Year | <cardexpirationyear> |
+    | Card Holder First Name               | <firstname>              |
+    | Card Holder Last Name                | <lastname>               |   
     Then the user navigates to Optional Benefits Page for following plans with available Riders
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
@@ -330,26 +328,15 @@ Feature: 1.05.4 OLE common tool Mobile Flow E2E SNP
     Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
         Then the user validates the Plan and Member details on Review and Submit Page
-    #Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    # Then the user validates Plan and Member Details on Confirmation Page
-    #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-		#Then the user validates the OLE Submission Details in GPS
-    #| Plan Type | <plantype> |
-    
-   # @SNP_OLE_AARP_Future 
-   		Examples: 
+   
+   @SNP_OLE_AARP_Future
     Examples: 
-     | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-     | 15576 | AARP|DSNP-MBI | future|future|  10001 | NO              | New York County | SNP      |  UnitedHealthcare Dual Complete (HMO D-SNP)             | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | true| 123456789|    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
+     | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                                | cardtype | firstname | lastname    | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|phoneno   | mobileno |middlename        |authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|authflag|paymentType|cardno|cardexpirationmonth|cardexpirationyear|
+     | 15576 | AARP|DSNP-MBI | future |future  |  72201 | Yes              | Pulaski County   | SNP      |  UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP)          | MBI      | GOTTFRIED | GARRAND     | 1EG1TE1MK12    | false    | 123456789  |    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | No                    | 876 MailingSt | Mailing LA  | AR           |      72201 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | yes           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|1234567890|2345678901| S                |Test_K         |Test_M        |122 2ND AVE     |655               |MINNEAPOLIS  |55455       |1235678901          |FRIEND               |MN|Agree|566|677|true|||||
   
-     #@SNP_OLE_UHC_Future
-     #Examples: 
-      #| TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|
-     #| 15576 | UHC|DSNP-MBI | future|future|  10001 | NO              | New York County | SNP      |  UnitedHealthcare Dual Complete (HMO D-SNP)             | MBI      | GOTTFRIED | GARRAND     | 5N69QY6ET34    | true| 123456789|    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | Yes                    | 876 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | no           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|
-  #
-      #@SNP_OLE_UHC_DSNP_Future
-     # Examples: 
-     # | TID   | site|PlanType        | Plan Year|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber| partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |inputdataType|
-     # | 15576 | UHC|DSNP-MBI        | future|future|  10001 | NO              | New York County   | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP)           | MBI      | GOTTFRIED | GARRAND  | 5N69QY6ET34    | false   |   11012002 |  01012006 |     0523456789 | true     | 04261944 | Female | 004 Morris Rd | New York    | Yes                    | 803 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NO                | NO      |Valid|
- 		
+     @SNP_OLE_UHC_Future
+     Examples: 
+      | TID   | site|PlanType |planyear|planYear|zipcode | isMultutiCounty | county            | plantype | planName                                             | cardtype | firstname | lastname | medicarenumber | ssnflag |SSNnumber   | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen |healthinsurancename|groupnumber| membernumber|prescriptioncoveragename|pdgroupnumber|pdmembernumber|inputdataType|phoneno   | mobileno |middlename        |authorizefirstN|authorizelastN|authorizeaddress|authorizeapartment|authorizecity|authorizezip|authorizephonenumber|authorizeRelationship|authorizestate|authorizationagree|permaptno|mailingaptno|authflag|paymentType|cardno|cardexpirationmonth|cardexpirationyear|
+     | 15576 | AARP|DSNP-MBI | future|future |  72201   | Yes              | Pulaski County | SNP      |  UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP)          | MBI      | GOTTFRIED | GARRAND     | 1EG1TE1MK12   | false| 123456789|    09011997 |  11012002 |     0123456789 | true     | 04261944 | Female | 123 Perm Rd   | Los Angeles | No                    | 876 MailingSt | Mailing LA  | AR           |      72201 | test@test.com | losing coverage/ moved outside of the service area                                                                                                                                                                                                  | 01012018/01012018       | yes     | yes           | false     | NO                | NO      |HealthInsurance             |HI1562759    | ABC12345DEF     |PrescriptionCoverage            |PD5646136   | BCD12345EFG |Valid|1234567890|2345678901| S                |Test_K         |Test_M        |122 2ND AVE     |655               |MINNEAPOLIS  |55455       |1235678901          |FRIEND               |MN|Agree|566|677|true|||||
+  

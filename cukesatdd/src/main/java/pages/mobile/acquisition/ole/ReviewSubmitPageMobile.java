@@ -490,7 +490,9 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 			}
 
 		}
-
+	
+		scrollToView(Submit_Disclaimer);
+		scrollToView(Enrollment_Disclaimer_Text);
 		if (validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)) {
 			if (Enrollment_Disclaimer_Text.getText()
 					.contains("Submitting your enrollment application electronically")) {
@@ -500,7 +502,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 				flag = false;
 		} else
 			flag = false;
-
+		scrollToView(SubmitApplicationBtn);
 		if (validate(SubmitApplicationBtn)) {
 			if (SubmitApplicationBtn.isEnabled()) {
 				flag = (!flag) ? false : true;
@@ -516,7 +518,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 	public OLEconfirmationPageMobile submitEnrollment() {
 
 		validateNew(SubmitApplicationBtn);
-	//	SubmitApplicationBtn.click();
+		scrollToView(SubmitApplicationBtn);
 		jsClickMobile(SubmitApplicationBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		// waitforElementDisapper(By.xpath("//button[contains(@class,'confirm-button')]"),
@@ -537,7 +539,7 @@ public class ReviewSubmitPageMobile extends UhcDriver {
 			System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 			return new OLEconfirmationPageMobile(driver);
 		} else if (validate(SubmitApplicationBtn)) {
-			SubmitApplicationBtn.click();
+			jsClickMobile(SubmitApplicationBtn);
 			if (driver.getCurrentUrl().contains("confirmation")) {
 				System.out.println("OLE Enrollment Submission Confirmation Page is Displayed");
 				return new OLEconfirmationPageMobile(driver);
