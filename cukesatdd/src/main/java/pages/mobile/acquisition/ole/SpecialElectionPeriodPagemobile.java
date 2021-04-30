@@ -304,7 +304,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		boolean Validation_Flag = true;
 		scrollToView(ChangingNewMedicareRadio);
 		if (ChangingNewMedicareRadio.isDisplayed()) {
-			jsClickNew(ChangingNewMedicareRadio);
+			jsClickMobile(ChangingNewMedicareRadio);
 			if (!validate(OtherReason) && validate(NoneApply)) {
 				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
 				Validation_Flag = true;
@@ -315,7 +315,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		}
 
 		ChangingCurrentMedicareRadio.isDisplayed();
-		jsClickNew(ChangingCurrentMedicareRadio);
+		jsClickMobile(ChangingCurrentMedicareRadio);
 
 		System.out.println("PlanType : " + planType);
 		try {
@@ -324,7 +324,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		// validateNew(ChangingCurrentMedicareRadio);
-		// jsClickNew(ChangingCurrentMedicareRadio);
+		// jsClickMobile(ChangingCurrentMedicareRadio);
 		// ChangingCurrentMedicareRadio.click();
 		if (planType.contentEquals("MA")) {
 			if (validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer)
@@ -401,7 +401,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public CoverageInformationPageMobile navigate_to_Coverage_Information_page() {
 
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		jsClickMobile(NextBtn);
 		/*
 		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", NextBtn);
@@ -474,7 +474,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public ProposedEffectiveDatePageMobile navigate_to_Proposed_Effective_Date_Page() {
 
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		jsClickMobile(NextBtn);
 		waitForPageLoadSafari();
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
@@ -500,11 +500,11 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		Validation_Flag &= NewMedicare.getText().trim()
 				.equalsIgnoreCase("I'm new to Medicare and enrolling for the first time");
 		// System.out.println("SEP plan is Clicked on the " +NewMedicareRadio);
-		jsClickNew(ChangingNewMedicareRadio);
+		jsClickMobile(ChangingNewMedicareRadio);
 
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
 		// validateNew(NextBtn);
-		// jsClickNew(NextBtn);
+		// jsClickMobile(NextBtn);
 
 		return Validation_Flag;
 	}

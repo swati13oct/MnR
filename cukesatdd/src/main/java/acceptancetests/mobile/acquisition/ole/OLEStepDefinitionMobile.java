@@ -3578,4 +3578,64 @@ public class OLEStepDefinitionMobile {
 		VisitorProfilePageMobile visitorProfilePage = personalInformationPage.saveAndReturnLater();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+	
+	@Then("^the user selects payment type$")
+	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
+		boolean flag = false;
+		Map<String, String> paymentInformationMap = new HashMap<String, String>();
+		paymentInformationMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			paymentInformationMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+		String payType = paymentInformationMap.get("Payment Type");
+		String cardNo = paymentInformationMap.get("Card No");
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo);   //.substring(cardNo.length()-4));
+		String cardExpirationMonth = paymentInformationMap.get("Card Expiration Month");
+		String cardExpirationYear =  paymentInformationMap.get("Card Expiration Year");
+		String cardExpirationDate = cardExpirationMonth + cardExpirationYear;
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE, cardExpirationDate);
+		String cardHolderFirstName = paymentInformationMap.get("Card Holder First Name");
+		String cardHolderLastName = paymentInformationMap.get("Card Holder Last Name");
+		String cardHolderName = cardHolderFirstName+" "+cardHolderLastName;
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD, cardHolderName);
+		System.out.println("The payment type selected is "+payType);
+		PlanPremiumPageMobile planPremiumPage = (PlanPremiumPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
+		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
+		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_METHOD, payType);
+		System.out.println("validate premium value");
+		boolean result = planPremiumPage.validatePremiumValue();
+		if(!result)	{
+		if(payType.equalsIgnoreCase("Pay by Mail")) {
+		flag = planPremiumPage.validatePayByMail();
+		}else if(payType.equalsIgnoreCase("Credit Card")) {
+			flag = planPremiumPage.validateCreditCard(cardNo, cardExpirationMonth, cardExpirationYear, cardHolderName);	
+		}else if(payType.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
+			flag = planPremiumPage.validateSocialSecurity();	
+		}
+		if (flag) {
+			System.out.println("Payment is passed");
+			Assertion.assertTrue(true);
+		}
+		else {
+			System.out.println("Payment is failed");
+			Assertion.fail("Payment is failed");
+	}
+	
+		}
+		
+		else {
+			flag = planPremiumPage.validateNoMonthlyPremium();
+			if (flag) {
+				System.out.println("No Monthly Premium validation is passed");
+				Assertion.assertTrue(true);
+			}
+			else {
+				System.out.println("No Monthly Premium validation is failed");
+				Assertion.fail("No Monthly Premium validation is failed");
+			}
+		}
+	}
+	
 }
