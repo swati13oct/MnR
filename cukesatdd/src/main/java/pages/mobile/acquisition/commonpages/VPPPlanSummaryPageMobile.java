@@ -271,7 +271,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(id = "drugsTabId")
 	public WebElement step1;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(xpath = "//button[@id='enrollment-next-button']")
 	private WebElement NextBtn;
 
 	@FindBy(xpath = "//div[contains(@id,'plan-list-') and not(contains(@class,'ng-hide'))]/div[contains(@class,'plan-list-content')]")
@@ -1081,7 +1081,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		scrollToView(ProviderSearchLink);
-		validateNew(ProviderSearchLink);
+		//validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -5241,6 +5241,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new pages.mobile.acquisition.commonpages.ComparePlansPageMobile(driver);
 		return null;
+		
+		
 
 	}
 

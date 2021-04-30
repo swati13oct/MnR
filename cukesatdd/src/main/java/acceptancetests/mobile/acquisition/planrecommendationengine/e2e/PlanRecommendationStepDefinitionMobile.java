@@ -739,7 +739,8 @@ public class PlanRecommendationStepDefinitionMobile {
 	public void view_drugs_PRE_VPP_page() {
 		PlanRecommendationEngineResultsPageMobile planSelectorResultspage = new PlanRecommendationEngineResultsPageMobile(
 				wd);
-		planSelectorResultspage.drugsDetailsPREtoVPP();
+		//planSelectorResultspage.drugsDetailsPREtoVPP();
+		planSelectorResultspage.verifyDrugPREVPP();
 		// planSelectorResultspage.MobileMenu();
 	}
 

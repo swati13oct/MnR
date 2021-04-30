@@ -170,6 +170,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(id = "proceed")
 	private WebElement proceedLeaveAARPMedicare;
+	
+	@FindBy(xpath = "//a[@class='viewLink disclaimer']")
+	private WebElement disclaimerLnkMobile;
 
 	// @FindBy(xpath = ".//*[contains(@class,
 	// 'meded-article-content__section')]//*[contains(text(), 'Request an
@@ -1832,7 +1835,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		MobileMenuToolsToHelp();
 
-		
+		scrollToView(ProviderSearch);
+		ProviderSearch.click();
 		switchToNewTabNew(ProviderSearch);
 
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -2105,7 +2109,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void selectState(String state) {
 		pageloadcomplete();
-		selectFromDropDownByValue(stateDropDown, state);
+		//selectFromDropDownByValue(stateDropDown, state);
+		mobileSelectOption(stateDropDown, state, true);
+		
 
 	}
 
@@ -3230,6 +3236,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void clickComplaintFormLink() {
+		/*Open Disclaimer Link section on mobile to validate complaint form*/
+		disclaimerLnkMobile.click();
 		WebElement lnkComplaintForm = driver.findElement(By.xpath("(//a[contains(text(),'Complaint Form')])[1]"));
 		validateNew(lnkComplaintForm);
 		scrollToView(lnkComplaintForm);

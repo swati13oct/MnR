@@ -39,6 +39,8 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 	public static ArrayList<String> drugNames = new ArrayList<String>();
 	public static ArrayList<String> drugNamesStartOver = new ArrayList<String>();
 	public static ArrayList<String> drugNamesinPRE = new ArrayList<String>();
+	
+
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;

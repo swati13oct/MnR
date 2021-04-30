@@ -32,6 +32,7 @@ import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
 public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements {
 
@@ -635,6 +636,31 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		pageloadcomplete();
 
 	}
+	
+
+	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
+	static ArrayList<String> addedDrugNames = new ArrayList<String>();
+	
+	public ArrayList<String> getDrugsVPP() {
+		threadsleep(5000);
+		validate(drugsInfoMA1stPlan, 60);
+		mobileUtils.mobileLocateElement(drugsInfoMA1stPlan);
+		mobileUtils.mobileLocateElementClick(drugsInfoMA1stPlan);
+		vppDrugsResults = new ArrayList<String>();
+		for (WebElement e : drugsListMA1stPlan) {
+			vppDrugsResults.add(e.getText().replace("\n", " ").replace("  ", " ").trim());
+		}
+		return vppDrugsResults;
+	}
+	
+	public void verifyDrugPREVPP() {
+		waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		threadsleep(5000);// Plan loader
+		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+		getDrugsVPP();
+		containsname(vppDrugsResults, DrugMobilePage.addedDrugNames);
+	}
+
 
 	public void drugsDetailsPREtoVPP() {
 		System.out.println("Validating PRE Drugs Details in VPP Page Plan Type: ");

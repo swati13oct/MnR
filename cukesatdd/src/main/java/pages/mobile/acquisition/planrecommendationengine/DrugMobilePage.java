@@ -627,7 +627,7 @@ public class DrugMobilePage extends UhcDriver {
 				"Expected Error Message not displayed");
 	}
 
-	static ArrayList<String> addedDrugNames = new ArrayList<String>();
+	public static ArrayList<String> addedDrugNames = new ArrayList<String>();
 	
 	public void addDrugsPRE(String drugsDetails) {
 		drugsInitiate("Yes");
