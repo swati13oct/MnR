@@ -77,13 +77,12 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//b[contains(text(),'MENU')]")
 	public WebElement MenuMobile;
 
-
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
 	public WebElement DCERedesignLink;
-	
+
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
 	public WebElement PharmacyTool;
 
@@ -95,7 +94,7 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//p[@class='dropdown-btn'][normalize-space()='Tools to help you choose a plan']")
 	public WebElement toolsToChoosePlan;
-	
+
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
 	public WebElement ProviderSearch;
 
@@ -115,8 +114,7 @@ public abstract class UhcDriver {
 		scrollToView(GetPlanRecoMobile);
 		jsClickNew(GetPlanRecoMobile);
 	}
-	
-	
+
 	public void MobileMenuProviderSearch() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
@@ -153,13 +151,13 @@ public abstract class UhcDriver {
 		jsClickNew(MenuShopForPlanMobile);
 		// jsClickNew(ShopTool);
 	}
-	
+
 	public void MobileMenuToolsToHelp() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		scrollToView(toolsToChoosePlan);
 		jsClickNew(toolsToChoosePlan);
-		
+
 	}
 
 	public void MobileMenuAccessDCE() {
@@ -168,7 +166,7 @@ public abstract class UhcDriver {
 		jsClickNew(toolsToChoosePlan);
 		jsClickNew(DCERedesignLink);
 	}
-	
+
 	public void MobileMenuAccessPharmacy() {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
@@ -552,7 +550,7 @@ public abstract class UhcDriver {
 
 		return jsonObject;
 	}
-	
+
 	public void iOSClick(WebElement element) {
 
 		boolean clickFlag = false;
@@ -1472,8 +1470,16 @@ public abstract class UhcDriver {
 
 	public void jsClickMobile(WebElement element) {
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript("arguments[0].click();", element);
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
+		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+			iOSClick(element);
+
+		}
+
 	}
 
 	public String returnDriverStorageJS(String StorageType, String StorageKey) {
