@@ -304,7 +304,7 @@ public class PlanPremiumPage extends UhcDriver{
 			if(socialSecurity.isDisplayed())	{
 				jsClickNew(socialSecurity);
 				Thread.sleep(1000);
-				actualText = socialSecurityText.getText().trim();
+				actualText = socialSecurityText.getText().replaceAll("\u00A0"," ").trim();
 				expectedText = CommonConstants.SOCIAL_SECURITY_TEXT;
 				flag = actualText.equalsIgnoreCase(expectedText);
 				

@@ -992,7 +992,7 @@ public class CommonConstants {
 	
 	public static String NO_MONTHLY_PREMIUM_TEXT = "The plan you have chosen does not have a monthly premium.";
 	
-	public static String LAST_ENROLLMENT_PENALITY_TEXT = "If you need to pay a late enrollment penality(LEP) you will receive a bill in the email.";
+	public static String LAST_ENROLLMENT_PENALITY_TEXT = "If you need to pay a late enrollment penality (LEP) you will receive a bill in the email.";
 	
 	public static String PART_D_INCOME_TEXT = "If you must pay a Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA) Social Security(SS) will send you a letter and ask you how you want to pay it:";
 	
