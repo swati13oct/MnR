@@ -5446,10 +5446,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				}
 			}
 			if(navigateComparePage.equalsIgnoreCase("Yes")) {
-			action.moveToElement(compareButton).build().perform();
+//			action.moveToElement(compareButton).build().perform(); 	//Does not work on Safari browser
+			jsMouseOver(compareButton);
 			compareButton.click();
 			Thread.sleep(2000);
-			action.moveToElement(comparePageHeader).build().perform();
+//			action.moveToElement(comparePageHeader).build().perform();   //Does not work on Safari browser
+			jsMouseOver(comparePageHeader);
 			if (comparePageHeader.isDisplayed()) {
 				flag = true;
 			}
@@ -5472,7 +5474,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 					WebElement savePlanLink = driver
 							.findElement(By.xpath("(//*[@class='unliked buttonIntoText'])[" + plans + "]"));
 					
-					action.moveToElement(savePlanLink).build().perform();
+//					action.moveToElement(savePlanLink).build().perform(); //Does not work on Safari browser
+					jsMouseOver(savePlanLink);
 					savePlanLink.click();
 					Thread.sleep(10000);
 					plans = plans - 1;
@@ -5493,20 +5496,24 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			}
 		} else if (btn.equalsIgnoreCase("Information")) {
 			Thread.sleep(2000);
-			action.moveToElement(editYourInformationLink).build().perform();
+//			action.moveToElement(editYourInformationLink).build().perform(); //Does not work on Safari browser
+			jsMouseOver(editYourInformationLink);
 			editYourInformationLink.click();
 			Thread.sleep(2000);
-			action.moveToElement(DOB).build().perform();
+//			action.moveToElement(DOB).build().perform();   //Does not work on Safari browser
+			jsMouseOver(DOB);
 			if (DOB.isDisplayed()) {
 				flag = true;
 			}
 
 		} else {
 			Thread.sleep(2000);
-			action.moveToElement(ViewPlanMedSupPage).build().perform();
+//			action.moveToElement(ViewPlanMedSupPage).build().perform();   //Does not work on Safari browser
+			jsMouseOver(ViewPlanMedSupPage);
 			ViewPlanMedSupPage.click();
 			Thread.sleep(2000);
-			action.moveToElement(compareButton).build().perform();
+//			action.moveToElement(compareButton).build().perform();   //Does not work on Safari browser
+			jsMouseOver(compareButton);
 			if (compareLink.isDisplayed()) {
 				flag = true;
 			}
