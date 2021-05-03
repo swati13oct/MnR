@@ -875,7 +875,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	private WebElement nextBestActionModalSelectPlanBtn;
 
 	//@FindBy(xpath = "(//*[contains(@class,'show active')]//*[contains(@class,'swiper-container')]//button[contains(text(),'Compare plans')])[1]")
-	@FindBy(xpath = "(//button[text()='Compare'])[1]")
+	@FindBy(xpath = "(//button[contains(text(),'Compare')])[1]")
 	private WebElement compareButton;
 
 	//@FindBy(xpath = "//span[@class='size36 semiBoldText colorPrimaryBlue']")

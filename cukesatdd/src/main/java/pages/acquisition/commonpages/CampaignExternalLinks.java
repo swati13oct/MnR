@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -942,5 +943,44 @@ public class CampaignExternalLinks extends UhcDriver {
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
+	}
+	
+	public void updateHrefUrlVPP(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-530621114']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
+		}
+	}
+	
+	public void updateHrefUrlDCE(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-1095029748']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
+		}
+	}
+	
+	public void updateHrefUrlPRE(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-565183562']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
+		}
 	}
 }
