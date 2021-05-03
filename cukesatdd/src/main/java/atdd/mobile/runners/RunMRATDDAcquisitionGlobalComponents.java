@@ -9,7 +9,7 @@ import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
-				features = {"src/main/resources/feature/mobile/acquisition/globalComponents"},
+				features = {"src/main/resources/feature/acquisition/globalComponents"},
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",

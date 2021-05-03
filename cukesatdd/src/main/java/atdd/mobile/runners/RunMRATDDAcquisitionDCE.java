@@ -9,7 +9,7 @@ import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
-				features = {"src/main/resources/feature/mobile/acquisition/dceredesign"},
+				features = {"src/main/resources/feature/acquisition/dceredesign"},
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",
@@ -17,7 +17,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@regressionAARP")
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionDCE extends BaseTestConfig {
 
 	@Test(dataProvider = ScenarioDataProvider)

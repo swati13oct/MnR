@@ -10,7 +10,7 @@ import io.cucumber.testng.PickleWrapper;
 
 
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
-				features = {"src/main/resources/feature/mobile/acquisition/vpp"},
+				features = {"src/main/resources/feature/acquisition/vpp"},
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",
@@ -18,7 +18,7 @@ import io.cucumber.testng.PickleWrapper;
 						"timeline:target" },
 				tags = "@regression")
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionVPP extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
