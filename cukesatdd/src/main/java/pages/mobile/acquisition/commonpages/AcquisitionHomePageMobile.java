@@ -30,7 +30,6 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
-import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
@@ -3595,15 +3594,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	
-	public void clickUnitedHealthcareMedicareSolutions() {
-//		threadsleep(8);
-		threadsleep(5000);
-//			UnitedHealthcareMedicareSolutions.click();
-		jsClickNew(UnitedHealthcareMedicareSolutions);
-	}
-
-	
 	public void clickVisitAARPFooterLink() {
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			switchToNewTabNew(visitAARPFooterLink);
@@ -3617,38 +3607,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 
-	}
-	
-	@FindBy(xpath = "//div[contains(@class,'companyNameHeader')]//*[contains(text(),'UnitedHealthcare Insurance Company')]")
-	private WebElement UHCICSubTitle;
-	
-	public void validateSubtitle() {
-		threadsleep(5);
-		if (UHCICSubTitle.isDisplayed()) {
-			System.out.println("validating the sub header");
-			//Assertion.assertEquals(UHCICSubTitle.getText(), "UnitedHealthcare Insurance Company (UnitedHealthcare)");
-			if(UHCICSubTitle.getText().contains("UnitedHealthcare Insurance Company ")) {
-				Assertion.assertTrue(true);
-			}
-		}
-
-	}
-	
-	public pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage Hoveronaplan() throws InterruptedException {
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
-				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
-			System.out.println("Hove Action skipped on Mobile");
-		}
-		else 
-		waitforElement(ShopForaplan);
-		if (ShopForaplan.isDisplayed()) {
-//            Actions action = new Actions(driver);
-//            action.moveToElement(ShopForaplan).build().perform();
-			jsMouseOver(ShopForaplan);
-			return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
-		} else {
-			return null;
-		}
 	}
 
 	public LearnAboutMedicareHomePageMobile clickLearnMoreOnHomePage() {

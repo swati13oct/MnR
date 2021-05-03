@@ -35,7 +35,6 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -50,16 +49,6 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
-
-	@FindBy(id = "addDrugComponentWrap")
-	public WebElement addDrugComponentWrap;
-
-	@FindBy(xpath = "//*[@id='addDrugComponentWrap']//button[text()='Get Started']")
-	public WebElement getStartedAddDrugNBA;
-
-	@FindBy(id = "findProvidersComponentWrap")
-	public WebElement findProvidersComponentWrap;
-
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
 	private WebElement PassportFlyerPDF;
 
@@ -941,7 +930,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public ProviderSearchPageMobile clickNextBestActionModalFindMyDoctorsBtn() {
 		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
-		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -949,8 +938,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		for (int i = 0; i < initialCount + 1; i++) {
 			driver.switchTo().window(tabs.get(i));
 			currentHandle = driver.getWindowHandle();
-			// if
-			// (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
+//			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
 			if (!currentHandle.contentEquals(CommonConstants.getMainWindowHandle()))
 				break;
 		}
@@ -1087,13 +1075,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 
-		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		scrollToView(ProviderSearchLink);
-		// validateNew(ProviderSearchLink);
+		//validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -2238,8 +2226,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		 * if(ReferRequired.equals(referralRequired)){
 		 * System.out.println("Referral Required Benefit for the plan is " +
 		 * ReferRequired); Assertion.assertTrue(true); } else
-		 * Assertion.fail("Referral Required Benefit for the plan is incorrect : "
-		 * +planName );
+		 * Assertion.fail("Referral Required Benefit for the plan is incorrect : "+planName
+		 * );
 		 */
 	}
 
@@ -2832,14 +2820,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Click to close on the create profile popup");
 
 			String State = CommonConstants.getSelectedState();
-			/*
-			 * if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) { if
-			 * (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") ||
-			 * CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") ||
-			 * CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {
-			 */
+			/*if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
+				if (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania")
+						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico")
+						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {*/
 			if (!StringUtils.isNullOrEmpty(State)) {
-				if (State.equalsIgnoreCase("Pennsylvania") || State.equalsIgnoreCase("Puerto Rico")
+				if (State.equalsIgnoreCase("Pennsylvania")
+						|| State.equalsIgnoreCase("Puerto Rico")
 						|| State.equalsIgnoreCase("Virginia")) {
 					if (validate(closeProfilePopup))
 						jsClickNew(closeProfilePopup);
@@ -3023,8 +3010,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		String testPlanXpath = "//*[contains(text(),'" + unsavePlan + "') and contains(@class,'ng-binding')]";
 		List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
 		int expMatch = 1;
-		Assertion.assertTrue("PROBLEM - unable to locate plan='" + unsavePlan + "'.  Expect number of match='"
-				+ expMatch + "' | Actual number of match='" + listOfPlans.size() + "'", listOfPlans.size() == expMatch);
+		Assertion.assertTrue("PROBLEM - unable to locate plan='" + unsavePlan + "'.  Expect number of match='" + expMatch
+				+ "' | Actual number of match='" + listOfPlans.size() + "'", listOfPlans.size() == expMatch);
 
 		System.out.println("Proceed to validate 'Saved Plan' icon is there before clicking to unsave it");
 		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
@@ -3160,8 +3147,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				validate(emailPlanSummaryFieldBox));
 		Assertion.assertTrue("PROBLEM - unable to locate send button on email popup screen after email link is clicked",
 				validate(emailPlanSummarySendButton));
-		Assertion.assertTrue(
-				"PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
+		Assertion.assertTrue("PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
 				validate(emailPlanSummaryCancelButton));
 
 		System.out.println("Proceed to click cancel button on email screen, email screen should close");
@@ -3338,8 +3324,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
 		jsClickNew(DOB);
-		// DOB.sendKeys(DateOfBirth);
-		sendkeysMobile(DOB, DateOfBirth);
+		DOB.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
 		jsClickNew(MaleGender);
@@ -4976,7 +4961,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public ProviderSearchPageMobile clicksOnIsProviderCoveredUms(String planName) {
 
-		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
 		try {
@@ -5256,56 +5241,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new pages.mobile.acquisition.commonpages.ComparePlansPageMobile(driver);
 		return null;
+		
+		
 
-	}
-
-	public void removeAddedDrugs(String planType, String planName) {
-		List<WebElement> drugLinkDropdown = driver.findElements(By.xpath(
-				"//div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
-
-		if (drugLinkDropdown.size() > 0)
-			drugLinkDropdown.get(0).click();
-
-		List<WebElement> addedDrugs = driver.findElements(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'remove-icon')]"));
-		int noOfDrugs = addedDrugs.size();
-
-		if (addedDrugs != null) {
-			for (int i = 0; i < noOfDrugs; i++) {
-				addedDrugs.get(i).click();
-				threadsleep(5);
-				System.out.println("Drug removed:" + (i + 1));
-			}
-		}
-
-	}
-
-	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCEFromNBA(String planType,
-			String planName) {
-
-		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
-			if (validate(addDrugComponentWrap)) {
-				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
-			} else if (validateNew(findProvidersComponentWrap)) {
-				removeAddedDrugs(planType, planName);
-				validateNew(addDrugComponentWrap);
-				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
-			}
-
-		} else if (planType.equalsIgnoreCase("PDP")) {
-			if (validate(addDrugComponentWrap)) {
-				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
-			}
-			if (validateNew(findProvidersComponentWrap)) {
-				removeAddedDrugs(planType, planName);
-				validateNew(addDrugComponentWrap);
-				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
-			}
-		} else if (planType.equalsIgnoreCase("MS") || planType.equalsIgnoreCase("SNP")) {
-			Assertion.fail("NBA is not available for the Plantype: " + planType);
-
-		}
-		return new pages.mobile.acquisition.dceredesign.GetStartedPageMobile(driver);
 	}
 
 }

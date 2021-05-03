@@ -7,7 +7,6 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -20,16 +19,11 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.ProviderSearchPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -405,82 +399,4 @@ public class SiteSearchMobile {
 		}
 	}
 
-	
-	/**
-	 * @toDo: user Enters a zipcode
-	 */
-	@When("^the user enters the zipcode and counts the plan$")
-	public void user_enters_the_zipcode_and_counts_plans(DataTable givenAttributes) {
-
-			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-						memberAttributesRow.get(i).getCells().get(1));
-			}*/
-
-			String zipcode = memberAttributesMap.get("Zip Code");
-			String plancount = memberAttributesMap.get("Plancount");
-			String planYear = memberAttributesMap.get("Year");
-
-		{
-			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
-					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			
-			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode,planYear);
-			 int strplancount = Integer.parseInt(plancount);
-			 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
-			 if(intPlanCounts!=strplancount){
-				Assertion.fail("Plan count is not matching");
-			 }
-			
-
-		}
-	}
-	
-	@Then("^the user validates Drug Recommendation section$")
-	public void the_user_validates_Drug_Recommendation_section() throws Throwable {
-		BuildYourDrugListMobile buildYourDrugsListPage = (BuildYourDrugListMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		buildYourDrugsListPage.validateDrugRecommendationSection(druglist);
-	}
-	
-	
-	@Then("^the user clicks on the united health care medicare solutions link$")
-	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
-
-	}
-	
-	@Then("^user changes zipcode within VPP page$")
-	public void User_Change_ZipCode_VPP_page(DataTable givenAttributes) {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		
-		if (plansummaryPage != null) {
-			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
-			plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode, county, isMultiCounty);
-		} else {
-			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
-		}
-	}
 }

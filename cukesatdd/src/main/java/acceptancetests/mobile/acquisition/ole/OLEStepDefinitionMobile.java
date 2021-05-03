@@ -9,7 +9,6 @@ import java.util.Random;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
@@ -24,9 +23,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.ShopForPlanNavigationPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
@@ -3642,110 +3638,4 @@ public class OLEStepDefinitionMobile {
 		}
 	}
 	
-	
-	@And("^the user selects the state drop down value in home page$")
-	public void the_user_selects_the_state_drop_down_value_in_AARP_home_page(DataTable givenAttributes) {
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
-
-		String state = givenAttributesMap.get("State");
-		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-//		CommonConstants.SELECTED_STATE = state;
-		CommonConstants.setSelectedState(state);
-
-		acqHomePage.selectState(state);
-	}
-	
-	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
-	public void the_user_on__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		String site = memberAttributesMap.get("Site");
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
-		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
-
-		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
-		if (site.equalsIgnoreCase("AARP")) 
-		aquisitionhomepage.validateSubtitle();
-	}
-
-
-	@Given("^the user hovers screen over the shop for a plan$")
-	public void the_user_hovers_screen_over_the_shop_for_a_plan() throws Throwable {
-		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage shop = acqusitionHomePage.Hoveronaplan();
-		/*if (shop != null) {
-			System.out.println("Shop for a plan drop down is opened");
-			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
-		} else {
-			Assertion.fail("Issue in selecting a plan drop down");
-		}*/
-	}
-	
-	@Then("^the site user clicks on View Plans Button proceed to View Plans Page$")
-	public void the_site_user_clicks_on_View_Plans_Button_proceed_to_View_Plans_Page_button(DataTable givenAttributes)
-			throws Throwable {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-
-		String DateOfBirth = memberAttributesMap.get("DOB");
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.MedSupFormValidation(DateOfBirth);
-	}
-
-
-	@When("the user selects plan year for PRE Flow$")
-	public void user_selects_plan_year_for_PRE_Flow(DataTable givenAttributes) {
-
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
-
-		String planYear = givenAttributesMap.get("Plan Year");
-		// VPPPlanSummaryPage plansummaryPage = null;
-		// VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
-		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(
-				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
-		// getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
-		// plansummaryPage);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planYear);
-
-	}
-
-
-
 }
