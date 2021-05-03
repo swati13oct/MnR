@@ -144,11 +144,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
 
 		String State = CommonConstants.getSelectedState();
-		/*if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
-				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
-		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania")
-				|| StringUtils.equalsIgnoreCase(State, "Puerto Rico")
+		/*
+		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
+		 * "Pennsylvania") ||
+		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
+		 * {
+		 */
+		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			for (String plan : listOfTestPlans) {
 				Assertion.assertEquals(plan,
@@ -199,11 +202,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public GetStartedPageMobile addDrug_DCERedesign() {
 
 		String State = CommonConstants.getSelectedState();
-		/*if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
-				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
-		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania")
-				|| StringUtils.equalsIgnoreCase(State, "Puerto Rico")
+		/*
+		 * if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
+		 * "Pennsylvania") ||
+		 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+		 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))
+		 * {
+		 */
+		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
 			jsClickNew(addrugs);
 		} else {
@@ -499,9 +505,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
 			System.out.println(plan);/*
-			System.out.println(driver.findElement(By.xpath(
-					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());*/
+										 * System.out.println(driver.findElement(By.xpath(
+										 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+										 * + plan + "')]")) .getText());
+										 */
 			Assertion.assertEquals(plan, driver.findElement(By.xpath(
 					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
 					.getText());
@@ -528,6 +535,50 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
+	public WebElement loginLink;
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	public WebElement signOutLink;
+
+	public void logIn(String username, String password) {
+		try {
+
+			loginLink.click();
+			waitForPageLoadSafari();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			System.out.println("before signin");
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			System.out.println("before wait");
+			waitForPageLoadSafari();
+			waitforElement(driver.findElement(By.cssSelector("#securityQues")));
+			System.out.println("after wait");
+			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("#UnrecognizedSecAns_input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				//securityAnswer.sendKeys("color1");
+				sendkeysMobile(securityAnswer, "color1");
+			} else {
+				System.out.println("Question is related to phone");
+				//securityAnswer.sendKeys("number1");
+				sendkeysMobile(securityAnswer, "number1");
+			}
+			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			CommonUtility.waitForPageLoadNew(driver, signOutLink, 20);
+
+		} catch (Exception e) {
+			Assertion.fail("###############Optum Id Sign In failed###############");
+		}
+
 	}
 
 	public VisitorProfilePageMobile validateVisitorProfilePage() {

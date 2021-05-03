@@ -29,6 +29,18 @@ import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 
 public class DrugDetailsPageMobile extends UhcDriver {
+	
+	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
+	public WebElement dceNBAModal;
+
+	@FindBy(xpath = "//*[@id='guest-flow-widget-head' and text()='Save your work for later']")
+	public WebElement dceNBAModalMsg;
+
+	@FindBy(xpath = "//button/*[text()='Create Your Profile']")
+	public WebElement dceNBAModalBtn;
+	
+	@FindBy(id = "SignIn")
+	public WebElement signInBtn;
 
 	@FindBy(xpath = "//*[@id='plancopaydetail']")
 	public WebElement CopaySection;
@@ -1415,6 +1427,18 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion.fail("Back to profile not displayed ");
 		}
 	}
+	
+	public void validateDCENBAModal() {
+		if (validateNew(dceNBAModal)) {
+			validateNew(dceNBAModalMsg);
+			validateNew(dceNBAModalBtn);
+			dceNBAModalBtn.click();
+			waitforElement(signInBtn);
+			Assertion.assertTrue("user not navigated to login page",
+					driver.getCurrentUrl().contains("app/index.html#/login"));
+		}
+	}
+
 
 	public void validateNotCoveredPharmacyView() {
 		if (validate(YourDrugs_Table) || validate(LinktoEditDrugList) || validate(MonthlyDrugStage_Header)
@@ -1427,5 +1451,62 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		System.out.println(
 				"***** Your Drugs, Monthly Costs by Stage, Copay and Coinsurance and Monthly Drugs costs Sections are not displayed *****");
 	}
+	
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='PDP']")
+	private WebElement clickPdpplan;
+
+	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='SNP']")
+	private WebElement clickSnpplan;
+
+	
+	
+	public void clickOnSNPPlan() {
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		validateNew(clickSnpplan);
+		JavascriptExecutor je = (JavascriptExecutor) driver;
+		je.executeScript("arguments[0].click()", clickSnpplan);
+	}
+	
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]")
+	public WebElement LIS_CopaySection;
+
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Initial Coverage Stage')]//parent::div")
+	public WebElement LIS_CopayHeader;
+
+	@FindBy(xpath = "//*[contains(@id, 'lisbuydown')]//*[contains(text(), 'All covered drugs:')]")
+	public WebElement LIS_BuyDown_Copay;
+
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//parent::div")
+	public WebElement LIS_Deductible;
+
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//following::a[contains(text(), 'Learn more about Extra Help')]")
+	public WebElement LIS_DeductibleLISLink;
+
+	@FindBy(xpath = "//*[contains(@alt, 'alert')]//following::*[contains(text(), 'level of Extra Help')]")
+	public WebElement LIS_Alert;
+
+	public void validateLISBuyDown_CopaySection_LISAlert() {
+		if (validateNew(LIS_CopaySection) && validateNew(LIS_BuyDown_Copay) &&
+		// !validate(LIS_CopayHeader) &&
+				validateNew(LIS_Deductible) && validateNew(LIS_DeductibleLISLink) && validateNew(LIS_Alert)) {
+			System.out.println(
+					"***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
+			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Buydown Plan *****");
+			System.out.println(LIS_BuyDown_Copay.getText());
+			System.out.println("***** Deductible for LIS Buydown and LIS link Displayed *****");
+			System.out.println(LIS_Deductible.getText());
+			System.out.println("***** Alert Displayed for LIS Buydown *****");
+			System.out.println(LIS_Alert.getText());
+		} else
+			Assertion.fail(
+					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
+	}
+
 
 }

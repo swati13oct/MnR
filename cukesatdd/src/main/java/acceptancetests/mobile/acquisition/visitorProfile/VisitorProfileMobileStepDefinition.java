@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
@@ -14,8 +15,10 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
@@ -23,6 +26,8 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.VisitorProfileTestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.shopperprofile.ProfileSearch;
+import pages.acquisition.shopperprofile.ShopperProfileAgentLogin;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
@@ -61,6 +66,73 @@ public class VisitorProfileMobileStepDefinition {
 		
 		acqHomePage.selectState(state);
 	}
+	
+	@And("^the user login with optum Id credentials$")
+	public void the_user_login_with_optum_Id_credentials(DataTable credentials) {
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}*/
+		String username = plannameAttributesMap.get("User Name");
+		String password = plannameAttributesMap.get("Password");
+		WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		VisitorProfilePageMobile visitorProfile = new VisitorProfilePageMobile(driver);
+		System.out.println("credentials" + username + password);
+		visitorProfile.logIn(username, password);
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
+	}
+	
+	
+	@Given("^I am an agent logged into the cloak in tool$")
+	public void i_am_an_agent_logged_into_the_cloak_in_tool(DataTable userData){
+		
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(userData);
+		/*List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+		String userName = givenAttributesMap.get("User Name");
+		String password = givenAttributesMap.get("Password");
+	    
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		pages.mobile.acquisition.commonpages.ShopperProfileAgentLogin shopperProfilePage = new pages.mobile.acquisition.commonpages.ShopperProfileAgentLogin(wd);
+		getLoginScenario().saveBean(PageConstants.SHOPPER_PROFILE_PAGE, shopperProfilePage);
+		
+		pages.mobile.acquisition.commonpages.ProfileSearch profileSearch = shopperProfilePage.doAgentLogin(userName, password);
+		getLoginScenario().saveBean(PageConstants.PROFILE_SEARCH, profileSearch);
+		
+	}
+	
+	@And("^the user selects the state drop down value in home page$")
+	public void the_user_selects_the_state_drop_down_value_in_AARP_home_pages(DataTable givenAttributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String state = givenAttributesMap.get("State");
+		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+//		CommonConstants.SELECTED_STATE = state;
+		CommonConstants.setSelectedState(state);
+
+		acqHomePage.selectState(state);
+	}
+
 	
 	@And("^user delets the added plans on visitor profile page$")
 	public void user_delets_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {

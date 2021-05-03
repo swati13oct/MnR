@@ -565,6 +565,20 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		return new VPPPlanSummaryPageMobile(driver);
 
 	}
+	
+	public int entersZipcodeAndPlancount(String zipcode, String year) {
+
+		validateNew(zipCodeTextfield);
+		//zipCodeTextfield.sendKeys(zipcode);
+		sendkeysMobile(zipCodeTextfield, zipcode);
+		validateNew(continueButton);
+		jsClickNew(continueButton);
+		selectYear(year);
+
+		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+
+		return topicDropDownValues.size();
+	}
 
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
