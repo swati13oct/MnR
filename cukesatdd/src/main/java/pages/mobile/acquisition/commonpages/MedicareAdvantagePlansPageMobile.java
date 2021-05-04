@@ -3,6 +3,8 @@ package pages.mobile.acquisition.commonpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.commonpages.PageTitleConstants;
+
 public class MedicareAdvantagePlansPageMobile extends GlobalWebElements {
 	
 
@@ -23,7 +25,7 @@ public class MedicareAdvantagePlansPageMobile extends GlobalWebElements {
 		medicareSupplementInsurancePlansLink.click();
 		validate(medicareSupplementInsurancePlansLink);
 		
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_SUPPLEMENT_INSURANCE_PLANS)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_SUPPLEMENT_INSURANCE_PLANS)) {
 			return new MedicareSupplementInsurancePlansPageMobile(driver);
 		}else{
 		
@@ -38,7 +40,7 @@ public class MedicareAdvantagePlansPageMobile extends GlobalWebElements {
 		validate(medicareAdvantagePlansRequestMoreHelpLink);
 		medicareAdvantagePlansRequestMoreHelpLink.click();
 		validate(medicareAdvantagePlansRequestMoreHelpLink);
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_REQUEST_AARP_MA_PLAN_INFORMATION)){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_REQUEST_AARP_MA_PLAN_INFORMATION)){
 			return new MedicareAdvantageRequestMoreHelpPageMobile(driver);
 		}
 	

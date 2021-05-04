@@ -6,6 +6,8 @@ package pages.mobile.acquisition.commonpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.commonpages.PageTitleConstants;
+
 /**
  * @author snagpa4
  *
@@ -29,7 +31,7 @@ public class PrescriptionDrugRequestMoreHelpPageMobile extends GlobalWebElements
 		validate(headerMedicareSupplementPlansLink);
 		headerMedicareSupplementPlansLink.click();
 		validate(headerMedicareSupplementPlansLink);
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_SUPPLEMENT_INSURANCE_PLANS)){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_SUPPLEMENT_INSURANCE_PLANS)){
 			return new MedicareSupplementInsurancePlansPageMobile(driver);
 		}
 		return null;

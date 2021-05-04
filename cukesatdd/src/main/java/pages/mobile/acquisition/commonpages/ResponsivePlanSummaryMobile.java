@@ -22,12 +22,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
-import pages.mobile.acquisition.commonpages.Rallytool_Page;
-import pages.mobile.acquisition.commonpages.VPPAarpNeedAStepBackWidgetMobile;
-import pages.mobile.acquisition.commonpages.VPPAarpNeedHelpWidgetPageMobile;
-import pages.mobile.acquisition.commonpages.VPPNeedMoreInformationWidgetMobile;
-import pages.mobile.acquisition.commonpages.VPPRequestSendEmailPageMobile;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class ResponsivePlanSummaryMobile extends UhcDriver{
 	
@@ -685,7 +680,7 @@ public void comparePlanslnk() throws InterruptedException{
 									e.printStackTrace();
 								}
 				                System.out.println(driver.getTitle());
-				                if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
+				                if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 				                	System.out.println("Page displayed successfully");
 				                	Assertion.assertTrue(true);
 				                }else{
@@ -1071,7 +1066,7 @@ public void comparePlanslnk() throws InterruptedException{
                             }
                             
                             if (driver.getTitle().equalsIgnoreCase(
-                            PageTitleConstantsMobile.ULAYER_OUR_MEDICARE_PLAN_TYPES) || driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
+                            PageTitleConstants.ULAYER_OUR_MEDICARE_PLAN_TYPES) || driver.getTitle().equalsIgnoreCase("estimate-drug-costs")) {
                             return new VPPPlanSummaryPageMobile(driver);
                             }
                     
@@ -1089,7 +1084,7 @@ public void comparePlanslnk() throws InterruptedException{
 				 public VPPPlanSummaryPageMobile enrollNowbtn(){
                      driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
                          enrollNowbtn.click();
-                         if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT))                
+                         if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT))                
                          System.out.println("Online enrollment tool launched");
                          driver.navigate().back();
                          System.out.println("Back to plan summary page");

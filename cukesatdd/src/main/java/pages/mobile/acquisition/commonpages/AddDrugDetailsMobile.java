@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.SavingsOppurtunity;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class AddDrugDetailsMobile extends UhcDriver {
 
@@ -90,7 +90,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 		
 		waitforElement(continueButton);
 		continueButton.click();
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_SAVINGS_OPPORTUNITY)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunity(driver);
 		}
 		return null;

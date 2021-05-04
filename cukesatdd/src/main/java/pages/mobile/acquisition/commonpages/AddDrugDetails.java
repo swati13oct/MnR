@@ -9,6 +9,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AddNewDrugModal;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class AddDrugDetails extends UhcDriver {
 

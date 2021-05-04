@@ -7,6 +7,7 @@ import java.util.Map;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 //import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
@@ -21,8 +22,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
+
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
@@ -31,6 +31,7 @@ import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.dce.bluelayer.AddDrugDetailsMobile;
@@ -1017,6 +1018,43 @@ public class VppPlanSummaryMobile {
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
+	}
+	
+	@Given("^the user hovers screen over the shop for a plan$")
+	public void the_user_hovers_screen_over_the_shop_for_a_plan() throws Throwable {
+		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		ShopForPlanNavigationPage shop = acqusitionHomePage.Hoveronaplan();
+		if (shop != null) {
+			System.out.println("Shop for a plan drop down is opened");
+			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
+		} else {
+			Assertion.fail("Issue in selecting a plan drop down");
+		}
+	}
+	
+
+	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
+	public void the_user__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
+		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String site = memberAttributesMap.get("Site");
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
+		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
+
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+		if (site.equalsIgnoreCase("AARP")) 
+		aquisitionhomepage.validateSubtitle();
 	}
 	
 	@Then("^the user clicks on the united health care medicare solutions link$")

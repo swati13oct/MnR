@@ -18,13 +18,9 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.commonpages.GetStartedPage;
-import pages.mobile.acquisition.commonpages.IntroductionInformationPageMobile;
-import pages.mobile.acquisition.commonpages.ManageDrugPageMobile;
-import pages.mobile.acquisition.commonpages.PlanInformationPageMobile;
-import pages.mobile.acquisition.commonpages.ProviderSearchPage;
 
 
 public class VPPAarpPlanSummaryPageMobile extends UhcDriver {

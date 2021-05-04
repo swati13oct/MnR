@@ -62,6 +62,27 @@ public class VisitorProfileMobileStepDefinition {
 		acqHomePage.selectState(state);
 	}
 	
+	@And("^the user selects the state drop down value in home page$")
+	public void user_select_the_state_drop_down_value_in_AARP_home_pages(DataTable givenAttributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String state = givenAttributesMap.get("State");
+		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+//		CommonConstants.SELECTED_STATE  = state; 
+		CommonConstants.setSelectedState(state);
+		
+		acqHomePage.selectState(state);
+	}
+	
 	@And("^user delets the added plans on visitor profile page$")
 	public void user_delets_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();

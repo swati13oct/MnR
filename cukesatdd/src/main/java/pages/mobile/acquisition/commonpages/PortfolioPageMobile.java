@@ -19,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.ZipcodeLookupPage;
 
 /**
@@ -279,7 +280,7 @@ public ResponsivePlanSummaryMobile searchPlans(String zipcode, String CountyName
                     break;
             }
     }
-        if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
+        if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE)) {
                  return new ResponsivePlanSummaryMobile(driver);
         } 
         return null;

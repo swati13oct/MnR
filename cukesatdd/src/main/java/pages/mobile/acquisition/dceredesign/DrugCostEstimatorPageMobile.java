@@ -25,8 +25,8 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
 
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
@@ -463,7 +463,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		System.out.println("Current Page title :: " + driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs")
-				|| driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
 
 			return new AddNewDrugModalMobile(driver);
 		}
@@ -1551,9 +1551,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			Thread.sleep(5000);
 
 			// switchToGenericHeadingsId
-			if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MY_BENEFITS_COVERAGES)) {
+			if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MY_BENEFITS_COVERAGES)) {
 				String savingsOpputunityHeading = driver.findElement(By.id("switchToGenericHeadingsId")).getText();
-				if (savingsOpputunityHeading.equals(PageTitleConstantsMobile.BLAYER_SAVINGS_OPPORTUNITY)) {
+				if (savingsOpputunityHeading.equals(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 					Assertion.assertTrue(true);
 				} else {
 					Assertion.assertTrue("Savings Oppurtunity modal popup does not show up", false);

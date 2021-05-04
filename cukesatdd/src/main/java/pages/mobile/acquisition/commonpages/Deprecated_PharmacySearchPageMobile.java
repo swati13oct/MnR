@@ -19,6 +19,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 /**
  * NOTE: deprecating this one, use the ones in cukesatdd/src/main/java/pages/acquisition/pharmacyLocator/
@@ -621,7 +622,7 @@ public class Deprecated_PharmacySearchPageMobile extends UhcDriver {
 		driver.manage().timeouts().implicitlyWait(300, TimeUnit.SECONDS);
 		((WebElement) showonmap).click();
 		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstantsMobile.ULAYER_MEMBER_CLAIMS)) {
+				PageTitleConstants.ULAYER_MEMBER_CLAIMS)) {
 			return new Deprecated_PharmacyResultPageMobile(driver);
 		}
 		return null;

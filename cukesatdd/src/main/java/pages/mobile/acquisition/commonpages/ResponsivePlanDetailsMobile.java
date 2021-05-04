@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class ResponsivePlanDetailsMobile extends UhcDriver{
 	
@@ -124,7 +125,7 @@ public class ResponsivePlanDetailsMobile extends UhcDriver{
 			if (validate(PDPEnrolllink)) {
 				PDPEnrolllink.click();
 				
-				if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
+				if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 					 return new IntroductionInformationPageMobile(driver);
 				
 				
@@ -134,7 +135,7 @@ public class ResponsivePlanDetailsMobile extends UhcDriver{
 		else if (plantype.equals("MA")) {
 			if (validate(MAEnrolllink)) {
 				MAEnrolllink.click();
-				if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
+				if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 					 return new IntroductionInformationPageMobile(driver);
 				
 		}

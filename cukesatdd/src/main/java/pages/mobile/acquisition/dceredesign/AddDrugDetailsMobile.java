@@ -16,9 +16,9 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 import pages.mobile.acquisition.commonpages.AddNewDrugModalMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
 
 public class AddDrugDetailsMobile extends UhcDriver {
 
@@ -127,7 +127,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 
 		waitforElement(continueButton);
 		jsClickNew(continueButton);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_SAVINGS_OPPORTUNITY)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunityMobile(driver);
 		}
 		return null;

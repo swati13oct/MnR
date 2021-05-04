@@ -30,6 +30,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
+import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
@@ -170,7 +172,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(id = "proceed")
 	private WebElement proceedLeaveAARPMedicare;
-	
+
 	@FindBy(xpath = "//a[@class='viewLink disclaimer']")
 	private WebElement disclaimerLnkMobile;
 
@@ -1434,7 +1436,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacySearchMobile() {
-	
+
 		MobileMenuAccessPharmacy();
 
 		if (locatePharmacy.getText().contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE))) {
@@ -1828,9 +1830,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * (countyModal.isDisplayed()) { return new MultiCountyModalPage(driver); }
 	 * return null; }
 	 */
-	
+
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
 	public WebElement ProviderSearch;
+
 	public ProviderSearchPageMobile clicksOnRallyToolFromGlobalHeader() {
 
 		MobileMenuToolsToHelp();
@@ -2109,9 +2112,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void selectState(String state) {
 		pageloadcomplete();
-		//selectFromDropDownByValue(stateDropDown, state);
+		// selectFromDropDownByValue(stateDropDown, state);
 		mobileSelectOption(stateDropDown, state, true);
-		
 
 	}
 
@@ -3236,7 +3238,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void clickComplaintFormLink() {
-		/*Open Disclaimer Link section on mobile to validate complaint form*/
+		/* Open Disclaimer Link section on mobile to validate complaint form */
 		disclaimerLnkMobile.click();
 		WebElement lnkComplaintForm = driver.findElement(By.xpath("(//a[contains(text(),'Complaint Form')])[1]"));
 		validateNew(lnkComplaintForm);
@@ -3608,11 +3610,46 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
-	
+
+	@FindBy(xpath = "//div[contains(@class,'companyNameHeader')]//*[contains(text(),'UnitedHealthcare Insurance Company')]")
+	private WebElement UHCICSubTitle;
+
+	public void validateSubtitle() {
+		threadsleep(5);
+		if (UHCICSubTitle.isDisplayed()) {
+			System.out.println("validating the sub header");
+			// Assertion.assertEquals(UHCICSubTitle.getText(), "UnitedHealthcare Insurance
+			// Company (UnitedHealthcare)");
+			if (UHCICSubTitle.getText().contains("UnitedHealthcare Insurance Company ")) {
+				Assertion.assertTrue(true);
+			}
+		}
+
+	}
+
+	public pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage Hoveronaplan() throws InterruptedException {
+		waitforElement(ShopForaplan);
+
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
+			System.out.println("Hove Action skipped on Mobile");
+		} else {
+			if (ShopForaplan.isDisplayed()) {
+				// Actions action = new Actions(driver);
+				// action.moveToElement(ShopForaplan).build().perform();
+				jsMouseOver(ShopForaplan);
+				return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
+			} else {
+				return null;
+			}
+		}
+		return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
+	}
+
 	public void clickUnitedHealthcareMedicareSolutions() {
-//		threadsleep(8);
+		// threadsleep(8);
 		threadsleep(5000);
-//			UnitedHealthcareMedicareSolutions.click();
+		// UnitedHealthcareMedicareSolutions.click();
 		jsClickNew(UnitedHealthcareMedicareSolutions);
 	}
 

@@ -22,11 +22,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
-import pages.mobile.acquisition.commonpages.VPPAarpNeedAStepBackWidgetMobile;
-import pages.mobile.acquisition.commonpages.VPPAarpNeedHelpWidgetPageMobile;
-import pages.mobile.acquisition.commonpages.VPPNeedMoreInformationWidgetMobile;
-import pages.mobile.acquisition.commonpages.VPPRequestSendEmailPageMobile;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class ResponsivePlanSummary extends UhcDriver{
 	

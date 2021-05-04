@@ -23,9 +23,9 @@ import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AddDrugDetails;
 import pages.acquisition.commonpages.AddNewDrugModal;
 import pages.acquisition.commonpages.EditDrugDetails;
+import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.SavingsOppurtunity;
-import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
@@ -410,7 +410,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		waitforElement(addDrug);
 		addDrug.click();
 
-if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
+if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs") || driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
 			return new AddNewDrugModal(driver);
 		}
 		return null;

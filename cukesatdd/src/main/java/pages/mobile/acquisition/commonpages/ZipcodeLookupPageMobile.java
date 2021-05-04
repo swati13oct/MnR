@@ -11,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -73,7 +73,7 @@ public class ZipcodeLookupPageMobile extends UhcDriver {
 
 		zipcodeButton.click();
 		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstantsMobile.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
+				PageTitleConstants.BLAYER_MEDICARE_PLAN_TYPES_TITLE)) {
 			return new ZipcodeSelectionPageMobile(driver);
 		}
 		return null;

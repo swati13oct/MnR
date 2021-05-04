@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 //import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 
 public class VPPAarpNeedHelpWidgetPageMobile extends UhcDriver{
