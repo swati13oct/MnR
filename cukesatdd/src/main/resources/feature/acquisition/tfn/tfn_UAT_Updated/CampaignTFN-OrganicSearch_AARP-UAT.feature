@@ -139,6 +139,7 @@ Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
     Then the user validates TFN Number
       | TFN No    | <TFNNo6>          |
       | TFN Xpath | <MedSuppTFNxpath> |
+      #Then the user reopen the browser
     ####################### # Precedence 6.7 - Visit AMP using organic traffic from Google search URL , PSC code 8001533#####################
     Given user is on Google and search AARP Medicare Advantage Plan to navigate to AARP page
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN

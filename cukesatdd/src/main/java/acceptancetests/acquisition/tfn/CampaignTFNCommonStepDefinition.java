@@ -1133,6 +1133,11 @@ public void the_user_navigates_to_following_memeber_signin_page_UHC(DataTable ar
 
 }
 
+@Then("^the user reopen the browser$")
+public void the_user_reopen_browser() {
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);		
+		tfnPage.closeAndReOpenNewTab();
+	}
 }
 
 
