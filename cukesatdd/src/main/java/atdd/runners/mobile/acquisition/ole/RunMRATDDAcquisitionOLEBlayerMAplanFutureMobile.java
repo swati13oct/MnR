@@ -16,7 +16,7 @@ jsonReport = "target/cucumber-RunMRATDDAcquisitionOLEBlayerMAplanFutureMobile.js
  detailedAggregatedReport = true, overviewReport = true, toPDF = true, outputFolder = "target/RunMRATDDAcquisitionOLEBlayerMAplanFutureMobile")
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },monochrome=true, features = { "src/main/resources/feature/mobile/acquisition/ole/oleFuture" },
 plugin = {
-		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEBlayerMAplanFutureMobile.json" }, tags = { "@MA_OLE_UHC_Future" }, dryRun=false)
+		"pretty", "html:reports/test-report", "json:target/cucumber-RunMRATDDAcquisitionOLEBlayerMAplanFutureMobile.json" }, tags = { "@MA_OLE_UHC_Future " }, dryRun=false)
 
 
 public class RunMRATDDAcquisitionOLEBlayerMAplanFutureMobile {

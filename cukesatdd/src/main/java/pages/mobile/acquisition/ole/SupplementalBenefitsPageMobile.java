@@ -76,7 +76,7 @@ public class SupplementalBenefitsPageMobile extends UhcDriver{
 
 	public AuthorizationPageMobile navigate_to_Authorization_Page() {
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		jsClickMobile(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
@@ -93,12 +93,12 @@ public class SupplementalBenefitsPageMobile extends UhcDriver{
 	public void select_riders(String DentalRider, String FitnessRider) {
 		if (DentalRider.contains("true")) {
 			dentalRiderYes.isDisplayed();
-			jsClickNew(dentalRiderYes);
+			jsClickMobile(dentalRiderYes);
 		} else
 			System.out.println("No rider available");
 		if (DentalRider.contains("true")) {
 			fitnessRiderYes.isDisplayed();
-			jsClickNew(fitnessRiderYes);
+			jsClickMobile(fitnessRiderYes);
 		} else
 			System.out.println("No rider available");
 	}
