@@ -175,6 +175,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		//wd.manage().deleteAllCookies();
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);
 		tfnPage.googleSearchAARP();
 
