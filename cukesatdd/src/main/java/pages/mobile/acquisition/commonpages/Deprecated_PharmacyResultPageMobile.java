@@ -7,13 +7,14 @@ import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 /**
  * NOTE: deprecating this one, use the ones in cukesatdd/src/main/java/pages/acquisition/pharmacyLocator/
@@ -61,7 +62,7 @@ public class Deprecated_PharmacyResultPageMobile extends UhcDriver{
 	@Override
 	public void openAndValidate() {
 
-		Assert.assertTrue(pharmacySearchResultsHeading.isDisplayed());
+		Assertion.assertTrue(pharmacySearchResultsHeading.isDisplayed());
 	}
 	public boolean validatePharmacyResultpage(JSONObject jsonObject, String zipcode, String planName){
 		boolean flag = true;
@@ -174,7 +175,7 @@ public class Deprecated_PharmacyResultPageMobile extends UhcDriver{
 		}
 		System.out.println(driver.getTitle());
 		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstantsMobile.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
+				PageTitleConstants.BLAYER_FIND_A_PHARMACY_AARP_MEDICARE_PLANS_FROM_UNITEDHEALTHCARE)) {
 			return new Deprecated_PharmacySearchPageMobile(driver);
 		}
 		return null;

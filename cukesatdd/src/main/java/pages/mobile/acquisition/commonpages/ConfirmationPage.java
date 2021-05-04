@@ -11,6 +11,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class ConfirmationPage extends UhcDriver{
 
@@ -80,7 +81,7 @@ public class ConfirmationPage extends UhcDriver{
 		}
 		
 		// Perform the actions on new window
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_PLANS_PRINT))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_PRINT))
 		{
 			
 			print.isEnabled();

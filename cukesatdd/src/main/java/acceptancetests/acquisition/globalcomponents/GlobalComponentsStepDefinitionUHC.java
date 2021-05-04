@@ -1,22 +1,8 @@
 package acceptancetests.acquisition.globalcomponents;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 
 
 /**
@@ -56,7 +42,7 @@ public class GlobalComponentsStepDefinitionUHC {
 
 			aquisitionhomepage.validateFooterLinks();
 		} else {
-			Assert.fail("Error in Home page");
+			Assertion.fail("Error in Home page");
 		}
 
 	}
@@ -72,9 +58,9 @@ public class GlobalComponentsStepDefinitionUHC {
 		SiteMapUMSPage siteMapUMSPage = aquisitionhomepage.siteMapFooterClick();
 		if (siteMapUMSPage != null) {
 			getLoginScenario().saveBean(PageConstants.SITE_MAP_PAGE, siteMapUMSPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("Error in Site map page");
+			Assertion.fail("Error in Site map page");
 
 		}
 	}
@@ -90,10 +76,10 @@ public class GlobalComponentsStepDefinitionUHC {
 		AboutUsPage aboutUsPage = aquisitionhomepage.aboutUsClick();
 		if (aboutUsPage != null) {
 			getLoginScenario().saveBean(PageConstants.ABOUT_US_PAGE, aboutUsPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 
 		} else {
-			Assert.fail("Error in Aboutus page");
+			Assertion.fail("Error in Aboutus page");
 
 		}
 
@@ -110,10 +96,10 @@ public class GlobalComponentsStepDefinitionUHC {
 		ContactUsUmsPage contactUsUmsPage = aquisitionhomepage.contactUsClick();
 		if (contactUsUmsPage != null) {
 			getLoginScenario().saveBean(PageConstants.CONTACT_US_PAGE, contactUsUmsPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 
 		} else {
-			Assert.fail("Error in Contact us page");
+			Assertion.fail("Error in Contact us page");
 		}
 
 	}
@@ -129,10 +115,10 @@ public class GlobalComponentsStepDefinitionUHC {
 		PrivacyPolicyUmsPage privacyPolicyUmsPage = aquisitionhomepage.privacyPolicyClick();
 		if (privacyPolicyUmsPage != null) {
 			getLoginScenario().saveBean(PageConstants.PRIVACY_POLICY_PAGE, privacyPolicyUmsPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 
 		} else {
-			Assert.fail("Error in Private policy page");
+			Assertion.fail("Error in Private policy page");
 		}
 
 	}*/
@@ -148,10 +134,10 @@ public class GlobalComponentsStepDefinitionUHC {
 		TermsOfUseUmsPage termsOfUseUmsPage = aquisitionhomepage.termsOfUseClick();
 		if (termsOfUseUmsPage != null) {
 			getLoginScenario().saveBean(PageConstants.TERMS_OF_USE_PAGE, termsOfUseUmsPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 
 		} else {
-			Assert.fail("Error in terms of use page");
+			Assertion.fail("Error in terms of use page");
 		}
 
 	}
@@ -167,9 +153,9 @@ public class GlobalComponentsStepDefinitionUHC {
 		DisclaimersPage disclaimersPage = aquisitionhomepage.disclaimersClick();
 		if (disclaimersPage != null) {
 			getLoginScenario().saveBean(PageConstants.DISCLAIMERS_PAGE, disclaimersPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("Error in disclaimers page");
+			Assertion.fail("Error in disclaimers page");
 		}
 
 	}
@@ -186,7 +172,7 @@ public class GlobalComponentsStepDefinitionUHC {
 		if (agentsAndBrokersPage != null) {
 			getLoginScenario().saveBean(PageConstants.AGENTS_AND_BROKERS_PAGE, agentsAndBrokersPage);
 		} else {
-			Assert.fail("Error in Agents and brokers page");
+			Assertion.fail("Error in Agents and brokers page");
 		}
 
 	}
@@ -201,7 +187,7 @@ public class GlobalComponentsStepDefinitionUHC {
 		 * 
 		 * AcquisitionHomePage aquisitionHomePageReload =
 		 * aquisitionhomepage.homeFooterClick();
-		 * Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); }
+		 * Assertion.assertTrue("home page not found", aquisitionHomePageReload!= null); }
 		 
 	*//**
 	 * @toDo:user clicks on Request Assistance and validates modal window
@@ -221,7 +207,7 @@ public class GlobalComponentsStepDefinitionUHC {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateHeaderLinks();
 		} else {
-			Assert.fail("Home page not found");
+			Assertion.fail("Home page not found");
 		}
 	}
 
@@ -251,7 +237,7 @@ public class GlobalComponentsStepDefinitionUHC {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
-		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
+		Assertion.assertTrue("home page not found", aquisitionHomePageReload != null);
 	}
 
 @When("^user vaidates the state drop down link on home page in UHC$")
@@ -304,7 +290,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateGlobalFooterLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 
@@ -315,7 +301,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateSubNavShopPlanLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 
@@ -326,7 +312,7 @@ public void user_clicks_on_View_all_disclaimer_information_link_on_home_page_in_
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateSubNavMedEdLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 

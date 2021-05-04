@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,14 +12,16 @@ import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 
@@ -42,22 +43,24 @@ public class PharmacyLocatorStepDefinitionMobile {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
+		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		return memberAttributesMap;
 	}
 
 	//note: added code to print test results note in jenkins report at the end of test for successful cases
-	@cucumber.api.java.After
+	@After
 	public void testResultNote(Scenario scenario) { 
 		if(null!=getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE)) {   
 			@SuppressWarnings("unchecked")   
 			List<String> testNote=(List<String>) getLoginScenario()
 			.getBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE);
 			for (String s: testNote) {   
-				scenario.write(s);
+//				scenario.write(s);
+				scenario.log(s);
 			}
 			testNote.clear(); 
 		}
@@ -81,6 +84,32 @@ public class PharmacyLocatorStepDefinitionMobile {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
 				aquisitionhomepage);
+		
+		PharmacySearchPageMobile pharmacySearchPage = aquisitionhomepage.navigateToPharmacySearchMobile();
+		 
+		//PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
+		
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
+				pharmacySearchPage);
+		
+	}
+	
+	@And("Navigate to pharmacy search page mobile")
+	public void navigatetoPharmacySearchMobile() {
+		
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		//wd = getLoginScenario().getMobileDriver();
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
+		/*//aquisitionhomepage.openPRE();
+		aquisitionhomepage.openMobileURL();
+		aquisitionhomepage.fixPrivateConnectionMobile();
+		
+		
+		//aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
+		System.out.println("Unselected state on home page for more predictable result");
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+				aquisitionhomepage);*/
 		
 		PharmacySearchPageMobile pharmacySearchPage = aquisitionhomepage.navigateToPharmacySearchMobile();
 		 
@@ -119,7 +148,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		}
 		System.out.println("***** entered******");
 		pharmacySearchPage = pharmacySearchPage.enterDistanceZipDetails(distance, zipcode);
-		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page",
+		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page",
 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,	pharmacySearchPage);
 	}
@@ -295,7 +324,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
-		Assert.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed",
+		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed",
 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
@@ -320,7 +349,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage = pharmacySearchPage.validateSearchPdfResult();
-		Assert.assertTrue("PROBLEM - PDF Results Page Not Displayed", 
+		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed", 
 				pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("PDF Result Page is Displayed");

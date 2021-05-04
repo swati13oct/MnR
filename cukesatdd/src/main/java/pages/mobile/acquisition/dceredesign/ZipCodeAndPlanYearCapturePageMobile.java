@@ -1,6 +1,5 @@
 package pages.mobile.acquisition.dceredesign;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +8,10 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.MRScenario;
+
+import atdd.framework.Assertion;
+
 import atdd.framework.UhcDriver;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
 public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
@@ -93,7 +92,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		try {
 			if (BuildDrugPage_verificationTxt.isDisplayed()) {
 				System.out.println("Navigated to Build Drug List Page");
-				Assert.assertTrue("Naviagted to Build Drug List Page", true);
+				Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 				return new ZipCodeAndPlanYearCapturePageMobile(driver);
 			}
 		} catch (Exception e) {
@@ -117,9 +116,10 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
 				// jsClickNew(countyDropdown);
-				//CommonUtility.waitForPageLoad(driver, countyRows, 30);
+				// CommonUtility.waitForPageLoad(driver, countyRows, 30);
 				// driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
-				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText().toString();
+				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText()
+						.toString();
 				mobileSelectOption(countyDropdown, countyValue, true);
 			}
 		} catch (Exception e) {
@@ -138,7 +138,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);
 		}
-		Assert.fail("DCE - Drug Summary Page is not displayed");
+		Assertion.fail("DCE - Drug Summary Page is not displayed");
 		return null;
 	}
 
@@ -160,11 +160,11 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownNonAEP() {
 		try {
 			if (planYearDropdown.isDisplayed()) {
-				Assert.fail("Plan year dropdown should not be displayed during NonAEP");
+				Assertion.fail("Plan year dropdown should not be displayed during NonAEP");
 				return null;
 			}
 		} catch (Exception e) {
-			Assert.assertTrue("Plan Year dropdoown should not be displayed", true);
+			Assertion.assertTrue("Plan Year dropdoown should not be displayed", true);
 		}
 		return new ZipCodeAndPlanYearCapturePageMobile(driver);
 	}
@@ -172,10 +172,10 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownAEP() {
 
 		if (validateNew(planYearDropdown)) {
-			Assert.assertTrue("Plan Year dropdoown not displayed during AEP", true);
+			Assertion.assertTrue("Plan Year dropdoown not displayed during AEP", true);
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		}
-		// Assert.fail("Plan year dropdown not displayed during AEP");
+		// Assertion.fail("Plan year dropdown not displayed during AEP");
 		return null;
 	}
 
@@ -229,16 +229,16 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		// zipCodeTxtbox.clear();
 		// return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		// }
-		Assert.fail("Error Message is not displaying for invalid zipcode");
+		Assertion.fail("Error Message is not displaying for invalid zipcode");
 		return null;
 	}
 
 	public void verifyReviewDrugCostPageDisplayed() {
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		if (validateNew(reviewDrugCostPageHeading)) {
-			Assert.assertTrue("Review drug cost page not displayed", true);
+			Assertion.assertTrue("Review drug cost page not displayed", true);
 		} else {
-			Assert.assertTrue("Review drug cost page not displayed", false);
+			Assertion.assertTrue("Review drug cost page not displayed", false);
 		}
 
 	}

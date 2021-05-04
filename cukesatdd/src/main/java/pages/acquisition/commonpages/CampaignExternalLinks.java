@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.GetStartedPage;
@@ -149,7 +149,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	private WebElement zipcodeonpage;
 	
 	
-	public static String parentWindow;
+	public String parentWindow;
 	
 	public CampaignExternalLinks(WebDriver driver) {
 		super(driver);
@@ -169,7 +169,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 
 	public void CheckiPerseptions() {
 		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 10); // do not change this to waitForPageLoadNew as
@@ -292,9 +292,9 @@ public class CampaignExternalLinks extends UhcDriver {
 				System.out.println(
 						"****************Zipcode  was found macthing ***************");	
 			//
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("**************** Zipcode is not displayed ***************");
+			Assertion.fail("**************** Zipcode is not displayed ***************");
 		}
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -347,7 +347,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 		return null;
 		/*
-		 * else Assert.fail("**************** Page is not displayed ***************");
+		 * else Assertion.fail("**************** Page is not displayed ***************");
 		 * CheckPageLoad(); try { Thread.sleep(3000); } catch (InterruptedException e) {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
@@ -379,7 +379,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 		return null;
 		/*
-		 * else Assert.fail("**************** Page is not displayed ***************");
+		 * else Assertion.fail("**************** Page is not displayed ***************");
 		 * CheckPageLoad(); try { Thread.sleep(3000); } catch (InterruptedException e) {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
@@ -411,7 +411,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 		return null;
 		/*
-		 * else Assert.fail("**************** Page is not displayed ***************");
+		 * else Assertion.fail("**************** Page is not displayed ***************");
 		 * CheckPageLoad(); try { Thread.sleep(3000); } catch (InterruptedException e) {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
@@ -442,7 +442,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 		return null;
 		/*
-		 * else Assert.fail("**************** Page is not displayed ***************");
+		 * else Assertion.fail("**************** Page is not displayed ***************");
 		 * CheckPageLoad(); try { Thread.sleep(3000); } catch (InterruptedException e) {
 		 * // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
@@ -470,9 +470,9 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (CurrentRailURL.contains("privacy-policy.html?")) {
 			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("**************** Page is not displayed ***************");
+			Assertion.fail("**************** Page is not displayed ***************");
 		}
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -517,10 +517,10 @@ public class CampaignExternalLinks extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("myuhcplans.com/morganstanley")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Morgan Stanley External Link Page opens successsfully");
 		} else
-			Assert.fail("Morgan Stanley External Link page is not opening up");
+			Assertion.fail("Morgan Stanley External Link page is not opening up");
 		validateNew(LearnAboutMedicareBtn);
 		validateNew(getHelpFindingPlanBtn);
 		validateNew(zipcodeEnterFld);
@@ -533,7 +533,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
 			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
 		else
-			Assert.fail("TFN elemnet is not found / TFN no is not same on page");
+			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
 
 		System.out.println(tfnHeader.getText());
 		System.out.print(TFNelement.getText());
@@ -546,10 +546,10 @@ public class CampaignExternalLinks extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("/medicare-prescription-drug-plans-52")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Medicare Prescription Drugs External Link Page opens successsfully");
 		} else
-			Assert.fail("Medicare Prescription Drugs External  Link page is not opening up");
+			Assertion.fail("Medicare Prescription Drugs External  Link page is not opening up");
 		
 		validateNew(planAndPricing);
 		validateNew(estimateDrugCost);
@@ -567,7 +567,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
 			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
 		else
-			Assert.fail("TFN elemnet is not found / TFN no is not same on page");
+			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
 
 		System.out.println(tfnHeader.getText());
 		System.out.print(TFNelement.getText());
@@ -581,13 +581,13 @@ public class CampaignExternalLinks extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("ma.aarpmedicareplans.com/")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("AARP External Link Page opens successsfully");
 		} else if (driver.getCurrentUrl().contains("ma.uhcmedicaresolutions.com/")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("UHC External Link Page opens successsfully");
 		} else
-			Assert.fail("AARP/UHC External Link page is not opening up");
+			Assertion.fail("AARP/UHC External Link page is not opening up");
 		validateNew(tfnHeader);
 
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
@@ -595,12 +595,12 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
 			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
 		else
-			Assert.fail("TFN elemnet is not found / TFN no is not same on page");
+			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
 
 		System.out.println(tfnHeader.getText());
 		System.out.print(TFNelement.getText());
 		if(validate(workingHrs)) {
-			Assert.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
+			Assertion.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
 		}
 	}
 	public AcquisitionHomePage clickOnmedicareplans11backLink(String zipcode) {
@@ -637,9 +637,9 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (CurrentRailURL.contains("/plan-summary")) {
 			System.out.println("****************Page is displayed  ***************" + CurrentRailURL);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("**************** Page is not displayed ***************");
+			Assertion.fail("**************** Page is not displayed ***************");
 		}
 		CheckPageLoad();
 		CheckiPerseptions();
@@ -657,10 +657,10 @@ public class CampaignExternalLinks extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("info.aarpmedicareplans.com/aarp-medicare-plans-11")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("AARP Medicare plans11 External Link Page opens successsfully");
 		} else
-			Assert.fail("AARP Medicare plans11 External Link page is not opening up");
+			Assertion.fail("AARP Medicare plans11 External Link page is not opening up");
 		validateNew(zipcodeEnter);
 		validateNew(submit);
 		validateNew(privacylink);
@@ -672,7 +672,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
 			System.out.println("TFN is Displayed on Page : " + actualTfnNo);
 		else
-			Assert.fail("TFN elemnet is not found / TFN no is not same on page");
+			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
 
 		System.out.println(tfnHeader.getText());
 		System.out.print(TFNelement.getText());
@@ -723,7 +723,7 @@ public class CampaignExternalLinks extends UhcDriver {
 			CheckiPerseptions();
 			return new MedicareSupplementInsurancePlansPage(driver);
 		} else
-			Assert.fail("Error loading MS Insurance Plans Page");
+			Assertion.fail("Error loading MS Insurance Plans Page");
 		return null;
 	}
 	

@@ -29,8 +29,8 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            |        | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare |             |               | No             | Yes,No,No,No                  | Higher               |
+      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
 
   @PRE @planrecommendation @MAPDFlow @Performance @F471404
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Plan Names in VPP Summary vs Details Pages using MAPD flow in PRE
@@ -67,7 +67,7 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Retail         | Yes,No,No,Yes                 | Lower                |
+      |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Retail         | Yes,No,No,Yes                 | Lower                |
 
   @PRE @planrecommandonation @SaveResult @F543314 @PRERegression8
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt>  , <Drug Selection>  - To validate Email Plan List PDP plans in PRE

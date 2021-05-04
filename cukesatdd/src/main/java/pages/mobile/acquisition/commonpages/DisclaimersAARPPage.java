@@ -19,7 +19,7 @@ import acceptancetests.util.CommonUtility;
 public class DisclaimersAARPPage extends GlobalWebElementsMobile{
 	
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'meded-accordion')]/div[contains(@class,'meded-accordion__item')]//a")
 	public static List<WebElement> mededAccordianList;
@@ -41,7 +41,7 @@ public class DisclaimersAARPPage extends GlobalWebElementsMobile{
 	}
 
 	@FindBy(id = "logo")
-	public static WebElement logoLink;
+	public WebElement logoLink;
 	
 	public AcquisitionHomePageMobile logoClick() {
 		validate(logoLink);

@@ -3,10 +3,7 @@ package pages.acquisition.ole;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 /**
@@ -384,7 +382,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		}
 		WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
 		flag = radioBtn.getAttribute("class").equalsIgnoreCase("Active");
-		Assert.assertTrue("PCP is not highlighted by blue colour", flag);
+		Assertion.assertTrue("PCP is not highlighted by blue colour", flag);
 		String actualProvider = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]//following-sibling::label/span")).getText();
 		String expectedProvider= driver.findElement(By.xpath("//p[text()='Provider or PCP Full Name: ']//following-sibling::p[contains(@class,'provider-info__data')][1]")).getText().trim();
 		String PCPNumber= driver.findElement(By.xpath("//p[text()='Provider/PCP Number: ']//following-sibling::p[contains(@class,'provider-info__data')]")).getText();
@@ -393,8 +391,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		System.out.println("PCP Name is Displayed"+expectedProvider);
 		System.out.println("PCP Number is Displayed"+PCPNumber);
 		
-		//Assert.assertEquals("PCP selected is not shown in blue box", expectedProvider, actualProvider);
-		Assert.assertTrue("PCP selected is not shown in blue box", actualProvider.contains(expectedProvider));
+		//Assertion.assertEquals("PCP selected is not shown in blue box", expectedProvider, actualProvider);
+		Assertion.assertTrue("PCP selected is not shown in blue box", actualProvider.contains(expectedProvider));
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
 	//	validateNew(NextBtn);
 	//	jsClickNew(NextBtn);

@@ -9,10 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEnginePharmacyPageMobile extends UhcDriver {
+public class PlanRecommendationEnginePharmacyPageMobile extends GlobalWebElements {
 
                 public PlanRecommendationEnginePharmacyPageMobile(WebDriver driver) {
                                 super(driver);
@@ -22,7 +21,7 @@ public class PlanRecommendationEnginePharmacyPageMobile extends UhcDriver {
                 @Override
                 public void openAndValidate() {
                                 checkModelPopup(driver);
-                                clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+                                clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
                                 waitTillFrameAvailabeAndSwitch(iframePst, 45);
                 }
                 

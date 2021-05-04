@@ -1,14 +1,9 @@
 package pages.acquisition.tfn;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 
 /**
@@ -27,11 +22,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 
 
 
@@ -233,10 +227,10 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 	
 	public void CheckiPerseptions() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,10); // do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn,10); // do not change this to CommonUtility.waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		try{
 			if(proactiveChatExitBtn.isDisplayed())
 				jsClickNew(proactiveChatExitBtn);
@@ -347,10 +341,10 @@ public class CampaignTFNPage extends UhcDriver {
 		if(ExpectedpscCode.contentEquals(PSC_Code)) {
 			System.out.println("****************Expected PSC Code matches Actual PSC code from TFN cookie ***************");
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else {
-			Assert.fail("****************Expected PSC Code DOES NOT match Actual PSC code from TFN cookie ***************");
+			Assertion.fail("****************Expected PSC Code DOES NOT match Actual PSC code from TFN cookie ***************");
 		}
 		// TODO Auto-generated method stub
 		
@@ -384,14 +378,14 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("TFN is Displayed on Page : "+TFNelement.getText());
 		}
 		else {
-			Assert.fail("TFN elemnet is not found / displayed on page : "+tFN_Xpath);
+			Assertion.fail("TFN elemnet is not found / displayed on page : "+tFN_Xpath);
 		}
 		String TFNonPage = TFNelement.getText();
 		if(TFNonPage.contains(FEDERAL_TFN)) {
 			System.out.println("Correct Federal TFN is Displayed on Page : "+TFNelement.getText());
 		}
 		else {
-			Assert.fail("TFN displayed is INCORRECT for Federal : "+tFN_Xpath);
+			Assertion.fail("TFN displayed is INCORRECT for Federal : "+tFN_Xpath);
 		}
 
 
@@ -404,14 +398,14 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("TFN is Displayed on Page : "+TFNelement.getText());
 		}
 		else {
-			Assert.fail("TFN elemnet is not found / displayed on page : "+tFN_Xpath);
+			Assertion.fail("TFN elemnet is not found / displayed on page : "+tFN_Xpath);
 		}
 		String TFNonPage = TFNelement.getText();
 		if(TFNonPage.contains(MEDSUPP_TFN)) {
 			System.out.println("Correct Med Supp TFN is Displayed on Page : "+TFNelement.getText());
 		}
 		else {
-			Assert.fail("TFN displayed is INCORRECT for Med Supp Page : "+tFN_Xpath);
+			Assertion.fail("TFN displayed is INCORRECT for Med Supp Page : "+tFN_Xpath);
 		}
 	}
 	
@@ -450,7 +444,7 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("Yahoo search result found");
 		else {
 			System.out.println("yahoo search result not found");
-			Assert.assertFalse("no yahoo search result found", false);
+			Assertion.assertFalse("no yahoo search result found", false);
 		}
 		YahooSearchResult.click();
 		System.out.println("Yahoo Results - AARP Medicare Advantage Plan - Link Clicked");
@@ -471,7 +465,7 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("Yahoo search result found");
 		else {
 			System.out.println("yahoo search result not found");
-			Assert.assertFalse("no yahoo search result found", false);
+			Assertion.assertFalse("no yahoo search result found", false);
 		}
 		YahooSearchResultshop.click();
 		System.out.println("Yahoo Results - AARP Medicare Advantage Plan - Link Clicked");
@@ -491,7 +485,7 @@ public class CampaignTFNPage extends UhcDriver {
 		if(AARPSearchLinkfromBing.isDisplayed())
 			System.out.println("Bing search result found");
 		else {
-			Assert.assertFalse("Bing search result not found", false);
+			Assertion.assertFalse("Bing search result not found", false);
 		}
 		AARPSearchLinkfromBing.click();		
 		System.out.println("Bing Results - AARP Medicare Advantage Plan - Link Clicked");
@@ -522,7 +516,7 @@ public class CampaignTFNPage extends UhcDriver {
 			System.out.println("Yahoo search result found");
 		else {
 			System.out.println("yahoo search result not found");
-			Assert.assertFalse("no yahoo search result found", false);
+			Assertion.assertFalse("no yahoo search result found", false);
 		}
 		YahooSearchResultUHC.click();
 		System.out.println("Yahoo Results - UHC Medicare Advantage Plan - Link Clicked");
@@ -543,7 +537,7 @@ public class CampaignTFNPage extends UhcDriver {
 		if(UHCSearchLinkfromBing.isDisplayed())
 			System.out.println("Bing search result found");
 		else {
-			Assert.assertFalse("Bing search result not found", false);
+			Assertion.assertFalse("Bing search result not found", false);
 		}
 		UHCSearchLinkfromBing.click();		
 		System.out.println("Bing Results - UHC Medicare Advantage Plan - Link Clicked");
@@ -679,7 +673,7 @@ public class CampaignTFNPage extends UhcDriver {
 
 		if (planType.equalsIgnoreCase("PDP")) {
 			CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-//			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from waitForPageLoadNew but didn't work
+//			sleepBySec(2); //note: add sleep for timing issue, tried increase timeout from CommonUtility.waitForPageLoadNew but didn't work
 			pdpPlansViewLink.click();
 			System.out.println("PDP Plan Type Clicked");
 			waitForPageLoadSafari();
@@ -722,10 +716,10 @@ public class CampaignTFNPage extends UhcDriver {
 		System.out.println("View Plan Details Link is clicked for first plan for "+planType);
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("#/details")) {	
-					Assert.assertTrue("Plan Details is displayed for Plan Type : "+planType, true);
+					Assertion.assertTrue("Plan Details is displayed for Plan Type : "+planType, true);
 				}
 				else {
-					Assert.assertTrue("Plan Details NOT Diaplyed for Plan Type : "+planType, false);
+					Assertion.assertTrue("Plan Details NOT Diaplyed for Plan Type : "+planType, false);
 				}
 	
 	}
@@ -742,10 +736,10 @@ public class CampaignTFNPage extends UhcDriver {
 		System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
 				CommonUtility.checkPageIsReadyNew(driver);
 				if (driver.getCurrentUrl().contains("welcome")) {	
-					Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+					Assertion.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
 				}
 				else {
-					Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+					Assertion.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
 				}
 	}
 
@@ -764,7 +758,7 @@ public class CampaignTFNPage extends UhcDriver {
 		System.out.println("Home Logo is clicked to navigate to Home Page");
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if(!validateNew(zipCodeField)){
-			Assert.assertTrue("Home Page NOT Diaplyed", false);
+			Assertion.assertTrue("Home Page NOT Diaplyed", false);
 		}
 	}
 
@@ -783,7 +777,7 @@ public class CampaignTFNPage extends UhcDriver {
 		} 
 		//CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if(!validateNew(zipCodeField)){
-			Assert.assertTrue("Home Page NOT Displayed", false);
+			Assertion.assertTrue("Home Page NOT Displayed", false);
 		}
 	}
 	
@@ -865,10 +859,10 @@ public class CampaignTFNPage extends UhcDriver {
 				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
 						CommonUtility.checkPageIsReadyNew(driver);
 						if (driver.getCurrentUrl().contains("welcome")) {	
-							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+							Assertion.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
 						}
 						else {
-							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+							Assertion.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
 						}
 			}
 			
@@ -890,7 +884,7 @@ public class CampaignTFNPage extends UhcDriver {
 				}
 				
 				else {
-					Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
+					Assertion.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
 				}
 				
 			}	
@@ -928,10 +922,10 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				System.out.println("View Plan Details Link is clicked for first plan for "+planType);
 						CommonUtility.checkPageIsReadyNew(driver);
 						if (driver.getCurrentUrl().contains("#/details")) {	
-							Assert.assertTrue("Plan Details is displayed for Plan Type : "+planType, true);
+							Assertion.assertTrue("Plan Details is displayed for Plan Type : "+planType, true);
 						}
 						else {
-							Assert.assertTrue("Plan Details NOT Diaplyed for Plan Type : "+planType, false);
+							Assertion.assertTrue("Plan Details NOT Diaplyed for Plan Type : "+planType, false);
 						}
 			
 			}
@@ -960,10 +954,10 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
 						CommonUtility.checkPageIsReadyNew(driver);
 						if (driver.getCurrentUrl().contains("welcome")) {	
-							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+							Assertion.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
 						}
 						else {
-							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+							Assertion.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
 						}
 			}
 			public void HomepagePlanSearchExternalLinks(String zip) {
@@ -996,10 +990,10 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				System.out.println("Enroll In Plan Link is clicked for first plan for "+planType);
 						CommonUtility.checkPageIsReadyNew(driver);
 						if (driver.getCurrentUrl().contains("welcome")) {	
-							Assert.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
+							Assertion.assertTrue("OLE Welcome Page is displayed for Plan Type : "+planType, true);
 						}
 						else {
-							Assert.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
+							Assertion.assertTrue("OLE Welcome Page NOT Diaplyed for Plan Type : "+planType, false);
 						}
 			}
 			
@@ -1175,9 +1169,9 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				if (CurrentRailURL.contains("medicare-information.html")) {
 					System.out.println("****************  ***************");
 
-					Assert.assertTrue(true);
+					Assertion.assertTrue(true);
 				} else {
-					Assert.fail("****************  ***************");
+					Assertion.fail("****************  ***************");
 				}
 				CheckPageLoad();
 				CheckiPerseptions();
@@ -1196,7 +1190,7 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				}
 				
 				else {
-					Assert.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
+					Assertion.fail("TFN elemnet is not found / displayed on page : "+TFNXpath);
 				}
 				
 				driver.switchTo().window(parentWindow);
@@ -1244,9 +1238,9 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 				if (ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
 					System.out.println("****************myuhcagent Page is displayed  ***************");
 
-					Assert.assertTrue(true);
+					Assertion.assertTrue(true);
 				} else {
-					Assert.fail("****************myuhcagent Page is not loaded ***************");
+					Assertion.fail("****************myuhcagent Page is not loaded ***************");
 				}
 				driver.switchTo().window(parentWindow);
 			}
@@ -1321,9 +1315,9 @@ public void validatecloseandReopenbroswer() throws InterruptedException {
 					if (CurrentRailURL.contains("estimate-drug-costs.html#/reviewdrugcosts"))   {
 						System.out.println("****************  ***************");
 
-						Assert.assertTrue(true);
+						Assertion.assertTrue(true);
 					} else {
-						Assert.fail("****************  ***************");
+						Assertion.fail("****************  ***************");
 					}*/
 					CheckPageLoad();
 					CheckiPerseptions();

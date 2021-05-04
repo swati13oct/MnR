@@ -1,4 +1,4 @@
-@dce_redesign_Drug_summary_AARP
+@dce_redesign_Drug_summary_AARP @DCE
 Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
 
   ############# DCE Summary Regression Scenario #################
@@ -32,7 +32,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | Generic Drug | <genericDrug2> |
     And user should verify the Extra help on SNP plan type
     And user click on View Drug Pricing Modal
-  #  And user should verify the drug extra qualification in drug pricing popup
+    #  And user should verify the drug extra qualification in drug pricing popup
     And user verifies Drug List on DCE Summary Page - Drug Pricing Modal
     And user clicks on change pharmacy link from summary page
     Then the user selects following pharmacy and returns to DCE Summary page
@@ -55,19 +55,17 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PDP Plans  | <pdptestPlans> |
       | SNP Plans  | <snptestPlans> |
 
-    @dce_DrugSummary_Page_AARP
+    @dce_DrugSummary_Page_AARP @regressionAARP @prod_regression
     Examples: 
       | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
       | AARP |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-    @dce_DrugSummary_Page_UHC
+    @dce_DrugSummary_Page_UHC @regressionUHC
     Examples: 
       | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
       | UHC  |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   ############# END - DCE Summary Regression Scenario #################
-  
- 
   @dCERedesign_ChangePharmacyModal @F426569 @F535368 @decRelease
   Scenario Outline: Test to verify sort, pagination, invalid zipcode error functionality for change pharmacy on drug summary page
     Given the user is on medicare acquisition site landing page
@@ -108,12 +106,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | ZipCode | <zipCode2> |
     Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal
 
-    @dCERedesign_ChangePharmacyModal_AARP
+    @dCERedesign_ChangePharmacyModal_AARP @regressionAARP
     Examples: 
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
       | AARP | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |
 
-    @dCERedesign_ChangePharmacyModal_UHC
+    @dCERedesign_ChangePharmacyModal_UHC @regressionUHC
     Examples: 
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
       | UHC  | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |

@@ -1,25 +1,10 @@
 
 package acceptancetests.acquisition.providersearch;
 
-import gherkin.formatter.model.DataTableRow;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * Functionality:ProviderSearch
@@ -75,7 +60,7 @@ public class ProviderSearchStepDefinitionUHC {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
 
@@ -144,7 +129,7 @@ public class ProviderSearchStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
+		Assertion.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
 	}
 	
 	*//**
@@ -177,7 +162,7 @@ public class ProviderSearchStepDefinitionUHC {
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
-			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -188,7 +173,7 @@ public class ProviderSearchStepDefinitionUHC {
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsHospitals();
-			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -202,7 +187,7 @@ public class ProviderSearchStepDefinitionUHC {
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPage plansummaryPage = providerSearchPage.MultipleselectsProvider();
-			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -221,7 +206,7 @@ public class ProviderSearchStepDefinitionUHC {
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		} else {
-			Assert.fail("Error Loading Rally tool from Global Header");
+			Assertion.fail("Error Loading Rally tool from Global Header");
 		}
 	}
 	
@@ -277,7 +262,7 @@ public class ProviderSearchStepDefinitionUHC {
 			if (providerSearchPage != null) {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 			} else {
-				Assert.fail("Error Loading Rally tool from Home Page");
+				Assertion.fail("Error Loading Rally tool from Home Page");
 			}
 		}
 		
@@ -291,7 +276,7 @@ public class ProviderSearchStepDefinitionUHC {
 				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 				PlanDetailsPage planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
-				Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+				Assertion.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
 
 			}
 		}
@@ -305,7 +290,7 @@ public class ProviderSearchStepDefinitionUHC {
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			if(!vppPlanDetailsPage.providerinfo()){
-				Assert.fail("Failed in validating the provider link on plan details page");
+				Assertion.fail("Failed in validating the provider link on plan details page");
 			}
 		}
 		
@@ -315,7 +300,7 @@ public class ProviderSearchStepDefinitionUHC {
 				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 				VPPTestHarnessPage vppTestHarnessPage = providerSearchPage.selectsProviderNavigateBacktoTestharness();
-				Assert.assertTrue("Not able to return to Testharness page", vppTestHarnessPage != null);
+				Assertion.assertTrue("Not able to return to Testharness page", vppTestHarnessPage != null);
 
 			}
 		}
@@ -346,7 +331,7 @@ public class ProviderSearchStepDefinitionUHC {
 				 int strplancount = Integer.parseInt(plancount);
 				 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
 				 if(intPlanCounts!=strplancount){
-					Assert.fail("Plan count is not matching");
+					Assertion.fail("Plan count is not matching");
 				 }
 				
 
@@ -374,23 +359,23 @@ public class ProviderSearchStepDefinitionUHC {
 			
 			ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
 			plansummaryPage.setStringList(providers);
-			Assert.assertFalse("Providers not added",providers.isEmpty());
+			Assertion.assertFalse("Providers not added",providers.isEmpty());
 			
 			//Adding Line for Marketing bullet points
 			VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			ArrayList<String> vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
 			plansummaryPage1.setStringList(vppmarketingBullets);
-			Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
+			Assertion.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
 			System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
 			// Line End for Marketing bullet points
 			
 			
 			ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
-			Assert.assertFalse("Providers not added",providers.isEmpty());
+			Assertion.assertFalse("Providers not added",providers.isEmpty());
 			System.out.println("List of Providers in OLE page is: " + providers);
 			ArrayList<String> vppmarketingBullets =plansummaryPage.validate_marketing_details(planName);
-			Assert.assertFalse("Marketing Bullets not added",vppmarketingBullets.isEmpty());
+			Assertion.assertFalse("Marketing Bullets not added",vppmarketingBullets.isEmpty());
 			System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
 		    Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 		    map.put("Provider", providers);

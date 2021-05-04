@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppBlayer
 Feature: 2.02-Plan summary in vpp flow UMS
 
-  @planDetailsUMS @vppBlayerSmoke @vppBlayerNextYrSmoke @vbfGate
+  @planDetailsUMS @vppBlayerSmoke @vppBlayerNextYrSmoke #@vbfGate
   Scenario Outline: Verify plan details in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -9,8 +9,8 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-   # When user views plans of the below plan type in UMS site
-   When user views plans of the below plan type in UMS site for next year
+    # When user views plans of the below plan type in UMS site
+    When user views plans of the below plan type in UMS site for next year
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
@@ -20,10 +20,10 @@ Feature: 2.02-Plan summary in vpp flow UMS
     Then I uncheck and go back to the vpp page to validate
 
     Examples: 
-      | zipcode | isMultutiCounty | county       | plantype | planName                                          |
+      | zipcode | isMultutiCounty | county       | plantype | planName                                            |
       |   80002 | YES             | Adams County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
-      
-   @vppBlayerCurrentYrSmoke 
+
+  @vppBlayerCurrentYrSmoke
   Scenario Outline: Verify plan details in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -31,8 +31,8 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     Then user validates plan count for all plan types on plan summary page in the UMS site
-   # When user views plans of the below plan type in UMS site
-   When user views plans of the below plan type in UMS site for current year
+    # When user views plans of the below plan type in UMS site
+    When user views plans of the below plan type in UMS site for current year
       | Plan Type | <plantype> |
     Then the user view plan details of the above selected plan in UMS site and validates
       | Plan Name | <planName> |
@@ -43,7 +43,7 @@ Feature: 2.02-Plan summary in vpp flow UMS
 
     Examples: 
       | zipcode | isMultutiCounty | county       | plantype | planName                                          |
-      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |   
+      |   80002 | YES             | Adams County | MAPD     | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @defect1964
   Scenario Outline: To verify correct message shows on view details page after checking compare plans box
@@ -111,7 +111,6 @@ Feature: 2.02-Plan summary in vpp flow UMS
     Examples: 
       | zipcode | planName                                           | plantype |
       |   33012 | AARP MedicareComplete Choice Plan 2 (Regional PPO) | MAPD     |
-
 
   @F229349 @validateEyeWearCredit @fastandfurious @Mar_release_2019
   Scenario Outline: UserStory: <UID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan
@@ -307,9 +306,7 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | US1641967 - UHC - Ambulatory Surgical Center Package |   98601 | YES             | Clark County        | SNP      | UnitedHealthcare Nursing Home Plan (PPO SNP)           | Ambulatory Surgical Center | 10% of the cost            |
       | US1641967 - UHC - Ambulatory Surgical Center Package |   53910 | NO              | Adams County        | MA       | UnitedHealthcare MedicareComplete Open Essential (PPO) | Ambulatory Surgical Center | $250 copay                 |
       | US1641967 - UHC - Ambulatory Surgical Center Package |   32960 | NO              | Indian River County | MAPD     | AARP MedicareComplete Focus (HMO)                      | Ambulatory Surgical Center | $150 copay                 |
-         
 
-      
   @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer @vppFavoritePlanInSession @vppFavoritePlanInSessionUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can save and unsave favorite plans on view plan preview page on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
@@ -317,11 +314,11 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site 
+    Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user validates selected plans can be saved as favorite on UHC site
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
+      | MA Test Plans  | <MA_testPlans>  |
+      | PDP Test Plans | <PDP_testPlans> |
+      | SNP Test Plans | <SNP_testPlans> |
     Then user validates saved favorite plans will be stored within same session after zipcode change from Home on UHC site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -343,10 +340,10 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | MA Test Plans   | <MA_testPlans>  |
       | PDP Test Plans  | <PDP_testPlans> |
       | SNP Test Plans  | <SNP_testPlans> |
-	Then user validates ability to unsave a saved plan on UHC site   
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
+    Then user validates ability to unsave a saved plan on UHC site
+      | MA Test Plans  | <MA_testPlans>  |
+      | PDP Test Plans | <PDP_testPlans> |
+      | SNP Test Plans | <SNP_testPlans> |
     Then user validates unsave favorite plans will be stored within same session after zipcode change from Home on UHC site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -370,9 +367,8 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | SNP Test Plans  | <SNP_testPlans> |
 
     Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
-
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                              |
+      | 1598162 |   80001 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   @feature-F265872 @us1598162 @vppFavoritePlanRegressionBlayer @vppFavoritePlanInSessionCloseTab @vppFavoritePlanInSessionCloseTabUhc @thePredators @Apr_release_2019
   Scenario Outline: UID: <UID> -zipcode: <zipcode> - Verify user can favorite plans will be saved within session on view plan preview page on UHC site
@@ -381,45 +377,43 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-    Then user validates plan count for all plan types on plan summary page in the UMS site 
+    Then user validates plan count for all plan types on plan summary page in the UMS site
     Then user validates selected plans can be saved as favorite on UHC site
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
-	Then user closes the original tab and open new tab for UHC site
-	Then the user performs plan search using following information in UMS site
+      | MA Test Plans  | <MA_testPlans>  |
+      | PDP Test Plans | <PDP_testPlans> |
+      | SNP Test Plans | <SNP_testPlans> |
+    Then user closes the original tab and open new tab for UHC site
+    Then the user performs plan search using following information in UMS site
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
       | Is Multi County | <isMultiCounty> |
-	Then user validates plans remain saved within same session for UHC site
-      | MA Test Plans   | <MA_testPlans>  |
-      | PDP Test Plans  | <PDP_testPlans> |
-      | SNP Test Plans  | <SNP_testPlans> |
- 
-    Examples: 
-      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                          | PDP_testPlans                                                    | SNP_testPlans                                                                               |
-      | 1598162 | 80001   | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO)| AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP)|
+    Then user validates plans remain saved within same session for UHC site
+      | MA Test Plans  | <MA_testPlans>  |
+      | PDP Test Plans | <PDP_testPlans> |
+      | SNP Test Plans | <SNP_testPlans> |
 
+    Examples: 
+      | UID     | zipcode | isMultiCounty | county           | MA_testPlans                                                                                           | PDP_testPlans                                                    | SNP_testPlans                              |
+      | 1598162 |   80001 | NO            | Jefferson County | AARP MedicareComplete SecureHorizons Essential (HMO),AARP MedicareComplete SecureHorizons Plan 1 (HMO) | AARP MedicareRx Preferred (PDP),AARP MedicareRx Saver Plus (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   @F322478 @us1603378 @BlayerSAMCall
   Scenario Outline: UID: <UID>  - Verify Call sticky action menu on UHC site
- 		Given the user is on the uhcmedicaresolutions site landing page
- 		When verify Call sticky action menu icon is visible or not
- 		And  verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent
-    Then user verify the popup and content in popup   
-    
-      Examples: 
-      | UID     | 
-      | F322478 |
-      
-  @F322478 @us1603378 @BlayerSAMChat
-  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on UHC site
- 		Given the user is on the uhcmedicaresolutions site landing page
- 		When verify Chat sticky action menu icon is visible or not
- 		And  verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent
-    Then user verify the Chat at its original state   
-    
-      Examples: 
-      | UID     | 
+    Given the user is on the uhcmedicaresolutions site landing page
+    When verify Call sticky action menu icon is visible or not
+    And verify Call sticky action menu roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the popup and content in popup
+
+    Examples: 
+      | UID     |
       | F322478 |
 
+  @F322478 @us1603378 @BlayerSAMChat
+  Scenario Outline: UID: <UID>  - Verify Chat sticky action menu on UHC site
+    Given the user is on the uhcmedicaresolutions site landing page
+    When verify Chat sticky action menu icon is visible or not
+    And verify Chat sticky action menu roll out and contain the text Call a Licensed Insurance Agent
+    Then user verify the Chat at its original state
+
+    Examples: 
+      | UID     |
+      | F322478 |

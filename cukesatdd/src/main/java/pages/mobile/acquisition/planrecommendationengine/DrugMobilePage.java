@@ -187,13 +187,13 @@ public class DrugMobilePage extends UhcDriver {
 		validate(pageRequiredInfo);
 		validate(pageRequiredInfoAsteriskMark);
 		validate(drugPagePrimaryQuestion);
-		//Assert.assertTrue(drugPagePrimaryQuestion.getText().contains("drug"));
+		//Assertion.assertTrue(drugPagePrimaryQuestion.getText().contains("drug"));
 		validate(drugPagePrimaryQuestionMark);
 		validate(drugPagePrimaryQuestionDecsription);
 		validate(drugAddOption, 30);
-		//Assert.assertTrue(drugAddOption.getText().contains("add"));
+		//Assertion.assertTrue(drugAddOption.getText().contains("add"));
 		validate(drugSkipOption, 30);
-		//Assert.assertTrue(drugSkipOption.getText().contains("skip"));
+		//Assertion.assertTrue(drugSkipOption.getText().contains("skip"));
 		mobileUtils.mobileLocateElementClick(drugAddOption);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
@@ -295,31 +295,31 @@ public class DrugMobilePage extends UhcDriver {
 		//currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
 		validate(pageStepsNumberName, 30);
-		//Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
+		//Assertion.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
 		validate(pageProgressPercentage, 30);
 		validate(progressbar);
 		validate(drugsearchbuildpres);
 		validate(drugsearchdescription);
-		//Assert.assertTrue(drugsearchdescription.getText().contains("drug"));
+		//Assertion.assertTrue(drugsearchdescription.getText().contains("drug"));
 		validate(drugsearchBox);
 		validate(drugsearchButton);
 		validate(continueBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		validate(drugAddOption);
-		//Assert.assertTrue(drugAddOption.getText().contains("add"));
+		//Assertion.assertTrue(drugAddOption.getText().contains("add"));
 		mobileUtils.mobileLocateElementClick(continueBtn);
 	}
 
 	// Drugs Search Generic Element Verification Method
 	public void genericElements() {
 		validate(modalGenericDescription, 30);
-		//Assert.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
+		//Assertion.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
 		validate(modalGenericDrug, 30);
-		//Assert.assertTrue(modalGenericDrug.getText().contains("TAB"));
+		//Assertion.assertTrue(modalGenericDrug.getText().contains("TAB"));
 		validate(modalGenericKeep, 30);
-		//Assert.assertTrue(modalGenericKeep.getText().contains("Keep"));
+		//Assertion.assertTrue(modalGenericKeep.getText().contains("Keep"));
 		validate(modalGenericSwitchLabel, 30);
-		//Assert.assertTrue(modalGenericSwitch.getText().contains("Switch"));
+		//Assertion.assertTrue(modalGenericSwitch.getText().contains("Switch"));
 	}
 
 	public void addDrugbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
@@ -566,7 +566,7 @@ public class DrugMobilePage extends UhcDriver {
 		/*
 		 * Not working in PRE but working in PROD modalQuantity.clear();
 		 * modalQuantity.click(); modalcontinue.click();
-		 * Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
+		 * Assertion.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
 		 * "Expected Error Message is not displayed");
 		 */
 
@@ -627,7 +627,7 @@ public class DrugMobilePage extends UhcDriver {
 				"Expected Error Message not displayed");
 	}
 
-	static ArrayList<String> addedDrugNames = new ArrayList<String>();
+	public static ArrayList<String> addedDrugNames = new ArrayList<String>();
 	
 	public void addDrugsPRE(String drugsDetails) {
 		drugsInitiate("Yes");

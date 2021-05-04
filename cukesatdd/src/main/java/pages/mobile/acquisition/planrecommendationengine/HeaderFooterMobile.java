@@ -364,30 +364,30 @@ public class HeaderFooterMobile extends UhcDriver {
 //		headerSectionmenu.click();
 //		learnaboutmedicareLink.click();
 //		validate(headerMedicareeducationLink, 30);
-//		Assert.assertTrue(headerMedicareeducationLink.getText().contains("Medicare Education Home"));
+//		Assertion.assertTrue(headerMedicareeducationLink.getText().contains("Medicare Education Home"));
 //		validate(headerEligibilityLink, 30);
-//		Assert.assertTrue(headerEligibilityLink.getText().contains("Eligibility"));
+//		Assertion.assertTrue(headerEligibilityLink.getText().contains("Eligibility"));
 //		validate(headerCoverageLink, 30);
-//		Assert.assertTrue(headerCoverageLink.getText().contains("Coverage Choices"));
+//		Assertion.assertTrue(headerCoverageLink.getText().contains("Coverage Choices"));
 //		validate(headermedicarePrescriptionprovidersLink, 30);
-//		Assert.assertTrue(headermedicarePrescriptionprovidersLink.getText().contains("Providers"));
+//		Assertion.assertTrue(headermedicarePrescriptionprovidersLink.getText().contains("Providers"));
 //		validate(headerCostbasicsLink, 30);
-//		Assert.assertTrue(headerCostbasicsLink.getText().contains("Medicare Cost Basics"));
+//		Assertion.assertTrue(headerCostbasicsLink.getText().contains("Medicare Cost Basics"));
 //		validate(headerMedicareadvantageLink, 30);
-//		Assert.assertTrue(headerMedicareadvantageLink.getText().contains("Medicare Advantage Plans"));
+//		Assertion.assertTrue(headerMedicareadvantageLink.getText().contains("Medicare Advantage Plans"));
 //		try {
 //			if(headerMedicaresupplemnetLink.isDisplayed())
-//				Assert.assertTrue(headerMedicaresupplemnetLink.getText().contains("Medicare Supplement Insurance Plans"));
+//				Assertion.assertTrue(headerMedicaresupplemnetLink.getText().contains("Medicare Supplement Insurance Plans"));
 //			}catch(Exception e){
 //				System.out.println("Medicare Supplement Insurance Plans link is not on header available for selected geo location");
 //			}
 //		validate(headerMedicareprescriptionLink, 30);
-//		Assert.assertTrue(headerMedicareprescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
+//		Assertion.assertTrue(headerMedicareprescriptionLink.getText().contains("Medicare Prescription Drug Plans"));
 //		validate(headerEnrollment, 30);
-//		Assert.assertTrue(headerEnrollment.getText().contains("Enrollment Basics"));
+//		Assertion.assertTrue(headerEnrollment.getText().contains("Enrollment Basics"));
 //		try {
 //		if(headerFAQLink.isDisplayed())
-//			Assert.assertTrue(headerFAQLink.getText().contains("Medicare FAQ"));
+//			Assertion.assertTrue(headerFAQLink.getText().contains("Medicare FAQ"));
 //		}catch(Exception e){
 //			System.out.println("MedicareFAQ link is not available on header for selected geo location");
 //		}
@@ -465,7 +465,7 @@ public class HeaderFooterMobile extends UhcDriver {
 		mobileUtils.mobileLocateElementClick(ShopToolsGetHelpRecommendationLink);
 		// navigatesubLink(ShopToolsGetHelpRecommendationLink.getAttribute("href"));
 		validate(landingpageHeader, 30);
-		//Assert.assertTrue(landingpageHeader.getText().contains("plan"));
+		//Assertion.assertTrue(landingpageHeader.getText().contains("plan"));
 	}
 
 	// ZipCode Function inside Shop for a Plan Mobile

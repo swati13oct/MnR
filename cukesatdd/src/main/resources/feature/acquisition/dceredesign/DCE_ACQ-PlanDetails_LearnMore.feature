@@ -1,8 +1,9 @@
+@DCE
 Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan Details in AARP site
 
   @DCE_Redesign_VPP_PlanDetailsLearnMore
   Scenario Outline: To verify DCE REDESIGN Details Page for Learn More from <site> home page
-#    Given the user is on AARP medicare acquisition site landing page
+    #    Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When I access the acquisition DCE Redesign from home page
@@ -14,7 +15,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | DrugName | <drug2> |
     Then the user edits supply length to three months for following drug
       | EditDrug | <drug1> |
-#    Then the user validates all added drugs in DrugList
+    #    Then the user validates all added drugs in DrugList
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
@@ -27,6 +28,8 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks PrescriptionBenifit Tab on Plan Details Page
     Then the user clicks Learn More button on Prescription Drug Costs Tab on Plan Details Page
     Then the user validates planName on LearnMore page matches plan Name in VPP
+
+    @regressionAARP
     Examples: 
-      | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected |
-      | vigabatrin | Lipitor |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP)        | AARP | Standard Retail | Standard Mail    |
+      | drug1      | drug2   | zipCode | planType | planName                                      | site | DefaultSelected | MailPharSelected |
+      | vigabatrin | Lipitor |   78006 | SNP      | UnitedHealthcare Chronic Complete (HMO C-SNP) | AARP | Standard Retail | Standard Mail    |

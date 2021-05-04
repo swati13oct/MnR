@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.SalesforceSitePage;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 
 public class EatonHomePage extends UhcDriver {
@@ -34,7 +34,7 @@ public class EatonHomePage extends UhcDriver {
 		validate(getstartedbutton);
 		getstartedbutton.click();
 		
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_PROBLEM_LOADING_PAGE))
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_PROBLEM_LOADING_PAGE))
 		{
 			return new SalesforceSitePage(driver);
 		}

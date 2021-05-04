@@ -1,4 +1,4 @@
-@dce_redesign_VP
+@DCE @dce_redesign_VP
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
   @DCE_VisitorProfile
@@ -23,12 +23,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user selects plan year
     And user clicks on continue button in Zip Entry Page
 
-    @DCE_VisitorProfile_AARP
+    @DCE_VisitorProfile_AARP @regressionAARP @prod_regression
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP |
 
-    @DCE_VisitorProfile_UHC
+    @DCE_VisitorProfile_UHC @regressionUHC @sanity
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | UHC  |
@@ -64,12 +64,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @DCEShopperProfileAddDrugsGlobally_AARP @F539025AARP
+    @DCEShopperProfileAddDrugsGlobally_AARP @F539025AARP @regressionAARP
     Examples: 
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | AARP | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-    @DCEShopperProfileAddDrugsGlobally_UHC @F539025UHC
+    @DCEShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC @prod_regression
     Examples: 
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | UHC  | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
@@ -109,12 +109,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @DCEShopperProfileAddDrugsPlancard_AARP
+    @DCEShopperProfileAddDrugsPlancard_AARP @regressionAARP @prod_regression
     Examples: 
       | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
       | AARP | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
 
-    @DCEShopperProfileAddDrugsPlancard_UHC
+    @DCEShopperProfileAddDrugsPlancard_UHC @regressionUHC
     Examples: 
       | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
       | UHC  | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
@@ -156,12 +156,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP_01
+    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP_01 @regressionAARP
     Examples: 
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
       | AARP | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@1 |
 
-    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC 
+    @DCEShopperProfileAddDrugsGloballyAuthenticatedUser_UHC @regressionUHC
     Examples: 
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
       | UHC  | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@1 |
@@ -182,12 +182,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see "Medicare Prescription Drug Plans" by default
 
-    @drugSummary_DefaultPlanType_AARP
+    @drugSummary_DefaultPlanType_AARP @regressionAARP
     Examples: 
       | drug1   | zipCode | site |
       | Orkambi |   40701 | AARP |
 
-    @drugSummary_DefaultPlanType_UHC
+    @drugSummary_DefaultPlanType_UHC @regressionUHC
     Examples: 
       | drug1   | zipCode | site |
       | Orkambi |   40701 | UHC  |
@@ -208,12 +208,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see "Medicare Advantage Plans" by default
 
-    @drugSummary_DefaultPlanType_AARP
+    @drugSummary_DefaultPlanType_AARP @regressionAARP
     Examples: 
       | drug1   | zipCode | site |
       | Orkambi |   90210 | AARP |
 
-    @drugSummary_DefaultPlanType_UHC
+    @drugSummary_DefaultPlanType_UHC @regressionUHC
     Examples: 
       | drug1   | zipCode | site |
       | Orkambi |   90210 | UHC  |
@@ -251,18 +251,17 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @DCEShopperProfileAddDrugsGlobally_AARP @F539025AARP
+    @DCEShopperProfileAddDrugsGlobally_AARP @F539025AARP @regressionAARP
     Examples: 
-      | site | drug1   | drug2  | plantype | planyear|testPlans                                                                 | zipcode | isMultiCounty | county          |planName |
-      | AARP | Orkambi | Fanapt | MAPD     | next    |AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO)  |   10001 | NO            | New York County |AARP Medicare Advantage Prime (HMO)|
+      | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | planName                            |
+      | AARP | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County | AARP Medicare Advantage Prime (HMO) |
 
-    @DCEShopperProfileAddDrugsGlobally_UHC @F539025UHC
-     Examples: 
-      | site | drug1   | drug2  | plantype | planyear|testPlans                                                                 | zipcode | isMultiCounty | county          |planName |
-      | UHC | Orkambi | Fanapt | MAPD     | next    |AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO)  |   10001 | NO            | New York County |AARP Medicare Advantage Prime (HMO)|
-      
-      
-      Scenario Outline: To verify zipcode information retained while navigating to shop pages from visitor profile 
+    @DCEShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC
+    Examples: 
+      | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | planName                            |
+      | UHC  | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County | AARP Medicare Advantage Prime (HMO) |
+
+  Scenario Outline: To verify zipcode information retained while navigating to shop pages from visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -283,7 +282,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
       | site | zipcode | county | isMultutiCounty | drug1   |
       | AARP |   90210 | none   | no              | Orkambi |
 
-   @F549665
+    @F549665
     Examples: 
       | site | zipcode | county | isMultutiCounty | drug1   |
       | UHC  |   90210 | none   | no              | Orkambi |

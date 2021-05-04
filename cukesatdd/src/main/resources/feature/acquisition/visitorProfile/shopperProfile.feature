@@ -1,9 +1,9 @@
 #Author: Naveen BK
 #created Date:04/06/2020
-@ShopperProfile
-Feature: 1.08. ACQ- Shopper Profile
+@ShopperProfile @regressionAARP
+Feature: 1.09. ACQ- Shopper Profile
 
-  @searchProfileEmail @SanitySP
+  @searchProfileEmail @SanitySP @sanity @test123
   Scenario Outline: Telesales agent searching for the profile using Email
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -68,7 +68,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | fname | lname | mbi           | dob        | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
       | qavgogine | qavgogine | DAX   | MUNET | 4F78-QY7-CU31 | 08/05/1951 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
 
-  @searchProfileAndAddPlans @SanitySP
+  @searchProfileAndAddPlans @SanitySP @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -301,7 +301,7 @@ Feature: 1.08. ACQ- Shopper Profile
     Examples: 
       | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
       | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
-      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                           | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
+      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | LEONEL  | DREHMER    |   10010 | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>

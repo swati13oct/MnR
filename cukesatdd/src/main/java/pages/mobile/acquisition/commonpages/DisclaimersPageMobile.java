@@ -13,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 //import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 
 /**
@@ -27,7 +28,7 @@ public class DisclaimersPageMobile extends UhcDriver{
 	private WebElement unitedHealthCareLogo;
 	
 	@FindBy(xpath = "//*[contains(@class,'meded-article-header__title')]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'meded-accordion')]/div[contains(@class,'meded-accordion__item')]//a")
 	public static List<WebElement> mededAccordianList;

@@ -2,7 +2,6 @@ package pages.mobile.acquisition.commonpages;
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +10,7 @@ import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 /**
@@ -111,7 +111,7 @@ public class ProviderSearchPageUhcRetiree extends UhcDriver{
 				WebElement yearBtn=driver.findElement(By.xpath("//a[contains(@ng-click,'ChoosePlanYearCtrl')]//*[text()='"+year+"']"));
 				yearBtn.click();
 			} catch (Exception e) {
-				Assert.assertTrue("PROBLEM - Page is showing year selection but unable to locate current year button", false);
+				Assertion.assertTrue("PROBLEM - Page is showing year selection but unable to locate current year button", false);
 			}
 		}
 		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName+ "\')]"));

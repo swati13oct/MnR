@@ -3,19 +3,15 @@
  */
 package pages.mobile.acquisition.planrecommendationengine.e2e;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
+public class PlanRecommendationEngineSpecialNeedsPageMobile extends GlobalWebElements {
 
 	public PlanRecommendationEngineSpecialNeedsPageMobile(WebDriver driver) {
 		super(driver);
@@ -25,7 +21,7 @@ public class PlanRecommendationEngineSpecialNeedsPageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 

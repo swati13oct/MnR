@@ -19,10 +19,10 @@ import pages.acquisition.commonpages.GlobalWebElements;
 public class AboutUsPageMobile extends GlobalWebElements{
 	
 	@FindBy(xpath = "//span[contains(@class,'visible-inline-block')][1]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//section[contains(@class,'meded-article-content')]//p[string-length(text()) > '1']")
-	public static WebElement abountUsBodyParaSection;
+	public WebElement abountUsBodyParaSection;
 	
 	@FindBy(id = "medicareTitle")
 	private WebElement aboutUsTitle;

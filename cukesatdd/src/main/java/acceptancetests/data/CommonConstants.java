@@ -863,8 +863,15 @@ public class CommonConstants {
 	public static final String SAUCELABS_TUNNEL_IDENTIFIER = "saucelabstunnel";
 	//public static final String SAUCELABS_DEFAULT_TUNNEL = "OptumSharedTunnel-Stg";
 	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Prd";
-	public static String MAIN_WINDOW_HANDLE_ACQUISITION = null;
+	private static ThreadLocal<String> MAIN_WINDOW_HANDLE_ACQUISITION = new ThreadLocal<>();
 
+	public static String getMainWindowHandle() {
+		return MAIN_WINDOW_HANDLE_ACQUISITION.get();
+	}
+
+	public static void setMainWindowHandle(String parentWindow) {
+		MAIN_WINDOW_HANDLE_ACQUISITION.set(parentWindow);
+	}
 	public static final String CONNECTION_URL_UAT19 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0103:1521/gpsts19";
 	public static final String CONNECTION_URL_UAT18 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
 	public static final String CONNECTION_URL_UAT20 = "jdbc:oracle:thin:qaread/testreadonly@dbslt0104:1521/gpsts20";
@@ -959,7 +966,17 @@ public class CommonConstants {
 	
 	public static final String CAMPAIGN_EXTERNAL_LINK_TFNNO = "campaignExternalLinkTfnNo";
 
-	public static String SELECTED_STATE = null;
+//	public static String SELECTED_STATE = null;
+	
+	private static ThreadLocal<String> SELECTED_STATE = new ThreadLocal<>();
+
+	public static String getSelectedState() {
+		return SELECTED_STATE.get();
+	}
+
+	public static void setSelectedState(String State) {
+		SELECTED_STATE.set(State);
+	}
 	
 	public static String PAY_BY_MAIL_TEXT = "If you want to pay by mail, we'll send a bill to your mailing address each month or you will receive an email notification if you signed up for e-delivery.";
 	
@@ -975,7 +992,7 @@ public class CommonConstants {
 	
 	public static String NO_MONTHLY_PREMIUM_TEXT = "The plan you have chosen does not have a monthly premium.";
 	
-	public static String LAST_ENROLLMENT_PENALITY_TEXT = "If you need to pay a late enrollment penality(LEP) you will receive a bill in the email.";
+	public static String LAST_ENROLLMENT_PENALITY_TEXT = "If you need to pay a late enrollment penality (LEP) you will receive a bill in the email.";
 	
 	public static String PART_D_INCOME_TEXT = "If you must pay a Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA) Social Security(SS) will send you a letter and ask you how you want to pay it:";
 	

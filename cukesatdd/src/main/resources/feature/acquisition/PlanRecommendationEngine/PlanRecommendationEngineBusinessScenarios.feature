@@ -24,7 +24,6 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #    And user selects pharmacy option in pharmacy page
     #      | Pharmacy Type | <pharmacyoption> |
-
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
@@ -72,16 +71,16 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-		@SanityPRE_01
+    @SanityPRE_01
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName              | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | Perez, Martha Regina, MD |               | No             | Yes,No,No,No                  | Higher               | None           | Travel, Vision               |
-      |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                          |               | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None                 |
-      
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName              | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | Perez, Martha Regina, MD | [blank]       | No             | Yes,No,No,No                  | Higher               | None           | Travel, Vision |
+      |   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare | [blank]                  | [blank]       | No             | Yes,No,No,No                  | Higher               | 1st            | Dental, None   |
+
     @SanityPRE_03
-    Examples:
-    	| Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName              | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      |   15537 | NO            | Bedford    | MAPD          | None         | None   | UHGNetwork      |                          |               | NO             | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
+    Examples: 
+      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel | doctors    | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
+      |   15537 | NO            | Bedford | MAPD          | None         | None   | UHGNetwork | [blank]     | [blank]       | NO             | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
 
   @PRE @planrecommendation @APIRanking @MAFlowRanking @SanityTest @PRERegression6 @SanityPRE
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
@@ -111,10 +110,10 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-		@SanityPRE_02
+    @SanityPRE_02
     Examples: 
       | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName     | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork |                 |               | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
+      |   15537 | NO            | Bedford       | MA            | None             | withinUS | UHGNetwork | [blank]         | [blank]       | Yes,No,No,No                  | Lower                | None           | Doctors, Health Care Premium |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
 
   #      |   94203 | NO            | Sacramento  | MA            | None             | withinUS | AcceptsMedicare |             |               | Yes,Yes,Yes,Yes               | Lower                | -->Tie Scenario
@@ -154,11 +153,10 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     #    And user selects pharmacy option in pharmacy page
     #      | Pharmacy Type | <pharmacyoption> |
-
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-		@SanityPRE_03
+    @SanityPRE_03
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                              | pharmacyoption |
       |   10001 | NO            | New York | PDP           | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Day,1,NO,NO | Retail         |

@@ -4,14 +4,15 @@ import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 
 public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 
@@ -39,24 +40,24 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 				System.out.println("TEST found line="+line);
 			}
 		}
-		Assert.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
 		JSONParser parser = new JSONParser();
 		JSONObject jsobObj=null;
 		try {
 			jsobObj = (JSONObject) parser.parse(deepLinkEntryLine);
 		} catch (ParseException e) {
 			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to convert target string into json object", false);
+			Assertion.assertTrue("PROBLEM - unable to convert target string into json object", false);
 		}
 		JSONObject messageObj = (JSONObject) jsobObj.get("message");
-		Assert.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
 		JSONObject paramsObj = (JSONObject) messageObj.get("params");
-		Assert.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
 		JSONObject requestObj = (JSONObject) paramsObj.get("request");
-		Assert.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
 		System.out.println("TEST - headersObj="+requestObj.toString());
 		String postDataStr = (String) requestObj.get("postData");
-		Assert.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
 		String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
 		tmp=tmp.replace("\\\\\"", "\"");
 		System.out.println("TEST - tmp="+tmp);
@@ -64,23 +65,23 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 			jsobObj = (JSONObject) parser.parse(tmp);
 		} catch (ParseException e) {
 			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
+			Assertion.assertTrue("PROBLEM - unable to convert postDataStr string into json object", false);
 		}
 		JSONObject toObj = (JSONObject) jsobObj.get("to");
-		Assert.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
 		JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
-		Assert.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
 		JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
-		Assert.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
 		System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
 		String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
-		Assert.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
 		System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
 		return deepLinkStr;
 	}
 
 	public void savedHeartFirstPlanOnSummaryPage() {
-		Assert.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
+		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
 		firstSaveHeartOnActiveSummaryPlanPage.click();
 	}
 	
@@ -93,9 +94,9 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 		} else if (planType.equalsIgnoreCase("snp")) {
 			printElement=summary_snpPrintOption;
 		} else {
-			Assert.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
+			Assertion.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
 		}
-		Assert.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
+		Assertion.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
 	}
 
 	public void sleepBySec(int sec) {
@@ -142,7 +143,7 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 			} else if (planType.equalsIgnoreCase("snp")) {
 				summary_printButton=summary_snpPrintOption;
 			} else {
-				Assert.assertTrue("PROBLEM - '"+planType+"' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument", false);
+				Assertion.assertTrue("PROBLEM - '"+planType+"' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument", false);
 			}
 			summary_printButton.click();
 		} else if (pageType.equalsIgnoreCase("compare")) {
@@ -150,12 +151,12 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 		} else if (pageType.equalsIgnoreCase("detail")) {
 			validatePrintButtonOnPlanDetails.click();
 		} else {
-			Assert.assertTrue("PROBLEM - need to code Print Option for this page type: "+pageType, false);
+			Assertion.assertTrue("PROBLEM - need to code Print Option for this page type: "+pageType, false);
 		}
 		CommonUtility.checkPageIsReady(driver);
 		int numWinHandleAfter=driver.getWindowHandles().size();
 		//note: Store the current window handle
-		Assert.assertTrue("PROBLEM - Print window was never opened after the click",numWinHandleAfter-numWinHandleBefore==1);
+		Assertion.assertTrue("PROBLEM - Print window was never opened after the click",numWinHandleAfter-numWinHandleBefore==1);
 		boolean flag = false;// flag will be used to determine a new window was opened after the click of print button
 		//note: switch to handle the new print window
 		for(String winHandle : driver.getWindowHandles()){
@@ -174,7 +175,7 @@ public class EmailAndPrintUtilBase extends EmailAndPrintUtilWebElements{
 		// note: Switch back to original browser (first window)
 		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
 		String pageTitleAfterClosingPrintPreview=driver.getTitle();
-		Assert.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+		Assertion.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 	}
 	
 	/** 

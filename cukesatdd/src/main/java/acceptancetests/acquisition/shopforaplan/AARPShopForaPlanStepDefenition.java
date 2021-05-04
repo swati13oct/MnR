@@ -1,20 +1,15 @@
 package acceptancetests.acquisition.shopforaplan;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.data.PageConstants;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.EnrollmentBasicsPage;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
 
 public class AARPShopForaPlanStepDefenition {
 	
@@ -35,7 +30,7 @@ public class AARPShopForaPlanStepDefenition {
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
 		}
 		else {
-			Assert.fail("Issue in selecting a plan drop down");
+			Assertion.fail("Issue in selecting a plan drop down");
 		}
 	}*/
 	
@@ -52,14 +47,15 @@ public class AARPShopForaPlanStepDefenition {
 	*/
 	@Given("^click on Learn how to enroll plan on enroll page for AARP$")
 	public void click_on_Learn_how_to_enroll_plan_on_enroll_page_for_AARP(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes
+				.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String planyear = "2019"; 
 		String plantype = givenAttributesMap.get("Plan Type");
 		String planName = givenAttributesMap.get("Plan Name");

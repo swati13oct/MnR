@@ -5,7 +5,6 @@ package pages.acquisition.ole;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,7 +14,6 @@ import java.util.Set;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -26,6 +24,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -35,18 +34,18 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  *
  */
 public class WelcomePage extends UhcDriver{
-	
+
 	//OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
-	
+
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
-	
+
 	//@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
 	@FindBy(xpath = "//*[contains(@id,'cancel-enrollment') or contains(@id,'ole-form-cancel-button')]")
 	private WebElement CancelEnrollmentLink;
-	
+
 	// WebElements for Welcome Page
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class, 'only-intro')]")
 	private WebElement WelcomePageHeader;
@@ -56,63 +55,63 @@ public class WelcomePage extends UhcDriver{
 
 	@FindBy(xpath = "//*[(contains(@id,'ole-cancel-confirm') or contains(@id,'enroll-cancel-profile')) and contains(@class,'active')]")
 	private WebElement CancellationModal;
-	
+
 	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
-	
+
 	@FindBy(xpath = "//*[@id='ole-plan-name']")
 	private WebElement PlanYear_PlanName;
-	
+
 	@FindBy(xpath = "//*[contains(text(), 'Zip:')]/..")
 	private WebElement ZipCode_County;
-	
+
 	@FindBy(xpath = "//*[contains(text(), 'Premium:')]/..")
 	private WebElement PremiumDisplay;
-	
+
 	@FindBy(xpath = "//*[@id = 'learn-more' or @id = 'learnmorebtn']")
 	private WebElement LearnMoreButton;
-	
+
 	@FindBy(xpath = "//h1[contains(text(),'Medicare Insurance Information')]")
 	private WebElement welcomepageHeader;
-	
-/*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
+
+	/*	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeCheckBx;
-	*/
+	 */
 	//@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']/following-sibling::label")
 	@FindBy(xpath = "//*[@id='enrollment-disclaimer-accept-yes']")
 	private WebElement DisclaimerAgreeSelect;
-	
+
 	//Right Rail Elements
-	
+
 	@FindBy(id = "tty-number")
 	private WebElement RightRailTFN;
-	
+
 	@FindBy(xpath = "//*[text()='Coverage Details']")
 	private WebElement CoverageDetailswdt;
-	
+
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Dental'))]//img")
 	private WebElement DentalImg;
-	
+
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Vision'))]//img")
 	private WebElement VisionImg;
-	
+
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Fitness'))]//img")
 	private WebElement FitnessImg;
-	
+
 	@FindBy(xpath = "//li[contains(text(), normalize-space('Hearing'))]//img")
 	private WebElement HearingImg;
-	
+
 	@FindBy(xpath = "//*[@id='ole-form-content']//a[contains(@href,'pharmacy.html')]")
 	private WebElement pharmacyLink;
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Enrollment Checklist - English (PDF)')]")
 	private WebElement EnrollmentChecklistLink;
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
 	private WebElement ListaVerificationLink;
-	
+
 	public WelcomePage(WebDriver driver) {
-		
+
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -122,7 +121,7 @@ public class WelcomePage extends UhcDriver{
 		super(driver);
 		PageFactory.initElements(driver, this);
 		start(OLE_URL);
-		
+
 		openAndValidate();
 
 		// TODO Auto-generated constructor stub
@@ -130,7 +129,7 @@ public class WelcomePage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		
+
 		System.out.println("Validating Welcome Page for OLE");
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
 			checkModelPopup(driver, 30);
@@ -153,13 +152,13 @@ public class WelcomePage extends UhcDriver{
 		String Expected_County = planDetailsMap.get("County");
 		//String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
 		boolean flag = false;
-		
+
 		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
 		}else flag =false;
 		//Plan Year commented for AEP validation
-/*		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
+		/*		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Year is Validated : "+flag);
 		}else flag =false;*/
@@ -171,7 +170,7 @@ public class WelcomePage extends UhcDriver{
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
 		}else flag =false;
-/*		if(Premium.contains(Expected_PlanPremium)){
+		/*		if(Premium.contains(Expected_PlanPremium)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Premium is Validated : "+flag);
 		}else flag =false;*/
@@ -181,7 +180,7 @@ public class WelcomePage extends UhcDriver{
 
 
 	public boolean ValidateTFN(String TFN) {
-		
+
 		if(validate(RightRailTFN)){
 			String TFN_OLE = RightRailTFN.getText();
 			if(TFN_OLE.contains(TFN)){
@@ -200,7 +199,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public PersonalInformationPage navigate_to_Personal_Information_page() {
-		
+
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -212,7 +211,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public MedicareInformationPage navigate_to_medicare_info_page_PDP() {
-		
+
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -227,7 +226,7 @@ public class WelcomePage extends UhcDriver{
 		checkModelPopup(driver);
 		validate(LearnMoreButton);
 		jsClickNew(LearnMoreButton);
-//		LearnMoreButton.click();
+		//		LearnMoreButton.click();
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -245,9 +244,9 @@ public class WelcomePage extends UhcDriver{
 		validate(CancelEnrollmentLink);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
-		
+
 		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
-		
+
 		//CancelEnrollmentLink.click();
 		/*try {
 			Thread.sleep(6000);
@@ -277,7 +276,7 @@ public class WelcomePage extends UhcDriver{
 		}
 		return null;
 	}
-	
+
 	public void validateBenefits(boolean riderFlag, WebElement riderBenefit) throws Exception {
 
 		if (riderFlag) {
@@ -285,7 +284,7 @@ public class WelcomePage extends UhcDriver{
 				try {
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
-					Assert.assertTrue("Rider Benefit is not available for this plan",
+					Assertion.assertTrue("Rider Benefit is not available for this plan",
 							riderBenefit.getAttribute("class").contains("benefitAvailable"));
 					System.out.println("Benfit is Available");
 					break;
@@ -300,7 +299,7 @@ public class WelcomePage extends UhcDriver{
 				try {
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
-					Assert.assertTrue("Rider Benefit is available for this plan",
+					Assertion.assertTrue("Rider Benefit is available for this plan",
 							riderBenefit.getAttribute("class").contains("benefitUnavailable"));
 					System.out.println("Benfit is UnAvailable");
 					break;
@@ -312,13 +311,13 @@ public class WelcomePage extends UhcDriver{
 		}
 	}
 
-	
+
 	public void validate_Ancillary_Benefits(String DentalFlag, String VisionFlag,String FitnessFlag,String HearingFlag) throws Exception {
 		boolean di = Boolean.parseBoolean(DentalFlag);
 		boolean vi = Boolean.parseBoolean(VisionFlag);
 		boolean fi = Boolean.parseBoolean(FitnessFlag);
 		boolean hi = Boolean.parseBoolean(HearingFlag);
-		
+
 		waitforElement(CoverageDetailswdt);
 		validate(CoverageDetailswdt);
 		validateBenefits(di, DentalImg);		
@@ -326,40 +325,40 @@ public class WelcomePage extends UhcDriver{
 		validateBenefits(fi, FitnessImg);
 		validateBenefits(hi, HearingImg);	
 	}
-	
+
 	public boolean validateNextButtonIsClickable() {
-		
+
 		boolean enrollInNotPossible = false;
 		try
-	    {
-	        WebDriverWait wait = new WebDriverWait(driver, 5);
-	        wait.until(ExpectedConditions.elementToBeClickable(NextBtn));
-	        enrollInNotPossible = true;
-	        return enrollInNotPossible;
-	    }
-	    catch (Exception e)
-	    {
-	        return enrollInNotPossible;
-	    }		
+		{
+			WebDriverWait wait = new WebDriverWait(driver, 5);
+			wait.until(ExpectedConditions.elementToBeClickable(NextBtn));
+			enrollInNotPossible = true;
+			return enrollInNotPossible;
+		}
+		catch (Exception e)
+		{
+			return enrollInNotPossible;
+		}		
 	}
-	
-public ArrayList<String> validate_marketing_details(String planName) {
-		
-        ArrayList<String> marketingBulletDetails = new ArrayList<String>();
+
+	public ArrayList<String> validate_marketing_details(String planName) {
+
+		ArrayList<String> marketingBulletDetails = new ArrayList<String>();
 		List<WebElement> marketingBullets = driver.findElements(By.xpath("//*[@id='ole-form-content']//*[@class='bullet-div']//*[@id='bullets-sub-header']//following-sibling::div//ul[@class='marketing-bullets']//li"));
-		
+
 		for(WebElement element:marketingBullets)
 		{
 			String marketingDetails = element.getText().trim();
 			marketingBulletDetails.add(marketingDetails);
 		}
-			
+
 		return marketingBulletDetails;
-	
+
 	}
-	
-public MedicareInformationPage navigate_to_medicare_info_page() {
-		
+
+	public MedicareInformationPage navigate_to_medicare_info_page() {
+
 		validateNew(NextBtn);
 		NextBtn.click();
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -379,7 +378,7 @@ public MedicareInformationPage navigate_to_medicare_info_page() {
 		}
 		return null;
 	}
-	
+
 	public void sleepBySec(int sec) {
 		try {
 			Thread.sleep(sec * 1000);
@@ -389,97 +388,97 @@ public MedicareInformationPage navigate_to_medicare_info_page() {
 		}
 	}
 
-	
-	
-	
-public void ValidateFooterEnrollmentChecklistLink()  throws InterruptedException, IOException{
-		
-	validateNew(EnrollmentChecklistLink);
-	CommonUtility.waitForPageLoadNew(driver, EnrollmentChecklistLink, 30);
-	String parentWindow = driver.getWindowHandle();
-	jsClickNew(EnrollmentChecklistLink);
-	sleepBySec(3);
-	Set<String> tabs_windows = driver.getWindowHandles();
-	Iterator<String> itr = tabs_windows.iterator();
-	while (itr.hasNext()) {
-		String window = itr.next();
-		if (!parentWindow.equals(window)) {
-			driver.switchTo().window(window);
-			break;
-		}
-	}
 
-			URL TestURL = new URL(driver.getCurrentUrl());
-			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-			PDDocument document = PDDocument.load(TestFile);
-			/*PDFParser TestPDF = new PDFParser(document);
+
+
+	public void ValidateFooterEnrollmentChecklistLink()  throws InterruptedException, IOException{
+
+		validateNew(EnrollmentChecklistLink);
+		CommonUtility.waitForPageLoadNew(driver, EnrollmentChecklistLink, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(EnrollmentChecklistLink);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		URL TestURL = new URL(driver.getCurrentUrl());
+		BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+		PDDocument document = PDDocument.load(TestFile);
+		/*PDFParser TestPDF = new PDFParser(document);
 			TestPDF.parse();*/
-			String PDFText = new PDFTextStripper().getText(document);
-			 String ExpectedPDFText = "Enrollment Checklist";
-			 String ExpectedPDFText1 = "Understanding the Benefits";
-			 String ExpectedPDFText2 = "Understanding Important Rules";
-				if(PDFText.contains(ExpectedPDFText) && PDFText.contains(ExpectedPDFText1) && PDFText.contains(ExpectedPDFText2)){
-				 System.out.println("PASSED - PDF : text contains expected Document code : "+ExpectedPDFText);
-			 }
-			 else{
-				 System.out.println("FAILED - PDF: text DOES NOT contains expected Document code : "+ExpectedPDFText);
-				 if(PDFText.contains("PDF coming soon")) {
-					
-			 }
-			 }
-		
+		String PDFText = new PDFTextStripper().getText(document);
+		String ExpectedPDFText = "Enrollment Checklist";
+		String ExpectedPDFText1 = "Understanding the Benefits";
+		String ExpectedPDFText2 = "Understanding Important Rules";
+		if(PDFText.contains(ExpectedPDFText) && PDFText.contains(ExpectedPDFText1) && PDFText.contains(ExpectedPDFText2)){
+			System.out.println("PASSED - PDF : text contains expected Document code : "+ExpectedPDFText);
+		}
+		else{
+			System.out.println("FAILED - PDF: text DOES NOT contains expected Document code : "+ExpectedPDFText);
+			if(PDFText.contains("PDF coming soon")) {
+
+			}
+		}
+
 		driver.close();
 		driver.switchTo().window(parentWindow);
-		
+
 	}
 
-public void ValidateFooterListaVerificationLink() throws InterruptedException, IOException {
-	
-	validateNew(ListaVerificationLink);
-	CommonUtility.waitForPageLoadNew(driver, ListaVerificationLink, 30);
-	String parentWindow = driver.getWindowHandle();
-	jsClickNew(ListaVerificationLink);
-	sleepBySec(3);
-	Set<String> tabs_windows = driver.getWindowHandles();
-	Iterator<String> itr = tabs_windows.iterator();
-	while (itr.hasNext()) {
-		String window = itr.next();
-		if (!parentWindow.equals(window)) {
-			driver.switchTo().window(window);
-			break;
+	public void ValidateFooterListaVerificationLink() throws InterruptedException, IOException {
+
+		validateNew(ListaVerificationLink);
+		CommonUtility.waitForPageLoadNew(driver, ListaVerificationLink, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(ListaVerificationLink);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
 		}
-	}
 
-	//	try {
-			URL TestURL = new URL(driver.getCurrentUrl());
-			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
-			PDDocument document = PDDocument.load(TestFile);
-			/*PDFParser TestPDF = new PDFParser(document);
+		//	try {
+		URL TestURL = new URL(driver.getCurrentUrl());
+		BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
+		PDDocument document = PDDocument.load(TestFile);
+		/*PDFParser TestPDF = new PDFParser(document);
 			TestPDF.parse();*/
-			String PDFText = new PDFTextStripper().getText(document);
-			 String ExpectedPDFText = "Lista de Verificaci6n de lnscripci6n";
-			 String ExpectedPDFText1 = "Explicaci6n de los beneficios";
-			 String ExpectedPDFText2 = "Explicaci6n de las reglas importantes";
-			if(PDFText.contains(ExpectedPDFText) && PDFText.contains(ExpectedPDFText1) && PDFText.contains(ExpectedPDFText2)){
-				 System.out.println("PASSED - PDF : text contains expected Document code : "+ExpectedPDFText);
-				 Assert.assertTrue(true);
-			 }
-			 else{
-				 System.out.println("FAILED - PDF: text DOES NOT contains expected Document code : "+ExpectedPDFText);
-				 if(PDFText.contains("PDF coming soon")) {
-					
-					 Assert.fail("****************Lista Verification page is not loaded ***************");
-					
-			 }
-			 }
-	/*	} catch (MalformedURLException e) {
+		String PDFText = new PDFTextStripper().getText(document);
+		String ExpectedPDFText = "Lista de Verificaci6n de lnscripci6n";
+		String ExpectedPDFText1 = "Explicaci6n de los beneficios";
+		String ExpectedPDFText2 = "Explicaci6n de las reglas importantes";
+		if(PDFText.contains(ExpectedPDFText) && PDFText.contains(ExpectedPDFText1) && PDFText.contains(ExpectedPDFText2)){
+			System.out.println("PASSED - PDF : text contains expected Document code : "+ExpectedPDFText);
+			Assertion.assertTrue(true);
+		}
+		else{
+			System.out.println("FAILED - PDF: text DOES NOT contains expected Document code : "+ExpectedPDFText);
+			if(PDFText.contains("PDF coming soon")) {
+
+				Assertion.fail("****************Lista Verification page is not loaded ***************");
+
+			}
+		}
+		/*	} catch (MalformedURLException e) {
 			 System.out.println("FAILURE, Exception in Reading PDF");
 		} catch (IOException e) {
 			 System.out.println("FAILURE, Exception in Reading PDF");
 		}*/
 		driver.close();
 		driver.switchTo().window(parentWindow);
-		
+
 	}
 
 }

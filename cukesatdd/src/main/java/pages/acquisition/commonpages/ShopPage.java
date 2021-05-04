@@ -1,6 +1,6 @@
 package pages.acquisition.commonpages;
 
-import static org.junit.Assert.assertTrue;
+import static atdd.framework.Assertion.assertTrue;
 
 import java.util.Iterator;
 import java.util.List;
@@ -508,10 +508,10 @@ public class ShopPage extends UhcDriver {
 		if(ExpectedUHCAgentURL.equalsIgnoreCase(CurrentUHCAgentURL)) {
 			System.out.println("****************myuhcagent Page is displayed  ***************");
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else {
-			Assert.fail("****************myuhcagent Page is not loaded ***************");
+			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentUHCAgentURL = driver.getCurrentUrl();

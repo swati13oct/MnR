@@ -1,12 +1,10 @@
 package pages.acquisition.commonpages;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -17,13 +15,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
-import pages.acquisition.commonpages.ComparePlansPage;
-
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 public class ResponsivePlanSummary extends UhcDriver{
@@ -431,7 +427,7 @@ public void comparePlanslnk() throws InterruptedException{
 					System.out.println("=======Marketing Bullets Displayed==========");
 				}else{
 					System.out.println("=======Marketing Bullets not Displayed======");
-					Assert.fail();
+					Assertion.fail();
 				}
 			}
 		}return new ResponsivePlanSummary(driver);
@@ -506,9 +502,9 @@ public void comparePlanslnk() throws InterruptedException{
 			if(countyNameDetail.getText().contains(CountyName)){
 				System.out.println("CountyName"+CountyName);
 			
-				Assert.assertTrue("---content displayed---", true);		
+				Assertion.assertTrue("---content displayed---", true);		
 				}else{
-			  Assert.fail();
+			  Assertion.fail();
 			}
 			
 			// TODO Auto-generated method stub
@@ -600,28 +596,28 @@ public void comparePlanslnk() throws InterruptedException{
 					 if(monthlyPremium1.equals(monthlypremium1.getText())){
 				 
 					 System.out.println("monthly premium is verified");
-					 Assert.assertTrue(true);
+					 Assertion.assertTrue(true);
 				 }else{
-					 Assert.fail("Error in displaying monthly premium 1");
+					 Assertion.fail("Error in displaying monthly premium 1");
 				 }
 				 if(monthlyPremium2.equals(monthlypremium2.getText())){
-					 Assert.assertTrue(true);
+					 Assertion.assertTrue(true);
 				 }else{
-					 Assert.fail("Error in displaying monthly premium 2");
+					 Assertion.fail("Error in displaying monthly premium 2");
 				 }
 				 }
 				 if (outofpocketmaximum.getText().equals("Out of Pocket Maximum")) {
 					 if(outofpocket1.getText().equals(outofPocket1)){
 						 
 						 System.out.print("Out of pockect is verified");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }else{
-						 Assert.fail("Error in displaying outofpocket1");
+						 Assertion.fail("Error in displaying outofpocket1");
 					 }
 					 if(outofpocket2.getText().equals(outofPocket2)){
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }else{
-						 Assert.fail("Error in displaying outofpocket2");
+						 Assertion.fail("Error in displaying outofpocket2");
 					 }
 					 }
 					
@@ -673,9 +669,9 @@ public void comparePlanslnk() throws InterruptedException{
 				                System.out.println(driver.getTitle());
 				                if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)){
 				                	System.out.println("Page displayed successfully");
-				                	Assert.assertTrue(true);
+				                	Assertion.assertTrue(true);
 				                }else{
-				                	Assert.fail();
+				                	Assertion.fail();
 				                }
 							}
 							break;
@@ -711,20 +707,20 @@ public void comparePlanslnk() throws InterruptedException{
 					 if(deduct1.equals(deductible1.getText()))
 					 {
 						 System.out.println("Annual Prescription Deductible is verified");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Annual Prescription Deductible for plan 1");
+						 Assertion.fail("Error in displaying Annual Prescription Deductible for plan 1");
 					 }
 					 if(deduct2.equals(deductible2.getText()))
 					 {
 						 System.out.println("Annual Prescription Deductible is verified");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Annual Prescription Deductible for plan 2");
+						 Assertion.fail("Error in displaying Annual Prescription Deductible for plan 2");
 					 }
 					 
 				 }*/
@@ -733,20 +729,20 @@ public void comparePlanslnk() throws InterruptedException{
 					 if(tiervalue1.equals(tier1value1.getText()))
 					 {
 						 System.out.println("Tier 1 value is verified for plan 1");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Tier 1 value for plan 1");
+						 Assertion.fail("Error in displaying Tier 1 value for plan 1");
 					 }
 					 if(tiervalue2.equals(tier1value2.getText()))
 					 {
 						 System.out.println("Tier1 value is verified for plan 2");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Tier 1 value for plan 2");
+						 Assertion.fail("Error in displaying Tier 1 value for plan 2");
 					 }
 					 
 				 }
@@ -757,20 +753,20 @@ public void comparePlanslnk() throws InterruptedException{
 					 if(opDen1.equals(optionalDental1.getText()))
 					 {
 						 System.out.println("Optional Dental is verified for Plan 1");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Optional Dental for plan 1");
+						 Assertion.fail("Error in displaying Optional Dental for plan 1");
 					 }
 					 if(opDen1.equals(optionalDental2.getText()))
 					 {
 						 System.out.println("Optional Dental is verified for Plan 2");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Optional Dental for plan 2");
+						 Assertion.fail("Error in displaying Optional Dental for plan 2");
 					 }
 					 
 				 }
@@ -779,20 +775,20 @@ public void comparePlanslnk() throws InterruptedException{
 					 if(highOpDen1.equals(highOptionDental1.getText()))
 					 {
 						 System.out.println("Hign Option Dental is verified for plan 1");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying High Option Denatl value for plan 1");
+						 Assertion.fail("Error in displaying High Option Denatl value for plan 1");
 					 }
 					 if(highOpDen2.equals(highOptionDental2.getText()))
 					 {
 						 System.out.println("Hign Option Dental is verified for plan 2");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying High Option Denatl value for plan 2");
+						 Assertion.fail("Error in displaying High Option Denatl value for plan 2");
 					 }
 					 
 				 }
@@ -804,20 +800,20 @@ public void comparePlanslnk() throws InterruptedException{
 					 if(planPrem1.equals(planPremium1.getText()))
 					 {
 						 System.out.println("Plan Premium is verified for Plan 1");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Plan Premium for plan 1");
+						 Assertion.fail("Error in displaying Plan Premium for plan 1");
 					 }
 					 if(planPrem2.equals(planPremium2.getText()))
 					 {
 						 System.out.println("Plan Premium is verified for Plan 2");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Plan Premium for plan 2");
+						 Assertion.fail("Error in displaying Plan Premium for plan 2");
 					 }
 					 
 				 }
@@ -826,20 +822,20 @@ public void comparePlanslnk() throws InterruptedException{
 					 if(medicalBenefits1.getText().contains(medBen1))
 					 {
 						 System.out.println("Medical Benefits is verified for plan 1");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Medical Benefits value for plan 1");
+						 Assertion.fail("Error in displaying Medical Benefits value for plan 1");
 					 }
 					 if(medicalBenefits2.getText().contains(medBen2))
 					 {
 						 System.out.println("Medical Benefits is verified for plan 2");
-						 Assert.assertTrue(true);
+						 Assertion.assertTrue(true);
 					 }
 					 else
 					 {
-						 Assert.fail("Error in displaying Medical Benefits value for plan 2");
+						 Assertion.fail("Error in displaying Medical Benefits value for plan 2");
 					 }
 					 
 				 }
@@ -870,10 +866,10 @@ public void comparePlanslnk() throws InterruptedException{
 					//System.out.println(driver.findElement(By.xpath("//*[@id='zipd
 					if(stickyZipcode.equals(actualZipcode)){
 						System.out.println("zipcode box displays sticky zipCode as  "+stickyZipcode);
-						Assert.assertTrue(true);
+						Assertion.assertTrue(true);
 					}else{
 						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
-						Assert.fail();
+						Assertion.fail();
 					}
 					
 				}
@@ -900,10 +896,10 @@ public void comparePlanslnk() throws InterruptedException{
 					//System.out.println(driver.findElement(By.xpath("//*[@id='zipd
 					if(stickyZipcode.equals(actualZipcode)){
 						System.out.println("zipcode box displays sticky zipCode as  "+stickyZipcode);
-						//Assert.assertTrue(true);
+						//Assertion.assertTrue(true);
 					}else{
 						System.out.println("zipcode box doesn't displays sticky zipCode as  "+stickyZipcode);
-						Assert.fail();
+						Assertion.fail();
 					}
 					driver.manage().window().setSize(new Dimension(1400, 1000));
 					countyNameDetail.click();
@@ -956,14 +952,14 @@ public void comparePlanslnk() throws InterruptedException{
 							 System.out.println("Error message content displayed correctly");
 						 }else{
 							 System.out.println("content of error message not displayed correctly");
-							 Assert.fail();
+							 Assertion.fail();
 						 }
 					 }else{
 						 if(errmsgcolor.getAttribute("class").contains("errmsgcolor")){
 							 System.out.println("successfully, although phantom js cannot check getText");
 						 }else{
 						 System.out.println("Error message not displayed");
-						 Assert.fail();
+						 Assertion.fail();
 						 }
 					 }
 					// TODO Auto-generated method stub
@@ -1003,20 +999,20 @@ public void comparePlanslnk() throws InterruptedException{
 									 System.out.println("Error message content displayed correctly");
 								 }else{
 									 System.out.println("content of error message not displayed correctly");
-									 Assert.fail();
+									 Assertion.fail();
 								 }
 							 }else{
 								 if(errmsgcolor.getAttribute("class").contains("ng-hide")){
 									 System.out.println("successfully, phantom js issue......");
 								 }else{
 									 System.out.println("Error message not displayed");
-									 Assert.fail();
+									 Assertion.fail();
 								 }
 								
 							 }
 						}catch(Exception e){
 							System.out.println("Element not accessable");
-							Assert.fail();
+							Assertion.fail();
 						}
 					}
 					
@@ -1088,12 +1084,12 @@ public void comparePlanslnk() throws InterruptedException{
                      
                  try{
                          if(enrollNowbtn.isDisplayed())
-                                 Assert.fail("Enroll now button should not display");
+                                 Assertion.fail("Enroll now button should not display");
                          
-                         Assert.assertTrue("Enroll now button did not display", true);
+                         Assertion.assertTrue("Enroll now button did not display", true);
                  }
                  catch(Exception e){
-                         Assert.assertTrue("Enroll now button did not display", true);
+                         Assertion.assertTrue("Enroll now button did not display", true);
                  }
                  return null;
          }

@@ -70,8 +70,8 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
 
     Examples: 
       | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities   |
-      #      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | David B. Auerbach |               | No             | Yes,No,No,No                  | Higher               |
-      |   55419 | No            | Hennepin | MAPD          | None         | None   | AcceptsMedicare |             |               | No             | Yes,No,No,No                  | Lower                | 1st            | Dental, None |
+      #     |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup          | David B. Auerbach |               | No             | Yes,No,No,No                  | Higher               |
+      |   55419 | No            | Hennepin | MAPD          | None         | None   | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Lower                | 1st            | Dental, None |
 
   @PRE @planrecommendation @APIRanking @MAFutureFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <DoctorsName> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate MA flow functions for MA and MS plans in PRE
@@ -103,7 +103,7 @@ Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functional
 
     Examples: 
       | Zipcode | isMultiCounty | county        | isCoverageOpt | specialNeeds     | travel   | doctors    | DoctorsName                      | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      |   10001 | NO            | New York      | MA            | None             | withinUS | UHGNetwork |                                  |               | Yes,No,No,No                  | Lower                | both           | Doctors, Health Care Premium |
+      |   10001 | NO            | New York      | MA            | None             | withinUS | UHGNetwork | [blank]                          | [blank]       | Yes,No,No,No                  | Lower                | both           | Doctors, Health Care Premium |
       |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | withinUS | Lookup     | Emily Adams, NP:Azizul Hoque, MD | NO            | Yes,Yes,Yes,Yes               | Lower                | None           | Dental, Doctors              |
 
   @PRE @planrecommendation @APIRanking @PDPFlowRanking @PDPFuture

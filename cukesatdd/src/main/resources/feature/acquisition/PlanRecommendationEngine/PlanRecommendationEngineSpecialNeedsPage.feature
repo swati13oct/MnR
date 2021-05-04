@@ -31,11 +31,11 @@ Feature: Plan Recommendation Engine flow - Verify special needs page in plan Rec
 
     Examples: 
       | Zipcode | isMultiCounty | county       | isCoverageOpt | specialNeeds             |
-      |   90201 | NO            |              | MAPD          | Medicaid,chronic,nursing |
+      |   90201 | NO            | [blank]      | MAPD          | Medicaid,chronic,nursing |
       |   78006 | YES           | Bexar County | None          | Medicaid,chronic,nursing |
-      |   45634 | NO            |              | MAPD          | chronic,nursing          |
-      |   10001 | NO            |              | None          | nursing                  |
-      |   12345 | NO            |              | MAPD          | None                     |
+      |   45634 | NO            | [blank]      | MAPD          | chronic,nursing          |
+      |   10001 | NO            | [blank]      | None          | nursing                  |
+      |   12345 | NO            | [blank]      | MAPD          | None                     |
 
   @PRE @planrecommendation @specialneedspage @specialneedspageerrorScenario @F372729
   Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds>  - To validate special needs page error scenarios in Plan Recommendation Engine
@@ -52,5 +52,5 @@ Feature: Plan Recommendation Engine flow - Verify special needs page in plan Rec
 
     Examples: 
       | Zipcode | isMultiCounty | county           | isCoverageOpt | specialNeeds                  |
-      |   90201 | NO            |                  | MAPD          | Medicaid,chronic,nursing,None |
-      |   21212 | YES           | Baltimore County | None          |                               |
+      |   90201 | NO            | [blank]          | MAPD          | Medicaid,chronic,nursing,None |
+      |   21212 | YES           | Baltimore County | None          | [blank]                       |

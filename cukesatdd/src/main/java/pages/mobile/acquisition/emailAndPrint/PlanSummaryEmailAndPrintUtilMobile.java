@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 
 public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMobile {
 
@@ -34,9 +34,9 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		} else if (planType.equalsIgnoreCase("snp")) {
 			emailElement = summary_snpEmailOption;
 		} else {
-			Assert.assertTrue("PROBLEM - test not coded for this '" + planType + "' planType testing", false);
+			Assertion.assertTrue("PROBLEM - test not coded for this '" + planType + "' planType testing", false);
 		}
-		Assert.assertTrue("PROBLEM - Unable to locate the email option. emailCheck=" + validate(emailElement),
+		Assertion.assertTrue("PROBLEM - Unable to locate the email option. emailCheck=" + validate(emailElement),
 				validate(emailElement));
 	}
 
@@ -49,31 +49,31 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		} else if (planType.equalsIgnoreCase("snp")) {
 			emailButton = summary_snpEmailOption;
 		} else {
-			Assert.assertTrue("PROBLEM - '" + planType
+			Assertion.assertTrue("PROBLEM - '" + planType
 					+ "' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument",
 					false);
 		}
 		System.out.println("Proceed to validate email popup screen for cancel option");
 		emailButton.click();
-		Assert.assertTrue("PROBLEM - unable to locate email popup screen after email link is clicked",
+		Assertion.assertTrue("PROBLEM - unable to locate email popup screen after email link is clicked",
 				validate(emailPlanSummaryPopupScreen));
 		String expectedEmailBoxHeader = emailPlanSummaryPopupScreenText.getText();
 		String actualEmailBoxHeader = "Email Plan List";
-		Assert.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - header text for the email popup screen is not as expected.  Expecte='"
 						+ expectedEmailBoxHeader + "' | Actual='" + actualEmailBoxHeader + "'",
 				expectedEmailBoxHeader.equals(actualEmailBoxHeader));
-		Assert.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - unable to locate email field box on email popup screen after email link is clicked",
 				validate(emailPlanSummaryFieldBox));
-		Assert.assertTrue("PROBLEM - unable to locate send button on email popup screen after email link is clicked",
+		Assertion.assertTrue("PROBLEM - unable to locate send button on email popup screen after email link is clicked",
 				validate(emailPlanSummarySendButton));
-		Assert.assertTrue("PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
+		Assertion.assertTrue("PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
 				validate(emailPlanSummaryCancelButton));
 
 		System.out.println("Proceed to click cancel button on email screen, email screen should close");
 		emailPlanSummaryCancelButton.click();
-		Assert.assertTrue("PROBLEM - email popup screen should have disappeared after cancel button is clicked",
+		Assertion.assertTrue("PROBLEM - email popup screen should have disappeared after cancel button is clicked",
 				!validate(emailPlanSummaryPopupScreen));
 
 		// ----- failure cases ------------------
@@ -83,14 +83,14 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 		emailPlanSummarySendButton.click();
 
-		Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
+		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
 				validate(emailPlanSummaryErrorFieldBox));
-		Assert.assertTrue("PROBLEM - unable to locate error text after email address validation failed",
+		Assertion.assertTrue("PROBLEM - unable to locate error text after email address validation failed",
 				validate(emailPlanSummaryInputErrorText));
 		String actualErrorText = emailPlanSummaryInputErrorText.getText();
 		String execptedErrorText = "Please Enter Valid Email Address";
 
-		Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '" + execptedErrorText
+		Assertion.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '" + execptedErrorText
 				+ "' | Actual='" + actualErrorText + "'", (execptedErrorText.equals(actualErrorText)));
 
 		System.out.println("Proceed to validate email popup screen for send option for failure case 2 ");
@@ -100,14 +100,14 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 		emailPlanSummarySendButton.click();
 
-		Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
+		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
 				validate(emailPlanSummaryErrorFieldBox));
-		Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
+		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
 				validate(emailPlanSummaryInputErrorText));
 		actualErrorText = emailPlanSummaryInputErrorText.getText();
 		execptedErrorText = "Please Enter Valid Email Address";
 
-		Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '" + execptedErrorText
+		Assertion.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '" + execptedErrorText
 				+ "' | Actual='" + actualErrorText + "'", (execptedErrorText.equals(actualErrorText)));
 
 		System.out.println("Proceed to validate email popup screen for send option for failure case 3");
@@ -117,14 +117,14 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 		emailPlanSummarySendButton.click();
 
-		Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
+		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
 				validate(emailPlanSummaryErrorFieldBox));
-		Assert.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
+		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
 				validate(emailPlanSummaryInputErrorText));
 		actualErrorText = emailPlanSummaryInputErrorText.getText();
 		execptedErrorText = "Please Enter Valid Email Address";
 
-		Assert.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '" + execptedErrorText
+		Assertion.assertTrue("PROBLEM - Email success message is not as expected.  Expected: '" + execptedErrorText
 				+ "' | Actual='" + actualErrorText + "'", (execptedErrorText.equals(actualErrorText)));
 
 		// ----- success cases ------------------
@@ -134,13 +134,13 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 		jsClickNew(emailPlanSummarySendButton);
-		Assert.assertTrue("PROBLEM - uable to locate success message after clicking send button",
+		Assertion.assertTrue("PROBLEM - uable to locate success message after clicking send button",
 				validate(emailPlanSummarySuccessText, 15));
 		// validateNew(emailPlanSummarySuccessText, 15);
 		String expectedSuccess1 = "Thank you!";
 		String expectedSuccess2 = "The email with your information will arrive shortly.";
 		String actualEmailSuccessText = emailPlanSummarySuccessText.getText();
-		Assert.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - Email success message is not as expected.  Expected to contain '" + expectedSuccess1
 						+ "' and '" + expectedSuccess2 + "' | Actual='" + actualEmailSuccessText + "'",
 				(actualEmailSuccessText.contains(expectedSuccess1))
@@ -284,7 +284,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 			}
 		}
 
-		Assert.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"
 						+ listOfFailure.size() + "'. list of mismatch: " + listOfFailure,
 				summary_finalResult);
@@ -293,7 +293,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 	public void clickOnBackToAllPlansFromCompareBackToSummaryPage() {
-		Assert.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page",
+		Assertion.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page",
 				validate(backToAllPlansLnk));
 		jsClickMobile(backToAllPlansLnk);
 		CommonUtility.checkPageIsReady(driver);

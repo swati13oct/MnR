@@ -36,7 +36,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel    | doctors    | DoctorsName         | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities         |
-      |   12345 | NO            | Schenectady | MAPD          | None         | withinUS  | UHGNetwork |                     |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Online         | No,No,No,No                   | Lower                | both           | Doctors, Drug Cost |
+      |   12345 | NO            | Schenectady | MAPD          | None         | withinUS  | UHGNetwork | [blank]             | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Online         | No,No,No,No                   | Lower                | both           | Doctors, Drug Cost |
       |   12345 | NO            | Schenectady | MAPD          | None         | outsideUS | Lookup     | Sherrie L Murray NP | NO            | Yes            | Lipitor,NO,Lipitor TAB 10MG,,,Day,1,YES,NO                                   | Retail         | Yes,Yes,Yes,Yes               | Higher               | None           | Doctors, Drug Cost |
 
   @PRE @Ranking @MAPlansRanking @F358846 @PRERegression1
@@ -71,7 +71,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county      | isCoverageOpt | specialNeeds | travel | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                |
-      |   12345 | NO            | Schenectady | MAPD          | None         | None   | AcceptsMedicare |             |               | NO             | No,No,Yes,Yes                 | Lower                | 1st            | Health Care Premium, None |
+      |   12345 | NO            | Schenectady | MAPD          | None         | None   | AcceptsMedicare | [blank]     | [blank]       | NO             | No,No,Yes,Yes                 | Lower                | 1st            | Health Care Premium, None |
 
   @PRE @Ranking @PDPPlansRanking @F358846 @PRERegression1
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
@@ -145,6 +145,6 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     Examples: 
       | Zipcode | isMultiCounty | county | isCoverageOpt | specialNeeds             | travel    | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   32111 | No            | Marion | MAPD          | Medicaid,Chronic,Nursing | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               |
-      |   32111 | No            | Marion | MAPD          | Chronic,Nursing          | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               |
-      |   32111 | No            | Marion | MAPD          | Nursing                  | OutsideUS | AcceptsMedicare |             |               | No             | No,No,No,Yes                  | Higher               |
+      |   32111 | No            | Marion | MAPD          | Medicaid,Chronic,Nursing | OutsideUS | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,Yes                  | Higher               |
+      |   32111 | No            | Marion | MAPD          | Chronic,Nursing          | OutsideUS | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,Yes                  | Higher               |
+      |   32111 | No            | Marion | MAPD          | Nursing                  | OutsideUS | AcceptsMedicare | [blank]     | [blank]       | No             | No,No,No,Yes                  | Higher               |

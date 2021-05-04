@@ -22,7 +22,7 @@ import acceptancetests.util.CommonUtility;
 public class SiteMapAARPPage extends GlobalWebElementsMobile {
 	 
 	@FindBy(xpath = "//div[@id='medicareTitle']/*")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'med_cont')]/ul[contains(@class,'bullet_list')]/li")
 	public static List<WebElement> siteMapList;

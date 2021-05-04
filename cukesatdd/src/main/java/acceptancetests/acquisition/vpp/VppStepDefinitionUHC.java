@@ -1,48 +1,8 @@
 package acceptancetests.acquisition.vpp;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Sleeper;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.OLE_PageConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-/*import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.ComparePlansPageBlayer;
-import pages.acquisition.bluelayer.DrugCostEstimatorPage;
-import pages.acquisition.bluelayer.FindCarePage;
-import pages.acquisition.bluelayer.MultiCountyModalPage;
-import pages.acquisition.bluelayer.PlanComparePage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.VPPTestHarnessPage;
-import pages.acquisition.bluelayer.VisitorProfilePage;
-import pages.acquisition.bluelayer.VisitorProfileTestHarnessPage;
-import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
-import pages.acquisition.ole.WelcomePage;
-import pages.acquisition.ulayer.ComparePlansPage;*/
-
-/**
- * Functionality: VPP UHC site
- */
-
 public class VppStepDefinitionUHC {
 
 	@Autowired
@@ -110,7 +70,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 
 	}
@@ -139,7 +99,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 
 	}
@@ -175,9 +135,9 @@ public class VppStepDefinitionUHC {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			else
-				Assert.fail("Error in validating the Plan Summary Page");
+				Assertion.fail("Error in validating the Plan Summary Page");
 
 		}
 
@@ -342,7 +302,7 @@ public class VppStepDefinitionUHC {
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 		} else
-			Assert.fail("Error in validating the Plan Details Page");
+			Assertion.fail("Error in validating the Plan Details Page");
 	}
 
 	@Then("^the user validates following PDF link is displayes with correct document code for UHC$")
@@ -362,7 +322,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
 		boolean validationFlag = vppPlanDetailsPage.ValidatePDFlinkIsDisplayed(PDFtype,DocumentCode);
-		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",validationFlag);
+		Assertion.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - ",validationFlag);
 
 	}
 	
@@ -381,7 +341,7 @@ public class VppStepDefinitionUHC {
 
 		String DocumentCode = memberAttributesMap.get("DocumentCode");
 		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlink(PDFtype, DocumentCode);
-		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ",validationFlag);
+		Assertion.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ",validationFlag);
 
 	}
 	
@@ -408,7 +368,7 @@ public class VppStepDefinitionUHC {
 
 		String DocumentCode = memberAttributesMap.get("DocumentCode");
 		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFText_ForDocCode(PDFtype, DocumentCode);
-		Assert.assertTrue("Validation failed : Expected Document Code is not Present in the PDF Text ",validationFlag);
+		Assertion.assertTrue("Validation failed : Expected Document Code is not Present in the PDF Text ",validationFlag);
 
 	}
 
@@ -427,9 +387,9 @@ public class VppStepDefinitionUHC {
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in Loading the Plan Details Page");
+			Assertion.fail("Error in Loading the Plan Details Page");
 	}
 	
 	@Then("^the user view plan details of the first plan in the given plan type in UMS site vpp$")
@@ -440,9 +400,9 @@ public class VppStepDefinitionUHC {
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in Loading the Plan Details Page");
+			Assertion.fail("Error in Loading the Plan Details Page");
 	}
 
 
@@ -518,9 +478,9 @@ public class VppStepDefinitionUHC {
 	public void I_check_compare_box_and_verify() {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		if (plandetailspage.validateCompareBoxPDP()) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the compare checkbox message and/or link");
+			Assertion.fail("Error in validating the compare checkbox message and/or link");
 	}
 
 	*//**
@@ -531,9 +491,9 @@ public class VppStepDefinitionUHC {
 	public void I_check_compare_box_and_verify_2_plans() {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		if (plandetailspage.validate2PlansAdded()) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the compare checkbox message and/or link");
+			Assertion.fail("Error in validating the compare checkbox message and/or link");
 	}
 
 	*//**
@@ -544,9 +504,9 @@ public class VppStepDefinitionUHC {
 	public void verifyPlanDetailsPage() {
 		PlanDetailsPage plandetailspage = (PlanDetailsPage) loginScenario.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		if (plandetailspage.validateCompareBox()) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the compare checkbox message and/or link");
+			Assertion.fail("Error in validating the compare checkbox message and/or link");
 	}
 
 	*//**
@@ -559,11 +519,11 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage vppsummarypage = plandetailspage.navigateBackToPlanSummaryPage();
 		if (vppsummarypage != null) {
 			if (vppsummarypage.verifyCompareCheckBoxesAreUnchecked())
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			else
-				Assert.fail("Error in validating that the checkboxes are unchecked");
+				Assertion.fail("Error in validating that the checkboxes are unchecked");
 		} else
-			Assert.fail("Error in loading the vpp plan summary page");
+			Assertion.fail("Error in loading the vpp plan summary page");
 	}
 
 	*//**
@@ -625,9 +585,9 @@ public class VppStepDefinitionUHC {
 
 		if (comparePlansPage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in Loading the Plan Compare Page");
+			Assertion.fail("Error in Loading the Plan Compare Page");
 
 	}
 
@@ -652,7 +612,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPageblayer);
 			// comparePlansPage.backToVPPPage();
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	*//**
@@ -719,7 +679,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		boolean validationFlag = vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(benefitType,
 				expectedText);
-		Assert.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - " + benefitType,
+		Assertion.assertTrue("Validation failed : Expected text not displayed for Additional Benefit - " + benefitType,
 				validationFlag);
 	}
 
@@ -742,7 +702,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		boolean validationFlag = vppPlanDetailsPage.validatingMedicalBenefitTextInPlanDetails(benefitType,
 				expectedText);
-		Assert.assertTrue("Validation failed : Expected text not displayed for Medical Benefit - " + benefitType,
+		Assertion.assertTrue("Validation failed : Expected text not displayed for Medical Benefit - " + benefitType,
 				validationFlag);
 
 	}
@@ -755,7 +715,7 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assert.assertTrue("Error validating plans in  VPP plan summary page",
+		Assertion.assertTrue("Error validating plans in  VPP plan summary page",
 				plansummaryPage.validateVPPPlanSummaryPage());
 		String SiteName = "UHG_ACQ";
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
@@ -773,9 +733,9 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPage();
 		if (plansummaryPage != null) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the Plan Summary Page");
+			Assertion.fail("Error in validating the Plan Summary Page");
 	}
 
 	*//**
@@ -814,7 +774,7 @@ public class VppStepDefinitionUHC {
 		if (multiCountyModalPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, multiCountyModalPage);
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 
 	}
@@ -825,7 +785,7 @@ public class VppStepDefinitionUHC {
 		MultiCountyModalPage multiCountyModalPage = (MultiCountyModalPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean Validation_Flag = multiCountyModalPage.validateMultiCounty_CancelButton();
-		Assert.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",
+		Assertion.assertTrue("Validation failed : Cancel button Validation for Multi County Pop-up Failed ",
 				Validation_Flag);
 
 	}
@@ -851,7 +811,7 @@ public class VppStepDefinitionUHC {
 		if (multiCountyModalPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, multiCountyModalPage);
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
 
@@ -874,7 +834,7 @@ public class VppStepDefinitionUHC {
 		if (multiCountyModalPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, multiCountyModalPage);
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
 
@@ -893,7 +853,7 @@ public class VppStepDefinitionUHC {
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 		} else
-			Assert.fail("Error in validating the Plan Details Page");
+			Assertion.fail("Error in validating the Plan Details Page");
 	}
 
 	*//**
@@ -916,7 +876,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link in UHC$")
@@ -938,7 +898,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@And("^I Click on DCE link on Plan compare$")
@@ -956,7 +916,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@And("^I Click on Look up your doctor link on Plan compare$")
@@ -974,7 +934,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			// comparePlansPage.backToVPPPage();
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@And("^I click on Get Started on and Add Provider from find care page$")
@@ -991,7 +951,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@Then("^Verify provider is count is updated on plan compare page$")
@@ -1034,9 +994,9 @@ public class VppStepDefinitionUHC {
 		if (vppPlanSummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSummaryPage);
 			System.out.println("OLE Campaign Landing Page Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Campaign Landing");
+			Assertion.fail("Error in validating the OLE Campaign Landing");
 	}
 	
 	@Given("^the user is on UHC medicare acquisition site VPP page after hits Campaign URL$")
@@ -1062,9 +1022,9 @@ public class VppStepDefinitionUHC {
 		if (vppPlanSummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, vppPlanSummaryPage);
 			System.out.println("OLE Campaign Landing Page Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Campaign Landing");
+			Assertion.fail("Error in validating the OLE Campaign Landing");
 		 
 		}
 
@@ -1088,7 +1048,7 @@ public class VppStepDefinitionUHC {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		boolean validationFlag = comparePlansPage.validatingMedicalBenefitTextInPlanDetails(benefitType, expectedText,
 				PlanName);
-		Assert.assertTrue("Validation failed : Expected text not displayed for Medical Benefit - " + benefitType,
+		Assertion.assertTrue("Validation failed : Expected text not displayed for Medical Benefit - " + benefitType,
 				validationFlag);
 
 	}
@@ -1256,7 +1216,7 @@ public class VppStepDefinitionUHC {
 			// System.out.println("TEST - loaded plansummary page for
 			// zipcode='"+zipcode+"'");
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		// ----- MA plan type ---------------------------
@@ -1301,7 +1261,7 @@ public class VppStepDefinitionUHC {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
@@ -1312,7 +1272,7 @@ public class VppStepDefinitionUHC {
 			// System.out.println("TEST - loaded plansummary page for
 			// zipcode='"+zipcode+"'");
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 
 		// ----- MA plan type ---------------------------
@@ -1359,7 +1319,7 @@ public class VppStepDefinitionUHC {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
 			plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode, county, isMultiCounty);
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		// ----- MA plan type ---------------------------
@@ -1450,7 +1410,7 @@ public class VppStepDefinitionUHC {
 			// System.out.println("TEST - loaded plansummary page for
 			// zipcode='"+zipcode+"'");
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		// ----- MA plan type ---------------------------
@@ -1495,7 +1455,7 @@ public class VppStepDefinitionUHC {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
 			plansummaryPage = plansummaryPage.navagateToShopAPlanAndFindZipcode(zipcode, county, isMultiCounty);
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		// ----- MA plan type ---------------------------
@@ -1542,10 +1502,10 @@ public class VppStepDefinitionUHC {
 			plansummaryPage = plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode, county,
 					isMultiCounty);
 			if (plansummaryPage == null) {
-				Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+				Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 			}
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		// ----- MA plan type ---------------------------
@@ -1878,7 +1838,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 			// comparePlansPage.backToVPPPage();
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@Then("^the user validate the print and email links on the plan Details Page on uhc site")
@@ -1961,7 +1921,7 @@ public class VppStepDefinitionUHC {
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 		} else {
-			Assert.fail("Error Loading OLE Welcome page");
+			Assertion.fail("Error Loading OLE Welcome page");
 		}
 	}
 
@@ -1997,11 +1957,11 @@ public class VppStepDefinitionUHC {
 		ComparePlansPageBlayer ChatIcon  = planComparePage.validateChatSam();
 		if (ChatIcon != null) {
 			getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, ChatIcon);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("TFN Widget is Displayed");
 		}
 		else{
-			Assert.fail("TFN Widget is NOT Displayed");
+			Assertion.fail("TFN Widget is NOT Displayed");
 		}
 	}
 	
@@ -2038,7 +1998,7 @@ public class VppStepDefinitionUHC {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatingMedicalBenefitTextInPlanDetails(medicalBenefits);
-		// Assert.assertTrue("Validation failed : Expected text not displayed
+		// Assertion.assertTrue("Validation failed : Expected text not displayed
 		// for Additional Benefit - "+benefitType,validationFlag);
 	}
 
@@ -2058,7 +2018,7 @@ public class VppStepDefinitionUHC {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidatePlanCosts(monthlyPremium, yearlyPremium);
-		Assert.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "
+		Assertion.assertTrue("Validation failed : Expected text not displayed for monthly and yearly premium - "
 				+ monthlyPremium + " " + yearlyPremium, validationFlag);
 	}
 	
@@ -2106,7 +2066,7 @@ public class VppStepDefinitionUHC {
 
 		boolean validationFlag = vppPlanDetailsPage.clickAndValidateOptionalRiderPremiums(monthlyPremium,
 				yearlyPremium);
-		Assert.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - "
+		Assertion.assertTrue("Validation failed : Expected text not displayed for riders monthly and yearly premium - "
 				+ monthlyPremium + " " + yearlyPremium, validationFlag);
 	}
 
@@ -2157,7 +2117,7 @@ public class VppStepDefinitionUHC {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		// comparePlansPage.backToVPPPage();
 	} else
-		Assert.fail("Error in loading the compare plans page");
+		Assertion.fail("Error in loading the compare plans page");
 }
 	
 	@Then("^check one plan and add it to plancompare for UHC$")
@@ -2170,7 +2130,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 			// comparePlansPage.backToVPPPage();
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@Then("^user select and unselect one plan for plan compare and verify second plan checkbox autoselected and click on plan compare$")
@@ -2187,7 +2147,7 @@ public class VppStepDefinitionUHC {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		boolean validationFlag = plansummaryPage.verifyPlanCompareCheckboxNotVisible();
-		Assert.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ",validationFlag);
+		Assertion.assertFalse("Validation failed : UnExpected Plan Compare check is Visible - ",validationFlag);
 
 	}
 	
@@ -2198,7 +2158,7 @@ public class VppStepDefinitionUHC {
 	   if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
 		} else {
-			Assert.fail("Error Loading Welcome Page for OLE");
+			Assertion.fail("Error Loading Welcome Page for OLE");
 		}
 	  }
 	
@@ -2208,10 +2168,10 @@ public class VppStepDefinitionUHC {
 		  ComparePlansPageBlayer vppPlanDetailsPage=planComparePage.navigateToPlanDetailfromplanCompare();
 			if (vppPlanDetailsPage != null) {
 					getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-					Assert.assertTrue(true);
+					Assertion.assertTrue(true);
 				} 
 			else
-				Assert.fail("Error in Loading the Plan Details Page");
+				Assertion.fail("Error in Loading the Plan Details Page");
 		
 	  }
 
@@ -2223,9 +2183,9 @@ public class VppStepDefinitionUHC {
 		
 		 * if (Aquisitionhomepage != null) {
 		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-		 * Aquisitionhomepage); Assert.assertTrue(true);
+		 * Aquisitionhomepage); Assertion.assertTrue(true);
 		 * System.out.println("TFN Widget is Displayed"); } else{
-		 * Assert.fail("TFN Widget is NOT Displayed"); }
+		 * Assertion.fail("TFN Widget is NOT Displayed"); }
 		 
 	}
 	
@@ -2252,9 +2212,9 @@ public class VppStepDefinitionUHC {
 		
 		 * if (Aquisitionhomepage != null) {
 		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-		 * Aquisitionhomepage); Assert.assertTrue(true);
+		 * Aquisitionhomepage); Assertion.assertTrue(true);
 		 * System.out.println("TFN Widget is Displayed"); } else{
-		 * Assert.fail("TFN Widget is NOT Displayed"); }
+		 * Assertion.fail("TFN Widget is NOT Displayed"); }
 		 
 	}
 	
@@ -2325,9 +2285,9 @@ public class VppStepDefinitionUHC {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			else
-				Assert.fail("Error in validating the Plan Summary Page");
+				Assertion.fail("Error in validating the Plan Summary Page");
 
 		}
 
@@ -2378,9 +2338,9 @@ public class VppStepDefinitionUHC {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			if (plansummaryPage.validateVPPPlanSummaryPage())
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			else
-				Assert.fail("Error in validating the Plan Summary Page");
+				Assertion.fail("Error in validating the Plan Summary Page");
 
 		}
 	}
@@ -2725,7 +2685,7 @@ public class VppStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assert.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
+		Assertion.assertTrue("Drugs coverage Info not updated", plansummaryPage.druginfo(planName));
 	}
 	*//** user is on the Medicare Site landing page for Visitorprofile Testharness*//*
 	@Given("^the user is on VistorProfile TestHarness page for UHC$")
@@ -2753,7 +2713,7 @@ public class VppStepDefinitionUHC {
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 		} else {
-			Assert.fail("Error Loading on visitor Profile page");
+			Assertion.fail("Error Loading on visitor Profile page");
 		}
 	}
 
@@ -2771,7 +2731,7 @@ public class VppStepDefinitionUHC {
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 		} else {
-			Assert.fail("Error Loading on visitor Profile page");
+			Assertion.fail("Error Loading on visitor Profile page");
 		}
 	}
 
@@ -2787,7 +2747,7 @@ public class VppStepDefinitionUHC {
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 		} else {
-			Assert.fail("Error Loading on visitor Profile page");
+			Assertion.fail("Error Loading on visitor Profile page");
 		}
 	}
 
@@ -2801,7 +2761,7 @@ public class VppStepDefinitionUHC {
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 		} else {
-			Assert.fail("Error Loading on visitor Profile page");
+			Assertion.fail("Error Loading on visitor Profile page");
 		}
 	}
 
@@ -2817,7 +2777,7 @@ public class VppStepDefinitionUHC {
 		if (planComparePage != null) {
 			loginScenario.saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 		} else {
-			Assert.fail("Error Loading on Plan Compare page");
+			Assertion.fail("Error Loading on Plan Compare page");
 		}
 
 	}
@@ -2849,7 +2809,7 @@ public class VppStepDefinitionUHC {
 		if (vppPlanDetailsPage != null) {
 			loginScenario.saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 		} else {
-			Assert.fail("Error Loading on Plan Details Page page");
+			Assertion.fail("Error Loading on Plan Details Page page");
 		}
 	}
 
@@ -2883,7 +2843,7 @@ public class VppStepDefinitionUHC {
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 		} else {
-			Assert.fail("Error Loading OLE Welcome page");
+			Assertion.fail("Error Loading OLE Welcome page");
 		}
 	}
 	
@@ -2898,7 +2858,7 @@ public class VppStepDefinitionUHC {
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 		} else {
-			Assert.fail("Error Loading on visitor Profile page");
+			Assertion.fail("Error Loading on visitor Profile page");
 		}
 	}
 	
@@ -2913,7 +2873,7 @@ public class VppStepDefinitionUHC {
 		if (visitorProfilePage != null) {
 			loginScenario.saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 		} else {
-			Assert.fail("Error Loading on visitor Profile page");
+			Assertion.fail("Error Loading on visitor Profile page");
 		}
 	}
 //	@Then("^the user enter the searchValue in the search text box and hits enter on UHC site$")
@@ -3096,7 +3056,7 @@ public class VppStepDefinitionUHC {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@Then("^remove one plan from new plan compare page for UHC$")
@@ -3156,7 +3116,7 @@ public class VppStepDefinitionUHC {
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@And("^click on Add your Hospitals link and Navigate to Rally page for UHC$")
@@ -3167,7 +3127,7 @@ public class VppStepDefinitionUHC {
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@And("^click on Edit your doctors link and Navigate to Rally page for UHC$")
@@ -3178,7 +3138,7 @@ public class VppStepDefinitionUHC {
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@And("^click on Edit your Hospitals link and Navigate to Rally page for UHC$")
@@ -3189,7 +3149,7 @@ public class VppStepDefinitionUHC {
 			if (findCarePage != null) {
 				getLoginScenario().saveBean(PageConstants.FIND_CARE_PAGE, findCarePage);
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@And("^user selects a provider from medical group and retuns to plan compare page in UHC$")
@@ -3206,7 +3166,7 @@ public class VppStepDefinitionUHC {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@And("^user selects a Hospitals from Clinical and retuns to plan compare page in UHC$")
@@ -3223,7 +3183,7 @@ public class VppStepDefinitionUHC {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@And("^I click on Get Started on and Add Places from Hospitals find care page in UHC$")
@@ -3240,7 +3200,7 @@ public class VppStepDefinitionUHC {
 				getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 				// comparePlansPage.backToVPPPage();
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@Then("^verify Edit your Drugs is loaded with Drugs summary on Plan Compare page UHC$")
@@ -3265,7 +3225,7 @@ public class VppStepDefinitionUHC {
 				getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, drugCostEstimatorPage);
 				// comparePlansPage.backToVPPPage();
 			} else
-				Assert.fail("Error in loading the compare plans page");
+				Assertion.fail("Error in loading the compare plans page");
 		}
 		
 		@Then("^Click on view more plans for right navigaton on UHC$")
@@ -3350,7 +3310,7 @@ public class VppStepDefinitionUHC {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}*/
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
@@ -14,15 +13,15 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
 
 /**
  *Functionality: Acquisition SEO for UHC
@@ -47,15 +46,16 @@ public class AcqSEOStepDefinitionUHC {
 	{
 		WebDriver wd = getLoginScenario().getWebDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		List<DataTableRow> AttributesRow = Url
-				.getGherkinRows();
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
+		urlAttributesMap = DataTableParser.readDataTableAsMaps(Url);
+		/*List<DataTableRow> AttributesRow = Url
+				.getGherkinRows();
 		
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
 			urlAttributesMap .put(AttributesRow.get(i).getCells()
 					.get(0), AttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String url = urlAttributesMap.get("URL");
 		
        try{
@@ -87,9 +87,9 @@ public class AcqSEOStepDefinitionUHC {
 	            	connection.disconnect();
 	                resultUrl = fetchRedirectURL(locationUrl);
 	                if(iRedirectionCounter<=3)
-		 		    	 Assert.assertTrue("Number of redirection urls "+iRedirectionCounter, true);
+		 		    	 Assertion.assertTrue("Number of redirection urls "+iRedirectionCounter, true);
 		 		     else
-		 		    	 Assert.assertTrue("Number of redirection urls "+iRedirectionCounter, false);
+		 		    	 Assertion.assertTrue("Number of redirection urls "+iRedirectionCounter, false);
 	            }
 	        }
 	    } 
