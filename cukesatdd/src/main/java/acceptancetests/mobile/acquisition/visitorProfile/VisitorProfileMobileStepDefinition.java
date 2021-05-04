@@ -42,7 +42,7 @@ public class VisitorProfileMobileStepDefinition {
 	}
 	
 	@And("^the user selects the state drop down value in home page mobile$")
-	public void the_user_selects_the_state_drop_down_value_in_AARP_home_page(DataTable givenAttributes) {
+	public void the_user_selects_the_state_drop_down_value_in_AARP_home_pages(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
