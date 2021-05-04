@@ -21,6 +21,8 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
@@ -977,10 +979,56 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		planSummaryPage.RockyLearnMoreButtonandValidate(planName);
 	}
+	
+	@Then("^the user clicks on Learn More for Rocky Mountain plans$")
+	public void the_user_clicks_on_Learn_More__for_Rocky_Mountain_plns(DataTable planAttributes) throws Throwable {
+
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.RockyLearnMoreButtonandValidate(planName);
+	}
 
 	@Then("^the user clicks on Learn More UMS for people Health plans$")
 	public void the_user_clicks_on_Learn_More_for_UHC_for_people_Health_plans(DataTable planAttributes)
 			throws Throwable {
+
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
+		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
+	}
+	
+	@Then("^the user clicks on the united health care medicare solutions link$")
+	public void the_user_clicks_on_the_united_health_care_medicare_solutions_link() throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickUnitedHealthcareMedicareSolutions();
+
+	}
+
+	@Then("^the user clicks on Learn More for people Health plans$")
+	public void the_user_clicks_at_Learn_More_for_people_Health_plans(DataTable planAttributes) throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);

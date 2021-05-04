@@ -3608,6 +3608,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
+	
+	public void clickUnitedHealthcareMedicareSolutions() {
+//		threadsleep(8);
+		threadsleep(5000);
+//			UnitedHealthcareMedicareSolutions.click();
+		jsClickNew(UnitedHealthcareMedicareSolutions);
+	}
 
 	public LearnAboutMedicareHomePageMobile clickLearnMoreOnHomePage() {
 

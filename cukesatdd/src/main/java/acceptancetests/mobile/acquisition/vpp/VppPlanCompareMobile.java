@@ -32,6 +32,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -2931,6 +2932,13 @@ public class VppPlanCompareMobile {
 
 	@Then("^user clicks on Change Zip code link in AARP site$")
 	public void user_clicks_on_Change_Zip_code_link_in_UMS_site() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.clickOnChangeZipCode();
+	}
+	
+	@Then("^user clicks on Change Zip code link$")
+	public void user_clicks_at_Change_Zip_code_link() throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickOnChangeZipCode();
