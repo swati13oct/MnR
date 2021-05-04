@@ -945,7 +945,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		return null;
 	}
 	
-	public void updateHrefUrlVPP(String env) {
+	public void updateHrefUrlVPP_Script1(String env) {
 		WebElement element= driver.findElement(By.xpath("//*[@id='button-530621114']"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		if(env.equalsIgnoreCase("stage"))
@@ -958,7 +958,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 	}
 	
-	public void updateHrefUrlDCE(String env) {
+	public void updateHrefUrlDCE_Script1(String env) {
 		WebElement element= driver.findElement(By.xpath("//*[@id='button-1095029748']"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		if(env.equalsIgnoreCase("stage"))
@@ -971,7 +971,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 	}
 	
-	public void updateHrefUrlPRE(String env) {
+	public void updateHrefUrlPRE_Script1(String env) {
 		WebElement element= driver.findElement(By.xpath("//*[@id='button-565183562']"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		if(env.equalsIgnoreCase("stage"))
@@ -981,6 +981,84 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 		else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
+		}
+	}
+	
+	public void updateHrefUrlVPP_Script7(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-94902407']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+	}
+	
+	public void updateHrefUrlDCE_Script7(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-127872393']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+	}
+	
+	public void updateHrefUrlDCE_Script7_1(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-951820959']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+	}
+	
+	public void updateHrefUrlPharmacy_Script7(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-356498815']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/aarp-pharmacy.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+	}
+	
+	public void updateHrefUrlVPP_Script7_1(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-1708542647']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/prescription-drug-plans/available-plans.html?WT.mc_id=8001024&county=053&state=27')", element);
+		}
+	}
+	
+	public void updateHrefUrlPrivacyLink_Script7(String env) {
+		WebElement element= driver.findElement(By.xpath("//span[contains(text(),'Privacy')]/.."));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/privacy-policy.html?WT.mc_id=8001024')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8001024')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8001024')", element);
 		}
 	}
 }

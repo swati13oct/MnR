@@ -539,7 +539,7 @@ public void user_clicks_on_Find_Plans_and_Pricing_to_open_a_new_tab_in_lower_env
 	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 	String env=MRScenario.environment;
-	campaignExternalLinkspage.updateHrefUrlVPP(env);
+	campaignExternalLinkspage.updateHrefUrlVPP_Script1(env);
 	campaignExternalLinkspage.clickFindPlansPricing();
 }
 
@@ -548,7 +548,7 @@ public void user_clicks_on_Estimate_Prescription_Drug_Costto_from_external_page_
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		String env=MRScenario.environment;
-		campaignExternalLinkspage.updateHrefUrlDCE(env);
+		campaignExternalLinkspage.updateHrefUrlDCE_Script1(env);
 		campaignExternalLinkspage.navigateToDCERedesignFromExternalPage();
 
 }
@@ -558,8 +558,103 @@ public void user_clicks_on_Start_Now_to_Get_Started_PRE_Flow_for_lower_env() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		String env=MRScenario.environment;
-		campaignExternalLinkspage.updateHrefUrlPRE(env);
+		campaignExternalLinkspage.updateHrefUrlPRE_Script1(env);
 		campaignExternalLinkspage.navigateToPREGetStarted();
+	}
+
+@Given("^User able to land on Shop for a plan page in new tab in lower env$")
+public void user_able_to_land_on_Shop_for_a_plan_page_in_new_tab_in_lower_env()  {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String env=MRScenario.environment;
+	campaignExternalLinkspage.updateHrefUrlVPP_Script7(env);
+	AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnPlanandPricingBtn();
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+}
+
+@Then("^the user clicks on Estimate your drug costs to land on Drug cost page from External link in lower env$")
+public void the_user_clicks_on_Estimate_Drug_Cost_button_on_external_link_page_in_lower_env() {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String env=MRScenario.environment;
+	campaignExternalLinkspage.updateHrefUrlDCE_Script7(env);
+	GetStartedPage getStartedPage = campaignExternalLinkspage.estimateDrugCostButton();
+	if (null != getStartedPage) {
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+	} else
+		Assert.fail("DCE Redesign page object not loaded");
+}
+
+@When("^user click on Estimate your Drug Cost button under Look up your drugs title in lower env$")
+public void the_user_clicks_on_Look_up_drug_button_on_external_link_page_lower_env() {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String env=MRScenario.environment;
+	campaignExternalLinkspage.updateHrefUrlDCE_Script7_1(env);
+	GetStartedPage getStartedPage = campaignExternalLinkspage.lookUpDrugButton();
+	if (null != getStartedPage) {
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
+	} else
+		Assert.fail("DCE Redesign page object not loaded");
+}
+
+@When("user clicks on Start Now to get start the Pharmacy flow from external page in lower env")
+public void user_clicks_on_Start_Now_to_Get_Started_Pharmacy_Flow_lower_env() {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String env=MRScenario.environment;
+	campaignExternalLinkspage.updateHrefUrlPharmacy_Script7(env);
+	PharmacySearchPage pharmacySearchPage = campaignExternalLinkspage.navigateToPharmacyGetStarted();
+	getLoginScenario().saveBean(PageConstants.PHARMACY_SEARCH_PAGE, pharmacySearchPage);
+}
+
+@Then("^the user clicks on View Plans and Pricing button on PDP external page in lower env$")
+public void the_user_clicks_on_View_Plans_and_Pricing_button_on_PDP_external_page_lower_env(DataTable givenAttributes) {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String zipcode = memberAttributesMap.get("Zip Code");
+	String county = memberAttributesMap.get("County Name");
+	String isMultiCounty = memberAttributesMap.get("Is Multi County");
+	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+	getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+	getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	VPPPlanSummaryPage plansummaryPage = null;
+	
+	String env=MRScenario.environment;
+	campaignExternalLinkspage.updateHrefUrlVPP_Script7_1(env);
+	campaignExternalLinkspage.viewPlansAndPricing();
+
+	if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+		plansummaryPage = campaignExternalLinkspage.searchPlansWithOutCountyForPDPExternalPage(zipcode);
+	} else {
+		plansummaryPage = campaignExternalLinkspage.searchPlanswithCountyForPDPExternalPage(zipcode, county);
+	}
+
+	if (plansummaryPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+	} else {
+		Assert.fail("Error Loading VPP plan summary page");
+	}
+
+}
+
+@Then("^the user navigate back to aarp medicare plans11 page privacy link in lower env$")
+public void navigate_aarp_medicare11_privacy_links_lower_env() throws InterruptedException {
+
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		String env=MRScenario.environment;
+		campaignExternalLinkspage.updateHrefUrlPrivacyLink_Script7(env);
+		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
 }
 
