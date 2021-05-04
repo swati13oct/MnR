@@ -31,6 +31,7 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.RequestHelpAndInformationPage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
@@ -3625,6 +3626,127 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 
+	}
+	
+	
+	
+	public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
+
+		validateNew(RightRail_FindAnAgentMedsupp);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgentMedsupp, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(RightRail_FindAnAgentMedsupp);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentUHCAgentURL = driver.getCurrentUrl();
+		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
+		System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);
+		System.out.println("Expected myuhcagent URL: " + ExpectedUHCAgentURL);
+		System.out.println("Actual myuhcagent URL: " + ActualCurrentUHCAgentURL);
+
+		if (ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+			System.out.println("****************myuhcagent Page is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************myuhcagent Page is not loaded ***************");
+		}
+
+	}
+	
+	@FindBy(xpath = "//*[contains(@class,'uhc-tempo-button') and contains(text(),'Find an Agent')]")
+	private WebElement requestAgentBtn;
+	
+	public pages.mobile.acquisition.commonpages.RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
+
+		Actions actions = new Actions(driver);
+		PageFactory.initElements(driver, this);
+		actions.moveToElement(ourPlansHoverLink);
+		actions.moveToElement(moreHelpInfoLink);
+		actions.click().build().perform();
+		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+		//CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
+		if (validateNew(requestAgentBtn)) {
+			return new pages.mobile.acquisition.commonpages.RequestHelpAndInformationPage(driver);
+		}
+		return null;
+	}
+
+	
+
+	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
+	private WebElement RightRail_FindAnAgent;
+
+	@FindBy(xpath = "//a[contains(@href,'/shop/connect.html')]")
+	private WebElement RequestMoreInformationLink;
+
+	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+	private WebElement RightRail_FindAnAgentMedsupp;
+
+
+	public void clickonFindanAgentlink(String ExpectedUHCAgentURL) {
+		// threadsleep(10);
+		validateNew(RightRail_FindAnAgent);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(RightRail_FindAnAgent);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentUHCAgentURL = driver.getCurrentUrl();
+		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
+		System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);
+		System.out.println("Expected myuhcagent URL: " + ExpectedUHCAgentURL);
+		System.out.println("Actual myuhcagent URL: " + ActualCurrentUHCAgentURL);
+
+		if (ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+			System.out.println("****************myuhcagent Page is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************myuhcagent Page is not loaded ***************");
+		}
+
+	}
+
+	@FindBy(id = "ghn_lnk_3")
+	private WebElement learnaboutMedicare;
+
+	public pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage HoveronalearnaboutMedicare()
+			throws InterruptedException {
+		waitforElement(learnaboutMedicare);
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
+			System.out.println("Hove Action skipped on Mobile");
+		} else {
+			if (learnaboutMedicare.isDisplayed()) {
+				Actions action = new Actions(driver);
+				action.moveToElement(learnaboutMedicare).build().perform();
+				jsMouseOver(learnaboutMedicare);
+				return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
+			} else {
+				return null;
+			}
+		}
+		return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
 	}
 
 	public pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage Hoveronaplan() throws InterruptedException {

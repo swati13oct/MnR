@@ -1,6 +1,8 @@
 package pages.mobile.acquisition.commonpages;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -73,7 +75,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 	public void pagebackButton() {
 		int i = 0;
 		waitforElementVisibilityInTime(getLnkMedicareAdvantage(), 10000);
-		//waitforElementNew(getLnkLearnAboutMedicare());
+		// waitforElementNew(getLnkLearnAboutMedicare());
 
 		backButtonClick(getLstLearnAboutMedicare().get(i));
 		new MedicareEligibilityPage(driver).backMedicareEducationHome();
@@ -99,7 +101,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 	}
 
 	public void backButtonClick(WebElement element) {
-		//navigateToMenuLinks(getLnkLearnAboutMedicare(), getLstLearnAboutMedicareTitle().get(0));
+		// navigateToMenuLinks(getLnkLearnAboutMedicare(),
+		// getLstLearnAboutMedicareTitle().get(0));
 		navigateToMenuLinks(getLnkLearnAboutMedicare(), element);
 	}
 
@@ -107,7 +110,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 	public void checktabKeyMedBacklink() {
 		int i = 0, j = 0;
 		waitforElementVisibilityInTime(getLnkMedicareAdvantage(), 10000);
-		//waitforElementNew(getLnkLearnAboutMedicare());
+		// waitforElementNew(getLnkLearnAboutMedicare());
 
 		navigateToMedicareMenuLinks(getLstLearnAboutMedicare().get(0));
 
@@ -211,10 +214,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 				if (getLstLearnAboutMedicare().get(i).getText().contains("Supplement")) {
 					Assertion.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
 							getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
-				}
-				else
-					if((medicareMenuText()[i]).contains("Supplement"))
-						continue;
+				} else if ((medicareMenuText()[i]).contains("Supplement"))
+					continue;
 				else
 					Assertion.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
 							getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
@@ -262,7 +263,8 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 		String txtmedicareMenu[] = {
 
 				"Eligibility", "Coverage Choices", "Prescriptions, Providers & Benefits", "Cost Basics",
-				"Medicare Advantage Plans", "Medicare Supplement Insurance Plans","Medicare Prescription Drug Plans", "Enrollment Basics" };
+				"Medicare Advantage Plans", "Medicare Supplement Insurance Plans", "Medicare Prescription Drug Plans",
+				"Enrollment Basics" };
 		return txtmedicareMenu;
 	}
 
@@ -299,6 +301,69 @@ public class LearnAboutMedicareHomePage extends GlobalWebElementsMobile {
 		getLnkMedicareAdvantage().click();
 		return new MedicarePrescriptionDrugPartDPlansPage(driver);
 
+	}
+
+	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
+	private WebElement FindAnAgent;
+
+	@FindBy(xpath = "//input[contains(id,'updates-email') or contains(@id,'learnmore-email-address')]")
+	private WebElement requestshoppageemailaddress;
+
+	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	private WebElement requestplaninformationLearnMedicaresubmit;
+
+	@FindBy(xpath = "//p[contains(text(),'Your guide will arrive in your inbox')]")
+	private WebElement requestplaninformationLearnMedicaresubmitpopup;
+
+	@FindBy(xpath = "//span[contains(@id,'learnmore-email-error')]")
+	private WebElement RequestPlanInformationLearnMedicarepages_ErrorMessage;
+
+	public void clickonFindanAgentlinkfromMedEd(String ExpectedUHCAgentURL) {
+
+		validateNew(FindAnAgent);
+		CommonUtility.waitForPageLoadNew(driver, FindAnAgent, 30);
+		String parentWindow = driver.getWindowHandle();
+		// FindAnAgent.click();
+		jsClickNew(FindAnAgent);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		/*
+		 * CommonUtility.checkPageIsReadyNew(driver); String CurrentUHCAgentURL =
+		 * driver.getCurrentUrl();
+		 * System.out.println("myuhcagent Page is displayed : "+CurrentUHCAgentURL);
+		 * System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
+		 * 
+		 * if(ExpectedUHCAgentURL.equalsIgnoreCase(CurrentUHCAgentURL)) { System.out.
+		 * println("****************myuhcagent Page is displayed  ***************");
+		 * 
+		 * Assertion.assertTrue(true); } else { Assertion.
+		 * fail("****************myuhcagent Page is not loaded ***************"); }
+		 */
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentUHCAgentURL = driver.getCurrentUrl();
+		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
+		System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);
+		System.out.println("Expected myuhcagent URL: " + ExpectedUHCAgentURL);
+		System.out.println("Actual myuhcagent URL: " + ActualCurrentUHCAgentURL);
+
+		if (ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+			System.out.println("****************myuhcagent Page is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************myuhcagent Page is not loaded ***************");
+		}
+
+		driver.close();
+		driver.switchTo().window(parentWindow);
 	}
 
 }

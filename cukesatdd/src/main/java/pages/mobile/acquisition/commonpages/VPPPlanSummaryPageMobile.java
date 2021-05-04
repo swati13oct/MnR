@@ -930,7 +930,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public ProviderSearchPageMobile clickNextBestActionModalFindMyDoctorsBtn() {
 		// nextBestActionModalFindMyDoctorsBtn.click();
 		jsClickNew(nextBestActionModalFindMyDoctorsBtn);
-//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -938,7 +938,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		for (int i = 0; i < initialCount + 1; i++) {
 			driver.switchTo().window(tabs.get(i));
 			currentHandle = driver.getWindowHandle();
-//			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
+			// if
+			// (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
 			if (!currentHandle.contentEquals(CommonConstants.getMainWindowHandle()))
 				break;
 		}
@@ -1075,13 +1076,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 
-//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		scrollToView(ProviderSearchLink);
-		//validateNew(ProviderSearchLink);
+		// validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -2226,8 +2227,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		 * if(ReferRequired.equals(referralRequired)){
 		 * System.out.println("Referral Required Benefit for the plan is " +
 		 * ReferRequired); Assertion.assertTrue(true); } else
-		 * Assertion.fail("Referral Required Benefit for the plan is incorrect : "+planName
-		 * );
+		 * Assertion.fail("Referral Required Benefit for the plan is incorrect : "
+		 * +planName );
 		 */
 	}
 
@@ -2820,13 +2821,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Click to close on the create profile popup");
 
 			String State = CommonConstants.getSelectedState();
-			/*if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
-				if (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania")
-						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico")
-						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {*/
+			/*
+			 * if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) { if
+			 * (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") ||
+			 * CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") ||
+			 * CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {
+			 */
 			if (!StringUtils.isNullOrEmpty(State)) {
-				if (State.equalsIgnoreCase("Pennsylvania")
-						|| State.equalsIgnoreCase("Puerto Rico")
+				if (State.equalsIgnoreCase("Pennsylvania") || State.equalsIgnoreCase("Puerto Rico")
 						|| State.equalsIgnoreCase("Virginia")) {
 					if (validate(closeProfilePopup))
 						jsClickNew(closeProfilePopup);
@@ -3010,8 +3012,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		String testPlanXpath = "//*[contains(text(),'" + unsavePlan + "') and contains(@class,'ng-binding')]";
 		List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
 		int expMatch = 1;
-		Assertion.assertTrue("PROBLEM - unable to locate plan='" + unsavePlan + "'.  Expect number of match='" + expMatch
-				+ "' | Actual number of match='" + listOfPlans.size() + "'", listOfPlans.size() == expMatch);
+		Assertion.assertTrue("PROBLEM - unable to locate plan='" + unsavePlan + "'.  Expect number of match='"
+				+ expMatch + "' | Actual number of match='" + listOfPlans.size() + "'", listOfPlans.size() == expMatch);
 
 		System.out.println("Proceed to validate 'Saved Plan' icon is there before clicking to unsave it");
 		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
@@ -3147,7 +3149,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				validate(emailPlanSummaryFieldBox));
 		Assertion.assertTrue("PROBLEM - unable to locate send button on email popup screen after email link is clicked",
 				validate(emailPlanSummarySendButton));
-		Assertion.assertTrue("PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
+		Assertion.assertTrue(
+				"PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
 				validate(emailPlanSummaryCancelButton));
 
 		System.out.println("Proceed to click cancel button on email screen, email screen should close");
@@ -4961,7 +4964,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public ProviderSearchPageMobile clicksOnIsProviderCoveredUms(String planName) {
 
-//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
 		try {
@@ -5241,8 +5244,238 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new pages.mobile.acquisition.commonpages.ComparePlansPageMobile(driver);
 		return null;
-		
-		
+
+	}
+
+	@FindBy(xpath = "//a[contains(text(),'Guide to Health Insurance for People with Medicare')]")
+	private WebElement RightRail_Guidetoyourhealth;
+
+	public void medsuppOLERightRailGuideourhealth() throws InterruptedException {
+		validateNew(RightRail_Guidetoyourhealth);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_Guidetoyourhealth, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_Guidetoyourhealth.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		// String ExpectedCurrentRailURL1 = new
+		// String("https://aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/GuideToHealth/StateVariations/GU25114ST.pdf");
+		// String ActualCurrentRailURL=CurrentRailURL.
+		// .substring(0, 27).trim();
+		System.out.println(" Page is displayed : " + CurrentRailURL);
+		// System.out.println("Expected URL: "+ExpectedCurrentRailURL1);
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+
+	}
+
+	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage')]")
+	// @FindBy(xpath = "//a[contains(text(),'Plan Overview')]")
+	private WebElement RightRail_outlinecoverage;
+
+	public void medsuppOLERightRailoutlinecoverage() throws InterruptedException {
+		validateNew(RightRail_outlinecoverage);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_outlinecoverage, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_outlinecoverage.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.switchTo().window(parentWindow);
+
+	}
+
+	@FindBy(xpath = "//a[contains(text(),'Plan Overview')]")
+	private WebElement RightRail_Planoverview;
+
+	public void medsuppOLERightRailplanoverview() throws InterruptedException {
+		validateNew(RightRail_Planoverview);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_Planoverview, 30);
+		String parentWindow = driver.getWindowHandle();
+		RightRail_Planoverview.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+
+	}
+
+	@FindBy(xpath = "//a[contains(text(),'Rules and Disclosures')]")
+	private WebElement RightRail_RulesandDisclosure;
+
+	public void medsuppOLERightRailRulesDisclose() throws InterruptedException {
+		validateNew(RightRail_RulesandDisclosure);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_RulesandDisclosure, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(RightRail_RulesandDisclosure);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+
+	}
+
+	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/EnrollmentDiscount')]")
+	private WebElement EnrollmentDiscount;
+
+	public void medsuppOLERightRailEnrollmentDiscount() throws InterruptedException {
+		validateNew(EnrollmentDiscount);
+		CommonUtility.waitForPageLoadNew(driver, EnrollmentDiscount, 30);
+		String parentWindow = driver.getWindowHandle();
+		EnrollmentDiscount.click();
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+				break;
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentRailURL = driver.getCurrentUrl();
+		System.out.println("Actual  URL: " + CurrentRailURL);
+
+		if (CurrentRailURL.contains("https://aarpsupplementalhealth-stg.uhc.com/")
+				|| CurrentRailURL.contains("https://www.aarpsupplementalhealth.com/")
+						&& CurrentRailURL.contains(".pdf")) {
+			System.out.println("****************Rail Rail is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************Rail Rail is not loaded ***************");
+		}
+		driver.close();
+		driver.switchTo().window(parentWindow);
+
+	}
+
+	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
+	private WebElement RightRail_FindAnAgent;
+
+	@FindBy(xpath = "//a[contains(@href,'/shop/connect.html')]")
+	private WebElement RequestMoreInformationLink;
+
+	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
+	private WebElement RightRail_FindAnAgentMedsupp;
+
+	public void clickonFindanAgentlinkMedsupp(String ExpectedUHCAgentURL) {
+
+		validateNew(RightRail_FindAnAgentMedsupp);
+		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgentMedsupp, 30);
+		String parentWindow = driver.getWindowHandle();
+		jsClickNew(RightRail_FindAnAgentMedsupp);
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
+		CommonUtility.checkPageIsReadyNew(driver);
+		String CurrentUHCAgentURL = driver.getCurrentUrl();
+		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
+		System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);
+		System.out.println("Expected myuhcagent URL: " + ExpectedUHCAgentURL);
+		System.out.println("Actual myuhcagent URL: " + ActualCurrentUHCAgentURL);
+
+		if (ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
+			System.out.println("****************myuhcagent Page is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("****************myuhcagent Page is not loaded ***************");
+		}
 
 	}
 

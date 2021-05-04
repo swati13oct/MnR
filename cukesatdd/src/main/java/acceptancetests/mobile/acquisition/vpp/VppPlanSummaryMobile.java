@@ -22,7 +22,8 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
@@ -1031,6 +1032,99 @@ public class VppPlanSummaryMobile {
 		} else {
 			Assertion.fail("Issue in selecting a plan drop down");
 		}
+	}
+	
+	
+	@Given("^the user hovers screen over the learnabout Medicare for a plan$")
+	public void the_user_hovers_screen_over_the_learnabout_Medicare_for_a_plan() throws Throwable {	
+		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		ShopForPlanNavigationPage shop = acqusitionHomePage.HoveronalearnaboutMedicare();
+//		if (shop!=null) {
+//			System.out.println("Medicare Education drop down is opened");
+//			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
+//		}
+//		else {
+//			Assertion.fail("Issue in selecting a plan drop down");
+//		}
+	}
+	
+	@Then("^the site user validates the RightRails Links on Medsupp Page$")
+	public void user_validate_rightrail_links_medsupp_page() throws Throwable {
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * Map<String, String> memberAttributesMap = new HashMap<String, String>(); for
+		 * (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); } String urGuideURL =
+		 * memberAttributesMap.get("UR Guide URL"); String GuideYourHealthURL =
+		 * memberAttributesMap.get("Guide Your Health URL"); String OutlineCoverageURL =
+		 * memberAttributesMap.get("Outline Coverage URL"); String PlanOverviewLink =
+		 * memberAttributesMap.get("Plan overview URL"); String RulesandDisclosureLink=
+		 * memberAttributesMap.get("Rules and Disclosure URL");
+		 */
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		// if(urGuideURL!=null){
+		plansummaryPage.medsuppOLERightRail();
+		plansummaryPage.medsuppOLERightRailGuideourhealth();
+	//	plansummaryPage.medsuppOLERightRailoutlinecoverage();
+		plansummaryPage.medsuppOLERightRailplanoverview();
+		plansummaryPage.medsuppOLERightRailRulesDisclose();
+		plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
+		//plansummaryPage.medsuppOLERightRailLearnmore();
+
+		// Assertion.assertTrue(true);
+		// }else
+		// Assertion.fail("Error in loading the yourguide Page");
+
+	}
+
+
+	
+	@Then("^the site user clicks on View Plans Button proceed to View Plans Page$")
+	public void the_site_users_clicks_on_View_Plans_Button_proceed_to_View_Plans_Page_button(DataTable givenAttributes)
+			throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.MedSupFormValidation(DateOfBirth);
+	}
+	
+	@When("the user selects plan year for PRE Flow$")
+	public void users_selects_plan_year_for_PRE_Flow(DataTable givenAttributes) {
+
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String planYear = givenAttributesMap.get("Plan Year");
+		// VPPPlanSummaryPage plansummaryPage = null;
+		// VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		VPPPlanSummaryPageMobile plansummaryPage = new VPPPlanSummaryPageMobile(
+				(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		// getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,
+		// plansummaryPage);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_YEAR, planYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planYear);
+
 	}
 	
 
