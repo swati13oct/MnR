@@ -156,8 +156,8 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
       | County Name     | <county>          |
       | Is Multi County | <isMultutiCounty> |
     #And the user views the plans of the below plan type
-    And the user views the plans of the below plan type for shop pages
-      | Plan Type | <plantype> |
+    #And the user views the plans of the below plan type for shop pages
+      #| Plan Type | <plantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
     And the user validates the available plans for selected plan types
