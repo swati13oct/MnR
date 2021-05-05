@@ -1061,4 +1061,30 @@ public class CampaignExternalLinks extends UhcDriver {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8001024')", element);
 		}
 	}
+	
+	public void updateHrefUrlVPP_Script6(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='zipfinder-277338403']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('data-url','https://www.stage-aarpmedicareplans.uhc.com/health-plans.html')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('data-url','https://offline.aarpmedicareplans.com/health-plans.html')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('data-url','https://www.aarpmedicareplans.com/health-plans.html')", element);
+		}
+	}
+	
+	public void updateHrefUrlPrivacyLink_Script6(String env) {
+		WebElement element= driver.findElement(By.xpath("//span[contains(text(),'Privacy')]/.."));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/privacy-policy.html?WT.mc_id=8000158')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8000158')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8000158')", element);
+		}
+	}
 }

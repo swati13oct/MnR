@@ -656,5 +656,37 @@ public void navigate_aarp_medicare11_privacy_links_lower_env() throws Interrupte
 		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
+
+@Then("^the user validate aarp medicare plans11 page external link in lower env$")
+public void validate_linkson_aarp_medicare_plans11_page_lower_env(DataTable givenAttributes) throws InterruptedException {
+
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+		String zipcode = memberAttributesMap.get("Zip Code");
+		
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		
+		String env=MRScenario.environment;
+		campaignExternalLinkspage.updateHrefUrlVPP_Script6(env);
+		
+		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11Link(zipcode);
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+	}
+
+@Then("^the user navigate back to aarp medicare plans11 privacy link in lower env$")
+public void navigate_aarp_medicare11_privacy_links_in_lower_env() throws InterruptedException {
+
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		String env=MRScenario.environment;
+		campaignExternalLinkspage.updateHrefUrlPrivacyLink_Script6(env);
+		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+	}
 }
 
