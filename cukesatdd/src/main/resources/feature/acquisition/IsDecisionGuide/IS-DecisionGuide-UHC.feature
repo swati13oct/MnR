@@ -1,7 +1,7 @@
-@fastandfurious @IS_DecisionGuide_UHC
+@fastandfurious @insuranceSolution_DecisionGuide_UHC
 Feature: 2.14 Med Supp Plans (IS) Decision Guide flow in UHC site
 
-  @IS_DecisionGuide_UHC
+  @insuranceSolution_DecisionGuide_UHC
   Scenario Outline: UID: <UID> - To Test IS Decision Guide E2E on UHC site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

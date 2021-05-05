@@ -165,7 +165,7 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | MultiCOuntyzipcode |
       |              78006 |
 
-  @F250062 @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019
+  @F250062 @vppChangeLocationMultiCOunty @fastandfurious @Feb_release_2019
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -180,7 +180,7 @@ Feature: 2.02-Plan summary in vpp flow UMS
       | zipcode | isMultiCounty | county             | MultiCOuntyzipcode |
       |   90210 | NO            | Los Angeles County |              80002 |
 
-  @F225721 @VPPPromoWidget @Predetors @Feb_release_2019
+  @F225721 @vppPromoWidget @Predetors @Feb_release_2019
   Scenario Outline: Vaidate the Right Rail Promo Widget
     Given the user is on the uhcmedicaresolutions site landing page
     When I access the vpp page

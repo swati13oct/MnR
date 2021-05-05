@@ -1,9 +1,9 @@
-#@DCE_Redesign_VPP_Details
+#@dce_Redesign_VPP_Details
 Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan Details in AARP site
 
   # 	Removing this scenario, added new validation step for
   #		combined validation for all 3 stages text validation fro LIS buydown plans
-  # 	Added to LISbuydown validation - @DCE_DrugDetailsLISBuyDown
+  # 	Added to LISbuydown validation - @dce_DrugDetailsLISBuyDown
   #@dceRedesignExtraHelpAlertDetailPage @F478554 @F492102 @F519757
   Scenario Outline: Test to Verify that Extra help Warning messgae on drug detail page
     Given the user is on medicare acquisition site landing page
@@ -136,7 +136,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | tabName                       |
       | UHC  |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | Medical Benefits and Programs |
 
-  #@DCE_Redesign_DCEViewPlanSummaryBtnNotExist
+  #@dce_Redesign_DCEViewPlanSummaryBtnNotExist
   Scenario Outline: Test to verify the Drug cost estimator and view plan summary are not visible when user navigate away from DCE and navigate to VPP detail page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -165,32 +165,32 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user click on view plan summary on vpp detail page
     Then user click on view plan details on summary page in AARP
 
-    #@DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD_AARP @dceViewPlanSummaryButton_AARP
+    #@dce_Redesign_VPPSummary_to_Vpp_Details_MAPD_AARP @dceViewPlanSummaryButton_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
       | AARP |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    # @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP_AARP @dceViewPlanSummaryButton_AARP
+    # @dce_Redesign_VPPSummary_to_Vpp_Details_PDP_AARP @dceViewPlanSummaryButton_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | tabName                       | planname                        |
       | AARP |   80002 | PDP      | future   | Adams County | yes             | meloxicam | Medical Benefits and Programs | AARP MedicareRx Walgreens (PDP) |
 
-    #  @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP_AARP @dceViewPlanSummaryButton_AARP
+    #  @dce_Redesign_VPPSummary_to_Vpp_Details_SNP_AARP @dceViewPlanSummaryButton_AARP
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | tabName                       |
       | AARP |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | Medical Benefits and Programs |
 
-    #   @DCE_Redesign_VPPSummary_to_Vpp_Details_MAPD_UHC @dceViewPlanSummaryButton_UHC
+    #   @dce_Redesign_VPPSummary_to_Vpp_Details_MAPD_UHC @dceViewPlanSummaryButton_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county | isMultutiCounty | drug1     | tabName                       | planname                                           |
       | UHC  |   90210 | MAPD     | future   | none   | no              | meloxicam | Medical Benefits and Programs | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    #    @DCE_Redesign_VPPSummary_to_Vpp_Details_PDP_UHC @dceViewPlanSummaryButton_UHC
+    #    @dce_Redesign_VPPSummary_to_Vpp_Details_PDP_UHC @dceViewPlanSummaryButton_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1     | tabName                       | planname                        |
       | UHC  |   80002 | PDP      | future   | Adams County | yes             | meloxicam | Medical Benefits and Programs | AARP MedicareRx Walgreens (PDP) |
 
-    #    @DCE_Redesign_VPPSummary_to_Vpp_Details_SNP_UHC @dceViewPlanSummaryButton_UHC
+    #    @dce_Redesign_VPPSummary_to_Vpp_Details_SNP_UHC @dceViewPlanSummaryButton_UHC
     Examples: 
       | site | zipcode | plantype | planyear | county       | isMultutiCounty | drug1   | planname                                              | tabName                       |
       | UHC  |   78006 | SNP      | future   | Bexar County | yes             | Lipitor | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | Medical Benefits and Programs |
@@ -350,7 +350,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | county       | isMultutiCounty | drug1 | planname                                   | planyear |
       | UHC  |   78006 | SNP      | Bexar County | yes             | Emsam | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
 
-  #      @DCERedesign_DCE-VPPDetails_DrugSummary
+  #      @dceRedesign_DCE-VPPDetails_DrugSummary
   Scenario Outline: Test to verify the Drug cost estimator and view plan summary button on VPP detail page from Drug summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -509,7 +509,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | county | isMultutiCounty | drug1     | zipCode1 | zipCode2 | drug4         | drug5            | drug6   | planname                                           |
       | UHC  |   90001 | MAPD     | none   | no              | meloxicam |    96799 |    78456 | buprenorphine | fentanyl citrate | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-  # @dCERedesign_ChangePharmacy_DetailsPage @F472598
+  # @dceRedesign_ChangePharmacy_DetailsPage @F472598
   Scenario Outline: Test to verify change pharmacy functionality from Drug details page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -534,12 +534,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     When user saves and updates pharmacy from list on details page
     Then the pharmacy name should be updated on details page
 
-    #		@dCERedesign_ChangePharmacy_DetailsPage_AARP
+    #		@dceRedesign_ChangePharmacy_DetailsPage_AARP
     Examples: 
       | site | drug1   | zipCode |
       | AARP | Lipitor |   90001 |
 
-    #     @dCERedesign_ChangePharmacy_DetailsPage_UHC
+    #     @dceRedesign_ChangePharmacy_DetailsPage_UHC
     Examples: 
       | site | drug1   | zipCode |
       | UHC  | Lipitor |   90001 |
@@ -596,7 +596,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | drug1   | zipCode | site |
       | Orkambi |   74562 | UHC  |
 
-  # @DCE_DrugSummary_ValidatePage
+  # @dce_DrugSummary_ValidatePage
   Scenario Outline: Test to verify the Drug summary page in AARP
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -615,12 +615,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     And user should be navigated to Review drug cost estimate page
     And user verify the drug summary page
 
-    #@DCE_DrugSummary_ValidatePage_AARP
+    #@dce_DrugSummary_ValidatePage_AARP
     Examples: 
       | site | zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       | AARP |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
 
-    #    @DCE_DrugSummary_ValidatePage_UHC
+    #    @dce_DrugSummary_ValidatePage_UHC
     Examples: 
       | site | zipCode | plantype | county | isMultutiCounty | drug1 | planname                                           |
       | UHC  |   10001 | MAPD     | none   | no              | Emsam | AARP Medicare Advantage SecureHorizons Focus (HMO) |
@@ -757,7 +757,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | drug1   | zipCode | testPlans                                                        | pdptestPlans                    | snptestPlans                               | testPlansName                                                                                                                               |
       | UHC  | Orkambi |   10001 | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) | UnitedHealthcare Medicare Advantage Choice Plan 4 (Regional PPO),AARP MedicareRx Preferred (PDP),UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @dCERedesign_PlanSave @F476042
+  @dceRedesign_PlanSave @F476042
   Scenario Outline: Test to verify unauthenticated user save the plan on drug summary page and see the saved plan on guest profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

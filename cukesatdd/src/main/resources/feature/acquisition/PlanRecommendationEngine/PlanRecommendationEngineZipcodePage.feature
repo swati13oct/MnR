@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommendation Engine
 
   @PRE @planrecommendation @zipcodepage @siglecounty @F372735 @F511315

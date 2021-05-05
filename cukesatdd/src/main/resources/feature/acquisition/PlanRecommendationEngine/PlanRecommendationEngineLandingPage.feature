@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PRERegression
+@planRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine flow - Verify landing page in plan Recommendation Engine
 
   @PRE @planrecommendation @PRENavigationViaGetHelpChoosing @landingpage @F372697 @F388910 @PRERegression3

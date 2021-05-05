@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify header and footer page in plan Recommendation Engine
 
   @PRE @planrecommendation @headervalidation @HFlinkvalidation @F383639

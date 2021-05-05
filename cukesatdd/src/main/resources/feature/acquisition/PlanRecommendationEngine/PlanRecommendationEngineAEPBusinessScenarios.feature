@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PREAEPRegression
+@planRecommendationEngine @PREAEPRegression
 Feature: Plan Recommendation Engine Ranking - Verify Future PRE flows functionalities with recommendation and Ranking with API results
 
   @PRE @FutureAPIRanking @MAPDFlowRankingFuture

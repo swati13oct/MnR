@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify special needs page in plan Recommendation Engine
 
   @PRE @planrecommendation @specialneedspage @elementValidation @F372729
