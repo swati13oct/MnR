@@ -1,3 +1,4 @@
+@OLE
 Feature: 1.05.1.E2E for DCE to OLE Flows
 
   Scenario Outline: TID: <TID> -plan type: <PlanType>-To verify E2E For DCE to OLE Flow

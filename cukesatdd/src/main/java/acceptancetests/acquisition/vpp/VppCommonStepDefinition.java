@@ -4240,12 +4240,8 @@ public class VppCommonStepDefinition {
 	
 	@Given("^the user directly navigates to welcome OLE page$")
 	public void the_user_navigates_to_Welcome_OLE_Pages(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String path = memberAttributesMap.get("PagePath");
 		
 		String PlanName = memberAttributesMap.get("Plan Name");
