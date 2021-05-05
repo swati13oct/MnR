@@ -1,4 +1,4 @@
-package atdd.runners.acquisition.ole;
+package atdd.runners;
 
 import org.testng.annotations.Test;
 
