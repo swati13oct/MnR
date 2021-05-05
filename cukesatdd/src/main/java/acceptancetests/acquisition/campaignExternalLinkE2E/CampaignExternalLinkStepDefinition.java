@@ -688,5 +688,63 @@ public void navigate_aarp_medicare11_privacy_links_in_lower_env() throws Interru
 		AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnmedicareplans11PrivacyLink();
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
 	}
+
+@Then("^the user clicks on Learn About Medicare button on external link page in lower env$")
+public void the_user_clicks_on_Learn_About_Medicare_button_on_external_link_page_lower_env() {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String env=MRScenario.environment;
+	campaignExternalLinkspage.updateHrefUrlLearnMore_Script5(env);
+	AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnLearnAboutMedicareBtn();
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+}
+
+@Then("^the user clicks on Get Help Finding a Plan button on external link page in lower env$")
+public void the_user_clicks_on_Get_Help_Finding_a_Plan_button_on_external_link_page_lower_env() {
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String env=MRScenario.environment;
+	campaignExternalLinkspage.updateHrefUrlGetHelp_Script5(env);
+	AcquisitionHomePage acquisitionHomePage = campaignExternalLinkspage.clickOnGetHelpFindingAPlanBtn();
+	getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, acquisitionHomePage);
+}
+
+@When("^the user performs plan search using following information on Morgan Stanley external link page in lower env$")
+public void the_user_performs_plan_search_using_following_information_on_Morgan_Stanley_external_link_page_lower_env(
+		DataTable givenAttributes) {
+	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	for (int i = 0; i < memberAttributesRow.size(); i++) {
+		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+				memberAttributesRow.get(i).getCells().get(1));
+	}
+	String zipcode = memberAttributesMap.get("Zip Code");
+	String county = memberAttributesMap.get("County Name");
+	String isMultiCounty = memberAttributesMap.get("Is Multi County");
+	getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+	getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+	getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+	String env=MRScenario.environment;
+	campaignExternalLinkspage.updateHrefUrlVPP_Script5(env);
+	
+	VPPPlanSummaryPage plansummaryPage = null;
+	campaignExternalLinkspage.enterZipcodeFindPlan(zipcode);
+
+	if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
+		plansummaryPage = campaignExternalLinkspage.searchPlansWithOutCountyForMorganStanley(zipcode);
+	} else {
+		plansummaryPage = campaignExternalLinkspage.searchPlanswithCountyForMorganStanley(zipcode, county);
+	}
+
+	if (plansummaryPage != null) {
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+
+	} else {
+		Assert.fail("Error Loading VPP plan summary page");
+	}
+}
 }
 

@@ -60,7 +60,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
 	private WebElement submit;
 
-	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/medicare-education.html')]")
+	@FindBy(xpath = "//a[contains(@href,'/medicare-education.html')]")
 	private WebElement LearnAboutMedicareBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'Privacy')]")
@@ -122,10 +122,10 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::a[contains(@href,'#modal--zip-finder')]")
 	private WebElement locateZipcodeLink;
 
-	@FindBy(xpath = "//span[@class='card-link__arrow' and contains(text(),'Medicare Supplement')]")
+	@FindBy(xpath = "//span[contains(@class,'link-text') and contains(text(),'Medicare Supplement')]")
 	private WebElement MedicareSupplementInsurancePlans;
 	
-	@FindBy(xpath = "//a[contains(@href,'https://www.uhcmedicaresolutions.com/medicare-plans.html')]")
+	@FindBy(xpath = "//a[contains(@href,'/medicare-plans.html')]")
 	private WebElement getHelpFindingPlanBtn;
 
 	@FindBy(xpath = "//h2[contains(text(),'View plans')]//following::button[contains(text(),'Find a Plan')]")
@@ -718,7 +718,6 @@ public class CampaignExternalLinks extends UhcDriver {
 		jsClickNew(MedicareSupplementInsurancePlans);
 		threadsleep(3);
 		CommonUtility.checkPageIsReadyNew(driver);
-
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_SUPPLEMENT_INSURANCE_PLANS)) {
 			System.out.println("MS Insurance Plans Page opened successfully: URL-->" + driver.getCurrentUrl());
 			CheckiPerseptions();
@@ -790,7 +789,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		String CurrentRailURL = driver.getCurrentUrl();
 		System.out.println("Actual  URL: " + CurrentRailURL);
 
-		if (CurrentRailURL.contains("https://www.uhcmedicaresolutions.com/plan-recommendation-engine.html")) {
+		if (CurrentRailURL.contains("/plan-recommendation-engine.html")) {
 			System.out.println("****************PRE Page is displayed***************" + CurrentRailURL);
 			checkModelPopup(driver, 10);
 			return new AcquisitionHomePage(driver);
@@ -1085,6 +1084,45 @@ public class CampaignExternalLinks extends UhcDriver {
 		}
 		else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/privacy-policy.html?WT.mc_id=8000158')", element);
+		}
+	}
+	
+	public void updateHrefUrlLearnMore_Script5(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-1416089344']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/medicare-education.html?WT.mc_id=8002977&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
+		}
+	}
+	
+	public void updateHrefUrlGetHelp_Script5(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='button-563198609']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/medicare-plans.html?WT.mc_id=8002977&coveragePerson=M&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Fmorganstanley&subdomain=group')", element);
+		}
+	}
+	
+	public void updateHrefUrlVPP_Script5(String env) {
+		WebElement element= driver.findElement(By.xpath("//*[@id='zipfinder-213300386']"));
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if(env.equalsIgnoreCase("stage"))
+		js.executeScript("arguments[0].setAttribute('data-url','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
+		else if (env.equalsIgnoreCase("offline")){
+			js.executeScript("arguments[0].setAttribute('data-url','https://offline.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
+		}
+		else {
+			js.executeScript("arguments[0].setAttribute('data-url','https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html')", element);
 		}
 	}
 }
