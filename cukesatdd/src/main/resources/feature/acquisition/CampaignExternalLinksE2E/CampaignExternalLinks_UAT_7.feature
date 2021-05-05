@@ -411,7 +411,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links for Scenario7 related to pr
       | TFN Xpath | <TFNxpath2> |
     And the user closes the new browser tab
     ##--------------------------------- pharmacyflow from External Link------------------------##
-    When user clicks on Start Now to get start the Pharmacy flow from external page in lower env
+    When user clicks on Start Now to start the Pharmacy flow from external page in lower env
     And the user enters following details on Pharmacy search page
       | Zip Code    | <zipcode>  |
       | Distance    | <distance> |

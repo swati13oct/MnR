@@ -16,7 +16,7 @@ import cucumber.api.CucumberOptions;
 		"src/main/resources/feature/acquisition/CampaignExternalLinksE2E" }, plugin = { "pretty",
 				"html:reports/test-report",
 				"json:target/cucumber-RunMRATDDAcquisitionUlayerCampaignExternalLink7Stage.json" }, tags = {
-						"@Scenario7_AARP" })
+						"@Scenario7_AARP_Stage" })
 public class RunMRATDDAcquisitionUlayerCampaignExternalLink7Stage {
 
 }

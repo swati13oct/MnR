@@ -598,8 +598,8 @@ public void the_user_clicks_on_Look_up_drug_button_on_external_link_page_lower_e
 		Assert.fail("DCE Redesign page object not loaded");
 }
 
-@When("user clicks on Start Now to get start the Pharmacy flow from external page in lower env")
-public void user_clicks_on_Start_Now_to_Get_Started_Pharmacy_Flow_lower_env() {
+@When("user clicks on Start Now to start the Pharmacy flow from external page in lower env")
+public void user_clicks_on_Start_Now_to_Get_Started_lower_env() {
 	CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 			.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 	String env=MRScenario.environment;
