@@ -15,7 +15,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionOLEBlayerPlanBenefits.json",
 						"timeline:target" },
-				tags = "@regressionAARP")
+				tags = "@OLEBenefits")
 
 
 @RetryCountIfFailed(1)
