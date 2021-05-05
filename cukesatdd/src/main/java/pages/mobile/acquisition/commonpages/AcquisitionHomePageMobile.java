@@ -1,6 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -1980,14 +1981,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		case "Empty":
 			System.out.println("Varify Error message for " + inputValue + "");
 			String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
-			assertTrue(errMessage.contains("Your search box was empty. Please enter some text in the search box"));
+			Assertion.assertTrue(errMessage.contains("Your search box was empty. Please enter some text in the search box"));
 			break;
 		case "InvalidCharacter":
 			System.out.println("Validating invalid character message");
 			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText();
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
-			// assertTrue(invalidSearch.contains("No pages were found containing
+			Assertion.assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			// Assertion.assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
 		case "Numbers":
@@ -2962,7 +2963,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		threadsleep(4);
 		if (Thankyou.getText().equalsIgnoreCase("Thank you!")) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
@@ -3097,7 +3098,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 		else {
 			System.out.println("@@@@@@@@@ No Chat Window  @@@@@@@@@");
-			// assertTrue("Chat Icon not displayed on " + pageName + "", false);
+			// Assertion.assertTrue("Chat Icon not displayed on " + pageName + "", false);
 		}
 	}
 
@@ -3302,7 +3303,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// Assert.assertEquals(driver.getCurrentUrl(),
 		// "https://www.uhc.com/legal/accessibility");
 		if (driver.getCurrentUrl().contains("accessibility")) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 	}
 
@@ -3382,7 +3383,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-advantage-plans.html");
 		if (driver.getCurrentUrl().contains("aarpmedicareplans.com")
 				|| driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
@@ -3437,7 +3438,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// "https://www.stage-aarpmedicareplans.uhc.com/shop/dual-special-needs-plans.html");
 		if (driver.getCurrentUrl().contains("aarpmedicareplans.com")
 				|| driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
@@ -3459,7 +3460,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// "https://www.stage-aarpmedicareplans.uhc.com/shop/medicare-supplement-plans.html");
 		if (driver.getCurrentUrl().contains("aarpmedicareplans.com")
 				|| driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 	}
 
@@ -3492,7 +3493,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// "https://www.stage-aarpmedicareplans.uhc.com/shop/prescription-drug-plans.html");
 		if (driver.getCurrentUrl().contains("aarpmedicareplans.com")
 				|| driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 	}
 
@@ -3511,7 +3512,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// "https://www.stage-aarpmedicareplans.uhc.com/medicare-education.html");
 		if (driver.getCurrentUrl().contains("aarpmedicareplans.com")
 				|| driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
@@ -3542,7 +3543,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		threadsleep(5);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans.com")
 				|| driver.getCurrentUrl().contains("uhcmedicaresolutions.com")) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
@@ -3788,4 +3789,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
+	
+	public void validateUrl(String url) {
+		threadsleep(6);
+		String parentWindow = driver.getWindowHandle();
+		driver.switchTo().window(driver.getWindowHandles().toArray()[1].toString());
+		System.out.println(driver.getTitle());
+		String str = driver.getTitle();
+		// Assertion.assertTrue( "Title mismatch for dental
+		// directory",driver.getTitle().equals(url));
+		if (str.equals(url)) {
+			Assertion.assertTrue(true);
+		}
+
+	}
 }
