@@ -1,4 +1,4 @@
-@VPPNBAValidations_unauthenticatedUser @nextBestAction @VPP
+@vppNBAValidations_unauthenticatedUser @nextBestAction @vpp
 Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
 	
   Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
@@ -85,7 +85,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
     When user selects a provider and retuns to VPP page
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_MAPD_AARP01 @NBA_MAPD_Sanity_AARP @prod_regression @regressionAARP @sanity
+    @NBA_MAPD_AARP01 @NBA_MAPD_Sanity_AARP @prodRegression @regressionAARP @sanity
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
@@ -120,7 +120,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
 
-    @NBA_MAPD_UHC02 @regressionUHC @prod_regression
+    @NBA_MAPD_UHC02 @regressionUHC @prodRegression
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
@@ -229,7 +229,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | AARP |   10001 | No              | New York County | MAPD     | next     | Lipitor |
 
-    @NBA_MAPD_UHC01 @NBA_MAPD_Sanity_UHC @prod_regression @regressionUHC
+    @NBA_MAPD_UHC01 @NBA_MAPD_Sanity_UHC @prodRegression @regressionUHC
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   |
       | UHC  |   10001 | No              | New York County | MAPD     | next     | Lipitor |
@@ -261,7 +261,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Year | <planyear> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_MAPD_AARP02 @NBA_MAPD_Sanity_AARP_01 @prod_regression @regressionAARP
+    @NBA_MAPD_AARP02 @NBA_MAPD_Sanity_AARP_01 @prodRegression @regressionAARP
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | plantype1 | drug1   | planyear |
       | AARP |   19019 | No              | Iowa County | MAPD     | PDP       | Lipitor | next     |
@@ -349,7 +349,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Plan Type | <plantype> |
     Then user should be able to see the NBA modal to Enroll Plan on the VPP summary page
 
-    @NBA_PDP_AARP01 @NBA_PDP_Sanity_AARP @prod_regression @regressionAARP
+    @NBA_PDP_AARP01 @NBA_PDP_Sanity_AARP @prodRegression @regressionAARP
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | PDP      | next     | Lipitor |
@@ -393,7 +393,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                       |
       | AARP |   10001 | No              | New York County | PDP      | next     | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
-    @NBA_PDP_UHC02 @NBA_PDP_Sanity_UHC @prod_regression @regressionUHC @sanity
+    @NBA_PDP_UHC02 @NBA_PDP_Sanity_UHC @prodRegression @regressionUHC @sanity
     Examples: 
       | site | zipcode | isMultutiCounty | county          | plantype | planyear | drug1   | testPlans                       |
       | UHC  |   10001 | No              | New York County | PDP      | next     | Lipitor | AARP MedicareRx Walgreens (PDP) |

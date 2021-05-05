@@ -1,7 +1,7 @@
-@fastandfurious @IS_DecisionGuide_AARP
+@fastandfurious @insuranceSolution_DecisionGuide_AARP
 Feature: 1.14 Med Supp Plans (IS) Decision Guide flow in AARP site
 
-  @IS_DecisionGuide_AARP
+  @insuranceSolution_DecisionGuide_AARP
   Scenario Outline: UID: <UID> - To Test IS Decision Guide E2E on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

@@ -1,5 +1,5 @@
 #file name: VppPlanSummary_Common.feature
-@VPP @planSummary
+@vpp @planSummary
 Feature: 1.01.1-Vpp to plan Summary Scenarios
 
   Scenario Outline: TID: <TID> -plan type: <plantype> - Verify plan cards on plan summary page in <site> site
@@ -63,7 +63,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
       | 00002 |   28105 | UHC  | YES             | Mecklenburg County | SNP      | UnitedHealthcare Dual Complete RP (Regional PPO D-SNP) | $0             | $0  copay            | $0  copay  | No               | $0                 | No drug coverage       |                                                       | future   |
       | 00003 |   90210 | UHC  | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP)                        | $41.60         | [blank]              | [blank]    | [blank]          | [blank]            | $0  copay              | $0 for Tier 1, Tier 2 $445 for Tier 3, Tier 4, Tier 5 | future   |
 
-    @prod_regression @sanity
+    @prodRegression @sanity
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                            | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible | planyear |
       | 00001 |   90210 | UHC  | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              | [blank]          | future   |
@@ -93,7 +93,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Then the user validates Plan Selector Tool section in the right rail
     Then the user validates Plan Selector Page after clicking on Start Plan Selector button
 
-    @vppPlanSummaryCommonAARP01 @prod_regression @regressionAARP
+    @vppPlanSummaryCommonAARP01 @prodRegression @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             | plantype | firstName | lastName | emailAddress  | planyear |
       | 00004 | AARP |   90210 | NO              | Los Angeles County | MAPD     | test      | test     | test@test.com | future   |
@@ -192,7 +192,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Then Verify provider name is displayed on Plan Summary page
       | PlanName | <planname> |
 
-    @vppPlanSummaryCommonAARP02 @prod_regression @regressionAARP @sanity
+    @vppPlanSummaryCommonAARP02 @prodRegression @regressionAARP @sanity
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county             | plantype | planname                                            | planyear |
       | 00008 | AARP |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |

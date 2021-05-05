@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PRERegression
+@planRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking
 
   @PRE @Ranking @MAPlansRanking1 @F358846 @PRERegression1

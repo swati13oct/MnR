@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify Cost Preferences page in plan Recommendation Engine
 
   @PRE @planrecommendation @costpreferencespage @costpreferenceselements @F374228

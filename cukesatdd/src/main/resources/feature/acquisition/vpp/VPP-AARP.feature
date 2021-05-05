@@ -165,7 +165,7 @@ Feature: 1.02-Plan summary in vpp flow AARP
       | MultiCOuntyzipcode |
       |              78006 |
 
-  @F250062 @VPPChangeLocationMultiCOunty @fastandfurious @Feb_release_2019 @F250062
+  @F250062 @vppChangeLocationMultiCOunty @fastandfurious @Feb_release_2019 @F250062
   Scenario Outline: Validate Cancel button for Multi Cunty Pop-up on VPP for Change Location
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -180,7 +180,7 @@ Feature: 1.02-Plan summary in vpp flow AARP
       | zipcode | isMultutiCounty | county             | MultiCOuntyzipcode |
       |   90210 | No              | Los Angeles County |              80002 |
 
-  @VppPromoWidjetaarp
+  @vppPromoWidjetaarp
   Scenario Outline: To check VPP for specific plans
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site

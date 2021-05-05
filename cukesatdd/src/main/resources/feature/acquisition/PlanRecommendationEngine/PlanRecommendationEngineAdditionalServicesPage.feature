@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify Additional Services page in plan Recommendation Engine
 
   @PRE @planrecommendation @additionalservicespage @additionalserviceselements @F374227

@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify doctors page in plan Recommendation Engine
 
   @PRE @planrecommendation @doctorspage @doctorelementValidation @F372731

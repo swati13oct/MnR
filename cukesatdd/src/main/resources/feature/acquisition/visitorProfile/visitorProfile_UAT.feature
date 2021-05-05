@@ -1,4 +1,4 @@
-@UATRegression @VisitorProfile
+@UATRegression @visitorProfile
 Feature: 1.08. UAT- Visitor profile
 
   #@addPlans @addPlansULayerSmoke @visitorProfileRegressionAARP
@@ -30,13 +30,13 @@ Feature: 1.08. UAT- Visitor profile
     And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @VisitorProfile_AARP_UAT @regressionAARP
+    @visitorProfile_AARP_UAT @regressionAARP
     Examples: 
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | AARP | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |
 
     #| Alabama | US1770330 |   53503 | NO            | Jefferson County | SNP      | UnitedHealthcare Dual Complete LP1 (HMO D-SNP),UnitedHealthcare Medicare Advantage Assist (PPO C-SNP)  |
-    @VisitorProfile_UHC_UAT @prod_regression @regressionUHC
+    @visitorProfile_UHC_UAT @prodRegression @regressionUHC
     Examples: 
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | UHC  | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |

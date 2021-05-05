@@ -11,7 +11,7 @@ Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
     Then the user validates whether chat icon is visible
 
     #Then the user validates whether chat Agent is Available on AARP
-    @header_1 @samChatCall_1 @samChatRegression @samChatRegression_AARP @prod_regression @globalfooter1
+    @header_1 @samChatCall_1 @samChatRegression @samChatRegression_AARP @prodRegression @globalfooter1
     Examples: 
       | site | pagename |
       | AARP | /        |
@@ -19,7 +19,7 @@ Feature: 1.13 ACQ AARP- To test SAM Icons in AARP site
     #| AARP | plan-recommendation-engine.html       |
     #| AARP | health-plans/estimate-drug-costs.html |
     #| AARP | health-plans/aarp-pharmacy.html       |
-    @header_1 @samChatCall_1 @samChatRegression @samChatRegression_UHC @prod_regression
+    @header_1 @samChatCall_1 @samChatRegression @samChatRegression_UHC @prodRegression
     Examples: 
       | site | pagename                              |
       | UHC  | /                                     |

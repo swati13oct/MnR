@@ -2,7 +2,7 @@
 Feature: UAT-Scripts-To test Organic Search Campaign TFN on UHC site
 
   ################################Script 3: Organic Search via Google and Bing######################################
-  @Scenario3_1_GoogleBingSearch_UHC_UAT @UATRegression @prod_regression_UAT
+  @Scenario3_1_GoogleBingSearch_UHC_UAT @UATRegression @prodRegression_UAT
   Scenario Outline: - <scenario> 3.1 Google search UHC Medicare Advantage Plan
     Given the user Starts WebDriver
     Given user is on Google and search UHC Medicare Advantage Plan to navigate to UHC page

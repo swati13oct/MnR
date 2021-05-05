@@ -1,4 +1,4 @@
-@UATRegression @DCE
+@UATRegression @dce
 Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
   @dce_ShopPDP_E2E_Scenario2_UAT
@@ -56,7 +56,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Scenario           | site | drug1   | drug2                | drugForRecommendation | selectDrugRecommendation | zipCode | planType | planName                        | supplyLength   |
       | E2E Scenario 2_UMS | UHC  | Lipitor | atorvastatin calcium | Synthroid             | levothyroxine sodium     |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
 
-  @DCE_MedEdPage_E2E_Scenario4_UAT
+  @dce_MedEdPage_E2E_Scenario4_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Med Ed page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -97,17 +97,17 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user applies pharmacy filter for following text on Standard pharmacies Tab, Details page - Change Pharmacy Page
       | PharmacyFilterText | <SelectPharmacy> |
 
-    @DCE_MedEdPage_E2E_Scenario4_UAT_AARP @regressionAARP
+    @dce_MedEdPage_E2E_Scenario4_UAT_AARP @regressionAARP
     Examples: 
       | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
       | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
-    @DCE_MedEdPage_E2E_Scenario4_UAT_UHC @regressionUHC
+    @dce_MedEdPage_E2E_Scenario4_UAT_UHC @regressionUHC
     Examples: 
       | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
       | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
-  @DCE_E2E_Scenario6_UAT
+  @dce_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -219,17 +219,17 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user clicks on site logo on drug detail Page and returns back to Acquisition Home Page
       | Site | <site> |
 
-    @DCE_E2E_Scenario6_UAT_AARP @regressionAARP @prod_regression_UAT
+    @dce_E2E_Scenario6_UAT_AARP @regressionAARP @prodRegression_UAT
     Examples: 
       | Scenario            | site | path                                                                                                                       | zipcode | county             | isMultutiCounty | plantype | planname                        | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county2           | plantype0 | updateplanname                       | insulinDrug1   | insulinDrug2                                    | insulinCopay |
       | E2E Scenario 6_AARP | AARP | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary |   90210 | Los Angeles County | NO              | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | MAPD      | AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |
 
-    @DCE_E2E_Scenario6_UAT_UHC @regressionUHC
+    @dce_E2E_Scenario6_UAT_UHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                                                                                                       | zipcode | county             | isMultutiCounty | plantype | planname                        | drug1   | drug2     | drug3    | drug4  | drug5 | drug6      | drug7           | brandDrug1 | genericDrug1         | brandDrug2 | genericDrug2 | premium | NewZipCode | newplantype | newplanname                                       | isMultutiCounty | county2           | plantype0 | updateplanname                       | insulinDrug1   | insulinDrug2                                    | insulinCopay |
       | E2E Scenario 6_UMS | UHC  | health-plans/prescription-drug-plans/available-plans.html?zipcode=90210&WT.mc_id=8001024&county=053&state=27#/plan-summary |   90210 | Los Angeles County | NO              | PDP      | AARP MedicareRx Walgreens (PDP) | Lipitor | Ibuprofen | Nicomide | Fanapt | Xanax | Alprazolam | Methylphenidate | Lipitor    | atorvastatin calcium | Xanax      | alprazolam   | $0 - $  |      33111 | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | NO              | Miami-Dade County | MAPD      | AARP Medicare Advantage Choice (PPO) | insulin lispro | insulin lispro protamine/insulin lispro kwikpen | $35          |
 
-  @DCE_E2E_Scenario1_UAT
+  @dce_E2E_Scenario1_UAT
   Scenario Outline: <Scenario> : To verify that user navigates VPP Compare to DCE Add drug, then Drugin modal to DCE details, verify the drug costs and enroll in plan
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -309,17 +309,17 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user navigates to Personal Information Page
     And the user cancels enrollment and navigates to homepage
 
-    @DCE_E2E_Scenario1_UAT_AARP @regressionAARP
+    @dce_E2E_Scenario1_UAT_AARP @regressionAARP
     Examples: 
       | Scenario           | site | zipcode | county          | isMultutiCounty | plantype | drugnameAutocomplete | brandDrug | genericDrug | drug1   | quantity1 | frequency1 | supplyLen1     | drug2     | drug3    | drug4          | drug5  | planname                        | supplyLength   | brandDrug1 | genericDrug1         |
       | E2E Scenario 1_AMP | AARP |   85001 | Maricopa County | NO              | PDP      | ativ                 | Ativan    | orazepam    | Lipitor |         2 | Day        | Every 3 Months | Ibuprofen | Nicomide | insulin lispro | Fanapt | AARP MedicareRx Walgreens (PDP) | Every 3 Months | Lipitor    | atorvastatin calcium |
 
-    @DCE_E2E_Scenario1_UAT_UHC @regressionUHC
+    @dce_E2E_Scenario1_UAT_UHC @regressionUHC
     Examples: 
       | Scenario           | site | zipcode | county          | isMultutiCounty | plantype | drugnameAutocomplete | brandDrug | genericDrug | drug1   | quantity1 | frequency1 | supplyLen1     | drug2     | drug3    | drug4          | drug5  | planname                        | supplyLength   | brandDrug1 | genericDrug1         |
       | E2E Scenario 1_UMS | UHC  |   85001 | Maricopa County | NO              | PDP      | ativ                 | Ativan    | orazepam    | Lipitor |         2 | Day        | Every 3 Months | Ibuprofen | Nicomide | insulin lispro | Fanapt | AARP MedicareRx Walgreens (PDP) | Every 3 Months | Lipitor    | atorvastatin calcium |
 
-  @DCE_E2E_Scenario3_UAT
+  @dce_E2E_Scenario3_UAT
   Scenario Outline: <Scenario> : Verify that user get started from home page and can search for a plan, verify the drug summary page  and change pharmacy on drug summary and navigate back to vpp plan details page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -424,13 +424,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     And the user compares drug costs for drug details and drug summary pages
     And user click on return to home on drug summary in AARP site
 
-    @DCE_E2E_Scenario3_UAT_AARP @regressionAARP
+    @dce_E2E_Scenario3_UAT_AARP @regressionAARP
     Examples: 
       | Scenario           | site | zipCode | county       | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                             | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
       | E2E Scenario 3_AMP | AARP |   78006 | Bexar County |           00000 | YES             |           99619 |            55344 | ROCK PHARMACY  | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
       #| E2E Scenario 3_AMP | AARP |   55344 | Hennepin County |           00000 | NO              |           99619 |            55344 | OptumRx Mail Service Pharmacy | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Headwaters (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |
 
-    @DCE_E2E_Scenario3_UAT_UHC @regressionUHC
+    @dce_E2E_Scenario3_UAT_UHC @regressionUHC
     Examples: 
       | Scenario           | site | zipCode | county       | invalidzipcode2 | isMultutiCounty | pharmacyZipCode | pharmacyZipCode2 | SelectPharmacy | SelectStandardPharmacy | planType | drug1   | drug2   | drug3 | drug4   | planName                             | planType2 | planName2                       | zipCode2 | zipCode3 | zipCode4 | brandDrug1 | genericDrug1         | message                                                                                                                                            | tabName                       |
       | E2E Scenario 3_UMS | UHC  |   78006 | Bexar County |           00000 | YES             |           99619 |            55344 | ROCK PHARMACY  | CVS PHARMACY           | MAPD     | Orfadin | Humalog | Emsam | Lipitor | AARP Medicare Advantage Choice (PPO) | PDP       | AARP MedicareRx Walgreens (PDP) |    78456 |    12345 |    96799 | Lipitor    | atorvastatin calcium | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | Medical Benefits and Programs |

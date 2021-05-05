@@ -1,7 +1,7 @@
-@DCE
+@dce
 Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan Details in AARP site
 
-  @DCE_Redesign_VPP_PlanDetailsLearnMore
+  @dce_Redesign_VPP_PlanDetailsLearnMore
   Scenario Outline: To verify DCE REDESIGN Details Page for Learn More from <site> home page
     #    Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
