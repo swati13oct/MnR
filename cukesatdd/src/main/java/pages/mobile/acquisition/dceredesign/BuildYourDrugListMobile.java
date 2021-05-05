@@ -306,6 +306,50 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		jsClickNew(removeLink);
 		
 	}
+	
+
+	@FindBy(xpath = "//h3[contains(text(), 'You might also take')]")
+	public WebElement DrugRecommendationHeader;
+
+	@FindBy(xpath = "//h3[contains(text(), 'You might also take')]//parent::div//following-sibling::ul//li//*")
+	public List <WebElement> DrugRecommendationDrugList;
+	
+	public void validateDrugRecommendationSection(String druglist) {
+		if(validate(DrugRecommendationHeader) && DrugRecommendationDrugList.size()>0 && DrugRecommendationDrugList.size()<=5) {
+			System.out.println("Drug Recommendation section Displayed for Drugs Added");
+			System.out.println("Drug Recommendation Displays " +DrugRecommendationDrugList.size()+ " No of Drugs");
+			System.out.println("Checking that Drug Recommendation does not display any added drug");
+			
+			String[] DrugListItems = druglist.split("&");
+			int i;
+			String currentDrug;
+			//int DrugCount_Total = DrugListItems.length-1;   	//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+			int DrugCount_Total = DrugListItems.length;
+			System.out.println("Total Added Drug Count : "+DrugCount_Total);
+			//for(i=1; i<=DrugCount_Total; i++) {				//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+			for(i=0; i<DrugCount_Total; i++) {
+				currentDrug = DrugListItems[i];
+				for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
+					if (currentDrug.contains(CurrentDrugRecommendation.getText()) && CurrentDrugRecommendation.getText().contains(currentDrug)) {
+						System.out.println("Current cabinet Drug Name : "+currentDrug);
+						System.out.println("Current recommendations Drug Name : "+CurrentDrugRecommendation.getText());
+						Assertion.fail(currentDrug+" is also Displayed in Drug Recommendations - Validation FAILED");
+					}
+				}
+				System.out.println(currentDrug+" is NOT Displayed in Drug Recommendations - Validation PASSED for Drug");
+			}
+			System.out.println("Drug Recommendations List : ");
+			for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
+			System.out.println(CurrentDrugRecommendation.getText());}
+			System.out.println("Drug Cabinet is NOT displayed in Drug Recommendation  - Validation PASSED");
+		}
+		else {
+			System.out.println(" ***************** Drug Recommendations section is not displayed *****************");
+
+		}
+		
+	}
+
 
 	public ComparePlansPageMobile returnToPlanComparePage() {
 

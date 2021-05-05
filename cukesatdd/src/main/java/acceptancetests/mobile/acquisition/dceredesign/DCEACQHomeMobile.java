@@ -18,7 +18,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.ProviderSearchPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
@@ -38,8 +44,7 @@ public class DCEACQHomeMobile {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-//	AppiumDriver wd;
+     AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -233,6 +238,93 @@ public class DCEACQHomeMobile {
 		DrugSummaryPageMobile drugSummaryPage = drugDetailsPage.ClickLinktoNavigatetoDrugSummary();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 
+	}
+	
+	@Then("^the user validates Drug Recommendation section$")
+	public void the_user_validates_Drug_Recommendation_section() throws Throwable {
+		BuildYourDrugListMobile buildYourDrugsListPage = (BuildYourDrugListMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
+		buildYourDrugsListPage.validateDrugRecommendationSection(druglist);
+	}
+	
+	@Then("^the user enters following information in Request Plan Information Guide$")
+	public void the_user_enters_following__information_in_Request_Plan_Information_Guide(DataTable givenAttributes)
+			throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		// String DateOfBirth = memberAttributesMap.get("DOB");
+		String FirstName = memberAttributesMap.get("Firstname");
+		String LastName = memberAttributesMap.get("Lastname");
+		String EmailAddress = memberAttributesMap.get("Email");
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
+
+	}
+	
+	/**
+	 * @toDo: user Enters a zipcode
+	 */
+	@When("^the user enters the zipcode and counts the plan$")
+	public void user_enters_the_zipcode_and_counts_plans(DataTable givenAttributes) {
+
+			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+						memberAttributesRow.get(i).getCells().get(1));
+			}*/
+
+			String zipcode = memberAttributesMap.get("Zip Code");
+			String plancount = memberAttributesMap.get("Plancount");
+			String planYear = memberAttributesMap.get("Year");
+
+		{
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
+			
+			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode,planYear);
+			 int strplancount = Integer.parseInt(plancount);
+			 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
+			 if(intPlanCounts!=strplancount){
+				Assertion.fail("Plan count is not matching");
+			 }
+			
+
+		}
+	}
+	
+	@When("^user saves below plan$")
+	public void user_saves_below_plan(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String savePlanNames = memberAttributesMap.get("Plan Name");
+		String planType = memberAttributesMap.get("Plan Type");
+		plansummaryPage.savePlans(savePlanNames, planType);
+	}
+	
+	@Then("^the user verify the Retail chain pharmacy on detail page$")
+	public void the_user_verify_the_Retail_chain_pharmacy_on_detail_page() throws Throwable {
+		DrugDetailsPageMobile drugDetailPage = new DrugDetailsPageMobile(wd);
+		drugDetailPage.validateRetailChainPharmacy();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailPage);
 	}
 
 }

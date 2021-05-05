@@ -576,6 +576,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return new DCETestHarnessPageMobile(driver);
 	}
 
+	
 	public void openPRE() {
 		if (!(MRScenario.getProps() == null)) {// If running from local
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
@@ -862,18 +863,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("@@@@@@@@@ No TFN widget @@@@@@@@@");
 		return null;
 	}
-
 	public void openAndValidate(String site) {
 		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
 			if (MRScenario.environment.equals("offline")) {
 				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
+				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNew(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
+				checkModelPopup(driver, 45);
+			} else if (MRScenario.environment.contains("stage-0")) {
+				startNew(UMS_ACQISITION_PAGE_URL_NEW);
+				checkModelPopup(driver, 20);
 			} else {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
+				checkForSecurityPage();
+				checkModelPopup(driver, 10);
 			}
 
 		} else if ("health-plans".equalsIgnoreCase(site)) {
@@ -884,12 +891,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			checkModelPopup(driver, 15);
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 			try {
-				if (proactiveChatExitBtn != null)
+				if (proactiveChatExitBtn != null) {
 					jsClickNew(proactiveChatExitBtn);
-
-				else
-					Assert.fail("Please check booleanvalue");
-
+				} else {
+					Assertion.fail("Please check booleanvalue");
+				}
 			} catch (Exception e) {
 				System.out.println("Proactive chat popup not displayed");
 			}
@@ -905,28 +911,34 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNew(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
-			} else {
+			}else {
 				start(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 30);
+				checkModelPopup(driver, 10);
 			}
+		}else if(site.equalsIgnoreCase("PRE")||site.equalsIgnoreCase("ARE")) {
+			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); //added on 3/3/21 as part of AARP/UHC cleanup
 		}
 
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("Current page URL: " + driver.getCurrentUrl());
-		checkModelPopup(driver, 15);
-		CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
-																			// we're not trying to fail the test if it
-																			// isn't found
-		try {
-			if (proactiveChatExitBtn.isDisplayed())
-				jsClickNew(proactiveChatExitBtn);
-		} catch (Exception e) {
-			System.out.println("Proactive chat popup not displayed");
+		if(!(site.equalsIgnoreCase("PRE")||site.equalsIgnoreCase("ARE"))) { //adding this condition temporarily to bypass PRE/ARE flows
+			//CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("Current page URL: " + driver.getCurrentUrl());
+			// checkModelPopup(driver,15);
+			//CommonUtility.waitForPageLoadNew(driver, navigationSectionHomeLink, 25);
+			//CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+																				// we're not trying to fail the test if it
+																				// isn't found
+			try {
+				validate(proactiveChatExitBtn,20);
+				if (proactiveChatExitBtn.isDisplayed())
+					jsClickNew(proactiveChatExitBtn);
+			} catch (Exception e) {
+				System.out.println("Proactive chat popup not displayed");
+			}
 		}
 	}
+
 
 	public void checkForSecurityPage() {
 		if (!MRScenario.domain.contains("uhc.com")) {
@@ -1937,6 +1949,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
+	public LearnAboutMedicareHomePageMobile HoveronaLearnMedicare() throws InterruptedException {
+		waitforElement(learnaboutMedicare);
+		if (learnaboutMedicare.isDisplayed()) {
+//            Actions action = new Actions(driver);
+//            action.moveToElement(ShopForaplan).build().perform();
+			jsMouseOver(learnaboutMedicare);
+			return new LearnAboutMedicareHomePageMobile(driver);
+		} else {
+			return null;
+		}
+	}
+	
 	public WelcomePageMobile ZipcodeSearchToOLEWithCounty(String zipcode, String countyName, String planName)
 			throws Exception {
 		try {
@@ -2572,6 +2596,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} else
 			startNewMobile(AARP_ACQISITION_PAGE_URL);
 		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
+	}
+	
+	public void openTelesalesAgentPortal() {
+		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
+			startNewMobile(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
+			startNewMobile(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+		}else if (MRScenario.environment.contains("digital-uatv2")) {
+			startNewMobile(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_Team);
+		}
 	}
 
 	/* Added for Mobile */
@@ -3788,7 +3822,32 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			return null;
 		}
 	}
+	
+	public void hoverOverShopForPlan() {
+		waitforElement(ShopForaplan);
+		if (ShopForaplan.isDisplayed()) {
+			jsMouseOver(ShopForaplan);
+			System.out.println("Hover over Shop for a Plan completed");
+		}
+	}
 
+	
+	public boolean checkZipCompErrorInSubNav() {
+		hoverOverShopForPlan();
+		sleepBySec(3);
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(OurPlans_zipfield);
+		validateNew(FindPlansButton1);
+		WebElement errorMsg = driver.findElement(By.xpath("//span[@class='field-error-msg']"));
+		jsClickNew(FindPlansButton1);
+		waitforElementNew(errorMsg);
+		if (errorMsg.isDisplayed()) {
+			System.out.println("Zip Component present in Sub Nav");
+			System.out.println("Error Message Displayed: " + errorMsg.getText());
+			return true;
+		} else
+			return false;
+	}
 	
 	public void validateUrl(String url) {
 		threadsleep(6);

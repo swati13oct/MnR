@@ -31,10 +31,13 @@ import com.mysql.jdbc.StringUtils;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
+import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
+import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -47,6 +50,50 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
  *
  */
 public class VPPPlanSummaryPageMobile extends UhcDriver {
+
+	@FindBy(xpath = "(//*[text()='View plan details'])[1]")
+	WebElement viewPlanDetailsBtn;
+
+	@FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")
+	WebElement CancelBtn;
+
+	@FindBy(xpath = "//input[@id='updates-first-name']")
+	private WebElement requestfirstName;
+
+	@FindBy(xpath = "//input[@id='updates-last-name']")
+	private WebElement requestlastName;
+
+	@FindBy(xpath = "//span[@class='uhc-button__text view-btn-ie']")
+	private WebElement viewSavedPlansBtn;
+
+	@FindBy(xpath = "//h2[text()='Your Guest Profile']")
+	private WebElement shopperProfilePageHeader;
+
+	@FindBy(xpath = "(//input[@id='updates-email'])")
+	private WebElement requestemailaddress;
+
+	@FindBy(xpath = "//input[@id='updates-email']")
+	private WebElement requestshoppageemailaddress;
+	@FindBy(xpath = "//p[contains(text(),'Submit')]")
+	private WebElement requestplaninformationsubmit;
+
+	@FindBy(xpath = "(//button[contains(text(),'Submit')])[2]")
+	private WebElement requestplaninformationShopsubmit;
+
+	@FindBy(xpath = "//p[contains(text(),'Your information has been submitted')]")
+	private WebElement requestplaninformationsubmitpopup;
+
+	@FindBy(xpath = "(//p[contains(text(),'Your guide will arrive in your inbox')])[2]")
+	private WebElement requestplaninformationshopsubmitpopup;
+
+	@FindBy(xpath = "//a[contains(@class,'emailsubmit_close')]")
+	private WebElement requestplaninformationclose;
+
+	@FindBy(xpath = "//*[contains(@id, 'email-error-id')]")
+	private WebElement RequestPlanInformation_ErrorMessage;
+
+	@FindBy(xpath = "(//*[contains(text(),'Please enter a valid email address')])[2]")
+	private WebElement RequestPlanInformationShoppages_ErrorMessage;
 
 	CommonutilitiesMobile mobileUtils = new CommonutilitiesMobile(driver);
 	@FindBy(xpath = "//a[text()='Passport Flyer (PDF)']")
@@ -404,8 +451,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]")
 	private WebElement nextBestActionModal;
 
-	@FindBy(xpath = "//div[@class='component_title']")
-	private WebElement nextBestActionModalMsg;
+	@FindBy(xpath = "//*[contains(@class,'component_title')]")
+	private List<WebElement> nextBestActionModalMsg;
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement getStartedBtn;
@@ -914,13 +961,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void verifyNextBestActionModalForProviderSearch() {
+		waitforElementVisibilityInTime(nextBestActionModalFindMyDoctorsBtn, 30);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
 				Assertion.assertTrue(
 						"The Provider search message is not displayed.../n Expected Message"
 								+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
-								+ nextBestActionModalMsg.getText(),
-						nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+								+ nextBestActionModalMsg.get(1).getText(),
+						nextBestActionModalMsg.get(1).getText().equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
 			}
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");
@@ -949,12 +997,26 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
+	private WebElement nextBestActionModalSelectPlanBtn;
+	
 	public void verifyNextBestActionModalForEnrollPlan() {
+		waitforElementVisibilityInTime(nextBestActionModalSelectPlanBtn, 20);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
-				Assertion.assertTrue("The Continue Enrollment message is not displayed.../n Expected Message"
-						+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message" + nextBestActionModalMsg.getText(),
-						nextBestActionModalMsg.getText().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+				if (nextBestActionModalMsg.size() > 1) {
+					Assertion.assertTrue(
+							"The Continue Enrollment message is not displayed.../n Expected Message "
+									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message "
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+				} else {
+					Assertion.assertTrue(
+							"The Continue Enrollment message is not displayed.../n Expected Message "
+									+ NEXT_ACTION_MODAL_MSG_ENROLL_PLAN + "\n Actual message "
+									+ nextBestActionModalMsg.get(0).getText().trim(),
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_ENROLL_PLAN));
+				}
 			}
 		} catch (Exception ex) {
 			System.out.println("NBA modal not found");
@@ -5290,6 +5352,107 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	}
 
+	public boolean RequestPlanIInformation(String FirstName, String LastName, String EmailAddress)
+			throws InterruptedException {
+
+		// boolean validation_Flag = true;
+		boolean RequestPlanIInformation_Validation = true;
+
+		boolean flag = true;
+		/*
+		 * if(validate(RequestPlanInformation_ErrorMessage)){
+		 * System.out.println("Email address is not entered : Error Message is Disabled"
+		 * ); //RequestPlanIInformation_Validation = true;
+		 * validateNew(requestemailaddress); requestemailaddress.sendKeys(EmailAddress);
+		 * System.out.println("Email Address is enetered : "+EmailAddress);
+		 * CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+		 * requestfirstName.sendKeys(FirstName);
+		 * CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+		 * requestlastName.sendKeys(LastName);
+		 * //CommonUtility.waitForPageLoadNew(driver, requestemailaddress, 20); //
+		 * requestemailaddress.sendKeys(EmailAddress);
+		 * validateNew(requestplaninformationsubmit);
+		 * jsClickNew(requestplaninformationsubmit);
+		 * validateNew(requestplaninformationclose);
+		 * jsClickNew(requestplaninformationclose);
+		 * 
+		 * if(requestplaninformationsubmitpopup.getText().
+		 * contains("Your information has been submitted. You should start getting your Medicare updates soon."
+		 * )) { System.out.
+		 * println("****************Request  information is displayed  ***************"
+		 * );
+		 * 
+		 * Assertion.assertTrue(true); validateNew(requestplaninformationclose);
+		 * jsClickNew(requestplaninformationclose); }else { System.out.
+		 * println("****************Request information is displayed  ***************");
+		 * } if(validateNonPresenceOfElement(RequestPlanInformation_ErrorMessage)) {
+		 * System.out.
+		 * println("Error Message is not Displayed when Email address is entered");
+		 * RequestPlanIInformation_Validation = true; } } else{
+		 * System.out.println("Email Address : Error Message is NOT Disabled");
+		 * RequestPlanIInformation_Validation = false; }
+		 * 
+		 * CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+		 * requestfirstName.sendKeys(FirstName);
+		 * CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+		 * requestlastName.sendKeys(LastName); CommonUtility.waitForPageLoadNew(driver,
+		 * requestemailaddress, 20); requestemailaddress.sendKeys(EmailAddress);
+		 * validateNew(requestplaninformationsubmit);
+		 * jsClickNew(requestplaninformationsubmit);
+		 * validateNew(requestplaninformationclose);
+		 * jsClickNew(requestplaninformationclose);
+		 * 
+		 * if(requestplaninformationsubmitpopup.getText().
+		 * contains("Your information has been submitted. You should start getting your Medicare updates soon."
+		 * )) { System.out.
+		 * println("****************Request information is displayed  ***************");
+		 * 
+		 * Assertion.assertTrue(true); validateNew(requestplaninformationclose);
+		 * requestplaninformationclose.click(); }else { System.out.
+		 * println("****************Request information is displayed  ***************");
+		 * }
+		 */
+		requestemailaddress.clear();
+		requestemailaddress.sendKeys("(*^*_asb@t.c");
+		requestplaninformationsubmit.click();
+		if (validate(RequestPlanInformation_ErrorMessage) && RequestPlanInformation_ErrorMessage.isDisplayed()) {
+			if (!RequestPlanInformation_ErrorMessage.getText()
+					.contains("Please enter a valid email address in the format 'user@company.com'")) {
+				System.out.println(
+						"Email Invalid Error is Not  displayed : " + RequestPlanInformation_ErrorMessage.getText());
+				flag = false;
+			}
+			System.out.println("Email Invalid Error : " + RequestPlanInformation_ErrorMessage.getText());
+
+		} else {
+			System.out.println("Email Invalid Error field is not displayed");
+
+		}
+
+		validateNew(requestemailaddress);
+		requestemailaddress.clear();
+		requestemailaddress.sendKeys(EmailAddress);
+		System.out.println("Email Address is enetered : " + EmailAddress);
+		CommonUtility.waitForPageLoadNew(driver, requestfirstName, 20);
+		requestfirstName.sendKeys(FirstName);
+		CommonUtility.waitForPageLoadNew(driver, requestlastName, 20);
+		requestlastName.sendKeys(LastName);
+		validateNew(requestplaninformationsubmit);
+		jsClickNew(requestplaninformationsubmit);
+		if (requestplaninformationsubmitpopup.getText().contains(
+				"Your information has been submitted. You should start getting your Medicare updates soon.")) {
+			System.out.println("****************Request  information is displayed  ***************");
+
+			Assertion.assertTrue(true);
+			validateNew(requestplaninformationclose);
+			jsClickNew(requestplaninformationclose);
+		} else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
+		return RequestPlanIInformation_Validation;
+
+	}
+
 	@FindBy(xpath = "//a[contains(@href,'//aarpsupplementalhealth-stg.uhc.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage') or contains(@href,'//www.aarpsupplementalhealth.com/content/dam/ole/MedSuppDocs/OutlineOfCoverage')]")
 	// @FindBy(xpath = "//a[contains(text(),'Plan Overview')]")
 	private WebElement RightRail_outlinecoverage;
@@ -5477,6 +5640,62 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}
 
+	}
+	
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
+	private WebElement nextBestActionModalGetStartedBtn;
+	
+	/**
+	 * @author rravind8 This method verifies the NBA Modal for Drug Cost
+	 */
+	public void verifyNextBestActionModalForDrugCost() {
+		waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				if (nextBestActionModalMsg.size() > 1) {
+					Assertion.assertTrue(
+							"The Drug Cost message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(1).getText(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				} else {
+					Assertion.assertTrue(
+							"The Drug Cost message is not displayed.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(0).getText(),
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+
+	private static String NEXT_ACTION_MODAL_MSG_DRUG_COST = "How much will my drugs cost?";
+	private static String NEXT_ACTION_MODAL_MSG_CONTINUE_ENROLLMENT = "Continue my enrollment";
+
+	public void verifyNextBestActionModalForDrugCostAuthenticated() {
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				validate(getStartedBtn);
+				if (nextBestActionModalMsg.size() > 1) {
+					Assertion.assertTrue(
+							"The Drug cost message is not displayed on NBA.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				} else {
+					Assertion.assertTrue(
+							"The Drug cost message is not displayed on NBA.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_DRUG_COST + "\n Actual message"
+									+ nextBestActionModalMsg.get(0).getText().trim(),
+							nextBestActionModalMsg.get(0).getText().trim().equals(NEXT_ACTION_MODAL_MSG_DRUG_COST));
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+			Assertion.fail("NBA element not found" + ex.getMessage());
+		}
 	}
 
 }

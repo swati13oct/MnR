@@ -38,6 +38,10 @@ public class GetStartedPageMobile extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@id,'get-started')]")
 	public WebElement getStartedTab;
+	
+
+	@FindBy(id = "dupIconFlyOut")
+	private WebElement shoppingCartIcon;
 
 
 	public GetStartedPageMobile(WebDriver driver) {
@@ -46,6 +50,16 @@ public class GetStartedPageMobile extends UhcDriver {
 	       openAndValidate();
 	}
 
+	
+	public VisitorProfilePageMobile clickOnShoppingCart() {
+		shoppingCartIcon.click();
+		if (driver.getCurrentUrl().contains("profile")) {
+			return new VisitorProfilePageMobile(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 	public LocationSearchPageMobile getStarted() {
 		getStartedLink.click();
 		if(currentUrl().contains("enterZipCode"))
