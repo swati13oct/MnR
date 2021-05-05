@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,9 +23,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
 
 
 public class DrugCostEstimatorPageMobile extends UhcDriver {
@@ -462,7 +462,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		System.out.println("Current Page title :: " + driver.getTitle());
 
 		if (driver.getTitle().equalsIgnoreCase("estimate-drug-costs")
-				|| driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
+				|| driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_PLAN_DRUG_COSTS)) {
 
 			return new AddNewDrugModalMobile(driver);
 		}
@@ -519,9 +519,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	public void validateintroductorytext() {
 		// TODO Auto-generated method stub
 		if (validateIntroductoryText.getText().equalsIgnoreCase("Drug Cost Estimator"))
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		else
-			Assert.assertTrue("Drug Cost Estimator is not present", false);
+			Assertion.assertTrue("Drug Cost Estimator is not present", false);
 	}
 
 	public boolean validatedrugheading() {
@@ -579,11 +579,11 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public void validatePharmacyForm() {
-		Assert.assertTrue(pharmacyform.isDisplayed());
-		// Assert.assertTrue(rbStandardNetwork.isDisplayed());
-		// Assert.assertTrue(rbPharmacySaver.isDisplayed());
-		// Assert.assertTrue(rbPreferredMailService.isDisplayed());
-		// Assert.assertTrue(rbPreferredRetail.isDisplayed());
+		Assertion.assertTrue(pharmacyform.isDisplayed());
+		// Assertion.assertTrue(rbStandardNetwork.isDisplayed());
+		// Assertion.assertTrue(rbPharmacySaver.isDisplayed());
+		// Assertion.assertTrue(rbPreferredMailService.isDisplayed());
+		// Assertion.assertTrue(rbPreferredRetail.isDisplayed());
 	}
 
 	public void pharmacyInformation(String zipcode, String radius) {
@@ -610,12 +610,12 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public void validateenterdrugtext() {
-		Assert.assertTrue(Enter_drug_text.isDisplayed());
+		Assertion.assertTrue(Enter_drug_text.isDisplayed());
 	}
 
 	public void validatesummaryheading() {
 
-		Assert.assertTrue(SummaryHeader.isDisplayed());
+		Assertion.assertTrue(SummaryHeader.isDisplayed());
 	}
 
 	public boolean validatetabdrugheading() {
@@ -633,9 +633,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		String deleteDrugXpath = "//div[@id='drugs-tab']//p[contains (text(), '" + dosage + "')]";
 		try {
 			driver.findElement(By.xpath(deleteDrugXpath));
-			Assert.assertFalse(true);
+			Assertion.assertFalse(true);
 		} catch (NoSuchElementException e) {
-			Assert.assertFalse(false);
+			Assertion.assertFalse(false);
 		}
 
 	}
@@ -696,11 +696,11 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			actualList.add(element.getText());
 		}
 		System.out.println("Acutal List is : " + actualList);
-		Assert.assertEquals(miles, actualList);
+		Assertion.assertEquals(miles, actualList);
 	}
 
 	public void validateZipcode(String zipcode) {
-		Assert.assertEquals(zipcode, zipcodeInput.getText());
+		Assertion.assertEquals(zipcode, zipcodeInput.getText());
 	}
 
 	public void selectRadius() {
@@ -726,23 +726,23 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 	public void validateDefaultStep2(String zipcode, String radius, String pharmacy_type) {
 		System.out.println("--------zipcodeInput.getText()-----------" + zipcodeInput.getText());
-		// Assert.assertEquals(zipcode,zipcodeInput.getText());
+		// Assertion.assertEquals(zipcode,zipcodeInput.getText());
 
 		WebElement selected_pharmacy_type = driver
 				.findElement(By.xpath("//label[contains(text(),'" + pharmacy_type + "')]/parent::div/input"));
-		Assert.assertTrue(selected_pharmacy_type.isSelected());
+		Assertion.assertTrue(selected_pharmacy_type.isSelected());
 		Select options = new Select(milesSelection);
 
 		WebElement selected_miles = driver
 				.findElement(By.xpath(".//*[@id='dce-pharmacy-radius']/option[contains(text(),'" + radius + "')]"));
-		Assert.assertTrue(selected_miles.isSelected());
+		Assertion.assertTrue(selected_miles.isSelected());
 		// String str = options.getAllSelectedOptions().toString();
 		// str.toString();
 		System.out.println("--------options.getAllSelectedOptions()-----------" + options.getAllSelectedOptions()
 				+ "----------------");
 		// System.out.println("--------str-----------"+ str +
 		// "----------------");
-		// Assert.assertEquals(pharmacy_type,str);
+		// Assertion.assertEquals(pharmacy_type,str);
 
 	}
 
@@ -783,7 +783,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public void verifyPharmacyResults() throws InterruptedException {
-		Assert.assertTrue(pharmacyResults.isDisplayed());
+		Assertion.assertTrue(pharmacyResults.isDisplayed());
 		Thread.sleep(4000);
 	}
 
@@ -806,7 +806,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public void validatePharmacylist() {
-		Assert.assertEquals(3, pharmacies.size());
+		Assertion.assertEquals(3, pharmacies.size());
 	}
 
 	@FindBy(xpath = "//*[contains(@dtmname,'view costs')]")
@@ -949,7 +949,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			System.out.println("UHC DrugList from Local Storage validated : " + Validate_DrugList);
 		}
 		System.out.println("UHC Local Storage Validation Status : " + validation_Flag);
-		Assert.assertTrue("UHC Local Storage Validation Failed", validation_Flag);
+		Assertion.assertTrue("UHC Local Storage Validation Failed", validation_Flag);
 	}
 
 	public void select_first_pharmacy() throws InterruptedException {
@@ -968,22 +968,22 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		if (pharmacy_type == "Standard Network") {
 			validate_cost_saving_not_present();
 		} else if (pharmacy_type == "Pharmacy Saver") {
-			Assert.assertTrue(card_promo_blue_saver.isDisplayed());
+			Assertion.assertTrue(card_promo_blue_saver.isDisplayed());
 		} else if (pharmacy_type == "Preferred Mail Service") {
-			Assert.assertTrue(card_promo_blue_mail.isDisplayed());
+			Assertion.assertTrue(card_promo_blue_mail.isDisplayed());
 		} else if (pharmacy_type == "Preferred Retail") {
-			Assert.assertTrue(card_promo_blue_retail.isDisplayed());
+			Assertion.assertTrue(card_promo_blue_retail.isDisplayed());
 		}
 	}
 
 	public void validate_cost_saving_not_present() { // Need refactoring
-		Assert.assertFalse(card_promo_blue_saver.isDisplayed());
-		Assert.assertFalse(card_promo_blue_mail.isDisplayed());
-		Assert.assertFalse(card_promo_blue_retail.isDisplayed());
+		Assertion.assertFalse(card_promo_blue_saver.isDisplayed());
+		Assertion.assertFalse(card_promo_blue_mail.isDisplayed());
+		Assertion.assertFalse(card_promo_blue_retail.isDisplayed());
 	}
 
 	public boolean validate_pharmacy_type_saver_not_present() {
-		// Assert.assertFalse(pharmacy_saver_type.isEnabled());
+		// Assertion.assertFalse(pharmacy_saver_type.isEnabled());
 
 		try {
 			driver.findElement(By.id("saver-type"));
@@ -994,19 +994,19 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	}
 
 	public void validate_pharmacy_saver_result() {
-		// Assert.assertTrue(text_total_annual_drug_cost.isDisplayed());
+		// Assertion.assertTrue(text_total_annual_drug_cost.isDisplayed());
 		// text_total_annual_drug_cost.getSize()
 	}
 
 	public boolean validate_selected_pharmacy_type(String pharmacy_type) {
 		if (pharmacy_type == "Preferred Retail") {
-			Assert.assertTrue(pharmacy_type + "is not selected", pharmacy_retail_type.isSelected());
+			Assertion.assertTrue(pharmacy_type + "is not selected", pharmacy_retail_type.isSelected());
 			return true;
 		} else if (pharmacy_type == "Pharmacy Saver") {
-			Assert.assertTrue(pharmacy_type + "is not selected", pharmacy_saver_type.isSelected());
+			Assertion.assertTrue(pharmacy_type + "is not selected", pharmacy_saver_type.isSelected());
 			return true;
 		} else if (pharmacy_type == "Standard Network") {
-			Assert.assertTrue(pharmacy_type + "is not selected", pharmacy_standard_type.isSelected());
+			Assertion.assertTrue(pharmacy_type + "is not selected", pharmacy_standard_type.isSelected());
 			return true;
 		} else
 			return false;
@@ -1052,17 +1052,17 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	public void validatePreferredMailServiceNotPresent() {
 		List<WebElement> mailService = driver.findElements(By.id("mail-service-type"));
 		if (mailService.get(0).isDisplayed()) {
-			Assert.assertFalse("Preferred Mail Servic pharmacy type is present", true);
+			Assertion.assertFalse("Preferred Mail Servic pharmacy type is present", true);
 		} else {
-			Assert.assertFalse(false);
+			Assertion.assertFalse(false);
 		}
 	}
 
 	public void validatePreferredMailServiceRD() {
 		try {
-			Assert.assertTrue(lbPreferredMailService.isDisplayed());
+			Assertion.assertTrue(lbPreferredMailService.isDisplayed());
 		} catch (org.openqa.selenium.NoSuchElementException e) {
-			Assert.assertFalse(false);
+			Assertion.assertFalse(false);
 		}
 	}
 
@@ -1077,7 +1077,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 															// String temp =
 															// validateIntroductoryText.getText().equalsIgnoreCase("Drug
 															// Cost Estimator")
-		Assert.assertTrue("Expected Summary cost is  not present" + summary_tot_cost.getText(),
+		Assertion.assertTrue("Expected Summary cost is  not present" + summary_tot_cost.getText(),
 				summary_tot_cost.getText().equalsIgnoreCase(total_cost));
 
 	}
@@ -1085,36 +1085,36 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	public void verify_summary_saving(String total_saving) throws InterruptedException {
 		Thread.sleep(5000);
 		waitforElement(summary_saving);
-		Assert.assertTrue("Expected" + total_saving + " Total saving is not present" + summary_saving.getText(),
+		Assertion.assertTrue("Expected" + total_saving + " Total saving is not present" + summary_saving.getText(),
 				summary_saving.getText().contains(total_saving));
 	}
 
 	public void verify_deductible(String deductible) {
 		waitforElement(left_rail_deductible);
-		Assert.assertTrue("Expected Deductible is not present", left_rail_deductible.getText().contains(deductible));
+		Assertion.assertTrue("Expected Deductible is not present", left_rail_deductible.getText().contains(deductible));
 	}
 
 	public void verify_leftrail_cost(String total_cost) throws InterruptedException {
 		Thread.sleep(10000);
 		waitforElement(left_rail_tot_cost);
-		Assert.assertTrue("Expected Left rail Total Cost is not present",
+		Assertion.assertTrue("Expected Left rail Total Cost is not present",
 				left_rail_tot_cost.getText().contains(total_cost));
 	}
 
 	public void verify_leftrail_saving(String total_saving) {
 		waitforElement(left_rail_tot_saving);
-		Assert.assertTrue("Expected Left rail Total Savings is not present",
+		Assertion.assertTrue("Expected Left rail Total Savings is not present",
 				left_rail_tot_saving.getText().contains(total_saving));
 	}
 
 	public void verify_leftrail_drug_saving(String drug_saving) {
 		waitforElement(left_rail_drug_saving);
-		Assert.assertTrue("Expected Drug Saving is not present", left_rail_drug_saving.getText().contains(drug_saving));
+		Assertion.assertTrue("Expected Drug Saving is not present", left_rail_drug_saving.getText().contains(drug_saving));
 	}
 
 	public void verify_leftrail_pharmacy_saving(String pharmacy_saving) {
 		waitforElement(left_rail_pharmacy_saving);
-		Assert.assertTrue("Expected Pharmacy saving is not present",
+		Assertion.assertTrue("Expected Pharmacy saving is not present",
 				left_rail_pharmacy_saving.getText().contains(pharmacy_saving));
 	}
 
@@ -1269,11 +1269,11 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			// System.out.println("given value "+totalAnnualDrugCost);
 			// System.out.println("summary value "+valTotDrugCost_Summary);
 			// System.out.println("left rail value "+ valtotDrugCost_LeftRail);
-			Assert.assertEquals(valTotDrugCost_Summary, valtotDrugCost_LeftRail);
-			Assert.assertEquals(totalAnnualDrugCost, valTotDrugCost_Summary);
-			Assert.assertEquals(totalAnnualDrugCost, valtotDrugCost_LeftRail);
+			Assertion.assertEquals(valTotDrugCost_Summary, valtotDrugCost_LeftRail);
+			Assertion.assertEquals(totalAnnualDrugCost, valTotDrugCost_Summary);
+			Assertion.assertEquals(totalAnnualDrugCost, valtotDrugCost_LeftRail);
 		} else {
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		}
 
 	}
@@ -1290,12 +1290,12 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			// valTotAvailableSav_Summary);
 			// System.out.println("totAvailableSav left rail value "+
 			// valTotAvailableSav_LeftRail);
-			Assert.assertEquals(valTotAvailableSav_Summary, valTotAvailableSav_LeftRail);
-			Assert.assertEquals(totalAvailableSavings, valTotAvailableSav_Summary);
-			Assert.assertEquals(totalAvailableSavings, valTotAvailableSav_LeftRail);
+			Assertion.assertEquals(valTotAvailableSav_Summary, valTotAvailableSav_LeftRail);
+			Assertion.assertEquals(totalAvailableSavings, valTotAvailableSav_Summary);
+			Assertion.assertEquals(totalAvailableSavings, valTotAvailableSav_LeftRail);
 
 		} else {
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		}
 
 	}
@@ -1306,10 +1306,10 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		if (totDrugSavings.size() > 0) {
 			String valTotDrugSavings = totDrugSavings.get(0).getText();
 			// System.out.println("totDrugSavings value "+ valTotDrugSavings);
-			Assert.assertEquals(drugSavings, valTotDrugSavings);
+			Assertion.assertEquals(drugSavings, valTotDrugSavings);
 
 		} else {
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		}
 
 	}
@@ -1322,9 +1322,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			String valTotPharmacySavings = totPharmacySavings.get(0).getText();
 			// System.out.println("totPharmacySavings value "+
 			// valTotPharmacySavings);
-			Assert.assertEquals(pharmacySavings, valTotPharmacySavings);
+			Assertion.assertEquals(pharmacySavings, valTotPharmacySavings);
 		} else {
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		}
 	}
 
@@ -1341,26 +1341,26 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			String valCatastrophicCoverageStage = catastrophicCoverageStage.get(0).getText();
 			// System.out.println("valInitialDrugCoverage value
 			// "+valInitialDrugCoverage);
-			Assert.assertEquals(drugCoverage, valInitialDrugCoverage);
-			Assert.assertEquals(drugCoverage, valCoverageGapStage);
-			Assert.assertEquals(drugCoverage, valCatastrophicCoverageStage);
+			Assertion.assertEquals(drugCoverage, valInitialDrugCoverage);
+			Assertion.assertEquals(drugCoverage, valCoverageGapStage);
+			Assertion.assertEquals(drugCoverage, valCatastrophicCoverageStage);
 		} else {
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		}
 	}
 
 	public void validateEditDrugAndPharmacyLinks() {
-		Assert.assertTrue(elementFound(lkEditDrugsList));
-		Assert.assertTrue(elementFound(lkEditPharmacyList));
+		Assertion.assertTrue(elementFound(lkEditDrugsList));
+		Assertion.assertTrue(elementFound(lkEditPharmacyList));
 	}
 
 	public void validateEditDrugLinkNotPresent() {
 		List<WebElement> editDrugLink = driver.findElements(By.xpath(".//*[@id='total_drugsavings']/div[2]/a"));
 		// String valEditDrugLink = editDrugLink.get(0).getText();
 		if (!editDrugLink.get(0).isDisplayed()) {
-			Assert.assertFalse(false);
+			Assertion.assertFalse(false);
 		} else {
-			Assert.assertFalse("Edit Drug Link is present", true);
+			Assertion.assertFalse("Edit Drug Link is present", true);
 		}
 	}
 
@@ -1387,19 +1387,19 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	public void verifystagesTexts() {
 
 		String all_text = stagesTexts.getText();
-		Assert.assertTrue("Annual Deductible Stage heading is not present",
+		Assertion.assertTrue("Annual Deductible Stage heading is not present",
 				all_text.contains("Annual Deductible Stage"));
-		Assert.assertTrue("Initial Coverage Stage heading is not present", all_text.contains("Initial Coverage Stage"));
-		Assert.assertTrue("Catastrophic Coverage Stage heading is not present",
+		Assertion.assertTrue("Initial Coverage Stage heading is not present", all_text.contains("Initial Coverage Stage"));
+		Assertion.assertTrue("Catastrophic Coverage Stage heading is not present",
 				all_text.contains("Catastrophic Coverage Stage"));
 	}
 
 	public void verifyTiersTexts(String year, String layer, String plan) {
 
 		String all_text = tierTexts.getText();
-		Assert.assertTrue(year + " is not present", all_text.contains(year));
-		Assert.assertTrue(layer + " is not present", all_text.contains(layer));
-		Assert.assertTrue(plan + " is not present", all_text.contains(plan));
+		Assertion.assertTrue(year + " is not present", all_text.contains(year));
+		Assertion.assertTrue(layer + " is not present", all_text.contains(layer));
+		Assertion.assertTrue(plan + " is not present", all_text.contains(plan));
 	}
 
 	public void selectPharmacyMailServicePharmacy() throws InterruptedException {
@@ -1411,7 +1411,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 			Thread.sleep(4000);
 
-			Assert.assertTrue("Preferred Mail Service Pharmacy is not selected",
+			Assertion.assertTrue("Preferred Mail Service Pharmacy is not selected",
 					SelectedName.getText().contains("Preferred Mail Service Pharmacy"));
 		}
 
@@ -1426,7 +1426,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 	public void verifyLearnMoreDeliveryContent(String content) {
 		homeDeliveryContent.getText().contains(content);
-		Assert.assertTrue(content + "is not present", homeDeliveryContent.getText().contains(content));
+		Assertion.assertTrue(content + "is not present", homeDeliveryContent.getText().contains(content));
 	}
 
 	public void isPharmacySelected() {
@@ -1435,18 +1435,18 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		// String valselectedPharmacy = selectedPharmacy.getText();
 		// if (valselectedPharmacy.equals("Select a pharmacy to see your drug costs") ||
 		// valselectedPharmacy.equals(" ")) {
-		// Assert.assertTrue(true);
+		// Assertion.assertTrue(true);
 		// } else {
-		// Assert.assertTrue("No pharmacy is selected", false);
+		// Assertion.assertTrue("No pharmacy is selected", false);
 		// }
 
 		List<WebElement> selectedPharmacy = driver
 				.findElements(By.xpath(".//*[@id='drugspharmacy']/div[3]/ul[2]/li/div/div[2]/span"));
 		System.out.println("selectedPharmacy size" + selectedPharmacy.size());
 		if (selectedPharmacy.get(0).isDisplayed()) {
-			Assert.assertTrue("Pharmacy is selected", false);
+			Assertion.assertTrue("Pharmacy is selected", false);
 		} else {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
@@ -1457,8 +1457,8 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		/*
 		 * String valselectedPharmacy = selectedPharmacy.getText(); if
 		 * (!valselectedPharmacy. equals("Select a pharmacy to see your drug costs") ||
-		 * !valselectedPharmacy.equals(" ")) { Assert.assertTrue(true); } else {
-		 * Assert.assertTrue("Pharmacy is selected",false); }
+		 * !valselectedPharmacy.equals(" ")) { Assertion.assertTrue(true); } else {
+		 * Assertion.assertTrue("Pharmacy is selected",false); }
 		 */
 		// .//*[@id='drugspharmacy']/div[3]/ul[2]/li/div/div[2]/span
 
@@ -1466,9 +1466,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 				.findElements(By.xpath(".//*[@id='drugspharmacy']/div[3]/ul[2]/li/div/div[2]/span"));
 		System.out.println("selectedPharmacy size" + selectedPharmacy.size());
 		if (selectedPharmacy.get(0).isDisplayed()) {
-			Assert.assertTrue("Pharmacy is selected", false);
+			Assertion.assertTrue("Pharmacy is selected", false);
 		} else {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 	}
 
@@ -1479,12 +1479,12 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			WebElement switchGenericOption = driver.findElement(By.id("generic-drug-" + (drugscount - 1)));
 			System.out.println("switch generic option" + switchGenericOption.getText());
 			if (switchGenericOption.isDisplayed()) {
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
-				Assert.assertTrue("Drug does not have switch to generic option ", false);
+				Assertion.assertTrue("Drug does not have switch to generic option ", false);
 			}
 		} else {
-			Assert.assertTrue("There are no drugs added ", false);
+			Assertion.assertTrue("There are no drugs added ", false);
 		}
 
 	}
@@ -1494,13 +1494,13 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		if (drugscount > 0) {
 			WebElement switchNowLink = driver.findElement(By.id("generic-drug-switch-btn-" + (drugscount - 1)));
 			if (switchNowLink.isDisplayed()) {
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
-				Assert.assertTrue("Switch now link is not present", false);
+				Assertion.assertTrue("Switch now link is not present", false);
 			}
 
 		} else {
-			Assert.assertTrue("There are no drugs added ", false);
+			Assertion.assertTrue("There are no drugs added ", false);
 		}
 
 	}
@@ -1512,13 +1512,13 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 					.findElements(By.id("generic-drug-saving-amount-" + (drugscount - 1)));
 			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
 			if (valSaveGenericMessage.equals("Save money")) {
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
-				Assert.assertTrue("Save money message is incorect", false);
+				Assertion.assertTrue("Save money message is incorect", false);
 			}
 
 		} else {
-			Assert.assertTrue("There are no drugs added ", false);
+			Assertion.assertTrue("There are no drugs added ", false);
 		}
 
 	}
@@ -1531,13 +1531,13 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 					.findElements(By.id("generic-drug-saving-amount-" + (drugscount - 1)));
 			String valSaveGenericMessage = saveGenericMessage.get(0).getText();
 			if (!valSaveGenericMessage.equals("Save money")) {
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
-				Assert.assertTrue("Save dollar amount message is incorect", false);
+				Assertion.assertTrue("Save dollar amount message is incorect", false);
 			}
 
 		} else {
-			Assert.assertTrue("There are no drugs added ", false);
+			Assertion.assertTrue("There are no drugs added ", false);
 		}
 
 	}
@@ -1550,17 +1550,17 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			Thread.sleep(5000);
 
 			// switchToGenericHeadingsId
-			if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MY_BENEFITS_COVERAGES)) {
+			if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MY_BENEFITS_COVERAGES)) {
 				String savingsOpputunityHeading = driver.findElement(By.id("switchToGenericHeadingsId")).getText();
-				if (savingsOpputunityHeading.equals(PageTitleConstantsMobile.BLAYER_SAVINGS_OPPORTUNITY)) {
-					Assert.assertTrue(true);
+				if (savingsOpputunityHeading.equals(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
+					Assertion.assertTrue(true);
 				} else {
-					Assert.assertTrue("Savings Oppurtunity modal popup does not show up", false);
+					Assertion.assertTrue("Savings Oppurtunity modal popup does not show up", false);
 				}
 			}
 
 		} else {
-			Assert.assertTrue("There are no drugs added ", false);
+			Assertion.assertTrue("There are no drugs added ", false);
 		}
 
 	}
@@ -1578,54 +1578,54 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		if (drugsCount > 0) {
 			String[] genericDrug = lbGenericdrug.get(drugsCount - 1).getText().split(" ");
 			if (genericDrug[0].equalsIgnoreCase("ATORVASTATIN")) {
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
-				Assert.assertTrue("Branded drug is not switched to generic drug", false);
+				Assertion.assertTrue("Branded drug is not switched to generic drug", false);
 			}
 
 		} else {
-			Assert.assertTrue("There are no drugs added ", false);
+			Assertion.assertTrue("There are no drugs added ", false);
 		}
 	}
 
 	public void validateStep1Item() {
 		validateintroductorytext();
-		Assert.assertTrue("returnLink is not present", returnLink.isDisplayed());
-		Assert.assertTrue("description text is not present", description.isDisplayed());
-		Assert.assertTrue("step1 text is not present", step1.isDisplayed());
-		Assert.assertTrue("step2 text is not present", step2.isDisplayed());
-		Assert.assertTrue("step3 text is not present", step3.isDisplayed());
+		Assertion.assertTrue("returnLink is not present", returnLink.isDisplayed());
+		Assertion.assertTrue("description text is not present", description.isDisplayed());
+		Assertion.assertTrue("step1 text is not present", step1.isDisplayed());
+		Assertion.assertTrue("step2 text is not present", step2.isDisplayed());
+		Assertion.assertTrue("step3 text is not present", step3.isDisplayed());
 
 	}
 
 	public void validateStep1Disclaimer() throws InterruptedException {
-		Assert.assertTrue(step1Disclaimers.isDisplayed());
+		Assertion.assertTrue(step1Disclaimers.isDisplayed());
 		step1Disclaimers.click();
 		waitforElement(step1Disclaimers);
-		Assert.assertTrue("disclaimerContent is not present", step1DisclaimerContent.isDisplayed());
+		Assertion.assertTrue("disclaimerContent is not present", step1DisclaimerContent.isDisplayed());
 		step1Disclaimers.click();
 		Thread.sleep(5000);
-		Assert.assertFalse("disclaimerContent is present", step1DisclaimerContent.isDisplayed());
+		Assertion.assertFalse("disclaimerContent is present", step1DisclaimerContent.isDisplayed());
 	}
 
 	public void validateStep2Disclaimer() throws InterruptedException {
-		Assert.assertTrue(step2Disclaimers.isDisplayed());
+		Assertion.assertTrue(step2Disclaimers.isDisplayed());
 		step2Disclaimers.click();
 		waitforElement(step2DisclaimerContent);
-		Assert.assertTrue("disclaimerContent is not present", step2DisclaimerContent.isDisplayed());
+		Assertion.assertTrue("disclaimerContent is not present", step2DisclaimerContent.isDisplayed());
 		step2Disclaimers.click();
 		Thread.sleep(5000);
-		Assert.assertFalse("disclaimerContent is present", step2DisclaimerContent.isDisplayed());
+		Assertion.assertFalse("disclaimerContent is present", step2DisclaimerContent.isDisplayed());
 	}
 
 	public void validateStep3Disclaimer() throws InterruptedException {
-		Assert.assertTrue(step2Disclaimers.isDisplayed());
+		Assertion.assertTrue(step2Disclaimers.isDisplayed());
 		step2Disclaimers.click();
 		waitforElement(step2DisclaimerContent);
-		Assert.assertTrue("disclaimerContent is not present", step2DisclaimerContent.isDisplayed());
+		Assertion.assertTrue("disclaimerContent is not present", step2DisclaimerContent.isDisplayed());
 		step2Disclaimers.click();
 		Thread.sleep(5000);
-		Assert.assertFalse("disclaimerContent is present", step2DisclaimerContent.isDisplayed());
+		Assertion.assertFalse("disclaimerContent is present", step2DisclaimerContent.isDisplayed());
 	}
 
 	public boolean isDrugPresent(String drugName) {
@@ -1702,7 +1702,7 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		} else if (editDrugInformation.size() > 0) {
 			editDrugInformation.get(0).click();
 		} else {
-			Assert.assertTrue("Enter drug information/Edit drug list link not displayed", false);
+			Assertion.assertTrue("Enter drug information/Edit drug list link not displayed", false);
 		}
 
 		Thread.sleep(1000);
@@ -1718,18 +1718,18 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		}
 		String summaryActual = summary.getText();
 		if (summaryActual.contains("Summary")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.assertTrue("Summary heading does not show up", false);
+			Assertion.assertTrue("Summary heading does not show up", false);
 		}
 	}
 
 	public void validateDrugs() {
 		String drugActual = drugsLink.getText();
 		if (drugActual.contains("Drugs")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.assertTrue("Drugs link does not show up", false);
+			Assertion.assertTrue("Drugs link does not show up", false);
 		}
 		drugsLink.click();
 		try {
@@ -1740,9 +1740,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		}
 		if (step1Text.getText().contains("Create a list")) {
 			step3.click();
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.assertTrue("Unable to navigate to Step 1", false);
+			Assertion.assertTrue("Unable to navigate to Step 1", false);
 		}
 	}
 
@@ -1759,9 +1759,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		wait.until(ExpectedConditions.elementToBeClickable(pharmacyLink));
 
 		if (pharmacyActual.contains("Pharmacy")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.assertTrue("Pharmacy link does not show up", false);
+			Assertion.assertTrue("Pharmacy link does not show up", false);
 		}
 		pharmacyLink.click();
 		try {
@@ -1772,9 +1772,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		}
 		if (step2Text.getText().contains("Find a pharmacy")) {
 			step3.click();
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.assertTrue("Unable to navigate to Step 2", false);
+			Assertion.assertTrue("Unable to navigate to Step 2", false);
 		}
 
 	}
@@ -1782,16 +1782,16 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 	public void validateCosts() {
 		String costsActual = costs.getText();
 		if (costsActual.contains("Costs")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.assertTrue("Costs link does not show up", false);
+			Assertion.assertTrue("Costs link does not show up", false);
 		}
 
 		returnToPlans.click();
 		if (driver.getCurrentUrl().contains("health-plans.html")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.assertTrue("Unable to navigate to VPP page from DCE tool", false);
+			Assertion.assertTrue("Unable to navigate to VPP page from DCE tool", false);
 		}
 
 	}
@@ -1805,9 +1805,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		if (findAPlanActual.contains("Find a Plan")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.assertTrue("Find a Plan link does not show up", false);
+			Assertion.assertTrue("Find a Plan link does not show up", false);
 		}
 
 	}
@@ -1856,8 +1856,8 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		/*
 		 * step3searchButton.click();
 		 * if(driver.getTitle().contains("Our Medicare Plans")){
-		 * Assert.assertTrue(true); } else{
-		 * Assert.assertTrue("Unable to navigate to VPP page",false); }
+		 * Assertion.assertTrue(true); } else{
+		 * Assertion.assertTrue("Unable to navigate to VPP page",false); }
 		 */
 	}
 
@@ -1878,19 +1878,19 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 	public void validatePagination() throws InterruptedException {
 		int pagesize = getPaginationText();
-		Assert.assertTrue("Initially left pagination arrow is not disabled", leftPaginationDisabled.isDisplayed());
+		Assertion.assertTrue("Initially left pagination arrow is not disabled", leftPaginationDisabled.isDisplayed());
 		for (int i = 0; i < pagesize; i++) {
 			rightPaginationArrow.click();
 			Thread.sleep(4000);
 		}
-		Assert.assertTrue("After reaching the last pagination right arrow is not disabled",
+		Assertion.assertTrue("After reaching the last pagination right arrow is not disabled",
 				rightPaginationDisabled.isDisplayed());
 
 		for (int i = 0; i < pagesize; i++) {
 			leftPaginationArrow.click();
 			Thread.sleep(4000);
 		}
-		Assert.assertTrue("After moving to first pagination left arrow is not disabled",
+		Assertion.assertTrue("After moving to first pagination left arrow is not disabled",
 				leftPaginationDisabled.isDisplayed());
 
 	}
@@ -1901,17 +1901,17 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 		if (mapIcon.getAttribute("src").contains("images/icon-svgs/mapmarker-pin-blue.svg")) {
 			System.out.println("-----------mapIcon.getAttribute()-----" + mapIcon.getAttribute("src"));
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 
-		Assert.assertTrue("1 map number is not present", mapNumber.get(0).getText().contains("1"));
+		Assertion.assertTrue("1 map number is not present", mapNumber.get(0).getText().contains("1"));
 		System.out.println("----mapNumber.get(0).getText()--------" + mapNumber.get(0).getText());
-		Assert.assertTrue("2 map number is not present", mapNumber.get(1).getText().contains("2"));
+		Assertion.assertTrue("2 map number is not present", mapNumber.get(1).getText().contains("2"));
 		System.out.println("----mapNumber.get(1).getText()--------" + mapNumber.get(1).getText());
-		Assert.assertTrue("3 map number is not present", mapNumber.get(2).getText().contains("3"));
+		Assertion.assertTrue("3 map number is not present", mapNumber.get(2).getText().contains("3"));
 		System.out.println("----mapNumber.get(2).getText()--------" + mapNumber.get(2).getText());
-		Assert.assertTrue("4 map number is not present", mapNumber.get(3).getText().contains("4"));
+		Assertion.assertTrue("4 map number is not present", mapNumber.get(3).getText().contains("4"));
 		System.out.println("----mapNumber.get(3).getText()--------" + mapNumber.get(3).getText());
 	}
 
@@ -1922,9 +1922,9 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 				.parseFloat(miles.get(1).getText().substring(0, 4).trim())
 				&& Float.parseFloat(miles.get(1).getText().substring(0, 4).trim()) <= Float
 						.parseFloat(miles.get(2).getText().substring(0, 4).trim())) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.assertTrue("Not in Nearest Order", false);
+			Assertion.assertTrue("Not in Nearest Order", false);
 	}
 
 	public int verboseCompare(String s1, String s2) {
@@ -1937,18 +1937,18 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 		List<WebElement> pharmnames = driver.findElements(By.xpath("//div[@id='pharInfoId']/span"));
 		int comparisonResult = verboseCompare(pharmnames.get(0).getText(), pharmnames.get(1).getText());
 		if (comparisonResult < 0) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.assertTrue("Not following A to Z order", false);
+			Assertion.assertTrue("Not following A to Z order", false);
 	}
 
 	public void validateZtoAorder() {
 		List<WebElement> pharmnames = driver.findElements(By.xpath("//div[@id='pharInfoId']/span"));
 		int comparisonResult = verboseCompare(pharmnames.get(0).getText(), pharmnames.get(1).getText());
 		if (comparisonResult > 0) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.assertTrue("Not following Z to A order", false);
+			Assertion.assertTrue("Not following Z to A order", false);
 	}
 
 	public void clickAtoZtab() {
@@ -1962,11 +1962,11 @@ public class DrugCostEstimatorPageMobile extends UhcDriver {
 
 	public void validatePlanYear() {
 		if (year2017.isDisplayed() && year2018.isDisplayed()) {
-			Assert.assertTrue("Plan year are displayed", true);
+			Assertion.assertTrue("Plan year are displayed", true);
 			year2017.click();
 			year2018.click();
 		} else {
-			Assert.assertFalse("Plan year are not displayed", true);
+			Assertion.assertFalse("Plan year are not displayed", true);
 		}
 	}
 

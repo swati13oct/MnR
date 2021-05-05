@@ -3,19 +3,15 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
+public class PlanRecommendationEngineSpecialNeedsPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineSpecialNeedsPage(WebDriver driver) {
 		super(driver);
@@ -25,7 +21,7 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -149,22 +145,22 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
-//			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//			Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
 		validate(pageProgressPercentage, 30);
 		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
-//			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//			Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(coverageTitle);
-//			Assert.assertTrue(coverageTitle.getText().contains("situations"));
+//			Assertion.assertTrue(coverageTitle.getText().contains("situations"));
 		validate(snpMedicaid, 30);
-//			Assert.assertTrue(snpMedicaid.getText().contains("Medicaid"));
+//			Assertion.assertTrue(snpMedicaid.getText().contains("Medicaid"));
 		validate(snpConditions, 30);
-//			Assert.assertTrue(snpConditions.getText().contains("following"));
+//			Assertion.assertTrue(snpConditions.getText().contains("following"));
 		validate(snpNursinghome, 30);
-//			Assert.assertTrue(snpNursinghome.getText().contains("facility"));
+//			Assertion.assertTrue(snpNursinghome.getText().contains("facility"));
 		validate(snpNone, 30);
-//			Assert.assertTrue(snpNone.getText().contains("None"));
+//			Assertion.assertTrue(snpNone.getText().contains("None"));
 		previousBtn.click();
 		System.out.println("Validationg " + page + " page Previous button functionality");
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());
@@ -227,8 +223,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 			if (snpMedicaidAccordion.isDisplayed()) {
 				validate(snpMedicaidAccordionCarrot, 30);
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
-//					Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
-//					Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
+//					Assertion.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
+//					Assertion.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				snpMedicaidAccordionCarrot.click();
 //				jsClickNew(snpMedicaidAccordionCarrot);
 			} else {
@@ -238,8 +234,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 			if (snpConditionsAccordion.isDisplayed()) {
 				validate(snpConditionsAccordionCarrot, 30);
 				Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
-//					Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
-//					Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
+//					Assertion.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
+//					Assertion.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				snpConditionsAccordionCarrot.click();
 //				jsClickNew(snpConditionsAccordionCarrot);
 			} else {
@@ -249,8 +245,8 @@ public class PlanRecommendationEngineSpecialNeedsPage extends UhcDriver {
 			if (snpNursinghomeAccordion.isDisplayed()) {
 				validate(snpNursinghomeAccordionCarrot, 30);
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
-//					Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
-//					Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
+//					Assertion.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
+//					Assertion.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				snpNursinghomeAccordionCarrot.click();
 //				jsClickNew(snpNursinghomeAccordionCarrot);
 			} else {

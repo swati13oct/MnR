@@ -4,7 +4,6 @@ import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,10 +14,11 @@ import org.openqa.selenium.support.ui.Select;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 import pages.mobile.acquisition.commonpages.AddNewDrugModalMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.commonpages.PageTitleConstantsMobile;
 
 public class AddDrugDetailsMobile extends UhcDriver {
 
@@ -127,7 +127,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 
 		waitforElement(continueButton);
 		jsClickNew(continueButton);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_SAVINGS_OPPORTUNITY)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunityMobile(driver);
 		}
 		return null;
@@ -140,7 +140,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 	}
 
 	public void validateThePage() {
-		Assert.assertTrue(addDrugDetailsPage.isDisplayed());
+		Assertion.assertTrue(addDrugDetailsPage.isDisplayed());
 	}
 
 	public SavingsOppurtunityMobile continueAddDrugDetailsModWithSaving() throws InterruptedException {

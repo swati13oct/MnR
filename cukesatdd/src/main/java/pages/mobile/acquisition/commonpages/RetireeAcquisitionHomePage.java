@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +20,7 @@ import acceptancetests.data.ElementData;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.mobile.acquisition.commonpages.UHCRetireeSiteMapPage;
@@ -196,7 +196,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 	}
 
 	public void validateGroupDropdownList() {
-		Assert.assertTrue("Group dropdown is not displayed", dropDownMenu.isDisplayed());
+		Assertion.assertTrue("Group dropdown is not displayed", dropDownMenu.isDisplayed());
 	}
 
 	public void impliciWait(WebElement element, int timeUnit) {
@@ -208,7 +208,7 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 		druglookuplink.click();
 		impliciWait(searchForaDrugHeader, 10);
 		// waitforElement(searchForaDrugHeader);
-		Assert.assertTrue("Header Displayed", searchForaDrugHeader.isDisplayed());
+		Assertion.assertTrue("Header Displayed", searchForaDrugHeader.isDisplayed());
 		return new DrugLookUpPage(driver);
 	}
 

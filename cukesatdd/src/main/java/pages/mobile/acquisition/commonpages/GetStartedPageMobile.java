@@ -1,7 +1,5 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.junit.Assert;
-
 /*@author pagarwa5*/
 
 import org.openqa.selenium.WebDriver;
@@ -10,8 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 
 
@@ -77,10 +75,10 @@ public class GetStartedPageMobile extends UhcDriver {
 			AddMyDrugsBtn.click();
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}
-		Assert.fail("Did not Navigate to Build Drug List Page");
+		Assertion.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
 		  

@@ -21,7 +21,7 @@ public class EnterDrugPage extends UhcDriver {
 	private WebElement drugInputField;
 
 	@FindBy(xpath="/html/body/div[1]/div/div[1]/div/div[3]/div/div[8]/div/div/div/div[2]/div/div/div")
-	public static WebElement findDrugBtn;
+	public WebElement findDrugBtn;
 	
 	@FindBy(name = "drugInitials")
 	CharSequence[] drugInitials;

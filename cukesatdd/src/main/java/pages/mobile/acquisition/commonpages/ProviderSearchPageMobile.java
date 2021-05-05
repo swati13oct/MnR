@@ -253,7 +253,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			FinishButton.click();
 		} else
 			System.out.println("Issue with Xpath");
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new PlanDetailsPageMobile(driver);
 	}
@@ -311,7 +312,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		threadsleep(3);
 		// waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new VPPPlanSummaryPageMobile(driver);
 	}
@@ -367,7 +369,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		} else
 			System.out.println("Issue with Xpath");
 		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new VPPPlanSummaryPageMobile(driver);
 	}
@@ -557,7 +560,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		validateNew(Finish);
 		Finish.click();
 		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		return new VPPPlanSummaryPageMobile(driver);
 
 	}
@@ -570,7 +574,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	public AcquisitionHomePageMobile returnToAcqHomePage() {
 		// TODO Auto-generated method stub
 		driver.close();
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		return new AcquisitionHomePageMobile(driver);
 	}
 }

@@ -31,7 +31,7 @@ public class MedicareAdvantageRequestMoreHelpPage extends GlobalWebElements {
 		validate(medicarePrescriptionDrug_PlansLink);
 		medicarePrescriptionDrug_PlansLink.click();
 		validate(medicarePrescriptionDrug_PlansLink);
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_PRESCRIPTION_DRUG_PLANS)){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_PLANS)){
 			return new MedicarePrescriptionDrugPlansPage(driver);
 		}
 	

@@ -1,9 +1,9 @@
 #Author: Naveen BK
 #created Date:2/12/2019
-@VisitorProfileAuthenticated
-Feature: 1.08. UAT - Visitor profile Authenticated
+@visitorProfileAuthenticated @visitorProfile
+Feature: 1.09. UAT - Visitor profile Authenticated
 
-  @vpMSSavePlanAuthenticated
+  @vpMSSavePlanAuthenticated @authenticated 
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -30,17 +30,17 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     And user delets the added Ms plans on visitor profile page
       | MS Test Plans | <MS_testPlans> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP @regressionAARP 
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName     | password   |
       | AARP | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrvdmedsupp | Password@1 |
 
-    @VisitorProfile_UHC
+    @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultiCounty | plantype | planyear | DOB        | county           | MS_testPlans  | userName         | password   |
       | UHC  | Alabama |   90210 | NO            | MS       | future   | 11/11/1949 | Jefferson County | Plan G,Plan A | mnrvdmedsupp_uhc | Password@1 |
 
-  @addDrugAuthenticated
+  @addDrugAuthenticated @authenticated 
   Scenario Outline: Verify user is able to add drug information to the authenticated visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -65,17 +65,17 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     Then the user deletes all the added drugs from profile page
       | DrugName | <drug1> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP @regressionAARP @sanity
     Examples: 
       | site | state   | userName  | password   | drug1   | zipCode |
       | AARP | Alabama | mnrqeaarp | Password@1 | Lipitor |   90210 |
 
-    @VisitorProfile_UHC
+    @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | userName | password   | drug1   | zipCode |
       | UHC  | Alabama | mnrqeuhc | Password@1 | Lipitor |   90210 |
 
-  @providerFlowAuthenticated
+  @providerFlowAuthenticated @authenticated 
   Scenario Outline: Verify Provider Search functional flow for authenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -99,17 +99,17 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     And user delets all the added providers on visitor profile page
       | PlanName | <planname> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP @regressionAARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             |
       | AARP | New York |   10001 | NO              | New York County | mnrqeaarp | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
-    @VisitorProfile_UHC
+    @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             |
       | UHC  | New York |   10001 | NO              | New York County | mnrqeuhc | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
-  @oleAuthenticatedValidations
+  @oleAuthenticatedValidations @authenticated 
   Scenario Outline: Verify OLE validations for authenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -123,17 +123,17 @@ Feature: 1.08. UAT - Visitor profile Authenticated
       | Status          | <status>         |
       | Monthly Premium | <monthlyPremium> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP @regressionAARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | status      | monthlyPremium |
       | AARP | New York |   10001 | NO              | New York County | mnrqeaarp | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
-    @VisitorProfile_UHC
+    @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
       | UHC  | New York |   10001 | NO              | New York County | mnrqeuhc | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
-  @vpPartialOLEAndRemove
+  @vppartialOLEAndRemove @authenticated 
   Scenario Outline: Verify Partial enrollment and cancel or remove the enrollment from profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -174,12 +174,12 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     And the user cancel the enrollment
       | Plan Name | <planName> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP @regressionAARP
     Examples: 
       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
       | AARP | New York | mnrvd6   | Password@1 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
 
-  @prePopulateEmailFieldPlanSummaryAuthenticated
+  @prePopulateEmailFieldPlanSummaryAuthenticated @authenticated 
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan summary page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -196,17 +196,17 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     Then user want the email address associated to my profile prepopulated in the text box on plan summary page
       | User Name | <userName> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP @regressionAARP
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @VisitorProfile_UHC
+    @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-  @prePopulateEmailFieldPlanDetailAuthenticated
+  @prePopulateEmailFieldPlanDetailAuthenticated @authenticated 
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan detail page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -222,17 +222,17 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     Then user want the email address associated to my profile prepopulated in the text box on plan detail page
       | User Name | <userName> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP @regressionAARP
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @VisitorProfile_UHC
+    @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-  @prePopulateEmailFieldPlanCompareAuthenticated
+  @prePopulateEmailFieldPlanCompareAuthenticated @authenticated 
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan compare page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -250,17 +250,17 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     Then user want the email address associated to my profile prepopulated in the text box on plan compare page
       | User Name | <userName> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP @regressionAARP
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @VisitorProfile_UHC
+    @visitorProfile_UHC @regressionUHC
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-  @validateHeaderWidget
+  @validateHeaderWidget @authenticated 
   Scenario Outline: Verify email prepopulate flow for authenticated profile on plan compare page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -273,12 +273,12 @@ Feature: 1.08. UAT - Visitor profile Authenticated
     And validate the new profile header
       | Name | <name> |
 
-    @VisitorProfile_AARP
+    @visitorProfile_AARP
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | name    | userName            | password   | plantype | planname                            | drugList           | providerList          |
       | AARP | Alabama |   10010 | NO              | New York County | Ledford | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) | Microlipid EMU 50% | Michael M Raffinan MD |
 
-    @VisitorProfile_UHC
+    @visitorProfile_UHC
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | name    | userName            | password   | plantype | planname                            | drugList           | providerList          |
       | UHC  | Alabama |   10010 | NO              | New York County | Ledford | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) | Microlipid EMU 50% | Michael M Raffinan MD |

@@ -1,5 +1,6 @@
 #File Name: VPP-EmailAndPrint-Common.feature
 #@vppUlayer @emailAndPrint @emailAndPrint_AARP
+@vpp @emailAndPrint
 Feature: 1.04 -ACQ-Print and email on VPP page
 
   # @emailAndPrint_AARP1 @emailAndPrintplancompare @predators @RegressionPredators @emailAndPrint_UHC1 @emailAndPrintplancompare @predatorsdecrelease2018
@@ -24,22 +25,22 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then I click back to all plans button and verify that all plans are still selected on summary page on site
     Then user loads page using email deeplink and validate vpp compare page content on site
 
-    @VppEmailandPrintCommon_AARP_1
+    @vppEmailandPrintCommon_AARP_1 @regressionAARP
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
       | 15523 | AARP |   90210 | MA       | NO            | next     |
 
-    @VppEmailandPrintCommon_UHC_1
+    @vppEmailandPrintCommon_UHC_1 @regressionUHC
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
       | 15523 | UHC  |   90210 | MA       | NO            | next     |
 
-    @prodRegression_AARP @VppEmailandPrintCommon_AARP_1
+    @prodRegression @vppEmailandPrintCommon_AARP_1 @sanity
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
       | 15523 | AARP |   90210 | PDP      | NO            | next     |
 
-    @prodRegression_UHC @VppEmailandPrintCommon_UHC_1
+    #   @prodRegression @vppEmailandPrintCommon_UHC_1
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
       | 15523 | UHC  |   90210 | PDP      | NO            | next     |
@@ -63,24 +64,24 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then the user validates the functionality of email button on the plan Details Page on site
     Then user loads page using email deeplink and validate vpp detail page content on site
 
-    @VppEmailandPrintCommon_AARP_2
+    @vppEmailandPrintCommon_AARP_2 @regressionAARP
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
       | 15531 | AARP |   80001 | MA       | No              | Jefferson County | next     |
       | 15531 | AARP |   80001 | PDP      | No              | Jefferson County | next     |
 
-    @VppEmailandPrintCommon_UHC_2
+    @vppEmailandPrintCommon_UHC_2 @regressionUHC
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
       | 15531 | UHC  |   80001 | MA       | No              | Jefferson County | next     |
       | 15531 | UHC  |   80001 | PDP      | No              | Jefferson County | next     |
 
-    @prodRegression_AARP_01 @VppEmailandPrintCommon_AARP_2
+    #   @prodRegression @vppEmailandPrintCommon_AARP_2
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
       | 15531 | AARP |   80001 | SNP      | No              | Jefferson County | next     |
 
-    @prodRegression_UHC_01 @VppEmailandPrintCommon_UHC_2
+    @prodRegression @vppEmailandPrintCommon_UHC_2 @sanity
     Examples: 
       | TID   | site | zipcode | plantype | isMultutiCounty | county           | planyear |
       | 15531 | UHC  |   80001 | SNP      | No              | Jefferson County | next     |
@@ -105,24 +106,24 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then user validates email functionality with invalid and valid email address for selected plan on plan summary page on site
     Then user loads page using email deeplink for plan and validate vpp summary page content on site
 
-    @VppEmailandPrintCommon_AARP_3
+    @vppEmailandPrintCommon_AARP_3 @regressionAARP
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
       | 1598166 | AARP | PDP      |   80001 | NO            | Jefferson County | next     |
       | 1598166 | AARP | SNP      |   80001 | NO            | Jefferson County | next     |
 
-    @VppEmailandPrintCommon_UHC_3
+    @vppEmailandPrintCommon_UHC_3 @regressionUHC
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
       | 1598166 | UHC  | PDP      |   80001 | NO            | Jefferson County | next     |
       | 1598166 | UHC  | SNP      |   80001 | NO            | Jefferson County | next     |
 
-    @prodRegression_AARP @VppEmailandPrintCommon_AARP_3
+    @prodRegression @vppEmailandPrintCommon_AARP_3 @sanity
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
       | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | next     |
 
-    @prodRegression_UHC @VppEmailandPrintCommon_UHC_3
+    #   @prodRegression
     Examples: 
       | UID     | site | plantype | zipcode | isMultiCounty | county           | planyear |
-      | 1598166 | AARP | MA       |   80001 | NO            | Jefferson County | next     |
+      | 1598166 | UHC  | MA       |   80001 | NO            | Jefferson County | next     |

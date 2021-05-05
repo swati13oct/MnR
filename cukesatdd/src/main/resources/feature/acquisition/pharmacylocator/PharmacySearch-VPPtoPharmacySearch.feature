@@ -1,4 +1,5 @@
-Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
+@pharmacyLocator
+Feature: 1.11.b ACQ-Pharmacy Locator Test Scripts
 
   Scenario Outline: TID: <TID> - To verify VPP details to Pharmacy page for Chinese, Spanish and English Language Pharmacy Directory Link
     Given the user is on medicare acquisition site landing page
@@ -13,7 +14,7 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
     #		| Language | <language> |
     And the user validates header section content on site
     When the user enters following details for the pharmacy search
-      | Zip Code |            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in Pharmacy locator page
       | Language | <language> |
@@ -53,39 +54,38 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
     Then the user validate error message displayed when filter results in no match
     Then the user validate the question widget
 
-    @Pharmacy_FromVPP_PharmacyDirectory_English_AARP
+    @Pharmacy_FromVPP_PharmacyDirectory_English_AARP @regressionAARP
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | English - Pharmacy | AARP | English  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @Pharmacy_FromVPP_PharmacyDirectory_Chinese_AARP
+    @Pharmacy_FromVPP_PharmacyDirectory_Chinese_AARP @regressionAARP
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Chinese - Pharmacy | AARP | Chinese  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @Pharmacy_FromVPP_PharmacyDirectory_Spanish_AARP
+    @Pharmacy_FromVPP_PharmacyDirectory_Spanish_AARP @regressionAARP
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Spanish - Pharmacy | AARP | Spanish  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @Pharmacy_FromVPP_PharmacyDirectory_English_UHC
+    @Pharmacy_FromVPP_PharmacyDirectory_English_UHC @regressionUHC
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | English - Pharmacy | UHC  | English  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @Pharmacy_FromVPP_PharmacyDirectory_Chinese_UHC
+    @Pharmacy_FromVPP_PharmacyDirectory_Chinese_UHC @regressionUHC
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Chinese - Pharmacy | UHC  | Chinese  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    @Pharmacy_FromVPP_PharmacyDirectory_Spanish_UHC
+    @Pharmacy_FromVPP_PharmacyDirectory_Spanish_UHC @regressionUHC
     Examples: 
       | TID                | site | language | countyForPlanDetails | path                                                                                                                                                                                                                                                                                                                          | pageName               | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | Spanish - Pharmacy | UHC  | Spanish  | None                 | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      
-      
-      @Pharmacy_Locator_ITU_HI_LTC_Messaging
-      Scenario Outline: <Scenario> : To verify language dropdown removal for pharmacy locator page on acquisition <site> site
+
+  @Pharmacy_Locator_ITU_HI_LTC_Messaging
+  Scenario Outline: <Scenario> : To verify language dropdown removal for pharmacy locator page on acquisition <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigate to pharmacy search page from the navigation bar
@@ -96,25 +96,21 @@ Feature: 1.07 and 1.11 ACQ-Pharmacy Locator
       | County Name | <countyName> |
     And the user chooses a plan from dropdown list
       | Current Year Plan Name | <cy_planName> |
-      #| Current Year Plan Year | <cy_planYear> |
-      #| Next Year Plan Name    | <ny_planName> |
-      #| Next Year Plan Year    | <ny_planYear> |
-   And the user selects Pharmacy Types to Filter
+    #| Current Year Plan Year | <cy_planYear> |
+    #| Next Year Plan Name    | <ny_planName> |
+    #| Next Year Plan Year    | <ny_planYear> |
+    And the user selects Pharmacy Types to Filter
       | Pharmacy Type | <pharmacyType> |
-      | Language      | English     |
+      | Language      | English        |
     Then the user validate error message displayed when filter results in no match
     Then the user validates ITU, Home Infusion, LTC filter Message and anchor link
-    
-      @Pharmacy_Locator_ITU_HI_LTC_Messaging_AARP
-      Examples: 
-     |Scenario                   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-     |Language Drop Down Removal | AARP |   14143 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
-      
-      @Pharmacy_Locator_ITU_HI_LTC_Messaging_UHC
-      Examples: 
-      |Scenario                   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      |Language Drop Down Removal | UHC  |   14143 |       15 | None            |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
-      
-      
-      
-      
+
+    @Pharmacy_Locator_ITU_HI_LTC_Messaging_AARP @regressionAARP
+    Examples: 
+      | Scenario                   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | Language Drop Down Removal | AARP |   14143 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |
+
+    @Pharmacy_Locator_ITU_HI_LTC_Messaging_UHC @regressionUHC
+    Examples: 
+      | Scenario                   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType   | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | Language Drop Down Removal | UHC  |   14143 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Long-term care | True                  | False            | True                 |

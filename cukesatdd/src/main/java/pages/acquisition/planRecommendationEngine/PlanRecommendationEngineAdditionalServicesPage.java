@@ -9,10 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
+public class PlanRecommendationEngineAdditionalServicesPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineAdditionalServicesPage(WebDriver driver) {
 		super(driver);
@@ -22,7 +21,7 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -116,16 +115,16 @@ public class PlanRecommendationEngineAdditionalServicesPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
-//		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//		Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
 		validate(pageProgressPercentage, 30);
 		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
-//		Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//		Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(additionalTitle);
-//		Assert.assertTrue(additionalTitle.getText().contains("additional"));
+//		Assertion.assertTrue(additionalTitle.getText().contains("additional"));
 		validate(additionalTitleInfo);
-//		Assert.assertTrue(additionalTitleInfo.getText().contains("additional"));
+//		Assertion.assertTrue(additionalTitleInfo.getText().contains("additional"));
 		
 		validate(dentalQuestion, 30);
 		Assert.assertTrue(dentalQuestion.getText().contains("Dental"));

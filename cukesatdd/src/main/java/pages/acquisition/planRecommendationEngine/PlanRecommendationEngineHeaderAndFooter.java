@@ -16,10 +16,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
+public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 	
 	Actions actions = new Actions(driver);
 
@@ -31,7 +30,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 //		validate(getStartedBtn, 30);
 
@@ -340,7 +339,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerSigninLink, 30);
 		Assert.assertTrue(headerSigninLink.getText().contains("Sign in"));
 		validate(headerRegisterLink, 30);
-//		Assert.assertTrue(headerRegisterLink.getText().contains("Register"));
+//		Assertion.assertTrue(headerRegisterLink.getText().contains("Register"));
 		validate(headerHeartNumberofPlan, 30);
 		validate(headerNavigationBar, 30);
 		validate(headerNavigationBarHomeTab, 30);
@@ -369,7 +368,7 @@ public class PlanRecommendationEngineHeaderAndFooter extends UhcDriver {
 		validate(headerShopLink, 30);
 		Assert.assertTrue(headerShopLink.getText().contains("Shop"));
 //		validate(headerNewExistingMemberLink, 30);
-//		Assert.assertTrue(headerNewExistingMemberLink.getText().contains("New and Existing Members"));
+//		Assertion.assertTrue(headerNewExistingMemberLink.getText().contains("New and Existing Members"));
 		validate(headerEnrollLink, 30);
 		Assert.assertTrue(headerEnrollLink.getText().contains("Enroll"));
 		validate(headerResourcesLink, 30);

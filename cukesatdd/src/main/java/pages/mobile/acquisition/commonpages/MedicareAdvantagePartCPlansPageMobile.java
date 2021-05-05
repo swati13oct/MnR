@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import junit.framework.Assert;
+import atdd.framework.Assertion;
 
 public class MedicareAdvantagePartCPlansPageMobile extends GlobalWebElements {
 
@@ -92,7 +92,7 @@ public class MedicareAdvantagePartCPlansPageMobile extends GlobalWebElements {
 	public void plansAvailableInYourArea() {
 
 		scrollToView(getLnkPlansAvailableInYourArea());
-		Assert.assertTrue("Plans Available link isn't present", getLnkPlansAvailableInYourArea().isDisplayed());
+		Assertion.assertTrue("Plans Available link isn't present", getLnkPlansAvailableInYourArea().isDisplayed());
 		switchToNewTabNew(getLnkPlansAvailableInYourArea());
 
 	}
@@ -104,7 +104,7 @@ public class MedicareAdvantagePartCPlansPageMobile extends GlobalWebElements {
 		getTxtZipcode().sendKeys(zipCode);
 		switchToNewTabNew(btnZipcode);
 		System.out.println(getTitle());
-		Assert.assertTrue("Incorrect page is loaded",
+		Assertion.assertTrue("Incorrect page is loaded",
 				getTitle().contains("Find Medicare Plans") || getTitle().contains("Available Plans"));
 		validateNonPresenceOfElement(btnZipcode);
 		return driver;

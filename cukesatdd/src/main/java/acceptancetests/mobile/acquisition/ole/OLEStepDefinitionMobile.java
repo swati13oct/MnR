@@ -3,11 +3,9 @@ package acceptancetests.mobile.acquisition.ole;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,20 +14,21 @@ import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-import pages.acquisition.ole.PlanPremiumPage;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
 import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
+import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
 import pages.mobile.acquisition.commonpages.SpecialElectionPeriodPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
@@ -76,13 +75,14 @@ public class OLEStepDefinitionMobile {
 	public void the_user_lands_on_OLE_Welcome_Page_wity_following_Plan_Details(DataTable planAttributes)
 			throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanPremium = givenAttributesMap.get("Premium");
 		String County = givenAttributesMap.get("County Name");
@@ -108,19 +108,20 @@ public class OLEStepDefinitionMobile {
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 	
 	@Given("^the user navigates to following Campaign acquisition site page$")
 	public void the_user_navigates_to_following_medicare_acquisition_site(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : "+path);
@@ -134,7 +135,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
 
@@ -147,13 +148,14 @@ public class OLEStepDefinitionMobile {
 	@Then("^the user clicks on Enroll Now for AARP site to start the OLE flow$")
 	public void the_user_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes) throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		// String PlanName = (String)
@@ -208,9 +210,9 @@ public class OLEStepDefinitionMobile {
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
 	
@@ -220,13 +222,14 @@ public class OLEStepDefinitionMobile {
 	public void the_user_navgates_to_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes)
 			throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = givenAttributesMap.get("Plan Name");
 
 		String plantype = givenAttributesMap.get("Plan Type");
@@ -280,22 +283,23 @@ public class OLEStepDefinitionMobile {
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
 	@Then("^the user navigates to clicks on Enroll Now from visitor profile to start the OLE flow$")
 	public void the_user_navgates_to_clicks_on_Enroll_Now_From_VisitorProfile_flow(DataTable planAttributes)
 			throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
@@ -345,9 +349,9 @@ public class OLEStepDefinitionMobile {
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
 	// /**
@@ -415,21 +419,22 @@ public class OLEStepDefinitionMobile {
 	// getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 	// welcomePage);
 	// System.out.println("OLE Welcome Page is Displayed");
-	// Assert.assertTrue(true);
+	// Assertion.assertTrue(true);
 	// }
 	// else
-	// Assert.fail("Error in validating the OLE Welcome Page");
+	// Assertion.fail("Error in validating the OLE Welcome Page");
 	// }
 
 	@Then("^the user clicks on Enroll Now in Plan Compare Page for the following Plan to start the OLE flow$")
 	public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		WelcomePageMobile welcomePage;
@@ -449,9 +454,9 @@ public class OLEStepDefinitionMobile {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 
 	}
 
@@ -468,9 +473,9 @@ public class OLEStepDefinitionMobile {
 	//	if (plansummaryPage.validatePlanNames(planType)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-		//	Assert.assertTrue(true);
+		//	Assertion.assertTrue(true);
 		//} else {
-		//	Assert.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
+		//	Assertion.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
 		//}
 	}
 
@@ -504,12 +509,12 @@ public class OLEStepDefinitionMobile {
 	// System.out.println("Plan Details Validation in OLE PAGE :
 	// "+Validation_Status+" - Validation Passed");
 	// getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-	// Assert.assertTrue(true);
+	// Assertion.assertTrue(true);
 	// }
 	// else{
 	// System.out.println("Plan Details Validation in OLE PAGE :
 	// "+Validation_Status);
-	// Assert.fail();
+	// Assertion.fail();
 	// }
 	// }
 
@@ -522,22 +527,23 @@ public class OLEStepDefinitionMobile {
 		if (Validation_Status) {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 	}
 
 	@Then("^the site user clicks on Start Application Button and proceed Next$")
 	public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		//String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
@@ -550,13 +556,14 @@ public class OLEStepDefinitionMobile {
 	}
 	@Then("^the site user clicks on continue application until confirmation page$")
 	public void conitnue_application_until_confirmation_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
 		String DateOfBirth = memberAttributesMap.get("DOB");			
@@ -569,13 +576,14 @@ public class OLEStepDefinitionMobile {
 	
 	@Then("^the site user fills all the details in MedsuppPage$")
 	public void user_fills_all_details_medsupp(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 	
@@ -593,7 +601,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
 		} else
-			Assert.fail("OLE Learn More Modal is NOT Displayed");
+			Assertion.fail("OLE Learn More Modal is NOT Displayed");
 
 		welcomePage = (WelcomePageMobile) learnMoremodal.returntoOLE();
 		if (welcomePage != null) {
@@ -601,7 +609,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("Back to OLE Application page - Welcome Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
 	}
 
 	@Then("^the user validates cancellation modal for Welcome OLE$")
@@ -614,7 +622,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
 			System.out.println("OLE Cancellation Modal is Displayed");
 		} else
-			Assert.fail("OLE Cancellation Modal is NOT Displayed");
+			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
 
 		welcomePage = (WelcomePageMobile) cancelOLEmodal.returntoOLE();
 		if (welcomePage != null) {
@@ -622,7 +630,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("Back to OLE Application page - Welcome Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
 	}
 
 	@Then("^the user validates Leave OLE modal for Welcome OLE$")
@@ -635,7 +643,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, leaveOLEmodal);
 			System.out.println("Leave OLE modal - Back to OLE ");
 		} else
-			Assert.fail("Leave OLE Modal is NOT Displayed");
+			Assertion.fail("Leave OLE Modal is NOT Displayed");
 
 		welcomePage = (WelcomePageMobile) leaveOLEmodal.returntoOLE();
 		if (welcomePage != null) {
@@ -643,7 +651,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("Back to OLE Application page - Welcome Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
 
 	}
 
@@ -651,12 +659,13 @@ public class OLEStepDefinitionMobile {
 	public void the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable Flags)
 			throws Throwable {
 
-		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
+		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
+		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
 					personalAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String medicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
@@ -673,9 +682,9 @@ public class OLEStepDefinitionMobile {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
 			System.out.println("OLE Medicare Information Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Medicare Information Page is NOT Displayed");
+			Assertion.fail("OLE Medicare Information Page is NOT Displayed");
 	}
 
 	@Then("^the user navigates to Medicare Information Page for PDP$")
@@ -687,9 +696,9 @@ public class OLEStepDefinitionMobile {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
 			System.out.println("OLE Medicare Information Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Medicare Information Page is NOT Displayed");
+			Assertion.fail("OLE Medicare Information Page is NOT Displayed");
 	}
 
 	@Then("^the user validates Medicare Information Page required fields$")
@@ -700,22 +709,23 @@ public class OLEStepDefinitionMobile {
 		if (Validation_Status) {
 			System.out.println("Medicare Information Page required fields : " + Validation_Status);
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Medicare Information Page required fields : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 	}
 
 	@Then("^the user enters following required Medicare Informations$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_pages(DataTable planAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String CardType = MedicareDetailsMap.get("Card Type");
 
 		Random rnd = new Random();
@@ -742,20 +752,21 @@ public class OLEStepDefinitionMobile {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
 			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Medicare Info data entry failed");
+			Assertion.fail("Medicare Info data entry failed");
 	}
 
 	@Then("^the user enters following required Medicare Information$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String CardType = MedicareDetailsMap.get("Card Type");
 		if (CardType.contains("HICN")) {
 			Random rnd = new Random();
@@ -794,19 +805,20 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
 			System.out.println("OLE Medicare Information Page, Medicare Info is entered and Next Button is enabled");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Medicare Info data entry failed");
+			Assertion.fail("Medicare Info data entry failed");
 	}
 	@Then("^the site user clicks on Start Application Button proceed to next pages$")
 	public void Start_application_button(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
@@ -821,13 +833,14 @@ public class OLEStepDefinitionMobile {
 	
 	@Then("^user clicks on resume application button$")
 	public void click_resume_application(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
@@ -844,13 +857,14 @@ public class OLEStepDefinitionMobile {
 
 	@And("^the user signs in with optum Id$")
 	public void the_user_signs_in_with_optum_Id(DataTable credentials) {
-		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
 			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 					plannameAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 
@@ -885,10 +899,10 @@ public class OLEStepDefinitionMobile {
 			System.out.println("TFN, Wunderman Validation in OLE Medicare Information Page : " + Validation_Status
 					+ " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("TFN, Wunderman Validation in OLE Medicare Information Page : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 	}
 
@@ -909,10 +923,10 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Plan Details Validation in OLE Medicare Information  PAGE : " + Validation_Status
 					+ " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Plan Details Validation in OLE Medicare Information PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 	}
 
@@ -925,11 +939,11 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Invalid Entry Validation for required fields in OLE Medicare Information  PAGE : "
 					+ Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Invalid Entry Validation for required fields in OLE Medicare Information PAGE : "
 					+ Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 	}
 	
@@ -970,7 +984,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
 		} else
-			Assert.fail("OLE Learn More Modal is NOT Displayed");
+			Assertion.fail("OLE Learn More Modal is NOT Displayed");
 
 		MedicareInfoPage = (MedicareInformationPageMobile) learnMoremodal.returntoOLE();
 		if (MedicareInfoPage != null) {
@@ -978,7 +992,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
 			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page -OLE Medicare Information Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page -OLE Medicare Information Page is NOT Displayed");
 
 	}
 
@@ -992,7 +1006,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEAVING_MODAL_PAGE, leaveOLEmodal);
 			System.out.println("Leave OLE modal - Back to OLE ");
 		} else
-			Assert.fail("Leave OLE Modal is NOT Displayed");
+			Assertion.fail("Leave OLE Modal is NOT Displayed");
 
 		MedicareInfoPage = (MedicareInformationPageMobile) leaveOLEmodal.returntoOLE();
 		if (MedicareInfoPage != null) {
@@ -1000,7 +1014,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
 			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - OLE Medicare Information Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - OLE Medicare Information Page is NOT Displayed");
 
 	}
 
@@ -1014,7 +1028,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
 			System.out.println("OLE Cancellation Modal is Displayed");
 		} else
-			Assert.fail("OLE Cancellation Modal is NOT Displayed");
+			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
 
 		MedicareInfoPage = (MedicareInformationPageMobile) cancelOLEmodal.returntoOLE();
 		if (MedicareInfoPage != null) {
@@ -1022,7 +1036,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, MedicareInfoPage);
 			System.out.println("Back to OLE Application page - OLE Medicare Information Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - OLE Medicare Information Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - OLE Medicare Information Page is NOT Displayed");
 
 	}
 
@@ -1039,7 +1053,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("OLE Preliminary Questions Page is Displayed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "false");
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			boolean Validation_Status = medicareInfoPage.validate_alreadyEnrolled_ErrorMessage();
 			if (Validation_Status) {
@@ -1047,12 +1061,12 @@ public class OLEStepDefinitionMobile {
 						+ Validation_Status + " - Validation Passed");
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
 				getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 
 			} else {
 				System.out.println("Already Enrolled Error message is NOT Displayed in OLE Medicare Information PAGE : "
 						+ Validation_Status);
-				Assert.fail("Already Enrolled Error message is NOT Displayed in OLE Medicare Information PAGE : "
+				Assertion.fail("Already Enrolled Error message is NOT Displayed in OLE Medicare Information PAGE : "
 						+ Validation_Status);
 			}
 
@@ -1069,7 +1083,7 @@ public class OLEStepDefinitionMobile {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
 			System.out.println("OLE Preliminary Questions Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
@@ -1077,12 +1091,13 @@ public class OLEStepDefinitionMobile {
 	@Then("^the user validates requierd fields for Preliminary Questions Pages$")
 	public void the_user_validates_requierd_fields_for_Preliminary_Questions_Pages(DataTable Flags) throws Throwable {
 
-		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
+		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
+		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
 					personalAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
@@ -1096,12 +1111,12 @@ public class OLEStepDefinitionMobile {
 					"Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "
 							+ Validation_Status);
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println(
 					"Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Failed : "
 							+ Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 
 	}
@@ -1109,12 +1124,13 @@ public class OLEStepDefinitionMobile {
 	@Then("^the user validates requierd ESRD on Medicare Info Page$")
 	public void the_user_validates_requierd_fields_for_Preliminary_Questions_Page(DataTable Flags) throws Throwable {
 
-		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
+		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
+		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
 					personalAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		/*
 		 * String alreadyEnrolled = (String)
 		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
@@ -1123,7 +1139,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
@@ -1140,12 +1156,12 @@ public class OLEStepDefinitionMobile {
 					"Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "
 							+ Validation_Status);
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInfoPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println(
 					"Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Failed : "
 							+ Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -1154,12 +1170,13 @@ public class OLEStepDefinitionMobile {
 	public void the_user_validates_not_requierd_fields_for_ESRD_Medicare_Questions_Page(DataTable Flags)
 			throws Throwable {
 
-		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
+		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
+		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
 					personalAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		/*
 		 * String alreadyEnrolled = (String)
 		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
@@ -1168,7 +1185,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
@@ -1186,25 +1203,26 @@ public class OLEStepDefinitionMobile {
 					"Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Passed : "
 							+ Validation_Status);
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInfoPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println(
 					"Preliminary Questions Validation for required fields in OLE Preliminary Questions PAGE - Validation Failed : "
 							+ Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
 
 	@Then("^the user enters provider details in Use and Disclosure Authorization page for CSNP and navidates to Personal information page$")
 	public void user_navigates_to_use_and_disclosure_page(DataTable planAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		UseAndDisclosureAuthorizationPageMobile useranddisclosure = (UseAndDisclosureAuthorizationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE);
 		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
@@ -1224,19 +1242,20 @@ public class OLEStepDefinitionMobile {
 	 */
 	@And("^the user fills following information in Preliminary Questions page$")
 	public void user_fill_information_Preliminary_Questions_page(DataTable personalAttributes) {
-		List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
 		Map<String, String> personalAttributesMap = new HashMap<String, String>();
+		personalAttributesMap = DataTableParser.readDataTableAsMaps(personalAttributes);
+		/*List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			personalAttributesMap.put(personalAttributesRow.get(i).getCells().get(0),
 					personalAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
 		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true : false;
 		if (alreadyEnrolled_Flag) {
 			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			String medicaidnumber = personalAttributesMap.get("MedicaidNumber");
 			PrelimineryQuestionsPageMobile prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) getLoginScenario()
@@ -1247,9 +1266,9 @@ public class OLEStepDefinitionMobile {
 
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
 				System.out.println("OLE Preliminary Questions Page is Displayed : Medicaid Number is entered");
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else
-				Assert.fail("OLE Preliminary Questions Page is NOT Displayed");
+				Assertion.fail("OLE Preliminary Questions Page is NOT Displayed");
 		}
 	}
 
@@ -1261,7 +1280,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			PrelimineryQuestionsPageMobile prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
@@ -1278,10 +1297,10 @@ public class OLEStepDefinitionMobile {
 				System.out.println("Plan Details Validation in OLE Premliminary Questions PAGE : " + Validation_Status
 						+ " - Validation Passed");
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
 				System.out.println("Plan Details Validation in OLE Premliminary Questions PAGE : " + Validation_Status);
-				Assert.fail();
+				Assertion.fail();
 			}
 		}
 	}
@@ -1294,7 +1313,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 
 			PrelimineryQuestionsPageMobile prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) getLoginScenario()
@@ -1305,11 +1324,11 @@ public class OLEStepDefinitionMobile {
 				System.out.println("TFN, Wunderman Validation in OLE Preliminary Questions PAGE : " + Validation_Status
 						+ " - Validation Passed");
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
 				System.out
 						.println("TFN, Wunderman Validation in OLE Preliminary Questions PAGE : " + Validation_Status);
-				Assert.fail();
+				Assertion.fail();
 			}
 		}
 	}
@@ -1322,7 +1341,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			PrelimineryQuestionsPageMobile prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
@@ -1332,7 +1351,7 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_LEAVING_MODAL_PAGE, leaveOLEmodal);
 				System.out.println("Leave OLE modal - Back to OLE ");
 			} else
-				Assert.fail("Leave OLE Modal is NOT Displayed");
+				Assertion.fail("Leave OLE Modal is NOT Displayed");
 
 			prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) leaveOLEmodal.returntoOLE();
 			if (prelimineryQuestionsPage != null) {
@@ -1340,7 +1359,7 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
 				System.out.println("Back to OLE Application page - OLE Preliminary Questions Page is Displayed");
 			} else
-				Assert.fail("Back to OLE Application page - OLE Preliminary Questions Page is NOT Displayed");
+				Assertion.fail("Back to OLE Application page - OLE Preliminary Questions Page is NOT Displayed");
 		}
 
 	}
@@ -1353,7 +1372,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 
 			PrelimineryQuestionsPageMobile prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) getLoginScenario()
@@ -1364,14 +1383,14 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, learnMoremodal);
 				System.out.println("OLE Learn More Modal is Displayed");
 			} else
-				Assert.fail("OLE Learn More Modal is NOT Displayed");
+				Assertion.fail("OLE Learn More Modal is NOT Displayed");
 			prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) learnMoremodal.returntoOLE();
 			if (prelimineryQuestionsPage != null) {
 
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
 				System.out.println("Back to OLE Application page - OLE Preliminary Questions Page is Displayed");
 			} else
-				Assert.fail("Back to OLE Application page -OLE Preliminary Questions Page is NOT Displayed");
+				Assertion.fail("Back to OLE Application page -OLE Preliminary Questions Page is NOT Displayed");
 		}
 	}
 
@@ -1383,7 +1402,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 					+ alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
 			getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG, "true");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			PrelimineryQuestionsPageMobile prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE);
@@ -1393,7 +1412,7 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
 				System.out.println("OLE Cancellation Modal is Displayed");
 			} else
-				Assert.fail("OLE Cancellation Modal is NOT Displayed");
+				Assertion.fail("OLE Cancellation Modal is NOT Displayed");
 
 			prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) cancelOLEmodal.returntoOLE();
 			if (prelimineryQuestionsPage != null) {
@@ -1401,7 +1420,7 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRELIM_QUESTIONS_PAGE, prelimineryQuestionsPage);
 				System.out.println("Back to OLE Application page - OLE Preliminary Questions Page is Displayed");
 			} else
-				Assert.fail("Back to OLE Application page - OLE Preliminary Questions Page is NOT Displayed");
+				Assertion.fail("Back to OLE Application page - OLE Preliminary Questions Page is NOT Displayed");
 
 		}
 	}
@@ -1416,7 +1435,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
@@ -1426,9 +1445,9 @@ public class OLEStepDefinitionMobile {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
 			System.out.println("OLE Personal Information Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Personal Information Page is NOT Displayed");
+			Assertion.fail("OLE Personal Information Page is NOT Displayed");
 		// }
 	}
 
@@ -1444,9 +1463,9 @@ public class OLEStepDefinitionMobile {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
 			System.out.println("OLE Personal Information Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Personal Information Page is NOT Displayed");
+			Assertion.fail("OLE Personal Information Page is NOT Displayed");
 	}
 
 	@Then("^the user enters following required information in Personal Information Page$")
@@ -1460,14 +1479,15 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details(MemberDetailsMap);
@@ -1491,21 +1511,22 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
 			getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Personal Information Page - Adding Member Details Failed");
+			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed");
 		// }
 	}
 
 	@Then("^the user enters following information in Personal Information Page$")
 	public void the_user_enters_following__information_in_Personal_Information_Page(DataTable arg1) throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details_Other(MemberDetailsMap);
@@ -1520,9 +1541,9 @@ public class OLEStepDefinitionMobile {
 					MemberDetailsMap.get("Email Confirmation"));
 			getLoginScenario().saveBean(oleCommonConstants.Go_Green, MemberDetailsMap.get("Go Green"));
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Personal Information Page - Adding Member Details Failed");
+			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed");
 		// }
 	}
 
@@ -1530,12 +1551,13 @@ public class OLEStepDefinitionMobile {
 	public void the_user_enters_following__information_in_Personal_Information_Page_DSNP(DataTable arg1)
 			throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details_Other_dsnp(MemberDetailsMap);
@@ -1547,9 +1569,9 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Personal Information Page - Adding Member Details Failed");
+			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed");
 		// }
 	}
 
@@ -1563,7 +1585,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
@@ -1579,10 +1601,10 @@ public class OLEStepDefinitionMobile {
 			System.out.println("Plan Details Validation in OLE Personal Information PAGE : " + Validation_Status
 					+ " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Plan Details Validation in OLE Personal Information PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -1597,7 +1619,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
@@ -1610,10 +1632,10 @@ public class OLEStepDefinitionMobile {
 		if (Validation_Status) {
 			System.out.println("Member Details Validation in OLE Personal Information PAGE : - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Member Details Validation in OLE Personal Information PAGE : - Validation Failed");
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -1628,7 +1650,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
@@ -1638,10 +1660,10 @@ public class OLEStepDefinitionMobile {
 			System.out.println("TFN, Wunderman Validation in OLE Personal Information PAGE : " + Validation_Status
 					+ " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("TFN, Wunderman Validation in OLE Personal Information PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -1656,7 +1678,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
@@ -1666,7 +1688,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEAVING_MODAL_PAGE, leaveOLEmodal);
 			System.out.println("Leave OLE modal - Back to OLE ");
 		} else
-			Assert.fail("Leave OLE Modal is NOT Displayed");
+			Assertion.fail("Leave OLE Modal is NOT Displayed");
 
 		personalInformationPage = (PersonalInformationPageMobile) leaveOLEmodal.returntoOLE();
 		if (personalInformationPage != null) {
@@ -1674,7 +1696,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
 			System.out.println("Back to OLE Application page - OLE Personal Information Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - OLE Personal Information Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - OLE Personal Information Page is NOT Displayed");
 		// }
 	}
 
@@ -1688,7 +1710,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
@@ -1698,14 +1720,14 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
 		} else
-			Assert.fail("OLE Learn More Modal is NOT Displayed");
+			Assertion.fail("OLE Learn More Modal is NOT Displayed");
 		personalInformationPage = (PersonalInformationPageMobile) learnMoremodal.returntoOLE();
 		if (personalInformationPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
 			System.out.println("Back to OLE Application page - OLE Personal Information Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page -OLE Personal Information Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page -OLE Personal Information Page is NOT Displayed");
 		// }
 	}
 
@@ -1719,7 +1741,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
@@ -1730,7 +1752,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
 			System.out.println("OLE Cancellation Modal is Displayed");
 		} else
-			Assert.fail("OLE Cancellation Modal is NOT Displayed");
+			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
 
 		personalInformationPage = (PersonalInformationPageMobile) cancelOLEmodal.returntoOLE();
 		if (personalInformationPage != null) {
@@ -1738,7 +1760,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
 			System.out.println("Back to OLE Application page - OLE Personal Information Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - OLE Personal Information Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - OLE Personal Information Page is NOT Displayed");
 		// }
 	}
 
@@ -1756,17 +1778,18 @@ public class OLEStepDefinitionMobile {
 		 * 
 		 * getLoginScenario().saveBean(OLE_PageConstants.
 		 * OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
-		 * System.out.println("OLE SEP Page is Displayed"); Assert.assertTrue(true); }
-		 * else Assert.fail("OLE SEP Page is NOT Displayed"); //}
+		 * System.out.println("OLE SEP Page is Displayed"); Assertion.assertTrue(true); }
+		 * else Assertion.fail("OLE SEP Page is NOT Displayed"); //}
 		 */
 
-		List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
+		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = personalInformationPage
@@ -1778,9 +1801,9 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
 			getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
 			getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE SEP Page is NOT Displayed");
+			Assertion.fail("OLE SEP Page is NOT Displayed");
 	}
 
 	@Then("^the user validates the Plan details in SEP Page OLE Right Rail$")
@@ -1793,7 +1816,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1809,10 +1832,10 @@ public class OLEStepDefinitionMobile {
 		if (Validation_Status) {
 			System.out.println("Plan Details Validation in OLE SEP PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Plan Details Validation in OLE SEP PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -1827,7 +1850,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1837,10 +1860,10 @@ public class OLEStepDefinitionMobile {
 			System.out.println(
 					"TFN, Wunderman Validation in OLE SEP PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("TFN, Wunderman Validation in OLE SEP PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -1855,7 +1878,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1865,7 +1888,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEAVING_MODAL_PAGE, leaveOLEmodal);
 			System.out.println("Leave OLE modal - Back to OLE ");
 		} else
-			Assert.fail("Leave OLE Modal is NOT Displayed");
+			Assertion.fail("Leave OLE Modal is NOT Displayed");
 
 		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) leaveOLEmodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
@@ -1873,7 +1896,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
 			System.out.println("Back to OLE Application page - OLE SEP Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
 		// }
 	}
 
@@ -1887,7 +1910,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1897,7 +1920,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, learnMoremodal);
 			System.out.println("OLE Learn More Modal is Displayed");
 		} else
-			Assert.fail("OLE Learn More Modal is NOT Displayed");
+			Assertion.fail("OLE Learn More Modal is NOT Displayed");
 
 		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) learnMoremodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
@@ -1905,7 +1928,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
 			System.out.println("Back to OLE Application page - OLE SEP Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page -OLE SEP Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page -OLE SEP Page is NOT Displayed");
 		// }
 	}
 
@@ -1920,7 +1943,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1930,14 +1953,14 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_LEARNMORE_MODAL_PAGE, cancelOLEmodal);
 			System.out.println("OLE Cancellation Modal is Displayed");
 		} else
-			Assert.fail("OLE Cancellation Modal is NOT Displayed");
+			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
 		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) cancelOLEmodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
 			System.out.println("Back to OLE Application page - OLE SEP Page is Displayed");
 		} else
-			Assert.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
+			Assertion.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
 
 		// }
 	}
@@ -1953,7 +1976,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -1963,10 +1986,10 @@ public class OLEStepDefinitionMobile {
 			System.out.println(
 					"Plan Type Options Validation in OLE SEP PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Plan Type Options in OLE SEP PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -1981,28 +2004,27 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
-			List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
-			Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
-			for (int i = 0; i < personalAttributesRow.size(); i++) {
-				SEPoptionsFlagMap.put(personalAttributesRow.get(i)
-						.getCells().get(0), personalAttributesRow.get(i)
-						.getCells().get(1));
-			}
-			String Selectoptions = SEPoptionsFlagMap.get("Select Options");
-			String optionsData = SEPoptionsFlagMap.get("Option Data");
+		Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
+		SEPoptionsFlagMap = DataTableParser.readDataTableAsMaps(SEPoptions);
+		/*List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			SEPoptionsFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
+					personalAttributesRow.get(i).getCells().get(1));
+		}*/
+		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
+		String optionsData = SEPoptionsFlagMap.get("Option Data");
+
 
 			SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 			specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
 			if (specialElectionPeriodPage != null) {
 
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
-						specialElectionPeriodPage);
-				System.out.println("OLE SEP page Options Selected : Next Button enabled");
-			}
-			else
-				Assert.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
+			System.out.println("OLE SEP page Options Selected : Next Button enabled");
+		} else
+			Assertion.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
 
 		//}
 	}
@@ -2017,7 +2039,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
@@ -2028,7 +2050,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_COVERAGE_INFO_PAGE, coverageInformationPage);
 			System.out.println("OLE Coverage and Health Information Page is Displayed");
 		} else
-			Assert.fail("OLE Coverage and Health Information Page is NOT Displayed");
+			Assertion.fail("OLE Coverage and Health Information Page is NOT Displayed");
 		// }
 	}
 
@@ -2043,7 +2065,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		MedicareInformationPageMobile medInformationPage = (MedicareInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
@@ -2052,10 +2074,10 @@ public class OLEStepDefinitionMobile {
 		if (Validation_Status) {
 			System.out.println("Plan Type Questions Validation in OLE Coverage and Health PAGE : Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medInformationPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Plan Type Questions Validation in OLE Coverage and Health PAGE : Validation Failed");
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -2071,14 +2093,15 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
-		List<DataTableRow> personalAttributesRow = arg1.getGherkinRows();
 		Map<String, String> QuestionMap = new HashMap<String, String>();
+		QuestionMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> personalAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			QuestionMap.put(personalAttributesRow.get(i).getCells().get(0),
 					personalAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PDPquestionFlag = QuestionMap.get("PDP Question");
 		String LongTermQuestionFlag = QuestionMap.get("LongTerm Question");
 
@@ -2090,7 +2113,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(oleCommonConstants.HEALTH_INSURANCE, LongTermQuestionFlag);
 			System.out.println("Coverage and Health Information Page : Data entered");
 		} else
-			Assert.fail("Coverage and Health Information Page : Data entry FAILED");
+			Assertion.fail("Coverage and Health Information Page : Data entry FAILED");
 		// }
 
 	}
@@ -2106,7 +2129,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE, proposedEffectiveDatePage);
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 		} else
-			Assert.fail("OLE Proposed Effective Date Page is NOT Displayed");
+			Assertion.fail("OLE Proposed Effective Date Page is NOT Displayed");
 		// }
 	}
 
@@ -2122,10 +2145,10 @@ public class OLEStepDefinitionMobile {
 			String proposedEffectiveDate = proposedEffectiveDatePage.get_proposed_effective_date();
 			getLoginScenario().saveBean(oleCommonConstants.PROPOSED_EFF_DATE, proposedEffectiveDate);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Proposed Effective Date display : Validation Failed");
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -2140,7 +2163,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		ProposedEffectiveDatePageMobile proposedEffectiveDatePage = (ProposedEffectiveDatePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PROPOSED_EFF_DATE_PAGE);
@@ -2155,7 +2178,7 @@ public class OLEStepDefinitionMobile {
 						"PCP Page is not Displayed : OLE Monthly Plan Premium Page is Displayed for Plantype : "
 								+ planType);
 			} else
-				Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : " + planType);
+				Assertion.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : " + planType);
 		} else {
 			PrimaryCarePhysicianPageMobile pcpPage = (PrimaryCarePhysicianPageMobile) proposedEffectiveDatePage
 					.navigate_to_PCP_Page(planType);
@@ -2164,7 +2187,7 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE, pcpPage);
 				System.out.println("OLE PCP Page is Displayed for Plantype : " + planType);
 			} else
-				Assert.fail("OLE PCP Page is NOT Displayed for Plantype : " + planType);
+				Assertion.fail("OLE PCP Page is NOT Displayed for Plantype : " + planType);
 		}
 		// }
 	}
@@ -2179,7 +2202,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		PrimaryCarePhysicianPageMobile pcpPage = (PrimaryCarePhysicianPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
@@ -2191,10 +2214,10 @@ public class OLEStepDefinitionMobile {
 			if (Validation_Status) {
 				System.out.println("PFFS plan Provider Contact Information Section : Validation Passed");
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE, pcpPage);
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
 				System.out.println("PFFS plan Provider Contact Information Section : Validation Failed");
-				Assert.fail();
+				Assertion.fail();
 			}
 		}
 		// }
@@ -2210,7 +2233,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		PrimaryCarePhysicianPageMobile pcpPage = (PrimaryCarePhysicianPageMobile) getLoginScenario()
@@ -2226,10 +2249,10 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(oleCommonConstants.PCP_NAME, pcp_Info.get(0));
 				getLoginScenario().saveBean(oleCommonConstants.PCP_NUMBER, pcp_Info.get(1));
 				getLoginScenario().saveBean(oleCommonConstants.PCP_RECENTLY_VISITED, pcp_Info.get(2));
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
 				System.out.println("Provider Look Up : Validation FAILED for PlanType - " + planType);
-				Assert.fail();
+				Assertion.fail();
 			}
 		}
 		// }
@@ -2246,7 +2269,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		PrimaryCarePhysicianPageMobile pcpPage = (PrimaryCarePhysicianPageMobile) getLoginScenario()
@@ -2261,7 +2284,7 @@ public class OLEStepDefinitionMobile {
 						"PCP Page is not Displayed : OLE Monthly Plan Premium Page is Displayed for Plantype : "
 								+ planType);
 			} else
-				Assert.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : " + planType);
+				Assertion.fail("OLE Monthly Plan Premium Page is NOT Displayed for Plantype : " + planType);
 		}
 		// }
 	}
@@ -2276,15 +2299,16 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 
-		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
+		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
+		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			RiderFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
 					personalAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String RiderFlag = RiderFlagMap.get("Rider Flag");
 		if (RiderFlag.contains("true")) {
 			PlanPremiumPageMobile planPremiumPage = (PlanPremiumPageMobile) getLoginScenario()
@@ -2295,7 +2319,7 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE, ridersPage);
 				System.out.println("OLE Supplemental Benefits page is Displayed");
 			} else
-				Assert.fail("OLE Supplemental Benefits page is NOT Displayed");
+				Assertion.fail("OLE Supplemental Benefits page is NOT Displayed");
 
 		}
 		// }
@@ -2311,14 +2335,15 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
-		List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
+		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
+		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		for (int i = 0; i < personalAttributesRow.size(); i++) {
 			RiderFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
 					personalAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String RiderFlag = RiderFlagMap.get("Rider Flag");
 		if (RiderFlag.contains("true")) {
 			SupplementalBenefitsPageMobile ridersPage = (SupplementalBenefitsPageMobile) getLoginScenario()
@@ -2329,7 +2354,7 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE, authorizationPage);
 				System.out.println("OLE Authorization page is Displayed for Plan with Rider");
 			} else
-				Assert.fail("OLE Authorization page is NOT Displayed for Plan with Rider");
+				Assertion.fail("OLE Authorization page is NOT Displayed for Plan with Rider");
 
 		} else {
 			PlanPremiumPageMobile planPremiumPage = (PlanPremiumPageMobile) getLoginScenario()
@@ -2340,7 +2365,7 @@ public class OLEStepDefinitionMobile {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE, authorizationPage);
 				System.out.println("OLE Authorization page is Displayed for Plan without Rider");
 			} else
-				Assert.fail("OLE Authorization page is NOT Displayed for Plan without Rider");
+				Assertion.fail("OLE Authorization page is NOT Displayed for Plan without Rider");
 		}
 		// }
 	}
@@ -2355,7 +2380,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		AuthorizationPageMobile authorizationPage = (AuthorizationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
@@ -2363,10 +2388,10 @@ public class OLEStepDefinitionMobile {
 		if (Validation_Status) {
 			System.out.println("Authorization Page : Required fields Validated, Required data entered");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE, authorizationPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Authorization Page : Required fields NOT validated");
-			Assert.fail("Authorization Page : Required fields NOT validated");
+			Assertion.fail("Authorization Page : Required fields NOT validated");
 		}
 		// }
 	}
@@ -2382,14 +2407,15 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		AuthorizationPageMobile authorizationPage = (AuthorizationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 		boolean Validation_Status = authorizationPage.validate_required_field_representative(MemberDetailsMap);
@@ -2419,10 +2445,10 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_AGREE,
 					MemberDetailsMap.get("authorizationAgree"));
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Authorization Page : Required fields NOT validated");
-			Assert.fail("Authorization Page : Required fields NOT validated");
+			Assertion.fail("Authorization Page : Required fields NOT validated");
 		}
 		// }
 	}
@@ -2437,7 +2463,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		AuthorizationPageMobile authorizationPage = (AuthorizationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
@@ -2447,7 +2473,7 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE, reviewSubmitPage);
 			System.out.println("OLE Review and Submit page is Displayed");
 		} else
-			Assert.fail("OLE Review and Submit page is NOT Displayed");
+			Assertion.fail("OLE Review and Submit page is NOT Displayed");
 		// }
 	}
 
@@ -2461,7 +2487,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
@@ -2505,10 +2531,10 @@ public class OLEStepDefinitionMobile {
 		if (Validation_Status) {
 			System.out.println("Review and Submit Page : All Plan and Member Details Validated");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE, reviewSubmitPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
@@ -2523,7 +2549,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * + alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,
-		 * "true"); Assert.assertTrue(true); } else {
+		 * "true"); Assertion.assertTrue(true); } else {
 		 */
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario()
@@ -2553,7 +2579,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * + alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,
-		 * "true"); Assert.assertTrue(true); } else {
+		 * "true"); Assertion.assertTrue(true); } else {
 		 */
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			OLEconfirmationPageMobile oleConfirmationPage = (OLEconfirmationPageMobile) getLoginScenario()
@@ -2572,15 +2598,15 @@ public class OLEStepDefinitionMobile {
 				if (Validation_Status) {
 					System.out.println("OLE Confirmation Page : All Plan Details Validated");
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
-					Assert.assertTrue(true);
+					Assertion.assertTrue(true);
 				} else {
 					System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
-					Assert.fail("Review and Submit Page : All Plan and Member Details  NOT validated");
+					Assertion.fail("Review and Submit Page : All Plan and Member Details  NOT validated");
 				}
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
 				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
-				Assert.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
+				Assertion.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
 			}
 		} else {
 			System.out.println("Skipping the Confirmation functionality in Offline-Prod/Prod environment");
@@ -2598,7 +2624,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 
 		OLEconfirmationPageMobile oleConfirmationPage = (OLEconfirmationPageMobile) getLoginScenario()
@@ -2611,10 +2637,10 @@ public class OLEStepDefinitionMobile {
 			if (Validation_Status) {
 				System.out.println("OLE Confirmation Page : Next Steps Validated");
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			} else {
 				System.out.println("Review and Submit Page : Next Steps  NOT validated");
-				Assert.fail();
+				Assertion.fail();
 			}
 		} else {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
@@ -2627,13 +2653,14 @@ public class OLEStepDefinitionMobile {
 	@Then("^the user validates the presence for Preliminary Questions on Page$")
 	public void the_user_validates_the_presence_for_Preliminary_Questions_on_Page(DataTable givenAttributes)
 			throws Throwable {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String planname = givenAttributesMap.get("Plan Name");
 		PrelimineryQuestionsPageMobile prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) getLoginScenario()
@@ -2665,7 +2692,7 @@ public class OLEStepDefinitionMobile {
 		if (ridersPage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE, ridersPage);
 		} else
-			Assert.fail("OLE Supplemental Benefits page is NOT Displayed");
+			Assertion.fail("OLE Supplemental Benefits page is NOT Displayed");
 
 	}
 
@@ -2704,24 +2731,26 @@ public class OLEStepDefinitionMobile {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
+		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		return memberAttributesMap;
 	}
 
 	@When("^the user navigates to OLE WelcomePage using following information$")
 	public void user_navigates_toOLEWelcomePageusingfollowinginformation(DataTable planAttributes) throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String SiteId = givenAttributesMap.get("SiteId");
 		String PBPNumber = givenAttributesMap.get("PBPNumber");
@@ -2807,9 +2836,9 @@ public class OLEStepDefinitionMobile {
 		if (welcomePage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
 	/**
@@ -2823,13 +2852,14 @@ public class OLEStepDefinitionMobile {
 	// givenAttributes, String planName) {
 	public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_VPP_displayed(
 			DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String planName = givenAttributesMap.get("PlanName");
 		String plantype = givenAttributesMap.get("Plan Type");
@@ -2837,7 +2867,7 @@ public class OLEStepDefinitionMobile {
 		PrimaryCarePhysicianPageMobile pcpPage = (PrimaryCarePhysicianPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
-		Assert.assertFalse("Providers not added", pcpproviders.isEmpty());
+		Assertion.assertFalse("Providers not added", pcpproviders.isEmpty());
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
@@ -2853,13 +2883,13 @@ public class OLEStepDefinitionMobile {
 		System.out.println("List of providers in PCP page is: " + pcpproviders);
 
 		if (vppproviders.size() <= 9) {
-			Assert.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
+			Assertion.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
 		} else {
 			for (String provider : pcpproviders) {
 				if (vppproviders.contains(provider)) {
 					continue;
 				} else {
-					Assert.assertTrue("Providers does not match", false);
+					Assertion.assertTrue("Providers does not match", false);
 				}
 			}
 		}
@@ -2882,13 +2912,14 @@ public class OLEStepDefinitionMobile {
 	public void the_User_navigates_to_PCP_Page_and_validates_PCP_Providers_listed_in_the_AARP_VPP_displayed(
 			DataTable givenAttributes) {
 
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String planName = givenAttributesMap.get("PlanName");
 		String plantype = givenAttributesMap.get("Plan Type");
@@ -2896,7 +2927,7 @@ public class OLEStepDefinitionMobile {
 		PrimaryCarePhysicianPageMobile pcpPage = (PrimaryCarePhysicianPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PRIMARY_CARE_PHYSICIAN_PAGE);
 		ArrayList<String> pcpproviders = pcpPage.pcpinforetreive(plantype);
-		Assert.assertFalse("Providers not added", pcpproviders.isEmpty());
+		Assertion.assertFalse("Providers not added", pcpproviders.isEmpty());
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
@@ -2912,13 +2943,13 @@ public class OLEStepDefinitionMobile {
 		System.out.println("List of providers in PCP page is: " + pcpproviders);
 
 		if (vppproviders.size() <= 9) {
-			Assert.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
+			Assertion.assertTrue("Providers does not match", vppproviders.equals(pcpproviders));
 		} else {
 			for (String provider : pcpproviders) {
 				if (vppproviders.contains(provider)) {
 					continue;
 				} else {
-					Assert.assertTrue("Providers does not match", false);
+					Assertion.assertTrue("Providers does not match", false);
 				}
 			}
 		}
@@ -2941,13 +2972,14 @@ public class OLEStepDefinitionMobile {
 	 */
 	@Then("^the User Validates Marketing Bullets for Welcome OLE$")
 	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String planName = givenAttributesMap.get("PlanName");
 		// String plantype = givenAttributesMap.get("Plan Type");
@@ -2955,7 +2987,7 @@ public class OLEStepDefinitionMobile {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		ArrayList<String> marketingBullets = welcomePage.validate_marketing_details(planName);
-		Assert.assertFalse("Providers not added", marketingBullets.isEmpty());
+		Assertion.assertFalse("Providers not added", marketingBullets.isEmpty());
 
 		System.out.println("List of MarketingBullets in OLE page is: " + marketingBullets);
 
@@ -2974,20 +3006,21 @@ public class OLEStepDefinitionMobile {
 
 		System.out.println("List of MarketingBullets in VPP page is: " + vppmarketingBullets);
 
-		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
+		Assertion.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
 
 	}
 
 	@Then("^the User Validates Marketing Bullets for Welcome OLE Blayer$")
 	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE_Blayer(DataTable givenAttributes)
 			throws Throwable {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String planName = givenAttributesMap.get("PlanName");
 		// String plantype = givenAttributesMap.get("Plan Type");
@@ -2995,7 +3028,7 @@ public class OLEStepDefinitionMobile {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		ArrayList<String> marketingBullets = welcomePage.validate_marketing_details(planName);
-		Assert.assertFalse("Providers not added", marketingBullets.isEmpty());
+		Assertion.assertFalse("Providers not added", marketingBullets.isEmpty());
 
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -3011,7 +3044,7 @@ public class OLEStepDefinitionMobile {
 
 		System.out.println("List of MarketingBullets in VPP page is: " + vppmarketingBullets);
 
-		Assert.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
+		Assertion.assertTrue("MarketingBullets does not match", vppmarketingBullets.equals(marketingBullets));
 
 	}
 
@@ -3024,29 +3057,30 @@ public class OLEStepDefinitionMobile {
 			System.out.println(
 					"Radio Button Options Validation in OLE SEP PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Radio Button Options in OLE SEP PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 	}
 	
 	@When("^the user Click on Is my Provider covered links$")
 	public void clickonProvidercoveredlinks(DataTable Planname) {
 		{
-			List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+			plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+			/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 			for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
 				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 						plannameAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 			String planName = plannameAttributesMap.get("PlanName");
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
+			ProviderSearchPageMobile providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
 			if (providerSearchPage != null) {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 			}
@@ -3057,10 +3091,10 @@ public class OLEStepDefinitionMobile {
 	@When("^user selects a multiple providers and retuns to VPP page$")
 	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page() {
 		{
-			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.MultipleselectsProvider();
-			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -3069,13 +3103,14 @@ public class OLEStepDefinitionMobile {
 	@Then("^User store the information provided from rally to vpp page$")
 	public void user_store_the_information_provided_from_rally_to_vpp(DataTable givenAttributes) {
 
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String planName = givenAttributesMap.get("PlanName");
 
@@ -3085,22 +3120,22 @@ public class OLEStepDefinitionMobile {
 		/*
 		 * ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
 		 * plansummaryPage.setStringList(providers);
-		 * Assert.assertFalse("Providers not added",providers.isEmpty());
+		 * Assertion.assertFalse("Providers not added",providers.isEmpty());
 		 * 
 		 * //Adding Line for Marketing bullet points VPPPlanSummaryPage plansummaryPage1
 		 * = (VPPPlanSummaryPage) getLoginScenario()
 		 * .getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE); ArrayList<String>
 		 * vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
 		 * plansummaryPage1.setStringList(vppmarketingBullets);
-		 * Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
+		 * Assertion.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
 		 * System.out.println("List of MarketingBullets in OLE page is: " +
 		 * vppmarketingBullets); // Line End for Marketing bullet points
 		 */
 		ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
-		Assert.assertFalse("Providers not added", providers.isEmpty());
+		Assertion.assertFalse("Providers not added", providers.isEmpty());
 		System.out.println("List of Providers in OLE page is: " + providers);
 		ArrayList<String> vppmarketingBullets = plansummaryPage.validate_marketing_details(planName);
-		Assert.assertFalse("Marketing Bullets not added", vppmarketingBullets.isEmpty());
+		Assertion.assertFalse("Marketing Bullets not added", vppmarketingBullets.isEmpty());
 		System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
 		Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 		map.put("Provider", providers);
@@ -3120,7 +3155,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
@@ -3129,22 +3164,23 @@ public class OLEStepDefinitionMobile {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, medicalInformationPage);
 			System.out.println("OLE medical Information Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Medical Information Page is NOT Displayed");
+			Assertion.fail("OLE Medical Information Page is NOT Displayed");
 		// }
 	}
 
 	@Then("^the user enters following required Medicare Informations for DSNP$")
 	public void the_user_enters_Medicare_Details_in_medicare_info_pages_DSNP(DataTable planAttributes)
 			throws Throwable {
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String CardType = MedicareDetailsMap.get("Card Type");
 
 		Random rnd = new Random();
@@ -3170,9 +3206,9 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(oleCommonConstants.SSN_FLAG, MedicareDetailsMap.get("SSN Flag"));
 			getLoginScenario().saveBean(oleCommonConstants.SSN_NUMBER, MedicareDetailsMap.get("SSN Number"));
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Medicare Info data entry failed");
+			Assertion.fail("Medicare Info data entry failed");
 	}
 
 	/*
@@ -3190,12 +3226,13 @@ public class OLEStepDefinitionMobile {
 	public void the_user_validates_the_long_term_questions_in_Medicare_Information_Page(DataTable arg1)
 			throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		boolean medicareInfoPageLongTerm = medicareInfoPage.answer_following_questionsLongTerm(MemberDetailsMap);
@@ -3207,21 +3244,22 @@ public class OLEStepDefinitionMobile {
 					MemberDetailsMap.get("Health Insurance Name"));
 			getLoginScenario().saveBean(oleCommonConstants.GROUP_NUMBER, MemberDetailsMap.get("Group Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MEMBER_NUMBER, MemberDetailsMap.get("Member Number"));
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
 	}
 
 	@Then("^the user validates the Prescription drug coverage questions in Medicare Information Page$")
 	public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medicare_Information_Page(DataTable arg1)
 			throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		boolean medicareInfoPageLongTerm = medicareInfoPage
@@ -3236,20 +3274,21 @@ public class OLEStepDefinitionMobile {
 					MemberDetailsMap.get("PD Group Number"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER,
 					MemberDetailsMap.get("PD Member Number"));
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
 	}
 
 	@Then("^the user validates the OLE Submission Details in GPS$")
 	public void the_user_validates_the_OLE_Submission_Details_in_GPS(DataTable arg1) throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String plantype = MemberDetailsMap.get("Plan Type");
 		String[] dateArray = null;
@@ -3258,7 +3297,7 @@ public class OLEStepDefinitionMobile {
 		// getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 		// boolean ConfirmationPage_Status =
 		// oleConfirmationPage.validate_plan_details(MemberDetailsMap);
-		// Assert.assertFalse("Confirmation Page Validation",ConfirmationPage_Status);
+		// Assertion.assertFalse("Confirmation Page Validation",ConfirmationPage_Status);
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			OLEconfirmationPageMobile OLEGPSValidation = (OLEconfirmationPageMobile) getLoginScenario()
@@ -3353,15 +3392,15 @@ public class OLEStepDefinitionMobile {
 				if (Validation_Status) {
 					System.out.println("OLE Confirmation Page : All Plan Details Validated in GPS");
 					getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
-					Assert.assertTrue(true);
+					Assertion.assertTrue(true);
 				} else {
 					System.out.println("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
-					Assert.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
+					Assertion.fail("OLE Confirmation Page : All Plan and Member Details  NOT validated in GPS");
 				}
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, OLEGPSValidation);
 				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
-				Assert.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
+				Assertion.fail("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
 			}
 		} else {
 			System.out.println(
@@ -3375,7 +3414,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE,
 		 * OLEGPSValidation); System.out.
 		 * println("OLE GPS Data - All required OLE Details are Validated in GPS");
-		 * Assert.assertTrue(true); } else Assert.
+		 * Assertion.assertTrue(true); } else Assertion.
 		 * fail("OLE GPS Data - All required OLE Details are not Validated in GPS");
 		 */
 	}
@@ -3390,7 +3429,7 @@ public class OLEStepDefinitionMobile {
 		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
 		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assert.assertTrue(true); } else{
+		 * Assertion.assertTrue(true); } else{
 		 */
 		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
@@ -3474,22 +3513,23 @@ public class OLEStepDefinitionMobile {
 		if (Validation_Status) {
 			System.out.println("Review and Submit Page : All Plan and Member Details Validated");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE, reviewSubmitPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
-			Assert.fail();
+			Assertion.fail();
 		}
 		// }
 	}
 
 	@Then("^the user validates Medicaid Number in confirm Eligibility Page$")
 	public void the_user_validates_Medicaid_Number_Confirm_Eligibility_Page(DataTable arg1) throws Throwable {
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		boolean MedicaidInformationStatus = medicareInfoPage.validate_Medicaid_Number_CEP(MemberDetailsMap);
@@ -3497,21 +3537,22 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE, medicareInfoPage);
 			System.out.println("OLE Medicaid Questions in Medicare Information Page - Medicaid Details are entered");
 			getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE Medicaid Questions in Medicare Information Page -  Medicaid Member Details Failed");
+			Assertion.fail("OLE Medicaid Questions in Medicare Information Page -  Medicaid Member Details Failed");
 	}
 
 	@Then("^the user navigates to SEP Page for Medicaid and Effective date$")
 	public void the_user_navigates_to_SEP_Page_Medicaid_Effective_Date(DataTable Medicareoptions) throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
+		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = personalInformationPage
@@ -3524,9 +3565,9 @@ public class OLEStepDefinitionMobile {
 			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
 			getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
 			getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("OLE SEP Page is NOT Displayed");
+			Assertion.fail("OLE SEP Page is NOT Displayed");
 	}
 
 	@Then("^the user clicks on save and return later to profile page$")
@@ -3541,12 +3582,13 @@ public class OLEStepDefinitionMobile {
 	@Then("^the user selects payment type$")
 	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
 		boolean flag = false;
-		List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		Map<String, String> paymentInformationMap = new HashMap<String, String>();
+		paymentInformationMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 			paymentInformationMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String payType = paymentInformationMap.get("Payment Type");
 		String cardNo = paymentInformationMap.get("Card No");
 		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo);   //.substring(cardNo.length()-4));
@@ -3574,11 +3616,11 @@ public class OLEStepDefinitionMobile {
 		}
 		if (flag) {
 			System.out.println("Payment is passed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else {
 			System.out.println("Payment is failed");
-			Assert.fail("Payment is failed");
+			Assertion.fail("Payment is failed");
 	}
 	
 		}
@@ -3587,11 +3629,11 @@ public class OLEStepDefinitionMobile {
 			flag = planPremiumPage.validateNoMonthlyPremium();
 			if (flag) {
 				System.out.println("No Monthly Premium validation is passed");
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			}
 			else {
 				System.out.println("No Monthly Premium validation is failed");
-				Assert.fail("No Monthly Premium validation is failed");
+				Assertion.fail("No Monthly Premium validation is failed");
 			}
 		}
 	}

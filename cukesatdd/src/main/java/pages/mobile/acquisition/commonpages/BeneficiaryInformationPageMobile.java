@@ -18,6 +18,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -159,7 +160,7 @@ public class BeneficiaryInformationPageMobile extends UhcDriver{
 		String sameMailingAdress = personalAttributesMap.get("Same Mailing Address");
 		sendkeys(emailAddressField,emailAddress);
 		sendkeys(primaryPhoneNumberField, mainPhoneNumber);
-		if(getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP)){
+		if(getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_COMLETE_ONLINE_APP)){
 		alternatePhoneNumberlink.click();
 		sendkeys(alternatePhoneNumberField,otherPhoneNumber);
 		}
@@ -267,7 +268,7 @@ public class BeneficiaryInformationPageMobile extends UhcDriver{
 		enrollmentNext.click();
 		System.out.println("step2Part2PageHeading::"+step2Part2PageHeading);
 		if (step2Part2PageHeading.getText().equalsIgnoreCase(
-				PageTitleConstantsMobile.ULAYER_SPECIAL_ELECTION_PERIOD)) {
+				PageTitleConstants.ULAYER_SPECIAL_ELECTION_PERIOD)) {
 			return new SpecialElectionPeriodPageMobile(driver);
 		}
 		return null;
@@ -277,7 +278,7 @@ public class BeneficiaryInformationPageMobile extends UhcDriver{
 		enrollmentNext.click();
 		System.out.println("step2Part2PageHeading::"+step2Part2PageHeading);
 		if (step2Part2PageHeading.getText().equalsIgnoreCase(
-				PageTitleConstantsMobile.ULAYER_SPECIAL_ELECTION_PERIOD)) {
+				PageTitleConstants.ULAYER_SPECIAL_ELECTION_PERIOD)) {
 			return new AdditionalInformationPageMobile(driver, planName);
 		}
 		return null;

@@ -1,11 +1,11 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 public class VPPAarpNeedAStepBackWidgetMobile extends UhcDriver{
@@ -42,9 +42,9 @@ public class VPPAarpNeedAStepBackWidgetMobile extends UhcDriver{
 			if(stepBackHeader.getText().equalsIgnoreCase("Need a Step Back?")){
 				//validate content is not null
 					if(stepBackContent.getText()!=null){
-						Assert.assertTrue("---content displayed---", true);
+						Assertion.assertTrue("---content displayed---", true);
 					}else
-					Assert.fail("----------content not displayed------------");
+					Assertion.fail("----------content not displayed------------");
 				}
 				//validate start plan selector button				
 					if(planSelectorButton.isDisplayed()){
@@ -59,7 +59,7 @@ public class VPPAarpNeedAStepBackWidgetMobile extends UhcDriver{
  						if(driver.getTitle().equals("Plan Selector"))
 						System.out.println("---------plan selector page displayed successfuly-------");
 					}else{
-					     Assert.fail("----------plan selector page not displayed-----------------");
+					     Assertion.fail("----------plan selector page not displayed-----------------");
 					}
 			}
 		System.out.println("-----------Step Back Widget validation ends---------------------");

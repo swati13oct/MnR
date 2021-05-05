@@ -22,9 +22,9 @@ Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenar
       | CurrentYear Plan Name | <CurrentYearplanName> |
     Then the user view plan details of the Current Year plan
     Then the user validates Current year Plan Details Page for pre-AEP
-	
+
     Examples: 
-      | dcedate    | zipcode | isMultutiCounty | county             | plantype | NextYearplanName                                    | CurrentYearplanName | 
+      | dcedate    | zipcode | isMultutiCounty | county             | plantype | NextYearplanName                                    | CurrentYearplanName                               |
       | 10/01/2018 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @10_15
@@ -50,7 +50,7 @@ Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenar
     Then the user validates Current year Plan Details Page for AEP enrollment period
 
     Examples: 
-      | dcedate    | zipcode | isMultutiCounty | county             | plantype | NextYearplanName                                    | CurrentYearplanName |
+      | dcedate    | zipcode | isMultutiCounty | county             | plantype | NextYearplanName                                    | CurrentYearplanName                               |
       | 10/15/2018 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @12_01
@@ -76,7 +76,7 @@ Feature: test plan summary and Plan Details in vpp flow AARP site for AEP scenar
     Then the user validates Current year Plan Details Page for Non enrollment period
 
     Examples: 
-      | dcedate    | zipcode | isMultutiCounty | county             | plantype | NextYearplanName                                    | CurrentYearplanName |
+      | dcedate    | zipcode | isMultutiCounty | county             | plantype | NextYearplanName                                    | CurrentYearplanName                               |
       | 12/01/2018 |   90210 | NO              | Los Angeles County | MA       | AARP Medicare Advantage SecureHorizons Plan 1 (HMO) | AARP MedicareComplete SecureHorizons Plan 1 (HMO) |
 
   @teamF_DCEdateChange

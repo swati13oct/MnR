@@ -11,6 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -85,7 +86,7 @@ public class PersonalIdentificationPageMobile extends UhcDriver{
 		
 		continueField.click();
 		//if(pageHeading.getText().equalsIgnoreCase("Check your email.")){
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_PLANS_USERNAME_PWD)){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_USERNAME_PWD)){
 			return new LoginAssitanceMessagePageMobile(driver);
 		}
 		return null;
@@ -94,7 +95,7 @@ public class PersonalIdentificationPageMobile extends UhcDriver{
 	public LoginAssitanceMessagePageMobile ContinueWithoutEnteringAnything()
 	{
 		continueField.click();
-		if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_PLANS_USERNAME_PWD)){
+		if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS_USERNAME_PWD)){
 			return new LoginAssitanceMessagePageMobile(driver);
 		}
 		return null;

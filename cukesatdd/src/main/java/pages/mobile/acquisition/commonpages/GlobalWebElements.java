@@ -21,75 +21,75 @@ public class GlobalWebElements extends UhcDriver {
 	}
 
 	@FindBy(id = "gf_lnk_1")
-	public static WebElement footerHomeLink;
+	public WebElement footerHomeLink;
 
 	@FindBy(id = "gf_lnk_2")
-	public static WebElement footerAboutUsLink;
+	public WebElement footerAboutUsLink;
 
 	@FindBy(id = "gf_lnk_3")
-	public static WebElement footerContactUsLink;
+	public WebElement footerContactUsLink;
 
 	@FindBy(id = "gf_lnk_4")
-	public static WebElement footerSiteMapLink;
+	public WebElement footerSiteMapLink;
 
 	@FindBy(id = "gf_lnk_5")
-	public static WebElement footerPrivacyPolicyLink;
+	public WebElement footerPrivacyPolicyLink;
 
 	@FindBy(id = "gf_lnk_6")
-	public static WebElement footerTermsnConditionsLink;
+	public WebElement footerTermsnConditionsLink;
 
 	@FindBy(id = "gf_lnk_7")
-	public static WebElement footerDisclaimersLink;
+	public WebElement footerDisclaimersLink;
 
 	@FindBy(id = "gf_lnk_8")
-	public static WebElement footerAgentsnBrokersLink;
+	public WebElement footerAgentsnBrokersLink;
 
 	/** Request for assistance link **/
 	@FindBy(id = "gf_lnk_10")
-	public static WebElement footerRequestforAssistancelink;
+	public WebElement footerRequestforAssistancelink;
 
 	@FindBy(id = "gf_lnk_9")
-	public static WebElement footerAccessibilitylink;
+	public WebElement footerAccessibilitylink;
 
 	@FindBys(value = {
 			@FindBy(xpath = "//div[contains(@class,'globalfooternav')]//a[contains(text(),'Visit AARP.org')]") })
-	public static WebElement aarpOrgLink;
+	public WebElement aarpOrgLink;
 
 	@FindBys(value = { @FindBy(id = "footnotes1") })
-	public static WebElement footnotesContent;
+	public WebElement footnotesContent;
 
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Medicare Advantage')]")
-	public static WebElement medicareAdvantagePlansLink;
+	public WebElement medicareAdvantagePlansLink;
 
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Special Needs')]")
-	public static WebElement medicareSpecialNeedsPlansLink;
+	public WebElement medicareSpecialNeedsPlansLink;
 
 	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
-	public static WebElement medicareSupplementInsurancePlansLink;
+	public WebElement medicareSupplementInsurancePlansLink;
 
 	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@href, 'prescription-drug')]")
-	public static WebElement medicarePrescriptionDrug_PlansLink;
+	public WebElement medicarePrescriptionDrug_PlansLink;
 
 	@FindBy(id = "gfn_lnk_row3_1")
-	public static WebElement learnAboutMedicareLink;
+	public WebElement learnAboutMedicareLink;
 
 	@FindBy(id = "gfn_lnk_row3_2")
-	public static WebElement prepareForInitialEnrollment;
+	public WebElement prepareForInitialEnrollment;
 
 	@FindBy(id = "gfn_lnk_row3_3")
-	public static WebElement exploreChangingPlansLink;
+	public WebElement exploreChangingPlansLink;
 
 	@FindBy(id = "gfn_lnk_row3_4")
-	public static WebElement discoverMoreResourcesLink;
+	public WebElement discoverMoreResourcesLink;
 
 	@FindBy(linkText = "Back to Top")
-	public static WebElement footerNavigationBackToTopLink;
+	public WebElement footerNavigationBackToTopLink;
 
 	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
-	public static WebElement viewAllDisclaimerInformationLink;
+	public WebElement viewAllDisclaimerInformationLink;
 
 	@FindBy(linkText = "Hide disclaimer information")
-	public static WebElement hideDiscliamerInformation;
+	public WebElement hideDiscliamerInformation;
 
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
 	private WebElement MedicareAdvantagePlans;
@@ -113,153 +113,153 @@ public class GlobalWebElements extends UhcDriver {
 	private WebElement BackToTop;
 
 	@FindBy(css = "a.backtotop1.hideLink")
-	public static WebElement disclaimerBackToTopLink;
+	public WebElement disclaimerBackToTopLink;
 
 	@FindBy(id = "proceed")
-	public static WebElement siteLeavingPopupProceddButton;
+	public WebElement siteLeavingPopupProceddButton;
 
 	@FindBy(id = "gf_lnk_6")
-	public static WebElement footerTermsAndConditionsLink;
+	public WebElement footerTermsAndConditionsLink;
 
 	@FindBy(id = "gf_lnk_8")
-	public static WebElement footerAgentsAndBrokersLink;
+	public WebElement footerAgentsAndBrokersLink;
 
 	@FindBy(id = "gfn_lnk_row3_3")
-	public static WebElement prepareForInitialEnrollmentLink;
+	public WebElement prepareForInitialEnrollmentLink;
 
 	@FindBy(id = "gfn_lnk_row2_5")
-	public static WebElement medicareSpecialNeedPlansLink;
+	public WebElement medicareSpecialNeedPlansLink;
 
 	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
-	public static WebElement visitorprofileicon;
+	public WebElement visitorprofileicon;
 
 	@FindBy(xpath = "//button[text()='Register']")
-	public static WebElement register;
+	public WebElement register;
 
 	// @FindBy(xpath = "//h1[@class='logo']/a")
 	@FindBy(id = "logo")
-	public static WebElement logoLink;
+	public WebElement logoLink;
 
 	@FindBy(id = "aarpSVGLogo")
-	public static WebElement AARPlogo;
+	public WebElement AARPlogo;
 
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
-	public static WebElement importantDisclosuresLink;
+	public WebElement importantDisclosuresLink;
 
 	@FindBy(xpath = "//ul[@class='menu-links']/li[1]/a")
-	public static WebElement visitAARPLink;
+	public WebElement visitAARPLink;
 
 	@FindBy(id = "proceed")
-	public static WebElement proceedLink;
+	public WebElement proceedLink;
 
 	@FindBy(className = "menu-dropdown")
-	public static WebElement alreadyPlanMemberButtonInactive;
+	public WebElement alreadyPlanMemberButtonInactive;
 
 	@FindBy(xpath = "//div[@class='menu-dropdown active']")
-	public static WebElement alreadyPlanMemberButtonActive;
+	public WebElement alreadyPlanMemberButtonActive;
 
 	@FindBy(id = "already-a-member-dropdown")
-	public static WebElement alreadyPlanMemberButton;
+	public WebElement alreadyPlanMemberButton;
 
 	@FindBy(className = "sign-in-text")
-	public static WebElement signInText;
+	public WebElement signInText;
 
 	@FindBy(id = "top-user")
-	public static WebElement usernameField;
+	public WebElement usernameField;
 
 	@FindBy(id = "top-pass")
-	public static WebElement passwordField;
+	public WebElement passwordField;
 
 	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/a")
-	public static WebElement forgotUsernameLink;
+	public WebElement forgotUsernameLink;
 
 	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
-	public static WebElement registerHereLink;
+	public WebElement registerHereLink;
 
 	@FindBy(xpath = "//button[text()='Register']")
-	public static WebElement headerRegisterLink;
+	public WebElement headerRegisterLink;
 
 	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
-	public static WebElement MenuCrossMobile;
+	public WebElement MenuCrossMobile;
 
 	@FindBy(className = "not-registered-text")
-	public static WebElement notRegisteredText;
+	public WebElement notRegisteredText;
 
 	@FindBy(id = "nav")
-	public static WebElement navigationSectionEnterSearch;
+	public WebElement navigationSectionEnterSearch;
 
 	@FindBy(id = "ghn_lnk_2")
-	public static WebElement navigationSectionOurPlansLink;
+	public WebElement navigationSectionOurPlansLink;
 
 	@FindBy(id = "ghn_lnk_3")
-	public static WebElement navigationSectionMedicareEducationLink;
+	public WebElement navigationSectionMedicareEducationLink;
 
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3/a/span")
-	public static WebElement learnAboutMedicareMedicareEducationLink;
+	public WebElement learnAboutMedicareMedicareEducationLink;
 
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div/div/h3[3]/a/span")
-	public static WebElement exploreChangingPlansMedicareEducationLink;
+	public WebElement exploreChangingPlansMedicareEducationLink;
 
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3/a/span")
-	public static WebElement prepareForInitialEnrollmentMedicareEducationLink;
+	public WebElement prepareForInitialEnrollmentMedicareEducationLink;
 
 	@FindBy(xpath = "//div[@id='subnav_3']/div/div/div/div[2]/div/h3[2]/a/span")
-	public static WebElement discoverMoreResourcesMedicareEducationLink;
+	public WebElement discoverMoreResourcesMedicareEducationLink;
 
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/span/p")
-	public static WebElement alreadyMemberInvalidCredsErrorMessage;
+	public WebElement alreadyMemberInvalidCredsErrorMessage;
 
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
-	public static WebElement signInButton;
+	public WebElement signInButton;
 
 	@FindBy(xpath = "//h1[contains(text(),'Sign In')]")
-	public static WebElement signIn;
+	public WebElement signIn;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
-	public static WebElement prescriptiondrugPlansRequestMoreHelpLink;
+	public WebElement prescriptiondrugPlansRequestMoreHelpLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[2]/div/p[2]/a[3]")
-	public static WebElement resumeYourSavedApplicationLink;
+	public WebElement resumeYourSavedApplicationLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[2]/div/h3/a/span")
-	public static WebElement headerMedicareSupplementPlansLink;
+	public WebElement headerMedicareSupplementPlansLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[1]/div[1]/p[2]/a")
-	public static WebElement medicareAdvantagePlansRequestMoreHelpLink;
+	public WebElement medicareAdvantagePlansRequestMoreHelpLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
-	public static WebElement medicareSelectHosipitalDirectoryLink;
+	public WebElement medicareSelectHosipitalDirectoryLink;
 
 	@FindBy(xpath = "//div[@id='mobile-nav']//div//div//div//div/a[normalize-space()='Sign in']")
-	public static WebElement headerSignInLink;
+	public WebElement headerSignInLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/a")
-	public static WebElement takeQuizButton;
+	public WebElement takeQuizButton;
 
 	@FindBy(css = "button[onclick=\"jumpToHSIDRegistration('header')\"]")
-	public static WebElement registerLink;
+	public WebElement registerLink;
 
 	@FindBy(id = "nav-zipcode")
-	public static WebElement zipcodeField;
+	public WebElement zipcodeField;
 
 	@FindBy(className = "zip-button")
-	public static WebElement findPlansButton;
+	public WebElement findPlansButton;
 
 	@FindBy(id = "ghn_lnk_2")
-	public static WebElement ourPlansHoverLink;
+	public WebElement ourPlansHoverLink;
 
 	@FindBy(id = "subnav_2")
-	public static WebElement ourPlansDropdownText;
+	public WebElement ourPlansDropdownText;
 
 	/** Request for assistance model window **/
 	@FindBy(id = "cover")
-	public static WebElement RequestforAssistancepopup;
+	public WebElement RequestforAssistancepopup;
 
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 
 	@FindBy(xpath = "//*[@id='subnav_2']//*[contains(@href,'estimate')]")
-	public static WebElement headerDrugCostEstimatorLink;
+	public WebElement headerDrugCostEstimatorLink;
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);

@@ -16,6 +16,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class PlanPaymentOptionsMobile extends UhcDriver{
 	
@@ -141,7 +142,7 @@ public class PlanPaymentOptionsMobile extends UhcDriver{
 		validate(saveandcontinuebutton);
 		saveandcontinuebutton.click();
 		
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)) {
 			return new OptionalRidersPageMobile(driver);
 		}
 		return null;

@@ -1,4 +1,4 @@
-@PlanRecommendationEngineUAT
+@planRecommendationEngineUAT
 Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
   @PRE @planrecommendation @PRE_UAT_VP_DOC_DRUG_PlanName_Scenario-3 @F583139
@@ -75,7 +75,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
     Examples: 
       | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds | travel   | doctors    | DoctorsName | isMultiDoctor | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities    | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | isCoverageOpt1 |
-      |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork |             |               | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            |
+      |   15537 | NO            | Bedford | MA            | Medicaid     | withinUS | UHGNetwork | [blank]     | [blank]       | Yes,No,No,No                  | Lower                | 1st            | Doctors, None | Lipitor,YES,Lipitor TAB 10MG,,,Month,1,YES,NO                                | PDP            |
 
   @PRE @planrecommendation @PRE_UAT_ExternalLink_PRE_Enroll_Scenario-2
   Scenario Outline: <site>  - To validate drug and doctors in Visitor profile
@@ -168,7 +168,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user validate UI and API recommendation rankings in results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                                       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | PlanYear | primaryRecommendation | Email                  | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds        |
+      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel             | doctors | DoctorsName                                       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                 | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      | PlanYear | primaryRecommendation | Email                  | E_Zipcode | E_isMultiCounty | E_county | E_isCoverageOpt | E_specialNeeds           |
       |   10001 | NO            | New York | MAPD          | None         | withinUS,outsideUS | Lookup  | Venegas-Pizarro, Marcelo F, MD:Agu, Chinedu L, PA | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | Yes,Yes,Yes,Yes               | Higher               | both           | Dental, Doctors | current  | MA                    | julia_dowden@optum.com |     10003 | NO              | New York | MAPD            | Medicaid,chronic,nursing |
 
   @PRE @planrecommendation @PRE_UAT_Provider_Drugs_StartNow_MAPD_PlanCompare_Scenario-5

@@ -1,12 +1,11 @@
 package pages.acquisition.commonpages;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 
 public class KeywordSearchPage extends GlobalWebElements {
 
@@ -29,10 +28,10 @@ public class KeywordSearchPage extends GlobalWebElements {
 	
 	public void url(){
 		System.out.println("PageTitle " + driver.getTitle());
-		Assert.assertTrue(driver.getTitle().contains("medicare"));
+		Assertion.assertTrue(driver.getTitle().contains("medicare"));
 		/*String expectedTitle = "medicare";
         String actualTitle = driver.getTitle();
-        Assert.assertEquals(actualTitle, expectedTitle);*/
+        Assertion.assertEquals(actualTitle, expectedTitle);*/
         try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {

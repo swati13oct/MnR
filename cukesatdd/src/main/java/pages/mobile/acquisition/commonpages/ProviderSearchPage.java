@@ -182,7 +182,8 @@ public class ProviderSearchPage extends UhcDriver {
 	validateNew(Checkcoverage);
 	jsClickNew(Checkcoverage);
 	waitForCountDecrement(2);
-	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+	driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 	return new VPPPlanSummaryPageMobile(driver);
 	}
@@ -275,7 +276,8 @@ public class ProviderSearchPage extends UhcDriver {
 			
 			Checkcoverage.click();
 			waitForCountDecrement(2);
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 			return new PlanDetailsPageMobile(driver);
 		

@@ -17,7 +17,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ English -----------------------------------
     And the user validates header section content
     When the user enters following details for pharmacy search
@@ -51,19 +51,18 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     And the user validates view search PDF link
 
     Examples: 
-      | TID   | THPage         | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      #| 15586 | pharmacysearch | Blayer   |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | TID   | THPage         | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-    
+    #| 15586 | pharmacysearch | Blayer   |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+    #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
     Examples: 
-      | TID   | THPage         | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | TID   | THPage         | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
+  #| 15587 | pharmacysearch | Blayer   |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Long-term care              | False                 | False            | True                 |
+  #| 15587 | pharmacysearch | Blayer   |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
+  #| 15587 | pharmacysearch | Blayer   |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
   @pharmacylocatorMicroAppBlayer02 @English
   Scenario Outline: TID: <TID> -zipcode: <zipcode> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in English on acquisition site
     Given the user is on the Acquisition Site TestHarness page
@@ -94,26 +93,25 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
     @pharmacylocatorblayer02a
     Examples: 
-      | TID   | THPage         | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
-      #| 15586 | pharmacysearch | Blayer   |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
-      #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+      | TID   | THPage         | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
-   
+    #| 15586 | pharmacysearch | Blayer   |   85215 |       15 | None           |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
+    #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP) |        2020 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
     @pharmacylocatorblayer02b
     Examples: 
-      | TID   | THPage         | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                                      | ny_planYear | ny_planName                                                      | pharmacyType                | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO)        | Retail Pharmacy             | False                 | False            | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Indian/Tribal/Urban         | False                 | False            | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
+      | TID   | THPage         | siteName | zipcode | distance | countyName   | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
 
+  #| 15587 | pharmacysearch | Blayer   |   80002 |       10 | Adams County |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              |        2020 | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)              | Indian/Tribal/Urban         | False                 | False            | True                 |
+  #| 15587 | pharmacysearch | Blayer   |   14867 |       25 | None         |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice Plan 3 (Regional PPO) | Long-term care              | False                 | False            | True                 |
+  #| 15587 | pharmacysearch | Blayer   |   33321 |       10 | None         |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        |        2020 | Medica HealthCare Plans MedicareMax (HMO)                        | Home Infusion and Specialty | False                 | False            | True                 |
   @pharmacylocatorMicroAppBlayer03 @Chinese
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
-   Given the user is on the Acquisition Site TestHarness page
+    Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ Chinese -----------------------------------
     When the user selects Chinese Language
     And the user validates header section content
@@ -148,17 +146,17 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     And the user validates view search PDF link
 
     Examples: 
-      | TID   | THPage         | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | TID   | THPage         | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
+  #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+  #| 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
   @pharmacylocatorMicroAppBlayer04 @Chinese
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Chinese on acquisition site
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |  <zipcode> |
+      | Zip Code        | <zipcode>  |
     #------ Chinese -----------------------------------
     When the user selects Chinese Language
     And the user enters following details for pharmacy search
@@ -183,17 +181,17 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Then the user validates the question widget
 
     Examples: 
-      | TID   | THPage         | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | TID   | THPage         | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
+  #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+  #| 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
   @pharmacylocatorMicroAppBlayer05 @Spanish
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 1 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |            |
+      | Zip Code        | [blank]    |
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
     And the user validates header section content
@@ -228,17 +226,17 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     And the user validates view search PDF link
 
     Examples: 
-      | TID   | THPage         | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
-      #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
-      #| 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
+      | TID   | THPage         | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
+  #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
+  #| 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |
   @pharmacylocatorMicroAppBlayer06 @Spanish
   Scenario Outline: TID: <TID> -zipcode: <zipcode> -countyName: <countyName> - Part 2 of 2 - To verify end-to-end behavior for pharmacy locator page in Spanish on acquisition site
     Given the user is on the Acquisition Site TestHarness page
       | Site Name       | <siteName> |
       | TestHarnessPage | <THPage>   |
-      | Zip Code        |  <zipcode> |
+      | Zip Code        | <zipcode>  |
     #------ Spanish -----------------------------------
     When the user selects Spanish Language
     And the user enters following details for pharmacy search
@@ -263,7 +261,7 @@ Feature: 2.11. ACQ-Pharmacy Locator - UMS
     Then the user validates the question widget
 
     Examples: 
-      | TID   | THPage         | siteName | zipcode | distance | countyName     | cy_planYear | cy_planName                                               | ny_planYear | ny_planName                                               | pharmacyType    | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None           |        2020 | AARP MedicareRx Preferred (PDP)                           |        2020 | AARP MedicareRx Preferred (PDP)                           | E-Prescribing   | True                  | False            | True                 |
+      | TID   | THPage         | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
+      | 15586 | pharmacysearch | Blayer   |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
       #| 15586 | pharmacysearch | Blayer   |   78006 |       15 | Kendall County |        2020 | AARP MedicareRx Walgreens (PDP)                           |        2020 | AARP MedicareRx Walgreens (PDP)                           | Open 24 hours   | True                  | True             | True                 |
       #| 15587 | pharmacysearch | Blayer   |   78006 |       10 | Comal County   |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) |        2020 | UnitedHealthcare Medicare Advantage Choice (Regional PPO) | Retail Pharmacy | False                 | False            | True                 |

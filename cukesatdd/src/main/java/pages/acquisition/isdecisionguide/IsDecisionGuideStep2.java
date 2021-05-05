@@ -6,7 +6,6 @@ package pages.acquisition.isdecisionguide;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
@@ -214,7 +214,7 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		Assert.assertTrue("Phone Number Field is Not Displayed", validate(PhoneNumber));
+		Assertion.assertTrue("Phone Number Field is Not Displayed", validate(PhoneNumber));
 		PhoneNumber.sendKeys("8765550987");
 		SubmitBtn.click();
 		try {
@@ -424,10 +424,10 @@ public class IsDecisionGuideStep2 extends UhcDriver{
 			&& part_A_Year_Expected.contains(part_A_Year_Displaye ) && part_B_Month_Expected.contains(part_B_Month_Displaye )
 					&&  part_B_Year_Expected.contains(part_B_Year_Displaye) &&  start_Date_Expected.contains(startDate_Displaye)) {
 			System.out.println("All fields displayed info matches Pre-Entry Page info");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else {
-			Assert.fail("All fields displayed info DOES NOT matches Pre-Entry Page info");
+			Assertion.fail("All fields displayed info DOES NOT matches Pre-Entry Page info");
 		}
 
 	}
