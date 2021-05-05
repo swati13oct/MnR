@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PRERegression
+@planRecommendationEngine @PRERegression
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking with API results
 
   @PRE @APIRanking @MAPDFlowRanking @SanityTest @PRERegression3

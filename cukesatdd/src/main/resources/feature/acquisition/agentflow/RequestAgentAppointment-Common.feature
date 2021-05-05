@@ -9,7 +9,7 @@ Feature: 1.06 - To test request an appointment with an agent flow
     Then the user fills the form out and submits the agent appointment
       | Zipcode | <zipcode> |
 
-    @agentAppointmentByZipSanity_AARP @prod_regression @regressionAARP @sanity
+    @agentAppointmentByZipSanity_AARP @prodRegression @regressionAARP @sanity
     Examples: 
       | TCID    | zipcode | site |
       | F266872 |   90002 | AARP |
@@ -37,7 +37,7 @@ Feature: 1.06 - To test request an appointment with an agent flow
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |
 
-    @agentAppointmentByZipSanity_UHC @prod_regression @regressionUHC @sanity
+    @agentAppointmentByZipSanity_UHC @prodRegression @regressionUHC @sanity
     Examples: 
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |

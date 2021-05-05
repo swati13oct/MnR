@@ -22,7 +22,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
       | E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html                                                                                                                                                                                                                                                                                           | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
       | E2E Scenario 2_UMS | UHC  | shop/prescription-drug-plans.html                                                                                                                                                                                                                                                                                             | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCBlayer @UATRegression @ISAgentAppointmentUHC @IS
+    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAppointmentUHC @insuranceSolution
     Examples: 
       | scenario           | site | path                                | pageName                     | UHCUrl                      |
       | E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
@@ -79,12 +79,12 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCBlayer @UATRegression @ISAgentAgentAppointmentUHC
+    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_UMS |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCUlayer @UATRegression @ISAgentAgentAppointmentAARP
+    @agentFlowEBRCUlayer @UATRegression @insuranceSolutionAgentAgentAppointmentAARP
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_AMP |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |

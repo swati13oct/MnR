@@ -1,4 +1,4 @@
-@AgentRecommendationEngine @ARERegression @ARESessionCookie @regressionAARP
+@agentRecommendationEngine @ARERegression @ARESessionCookie @regressionAARP
 Feature: Agent Recommendation Engine - Verify ARE functionality with Session Cookies
 
   @ARE @ClearedSessionNewCloakIn @F457409

@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify travel page in plan Recommendation Engine
 
   @PRE @planrecommendation @travelpage @elementValidation @F372739

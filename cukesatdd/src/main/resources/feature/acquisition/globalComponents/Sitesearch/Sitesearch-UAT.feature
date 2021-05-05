@@ -28,7 +28,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_UMS | UHC  | Medicare        | MEDICARE PART D CLAIM FORM(PDF) |
       | E2E Scenario 1_UMS | UHC  | Dental coverage | Drug cost estimator             |
 
-    @prodSanity_AARP @vbfGateAARP @prod_regression @test123
+    @prodSanity_AARP @vbfGateAARP @prodRegression @test123
     Examples: 
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_AMP | AARP | Medicare    | Pharmacy       |
@@ -71,7 +71,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue | Error            | NewSearchValue |
       | E2E Scenario 1_AMP | AARP | Medicare    | InvalidCharacter | medicareeee    |
 
-    @prodSanity_UHC @prod_regression
+    @prodSanity_UHC @prodRegression
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue |
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | medicareeee    |
@@ -85,7 +85,7 @@ Feature: 1.08 UAT-Site Search Flows
     Then the user clicks on the united health care medicare solutions link
     Then the user validates the "<url>"
 
-    @SiteSearch_AARP_03 @prodSanity_AARP @prod_regression @regressionAARP @sanity
+    @SiteSearch_AARP_03 @prodSanity_AARP @prodRegression @regressionAARP @sanity
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -281,7 +281,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | url                                                           |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC_06 @prodSanity_UHC @prod_regression @regressionUHC
+    @SiteSearch_UHC_06 @prodSanity_UHC @prodRegression @regressionUHC
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | url                                                           |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |

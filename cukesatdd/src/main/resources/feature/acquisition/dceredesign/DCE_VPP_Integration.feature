@@ -1,7 +1,7 @@
-@dce_redesign_Drug_summary_AARP @F426576 @DCE
+@dce_redesign_Drug_summary_AARP @F426576 @dce
 Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from various pages
 
-  @DCE_Redesign_VPP_PlanSummary_Integration
+  @dce_Redesign_VPP_PlanSummary_Integration
   Scenario Outline: 1.10.3.2 To test the DCE Redesign flow for PlanType :  <plantype> from vpp Plan Summary
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -69,12 +69,12 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     And the user clicks on Return to details link on Drug Details page
     And the user verifies the drug information on plan costs tab
 
-    @DCE_Redesign_VPP_PlanSummary_Integration_MAPD_AARP @regressionAARP
+    @dce_Redesign_VPP_PlanSummary_Integration_MAPD_AARP @regressionAARP
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   |
       | AARP |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) | Every 3 Months |
 
-    @DCE_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @prod_regression
+    @dce_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @prodRegression
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   |
       | UHC  |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) | Every 3 Months |
@@ -110,12 +110,12 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     And the user clicks on DCE button to return to Review Drug cost page
 
-    @VPP_NBA_DCE_Redesign_Integration_AARP @regressionAARP
+    @vpp_NBA_DCE_Redesign_Integration_AARP @regressionAARP
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | planname                                                         | drug1   |
       | AARP |   10001 | future   | MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Orkambi |
 
-    @VPP_NBA_DCE_Redesign_Integration_UHC @regressionUHC
+    @vpp_NBA_DCE_Redesign_Integration_UHC @regressionUHC
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | planname                                                         | drug1   |
       | UHC  |   10001 | future   | MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Orkambi |

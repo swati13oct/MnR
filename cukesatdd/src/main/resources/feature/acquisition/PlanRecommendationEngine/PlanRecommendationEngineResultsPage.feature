@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommendation Engine
 
   @PRE @planrecommendation @resultspage @resultspageselection @F384284

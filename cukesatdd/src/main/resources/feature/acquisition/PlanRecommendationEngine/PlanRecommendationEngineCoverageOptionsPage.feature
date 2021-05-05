@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify coverage options page in plan Recommendation Engine
 
   @PRE @planrecommendation @coveragepage @elementValidation @F372736

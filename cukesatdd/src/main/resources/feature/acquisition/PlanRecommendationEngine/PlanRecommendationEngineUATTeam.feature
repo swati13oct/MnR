@@ -1,4 +1,4 @@
-@PlanRecommendationEngineUAT
+@planRecommendationEngineUAT
 Feature: PRE_UAT - Verify UAT Scenarios in PRE
 
   @PRE @planrecommendation @PRE_UAT_VP_DOC_DRUG_PlanName_Scenario-3 @F583139
