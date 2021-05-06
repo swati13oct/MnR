@@ -2,6 +2,7 @@ package pages.mobile.acquisition.commonpages;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -123,6 +124,9 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 
 	@FindBy(className = "loading-block")
 	protected List<WebElement> loadingBlock;
+	
+	protected By loadingSpinner = By.className("uhc-spinner");
+
 
 	@FindBy(xpath = "//img[@alt='Standard Network']")
 	protected List<WebElement> standardNetworkMarker;

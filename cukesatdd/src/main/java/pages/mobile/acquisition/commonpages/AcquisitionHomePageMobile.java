@@ -127,7 +127,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(text(),'Request More')]")
 	private WebElement moreHelpInfoLink;
 
-	@FindBy(xpath = "//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')]")
+	@FindBy(xpath = "(//div[@id='subnav_2']//h3/a[contains(text(),'Pharmacy')])[2]")
 	private WebElement pharmacylocator;
 
 	@FindBy(xpath = "//*[@id=\"planTypesColumn\"]/h3[2]/a")
@@ -306,6 +306,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "ghn_lnk_2")
 	private WebElement ShopForaplan;
 
+	@FindBy(xpath ="//*[@class='mob-sctn section-3 column column-lg-4']/p")
+	private WebElement toolsToChoosePlan;
+			
 	@FindBy(xpath = ".//*[@id='updates-mobile-form']/div/div[2]/button")
 	private WebElement submit;
 
@@ -2348,21 +2351,28 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacyLocator() {
-		// checkModelPopup(driver);
-		Actions action = new Actions(driver);
-		scrollToView(ourPlansHoverLink);
-		action.moveToElement(navigationSectionHomeLink).moveToElement(ourPlansHoverLink).build().perform();
-		// pharmacylocator.click();
-		jsClickNew(pharmacylocator);
-		CommonUtility.checkPageIsReadyNew(driver);
+		jsClickMobile(Menu);
 
-		// checkIfPageReadySafari();
-
+		waitforElement(ShopForaplan);
+		if (ShopForaplan.isDisplayed()) {
+			jsClickNew(ShopForaplan);
+			scrollToView(toolsToChoosePlan);
+			waitforElement(toolsToChoosePlan);
+			jsClickNew(toolsToChoosePlan);
+			System.out.println("clicked on tools to choose plan");
+			
+			scrollToView(pharmacylocator);
+			waitforElement(pharmacylocator);
+			jsClickNew(pharmacylocator);
+			System.out.println("navigating to pharmacy locator page");
+		}
+		
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
 			return new PharmacySearchPageMobile(driver);
 		}
 		return null;
+		
 
 	}
 
