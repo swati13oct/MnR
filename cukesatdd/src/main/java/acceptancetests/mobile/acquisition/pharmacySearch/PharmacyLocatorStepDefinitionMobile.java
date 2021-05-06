@@ -469,7 +469,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void user_click_on_return_to_home_on_drug_summary_in_AARP_site() throws Throwable {
 		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile)getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		drugSummaryPage.clickOnReturnToHome();
+		//drugSummaryPage.clickOnReturnToHome();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
