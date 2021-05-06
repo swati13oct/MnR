@@ -352,12 +352,14 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County | MAPD     |             4,1,2 | future   |           5 |
+      | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |             2,1   | future   |           4 |
 
     @vppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 @regressionUHC @sanity
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | UHC  |   55343 | NO            | Hennepin County | MAPD     |               2,1 | future   |           5 |
       | 00016 | UHC  |   55343 | NO            | Hennepin County | PDP      |               2,1 | future   |           3 |
+      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |             2,1   | future   |           4 |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on OON Toggle for Medical Benefits and Additional Benefits on <site>
     Given the user is on medicare acquisition site landing page
@@ -545,3 +547,34 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planname                                            | planyear |
       | 00026 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | future   |
+    Scenario Outline: <site>  - Validate that M&R Prospective client, user wants to use VPP to view details and enroll for a plan from Connector Model plus landing page into  Medicare Education.
+    Given the user is on external acquisition site landing page
+      | Site Name | <site> |
+    Then user clicks on Learn About Medicare
+    Then Validate user Land on MEDED Page and validate links
+    Then Navigate back to previous window
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then I validate "<plantype>" plans with names "<planNamesList>" are listed correctly on summary page
+    Then user changes zipcode within VPP page
+      | Zip Code        | <zipcode2>      |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <county2>       |
+    Then I validate "<plantype>" plans with names "<planNamesList2>" are listed correctly on summary page
+    And I validate view more and view less links on plan summary
+    Then I save "<plantype>" plans and "<SavePlansCount>" plans and verify the count update on shopping cart
+    Then the user validates the right rail
+    Then the user validates the Need Help Section in the right rail
+    Then the user validates the TFN in the Need Help Section
+
+    @vppPlanSummaryCommonUHC01
+    Examples: 
+      | site       | zipcode | isMultiCounty | county     | planNamesList                                                                                                                                                                                                                                                                                                                                                                                                                                              | plantype | planyear | zipcode2 | county2  | planNamesList2                                                                                                                                | SavePlansCount |
+      | Myuhcplans |   33111 | NO            | Miami-Dade | Preferred Medicare Assist Plan 2 (HMO D-SNP),Preferred Medicare Assist Plan 1 (HMO D-SNP),Medica HealthCare Plans MedicareMax Plus (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP),UnitedHealthcare Dual Complete RP - FL (Regional PPO D-SNP),Preferred Special Care Miami-Dade (HMO C-SNP),UnitedHealthcare Nursing Home Plan (PPO I-SNP),UnitedHealthcare Assisted Living Plan (PPO I-SNP),UnitedHealthcare Nursing Home Plan (HMO I-SNP) | SNP      | current  |    37714 | Campbell | UnitedHealthcare Dual Complete (HMO D-SNP),UnitedHealthcare Dual Complete ONE (HMO D-SNP),UnitedHealthcare Dual Complete ONE Plus (HMO D-SNP) |              1 |
+      
