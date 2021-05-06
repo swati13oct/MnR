@@ -4257,7 +4257,7 @@ public class VppCommonStepDefinition {
 
 	@Then("^Navigate back to previous window$")
 	public void navigate_back_to_previous_window() throws Throwable {
-		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String originalHandle = wd.getWindowHandle();
 		    for(String handle : wd.getWindowHandles()) {
 		        if (!handle.equals(originalHandle)) {
