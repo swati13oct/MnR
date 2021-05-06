@@ -720,8 +720,10 @@ public abstract class UhcDriver {
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
 		scrollToView(Element);
-		jsClickNew(Element);
-		waitForPageLoadSafari();
+		//jsClickNew(Element);
+		Element.click();
+		//waitForPageLoadSafari();
+		sleepBySec(5);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;

@@ -1883,7 +1883,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
 		MobileMenuMain();
-		MobileMenuShopTool();
+		MobileMenuProviderSearch();
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
