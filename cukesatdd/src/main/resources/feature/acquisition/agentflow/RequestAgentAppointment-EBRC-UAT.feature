@@ -22,10 +22,10 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
       | E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html                                                                                                                                                                                                                                                                                           | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
       | E2E Scenario 2_UMS | UHC  | shop/prescription-drug-plans.html                                                                                                                                                                                                                                                                                             | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAppointmentUHC @insuranceSolution
-    Examples: 
-      | scenario           | site | path                                | pageName                     | UHCUrl                      |
-      | E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
+   # @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAppointmentUHC @regressionUHC
+    #Examples:
+     # | scenario           | site | path                                | pageName                     | UHCUrl                      |
+      #| E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
 
     @agentFlowEBRCUlayer @UATRegression @regressionAARP
     Examples: 
