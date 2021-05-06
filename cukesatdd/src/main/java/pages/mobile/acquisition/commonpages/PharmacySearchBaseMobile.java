@@ -80,8 +80,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
 		
-		mobileactionsendkeys(zipcodeField, zipcode);
-		planTypeDropDownTitle.click();
+		jsSendkeys(zipcodeField, zipcode);
+		//planTypeDropDownTitle.click();
+		System.out.println("zipcode entered");
+		jsClickMobile(planTypeDropDownTitle);
 		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
 		// List<String> testNote=new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
@@ -136,8 +138,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void validateNoresultsZipcodeError(String zipcode) {
 		zipcodeField.clear();
 		sleepBySec(8);
-
+		scrollToView(zipcodeField);
 		zipcodeField.sendKeys(zipcode);
+		System.out.println("checking for the second time while entering zipcode");
 		//mobileactionsendkeys(zipcodeField, zipcode);
 		// if(zipcode.length()!=5){
 		// distanceOption_15miles.click();
@@ -759,6 +762,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 */
 	public boolean pharmacyValidate(WebElement element) {
 		long timeoutInSec = 20;
+		scrollToView(element);
 		return pharmacyValidate(element, timeoutInSec);
 	}
 

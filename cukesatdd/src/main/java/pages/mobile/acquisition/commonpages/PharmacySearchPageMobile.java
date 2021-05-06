@@ -2,18 +2,22 @@ package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
+import pages.acquisition.dceredesign.GetStartedPage;
 
 public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 
@@ -296,7 +300,26 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 		return null;
 	}
+	@FindBy(xpath = "//a[text()='Estimate your drug costs at a preferred retail pharmacy']")
+	private WebElement DCELink;
 
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+
+
+	public GetStartedPage navigateToDCE() {
+		scrollToView(DCELink);
+		validateNew(DCELink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", DCELink);
+		DCELink.click();
+		CommonUtility.checkPageIsReadyNew(driver);
+		if (validateNew(AddMyDrugsBtn))
+			return new GetStartedPage(driver);
+		return null;
+	}
+
+	
 	public PharmacySearchPageMobile validateGetDirectionLinks() {
 		CommonUtility.checkPageIsReady(driver);
 		int getDirectionCount = getDirectionLnk.size();
@@ -380,302 +403,171 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		js.executeScript("arguments[0].scrollIntoView();", element); */
 	}
 
-	
-/*
-	public void validateMapSectionContent() {
-		moveMouseToElement(map_resultSection);
-		Assertion.assertTrue("PROBLEM - unable to locate the map", 
-				pharmacyValidate(map_mapImg));
-		Assertion.assertTrue("PROBLEM - unable to locate the 'Hide Map' link", 
-				pharmacyValidate(map_showHideMapLnk));
-		map_showHideMapLnk.click();
-		Assertion.assertTrue("PROBLEM - map should disappear after clicking 'Hide Map' link", 
-				!pharmacyValidate(map_mapImg));
-		map_showHideMapLnk.click();
-		Assertion.assertTrue("PROBLEM - unable to locate the map after clicking 'Show Map' link", 
-				pharmacyValidate(map_mapImg));
-		Assertion.assertTrue("PROBLEM - unable to locate the 'Map' button on the map", 
-				pharmacyValidate(map_mapBtn));
-		Assertion.assertTrue("PROBLEM - unable to locate the 'Satellite' button on the map", 
-				pharmacyValidate(map_satelliteBtn));
-		Assertion.assertTrue("PROBLEM - unable to locate the toggle full screen view button on the map", 
-				pharmacyValidate(map_fullScreenViewBtn));
-		Assertion.assertTrue("PROBLEM - unable to locate the zoom in button on the map", 
-				pharmacyValidate(map_zoomIn));
-		Assertion.assertTrue("PROBLEM - unable to locate the zoom out button on the map", 
-				pharmacyValidate(map_zoomOut));
-		Assertion.assertTrue("PROBLEM - unable to locate the open street view button on the map", 
-				pharmacyValidate(map_openStreetView));
+	/**
+	 * Validate Widgets From copy deck: Preferred Retail Pharmacy Network Only
+	 * display the Preferred Retail Pharmacy Network tile for plans that have a
+	 * Preferred Retail Pharmacy benefit. Do not display for the AARP MedicareRx
+	 * Walgreens plan Walgreens – Preferred Retail Pharmacy Only display the
+	 * Walgreens tile for AARP MedicareRx Walgreens plan members Preferred Mail
+	 * Service Pharmacy Only display the Preferred Mail Service Pharmacy tile for
+	 * plans that have a Preferred Mail Service Pharmacy benefit. Do not display for
+	 * AL PEEHIP BYPASS KNOWN ISSUE -ticket INC12081940 - Walgreens widget on
+	 * doesn't show up for Chinese and Spanish page
+	 * 
+	 * @param planType
+	 * @throws InterruptedException
+	 */
+	public void validatePharmacyWidgets(boolean expectPrefRetailPharmacyPlan, boolean expectWalgreensPlan,
+			boolean expectPrefMailServPlan, HashMap<String, String> inputMap, String testSiteUrl)
+			throws InterruptedException {
+		String testPlanName = inputMap.get("planName");
+		String language = inputMap.get("language");
+		String testWidget = "";
+		String expUrl = "";
+		boolean hasWalgreensPlan = false;
+		if (testPlanName.contains("AARP MedicareRx Walgreens"))
+			hasWalgreensPlan = true;
+		Assertion.assertTrue("PROBLEM - test input expects no walgreens plan but user has walgreens plan",
+				expectWalgreensPlan == hasWalgreensPlan);
 
-	}
-	
-	
-
-	*//** Validate show on map link appearance for search results *//*
-	public PharmacySearchPageMobile validateShowOnMapLinks() {
-		CommonUtility.checkPageIsReady(driver);
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,-100)", "");
-		int showonmapCount = showonmap.size();
-		int PharmacyCount = PharmacyResultList.size();
-		System.out.println(" No of SHOW ON MAP Links displayed : "+showonmapCount);
-		System.out.println(" No of Pharmacy Results displayed : "+PharmacyCount);
-		if(showonmapCount==PharmacyCount){
-			System.out.println("Show on Map Links are Displayed for all Displayed Pharmacy Results");
-			return new PharmacySearchPageMobile(driver);
+		testWidget = "Preferred Mail Service Pharmacy";
+		if (expectPrefMailServPlan) {
+			Assertion.assertTrue("PROBLEM - user should see '" + testWidget + "' widget",
+					pharmacyValidate(widget_preferredMailServicePharmacy));
+			expUrl = "resources/mail-order-pharmacy.html";
+			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap, testSiteUrl);
+		} else {
+			Assertion.assertTrue("PROBLEM - user should see '" + testWidget + "' widget",
+					pharmacyValidate(widget_preferredMailServicePharmacy));
 		}
-		return null;
+
+		testWidget = "Preferred Retail Pharmacy Network";
+		if (expectPrefRetailPharmacyPlan) { // note: with this plan should see widget BUT if plan is walgreen then won't
+			if (hasWalgreensPlan) {
+				Assertion.assertTrue("PROBLEM - PDP user has Walgreens plan should not see '" + testWidget + "' widget",
+						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
+			} else {
+				Assertion.assertTrue("PROBLEM - PDP user should see '" + testWidget + "' widget",
+						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
+				Assertion.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget",
+						!pharmacyValidate(widget_walgreens));
+				expUrl = "health-plans/estimate-drug-costs.html";
+//				expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
+			}
+		} else {
+			Assertion.assertTrue("PROBLEM - user input does not expect to see '" + testWidget + "' widget",
+					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
+		}
+		testWidget = "Walgreens - Preferred Retail Pharmacy";
+		if (expectWalgreensPlan) {
+			if (hasWalgreensPlan) {
+				if (language.equalsIgnoreCase("English")) {
+					Assertion.assertTrue("PROBLEM - user has Walgreens plan should see '" + testWidget + "' widget",
+							pharmacyValidate(widget_walgreens));
+//					expUrl = "health-plans/estimate-drug-costs.html#/getstarted";
+					expUrl = "health-plans/estimate-drug-costs.html";
+					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
+				} else {
+					System.out.println(
+							"INC12081940 - bypassed the Walgreens widget issue for Spanish and Chinese for the time being");
+				}
+			}
+		} else {
+			Assertion.assertTrue("PROBLEM - test input not expect to see '" + testWidget + "' widget",
+					!pharmacyValidate(widget_walgreens));
+		}
 	}
 
-	*//** Validate More info section *//*
-	public void validateMoreInfoContent() {
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, moreInfoLink, 5);
-		moreInfoLink.click();
-		Assertion.assertTrue("PROBLEM - text is not displaying after clicking 'More Info' link", 
-				pharmacyValidate(moreInfoText_show));
-		moreInfoLink.click();
-		Assertion.assertTrue("PROBLEM - text should NOT displaying after collapsing 'More Info' link again", 
-				!pharmacyValidate(moreInfoText_show));
-	}
-
-	*//** Verify page load in chinese language *//*
-	public PharmacySearchPageMobile clickChinese() {
-		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, chineseLanguage, 5);
-		chineseLanguage.click();
-		CommonUtility.checkPageIsReady(driver);
-		System.out.println("Chinese language selected");   
-		return new PharmacySearchPageMobile(driver);
-	}
-
-	public void validateGetDirectionLinks() {
-		CommonUtility.checkPageIsReady(driver);
-		int getDirectionCount = getDirectionLnk.size();
-		int PharmacyCount = PharmacyResultList.size();
-		System.out.println(" No of GetDirection Links displayed : "+getDirectionCount);
-		System.out.println(" No of Pharmacy Results displayed : "+PharmacyCount);
-		Assertion.assertTrue("PROBLEM - Get Direction Links are NOT Displayed for all Displayed Pharmacy Results. "
-				+ "Total result='"+PharmacyCount+"' | GetDirection result='"+getDirectionCount+"'", 
-				getDirectionCount==PharmacyCount);
-	}	
-
-	public void validateWidget(String linkType, String widgetName, WebElement learnMoreElement, String expUrl, 
+	public void validateWidget(String linkType, String widgetName, WebElement learnMoreElement, String expUrl,
 			HashMap<String, String> inputMap, String testSiteUrl) throws InterruptedException {
-		String planName=inputMap.get("planName");
-		String zipcode=inputMap.get("zipcode");
-		String distance=inputMap.get("distance");
-		String county=inputMap.get("county");
-		Assertion.assertTrue("PROBLEM - '"+linkType+"' link should show for '"+widgetName+"' widget", 
+		String planName = inputMap.get("planName");
+		String planYear = inputMap.get("planYear");
+		String zipcode = inputMap.get("zipcode");
+		String distance = inputMap.get("distance");
+		String county = inputMap.get("county");
+		Assertion.assertTrue("PROBLEM - '" + linkType + "' link should show for '" + widgetName + "' widget",
 				pharmacyValidate(learnMoreElement));
 		CommonUtility.waitForPageLoadNewForClick(driver, learnMoreElement, 60);
-		learnMoreElement.click();
+//		learnMoreElement.click();
+		jsClickNew(learnMoreElement);
 		sleepBySec(8);
 		CommonUtility.checkPageIsReady(driver);
-		String actUrl=driver.getCurrentUrl();
-		Assertion.assertTrue("PROBLEM - '"+linkType+"' link on '"+widgetName+"' widget is not opening expected page.  "
-				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
+		String actUrl = driver.getCurrentUrl();
+		Assertion.assertTrue(
+				"PROBLEM - '" + linkType + "' link on '" + widgetName + "' widget is not opening expected page.  "
+						+ "Expected url contains '" + expUrl + "' Actual URL='" + actUrl + "'",
 				actUrl.contains(expUrl));
 		driver.navigate().back(); //note: use driver back to go back to pharmacy locator page
 		//tbd Thread.sleep(2000); //note: keep for timing issue
+		//driver.navigate().refresh(); //note: added refresh since Safari has issues locating elements after navigate back
+		sleepBySec(2);
 		CommonUtility.checkPageIsReady(driver);
-		expUrl="/Pharmacy-Search-";
-		actUrl=driver.getCurrentUrl();
-		Assertion.assertTrue("PROBLEM - Unable to get back to pharmacy locator page for further validation. "
-				+ "Expected url contains '"+expUrl+"' Actual URL='"+actUrl+"'", 
+		expUrl = "/Pharmacy-Search-";
+		actUrl = driver.getCurrentUrl();
+		Assertion.assertTrue(
+				"PROBLEM - Unable to get back to pharmacy locator page for further validation. "
+						+ "Expected url contains '" + expUrl + "' Actual URL='" + actUrl + "'",
 				actUrl.contains(expUrl));
 		enterZipDistanceDetails(zipcode, distance, county);
+		if (isPlanYear()) {
+			selectsPlanYear(planYear);
+		}
 		selectsPlanName(planName, testSiteUrl);
 		CommonUtility.checkPageIsReady(driver);
 	}
 
-	public void validateQuestionsWidget() {
-		CommonUtility.waitForPageLoad(driver, callUnitedHealthCareText, 5);
-		Assertion.assertTrue("PROBLEM -Question Widget is not displayed", 
-				pharmacyValidate(questionsRightRailWidget));
-		Assertion.assertTrue("PROBLEM -Call us icon is not displayed", 
-				pharmacyValidate(callUsIcon));
-		Assertion.assertTrue("PROBLEM -Call United Health care is not displayed", 
-				pharmacyValidate(callUnitedHealthCareText));
-	}
+	public void selectsPlanName(String planName, String testSiteUrl) {
+		scrollToView(seletPlandropdown);
+		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
+//		seletPlandropdown.click();
+		jsClickNew(seletPlandropdown);
+		sleepBySec(1);
+		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		sleepBySec(2);
+		if (!loadingBlock.isEmpty())
+//			waitforElementDisapper(By.className("loading-block"), 90);
+			waitforElementDisapper(loadingSpinner, 90);
+		if (!loadingBlock.isEmpty())	//note: if still not done, give it another 30 second
+//			waitforElementDisapper(By.className("loading-block"), 30);
+			waitforElementDisapper(loadingSpinner, 90);
+		sleepBySec(1); //note: let the page settle down
+//		searchbtn.click();
+		jsClickNew(searchbtn);
 
-	public void validateDefaultZip() {
-		String actualDefaultZip = zipcodeField.getText();
-		Assertion.assertTrue("PROBLEM - default zip code should not be null during first load",
-				actualDefaultZip.equalsIgnoreCase("null"));
-	}
-
-	*//**
-	 * Validate Widgets
-	 *   From copy deck:
-	 *   Preferred Retail Pharmacy Network
-	 *     Only display the Preferred Retail Pharmacy Network tile for plans that have a Preferred Retail Pharmacy benefit. 
-	 *     Do not display for the AARP MedicareRx Walgreens plan
-	 *   Walgreens – Preferred Retail Pharmacy
-	 *     Only display the Walgreens tile for AARP MedicareRx Walgreens plan members
-	 *   Preferred Mail Service Pharmacy
-	 *     Only display the Preferred Mail Service Pharmacy tile for plans that have a Preferred Mail Service Pharmacy benefit. 
-	 *     Do not display for AL PEEHIP
-	 *   BYPASS KNOWN ISSUE 
-	 *   -ticket INC12081940 - Walgreens widget on doesn't show up for Chinese and Spanish page
-	 * @param planType
-	 * @throws InterruptedException 
-	 *//*
-	public void validatePharmacyWidgets(
-			boolean expectPrefRetailPharmacyPlan, boolean expectWalgreensPlan, boolean expectPrefMailServPlan,
-			HashMap<String, String> inputMap, String testSiteUrl) throws InterruptedException { 
-		String testPlanName=inputMap.get("planName");
-		String language=inputMap.get("language");
-		String testWidget="";
-		String expUrl="";
-		boolean hasWalgreensPlan=false;
-		if (testPlanName.contains("AARP MedicareRx Walgreens")) 
-			hasWalgreensPlan=true;
-		Assertion.assertTrue("PROBLEM - test input expects no walgreens plan but user has walgreens plan", 
-				expectWalgreensPlan==hasWalgreensPlan);
-
-		testWidget="Preferred Mail Service Pharmacy";
-		if (expectPrefMailServPlan) {
-			Assertion.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
-					pharmacyValidate(widget_preferredMailServicePharmacy));
-			expUrl="resources/mail-order-pharmacy.html";
-			validateWidget("LearnMore", testWidget, widget_prefMailServPhar_learnMore, expUrl, inputMap, testSiteUrl);
-		} else {
-			Assertion.assertTrue("PROBLEM - user should see '"+testWidget+"' widget", 
-					pharmacyValidate(widget_preferredMailServicePharmacy));
-		}
-
-		testWidget="Preferred Retail Pharmacy Network";
-		if (expectPrefRetailPharmacyPlan) { //note: with this plan should see widget BUT if plan is walgreen then won't
-			if (hasWalgreensPlan) {
-				Assertion.assertTrue("PROBLEM - PDP user has Walgreens plan should not see '"+testWidget+"' widget", 
-						!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
+		// let the plans load, wait for the loading symbol to disappear
+		if (!loadingBlock.isEmpty())
+//			waitforElementDisapper(By.className("loading-block"), 90);
+			waitforElementDisapper(loadingSpinner, 90);
+		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
+//			waitforElementDisapper(By.className("loading-block"), 30);
+			waitforElementDisapper(loadingSpinner, 90);
+		sleepBySec(1); // note: let the page settle down
+//		sleepBySec(50);
+		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
+		if (!pharmacyValidate(pharmacyCount)) {
+			if ((MRScenario.environmentMedicare.equals("stage"))) {
+				//note: check system time and display in assert message if failed to see what is the system time at the time of the test
+				String currentSysTime=getAcqTestEnvSysTime(testSiteUrl);
+				
+				Assertion.assertTrue("PROBLEM - Search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. "
+						+ "Current system time is '"+currentSysTime+"'", 
+						pharmacyValidate(pharmacyCount));
 			} else {
-				Assertion.assertTrue("PROBLEM - PDP user should see '"+testWidget+"' widget", 
-						pharmacyValidate(widget_preferredRetailPharmacyNetwork));
-				Assertion.assertTrue("PROBLEM - PDP user should not see 'Walgreens - Preferred Retail Pharmacy' widget", 
-						!pharmacyValidate(widget_walgreens));
-				expUrl="health-plans/estimate-drug-costs.html#/getstarted";
-				validateWidget("DCE", testWidget, widget_prefRetPhaNet_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
+				Assertion.assertTrue("PROBLEM - Search yield no result, "
+						+ "test expects input data to have search result for remaining validation steps, "
+						+ "please check user data input or env to see if everything is ok. ", 
+						pharmacyValidate(pharmacyCount));
 			}
-		} else {
-			Assertion.assertTrue("PROBLEM - user input does not expect to see '"+testWidget+"' widget", 
-					!pharmacyValidate(widget_preferredRetailPharmacyNetwork));
 		}
-		testWidget="Walgreens - Preferred Retail Pharmacy";
-		if (expectWalgreensPlan) {	
-			if (hasWalgreensPlan) {
-				if (language.equalsIgnoreCase("English")) {
-					Assertion.assertTrue("PROBLEM - user has Walgreens plan should see '"+testWidget+"' widget", 
-							pharmacyValidate(widget_walgreens));
-					expUrl="health-plans/estimate-drug-costs.html#/getstarted";
-					validateWidget("DCE", testWidget, widget_walgreens_estYurDrugCosts, expUrl, inputMap, testSiteUrl);
-				} else {
-					System.out.println("INC12081940 - bypassed the Walgreens widget issue for Spanish and Chinese for the time being");
-				}
-			}
-		} else {
-			Assertion.assertTrue("PROBLEM - test input not expect to see '"+testWidget+"' widget", 
-					!pharmacyValidate(widget_walgreens));
-		}
-	}
-	
-	*//** Changing of pharmacyType filter *//*
-	public void validatePlanTypeFilter(String pharmacyType, String language) {
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
-		int totalBefore=Integer.parseInt(PharmacyFoundCount.getText().trim());
-		String labelId="";
-		if (pharmacyType.equalsIgnoreCase("E-Prescribing")) {
-			labelId="ePrescribing-label";
-		} else if (pharmacyType.equalsIgnoreCase("Home Infusion and Specialty")) {
-			labelId="home-specialty-label";
-		} else if (pharmacyType.equalsIgnoreCase("Indian/Tribal/Urban")) {
-			labelId="indian-tribal-label";
-		} else if (pharmacyType.equalsIgnoreCase("Long-term care")) {
-			labelId="long-term-label";
-		} else if (pharmacyType.equalsIgnoreCase("Mail Order Pharmacy")) {
-			labelId="mail-order-label";
-		} else if (pharmacyType.equalsIgnoreCase("Open 24 hours")) {
-			labelId="24-hours-label";
-		} else if (pharmacyType.equalsIgnoreCase("Retail Pharmacy")) {
-			labelId="StandardNightyDays-label";
-		} else {
-			Assertion.assertTrue("PROBLEM - haven't code to handle filter '"+pharmacyType+"' yet", false);
-		}
-		WebElement label = driver.findElement(By.xpath("//label[@id='"+labelId+"']"));
-		jsClickNew(label);
+		else
+			System.out.println("Pharmacy Count: " + pharmacyCount.getText());
 
-		CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		CommonUtility.checkPageIsReady(driver);
-		CommonUtility.waitForPageLoad(driver, pagination, 10);
-		int PharmacyCount=0;
-		if (!pharmacyValidate(noResultMsg))
-			PharmacyCount = PharmacyResultList.size();
-		if(PharmacyCount>0) {
-			int totalAfter=Integer.parseInt(PharmacyFoundCount.getText().trim());
-			Assertion.assertTrue("PROBLEM - expect total after filter to be equal or less than before filter. "
-					+ "Expect='"+totalBefore+"' | Actual='"+totalAfter+"'", 
-					totalBefore>=totalAfter);
-			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element", 
-					pharmacyValidate(pharmaciesAvailable));
-			if (totalAfter >10) {
-				WebElement contactUsLink=contactUnitedHealthCare;
-				if (!pharmacyValidate(contactUnitedHealthCare)) 
-					contactUsLink=contactUnitedHealthCare_ol;
-				moveMouseToElement(contactUsLink);
-				sleepBySec(3);
-				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", 
-						pharmacyValidate(pagination));
-				sleepBySec(3);
-				Assertion.assertTrue("PROBLEM - unable to locate the left arrow element", 
-						pharmacyValidate(leftArrow));
-				sleepBySec(3);
-				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element",
-						pharmacyValidate(rightArrow));
-				try {
-					sleepBySec(2);
-					CommonUtility.waitForPageLoadNewForClick(driver, rightArrow, 60);
-					rightArrow.click();
-					CommonUtility.checkPageIsReady(driver);
-					CommonUtility.waitForPageLoadNewForClick(driver, leftArrow, 60); 
-					leftArrow.click();
-					sleepBySec(5);
-					CommonUtility.checkPageIsReady(driver);
-				} catch (Exception e) {
-					Assertion.assertTrue("PROBLEM - something wrong with the arrow", false);
-				}
-				sleepBySec(8);
-				CommonUtility.waitForPageLoadNew(driver, resultNavTooltip, 60);
-				Assertion.assertTrue("PROBLEM - unable to locate the search result navigation tooltip element", 
-						pharmacyValidate(resultNavTooltip));
-				moveMouseToElement(resultNavTooltip); //note: then move mouse over to target element
-				Assertion.assertTrue("PROBLEM - unable to locate tooltip display after mouse over", 
-						pharmacyValidate(tooltip));
-				if (language.equalsIgnoreCase("English")) {
-					String expTxt1="Change the range of your search - increase the miles for more results, decrease the miles for fewer results.";
-					String expTxt2="Change the pharmacy type you selected.";
-					String actualTxtXpath1="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[1]";
-					String actualTxt1=driver.findElement(By.xpath(actualTxtXpath1)).getText();
-					String actualTxtXpath2="//nav[@aria-label='Search results navigation']/../div[2]//span[@role='tooltip']//li[2]";
-					String actualTxt2=driver.findElement(By.xpath(actualTxtXpath2)).getAttribute("innerHTML");
-					Assertion.assertTrue("PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-							+ "Expected='"+expTxt1+"' | "
-							+ "Actual-'"+actualTxt1+"'", expTxt1.equals(actualTxt1));
-					Assertion.assertTrue("PROBLEM - not getting expected tooltip text for Search Result Navigation element.  "
-							+ "Expected='"+expTxt2+"' | "
-							+ "Actual-'"+actualTxt2+"'", expTxt2.equals(actualTxt2));
-				}
-				moveMouseToElement(moveAwayFromTooltip); //note: move away from tooltip for it to disappear
-			} else {
-				Assertion.assertTrue("PROBLEM - total < 10, should not find the pagination element",
-						!pharmacyValidate(pagination));
-				Assertion.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-						!pharmacyValidate(leftArrow));
-				Assertion.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
-						!pharmacyValidate(rightArrow));
-			}
-		}
-	}*/
+	}
+
 	
 }
 
