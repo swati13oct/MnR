@@ -6167,7 +6167,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA")) {
 			allPlans = driver
 					.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
-		} else {
+		}else if(planType.equalsIgnoreCase("SNP"))
+			allPlans=driver.findElements(By.xpath("//label[contains(text(),'Compare')]"));
+		else {
 			allPlans = driver.findElements(By.xpath("//label[contains(text(),'Add to compare')]"));
 		}
 		if (allPlans != null) {
