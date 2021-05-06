@@ -434,7 +434,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN No      | <TFNNo>      |
       | TFN Xpath   | <TFNxpath1>  |
       | Working hrs | <workingHrs> |
-    When user clicks on Estimate Your Prescription Drug Costs from external page for lower env
+    When user clicks on Estimate Your Prescription Drug Costs for lower env
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
@@ -479,7 +479,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 1 related to AMP_U
       | TFN No      | <TFNNo>      |
       | TFN Xpath   | <TFNxpath1>  |
       | Working hrs | <workingHrs> |
-    When user clicks on Start Now to get start the PRE flow from external page for lower env
+    When user clicks on Start Now to get start the PRE flow external page for lower env
     And clicks on get started button and runs questionnaire
       | Zip Code        | <zipcode>       |
       | Is Multi County | <isMultiCounty> |

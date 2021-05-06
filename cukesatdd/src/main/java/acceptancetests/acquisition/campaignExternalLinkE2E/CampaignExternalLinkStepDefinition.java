@@ -543,8 +543,8 @@ public void user_clicks_on_Find_Plans_and_Pricing_to_open_a_new_tab_in_lower_env
 	campaignExternalLinkspage.clickFindPlansPricing();
 }
 
-@When ("user clicks on Estimate Your Prescription Drug Costs from external page for lower env")
-public void user_clicks_on_Estimate_Prescription_Drug_Costto_from_external_page_for_lower_env() {
+@When ("user clicks on Estimate Your Prescription Drug Costs for lower env")
+public void user_clicks_on_Estimate_Prescription_Drug_for_lower_env() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		String env=MRScenario.environment;
@@ -553,8 +553,8 @@ public void user_clicks_on_Estimate_Prescription_Drug_Costto_from_external_page_
 
 }
 
-@When ("user clicks on Start Now to get start the PRE flow from external page for lower env")
-public void user_clicks_on_Start_Now_to_Get_Started_PRE_Flow_for_lower_env() {
+@When ("user clicks on Start Now to get start the PRE flow external page for lower env")
+public void user_clicks_on_Start_Now_PRE_Flow__lower_env() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		String env=MRScenario.environment;

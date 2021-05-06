@@ -945,41 +945,81 @@ public class CampaignExternalLinks extends UhcDriver {
 	}
 	
 	public void updateHrefUrlVPP_Script1(String env) {
-		WebElement element= driver.findElement(By.xpath("//*[@id='button-530621114']"));
+		WebElement element= driver.findElement(By.xpath("(//*[contains(@id,'button') and contains(@href,'available-plans')])[1]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		if(env.equalsIgnoreCase("stage"))
+		if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+		if(env.equalsIgnoreCase("stage")) {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
-		else if (env.equalsIgnoreCase("offline")){
+		}else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}
 		else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}
 	}
+		else {
+			if(env.equalsIgnoreCase("stage"))
+				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
+				else if (env.equalsIgnoreCase("offline")){
+					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
+				}
+				else {
+					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=8012870&county=053&state=27')", element);
+				}
+		}
+	}
 	
 	public void updateHrefUrlDCE_Script1(String env) {
-		WebElement element= driver.findElement(By.xpath("//*[@id='button-1095029748']"));
+		WebElement element= driver.findElement(By.xpath("//*[contains(@id,'button') and contains(@href,'estimate-drug')]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		if(env.equalsIgnoreCase("stage"))
+		if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+		if(env.equalsIgnoreCase("stage")) {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
+		}
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}
 		else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/health-plans/estimate-drug-costs.html?WT.mc_id=8012869&county=053&state=27')", element);
 		}
+		}
+		else {
+			if(env.equalsIgnoreCase("stage")) {
+				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
+				}
+				else if (env.equalsIgnoreCase("offline")){
+					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
+				}
+				else {
+					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/health-plans/estimate-drug-costs.html#/drug-cost-estimator?WT.mc_id=8012870&county=053&state=27')", element);
+				}
+		}
 	}
 	
 	public void updateHrefUrlPRE_Script1(String env) {
-		WebElement element= driver.findElement(By.xpath("//*[@id='button-565183562']"));
+		WebElement element= driver.findElement(By.xpath("//*[contains(@id,'button') and contains(@href,'plan-recommendation')]"));
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		if(env.equalsIgnoreCase("stage"))
+		if(driver.getCurrentUrl().contains("aarpmedicareplans")) {
+		if(env.equalsIgnoreCase("stage")) {
 		js.executeScript("arguments[0].setAttribute('href','https://www.stage-aarpmedicareplans.uhc.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
+		}
 		else if (env.equalsIgnoreCase("offline")){
 			js.executeScript("arguments[0].setAttribute('href','https://offline.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
 		}
 		else {
 			js.executeScript("arguments[0].setAttribute('href','https://www.aarpmedicareplans.com/plan-recommendation-engine.html?WT.mc_id=8012869')", element);
+		}
+		}
+		else {
+			if(env.equalsIgnoreCase("stage")) {
+				js.executeScript("arguments[0].setAttribute('href','https://www.stage-uhcmedicaresolutions.uhc.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
+				}
+				else if (env.equalsIgnoreCase("offline")){
+					js.executeScript("arguments[0].setAttribute('href','https://offline.uhcmedicaresolutions.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
+				}
+				else {
+					js.executeScript("arguments[0].setAttribute('href','https://www.uhcmedicaresolutions.com/plan-recommendation-engine.html?WT.mc_id=8012870')", element);
+				}
 		}
 	}
 	

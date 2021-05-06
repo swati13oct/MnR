@@ -5303,6 +5303,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CheckiPerseptions();
 		WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
 		validateNew(ActualTFNelement);	
+		System.out.println(ExpecetdTFNNo);
+		System.out.println(ActualTFNelement.getText());
 	//	if(validateNew(TFNelement) && TFNelement.isDisplayed()) {
 			if(ExpecetdTFNNo.contains(ActualTFNelement.getText())) {
 			System.out.println("TFN is Displayed on Page : "+ActualTFNelement.getText());
