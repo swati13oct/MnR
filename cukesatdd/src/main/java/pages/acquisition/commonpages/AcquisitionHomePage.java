@@ -287,7 +287,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public WebElement brokerHeader;
 
 	/* LearnAboutMedicare link */
-	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	//@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	@FindBy(xpath="//a[contains(text(),'Learn About Medicare')]")
 	private WebElement lnkLearnAboutMedicare;
 
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
@@ -953,6 +954,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+				driver.switchTo().window(window);
+				System.out.println(driver.getTitle());
+		}
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPage(driver);
@@ -1222,6 +1230,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 //			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		validateNew(vppTop, 30);
+		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+				driver.switchTo().window(window);
+				System.out.println(driver.getTitle());
+		}
 		if (driver.getCurrentUrl().contains("health-plans")) {
 			return new VPPPlanSummaryPage(driver);
 		} else
