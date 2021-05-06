@@ -323,10 +323,12 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//a[@id='change-location']")
 	private WebElement planOverviewChangeZipCodeLink;
 
-	@FindBy(xpath = "//input[@id='zipcode']")
+	//@FindBy(xpath = "//input[@id='zipcode']")
+	@FindBy(xpath="(//input[@id='zipcode' or contains(@data-rule,'zipcode')])[last()]")
 	private WebElement planOverviewZipCodeFieldBox;
 
-	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
+	//@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'landing')]")
+	@FindBy(xpath="(//button[contains(@class,'zip-button') and contains(@dtmid,'landing') or contains(text(),'Find a Plan')])[last()]")
 	private WebElement planOverviewFindPlanButton;
 
 	@FindBy(xpath = "//*[contains(@id,'pop-btn-1')]")
@@ -1014,6 +1016,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@class,'plan_type_head ng-scope')]")
 	public WebElement planTypeHeading;
+	
+	@FindBy(xpath="(//*[contains(text(),'UnitedHealthcare Group Medicare Advantage (PPO)')]//following::div//ul[@class='highlight-list'])[1]")
+	private WebElement groupPlanMarkettingBullets;
 	
 	private static String NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH = "Is my doctor covered?";
 	private static String NEXT_ACTION_MODAL_MSG_ENROLL_PLAN = "How do I enroll?";
@@ -7103,5 +7108,15 @@ public String continueApplicationuntilSubmitPagevpppages(String Medicarenumber) 
 			return new VPPPlanSummaryPage(driver);
 		}
 		return null;
+	}
+	public void validateGroupPlanMArkettingBullets() {
+		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+				driver.switchTo().window(window);
+				System.out.println(driver.getTitle());
+		}
+		validateNew(groupPlanMarkettingBullets);
 	}
 }
