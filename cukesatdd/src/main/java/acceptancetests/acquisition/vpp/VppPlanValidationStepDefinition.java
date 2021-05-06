@@ -617,7 +617,8 @@ public class VppPlanValidationStepDefinition {
 			}
 	}
 	
-	@Then("^the user navigates to OLE plan summary page and compares benefits value from excel to UI and reports into excel$")
+	//@Then("^the user navigates to OLE plan summary page and compares benefits value from excel to UI and reports into excel$")
+	@Then("^the user navigates to Welcome OLE page and compares premium value from excel to UI and reports into excel$")
 	public void exceldataValidation_OLE_planSummary(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -664,10 +665,8 @@ public class VppPlanValidationStepDefinition {
 				 AepVppPlanSummaryPage planSummaryPage = null;
 				 String currentCellValue = "";
 				 String currentColName = "";
-				// int countyCellNum = 8, planYearCellNum = 10, planNameCellNum = 6; //to be used when running a random row number
-				// int countyCellNum =3, planYearCellNum = 5, planNameCellNum = 2; // to be used for PDP sheets when running a random row number on local
 				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0;
-				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
+				 HashMap <String, String> premiumMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
@@ -716,14 +715,15 @@ public class VppPlanValidationStepDefinition {
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
 							
 									  planSummaryPage.Enroll_OLE_Plan(planName,planType);
-                                    //  benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
-									  benefitsMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
+                                      //benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
+									  premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
 										 
 								 }
 
 								 if(!(currentColName.equalsIgnoreCase("plan year")||currentColName.equalsIgnoreCase("plan id qa script")||currentColName.equalsIgnoreCase("product focus")||currentColName.equalsIgnoreCase("dsnp sub type")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.contains("Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("zip code")||currentColName.equalsIgnoreCase("fips"))) {	
 									 
-									 resultMap = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 //resultMap = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 resultMap = planSummaryPage.comparePremium(currentColName, currentCellValue, premiumMap);
 									 if(resultMap.containsKey(false))
 										 valueMatches = false;
 									 System.out.println(currentColName + " : "+ valueMatches);
