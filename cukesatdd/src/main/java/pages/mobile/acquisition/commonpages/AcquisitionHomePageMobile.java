@@ -1856,7 +1856,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		MobileMenuToolsToHelp();
 
 		scrollToView(ProviderSearch);
-		ProviderSearch.click();
+		//ProviderSearch.click();
 		switchToNewTabNew(ProviderSearch);
 
 		CommonUtility.checkPageIsReadyNew(driver);
