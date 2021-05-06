@@ -59,6 +59,7 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.acquisition.vpp.VppCommonPage;
+import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -4237,4 +4238,40 @@ public class VppCommonStepDefinition {
 			plansummaryPage.handlePlanYearSelectionPopup();
 		}
 	//}
+	@Then("^user clicks on Learn About Medicare$")
+	public void user_clicks_on_Learn_About_Medicare() throws Throwable {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) aquisitionhomepage
+				.openLearnAboutMedicarePage();
+
+		getLoginScenario().saveBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE, learnAboutMedicareHomePage);
+
+	}
+
+	@Then("^Validate user Land on MEDED Page and validate links$")
+	public void validate_user_Land_on_MEDED_Page_and_validate_links() throws Throwable {
+
+	}
+
+	@Then("^Navigate back to previous window$")
+	public void navigate_back_to_previous_window() throws Throwable {
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		String originalHandle = wd.getWindowHandle();
+		    for(String handle : wd.getWindowHandles()) {
+		        if (!handle.equals(originalHandle)) {
+		            wd.switchTo().window(handle);
+		            wd.close();
+		        }
+		    }
+		    wd.switchTo().window(originalHandle);
+	}
+
+	@Then("^validate group plan marketting Bullets$")
+	public void validate_group_plans_markettingBullets() throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+				plansummaryPage.validateGroupPlanMArkettingBullets() ;
+	}
 }
