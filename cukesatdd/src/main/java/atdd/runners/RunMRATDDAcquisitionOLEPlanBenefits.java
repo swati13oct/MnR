@@ -13,13 +13,13 @@ import io.cucumber.testng.PickleWrapper;
 				monochrome = true,
 				plugin = { "pretty",
 						"html:reports/test-report.html",
-						"json:target/cucumber-RunMRATDDAcquisitionOLEBlayerPlanBenefits.json",
+						"json:target/cucumber-RunMRATDDAcquisitionOLEPlanBenefits.json",
 						"timeline:target" },
-				tags = "@OLEBenefits")
+				tags = "@OLEplanSummaryBenefitsAARP01")
 
 
 @RetryCountIfFailed(1)
-public class RunMRATDDAcquisitionOLEBlayerPlanBenefits extends BaseTestConfig {
+public class RunMRATDDAcquisitionOLEPlanBenefits extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
