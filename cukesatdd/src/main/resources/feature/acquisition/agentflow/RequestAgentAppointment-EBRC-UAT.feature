@@ -1,4 +1,3 @@
-@agentAppointment
 Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on Shop Pages
 
   Scenario Outline: <scenario> Verify request an appointment through <pageName>
@@ -10,7 +9,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     When the user clicks on Agent link and validates the correct URL is loaded
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCBlayer @UATRegression @regressionUHC
+    @agentFlowEBRCBlayer @UATRegression @regressionUHC @agentAppointment
     Examples: 
       | scenario           | site | path                                                                                                                                                                                                                                                                                                                          | pageName                     | UHCUrl                      |
       | E2E Scenario 1_UMS | UHC  | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD       | https://www.myuhcagent.com/ |
@@ -22,12 +21,12 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
       | E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html                                                                                                                                                                                                                                                                                           | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
       | E2E Scenario 2_UMS | UHC  | shop/prescription-drug-plans.html                                                                                                                                                                                                                                                                                             | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ |
 
-   # @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAppointmentUHC @regressionUHC
+   # @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAppointmentUHC @regressionUHC @agentAppointment
     #Examples:
      # | scenario           | site | path                                | pageName                     | UHCUrl                      |
       #| E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCUlayer @UATRegression @regressionAARP
+    @agentFlowEBRCUlayer @UATRegression @regressionAARP @agentAppointment
     Examples: 
       | scenario           | site | path                                                                                                                                                                                                                                                                                                                          | pageName                     | UHCUrl                      |
       | E2E Scenario 1_AMP | AARP | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD       | https://www.myuhcagent.com/ |
@@ -47,7 +46,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     Then the user fills the form out and submits the agent appointment application
       | Zipcode | <zipcode> |
 
-    @agentFlowEBRCBlayer @UATRegression @regressionUHC
+    @agentFlowEBRCBlayer @UATRegression @regressionUHC @agentAppointment
     Examples: 
       | scenario           | zipcode | site |
       | E2E Scenario 3_UMS |   90002 | UHC  |
@@ -60,7 +59,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     Then the user fills the form out and submits the agent appointment application
       | Zipcode | <zipcode> |
 
-    @agentFlowEBRCUlayer @UATRegression @regressionAARP
+    @agentFlowEBRCUlayer @UATRegression @regressionAARP @agentAppointment
     Examples: 
       | scenario           | zipcode | site |
       | E2E Scenario 3_AMP |   90002 | AARP |
@@ -79,12 +78,12 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC
+    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC @agentAppointment
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_UMS |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCUlayer @UATRegression @insuranceSolutionAgentAgentAppointmentAARP
+    @agentFlowEBRCUlayer @UATRegression @insuranceSolutionAgentAgentAppointmentAARP @agentAppointment
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_AMP |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |
