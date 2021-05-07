@@ -277,12 +277,12 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     And the user clicks on Submit button using email address ""
     And the user clicks on Submit button using email address "namita_meher@optum.com"
 
-    @vppPlanSummaryCommonAARP01
+    @vppPlanCompareCommon_AARP01New
     Examples: 
       | Scenario           | site | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | https://www.myuhcagent.com/ |
 
-    @vppPlanSummaryCommonUHC01
+    @vppPlanCompareCommon_UHC01New
     Examples: 
       | Scenario           | site | UHCUrl                      |
       | E2E Scenario 3_UMS | UHC  | https://www.myuhcagent.com/ |
@@ -411,12 +411,44 @@ Feature: 1.01.4 UAT Feature to test VPP scenarios
     Then the user navigates to Medicare Information Page
     And the user cancels enrollment and navigates to homepage
 
-    @vppPlanSummaryCommonAARP01
+    @vppPlanCompareCommon_AARP01New
     Examples: 
       | Scenario              | site | zipcode | zipcode2 | isMultutiCounty | county            | county2     | plantype | plantype1 | drug1   | drug2     | drug3    | planyear | planname                        | planname1                            | firstname | lastname | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | emailConfirmation | goGreen | phoneno    | mobileno   | middlename  |
       | VPP-E2E Scenario5_AMP | AARP |   33111 |    90210 | No              | Miami-Dade County | Los Angeles | PDP      | MAPD      | Lipitor | Ibuprofen | Nicomide | next     | AARP MedicareRx Walgreens (PDP) | AARP Medicare Advantage Choice (PPO) | GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami    | No                     | 123 Test      | Miami       | FL           |      33111 | test@test.com | yes               | yes     | 1234567890 | 2345678901 | Test_Middle |
 
-    @vppPlanSummaryCommonUHC01
+    @vppPlanCompareCommon_UHC01New
     Examples: 
       | Scenario              | site | zipcode | zipcode2 | isMultutiCounty | county            | county2     | plantype | plantype1 | drug1   | drug2     | drug3    | planyear | planname                        | planname1                            | firstname | lastname | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | emailConfirmation | goGreen | phoneno    | mobileno   | middlename  |
       | VPP-E2E Scenario5_UMS | UHC  |   33111 |    90210 | No              | Miami-Dade County | Los Angeles | PDP      | MAPD      | Lipitor | Ibuprofen | Nicomide | next     | AARP MedicareRx Walgreens (PDP) | AARP Medicare Advantage Choice (PPO) | GOTTFRIED | GARRAND  | 04261944 | Male   | 003 Morris Rd | Miami    | No                     | 123 Test      | Miami       | FL           |      33111 | test@test.com | yes               | yes     | 1234567890 | 2345678901 | Test_Middle |
+
+       Scenario Outline: <site>  - Validate that M&R Prospective client, user wants to use VPP to view details and enroll for a plan from Connector Model plus landing page into  Medicare Education.
+    Given the user is on external acquisition site landing page
+      | Site Name | <site> |
+    Then user clicks on Learn About Medicare
+    Then Validate user Land on MEDED Page and validate links
+    Then Navigate back to previous window
+    When the user performs plan search using following information
+      | Zip Code        | <zipcode>         |
+      | Is Multi County | <isMultutiCounty> |
+      | County Name     | <county>          |
+    And the user views the plans of the below plan type
+      | Plan Type | <plantype> |
+    And the user selects plan year
+      | Plan Year | <planyear> |
+    Then I validate "<plantype>" plans with names "<planNamesList>" are listed correctly on summary page
+    Then user changes zipcode within VPP page
+      | Zip Code        | <zipcode2>      |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <county2>       |
+    Then I validate "<plantype>" plans with names "<planNamesList2>" are listed correctly on summary page
+    And I validate view more and view less links on plan summary
+    Then I save "<plantype>" plans and "<SavePlansCount>" plans and verify the count update on shopping cart
+    Then the user validates the right rail
+    Then the user validates the Need Help Section in the right rail
+    Then the user validates the TFN in the Need Help Section
+
+    @vppPlanCompareCommon_UHC01New
+    Examples: 
+      | site       | zipcode | isMultiCounty | county     | planNamesList                                                                                                                                                                                                                                                                                                                                                                                                                                              | plantype | planyear | zipcode2 | county2  | planNamesList2                                                                                                                                | SavePlansCount |
+      | Myuhcplans |   33111 | NO            | Miami-Dade | Preferred Medicare Assist Plan 2 (HMO D-SNP),Preferred Medicare Assist Plan 1 (HMO D-SNP),Medica HealthCare Plans MedicareMax Plus (HMO D-SNP),UnitedHealthcare Dual Complete Choice (PPO D-SNP),UnitedHealthcare Dual Complete RP - FL (Regional PPO D-SNP),Preferred Special Care Miami-Dade (HMO C-SNP),UnitedHealthcare Nursing Home Plan (PPO I-SNP),UnitedHealthcare Assisted Living Plan (PPO I-SNP),UnitedHealthcare Nursing Home Plan (HMO I-SNP) | SNP      | current  |    37714 | Campbell | UnitedHealthcare Dual Complete (HMO D-SNP),UnitedHealthcare Dual Complete ONE (HMO D-SNP),UnitedHealthcare Dual Complete ONE Plus (HMO D-SNP) |              1 |
+      

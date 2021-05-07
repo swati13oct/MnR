@@ -865,7 +865,7 @@ public class CommonConstants {
 	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Prd";
 	private static ThreadLocal<String> MAIN_WINDOW_HANDLE_ACQUISITION = new ThreadLocal<>();
 
-	public static String getMainWindowHandle() {
+	public synchronized static String getMainWindowHandle() {
 		return MAIN_WINDOW_HANDLE_ACQUISITION.get();
 	}
 
@@ -970,7 +970,7 @@ public class CommonConstants {
 	
 	private static ThreadLocal<String> SELECTED_STATE = new ThreadLocal<>();
 
-	public static String getSelectedState() {
+	public synchronized static String getSelectedState() {
 		return SELECTED_STATE.get();
 	}
 

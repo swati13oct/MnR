@@ -570,6 +570,19 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
 	}
+	
+	public int entersZipcodeAndPlancount(String zipcode, String year) {
+
+		validateNew(zipCodeTextfield);
+		zipCodeTextfield.sendKeys(zipcode);
+		validateNew(continueButton);
+		jsClickNew(continueButton);
+		selectYear(year);
+
+		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+
+		return topicDropDownValues.size();
+	}
 
 	public AcquisitionHomePageMobile returnToAcqHomePage() {
 		// TODO Auto-generated method stub

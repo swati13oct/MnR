@@ -52,7 +52,7 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 		if (!result.isSuccess()) {
 			setRetryCounter(result);
 			if (0 < retryCounter.getAndDecrement()) {
-				System.out.println("Retrying for test runner: " + result.getTestClass().getName());
+				System.out.println("Retrying scenario using test runner: " + result.getTestClass().getName());
 				result.setStatus(ITestResult.SKIP);
 				return true;
 			} else {

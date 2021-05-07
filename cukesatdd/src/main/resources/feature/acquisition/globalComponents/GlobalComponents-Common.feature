@@ -317,15 +317,15 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @MedSuppOnlyPages_GlobalCompsAARP @regressionAARP
     Examples: 
-      | site | path                                                         | pageName          | tfnXpath       | tfnFlag |
-      | AARP | medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      | AARP | medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
+      | AARP | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
+      | AARP | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
 
     @MedSuppOnlyPages_GlobalCompsUHC @regressionUHC
     Examples: 
-      | site | path                                                         | pageName          | tfnXpath       | tfnFlag |
-      | UHC  | medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      | UHC  | medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
+      | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
+      | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
 
   @GlobalComponentsAARPNewShopPages
   Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>

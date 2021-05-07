@@ -3828,6 +3828,25 @@ public class VppPlanCompareMobile {
 		
 	}
 	
+	@Then("^user fills out medsup form and proceeds to next pages$")
+	public void fillOutMedSuppForms(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipCode = memberAttributesMap.get("Zip Code");
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.fillDetails(zipCode,DateOfBirth);
+		
+	}
+	
 
 	@Then("^agent saves two plans as favorite on AARP site for user$")
 	public void agent_saves_two_plans_as_favorite_on_AARP_site_for_user(DataTable givenAttributes) {

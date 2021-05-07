@@ -114,8 +114,8 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		try {
 
 			if (countyDropdown.isDisplayed()) {
-				countyDropdown.click();
-				// jsClickNew(countyDropdown);
+				//countyDropdown.click();
+				jsClickNew(countyDropdown);
 				// CommonUtility.waitForPageLoad(driver, countyRows, 30);
 				// driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
 				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText()
