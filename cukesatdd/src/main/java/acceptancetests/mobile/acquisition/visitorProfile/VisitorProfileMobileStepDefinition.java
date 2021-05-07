@@ -47,15 +47,7 @@ public class VisitorProfileMobileStepDefinition {
 		return loginScenario;
 	}
 
-	@Given("^the agent is on shopper profile login page$")
-	public void the_agent_on_shopperprofile_login_site() {
-		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "ARE"); // changed on 3/3/21 as part of
-																						// AARP/UHC cleanup
-		aquisitionhomepage.openTelesalesAgentPortal();
-		aquisitionhomepage.fixPrivateConnection();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-	}
+
 
 	@Given("^I am an agent logged into the cloak in tool$")
 	public void i_am_an_agent_logged_into_the_cloak_in_tool(DataTable userData) {
