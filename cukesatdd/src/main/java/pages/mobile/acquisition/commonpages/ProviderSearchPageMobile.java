@@ -464,7 +464,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, PrintEmailBtn, 30);
 			// validateNew(providerCard);
 			scrollToView(PrintEmailBtn);
-			validateNew(PrintEmailBtn);
+			
 		}
 	}
 

@@ -510,6 +510,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private static String UMS_ACQISITION_PAGE_URL_NEW = MRConstants.UHC_URL_NEW;
 	private static String UMS_ACQISITION_OFFLINE_PAGE_URL = MRConstants.UHC_URL_OFFLINE;
 	private static String UMS_ACQISITION_PROD_PAGE_URL = MRConstants.UHCM_URL_PROD;
+	
+
+	private static String AARP_TELESALES_AGENT_PAGE_URL = MRConstants.AARP_TELESALES_AGENT_PAGE_URL;
+	private static String AARP_TELESALES_AGENT_PAGE_URL_STAGE = MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE;
+	private static String AARP_TELESALES_AGENT_PAGE_URL_Team = MRConstants.AARP_TELESALES_AGENT_PAGE_URL_Team;
 
 	private PageData globalFooter;
 
@@ -2610,12 +2615,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	
 	public void openTelesalesAgentPortal() {
 		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
-			startNewMobile(MRConstants.AARP_TELESALES_AGENT_PAGE_URL);
+			startNewMobile(AARP_TELESALES_AGENT_PAGE_URL);
 		} else if (MRScenario.environment.equalsIgnoreCase("stage")) {
-			startNewMobile(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_STAGE);
+			startNewMobile(AARP_TELESALES_AGENT_PAGE_URL_STAGE);
 		}else if (MRScenario.environment.contains("digital-uatv2")) {
-			startNewMobile(MRConstants.AARP_TELESALES_AGENT_PAGE_URL_Team);
+			startNewMobile(AARP_TELESALES_AGENT_PAGE_URL_Team);
 		}
+		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
 	/* Added for Mobile */
