@@ -1,4 +1,4 @@
-@UATRegression
+@UATRegression @globalComponent
 Feature: 1.12 UAT - Medicare Education Pages flows
 
   @GlobalComponentsAARPPages
@@ -20,33 +20,33 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
 
     # Then the user validates SAM re-active Chat
-    @MedEdPages_1_GlobalCompsAARP
+    @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                                     | pageName                              | tfnXpath            | tfnFlag                                                        |      |
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | AARP Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_1_GlobalCompsUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                                     | pageName                              | tfnXpath         | tfnFlag                                                        |      |
       | E2E Scenario 2_UMS | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices | UnitedHealthcare | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_2_GlobalCompsAARP
+    @MedEdPages_2_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                             | pageName                             | tfnXpath            | tfnFlag                                                        |      |
       | E2E Scenario 5_AMP | AARP | medicare-education/medicare-advantage-plans.html | Learn about Medicare Advantage Plans | AARP Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_2_GlobalCompsUHC
+    @MedEdPages_2_GlobalCompsUHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                             | pageName                          | tfnXpath         | tfnFlag                                                        |      |
       | E2E Scenario 5_UMS | UHC  | medicare-education/medicare-advantage-plans.html | Medicare Advantage (Part C) Plans | UnitedHealthcare | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_3_GlobalCompsAARP
+    @MedEdPages_3_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                                  | pageName                   | tfnXpath            | tfnFlag                                                        |      |
       | E2E Scenario 4_AMP | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | AARP Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
       | E2E Scenario 6_AMP | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | AARP Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_3_GlobalCompsUHC
+    @MedEdPages_3_GlobalCompsUHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                                  | pageName                   | tfnXpath         | tfnFlag                                                        |      |
       | E2E Scenario 4_UMS | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | UnitedHealthcare | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
@@ -74,12 +74,12 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user click on next article link
 
-    @MedEdPages_1_GlobalCompsAARP
+    @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                      | pageName                            | tfnXpath                                                       | tfnFlag |
       | E2E Scenario 3_AMP | AARP | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @MedEdPages_1_GlobalCompsUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                      | pageName                            | tfnXpath                                                       | tfnFlag |
       | E2E Scenario 3_UMS | UHC  | medicare-education/medicare-benefits.html | Prescriptions, Providers & Benefits | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -105,15 +105,15 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user clicks on Agent link and validates the correct URL is loaded from Med Ed Page
       | UHC Agent URL | <UHCUrl> |
-    #Then the user come back to Med-ed page
+    Then the user come back to Med-ed page
     Then the user click on next article link
 
-    @MedEdPages_1_GlobalCompsAARP
+    @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                         | pageName             | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_AMP | AARP | medicare-education/medicare-eligibility.html | Medicare Eligibility | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-    @MedEdPages_1_GlobalCompsUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                         | pageName             | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_UMS | UHC  | medicare-education/medicare-eligibility.html | Medicare Eligibility | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
@@ -136,12 +136,12 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user click on next article link
 
-    @MedEdPages_1_GlobalCompsAARP
+    @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                                     | pageName         | tfnXpath                                                       | tfnFlag |
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @MedEdPages_1_GlobalCompsUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                                     | pageName         | tfnXpath                                                       | tfnFlag |
       | E2E Scenario 2_UMS | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Coverage Choices | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -166,12 +166,12 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
     Then the user click on next article link
 
-    @MedEdPages_1_GlobalCompsAARP
+    @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                   | pageName    | tfnXpath                                                       | tfnFlag |
       | E2E Scenario 4_AMP | AARP | medicare-education/medicare-costs.html | Cost Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @MedEdPages_1_GlobalCompsUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                   | pageName    | tfnXpath                                                       | tfnFlag |
       | E2E Scenario 4_UMS | UHC  | medicare-education/medicare-costs.html | Cost Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -199,15 +199,15 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
 
-    @MedEdPages_1_GlobalCompsAARP
+    @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples: 
-      | Scenario           | site | plantype | tfnXpath                                                       | tfnFlag |  |
-      | E2E Scenario 5_AMP | AARP | MA       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | Scenario           | site | plantype | tfnXpath                                                       | tfnFlag |
+      | E2E Scenario 5_AMP | AARP | MA       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @MedEdPages_1_GlobalCompsUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples: 
-      | Scenario           | site | plantype | tfnXpath                                                       | tfnFlag |  |
-      | E2E Scenario 5_UMS | UHC  | MA       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |  |
+      | Scenario           | site | plantype | tfnXpath                                                       | tfnFlag |
+      | E2E Scenario 5_UMS | UHC  | MA       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site for plantype <plantype> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -223,12 +223,12 @@ Feature: 1.12 UAT - Medicare Education Pages flows
       | TFNflag  | <tfnFlag>  |
     Then the user validates whether call icon is visible
 
-    @MedEdPages_1_GlobalCompsAARP
+    @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples: 
       | Scenario           | site | path                                                  | pageName          | tfnXpath                                                       | tfnFlag |
       | E2E Scenario 6_AMP | AARP | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @MedEdPages_1_GlobalCompsUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples: 
       | Scenario           | site | path                                                  | pageName          | tfnXpath                                                       | tfnFlag |
       | E2E Scenario 6_UMS | UHC  | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |

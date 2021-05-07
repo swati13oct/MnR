@@ -1,34 +1,22 @@
 package acceptancetests.AEM;
 
-import gherkin.formatter.model.DataTableRow;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import pages.AEM.CQLoginPage;
 import pages.AEM.CQPage;
-import pages.AEM.*;
 
 
 /**
@@ -36,7 +24,8 @@ import pages.AEM.*;
  */
 public class CQStepDefinition {
 	
-	static int iRedirectionCounter = 0;
+	//Use Atomic integer for thread safety, refer RetryAnalyzer
+	int iRedirectionCounter = 0;
 
 	@Autowired
 	MRScenario loginScenario;
@@ -54,15 +43,15 @@ public class CQStepDefinition {
 	{
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		List<DataTableRow> AttributesRow = data
-				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		/*List<DataTableRow> AttributesRow = data
+				.getGherkinRows();
 		
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
 			memberAttributesMap .put(AttributesRow.get(i).getCells()
 					.get(0), AttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String username = memberAttributesMap.get("Username");
 		String password = memberAttributesMap.get("Password");
 		
@@ -103,15 +92,16 @@ public class CQStepDefinition {
 	public void the_user_login_in_AEM(DataTable data) {
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		List<DataTableRow> AttributesRow = data
-				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+		/*List<DataTableRow> AttributesRow = data
+				.getGherkinRows();
 		
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
 			memberAttributesMap .put(AttributesRow.get(i).getCells()
 					.get(0), AttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String username = memberAttributesMap.get("Username");
 		String password = memberAttributesMap.get("Password");
 		
@@ -132,15 +122,16 @@ public class CQStepDefinition {
 	
 	@Then("^the user validates the static tab components$")
 	public void the_user_validates_the_static_tab_components(DataTable data) {
-		List<DataTableRow> AttributesRow = data
-				.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(data);
+		/*List<DataTableRow> AttributesRow = data
+				.getGherkinRows();
 		
 		for (int i = 0; i < AttributesRow.size(); i++) {
 
 			memberAttributesMap .put(AttributesRow.get(i).getCells()
 					.get(0), AttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String url = memberAttributesMap.get("StaticURL");
 		CQPage cqPage=(CQPage)getLoginScenario().getBean(PageConstants.CQ_PAGE);
 		cqPage.validateDataLayerStaticTab(url);

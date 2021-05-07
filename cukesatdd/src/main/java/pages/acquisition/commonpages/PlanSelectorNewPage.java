@@ -3,7 +3,6 @@
  */
 package pages.acquisition.commonpages;
 
-import java.awt.Desktop.Action;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -11,20 +10,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 
-import atdd.framework.UhcDriver;
-
-public class PlanSelectorNewPage extends UhcDriver {
+public class PlanSelectorNewPage extends GlobalWebElements {
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -170,7 +162,7 @@ public class PlanSelectorNewPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 

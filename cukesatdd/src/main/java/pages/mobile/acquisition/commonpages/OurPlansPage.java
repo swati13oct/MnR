@@ -34,7 +34,7 @@ public class OurPlansPage extends UhcDriver {
 	private WebElement OurPlansLink;
 
 	@FindBy(id = "subnav_2")
-	public static WebElement ourPlansDropdown;
+	public WebElement ourPlansDropdown;
 
 	@FindBy(id = "nav-zipcode")
 	private WebElement zipfield;

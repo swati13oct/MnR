@@ -4,23 +4,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
-import pages.acquisition.commonpages.ComparePlansPage;
 
 /**
  * Functionality: VPP flow for Acquisition
@@ -133,7 +134,7 @@ public class VppEmailAndPrintStepDefinition {
 			VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToFirstPlanForPlanDetails(planType);
-			Assert.assertTrue("Error in Loading the Plan Details Page", vppPlanDetailsPage != null);
+			Assertion.assertTrue("Error in Loading the Plan Details Page", vppPlanDetailsPage != null);
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
 			wDriver=vppPlanSummaryPage.driver;
 		} 
@@ -146,7 +147,7 @@ public class VppEmailAndPrintStepDefinition {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		
+		CommonUtility commonUtils = new CommonUtility();
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			int plansForCompare=0;
@@ -154,15 +155,15 @@ public class VppEmailAndPrintStepDefinition {
 				plansForCompare=plansummaryPage.checkAllMAPlans();
 			} else {  //note: if not MA then it's PDP
 				//note: PDP somehow takes longer to load
-				CommonUtility.checkPageIsReady(wDriver);
+				commonUtils.checkPageIsReady(wDriver);
 				util.waitForSummaryPageToLoad();
 				plansForCompare=plansummaryPage.checkAllPDPlans();
-				CommonUtility.checkPageIsReady(wDriver);
+				commonUtils.checkPageIsReady(wDriver);
 				util.waitForComparePageToLoad();
 			}
 			getLoginScenario().saveBean(PageConstants.plansForCompare, String.valueOf(plansForCompare));
 			ComparePlansPage comparePlansPage = plansummaryPage.clickFirstComparePlanBtn(planType);
-			Assert.assertTrue("Error in loading the compare plans page", comparePlansPage != null);
+			Assertion.assertTrue("Error in loading the compare plans page", comparePlansPage != null);
 			wDriver=comparePlansPage.driver;
 		
 			getLoginScenario().saveBean(PageConstants.TeamC_Plan_Compare_Page, comparePlansPage);
@@ -195,6 +196,7 @@ public class VppEmailAndPrintStepDefinition {
 	public void validate_summary_deeplink() {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
+		CommonUtility commonUtils = new CommonUtility();
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String deepLinkStringId="";
 		String infoMapStringId="";
@@ -206,11 +208,11 @@ public class VppEmailAndPrintStepDefinition {
 		//note: use new driver to achieve clear cache
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
-		CommonUtility.checkPageIsReady(newTestDriver);
+		commonUtils.checkPageIsReady(newTestDriver);
 		//tbd wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
-		CommonUtility.checkPageIsReady(newTestDriver);
+		commonUtils.checkPageIsReady(newTestDriver);
 		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		List<String> noteList=util.validatePlanSummaryEmailDeeplink(planType, deepLinkStringId, infoMapStringId, deepLink, origPage);
 		getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
@@ -221,6 +223,7 @@ public class VppEmailAndPrintStepDefinition {
 	public void validate_detail_page_deeplink() throws InterruptedException {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
+		CommonUtility commonUtils = new CommonUtility();
 		String deepLinkStringId=PageConstants.DETAIL_PAGE_DEEPLINK;
 		String infoMapStringId=PageConstants.DETAIL_PAGE_INFO;
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
@@ -230,12 +233,12 @@ public class VppEmailAndPrintStepDefinition {
 		//note: use new driver to achieve clear cache
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
-		CommonUtility.checkPageIsReady(newTestDriver);
+		commonUtils.checkPageIsReady(newTestDriver);
 		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		Thread.sleep(1000);
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
-		CommonUtility.checkPageIsReady(newTestDriver);
+		commonUtils.checkPageIsReady(newTestDriver);
 		util.checkModelPopup(newTestDriver);
 		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util = new EmailAndPrintUtil(newTestDriver);
@@ -249,6 +252,7 @@ public class VppEmailAndPrintStepDefinition {
 	public void validate_compare_page_deeplink() {
 		WebDriver wDriver=(WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
+		CommonUtility commonUtils = new CommonUtility();
 		String deepLinkStringId=PageConstants.COMPARE_PAGE_DEEPLINK;
 		String infoMapStringId=PageConstants.COMPARE_PAGE_INFO;
 		String planType=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
@@ -258,11 +262,11 @@ public class VppEmailAndPrintStepDefinition {
 		//note: use new driver to achieve clear cache
 		WebDriver newTestDriver=getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
-		CommonUtility.checkPageIsReady(newTestDriver);
+		commonUtils.checkPageIsReady(newTestDriver);
 		wDriver.navigate().refresh(); //note: need this to trick the original driver from timing out before the validation is done
 		util=new EmailAndPrintUtil(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
-		CommonUtility.checkPageIsReady(newTestDriver);
+		commonUtils.checkPageIsReady(newTestDriver);
 		util.checkModelPopup(newTestDriver);
 
 		//note: temperary bypass for now until the flash issue is resolved
@@ -275,13 +279,14 @@ public class VppEmailAndPrintStepDefinition {
 	}
 
 	@SuppressWarnings("unchecked")   
-	@cucumber.api.java.After
+	@After
 	public void testResultNote(Scenario scenario) { 
 		if(null!=getLoginScenario().getBean(VPPCommonConstants.TEST_RESULT_NOTE)) {   
 			List<String> testNote=(List<String>) getLoginScenario()
 					.getBean(VPPCommonConstants.TEST_RESULT_NOTE);
 			for (String s: testNote) {   
-				scenario.write(s);
+//				scenario.write(s);
+				scenario.log(s);
 			}
 			testNote.clear(); 
 		}
@@ -289,13 +294,14 @@ public class VppEmailAndPrintStepDefinition {
 
 	@And("^the user views the plans of the below plan type on test site$")
 	public void user_performs_planSearch(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		String site = givenAttributesMap.get("Site");
@@ -334,7 +340,7 @@ public class VppEmailAndPrintStepDefinition {
 
 		String plansForCompare=(String) getLoginScenario().getBean(PageConstants.plansForCompare);
 		util.clickOnBackToAllPlansFromCompareBackToSummaryPage();
-		Assert.assertTrue("Error in validating all plans are still selected",util.validateAllPlansCheckedOnSummaryPage(plansForCompare));
+		Assertion.assertTrue("Error in validating all plans are still selected",util.validateAllPlansCheckedOnSummaryPage(plansForCompare));
 	}	
 
 	@When("^the user validate the email link option in plan compare on test site$")

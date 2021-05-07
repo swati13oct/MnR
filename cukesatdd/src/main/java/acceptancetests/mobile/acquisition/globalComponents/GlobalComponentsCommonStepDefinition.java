@@ -5,19 +5,19 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
@@ -39,8 +39,6 @@ import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 
-
-
 public class GlobalComponentsCommonStepDefinition {
 	
 	@Autowired
@@ -60,7 +58,7 @@ public class GlobalComponentsCommonStepDefinition {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateHeaderLinks();
 		} else {
-			Assert.fail("Home page not found");
+			Assertion.fail("Home page not found");
 		}
 	}
 	
@@ -73,7 +71,7 @@ public class GlobalComponentsCommonStepDefinition {
 			aquisitionhomepage.validateGlobalFooterLinks();
 			//aquisitionhomepage.clickBrowserBackButton();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 	
@@ -118,7 +116,7 @@ public class GlobalComponentsCommonStepDefinition {
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
-			Assert.fail("DCE Redesign page object not loaded");
+			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
 //	@Given("^the user navigates to following medicare acquisition site page$")
@@ -146,7 +144,7 @@ public class GlobalComponentsCommonStepDefinition {
 			
 			aquisitionhomepage.validateSubNavShopPlanLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 	
@@ -157,18 +155,19 @@ public class GlobalComponentsCommonStepDefinition {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateSubNavMedEdLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 	
 	@Then("^the user validates TFN on the page$") 
 	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -191,7 +190,6 @@ public class GlobalComponentsCommonStepDefinition {
 	
 	@When("^user vaidates the state drop down link on the home page$")
 	public void user_vaidates_the_state_drop_down_link_on_home_page() throws Throwable {
-		
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateStateDropDown();
@@ -230,7 +228,7 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE, aboutUsAARPPage);
 			Assert.assertTrue(true);
 		} else {
-			Assert.fail("Aboutus page not found");
+			Assertion.fail("Aboutus page not found");
 		}
 	}
 	
@@ -242,9 +240,9 @@ public class GlobalComponentsCommonStepDefinition {
 		ContactUsAARPPageMobile contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
 		if (contactUsAARPPage != null) {
 			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("contactus page not found");
+			Assertion.fail("contactus page not found");
 		}
 	}
 
@@ -258,9 +256,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE,
 					siteMapAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("sitemap page not found");
+			Assertion.fail("sitemap page not found");
 		}
 	}
 	
@@ -274,9 +272,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE,
 					privacyPolicyAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("privacypolicy page not found");
+			Assertion.fail("privacypolicy page not found");
 		}
 	}
 
@@ -290,9 +288,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_TERMS_AND_CONDITIONS_PAGE,
 					termsnConditionsAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("terms&conditions page not found");
+			Assertion.fail("terms&conditions page not found");
 		}
 	}
 
@@ -305,9 +303,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE,
 					disclaimersAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("disclaimers page not found");
+			Assertion.fail("disclaimers page not found");
 		}
 	}
 
@@ -320,9 +318,9 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE,
 					agentsnBrokersAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("agents&brokers page not found");
+			Assertion.fail("agents&brokers page not found");
 		}
 	}
 
@@ -333,7 +331,7 @@ public class GlobalComponentsCommonStepDefinition {
 		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		  AcquisitionHomePageMobile aquisitionHomePageReload =
 		  aquisitionhomepage.homeFooterClick();
-		  Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
+		  Assertion.assertTrue("home page not found", aquisitionHomePageReload!= null); 
 	  }
 
 	  @And("^the user clicks on browser back button$")
@@ -356,22 +354,24 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 	  public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-			List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
+			/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 						memberAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 			return memberAttributesMap;
 		}
 
 		@Then("^the user validates TFN on need help section of Shop pages$")
 		public void the_user_validates_TFN_on_need_help_section_of_Shop_pages(DataTable givenAttributes) throws Throwable {
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 						memberAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 			String tfnXpath = memberAttributesMap.get("TFNxpath");
 			String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -385,12 +385,13 @@ public class GlobalComponentsCommonStepDefinition {
 		}
 		@Then("^the user validates TFN on right rail Medicare Article$")
 		public void the_user_validates_TFN_on_right_rail_Medicare_article(DataTable givenAttributes) throws Throwable {
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 						memberAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 			String tfnXpath = memberAttributesMap.get("TFNxpath");
 			String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -415,12 +416,13 @@ public class GlobalComponentsCommonStepDefinition {
 
 		@Then("^user check inner page links on the Medicare Education page$")
 		public void user_check_inner_page_links(DataTable givenAttributes) {
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 						memberAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 			String pageName = memberAttributesMap.get("PageName");
 
 			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
@@ -601,12 +603,13 @@ public class GlobalComponentsCommonStepDefinition {
 
 		@Then("^the user navigates to plan information page$")
 		public void user_navigates_to_plan(DataTable givenAttributes) {
-			List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			Map<String, String> memberAttributesMap = new HashMap<String, String>();
+			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 						memberAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 			String planType = memberAttributesMap.get("planType");
 			LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
 					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);

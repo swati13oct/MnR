@@ -5,9 +5,7 @@ package pages.mobile.acquisition.ole;
 
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +13,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 /**
@@ -121,7 +120,7 @@ public class AuthorizationPageMobile extends UhcDriver{
 		if(PageHeader.getText().contains("Authorization"))
 			System.out.println("Page header is Displayed : "+PageHeader.getText());
 		else
-			Assert.fail("Error in validating the Authorization page loaded");
+			Assertion.fail("Error in validating the Authorization page loaded");
 			
 	}
 

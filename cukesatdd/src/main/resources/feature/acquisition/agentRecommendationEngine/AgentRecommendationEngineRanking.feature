@@ -1,7 +1,7 @@
-@AgentRecommendationEngine @ARERegression
+@agentRecommendationEngine @ARERegression @regressionAARP
 Feature: Agent Recommendation Engine - Verify ARE elements
 
-  @ARE @AREElements @dropdownUI @F439411
+  @ARE @AREElements @dropdownUI @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate ARE dropdown UI
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -36,7 +36,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
       | qavgogine | qavgogine | ATDD4STG@MEMBERDD.COM | None          | current  |
       | qavgogine | qavgogine | SPOP@NONMEMBER.COM    | None          | current  |
 
-  @ARE @ViewPlanDetailsARE @F439411
+  @ARE @ViewPlanDetailsARE @F439411 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate View Plan Details in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -109,8 +109,8 @@ Feature: Agent Recommendation Engine - Verify ARE elements
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions                               | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
       #| qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | Mosaic(HMO),Choice(PPO),Essential(HMO),Essential(RegionalPPO),Plan2(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan1(HMO),Plan4(RegionalPPO) |
-      | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                           | YES                | YES           |            |
-      | qavgogine | qavgogine | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,travel,lowpremium,drug,doctor | YES                | YES           |            |
+      | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium                           | YES                | YES           | [blank]    |
+      | qavgogine | qavgogine | APISTG@MEMBERDD.COM   | None          | current  |          10001 | hearing,vision,travel,lowpremium,drug,doctor | YES                | YES           | [blank]    |
 
   @ARE @deleteaddplans @F487396
   Scenario Outline: - <Email> To Verify agent login and validate deleted plans reordering in ARE
@@ -132,7 +132,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP | RankingOptions     | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           |            |
+      | qavgogine | qavgogine | ATDD5STG@MEMBERDD.COM | None          | current  |          10001 | fitness,lowpremium | YES                | YES           | [blank]    |
 
   @ARE @PlansReorder @MCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for MCE
@@ -156,7 +156,7 @@ Feature: Agent Recommendation Engine - Verify ARE elements
 
     Examples: 
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | EstimateMC | PlanCompareZIP | RankingOptions | DisplayCurrentPlan | ChangeInOrder | PlansOrder |
-      | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | YES                | YES           |            |
+      | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | YES        |          10001 | mce,lowpremium | YES                | YES           | [blank]    |
 
   @ARE @PlansReorder @NOMCE @F487422
   Scenario Outline: - <Email> To Verify agent login and validate Plans reorder in ARE for NoMCE

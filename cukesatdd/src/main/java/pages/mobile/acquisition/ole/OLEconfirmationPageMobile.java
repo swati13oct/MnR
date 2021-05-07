@@ -8,20 +8,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 /**
@@ -317,7 +313,7 @@ public Connection createDataBaseConnection() {
 			for (String key : matched.keySet()) {
 				String matchedValue = key + "\t" + matched.get(key).toString();
 			    System.out.println(matchedValue);
-			  Assert.assertTrue(matchedValue, flag);
+			  Assertion.assertTrue(matchedValue, flag);
 			}
 
 			// print out mismatched
@@ -329,7 +325,7 @@ public Connection createDataBaseConnection() {
 			for (String key : mismatched.keySet()) {
 				String mismatchedValue = key + "\t" + mismatched.get(key).toString();
 			    System.out.println(mismatchedValue);
-			  Assert.assertTrue(mismatchedValue, flag);
+			  Assertion.assertTrue(mismatchedValue, flag);
 			}
 		}
 		return flag;

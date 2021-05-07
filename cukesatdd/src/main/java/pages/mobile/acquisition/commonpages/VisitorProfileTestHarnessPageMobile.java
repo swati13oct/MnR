@@ -1,14 +1,13 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
 public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
@@ -238,7 +237,7 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 			System.out.println("Navigation to Plan Compare page is Passed");
 			return new ComparePlansPageMobile(driver);
 		} else {
-			Assert.fail("Navigation to Plan Compare page is failed");
+			Assertion.fail("Navigation to Plan Compare page is failed");
 		}
 		return null;
 	}
@@ -264,7 +263,7 @@ public class VisitorProfileTestHarnessPageMobile extends UhcDriver {
 			System.out.println("Navigation to Plan Details page is Passed");
 			return new PlanDetailsPageMobile(driver);
 		} else {
-			Assert.fail("Navigation to Plan Details page is failed");
+			Assertion.fail("Navigation to Plan Details page is failed");
 		}
 		return null;
 	}

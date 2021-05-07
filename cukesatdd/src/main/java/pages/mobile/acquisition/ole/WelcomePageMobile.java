@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,13 +14,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ole.CancelOLEModal;
-import pages.acquisition.ole.LearnMoreModal;
-import pages.acquisition.ole.LeavingOLEmodal;
 import pages.acquisition.ole.MedicareInformationPage;
-import pages.acquisition.ole.PersonalInformationPage;
 
 public class WelcomePageMobile extends UhcDriver{
 	
@@ -178,6 +174,8 @@ public class WelcomePageMobile extends UhcDriver{
 		System.out.println("TFN not displayed in OLE right rail");
 		return false;
 	}
+	
+	
 
 	public PersonalInformationPageMobile navigate_to_Personal_Information_page() {
 		
@@ -265,7 +263,7 @@ public class WelcomePageMobile extends UhcDriver{
 				try {
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
-					Assert.assertTrue("Rider Benefit is not available for this plan",
+					Assertion.assertTrue("Rider Benefit is not available for this plan",
 							riderBenefit.getAttribute("class").contains("benefitAvailable"));
 					System.out.println("Benfit is Available");
 					break;
@@ -280,7 +278,7 @@ public class WelcomePageMobile extends UhcDriver{
 				try {
 					waitforElement(riderBenefit);
 					validate(riderBenefit);
-					Assert.assertTrue("Rider Benefit is available for this plan",
+					Assertion.assertTrue("Rider Benefit is available for this plan",
 							riderBenefit.getAttribute("class").contains("benefitUnavailable"));
 					System.out.println("Benfit is UnAvailable");
 					break;

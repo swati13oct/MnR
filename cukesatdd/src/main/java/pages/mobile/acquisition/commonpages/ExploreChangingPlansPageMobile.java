@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.commonpages.PageTitleConstants;
+
 public class ExploreChangingPlansPageMobile extends GlobalWebElements {
 
 	public ExploreChangingPlansPageMobile(WebDriver driver) {
@@ -22,7 +24,7 @@ public class ExploreChangingPlansPageMobile extends GlobalWebElements {
 		validate(discoverMoreResourcesLink);
 		discoverMoreResourcesLink.click();
 		validate(discoverMoreResourcesLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MORE_MEDICARE_RESOURCES)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MORE_MEDICARE_RESOURCES)) {
 			return new DiscoverMoreResourcesPageMobile(driver);
 		}else{
 		
@@ -40,7 +42,7 @@ public class ExploreChangingPlansPageMobile extends GlobalWebElements {
 	    actions.moveToElement(prepareForInitialEnrollmentMedicareEducationLink);
 	    actions.click().build().perform();
 	    validate(navigationSectionMedicareEducationLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
 			return new PrepareforInitialEnrollmentPageMobile(driver);
 		}else{
 		

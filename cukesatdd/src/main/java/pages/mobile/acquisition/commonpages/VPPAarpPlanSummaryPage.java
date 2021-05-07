@@ -7,7 +7,6 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,6 +16,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.GetStartedPage;
 import pages.acquisition.commonpages.IntroductionInformationPage;
@@ -536,30 +536,30 @@ public class VPPAarpPlanSummaryPage extends UhcDriver {
 	 */
 	public void verifyInactiveCompare3PlansButton(){
 		
-		Assert.assertTrue("FAIL - Compare 3 plans button is not displayed", elementFound(comparePDPPlanChkBox));
-		Assert.assertEquals("true", comparePDPPlanChkBox.getAttribute("readonly"));
+		Assertion.assertTrue("FAIL - Compare 3 plans button is not displayed", elementFound(comparePDPPlanChkBox));
+		Assertion.assertEquals("true", comparePDPPlanChkBox.getAttribute("readonly"));
 	}
 	
 	public void clickAndVerifyCompareUpto3PlansPopup(){
 		comparePDPPlanChkBox.click();
-		Assert.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
+		Assertion.assertEquals("Compare up to 3 plans Select 2-3 plans that you'd like to compare.",compareUpto3PlansPopup.getText().trim());
 	}
 	
 	public void verifyCompareCheckBoxesAreUnchecked(){
 		
-		Assert.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
+		Assertion.assertEquals("compare_checkbox ng-scope ng-pristine ng-valid", compareChkBox.getAttribute("class"));
 		
 	}
 	
 	public void UncheckAndVerifyCompareChkBox(){
 		compareChkBox.click();
-		Assert.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
+		Assertion.assertEquals("compare_checkbox ng-scope ng-valid ng-dirty", compareChkBox.getAttribute("class"));
 	}
 	
 	public void VerifyComparePopUpText(){
 		
-		Assert.assertEquals("Select 1 more plan to compare",comparePopUpTxt1.getText().trim());
-		Assert.assertEquals("Select 2-3 plans that you'd like to compare",comparePopUpTxt2.getText().trim());
+		Assertion.assertEquals("Select 1 more plan to compare",comparePopUpTxt1.getText().trim());
+		Assertion.assertEquals("Select 2-3 plans that you'd like to compare",comparePopUpTxt2.getText().trim());
 	}
 	
 	public void clickCompareChkBox(){

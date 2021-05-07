@@ -3,7 +3,6 @@ package pages.acquisition.shopperprofile;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,8 +16,6 @@ import com.google.common.base.Strings;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
 import pages.acquisition.commonpages.ComparePlansPage;
 
 
@@ -46,7 +43,7 @@ public class ProfileSearch extends UhcDriver {
 	private WebElement btnCloakIn;
 	
 	@FindBy(id = "aarpSVGLogo")
-	public static WebElement AARPlogo;
+	public WebElement AARPlogo;
 	
 	@FindBy(css="input#visitorsEmail+div.invalid-field")
 	private WebElement emailError;
@@ -254,15 +251,15 @@ public class ProfileSearch extends UhcDriver {
 	 * @param dob
 	 * @param mbi
 	 */
-	public void searchProfileAndDeleteNonMember(DataTable nonMemberDetails) {
+	public void searchProfileAndDeleteNonMember(HashMap<String,String> givenAttributesMap) {
 		
+		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		List<DataTableRow> givenAttributesRow = nonMemberDetails.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String emailID = givenAttributesMap.get("Email");
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		sendkeys(visitorEmail, emailID);

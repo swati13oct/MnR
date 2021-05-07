@@ -4,22 +4,18 @@
 package atdd.framework;
 
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
@@ -36,7 +32,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.google.common.base.Predicate;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -44,14 +39,11 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-
-import java.util.regex.Pattern;
 
 /**
  * @author pjaising
@@ -63,10 +55,10 @@ public abstract class UhcDriverMobile {
 	private long defaultTimeoutInSec=15;
 	
 	@FindBy(xpath = ".//iframe[contains(@id,'IPerceptionsEmbed')]")
-	public static WebElement IPerceptionsFrame;
+	public WebElement IPerceptionsFrame;
 	
 	@FindBy(xpath="//*[contains(@class,'btn-no')]")
-	public static WebElement IPerceptionNoBtn;
+	public WebElement IPerceptionNoBtn;
 	
 	public void start(String url) {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -180,11 +172,11 @@ public abstract class UhcDriverMobile {
 	                   Actions actions = new Actions(driver);
 	                   actions.moveToElement(element);
 	                   actions.perform();
-	                   Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
+	                   Assertion.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
 	                   System.out.println("@@@The element " + element.getText() + "is found@@@");
 	            }
 	     } catch (Exception e) {
-	            Assert.fail("The element " + element.getText() + "is not  found");
+	            Assertion.fail("The element " + element.getText() + "is not  found");
 	         return false;
 	     }
 	     
@@ -461,7 +453,7 @@ try {
 			js.executeScript("arguments[0].scrollIntoView();", element);
 		} catch (Exception e) {
 
-			Assert.fail("The element " + element.getText() + "is not  found");
+			Assertion.fail("The element " + element.getText() + "is not  found");
 			return false;
 		}
 
@@ -510,7 +502,8 @@ try {
 	 * @param Element
 	 */
 	public void switchToNewTabNew(WebElement Element) {
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
 		jsClickNew(Element);
 		waitForCountIncrement(initialCount);
@@ -519,7 +512,8 @@ try {
 		for (int i = 0; i < initialCount + 1; i++) {
 			driver.switchTo().window(tabs.get(i));
 			currentHandle = driver.getWindowHandle();
-			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
+//			if (!currentHandle.contentEquals(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION))
+			if (!currentHandle.contentEquals(CommonConstants.getMainWindowHandle()))
 				break;
 		}
 	}
@@ -573,12 +567,12 @@ try {
 		try {
 			waitforElementNew(element,timeoutInSec);
 			if (element.isDisplayed()) {
-				Assert.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
+				Assertion.assertTrue("@@@The element " + element.getText() + "is found@@@", element.isDisplayed());
 				//System.out.println("@@@The element " + element.getText() + "is found@@@");
 			}
 		} catch (Exception e) {
 
-			Assert.fail("The element " + element.getText() + "is not  found");
+			Assertion.fail("The element " + element.getText() + "is not  found");
 			return false;
 		}
 
@@ -593,13 +587,13 @@ try {
 		try {
 			Pattern pattern = Pattern.compile(Effectivepattern);
 			if (pattern.matcher(input).matches())
-				Assert.assertTrue("Pattern matches for the text:" + input, true);
+				Assertion.assertTrue("Pattern matches for the text:" + input, true);
 			else
-				Assert.fail("Pattern does not matches");
+				Assertion.fail("Pattern does not matches");
 		} catch (IllegalArgumentException ex) {
 			System.out.println("Exception - " + ex.toString());
 			System.out.println("Exception message: " + ex.getMessage());
-			Assert.fail("Error!!!" + ex.getMessage());
+			Assertion.fail("Error!!!" + ex.getMessage());
 		} catch (Exception ex) {
 			System.out.println("Exception - " + ex.toString());
 			System.out.println("Exception message: " + ex.getMessage());
@@ -613,7 +607,7 @@ try {
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
 		if (!dropdown.getFirstSelectedOption().getText().trim().equalsIgnoreCase(value))
-			Assert.fail("Expected value is not present in dropdown");
+			Assertion.fail("Expected value is not present in dropdown");
 	}
 	
 	public void selectFromDropDownByValue(WebElement dropdownElement, String value) {
@@ -623,7 +617,7 @@ try {
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
 	if(!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
-		Assert.fail("Expected value is not present in dropdown");
+		Assertion.fail("Expected value is not present in dropdown");
 	}
 
 	public void waitUntilSelectOptionsPopulated(final Select select) {
@@ -806,7 +800,7 @@ try {
 			timeStr = (String) sysTimeJsonObj.get("systemtime"); 
 		} catch (ParseException e) {
 			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+			Assertion.assertTrue("PROBLEM - unable to find out the system time", false);
 		}
 		driver.close();
 		driver.switchTo().window(winHandleBefore);
@@ -839,7 +833,7 @@ try {
 			timeStr=(String) dataObj.get("systemDate"); 
 		} catch (ParseException e) {
 			e.printStackTrace();
-			Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+			Assertion.assertTrue("PROBLEM - unable to find out the system time", false);
 		}
 		driver.close();
 		driver.switchTo().window(winHandleBefore);

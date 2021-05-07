@@ -231,8 +231,7 @@ public class SelectPharmacyPageMobile extends UhcDriver {
 	}
 
 	public JSONObject getExpectedData(String fileName, String directory) {
-		JSONObject availablePharmaciesExpectedJson = MRScenario
-				.readExpectedJson(fileName, directory);
+		JSONObject availablePharmaciesExpectedJson = MRScenario.readExpectedJson(fileName, directory);
 		return availablePharmaciesExpectedJson;
 	}
 

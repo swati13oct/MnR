@@ -1,26 +1,22 @@
 package acceptancetests.mobile.acquisition.vpp;
 
-import io.appium.java_client.AppiumDriver;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 //import pages.acquisition.ulayer.keywordSearch;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
+import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
 /**
  * Functionality: VPP flow for AARP site
@@ -42,7 +38,7 @@ public class VppFavoritePlanMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assert.assertTrue("Error validating plans in  VPP plan summary page",
+		Assertion.assertTrue("Error validating plans in  VPP plan summary page",
 				plansummaryPage.validateVPPPlanSummaryPage());
 		String SiteName = "AARP_ACQ";
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
@@ -86,12 +82,13 @@ public class VppFavoritePlanMobile {
 
 	// vvv note: added for US1598162
 	public Map<String, String> prepareTestInput(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		return memberAttributesMap;
 	}
 	
@@ -131,7 +128,7 @@ public class VppFavoritePlanMobile {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			//System.out.println("TEST - loaded plansummary page for zipcode='"+zipcode+"'");
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		//----- MA plan type ---------------------------
@@ -220,7 +217,7 @@ public class VppFavoritePlanMobile {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			//System.out.println("TEST - loaded plansummary page for zipcode='"+zipcode+"'");
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		//----- MA plan type ---------------------------
@@ -265,7 +262,7 @@ public class VppFavoritePlanMobile {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
@@ -275,7 +272,7 @@ public class VppFavoritePlanMobile {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 			//System.out.println("TEST - loaded plansummary page for zipcode='"+zipcode+"'");
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 
 		//----- MA plan type ---------------------------
@@ -321,7 +318,7 @@ public class VppFavoritePlanMobile {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
 			plansummaryPage=plansummaryPage.navagateToShopAPlanAndFindZipcode(zipcode, county, isMultiCounty);
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		//----- MA plan type ---------------------------
@@ -367,7 +364,7 @@ public class VppFavoritePlanMobile {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
 			plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode,county,isMultiCounty);
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		//----- MA plan type ---------------------------
@@ -413,10 +410,10 @@ public class VppFavoritePlanMobile {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
 			plansummaryPage=plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode,county,isMultiCounty);
 			if (plansummaryPage == null) {
-				Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+				Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 			}
 		} else {
-			Assert.assertTrue("PROBLEM - plansummaryPage is null", false);
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 
 		//----- MA plan type ---------------------------

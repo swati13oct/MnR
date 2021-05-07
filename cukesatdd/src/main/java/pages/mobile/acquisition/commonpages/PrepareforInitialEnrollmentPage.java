@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class PrepareforInitialEnrollmentPage extends GlobalWebElementsMobile {
 

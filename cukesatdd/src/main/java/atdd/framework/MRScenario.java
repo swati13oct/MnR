@@ -35,10 +35,9 @@ import java.util.logging.Level;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.OutputType;
@@ -57,13 +56,13 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
 import org.springframework.stereotype.Component;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
-import cucumber.api.Scenario;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-
+import io.cucumber.java.Scenario;
 import java.security.*;
 import javax.crypto.*;
 
@@ -76,20 +75,18 @@ import javax.crypto.*;
 @Component
 public class MRScenario {
 
-	private Map<String, Object> scenarioObjectMap = new HashMap<String, Object>();
+	private Map<String, String> ampMemberAttributesMap = new LinkedHashMap<String, String>();
 
-	private static Map<String, String> ampMemberAttributesMap = new LinkedHashMap<String, String>();
+	private Map<String, String> umsMemberAttributesMap = new LinkedHashMap<String, String>();
+	private Map<String, String> memberRedesignVbfAttributesMap = new LinkedHashMap<String, String>();
 
-	private static Map<String, String> umsMemberAttributesMap = new LinkedHashMap<String, String>();
-	private static Map<String, String> memberRedesignVbfAttributesMap = new LinkedHashMap<String, String>();
-
-	private static List<String> userNamesAddedList = new ArrayList<String>();
+	private List<String> userNamesAddedList = new ArrayList<String>();
 
 	private static Map<String, String> props = new HashMap<String, String>();
 
-	private static Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
+	private Map<String, Map<String, JSONObject>> expectedDataMapUlayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 
-	private static Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
+	private Map<String, Map<String, JSONObject>> expectedDataMapBluelayer = new LinkedHashMap<String, Map<String, JSONObject>>();
 	private static Map<String, String> loginCreds = new HashMap<String, String>();
 
 	public static String environment = System.getProperty("environment");
@@ -106,9 +103,9 @@ public class MRScenario {
 	public static String compositeDesiredAttributes;
 	public static String attributeMapToUse = "";
 	private static final String DIRECTORY = "/src/main/resources/";
-	private static String sessionId;
-	private static String JobURL = null;
-	private static String JobURLVD = null;
+	private static final ThreadLocal<String> sessionId = new ThreadLocal<String>();
+	private static final ThreadLocal<String> JobURL = new ThreadLocal<String>();
+	private static final ThreadLocal<String> JobURLVD = new ThreadLocal<String>();
 	public static boolean isSauceLabSelected = false;
 	public static int count = 0;
 	public static String sauceLabsTunnelIdentifier;
@@ -122,10 +119,20 @@ public class MRScenario {
 	public static String mobileDeviceOSName = "";
 	public static String mobileDeviceOSVersion = "";
 	public static String desktopBrowserName;
-	public AppiumDriver mobileDriver;
+//	public AppiumDriver mobileDriver;
 	public String mobileSessionTimeout = "900000";
-	public static String runnerFiles = "";
+//	public static String runnerFiles = "";
 	public static String mobileDeviceType;
+	
+	private static final ThreadLocal<String> runnerFileName = new ThreadLocal<>();
+	
+	public static String getRunnerFileName() {
+		return runnerFileName.get();
+	}
+	
+	public static void setRunnerFileName(String runnerFile) {
+		runnerFileName.set(runnerFile);
+	}
 
 	public static final String USERNAME = "ucpadmin";
 
@@ -138,31 +145,80 @@ public class MRScenario {
 	public static final String HSIDDB_PASSWORD = "aK6-VBYn";
 	public static final String HSIDDB_URL = "jdbc:mysql://dbsls0495:3306/ogns";
 
-	// public static final String USERNAME = System.getenv("SAUCE_USERNAME");
+	// public final String USERNAME = System.getenv("SAUCE_USERNAME");
 
-	// public static final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
+	// public final String ACCESS_KEY = System.getenv("SAUCE_ACCESS_KEY");
 
-	public static final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
-	public static final String RealDeviceURL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.us-west-1.saucelabs.com/wd/hub";
-	public static final String VirtualDeviceURL = "http://" + USERNAME + ":" + ACCESS_KEY
+	public final String URL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.saucelabs.com:443/wd/hub";
+	public final String RealDeviceURL = "https://" + USERNAME + ":" + ACCESS_KEY + "@ondemand.us-west-1.saucelabs.com/wd/hub";
+	public final String VirtualDeviceURL = "http://" + USERNAME + ":" + ACCESS_KEY
 			+ "@ondemand.saucelabs.com:80/wd/hub";
 
+	
+	private ThreadLocal<HashMap<String, Object>> scenarioObjectMap = new ThreadLocal<HashMap<String, Object>>() {
+		@Override
+		protected HashMap<String, Object> initialValue() {
+			return new HashMap<>();
+		}
+	};
+	
 	public void saveBean(String id, Object object) {
-		scenarioObjectMap.put(id, object);
+		scenarioObjectMap.get().put(id, object);
 	}
 
 	public void flushBeans() {
-		if (!scenarioObjectMap.isEmpty()) {
-			scenarioObjectMap.clear();
-			System.out.println("Flushing all saved beans !");
-
+		if (!scenarioObjectMap.get().isEmpty()) {
+			scenarioObjectMap.get().clear();
+			scenarioObjectMap.remove();
 		}
 	}
 
-	static WebDriver webDriver;
+	private WebDriver webDriver;
 
-	public Object getBean(String id) {
-		Object result = scenarioObjectMap.get(id);
+	private static final ThreadLocal<WebDriver> threadSafeDriver = new ThreadLocal<>();
+	
+	public static synchronized WebDriver getThreadSafeDriver() {
+		return threadSafeDriver.get();
+	}
+	
+	public void flushThreadSafeDriver() {
+		threadSafeDriver.remove();
+	}
+	
+	
+	private static final ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
+	
+	public synchronized AppiumDriver getThreadSafeMobileDriver() {
+		return threadSafeMobileDriver.get();
+	}
+	
+	public void flushThreadSafeMobileDriver() {
+		threadSafeMobileDriver.remove();
+	}
+	
+	
+	public void flushSessionID() {
+		sessionId.remove();
+	}
+	
+	public void flushJobUrl() {
+		JobURL.remove();
+	}
+	
+	public void flushRunnerFileName() {
+		runnerFileName.remove();
+	}
+	
+	public void flushThreadLocals() {
+		flushThreadSafeDriver();
+		flushThreadSafeMobileDriver();
+		flushSessionID();
+		flushJobUrl();
+		flushRunnerFileName();
+	}
+
+	public synchronized Object getBean(String id) {
+		Object result = scenarioObjectMap.get().get(id);
 		if (result == null) {
 			System.out.println("Object not initialized - " + id);
 		}
@@ -170,21 +226,17 @@ public class MRScenario {
 
 	}
 
-	public Object getBean(String id, Object defaultValue) {
-
+	public synchronized Object getBean(String id, Object defaultValue) {
 		Object result = getBean(id);
 
 		if (result == null) {
-
 			return defaultValue;
-
 		}
 		return result;
 
 	}
 
 	static {
-
 		props = getProperties();
 
 		if (!(props == null)) { // when running on local this logic will be used
@@ -239,7 +291,7 @@ public class MRScenario {
 		 * CommonConstants.APPIUM_DEFAULT_VERSION :
 		 * System.getProperty(CommonConstants.APPIUM_VERSION));
 		 */
-		runnerFiles = System.getenv("RUNNER_NAME");
+//		runnerFiles = System.getenv("RUNNER_NAME");
 
 		// Setting permission to the scripts , so that jenkins server can access
 		File shellScript = new File("src/main/resources/pdfReportGenerator.sh");
@@ -255,7 +307,7 @@ public class MRScenario {
 
 	}
 
-	public static void loadCSV() {
+	public void loadCSV() {
 		// GlobalBeforeHook.beforeGlobal(scenario);
 		String csvName = getCsvName();
 		System.out.println(csvName);
@@ -263,7 +315,7 @@ public class MRScenario {
 
 	}
 
-	private static void putCsv(String csvName) {
+	private void putCsv(String csvName) {
 		InputStream memberTypeStream1 = ClassLoader.class.getResourceAsStream("/database/" + csvName);
 		memberUmsTypeReader = new BufferedReader(new InputStreamReader(memberTypeStream1));
 		System.out.println("Inside ..........." + csvName);
@@ -278,15 +330,16 @@ public class MRScenario {
 		}
 	}
 
-	public static List<String> getTagList() {
-		List<String> tagsList = atdd.framework.GlobalBeforeHook.tagsList;
+	public List<String> getTagList() {
+		GlobalBeforeHook beforeHook = new GlobalBeforeHook();
+		List<String> tagsList = beforeHook.getTagsList();
 		return tagsList;
 	}
 
-	public static String getCsvName() {
-
+	public String getCsvName() {
+		GlobalBeforeHook beforeHook = new GlobalBeforeHook();
 		String csvName = null;
-		List<String> tagsList = atdd.framework.GlobalBeforeHook.tagsList;
+		List<String> tagsList = beforeHook.getTagsList();
 		System.out.println(tagsList.size());
 		Iterator<String> it = tagsList.iterator();
 		while (it.hasNext()) {
@@ -334,7 +387,7 @@ public class MRScenario {
 
 	}
 
-	public static String formatMemberData(String line, String formattedMemberString) {
+	public String formatMemberData(String line, String formattedMemberString) {
 		formattedMemberString = "";
 		String[] memberAttributes = line.split(cvsSplitBy);
 
@@ -360,7 +413,7 @@ public class MRScenario {
 		return formattedMemberString;
 	}
 
-	public static String formatMemberData(String line) {
+	public String formatMemberData(String line) {
 		String formattedMemberString = "";
 		String[] memberAttributes = line.split(cvsSplitBy);
 
@@ -386,7 +439,7 @@ public class MRScenario {
 		return formattedMemberString;
 	}
 
-	private static Connection getDBConnection(Map<String, String> props) {
+	private Connection getDBConnection(Map<String, String> props) {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
@@ -405,7 +458,7 @@ public class MRScenario {
 
 	}
 
-	public static Connection getPDBDBConnection() {
+	public Connection getPDBDBConnection() {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -438,7 +491,7 @@ public class MRScenario {
 
 	}
 
-	public static void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+	public void getRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
 		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
@@ -448,7 +501,6 @@ public class MRScenario {
 		try {
 			sql = "SELECT HLTHSF_ID FROM mbr where MDM_FST_NM = '" + firstName + "' and MDM_LST_NM = '" + lastName
 					+ "'";
-
 			rs1 = stmt.executeQuery(sql);
 			rs1.first();
 			String HLTHSF_ID = rs1.getString("HLTHSF_ID");
@@ -463,7 +515,7 @@ public class MRScenario {
 
 	}
 
-	public static void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
+	public void deleteRecordsFrom_mbr_table(String firstName, String lastName) throws SQLException {
 		// Connection con = getPDBDBConnection(props);
 		Connection con = getPDBDBConnection();
 		Statement stmt = null;
@@ -497,7 +549,7 @@ public class MRScenario {
 		}
 	}
 
-	public static void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
+	public void deleteRecordsFrom_mbr_prtl_table(String firstName, String lastName) throws SQLException {
 
 		// The following steps will return no. of selected records based on
 		// first name and last name
@@ -536,8 +588,7 @@ public class MRScenario {
 
 	}
 
-	public static void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName)
-			throws SQLException {
+	public void deleteRecordsFrom_mbr_extrm_scl_dtl_table(String firstName, String lastName) throws SQLException {
 		// The following steps will return no. of selected records based on
 		// first name and last name
 		// Connection con = getPDBDBConnection(props);
@@ -638,9 +689,7 @@ public class MRScenario {
 		Properties prop = new Properties();
 		String propertiesFileToPick = environment;
 		System.out.println("Using properties for environment ...." + propertiesFileToPick);
-
 		if (StringUtils.isBlank(propertiesFileToPick)) {
-
 			System.out.println("Using CI as default since environment was not passed in !!!");
 			propertiesFileToPick = CommonConstants.DEFAULT_ENVIRONMENT_CI;
 
@@ -650,7 +699,6 @@ public class MRScenario {
 			propertyFilePath.append("/").append(propertiesFileToPick).append("/")
 					.append(CommonConstants.PROPERTY_FILE_NAME);
 			InputStream is = ClassLoader.class.getResourceAsStream(propertyFilePath.toString());
-
 			try {
 				prop.load(is);
 			} catch (IOException e) {
@@ -683,7 +731,6 @@ public class MRScenario {
 					|| environment.contains("chargers-qa") || environment.contains("team-uhc-rx"))
 
 				domain = "ocp-elr-core-nonprod.optum.com";
-
 			else if (environment.contains("mnr-acq"))
 				domain = "origin-elr-dmz.optum.com";
 			else
@@ -807,16 +854,17 @@ public class MRScenario {
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		try {
-			webDriver = new
-
-			RemoteWebDriver(new URL(URL), capabilities);
-			MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
-			System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
-			getJobURL(getSessionId());
+//			webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+			//sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+			threadSafeDriver.set(new RemoteWebDriver(new URL(URL), capabilities));
+			sessionId.set(((RemoteWebDriver) getThreadSafeDriver()).getSessionId().toString());
+			System.out.println("Session ID:" + getThreadLocalSessionId());
+			getJobURL(getThreadLocalSessionId());
 		} catch (MalformedURLException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return webDriver;
+//		return webDriver;
+		return getThreadSafeDriver();
 
 		/*
 		 * File pathToBinary = new
@@ -840,9 +888,12 @@ public class MRScenario {
 		DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
 		ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 		ieCaps.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-		webDriver = new InternetExplorerDriver(ieCaps);
-		webDriver.manage().window().maximize();
-		return webDriver;
+//		webDriver = new InternetExplorerDriver(ieCaps);
+		threadSafeDriver.set(new InternetExplorerDriver(ieCaps));
+//		webDriver.manage().window().maximize();
+		getThreadSafeDriver().manage().window().maximize();
+//		return webDriver;
+		return getThreadSafeDriver();
 
 	}
 
@@ -855,8 +906,10 @@ public class MRScenario {
 		capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
 		capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 		System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-		webDriver = new ChromeDriver(capabilities);
-		return webDriver;
+//		webDriver = new ChromeDriver(capabilities);
+		threadSafeDriver.set(new ChromeDriver(capabilities));
+//		return webDriver;
+		return getThreadSafeDriver();
 	}
 
 	public void removeMember(String userName) {
@@ -940,7 +993,7 @@ public class MRScenario {
 		}
 	}
 
-	public static Map<String, String> returnMemberAttributeMap() {
+	public Map<String, String> returnMemberAttributeMap() {
 		if (attributeMapToUse.equalsIgnoreCase("memberRedesignVbfAttributesMap"))
 			return memberRedesignVbfAttributesMap;
 		else if (attributeMapToUse.equalsIgnoreCase("ampMemberAttributesMap"))
@@ -951,7 +1004,7 @@ public class MRScenario {
 			return null;
 	}
 
-	public static void returnLoginCredentials() {
+	public void returnLoginCredentials() {
 		loginCreds.clear();
 		for (Entry<String, String> currEntry : returnMemberAttributeMap().entrySet()) {
 			if (currEntry.getKey().equals(compositeDesiredAttributes)) {
@@ -972,7 +1025,8 @@ public class MRScenario {
 		final byte[] screenshot = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.BYTES);
 		System.out.println("Screenshot captured!!!");
 		// To get the report embedded in the report
-		scenario.embed(screenshot, "image/png");
+//		scenario.embed(screenshot, "image/png");
+		scenario.attach(screenshot, "image/png", "Screenshot");
 
 	}
 
@@ -1049,19 +1103,25 @@ public class MRScenario {
 					new String[] { "--web-security=no", "--ignore-ssl-errors=yes", "--ssl-protocol=any" });
 
 			// end from jarvis
-			webDriver = new PhantomJSDriver(caps);
-			webDriver.manage().window().setSize(new Dimension(1400, 1000));
-			webDriver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
+//			webDriver = new PhantomJSDriver(caps);
+//			webDriver.manage().window().setSize(new Dimension(1400, 1000));
+//			webDriver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
+			threadSafeDriver.set(new PhantomJSDriver(caps));
+			getThreadSafeDriver().manage().window().setSize(new Dimension(1400, 1000));
+			getThreadSafeDriver().manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
 		} else if (browser.equalsIgnoreCase(CommonConstants.FIREFOX_BROWSER)) {
 
 			System.setProperty("webdriver.gecko.driver", "pathToBinary");
 			DesiredCapabilities capabilities = DesiredCapabilities.firefox();
 			capabilities.setCapability("marionette", true);
-			webDriver = new FirefoxDriver(capabilities);
+//			webDriver = new FirefoxDriver(capabilities);
+			threadSafeDriver.set(new FirefoxDriver(capabilities));
 
-			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-
-			webDriver.get("google.com");
+//			webDriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			getThreadSafeDriver().manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+			
+//			webDriver.get("google.com");
+			getThreadSafeDriver().get("google.com");
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -1071,9 +1131,10 @@ public class MRScenario {
 			// System.setProperty("webdriver.chrome.driver", pathToBinary);
 			System.setProperty("webdriver.chrome.driver", "C:\\Users\\hahire\\Downloads\\driver\\chromedriver.exe");
 			//System.setProperty("webdriver.chrome.driver", "C:\\ProgramData\\Chrome_driver_80.0.3987.16\\chromedriver.exe");
-			webDriver = new ChromeDriver();
-			saveBean(CommonConstants.WEBDRIVER, webDriver);
-			return webDriver;
+//			webDriver = new ChromeDriver();
+			threadSafeDriver.set(new ChromeDriver());
+			saveBean(CommonConstants.WEBDRIVER, getThreadSafeDriver());
+			// return webDriver;
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.CHROME_BROWSER)) {
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -1081,18 +1142,22 @@ public class MRScenario {
 			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
 			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 			System.setProperty("webdriver.chrome.driver", pathToBinary);
-			webDriver = new ChromeDriver();
-			saveBean(CommonConstants.WEBDRIVER, webDriver);
-			return webDriver;
+//			webDriver = new ChromeDriver();
+			threadSafeDriver.set(new ChromeDriver());
+			saveBean(CommonConstants.WEBDRIVER, getThreadSafeDriver());
+			// return webDriver;
 
 		} else if (browser.equalsIgnoreCase(CommonConstants.IE_BROWSER)) {
 			System.setProperty("webdriver.ie.driver", pathToBinary);
 			DesiredCapabilities ieCaps = DesiredCapabilities.internetExplorer();
 			ieCaps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			webDriver = new InternetExplorerDriver(ieCaps);
-			webDriver.manage().window().maximize();
+//			webDriver = new InternetExplorerDriver(ieCaps);
+//			webDriver.manage().window().maximize();
+			threadSafeDriver.set(new InternetExplorerDriver(ieCaps));
+			getThreadSafeDriver().manage().window().maximize();
 
-			return webDriver;
+
+			// return webDriver;
 		} else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
 			Map<String, String> mobileEmulation = new HashMap<String, String>();
 			mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
@@ -1102,8 +1167,9 @@ public class MRScenario {
 			capabilities.setCapability("chrome.switches", Arrays.asList("--start-maximized"));
 			capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 			System.setProperty("webdriver.chrome.driver", props.get(CommonConstants.CHROME_DRIVER));
-			webDriver = new ChromeDriver(capabilities);
-			return webDriver;
+//			webDriver = new ChromeDriver(capabilities);
+			threadSafeDriver.set(new ChromeDriver(capabilities));
+			// return webDriver;
 		} else if (browser.equalsIgnoreCase(CommonConstants.SAUCE_BROWSER_WEB)) {
 			System.out.println("Execution is Going to Start on SauceLabs Web.....!!!!!");
 			isSauceLabSelected = true;
@@ -1143,7 +1209,7 @@ public class MRScenario {
 
 				MutableCapabilities sauceOptions = new MutableCapabilities();
 				sauceOptions.setCapability("screenResolution", "1920x1440");
-				sauceOptions.setCapability("maxDuration", 5400);
+				sauceOptions.setCapability("maxDuration", 7200);
 				sauceOptions.setCapability("idleTimeout", 200);
 
 				SafariOptions browserOptions = new SafariOptions();
@@ -1175,11 +1241,15 @@ public class MRScenario {
 						+ System.getProperty("environment") + " environment";
 				capabilities.setCapability("name", jobName);
 				try {
-					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-					MRScenario.sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
-					System.out.println("Session ID:" + (((RemoteWebDriver) webDriver).getSessionId()).toString());
-					getJobURL(getSessionId());
-					// webDriver.manage().deleteAllCookies();
+//					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+					threadSafeDriver.set(new RemoteWebDriver(new URL(URL), capabilities));
+//					setThreadSafeDriver(webDriver);
+//					setThreadSafeDriver(new RemoteWebDriver(new URL(URL), capabilities));
+					//sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
+					sessionId.set(((RemoteWebDriver) getThreadSafeDriver()).getSessionId().toString());
+					System.out.println("Session ID:" + getThreadLocalSessionId());
+					getJobURL(getThreadLocalSessionId());
+//					saveBean(CommonConstants.WEBDRIVER, webDriver);
 				} catch (MalformedURLException e) {
 					Assert.fail("Invalid Sauce URL: [" + URL + "]");
 				}
@@ -1187,40 +1257,43 @@ public class MRScenario {
 				Assert.fail(
 						"Error in setting capabilities due to unidentified browser. Check your browser and/or Jenkins job pipeline script to make sure browser is added in the build command");
 		}
-		// }
-		return webDriver;
-
+		// return webDriver;
+		return getThreadSafeDriver();
 	}
 
-	public String getSessionId() {
-		return sessionId;
+	public synchronized String getThreadLocalSessionId() {
+		//return sessionId;
+		return sessionId.get();
 	}
 
-	public static String returnJobURL() {
-		if (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_VIRTUAL)) {
-
-			return JobURLVD;
+	public synchronized String returnJobURL() {
+//		return JobURL;
+		if (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_VIRTUAL) && 
+				getThreadSafeMobileDriver() != null) {
+			return JobURLVD.get();
+		} else {
+			return JobURL.get();
 		}
-
-		else {
-			return JobURL;
-		}
-
+		
 	}
 
 	public void getJobURL(String jobID) {
 		String digest = hmacDigest(jobID, USERNAME + ":" + ACCESS_KEY, "HmacMD5");
-		JobURL = "https://saucelabs.com/jobs/" + jobID + "?auth=" + digest;
-		System.out.println("JobURL ---" + JobURL);
+//		JobURL = "https://saucelabs.com/jobs/" + jobID + "?auth=" + digest;
+//		System.out.println("JobURL ---" + JobURL);
+		JobURL.set("https://saucelabs.com/jobs/" + jobID + "?auth=" + digest);
+		System.out.println("JobURL ---" + returnJobURL());
 	}
 
 	public void getVDJobURL(String jobID) {
 		String digest = hmacDigest(jobID, USERNAME + ":" + ACCESS_KEY, "HmacMD5");
-		JobURLVD = "https://saucelabs.com/tests/" + jobID + "?auth=" + digest;
-		System.out.println("JobURL ---" + JobURLVD);
+//		JobURLVD = "https://saucelabs.com/tests/" + jobID + "?auth=" + digest;
+//		System.out.println("JobURL ---" + JobURLVD);
+		JobURLVD.set("https://saucelabs.com/jobs/" + jobID + "?auth=" + digest);
+		System.out.println("JobURL ---" + returnJobURL());
 	}
 
-	public static String hmacDigest(String msg, String keyString, String algo) {
+	public String hmacDigest(String msg, String keyString, String algo) {
 		String digest = null;
 		try {
 			SecretKeySpec key = new SecretKeySpec((keyString).getBytes("UTF-8"), algo);
@@ -1288,9 +1361,7 @@ public class MRScenario {
 		capabilities.setCapability("name", jobName);
 		capabilities.setCapability("recordMp4", true);
 		capabilities.setCapability("appiumVersion", appiumVersion);
-		capabilities.setCapability("setJavascriptEnabled", true);
 		capabilities.setCapability("forceMjsonwp", true);
-		capabilities.setCapability("locationContextEnabled", true);
 		// capabilities.setCapability("autoAcceptAlerts", true);
 		try {
 
@@ -1301,43 +1372,52 @@ public class MRScenario {
 			if (mobileDeviceOSName.equalsIgnoreCase("Android")) {
 				capabilities.setCapability("browserName", "Chrome");
 				browserName="Chrome";
-				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
+//				mobileDriver = new AndroidDriver(new URL(SauceLabsURL), capabilities);
+				threadSafeMobileDriver.set(new AndroidDriver(new URL(SauceLabsURL), capabilities));
 
 			} else {
 				capabilities.setCapability("browserName", "Safari");
 				browserName="Safari";
-				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
+//				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
+				threadSafeMobileDriver.set(new IOSDriver(new URL(SauceLabsURL), capabilities));
 			}
-
-			System.out.println("Session ID --- " + mobileDriver.getSessionId());
+//			System.out.println("Session ID --- " + mobileDriver.getSessionId());
+			System.out.println("Session ID --- " + getThreadSafeMobileDriver().getSessionId().toString());
 
 			if (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_DEFAULT)) {
-				JobURL = (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
-				System.out.println(mobileDeviceName + " JobURL  --- " + JobURL);
+				/*JobURL= (String) mobileDriver.getCapabilities().getCapability("testobject_test_report_url");
+				System.out.println(mobileDeviceName + " JobURL  --- " + JobURL);*/
+				
+				JobURL.set((String) getThreadSafeMobileDriver().getCapabilities().getCapability("testobject_test_report_url"));
+				System.out.println(mobileDeviceName + " JobURL  --- " + returnJobURL());
 				// System.out.println("JobReportURL ---
 				// "+mobileDriver.getCapabilities().getCapability("testobject_test_live_view_url"));
 				// System.out.println("APIURL ---
 				// "+mobileDriver.getCapabilities().getCapability("testobject_test_report_api_url"));
-				System.out.println(mobileDriver.getContext());
+//				System.out.println(mobileDriver.getContext());
+				System.out.println(getThreadSafeMobileDriver().getContext());
 			} else {
 
 				// JobURLVD = ("https://app.saucelabs.com/tests/"
 				// + mobileDriver.getSessionId());
 				// System.out.println("SEE TEST EXECUTION HERE:***" +JobURLVD);
 				//
-				System.out.println("Session ID:" + ((mobileDriver).getSessionId()).toString());
-
-				getVDJobURL(((mobileDriver).getSessionId()).toString());
+//				System.out.println("Session ID:" + ((mobileDriver).getSessionId()).toString());
+				sessionId.set(getThreadSafeMobileDriver().getSessionId().toString());
+				System.out.println("Session ID:" + getThreadLocalSessionId());
+//				getVDJobURL(((mobileDriver).getSessionId()).toString());
+				getVDJobURL(getThreadLocalSessionId());
 			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return mobileDriver;
+//		return mobileDriver;
+		return getThreadSafeMobileDriver();
 	}
 
-	public static Connection getGPSuat3Connection() throws SQLException {
+	public Connection getGPSuat3Connection() throws SQLException {
 
 		Connection con = null;
 
@@ -1357,7 +1437,6 @@ public class MRScenario {
 			// connect)
 			// String url =
 			// "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=dbslt0041.uhc.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=gpsts20svc.uhc.com)))";
-
 			// Below is GPS UAT3 URL (enable/disable based on GPS env that you want to
 			// connect)
 

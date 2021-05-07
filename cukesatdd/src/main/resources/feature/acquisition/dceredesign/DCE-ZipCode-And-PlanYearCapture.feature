@@ -1,7 +1,7 @@
 @dce_redesign_zipcode_planyear_capture_AEP @F426582
 Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page in New DCE flow during AEP
 
-  @DCE_ZipCodePlanYear_AEP
+  @dce_ZipCodePlanYear_AEP
   Scenario Outline: Test to verify the new DCE redesign page displayed for ZipCode and Plan year capture page for AEP on  <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -25,7 +25,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | drug1   | site |
       | Lipitor | UHC  |
 
-  @DCE_ZipCodePlanYear_ValidateContinueBtn_AEP @F443609
+  @dce_ZipCodePlanYear_ValidateContinueBtn_AEP @F443609
   Scenario Outline: Test to verify the functionality of continue button on ZipCode and Plan year capture page when valid zipcode, county and plan year selected on  <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -53,7 +53,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | drug1   | zipCode | site |
       | Lipitor |   90210 | UHC  |
 
-  @DCE_ZipCodePlanYear_ErrorMessage_NoZipcode_AEP @F443609
+  @dce_ZipCodePlanYear_ErrorMessage_NoZipcode_AEP @F443609
   Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -84,7 +84,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 | drug1   | site |
       |          78452 |   90210 |            1234 |           00000 | Lipitor | UHC  |
 
-  @DCE_ZipCodePlanYear_SamChatCall_AEP
+  @dce_ZipCodePlanYear_SamChatCall_AEP
   Scenario Outline: To verify the SAM icons on DCE Zip code and plan year capture page on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -108,8 +108,8 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
       | drug1   | site |
       | Lipitor | UHC  |
 
-		@dcePreviousButton @F477541 @decRelease
-    Scenario Outline: Test to Verify Previous button for Zip Code entry
+  @dcePreviousButton @F477541 @decRelease
+  Scenario Outline: Test to Verify Previous button for Zip Code entry
     Given the user is on the AARP medicare site landing page
     When I access the acquisition DCE tool from home page
     Then the user validates Get Started Page
@@ -121,16 +121,15 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     When user enters valid zipcode and county
       | ZipCode | <zipcode> |
     # And user selects plan year in AARP
-    And user verify and click on previous button on zip code enter page 
+    And user verify and click on previous button on zip code enter page
     And clicks on Review drug cost button
     Then user should be navigated to zipcode and plan year capture page for AEP
-    
-    
+
     Examples: 
-      | zipcode | plantype | county           | isMultutiCounty | drugName   |
-      |   10001 | MAPD      | Western District | no              | Orkambi|
-      
-      @DCE_ZipCodePlanYear_ErrorMessage_InvalidZipcode_AEP @F443609 @F535368
+      | zipcode | plantype | county           | isMultutiCounty | drugName |
+      |   10001 | MAPD     | Western District | no              | Orkambi  |
+
+  @dce_ZipCodePlanYear_ErrorMessage_InvalidZipcode_AEP @F443609 @F535368
   Scenario Outline: Test to verify the error message when user does not enter or enter invalid zipcode and clicks on continue button on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -155,4 +154,3 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test ZipCode and Plan Year capture page i
     Examples: 
       | invalidzipcode | zipCode | invalidzipcode1 | invalidzipcode2 | drug1   | site |
       |          78452 |   90210 |            1234 |           00000 | Lipitor | AARP |
-

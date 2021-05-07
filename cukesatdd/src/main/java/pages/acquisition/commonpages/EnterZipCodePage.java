@@ -1,6 +1,6 @@
 package pages.acquisition.commonpages;
 
-import static org.junit.Assert.assertTrue;
+import static atdd.framework.Assertion.assertTrue;
 
 import java.util.List;
 import java.util.Set;

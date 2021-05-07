@@ -1,23 +1,15 @@
 package pages.mobile.acquisition.dceredesign;
 
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.BuildYourDrugList;
 
 
 public class SwitchToGenericMobile extends UhcDriver {
@@ -102,7 +94,7 @@ public class SwitchToGenericMobile extends UhcDriver {
 		 * println("Brand Name and Generic Drug Options are displayed and Brand Name Option is Selected by default"
 		 * );
 		 * 
-		 * } else { Assert.fail("Brand Name and Generic Drug options NOT Validated"); }
+		 * } else { Assertion.fail("Brand Name and Generic Drug options NOT Validated"); }
 		 */
 
 	}
@@ -122,10 +114,10 @@ public class SwitchToGenericMobile extends UhcDriver {
 						.println("Error Message displayed for Blank Quantity search : " + BlankQuantityError.getText());
 				DrugQuantityTxtBx.sendKeys(Quantity);
 			} else
-				Assert.fail("Error Message displayed for Blank Quantity search : " + BlankQuantityError.getText());
+				Assertion.fail("Error Message displayed for Blank Quantity search : " + BlankQuantityError.getText());
 
 		} else {
-			Assert.fail("Drug Quantity Text Box NOT Cleared : " + DrugQuantityTxtBx.getText());
+			Assertion.fail("Drug Quantity Text Box NOT Cleared : " + DrugQuantityTxtBx.getText());
 
 		}
 
@@ -136,10 +128,10 @@ public class SwitchToGenericMobile extends UhcDriver {
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugList(driver);
 		}
-		Assert.fail("Did not Navigate to Build Drug List Page");
+		Assertion.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
 
@@ -188,9 +180,9 @@ public class SwitchToGenericMobile extends UhcDriver {
 		WebElement SavingsText = driver.findElement(By.xpath("//*[contains(text(), 'save up to') and contains(text(), 'annually by switching to the generic')]"));
 		openAndValidate();
 		if(!validateNew(GenericDrugText) || !validateNew(BrandDrugText) || !validateNew(SavingsText)) {
-			Assert.fail("Switch To Generic Page Validation Failed");
+			Assertion.fail("Switch To Generic Page Validation Failed");
 		}
-		Assert.assertTrue("Switch To Generic Page Validation Passed", true);
+		Assertion.assertTrue("Switch To Generic Page Validation Passed", true);
 	}
 
 	@FindBy(xpath = "//button[@id='changePharmacyLink']")
@@ -204,10 +196,10 @@ public class SwitchToGenericMobile extends UhcDriver {
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
 		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinkToDrugSummary)) {
-			Assert.assertTrue("Naviagted to DCE Drug Details Page", true);
+			Assertion.assertTrue("Naviagted to DCE Drug Details Page", true);
 			return new DrugDetailsPageMobile(driver);
 		}
-		Assert.fail("Did not Navigate to DCE Drug Details Page");
+		Assertion.fail("Did not Navigate to DCE Drug Details Page");
 		return null;
 	}
 

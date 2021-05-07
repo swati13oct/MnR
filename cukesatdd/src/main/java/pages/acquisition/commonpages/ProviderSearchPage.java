@@ -264,7 +264,8 @@ public class ProviderSearchPage extends UhcDriver {
 	
 		threadsleep(3);
 		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		
 		//note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
@@ -316,7 +317,8 @@ public class ProviderSearchPage extends UhcDriver {
 		}else
 			System.out.println("Issue with Xpath");
 		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new VPPPlanSummaryPage(driver);
 	}
@@ -454,7 +456,8 @@ public class ProviderSearchPage extends UhcDriver {
 		//note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 		
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new PlanDetailsPage(driver);
 
@@ -507,7 +510,8 @@ public class ProviderSearchPage extends UhcDriver {
 		}else
 			System.out.println("Issue with Xpath");
 		waitForCountDecrement(2);
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new VPPTestHarnessPage(driver);
 	}
@@ -655,7 +659,8 @@ public class ProviderSearchPage extends UhcDriver {
 
 	threadsleep(3);
 	waitForCountDecrement(2);
-	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+	driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 	return new VPPPlanSummaryPage(driver);
 }
@@ -686,7 +691,8 @@ public class ProviderSearchPage extends UhcDriver {
 	public AcquisitionHomePage returnToAcqHomePage() {
 		// TODO Auto-generated method stub
 		driver.close();
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		return new AcquisitionHomePage(driver);
 	}
 	@FindBy(xpath="(//*[@class='remove-provider'])[1]")
@@ -707,7 +713,8 @@ public class ProviderSearchPage extends UhcDriver {
 		//note: setting the implicit wait back to default value - 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 		
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 		return new PlanDetailsPage(driver);
 

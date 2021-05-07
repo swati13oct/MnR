@@ -2,21 +2,21 @@ package pages.acquisition.vpp;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.*;
+import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class VPPTestHarnessPage extends UhcDriver {
 
@@ -500,14 +500,15 @@ public class VPPTestHarnessPage extends UhcDriver {
 	}
 
 	public void validateMedSupSpecificPlanInfo(String PlanName) throws InterruptedException {
-		Assert.assertTrue("Not anble to See medsup plan", medsupPlanF.getText().contains(PlanName));
+		Assertion.assertTrue("Not anble to See medsup plan", medsupPlanF.getText().contains(PlanName));
 		System.out.println("Validate we are on medsup page from deeplink");
 
 	}
 
 	public ProviderSearchPage enterMandatoryFieldsToProviderSearch(String zipcode, String planId, String planyear)
 			throws Exception {
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		validateNew(providerZipInput);
 		sendkeys(providerZipInput, zipcode);
 		sendkeys(providerPlanID, planId);

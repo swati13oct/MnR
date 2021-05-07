@@ -1,15 +1,13 @@
 package pages.mobile.acquisition.commonpages;
 import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
-import acceptancetests.util.CommonUtility;
+
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.SavingsOppurtunity;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 public class AddDrugDetailsMobile extends UhcDriver {
 
@@ -92,7 +90,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 		
 		waitforElement(continueButton);
 		continueButton.click();
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_SAVINGS_OPPORTUNITY)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
 			return new SavingsOppurtunity(driver);
 		}
 		return null;
@@ -102,7 +100,7 @@ public class AddDrugDetailsMobile extends UhcDriver {
 		return new AddNewDrugModalMobile(driver);
 	}
 	public void validateThePage(){
-		Assert.assertTrue(addDrugDetailsPageHeading.isDisplayed());
+		Assertion.assertTrue(addDrugDetailsPageHeading.isDisplayed());
 	}
 
 }

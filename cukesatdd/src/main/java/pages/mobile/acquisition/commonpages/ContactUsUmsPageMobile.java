@@ -18,16 +18,16 @@ import atdd.framework.UhcDriver;
 public class ContactUsUmsPageMobile extends UhcDriver{
 	
 	@FindBy(xpath = "//div[contains(text(),'Contact Us')]")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//*[contains(text(),'PROVIDERS ONLY')]")
-	public static WebElement rightRailSection_ProvidersOnly;
+	public WebElement rightRailSection_ProvidersOnly;
 	
 	@FindBy(id = "collapse2heading_article_mededaccordion0")
-	public static WebElement ma_AccordialCollapsed;
+	public WebElement ma_AccordialCollapsed;
 	
 	@FindBy(xpath = "//div[contains(@class,'disclaimer-box')]/p")
-	public static WebElement disclaimerBox_Para;
+	public WebElement disclaimerBox_Para;
 	
 
 	public ContactUsUmsPageMobile(WebDriver driver) {

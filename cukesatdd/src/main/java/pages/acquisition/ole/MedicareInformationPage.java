@@ -377,7 +377,7 @@ public class MedicareInformationPage extends UhcDriver{
 				System.out.println("Correct Label 'Medicare Claim Number' displayed for CARD A");
 			}
 			else{
-				Assert.fail("Correct Label not displayed for CARD A");
+				Assertion.fail("Correct Label not displayed for CARD A");
 				/*System.out.println("Correct Label not displayed for CARD A");
 				return null;*/
 			/*}
@@ -391,7 +391,7 @@ public class MedicareInformationPage extends UhcDriver{
 
 			}
 			else{
-				Assert.fail("Correct Label not displayed for CARD B");
+				Assertion.fail("Correct Label not displayed for CARD B");
 				System.out.println("Correct Label not displayed for CARD B");
 				//return null;
 			}
@@ -937,12 +937,12 @@ public boolean validate_Required_Fields_CSNP( Map<String, String> MemberDetailsM
 			System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected());
 			
 				//Diabetes questions
-				Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
+				Assertion.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
 				validateNew(diabetesQuestions1Yes);
 				jsClickNew(diabetesQuestions1Yes);
 				validateNew(diabetesQuestions2No);
 				jsClickNew(diabetesQuestions2No);
-				Assert.assertTrue(validateNew(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
+				Assertion.assertTrue(validateNew(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
 				validateNew(chronicHeartFailureQuestion1No);
 				jsClickNew(chronicHeartFailureQuestion1No);	
 				validateNew(chronicHeartFailureQuestion2No);

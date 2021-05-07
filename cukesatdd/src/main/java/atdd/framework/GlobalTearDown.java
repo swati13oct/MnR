@@ -3,19 +3,17 @@ package atdd.framework;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.LoginCommonConstants;
-import cucumber.api.Scenario;
-// To be added
-import cucumber.api.java.After;
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.appium.java_client.AppiumDriver;
 
 /**
@@ -48,11 +46,13 @@ public class GlobalTearDown {
 
 	@Autowired
 	MRScenario loginScenario;
+	
+	private String SaucelabsVideoUrl = "<strong>SauceLabs video link</strong><br /><a href=%s >Go to video</a>";
 
 	public MRScenario getLoginScenario() {
-
 		return loginScenario;
 	}
+
 	/**
 	 * 
 	 * @param scenario
@@ -60,64 +60,52 @@ public class GlobalTearDown {
 	@After
 	public void tearDown(Scenario scenario) {
 		try {
-		if(null !=getLoginScenario()  && null!=getLoginScenario().getBean(CommonConstants.WEBDRIVER))
-		{
-		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		   // AppiumDriver wd1  =(AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-			final byte[] screenshot = ((TakesScreenshot) wd).getScreenshotAs(OutputType.BYTES);
-			
-			// To get the report embedded in the report
-			scenario.embed(screenshot, "image/png");
-			if (MRScenario.isSauceLabSelected) {
-				String html = "<strong>SauceLabs video link</strong><br />";
-				html = html.concat("<a href=" + MRScenario.returnJobURL()+" >Go to video</a>");
-				scenario.embed(html.getBytes(), "text/html");
-			}
-					
-			if(null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)){
-				scenario.write("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
-			}
-			MRScenario mrScen = new MRScenario();
-			// Clean up the existing webdriver.
-			try {
+			 if(null !=getLoginScenario() && null!=getLoginScenario().getBean(CommonConstants.WEBDRIVER)) {
+				 WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+				// AppiumDriver wd1 =(AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);		
+				 scenario.attach(takeScreenshot(driver), "image/png", "Screenshot");
+				if (MRScenario.isSauceLabSelected) {
+					scenario.attach(embedSaucelabsVideoUrl(loginScenario.returnJobURL()), "text/html", "Job URL");
+				}
+
+				if (null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)) {
+					scenario.log("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
+				}
+				// Clean up the existing webdriver.
+				try {
 					Thread.sleep(4000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			 //mrScen.DriverQuit();
-				wd.quit(); 
+				driver.quit();
 				System.out.println("---- Script Execution Completed ----");
-			
-		}
+			} else {
+				scenario.log("Teardown received a null object !");
+			}
 		} catch (WebDriverException e) {
-		    WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		    wd.quit();
-			if(null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)){
-				scenario.write("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
-				//tbd Assert.assertTrue("Got WebDriverException. USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME)+" | "+"SauceLab video link for the job='"+MRScenario.returnJobURL()+"' | exception: "+e, false);
-			} 
-			scenario.write("SauceLab video link for the job | "+MRScenario.returnJobURL());
-			scenario.write("Got exception:\n"+e.getMessage());
-			Assert.assertTrue("Got WebDriverException", false);
+			if (null != getLoginScenario().getBean(LoginCommonConstants.USERNAME)) {
+				scenario.log("USER NAME USED : " + getLoginScenario().getBean(LoginCommonConstants.USERNAME));
+				Assert.assertTrue(false, "Got WebDriverException. USER NAME USED : "
+						+ getLoginScenario().getBean(LoginCommonConstants.USERNAME) + " | "
+						+ "SauceLab video link for the job='" + loginScenario.returnJobURL() + "' | exception: " + e);
+			} else {
+				Assert.assertTrue(false, "Got WebDriverException. SauceLab video link for the job='"
+						+ loginScenario.returnJobURL() + "' | exception: " + e);
+			}
+		} finally {
+			//Cleaning up ThreadLocal variables
+			getLoginScenario().flushBeans();
+			getLoginScenario().flushThreadLocals();
 		}
 	}
-	// to be added
-	/**
-	 * 
-	 * @param scenario
-	 */
-	/*@After
-	public void tearDown(Scenario scenario) 
-	//{
-		if (null != getLoginScenario() && null != getLoginScenario().getBean(CommonConstants.WEBDRIVER)) {
-			//To get the report embedded in the report
-			getLoginScenario().CaptureScreenshot(scenario);
-			// Clean up the existing webdriver.
-			getLoginScenario().nullifyWebDriverNew();
-		} else {
-			Assert.fail("Screenshot not captured and webdriver not quitted...");
-    }
-	}*/
+	
+	public final byte[] takeScreenshot(WebDriver driver) {
+		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	}
+	
+	public byte[] embedSaucelabsVideoUrl(String jobUrl) {
+		return String.format(SaucelabsVideoUrl, jobUrl).getBytes();
+	}
 
 }

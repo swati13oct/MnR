@@ -1,21 +1,15 @@
 package pages.acquisition.dceredesign;
 
 import java.util.List;
-import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
 
@@ -93,7 +87,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(BlankDrugError) && BlankDrugError.getText().contains("enter at least 4 characters ")) {
 			System.out.println("Error Message displayed for Blank Drug search : " + BlankDrugError.getText());
 		} else
-			Assert.fail("Error Message displayed for Blank Drug search : " + BlankDrugError.getText());
+			Assertion.fail("Error Message displayed for Blank Drug search : " + BlankDrugError.getText());
 	}
 
 	public void addDrugs(String drugName) {
@@ -122,7 +116,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(NoDrugError) && NoDrugError.getText().contains("No drugs were found ")) {
 			System.out.println("Error Message displayed for No Drug Found : " + NoDrugError.getText());
 		} else
-			Assert.fail("Error Message displayed for No Drug Found : " + NoDrugError.getText());
+			Assertion.fail("Error Message displayed for No Drug Found : " + NoDrugError.getText());
 	}
 
 	public void ValidateDrugAutocomplete(String partialDrug) {
@@ -137,7 +131,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(AutoCompleteList) && AutoCompleteitems.size() <= 5) {
 			System.out.println("Drug Autocomplete Validated - less than or 5 drugs displayed for autocomplete");
 		} else
-			Assert.fail("Drug Autocomplete NOT Validated");
+			Assertion.fail("Drug Autocomplete NOT Validated");
 
 	}
 
@@ -149,7 +143,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
 			return new TellUsAboutDrug(driver);
 		} else {
-			Assert.fail("Tell Us About Drug Page is NOT Displayed");
+			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
 			return null;
 		}
 	}
@@ -162,7 +156,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(zipCodeTxtbox)) {
 			return new ZipCodePlanYearCapturePage(driver);
 		} else {
-			Assert.fail("Zip Code Entry Page is NOT Displayed");
+			Assertion.fail("Zip Code Entry Page is NOT Displayed");
 			return null;
 		}
 
@@ -176,7 +170,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);
 		} else {
-			Assert.fail("Drug Summary Page is not loaded");
+			Assertion.fail("Drug Summary Page is not loaded");
 			return null;
 		}
 
@@ -200,7 +194,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
 			return new TellUsAboutDrug(driver);
 		} else {
-			Assert.fail("Tell Us About Drug Page is NOT Displayed");
+			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
 			return null;
 		}
 	}
@@ -221,7 +215,7 @@ public class BuildYourDrugList extends UhcDriver {
 		{
 			return new DrugDetailsPage(driver);
 		} else {
-			Assert.fail("Drug Details is NOT Displayed");
+			Assertion.fail("Drug Details is NOT Displayed");
 			return null;
 		}
 	}
@@ -248,10 +242,10 @@ public class BuildYourDrugList extends UhcDriver {
 				&& validateNew(DrugListModal_GotItBtn)) {
 			jsClickNew(DrugListModal_GotItBtn);
 			System.out.println("Got It button Clicked to close modal");
-			Assert.assertTrue("Drug List limit Modal and message are Displayed as Expected : " + DrugListModal_Message,
+			Assertion.assertTrue("Drug List limit Modal and message are Displayed as Expected : " + DrugListModal_Message,
 					true);
 		} else
-			Assert.fail("Drug List Modal and Message NOT Displayed!!!");
+			Assertion.fail("Drug List Modal and Message NOT Displayed!!!");
 
 	}
 
@@ -276,9 +270,9 @@ public class BuildYourDrugList extends UhcDriver {
 							+ currentDrug + "')]"));
 
 			if (validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
-				Assert.assertTrue("Validated Drug List for Drug : " + currentDrug, true);
+				Assertion.assertTrue("Validated Drug List for Drug : " + currentDrug, true);
 			} else
-				Assert.fail("Drug List Validation FAILED for Drug : " + currentDrug);
+				Assertion.fail("Drug List Validation FAILED for Drug : " + currentDrug);
 		}
 	}
 
@@ -304,7 +298,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
 			return new TellUsAboutDrug(driver);
 		} else {
-			Assert.fail("Tell Us About Drug Page is NOT Displayed");
+			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
 			return null;
 		}
 	}
@@ -314,7 +308,7 @@ public class BuildYourDrugList extends UhcDriver {
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);
 		} else {
-			Assert.fail("Review drug cost page not displayed");
+			Assertion.fail("Review drug cost page not displayed");
 			return null;
 		}
 	}
@@ -362,7 +356,7 @@ public class BuildYourDrugList extends UhcDriver {
 			System.out.println("Drug List Drug Quantity, Frequency and Supply Length Validation PASSED for Drug : " + drugName);
 			System.out.println("Displayed Drug Details Text: "+DrugText);
 		} else
-			Assert.fail("Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug : " + drugName);
+			Assertion.fail("Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug : " + drugName);
 	}
 
 
@@ -392,7 +386,7 @@ public class BuildYourDrugList extends UhcDriver {
 					if (currentDrug.contains(CurrentDrugRecommendation.getText()) && CurrentDrugRecommendation.getText().contains(currentDrug)) {
 						System.out.println("Current cabinet Drug Name : "+currentDrug);
 						System.out.println("Current recommendations Drug Name : "+CurrentDrugRecommendation.getText());
-						Assert.fail(currentDrug+" is also Displayed in Drug Recommendations - Validation FAILED");
+						Assertion.fail(currentDrug+" is also Displayed in Drug Recommendations - Validation FAILED");
 					}
 				}
 				System.out.println(currentDrug+" is NOT Displayed in Drug Recommendations - Validation PASSED for Drug");
@@ -414,7 +408,7 @@ public class BuildYourDrugList extends UhcDriver {
 			System.out.println("Validation PASSED : Drug Recommendation NOT displayed when 25 Drugs added to cabinet ");
 		}
 		else
-			Assert.fail("Validation FAILED : Drug Recommendation displayed when 25 Drugs added to cabinet");
+			Assertion.fail("Validation FAILED : Drug Recommendation displayed when 25 Drugs added to cabinet");
 	}
 
 	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
@@ -447,13 +441,13 @@ public class BuildYourDrugList extends UhcDriver {
 				waitForPageLoadSafari();
 				CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 				if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-					Assert.assertTrue("Naviagted to Build Drug List Page", true);
+					Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 					return true;
 				}
-				Assert.fail("Did not Navigate to Build Drug List Page");			
+				Assertion.fail("Did not Navigate to Build Drug List Page");			
 			} 
 			else {
-				Assert.fail("Tell Us About Drug Page is NOT Displayed");
+				Assertion.fail("Tell Us About Drug Page is NOT Displayed");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

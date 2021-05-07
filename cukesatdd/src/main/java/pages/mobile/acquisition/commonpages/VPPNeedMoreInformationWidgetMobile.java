@@ -1,11 +1,11 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 public class VPPNeedMoreInformationWidgetMobile extends UhcDriver{
@@ -40,11 +40,11 @@ public class VPPNeedMoreInformationWidgetMobile extends UhcDriver{
 				if(moreInformationDynamicContent.getText()!=null){
 					System.out.println("-----------context displayed in content box-----------");
 				}else{
-					Assert.fail("------------context not displayed in content box----------");
+					Assertion.fail("------------context not displayed in content box----------");
 				}
 			}
 			else{
-				Assert.fail("---------------content missing on UI-----------------");
+				Assertion.fail("---------------content missing on UI-----------------");
 			}
 			if(chooseAVideoLink.isDisplayed()){
 				System.out.println("choose a videos link displayed");
@@ -52,9 +52,9 @@ public class VPPNeedMoreInformationWidgetMobile extends UhcDriver{
 				//validate that page name in new tab
 				switchToNewTab();
 				if(driver.getTitle().equalsIgnoreCase("UnitedHealthcare Medicare Plans Video Guide")){
-  					Assert.assertTrue("---------------video page displayed successfully---------",true);
+  					Assertion.assertTrue("---------------video page displayed successfully---------",true);
 				}else{
-				    Assert.fail("----------------video page not displayed correctly------------");
+				    Assertion.fail("----------------video page not displayed correctly------------");
 				}
 			}
 			

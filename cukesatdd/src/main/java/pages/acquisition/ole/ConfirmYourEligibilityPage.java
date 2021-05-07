@@ -302,7 +302,7 @@ public class ConfirmYourEligibilityPage extends UhcDriver{
 				System.out.println("Correct Label 'Medicare Claim Number' displayed for CARD A");
 			}
 			else{
-				Assert.fail("Correct Label not displayed for CARD A");
+				Assertion.fail("Correct Label not displayed for CARD A");
 				/*System.out.println("Correct Label not displayed for CARD A");
 				return null;*/
 			/*}
@@ -316,7 +316,7 @@ public class ConfirmYourEligibilityPage extends UhcDriver{
 
 			}
 			else{
-				Assert.fail("Correct Label not displayed for CARD B");
+				Assertion.fail("Correct Label not displayed for CARD B");
 				System.out.println("Correct Label not displayed for CARD B");
 				//return null;
 			}

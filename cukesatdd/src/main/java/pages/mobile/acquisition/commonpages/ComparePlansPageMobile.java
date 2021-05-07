@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
@@ -26,9 +25,9 @@ import com.mysql.jdbc.StringUtils;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
@@ -422,8 +421,8 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	public void verifyProvidercount() {
-		Assert.assertTrue("Verified Provider Count not Displayed", validate(VerifyProviderCount));
-		Assert.assertTrue("Verified Edit Provider Link not Displayed", validate(EditproviderlistLink));
+		Assertion.assertTrue("Verified Provider Count not Displayed", validate(VerifyProviderCount));
+		Assertion.assertTrue("Verified Edit Provider Link not Displayed", validate(EditproviderlistLink));
 
 	}
 
@@ -594,7 +593,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		// driver.switchTo().activeElement();
 		// if (CallSamTFN.getText().isEmpty()) {
 		// // return null;
-		// Assert.fail("TFN number was not found on the SAM call Popup");
+		// Assertion.fail("TFN number was not found on the SAM call Popup");
 		// } else {
 		// CallSamTFNClose.click();
 		// validateNew(callsam);
@@ -685,7 +684,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		if (driver.findElement(By.xpath("//th[@ng-repeat='plan in count'][1]//a[contains(@class,'remove')]"))
 				.isDisplayed()) {
 			System.out.println("Element is Present");
-			Assert.fail("remove icon is Displaying in plan compare page");
+			Assertion.fail("remove icon is Displaying in plan compare page");
 		} else {
 			System.out.println("remove icon is not Displaying in plan compare page");
 
@@ -721,27 +720,27 @@ public class ComparePlansPageMobile extends UhcDriver {
 				.findElements(By.xpath("//div[contains(@class,'align-items-lg-start')]//div"));
 		int plansForCompare = allMAPlans.size();
 		if (plansForCompare == 3) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Verified Three plans Added on plan compare");
 		} else
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 	}
 
 	public void validatePlansAddedonPlancompareforVisitorProfile() {
 		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
 		int plansForCompare = allMAPlans.size();
 		if (plansForCompare == 2) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Verified two plans Added on plan compare from visitor profile testharness");
 		} else
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 	}
 
 	public void validatePlansAddedonPlancompareforVisitorProfile(String plans) {
 		List<WebElement> allMAPlans = driver.findElements(By.xpath("//*[@class='planNameVisibility']//h3"));
 		String[] plan = plans.split(",");
 		for (int i = 0; i < allMAPlans.size(); i++) {
-			Assert.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
+			Assertion.assertEquals(plan[i], allMAPlans.get(i).getText().trim());
 		}
 	}
 
@@ -815,7 +814,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
 
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -848,7 +847,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", editHospitalsLink);
 
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editHospitalsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -883,7 +882,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDoctorsLink);
 
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(addDoctorsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -918,7 +917,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addHospitalsLink);
 
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(addHospitalsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -997,15 +996,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 	 * 
 	 * @param planName
 	 */
-	public void validateMemberDetails(DataTable userData) {
+	public void validateMemberDetails(Map<String, String> givenAttributesMap) {
 
-		List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
+		//To be handled from step definition
+		/*List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String plan = givenAttributesMap.get("Plan Name");
 		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
 		String drugs = givenAttributesMap.get("Drugs");
@@ -1018,25 +1018,25 @@ public class ComparePlansPageMobile extends UhcDriver {
 		allSet();
 
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
-		Assert.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
+		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
 				agentModeBanner.getText().trim());
 
 		if (Strings.isNullOrEmpty(enrolledPlan)) {
 			System.out.println("#########Empty Profile#########");
-			Assert.assertEquals("DOB: " + dob, memberDOB.getText().trim());
-			Assert.assertEquals(fname + " " + lname, memberName.getText().trim().toUpperCase());
+			Assertion.assertEquals("DOB: " + dob, memberDOB.getText().trim());
+			Assertion.assertEquals(fname + " " + lname, memberName.getText().trim().toUpperCase());
 		}
 
 		else if (enrolledPlan.contains("Group") || enrolledPlan.contains("D-SNP")) {
-			Assert.assertEquals("(#" + mbi + ")", memberMBI.getText().trim());
-			Assert.assertEquals(fname + " " + lname, memberName.getText().trim().toUpperCase());
-			Assert.assertEquals("DOB: " + dob, memberDOB.getText().trim());
+			Assertion.assertEquals("(#" + mbi + ")", memberMBI.getText().trim());
+			Assertion.assertEquals(fname + " " + lname, memberName.getText().trim().toUpperCase());
+			Assertion.assertEquals("DOB: " + dob, memberDOB.getText().trim());
 		} else {
 			CommonUtility.waitForPageLoad(driver, currentPlanToggle, 5);
-			Assert.assertEquals(enrolledPlan, enrolledPlanName.getText().trim());
-			Assert.assertEquals("(#" + mbi + ")", memberMBI.getText().trim());
-			Assert.assertEquals(fname + " " + lname, memberName.getText().trim().toUpperCase());
-			// Assert.assertEquals("DOB: "+dob, memberDOB.getText().trim());
+			Assertion.assertEquals(enrolledPlan, enrolledPlanName.getText().trim());
+			Assertion.assertEquals("(#" + mbi + ")", memberMBI.getText().trim());
+			Assertion.assertEquals(fname + " " + lname, memberName.getText().trim().toUpperCase());
+			// Assertion.assertEquals("DOB: "+dob, memberDOB.getText().trim());
 
 		}
 
@@ -1049,7 +1049,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 				String[] provider = providers.split(";");
 				for (int i = 0; i < provider.length; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
-						Assert.assertTrue(provider[i].split(":")[0].contains(
+						Assertion.assertTrue(provider[i].split(":")[0].contains(
 								providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 						System.out.println("#########"
 								+ providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
@@ -1057,7 +1057,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 					}
 				}
 			} else {
-				Assert.assertTrue(providers.split(":")[0]
+				Assertion.assertTrue(providers.split(":")[0]
 						.contains(providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 				System.out.println(
 						"#########" + providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()
@@ -1076,7 +1076,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
-					Assert.assertTrue(drugName[i].contains(
+					Assertion.assertTrue(drugName[i].contains(
 							drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 					System.out.println("#########"
 							+ drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
@@ -1094,15 +1094,16 @@ public class ComparePlansPageMobile extends UhcDriver {
 	 * 
 	 * @param planName
 	 */
-	public void validateAgentModeBannersForNonMember(DataTable userData) {
+	public void validateAgentModeBannersForNonMember(Map<String, String> givenAttributesMap) {
 
-		List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
+		//To be handled from step definition
+		/*List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String plan = givenAttributesMap.get("Plan Name");
 		String drugs = givenAttributesMap.get("Drugs");
 		String providers = givenAttributesMap.get("Providers");
@@ -1113,7 +1114,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		allSet();
 
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
-		Assert.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
+		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
 				agentModeBanner.getText().trim());
 
 		// Validate Providers
@@ -1125,7 +1126,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 				String[] provider = providers.split(";");
 				for (int i = 0; i < providersList.size() - 1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
-						Assert.assertTrue(provider[i].split(":")[0].contains(
+						Assertion.assertTrue(provider[i].split(":")[0].contains(
 								providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 						System.out.println("#########"
 								+ providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
@@ -1133,7 +1134,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 					}
 				}
 			} else {
-				Assert.assertTrue(providers.split(":")[0]
+				Assertion.assertTrue(providers.split(":")[0]
 						.contains(providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 				System.out.println(
 						"#########" + providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()
@@ -1152,7 +1153,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
-					Assert.assertTrue(drugs.contains(
+					Assertion.assertTrue(drugs.contains(
 							drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
 					System.out.println("#########"
 							+ drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
@@ -1183,7 +1184,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		validateNew(DrugSummaryCoverageHeader);
 		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
 		validateNew(DrugName);
-		Assert.assertTrue("Drug name is not displayed on the plan compare page", DrugName.getText().contains(drug));
+		Assertion.assertTrue("Drug name is not displayed on the plan compare page", DrugName.getText().contains(drug));
 		validateNew(DrugCoverageText);
 		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
 		System.out.println("Verified Edit Drugs Section header and Summary section");
@@ -1197,10 +1198,10 @@ public class ComparePlansPageMobile extends UhcDriver {
 	public WebElement enterDrugInformation;
 
 	@FindBy(xpath = "//div[contains(text(),'Available')]")
-	public static WebElement planComparePlansAvailableLabel;
+	public WebElement planComparePlansAvailableLabel;
 
 	@FindBy(xpath = "//button[@id='viewallplansBtnId']")
-	public static WebElement viewAllplansButton;
+	public WebElement viewAllplansButton;
 
 	public GetStartedPageMobile navigateToDCERedesign() {
 
@@ -1215,54 +1216,54 @@ public class ComparePlansPageMobile extends UhcDriver {
 	}
 
 	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
-	public static WebElement medicalBenefitsOONToggle;
+	public WebElement medicalBenefitsOONToggle;
 
 	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
-	public static WebElement medicalBenefitsOONLabel;
+	public WebElement medicalBenefitsOONLabel;
 
 	@FindBy(xpath = "//h2[contains(text(),'Additional Benefits')]/following::div[@class='uhc-switch__slider']")
-	public static WebElement additionalBenefitsOONToggle;
+	public WebElement additionalBenefitsOONToggle;
 
 	@FindBy(xpath = "//h2[contains(text(),'Additional Benefits')]/following::div[contains(@class,'uhc-switch__label')]")
-	public static WebElement additionalBenefitsOONLabel;
+	public WebElement additionalBenefitsOONLabel;
 
 	@FindBy(xpath = "//td[contains(@class,'show-out-of-network')]")
-	public static WebElement outOfNetworkStyle;
+	public WebElement outOfNetworkStyle;
 
 	@FindBy(xpath = "//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
-	public static WebElement medicalBenefitsOONToggleNotDisplayed;
+	public WebElement medicalBenefitsOONToggleNotDisplayed;
 
 	public void validateOONDDisplayed() throws Exception {
-		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
+		Assertion.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
 				medicalBenefitsOONToggle.isDisplayed());
-		Assert.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
+		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
 				"View Out-of-Network Benefits", medicalBenefitsOONLabel.getText().trim());
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
 		medicalBenefitsOONToggle.click();
 		System.out.println(medicalBenefitsOONLabel.getText().trim());
-		Assert.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits",
+		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits",
 				medicalBenefitsOONLabel.getText().trim());
-		Assert.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
+		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
 		medicalBenefitsOONToggle.click();
-		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits",
+		Assertion.assertTrue("OON Toggle Should be Displayed for Additional Benefits",
 				additionalBenefitsOONToggle.isDisplayed());
-		Assert.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
+		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
 				"View Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
-		Assert.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits",
+		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits", "View In-Network Benefits",
 				additionalBenefitsOONLabel.getText().trim());
-		Assert.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
+		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
 		// additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 	}
 
 	public void validateOONNotDisplayed() {
-		Assert.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
+		Assertion.assertTrue("OON Toggle Should be Displayed for Medical Benefits",
 				driver.findElements(By.xpath(
 						"//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']"))
 						.isEmpty());
-		Assert.assertTrue("OON Toggle Should be Displayed for Additional Benefits",
+		Assertion.assertTrue("OON Toggle Should be Displayed for Additional Benefits",
 				driver.findElements(By.xpath(
 						"//h2[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']"))
 						.isEmpty());
@@ -1283,7 +1284,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 	
 
 	public void validateOptionalRidersSectionHidden() {
-		Assert.assertFalse("Optional Service Section must not be visible",
+		Assertion.assertFalse("Optional Service Section must not be visible",
 				driver.findElements(By.xpath("//h2[@id='optionalservicesheading']")).size() > 0);
 	}
 
@@ -1294,12 +1295,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		System.out.println("Count of plans Available=" + planCount);
 		System.out.println("Count of plans on compare Before button is clicked"
 				+ driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
-		Assert.assertTrue("View All button should be displayed", viewAllplansButton.isDisplayed());
+		Assertion.assertTrue("View All button should be displayed", viewAllplansButton.isDisplayed());
 		viewAllplansButton.click();
 		System.out.println("Count of plans on compare after button is clicked"
 				+ driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
-		Assert.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
-		Assert.assertEquals("Plan Counts mismatch", planCount,
+		Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
+		Assertion.assertEquals("Plan Counts mismatch", planCount,
 				driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
 	}
 
@@ -1333,7 +1334,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		String firstDoctorName = firstDoctorNameLabel.getText();
 		jsClickNew(viewLocationLink);
 		// viewLocationLink.click();
-		Assert.assertEquals("Doctor name is not displayed correctly", firstDoctorName,
+		Assertion.assertEquals("Doctor name is not displayed correctly", firstDoctorName,
 				viewLocationPopupProviderName.getText());
 	}
 	
@@ -1347,7 +1348,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Dental Flyer link is 1023 Displayed");
 			jsClickNew(DentalFlyerLink);
 			System.out.println("Clicked on 1023 DentalFlyer on plan Compare page");
-			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			switchToNewTabNew(DentalFlyerLink);
 			if (driver.getCurrentUrl().contains(Documentcode)) {
 				System.out.println("We able to 1023  Document loaded");
@@ -1362,7 +1363,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			System.out.println("Dental Flyer link is 1025 Displayed");
 			jsClickNew(DentalFlyerLink);
 			System.out.println("Clicked on 1025 DentalFlyer on plan Compare page");
-			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			switchToNewTabNew(DentalFlyerLink);
 
 			if (driver.getCurrentUrl().contains(Documentcode)) {

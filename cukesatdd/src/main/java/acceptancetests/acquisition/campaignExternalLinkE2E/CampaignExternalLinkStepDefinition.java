@@ -1,32 +1,31 @@
 package acceptancetests.acquisition.campaignExternalLinkE2E;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.testng.Assert;
 
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.CampaignExternalLinks;
 import pages.acquisition.commonpages.MedicareSupplementInsurancePlansPage;
@@ -54,12 +53,13 @@ public class CampaignExternalLinkStepDefinition {
 	@Given("^user is on campaign external Links page$")
 	public void user_ison_externallinks(DataTable givenAttributes) throws Exception  {
 		wd = getLoginScenario().getWebDriverNew();
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 	
 		String url = memberAttributesMap.get("External Link");
 		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
@@ -75,12 +75,13 @@ public class CampaignExternalLinkStepDefinition {
 	@Then("^the user validate aarp medicare plans11 page external link$")
 	public void validate_linkson_aarp_ExternalPage_medicare_plans(DataTable givenAttributes) throws InterruptedException {
 	
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 			String zipcode = memberAttributesMap.get("Zip Code");
 			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
@@ -94,12 +95,13 @@ public class CampaignExternalLinkStepDefinition {
 	@Then("^the user validate links and other options on morganstanley external link page$")
 	public void validate_linkson_ExternalPage_morganstanley(DataTable givenAttributes) throws InterruptedException {
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
 
@@ -114,12 +116,13 @@ public class CampaignExternalLinkStepDefinition {
 	@Then("^the user validate links and other options on medicare prescription drug external link page$")
 	public void validate_linkson_ExternalPage_pdp(DataTable givenAttributes) throws InterruptedException {
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
 
@@ -162,12 +165,13 @@ public class CampaignExternalLinkStepDefinition {
 	
 	@Then("^the user navigate back to external link of aarp medicare plans11 page$")
 	public void navigate_back_aarp_medicare11_page(DataTable givenAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 			String zipcode = memberAttributesMap.get("Zip Code");
 			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
@@ -202,12 +206,13 @@ public class CampaignExternalLinkStepDefinition {
 	
 	@Then("^user verify TFN on AARP external links page$")
 	public void user_verify_TFN_on_AARP_external_links_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
 		String ExpectedWorkingHrs = memberAttributesMap.get("Working hrs");
@@ -231,12 +236,13 @@ public class CampaignExternalLinkStepDefinition {
 	@Then("^the user validate links and other options on aarp medicare plans11 external link page$")
 	public void validate_linkson_ExternalPage_aarp_medicare_plans11(DataTable givenAttributes) throws InterruptedException {
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String TFNXpath = memberAttributesMap.get("TFN Xpath");
 		String ExpectedTFNNo = memberAttributesMap.get("TFN No");
 
@@ -250,12 +256,13 @@ public class CampaignExternalLinkStepDefinition {
 	@Then("^user navigate back to external url for medicare advatnatge plan$")
 	public void user_vavigate_Bakc_externallinks(DataTable givenAttributes) throws Exception  {
 		wd = getLoginScenario().getWebDriverNew();
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 	
 		String url = memberAttributesMap.get("External Link");
 		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
@@ -323,12 +330,13 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 	@When("^the user performs plan search using following information on Morgan Stanley external link page$")
 	public void the_user_performs_plan_search_using_following_information_on_Morgan_Stanley_external_link_page(
 			DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -366,12 +374,13 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 
 	@And("^the user enters following details on Pharmacy search page$")
 	public void the_user_enters_following_details_on_Pharmacy_search_page(DataTable givenAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String distance = memberAttributesMap.get("Distance");
@@ -443,7 +452,7 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 				timeStr = (String) dataObj.get("systemDate");
 			} catch (ParseException e) {
 				e.printStackTrace();
-				Assert.assertTrue("PROBLEM - unable to find out the system time", false);
+				Assertion.assertTrue("PROBLEM - unable to find out the system time", false);
 			}
 			wd.close();
 			wd.switchTo().window(winHandleBefore);
@@ -465,12 +474,13 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 
 	@Then("^the user clicks on View Plans and Pricing button on PDP external page$")
 	public void the_user_clicks_on_View_Plans_and_Pricing_button_on_PDP_external_page(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -500,12 +510,13 @@ public void user_closes_current_tab_and_navigate_to_previous_tab() {
 
 	@Then("^the user clicks on View Plans and Pricing link on PDP external page$")
 	public void the_user_clicks_on_View_Plans_and_Pricing_link_on_PDP_external_page(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -610,12 +621,15 @@ public void user_clicks_on_Start_Now_to_Get_Started_lower_env() {
 
 @Then("^the user clicks on View Plans and Pricing button on PDP external page in lower env$")
 public void the_user_clicks_on_View_Plans_and_Pricing_button_on_PDP_external_page_lower_env(DataTable givenAttributes) {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-				memberAttributesRow.get(i).getCells().get(1));
-	}
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * Map<String, String> memberAttributesMap = new HashMap<String, String>(); for
+		 * (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 	String zipcode = memberAttributesMap.get("Zip Code");
 	String county = memberAttributesMap.get("County Name");
 	String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -659,13 +673,15 @@ public void navigate_aarp_medicare11_privacy_links_lower_env() throws Interrupte
 
 @Then("^the user validate aarp medicare plans11 page external link in lower env$")
 public void validate_linkson_aarp_medicare_plans11_page_lower_env(DataTable givenAttributes) throws InterruptedException {
-
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-				memberAttributesRow.get(i).getCells().get(1));
-	}
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * Map<String, String> memberAttributesMap = new HashMap<String, String>(); for
+		 * (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
@@ -712,12 +728,15 @@ public void the_user_clicks_on_Get_Help_Finding_a_Plan_button_on_external_link_p
 @When("^the user performs plan search using following information on Morgan Stanley external link page in lower env$")
 public void the_user_performs_plan_search_using_following_information_on_Morgan_Stanley_external_link_page_lower_env(
 		DataTable givenAttributes) {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	for (int i = 0; i < memberAttributesRow.size(); i++) {
-		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-				memberAttributesRow.get(i).getCells().get(1));
-	}
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * Map<String, String> memberAttributesMap = new HashMap<String, String>(); for
+		 * (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 	String zipcode = memberAttributesMap.get("Zip Code");
 	String county = memberAttributesMap.get("County Name");
 	String isMultiCounty = memberAttributesMap.get("Is Multi County");

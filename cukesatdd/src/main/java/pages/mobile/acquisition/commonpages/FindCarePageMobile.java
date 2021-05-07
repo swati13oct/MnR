@@ -256,7 +256,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		}else
 			System.out.println("Issue with Xpath");
 	
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
@@ -311,7 +312,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		}else
 			System.out.println("Issue with Xpath");
 
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
@@ -368,7 +370,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		}else
 			System.out.println("Issue with Xpath");
 		
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;
@@ -423,7 +426,8 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		}else
 			System.out.println("Issue with Xpath");
 	
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
 		return null;

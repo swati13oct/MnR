@@ -3,6 +3,8 @@ package pages.mobile.acquisition.commonpages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import pages.acquisition.commonpages.PageTitleConstants;
+
 public class MedicareSupplementInsurancePlansPage extends GlobalWebElements {
 
 	public MedicareSupplementInsurancePlansPage(WebDriver driver) {
@@ -22,7 +24,7 @@ public MedicarePrescriptionDrugPlansPage medicarePrescriptionFooterClick() {
 		validate(medicareSupplementInsurancePlansLink);
 		medicarePrescriptionDrug_PlansLink.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_PRESCRIPTION_DRUG_PLANS)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PRESCRIPTION_DRUG_PLANS)) {
 			return new MedicarePrescriptionDrugPlansPage(driver);
 		}else{
 			System.out.println("page does not match " + driver.getTitle());
@@ -37,7 +39,7 @@ public MedicareSelectHospitalDirectoryPage medicareSelectHosipitalDirectoryClick
 	validate(medicareSelectHosipitalDirectoryLink);
 	medicareSelectHosipitalDirectoryLink.click();
 	validate(medicareSelectHosipitalDirectoryLink);
-	if(driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MEDICARE_SELECT_HOSPITAL_DIRECTORY)){
+	if(driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MEDICARE_SELECT_HOSPITAL_DIRECTORY)){
 		return new MedicareSelectHospitalDirectoryPage(driver);
 	}
 	return null;
