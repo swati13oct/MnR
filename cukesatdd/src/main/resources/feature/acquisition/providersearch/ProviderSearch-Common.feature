@@ -174,13 +174,13 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
     @ProviderSearchCommon_AARP @regressionAARP
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | AARP |        13 | future |
+      |   10001 | AARP |        12 | future |
 
     #@ProviderSearchFromWidgetBlayer
     @ProviderSearchCommon_UHC @regressionUHC
     Examples: 
       | zipcode | site | plancount | year   |
-      |   10001 | UHC  |        13 | future |
+      |   10001 | UHC  |        12 | future |
 
     #@ProviderSearchFromWidgetUlayer
     Examples: 

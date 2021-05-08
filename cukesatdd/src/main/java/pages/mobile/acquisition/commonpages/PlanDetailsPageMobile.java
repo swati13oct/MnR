@@ -144,8 +144,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
 	private WebElement addedDrug;
 
-	@FindBy(id = "po7links")
+	@FindBy(xpath = "//a[text()='Look up my Doctor/Provider']")
 	private WebElement lookUpYourProviderButton;
+	
+	@FindBy(xpath = "//p[contains(text(),'See if your Doctor/Provider is covered in your ZIP')]")
+	private WebElement lookUpYourProviderTitle;
+	
+	
 
 	@FindBy(xpath = "//span[contains(text(),'1 providers covered')]")
 	private WebElement providerCountUpdated;
@@ -328,15 +333,15 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void openAndValidate(String planType) {
-		if (planType.equalsIgnoreCase("MA")) {
-			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+		if ((planType.equalsIgnoreCase("MA") || (planType.equalsIgnoreCase("MAPD")))) {
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 20);
 			Assertion.assertTrue("Prescription Drug tab not displayed for MA plans", 0 == presDrugTab1.size());
 
 		} else if (planType.equalsIgnoreCase("PDP")) {
-			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 45);
+			CommonUtility.waitForPageLoadNew(driver, presDrugTab.get(0), 20);
 			Assertion.assertTrue("Medical Benefit tab not displayed for PDP plans", 0 == medBenefitsTab.size());
 		} else if (planType.equalsIgnoreCase("SNP")) {
-			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 45);
+			CommonUtility.waitForPageLoadNew(driver, medBenefitsTab.get(0), 20);
 			Assertion.assertTrue("Medical Benefit tab not displayed for SNP plans",
 					medBenefitsTab.get(0).isDisplayed());
 		} /* Added for SNP as well */
@@ -813,8 +818,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public ProviderSearchPageMobile validateLookUpYourProviderButton() {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
+		iosScroll(lookUpYourProviderTitle);
 //		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+		
 		switchToNewTabNew(lookUpYourProviderButton);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);

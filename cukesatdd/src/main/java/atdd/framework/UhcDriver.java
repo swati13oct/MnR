@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -719,11 +720,11 @@ public abstract class UhcDriver {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
+		sleepBySec(3);
 		scrollToView(Element);
-		//jsClickNew(Element);
 		Element.click();
-		//waitForPageLoadSafari();
 		sleepBySec(5);
+		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
@@ -733,6 +734,7 @@ public abstract class UhcDriver {
 			if (!currentHandle.contentEquals(CommonConstants.getMainWindowHandle()))
 				break;
 		}
+
 	}
 
 	public void sleepBySec(int sec) {
