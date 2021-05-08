@@ -999,7 +999,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
 	private WebElement nextBestActionModalSelectPlanBtn;
-	
+
 	public void verifyNextBestActionModalForEnrollPlan() {
 		waitforElementVisibilityInTime(nextBestActionModalSelectPlanBtn, 20);
 		try {
@@ -1832,8 +1832,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// scrollToView(plan);
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+
+		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
+		waitforElementVisibilityInTime(premiumForPlan, 10);
 		scrollToView(premiumForPlan);
-		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 40);
+
 		String PlanPremium = premiumForPlan.getText();
 
 		System.out.println("Premium for Plan : " + PlanPremium);
@@ -4963,8 +4966,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]"
-					+ "//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			mobileswipeHorizantal("50", true);
 			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
 			scrollToView(MAmoreDetailsLink);
@@ -5641,10 +5643,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 
 	}
-	
+
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement nextBestActionModalGetStartedBtn;
-	
+
 	/**
 	 * @author rravind8 This method verifies the NBA Modal for Drug Cost
 	 */

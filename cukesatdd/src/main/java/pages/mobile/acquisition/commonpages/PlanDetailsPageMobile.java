@@ -947,7 +947,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 */
 	public boolean clickAndValidatePlanCosts(String monthlyPremium, String yearlyPremium) throws Exception {
 		boolean bValidation = false;
-		scrollToView(planCostsTab);
+		iosScroll(planCostsTab);
 		// validateNew(planCostsTab);
 		// planCostsTab.click();
 		jsClickNew(planCostsTab);

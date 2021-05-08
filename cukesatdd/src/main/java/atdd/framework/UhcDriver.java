@@ -580,7 +580,7 @@ public abstract class UhcDriver {
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click(true);", element);
 				System.out.println("JsClick worked");
-				clickFlag = true;
+				//clickFlag = true;
 
 				// if (element.isDisplayed() && (clickFlag = true))
 				// try {
