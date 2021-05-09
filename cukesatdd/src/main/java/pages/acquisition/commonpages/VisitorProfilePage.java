@@ -178,14 +178,14 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
 	public WebElement signOutLink;
 
-	@FindBy(xpath = "//button[@aria-expanded='true']/..//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove drug']")
-	public List<WebElement> removeDrugsPlanCard;
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove')]")
+	public List<WebElement> removeDrugs;
 
 	@FindBy(xpath = "//*[contains(@aria-controls,'plan-providers-dropdown')]/img")
 	public WebElement expandProvidersPlanCard;
 
-	@FindBy(xpath = "//*[contains(@id,'plan-providers-dropdown')]//button[@aria-label='Remove provider']")
-	public List<WebElement> removeProvidersPlanCard;
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove')]")
+	public List<WebElement> removeProviders;
 
 	@FindBy(xpath = "//*[contains(@id,'ghn_lnk')]/span[text()='Home']")
 	private WebElement homeTab;
@@ -786,7 +786,7 @@ public class VisitorProfilePage extends UhcDriver {
 	/**
 	 * Validate the enrolled plan details on profile page
 	 * 
-	 * @param oleDetails
+	 * @param
 	 */
 	public void validateOLEDetails(Map<String, String> givenAttributesMap) {
 		//Handled data table in step definition
@@ -927,6 +927,9 @@ public class VisitorProfilePage extends UhcDriver {
 		System.out.println("View Drug Pricing - Edit Drugs link is clicked for Plan Card");
 	}
 
+	@FindBy(xpath = "//input[contains(@id, 'agreeButton')]")
+	public WebElement ShareOneHealth_AgreeButton;
+
 	public void logIn(String username, String password) {
 		try {
 
@@ -955,6 +958,14 @@ public class VisitorProfilePage extends UhcDriver {
 				securityAnswer.sendKeys("number1");
 			}
 			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			try{
+				validateNew(ShareOneHealth_AgreeButton);
+				System.out.println("Share My One Healthcare ID Page is Dispalyed for VP Login - Clicking on I Agree");
+				jsClickNew(ShareOneHealth_AgreeButton);
+
+			} catch (Exception e) {
+				System.out.println("Share My One Healthcare ID Page is NOT Dispalyed for VP Login - Continuing to VP");
+			}
 			CommonUtility.waitForPageLoadNew(driver, signOutLink, 20);
 
 		} catch (Exception e) {
@@ -970,15 +981,26 @@ public class VisitorProfilePage extends UhcDriver {
 		editDrugsGlobal.click();
 	}
 
-	public void clearDrugsFromPlanCard() {
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove Modal:Yes Remove')]")
+	public WebElement ConfirmRemoveDrug;
+	@FindBy(xpath = "//a[contains(@dtmname, 'Visitor Profile:Header:Auth:Your Saved Drugs & Pharmacy')]/span[contains(@class, 'uhc-profile-header-nav__item-bottom')]")
+	public WebElement VPHeader_DrugsLinks;
+
+
+	public void clearDrugs() {
+		CommonUtility.waitForPageLoadNew(driver,VPHeader_DrugsLinks, 20 );
+		jsClickNew(VPHeader_DrugsLinks);
 		try {
+/*
 			if (expandDrugsPlanCard.isDisplayed()) {
 				expandDrugsPlanCard.click();
-				System.out.println(removeDrugsPlanCard.size());
-				while (removeDrugsPlanCard.size() != 0) {
-					removeDrugsPlanCard.get(0).click();
-					expandDrugsPlanCard.click();
-					System.out.println(removeDrugsPlanCard.size());
+*/
+				System.out.println(removeDrugs.size());
+				while (removeDrugs.size() != 0) {
+					removeDrugs.get(0).click();
+					validateNew(ConfirmRemoveDrug);
+					jsClickNew(ConfirmRemoveDrug);
+					System.out.println(removeDrugs.size());
 					System.out.println("Removed drugs");
 
 				}
@@ -991,27 +1013,36 @@ public class VisitorProfilePage extends UhcDriver {
 				 * removeDrugsPlanCard.get(0).click(); System.out.println("Removed drugs");
 				 * validate(addrugs); }
 				 */
-			}
+//			}
 		} catch (Exception e) {
 			System.out.println("No existing drugs found");
 		}
 	}
 
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove Modal:Yes Remove')]")
+	public WebElement ConfirmRemoveProvider;
+
+
 	public void clearProvider() {
 		try {
+/*
 			if (expandProvidersPlanCard.isDisplayed()) {
 				expandProvidersPlanCard.click();
+*/
 
-				while (removeProvidersPlanCard.size() != 0) {
+				while (removeProviders.size() != 0) {
 					/*
 					 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
 					 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
 					 */
-					removeProvidersPlanCard.get(0).click();
+					removeProviders.get(0).click();
+					validateNew(ConfirmRemoveProvider);
+					jsClickNew(ConfirmRemoveProvider);
+
 					System.out.println("Removed provider");
 					// validate(addrugs);
 				}
-			}
+//			}
 		} catch (Exception e) {
 			System.out.println("No existing providers found");
 		}

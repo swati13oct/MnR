@@ -23,13 +23,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user selects plan year
     And user clicks on continue button in Zip Entry Page
 
-    @dce_VisitorProfile_AARP @regressionAARP @prodRegression
-    Examples: 
+  @dce_VisitorProfile_AARP @regressionAARP @prodRegression
+    Examples:
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | AARP |
 
-    @dce_VisitorProfile_UHC @regressionUHC @sanity
-    Examples: 
+  @dce_VisitorProfile_UHC @regressionUHC @sanity
+    Examples:
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | UHC  |
 
@@ -64,13 +64,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @dceShopperProfileAddDrugsGlobally_AARP @F539025AARP @regressionAARP
-    Examples: 
+  @dceShopperProfileAddDrugsGlobally_AARP @F539025AARP @regressionAARP
+    Examples:
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | AARP | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
-    @dceShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC @prodRegression
-    Examples: 
+  @dceShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC @prodRegression
+    Examples:
       | drug1   | zipCode | site | drug2  | planType | planName                                            |
       | Orkambi |   80002 | UHC  | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) |
 
@@ -109,13 +109,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @dceShopperProfileAddDrugsPlancard_AARP @regressionAARP @prodRegression
-    Examples: 
+  @dceShopperProfileAddDrugsPlancard_AARP @regressionAARP @prodRegression
+    Examples:
       | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
       | AARP | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
 
-    @dceShopperProfileAddDrugsPlancard_UHC @regressionUHC
-    Examples: 
+  @dceShopperProfileAddDrugsPlancard_UHC @regressionUHC
+    Examples:
       | site | drug1   | drug2  | plantype | testPlans                                                                 | zipcode | isMultiCounty | county          |
       | UHC  | Orkambi | Fanapt | MAPD     | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |   10001 | NO            | New York County |
 
@@ -156,13 +156,62 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP_01 @regressionAARP
-    Examples: 
+  @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP_01 @regressionAARP
+    Examples:
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
-      | AARP | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@1 |
+      | AARP | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@5 |
 
-    @dceShopperProfileAddDrugsGloballyAuthenticatedUser_UHC @regressionUHC
-    Examples: 
+  @dceImportDrugs_AuthenticatedUser
+  Scenario Outline: To verify DCE REDESIGN shopper profile flow when adding and editing drugs globally for authenticated user
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When the user navigate to Visitor profile page
+    And the user login with optum Id credentials
+      | User Name | <userName> |
+      | Password  | <password> |
+    And user clears the existing drugs in Visitor profile
+    And user clears the provider in visitor profile page
+    And the user clicks on the add drugs button globally on the profile page
+    Then the user validates Get Started Page
+    Then the user validates Import Option is displayed
+    Then the user clicks on Import Drugs and validates Import Flow - Imports Get Started, Member NonMember Selection modals
+    Then the user selects Member and provides Member Details and proceeds to import
+      | DOB | <dob> |
+      | ZipCode | <zipCode> |
+      | MBI     | <mbi> |
+    Then the user validates Import Success/Failure modal as follows
+      | DrugsFlag | <drugFlag> |
+      | ProvidersFlag | <providersFlag>     |
+    Then the user clicks on Review Imported Drugs and lands on Build your Drug List Page
+    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
+    When user enters valid zipcode and county
+      | ZipCode | <zipCode> |
+    And user clicks on continue button in Zip Entry Page
+    Then user should be able to see Return to profile link on summary page
+    And Back to profile button should be displayed for each plan card
+    When user clicks on Back to profile button
+    Then user should be navigated to shopper profile page
+    When user clicks on edit drugs button globally
+    Then user should be navigated to build drug list page
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug2> |
+    Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
+    Then user should be able to see Return to profile link on summary page
+    And Back to profile button should be displayed for each plan card
+    Then the user selects View Drug details for following plantype and PlanName
+      | Plan Type | <planType> |
+      | Plan Name | <planName> |
+    Then user should be able to see Return to profile link on details page
+    And user should be able to see Back to profile button on details page
+
+  @dceImportDrugs_AuthenticatedMember_AARP  @regressionAARP
+    Examples:
+      | site  | zipCode | drug2  | planType | planName                                            | userName  | password   | dob | zipCode | mbi | drugFlag | providersFlag |
+      | AARP  |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | DCE_ATDD  | Password@1 | 10/20/1942 | 06096 | 2ED7ET4TC62 | true | true |
+
+
+  @dceImportDrugs_AuthenticatedMember_UHC @regressionUHC
+    Examples:
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
       | UHC  | Orkambi |   80002 | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@1 |
 
@@ -182,13 +231,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see "Medicare Prescription Drug Plans" by default
 
-    @drugSummary_DefaultPlanType_AARP @regressionAARP
-    Examples: 
+  @drugSummary_DefaultPlanType_AARP @regressionAARP
+    Examples:
       | drug1   | zipCode | site |
       | Orkambi |   40701 | AARP |
 
-    @drugSummary_DefaultPlanType_UHC @regressionUHC
-    Examples: 
+  @drugSummary_DefaultPlanType_UHC @regressionUHC
+    Examples:
       | drug1   | zipCode | site |
       | Orkambi |   40701 | UHC  |
 
@@ -208,13 +257,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user clicks on continue button in Zip Entry Page
     Then user should be able to see "Medicare Advantage Plans" by default
 
-    @drugSummary_DefaultPlanType_AARP @regressionAARP
-    Examples: 
+  @drugSummary_DefaultPlanType_AARP @regressionAARP
+    Examples:
       | drug1   | zipCode | site |
       | Orkambi |   90210 | AARP |
 
-    @drugSummary_DefaultPlanType_UHC @regressionUHC
-    Examples: 
+  @drugSummary_DefaultPlanType_UHC @regressionUHC
+    Examples:
       | drug1   | zipCode | site |
       | Orkambi |   90210 | UHC  |
 
@@ -251,13 +300,13 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
-    @dceShopperProfileAddDrugsGlobally_AARP @F539025AARP @regressionAARP
-    Examples: 
+  @dceShopperProfileAddDrugsGlobally_AARP @F539025AARP @regressionAARP
+    Examples:
       | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | planName                            |
       | AARP | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County | AARP Medicare Advantage Prime (HMO) |
 
-    @dceShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC
-    Examples: 
+  @dceShopperProfileAddDrugsGlobally_UHC @F539025UHC @regressionUHC
+    Examples:
       | site | drug1   | drug2  | plantype | planyear | testPlans                                                                | zipcode | isMultiCounty | county          | planName                            |
       | UHC  | Orkambi | Fanapt | MAPD     | next     | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10001 | NO            | New York County | AARP Medicare Advantage Prime (HMO) |
 
@@ -277,12 +326,12 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user clicks on Review Drug Costs button to Land on Drug Summary Page
     Then user should be able to see "Medicare Prescription Drug Plans" by default
 
-    @F549665
-    Examples: 
+  @F549665
+    Examples:
       | site | zipcode | county | isMultutiCounty | drug1   |
       | AARP |   90210 | none   | no              | Orkambi |
 
-    @F549665
-    Examples: 
+  @F549665
+    Examples:
       | site | zipcode | county | isMultutiCounty | drug1   |
       | UHC  |   90210 | none   | no              | Orkambi |

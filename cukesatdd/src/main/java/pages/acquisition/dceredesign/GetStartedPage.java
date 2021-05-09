@@ -232,5 +232,104 @@ public void yahooSearch(String searchParameter) {
 		
 	}
 
+	@FindBy(xpath = "//button[contains(@id, 'importDrug')]/*")
+	public WebElement ImportBtn;
+
+	public void ValidateImportOptionDIspalyed() {
+		if(!validateNew(ImportBtn)){
+			Assertion.fail(">>>>>>>>>> Import Validation Failed <<<<<<<<< - Import Option is NOT Displayed");
+		}
+    }
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'get started')]/span")
+	public WebElement ImportModal_GetStartedBtn;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//input[contains(@id, 'member')]//following::span[contains(text(), 'Yes')]")
+	public WebElement ImportModal_MemberRadio;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//input[contains(@id, 'non-member')]//following::span[text()= 'No ']")
+	public WebElement ImportModal_NonMemberRadio;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'next')]")
+	public WebElement ImportModal_NextBtn;
+
+	public void ClickImportValidateModals() {
+		validateNew(ImportBtn);
+		jsClickNew(ImportBtn);
+		CommonUtility.waitForPageLoadNew(driver, ImportModal_GetStartedBtn, 20);
+		validateNew(ImportModal_GetStartedBtn);
+		jsClickNew(ImportModal_GetStartedBtn);
+		CommonUtility.waitForPageLoadNew(driver, ImportModal_MemberRadio, 20);
+		validateNew(ImportModal_MemberRadio);
+		validateNew(ImportModal_NonMemberRadio);
+		validateNew(ImportModal_NextBtn);
+	}
+
+	@FindBy(xpath = "//input[@id='member-date-of-birth']")
+	public WebElement Member_DOBtxtbx;
+	@FindBy(xpath = "//input[@id='member-zip-code']")
+	public WebElement Member_Ziptxtbx;
+	@FindBy(xpath = "//input[@id='member-medicare-number']")
+	public WebElement Member_MBItxtbx;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'view your drugs and doctors')]/span")
+	public WebElement Member_VieDrugsDrBtn;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//*[contains(@id, 'name-capital')]/span")
+	public WebElement Member_NameDisplay;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//*[contains(@class, 'data-import-popup')]")
+	public WebElement DataImportStatusPopup;
+
+	public void EnterMemberDetailsAndImport(String member_dob, String member_zip, String member_mbi) {
+		validateNew(ImportModal_MemberRadio);
+		jsClickNew(ImportModal_MemberRadio);
+		validateNew(ImportModal_NextBtn);
+		jsClickNew(ImportModal_NextBtn);
+		CommonUtility.waitForPageLoadNew(driver, Member_NameDisplay, 20);
+		validateNew(Member_NameDisplay);
+		System.out.println("Member Name Displayed - "+Member_NameDisplay);
+		validateNew(Member_DOBtxtbx);
+		validateNew(Member_Ziptxtbx);
+		validateNew(Member_MBItxtbx);
+		validateNew(Member_VieDrugsDrBtn);
+		sendkeys(Member_DOBtxtbx, member_dob);
+		sendkeys(Member_Ziptxtbx, member_zip);
+		sendkeys(Member_MBItxtbx, member_mbi);
+		jsClickNew(Member_VieDrugsDrBtn);
+		CommonUtility.waitForPageLoadNew(driver, DataImportStatusPopup, 20);
+		if(!validateNew(DataImportStatusPopup)){
+			Assertion.fail(">>>>>>>> Import FAILED <<<<<<<< - Import Status Modal not displayed");
+		}
+	}
+
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//h2[contains(text(), 'Success')]")
+	public WebElement Import_SuccessMsg;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//li/*[contains(text(), 'Drugs')]//*[contains(text(), 'Have been added to your cabinet')]")
+	public WebElement Drugs_SuccessMsg;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//li/*[contains(text(), 'Doctors')]//*[contains(text(), 'Have been added to your shopper profile')]")
+	public WebElement Providers_SuccessMsg;
+	@FindBy(xpath = "//*[contains(@id, 'modal')]//button[contains(@dtmname, 'review my drugs')]")
+	public WebElement ReviewDrugsBtn;
+
+	//*[contains(@id, 'modal')]//h2[contains(text(), 'Success')]
+	public void ValidateImportCompleteModal(String drugsFlag, String providersFlag) {
+		validateNew(DataImportStatusPopup);
+		if(drugsFlag.equalsIgnoreCase("true") || drugsFlag.equalsIgnoreCase("yes")
+			|| providersFlag.equalsIgnoreCase("true") || providersFlag.equalsIgnoreCase("yes")){
+			System.out.println("Expected Drug Import Status - Both Drugs and Providers Imported");
+			validateNew(Import_SuccessMsg);
+			validateNew(Drugs_SuccessMsg);
+			validateNew(Providers_SuccessMsg);
+			validateNew(ReviewDrugsBtn);
+			System.out.println("Validation Passed - Import Completion Modal Validated for Successful Drugs and Providers Import");
+		}
+	}
+
+	public BuildYourDrugList ClickReviewDrugsBtn() {
+		validateNew(ReviewDrugsBtn);
+		jsClickNew(ReviewDrugsBtn);
+		System.out.println("Review Your Drugs Button for Import Modal is Clicked to land on Build Your Drug List Page");
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugList(driver);
+		}
+		Assertion.fail("Did not Navigate to Build Drug List Page");
+		return null;
+	}
 }
 

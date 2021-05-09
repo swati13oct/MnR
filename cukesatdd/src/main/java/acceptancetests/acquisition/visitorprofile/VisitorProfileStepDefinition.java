@@ -551,7 +551,7 @@ public class VisitorProfileStepDefinition {
 	public void user_clears_the_existing_drugs_in_visitor_profile() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.clearDrugsFromPlanCard();
+		visitorProfile.clearDrugs();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 
