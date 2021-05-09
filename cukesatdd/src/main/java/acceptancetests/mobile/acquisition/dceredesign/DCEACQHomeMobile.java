@@ -44,7 +44,8 @@ public class DCEACQHomeMobile {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-     AppiumDriver wd;
+
+	AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -55,8 +56,8 @@ public class DCEACQHomeMobile {
 		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		aquisitionhomepage.openMobileURL();
-		//aquisitionhomepage.openPRE();
-		
+		// aquisitionhomepage.openPRE();
+
 		aquisitionhomepage.fixPrivateConnectionMobile();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
@@ -89,7 +90,7 @@ public class DCEACQHomeMobile {
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		BuildYourDrugListMobile DCEbuildDrugList = DCEgetStarted.clickAddsDrugs();
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		//druglist = "";
+		// druglist = "";
 		System.out.println("Setting Drugs List : " + druglist);
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
@@ -99,11 +100,12 @@ public class DCEACQHomeMobile {
 	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -116,13 +118,7 @@ public class DCEACQHomeMobile {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
 	}
-	
 
-	
-
-	
-
-	
 	@Then("^the user validates all added drugs in DrugList$")
 	public void the_user_validates_all_added_drugs_in_DrugList() throws Throwable {
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -143,11 +139,12 @@ public class DCEACQHomeMobile {
 	public void user_enter_valid_zipcode_and_county_in_AARP(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("ZipCode");
 		String county = memberAttributesMap.get("county");
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
@@ -170,12 +167,13 @@ public class DCEACQHomeMobile {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = attributes.getGherkinRows(); for
+		 * (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String plantype = memberAttributesMap.get("Plan Type");
 		String planName = memberAttributesMap.get("Plan Name");
 		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
@@ -193,7 +191,7 @@ public class DCEACQHomeMobile {
 
 		String PlanName = (String) getLoginScenario().getBean(DCERedesignCommonConstants.PLANNAME);
 		drugDetailsPage.validatePlanName(PlanName);
-	    getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, PlanName);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, PlanName);
 	}
 
 	@Then("^the user validates Drug Costs section$")
@@ -230,7 +228,7 @@ public class DCEACQHomeMobile {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDrugStageInfoModals();
 	}
-	
+
 	@Then("^the user validates link to Drug Summary Page$")
 	public void the_user_validates_link_to_Drug_Summary_Page() throws Throwable {
 		DrugDetailsPageMobile drugDetailsPage = (DrugDetailsPageMobile) getLoginScenario()
@@ -239,25 +237,27 @@ public class DCEACQHomeMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 
 	}
-	
+
 	@Then("^the user validates Drug Recommendation section$")
 	public void the_user_validates_Drug_Recommendation_section() throws Throwable {
-		BuildYourDrugListMobile buildYourDrugsListPage = (BuildYourDrugListMobile) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+		BuildYourDrugListMobile buildYourDrugsListPage = (BuildYourDrugListMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
 		buildYourDrugsListPage.validateDrugRecommendationSection(druglist);
 	}
-	
+
 	@Then("^the user enters following information in Request Plan Information Guide$")
 	public void the_user_enters_following__information_in_Request_Plan_Information_Guide(DataTable givenAttributes)
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		// String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
@@ -268,41 +268,39 @@ public class DCEACQHomeMobile {
 		plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
 
 	}
-	
+
 	/**
 	 * @toDo: user Enters a zipcode
 	 */
 	@When("^the user enters the zipcode and counts the plan$")
 	public void user_enters_the_zipcode_and_counts_plans(DataTable givenAttributes) {
 
-			Map<String, String> memberAttributesMap = new HashMap<String, String>();
-			memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-			/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-			for (int i = 0; i < memberAttributesRow.size(); i++) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
-				memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-						memberAttributesRow.get(i).getCells().get(1));
-			}*/
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String plancount = memberAttributesMap.get("Plancount");
+		String planYear = memberAttributesMap.get("Year");
 
-			String zipcode = memberAttributesMap.get("Zip Code");
-			String plancount = memberAttributesMap.get("Plancount");
-			String planYear = memberAttributesMap.get("Year");
+		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
+				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 
-		{
-			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
-					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			
-			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode,planYear);
-			 int strplancount = Integer.parseInt(plancount);
-			 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
-			 if(intPlanCounts!=strplancount){
-				Assertion.fail("Plan count is not matching");
-			 }
-			
-
+		int intPlanCounts = providerSearchPage.entersZipcodeAndPlancount(zipcode, planYear);
+		int strplancount = Integer.parseInt(plancount);
+		System.out.println("expected==" + strplancount + "===actual==" + intPlanCounts);
+		if (intPlanCounts != strplancount) {
+			Assertion.fail("Plan count is not matching");
 		}
+
 	}
-	
+
 	@When("^user saves below plan$")
 	public void user_saves_below_plan(DataTable givenAttributes) {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -310,16 +308,17 @@ public class DCEACQHomeMobile {
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savePlanNames = memberAttributesMap.get("Plan Name");
 		String planType = memberAttributesMap.get("Plan Type");
 		plansummaryPage.savePlans(savePlanNames, planType);
 	}
-	
+
 	@Then("^the user verify the Retail chain pharmacy on detail page$")
 	public void the_user_verify_the_Retail_chain_pharmacy_on_detail_page() throws Throwable {
 		DrugDetailsPageMobile drugDetailPage = new DrugDetailsPageMobile(wd);
