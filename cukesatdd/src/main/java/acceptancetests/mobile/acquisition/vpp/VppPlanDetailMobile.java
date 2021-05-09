@@ -2302,7 +2302,7 @@ public class VppPlanDetailMobile {
 	}
 
 	@Then("^the user Click on Look up your Provider button in UMS site$")
-	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
+	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() throws InterruptedException {
 
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);

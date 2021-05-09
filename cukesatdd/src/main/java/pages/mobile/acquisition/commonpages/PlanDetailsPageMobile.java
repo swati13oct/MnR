@@ -815,13 +815,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return validationFlag;
 	}
 
-	public ProviderSearchPageMobile validateLookUpYourProviderButton() {
+	public ProviderSearchPageMobile validateLookUpYourProviderButton() throws InterruptedException {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
 		iosScroll(lookUpYourProviderTitle);
 //		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
-		
+		Thread.sleep(5000);
+		checkElementisEnabled(lookUpYourProviderButton);
 		switchToNewTabNew(lookUpYourProviderButton);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);

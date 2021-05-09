@@ -23,6 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
@@ -144,7 +145,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
 	private WebElement pdpPlansNumber;
 
-	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
 	private WebElement pdpPlansViewLink;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
@@ -2880,12 +2881,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
 			WebDriverWait d = new WebDriverWait(driver, 20);
-			// d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
 
 			String State = CommonConstants.getSelectedState();
+
 			/*
 			 * if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) { if
 			 * (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") ||

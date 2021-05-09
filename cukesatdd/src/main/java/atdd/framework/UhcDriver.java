@@ -1286,7 +1286,7 @@ public abstract class UhcDriver {
 			if (clickElement)
 				scrollToView(selectElement);
 			checkElementisEnabled(selectElement);
-			jsClickNew(selectElement);
+			selectElement.click();
 
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
