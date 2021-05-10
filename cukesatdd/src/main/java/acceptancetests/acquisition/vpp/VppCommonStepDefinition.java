@@ -4274,4 +4274,24 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 				plansummaryPage.validateGroupPlanMArkettingBullets() ;
 	}
+	
+	@And("^the user views the plans for below plan type$")
+	public void user_view_plans_of_plan_type(DataTable givenAttributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String plantype = givenAttributesMap.get("Plan Type");
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		plansummaryPage.viewPlanSummary(plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+	}
 }

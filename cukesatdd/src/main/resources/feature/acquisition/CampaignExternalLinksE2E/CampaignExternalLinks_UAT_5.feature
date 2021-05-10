@@ -47,7 +47,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | 2nd Recommendation | <2ndRecommendation> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantype> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
@@ -65,26 +65,26 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | County Name     | <county>        |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantypePDP> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user validates TFN Number on Right Rail
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantypeSNP> |
     And the user validates TFN Number on Right Rail
       | TFN Xpath | <TFNxpath3> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantype> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user validates TFN Number on Right Rail
       | TFN Xpath | <TFNxpath3> |
     Then the user navigates to refresh page
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantypeMS> |
     And the user validates SAM icons on Medsupp page
       | TFN Xpath | <TFNxpath2> |
@@ -147,7 +147,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | 2nd Recommendation | <2ndRecommendation> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantype> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
@@ -165,26 +165,26 @@ Feature: 1.05.5. UAT Scripts Campaign External Links Scenario 5 related to morga
       | Zip Code        | <Zipcode>       |
       | Is Multi County | <isMultiCounty> |
       | County Name     | <county>        |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantypePDP> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user validates TFN Number on Right Rail
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantypeSNP> |
     And the user validates TFN Number on Right Rail
       | TFN Xpath | <TFNxpath3> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantype> |
     And the user validates SAM icons on the page
       | TFN Xpath | <TFNxpath2> |
     And the user validates TFN Number on Right Rail
       | TFN Xpath | <TFNxpath3> |
       Then the user navigates to refresh page
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <plantypeMS> |
     And the user validates SAM icons on Medsupp page
       | TFN Xpath | <TFNxpath2> |

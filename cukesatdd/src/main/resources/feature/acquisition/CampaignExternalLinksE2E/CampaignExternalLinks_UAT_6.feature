@@ -17,7 +17,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <MAplantype> |
     # And the user selects plan year
     #	|Plan Year	| <planyear>|
@@ -75,7 +75,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
      Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <PDPplantype> |
     # And the user selects plan year
     #	|Plan Year	| <planyear>|
@@ -131,7 +131,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
      Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <SNPplantype> |
     # And the user selects plan year
     #	|Plan Year	| <planyear>|
@@ -173,7 +173,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
      Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <MSplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
@@ -213,7 +213,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
     And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
     Then the user validates PSC code
       | PSC Code | <pscCode> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <MAplantype> |
     # And the user selects plan year
     #	|Plan Year	| <planyear>|
@@ -271,7 +271,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
      Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <PDPplantype> |
     # And the user selects plan year
     #	|Plan Year	| <planyear>|
@@ -327,7 +327,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
      Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <SNPplantype> |
     # And the user selects plan year
     #	|Plan Year	| <planyear>|
@@ -369,7 +369,7 @@ Feature: 1.05.5. UAT Scripts Campaign External Links scenario 6 related to  medi
      Then the user validates TFN Number on Zipcode component
       | TFN No    | <TFNNo>     |
       | TFN Xpath | <TFNxpath3> |
-    And the user views the plans of the below plan type
+    And the user views the plans for below plan type
       | Plan Type | <MSplantype> |
     And the user selects plan year
       | Plan Year | <planyear> |
