@@ -237,7 +237,7 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+   # Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user selects payment type
       | Payment Type           | <paymentType>         |
@@ -268,10 +268,10 @@ Feature: 1.05.9 OLE Common tool flow E2E Shop Pages
     Then the user clicks on Submit Enrollment to complete enrollment
     # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-    Then the user validates the OLE Submission Details in GPS
-      | Plan Type                | <plantype>               |
-      | Auth Flag                | <authflag>               |
-      | Mailing Address Question | <mailingaddressquestion> |
+    #Then the user validates the OLE Submission Details in GPS
+     # | Plan Type                | <plantype>               |
+     # | Auth Flag                | <authflag>               |
+     # | Mailing Address Question | <mailingaddressquestion> |
 
     @ShopPage_OLE_Future_AARP @regressionAARP @OLE
     Examples: 
