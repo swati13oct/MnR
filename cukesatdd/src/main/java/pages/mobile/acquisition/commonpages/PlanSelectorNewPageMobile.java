@@ -15,11 +15,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.GlobalWebElements;
 import pages.acquisition.commonpages.PageTitleConstants;
 
 
-public class PlanSelectorNewPageMobile extends UhcDriver {
+public class PlanSelectorNewPageMobile extends GlobalWebElements {
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -166,7 +166,7 @@ public class PlanSelectorNewPageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePageMobile.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 

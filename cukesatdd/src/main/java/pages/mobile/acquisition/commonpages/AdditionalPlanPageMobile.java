@@ -11,6 +11,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -58,7 +59,7 @@ public class AdditionalPlanPageMobile extends UhcDriver{
 		}
 
 		if (getTitle().equalsIgnoreCase(
-				PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_PLANS)) {
+				PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS)) {
 			return new PlanConfirmationPageMobile(driver);
 		}
 		return null;

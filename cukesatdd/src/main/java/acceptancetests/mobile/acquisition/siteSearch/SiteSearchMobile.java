@@ -2,10 +2,8 @@ package acceptancetests.mobile.acquisition.siteSearch;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,13 +11,14 @@ import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
@@ -72,13 +71,12 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
-				.clicksOnRallyToolFromGlobalHeader();
+		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		} else {
-			Assert.fail("Error Loading Rally tool from Global Header");
+			Assertion.fail("Error Loading Rally tool from Global Header");
 		}
 		
 //		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
@@ -89,7 +87,7 @@ public class SiteSearchMobile {
 //		if (providerSearchPage != null) {
 //			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 //		} else {
-//			Assert.fail("Error Loading Rally tool from Global Header");
+//			Assertion.fail("Error Loading Rally tool from Global Header");
 //		}
 	}
 
@@ -99,20 +97,21 @@ public class SiteSearchMobile {
 	@Then("^the user enters the zipcode and select a plan on the Rally tool$")
 	public void user_enters_the_zipcode_on_the_Rally_tool(DataTable givenAttributes) {
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String planName = memberAttributesMap.get("Plan Name");
 		String year = memberAttributesMap.get("Year");
 
 		{
-			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.entersZipcodeAndSelectPlanName(zipcode, planName, year);
 
@@ -125,7 +124,7 @@ public class SiteSearchMobile {
 	@When("^user selects a provider and saves it$")
 	public void user_selects_provider_and_saves_it() {
 		{
-			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
 
@@ -138,27 +137,28 @@ public class SiteSearchMobile {
 	@When("^the user enters the zipcode and counts the plan Ulayer$")
 	public void user_enters_the_zipcode_and_counts_plan(DataTable givenAttributes) {
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String plancount = memberAttributesMap.get("Plancount");
 		String planYear = memberAttributesMap.get("Year");
 
 		{
-			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 
 			int intPlanCounts = providerSearchPage.entersZipcodeAndPlancountblayer(zipcode, planYear);
 			int strplancount = Integer.parseInt(plancount);
 			System.out.println("expected==" + strplancount + "===actual==" + intPlanCounts);
 			if (intPlanCounts != strplancount) {
-				Assert.fail("Plan count is not matching");
+				Assertion.fail("Plan count is not matching");
 			}
 
 		}
@@ -178,7 +178,7 @@ public class SiteSearchMobile {
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		} else {
-			Assert.fail("Error Loading Rally tool from Home Page");
+			Assertion.fail("Error Loading Rally tool from Home Page");
 		}
 	}
 
@@ -191,13 +191,12 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
-				.clicksOnRallyToolFromGlobalHeader();
+		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromGlobalHeader();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		} else {
-			Assert.fail("Error Loading Rally tool from Global Header");
+			Assertion.fail("Error Loading Rally tool from Global Header");
 		}
 	}
 
@@ -207,20 +206,21 @@ public class SiteSearchMobile {
 	@Then("^the user enters the zipcode and select a plan on the Rally tool for given zipcode$")
 	public void user_enters_the_zipcode_on_the_Rally_tool1(DataTable givenAttributes) {
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String planName = memberAttributesMap.get("Plan Name");
 		String year = memberAttributesMap.get("Year");
 
 		{
-			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.entersZipcodeAndSelectPlanName(zipcode, planName, year);
 
@@ -233,7 +233,7 @@ public class SiteSearchMobile {
 	@When("^user select a provider and save it$")
 	public void user_selects_provider_and_saves_it1() {
 		{
-			pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.selectsProviderFromGlobaHeader();
 
@@ -242,11 +242,12 @@ public class SiteSearchMobile {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
+		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		return memberAttributesMap;
 	}
 
@@ -255,20 +256,20 @@ public class SiteSearchMobile {
 	 */
 	@When("^the user Click on Is my Provider covered link$")
 	public void clickonProvidercoveredlink(DataTable Planname) {
-		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
 			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 					plannameAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String planName = plannameAttributesMap.get("PlanName");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = plansummaryPage
-				.clicksOnIsProviderCovered(planName);
+		ProviderSearchPageMobile providerSearchPage = plansummaryPage.clicksOnIsProviderCovered(planName);
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		}
@@ -280,10 +281,10 @@ public class SiteSearchMobile {
 
 	@When("^user selects a provider and retuns to VPP page$")
 	public void user_selects_provider_and_return_vpp_page_ulayer() {
-		pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = (pages.mobile.acquisition.commonpages.ProviderSearchPageMobile) getLoginScenario()
+		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 				.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = providerSearchPage.selectsProvider();
-		Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+		Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 	}
 
 	/**
@@ -292,13 +293,14 @@ public class SiteSearchMobile {
 	 */
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page$")
 	public void verify_providers_covered_ulayer(DataTable Planname) {
-		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
 			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 					plannameAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -306,21 +308,20 @@ public class SiteSearchMobile {
 		plansummaryPage.verifyproviderName(planName);
 	}
 
-	
-	
 	/**
 	 * @toDo:Verify provider covered information is displayed on Plan Summary page
 	 */
 	@Then("^Verify provider name is displayed on Plan Summary page$")
 	public void verify_provider_covered_ulayer(DataTable Planname) {
 
-		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
 			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 					plannameAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -330,8 +331,9 @@ public class SiteSearchMobile {
 
 	@Then("^the user navigates to the plan details page$")
 	public void user_navigates_to_plan_details_page(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
+		String PlanName = givenAttributes.cell(0, 1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
 
 		VPPPlanSummaryPageMobile vppPlanSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -339,20 +341,19 @@ public class SiteSearchMobile {
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		System.out.println("Plan name is " + PlanName + "Plan type is " + planType);
-		pages.mobile.acquisition.commonpages.PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
-				.navigateToPlanDetails(PlanName, planType);
+		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in Loading the Plan Details Page");
+			Assertion.fail("Error in Loading the Plan Details Page");
 
 	}
 
 	@Then("^the user Click on Look up your Provider button on Plan Details Page$")
 	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
 
-		pages.mobile.acquisition.commonpages.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.commonpages.PlanDetailsPageMobile) getLoginScenario()
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 
 		ProviderSearchPageMobile providerSearchPage = vppPlanDetailsPage.validateLookUpYourProviderButton();
@@ -367,18 +368,17 @@ public class SiteSearchMobile {
 		{
 			ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
-			pages.mobile.acquisition.commonpages.PlanDetailsPageMobile planDetailsPage = providerSearchPage
-					.selectsProviderFromVppPlanDetailsPage();
-			Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+			PlanDetailsPageMobile planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
+			Assertion.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
 
 		}
 	}
 
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Details page$")
 	public void verify_providers_covered_ulayer_planDetails() {
-		pages.mobile.acquisition.commonpages.PlanDetailsPageMobile vppPlanDetailsPage = (pages.mobile.acquisition.commonpages.PlanDetailsPageMobile) getLoginScenario()
+		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		Assert.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
+		Assertion.assertTrue("Provider coverage Info not updated", vppPlanDetailsPage.providerinfo());
 	}
 
 	/**
@@ -390,13 +390,12 @@ public class SiteSearchMobile {
 		AcquisitionHomePageMobile acquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		pages.mobile.acquisition.commonpages.ProviderSearchPageMobile providerSearchPage = acquisitionhomepage
-				.clicksOnRallyToolFromHomePage();
+		ProviderSearchPageMobile providerSearchPage = acquisitionhomepage.clicksOnRallyToolFromHomePage();
 
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		} else {
-			Assert.fail("Error Loading Rally tool from Home Page");
+			Assertion.fail("Error Loading Rally tool from Home Page");
 		}
 	}
 

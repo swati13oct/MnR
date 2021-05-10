@@ -1,6 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.junit.Assert;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,10 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import pages.acquisition.commonpages.CoverageChoicesPage;
-
-import java.util.List;
 
 public class MedicareEligibilityPageMobile extends GlobalWebElements {
 
@@ -121,7 +120,7 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 		return txtsideBarLinks;
 
 	}
-	
+
 	/*default value of dropdown on secondary pages of Learn about medicare*/
 	public String defaultValueDropDown() {
 		Select dropdown = new Select(getDropDownState());
@@ -130,7 +129,7 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 		String txtDefaultValueDropDown = option.getText() == "Select State" ? option.getText()
 				: option.getAttribute("value");
 		if (!txtDefaultValueDropDown.contains(("Select State")))
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		return txtDefaultValueDropDown;
 
 		/*
@@ -150,7 +149,7 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 			}
 		}
 
-		Assert.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
+		Assertion.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
 
 	}
 	/*side links of secondary pages of Learn about medicare*/
@@ -162,30 +161,31 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 			}
 		}
 
-		Assert.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
+		Assertion.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
 
 	}
-	
+
 	public void stateSelection(String value) {
 		
-		selectFromDropDownByText(driver,dropDownState,value);
+		//selectFromDropDownByText(driver,dropDownState,value);
+		mobileSelectOption(dropDownState, value, true);
 
 	}
-	
+
 	/*logic:search for a plan with valid zipcode*/
 	public WebDriver planSearch(String zipCode) {
 		validateNew(getTxtZipcode());
 		getTxtZipcode().sendKeys(zipCode);
 		switchToNewTabNew(btnZipcode);
 		System.out.println(getTitle());
-		Assert.assertTrue("Incorrect page is loaded", getTitle().contains("Find Medicare Plans"));
+		Assertion.assertTrue("Incorrect page is loaded", getTitle().contains("Find Medicare Plans"));
 		//btnZipcode.click();
 		validateNonPresenceOfElement(btnZipcode);
 		return driver;
-		
+
 	}
-public void clickOnIEP() {
-		
+	public void clickOnIEP() {
+
 		WebElement lnkIEP=driver.findElement(By.xpath("//a[contains(text(),'Initial Enrollment Period')]"));
 		validateNew(lnkIEP);
 		jsClickNew(lnkIEP);
@@ -195,13 +195,13 @@ public void clickOnIEP() {
 		{
 			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
 			waitforElementNew(pageHeader);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Initial Enrollment Period Page open correctly");
-			
+
 		}else {
-			Assert.fail("Initial Enrollment Period Page did not open correctly");
+			Assertion.fail("Initial Enrollment Period Page did not open correctly");
 		}
-		
+
 		driver.navigate().back();
 		//Adding the below code as elements are not located in Safari browser after using navigate back
 		if(MRScenario.browserName.equalsIgnoreCase("Safari")) {
@@ -210,7 +210,7 @@ public void clickOnIEP() {
 		}
 	}
 
-    public void checkLeftRailPlanLinks(String plan) {
+	public void checkLeftRailPlanLinks(String plan) {
 		WebElement lnkplan=null;
 		WebElement lnkMededNavMobile=driver.findElement(By.xpath("//a[contains(@class,'meded-article-nav__title')]"));
 		waitForPageLoadSafari();
@@ -219,32 +219,32 @@ public void clickOnIEP() {
 		sleepBySec(2);
 		System.out.println("Med Ed Navigation Opened Successfully");
 		if(plan=="MA") {
-		 lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-advantage') and contains(@class,'sidebar')]"));
+			lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-advantage') and contains(@class,'sidebar')]"));
 		}else if(plan=="MS") {
-		 lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-supplement') and contains(@class,'sidebar')]"));
+			lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-supplement') and contains(@class,'sidebar')]"));
 		}else if(plan=="PDP") {
-		 lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-part-d') and contains(@class,'sidebar')]"));
+			lnkplan=driver.findElement(By.xpath("//a[contains(@href,'medicare-part-d') and contains(@class,'sidebar')]"));
 		}
 		validateNew(lnkplan);
 		jsClickNew(lnkplan);
-		
+
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		String checkUrl=driver.getCurrentUrl();
-		
+
 		WebElement pageHeader=null;
-		
+
 		if(plan=="MA" && checkUrl.contains("medicare-education/medicare-advantage-plans.html")) {
 			pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Medicare Advantage')]"));			
 		}else if(plan=="MS" && checkUrl.contains("medicare-education/medicare-supplement-plans.html")) {
 			pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Medicare Supplement')]"));
 		}else if(plan=="PDP" && checkUrl.contains("medicare-education/medicare-part-d.html")) {
-			
+
 			pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Medicare Prescription')]"));
 		}
 		if (pageHeader!=null)
 		{
-			Assert.assertTrue(true);	
+			Assertion.assertTrue(true);	
 			waitforElementNew(pageHeader,8);
 			System.out.println(pageHeader.getText()+" page is displayed");
 			driver.navigate().back();
@@ -254,9 +254,9 @@ public void clickOnIEP() {
 				threadsleep(2000);
 			}
 		}else {
-			Assert.fail(plan+" MEd Ed page not displayed");
+			Assertion.fail(plan+" MEd Ed page not displayed");
 		}
-		
+
 	}
 
 	public CoverageChoicesPageMobile clickonCoverageChoicesLink() {
@@ -264,7 +264,7 @@ public void clickOnIEP() {
 		validateNew(lnkcvrgChoice);
 		jsClickNew(lnkcvrgChoice);
 		CommonUtility.checkPageIsReadyNew(driver);
-		
+
 		String checkUrl=driver.getCurrentUrl();
 		if(checkUrl.contains("medicare-education/medicare-parts-and-medigap-plans.html")) {
 			return new CoverageChoicesPageMobile(driver);
@@ -283,9 +283,9 @@ public void clickOnIEP() {
 
 	}
 
-	
-	
-	
-	
+
+
+
+
 
 }

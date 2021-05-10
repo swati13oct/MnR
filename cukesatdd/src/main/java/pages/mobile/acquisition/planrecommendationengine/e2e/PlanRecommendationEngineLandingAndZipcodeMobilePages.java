@@ -6,7 +6,6 @@ package pages.mobile.acquisition.planrecommendationengine.e2e;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -14,11 +13,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
-import io.appium.java_client.AppiumDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDriver {
+public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends GlobalWebElements {
 
 	public PlanRecommendationEngineLandingAndZipcodeMobilePages(WebDriver driver) {
 		super(driver);
@@ -28,7 +25,7 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 
@@ -247,7 +244,8 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 		Thread.sleep(2000);
 		zipcodePagemultiCounty();
 		waitforElementVisibilityInTime(PRECounty, 45);
-		selectFromDropDownByText(driver, PRECounty, County);
+		//selectFromDropDownByText(driver, PRECounty, County);
+		mobileSelectOption(PRECounty, County, true);
 		threadsleep(5000);
 		jsClickNew(continueBtn);
 		waitforElementVisibilityInTime(coverageTitle, 30);
@@ -364,10 +362,12 @@ public class PlanRecommendationEngineLandingAndZipcodeMobilePages extends UhcDri
 	public void edit_location(String zipcode, String multi, String county) {
 		waitforElementVisibilityInTime(zipCode, 45);
 		zipCode.clear();
-		sendkeys(zipCode, zipcode);
+		//sendkeys(zipCode, zipcode);
+		sendkeysMobile(zipCode, zipcode);
 		if (multi.equalsIgnoreCase("Yes")) {
 			waitforElementVisibilityInTime(PRECounty, 45);
-			selectFromDropDownByText(driver, PRECounty, county);
+			//selectFromDropDownByText(driver, PRECounty, county);
+			mobileSelectOption(PRECounty, county, true);
 		}
 		threadsleep(3000);
 	}

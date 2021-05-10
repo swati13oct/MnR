@@ -2,14 +2,15 @@ package pages.mobile.acquisition.commonpages;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 //import pages.mobile.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 
 public class VPPAarpNeedHelpWidgetPageMobile extends UhcDriver{
@@ -76,13 +77,13 @@ public class VPPAarpNeedHelpWidgetPageMobile extends UhcDriver{
 					System.out.println(messageText.getText());
 					closeButtonOnNewTab.click();						
 					}else{
-						Assert.fail("-----issue with chat now ne window------");
+						Assertion.fail("-----issue with chat now ne window------");
 					}
 				}else{
-					Assert.fail("-------New Window not displayed-----");
+					Assertion.fail("-------New Window not displayed-----");
 				}*/
 			}else{
-				Assert.fail("-----------chat button not displayed or not enabled-------------");
+				Assertion.fail("-----------chat button not displayed or not enabled-------------");
 			}
 		System.out.println("------------chat with us widget validation ends---------------");
 	}
@@ -97,7 +98,7 @@ public class VPPAarpNeedHelpWidgetPageMobile extends UhcDriver{
  			if(findUsInYourNeighborhood.getText()!=null){
 				System.out.println("-------content text is displayed in content---------");
 			}else{
-				Assert.fail("--------------failed as nothing displayed in UI for content-------");
+				Assertion.fail("--------------failed as nothing displayed in UI for content-------");
 			}
 				makeAnAppointmentLink.click();
 				driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -107,7 +108,7 @@ public class VPPAarpNeedHelpWidgetPageMobile extends UhcDriver{
 					System.out.println("---Page Displayed correctly------");
 				}			 		 
 			}else{
-				Assert.fail("------------meet an agent widget not displayed");
+				Assertion.fail("------------meet an agent widget not displayed");
 			}
 			System.out.println("----------meet with an agent validation ends---------------");
 	}

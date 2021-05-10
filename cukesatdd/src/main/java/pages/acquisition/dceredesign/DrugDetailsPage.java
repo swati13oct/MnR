@@ -1,14 +1,10 @@
 package pages.acquisition.dceredesign;
 
-import static org.junit.Assert.assertTrue;
+import static atdd.framework.Assertion.assertTrue;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,10 +12,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.google.common.collect.Ordering;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
@@ -74,7 +74,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")
 	public WebElement DrugCosts_SaveBtn;
 
-	@FindBy(xpath = "//div[contains(text(), 'Need Help?')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-card')]//*[contains(text(), 'Need Help?')]")
 	public WebElement DrugCosts_TFN;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Your Drugs')]")
@@ -422,9 +422,9 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Plan Name : " + planName);
 		WebElement PlanNameElement = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]"));
 		if (validateNew(PlanNameElement)) {
-			Assert.assertTrue("Plan Name is correct for Drug Details Page" + PlanNameElement.getText(), true);
+			Assertion.assertTrue("Plan Name is correct for Drug Details Page" + PlanNameElement.getText(), true);
 		} else
-			Assert.fail("Plan Name validation Failed for Drug Details Page");
+			Assertion.fail("Plan Name validation Failed for Drug Details Page");
 	}
 
 	public void validateDrugCosts() {
@@ -534,7 +534,7 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println(
 					"Modal displayed for Initial Coverage Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
 		} else
-			Assert.fail(
+			Assertion.fail(
 					"Modal NOT Displayed for Initial Coverage Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page !!!");
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
@@ -545,7 +545,7 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println(
 					"Modal displayed for Coverage Gap Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
 		} else
-			Assert.fail(
+			Assertion.fail(
 					"Modal NOT Displayed for Coverage Gap Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page !!!");
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
@@ -556,7 +556,7 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println(
 					"Modal displayed for Catastrophic Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
 		} else
-			Assert.fail(
+			Assertion.fail(
 					"Modal NOT Displayed for Catastrophic Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page !!!");
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
@@ -571,15 +571,15 @@ public class DrugDetailsPage extends UhcDriver {
 		WebElement AccordianContent = driver
 				.findElement(By.xpath("//div[contains(@id,'accordian-content')]//h3[text()='General Disclaimer']"));
 		if (!AccordianContent.isDisplayed()) {
-			Assert.assertTrue("Important Information section is collapsed by default.", true);
+			Assertion.assertTrue("Important Information section is collapsed by default.", true);
 		} else
-			Assert.fail("Important Information section is NOT collapsed by default.");
+			Assertion.fail("Important Information section is NOT collapsed by default.");
 		jsClickNew(Disclaimer_Accordian);
 		System.out.println("Accordian Clicked");
 		if (validateNew(AccordianContent)) {
-			Assert.assertTrue("Important Information section is collapsed is Expanded.", true);
+			Assertion.assertTrue("Important Information section is collapsed is Expanded.", true);
 		} else
-			Assert.fail("Important Information section is NOT expanding when clicked");
+			Assertion.fail("Important Information section is NOT expanding when clicked");
 
 	}
 
@@ -594,7 +594,7 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);
 		}
-		Assert.fail("DCE - Drug Summary Page is not displayed");
+		Assertion.fail("DCE - Drug Summary Page is not displayed");
 		return null;
 	}
 
@@ -632,7 +632,7 @@ public class DrugDetailsPage extends UhcDriver {
 						"Drug Details Page, Validated Drug List for Drug, Initial Coverage Cost text and You Pay : "
 								+ currentDrug);
 			} else
-				Assert.fail(
+				Assertion.fail(
 						"Drug Details Page, Drug List, Initial Coverage Cost text and You Pay Validation FAILED for Drug : "
 								+ currentDrug);
 		}
@@ -640,7 +640,7 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println("Drug Details Page, Validated Total Added Drug Count Displayed in Your Drug Section: "
 					+ TotalDrugCount.getText());
 		} else
-			Assert.fail("Drug Details Page, Validated Total Added Drug Count NOT Displayed in Your Drug Section: "
+			Assertion.fail("Drug Details Page, Validated Total Added Drug Count NOT Displayed in Your Drug Section: "
 					+ TotalDrugCount.getText());
 	}
 
@@ -672,62 +672,62 @@ public class DrugDetailsPage extends UhcDriver {
 		if (Tier1Drugs.size() > 0) {
 			System.out.println("Total No. of Tier 1 Drugs Added: " + Tier1Drugs.size());
 		} else
-			Assert.fail("Tier 1 Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Tier 1 Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (Tier2Drugs.size() > 0) {
 			System.out.println("Total No. of Tier 2 Drugs Added: " + Tier2Drugs.size());
 		} else
-			Assert.fail("Tier 2 Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Tier 2 Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (Tier3Drugs.size() > 0) {
 			System.out.println("Total No. of Tier 3 Drugs Added: " + Tier3Drugs.size());
 		} else
-			Assert.fail("Tier 3 Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Tier 3 Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (Tier4Drugs.size() > 0) {
 			System.out.println("Total No. of Tier 4 Drugs Added: " + Tier4Drugs.size());
 		} else
-			Assert.fail("Tier 4 Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Tier 4 Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (Tier5Drugs.size() > 0) {
 			System.out.println("Total No. of Tier 5 Drugs Added: " + Tier5Drugs.size());
 		} else
-			Assert.fail("Tier 5 Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Tier 5 Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (NotCoveredDrugs.size() > 0) {
 			System.out.println("Total No. of Not Covered Drugs Added: " + NotCoveredDrugs.size());
 		} else
-			Assert.fail("Not Covered Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Not Covered Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (PADrugs.size() > 0) {
 			System.out.println("Total No. of Prior Auth Drugs Added: " + PADrugs.size());
 		} else
-			Assert.fail("Prior Auth Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Prior Auth Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (STDrugs.size() > 0) {
 			System.out.println("Total No. of Step Therapy Drugs Added: " + STDrugs.size());
 		} else
-			Assert.fail("Step Therapy Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Step Therapy Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (QLDrugs.size() > 0) {
 			System.out.println("Total No. of Quantity Limit Drugs Added: " + QLDrugs.size());
 		} else
-			Assert.fail("Quantity Limit Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Quantity Limit Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (SevenDayDrugs.size() > 0) {
 			System.out.println("Total No. of Seven Day Supply Drugs Added: " + SevenDayDrugs.size());
 		} else
-			Assert.fail("Seven Day Supply Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Seven Day Supply Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (LADrugs.size() > 0) {
 			System.out.println("Total No. of Limited Access Drugs Added: " + LADrugs.size());
 		} else
-			Assert.fail("Limited Access Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Limited Access Drug text NOT Displayed in Your Drug Section!!!");
 
 		if (DLDrugs.size() > 0) {
 			System.out.println("Total No. of Dispensing Limits Drugs Added: " + DLDrugs.size());
 		} else
-			Assert.fail("Dispensing Limits Drug text NOT Displayed in Your Drug Section!!!");
+			Assertion.fail("Dispensing Limits Drug text NOT Displayed in Your Drug Section!!!");
 
 	}
 
@@ -764,75 +764,75 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(ST_PDF_Link)) {
 			System.out.println("Step Therapy PDF Link is Displayed in Important Information Section");
 		} else
-			Assert.fail("Step Therapy PDF Link is NOT Displayed in Important Information Section!!!");
+			Assertion.fail("Step Therapy PDF Link is NOT Displayed in Important Information Section!!!");
 
 		if (validateNew(PA_PDF_Link)) {
 			System.out.println("Prior Authorization PDF Link is NOT Displayed in Important Information Section");
 		} else
-			Assert.fail("Prior Authorization PDF Link is NOT Displayed in Important Information Section!!!");
+			Assertion.fail("Prior Authorization PDF Link is NOT Displayed in Important Information Section!!!");
 
 		if (validateNew(Tier1Info)) {
 			System.out.println("Tier 1 Info is Displayed in Important Information Section : " + Tier1Info.getText());
 		} else
-			Assert.fail("Tier 1 Info is NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Tier 1 Info is NOT Displayed in Important Information Section !!!");
 
 		if (validateNew(Tier2Info)) {
 			System.out.println("Tier 2 Info is Displayed in Important Information Section : " + Tier2Info.getText());
 		} else
-			Assert.fail("Tier 2 Info is NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Tier 2 Info is NOT Displayed in Important Information Section !!!");
 
 		if (validateNew(Tier3Info)) {
 			System.out.println("Tier 3 Info is Displayed in Important Information Section : " + Tier3Info.getText());
 		} else
-			Assert.fail("Tier 3 Info is NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Tier 3 Info is NOT Displayed in Important Information Section !!!");
 
 		if (validateNew(Tier4Info)) {
 			System.out.println("Tier 4 Info is Displayed in Important Information Section : " + Tier4Info.getText());
 		} else
-			Assert.fail("Tier 4 Info is NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Tier 4 Info is NOT Displayed in Important Information Section !!!");
 
 		if (validateNew(Tier5Info)) {
 			System.out.println("Tier 5 Info is Displayed in Important Information Section : " + Tier5Info.getText());
 		} else
-			Assert.fail("Tier 5 Info is Displayed in Important Information Section !!!");
+			Assertion.fail("Tier 5 Info is Displayed in Important Information Section !!!");
 
 		if (validateNew(NotCoveredInfo)) {
 			System.out.println(
 					"Not Covered Info Displayed in Important Information Section : " + NotCoveredInfo.getText());
 		} else
-			Assert.fail("Not Covered Info NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Not Covered Info NOT Displayed in Important Information Section !!!");
 
 		if (validateNew(PAInfo)) {
 			System.out.println("Prior Auth Info Displayed in Important Information Section : " + PAInfo.getText());
 		} else
-			Assert.fail("Prior Auth Info NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Prior Auth Info NOT Displayed in Important Information Section !!!");
 
 		if (validateNew(STInfo)) {
 			System.out.println("Step Therapy Info Displayed in Important Information Section : " + STInfo.getText());
 		} else
-			Assert.fail("Step Therapy Info NOt Displayed in Important Information Section !!!");
+			Assertion.fail("Step Therapy Info NOt Displayed in Important Information Section !!!");
 
 		if (validateNew(QLInfo)) {
 			System.out.println("Quantity Limit Info Displayed in Important Information Section : " + QLInfo.getText());
 		} else
-			Assert.fail("Quantity Limit Info NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Quantity Limit Info NOT Displayed in Important Information Section !!!");
 
 		if (validateNew(SevenDayInfo)) {
 			System.out.println("Seven Day Supply Limit Info Displayed in Important Information Section : "
 					+ SevenDayInfo.getText());
 		} else
-			Assert.fail("Seven Day Supply Limit Info NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Seven Day Supply Limit Info NOT Displayed in Important Information Section !!!");
 
 		if (validateNew(LAInfo)) {
 			System.out.println("Limited Access Info Displayed in Important Information Section : " + LAInfo.getText());
 		} else
-			Assert.fail("Limited Access Info NOT Displayed in Important Information Section  !!!");
+			Assertion.fail("Limited Access Info NOT Displayed in Important Information Section  !!!");
 
 		if (validateNew(DLInfo)) {
 			System.out
 					.println("Dispensing Limits Info Displayed in Important Information Section : " + DLInfo.getText());
 		} else
-			Assert.fail("Dispensing Limits Drug text NOT Displayed in Important Information Section !!!");
+			Assertion.fail("Dispensing Limits Drug text NOT Displayed in Important Information Section !!!");
 
 	}
 
@@ -851,7 +851,7 @@ public class DrugDetailsPage extends UhcDriver {
 						.println("Current Drug Displayed in Drug Details Page, Monthly Drug Costs by Stage Drug List : "
 								+ currentDrug);
 			} else
-				Assert.fail("Drug Details Page, Monthly Drug Costs by Stage Drug List Validation FAILED for Drug : "
+				Assertion.fail("Drug Details Page, Monthly Drug Costs by Stage Drug List Validation FAILED for Drug : "
 						+ currentDrug);
 		}
 
@@ -907,7 +907,7 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(selectPharmacyHeader)) {
 			System.out.println("Select Pharmacy Modal displayed");
 		} else {
-			Assert.fail("Select Pharmacy Modal not displayed");
+			Assertion.fail("Select Pharmacy Modal not displayed");
 		}
 	}
 
@@ -919,7 +919,7 @@ public class DrugDetailsPage extends UhcDriver {
 				&& validateNew(nextBtn)) {
 			System.out.println("Select Pharmacy Modal validated - DCE Details Page");
 		} else {
-			Assert.fail("Select Pharmacy Modal not as expected - DCE Details Page");
+			Assertion.fail("Select Pharmacy Modal not as expected - DCE Details Page");
 		}
 	}
 
@@ -989,9 +989,9 @@ public class DrugDetailsPage extends UhcDriver {
 		// validateNew(PlanName_PlanDetails);
 
 		if (validateNew(PlanName_PlanDetails))
-			Assert.assertTrue("Plan Name is correct for Drug Details Page" + PlanName_PlanDetails.getText(), true);
+			Assertion.assertTrue("Plan Name is correct for Drug Details Page" + PlanName_PlanDetails.getText(), true);
 		else
-			Assert.fail("Plan Name validation Failed for Drug Details Page");
+			Assertion.fail("Plan Name validation Failed for Drug Details Page");
 	}
 
 	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
@@ -1065,7 +1065,7 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
 			return new SwitchToGeneric(driver);
 		}
-		Assert.fail("Did not Navigate to Switch To Generic Page");
+		Assertion.fail("Did not Navigate to Switch To Generic Page");
 		return null;
 	}
 
@@ -1081,7 +1081,7 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(EnterDrugNameTxt) && validateNew(SearchBtn)) {
 			return new BuildYourDrugList(driver);
 		}
-		Assert.fail("Did not Navigate to Build Drug List Page");
+		Assertion.fail("Did not Navigate to Build Drug List Page");
 		return null;
 
 	}
@@ -1148,9 +1148,9 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(ModalClose);
 		validateNew(Tier5_90Day_Text);
 		if (WhytheseAmountsText.contains("Preferred Pharmacy Network") && validateNew(Tier5_90Day_Text)) {
-			Assert.assertTrue("Preferred Retail Pharmacy Copay and Modals validated", true);
+			Assertion.assertTrue("Preferred Retail Pharmacy Copay and Modals validated", true);
 		} else
-			Assert.fail("Preferred Retail Pharmacy Copay and Modals NOT validated");
+			Assertion.fail("Preferred Retail Pharmacy Copay and Modals NOT validated");
 
 	}
 
@@ -1164,9 +1164,9 @@ public class DrugDetailsPage extends UhcDriver {
 		jsClickNew(ModalClose);
 		validateNew(Tier5_90Day_Text);
 		if (WhytheseAmountsText.contains("Standard Pharmacy Network") && validateNew(Tier5_90Day_Text)) {
-			Assert.assertTrue("Standard Retail Pharmacy Copay and Modals validated", true);
+			Assertion.assertTrue("Standard Retail Pharmacy Copay and Modals validated", true);
 		} else
-			Assert.fail("Standard Retail Pharmacy Copay and Modals NOT validated");
+			Assertion.fail("Standard Retail Pharmacy Copay and Modals NOT validated");
 
 	}
 
@@ -1190,9 +1190,9 @@ public class DrugDetailsPage extends UhcDriver {
 		if (WhytheseAmountsText.contains("Standard Mail Service")
 				&& WhyNAText.contains("Tier 5 drugs cannot be filled with a mail service pharmacy")
 				&& validateNew(Tier5_MailPharmacy_Text)) {
-			Assert.assertTrue("Standard Mail Pharmacy Copay and Modals validated", true);
+			Assertion.assertTrue("Standard Mail Pharmacy Copay and Modals validated", true);
 		} else
-			Assert.fail("Standard Mail Pharmacy Copay and Modals NOT validated");
+			Assertion.fail("Standard Mail Pharmacy Copay and Modals NOT validated");
 
 	}
 
@@ -1218,9 +1218,9 @@ public class DrugDetailsPage extends UhcDriver {
 		if (WhytheseAmountsText.contains("Preferred Mail Service")
 				&& WhyNAText.contains("Tier 5 drugs cannot be filled with a mail service pharmacy")
 				&& validateNew(Tier5_MailPharmacy_Text)) {
-			Assert.assertTrue("Preferred Mail Pharmacy Copay and Modals validated", true);
+			Assertion.assertTrue("Preferred Mail Pharmacy Copay and Modals validated", true);
 		} else
-			Assert.fail("Preferred Mail Pharmacy Copay and Modals NOT validated");
+			Assertion.fail("Preferred Mail Pharmacy Copay and Modals NOT validated");
 	}
 
 	@FindBy(xpath = "//*[contains(text(), 'Pharmacy:')]/span")
@@ -1229,9 +1229,9 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePharmacyName(String PharmacyName) {
 
 		if (validateNew(PharmacyNameText) && PharmacyNameText.getText().contains(PharmacyName)) {
-			Assert.assertTrue("Correct Pharmacy Name is Displayed : " + PharmacyNameText.getText(), true);
+			Assertion.assertTrue("Correct Pharmacy Name is Displayed : " + PharmacyNameText.getText(), true);
 		} else {
-			Assert.fail("Correct Pharmacy Name is NOT Displayed : " + PharmacyNameText.getText());
+			Assertion.fail("Correct Pharmacy Name is NOT Displayed : " + PharmacyNameText.getText());
 		}
 	}
 
@@ -1242,7 +1242,7 @@ public class DrugDetailsPage extends UhcDriver {
 		String PremiumDisplayed = PremiumforPlan.getText();
 		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
 		if (!PremiumDisplayed.contains(premium)) {
-			Assert.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
+			Assertion.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
 					+ PremiumDisplayed);
 		}
 	}
@@ -1255,10 +1255,10 @@ public class DrugDetailsPage extends UhcDriver {
 		if (CopaySection_InsulinTier.getText().contains(insulinCopay)) {
 			System.out.println("Copay Section - Insulin Tier and correct Copay is Displayed : "
 					+ CopaySection_InsulinTier.getText());
-			Assert.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "
+			Assertion.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "
 					+ CopaySection_InsulinTier.getText(), true);
 		} else {
-			Assert.fail("Copay Section - Incorrect Copay Displayed;  Expected Copay: " + insulinCopay);
+			Assertion.fail("Copay Section - Incorrect Copay Displayed;  Expected Copay: " + insulinCopay);
 		}
 	}
 
@@ -1278,10 +1278,10 @@ public class DrugDetailsPage extends UhcDriver {
 		if (InsulinDrugCopayDisplayed.getText().contains(insulinCopay)) {
 			System.out.println("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "
 					+ InsulinDrugCopayDisplayed.getText());
-			Assert.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "
+			Assertion.assertTrue("Your Drugs Section - Insulin Tier and correct Copay is Displayed : "
 					+ InsulinDrugCopayDisplayed.getText(), true);
 		} else {
-			Assert.fail("Your Drugs Section - Incorrect Copay Displayed;  Expected Copay: " + insulinCopay);
+			Assertion.fail("Your Drugs Section - Incorrect Copay Displayed;  Expected Copay: " + insulinCopay);
 		}
 	}
 
@@ -1296,11 +1296,11 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println("Important Information Section - Insulin Tier Information is Displayed;  Header: "
 					+ ImportantInfo_InsulinSavingsHeader.getText() + "    Text : "
 					+ ImportantInfo_InsulinSavingsText.getText());
-			Assert.assertTrue("Important Information Section - Insulin Tier Information is Displayed;  Header: "
+			Assertion.assertTrue("Important Information Section - Insulin Tier Information is Displayed;  Header: "
 					+ ImportantInfo_InsulinSavingsHeader.getText() + "    Text : "
 					+ ImportantInfo_InsulinSavingsText.getText(), true);
 		} else {
-			Assert.fail("Important Information Section - Insulin Tier Information is NOT Displayed");
+			Assertion.fail("Important Information Section - Insulin Tier Information is NOT Displayed");
 		}
 
 	}
@@ -1311,9 +1311,9 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Plan Name : " + planName);
 		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
 		if (validateNew(PlanNameElement)) {
-			Assert.assertTrue("Plan Name is correct for Learn More Page" + PlanNameElement.getText(), true);
+			Assertion.assertTrue("Plan Name is correct for Learn More Page" + PlanNameElement.getText(), true);
 		} else
-			Assert.fail("Plan Name validation Failed for Learn More Page");
+			Assertion.fail("Plan Name validation Failed for Learn More Page");
 	}
 	// Learn More changes End
 
@@ -1351,7 +1351,7 @@ public class DrugDetailsPage extends UhcDriver {
 				System.out.println(
 						"DCE Details Page -  Validated Drug List and You Pay for Drugs Against Compare Page Display");
 			} else
-				Assert.fail(
+				Assertion.fail(
 						"DCE Details Page - >>>  Validated FAILED  <<<  Drug List and You Pay for Drugs Against Compare Page Display");
 		}
 	}
@@ -1388,7 +1388,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public ComparePlansPage clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
 		validateNew(LinktoExitScenario);
 		if (!LinktoExitScenario.getText().contains("Compare"))
-			Assert.fail("Exit Scenario Link Text Incorrect for Compare Flow : " + LinktoExitScenario.getText());
+			Assertion.fail("Exit Scenario Link Text Incorrect for Compare Flow : " + LinktoExitScenario.getText());
 
 		jsClickNew(LinktoExitScenario);
 		waitForPageLoadSafari();
@@ -1527,7 +1527,7 @@ public class DrugDetailsPage extends UhcDriver {
 				|| validate(MonthlyDrugStage_InitialCoverageStagerTbl)
 				|| validate(MonthlyDrugStage_CoverageGapStagerTbl) || validate(MonthlyDrugStage_CatastropheStagerTbl)
 				|| validate(MonthlyDrug_YouPay_heading) || validate(ImportantInfo_Header) || validate(CopaySection)) {
-			Assert.fail("***** DCE Details Page validation for Not Covered Pharmacy View - FAILED *****");
+			Assertion.fail("***** DCE Details Page validation for Not Covered Pharmacy View - FAILED *****");
 		}
 		System.out.println("***** DCE Details Page validation for Not Covered Pharmacy View Passed *****");
 		System.out.println(
@@ -1565,7 +1565,7 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println("***** Alert Displayed for LIS Buydown *****");
 			System.out.println(LIS_Alert.getText());
 		} else
-			Assert.fail(
+			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
 	}
 
@@ -1585,7 +1585,7 @@ public class DrugDetailsPage extends UhcDriver {
 			System.out.println("***** Alert Displayed for LIS Buydown *****");
 			System.out.println(LIS_Alert.getText());
 		} else
-			Assert.fail(
+			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
 
 	}
@@ -1595,7 +1595,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void validateLISBuyDown_MonthlyCostsNotDisplayed() {
 		if (validate(MonthlyCostDetails_Header) || validate(MonthlyDrug_Tbl) || validate(Graph_svg)) {
-			Assert.fail(
+			Assertion.fail(
 					"***** DCE Details Page validation for LIS Buydown, Monthly Cost details IS Displayed - FAILED *****");
 		}
 		System.out.println(
@@ -1614,7 +1614,7 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(DrugYouPay) && currentDrugYouPay.contentEquals("$0")) {
 			System.out.println("DCE Details Page, LIS BuyDown -  Validated $0 You Pay for Covered Drugs");
 		} else
-			Assert.fail(
+			Assertion.fail(
 					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
 	}
 
@@ -1629,7 +1629,7 @@ public class DrugDetailsPage extends UhcDriver {
 		if (validateNew(DrugYouPay) && !currentDrugYouPay.contains("$0")) {
 			System.out.println("DCE Details Page, LIS BuyDown -  Validated Non $0 You Pay for Not Covered Drugs");
 		} else
-			Assert.fail(
+			Assertion.fail(
 					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  Non $0 You Pay for Not Covered Drugs NOT Displayed");
 	}
 
@@ -1644,7 +1644,7 @@ public class DrugDetailsPage extends UhcDriver {
 				System.out.println("Return to profile displayed");
 			}
 		} catch (Exception e) {
-			Assert.fail("Return to profile not displayed");
+			Assertion.fail("Return to profile not displayed");
 		}
 	}
 
@@ -1655,7 +1655,7 @@ public class DrugDetailsPage extends UhcDriver {
 				returnToProfileLink.click();
 			}
 		} catch (Exception e) {
-			Assert.fail("Return to profile not displayed");
+			Assertion.fail("Return to profile not displayed");
 		}
 	}
 
@@ -1665,7 +1665,7 @@ public class DrugDetailsPage extends UhcDriver {
 			validateNew(dceNBAModalBtn);
 			dceNBAModalBtn.click();
 			waitforElement(signInBtn);
-			Assert.assertTrue("user not navigated to login page",
+			Assertion.assertTrue("user not navigated to login page",
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
@@ -1683,7 +1683,7 @@ public class DrugDetailsPage extends UhcDriver {
 		String pharmacy = pharmacyName.getText().trim();
 		System.out.println(selectedPharmacyName);
 		System.out.println(pharmacy);
-		Assert.assertTrue("Pharmacy not updated", selectedPharmacyName.contains(pharmacy));
+		Assertion.assertTrue("Pharmacy not updated", selectedPharmacyName.contains(pharmacy));
 	}
 
 	public void clickswitchToGenericNBA() throws InterruptedException {
@@ -1710,7 +1710,7 @@ public class DrugDetailsPage extends UhcDriver {
 		 */
 		validate(switchToGenericIcon);
 
-		Assert.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
+		Assertion.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
 	}
 
 	public void vppdetails_clickEditPharmacy() throws InterruptedException {
@@ -1721,7 +1721,7 @@ public class DrugDetailsPage extends UhcDriver {
 		JavascriptExecutor je = (JavascriptExecutor) driver;
 		je.executeScript("arguments[0].click();", editLink);
 
-		// Assert.assertTrue("Drug not switched to generic", editLink.isDisplayed());
+		// Assertion.assertTrue("Drug not switched to generic", editLink.isDisplayed());
 	}
 
 	public void selectPreferredMailOrderPharmacyDrugDetails() {
@@ -1731,13 +1731,13 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void validatePreferredMailOrderPharmacyMessageDrugDetail(String expectedMsg) {
 		waitforElement(mailOrderPharmacyMsg);
-		Assert.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
+		Assertion.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
 				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
 	}
 
 	public void validateDefaultDistanceDrugDetails() {
 		Select distance = new Select(clickDistanceDefaultMile);
-		Assert.assertTrue("Default distance is not 15 miles",
+		Assertion.assertTrue("Default distance is not 15 miles",
 				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
 	}
 
@@ -1753,7 +1753,7 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 		System.out.println("After sort" + pharmacListAfterSort);
 		Boolean sorted = Ordering.natural().isOrdered(pharmacListAfterSort);
-		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
 	}
 
 	public void validatePharmaciesDescendingOrderDrugDetails() {
@@ -1763,7 +1763,7 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 		System.out.println("After sort" + pharmacListAfterSort);
 		Boolean sorted = Ordering.natural().reverse().isOrdered(pharmacListAfterSort);
-		Assert.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
 	}
 
 	public void clickNextButtonPagination() {
@@ -1781,7 +1781,7 @@ public class DrugDetailsPage extends UhcDriver {
 		if (m.find()) {
 			page = m.group(1);
 		}
-		Assert.assertTrue("Second page not displayed", page.equals("2"));
+		Assertion.assertTrue("Second page not displayed", page.equals("2"));
 	}
 
 	public void validateFirstPageDisplayedDrugDetails() {
@@ -1791,7 +1791,7 @@ public class DrugDetailsPage extends UhcDriver {
 		if (m.find()) {
 			page = m.group(1);
 		}
-		Assert.assertTrue("First page not displayed", page.equals("1"));
+		Assertion.assertTrue("First page not displayed", page.equals("1"));
 	}
 
 	public void searchPharmaciesByZipcodeDrugDetails(String zipcode) {
@@ -1803,7 +1803,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateInvalidZipErrCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText());
-		Assert.assertTrue("Invalid zipcode message not displayed",
+		Assertion.assertTrue("Invalid zipcode message not displayed",
 				invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 
@@ -1816,7 +1816,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
-		Assert.assertTrue("No results message not displayed", noResultsMessage.getText().trim().equals(expectedMsg));
+		Assertion.assertTrue("No results message not displayed", noResultsMessage.getText().trim().equals(expectedMsg));
 	}
 
 	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']/parent::button")
@@ -1856,11 +1856,11 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void validateDefaultPharmacyName(String defaultPharmacy) {
 		validateNew(pharmacyName);
-		Assert.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
+		Assertion.assertTrue("Default pharmacy name is not displayed", pharmacyName.getText().contains(defaultPharmacy));
 	}
 
 	public void validateBreadCrumb(String breadCrumb) {
-		Assert.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
 				breaCrumbLink.getText().trim().equals(breadCrumb));
 	}
 
@@ -1870,7 +1870,7 @@ public class DrugDetailsPage extends UhcDriver {
 				System.out.println("Back to profile button is displayed");
 			}
 		} catch (Exception e) {
-			Assert.fail("Back to profile button is not displayed");
+			Assertion.fail("Back to profile button is not displayed");
 		}
 	}
 
@@ -1896,7 +1896,7 @@ public class DrugDetailsPage extends UhcDriver {
 			selectPharmacyModalCloseBtn.click();
 			validateNew(DrugDetails_ChangePharmacyLnk);
 		} else
-			Assert.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
+			Assertion.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
 
 	}
 
@@ -1932,7 +1932,7 @@ public class DrugDetailsPage extends UhcDriver {
 							+ drugName);
 			System.out.println("Displayed Drug Details Text: " + DrugText);
 		} else
-			Assert.fail(
+			Assertion.fail(
 					"Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug on DCE Details Page : "
 							+ drugName);
 
@@ -1949,7 +1949,7 @@ public class DrugDetailsPage extends UhcDriver {
 					"Correct text displayed for Initial Coverage Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
 			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
 		} else
-			Assert.fail(
+			Assertion.fail(
 					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
@@ -1962,7 +1962,7 @@ public class DrugDetailsPage extends UhcDriver {
 					"Correct text displayed for Coverage Gap Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
 			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
 		} else
-			Assert.fail(
+			Assertion.fail(
 					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
@@ -1975,7 +1975,7 @@ public class DrugDetailsPage extends UhcDriver {
 					"Correct text displayed for Catastrophic Coverage Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
 			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
 		} else
-			Assert.fail(
+			Assertion.fail(
 					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
@@ -1991,7 +1991,7 @@ public class DrugDetailsPage extends UhcDriver {
 					"Correct text displayed for Initial Coverage Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
 			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
 		} else
-			Assert.fail(
+			Assertion.fail(
 					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
@@ -2005,7 +2005,7 @@ public class DrugDetailsPage extends UhcDriver {
 					"Correct text displayed for Coverage Gap Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
 			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
 		} else
-			Assert.fail(
+			Assertion.fail(
 					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
@@ -2019,7 +2019,7 @@ public class DrugDetailsPage extends UhcDriver {
 					"Correct text displayed for Catastrophic Coverage Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
 			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
 		} else
-			Assert.fail(
+			Assertion.fail(
 					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 		
@@ -2053,7 +2053,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("X button for Filter text clearing is Displayed");
 		jsClickNew(PharmacyFilterClearTextX);
 		System.out.println("Clear Text is clicked for Pharmacy Filter");
-		Assert.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<", PharmacyFilterTxtBx.getText().isEmpty());
+		Assertion.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<", PharmacyFilterTxtBx.getText().isEmpty());
 	}
 
 	public void validateXcleartextPharmacyFilter() {
@@ -2062,7 +2062,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Apply button clicked for Blank filter text");
 		validateNew(PharmacyFilterErrorMsg);
 		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
-		Assert.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
+		Assertion.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
 	}
 
 	public void ApplyPharmacyFilter(String filterText) {
@@ -2081,5 +2081,259 @@ public class DrugDetailsPage extends UhcDriver {
 		}
 		System.out.println("All Pharmacy have filter text");
 	}
+
+
+	public String getAcqTestEnvSysTime(String testSiteUrl) {
+		String timeStr = "";
+		String winHandleBefore = driver.getWindowHandle();
+		System.out.println("Proceed to open a new blank tab to check the system time");
+		String urlGetSysTime = testSiteUrl + "/PlanBenefitsWAR/profiledetail/aarp";
+		System.out.println("test env URL for getting time: " + urlGetSysTime);
+		// open new tab
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
+		for (String winHandle : driver.getWindowHandles()) {
+			if(!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+				break;
+			}
+		}
+		threadsleep(2000);
+		WebElement currentSysTimeElement = timeJson;
+		String currentSysTimeStr = currentSysTimeElement.getText();
+		System.out.println("currentSysTimeStr=" + currentSysTimeStr);
+		JSONParser parser = new JSONParser();
+		org.json.simple.JSONObject jsonObj;
+		try {
+			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
+			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj;
+
+			org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data");
+			timeStr = (String) dataObj.get("systemDate");
+		} catch (ParseException e) {
+			e.printStackTrace();
+			Assert.assertTrue(false,"PROBLEM - unable to find out the system time" );
+		}
+		driver.close();
+		driver.switchTo().window(winHandleBefore);
+		return timeStr;
+	}
+
+
+	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Annual Period') and contains(text(), '(January 1 Effective Date)')]")
+	public WebElement PlanEffective_DefaultText;
+
+	@FindBy(xpath = "//button[contains(@dtmname, 'change start date')]/*[contains(text(), 'Change Start Date')]")
+	public WebElement ChangePED_DropDown;
+
+	@FindBy(xpath = "//*[contains(@id, 'monthlyCostDetailsImg')]//*[contains(text(), 'Bar Chart')]")
+	public WebElement BarChart;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Jan')]")
+	public WebElement BarChart_Jan;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Feb')]")
+	public WebElement BarChart_Feb;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Mar')]")
+	public WebElement BarChart_Mar;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Apr')]")
+	public WebElement BarChart_Apr;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'May')]")
+	public WebElement BarChart_May;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Jun')]")
+	public WebElement BarChart_Jun;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Jul')]")
+	public WebElement BarChart_Jul;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Aug')]")
+	public WebElement BarChart_Aug;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Sep')]")
+	public WebElement BarChart_Sep;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Oct')]")
+	public WebElement BarChart_Oct;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Nov')]")
+	public WebElement BarChart_Nov;
+
+	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Dec')]")
+	public WebElement BarChart_Dec;
+
+	public void validateDefaultPED() {
+		validateNew(PlanEffective_DefaultText);
+		validateNew(ChangePED_DropDown);
+		validateNew(BarChart_Jan);
+		validateNew(BarChart_Feb);
+		validateNew(BarChart_Mar);
+		validateNew(BarChart_Apr);
+		validateNew(BarChart_May);
+		validateNew(BarChart_Jun);
+		validateNew(BarChart_Jul);
+		validateNew(BarChart_Aug);
+		validateNew(BarChart_Sep);
+		validateNew(BarChart_Oct);
+		validateNew(BarChart_Nov);
+		validateNew(BarChart_Dec);
+		System.out.println("Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED");
+	}
+
+
+	public void validateResetEffectiveDate() {
+		validateNew(ResetEffectiveDateLink);
+		ResetEffectiveDateLink.click();
+		CommonUtility.waitForPageLoad(driver, BarChart, 30);
+		validateDefaultPED();
+	}
+	public String getMonthNameforMonthNo(int envMonth) {
+		String MonthName = "";
+		Map<String, String> MonthMap = new LinkedHashMap<String, String>();
+		MonthMap.put("1", "January");
+		MonthMap.put("2", "February");
+		MonthMap.put("3", "March");
+		MonthMap.put("4", "April");
+		MonthMap.put("5", "May");
+		MonthMap.put("6", "June");
+		MonthMap.put("7", "July");
+		MonthMap.put("8", "August");
+		MonthMap.put("9", "September");
+		MonthMap.put("10", "October");
+		MonthMap.put("11", "November");
+		MonthMap.put("12", "December");
+		String month = String.valueOf(envMonth);
+		return MonthMap.get(month);
+	}
+
+	@FindBy(xpath = "//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]")
+	public WebElement ChangePED_DropDown_List;
+
+	@FindBy(xpath = "//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li")
+	private List<WebElement> ChangePED_MonthNames;
+
+
+	public void validateChangePEDDropDwn(String envMonth, String envTimeYear) {
+		validateNew(ChangePED_DropDown);
+		scrollToView(ChangePED_DropDown);
+		ChangePED_DropDown.click();
+//		jsClickNew(ChangePED_DropDown);
+		validateNew(ChangePED_DropDown_List);
+		int monthNo = Integer.parseInt(envMonth);
+		String CurrentMonthName = getMonthNameforMonthNo(monthNo);
+		System.out.println("Current System Month Name - "+CurrentMonthName);
+		int nextMonthNo = monthNo+1;
+		int MonthListCount = 12-monthNo;
+		System.out.println("Expected Month count in Change Effective date Dropdown - "+MonthListCount);
+		System.out.println("Number of month selection options dispalyed in CHange Effective date dropdown - "+ChangePED_MonthNames.size());
+		if(ChangePED_MonthNames.size()!=MonthListCount) {
+			Assert.fail("Number of months displayed in dropdown does not match the number of months left in the current year");
+		}
+		for (WebElement MonthSelection : ChangePED_MonthNames) {
+			scrollToView(MonthSelection);
+			jsMouseOver(MonthSelection);
+			CurrentMonthName = getMonthNameforMonthNo(nextMonthNo);
+			System.out.println("Displayed Month Name - "+CurrentMonthName);
+			if(!MonthSelection.getText().contains(CurrentMonthName)
+					|| !MonthSelection.getText().contains(envTimeYear)) {
+				Assert.fail("Month and Year Displayed in Change Effective Dropdown is Incorrect"+MonthSelection.getText());
+
+			}
+			nextMonthNo++;
+		}
+		scrollToView(ChangePED_DropDown);
+		ChangePED_DropDown.click();
+	}
+
+	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]")
+	public WebElement ChangePED_Modal;
+
+	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]//b")
+	public WebElement ChangePED_ModalText;
+
+	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]//button[contains(@dtmname, 'conti')]/span")
+	public WebElement ChangePED_ModalContinueBtn;
+
+	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]//button[contains(@dtmname, 'close')]/img")
+	public WebElement ChangePED_ModalCloseicon;
+
+	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]//button[contains(@dtmname, 'cancel')]/span")
+	public WebElement ChangePED_ModalCancelBtn;
+
+	@FindBy(xpath = "//button[contains(@dtmname, 'reset effective date')]")
+	public WebElement ResetEffectiveDateLink;
+
+	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Dec 31')]")
+	public WebElement EffectiveDateTextafterChange;
+
+
+	public void validateChangePEDandModalandChangeDisplay() {
+		validateNew(ChangePED_DropDown);
+		scrollToView(ChangePED_DropDown);
+		ChangePED_DropDown.click();
+		validateNew(ChangePED_DropDown_List);
+		WebElement NextMonthOption = ChangePED_MonthNames.get(0);
+
+		String[] MonthYearText = NextMonthOption.getText().split(",");
+		String Year = MonthYearText[1];
+		String Month = MonthYearText[0];
+		System.out.println("Month Year selected from dropdown - "+Month+","+Year);
+		jsClickNew(NextMonthOption);
+		validateNew(ChangePED_Modal);
+		validateNew(ChangePED_ModalContinueBtn);
+		validateNew(ChangePED_ModalCloseicon);
+		validateNew(ChangePED_ModalCancelBtn);
+		if(!ChangePED_ModalText.getText().contains(Month) || !ChangePED_ModalText.getText().contains(Year)) {
+			Assert.fail("Change Effective Modal Text validation Failed. DIsplayed Month Year - "+ChangePED_ModalText.getText());
+		}
+		scrollToView(ChangePED_ModalContinueBtn);
+		ChangePED_ModalContinueBtn.click();
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		validateNew(ResetEffectiveDateLink);
+		Month = Month.substring(0, 3);
+		String ExpectedEffectiveDate= Month+" 1,"+Year;
+		System.out.println("Expected Effective Date Text after Changed Effective Date"+ExpectedEffectiveDate);
+
+		System.out.println("Displayed Effective Date Text after Changed Effective Date"+EffectiveDateTextafterChange.getText());
+		if(!EffectiveDateTextafterChange.getText().contains(ExpectedEffectiveDate)) {
+			Assert.fail("Effective Date dispalyed is incorrect after changing to - "+Month);
+		}
+
+	}
+
+	public void validateNoBarChartDisplayforNovDec() {
+		validateNew(ChangePED_DropDown);
+		scrollToView(ChangePED_DropDown);
+		ChangePED_DropDown.click();
+		validateNew(ChangePED_DropDown_List);
+		WebElement NovemberMonthOption = driver.findElement(By.xpath("//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li[contains(text(), 'November')]"));
+		NovemberMonthOption.click();
+		scrollToView(ChangePED_ModalContinueBtn);
+		ChangePED_ModalContinueBtn.click();
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		validateNew(ResetEffectiveDateLink);
+		if(validate(BarChart)) {
+			Assert.fail(">>>>>>> Validation Failed <<<<<<<< - Bar Chart is Displayed for November Effective Date Selection");
+		}
+		validateNew(ChangePED_DropDown);
+		scrollToView(ChangePED_DropDown);
+		ChangePED_DropDown.click();
+		validateNew(ChangePED_DropDown_List);
+		WebElement DecemberMonthOption = driver.findElement(By.xpath("//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li[contains(text(), 'December')]"));
+		DecemberMonthOption.click();
+		scrollToView(ChangePED_ModalContinueBtn);
+		ChangePED_ModalContinueBtn.click();
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		validateNew(ResetEffectiveDateLink);
+		if(validate(BarChart)) {
+			Assert.fail(">>>>>>> Validation Failed <<<<<<<< - Bar Chart is Displayed for Decembermber Effective Date Selection");
+		}
+
+	}
+
+
 
 }

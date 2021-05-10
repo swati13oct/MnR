@@ -1,24 +1,23 @@
 package acceptancetests.acquisition.planRecommendationEngine;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.*;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.PlanSelectorNewPage;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineAdditionalServicesPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
@@ -45,18 +44,19 @@ public class PlanRecommendationEngineStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	WebDriver wd;
-	List<DataTableRow> inputRow;
+//	WebDriver wd;
+//	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
 	public static String PREflow="";
 	
 	public void readfeaturedata(DataTable data) {
-		inputRow = new ArrayList(data.getGherkinRows());
+//		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
-		for (int i = 0; i < inputRow.size(); i++) {
+		inputValues = DataTableParser.readDataTableAsMaps(data);
+		/*for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0),
 			inputRow.get(i).getCells().get(1));
-		}
+		}*/
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
@@ -66,7 +66,7 @@ public class PlanRecommendationEngineStepDefinition {
 	boolean if_offline_prod = false, popup_clicked = false;
 	@Given("^the user is on UHC medicare acquisition site landing page$")
 	public void the_user_on_uhc_medicaresolutions_Site() {
-		wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE"); //changed on 3/3/21 as part of AARP/UHC cleanup
 		if_offline_prod = aquisitionhomepage.openPRE();
@@ -97,7 +97,6 @@ public class PlanRecommendationEngineStepDefinition {
 			planSelectorhomepage.quizStartAndRunQuestionnaire(zipcode);
 		} else {
 			planSelectorhomepage.quizStartAndRunQuestionnaireWithCounty(zipcode, county);
-			
 		}
 	}
 	
@@ -107,7 +106,7 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
 		boolean isResultsPage = planSelectorNewPage.JumpLink();
-		Assert.assertTrue("Plan Results Page not loaded", isResultsPage);
+		Assertion.assertTrue("Plan Results Page not loaded", isResultsPage);
 	}
 	
 
@@ -117,7 +116,7 @@ public class PlanRecommendationEngineStepDefinition {
 		PlanSelectorNewPage planSelectorNewPage = (PlanSelectorNewPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_SELECTOR_NEW_PAGE);
 		boolean isPlanDetailsPage = planSelectorNewPage.navigateToPlanDetails(County);
-		Assert.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
+		Assertion.assertTrue("Plan Details Page is not loaded", isPlanDetailsPage);
 
 	}
 
@@ -173,6 +172,7 @@ public class PlanRecommendationEngineStepDefinition {
 	}
 	@Then("^user validate Header and Footer Functionality of Plan Recommendation Engine$")
 	public void user_check_header_footer_Actions_Plan_Selector_tool(DataTable givenAttributes) throws Throwable{
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String actualpageurl = wd.getCurrentUrl();
 		readfeaturedata(givenAttributes);
 		String zipcode = inputValues.get("Zip Code");
@@ -966,7 +966,7 @@ public class PlanRecommendationEngineStepDefinition {
 	@Given("^the user is on external acquisition site landing page$")
 	public void the_user_on_external_Site(DataTable givenAttributes) {
 		readfeaturedata(givenAttributes);
-		wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,"PRE");
 		aquisitionhomepage.openExternalLinkPRE(inputValues.get("Site Name"));
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);

@@ -1,15 +1,14 @@
 package pages.mobile.acquisition.commonpages;
 
-import org.junit.Assert;
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.util.CommonUtility;
-
-import java.util.List;
+import atdd.framework.Assertion;
 
 public class MedicareEligibilityPage extends GlobalWebElementsMobile {
 
@@ -127,7 +126,7 @@ public class MedicareEligibilityPage extends GlobalWebElementsMobile {
 		String txtDefaultValueDropDown = option.getText() == "Select State" ? option.getText()
 				: option.getAttribute("value");
 		if (!txtDefaultValueDropDown.contains(("Select State")))
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		return txtDefaultValueDropDown;
 
 		/*
@@ -147,7 +146,7 @@ public class MedicareEligibilityPage extends GlobalWebElementsMobile {
 			}
 		}
 
-		Assert.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
+		Assertion.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
 
 	}
 	/*side links of secondary pages of Learn about medicare*/
@@ -159,13 +158,14 @@ public class MedicareEligibilityPage extends GlobalWebElementsMobile {
 			}
 		}
 
-		Assert.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
+		Assertion.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
 
 	}
 	
 	public void stateSelection(String value) {
 		
-		selectFromDropDownByText(driver,dropDownState,value);
+		//selectFromDropDownByText(driver,dropDownState,value);
+		mobileSelectOption(dropDownState, value, true);
 
 	}
 	
@@ -175,7 +175,7 @@ public class MedicareEligibilityPage extends GlobalWebElementsMobile {
 		getTxtZipcode().sendKeys(zipCode);
 		switchToNewTabNew(btnZipcode);
 		System.out.println(getTitle());
-		Assert.assertTrue("Incorrect page is loaded", getTitle().contains("Find Medicare Plans"));
+		Assertion.assertTrue("Incorrect page is loaded", getTitle().contains("Find Medicare Plans"));
 		//btnZipcode.click();
 		validateNonPresenceOfElement(btnZipcode);
 		return driver;

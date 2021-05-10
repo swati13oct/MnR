@@ -5,13 +5,11 @@ package pages.acquisition.isdecisionguide;
 
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -94,7 +92,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	private WebElement CityTxt;
 	
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 	
 
 	@FindBy(xpath = "//*[contains(@id, '-form-error-city')]")
@@ -439,7 +437,7 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	}
 
 	public void CheckiPerseptions() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to CommonUtility.waitForPageLoadNew as
 																			// we're not trying to fail the test if it
 																			// isn't found
 		try {

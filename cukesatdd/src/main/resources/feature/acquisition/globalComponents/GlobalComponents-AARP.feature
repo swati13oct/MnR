@@ -92,16 +92,16 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-			#|AARP| medicare-education/compare-ma-ms-plans.html|
 
+    #|AARP| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_2_GlobalCompsUHC
     Examples: 
       | site | path                                              | pageName                            | tfnXpath                                                       | tfnFlag |
       | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-			#|UHC| medicare-education/compare-ma-ms-plans.html|
 
+    #|UHC| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_3_GlobalCompsAARP
     Examples: 
       | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
@@ -239,7 +239,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | resources/ma-resources-materials/ma-information-forms.html | ShopPlan: Resources MA Plans Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
 
     # Replace any "#" chars in the deeplink with "!"
-    @VPP_Deeplinks_GlobalCompsAARP
+    @vpp_Deeplinks_GlobalCompsAARP
     Examples: 
       | site | path                                                                                                                                                                                                                                                                                                                          | pageName               | tfnXpath                                                    | tfnFlag |
       | AARP | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD | //a[contains(@class, 'tel')]                                | true    |
@@ -250,7 +250,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
 
     # Replace any "#" chars in the deeplink with "!"
-    @VPP_Deeplinks_GlobalCompsUHC
+    @vpp_Deeplinks_GlobalCompsUHC
     Examples: 
       | site | path                                                                                                                                                                                                                                                                                                                          | pageName               | tfnXpath                                                    | tfnFlag |
       | UHC  | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD | //a[contains(@class, 'tel')]                                | true    |
@@ -701,3 +701,63 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
       | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
 
+  Scenario Outline: To verify the links under Learn About Medicare on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user hovers over the learn about medicare
+    When user click on "Introduction" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Eligibility" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Coverage Options" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Prescriptions, Providers & Benefits" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Cost Basics" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Advantage Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Supplement Insurance Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Prescription Drug Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Enrollment Basics" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare FAQ" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+		When user click on "Articles and Special Topics" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user enter email and submit in email section
+    Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
+    
+    @learnAboutMedicareNav_AARP @regressionAARP
+    Examples: 
+      | site |
+      | AARP |
+      
+    @learnAboutMedicareNav_UHC @regressionUHC
+    Examples: 
+      | site|  
+      | UHC|

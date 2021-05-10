@@ -680,7 +680,8 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDoctorsLink);
 		
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(addDoctorsLink);
 		
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -721,7 +722,8 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addHospitalsLink);
 		
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(addHospitalsLink);
 		
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -755,7 +757,8 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
 		
 		
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editDoctorsLink);
 		
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -788,7 +791,8 @@ public VPPPlanSummaryPageMobile clickOnNewAddIcon(){
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", editHospitalsLink);
 		
-		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editHospitalsLink);
 		
 		if (driver.getCurrentUrl().contains("werally")) {

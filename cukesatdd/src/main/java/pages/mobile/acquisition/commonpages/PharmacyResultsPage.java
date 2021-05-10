@@ -2,7 +2,6 @@ package pages.mobile.acquisition.commonpages;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -10,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 /**
@@ -51,17 +51,17 @@ public class PharmacyResultsPage extends UhcDriver {
 	
 	public void validatePharmacyResults(String zipcode){
 		driver.switchTo().frame(0);
-		Assert.assertEquals("Pharmacies close to "+zipcode, pharmaciesZipcodeHeader.getText());
-		Assert.assertTrue((pharmacyResultsTable.size() > 0));
-		Assert.assertEquals(linkCreatePDF.getText().trim(), "Create PDF");
+		Assertion.assertEquals("Pharmacies close to "+zipcode, pharmaciesZipcodeHeader.getText());
+		Assertion.assertTrue((pharmacyResultsTable.size() > 0));
+		Assertion.assertEquals(linkCreatePDF.getText().trim(), "Create PDF");
 	}
 	
 	public void validateStandardNetworkPharmacyResults(){
-		Assert.assertTrue((standardNetworkPharmacy.getText().contains("Standard Network Pharmacy")));
+		Assertion.assertTrue((standardNetworkPharmacy.getText().contains("Standard Network Pharmacy")));
 	}
 	
 	public void validatePharmacySaverPharmacyResults(){
-		Assert.assertTrue((pharmacySaver.getText().contains("Pharmacy Saver")));
+		Assertion.assertTrue((pharmacySaver.getText().contains("Pharmacy Saver")));
 	}
 	
 }

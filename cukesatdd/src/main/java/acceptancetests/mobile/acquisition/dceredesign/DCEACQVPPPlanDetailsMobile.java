@@ -1,45 +1,31 @@
 package acceptancetests.mobile.acquisition.dceredesign;
 
-import gherkin.formatter.model.DataTableRow;
-import io.appium.java_client.AppiumDriver;
-
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
-import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
-import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
-import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
-import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
-import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
-import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
-//import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
-import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
+import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
+//import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
+import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 
 /**
  * Functionality:DCE Acquisition
@@ -72,12 +58,13 @@ public class DCEACQVPPPlanDetailsMobile {
 
 	@When("^the consumer performs plan search using following information$")
 	public void enters_zipcode_details_in_UMS_site(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -94,7 +81,7 @@ public class DCEACQVPPPlanDetailsMobile {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 
 	}
@@ -103,11 +90,12 @@ public class DCEACQVPPPlanDetailsMobile {
 	public void the_user_navigates_to_Presciption_Drug_Benefits_tab_in_AARP_site() throws Throwable {
 		PlanDetailsPageMobile plandetailspage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_DETAILS_PAGE);
+		System.out.println("plan details page : " + plandetailspage);
 		GetStartedPageMobile getStartedPage = plandetailspage.navigateToDCERedesign();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
-			Assert.fail("DCE Redesign page object not loaded");
+			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
 	@Then("^the consumer validates Get Started Page$")
@@ -132,12 +120,13 @@ public class DCEACQVPPPlanDetailsMobile {
 
 	@Then("^the consumer searches and adds the following Drug to Drug List$")
 	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -198,10 +187,10 @@ public class DCEACQVPPPlanDetailsMobile {
 		String EstimatedDrugCosts = plandetailspage.costComparisonPrescriptionDrugFromDCE();
 		String cost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
 		if (cost.trim().contains(EstimatedDrugCosts))
-			Assert.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page; Expected : " + cost
+			Assertion.assertTrue("It's a match on on prescription drug tab and Drug CostEstimator page; Expected : " + cost
 					+ "; Actual : " + EstimatedDrugCosts, true);
 		else
-			Assert.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page; Expected : " + cost
+			Assertion.assertTrue("Cost mismatch on prescription drug tab and drug CostEstimator page; Expected : " + cost
 					+ "; Actual : " + EstimatedDrugCosts, false);
 
 	}
@@ -216,7 +205,7 @@ public class DCEACQVPPPlanDetailsMobile {
 		if (null != plandetailspage) {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
 		} else
-			Assert.fail("VPP Plan Details not loaded");
+			Assertion.fail("VPP Plan Details not loaded");
 		
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails,drugDetailsPage);
 
@@ -242,17 +231,21 @@ public class DCEACQVPPPlanDetailsMobile {
 	@Then("^the user navigates to the plan details for the given plan type$")
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
 			throws Throwable {
-		List<DataTableRow> memberAttributesRow = data.getGherkinRows();
+		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);
-		String planName = memberAttributesRow.get(1).getCells().get(1);
+		String planName = memberAttributesRow.get(1).getCells().get(1);*/
 
+		String planType = data.cell(0, 1);
+		String planName = data.cell(1, 1);
+		
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		System.out.println("plan details ");
 		plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			System.out.println("plan details "+plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
 

@@ -1,4 +1,4 @@
-@PlanRecommendationEngineVPPDCE
+@planRecommendationEngineVPPDCE
 Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with VPP validation and DCE Redesign
 
   @PRE_VPP_DCE_E2E
@@ -56,14 +56,14 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
 
     @PRE_VPP_DCE_E2E_AARP
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planname                                             | planyear |	priorityOption	|	priorities			|
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | John        |               | No             | Yes,No,No,No                  | Higher               | MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | future   |	None           	| Travel, Vision	|
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planname                                             | planyear | priorityOption | priorities     |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | John        | [blank]       | No             | Yes,No,No,No                  | Higher               | MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | future   | None           | Travel, Vision |
 
-    #|	AARP	|   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare |                  |               | No             | Yes,No,No,No                  | Higher               |
+    #|	AARP	|   55419 | No            | Hennepin   | MAPD          | None         | None   | AcceptsMedicare | [blank]                    | [blank]                 | No             | Yes,No,No,No                  | Higher               |
     @PRE_VPP_DCE_E2E_UHC
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planname                                             | planyear |	priorityOption	|	priorities		|
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | John        |               | No             | Yes,No,No,No                  | Higher               | MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | future   |	None           	| Travel, Vision	|
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | drug1   | planname                                             | planyear | priorityOption | priorities     |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | Lookup  | John        | [blank]       | No             | Yes,No,No,No                  | Higher               | MAPD     | Orkambi | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | future   | None           | Travel, Vision |
 
   @PRE_VppPlanSummaryCard_DCE
   Scenario Outline: <plantype> - <Zipcode> - To validate integration of DCE with PRE in Vpp Plan Summary
@@ -84,7 +84,7 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
       | Doctors Search Text | <DoctorsName>   |
       | Multi Doctor        | <isMultiDoctor> |
     Then user selects add drug option in Drug page
-      | Drug Selection | <Drug Selection>                                                       |
+      | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
@@ -116,17 +116,17 @@ Feature: PRE_VPP_DCERedesign - Verify end-to-end PRE flows functionalities with 
     Then the user navigates to Visitor profile page
     And user validates the added plans on visitor profile page
       | Test Plans | <planname> |
-      #And user validates the plans on new visitor profile page of AARP site
-      #| Test Plans | <planname> |
+    #And user validates the plans on new visitor profile page of AARP site
+    #| Test Plans | <planname> |
     Then the user should be able to see all the added Drugs information in the guest profile page
       | Drugs Added | <drugsadded> |
 
     @PRE_VppPlanSummaryCard_DCE_AARP
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                              		| Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | planname                                             | planyear	| drugname                 | drug1   | drugsadded                       | planyear |	priorityOption	|	priorities			|
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | Yes,No,No,No                  | Higher               | MAPD     | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | future  	| Lipitor:morphine sulfate | Orkambi | Lipitor:morphine sulfate:Orkambi | future   |	both						|	Dental, Doctors	|
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                  | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | planname                                             | planyear | drugname                 | drug1   | drugsadded                       | planyear | priorityOption | priorities      |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | Yes,No,No,No                  | Higher               | MAPD     | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | future   | Lipitor:morphine sulfate | Orkambi | Lipitor:morphine sulfate:Orkambi | future   | both           | Dental, Doctors |
 
     @PRE_VppPlanSummaryCard_DCE_UHC
     Examples: 
-      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                              		| Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | planname                                             | planyear | drugname                 | drug1   | drugsadded                       | planyear |	priorityOption	|	priorities			|
-      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | Yes,No,No,No                  | Higher               | MAPD     | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | future  | Lipitor:morphine sulfate | Orkambi | Lipitor:morphine sulfate:Orkambi | future   |	both						|	Dental, Doctors	|
+      | Zipcode | isMultiCounty | county     | isCoverageOpt | specialNeeds | travel | doctors    | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                  | Dental-Hearing-Vision-Fitness | costPreferenceOption | plantype | planname                                             | planyear | drugname                 | drug1   | drugsadded                       | planyear | priorityOption | priorities      |
+      |   33143 | No            | Miami-Dade | MAPD          | None         | None   | UHGNetwork | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | Yes,No,No,No                  | Higher               | MAPD     | AARP Medicare Advantage Choice Plan 2 (Regional PPO) | future   | Lipitor:morphine sulfate | Orkambi | Lipitor:morphine sulfate:Orkambi | future   | both           | Dental, Doctors |

@@ -31,9 +31,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import junit.framework.Assert;
 
 /**
  * @author pjaising
@@ -116,9 +116,10 @@ public class CommonUtility {
 			System.out.println("The element: " + elementExpected + " is visible");
 
 		} catch (Exception e) {
-			// Assert.fail("Not able to locate this element -- " + element + " on page");
-			System.out.println("error in waiting for page load " + e.getMessage());
+			//Assertion.fail("Not able to locate this element -- " + element + " on page");
+			System.out.println("error in waiting for page load "+e.getMessage());
 		}
+
 
 	}
 
@@ -184,7 +185,7 @@ public class CommonUtility {
 
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
-		// wd.quit();
+		//wd.quit();
 	}
 
 	public static void changePartDTime(MRScenario mrScenario, String date) {
@@ -216,7 +217,7 @@ public class CommonUtility {
 
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
-		// wd.quit();
+		//wd.quit();
 	}
 
 	public static void resetMRRestTime(MRScenario mrScenario) {
@@ -224,7 +225,7 @@ public class CommonUtility {
 		String completeDateUrl = MRREST_TIME_ADMIN_URL + dateURL;
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
-		// wd.quit();
+		//wd.quit();
 	}
 
 	public static void resetPartDTime(MRScenario mrScenario) {
@@ -232,7 +233,7 @@ public class CommonUtility {
 		String completeDateUrl = PARTD_TIME_ADMIN_URL + dateURL;
 		WebDriver wd = mrScenario.getWebDriverNew();
 		wd.get(completeDateUrl);
-		// wd.quit();
+		//wd.quit();
 
 	}
 
@@ -287,7 +288,7 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
 			driver.findElement(By.id("tobederegisteruser")).submit();
-			// driver.quit();
+			//driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("stage")) {
 			WebDriver driver = mrScenario.getWebDriverNew();
@@ -295,7 +296,7 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
 			driver.findElement(By.id("tobederegisteruser")).submit();
-			// driver.quit();
+			//driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("test-a")) {
 			WebDriver driver = mrScenario.getWebDriverNew();
@@ -303,7 +304,7 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
 			driver.findElement(By.id("tobederegisteruser")).submit();
-			// driver.quit();
+			//driver.quit();
 		}
 		if (System.getProperty("environment").equalsIgnoreCase("test-b")) {
 			WebDriver driver = mrScenario.getWebDriverNew();
@@ -311,7 +312,7 @@ public class CommonUtility {
 			driver.findElement(By.id("tobederegisteruser")).click();
 			driver.findElement(By.id("tobederegisteruser")).sendKeys(username);
 			driver.findElement(By.id("tobederegisteruser")).submit();
-			// driver.quit();
+			//driver.quit();
 		}
 
 	}
@@ -383,7 +384,7 @@ public class CommonUtility {
 			} catch (Exception e) {
 				System.out.println("ERROR creating version text file");
 			}
-			// wd.quit();
+			//wd.quit();
 		}
 	}
 
@@ -403,15 +404,16 @@ public class CommonUtility {
 				System.out.println("The element: " + elementExpected + " is visible");
 			} else {
 				System.out.println("The element: " + elementExpected + " is not visible");
-				Assert.fail("The element: " + elementExpected + " is not visible");
+				Assertion.fail("The element: " + elementExpected + " is not visible");
 			}
 
 		} catch (Exception e) {
-			Assert.fail("Not able to locate this element -- " + element + " on page");
+			Assertion.fail("Not able to locate this element -- " + element + " on page");
 			System.out.println(e.getMessage());
 		}
-	}
 
+	}
+	
 	public static void waitForPageLoadNewForClick(WebDriver driver, WebElement element, long timeout) {
 
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
@@ -421,15 +423,16 @@ public class CommonUtility {
 				System.out.println("The element: " + elementExpected + " is visible");
 			} else {
 				System.out.println("The element: " + elementExpected + " is not visible");
-				Assert.fail("The element: " + elementExpected + " is not visible");
+				Assertion.fail("The element: " + elementExpected + " is not visible");
 			}
 
 		} catch (Exception e) {
-			Assert.fail("Not able to locate this element -- " + element + " on page");
+			Assertion.fail("Not able to locate this element -- " + element + " on page");
 			System.out.println(e.getMessage());
 		}
 
 	}
+
 
 	/***
 	 * the waits till page state becomes complete
@@ -453,15 +456,15 @@ public class CommonUtility {
 					e.printStackTrace();
 				}
 			}
-			Assert.fail("TimeOut!!! Page not loaded");
-		} catch (UnhandledAlertException ae) { // if getting alert error, stop and fail the test
+			Assertion.fail("TimeOut!!! Page not loaded");
+		} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
 			Alert alert = driver.switchTo().alert();
 			System.out.println("Alert text=" + alert.getText());
 			if (alert.getText().contains("an error while processing your information")) {
-				Assert.assertTrue("***** Got Alert message: " + alert.getText(), false);
+				Assertion.assertTrue("***** Got Alert message: " + alert.getText(), false);
 			}
 		} catch (WebDriverException e) {
-			Assert.assertTrue("PROBLEM - got webdriver exception: " + e, false);
+			Assertion.assertTrue("PROBLEM - got webdriver exception: " + e, false);
 			return false;
 		}
 		return false;

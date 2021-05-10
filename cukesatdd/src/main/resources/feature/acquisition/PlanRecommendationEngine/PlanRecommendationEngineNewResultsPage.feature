@@ -1,4 +1,4 @@
-@PlanRecommendationEngine @PREVPPRegression
+@planRecommendationEngine @PREVPPRegression
 Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan Recommendation Engine
 
   @PRE @planrecommandonation @PREVPPPage @F527967
@@ -53,6 +53,6 @@ Feature: Plan Recommendation Engine flow - Verify PRE New Results page in plan R
     Then user validate elements in loading results page
 
     Examples: 
-      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities                   |
-      |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | withinUS | AcceptsMedicare |             |               | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Travel, Vision               |
-#      |   15537 | NO            | Bedford | MAPD          | None            | None     | UHGNetwork      |             |               | NO             |                                                                                                             | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |
+      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | travel   | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
+      |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | withinUS | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Travel, Vision |
+#      |   15537 | NO            | Bedford | MAPD          | None            | None     | UHGNetwork      |  [blank]              |  [blank]                | NO             |  [blank]                                                                                                   | No,No,No,No                   | Lower                | 2nd            | Doctors, Health Care Premium |

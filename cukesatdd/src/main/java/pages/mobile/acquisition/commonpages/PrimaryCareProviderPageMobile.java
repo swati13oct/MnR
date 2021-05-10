@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -60,7 +61,7 @@ public class PrimaryCareProviderPageMobile extends UhcDriver {
 		saveandcontinuepcp.click();
 
 		if (driver.getTitle()
-				.equalsIgnoreCase(PageTitleConstantsMobile.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)) {
+				.equalsIgnoreCase(PageTitleConstants.BLAYER_MEDICARE_ADVANTAGE_ENROLLMENT)) {
 			return new PlanPaymentOptionsMobile(driver);
 		}
 		return null;

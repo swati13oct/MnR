@@ -13,6 +13,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 /**
  * @author pperugu
@@ -78,7 +79,7 @@ public class RegistrationHomePageMobile extends UhcDriver{
 		}
 
 		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_PLANS))
+				PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS))
 			return new PlanConfirmationPageMobile(driver);
 		else
 			return null;
@@ -102,7 +103,7 @@ public class RegistrationHomePageMobile extends UhcDriver{
 	
 	public RegistrationAARPErrorPageMobile navigateToErrorPage() {		
 		if (driver.getTitle().equalsIgnoreCase(
-				PageTitleConstantsMobile.ULAYER_AARP_MEDICARE_PLANS)) {
+				PageTitleConstants.ULAYER_AARP_MEDICARE_PLANS)) {
 			return new RegistrationAARPErrorPageMobile(driver);
 		}
 		return null;

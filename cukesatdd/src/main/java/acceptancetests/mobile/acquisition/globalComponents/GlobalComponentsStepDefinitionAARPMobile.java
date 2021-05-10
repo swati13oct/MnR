@@ -1,38 +1,26 @@
 package acceptancetests.mobile.acquisition.globalComponents;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.AgentsnBrokersAARPPageMobile;
-import pages.mobile.acquisition.commonpages.ContactUsAARPPageMobile;
-import pages.mobile.acquisition.commonpages.DisclaimersAARPPageMobile;
-import pages.mobile.acquisition.commonpages.EnterZipCodePage;
-import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
-import pages.mobile.acquisition.commonpages.PrivacyPolicyAARPPageMobile;
-import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
-import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.EnterZipCodePage;
+import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
+import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 
 /**
  * Functionality:Global Header Footer
@@ -70,7 +58,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateFooterLinks();
 		} else {
-			Assert.fail("Home page not found");
+			Assertion.fail("Home page not found");
 		}
 	}
 
@@ -88,9 +76,9 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	// if(aboutUsAARPPage!= null){
 	// getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE,
 	// aboutUsAARPPage);
-	// Assert.assertTrue(true);
+	// Assertion.assertTrue(true);
 	// } else {
-	// Assert.fail("Aboutus page not found");
+	// Assertion.fail("Aboutus page not found");
 	// }
 	//
 	//
@@ -109,9 +97,9 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	// if (contactUsAARPPage != null) {
 	// getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE,
 	// contactUsAARPPage);
-	// Assert.assertTrue(true);
+	// Assertion.assertTrue(true);
 	// } else {
-	// Assert.fail("contactus page not found");
+	// Assertion.fail("contactus page not found");
 	// }
 	// }
 
@@ -129,9 +117,9 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	// getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE,
 	// siteMapAARPPage);
 	//
-	// Assert.assertTrue(true);
+	// Assertion.assertTrue(true);
 	// } else {
-	// Assert.fail("sitemap page not found");
+	// Assertion.fail("sitemap page not found");
 	// }
 	// }
 
@@ -149,9 +137,9 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	// getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE,
 	// privacyPolicyAARPPage);
 	//
-	// Assert.assertTrue(true);
+	// Assertion.assertTrue(true);
 	// } else {
-	// Assert.fail("privacypolicy page not found");
+	// Assertion.fail("privacypolicy page not found");
 	// }
 	// }
 
@@ -166,9 +154,9 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		if (termsnConditionsAARPPage != null) {
 			getLoginScenario().saveBean(PageConstants.AARP_TERMS_AND_CONDITIONS_PAGE, termsnConditionsAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("terms&conditions page not found");
+			Assertion.fail("terms&conditions page not found");
 		}
 	}
 
@@ -186,9 +174,9 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	// getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE,
 	// disclaimersAARPPage);
 	//
-	// Assert.assertTrue(true);
+	// Assertion.assertTrue(true);
 	// } else {
-	// Assert.fail("disclaimers page not found");
+	// Assertion.fail("disclaimers page not found");
 	// }
 	// }
 
@@ -206,9 +194,9 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	// getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE,
 	// agentsnBrokersAARPPage);
 	//
-	// Assert.assertTrue(true);
+	// Assertion.assertTrue(true);
 	// } else {
-	// Assert.fail("agents&brokers page not found");
+	// Assertion.fail("agents&brokers page not found");
 	// }
 	// }
 
@@ -222,7 +210,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	// getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	// AcquisitionHomePageMobile aquisitionHomePageReload =
 	// aquisitionhomepage.homeFooterClick();
-	// Assert.assertTrue("home page not found", aquisitionHomePageReload!= null);
+	// Assertion.assertTrue("home page not found", aquisitionHomePageReload!= null);
 	// }
 
 	/**
@@ -258,7 +246,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateHeaderLinks();
 		} else {
-			Assert.fail("Home page not found");
+			Assertion.fail("Home page not found");
 		}
 	}
 
@@ -288,7 +276,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
-		Assert.assertTrue("home page not found", aquisitionHomePageReload != null);
+		Assertion.assertTrue("home page not found", aquisitionHomePageReload != null);
 	}
 
 	@When("^user vaidates the state drop down link on home page$")
@@ -349,7 +337,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateGlobalFooterLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 
@@ -360,7 +348,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateSubNavShopPlanLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 
@@ -371,18 +359,19 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateSubNavMedEdLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 
 	@Then("^the user validates TFN on page$")
 	public void the_user_validates_TFN_on_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String tfnXpath = memberAttributesMap.get("TFNxpath");
 		String tfnFlag = memberAttributesMap.get("TFNflag");
 
@@ -399,7 +388,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		// EnterZipCodePageMobile enterZipCodePage= new EnterZipCodePageMobile(driver);
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		pages.mobile.acquisition.commonpages.EnterZipCodePage enterZipCodePage = aquisitionhomepage.enterZipCode();
+		EnterZipCodePage enterZipCodePage = aquisitionhomepage.enterZipCode();
 		enterZipCodePage.validateZipComp(zipCode);
 	}
 

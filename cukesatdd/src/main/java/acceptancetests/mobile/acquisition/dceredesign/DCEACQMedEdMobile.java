@@ -1,30 +1,28 @@
 package acceptancetests.mobile.acquisition.dceredesign;
 
-import gherkin.formatter.model.DataTableRow;
-import io.appium.java_client.AppiumDriver;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
+import atdd.framework.MRScenario;
+import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.dceredesign.TellUsAboutDrugMobile;
 import pages.mobile.acquisition.dceredesign.ZipCodeAndPlanYearCapturePageMobile;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * Functionality:DCE Acquisition
@@ -38,11 +36,11 @@ public class DCEACQMedEdMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+//	AppiumDriver wd;
 
 	@Given("^the user is on AARP medicare acquisition site landing page Mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		//aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -67,12 +65,12 @@ public class DCEACQMedEdMobile {
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
-			Assert.fail("DCE Redesign page object not loaded");
+			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
 	@Then("^the user validates Get Started Page$")
 	public void the_user_verify_Get_Started_Page() throws Throwable {
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 
@@ -92,12 +90,13 @@ public class DCEACQMedEdMobile {
 
 	@And("^enduser search & add drugs to druglist$")
 	public void user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
@@ -121,13 +120,15 @@ public class DCEACQMedEdMobile {
 
 	@When("^user enters valid zipcode and county$")
 	public void user_enter_valid_zipcode_county(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String zipcode = memberAttributesMap.get("ZipCode");
+		String county = memberAttributesMap.get("county");
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
 		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);

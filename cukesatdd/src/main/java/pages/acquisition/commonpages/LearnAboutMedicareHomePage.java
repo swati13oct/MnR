@@ -8,13 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
-import junit.framework.Assert;
+import atdd.framework.Assertion;
 
 @SuppressWarnings({ "deprecation" })
 public class LearnAboutMedicareHomePage extends GlobalWebElements {
@@ -90,6 +89,18 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 
 	@FindBy(xpath="//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement FindAnAgent; 
+	
+	@FindBy(xpath = "//input[contains(id,'updates-email') or contains(@id,'learnmore-email-address')]")
+	private WebElement requestshoppageemailaddress;
+	
+	@FindBy(xpath = "//span[contains(text(),'Submit')]")
+	private WebElement requestplaninformationLearnMedicaresubmit;
+	
+	@FindBy(xpath = "//p[contains(text(),'Your guide will arrive in your inbox')]")
+	private WebElement requestplaninformationLearnMedicaresubmitpopup;
+	
+	@FindBy(xpath = "//span[contains(@id,'learnmore-email-error')]")
+	private WebElement RequestPlanInformationLearnMedicarepages_ErrorMessage;
 	
 	/* logic to navigate to Learn About medicare page from other pages */
 	public void pagebackButton() {
@@ -224,7 +235,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		navigateToMenuLinks(getLnkLearnAboutMedicare(), getLstLearnAboutMedicareTitle().get(0));
 		for (int i = 0; i < getLstLearnAboutMedicareTitle().size(); i++) {
 			System.out.println(getLstLearnAboutMedicareTitle().get(i).getText());
-			Assert.assertTrue("Medicare-Menu-header-mismatch, incorrect header displayed",
+			Assertion.assertTrue("Medicare-Menu-header-mismatch, incorrect header displayed",
 					getLstLearnAboutMedicareTitle().get(i).getText().contains(medicareMenuHeaders()[i]));
 
 		}
@@ -233,14 +244,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 			if (getLstLearnAboutMedicare().get(i).isEnabled()) {
 
 				if (getLstLearnAboutMedicare().get(i).getText().contains("Supplement")) {
-					Assert.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
+					Assertion.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
 							getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
 				}
 				else
 					if((medicareMenuText()[i]).contains("Supplement"))
 						continue;
 				else
-					Assert.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
+					Assertion.assertTrue("Medicare-Menu-links-Text-Mismatch, link's description is incorrect",
 							getLstLearnAboutMedicare().get(i).getText().contains(medicareMenuText()[i]));
 				System.out.println(getLstLearnAboutMedicare().get(i).getText());
 			}
@@ -251,7 +262,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	/* logic to check title of a page */
 	public void checkTitle(String title) {
 
-		Assert.assertTrue("Title mismatch, incorrect page loaded", getTitle().contains(title));
+		Assertion.assertTrue("Title mismatch, incorrect page loaded", getTitle().contains(title));
 		System.out.println(getTitle());
 	}
 
@@ -264,7 +275,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	/* logic to compare URL */
 	public void checkURL(String url) {
 
-		Assert.assertTrue("URL mismatch, incorrect page loaded", currentUrl().contains(url));
+		Assertion.assertTrue("URL mismatch, incorrect page loaded", currentUrl().contains(url));
 		System.out.println(currentUrl());
 
 	}
@@ -338,7 +349,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	}
 	public PrescriptionsProvidersBenefitsPage selectBenifitsEducation() {
 		
-		WebElement medBenifits= driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[2]"));
+		WebElement medBenifits= driver.findElement(By.xpath("(//a[contains(@href,'medicare-benefits')])[3]"));
 		validateNew(medBenifits);
 		jsClickNew(medBenifits);
 		waitForPageLoadSafari();
@@ -422,10 +433,10 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		if(ExpectedUHCAgentURL.equalsIgnoreCase(CurrentUHCAgentURL)) {
 			System.out.println("****************myuhcagent Page is displayed  ***************");
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else {
-			Assert.fail("****************myuhcagent Page is not loaded ***************");
+			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentUHCAgentURL = driver.getCurrentUrl();
@@ -437,12 +448,14 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		if(ExpectedUHCAgentURL.equalsIgnoreCase(ActualCurrentUHCAgentURL)) {
 			System.out.println("****************myuhcagent Page is displayed  ***************");
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else {
-			Assert.fail("****************myuhcagent Page is not loaded ***************");
+			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}
 	
+		driver.close();
+		driver.switchTo().window(parentWindow);
 	}
 	public void sleepBySec(int sec) {
 		try {
@@ -601,17 +614,17 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		if(driver.findElement(By.xpath("//h4[contains(text(),'Video transcript')]")).isDisplayed()) {
 			System.out.println("Transcipt PDF link open successfully");
 			jsClickNew(lnkVideoTranscipt);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}else {
-			Assert.fail("Transcipt PDF link did not open successfully");
+			Assertion.fail("Transcipt PDF link did not open successfully");
 		}
 	}
 
 	public void backToMedEdPage() {
-		
 		/*CommonUtility.checkPageIsReadyNew(driver);		
 		waitForPageLoadSafari();
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);*/
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());*/
 		if (driver.getWindowHandles().size() > 1) {
 			String currentPage = driver.getWindowHandle();
 			Set<String> newWindow = driver.getWindowHandles();
@@ -636,11 +649,11 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		String checkUrl=driver.getCurrentUrl();
 		if(checkUrl.contains(urlPath)) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println(pageName+" page loaded");
 		}else
 		{
-			Assert.fail(pageName+" page failed to load");
+			Assertion.fail(pageName+" page failed to load");
 		}
 				
 	}
@@ -648,18 +661,18 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement lnkPlansAvailableInYourArea=driver.findElement(By.xpath("//a[contains(@href,'/health-plans/medicare-advantage-plans/available-plans.html#/zipcode')]"));
 		scrollToView(lnkPlansAvailableInYourArea);
-		Assert.assertTrue("Plans Available link isn't present", lnkPlansAvailableInYourArea.isDisplayed());
+		Assertion.assertTrue("Plans Available link isn't present", lnkPlansAvailableInYourArea.isDisplayed());
 		switchToNewTabNew(lnkPlansAvailableInYourArea);
+		sleepBySec(10);
 		CommonUtility.checkPageIsReadyNew(driver);
-		sleepBySec(2);
 		if(driver.getCurrentUrl().contains("health-plans")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Plan Details page displayed Successfully");
 			driver.close();
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-			//driver.navigate().back();
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		}else {
-			Assert.fail("Plan Details page did not displayed Successfully");
+			Assertion.fail("Plan Details page did not displayed Successfully");
 		}
 	}
 
@@ -681,11 +694,11 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	public void hoverToPlanPage(String plantype) {
 		WebElement lnkPlan=null;
 		if(plantype.equalsIgnoreCase("MA")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col')]//span[contains(text(),'Advantage')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Advantage')])[3]"));
 		}else if(plantype.equalsIgnoreCase("MS")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col')]//span[contains(text(),'Supplement')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Supplement')])[1]"));
 		}else if(plantype.equalsIgnoreCase("PDP")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col') and contains(text(),'Prescription Drug')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Prescription Drug')])[3]"));
 		}
 		scrollToView(lnkPlan);
 		navigateToMedicareMenuLinks(lnkPlan);
@@ -700,12 +713,55 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		WebElement stillQues=driver.findElement(By.xpath("//span[contains(text(),'Still have questions?')]"));
 		validateNew(stillQues);
 		if(stillQues.isDisplayed()) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else {
-			Assert.fail("Still have a question not displayed");
+			Assertion.fail("Still have a question not displayed");
 		}
 		
+	}
+	
+	
+	
+	public boolean RequestPlanIInformationshoppages(String EmailAddress)
+			throws InterruptedException {
+
+		boolean RequestPlanIInformation_Validation = true;
+
+		boolean flag = true;
+		
+		requestshoppageemailaddress.clear();
+		requestshoppageemailaddress.sendKeys("(*^*_asb@t.c");
+		requestplaninformationLearnMedicaresubmit.click();
+		if (validate(RequestPlanInformationLearnMedicarepages_ErrorMessage) && RequestPlanInformationLearnMedicarepages_ErrorMessage.isDisplayed()) {
+			if (!RequestPlanInformationLearnMedicarepages_ErrorMessage.getText()
+					.contains("Please enter a valid email address")) {
+				System.out.println(
+						"Email Invalid Error is Not  displayed : " + RequestPlanInformationLearnMedicarepages_ErrorMessage.getText());
+				flag = false;
+			}
+			System.out.println("Email Invalid Error : " + RequestPlanInformationLearnMedicarepages_ErrorMessage.getText());
+
+		} else {
+			System.out.println("Email Invalid Error field is not displayed");
+
+		}
+		validateNew(requestshoppageemailaddress);
+		requestshoppageemailaddress.clear();
+		requestshoppageemailaddress.sendKeys(EmailAddress);
+		System.out.println("Email Address is enetered : " + EmailAddress);
+		validateNew(requestplaninformationLearnMedicaresubmit);
+		jsClickNew(requestplaninformationLearnMedicaresubmit);
+		if (requestplaninformationLearnMedicaresubmitpopup.getText().contains(
+				"Your guide will arrive in your inbox shortly")) {
+			System.out.println("****************Request  information is displayed  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("****************Request information is displayed  ***************");
+		}
+		return RequestPlanIInformation_Validation;
+
 	}
 }
 

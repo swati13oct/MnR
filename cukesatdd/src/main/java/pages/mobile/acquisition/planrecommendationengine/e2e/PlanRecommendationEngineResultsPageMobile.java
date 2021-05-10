@@ -6,7 +6,6 @@ package pages.mobile.acquisition.planrecommendationengine.e2e;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -25,24 +24,17 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
-import acceptancetests.data.PageConstants;
 import acceptancetests.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationStepDefinitionMobile;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import cucumber.api.DataTable;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
-
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
-public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
+public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements {
 
 	public PlanRecommendationEngineResultsPageMobile(WebDriver driver) {
 		super(driver);
@@ -52,7 +44,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -291,6 +283,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 
 	@FindBy(css = "#plan-list-1 div.module-plan-overview")
 	private List<WebElement> MA1stPlanList;
+	
+
 
 	@FindBy(css = "#plan-list-1 div.module-plan-overview:nth-child(1) .drugs-list div[class*='drug-info-container']")
 	private List<WebElement> DrugsNames;
@@ -642,6 +636,31 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		pageloadcomplete();
 
 	}
+	
+
+	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
+	static ArrayList<String> addedDrugNames = new ArrayList<String>();
+	
+	public ArrayList<String> getDrugsVPP() {
+		threadsleep(5000);
+		validate(drugsInfoMA1stPlan, 60);
+		mobileUtils.mobileLocateElement(drugsInfoMA1stPlan);
+		mobileUtils.mobileLocateElementClick(drugsInfoMA1stPlan);
+		vppDrugsResults = new ArrayList<String>();
+		for (WebElement e : drugsListMA1stPlan) {
+			vppDrugsResults.add(e.getText().replace("\n", " ").replace("  ", " ").trim());
+		}
+		return vppDrugsResults;
+	}
+	
+	public void verifyDrugPREVPP() {
+		waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		threadsleep(5000);// Plan loader
+		mobileUtils.mobileLocateElementClick(MAViewPlansLink);
+		getDrugsVPP();
+		containsname(vppDrugsResults, DrugMobilePage.addedDrugNames);
+	}
+
 
 	public void drugsDetailsPREtoVPP() {
 		System.out.println("Validating PRE Drugs Details in VPP Page Plan Type: ");
@@ -664,6 +683,8 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		// vppToPre();
 		MobileMenuAndGetPlanRecom();
 		validateDrugPage(flow, true);
+		
+		
 
 	}
 
@@ -718,6 +739,7 @@ public class PlanRecommendationEngineResultsPageMobile extends UhcDriver {
 		DrugsList = new ArrayList<String>();
 		validate(MAPlanCount, 60);
 		WebElement drugImageVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='drug-list-toggle'] img"));
+		
 		validate(drugImageVPP, 20);
 		threadsleep(5000);
 		drugcoveredsession();

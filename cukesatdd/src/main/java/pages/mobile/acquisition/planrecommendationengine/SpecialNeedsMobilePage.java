@@ -135,15 +135,15 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 		mobileUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
 		validate(specialNeedsPagePrimaryQuestion);
-		//Assert.assertTrue(specialNeedsPagePrimaryQuestion.getText().contains("situations"));
+		//Assertion.assertTrue(specialNeedsPagePrimaryQuestion.getText().contains("situations"));
 		validate(snpMedicaid, 30);
-		//Assert.assertTrue(snpMedicaid.getText().contains("Medicaid"));
+		//Assertion.assertTrue(snpMedicaid.getText().contains("Medicaid"));
 		validate(snpConditions, 30);
-		//Assert.assertTrue(snpConditions.getText().contains("following"));
+		//Assertion.assertTrue(snpConditions.getText().contains("following"));
 		validate(snpNursinghome, 30);
-		//Assert.assertTrue(snpNursinghome.getText().contains("facility"));
+		//Assertion.assertTrue(snpNursinghome.getText().contains("facility"));
 		validate(snpNone, 30);
-		//Assert.assertTrue(snpNone.getText().contains("None"));
+		//Assertion.assertTrue(snpNone.getText().contains("None"));
 		mobileUtils.mobileLocateElement(previousBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
@@ -203,7 +203,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 			if (snpMedicaidAccordion.isDisplayed()) {
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpMedicaidAccordionMoreInfo1stPara.getText().contains("D-SNP"));
-				//Assert.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
+				//Assertion.assertTrue(snpMedicareAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				mobileUtils.mobileFindElementBeforeCallBanner(snpMedicaidAccordionCarrot, "50%", 10, true);
 				snpMedicaidAccordionCarrot.click();
 			} else {
@@ -213,7 +213,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 			if (snpConditionsAccordion.isDisplayed()) {
 				Assert.assertTrue(snpConditionsAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpConditionsAccordionMoreInfo1stPara.getText().contains("C-SNP"));
-				//Assert.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
+				//Assertion.assertTrue(snpConditionsAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				mobileUtils.mobileFindElementBeforeCallBanner(snpConditionsAccordionCarrot, "50%", 10, true);
 				snpConditionsAccordionCarrot.click();
 			} else {
@@ -223,7 +223,7 @@ public class SpecialNeedsMobilePage extends UhcDriver {
 			if (snpNursinghomeAccordion.isDisplayed()) {
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo.getText().contains("More"));
 				Assert.assertTrue(snpNursinghomeAccordionMoreInfo1stPara.getText().contains("I-SNP"));
-				//Assert.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
+				//Assertion.assertTrue(snpNursinghomeAccordionMoreInfo2ndPara.getText().contains("toll free"));
 				mobileUtils.mobileFindElementBeforeCallBanner(snpNursinghomeAccordionCarrot, "50%", 10, true);
 				snpNursinghomeAccordionCarrot.click();
 			} else {

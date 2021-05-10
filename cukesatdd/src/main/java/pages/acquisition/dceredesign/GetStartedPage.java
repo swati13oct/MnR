@@ -1,26 +1,17 @@
 
 package pages.acquisition.dceredesign;
 
-import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
-import pages.acquisition.dceredesign.BuildYourDrugList;
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
@@ -53,7 +44,7 @@ public class GetStartedPage extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
 	private WebElement breaCrumbLink;
-	
+
 	@FindBy(xpath = "//span[contains(@class,'back-to-view-all-pla')]")
 	private WebElement backToHomeLink;
 	
@@ -81,7 +72,7 @@ public class GetStartedPage extends UhcDriver {
 		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
 		openAndValidate();
 	}
-	
+
 	public GetStartedPage(WebDriver driver, boolean isSearchEngine) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -105,10 +96,10 @@ public class GetStartedPage extends UhcDriver {
 			jsClickNew(AddMyDrugsBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assert.assertTrue("Naviagted to Build Drug List Page", true);
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugList(driver);
 		}
-		Assert.fail("Did not Navigate to Build Drug List Page");
+		Assertion.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
 
@@ -150,7 +141,8 @@ public class GetStartedPage extends UhcDriver {
 
 	public PrescriptionsProvidersBenefitsPage clickReturnToAcqHomePAge() {
 		driver.close();
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		waitForPageLoadSafari();
 		threadsleep(5000);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
@@ -171,7 +163,7 @@ public class GetStartedPage extends UhcDriver {
 	}
 
 	public void validateBreadCrumb(String breadCrumb) {
-		Assert.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().equals(breadCrumb));
+		Assertion.assertTrue("Expected breadcrumb "+ breadCrumb+" is not displayed",breaCrumbLink.getText().equals(breadCrumb));
 		        }
 		        
 		        
@@ -188,7 +180,7 @@ public void yahooSearch(String searchParameter) {
 			System.out.println("Yahoo search result found");
 		else {
 			System.out.println("yahoo search result not found");
-			Assert.assertFalse("no yahoo search result found", false);
+			Assertion.assertFalse("no yahoo search result found", false);
 		}
 		YahooSearchResult.click();
 		System.out.println("Yahoo Results - Get started - Link Clicked");
@@ -209,7 +201,7 @@ public void yahooSearch(String searchParameter) {
 			System.out.println("Google search result found");
 		else {
 			System.out.println("Google search result not found");
-			Assert.assertFalse("no Google search result found", false);
+			Assertion.assertFalse("no Google search result found", false);
 		}
 		googleSearchResult.click();
 		System.out.println("Google Results - Get started - Link Clicked");
@@ -230,11 +222,11 @@ public void yahooSearch(String searchParameter) {
 			if(driver.getTitle().contains("ARP Medicare Plans from UnitedHealthcare") || driver.getTitle().contains("Medicare Coverage Options from UnitedHealthcare")){
 				return true;
 			}	else{
-				Assert.assertTrue("Home page is reached", false);
+				Assertion.assertTrue("Home page is reached", false);
 				return false;
 			}
 		}else{
-			Assert.assertTrue("Return to home link is not visible", false);
+			Assertion.assertTrue("Return to home link is not visible", false);
 			return false;
 		}
 		

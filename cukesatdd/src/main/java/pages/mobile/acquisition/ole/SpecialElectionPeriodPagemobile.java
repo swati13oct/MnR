@@ -5,7 +5,6 @@ package pages.mobile.acquisition.ole;
 
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +14,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.ProposedEffectiveDatePage;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
 
 /**
@@ -143,6 +144,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
 	private WebElement pedHeader;
+
 
 	@FindBy(xpath = "//*[contains(text(),'new to Medicare')]/parent::span/input")
 	private WebElement pedHeader1;
@@ -302,7 +304,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		boolean Validation_Flag = true;
 		scrollToView(ChangingNewMedicareRadio);
 		if (ChangingNewMedicareRadio.isDisplayed()) {
-			jsClickNew(ChangingNewMedicareRadio);
+			jsClickMobile(ChangingNewMedicareRadio);
 			if (!validate(OtherReason) && validate(NoneApply)) {
 				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
 				Validation_Flag = true;
@@ -313,7 +315,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		}
 
 		ChangingCurrentMedicareRadio.isDisplayed();
-		jsClickNew(ChangingCurrentMedicareRadio);
+		jsClickMobile(ChangingCurrentMedicareRadio);
 
 		System.out.println("PlanType : " + planType);
 		try {
@@ -322,7 +324,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		// validateNew(ChangingCurrentMedicareRadio);
-		// jsClickNew(ChangingCurrentMedicareRadio);
+		// jsClickMobile(ChangingCurrentMedicareRadio);
 		// ChangingCurrentMedicareRadio.click();
 		if (planType.contentEquals("MA")) {
 			if (validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer)
@@ -399,7 +401,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public CoverageInformationPageMobile navigate_to_Coverage_Information_page() {
 
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		jsClickMobile(NextBtn);
 		/*
 		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", NextBtn);
@@ -415,73 +417,69 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public SpecialElectionPeriodPagemobile select_option_and_enter_data(String selectoptions, String optionsData) {
 		String[] options = selectoptions.split("/");
 		String[] optiondata = optionsData.split("/");
-		int i = 0;
+		int i=0;
 		boolean Option_Selected_Flag = true;
-		for (String currentOption : options) {
-			System.out.println("Option to select : " + currentOption);
-			/*
-			 * if(currentOption.contains("None apply")){ try { WebElement currentOptionChkBx
-			 * = driver.findElement(By.
-			 * xpath("//*[contains(text(), 'None apply')]//..//preceding-sibling::input"));
-			 * currentOptionChkBx.click(); } catch (Exception e) { // TODO Auto-generated
-			 * catch block System.out.println("Not able to select option"); return null; } }
-			 */
+		for(String currentOption : options){
+			System.out.println("Option to select : "+currentOption);
+	/*		if(currentOption.contains("None apply")){
+				try {
+					WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), 'None apply')]//..//preceding-sibling::input"));
+					currentOptionChkBx.click();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					System.out.println("Not able to select option");
+					return null;
+				}
+			}*/
 			try {
-				WebElement currentOptionChkBx = driver.findElement(
-						By.xpath("//*[contains(text(), '" + currentOption + "')]//..//preceding-sibling::input"));
-				// currentOptionChkBx.click();
-				jsClickMobile(currentOptionChkBx);
+				WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
+				currentOptionChkBx.click();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("Not able to select option");
 				Option_Selected_Flag = false;
 			}
 			String currentOptionData = optiondata[i];
-			System.out.println("Entering data for option : " + currentOptionData);
+			System.out.println("Entering data for option : "+currentOptionData);
 
-			try {
-				WebElement dataTextBx = driver.findElement(By.xpath(
-						"//*[contains(text(), '" + currentOption + "')]//..//*[@class='subquestionfield']//input"));
-				if (validate(dataTextBx))
-					// dataTextBx.sendKeys(currentOptionData);
-					jsSendkeys(dataTextBx, currentOptionData);
-			} catch (Exception e) {
-			}
-			try {
-				WebElement dataTextBx = driver.findElement(By.xpath(
-						"//*[contains(text(), '" + currentOption + "')]//..//*[@class='subquestionfield']//textarea"));
-				if (validate(dataTextBx))
-					jsSendkeys(dataTextBx, currentOptionData);
-				// dataTextBx.sendKeys(currentOptionData);
-			} catch (Exception e) {
-				System.out.println("No additional data required for Option selected");
-			}
+				try {
+					WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
+					if(validate(dataTextBx))
+						dataTextBx.sendKeys(currentOptionData);
+				} 
+				catch (Exception e) {
+				}
+				try {
+					WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
+					if(validate(dataTextBx))
+							dataTextBx.sendKeys(currentOptionData);
+				} catch (Exception e) {
+					System.out.println("No additional data required for Option selected");
+				}
 
 			i++;
 		}
-
-		if (NextBtn.isEnabled()) {
-			System.out.println("SEP options selection Status :  " + Option_Selected_Flag);
+		
+		if(NextBtn.isEnabled()){
+			System.out.println("SEP options selection Status :  "+Option_Selected_Flag);
 			System.out.println("SEP options selected :  Next button is enabled");
 			return new SpecialElectionPeriodPagemobile(driver);
 		}
 
 		return null;
 	}
+	
+	
 
 	public ProposedEffectiveDatePageMobile navigate_to_Proposed_Effective_Date_Page() {
 
 		validateNew(NextBtn);
 		jsClickMobile(NextBtn);
-		/*
-		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
-		 * executor.executeScript("arguments[0].click();", NextBtn);
-		 */
-		//*[@id="new"]
-		jsClickMobile(trial);
-		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
-		if (validateNew(pedHeader)) {
+		waitForPageLoadSafari();
+		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", NextBtn);*/
+		scrollToView(pedHeader);
+		if(validateNew(pedHeader)){
 			System.out.println("OLE Proposed Effective Date Page is Displayed");
 			return new ProposedEffectiveDatePageMobile(driver);
 		}
@@ -502,11 +500,11 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		Validation_Flag &= NewMedicare.getText().trim()
 				.equalsIgnoreCase("I'm new to Medicare and enrolling for the first time");
 		// System.out.println("SEP plan is Clicked on the " +NewMedicareRadio);
-		jsClickNew(ChangingNewMedicareRadio);
+		jsClickMobile(ChangingNewMedicareRadio);
 
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
 		// validateNew(NextBtn);
-		// jsClickNew(NextBtn);
+		// jsClickMobile(NextBtn);
 
 		return Validation_Flag;
 	}

@@ -207,32 +207,42 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
 
-		sendkeysNew(firstNameField, FirstName);
-		sendkeysNew(lastNameField, LastName);
+		//sendkeysNew(firstNameField, FirstName);
+		sendkeysMobile(firstNameField, FirstName);
+		//sendkeysNew(lastNameField, LastName);
+		sendkeysMobile(lastNameField, LastName);
 
-		sendkeys(DOBtxtFld, DOB);
+		//sendkeys(DOBtxtFld, DOB);
+		sendkeysMobile(DOBtxtFld, DOB);
+		
 		if (Gender.contains("Male")) {
 			// GenderSelectMale.click();
-			jsClickNew(GenderSelectMale);
+			jsClickMobile(GenderSelectMale);
 		} else {
 			// GenderSelectFemale.click();
-			jsClickNew(GenderSelectFemale);
+			jsClickMobile(GenderSelectFemale);
 		}
-		sendkeys(PermanentAdd_Street, Perm_Street);
+		//sendkeys(PermanentAdd_Street, Perm_Street);
+		sendkeysMobile(PermanentAdd_Street, Perm_Street);
 		// sendkeys(PermanentAdd_Aptno,Perm_Aptno);
-		sendkeys(PermanentAdd_City, Perm_city);
+		//sendkeys(PermanentAdd_City, Perm_city);
+		sendkeysMobile(PermanentAdd_City, Perm_city);
 		System.out.println("Mailing Question : " + MailingQuestion);
 		if (MailingQuestion.equalsIgnoreCase("no")) {
-			jsClickNew(SameMailingAddressNo);
+			jsClickMobile(SameMailingAddressNo);
 			// CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
-			sendkeysNew(MailingAdd_Street, Mailing_Street);
+			//sendkeysNew(MailingAdd_Street, Mailing_Street);
+			sendkeysMobile(MailingAdd_Street, Mailing_Street);
 			// sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
-			sendkeys(MailingAdd_City, Mailing_City);
+			sendkeysMobile(MailingAdd_City, Mailing_City);
+			//sendkeys(MailingAdd_City, Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
-			sendkeysNew(MailingAdd_Zip, Mailing_Zip);
+			//sendkeysNew(MailingAdd_Zip, Mailing_Zip);
+			sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
 		}
-		sendkeys(Email, EmailAddress);
+		//sendkeys(Email, EmailAddress);
+		sendkeysMobile(Email, EmailAddress);
 
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
@@ -360,7 +370,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			if (confirmYourEligibilityPage != null) {
 
 				validateNew(NextBtn);
-				jsClickNew(NextBtn);
+				jsClickMobile(NextBtn);
 
 				if (driver.getCurrentUrl().contains("special")) {
 					System.out.println("OLE SEP Page is Displayed");
@@ -381,8 +391,8 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
-			jsSendkeys(partAStartDateField, PartAeffectiveDate);
-			jsSendkeys(partBStartDateField, PartBeffectiveDate);
+			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
+			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
 		}
 
 		return new ConfirmYourEligibilityPageMobile(driver);
@@ -400,30 +410,30 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		validateNew(HomephoneNumberField);
 		// sendkeys(HomephoneNumberField, HomeNumber);
-		jsSendkeys(HomephoneNumberField, HomeNumber);
+		sendkeysMobile(HomephoneNumberField, HomeNumber);
 		validateNew(MobileNumberField);
 		// sendkeys(MobileNumberField, MobileNumber);
-		jsSendkeys(MobileNumberField, MobileNumber);
+		sendkeysMobile(MobileNumberField, MobileNumber);
 		// sendkeysNew(MiddleNameField, MiddleName);
-		jsSendkeys(MiddleNameField, MiddleName);
+		sendkeysMobile(MiddleNameField, MiddleName);
 		if (emailConfirmation.equalsIgnoreCase("YES")) {
-			jsClickNew(emailConfirmationYesBtn); // emailConfirmationYesBtn.click();
+			jsClickMobile(emailConfirmationYesBtn); // emailConfirmationYesBtn.click();
 		} else
-			jsClickNew(emailConfirmationNoBtn); // emailConfirmationNoBtn.click();
+			jsClickMobile(emailConfirmationNoBtn); // emailConfirmationNoBtn.click();
 
 		if (goGreen.equalsIgnoreCase("YES")) {
 			// goGreenYesBtn.click();
-			jsClickNew(goGreenYesBtn);
+			jsClickMobile(goGreenYesBtn);
 		} else
 			// goGreenNoBtn.click();
-			jsClickNew(goGreenNoBtn);
+			jsClickMobile(goGreenNoBtn);
 
 		// if(emailConfirmation.equalsIgnoreCase("YES") &&
 		// goGreen.equalsIgnoreCase("YES"))
 		// sendkeysNew(emailAddressField, email);
 
 		// sendkeys(Email, EmailAddress);
-		jsSendkeys(Email, EmailAddress);
+		sendkeysMobile(Email, EmailAddress);
 
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
@@ -461,7 +471,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			// StateSelectNC.click();
 			WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
 			// EnterZip.sendKeys(ZipCode);
-			jsSendkeys(EnterZip, ZipCode);
+			sendkeysMobile(EnterZip, ZipCode);
 			System.out.println("C&S DSNP Plan : State selected and Zip Entered");
 			StateDisplayText = state;
 			ZipDisplayText = EnterZip.getText();
@@ -541,7 +551,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		validateNew(MobileNumberField);
 		scrollToView(MobileNumberField);
 		// sendkeys(MobileNumberField, MobileNumber);
-		jsSendkeys(MobileNumberField, MobileNumber);
+		sendkeysMobile(MobileNumberField, MobileNumber);
 		// sendkeysNew(MiddleNameField, MiddleName);
 		MiddleNameField.sendKeys(MiddleName);
 		// sendkeys(Email, EmailAddress);
@@ -558,7 +568,8 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			throws InterruptedException {
 
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		scrollToView(NextBtn);
+		jsClickMobile(NextBtn);
 
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("special")) {
@@ -574,7 +585,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			if (confirmYourEligibilityPage != null) {
 
 				scrollToView(NextBtn);
-				jsClickNew(NextBtn);
+				jsClickMobile(NextBtn);
 				// waitForPageLoadSafari();
 				if (driver.getCurrentUrl().contains("special")) {
 					System.out.println("OLE SEP Page is Displayed");
@@ -594,12 +605,12 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	 */
 	public VisitorProfilePageMobile saveAndReturnLater() {
 
-		jsClickNew(saveandReturn);
-		jsClickNew(enrollSavedClose);
-		jsClickNew(aarpLogo);
-		jsClickNew(enrollProfileYes);
-		jsClickNew(shoppingCartIcon);
-		jsClickNew(lnkProfile);
+		jsClickMobile(saveandReturn);
+		jsClickMobile(enrollSavedClose);
+		jsClickMobile(aarpLogo);
+		jsClickMobile(enrollProfileYes);
+		jsClickMobile(shoppingCartIcon);
+		jsClickMobile(lnkProfile);
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePageMobile(driver);
@@ -618,9 +629,9 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
 			// sendkeysNew(partAStartDateField, PartAeffectiveDate);
-			jsSendkeys(partAStartDateField, PartAeffectiveDate);
+			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
 			// sendkeysNew(partBStartDateField, PartBeffectiveDate);
-			jsSendkeys(partBStartDateField, PartBeffectiveDate);
+			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
 			// sendkeysNew(medicaidNumberField,MedicaidNo);
 		}
 

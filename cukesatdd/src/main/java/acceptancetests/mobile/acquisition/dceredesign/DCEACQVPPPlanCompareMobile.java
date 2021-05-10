@@ -1,12 +1,20 @@
 package acceptancetests.mobile.acquisition.dceredesign;
 
-import gherkin.formatter.model.DataTableRow;
+import java.util.List;
 import io.appium.java_client.AppiumDriver;
 
-import java.util.List;
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
+import io.appium.java_client.AppiumDriver;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
@@ -17,11 +25,6 @@ import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * Functionality:DCE Acquisition
@@ -77,7 +80,7 @@ public class DCEACQVPPPlanCompareMobile {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 		} else
-			Assert.fail("Error in loading the compare plans page");
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@When("^I access the DCE Redesign from Plan compare page$")
@@ -88,7 +91,7 @@ public class DCEACQVPPPlanCompareMobile {
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
-			Assert.fail("DCE Redesign page object not loaded");
+			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
 	@Then("^the user clicks on return to compare link on build drug list page to returns to plan compare$")
@@ -104,9 +107,10 @@ public class DCEACQVPPPlanCompareMobile {
 	public void the_userValidatesDrugInfo(DataTable attributes) throws Throwable {
 		ComparePlansPageMobile planComparePage = (ComparePlansPageMobile) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+//		List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 
-		String drug = memberAttributesRow.get(0).getCells().get(1);
+//		String drug = memberAttributesRow.get(0).getCells().get(1);
+		String drug = attributes.cell(0, 1);
 		planComparePage.validateDrugInfo(drug);
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 

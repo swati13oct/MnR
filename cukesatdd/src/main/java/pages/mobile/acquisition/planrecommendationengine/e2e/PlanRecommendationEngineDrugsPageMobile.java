@@ -4,7 +4,6 @@
 package pages.mobile.acquisition.planrecommendationengine.e2e;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,14 +15,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.WerallyMobilePage;
 
-public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
+public class PlanRecommendationEngineDrugsPageMobile extends GlobalWebElements {
 
 	public PlanRecommendationEngineDrugsPageMobile(WebDriver driver) {
 		super(driver);
@@ -33,7 +29,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -179,7 +175,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends UhcDriver {
 
 	@FindBy(css = "uhc-temp-display p[role='alert']")
 	private WebElement modaldrugsCount;
-
+	
 	@FindBy(css = "uhc-list uhc-list-item")
 	private List<WebElement> drugsList;
 

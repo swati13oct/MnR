@@ -28,15 +28,10 @@ import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
-public class PlanRecommendationEngineResultsPage extends UhcDriver {
+public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineResultsPage(WebDriver driver) {
 		super(driver);
@@ -46,7 +41,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 	
@@ -554,7 +549,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		if (R1.equalsIgnoreCase("MA")) {
 //			MAViewPlansLink.click();
 			validate(MA1stPlanName, 60);
-//			Assert.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()), "MA Invalid Plan Ranking");
+//			Assertion.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()), "MA Invalid Plan Ranking");
 			//mobileUtils.mobileLocateElementClick(MA1stPlanEnroll);
 //			clickEnrolldesktop(MA1stPlanEnroll);
 		}
@@ -562,21 +557,21 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 //			MSViewPlansLink.click();
 			submitMSform();
 			validate(MS1stPlanName, 60);
-//			Assert.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"MS Invalid Plan Ranking");
+//			Assertion.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"MS Invalid Plan Ranking");
 			//mobileUtils.mobileLocateElementClick(MS1stPlanEnroll);
 			clickEnrolldesktop(MS1stPlanEnroll,needhelptxtMS);
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
 //			PDPViewPlansLink.click();
 			validate(PDP1stPlanName, 60);
-//			Assert.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"PDP Invalid Plan Ranking");
+//			Assertion.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"PDP Invalid Plan Ranking");
 			//mobileUtils.mobileLocateElementClick(PDP1stPlanEnroll);
 //			clickEnrolldesktop(PDP1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
 //			SNPViewPlansLink.click();
 			validate(SNP1stPlanName, 60);
-//			Assert.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"SNP Invalid Plan Ranking");
+//			Assertion.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"SNP Invalid Plan Ranking");
 			//mobileUtils.mobileLocateElementClick(SNP1stPlanEnroll);
 			if(SNP1stPlanName.getText().toUpperCase().contains("D-SNP")) 
 				clickEnrolldesktop(SNP1stPlanEnroll,needhelptxt);
@@ -1749,7 +1744,7 @@ public void validateDrugProvider() {
 	Collections.sort(vpdrugs);
 	System.out.println(vpdrugs);
 	verifyConfirmationmodalResults(drgcount,DrugsInPRE,vpdrugs);
-//	Assert.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
+//	Assertion.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
 	threadsleep(3000);
 	
 	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1].trim());
@@ -1759,7 +1754,7 @@ public void validateDrugProvider() {
 	Collections.sort(vpProviders);
 	System.out.println(vpProviders);
 	verifyConfirmationmodalResults(prdcount,DocInPRE,vpProviders);
-//	Assert.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
+//	Assertion.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
 	threadsleep(3000);
 	System.out.println("Drug and provider details successfully validated in VP ");
 	System.out.println("Validate Pharamacy details in VP ");

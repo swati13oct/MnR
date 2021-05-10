@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,8 +15,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 
@@ -47,12 +46,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// zipcodeField.clear();
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		// sendkeys(zipcodeField, zipcode);
-		// jsSendkeys(zipcodeField, zipcode);
 
-		// jsClickNew(zipcodeField);
-		// jsSendkeys(zipcodeField, zipcode);
-		zipcodeField.sendKeys(zipcode);
+		mobileactionsendkeys(zipcodeField, zipcode);
 
 		Select select = new Select(distanceDropDownField);
 		String DistanceSelection = distance + " miles";
@@ -66,7 +61,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 		// CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 
-		jsClickMobile(searchbtn);
+		jsClickNew(searchbtn);
 		System.out.println("***** entered******");
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,100)", "");
@@ -84,19 +79,23 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	}
 
 	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
+		
+		mobileactionsendkeys(zipcodeField, zipcode);
+		planTypeDropDownTitle.click();
 		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
 		// List<String> testNote=new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(zipcode);
-		Assert.assertTrue("PROBLEM - unable to locate distance dropdown option", pharmacyValidate(distanceDropownID));
+		Assertion.assertTrue("PROBLEM - unable to locate distance dropdown option", pharmacyValidate(distanceDropownID));
 		if (distance.equals("1"))
 			distance = distance + " mile";
 		else
 			distance = distance + " miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
-		selectFromDropDownByText(driver, distanceDropownID, distance);
+		// selectFromDropDownByText(driver, distanceDropownID, distance);
+		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
@@ -106,14 +105,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
 			if (county.equalsIgnoreCase("None")) {
-				Assert.assertTrue(
+				Assertion.assertTrue(
 						"PROBLEM - expects zicode '" + zipcode + "' to have multi-county but selection is showing",
 						!pharmacyValidate(countyModal));
 			} else {
 				if (initialZipVal.equals("") || !initialZipVal.equals(zipcode.trim())) {
 					System.out.println(
 							"This is either the first time entering zip for multicounty or changing to zip that's multicounty, expect selection popup");
-					Assert.assertTrue(
+					Assertion.assertTrue(
 							"PROBLEM - expects zipcode '" + zipcode
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
@@ -122,7 +121,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
 				} else {
-					Assert.assertTrue(
+					Assertion.assertTrue(
 							"PROBLEM - this is not first time entering zip for multicounty or changing from zip that was not, should NOT see multicounty popup",
 							!pharmacyValidate(countyModal));
 				}
@@ -139,12 +138,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(8);
 
 		zipcodeField.sendKeys(zipcode);
+		//mobileactionsendkeys(zipcodeField, zipcode);
 		// if(zipcode.length()!=5){
-		distanceOption_15miles.click();
+		// distanceOption_15miles.click();
+		jsClickNew(distanceOption_15miles);
 		// }
 		// searchbtn.click();
 		// CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		// Assert.assertTrue("PROBLEM - unable to locate Zipcode Error message",
+		// Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
 		// pharmacyValidate(zipcodeErrorMessage));
 	}
 
@@ -174,7 +175,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * 
 	 * timeStr = (String) sysTimeJsonObj.get("systemtime"); } catch (ParseException
 	 * e) { e.printStackTrace();
-	 * Assert.assertTrue("PROBLEM - unable to find out the system time", false); }
+	 * Assertion.assertTrue("PROBLEM - unable to find out the system time", false); }
 	 * driver.close(); driver.switchTo().window(winHandleBefore); return timeStr; }
 	 */
 
@@ -194,10 +195,11 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		// seletPlandropdown.click();
 
-		jsClickMobile(seletPlandropdown);
+		// jsClickMobile(seletPlandropdown);
 		sleepBySec(1);
-		//selectFromDropDownByText(driver, seletPlandropdown, planName);
-		/*To handle iOS dropdown */
+		// selectFromDropDownByText(driver, seletPlandropdown, planName);
+		/* To handle iOS dropdown */
+		planTypeDropDownTitle.click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 
@@ -208,20 +210,20 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(1); // note: let the page settle down
 		searchbtn.click();
 		sleepBySec(50);
-		Assert.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
+		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
 			if ((MRScenario.environmentMedicare.equals("stage"))) {
 				// note: check system time and display in assert message if failed to see what
 				// is the system time at the time of the test
 				// String currentSysTime=getAcqTestEnvSysTime(testSiteUrl);
 
-				Assert.assertTrue(
+				Assertion.assertTrue(
 						"PROBLEM - Search yield no result, "
 								+ "test expects input data to have search result for remaining validation steps, "
 								+ "please check user data input or env to see if everything is ok. ",
 						pharmacyValidate(pharmacyCount));
 			} else {
-				Assert.assertTrue(
+				Assertion.assertTrue(
 						"PROBLEM - Search yield no result, "
 								+ "test expects input data to have search result for remaining validation steps, "
 								+ "please check user data input or env to see if everything is ok. ",
@@ -254,21 +256,21 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			} else {
 				total = Integer.parseInt(PharmacyFoundCount.getText().trim());
 			}
-			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
 					pharmacyValidate(pharmaciesAvailable));
 			if (total > 10) {
-				Assert.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
-				Assert.assertTrue("PROBLEM - unable to locate the left arrow element", pharmacyValidate(leftArrow));
-				Assert.assertTrue("PROBLEM - unable to locate the right arrow element", pharmacyValidate(rightArrow));
+				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
+				Assertion.assertTrue("PROBLEM - unable to locate the left arrow element", pharmacyValidate(leftArrow));
+				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element", pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
 					leftArrow.click();
 					CommonUtility.checkPageIsReady(driver);
 				} catch (Exception e) {
-					Assert.assertTrue("PROBLEM - something wrong with the arrow", false);
+					Assertion.assertTrue("PROBLEM - something wrong with the arrow", false);
 				}
-				Assert.assertTrue(
+				Assertion.assertTrue(
 						"PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section",
 						pharmacyValidate(contactUnitedHealthCare));
 				contactUnitedHealthCare.click();
@@ -276,18 +278,18 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				CommonUtility.checkPageIsReady(driver);
 				String currentURL = driver.getCurrentUrl();
 				String expectedURL = "contact-us";
-				Assert.assertTrue("PROBLEM - unable to go to contact us page. " + "Expect to contain '" + expectedURL
+				Assertion.assertTrue("PROBLEM - unable to go to contact us page. " + "Expect to contain '" + expectedURL
 						+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
-				Assert.assertTrue("PROBLEM - unable to find Contact Us Header on Contact us Page. ",
+				Assertion.assertTrue("PROBLEM - unable to find Contact Us Header on Contact us Page. ",
 						pharmacyValidate(contactUsHeader));
 				driver.navigate().back();
 				CommonUtility.checkPageIsReady(driver);
 				CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 				currentURL = driver.getCurrentUrl();
 				expectedURL = "member/pharmacy-locator";
-				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+				Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
 						currentURL.contains(expectedURL));
-				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans",
+				Assertion.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU other plans",
 						validateNew(pdf_otherPlans));
 				String winHandleBefore = driver.getWindowHandle();
 				Thread.sleep(5000);
@@ -298,16 +300,16 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs - 1));
 				currentURL = driver.getCurrentUrl();
 				expectedURL = "LTC_HI_ITU_Pharmacies_Other.pdf";
-				Assert.assertTrue("PROBLEM - PDF Page  is not opening, URL should contain '" + expectedURL
+				Assertion.assertTrue("PROBLEM - PDF Page  is not opening, URL should contain '" + expectedURL
 						+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
 				currentURL = driver.getCurrentUrl();
 				expectedURL = "member/pharmacy-locator";
-				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+				Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
 						currentURL.contains(expectedURL));
 				CommonUtility.waitForPageLoad(driver, pdf_WalgreenPlans, 15);
-				Assert.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU walgreen plans",
+				Assertion.assertTrue("PROBLEM - unable to locate the link for pdf for LTC_HI_ITU walgreen plans",
 						pharmacyValidate(pdf_WalgreenPlans));
 				winHandleBefore = driver.getWindowHandle();
 				CommonUtility.checkPageIsReady(driver);
@@ -318,29 +320,29 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 				driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs - 1));
 				currentURL = driver.getCurrentUrl();
 				expectedURL = "LTC_HI_ITU_Pharmacies_Walgreens.pdf";
-				Assert.assertTrue("PROBLEM - PDF Page  is not opening, URL should contain '" + expectedURL
+				Assertion.assertTrue("PROBLEM - PDF Page  is not opening, URL should contain '" + expectedURL
 						+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
 				driver.close();
 				driver.switchTo().window(winHandleBefore);
 				currentURL = driver.getCurrentUrl();
 				expectedURL = "member/pharmacy-locator";
-				Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+				Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
 						currentURL.contains(expectedURL));
 			} else {
-				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the pagination element",
 						!pharmacyValidate(pagination));
-				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
 						!pharmacyValidate(leftArrow));
-				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
 						!pharmacyValidate(rightArrow));
 			}
 		} else {
-			Assert.assertTrue(
+			Assertion.assertTrue(
 					"PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section",
 					!pharmacyValidate(contactUnitedHealthCare));
-			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans",
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans",
 					!pharmacyValidate(pdf_otherPlans));
-			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans",
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans",
 					!pharmacyValidate(pdf_WalgreenPlans));
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  " + PharmacyCount);
 			System.out.println(
@@ -366,13 +368,13 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			// note: check system time and display in assert message if failed to see what
 			// is the system time at the time of the test
 			// String currentSysTime=getMemTestEnvSysTime();
-			Assert.assertTrue(
+			Assertion.assertTrue(
 					"PROBLEM - while search display behaved as expected but search yield no result, "
 							+ "test expects input data to have search result for remaining validation steps, "
 							+ "please check user data input or env to see if everything is ok. ",
 					!pharmacyValidate(noResultMsg) && !pharmacyValidate(noResultMsgTopPink));
 			/*
-			 * tbd } else { Assert.
+			 * tbd } else { Assertion.
 			 * assertTrue("PROBLEM - while search display behaved as expected but search yield no result, "
 			 * +
 			 * "test expects input data to have search result for remaining validation steps, "
@@ -413,7 +415,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void validateLtcPdfDoc(String pdfType, String testPlanYear, WebElement pdfLink, String testPdfLinkTextDate)
 			throws InterruptedException {
 		CommonUtility.waitForPageLoad(driver, pdfLink, 15);
-		Assert.assertTrue("PROBLEM - unable to locate the link for pdf for " + pdfType, pharmacyValidate(pdfLink));
+		Assertion.assertTrue("PROBLEM - unable to locate the link for pdf for " + pdfType, pharmacyValidate(pdfLink));
 		// note: "current year" set of doc will be associated with current real year
 		// (e.g. right now is 2019, so "current year" docs are 2019 docs)
 		// note: "next year" set of doc will be associated with next real year (e.g.
@@ -427,7 +429,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// is "next year"
 		// note: then the code would know to display 2020 link text when you select 2020
 		// because that's the "next year" docs
-		Assert.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - unable to locate expected year on the link text for pdf for " + pdfType + ". "
 						+ "Expected year (either system is on this year or selected this year on plan year dropdown)='"
 						+ testPlanYear + "' | Actual link text='" + pdfLink.getText() + "'",
@@ -441,9 +443,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs - 1));
 		String currentURL = driver.getCurrentUrl();
 		String expectedURL = pdfType;
-		Assert.assertTrue("PROBLEM - PDF Page  is not opening, " + "URL should contain '" + expectedURL
+		Assertion.assertTrue("PROBLEM - PDF Page  is not opening, " + "URL should contain '" + expectedURL
 				+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
-		Assert.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - unable to locate expected year on the URL. " + "URL should contain year '"
 						+ testPdfLinkTextDate + "' | Actual URL='" + currentURL + "'",
 				currentURL.contains(testPdfLinkTextDate));
@@ -451,7 +453,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		driver.switchTo().window(winHandleBefore);
 		currentURL = driver.getCurrentUrl();
 		expectedURL = "Pharmacy-Search";
-		Assert.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
+		Assertion.assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing",
 				currentURL.contains(expectedURL));
 	}
 
@@ -470,7 +472,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			// popup.click();
 			total = Integer.parseInt(PharmacyFoundCount.getText().trim());
 
-			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
 					pharmacyValidate(pharmaciesAvailable));
 			if (total > 10) {
 				WebElement contactUsLink = contactUnitedHealthCare;
@@ -478,7 +480,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 					contactUsLink = contactUnitedHealthCare_ol;
 				}
 
-				Assert.assertTrue(
+				Assertion.assertTrue(
 						"PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 								+ "in 'pharmacies with India/Tribal/Urbal...' section",
 						pharmacyValidate(contactUsLink));// locationContextEnabled: false
@@ -495,7 +497,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		 * Thread.sleep(2000); //note: keep this for the page to load
 		 * CommonUtility.checkPageIsReadyNew(driver); String
 		 * currentURL=driver.getCurrentUrl(); String expectedURL="contact-us.html";
-		 * Assert.assertTrue("PROBLEM - unable to go to contact us page. " +
+		 * Assertion.assertTrue("PROBLEM - unable to go to contact us page. " +
 		 * "Expect to contain '"+expectedURL+"' | Actual URL='"+currentURL+"'",
 		 * currentURL.contains(expectedURL));
 		 */
@@ -503,7 +505,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		 * driver.navigate().back(); CommonUtility.checkPageIsReadyNew(driver);
 		 * CommonUtility.waitForElementToDisappear(driver, loadingImage, 90);
 		 * currentURL=driver.getCurrentUrl(); //System.out.println(currentURL);
-		 * expectedURL="Pharmacy-Search"; Assert.
+		 * expectedURL="Pharmacy-Search"; Assertion.
 		 * assertTrue("PROBLEM - unable to go back to pharmacy locator page for further testing"
 		 * , currentURL.contains(expectedURL)); //note: if year dropdown is available,
 		 * handle it with current year if (isPlanYear()) {
@@ -518,30 +520,30 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		 * pdfType="LTC_HI_ITU_Pharmacies_Walgreens.pdf"; pdfElement=pdf_WalgreenPlans;
 		 * validateLtcPdfDoc(pdfType, testPlanYear, pdfElement, testPdfLinkTextDate);
 		 * moveMouseToElement(contactUsLink);
-		 * Assert.assertTrue("PROBLEM - unable to locate the pagination element",
+		 * Assertion.assertTrue("PROBLEM - unable to locate the pagination element",
 		 * pharmacyValidate(pagination));
-		 * Assert.assertTrue("PROBLEM - unable to locate the left arrow element",
+		 * Assertion.assertTrue("PROBLEM - unable to locate the left arrow element",
 		 * pharmacyValidate(leftArrow));
-		 * Assert.assertTrue("PROBLEM - unable to locate the right arrow element",
+		 * Assertion.assertTrue("PROBLEM - unable to locate the right arrow element",
 		 * pharmacyValidate(rightArrow)); try { rightArrow.click();
 		 * CommonUtility.checkPageIsReady(driver); leftArrow.click();
 		 * CommonUtility.checkPageIsReady(driver); } catch (Exception e) {
-		 * Assert.assertTrue("PROBLEM - something wrong with the arrow", false); }
+		 * Assertion.assertTrue("PROBLEM - something wrong with the arrow", false); }
 		 * 
-		 * } else { Assert.
+		 * } else { Assertion.
 		 * assertTrue("PROBLEM - total < 10, should not find the pagination element",
-		 * !pharmacyValidate(pagination)); Assert.
+		 * !pharmacyValidate(pagination)); Assertion.
 		 * assertTrue("PROBLEM - total < 10, should not find the left arrow element",
-		 * !pharmacyValidate(leftArrow)); Assert.
+		 * !pharmacyValidate(leftArrow)); Assertion.
 		 * assertTrue("PROBLEM - total < 10, should not find the right arrow element",
 		 * !pharmacyValidate(rightArrow)); } } else { WebElement
 		 * contactUsLink=contactUnitedHealthCare; if
 		 * (!pharmacyValidate(contactUnitedHealthCare))
-		 * contactUsLink=contactUnitedHealthCare_ol; Assert.
+		 * contactUsLink=contactUnitedHealthCare_ol; Assertion.
 		 * assertTrue("PROBLEM - should not be abl to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section"
-		 * , !pharmacyValidate(contactUsLink)); Assert.
+		 * , !pharmacyValidate(contactUsLink)); Assertion.
 		 * assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans"
-		 * , !pharmacyValidate(pdf_otherPlans)); Assert.
+		 * , !pharmacyValidate(pdf_otherPlans)); Assertion.
 		 * assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans"
 		 * , !pharmacyValidate(pdf_WalgreenPlans));
 		 * System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  "
@@ -634,7 +636,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			testElementList = listOfPdpPlans;
 		else if (planType.equalsIgnoreCase("SNP"))
 			testElementList = listOfSnpPlans;
-		Assert.assertTrue("PROBLEM - unable to locate plan for planType='" + planType + "'",
+		Assertion.assertTrue("PROBLEM - unable to locate plan for planType='" + planType + "'",
 				testElementList.isDisplayed());
 		jsClickNew(testElementList);
 		CommonUtility.checkPageIsReady(driver);
@@ -654,7 +656,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void clickDirectoryLnk(String isMultiCounty, String countyName) {
 		CommonUtility.waitForPageLoad(driver, vpp_onlinePharmacyDirectoryLnk, 10);
 		scrollToView(vpp_onlinePharmacyDirectoryLnk);
-		Assert.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
+		Assertion.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));
 		// vpp_onlinePharmacyDirectoryLnk.click();
 		jsClickMobile(vpp_onlinePharmacyDirectoryLnk);
@@ -667,7 +669,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		String currentURL = driver.getCurrentUrl();
 		if (("Yes").equalsIgnoreCase(isMultiCounty.trim())) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
-			Assert.assertTrue(
+			Assertion.assertTrue(
 					"PROBLEM - test zip expects multi-county but multi-county selection popup is NOT showing when switching to pharmacy locator page",
 					pharmacyValidate(countyModal));
 			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
@@ -675,7 +677,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			CommonUtility.waitForPageLoad(driver, pharmacylocatorheader, 10); // note: should be on vpp page afterward
 		}
 		String expectedURL = "Pharmacy-Search-English";
-		Assert.assertTrue("PROBLEM - Pharmacy Locator Page is not opening, URL should contain '" + expectedURL
+		Assertion.assertTrue("PROBLEM - Pharmacy Locator Page is not opening, URL should contain '" + expectedURL
 				+ "' | Actual URL='" + currentURL + "'", currentURL.contains(expectedURL));
 	}
 
@@ -693,34 +695,34 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 			total = Integer.parseInt(PharmacyFoundCount.getText().trim());
 
-			Assert.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Pharmacies Available in Your Area' text element",
 					pharmacyValidate(pharmaciesAvailable));
 			if (total > 10) {
 				WebElement contacUstLink = contactUnitedHealthCare;
 				if (!pharmacyValidate(contacUstLink))
 					contacUstLink = contactUnitedHealthCare_ol;
-				Assert.assertTrue(
+				Assertion.assertTrue(
 						"PROBLEM - unable to locate the 'CONTACT UNITEDHELATHCARE' link "
 								+ "in 'pharmacies with India/Tribal/Urbal...' section",
 						pharmacyValidate(contacUstLink));
 			} else {
-				Assert.assertTrue("PROBLEM - total < 10, should not find the pagination element",
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the pagination element",
 						!pharmacyValidate(pagination));
-				Assert.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the left arrow element",
 						!pharmacyValidate(leftArrow));
-				Assert.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
+				Assertion.assertTrue("PROBLEM - total < 10, should not find the right arrow element",
 						!pharmacyValidate(rightArrow));
 			}
 		} else {
 			WebElement contacUstLink = contactUnitedHealthCare;
 			if (!pharmacyValidate(contacUstLink))
 				contacUstLink = contactUnitedHealthCare_ol;
-			Assert.assertTrue(
+			Assertion.assertTrue(
 					"PROBLEM - should not be able to locate the 'CONTACT UNITEDHELATHCARE' link in 'pharmacies with India/Tribal/Urbal...' section",
 					!pharmacyValidate(contacUstLink));
-			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans",
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU other plans",
 					!pharmacyValidate(pdf_otherPlans));
-			Assert.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans",
+			Assertion.assertTrue("PROBLEM - should not be able to locate link for pdf for LTC_HI_ITU walgreen plans",
 					!pharmacyValidate(pdf_WalgreenPlans));
 			System.out.println("Pharmacy Result Not displayed  - Pharmacy Count =  " + PharmacyCount);
 			System.out.println(
@@ -756,7 +758,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * @return
 	 */
 	public boolean pharmacyValidate(WebElement element) {
-		long timeoutInSec = 10;
+		long timeoutInSec = 20;
 		return pharmacyValidate(element, timeoutInSec);
 	}
 

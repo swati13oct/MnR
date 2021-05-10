@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
+import pages.acquisition.commonpages.PageTitleConstants;
 
 
 
@@ -58,7 +59,7 @@ public PrepareforInitialEnrollmentPageMobile prepareforInitialEnrollmentFooterCl
 		validate(medicareSupplementInsurancePlansLink);
 		prepareForInitialEnrollment.click();
 		validate(medicareSupplementInsurancePlansLink);
-		if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
+		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_MEDICARE_INITIAL_ENROLLMENT_PERIOD)) {
 			return new PrepareforInitialEnrollmentPageMobile(driver);
 		}else{
 		
@@ -76,7 +77,7 @@ public ExploreChangingPlansPage exploreChangingPlansClick() {
     actions.moveToElement(exploreChangingPlansMedicareEducationLink);
     actions.click().build().perform();
     validate(navigationSectionMedicareEducationLink);
-	if (driver.getTitle().equalsIgnoreCase(PageTitleConstantsMobile.ULAYER_CHANGE_MEDICARE_PLANS)) {
+	if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_CHANGE_MEDICARE_PLANS)) {
 		return new ExploreChangingPlansPage(driver);
 	}else{
 	

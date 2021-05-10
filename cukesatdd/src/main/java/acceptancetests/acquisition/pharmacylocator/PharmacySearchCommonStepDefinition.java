@@ -7,25 +7,24 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.data.PageConstantsMnR;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.Scenario;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 public class PharmacySearchCommonStepDefinition {
 
@@ -39,11 +38,12 @@ public class PharmacySearchCommonStepDefinition {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
+		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		return memberAttributesMap;
 	}
 
@@ -90,7 +90,8 @@ public class PharmacySearchCommonStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 		aquisitionhomepage.navigateToPharmacyLocator();
-		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(aquisitionhomepage.driver);
+//		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(aquisitionhomepage.driver);
+		PharmacySearchPage pharmacySearchPage = new PharmacySearchPage(wd);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 
 	}
@@ -236,9 +237,9 @@ public class PharmacySearchCommonStepDefinition {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		String planName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
 		if (pharmacySearchPage.searchesPharmacyResults(language, planName)) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("Error in validating Pharmacy Results ");
+			Assertion.fail("Error in validating Pharmacy Results ");
 		}
 	}
 */
@@ -248,7 +249,7 @@ public class PharmacySearchCommonStepDefinition {
 		Map<String, String> inputDataMap = parseInputArguments(inputData);
 		String language = inputDataMap.get("Language");
 		String tmp = inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
-		Assert.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - input 'Has Preferred Retail Pharmacy network Plan' should be True or False. Actual='" + tmp
 						+ "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
@@ -274,7 +275,7 @@ public class PharmacySearchCommonStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
-		Assert.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed", pharmacySearchPage != null);
+		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed", pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
 
@@ -308,7 +309,7 @@ public class PharmacySearchCommonStepDefinition {
 		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
 		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults(testPlanName);
 		
-		Assert.assertTrue("PROBLEM - PDF Results Page Not Displayed", pharmacySearchPage != null);
+		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed", pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("PDF Result Page is Displayed");
 	}
@@ -317,19 +318,19 @@ public class PharmacySearchCommonStepDefinition {
 	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException {
 		Map<String, String> inputDataMap = parseInputArguments(inputData);
 		String tmp = inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
-		Assert.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. \nActual='" + tmp
 						+ "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 
 		tmp = inputDataMap.get("Has Walgreens plan").trim();
-		Assert.assertTrue("PROBLEM - input 'Has Walgreens plan' should be True or False. Actual='" + tmp + "'",
+		Assertion.assertTrue("PROBLEM - input 'Has Walgreens plan' should be True or False. Actual='" + tmp + "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasWalgreens = Boolean.parseBoolean(tmp);
 
 		tmp = inputDataMap.get("Has Preferred Mail Service Pharmacy plan").trim();
-		Assert.assertTrue("PROBLEM - input 'Has Preferred Mail Service Pharmacy plan' should be True or False. Actual='"
+		Assertion.assertTrue("PROBLEM - input 'Has Preferred Mail Service Pharmacy plan' should be True or False. Actual='"
 				+ tmp + "'", tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefMailServ = Boolean.parseBoolean(tmp);
 
@@ -373,7 +374,7 @@ public class PharmacySearchCommonStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		boolean isPharmacySelected = pharmacySearchPage.validateNoPharmaciesErrorMessage();
-		Assert.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
+		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
 	}
 
 	@Then("^the user validate the question widget$")
@@ -389,7 +390,7 @@ public class PharmacySearchCommonStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage = pharmacySearchPage.selectPlanLanguage();
-		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page - Spanish Language Selected",
+		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Spanish Language Selected",
 				pharmacySearchPage != null);
 		// note: if english has plan year dropdown, other language should have it too
 		boolean expectedPlanYearDropdown = false;
@@ -398,7 +399,7 @@ public class PharmacySearchCommonStepDefinition {
 		}
 		pharmacySearchPage.validateLanguageChanges("Spanish");
 		boolean actualPlanYearDropdown = pharmacySearchPage.isPlanYear();
-		Assert.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
+		Assertion.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
 				expectedPlanYearDropdown == actualPlanYearDropdown);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Spanish");
@@ -410,7 +411,7 @@ public class PharmacySearchCommonStepDefinition {
 		PharmacySearchPage pharmacySearchPage = (PharmacySearchPage) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage = pharmacySearchPage.multilangPharmacySearchResult();
-		Assert.assertTrue("PROBLEM - Pharmacy Results are NOT Displayed", pharmacySearchPage != null);
+		Assertion.assertTrue("PROBLEM - Pharmacy Results are NOT Displayed", pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("Pharmacy Results are Displayed");
 	}
@@ -433,11 +434,11 @@ public class PharmacySearchCommonStepDefinition {
 			expectedPlanYearDropdown = true;
 		}
 		pharmacySearchPage = pharmacySearchPage.clickChinese();
-		Assert.assertTrue("PROBLEM - Failed to load Pharmacy search page - Chinese Language Selected",
+		Assertion.assertTrue("PROBLEM - Failed to load Pharmacy search page - Chinese Language Selected",
 				pharmacySearchPage != null);
 		pharmacySearchPage.validateLanguageChanges("Chinese");
 		boolean actualPlanYearDropdown = pharmacySearchPage.isPlanYear();
-		Assert.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
+		Assertion.assertTrue("PROBLEM - on English version there is plan year dropdown but Chinese version is missing",
 				expectedPlanYearDropdown == actualPlanYearDropdown);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.LANGUAGE, "Chinese");
@@ -456,7 +457,7 @@ public class PharmacySearchCommonStepDefinition {
 		// tbd .getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		boolean isPharmacySelected;
 		isPharmacySelected = pharmacySearchPage.selectPharmacyandServices(filterType);
-		Assert.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
+		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
 	}
 */
 	/** user is on the AARP Medicare Site landing page */
@@ -531,7 +532,7 @@ public class PharmacySearchCommonStepDefinition {
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
-			Assert.fail("DCE Redesign page object not loaded");
+			Assertion.fail("DCE Redesign page object not loaded");
 	}
 	
 	/** user is on the Medicare Site landing page */
@@ -601,7 +602,7 @@ public class PharmacySearchCommonStepDefinition {
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 		}
 		else
-			Assert.fail("Navigation to Pharmacy Page for Language - "+Language+" FAILED");
+			Assertion.fail("Navigation to Pharmacy Page for Language - "+Language+" FAILED");
 	}
 	
 	@Then("^the user validates ITU, Home Infusion, LTC filter Message and anchor link$")

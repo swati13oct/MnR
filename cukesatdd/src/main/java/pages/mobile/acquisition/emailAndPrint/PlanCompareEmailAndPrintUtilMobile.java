@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 
 public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMobile{
 
@@ -119,7 +120,9 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	}
 
 	public void validatePlanCompareEmailThankYouMessage() {
-		validateemailbutton.click();
+		pageloadcomplete();
+		//validateemailbutton.click();
+		jsClickNew(validateemailbutton);
 		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
 		//Validating email popup
 		validate(leavingcomapreplansitepopup);
@@ -142,7 +145,7 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("!!!Entered valid Email ");
 	scrollToView(sendButtonEmailPlanComparePopUp);
 		jsClickMobile(sendButtonEmailPlanComparePopUp);
-		Assert.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));
+		Assertion.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));
 		//Validating email success popup
 		System.out.println("Email has successfull send to user");
 		validateNew(validatesuccesspopup);
@@ -264,7 +267,7 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 			}
 		}
 
-		Assert.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , compare_finalResult);
+		Assertion.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , compare_finalResult);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return testNote;
 	}

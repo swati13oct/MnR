@@ -5,7 +5,6 @@ package pages.AEM;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +13,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 
@@ -281,11 +281,11 @@ public class CQPage extends UhcDriver{
 	
 	public void validateAcqContent(){
 		if(!validate(acqHeader))
-			Assert.fail("header not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("header not found on this page: "+driver.getCurrentUrl());
 		if(!validate(acqFooter))
-			Assert.fail("footer not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("footer not found on this page: "+driver.getCurrentUrl());
 		if(!validate(acqPageBodyContent))
-			Assert.fail("page content not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("page content not found on this page: "+driver.getCurrentUrl());
 	}
 	
 	public void validateMemberPages(){
@@ -312,22 +312,22 @@ public class CQPage extends UhcDriver{
 
 	private void validateMemberContent() {
 		if(!validate(memberHeader))
-			Assert.fail("header not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("header not found on this page: "+driver.getCurrentUrl());
 		if(!validate(memberFooter))
-			Assert.fail("footer not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("footer not found on this page: "+driver.getCurrentUrl());
 		if(!validate(memberBodyContent))
-			Assert.fail("page content not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("page content not found on this page: "+driver.getCurrentUrl());
 		
 	}
 
 	private void validateMemberPreSingInContent() {
 		// TODO Auto-generated method stub
 		if(!validate(memberHeaderPreSignIn))
-			Assert.fail("header not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("header not found on this page: "+driver.getCurrentUrl());
 		if(!validate(memberFooterPreSignIn))
-			Assert.fail("footer not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("footer not found on this page: "+driver.getCurrentUrl());
 		if(!validate(memberBodyContentPreSignIn))
-			Assert.fail("page content not found on this page: "+driver.getCurrentUrl());
+			Assertion.fail("page content not found on this page: "+driver.getCurrentUrl());
 	}
 	
 	public void navigateToDataLayerUrl() {
@@ -337,11 +337,11 @@ public class CQPage extends UhcDriver{
 		WebElement dataLayerHead=driver.findElement(By.xpath("//h1[contains(text(),'Data Layer Utility')]"));
 		
 		if(validateNew(dataLayerHead) && dataLayerHead.isDisplayed()) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Data Layer Page opened successfully.\nurl:"+driver.getCurrentUrl());
 		}
 		else {
-			Assert.fail("Data Layer Page not open successfully");
+			Assertion.fail("Data Layer Page not open successfully");
 		}
 		
 	}
@@ -353,7 +353,7 @@ public class CQPage extends UhcDriver{
 		validateNew(btnShowUsage)) {
 			System.out.println("All elements are present in Static tab");
 		}else {
-			Assert.fail("All elements not present in Static Tab");
+			Assertion.fail("All elements not present in Static Tab");
 		}
 		//To Enter Page Path in Input Text Feild
 		sleepBySec(2);
@@ -371,7 +371,7 @@ public class CQPage extends UhcDriver{
 					elementsPresent.contains("Hyperlink") && elementsPresent.contains("Form")) {
 				System.out.println(" All Active Elements present in DropDown");
 			}else {
-				Assert.fail(" All Active Elements are not present in DropDown");
+				Assertion.fail(" All Active Elements are not present in DropDown");
 			}
 			activeElementDropdown.click();
 		}
@@ -412,7 +412,7 @@ public class CQPage extends UhcDriver{
 		if(validateNew(selectAppDropdown) && selectAppDropdown.isDisplayed()) {
 			System.out.println("Dynamic App Tab Opened Successfully");
 		}else {
-			Assert.fail("Dynamic App Tab did not Opened Successfully");
+			Assertion.fail("Dynamic App Tab did not Opened Successfully");
 		}
 		selectAppDropdown.click();
 		if (!selectAppOptions.isEmpty()) {
@@ -422,7 +422,7 @@ public class CQPage extends UhcDriver{
 			}
 			System.out.println("Element Present in Select App DropDown: "+presentApp);
 		}else {
-			Assert.fail("Elemnents not present in Dropdown");
+			Assertion.fail("Elemnents not present in Dropdown");
 		}
 		selectAppDropdown.click();
 		
@@ -487,7 +487,7 @@ public class CQPage extends UhcDriver{
 			if(result!=null) {
 				System.out.println("Result Message: "+result.getText());
 			}else {
-				Assert.fail("Error in Displaying Result");	
+				Assertion.fail("Error in Displaying Result");	
 			}
 		}
 	}

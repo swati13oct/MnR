@@ -318,21 +318,23 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		String goGreen = MedicareDetailsMap.get("Go Green");
 		String email = MedicareDetailsMap.get("Email");
 		
-		jsClickMobile(claimNumberField);
-		//jsSendkeys(claimNumberField, MedicareNumber);
+		//jsClickMobile(claimNumberField);
+		//sendkeysMobile(claimNumberField, MedicareNumber);
+		
 		getkeypad();
+		sendkeysMobile(claimNumberField, MedicareNumber);
 		//wait
 		//mobileactionsendkeys(claimNumberField, MedicareNumber);
 		//claimNumberField.sendKeys(MedicareNumber);
-		jsClickMobile(claimNumberField);
+		//jsClickMobile(claimNumberField);
 		//claimNumberField.clear();
 		System.out.println("Medicare number cleared");
-		mobileactionsendkeys(claimNumberField, MedicareNumber);
-		System.out.println("Medicare number set again");
+	//	mobileactionsendkeys(claimNumberField, MedicareNumber);
+	//	System.out.println("Medicare number set again");
 
 		if (SSNflag.contains("true")) {
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
-			jsSendkeys(SSNField, SSNnumber);
+			sendkeysMobile(SSNField, SSNnumber);
 
 		}
 
@@ -341,7 +343,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is enabled to navigate to Next Page");
-			//jsClickNew(NextBtn);
+			//jsClickMobile(NextBtn);
 			return true;
 		} else
 			System.out.println("Next Button is disabled, Incorrect/Incomplete Medicare Details provided");
@@ -351,7 +353,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	public PrelimineryQuestionsPageMobile navigate_to_Preliminary_Questions_page() {
 
 		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+		jsClickMobile(NextBtn);
 		/*
 		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", NextBtn);
@@ -613,7 +615,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 					System.out.println("Medicaid Number Required : Error Message is Disabled");
 					Medicaid_Validation = true;
 					// medicaidnumTxtBx.sendKeys(medicaidNumber);
-					jsSendkeys(medicaidnumTxtBx, medicaidNumber);
+					sendkeysMobile(medicaidnumTxtBx, medicaidNumber);
 					System.out.println("Medicare Number is enetered : " + medicaidNumber);
 					if (validateNonPresenceOfElement(RequiredField_ErrorMessage)
 							&& validateNonPresenceOfElement(MedicaidRequired_ErrorMessage)) {
@@ -705,7 +707,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		} else {
 			if (validate(MedicaidQuestion) && NextBtn.isEnabled()) {
 				System.out.println("Medicaid Number question is not required for non-DSNP : validation pass");
-				jsClickNew(medicaiddno);
+				jsClickMobile(medicaiddno);
 				System.out.println("Medicaid question : No clicked" + medicaiddno.isSelected());
 				if (validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton)
 						&& NextBtn.isEnabled()) {
@@ -715,7 +717,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 					System.out.println("non DSNP - Medicare Question 'No' : validation failed");
 					Medicaid_Validation = false;
 				}
-				jsClickNew(medicaiddyes);
+				jsClickMobile(medicaiddyes);
 				System.out.println("Medicaid question : Yes clicked" + medicaiddyes.isSelected());
 				if (validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton)
 						&& NextBtn.isEnabled()) {
@@ -747,30 +749,30 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			// Diabetes questions
 			Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
 			validateNew(diabetesQuestions1Yes);
-			jsClickNew(diabetesQuestions1Yes);
+			jsClickMobile(diabetesQuestions1Yes);
 			validateNew(diabetesQuestions2No);
-			jsClickNew(diabetesQuestions2No);
+			jsClickMobile(diabetesQuestions2No);
 			Assert.assertTrue(validateNew(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
 			validateNew(chronicHeartFailureQuestion1No);
-			jsClickNew(chronicHeartFailureQuestion1No);
+			jsClickMobile(chronicHeartFailureQuestion1No);
 			validateNew(chronicHeartFailureQuestion2No);
-			jsClickNew(chronicHeartFailureQuestion2No);
+			jsClickMobile(chronicHeartFailureQuestion2No);
 			validateNew(chronicHeartFailureQuestion3No);
-			jsClickNew(chronicHeartFailureQuestion3No);
+			jsClickMobile(chronicHeartFailureQuestion3No);
 			Assert.assertTrue(validateNew(CardiovascularDisordersQuestion1),
 					"Cardiovascular Disorders Question are present");
 			validateNew(CardiovascularDisordersQ1No);
-			jsClickNew(CardiovascularDisordersQ1No);
+			jsClickMobile(CardiovascularDisordersQ1No);
 			validateNew(CardiovascularDisordersQ2No);
-			jsClickNew(CardiovascularDisordersQ2No);
+			jsClickMobile(CardiovascularDisordersQ2No);
 			validateNew(CardiovascularDisordersQ3No);
-			jsClickNew(CardiovascularDisordersQ3No);
+			jsClickMobile(CardiovascularDisordersQ3No);
 			validateNew(CardiovascularDisordersQ4No);
-			jsClickNew(CardiovascularDisordersQ4No);
+			jsClickMobile(CardiovascularDisordersQ4No);
 			validateNew(CardiovascularDisordersQ5No);
-			jsClickNew(CardiovascularDisordersQ5No);
+			jsClickMobile(CardiovascularDisordersQ5No);
 			validateNew(CardiovascularDisordersQ6No);
-			jsClickNew(CardiovascularDisordersQ6No);
+			jsClickMobile(CardiovascularDisordersQ6No);
 
 			// waitforElement(disclosureBox);
 			return true;
@@ -783,16 +785,16 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			// Diabetes questions
 			Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
 			validateNew(diabetesQuestions1Yes);
-			jsClickNew(diabetesQuestions1Yes);
+			jsClickMobile(diabetesQuestions1Yes);
 			validateNew(diabetesQuestions2No);
-			jsClickNew(diabetesQuestions2No);
+			jsClickMobile(diabetesQuestions2No);
 			Assert.assertTrue(validateNew(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
 			validateNew(chronicHeartFailureQuestion1No);
-			jsClickNew(chronicHeartFailureQuestion1No);
+			jsClickMobile(chronicHeartFailureQuestion1No);
 			validateNew(chronicHeartFailureQuestion2No);
-			jsClickNew(chronicHeartFailureQuestion2No);
+			jsClickMobile(chronicHeartFailureQuestion2No);
 			validateNew(chronicHeartFailureQuestion3No);
-			jsClickNew(chronicHeartFailureQuestion3No);
+			jsClickMobile(chronicHeartFailureQuestion3No);
 			// waitforElement(disclosureBox);
 			return true;
 		}
@@ -913,14 +915,14 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	 * boolean Validation_Flag = true; try {
 	 * 
 	 * if(LongTermQuestionFlagNo.isDisplayed()) {
-	 * jsClickNew(LongTermQuestionFlagNo); if(!validate(HealthInsuranceName) &&
+	 * jsClickMobile(LongTermQuestionFlagNo); if(!validate(HealthInsuranceName) &&
 	 * validate(GroupNumber)){
 	 * System.out.println("LongTermQuestion Options is yes : Validation Passed");
 	 * Validation_Flag = true; } else {
 	 * System.out.println("LongTermQuestion Options  :Validation Failed");
 	 * Validation_Flag = false; } }
 	 * 
-	 * LongTermQuestionFlagYes.isDisplayed(); jsClickNew(LongTermQuestionFlagYes);
+	 * LongTermQuestionFlagYes.isDisplayed(); jsClickMobile(LongTermQuestionFlagYes);
 	 * 
 	 * validateNew(HealthInsuranceName); HealthInsuranceName.sendKeys("Test123");
 	 * validateNew(GroupNumber); GroupNumber.sendKeys("21611136");
@@ -962,9 +964,9 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			String GroupNumber = memberDetailsMap.get("Group Number");
 			String MemberNumber = memberDetailsMap.get("Member Number");
 
-			jsSendkeys(healthInsuranceNameField, HealthInsuranceName);
-			jsSendkeys(groupNumberField, GroupNumber);
-			jsSendkeys(memberNumberField, MemberNumber);
+			sendkeysMobile(healthInsuranceNameField, HealthInsuranceName);
+			sendkeysMobile(groupNumberField, GroupNumber);
+			sendkeysMobile(memberNumberField, MemberNumber);
 
 		} catch (Exception e) {
 
@@ -1001,9 +1003,9 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			String PDGroupNumber = memberDetailsMap.get("PD Group Number");
 			String PDMemberNumber = memberDetailsMap.get("PD Member Number");
 
-			jsSendkeys(PrescriptionCoverageNameField, PrescriptionName);
-			jsSendkeys(PrescriptionCoveragegroupNumberField, PDGroupNumber);
-			jsSendkeys(PrescriptionCoveragememberNumberField, PDMemberNumber);
+			sendkeysMobile(PrescriptionCoverageNameField, PrescriptionName);
+			sendkeysMobile(PrescriptionCoveragegroupNumberField, PDGroupNumber);
+			sendkeysMobile(PrescriptionCoveragememberNumberField, PDMemberNumber);
 
 		} catch (Exception e) {
 
@@ -1057,7 +1059,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		} else {
 			if (validate(MedicaidQuestion) && NextBtn.isEnabled()) {
 				System.out.println("Medicaid Number question is not required for non-DSNP : validation pass");
-				jsClickNew(medicaiddno);
+				jsClickMobile(medicaiddno);
 				System.out.println("Medicaid question : No clicked" + medicaiddno.isSelected());
 				if (validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton)
 						&& NextBtn.isEnabled()) {
@@ -1067,7 +1069,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 					System.out.println("non DSNP - Medicare Question 'No' : validation failed");
 					Medicaid_Validation = false;
 				}
-				jsClickNew(medicaiddyes);
+				jsClickMobile(medicaiddyes);
 				System.out.println("Medicaid question : Yes clicked" + medicaiddyes.isSelected());
 				if (validateNonPresenceOfElement(MedicaidError) && validateNonPresenceOfElement(CancelButton)
 						&& NextBtn.isEnabled()) {
@@ -1093,7 +1095,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		try {
 
 			if (medicaiddno.isDisplayed()) {
-				jsClickNew(medicaiddno);
+				jsClickMobile(medicaiddno);
 				if (!validate(medicaidnumTxtBx)) {
 					System.out.println("Medicaid Options is yes : Validation Passed");
 					Validation_Flag = true;
@@ -1104,11 +1106,11 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			}
 
 			medicaiddyes.isDisplayed();
-			jsClickNew(medicaiddyes);
+			jsClickMobile(medicaiddyes);
 
 			String MedicaidNumber = memberDetailsMap.get("MedicaidNumber");
 
-			sendkeysNew(medicaidNumberField, MedicaidNumber);
+			sendkeysMobile(medicaidNumberField, MedicaidNumber);
 		} catch (Exception e) {
 
 			System.out.println("Failed Due To-------" + e.getMessage());

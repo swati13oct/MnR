@@ -1,19 +1,23 @@
 package pages.mobile.acquisition.dceredesign;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+
+import com.google.common.collect.Ordering;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.acquisition.dceredesign.DrugDetailsPage;
 
 public class DrugSummaryPageMobile extends UhcDriver {
 
@@ -92,10 +96,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-	@FindBy(id = "selectaPharmacyHeader")
+	@FindBy(id = "modal-label")
 	public WebElement selectPharmacyHeader;
 
-	@FindBy(id = "selectPharmcyModalCloseLink")
+	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 
 	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
@@ -224,7 +228,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		 * System.out.println(drugNames.get(i).getText()); }
 		 */
 		System.out.println(drugNames);
-		Assert.assertTrue("Drug not switched to generic", drugNames.getText().contains(genericDrug));
+		Assertion.assertTrue("Drug not switched to generic", drugNames.getText().contains(genericDrug));
 	}
 
 	@FindBy(id = "sign-up-modal-header")
@@ -320,6 +324,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
 	public WebElement ToggleDropDown;
 
+	
+	public void validateDefaultDistance() {
+		Select distance = new Select(distanceDrpDown);
+		Assertion.assertTrue("Default distance is not 15 miles",
+				distance.getFirstSelectedOption().getText().trim().equals("15 Miles"));
+	}
+
 	public DrugDetailsPageMobile clickViewDrugDetailsForPlan(String plantype, String planName) {
 		if (plantype.equalsIgnoreCase("MAPD")) {
 			pageloadcomplete();
@@ -363,7 +374,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
 			return new DrugDetailsPageMobile(driver);
 		} else {
-			Assert.fail("Drug Details Page is NOT Displayed");
+			Assertion.fail("Drug Details Page is NOT Displayed");
 			return null;
 		}
 	}
@@ -404,7 +415,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			backToProfileBtn.get(1).click();
 			System.out.println("Back to profile clicked");
 		} catch (Exception e) {
-			Assert.fail("Back to profile not displayed ");
+			Assertion.fail("Back to profile not displayed ");
 		}
 	}
 
@@ -420,7 +431,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				System.out.println("Return to profile displayed");
 			}
 		} catch (Exception e) {
-			Assert.fail("Return to profile not displayed");
+			Assertion.fail("Return to profile not displayed");
 		}
 	}
 
@@ -433,9 +444,24 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				System.out.println("Back to profile displayed for each plan card");
 			}
 		} catch (Exception e) {
-			Assert.fail("Back to profile not displayed for each plan card");
+			Assertion.fail("Back to profile not displayed for each plan card");
 		}
 	}
+	
+	public void sortPharmacies(String sortOption) {
+		Select sort = new Select(sortDrpdown);
+		sort.selectByVisibleText(sortOption);
+	}
+	
+	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']/../../following-sibling::div[1]")
+	private WebElement mailOrderPharmacyMsg;
+	
+	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
+		waitforElement(mailOrderPharmacyMsg);
+		Assertion.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
+				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
+	}
+
 
 	// @FindBy(xpath =
 	// "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare
@@ -484,7 +510,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		String PremiumDisplayed = PremiumforPlan.getText();
 		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
 		if (!PremiumDisplayed.contains(premium)) {
-			Assert.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
+			Assertion.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
 					+ PremiumDisplayed);
 		}
 	}
@@ -498,7 +524,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 			jsClickNew(dceNBAModalBtn);
 			waitforElement(signInBtn);
-			Assert.assertTrue("user not navigated to login page",
+			Assertion.assertTrue("user not navigated to login page",
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
@@ -506,10 +532,92 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void verifyReviewDrugCostPageDisplayed() {
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		if (validateNew(reviewDrugCostPageHeading)) {
-			Assert.assertTrue("Review drug cost page not displayed", true);
+			Assertion.assertTrue("Review drug cost page not displayed", true);
 		} else {
-			Assert.assertTrue("Review drug cost page not displayed", false);
+			Assertion.assertTrue("Review drug cost page not displayed", false);
 		}
 
+	}
+	public void selectPreferredMailOrderPharmacy() {
+		waitforElement(preferredMailPharmacy);
+	//	preferredMailPharmacy.click();
+		jsClickMobile(preferredMailPharmacy);
+	}
+	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
+	private List<WebElement> pharmacyNameList;
+	
+	public void validatePharmaciesAscendingOrder() {
+		List<String> pharmacListAfterSort = new ArrayList<String>();
+		for (WebElement e : pharmacyNameList) {
+			pharmacListAfterSort.add(e.getText());
+		}
+		System.out.println("After sort" + pharmacListAfterSort);
+		Boolean sorted = Ordering.natural().isOrdered(pharmacListAfterSort);
+		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+	}
+	
+	public void validatePharmaciesDescendingOrder() {
+		List<String> pharmacListAfterSort = new ArrayList<String>();
+		for (WebElement e : pharmacyNameList) {
+			pharmacListAfterSort.add(e.getText());
+		}
+		System.out.println("After sort" + pharmacListAfterSort);
+		Boolean sorted = Ordering.natural().reverse().isOrdered(pharmacListAfterSort);
+		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
+	}
+	
+	public void clickNextButton() {
+		jsClickMobile(nextBtn);
+	}
+	@FindBy(xpath = "//*[@class='pagination']/../p")
+	private WebElement pageNumber;
+
+	public void validateSecondPageDisplayed() {
+		String page = pageNumber.getText();
+		Pattern p = Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m = p.matcher(page);
+		if (m.find()) {
+			page = m.group(1);
+		}
+		Assertion.assertTrue("Second page not displayed", page.equals("2"));
+	}
+	public void clickBackButton() {
+		jsClickMobile(backBtn);
+	}
+
+	public void validateFirstPageDisplayed() {
+		String page = pageNumber.getText();
+		Pattern p = Pattern.compile("Page (\\d*) of (\\d*)");
+		java.util.regex.Matcher m = p.matcher(page);
+		if (m.find()) {
+			page = m.group(1);
+		}
+		Assertion.assertTrue("First page not displayed", page.equals("1"));
+	}
+	
+	public void searchPharmaciesByZipcode(String zipcode) {
+		pharmacyZipcodeSearch.clear();
+		pharmacyZipcodeSearch.sendKeys(zipcode);
+		jsClickMobile(pharmacySearchBtn);
+	}
+
+
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
+	private WebElement noResultsMessage;
+
+	public void validateNoResultsMsg(String expectedMsg) {
+		waitforElement(noResultsMessage);
+		System.out.println(noResultsMessage.getText());
+		System.out.println(expectedMsg);
+		Assertion.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
+	}
+	@FindBy(id = "inValidZipcodeLbl")
+	private WebElement invalidZipCodeMsg;
+
+
+	public void validateInvalidZipCodeMsg(String expectedMsg) {
+		waitforElement(invalidZipCodeMsg);
+		System.out.println(invalidZipCodeMsg.getText().trim());
+		Assertion.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 }
