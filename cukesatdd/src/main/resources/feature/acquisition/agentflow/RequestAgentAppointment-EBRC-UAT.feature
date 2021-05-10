@@ -1,6 +1,6 @@
-Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on Shop Pages
+Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment with an agent flow
 
-  Scenario Outline: <scenario> Verify request an appointment through <pageName>
+  Scenario Outline: <scenario> Verify request an appointment through <pageName> for <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
@@ -38,33 +38,26 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
       | E2E Scenario 2_AMP | AARP | shop/prescription-drug-plans.html                                                                                                                                                                                                                                                                                             | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ |
       | E2E Scenario 2_AMP | AARP | shop/dual-special-needs-plans.html                                                                                                                                                                                                                                                                                            | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ |
 
-  Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode UHC SIte
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user navigates to request more help and information
-    When the user navigates to request appointment with an agent in and validates page is loaded
-    Then the user fills the form out and submits the agent appointment application
-      | Zipcode | <zipcode> |
-
-    @agentFlowEBRCBlayer @UATRegression @regressionUHC @agentAppointment
-    Examples: 
-      | scenario           | zipcode | site |
-      | E2E Scenario 3_UMS |   90002 | UHC  |
-
-  Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode AARP SIte
+  Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigates to request more help and information
     When the user navigates to request appointment with an agent and validates page is loaded
-    Then the user fills the form out and submits the agent appointment application
+    Then the user fills the form out and submits the agent appointment
       | Zipcode | <zipcode> |
 
     @agentFlowEBRCUlayer @UATRegression @regressionAARP @agentAppointment
     Examples: 
       | scenario           | zipcode | site |
       | E2E Scenario 3_AMP |   90002 | AARP |
-
-  Scenario Outline: <scenario> Verify request an appointment for Medsupp flows
+      
+      @agentFlowEBRCBlayer @UATRegression @regressionUHC @agentAppointment
+    Examples: 
+      | scenario           | zipcode | site |
+			 | E2E Scenario 3_UMS |   90002 | UHC  |
+			 
+			 
+  Scenario Outline: <scenario> Verify request an appointment for Medsupp <site> site flows 
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information

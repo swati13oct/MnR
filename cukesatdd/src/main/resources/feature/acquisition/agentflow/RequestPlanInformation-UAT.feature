@@ -1,5 +1,5 @@
 #@requestPlanInformation
-Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on vpp Pages
+Feature: 1.06-UAT Scripts to validate the request plan information on the Acquistion sites
 
   Scenario Outline: <scenario> Verify request an <plantype> appointment through <site>
     Given the user is on medicare acquisition site landing page

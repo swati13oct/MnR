@@ -108,12 +108,12 @@ Feature: 1.06-To test request an appointment with an agent flow
     When the user clicks on Agent link and validates the correct URL is loaded
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCUlayer @regressionAARP @agentAppointment
+   # @agentFlowEBRCUlayer @regressionAARP @agentAppointment
     Examples: 
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |
 
-    @agentFlowEBRCBlayer @regressionUHC @agentAppointment
+   # @agentFlowEBRCBlayer @regressionUHC @agentAppointment
     Examples: 
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |
