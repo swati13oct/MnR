@@ -745,19 +745,19 @@ Feature: 1.12 ACQ - Global Components Validation
     Then user should be navigated to respective medicare education page
     Then the user clicks on browser back button
     Then the user hovers over the learn about medicare
-		When user click on "Articles and Special Topics" link under learn about medicare
+    When user click on "Articles and Special Topics" link under learn about medicare
     Then user should be navigated to respective medicare education page
     Then the user clicks on browser back button
     Then the user hovers over the learn about medicare
     When user enter email and submit in email section
     Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
-    
+
     @learnAboutMedicareNav_AARP @regressionAARP
     Examples: 
       | site |
       | AARP |
-      
+
     @learnAboutMedicareNav_UHC @regressionUHC
     Examples: 
-      | site|  
-      | UHC|
+      | site |
+      | UHC  |

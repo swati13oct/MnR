@@ -2,7 +2,7 @@
 Feature: 1.11. ACQ-Pharmacy Locator AARP
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
-  @pharmacyLocatorPerformanceUlayer #@vbfGate
+  @pharmacyLocatorPerformanceUlayer
   Scenario Outline: To verify available pharmacies
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |

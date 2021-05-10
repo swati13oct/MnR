@@ -544,7 +544,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public JSONObject globalFooterDTMJson;
 
-	public static boolean isHealthPlan = false;
+	public boolean isHealthPlan = false;
 
 	public String testSiteUrl;
 

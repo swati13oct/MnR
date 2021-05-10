@@ -27,7 +27,7 @@ import atdd.framework.UhcDriver;
  */
 public class ProviderSearchPageMobile extends UhcDriver {
 
-	private static final String planToBeSelected = null;
+	private final String planToBeSelected = null;
 
 	@FindBy(className = "firstTierFilterItem")
 	private WebElement physcianSearchTypes;
