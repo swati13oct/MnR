@@ -41,6 +41,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |
       | Plan Name | <planName> |
+    Then the user validates default view for Plan Effective Date
+    Then the user validates Change effective date Dropdown
+    Then the user validates Change effective date modal and display after changing effective date
+    Then the user validates Reset effective date
+    Then the user validate no bar is displayed for November and December
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     And the user verifies the drug information on prescription drug tab
       | DrugName | <drug2> |

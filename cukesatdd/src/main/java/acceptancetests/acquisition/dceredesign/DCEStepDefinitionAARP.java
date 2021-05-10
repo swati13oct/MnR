@@ -2917,4 +2917,53 @@ public class DCEStepDefinitionAARP {
 
 	}
 
+	@Then("^the user validates default view for Plan Effective Date$")
+	public void the_user_validates_default_view_for_Plan_Effective_Date() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDefaultPED();
+	}
+
+	@Then("^the user validates Change effective date Dropdown$")
+	public void the_user_validates_Change_effective_date_Dropdown() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String currentEnvTime=drugDetailsPage.getAcqTestEnvSysTime(testSiteUrl);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
+		String[] tmpDateAndTime=currentEnvTime.split(" ");
+		String[] tmpDate=tmpDateAndTime[0].split("/");
+		String envMonth=tmpDate[0];
+		System.out.println("TEST - sysTimeMonth = "+envMonth);
+		String envTimeYear=tmpDate[tmpDate.length-1];
+		System.out.println("TEST - sysTimeYear = "+envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_MONTH, envMonth);
+		drugDetailsPage.validateChangePEDDropDwn(envMonth,envTimeYear);
+
+	}
+
+	@Then("^the user validates Change effective date modal and display after changing effective date$")
+	public void the_user_validates_Change_effective_date_modal_and_display_after_changing_effective_date() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		String envMonth = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_MONTH);
+		drugDetailsPage.validateChangePEDandModalandChangeDisplay();
+	}
+
+	@Then("^the user validates Reset effective date$")
+	public void the_user_validates_Reset_effective_date() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateResetEffectiveDate();
+	}
+
+	@Then("^the user validate no bar is displayed for November and December$")
+	public void the_user_validate_no_bar_is_displayed_for_November_and_December() throws Throwable {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateNoBarChartDisplayforNovDec();
+
+	}
+
 }
