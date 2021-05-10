@@ -287,8 +287,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public WebElement brokerHeader;
 
 	/* LearnAboutMedicare link */
-	//@FindBy(xpath = "//*[@id='ghn_lnk_3']")
-	@FindBy(xpath="//a[contains(text(),'Learn About Medicare')]")
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	//@FindBy(xpath="//a[contains(text(),'Learn About Medicare')]")
 	private WebElement lnkLearnAboutMedicare;
 
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
