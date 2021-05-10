@@ -13,6 +13,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -73,7 +75,12 @@ public class VppCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
+	
+	private Scenario scenario;
 //	WebDriver wd;
 	public String PREflow = "";
 
@@ -127,6 +134,8 @@ public class VppCommonStepDefinition {
 	}
 	@When("^the user performs plan search using following information$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
+		
+		//scenario.log("Aayush Shah /n 5/7/21 - Inside step 2");
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();

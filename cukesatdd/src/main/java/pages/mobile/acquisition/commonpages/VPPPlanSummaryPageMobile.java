@@ -23,6 +23,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Strings;
@@ -144,7 +145,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[3]//span[@class='ng-binding']")
 	private WebElement pdpPlansNumber;
 
-	@FindBy(xpath = "//*[contains(@class,'module-tabs-tabs')]/*[not (contains(@class,'active'))]//*[contains(@id,'pdpviewplans')]/following-sibling::*[contains(@aria-label,'View Plans')]")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='pdpviewplans']/following-sibling::a")
 	private WebElement pdpPlansViewLink;
 
 	@FindBy(xpath = "//div[contains(@class,'overview-main')]/span/h2")
@@ -999,7 +1000,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
 	private WebElement nextBestActionModalSelectPlanBtn;
-	
+
 	public void verifyNextBestActionModalForEnrollPlan() {
 		waitforElementVisibilityInTime(nextBestActionModalSelectPlanBtn, 20);
 		try {
@@ -1832,8 +1833,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// scrollToView(plan);
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+
+		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
+		waitforElementVisibilityInTime(premiumForPlan, 10);
 		scrollToView(premiumForPlan);
-		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 40);
+
 		String PlanPremium = premiumForPlan.getText();
 
 		System.out.println("Premium for Plan : " + PlanPremium);
@@ -2877,12 +2881,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
 			WebDriverWait d = new WebDriverWait(driver, 20);
-			// d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
 
 			String State = CommonConstants.getSelectedState();
+
 			/*
 			 * if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) { if
 			 * (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") ||
@@ -4963,8 +4968,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			WebElement MAmoreDetailsLink = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]"
-					+ "//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
+					+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//div[contains(@class,'swiper-content')]//div[not (contains(@class,'ng-hide'))]/a[contains(text(),'View Plan')]"));
 			mobileswipeHorizantal("50", true);
 			// CommonUtility.waitForPageLoadNew(driver, MAmoreDetailsLink, 30);
 			scrollToView(MAmoreDetailsLink);
@@ -5641,10 +5645,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 
 	}
-	
+
 	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
 	private WebElement nextBestActionModalGetStartedBtn;
-	
+
 	/**
 	 * @author rravind8 This method verifies the NBA Modal for Drug Cost
 	 */
