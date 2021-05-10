@@ -169,8 +169,8 @@ public class VisitorProfilePage extends UhcDriver {
 	// @FindBy(xpath = "//*[contains(@aria-controls,'plan-drugs-dropdown')]")
 	// public WebElement expandDrugsGlobal;
 
-	@FindBy(xpath = "//*[@id='saved-drugs']/../a[contains(text(),'Edit Your Drugs and Pharmacy')]")
-	public WebElement editDrugsGlobal;
+	@FindBy(xpath = "//button[contains(@dtmname, 'Add Drugs')]/span")
+	public WebElement AddDrugsGlobal;
 
 	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
 	public WebElement loginLink;
@@ -312,7 +312,7 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 
 	public void validateAddedPlans(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		String[] listOfTestPlans = planNames.split(",");
 
 		/*if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
@@ -446,14 +446,14 @@ public class VisitorProfilePage extends UhcDriver {
 					&& StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
 			if (!StringUtils.isEmpty(State)
 					&& StringUtils.equalsIgnoreCase(State, "Virginia")) {
-				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+				String[] listOfTestPlans = plans.split(",");
 				for (String plan : listOfTestPlans) {
 					jsClickNew(driver.findElement(By.xpath("//h4[text()='" + plan + "']/preceding::button[1]")));
 					Thread.sleep(5000);
 				}
 
 			} else if (driver.findElements(By.xpath("//span[contains(text(),'Plan Summary')]")).size() > 0) {
-				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+				String[] listOfTestPlans = plans.split(",");
 				for (String plan : listOfTestPlans) {
 					jsClickNew(driver.findElement(By.xpath(
 							"//h3[contains(text(),'" + plan + "')]/preceding::button[contains(@class,'remove')][1]")));
@@ -502,11 +502,8 @@ public class VisitorProfilePage extends UhcDriver {
 						+ "')]/following::button[contains(@aria-controls, 'plan-providers')][1]/span/span"));
 		String mproviderinfo = ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		if (mproviderinfo.toLowerCase().contains("providers covered")) {
-			return true;
-		}
-		return false;
-	}
+        return mproviderinfo.toLowerCase().contains("providers covered");
+    }
 	
 	/**
 	 * Get the added provider information
@@ -520,11 +517,8 @@ public class VisitorProfilePage extends UhcDriver {
 						+ "')]/following::div[@class='provider-accordion']/button"));
 		String mproviderinfo = ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
-		if (mproviderinfo.toLowerCase().contains("providers covered")) {
-			return true;
-		}
-		return false;
-	}
+        return mproviderinfo.toLowerCase().contains("providers covered");
+    }
 
 	/**
 	 * Get the added provider information
@@ -746,7 +740,7 @@ public class VisitorProfilePage extends UhcDriver {
 
 	public void validateAddedMsPlans(String planNames) {
 		try {
-			List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+			String[] listOfTestPlans = planNames.split(",");
 			CommonUtility.checkPageIsReadyNew(driver);
 			Thread.sleep(20000);
 			for (String plan : listOfTestPlans) {
@@ -774,7 +768,7 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 
 	public void validateAddedPlansPDFLinks(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		String[] listOfTestPlans = planNames.split(",");
 		for (String plan : listOfTestPlans) {
 			Assertion.assertTrue(driver
 					.findElement(By
@@ -840,7 +834,7 @@ public class VisitorProfilePage extends UhcDriver {
 	}
 
 	public void validateAddedPlansNew(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
+		String[] listOfTestPlans = planNames.split(",");
 		CommonUtility.checkPageIsReadyNew(driver);
 		for (String plan : listOfTestPlans) {
 			System.out.println("Checking Saved Plan on VP for : "+plan);
@@ -977,8 +971,8 @@ public class VisitorProfilePage extends UhcDriver {
 	/**
 	 * click edit drugs globally
 	 */
-	public void clickEditDrugs() {
-		editDrugsGlobal.click();
+	public void clickAddDrugsBtn() {
+		AddDrugsGlobal.click();
 	}
 
 	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove Modal:Yes Remove')]")
@@ -997,6 +991,8 @@ public class VisitorProfilePage extends UhcDriver {
 */
 				System.out.println(removeDrugs.size());
 				while (removeDrugs.size() != 0) {
+					waitforElementNew(removeDrugs.get(0));
+					validateNew(removeDrugs.get(0));
 					removeDrugs.get(0).click();
 					validateNew(ConfirmRemoveDrug);
 					jsClickNew(ConfirmRemoveDrug);
@@ -1035,6 +1031,8 @@ public class VisitorProfilePage extends UhcDriver {
 					 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
 					 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
 					 */
+					waitforElementNew(removeProviders.get(0));
+					validateNew(removeProviders.get(0));
 					removeProviders.get(0).click();
 					validateNew(ConfirmRemoveProvider);
 					jsClickNew(ConfirmRemoveProvider);
@@ -1122,7 +1120,7 @@ public class VisitorProfilePage extends UhcDriver {
 	public void deleteAllDrugs(String drugList) {
 		CommonUtility.waitForPageLoadNew(driver, savedDrugsList.get(0), 45);
 		if(drugList.contains(",")) {
-			String drugs[] = drugList.split(",");
+            String[] drugs = drugList.split(",");
 			for(String drugName:drugs) {
 				driver.findElement(By.xpath("//div[contains(text(),'"+drugName+"')]/following::button[text()='Remove']")).click();
 				removeDrugBtn.click();
@@ -1177,7 +1175,28 @@ public class VisitorProfilePage extends UhcDriver {
 		Assertion.assertEquals("Sign Out", signOutText.getText().trim());
 		
 	}
-	
-	
+
+
+	public void ValidateDrugsProviders(String drugsFlag, String providersFlag) {
+		CommonUtility.waitForPageLoadNew(driver, VPHeader_DrugsLinks, 20);
+		jsClickNew(VPHeader_DrugsLinks);
+
+		if(drugsFlag.equalsIgnoreCase("true") || drugsFlag.equalsIgnoreCase("yes")) {
+			System.out.println("Total Drugs Added Count - " + removeDrugs.size());
+			Assertion.assertTrue(">>>>>> Validation Failed for drugs Added <<<<<<<<< - No Drugs Added ", removeDrugs.size() > 0);
+		}
+		if(drugsFlag.equalsIgnoreCase("false") || drugsFlag.equalsIgnoreCase("no")) {
+			System.out.println("Total Drugs Added Count - " + removeDrugs.size());
+			Assertion.assertTrue(">>>>>> Validation Failed for drugs NOT Added <<<<<<<<< - Drugs Added ", removeDrugs.size() == 0);
+		}
+		if(providersFlag.equalsIgnoreCase("true") || providersFlag.equalsIgnoreCase("yes")) {
+			System.out.println("Total Providers Added Count - " + removeProviders.size());
+			Assertion.assertTrue(">>>>>> Validation Failed for Providers Added <<<<<<<<< - No Providers Added ", removeProviders.size() > 0);
+		}
+		if(providersFlag.equalsIgnoreCase("false") || providersFlag.equalsIgnoreCase("no")) {
+			System.out.println("Total Providers Added Count - " + removeProviders.size());
+			Assertion.assertTrue(">>>>>> Validation Failed for Providers NOT Added <<<<<<<<< - Providers Added ", removeProviders.size() == 0);
+		}
+	}
 }
 

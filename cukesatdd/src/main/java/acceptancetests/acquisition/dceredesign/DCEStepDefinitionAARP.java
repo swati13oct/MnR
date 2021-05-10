@@ -1222,11 +1222,6 @@ public class DCEStepDefinitionAARP {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
@@ -1560,9 +1555,7 @@ public class DCEStepDefinitionAARP {
 			List<String> drugListBeforeRemoving = new ArrayList<String>(Arrays.asList(druglist.split("&")));
 
 			//Update the arraylist by removing the deleted drug
-			if(drugListBeforeRemoving.contains(DeleteDrug)) {
-				drugListBeforeRemoving.remove(DeleteDrug);
-			}
+			drugListBeforeRemoving.remove(DeleteDrug);
 			//Get the updated list of drugs in druglist variable
 			druglist = String.join("&", drugListBeforeRemoving);
 		}catch(UnsupportedOperationException e) {
@@ -1985,7 +1978,8 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user clicks on Return to profile link on details page$")
 	public void user_clicks_on_Return_to_profile_link_on_details_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.clickReturnToProfile();
 	}
 
@@ -1993,6 +1987,8 @@ public class DCEStepDefinitionAARP {
 	public void user_should_be_navigated_to_shopper_profile_page() {
 		VisitorProfilePage visitorProfile = new VisitorProfilePage(driver);
 		visitorProfile.validateVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE,visitorProfile);
+
 	}
 
 	@Then("^verify DCE NBA is displayed on drug summary page$")
@@ -3011,6 +3007,22 @@ public class DCEStepDefinitionAARP {
 	public void the_user_clicks_on_Review_Imported_Drugs_and_lands_on_Build_your_Drug_List_Page() throws Throwable {
 		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
-		BuildYourDrugList buildYourDrugList = getStartedPage.ClickReviewDrugsBtn();
+		BuildYourDrugList buildYourDrugList = getStartedPage.ClickReviewAddDrugsBtn();
+		getLoginScenario()
+				.saveBean(PageConstants.DCE_Redesign_BuildDrugList,buildYourDrugList);
 	}
+
+	@Given("^the user selects NonMember, validates disclsimer page and provides following NonMember Details and proceeds to import$")
+	public void the_user_selects_NonMember_and_provides_NonMember_Details_and_proceeds_to_import(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String NonMember_DOB = memberAttributesMap.get("DOB");
+		String NonMember_Zip = memberAttributesMap.get("ZipCode");
+		String NonMember_Gender = memberAttributesMap.get("Gender");
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.EnterNonMemberDetailsAndImport(NonMember_DOB, NonMember_Zip, NonMember_Gender);
+	}
+
+
 }

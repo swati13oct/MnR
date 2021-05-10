@@ -1517,7 +1517,7 @@ public class DrugDetailsPage extends UhcDriver {
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
 
-		jsClickNew(PharmacyName.get(0));
+		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
@@ -2106,7 +2106,7 @@ public class DrugDetailsPage extends UhcDriver {
 		org.json.simple.JSONObject jsonObj;
 		try {
 			jsonObj = (org.json.simple.JSONObject) parser.parse(currentSysTimeStr);
-			org.json.simple.JSONObject sysTimeJsonObj = (org.json.simple.JSONObject) jsonObj;
+			org.json.simple.JSONObject sysTimeJsonObj = jsonObj;
 
 			org.json.simple.JSONObject dataObj = (org.json.simple.JSONObject) sysTimeJsonObj.get("data");
 			timeStr = (String) dataObj.get("systemDate");
