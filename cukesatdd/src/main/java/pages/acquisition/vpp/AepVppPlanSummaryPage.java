@@ -439,11 +439,16 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	public HashMap<Boolean, String> comparePremium(String columnName, String valueExcel, HashMap<String, String> premiumMap) {
 		boolean flag = true; int counter =0;
-		
-		
+
+		System.out.println("================ Premium Map Values ================");
+		premiumMap.entrySet().forEach(entry -> {
+			System.out.println(entry.getKey() + " " + entry.getValue());
+		});
+
+
 		String tmpUIString1 = "",tmpUIString2="",valueUI="", headerPremiumString="";
 		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
-		headerPremiumString = premiumMap.get("header premium"); //gets the value for the header premium that was stored from the UI
+		headerPremiumString = premiumMap.get("Monthly Premium"); //gets the value for the header premium that was stored from the UI
 		
 		if(headerPremiumString!=null) //the header monthly premium value is not there for PDP plans so in case of PDP plans this value will be null
 			headerPremiumString = headerPremiumString.replace("\n", "").replaceAll("\\s+", ""); //removing spaces and next lines if any
@@ -465,14 +470,28 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						valueUI = valueUI.trim();
 						
 						if(key.contains("premium")) {
+							if (valueExcel.contains("-")){
+								String [] premiumArray = valueExcel.split("-");
+								valueExcel = premiumArray[1];
+							}
+							if (valueExcel.contains("$0") && !valueExcel.contains("-")){
+								valueExcel = valueExcel.concat(".00");
+							}
 							if(valueUI.equalsIgnoreCase(valueExcel)) { //if the UI value and the excel value matches
 								if(valueUI.equalsIgnoreCase(headerPremiumString)){
-										flag = true;break;
+										flag = true;
+										System.out.println("==============VERIFY PREMIUM PASSED==============");
+										System.out.println(sheetName+"_"+rowIndex+" - HEADER PREMIUM VALUE MATCH WITH BOX FOR: "+columnName+" Excel: "+headerPremiumString+" | UI: "+valueUI);
+										break;
 								}else if(headerPremiumString == null ) { //for PDP plans this will be null
-										flag = true; break;
+										flag = true;
+										System.out.println("==============VERIFY PREMIUM PASSED==============");
+										System.out.println(sheetName+"_"+rowIndex+" - HEADER PREMIUM VALUE MATCH WITH BOX FOR: "+columnName+" Excel: "+headerPremiumString+" | UI: "+valueUI);
+										break;
 								}
 								else {
 										flag = false;
+										System.out.println("==============VERIFY PREMIUM FAILED==============");
 										System.out.println(sheetName+"_"+rowIndex+" - header premium value didn't match with the box for: "+columnName+" Excel: "+headerPremiumString+" | UI: "+valueUI);
 										tmpUIString2 = tmpUIString1 +" / Header Value: "+headerPremiumString;
 										break;
@@ -487,7 +506,10 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 						}
 						else if(key.contains("plan name")||key.contains("zip")) {
 							if(valueUI.equalsIgnoreCase(valueExcel)) {
-								flag = true;break;
+								flag = true;
+								System.out.println("==============VERIFY "+key.toString()+" ==============");
+								System.out.println(sheetName+"_"+rowIndex+" - Values match for col:2 "+columnName+" Excel: "+valueExcel+" | UI: "+valueUI);
+								break;
 							}else {
 								flag = false;
 								System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:2 "+columnName+" Excel: "+valueExcel+" | UI: "+valueUI);
@@ -669,7 +691,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		String planCard = "(//*[contains(text(), '"+planName+"')])[1]";
 		System.out.println("Plan card xpath : "+ planCard);
 		String headerPremiumXpath = planCard+"/parent::div/ul/li[2]";
-		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
+		String headerPrem = "Monthly Premium"; //this variable will be stored as key for the header premium
 		String headerPremiumText = null;
 		headerPremiumText = driver.findElement(By.xpath(headerPremiumXpath)).getText();
 		String [] headerPremiumArray = headerPremiumText.split(" ");
@@ -682,13 +704,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			result.put(headerPrem, headerPremiumArray[1]);	
 		}
 		
-		String headerPlanName = "header plan name"; //this variable will be stored as key for the header plan name
+		String headerPlanName = "Plan Name"; //this variable will be stored as key for the header plan name
 		String headerPlanNameText= null;
 		headerPlanNameText = driver.findElement(By.xpath(planCard)).getText();
 		result.put(headerPlanName, headerPlanNameText);	
 		
 		String headerZipXpath = planCard+"/parent::div/ul/li[1]";
-		String headerZip = "header zip"; //this variable will be stored as key for the header zip
+		String headerZip = "ZipCode"; //this variable will be stored as key for the header zip
 		String headerZipText= null;
 		headerZipText = driver.findElement(By.xpath(headerZipXpath)).getText();
 		String [] headerZipArray = headerZipText.split(" ");
