@@ -318,8 +318,8 @@ Feature: 1.12 ACQ - Global Components Validation
     @MedSuppOnlyPages_GlobalCompsAARP
     Examples: 
       | site | path                                                         | pageName          | tfnXpath       | tfnFlag |
-      | AARP | medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
-      | AARP | medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
+      | AARP | /health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
+      | AARP | /health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
 
     @MedSuppOnlyPages_GlobalCompsUHC
     Examples: 
