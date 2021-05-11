@@ -5805,7 +5805,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
 
-		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
+		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
 			System.out.println(
 					"****************call us Content was found macthing with the SAM call Popup  ***************");
 			Assert.assertTrue(true);
@@ -6403,4 +6403,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(expectedMsg);
 		Assertion.assertTrue("Expected message is not displayed", actualMsg.contains(expectedMsg));
 	}
+	
+	public WelcomePage navigateToPathOLE(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		if(driver.getCurrentUrl().contains("welcome")){
+			return new WelcomePage(driver);
+		}
+		else {
+			System.out.println("Navigation to OLE Page is failed");
+			return null;
+		}
+		}
 }

@@ -437,6 +437,74 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 	}
 	
+	public HashMap<Boolean, String> comparePremium(String columnName, String valueExcel, HashMap<String, String> premiumMap) {
+		boolean flag = true; int counter =0;
+		
+		
+		String tmpUIString1 = "",tmpUIString2="",valueUI="", headerPremiumString="";
+		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
+		headerPremiumString = premiumMap.get("header premium"); //gets the value for the header premium that was stored from the UI
+		
+		if(headerPremiumString!=null) //the header monthly premium value is not there for PDP plans so in case of PDP plans this value will be null
+			headerPremiumString = headerPremiumString.replace("\n", "").replaceAll("\\s+", ""); //removing spaces and next lines if any
+		
+		for(String key : premiumMap.keySet()) {
+			valueUI = premiumMap.get(key);
+			tmpUIString1 = valueUI;
+			key = key.toLowerCase().trim();
+			columnName = columnName.toLowerCase().trim();
+			
+			if(key.contains(columnName)) {
+						counter++;
+						valueUI = valueUI.replace("\n", "").replaceAll("\\s+", "");
+						valueExcel = valueExcel.replace("\n", "").replaceAll("\\s+", ""); 
+						
+						//the following code is used to remove the footnote values from the benefit value string.
+
+						valueExcel = valueExcel.trim();
+						valueUI = valueUI.trim();
+						
+						if(key.contains("premium")) {
+							if(valueUI.equalsIgnoreCase(valueExcel)) { //if the UI value and the excel value matches
+								if(valueUI.equalsIgnoreCase(headerPremiumString)){
+										flag = true;break;
+								}else if(headerPremiumString == null ) { //for PDP plans this will be null
+										flag = true; break;
+								}
+								else {
+										flag = false;
+										System.out.println(sheetName+"_"+rowIndex+" - header premium value didn't match with the box for: "+columnName+" Excel: "+headerPremiumString+" | UI: "+valueUI);
+										tmpUIString2 = tmpUIString1 +" / Header Value: "+headerPremiumString;
+										break;
+								}
+							
+							}else {
+								flag = false;
+								System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:1 "+columnName+" Excel: "+valueExcel+" | UI: "+valueUI);
+								tmpUIString2 = tmpUIString1+" / Header Value: "+headerPremiumString;
+								break;
+							}
+						}
+						else if(key.contains("plan name")||key.contains("zip")) {
+							if(valueUI.equalsIgnoreCase(valueExcel)) {
+								flag = true;break;
+							}else {
+								flag = false;
+								System.out.println(sheetName+"_"+rowIndex+" - Values did not match for col:2 "+columnName+" Excel: "+valueExcel+" | UI: "+valueUI);
+								tmpUIString2 = tmpUIString1;
+								break;
+							}
+									
+						}
+			}
+		}
+		
+		comparedResult.put(flag, tmpUIString2);
+		return comparedResult;
+		
+	}
+
+	
 	public boolean checkForMultiCountyPopup(String countyName) {
 		boolean flag = false;
 		if(validate(countyModal,20)) {
@@ -485,6 +553,152 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		}
 		
 	}
-}
+
+	public void Enroll_OLE_Plan(String planName, String planType) throws InterruptedException {
+		WebElement enrollForPlan = null;
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		if (planType.equalsIgnoreCase("PDP")) {
+			// driver.navigate().refresh();
+			Thread.sleep(5000);
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
+		} else {
+			enrollForPlan = driver.findElement(By.xpath(
+					"//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+		}
+		if (enrollForPlan != null) {
+			validateNew(enrollForPlan);
+			jsClickNew(enrollForPlan);
+//			enrollForPlan.click();
+		}
+		
+	}
+	
+	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
+		this.sheetName = sheetName;
+		this.rowIndex = rowIndex;
+
+        HashMap<String, String> result=new HashMap<String, String>();
+        
+        result = collectInfoWelcomeOLEpg(planName);
+        
+        System.out.println(sheetName);
+        System.out.println(rowIndex);
+        System.out.println(planName);
+        
+        return result;
+    }
+	
+/*	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the info on Welcome OLE Page");
+
+		HashMap<String, String> result=new HashMap<String, String>();
+		//String planCard = "//*[contains(text(), '"+planName+"') and contains(@class,'ng-binding')]/ancestor::*[contains(@class,'module-plan-overview module')]";
+		String planCard = "(//*[contains(text(), '"+planName+"')])[1]";
+		System.out.println("Plan card xpath : "+ planCard);
+		String rowXpath = "";
+		String headerPremiumXpath = planCard+"/parent::div/ul/li[2]";
+		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
+		String headerPremiumText = "Header not found";
+		String learnMoreLink = planCard + "//*[contains(@ng-click,'lispopup')]";
+		
+		List<WebElement> learnMoreAboutLink = driver.findElements(By.xpath(learnMoreLink));
+		
+		if(planName.contains("PDP"))
+			rowXpath = planCard+"//*[contains(@class,'pdpbenefittable')]//ul//li";
+		else {
+			rowXpath = planCard+"//ul[contains(@class,'benefits-table')]//li";
+			List<WebElement> headerPremium = driver.findElements(By.xpath(headerPremiumXpath));
+			if(headerPremium.size()!=0) {
+				 headerPremiumText = headerPremium.get(0).getText(); //this variable will be stored as value for the header premium value
+				
+			}
+			result.put(headerPrem, headerPremiumText);
+		}
+		List<WebElement> listOfRowsPerTable=driver.findElements(By.xpath(rowXpath));
+		
+		String key = "";
+		
+		
+		
+		for(int rowIndex=1; rowIndex<=listOfRowsPerTable.size(); rowIndex++) { //note: loop through each row
+			String cellsXpath="",benefitValueXpath ="";
+			String value = "",rowText ="" ,benefitValueText = "";
+			
+			 cellsXpath = rowXpath+"["+rowIndex+"]"; //index xpath for each row in the table
+			benefitValueXpath = cellsXpath + "//*[contains(@class,'float-right')]";// xpath for the benefit value for the cell
+			 
+			 // the below code gets the benefit name from the table before the : symbol
+			 WebElement e=driver.findElement(By.xpath(cellsXpath));
+			 rowText = e.getText();
+			 String [] parts = rowText.split(":");
+			 key = parts[0];
+			 
+			 //the below code gets the benefit value from the table after the : symbol
+			 List <WebElement> j = driver.findElements(By.xpath(benefitValueXpath));
+			 if(j.size()!=0)
+				 benefitValueText = j.get(0).getText();
+			 
+			 for (int i = 1; i < parts.length; i++) {
+				 value = value + parts[i]; 
+			 }
+			 value = benefitValueText;
+			 
+			 
+			 result.put(key, value);
+			 
+		}
+		
+		for(String keyValue : result.keySet()) {
+			  System.out.println("Key : "+keyValue+" Value: "+result.get(keyValue));
+			  System.out.println("_________________________________________________________________________________________________");
+		}
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		System.out.println(sheetName+"_"+rowIndex+" - Finished to collect the OLE Info on Wlecome OLE Pages - " + result.size());
+		return result;
+	}
+*/
+	
+	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName) {
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the info on Welcome OLE Page");
+
+		HashMap<String, String> result=new HashMap<String, String>();
+		String planCard = "(//*[contains(text(), '"+planName+"')])[1]";
+		System.out.println("Plan card xpath : "+ planCard);
+		String headerPremiumXpath = planCard+"/parent::div/ul/li[2]";
+		String headerPrem = "header premium"; //this variable will be stored as key for the header premium
+		String headerPremiumText = null;
+		headerPremiumText = driver.findElement(By.xpath(headerPremiumXpath)).getText();
+		String [] headerPremiumArray = headerPremiumText.split(" ");
+		if(headerPremiumArray[1].substring(3, 5).equalsIgnoreCase("0.00"))
+		{
+		String updatedHeaderPremium = headerPremiumArray[1].substring(0, 2) ;
+		result.put(headerPrem, updatedHeaderPremium);
+		}
+		else {
+			result.put(headerPrem, headerPremiumArray[1]);	
+		}
+		
+		String headerPlanName = "header plan name"; //this variable will be stored as key for the header plan name
+		String headerPlanNameText= null;
+		headerPlanNameText = driver.findElement(By.xpath(planCard)).getText();
+		result.put(headerPlanName, headerPlanNameText);	
+		
+		String headerZipXpath = planCard+"/parent::div/ul/li[1]";
+		String headerZip = "header zip"; //this variable will be stored as key for the header zip
+		String headerZipText= null;
+		headerZipText = driver.findElement(By.xpath(headerZipXpath)).getText();
+		String [] headerZipArray = headerZipText.split(" ");
+		result.put(headerZip, headerZipArray[1]);	
+
+
+		System.out.println(sheetName+"_"+rowIndex+" - Finished to collect the OLE Info on Wlecome OLE Pages - " + result.size());
+		return result;
+	}
+	}
+
 
 	

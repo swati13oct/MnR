@@ -4227,8 +4227,8 @@ public class VppCommonStepDefinition {
 		String plantype = givenAttributesMap.get("Plan Type");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-	//	if (!(MRScenario.environment.equalsIgnoreCase("offline")
-	//			|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 			
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -4238,7 +4238,45 @@ public class VppCommonStepDefinition {
 		if (!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 		}
-	//}
+	}
+	
+	@Given("^the user directly navigates to welcome OLE page$")
+	public void the_user_navigates_to_Welcome_OLE_Pages(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String path = memberAttributesMap.get("PagePath");
+		
+		String PlanName = memberAttributesMap.get("Plan Name");
+		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		
+		//String County = "St. Louis County";
+		//String ZipCode = "63043";
+		//String PlanYear = "2020"; 
+
+		String PlanYear = memberAttributesMap.get("Plan Year");
+		String PlanPremium = "";
+		String ZipCode = "";
+		String County = "";
+		String PlanType = memberAttributesMap.get("Plan Type");
+		String SiteName;
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		//String plantype = memberAttributesMap.get("Plan Type");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : " + path);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		WelcomePage welcomepage = aquisitionhomepage.navigateToPathOLE(path);
+		
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+	}
 	@Then("^user clicks on Learn About Medicare$")
 	public void user_clicks_on_Learn_About_Medicare() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -4280,13 +4318,6 @@ public class VppCommonStepDefinition {
 	public void user_view_plans_of_plan_type(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
-
 		String plantype = givenAttributesMap.get("Plan Type");
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
