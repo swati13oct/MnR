@@ -43,7 +43,7 @@ public class PageTitleConstants {
 	public static final String BLAYER_UHC_MEDICARE_SOLUTIONS = "UHC medicare solutions - Google Search";
 	public static final String BLAYER_HEALTH_INSURANCE_AGENT_APPOINTMENT_REQUEST = "Health Insurance Agent Appointment Request | AARPï¿½ï¿½ Medicare Plans from UnitedHealthcareï¿½ï¿½";
 	public static final String BLAYER_UHC_MEDICARE_SOLUTIONS_YAHOO = "UHC medicare solutions - Yahoo Search Results";
-	public static final String BLAYER_MEDICARE_SUPPLEMENT_INSURANCE_PLANS = "Medicare Supplement Insurance Plans | UnitedHealthcare";
+	public static final String BLAYER_MEDICARE_SUPPLEMENT_INSURANCE_PLANS = "Learn about Medicare Supplement Plans | UnitedHealthcare";
 	public static final String BLAYER_DISCLAIMERS = "Disclaimers | UnitedHealthcareï¿½";
 	public static final String BLAYER_MEDICARE_PLAN_DRUG_COSTS = "Medicare Plan Drug Costs | AARPï¿½ Medicare Plans from UnitedHealthcareï¿½";
 	public static final String BLAYER_MY_BENEFITS_COVERAGES = "My Benefits & Coverage";
@@ -54,11 +54,11 @@ public class PageTitleConstants {
 	public static final String BLAYER_SDCERA_GROUP_RETIREE_PROVIDER = "SDCERA Group Retiree ï¿½ Find a provider";
 	public static final String BLAYER_CONTACT_UNITEDHEALTHCARE_AARP_MEDICARE = "Contact UnitedHealthcareï¿½ | AARPï¿½ Medicare Plans from UnitedHealthcare";
 	//public static final String BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE="UHCMS: Available Plans in Your Area| UnitedHealthcareï¿½";
-	public static final String BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE="UHCMS: Available Plans in Your Area| UnitedHealthcare®";
+	public static final String BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE="UHCMS: Available Plans in Your Area| UnitedHealthcareï¿½";
 	//public static final String BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE="UHCMS: Available Plans in Your Area| UnitedHealthcareÂ®";
 	public static final String BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE="Shop for a Plan";
 	//public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARPï¿½ Medicare Plans from UnitedHealthcareï¿½";
-	public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARP® Medicare Plans from UnitedHealthcare®";
+	public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARPï¿½ Medicare Plans from UnitedHealthcareï¿½";
 	//public static final String ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE="AARPMP: Available Plans in Your Area| AARPÂ® Medicare Plans from UnitedHealthcareÂ®";
 	public static final String ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE="Shop for a Plan";
 	public static final String ULAYER_OUR_MEDICARE_PLANS = "Our Medicare Plans | AARPï¿½ Medicare Plans From UnitedHealthcareï¿½";
