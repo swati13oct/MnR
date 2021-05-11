@@ -52,7 +52,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(name = "Or, Sign In to your Profile")
+	@FindBy(xpath = "//a[@class='text-small header-link-mobile'][normalize-space()='Or, Sign In to your Profile']")
 	private WebElement signIn;
 	
 	
@@ -68,7 +68,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
 
-	@FindBy(xpath = "//button[@dtmname='Visitor Profile:Save Drugs and Doctors:Add Drugs']//span[text()='Add Drugs']")
+	@FindBy(xpath = "//button[@dtmname='Visitor Profile:Save Drugs and Doctors:Add Drugs']")
 	private WebElement addDrugsBtn;
 
 	@FindBy(css = "a.add-provider")
@@ -155,7 +155,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public void validateAddedDrugAndPharmacy(String drug) {
-		expandDrugBlock.click();
+		//expandDrugBlock.click();//No Expand block seen on mobile
 
 		Assertion.assertTrue(drugName.getText().trim().contains(drug));
 		Assertion.assertTrue(pharmacyAddress.isDisplayed());
@@ -232,8 +232,11 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 */
 		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
-			jsClickNew(addrugs);
+			//jsClickNew(addrugs);
+			scrollToView(addDrugsBtn);
+			jsClickNew(addDrugsBtn);
 		} else {
+			scrollToView(addDrugsBtn);
 			jsClickNew(addDrugsBtn);
 		}
 		waitForPageLoadSafari();
@@ -436,10 +439,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 //			if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
 			if(!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				Thread.sleep(3000);
-				signInLegacy.click();
+				//signInLegacy.click();
+				scrollToView(signIn);
+				signIn.click();
 				
 			}else {
-				jsClickNew(signIn);
+				System.out.println("Clicking on SignIn from Visitor Profile guest page");
+				scrollToView(signIn);
+				signIn.click();
 			}
 			Thread.sleep(3000);
 			waitForPageLoadSafari();
@@ -466,7 +473,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assertion.fail("###############Optum Id Sign In failed###############");

@@ -3840,9 +3840,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		System.out.println("Plan to start date selected");
 
 		// viewPlansBtnMedSupp.click();
-		jsClickMobile(viewPlansBtnMedSupp);
+		jsClickNew(viewPlansBtnMedSupp);
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
+		//CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
 
 		/*
 		 * if(!driver.findElement(By.xpath(

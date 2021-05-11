@@ -722,14 +722,9 @@ public abstract class UhcDriver {
 		int initialCount = driver.getWindowHandles().size();
 		sleepBySec(3);
 		scrollToView(Element);
-		try {
-			Element.click();
-		} catch (Exception e) {
-			System.out.println("element click failed for IOS with selenium click().........");
-		}
-		finally {
-			jsClickNew(Element);
-		}
+
+		Element.click();
+
 		sleepBySec(5);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
@@ -743,8 +738,6 @@ public abstract class UhcDriver {
 		}
 
 	}
-	
-	
 
 	public void sleepBySec(int sec) {
 		try {
