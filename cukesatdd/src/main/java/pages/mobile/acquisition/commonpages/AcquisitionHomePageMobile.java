@@ -22,6 +22,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
@@ -30,10 +31,13 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
+import io.appium.java_client.MobileBy;
+import io.appium.java_client.ios.IOSDriver;
 import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.RequestHelpAndInformationPage;
 import pages.acquisition.commonpages.ShopForPlanNavigationPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
@@ -1173,17 +1177,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
+
+
 	public VPPPlanSummaryPageMobile searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty) {
 		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
 		sendkeys(healthPlansZipcode, zipcode);
-		// findPlansBtn.click();
 		jsClickNew(findPlansBtn);
-
+		waitForPageLoadSafari();
 		if (isMultiCounty.equalsIgnoreCase("YES")) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
 			if (validate(countyModal))
 				driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
 		}
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -1191,30 +1197,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	// public VPPPlanSummaryPageMobile searchPlansForLearnFindPlans(String zipcode,
-	// String countyName) {
-	// sendkeys(learnzipCodeField, zipcode);
-	// learnfindPlansButton.click();
-	// try {
-	// if (countyModal.isDisplayed()) {
-	// for (WebElement county : countyRows) {
-	// if (county.getText().equalsIgnoreCase(countyName)) {
-	// county.click();
-	// break;
-	// }
-	//
-	// }
-	// }
-	// } catch (Exception e) {
-	// System.out.println("county box not found");
-	// }
-	// if
-	// (getTitle().equalsIgnoreCase(PageTitleConstants.ULAYER_PLAN_SUMMARY_PAGE_TITLE))
-	// {
-	// return new VPPPlanSummaryPageMobile(driver);
-	// }
-	// return null;
-	// }
 
 	public VPPPlanSummaryPageMobile navigateToVpp(String zipcode) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 3000);
@@ -2109,7 +2091,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(SubmitBtn);
 		// SubmitBtn.click();
 		jsClickNew(SubmitBtn);
-		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		//CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
 
@@ -2146,8 +2128,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void selectState(String state) {
 		pageloadcomplete();
-		// selectFromDropDownByValue(stateDropDown, state);
-		mobileSelectOption(stateDropDown, state, true);
+		//selectFromDropDownByValue(stateDropDown, state);
+		//mobileSelectOption(stateDropDown, state, true);
+		iosScroll(stateDropDown);
+		Select element = new Select(stateDropDown);
+		element.selectByIndex(1);
+	
 
 	}
 

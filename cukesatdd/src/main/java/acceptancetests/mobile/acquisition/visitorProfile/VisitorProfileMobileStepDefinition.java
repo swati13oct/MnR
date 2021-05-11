@@ -20,6 +20,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
@@ -198,14 +199,13 @@ public class VisitorProfileMobileStepDefinition {
 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
 		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
+		String county = memberAttributesMap.get("county");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
 		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
@@ -222,6 +222,7 @@ public class VisitorProfileMobileStepDefinition {
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
+	
 	}
 
 	// @Then("^Navigate to Visitor Profile page$")

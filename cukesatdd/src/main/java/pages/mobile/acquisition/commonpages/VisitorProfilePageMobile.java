@@ -58,7 +58,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
 
-	@FindBy(xpath = "//div[contains(@class,'find-plans')]/button")
+	@FindBy(xpath = "//button[@class='uhc-button uhc-button--outlined uhc-button--secondary mt-20']")
 	private WebElement addPlans;
 
 	@FindBy(css = "a.addrugs")
@@ -144,8 +144,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
-			// System.out.println("validating zipcode and returning
-			// value-----------------------------------------------------");
+			
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;

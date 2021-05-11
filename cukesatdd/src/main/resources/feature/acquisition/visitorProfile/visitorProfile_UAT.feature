@@ -30,7 +30,7 @@ Feature: 1.08. UAT- Visitor profile
     And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @visitorProfile_AARP_UAT @regressionAARP
+    @visitorProfile_AARP_UAT @regressionAARP 
     Examples: 
       | site | state   | UID       | planyear | zipcode | isMultiCounty | county           | plantype | testPlans                                                                                              |
       | AARP | Alabama | US1770330 | future   |   90210 | NO            | Jefferson County | MAPD     | AARP Medicare Advantage SecureHorizons Focus (HMO),AARP Medicare Advantage SecureHorizons Plan 1 (HMO) |

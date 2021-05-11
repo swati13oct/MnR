@@ -15,13 +15,11 @@ import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.emailAndPrint.EmailAndPrintUtil;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.emailAndPrint.EmailAndPrintUtilMobile;
+
 
 public class VppEmailAndPrintCommonStepDefinitionMobile {
 
@@ -78,8 +76,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	public void user_validate_print_link_option_in_plan_compare() {
 		/*
 		 * WebDriver wDriver = (WebDriver)
-		 * getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER); EmailAndPrintUtil
-		 * util = new EmailAndPrintUtil(wDriver);
+		 * getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER); EmailAndPrintUtilMobile
+		 * util = new EmailAndPrintUtilMobile(wDriver);
 		 */
 		// WebDriver wDriver = (WebDriver)
 		// (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -100,7 +98,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_TYPE);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
 		String pageType = "compare";
 		util.validatePrintOptionOnPage(pageType, planType);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
@@ -110,7 +108,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	public void user_validate_email_link_option_in_plan_compare() {
 		// WebDriver wDriver = (WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
 		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario()
 				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validateEmailPlanCompare();
@@ -123,7 +121,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_TYPE);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
 		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario()
 				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validatePlanCompareEmailThankYouMessage();
@@ -144,7 +142,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	public void verifyAllPlansStillSelected() {
 		// WebDriver wDriver = (WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
 		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario()
 				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		String plansForCompare = (String) getLoginScenario().getBean(PageConstants.plansForCompare);
@@ -160,7 +158,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	public void validate_compare_page_deeplink() {
 		// WebDriver wDriver = (WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
 		wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario()
 				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
@@ -175,20 +173,20 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		WebDriver newTestDriver = getLoginScenario().getWebDriverNew();
 		newTestDriver.get(deepLink);
 		commonUtils.checkPageIsReady(newTestDriver);
-		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
-										// validation is done
-		util = new EmailAndPrintUtilMobile(newTestDriver);
-		util.handlePlanYearSelectionPopup(planType);
-		commonUtils.checkPageIsReady(newTestDriver);
-		util.checkModelPopup(newTestDriver);
-
-		// note: temperary bypass for now until the flash issue is resolved
-		// tbd List<String> noteList=new ArrayList<String>();
-		// tbd noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink
-		// page content flashing");
-		// note: do not remove the comment lines below
-		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
-										// validation is done
+//		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
+//										// validation is done
+//		util = new EmailAndPrintUtilMobile(newTestDriver);
+//		util.handlePlanYearSelectionPopup(planType);
+//		commonUtils.checkPageIsReady(newTestDriver);
+//		util.checkModelPopup(newTestDriver);
+//
+//		// note: temperary bypass for now until the flash issue is resolved
+//		// tbd List<String> noteList=new ArrayList<String>();
+//		// tbd noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink
+//		// page content flashing");
+//		// note: do not remove the comment lines below
+//		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
+//										// validation is done
 		List<String> noteList = util.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId,
 				deepLink, origPage, wDriver);
 		getLoginScenario().saveBean(VPPCommonConstantsMobile.TEST_RESULT_NOTE, noteList);
@@ -211,7 +209,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	@Then("^the user validate the print link on the plan Details Page on site$")
 	public void user_validate_print_on_the_plan_Details_Page() {
 		wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
+		EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
 		util.validatePrintPlanDetails();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wDriver);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
@@ -222,8 +220,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		// WebDriver wDriver = (WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_TYPE);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		String pageType = "detail";
 		util.validatePrintOptionOnPage(pageType, planType);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
@@ -234,8 +232,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	public void user_validate_email__on_the_plan_Details_Page() {
 		// WebDriver wDriver = (WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validateEmailOnPlanDetails();
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
 
@@ -245,12 +243,12 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	public void user_validates_the_functionality_of_email_button_on_the_plan_Details_Page() {
 		wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_TYPE);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validatingFunctionalityOfEmailOnPlanDetails();
 
 		// note: collect page data for email deeplink validation
-		// util = new EmailAndPrintUtil(wDriver);
+		// util = new EmailAndPrintUtilMobile(wDriver);
 		HashMap<String, String> infoMap = util.collectInfoVppPlanDetailPg(planType, "original", wDriver);
 		getLoginScenario().saveBean(PageConstants.DETAIL_PAGE_INFO, infoMap);
 
@@ -266,8 +264,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 	@Then("^user loads page using email deeplink and validate vpp detail page content on site$")
 	public void validate_detail_page_deeplink() throws InterruptedException {
 		wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		// EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		CommonUtility commonUtils = new CommonUtility();
 		String deepLinkStringId = PageConstants.DETAIL_PAGE_DEEPLINK;
 		String infoMapStringId = PageConstants.DETAIL_PAGE_INFO;
@@ -282,13 +280,13 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
 										// validation is done
 		Thread.sleep(1000);
-		util = new EmailAndPrintUtil(newTestDriver);
+		util = new EmailAndPrintUtilMobile(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
 		commonUtils.checkPageIsReady(newTestDriver);
 		util.checkModelPopup(newTestDriver);
 		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
 										// validation is done
-		util = new EmailAndPrintUtil(newTestDriver);
+		util = new EmailAndPrintUtilMobile(newTestDriver);
 		List<String> noteList = util.validatePlanDetailEmailDeeplink(planType, deepLinkStringId, infoMapStringId,
 				deepLink, origPage, wDriver);
 		getLoginScenario().saveBean(VPPCommonConstantsMobile.TEST_RESULT_NOTE, noteList);
@@ -301,8 +299,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		// WebDriver wDriver=(WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util=new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validatePrintOptionExistOnSummaryPage(planType);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wDriver);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
@@ -315,8 +313,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		// (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		// WebDriver wDriver=(WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util=new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		String pageType = "summary";
 		util.validatePrintOptionOnPage(pageType, planType);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
@@ -329,8 +327,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		// (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		// WebDriver wDriver=(WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util=new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validateEmailOptionExistOnSummaryPage(planType);
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
 	}
@@ -342,8 +340,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		// (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		// WebDriver wDriver=(WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util=new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		util.validateEmailFunctionOnSummaryPage(planType);
 
 		// note: collect page data for email deeplink validation
@@ -363,8 +361,8 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		// WebDriver wDriver=(WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtil util=new EmailAndPrintUtil(wDriver);
-		EmailAndPrintUtil util = (EmailAndPrintUtil) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		// EmailAndPrintUtilMobile util=new EmailAndPrintUtilMobile(wDriver);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		CommonUtility commonUtils = new CommonUtility();
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_TYPE);
 		String deepLinkStringId = "";
@@ -380,7 +378,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		commonUtils.checkPageIsReady(newTestDriver);
 		// tbd wDriver.navigate().refresh(); //note: need this to trick the original
 		// driver from timing out before the validation is done
-		util = new EmailAndPrintUtil(newTestDriver);
+		util = new EmailAndPrintUtilMobile(newTestDriver);
 		util.handlePlanYearSelectionPopup(planType);
 		commonUtils.checkPageIsReady(newTestDriver);
 		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the

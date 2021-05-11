@@ -1741,8 +1741,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (allMAPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
+				iosScroll(allMAPlans.get(i));
 				jsClickNew(allMAPlans.get(i));
-				// allMAPlans.get(i).click();
+				//allMAPlans.get(i).click();
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
@@ -4613,8 +4614,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	private WebElement firstPlanDetailsLink;
 
 	public PlanDetailsPageMobile navigateToFirstPlanForPlanDetails(String planType) {
-		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
+//		CommonUtility.checkPageIsReadyNew(driver);
+//		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
+		scrollToView(firstPlanDetailsLink);
 		firstPlanDetailsLink.click();
 		System.out.println("View Plan Details Link is clicked for first plan for " + planType);
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -5304,7 +5306,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public pages.mobile.acquisition.commonpages.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
 		// TODO Auto-generated method stub
-
+		iosScroll(firstComparePlanButton);
 		jsClickNew(firstComparePlanButton);
 		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
