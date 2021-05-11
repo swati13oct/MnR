@@ -217,7 +217,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Examples:
       | site | zipCode | drug2  | planType | planName                        | userName  | password   | dob        | importZipCode | mbi         | drugFlag | providersFlag |
       | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD1 | Password@1 | 06/11/1943 | 06383         | 3AA6TD4UY48 | true     | false         |
-      | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD2 | Password@1 | 05/11/1953 | 06052         | 3WD2PU1GE94 | false    | true          |
+ #     | UHC  | 80002   | Fanapt | PDP      | AARP MedicareRx Preferred (PDP) | DCE_ATDD2 | Password@1 | 05/11/1953 | 06052         | 3WD2PU1GE94 | false    | true          |
 
 
   @dceImportDrugs_AuthNonMember
