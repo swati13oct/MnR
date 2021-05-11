@@ -2129,7 +2129,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void selectState(String state) {
 		pageloadcomplete();
 		//selectFromDropDownByValue(stateDropDown, state);
-		//mobileSelectOption(stateDropDown, state, true);
+		//mobileSelectOption(stateDropDown, state, true); //For iOS selecting value from drop down is not working with XCUIPickerWheel 
 		iosScroll(stateDropDown);
 		Select element = new Select(stateDropDown);
 		element.selectByIndex(1);

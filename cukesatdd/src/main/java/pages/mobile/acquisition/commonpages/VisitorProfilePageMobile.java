@@ -54,6 +54,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(css = "div.signupCTA a:first-child")
 	private WebElement signIn;
+	
+	@FindBy(css = "div.signupCTA a.signin-font")
+	private WebElement signInLegacy;
 
 	@FindBy(css = "div.signupCTA a.profileBtn")
 	private WebElement btnCreateProfile;
@@ -406,13 +409,29 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public void signIn(String username, String password) {
 		try {
-
-			signIn.click();
-			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			/*if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {*/
+			String State = CommonConstants.getSelectedState();
+//			if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			if(!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
+				Thread.sleep(3000);
+				signInLegacy.click();
+				
+			}else {
+				jsClickNew(signIn);
+			}
+			Thread.sleep(3000);
+			waitForPageLoadSafari();
+			// driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
 			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
-			driver.findElement(By.cssSelector("input#SignIn")).click();
-			String Question = driver.findElement(By.cssSelector("label#challengeQuestionLabelId")).getText().trim();
-			WebElement securityAnswer = driver.findElement(By.cssSelector("div#challengeSecurityAnswerId >input"));
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
+			Thread.sleep(3000);
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+			waitforElement(securityAnswer);
 			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
 				System.out.println("Question is related to friendname");
 				securityAnswer.sendKeys("name1");
@@ -425,7 +444,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 				System.out.println("Question is related to phone");
 				securityAnswer.sendKeys("number1");
 			}
-			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
 			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
@@ -433,6 +453,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 	}
+
 
 	/**
 	 * Enroll in a plan

@@ -580,7 +580,7 @@ public abstract class UhcDriver {
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click(true);", element);
 				System.out.println("JsClick worked");
-				//clickFlag = true;
+				// clickFlag = true;
 
 				// if (element.isDisplayed() && (clickFlag = true))
 				// try {
@@ -722,7 +722,14 @@ public abstract class UhcDriver {
 		int initialCount = driver.getWindowHandles().size();
 		sleepBySec(3);
 		scrollToView(Element);
-		Element.click();
+		try {
+			Element.click();
+		} catch (Exception e) {
+			System.out.println("element click failed for IOS with selenium click().........");
+		}
+		finally {
+			jsClickNew(Element);
+		}
 		sleepBySec(5);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);

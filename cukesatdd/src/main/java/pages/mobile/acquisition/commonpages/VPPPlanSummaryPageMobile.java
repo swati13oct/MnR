@@ -3833,6 +3833,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// startDrpDwn.click();
 		jsClickMobile(startDrpDwn);
 		Thread.sleep(2000);
+		iosScroll(startDrpDwnOption);
 		startDrpDwnOption.click();
 
 		System.out.println("Plan to start date selected");

@@ -65,7 +65,7 @@ public class VisitorProfileMobileStepDefinition {
 		String userName = givenAttributesMap.get("User Name");
 		String password = givenAttributesMap.get("Password");
 
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		wd = (AppiumDriver) getLoginScenario().getMobileDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		ShopperProfileAgentLogin shopperProfilePage = new ShopperProfileAgentLogin(wd);
