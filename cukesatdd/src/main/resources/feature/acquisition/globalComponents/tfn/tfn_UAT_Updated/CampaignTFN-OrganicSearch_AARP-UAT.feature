@@ -1,4 +1,4 @@
-@campaignTFN @regressionAARP
+@campaignTFN @regressionAARP @campaignTFNProd
 Feature: UAT Scripts-To test Organic SearchCampaign TFN on AARP site
 
   #######################Script 3: Organic Search via Google and Bing##########################################
