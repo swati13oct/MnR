@@ -1,3 +1,4 @@
+@agentAppointment
 Feature: 1.06-To test request an appointment with an agent flow
 
   Scenario Outline: Verify request an appointment with an agent flow for <pageName> through <site> site
@@ -9,7 +10,7 @@ Feature: 1.06-To test request an appointment with an agent flow
     When the user clicks on Agent link and validates the correct URL is loaded
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCUlayer @regressionAARP @agentAppointment
+    @agentFlowEBRCUlayer @regressionAARP
     Examples: 
       | site | path                                                                                                                                                                                                | pageName        | UHCUrl                      |
       | AARP | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary | Connector Modal | https://www.myuhcagent.com/ |
@@ -19,7 +20,7 @@ Feature: 1.06-To test request an appointment with an agent flow
       #| AARP | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | https://www.myuhcagent.com/ |
       #| AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCBlayer @regressionUHC @agentAppointment
+    @agentFlowEBRCBlayer @regressionUHC
     Examples: 
       | site | path                                                                                                                                                                                                | pageName        | UHCUrl                      |
       | UHC  | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary | Connector Modal | https://www.myuhcagent.com/ |
@@ -29,7 +30,7 @@ Feature: 1.06-To test request an appointment with an agent flow
       #| UHC  | health-plans.html?zipcode=10011&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H3307018000&planYear=2020&systemYear=2020&zipcode=10011&fipsCode=061&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details MA   | https://www.myuhcagent.com/ |
       #| UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary                                                                                                    | VPP: Plan Summary      | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCUlayer @regressionAARP @agentAppointment
+    @agentFlowEBRCUlayer @regressionAARP
     Examples: 
       | site | path                            | pageName                    | UHCUrl                      |
       | AARP | shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/ |
@@ -43,7 +44,7 @@ Feature: 1.06-To test request an appointment with an agent flow
       #| AARP | shop/estimate.html              | ShopPlan: Estimate          | https://www.myuhcagent.com/ |
       #| AARP | shop/switch.html                | ShopPlan: Switch            | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCBlayer @regressionUHC @agentAppointment
+    @agentFlowEBRCBlayer @regressionUHC
     Examples: 
       | site | path                            | pageName                    | UHCUrl                      |
       | UHC  | shop.html                       | ShopPlan: Shop              | https://www.myuhcagent.com/ |
@@ -57,7 +58,7 @@ Feature: 1.06-To test request an appointment with an agent flow
       #| UHC  | shop/estimate.html              | ShopPlan: Estimate          | https://www.myuhcagent.com/ |
       #| UHC  | shop/switch.html                | ShopPlan: Switch            | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCUlayer @regressionAARP @agentAppointment
+    @agentFlowEBRCUlayer @regressionAARP
     Examples: 
       | site | path                                                  | pageName                                               | UHCUrl                      |
       | AARP | medicare-articles/eligibility-and-enrollment.html     | medicare-articles: eligibility-and-enrollment          | https://www.myuhcagent.com/ |
@@ -68,7 +69,7 @@ Feature: 1.06-To test request an appointment with an agent flow
       | AARP | medicare-articles/medicare-when-working-past-65.html  | medicare-articles: medicare-when-working-past-65.html  | https://www.myuhcagent.com/ |
       | AARP | medicare-articles/medicare-tips-and-faqs.html         | medicare-articles: medicare-tips-and-faqs.html         | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCBlayer @regressionUHC @agentAppointment
+    @agentFlowEBRCBlayer @regressionUHC
     Examples: 
       | site | path                                                  | pageName                                               | UHCUrl                      |
       | UHC  | medicare-articles/eligibility-and-enrollment.html     | medicare-articles: eligibility-and-enrollment          | https://www.myuhcagent.com/ |
@@ -108,12 +109,12 @@ Feature: 1.06-To test request an appointment with an agent flow
     When the user clicks on Agent link and validates the correct URL is loaded
       | UHC Agent URL | <UHCUrl> |
 
-   @agentFlowEBRCUlayer @regressionAARP @agentAppointment
+   @agentFlowEBRCUlayer @regressionAARP
     Examples: 
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |
 
-    @agentFlowEBRCBlayer @regressionUHC @agentAppointment
+    @agentFlowEBRCBlayer @regressionUHC
     Examples: 
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |
