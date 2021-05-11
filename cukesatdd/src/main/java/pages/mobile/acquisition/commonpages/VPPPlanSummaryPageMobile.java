@@ -536,13 +536,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(id = "msVppDOB")
 	private WebElement DOB;
 
-	@FindBy(id = "mpaed-month")
+	@FindBy(xpath = "//select[@id='mpaed-month']")
 	private WebElement monthDrpDwnPartA;
 
 	@FindBy(xpath = "//select[@id='mpaed-month']//option[2]")
 	private WebElement monthDrpDwnOptionPartA;
 
-	@FindBy(id = "mpaed-year")
+	@FindBy(xpath = "//select[@id='mpaed-year']")
 	private WebElement yearDrpDwnPartA;
 
 	@FindBy(xpath = "//select[@id='mpaed-year']//option[contains(text(),'2019')]")
@@ -551,19 +551,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//label[@for='futureYear']")
 	public WebElement nextYearSelection;
 
-	@FindBy(id = "mpbed-month")
+	@FindBy(xpath = "//select[@id='mpbed-month']")
 	private WebElement monthDrpDwnPartB;
 
 	@FindBy(xpath = "//select[@id='mpbed-month']//option[2]")
 	private WebElement monthDrpDwnOptionPartB;
 
-	@FindBy(id = "mpbed-year")
+	@FindBy(xpath = "//select[@id='mpbed-year']")
 	private WebElement yearDrpDwnPartB;
 
 	@FindBy(xpath = "//select[@id='mpbed-year']//option[contains(text(),'2019')]")
 	private WebElement yearDrpDwnOptionPartB;
 
-	@FindBy(id = "msVppdpsd")
+	@FindBy(xpath = "//select[@id='msVppdpsd']")
 	private WebElement startDrpDwn;
 
 	@FindBy(id = "sign-up-modal-header")
@@ -3800,8 +3800,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
-		// sendkeys(medSuppZipCode, zipCode);
-		medSuppZipCode.sendKeys(zipCode);
+		
+		//medSuppZipCode.sendKeys(zipCode);
+		sendkeysMobile(medSuppZipCode, zipCode);
 		Thread.sleep(1000);
 		// sendkeys(DOB, DateOfBirth);
 		DOB.sendKeys(DateOfBirth);

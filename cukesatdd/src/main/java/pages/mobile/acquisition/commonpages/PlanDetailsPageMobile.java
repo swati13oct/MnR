@@ -869,7 +869,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 *            all the additional benefits given in the feature file
 	 */
 	public void validatingAdditionalBenefitTextInPlanDetails(List<List<String>> additionalBenefits) {
-
 		// boolean validationFlag = true;
 		WebElement AdditionalBenefitType;
 		WebElement ActualTextforBenefit;

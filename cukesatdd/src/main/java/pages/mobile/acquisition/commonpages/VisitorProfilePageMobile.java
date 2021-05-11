@@ -52,8 +52,9 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(css = "div.signupCTA a:first-child")
+	@FindBy(name = "Or, Sign In to your Profile")
 	private WebElement signIn;
+	
 	
 	@FindBy(css = "div.signupCTA a.signin-font")
 	private WebElement signInLegacy;
@@ -67,7 +68,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
 
-	@FindBy(xpath = "//span[text()='Add Drugs']/parent::button")
+	@FindBy(xpath = "//button[@dtmname='Visitor Profile:Save Drugs and Doctors:Add Drugs']//span[text()='Add Drugs']")
 	private WebElement addDrugsBtn;
 
 	@FindBy(css = "a.add-provider")
@@ -219,7 +220,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@dtmid,'acq_visitor_profile')]//span[contains(text(),'Get Started')]")
 	private WebElement GetStartedDrug;
 
-	public pages.mobile.acquisition.commonpages.GetStartedPageMobile addDrug_DCERedesign() {
+	public GetStartedPageMobile addDrug_DCERedesign() {
 
 		String State = CommonConstants.getSelectedState();
 		/*
@@ -237,7 +238,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 		waitForPageLoadSafari();
 		if (validateNew(AddMyDrugsBtn))
-			return new pages.mobile.acquisition.commonpages.GetStartedPageMobile(driver);
+			return new GetStartedPageMobile(driver);
 		return null;
 	}
 	
@@ -253,8 +254,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 */
 		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
+			iosScroll(addrugs);
 			jsClickNew(addrugs);
 		} else {
+			iosScroll(addDrugsBtn);
 			jsClickNew(addDrugsBtn);
 		}
 		waitForPageLoadSafari();
@@ -285,14 +288,31 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 		try {
-			if (driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0) {
+			/*if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE)
+					&& (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
+							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))) {*/
+			String State = CommonConstants.getSelectedState();
+			/*if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE)
+					&& StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
+			if (!StringUtils.isEmpty(State)
+					&& StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan : listOfTestPlans) {
-					driver.findElement(By.xpath("//h4[text()='" + plan + "']/preceding::button[1]")).click();
+					jsClickNew(driver.findElement(By.xpath("//h4[text()='" + plan + "']/preceding::button[1]")));
+					Thread.sleep(5000);
+				}
+
+			} else if (driver.findElements(By.xpath("//span[contains(text(),'Plan Summary')]")).size() > 0) {
+				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
+				for (String plan : listOfTestPlans) {
+					jsClickNew(driver.findElement(By.xpath(
+							"//h3[contains(text(),'" + plan + "')]/preceding::button[contains(@class,'remove')][1]")));
 					Thread.sleep(5000);
 				}
 			} else
 				System.out.println("##############No saved plans available here##############");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

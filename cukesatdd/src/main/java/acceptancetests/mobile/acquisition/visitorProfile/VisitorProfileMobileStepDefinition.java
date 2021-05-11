@@ -24,7 +24,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPage;
-import pages.mobile.acquisition.commonpages.GetStartedPageMobile;
+
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.ProfileSearch;
 import pages.mobile.acquisition.commonpages.ShopperProfileAgentLogin;
@@ -32,6 +32,7 @@ import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfileTestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 /**
  * @author bnaveen4 Functionality:Visitor Profile for both AAPR and UHC
@@ -47,8 +48,6 @@ public class VisitorProfileMobileStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-
-
 
 	@Given("^I am an agent logged into the cloak in tool$")
 	public void i_am_an_agent_logged_into_the_cloak_in_tool(DataTable userData) {
@@ -199,11 +198,12 @@ public class VisitorProfileMobileStepDefinition {
 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("county");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -222,7 +222,7 @@ public class VisitorProfileMobileStepDefinition {
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
-	
+
 	}
 
 	// @Then("^Navigate to Visitor Profile page$")
@@ -388,7 +388,7 @@ public class VisitorProfileMobileStepDefinition {
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		System.out.println("vapp plan details page" + PageConstants.VPP_PLAN_DETAILS_PAGE + vppPlanDetailsPage);
+		System.out.println("vpp plan details page" + PageConstants.VPP_PLAN_DETAILS_PAGE + vppPlanDetailsPage);
 		vppPlanDetailsPage.validatingAdditionalBenefitTextInPlanDetails(additionalBenefits);
 	}
 
