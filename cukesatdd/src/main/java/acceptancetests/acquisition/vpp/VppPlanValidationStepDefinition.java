@@ -617,5 +617,156 @@ public class VppPlanValidationStepDefinition {
 			}
 	}
 	
+	//@Then("^the user navigates to OLE plan summary page and compares benefits value from excel to UI and reports into excel$")
+	@Then("^the user navigates to Welcome OLE page and compares premium value from excel to UI and reports into excel$")
+	public void exceldataValidation_OLE_planSummary(DataTable givenAttributes) throws Throwable {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		String ExcelName = givenAttributesMap.get("ExcelFile");
+		String sheetName = givenAttributesMap.get("WorkSheetName");
+		String siteType = givenAttributesMap.get("Site");
+		
+		
+		 WebDriver wd = getLoginScenario().getWebDriverNew();
+		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+			
+		
+		//Getting Date
+			DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
+			Date RunDate = new Date();
+			String DateCreated = dateFormat.format(RunDate);
+			String parentDirectory = null;
+			parentDirectory = new java.io.File(".").getCanonicalPath();
+			String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
+			String OutputFilePath = parentDirectory+"/target/PlanValidation_Results_"+ExcelName+"_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
+			
+		//Reading Excel.xls file
+			File InputFile = new File(InputFilePath);
+			FileInputStream inputStream = new FileInputStream(InputFile);
+			Workbook workbook = new HSSFWorkbook(inputStream);
+			Sheet sheet = workbook.getSheet(sheetName);
+			int lastRow = sheet.getLastRowNum();
+			Workbook ResultWorkbook = new HSSFWorkbook();
+			Sheet ResultsSheet = ResultWorkbook.createSheet("PlanBenefitsResults");
+			
+			CellStyle stylePassed = ResultWorkbook.createCellStyle();
+			stylePassed.setFillForegroundColor(IndexedColors.GREEN.getIndex());
+			stylePassed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+			
+			CellStyle styleFailed = ResultWorkbook.createCellStyle();
+			styleFailed.setFillForegroundColor(IndexedColors.RED.getIndex());
+			styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
+			  
+		//Setting First Row for Results excel
+
+			try {
+				
+				 AepVppPlanSummaryPage planSummaryPage = null;
+				 String currentCellValue = "";
+				 String currentColName = "";
+				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0;
+				 HashMap <String, String> premiumMap = new HashMap<String, String>();
+				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
+				 //Looping over total rows with values
+				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+		            {
+					 	int failureCounter = 0;int cellIndex = 0;System.out.println("INSIDE Row");
+					 	
+					 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
+		                Iterator<Cell> cellIterator = row.cellIterator();
+		                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
+   
+		                //looping through columns until an empty column is found
+		                while (cellIterator.hasNext()) 
+		                {
+		                	HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
+		                	boolean valueMatches = true;
+		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
+				             
+		                	 try {
+		                		 currentCellValue = cell.getStringCellValue();
+		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+		                	 }catch (Exception e) {
+		                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
+		                		 System.out.println(e);
+		                	 }
+			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
+			                 if(rowIndex==0) {
+								 newCell.setCellValue(cell.getStringCellValue()); 
+								 if(cell.getStringCellValue().equalsIgnoreCase("county"))
+									  countyCellNum = cellIndex;
+								 else if(cell.getStringCellValue().equalsIgnoreCase("plan year"))
+									 planYearCellNum = cellIndex;
+								 else if(cell.getStringCellValue().equalsIgnoreCase("plan name"))
+									 planNameCellNum = cellIndex;
+			                 }
+							
+							 if(rowIndex!=0) { //skip the header row
+								 if(cellIndex==0) { 
+									 
+									  String countyName = row.getCell(countyCellNum).getStringCellValue(); 
+									  String planYear = row.getCell(planYearCellNum).getStringCellValue();
+									  String planName = row.getCell(planNameCellNum).getStringCellValue();
+									  String planType = row.getCell(planNameCellNum).getStringCellValue();
+									  
+									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
+									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
+									  planSummaryPage = new AepVppPlanSummaryPage(wd);
+							
+									  planSummaryPage.Enroll_OLE_Plan(planName,planType);
+                                      //benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
+									  premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
+										 
+								 }
+
+								 if(!(currentColName.equalsIgnoreCase("plan year")||currentColName.equalsIgnoreCase("plan id qa script")||currentColName.equalsIgnoreCase("product focus")||currentColName.equalsIgnoreCase("dsnp sub type")||currentColName.equalsIgnoreCase("Error Count")||currentColName.equalsIgnoreCase("portal labels")||currentColName.equalsIgnoreCase("OON_IN")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("Link parameters")||currentColName.contains("Segment ID")||currentColName.equalsIgnoreCase("product")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("zip code")||currentColName.equalsIgnoreCase("fips"))) {	
+									 
+									 //resultMap = planSummaryPage.compareBenefits(currentColName, currentCellValue, benefitsMap); //compares the benefit value from the excel to the values from the hashmap. key = columnName, value= benefit value
+									 resultMap = planSummaryPage.comparePremium(currentColName, currentCellValue, premiumMap);
+									 if(resultMap.containsKey(false))
+										 valueMatches = false;
+									 System.out.println(currentColName + " : "+ valueMatches);
+									 if(valueMatches) 
+										 newCell.setCellStyle(stylePassed);	
+									 else {
+										 newCell.setCellStyle(styleFailed);				
+									 	  failureCounter++;
+									 }
+										 
+								 } 
+	
+								 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
+					                	 newCell.setCellValue(failureCounter);
+					             else {
+					                	 if(valueMatches) { 			//if boolean value is true then it will write only the excel value from the input sheet and mark it green
+					                		 newCell.setCellValue(cell.getStringCellValue()); 
+					                	 } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
+					                		 newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));	 
+					                	 }
+					              }
+							 } 
+
+							  cellIndex++;
+		                 }
+		            }
+			
+					File OutputFile = new File(OutputFilePath);
+					FileOutputStream outputStream = new FileOutputStream(OutputFile);
+					ResultWorkbook.write(outputStream);
+					inputStream.close();
+					outputStream.flush();			
+					outputStream.close();
+	
+			} catch (Exception e) {
+					File OutputFile = new File(OutputFilePath);
+					FileOutputStream outputStream = new FileOutputStream(OutputFile);
+					ResultWorkbook.write(outputStream);
+					inputStream.close();
+					outputStream.flush();
+					outputStream.close();
+					e.printStackTrace();
+			}
+	}
 	
 }
