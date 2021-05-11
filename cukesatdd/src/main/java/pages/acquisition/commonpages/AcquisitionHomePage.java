@@ -3758,10 +3758,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement PDPplansLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-part-d')]"));
 
-		WebElement EnrollmentBasicsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
+		//WebElement EnrollmentBasicsLink = driver.findElement(
+				//By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
 		//WebElement compareMAMSPlans = driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
 		
+		WebElement whenToEnrollLink = driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'when-to-enroll')]"));
 		WebElement FAQLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-faq')]"));
 
@@ -3775,12 +3776,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(PDPplansLink);
 		//validateNew(compareMAMSPlans);
 
-		validateNew(EnrollmentBasicsLink);
+		//validateNew(EnrollmentBasicsLink);
+		validateNew(whenToEnrollLink);
 		validateNew(FAQLink);
 
 		if (EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() && PresProvidersBenefitsLink.isDisplayed()
 				&& CostbasicsLink.isDisplayed() && MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed()
-				&& PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed() && FAQLink.isDisplayed()) {
+				&& PDPplansLink.isDisplayed() && whenToEnrollLink.isDisplayed() && FAQLink.isDisplayed()) {
 			// && FAQLink.isDisplayed()
 			// && compareMAMSPlans.isDisplayed()
 			Assertion.assertTrue(true);
