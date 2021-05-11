@@ -5805,7 +5805,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
 
-		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
 			System.out.println(
 					"****************call us Content was found macthing with the SAM call Popup  ***************");
 			Assert.assertTrue(true);

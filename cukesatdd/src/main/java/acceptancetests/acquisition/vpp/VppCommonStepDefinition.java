@@ -369,11 +369,11 @@ public class VppCommonStepDefinition {
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		if (plansummaryPage != null) {
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("Error in validating the Plan Summary Page");
-		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 
 	@Then("^the user validates below plan benefit values for the above selected plan$")
