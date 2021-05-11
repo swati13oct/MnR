@@ -9,12 +9,12 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>	    |
 
-     @regressionAARP @OLEplanSummaryBenefitsAARP01
+     @OLEplanSummaryBenefitsAARP01
     	Examples: 
       | excelPath                | workSheet | site |
       | Plan Summary Benefits_OLE_Data | OLE Sheet2021  | AARP |
 
-  @regressionUHC @OLEplanSummaryBenefitsUHC01
+	@OLEplanSummaryBenefitsUHC01
     Examples:
       | excelPath                | workSheet | site |
       | Plan Summary Benefits_OLE_Data | OLE Sheet2021  | UHC |
