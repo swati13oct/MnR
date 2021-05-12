@@ -1,3 +1,4 @@
+
 package acceptancetests.acquisition.vpp;
 
 import java.io.File;
@@ -13,8 +14,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -75,12 +74,7 @@ public class VppCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	@Before
-	public void before(Scenario scenario) {
-		this.scenario = scenario;
-	}
-	
-	private Scenario scenario;
+
 //	WebDriver wd;
 	public String PREflow = "";
 
@@ -134,8 +128,6 @@ public class VppCommonStepDefinition {
 	}
 	@When("^the user performs plan search using following information$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
-		
-		//scenario.log("Aayush Shah /n 5/7/21 - Inside step 2");
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -378,6 +370,7 @@ public class VppCommonStepDefinition {
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		VPPPlanSummaryPage plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		if (plansummaryPage != null) {
 			Assertion.assertTrue(true);
 		} else
@@ -1538,7 +1531,7 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
 		PlanDetailsPage vppPlanDetailsPage = vppPlanSummaryPage.navigateToPlanDetails(planName, planType);
 		if (vppPlanDetailsPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, vppPlanDetailsPage);
@@ -4235,8 +4228,8 @@ public class VppCommonStepDefinition {
 		String plantype = givenAttributesMap.get("Plan Type");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-	//	if (!(MRScenario.environment.equalsIgnoreCase("offline")
-	//			|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme"))) {
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 			
 		
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -4246,7 +4239,45 @@ public class VppCommonStepDefinition {
 		if (!plantype.equalsIgnoreCase("MS"))
 			plansummaryPage.handlePlanYearSelectionPopup();
 		}
-	//}
+	}
+	
+	@Given("^the user directly navigates to welcome OLE page$")
+	public void the_user_navigates_to_Welcome_OLE_Pages(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String path = memberAttributesMap.get("PagePath");
+		
+		String PlanName = memberAttributesMap.get("Plan Name");
+		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		
+		//String County = "St. Louis County";
+		//String ZipCode = "63043";
+		//String PlanYear = "2020"; 
+
+		String PlanYear = memberAttributesMap.get("Plan Year");
+		String PlanPremium = "";
+		String ZipCode = "";
+		String County = "";
+		String PlanType = memberAttributesMap.get("Plan Type");
+		String SiteName;
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
+		//String plantype = memberAttributesMap.get("Plan Type");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : " + path);
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		WelcomePage welcomepage = aquisitionhomepage.navigateToPathOLE(path);
+		
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+	}
 	@Then("^user clicks on Learn About Medicare$")
 	public void user_clicks_on_Learn_About_Medicare() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -4283,4 +4314,18 @@ public class VppCommonStepDefinition {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 				plansummaryPage.validateGroupPlanMArkettingBullets() ;
 	}
+	
+	@And("^the user views the plans for below plan type$")
+	public void user_view_plans_of_plan_type(DataTable givenAttributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String plantype = givenAttributesMap.get("Plan Type");
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+		VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		plansummaryPage.viewPlanSummary(plantype);
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+	}
+
 }

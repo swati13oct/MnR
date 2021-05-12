@@ -760,4 +760,114 @@ Feature: 1.12 ACQ - Global Components Validation
     @learnAboutMedicareNav_UHC
     Examples: 
       | site |
+<<<<<<< HEAD
       | UHC  |
+=======
+      | UHC  |
+
+      
+       Scenario Outline: To verify the Geo Targeting Link for Medicare Supplement Plans on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user updates the state drop down value on the home page
+      | State | <state> |
+      | Code  | <code>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state>      |
+      | Code       | <code>       |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+    Then the user clicks on browser back button
+    When user updates the state drop down value on the home page
+      | State | <state1> |
+      | Code  | <code1>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state1>     |
+      | Code       | <code1>      |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+    Then the user clicks on browser back button
+    When user updates the state drop down value on the home page
+      | State | <state2> |
+      | Code  | <code2>  |
+    Then the user clicks on medicare supplement plans from shop for a plan
+    Then user validates the url for Medicare Supplement Insurance Plans
+      | State      | <state2>     |
+      | Code       | <code2>      |
+      | ClassicUrl | <classicurl> |
+      | GenericUrl | <url>        |
+
+    @GeoTarget_MedSup_GlobalCompsAARP @regressionAARP
+    Examples: 
+      | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
+      | AARP | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
+
+    @GeoTarget_MedSup_GlobalCompsUHC @regressionUHC
+    Examples: 
+      | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
+      | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
+
+  Scenario Outline: To verify the links under Learn About Medicare on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user hovers over the learn about medicare
+    When user click on "Introduction" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Eligibility" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Coverage Options" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Prescriptions, Providers & Benefits" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Cost Basics" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Advantage Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Supplement Insurance" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare Prescription Drug Plans" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "When to Enroll" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user click on "Medicare FAQ" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+		When user click on "Articles and Special Topics" link under learn about medicare
+    Then user should be navigated to respective medicare education page
+    Then the user clicks on browser back button
+    Then the user hovers over the learn about medicare
+    When user enter email and submit in email section
+    Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
+    
+    @learnAboutMedicareNav_AARP @regressionAARP
+    Examples: 
+      | site |
+      | AARP |
+      
+    @learnAboutMedicareNav_UHC @regressionUHC
+    Examples: 
+      | site|  
+      | UHC|
+      
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd/tree/testng_develop

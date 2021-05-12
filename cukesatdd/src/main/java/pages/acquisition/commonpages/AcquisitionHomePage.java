@@ -287,8 +287,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public WebElement brokerHeader;
 
 	/* LearnAboutMedicare link */
-	//@FindBy(xpath = "//*[@id='ghn_lnk_3']")
-	@FindBy(xpath="//a[contains(text(),'Learn About Medicare')]")
+	@FindBy(xpath = "//*[@id='ghn_lnk_3']")
+	//@FindBy(xpath="//a[contains(text(),'Learn About Medicare')]")
 	private WebElement lnkLearnAboutMedicare;
 
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
@@ -650,13 +650,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@dtmname,'TFN Link') and contains(text(),'1-')]/..")
 	private WebElement CallSamTFNInfo;
 	
-	@FindBy(xpath = "//div[contains(@class,'ums hrs')]")
+	@FindBy(xpath = "//div[contains(@class,'calluswidgets')]//p[3]")
 	private WebElement footertextsectionMedsuppTFNtimezone;
 
 	@FindBy(xpath = "(//div[@class='label-icon']/h5)[7]")
 	private WebElement footertextsectionHeadermedsupp;
 
-	@FindBy(xpath = "//div[contains(@class,'ums')]/p")
+	@FindBy(xpath = "//div[contains(@class,'calluswidgets')]//p[1]")
 	private WebElement footertextsectioncallusMedsupp;
 	
 	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[2]")
@@ -3754,14 +3754,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'/medicare-education/medicare-advantage-plans')]"));
 		WebElement MedSuppPlansLink = driver.findElement(
 				//By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-supplement-plans.html')]"));
-		By.xpath("//*[contains(@class, 'sctn')]//a[contains(text(),'Medicare Supplement Insurance Plans')]"));
+		By.xpath("//*[contains(@class, 'sctn')]//a[contains(text(),'Medicare Supplement Insurance')]"));
 		WebElement PDPplansLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-part-d')]"));
 
-		WebElement EnrollmentBasicsLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
+		//WebElement EnrollmentBasicsLink = driver.findElement(
+				//By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
 		//WebElement compareMAMSPlans = driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'enrollment-and-changing-plans')]"));
 		
+		WebElement whenToEnrollLink = driver.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'when-to-enroll')]"));
 		WebElement FAQLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-faq')]"));
 
@@ -3775,12 +3776,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(PDPplansLink);
 		//validateNew(compareMAMSPlans);
 
-		validateNew(EnrollmentBasicsLink);
+		//validateNew(EnrollmentBasicsLink);
+		validateNew(whenToEnrollLink);
 		validateNew(FAQLink);
 
 		if (EligibilityTxt.isDisplayed() && ChoicesBtn.isDisplayed() && PresProvidersBenefitsLink.isDisplayed()
 				&& CostbasicsLink.isDisplayed() && MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed()
-				&& PDPplansLink.isDisplayed() && EnrollmentBasicsLink.isDisplayed() && FAQLink.isDisplayed()) {
+				&& PDPplansLink.isDisplayed() && whenToEnrollLink.isDisplayed() && FAQLink.isDisplayed()) {
 			// && FAQLink.isDisplayed()
 			// && compareMAMSPlans.isDisplayed()
 			Assertion.assertTrue(true);
@@ -5805,7 +5807,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println("Expected TFN member: " + ExpectedCallSamTFNMember);
 		System.out.println("Actual TFN member: " + ActualCallSamTFNMember);
 
-		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+		if (ExpectedCallSamTFNMember.contains(ActualCallSamTFNMember)) {
 			System.out.println(
 					"****************call us Content was found macthing with the SAM call Popup  ***************");
 			Assert.assertTrue(true);
@@ -6366,7 +6368,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.assertTrue("Navigation to Medicare Advantage Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-advantage-plans.html"));
 			break;
 			
-		case "Medicare Supplement Insurance Plans":
+		case "Medicare Supplement Insurance":
 			Assertion.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-supplement-plans.html"));
 			break;
 			
@@ -6374,8 +6376,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-part-d.html"));
 			break;
 			
-		case "Enrollment Basics":
-			Assertion.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"));
+		case "When to Enroll":
+			Assertion.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("/medicare-education/when-to-enroll.html"));
 			break;
 			
 		case "Medicare FAQ":
@@ -6403,4 +6405,24 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		System.out.println(expectedMsg);
 		Assertion.assertTrue("Expected message is not displayed", actualMsg.contains(expectedMsg));
 	}
+	
+	public WelcomePage navigateToPathOLE(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		if(driver.getCurrentUrl().contains("welcome")){
+			return new WelcomePage(driver);
+		}
+		else {
+			System.out.println("Navigation to OLE Page is failed");
+			return null;
+		}
+		}
 }

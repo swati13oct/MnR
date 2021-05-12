@@ -1007,6 +1007,12 @@ public class CommonConstants {
 	public static final String STATE_SELECTED = "state";
 	
 	public static final String LEARNABOUTMEDICARE_LINK = "linkName";
+	
+	public static final String PSC_CODE="pscCode";
+
+	public static final String FED_TFN="fedTfn";
+
+	public static final String MEDSUP_TFN="medsupTfn";
 }
 
 

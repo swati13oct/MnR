@@ -1,4 +1,4 @@
-@agentAppointment @fixedTestCaseTest
+#@agentAppointment @fixedTestCaseTest
 Feature: 1.06 - To test request an appointment with an agent flow
 
   Scenario Outline: TID:<TCID> Verify request an appointment with an agent flow for zipcode in <site> site
@@ -9,12 +9,12 @@ Feature: 1.06 - To test request an appointment with an agent flow
     Then the user fills the form out and submits the agent appointment
       | Zipcode | <zipcode> |
 
-    @agentAppointmentByZipSanity_AARP @prodRegression @regressionAARP @sanity
+   # @agentAppointmentByZipSanity_AARP @prodRegression @regressionAARP @sanity
     Examples: 
       | TCID    | zipcode | site |
       | F266872 |   90002 | AARP |
 
-    @agentAppointmentByZipSanity_UHC @regressionUHC
+   # @agentAppointmentByZipSanity_UHC @regressionUHC
     Examples: 
       | TCID    | zipcode | site |
       | F266872 |   90002 | UHC  |
@@ -32,17 +32,17 @@ Feature: 1.06 - To test request an appointment with an agent flow
     When the user clicks on Agent link and validates the correct URL is loaded
       | UHC Agent URL | <UHCUrl> |
 
-    @agentAppointmentByZipSanity_AARP @regressionAARP
+   # @agentAppointmentByZipSanity_AARP @regressionAARP
     Examples: 
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |
 
-    @agentAppointmentByZipSanity_UHC @prodRegression @regressionUHC @sanity
+   # @agentAppointmentByZipSanity_UHC @prodRegression @regressionUHC @sanity
     Examples: 
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |
 
-  @Request_Agent_Appointment_Right_Rail_AARP
+ # @Request_Agent_Appointment_Right_Rail_AARP
   Scenario Outline: UID: <UID> - To Test Request Agent Appointment E2E on AARP site
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -57,7 +57,7 @@ Feature: 1.06 - To test request an appointment with an agent flow
       | Medicare Prescription Drug (Part D) Plans |
       | Medicare Special Needs Plans              |
 
-    ##
+
     Examples: 
       | UID     | zipcode |
       | [blank] |   88009 |

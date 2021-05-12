@@ -1,9 +1,11 @@
 package acceptancetests.acquisition.visitorprofile;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.cucumber.java.en.Given;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -488,11 +490,11 @@ public class VisitorProfileStepDefinition {
 		visitorProfile.clickEditDrugsPlancard();
 	}
 
-	@When("^user clicks on edit drugs button globally$")
-	public void user_clicks_on_edit_drugs_button_globally() {
+	@When("^user clicks on Add drugs button globally on shopper profile page$")
+	public void user_clicks_on_add_drugs_button_globally() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.clickEditDrugs();
+		visitorProfile.clickAddDrugsBtn();
 	}
 
 	@And("^user validates the added plans on new visitor profile page of AARP site$")
@@ -551,7 +553,7 @@ public class VisitorProfileStepDefinition {
 	public void user_clears_the_existing_drugs_in_visitor_profile() {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		visitorProfile.clearDrugsFromPlanCard();
+		visitorProfile.clearDrugs();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 
@@ -622,4 +624,16 @@ public class VisitorProfileStepDefinition {
 		visitorProfile.validateNewHeader(data);
 		
 	}
+
+	@Given("^the user validates Drugs and provides are added or not added on shopper profile page as follows$")
+	public void the_user_validates_drugs_provides_as_per_flag(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String DrugsFlag = memberAttributesMap.get("DrugsFlag");
+		String ProvidersFlag = memberAttributesMap.get("ProvidersFlag");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		visitorProfile.ValidateDrugsProviders(DrugsFlag, ProvidersFlag);
+	}
+
 }
