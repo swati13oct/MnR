@@ -60,7 +60,8 @@ public class SAMIconsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateCallSam();
 		//aquisitionhomepage.validateCallSamContent();
-		aquisitionhomepage.validateCallpopup();
+		//aquisitionhomepage.validateCallpopup();
+		aquisitionhomepage.validateTFNCallpopup();
 		/*
 		 * if(returnval==null){ Assertion.fail("No TFN found"); }else{
 		 * Assertion.assertTrue(true); }
