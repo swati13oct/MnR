@@ -4451,7 +4451,7 @@ public class VppPlanCompareMobile {
 		planComparePage.validateCallpopup();
 	}
 	
-	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
+	/*@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_Page()
 			throws InterruptedException {
 
@@ -4459,7 +4459,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSamContent();
 
-	}
+	}*/
 	
 	@Then("^validate OON Toggle is displayed on medical and additional benefits$")
 	public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {
