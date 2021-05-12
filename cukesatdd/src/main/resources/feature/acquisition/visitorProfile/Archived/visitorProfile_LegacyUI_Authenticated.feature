@@ -27,7 +27,7 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Authenticated
       | Drugname | <drug1> |
     Then user delets all the added drugs on visitor profile page
 
-    @visitorProfile_AARP @regressionAARP
+    @visitorProfile_AARP @regressionAARP 
     Examples: 
       | site | state    | userName | password   | drug1   | zipCode |
       | AARP | Virginia | mnrqevd5 | Password@1 | Lipitor |   20120 |

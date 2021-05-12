@@ -1,7 +1,7 @@
 @fixedTestCaseTest @vppBlayer
 Feature: 2.02-Plan summary in vpp flow UMS
 
-  @planDetailsUMS @vppBlayerSmoke @vppBlayerNextYrSmoke #@vbfGate
+  @planDetailsUMS @vppBlayerSmoke @vppBlayerNextYrSmoke
   Scenario Outline: Verify plan details in UMS site
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site

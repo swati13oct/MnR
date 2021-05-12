@@ -49,7 +49,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     #     | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
     #     | 15582 | AARP |   00602 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | True                  | True             | True                 |
     #     | 15582 | AARP |   96950 |       15 | None           |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | Open 24 hours | False                 | True             | True                 |
-    @prodRegression @regressionAARP
+    @prodRegression @regressionAARP @vbfGate
     Examples: 
       | TID   | site | zipcode | distance | countyName     | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | AARP |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
@@ -132,7 +132,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | 15582 | UHC  |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
       | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
-    @PharmacyLocatorCommonProd_UHC @prodRegression @sanity
+    @PharmacyLocatorCommonProd_UHC @prodRegression @sanity @vbfGate
     Examples: 
       | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
@@ -155,7 +155,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
     #------ English -----------------------------------
     And the user validates header section content on site
 
-    @PharmacyLocatorCommonAARP07 @regressionAARP
+    @PharmacyLocatorCommonAARP07 @regressionAARP @vbfGate
     Examples: 
       | TID   | site | state     |
       | xxxxx | AARP | Ohio      |
@@ -181,7 +181,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | site |
       | AARP |
 
-    @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC
+    @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC @vbfGate
     Examples: 
       | site |
       | UHC  |
@@ -203,7 +203,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | site |
       | AARP |
 
-    @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC
+    @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC @vbfGate
     Examples: 
       | site |
       | UHC  |

@@ -77,12 +77,13 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanPremium = givenAttributesMap.get("Premium");
 		String County = givenAttributesMap.get("County Name");
@@ -101,7 +102,7 @@ public class OLEStepDefinitionMobile {
 		// Hard Coding OLE Welcome Page URL for Build Validation Test
 		String OLE_URL = "https://www.team-f-aarpmedicareplans.ose-elr-core.optum.com/content/aarpmedicareplans/en/enrollment.html";
 
-		WebDriver wd = getLoginScenario().getWebDriver();
+		wd = (AppiumDriver) getLoginScenario().getMobileDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		WelcomePageMobile welcomePage = new WelcomePageMobile(wd, OLE_URL);
@@ -112,25 +113,26 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
-	
+
 	@Given("^the user navigates to following Campaign acquisition site page$")
 	public void the_user_navigates_to_following_medicare_acquisition_site(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : "+path);
+		System.out.print("Path to Acq page : " + path);
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);	
-		
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
 		aquisitionhomepage.navigateToPath(path);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);	
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
@@ -150,12 +152,13 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		// String PlanName = (String)
@@ -166,7 +169,7 @@ public class OLEStepDefinitionMobile {
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		
+
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
@@ -182,7 +185,7 @@ public class OLEStepDefinitionMobile {
 		} else {
 			VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			//TFN = planSummaryPage.GetTFNforPlanType();
+			// TFN = planSummaryPage.GetTFNforPlanType();
 
 			// PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
@@ -196,14 +199,14 @@ public class OLEStepDefinitionMobile {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-		
+
 		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
 		System.out.println("Plan County Name is : " + County);
 		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		//System.out.println("TFN for Plan Type is : " + TFN);
+		// System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 
@@ -215,21 +218,19 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
-	
-	
-	
 	@Then("^the user navigates to clicks on Enroll Now for AARP site to start the OLE flow$")
 	public void the_user_navgates_to_clicks_on_Enroll_Now_to_start_the_OLE_flow(DataTable planAttributes)
 			throws Throwable {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
 
 		String plantype = givenAttributesMap.get("Plan Type");
@@ -294,12 +295,13 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
@@ -429,12 +431,13 @@ public class OLEStepDefinitionMobile {
 	public void the_user_get_Plan_Details_for_the_following_Plan(DataTable planAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		WelcomePageMobile welcomePage;
@@ -470,13 +473,14 @@ public class OLEStepDefinitionMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-	//	if (plansummaryPage.validatePlanNames(planType)) {
-			String SiteName = "AARP_ACQ";
-			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-		//	Assertion.assertTrue(true);
-		//} else {
-		//	Assertion.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
-		//}
+		// if (plansummaryPage.validatePlanNames(planType)) {
+		String SiteName = "AARP_ACQ";
+		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		// Assertion.assertTrue(true);
+		// } else {
+		// Assertion.fail("Error validating availables plans for selected plantype in
+		// VPP plan summary page");
+		// }
 	}
 
 	// /**
@@ -538,59 +542,64 @@ public class OLEStepDefinitionMobile {
 	public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-
-		//String DateOfBirth = memberAttributesMap.get("DOB");
+		// String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);			
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
 	}
+
 	@Then("^the site user clicks on continue application until confirmation page$")
 	public void conitnue_application_until_confirmation_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
-		String DateOfBirth = memberAttributesMap.get("DOB");			
+		String DateOfBirth = memberAttributesMap.get("DOB");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
 		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 
 	}
-	
+
 	@Then("^the site user fills all the details in MedsuppPage$")
 	public void user_fills_all_details_medsupp(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
-	
+
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
 	}
+
 	@Then("^the user validates Learn more modal for Welcome OLE$")
 	public void the_user_validates_Learn_more_modal_for_OLE() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
@@ -661,11 +670,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
 		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
-		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow = Flags.getGherkinRows(); for (int i
+		 * = 0; i < personalAttributesRow.size(); i++) {
+		 * PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String medicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
@@ -720,12 +730,13 @@ public class OLEStepDefinitionMobile {
 	public void the_user_enters_Medicare_Details_in_medicare_info_pages(DataTable planAttributes) throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String CardType = MedicareDetailsMap.get("Card Type");
 
 		Random rnd = new Random();
@@ -761,12 +772,13 @@ public class OLEStepDefinitionMobile {
 	public void the_user_enters_Medicare_Details_in_medicare_info_page(DataTable planAttributes) throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String CardType = MedicareDetailsMap.get("Card Type");
 		if (CardType.contains("HICN")) {
 			Random rnd = new Random();
@@ -809,16 +821,18 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("Medicare Info data entry failed");
 	}
+
 	@Then("^the site user clicks on Start Application Button proceed to next pages$")
 	public void Start_application_button(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
@@ -830,17 +844,18 @@ public class OLEStepDefinitionMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.RESUMEKEY, resumeKey);
 
 	}
-	
+
 	@Then("^user clicks on resume application button$")
 	public void click_resume_application(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
@@ -859,12 +874,13 @@ public class OLEStepDefinitionMobile {
 	public void the_user_signs_in_with_optum_Id(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
-		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 
@@ -887,7 +903,6 @@ public class OLEStepDefinitionMobile {
 		}
 
 	}
-
 
 	@Then("^the user validates TFN in Medicare Info OLE Right Rail$")
 	public void the_user_validates_TFN_in_Medicare_Info_OLE_Right_Rail() throws Throwable {
@@ -946,32 +961,33 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail();
 		}
 	}
-	
+
 	@Given("^the user is on the Acquisition Site landing page and navigate to Shop a plan page mobile$")
 	public void validateUserIsOnAcquisitionSiteNavToShopPlanMobile(DataTable inputAttributes) {
-		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
-		
+
 		wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
-		//aquisitionhomepage.openPRE();
+		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
-		
-		
-		aquisitionhomepage.selectState("Select State"); //note: default it to no state selected for predictable result
+
+		aquisitionhomepage.selectState("Select State"); // note: default it to no state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-			aquisitionhomepage);
-/*		
-		PharmacySearchPageMobile pharmacySearchPage = aquisitionhomepage.navigateToShopPlanMobile();
-		 
-		//PharmacySearchPage pharmacySearchPage=new PharmacySearchPage(aquisitionhomepage.driver);
-		
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE,
-				pharmacySearchPage);*/
-		
+		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+		/*
+		 * PharmacySearchPageMobile pharmacySearchPage =
+		 * aquisitionhomepage.navigateToShopPlanMobile();
+		 * 
+		 * //PharmacySearchPage pharmacySearchPage=new
+		 * PharmacySearchPage(aquisitionhomepage.driver);
+		 * 
+		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.
+		 * PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		 */
+
 	}
 
 	@Then("^the user validates Learn more modal for Medicare Information Page$")
@@ -1093,11 +1109,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
 		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
-		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow = Flags.getGherkinRows(); for (int i
+		 * = 0; i < personalAttributesRow.size(); i++) {
+		 * PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String MedicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
@@ -1126,11 +1143,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
 		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
-		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow = Flags.getGherkinRows(); for (int i
+		 * = 0; i < personalAttributesRow.size(); i++) {
+		 * PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 		/*
 		 * String alreadyEnrolled = (String)
 		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
@@ -1172,11 +1190,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
 		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
-		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow = Flags.getGherkinRows(); for (int i
+		 * = 0; i < personalAttributesRow.size(); i++) {
+		 * PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 		/*
 		 * String alreadyEnrolled = (String)
 		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
@@ -1217,12 +1236,13 @@ public class OLEStepDefinitionMobile {
 	public void user_navigates_to_use_and_disclosure_page(DataTable planAttributes) throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		UseAndDisclosureAuthorizationPageMobile useranddisclosure = (UseAndDisclosureAuthorizationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE);
 		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
@@ -1244,11 +1264,13 @@ public class OLEStepDefinitionMobile {
 	public void user_fill_information_Preliminary_Questions_page(DataTable personalAttributes) {
 		Map<String, String> personalAttributesMap = new HashMap<String, String>();
 		personalAttributesMap = DataTableParser.readDataTableAsMaps(personalAttributes);
-		/*List<DataTableRow> personalAttributesRow = personalAttributes.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			personalAttributesMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow =
+		 * personalAttributes.getGherkinRows(); for (int i = 0; i <
+		 * personalAttributesRow.size(); i++) {
+		 * personalAttributesMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String alreadyEnrolled = (String) getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG);
 		boolean alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true : false;
 		if (alreadyEnrolled_Flag) {
@@ -1483,11 +1505,12 @@ public class OLEStepDefinitionMobile {
 		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details(MemberDetailsMap);
@@ -1522,11 +1545,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details_Other(MemberDetailsMap);
@@ -1553,11 +1577,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details_Other_dsnp(MemberDetailsMap);
@@ -1778,18 +1803,19 @@ public class OLEStepDefinitionMobile {
 		 * 
 		 * getLoginScenario().saveBean(OLE_PageConstants.
 		 * OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
-		 * System.out.println("OLE SEP Page is Displayed"); Assertion.assertTrue(true); }
-		 * else Assertion.fail("OLE SEP Page is NOT Displayed"); //}
+		 * System.out.println("OLE SEP Page is Displayed"); Assertion.assertTrue(true);
+		 * } else Assertion.fail("OLE SEP Page is NOT Displayed"); //}
 		 */
 
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
-		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = personalInformationPage
@@ -1830,7 +1856,8 @@ public class OLEStepDefinitionMobile {
 
 		boolean Validation_Status = specialElectionPeriodPage.validate_plan_details(PlanDetailsMap);
 		if (Validation_Status) {
-			System.out.println("Plan Details Validation in OLE SEP PAGE : " + Validation_Status + " - Validation Passed");
+			System.out
+					.println("Plan Details Validation in OLE SEP PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
 			Assertion.assertTrue(true);
 		} else {
@@ -2008,25 +2035,26 @@ public class OLEStepDefinitionMobile {
 		 */
 		Map<String, String> SEPoptionsFlagMap = new HashMap<String, String>();
 		SEPoptionsFlagMap = DataTableParser.readDataTableAsMaps(SEPoptions);
-		/*List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			SEPoptionsFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow = SEPoptions.getGherkinRows(); for
+		 * (int i = 0; i < personalAttributesRow.size(); i++) {
+		 * SEPoptionsFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
 		String optionsData = SEPoptionsFlagMap.get("Option Data");
 
-
-			SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
-			specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
-			if (specialElectionPeriodPage != null) {
+		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
+		if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
 			System.out.println("OLE SEP page Options Selected : Next Button enabled");
 		} else
 			Assertion.fail("OLE SEP page Options NOT Selected : Next Button NOT enabled");
 
-		//}
+		// }
 	}
 
 	@Then("^the user navigates to Coverage and Health Information Page$")
@@ -2097,11 +2125,12 @@ public class OLEStepDefinitionMobile {
 		 */
 		Map<String, String> QuestionMap = new HashMap<String, String>();
 		QuestionMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> personalAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			QuestionMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow = arg1.getGherkinRows(); for (int i
+		 * = 0; i < personalAttributesRow.size(); i++) {
+		 * QuestionMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String PDPquestionFlag = QuestionMap.get("PDP Question");
 		String LongTermQuestionFlag = QuestionMap.get("LongTerm Question");
 
@@ -2304,11 +2333,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
 		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
-		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			RiderFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow = Flags.getGherkinRows(); for (int i
+		 * = 0; i < personalAttributesRow.size(); i++) {
+		 * RiderFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String RiderFlag = RiderFlagMap.get("Rider Flag");
 		if (RiderFlag.contains("true")) {
 			PlanPremiumPageMobile planPremiumPage = (PlanPremiumPageMobile) getLoginScenario()
@@ -2339,11 +2369,12 @@ public class OLEStepDefinitionMobile {
 		 */
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
 		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
-		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			RiderFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
-					personalAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> personalAttributesRow = Flags.getGherkinRows(); for (int i
+		 * = 0; i < personalAttributesRow.size(); i++) {
+		 * RiderFlagMap.put(personalAttributesRow.get(i).getCells().get(0),
+		 * personalAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String RiderFlag = RiderFlagMap.get("Rider Flag");
 		if (RiderFlag.contains("true")) {
 			SupplementalBenefitsPageMobile ridersPage = (SupplementalBenefitsPageMobile) getLoginScenario()
@@ -2411,11 +2442,12 @@ public class OLEStepDefinitionMobile {
 		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		AuthorizationPageMobile authorizationPage = (AuthorizationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 		boolean Validation_Status = authorizationPage.validate_required_field_representative(MemberDetailsMap);
@@ -2655,12 +2687,13 @@ public class OLEStepDefinitionMobile {
 			throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planname = givenAttributesMap.get("Plan Name");
 		PrelimineryQuestionsPageMobile prelimineryQuestionsPage = (PrelimineryQuestionsPageMobile) getLoginScenario()
@@ -2732,11 +2765,12 @@ public class OLEStepDefinitionMobile {
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
-		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		return memberAttributesMap;
 	}
 
@@ -2745,12 +2779,13 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String SiteId = givenAttributesMap.get("SiteId");
 		String PBPNumber = givenAttributesMap.get("PBPNumber");
@@ -2854,12 +2889,13 @@ public class OLEStepDefinitionMobile {
 			DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("PlanName");
 		String plantype = givenAttributesMap.get("Plan Type");
@@ -2914,12 +2950,13 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("PlanName");
 		String plantype = givenAttributesMap.get("Plan Type");
@@ -2974,12 +3011,13 @@ public class OLEStepDefinitionMobile {
 	public void the_User_Validates_Marketing_Bullets_for_Welcome_OLE(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("PlanName");
 		// String plantype = givenAttributesMap.get("Plan Type");
@@ -3015,12 +3053,13 @@ public class OLEStepDefinitionMobile {
 			throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("PlanName");
 		// String plantype = givenAttributesMap.get("Plan Type");
@@ -3063,18 +3102,19 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail();
 		}
 	}
-	
+
 	@When("^the user Click on Is my Provider covered links$")
 	public void clickonProvidercoveredlinks(DataTable Planname) {
 		{
 			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 			plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-			/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-			for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-						plannameAttributesRow.get(i).getCells().get(1));
-			}*/
+			/*
+			 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+			 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+			 * 
+			 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+			 * plannameAttributesRow.get(i).getCells().get(1)); }
+			 */
 			String planName = plannameAttributesMap.get("PlanName");
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -3098,19 +3138,19 @@ public class OLEStepDefinitionMobile {
 
 		}
 	}
-	
 
 	@Then("^User store the information provided from rally to vpp page$")
 	public void user_store_the_information_provided_from_rally_to_vpp(DataTable givenAttributes) {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("PlanName");
 
@@ -3144,7 +3184,6 @@ public class OLEStepDefinitionMobile {
 
 	}
 
-
 	@Then("^the user navigates to Medicare Information Page for DSNP$")
 	public void the_user_navigates_to_Medicare_Information_Page_for_DSNP() throws Throwable {
 		/*
@@ -3175,12 +3214,13 @@ public class OLEStepDefinitionMobile {
 			throws Throwable {
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String CardType = MedicareDetailsMap.get("Card Type");
 
 		Random rnd = new Random();
@@ -3228,11 +3268,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		boolean medicareInfoPageLongTerm = medicareInfoPage.answer_following_questionsLongTerm(MemberDetailsMap);
@@ -3255,11 +3296,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		boolean medicareInfoPageLongTerm = medicareInfoPage
@@ -3284,11 +3326,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String plantype = MemberDetailsMap.get("Plan Type");
 		String[] dateArray = null;
@@ -3297,7 +3340,8 @@ public class OLEStepDefinitionMobile {
 		// getLoginScenario().getBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE);
 		// boolean ConfirmationPage_Status =
 		// oleConfirmationPage.validate_plan_details(MemberDetailsMap);
-		// Assertion.assertFalse("Confirmation Page Validation",ConfirmationPage_Status);
+		// Assertion.assertFalse("Confirmation Page
+		// Validation",ConfirmationPage_Status);
 
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			OLEconfirmationPageMobile OLEGPSValidation = (OLEconfirmationPageMobile) getLoginScenario()
@@ -3525,11 +3569,12 @@ public class OLEStepDefinitionMobile {
 	public void the_user_validates_Medicaid_Number_Confirm_Eligibility_Page(DataTable arg1) throws Throwable {
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		boolean MedicaidInformationStatus = medicareInfoPage.validate_Medicaid_Number_CEP(MemberDetailsMap);
@@ -3547,12 +3592,13 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
 		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
-		/*List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = Medicareoptions.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPagemobile specialElectionPeriodPage = personalInformationPage
@@ -3578,64 +3624,65 @@ public class OLEStepDefinitionMobile {
 		VisitorProfilePageMobile visitorProfilePage = personalInformationPage.saveAndReturnLater();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
-	
+
 	@Then("^the user selects payment type$")
-	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
+	public void the_user_selects_payment_type(DataTable arg1) throws Throwable {
 		boolean flag = false;
 		Map<String, String> paymentInformationMap = new HashMap<String, String>();
 		paymentInformationMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> givenAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			paymentInformationMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * paymentInformationMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String payType = paymentInformationMap.get("Payment Type");
 		String cardNo = paymentInformationMap.get("Card No");
-		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo);   //.substring(cardNo.length()-4));
+		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NUMBER, cardNo); // .substring(cardNo.length()-4));
 		String cardExpirationMonth = paymentInformationMap.get("Card Expiration Month");
-		String cardExpirationYear =  paymentInformationMap.get("Card Expiration Year");
+		String cardExpirationYear = paymentInformationMap.get("Card Expiration Year");
 		String cardExpirationDate = cardExpirationMonth + cardExpirationYear;
 		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_EXPIRATION_DATE, cardExpirationDate);
 		String cardHolderFirstName = paymentInformationMap.get("Card Holder First Name");
 		String cardHolderLastName = paymentInformationMap.get("Card Holder Last Name");
-		String cardHolderName = cardHolderFirstName+" "+cardHolderLastName;
+		String cardHolderName = cardHolderFirstName + " " + cardHolderLastName;
 		getLoginScenario().saveBean(oleCommonConstants.CREDIT_CARD_NAME_ON_CARD, cardHolderName);
-		System.out.println("The payment type selected is "+payType);
-		PlanPremiumPageMobile planPremiumPage = (PlanPremiumPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
+		System.out.println("The payment type selected is " + payType);
+		PlanPremiumPageMobile planPremiumPage = (PlanPremiumPageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
 		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_METHOD, payType);
 		System.out.println("validate premium value");
 		boolean result = planPremiumPage.validatePremiumValue();
-		if(!result)	{
-		if(payType.equalsIgnoreCase("Pay by Mail")) {
-		flag = planPremiumPage.validatePayByMail();
-		}else if(payType.equalsIgnoreCase("Credit Card")) {
-			flag = planPremiumPage.validateCreditCard(cardNo, cardExpirationMonth, cardExpirationYear, cardHolderName);	
-		}else if(payType.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
-			flag = planPremiumPage.validateSocialSecurity();	
+		if (!result) {
+			if (payType.equalsIgnoreCase("Pay by Mail")) {
+				flag = planPremiumPage.validatePayByMail();
+			} else if (payType.equalsIgnoreCase("Credit Card")) {
+				flag = planPremiumPage.validateCreditCard(cardNo, cardExpirationMonth, cardExpirationYear,
+						cardHolderName);
+			} else if (payType.equalsIgnoreCase("Social Security or Railroad Retirement Benefit")) {
+				flag = planPremiumPage.validateSocialSecurity();
+			}
+			if (flag) {
+				System.out.println("Payment is passed");
+				Assertion.assertTrue(true);
+			} else {
+				System.out.println("Payment is failed");
+				Assertion.fail("Payment is failed");
+			}
+
 		}
-		if (flag) {
-			System.out.println("Payment is passed");
-			Assertion.assertTrue(true);
-		}
-		else {
-			System.out.println("Payment is failed");
-			Assertion.fail("Payment is failed");
-	}
-	
-		}
-		
+
 		else {
 			flag = planPremiumPage.validateNoMonthlyPremium();
 			if (flag) {
 				System.out.println("No Monthly Premium validation is passed");
 				Assertion.assertTrue(true);
-			}
-			else {
+			} else {
 				System.out.println("No Monthly Premium validation is failed");
 				Assertion.fail("No Monthly Premium validation is failed");
 			}
 		}
 	}
-	
+
 }

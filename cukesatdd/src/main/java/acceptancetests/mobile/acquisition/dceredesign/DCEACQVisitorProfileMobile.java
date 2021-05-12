@@ -49,7 +49,7 @@ public class DCEACQVisitorProfileMobile {
 		VisitorProfilePageMobile visitorProfilePage = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesign();
+		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesigns();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
@@ -148,7 +148,7 @@ public class DCEACQVisitorProfileMobile {
 		pages.mobile.acquisition.commonpages.VisitorProfilePageMobile visitorProfilePage = (pages.mobile.acquisition.commonpages.VisitorProfilePageMobile) getLoginScenario().
 				getBean(PageConstants.VISITOR_PROFILE_PAGE);
 
-		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesign();
+		GetStartedPageMobile getStartedPage = visitorProfilePage.addDrug_DCERedesigns();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 			getLoginScenario().saveBean(PageConstants.DRUG_COST_ESTIMATOR_PAGE, getStartedPage);

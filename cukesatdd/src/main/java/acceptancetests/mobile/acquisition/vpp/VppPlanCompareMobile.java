@@ -1429,7 +1429,7 @@ public class VppPlanCompareMobile {
 	}
 
 	@Then("^the user Click on Look up your Provider button$")
-	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
+	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() throws InterruptedException {
 
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -3828,6 +3828,25 @@ public class VppPlanCompareMobile {
 		
 	}
 	
+	@Then("^user fills out medsup form and proceeds to next pages$")
+	public void fillOutMedSuppForms(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String DateOfBirth = memberAttributesMap.get("DOB");
+		String zipCode = memberAttributesMap.get("Zip Code");
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.fillDetails(zipCode,DateOfBirth);
+		
+	}
+	
 
 	@Then("^agent saves two plans as favorite on AARP site for user$")
 	public void agent_saves_two_plans_as_favorite_on_AARP_site_for_user(DataTable givenAttributes) {
@@ -4432,7 +4451,7 @@ public class VppPlanCompareMobile {
 		planComparePage.validateCallpopup();
 	}
 	
-	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
+	/*@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_Page()
 			throws InterruptedException {
 
@@ -4440,7 +4459,7 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateCallSamContent();
 
-	}
+	}*/
 	
 	@Then("^validate OON Toggle is displayed on medical and additional benefits$")
 	public void validate_OON_Toggle_is_displayed_on_medical_and_additional_benefits() throws Throwable {

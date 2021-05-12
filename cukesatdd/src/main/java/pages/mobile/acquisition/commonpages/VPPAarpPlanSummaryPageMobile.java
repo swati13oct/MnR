@@ -3,6 +3,7 @@ package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +19,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.MultiCountyModalPage;
 import pages.acquisition.commonpages.PageTitleConstants;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
@@ -628,5 +630,34 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 	
 		return null;
 	}
+	
+	@FindBy(id = "change-location")
+	private WebElement ChangeLocationLink;
+	
+	@FindBy(id = "zipcode")
+	private WebElement ZipCodeTxtBx;
+
+	@FindBy(id = "submit")
+	private WebElement FIndPlansButton;
+
+	@FindBy(xpath = "//div[@class='modal-title']")
+	private WebElement countyModal;
+
+	
+	public MultiCountyModalPageMobile VPP_ChangeLocationValidateMultiCOuntyPopUp(String zipcode) {
+		ChangeLocationLink.click();
+		validate(ZipCodeTxtBx);
+		ZipCodeTxtBx.click();
+		ZipCodeTxtBx.clear();
+		ZipCodeTxtBx.sendKeys(zipcode);
+		validate(FIndPlansButton);
+		FIndPlansButton.click();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if (countyModal.isDisplayed()) {
+			return new MultiCountyModalPageMobile(driver);
+		}
+		return null;
+	}
+
 
 }

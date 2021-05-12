@@ -3,6 +3,7 @@ package acceptancetests.mobile.acquisition.dceredesign;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.CommonConstants;
@@ -41,7 +42,7 @@ public class DCEACQDrugSummaryMobile {
 		return loginScenario;
 	}
 
-//	AppiumDriver wd;
+	AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -225,6 +226,14 @@ public class DCEACQDrugSummaryMobile {
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		drugSummaryPage.verifyDefaultPlanType();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
+	
+	@When("^user should be able to see \"([^\"]*)\" by default$")
+	public void user_should_be_able_to_see_by_default(String planType) throws Throwable {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(wd);
+		drugSummaryPage.verifyDefaultPlanType(planType);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 

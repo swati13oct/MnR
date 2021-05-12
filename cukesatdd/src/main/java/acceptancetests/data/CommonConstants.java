@@ -865,7 +865,7 @@ public class CommonConstants {
 	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Prd";
 	private static ThreadLocal<String> MAIN_WINDOW_HANDLE_ACQUISITION = new ThreadLocal<>();
 
-	public static String getMainWindowHandle() {
+	public synchronized static String getMainWindowHandle() {
 		return MAIN_WINDOW_HANDLE_ACQUISITION.get();
 	}
 
@@ -878,7 +878,7 @@ public class CommonConstants {
 	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@es08-scan01:1521/gpsst04_1svc_trn.uhc.com";
 	
 	
-	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Stage";// or Optum-Prd;
+	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Prd";// or Optum-Prd;
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER"; // Parameter name from Jenkins run
 	
 	public static final String APPIUM_DEFAULT_VERSION = "1.17.0";
@@ -970,7 +970,7 @@ public class CommonConstants {
 	
 	private static ThreadLocal<String> SELECTED_STATE = new ThreadLocal<>();
 
-	public static String getSelectedState() {
+	public synchronized static String getSelectedState() {
 		return SELECTED_STATE.get();
 	}
 

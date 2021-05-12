@@ -99,7 +99,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And user delets all the added providers on visitor profile page
       | PlanName | <planname> |
 
-    @visitorProfile_AARP @regressionAARP
+    @visitorProfile_AARP @regressionAARP @vbfGate1
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             |
       | AARP | New York |   10001 | NO              | New York County | mnrqeaarp | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
@@ -128,7 +128,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | state    | zipcode | isMultutiCounty | county          | userName  | password   | plantype | planname                             | status      | monthlyPremium |
       | AARP | New York |   10001 | NO              | New York County | mnrqeaarp | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC @regressionUHC 
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county          | userName | password   | plantype | planname                             | status      | monthlyPremium |
       | UHC  | New York |   10001 | NO              | New York County | mnrqeuhc | Password@1 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | In Progress | $34.00         |
@@ -174,7 +174,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
     And the user cancel the enrollment
       | Plan Name | <planName> |
 
-    @visitorProfile_AARP @regressionAARP
+    @visitorProfile_AARP @regressionAARP @vbfGate1
     Examples: 
       | site | state    | userName | password   | zipcode | isMultiCounty | county          | planyear | PlanType | plantype | planName                              | cardtype | firstname | lastname | dob      | gender | permstreet    | permcity | mailingstate | mailingzip | email         | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | status      | monthlyPremium |
       | AARP | New York | mnrvd6   | Password@1 |   10001 | NO            | New York County | Next     | MA-MBI   | MA       | AARP Medicare Advantage Patriot (HMO) | MBI      | John      | Doe      | 01011903 | Male   | 003 Morris Rd | NY       | NY           |      10001 | test@test.com | 2n22C33YK33    | false   |  09011997 |  11012002 |      431665465 | In Progress | $0             |
@@ -201,7 +201,7 @@ Feature: 1.09. UAT - Visitor profile Authenticated
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | AARP | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC @regressionUHC @vbfGate1
     Examples: 
       | site | state   | zipcode | isMultutiCounty | county          | userName            | password   | plantype | planname                            |
       | UHC  | Alabama |   10010 | NO              | New York County | ledford@getnada.com | Password@1 | MAPD     | AARP Medicare Advantage Prime (HMO) |
