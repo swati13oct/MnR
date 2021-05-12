@@ -2,7 +2,7 @@
 Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
 
   @dce_VisitorProfile
-  Scenario Outline: To verify DCE REDESIGN flow from Ulayer home page
+  Scenario Outline: To verify DCE REDESIGN flow from <site> home page through visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user clicks on the shopping cart icon
@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user selects plan year
     And user clicks on continue button in Zip Entry Page
 
-  @dce_VisitorProfile_AARP @regressionAARP @prodRegression
+  @dce_VisitorProfile_AARP @regressionAARP @prodRegression @vbfGate1
     Examples:
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall | 80002   | AARP |

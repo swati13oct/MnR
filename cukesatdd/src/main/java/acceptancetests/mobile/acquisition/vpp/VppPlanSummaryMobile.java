@@ -55,6 +55,41 @@ public class VppPlanSummaryMobile {
 	}
 
 	AppiumDriver wd;
+	
+	@Then("^user should be able to see the NBA modal to add drugs on the VPP summary page$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_add_drugs_on_the_VPP_summary_page() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCost();
+	}
+
+	
+	@Then("^user changes zipcode within VPP page$")
+	public void User_Change_ZipCode_VPP_pages(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String zipcode = memberAttributesMap.get("Zip Code");
+		String county = memberAttributesMap.get("County Name");
+		String isMultiCounty = memberAttributesMap.get("Is Multi County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
+		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
+
+		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
+		
+		if (plansummaryPage != null) {
+			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
+			plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode, county, isMultiCounty);
+		} else {
+			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
+		}
+	}
 
 	@When("^the user validates plan summary for the below plan$")
 	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {

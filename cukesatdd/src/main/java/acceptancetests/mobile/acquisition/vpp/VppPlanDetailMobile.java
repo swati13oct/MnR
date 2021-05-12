@@ -2302,7 +2302,7 @@ public class VppPlanDetailMobile {
 	}
 
 	@Then("^the user Click on Look up your Provider button in UMS site$")
-	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() {
+	public void user_Clicks_on_Look_upyourProvider_button_on_PlanDetailsPage() throws InterruptedException {
 
 		PlanDetailsPageMobile vppPlanDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
@@ -2372,7 +2372,7 @@ public class VppPlanDetailMobile {
 		planComparePage.validateCallSam();
 	}
 
-	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site$")
+	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC()
 			throws InterruptedException {
 

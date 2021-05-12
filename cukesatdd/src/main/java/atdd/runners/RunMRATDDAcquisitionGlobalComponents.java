@@ -24,3 +24,5 @@ public class RunMRATDDAcquisitionGlobalComponents extends BaseTestConfig{
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
+
+

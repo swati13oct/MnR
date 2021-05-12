@@ -1,3 +1,4 @@
+
 package acceptancetests.acquisition.vpp;
 
 import java.io.File;
@@ -4326,4 +4327,5 @@ public class VppCommonStepDefinition {
 		plansummaryPage.viewPlanSummary(plantype);
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
+
 }

@@ -22,7 +22,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00003 | AARP |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | AARP |   70072 | NO            | Jefferson Parish | MAPD     | future   |
 
-		@sanity
+		@sanity @vbfGate
 		Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00001 | AARP |   96799 | NO            | Western District | PDP      | future   |
@@ -145,7 +145,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00009 | AARP |   90210 | NO            | Los Angeles County | MAPD     | future   |
 
-    @vppPlanCompareCommon_UHC01 @regressionUHC @prodRegression @sanity
+    @vppPlanCompareCommon_UHC01 @regressionUHC @prodRegression @sanity @vbfGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | planyear |
       | 00009 | UHC  |   90210 | NO            | Los Angeles County | MAPD     | future   |
@@ -167,7 +167,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And check one plan and add it to plancompare
     Then Verify newly added plan displayed on new plan compare page
 
-    @vppPlanCompareCommon_AARP01 @regressionAARP @prodRegression
+    @vppPlanCompareCommon_AARP01 @regressionAARP @prodRegression @vbfGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |
       | 00010 | AARP |   90210 | NO            | Los Angeles County | MAPD     |     2 | future   |
@@ -348,7 +348,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then remove "<removePlanIndices>" plan from new plan compare page
     Then validate all available plans are shown on click of view all plans
 
-    @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity
+    @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @vbfGate2
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County | MAPD     |             4,1,2 | future   |           5 |
@@ -383,7 +383,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
       | 00017 | AARP |   78006 | NO            | Bexar County | MAPD     | future   |           4 |               4,1 |
 
-    @vppPlanCompareCommon_UHC03 @regressionUHC
+    @vppPlanCompareCommon_UHC03 @regressionUHC @vbfGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
       | 00017 | UHC  |   78006 | NO            | Bexar County | MAPD     | future   |           4 |               1,4 |

@@ -39,7 +39,7 @@ public class GlobalComponentsStepDefinitionUHC {
 	 */
 	@Given("^the user is on the UHC Medicaresolutions Site$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		 wd = (AppiumDriver) getLoginScenario().getMobileDriver();
 
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 

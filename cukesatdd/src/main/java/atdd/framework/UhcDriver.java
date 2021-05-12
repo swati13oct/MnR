@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -253,6 +254,7 @@ public abstract class UhcDriver {
 			sendKeys_IOS(element, message);
 			element.getText().replaceAll("\u00A00", " ").trim();
 			element.sendKeys(Keys.ENTER);
+			element.sendKeys(Keys.TAB);
 
 			// element.sendKeys(Keys.BACK_SPACE);
 
@@ -579,7 +581,7 @@ public abstract class UhcDriver {
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click(true);", element);
 				System.out.println("JsClick worked");
-				clickFlag = true;
+				// clickFlag = true;
 
 				// if (element.isDisplayed() && (clickFlag = true))
 				// try {
@@ -719,8 +721,12 @@ public abstract class UhcDriver {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
+		sleepBySec(3);
 		scrollToView(Element);
-		jsClickNew(Element);
+
+		Element.click();
+
+		sleepBySec(5);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
@@ -731,6 +737,7 @@ public abstract class UhcDriver {
 			if (!currentHandle.contentEquals(CommonConstants.getMainWindowHandle()))
 				break;
 		}
+
 	}
 
 	public void sleepBySec(int sec) {
@@ -1282,8 +1289,7 @@ public abstract class UhcDriver {
 			if (clickElement)
 				scrollToView(selectElement);
 			checkElementisEnabled(selectElement);
-			jsClickNew(selectElement);
-
+			selectElement.click();
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
