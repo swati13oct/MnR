@@ -1,7 +1,7 @@
 @agentAppointment
-Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment with an agent flow on Shop Pages
+Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment with an agent flow
 
-  Scenario Outline: <scenario> Verify request an appointment through <pageName>
+  Scenario Outline: <scenario> Verify request an appointment through <pageName> for <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
@@ -22,10 +22,10 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
       | E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html                                                                                                                                                                                                                                                                                           | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
       | E2E Scenario 2_UMS | UHC  | shop/prescription-drug-plans.html                                                                                                                                                                                                                                                                                             | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAppointmentUHC @insuranceSolution
-    Examples: 
-      | scenario           | site | path                                | pageName                     | UHCUrl                      |
-      | E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
+   # @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAppointmentUHC @regressionUHC
+    #Examples:
+     # | scenario           | site | path                                | pageName                     | UHCUrl                      |
+      #| E2E Scenario 2_UMS | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ |
 
     @agentFlowEBRCUlayer @UATRegression @regressionAARP
     Examples: 
@@ -39,33 +39,26 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
       | E2E Scenario 2_AMP | AARP | shop/prescription-drug-plans.html                                                                                                                                                                                                                                                                                             | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ |
       | E2E Scenario 2_AMP | AARP | shop/dual-special-needs-plans.html                                                                                                                                                                                                                                                                                            | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ |
 
-  Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode UHC SIte
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    When the user navigates to request more help and information
-    When the user navigates to request appointment with an agent in and validates page is loaded
-    Then the user fills the form out and submits the agent appointment application
-      | Zipcode | <zipcode> |
-
-    @agentFlowEBRCBlayer @UATRegression @regressionUHC
-    Examples: 
-      | scenario           | zipcode | site |
-      | E2E Scenario 3_UMS |   90002 | UHC  |
-
-  Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode AARP SIte
+  Scenario Outline: <scenario> Verify request an appointment with an agent flow for zipcode <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigates to request more help and information
     When the user navigates to request appointment with an agent and validates page is loaded
-    Then the user fills the form out and submits the agent appointment application
+    Then the user fills the form out and submits the agent appointment
       | Zipcode | <zipcode> |
 
     @agentFlowEBRCUlayer @UATRegression @regressionAARP
     Examples: 
       | scenario           | zipcode | site |
       | E2E Scenario 3_AMP |   90002 | AARP |
-
-  Scenario Outline: <scenario> Verify request an appointment for Medsupp flows
+      
+      @agentFlowEBRCBlayer @UATRegression @regressionUHC
+    Examples: 
+      | scenario           | zipcode | site |
+			 | E2E Scenario 3_UMS |   90002 | UHC  |
+			 
+			 
+  Scenario Outline: <scenario> Verify request an appointment for Medsupp <site> site flows 
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -79,12 +72,12 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC
+    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC @regressionAARP
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_UMS |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |
 
-    @agentFlowEBRCUlayer @UATRegression @insuranceSolutionAgentAgentAppointmentAARP
+    @agentFlowEBRCUlayer @UATRegression @insuranceSolutionAgentAgentAppointmentAARP @regressionUHC
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_AMP |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |

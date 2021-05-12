@@ -177,7 +177,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
     @dce_DrugDetailsCopay_Standard_AARP @regressionAARP
     Examples: 
       | drug1      | drug2  | zipCode | planType | planName                                            | site | DefaultSelected | MailPharSelected | pharmacyZipCode | SelectPharmacy | insulinDrug    | insulinCopay | insulinCopay2 |
-      | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $35          | $105          |
+#      | vigabatrin | Fanapt |   80001 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $35          | $105          |
       | vigabatrin | Fanapt |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP)       | AARP | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $15          | $45           |
 
     @dce_DrugDetailsCopay_Standard_UHC @regressionUHC

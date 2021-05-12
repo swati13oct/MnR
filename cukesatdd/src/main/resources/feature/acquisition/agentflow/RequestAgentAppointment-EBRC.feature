@@ -1,7 +1,7 @@
 @agentAppointment
 Feature: 1.06-To test request an appointment with an agent flow
 
-  Scenario Outline: Verify request an appointment with an agent flow for <pageName>
+  Scenario Outline: Verify request an appointment with an agent flow for <pageName> through <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user navigates to following medicare acquisition site page
@@ -96,12 +96,12 @@ Feature: 1.06-To test request an appointment with an agent flow
       #| UHC  | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ |
       #| UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ |
 
-  Scenario Outline: Verify request an appointment with an agent flow for <pageName>
-    Given the user is on medicare acquisition site landing page
+  Scenario Outline: Verify request an appointment with an agent flow for <pageName> through <site> site
+   Given the user is on medicare acquisition site landing page fro campaign Traffic
       | Site | <site> |
-    And the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
+    Given the user navigates to following Campaign acquisition site page
+      # | PageName | <pageName> |
+      | PagePath | <path> |
     And the user views the plans of the below plan type
       | Plan Type | <plantype> |
     And the user selects plan year
@@ -109,7 +109,7 @@ Feature: 1.06-To test request an appointment with an agent flow
     When the user clicks on Agent link and validates the correct URL is loaded
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCUlayer @regressionAARP
+   @agentFlowEBRCUlayer @regressionAARP
     Examples: 
       | site | path                                                                                                                                                                                                                       | pageName          | UHCUrl                      | plantype | planyear |
       | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary | https://www.myuhcagent.com/ | MA       | future   |
