@@ -2372,7 +2372,7 @@ public class VppPlanDetailMobile {
 		planComparePage.validateCallSam();
 	}
 
-	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare on UHC site$")
+	@And("^verify Call SAM roll out and contain the text Call a Licensed Insurance Agent on Plan Comapare Page$")
 	public void verify_Call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent_PlanCompare_UHC()
 			throws InterruptedException {
 

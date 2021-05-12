@@ -25,6 +25,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.MultiCountyModalPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPAarpPlanSummaryPageMobile;
@@ -1132,6 +1133,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		 * Assertion.fail("TFN Widget is NOT Displayed"); }
 		 */
 	}
+	
 
 	@When("^the user performs Change Location on Plan Summary Page using following MultiCounty Zip information$")
 	public void the_user_performs_Change_Location_on_Plan_Summary_Page_using_following_MultiCounty_Zip_information(
