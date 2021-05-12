@@ -97,6 +97,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     And clicks on Review drug cost button
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then user should be able to see Return to profile link on details page
     When user clicks on Return to profile link on details page
     Then user should be navigated to shopper profile page

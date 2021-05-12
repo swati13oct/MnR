@@ -361,12 +361,15 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugSummaryPage);
 	}
 
+/*
 	@When("^clicks on Review drug cost button$")
 	public void clicks_on_Review_drug_cost_button() {
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		buildDrugList.clickReviewDrugCostBtn();
 	}
+*/
+/*
 
 	@When("^clicks on Review drug cost button for detail page$")
 	public void clicks_on_Review_drug_cost_button_Detail_Page() {
@@ -376,7 +379,8 @@ public class DCEStepDefinitionAARP {
 		
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
-	
+*/
+
 	@When("^clicks on Review drug cost button to land on drug summary page$")
 	public void clicks_on_Review_drug_cost_for_drug_summary_Page() {
 		BuildYourDrugList buildDrugList = (BuildYourDrugList) getLoginScenario()
@@ -1266,8 +1270,8 @@ public class DCEStepDefinitionAARP {
 	@When("^user clicks view drug cost button$")
 	public void user_clicks_view_drug_cost_button_in_AARP() throws InterruptedException {
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
-		drugSummaryPage.clickViewDrugCostBtn();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+        DrugDetailsPage drugDetailsPage = drugSummaryPage.clickViewDrugCostBtn();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@When("^user clicks on change pharmacy link from details page$")
