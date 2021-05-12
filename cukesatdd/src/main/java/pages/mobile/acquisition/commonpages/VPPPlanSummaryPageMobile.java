@@ -56,6 +56,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "(//*[text()='View plan details'])[1]")
 	WebElement viewPlanDetailsBtn;
+	
+	@FindBy(xpath = "//*[@id=\"card-updates\"]/a")
+	public
+	WebElement backToPlans;
 
 	@FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")
 	WebElement CancelBtn;
@@ -2839,7 +2843,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
-
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out
 				.println("Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
@@ -2885,21 +2888,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Proceed to click to save plan");
 //			WebDriverWait d = new WebDriverWait(driver, 20);
 //			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
-
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");
 
 			String State = CommonConstants.getSelectedState();
-
-			/*
-			 * if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) { if
-			 * (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania") ||
-			 * CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico") ||
-			 * CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {
-			 */
+			
+			/*if (!StringUtils.isNullOrEmpty(CommonConstants.SELECTED_STATE)) {
+				if (CommonConstants.SELECTED_STATE.equalsIgnoreCase("Pennsylvania")
+						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Puerto Rico")
+						|| CommonConstants.SELECTED_STATE.equalsIgnoreCase("Virginia")) {*/
 			if (!StringUtils.isNullOrEmpty(State)) {
-				if (State.equalsIgnoreCase("Pennsylvania") || State.equalsIgnoreCase("Puerto Rico")
+				if (State.equalsIgnoreCase("Pennsylvania")
+						|| State.equalsIgnoreCase("Puerto Rico")
 						|| State.equalsIgnoreCase("Virginia")) {
 					if (validate(closeProfilePopup))
 						jsClickNew(closeProfilePopup);
@@ -2952,6 +2953,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			Assertion.assertTrue("PROBLEM - unable to locate Saved Plan icon after click for ='" + plan
 					+ "'.  Expect number of match='" + expMatch + "' | Actual number of match='"
 					+ listOfAppearedSavedText.size() + "'", listOfAppearedSavedText.size() == expMatch);
+			
+			scrollToView(backToPlanResults);
 		}
 	}
 
