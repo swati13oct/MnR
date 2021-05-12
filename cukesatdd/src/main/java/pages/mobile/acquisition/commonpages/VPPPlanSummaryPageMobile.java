@@ -1745,7 +1745,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			for (int i = 0; i < plansForCompare; i++) {
 				iosScroll(allMAPlans.get(i));
 				jsClickNew(allMAPlans.get(i));
-				//allMAPlans.get(i).click();
+				// allMAPlans.get(i).click();
 				System.out.println("Plan added to compare : " + i);
 			}
 		}
@@ -2581,8 +2581,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// sendkeysNew(firstNameField, FirstName);
 		scrollToView(firstNameField);
 		jsSendkeys(firstNameField, FirstName);
-		sendkeysNew(lastNameField, LastName);
-		sendkeysNew(emailField, EmailAddress);
+		jsSendkeys(lastNameField, LastName);
+		jsSendkeys(emailField, EmailAddress);
 		validateNew(Submitbutton);
 		jsClickNew(Submitbutton);
 		if (validateNew(medicareGuidePopup)) {
@@ -3803,8 +3803,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void fillDetails(String zipCode, String DateOfBirth) throws InterruptedException {
-		
-		//medSuppZipCode.sendKeys(zipCode);
+
+		// medSuppZipCode.sendKeys(zipCode);
 		sendkeysMobile(medSuppZipCode, zipCode);
 		Thread.sleep(1000);
 		// sendkeys(DOB, DateOfBirth);
@@ -3845,7 +3845,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// viewPlansBtnMedSupp.click();
 		jsClickNew(viewPlansBtnMedSupp);
 		CommonUtility.checkPageIsReadyNew(driver);
-		//CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
+		// CommonUtility.waitForPageLoadNew(driver, Start_ApplicationBtn, 45);
 
 		/*
 		 * if(!driver.findElement(By.xpath(
@@ -4020,16 +4020,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void enterAddressDetails(String address, String city, String state) {
 		validateNew(searchByAddressButton);
-		searchByAddressButton.click();
+		// searchByAddressButton.click();
+		jsClickMobile(searchByAddressButton);
+		System.out.println(" clicking on searchby address button");
 		validateNew(addressInput);
 		sendkeys(addressInput, address);
 		sendkeys(cityInput, city);
 		selectFromDropDown(stateDropDownValues, state.toUpperCase());
-
+		System.out.println("Selecting state from Drop down");
 	}
 
 	public void searchPlansCounty(String countyName, String ismultiCounty) {
-		findPlansButton.click();
+		// findPlansButton.click();
+		jsClickNew(findPlansButton);
 		CommonUtility.waitForPageLoad(driver, searchByAddressButton, CommonConstants.TIMEOUT_30);
 
 		if (ismultiCounty.contains("YES") && validate(countyModal)) {
@@ -4619,10 +4622,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	private WebElement firstPlanDetailsLink;
 
 	public PlanDetailsPageMobile navigateToFirstPlanForPlanDetails(String planType) {
-//		CommonUtility.checkPageIsReadyNew(driver);
-//		CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
+		// CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.waitForPageLoadNew(driver, firstPlanDetailsLink, 30);
 		scrollToView(firstPlanDetailsLink);
-		firstPlanDetailsLink.click();
+
+		jsClickNew(firstPlanDetailsLink);
 		System.out.println("View Plan Details Link is clicked for first plan for " + planType);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("#/details")) {
