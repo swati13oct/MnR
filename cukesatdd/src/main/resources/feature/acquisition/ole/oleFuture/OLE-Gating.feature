@@ -1,4 +1,4 @@
-@vbfgate
+@vbfGate
 Feature: 1.10 <----OLE common tool E2E flow for gating---->
 
   Scenario Outline: TID: <Scenario> -OLE End to end from VPP Plan Summary for <plantype> Plans
@@ -96,10 +96,6 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
     Then the user validates the Plan and Member details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
 
-    # Then the user validates Plan and Member Details on Confirmation Page
-    #Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-    #Then the user validates the OLE Submission Details in GPS
-    #| Plan Type | <plantype> |
   @MA_OLE_Ulayer_Future 
     Examples:
       | Scenario                | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county      | plantype | planyear | planName                                  | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | medicarenumber1 | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
@@ -195,27 +191,12 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
-    #Then the user validates required fields for Authorization Page
-    Then the user validates required fields for Authorization Page Representative
-      | authorizationFirstname      | <authorizefirstN>       |
-      | authorizationLastname       | <authorizelastN>        |
-      | authorizationAddress        | <authorizeaddress>      |
-      | authorizationApartmentSuite | <authorizeapartment>    |
-      | authorizationCity           | <authorizecity>         |
-      | authorizationZip            | <authorizezip>          |
-      | authorizationPhoneNo        | <authorizephonenumber>  |
-      | authorizationRelationship   | <authorizeRelationship> |
-      | authorizationStateDisplay   | <authorizestate>        |
-      | authorizationAgree          | <authorizationagree>    |
+    Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
    # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
-
-    #Then the user validates the OLE Submission Details in GPS
-    #| Plan Type | <plantype> |
-
+    
   @SNP_OLE_UHC_Future
     Examples:
       | Scenario                 | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county         | plantype | planName                                                   | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet  | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                      | optiondata        | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | phoneno    | mobileno   | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | medicarenumber1 | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
@@ -386,7 +367,6 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Zip                     | <providerzipcode> |
       | Provider Phone Number   | <providernumber>  |
       | Mailing_State           | <mailingstate>    |
-    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
@@ -408,28 +388,11 @@ Feature: 1.10 <----OLE common tool E2E flow for gating---->
       | Rider Flag | <riderflag> |
     Then the user navigates to Authorization Page for plan as per following rider options
       | Rider Flag | <riderflag> |
-    Then the user validates required fields for Authorization Page Representative
-      | authorizationFirstname      | <authorizefirstN>       |
-      | authorizationLastname       | <authorizelastN>        |
-      | authorizationAddress        | <authorizeaddress>      |
-      | authorizationApartmentSuite | <authorizeapartment>    |
-      | authorizationCity           | <authorizecity>         |
-      | authorizationZip            | <authorizezip>          |
-      | authorizationPhoneNo        | <authorizephonenumber>  |
-      | authorizationRelationship   | <authorizeRelationship> |
-      | authorizationStateDisplay   | <authorizestate>        |
-      | authorizationAgree          | <authorizationagree>    |
+   Then the user validates required fields for Authorization Page
     Then the user navigates to Review and Submit Page
     Then the user validates the Plan and Member details on Review and Submit Page
-    #Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    # Then the user validates Plan and Member Details on Confirmation Page
-    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
 
-    #Then the user validates the OLE Submission Details in GPS
-    #	| Plan Type | <plantype> |
-    # | Rider Flag | <riderflag> |
-    # | Mailing Address Question | <mailingaddressquestion> |
   @CSNP_OLE_AARP_Future
     Examples:
       | Scenario                  | PlanType | site | planyear | planYear | zipcode | isMultutiCounty | county       | plantype | planName                                      | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | providername | provideraddress | providercity | providerzipcode | providernumber | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | diabetesQ1 | diabetesQ2 | chronicQ1 | chronicQ2 | chronicQ3 | cardioQ1 | cardioQ2 | cardioQ3 | cardioQ4 | cardioQ5 | cardioQ6 | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
