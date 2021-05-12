@@ -7,7 +7,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     Then user validates plan count for all plan types on plan summary page
     Then user validates selected plans can be saved as favorite
@@ -50,7 +50,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     Then user validates plan count for all plan types on plan summary page
     Then user validates selected plans can be saved as favorite
@@ -93,7 +93,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     Then user validates plan count for all plan types on plan summary page
     Then user validates selected plans can be saved as favorite
@@ -136,7 +136,7 @@ Feature: 1.02-Favorite Plans in vpp flow AARP
       | Site | <site> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
-      | Is Multi County | <isMultutiCounty> |
+      | Is Multi County | <isMultiCounty> |
       | County Name     | <county>          |
     Then user validates plan count for all plan types on plan summary page
     Then user validates selected plans can be saved as favorite
