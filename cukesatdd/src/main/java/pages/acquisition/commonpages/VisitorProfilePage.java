@@ -924,6 +924,13 @@ public class VisitorProfilePage extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id, 'agreeButton')]")
 	public WebElement ShareOneHealth_AgreeButton;
 
+	@FindBy(xpath = "//*[contains(@id, 'identity-confirm-title')]")
+	public WebElement ConfirmIdentity_ModalHdr;
+
+	@FindBy(xpath = "//*[contains(@class, 'identity-confirm')]//button[contains(@class, 'close')]")
+	public WebElement ConfirmIdentity_ModalClose;
+
+
 	public void logIn(String username, String password) {
 		try {
 
@@ -960,8 +967,14 @@ public class VisitorProfilePage extends UhcDriver {
 			} catch (Exception e) {
 				System.out.println("Share My One Healthcare ID Page is NOT Dispalyed for VP Login - Continuing to VP");
 			}
+			try {
+				validateNew(ConfirmIdentity_ModalHdr);
+				validateNew(ConfirmIdentity_ModalClose);
+				jsClickNew(ConfirmIdentity_ModalClose);
+			} catch (Exception e) {
+				System.out.println("Confirm Identity and Import Modal is NOT Dispalyed for VP Login - Continuing to VP");
+			}
 			CommonUtility.waitForPageLoadNew(driver, signOutLink, 20);
-
 		} catch (Exception e) {
 			Assertion.fail("###############Optum Id Sign In failed###############");
 		}
