@@ -12,6 +12,7 @@ import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
+import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
@@ -65,6 +66,7 @@ public class VppFavoritePlanMobile {
 
 		// ----- PDP plan type ---------------------------
 		planType = "PDP";
+		plansummaryPage.backToPlans.click();
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
@@ -73,6 +75,7 @@ public class VppFavoritePlanMobile {
 
 		// ----- SNP plan type ---------------------------
 		planType = "SNP";
+		plansummaryPage.backToPlans.click();
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
