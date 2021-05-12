@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
+import javax.swing.Scrollable;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -2881,8 +2883,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 			// ----------------------------------------
 			System.out.println("Proceed to click to save plan");
-			WebDriverWait d = new WebDriverWait(driver, 20);
-			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+//			WebDriverWait d = new WebDriverWait(driver, 20);
+//			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+
 			jsClickNew(listOfSavePlanIcons.get(0));
 
 			System.out.println("Click to close on the create profile popup");

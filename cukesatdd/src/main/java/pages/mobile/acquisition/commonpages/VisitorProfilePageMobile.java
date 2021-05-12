@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -54,8 +55,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[@class='text-small header-link-mobile'][normalize-space()='Or, Sign In to your Profile']")
 	private WebElement signIn;
-	
-	
+
 	@FindBy(css = "div.signupCTA a.signin-font")
 	private WebElement signInLegacy;
 
@@ -148,14 +148,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
-			
+
 			return new AcquisitionHomePageMobile(driver);
 		}
 		return null;
 	}
 
 	public void validateAddedDrugAndPharmacy(String drug) {
-		//expandDrugBlock.click();//No Expand block seen on mobile
+		// expandDrugBlock.click();//No Expand block seen on mobile
 
 		Assertion.assertTrue(drugName.getText().trim().contains(drug));
 		Assertion.assertTrue(pharmacyAddress.isDisplayed());
@@ -232,19 +232,48 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 */
 		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
-			//jsClickNew(addrugs);
-			scrollToView(addDrugsBtn);
+			// jsClickNew(addrugs);
+			removeAddedDrugsFromVP();
+			iosScroll(addDrugsBtn);
 			jsClickNew(addDrugsBtn);
 		} else {
-			scrollToView(addDrugsBtn);
+			removeAddedDrugsFromVP();
+			iosScroll(addDrugsBtn);
 			jsClickNew(addDrugsBtn);
 		}
 		waitForPageLoadSafari();
+
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
 	}
-	
+
+	@FindBy(xpath = "//button[contains(text(),'Remove')]")
+	private WebElement remove;
+
+	public void removeAddedDrugsFromVP() {
+		pageloadcomplete();
+
+		try {
+			
+		
+			if (remove.isDisplayed()) {
+				System.out.println("Remove links present - Existing drugs available..........");
+				List<Dimension> drugListRemoveLinks = Arrays.asList(remove.getSize());
+				for (Dimension wb : drugListRemoveLinks) {
+					remove.click();
+
+				}
+
+			} else {
+				System.out.println("Remove link not available - No existing drugs available..........");
+			}
+		} catch (Exception e) {
+			System.out.println("Unable to check existing drugs.......");
+		}
+
+	}
+
 	public GetStartedPageMobile addDrug_DCERedesigns() {
 
 		String State = CommonConstants.getSelectedState();
@@ -291,15 +320,19 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 		try {
-			/*if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE)
-					&& (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
-							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-							|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))) {*/
+			/*
+			 * if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
+			 * (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+			 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
+			 * "Puerto Rico") ||
+			 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia"))) {
+			 */
 			String State = CommonConstants.getSelectedState();
-			/*if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE)
-					&& StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
-			if (!StringUtils.isEmpty(State)
-					&& StringUtils.equalsIgnoreCase(State, "Virginia")) {
+			/*
+			 * if (!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
+			 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			 */
+			if (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				List<String> listOfTestPlans = Arrays.asList(plans.split(","));
 				for (String plan : listOfTestPlans) {
 					jsClickNew(driver.findElement(By.xpath("//h4[text()='" + plan + "']/preceding::button[1]")));
@@ -432,18 +465,23 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 */
 	public void signIn(String username, String password) {
 		try {
-			/*if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
-					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Puerto Rico")
-					|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {*/
+			/*
+			 * if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
+			 * (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Pennsylvania")
+			 * || StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE,
+			 * "Puerto Rico") ||
+			 * StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) ) {
+			 */
 			String State = CommonConstants.getSelectedState();
-//			if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) && StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
-			if(!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
+			// if(!StringUtils.isEmpty(CommonConstants.SELECTED_STATE) &&
+			// StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
+			if (!StringUtils.isEmpty(State) && StringUtils.equalsIgnoreCase(State, "Virginia")) {
 				Thread.sleep(3000);
-				//signInLegacy.click();
+				// signInLegacy.click();
 				scrollToView(signIn);
 				signIn.click();
-				
-			}else {
+
+			} else {
 				System.out.println("Clicking on SignIn from Visitor Profile guest page");
 				scrollToView(signIn);
 				signIn.click();
@@ -473,14 +511,13 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			}
 			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
 			waitForPageLoadSafari();
-			//CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+			// CommonUtility.waitForPageLoadNew(driver, signOut, 15);
 
 		} catch (Exception e) {
 			Assertion.fail("###############Optum Id Sign In failed###############");
 		}
 
 	}
-
 
 	/**
 	 * Enroll in a plan
@@ -598,7 +635,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * This method is to cancel the given enrollment
 	 * 
@@ -617,7 +654,6 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			System.out.println("#############No saved Enrollment found#############");
 		}
 	}
-
 
 	@FindBy(xpath = "//span[text()='Add Drugs']")
 	public WebElement addDrugsGlobal;

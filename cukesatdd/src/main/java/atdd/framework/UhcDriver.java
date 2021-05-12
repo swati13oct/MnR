@@ -254,6 +254,7 @@ public abstract class UhcDriver {
 			sendKeys_IOS(element, message);
 			element.getText().replaceAll("\u00A00", " ").trim();
 			element.sendKeys(Keys.ENTER);
+			element.sendKeys(Keys.TAB);
 
 			// element.sendKeys(Keys.BACK_SPACE);
 
@@ -1289,7 +1290,6 @@ public abstract class UhcDriver {
 				scrollToView(selectElement);
 			checkElementisEnabled(selectElement);
 			selectElement.click();
-
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
