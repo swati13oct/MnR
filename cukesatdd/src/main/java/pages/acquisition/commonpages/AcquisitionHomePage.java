@@ -3754,7 +3754,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'/medicare-education/medicare-advantage-plans')]"));
 		WebElement MedSuppPlansLink = driver.findElement(
 				//By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-supplement-plans.html')]"));
-		By.xpath("//*[contains(@class, 'sctn')]//a[contains(text(),'Medicare Supplement Insurance Plans')]"));
+		By.xpath("//*[contains(@class, 'sctn')]//a[contains(text(),'Medicare Supplement Insurance')]"));
 		WebElement PDPplansLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-part-d')]"));
 
@@ -6368,7 +6368,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.assertTrue("Navigation to Medicare Advantage Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-advantage-plans.html"));
 			break;
 			
-		case "Medicare Supplement Insurance Plans":
+		case "Medicare Supplement Insurance":
 			Assertion.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-supplement-plans.html"));
 			break;
 			
@@ -6376,8 +6376,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-part-d.html"));
 			break;
 			
-		case "Enrollment Basics":
-			Assertion.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"));
+		case "When to Enroll":
+			Assertion.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("/medicare-education/when-to-enroll.html"));
 			break;
 			
 		case "Medicare FAQ":
