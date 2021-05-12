@@ -851,9 +851,9 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the user verify the Retail chain pharmacy on detail page$")
 	public void the_user_verify_the_Retail_chain_pharmacy_on_detail_page() throws Throwable {
-		DrugDetailsPage drugDetailPage = new DrugDetailsPage(driver);
-		drugDetailPage.validateRetailChainPharmacy();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailPage);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateRetailChainPharmacy();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user validates planName matches plan Name in VPP$")
@@ -963,9 +963,9 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the user verify the extra help alert message on Drug Detail Page$")
 	public void the_user_verify_the_extra_help_alert_message_on_Drug_Detail_Page() throws Throwable {
-		DrugDetailsPage drugDetailPage = new DrugDetailsPage(driver);
-		drugDetailPage.validateExtraHelpAlert();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailPage);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateExtraHelpAlert();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the user validates Your Drugs sections$")
@@ -1272,21 +1272,21 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user clicks on change pharmacy link from details page$")
 	public void user_clicks_on_change_pharmacy_link_from_details_page_in_AARP() throws InterruptedException {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.clickChangePharmacyLinkDetailsPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^details page change pharmacy modal should be displayed$")
 	public void details_page_change_pharmacy_modal_should_be_displayed_in_AARP() throws InterruptedException {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.selectPharmacyModalDisplayed();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^user verify details page change pharmacy modal$")
 	public void user_verify_details_page_change_pharmacy_modal_in_AARP() throws InterruptedException {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateSelectPharmacyPage();
 		drugDetailsPage.clickDistanceMiledropdown();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
@@ -1335,14 +1335,14 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user clicks on Keep Using This Pharmacy on change pharmacy page")
 	public void user_clicks_on_keep_using_pharmacy() throws InterruptedException {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateAndClickKeepPharm();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@When("^user validate \"([^\"]*)\" pharmacy on detail page")
 	public void user_validate_pharmacy_on_detail_page(String pharmacyName) throws InterruptedException {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDefaultPharmacyName(pharmacyName);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
@@ -1949,7 +1949,7 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user should be able to see Return to profile link on details page$")
 	public void user_should_be_able_to_see_Return_to_profile_link_on_details_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.verifyReturnToProfileDisplayed();
 	}
 
@@ -1985,7 +1985,7 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user clicks on Return to profile link on details page$")
 	public void user_clicks_on_Return_to_profile_link_on_details_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.clickReturnToProfile();
 	}
 
@@ -2014,7 +2014,7 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^verify DCE NBA is displayed on drug details page$")
 	public void verify_dce_NBA_is_displayed_on_drug_details_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDCENBAModal();
 	}
 
@@ -2038,13 +2038,13 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the pharmacy name should be updated on details page$")
 	public void the_pharmacy_name_should_be_updated_on_details_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateSelectedPharmacy();
 	}
 
 	@When("^user saves and updates pharmacy from list on details page$")
 	public void user_saves_and_updates_pharmacy_from_list_on_details_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.saveAndUpdatePharmacy();
 	}
 
@@ -2091,13 +2091,13 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user verify and click on switch to generic NBA on drug detail page$")
 	public void user_verify_and_click_on_switch_to_generic_NBA_on_drug_detail_page() throws Throwable {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.clickswitchToGeneric();
 	}
 
 	@Then("^verify drug is switched to generic on detail page$")
 	public void verify_drug_is_switched_to_generic_on_detail_page() throws Throwable {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 
 		drugDetailsPage.verifyDrugisSwitchedtoGeneric();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, drugDetailsPage);
@@ -2268,14 +2268,14 @@ public class DCEStepDefinitionAARP {
 
 	@When("^user selects Preferred mail order pharmacy from drug details page$")
 	public void user_selects_Preferred_mail_order_pharmacy_from_drug_detail_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.selectPreferredMailOrderPharmacyDrugDetails();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^the message \"([^\"]*)\" should be displayed on change pharmacy modal from drug detail page$")
 	public void should_be_displayed_on_change_pharmacy_modal_from_drug_detail_page(String mailOrderPharmacyMessage) {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validatePreferredMailOrderPharmacyMessageDrugDetail(mailOrderPharmacyMessage);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
@@ -2283,56 +2283,56 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user verify the default distance on change pharmacy modal from drug details$")
 	public void user_verify_the_default_distance_on_change_pharmacy_modal_from_drug_detail() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDefaultDistanceDrugDetails();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@When("^user sort the pharmacy list by \"([^\"]*)\" from drug details$")
 	public void user_sort_the_pharmacy_list_by_from_drug_detail(String sortOption) {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.sortPharmaciesDrugDetails(sortOption);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^pharmacy list should be displayed in ascending order from drug details$")
 	public void pharmacy_list_should_be_displayed_in_ascending_order_from_drug_detail() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validatePharmaciesAscendingOrderDrugDetail();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^pharmacy list should be displayed in descending order from drug details$")
 	public void pharmacy_list_should_be_displayed_in_descending_order_from_drug_detail() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validatePharmaciesDescendingOrderDrugDetails();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@When("^user clicks on next button on change pharmacy modal from drug details$")
 	public void user_clicks_on_next_button_on_change_pharmacy_modal_from_drug_detail() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.clickNextButtonPagination();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^user should be navigated to second page of pharmacy list from drug details$")
 	public void user_should_be_navigated_to_second_page_of_pharmacy_list_from_drug_details() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateSecondPageDisplayedDrugDetailPharmacy();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@When("^user clicks on back button on change pharmacy modal from drug details$")
 	public void user_clicks_on_back_button_on_change_pharmacy_modal_from_drug_details() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.clickBackButtonPagination();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Then("^user should be navigated to first page of pharmacy list from drug details$")
 	public void user_should_be_navigated_to_first_page_of_pharmacy_list_from_drug_details() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateFirstPageDisplayedDrugDetails();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
@@ -2341,20 +2341,14 @@ public class DCEStepDefinitionAARP {
 	public void user_search_with_zipcode_with_no_pharamacies_from_drug_details(DataTable attributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String zipCode = memberAttributesMap.get("ZipCode");
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.searchPharmaciesByZipcodeDrugDetails(zipCode);
 	}
 
 	@Then("^error message \"([^\"]*)\" should be displayed on change pharmacy modal from drug details$")
 	public void error_message_should_be_displayed_on_change_pharmacy_modal_from_drug_details(String errorMessage) {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateInvalidZipErrCodeMsg(errorMessage);
 	}
 
@@ -2362,20 +2356,14 @@ public class DCEStepDefinitionAARP {
 	public void user_search_with_incorrect_zipcode_from_drug_details(DataTable attributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String zipCode = memberAttributesMap.get("ZipCode");
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.searchPharmaciesByZipcodeDrugDetails(zipCode);
 	}
 
 	@When("^user updates the distance to \"([^\"]*)\" from drug details$")
 	public void user_updates_the_distance_to_drug_details(String distance) throws InterruptedException {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.updateDistanceDrugDetails(distance);
 	}
 
@@ -2390,19 +2378,19 @@ public class DCEStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
 		String message = memberAttributesMap.get("NoResultsMessage");
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateNoResultsMsgDrugDetails(message);
 	}
 
 	@When("^the user saves plan from drug details page$")
 	public void the_user_saves_plan_from_drug_details_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.savePlan();
 	}
 
 	@Then("^user verify details page change pharmacy modal for preferred tab$")
 	public void user_verify_details_page_change_pharmacy_modal_for_preferred_tab() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validatePreferredTab();
 	}
 
@@ -2436,7 +2424,7 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^the user clicks VPP Plan Details button from Drug Details Page$")
 	public void the_user_clicks__VPP_Plan_Details_button_from_Drug_Details_Page() throws Throwable {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		PlanDetailsPage plandetailspage = drugDetailsPage.clickViewPlanDetailsBtn();
 		if (null != plandetailspage) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
@@ -2548,7 +2536,7 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user verify and click on standard tab from drug details")
 	public void user_click_on_standard_tab_to_update_the_distance_to_durg_details() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateStandardTab();
 	}
 
@@ -2647,7 +2635,7 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user click on standard tab from drug details$")
 	public void user_click_on_standard_tab_from_drug_details() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateStandardTab();
 	}
 
@@ -2666,13 +2654,13 @@ public class DCEStepDefinitionAARP {
 
 	@Then("^user verify breadcrumb \"([^\"]*)\" on drug details page$")
 	public void user_verify_breadcrumb_on_drug_details_page(String breadCrumb) {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateBreadCrumb(breadCrumb);
 	}
 
 	@Then("^user should be able to see Back to profile button on details page$")
 	public void user_should_be_able_to_see_Back_to_profile_button_on_details_page() {
-		DrugDetailsPage drugDetailsPage = new DrugDetailsPage(driver);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.verifyBackToProfileBtnDisplayed();
 	}
 	
