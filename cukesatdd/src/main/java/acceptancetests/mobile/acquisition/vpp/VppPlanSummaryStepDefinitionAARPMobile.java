@@ -21,8 +21,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.MultiCountyModalPage;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
+import pages.mobile.acquisition.commonpages.VPPAarpPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.keywordSearchAARP;
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
@@ -922,42 +927,37 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		}
 	}
 
-	@Then("^the user validates the right rail in AARP Site$")
-	public void user_validates_rightRail() {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.validateRightRailSection();
-	}
 
-	@Then("^the user validates the Need Help Section in the right rail in aarp Site$")
+
+	@Then("^the user validates the Need Help Section in the right rail$")
 	public void validate_needHelp_rightRail() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateNeedHelpRightRail();
 	}
 
-	@Then("^the user validates the TFN in the Need Help Section in aarp Site$")
+	@Then("^the user validates the TFN in the Need Help Section$")
 	public void validate_TFN_inRIghtRail_aarp() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.GetTFNforPlanType();
 	}
 
-	@Then("^the user validates and clicks on Find an agent in your area link in aarp Site$")
+	@Then("^the user validates and clicks on Find an agent$")
 	public void validateAndClick_findAgentInYourArea_RightRail() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateAgentEBRCPage();
 	}
 
-	@Then("^the user validates Get a free medicare Guide section in the right rail in aarp Site$")
+	@Then("^the user validates Get a free medicare Guide section in the right rail$")
 	public void validate_freeMedicareGuide_rightRail() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateMedicareGuideRightRail();
 	}
 
-	@Then("^the user enters the following information in the Get a free medicare Guide section in aarp Site$")
+	@Then("^the user enters the following information in the Get a free medicare Guide section$")
 	public void user_enters_necessaryInformation_inGetFreeMedicareGuideSection(DataTable givenAttributes)
 			throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
@@ -974,28 +974,28 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 
 	}
 
-	@Then("^the user validates Need More Information section in the right rail in aarp Site$")
+	@Then("^the user validates Need More Information section in the right rail$")
 	public void validate_needMoreInformation_rightRail() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateNeedMoreInformationRightRail();
 	}
 
-	@Then("^the user validates Medicare Plans Video Guide Page after clicking Choose a video link in aarp Site$")
+	@Then("^the user validates Medicare Plans Video Guide Page after clicking Choose a video link$")
 	public void validate_andClick_ChooseAVideo() throws InterruptedException {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateMedicareVideoGuideRightRail();
 	}
 
-	@Then("^the user validates Plan Selector Tool section in the right rail in aarp Site$")
+	@Then("^the user validates Plan Selector Tool section in the right rail$")
 	public void validate_planSelectorTool_rightRail() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validatePlanSelectorToolRightRail();
 	}
 
-	@Then("^the user validates Plan Selector Page after clicking on Start Plan Selector button in aarp Site$")
+	@Then("^the user validates Plan Selector Page after clicking on Start Plan Selector button$")
 	public void user_validate_planSelectorPage_inaarpSite() throws Exception {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -1097,4 +1097,98 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifySelectPlanForEnrollModalForallPlans(allPlanNames);
 	}
+	
+	@Then("^user clicks on Select by Address and Enter fileds$")
+	public void user_clicks_on_Select_by_Address_and_Enter_fileds(DataTable givenAttributes)
+			throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String address = memberAttributesMap.get("Address");
+		String city = memberAttributesMap.get("City");
+		String state = memberAttributesMap.get("State");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.enterAddressDetails(address, city, state);
+	}
+	
+	@When("^verify Call SAM icon is visible$")
+	public void verify_Call_SAM_icon_is_visible() throws InterruptedException {
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSam();
+		/*
+		 * if (Aquisitionhomepage != null) {
+		 * getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
+		 * Aquisitionhomepage); Assertion.assertTrue(true);
+		 * System.out.println("TFN Widget is Displayed"); } else{
+		 * Assertion.fail("TFN Widget is NOT Displayed"); }
+		 */
+	}
+
+	@When("^the user performs Change Location on Plan Summary Page using following MultiCounty Zip information$")
+	public void the_user_performs_Change_Location_on_Plan_Summary_Page_using_following_MultiCounty_Zip_information(
+			DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String zipcode = memberAttributesMap.get("Zip Code");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		VPPAarpPlanSummaryPageMobile plansummaryPage = (VPPAarpPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		MultiCountyModalPageMobile multiCountyModalPage = plansummaryPage.VPP_ChangeLocationValidateMultiCOuntyPopUp(zipcode);
+
+		if (multiCountyModalPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, multiCountyModalPage);
+		} else {
+			Assertion.fail("Error Loading VPP plan summary page");
+		}
+
+	}
+
+	@When("^the user clicks on Find plans on vpp using following information$")
+	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information(
+			DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		
+		String county2 = memberAttributesMap.get("County Name2");
+		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		plansummaryPage.searchPlansCounty(county2, isMultiCounty2);
+
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			if (plansummaryPage.validateVPPPlanSummaryPage())
+				Assertion.assertTrue(true);
+			else
+				Assertion.fail("Error in validating the Plan Summary Page");
+
+		}
+	}
+	
+	
+	@Then("^the user validates the right rail$")
+	public void user_validates_rightRail() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateRightRailSection();
+	}
+
 }
