@@ -689,9 +689,15 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	public void clickViewDrugCostBtn() {
+	public DrugDetailsPage clickViewDrugCostBtn() {
 		viewDrugCostBtn.click();
-	}
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPage(driver);
+		} else {
+			Assertion.fail("Drug Details Page is NOT Displayed");
+			return null;
+		}	}
 	
 	public void viewDrugPricingModal(String planName){
 	  WebElement viewDrugPricingLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'priceLinkBtn')]"));
