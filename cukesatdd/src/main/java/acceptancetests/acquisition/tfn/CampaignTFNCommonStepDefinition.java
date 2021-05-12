@@ -65,7 +65,10 @@ public class CampaignTFNCommonStepDefinition {
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-		tfnPage.retrieveTFNcookie();
+		HashMap<String,String> tfnCookieValue=tfnPage.retrieveTFNcookie();
+		getLoginScenario().saveBean(CommonConstants.PSC_CODE,tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.FED_TFN,tfnCookieValue.get("Fed TFN"));
+		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN,tfnCookieValue.get("Medsup TFN"));
 	}
 WebDriver wd;
 	@Then("^the user validates PSC code$")
@@ -74,7 +77,8 @@ WebDriver wd;
 		String pscCode = inputAttributesMap.get("PSC Code");
 		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE,(new CampaignTFNPage(wd)));
-		tfnPage.validatePSCcode(pscCode);
+		String actualPscCode= (String) getLoginScenario().getBean(CommonConstants.PSC_CODE);
+		tfnPage.validatePSCcode(pscCode,actualPscCode);
 	}
 
 

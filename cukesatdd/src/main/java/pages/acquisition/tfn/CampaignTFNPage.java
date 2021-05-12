@@ -1,5 +1,6 @@
 package pages.acquisition.tfn;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -297,19 +298,19 @@ public class CampaignTFNPage extends UhcDriver {
 	
 	}
 	
-	String PSC_Code;
-	String FedTFN;
-	String MedSuppTFN ;
-	public void retrieveTFNcookie() {
+	
+	public HashMap<String, String> retrieveTFNcookie() {
 		System.out.println("Current URL - "+driver.getCurrentUrl());
 		Cookie cookietfn = driver.manage().getCookieNamed("TFNSessionCookie");
 		System.err.println(cookietfn);
 		String str = cookietfn.toString();
 		System.out.println("TFN Cookie Value - "+str);
 		String[] arrOfStr = str.split("%2C"); 
-		/*
-		 * String PSC_Code; String FedTFN; String MedSuppTFN ;
-		 */
+		
+		String PSC_Code;
+		String FedTFN;
+		String MedSuppTFN ;
+		 
 		for (String a : arrOfStr)
 		        
 		            System.out.println(a); 
@@ -323,9 +324,12 @@ public class CampaignTFNPage extends UhcDriver {
 		System.out.println("Federal TFN - "+FedTFN);
 		System.out.println("MedSupp TFN - "+MedSuppTFN);
 		
-		/*
-		 * PSC_CODE = PSC_Code; FEDERAL_TFN=FedTFN; MEDSUPP_TFN=MedSuppTFN;
-		 */
+		HashMap<String, String> tfnCookieValues = new HashMap<String, String>();
+		tfnCookieValues.put("PSC Code", PSC_Code);
+		tfnCookieValues.put("Fed TFN", FedTFN);
+		tfnCookieValues.put("Medsup TFN", MedSuppTFN);
+			System.out.println(tfnCookieValues);
+		return tfnCookieValues;
 		
 		/*
 		 * getLoginScenario().saveBean(TFNCommonConstants.PSC_CODE, PSC_Code);
@@ -335,13 +339,13 @@ public class CampaignTFNPage extends UhcDriver {
 
 	}
 
-	public void validatePSCcode(String ExpectedpscCode) {
+	public void validatePSCcode(String ExpectedpscCode,String actualPscCode) {
 		
 		//String PSC_Code = PSC_CODE;
 		System.out.println("Expected PSC code: "+ExpectedpscCode);
-		System.out.println("Actual PSC code: "+PSC_Code);
+		System.out.println("Actual PSC code: "+actualPscCode);
 		
-		if(ExpectedpscCode.contentEquals(PSC_Code)) {
+		if(ExpectedpscCode.contentEquals(actualPscCode)) {
 			System.out.println("****************Expected PSC Code matches Actual PSC code from TFN cookie ***************");
 
 			Assertion.assertTrue(true);
