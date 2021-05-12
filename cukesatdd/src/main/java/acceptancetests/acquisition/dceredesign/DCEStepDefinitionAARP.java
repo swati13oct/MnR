@@ -2954,4 +2954,66 @@ public class DCEStepDefinitionAARP {
 
 	}
 
+	/**
+	 * Axding Steps for Drugs and providers Imports Validation for DCE - Authenticated Profiles
+	 * @throws Throwable
+	 */
+	@Then("^the user validates Import Option is displayed$")
+	public void the_user_validates_Import_Option_is_displayed() throws Throwable {
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.ValidateImportOptionDIspalyed();
+	}
+	@Then("^the user clicks on Import Drugs and validates Import Flow \\- Imports Get Started\\, Member NonMember Selection modals$")
+	public void the_user_clicks_on_Import_Drugs_and_validates_Import_Flow_Imports_Get_Started_Member_NonMember_Selection_modals() throws Throwable {
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.ClickImportValidateModals();
+	}
+
+	@Given("^the user selects Member and provides Member Details and proceeds to import$")
+	public void the_user_selects_Member_and_provides_Member_Details_and_proceeds_to_import(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String Member_DOB = memberAttributesMap.get("DOB");
+		String Member_Zip = memberAttributesMap.get("ZipCode");
+		String Member_MBI = memberAttributesMap.get("MBI");
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.EnterMemberDetailsAndImport(Member_DOB, Member_Zip, Member_MBI);
+	}
+
+	@Given("^the user validates Import Success/Failure modal as follows$")
+	public void the_user_validates_Success_Failure_modal_as_follows(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String DrugsFlag = memberAttributesMap.get("DrugsFlag");
+		String ProvidersFlag = memberAttributesMap.get("ProvidersFlag");
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.ValidateImportCompleteModal(DrugsFlag, ProvidersFlag);
+	}
+
+	@Then("^the user clicks on Review Imported Drugs and lands on Build your Drug List Page$")
+	public void the_user_clicks_on_Review_Imported_Drugs_and_lands_on_Build_your_Drug_List_Page() throws Throwable {
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		BuildYourDrugList buildYourDrugList = getStartedPage.ClickReviewAddDrugsBtn();
+		getLoginScenario()
+				.saveBean(PageConstants.DCE_Redesign_BuildDrugList,buildYourDrugList);
+	}
+
+	@Given("^the user selects NonMember, validates disclsimer page and provides following NonMember Details and proceeds to import$")
+	public void the_user_selects_NonMember_and_provides_NonMember_Details_and_proceeds_to_import(DataTable attributes) {
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String NonMember_DOB = memberAttributesMap.get("DOB");
+		String NonMember_Zip = memberAttributesMap.get("ZipCode");
+		String NonMember_Gender = memberAttributesMap.get("Gender");
+		GetStartedPage getStartedPage = (GetStartedPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_GetStarted);
+		getStartedPage.EnterNonMemberDetailsAndImport(NonMember_DOB, NonMember_Zip, NonMember_Gender);
+	}
+
+
 }
