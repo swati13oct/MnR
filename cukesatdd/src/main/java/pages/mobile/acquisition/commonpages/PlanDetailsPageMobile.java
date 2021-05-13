@@ -93,7 +93,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 
-	@FindBy(xpath = "//*[contains(text(),'Plan Costs')]")
+	@FindBy(xpath = "//*[@id=\"plancosts\"]/div/span")
 	private WebElement planCostsTab;
 
 	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
@@ -178,7 +178,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@id='planCosts']//td//strong[contains(text(),'Estimate Annual Total')]/ancestor::td/following-sibling::td/span[(not (contains(@class, 'ng-hide')))]/strong")
 	private WebElement estimateAnnualCost;
 
-	@FindBy(id = "optionalservices")
+	@FindBy(xpath = "//*[@id=\"optionalservices\"]/div/span")
 	private WebElement optionalServicesTab;
 
 	@FindBy(xpath = "//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Monthly']/following-sibling::strong[1]")
@@ -1060,7 +1060,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	public void validatePdfSection(String planType) {
 
-		if (planType.contains("MAPD")) {
+		if (planType.contains("MAPD") || planType.contains("MA")) {
 			// validate English PDFs
 			validateNew(mapdGeneralPlanPDfs);
 			validateNew(mapdMedicalProvidersPDfs);
@@ -1073,6 +1073,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			validateNew(mapdDrugCoveragePDfsOtherLang);
 			validateNew(mapdPharmacyDirectoryPDfsOtherLang);
 		}
+		
+		
 
 	}
 
@@ -1380,6 +1382,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 	}
 
+
+	
 	@FindBy(xpath = "(//label[contains(text(),'Add to Compare')])[1]")
 	public WebElement addToCompareLabel;
 
@@ -1387,6 +1391,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public WebElement comparePlansLink;
 
 	public ComparePlansPageMobile addToCompareAndNavigate() {
+		scrollToView(addToCompareLabel);
 		jsClickNew(addToCompareLabel);
 		jsClickNew(comparePlansLink);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
