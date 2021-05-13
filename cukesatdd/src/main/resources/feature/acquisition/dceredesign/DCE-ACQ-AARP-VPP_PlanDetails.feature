@@ -139,7 +139,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button
+    And clicks on Review drug cost button for detail page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
