@@ -656,6 +656,9 @@ Feature: 1.12 ACQ - Global Components Validation
     @ShopPlan_Resources2_GlobalCompsUHC
     Examples: 
       | site |
+<<<<<<< HEAD
+      | UHC  |
+=======
       | UHC  |
 
   Scenario Outline: To verify the Geo Targeting Link for Medicare Supplement Plans on the <site> site
@@ -761,3 +764,4 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site |
       | UHC  |
+>>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd.git
