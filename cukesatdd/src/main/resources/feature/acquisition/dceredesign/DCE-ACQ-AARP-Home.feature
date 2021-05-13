@@ -38,7 +38,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
       | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP |
 
-    @dce_HomeIcon_AEP_UHC @prodRegression_UHC @regressionUHC @sanity @vbfGate1
+    @dce_HomeIcon_AEP_UHC @prodRegression_UHC @regressionUHC @sanity @vbfGate2
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | UHC  |
