@@ -6353,7 +6353,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		switch (linkName) {
 		
 		case "Introduction":
-				Assertion.assertTrue("Navigation to Introduction page failed", driver.getCurrentUrl().contains("/medicare-education.html"));
+				Assertion.assertTrue("Navigation to Introduction page failed", driver.getCurrentUrl().contains("/medicare-education"));
 				break;
 		case "Eligibility":
 				Assertion.assertTrue("Navigation to Eligibility page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-eligibility.html"));
