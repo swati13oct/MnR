@@ -317,7 +317,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='nav-zipcode']")
 	private WebElement shopForAPlanOptionZipcodeFieldBox;
 
-	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
+//	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
+	@FindBy(css = "#subnav_2  button[class*='uhc-button']")
 	private WebElement shopForAPlanOptionFindPlanButton;
 
 	@FindBy(xpath = "//a[@id='change-location']")
