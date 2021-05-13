@@ -97,6 +97,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     And clicks on Review drug cost button
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then user should be able to see Return to profile link on details page
     When user clicks on Return to profile link on details page
     Then user should be navigated to shopper profile page
@@ -159,7 +160,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
   @dceShopperProfileAddDrugsGloballyAuthenticatedUser_AARP123 @F539025AARP_01 @regressionAARP
     Examples:
       | site | drug1   | zipCode | drug2  | planType | planName                                            | userName      | password   |
-      | AARP | Orkambi | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | chargersdev@1 | Password@5 |
+      | AARP | Orkambi | 80002   | Fanapt | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | DCE_VP_ATDD | Password@1 |
 
   @dceImportDrugs_AuthMember
   Scenario Outline: To verify DCE  - Drug Import flow for Authenticated Member Profile

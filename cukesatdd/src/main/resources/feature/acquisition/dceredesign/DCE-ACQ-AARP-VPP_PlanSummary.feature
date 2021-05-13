@@ -278,7 +278,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     When the user clicks on Build Drug List to navigate to Build Drug List Page
     And the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button
+    And clicks on Review drug cost button to land on drug summary page
     Then user should be able to see Medicare Advantage plan by default
     When user clicks on Return to plan summary page link in DCE
     Then user saves two plans as favorite
