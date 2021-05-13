@@ -732,6 +732,7 @@ public abstract class UhcDriver {
 			System.out.println("Trying JS-Click as click failed in try block..............");
 			jsClickNew(Element);
 		}
+		sleepBySec(3);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
