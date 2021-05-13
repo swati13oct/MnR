@@ -21,7 +21,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_AMP | AARP | Medicare        | MEDICARE PART D CLAIM FORM(PDF) |
       | E2E Scenario 1_AMP | AARP | Dental coverage | Drug cost estimator             |
 
-    @SiteSearch_UHC_01 @regressionUHC
+    @SiteSearch_UHC_01 @regressionUHC @vbfGate
     Examples: 
       | Scenario           | site | searchValue     | newsearchvalue                  |
       | E2E Scenario 1_UMS | UHC  | Medicare        | Pharmacy                        |
@@ -33,7 +33,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_AMP | AARP | Medicare    | Pharmacy       |
 
-    @prodSanity_UHC @sanity @vbfGate
+    @prodSanity_UHC @sanity 
     Examples: 
       | Scenario           | site | searchValue | newsearchvalue |
       | E2E Scenario 1_UMS | UHC  | Medicare    | Pharmacy       |
@@ -50,7 +50,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Error          | <Error>          |
       | NewSearchValue | <NewSearchValue> |
 
-    @SiteSearch_AARP_02 @regressionAARP
+    @SiteSearch_AARP_02 @regressionAARP 
     Examples: 
       | Scenario           | site | searchValue | Error            | NewSearchValue                                                              |
       | E2E Scenario 1_AMP | AARP | Medicare    | Empty            | [blank]                                                                     |
@@ -109,7 +109,7 @@ Feature: 1.08 UAT-Site Search Flows
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearch_AARP @regressionAARP
+    @SiteSearch_AARP @regressionAARP @vbfGate
     Examples: 
       | Scenario           | site | searchValue     | newsearchvalue                  |
       | E2E Scenario 1_AMP | AARP | Medicare        | Pharmacy                        |
@@ -167,7 +167,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC @regressionUHC
+    @SiteSearch_UHC @regressionUHC @vbfGate
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -192,7 +192,7 @@ Feature: 1.08 UAT-Site Search Flows
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearch_AARP_04 @regressionAARP
+    @SiteSearch_AARP_04 @regressionAARP @vbfGate
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | newsearchvalue      |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare        | pharmacy            |
@@ -242,7 +242,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter |         123456 |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | @@@@           |
 
-    @SiteSearch_UHC_03 @regressionUHC
+    @SiteSearch_UHC_03 @regressionUHC @vbfGate
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | Empty            | [blank]        |

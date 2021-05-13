@@ -386,7 +386,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @vppPlanCompareCommon_UHC03 @regressionUHC @vbfGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | NO            | Bexar County | MAPD     | future   |           4 |               1,4 |
+      | 00017 | UHC  |   78006 | YES            | Bexar County | MAPD     | future   |           4 |               1,4 |
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE on <site>
     Given the user is on medicare acquisition site landing page
