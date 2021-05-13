@@ -1,4 +1,4 @@
-@globalComponent @samIcons
+@globalComponent 
 Feature: 1.14 - UAT Scripts - To test SAM Icons
 
   Scenario Outline: <scenario> 1.19.1.1 To test the SAM icons on Acq site on <site> Homepage
@@ -10,17 +10,17 @@ Feature: 1.14 - UAT Scripts - To test SAM Icons
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
-    @samChatCallulayer @UATRegression @sanity @regressionAARP
+    @samChatCallulayer @UATRegression @sanity @regressionAARP @samIcons
     Examples: 
       | pagename | site | scenario           |
       | /        | AARP | E2E Scenario 1_AMP |
 
-    @samChatCallblayer @UATRegression @regressionUHC
+    @samChatCallblayer @UATRegression @regressionUHC @samIcons
     Examples: 
       | pagename | site | scenario           |
       | /        | UHC  | E2E Scenario 1_UMS |
 
-  @samChatVPULayer
+  @samChatVPULayer @samIcons
   Scenario Outline: <scenario> 1.19.1.2 To test the SAM icons on Visitor Profile Page to intiate a chat
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
