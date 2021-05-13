@@ -1829,7 +1829,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * @return
 	 * @throws InterruptedException
 	 */
-	public String getPlanPremium(String PlanName, String planType) throws InterruptedException {
+	public String getPlanPremium(String PlanName, String planType) {
 		System.out.println("Plan Name is : " + PlanName);
 		WebElement premiumForPlan = null;
 		if (planType.equalsIgnoreCase("PDP")) {
@@ -1837,13 +1837,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
 		} else
 
-			// scrollToView(plan);
+						 
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
 
-		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
-		waitforElementVisibilityInTime(premiumForPlan, 10);
-		scrollToView(premiumForPlan);
+		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
+													 
+							   
 
 		String PlanPremium = premiumForPlan.getText();
 
@@ -2198,6 +2198,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void validatePlanPremium(String planName, String monthlyPremium) {
 
+
 		WebElement premiumForPlan = null;
 		if (planName.contains("SNP")) {
 			premiumForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
@@ -2210,7 +2211,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Monthly Premium')])"));
 
 		scrollToView(premiumForPlan);
-		validateNew(premiumForPlan);
+		//validateNew(premiumForPlan);
 		/*
 		 * String PlanPremium = PremiumForPlan.getText();
 		 * if(PlanPremium.equals(monthlyPremium)){
@@ -2457,19 +2458,29 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		System.out.println("Need Help Section is present");
 	}
 
+
+	
 	public void validateAgentEBRCPage() {
 		validateNew(RightRail_AgentInYourArea);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
-		// RightRail_AgentInYourArea.click();
+		String parentWindow = driver.getWindowHandle();
 		jsClickNew(RightRail_AgentInYourArea);
-		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
-		driver.switchTo().window(tabs_windows.get(1));
+		sleepBySec(3);
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("myuhcagent")) {
 			System.out.println("myuhcagent Page is displayed");
 			Assertion.assertTrue(true);
 			// driver.navigate().back();
-			driver.switchTo().window(tabs_windows.get(0));
+			driver.switchTo().window(parentWindow);
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("plan-summary")) {
 				System.out.println("Back on VPP Plan Summary Page");
@@ -2479,6 +2490,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else
 			Assertion.fail("Unable to load Myuhcagent Page");
 	}
+
 
 	public void validateMedicareGuideRightRail() {
 		validateNew(MedicareGuideRightRail);
@@ -5257,11 +5269,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void checkPlansForCompare(String counter, String planType) {
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		pageloadcomplete();
+		
 		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
 		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
 		if (count == 0)
@@ -5278,11 +5287,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("MA")) {
 			allPlans = driver
 					.findElements(By.xpath(".//*[@id='plan-list-1']//div[contains(@class,'compare-box')]//label"));
-		} else {
+		}else if(planType.equalsIgnoreCase("SNP"))
+			allPlans=driver.findElements(By.xpath("//label[contains(text(),'Compare')]"));
+		else {
 			allPlans = driver.findElements(By.xpath("//label[contains(text(),'Add to compare')]"));
 		}
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
+				iosScroll(allPlans.get(i));
 				jsClickNew(allPlans.get(i));
 			}
 		}
