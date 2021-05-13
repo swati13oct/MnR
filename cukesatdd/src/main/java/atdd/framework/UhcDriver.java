@@ -724,7 +724,7 @@ public abstract class UhcDriver {
 		sleepBySec(3);
 		scrollToView(Element);
 
-		Element.click();
+		jsClickNew(Element);
 
 		sleepBySec(5);
 		waitForPageLoadSafari();
