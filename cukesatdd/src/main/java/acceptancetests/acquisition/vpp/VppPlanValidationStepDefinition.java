@@ -714,11 +714,18 @@ public class VppPlanValidationStepDefinition {
 									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
 									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
 									  planSummaryPage = new AepVppPlanSummaryPage(wd);
+										if (planType.equalsIgnoreCase("PDP")) {
 									  planSummaryPage.selectCounty(countyName);
 									  planSummaryPage.Enroll_OLE_Plan(planName,planType);
-                                      //benefitsMap = planSummaryPage.collectInfoVppPlanSummaryPg(planName, countyName, planYear, sheetName, rowIndex);
-									  premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
-
+                                      premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
+									
+										}
+										else {
+									  planSummaryPage.Enroll_OLE_Plan_PlanDetails(planName,planType);
+                                      premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
+									
+										}
+										
 								 }
 
 								 if(!(currentColName.equalsIgnoreCase("plan year")||

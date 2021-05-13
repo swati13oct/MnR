@@ -65,7 +65,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	
 	@FindBy(xpath = "//*[contains(@class,'plan-detail-table')]")
 	private WebElement lisPlanTable;
-
+	
+	@FindBy(xpath = "//*[not(contains(@class,'ng-hide')) and contains(text(), 'Enroll in plan')]")
+	private WebElement EnrollinPlan_PlanDetails;
+	
+	
 	String sheetName = "";
 	int rowIndex;
 
@@ -683,6 +687,32 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		System.out.println(sheetName+"_"+rowIndex+" - Finished to collect the OLE Info on Wlecome OLE Pages - " + result.size());
 		return result;
 	}
+    
+    
+    public void Enroll_OLE_Plan_PlanDetails(String planName, String planType) throws InterruptedException {
+    	
+    		try {
+    			Thread.sleep(10000);
+    		} catch (InterruptedException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+
+    		System.out.println("Enroll in Plan for Plan : " + planName);
+    		try {
+    			if (validate(EnrollinPlan_PlanDetails))
+    				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+    			else
+    				System.out.println("Enroll in Plan Button is Not Displayed ");
+
+    		} catch (Exception e) {
+    			System.out.println("Enroll in Plan Button is Not Displayed ");
+    		}
+
+    		jsClickNew(EnrollinPlan_PlanDetails);
+
+    		
+    	}
 	}
 
 
