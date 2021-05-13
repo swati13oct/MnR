@@ -66,7 +66,8 @@ public class VppFavoritePlanMobile {
 
 		// ----- PDP plan type ---------------------------
 		planType = "PDP";
-		plansummaryPage.backToPlans.click();
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+	
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(pdp_savePlanNames, planType);
@@ -75,7 +76,7 @@ public class VppFavoritePlanMobile {
 
 		// ----- SNP plan type ---------------------------
 		planType = "SNP";
-		plansummaryPage.backToPlans.click();
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup();
 		plansummaryPage.validateAbilityToSavePlans(snp_savePlanNames, planType);
@@ -113,6 +114,7 @@ public class VppFavoritePlanMobile {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
+		//plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		System.out.println("Proceed to click Home button to enter zip code again");
 		plansummaryPage.clickHomeButton();
 
@@ -143,6 +145,7 @@ public class VppFavoritePlanMobile {
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
@@ -150,6 +153,7 @@ public class VppFavoritePlanMobile {
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		//plansummaryPage.handlePlanYearSelectionPopup(planYear);

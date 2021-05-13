@@ -49,7 +49,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | Monthly Premium | <monthlyPremium> |
       | Yearly Premium  | <yearlyPremium>  |
 
-    @vppPlanDetailsCommon_AARP01 @regressionAARP @sanity @MHJ 
+    @vppPlanDetailsCommon_AARP01 @regressionAARP @sanity
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
       | 00002 | AARP |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $29            | $348          | future   |
