@@ -1,4 +1,4 @@
-@GlobalComponentsAARP
+@GlobalComponentsAARP @GlobalHeaderFooter
 Feature: 1.12 ACQ - Global Components Validation
 
   @globalfooterULayer
