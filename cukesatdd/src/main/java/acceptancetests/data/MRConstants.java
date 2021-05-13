@@ -516,15 +516,15 @@ public class MRConstants {
 
 	public static final String STAGE_SSO_TESTHANESS_URL = "http://apsrs7264.uhc.com:8080/content/admin-tools/sso-test.html";
 
-	public static String AARP_TELESALES_AGENT_PAGE_URL = "https://www." + MRScenario.environment
+	public static final String AARP_TELESALES_AGENT_PAGE_URL = "https://www." + MRScenario.environment
 			+ "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/admin/shopper-profile.html/login";
 
-	public static String AARP_TELESALES_AGENT_PAGE_URL_STAGE = "https://" + MRScenario.environment
+	public static final String AARP_TELESALES_AGENT_PAGE_URL_STAGE = "https://" + MRScenario.environment
 			+ "-generic.uhc.com/admin/shopper-profile.html/login";
 
-	public static String AARP_TELESALES_AGENT_TEAM_E_PAGE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
+	public static final String AARP_TELESALES_AGENT_TEAM_E_PAGE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
 
-	public static String AARP_TELESALES_AGENT_PAGE_URL_Team = "https://www." + MRScenario.environment
+	public static final String AARP_TELESALES_AGENT_PAGE_URL_Team = "https://www." + MRScenario.environment
 			+ "-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
 
 	public static final String Team_H_NEW_URL_TESTHARNESS = "https://www.team-h-medicare.ocp-ctc-dmz-nonprod.optum.com/content/login/overview.html?testharness=true";

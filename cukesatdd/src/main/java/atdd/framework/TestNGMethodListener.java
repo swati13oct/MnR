@@ -22,28 +22,29 @@ public class TestNGMethodListener implements IInvokedMethodListener, IAnnotation
 	}
 
 	/**
-	 * Set the name of the runner class
-	 * before the method annotated with @Test from runner class is invoked
-	 * */
+	 * Set the name of the runner class before the method annotated with @Test from
+	 * runner class is invoked
+	 */
 	@Override
 	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 		MRScenario.setRunnerFileName(testResult.getTestClass().getRealClass().getSimpleName());
 	}
 
-	
-	
 	/**
-	 * This is an implementation for transform method from IAnnotationTransformer interface, 
-	 * it is capable of handling the execution of a Test runner based on the microapps parameter from POM.
+	 * This is an implementation for transform method from IAnnotationTransformer
+	 * interface, it is capable of handling the execution of a Test runner based on
+	 * the microapps parameter from POM.
 	 * 
-	 * If the runner name contains the micro app name, then it will be executed. If not, it will be skipped.
+	 * If the runner name contains the micro app name, then it will be executed. If
+	 * not, it will be skipped.
 	 * 
 	 * If no value for property microapps is passed, it will be skipped
 	 */
 	@Override
 	public void transform(ITestAnnotation annotation, Class testClass, Constructor testConstructor, Method testMethod) {
-		String MicroApps = System.getProperty("microapps");
-		List<String> selectedMicroApps =  MicroApps.isEmpty() ? new ArrayList<String>() : Arrays.asList(MicroApps.split(","));
+		String MicroApps = System.getProperty("microapps") == null ? "" : System.getProperty("microapps");
+		List<String> selectedMicroApps = MicroApps.isEmpty() ? new ArrayList<String>()
+				: Arrays.asList(MicroApps.split(","));
 		Set<String> selectedRunners = new HashSet<String>();
 		if (!selectedMicroApps.isEmpty()) {
 			for (String MicroApp : selectedMicroApps) {

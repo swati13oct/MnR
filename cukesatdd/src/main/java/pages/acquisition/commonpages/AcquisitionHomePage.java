@@ -3306,9 +3306,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink = driver.findElement(By
-				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
-		String winHandleBefore = driver.getWindowHandle();
+//		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
+		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and @onkeydown]"));
+
+String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();
 		driver.switchTo().window(winHandleBefore);

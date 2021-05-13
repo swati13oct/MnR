@@ -110,7 +110,7 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     And the user clicks on DCE button to return to Review Drug cost page
 
-    @vpp_NBA_DCE_Redesign_Integration_AARP @regressionAARP
+    @vpp_NBA_DCE_Redesign_Integration_AARP @regressionAARP @vbfGate1
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | planname                                                         | drug1   |
       | AARP |   10001 | future   | MAPD     | none   | no              | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | Orkambi |

@@ -31,7 +31,7 @@ public class DisclaimersPageMobile extends UhcDriver{
 	public WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'meded-accordion')]/div[contains(@class,'meded-accordion__item')]//a")
-	public static List<WebElement> mededAccordianList;
+	public List<WebElement> mededAccordianList;
 
 	public DisclaimersPageMobile(WebDriver driver) {
 		super(driver);

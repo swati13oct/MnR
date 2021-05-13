@@ -1160,6 +1160,9 @@ public class PlanDetailsPage extends UhcDriver {
 
 	public PharmacySearchPage planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
 		WebElement PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-"+language+"')]"));
+		if(language.equalsIgnoreCase("English")){
+			PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
+		}
 		CommonUtility.waitForPageLoad(driver, PharmacyLink, 45);
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(PharmacyLink);

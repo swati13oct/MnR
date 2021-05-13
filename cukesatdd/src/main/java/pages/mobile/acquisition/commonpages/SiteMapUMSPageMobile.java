@@ -45,7 +45,7 @@ public class SiteMapUMSPageMobile extends UhcDriver{
 	public WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'med_cont')]/ul[contains(@class,'bullet_list')]/li")
-	public static List<WebElement> siteMapList;
+	public List<WebElement> siteMapList;
 	
 	public SiteMapUMSPageMobile(WebDriver driver) {
 		super(driver);
