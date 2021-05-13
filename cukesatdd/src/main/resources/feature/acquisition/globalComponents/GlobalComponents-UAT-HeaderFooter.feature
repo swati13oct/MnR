@@ -1,4 +1,4 @@
-@UATRegression @F513647 @globalComponent
+@UATRegression @F513647 @globalComponent @GlobalHeaderFooter
 Feature: 1.12 UAT - Header and Footer flows
 
   @globalfooterULayer @UATRegression
