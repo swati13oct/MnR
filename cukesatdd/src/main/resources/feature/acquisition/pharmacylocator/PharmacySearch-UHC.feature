@@ -2,7 +2,7 @@
 Feature: 2.11. ACQ-Pharmacy Locator - UMS
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
-  @pharmacyLocatorPerformanceBlayer #@vbfGate
+  @pharmacyLocatorPerformanceBlayer
   Scenario Outline: To verify available pharmacies
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |

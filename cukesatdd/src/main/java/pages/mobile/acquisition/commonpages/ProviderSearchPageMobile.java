@@ -27,7 +27,7 @@ import atdd.framework.UhcDriver;
  */
 public class ProviderSearchPageMobile extends UhcDriver {
 
-	private static final String planToBeSelected = null;
+	private final String planToBeSelected = null;
 
 	@FindBy(className = "firstTierFilterItem")
 	private WebElement physcianSearchTypes;
@@ -464,7 +464,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, PrintEmailBtn, 30);
 			// validateNew(providerCard);
 			scrollToView(PrintEmailBtn);
-			validateNew(PrintEmailBtn);
+			
 		}
 	}
 
@@ -569,6 +569,19 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	public void verifyProviderSearchRallyPageDisplayed() {
 		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
+	}
+	
+	public int entersZipcodeAndPlancount(String zipcode, String year) {
+
+		validateNew(zipCodeTextfield);
+		zipCodeTextfield.sendKeys(zipcode);
+		validateNew(continueButton);
+		jsClickNew(continueButton);
+		selectYear(year);
+
+		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+
+		return topicDropDownValues.size();
 	}
 
 	public AcquisitionHomePageMobile returnToAcqHomePage() {

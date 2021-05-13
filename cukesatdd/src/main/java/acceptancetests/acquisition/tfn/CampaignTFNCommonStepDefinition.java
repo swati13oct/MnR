@@ -65,7 +65,10 @@ public class CampaignTFNCommonStepDefinition {
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-		tfnPage.retrieveTFNcookie();
+		HashMap<String,String> tfnCookieValue=tfnPage.retrieveTFNcookie();
+		getLoginScenario().saveBean(CommonConstants.PSC_CODE,tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.FED_TFN,tfnCookieValue.get("Fed TFN"));
+		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN,tfnCookieValue.get("Medsup TFN"));
 	}
 WebDriver wd;
 	@Then("^the user validates PSC code$")
@@ -74,7 +77,8 @@ WebDriver wd;
 		String pscCode = inputAttributesMap.get("PSC Code");
 		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE,(new CampaignTFNPage(wd)));
-		tfnPage.validatePSCcode(pscCode);
+		String actualPscCode= (String) getLoginScenario().getBean(CommonConstants.PSC_CODE);
+		tfnPage.validatePSCcode(pscCode,actualPscCode);
 	}
 
 
@@ -292,6 +296,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String expectedTfnNumber=(String)getLoginScenario().getBean(CommonConstants.FED_TFN);
 	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	//tfnPage.HomepagePlanSearchOLE(Zip);
@@ -299,7 +304,8 @@ public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	tfnPage.validateFederalTFNNo(TFNXpath_PlanDetails, expectedTfnNumber);
 
 }
 

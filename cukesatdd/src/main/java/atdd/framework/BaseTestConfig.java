@@ -24,8 +24,6 @@ public abstract class BaseTestConfig {
 
 	public abstract void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper);
 
-	long dataSize = 1024 * 1024;
-
 	@BeforeSuite(alwaysRun = true)
 	public void setupSuite(ITestContext context) {
 		for (ITestNGMethod method : context.getAllTestMethods()) {
@@ -35,8 +33,6 @@ public abstract class BaseTestConfig {
 
 	@BeforeClass(alwaysRun = true)
 	public void setupClass() {
-		long usedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
-
 		testNGCucumberRunner = new TestNGCucumberRunner(this.getClass());
 	}
 

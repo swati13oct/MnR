@@ -15,12 +15,15 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
+import atdd.framework.GlobalBeforeHook;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import pages.acquisition.commonpages.AboutUsAARPPage;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
@@ -49,6 +52,12 @@ public class GlobalComponentsCommonStepDefinition {
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	private Scenario scenario;
+	
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 	@When("^user accesses global header of the Medicare Plans home page$")
 	public void access_global_header_aarp() {
@@ -64,6 +73,8 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@Given("^the user is on medicare acquisition site landing page$")
 	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
+		
+		//scenario.log("Aayush Shah - Change made 5/7 - test");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -87,6 +98,7 @@ public class GlobalComponentsCommonStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 
 		aquisitionhomepage.validateSubtitle();
+		
 	}
 
 	@When("^user accesses global footer of the Medicare Plans All page$")

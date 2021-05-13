@@ -695,6 +695,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'thankYouMsg')]")
 	private WebElement learnMoreMedicareEmailSubmissionMsg;
 	
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]")
+	private WebElement CallSamTFNtimezone_Medsup;
+
+	@FindBy(xpath = "//div//p[contains(text(),'Already a member?')]")
+	private WebElement CallSamTFNMember_Medsup;
+	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
 	private static String TeamC_ACQUISITION_PAGE_URL = MRConstants.TeamC_UHC_URL;
@@ -3300,9 +3306,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink = driver.findElement(By
-				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
-		String winHandleBefore = driver.getWindowHandle();
+//		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
+		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and @onkeydown]"));
+
+String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();
 		driver.switchTo().window(winHandleBefore);
@@ -3754,7 +3761,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'/medicare-education/medicare-advantage-plans')]"));
 		WebElement MedSuppPlansLink = driver.findElement(
 				//By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-supplement-plans.html')]"));
-		By.xpath("//*[contains(@class, 'sctn')]//a[contains(text(),'Medicare Supplement Insurance Plans')]"));
+		By.xpath("//*[contains(@class, 'sctn')]//a[contains(text(),'Medicare Supplement Insurance')]"));
 		WebElement PDPplansLink = driver
 				.findElement(By.xpath("//*[contains(@class, 'sctn')]//a[contains(@href,'medicare-part-d')]"));
 
@@ -6347,7 +6354,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		switch (linkName) {
 		
 		case "Introduction":
-				Assertion.assertTrue("Navigation to Introduction page failed", driver.getCurrentUrl().contains("/medicare-education.html"));
+				Assertion.assertTrue("Navigation to Introduction page failed", driver.getCurrentUrl().contains("/medicare-education"));
 				break;
 		case "Eligibility":
 				Assertion.assertTrue("Navigation to Eligibility page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-eligibility.html"));
@@ -6368,7 +6375,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.assertTrue("Navigation to Medicare Advantage Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-advantage-plans.html"));
 			break;
 			
-		case "Medicare Supplement Insurance Plans":
+		case "Medicare Supplement Insurance":
 			Assertion.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-supplement-plans.html"));
 			break;
 			
@@ -6376,8 +6383,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-part-d.html"));
 			break;
 			
-		case "Enrollment Basics":
-			Assertion.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"));
+		case "When to Enroll":
+			Assertion.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("/medicare-education/when-to-enroll.html"));
 			break;
 			
 		case "Medicare FAQ":
@@ -6425,4 +6432,100 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return null;
 		}
 		}
+	
+	public AcquisitionHomePage validateTFNCallpopup() throws InterruptedException {
+		driver.navigate().refresh();
+		CommonUtility.checkPageIsReady(driver);
+		CheckiPerseptions();
+		validate(callsamtooltip);
+		validate(callsam);
+		String ActualCallSAMTFN = callsam.getText();
+		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
+		jsClickNew(callsam);
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+		validate(CallSamTFN);
+		String ExpectedCallSAMTFN = CallSamTFN.getText();
+		System.out.println("TFN No displayed on the Page" + ExpectedCallSAMTFN);
+		if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
+			System.out
+					.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
+
+			Assert.assertTrue(true);
+		} else {
+			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
+					+ ExpectedCallSAMTFN);
+		}
+		if(driver.getCurrentUrl().contains("medicare-supplement-plans.html") || driver.getCurrentUrl().contains("/compare/compare-ms.html") || driver.getCurrentUrl().contains("/enroll/ms-apply.html") || driver.getCurrentUrl().contains("shop/estimate/ms-costs.html")) {
+			String ExpectedCallSamTFNtimezone = "7 a.m. â€“ 11 p.m. ET, Monday-Friday\n9 a.m. â€“ 5 p.m. ET, Saturday";
+			validate(CallSamTFNtimezone_Medsup);
+			String ActualCallSamTFNtimezone = CallSamTFNtimezone_Medsup.getText();
+			System.out.println(ExpectedCallSamTFNtimezone);
+			System.out.println(ActualCallSamTFNtimezone);
+			if (ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+					.equalsIgnoreCase(ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", ""))) {
+				System.out.println(
+						"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+			} else {
+				Assert.fail(
+						"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************"+ExpectedCallSamTFNtimezone);
+			}
+			String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
+			validate(CallSamTFNMember_Medsup);
+			String ActualCallSamTFNMember = CallSamTFNMember_Medsup.getText();
+			System.out.println(ExpectedCallSamTFNMember);
+			if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+				System.out.println(
+						"****************TFN Member Content was  found macthing with the SAM call Popup  ***************");
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail(
+						"*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"
+								+ ActualCallSamTFNMember);
+			}
+		}
+		else {
+			String ExpectedCallSamTFNtimezone = "Hours: 8 a.m. � 8 p.m., 7 days a week.*\n*Alaska and Hawaii: 8 a.m. � 8 p.m. Monday � Friday, 8 a.m. � 5 p.m. Saturday and Sunday.";
+			validate(CallSamTFNtimezone);
+			String ActualCallSamTFNtimezone = CallSamTFNtimezone.getText();
+			System.out.println(ExpectedCallSamTFNtimezone);
+			System.out.println(ActualCallSamTFNtimezone);
+			if (ActualCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", "")
+					.equalsIgnoreCase(ExpectedCallSamTFNtimezone.replaceAll("[^A-Za-z0-9:.]", "").replace("\n", ""))) {
+				System.out.println(
+						"****************TFN Timezone Content was  found macthing with the SAM call Popup  ***************");
+				// Assert.assertTrue(true);
+			} else {
+				// Assert.fail("*****************TFN Timezone Content was not found macthing
+				// with the SAM call Popup ***************"+ActualCallSamTFNtimezone);
+				System.out.println(
+						"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
+			}
+			String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
+			// ActualCallSamTFNMember.replace("", " ");
+			// WebElement strCallSamTFNMember=
+			// driver.findElement(By.xpath("//p[contains(text(),'Already a member?')]"));
+			validate(CallSamTFNMember);
+			String ActualCallSamTFNMember = CallSamTFNMember.getText();
+			System.out.println(ExpectedCallSamTFNMember);
+			if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
+				System.out.println(
+						"****************TFN Member Content was  found macthing with the SAM call Popup  ***************");
+				Assert.assertTrue(true);
+			} else {
+				Assert.fail(
+						"*****************TFN Member Content was not found macthing with the SAM call Popup  ***************"
+								+ ActualCallSamTFNMember);
+			}
+		}
+		validate(CallSamTFNClose);
+		jsClickNew(CallSamTFNClose);
+		/*
+		 * validate(callsamtooltip); CheckiPerseptions(); callsam.click();
+		 * System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		 * driver.switchTo().activeElement(); System.out.println(CallSamTFN.getText());
+		 * CallSamTFNClose.click(); validateNew(callsam); return null;
+		 */
+		return null;
+	}
 }
