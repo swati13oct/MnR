@@ -319,7 +319,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(id = "backToPlanSummaryTop")
 	private WebElement backToPlansLink;
 
-	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
+	@FindBy(xpath = "//*[@id=\"card-updates\"]/a")
 	private WebElement backToPlanResults;
 
 	@FindBy(id = "drugsTabId")
@@ -434,7 +434,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
 	private WebElement snpEmailOption;
 
-	@FindBy(xpath = "//img[@class='img-responsive aarp']")
+	@FindBy(xpath = "//*[@id=\"Lock-ups\"]")
 	private WebElement homeBtn;
 
 	@FindBy(xpath = "//ul[contains(@class,'primary-nav')]//a[contains(@href,'health-plans.html')]")
@@ -1146,11 +1146,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+		//CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
-		scrollToView(ProviderSearchLink);
+		iosScroll(ProviderSearchLink);
 		// validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
@@ -2855,17 +2855,23 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void validateAbilityToSavePlans(String savePlanNames, String planType) {
+		
+		scrollToView(backToPlans);
 		List<String> listOfTestPlans = Arrays.asList(savePlanNames.split(","));
 		System.out
 				.println("Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
+		
 
 		for (String plan : listOfTestPlans) {
 			System.out.println("Proceed to locate plan=" + plan);
 
 			String testPlanXpath = "//*[contains(text(),'" + plan + "') and contains(@class,'ng-binding')]";
+			WebElement testPlanXpath1 = driver.findElement(By.xpath("//*[contains(text(),'" + plan + "') and contains(@class,'ng-binding')]"));
 			System.out.println("TEST - textPlanXpath xpath=" + testPlanXpath);
 			List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
+			
 			int expMatch = 1;
+			scrollToView(testPlanXpath1);
 			Assertion.assertTrue(
 					"PROBLEM - unable to locate plan='" + plan + "'.  Expect number of match='" + expMatch
 							+ "' | Actual number of match='" + listOfPlans.size() + "'",
@@ -2900,7 +2906,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Proceed to click to save plan");
 //			WebDriverWait d = new WebDriverWait(driver, 20);
 //			d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
+			iosScroll(listOfSavePlanIcons.get(0));
+			scrollToView(listOfSavePlanIcons.get(0));
 			jsClickNew(listOfSavePlanIcons.get(0));
+			
+			
 
 			System.out.println("Click to close on the create profile popup");
 
@@ -2915,13 +2925,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 						|| State.equalsIgnoreCase("Puerto Rico")
 						|| State.equalsIgnoreCase("Virginia")) {
 					if (validate(closeProfilePopup))
+						iosScroll(closeProfilePopup);
 						jsClickNew(closeProfilePopup);
 				} else {
 					if (validate(keepShoppingBtn))
+						iosScroll(keepShoppingBtn);
 						jsClickNew(keepShoppingBtn);
 				}
 			} else {
 				if (validate(keepShoppingBtn))
+					iosScroll(keepShoppingBtn);
 					jsClickNew(keepShoppingBtn);
 			}
 			CommonUtility.checkPageIsReady(driver);
@@ -2966,16 +2979,22 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "'.  Expect number of match='" + expMatch + "' | Actual number of match='"
 					+ listOfAppearedSavedText.size() + "'", listOfAppearedSavedText.size() == expMatch);
 			
+			
 			scrollToView(backToPlanResults);
 		}
 	}
 
 	public void validatePlansAreSaved(String savePlanNames, String planType) {
 		String planTypePath = "";
+		driver.navigate().refresh();
+		sleepBySec(3);
 		if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
 			planTypePath = "//div[@ng-show='showMaPlans']";
 		} else if (planType.equalsIgnoreCase("pdp")) {
 			planTypePath = "//div[@ng-show='showPdpPlans']";
+			driver.navigate().refresh();
+			CommonUtility.checkPageIsReady(driver);
+			sleepBySec(5);
 		} else if (planType.equalsIgnoreCase("snp")) {
 			planTypePath = "//div[@ng-show='showSnpPlans']";
 		}
@@ -3015,7 +3034,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		try {
 			sleepBySec(2);
 			homeBtn.isDisplayed();
-			// homeBtn.click();
+			scrollToView(homeBtn);
+			//homeBtn.click();
 			jsClickNew(homeBtn);
 		} catch (Exception e) {
 			Assertion.assertTrue("PROBLEM - Unable to click Home button", false);

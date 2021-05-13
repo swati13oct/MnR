@@ -578,6 +578,7 @@ public abstract class UhcDriver {
 				// action.perform();
 				checkElementisEnabled(element);
 
+				System.out.println("Trying JSClick on IOS ..........");
 				JavascriptExecutor js = (JavascriptExecutor) driver;
 				js.executeScript("arguments[0].click(true);", element);
 				System.out.println("JsClick worked");
@@ -732,7 +733,7 @@ public abstract class UhcDriver {
 			System.out.println("Trying JS-Click as click failed in try block..............");
 			jsClickNew(Element);
 		}
-		sleepBySec(3);
+		sleepBySec(10);
 		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());

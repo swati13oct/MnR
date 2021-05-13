@@ -145,7 +145,8 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("!!!Entered valid Email ");
 	    scrollToView(sendButtonEmailPlanComparePopUp);
 	    pageloadcomplete();
-		jsClickMobile(sendButtonEmailPlanComparePopUp);
+		iosScroll(sendButtonEmailPlanComparePopUp);
+		jsClickNew(sendButtonEmailPlanComparePopUp);
 		pageloadcomplete();
 		Assertion.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));
 		//Validating email success popup
