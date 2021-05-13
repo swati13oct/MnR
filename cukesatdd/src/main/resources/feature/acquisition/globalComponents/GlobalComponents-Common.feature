@@ -36,10 +36,11 @@ Feature: 1.12 ACQ - Global Components Validation
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user accesses global header of the Medicare Plans home page
-    And user verifies the logo on home page
-    And user clicks on Sign in link in the header
-    And user clicks on register link in the header
-    Then user clicks on the heart icon in the header
+    When user verifies the logo
+    And user clicks on Sign in link
+    And user clicks on register link
+    Then the user clicks on browser back button
+    Then user validates visitor profile
 
     @globalheader
     Examples: 
