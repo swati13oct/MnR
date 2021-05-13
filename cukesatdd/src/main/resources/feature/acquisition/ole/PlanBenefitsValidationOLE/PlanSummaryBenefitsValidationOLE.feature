@@ -12,12 +12,12 @@ Feature: ACQ-Plan benefits validation
      @OLEplanSummaryBenefitsAARP01
     	Examples: 
       | excelPath                | workSheet | site |
-      | Plan Summary Benefits_OLE_Data | OLESheet2021 MASNP 122  | AARP |
+      | Plan Benefits_MA_SNP_OLE_Data | OLESheet2021 MASNP 122  | AARP |
 
   @OLEplanSummaryBenefitsAARP01
     Examples:
       | excelPath                | workSheet | site |
-      | Plan Summary Benefits_OLE_Data | OLESheet2021 PDP 118  | AARP |
+      | Plan Benefits_PDP_OLE_Data | OLESheet2021 PDP 118  | AARP |
 
 
   @OLEplanSummaryBenefitsUHC01
