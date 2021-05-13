@@ -49,7 +49,7 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | UHC  | Medicare    | Empty            | [blank]        |
       | UHC  | Medicare    | InvalidCharacter | medicareeee    |
 
-  #@SiteSearchResultsVPPUlayer  @SiteSearchRegressionAARP @vbfGate @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC @vbfGate
+  #@SiteSearchResultsVPPUlayer  @SiteSearchRegressionAARP @SiteSearchErrorHandlingUHC  @SiteSearchRegressionUHC @vbfGate
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify specific Additional Benefits in Plan Details for provided plan on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

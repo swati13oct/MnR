@@ -860,7 +860,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(DrugSummaryCoverageHeader);
 		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
 		validateNew(DrugName);
-		Assertion.assertTrue("Drug name is not displayed on the plan compare page",DrugName.getText().contains(drug));
+		Assertion.assertTrue("Drug name is not displayed on the plan compare page",DrugName.getText().toLowerCase().contains(drug));
 		validateNew(DrugCoverageText);
 		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
 		System.out.println("Verified Edit Drugs Section header and Summary section");

@@ -115,7 +115,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | zipcode | site | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
       |   80002 | AARP | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
 
-    @dce_Redesign_DCE_Detail_to_Vpp_Details_SNP @regressionAARP @regressionUHC
+    @dce_Redesign_DCE_Detail_to_Vpp_Details_SNP @regressionAARP @regressionUHC @vbfGate1
     Examples: 
       | zipcode | site | plantype | county       | isMultutiCounty | drug1     | planname                                              | planyear |
       |   78006 | AARP | SNP      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | future   |
@@ -139,7 +139,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button
+    And clicks on Review drug cost button for detail page
     Then the user Clicks button to VPP Plan Details Page from Drug Details Page
     Then the user validates planName matches plan Name in VPP
     Then the user verify the drug cost estimator and view plan summary on VPP detail page in AARP
@@ -213,7 +213,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | AARP |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
 
-    @dceSwitchtoGenericNBA_MAPD_UHC @switchtoGenericUHC @regressionUHC
+    @dceSwitchtoGenericNBA_MAPD_UHC @switchtoGenericUHC @regressionUHC @vbfGate1
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |

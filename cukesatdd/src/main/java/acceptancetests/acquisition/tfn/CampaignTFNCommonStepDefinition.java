@@ -296,6 +296,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String expectedTfnNumber=(String)getLoginScenario().getBean(CommonConstants.FED_TFN);
 	String Zip = inputAttributesMap.get("Zip Code");
 	tfnPage.HomepagePlanSearch(Zip);
 	//tfnPage.HomepagePlanSearchOLE(Zip);
@@ -303,7 +304,8 @@ public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
 	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
-	tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	tfnPage.validateFederalTFNNo(TFNXpath_PlanDetails, expectedTfnNumber);
 
 }
 
