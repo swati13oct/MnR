@@ -6,14 +6,14 @@ Feature: 1.03 Acq-To test Sitesearch results site
   Scenario Outline: Verify search results in <site> site -search value -<newsearchvalue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    Then the user enter the searchvalue in the search text box and hits enter
+    Then the user enter the searchValue in the search text box and hits enter
       | search Value | <searchValue> |
-    Then the user should see fifteen results before the pagination
+    Then the user should see fifteen results before pagination
     #Then the user validates count of results aganist the total shown at top of the page
-    Then the user validates pagination and results displayed on page
-    Then the user validates the secondary search by providing new searchvalue in the text box
+    Then the user validates pagination and results displayed
+    Then the user enter the secondary searchValue in the search text box
       | NewSearchValue | <newsearchvalue> |
-    Then the user validates pagination and results displayed on page
+    Then the user validates pagination and results displayed
 
     @SiteSearchCommon_AARP
     Examples: 
@@ -29,10 +29,10 @@ Feature: 1.03 Acq-To test Sitesearch results site
   Scenario Outline: Verify search results in <site> site - search value -<NewSearchValue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    Then the user enter the searchvalue in the search text box and hits enter
+    Then the user enter the searchValue in the search text box and hits enter
       | search Value | <searchValue> |
-    Then the user clear secondary search box and insert new searchvalue
-      | New Search Value | <NewSearchValue> |
+    Then the user enter the secondary searchValue in the search text box
+      | NewSearchValue | <newsearchvalue> |
     Then the user validates Error message on page
       | Error          | <Error>          |
       | NewSearchValue | <NewSearchValue> |
@@ -64,15 +64,15 @@ Feature: 1.03 Acq-To test Sitesearch results site
     #    Then the user checks for AEP CUrrent year plans link and clicks to view current year plans on AARP
     And the user views plan details of the above selected plan and validates
       | Plan Name | <planName> |
-    Then the user enter the searchvalue in the search text box and hits enter
+    Then the user enter the searchValue in the search text box and hits enter
       | search Value | <searchValue> |
-    Then the user should see fifteen results before the pagination
+    Then the user should see fifteen results before pagination
     #Then the user validates count of results aganist the total shown at top of the page
-    Then the user validates pagination and results displayed on page
-    Then the user validates the secondary search by providing new searchvalue in the text box
+    Then the user validates pagination and results displayed
+    Then the user enter the secondary searchValue in the search text box
       | NewSearchValue | <newsearchvalue> |
-    Then the user validates pagination and results displayed on page
-
+    Then the user validates pagination and results displayed
+    
     @SiteSearchCommon_AARP
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                    | searchValue | newsearchvalue |
@@ -103,14 +103,14 @@ Feature: 1.03 Acq-To test Sitesearch results site
   Scenario Outline: To verify search results in pharmacy locator on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    Then the user enter the searchvalue in the search text box and hits enter
+    Then the user enter the searchValue in the search text box and hits enter
       | search Value | <searchValue> |
-    Then the user should see fifteen results before the pagination
+    Then the user should see fifteen results before pagination
     #Then the user validates count of results aganist the total shown at top of the page
-    Then the user validates pagination and results displayed on page
-    Then the user validates the secondary search by providing new searchvalue in the text box
+    Then the user validates pagination and results displayed
+    Then the user enter the secondary searchValue in the search text box
       | NewSearchValue | <newsearchvalue> |
-    Then the user validates pagination and results displayed on page
+    Then the user validates pagination and results displayed
 
     @SiteSearchCommon_AARP
     Examples: 
