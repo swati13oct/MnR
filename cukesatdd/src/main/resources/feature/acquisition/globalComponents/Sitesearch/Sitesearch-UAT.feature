@@ -112,9 +112,9 @@ Feature: 1.08 UAT-Site Search Flows
     @SiteSearch_AARP @regressionAARP @vbfGate
     Examples: 
       | Scenario           | site | searchValue     | newsearchvalue                  |
-      | E2E Scenario 1_AMP | AARP | Medicare        | Pharmacy                        |
-      | E2E Scenario 1_AMP | AARP | Medicare        | MEDICARE PART D CLAIM FORM(PDF) |
-      | E2E Scenario 1_AMP | AARP | Dental coverage | Drug cost estimator             |
+      | E2E Scenario 1_AMP_1 | AARP | Medicare        | Pharmacy                        |
+      | E2E Scenario 1_AMP_2 | AARP | Medicare        | MEDICARE PART D CLAIM FORM(PDF) |
+      | E2E Scenario 1_AMP_3 | AARP | Dental coverage | Drug cost estimator             |
 
     @SiteSearch_UHC @regressionUHC
     Examples: 
