@@ -32,14 +32,14 @@ Feature: 1.03 Acq-To test Sitesearch results site
     Then the user enter the searchValue in the search text box and hits enter
       | search Value | <searchValue> |
     Then the user clear secondary search box and insert new search value
-      | NewSearchValue | <newsearchvalue> |
+      | New Search Value | <newsearchvalue> |
     Then the user validates Error message on page
       | Error          | <Error>          |
       | NewSearchValue | <NewSearchValue> |
 
     @SiteSearchCommon_AARP
     Examples: 
-      | site | searchValue | Error            | NewSearchValue |
+      | site | searchValue | Error            | newsearchvalue |
       | AARP | Medicare    | Empty            | [blank]        |
       | AARP | Medicare    | InvalidCharacter | medicareeee    |
 
