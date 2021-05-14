@@ -35,7 +35,7 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | New Search Value | <newsearchvalue> |
     Then the user validates Error message on page
       | Error          | <Error>          |
-      | NewSearchValue | <NewSearchValue> |
+      | NewSearchValue | <newsearchvalue> |
 
     @SiteSearchCommon_AARP
     Examples: 
@@ -45,7 +45,7 @@ Feature: 1.03 Acq-To test Sitesearch results site
 
     @SiteSearchCommon_UHC
     Examples: 
-      | site | searchValue | Error            | NewSearchValue |
+      | site | searchValue | Error            | newsearchvalue |
       | UHC  | Medicare    | Empty            | [blank]        |
       | UHC  | Medicare    | InvalidCharacter | medicareeee    |
 
