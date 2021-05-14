@@ -24,6 +24,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageBlayerMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
@@ -3825,6 +3826,16 @@ public class VppPlanDetailMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.checkPlansForCompare(Counter, planType);
+	}
+	
+	@And("^verify call SAM roll out and contain the text Call a Licensed Insurance Agent$")
+	public void verify_call_SAM_roll_out_and_contain_the_text_Call_a_Licensed_Insurance_Agent()
+			throws InterruptedException {
+
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateCallSamContent();
+
 	}
 
 	@Then("^click add to compare checkbox on plan details page and navigate to compare page$")
