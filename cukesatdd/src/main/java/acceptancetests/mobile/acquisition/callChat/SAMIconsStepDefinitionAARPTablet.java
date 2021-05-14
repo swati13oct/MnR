@@ -78,17 +78,17 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.verifyChatpopupOnTablet();
 	}
 	
-	/*@Then("^user opens the page to validate M&R Sites$")
+	@Then("^user opens the page to validate M&R Sites$")
 	public void the_user_opens_the_page_to_validate_Sites(DataTable givenAttributes) throws InterruptedException {
 		
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = givenAttributes
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 						.get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String pagename = memberAttributesMap.get("pagename");
@@ -100,32 +100,5 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.navigateToPage(pagename);
 	}
 	
-	@Then("^the user validates whether call icon is visible$")
-	public void the_user_validates_whether_callicon_isvisible() throws InterruptedException {
-		
-	AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateCallSam();
-		
-		aquisitionhomepage.validateTFNCallpopup();
-		
-		 * if(returnval==null){ Assertion.fail("No TFN found"); }else{
-		 * Assertion.assertTrue(true); }
-		 
-	}
 	
-
-	@Then("^the user validates whether chat icon is visible")
-	public void the_user_validates_whether_chaticon_isvisible() throws Throwable {
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatSam();
-		aquisitionhomepage.verifyChatpopup();
-	//	aquisitionhomepage.validateProActiveChatpopupconnect();
-		aquisitionhomepage.validateChatpopupconnect();	
-		
-	}
-	
-
-*/
 }
