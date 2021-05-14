@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 
 
@@ -111,5 +112,15 @@ public class GetStartedPageMobile extends UhcDriver {
 		}
 		return new AddDrugPageMobile(driver);
 	}	 
+	public VPPPlanSummaryPageMobile ClickReturnToPlanSummary() {
+		validateNew(LinktoExitScenario);
+		jsClickNew(LinktoExitScenario);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
+	}
+
 
 }
