@@ -695,7 +695,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'thankYouMsg')]")
 	private WebElement learnMoreMedicareEmailSubmissionMsg;
 	
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]/p[2]")
 	private WebElement CallSamTFNtimezone_Medsup;
 
 	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
@@ -6456,7 +6456,7 @@ String winHandleBefore = driver.getWindowHandle();
 			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		if(driver.getCurrentUrl().contains("medicare-supplement-plans.html") || driver.getCurrentUrl().contains("/compare/compare-ms.html") || driver.getCurrentUrl().contains("/enroll/ms-apply.html") || driver.getCurrentUrl().contains("shop/estimate/ms-costs.html")) {
+		if(driver.getCurrentUrl().contains("medicare-supplement-plans") || driver.getCurrentUrl().contains("/compare/compare-ms") || driver.getCurrentUrl().contains("/enroll/ms-apply") || driver.getCurrentUrl().contains("shop/estimate/ms-costs")) {
 			String ExpectedCallSamTFNtimezone = "7 a.m. â€“ 11 p.m. ET, Monday-Friday\n9 a.m. â€“ 5 p.m. ET, Saturday";
 			validate(CallSamTFNtimezone_Medsup);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone_Medsup.getText();
