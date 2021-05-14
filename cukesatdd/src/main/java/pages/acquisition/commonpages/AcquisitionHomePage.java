@@ -695,7 +695,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'thankYouMsg')]")
 	private WebElement learnMoreMedicareEmailSubmissionMsg;
 	
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]/p[2]")
 	private WebElement CallSamTFNtimezone_Medsup;
 
 	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
