@@ -74,7 +74,7 @@ public class EnterZipCodePage extends UhcDriver {
 						System.out
 								.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 					else
-						assertTrue("Not redirected to VPP page",
+						assertTrue("Not redirected to VPP page Expected:"+PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE+"Actual:"+vppPageTitle,
 								vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
 				} else {
 					if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {

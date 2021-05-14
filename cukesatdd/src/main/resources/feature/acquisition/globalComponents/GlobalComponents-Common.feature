@@ -87,7 +87,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices        | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | medicare-education/medicare-benefits.html                | Medicare Prescriptions, Providers & Benefits | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @MedEdPages_2_GlobalCompsAARP @regressionAARP
+    @MedEdPages_2_GlobalCompsAARP @regressionAARP123
     Examples: 
       | site | path                                              | pageName                              | tfnXpath                                                       | tfnFlag |
       | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
