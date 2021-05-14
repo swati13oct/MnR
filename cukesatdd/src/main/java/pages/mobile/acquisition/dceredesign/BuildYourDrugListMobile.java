@@ -380,6 +380,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		WebElement DrugDetailsText = driver.findElement(
 				By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName +"')]//following-sibling::p[contains(text(), 'per') and contains(text(), 'refill')]"));
 		String DrugText = DrugDetailsText.getText();
+		System.out.println("Drug Text : "+DrugText);
 		if (validateNew(DrugName) && validateNew(DrugDetailsText)
 				 && DrugText.contains(drugQuantity) && DrugText.contains(drugFrequency)
 				 && DrugText.contains(drugSupplyLen)) {
