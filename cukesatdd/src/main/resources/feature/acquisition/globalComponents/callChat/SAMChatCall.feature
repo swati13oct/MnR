@@ -21,7 +21,7 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/medicare-supplement-plans.html          | AARP |
       | medicare-education/medicare-part-d.html                    | AARP |
       | medicare-education/medicare-costs.html                     | AARP |
-      | medicare-education/when-to-enroll.html      | AARP |
+      | medicare-education/when-to-enroll.html                     | AARP |
       | medicare-education/medicare-faq.html                       | AARP |
       | medicare-education.html                                    | AARP |
       | medicare-education/medicare-medicaid-dual-eligibility.html | AARP |
@@ -103,7 +103,7 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/medicare-supplement-plans.html          | UHC  |
       | medicare-education/medicare-part-d.html                    | UHC  |
       | medicare-education/medicare-costs.html                     | UHC  |
-      | medicare-education/when-to-enroll.html      | UHC  |
+      | medicare-education/when-to-enroll.html                     | UHC  |
       | medicare-education/medicare-faq.html                       | UHC  |
       | medicare-education.html                                    | UHC  |
       | medicare-education/medicare-medicaid-dual-eligibility.html | UHC  |
@@ -186,7 +186,7 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/medicare-supplement-plans.html        | AARP |
       | medicare-education/medicare-part-d.html                  | AARP |
       | medicare-education/medicare-costs.html                   | AARP |
-      | medicare-education/when-to-enroll.html    | AARP |
+      | medicare-education/when-to-enroll.html                   | AARP |
       | medicare-education/medicare-faq.html                     | AARP |
 
     @samChatRegressionAARP8 @regressionAARP
@@ -256,7 +256,7 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/medicare-supplement-plans.html        | UHC  |
       | medicare-education/medicare-part-d.html                  | UHC  |
       | medicare-education/medicare-costs.html                   | UHC  |
-      | medicare-education/when-to-enroll.html    | UHC  |
+      | medicare-education/when-to-enroll.html                   | UHC  |
       | medicare-education/medicare-faq.html                     | UHC  |
 
     @samChatRegressionUHC8 @regressionUHC
