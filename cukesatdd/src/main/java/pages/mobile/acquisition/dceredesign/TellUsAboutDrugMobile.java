@@ -151,7 +151,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	public void selectFrequency(String Frequency) {
 		validateNew(FrequentyDrpDwn);
 		jsClickNew(FrequentyDrpDwn);
-		WebElement element = driver.findElement(By.xpath("//select[@id='new-drug-frequency']//option[contains(text(), '"+Frequency+"')]"));
+		WebElement element = driver.findElement(By.xpath("//select[@id='drugfrequency']//option[contains(text(), '"+Frequency+"')]"));
 		jsClickNew(element);
 	}
 
