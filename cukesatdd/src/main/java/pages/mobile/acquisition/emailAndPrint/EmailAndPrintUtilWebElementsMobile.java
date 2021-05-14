@@ -127,7 +127,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailComparison']")
 	protected WebElement compare_validateemailbutton;
 
-	@FindBy(xpath="//a[@id='backtoplansummarypage']")
+	@FindBy(xpath="//*[@id=\"backtoplansummarypage\"]")
 	protected WebElement backToAllPlansLnk;
 
 	@FindBy(xpath="//button[@ng-click='closeEmailSuccessMsgPopUp()']")
