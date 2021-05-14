@@ -31,7 +31,7 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | Site | <site> |
     Then the user enter the searchValue in the search text box and hits enter
       | search Value | <searchValue> |
-    Then the user enter the secondary searchValue in the search text box
+    Then the user clear secondary search box and insert new search value
       | NewSearchValue | <newsearchvalue> |
     Then the user validates Error message on page
       | Error          | <Error>          |
