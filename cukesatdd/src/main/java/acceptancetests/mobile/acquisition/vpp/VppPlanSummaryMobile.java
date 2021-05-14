@@ -1247,29 +1247,29 @@ public class VppPlanSummaryMobile {
 		plansummaryPage.saveMSPlans(ms_savePlanNames);
 
 	}
-	@And("^the user login with optum Id credentials$")
+/*	@And ("^the user login with optum Id credentials$")
 	public void the_user_login_with_optum_Id_credentials(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
-		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
+		List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 		for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
 			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		}
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 		VisitorProfilePageMobile visitorProfile = (VisitorProfilePageMobile) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-		/*WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		VisitorProfilePage visitorProfile = new VisitorProfilePage(driver);
-		*/
+		
 		System.out.println("credentials" + username + password);
 		visitorProfile.logIn(username, password);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
 	
-	@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page$")
+*/	@Then("^user should be able to see the NBA modal to Enroll Plan on the VPP summary page$")
 	public void user_should_be_able_to_see_the_NBA_modal_to_Enroll_Plan_on_the_VPP_summary_page() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
