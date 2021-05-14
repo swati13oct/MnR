@@ -105,17 +105,17 @@ Feature: 1.12 ACQ - Global Components Validation
     #|UHC| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_3_GlobalCompsAARP @regressionAARP
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
-      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | site | path                                   | pageName             | tfnXpath                                                       | tfnFlag |
+      | AARP | medicare-education/medicare-costs.html | Medicare Cost Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/when-to-enroll.html | When to Enroll       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-faq.html   | Medicare FAQ         | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @MedEdPages_3_GlobalCompsUHC @regressionUHC
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
-      | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | site | path                                   | pageName             | tfnXpath                                                       | tfnFlag |
+      | UHC  | medicare-education/medicare-costs.html | Medicare Cost Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/when-to-enroll.html | When to Enroll       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-faq.html   | Medicare FAQ         | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP
     Examples: 
@@ -328,7 +328,6 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
       | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
 
-  
   @GlobalComponentsAARPShopPages
   Scenario Outline: To verify Global Components zipcode component for the page mentioned on site -<site> - <pageName> : <path>
     Given the user is on medicare acquisition site landing page
