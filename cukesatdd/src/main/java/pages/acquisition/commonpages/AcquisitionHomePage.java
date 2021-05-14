@@ -380,7 +380,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
 	private WebElement CallSamTFNtimezone;
 
-	@FindBy(xpath = "//p[contains(text(),'Already a member?')]")
+	@FindBy(xpath = "//div[@id='sam-call-modal']//p[contains(text(),'Already a member')]")
 	private WebElement CallSamTFNMember;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
@@ -698,7 +698,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]")
 	private WebElement CallSamTFNtimezone_Medsup;
 
-	@FindBy(xpath = "//div//p[contains(text(),'Already a member?')]")
+	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
 	private WebElement CallSamTFNMember_Medsup;
 	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
@@ -4799,7 +4799,7 @@ String winHandleBefore = driver.getWindowHandle();
 //			MedicareEducation.click();
 		jsClickNew(MedicareEducation);
 		threadsleep(5);
-		if (driver.getCurrentUrl().contains("medicare-education.html")) {
+		if (driver.getCurrentUrl().contains("medicare-education")) {
 			Assertion.assertTrue(true);
 			System.out.println("Medicare Education Homepage open: URL-->" + driver.getCurrentUrl());
 		} else {
@@ -5711,8 +5711,8 @@ String winHandleBefore = driver.getWindowHandle();
 					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
 
 		String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
-		validate(CallSamTFNMember);
-		String ActualCallSamTFNMember = CallSamTFNMember.getText();
+		validate(CallSamTFNMember_Medsup);
+		String ActualCallSamTFNMember = CallSamTFNMember_Medsup.getText();
 		System.out.println("TFN Member on CAll popup: " + ExpectedCallSamTFNMember);
 		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
 			System.out.println(
