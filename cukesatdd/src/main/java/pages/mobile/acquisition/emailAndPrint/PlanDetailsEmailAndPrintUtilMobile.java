@@ -307,6 +307,7 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		;
 		validateEmailButtonOnPlanDetails.click();
 		validateNew(emailPopup);
+		scrollToView(sendButtonEmailPlanDetailsPopUp);
 		validateNew(sendButtonEmailPlanDetailsPopUp);
 		System.out.println("!!!Cancel Button is displayed ===>" + sendButtonEmailPlanDetailsPopUp.isDisplayed());
 		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("alisha_kapoor@optum.com");
@@ -316,6 +317,7 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		Assertion.assertTrue("PROBLEM - unable to get successful message after clicking send", validate(validatesuccesspopup));
 		//validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
+		scrollToView(closeButtonthankyoumessagepopup);
 		closeButtonthankyoumessagepopup.click();
 		CommonUtility.checkPageIsReady(driver);
 
