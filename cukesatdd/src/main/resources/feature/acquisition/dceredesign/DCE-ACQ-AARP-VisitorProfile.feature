@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user selects plan year
     And user clicks on continue button in Zip Entry Page
 
-  @dce_VisitorProfile_AARP @regressionAARP @prodRegression @vbfGate1
+  @dce_VisitorProfile_AARP @regressionAARP @prodRegression @vbfGate
     Examples:
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall | 80002   | AARP |
