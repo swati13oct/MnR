@@ -68,24 +68,24 @@ public class EnterZipCodePage extends UhcDriver {
 
 				System.out.println("Actual : " + vppPageTitle);
 				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+					if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out
 								.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 					else
 						assertTrue("Not redirected to VPP page",
-								vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+								vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")));
 				} else {
 					if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
-					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+					if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out
 								.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 					else
 						assertTrue("Not redirected to VPP page",
-								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+								vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")));
 					}
 				}
 				
