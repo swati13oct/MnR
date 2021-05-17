@@ -25,7 +25,7 @@ Feature: 1.04 -ACQ-Print and email on VPP page
     Then I click back to all plans button and verify that all plans are still selected on summary page on site
     Then user loads page using email deeplink and validate vpp compare page content on site
 
-    @vppEmailandPrintCommon_AARP_1 @regressionAARP 
+    @vppEmailandPrintCommon_AARP_1 @regressionAARP @MHJ
     Examples: 
       | TID   | site | zipcode | plantype | isMultiCounty | planyear |
       | 15523 | AARP |   90210 | MA       | NO            | next     |

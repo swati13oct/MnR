@@ -726,6 +726,7 @@ public abstract class UhcDriver {
 		scrollToView(Element);
 		try {
 			System.out.println("Trying selenium click to open new window ................");
+			checkElementisEnabled(Element);
 			Element.click();
 
 		} catch (Exception e) {
@@ -734,7 +735,7 @@ public abstract class UhcDriver {
 			jsClickNew(Element);
 		}
 		sleepBySec(10);
-		waitForPageLoadSafari();
+		//waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
