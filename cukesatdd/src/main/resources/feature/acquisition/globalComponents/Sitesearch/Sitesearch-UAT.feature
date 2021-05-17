@@ -167,7 +167,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC @regressionUHC @vbfGate
+    @SiteSearch_UHC @regressionUHC @vbfGate @sanity
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -276,7 +276,7 @@ Feature: 1.08 UAT-Site Search Flows
     Then the user clicks on the united health care medicare solutions link
     Then the user validates the "<url>"
 
-    @SiteSearch_AARP_06 @prodSanity_AARP @regressionAARP
+    @SiteSearch_AARP_06 @prodSanity_AARP @regressionAARP @sanity
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue     | url                                                           |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |

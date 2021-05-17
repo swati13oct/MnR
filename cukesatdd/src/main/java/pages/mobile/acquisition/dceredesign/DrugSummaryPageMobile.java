@@ -18,6 +18,7 @@ import com.google.common.collect.Ordering;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 
 public class DrugSummaryPageMobile extends UhcDriver {
 
@@ -621,6 +622,47 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		Assertion.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
 	
+	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
+	public WebElement Pharmacy_ZipCodeTxt;
+
+	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	public WebElement Pharmacy_SearchBtn;
+
+	
+	public void validateOptumRxConsistentDisplay_PharmacyPage() {
+		//Zip code for No retail pharmacy results
+		String pharmacyZipCode = "89405";
+		clickChangePharmacy();
+		try{
+		validateSelectPharmacyPage();
+		validateNew(Pharmacy_ZipCodeTxt);
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+		validateNew(Pharmacy_SearchBtn);
+		Pharmacy_SearchBtn.click();
+		System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+				+ Pharmacy_ZipCodeTxt.getText());
+		validateNew(preferredMailPharmacy);
+		validateNew(noResultsMessage);
+		if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
+			System.out.println("OptumRx Pharmacy Displayed for Zip not returning any retail Pharmacy results");
+			System.out.println("No results message displayed : "+noResultsMessage.getText());
+			validateNew(selectPharmacyModalCloseBtn);
+			System.out.println("Closing Pharmacy page");
+			selectPharmacyModalCloseBtn.click();
+			validateDrugSummaryPage();
+		}
+		else 
+			Assertion.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
+	
+	}catch(InterruptedException e) {
+		System.out.println("Execption occured while validating pharmacy page");
+	}
+	}
+	public void validateNBAModal() {
+		validateNew(dceNBAModal);
+		validateNew(dceNBAModalBtn);
+	}
 
 	
 }

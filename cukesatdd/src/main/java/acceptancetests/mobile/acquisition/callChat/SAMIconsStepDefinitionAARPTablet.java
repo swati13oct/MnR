@@ -14,6 +14,7 @@ import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 
 public class SAMIconsStepDefinitionAARPTablet {
@@ -76,5 +77,28 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.validateChatSamContentOnTablet();
 		aquisitionhomepage.verifyChatpopupOnTablet();
 	}
+	
+	@Then("^user opens the page to validate M&R Sites$")
+	public void the_user_opens_the_page_to_validate_Sites(DataTable givenAttributes) throws InterruptedException {
+		
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
+					.getGherkinRows();
+			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
+				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
+						.get(0), memberAttributesRow.get(i).getCells().get(1));
+			}*/
+
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String pagename = memberAttributesMap.get("pagename");
+		
+		System.out.println(pagename);
+	
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.navigateToPage(pagename);
+	}
+	
+	
 }
