@@ -15,15 +15,4 @@ bin/
 cukesatdd/.classpath
 cukesatdd/src/main/resources/config/ci/config.properties
 /cukesatdd/*.classpath
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionAgentRecommendationEngine.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionDCE.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionGlobalComponents.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionOLE.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionPharmacyLocator.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionPlanRecommendationEngine.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionProviderSearch.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionRequestAgent.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionVisitorProfile.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionVPP.java
-cukesatdd/src/main/java/atdd/runners/RunMRATDDPlanBenefits.java
 cukesatdd/testng.xml
