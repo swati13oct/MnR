@@ -10,7 +10,14 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     When the user clicks on Agent link and validates the correct URL is loaded
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCBlayer @UATRegression @regressionUHC @vbfGate
+     @vbfGate
+    Examples: 
+      | scenario           | site | path                                                                                                                                                                                                                                                                                                                          | pageName                     | UHCUrl                      |
+      | E2E Scenario 1_UMS | UHC  | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD       | https://www.myuhcagent.com/ |
+      | E2E Scenario 1_UMS | UHC  | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details   | VPP: Plan Details DSNP       | https://www.myuhcagent.com/ |
+      
+    
+    @agentFlowEBRCBlayer @UATRegression @regressionUHC
     Examples: 
       | scenario           | site | path                                                                                                                                                                                                                                                                                                                          | pageName                     | UHCUrl                      |
       | E2E Scenario 1_UMS | UHC  | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD       | https://www.myuhcagent.com/ |
@@ -72,7 +79,7 @@ Feature: 1.06-UAT Scripts to test Federal Agent Link and request an appointment 
     When the user clicks on Agent link and validates the correct URL is loaded for Medsupp page
       | UHC Agent URL | <UHCUrl> |
 
-    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC @regressionAARP @vbfGate
+    @agentFlowEBRCBlayer @UATRegression @insuranceSolutionAgentAgentAppointmentUHC @regressionAARP
     Examples: 
       | scenario           | zipcode | isMultutiCounty | county             | plantype | DOB        | Firstname | Lastname | site | UHCUrl                      |
       | E2E Scenario 4_UMS |   90002 | NO              | Los Angeles County | MS       | 11/13/1940 | John      | Carry    | AARP | https://www.myuhcagent.com/ |
