@@ -31,21 +31,21 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | Site | <site> |
     Then the user enter the searchValue in the search text box and hits enter
       | search Value | <searchValue> |
-    Then the user enter the secondary searchValue in the search text box
-      | NewSearchValue | <newsearchvalue> |
+    Then the user clear secondary search box and insert new search value
+      | New Search Value | <newsearchvalue> |
     Then the user validates Error message on page
       | Error          | <Error>          |
-      | NewSearchValue | <NewSearchValue> |
+      | NewSearchValue | <newsearchvalue> |
 
     @SiteSearchCommon_AARP
     Examples: 
-      | site | searchValue | Error            | NewSearchValue |
+      | site | searchValue | Error            | newsearchvalue |
       | AARP | Medicare    | Empty            | [blank]        |
       | AARP | Medicare    | InvalidCharacter | medicareeee    |
 
     @SiteSearchCommon_UHC
     Examples: 
-      | site | searchValue | Error            | NewSearchValue |
+      | site | searchValue | Error            | newsearchvalue |
       | UHC  | Medicare    | Empty            | [blank]        |
       | UHC  | Medicare    | InvalidCharacter | medicareeee    |
 
