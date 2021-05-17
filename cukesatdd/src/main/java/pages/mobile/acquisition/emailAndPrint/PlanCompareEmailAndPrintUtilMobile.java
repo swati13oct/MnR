@@ -154,7 +154,8 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
 		
-		closeButtonthankyoumessagepopup.click();
+		//closeButtonthankyoumessagepopup.click();
+		jsClickNew(closeButtonthankyoumessagepopup);
 		System.out.println("Thank you Message pop up is closed");
 	}
 

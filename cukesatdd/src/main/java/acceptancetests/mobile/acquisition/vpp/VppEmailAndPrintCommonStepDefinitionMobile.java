@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
@@ -143,53 +144,50 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 		// WebDriver wDriver = (WebDriver)
 		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
-		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario()
-				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile)getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
 		String plansForCompare = (String) getLoginScenario().getBean(PageConstants.plansForCompare);
 		util.clickOnBackToAllPlansFromCompareBackToSummaryPage();
 		Assertion.assertTrue("Error in validating all plans are still selected",
 				util.validateAllPlansCheckedOnSummaryPage(plansForCompare));
-
+		
 		getLoginScenario().saveBean(PageConstants.EMAIL_AND_PRINT_UTIL, util);
 	}
 
 	@SuppressWarnings({ "unchecked", "static-access" })
 	@Then("^user loads page using email deeplink and validate vpp compare page content on site$")
 	public void validate_compare_page_deeplink() {
-		// WebDriver wDriver = (WebDriver)
-		// getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
-		// EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wDriver);
-		wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile) getLoginScenario()
-				.getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
-		CommonUtility commonUtils = new CommonUtility();
-		String deepLinkStringId = PageConstants.COMPARE_PAGE_DEEPLINK;
-		String infoMapStringId = PageConstants.COMPARE_PAGE_INFO;
-		String planType = (String) getLoginScenario().getBean(VPPCommonConstantsMobile.PLAN_TYPE);
-		String deepLink = (String) getLoginScenario().getBean(deepLinkStringId);
-		HashMap<String, String> origPage = (HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
+		//WebDriver wDriver = (WebDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
+				//EmailAndPrintUtil util = new EmailAndPrintUtil(wDriver);
+				 wDriver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+				 EmailAndPrintUtilMobile util = (EmailAndPrintUtilMobile)getLoginScenario().getBean(PageConstants.EMAIL_AND_PRINT_UTIL);
+				CommonUtility commonUtils = new CommonUtility();
+				String deepLinkStringId = PageConstants.COMPARE_PAGE_DEEPLINK;
+				String infoMapStringId = PageConstants.COMPARE_PAGE_INFO;
+				String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+				String deepLink = (String) getLoginScenario().getBean(deepLinkStringId);
+				HashMap<String, String> origPage = (HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
 
-		// note: use new driver to achieve clear cache
-		WebDriver newTestDriver = getLoginScenario().getWebDriverNew();
-		newTestDriver.get(deepLink);
-		commonUtils.checkPageIsReady(newTestDriver);
-//		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
-//										// validation is done
-//		util = new EmailAndPrintUtilMobile(newTestDriver);
-//		util.handlePlanYearSelectionPopup(planType);
-//		commonUtils.checkPageIsReady(newTestDriver);
-//		util.checkModelPopup(newTestDriver);
-//
-//		// note: temperary bypass for now until the flash issue is resolved
-//		// tbd List<String> noteList=new ArrayList<String>();
-//		// tbd noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink
-//		// page content flashing");
-//		// note: do not remove the comment lines below
-//		wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
-//										// validation is done
-		List<String> noteList = util.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId,
-				deepLink, origPage, wDriver);
-		getLoginScenario().saveBean(VPPCommonConstantsMobile.TEST_RESULT_NOTE, noteList);
+				// note: use new driver to achieve clear cache
+				WebDriver newTestDriver = (AppiumDriver)getLoginScenario().getWebDriverNew();
+				newTestDriver.get(deepLink);
+				commonUtils.checkPageIsReady(newTestDriver);
+				wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
+												// validation is done
+				util = new EmailAndPrintUtilMobile(newTestDriver);
+				util.handlePlanYearSelectionPopup(planType);
+				commonUtils.checkPageIsReady(newTestDriver);
+				util.checkModelPopup(newTestDriver);
+
+				// note: temperary bypass for now until the flash issue is resolved
+				// tbd List<String> noteList=new ArrayList<String>();
+				// tbd noteList.add("BYPASS validation until fix (tick# xxxxx) - email deeplink
+				// page content flashing");
+				// note: do not remove the comment lines below
+				wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the
+												// validation is done
+				List<String> noteList = util.validatePlanCompareEmailDeeplink(planType, deepLinkStringId, infoMapStringId,
+						deepLink, origPage, wDriver);
+				getLoginScenario().saveBean(VPPCommonConstants.TEST_RESULT_NOTE, noteList);
 	}
 
 	@Then("^the user view plan details of the first plan in the given plan type and perform validation on site$")
