@@ -1529,14 +1529,14 @@ public abstract class UhcDriver {
 				&& driver.getClass().getSimpleName().contains("WebDriver")) {
 			// Sets FluentWait Setup
 			List<WebElement> loadingScreen = null;
-			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
+			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(20))
 					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 
 			// First checking to see if the loading indicator is found
 			// we catch and throw no exception here in case they aren't ignored
 			try {
-				threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
+//				threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
 				System.out.println("Waiting to check if Loading screen is present");
 				loadingScreen = fwait.until(new Function<WebDriver, List<WebElement>>() {
 					public List<WebElement> apply(WebDriver driver) {
@@ -1554,7 +1554,7 @@ public abstract class UhcDriver {
 			// disappear
 			if (!CollectionUtils.isEmpty(loadingScreen)) {
 				System.out.println("Loading screen visible!!! Waiting till it disappears");
-				WebDriverWait wait = new WebDriverWait(driver, 10);
+				WebDriverWait wait = new WebDriverWait(driver, 15);
 				try {
 					ready = wait.until(ExpectedConditions.invisibilityOfAllElements(loadingScreen));
 				} catch (NoSuchElementException e) {
