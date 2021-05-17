@@ -925,7 +925,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		// action.moveToElement(element).perform();
 		jsMouseOver(favoriteIcon);
 		// waitforElementNew(favoriteSuccess,5);
-	//	System.out.println(favoriteSuccess.getText());
+		// System.out.println(favoriteSuccess.getText());
 
 	}
 
@@ -1140,7 +1140,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	// Learn More changes Start
 	public void validatePlanNameLearnMore(String PlanName) {
-		
+
 		System.out.println("Plan Name : " + PlanName);
 
 		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(),'" + PlanName + "')]"));
@@ -1174,7 +1174,8 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		// Displayed : "
 		// + InsulinDrugCopayDisplayed.getText(), true);
 		// } else {
-		// Assertion.fail("Your Drugs Section - Incorrect Copay Displayed; Expected Copay:
+		// Assertion.fail("Your Drugs Section - Incorrect Copay Displayed; Expected
+		// Copay:
 		// " + insulinCopay);
 		// }
 	}
@@ -1370,7 +1371,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(@type,'submit')]//*[contains(text(),'Switch to Generic')]")
 	private WebElement switchToGenericSubmitBtn;
-	
+
 	public void clickswitchToGeneric() throws InterruptedException {
 
 		// validate(drugTitle);
@@ -1379,6 +1380,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(switchToGenericSubmitBtn);
 		jsClickNew(switchToGenericSubmitBtn);
 	}
+
 	public void verifyReturnToProfileDisplayed() {
 		try {
 			if (returnToProfileLink.isDisplayed()) {
@@ -1392,7 +1394,6 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//table/tbody/tr/td[1]/div/div/img[contains(@src,'check-icon@2x.png')]")
 	private WebElement switchToGenericIcon;
 
-
 	public void verifyDrugisSwitchedtoGeneric() throws InterruptedException {
 		Thread.sleep(6000);
 		// validate(drugTitle);
@@ -1404,6 +1405,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 		Assertion.assertTrue("Drug not switched to generic", switchToGenericIcon.isDisplayed());
 	}
+
 	@FindBy(xpath = "//button//span[text()='Back to Profile']")
 	public List<WebElement> backToProfileBtn;
 
@@ -1428,4 +1430,68 @@ public class DrugDetailsPageMobile extends UhcDriver {
 				"***** Your Drugs, Monthly Costs by Stage, Copay and Coinsurance and Monthly Drugs costs Sections are not displayed *****");
 	}
 
+	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Save ']/parent::button")
+	public WebElement saveBtn;
+
+	@FindBy(xpath = "//*[@class='uhc-button__text'][text()='Saved ']")
+	public WebElement savedBtn;
+
+	public void savePlan() {
+		validate(saveBtn);
+		saveBtn.click();
+		validate(savedBtn);
+	}
+
+	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
+	private WebElement noResultsMessage;
+
+	public void validateOptumRxConsistentDisplay_PharmacyPage() throws InterruptedException {
+		// Zip code for No retail pharmacy results
+		String pharmacyZipCode = "89405";
+		clickChangePharmacyLinkDetailsPage();
+		validateSelectPharmacyPage();
+		validateNew(Pharmacy_ZipCodeTxt);
+		Pharmacy_ZipCodeTxt.clear();
+		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+		validateNew(Pharmacy_SearchBtn);
+		Pharmacy_SearchBtn.click();
+		System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+				+ Pharmacy_ZipCodeTxt.getText());
+		validateNew(preferredMailPharmacy);
+		validateNew(noResultsMessage);
+		if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
+			System.out.println("OptumRx Pharmacy Displayed for Zip not returning any retail Pharmacy results");
+			System.out.println("No results message displayed : " + noResultsMessage.getText());
+			validateNew(selectPharmacyModalCloseBtn);
+			System.out.println("Closing Pharmacy page");
+			selectPharmacyModalCloseBtn.click();
+			validateNew(DrugDetails_ChangePharmacyLnk);
+		} else
+			Assertion
+					.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
+
+	}
+
+	public void validateDetailsForDrugInYourDrugs(String drugName, String drugQuantity, String drugFrequency,
+			String drugSupplyLen) {
+		System.out.println("Current Added Drug Name : " + drugName);
+		WebElement DrugName = driver.findElement(
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '" + drugName
+						+ "')]"));
+		WebElement DrugDetailsText = driver.findElement(By
+				.xpath("(//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '" + drugName
+						+ "')]//following::ul[contains(@class, 'yourdrugs')]//li[contains(text(), 'per') and contains(text(), 'refill')])[1]"));
+		String DrugText = DrugDetailsText.getText();
+		if (validateNew(DrugName) && validateNew(DrugDetailsText) && DrugText.contains(drugQuantity)
+				&& DrugText.contains(drugFrequency) && DrugText.contains(drugSupplyLen)) {
+			System.out.println(
+					"Drug List Drug Quantity, Frequency and Supply Length Validation PASSED for Drug on DCE Details Page : "
+							+ drugName);
+			System.out.println("Displayed Drug Details Text: " + DrugText);
+		} else
+			Assertion.fail(
+					"Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug on DCE Details Page : "
+							+ drugName);
+
+	}
 }
