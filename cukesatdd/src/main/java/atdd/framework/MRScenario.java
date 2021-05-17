@@ -20,15 +20,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -155,20 +148,36 @@ public class MRScenario {
 			+ "@ondemand.saucelabs.com:80/wd/hub";
 
 	
-	private ThreadLocal<HashMap<String, Object>> scenarioObjectMap = new ThreadLocal<HashMap<String, Object>>() {
+	private static final ThreadLocal<WeakHashMap<String, Object>> scenarioObjectMap = new ThreadLocal<WeakHashMap<String, Object>>() {
 		@Override
-		protected HashMap<String, Object> initialValue() {
-			return new HashMap<>();
+		protected WeakHashMap<String, Object> initialValue() {
+			return new WeakHashMap<>();
 		}
 	};
 	
-	public void saveBean(String id, Object object) {
+	public synchronized void saveBean(String id, Object object) {
 		scenarioObjectMap.get().put(id, object);
 	}
 
-	public void flushBeans() {
+	public synchronized void flushBeans() {
 		if (!scenarioObjectMap.get().isEmpty()) {
-			scenarioObjectMap.get().clear();
+//			scenarioObjectMap.get().clear();
+			Iterator<Map.Entry<String, Object>>
+					iterator = scenarioObjectMap.get().entrySet().iterator();
+
+			// Iterate over the HashMap
+			while (iterator.hasNext()) {
+				// Get the entry at this iteration
+				Map.Entry<String, Object>
+						entry = iterator.next();
+
+				//Get the object reference for the key and assign null, to make it eligible for gc.
+//	            Object objectReference = entry.getValue();
+// 	            objectReference = objectReference != null ? null : objectReference;
+
+				// Remove this entry from HashMap
+				iterator.remove();
+			}
 			scenarioObjectMap.remove();
 		}
 	}
@@ -181,7 +190,7 @@ public class MRScenario {
 		return threadSafeDriver.get();
 	}
 	
-	public void flushThreadSafeDriver() {
+	public synchronized void flushThreadSafeDriver() {
 		threadSafeDriver.remove();
 	}
 	
