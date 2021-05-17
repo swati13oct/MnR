@@ -295,7 +295,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@ng-click,'backToDceDrugDetailsOrSummary')]")
 	public WebElement backtoDrugEstBtn;
 
-	@FindBy(xpath = "//button[@ng-click='backToPlanSummary()']")
+	@FindBy(xpath = "//button[contains(@ng-click,'backToPlanSummary')]")
 	public WebElement backtoSummaryBtn;
 
 	@FindBy(xpath = "//*[contains(@id,'edityourdrug')]")
