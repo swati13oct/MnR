@@ -502,7 +502,7 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | Priority Option | <priorityOption> |
       | Priorities      | <priorities>     |
     Then user validate elements in loading results page
-    And the user selects plan year
+    And the user selects plan year for PRE Flow
       | Plan Year | <planyear> |
     Then user verify NBA is not displayed on the VPP page
     When the user views the plans of the below plan type
