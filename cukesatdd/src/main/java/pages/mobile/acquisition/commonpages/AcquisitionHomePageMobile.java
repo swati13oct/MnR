@@ -2834,9 +2834,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void verifyChatpopup() throws InterruptedException {
 		// CommonUtility.checkPageIsReady(driver);
 		//chatsam.click();
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
+			System.out.println("verify chat popup skipped on Mobile");}
+			else {
 		jsClickNew(chatsam);
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
-
+			}
 	}
 
 	public AboutUsPageMobile aboutUsClick() {
