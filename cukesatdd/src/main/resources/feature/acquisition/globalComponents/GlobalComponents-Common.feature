@@ -69,6 +69,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | TFNflag  | <tfnFlag>  |
     # Then the user validates Pro-active Chat
     Then the user validates whether call icon is visible
+    Then the user validates whether chat icon is visible
 
     # Then the user validates SAM re-active Chat
     @MedEdPages_1_GlobalCompsAARP @regressionAARP
@@ -79,7 +80,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | AARP | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @MedEdPages_1_GlobalCompsUHC @regressionUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC @sanity
     Examples: 
       | site | path                                                     | pageName                                     | tfnXpath                                                       | tfnFlag |
       | UHC  | medicare-education.html                                  | Understanding Medicare                       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -95,7 +96,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     #|AARP| medicare-education/compare-ma-ms-plans.html|
-    @MedEdPages_2_GlobalCompsUHC @regressionUHC
+    @MedEdPages_2_GlobalCompsUHC @regressionUHC @sanity
     Examples: 
       | site | path                                              | pageName                            | tfnXpath                                                       | tfnFlag |
       | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
