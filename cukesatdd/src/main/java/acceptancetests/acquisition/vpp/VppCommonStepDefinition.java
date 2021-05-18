@@ -3046,21 +3046,16 @@ public class VppCommonStepDefinition {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-
-		// String DateOfBirth = memberAttributesMap.get("DOB");
-		String FirstName = memberAttributesMap.get("Firstname");
-		String LastName = memberAttributesMap.get("Lastname");
-		String EmailAddress = memberAttributesMap.get("Email");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
-
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			// String DateOfBirth = memberAttributesMap.get("DOB");
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			String EmailAddress = memberAttributesMap.get("Email");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
+		}
 	}
 
 	@Then("^the user clicks on back on all plan linnk in Plan Compare page")
