@@ -146,7 +146,8 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	
 	public void selectQuantity(String Quantity) {
 		validateNew(QuantityTxt);
-		QuantityTxt.sendKeys(Quantity);
+		sendkeysNew(QuantityTxt, Quantity);
+		
 	}
 
 	public void selectFrequency(String Frequency) {
