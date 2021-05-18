@@ -70,7 +70,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
 	public WebElement addToDrugList;
 
-	//@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-builddrug[1]/div[1]/div[8]/div[1]/div[1]/button[2]/span[1]")
+	
 	@FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
 	public WebElement reviewDrugCost;
 
@@ -194,11 +194,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile navigateToZipEntryPage() {
-		pageloadcomplete();
-		scrollToView(reviewDrugCost);
-		validateNew(reviewDrugCost);
+		//pageloadcomplete();
+		iosScroll(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
-		CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
+		//CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
 		if (validateNew(zipCodeTxtbox)) {
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		} else {
@@ -380,6 +379,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		WebElement DrugDetailsText = driver.findElement(
 				By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName +"')]//following-sibling::p[contains(text(), 'per') and contains(text(), 'refill')]"));
 		String DrugText = DrugDetailsText.getText();
+		System.out.println("Drug Text : "+DrugText);
 		if (validateNew(DrugName) && validateNew(DrugDetailsText)
 				 && DrugText.contains(drugQuantity) && DrugText.contains(drugFrequency)
 				 && DrugText.contains(drugSupplyLen)) {
