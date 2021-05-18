@@ -2278,7 +2278,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void signInheader() {
 		MobileMenuMain();
 
-		jsClickNew(headerSignInLink);
+		jsClickNew(headerSigninLinkMobile);
 		waitForPageLoadSafari();
 		validateNew(signIn);
 		if (driver.getCurrentUrl().contains("medicare.uhc.com")) {
@@ -2562,7 +2562,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void headerRegisterLink() {
 		MobileMenuMain();
-		if (headerRegisterLink.isDisplayed() && headerRegisterLink.isEnabled()) {
+		if (headerRegisterLinkMobile.isDisplayed() && headerRegisterLinkMobile.isEnabled()) {
 			Assert.assertTrue(true);
 			System.out.println("Register link is displayed on home page");
 			scrollToView(MenuCrossMobile);
@@ -3188,15 +3188,20 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail();
 		}
 	}
-
+	@FindBy(xpath = "//*[@id=\"mobile-nav\"]//a[contains(text(),'Sign in')]")
+	public WebElement headerSigninLinkMobile;
+	@FindBy(xpath = "//*[@id=\"mobile-nav\"]//a[contains(text(),'Register')]")
+	public WebElement headerRegisterLinkMobile;
+	
 	public void validateHeaderLinks() {
 		MobileMenuMain();
-		scrollToView(headerSignInLink);
-		// validateNew(headerSignInLink);
-		// validateNew(headerRegisterLink);
-		scrollToView(headerRegisterLink);
-		jsClickNew(headerRegisterLink);
+		scrollToView(headerSigninLinkMobile);
+		// validateNew(headerSigninLinkMobile);
+		// validateNew(headerRegisterLinkMobile);
+		scrollToView(headerRegisterLinkMobile);
+		jsClickNew(headerRegisterLinkMobile);
 		clickBrowserBackButton();
+		MobileMenuMain();
 		validateNew(visitAARPLink);
 		validateNew(AARPlogo);
 		validateNew(visitorprofileicon);
