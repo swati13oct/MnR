@@ -1,7 +1,7 @@
 @vppNBAValidations_unauthenticatedUser @nextBestAction @vpp
 Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
 	
-  Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added
+  Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when no Drug cost/provider is added in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -21,12 +21,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     |
 
-    @NBA_MAPD_UHC01 
+    @NBA_MAPD_UHC01 @sanity
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     |
 	
-  Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when Drug cost exists
+  Scenario Outline: UserStory: Plan type: <plantype> -Test to verify the Next action modal on VPP summary page for MAPD Plan when Drug cost exists in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -55,12 +55,12 @@ Feature: ACQ-Next Action Modal on vpp flow for unauthenticated flow
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | AARP |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
 
-    @NBA_MAPD_UHC01 
+    @NBA_MAPD_UHC01 @sanity
     Examples: 
       | site | zipcode | isMultutiCounty | county      | plantype | planyear | drug1   |
       | UHC  |   19019 | No              | Iowa County | MAPD     | next     | Lipitor |
 
-  Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal on VPP summary page for MAPD plan when Drug and Provider exists
+  Scenario Outline: UserStory: Plan type: <plantype> Test to verify the Next action modal on VPP summary page for MAPD plan when Drug and Provider exists in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
