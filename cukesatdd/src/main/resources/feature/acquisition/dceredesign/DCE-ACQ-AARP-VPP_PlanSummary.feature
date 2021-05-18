@@ -165,12 +165,12 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanSummary AARP - To test VPP Plan Details 
     And user validates the plans on new visitor profile page of AARP site
       | Test Plans | <mapdtestPlans> |
 
-    @regressionAARP
-    Examples: 
+  @dceSavePlanDifferentZipcode_AARP
+    Examples:
       | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
       | AARP |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
 
-    @regressionUHC
+  @dceSavePlanDifferentZipcode_UHC
     Examples: 
       | site | zipcode | plantype | county | isMultutiCounty | drug1   | planname                                           | mapdtestPlans                        | newzipcode |
       | UHC  |   90210 | MAPD     | none   | no              | Orkambi | AARP Medicare Advantage SecureHorizons Focus (HMO) | AARP Medicare Advantage Plan 1 (HMO) |      10001 |
