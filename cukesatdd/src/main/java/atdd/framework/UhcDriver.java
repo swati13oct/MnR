@@ -239,6 +239,15 @@ public abstract class UhcDriver {
 
 	}
 
+	
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/*
 	 * To handle iOS specific sendkeys problem By: Harshal Ahire
 	 */
@@ -729,14 +738,7 @@ public abstract class UhcDriver {
 
 	}
 
-	public void sleepBySec(int sec) {
-		try {
-			Thread.sleep(sec * 1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 
 	/***
 	 * the method waits for 60 sec till current windows count increments by 1

@@ -140,7 +140,7 @@ public class VppFavoritePlanMobile {
 		String planType="MA";
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
-		plansummaryPage.handlePlanYearSelectionPopup(planYear);
+		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		plansummaryPage.validatePlansAreSaved(ma_savePlanNames, planType);
 
 		//----- PDP plan type --------------------------
@@ -170,6 +170,10 @@ public class VppFavoritePlanMobile {
 		String pdp_plans = memberAttributesMap.get("PDP Test Plans");
 		String snp_plans = memberAttributesMap.get("SNP Test Plans");
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
+		
+		if(plansummaryPage.backToPlans.isDisplayed()) {
+			plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		}
 		// note: the second plan in the list will be unsaved
 		String planType="MA";
 		plansummaryPage.viewPlanSummary(planType);
@@ -178,12 +182,14 @@ public class VppFavoritePlanMobile {
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType="PDP";
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 
 		planType="SNP";
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
@@ -226,6 +232,10 @@ public class VppFavoritePlanMobile {
 		} else {
 			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
+		
+		if(plansummaryPage.backToPlans.isDisplayed()) {
+			plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		}
 
 		//----- MA plan type ---------------------------
 		String planType="MA";
@@ -236,6 +246,8 @@ public class VppFavoritePlanMobile {
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
+		
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		System.out.println("Proceed to validate "+planType+" unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
@@ -243,6 +255,8 @@ public class VppFavoritePlanMobile {
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
+		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.backToPlans.click();
 		System.out.println("Proceed to validate "+planType+" unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
