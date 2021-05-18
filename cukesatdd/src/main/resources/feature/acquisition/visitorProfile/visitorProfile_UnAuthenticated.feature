@@ -4,7 +4,7 @@
 Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
   @addDrugs @addDrugsULayerSmoke @visitorProfileRegressionAARP @dce_Regression_Ulayer_VisitorProfile
-  Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile - zip - <zipCode>
+  Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile in <site> site - zip -<zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user selects the state drop down value in home page
@@ -24,7 +24,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
 
-    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression
+    @visitorProfile_AARP @regressionAARP @VP_ProdRegression_AARP @prodRegression @sanity
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
@@ -36,7 +36,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
 
 
   @addDrugsDCE1
-  Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile - zip -<zipCode>
+  Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile in <site> site - zip -<zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user selects the state drop down value in home page
@@ -60,7 +60,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @regressionUHC @vbfGate1
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @regressionUHC @vbfGate1 @sanity
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |

@@ -390,7 +390,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
 
-	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
 	private WebElement chatsam;
 
 	@FindBy(xpath = "//div[@class='sam']")
