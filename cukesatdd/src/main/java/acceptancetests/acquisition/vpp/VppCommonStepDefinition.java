@@ -2747,14 +2747,15 @@ public class VppCommonStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
-
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
 		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
-
+		}
 	}
 
 	@Then("^the site user validates the RightRails Links on Medsupp Page$")
@@ -2794,21 +2795,15 @@ public class VppCommonStepDefinition {
 	public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-
-		// String DateOfBirth = memberAttributesMap.get("DOB");
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 		String FirstName = memberAttributesMap.get("Firstname");
 		String LastName = memberAttributesMap.get("Lastname");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
 		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
-
+		}
 	}
 
 	@Then("^user validate the plandetails on medsupp plans$")
@@ -3847,14 +3842,15 @@ public class VppCommonStepDefinition {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
-
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPagevpppages(Medicarenumber);
 		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
-
+		}
 	}
 	
 	@Then("^verify all links on plan compare page is loaded$")
