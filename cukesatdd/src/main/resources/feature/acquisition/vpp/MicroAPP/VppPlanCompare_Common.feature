@@ -35,7 +35,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00003 | UHC  |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | UHC  |   70072 | NO            | Jefferson Parish | MAPD     | future   |
       
-      @sanity
+    @sanity
 		Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00002 | UHC  |   10001 | NO            | New York  County | SNP      | future   |
