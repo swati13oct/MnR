@@ -2833,7 +2833,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void verifyChatpopup() throws InterruptedException {
 		// CommonUtility.checkPageIsReady(driver);
-		chatsam.click();
+		//chatsam.click();
+		jsClickNew(chatsam);
 		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
 
 	}
@@ -3783,23 +3784,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
 	}
 
-	public pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage Hoveronaplan() throws InterruptedException {
-		waitforElement(ShopForaplan);
+	public ShopforaplanAARPlayerMobile Hoveronaplan() throws InterruptedException {
+		//waitforElement(ShopForaplan);
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
-			System.out.println("Hove Action skipped on Mobile");
+			MobileMenuMain();
+			System.out.println("Hover Action skipped on Mobile");
 		} else {
 			if (ShopForaplan.isDisplayed()) {
 				// Actions action = new Actions(driver);
 				// action.moveToElement(ShopForaplan).build().perform();
 				jsMouseOver(ShopForaplan);
-				return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
+				return new ShopforaplanAARPlayerMobile(driver);
 			} else {
 				return null;
 			}
 		}
-		return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
+		return new ShopforaplanAARPlayerMobile(driver);
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
@@ -4005,6 +4007,21 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("Failed Due To-------" + e.getMessage());
 		}
 
+	}
+	
+	public boolean validateChatNonHours() throws InterruptedException {
+
+		boolean present = true;
+		try {
+			WebElement chat = driver.findElement(By.xpath("//button[contains(@id,'sam-button--chat')]"));
+			if (chat.getAttribute("class").contains("activeChatBtn")) {
+				present = false;
+			}
+
+		} catch (NoSuchElementException e) {
+			e.printStackTrace();
+		}
+		return present;
 	}
 
 }

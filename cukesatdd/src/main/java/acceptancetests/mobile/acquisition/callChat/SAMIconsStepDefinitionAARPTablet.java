@@ -12,10 +12,13 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.ShopForPlanNavigationPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ShopforaplanAARPlayerMobile;
 
 public class SAMIconsStepDefinitionAARPTablet {
 
@@ -100,5 +103,22 @@ public class SAMIconsStepDefinitionAARPTablet {
 		aquisitionhomepage.navigateToPage(pagename);
 	}
 	
+	@Then("^user validates whether chat Agent is not Available")
+	public void the_user_validates_whether_chat_Agent_is_not_visible() throws Throwable {
+	boolean flag= false;
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	flag=aquisitionhomepage.validateChatNonHours();
+
+		Assertion.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
+		
+	}
+	
+	@And("^click on provider search link on shop pages$")
+	public void click_on_provider_search_link_on_shop_pages() throws Throwable {
+		ShopforaplanAARPlayerMobile shopaplan = (ShopforaplanAARPlayerMobile) getLoginScenario()
+				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
+		shopaplan.providersearch();
+	}
 	
 }
