@@ -74,7 +74,7 @@ Feature: 1.10.3 DCE-REDESIGN- To test integration flows between DCE and VPP from
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   |
       | AARP |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) | Every 3 Months |
 
-    @dce_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @prodRegression
+    @dce_Redesign_VPP_PlanSummary_MAPD_UHC @regressionUHC @prodRegression @sanity
     Examples: 
       | site | zipcode | planyear | plantype | county | isMultutiCounty | drug1   | drug2   | planname                                           | supplyLength   |
       | UHC  |   90210 | future   | MAPD     | none   | no              | Orkambi | Lipitor | AARP Medicare Advantage SecureHorizons Focus (HMO) | Every 3 Months |

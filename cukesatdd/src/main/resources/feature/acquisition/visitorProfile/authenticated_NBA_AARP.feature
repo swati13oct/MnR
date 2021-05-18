@@ -2,7 +2,7 @@
 Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
 
   @getStartedNBA @decRelease @authenticated 
-  Scenario Outline: Verify get started NBA for authenticated user on VPP page for <plantype> plantype
+  Scenario Outline: Verify get started NBA for authenticated user on VPP page for <plantype> plantype in <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user navigate to Visitor profile page

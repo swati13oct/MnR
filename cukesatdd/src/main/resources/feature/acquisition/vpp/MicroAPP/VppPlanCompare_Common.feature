@@ -35,7 +35,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
       | 00003 | UHC  |   48101 | NO            | Wayne County     | MAPD     | future   |
       | 00004 | UHC  |   70072 | NO            | Jefferson Parish | MAPD     | future   |
       
-      @sanity
+    @sanity
 		Examples: 
       | TID   | site | zipcode | isMultiCounty | county           | plantype | planyear |
       | 00002 | UHC  |   10001 | NO            | New York  County | SNP      | future   |
@@ -381,12 +381,12 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @vppPlanCompareCommon_AARP03 @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | AARP |   78006 | NO            | Bexar County | MAPD     | future   |           4 |               4,1 |
+      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | future   |           4 |               4,1 |
 
     @vppPlanCompareCommon_UHC03 @regressionUHC @vbfGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | YES            | Bexar County | MAPD     | future   |           4 |               1,4 |
+      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | future   |           4 |               1,4 |
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE on <site>
     Given the user is on medicare acquisition site landing page
