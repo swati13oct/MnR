@@ -371,10 +371,12 @@ public class LearnAboutMedicareStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/		
 		String EmailAddress = memberAttributesMap.get("Email");
-		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
-				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
-		learnAboutMedicareHomePage.RequestPlanIInformationshoppages(EmailAddress);
-	
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.RequestPlanIInformationshoppages(EmailAddress);
+		}
 	}
 
 	@Given("^the user hovers screen over the learn medicare for a plan$")
