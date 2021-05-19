@@ -9,12 +9,55 @@ Feature: ACQ-Plan benefits validation
       | WorkSheetName | <workSheet> |
       | Site          | <site>	    |
 
-  @OLEplanSummaryBenefitsAARP011
+  @OLEplanBenefitsAARP
     Examples:
       | excelPath                | workSheet | site |
-      | Plan Benefits_PDP_OLE_Data | OLESheet2021 PDP 118  | AARP |
+      | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_1  | AARP |
+      | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_2  | AARP |
 
-  @OLEplanSummaryBenefitsAARP01
+  @OLEplanBenefitsUHC01
     Examples:
       | excelPath                | workSheet | site |
-      | Plan Benefits_MA_SNP_OLE_Data | OLESheet2021 MASNP 122  | AARP |
+      | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_1  | UHC |
+      | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_2  | UHC |
+
+
+  @OLEplanBenefitsMAAARP
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_1  | AARP |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_2  | AARP |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_3  | AARP |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_4  | AARP |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_5  | AARP |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_6  | AARP |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_7  | AARP |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_8  | AARP |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_9  | AARP |
+
+
+  @OLEplanBenefitsMAUHC
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_1  | UHC |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_2  | UHC |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_3  | UHC |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_4  | UHC |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_5  | UHC |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_6  | UHC |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_7  | UHC |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_8  | UHC |
+      | Plan Benefits_MA_SNP_OLE | MASheet2021_9  | UHC |
+
+
+  @OLEplanBenefitsSNPAARP
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | SNPSheet2021_1  | AARP |
+      | Plan Benefits_MA_SNP_OLE | SNPSheet2021_2  | AARP |
+
+  @OLEplanBenefitsSNPUHC
+    Examples:
+      | excelPath                | workSheet | site |
+      | Plan Benefits_MA_SNP_OLE | SNPSheet2021_1  | UHC |
+      | Plan Benefits_MA_SNP_OLE | SNPSheet2021_2  | UHC |
