@@ -624,6 +624,7 @@ public class VppPlanValidationStepDefinition {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
+		boolean result = false;
 		String ExcelName = givenAttributesMap.get("ExcelFile");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String siteType = givenAttributesMap.get("Site");
@@ -679,29 +680,28 @@ public class VppPlanValidationStepDefinition {
 		                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
 
 		                //looping through columns until an empty column is found
-		                while (cellIterator.hasNext())
-		                {
-		                	HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>();
-		                	boolean valueMatches = true;
-		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
+		                while (cellIterator.hasNext()) {
+							HashMap<Boolean, String> resultMap = new HashMap<Boolean, String>();
+							boolean valueMatches = true;
+							HSSFCell cell = (HSSFCell) cellIterator.next();
 
-		                	 try {
-		                		 currentCellValue = cell.getStringCellValue();
-		                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
-		                	 }catch (Exception e) {
-		                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
-		                		 System.out.println(e);
-		                	 }
-			                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex);
-			                 if(rowIndex==0) {
-								 newCell.setCellValue(cell.getStringCellValue());
-								 if(cell.getStringCellValue().equalsIgnoreCase("county"))
-									  countyCellNum = cellIndex;
-								 else if(cell.getStringCellValue().equalsIgnoreCase("plan year"))
-									 planYearCellNum = cellIndex;
-								 else if(cell.getStringCellValue().equalsIgnoreCase("plan name"))
-									 planNameCellNum = cellIndex;
-			                 }
+							try {
+								currentCellValue = cell.getStringCellValue();
+								currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+							} catch (Exception e) {
+								System.out.println("Error getting value for " + sheetName + " Row " + rowIndex + " Cell " + cell);
+								System.out.println(e);
+							}
+							HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex);
+							if (rowIndex == 0) {
+								newCell.setCellValue(cell.getStringCellValue());
+								if (cell.getStringCellValue().equalsIgnoreCase("county"))
+									countyCellNum = cellIndex;
+								else if (cell.getStringCellValue().equalsIgnoreCase("plan year"))
+									planYearCellNum = cellIndex;
+								else if (cell.getStringCellValue().equalsIgnoreCase("plan name"))
+									planNameCellNum = cellIndex;
+							}
 
 							 if(rowIndex!=0) { //skip the header row
 								 if(cellIndex==0) {
@@ -711,62 +711,65 @@ public class VppPlanValidationStepDefinition {
 									  String planName = row.getCell(planNameCellNum).getStringCellValue();
 									  String planType = row.getCell(planNameCellNum).getStringCellValue();
 
-									  System.out.println("Validating "+sheetName+ " Plan "+rowIndex+" ************************************************************");
-									  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
-									  planSummaryPage = new AepVppPlanSummaryPage(wd);
-										if (planType.equalsIgnoreCase("PDP")) {
-									  planSummaryPage.selectCounty(countyName);
-									  planSummaryPage.Enroll_OLE_Plan(planName,planType);
-                                      premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
-									
+									System.out.println("Validating " + sheetName + " Plan " + rowIndex + " ************************************************************");
+									new VppCommonPage(wd, siteType, currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page
+									planSummaryPage = new AepVppPlanSummaryPage(wd);
+									if (planType.equalsIgnoreCase("PDP")) {
+										planSummaryPage.selectCounty(countyName);
+										planSummaryPage.Enroll_OLE_Plan(planName, planType);
+										premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
+
+									} else {
+
+
+										result = planSummaryPage.Enroll_OLE_Plan_PlanDetails(planName, planType);
+										if (result) {
+											premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
 										}
+									}
+
+								}
+								if (result) {
+									if (!(currentColName.equalsIgnoreCase("plan year") ||
+											currentColName.equalsIgnoreCase("plan id qa script") ||
+											currentColName.equalsIgnoreCase("product focus") ||
+											currentColName.equalsIgnoreCase("dsnp sub type") ||
+											currentColName.equalsIgnoreCase("Error Count") ||
+											currentColName.equalsIgnoreCase("portal labels") ||
+											currentColName.equalsIgnoreCase("OON_IN") ||
+											currentColName.equalsIgnoreCase("plan type") ||
+											currentColName.equalsIgnoreCase("county") ||
+											currentColName.equalsIgnoreCase("Link parameters") ||
+											currentColName.equalsIgnoreCase("product")
+									)) {
+
+
+										resultMap = planSummaryPage.comparePremium(sheetName, rowIndex, currentColName, currentCellValue, premiumMap);
+
+										if (resultMap.containsKey(false))
+											valueMatches = false;
+										System.out.println(currentColName + " : " + valueMatches);
+										if (valueMatches)
+											newCell.setCellStyle(stylePassed);
 										else {
-									  planSummaryPage.Enroll_OLE_Plan_PlanDetails(planName,planType);
-                                      premiumMap = planSummaryPage.collectInfoWelcomeOLEpg(planName, countyName, planYear, sheetName, rowIndex);
-									
+											newCell.setCellStyle(styleFailed);
+											failureCounter++;
 										}
-										
-								 }
 
-								 if(!(currentColName.equalsIgnoreCase("plan year")||
-										 currentColName.equalsIgnoreCase("plan id qa script")||
-										 currentColName.equalsIgnoreCase("product focus")||
-										 currentColName.equalsIgnoreCase("dsnp sub type")||
-										 currentColName.equalsIgnoreCase("Error Count")||
-										 currentColName.equalsIgnoreCase("portal labels")||
-										 currentColName.equalsIgnoreCase("OON_IN")||
-										 currentColName.equalsIgnoreCase("plan type")||
-										 currentColName.equalsIgnoreCase("county")||
-										 currentColName.equalsIgnoreCase("Link parameters")||
-										 currentColName.equalsIgnoreCase("product")
-								 )) {
-
-
-									 resultMap = planSummaryPage.comparePremium(sheetName, rowIndex, currentColName, currentCellValue, premiumMap);
-
-									 if(resultMap.containsKey(false))
-										 valueMatches = false;
-									 System.out.println(currentColName + " : "+ valueMatches);
-									 if(valueMatches)
-										 newCell.setCellStyle(stylePassed);
-									 else {
-										 newCell.setCellStyle(styleFailed);
-										 failureCounter++;
-									 }
-
-								 }
-
-								 if(currentColName.equalsIgnoreCase("Error Count")&&rowIndex!=0)
-					                	 newCell.setCellValue(failureCounter);
-					             else {
-					                	 if(valueMatches) { 			//if boolean value is true then it will write only the excel value from the input sheet and mark it green
-					                		 newCell.setCellValue(cell.getStringCellValue());
-					                	 } else { 						//boolean value is false so it will add the UI value as well to differentiate and mark the cell red
-					                		 newCell.setCellValue("Excel Value: "+cell.getStringCellValue()+" / UI Value: "+resultMap.get(false));
-					                	 }
-					              }
-							 }
-
+									}
+								}
+								if(result){
+								if (currentColName.equalsIgnoreCase("Error Count") && rowIndex != 0)
+									newCell.setCellValue(failureCounter);
+								else {
+									if (valueMatches) {            //if boolean value is true then it will write only the excel value from the input sheet and mark it green
+										newCell.setCellValue(cell.getStringCellValue());
+									} else {                        //boolean value is false so it will add the UI value as well to differentiate and mark the cell red
+										newCell.setCellValue("Excel Value: " + cell.getStringCellValue() + " / UI Value: " + resultMap.get(false));
+									}
+								}
+							}
+						}
 							  cellIndex++;
 		                 }
 		            }
