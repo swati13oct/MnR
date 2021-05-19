@@ -774,17 +774,22 @@ public class VppPlanValidationStepDefinition {
 										newCell.setCellStyle(stylePassed);
 								}
 
-								if(result){
+
+							//	if(result){
 								if (currentColName.equalsIgnoreCase("Error Count") && rowIndex != 0)
 									newCell.setCellValue(failureCounter);
 								else {
 									if (valueMatches) {            //if boolean value is true then it will write only the excel value from the input sheet and mark it green
-										newCell.setCellValue(cell.getStringCellValue());
+										//newCell.setCellValue(cell.getStringCellValue());
+										if(!(currentColName.equalsIgnoreCase("Monthly Premium") && newCell.getStringCellValue().equals("N/A"))) {
+											//if boolean value is true then it will write only the excel value from the input sheet and mark it green
+											newCell.setCellValue(cell.getStringCellValue());
+										}
 									} else {                        //boolean value is false so it will add the UI value as well to differentiate and mark the cell red
 										newCell.setCellValue("Excel Value: " + cell.getStringCellValue() + " / UI Value: " + resultMap.get(false));
 									}
 								}
-							}
+							//}
 						}
 							  cellIndex++;
 		                 }
