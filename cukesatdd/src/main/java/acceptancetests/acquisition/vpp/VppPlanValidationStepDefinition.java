@@ -768,6 +768,7 @@ public class VppPlanValidationStepDefinition {
 
 									}
 								}
+								//
 								if(currentColName.equalsIgnoreCase("Monthly Premium") && rowIndex != 0 && !result){
 										newCell.setCellValue("N/A");
 										newCell.setCellStyle(stylePassed);
