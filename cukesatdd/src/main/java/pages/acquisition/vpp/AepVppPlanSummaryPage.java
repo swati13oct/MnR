@@ -601,7 +601,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			driver.switchTo().window(window);
 			System.out.println(driver.getTitle());
 		}
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
 
 
@@ -689,30 +689,27 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	}
     
     
-    public void Enroll_OLE_Plan_PlanDetails(String planName, String planType) throws InterruptedException {
-    	
-    		try {
-    			Thread.sleep(10000);
-    		} catch (InterruptedException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
-    		}
+    public boolean Enroll_OLE_Plan_PlanDetails(String planName, String planType) throws InterruptedException {
+    	boolean flag = true;
 
     		System.out.println("Enroll in Plan for Plan : " + planName);
-    		try {
-    			if (validate(EnrollinPlan_PlanDetails))
-    				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
-    			else
-    				System.out.println("Enroll in Plan Button is Not Displayed ");
 
-    		} catch (Exception e) {
-    			System.out.println("Enroll in Plan Button is Not Displayed ");
-    		}
+				WebElement enrollInPlan = null;
+					try {
+						Thread.sleep(5000);
+				enrollInPlan = driver.findElement(By.xpath(
+								"(//*[contains(text(),'Enroll in plan')])[2]"));
+					}catch(Exception e){
+				System.out.println("This plan does not have enroll button");
+				flag = false;
+					}
 
-    		jsClickNew(EnrollinPlan_PlanDetails);
-
-    		
-    	}
+				if (enrollInPlan != null) {
+					validateNew(enrollInPlan);
+					jsClickNew(enrollInPlan);
+				}
+		return flag;
+		}
 	}
 
 
