@@ -2279,7 +2279,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(ChangePED_DropDown_List);
 		WebElement NextMonthOption = ChangePED_MonthNames.get(0);
 
-		String[] MonthYearText = NextMonthOption.getText().split(",");
+		String[] MonthYearText = NextMonthOption.getText().trim().split(",");
 		String Year = MonthYearText[1];
 		String Month = MonthYearText[0];
 		System.out.println("Month Year selected from dropdown - "+Month+","+Year);
