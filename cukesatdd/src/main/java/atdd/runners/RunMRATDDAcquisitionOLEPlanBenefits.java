@@ -15,10 +15,10 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionOLEPlanBenefits.json",
 						"timeline:target" },
-				tags = "@OLEplanSummaryBenefitsAARP01")
+				tags = "@OLEBenefits")
 
 
-@RetryCountIfFailed(1)
+@RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionOLEPlanBenefits extends BaseTestConfig {
 	@Test(dataProvider = ScenarioDataProvider)
 	public void runCukes(PickleWrapper pickleWrapper, FeatureWrapper featureWrapper) {
