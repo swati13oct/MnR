@@ -959,6 +959,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void clickOnBacktoDrugBtn() {
 		validateNew(backtoDrugEstBtn);
 		backtoDrugEstBtn.click();
+		waitForPageLoadSafari();
 	}
 
 	public void clickOnvppPlan() {
