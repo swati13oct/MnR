@@ -33,7 +33,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username  | password  | email          | mbi           | dob        | fname | lname | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
       | qavgogine | qavgogine | DAX@MEMBER.COM | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
 
-  @searchProfileName
+  @searchProfileName @sanity
   Scenario Outline: Telesales agent searching for the profile using first name and last name
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -106,7 +106,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username  | password  | email                     | fname  | lname    | mbi           | dob        | plantype | enrolledplanName                  | planName                             | drugNames | providers | testPlans                                                                 |
       | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | CHERRY | KUKOWSKI | 9EX6-WA2-PQ79 | 12/05/1966 | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Plan 1 (HMO) | No        | No        | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
-  @searchProfileAndAddDrugs
+  @searchProfileAndAddDrugs @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -136,7 +136,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username  | password  | email              | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipCode |
       | qavgogine | qavgogine | nynette@MEMBER.COM | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
-  @searchProfileAndProviderFlow
+  @searchProfileAndProviderFlow @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |

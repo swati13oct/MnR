@@ -78,7 +78,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | RankingOptions | PlansOrder                                                                                                                              | DisplayCurrentPlan |
       | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Prime(HMO),Plan1(HMO),Plan2(HMO),Choice(PPO),Patriot(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO) | YES                |
 
-  @ARE @AddEditDeleteDrug @F457409
+  @ARE @AddEditDeleteDrug @F457409 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Drugs in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
