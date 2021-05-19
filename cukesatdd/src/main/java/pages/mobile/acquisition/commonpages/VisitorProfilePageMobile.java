@@ -255,8 +255,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		pageloadcomplete();
 
 		try {
-			
-		
+
 			if (remove.isDisplayed()) {
 				System.out.println("Remove links present - Existing drugs available..........");
 				List<Dimension> drugListRemoveLinks = Arrays.asList(remove.getSize());
@@ -791,4 +790,72 @@ public class VisitorProfilePageMobile extends UhcDriver {
 					.isDisplayed());
 		}
 	}
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign In')]")
+	public WebElement loginLink;
+
+	@FindBy(xpath = "//input[contains(@id, 'agreeButton')]")
+	public WebElement ShareOneHealth_AgreeButton;
+
+	@FindBy(xpath = "//*[contains(@id, 'identity-confirm-title')]")
+	public WebElement ConfirmIdentity_ModalHdr;
+
+	@FindBy(xpath = "//*[contains(@class, 'identity-confirm')]//button[contains(@class, 'close')]")
+	public WebElement ConfirmIdentity_ModalClose;
+
+	@FindBy(xpath = "//*[@id='globalContentIdForSkipLink']/..//a[contains(text(),'Sign Out')]")
+	public WebElement signOutLink;
+
+	public void logIn(String username, String password) {
+		try {
+
+			// loginLink.click();
+			jsClickNew(loginLink);
+			waitForPageLoadSafari();
+			driver.findElement(By.cssSelector("input#userNameId_input")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			System.out.println("before signin");
+			driver.findElement(By.cssSelector("input#SignIn")).click();
+			System.out.println("before wait");
+			waitForPageLoadSafari();
+			waitforElement(driver.findElement(By.cssSelector("#securityQues")));
+			System.out.println("after wait");
+			String Question = driver.findElement(By.cssSelector("#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("#UnrecognizedSecAns_input"));
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			driver.findElement(By.cssSelector("input#authQuesSubmitButton")).click();
+			try {
+				validateNew(ShareOneHealth_AgreeButton);
+				System.out.println("Share My One Healthcare ID Page is Dispalyed for VP Login - Clicking on I Agree");
+				jsClickNew(ShareOneHealth_AgreeButton);
+
+			} catch (Exception e) {
+				System.out.println("Share My One Healthcare ID Page is NOT Dispalyed for VP Login - Continuing to VP");
+			}
+			try {
+				validateNew(ConfirmIdentity_ModalHdr);
+				validateNew(ConfirmIdentity_ModalClose);
+				jsClickNew(ConfirmIdentity_ModalClose);
+			} catch (Exception e) {
+				System.out
+						.println("Confirm Identity and Import Modal is NOT Dispalyed for VP Login - Continuing to VP");
+			}
+			CommonUtility.waitForPageLoadNew(driver, signOutLink, 20);
+		} catch (Exception e) {
+			Assertion.fail("###############Optum Id Sign In failed###############");
+		}
+
+	}
+
 }

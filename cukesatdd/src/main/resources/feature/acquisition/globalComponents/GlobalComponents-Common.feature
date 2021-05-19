@@ -1,4 +1,4 @@
-@GlobalComponentsAARP
+@GlobalComponentsAARP @GlobalHeaderFooter
 Feature: 1.12 ACQ - Global Components Validation
 
   @globalfooterULayer
@@ -36,10 +36,11 @@ Feature: 1.12 ACQ - Global Components Validation
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user accesses global header of the Medicare Plans home page
-    And user verifies the logo on home page
-    And user clicks on Sign in link in the header
-    And user clicks on register link in the header
-    Then user clicks on the heart icon in the header
+    When user verifies the logo
+    And user clicks on Sign in link
+    And user clicks on register link
+    Then the user clicks on browser back button
+    Then user validates visitor profile
 
     @globalheader
     Examples: 
@@ -68,6 +69,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | TFNflag  | <tfnFlag>  |
     # Then the user validates Pro-active Chat
     Then the user validates whether call icon is visible
+    Then the user validates whether chat icon is visible
 
     # Then the user validates SAM re-active Chat
     @MedEdPages_1_GlobalCompsAARP @regressionAARP
@@ -78,7 +80,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | AARP | medicare-education/medicare-benefits.html                | Prescriptions, Providers & Benefits   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @MedEdPages_1_GlobalCompsUHC @regressionUHC
+    @MedEdPages_1_GlobalCompsUHC @regressionUHC @sanity
     Examples: 
       | site | path                                                     | pageName                                     | tfnXpath                                                       | tfnFlag |
       | UHC  | medicare-education.html                                  | Understanding Medicare                       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -94,7 +96,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     #|AARP| medicare-education/compare-ma-ms-plans.html|
-    @MedEdPages_2_GlobalCompsUHC @regressionUHC
+    @MedEdPages_2_GlobalCompsUHC @regressionUHC @sanity
     Examples: 
       | site | path                                              | pageName                            | tfnXpath                                                       | tfnFlag |
       | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
@@ -104,17 +106,17 @@ Feature: 1.12 ACQ - Global Components Validation
     #|UHC| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_3_GlobalCompsAARP @regressionAARP
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
-      | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | AARP | medicare-education/medicare-faq.html                  | Medicare FAQ               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | site | path                                   | pageName             | tfnXpath                                                       | tfnFlag |
+      | AARP | medicare-education/medicare-costs.html | Medicare Cost Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/when-to-enroll.html | When to Enroll       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-faq.html   | Medicare FAQ         | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @MedEdPages_3_GlobalCompsUHC @regressionUHC
     Examples: 
-      | site | path                                                  | pageName                   | tfnXpath                                                       | tfnFlag |
-      | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UHC  | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UHC  | medicare-education/medicare-faq.html                  | Medicare FAQ               | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | site | path                                   | pageName             | tfnXpath                                                       | tfnFlag |
+      | UHC  | medicare-education/medicare-costs.html | Medicare Cost Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/when-to-enroll.html | When to Enroll       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-faq.html   | Medicare FAQ         | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
     @ShopPlan_Shop1_GlobalCompsAARP @regressionAARP
     Examples: 
@@ -326,22 +328,6 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | path                                                                      | pageName          | tfnXpath       | tfnFlag |
       | UHC  | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | Decision Guide    | //*[@id='tfn'] | true    |
       | UHC  | health-plans/medicare-supplement-plans/agent-appointment.html             | Agent Appointment | //*[@id='tfn'] | true    |
-
-  @GlobalComponentsAARPNewShopPages
-  Scenario Outline: To verify Global Components for the page mentioned of AARP site <pageName> : <path>
-    Given the user is on AARP medicare acquisition site landing page
-    Given the user navigates to following AARP medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then the user validate ZipCode Components on page using ZipCode "90210"
-    Then the user validates TFN on page
-      | TFNxpath | <tfnXpath> |
-      | TFNflag  | <tfnFlag>  |
-
-    @GlobalComponentsAARPNewShopPages1
-    Examples: 
-      | path                               | pageName               | tfnXpath                                                           | tfnFlag |
-      | shop/medicare-advantage-plans.html | ShopPlan: Shop MA Plan | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
   @GlobalComponentsAARPShopPages
   Scenario Outline: To verify Global Components zipcode component for the page mentioned on site -<site> - <pageName> : <path>
@@ -729,7 +715,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Then user should be navigated to respective medicare education page
     Then the user clicks on browser back button
     Then the user hovers over the learn about medicare
-    When user click on "Medicare Supplement Insurance Plans" link under learn about medicare
+    When user click on "Medicare Supplement Insurance" link under learn about medicare
     Then user should be navigated to respective medicare education page
     Then the user clicks on browser back button
     Then the user hovers over the learn about medicare
@@ -737,7 +723,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Then user should be navigated to respective medicare education page
     Then the user clicks on browser back button
     Then the user hovers over the learn about medicare
-    When user click on "Enrollment Basics" link under learn about medicare
+    When user click on "When to Enroll" link under learn about medicare
     Then user should be navigated to respective medicare education page
     Then the user clicks on browser back button
     Then the user hovers over the learn about medicare

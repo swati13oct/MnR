@@ -380,7 +380,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'timezone')]")
 	private WebElement CallSamTFNtimezone;
 
-	@FindBy(xpath = "//p[contains(text(),'Already a member?')]")
+	@FindBy(xpath = "//div[@id='sam-call-modal']//p[contains(text(),'Already a member')]")
 	private WebElement CallSamTFNMember;
 
 	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'modal-close')]")
@@ -390,7 +390,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
 
-	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
 	private WebElement chatsam;
 
 	@FindBy(xpath = "//div[@class='sam']")
@@ -638,7 +638,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']/h5)[1]")
 	private WebElement footertextsectionTFNHeader;
 	
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]/p[2]")
 	private WebElement CallSamTFNMedsupptimezone;
 	
 	@FindBy(xpath = "//h3[@class='sam-callbody-head']")
@@ -695,10 +695,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'thankYouMsg')]")
 	private WebElement learnMoreMedicareEmailSubmissionMsg;
 	
-	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-call-modal')]//*[contains(@class,'medsuptime')]/p[2]")
 	private WebElement CallSamTFNtimezone_Medsup;
 
-	@FindBy(xpath = "//div//p[contains(text(),'Already a member?')]")
+	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
 	private WebElement CallSamTFNMember_Medsup;
 	
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
@@ -3307,7 +3307,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
 //		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
-		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and @onkeydown]"));
+		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
 
 String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
@@ -4799,7 +4799,7 @@ String winHandleBefore = driver.getWindowHandle();
 //			MedicareEducation.click();
 		jsClickNew(MedicareEducation);
 		threadsleep(5);
-		if (driver.getCurrentUrl().contains("medicare-education.html")) {
+		if (driver.getCurrentUrl().contains("medicare-education")) {
 			Assertion.assertTrue(true);
 			System.out.println("Medicare Education Homepage open: URL-->" + driver.getCurrentUrl());
 		} else {
@@ -5711,8 +5711,8 @@ String winHandleBefore = driver.getWindowHandle();
 					"****************TFN Timezone Content was not found macthing with the SAM call Popup  ***************");
 
 		String ExpectedCallSamTFNMember = "Already a member? Call the number on the back of your member ID card.";
-		validate(CallSamTFNMember);
-		String ActualCallSamTFNMember = CallSamTFNMember.getText();
+		validate(CallSamTFNMember_Medsup);
+		String ActualCallSamTFNMember = CallSamTFNMember_Medsup.getText();
 		System.out.println("TFN Member on CAll popup: " + ExpectedCallSamTFNMember);
 		if (ExpectedCallSamTFNMember.equalsIgnoreCase(ActualCallSamTFNMember)) {
 			System.out.println(
@@ -6456,7 +6456,7 @@ String winHandleBefore = driver.getWindowHandle();
 			Assert.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
 					+ ExpectedCallSAMTFN);
 		}
-		if(driver.getCurrentUrl().contains("medicare-supplement-plans.html") || driver.getCurrentUrl().contains("/compare/compare-ms.html") || driver.getCurrentUrl().contains("/enroll/ms-apply.html") || driver.getCurrentUrl().contains("shop/estimate/ms-costs.html")) {
+		if(driver.getCurrentUrl().contains("medicare-supplement-plans") || driver.getCurrentUrl().contains("/compare/compare-ms") || driver.getCurrentUrl().contains("/enroll/ms-apply") || driver.getCurrentUrl().contains("shop/estimate/ms-costs")) {
 			String ExpectedCallSamTFNtimezone = "7 a.m. â€“ 11 p.m. ET, Monday-Friday\n9 a.m. â€“ 5 p.m. ET, Saturday";
 			validate(CallSamTFNtimezone_Medsup);
 			String ActualCallSamTFNtimezone = CallSamTFNtimezone_Medsup.getText();

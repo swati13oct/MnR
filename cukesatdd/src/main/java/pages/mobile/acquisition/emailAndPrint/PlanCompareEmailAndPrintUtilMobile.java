@@ -143,15 +143,19 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("!!!Cancel Button is displayed ===>"+sendButtonEmailPlanComparePopUp.isDisplayed());
 		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("rani_madadi@optum.com");
 		System.out.println("!!!Entered valid Email ");
-	scrollToView(sendButtonEmailPlanComparePopUp);
-		jsClickMobile(sendButtonEmailPlanComparePopUp);
+	    scrollToView(sendButtonEmailPlanComparePopUp);
+	    pageloadcomplete();
+		iosScroll(sendButtonEmailPlanComparePopUp);
+		jsClickNew(sendButtonEmailPlanComparePopUp);
+		pageloadcomplete();
 		Assertion.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));
 		//Validating email success popup
 		System.out.println("Email has successfull send to user");
 		validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
 		
-		closeButtonthankyoumessagepopup.click();
+		//closeButtonthankyoumessagepopup.click();
+		jsClickNew(closeButtonthankyoumessagepopup);
 		System.out.println("Thank you Message pop up is closed");
 	}
 

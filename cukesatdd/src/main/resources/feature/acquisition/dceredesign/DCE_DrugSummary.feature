@@ -60,7 +60,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
       | AARP |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-    @dce_DrugSummary_Page_UHC @regressionUHC
+    @dce_DrugSummary_Page_UHC @regressionUHC @sanity
     Examples: 
       | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
       | UHC  |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
@@ -111,7 +111,7 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
       | AARP | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |
 
-    @dceRedesign_ChangePharmacyModal_UHC @regressionUHC @vbfGate1
+    @dceRedesign_ChangePharmacyModal_UHC @regressionUHC @vbfGate
     Examples: 
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
       | UHC  | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |

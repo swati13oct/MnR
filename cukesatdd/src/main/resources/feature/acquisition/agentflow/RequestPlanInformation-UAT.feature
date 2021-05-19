@@ -79,22 +79,27 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
       | scenario                                   | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
       | Request plan information scenario 1 _UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
 
-  Scenario Outline: <scenario> Verify Request Plan Information through <site> from Shop for a Plan
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    And the user hovers screen over the shop for a plan
-    Then the user enters following information in Request Plan Information Guide through Shop Pages
-      | Email | <email> |
+
+   # ------------------ Old pages for Shop for plan and changed to medicare page
+  #Scenario Outline: <scenario> Verify Request Plan Information through <site> from Shop for a Plan
+    #Given the user is on medicare acquisition site landing page
+    #  | Site | <site> |
+    #And the user hovers screen over the shop for a plan
+    #Then the user enters following information in Request Plan Information Guide through Shop Pages
+      #| Email | <email> |
 
     #@requestPlanInformationUlayer @UATRegression @regressionAARP
-    Examples: 
-      | scenario                                       | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
-      | Request Plan Information - E2E Scenario 3_AARP | AARP | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+    #Examples:
+    #  | scenario                                       | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
+     # | Request Plan Information - E2E Scenario 3_AARP | AARP | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
 
     #@requestPlanInformationBlayer @UATRegression @regressionUHC
-    Examples: 
-      | scenario                                        | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
-      | Request Plan Information - E2E Scenario 3_UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+   # Examples:
+     # | scenario                                        | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
+     # | Request Plan Information - E2E Scenario 3_UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+ # ------------------ Old pages for Shop for plan and changed to medicare page
+
+
 
   Scenario Outline: <scenario> Verify Request Plan Information through <site> from learn about medicare page
     Given the user is on medicare acquisition site landing page

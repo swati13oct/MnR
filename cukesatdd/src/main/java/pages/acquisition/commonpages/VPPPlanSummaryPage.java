@@ -317,7 +317,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='nav-zipcode']")
 	private WebElement shopForAPlanOptionZipcodeFieldBox;
 
-	@FindBy(xpath = "//button[contains(@class,'zip-button') and contains(@dtmid,'top')]")
+	@FindBy(xpath = "//div[@class='uhc-pulldown-menu']//span[text()='Find Plans']")
 	private WebElement shopForAPlanOptionFindPlanButton;
 
 	@FindBy(xpath = "//a[@id='change-location']")
@@ -3033,9 +3033,11 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			System.out.println("Proceed to locate plan=" + plan);
 
 			String testPlanXpath = "//*[contains(text(),'" + plan + "') and contains(@class,'ng-binding')]";
+			WebElement testPlanXpath1 = driver.findElement(By.xpath("//*[contains(text(),'" + plan + "') and contains(@class,'ng-binding')]"));
 			System.out.println("TEST - textPlanXpath xpath=" + testPlanXpath);
 			List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
 			int expMatch = 1;
+		    scrollToView(testPlanXpath1);
 			Assertion.assertTrue(
 					"PROBLEM - unable to locate plan='" + plan + "'.  Expect number of match='" + expMatch
 							+ "' | Actual number of match='" + listOfPlans.size() + "'",
@@ -3645,7 +3647,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		jsClickNew(alternatemailingAddressBtn);
-		emailAddress.sendKeys("venkata.kanagala@optum.com");
+		emailAddress.sendKeys("test123@optum.com");
 		phoneNumber.sendKeys("1234567890");
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -4582,7 +4584,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		address1.sendKeys("TestAddress1");
 		cityName.sendKeys("TestCity");
 		alternatemailingAddressBtn.click();
-		emailAddress.sendKeys("venkata.kanagala@optum.com");
+		emailAddress.sendKeys("test123@optum.com");
 		phoneNumber.sendKeys("1234567890");
 		jsClickNew(nextButton);
 		Thread.sleep(2000);

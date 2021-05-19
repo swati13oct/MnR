@@ -23,7 +23,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And user selects plan year
     And user clicks on continue button in Zip Entry Page
 
-  @dce_VisitorProfile_AARP @regressionAARP @prodRegression @vbfGate1
+  @dce_VisitorProfile_AARP @regressionAARP @prodRegression @vbfGate
     Examples:
       | drug1   | drug2  | drug3   | drug4    | zipCode | site |
       | Orkambi | Fanapt | Humalog | Adderall | 80002   | AARP |
@@ -96,7 +96,6 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    And clicks on Review drug cost button
     Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then user should be able to see Return to profile link on details page
     When user clicks on Return to profile link on details page
@@ -106,7 +105,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     Then user should be navigated to build drug list page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |
-    And clicks on Review drug cost button
+    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then user should be able to see Return to profile link on details page
     And user should be able to see Back to profile button on details page
 
@@ -144,7 +143,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Visitor Profile to NEW DCE Flows
     And Back to profile button should be displayed for each plan card
     When user clicks on Back to profile button
     Then user should be navigated to shopper profile page
-    When user clicks on edit drugs button globally
+    Then user clicks on Add drugs button globally on shopper profile page
     Then user should be navigated to build drug list page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug2> |

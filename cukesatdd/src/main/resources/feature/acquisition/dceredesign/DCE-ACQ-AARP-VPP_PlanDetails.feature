@@ -64,7 +64,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                        |
       | UHC  |   80002 | future   | PDP      | Adams County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | AARP MedicareRx Walgreens (PDP) |
 
-    @dce_Redesign_VPP_PlanDetails_SNP_AARP @regressionAARP @sanity
+    @dce_Redesign_VPP_PlanDetails_SNP_AARP @regressionAARP
     Examples: 
       | site | zipcode | planyear | plantype | county       | isMultutiCounty | drug1     | drug2                | drug3      | drug4         | drug5            | drug6   | planname                                                   |
       | AARP |   78006 | future   | SNP      | Bexar County | yes             | meloxicam | diclofenac potassium | febuxostat | buprenorphine | fentanyl citrate | Lipitor | UnitedHealthcare Dual Complete Choice (Regional PPO D-SNP) |
@@ -110,12 +110,17 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | zipcode | site | plantype | county | isMultutiCounty | drug1     | planname                                           | planyear |
       |   90210 | AARP | MAPD     | none   | no              | meloxicam | AARP Medicare Advantage SecureHorizons Focus (HMO) | future   |
 
-    @dce_Redesign_DCE_Detail_to_Vpp_Details_PDP @regressionAARP @regressionUHC
+    @dce_Redesign_DCE_Detail_to_Vpp_Details_PDP @regressionAARP
     Examples: 
       | zipcode | site | plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
       |   80002 | AARP | PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
+    
+    @regressionUHC  @sanity
+   	Examples: 
+      | zipcode | site 	| plantype | county       | isMultutiCounty | drug1     | planname                        | planyear |
+      |   80002 | UHC 	| PDP      | Adams County | yes             | meloxicam | AARP MedicareRx Walgreens (PDP) | future   |
 
-    @dce_Redesign_DCE_Detail_to_Vpp_Details_SNP @regressionAARP @regressionUHC @vbfGate1
+    @dce_Redesign_DCE_Detail_to_Vpp_Details_SNP @regressionAARP @regressionUHC @vbfGate
     Examples: 
       | zipcode | site | plantype | county       | isMultutiCounty | drug1     | planname                                              | planyear |
       |   78006 | AARP | SNP      | Bexar County | yes             | meloxicam | UnitedHealthcare Medicare Silver (Regional PPO C-SNP) | future   |
@@ -213,7 +218,7 @@ Feature: 1.10.2 ACQ-DCERedesign-VPP_PlanDetails AARP - To test DCE - VPP Plan De
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | AARP |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |
 
-    @dceSwitchtoGenericNBA_MAPD_UHC @switchtoGenericUHC @regressionUHC @vbfGate1
+    @dceSwitchtoGenericNBA_MAPD_UHC @switchtoGenericUHC @regressionUHC @vbfGate
     Examples: 
       | site | zipcode | plantype | county       | isMultutiCounty | drug1   | drug2   | planname                             |
       | UHC  |   78006 | MAPD     | Bexar County | yes             | Lipitor | orfadin | AARP Medicare Advantage Choice (PPO) |

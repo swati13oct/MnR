@@ -75,6 +75,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
 
     #@ProviderSearchFromVppPlanSummaryPageBlayer
+    @sanity
     Examples: 
       | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear |
       |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
@@ -137,7 +138,7 @@ Feature: 1.07.1 .ACQ- Provider Search Flow in AARP
       | Year      | <year>      |
 
     #@ProviderSearchFromGlobalHeaderUlayer1
-    @ProviderSearchCommon_AARP @regressionAARP @sanity
+    @ProviderSearchCommon_AARP @regressionAARP @sanity 
     Examples: 
       | zipcode | site | plancount | year   |
       |   10001 | AARP |        12 | future |
