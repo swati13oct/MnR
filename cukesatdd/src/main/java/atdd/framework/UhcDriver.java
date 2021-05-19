@@ -712,20 +712,7 @@ public abstract class UhcDriver {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
-		sleepBySec(3);
-		scrollToView(Element);
-		try {
-			System.out.println("Trying selenium click to open new window ................");
-			checkElementisEnabled(Element);
-			Element.click();
-
-		} catch (Exception e) {
-
-			System.out.println("Trying JS-Click as click failed in try block..............");
-			jsClickNew(Element);
-		}
-		sleepBySec(10);
-		// waitForPageLoadSafari();
+		jsClickNew(Element);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;

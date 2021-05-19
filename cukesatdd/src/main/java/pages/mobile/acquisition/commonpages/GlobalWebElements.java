@@ -23,7 +23,7 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id = "gf_lnk_1")
 	public WebElement footerHomeLink;
 
-	@FindBy(id = "gf_lnk_2")
+	@FindBy(xpath = "//*[@id=\"gf_lnk_2\"]/div")
 	public WebElement footerAboutUsLink;
 
 	@FindBy(id = "gf_lnk_3")
