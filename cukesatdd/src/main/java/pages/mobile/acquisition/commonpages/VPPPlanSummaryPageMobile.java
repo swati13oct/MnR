@@ -1149,7 +1149,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
-		//iosScroll(ProviderSearchLink);
+		// iosScroll(ProviderSearchLink);
 		// validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(3);
@@ -1840,15 +1840,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		System.out.println("Plan Name is : " + PlanName);
 		WebElement premiumForPlan = null;
 		if (planType.equalsIgnoreCase("PDP")) {
+			iosScroll(premiumForPlan);
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
 		} else
+			iosScroll(premiumForPlan);
+		premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+				+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
 
-			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
-
-		CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
-
+		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
+		scrollToView(premiumForPlan);
 		String PlanPremium = premiumForPlan.getText();
 
 		System.out.println("Premium for Plan : " + PlanPremium);
@@ -2237,8 +2238,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
 		} else
 			iosScroll(PrimaryCarePhysicianForPlan);
-			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
+		PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -3121,10 +3122,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		System.out.println("Proceed to unsave 1st plan from input '" + unsavePlan + "'");
 
 		String testPlanXpath = "//*[contains(text(),'" + unsavePlan + "') and contains(@class,'ng-binding')]";
+		WebElement testPlanXpath1 = driver.findElement(
+				By.xpath("//*[contains(text(),'" + unsavePlan + "') and contains(@class,'ng-binding')]"));
+		testPlanXpath1.getText().replaceAll("\u00A00", " ").trim();
 		List<WebElement> listOfPlans = driver.findElements(By.xpath(testPlanXpath));
 		int expMatch = 1;
-		Assertion.assertTrue("PROBLEM - unable to locate plan='" + unsavePlan + "'.  Expect number of match='" + expMatch
-				+ "' | Actual number of match='" + listOfPlans.size() + "'", listOfPlans.size() == expMatch);
+		Assertion.assertTrue("PROBLEM - unable to locate plan='" + unsavePlan + "'.  Expect number of match='"
+				+ expMatch + "' | Actual number of match='" + listOfPlans.size() + "'", listOfPlans.size() == expMatch);
 
 		System.out.println("Proceed to validate 'Saved Plan' icon is there before clicking to unsave it");
 		String appeared_savedPlanLIconXpath = "//*[contains(text(),'" + unsavePlan
@@ -3138,9 +3142,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				+ listOfAppearedSavedPlanIcons.size() + "'", listOfAppearedSavedPlanIcons.size() == expMatch);
 
 		System.out.println("Proceed to click to unsave plan");
-		// ((JavascriptExecutor)
-		// driver).executeScript("arguments[0].scrollIntoView(false);",
-		// listOfAppearedSavedPlanIcons.get(0));
+
 		validate(listOfAppearedSavedPlanIcons.get(0));
 		jsClickNew(listOfAppearedSavedPlanIcons.get(0));
 		try {
@@ -3153,7 +3155,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		System.out.println("TEST - appeared_savedPlanLIconXpath xpath=" + appeared_savedPlanLIconXpath);
 		listOfAppearedSavedPlanIcons = driver.findElements(By.xpath(appeared_savedPlanLIconXpath));
 		expMatch = 0;
-		sleepBySec(10);
+
 		Assertion.assertTrue("PROBLEM - 'Saved Plan' icon should no longer appear for ='" + unsavePlan
 				+ "'.  Expect number of match='" + expMatch + "' | Actual number of match='"
 				+ listOfAppearedSavedPlanIcons.size() + "'", listOfAppearedSavedPlanIcons.size() == expMatch);
@@ -3170,7 +3172,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 						+ expMatch + "' | Actual number of match='" + listOfSavePlanIcons.size() + "'",
 				listOfSavePlanIcons.size() == expMatch);
 	}
-
 
 	public void validateOnePlanSavedOnePlanUnsaved(String savePlanNames, String planType) {
 		String subPath = determineSubpath(planType);

@@ -255,8 +255,8 @@ public class VppFavoritePlanMobile {
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
+		
 		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
-		plansummaryPage.backToPlans.click();
 		System.out.println("Proceed to validate "+planType+" unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);

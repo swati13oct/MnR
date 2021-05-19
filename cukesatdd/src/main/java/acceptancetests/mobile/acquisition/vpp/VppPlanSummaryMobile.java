@@ -842,7 +842,8 @@ public class VppPlanSummaryMobile {
 		dce.verifyPharmacyResults();
 		for (int i = 0; i < dce.getLstPharmacyNames().size(); i++)
 			if (dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
-				dce.getLstSelectPharmacy().get(i).click();
+				//dce.getLstSelectPharmacy().get(i).click();
+				dce.jsClickNew(dce.getLstSelectPharmacy().get(i));
 				break;
 			}
 

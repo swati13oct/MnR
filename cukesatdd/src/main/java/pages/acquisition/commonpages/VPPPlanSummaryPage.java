@@ -3261,6 +3261,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
+		scrollToView(backToPlans);
 		String subPath = determineSubpath(planType);
 		String headerPath = determineHeaderPath(planType);
 

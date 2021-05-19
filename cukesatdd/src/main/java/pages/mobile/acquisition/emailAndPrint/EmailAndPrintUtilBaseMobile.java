@@ -42,7 +42,8 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			}
 		}
 
-		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value", deepLinkEntryLine!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate the network entry that contains the deeplink value",
+				deepLinkEntryLine != null);
 
 		JSONParser parser = new JSONParser();
 		JSONObject jsobObj = null;
@@ -54,23 +55,23 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 		}
 		JSONObject messageObj = (JSONObject) jsobObj.get("message");
 
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", messageObj != null);
 
 		JSONObject paramsObj = (JSONObject) messageObj.get("params");
 
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", paramsObj != null);
 
 		JSONObject requestObj = (JSONObject) paramsObj.get("request");
 
-		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj!=null);
-		System.out.println("TEST - headersObj="+requestObj.toString());
+		Assertion.assertTrue("PROBLEM - unable to locate message json object", requestObj != null);
+		System.out.println("TEST - headersObj=" + requestObj.toString());
 
 		String postDataStr = (String) requestObj.get("postData");
 
-		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr!=null);
-		String tmp=postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
-		tmp=tmp.replace("\\\\\"", "\"");
-		System.out.println("TEST - tmp="+tmp);
+		Assertion.assertTrue("PROBLEM - unable to locate postData string", postDataStr != null);
+		String tmp = postDataStr.replace("\\\"{", "{").replace("}\\\"", "}");
+		tmp = tmp.replace("\\\\\"", "\"");
+		System.out.println("TEST - tmp=" + tmp);
 
 		try {
 			jsobObj = (JSONObject) parser.parse(tmp);
@@ -80,30 +81,33 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 		}
 		JSONObject toObj = (JSONObject) jsobObj.get("to");
 
-		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate 'to' json object", toObj != null);
 
 		JSONObject contactAttributesObj = (JSONObject) toObj.get("contactAttributes");
 
-		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object", contactAttributesObj!=null);
+		Assertion.assertTrue("PROBLEM - unable to locate 'contactAttributes' json object",
+				contactAttributesObj != null);
 
 		JSONObject subscriberAttributesObj = (JSONObject) contactAttributesObj.get("subscriberAttributes");
 
-		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object", subscriberAttributesObj!=null);
-		System.out.println("TEST - subscriberAttributesObj="+subscriberAttributesObj.toString());
+		Assertion.assertTrue("PROBLEM - unable to locate 'subscriberAttributes' json object",
+				subscriberAttributesObj != null);
+		System.out.println("TEST - subscriberAttributesObj=" + subscriberAttributesObj.toString());
 
 		String deepLinkStr = (String) subscriberAttributesObj.get("deepLink");
 
-		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr!=null);
-		System.out.println("TEST - *** deepLinkStr="+deepLinkStr);
+		Assertion.assertTrue("PROBLEM - unable to locate deepLinkStr string", deepLinkStr != null);
+		System.out.println("TEST - *** deepLinkStr=" + deepLinkStr);
 
 		return deepLinkStr;
 	}
 
 	public void savedHeartFirstPlanOnSummaryPage() {
+		iosScroll(firstSaveHeartOnActiveSummaryPlanPage);
+		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page",
+				validate(firstSaveHeartOnActiveSummaryPlanPage));
 
-		Assertion.assertTrue("PROBLEM - unable to locate the first save heart on plan page", validate(firstSaveHeartOnActiveSummaryPlanPage));
-
-		jsClickMobile(firstSaveHeartOnActiveSummaryPlanPage);
+		jsClickNew(firstSaveHeartOnActiveSummaryPlanPage);
 
 	}
 
@@ -117,11 +121,13 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 			printElement = summary_snpPrintOption;
 		} else {
 
-			Assertion.assertTrue("PROBLEM - test not coded for this '"+planType+"' planType testing", false);
+			Assertion.assertTrue("PROBLEM - test not coded for this '" + planType + "' planType testing", false);
 
 		}
 
-		Assertion.assertTrue("PROBLEM - Unable to locate the print option or the email option. printCheck="+validate(printElement), validate(printElement));
+		Assertion.assertTrue(
+				"PROBLEM - Unable to locate the print option or the email option. printCheck=" + validate(printElement),
+				validate(printElement));
 
 	}
 
@@ -153,65 +159,75 @@ public class EmailAndPrintUtilBaseMobile extends EmailAndPrintUtilWebElementsMob
 	}
 
 	public void validatePrintOptionOnPage(String pageType, String planType) {
-		
-		if (driver.getClass().toString().toUpperCase().contains("IOS")){
-			System.out.println("Print Funxtionality check skipped on mobile device.....");
-		}
-		else if((driver.getClass().toString().toUpperCase().contains("ANDROID"))){
-		//note: the print function will bring up the print preview window where the content can't be controlled by selenium
-		// for now will only validate the print button will bring up the print preview page
-		CommonUtility.checkPageIsReady(driver);
-		int numWinHandleBefore=driver.getWindowHandles().size();
-		String winHandleBefore = driver.getWindowHandle();
-		String originalPageTitle=driver.getTitle();
-		System.out.println("Current title: "+driver.getTitle());
-		if (pageType.equalsIgnoreCase("summary")) {
-			WebElement summary_printButton=null;
-			if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
-				summary_printButton=summary_maPrintOption;
-			} else if (planType.equalsIgnoreCase("pdp")) {
-				summary_printButton=summary_pdpPrintOption;
-			} else if (planType.equalsIgnoreCase("snp")) {
-				summary_printButton=summary_snpPrintOption;
-			} else {
-				Assertion.assertTrue("PROBLEM - '"+planType+"' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument", false);
-			}
-			summary_printButton.click();
-		} else if (pageType.equalsIgnoreCase("compare")) {
-			//compare_validateprintbutton.click();
-			jsClickNew(compare_validateprintbutton);
-		} else if (pageType.equalsIgnoreCase("detail")) {
-			//validatePrintButtonOnPlanDetails.click();
-			jsClickNew(validatePrintButtonOnPlanDetails);
-			
-		} else {
-			Assertion.assertTrue("PROBLEM - need to code Print Option for this page type: "+pageType, false);
-		}
-		//CommonUtility.checkPageIsReady(driver);
-		int numWinHandleAfter=driver.getWindowHandles().size();
-		//note: Store the current window handle
-		Assertion.assertTrue("PROBLEM - Print window was never opened after the click",numWinHandleAfter-numWinHandleBefore==1);
-		boolean flag = false;// flag will be used to determine a new window was opened after the click of print button
-		//note: switch to handle the new print window
-		for(String winHandle : driver.getWindowHandles()){
-			if(!winHandle.equals(winHandleBefore))
-	          {
-				driver.switchTo().window(winHandle);
-				driver.close();
-				driver.switchTo().window(winHandleBefore);
-	          }
-		}
-		//note: keep for the print page to load
-		//CommonUtility.checkPageIsReady(driver);
-		// Perform the actions on new window
-		//System.out.println("TEST  --------------- after handler="+driver.getWindowHandle());
 
-		// note: Switch back to original browser (first window)
-		//System.out.println("TEST  --------------- back handler="+driver.getWindowHandle());
-		String pageTitleAfterClosingPrintPreview=driver.getTitle();
-		Assertion.assertTrue("PROBLEM - page title should have been the same after closing print preview.  | Before='"+originalPageTitle+"' | After='"+pageTitleAfterClosingPrintPreview+"'", originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			System.out.println("Print Funxtionality check skipped on mobile device.....");
+		} else if ((driver.getClass().toString().toUpperCase().contains("ANDROID"))) {
+			// note: the print function will bring up the print preview window where the
+			// content can't be controlled by selenium
+			// for now will only validate the print button will bring up the print preview
+			// page
+			CommonUtility.checkPageIsReady(driver);
+			int numWinHandleBefore = driver.getWindowHandles().size();
+			String winHandleBefore = driver.getWindowHandle();
+			String originalPageTitle = driver.getTitle();
+			System.out.println("Current title: " + driver.getTitle());
+			if (pageType.equalsIgnoreCase("summary")) {
+				WebElement summary_printButton = null;
+				if (planType.equalsIgnoreCase("ma") || planType.equalsIgnoreCase("mapd")) {
+					summary_printButton = summary_maPrintOption;
+				} else if (planType.equalsIgnoreCase("pdp")) {
+					summary_printButton = summary_pdpPrintOption;
+				} else if (planType.equalsIgnoreCase("snp")) {
+					summary_printButton = summary_snpPrintOption;
+				} else {
+					Assertion.assertTrue("PROBLEM - '" + planType
+							+ "' is not supported test scenario. Only support MA/MAPD/PDP/SNP, please update input argument",
+							false);
+				}
+				summary_printButton.click();
+			} else if (pageType.equalsIgnoreCase("compare")) {
+				// compare_validateprintbutton.click();
+				jsClickNew(compare_validateprintbutton);
+			} else if (pageType.equalsIgnoreCase("detail")) {
+				// validatePrintButtonOnPlanDetails.click();
+				jsClickNew(validatePrintButtonOnPlanDetails);
+
+			} else {
+				Assertion.assertTrue("PROBLEM - need to code Print Option for this page type: " + pageType, false);
+			}
+			// CommonUtility.checkPageIsReady(driver);
+			int numWinHandleAfter = driver.getWindowHandles().size();
+			// note: Store the current window handle
+			Assertion.assertTrue("PROBLEM - Print window was never opened after the click",
+					numWinHandleAfter - numWinHandleBefore == 1);
+			boolean flag = false;// flag will be used to determine a new window was opened after the click of
+									// print button
+			// note: switch to handle the new print window
+			for (String winHandle : driver.getWindowHandles()) {
+				if (!winHandle.equals(winHandleBefore)) {
+					driver.switchTo().window(winHandle);
+					driver.close();
+					driver.switchTo().window(winHandleBefore);
+				}
+			}
+			// note: keep for the print page to load
+			// CommonUtility.checkPageIsReady(driver);
+			// Perform the actions on new window
+			// System.out.println("TEST --------------- after
+			// handler="+driver.getWindowHandle());
+
+			// note: Switch back to original browser (first window)
+			// System.out.println("TEST --------------- back
+			// handler="+driver.getWindowHandle());
+			String pageTitleAfterClosingPrintPreview = driver.getTitle();
+			Assertion.assertTrue(
+					"PROBLEM - page title should have been the same after closing print preview.  | Before='"
+							+ originalPageTitle + "' | After='" + pageTitleAfterClosingPrintPreview + "'",
+					originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
+		}
 	}
-	}
+
 	/**
 	 * Need to keep the original sesson on sauce lab alive by refreshing the page
 	 * TODO - look into custom extending the sauce lab session
