@@ -2833,14 +2833,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void verifyChatpopup() throws InterruptedException {
 		// CommonUtility.checkPageIsReady(driver);
-		//chatsam.click();
+		// chatsam.click();
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
-			System.out.println("verify chat popup skipped on Mobile");}
-			else {
-		jsClickNew(chatsam);
-		System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
-			}
+			System.out.println("verify chat popup skipped on Mobile");
+		} else {
+			jsClickNew(chatsam);
+			System.out.println("@@@@@@@@@@@@@@@ Chat Icon Clicked @@@@@@@@@@@@@@@");
+		}
 	}
 
 	public AboutUsPageMobile aboutUsClick() {
@@ -3188,11 +3188,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail();
 		}
 	}
+
 	@FindBy(xpath = "//*[@id=\"mobile-nav\"]//a[contains(text(),'Sign in')]")
 	public WebElement headerSigninLinkMobile;
+
 	@FindBy(xpath = "//*[@id=\"mobile-nav\"]//a[contains(text(),'Register')]")
 	public WebElement headerRegisterLinkMobile;
-	
+
 	public void validateHeaderLinks() {
 		MobileMenuMain();
 		scrollToView(headerSigninLinkMobile);
@@ -3794,7 +3796,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ShopforaplanAARPlayerMobile Hoveronaplan() throws InterruptedException {
-		//waitforElement(ShopForaplan);
+		// waitforElement(ShopForaplan);
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
@@ -4017,7 +4019,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 	}
-	
+
 	public boolean validateChatNonHours() throws InterruptedException {
 
 		boolean present = true;
@@ -4033,4 +4035,55 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return present;
 	}
 
+	@FindBy(xpath = "//input[@id='cancelPreChatForm']")
+	private WebElement proActiveChatCancel;
+
+	@FindBy(xpath = "//input[@id='submitChat']")
+	private WebElement proActiveChatSubmit;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public WebElement proactiveChatExitBtn;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	public WebElement proactiveChatChatBtn;
+	
+	public void validateProActiveChatpopupconnect() {
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
+			System.out.println("Skipping chat validations for Mobile");
+		} else {
+			driver.navigate().refresh();
+			System.out.println("@@here@@@");
+			threadsleep(20);
+			// waitTillElementClickableInTime(proactiveChatExitBtn, 30);
+			if (proactiveChatExitBtn != null) {
+				System.out.println("@@@proactive chat popup is displayed@@@@");
+				waitTillElementClickableInTime(proactiveChatChatBtn, 30);
+				jsClickNew(proactiveChatChatBtn);
+				System.out.println("@@@clciked@@@@");
+			} // driver.switchTo().defaultContent();
+			driver.switchTo().frame("sp-chat-iframe");
+			validateNew(samChatFirstNameField);
+			samChatFirstNameField.sendKeys("tester");
+
+			validateNew(samChatLastNameField);
+			samChatLastNameField.sendKeys("test");
+
+			validateNew(samChatZipField);
+			samChatZipField.sendKeys("90210");
+
+			validateNew(samChatEmailField);
+			samChatEmailField.sendKeys("test123@test.com");
+
+			validateNew(samChatOptions);
+			samChatOptions.click();
+			validateNew(proActiveChatCancel);
+			validateNew(proActiveChatSubmit);
+			proActiveChatCancel.click();
+			driver.switchTo().defaultContent();
+			System.out.println("Page Title---" + driver.getTitle());
+
+		}
+
+	}
 }

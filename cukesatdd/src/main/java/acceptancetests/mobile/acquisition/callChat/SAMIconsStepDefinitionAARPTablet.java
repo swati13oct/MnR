@@ -121,4 +121,13 @@ public class SAMIconsStepDefinitionAARPTablet {
 		shopaplan.providersearch();
 	}
 	
+	@Then("^the user validates proactive chat popup")
+	public void the_user_validates_proactive_chat_popup() throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+	
+		aquisitionhomepage.validateProActiveChatpopupconnect();
+		
+		
+	}
 }
