@@ -1530,7 +1530,7 @@ public abstract class UhcDriver {
 				&& driver.getClass().getSimpleName().contains("WebDriver")) {
 			// Sets FluentWait Setup
 			List<WebElement> loadingScreen = null;
-			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(20))
+			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(30))
 					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 
