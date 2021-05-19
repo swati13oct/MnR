@@ -1798,6 +1798,7 @@ public class DrugDetailsPage extends UhcDriver {
 		pharmacyZipcodeSearch.clear();
 		pharmacyZipcodeSearch.sendKeys(zipcode);
 		pharmacySearchBtn.click();
+		waitForPageLoadSafari();
 	}
 
 	public void validateInvalidZipErrCodeMsg(String expectedMsg) {

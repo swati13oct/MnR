@@ -1522,6 +1522,7 @@ public abstract class UhcDriver {
 	 * spinners which show in different flows
 	 *
 	 * @return true, if successful
+	 * @author amahale
 	 */
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
