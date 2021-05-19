@@ -1531,7 +1531,7 @@ public abstract class UhcDriver {
 			// Sets FluentWait Setup
 			List<WebElement> loadingScreen = null;
 			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(30))
-					.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
+					.pollingEvery(Duration.ofMillis(500)).ignoring(NoSuchElementException.class)
 					.ignoring(TimeoutException.class);
 
 			// First checking to see if the loading indicator is found
