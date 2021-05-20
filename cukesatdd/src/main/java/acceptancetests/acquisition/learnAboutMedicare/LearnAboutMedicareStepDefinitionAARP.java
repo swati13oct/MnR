@@ -45,7 +45,7 @@ public class LearnAboutMedicareStepDefinitionAARP {
 	 */
 	@Given("^user is on AARP medicare acquisition site landing page$")
 	public void user_on_aarp_medicaresolutions_Site() {
-		wd = getLoginScenario().getWebDriver();
+		wd = getLoginScenario().getWebDriverNew();
 		// wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
@@ -371,10 +371,12 @@ public class LearnAboutMedicareStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/		
 		String EmailAddress = memberAttributesMap.get("Email");
-		LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
-				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
-		learnAboutMedicareHomePage.RequestPlanIInformationshoppages(EmailAddress);
-	
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+			LearnAboutMedicareHomePage learnAboutMedicareHomePage = (LearnAboutMedicareHomePage) getLoginScenario()
+					.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+			learnAboutMedicareHomePage.RequestPlanIInformationshoppages(EmailAddress);
+		}
 	}
 
 	@Given("^the user hovers screen over the learn medicare for a plan$")

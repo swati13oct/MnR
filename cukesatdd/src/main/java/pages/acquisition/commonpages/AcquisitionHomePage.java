@@ -390,7 +390,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
 
-	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
 	private WebElement chatsam;
 
 	@FindBy(xpath = "//div[@class='sam']")
@@ -3307,7 +3307,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
 //		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@title, 'prescription drug costs')]"));
-		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and @onkeydown]"));
+		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
 
 String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);

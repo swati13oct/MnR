@@ -39,7 +39,7 @@ public class GlobalComponentsStepDefinitionAARP {
 
 	@Given("^user is on acquisition home page of AARP Site$")
 	public void user_is_on_acquisition_home_page_of_AARP_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 		
