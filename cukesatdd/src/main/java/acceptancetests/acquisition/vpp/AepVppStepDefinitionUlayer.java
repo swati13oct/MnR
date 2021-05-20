@@ -40,7 +40,7 @@ public class AepVppStepDefinitionUlayer {
 
 	@Then("^the user is on team-f dce date change url and changes DCE server date to following date$")
 	public void the_user_changes_the_DCE_server_date_to_the_following_date(DataTable arg1) throws Throwable {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		DCEdatechangePage dceDateChangePage = new DCEdatechangePage(wd);
 		Map<String, String> DateChangeMap = new HashMap<String, String>();
 		DateChangeMap = DataTableParser.readDataTableAsMaps(arg1);

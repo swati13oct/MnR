@@ -45,7 +45,7 @@ public class LearnAboutMedicareStepDefinitionAARP {
 	 */
 	@Given("^user is on AARP medicare acquisition site landing page$")
 	public void user_on_aarp_medicaresolutions_Site() {
-		wd = getLoginScenario().getWebDriver();
+		wd = getLoginScenario().getWebDriverNew();
 		// wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 

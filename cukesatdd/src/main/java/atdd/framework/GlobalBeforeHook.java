@@ -50,7 +50,7 @@ public class GlobalBeforeHook implements BeforeHook {
 			System.out.print("Tag: " + tag);
 		}
 
-		//getGlobalScenario().loadCSV();
+		
 		scenario.log("Executing scenario using runner : " + MRScenario.getRunnerFileName());
 		return tagsList;
 	}

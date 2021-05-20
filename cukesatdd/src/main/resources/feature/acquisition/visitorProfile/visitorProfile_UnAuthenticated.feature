@@ -29,7 +29,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
 
-    @visitorProfile_UHC @regressionUHC  @VP_ProdRegression_UHC @vbfGate1
+    @visitorProfile_UHC @regressionUHC  @VP_ProdRegression_UHC @vbfGate
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |
@@ -60,7 +60,7 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | AARP |
 
-    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @regressionUHC @vbfGate1
+    @visitorProfile_UHC @VP_ProdRegression_UHC @prodRegression_UHC_02 @regressionUHC @vbfGate
     Examples: 
       | state   | drug1   | zipCode | site |
       | Alabama | Lipitor |   90210 | UHC  |

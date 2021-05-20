@@ -348,7 +348,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then remove "<removePlanIndices>" plan from new plan compare page
     Then validate all available plans are shown on click of view all plans
 
-    @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @vbfGate2
+    @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @vbfGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
       | 00016 | AARP |   55343 | NO            | Hennepin County | MAPD     |             4,1,2 | future   |           5 |

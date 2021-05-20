@@ -93,7 +93,7 @@ public class PharmacyLocatorStepDefinition {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
 		String state = inputAttributesMap.get("State");
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName);
 		aquisitionhomepage.selectState(state); 
 		System.out.println("Selected state '"+state+"' on home page");
@@ -454,7 +454,7 @@ public class PharmacyLocatorStepDefinition {
 	public void validateUserIsOnAcquisitionSite(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd,siteName);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,

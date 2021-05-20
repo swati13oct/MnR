@@ -40,7 +40,7 @@ public class LearnAboutMedicareStepDefinitionUHC {
 	 */
 	@Given("^user is on uhcmedicaresolutions site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
-		wd = getLoginScenario().getWebDriver();
+		wd = getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 
