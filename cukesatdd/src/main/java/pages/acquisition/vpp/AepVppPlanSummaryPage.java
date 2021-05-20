@@ -602,7 +602,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		while (itr.hasNext()) {
 			String window = itr.next();
 			driver.switchTo().window(window);
-			System.out.println(driver.getTitle());
+		System.out.println(driver.getTitle());
 		}
 		//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
@@ -616,10 +616,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		if (planType.equalsIgnoreCase("PDP")) {
 			// driver.navigate().refresh();
 			//Thread.sleep(5000);
+	validate(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
-			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+			validate(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
+					enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
 		}
+
 		if (enrollForPlan != null) {
 			//validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
