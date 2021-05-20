@@ -702,9 +702,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 					try {
 						Thread.sleep(5000);
 				if(planType.equalsIgnoreCase("MA")) {
+
+					validate(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
 					enrollInPlan = driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]"));
 				}
 				if(planType.equalsIgnoreCase("SNP")){
+					validate(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
 					enrollInPlan = driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]"));
 				}
 					}catch(Exception e){
