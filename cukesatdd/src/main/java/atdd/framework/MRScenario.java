@@ -1371,6 +1371,7 @@ public class MRScenario {
 		capabilities.setCapability("commandTimeout" , 600);
 		capabilities.setCapability("maxDuration", 10000);
 		capabilities.setCapability("idleTimeout", 1000);
+		capabilities.setCapability("priority", 0);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = System.getProperty("user.name") + " Mobile Execution - Using " + mobileDeviceName + " in  "
 				+ sauceLabsMobileTunnelIdentifier + " environment";
