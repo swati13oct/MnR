@@ -39,7 +39,7 @@ public class ARECommonutility extends UhcDriver {
 			i++;
 			threadsleep(1000);
 		} while (i < 60);
-		System.out.println(URL);
+		System.out.println("Current URL is ..............."   +URL);
 		Assert.assertTrue(URL.contains("plan-compare"), "New Plan Compare view is not loaded properly");
 		pageloadcomplete();
 		//validate(planLoaderscreen, 5);

@@ -526,6 +526,7 @@ public class OLEStepDefinitionMobile {
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
 		if (Validation_Status) {

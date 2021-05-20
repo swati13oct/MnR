@@ -316,6 +316,7 @@ public class VppPlanDetailMobile {
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		PlanDetailsMap.put("TFN", (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN));
 
 		boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
 		if (Validation_Status) {
@@ -326,6 +327,7 @@ public class VppPlanDetailMobile {
 			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
 			Assertion.fail();
 		}
+		
 	}
 
 	@When("^user selects a provider and retuns to VPP plan details page in blayer$")

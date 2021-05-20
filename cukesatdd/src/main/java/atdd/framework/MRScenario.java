@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -145,10 +146,10 @@ public class MRScenario {
 			+ "@ondemand.saucelabs.com:80/wd/hub";
 
 	
-	private ThreadLocal<HashMap<String, Object>> scenarioObjectMap = new ThreadLocal<HashMap<String, Object>>() {
+	private static final ThreadLocal<WeakHashMap<String, Object>> scenarioObjectMap = new ThreadLocal<WeakHashMap<String, Object>>() {
 		@Override
-		protected HashMap<String, Object> initialValue() {
-			return new HashMap<>();
+		protected WeakHashMap<String, Object> initialValue() {
+			return new WeakHashMap<>();
 		}
 	};
 	
@@ -156,13 +157,28 @@ public class MRScenario {
 		scenarioObjectMap.get().put(id, object);
 	}
 
-	public void flushBeans() {
+	public synchronized void flushBeans() {
 		if (!scenarioObjectMap.get().isEmpty()) {
-			scenarioObjectMap.get().clear();
+//			scenarioObjectMap.get().clear();
+			Iterator<Map.Entry<String, Object>>
+					iterator = scenarioObjectMap.get().entrySet().iterator();
+
+			// Iterate over the HashMap
+			while (iterator.hasNext()) {
+				// Get the entry at this iteration
+				Map.Entry<String, Object>
+						entry = iterator.next();
+
+				//Get the object reference for the key and assign null, to make it eligible for gc.
+//	            Object objectReference = entry.getValue();
+// 	            objectReference = objectReference != null ? null : objectReference;
+
+				// Remove this entry from HashMap
+				iterator.remove();
+			}
 			scenarioObjectMap.remove();
 		}
 	}
-
 	private WebDriver webDriver;
 
 	private static final ThreadLocal<WebDriver> threadSafeDriver = new ThreadLocal<>();
@@ -756,6 +772,7 @@ public class MRScenario {
 		capabilities.setCapability("commandTimeout" , 600);
 		capabilities.setCapability("maxDuration", 10000);
 		capabilities.setCapability("idleTimeout", 1000);
+		capabilities.setCapability("priority", 0);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
 		String jobName = System.getProperty("user.name") + " Mobile Execution - Using " + mobileDeviceName + " in  "
 				+ sauceLabsMobileTunnelIdentifier + " environment";

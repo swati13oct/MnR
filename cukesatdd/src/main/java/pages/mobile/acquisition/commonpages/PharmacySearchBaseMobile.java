@@ -202,7 +202,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(1);
 		// selectFromDropDownByText(driver, seletPlandropdown, planName);
 		/* To handle iOS dropdown */
-		planTypeDropDownTitle.click();
+		jsClickNew(planTypeDropDownTitle);
+		//planTypeDropDownTitle.click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 

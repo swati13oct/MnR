@@ -54,7 +54,8 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 					false);
 		}
 		System.out.println("Proceed to validate email popup screen for cancel option");
-		emailButton.click();
+		
+		jsClickNew(emailButton);
 		Assertion.assertTrue("PROBLEM - unable to locate email popup screen after email link is clicked",
 				validate(emailPlanSummaryPopupScreen));
 		String expectedEmailBoxHeader = emailPlanSummaryPopupScreenText.getText();
@@ -63,11 +64,13 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 				"PROBLEM - header text for the email popup screen is not as expected.  Expecte='"
 						+ expectedEmailBoxHeader + "' | Actual='" + actualEmailBoxHeader + "'",
 				expectedEmailBoxHeader.equals(actualEmailBoxHeader));
+		iosScroll(emailPlanSummaryFieldBox);
 		Assertion.assertTrue(
 				"PROBLEM - unable to locate email field box on email popup screen after email link is clicked",
 				validate(emailPlanSummaryFieldBox));
 		Assertion.assertTrue("PROBLEM - unable to locate send button on email popup screen after email link is clicked",
 				validate(emailPlanSummarySendButton));
+		iosScroll(emailPlanSummaryCancelButton);
 		Assertion.assertTrue("PROBLEM - unable to locate cancel button on email popup screen after email link is clicked",
 				validate(emailPlanSummaryCancelButton));
 
