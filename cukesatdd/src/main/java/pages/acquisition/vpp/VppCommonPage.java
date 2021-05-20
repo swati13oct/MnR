@@ -81,7 +81,7 @@ public class VppCommonPage extends UhcDriver {
 			} else {
 				tempUrl=AARP_ACQISITION_PAGE_URL;
 				driver.get(tempUrl+deeplinkUrl);
-				checkModelPopup(driver,10);
+				//checkModelPopup(driver,10);
 				
 			}
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
@@ -99,7 +99,7 @@ public class VppCommonPage extends UhcDriver {
 			} else {
 				tempUrl=UMS_ACQISITION_PAGE_URL;
 				driver.get(tempUrl+deeplinkUrl);
-				checkModelPopup(driver,20);
+				//checkModelPopup(driver,20);
 			}
 			System.out.println("Current page URL: "+driver.getCurrentUrl());
 		}
