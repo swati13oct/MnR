@@ -25,13 +25,13 @@ public class AgentRecommendationEngineStepDefinition {
 
 	MRScenario loginScenario;
 	
-	AppiumDriver Wd;
+	//AppiumDriver Wd;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
+	
 
-//	AppiumDriver wd;
 //	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
 
@@ -49,12 +49,12 @@ public class AgentRecommendationEngineStepDefinition {
 	public void the_agent_on_shopperprofile_login_site() {
 		
 		
-		Wd = (AppiumDriver) getLoginScenario().getMobileDriver();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getMobileDriver();
 	
-		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(Wd, "ARE"); //changed on 3/3/21 as part of AARP/UHC cleanup
+		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, "ARE"); //changed on 3/3/21 as part of AARP/UHC cleanup
 		aquisitionhomepage.openTelesalesAgentPortal();
 		aquisitionhomepage.fixPrivateConnectionMobile();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, Wd);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
 
 	@When("^agent login to shopper profile$")
