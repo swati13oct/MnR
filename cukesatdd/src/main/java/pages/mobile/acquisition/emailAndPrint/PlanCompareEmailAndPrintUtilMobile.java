@@ -123,7 +123,7 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		pageloadcomplete();
 		//validateemailbutton.click();
 		jsClickNew(validateemailbutton);
-		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		sleepBySec(5);
 		//Validating email popup
 		validate(leavingcomapreplansitepopup);
 		System.out.println("!!!Leaving site popup is displayed ===>"+leavingcomapreplansitepopup.isDisplayed());
@@ -143,9 +143,8 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("!!!Cancel Button is displayed ===>"+sendButtonEmailPlanComparePopUp.isDisplayed());
 		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("rani_madadi@optum.com");
 		System.out.println("!!!Entered valid Email ");
-	    scrollToView(sendButtonEmailPlanComparePopUp);
 	    pageloadcomplete();
-		iosScroll(sendButtonEmailPlanComparePopUp);
+	    scrollToView(sendButtonEmailPlanComparePopUp);
 		jsClickNew(sendButtonEmailPlanComparePopUp);
 		pageloadcomplete();
 		Assertion.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));

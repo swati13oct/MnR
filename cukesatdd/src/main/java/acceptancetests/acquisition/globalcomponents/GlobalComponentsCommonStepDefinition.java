@@ -74,7 +74,7 @@ public class GlobalComponentsCommonStepDefinition {
 	@Given("^the user is on medicare acquisition site landing page$")
 	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
 		
-		//scenario.log("Aayush Shah - Change made 5/7 - test");
+		//scenario.log("Aayush Shah - Change made 5/13 - test");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);

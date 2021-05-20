@@ -613,7 +613,8 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 
 	public void pharmarcyCheckModelPopup(WebDriver driver, int timeout) {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); 
-		checkModelPopup(driver,5);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver,5);
 		//note: UhcDriver default is 10
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 	}

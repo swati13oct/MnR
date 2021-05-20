@@ -44,7 +44,7 @@ public class AcqSEOStepDefinitionUHC {
 	@Given("^load the UMS Blayer medicare solutions acquisition site page url$")
 	public void user_Login(DataTable Url) 
 	{
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		urlAttributesMap = DataTableParser.readDataTableAsMaps(Url);

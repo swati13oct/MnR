@@ -1,4 +1,5 @@
 target/
+test-output/
 .settings/
 .project
 .classpath
@@ -9,20 +10,6 @@ target/
 .jquery-1.6.4.min.js
 .style.css
 .bin/
-.reports/
 reports/
 bin/
-cukesatdd/.classpath
-cukesatdd/src/main/resources/config/ci/config.properties
-/cukesatdd/*.classpath
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionAgentRecommendationEngine
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionDCE
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionGlobalComponents
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionOLE
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionPharmacyLocator
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionPlanRecommendationEngine
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionProviderSearch
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionRequestAgent
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionVisitorProfile
-cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionVPP
-cukesatdd/src/main/java/atdd/runners/RunMRATDDPlanBenefits
+config.properties

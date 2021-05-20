@@ -10,6 +10,12 @@ Feature: 1.15 ACQ - To test SAM Icons in Blog Pages
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
+ 		@vbfGate1 #these are used in the gate and are taken from below examples
+    Examples: 
+      | pagename                                                                                                    | site |                                                         
+      | medicare-articles/medicare-benefits-and-coverage.html                                                       | AARP |
+      | medicare-articles/medicare-costs.html 																																			| AARP |
+
     @samChatRegressionAARPblog1 @regressionAARP
     Examples: 
       | pagename                                                                                                    | site |

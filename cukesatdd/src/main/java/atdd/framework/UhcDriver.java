@@ -84,7 +84,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Drug Cost Estimator']")
 	public WebElement DCERedesignLink;
 
-	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Pharmacy Search']")
 	public WebElement PharmacyTool;
 
 	@FindBy(xpath = "//h3//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation' and text()='Get a Plan Recommendation']")
@@ -239,6 +239,15 @@ public abstract class UhcDriver {
 
 	}
 
+	
+	public void sleepBySec(int sec) {
+		try {
+			Thread.sleep(sec * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	/*
 	 * To handle iOS specific sendkeys problem By: Harshal Ahire
 	 */
@@ -254,7 +263,6 @@ public abstract class UhcDriver {
 			sendKeys_IOS(element, message);
 			element.getText().replaceAll("\u00A00", " ").trim();
 			element.sendKeys(Keys.ENTER);
-			element.sendKeys(Keys.TAB);
 
 			// element.sendKeys(Keys.BACK_SPACE);
 
@@ -553,63 +561,42 @@ public abstract class UhcDriver {
 		return jsonObject;
 	}
 
+	/*
+	 * To handle iOS specific click problem By: Harshal Ahire
+	 */
 	public void iOSClick(WebElement element) {
 
-		boolean clickFlag = false;
-
-		// Sets FluentWait Setup
-
-		FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
-				.pollingEvery(Duration.ofMillis(100)).ignoring(NoSuchElementException.class)
-				.ignoring(TimeoutException.class);
-
-		// First checking to see if the loading indicator is found
-		// we catch and throw no exception here in case they aren't ignored
 		try {
-			threadsleep(5000); // Adding sleep since the loading spinner sometimes takes long to come up
-			System.out.println("Waiting to check if element is present");
-			fwait.until(ExpectedConditions.visibilityOf(element));
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript(
+					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
+					element);
+			//checkElementisEnabled(element);
+			scrollToView(element);
+			element.click();
 
-			if (element.isDisplayed()) {
+			System.out.println("Selenium Click executed........" + element.getAttribute("automationTrack"));
+			
+		
 
-				// TouchActions action = new TouchActions(driver);
-				// action.longPress(element);
-				// singleTap(element);
-				// action.perform();
-				checkElementisEnabled(element);
-
+			if (element.getAttribute("automationTrack")!="true") {
+				//checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
-				JavascriptExecutor js = (JavascriptExecutor) driver;
-				js.executeScript("arguments[0].click(true);", element);
-				System.out.println("JsClick worked");
-				// clickFlag = true;
-
-				// if (element.isDisplayed() && (clickFlag = true))
-				// try {
-				// element.click();
-				// System.out.println("Click worked");
-				// } catch (Exception e) {
-				// System.out.println("Unable to click on element for IOS");
-				// }
-
-				// new
-				// TouchAction((AppiumDriver)driver).tap(TapOptions.tapOptions().withElement((ElementOption)
-				// element)).perform();
-
-				// Actions builder = new Actions((IOSDriver)driver);
-				// builder.moveToElement(element).click(element);
-				// builder.perform();
+				iosScroll(element);
+				JavascriptExecutor js1 = (JavascriptExecutor) driver;
+				js1.executeScript("arguments[0].click(true);", element);
 
 			}
-		}
 
-		catch (Exception e) {
-			System.out.println("Unable to click on element for IOS");
+		} catch (Exception e) {
+			
+			System.out.println("Click and JsClick failed");
+			
 		}
-
-		// ((IOSDriver) driver).findElement(MobileBy.
 
 	}
+
+	// ((IOSDriver) driver).findElement(MobileBy.
 
 	public void jsClickNew(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
@@ -618,6 +605,9 @@ public abstract class UhcDriver {
 			js.executeScript("arguments[0].click();", element);
 		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 
+			/*
+			 * To handle iOS specific click problem By: Harshal Ahire
+			 */
 			iOSClick(element);
 
 		}
@@ -722,20 +712,7 @@ public abstract class UhcDriver {
 
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
-		sleepBySec(3);
-		scrollToView(Element);
-		try {
-			System.out.println("Trying selenium click to open new window ................");
-			checkElementisEnabled(Element);
-			Element.click();
-
-		} catch (Exception e) {
-
-			System.out.println("Trying JS-Click as click failed in try block..............");
-			jsClickNew(Element);
-		}
-		sleepBySec(10);
-		//waitForPageLoadSafari();
+		jsClickNew(Element);
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
@@ -748,14 +725,7 @@ public abstract class UhcDriver {
 
 	}
 
-	public void sleepBySec(int sec) {
-		try {
-			Thread.sleep(sec * 1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
 
 	/***
 	 * the method waits for 60 sec till current windows count increments by 1
@@ -1295,9 +1265,10 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-				scrollToView(selectElement);
-			checkElementisEnabled(selectElement);
-			selectElement.click();
+				//scrollToView(selectElement);
+			//checkElementisEnabled(selectElement);
+			//selectElement.click();
+			jsClickNew(selectElement);
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
@@ -1467,6 +1438,8 @@ public abstract class UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
+
+	
 
 	public void mobileactiondragdrop(WebElement dragelement, WebElement dropelement, boolean swipeVertical) {
 		System.out.println("Drag Drop");

@@ -43,7 +43,7 @@ public class VisitorProfileMobileStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -64,7 +64,7 @@ public class VisitorProfileMobileStepDefinition {
 		String userName = givenAttributesMap.get("User Name");
 		String password = givenAttributesMap.get("Password");
 
-		wd = (AppiumDriver) getLoginScenario().getMobileDriver();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getMobileDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		ShopperProfileAgentLogin shopperProfilePage = new ShopperProfileAgentLogin(wd);

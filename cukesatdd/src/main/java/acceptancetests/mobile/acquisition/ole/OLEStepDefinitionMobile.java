@@ -63,7 +63,7 @@ public class OLEStepDefinitionMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/**
 	 * @author sdwaraka
@@ -102,7 +102,7 @@ public class OLEStepDefinitionMobile {
 		// Hard Coding OLE Welcome Page URL for Build Validation Test
 		String OLE_URL = "https://www.team-f-aarpmedicareplans.ose-elr-core.optum.com/content/aarpmedicareplans/en/enrollment.html";
 
-		wd = (AppiumDriver) getLoginScenario().getMobileDriver();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getMobileDriver();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		WelcomePageMobile welcomePage = new WelcomePageMobile(wd, OLE_URL);
@@ -526,6 +526,7 @@ public class OLEStepDefinitionMobile {
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
 		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
 		if (Validation_Status) {
@@ -967,7 +968,7 @@ public class OLEStepDefinitionMobile {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
 
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();

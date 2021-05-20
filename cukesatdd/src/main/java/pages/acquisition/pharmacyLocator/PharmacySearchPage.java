@@ -42,7 +42,8 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	@Override
 	public void openAndValidate() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		checkModelPopup(driver, 10);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 10);
 		// CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10);
 	}
 
