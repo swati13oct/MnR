@@ -1589,7 +1589,7 @@ public WelcomePage Enroll_OLE_Plan_Compare_PDP(String planName) throws Interrupt
 	}
 
 	jsClickNew(EnrollinPlanCompare_PDP);
-
+	waitForPageLoadSafari();
 	// if (driver.getCurrentUrl().contains("enrollment"))
 	if (driver.getCurrentUrl().contains("welcome")) {
 		System.out.println("OLE Welcome Page is Displayed");
