@@ -41,14 +41,6 @@ public class CommonConstants {
 
 	public static final String DB_PASSWORD = "DBPassword";
 	
-	public static final String HSIDDB_URL = "HSIDDBURL";
-
-	public static final String HSIDDB_USERNAME = "HSIDDBUsername";
-
-	public static final String HSIDDB_PASSWORD = "HSIDDBPassword";
-	
-	public static final String HSID_ENV = "HSID_ENV";
-	
 
 	public static final String DB_SCHEMA = "DBSchema";
 
@@ -862,7 +854,7 @@ public class CommonConstants {
 	public static final long TIMEOUT_90 = 90;
 	public static final String SAUCELABS_TUNNEL_IDENTIFIER = "saucelabstunnel";
 	//public static final String SAUCELABS_DEFAULT_TUNNEL = "OptumSharedTunnel-Stg";
-	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Prd";
+	public static final String SAUCELABS_DEFAULT_TUNNEL = "Optum-Prd"; //Optum-Prd
 	private static ThreadLocal<String> MAIN_WINDOW_HANDLE_ACQUISITION = new ThreadLocal<>();
 
 	public synchronized static String getMainWindowHandle() {

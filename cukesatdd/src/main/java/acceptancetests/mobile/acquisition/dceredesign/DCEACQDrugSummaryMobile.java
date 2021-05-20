@@ -42,7 +42,7 @@ public class DCEACQDrugSummaryMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page

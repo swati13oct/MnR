@@ -8,15 +8,12 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 
-
-@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" },
-				features = {"src/main/resources/feature/acquisition/agentRecommendationEngine"},
-				monochrome = true,
-				plugin = { "pretty",
-						"html:reports/test-report.html",
-						"json:target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngine.json",
-						"timeline:target" },
-				tags = "@regressionAARP")
+@CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
+		"src/main/resources/feature/acquisition/agentRecommendationEngine" }, monochrome = true, plugin = { "pretty",
+				"html:reports/test-report.html",
+				"json:target/cucumber-RunMRATDDAcquisitionAgentRecommendationEngine.json",
+				"timeline:target" },
+				tags ="@regressionAARP and not @ARE", dryRun=false)
 
 @RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionARE extends BaseTestConfig {

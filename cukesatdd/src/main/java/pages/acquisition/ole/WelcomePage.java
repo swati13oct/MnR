@@ -133,8 +133,8 @@ public class WelcomePage extends UhcDriver{
 		System.out.println("Validating Welcome Page for OLE");
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
 			checkModelPopup(driver, 30);
-		else 
-			checkModelPopup(driver,10);
+		/*else 
+			checkModelPopup(driver,10);*/
 		validateNew(WelcomePageHeader);
 		validateNew(PlanYear_PlanName);
 	}
@@ -223,7 +223,8 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public LearnMoreModal OpenLearnMore() {
-		checkModelPopup(driver);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver);
 		validate(LearnMoreButton);
 		jsClickNew(LearnMoreButton);
 		//		LearnMoreButton.click();

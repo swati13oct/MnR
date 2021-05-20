@@ -152,7 +152,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='pharmacy-locator']//div[contains(@class,'col-md-12')]/*[contains(text(),'farmacia')]")
 	protected WebElement pharmacyBodyContentSpanish;
 
-	@FindBy(xpath="//select[@id='distance']")
+	@FindBy(xpath="//*[@id=\"distance\"]")
 	protected WebElement distanceDropownID;
 
 	@FindBy(xpath = "//div[@class='modal-title']")

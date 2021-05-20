@@ -66,7 +66,8 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	public void openAndValidate() {
 		validateNew(TellUsABoutHeader);
 		validateNew(TellUsABoutCloseBtn);
-		validateNew(AddDrugBtn);
+		scrollToView(AddDrugBtn);
+		
 		validateNew(supplyLengthDrpDwn);
 		validateNew(FrequentyDrpDwn);
 		validateNew(QuantityTxt);
@@ -117,7 +118,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	}
 
 	public BuildYourDrugListMobile ClickAddDrug() {
-		validateNew(AddDrugBtn);
+		
 		jsClickNew(AddDrugBtn);
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {

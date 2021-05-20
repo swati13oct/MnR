@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
@@ -46,7 +47,7 @@ public class GlobalComponentsCommonStepDefinition {
 	@Autowired
 	MRScenario loginScenario;
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -54,6 +55,7 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@Given("^the user hovers over the learn about medicare$")
 	public void the_user_hovers_screen_over_the_learnaboutmedicare() throws Throwable {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		
@@ -74,6 +76,7 @@ public class GlobalComponentsCommonStepDefinition {
 
 	@Then("^the user hover over Shop for a Plan and validates zipcode component$")
 	public void the_user_hover_over_Shop_for_a_Plan_and_validates_zipcode_component() {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 

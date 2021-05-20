@@ -42,7 +42,7 @@ public class AcqSEOStepDefinitionAARP {
 	@Given("^load the AARP Ulayer medicare acquisition site page url$")
 	public void user_Login(DataTable Url) 
 	{
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		/*List<DataTableRow> AttributesRow = Url.getGherkinRows();
