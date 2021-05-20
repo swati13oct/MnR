@@ -26,3 +26,4 @@ cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionRequestAgent
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionVisitorProfile
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionVPP
 cukesatdd/src/main/java/atdd/runners/RunMRATDDPlanBenefits
+*.properties
