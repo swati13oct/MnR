@@ -4084,6 +4084,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("Page Title---" + driver.getTitle());
 
 		}
+		
+	
+
+	}
+	
+	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType(){
+		MobileMenuAccessPharmacy();
+		waitForPageLoadSafari();
+		if (driver.getTitle().toLowerCase()
+				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
+			return new PharmacySearchPageMobile(driver);
+		}
+		return null;
 
 	}
 }
