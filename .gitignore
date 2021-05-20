@@ -13,7 +13,7 @@ target/
 reports/
 bin/
 cukesatdd/.classpath
-cukesatdd/src/main/resources/config/ci/config.properties
+config.properties
 /cukesatdd/*.classpath
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionAgentRecommendationEngine
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionDCE
@@ -26,4 +26,3 @@ cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionRequestAgent
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionVisitorProfile
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionVPP
 cukesatdd/src/main/java/atdd/runners/RunMRATDDPlanBenefits
-*.properties

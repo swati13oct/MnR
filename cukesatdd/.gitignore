@@ -9,7 +9,6 @@ test-output/
 .jquery-1.6.4.min.js
 .style.css
 .classpath
-*.properties
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionAgentRecommendationEngine
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionDCE
 cukesatdd/src/main/java/atdd/runners/RunMRATDDAcquisitionGlobalComponents
