@@ -29,7 +29,7 @@ public class SAMIconsStepDefinitionAARPTablet {
 		return loginScenario;
 	}
 
-//	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	@Given("^the user is on the AARP medicare site landing page on Tablet$")
 	public void the_user_is_on_the_AARP_medicare_site_landing_page_on_Tablet() {

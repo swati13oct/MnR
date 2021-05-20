@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
@@ -38,7 +39,7 @@ public class DCEACQNewRunnerMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	@Then("^the user edits supply length to three months for following drug$")
 	public void the_user_edits_supply_length_to_three_months_for_following_drug(DataTable givenAttributes)
@@ -175,6 +176,7 @@ public class DCEACQNewRunnerMobile {
 
 	@Then("^user should be navigated to zipcode and plan year capture page for Non AEP$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_Non_AEP() {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
@@ -513,6 +515,7 @@ public class DCEACQNewRunnerMobile {
 
 	@When("^user clicks on Return to profile link on details page$")
 	public void user_clicks_on_Return_to_profile_link_on_details_page() {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugDetailsPageMobile drugDetailsPage = new DrugDetailsPageMobile(wd);
 		drugDetailsPage.clickReturnToProfile();
 	}
@@ -552,6 +555,7 @@ public class DCEACQNewRunnerMobile {
 
 	@Then("^user should be able to see Return to profile link on details page$")
 	public void user_should_be_able_to_see_Return_to_profile_link_on_details_page() {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugDetailsPageMobile drugDetailsPage = new DrugDetailsPageMobile(wd);
 		drugDetailsPage.verifyReturnToProfileDisplayed();
 	}
@@ -565,6 +569,7 @@ public class DCEACQNewRunnerMobile {
 
 	@Then("^user should be navigated to shopper profile page$")
 	public void user_should_be_navigated_to_shopper_profile_page() {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		VisitorProfilePageMobile visitorProfile = new VisitorProfilePageMobile(wd);
 		visitorProfile.validateVisitorProfilePage();
 
@@ -572,19 +577,21 @@ public class DCEACQNewRunnerMobile {
 
 	@When("^user clicks on Back to profile button$")
 	public void user_clicks_on_Back_to_profile_button() {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		drugSummaryPage.clickBackToProfileBtn();
 	}
 
 	@Then("^Back to profile button should be displayed for each plan card$")
 	public void back_to_profile_button_for_each_plan_card() {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		drugSummaryPage.verifyBackToProfileDisplayed();
 	}
 
 	@Then("^user should be able to see Return to profile link on summary page$")
 	public void user_should_be_able_to_see_Return_to_profile_link_on_summary_page() {
-
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_DrugSummary);
 		getLoginScenario().getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);

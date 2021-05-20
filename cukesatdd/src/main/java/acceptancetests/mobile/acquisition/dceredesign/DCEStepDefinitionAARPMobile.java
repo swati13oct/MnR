@@ -42,11 +42,11 @@ public class DCEStepDefinitionAARPMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	@Given("^the user is on AARP medicare acquisition site landing page in mobile$")
 	public void the_user_is_on_AARP_medicare_acquisition_site_landing_page_in_mobile() throws Throwable {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		aquisitionhomepage.openMobileURL();
 		aquisitionhomepage.fixPrivateConnectionMobile();
@@ -75,7 +75,7 @@ public class DCEStepDefinitionAARPMobile {
 
 	@Then("^the user validates Get Started Page in mobile$")
 	public void the_user_validates_Get_Started_Page_in_mobile() {
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}

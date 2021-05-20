@@ -73,14 +73,14 @@ public class VppPlanCompareMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
 	@Given("^the user is on AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicaresolutions_Site() {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -640,7 +640,7 @@ public class VppPlanCompareMobile {
 
 	@When("^user successfully adds drug in the ums site$")
 	public void user_successfully_adds_drugs(DataTable data) throws InterruptedException {
-
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddDrugDetailsMobile DrugDetails = (AddDrugDetailsMobile) getLoginScenario()
 				.getBean(PageConstants.ADD_DRUG_DETAILS);
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()

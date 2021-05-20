@@ -34,11 +34,11 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	@Given("^user is on acquisition home page of AARP Site$")
 	public void user_is_on_acquisition_home_page_of_AARP_Site() {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -541,7 +541,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	public void userNavigatesToPharmacySearchPage() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		// aquisitionhomepage.selectState("Select State"); // note: default it to no
 		// state selected for predictable result
 		System.out.println("Unselected state on home page for more predictable result");

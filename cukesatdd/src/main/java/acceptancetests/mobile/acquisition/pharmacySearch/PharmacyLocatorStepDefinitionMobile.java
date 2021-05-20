@@ -42,7 +42,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	@Autowired
 	MRScenario loginScenario;
 	String langName;
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -82,7 +82,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
 
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();

@@ -55,14 +55,14 @@ public class VppPlanDetailMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on the uhcmedicaresolutions site landing page
 	 */
 	@Given("^the user is on the uhcmedicaresolutions site landing page$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -73,7 +73,7 @@ public class VppPlanDetailMobile {
 
 	@Given("^the user lands on AARP medicare acquisition site page$")
 	public void the_user_lands_AARP_medicares_Site() {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -408,7 +408,7 @@ public class VppPlanDetailMobile {
 	/* Cost comparison for prescription drugs */
 	@Then("^user verifies annual drug cost in the prescription drug tab of UMS site$")
 	public void user_verifies_drug_cost_in_UMS_site(DataTable data) throws Throwable {
-
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);*/
 		String planType = data.cell(0, 1);

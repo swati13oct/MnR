@@ -32,7 +32,7 @@ public class VppFavoritePlanMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	@Then("^user validates plan count for all plan types on plan summary page$")
 	public void user_validates_following_benefits_ui_aarp() {
