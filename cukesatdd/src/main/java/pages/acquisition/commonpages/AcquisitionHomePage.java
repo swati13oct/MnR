@@ -4582,7 +4582,7 @@ String winHandleBefore = driver.getWindowHandle();
 		jsClickNew(learnAboutMedicareHomeScreen);
 		waitForPageLoadSafari();
 		String urlCheck = driver.getCurrentUrl();
-		if (urlCheck.contains("medicare-education.html")) {
+		if (urlCheck.contains("medicare-education.html")||urlCheck.contains("medicare-education-classic.html")) {
 			return new LearnAboutMedicareHomePage(driver);
 		} else {
 			return null;
