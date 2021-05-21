@@ -83,7 +83,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[@id='prescriptiondrug' and contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
 
-
 	@FindBy(id = "prescriptiondrug")
 	private List<WebElement> presDrugTab;
 
@@ -93,7 +92,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 
-	@FindBy(xpath = "//*[@id=\"plancosts\"]/div/span")
+	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
 	private WebElement planCostsTab;
 
 	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
@@ -146,11 +145,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Look up my Doctor/Provider']")
 	private WebElement lookUpYourProviderButton;
-	
+
 	@FindBy(xpath = "//p[contains(text(),'See if your Doctor/Provider is covered in your ZIP')]")
 	private WebElement lookUpYourProviderTitle;
-	
-	
 
 	@FindBy(xpath = "//span[contains(text(),'1 providers covered')]")
 	private WebElement providerCountUpdated;
@@ -178,7 +175,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@id='planCosts']//td//strong[contains(text(),'Estimate Annual Total')]/ancestor::td/following-sibling::td/span[(not (contains(@class, 'ng-hide')))]/strong")
 	private WebElement estimateAnnualCost;
 
-	@FindBy(xpath = "//*[@id=\"optionalservices\"]/div/span")
+	@FindBy(xpath = "//span[contains(text(),'Optional Services (Riders)')]")
 	private WebElement optionalServicesTab;
 
 	@FindBy(xpath = "//p[text()='Optional Rider']/ancestor::tr[(not (contains(@class, 'ng-hide')))]/td[(not (contains(@class, 'ng-hide')))]/p[text()='Monthly']/following-sibling::strong[1]")
@@ -781,8 +778,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		presDrugTab.get(0).click();
 		validateNew(yourDrugListHeading);
 		String actualDrug = addedDrug.getText().trim();
-		Assertion.assertTrue("Expected drug not matches with actual drug",
-				actualDrug.contains(expectedDrugName));
+		Assertion.assertTrue("Expected drug not matches with actual drug", actualDrug.contains(expectedDrugName));
 	}
 
 	/**
@@ -819,7 +815,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		// TODO Auto-generated method stub
 		validateNew(lookUpYourProviderButton);
 		iosScroll(lookUpYourProviderTitle);
-//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		Thread.sleep(5000);
 		checkElementisEnabled(lookUpYourProviderButton);
@@ -853,7 +849,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
 		validateNew(getLnkBackToAllPlans());
 		jsClickNew(getLnkBackToAllPlans());
-	
+
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			jsClickNew(ReturnToMainPlanList);
 			return new VPPPlanSummaryPageMobile(driver);
@@ -876,9 +872,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		for (int i = 0; i < additionalBenefits.size(); i = i + 2) {
 			if (additionalBenefits.get(i).get(1).contains("Fitness")) {
-				AdditionalBenefitType = driver
-						.findElement(By.xpath("//div[contains(text(), '" + additionalBenefits.get(i).get(1)
-								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"
+						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
 				ActualTextforBenefit = driver.findElement(By.xpath("//div[contains(text(), '"
 						+ additionalBenefits.get(i).get(1)
@@ -890,9 +885,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 					Assertion.fail("Proper value not found");
 				}
 			} else {
-				AdditionalBenefitType = driver
-						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
-								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"
+						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
 				ActualTextforBenefit = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
@@ -921,12 +915,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		String displayedText;
 
 		for (int i = 0; i < medicalBenefits.size(); i = i + 2) {
-			medicalBenefitType = driver
-					.findElement(By.xpath("//p[contains(text(), '" + medicalBenefits.get(i).get(1)
-							+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+			medicalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '" + medicalBenefits.get(i).get(1)
+					+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 			System.out.println("The additional Benefit to Valuidate : " + medicalBenefitType.getText());
-			ActualTextforBenefit = driver.findElement(By.xpath("//p[(contains(text(), '"
-					+ medicalBenefits.get(i).get(1)
+			ActualTextforBenefit = driver.findElement(By.xpath("//p[(contains(text(), '" + medicalBenefits.get(i).get(1)
 					+ "'))]/ancestor::td[(not (contains(@class, 'ng-hide')))]/following-sibling::td[contains(@class,'medical-benefits')]/span"));
 			displayedText = ActualTextforBenefit.getText();
 			System.out.println("Text Displayed for the Additional Benefit on Plan Details : ");
@@ -947,17 +939,19 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 */
 	public boolean clickAndValidatePlanCosts(String monthlyPremium, String yearlyPremium) throws Exception {
 		boolean bValidation = false;
-		
+
 		scrollToView(prescriptiondrugTab);
-		prescriptiondrugTab.click();
-		pageloadcomplete();
-		scrollToView(optionalServicesTab);
-		optionalServicesTab.click();
-		pageloadcomplete();
-		scrollToView(planCostsTab);
-		planCostsTab.click();
+		jsClickNew(prescriptionTab);
 		pageloadcomplete();
 		
+		scrollToView(optionalServicesTab);
+		jsClickNew(optionalServicesTab);
+		pageloadcomplete();
+		
+		scrollToView(planCostsTab);
+		jsClickNew(planCostsTab);
+		pageloadcomplete();
+
 		Thread.sleep(4000);
 		if (monthlyPremium.equals(planMonthlyPremium.getText().trim())
 				&& yearlyPremium.equals(planYearlyPremium.getText().trim()))
@@ -1073,8 +1067,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			validateNew(mapdDrugCoveragePDfsOtherLang);
 			validateNew(mapdPharmacyDirectoryPDfsOtherLang);
 		}
-		
-		
 
 	}
 
@@ -1116,8 +1108,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		WebElement PDFlink = driver
 				.findElement(By.xpath("//*[contains(@id, 'planDocuments')]//a[contains(text(), '" + pDFtype + "')]"));
 
-		WebElement PDFCode = driver
-				.findElement(By.xpath("//a[@href='/online_documents/ovation/pdf/mapd/en/2021/Step_Therapy_MCOREE_2021.pdf']"));
+		WebElement PDFCode = driver.findElement(
+				By.xpath("//a[@href='/online_documents/ovation/pdf/mapd/en/2021/Step_Therapy_MCOREE_2021.pdf']"));
 
 		// On mobile chrome when user clicks on pdf link it asks for phone memory access
 		// on SauceLabs hence verifying code via @href
@@ -1382,8 +1374,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 	}
 
-
-	
 	@FindBy(xpath = "(//label[contains(text(),'Add to Compare')])[1]")
 	public WebElement addToCompareLabel;
 
