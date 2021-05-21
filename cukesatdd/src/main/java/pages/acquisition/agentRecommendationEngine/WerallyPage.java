@@ -110,7 +110,7 @@ public class WerallyPage extends UhcDriver {
 //Switch to Werally Window Page
 
 	public ArrayList<String> validateLinksanotherWindow(String primaryWindow, String type, String search) {
-		String browser = MRScenario.browsername;
+		String browser = MRScenario.browserName;
 		String env = MRScenario.environment;
 		threadsleep(2000);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
