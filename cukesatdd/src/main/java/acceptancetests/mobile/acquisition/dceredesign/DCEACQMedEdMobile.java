@@ -36,7 +36,7 @@ public class DCEACQMedEdMobile {
 		return loginScenario;
 	}
 
-//	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	@Given("^the user is on AARP medicare acquisition site landing page Mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {

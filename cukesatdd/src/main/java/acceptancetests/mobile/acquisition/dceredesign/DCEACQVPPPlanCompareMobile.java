@@ -43,7 +43,7 @@ public class DCEACQVPPPlanCompareMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 	
 	@And("^the user click on return to plan summary from Drug Details Page to return to VPP Plan Summary$")
 	public void the_user_clicks_on_returnlink_to_vpp_planSummary_DrugDetails() {
@@ -70,6 +70,7 @@ public class DCEACQVPPPlanCompareMobile {
 	
 	@When("^user clicks view drug cost button$")
 	public void user_clicks_view_drug_cost_button_in_AARP() throws InterruptedException {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
 		drugSummaryPage.clickViewDrugCostBtn();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -77,7 +78,7 @@ public class DCEACQVPPPlanCompareMobile {
 
 	@Given("^user is on AARP site$")
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		//aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();

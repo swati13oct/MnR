@@ -98,7 +98,7 @@ public class oleStepDefinition {
 		// Hard Coding OLE Welcome Page URL for Build Validation Test
 		String OLE_URL = "https://www.team-f-aarpmedicareplans.ose-elr-core.optum.com/content/aarpmedicareplans/en/enrollment.html";
 
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		WelcomePage welcomePage = new WelcomePage(wd, OLE_URL);

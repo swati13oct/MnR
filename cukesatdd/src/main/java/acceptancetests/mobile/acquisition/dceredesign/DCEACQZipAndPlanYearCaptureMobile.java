@@ -32,7 +32,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	@When("^clicks on Review drug cost button$")
 	public void clicks_on_Review_drug_cost_button() {

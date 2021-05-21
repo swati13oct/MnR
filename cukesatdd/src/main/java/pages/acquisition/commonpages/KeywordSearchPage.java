@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
 
 public class KeywordSearchPage extends GlobalWebElements {
 
@@ -17,7 +18,8 @@ public class KeywordSearchPage extends GlobalWebElements {
 	
 	@Override
 	public void openAndValidate() {
-		checkModelPopup(driver);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver);
 	}
 	
 	@FindBy(id = "search-field")

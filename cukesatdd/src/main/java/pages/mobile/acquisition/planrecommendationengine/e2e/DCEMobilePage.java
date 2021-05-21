@@ -4,6 +4,7 @@
 package pages.mobile.acquisition.planrecommendationengine.e2e;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -220,5 +221,6 @@ public class DCEMobilePage extends UhcDriver {
 			System.out.println("Unable to add drug");
 		}
 	}
-	static ArrayList<String> addedDrugNames = new ArrayList<String>();
+ ArrayList<String> addedDrugNames = new ArrayList<String>();
+	
 }

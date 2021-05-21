@@ -44,7 +44,7 @@ public class DCEACQShopPlanPDPMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -52,7 +52,7 @@ public class DCEACQShopPlanPDPMobile {
 
 	@Given("^the user is on acquisition site landing page$")
 	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		//aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -78,7 +78,7 @@ public class DCEACQShopPlanPDPMobile {
 
 	@Then("^end user validates GetStarted Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 

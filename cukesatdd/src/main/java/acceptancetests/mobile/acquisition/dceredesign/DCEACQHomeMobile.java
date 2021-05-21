@@ -45,7 +45,7 @@ public class DCEACQHomeMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -321,6 +321,7 @@ public class DCEACQHomeMobile {
 
 	@Then("^the user verify the Retail chain pharmacy on detail page$")
 	public void the_user_verify_the_Retail_chain_pharmacy_on_detail_page() throws Throwable {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugDetailsPageMobile drugDetailPage = new DrugDetailsPageMobile(wd);
 		drugDetailPage.validateRetailChainPharmacy();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailPage);

@@ -36,7 +36,7 @@ public class DCEACQVisitorProfileMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
@@ -59,7 +59,7 @@ public class DCEACQVisitorProfileMobile {
 	
 	@Then("^end user goto GetStarted button and click on it$")
 	public void the_user_verify_Get_Started_Page() throws Throwable {
-		wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		GetStartedPageMobile DCEgetStarted = new GetStartedPageMobile(wd);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, DCEgetStarted);
 

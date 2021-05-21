@@ -28,7 +28,7 @@ public class GlobalComponentsStepDefinitionUHC {
 	@Autowired
 	MRScenario loginScenario;
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 	
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -39,7 +39,7 @@ public class GlobalComponentsStepDefinitionUHC {
 	 */
 	@Given("^the user is on the UHC Medicaresolutions Site$")
 	public void the_user_on_UHC_Medicaresolutions_Site() {
-		 wd = (AppiumDriver) getLoginScenario().getMobileDriver();
+		 AppiumDriver wd = (AppiumDriver) getLoginScenario().getMobileDriver();
 
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 

@@ -7,7 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.AssertJUnit;
@@ -26,6 +25,8 @@ import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -41,7 +42,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	@Autowired
 	MRScenario loginScenario;
 	String langName;
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
@@ -81,7 +82,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
 
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -241,7 +242,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		 * envTimeYear);
 		 */
 		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
-		
+
 		/*
 		 * noteList.addAll(testNote);
 		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE,
@@ -282,7 +283,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		String testPlanYear = cy_planYear;
 		String testPlanName = cy_planName;
 		String testPdfLinkTextDate = String.valueOf(actualYearValue);
-		if (pharmacySearchPage.isPlanYear()) { // note: has plan year dropdown
+		/*if (pharmacySearchPage.isPlanYear()) { // note: has plan year dropdown
 			testPlanYear = ny_planYear;
 			testPdfLinkTextDate = ny_planYear;
 			testPlanName = ny_planName;
@@ -291,7 +292,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 			// plan name="+testPlanName);
 			getLoginScenario().saveBean(PharmacySearchCommonConstants.HAS_PLAN_YEAR_DROPDOWN, true);
 
-		}
+		}*/
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_NAME, testPlanName);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PLAN_YEAR, testPlanYear);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_PDF_LINK_TEXT_DATE, testPdfLinkTextDate);
@@ -442,7 +443,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		pharmacySearchPage.validateGetDirectionLinks();
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
-	
+
 	@Then("^click on DCE Link on Pharmacy Page$")
 	public void clickonDCELink() throws InterruptedException {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
@@ -453,24 +454,71 @@ public class PharmacyLocatorStepDefinitionMobile {
 		} else
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
-	
 
 	@Then("^user verify breadcrumb \"([^\"]*)\" displayed on pharmacy search page$")
 	public void user_verify_breadcrumb_displayed_on_pharmacy_search_page(String breadCrumb) {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		/*pharmacySearchPage.validateBreadCrumb(breadCrumb);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
-	*/
-	System.out.println("skipping the step for verify breadcrumb for mobile execution");	
+		/*
+		 * pharmacySearchPage.validateBreadCrumb(breadCrumb);
+		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.
+		 * PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+		 */
+		System.out.println("skipping the step for verify breadcrumb for mobile execution");
 	}
-	
+
 	@And("^user click on return to home on drug summary in AARP site$")
 	public void user_click_on_return_to_home_on_drug_summary_in_AARP_site() throws Throwable {
-		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile)getLoginScenario()
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		//drugSummaryPage.clickOnReturnToHome();
+		// drugSummaryPage.clickOnReturnToHome();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
+	/** user is on the Medicare Site landing page */
+	@And("^the user navigate to pharmacy search page from plan type pdp navigation bar$")
+	public void userNavigatesFromplantypeToPharmacySearchPage() {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		// aquisitionhomepage.selectState("Select State"); // note: default it to no
+		// state selected for predictable result
+		System.out.println("Unselected state on home page for more predictable result");
+		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		PharmacySearchPageMobile pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocatorFromPlanType();
+		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+
+	}
+
+	/** Choosing the different set of combination in Pharmacy filter */
+	@And("^the user selects Pharmacy Types to Filter$")
+	public void selectsPharmacyTypesfilter(DataTable inputAttributes) {
+		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
+		String pharmacyType = inputAttributesMap.get("Pharmacy Type");
+		String language = inputAttributesMap.get("Language");
+		System.out.println("Filter Type to Select : " + pharmacyType);
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validatePlanTypeFilter(pharmacyType, language);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
+	}
+
+	@Then("^the user validate error message displayed when filter results in no match$")
+	public void the_user_validates_the_no_pharmacies_error_message() {
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		boolean isPharmacySelected = pharmacySearchPage.validateNoPharmaciesErrorMessage();
+		Assertion.assertTrue("PROBLEM - Error in selecting pharmacy type!!!", isPharmacySelected);
+	}
+
+	@Then("^the user validates ITU, Home Infusion, LTC filter Message and anchor link$")
+	public void the_user_validates_ITU_Home_Infusion_LTC_filter_Message_and_anchor_link() throws Throwable {
+		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
+				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
+		pharmacySearchPage.validateITU_HS_LTC_Messaging();
+
+	}
+	
 }

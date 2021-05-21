@@ -409,8 +409,8 @@ public class PlanDetailsPage extends UhcDriver {
 
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
 			checkModelPopup(driver, 45);
-		else
-			checkModelPopup(driver, 10);
+		/*else
+			checkModelPopup(driver, 10);*/
 		validateNew(planCostsTab);
 
 	}
@@ -418,8 +418,8 @@ public class PlanDetailsPage extends UhcDriver {
 	public void openAndValidate(String planType) {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
 			checkModelPopup(driver, 45);
-		else
-			checkModelPopup(driver, 10);
+		/*else
+			checkModelPopup(driver, 10);*/
 
 		// note: setting the implicit wait to 0 as it fails because of TimeoutException
 		// while finding List<WebElement> of the different tabs on Plan detail page

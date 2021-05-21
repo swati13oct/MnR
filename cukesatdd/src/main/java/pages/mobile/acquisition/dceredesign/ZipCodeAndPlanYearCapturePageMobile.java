@@ -104,22 +104,23 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[text()='Find Plans' and @xpath=\"1\"]")
 	public WebElement FindPlans;
+	
+	@FindBy(xpath = "//*[@id=\"county\"]/option[2]")
+	public WebElement firstCounty;
 
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
 		// sendkeys(zipCodeTxtbox, zipcode);
 		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
-		iosScroll(countyDropdown);
+		//iosScroll(countyDropdown);
 		try {
 
 			if (countyDropdown.isDisplayed()) {
-				//countyDropdown.click();
-				//jsClickNew(countyDropdown);
-				// CommonUtility.waitForPageLoad(driver, countyRows, 30);
-				// driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
 				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText()
 						.toString();
+				//countyDropdown.click();
+				//firstCounty.click();
 				mobileSelectOption(countyDropdown, countyValue, true);
 			}
 		} catch (Exception e) {
