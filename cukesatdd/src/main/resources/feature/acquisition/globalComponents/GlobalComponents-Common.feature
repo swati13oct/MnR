@@ -265,16 +265,16 @@ Feature: 1.12 ACQ - Global Components Validation
     @MiscellaneousLinks_GlobalCompsAARP @prodRegression @regressionAARP
     Examples: 
       | site | path                                                       | pageName                | tfnXpath                                                       | tfnFlag |
-      | AARP | health-plans/estimate-drug-costs.html!/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
-      | AARP | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
+      | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
+      | AARP | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
       | AARP | medicare-plans.html                                        | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | AARP | profile/guest                                              | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |
 
     @MiscellaneousLinks_GlobalCompsUHC @regressionUHC
     Examples: 
       | site | path                                                       | pageName                | tfnXpath                                                       | tfnFlag |
-      | UHC  | health-plans/estimate-drug-costs.html!/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
-      | UHC  | health-plans/aarp-pharmacy.html!/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
+      | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
+      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
       | UHC  | medicare-plans.html                                        | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
       | UHC  | profile/guest                                              | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |
 
@@ -677,12 +677,12 @@ Feature: 1.12 ACQ - Global Components Validation
       | ClassicUrl | <classicurl> |
       | GenericUrl | <url>        |
 
-    @GeoTarget_MedSup_GlobalCompsAARP
+    @GeoTarget_MedSup_GlobalCompsAARP @regressionAARP
     Examples: 
       | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
       | AARP | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
 
-    @GeoTarget_MedSup_GlobalCompsUHC
+    @GeoTarget_MedSup_GlobalCompsUHC @regressionUHC
     Examples: 
       | site | state               | code | state1 | code1 | state2 | code2 | classicurl                                   | url                                  |
       | UHC  | U.S. Virgin Islands | VI   | Oregon | OR    | Alaska | AK    | /shop/medicare-supplement-plans-classic.html | /shop/medicare-supplement-plans.html |
@@ -738,12 +738,12 @@ Feature: 1.12 ACQ - Global Components Validation
     When user enter email and submit in email section
     Then the message "Thank You!Your guide will arrive in your inbox shortly." should be displayed in email section
 
-    @learnAboutMedicareNav_AARP
+    @learnAboutMedicareNav_AARP @regressionAARP
     Examples: 
       | site |
       | AARP |
 
-    @learnAboutMedicareNav_UHC
+    @learnAboutMedicareNav_UHC @regressionUHC
     Examples: 
       | site |
       | UHC  |
