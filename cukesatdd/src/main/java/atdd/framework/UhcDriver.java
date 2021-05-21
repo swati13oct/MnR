@@ -584,8 +584,6 @@ public abstract class UhcDriver {
 
 			System.out.println("Selenium Click executed........" + element.getAttribute("automationTrack"));
 			
-		
-
 			if (element.getAttribute("automationTrack")!="true") {
 				//checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
@@ -603,7 +601,7 @@ public abstract class UhcDriver {
 
 	}
 
-	// ((IOSDriver) driver).findElement(MobileBy.
+
 
 	public void jsClickNew(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
