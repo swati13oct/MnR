@@ -181,6 +181,13 @@ public abstract class UhcDriver {
 		driver.manage().window().maximize();
 		driver.get(url);
 	}
+	
+	public void startNewMobile(String url) {
+
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
+		driver.get(url);
+	}
 
 	public UhcDriver(WebDriver driver) {
 		this.driver = driver;
@@ -1106,11 +1113,7 @@ public abstract class UhcDriver {
 		return timeStr;
 	}
 
-	public void startNewMobile(String url) {
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(url);
-	}
 
 	/**
 	 * @author Murali - mmurugas This method will perform vertical swipe on mobile
