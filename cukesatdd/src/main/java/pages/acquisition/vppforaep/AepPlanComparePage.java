@@ -213,7 +213,7 @@ public class AepPlanComparePage extends UhcDriver {
         //Read Plan Summary table
         result.putAll(readBenefitsData("plan-summary-table", planType.equals("PDP") ? "" : "PC"));
 
-        if (planType.startsWith("MA")) {
+        if (planType.startsWith("MA") || planType.startsWith("SNP")) {
 
             //Read INN Benefits data
             result.putAll(readBenefitsData("medical-benefits-table", ""));
