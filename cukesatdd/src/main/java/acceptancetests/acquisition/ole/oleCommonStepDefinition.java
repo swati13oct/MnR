@@ -1,46 +1,45 @@
 package acceptancetests.acquisition.ole;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.testng.util.Strings;
 
 import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
 
 public class oleCommonStepDefinition {
-	
+
 	@Autowired
 	MRScenario loginScenario;
 
 	public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
-	
+
 	@Then("^the user navigates to clicks on Enroll Now from visitor profile to start OLE flow$")
 	public void the_user_navgates_to_clicks_on_Enroll_Now_From_VisitorProfile_flow(DataTable planAttributes) throws Throwable {
 
-		List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
+		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String ZipCode = givenAttributesMap.get("Zip Code");
@@ -49,36 +48,36 @@ public class oleCommonStepDefinition {
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
-		
+
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, premium);
-		
+
 		String SiteName;
 		String PlanPremium = "";
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		System.out.println("Site Name is : " + SiteName);
 		//-----------------------------------------------------------------------------------------------------
 		WelcomePage welcomePage;			
-			if(SiteName.contains("UHC_ACQ")){
-				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
-						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-				//TFN = planSummaryPage.GetTFNforPlanType();
+		if(SiteName.contains("UHC_ACQ")){
+			VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+			//TFN = planSummaryPage.GetTFNforPlanType();
 
-				welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+			welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
 
-			}
-			else{
-				VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
-						.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-				//TFN = planSummaryPage.GetTFNforPlanType();
+		}
+		else{
+			VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+					.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+			//TFN = planSummaryPage.GetTFNforPlanType();
 
-				welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
+			welcomePage = visitorProfilePage.Enroll_OLE_Plan(PlanName);
 
-			}
-			
+		}
+
 		//--------------------------------------------------------------------------------------------------------------------
-		
+
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -98,18 +97,20 @@ public class oleCommonStepDefinition {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
 					welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
-@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site$")
+	@Then("^the user clicks on Enroll Now in Plan Details Page to start the OLE flow on the site$")
 	public void the_user_clicks_on_Enroll_Now_in_Plan_Details_Page_to_start_the_OLE_flow() throws Throwable {
 		String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+				//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = "";
+				//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
 		// String SiteName= (String)
@@ -127,7 +128,8 @@ public class oleCommonStepDefinition {
 		TFN = vppPlanDetailsPage.GetTFNforPlanType();
 		WelcomePage welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
 		// }
-		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		String PlanPremium = "";
+				//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -147,9 +149,9 @@ public class oleCommonStepDefinition {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			System.out.println("OLE Welcome Page is Displayed");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else
-			Assert.fail("Error in validating the OLE Welcome Page");
+			Assertion.fail("Error in validating the OLE Welcome Page");
 
 	}
 
@@ -159,7 +161,7 @@ public class oleCommonStepDefinition {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
-		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		//PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
@@ -168,10 +170,10 @@ public class oleCommonStepDefinition {
 		if (Validation_Status) {
 			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
-			Assert.fail();
+			Assertion.fail();
 		}
 	}
 

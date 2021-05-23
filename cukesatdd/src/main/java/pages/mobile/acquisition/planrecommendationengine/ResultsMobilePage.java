@@ -175,10 +175,10 @@ public class ResultsMobilePage extends UhcDriver {
 	@FindBy(xpath = "//div[@class='uhc-container']//h4[contains(text(),'Need Help?')]")
 	private WebElement needhelptxtMS;
 
-	@FindBy(css = "input#cta-zipcode")
+	@FindBy(css = "input#zipcodemeded-0")
 	private WebElement homePageZiptxt;
 
-	@FindBy(css = "button#zipcodebtn")
+	@FindBy(css = "button[class*='uhc-zip-button']")
 	private WebElement homePageFindPlans;
 
 	@FindBy(css = "#plan-list-1 .swiper-container .module-plan-overview:nth-of-type(1) a.add-provider")
@@ -342,7 +342,7 @@ public class ResultsMobilePage extends UhcDriver {
 		if (R1.equalsIgnoreCase("MA")) {
 			mobileUtils.mobileLocateElementClick(MAViewPlansLink);
 			validate(MA1stPlanName, 60);
-			// Assert.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+			// Assertion.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "MA Invalid Plan Ranking");
 			clickEnrollmobile(MA1stPlanEnroll, needhelptxt);
 		}
@@ -350,21 +350,21 @@ public class ResultsMobilePage extends UhcDriver {
 			mobileUtils.mobileLocateElementClick(MSViewPlansLink);
 			submitMSform();
 			validate(MS1stPlanName, 60);
-			// Assert.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+			// Assertion.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "MS Invalid Plan Ranking");
 			clickEnrollmobile(MS1stPlanEnroll, needhelptxtMS);
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
 			mobileUtils.mobileLocateElementClick(PDPViewPlansLink);
 			validate(PDP1stPlanName, 60);
-			// Assert.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+			// Assertion.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "PDP Invalid Plan Ranking");
 			clickEnrollmobile(PDP1stPlanEnroll, needhelptxt);
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
 			mobileUtils.mobileLocateElementClick(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
-			// Assert.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
+			// Assertion.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),
 			// "SNP Invalid Plan Ranking");
 			// System.out.println("Ranking Plan Name : "+SNP1stPlanName.getText());
 			if (SNP1stPlanName.getText().toUpperCase().contains("D-SNP"))
@@ -389,13 +389,13 @@ public class ResultsMobilePage extends UhcDriver {
 		Select temp = new Select(MSPlanPartAMonth);
 		mobileSelectOption(MSPlanPartAMonth, "January 1",true);
 		temp = new Select(MSPlanPartAYear);
-		mobileSelectOption(MSPlanPartAYear, "2021",true);
+		mobileSelectOption(MSPlanPartAYear, "2022",true);
 		temp = new Select(MSPlanPartBMonth);
 		mobileSelectOption(MSPlanPartBMonth, "January 1",true);
 		temp = new Select(MSPlanPartBYear);
-		mobileSelectOption(MSPlanPartBYear, "2021",true);
+		mobileSelectOption(MSPlanPartBYear, "2022",true);
 		temp = new Select(MSPlanStartMonth);
-		mobileSelectOption(MSPlanStartMonth, "January 1, 2021",true);
+		mobileSelectOption(MSPlanStartMonth, "January 1, 2022",true);
 		mobileUtils.mobileLocateElement(MSViewPlanButton);
 		mobileUtils.mobileLocateElementClick(MSViewPlanButton);
 	}

@@ -3,45 +3,21 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
+public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements {
 
 	public PlanRecommendationEngineEditResponsePage(WebDriver driver) {
 		super(driver);
@@ -51,7 +27,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -140,15 +116,13 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	@FindBy(css = "a#changeMyProviders")
 	private WebElement changeDocLink;
+	
+	@FindBy(css = "#doctors-warning")
+	private WebElement WarningDocMsg;
 
 	@FindBy(css = "#modal button[class*='primary']")
 	private WebElement locationModalConfirm;
 
-	// Results loading page Elements
-	
-	@FindBy(css = ".loading-container .container>div>div>div:nth-of-type(2)>img")
-	private WebElement svgAnimation;
-	
 	// Variables
 
 	public HashMap<String, String> inputValues;
@@ -193,45 +167,14 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	}
 
 	public void navigateEditResponsePage(String flow) {
-		//E2E : Added additional wait for Safari browser alongwith check for svg animation icon
-		validate(svgAnimation, 30);
 		waitForPageLoadSafari();
-		
-		/** E2E : Since the edit response button is not instantly visible and scripts fail
-		  	Using fluent wait to get the active plan type tab name (only MAPD and SNP)
-		  	and wait until the respective plan type edit response button is click able.
-		*/
-		By recommendedPlanTypeName = By.xpath("//div[contains(@class,'overview-tabs')]/div[contains(@class,'active')]//span[@class='title']//small");
-		FluentWait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-				.withTimeout(Duration.ofSeconds(10))
-				.pollingEvery(Duration.ofMillis(100))
-				.ignoring(NoSuchElementException.class)
-				.ignoring(TimeoutException.class);
-		String activeTabName = wait.until(ExpectedConditions.visibilityOfElementLocated(recommendedPlanTypeName)).getText();
-		System.out.println("Active plan type tab - " +activeTabName);
 		if (flow.equalsIgnoreCase("pdp")) {
-			validate(pdpEditResponseButton, 10);
-			waitTillElementClickableInTime(pdpEditResponseButton, 15);
 			pdpEditResponseButton.click();
 		} else {
-			if(activeTabName.contains("Medicare Special Needs Plans")) {
-				validate(snpEditResponseButton, 10);
-				waitTillElementClickableInTime(snpEditResponseButton, 15);
-				snpEditResponseButton.click();
-			} else {
-				validate(mapdEditResponseButton, 10);
-				waitTillElementClickableInTime(mapdEditResponseButton, 15);
+			if (validate(mapdEditResponseButton, 10))
 				mapdEditResponseButton.click();
-			}
-			
-			
-			/*if (validate(mapdEditResponseButton, 10)) {
-//				waitTillElementClickableInTime(mapdEditResponseButton, 15);
-				mapdEditResponseButton.click();
-			} else {
-				waitTillElementClickableInTime(snpEditResponseButton, 15);
+			else
 				snpEditResponseButton.click();
-			}*/
 		}
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
@@ -254,7 +197,6 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	public void checkContent(String section) {
 		// boolean sectionStaus = false;
-		waitForPageLoadSafari();
 		section = section.toLowerCase();
 		String formatedUIText = changetoUIdata(section);
 		// System.out.println("Formated UI Text : "+formatedUIText);
@@ -321,7 +263,6 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 
 	public void verifyClickEditButton(String section, boolean click) {
 		boolean editButton = false;
-		waitForPageLoadSafari();
 		for (WebElement elem : allQuestionSection) {
 			String tempTxt = elem.findElement(By.cssSelector("button")).getText().toLowerCase();
 			System.out.println("tempTxt : " + tempTxt);
@@ -348,13 +289,11 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 			viewUpdateButton.click();
 		else
 			returnToPlanLink.click();
-		waitForPageLoadSafari();
 	}
 
 	public void checkDrugDocInfo(String section, boolean modifiedValue) {
 		String UIInfo = getUISectionValue(section);
 		String givenInfo = null;
-		waitForPageLoadSafari();
 		if (section.contains("drugs")) {
 			if (modifiedValue)
 				givenInfo = inputValues.get("Drug Details").split(",")[2].toLowerCase();
@@ -450,7 +389,6 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		System.out.println("Edit User Response: ");
 		inputValues = userInput;
 		pageloadcomplete();
-		waitForPageLoadSafari();
 		navigateEditResponsePage(inputValues.get("Plan Type"));
 		editUpdate(inputValues.get("Plan Type").toLowerCase());
 		Assert.assertTrue(validate(viewUpdateButton, 10), "View Updated Button should be displayed");
@@ -471,7 +409,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 				"Progres Bar does not have required Info");
 		editValue(randomSection);
 		// cancelButton.click();
-		// Assert.assertTrue(validate(returnToPlanLink,10),"Invalid cancel action");
+		// Assertion.assertTrue(validate(returnToPlanLink,10),"Invalid cancel action");
 	}
 
 	public void editValue(String section) {
@@ -561,6 +499,36 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 		coverage.chooseCoverageOption(inputValues.get("Plan Type").toUpperCase().replace("PDPTOMAPD", "MAPD"));
 		jsClickNew(saveBtn);
 	}
+	
+	public void addSNPEditResponse(HashMap<String, String> userInput) {
+		System.out.println("Change SpecialNeeds Options:");
+		inputValues = userInput;
+		pageloadcomplete();
+		navigateEditResponsePage(inputValues.get("Plan Type"));
+		verifyClickEditButton("special", true);
+		validate(progressInfo, 10);
+		String progressText = progressInfo.getText().toLowerCase();
+		Assert.assertTrue(progressText.contains("special") && progressText.contains("100%"),
+				"Progres Bar does not have required Info");
+		editValue("special");
+		System.out.println("******  Add SpecialNeeds Completed ******");
+	}
+	
+	public void addLocationEditResponse(HashMap<String, String> userInput) {
+		System.out.println("Change SpecialNeeds Options:");
+		inputValues = userInput;
+		pageloadcomplete();
+//		navigateEditResponsePage(inputValues.get("Plan Type"));
+		verifyClickEditButton("location", true);
+		validate(progressInfo, 10);
+		String progressText = progressInfo.getText().toLowerCase();
+		Assert.assertTrue(progressText.contains("location") && progressText.contains("100%"),
+				"Progres Bar does not have required Info");
+		editValue("location");
+		validate(WarningDocMsg, 10);
+		Assert.assertTrue(WarningDocMsg.getText().contains("Warning:"), "Doctors Warning message is not displayed");
+		System.out.println("******  Add Location Completed ******");
+	}
 
 	public void checkCoveragevalue(HashMap<String, String> userInput) {
 		inputValues = userInput;
@@ -575,6 +543,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	public void validateSaveResults(String plantype) {
 		System.out.println("Validating Save Results : ");
 		pageloadcomplete();
+		waitForPageLoadSafari();
 		navigateSaveResultsPage(plantype);
 		jsClickNew(ViewProfileButton);
 		threadsleep(5000);

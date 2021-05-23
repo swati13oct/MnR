@@ -1,4 +1,4 @@
-@AgentRecommendationEngine @ARERegression @ARESessionCookie
+@agentRecommendationEngine @ARERegression @ARESessionCookie @regressionAARP
 Feature: Agent Recommendation Engine - Verify ARE functionality with Session Cookies
 
   @ARE @ClearedSessionNewCloakIn @F457409
@@ -19,7 +19,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | PlanCompareZIP |
       | qavgogine | qavgogine | ATDD1STG@MEMBERDD.COM | None          | current  |          10001 |
 
-  @ARE @SavedSessionDropdown @F457409
+  @ARE @SavedSessionDropdown @F457409 @sanity
   Scenario Outline: - <Email> To Verify agent login and validating session storage in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -78,7 +78,7 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | User      | Pass      | Email                 | IfMultiCounty | PlanYear | RankingOptions | PlansOrder                                                                                                                              | DisplayCurrentPlan |
       | qavgogine | qavgogine | ATDD2STG@MEMBERDD.COM | None          | current  | drug,doctor    | Prime(HMO),Plan1(HMO),Plan2(HMO),Choice(PPO),Patriot(HMO),Plan1(RegionalPPO),Plan3(RegionalPPO),Plan4(RegionalPPO),Patriot(RegionalPPO) | YES                |
 
-  @ARE @AddEditDeleteDrug @F457409
+  @ARE @AddEditDeleteDrug @F457409 @sanity
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Drugs in ARE
     Given the agent is on shopper profile login page
     When agent login to shopper profile
@@ -92,11 +92,11 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
     When Agent fetch original PlanOrder in plancompare page
       | Ranking Options | <RankingOptions> |
     When user adds Drugs in plan compare page
-      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
+      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
     Then Apply ranking and get plans names in plancompare page
       | Ranking Options | <RankingOptions> |
     When user adds Drugs in plan compare page
-      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch2> |
+      | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch2> |
     Then agent get plandetails after editing Drugs in plancompare
       | Current Plan         | <DisplayCurrentPlan> |
       | ChangeIn Order       | <ChangeInOrder>      |
@@ -110,8 +110,8 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User      | Pass      | Email                | IfMultiCounty | PlanYear | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch2 | DrugNameDosage                              | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DisplayCurrentPlan |
-      | qavgogine | qavgogine | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,1,NO,NO                   | CELECOXIB,NO,celecoxib CAP 50MG,,,1,NO,NO                             | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | YES          | YES           |            | drug           | NO             | YES                |
+      | User      | Pass      | Email                | IfMultiCounty | PlanYear | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch2 | DrugNameDosage                              | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DisplayCurrentPlan |
+      | qavgogine | qavgogine | ATDDSTG@MEMBERDD.COM | None          | current  | AZITHROMYCIN,NO,azithromycin POW 1GM PAK,,,Week,1,NO,NO                      | CELECOXIB,NO,celecoxib CAP 50MG,,,Month,1,NO,NO                               | azithromycin POW 1GM PAK:CELECOXIB CAP 50MG | YES          | YES           | [blank]    | drug           | NO             | YES                |
 
   @ARE @AddEditDeleteDoctors @F457409
   Scenario Outline: - <Email> To Verify agent login and validate Add,Edit and Delete Doctors in ARE
@@ -146,5 +146,5 @@ Feature: Agent Recommendation Engine - Verify ARE functionality with Session Coo
       | Expected Plans Order | <PlansOrder>         |
 
     Examples: 
-      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | Doctors         | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                  | DisplayCurrentPlan |
-      | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM | None          | current  | Emily Adams, NP | Palmer, John, MD | YES          | YES           |            | doctor         | NO             | Emily Adams, NP:Palmer, John, MD | YES                |
+      | User      | Pass      | Email                 | IfMultiCounty | PlanYear | Doctors             | Doctors1         | Current Plan | ChangeInOrder | PlansOrder | RankingOptions | ChangeInOrder1 | DelDoctorsNames                      | DisplayCurrentPlan |
+      | qavgogine | qavgogine | ATDD3STG@MEMBERDD.COM | None          | current  | Adams, Susan E, AUD | Palmer, John, MD | YES          | YES           | [blank]    | doctor         | NO             | Adams, Susan E, AUD:Palmer, John, MD | YES                |

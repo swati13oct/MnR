@@ -1,22 +1,22 @@
 package acceptancetests.acquisition.vpp;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.vppforaep.AepPlanDetailsPage;
-import pages.acquisition.vppforaep.AepVppPlanSummaryPage;
-import pages.acquisition.vppforaep.DCEdatechangePage;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.vpp.AepPlanDetailsPage;
+import pages.acquisition.vpp.AepVppPlanSummaryPage;
+import pages.acquisition.vpp.DCEdatechangePage;
 
 /**
  * Functionality: VPP flow for AARP site 
@@ -40,16 +40,17 @@ public class AepVppStepDefinitionUlayer {
 
 	@Then("^the user is on team-f dce date change url and changes DCE server date to following date$")
 	public void the_user_changes_the_DCE_server_date_to_the_following_date(DataTable arg1) throws Throwable {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 		DCEdatechangePage dceDateChangePage = new DCEdatechangePage(wd);
-		List<DataTableRow> datechangerow = arg1
-				.getGherkinRows();
 		Map<String, String> DateChangeMap = new HashMap<String, String>();
+		DateChangeMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> datechangerow = arg1
+				.getGherkinRows();
 		for (int i = 0; i < datechangerow.size(); i++) {
 
 			DateChangeMap.put(datechangerow.get(i).getCells()
 					.get(0), datechangerow.get(i).getCells().get(1));
-		}
+		}*/
 
 		String DCEdate = DateChangeMap.get("DCE Date");
 		boolean ValidationStatus = dceDateChangePage.setAndValidate_DCEserverDate(DCEdate);
@@ -60,13 +61,13 @@ public class AepVppStepDefinitionUlayer {
 			wd.quit();
 		}
 		else
-			Assert.fail("DCE date change failed");
+			Assertion.fail("DCE date change failed");
 	}
 
 
 	@Then("^the user validates Current year and next year links in VPP$")
 	public void the_user_validates_Current_year_and_next_year_links_in_VPP() throws Throwable {
-		pages.acquisition.ulayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.ulayer.VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String AEP_Flag = "true";
 		getLoginScenario().saveBean(VPPCommonConstants.AEP_FLAG, AEP_Flag);
@@ -82,13 +83,13 @@ public class AepVppStepDefinitionUlayer {
 				getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE, aepVppPlanSummarypage);
 			}
 			else
-				Assert.fail("VPP Page for AEP Period is not Displayed");
+				Assertion.fail("VPP Page for AEP Period is not Displayed");
 		}
 	}
 
-	@Then("^the user validates Current year and next year links in Blayer VPP$")
+	/*@Then("^the user validates Current year and next year links in Blayer VPP$")
 	public void the_user_validates_Current_year_and_next_year_links_in_VPP_BlueLayer() throws Throwable {
-		pages.acquisition.bluelayer.VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
+		VPPPlanSummaryPage plansummaryPage = (pages.acquisition.bluelayer.VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String AEP_Flag = "true";
 		getLoginScenario().saveBean(VPPCommonConstants.AEP_FLAG, AEP_Flag);
@@ -104,27 +105,28 @@ public class AepVppStepDefinitionUlayer {
 				getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE, aepVppPlanSummarypage);
 			}
 			else
-				Assert.fail("VPP Page for AEP Period is not Displayed");
+				Assertion.fail("VPP Page for AEP Period is not Displayed");
 		}
-	}
+	}*/
 
 	@Then("^the user validates Next year Plan summary Page for pre-AEP for below plan$")
 	public void the_user_validates_Next_year_Plan_summary_Page_for_pre_AEP_for_below_plan(DataTable arg1) throws Throwable {
-		List<DataTableRow> planNamerow = arg1
-				.getGherkinRows();
 		Map<String, String> PlanNameMap = new HashMap<String, String>();
+		PlanNameMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> planNamerow = arg1
+				.getGherkinRows();
 		for (int i = 0; i < planNamerow.size(); i++) {
 
 			PlanNameMap.put(planNamerow.get(i).getCells()
 					.get(0), planNamerow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = PlanNameMap.get("NextYear Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.NEXTYEAR_PLAN_NAME, PlanName);
 		AepVppPlanSummaryPage aepVppPlanSummarypage = (AepVppPlanSummaryPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE);
 
 		boolean ValidationStatus = aepVppPlanSummarypage.Validate_preAEP_NextYearPlanSummary(PlanName);
 		getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE, aepVppPlanSummarypage);
-		Assert.assertTrue("Validation failed - Enroll button displayed for next year pre-AEP Plan Summary Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button displayed for next year pre-AEP Plan Summary Page", ValidationStatus);;
 	}
 
 	@When("^the user view plan details of the Next Year plan$")
@@ -142,7 +144,7 @@ public class AepVppStepDefinitionUlayer {
 			getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_DETAILS_PAGE,
 					aepPlanDetailsPage);
 		else
-			Assert.fail("Error in validating the Plan Details Page for AEP");
+			Assertion.fail("Error in validating the Plan Details Page for AEP");
 	}
 
 	@When("^the user view plan details of the Current Year plan$")
@@ -160,7 +162,7 @@ public class AepVppStepDefinitionUlayer {
 			getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_DETAILS_PAGE,
 					aepPlanDetailsPage);
 		else
-			Assert.fail("Error in validating the Plan Details Page for AEP");
+			Assertion.fail("Error in validating the Plan Details Page for AEP");
 	}
 
 	@Then("^the user validates Next year Plan details Page for pre-AEP$")
@@ -170,7 +172,7 @@ public class AepVppStepDefinitionUlayer {
 
 		AepPlanDetailsPage aepPlanDetailsPage = (AepPlanDetailsPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_DETAILS_PAGE);
 		boolean ValidationStatus = aepPlanDetailsPage.Validate_preAEP_NextYearPlanDetails(PlanName, NextYear);
-		Assert.assertTrue("Validation failed - Enroll button displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
 
 	}
 
@@ -182,19 +184,20 @@ public class AepVppStepDefinitionUlayer {
 			getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE, aepPlanSummaryPage);
 		}
 		else
-			Assert.fail("VPP Page for AEP Period is not Displayed");
+			Assertion.fail("VPP Page for AEP Period is not Displayed");
 	}
 
 	@Then("^the user validates Current year Plan Summary Page for pre-AEP$")
 	public void the_user_validates_Current_year_Plan_Summary_Page_for_pre_AEP(DataTable arg1) throws Throwable {
-		List<DataTableRow> planNamerow = arg1
-				.getGherkinRows();
 		Map<String, String> PlanNameMap = new HashMap<String, String>();
+		PlanNameMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> planNamerow = arg1
+				.getGherkinRows();
 		for (int i = 0; i < planNamerow.size(); i++) {
 
 			PlanNameMap.put(planNamerow.get(i).getCells()
 					.get(0), planNamerow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = PlanNameMap.get("CurrentYear Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.CURRENTYEAR_PLAN_NAME, PlanName);
 		AepVppPlanSummaryPage aepVppPlanSummarypage = (AepVppPlanSummaryPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE);
@@ -202,7 +205,7 @@ public class AepVppStepDefinitionUlayer {
 		aepVppPlanSummarypage.ClickCurrentYearLink();
 		boolean ValidationStatus = aepVppPlanSummarypage.Validate_preAEP_AEP_CurrentYearPlanSummary(PlanName);
 		getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE, aepVppPlanSummarypage);
-		Assert.assertTrue("Validation failed - Enroll button NOT displayed for Current year pre-AEP Plan Summary Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button NOT displayed for Current year pre-AEP Plan Summary Page", ValidationStatus);;
 	}
 
 	@Then("^the user validates Current year Plan Details Page for pre-AEP$")
@@ -212,26 +215,27 @@ public class AepVppStepDefinitionUlayer {
 
 		AepPlanDetailsPage aepPlanDetailsPage = (AepPlanDetailsPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_DETAILS_PAGE);
 		boolean ValidationStatus = aepPlanDetailsPage.Validate_preAEP_CurrentYearPlanDetails(PlanName, CurrentYear);
-		Assert.assertTrue("Validation failed - Enroll button is NOT displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button is NOT displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
 	}
 
 	@Then("^the user validates Next year Plan summary Page for AEP enrollment period for below plan$")
 	public void the_user_validates_Next_year_Plan_summary_Page_for_AEP_enrollment_period_for_below_plan(DataTable arg1) throws Throwable {
-		List<DataTableRow> planNamerow = arg1
-				.getGherkinRows();
 		Map<String, String> PlanNameMap = new HashMap<String, String>();
+		PlanNameMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> planNamerow = arg1
+				.getGherkinRows();
 		for (int i = 0; i < planNamerow.size(); i++) {
 
 			PlanNameMap.put(planNamerow.get(i).getCells()
 					.get(0), planNamerow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = PlanNameMap.get("NextYear Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.NEXTYEAR_PLAN_NAME, PlanName);
 		AepVppPlanSummaryPage aepVppPlanSummarypage = (AepVppPlanSummaryPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE);
 
 		boolean ValidationStatus = aepVppPlanSummarypage.Validate_AEP_NextYearPlanSummary(PlanName);
 		getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE, aepVppPlanSummarypage);
-		Assert.assertTrue("Validation failed - Enroll button displayed for next year pre-AEP Plan Summary Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button displayed for next year pre-AEP Plan Summary Page", ValidationStatus);;
 	}
 
 	@Then("^the user validates Next year Plan details Page for AEP enrollment period$")
@@ -241,21 +245,22 @@ public class AepVppStepDefinitionUlayer {
 
 		AepPlanDetailsPage aepPlanDetailsPage = (AepPlanDetailsPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_DETAILS_PAGE);
 		boolean ValidationStatus = aepPlanDetailsPage.Validate_AEP_NextYearPlanDetails(PlanName, NextYear);
-		Assert.assertTrue("Validation failed - Enroll button displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
 
 
 	}
 
 	@Then("^the user validates Current year Plan Summary Page for AEP enrollment period$")
 	public void the_user_validates_Current_year_Plan_Summary_Page_for_AEP_enrollment_period(DataTable arg1) throws Throwable {
-		List<DataTableRow> planNamerow = arg1
-				.getGherkinRows();
 		Map<String, String> PlanNameMap = new HashMap<String, String>();
+		PlanNameMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*List<DataTableRow> planNamerow = arg1
+				.getGherkinRows();
 		for (int i = 0; i < planNamerow.size(); i++) {
 
 			PlanNameMap.put(planNamerow.get(i).getCells()
 					.get(0), planNamerow.get(i).getCells().get(1));
-		}
+		}*/
 		String PlanName = PlanNameMap.get("CurrentYear Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.CURRENTYEAR_PLAN_NAME, PlanName);
 		AepVppPlanSummaryPage aepVppPlanSummarypage = (AepVppPlanSummaryPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE);
@@ -263,7 +268,7 @@ public class AepVppStepDefinitionUlayer {
 		aepVppPlanSummarypage.ClickCurrentYearLink();
 		boolean ValidationStatus = aepVppPlanSummarypage.Validate_preAEP_AEP_CurrentYearPlanSummary(PlanName);
 		getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE, aepVppPlanSummarypage);
-		Assert.assertTrue("Validation failed - Enroll button NOT displayed for Current year pre-AEP Plan Summary Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button NOT displayed for Current year pre-AEP Plan Summary Page", ValidationStatus);;
 
 	}
 
@@ -274,7 +279,7 @@ public class AepVppStepDefinitionUlayer {
 
 		AepPlanDetailsPage aepPlanDetailsPage = (AepPlanDetailsPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_DETAILS_PAGE);
 		boolean ValidationStatus = aepPlanDetailsPage.Validate_preAEP_CurrentYearPlanDetails(PlanName, CurrentYear);
-		Assert.assertTrue("Validation failed - Enroll button is NOT displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button is NOT displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
 
 	}
 
@@ -286,7 +291,7 @@ public class AepVppStepDefinitionUlayer {
 		aepVppPlanSummarypage.ClickCurrentYearLink();
 		boolean ValidationStatus = aepVppPlanSummarypage.Validate_PostAEP_AEP_CurrentYearPlanSummary(PlanName);
 		getLoginScenario().saveBean(PageConstants.AEP_VPP_PLAN_SUMMARY_PAGE, aepVppPlanSummarypage);
-		Assert.assertTrue("Validation failed - Enroll button NOT displayed for Current year pre-AEP Plan Summary Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button NOT displayed for Current year pre-AEP Plan Summary Page", ValidationStatus);;
 
 	}
 
@@ -297,7 +302,7 @@ public class AepVppStepDefinitionUlayer {
 
 		AepPlanDetailsPage aepPlanDetailsPage = (AepPlanDetailsPage) getLoginScenario().getBean(PageConstants.AEP_VPP_PLAN_DETAILS_PAGE);
 		boolean ValidationStatus = aepPlanDetailsPage.Validate_PostAEP_CurrentYearPlanDetails(PlanName, CurrentYear);
-		Assert.assertTrue("Validation failed - Enroll button is NOT displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
+		Assertion.assertTrue("Validation failed - Enroll button is NOT displayed for next year pre-AEP Plan Details Page", ValidationStatus);;
 	}
 
 

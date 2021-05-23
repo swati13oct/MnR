@@ -55,13 +55,13 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@type,'submit') and contains(text(), 'Send')]")
 	protected WebElement emailPlanSummarySendButton;
 
-	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")
+	@FindBy(xpath = "//a[@id='closepopup']")
 	protected WebElement emailPlanSummaryCancelButton;
 
 	@FindBy(xpath = "//*[@id='emailSuccess']") 
 	protected WebElement emailPlanSummarySuccessText;
 
-	@FindBy(xpath = "//button[@ng-click='closeEmailSuccessMsgSummaryPopUp()']")
+	@FindBy(xpath = "//button[contains(@ng-click,'closeEmailSuccessMsgSummaryPopUp')]")
 	protected WebElement emailPlanSummarySuccessCloseButton;
 
 	@FindBy(xpath = "//input[@id='email' and @class='error']")
@@ -130,7 +130,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath="//a[@id='backtoplansummarypage']")
 	protected WebElement backToAllPlansLnk;
 
-	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']/div/form/div[2]/button")
+	@FindBy(xpath=".//*[contains(@id,'SuccessPopUp')]//form//div[2]//button")
 	protected WebElement closeButtonthankyoumessagepopup;
 
 	@FindBy(xpath=".//*[@id='emailComparison']")
@@ -139,13 +139,13 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath=".//*[@id='emailcompareDescription']")
 	protected WebElement leavingcomapreplansitepopup;
 	
-	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[1]")
+	@FindBy(xpath=".//*[@id='form-valid']/div[2]//div[text()='Cancel']")
 	protected WebElement cancelButtonEmailPlanComparePopUp;
 	
-	@FindBy(xpath=".//*[@id='form-valid']/div[2]/button[2]")
+	@FindBy(xpath="//*[@id='form-valid']/div[2]//div[text()='Send']")
 	protected WebElement sendButtonEmailPlanComparePopUp;
 	
-	@FindBy(xpath=".//*[@id='emailSuccessMsgPopUp']")
+	@FindBy(xpath=".//*[@id='emailSuccess']")
 	protected WebElement validatesuccesspopup;
 
 	@FindBy(xpath = ".//*[@id='emailPlanDetail']")
@@ -157,7 +157,7 @@ public class EmailAndPrintUtilWebElements extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='closepopup']")
 	protected WebElement cancelButtonEmailPlanDetailsPopUp;
 
-	@FindBy(xpath = ".//*[@id='form-valid']//button[2]")
+	@FindBy(xpath = ".//*[@id='form-valid']/div[2]//button[text()='Send']")
 	protected WebElement sendButtonEmailPlanDetailsPopUp;
 
 	@FindBy(xpath="//a[contains(@dtmname,'Enroll in Plan')]")

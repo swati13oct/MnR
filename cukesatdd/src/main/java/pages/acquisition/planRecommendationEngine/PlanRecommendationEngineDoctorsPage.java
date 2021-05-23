@@ -1,16 +1,12 @@
-/**
-* 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,10 +14,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import atdd.framework.MRScenario;
-import atdd.framework.UhcDriver;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
+public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineDoctorsPage(WebDriver driver) {
 		super(driver);
@@ -31,7 +26,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -134,20 +129,20 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
-//                                                Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//                                                Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
 		validate(pageProgressPercentage, 30);
 		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
-//                                                Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//                                                Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(doctorsTitle);
-//                                                Assert.assertTrue(doctorsTitle.getText().contains("doctors"));
+//                                                Assertion.assertTrue(doctorsTitle.getText().contains("doctors"));
 		validate(innetwork, 30);
-//                                                Assert.assertTrue(innetwork.getText().contains("network"));
+//                                                Assertion.assertTrue(innetwork.getText().contains("network"));
 		validate(outnetwork, 30);
-//                                              Assert.assertTrue(outnetwork.getText().contains("patients"));
+//                                              Assertion.assertTrue(outnetwork.getText().contains("patients"));
 		validate(mydoctors, 30);
-//                                                Assert.assertTrue(mydoctors.getText().contains("current doctors"));
+//                                                Assertion.assertTrue(mydoctors.getText().contains("current doctors"));
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());
@@ -221,14 +216,15 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		desktopCommonUtils.desktopErrorValidation(page);
 	}
 
-//Doctors Model Popup Window Verification                                
+//Doctors Model Popup Window Verification        
+	int locationCount = 1;
 
 	public void doctorModellookup(String search, int count) {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
 //		modalFinddoctors.click();
 		jsClickNew(modalFinddoctors);
-		validateLinksanotherWindow(curWindow, "Doctors", search, count);
+		validateLinksanotherWindow(curWindow, "Doctors", search, count, locationCount);
 		threadsleep(5000);
 		// Changing the count for multiple doc with : separated
 		if (search.contains(":")) {
@@ -247,22 +243,22 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
 	public void doctorModellookupElements() {
 		validate(modalDescription);
-//                        			Assert.assertTrue(modalDescription.getText().contains("Save"));
+//                        			Assertion.assertTrue(modalDescription.getText().contains("Save"));
 		validate(modalTitle);
 		Assert.assertTrue(modalTitle.getText().contains("browser"));
 		validate(modalCancel);
 		Assert.assertTrue(modalCancel.getText().contains("Cancel"));
 		validate(modalFinddoctors);
-//                        			Assert.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
+//                        			Assertion.assertTrue(modalFinddoctors.getText().contains("Find Doctors"));
 	}
 
 //Doctors Confirmation Model Popup Window Verification                                
 
 	public void doctorConfirmationModellookup() {
 		validate(modalTitle);
-//                        			Assert.assertTrue(modalTitle.getText().contains("Your Doctors"));
+//                        			Assertion.assertTrue(modalTitle.getText().contains("Your Doctors"));
 		validate(modalDoctorsCount);
-//                        			Assert.assertTrue(modalDoctorsCount.getText().contains("doctor(s)"));
+//                        			Assertion.assertTrue(modalDoctorsCount.getText().contains("doctor(s)"));
 		validate(modalCancel);
 		Assert.assertTrue(modalCancel.getText().contains("Cancel"));
 		validate(modalContinuedoctors);
@@ -271,8 +267,10 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 
 //Switch to Werally Window Page
 
-	public ArrayList<String> validateLinksanotherWindow(String primaryWindow, String type, String search, int count) {
+
+	public ArrayList<String> validateLinksanotherWindow(String primaryWindow, String type, String search, int count, int locationCount) {
 		String browser = MRScenario.browserName;				//E2E: the browser name is stored in browserName variable in getWebDriverNew method of MRScenario 
+
 		String env = MRScenario.environment;
 		threadsleep(2000);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
@@ -301,7 +299,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 					else
 						Assert.assertTrue(driver.getCurrentUrl().contains("werally.in"),
 								"Non Prod Connected to Incorrect Rally");
-					werallyResults = werally.werallySearch(type, search, count);
+					werallyResults = werally.werallySearch(type, search, count, locationCount);
 					System.out.println("werallyResults Size is : " + werallyResults.size());
 					System.out.println("werallyResults Content is : " + werallyResults);
 				}
@@ -345,6 +343,19 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		}
 		return confirmationResults;
 	}
+	
+	public void getcontinue(String multi) {
+		int count = 0;
+		threadsleep(3000);
+		int confirmationSize = Integer.parseInt(modalDoctorsCount.getText().trim().split(" ")[2]);
+		System.out.println("confirmationResults Size is : " + confirmationSize);
+		if(multi.equalsIgnoreCase("Multi"))
+			count = 5;
+		if(confirmationSize==count)
+			System.out.println("Doctors Size is : " + count);
+			jsClickNew(modalContinuedoctors);
+			threadsleep(3000);
+		}
 
 	public void verifyConfirmationmodalResults(int count, ArrayList<String> werally, ArrayList<String> confirm) {
 
@@ -439,7 +450,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 			String curdriverhandle = driver.getWindowHandle();
 //			modalFinddoctors.click();
 			jsClickNew(modalFinddoctors);
-			validateLinksanotherWindow(curdriverhandle, "Doctors", doctorsName, 2);
+			validateLinksanotherWindow(curdriverhandle, "Doctors", doctorsName, 2, locationCount);
 			doctorConfirmationModellookup();
 //			modalCancel.click();
 			jsClickNew(modalCancel);
@@ -487,7 +498,7 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	public void providerlookup(String search, int count) {
 		String curdriverhandle = driver.getWindowHandle();
 		jsClickNew(modalFinddoctors);
-		validateLinksanotherWindow(curdriverhandle, "Doctors", search, count);
+		validateLinksanotherWindow(curdriverhandle, "Doctors", search, count, locationCount);
 		confirmationProviderResults = getConfimationPopupResults(count);
 		verifyConfirmationmodalResults(count, werallyResults, confirmationProviderResults);
 	}
@@ -506,9 +517,9 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		jsClickNew(modalEditdoctors);
 		jsClickNew(modalFinddoctors);
 		if (muliDoctor2.equalsIgnoreCase("YES"))
-			validateLinksanotherWindow(curdriverhandle, "Doctors", doctorName2, 3);
+			validateLinksanotherWindow(curdriverhandle, "Doctors", doctorName2, 3, locationCount);
 		else
-			validateLinksanotherWindow(curdriverhandle, "Doctors", doctorName2, 1);
+			validateLinksanotherWindow(curdriverhandle, "Doctors", doctorName2, 1, locationCount);
 		Assert.assertTrue(modalDoctorsList.size() > confirmationSize, "Error in adding another Provider through Edit");
 		nextPageValidationDoctor();
 	}
@@ -540,9 +551,9 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 		threadsleep(5000);
 		if (doctor.equalsIgnoreCase("Lookup")) {
 			if (multiDoctor.equalsIgnoreCase("YES"))
-				validateLinksanotherWindow(curWindow, "Doctors", doctorsName, 3);
+				validateLinksanotherWindow(curWindow, "Doctors", doctorsName, 3, locationCount);
 			else
-				validateLinksanotherWindow(curWindow, "Doctors", doctorsName, 1);
+				validateLinksanotherWindow(curWindow, "Doctors", doctorsName, 1, locationCount);
 		}
 		jsClickNew(modalContinuedoctors);
 	}
@@ -550,8 +561,9 @@ public class PlanRecommendationEngineDoctorsPage extends UhcDriver {
 	public void addProviderEdit(String search) {
 		String curWindow = driver.getWindowHandle();
 		System.out.println(curWindow);
-		validateLinksanotherWindow(curWindow, "Doctors", search, 1);
+		validateLinksanotherWindow(curWindow, "Doctors", search, 1, locationCount);
 		threadsleep(5000);
 	}
 
 }
+

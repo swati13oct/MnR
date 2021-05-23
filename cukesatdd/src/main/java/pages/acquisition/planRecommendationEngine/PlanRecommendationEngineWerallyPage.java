@@ -86,6 +86,18 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	@FindBy(css = "label#label_unsaved_selectedLocation0")
 	private WebElement firstLocation;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation1")
+	private WebElement secondLocation;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation2")
+	private WebElement thirdLocation;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation3")
+	private WebElement fourthLocation;
+	
+	@FindBy(css = "label#label_unsaved_selectedLocation4")
+	private WebElement fivthLocation;
 
 	@FindBy(css = "button[aria-describedby*='locationRequired']")
 	private WebElement locationSave;
@@ -99,7 +111,7 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 	@FindBy(css = "a[track='Saved']")
 	private WebElement viewSavedbutton;
 	
-	public ArrayList<String> werallySearch(String type, String searchParameter, int count) {
+	public ArrayList<String> werallySearch(String type, String searchParameter, int count, int locationCount) {
 		System.out.println("Werally " + type + " Search Operation");
 		ArrayList<String> doctorsName = new ArrayList<String>();
 		ArrayList<String> doctorsSPecialtyName = new ArrayList<String>();
@@ -118,21 +130,23 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 			if (type.toUpperCase().contains("DOCTORS")) {
 				searchBox.sendKeys(searchParameter);
 				threadsleep(2000);
+
 //				searchButton.click();
 				jsClickNew(searchButton);
 				validate(serachResultsCount, 30);
+
 				int actualResultscount = Integer.parseInt(serachResultsCount.getText().trim().split(" ")[0]);
 				if (actualResultscount >= count) {
 					for (int i = count - 1; i >= 0; i--) {
 						threadsleep(5000);
-						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h2")).getText().trim());
+						doctorsName.add(searchResults.get(i).findElement(By.cssSelector("h3")).getText().trim());
 						doctorsSPecialtyName.add(searchResults.get(i)
 								.findElement(By.cssSelector("div[class='small specialties']")).getText().trim());
 						WebElement saveButton = searchResults.get(i)
-								.findElement(By.cssSelector("div[class*='hidden'] button"));
+								.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
 						if (count > 1) {
 							if (i != 0) {
-								WebElement doc = searchResults.get(i - 1).findElement(By.cssSelector("h2"));
+								WebElement doc = searchResults.get(i - 1).findElement(By.cssSelector("h3"));
 								scrollToView(doc);
 							} else
 								scrollToView(serachResultsCount);
@@ -140,9 +154,13 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 						jsClickNew(saveButton);
 						threadsleep(3000);
 //						doctorsName.add(doctorNameinWerally.getText().trim());
+						if(locationCount >= 5 )
+							chooseFiveLocation();
 						chooseFirstLocation();
+
 //						saveModalCloseContinueSearchbutton.click();
 						jsClickNew(saveModalCloseContinueSearchbutton);
+
 					}
 				} else {
 					System.out.println("Required search Results is not Returned");
@@ -150,15 +168,19 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 				}
 
 			}
+
 //			desktopLogo.click();
 			jsClickNew(desktopLogo);
+
 		}
+
 //		viewSavedbutton.click();
 		jsClickNew(viewSavedbutton);
 		threadsleep(3000);
 //		savedFinishReturnButton.click();
 		jsClickNew(savedFinishReturnButton);
 		waitForPageLoadSafari();
+
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, 2);
 			if (wait.until(ExpectedConditions.alertIsPresent()) == null) {
@@ -181,8 +203,28 @@ public class PlanRecommendationEngineWerallyPage extends UhcDriver {
 
 	public void chooseFirstLocation() {
 		if (validate(firstLocation, 5)) {
+
 //			firstLocation.click();
 			jsClickNew(firstLocation);
+
+			threadsleep(1000);
+			jsClickNew(locationSave);
+			threadsleep(2000);
+		}
+	}
+	
+	public void chooseFiveLocation() {
+		if (validate(firstLocation, 5)) {
+//			firstLocation.click();
+			jsClickNew(firstLocation);
+			threadsleep(1000);
+			jsClickNew(secondLocation);
+			threadsleep(1000);
+			jsClickNew(thirdLocation);
+			threadsleep(1000);
+			jsClickNew(fourthLocation);
+			threadsleep(1000);
+			jsClickNew(fivthLocation);
 			threadsleep(1000);
 			jsClickNew(locationSave);
 			threadsleep(2000);

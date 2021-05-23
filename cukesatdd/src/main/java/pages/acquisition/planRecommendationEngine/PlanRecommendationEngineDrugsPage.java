@@ -1,10 +1,7 @@
-/**
-* 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,13 +13,11 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.WerallyMobilePage;
 
-public class PlanRecommendationEngineDrugsPage extends UhcDriver {
+public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineDrugsPage(WebDriver driver) {
 		super(driver);
@@ -32,7 +27,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -44,6 +39,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	public static ArrayList<String> drugNames = new ArrayList<String>();
 	public static ArrayList<String> drugNamesStartOver = new ArrayList<String>();
 	public static ArrayList<String> drugNamesinPRE = new ArrayList<String>();
+	
+
 
 	@FindBy(id = "planSelectorTool")
 	private WebElement iframePst;
@@ -152,6 +149,9 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	@FindBy(css = "#modal #frequency-select")
 	private WebElement modalFrequencySelect;
 
+	@FindBy(css = "#modal #new-drug-refill")
+	private WebElement modalSLengthSelect;
+	
 	@FindBy(css = "#modal uhc-alert")
 	private WebElement modalError;
 
@@ -195,18 +195,18 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
-//                                                Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//                                                Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
 		validate(pageProgressPercentage, 30);
 		desktopCommonUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo);
-//                                                Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//                                                Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 		validate(drugTitle);
-//                                                Assert.assertTrue(drugTitle.getText().contains("prescription "));
+//                                                Assertion.assertTrue(drugTitle.getText().contains("prescription "));
 		validate(yesOption, 30);
-//                                                Assert.assertTrue(yesOption.getText().contains("Yes"));
+//                                                Assertion.assertTrue(yesOption.getText().contains("Yes"));
 		validate(noOption, 30);
-//                                                Assert.assertTrue(noOption.getText().contains("No"));
+//                                                Assertion.assertTrue(noOption.getText().contains("No"));
 		previousBtn.click();
 		System.out.println("Validating " + page + " page Previous button functionality");
 		desktopCommonUtils.previousPageValidation(page.toUpperCase());
@@ -223,25 +223,25 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 		validate(progressbar);
 		validate(drugsearchbuildpres);
 		validate(drugsearchdescription);
-//                            			Assert.assertTrue(drugsearchdescription.getText().contains("drug"));
+//                            			Assertion.assertTrue(drugsearchdescription.getText().contains("drug"));
 		validate(drugsearchBox);
 		validate(drugsearchButton);
 		validate(continueBtn);
 		previousBtn.click();
-//                            			Assert.assertTrue(yesOption.getText().contains("add"));
+//                            			Assertion.assertTrue(yesOption.getText().contains("add"));
 		continueBtn.click();
 	}
 
 //Drugs Search Generic Element Verification Method
 	public void genericElements() {
 		validate(modalGenericDescription, 30);
-//                            		Assert.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
+//                            		Assertion.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
 		validate(modalGenericDrug, 30);
-//                            		Assert.assertTrue(modalGenericDrug.getText().contains("TAB"));
+//                            		Assertion.assertTrue(modalGenericDrug.getText().contains("TAB"));
 		validate(modalGenericKeep, 30);
-//                            		Assert.assertTrue(modalGenericKeep.getText().contains("Keep"));
+//                            		Assertion.assertTrue(modalGenericKeep.getText().contains("Keep"));
 		validate(modalGenericSwitchLabel, 30);
-//                            		Assert.assertTrue(modalGenericSwitch.getText().contains("Switch"));
+//                            		Assertion.assertTrue(modalGenericSwitch.getText().contains("Switch"));
 	}
 
 // Selecting drug options in Drug Costs Page
@@ -271,6 +271,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 //Drug option selects in Drug page
 
 	public void drugsInitiate(String drugSelection) {
+		threadsleep(3000);
 		drugpageOptions(drugSelection);
 		jsClickNew(continueBtn);
 		validate(drugsearchBox);
@@ -284,7 +285,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 		String dosage = "";
 		String packageName = "";
 		String count = "";
-		boolean threeeMonthfrequency = false;
+		String frequency = "";
+		boolean threeeMonthSLength = false;
 		boolean GenericDrug = false;
 		boolean switchGeneric = false;
 
@@ -299,14 +301,15 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 				dosage = drugDetails[2];
 				packageName = drugDetails[3];
 				count = drugDetails[4];
-				if (drugDetails[5].toUpperCase().equals("3"))
-					threeeMonthfrequency = true;
-				if (drugDetails[6].toUpperCase().equals("YES"))
-					GenericDrug = true;
+				frequency = drugDetails[5];
+				if (drugDetails[6].toUpperCase().equals("3"))
+					threeeMonthSLength = true;
 				if (drugDetails[7].toUpperCase().equals("YES"))
+					GenericDrug = true;
+				if (drugDetails[8].toUpperCase().equals("YES"))
 					switchGeneric = true;
 
-				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
+				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, frequency, threeeMonthSLength,
 						GenericDrug, switchGeneric);
 			}
 		}
@@ -412,8 +415,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			threadsleep(1000);
 			drugNames.add(drugNameList.get(i).findElement(By.cssSelector("p:nth-child(1)")).getText().trim()
 					.toUpperCase() + " "
-					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim()				//E2E : Added trim()
-					.toUpperCase());
+					+ drugNameList.get(i).findElement(By.cssSelector("p:nth-child(2)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
 		}
 		Collections.sort(drugNames);
 		System.out.println("Drugs Name list is : " + drugNames);
@@ -426,7 +428,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 
 		String drugName = drugInfo.split(",")[0];
 		boolean generic = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			generic = true;
 		drugsSearchpageElements();
 
@@ -489,7 +491,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 //Adding Drug Functionality
 
 	public void addDrugbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
-			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
+			String count, String frequency, boolean threeeMonthSLength, boolean GenericDrug, boolean switchGeneric) {
 		try {
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
@@ -514,7 +516,8 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			threadsleep(2000);
 			Select dos = new Select(modalDosageSelect);
 			Select freq = new Select(modalFrequencySelect);
-
+			Select slen = new Select(modalSLengthSelect);
+			
 			if (!dosage.isEmpty())
 				dos.selectByVisibleText(dosage);
 			if (!packageName.isEmpty()) {
@@ -525,8 +528,11 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 				modalQuantity.clear();
 				modalQuantity.sendKeys(count);
 			}
-			if (threeeMonthfrequency)
-				freq.selectByVisibleText("Every 3 Months");
+			
+			freq.selectByVisibleText(frequency);
+			
+			if (threeeMonthSLength)
+				slen.selectByVisibleText("Every 3 Months");
 
 			threadsleep(4000);
 			jsClickNew(modalcontinue);
@@ -596,7 +602,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 			generic = true;
 		String count = drugInfo.split(",")[4];
 		boolean GenericDrug = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			GenericDrug = true;
 		System.out.println("Validating Modal Error functionalities");
 
@@ -610,7 +616,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 
 		/*
 		 * Not working in PRE but working in PROD modalcontinue.click();
-		 * Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
+		 * Assertion.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
 		 * "Expected Error Message is not displayed");
 		 */
 		modalQuantity.sendKeys(count);
@@ -640,7 +646,7 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	public void drugChoose(String searchText, String drugInfo) {
 		String drugName = drugInfo.split(",")[0];
 		boolean generic = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			generic = true;
 		validate(drugsearchBox, 30);
 		drugsearchBox.sendKeys(searchText);
@@ -745,3 +751,4 @@ public class PlanRecommendationEngineDrugsPage extends UhcDriver {
 	}
 
 }
+

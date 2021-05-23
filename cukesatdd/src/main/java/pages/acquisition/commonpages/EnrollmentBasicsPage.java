@@ -10,7 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
-import junit.framework.Assert;
+import atdd.framework.Assertion;
 
 public class EnrollmentBasicsPage extends GlobalWebElements {
 
@@ -67,7 +67,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 	@FindBy(xpath="//a[contains(@class, 'back-to-top')]")
     private WebElement backToTop;
 	
-	@FindBy(xpath="//a[contains(text(),'Social Security website')]")
+	@FindBy(xpath="//a//span[contains(text(),'Social Security website')]")
 	private WebElement lnkSocialSecurity;
 	
 	public WebElement getBtnNext() {
@@ -150,29 +150,29 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 
 	public void checkInnerLinks() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkOriginalMedicare=driver.findElement(By.xpath("//a[contains(text(),'When can I enroll in Original Medicare or apply fo')]"));
+		WebElement lnkOriginalMedicare=driver.findElement(By.xpath("//a//span[contains(text(),'When can I enroll in Original Medicare or apply fo')]"));
 		scrollToView(lnkOriginalMedicare);
 		jsClickNew(lnkOriginalMedicare);
 		sleepBySec(3);
-		WebElement lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to top')])[1]"));
+		WebElement lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to Top')])[1]"));
 		scrollToView(lnkBack);
 		jsClickNew(lnkBack);
 		System.out.print("Link Clicked: When can I enroll in Original Medicare or apply for more coverage?");
 		
-		WebElement lnkChangPlans=driver.findElement(By.xpath("//a[contains(text(),'How do I know if I should change plans?')]"));
+		WebElement lnkChangPlans=driver.findElement(By.xpath("//a//span[contains(text(),'How do I know if I should change plans?')]"));
 		scrollToView(lnkChangPlans);
 		jsClickNew(lnkChangPlans);
 		sleepBySec(3);
-		lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to top')])[2]"));
+		lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to Top')])[2]"));
 		scrollToView(lnkBack);
 		jsClickNew(lnkBack);
 		System.out.print("Link Clicked: How do I know if I should change plans?");
 		
-		WebElement lnkAdditionCoverage=driver.findElement(By.xpath("//a[contains(text(),'When can I change my Medicare plan or apply for ad')]"));
+		WebElement lnkAdditionCoverage=driver.findElement(By.xpath("//a//span[contains(text(),'When can I change my Medicare plan or apply for ad')]"));
 		scrollToView(lnkAdditionCoverage);
 		jsClickNew(lnkAdditionCoverage);
 		sleepBySec(3);
-		lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to top')])[3]"));
+		lnkBack=driver.findElement(By.xpath("(//a[contains(text(),'Back to Top')])[3]"));
 		scrollToView(lnkBack);
 		jsClickNew(lnkBack);
 		System.out.print("Link Clicked: When can I change my Medicare plan or apply for additional coverage?");	
@@ -183,19 +183,19 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		validateNew(lnkSocialSecurity);
 		scrollToView(lnkSocialSecurity);
 		switchToNewTabNew(lnkSocialSecurity);
-		
 		if(driver.getCurrentUrl().contains("https://www.ssa.gov/benefits/medicare/")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Social Security Link open Successfully\tURL: "+driver.getCurrentUrl());
 			sleepBySec(5);
 			driver.close();
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 			
 		}else {
-			Assert.fail("Social Security Link did not open Successfully");
+			Assertion.fail("Social Security Link did not open Successfully");
 		}	
 	}
-	@FindBy(xpath="//p[contains(text(),'See plans available in your area')]")
+	@FindBy(xpath="//*[contains(text(),'plans available in your area')]")
 	private WebElement lnkSeePlans;
 	
 	public void clickSeePlans() {
@@ -206,14 +206,15 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		sleepBySec(10);
 		if(driver.getCurrentUrl().contains("/health-plans.html#/plan-summary")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Plan Summary Page open Successfully");
 			waitForPageLoadSafari();
 			sleepBySec(5);
 			driver.close();
-			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);			
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		}else {
-			Assert.fail("Plan Summary Page did not open Successfully");
+			Assertion.fail("Plan Summary Page did not open Successfully");
 		}
 		
 	}
@@ -227,7 +228,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		if(driver.getCurrentUrl().contains("/enroll/ma-enrollment.html")) {
 			System.out.println("MA Enrollment Page opened Successfully : "+ driver.getCurrentUrl());
 		}else {
-			Assert.fail("MA Enrollment Page did not opened Successfully");
+			Assertion.fail("MA Enrollment Page did not opened Successfully");
 		}
 	}
 	
@@ -240,7 +241,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		if(driver.getCurrentUrl().contains("/enroll/pdp-enrollment")) {
 			System.out.println("PDP Enrollment Page opened Successfully : "+ driver.getCurrentUrl());
 		}else {
-			Assert.fail("PDP Enrollment Page did not opened Successfully");
+			Assertion.fail("PDP Enrollment Page did not opened Successfully");
 		}
 	}
 	public void clickMedSupEnrolllink() {
@@ -252,7 +253,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		if(driver.getCurrentUrl().contains("/enroll/ms-apply")) {
 			System.out.println("MedSup Enrollment Page opened Successfully: " + driver.getCurrentUrl());
 		}else {
-			Assert.fail("MedSup Enrollment Page did not opened Successfully");
+			Assertion.fail("MedSup Enrollment Page did not opened Successfully");
 		}
 	}
 	
@@ -264,25 +265,25 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		System.out.println("Learn About Eligiblity link Clicked.");
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(driver.getCurrentUrl().contains("medicare-education/medicare-eligibility.html")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Learn About Eligiblity link opened successfully.\n "+ driver.getCurrentUrl());
 		}else {
-			Assert.fail("Learn About Eligiblity link did not opened successfully.");
+			Assertion.fail("Learn About Eligiblity link did not opened successfully.");
 		}
 	}
 	
 	public void clickLearnEnrollmentLink() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkEnrollBasics=driver.findElement(By.xpath("//span//a[contains(@href,'enrollment-and-changing-plans.html')]"));
+		WebElement lnkEnrollBasics=driver.findElement(By.xpath("//span//a[contains(@href,'when-to-enroll')]"));
 		scrollToView(lnkEnrollBasics);
 		jsClickNew(lnkEnrollBasics);
 		System.out.println("Learn About Enrollment link Clicked.");
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html")) {
-			Assert.assertTrue(true);
+		if(driver.getCurrentUrl().contains("medicare-education/when-to-enroll")) {
+			Assertion.assertTrue(true);
 			System.out.println("Learn About Enrollment link opened successfully.\n"+ driver.getCurrentUrl());
 		}else {
-			Assert.fail("Learn About Enrollment link did not opened successfully.");
+			Assertion.fail("Learn About Enrollment link did not opened successfully.");
 		}
 	}
 

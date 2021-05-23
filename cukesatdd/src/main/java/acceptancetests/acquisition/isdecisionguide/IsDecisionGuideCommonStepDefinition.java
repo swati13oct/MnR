@@ -1,21 +1,20 @@
 package acceptancetests.acquisition.isdecisionguide;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.isdecisionguide.DGR_ThankYouPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep2;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class IsDecisionGuideCommonStepDefinition {
 	
@@ -52,13 +51,14 @@ public class IsDecisionGuideCommonStepDefinition {
 	 
 	@Then("^the user enters and  saves the entered information in Pre-entry page for validation on IS form$")
 	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_IS_form(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String dateOfBirth= memberAttributesMap.get("DOB");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> PreEntryPageInfo = new HashMap<String, String>();
@@ -108,7 +108,7 @@ public class IsDecisionGuideCommonStepDefinition {
 			System.out.println("Successfully navigated to IS Decision Guide Step 1 Page");
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
 		} else {
-			Assert.assertTrue("PROBLEM - Is Decision Guide Step 1 Page is null", false);
+			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 1 Page is null", false);
 		}
 	}
 
@@ -118,7 +118,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
 		boolean Validation_Flag = DecisionGuideStep1Page.blankFieldValidation();
 		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 1 Page Blank Field Error Validation failed", false);
+			Assertion.assertTrue("PROBLEM - Step 1 Page Blank Field Error Validation failed", false);
 		}
 		else
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
@@ -130,7 +130,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
 		boolean Validation_Flag = DecisionGuideStep1Page.invalidFieldValidation();
 		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Data Field Error Validation failed", false);
+			Assertion.assertTrue("PROBLEM - Step 1 Page Invalid Data Field Error Validation failed", false);
 		}
 		else
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
@@ -142,7 +142,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
 		boolean Validation_Flag = DecisionGuideStep1Page.NextBtn_invalidAddressValidation();
 		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 1 Page Invalid Address Error Validation failed", false);
+			Assertion.assertTrue("PROBLEM - Step 1 Page Invalid Address Error Validation failed", false);
 		}
 		else
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
@@ -151,13 +151,14 @@ public class IsDecisionGuideCommonStepDefinition {
 	@Then("^the user enters valid information for the following fields$")
 	public void the_user_enters_valid_information_for_the_following_fields(DataTable givenAttributes) throws Throwable {
 
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
 		DecisionGuideStep1Page.enterUserInfoStep1(memberAttributesMap);
@@ -170,7 +171,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
 		boolean Validation_Flag = DecisionGuideStep1Page.Validate_addressAutoComplete();
 		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 1 Page Address Aut Complete Validation failed", false);
+			Assertion.assertTrue("PROBLEM - Step 1 Page Address Aut Complete Validation failed", false);
 		}
 		else
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE1,DecisionGuideStep1Page);
@@ -184,7 +185,7 @@ public class IsDecisionGuideCommonStepDefinition {
 			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
 		} else {
-			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
 
 	}
@@ -194,7 +195,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		IsDecisionGuideStep2 DecisionGuideStep2Page  =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
 		boolean Validation_Flag = DecisionGuideStep2Page.blankFieldValidation();
 		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 2 Page Blank Field Error Validation failed", false);
+			Assertion.assertTrue("PROBLEM - Step 2 Page Blank Field Error Validation failed", false);
 		}
 		else
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
@@ -206,7 +207,7 @@ public class IsDecisionGuideCommonStepDefinition {
 		IsDecisionGuideStep2 DecisionGuideStep2Page =(IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
 		boolean Validation_Flag = DecisionGuideStep2Page.invalidFieldValidation();
 		if(!Validation_Flag){
-			Assert.assertTrue("PROBLEM - Step 2 Page Invalid Data Field Error Validation failed", false);
+			Assertion.assertTrue("PROBLEM - Step 2 Page Invalid Data Field Error Validation failed", false);
 		}
 		else
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
@@ -240,7 +241,7 @@ public class IsDecisionGuideCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,dgrThankYouPage);
 			getLoginScenario().saveBean(PageConstants.DGR_THANKYOU_PAGE,dgrThankYouPage);
 		} else {
-			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
 
 	}
@@ -254,13 +255,14 @@ public class IsDecisionGuideCommonStepDefinition {
 	public void the_user_enters_valid_information_errors_for_the_following_fields_in_IS_Pages(DataTable givenAttributes) throws Throwable {
 
 		
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 
 		IsDecisionGuideStep1 DecisionGuideStep1Page =(IsDecisionGuideStep1) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE1);
 		DecisionGuideStep1Page.enterUserInfoSteperror(memberAttributesMap);
@@ -277,7 +279,7 @@ public class IsDecisionGuideCommonStepDefinition {
 			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE,planSummaryPage);
 		} else {
-			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
 	}
 	
@@ -289,8 +291,34 @@ public class IsDecisionGuideCommonStepDefinition {
 			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
 		} else {
-			Assert.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
 		}
 
+	}
+	
+	
+	@Then("^the user fill details on the IS pages and click on submit button back to vpp page$")
+	public void the_user_fill_details_on_IS_page_submit_button_findplans_button_and_navigate_to_vpp_page() throws Throwable {
+			
+		IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
+		String dateOfBirth= (String) getLoginScenario().getBean(MedSuppCommonConstants.DOB);
+		Map<String, String> PreEntryPageInfo=  new HashMap<String, String>();
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+		PreEntryPageInfo = DecisionGuideStep2Page.CapturePreEntryPageInfoISDecisionGuide(dateOfBirth);
+		String DOBEntered = PreEntryPageInfo.get("DOB");
+		String part_A_Month_Entered = PreEntryPageInfo.get("part_A_Month_Entered");
+		String part_A_Year_Entered = PreEntryPageInfo.get("part_A_Year_Entered");
+		String part_B_Month_Entered = PreEntryPageInfo.get("part_B_Month_Entered");
+		String part_B_Year_Entered = PreEntryPageInfo.get("part_B_Year_Entered");
+		String start_Date_Entered =PreEntryPageInfo.get("startDateEntered");
+		//getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+		if (DecisionGuideStep2Page != null) {
+			System.out.println("Successfully navigated to IS Decision Guide Step 2 Page");
+			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
+		} else {
+			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
+		}
 	}
 }

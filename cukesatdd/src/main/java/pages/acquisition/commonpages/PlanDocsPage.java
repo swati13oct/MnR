@@ -3,17 +3,14 @@
  */
 package pages.acquisition.commonpages;
 
-import java.util.List;
-
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 
 /**
  * @author saduri driver.findElement(By.xpath(".//label[@for='currentYear']")).click();
@@ -22,10 +19,10 @@ import acceptancetests.util.CommonUtility;
 public class PlanDocsPage extends GlobalWebElements{	
 
 	@FindBy(xpath = "//h1")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//h2")
-	public static WebElement subtitle;
+	public WebElement subtitle;
 	
 	@FindBy( xpath= ".//label[@for='zip-code']")
 	private WebElement labelZipCode;
@@ -77,28 +74,28 @@ public class PlanDocsPage extends GlobalWebElements{
 	
 	public void validateContent() {		
 		if(header.getText().contains("Plan Documents Search")){
-			Assert.assertTrue("Heading is::"+header, true); 	
+			Assertion.assertTrue("Heading is::"+header, true); 	
 		}else
-			Assert.fail("Heading is not matching");
+			Assertion.fail("Heading is not matching");
 		
 		if(subtitle.getText().contains("To find your plan-specific documents enter your ZIP code, then choose your plan.")){
-			Assert.assertTrue("Sub Heading is is::"+subtitle, true); 	
+			Assertion.assertTrue("Sub Heading is is::"+subtitle, true); 	
 		}else
-			Assert.fail("subheading is not matching");
+			Assertion.fail("subheading is not matching");
 	}
 	
 	public void validateLabels() {
 		System.out.println("labelZipCode=="+labelZipCode.getText());
 		if(labelZipCode.getText().contains("Enter ZIP code")){
-			Assert.assertTrue("Zipcode is::"+labelZipCode.getText(), true); 	
+			Assertion.assertTrue("Zipcode is::"+labelZipCode.getText(), true); 	
 		}else 
-			Assert.fail("Zipcode is not matching");		
+			Assertion.fail("Zipcode is not matching");		
 		
 		System.out.println("labelSelectCounty=="+labelSelectCounty.getText());
 		if(labelSelectCounty.getText().contains("Select a county")){
-			Assert.assertTrue("County is::"+labelSelectCounty.getText(), true); 	
+			Assertion.assertTrue("County is::"+labelSelectCounty.getText(), true); 	
 		}else
-			Assert.fail("County is not matching");
+			Assertion.fail("County is not matching");
 		
 	
 	}
@@ -134,10 +131,10 @@ public class PlanDocsPage extends GlobalWebElements{
 	public boolean verifyErrorZipCodeMessage() {
 		if(zipcodeerror.isDisplayed()){
 			zipcodeerror.getText().contains("Please enter a valid ZIP code");
-			Assert.assertTrue("zipcodeerror section is visible", true); 
+			Assertion.assertTrue("zipcodeerror section is visible", true); 
 			return true;
 		}else{
-			Assert.fail("zipcodeerror is not visible");
+			Assertion.fail("zipcodeerror is not visible");
 			return false;
 		}
 	}
@@ -145,10 +142,10 @@ public class PlanDocsPage extends GlobalWebElements{
 	public boolean verifyErrorCountyMessage() {
 		if(countyerror.isDisplayed()){
 			countyerror.getText().contains("Please select a county");
-			Assert.assertTrue("countyerror section is visible", true); 	
+			Assertion.assertTrue("countyerror section is visible", true); 	
 			return true;
 		}else{
-			Assert.fail("countyerror is not visible");
+			Assertion.fail("countyerror is not visible");
 			return false;
 		}
 	}
@@ -156,10 +153,10 @@ public class PlanDocsPage extends GlobalWebElements{
 	public boolean verifyErrorPlanMessage() {
 		if(planerror.isDisplayed()){
 			planerror.getText().contains("Please select a plan");
-			Assert.assertTrue("planerror section is visible", true); 	
+			Assertion.assertTrue("planerror section is visible", true); 	
 			return true;
 		}else{
-			Assert.fail("planerror is not visible");
+			Assertion.fail("planerror is not visible");
 			return false;
 		}		
 	}
@@ -172,9 +169,9 @@ public class PlanDocsPage extends GlobalWebElements{
 
 			if(PDF.isDisplayed()){
 				System.out.println("PDF is visible");
-				Assert.assertTrue("PDF section is visible", true); 	
+				Assertion.assertTrue("PDF section is visible", true); 	
 			}else
-				Assert.fail("PDF section is not visible");		
+				Assertion.fail("PDF section is not visible");		
 			
 		
 			if(driver.findElement(By.xpath("//*[@id='planDocuments']/div/div[1]/h4")).getText().equalsIgnoreCase("English"))

@@ -15,7 +15,7 @@
 #<> (placeholder)
 #""
 ## (Comments)
-@gladiators @acquisitionRegression @learnAboutMedicare 
+@gladiators @acquisitionRegression @learnAboutMedicare
 Feature: 1.01-Acq-To test learn about medicare flow in UHC site
 
   @learnAboutMedicare1 @regressionMember @uhc
@@ -25,8 +25,8 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
     When user clicks on learn about medicare link on uhc site
     And verifies URL, title of pages navigable from menu on uhc site
     When user clicks on learn about medicare link on uhc site
-#    And verifies navigation to learn about medicare homePage on uhc site
-#    And verifies accessibility of links using tabkey, back button on every page navigable from homepage on uhc site
+    #    And verifies navigation to learn about medicare homePage on uhc site
+    #    And verifies accessibility of links using tabkey, back button on every page navigable from homepage on uhc site
     And app navigates to medicare eligibility page on uhc site
     And verifies default value of state drop down on uhc site
     And verifies presence of video, sideLinks, back button and next button on medicare eligibility page on uhc site
@@ -42,11 +42,11 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
       | Option  | <option>  |
     And verifies Shop For a Plan Homepage on uhc site
     And views plan of a particular type on uhc site
-    |PlanType|<planType>|
-    ##MA MS SNP PDP
-#    And verifies plantype on uhc site
-#   |PlanType|<planType>|
+      | PlanType | <planType> |
 
+    ##MA MS SNP PDP
+    #    And verifies plantype on uhc site
+    #   |PlanType|<planType>|
     #TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType | option |
@@ -62,7 +62,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
       | PlanType | <planType> |
 
     ##MA MS SNP PDP
-	#TestCaseId:15524,15525,15526
+    #TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType |
       |   90002 | MA       |
@@ -76,7 +76,7 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
     And clicks on plans available option on uhc site
       | PlanType | <planType> |
 
-	#TestCaseId:15524,15525,15526
+    #TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType |
       |   90002 | PDP      |
@@ -92,12 +92,13 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
       | PlanType | <planType> |
     And verifies Shop For a Plan Homepage on uhc site
     And verifies plantype on uhc site
-    |PlanType|<planType>|
-	#TestCaseId:15524,15525,15526
+      | PlanType | <planType> |
+
+    #TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType |
       |   90002 | MA       |
-		
+
   @learnAboutMedicare5 @regressionMember @uhc
   Scenario Outline: Verify precscription drug plan flow from learn about medicare homePage
     Given user is on uhcmedicaresolutions site landing page
@@ -107,10 +108,11 @@ Feature: 1.01-Acq-To test learn about medicare flow in UHC site
     And verifies plan search with a valid zipcode on uhc site
       | ZipCode  | <zipcode>  |
       | PlanType | <planType> |
-	And verifies Shop For a Plan Homepage on uhc site
+    And verifies Shop For a Plan Homepage on uhc site
     And verifies plantype on uhc site
-    |PlanType|<planType>|
-	#TestCaseId:15524,15525,15526
+      | PlanType | <planType> |
+
+    #TestCaseId:15524,15525,15526
     Examples: 
       | zipcode | planType |
       |   90002 | PDP      |

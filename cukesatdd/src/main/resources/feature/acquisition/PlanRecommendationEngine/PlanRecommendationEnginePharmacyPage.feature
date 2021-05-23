@@ -1,4 +1,4 @@
-#@PlanRecommendationEngine
+#@planRecommendationEngine
 #Feature: Plan Recommendation Engine flow - Verify Pharmacy page in plan Recommendation Engine
 
 #  @PRE @planrecommendation @pharmacypage @pharmacyelementValidation @F374226

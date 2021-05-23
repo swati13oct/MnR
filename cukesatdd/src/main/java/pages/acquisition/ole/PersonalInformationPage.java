@@ -200,7 +200,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
 	private WebElement LeaveOnlineApplication;
 
-	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[4]")
 	private WebElement closepopup;
 	
 	public PersonalInformationPage(WebDriver driver) {
@@ -511,14 +511,7 @@ public class PersonalInformationPage extends UhcDriver{
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
-		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);*/
-		
-		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
-			System.out.println("OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
-		}
-		*/
+
 		
 		Thread.sleep(3000);
 			//if(driver.getCurrentUrl().contains("special")){
@@ -538,8 +531,10 @@ public class PersonalInformationPage extends UhcDriver{
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					 waitForPageLoadSafari();
+
 					 if(driver.getCurrentUrl().contains("special-election-period")){
 					  System.out.println("OLE SEP Page is Displayed"); } else {
+
 					  System.out.println("OLE SEP Page is not Displayed"); }
 					 return new SpecialElectionPeriodPage(driver);	
 				}
@@ -615,7 +610,9 @@ public class PersonalInformationPage extends UhcDriver{
 		 * System.out.println("Last Name Expected : "
 		 * +LastName+"       Displayed on page  - "+LastNameDisplayText);
 		 */
+
 		System.out.println("State Name Expected - "+ Mailing_State +"\tState Name Displayed on page  - "+StateDisplayText);
+
 		System.out.println("Zip Code Name Expected : "+ZipCode+"       Displayed on page  - "+ZipDisplayText);
 		
 		if(StateDisplayText.contains(Mailing_State) && ZipDisplayText.contains(ZipCode)){
@@ -639,6 +636,7 @@ public class PersonalInformationPage extends UhcDriver{
 		jsClickNew(enrollProfileYes);
 		jsClickNew(enrollSavedClose);
 		jsClickNew(aarpLogo);
+		waitforElement(shoppingCartIcon);
 		jsClickNew(shoppingCartIcon);
 		jsClickNew(lnkProfile);
 		if(driver.getCurrentUrl().contains("profile")) {

@@ -1,25 +1,32 @@
 package acceptancetests.mobile.acquisition.planrecommendationengine;
 
+import java.util.HashMap;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import acceptancetests.data.CommonConstants;
+import acceptancetests.data.PageConstants;
+import atdd.framework.DataTableParser;
+import atdd.framework.MRScenario;
+
 /**
  * @author Murali - mmurugas
  */
 
-import gherkin.formatter.model.DataTableRow;
 import io.appium.java_client.AppiumDriver;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEnginePrioritiesPage;
-import pages.mobile.acquisition.bluelayer.AcquisitionHomePageMobile;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
+import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.CoverageOptionsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.EditResponseMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.HeaderFooterMobile;
 import pages.mobile.acquisition.planrecommendationengine.LandingAndZipcodeMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
@@ -28,18 +35,6 @@ import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
-import pages.mobile.acquisition.planrecommendationengine.CostPreferencesMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.EditResponseMobilePage;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
-import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 public class PlanRecommendationStepDefinitionMobile {
 
@@ -51,16 +46,17 @@ public class PlanRecommendationStepDefinitionMobile {
 	}
 
 	AppiumDriver wd;
-	List<DataTableRow> inputRow;
+//	List<DataTableRow> inputRow;
 	HashMap<String, String> inputValues;
 	public static String PREflow="";
 
 	public void readfeaturedataMobile(DataTable data) {
-		inputRow = new ArrayList(data.getGherkinRows());
+//		inputRow = new ArrayList(data.getGherkinRows());
 		inputValues = new HashMap<String, String>();
-		for (int i = 0; i < inputRow.size(); i++) {
+		inputValues = DataTableParser.readDataTableAsMaps(data);
+		/*for (int i = 0; i < inputRow.size(); i++) {
 			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
-		}
+		}*/
 		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;

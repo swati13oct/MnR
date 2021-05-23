@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pages.acquisition.agentRecommendationEngine;
 
 import java.text.DateFormat;
@@ -209,10 +207,10 @@ public class AREPlanRanking extends UhcDriver {
 	@FindBy(css = ".multi-year-select button:nth-child(2)")
 	private WebElement futurePlanYear;
 	
-	@FindBy(css = "#plan-summary-table tr:nth-child(7)")
+	@FindBy(css = "#plan-summary-table tr:nth-child(8)")
 	private WebElement estimateMedicalCost;
 	
-	@FindBy(css = "#plan-summary-table tr:nth-child(7) div.text-small span")
+	@FindBy(css = "#plan-summary-table tr:nth-child(8) div.text-small span")
 	private List<WebElement> estimateMedicalCostvalue;
 
 	@FindBy(css = "div#multiSelect label[for='estimated_medical_costs']")
@@ -791,7 +789,7 @@ public class AREPlanRanking extends UhcDriver {
 		int planstart = 0;
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planstart = 1;
-//			Assert.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+//			Assertion.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		System.out.println("Verify Drug and Doctors Session Storage");
@@ -901,7 +899,7 @@ public class AREPlanRanking extends UhcDriver {
 		pageloadcomplete();
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planStartCount = 1;
-//			Assert.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+//			Assertion.assertTrue(drugplansDetails.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		List<String> newplansDetails = new ArrayList<String>();
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1081,7 +1079,7 @@ public class AREPlanRanking extends UhcDriver {
 		int planStartCount = 0;
 		if (curPlan.equalsIgnoreCase("yes")) {
 			planStartCount = 1;
-//			Assert.assertTrue(originalplanNames.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
+//			Assertion.assertTrue(originalplanNames.get(0).contains("CURRENTPLAN"), "Current Plan is not displayed by default");
 		}
 		List<String> newplansDetails = new ArrayList<String>();
 
@@ -1191,3 +1189,4 @@ public class AREPlanRanking extends UhcDriver {
 	}
 
 }
+

@@ -15,12 +15,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class EditResponseMobilePage extends UhcDriver {
+public class EditResponseMobilePage extends GlobalWebElements {
 
 	public EditResponseMobilePage(WebDriver driver) {
 		super(driver);
@@ -30,7 +27,7 @@ public class EditResponseMobilePage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -102,6 +99,12 @@ public class EditResponseMobilePage extends UhcDriver {
 	@FindBy(css = "#modal button[class*='primary']")
 	private WebElement locationModalConfirm;
 
+	@FindBy(css = "body>div#overlay")
+	private WebElement planLoaderscreen;
+
+	@FindBy(css = ".plan-overview-wrapper>div[class='overview-main'] h2")
+	private WebElement planZipInfo;
+	
 	// Variables
 
 	public HashMap<String, String> inputValues;
@@ -119,7 +122,7 @@ public class EditResponseMobilePage extends UhcDriver {
 		inputValues = userInput;
 		String currentPageUrl = driver.getCurrentUrl();
 		currentPageUrl.contains("/plan-recommendation-engine.html/");
-		pageloadcomplete();
+		plansLoader();
 		navigateEditResponsePageMobile(inputValues.get("Plan Type"));
 		checkContent("location");
 		checkContent("coverage");
@@ -379,7 +382,7 @@ public class EditResponseMobilePage extends UhcDriver {
 	public void editUserResponse(HashMap<String, String> userInput) {
 		System.out.println("Edit User Response: ");
 		inputValues = userInput;
-		pageloadcomplete();
+		plansLoader();
 		navigateEditResponsePageMobile(inputValues.get("Plan Type"));
 		editUpdate(inputValues.get("Plan Type").toLowerCase());
 		Assert.assertTrue(validate(viewUpdateButton, 10), "View Updated Button should be displayed");
@@ -400,7 +403,7 @@ public class EditResponseMobilePage extends UhcDriver {
 				"Progres Bar does not have required Info");
 		editValue(randomSection);
 		// cancelButton.click();
-		// Assert.assertTrue(validate(returnToPlanLink,10),"Invalid cancel action");
+		// Assertion.assertTrue(validate(returnToPlanLink,10),"Invalid cancel action");
 	}
 
 	public void editValue(String section) {
@@ -497,6 +500,14 @@ public class EditResponseMobilePage extends UhcDriver {
 	public void addDrugs(HashMap<String, String> userInput) {
 		inputValues = userInput;
 		editValue("drugs");
+	}
+	
+	public void plansLoader() {
+		pageloadcomplete();
+		validate(planLoaderscreen, 60);
+		waitforElementInvisibilityInTime(planLoaderscreen, 60);
+		validate(planZipInfo, 60);
+		threadsleep(5000);// Plan loader
 	}
 
 }

@@ -134,6 +134,9 @@ public class DrugMobilePage extends UhcDriver {
 
 	@FindBy(css = "#modal #frequency-select")
 	private WebElement modalFrequencySelect;
+	
+	@FindBy(css = "#modal #new-drug-refill")
+	private WebElement modalSLengthSelect;
 
 	@FindBy(css = "#modal uhc-alert")
 	private WebElement modalError;
@@ -184,13 +187,13 @@ public class DrugMobilePage extends UhcDriver {
 		validate(pageRequiredInfo);
 		validate(pageRequiredInfoAsteriskMark);
 		validate(drugPagePrimaryQuestion);
-		//Assert.assertTrue(drugPagePrimaryQuestion.getText().contains("drug"));
+		//Assertion.assertTrue(drugPagePrimaryQuestion.getText().contains("drug"));
 		validate(drugPagePrimaryQuestionMark);
 		validate(drugPagePrimaryQuestionDecsription);
 		validate(drugAddOption, 30);
-		//Assert.assertTrue(drugAddOption.getText().contains("add"));
+		//Assertion.assertTrue(drugAddOption.getText().contains("add"));
 		validate(drugSkipOption, 30);
-		//Assert.assertTrue(drugSkipOption.getText().contains("skip"));
+		//Assertion.assertTrue(drugSkipOption.getText().contains("skip"));
 		mobileUtils.mobileLocateElementClick(drugAddOption);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		System.out.println("Validating " + page + " page Previous button functionality");
@@ -231,6 +234,7 @@ public class DrugMobilePage extends UhcDriver {
 		String dosage = "";
 		String packageName = "";
 		String count = "";
+		String frequency = "";
 		boolean threeeMonthfrequency = false;
 		boolean GenericDrug = false;
 		boolean switchGeneric = false;
@@ -246,14 +250,15 @@ public class DrugMobilePage extends UhcDriver {
 				dosage = drugDetails[2];
 				packageName = drugDetails[3];
 				count = drugDetails[4];
-				if (drugDetails[5].toUpperCase().equals("3"))
+				frequency = drugDetails[5];
+				if (drugDetails[6].toUpperCase().equals("3"))
 					threeeMonthfrequency = true;
-				if (drugDetails[6].toUpperCase().equals("YES"))
-					GenericDrug = true;
 				if (drugDetails[7].toUpperCase().equals("YES"))
+					GenericDrug = true;
+				if (drugDetails[8].toUpperCase().equals("YES"))
 					switchGeneric = true;
 
-				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, threeeMonthfrequency,
+				addDrugbySearch(drugName, searchButtonClick, dosage, packageName, count, frequency, threeeMonthfrequency,
 						GenericDrug, switchGeneric);
 			}
 		}
@@ -290,35 +295,35 @@ public class DrugMobilePage extends UhcDriver {
 		//currentPageUrl.contains("/plan-recommendation-engine.html/");
 		validate(planSelectorPageTilte);
 		validate(pageStepsNumberName, 30);
-		//Assert.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
+		//Assertion.assertTrue(pageStepsNumberName.getText().contains("Step 6: Drug"));
 		validate(pageProgressPercentage, 30);
 		validate(progressbar);
 		validate(drugsearchbuildpres);
 		validate(drugsearchdescription);
-		//Assert.assertTrue(drugsearchdescription.getText().contains("drug"));
+		//Assertion.assertTrue(drugsearchdescription.getText().contains("drug"));
 		validate(drugsearchBox);
 		validate(drugsearchButton);
 		validate(continueBtn);
 		mobileUtils.mobileLocateElementClick(previousBtn);
 		validate(drugAddOption);
-		//Assert.assertTrue(drugAddOption.getText().contains("add"));
+		//Assertion.assertTrue(drugAddOption.getText().contains("add"));
 		mobileUtils.mobileLocateElementClick(continueBtn);
 	}
 
 	// Drugs Search Generic Element Verification Method
 	public void genericElements() {
 		validate(modalGenericDescription, 30);
-		//Assert.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
+		//Assertion.assertTrue(modalGenericDescription.getText().contains("switching to a generic drug"));
 		validate(modalGenericDrug, 30);
-		//Assert.assertTrue(modalGenericDrug.getText().contains("TAB"));
+		//Assertion.assertTrue(modalGenericDrug.getText().contains("TAB"));
 		validate(modalGenericKeep, 30);
-		//Assert.assertTrue(modalGenericKeep.getText().contains("Keep"));
+		//Assertion.assertTrue(modalGenericKeep.getText().contains("Keep"));
 		validate(modalGenericSwitchLabel, 30);
-		//Assert.assertTrue(modalGenericSwitch.getText().contains("Switch"));
+		//Assertion.assertTrue(modalGenericSwitch.getText().contains("Switch"));
 	}
 
 	public void addDrugbySearch(String drugName, boolean searchButtonClick, String dosage, String packageName,
-			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
+			String count, String frequency, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
 		try {
 			validate(drugsearchBox, 30);
 			threadsleep(2000);
@@ -342,7 +347,7 @@ public class DrugMobilePage extends UhcDriver {
 			threadsleep(2000);
 			Select dos = new Select(modalDosageSelect);
 			Select freq = new Select(modalFrequencySelect);
-
+			
 			if (!dosage.isEmpty())
 				mobileSelectOption(modalDosageSelect, dosage,true);
 			if (!packageName.isEmpty()) {
@@ -356,8 +361,11 @@ public class DrugMobilePage extends UhcDriver {
 				modalheader.click();
 				threadsleep(2000);
 			}
+			
+			mobileSelectOption(modalFrequencySelect, frequency,true);
+			
 			if (threeeMonthfrequency)
-				mobileSelectOption(modalFrequencySelect, "Every 3 Months",true);
+				mobileSelectOption(modalSLengthSelect, "Every 3 Months",true);
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
@@ -455,7 +463,7 @@ public class DrugMobilePage extends UhcDriver {
 
 		String drugName = drugInfo.split(",")[0];
 		boolean generic = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			generic = true;
 		drugsSearchpageElements();
 
@@ -542,7 +550,7 @@ public class DrugMobilePage extends UhcDriver {
 		String drugName = drugInfo.split(",")[0];
 		String count = drugInfo.split(",")[4];
 		boolean GenericDrug = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			GenericDrug = true;
 		System.out.println("Validating Modal Error functionalities");
 
@@ -558,7 +566,7 @@ public class DrugMobilePage extends UhcDriver {
 		/*
 		 * Not working in PRE but working in PROD modalQuantity.clear();
 		 * modalQuantity.click(); modalcontinue.click();
-		 * Assert.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
+		 * Assertion.assertTrue(modalError.getText().toUpperCase().contains("QUANTITY"),
 		 * "Expected Error Message is not displayed");
 		 */
 
@@ -589,7 +597,7 @@ public class DrugMobilePage extends UhcDriver {
 	public void drugChoose(String searchText, String drugInfo) {
 		String drugName = drugInfo.split(",")[0];
 		boolean generic = false;
-		if (drugInfo.split(",")[6].toUpperCase().equals("YES"))
+		if (drugInfo.split(",")[7].toUpperCase().equals("YES"))
 			generic = true;
 		validate(drugsearchBox, 30);
 		mobileUtils.mobileLocateElementSendkeys(drugsearchBox, searchText);
@@ -619,7 +627,7 @@ public class DrugMobilePage extends UhcDriver {
 				"Expected Error Message not displayed");
 	}
 
-	static ArrayList<String> addedDrugNames = new ArrayList<String>();
+	public static ArrayList<String> addedDrugNames = new ArrayList<String>();
 	
 	public void addDrugsPRE(String drugsDetails) {
 		drugsInitiate("Yes");

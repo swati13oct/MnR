@@ -5,17 +5,16 @@ package pages.acquisition.isdecisionguide;
 
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -92,6 +91,10 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 
 	@FindBy(xpath = "//input[contains(@class, 'city') and contains(@id, 'form-city') and contains(@name, 'city')]")
 	private WebElement CityTxt;
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public WebElement proactiveChatExitBtn;
+	
 
 	@FindBy(xpath = "//*[contains(@id, '-form-error-city')]")
 	private WebElement CityError;
@@ -426,15 +429,36 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		return flag;
 	
 	}
+	
+	private void CheckPageLoad() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 20);
 
+	}
+
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to CommonUtility.waitForPageLoadNew as
+																			// we're not trying to fail the test if it
+																			// isn't found
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}
+	
 	public void enterUserInfoStep1(Map<String, String> memberAttributesMap) {
 		String FirstName = memberAttributesMap.get("FirstName");
 		String LastName = memberAttributesMap.get("LastName");
 		String DistributionMethod = memberAttributesMap.get("DistributionMethod");
 		String Email = memberAttributesMap.get("Email");
-		FirstNameTxt.clear();
-		LastNameTxt.clear();
-		EmailTxt.clear();
+	//	FirstNameTxt.clear();
+	//	LastNameTxt.clear();
+	//	EmailTxt.clear();
+		driver.navigate().refresh();
 		FirstNameTxt.sendKeys(FirstName);
 		LastNameTxt.sendKeys(LastName);
 		if(DistributionMethod.equalsIgnoreCase("email")){
@@ -576,9 +600,10 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 		String LastName = memberAttributesMap.get("LastName");
 		String DistributionMethod = memberAttributesMap.get("DistributionMethod");
 		String Email = memberAttributesMap.get("Email");
-		FirstNameTxt.clear();
-		LastNameTxt.clear();
-		EmailTxt.clear();
+	//	FirstNameTxt.clear();
+	//	LastNameTxt.clear();
+	//	EmailTxt.clear();
+		driver.navigate().refresh();
 		FirstNameTxt.sendKeys(FirstName);
 		LastNameTxt.sendKeys(LastName);
 		if(DistributionMethod.equalsIgnoreCase("email")){

@@ -1,8 +1,8 @@
+
 package pages.acquisition.commonpages;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 
 public class MedicareEligibilityPage extends GlobalWebElements {
@@ -129,7 +130,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		String txtDefaultValueDropDown = option.getText() == "Select State" ? option.getText()
 				: option.getAttribute("value");
 		if (!txtDefaultValueDropDown.contains(("Select State")))
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		return txtDefaultValueDropDown;
 
 		/*
@@ -149,7 +150,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 			}
 		}
 
-		Assert.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
+		Assertion.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
 
 	}
 	/*side links of secondary pages of Learn about medicare*/
@@ -161,7 +162,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 			}
 		}
 
-		Assert.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
+		Assertion.assertTrue("Less or incorrect links are displayed", lstSideBarLinks.size() == j);
 
 	}
 	
@@ -177,7 +178,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		getTxtZipcode().sendKeys(zipCode);
 		switchToNewTabNew(btnZipcode);
 		System.out.println(getTitle());
-		Assert.assertTrue("Incorrect page is loaded", getTitle().contains("Find Medicare Plans"));
+		Assertion.assertTrue("Incorrect page is loaded", getTitle().contains("Find Medicare Plans"));
 		//btnZipcode.click();
 		validateNonPresenceOfElement(btnZipcode);
 		return driver;
@@ -192,13 +193,13 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
 		{
-			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			WebElement pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Enrollment Basics')]"));
 			waitforElementNew(pageHeader);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 			System.out.println("Initial Enrollment Period Page open correctly");
 			
 		}else {
-			Assert.fail("Initial Enrollment Period Page did not open correctly");
+			Assertion.fail("Initial Enrollment Period Page did not open correctly");
 		}
 		
 		driver.navigate().back();
@@ -239,7 +240,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		}
 		if (pageHeader!=null)
 		{
-			Assert.assertTrue(true);	
+			Assertion.assertTrue(true);	
 			waitforElementNew(pageHeader,8);
 			System.out.println(pageHeader.getText()+" page is displayed");
 			driver.navigate().back();
@@ -249,7 +250,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 				threadsleep(2000);
 			}
 		}else {
-			Assert.fail(plan+" MEd Ed page not displayed");
+			Assertion.fail(plan+" MEd Ed page not displayed");
 		}
 		
 	}
@@ -275,3 +276,4 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 	
 
 }
+

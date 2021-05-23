@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
 	ArrayList<String> druglistPRE;
 	public static ArrayList<String> DrugsList = new ArrayList<String>();
-	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
+	public static ArrayList<String> vppDrugsResults = new ArrayList<String>();
 	static ArrayList<String> DCEDrugsResults = new ArrayList<String>();
 
 	String page = "Drug Cost Estimator";
@@ -245,8 +243,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		int count = Integer.parseInt(drugcount.getText().split("drugs")[0].split(" ")[2]);
 		vppDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
-			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace("(Brand)", "").toUpperCase()+ "" +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("Qty ", "").replace(", refill", "").toUpperCase());
+			vppDrugsResults.add(drugsListinDCE.get(i).findElement(By.cssSelector("h4[class*='text-bold']")).getText().trim().replace(" (Brand)", "").toUpperCase()+ " " +
+					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
 		}
 		Collections.sort(vppDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+vppDrugsResults.size());
@@ -259,8 +257,8 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 		int count = drugsNamesinDCE.size();
 		DCEDrugsResults = new ArrayList<String>();
 		for (int i = count-1; i >= 0; i--){
-			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div[class='align-items-start'] span:nth-of-type(1)")).getText().trim().replace("(Brand)", "").toUpperCase()+ "" +
-					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("Qty ", "").replace(", refill", "").toUpperCase());
+			DCEDrugsResults.add(drugsNamesinDCE.get(i).findElement(By.cssSelector("div[class='align-items-start'] span:nth-of-type(1)")).getText().trim().replace("(Brand)", "").toUpperCase()+ " " +
+					drugsListinDCE.get(i).findElement(By.cssSelector("p:nth-child(3)")).getText().trim().replace("per ", "").replace(", refill", "").toUpperCase());
 		}
 		Collections.sort(DCEDrugsResults);
 		System.out.println("DrugsList in DCE Size is : "+DCEDrugsResults.size());
@@ -271,7 +269,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public void Pharmacytype() {
 		threadsleep(5000);
     	validate(PharmacyType);
-    	Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"), "Pharmacy is not default online");    			
+    	Assert.assertTrue(PharmacyType.getText().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
 	}
 	
 	public void getDruglist(){
@@ -290,3 +288,4 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	}
 
 }
+

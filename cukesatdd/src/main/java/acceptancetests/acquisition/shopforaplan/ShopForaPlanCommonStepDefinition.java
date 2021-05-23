@@ -2,21 +2,21 @@ package acceptancetests.acquisition.shopforaplan;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.EnrollmentBasicsPage;
 import pages.acquisition.commonpages.ResourcesPage;
@@ -43,7 +43,7 @@ public class ShopForaPlanCommonStepDefinition {
 			System.out.println("Shop for a plan drop down is opened");
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
 		} else {
-			Assert.fail("Issue in selecting a plan drop down");
+			Assertion.fail("Issue in selecting a plan drop down");
 		}
 	}
 
@@ -69,13 +69,14 @@ public class ShopForaPlanCommonStepDefinition {
 
 	@Given("^click on Learn how to enroll on enroll page$")
 	public void click_on_Learn_how_to_enroll_plan_on_enroll_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String planyear = "2019";
 		String plantype = givenAttributesMap.get("Plan Type");
 		String planName = givenAttributesMap.get("Plan Name");
@@ -97,13 +98,14 @@ public class ShopForaPlanCommonStepDefinition {
 
 	@Given("^click on how to enroll shop pages$")
 	public void click_on_how_to_enroll_Shopplan(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < givenAttributesRow.size(); i++) {
 
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		// String planyear = "2019";
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 		String plantype = givenAttributesMap.get("Plan Type");
@@ -144,6 +146,7 @@ public class ShopForaPlanCommonStepDefinition {
 	public void clicks_on_MA_shop_button() {
 		ShopPage shopPage = (ShopPage) getLoginScenario().getBean(PageConstants.SHOP_PAGE);
 		shopPage.clickOnMAShopButton();
+		getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
 
 	}
 
@@ -151,14 +154,14 @@ public class ShopForaPlanCommonStepDefinition {
 	public void clicks_on_PDP_shop_button() {
 		ShopPage shopPage = (ShopPage) getLoginScenario().getBean(PageConstants.SHOP_PAGE);
 		shopPage.clickOnPDPShopButton();
-
+		getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
 	}
 
 	@And("^the user clicks on the Shop button for Medicare DSNP Plan and navigates to DSNP plans page$")
 	public void clicks_on_SNP_shop_button() {
 		ShopPage shopPage = (ShopPage) getLoginScenario().getBean(PageConstants.SHOP_PAGE);
 		shopPage.clickOnSNPShopButton();
-
+		getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
 	}
 
 	@And("^click on provider search link on shop pages$")
@@ -264,7 +267,7 @@ public class ShopForaPlanCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
 		}
 		else {
-			Assert.fail("Issue in selecting a plan drop down");
+			Assertion.fail("Issue in selecting a plan drop down");
 		}
 	}
 	@Given("^click on Enroll Plan on Medicare Education Page for Medsupp plans$")
@@ -289,10 +292,11 @@ public class ShopForaPlanCommonStepDefinition {
 	
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
+		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		return memberAttributesMap;
 	}
 	
@@ -306,7 +310,7 @@ public class ShopForaPlanCommonStepDefinition {
 			System.out.println("Enroll Link opened Successfully");
 		}
 		else
-			Assert.fail("Enroll page is not loaded");
+			Assertion.fail("Enroll page is not loaded");
 	}
 	@Then("^the user click on MA Enroll Start button on Enroll Page$")
 	public void the_user_click_on_MA_Enroll_Start_button_on_Enroll_Page(){
@@ -394,5 +398,13 @@ public class ShopForaPlanCommonStepDefinition {
 	public void user_click_on_Get_Informed_button_for_Preventing_Medical_Fraud_link() {
 		ResourcesPage resourcePage= (ResourcesPage) getLoginScenario().getBean(PageConstants.RESOURCE_PAGE);
 		resourcePage.clickOnGetInformedMedicalFraudLink();
+	}
+	
+	@Given("^the user clicks on medicare supplement plans from shop for a plan$")
+	public void the_user_clicks_screen_over_the_shop_for_a_plan() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		String stateSelected=(String) getLoginScenario().getBean(CommonConstants.STATE_SELECTED);
+		acqusitionHomePage.clickMedSupp(stateSelected);
 	}
 }

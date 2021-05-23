@@ -6,7 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.bluelayer.ZipcodeLookupPage;
+import pages.acquisition.commonpages.ZipcodeLookupPage;
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
@@ -33,7 +33,7 @@ public class OurPlansPage extends UhcDriver {
 	private WebElement OurPlansLink;
 
 	@FindBy(id = "subnav_2")
-	public static WebElement ourPlansDropdown;
+	public WebElement ourPlansDropdown;
 
 	@FindBy(id = "nav-zipcode")
 	private WebElement zipfield;

@@ -2,7 +2,6 @@ package pages.acquisition.commonpages;
 
 import java.util.List;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 
 public class CostBasicsPage extends GlobalWebElements {
 
@@ -82,7 +82,8 @@ public class CostBasicsPage extends GlobalWebElements {
 	}
 	
 	public void navigatesExtraLinks() {
-		WebElement lnkDrugCost=driver.findElement(By.xpath("(//a[contains(@href,'extra-help-program')])[4]"));
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement lnkDrugCost=driver.findElement(By.xpath("//a[contains(@href,'extra-help-program')]"));
 		validateNew(lnkDrugCost);
 		jsClickNew(lnkDrugCost);
 		waitForPageLoadSafari();
@@ -96,7 +97,7 @@ public class CostBasicsPage extends GlobalWebElements {
 		
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkMedicaid=driver.findElement(By.xpath("(//a[contains(@href,'medicaid-dual')])[3]"));
+		WebElement lnkMedicaid=driver.findElement(By.xpath("//a[contains(@href,'medicaid-dual')]"));
 		validateNew(lnkMedicaid);
 		jsClickNew(lnkMedicaid);
 		waitForPageLoadSafari();
@@ -113,7 +114,7 @@ public class CostBasicsPage extends GlobalWebElements {
 	public void navigatesToMedicareSaving() {
 		
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkSavings=driver.findElement(By.xpath("//a[contains(text(),'Find out if you qualify for a Medicare Savings Pro')]"));
+		WebElement lnkSavings=driver.findElement(By.xpath("//span[contains(text(),'Find out if you qualify for Medicare Savings Pro')]"));
 		validateNew(lnkSavings);
 		switchToNewTabNew(lnkSavings);		
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -123,12 +124,13 @@ public class CostBasicsPage extends GlobalWebElements {
 		System.out.println("Actual   URL: "+driver.getCurrentUrl());
 		if(driver.getCurrentUrl().contains(urlCheck)) {
 			System.out.println("Medicare Saving Link open successfully");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}else{
-			Assert.fail("Medicare Saving Link did not open successfully");
+			Assertion.fail("Medicare Saving Link did not open successfully");
 		}
 		driver.close();
-		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 	}		
 	public void sleepBySec(int sec) {

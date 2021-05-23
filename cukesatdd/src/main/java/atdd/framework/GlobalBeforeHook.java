@@ -5,9 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cucumber.api.java.Before;
-
-
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 
 /**
  * 
@@ -15,11 +14,10 @@ import cucumber.api.java.Before;
  *
  */
 public class GlobalBeforeHook implements BeforeHook {
-	
 
-	@Autowired 
+	@Autowired
 	MRScenario globalScenario;
-	static List<String> tagsList=new ArrayList<String>();
+	List<String> tagsList = new ArrayList<String>();
 
 	public MRScenario getGlobalScenario() {
 		return globalScenario;
@@ -29,14 +27,12 @@ public class GlobalBeforeHook implements BeforeHook {
 		this.globalScenario = globalScenario;
 	}
 
-	@Before
 	public void setup() throws Exception {
-		getGlobalScenario().flushBeans();
+//		getGlobalScenario().flushBeans();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
 				try {
-					
-					//globalScenario.removeMember();
+					// globalScenario.removeMember();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -45,21 +41,26 @@ public class GlobalBeforeHook implements BeforeHook {
 			}
 		});
 	}
+
+	@Before
+	public List<String> beforeGlobal(Scenario scenario) {		
+		tagsList.clear();
+		for (String tag : scenario.getSourceTagNames()) {
+			tagsList.add(tag);
+			System.out.print("Tag: " + tag);
+		}
+
 		
-		@Before
-		public static List<String> beforeGlobal(cucumber.api.Scenario scenario){
-	           tagsList.clear();
-	        for(String tag : scenario.getSourceTagNames()){
-	        	
-	        	tagsList.add(tag);
-	          System.out.print("Tag: " + tag);
-	        }
-	      
-	        	//MRScenario.loadCSV();
-	       
-	       return tagsList;
-	    }
-	
-	
-	
+		scenario.log("Executing scenario using runner : " + MRScenario.getRunnerFileName());
+		return tagsList;
+	}
+
+	public List<String> getTagsList() {
+		return tagsList;
+	}
+
+	public void setTagsList(List<String> tagsList) {
+		this.tagsList = tagsList;
+	}
+
 }

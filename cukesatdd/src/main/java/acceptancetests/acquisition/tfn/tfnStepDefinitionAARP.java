@@ -1,43 +1,20 @@
 package acceptancetests.acquisition.tfn;
 
-/**
- * @author Tamzid
- *
- */
-
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.UlayerTFNPage;
-import pages.acquisition.ulayer.VPPPlanSummaryPage;
 
 public class tfnStepDefinitionAARP {
 
 	@Autowired
 	MRScenario loginScenario;
 
-	public MRScenario getLoginScenario() {
+	/*public MRScenario getLoginScenario() {
 		return loginScenario;
 	}
 	WebDriver wd;
 	AcquisitionHomePage acqHomePage;
-	UlayerTFNPage tfnPage;
+	commonpagesTFNPage tfnPage;
 	MRScenario mr;
 	
 	
@@ -55,7 +32,7 @@ public class tfnStepDefinitionAARP {
 			String amptfn = memberAttributesMap.get("TFN Number MA");
 			mr = new MRScenario();
 			wd = mr.getWebDriverNew();
-			tfnPage = new UlayerTFNPage(wd);
+			tfnPage = new commonpagesTFNPage(wd);
 			tfnPage.openUrl(url);
 			System.out.println(url);
 			//tfnPage.popupCheck();
@@ -66,7 +43,7 @@ public class tfnStepDefinitionAARP {
 				getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, tfnPage);
 			}
 			else{
-				Assert.fail("Error validating TFN in  VPP plan summary page");
+				Assertion.fail("Error validating TFN in  VPP plan summary page");
 			}
 
 
@@ -82,7 +59,7 @@ public class tfnStepDefinitionAARP {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}	
-		 tfnPage = new UlayerTFNPage(wd);
+		 tfnPage = new commonpagesTFNPage(wd);
 		String tfnNumber = memberAttributesMap.get("TFN Number MA");
 		tfnPage.navigateToVPPpage();
 		String tfn = tfnPage.validateMAtabTFN();
@@ -91,19 +68,19 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MA Tab displaying correct TFN");
 		}
 		else{
-			Assert.fail("TFN in  VPP plan summary page DID NOT Match");
+			Assertion.fail("TFN in  VPP plan summary page DID NOT Match");
 		}	
 	}
 	
 
 	@Then("^Navigate to Medicare Education to varify TFN for AMP version$")
 	public void navigate_to_Medicare_Education_to_varify_TFN_for_AMP_version() throws Exception{
-		 tfnPage = new UlayerTFNPage(wd);
+		 tfnPage = new commonpagesTFNPage(wd);
 		 tfnPage.learnAboutMedicareLink.click();
 		if(tfnPage.learnAboutmedicareTFN()==true){
 			System.out.println("TFN displaying properly on Learn abot medicare page");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -111,42 +88,42 @@ public class tfnStepDefinitionAARP {
 
 	@Then("^Navigate back to VPP and select MEdSup tab to varify TFN in right rail Display$")
 	public void navigate_back_to_VPP_and_select_MEdSup_tab_to_varify_TFN_in_right_rail_Display() throws Exception{
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		if(tfnPage.MedSupTFN()==true){
 			System.out.println("TFN displaying properly on Med Sup Right Rail ");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 	}
 
 	@Then("^Navigate back to VPP and select PDP tab to varify TFN$")
 	public void navigate_back_to_VPP_and_select_PDP_tab_to_varify_TFN() throws Throwable {
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		if(tfnPage.PDPTFN()==true){
 			System.out.println("TFN displaying properly on PDP Right Rail ");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 	}
 
 	@Then("^click plan and drug coverage button for any PDP plan to varify TFN$")
 	public void click_plan_and_drug_coverage_button_for_any_PDP_plan_to_varify_TFN() throws Exception {
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		if(tfnPage.PDPplanDrugCvrg()==true){
 			System.out.println("TFN displaying properly on PDP Plancand Drug coverafe Right Rail ");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 		
 	}
 
 	@Then("^varify the right rail Display of TFN on PDP OLE$")
 	public void varify_the_right_rail_Display_of_TFN_on_PDP_OLE() throws Throwable {
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		if(tfnPage.PdpOleTFN()==true){
 			System.out.println("TFN displaying properly on PDP Plancand Drug coverafe Right Rail ");
 		} else {
-			Assert.fail("TFN not displaying proper number/ or didnt dislay at all");
+			Assertion.fail("TFN not displaying proper number/ or didnt dislay at all");
 		}
 	}
 	
@@ -198,7 +175,7 @@ public class tfnStepDefinitionAARP {
 		mr = new MRScenario();
 		wd = mr.getWebDriverNew();
 		wd.manage().deleteAllCookies();
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.openUrl(url);
 		System.out.println(url);
 		String tfn = tfnPage.validateDirectPageTFN();
@@ -207,7 +184,7 @@ public class tfnStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.ACCOUNT_HOME_PAGE, tfnPage);
 		}
 		else{
-			Assert.fail("MA-TAB Page TFN Did Not Match the Expected TFN");
+			Assertion.fail("MA-TAB Page TFN Did Not Match the Expected TFN");
 		}
 
 
@@ -224,13 +201,13 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 		System.out.println("this is the Expected MedSUp-TAB TFN from Feature file: " + medicalsuptfn);
-		tfnPage = (UlayerTFNPage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		tfnPage = (commonpagesTFNPage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		String medsuptfn = tfnPage.medicalSupTFN_direct_2();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -245,13 +222,13 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 		System.out.println("this is the Expected MedSUp-TAB TFN from Feature file: " + medicalsuptfn);
-		tfnPage = (UlayerTFNPage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		tfnPage = (commonpagesTFNPage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		String medsuptfn = tfnPage.medicalSupTFN();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -267,13 +244,13 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 		System.out.println("this is the Expected MedSUp-TAB TFN from Feature file: " + medicalsuptfn);
-		tfnPage = (UlayerTFNPage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
+		tfnPage = (commonpagesTFNPage) getLoginScenario().getBean(PageConstants.ACCOUNT_HOME_PAGE);
 		String medsuptfn = tfnPage.medicalSupTFN_direct_2();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -299,7 +276,7 @@ public class tfnStepDefinitionAARP {
 		mr = new MRScenario();
 		wd = mr.getWebDriverNew();
 		//wd.manage().deleteAllCookies();
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.openUrl(url);
 		String hometfn = tfnPage.googleSearchAARP();
 		System.out.println("I am here");
@@ -310,7 +287,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Home Page displaying proper number");
 		}
 		else{
-			Assert.fail("Error validating plans in  Acqusition homepage TFN");
+			Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 		}
 		
 	}
@@ -326,14 +303,14 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		String medsuptfn = tfnPage.medicalSupTFNfromGoogle();
 		
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("Med Sup Tab displaying correct number");
 		}
 		else{
-			Assert.fail("Error validating plans in  VPP plan summary page");
+			Assertion.fail("Error validating plans in  VPP plan summary page");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
@@ -353,7 +330,7 @@ public class tfnStepDefinitionAARP {
 		System.out.println("this is the number from Feature file: " + tfn);
 		mr = new MRScenario();
 		wd = mr.getWebDriverNew();
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.openUrl(url);
 		tfnPage.popupCheck();
 		String hometfn = tfnPage.validateDeepLinkPageTFN();
@@ -362,7 +339,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Home Page displaying proper number");
 		}
 		else{
-			Assert.fail("Error validating plans in  Acqusition homepage TFN");
+			Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 		}
 	}
 	
@@ -376,13 +353,13 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 		System.out.println("this is the Expected MedSUp-TAB TFN from Feature file: " + medicalsuptfn);
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		String medsuptfn = tfnPage.medicalSupTFN_FromDeepLink1();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("MedSup Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN ");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN ");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -398,7 +375,7 @@ public class tfnStepDefinitionAARP {
 		String tfn = memberAttributesMap.get("AMPTFN");
 		System.out.println("this is the Expected MA-TAB TFN from Feature file: " + tfn);
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.reopenGoogle();
 		String hometfn = tfnPage.googleSearchAARP();
 		System.out.println("I am here after google search completed and returning me TFN from UI on MA-TAB");
@@ -406,7 +383,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MA-Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("MA-TAB Page TFN did not Match Expected TFN");
+			Assertion.fail("MA-TAB Page TFN did not Match Expected TFN");
 		}
 
 	}
@@ -422,7 +399,7 @@ public class tfnStepDefinitionAARP {
 		String tfn = memberAttributesMap.get("AMPTFN Google");
 		System.out.println("this is the Expected MA-TAB TFN from Feature file: " + tfn);
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.reopenGoogle();
 		String hometfn = tfnPage.googleSearchAARP();
 		System.out.println("I am here after google search complted and returned TFN from MA Tab");
@@ -430,7 +407,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("MA-Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("MA-TAB Page TFN did not Match Expected TFN");
+			Assertion.fail("MA-TAB Page TFN did not Match Expected TFN");
 		}
 		
 	}
@@ -449,14 +426,14 @@ public class tfnStepDefinitionAARP {
 		String tfn = memberAttributesMap.get("AMPTFN");
 		System.out.println("this is the number from Feature file: " + tfn);
 		WebDriver wd=(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.reopenAMPPage(url);
 		String hometfn = tfnPage.validateAMPPageTFN();
 		if(tfn.equalsIgnoreCase(hometfn)){
 			System.out.println("Home Page displaying proper number");
 		}
 		else{
-			Assert.fail("Error validating plans in  Acqusition homepage TFN");
+			Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 		}
 	}
 	
@@ -471,14 +448,14 @@ public class tfnStepDefinitionAARP {
 		String url = memberAttributesMap.get("URL");
 		String tfn = memberAttributesMap.get("AMPTFN");
 		System.out.println("this is the Expected MA-TAB TFN from Feature file: " + tfn);
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.reopenAMPPage(url);
 		String hometfn = tfnPage.validateAMPPageTFN();
 		if(tfn.equalsIgnoreCase(hometfn)){
 			System.out.println("MA-Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("MA-TAB Page TFN did not Match Expected TFN");
+			Assertion.fail("MA-TAB Page TFN did not Match Expected TFN");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -491,14 +468,14 @@ public class tfnStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		System.out.println("this is the Expected MedSUp-TAB TFN from Feature file: " + medicalsuptfn);
 		String medsuptfn = tfnPage.medicalSupTFN_direct_2();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -513,13 +490,13 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 		System.out.println("this is the Expected MedSUp-TAB TFN from Feature file: " + medicalsuptfn);
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		String medsuptfn = tfnPage.medicalSupTFN_direct_2();
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("Med sub Tab displaying Correct TFN number");
 		}
 		else{
-			Assert.fail("Med Sup Page TFN did not Match Expected TFN");
+			Assertion.fail("Med Sup Page TFN did not Match Expected TFN");
 		}
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 	}
@@ -534,13 +511,13 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 		System.out.println("this is the Expected MedSUp-TAB TFN from Feature file: " + medicalsuptfn);
-		 tfnPage = new UlayerTFNPage(wd);
+		 tfnPage = new commonpagesTFNPage(wd);
 		 String medsuptfn = tfnPage.medicalSupTFN_2();
 		 if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 				System.out.println("MedSup Page displaying proper number "+ medsuptfn );
 			}
 			else{
-				Assert.fail("TFN did not match in  MedSup plan summary page");
+				Assertion.fail("TFN did not match in  MedSup plan summary page");
 			}
 	}
 
@@ -555,7 +532,7 @@ public class tfnStepDefinitionAARP {
 
 		}
 		String url = memberAttributesMap.get("URL");
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.reopenAMPPage(url);
 		tfnPage.popupCheck();
 		
@@ -577,7 +554,7 @@ public class tfnStepDefinitionAARP {
 		mr = new MRScenario();
 		wd = mr.getWebDriverNew();
 		//wd.manage().deleteAllCookies();
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.openUrl(url);
 		String hometfn = tfnPage.YahooSearchAARP();
 		System.out.println("I am here after yahoo search");
@@ -586,7 +563,7 @@ public class tfnStepDefinitionAARP {
 			System.out.println("Home Page displaying proper number");
 		}
 		else{
-			Assert.fail("Error validating plans in  Acqusition homepage TFN");
+			Assertion.fail("Error validating plans in  Acqusition homepage TFN");
 		}
 		
 	}
@@ -603,14 +580,14 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
 
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		String medsuptfn = tfnPage.medicalSupTFN();
 		
 		if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 			System.out.println("Med Sup Page is displaying the correct number:  "+ medsuptfn);
 		}
 		else{
-			Assert.fail("Error validating plans in  VPP plan summary page");
+			Assertion.fail("Error validating plans in  VPP plan summary page");
 		}
 	}
 	
@@ -626,7 +603,7 @@ public class tfnStepDefinitionAARP {
 		
 		mr = new MRScenario();
 		wd = mr.getWebDriverNew();
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		tfnPage.openUrl(url);
 		//tfnPage.popupCheck();
 	}
@@ -641,13 +618,13 @@ public class tfnStepDefinitionAARP {
 		}
 		String medicaleligibilityTFN = memberAttributesMap.get("Eligiblity TFN");
 		System.out.println("This is the TFN for Eligiblity page from feature file:  "+medicaleligibilityTFN);
-		 tfnPage = new UlayerTFNPage(wd);
+		 tfnPage = new commonpagesTFNPage(wd);
 		 String eligibiltyTFN = tfnPage.medEligibilityTFN();
 		 if(medicaleligibilityTFN.equalsIgnoreCase(eligibiltyTFN)){
 				System.out.println("Medical Eligibility  Page displaying proper number "+ eligibiltyTFN );
 			}
 			else{
-				Assert.fail("TFN did not match in Medical Eligibility page "+ eligibiltyTFN);
+				Assertion.fail("TFN did not match in Medical Eligibility page "+ eligibiltyTFN);
 			}
 	}
 
@@ -661,13 +638,13 @@ public class tfnStepDefinitionAARP {
 					memberAttributesRow.get(i).getCells().get(1));
 		}
 		String maVPPTFN = memberAttributesMap.get("MA VPP TFN");
-		tfnPage = new UlayerTFNPage(wd);
+		tfnPage = new commonpagesTFNPage(wd);
 		String maTFN = tfnPage.maVPPPageTFN();
 		if(maVPPTFN.equalsIgnoreCase(maTFN)){
 			System.out.println("MA Tab displaying proper number:  "+maTFN);
 		}
 		else{
-			Assert.fail("TFN did not match in  VPP plan summary page"+ maTFN);
+			Assertion.fail("TFN did not match in  VPP plan summary page"+ maTFN);
 		}
 	}
 	@Then("^navigate to MedSup via direct url towards med sup to varify TFN$")
@@ -681,14 +658,14 @@ public class tfnStepDefinitionAARP {
 
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
-		 tfnPage = new UlayerTFNPage(wd);
+		 tfnPage = new commonpagesTFNPage(wd);
 		 String medsuptfn = tfnPage.medicalSupTFN();
 		 if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 				System.out.println("MedSup Page displaying proper number "+ medsuptfn );
 				Thread.sleep(15000);
 			}
 			else{
-				Assert.fail("TFN did not match in  MedSup plan summary page");
+				Assertion.fail("TFN did not match in  MedSup plan summary page");
 			}
 	}
 	
@@ -703,16 +680,16 @@ public class tfnStepDefinitionAARP {
 
 		}
 		String medicalsuptfn = memberAttributesMap.get("MedSup TFN");
-		 tfnPage = new UlayerTFNPage(wd);
+		 tfnPage = new commonpagesTFNPage(wd);
 		 String medsuptfn = tfnPage.medicalSupTFN();
 		 if(medsuptfn.equalsIgnoreCase(medicalsuptfn)){
 				System.out.println("MedSup Page displaying proper number "+ medsuptfn );
 				Thread.sleep(15000);
 			}
 			else{
-				Assert.fail("TFN did not match in  MedSup plan summary page");
+				Assertion.fail("TFN did not match in  MedSup plan summary page");
 			}
-	}
+	}*/
 }
 
 	

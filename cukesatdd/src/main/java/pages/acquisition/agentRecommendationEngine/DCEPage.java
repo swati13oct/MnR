@@ -53,7 +53,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(css = "#buildyourdruglist button:nth-of-type(2)")
 	private List<WebElement> drugpageButtons;
-	
+
 	@FindBy(css = "#modal uhc-radio-group uhc-radio")
 	private List<WebElement> modalSelcetedDrugsList;
 
@@ -62,7 +62,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(.,'Remove')]")
 	private List<WebElement> drugDeleteButtons;
-	
+
 	// Dosage Modal
 
 	@FindBy(css = "#drugModal #popup3 section>h2")
@@ -82,7 +82,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(css = "#new-drug-refill")
 	private WebElement modalSupplySelect;
-	
+
 	@FindBy(css = ".content-section button[type='submit']")
 	private WebElement addDrugButton;
 
@@ -106,7 +106,7 @@ public class DCEPage extends UhcDriver {
 
 	@FindBy(css = "button.delete-drug-confirm")
 	private WebElement deleteBtn;
-
+	
 	public void drugsHandlerWithdetails(String drugsDetails) {
 		String drugName = "";
 		boolean searchButtonClick = false;
@@ -139,16 +139,8 @@ public class DCEPage extends UhcDriver {
 						GenericDrug, switchGeneric);
 			}
 		}
-
 	}
-
-	public void returnToCompare() {
-		validate(drugpageButtons.get(0));
-		drugpageButtons.get(0).click();
-		pageloadcomplete();
-		threadsleep(2000);
-	}
-
+	
 	public void addDrugbySearchDCE(String drugName, boolean searchButtonClick, String dosage, String packageName,
 			String count, boolean threeeMonthfrequency, boolean GenericDrug, boolean switchGeneric) {
 		try {
@@ -201,6 +193,13 @@ public class DCEPage extends UhcDriver {
 		}
 	}
 
+	public void returnToCompare() {
+		validate(drugpageButtons.get(0));
+		drugpageButtons.get(0).click();
+		pageloadcomplete();
+		threadsleep(2000);
+	}
+
 	public void deletedrugsHandlerWithdetails(String drugsDetails) {
 		String dosage = "";
 
@@ -219,15 +218,16 @@ public class DCEPage extends UhcDriver {
 	public void delete(String dosage) {
 		validate(drugsearchBox, 30);
 		WebElement deleteLink = driver
-				.findElement(By.xpath("//uhc-list-item[contains(.,'"+dosage+"')]//button[2]"));
+				.findElement(By.xpath("//uhc-list-item[contains(.,'" + dosage + "')]//button[2]"));
 		jsClickNew(deleteLink);
+
 		threadsleep(2000);
 		pageloadcomplete();
 	}
-	
+
 	public void deleteAllDrugs() {
-		int drugLimit = drugDeleteButtons.size(); 
-		for(int i=0;i<drugLimit;i++) {
+		int drugLimit = drugDeleteButtons.size();
+		for (int i = 0; i < drugLimit; i++) {
 			drugDeleteButtons.get(0).click();
 			threadsleep(2000);
 		}
