@@ -175,7 +175,7 @@ Feature: ACQ-Plan benefits validation
       | workSheet      |
       | PDPSheet2020_3 |
 
-  @2021_AARP @next_year
+  @2021_AARP @next_year @2021CompareAARP
   Scenario Outline: 2021 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | Plan Compare Benefits_Data |
@@ -282,6 +282,26 @@ Feature: ACQ-Plan benefits validation
       | workSheet    |
       | Sheet2021_20 |
 
+    @planCompareBenefits_NextYearAARP21
+    Examples: 
+      | workSheet    |
+      | Sheet2021_21 |
+
+    @planCompareBenefits_NextYearAARP22
+    Examples: 
+      | workSheet    |
+      | Sheet2021_22 |
+
+    @planCompareBenefits_NextYearAARP23
+    Examples: 
+      | workSheet    |
+      | Sheet2021_23 |
+      
+    @planCompareBenefits_NextYearAARP24
+    Examples: 
+      | workSheet    |
+      | Sheet2021_24 |
+
     @planCompareBenefits_NextYearPDPAARP01
     Examples: 
       | workSheet      |
@@ -317,7 +337,7 @@ Feature: ACQ-Plan benefits validation
       | workSheet                |
       | Sheet2021_ProdCheckout_4 |
 
-  @2021_UHC @next_year
+  @2021_UHC @next_year @2021CompareUHC
   Scenario Outline: 2021 UHC Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | Plan Compare Benefits_Data |
@@ -423,6 +443,26 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet    |
       | Sheet2021_20 |
+
+    @planCompareBenefits_NextYearUHC21
+    Examples: 
+      | workSheet    |
+      | Sheet2021_21 |
+
+    @planCompareBenefits_NextYearUHC22
+    Examples: 
+      | workSheet    |
+      | Sheet2021_22 |
+
+    @planCompareBenefits_NextYearUHC23
+    Examples: 
+      | workSheet    |
+      | Sheet2021_23 |
+     
+    @planCompareBenefits_NextYearUHC24
+    Examples: 
+      | workSheet    |
+      | Sheet2021_24 |
 
     @planCompareBenefits_NextYearPDPUHC01
     Examples: 
