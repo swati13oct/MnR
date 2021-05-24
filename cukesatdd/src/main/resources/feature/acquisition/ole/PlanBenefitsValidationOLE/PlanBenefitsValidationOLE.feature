@@ -13,7 +13,7 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_1  | AARP |
    
-   @OLEplanBenefitsPDPAARP2 @OLEBenefits
+   @OLEplanBenefitsPDPAARP2 @OLEBenefits @OLEBenefits_Sanity
     Examples:
       | excelPath                	 | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_2  | AARP |
@@ -28,7 +28,7 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_1  | UHC |
-  @OLEplanBenefitsUHCPDP02 @OLEBenefits
+  @OLEplanBenefitsUHCPDP02 @OLEBenefits @OLEBenefits_Sanity
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_2  | UHC |
@@ -178,7 +178,7 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_2  | AARP |
   
-   @OLEplanBenefitsSNPAARP3 @OLEBenefits
+   @OLEplanBenefitsSNPAARP3 @OLEBenefits @OLEBenefits_Sanity
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_3  | AARP |
@@ -199,7 +199,7 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_2  | UHC |
     
-    @OLEplanBenefitsSNPUHC3 @OLEBenefits
+    @OLEplanBenefitsSNPUHC3 @OLEBenefits @OLEBenefits_Sanity
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_3  | UHC |
