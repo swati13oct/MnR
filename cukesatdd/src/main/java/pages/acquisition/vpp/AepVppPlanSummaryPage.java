@@ -617,9 +617,11 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 			// driver.navigate().refresh();
 			//Thread.sleep(5000);
 	validate(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
+	scrollToView(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
 			validate(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
+			scrollToView(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
 					enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
 		}
 
@@ -704,10 +706,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				if(planType.equalsIgnoreCase("MA")) {
 
 					validate(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
+					scrollToView(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
 					enrollInPlan = driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]"));
 				}
 				if(planType.equalsIgnoreCase("SNP")){
 					validate(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
+					scrollToView(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
 					enrollInPlan = driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]"));
 				}
 					}catch(Exception e){
