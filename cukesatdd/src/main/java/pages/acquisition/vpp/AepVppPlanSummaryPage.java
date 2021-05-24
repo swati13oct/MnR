@@ -633,7 +633,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		
 	}
 	
-	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
+	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex) throws InterruptedException {
 		this.sheetName = sheetName;
 		this.rowIndex = rowIndex;
 
@@ -648,14 +648,14 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         return result;
     }
 
-    public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex) {
+    public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex) throws InterruptedException {
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
 		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the info on Welcome OLE Page");
 
 		HashMap<String, String> result=new HashMap<String, String>();
 		String planCard = "(//*[contains(text(), '"+planName+"')])[1]";
 		System.out.println("Plan card xpath : "+ planCard);
-
+		Thread.sleep(1000);
 		String headerPremiumXpath = planCard+"/parent::div/ul/li[2]";
 		String headerPrem = "Monthly Premium"; //this variable will be stored as key for the header premium
 		String headerPremiumText = null;
