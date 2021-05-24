@@ -257,8 +257,8 @@ public class WelcomePage extends UhcDriver{
 		}
 	}	
 	public CancelOLEModal OpenCancelOLE() {
-		validate(CancelEnrollmentLink);
 		CheckiPerseptions();
+		validate(CancelEnrollmentLink);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
 
@@ -278,6 +278,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public LeavingOLEmodal OpenLeaveOLEmodal() {
+		CheckiPerseptions();
 		validate(SiteLogo);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SiteLogo);

@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 
@@ -25,7 +26,10 @@ public class CancelOLEModal extends UhcDriver{
 	
 	@FindBy(id = "backBtn")
 	private WebElement BackBtn;
-
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public WebElement proactiveChatExitBtn;
+	
 	public CancelOLEModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -37,8 +41,21 @@ public class CancelOLEModal extends UhcDriver{
 		validate(CancellationModal);
 		
 	}
-
+	
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+																			// we're not trying to fail the test if it
+																			// isn't found
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}	
+	
 	public Object returntoOLE() {
+		CheckiPerseptions();
 		validate(BackBtn);
 		BackBtn.click();
 		try {
