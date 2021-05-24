@@ -1,7 +1,7 @@
 @vppBenefits
 Feature: ACQ-Plan benefits validation
 
-  @planSummary_ExcelValidation
+  @planSummary_ExcelValidation @2020planSummaryAARP
   Scenario Outline: Verify plan benefits on the Plan Summary Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user navigates to plan summary page and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | <excelPath> |
@@ -78,7 +78,14 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Summary Benefits_Data | PDPSheet2020_2 | AARP |
 
-    # Below are examples for UHC plan Summary benefits
+  # Below are examples for UHC plan Summary benefits
+  @planSummary_ExcelValidation @2020planSummaryUHC
+  Scenario Outline: Verify plan benefits on the Plan Summary Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user navigates to plan summary page and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
     @planSummaryBenefitsUHC01
     Examples: 
       | excelPath                  | workSheet   | site |
@@ -149,7 +156,14 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Summary Benefits_Data | PDPSheet2020_2 | UHC  |
 
-    #2021 Plans
+  #2021 Plans
+  @planSummary_ExcelValidation @2021planSummaryAARP
+  Scenario Outline: Verify plan benefits on the Plan Summary Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user navigates to plan summary page and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
     @planSummaryBenefitsAARP01_NextYear
     Examples: 
       | excelPath                  | workSheet   | site |
@@ -230,7 +244,14 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Summary Benefits_Data | PDPSheet2021_2 | AARP |
 
-    # UHC
+  # UHC
+  @planSummary_ExcelValidation @2021planSummaryUHC
+  Scenario Outline: Verify plan benefits on the Plan Summary Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user navigates to plan summary page and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
     @planSummaryBenefitsUHC01_NextYear
     Examples: 
       | excelPath                  | workSheet   | site |
@@ -311,7 +332,14 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Summary Benefits_Data | PDPSheet2021_2 | UHC  |
 
-    # PROD NIGHT RUN SCENARIOS
+  # PROD NIGHT RUN SCENARIOS
+  @planSummary_ExcelValidation @2021planSummaryProd
+  Scenario Outline: Verify plan benefits on the Plan Summary Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user navigates to plan summary page and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
     @planSummaryBenefitsUHC01_Prod
     Examples: 
       | excelPath                  | workSheet   | site |
