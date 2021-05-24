@@ -256,7 +256,15 @@ public class WelcomePage extends UhcDriver{
 			System.out.println("Proactive chat popup not displayed");
 		}
 	}	
+	private void CheckPageLoad() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 10);
+	
+	}
 	public CancelOLEModal OpenCancelOLE() {
+		CheckPageLoad();
 		CheckiPerseptions();
 		validate(CancelEnrollmentLink);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
@@ -271,6 +279,8 @@ public class WelcomePage extends UhcDriver{
 			e.printStackTrace();
 		}*/
 		if(validate(CancellationModal,20)){
+			CheckPageLoad();
+			CheckiPerseptions();
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModal(driver);
 		}

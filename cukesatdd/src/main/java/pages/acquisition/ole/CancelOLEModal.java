@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 
@@ -53,8 +54,15 @@ public class CancelOLEModal extends UhcDriver{
 			System.out.println("Proactive chat popup not displayed");
 		}
 	}	
+	private void CheckPageLoad() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 10);
 	
+	}
 	public Object returntoOLE() {
+		CheckPageLoad();
 		CheckiPerseptions();
 		validate(BackBtn);
 		BackBtn.click();
