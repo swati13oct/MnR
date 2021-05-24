@@ -8,32 +8,32 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | Site          | <site>	    |
 
 
-  @OLEplanBenefitsPDPAARP1 @OLEBenefits
+  @OLEplanBenefitsPDPAARP1 @OLEBenefits @OLEBenefits_PDP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_1  | AARP |
    
-   @OLEplanBenefitsPDPAARP2 @OLEBenefits @OLEBenefits_Sanity
+   @OLEplanBenefitsPDPAARP2 @OLEBenefits  @OLEBenefits_PDP
     Examples:
       | excelPath                	 | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_2  | AARP |
     
-    @OLEplanBenefitsPDPAARP3 @OLEBenefits
+    @OLEplanBenefitsPDPAARP3 @OLEBenefits @OLEBenefits_PDP
     Examples:
       | excelPath                | workSheet | site |
   
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_3  | AARP |
 
-  @OLEplanBenefitsPDPUHC01 @OLEBenefits
+  @OLEplanBenefitsPDPUHC01 @OLEBenefits @OLEBenefits_PDP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_1  | UHC |
-  @OLEplanBenefitsUHCPDP02 @OLEBenefits @OLEBenefits_Sanity
+  @OLEplanBenefitsUHCPDP02 @OLEBenefits  @OLEBenefits_PDP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_2  | UHC |
    
-   @OLEplanBenefitsPDPUHC03 @OLEBenefits
+   @OLEplanBenefitsPDPUHC03 @OLEBenefits @OLEBenefits_PDP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_PDP_OLE_Data | OLEPDPSheet2021_3  | UHC |
@@ -168,43 +168,43 @@ Feature: ACQ-OLE Welcome Page Plan benefits validation
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | MASheet2021_13  | UHC |
  
-  @OLEplanBenefitsSNPAARP1 @OLEBenefits
+  @OLEplanBenefitsSNPAARP1 @OLEBenefits @OLEBenefits_SNP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_1  | AARP |
    
-   @OLEplanBenefitsSNPAARP2 @OLEBenefits
+   @OLEplanBenefitsSNPAARP2 @OLEBenefits @OLEBenefits_SNP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_2  | AARP |
   
-   @OLEplanBenefitsSNPAARP3 @OLEBenefits @OLEBenefits_Sanity
+   @OLEplanBenefitsSNPAARP3 @OLEBenefits @OLEBenefits_SNP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_3  | AARP |
    
-    @OLEplanBenefitsSNPAARP4 @OLEBenefits
+    @OLEplanBenefitsSNPAARP4 @OLEBenefits @OLEBenefits_SNP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_4  | AARP |
       
 
-  @OLEplanBenefitsSNPUHC1 @OLEBenefits
+  @OLEplanBenefitsSNPUHC1 @OLEBenefits @OLEBenefits_SNP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_1  | UHC |
    
-   @OLEplanBenefitsSNPUHC2 @OLEBenefits
+   @OLEplanBenefitsSNPUHC2 @OLEBenefits @OLEBenefits_SNP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_2  | UHC |
     
-    @OLEplanBenefitsSNPUHC3 @OLEBenefits @OLEBenefits_Sanity
+    @OLEplanBenefitsSNPUHC3 @OLEBenefits @OLEBenefits_SNP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_3  | UHC |
       
-     @OLEplanBenefitsSNPUHC4 @OLEBenefits
+     @OLEplanBenefitsSNPUHC4 @OLEBenefits @OLEBenefits_SNP
     Examples:
       | excelPath                | workSheet | site |
       | Plan Benefits_MA_SNP_OLE | SNPSheet2021_4  | UHC |
