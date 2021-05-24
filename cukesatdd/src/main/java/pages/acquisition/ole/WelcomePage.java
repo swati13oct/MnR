@@ -109,7 +109,11 @@ public class WelcomePage extends UhcDriver{
 
 	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
 	private WebElement ListaVerificationLink;
-
+	
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public WebElement proactiveChatExitBtn;
+	
 	public WelcomePage(WebDriver driver) {
 
 		super(driver);
@@ -241,8 +245,20 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+																			// we're not trying to fail the test if it
+																			// isn't found
+		try {
+			if (proactiveChatExitBtn.isDisplayed())
+				jsClickNew(proactiveChatExitBtn);
+		} catch (Exception e) {
+			System.out.println("Proactive chat popup not displayed");
+		}
+	}	
 	public CancelOLEModal OpenCancelOLE() {
 		validate(CancelEnrollmentLink);
+		CheckiPerseptions();
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
 
