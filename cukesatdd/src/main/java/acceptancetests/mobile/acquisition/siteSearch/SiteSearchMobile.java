@@ -39,7 +39,7 @@ public class SiteSearchMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/** user is on the AARP Medicare Site landing page */
 	@Given("^the user is on the Acquisition Site landing page and navigate to pharmacy search page$")

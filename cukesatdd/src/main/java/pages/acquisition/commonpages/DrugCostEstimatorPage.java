@@ -534,8 +534,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
 			checkModelPopup(driver, 45);
-		else
-			checkModelPopup(driver, 10);
+		/*else
+			checkModelPopup(driver, 10);*/
 		validateNew(addDrug);
 		validateNew(step1);
 		validateNew(step2);
@@ -1655,7 +1655,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage validateMultiCountyPopup(String zipCode, String county) {
-		checkModelPopup(driver);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver);
 		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
 
@@ -1864,7 +1865,8 @@ public class DrugCostEstimatorPage extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPage enterZipcodeAndNavigateToPlanSummary(String zipCode) {
-		checkModelPopup(driver);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))	
+			checkModelPopup(driver);
 		sendkeys(zipCodeTextBox, zipCode);
 		findPlansButton.click();
 		CommonUtility.waitForPageLoadNew(driver, maPlansCount, 60);

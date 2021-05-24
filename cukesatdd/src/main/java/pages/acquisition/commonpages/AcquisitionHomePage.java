@@ -390,7 +390,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	String CallSam1855 = "1-855";
 	String CallSam1877 = "1-877";
 
-	@FindBy(xpath = "//*[contains(@class,'activeChatBtn')]")
+	@FindBy(xpath = "//*[contains(@id,'sam-button--chat')]")
 	private WebElement chatsam;
 
 	@FindBy(xpath = "//div[@class='sam']")
@@ -769,7 +769,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				startNew(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+				//checkModelPopup(driver, 10);
 			}
 
 		} else if ("health-plans".equalsIgnoreCase(site)) {
@@ -804,7 +804,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				start(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+				//checkModelPopup(driver, 10);
 			}
 		}else if(site.equalsIgnoreCase("PRE")||site.equalsIgnoreCase("ARE")) {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); //added on 3/3/21 as part of AARP/UHC cleanup
@@ -834,7 +834,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 			testSiteUrl = driver.getCurrentUrl();
-			checkModelPopup(driver);
+			if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+				checkModelPopup(driver);
 			CommonUtility.waitForPageLoadNew(driver, zipCodeField, 15);
 			try {
 				if (proactiveChatExitBtn != null)
@@ -907,7 +908,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			CommonUtility.checkPageIsReadyNew(driver);
 			System.out.println("Current page URL: " + driver.getCurrentUrl());
 			testSiteUrl = driver.getCurrentUrl();
-			checkModelPopup(driver, 15);
+			if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+				checkModelPopup(driver, 15);
 			CommonUtility.waitForPageLoadNew(driver, zipCode, 45);
 			try {
 				if (proactiveChatExitBtn != null)
@@ -3520,6 +3522,7 @@ String winHandleBefore = driver.getWindowHandle();
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
 		checkModelPopup(driver, 20);
 
 	}
@@ -4157,6 +4160,7 @@ String winHandleBefore = driver.getWindowHandle();
 		jsClickNew(SubmitBtn);
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
 		checkModelPopup(driver, 20);
 
 	}
@@ -4583,7 +4587,7 @@ String winHandleBefore = driver.getWindowHandle();
 		jsClickNew(learnAboutMedicareHomeScreen);
 		waitForPageLoadSafari();
 		String urlCheck = driver.getCurrentUrl();
-		if (urlCheck.contains("medicare-education.html")) {
+		if (urlCheck.contains("medicare-education.html")||urlCheck.contains("medicare-education-classic.html")) {
 			return new LearnAboutMedicareHomePage(driver);
 		} else {
 			return null;
@@ -5732,6 +5736,7 @@ String winHandleBefore = driver.getWindowHandle();
 			System.out.println("########Validating TFN on Call SAM icon and Call popup#######");
 			// driver.navigate().refresh();
 			CommonUtility.checkPageIsReady(driver);
+			if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
 			checkModelPopup(driver, 10);
 
 			WebElement ActualTFNelement = driver.findElement(By.xpath(TFNXpath));
@@ -6140,6 +6145,7 @@ String winHandleBefore = driver.getWindowHandle();
 
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
 		checkModelPopup(driver, 10);
 //		sendkeys(zipCodeField, zipcode);
 		sendkeysNew(externalzipCodeField, zipcode);
@@ -6159,6 +6165,7 @@ String winHandleBefore = driver.getWindowHandle();
 	
 	public VPPPlanSummaryPage externalsearchPlans(String zipcode, String countyName) {
 		waitForPageLoadSafari();
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
 		checkModelPopup(driver, 10);
 		CommonUtility.waitForPageLoadNew(driver, externalzipCodeField, 30);
 		sendkeys(externalzipCodeField, zipcode);
@@ -6167,7 +6174,7 @@ String winHandleBefore = driver.getWindowHandle();
 		CommonUtility.waitForPageLoad(driver, countyModal, 15);
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
-
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
 		checkModelPopup(driver, 10);
 
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);

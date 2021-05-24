@@ -35,6 +35,7 @@ import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
 import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage;
+import pages.mobile.acquisition.commonpages.ShopforaplanAARPlayerMobile;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
@@ -57,7 +58,7 @@ public class VppPlanSummaryMobile {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 	
 	@Then("^user should be able to see the NBA modal to add drugs on the VPP summary page$")
 	public void user_should_be_able_to_see_the_NBA_modal_to_add_drugs_on_the_VPP_summary_page() {
@@ -278,7 +279,7 @@ public class VppPlanSummaryMobile {
 
 	@Given("^the user is on uhcmedicaresolutions site landing page$")
 	public void the_user_on_uhc_medicareplans_Site() {
-		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
 		aquisitionhomepage.openMobileURL();
@@ -512,7 +513,7 @@ public class VppPlanSummaryMobile {
 
 	@Then("^user saves first plan on plan summary page on test site$")
 	public void saveFirtPlan() {
-		wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wd);
 		util.savedHeartFirstPlanOnSummaryPage();
 	}
@@ -520,7 +521,7 @@ public class VppPlanSummaryMobile {
 	@Then("^user validates print option for selected plan on plan summary page on test site$")
 	public void user_validates_print_option_for_plan_on_test_site() {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wd);
 		util.validatePrintOptionExistOnSummaryPage(planType);
 	}
@@ -528,7 +529,7 @@ public class VppPlanSummaryMobile {
 	@Then("^user validates print functionality for selected plan on plan summary page on test site$")
 	public void user_validates_print_functionality_for_plan_on_test_site() {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wd);
 		String pageType = "summary";
 		util.validatePrintOptionOnPage(pageType, planType);
@@ -537,7 +538,7 @@ public class VppPlanSummaryMobile {
 	@Then("^user validates email option for selected plan on plan summary page on test site$")
 	public void user_validates_email_option_on_for_selected_plan_test_site() {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wd);
 		util.validateEmailOptionExistOnSummaryPage(planType);
 	}
@@ -545,7 +546,7 @@ public class VppPlanSummaryMobile {
 	@Then("^user validates email functionality with invalid and valid email address for selected plan on plan summary page on test site$")
 	public void user_validates_email_functionality_on_for_selected_plan_test_site() {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wd);
 		util.validateEmailFunctionOnSummaryPage(planType);
 
@@ -562,7 +563,7 @@ public class VppPlanSummaryMobile {
 	@SuppressWarnings("unchecked")
 	@Then("^user loads page using email deeplink for plan and validate vpp summary page content on test site$")
 	public void validate_summary_deeplink() {
-		wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(PageConstants.ACQ_PAGE_DRIVER);
 		EmailAndPrintUtilMobile util = new EmailAndPrintUtilMobile(wd);
 		CommonUtility commonUtils = new CommonUtility();
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
@@ -660,7 +661,7 @@ public class VppPlanSummaryMobile {
 
 	@Given("^user is on blue layer landing page$")
 	public void user_on_UHC_Medicaresolutions_Site() {
-		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getMobileDriver();
 
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		// aquisitionhomepage.openPRE();
@@ -709,7 +710,8 @@ public class VppPlanSummaryMobile {
 	@Then("^the user navigates to the plan details for the given plan type in UMS site$")
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_UMS_site(DataTable data)
 			throws Throwable {
-		wd.manage().window().maximize();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		//wd.manage().window().maximize();
 		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);
 		String planName = memberAttributesRow.get(1).getCells().get(1);*/
@@ -783,7 +785,7 @@ public class VppPlanSummaryMobile {
 
 	@When("^user successfully adds drug in the UMS site$")
 	public void user_successfully_adds_drug(DataTable data) throws InterruptedException {
-
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		AddDrugDetailsMobile DrugDetails = (AddDrugDetailsMobile) getLoginScenario()
 				.getBean(PageConstants.ADD_DRUG_DETAILS);
 		DrugCostEstimatorPageMobile dce = (DrugCostEstimatorPageMobile) getLoginScenario()
@@ -841,7 +843,8 @@ public class VppPlanSummaryMobile {
 		dce.verifyPharmacyResults();
 		for (int i = 0; i < dce.getLstPharmacyNames().size(); i++)
 			if (dce.getLstPharmacyNames().get(i).getText().toLowerCase().contains(pharmacyName.toLowerCase())) {
-				dce.getLstSelectPharmacy().get(i).click();
+				//dce.getLstSelectPharmacy().get(i).click();
+				dce.jsClickNew(dce.getLstSelectPharmacy().get(i));
 				break;
 			}
 
@@ -932,7 +935,7 @@ public class VppPlanSummaryMobile {
 	/* Cost comparison for Plan Costs Tab */
 	@Then("^user verifies annual drug cost in the Plan Cost tab of UMS site$")
 	public void user_verifies_annual_drug_cost_in_the_Plan_Cost_tab_of_UMS_site(DataTable data) throws Throwable {
-
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
 		String planType = memberAttributesRow.get(0).getCells().get(1);*/
 		String planType = data.cell(0, 1);
@@ -954,6 +957,7 @@ public class VppPlanSummaryMobile {
 	/* Back To All Plans on prescription drug tab */
 	@Then("^the user clicks on Back to All Plans button present on details page in UMS site$")
 	public void the_user_clicks_on_Back_to_All_Plans_button_present_UMS_sit() throws Throwable {
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		PlanDetailsPageMobile plandetailspage = new PlanDetailsPageMobile(wd);
 
 		plandetailspage.navigateBackToPlanSummaryPageFromDetailsPage();
@@ -1062,7 +1066,7 @@ public class VppPlanSummaryMobile {
 	public void the_user_hovers_screen_over_the_shop_for_a_plan() throws Throwable {
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ShopForPlanNavigationPage shop = acqusitionHomePage.Hoveronaplan();
+		ShopforaplanAARPlayerMobile shop = acqusitionHomePage.Hoveronaplan();
 		if (shop != null) {
 			System.out.println("Shop for a plan drop down is opened");
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
@@ -1167,7 +1171,7 @@ public class VppPlanSummaryMobile {
 
 	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
 	public void the_user__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
-		wd = (AppiumDriver) getLoginScenario().getWebDriverNew();
+		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();

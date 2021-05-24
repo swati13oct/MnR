@@ -42,14 +42,14 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		return loginScenario;
 	}
 	
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	/**
 	 * @toDo:user is on AARP medicare acquisition site landing page
 	 */
 	@Given("^the user is on the AARP medicare acquisition site landing page$")
 	public void the_user_on_aarp_medicareplans_Site() {
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		aquisitionhomepage.openMobileURL();
 

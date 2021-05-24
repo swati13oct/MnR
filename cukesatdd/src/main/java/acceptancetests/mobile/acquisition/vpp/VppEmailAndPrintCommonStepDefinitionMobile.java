@@ -168,7 +168,7 @@ public class VppEmailAndPrintCommonStepDefinitionMobile {
 				HashMap<String, String> origPage = (HashMap<String, String>) getLoginScenario().getBean(infoMapStringId);
 
 				// note: use new driver to achieve clear cache
-				WebDriver newTestDriver = (AppiumDriver)getLoginScenario().getWebDriverNew();
+				WebDriver newTestDriver = (AppiumDriver)getLoginScenario().getMobileDriver();
 				newTestDriver.get(deepLink);
 				commonUtils.checkPageIsReady(newTestDriver);
 				wDriver.navigate().refresh(); // note: need this to trick the original driver from timing out before the

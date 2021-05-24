@@ -26,12 +26,12 @@ public class ClickToCallStepDefinition {
 		return loginScenario;
 	}
 
-	AppiumDriver wd;
+	//AppiumDriver wd;
 
 	
 	@Given("^the user is on medicare acquisition site on mobile$")
 	public void the_user_on_uhc_medicaresolutions_site_mobile() {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 		aquisitionhomepage.openPRE();
 		aquisitionhomepage.fixPrivateConnectionMobile();
@@ -43,7 +43,7 @@ public class ClickToCallStepDefinition {
 
 	@Given("^the user is on UHC medicare acquisition site landing page in mobile$")
 	public void the_user_is_on_UHC_medicare_acquisition_site_landing_page_in_mobile() throws Throwable {
-		wd = getLoginScenario().getMobileDriver();
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd);
 
 		//aquisitionhomepage.openUHCURLOnMobile();

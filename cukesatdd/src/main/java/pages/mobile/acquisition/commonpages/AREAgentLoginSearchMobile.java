@@ -69,7 +69,9 @@ public class AREAgentLoginSearchMobile extends UhcDriver {
 		searchBtn.click();
 		validate(cloakInBtn);
 		String curWind = driver.getWindowHandle();
+		iosScroll(cloakInBtn);
 		cloakInBtn.click();
+		//jsClickNew(cloakInBtn);
 		switchAnotherWindow(curWind);
 		commonUtils.plansLoader();
 		// Assertion.assertTrue(validate(stausTxt, 60), "Search not success");

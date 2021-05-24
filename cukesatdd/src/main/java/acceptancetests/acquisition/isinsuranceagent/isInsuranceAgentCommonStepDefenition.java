@@ -132,14 +132,16 @@ public class isInsuranceAgentCommonStepDefenition    {
 	@Then("^the user clicks Submit to submit Licensed Insurance Agent and validates Thank You Page$")
 	public void the_user_clicks_Submit_to_submit_Licensed_Insurance_and_validates_Thank_You_Page() throws Throwable {
 		IsInsuranceAgent LicenseInsuranceAgentPage =(IsInsuranceAgent) getLoginScenario().getBean(PageConstants.IS_INSURANCE_AGENT_PAGE);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 		License_ThankYouPage dgrThankYouPage = LicenseInsuranceAgentPage.NavigateNext_LIAthankYouPage();
 		if(dgrThankYouPage != null) {
 			System.out.println("Successfully navigated to Licensed Insurance Submit Page");
 			getLoginScenario().saveBean(PageConstants.IS_INSURANCE_AGENT_PAGE,dgrThankYouPage);
 		} else {
 			Assertion.assertTrue("PROBLEM - Licensed Insurance Submit is null", false);
+			}
 		}
-
 	}
 	
 	@Then("^the user clicks on Request a Free Insurance Agent$")

@@ -294,7 +294,8 @@ public class CampaignTFNPage extends UhcDriver {
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: "+driver.getCurrentUrl());
-		checkModelPopup(driver, 10);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 10);
 	
 	}
 	

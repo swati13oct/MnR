@@ -80,10 +80,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 
 	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
 		
-		jsSendkeys(zipcodeField, zipcode);
+		sendkeysMobile(zipcodeField, zipcode);
 		//planTypeDropDownTitle.click();
 		System.out.println("zipcode entered");
-		jsClickMobile(planTypeDropDownTitle);
+		jsClickNew(planTypeDropDownTitle);
 		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
 		// List<String> testNote=new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
@@ -202,7 +202,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		sleepBySec(1);
 		// selectFromDropDownByText(driver, seletPlandropdown, planName);
 		/* To handle iOS dropdown */
-		planTypeDropDownTitle.click();
+		jsClickNew(planTypeDropDownTitle);
+		//planTypeDropDownTitle.click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 

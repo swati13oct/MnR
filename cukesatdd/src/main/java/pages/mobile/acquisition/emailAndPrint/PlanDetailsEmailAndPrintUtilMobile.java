@@ -307,8 +307,8 @@ public class PlanDetailsEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		;
 		validateEmailButtonOnPlanDetails.click();
 		validateNew(emailPopup);
-		scrollToView(sendButtonEmailPlanDetailsPopUp);
-		validateNew(sendButtonEmailPlanDetailsPopUp);
+		iosScroll(sendButtonEmailPlanDetailsPopUp);
+		//validateNew(sendButtonEmailPlanDetailsPopUp);
 		System.out.println("!!!Cancel Button is displayed ===>" + sendButtonEmailPlanDetailsPopUp.isDisplayed());
 		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("alisha_kapoor@optum.com");
 		System.out.println("!!!Entered valid Email ");

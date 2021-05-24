@@ -55,12 +55,12 @@ Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
       | PDP Plans  | <pdptestPlans> |
       | SNP Plans  | <snptestPlans> |
 
-    @dce_DrugSummary_Page_AARP @regressionAARP @prodRegression
+    @dce_DrugSummary_Page_AARP @regressionAARP @prodRegression @MHJ
     Examples: 
       | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
       | AARP |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-    @dce_DrugSummary_Page_UHC @regressionUHC
+    @dce_DrugSummary_Page_UHC @regressionUHC @sanity
     Examples: 
       | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
       | UHC  |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |

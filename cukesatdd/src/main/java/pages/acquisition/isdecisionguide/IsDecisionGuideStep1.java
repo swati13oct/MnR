@@ -14,6 +14,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 
 /**
@@ -432,7 +433,8 @@ public class IsDecisionGuideStep1 extends UhcDriver{
 	private void CheckPageLoad() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
-		checkModelPopup(driver, 20);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 20);
 
 	}
 

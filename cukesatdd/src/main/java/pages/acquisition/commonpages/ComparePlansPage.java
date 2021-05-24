@@ -338,7 +338,8 @@ public class ComparePlansPage extends UhcDriver {
 			validateNew(backToAllPlansLink);
 		validateNew(validateprintbutton);
 		validateNew(validateemailbutton);
-		checkModelPopup(driver,20);
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver,20);
 		
 		try {
 			if (proactiveChatExitBtn.isDisplayed())
