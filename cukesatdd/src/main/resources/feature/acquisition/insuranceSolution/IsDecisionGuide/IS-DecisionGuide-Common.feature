@@ -1,6 +1,6 @@
 Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
 
-  Scenario Outline: <Scenario> - To Test IS Decision Guide E2E on <site> site
+  Scenario Outline: <Scenario> - To Test IS Decision Guide E2E on <site> site for <firstname>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When the user performs plan search using following information
@@ -45,9 +45,9 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
     #Then the user validates Thank You Page and land on Medsupp Page
     @insuranceSolution_DecisionGuide_Common_AARP @UATRegression @regressionAARP @sanity @insuranceSolution
     Examples: 
-      | Scenario                                      | site | zipcode | isMultutiCounty | county             | plantype | firstname  | lastname     | distributionmethod | email                      | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
-      | IS Decision Guide Request - E2E Scenario_AARP | AARP |   90210 | NO              | Los Angeles County | MS       |MNRtestKumar | MNRtestSai  | mail               | [blank]                    | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
-      | IS Decision Guide Request - E2E Scenario_AARP | AARP |   90210 | NO              | Los Angeles County | MS       | MNRtestSai | MNRtestKumar | email              | test123@optum.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
+      | Scenario                                      | site | zipcode | isMultutiCounty | county             | plantype |	firstname  		| lastname    	| distributionmethod | email              | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
+      | IS Decision Guide Request - E2E Scenario_AARP | AARP |   90210 | NO              | Los Angeles County | MS       |	MNRtestKumar	| MNRtestSai 		| mail               | [blank]            | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
+      | IS Decision Guide Request - E2E Scenario_AARP | AARP |   90210 | NO              | Los Angeles County | MS       | 	MNRtestSai 		| MNRtestKumar	| email              | test123@optum.com 	| 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
 
     @insuranceSolution_DecisionGuide_Common_UHC @UATRegression @regressionUHC @insuranceSolution
     Examples: 
@@ -55,7 +55,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
       | IS Decision Guide Request - E2E Scenario_UMS | UHC  |   90210 | NO              | Los Angeles County | MS       | MNRtestKumar | MNRtestSai | mail               | [blank]                  | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
       | IS Decision Guide Request - E2E Scenario_UMS | UHC  |   90210 | NO              | Los Angeles County | MS       | MNRtestSai | MNRtestKumar | email              | test123@optum.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
 
-  Scenario Outline: <Scenario> - To Test UAT IS Decision Guide E2E on <site> site thorugh Shop Pages
+  Scenario Outline: <Scenario> - To Test UAT IS Decision Guide E2E on <site> site thorugh Shop Pages for <firstname>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And the user hovers screen over the shop for a plan
@@ -98,7 +98,7 @@ Feature: 1.14 Med Supp Plans (IS) Decision Guide flow UAT Scripts
       | IS Decision Guide Request - E2E Scenario 1_AARP | AARP |   90210 | NO              | Los Angeles County | MS       | MNRtestKumar | MNRtestSai | mail               | [blank]                    | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
       | IS Decision Guide Request - E2E Scenario 1_AARP | AARP |   90210 | NO              | Los Angeles County | MS       | MNRtestSai | MNRtestKumar | email              | venkata.kanagala@optum.com | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
 
-    @insuranceSolution_DecisionGuide_Common_UHC @UATRegression @regressionUHC @insuranceSolution
+    @insuranceSolution_DecisionGuide_Common_UHC @UATRegression @regressionUHC @insuranceSolution @sanity
     Examples: 
       | Scenario                                       | site | zipcode | isMultutiCounty | county             | plantype | firstname  | lastname     | distributionmethod | email                    | dob        | partBmonth | partByear | aarpNo     | phNo       | mobileFlag | partAmonth | partAyear | startDate | gender |
       | IS Decision Guide Request - E2E Scenario 1_UMS | UHC  |   90210 | NO              | Los Angeles County | MS       | MNRtestKumar | MNRtestSai | mail               | [blank]                  | 01/01/1945 | January    |      2020 | 0321323215 | 3216549871 | N          | February   |      2020 | June      | male   |
