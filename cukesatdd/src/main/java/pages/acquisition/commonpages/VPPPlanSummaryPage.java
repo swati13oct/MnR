@@ -4714,6 +4714,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	
 
 	public void medsuppOLERightRail() throws InterruptedException {
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", RightRail_yourGuide);
+		sleepBySec(3);
 		validateNew(RightRail_yourGuide);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_yourGuide, 30);
 		String parentWindow = driver.getWindowHandle();
