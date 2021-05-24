@@ -28,11 +28,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='addDrug']")
 	public WebElement addMyDrugsBtn;
 
-	@FindBy(xpath = "//button[(@id= 'search')]")
+	@FindBy(xpath = "//span[contains(text(),'Search')]")
 	public WebElement SearchBtn;
-
-	@FindBy(css = "#heading")
-	public WebElement AddmyDrugHeader;
 	
 	@FindBy(xpath = "//*[@id=\"drug-label\"]")
 	public WebElement enterDrugTitle;
@@ -110,25 +107,26 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//h2[@id='heading']")
+	@FindBy(xpath = "//span[contains(text(),'Build Your Drug List')]")
 	public WebElement addYourDrugHeader;
 
 	public void addDrugs(String drugName) throws InterruptedException {
 		
 		sendkeysMobile(EnterDrugNameTxt, drugName);
 		
-		scrollToView(addYourDrugHeader);
+//		scrollToView(addYourDrugHeader);
 		jsClickNew(addYourDrugHeader);
 		
-		scrollToView(addYourDrugHeader);
+//		scrollToView(SearchBtn);
 		jsClickNew(SearchBtn);
-		Thread.sleep(5000);
+		pageloadcomplete();
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
+//		iosScroll(SelectDrug);
 		jsClickNew(SelectDrug);
 		Thread.sleep(2000);
-		
-		iosScroll(addToDrugList);
+//		
+//		iosScroll(addToDrugList);
 		jsClickNew(addToDrugList);
 
 
@@ -209,15 +207,14 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		// EnterDrugNameTxt.sendKeys(drugName);
 		sendkeysMobile(EnterDrugNameTxt, drugName);
 		
-		iosScroll(addYourDrugHeader);
+		//scrollToView(addYourDrugHeader);
 		jsClickNew(addYourDrugHeader);
 		
-		validateNew(SearchBtn);
+		//scrollToView(SearchBtn);
 		jsClickNew(SearchBtn);
 		
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
-		;
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
 		validateNew(SelectDrug);

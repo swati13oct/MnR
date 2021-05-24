@@ -589,7 +589,7 @@ public abstract class UhcDriver {
 				System.out.println("Trying JSClick on IOS ..........");
 				iosScroll(element);
 				JavascriptExecutor js1 = (JavascriptExecutor) driver;
-				js1.executeScript("arguments[0].click(true);", element);
+				js1.executeScript("arguments[0].click();", element);
 
 			}
 
@@ -1266,14 +1266,11 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-				//scrollToView(selectElement);
-			//checkElementisEnabled(selectElement);
-			//selectElement.click();
 			jsClickNew(selectElement);
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			threadsleep(500);
+			threadsleep(3000);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
