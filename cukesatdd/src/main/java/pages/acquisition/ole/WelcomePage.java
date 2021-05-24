@@ -278,9 +278,10 @@ public class WelcomePage extends UhcDriver{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}*/
+		//CheckPageLoad();
+		CheckiPerseptions();
 		if(validate(CancellationModal,20)){
-			CheckPageLoad();
-			CheckiPerseptions();
+		
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModal(driver);
 		}
