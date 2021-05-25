@@ -296,7 +296,7 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet    |
       | Sheet2021_23 |
-      
+
     @planCompareBenefits_NextYearAARP24
     Examples: 
       | workSheet    |
@@ -316,6 +316,13 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet      |
       | PDPSheet2021_3 |
+
+  @2021_AARP @current_year @2021CompareProd
+  Scenario Outline: 2021 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
+    Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | Plan Compare Benefits_Data |
+      | WorkSheetName | <workSheet>                |
+      | Site          | AARP                       |
 
     @planCompareBenefits_NextYear_AARP_ProdCheckout_1
     Examples: 
@@ -458,7 +465,7 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet    |
       | Sheet2021_23 |
-     
+
     @planCompareBenefits_NextYearUHC24
     Examples: 
       | workSheet    |
@@ -478,6 +485,13 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet      |
       | PDPSheet2021_3 |
+
+  @2021_AARP @current_year @2021CompareProd
+  Scenario Outline: 2020 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
+    Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | Plan Compare Benefits_Data |
+      | WorkSheetName | <workSheet>                |
+      | Site          | AARP                       |
 
     @planCompareBenefits_NextYear_UHC_ProdCheckout_1
     Examples: 
