@@ -1451,8 +1451,8 @@ public class ComparePlansPage extends UhcDriver {
 		if (counter.equals("1023")) {
 			DentalFlyerLink = driver.findElement(By.xpath("//td[1]//*[text()='Click here for details']"));
 			System.out.println("Dental Flyer link is 1023 Displayed");
-			jsClickNew(DentalFlyerLink);
-			System.out.println("Clicked on 1023 DentalFlyer on plan Compare page");
+//			jsClickNew(DentalFlyerLink);
+			System.out.println("Clicking on 1023 DentalFlyer on plan Compare page");
 //			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 //			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			switchToNewTabNew(DentalFlyerLink);
@@ -1467,8 +1467,8 @@ public class ComparePlansPage extends UhcDriver {
 		} else if (counter.equals("1025")) {
 			DentalFlyerLink = driver.findElement(By.xpath("//td[2]//*[text()='Click here for details']"));
 			System.out.println("Dental Flyer link is 1025 Displayed");
-			jsClickNew(DentalFlyerLink);
-			System.out.println("Clicked on 1025 DentalFlyer on plan Compare page");
+//			jsClickNew(DentalFlyerLink);
+			System.out.println("Clicking on 1025 DentalFlyer on plan Compare page");
 //			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 //			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			switchToNewTabNew(DentalFlyerLink);
@@ -1590,7 +1590,7 @@ public WelcomePage Enroll_OLE_Plan_Compare_PDP(String planName) throws Interrupt
 	}
 
 	jsClickNew(EnrollinPlanCompare_PDP);
-
+	waitForPageLoadSafari();
 	// if (driver.getCurrentUrl().contains("enrollment"))
 	if (driver.getCurrentUrl().contains("welcome")) {
 		System.out.println("OLE Welcome Page is Displayed");

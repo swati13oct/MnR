@@ -69,7 +69,6 @@ Feature: 1.12 ACQ - Global Components Validation
       | TFNflag  | <tfnFlag>  |
     # Then the user validates Pro-active Chat
     Then the user validates whether call icon is visible
-    Then the user validates whether chat icon is visible
 
     # Then the user validates SAM re-active Chat
     @MedEdPages_1_GlobalCompsAARP @regressionAARP @avengersRegressionAARP

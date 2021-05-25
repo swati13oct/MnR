@@ -24,3 +24,4 @@ public class RunMRATDDAcquisitionCampaignExternalLinks extends BaseTestConfig{
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
+

@@ -15,7 +15,7 @@ import io.cucumber.testng.PickleWrapper;
 						"html:reports/test-report.html",
 						"json:target/cucumber-RunMRATDDAcquisitionGlobalComponents.json",
 						"timeline:target" },
-				tags = "@regressionAARP")												
+				tags = "@regressionAARP")
 
 @RetryCountIfFailed(1)
 public class RunMRATDDAcquisitionGlobalComponents extends BaseTestConfig{
@@ -24,5 +24,3 @@ public class RunMRATDDAcquisitionGlobalComponents extends BaseTestConfig{
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
-
-

@@ -659,7 +659,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[contains(@class,'calluswidgets')]//p[1]")
 	private WebElement footertextsectioncallusMedsupp;
 	
-	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[2]")
+//	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[2]")
+	@FindBy(xpath= "//div[contains(@class,'label-icon')]//following-sibling::div/p[2]/span[@class='ng-scope']")
 	private WebElement rightRailsectionTFNtimezonePlanDetails;
 	
 	@FindBy(id = "zipcode")
@@ -3039,12 +3040,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		// driver.navigate().refresh();
-		if (MRScenario.browserName.equalsIgnoreCase("Safari")) { // Adding because Safari 13 fails to locate element
-																	// after navigate back
-			driver.navigate().refresh();
-			sleepBySec(2);
-		}
-
 	}
 
 	public void validateCallSamValue() throws InterruptedException {
@@ -6364,42 +6359,42 @@ String winHandleBefore = driver.getWindowHandle();
 				Assertion.assertTrue("Navigation to Introduction page failed", driver.getCurrentUrl().contains("/medicare-education"));
 				break;
 		case "Eligibility":
-				Assertion.assertTrue("Navigation to Eligibility page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-eligibility.html"));
+				Assertion.assertTrue("Navigation to Eligibility page failed", driver.getCurrentUrl().contains("/medicare-eligibility"));
 				break;
 		case "Coverage Options":
-			Assertion.assertTrue("Navigation to Coverage Options failed", driver.getCurrentUrl().contains("/medicare-education/medicare-parts-and-medigap-plans.html"));
+			Assertion.assertTrue("Navigation to Coverage Options failed", driver.getCurrentUrl().contains("medicare-parts-and-medigap-plans"));
 			break;
 			
 		case "Prescriptions, Providers & Benefits":
-			Assertion.assertTrue("Navigation to Prescriptions, Providers & Benefits page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-benefits.html"));
+			Assertion.assertTrue("Navigation to Prescriptions, Providers & Benefits page failed", driver.getCurrentUrl().contains("medicare-benefits"));
 			break;
 			
 		case "Medicare Cost Basics":
-			Assertion.assertTrue("Navigation to Medicare Cost Basics page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-costs.html"));
+			Assertion.assertTrue("Navigation to Medicare Cost Basics page failed", driver.getCurrentUrl().contains("medicare-costs"));
 			break;
 			
 		case "Medicare Advantage Plans":
-			Assertion.assertTrue("Navigation to Medicare Advantage Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-advantage-plans.html"));
+			Assertion.assertTrue("Navigation to Medicare Advantage Plans page failed", driver.getCurrentUrl().contains("medicare-advantage-plans"));
 			break;
 			
 		case "Medicare Supplement Insurance":
-			Assertion.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-supplement-plans.html"));
+			Assertion.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed", driver.getCurrentUrl().contains("medicare-supplement-plans"));
 			break;
 			
 		case "Medicare Prescription Drug Plans":
-			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-part-d.html"));
+			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("medicare-part-d"));
 			break;
 			
 		case "When to Enroll":
-			Assertion.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("/medicare-education/when-to-enroll.html"));
+			Assertion.assertTrue("Navigation to Enrollment Basics page failed", driver.getCurrentUrl().contains("when-to-enroll"));
 			break;
 			
 		case "Medicare FAQ":
-			Assertion.assertTrue("Navigation to Medicare FAQ page failed", driver.getCurrentUrl().contains("/medicare-education/medicare-faq.html"));
+			Assertion.assertTrue("Navigation to Medicare FAQ page failed", driver.getCurrentUrl().contains("medicare-faq"));
 			break;
 			
 		case "Articles and Special Topics":
-			Assertion.assertTrue("Navigation to Articles and Special Topics page failed", driver.getCurrentUrl().contains("/medicare-articles.html"));
+			Assertion.assertTrue("Navigation to Articles and Special Topics page failed", driver.getCurrentUrl().contains("medicare-articles"));
 			break;
 			
 			default:
