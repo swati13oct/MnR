@@ -31,6 +31,9 @@ public class CancelOLEModal extends UhcDriver{
 	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 	
+	@FindBy(xpath="//button[contains(@id,'ip-no')]")
+	public WebElement AccessibilityButton;
+	
 	public CancelOLEModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -44,14 +47,14 @@ public class CancelOLEModal extends UhcDriver{
 	}
 	
 	public void CheckiPerseptions() {
-		CommonUtility.waitForPageLoad(driver, proactiveChatExitBtn, 20); // do not change this to waitForPageLoadNew as
+		CommonUtility.waitForPageLoad(driver, AccessibilityButton, 20); // do not change this to waitForPageLoadNew as
 																			// we're not trying to fail the test if it
 																			// isn't found
 		try {
-			if (proactiveChatExitBtn.isDisplayed())
-				jsClickNew(proactiveChatExitBtn);
+			if (AccessibilityButton.isDisplayed())
+				jsClickNew(AccessibilityButton);
 		} catch (Exception e) {
-			System.out.println("Proactive chat popup not displayed");
+			System.out.println("Accessibility Button popup not displayed");
 		}
 	}	
 	private void CheckPageLoad() {
