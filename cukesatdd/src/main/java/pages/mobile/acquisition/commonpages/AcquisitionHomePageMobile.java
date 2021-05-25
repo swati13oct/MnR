@@ -2021,7 +2021,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
 		SecondarySearchInput.sendKeys(str);
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
-		SecondarySearchBtn.click();
+		//SecondarySearchBtn.click();
+		jsClickNew(SecondarySearchBtn);
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}

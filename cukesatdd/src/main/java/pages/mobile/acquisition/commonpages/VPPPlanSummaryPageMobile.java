@@ -904,8 +904,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
+		iosScroll(element);
 		System.out.println("******************>>>>>>>> " + element.getText());
-		if (element.getText().trim().contains(planName)) {
+		if (element.getText().replaceAll("\u00A00", " ").trim().contains(planName)) {
 			return true;
 		} else {
 			return false;
@@ -1090,14 +1091,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			pageloadcomplete();
 			validateNew(maPlansViewLink, 10);
-			scrollToView(maPlansViewLink);
+			iosScroll(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			// CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			pageloadcomplete();
-			scrollToView(msPlansViewLink);
+			iosScroll(msPlansViewLink);
 			jsClickNew(msPlansViewLink);
 			pageloadcomplete();
 			// CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
@@ -1107,7 +1108,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			pageloadcomplete();
-			scrollToView(snpPlansViewLink);
+			iosScroll(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
 			pageloadcomplete();
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1497,27 +1498,22 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
-
 		boolean isSpecificPlanInfoPresent = false;
-		if (planName.contains("MA") || planName.contains("MAPD") || planName.contains("HMO")) {
-			// ElementData elementData = new ElementData("id", "viewDetailsMA");
-			Thread.sleep(3000);
-			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
-			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
-			// planName);
-		}
 		if (planName.contains("SNP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsMA");
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
 			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
 			// planName);
+		} else if (planName.contains("HMO")) {
+			Thread.sleep(4000);
+			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
 			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
 			// planName);
-			Thread.sleep(3000);
+			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
 		}
 		/*
@@ -1837,13 +1833,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		System.out.println("Plan Name is : " + PlanName);
 		WebElement premiumForPlan = null;
 		if (planType.equalsIgnoreCase("PDP")) {
-			
+
 			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'pdpbenefittable')]//li[1]//*[contains(@class,'float-right')]//*[contains(@class,'ng-scope')]"));
 		} else
-	
-		premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
-				+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
+
+			premiumForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + PlanName
+					+ "')]//following::ul[@class='benefits-table'][1]//li[1]//span/span[contains(text(),'$') and (contains(@class,'scope'))]"));
 
 		// CommonUtility.waitForPageLoadNew(driver, premiumForPlan, 30);
 		pageloadcomplete();
@@ -2224,19 +2220,19 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void validatePrimaryCarePhysicianBenefit(String planType, String planName, String primaryCarePhysician) {
 		WebElement PrimaryCarePhysicianForPlan = null;
-
+		pageloadcomplete();
 		if (planName.contains("SNP")) {
-			iosScroll(PrimaryCarePhysicianForPlan);
+
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//li[contains(@id, 'linkforsnp')]//*[contains(text(),'Primary Care Physician')]"));
 		} else if (planName.contains("PDP")) {
-			iosScroll(PrimaryCarePhysicianForPlan);
+
 			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
 					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'pdpbenefittable')]//li[contains(text(),'Primary Care Physician')]"));
 		} else
-			iosScroll(PrimaryCarePhysicianForPlan);
-		PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
+
+			PrimaryCarePhysicianForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
+					+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class, 'mabenefittable')]//li//*[contains(text(),'Primary Care Physician')])"));
 
 		validateNew(PrimaryCarePhysicianForPlan);
 		/*
@@ -2334,7 +2330,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void validatePrescriptionDrugsTier1(String planName, String planType, String prescriptionDrugsTier1) {
 		WebElement drugsForPlan = null;
-
+		pageloadcomplete();
 		if (!prescriptionDrugsTier1.contains("No drug coverage")) {
 			if (planType.equalsIgnoreCase("SNP")) {
 				drugsForPlan = driver.findElement(By.xpath("(//*[contains(text(),\'" + planName
@@ -3803,7 +3799,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public void handlePlanYearSelectionPopup(String planYear) {
 
-		CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.checkPageIsReadyNew(driver);
 
 		if (planYear.equalsIgnoreCase("current")) { // if the scenario is for current year
 			if (validate(IsMyDoctorCovereredBanner, 20)) {
@@ -4940,7 +4936,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			moveMouseToElement(compareLinks.get(1));
 			iosScroll(compareLinks.get(1));
 			jsClickNew(compareLinks.get(1));
-			//compareLinks.get(1).click();
+			// compareLinks.get(1).click();
 		} else {
 			WebElement compareLinks2 = driver
 					.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));
