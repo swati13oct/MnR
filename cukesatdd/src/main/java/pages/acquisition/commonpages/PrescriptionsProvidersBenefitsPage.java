@@ -99,8 +99,8 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		
 		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"))
 		{
-			WebElement pageHeader=driver.findElement(By.xpath("//span[contains(text(),'Enrollment Basics') and contains(@class,'heading-1')]"));
-			waitforElementNew(pageHeader);
+			//WebElement pageHeader=driver.findElement(By.xpath("//span[contains(text(),'Enrollment Basics') and contains(@class,'heading-1')]"));
+			//waitforElementNew(pageHeader);
 			System.out.println("Annual Enrollment Period Page open correctly");
 			
 		}else {
@@ -109,7 +109,8 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		driver.navigate().back();
 	}
 	public ProviderSearchPage clicksOnRallyToolFromMedEdPage() {
-		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//span[contains(text(),'Look up providers in the Provider Search tool')]"));
+		//WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//span[contains(text(),'Look up providers in the Provider Search tool')]"));
+		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//a//span[contains(text(),'Look up your providers')]"));
 		validateNew(providerSearchFromMedEd);
 	
 		switchToNewTabNew(providerSearchFromMedEd);
@@ -123,7 +124,9 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 	}
 
 	public GetStartedPage clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator')]//span[contains(text(),'drug cost')]"));
+		//WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator')]//span[contains(text(),'drug cost')]"));
+		//WebElement DCELink=driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and @role='button']"));
+		WebElement DCELink=driver.findElement(By.xpath("(//a[contains(@href,'drug-cost-estimator')])[3]"));
 		validateNew(DCELink);
 		switchToNewTabNew(DCELink);
 		waitForPageLoadSafari();

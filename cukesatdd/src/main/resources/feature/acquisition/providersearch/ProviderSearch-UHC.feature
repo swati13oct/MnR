@@ -22,7 +22,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       | zipcode | isMultutiCounty | county          | plantype | planname                             | planyear |
       |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Plan 2 (HMO) | future   |
 
-  @ProviderSearchFromGlobalHeaderBlayer @AcqRegressionProviderSearchBlayer @prodRegression
+  @ProviderSearchFromGlobalHeaderBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search in UHC site from Global Header
     Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the global header on UHC site
@@ -74,7 +74,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       |   55344 |         7 | future |
       |   04011 |         6 | future |
 
-  @ProviderSearchFromVppPlanSummaryPageBlayer @prodRegression
+  @ProviderSearchFromVppPlanSummaryPageBlayer
   Scenario Outline: Verify Provider Search  in UHC site from plan summary page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -97,7 +97,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       | zipcode | isMultutiCounty | county          | plantype | planName                             | aep | planyear |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | no  | future   |
 
-  @ProviderSearchFromVppPlanDetailsPageBlayer @AcqRegressionProviderSearchBlayer @prodRegression
+  @ProviderSearchFromVppPlanDetailsPageBlayer @AcqRegressionProviderSearchBlayer
   Scenario Outline: Verify Provider Search  in UHC site from Plan Details page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user performs plan search using following information in UMS site
@@ -118,7 +118,7 @@ Feature: 2.07. ACQ- Provider Search Flow in UMS
       | zipcode | isMultutiCounty | county          | plantype | planName                                | aep | planyear |
       |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | no  | future   |
 
-  @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @prodRegression
+  @ProviderSearchFromHomePageBlayer @AcqRegressionProviderSearchBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke
   Scenario Outline: Verify Provider Search  in UHC site from Home Page
     Given the user is on the uhcmedicaresolutions site landing page
     When the user clicks on Provider Search on the Home Page on UHC Site

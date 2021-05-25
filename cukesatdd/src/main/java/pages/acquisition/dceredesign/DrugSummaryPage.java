@@ -691,6 +691,7 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public DrugDetailsPage clickViewDrugCostBtn() {
 		viewDrugCostBtn.click();
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
 			return new DrugDetailsPage(driver);

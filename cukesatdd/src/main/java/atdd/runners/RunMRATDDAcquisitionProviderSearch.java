@@ -25,3 +25,4 @@ public class RunMRATDDAcquisitionProviderSearch extends BaseTestConfig {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
+

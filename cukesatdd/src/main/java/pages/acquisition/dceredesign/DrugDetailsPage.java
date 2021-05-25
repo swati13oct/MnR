@@ -959,6 +959,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void clickOnBacktoDrugBtn() {
 		validateNew(backtoDrugEstBtn);
 		backtoDrugEstBtn.click();
+		waitForPageLoadSafari();
 	}
 
 	public void clickOnvppPlan() {
@@ -1798,6 +1799,7 @@ public class DrugDetailsPage extends UhcDriver {
 		pharmacyZipcodeSearch.clear();
 		pharmacyZipcodeSearch.sendKeys(zipcode);
 		pharmacySearchBtn.click();
+		waitForPageLoadSafari();
 	}
 
 	public void validateInvalidZipErrCodeMsg(String expectedMsg) {
@@ -2277,7 +2279,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(ChangePED_DropDown_List);
 		WebElement NextMonthOption = ChangePED_MonthNames.get(0);
 
-		String[] MonthYearText = NextMonthOption.getText().split(",");
+		String[] MonthYearText = NextMonthOption.getText().trim().split(",");
 		String Year = MonthYearText[1];
 		String Month = MonthYearText[0];
 		System.out.println("Month Year selected from dropdown - "+Month+","+Year);

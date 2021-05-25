@@ -21,7 +21,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county          | plantype | planname                             |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) |
 
-  @ProviderSearchFromGlobalHeaderUlayer @prodRegression
+  @ProviderSearchFromGlobalHeaderUlayer
   Scenario Outline: Verify Provider Search  in AARP site from Global Header
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the global header
@@ -73,7 +73,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       |   55344 |         7 | future |
       |   04011 |         6 | future |
 
-  @ProviderSearchFromVppPlanSummaryPageUlayer @prodRegression
+  @ProviderSearchFromVppPlanSummaryPageUlayer
   Scenario Outline: Verify Provider Search  in AARP site from plan summary page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -96,7 +96,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county          | plantype | planname                             | planyear |
       |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |
 
-  @ProviderSearchFromVppPlanDetailsPageUlayer @prodRegression
+  @ProviderSearchFromVppPlanDetailsPageUlayer
   Scenario Outline: Verify Provider Search  in AARP site from Plan Details page
     Given the user is on AARP medicare acquisition site landing page
     When the user performs plan search using following information in the AARP site
@@ -117,7 +117,7 @@ Feature: 1.07 .ACQ- Provider Search Flow in AARP
       | zipcode | isMultutiCounty | county          | plantype | planName                                | planyear |
       |   10001 | NO              | New York County | MA       | AARP Medicare Advantage Essential (HMO) | future   |
 
-  @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke @prodRegression
+  @ProviderSearchFromHomePageUlayer @ProviderSearchFromHomePageNextYrUlayerSmoke
   Scenario Outline: Verify Provider Search  in AARP site from Home Page
     Given the user is on AARP medicare acquisition site landing page
     When the user clicks on Provider Search on the Home Page

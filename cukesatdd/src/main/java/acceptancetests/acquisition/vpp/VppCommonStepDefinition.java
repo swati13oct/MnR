@@ -3046,8 +3046,7 @@ public class VppCommonStepDefinition {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
+		
 			// String DateOfBirth = memberAttributesMap.get("DOB");
 			String FirstName = memberAttributesMap.get("Firstname");
 			String LastName = memberAttributesMap.get("Lastname");
@@ -3055,7 +3054,7 @@ public class VppCommonStepDefinition {
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
-		}
+		
 	}
 
 	@Then("^the user clicks on back on all plan linnk in Plan Compare page")
