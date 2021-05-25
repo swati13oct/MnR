@@ -187,12 +187,12 @@ Feature: 1.05.9 -OLE MedSupp Flow
     And user clicks on Edit Your Information link and navigate back to micro form
     Then user validate all fields are editable and view plan and cancel buttons are visible
 
-    #@MedSupp_OLE_Regression_AARP
+    @MedSupp_OLE_Regression_AARP @insuranceSolution @regressionAARP
     Examples: 
       | NavigateToCompare | NoOfSavedPlansOnComparePage | NoOfPlans | zipcode | isMultutiCounty | AARPUrl                                          | county             | plantype | DOB        | Firstname | Lastname | ApplicationID | applicationType | username  | password   | AARPUrl-stg                                                                                     | site |
       | Yes               |                           4 |         2 |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html | Los Angeles County | MS       | 11/13/1940 | TEST_PORTALS_John      | TEST_PORTALS_Carry    | ABCD          | Resume          | mnrqavd11 | Password@1 | https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html | AARP |
 
-    #@MedSupp_OLE_Regression_UHC
+    @MedSupp_OLE_Regression_UHC @regressionUHC @insuranceSolution
     Examples: 
       | NavigateToCompare | NoOfSavedPlansOnComparePage | NoOfPlans | zipcode | isMultutiCounty | AARPUrl                                          | county             | plantype | DOB        | Firstname | Lastname | ApplicationID | applicationType | username  | password   | AARPUrl-stg                                                                                     | site |
       | Yes               |                           4 |         2 |   90002 | NO              | aarpsupplementalhealth.com/ole/ms.olelaunch.html | Los Angeles County | MS       | 11/13/1940 | TEST_PORTALS_John      | TEST_PORTALS_Carry    | ABCD          | Resume          | mnrqavd11 | Password@1 | https://aarpsupplementalhealth-stg.uhc.com/content/aarpsupplementalhealth/ole/ms.olelaunch.html | UHC  |

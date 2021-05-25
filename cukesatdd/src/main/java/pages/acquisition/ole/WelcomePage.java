@@ -109,7 +109,14 @@ public class WelcomePage extends UhcDriver{
 
 	@FindBy(xpath = "//a[contains(text(),'Lista de Verificación de Inscripción (PDF)')]")
 	private WebElement ListaVerificationLink;
-
+	
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public WebElement proactiveChatExitBtn;
+	
+	@FindBy(xpath="//button[contains(@id,'ip-no')]")
+	public WebElement AccessibilityButton;
+	
 	public WelcomePage(WebDriver driver) {
 
 		super(driver);
@@ -241,7 +248,27 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, AccessibilityButton, 20); // do not change this to waitForPageLoadNew as
+																			// we're not trying to fail the test if it
+																			// isn't found
+		try {
+			if (AccessibilityButton.isDisplayed())
+				jsClickNew(AccessibilityButton);
+		} catch (Exception e) {
+			System.out.println("Accessibility Button popup not displayed");
+		}
+	}	
+	private void CheckPageLoad() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 10);
+	
+	}
 	public CancelOLEModal OpenCancelOLE() {
+		CheckPageLoad();
+		CheckiPerseptions();
 		validate(CancelEnrollmentLink);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", CancelEnrollmentLink);
@@ -254,7 +281,10 @@ public class WelcomePage extends UhcDriver{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}*/
+		//CheckPageLoad();
+		CheckiPerseptions();
 		if(validate(CancellationModal,20)){
+		
 			System.out.println("OLE Cancel Enrollment Modal is Displayed");
 			return new CancelOLEModal(driver);
 		}
@@ -262,6 +292,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public LeavingOLEmodal OpenLeaveOLEmodal() {
+		CheckiPerseptions();
 		validate(SiteLogo);
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", SiteLogo);

@@ -24,6 +24,9 @@ import atdd.framework.UhcDriver;
  */
 public class AepVppPlanSummaryPage extends UhcDriver {
 
+	@FindBy(xpath="//*[(text()='Welcome to Online Enrollment')]")
+	private WebElement welcomePageHeader;
+
 	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
 	private WebElement CurrentYearLink;
 
@@ -594,44 +597,49 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	}
 
 	public void selectCounty(String county){
-		CommonUtility.waitForPageLoad(driver, countyModal, 10);
+		//CommonUtility.waitForPageLoad(driver, countyModal, 10);
 		if (validate(countyModal))
+
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[contains(text(),'" + county + "')]")));
-		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		/*ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
 			String window = itr.next();
 			driver.switchTo().window(window);
 		System.out.println(driver.getTitle());
-		}
-		//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		}*/
+			//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
 
 
 	}
 
 	public void Enroll_OLE_Plan(String planName, String planType) throws InterruptedException {
+		Thread.sleep(5000);
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		if (planType.equalsIgnoreCase("PDP")) {
 			// driver.navigate().refresh();
 			//Thread.sleep(5000);
-	validate(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
+			validateNew(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
+			scrollToView(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]")));
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
-			validate(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
-					enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+			validateNew(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
+			scrollToView(driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]")));
+			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
 		}
 
 		if (enrollForPlan != null) {
 			//validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
+			validateNew(welcomePageHeader,60);
 
 		}
 		
 	}
 	
-	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex) {
+	public HashMap<String, String> collectInfoWelcomeOLEpg(String planName, String countyName, String planYear, String sheetName, int rowIndex) throws InterruptedException {
 		this.sheetName = sheetName;
 		this.rowIndex = rowIndex;
 
@@ -646,14 +654,13 @@ public class AepVppPlanSummaryPage extends UhcDriver {
         return result;
     }
 
-    public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex) {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+    public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex) throws InterruptedException {
+		//driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the info on Welcome OLE Page");
 
 		HashMap<String, String> result=new HashMap<String, String>();
 		String planCard = "(//*[contains(text(), '"+planName+"')])[1]";
 		System.out.println("Plan card xpath : "+ planCard);
-
 		String headerPremiumXpath = planCard+"/parent::div/ul/li[2]";
 		String headerPrem = "Monthly Premium"; //this variable will be stored as key for the header premium
 		String headerPremiumText = null;
@@ -704,10 +711,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 				if(planType.equalsIgnoreCase("MA")) {
 
 					validate(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
+					scrollToView(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
 					enrollInPlan = driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]"));
 				}
 				if(planType.equalsIgnoreCase("SNP")){
 					validate(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
+					scrollToView(driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]")));
 					enrollInPlan = driver.findElement(By.xpath("(//*[contains(text(),'Enroll in plan')])[2]"));
 				}
 					}catch(Exception e){
