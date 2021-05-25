@@ -659,7 +659,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//div[contains(@class,'calluswidgets')]//p[1]")
 	private WebElement footertextsectioncallusMedsupp;
 	
-	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[2]")
+//	@FindBy(xpath = "(//div[contains(@class,'label-icon')]//following-sibling::div/p)[2]")
+	@FindBy(xpath= "//div[contains(@class,'label-icon')]//following-sibling::div/p[2]/span[@class='ng-scope']")
 	private WebElement rightRailsectionTFNtimezonePlanDetails;
 	
 	@FindBy(id = "zipcode")
@@ -3039,12 +3040,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public void validateCallSam() throws InterruptedException {
 		boolean present;
 		// driver.navigate().refresh();
-		if (MRScenario.browserName.equalsIgnoreCase("Safari")) { // Adding because Safari 13 fails to locate element
-																	// after navigate back
-			driver.navigate().refresh();
-			sleepBySec(2);
-		}
-
 	}
 
 	public void validateCallSamValue() throws InterruptedException {

@@ -713,6 +713,7 @@ public abstract class UhcDriver {
 		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		int initialCount = driver.getWindowHandles().size();
 		jsClickNew(Element);
+		waitForPageLoadSafari();
 		waitForCountIncrement(initialCount);
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		String currentHandle = null;
@@ -1495,6 +1496,7 @@ public abstract class UhcDriver {
 	 * spinners which show in different flows
 	 *
 	 * @return true, if successful
+	 * @author amahale
 	 */
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;

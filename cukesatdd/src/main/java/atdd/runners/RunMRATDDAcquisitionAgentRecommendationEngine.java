@@ -25,3 +25,4 @@ public class RunMRATDDAcquisitionAgentRecommendationEngine extends BaseTestConfi
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
+
