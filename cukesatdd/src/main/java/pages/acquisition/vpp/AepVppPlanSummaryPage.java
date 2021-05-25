@@ -707,7 +707,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 				WebElement enrollInPlan = null;
 					try {
-						//Thread.sleep(5000);
+						Thread.sleep(5000);
 				if(planType.equalsIgnoreCase("MA")) {
 
 					validate(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
