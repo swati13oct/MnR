@@ -1,7 +1,7 @@
 @vppUlayer
 Feature: ACQ-Plan benefits validation
 
-  @PlanDetails_ExcelValidation
+  @PlanDetails_ExcelValidation @2020PlanDetialsAARP
   Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
     Given the user navigates to plan details and compares benefits value from excel to UI and reports into excel
       | ExcelFile     | <excelPath> |
@@ -88,6 +88,13 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Details Benefits_Data | PDPSheet2020_2 | AARP |
 
+  @PlanDetails_ExcelValidation @2020PlanDetialsUHC
+  Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user navigates to plan details and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
     # Below are examples for UHC plan details benefits
     @planDetailsBenefitsUHC01
     Examples: 
@@ -169,7 +176,14 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Details Benefits_Data | PDPSheet2020_2 | UHC  |
 
-    # 2021 plans examples seen below
+  # 2021 plans examples seen below
+  @PlanDetails_ExcelValidation @2021PlanDetialsAARP
+  Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user navigates to plan details and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
     @planDetailsBenefitsAARP01_NextYear
     Examples: 
       | excelPath                  | workSheet   | site |
@@ -265,7 +279,14 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Details Benefits_Data | PDPSheet2021_2 | AARP |
 
-    # 2021 UHC
+  # 2021 UHC
+  @PlanDetails_ExcelValidation @2021PlanDetialsUHC
+  Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user navigates to plan details and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
     @planDetailsBenefitsUHC01_NextYear
     Examples: 
       | excelPath                  | workSheet   | site |
@@ -361,7 +382,14 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Details Benefits_Data | PDPSheet2021_2 | UHC  |
 
-    # PROD NIGHT RUN SCENARIOS
+  # PROD NIGHT RUN SCENARIOS
+  @PlanDetails_ExcelValidation @2021PlanDetialsProd
+  Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
+    Given the user navigates to plan details and compares benefits value from excel to UI and reports into excel
+      | ExcelFile     | <excelPath> |
+      | WorkSheetName | <workSheet> |
+      | Site          | <site>      |
+
     @planDetailsBenefitsUHC01_Prod
     Examples: 
       | excelPath                  | workSheet   | site |
