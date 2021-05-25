@@ -24,6 +24,9 @@ import atdd.framework.UhcDriver;
  */
 public class AepVppPlanSummaryPage extends UhcDriver {
 
+	@FindBy(xpath="//*[(text()='Welcome to Online Enrollment')]")
+	private WebElement welcomePageHeader;
+
 	@FindBy(xpath="//label[contains(@for, 'currentYear')]")
 	private WebElement CurrentYearLink;
 
@@ -594,17 +597,18 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 	}
 
 	public void selectCounty(String county){
-		CommonUtility.waitForPageLoad(driver, countyModal, 10);
+		//CommonUtility.waitForPageLoad(driver, countyModal, 10);
 		if (validate(countyModal))
+
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[contains(text(),'" + county + "')]")));
-		ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
+		/*ArrayList<String> tabs_windows = new ArrayList<String>(driver.getWindowHandles());
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
 			String window = itr.next();
 			driver.switchTo().window(window);
 		System.out.println(driver.getTitle());
-		}
-		//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		}*/
+			//CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
 
 
@@ -628,6 +632,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 		if (enrollForPlan != null) {
 			//validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
+			validateNew(welcomePageHeader,60);
 
 		}
 		
@@ -649,13 +654,12 @@ public class AepVppPlanSummaryPage extends UhcDriver {
     }
 
     public HashMap<String, String> collectInfoOLEpg(String planName,String sheetName, int rowIndex) throws InterruptedException {
-		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);  
+		//driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		System.out.println(sheetName+"_"+rowIndex+" - Proceed to collect the info on Welcome OLE Page");
 
 		HashMap<String, String> result=new HashMap<String, String>();
 		String planCard = "(//*[contains(text(), '"+planName+"')])[1]";
 		System.out.println("Plan card xpath : "+ planCard);
-		Thread.sleep(1000);
 		String headerPremiumXpath = planCard+"/parent::div/ul/li[2]";
 		String headerPrem = "Monthly Premium"; //this variable will be stored as key for the header premium
 		String headerPremiumText = null;
@@ -702,7 +706,7 @@ public class AepVppPlanSummaryPage extends UhcDriver {
 
 				WebElement enrollInPlan = null;
 					try {
-						Thread.sleep(5000);
+						//Thread.sleep(5000);
 				if(planType.equalsIgnoreCase("MA")) {
 
 					validate(driver.findElement(By.xpath("//*[contains(text(),'Enroll in plan')]")));
