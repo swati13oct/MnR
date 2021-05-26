@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VisitorProfilePage;
 
@@ -203,6 +204,9 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[4]")
 	private WebElement closepopup;
 	
+	@FindBy(xpath="//button[contains(@id,'ip-no')]")
+	public WebElement AccessibilityButton;
+	
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -214,7 +218,26 @@ public class PersonalInformationPage extends UhcDriver{
 		CommonUtility.waitForPageLoadNew(driver, DOBtxtFld, 30);
 
 	}
-
+	
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, AccessibilityButton, 20); // do not change this to waitForPageLoadNew as
+																			// we're not trying to fail the test if it
+																			// isn't found
+		try {
+			if (AccessibilityButton.isDisplayed())
+				jsClickNew(AccessibilityButton);
+		} catch (Exception e) {
+			System.out.println("Accessibility Button popup not displayed");
+		}
+	}	
+	private void CheckPageLoad() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 10);
+	
+	}
+	
 	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
 
 		String FirstName = memberDetailsMap.get("First Name");
@@ -231,7 +254,10 @@ public class PersonalInformationPage extends UhcDriver{
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
-
+		
+		CheckPageLoad();
+		CheckiPerseptions();
+		
 		sendkeysNew(firstNameField, FirstName);
 		sendkeysNew(lastNameField, LastName);
 		

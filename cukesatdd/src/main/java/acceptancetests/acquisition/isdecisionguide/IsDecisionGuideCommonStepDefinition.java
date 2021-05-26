@@ -303,6 +303,8 @@ public class IsDecisionGuideCommonStepDefinition {
 		IsDecisionGuideStep2 DecisionGuideStep2Page = (IsDecisionGuideStep2) getLoginScenario().getBean(PageConstants.IS_DECISION_GUIDE_PAGE2);
 		String dateOfBirth= (String) getLoginScenario().getBean(MedSuppCommonConstants.DOB);
 		Map<String, String> PreEntryPageInfo=  new HashMap<String, String>();
+		if (!(MRScenario.environment.equalsIgnoreCase("offline")
+				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
 		PreEntryPageInfo = DecisionGuideStep2Page.CapturePreEntryPageInfoISDecisionGuide(dateOfBirth);
 		String DOBEntered = PreEntryPageInfo.get("DOB");
 		String part_A_Month_Entered = PreEntryPageInfo.get("part_A_Month_Entered");
@@ -316,6 +318,7 @@ public class IsDecisionGuideCommonStepDefinition {
 			getLoginScenario().saveBean(PageConstants.IS_DECISION_GUIDE_PAGE2,DecisionGuideStep2Page);
 		} else {
 			Assertion.assertTrue("PROBLEM - Is Decision Guide Step 2 Page is null", false);
+		}
 		}
 	}
 }

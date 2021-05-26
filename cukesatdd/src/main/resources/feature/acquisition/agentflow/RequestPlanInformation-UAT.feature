@@ -25,7 +25,7 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
     @requestPlanInformationBlayer @UATRegression @regressionUHC
     Examples: 
       | scenario                                   | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
-      | Request plan information scenario 1 _UHCMS | UHC  | MA-MBI   | future   | future   |   10001 | NO              | New York County | MA       | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+      | Request plan information scenario 1 _UHCMS | UHC  | MA-MBI   | future   | future   |   10001 | NO              | New York County | MA       | future   | Test_Portals_J | Test_Portals_K | prashant_kadus@optum.com |
 
   Scenario Outline: <scenario> Verify request an <plantype>appointment through <site>
     Given the user is on medicare acquisition site landing page
@@ -51,7 +51,7 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
     @requestPlanInformationBlayer @UATRegression @regressionUHC
     Examples: 
       | scenario                                   | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
-      | Request plan information scenario 1 _UHCMS | UHC  | PDP-MBI  | future   | future   |   10001 | NO              | New York County | PDP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+      | Request plan information scenario 1 _UHCMS | UHC  | PDP-MBI  | future   | future   |   10001 | NO              | New York County | PDP      | future   | Test_Portals_J | Test_Portals_K | prashant_kadus@optum.com     |
 
   Scenario Outline: <scenario> Verify request <plantype> an appointment through <site>
     Given the user is on medicare acquisition site landing page
@@ -77,7 +77,7 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
     @requestPlanInformationBlayer @UATRegression @regressionUHC
     Examples: 
       | scenario                                   | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
-      | Request plan information scenario 1 _UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+      | Request plan information scenario 1 _UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | prashant_kadus@optum.com |
 
 
    # ------------------ Old pages for Shop for plan and changed to medicare page
@@ -116,4 +116,4 @@ Feature: 1.06-UAT Scripts to validate the request plan information on the Acquis
     @requestPlanInformationBlayer @UATRegression @regressionUHC
     Examples: 
       | scenario                                        | site | PlanType     | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | Firstname      | Lastname       | email                      |
-      | Request Plan Information - E2E Scenario 3_UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | venkata.kanagala@optum.com |
+      | Request Plan Information - E2E Scenario 3_UHCMS | UHC  | PCP-DSNP-MBI | future   | future   |   10001 | NO              | New York County | SNP      | future   | Test_Portals_J | Test_Portals_K | prashant_kadus@optum.com |
