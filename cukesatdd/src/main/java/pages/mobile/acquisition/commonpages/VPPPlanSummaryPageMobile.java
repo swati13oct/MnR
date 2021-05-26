@@ -40,6 +40,7 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
@@ -904,14 +905,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
-		iosScroll(element);
-		System.out.println("******************>>>>>>>> " + element.getText());
-		if (element.getText().replaceAll("\u00A00", " ").trim().contains(planName)) {
+		if (element.getText().contains(planName)) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
 
 	public void clickCurrentYearTab() {
@@ -1077,8 +1075,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
-			
-			//iosScroll(pdpPlansViewLink);
+
+			// iosScroll(pdpPlansViewLink);
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
 			pageloadcomplete();
@@ -1141,16 +1139,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 
+		sleepBySec(5);
 		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
-		ProviderSearchLink.getText().replaceAll("\u00A00", " ").trim();
-		// iosScroll(ProviderSearchLink);
-		// validateNew(ProviderSearchLink);
+		validateNew(ProviderSearchLink);
+		iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
-		sleepBySec(3);
+		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
 			return new ProviderSearchPageMobile(driver);
 		}
@@ -3066,8 +3064,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public VPPPlanSummaryPageMobile navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
-		Actions action = new Actions(driver);
-		action.moveToElement(planOverviewChangeZipCodeLink).build().perform();
+		// Actions action = new Actions(driver);
+		// action.moveToElement(planOverviewChangeZipCodeLink).build().perform();
 		try {
 			// if change zip code link is there then click it, once you used it then it will
 			// only display field box going forward.
@@ -3086,7 +3084,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// planOverviewZipCodeFieldBox.clear();
 
 		// enter zipcode
-		jsSendkeys(planOverviewZipCodeFieldBox, zipcode);
+		sendkeysMobile(planOverviewZipCodeFieldBox, zipcode);
 		jsClickNew(planOverviewFindPlanButton);
 
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
@@ -4908,6 +4906,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public ComparePlansPageMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
+		iosScroll(compareLinks.get(1));
 		jsClickNew(compareLinks.get(1));
 		waitForPageLoadSafari();
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
@@ -4934,7 +4933,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// compareLinks.get(1).click();
 		} else {
 			WebElement compareLinks2 = driver
-					.findElement(By.xpath("(.//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));
+					.findElement(By.xpath(".//*[@id='plan-list-3']//button[contains(text(),'Compare plans')])[1]"));
 			// compareLinks2.click();
 			jsClickNew(compareLinks2);
 			pageloadcomplete();
@@ -5288,8 +5287,11 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void checkPlansForCompare(String counter, String planType) {
-		pageloadcomplete();
-
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		List<Integer> selectPlanIndexes = new ArrayList<Integer>();
 		int count = counter.contains(",") ? 0 : Integer.parseInt(counter);
 		if (count == 0)
@@ -5313,7 +5315,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (allPlans != null) {
 			for (int i : selectPlanIndexes) {
-				iosScroll(allPlans.get(i));
+
 				jsClickNew(allPlans.get(i));
 			}
 		}

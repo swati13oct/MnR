@@ -136,8 +136,8 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		validateNew(continueBtn);
 		jsClickNew(continueBtn);
 		pageloadcomplete();
-		// waitForPageLoadSafari();
-		// CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		waitForPageLoadSafari();
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);

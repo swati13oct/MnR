@@ -143,7 +143,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
 	private WebElement addedDrug;
 
-	@FindBy(xpath = "//a[text()='Look up my Doctor/Provider']")
+	@FindBy(id = "po7links")
 	private WebElement lookUpYourProviderButton;
 
 	@FindBy(xpath = "//p[contains(text(),'See if your Doctor/Provider is covered in your ZIP')]")
@@ -169,6 +169,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
 	private WebElement planMonthlyPremium;
+
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement planYearlyPremium;
 
@@ -940,17 +941,13 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public boolean clickAndValidatePlanCosts(String monthlyPremium, String yearlyPremium) throws Exception {
 		boolean bValidation = false;
 
-		scrollToView(prescriptiondrugTab);
 		jsClickNew(prescriptionTab);
 		pageloadcomplete();
-		
-		scrollToView(optionalServicesTab);
+
 		jsClickNew(optionalServicesTab);
 		pageloadcomplete();
-		
-		scrollToView(planCostsTab);
+
 		jsClickNew(planCostsTab);
-		pageloadcomplete();
 
 		Thread.sleep(4000);
 		if (monthlyPremium.equals(planMonthlyPremium.getText().trim())

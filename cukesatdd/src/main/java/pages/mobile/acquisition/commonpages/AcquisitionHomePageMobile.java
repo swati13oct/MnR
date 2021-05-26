@@ -1,7 +1,6 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
-import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,25 +30,8 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.PageTitleConstants;
-import pages.acquisition.commonpages.RequestHelpAndInformationPage;
-import pages.acquisition.commonpages.ShopForPlanNavigationPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
-import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.commonpages.DisclaimersPageMobile;
-import pages.mobile.acquisition.commonpages.EnterZipCodePage;
-import pages.mobile.acquisition.commonpages.KeywordSearchAARPMobile;
-import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
-import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
-import pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile;
-import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
@@ -3860,7 +3842,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// Assertion.assertTrue( "Title mismatch for dental
 		// directory",driver.getTitle().equals(url));
 		if (str.equals(url)) {
-			Assertion.assertTrue(true);
+			assertTrue(true);
 		}
 
 	}
