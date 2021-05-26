@@ -126,7 +126,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]/div/span/span[@class='ng-binding']")
 	private WebElement snpPlansNumber;
 
-	@FindBy(xpath = "//a[@aria-label='Medicare Advantage (Part C) Plans: View Plans']")
+	@FindBy(xpath = "//div[contains(@class,'module-tabs-tabs')]/div[not (contains(@class,'active'))]//span[@id='maviewplans']/following-sibling::a")
 	private WebElement maPlansViewLink;
 
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[contains(@class,'trigger-closed')]")
@@ -1077,12 +1077,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void viewPlanSummary(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
-			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", pdpPlansViewLink);
-			// CommonUtility.waitForPageLoadNew(driver, pdpPlansViewLink, 30);
-			// sleepBySec(2); // note: add sleep for timing issue, tried increase timeout
-			// from
-			// waitForPageLoadNew but didn't work
-			scrollToView(pdpPlansViewLink);
+			
+			//iosScroll(pdpPlansViewLink);
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
 			pageloadcomplete();
@@ -1150,6 +1146,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+		ProviderSearchLink.getText().replaceAll("\u00A00", " ").trim();
 		// iosScroll(ProviderSearchLink);
 		// validateNew(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
@@ -1506,14 +1503,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
 			// planName);
 		} else if (planName.contains("HMO")) {
-			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
 			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
 			// planName);
-			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
 		}
 		/*
@@ -2459,10 +2454,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void validateAgentEBRCPage() {
-		scrollToView(RightRail_AgentInYourArea);
+		validateNew(RightRail_AgentInYourArea);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_AgentInYourArea, 30);
 		String parentWindow = driver.getWindowHandle();
-		iosScroll(RightRail_AgentInYourArea);
+		checkElementisEnabled(RightRail_AgentInYourArea);
 		jsClickNew(RightRail_AgentInYourArea);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();

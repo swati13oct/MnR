@@ -71,8 +71,8 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-	       		<artifactId>maven-failsafe-plugin</artifactId>
-	        	<version>2.22.2</version> <!-- 2.22.0 -->
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.2</version> <!-- 2.22.0 -->
 				<executions>
 					<execution>
 						<goals>
@@ -92,10 +92,8 @@
 							<!-- <threadCountMethods>1000</threadCountMethods> -->
 							<!-- <threadCount>100</threadCount> -->
 							<properties>
-								<!-- <property>
-									<name>dataproviderthreadcount</name>
-									<value>200</value>
-								</property> -->
+								<!-- <property> <name>dataproviderthreadcount</name> <value>200</value> 
+									</property> -->
 								<property>
 									<name>testnames</name>
 									<value>${testnames}</value>
@@ -111,26 +109,12 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1.1</version>
-				<executions>
-					<execution>
-						<id>script-execution</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable>
-				</configuration>
-			</plugin>
-			-->
-			
+			<!-- <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
+				<version>1.1.1</version> <executions> <execution> <id>script-execution</id> 
+				<phase>post-integration-test</phase> <goals> <goal>exec</goal> </goals> </execution> 
+				</executions> <configuration> <executable>${basedir}/src/main/resources/pdfReportGenerator.sh</executable> 
+				</configuration> </plugin> -->
+
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
@@ -143,7 +127,9 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<project>Acquisition</project>
+							<project>
+								Acquisition
+							</project>
 							<skip>false</skip>
 							<outputDirectory>test-output</outputDirectory>
 							<inputDirectory>${project.build.directory}</inputDirectory>
@@ -165,11 +151,11 @@
 				<version>3.9.0</version>
 				<configuration>
 					<targetJdk>1.8</targetJdk>
-				<rulesets>
-					<ruleset>${project.basedir}/src/main/resources/ucp-custom-ruleset.xml</ruleset>
-				</rulesets>
-				<failsOnError>false</failsOnError>
-     			<failOnViolation>false</failOnViolation>
+					<rulesets>
+						<ruleset>${project.basedir}/src/main/resources/ucp-custom-ruleset.xml</ruleset>
+					</rulesets>
+					<failsOnError>false</failsOnError>
+					<failOnViolation>false</failOnViolation>
 				</configuration>
 				<executions>
 					<execution>
@@ -180,7 +166,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-	
+
 		<pluginManagement>
 			<plugins>
 				<!--This plugin's configuration is used to store Eclipse m2e settings 
@@ -218,28 +204,28 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-		<reporting>
-    		<plugins>
-       		 <plugin>
-          	  <groupId>org.apache.maven.plugins</groupId>
-          	  <artifactId>maven-jxr-plugin</artifactId>
-           	 <version>2.5</version>
-       		 </plugin>
-       		 
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-pmd-plugin</artifactId>
-            <version>3.9.0</version>
-            <configuration>
-                <linkXRef>false</linkXRef>
-                <targetJdk>1.8</targetJdk>
-                <rulesets>
-                    <ruleset>/rulesets/basic.xml</ruleset>
-                </rulesets>
-            </configuration>
-        </plugin>
-    		</plugins>
-		</reporting>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+				<version>2.5</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.9.0</version>
+				<configuration>
+					<linkXRef>false</linkXRef>
+					<targetJdk>1.8</targetJdk>
+					<rulesets>
+						<ruleset>/rulesets/basic.xml</ruleset>
+					</rulesets>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencies>
 		<dependency>
@@ -362,6 +348,7 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>

@@ -55,7 +55,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@type,'submit') and contains(text(), 'Send')]")
 	protected WebElement emailPlanSummarySendButton;
 
-	@FindBy(xpath = "//button[@class='cta-button close-modal secondary']")
+	@FindBy(xpath = "//a[@id='closepopup']")
 	protected WebElement emailPlanSummaryCancelButton;
 
 	@FindBy(xpath = "//*[@id='emailSuccess']") 
@@ -133,7 +133,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath="//button[@ng-click='closeEmailSuccessMsgPopUp()']")
 	protected WebElement closeButtonthankyoumessagepopup;
 
-	@FindBy(xpath=".//*[@id='emailComparison']")
+	@FindBy(xpath="//span[contains(text(),'Email')]")
 	protected WebElement validateemailbutton;
 	
 	@FindBy(xpath=".//*[@id='emailcompareDescription']")
@@ -157,7 +157,7 @@ public class EmailAndPrintUtilWebElementsMobile extends UhcDriver {
 	@FindBy(xpath = ".//*[@id='closepopup']")
 	protected WebElement cancelButtonEmailPlanDetailsPopUp;
 
-	@FindBy(xpath = ".//*[@id='form-valid']//button[2]")
+	@FindBy(xpath = "//button[contains(text(),'Send')]")
 	protected WebElement sendButtonEmailPlanDetailsPopUp;
 
 	@FindBy(xpath="//a[contains(@dtmname,'Enroll in Plan')]")

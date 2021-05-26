@@ -1021,7 +1021,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		iosScroll(footerAboutUsLink);
 		jsClickNew(footerAboutUsLink);
 		pageloadcomplete();
-		//validateNew(footerLinkHeader, 30);
+		// validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPageMobile(driver);
 		}
@@ -1047,7 +1047,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerSiteMapLink);
 		// footerSiteMapLink.click();
 		jsClickNew(footerSiteMapLink);
-		//pageloadcomplete();
+		// pageloadcomplete();
 		pageloadcomplete();
 		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
@@ -1692,9 +1692,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * 
 	 * public ContactUsAARPPage contactUsFooterClick() {
 	 * validateNew(footerContactUsLink); footerContactUsLink.click();
-	 * pageloadcomplete(); if
-	 * (driver.getCurrentUrl().contains("contact-us")) { return new
-	 * ContactUsAARPPage(driver); } return null; }
+	 * pageloadcomplete(); if (driver.getCurrentUrl().contains("contact-us")) {
+	 * return new ContactUsAARPPage(driver); } return null; }
 	 * 
 	 * 
 	 * 
@@ -1706,14 +1705,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * 
 	 * public TermsnConditionsAARPPage termsnconditionsFooterClick() {
 	 * validate(footerTermsnConditionsLink); footerTermsnConditionsLink.click();
-	 * pageloadcomplete(); if
-	 * (driver.getCurrentUrl().contains("terms-of-use")) { return new
-	 * TermsnConditionsAARPPage(driver); } return null; }
+	 * pageloadcomplete(); if (driver.getCurrentUrl().contains("terms-of-use")) {
+	 * return new TermsnConditionsAARPPage(driver); } return null; }
 	 * 
 	 * public AcquisitionHomePageMobile homeFooterClick() {
-	 * validateNew(footerHomeLink); footerHomeLink.click();
-	 * pageloadcomplete(); if (validateNew(zipCodeField)) {
-	 * return new AcquisitionHomePageMobile(driver, true); } return null; }
+	 * validateNew(footerHomeLink); footerHomeLink.click(); pageloadcomplete(); if
+	 * (validateNew(zipCodeField)) { return new AcquisitionHomePageMobile(driver,
+	 * true); } return null; }
 	 * 
 	 * public void clickRequestAsistancce() {
 	 * validateNew(footerRequestforAssistancelink); if(proactiveChatExitBtn!=null)
@@ -1772,16 +1770,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPageMobile ZipcodeSearch(String zipcode) {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,300)", "");
+		pageloadcomplete();
+		scrollToView(StandaloneZipcode);
 
-		sendkeys(StandaloneZipcode, zipcode);
-		StandalonSearchCounty.click();
+		sendkeysMobile(StandaloneZipcode, zipcode);
+
+		jsClickNew(StandalonSearchCounty);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		try {
 			if (countyDropdown.isDisplayed()) {
@@ -1793,13 +1787,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		jse.executeScript("window.scrollBy(0,100)", "");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		ViewPlansPricingButton.click();
+		pageloadcomplete();
+		// ViewPlansPricingButton.click();
+		jsClickNew(ViewPlansPricingButton);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -2021,7 +2011,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
 		SecondarySearchInput.sendKeys(str);
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
-		//SecondarySearchBtn.click();
+		// SecondarySearchBtn.click();
 		jsClickNew(SecondarySearchBtn);
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
@@ -3618,8 +3608,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 		/*
-		 * pageloadcomplete(); String CurrentUHCAgentURL =
-		 * driver.getCurrentUrl();
+		 * pageloadcomplete(); String CurrentUHCAgentURL = driver.getCurrentUrl();
 		 * System.out.println("myuhcagent Page is displayed : "+CurrentUHCAgentURL);
 		 * System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
 		 * 
@@ -4042,13 +4031,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//input[@id='submitChat']")
 	private WebElement proActiveChatSubmit;
-	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+
+	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
-	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+
+	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
 	public WebElement proactiveChatChatBtn;
-	
+
 	public void validateProActiveChatpopupconnect() {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
@@ -4086,12 +4075,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("Page Title---" + driver.getTitle());
 
 		}
-		
-	
 
 	}
-	
-	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType(){
+
+	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType() {
 		MobileMenuAccessPharmacy();
 		waitForPageLoadSafari();
 		if (driver.getTitle().toLowerCase()
