@@ -270,6 +270,15 @@ public class PersonalInformationPage extends UhcDriver{
 			//GenderSelectFemale.click();
 			jsClickNew(GenderSelectFemale);
 		}	
+		
+		
+		//call method click on CONTINUE BUtton
+		
+		boolean result = false; 
+		 result= Clickoncontinuebutton("/mailing-address");
+		
+		if(result) {
+		//Code for Personal Information page 2 begin
 		sendkeys(PermanentAdd_Street,Perm_Street);
 		//sendkeys(PermanentAdd_Aptno,Perm_Aptno);
 		sendkeys(PermanentAdd_City,Perm_city);
@@ -283,15 +292,46 @@ public class PersonalInformationPage extends UhcDriver{
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
 			sendkeysNew(MailingAdd_Zip,Mailing_Zip);
-		}
+					}
+		}		
+		result= Clickoncontinuebutton("phone-number");
+		//Code for Personal Information page 3 begin
+		if(result) {
 		sendkeys(Email,EmailAddress);
+		}	
+		result= Clickoncontinuebutton("language-preference");
 		
+		if(result) {
+			result= Clickoncontinuebutton("medicare-information");
+			System.out.println("Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
+		}
+		
+		/*
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : All Required Details are entered");
 			return true;
-		}
-		return false;
+		}*/
+		return result;
 	}
+
+	
+	public boolean Clickoncontinuebutton(String expectedPageURL) {
+		boolean flag=false;
+		
+		if(NextBtn.isEnabled())
+		{
+			System.out.println("Conitnue Button is Enabled : All Required Details are entered");
+			jsClickNew(NextBtn);
+			String ActualPageURL=driver.getCurrentUrl();
+			if(ActualPageURL.contains(expectedPageURL)) 
+			{
+				
+				flag=true;
+			}
+		}	
+		return flag;
+		
+		}
 	
 	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
 
