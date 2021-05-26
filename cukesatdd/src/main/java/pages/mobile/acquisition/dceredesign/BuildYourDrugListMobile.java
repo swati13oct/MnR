@@ -73,7 +73,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
 	public WebElement reviewDrugCost;
 
-	@FindBy(xpath = "//input[@id='zip-code']")
+	@FindBy(css = "#zip-code")
 	public WebElement zipCodeTxtbox;
 
 	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
