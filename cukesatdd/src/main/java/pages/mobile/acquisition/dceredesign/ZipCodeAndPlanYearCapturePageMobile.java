@@ -29,7 +29,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//select[@id='county']/option")
 	public WebElement countyRows;
 
-	@FindBy(xpath = "//select[@id='county']")
+	@FindBy(css = "#county")
 	public WebElement countyDropdown;
 
 	@FindBy(xpath = "//*[@id='plan-year']")
@@ -104,7 +104,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[text()='Find Plans' and @xpath=\"1\"]")
 	public WebElement FindPlans;
-	
+
 	@FindBy(xpath = "//*[@id=\"county\"]/option[2]")
 	public WebElement firstCounty;
 
@@ -113,14 +113,12 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		// sendkeys(zipCodeTxtbox, zipcode);
 		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
-		//iosScroll(countyDropdown);
+		iosScroll(countyDropdown);
 		try {
 
 			if (countyDropdown.isDisplayed()) {
-				String countyValue = (driver.findElements(By.xpath("//select[@id='county']/option")).get(1)).getText()
-						.toString();
-				//countyDropdown.click();
-				//firstCounty.click();
+				String countyValue = driver.findElements(By.cssSelector("#county")).get(1).getText().toString();
+				sleepBySec(5);
 				mobileSelectOption(countyDropdown, countyValue, true);
 			}
 		} catch (Exception e) {
@@ -133,7 +131,8 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	public DrugSummaryPageMobile clickContinueBtn() {
 		validateNew(continueBtn);
 		jsClickNew(continueBtn);
-		waitForPageLoadSafari();
+		pageloadcomplete();
+//		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {

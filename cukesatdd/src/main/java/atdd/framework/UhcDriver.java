@@ -181,6 +181,13 @@ public abstract class UhcDriver {
 		driver.manage().window().maximize();
 		driver.get(url);
 	}
+	
+	public void startNewMobile(String url) {
+
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
+		driver.get(url);
+	}
 
 	public UhcDriver(WebDriver driver) {
 		this.driver = driver;
@@ -577,14 +584,12 @@ public abstract class UhcDriver {
 
 			System.out.println("Selenium Click executed........" + element.getAttribute("automationTrack"));
 			
-		
-
 			if (element.getAttribute("automationTrack")!="true") {
 				//checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
 				iosScroll(element);
 				JavascriptExecutor js1 = (JavascriptExecutor) driver;
-				js1.executeScript("arguments[0].click(true);", element);
+				js1.executeScript("arguments[0].click();", element);
 
 			}
 
@@ -596,7 +601,7 @@ public abstract class UhcDriver {
 
 	}
 
-	// ((IOSDriver) driver).findElement(MobileBy.
+
 
 	public void jsClickNew(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
@@ -1107,11 +1112,7 @@ public abstract class UhcDriver {
 		return timeStr;
 	}
 
-	public void startNewMobile(String url) {
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.get(url);
-	}
 
 	/**
 	 * @author Murali - mmurugas This method will perform vertical swipe on mobile
@@ -1266,14 +1267,11 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-				//scrollToView(selectElement);
-			//checkElementisEnabled(selectElement);
-			//selectElement.click();
 			jsClickNew(selectElement);
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
 			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			threadsleep(500);
+			threadsleep(3000);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());

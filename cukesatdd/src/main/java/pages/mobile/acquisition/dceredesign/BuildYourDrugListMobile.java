@@ -24,16 +24,15 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='drugsearch']")
 	public WebElement EnterDrugNameTxt;
-	
 
 	@FindBy(xpath = "//button[@id='addDrug']")
 	public WebElement addMyDrugsBtn;
 
-	@FindBy(xpath = "//button[(@id= 'search')]")
+	@FindBy(xpath = "//span[contains(text(),'Search')]")
 	public WebElement SearchBtn;
 	
-	@FindBy(css = "#heading")
-	public WebElement AddmyDrugHeader;
+	@FindBy(xpath = "//*[@id=\"drug-label\"]")
+	public WebElement enterDrugTitle;
 
 	@FindBy(xpath = "//button[(@id= 'previousButton')]")
 	public WebElement PreviousBtn;
@@ -66,11 +65,11 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "(//button[text()='Select'])[1]")
 	public WebElement selectBtn;
 
-	
 	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
 	public WebElement addToDrugList;
 
-	
+	// span[contains(text(),'Add to drug List')]
+
 	@FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
 	public WebElement reviewDrugCost;
 
@@ -108,40 +107,36 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	}
 
+	@FindBy(xpath = "//span[contains(text(),'Build Your Drug List')]")
+	public WebElement addYourDrugHeader;
+
 	public void addDrugs(String drugName) throws InterruptedException {
-		// validate(EnterDrugNameTxt);
-
-		// waitforElement(EnterDrugNameTxt);
-
-		// EnterDrugNameTxt.click();
-		// jsClickNew(EnterDrugNameTxt);
-		// EnterDrugNameTxt.sendKeys(drugName);
-		//sendkeys(EnterDrugNameTxt, drugName);
+		
 		sendkeysMobile(EnterDrugNameTxt, drugName);
-
-		Thread.sleep(5000);
-		WebElement drugname = driver.findElement(By.xpath("//*[contains(@id,'" + drugName + "')]"));
-
-		jsClickNew(drugname);
-		/*
-		 * if(validate(SearchBtn)) SearchBtn.click(); if(validate(selectBtn))
-		 * selectBtn.click();
-		 */
+		
+//		scrollToView(addYourDrugHeader);
+		jsClickNew(addYourDrugHeader);
+		
+//		scrollToView(SearchBtn);
+		jsClickNew(SearchBtn);
+		pageloadcomplete();
+		WebElement SelectDrug = driver
+				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
+//		iosScroll(SelectDrug);
+		jsClickNew(SelectDrug);
 		Thread.sleep(2000);
-		validateNew(addToDrugList);
-		scrollToView(addToDrugList);
+//		
+//		iosScroll(addToDrugList);
 		jsClickNew(addToDrugList);
 
-		// addToDrugList.click();
-		// reviewDrugCost.click();
+
 	}
 
 	@FindBy(xpath = "//a[contains(text(),'Add Drugs')]")
 	private WebElement addrugs;
-	
+
 	public DrugCostEstimatorPageMobile addDrug() {
 
-		
 		jsClickNew(addrugs);
 		if (currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPageMobile(driver);
@@ -149,7 +144,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public void clickReviewDrugCostBtn() {
-		
+
 		jsClickMobile(reviewDrugCost);
 	}
 
@@ -182,7 +177,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public TellUsAboutDrugMobile SelectDrugfromList(String drugName) {
 		validateNew(AutoCompleteList);
-		WebElement Drug = driver.findElement(By.xpath("//*[@id='"+drugName+"']"));
+		WebElement Drug = driver.findElement(By.xpath("//*[@id='" + drugName + "']"));
 		jsClickNew(Drug);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
@@ -194,10 +189,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile navigateToZipEntryPage() {
-		//pageloadcomplete();
+		// pageloadcomplete();
 		iosScroll(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
-		//CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
+		// CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
 		if (validateNew(zipCodeTxtbox)) {
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
 		} else {
@@ -209,20 +204,28 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) throws InterruptedException {
 		validateNew(EnterDrugNameTxt);
-		//EnterDrugNameTxt.sendKeys(drugName);
+		// EnterDrugNameTxt.sendKeys(drugName);
 		sendkeysMobile(EnterDrugNameTxt, drugName);
-		validateNew(SearchBtn);
+		
+		//scrollToView(addYourDrugHeader);
+		jsClickNew(addYourDrugHeader);
+		
+		//scrollToView(SearchBtn);
 		jsClickNew(SearchBtn);
+		
 		waitForPageLoadSafari();
-		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);;
+		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
+		pageloadcomplete();
+//		iosScroll(addToDrugList);
+//		jsClickNew(addToDrugList);
 		threadsleep(2000);
-		waitForPageLoadSafari();
+		//waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
+		// CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
 			return new TellUsAboutDrugMobile(driver);
 		} else {
@@ -271,8 +274,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 				&& validateNew(DrugListModal_GotItBtn)) {
 			jsClickNew(DrugListModal_GotItBtn);
 			System.out.println("Got It button Clicked to close modal");
-			Assertion.assertTrue("Drug List limit Modal and message are Displayed as Expected : " + DrugListModal_Message,
-					true);
+			Assertion.assertTrue(
+					"Drug List limit Modal and message are Displayed as Expected : " + DrugListModal_Message, true);
 		} else
 			Assertion.fail("Drug List Modal and Message NOT Displayed!!!");
 
@@ -282,112 +285,120 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		String[] DrugListItems = druglist.split("&");
 		int i;
 		String currentDrug;
-		int DrugCount_Total = DrugListItems.length-1;
-		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		for(i=1; i<=DrugCount_Total; i++) {
+		int DrugCount_Total = DrugListItems.length - 1;
+		System.out.println("Total Added Drug Count : " + DrugCount_Total);
+		System.out.println("Total Added Drug Count : " + DrugCount_Total);
+		for (i = 1; i <= DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
-			System.out.println("Current Added Drug Name : "+currentDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '"+currentDrug+"')]"));
-			WebElement DrugEditBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit') and contains(@aria-label, '"+currentDrug+"')]"));
-			WebElement DrugRemoveBtn = driver.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove') and contains(@aria-label, '"+currentDrug+"')]"));
+			System.out.println("Current Added Drug Name : " + currentDrug);
+			WebElement DrugName = driver
+					.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '" + currentDrug + "')]"));
+			WebElement DrugEditBtn = driver.findElement(
+					By.xpath("//uhc-list-item//button[contains(@aria-label, 'Edit') and contains(@aria-label, '"
+							+ currentDrug + "')]"));
+			WebElement DrugRemoveBtn = driver.findElement(
+					By.xpath("//uhc-list-item//button[contains(@aria-label, 'Remove') and contains(@aria-label, '"
+							+ currentDrug + "')]"));
 
-			if(validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
-				Assertion.assertTrue("Validated Drug List for Drug : "+currentDrug, true);
-			}
-			else
+			if (validateNew(DrugName) && validateNew(DrugEditBtn) && validateNew(DrugRemoveBtn)) {
+				Assertion.assertTrue("Validated Drug List for Drug : " + currentDrug, true);
+			} else
 				Assertion.fail("Drug List Validation FAILED for Drug : " + currentDrug);
 		}
 	}
+
 	public void deleteDrug(String deleteDrug) {
-		System.out.println("Drug to be removed : "+deleteDrug);
-		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove "+deleteDrug+"')]"));
+		System.out.println("Drug to be removed : " + deleteDrug);
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + deleteDrug + "')]"));
 		jsClickNew(removeLink);
-		
+
 	}
-	
 
 	@FindBy(xpath = "//h3[contains(text(), 'You might also take')]")
 	public WebElement DrugRecommendationHeader;
 
 	@FindBy(xpath = "//h3[contains(text(), 'You might also take')]//parent::div//following-sibling::ul//li//*")
-	public List <WebElement> DrugRecommendationDrugList;
-	
+	public List<WebElement> DrugRecommendationDrugList;
+
 	public void validateDrugRecommendationSection(String druglist) {
-		if(validate(DrugRecommendationHeader) && DrugRecommendationDrugList.size()>0 && DrugRecommendationDrugList.size()<=5) {
+		if (validate(DrugRecommendationHeader) && DrugRecommendationDrugList.size() > 0
+				&& DrugRecommendationDrugList.size() <= 5) {
 			System.out.println("Drug Recommendation section Displayed for Drugs Added");
-			System.out.println("Drug Recommendation Displays " +DrugRecommendationDrugList.size()+ " No of Drugs");
+			System.out.println("Drug Recommendation Displays " + DrugRecommendationDrugList.size() + " No of Drugs");
 			System.out.println("Checking that Drug Recommendation does not display any added drug");
-			
+
 			String[] DrugListItems = druglist.split("&");
 			int i;
 			String currentDrug;
-			//int DrugCount_Total = DrugListItems.length-1;   	//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+			// int DrugCount_Total = DrugListItems.length-1; //Commenting because null is
+			// handled when drugs are added to druglist array, thus array will only have
+			// drug names.
 			int DrugCount_Total = DrugListItems.length;
-			System.out.println("Total Added Drug Count : "+DrugCount_Total);
-			//for(i=1; i<=DrugCount_Total; i++) {				//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
-			for(i=0; i<DrugCount_Total; i++) {
+			System.out.println("Total Added Drug Count : " + DrugCount_Total);
+			// for(i=1; i<=DrugCount_Total; i++) { //Druglist array does not have null and
+			// only has drug names, hence starting from 0 to array length - 1.
+			for (i = 0; i < DrugCount_Total; i++) {
 				currentDrug = DrugListItems[i];
-				for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
-					if (currentDrug.contains(CurrentDrugRecommendation.getText()) && CurrentDrugRecommendation.getText().contains(currentDrug)) {
-						System.out.println("Current cabinet Drug Name : "+currentDrug);
-						System.out.println("Current recommendations Drug Name : "+CurrentDrugRecommendation.getText());
-						Assertion.fail(currentDrug+" is also Displayed in Drug Recommendations - Validation FAILED");
+				for (WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
+					if (currentDrug.contains(CurrentDrugRecommendation.getText())
+							&& CurrentDrugRecommendation.getText().contains(currentDrug)) {
+						System.out.println("Current cabinet Drug Name : " + currentDrug);
+						System.out
+								.println("Current recommendations Drug Name : " + CurrentDrugRecommendation.getText());
+						Assertion.fail(currentDrug + " is also Displayed in Drug Recommendations - Validation FAILED");
 					}
 				}
-				System.out.println(currentDrug+" is NOT Displayed in Drug Recommendations - Validation PASSED for Drug");
+				System.out.println(
+						currentDrug + " is NOT Displayed in Drug Recommendations - Validation PASSED for Drug");
 			}
 			System.out.println("Drug Recommendations List : ");
-			for(WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
-			System.out.println(CurrentDrugRecommendation.getText());}
+			for (WebElement CurrentDrugRecommendation : DrugRecommendationDrugList) {
+				System.out.println(CurrentDrugRecommendation.getText());
+			}
 			System.out.println("Drug Cabinet is NOT displayed in Drug Recommendation  - Validation PASSED");
-		}
-		else {
+		} else {
 			System.out.println(" ***************** Drug Recommendations section is not displayed *****************");
 
 		}
-		
-	}
 
+	}
 
 	public ComparePlansPageMobile returnToPlanComparePage() {
 
 		validateNew(returnToCompareBtn);
-		//returnToCompareBtn.click();
+		// returnToCompareBtn.click();
 		jsClickNew(returnToCompareBtn);
 		return new ComparePlansPageMobile(driver);
 	}
-	
+
 	public TellUsAboutDrugMobile EditDrug(String drugName) {
-		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit "+drugName+"')]"));
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit " + drugName + "')]"));
 		jsClickNew(removeLink);
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
-		if(validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn))
-		{
+		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
 			return new TellUsAboutDrugMobile(driver);
-		}
-		else {
+		} else {
 			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
 			return null;
-		}	}
+		}
+	}
 
 	public void validateDetailsForDrug(String drugName, String drugQuantity, String drugFrequency,
 			String drugSupplyLen) {
 		System.out.println("Current Added Drug Name : " + drugName);
-		WebElement DrugName = driver
-				.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName + "')]"));
-		WebElement DrugDetailsText = driver.findElement(
-				By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName +"')]//following-sibling::p[contains(text(), 'per') and contains(text(), 'refill')]"));
+		WebElement DrugName = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName + "')]"));
+		WebElement DrugDetailsText = driver.findElement(By.xpath("//uhc-list-item//h4[contains(text(), '" + drugName
+				+ "')]//following-sibling::p[contains(text(), 'per') and contains(text(), 'refill')]"));
 		String DrugText = DrugDetailsText.getText();
-		System.out.println("Drug Text : "+DrugText);
-		if (validateNew(DrugName) && validateNew(DrugDetailsText)
-				 && DrugText.contains(drugQuantity) && DrugText.contains(drugFrequency)
-				 && DrugText.contains(drugSupplyLen)) {
-			System.out.println("Drug List Drug Quantity, Frequency and Supply Length Validation PASSED for Drug : " + drugName);
-			System.out.println("Displayed Drug Details Text: "+DrugText);
+		System.out.println("Drug Text : " + DrugText);
+		if (validateNew(DrugName) && validateNew(DrugDetailsText) && DrugText.contains(drugQuantity)
+				&& DrugText.contains(drugFrequency) && DrugText.contains(drugSupplyLen)) {
+			System.out.println(
+					"Drug List Drug Quantity, Frequency and Supply Length Validation PASSED for Drug : " + drugName);
+			System.out.println("Displayed Drug Details Text: " + DrugText);
 		} else
-			Assertion.fail("Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug : " + drugName);
+			Assertion.fail(
+					"Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug : " + drugName);
 	}
-
 
 }
