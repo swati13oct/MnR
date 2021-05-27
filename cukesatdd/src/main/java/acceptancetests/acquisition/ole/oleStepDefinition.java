@@ -3969,4 +3969,25 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 		welcomePage.OpensavereturnOLEPages();
 		System.out.println("OLE cancellation and Save Return Later modal on OLE Pages");
 	}
+	
+	@Then("^the user validates Optional Benefits Page for following plans with available Riders in welcome page$")
+	public void the_user_validate_optional_rider_welcome_OLE_Page(DataTable Flags) {
+		
+		Map<String, String> RiderFlagMap = new HashMap<String, String>();
+		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
+		String RiderFlag = RiderFlagMap.get("Rider Flag");
+		if(RiderFlag.contains("true")){
+			WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+			boolean ridersPage= welcomePage.validate_Supplemental_Riders_Page();
+			if (ridersPage) {
+
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+				Assertion.assertTrue(true);
+				System.out.println("OLE Supplemental Benefits page is Displayed");
+			} else
+				Assertion.fail("OLE Supplemental Benefits page is NOT Displayed");
+
+			}
+	
+	}
 }

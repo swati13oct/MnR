@@ -21,6 +21,8 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
    # Then the user validates Leave OLE modal for Welcome OLE
     #Then the user validates cancellation modal for Welcome OLE
     Then the user validates Save Return Later modal for OLE Page
+    Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
+     | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |

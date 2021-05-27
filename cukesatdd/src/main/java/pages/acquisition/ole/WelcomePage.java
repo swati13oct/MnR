@@ -22,6 +22,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -559,5 +560,19 @@ public class WelcomePage extends UhcDriver{
 			return new SaveandReturnOLEModal(driver);
 		}
 		return null;
+	}
+	
+	public boolean validate_Supplemental_Riders_Page() {
+		
+		boolean flag=false;
+		//validateNew(NextBtn);
+		//jsClickNew(NextBtn);
+		if(validateNew(driver.findElement(By.xpath("//strong[contains(text(),'Optional Supplemental Benefits')]")))){
+			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//input[contains(@id,'DentalPlatinum_selectedRiders')]"))), "unable to find Yes option available for rider");
+			System.out.println("Validated Yes option available");
+			System.out.println("Benfit Riders are available on the welcome Page");
+			
+		}
+		return flag;
 	}
 }
