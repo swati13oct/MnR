@@ -848,8 +848,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
-		validateNew(getLnkBackToAllPlans());
-		jsClickNew(getLnkBackToAllPlans());
+		validateNew(lnkBackToAllPlans);
+		jsClickNew(lnkBackToAllPlans);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			jsClickNew(ReturnToMainPlanList);
@@ -858,6 +858,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		return null;
 	}
+
+
 
 	/**
 	 * @author bnaveen4

@@ -121,7 +121,7 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 
 	public void validatePlanCompareEmailThankYouMessage() {
 		pageloadcomplete();
-		//validateemailbutton.click();
+		iosScroll(validateemailbutton);
 		jsClickNew(validateemailbutton);
 		sleepBySec(5);
 		//Validating email popup

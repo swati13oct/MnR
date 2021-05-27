@@ -287,7 +287,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='']")
 	private WebElement searchIcon;
 
-	@FindBy(xpath = "(//a[text()='Provider Search'])[2]")
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -1845,8 +1845,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
-		MobileMenuMain();
-		MobileMenuProviderSearch();
+		MobileMenuToolsToHelp();
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
@@ -2645,10 +2644,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonShopPDPpage() {
-		WebElement DCELink = driver.findElement(
-				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
-		validateNew(DCELink);
-		jsClickNew(DCELink);
+		MobileMenuAccessDCE();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
