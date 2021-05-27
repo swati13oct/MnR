@@ -676,8 +676,6 @@ public class oleStepDefinition {
 		boolean isInformationFilled = medicareInfoPage.enter_required_Medicare_details(MedicareDetailsMap);
 		if (isInformationFilled) {
 
-			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MedicareDetailsMap.get("First Name"));
-			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MedicareDetailsMap.get("Last Name"));
 			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number"));
 			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
 			//getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
@@ -1335,12 +1333,6 @@ public class oleStepDefinition {
 					personalInformationPage);
 			System.out.println("OLE Personal Information Page - All required Member Details are entered");
 			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MemberDetailsMap.get("First Name"));
-			/*
-			 * if(!MemberDetailsMap.get("Middle Name").contains("middlename")) {
-			 * getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME,
-			 * MemberDetailsMap.get("Middle Name")); } else {
-			 * getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, middleName); }
-			 */
 			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MemberDetailsMap.get("Last Name"));
 			getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
 			getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
@@ -1354,6 +1346,11 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
 			getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
+			getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Home Number"));
+			getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
+			getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
+			getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION, MemberDetailsMap.get("Email Confirmation"));
+			getLoginScenario().saveBean(oleCommonConstants.Go_Green, MemberDetailsMap.get("Go Green"));
 			//getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));			
 			Assertion.assertTrue(true);
 		} else
@@ -1361,26 +1358,9 @@ public class oleStepDefinition {
 		// }
 	}
 
-	@Then("^the user enters following information in Personal Information Page$")
+	/*@Then("^the user enters following information in Personal Information Page$")
 	public void the_user_enters_following__information_in_Personal_Information_Page(DataTable arg1) throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
-		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
-		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*
-		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
-		 * 0; i < givenAttributesRow.size(); i++) {
-		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details_Other(MemberDetailsMap);
@@ -1400,7 +1380,7 @@ public class oleStepDefinition {
 			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed");
 		// }
 	}
-
+*/
 	@Then("^the user enters following information in Personal Information Page DSNP$")
 	public void the_user_enters_following__information_in_Personal_Information_Page_DSNP(DataTable arg1)
 			throws Throwable {
@@ -3608,12 +3588,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	public void the_user_validates_Medicaid_Number_Confirm_Eligibility_Page(DataTable arg1) throws Throwable {
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*
-		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
-		 * 0; i < givenAttributesRow.size(); i++) {
-		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
+		
 		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		getLoginScenario().saveBean(OLE_PageConstants.MEDICAID_NUMBER, MemberDetailsMap.get("MedicaidNumber"));
@@ -3985,5 +3960,13 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 			welcomePage.ValidateFooterEnrollmentChecklistLink();
 			welcomePage.ValidateFooterListaVerificationLink();
 		}
+	}
+	
+	@Then("^the user validates Save Return Later modal for OLE Page$")
+	public void the_user_validates_save_return_later_for_OLE_pages() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+	//	MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		welcomePage.OpensavereturnOLEPages();
+		System.out.println("OLE cancellation and Save Return Later modal on OLE Pages");
 	}
 }

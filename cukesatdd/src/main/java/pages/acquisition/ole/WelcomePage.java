@@ -39,7 +39,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "//*[@class = 'logo']//img")
 	private WebElement SiteLogo;
 
-	@FindBy(id = "enrollment-next-button")
+	@FindBy(xpath = "//button[@id='enrollment-next-button']")
 	private WebElement NextBtn;
 
 	//@FindBy(xpath = "//*[@class = 'cancel-button modal-link']")
@@ -59,13 +59,13 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(id = "leavingSite-linkrouter")
 	private WebElement LeavingOLEmodal;
 
-	@FindBy(xpath = "//*[@id='ole-plan-name']")
+	@FindBy(xpath = "//h2[contains(@class,'h3-welcome-class')]")
 	private WebElement PlanYear_PlanName;
 
-	@FindBy(xpath = "//*[contains(text(), 'Zip:')]/..")
+	@FindBy(xpath = "//strong[contains(text(),'ZIP Code:')]/..")
 	private WebElement ZipCode_County;
 
-	@FindBy(xpath = "//*[contains(text(), 'Premium:')]/..")
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
 	private WebElement PremiumDisplay;
 
 	@FindBy(xpath = "//*[@id = 'learn-more' or @id = 'learnmorebtn']")
@@ -83,7 +83,7 @@ public class WelcomePage extends UhcDriver{
 
 	//Right Rail Elements
 
-	@FindBy(id = "tty-number")
+	@FindBy(id = "//*[contains(text(),'Need Help? Call')]/u")
 	private WebElement RightRailTFN;
 
 	@FindBy(xpath = "//*[text()='Coverage Details']")
@@ -116,6 +116,24 @@ public class WelcomePage extends UhcDriver{
 	
 	@FindBy(xpath="//button[contains(@id,'ip-no')]")
 	public WebElement AccessibilityButton;
+	
+	@FindBy(xpath="//strong[contains(text(),'Return to View Plan Details')]")
+	public WebElement ViewPlanDetails;
+	
+	
+	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
+	private WebElement SaveEnrollmentLinkOLE;		
+	@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
+	private WebElement SaveModalOLE;
+
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
+	private WebElement CreateProfilesave;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
+	private WebElement SaveSignIn;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
+	private WebElement Saveclosepopup;
 	
 	public WelcomePage(WebDriver driver) {
 
@@ -150,14 +168,17 @@ public class WelcomePage extends UhcDriver{
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
+		//String ViewPlanDetailsLink = ViewPlanDetails.getText();
 		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
-		System.out.println("Zip Code and County Displayed on OLE : "+Zip_County_Text);
+		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
 		//String Expected_PlanYear = planDetailsMap.get("Plan Year");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
-		String Expected_County = planDetailsMap.get("County");
+		//String Expected_County = planDetailsMap.get("County");
 		//String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
+		validateNew(ViewPlanDetails);
+		ViewPlanDetails.isDisplayed();
 		boolean flag = false;
 
 		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
@@ -169,10 +190,10 @@ public class WelcomePage extends UhcDriver{
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Year is Validated : "+flag);
 		}else flag =false;*/
-		if(Zip_County_Text.contains(Expected_County)){
+		/*if(Zip_County_Text.contains(Expected_County)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan County is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
 		if(Zip_County_Text.contains(Expected_ZipCode)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
@@ -187,7 +208,7 @@ public class WelcomePage extends UhcDriver{
 
 
 	public boolean ValidateTFN(String TFN) {
-
+		//TFN no  above the continue button
 		if(validate(RightRailTFN)){
 			String TFN_OLE = RightRailTFN.getText();
 			if(TFN_OLE.contains(TFN)){
@@ -512,5 +533,31 @@ public class WelcomePage extends UhcDriver{
 		driver.switchTo().window(parentWindow);
 
 	}
-
+		
+	public SaveandReturnOLEModal OpensavereturnOLEPages() {
+		validate(SaveEnrollmentLinkOLE);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", SaveEnrollmentLinkOLE);
+		
+		//((JavascriptExecutor) driver).executeScript("arguments[0].click;", CancelEnrollmentLink);
+		
+		//CancelEnrollmentLink.click();
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(SaveModalOLE)){
+			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+			validate(CreateProfilesave);
+			CreateProfilesave.isDisplayed();
+			validate(SaveSignIn);
+			SaveSignIn.isDisplayed();
+			Saveclosepopup.isDisplayed();
+			//Saveclosepopup.click();
+			jsClickNew(Saveclosepopup);
+			return new SaveandReturnOLEModal(driver);
+		}
+		return null;
+	}
 }

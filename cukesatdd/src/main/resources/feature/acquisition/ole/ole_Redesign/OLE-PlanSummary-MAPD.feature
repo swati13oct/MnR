@@ -16,10 +16,11 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
+    #Then the user validates TFN in Welcome OLE Right Rail
+    #Then the user validates Learn more modal for Welcome OLE
+   # Then the user validates Leave OLE modal for Welcome OLE
+    #Then the user validates cancellation modal for Welcome OLE
+    Then the user validates Save Return Later modal for OLE Page
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
@@ -34,31 +35,16 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | Mailing_State            | <mailingstate>           |
       | Mailing_Zip              | <mailingzip>             |
       | Email                    | <email>                  |
-      | MedicaidNumber           | <medicaidnumber>         |
-    # | Middle Name         		 | <middlename>       |
-    Then the user enters following information in Personal Information Page
       | Email Confirmation | <emailConfirmation> |
       | Go Green           | <goGreen>           |
-      | Email              | <email>             |
       | Home Number        | <phoneno>           |
       | Mobile Number      | <mobileno>          |
       | Middle Name        | <middlename>        |
-    Then the user validates the Plan details in Personal Information Page OLE Right Rail
-    #Then the user validates the Member details dynamic display in Personal Information Page
     Then the user navigates to Medicare Information Page
-    #Then the user validates Medicare Information Page required fields
     Then the user enters following required Medicare Information
       | Medicare Number    | <medicarenumber>    |
       | SSN Flag           | <ssnflag>           |
-      # | PartA Date         | <partadate>         |
-      # | PartB Date         | <partbdate>         |
       | Card Type          | <cardtype>          |
-      | Email Confirmation | <emailConfirmation> |
-      | Go Green           | <goGreen>           |
-      | Email              | <email>             |
-    Then the user validates TFN in Medicare Info OLE Right Rail
-    Then the user validates the Plan details in Medicare Info OLE Right Rail
-    #    Then the user navigates to Preliminary Questions Page
     Then the user validates Medicaid Number in confirm Eligibility Page
       | MedicaidNumber | <medicaidnumber> |
       | Plan Year      | <planYear>       |

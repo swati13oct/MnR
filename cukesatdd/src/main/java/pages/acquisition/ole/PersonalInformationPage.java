@@ -37,7 +37,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(id = "ole-form-back-button")
 	private WebElement BackBtn;
 
-	@FindBy(xpath = "//*[@id='ole-form-cancel-button' or @id = 'cancel-enrollment']")
+	@FindBy(xpath = "//*[@id='ole-form-cancel-button1' or @id = 'cancel-enrollment']")
 	private WebElement CancelEnrollmentLink;
 
 	@FindBy(id = "view-learn-enrollment")
@@ -110,7 +110,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(id = "address1")
 	private WebElement PermanentAdd_Street;
 
-	@FindBy(id = "address2")
+	@FindBy(xpath = "//input[@id='address2']")
 	private WebElement PermanentAdd_Aptno;
 
 	@FindBy(id = "city")
@@ -241,11 +241,12 @@ public class PersonalInformationPage extends UhcDriver{
 	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
 
 		String FirstName = memberDetailsMap.get("First Name");
+		String MiddleName = memberDetailsMap.get("Middle Name");
 		String LastName = memberDetailsMap.get("Last Name");	
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
-		//String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
+		String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
 		String Perm_city = memberDetailsMap.get("Perm_city");
 		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
 		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
@@ -254,24 +255,27 @@ public class PersonalInformationPage extends UhcDriver{
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
+		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
+		String goGreen = memberDetailsMap.get("Go Green");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
 		
 		CheckPageLoad();
 		CheckiPerseptions();
 		
 		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(MiddleNameField, MiddleName);
 		sendkeysNew(lastNameField, LastName);
 		
 		sendkeys(DOBtxtFld,DOB);
 		if(Gender.contains("Male")){
-			//GenderSelectMale.click();
 			jsClickNew(GenderSelectMale);
 		}
 		else{
-			//GenderSelectFemale.click();
+			
 			jsClickNew(GenderSelectFemale);
 		}	
-		
-		
+				
 		//call method click on CONTINUE BUtton
 		
 		boolean result = false; 
@@ -285,9 +289,9 @@ public class PersonalInformationPage extends UhcDriver{
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			jsClickNew(SameMailingAddressNo);
-			//CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
+			
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
-			//sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
+		//	sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
@@ -297,20 +301,29 @@ public class PersonalInformationPage extends UhcDriver{
 		result= Clickoncontinuebutton("phone-number");
 		//Code for Personal Information page 3 begin
 		if(result) {
+			validateNew(HomephoneNumberField);
+			sendkeys(HomephoneNumberField, HomeNumber);
+			  validateNew(MobileNumberField);
+			sendkeys(MobileNumberField, MobileNumber);
+			if(emailConfirmation.equalsIgnoreCase("YES")){
+				jsClickNew(emailConfirmationYesBtn);	
+			}else
+				jsClickNew(emailConfirmationNoBtn); 
+			if(goGreen.equalsIgnoreCase("YES")){
+				//goGreenYesBtn.click();
+				jsClickNew(goGreenYesBtn);
+			}else
+			//	goGreenNoBtn.click();
+			jsClickNew(goGreenNoBtn);
 		sendkeys(Email,EmailAddress);
 		}	
 		result= Clickoncontinuebutton("language-preference");
 		
 		if(result) {
-			result= Clickoncontinuebutton("medicare-information");
+			//result= Clickoncontinuebutton("medicare-information");
 			System.out.println("Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
 		}
 		
-		/*
-		if(NextBtn.isEnabled()){
-			System.out.println("Next Button is Enabled : All Required Details are entered");
-			return true;
-		}*/
 		return result;
 	}
 

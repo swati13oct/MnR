@@ -360,122 +360,19 @@ public class MedicareInformationPage extends UhcDriver{
 	} 
 
 	public boolean enter_required_Medicare_details(Map<String, String> MedicareDetailsMap){
-		//String FirstName = MedicareDetailsMap.get("First Name");
-		//String LastName = MedicareDetailsMap.get("Last Name");
+		
 		String MedicareNumber = MedicareDetailsMap.get("Medicare Number");
-	//	String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
-	//	String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		String SSNflag = MedicareDetailsMap.get("SSN Flag");
-		String emailConfirmation = MedicareDetailsMap.get("Email Confirmation");
-		String goGreen = MedicareDetailsMap.get("Go Green");
-		String email = MedicareDetailsMap.get("Email");
-		/*if(CardType.contains("HICN") || CardType.contains("RRID")){
-			SelectCardA.click();
-			validateNew(MedicareNumberLabel);
-			if(MedicareNumberLabel.getText().contains("Medicare Claim Number")){
-				System.out.println("Correct Label 'Medicare Claim Number' displayed for CARD A");
-			}
-			else{
-				Assertion.fail("Correct Label not displayed for CARD A");
-				/*System.out.println("Correct Label not displayed for CARD A");
-				return null;*/
-			/*}
-		}
-		if(CardType.contains("MBI")){  
-			SelectCardB.click();
-			validateNew(MedicareNumberLabel);
-			if(MedicareNumberLabel.getText().contains("Medicare Number")){
-				System.out.println("Correct Label 'Medicare Number' displayed for CARD B");
-				System.out.println("Correct Medicare Number provided for CARD B"+MedicareNumber);
 
-			}
-			else{
-				Assertion.fail("Correct Label not displayed for CARD B");
-				System.out.println("Correct Label not displayed for CARD B");
-				//return null;
-			}
-		} */
-	//	sendkeysNew(firstNameField, FirstName);
-		//sendkeysNew(lastNameField, LastName);
-		//sendkeysNew(claimNumberField, MedicareNumber);
 		sendkeysMobile(claimNumberField, MedicareNumber);
 
-
-/*		if(validateNew(firstNameField)){
-			firstNameField.sendKeys(FirstName);
-			System.out.println("First Name entered : "+FirstName);
-		}
-		else{
-			System.out.println("First Name field is not displayed");
-			return null;
-		}
-		if(validate(lastNameField)){
-			lastNameField.sendKeys(LastName);
-			System.out.println("Last Name entered : "+LastName);
-		}
-		else{
-			System.out.println("Last Name field is not displayed");
-			return null;
-		}
-		if(validate(claimNumberField)){
-			claimNumberField.sendKeys(MedicareNumber);
-			System.out.println("Medicare Number entered : "+MedicareNumber);
-		}
-		else{
-			System.out.println("Medicare Number field is not displayed");
-			return null;
-		}*/
-		
 		if(SSNflag.contains("true")){
 			String SSNnumber = MedicareDetailsMap.get("SSN Number");
 			//sendkeysNew(SSNField, SSNnumber);
 			sendkeysMobile(SSNField, SSNnumber);
-			/*if(validateNew(SSNField)){
-				System.out.println("SSN field is Displayed for NC M&R DSNP");
-				SSNField.sendKeys(SSNnumber);
-				System.out.println("SSN entered : "+SSNnumber);
-			}
-			else{
-				System.out.println("SSN field is not displayed for NC M&R DSNP");
-				return null;
-			}*/
-		}
-		
-		//sendkeysNew(partAStartDateField, PartAeffectiveDate);
-		/*if(validate(partAStartDateField)){
-			partAStartDateField.sendKeys(PartAeffectiveDate);
-			System.out.println("Part A Effective Date entered : "+PartAeffectiveDate);
-		}
-		else{
-			System.out.println("Part A Effective Date field is not displayed");
-			return null;
-		}*/
-		
-		//sendkeysNew(partBStartDateField, PartBeffectiveDate);
-		
-		/*if(validate(partBStartDateField)){
-			partBStartDateField.sendKeys(PartBeffectiveDate);
-			System.out.println("Part B Effective Date entered : "+PartBeffectiveDate);
-		}
-		else{
-			System.out.println("Part B Effective Date field is not displayed");
-			return null;
-		}*/
-		
-//		if(emailConfirmation.equalsIgnoreCase("YES")){
-//			emailConfirmationYesBtn.click();
-//		}else
-//			emailConfirmationNoBtn.click();
-//		
-//		if(goGreen.equalsIgnoreCase("YES")){
-//			goGreenYesBtn.click();
-//		}else
-//			goGreenNoBtn.click();
-//		
-//		if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
-//			sendkeysNew(emailAddressField, email);
-//		
+			
+		}		
 		System.out.println("All Medicare Details are entered");
 		
 		if(NextBtn.isEnabled()){
