@@ -136,6 +136,13 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
 	private WebElement Saveclosepopup;
 	
+	@FindBy(xpath = "(//input[contains(@id,'DentalPlatinum_selectedRiders')]/../label)[1]")
+	private WebElement Ridersoption_Yes;
+	
+	@FindBy(xpath = "(//input[contains(@id,'N_selectedRiders')]/../label)[1]")
+	private WebElement Ridersoption_No;
+	
+	
 	public WelcomePage(WebDriver driver) {
 
 		super(driver);
@@ -565,11 +572,9 @@ public class WelcomePage extends UhcDriver{
 	public boolean validate_Supplemental_Riders_Page() {
 		
 		boolean flag=false;
-		//validateNew(NextBtn);
-		//jsClickNew(NextBtn);
 		if(validateNew(driver.findElement(By.xpath("//strong[contains(text(),'Optional Supplemental Benefits')]")))){
-			Assert.assertTrue(validateNew(driver.findElement(By.xpath("//input[contains(@id,'DentalPlatinum_selectedRiders')]"))), "unable to find Yes option available for rider");
-			System.out.println("Validated Yes option available");
+			validateNew(Ridersoption_Yes);		
+			jsClickNew(Ridersoption_Yes);
 			System.out.println("Benfit Riders are available on the welcome Page");
 			
 		}
