@@ -569,13 +569,13 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 	
-	public boolean validate_Supplemental_Riders_Page() {
+	public boolean validate_Supplemental_Riders() {
 		
-		boolean flag=false;
+		boolean flag=true;
 		if(validateNew(driver.findElement(By.xpath("//strong[contains(text(),'Optional Supplemental Benefits')]")))){
 			validateNew(Ridersoption_Yes);		
 			jsClickNew(Ridersoption_Yes);
-			System.out.println("Benfit Riders are available on the welcome Page");
+			System.out.println("Benefit Riders are available on the welcome Page");
 			
 		}
 		return flag;
