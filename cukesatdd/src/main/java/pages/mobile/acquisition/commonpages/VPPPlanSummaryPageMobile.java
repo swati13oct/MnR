@@ -923,7 +923,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
 			checkModelPopup(driver, 45);
 		else
-			checkModelPopup(driver, 10);
+			checkModelPopup(driver, 30);
 		// handleChatPopup();
 		// validateNew(maPlansCount);
 		// validateNew(msPlansCount);

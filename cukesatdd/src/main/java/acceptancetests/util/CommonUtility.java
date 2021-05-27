@@ -107,16 +107,17 @@ public class CommonUtility {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		try {
 			WebElement elementExpected = wait.until(ExpectedConditions.visibilityOf(element));
-			if (elementExpected.isDisplayed()) {
-				System.out.println("The element: " + elementExpected + " is visible");
-			} else {
-				System.out.println("The element: " + elementExpected + " is not visible");
-				Assertion.fail("The element: " + elementExpected + " is not visible");
+			if ((elementExpected.getText().isEmpty() || elementExpected.getText() == null)) {
+				timeout = timeout - 5;
+				if (timeout > 0) {
+					waitForPageLoad(driver, element, timeout);
+				}
 			}
+			System.out.println("The element: " + elementExpected + " is visible");
 
 		} catch (Exception e) {
-			Assertion.fail("Not able to locate this element -- " + element + " on page");
-			System.out.println(e.getMessage());
+			//Assertion.fail("Not able to locate this element -- " + element + " on page");
+			System.out.println("error in waiting for page load "+e.getMessage());
 		}
 
 
