@@ -6,11 +6,7 @@ package pages.acquisition.ole;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
@@ -118,7 +114,7 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath="//button[contains(@id,'ip-no')]")
 	public WebElement AccessibilityButton;
 	
-	@FindBy(xpath="//strong[contains(text(),'Return to View Plan Details')]")
+	@FindBy(xpath="//*[contains(text(),'Return to View Plan Details')]")
 	public WebElement ViewPlanDetails;
 	
 	
@@ -172,27 +168,40 @@ public class WelcomePage extends UhcDriver{
 		validateNew(PlanYear_PlanName);
 	}
 
-	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
+	public boolean validate_plan_details(Map<String, String> planDetailsMap) throws InterruptedException {
+		boolean flag = false;
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
-		//String ViewPlanDetailsLink = ViewPlanDetails.getText();
 		System.out.println("Plan Year and Plan Name Displayed on OLE : "+PlanYear_PlanName_Text);
 		System.out.println("Zip Code is Displayed on OLE : "+Zip_County_Text);
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
-		//String Expected_PlanYear = planDetailsMap.get("Plan Year");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
-		//String Expected_County = planDetailsMap.get("County");
-		//String Expected_PlanPremium = planDetailsMap.get("Plan Premium");
-		validateNew(ViewPlanDetails);
-		ViewPlanDetails.isDisplayed();
-		boolean flag = false;
+		if(validateNew(ViewPlanDetails)){
+			ViewPlanDetails.click();
+			Thread.sleep(500);
+			flag = driver.getCurrentUrl().contains("details");
+			if(flag){
+				String elementPath = "//*[contains(text(),'Enroll in plan')]";
+				WebElement enrollInPlan = driver.findElement(By.xpath(elementPath));
+				enrollInPlan.click();
+				Thread.sleep(500);
+				flag = driver.getCurrentUrl().contains("welcome");
+				if (flag){
+					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
+							&& Zip_County_Text.contains(Expected_ZipCode);
+				}
 
-		if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
+			}
+		}
+		System.out.println("Plan Details are Validated : "+flag);
+		return flag;
+		/*if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
 			flag = true;
 			System.out.println("Plan Name is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
+
 		//Plan Year commented for AEP validation
 		/*		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
 			flag = (flag==false)?false:true;
@@ -202,16 +211,14 @@ public class WelcomePage extends UhcDriver{
 			flag = (flag==false)?false:true;
 			System.out.println("Plan County is Validated : "+flag);
 		}else flag =false;*/
-		if(Zip_County_Text.contains(Expected_ZipCode)){
+		/*if(Zip_County_Text.contains(Expected_ZipCode)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan ZIP CODE is Validated : "+flag);
-		}else flag =false;
+		}else flag =false;*/
 		/*		if(Premium.contains(Expected_PlanPremium)){
 			flag = (flag==false)?false:true;
 			System.out.println("Plan Premium is Validated : "+flag);
 		}else flag =false;*/
-		System.out.println("Plan Details are Validated : "+flag);
-		return flag;
 	}
 
 
@@ -569,15 +576,21 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 	
-	public boolean validate_Supplemental_Riders() {
-		
-		boolean flag=true;
-		if(validateNew(driver.findElement(By.xpath("//strong[contains(text(),'Optional Supplemental Benefits')]")))){
-			validateNew(Ridersoption_Yes);		
-			jsClickNew(Ridersoption_Yes);
-			System.out.println("Benefit Riders are available on the welcome Page");
-			
+	public Map<Boolean, String> validate_Supplemental_Riders() {
+		boolean flag=false;
+		String riderText = null;
+		HashMap map = new HashMap<Boolean,String>();
+		String elementPath = "//*[contains(text(),'Optional Supplemental Benefits')]";
+		WebElement benefit = driver.findElement(By.xpath(elementPath));
+		flag = validateNew(benefit);
+		if(flag){
+			flag = validateNew(Ridersoption_Yes);
+			if(flag){
+				jsClickNew(Ridersoption_Yes);
+				riderText = Ridersoption_Yes.getText().trim();
+			}
 		}
-		return flag;
+		map.put(flag,riderText);
+		return map;
 	}
 }
