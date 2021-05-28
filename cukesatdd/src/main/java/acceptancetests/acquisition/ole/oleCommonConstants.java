@@ -15,6 +15,7 @@ public class oleCommonConstants {
 	public static final String OLE_PLAN_TYPE = "planType";
 	public static final String OLE_ZIPCODE = "zipcode";
 	public static final String OLE_COUNTY = "county";
+	public static final String OPTIONAL_RIDER_TEXT = "optionalrider";
 	public static final String OLE_PLAN_YEAR = "planyear";
 	public static final String OLE_PLAN_PREMIUM = "premium";
 	public static final String OLE_TFN = "tfn";
