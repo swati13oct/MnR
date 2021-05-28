@@ -3976,10 +3976,10 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
 		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
 		String RiderFlag = RiderFlagMap.get("Rider Flag");
-		if(RiderFlag.contains("true")){
+		if(RiderFlag.contains("true_yes") || RiderFlag.contains("true_no")){
 			WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 			HashMap outputmap = new HashMap<Boolean,String>();
-			outputmap = (HashMap) welcomePage.validate_Supplemental_Riders();
+			outputmap = (HashMap) welcomePage.validate_Supplemental_Riders(RiderFlag);
 			if (outputmap.containsKey(true)) {
 				String optionalRider = outputmap.get(true).toString();
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);

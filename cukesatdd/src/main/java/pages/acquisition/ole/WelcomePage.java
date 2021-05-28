@@ -576,7 +576,7 @@ public class WelcomePage extends UhcDriver{
 		return null;
 	}
 	
-	public Map<Boolean, String> validate_Supplemental_Riders() {
+	public Map<Boolean, String> validate_Supplemental_Riders(String riderflag) {
 		boolean flag=false;
 		String riderText = null;
 		HashMap map = new HashMap<Boolean,String>();
@@ -584,10 +584,13 @@ public class WelcomePage extends UhcDriver{
 		WebElement benefit = driver.findElement(By.xpath(elementPath));
 		flag = validateNew(benefit);
 		if(flag){
-			flag = validateNew(Ridersoption_Yes);
-			if(flag){
+			flag = validateNew(Ridersoption_Yes) && validateNew(Ridersoption_No);
+			if(flag && riderflag.equalsIgnoreCase("true_yes")){
 				jsClickNew(Ridersoption_Yes);
 				riderText = Ridersoption_Yes.getText().trim();
+			}else{
+				jsClickNew(Ridersoption_No);
+				riderText = Ridersoption_No.getText().trim();
 			}
 		}
 		map.put(flag,riderText);
