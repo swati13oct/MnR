@@ -3978,10 +3978,12 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 		String RiderFlag = RiderFlagMap.get("Rider Flag");
 		if(RiderFlag.contains("true")){
 			WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-			boolean ridersPage= welcomePage.validate_Supplemental_Riders();
-			if (ridersPage) {
-
+			HashMap outputmap = new HashMap<Boolean,String>();
+			outputmap = (HashMap) welcomePage.validate_Supplemental_Riders();
+			if (outputmap.containsKey(true)) {
+				String optionalRider = outputmap.get(true).toString();
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+				getLoginScenario().saveBean(oleCommonConstants.OPTIONAL_RIDER_TEXT, optionalRider);
 				Assertion.assertTrue(true);
 				System.out.println("OLE Supplemental Benefits are displayed on welcome OLE Page");
 			} else
