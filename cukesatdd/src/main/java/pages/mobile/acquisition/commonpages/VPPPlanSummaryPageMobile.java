@@ -134,7 +134,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='overview-tabs module-tabs-tabs']/div[4]//a[contains(@class,'trigger-closed')]")
 	private WebElement snpPlansViewLink;
 
-	@FindBy(css = "div#plan-list-1")
+	@FindBy(xpath = "//div[@ng-show='showMaPlans' and @id='plan-list-1']")
 	private WebElement maPlanList;
 
 	@FindBy(css = "div#plan-list-3")
@@ -1499,15 +1499,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (planName.contains("SNP")) {
 //			WebElement plancardsnp = driver.findElement(By.xpath("//a[contains(text(),'" + planName + "']"));
 //			iosScroll(plancardsnp);
-
+			System.out.println("$$$$$$$$$$$$$$$$" +snpPlanList.getText().trim());
 			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
 
 		} else if (planName.contains("HMO")) {
 			
-			WebElement plancardma = driver.findElement(By.xpath("//a[contains(text(),'" + planName + "']"));
-			iosScroll(plancardma);
-			
+			//boolean plancardma = driver.findElement(By.xpath("//a[contains(text(),'" + planName + "']")).isDisplayed();
+			System.out.println("$$$$$$$$$$$$$$$$" +maPlanList.getText().trim());
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
@@ -1859,8 +1858,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
 
-			enrollForPlan = driver.findElement(By.xpath(
-					"//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
+			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
 		}
 		if (enrollForPlan != null) {
 			iosScroll(enrollForPlan);
