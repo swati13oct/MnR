@@ -3614,10 +3614,10 @@ String winHandleBefore = driver.getWindowHandle();
 	}
 
 	public void validateGlobalFooterLinks() {
-		scrollToView(footerHomeLink);
-		validateNew(footerHomeLink);
-		validateNew(footerAboutUsLink);
-		validateNew(footerContactUsLink);
+		scrollToView(footerSiteMapLink);
+		//validateNew(footerHomeLink);
+		//validateNew(footerAboutUsLink);
+		//validateNew(footerContactUsLink);
 		validateNew(footerSiteMapLink);
 		validateNew(footerPrivacyPolicyLink);
 		validateNew(footerTermsnConditionsLink);
@@ -3633,7 +3633,21 @@ String winHandleBefore = driver.getWindowHandle();
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
-		validateNew(learnAboutMedicareLink);
+		//validateNew(learnAboutMedicareLink);
+		
+		validateNew(planRecommendationLink);
+		validateNew(drugCostEstimatorLink);
+		validateNew(pharmacySearchLink);
+		validateNew(providerSearchLink);
+		
+		validateNew(introductioMedicareLink);
+		validateNew(eligibilityLink);
+		validateNew(coverageChoiceLink);
+		validateNew(medicareFaqLink);
+		
+		validateNew(aboutLink);
+		validateNew(contactLink);
+		validateNew(languageAssistanceLink);
 	}
 
 	public void validateTFNelement(String tfnXpath) {
