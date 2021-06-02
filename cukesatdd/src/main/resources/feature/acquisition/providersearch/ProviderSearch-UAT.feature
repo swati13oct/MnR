@@ -76,7 +76,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | next |
 
-    @ProviderSearchCommon_UHC @prodRegression @ProviderSearchFromGlobalHeaderBlayer @regressionUHC @sanity
+    @ProviderSearchCommon_UHC @prodRegression @ProviderSearchFromGlobalHeaderBlayer @regressionUHC @sanity @vbfGate
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | next |
