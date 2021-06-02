@@ -381,7 +381,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void clickChangePharmacy() {
-		changePharmacy.click();
+		//changePharmacy.click(); exception thrown for click on saucelabs - org.openqa.selenium.WebDriverException
+		jsClickNew(changePharmacy);
 	}
 
 	public DrugSummaryPageMobile selectPharmacyModalDisplayed() throws InterruptedException {

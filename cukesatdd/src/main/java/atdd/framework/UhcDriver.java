@@ -78,6 +78,15 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//b[contains(text(),'MENU')]")
 	public WebElement MenuMobile;
 
+	@FindBy(xpath = "//span[contains(text(),'Learn About Medicare')]")
+	public WebElement LearnAboutMedicare;
+
+	@FindBy(xpath = "//p[contains(text(),'Introduction to Medicare')]")
+	public WebElement IntroductionToMedicare;
+
+	@FindBy(xpath = "//div[contains(@class,'dropdown-container sub-level-3')]//a[normalize-space()='Prescriptions, Providers & Benefits']")
+	public WebElement PrescriptionsProvidersBenefitsLink;
+
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
@@ -127,6 +136,23 @@ public abstract class UhcDriver {
 	public void MobileMenuMain() {
 		scrollToView(MenuMobile);
 		jsClickNew(MenuMobile);
+
+	}
+
+	public void MobileLearnAboutMedicare() {
+		scrollToView(MenuMobile);
+		jsClickNew(MenuMobile);
+		jsClickNew(LearnAboutMedicare);
+		jsClickNew(IntroductionToMedicare);
+
+	}
+
+	public void MobileLearnAboutMedicarePrescProvBenefit() {
+		scrollToView(MenuMobile);
+		jsClickNew(MenuMobile);
+		jsClickNew(LearnAboutMedicare);
+		jsClickNew(IntroductionToMedicare);
+		jsClickNew(PrescriptionsProvidersBenefitsLink);
 
 	}
 
@@ -728,32 +754,32 @@ public abstract class UhcDriver {
 		}
 
 	}
-/*	Author: Harshal Ahire 
-	
-	To interact with Shadow element for IOS 
-	
-	@Params driver, shadowHost, cssOfShadowElement*/
-	
-/*	// get the shadowHost in the original dom using findElement
-	WebElement shadowHost = driver.findElement(By.cssSelector("#county"));
-	// get the shadow root
-	WebElement shadowRoot = getShadowRoot((AppiumDriver)driver,shadowHost);
-	// access shadow tree element
-	WebElement shadowTreeElement = shadowRoot.findElement(By.cssSelector("#county > option:nth-child(2)"));*/
-	
-	
-	public static WebElement getShadowElement(WebDriver driver,WebElement shadowHost, String cssOfShadowElement) {
-	    WebElement shardowRoot = getShadowRoot(driver, shadowHost);
-	    return shardowRoot.findElement(By.cssSelector(cssOfShadowElement));
+	/*
+	 * Author: Harshal Ahire
+	 * 
+	 * To interact with Shadow element for IOS
+	 * 
+	 * @Params driver, shadowHost, cssOfShadowElement
+	 */
+
+	/*
+	 * // get the shadowHost in the original dom using findElement WebElement
+	 * shadowHost = driver.findElement(By.cssSelector("#county")); // get the shadow
+	 * root WebElement shadowRoot = getShadowRoot((AppiumDriver)driver,shadowHost);
+	 * // access shadow tree element WebElement shadowTreeElement =
+	 * shadowRoot.findElement(By.cssSelector("#county > option:nth-child(2)"));
+	 */
+
+	public static WebElement getShadowElement(WebDriver driver, WebElement shadowHost, String cssOfShadowElement) {
+		WebElement shardowRoot = getShadowRoot(driver, shadowHost);
+		return shardowRoot.findElement(By.cssSelector(cssOfShadowElement));
 	}
 
-	private static WebElement getShadowRoot(WebDriver driver,WebElement shadowHost) {
-	    JavascriptExecutor js = (JavascriptExecutor) driver;
-	    return (WebElement) js.executeScript("return arguments[0].shadowRoot", shadowHost);
+	private static WebElement getShadowRoot(WebDriver driver, WebElement shadowHost) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		return (WebElement) js.executeScript("return arguments[0].shadowRoot", shadowHost);
 	}
 
-	
-	
 	/***
 	 * the method waits for 60 sec till current windows count increments by 1
 	 * 
@@ -1283,9 +1309,9 @@ public abstract class UhcDriver {
 			element.selectByVisibleText(option);
 		} else {
 			String curHandle = ((IOSDriver) driver).getContext();
-			System.out.println("curHandle - "+curHandle);
+			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
-			if(clickElement)
+			if (clickElement)
 				jsClickNew(selectElement);
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
@@ -1293,12 +1319,9 @@ public abstract class UhcDriver {
 			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
-			System.out.println("curHandle - "+((IOSDriver) driver).getContext());
+			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
 		}
 	}
-	
-	
-	
 
 	/*
 	 * @author : Harshal Ahire
@@ -1311,7 +1334,8 @@ public abstract class UhcDriver {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
-				"document.getElementsByClassName('uhc-select uhc-select--block county-dropdown ng-pristine ng-valid ng-touched').value =='" + option + "';");
+				"document.getElementsByClassName('uhc-select uhc-select--block county-dropdown ng-pristine ng-valid ng-touched').value =='"
+						+ option + "';");
 	}
 
 	public void iosScroll(WebElement element) {

@@ -25,7 +25,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class GetStartedPageMobile extends UhcDriver {
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
@@ -63,8 +63,8 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	public BuildYourDrugListMobile clickAddsDrugs() {
 		if (validate(AddMyDrugsBtn))
-			jsClickMobile(AddMyDrugsBtn);
-		// AddMyDrugsBtn.click();
+			jsClickNew(AddMyDrugsBtn);
+
 		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 40);
 		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
 			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
@@ -109,7 +109,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public VisitorProfilePageMobile clickOnShoppingCart() {
-		//shoppingCartIcon.click();
+		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
@@ -118,7 +118,7 @@ public class GetStartedPageMobile extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	public PrescriptionsProvidersBenefitsPageMobile clickReturnToAcqHomePAge() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);

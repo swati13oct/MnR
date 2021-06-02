@@ -30,7 +30,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(text(),'Search')]")
 	public WebElement SearchBtn;
-	
+
 	@FindBy(xpath = "//*[@id=\"drug-label\"]")
 	public WebElement enterDrugTitle;
 
@@ -111,24 +111,23 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public WebElement addYourDrugHeader;
 
 	public void addDrugs(String drugName) throws InterruptedException {
-		
+
 		sendkeysMobile(EnterDrugNameTxt, drugName);
-		
-//		scrollToView(addYourDrugHeader);
+
+		// scrollToView(addYourDrugHeader);
 		jsClickNew(addYourDrugHeader);
-		
-//		scrollToView(SearchBtn);
+
+		// scrollToView(SearchBtn);
 		jsClickNew(SearchBtn);
 		pageloadcomplete();
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
-//		iosScroll(SelectDrug);
+		// iosScroll(SelectDrug);
 		jsClickNew(SelectDrug);
 		Thread.sleep(2000);
-//		
-//		iosScroll(addToDrugList);
+		//
+		// iosScroll(addToDrugList);
 		jsClickNew(addToDrugList);
-
 
 	}
 
@@ -148,12 +147,18 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		jsClickMobile(reviewDrugCost);
 	}
 
+	@FindBy(xpath = "//label[@id='drug-label']")
+	public WebElement enterDrugNameTitle;
+
 	public void validateDrugNotFound_ErrorMsg() {
 		validateNew(EnterDrugNameTxt);
 		EnterDrugNameTxt.sendKeys("india");
+		jsClickNew(enterDrugNameTitle);
 		validateNew(SearchBtn);
 		jsClickNew(SearchBtn);
-		if (validateNew(NoDrugError) && NoDrugError.getText().contains("No drugs were found ")) {
+
+		waitforElementVisibilityInTime(NoDrugError, 5);
+		if (validateNew(NoDrugError) && NoDrugError.getText().trim().contains("No drugs were found")) {
 			System.out.println("Error Message displayed for No Drug Found : " + NoDrugError.getText());
 		} else
 			Assertion.fail("Error Message displayed for No Drug Found : " + NoDrugError.getText());
@@ -204,15 +209,13 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) throws InterruptedException {
 		validateNew(EnterDrugNameTxt);
-		// EnterDrugNameTxt.sendKeys(drugName);
+
 		sendkeysMobile(EnterDrugNameTxt, drugName);
-		
-		//scrollToView(addYourDrugHeader);
+
 		jsClickNew(addYourDrugHeader);
-		
-		//scrollToView(SearchBtn);
+
 		jsClickNew(SearchBtn);
-		
+
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
 		WebElement SelectDrug = driver
@@ -220,10 +223,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
 		pageloadcomplete();
-//		iosScroll(addToDrugList);
-//		jsClickNew(addToDrugList);
+
 		threadsleep(2000);
-		//waitForPageLoadSafari();
+		// waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		// CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {

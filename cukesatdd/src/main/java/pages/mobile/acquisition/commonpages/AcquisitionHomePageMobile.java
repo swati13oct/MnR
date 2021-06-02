@@ -1731,24 +1731,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement Menu;
 
 	public void navigateToMedEdPresDrugPage() {
-		waitforElement(Menu);
-		jsClickMobile(Menu);
+		MobileLearnAboutMedicare();
+		MobileLearnAboutMedicarePrescProvBenefit();
 
-		waitforElement(lnkLearnAboutMedicare);
-
-		if (lnkLearnAboutMedicare.isDisplayed()) {
-			Actions actions = new Actions(driver);
-			actions.moveToElement(lnkLearnAboutMedicare);
-			actions.build().perform();
-			System.out.println("Hover over Learn about Medicare completed");
-		}
-
-		// WebElement PresProvidersBenefitsLink =
-		// driver.findElement(By.xpath("//*[contains(@class, 'nav-col
-		// nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
-		WebElement PresProvidersBenefitsLink = driver
-				.findElement(By.xpath("//span[contains(text(),'Prescriptions, Providers & Benefits')]"));
-		jsClickNew(PresProvidersBenefitsLink);
 	}
 
 	public VPPPlanSummaryPageMobile ZipcodeSearch(String zipcode) {
@@ -3612,8 +3597,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("****************myuhcagent Page is not loaded ***************");
 		}
 
-		driver.close();
-		driver.switchTo().window(parentWindow);
+		if (tabs_windows.size() > 1) {
+			driver.close();
+			driver.switchTo().window(parentWindow);
+		}
 
 	}
 
@@ -3700,6 +3687,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
+	// @FindBy(xpath = "//*[local-name()='svg' and
+	// @class='icon-external']/*[local-name()='path']")
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent;
 
@@ -3714,6 +3703,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(RightRail_FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
+		checkElementisEnabled(RightRail_FindAnAgent);
 		jsClickNew(RightRail_FindAnAgent);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -3785,9 +3775,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
-		// threadsleep(8);
-		threadsleep(5000);
-		// UnitedHealthcareMedicareSolutions.click();
+
+		pageloadcomplete();
 		jsClickNew(UnitedHealthcareMedicareSolutions);
 	}
 
