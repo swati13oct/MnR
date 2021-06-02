@@ -29,7 +29,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan-year']")
 	public WebElement planYearDropdown;
 
-	@FindBy(xpath = "//button[contains(@class,'continue-btn')]")
+	@FindBy(xpath = "//button[contains(@dtmname,'review drug costs') and contains(@class, 'uhc-button')]/span")
 	public WebElement continueBtn;
 	
 	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
@@ -52,6 +52,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		validateNew(continueBtn);
 		validateNew(zipCodeTxtbox);
 	}
 	public void enterZipCode(String zipcode) {
