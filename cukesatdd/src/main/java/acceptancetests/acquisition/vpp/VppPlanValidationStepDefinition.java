@@ -742,15 +742,23 @@ public class VppPlanValidationStepDefinition {
 								if (result) {
 									if (!(currentColName.equalsIgnoreCase("plan year") ||
 											currentColName.equalsIgnoreCase("plan id qa script") ||
+											currentColName.equalsIgnoreCase("Contract PBP Segment ID") ||
+											currentColName.equalsIgnoreCase("Segment ID") ||
 											currentColName.equalsIgnoreCase("product focus") ||
 											currentColName.equalsIgnoreCase("dsnp sub type") ||
 											currentColName.equalsIgnoreCase("Error Count") ||
 											currentColName.equalsIgnoreCase("portal labels") ||
-											currentColName.equalsIgnoreCase("OON_IN") ||
+											//	currentColName.equalsIgnoreCase("OON_IN") ||
 											currentColName.equalsIgnoreCase("plan type") ||
 											currentColName.equalsIgnoreCase("county") ||
 											currentColName.equalsIgnoreCase("Link parameters") ||
-											currentColName.equalsIgnoreCase("product")
+											currentColName.equalsIgnoreCase("product") ||
+											//	currentColName.equalsIgnoreCase("Plan Premium") ||
+											//	currentColName.equalsIgnoreCase("Plan Premium Zero") ||
+											//	currentColName.equalsIgnoreCase("Medical Benefits") ||
+											//	currentColName.equalsIgnoreCase("High Option DentalPS") ||
+											//	currentColName.equalsIgnoreCase("Platinum DentalPS") ||
+											currentColName.equalsIgnoreCase("Fips")
 									)) {
 
 
