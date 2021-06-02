@@ -827,7 +827,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public WebElement DrugsCoveredText;
 
 	public void ValidateNCPharmacyCoveredDrugs() {
-
+		CommonUtility.waitForPageLoadNew(driver,planCardHeader, 20 );
 		if (validateNew(DrugsCoveredText)) {
 			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
 		} else

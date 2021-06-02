@@ -984,6 +984,7 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 
 	public void validatePlanDrugDetails(String planName) {
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_ChangePharmacyLnk, 20);
 		System.out.println("Plan Name : " + planName);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
 		// CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
@@ -1308,7 +1309,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	// Learn More changes Start
 	public void validatePlanNameLearnMore(String planName) {
-
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_ChangePharmacyLnk, 20);
 		System.out.println("Plan Name : " + planName);
 		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
 		if (validateNew(PlanNameElement)) {

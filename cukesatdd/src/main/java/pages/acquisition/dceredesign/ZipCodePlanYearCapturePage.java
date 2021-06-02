@@ -17,7 +17,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = "//span[@id='zipError']")
+	@FindBy(xpath = "//*[@id='zipError']")
 	public WebElement zipCodeErrorMsg;
 	
 	@FindBy(xpath = "//select[@id='county']/option")
