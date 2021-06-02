@@ -56,7 +56,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	private WebElement viewShopPlansButton;
 
 	//@FindBy(xpath = "//p[contains(text(),'UnitedHealthcare Insurance Company (UnitedHealthcare)')]")
-	@FindBy(xpath = "//div[contains(@class,'companyNameHeader')]//*[contains(text(),'UnitedHealthcare Insurance Company')]")
+	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
 	private WebElement UHCICSubTitle;
 
 	// @FindBy(xpath =
@@ -322,7 +322,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
 	private WebElement backToTop;
 
-	@FindBy(xpath = "//a[contains(@class, 'viewLink disclaimer')]")
+	@FindBy(xpath = "//div[contains(@class, 'viewdisclaimerstext')]")
 	private WebElement disclaimerInformation;
 
 	@FindBy(css = ".icon-search")
