@@ -32,7 +32,7 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//select[@id='county']/option")
 	public WebElement countyRows;
 
-	@FindBy(css = "select#county")
+	@FindBy(xpath = "//select[@id='county']")
 	public WebElement countyDropdown;
 
 	@FindBy(xpath = "//label[contains(text(),'County')]")

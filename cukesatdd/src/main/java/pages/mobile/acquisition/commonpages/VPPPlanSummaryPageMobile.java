@@ -59,7 +59,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "(//*[text()='View plan details'])[1]")
 	WebElement viewPlanDetailsBtn;
 
-	@FindBy(xpath = "//*[@id=\"card-updates\"]/a")
+	@FindBy(xpath = "//a[contains(text(),'Back to plan results')]")
 	public WebElement backToPlans;
 
 	@FindBy(xpath = "(//*[contains(@class,'backToPlanSummarry')])[2]")
