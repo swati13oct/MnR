@@ -19,6 +19,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.ConfirmYourEligibilityPage;
+import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 
@@ -59,7 +60,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//input[contains(@id,'emailConfirmationYes')]")
 	private WebElement emailConfirmationYesBtn;
 
-	@FindBy(css = "#ole-form-next-button")
+	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
 
 	@FindBy(xpath = "//span[contains(text(),'✓')]")
@@ -324,15 +325,12 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	public MedicareInformationPageMobile navigate_to_medicare_info_page() {
 
-		validate(emailAddVaidationChecktick);
-		scrollToView(NextBtn);
 
-		jsClickMobile(NextBtn);
+		validateNew(NextBtn);
+//		NextBtn.click();
+		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement MedicareLable = driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]"));
-		CommonUtility.checkPageIsReadyNew(driver);
-		boolean flagpage = validateNew(MedicareLable, 10);
-		if (flagpage == true) {
+		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPageMobile(driver);
 		}

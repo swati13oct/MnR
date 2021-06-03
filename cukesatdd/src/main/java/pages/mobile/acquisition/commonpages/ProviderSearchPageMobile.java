@@ -148,7 +148,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, continueButton, 45);
+		//CommonUtility.waitForPageLoadNew(driver, continueButton, 45);
 	}
 
 	public VPPPlanSummaryPageMobile selectsProvider(String physicianSearchCriteria, String physicianName) {
@@ -573,8 +573,10 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	
 	public int entersZipcodeAndPlancount(String zipcode, String year) {
 
-		validateNew(zipCodeTextfield);
-		zipCodeTextfield.sendKeys(zipcode);
+		//validateNew(zipCodeTextfield);
+		waitforElementVisibilityInTime(zipCodeTextfield, 5);
+		//zipCodeTextfield.sendKeys(zipcode);
+		sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
 		jsClickNew(continueButton);
 		selectYear(year);

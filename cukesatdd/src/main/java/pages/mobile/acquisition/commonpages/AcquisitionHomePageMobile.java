@@ -1,7 +1,6 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
-import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -31,25 +30,8 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.LearnAboutMedicareHomePage;
 import pages.acquisition.commonpages.PageTitleConstants;
-import pages.acquisition.commonpages.RequestHelpAndInformationPage;
-import pages.acquisition.commonpages.ShopForPlanNavigationPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.AgentsAndBrokersPageMobile;
-import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.commonpages.DisclaimersPageMobile;
-import pages.mobile.acquisition.commonpages.EnterZipCodePage;
-import pages.mobile.acquisition.commonpages.KeywordSearchAARPMobile;
-import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
-import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
-import pages.mobile.acquisition.commonpages.VPPTestHarnessPageMobile;
-import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
@@ -305,7 +287,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='']")
 	private WebElement searchIcon;
 
-	@FindBy(xpath = "(//a[text()='Provider Search'])[2]")
+	@FindBy(xpath = "//a[@dtmname='NavLinks:Shop for a Plan:Plan Types:Provider Search']")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -334,6 +316,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+	
+	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
+	public WebElement EstimateYourDrugCost;
 
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
@@ -1021,7 +1009,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		iosScroll(footerAboutUsLink);
 		jsClickNew(footerAboutUsLink);
 		pageloadcomplete();
-		//validateNew(footerLinkHeader, 30);
+		// validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
 			return new AboutUsAARPPageMobile(driver);
 		}
@@ -1047,7 +1035,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerSiteMapLink);
 		// footerSiteMapLink.click();
 		jsClickNew(footerSiteMapLink);
-		//pageloadcomplete();
+		// pageloadcomplete();
 		pageloadcomplete();
 		validateNew(siteMapHeader);
 		if (driver.getCurrentUrl().contains("sitemap.html")) {
@@ -1692,9 +1680,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * 
 	 * public ContactUsAARPPage contactUsFooterClick() {
 	 * validateNew(footerContactUsLink); footerContactUsLink.click();
-	 * pageloadcomplete(); if
-	 * (driver.getCurrentUrl().contains("contact-us")) { return new
-	 * ContactUsAARPPage(driver); } return null; }
+	 * pageloadcomplete(); if (driver.getCurrentUrl().contains("contact-us")) {
+	 * return new ContactUsAARPPage(driver); } return null; }
 	 * 
 	 * 
 	 * 
@@ -1706,14 +1693,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	 * 
 	 * public TermsnConditionsAARPPage termsnconditionsFooterClick() {
 	 * validate(footerTermsnConditionsLink); footerTermsnConditionsLink.click();
-	 * pageloadcomplete(); if
-	 * (driver.getCurrentUrl().contains("terms-of-use")) { return new
-	 * TermsnConditionsAARPPage(driver); } return null; }
+	 * pageloadcomplete(); if (driver.getCurrentUrl().contains("terms-of-use")) {
+	 * return new TermsnConditionsAARPPage(driver); } return null; }
 	 * 
 	 * public AcquisitionHomePageMobile homeFooterClick() {
-	 * validateNew(footerHomeLink); footerHomeLink.click();
-	 * pageloadcomplete(); if (validateNew(zipCodeField)) {
-	 * return new AcquisitionHomePageMobile(driver, true); } return null; }
+	 * validateNew(footerHomeLink); footerHomeLink.click(); pageloadcomplete(); if
+	 * (validateNew(zipCodeField)) { return new AcquisitionHomePageMobile(driver,
+	 * true); } return null; }
 	 * 
 	 * public void clickRequestAsistancce() {
 	 * validateNew(footerRequestforAssistancelink); if(proactiveChatExitBtn!=null)
@@ -1738,10 +1724,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink = driver.findElement(By
-				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
-		validateNew(DCELink);
-		jsClickNew(DCELink);
+		jsClickNew(EstimateYourDrugCost);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
@@ -1751,37 +1734,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	private WebElement Menu;
 
 	public void navigateToMedEdPresDrugPage() {
-		waitforElement(Menu);
-		jsClickMobile(Menu);
+		MobileLearnAboutMedicare();
+		MobileLearnAboutMedicarePrescProvBenefit();
 
-		waitforElement(lnkLearnAboutMedicare);
-
-		if (lnkLearnAboutMedicare.isDisplayed()) {
-			Actions actions = new Actions(driver);
-			actions.moveToElement(lnkLearnAboutMedicare);
-			actions.build().perform();
-			System.out.println("Hover over Learn about Medicare completed");
-		}
-
-		// WebElement PresProvidersBenefitsLink =
-		// driver.findElement(By.xpath("//*[contains(@class, 'nav-col
-		// nav-col-3')]//a[contains(@href,'medicare-benefits')]"));
-		WebElement PresProvidersBenefitsLink = driver
-				.findElement(By.xpath("//span[contains(text(),'Prescriptions, Providers & Benefits')]"));
-		jsClickNew(PresProvidersBenefitsLink);
 	}
 
 	public VPPPlanSummaryPageMobile ZipcodeSearch(String zipcode) {
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		JavascriptExecutor jse = (JavascriptExecutor) driver;
-		jse.executeScript("window.scrollBy(0,300)", "");
+		pageloadcomplete();
+		scrollToView(StandaloneZipcode);
 
-		sendkeys(StandaloneZipcode, zipcode);
-		StandalonSearchCounty.click();
+		sendkeysMobile(StandaloneZipcode, zipcode);
+
+		jsClickNew(StandalonSearchCounty);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		try {
 			if (countyDropdown.isDisplayed()) {
@@ -1793,13 +1757,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		jse.executeScript("window.scrollBy(0,100)", "");
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			System.out.println("page took time to load");
-		}
-		ViewPlansPricingButton.click();
+		pageloadcomplete();
+		// ViewPlansPricingButton.click();
+		jsClickNew(ViewPlansPricingButton);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
@@ -1873,8 +1833,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ProviderSearchPageMobile clicksOnRallyToolFromHomePage() {
-		MobileMenuMain();
-		MobileMenuProviderSearch();
+		MobileMenuToolsToHelp();
 		validateNew(providerSearchFromHomeScreen);
 
 		switchToNewTabNew(providerSearchFromHomeScreen);
@@ -2021,7 +1980,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, SecondarySearchInput, 30);
 		SecondarySearchInput.sendKeys(str);
 		CommonUtility.waitForPageLoadNewForClick(driver, SecondarySearchBtn, 30);
-		//SecondarySearchBtn.click();
+		// SecondarySearchBtn.click();
 		jsClickNew(SecondarySearchBtn);
 		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
@@ -2673,10 +2632,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonShopPDPpage() {
-		WebElement DCELink = driver.findElement(
-				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
-		validateNew(DCELink);
-		jsClickNew(DCELink);
+		MobileMenuAccessDCE();
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
@@ -2701,8 +2657,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
-	public WebElement AddMyDrugsBtn;
+
 
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
 		MobileMenuAccessDCE();
@@ -3618,8 +3573,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 
 		/*
-		 * pageloadcomplete(); String CurrentUHCAgentURL =
-		 * driver.getCurrentUrl();
+		 * pageloadcomplete(); String CurrentUHCAgentURL = driver.getCurrentUrl();
 		 * System.out.println("myuhcagent Page is displayed : "+CurrentUHCAgentURL);
 		 * System.out.println("Expected myuhcagent URL: "+ExpectedUHCAgentURL);
 		 * 
@@ -3645,8 +3599,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assert.fail("****************myuhcagent Page is not loaded ***************");
 		}
 
-		driver.close();
-		driver.switchTo().window(parentWindow);
+		if (tabs_windows.size() > 1) {
+			driver.close();
+			driver.switchTo().window(parentWindow);
+		}
 
 	}
 
@@ -3733,6 +3689,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
+	// @FindBy(xpath = "//*[local-name()='svg' and
+	// @class='icon-external']/*[local-name()='path']")
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent;
 
@@ -3747,6 +3705,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(RightRail_FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
+		checkElementisEnabled(RightRail_FindAnAgent);
 		jsClickNew(RightRail_FindAnAgent);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
@@ -3818,9 +3777,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
-		// threadsleep(8);
-		threadsleep(5000);
-		// UnitedHealthcareMedicareSolutions.click();
+
+		pageloadcomplete();
 		jsClickNew(UnitedHealthcareMedicareSolutions);
 	}
 
@@ -3871,7 +3829,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// Assertion.assertTrue( "Title mismatch for dental
 		// directory",driver.getTitle().equals(url));
 		if (str.equals(url)) {
-			Assertion.assertTrue(true);
+			assertTrue(true);
 		}
 
 	}
@@ -4042,13 +4000,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//input[@id='submitChat']")
 	private WebElement proActiveChatSubmit;
-	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+
+	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
-	
-	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+
+	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
 	public WebElement proactiveChatChatBtn;
-	
+
 	public void validateProActiveChatpopupconnect() {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
@@ -4086,12 +4044,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			System.out.println("Page Title---" + driver.getTitle());
 
 		}
-		
-	
 
 	}
-	
-	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType(){
+
+	public PharmacySearchPageMobile navigateToPharmacyLocatorFromPlanType() {
 		MobileMenuAccessPharmacy();
 		waitForPageLoadSafari();
 		if (driver.getTitle().toLowerCase()

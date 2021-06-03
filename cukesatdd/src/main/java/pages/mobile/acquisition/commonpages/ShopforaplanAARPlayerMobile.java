@@ -90,12 +90,15 @@ public class ShopforaplanAARPlayerMobile extends UhcDriver {
 
 	public void providersearch() {
 		
-		jsClickNew(MenuShopForPlanMobile);
-		jsClickNew(toolsToChoosePlan);
-		scrollToView(ProviderSearch);
-		jsClickNew(ProviderSearch);
-		CommonUtility.waitForPageLoadNew(driver, ProviderSearch, 60);
-		validateNew(ProviderSearch);
+//		jsClickNew(MenuShopForPlanMobile);
+//		jsClickNew(toolsToChoosePlan);
+//		scrollToView(ProviderSearch);
+//		jsClickNew(ProviderSearch);
+		MobileMenuProviderSearch();
+		
+		driver.switchTo().activeElement().getText().contains("location");
+//		CommonUtility.waitForPageLoadNew(driver, ProviderSearch, 60);
+//		validateNew(ProviderSearch);
 	}
 
 }

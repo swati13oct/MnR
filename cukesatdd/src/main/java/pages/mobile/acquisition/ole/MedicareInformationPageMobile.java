@@ -66,6 +66,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 	// Page Header
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 	public WebElement MedicalInfoPageHeader;
+	
 
 	// Select Medicare Card Type - A 0r B
 

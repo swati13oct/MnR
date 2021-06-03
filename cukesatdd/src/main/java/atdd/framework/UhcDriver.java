@@ -78,6 +78,15 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//b[contains(text(),'MENU')]")
 	public WebElement MenuMobile;
 
+	@FindBy(xpath = "//span[contains(text(),'Learn About Medicare')]")
+	public WebElement LearnAboutMedicare;
+
+	@FindBy(xpath = "//p[contains(text(),'Introduction to Medicare')]")
+	public WebElement IntroductionToMedicare;
+
+	@FindBy(xpath = "//div[contains(@class,'dropdown-container sub-level-3')]//a[normalize-space()='Prescriptions, Providers & Benefits']")
+	public WebElement PrescriptionsProvidersBenefitsLink;
+
 	@FindBy(xpath = "//span[contains(text(),'Shop For a Plan')]")
 	public WebElement MenuShopForPlanMobile;
 
@@ -127,6 +136,23 @@ public abstract class UhcDriver {
 	public void MobileMenuMain() {
 		scrollToView(MenuMobile);
 		jsClickNew(MenuMobile);
+
+	}
+
+	public void MobileLearnAboutMedicare() {
+		scrollToView(MenuMobile);
+		jsClickNew(MenuMobile);
+		jsClickNew(LearnAboutMedicare);
+		jsClickNew(IntroductionToMedicare);
+
+	}
+
+	public void MobileLearnAboutMedicarePrescProvBenefit() {
+		scrollToView(MenuMobile);
+		jsClickNew(MenuMobile);
+		jsClickNew(LearnAboutMedicare);
+		jsClickNew(IntroductionToMedicare);
+		jsClickNew(PrescriptionsProvidersBenefitsLink);
 
 	}
 
@@ -181,11 +207,11 @@ public abstract class UhcDriver {
 		driver.manage().window().maximize();
 		driver.get(url);
 	}
-	
+
 	public void startNewMobile(String url) {
 
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(30,TimeUnit.SECONDS);
+		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
 
@@ -246,7 +272,6 @@ public abstract class UhcDriver {
 
 	}
 
-	
 	public void sleepBySec(int sec) {
 		try {
 			Thread.sleep(sec * 1000);
@@ -255,6 +280,7 @@ public abstract class UhcDriver {
 			e.printStackTrace();
 		}
 	}
+
 	/*
 	 * To handle iOS specific sendkeys problem By: Harshal Ahire
 	 */
@@ -578,14 +604,14 @@ public abstract class UhcDriver {
 			js.executeScript(
 					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
 					element);
-			//checkElementisEnabled(element);
+			// checkElementisEnabled(element);
 			scrollToView(element);
 			element.click();
-
+			sleepBySec(2);
 			System.out.println("Selenium Click executed........" + element.getAttribute("automationTrack"));
-			
-			if (element.getAttribute("automationTrack")!="true") {
-				//checkElementisEnabled(element);
+
+			if (element.getAttribute("automationTrack") != "true") {
+				// checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
 				iosScroll(element);
 				JavascriptExecutor js1 = (JavascriptExecutor) driver;
@@ -594,14 +620,12 @@ public abstract class UhcDriver {
 			}
 
 		} catch (Exception e) {
-			
+
 			System.out.println("Click and JsClick failed");
-			
+
 		}
 
 	}
-
-
 
 	public void jsClickNew(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
@@ -730,8 +754,31 @@ public abstract class UhcDriver {
 		}
 
 	}
+	/*
+	 * Author: Harshal Ahire
+	 * 
+	 * To interact with Shadow element for IOS
+	 * 
+	 * @Params driver, shadowHost, cssOfShadowElement
+	 */
 
+	/*
+	 * // get the shadowHost in the original dom using findElement WebElement
+	 * shadowHost = driver.findElement(By.cssSelector("#county")); // get the shadow
+	 * root WebElement shadowRoot = getShadowRoot((AppiumDriver)driver,shadowHost);
+	 * // access shadow tree element WebElement shadowTreeElement =
+	 * shadowRoot.findElement(By.cssSelector("#county > option:nth-child(2)"));
+	 */
 
+	public static WebElement getShadowElement(WebDriver driver, WebElement shadowHost, String cssOfShadowElement) {
+		WebElement shardowRoot = getShadowRoot(driver, shadowHost);
+		return shardowRoot.findElement(By.cssSelector(cssOfShadowElement));
+	}
+
+	private static WebElement getShadowRoot(WebDriver driver, WebElement shadowHost) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		return (WebElement) js.executeScript("return arguments[0].shadowRoot", shadowHost);
+	}
 
 	/***
 	 * the method waits for 60 sec till current windows count increments by 1
@@ -1112,8 +1159,6 @@ public abstract class UhcDriver {
 		return timeStr;
 	}
 
-
-
 	/**
 	 * @author Murali - mmurugas This method will perform vertical swipe on mobile
 	 *         screen for given %
@@ -1267,11 +1312,11 @@ public abstract class UhcDriver {
 			System.out.println("curHandle - " + curHandle);
 			System.out.println(((IOSDriver) driver).getContextHandles());
 			if (clickElement)
-			jsClickNew(selectElement);
+				jsClickNew(selectElement);
 			threadsleep(2000);
 			((IOSDriver) driver).context("NATIVE_APP");
-			((IOSDriver) driver).findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
-			threadsleep(3000);
+			driver.findElement(MobileBy.className("XCUIElementTypePickerWheel")).sendKeys(option);
+			threadsleep(500);
 			((IOSDriver) driver).findElement(MobileBy.AccessibilityId("Done")).click();
 			((IOSDriver) driver).context(curHandle);
 			System.out.println("curHandle - " + ((IOSDriver) driver).getContext());
@@ -1281,7 +1326,7 @@ public abstract class UhcDriver {
 	/*
 	 * @author : Harshal Ahire
 	 * 
-	 * @Params: dorpdown option
+	 * @Params: dropdwon option
 	 *
 	 * To select value in dropdpwn via JsScript in IOS device
 	 *****/
@@ -1289,7 +1334,8 @@ public abstract class UhcDriver {
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(
-				"document.getElementsByClassName('uhc-select ng-pristine ng-valid').value =='" + option + "';");
+				"document.getElementsByClassName('uhc-select uhc-select--block county-dropdown ng-pristine ng-valid ng-touched').value =='"
+						+ option + "';");
 	}
 
 	public void iosScroll(WebElement element) {
@@ -1437,8 +1483,6 @@ public abstract class UhcDriver {
 		WebDriverWait wait = new WebDriverWait(driver, timeout);
 		wait.until(ExpectedConditions.invisibilityOf(element));
 	}
-
-	
 
 	public void mobileactiondragdrop(WebElement dragelement, WebElement dropelement, boolean swipeVertical) {
 		System.out.println("Drag Drop");

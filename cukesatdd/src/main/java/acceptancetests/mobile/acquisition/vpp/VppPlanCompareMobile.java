@@ -32,6 +32,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AboutUsAARPPageMobile;
@@ -4761,12 +4762,14 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// int counter = Integer.parseInt(Counter);
-		if (planType.equals("MAPD")) {
-			// plansummaryPage.clickonViewPlans();
-			plansummaryPage.checkMAPlansOnly(Counter);
-			System.out.println("Selected All MAPD plans for Plan Compare");
-		}
-
+//		if (planType.equals("MAPD")) {
+//			// plansummaryPage.clickonViewPlans();
+//			plansummaryPage.checkMAPlansOnly(Counter);
+//			System.out.println("Selected All MAPD plans for Plan Compare");
+//		}
+//		else
+		plansummaryPage.checkPlansForCompare(Counter,planType);
+		
 		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);

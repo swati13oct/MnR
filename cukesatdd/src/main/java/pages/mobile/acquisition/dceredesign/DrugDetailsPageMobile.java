@@ -90,10 +90,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]")
 	public WebElement DrugCosts_AnnualEstTotal_Amount;
 
-	@FindBy(xpath = "//button[@dlassetid='rd_btn_3_0']")
+	@FindBy(xpath = "//button/span[contains(text(), 'View Plan Details')]")
 	public WebElement DrugCosts_PlanDetailsBtn;
 
-	@FindBy(xpath = "//button[@dlassetid='rd_btn_6_0']")
+	@FindBy(xpath = "//button/span[contains(text(), 'Save')]")
 	public WebElement DrugCosts_SaveBtn;
 
 	@FindBy(xpath = "//div[contains(text(), 'Need Help?')]")
@@ -339,6 +339,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 		System.out.println("Plan Name : " + planName);
 		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+		PlanNameElement.getText().replaceAll("\u00A00", " ").trim();
 		if (validateNew(PlanNameElement)) {
 			Assertion.assertTrue("Plan Name is correct for Drug Details Page" + PlanNameElement.getText(), true);
 		} else
@@ -720,17 +721,22 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		}
 
 	}
+	
+	@FindBy(xpath = "//*[contains(@id, 'plancosts')]")
+	private WebElement planCostsTab;
 
 	public PlanDetailsPageMobile ClickandNavigate_VPPPlanDetails(String planName) {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
-		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
-		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
+		CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
+		iosScroll(PlanName_PlanDetails);
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
-			System.out.println("Plan Details Page displayed for current Plan : " + planName);
+			System.out.println("Plan Details Page displayed for current Plan : "+planName);
 			return new PlanDetailsPageMobile(driver);
-		} else {
+		}
+		else {
 			return null;
 		}
 	}
