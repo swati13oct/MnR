@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 import org.springframework.util.StringUtils;
 import org.openqa.selenium.By;
@@ -337,10 +338,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 		return validation_Flag;
 	}
 	
-	public HashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
+	public WeakHashMap<Boolean, String> compareBenefits(String columnName, String benefitValue, Map<String, String> benefitsMap) {
 		boolean flag = true; int counter =0;
 		String tmpUIString1 = "",tmpUIString2="", tmpKeyString="",benefitValueUI="";
-		HashMap<Boolean, String> comparedResult = new HashMap<Boolean, String>();
+		WeakHashMap<Boolean, String> comparedResult = new WeakHashMap<Boolean, String>();
 
 		if(columnName.equalsIgnoreCase("Plan Premium Zero"))
 			columnName = columnName.replace(" Zero", "");
@@ -579,8 +580,8 @@ public class AepPlanDetailsPage extends UhcDriver {
 		
 	}
 
-	public HashMap<String, String> collectInfoVppPlanDetailPg(String sheetName, int rowIndex) {
-		HashMap<String, String> result=new HashMap<String, String>();
+	public WeakHashMap<String, String> collectInfoVppPlanDetailPg(String sheetName, int rowIndex) {
+		WeakHashMap<String, String> result=new WeakHashMap<String, String>();
 
 		for (int i = 0; i < 5; i++) {
 			try {
@@ -604,10 +605,10 @@ public class AepPlanDetailsPage extends UhcDriver {
 		return result;
 	}
 
-	public HashMap<String, String> collectInfoVppPlanDetailPg() {
+	public WeakHashMap<String, String> collectInfoVppPlanDetailPg() {
 		System.out.println("Proceed to collect the info on vpp detail page =====");
 
-		HashMap<String, String> result=new HashMap<String, String>();
+		WeakHashMap<String, String> result=new WeakHashMap<String, String>();
 		
 		result.put("Plan Name", planName.getText());
 		String key="Total Tabs";
