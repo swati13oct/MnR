@@ -3836,7 +3836,7 @@ String winHandleBefore = driver.getWindowHandle();
 		validateNew(disclaimerInformation);
 //			disclaimerInformation.click();
 		jsClickNew(disclaimerInformation);
-		validateNew(backToTop_Disclaimer);
+		//validateNew(backToTop_Disclaimer);
 	}
 
 	public void validateVisitAarpOrglink() {

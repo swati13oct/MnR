@@ -25,7 +25,8 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(id = "gf_lnk_1")
 	public WebElement footerHomeLink;
 	
-	@FindBy(id = "gf_lnk_2")
+	//@FindBy(id = "gf_lnk_2")
+	@FindBy(xpath="//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
 	public WebElement footerAboutUsLink;
 	
 	@FindBy(id = "gf_lnk_3")
