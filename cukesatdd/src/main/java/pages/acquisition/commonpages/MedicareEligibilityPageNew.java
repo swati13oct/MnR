@@ -3,7 +3,6 @@ package pages.acquisition.commonpages;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
-import jdk.internal.org.objectweb.asm.Handle;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
