@@ -1311,7 +1311,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validatePlanNameLearnMore(String planName) {
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_ChangePharmacyLnk, 20);
 		System.out.println("Plan Name : " + planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
 		if (validateNew(PlanNameElement)) {
 			Assertion.assertTrue("Plan Name is correct for Learn More Page" + PlanNameElement.getText(), true);
 		} else
