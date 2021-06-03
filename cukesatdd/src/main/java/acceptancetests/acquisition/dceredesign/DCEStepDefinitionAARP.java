@@ -801,6 +801,8 @@ public class DCEStepDefinitionAARP {
 	public void the_user_navigates_to_Med_Ed_Prescription_Drugs_Page() throws Throwable {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		System.out.println("Selecting State in Acq Home page so Med ED CLassic page is displayed...");
+		acquisitionHomePage.selectState("Florida");
 		acquisitionHomePage.navigateToMedEdPresDrugPage();
 
 	}
