@@ -96,7 +96,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
   @SiteSearchULayer @UATRegression
-  Scenario Outline: <Scenario> : To verify search results on Visitor profile from Home page
+  Scenario Outline: <Scenario> : To verify search results on Visitor profile from Home page for <site> site - <newsearchvalue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user clicks on the shopping cart icon
@@ -124,7 +124,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_UMS | UHC  | Dental coverage | Drug cost estimator             |
 
   @SiteSearchULayer @UATRegression
-  Scenario Outline: <Scenario>: Verify Error handling on Visitor profile from Homepage
+  Scenario Outline: <Scenario>: Verify Error handling on Visitor profile from Homepage for <site> site - <NewSearchValue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user clicks on the shopping cart icon
@@ -388,7 +388,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
   @SiteSearchULayerPages @UATRegression
-  Scenario Outline: <Scenario> : To verify provider search third party URL on page mentioned - <PageName>- <searchValue>
+  Scenario Outline: <Scenario> : To verify provider search third party URL on page mentioned for <site> site - <pageName>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
@@ -498,7 +498,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 2_UMS | UHC  | medicare-education/medicare-part-d.html                  | Medicare Prescription Drug Plans             | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
   @SiteSearchULayerPages @UATRegression
-  Scenario Outline: Verify search results on page mentioned <PageName>- <searchValue> - <newsearchvalue>
+  Scenario Outline: Verify search results on page mentioned for <site> site - <pageName>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Given the user navigates to following medicare acquisition site page
