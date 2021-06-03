@@ -802,7 +802,7 @@ public class DCEStepDefinitionAARP {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		System.out.println("Selecting State in Acq Home page so Med ED CLassic page is displayed...");
-		acquisitionHomePage.selectState("Florida");
+		//acquisitionHomePage.selectState("Florida");
 		acquisitionHomePage.navigateToMedEdPresDrugPage();
 
 	}
