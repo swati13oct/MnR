@@ -316,6 +316,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
+	
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	public WebElement AddMyDrugsBtn;
+	
+	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
+	public WebElement EstimateYourDrugCost;
 
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
@@ -1718,10 +1724,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink = driver.findElement(By
-				.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
-		validateNew(DCELink);
-		jsClickNew(DCELink);
+		jsClickNew(EstimateYourDrugCost);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
@@ -2654,8 +2657,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
-	public WebElement AddMyDrugsBtn;
+
 
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
 		MobileMenuAccessDCE();
