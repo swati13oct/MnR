@@ -187,8 +187,8 @@ public class ProviderSearchCommonStepDefinition {
 			
 			 int intPlanCounts =providerSearchPage.entersZipcodeAndPlancount(zipcode,planYear);
 			 int strplancount = Integer.parseInt(plancount);
-			 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
-			 if(intPlanCounts!=strplancount){
+			 System.out.println("expected=="+strplancount +"===actual==" +(intPlanCounts-1));
+			 if((intPlanCounts-1)!=strplancount){
 				Assertion.fail("Plan count is not matching");
 			 }
 			
