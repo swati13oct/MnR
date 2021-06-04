@@ -313,7 +313,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[contains(@class, 'backtotop1')]")
 	private WebElement backToTop_Disclaimer;
 
-	@FindBy(xpath = "//a[contains(@dtmname, 'Footer:Visit AARP')]")
+	@FindBy(xpath = "//*[@id='more-list-heading']/..//a[contains(@href,'aarp.org')]")
 	private WebElement visitAARPFooterLink;
 
 	@FindBy(xpath = "//*[contains(@id, 'aarplink')]")
@@ -557,28 +557,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath="//span[contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'medicare-advantage-plans')]")
 	private WebElement MedicareAdvantagePlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'dual-special-needs-plans')]")
 	private WebElement DualSpecialNeedsPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'medicare-supplement-plans')]")
 	private WebElement MedicareSupplementInsurancePlans;
 
-	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement MedicarePrescriptionDrugPlans;
 
 	@FindBy(xpath = "//a[@id='gfn_lnk_row2_5']")
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
-	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
+	@FindBy(xpath = "(//*[@id='learn-about-medicare-list-heading']/..//a[contains(@href,'medicare-education')])[1]")
 	private WebElement MedicareEducation;
 
 	@FindBy(xpath = "//a[@class='back-to-top']")
 	private WebElement BackToTop;
 
-	@FindBy(xpath = "//div[contains(text(),'Accessibility')]")
+	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'accessibility')]")
 	private WebElement Accessibility;
 
 	@FindBy(xpath = "(//a[@id='gf_lnk_2']")
