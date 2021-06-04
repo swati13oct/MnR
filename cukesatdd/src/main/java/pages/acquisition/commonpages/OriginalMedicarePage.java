@@ -103,7 +103,7 @@ public class OriginalMedicarePage extends GlobalWebElements {
         System.out.println("Types of Medicare and Medigap Insurance Plans link clicked");
         CommonUtility.checkPageIsReadyNew(driver);
         sleepBySec(2);
-        if (driver.getCurrentUrl().contains("/medicare-education/medicare-plans-overview.html")) {
+        if (driver.getCurrentUrl().contains("/medicare-education/medicare-plans-overview")) {
             return new OverviewofPlanTypesPage(driver);
         } else {
             return null;

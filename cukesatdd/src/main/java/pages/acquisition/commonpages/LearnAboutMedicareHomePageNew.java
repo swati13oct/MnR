@@ -208,7 +208,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         jsClickNew(lnkOverviewOfPlans);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
-        if (driver.getCurrentUrl().contains("/medicare-education/medicare-plans-overview.html")) {
+        if (driver.getCurrentUrl().contains("/medicare-education/medicare-plans-overview")) {
             return new OverviewofPlanTypesPage(driver);
         } else {
             return null;
