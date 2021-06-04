@@ -278,7 +278,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "medicareTitle")
 	public WebElement siteMapHeader;
 
-	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1') and contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
 
 	// @FindBy(xpath = "//*[@class='container
@@ -4954,7 +4954,7 @@ String winHandleBefore = driver.getWindowHandle();
 		scrollToView(viewAllDisclaimerInformationLink);
 		jsClickNew(viewAllDisclaimerInformationLink);
 		sleepBySec(2);
-		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hideLink')]"));
+		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimerstext')]"));
 		if (content.isDisplayed() && content.isEnabled()) {
 			System.out.println("View Diclaimer Information Link clicked Successfully");
 			Assertion.assertTrue(true);
@@ -5019,7 +5019,7 @@ String winHandleBefore = driver.getWindowHandle();
 		waitforElementNew(stateGeotargeting, 5);
 		System.out.println("State selected for Geotagging: " + stateGeotargeting.getText());
 		waitforElementNew(stateGeotargeting, 5);
-		jsClickNew(backToTop);
+		//jsClickNew(backToTop);
 	}
 
 	public void clickComplaintFormLink() {

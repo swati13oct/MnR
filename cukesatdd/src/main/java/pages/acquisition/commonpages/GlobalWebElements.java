@@ -91,11 +91,11 @@ public class GlobalWebElements  extends UhcDriver{
 	@FindBy(linkText = "Back to Top")
 	 public WebElement footerNavigationBackToTopLink;
 	
-	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
+	@FindBy(xpath = ".//*[contains(@class, 'viewdisclaimerstext')]")
 	 public WebElement viewAllDisclaimerInformationLink;
 	
 	//@FindBy(linkText = "Hide disclaimer information")
-	@FindBy(xpath="//a[contains(@class,'disclaimer hideLink')]") 
+	@FindBy(xpath=".//*[contains(@class, 'hidedisclaimerstext')]") 
 	public WebElement hideDiscliamerInformation;
 	
 	@FindBy(css = "a.backtotop1.hideLink")
