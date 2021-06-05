@@ -1035,5 +1035,37 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateEmailSubmissionMessage(expectedMsg);
 	}
+	
+	@When("^user click on \"([^\"]*)\" link under shop plans$")
+	public void user_click_on_link_under_shop_plan(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickFooterLinks(linkName);
+		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+	}
+	
+	@When("^user click on \"([^\"]*)\" link under Tools & Resources$")
+	public void user_click_on_link_under_tools(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickFooterLinks(linkName);
+		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+	}
+	
+	@When("^user click on \"([^\"]*)\" link under Learn About Medicare$")
+	public void user_click_on_link_under_Learn_About_Medicare(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickFooterLinks(linkName);
+		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+	}
+	
+	@When("^user click on \"([^\"]*)\" link under more$")
+	public void user_click_on_link_under_more(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickFooterLinks(linkName);
+		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+	}
 }
 

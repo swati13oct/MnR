@@ -6238,10 +6238,10 @@ String winHandleBefore = driver.getWindowHandle();
 	public void validatestatedropDown(String state, String code) {
 		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
-		String StateSessionStorage = returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
+		/*String StateSessionStorage = returnDriverStorageJS("sessionStorage", "ucp_geotrackingState");
 		System.out.println("State selected : " + state);
 		System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
-		Assertion.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase(code));
+		Assertion.assertTrue("Gesolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase(code));*/
 	}
 	
 	public void validateMedupsStateUrl(String state, String code, String classicStates, String AllStates) {
@@ -6543,5 +6543,21 @@ String winHandleBefore = driver.getWindowHandle();
 		 * CallSamTFNClose.click(); validateNew(callsam); return null;
 		 */
 		return null;
+	}
+	
+	public void clickFooterLinks(String linkName) {
+		WebElement link=driver.findElement(By.xpath("//a[@dtmid='acq_footer' and contains(@dtmname,'"+linkName+"')]"));
+		String base = driver.getWindowHandle();
+		waitforElement(link);
+		jsClickNew(link);
+		Set<String> all = driver.getWindowHandles();
+		for(String s:all) {
+			driver.switchTo().window(s);
+			if(!base.equals(s)) {
+				driver.close();
+				break;
+			}
+		}
+		driver.switchTo().window(base);
 	}
 }

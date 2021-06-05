@@ -18,9 +18,9 @@ Feature: 1.12 ACQ - Global Components Validation
     And user clicks on termsOfuse link on privacypolicy page
     And user clicks on disclaimers link on terms&conditions page
     And user clicks on agents&brokers link on disclaimers page
-    And user verifies home link of agents&brokers page
-    Then user clicks on back to top link of home page
 
+    #And user verifies home link of agents&brokers page
+    #Then user clicks on back to top link of home page
     @globalfooter
     Examples: 
       | site | state  | code |
@@ -263,19 +263,19 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @MiscellaneousLinks_GlobalCompsAARP @prodRegression
     Examples: 
-      | site | path                                                       | pageName                | tfnXpath                                                       | tfnFlag |
+      | site | path                                                      | pageName                | tfnXpath                                                       | tfnFlag |
       | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
       | AARP | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
-      | AARP | medicare-plans.html                                        | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      | AARP | profile/guest                                              | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |
+      | AARP | medicare-plans.html                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      | AARP | profile/guest                                             | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |
 
     @MiscellaneousLinks_GlobalCompsUHC
     Examples: 
-      | site | path                                                       | pageName                | tfnXpath                                                       | tfnFlag |
+      | site | path                                                      | pageName                | tfnXpath                                                       | tfnFlag |
       | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator | Drug Cost Estimator     | //a[contains(@class, 'tel')]                                   | false   |
       | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English   | Pharmacy Search         | //a[contains(@href ,'tel')]                                    | true    |
-      | UHC  | medicare-plans.html                                        | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
-      | UHC  | profile/guest                                              | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |
+      | UHC  | medicare-plans.html                                       | ShopPlan: Plan Selector | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
+      | UHC  | profile/guest                                             | Visitor Profile: Guest  | //*[contains(@class,'tel')]                                    | true    |
 
     @FooterLinks_GlobalCompsAARP @avengersRegressionAARP
     Examples: 
@@ -746,3 +746,50 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site |
       | UHC  |
+      
+@footerLinks
+  Scenario Outline: To verify the links under Shop Plans, Tools & Resources, Learn About Medicare and More on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user click on "Medicare Advantage Plans" link under shop plans
+    Then the user clicks on browser back button
+    When user click on "Dual Special Needs Plans" link under shop plans
+    Then the user clicks on browser back button
+    When user click on "Medicare Supplement Insurance Plans" link under shop plans
+    Then the user clicks on browser back button
+    When user click on "Medicare Prescription Drug Plans" link under shop plans
+    Then the user clicks on browser back button
+    When user click on "Plan Recommendation" link under Tools & Resources
+    Then the user clicks on browser back button
+    When user click on "Drug Cost Estimator" link under Tools & Resources
+    Then the user clicks on browser back button
+    When user click on "Pharmacy Search" link under Tools & Resources
+    When user click on "Provider Search" link under Tools & Resources
+    Then the user clicks on browser back button
+    When user click on "Introduction to Medicare" link under Learn About Medicare
+    Then the user clicks on browser back button
+    When user click on "Eligibility" link under Learn About Medicare
+    Then the user clicks on browser back button
+    When user click on "Coverage Choices" link under Learn About Medicare
+    Then the user clicks on browser back button
+    When user click on "Medicare FAQ" link under Learn About Medicare
+    Then the user clicks on browser back button
+    When user click on "About" link under more
+    Then the user clicks on browser back button
+    When user click on "Contact" link under more
+    Then the user clicks on browser back button
+    When user click on "Language Assistance" link under more
+    When user click on "AARP.org" link under more
+    When user updates the state drop down value on the home page
+      | State | <state> |
+    And user clicks on View all disclaimer information link on the home page
+
+    @footerLinksAARP
+    Examples: 
+      | site |state|
+      | AARP |Alaska|
+      
+       @footerLinksUHC
+    Examples: 
+      | site |state|
+      | UHC |Alaska|
