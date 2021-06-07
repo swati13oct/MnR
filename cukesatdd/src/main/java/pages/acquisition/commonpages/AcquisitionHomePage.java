@@ -6560,4 +6560,74 @@ String winHandleBefore = driver.getWindowHandle();
 		}
 		driver.switchTo().window(base);
 	}
+	
+	public void validateFooterLinksNavigation(String linkName) {
+		switch (linkName) {
+		
+		case "Introduction to Medicare":
+				Assertion.assertTrue("Navigation to Introduction page failed", driver.getCurrentUrl().contains("/medicare-education"));
+				break;
+		case "Eligibility":
+				Assertion.assertTrue("Navigation to Eligibility page failed", driver.getCurrentUrl().contains("/medicare-eligibility"));
+				break;
+		case "Coverage Choices":
+			Assertion.assertTrue("Navigation to Coverage Options failed", driver.getCurrentUrl().contains("medicare-parts-and-medigap-plans"));
+			break;
+			
+		case "Medicare FAQ":
+			Assertion.assertTrue("Navigation to Medicare FAQ page failed", driver.getCurrentUrl().contains("medicare-faq"));
+			break;
+						
+		case "Medicare Advantage Plans":
+			Assertion.assertTrue("Navigation to Medicare Advantage Plans page failed", driver.getCurrentUrl().contains("medicare-advantage-plans"));
+			break;
+			
+		case "Medicare Supplement Insurance Plans":
+			Assertion.assertTrue("Navigation to Medicare Supplement Insurance Plans page failed", driver.getCurrentUrl().contains("medicare-supplement-plans"));
+			break;
+			
+		case "Medicare Prescription Drug Plans":
+			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("medicare-part-d"));
+			break;
+			
+		case "Dual Special Needs Plans":
+			Assertion.assertTrue("Navigation to Dual Special Needs Plans page failed", driver.getCurrentUrl().contains("dual-special-needs-plans"));
+			break;
+			
+		case "Plan Recommendation":
+			Assertion.assertTrue("Navigation to Plan Recommendation page failed", driver.getCurrentUrl().contains("plan-recommendation-engine"));
+			break;
+			
+		case "Drug Cost Estimator":
+			Assertion.assertTrue("Navigation to Drug Cost Estimator page failed", driver.getCurrentUrl().contains("estimate-drug-costs"));
+			break;
+						
+		case "Pharmacy Search":
+			Assertion.assertTrue("Navigation to Pharmacy Search page failed", driver.getCurrentUrl().contains("Pharmacy-Search"));
+			break;
+			
+		case "Provider Search":
+			Assertion.assertTrue("Navigation to Provider Search page failed", driver.getCurrentUrl().contains("connect.int.werally"));
+			break;
+			
+		case "About":
+			Assertion.assertTrue("Navigation to About page failed", driver.getCurrentUrl().contains("about-us"));
+			break;
+			
+		case "Contact":
+			Assertion.assertTrue("Navigation to Contact page failed", driver.getCurrentUrl().contains("contact-us"));
+			break;
+			
+		case "Language Assistance":
+			Assertion.assertTrue("Navigation to Language Assistance page failed", driver.getCurrentUrl().contains("language-assistance"));
+			break;
+			
+		case "AARP.org":
+			Assertion.assertTrue("Navigation to AARP.org page failed", driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org"));
+			break;
+			
+			default:
+				System.out.println("Link not available under Learn about Medicare");
+		}
+	}
 }

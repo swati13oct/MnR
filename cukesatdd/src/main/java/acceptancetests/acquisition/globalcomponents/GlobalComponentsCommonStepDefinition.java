@@ -1041,7 +1041,7 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.clickFooterLinks(linkName);
-		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
 	}
 	
 	@When("^user click on \"([^\"]*)\" link under Tools & Resources$")
@@ -1049,7 +1049,7 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.clickFooterLinks(linkName);
-		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
 	}
 	
 	@When("^user click on \"([^\"]*)\" link under Learn About Medicare$")
@@ -1057,7 +1057,7 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.clickFooterLinks(linkName);
-		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
 	}
 	
 	@When("^user click on \"([^\"]*)\" link under more$")
@@ -1065,7 +1065,15 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.clickFooterLinks(linkName);
-		getLoginScenario().saveBean(CommonConstants.LEARNABOUTMEDICARE_LINK, linkName);
+		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
+	}
+	
+	@Then("^user should be navigated to respective footer links page$")
+	public void user_should_be_navigated_to_footer_links_page() throws Throwable {
+		String linkName=(String) getLoginScenario().getBean(CommonConstants.FOOTER_LINK);
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.validateFooterLinksNavigation(linkName);
 	}
 }
 
