@@ -3992,4 +3992,20 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 			}
 	
 	}
+	
+	@Then("^the user validates Statement of Understanding Page$")
+	public void the_user_validates_SOA_Page() throws Throwable {
+		
+		AuthorizationPage sOAPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
+		boolean Validation_Status = sOAPage.validate_SOA_Page();
+		if(Validation_Status){
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SOA_PAGE,sOAPage);
+			
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("SOA Page : Required fields NOT validated");
+			Assertion.fail("SOA Page : Required fields NOT validated");
+		}
+		// }
+	}
 }
