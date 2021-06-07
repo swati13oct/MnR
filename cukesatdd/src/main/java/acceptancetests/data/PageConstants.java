@@ -775,5 +775,29 @@ public static final String GUEST_PAYMENTS_HOME_PAGE = "guestPaymentsHomePage";
 
 	public static final String RESOURCE_PAGE = "resourcePage";
 
+	public static final String WHEN_TO_ENROLL_IN_MEDICARE_PAGE="whenToEnrollInMedicarePage";
+
+	public static final String MEDICARE_ADVANTAGE_PART_C_PLANS_PAGE="medicareAdvantagePartCPlansPage";
+
+	public static final String MEDICARE_SUPPLEMENT_PLANS_PAGE="medicareSupplementPlansPage";
+
+	public static final String SPECIAL_NEEDS_PLANS_PAGE="specialNeedsPlansPage";
+
+	public static final String PRESCRIPTION_DRUGS_PLANS_PAGE="prescriptionDrugsPlansPage";
+
+	public static final String OVERVIEW_OF_PLAN_TYPES="overviewOfPlanTypes";
+
+	public static final String INITIAL_ENROLLMENT_PERIOD_PAGE="initialEnrollmentPeriodPage";
+
+	public static final String WORKING_PAST_65_PAGE="workingPast65Page";
+
+	public static final String HOW_TO_ENROLL_IN_MEDICARE_PAGE="howtoEnrollInMedicarePage";
+
+	public static final String ORIGINAL_MEDICARE_PAGE="originalMedicarePage";
+
+	public static final String CHANGING_MEDICARE_PLAN_PAGE="changingMedicarePlanPage";
+
+
+
 }
 
