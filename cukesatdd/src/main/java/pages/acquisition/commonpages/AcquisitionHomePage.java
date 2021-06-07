@@ -6546,22 +6546,23 @@ String winHandleBefore = driver.getWindowHandle();
 	}
 	
 	public void clickFooterLinks(String linkName) {
-		WebElement link=driver.findElement(By.xpath("//a[@dtmid='acq_footer' and contains(@dtmname,'"+linkName+"')]"));
-		String base = driver.getWindowHandle();
+		WebElement link;
+		if(linkName.equals("Medicare Supplement Insurance Plans")) {
+			link = driver.findElement(By.xpath("//*[@class='uhc-footer']//span[contains(text(),'Medicare Supplement Insurance Plans')]"));
+		}
+		else {
+			link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName + "') and contains(@dtmname,'" + linkName + "')]"));
+		}
+		//String base = driver.getWindowHandle();
 		waitforElement(link);
 		jsClickNew(link);
-		Set<String> all = driver.getWindowHandles();
-		for(String s:all) {
-			driver.switchTo().window(s);
-			if(!base.equals(s)) {
-				driver.close();
-				break;
-			}
-		}
-		driver.switchTo().window(base);
+		pageloadcomplete();
 	}
 	
 	public void validateFooterLinksNavigation(String linkName) {
+		String base = driver.getWindowHandle();
+		Set<String> all = driver.getWindowHandles();
+		boolean flag=false;
 		switch (linkName) {
 		
 		case "Introduction to Medicare":
@@ -6587,7 +6588,7 @@ String winHandleBefore = driver.getWindowHandle();
 			break;
 			
 		case "Medicare Prescription Drug Plans":
-			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("medicare-part-d"));
+			Assertion.assertTrue("Navigation to Medicare Prescription Drug Plans page failed", driver.getCurrentUrl().contains("prescription-drug-plans"));
 			break;
 			
 		case "Dual Special Needs Plans":
@@ -6607,7 +6608,16 @@ String winHandleBefore = driver.getWindowHandle();
 			break;
 			
 		case "Provider Search":
-			Assertion.assertTrue("Navigation to Provider Search page failed", driver.getCurrentUrl().contains("connect.int.werally"));
+			for(String s:all) {
+				driver.switchTo().window(s);
+				flag=driver.getCurrentUrl().contains("connect.int.werally");
+				if(!base.equals(s)) {
+					driver.close();
+					break;
+				}
+			}
+			driver.switchTo().window(base);
+			Assertion.assertTrue("Navigation to Provider Search page failed", flag);
 			break;
 			
 		case "About":
@@ -6619,11 +6629,29 @@ String winHandleBefore = driver.getWindowHandle();
 			break;
 			
 		case "Language Assistance":
-			Assertion.assertTrue("Navigation to Language Assistance page failed", driver.getCurrentUrl().contains("language-assistance"));
+			for(String s:all) {
+				driver.switchTo().window(s);
+				flag=driver.getCurrentUrl().contains("language-assistance");
+				if(!base.equals(s)) {
+					driver.close();
+					break;
+				}
+			}
+			driver.switchTo().window(base);
+			Assertion.assertTrue("Navigation to Language Assistance page failed", flag);
 			break;
 			
 		case "AARP.org":
-			Assertion.assertTrue("Navigation to AARP.org page failed", driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org"));
+			for(String s:all) {
+				driver.switchTo().window(s);
+				flag=driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org");
+				if(!base.equals(s)) {
+					driver.close();
+					break;
+				}
+			}
+			driver.switchTo().window(base);
+			Assertion.assertTrue("Navigation to AARP.org page failed",flag );
 			break;
 			
 			default:

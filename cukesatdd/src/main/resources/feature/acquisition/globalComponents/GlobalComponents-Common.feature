@@ -774,7 +774,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the user clicks on browser back button
     When user click on "Provider Search" link under Tools & Resources
     Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
+    #Then the user clicks on browser back button
     When user click on "Introduction to Medicare" link under Learn About Medicare
     Then user should be navigated to respective footer links page
     Then the user clicks on browser back button
