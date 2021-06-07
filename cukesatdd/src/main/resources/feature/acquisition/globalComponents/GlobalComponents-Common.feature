@@ -806,7 +806,59 @@ Feature: 1.12 ACQ - Global Components Validation
       | site |state|
       | AARP |Alaska|
       
-       @footerLinksUHC
+      @footerLinks
+  Scenario Outline: To verify the links under Shop Plans, Tools & Resources, Learn About Medicare and More on the <site> site
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    When user click on "Medicare Advantage Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Dual Special Needs Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare Supplement Insurance Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare Prescription Drug Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Plan Recommendation" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Drug Cost Estimator" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Pharmacy Search" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Provider Search" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    #Then the user clicks on browser back button
+    When user click on "Introduction to Medicare" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Eligibility" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Coverage Choices" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare FAQ" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "About" link under more
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Contact" link under more
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Language Assistance" link under more
+    Then user should be navigated to respective footer links page
+    When user updates the state drop down value on the home page
+      | State | <state> |
+    And user clicks on View all disclaimer information link on the home page
+    
+    @footerLinksUHC
     Examples: 
       | site |state|
       | UHC |Alaska|
