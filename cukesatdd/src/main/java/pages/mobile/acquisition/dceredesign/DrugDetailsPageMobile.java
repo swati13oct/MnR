@@ -21,9 +21,12 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
@@ -189,6 +192,24 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
 	public WebElement pharmacyName;
+	
+	@FindBy(xpath = "//*[@id='editPharmacyLink']")
+	public WebElement editLink;
+
+	@FindBy(id = "prescriptiondrug")
+	private WebElement prescriptiondrugTab;
+
+	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
+	public WebElement dceNBAModal;
+
+	@FindBy(xpath = "//*[@id='guest-flow-widget-head' and text()='Save your work for later']")
+	public WebElement dceNBAModalMsg;
+
+	@FindBy(xpath = "//button/*[text()='Create Your Profile']")
+	public WebElement dceNBAModalBtn;
+
+	@FindBy(id = "SignIn")
+	public WebElement signInBtn;
 
 	@FindBy(xpath = "//button[contains(@aria-label,'Select ROCK PHARMACY -')]")
 	public WebElement selectRockPharm;
@@ -324,6 +345,15 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 
+	}
+	
+	private String CurrentFlow = "";
+
+	public DrugDetailsPageMobile(WebDriver driver, String Flow) {
+		super(driver);
+		PageFactory.initElements(driver, this);
+		CurrentFlow = Flow;
+		openAndValidate();
 	}
 
 	@Override
@@ -721,7 +751,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		}
 
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@id, 'plancosts')]")
 	private WebElement planCostsTab;
 
@@ -730,13 +760,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
-		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
 		iosScroll(PlanName_PlanDetails);
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
-			System.out.println("Plan Details Page displayed for current Plan : "+planName);
+			System.out.println("Plan Details Page displayed for current Plan : " + planName);
 			return new PlanDetailsPageMobile(driver);
-		}
-		else {
+		} else {
 			return null;
 		}
 	}
@@ -1476,6 +1505,62 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion
 					.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
 
+	}
+
+	public void validateDCENBAModal() {
+		if (validateNew(dceNBAModal)) {
+			validateNew(dceNBAModalMsg);
+			validateNew(dceNBAModalBtn);
+			dceNBAModalBtn.click();
+			waitforElement(signInBtn);
+			Assertion.assertTrue("user not navigated to login page",
+					driver.getCurrentUrl().contains("app/index.html#/login"));
+		}
+	}
+	
+
+	
+	public void vppdetails_clickEditPharmacy() throws InterruptedException {
+		Thread.sleep(6000);
+		validate(prescriptiondrugTab);
+		prescriptiondrugTab.click();
+		validateNew(editLink);
+		JavascriptExecutor je = (JavascriptExecutor) driver;
+		je.executeScript("arguments[0].click();", editLink);
+
+		// Assertion.assertTrue("Drug not switched to generic", editLink.isDisplayed());
+	}
+	
+	@FindBy(xpath = "//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
+	private WebElement DrugInfoModal_DrugCostDetailsBtn;
+	
+	@FindBy(xpath = "//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
+	private WebElement DrugInfoModal_CloseBtn;
+	
+	public ComparePlansPageMobile clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
+		validateNew(LinktoExitScenario);
+		if (!LinktoExitScenario.getText().contains("Compare"))
+			Assertion.fail("Exit Scenario Link Text Incorrect for Compare Flow : " + LinktoExitScenario.getText());
+
+		jsClickNew(LinktoExitScenario);
+		waitForPageLoadSafari();
+		// CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
+		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
+		// WebElement DrugInfoModal_Header =
+		// driver.findElement(By.xpath("//*[contains(@class,
+		// 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
+		// validateNew(DrugInfoModal_Header);
+
+		validateNew(DrugInfoModal_DrugCostDetailsBtn);
+		validateNew(DrugInfoModal_CloseBtn);
+		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
+		return new ComparePlansPageMobile(driver);
+	}
+	
+	public void validateDefaultPharmacyName(String defaultPharmacy) {
+		validateNew(pharmacyName);
+		Assertion.assertTrue("Default pharmacy name is not displayed",
+				pharmacyName.getText().contains(defaultPharmacy));
 	}
 
 	public void validateDetailsForDrugInYourDrugs(String drugName, String drugQuantity, String drugFrequency,

@@ -236,10 +236,11 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	
+	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
-	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+	@FindBy(xpath = "//h2[normalize-space()='Drug Cost Details')]")
 	public WebElement DrugDetails_DrugCostsHeading;
 
 	public DrugDetailsPageMobile navigateToDrugDetailsPage() {

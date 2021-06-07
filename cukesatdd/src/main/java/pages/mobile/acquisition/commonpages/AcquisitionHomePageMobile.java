@@ -316,10 +316,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
-	
+
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
 	public WebElement EstimateYourDrugCost;
 
@@ -2281,6 +2281,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		String NavigateToURL = CurrentURL + path;
 		System.out.println("Navigating to URL : " + NavigateToURL);
 		driver.navigate().to(NavigateToURL);
+		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
@@ -2656,8 +2657,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			return new KeywordSearchAARPMobile(driver);
 		return null;
 	}
-
-
 
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
 		MobileMenuAccessDCE();
@@ -3689,8 +3688,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	// @FindBy(xpath = "//*[local-name()='svg' and
-	// @class='icon-external']/*[local-name()='path']")
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
 	private WebElement RightRail_FindAnAgent;
 
@@ -3700,13 +3697,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
+	String AgentLinkJSPath = "document.querySelector(.disableExternalPopup.agentPSC)" + ".click();";
+
 	public void clickonFindanAgentlink(String ExpectedUHCAgentURL) {
 		// threadsleep(10);
 		validateNew(RightRail_FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
-		checkElementisEnabled(RightRail_FindAnAgent);
-		jsClickNew(RightRail_FindAnAgent);
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript(AgentLinkJSPath);
+		
+		//jsClickNew(RightRail_FindAnAgent);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -3717,7 +3718,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 
-		pageloadcomplete();
+		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentUHCAgentURL = driver.getCurrentUrl();
 		String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
 		System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);

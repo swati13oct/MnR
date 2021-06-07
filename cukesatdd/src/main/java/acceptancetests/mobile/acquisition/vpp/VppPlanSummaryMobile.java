@@ -66,6 +66,25 @@ public class VppPlanSummaryMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNextBestActionModalForDrugCost();
 	}
+	
+	@Then("^the user validates the added drug name on plan summary page for the selected plan$")
+	public void verify_drugs_covered_AARP(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}*/
+		String planName = plannameAttributesMap.get("Plan Name");
+		String drugName = plannameAttributesMap.get("DrugName");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assertion.assertTrue("Drugs coverage Info not updated", plansummaryPage.verifyAddedDrugName(planName, drugName));
+	}
 
 	
 	@Then("^user changes zipcode within VPP page$")
