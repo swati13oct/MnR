@@ -338,7 +338,8 @@ public class PlanDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//button[@ng-click='backToDceDrugDetailsOrSummary()']")
 	public WebElement backtoDrugEstBtn;
 
-	@FindBy(xpath = "//*[@class='tab ng-scope active']")
+//	@FindBy(xpath = "//*[@class='tab ng-scope active']")
+	@FindBy(xpath = "//*[@class='tab ng-scope active']//span")
 	private WebElement defaultSelectedTab;
 	
 	@FindBy(xpath="//div[contains(@class,'plan-detail-tabs')]//a")
