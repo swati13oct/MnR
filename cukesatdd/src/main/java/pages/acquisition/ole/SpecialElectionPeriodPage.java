@@ -377,6 +377,8 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 }
 
 public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData) {
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");
 	int i=0;

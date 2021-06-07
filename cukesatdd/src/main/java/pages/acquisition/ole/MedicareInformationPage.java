@@ -889,12 +889,20 @@ public boolean answer_following_questions(Map<String, String> questionMap) {
 	String PDPquestionFlag = questionMap.get("PDP Question");
 	String LongTermQuestionFlag = questionMap.get("LongTerm Question");
 
-	if(PDPquestionFlag.equalsIgnoreCase("yes")){
-		jsClickNew(PDPQuestion_Yes);
-	}
+	
 	if(LongTermQuestionFlag.equalsIgnoreCase("yes")){
 		jsClickNew(LongTerm_Question_Yes);
 	}
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
+	/*CommonUtility.checkPageIsReadyNew(driver);
+		if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Other Health Insurance')]")))){		
+		System.out.println("OLE Prescription drug Coverage Page is Displayed");
+		}*/
+		if(PDPquestionFlag.equalsIgnoreCase("yes")){
+		jsClickNew(PDPQuestion_Yes);
+	}
+	
 	if(NextBtn.isEnabled()){
 		System.out.println("SEP options selected :  Next button is enabled");
 		return true;
@@ -1038,7 +1046,7 @@ public boolean  answer_following_questionsLongTerm(Map<String, String> memberDet
 		}
 
 	if(NextBtn.isEnabled()){
-		System.out.println("SEP options selected :  Next button is enabled");
+		System.out.println("Prescription Drug Coverage options selected :  Next button is enabled");
 	}
 	return true;
 
@@ -1051,9 +1059,14 @@ public boolean  answer_following_questionsLongTerm(Map<String, String> memberDet
 public boolean answer_following_questions_PrescriptionCoverage(Map<String, String> memberDetailsMap) {
 	boolean Validation_Flag = true;
 	
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
 	try
 	{
-
+	CommonUtility.checkPageIsReadyNew(driver);
+	if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Prescription Drug Coverage')]")))){			
+		System.out.println("OLE Medicare Information Page is Displayed");
+	}
 	if(PrescriptionCoverageQuestionFlagNo.isDisplayed()) {
 		jsClickNew(PrescriptionCoverageQuestionFlagNo);
 		if(!validate(healthInsuranceNameField) && validate(groupNumberField)){
@@ -1161,8 +1174,15 @@ public boolean validate_MedicaidNumberField(String planType, String medicaidNumb
 
 public boolean validate_Medicaid_Number_CEP(Map<String, String> memberDetailsMap) {
 boolean Validation_Flag = true;
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
+	CommonUtility.checkPageIsReadyNew(driver);
+	//	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+			if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Medicaid')]")))){		
+			System.out.println("OLE Medicare Information Page is Displayed");
 	
-	try
+			}
+			try
 	{
 
 	if(medicaiddno.isDisplayed()) {

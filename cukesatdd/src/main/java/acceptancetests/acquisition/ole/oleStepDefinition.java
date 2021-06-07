@@ -3044,7 +3044,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER, MemberDetailsMap.get("PD Member Number"));
 			Assertion.assertTrue(true);
 		} else
-			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+			Assertion.fail("OLE Prescription Drug Coverage Questions in Prescription Coverage Page - Adding Member Details Failed");
 	}
 
 	@SuppressWarnings("unchecked")

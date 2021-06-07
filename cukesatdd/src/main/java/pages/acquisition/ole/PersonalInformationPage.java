@@ -522,7 +522,8 @@ public class PersonalInformationPage extends UhcDriver{
 //		NextBtn.click();
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+	//	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+			if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Please Provide Your Medicare Insurance Information')]")))){		
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}
@@ -533,18 +534,11 @@ public class PersonalInformationPage extends UhcDriver{
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
-		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-		executor.executeScript("arguments[0].click();", NextBtn);*/
-		
-		/*if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Special Election')]")))){
-			System.out.println("OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
-		}
-		*/
 		
 		Thread.sleep(3000);
-			if(driver.getCurrentUrl().contains("special")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
+		//Updated the get url title SEP Page with Other Health insurance...OLERedesign
+			if(driver.getCurrentUrl().contains("other-health-insurance")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance"), "OLE Other HealthInsurance Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 			
 			}
@@ -559,9 +553,9 @@ public class PersonalInformationPage extends UhcDriver{
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					
-					 if(driver.getCurrentUrl().contains("special")){
-					  System.out.println("OLE SEP Page is Displayed"); } else {
-					  System.out.println("OLE SEP Page is not Displayed"); }
+					 if(driver.getCurrentUrl().contains("other-health-insurance")){
+					  System.out.println("OLE Other HealthInsurance Page is Displayed"); } else {
+					  System.out.println("OLE Other HealthInsurance Page is not Displayed"); }
 					 return new SpecialElectionPeriodPage(driver);	
 				}
 			 }
@@ -594,8 +588,8 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		Thread.sleep(3000);
 			//if(driver.getCurrentUrl().contains("special")){
-			if(driver.getCurrentUrl().contains("special-election-period")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("special-election-period"), "OLE SEP Page is Displayed");
+			if(driver.getCurrentUrl().contains("other-health-insurance")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance"), "OLE otherhealth insurance Page is Displayed");
 			return new SpecialElectionPeriodPage(driver);
 			
 			}
@@ -611,10 +605,10 @@ public class PersonalInformationPage extends UhcDriver{
 					 jsClickNew(NextBtn);
 					 waitForPageLoadSafari();
 
-					 if(driver.getCurrentUrl().contains("special-election-period")){
-					  System.out.println("OLE SEP Page is Displayed"); } else {
+					 if(driver.getCurrentUrl().contains("other-health-insurance")){
+					  System.out.println("OLE otherhealth insurance Page is Displayed"); } else {
 
-					  System.out.println("OLE SEP Page is not Displayed"); }
+					  System.out.println("OLE otherhealth insurance Page is Displayed"); }
 					 return new SpecialElectionPeriodPage(driver);	
 				}
 			 }
