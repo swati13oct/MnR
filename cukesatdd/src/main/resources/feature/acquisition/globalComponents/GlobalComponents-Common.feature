@@ -862,3 +862,113 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site |state|
       | UHC |Alaska|
+      
+      @GlobalComponentsFooterAARPBlogPages
+  Scenario Outline: To verify Global Components Blog pages for the page mentioned on site - <site> -  <pageName> : <path>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    #Then the user hover over Shop for a Plan and validates zipcode component
+    #Then the user validate ZipCode Components on SubNav using ZipCode "10001"
+     When user click on "Medicare Advantage Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Dual Special Needs Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare Supplement Insurance Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare Prescription Drug Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Plan Recommendation" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Drug Cost Estimator" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Pharmacy Search" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Provider Search" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    #Then the user clicks on browser back button
+    When user click on "Introduction to Medicare" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Eligibility" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Coverage Choices" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare FAQ" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "About" link under more
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Contact" link under more
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Language Assistance" link under more
+    Then user should be navigated to respective footer links page
+    When user click on "AARP.org" link under more
+    Then user should be navigated to respective footer links page
+   
+    @Global_Comps_Footer_AARP2
+    Examples: 
+      | site | path      | pageName           |
+      | AARP | shop.html | ShopPlan: Homepage |
+      
+       @Global_Comps_Footer_AARP
+    Examples: 
+      | site | path                                                                                    | pageName                        |
+      | AARP | shop.html                                                                               | ShopPlan: Homepage              |
+      | AARP | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          |
+      | AARP | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          |
+      | AARP | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         |
+      | AARP | shop/dual-special-needs-plans.html                                                      | ShopPlan: Shop SNP Plan         |
+      | AARP | safe-shopping.html                                                                      | ShopPlan: Safe Shopping         |
+      | AARP | shop/compare/compare-ma-ms.html                                                         | ShopPlan: Compare MA-MS         |
+      | AARP | shop/compare/compare-ms.html                                                            | ShopPlan: Compare MS            |
+      | AARP | enroll.html                                                                             | ShopPlan: Enrollment Homepage   |
+      | AARP | enroll/ms-apply.html                                                                    | ShopPlan: MS Enrollment         |
+      | AARP | enroll/ma-enrollment.html                                                               | ShopPlan: MA Enrollment         |
+      | AARP | enroll/pdp-enrollment.html                                                              | ShopPlan: PDP Enrollment        |
+      | AARP | shop/compare.html                                                                       | ShopPlan: Compare Homepage      |
+      | AARP | shop/compare/compare-ma.html                                                            | ShopPlan: Compare MA            |
+      | AARP | shop/compare/compare-pdp.html                                                           | ShopPlan: Compare PDP           |
+      | AARP | shop/estimate.html                                                                      | ShopPlan: Estimate Homepage     |
+      | AARP | shop/estimate/ms-costs.html                                                             | ShopPlan: Estimate MS           |
+      | AARP | shop/estimate/ma-costs.html                                                             | ShopPlan: Estimate  MA          |
+      | AARP | shop/estimate/pdp-costs.html                                                            | ShopPlan: Estimate  PDP         |
+      | AARP | shop/switch.html                                                                        | ShopPlan: Switch                |
+      | AARP | resources/mail-order-pharmacy.html                                                      | ShopPlan: Mail ORDER-PHARMACY   |
+      | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html                                     | ShopPlan: MA Plan benefits      |
+      | AARP | contact-us.html                                                                         | Contact us                      |
+      | AARP | shop/renew-active.html                                                                  | ShopPlan: Renew Active          |
+      | AARP | shop/medicare-advantage-veteran-plan.html                                               | ShopPlan: MA Veteran Plan       |
+      | AARP | medicare-articles.html                                                                  | ShopPlan: Articles              |
+      | AARP | medicare-articles/eligibility-and-enrollment.html                                       | ShopPlan: Sample Category Page  |
+      | AARP | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             |
+      | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 |
+      | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        |
+      | AARP | about-us.html                                                                           | About Us Page                   |
+      
+      @Global_Comps_Footer_Visitor_Profile_AARP
+
+     Examples: 
+      | site | path                                                                                    | pageName                        |
+      | AARP | /profile                                                                              | VisitorProfile:Proflie Page             |
+      
+      @Global_Comps_Footer_Visitor_Profile_AARP
+
+     Examples: 
+      | site | path                                                                                    | pageName                        |
+      | UHC | /profile                                                                              | VisitorProfile:Proflie Page             |
+      
+      

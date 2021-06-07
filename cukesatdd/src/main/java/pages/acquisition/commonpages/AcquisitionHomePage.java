@@ -3831,12 +3831,16 @@ String winHandleBefore = driver.getWindowHandle();
 		System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
 		Assertion.assertTrue("Geolocation State validation Failed ", StateSessionStorage.equalsIgnoreCase("CA"));
 	}
+	
+	@FindBy(xpath = "//*[@id=\'accordion-disclaimer-button\']/div[2]")
+	private WebElement hide_Disclaimer_Information;
 
 	public void validateDisclaimer() {
 		validateNew(disclaimerInformation);
 //			disclaimerInformation.click();
 		jsClickNew(disclaimerInformation);
-		//validateNew(backToTop_Disclaimer);
+		validateNew(hide_Disclaimer_Information);
+		jsClickNew(hide_Disclaimer_Information);
 	}
 
 	public void validateVisitAarpOrglink() {
