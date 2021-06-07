@@ -25,19 +25,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.dceredesign.SwitchToGeneric;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
+import pages.acquisition.dceredesign.*;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
@@ -53,6 +49,13 @@ public class DCEStepDefinitionAARP {
 	}
 
 	private WebDriver driver;
+
+	private Scenario scenario;
+
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 	@Then("^the user validates Get Started Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
@@ -3018,5 +3021,43 @@ public class DCEStepDefinitionAARP {
 		getStartedPage.EnterNonMemberDetailsAndImport(NonMember_DOB, NonMember_Zip, NonMember_Gender);
 	}
 
+	/**
+	 * Step Header Flags as follows
+	 * C - Current
+	 * E - Enabled
+	 * D - Disabled
+	 **/
+	@Then("the user validates the Step Header as follows")
+	public void the_user_validates_teh_step_header_as_follows(io.cucumber.datatable.DataTable attributes) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header validation Added --> C for Current, E for Enabled, D for Disabled ");
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String StepHeaderFlag = memberAttributesMap.get("Flags");
+		System.out.println("Flags -->>"+StepHeaderFlag);
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		dceStepHeader.validateStepHeader(StepHeaderFlag);
+	}
+	@Then("the user clicks on Step Header Step {int} to land on Build your drug list Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_build_your_drug_list_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		BuildYourDrugList buildDrugListPage = dceStepHeader.ClickStep2_NavigateDrugListPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);
+	}
 
+	@Then("the user clicks on Step Header Step {int} to land on Drug Details Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_drug_details_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		DrugDetailsPage drugDetailsPage = dceStepHeader.ClickStep3_NavigateDrugDetailsPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+
+	@Then("the user clicks on Step Header Step {int} to land on Drug Summary Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_drug_summary_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		DrugSummaryPage drugSummaryPage = dceStepHeader.ClickStep3_NavigateDrugSummaryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
 }

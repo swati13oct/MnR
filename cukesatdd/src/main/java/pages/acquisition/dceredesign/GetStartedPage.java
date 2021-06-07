@@ -232,7 +232,7 @@ public void yahooSearch(String searchParameter) {
 		
 	}
 
-	@FindBy(xpath = "//button[contains(@id, 'importDrug')]/*")
+	@FindBy(xpath = "//*[contains(@class, 'flex')]//button[contains(@dtmname, 'import my drugs')]/*")
 	public WebElement ImportBtn;
 
 	public void ValidateImportOptionDIspalyed() {

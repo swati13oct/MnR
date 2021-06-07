@@ -7,7 +7,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | Site | <site> |
     Then the user navigates to Shop plans for PDP Page and clicks on DCE link fto land on DCE Redesign
     Then the user validates Get Started Page
+    Then the user validates the Step Header as follows
+      | Flags | <GetStartedHeader> |
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
+    Then the user validates the Step Header as follows
+      | Flags | <DrugListPage_NoDrugs> |
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
     Then the user searches and adds the following Drug to Drug List
@@ -15,26 +19,37 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user selects the following drug recommendation and validates Drug Search page is displayed and add drug
       | SelectDrugRecommendation | <selectDrugRecommendation> |
     Then the user validates Drug Recommendation section
+    Then the user validates the Step Header as follows
+      | Flags | <DrugListPage_DrugsAdded> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
       | ZipCode | <zipCode> |
+    Then the user validates the Step Header as follows
+      | Flags | <ZipPage_ZipAdded> |
     And user clicks on continue button in Zip Entry Page
+    Then the user validates the Step Header as follows
+      | Flags | <DrugSummary> |
     Then the user selects View Drug details for following plantype and PlanName
       | Plan Type | <planType> |
       | Plan Name | <planName> |
+    Then the user validates the Step Header as follows
+      | Flags | <DrugDetails> |
     Then the user validates Switch to generic for following Brand Drug and validate Generic drug on Details Page
       | Brand Drug   | <drug1> |
       | Generic Drug | <drug2> |
     And user clicks on change pharmacy link from details page
     And the user selects Mail Pharmacy and returns to DCE Details page
-    And the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
+    Then the user clicks on Step Header Step 2 to land on Build your drug list Page
+#    And the user clicks Edit Drug on Drug Details Page and validates user navigates to Build your drug list Page
     And the user clicks on Edit button on Drug List page on DCE
       | DrugName | <drug2> |
     And the user changes the supply length
       | Supply Length | <supplyLength> |
-    Then the user clicks on Review Drug Costs to Land on Drug Details Page
+    Then the user clicks on Step Header Step 3 to land on Drug Details Page
+#    Then the user clicks on Review Drug Costs to Land on Drug Details Page
     Then the user Captures Drug costs on Drug Details Page
-    And the user validates link to Drug Summary Page
+    Then the user clicks on Step Header Step 3 to land on Drug Summary Page
+#    And the user validates link to Drug Summary Page
     And the user Captures Drug costs on Drug Summary Page for the given plan
       | Plan Name | <planName> |
     And the user compares drug costs for drug details and drug summary pages
@@ -53,13 +68,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
     @dce_ShopPDP_E2E_Scenario2_UAT_AARP @regressionAARP
     Examples: 
-      | Scenario           | site | drug1   | drug2                | drugForRecommendation | selectDrugRecommendation | zipCode | planType | planName                        | supplyLength   |
-      | E2E Scenario 2_AMP | AARP | Lipitor | atorvastatin calcium | Synthroid             | levothyroxine sodium     |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
+      | Scenario           | site | drug1   | drug2                | drugForRecommendation | selectDrugRecommendation | zipCode | planType | planName                        | supplyLength   | GetStartedHeader | DrugListPage_NoDrugs | DrugListPage_DrugsAdded | ZipPage_ZipAdded | DrugSummary | DrugDetails |
+      | E2E Scenario 2_AMP | AARP | Lipitor | atorvastatin calcium | Synthroid             | levothyroxine sodium     |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months | C:E:D            | E:C:D                | E:C:E                   | E:E:E            | E:E:C       | E:E:E       |
 
     @dce_ShopPDP_E2E_Scenario2_UAT_UHC @regressionUHC
     Examples: 
-      | Scenario           | site | drug1   | drug2                | drugForRecommendation | selectDrugRecommendation | zipCode | planType | planName                        | supplyLength   |
-      | E2E Scenario 2_UMS | UHC  | Lipitor | atorvastatin calcium | Synthroid             | levothyroxine sodium     |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months |
+      | Scenario           | site | drug1   | drug2                | drugForRecommendation | selectDrugRecommendation | zipCode | planType | planName                        | supplyLength   | GetStartedHeader | DrugListPage_NoDrugs | DrugListPage_DrugsAdded | ZipPage_ZipAdded | DrugSummary | DrugDetails |
+      | E2E Scenario 2_UMS | UHC  | Lipitor | atorvastatin calcium | Synthroid             | levothyroxine sodium     |   80002 | PDP      | AARP MedicareRx Walgreens (PDP) | Every 3 Months | C:E:D            | E:C:D                | E:C:E                   | E:E:E            | E:E:C       | E:E:E       |
 
   @dce_MedEdPage_E2E_Scenario4_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from Med Ed page

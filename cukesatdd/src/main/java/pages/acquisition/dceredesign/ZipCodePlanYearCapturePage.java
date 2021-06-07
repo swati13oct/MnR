@@ -11,6 +11,8 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
+import java.util.List;
+
 public class ZipCodePlanYearCapturePage extends UhcDriver {
 
 	
@@ -168,10 +170,16 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
 				CommonUtility.waitForPageLoad(driver,countyRows , 30);
-				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
+				List<WebElement> Counties = driver.findElements(By.xpath("//select[@id='county']/option"));
+				int CountiesCnt = Counties.size();
+				System.out.println("Counties Dropdown count --> "+CountiesCnt);
+				System.out.println("Last Object in counties dropdown --> "+Counties.get(CountiesCnt-1));
+				Counties.get(CountiesCnt-1).click();
+				//driver.findElements(By.xpath("//select[@id='county']/option")).get(0).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
+			Assertion.fail(">>>>> County Dropdown is NOT Dispalyed <<<<<");
 		}
 		validateNew(continueBtn);
 		//continueBtn.click();
