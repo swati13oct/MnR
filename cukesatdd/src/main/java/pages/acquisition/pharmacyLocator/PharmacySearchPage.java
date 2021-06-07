@@ -290,7 +290,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 		Pattern pattern = Pattern.compile(regex);
 		CommonUtility.checkPageIsReady(driver);
 		if (inputZip == null || inputZip.equals("")) { // note: no zip value
-			String exp_noZipTxt = "Please enter a ZIP code";
+			String exp_noZipTxt = "Please enter a ZIP Code";
 			Assertion.assertTrue("PROBLEM - not seeing no zip error element", pharmacyValidate(noZipcode));
 			if (language.equalsIgnoreCase("English")) {
 				String act_noZipTxt = noZipcode.getText();
@@ -299,7 +299,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 			}
 		} else {
 			if (!pattern.matcher(inputZip).matches()) { // note: zip invalid format
-				String exp_zipFormatErrTxt = "Please enter your ZIP code as 5 numbers like this";
+				String exp_zipFormatErrTxt = "Please enter your ZIP Code as 5 numbers like this";
 				Assertion.assertTrue("PROBLEM - not seeing zip format error element", pharmacyValidate(invalidZip));
 				if (language.equalsIgnoreCase("English")) {
 					String act_zipFormatErrTxt = invalidZip.getText();
