@@ -4994,7 +4994,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		scrollToView(hideDiscliamerInformation);
 		jsClickNew(hideDiscliamerInformation);
 		sleepBySec(2);
-		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hideLink')]"));
+		WebElement content = driver.findElement(By.xpath("//div[contains(@class,'hidedisclaimers')]"));
 		if (!content.isDisplayed() && content.isEnabled()) {
 			System.out.println("Hide Diclaimer Information Link clicked Successfully");
 			Assertion.assertTrue(true);

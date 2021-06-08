@@ -747,7 +747,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site |
       | UHC  |
       
-@footerLinks
+@footerLinks 
   Scenario Outline: To verify the links under Shop Plans, Tools & Resources, Learn About Medicare and More on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -806,7 +806,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site |state|
       | AARP |Alaska|
       
-      @footerLinks
+      @footerLinks 
   Scenario Outline: To verify the links under Shop Plans, Tools & Resources, Learn About Medicare and More on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -919,10 +919,10 @@ Feature: 1.12 ACQ - Global Components Validation
     When user click on "AARP.org" link under more
     Then user should be navigated to respective footer links page
    
-    @Global_Comps_Footer_AARP2
+    @Global_Comps_Footer_AARP2 @vbfGate
     Examples: 
       | site | path      | pageName           |
-      | AARP | shop.html | ShopPlan: Homepage |
+      | UHC | shop.html | ShopPlan: Homepage |
       
        @Global_Comps_Footer_AARP
     Examples: 
