@@ -55,7 +55,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on Back to top Link
     And user clicks on visit aarp.org link in the footer
 
-    @globalfooter_AARP @regressionAARP @vbfGate
+    @globalfooter_AARP @regressionAARP
     Examples: 
       | Scenario           | site |
       | E2E Scenario_1 AMP | AARP |
@@ -120,7 +120,7 @@ Feature: 1.12 UAT - Header and Footer flows
       | Scenario           | site | zipcode | isMultutiCounty | county    |
       | E2E Scenario_3 AMP | AARP |   80001 | No              | Jefferson |
 
-    @globalfooter_UHC @regressionUHC @vbfGate
+    @globalfooter_UHC @regressionUHC
     Examples: 
       | Scenario           | site | zipcode | isMultutiCounty | county    |
       | E2E Scenario_3 UMS | UHC  |   80001 | No              | Jefferson |
@@ -172,7 +172,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the footer
 
-    @globalfooter_AARP @regressionAARP @vbfGate
+    @globalfooter_AARP @regressionAARP
     Examples: 
       | Scenario           | site |
       | E2E Scenario_4 AMP | AARP |
