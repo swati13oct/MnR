@@ -96,7 +96,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
   @SiteSearchULayer @UATRegression
-  Scenario Outline: <Scenario> : To verify search results on Visitor profile from Home page
+  Scenario Outline: <Scenario> : To verify search results on Visitor profile from Home page -<newsearchvalue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user clicks on the shopping cart icon
@@ -124,7 +124,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_UMS | UHC  | Dental coverage | Drug cost estimator             |
 
   @SiteSearchULayer @UATRegression
-  Scenario Outline: <Scenario>: Verify Error handling on Visitor profile from Homepage
+  Scenario Outline: <Scenario>: Verify Error handling on Visitor profile from Homepage -<NewSearchValue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user clicks on the shopping cart icon
@@ -153,7 +153,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | Unicorn                                                                     |
 
   @SiteSearchULayer @UATRegression
-  Scenario Outline: <Scenario> : Verify provider search third party URL on Visitor profile from homepage
+  Scenario Outline: <Scenario> : Verify provider search third party URL on Visitor profile from homepage -<searchValue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user clicks on the shopping cart icon
