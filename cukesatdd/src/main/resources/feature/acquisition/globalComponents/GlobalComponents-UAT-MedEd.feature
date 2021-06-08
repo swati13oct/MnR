@@ -20,33 +20,33 @@ Feature: 1.12 UAT - Medicare Education Pages flows
     Then the user validates whether call icon is visible
 
     # Then the user validates SAM re-active Chat
-    @MedEdPages_1_GlobalCompsAARP @regressionAARP
+    @MedEdPages_1_GlobalCompsAARP
     Examples: 
       | Scenario           | site | path                                                     | pageName                              | tfnXpath            | tfnFlag                                                        |      |
       | E2E Scenario 2_AMP | AARP | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Options | AARP Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_1_GlobalCompsUHC @regressionUHC
+    @MedEdPages_1_GlobalCompsUHC
     Examples: 
       | Scenario           | site | path                                                     | pageName                              | tfnXpath         | tfnFlag                                                        |      |
       | E2E Scenario 2_UMS | UHC  | medicare-education/medicare-parts-and-medigap-plans.html | Medicare and Medigap Coverage Choices | UnitedHealthcare | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_2_GlobalCompsAARP @regressionAARP
+    @MedEdPages_2_GlobalCompsAARP
     Examples: 
       | Scenario           | site | path                                             | pageName                             | tfnXpath            | tfnFlag                                                        |      |
       | E2E Scenario 5_AMP | AARP | medicare-education/medicare-advantage-plans.html | Learn about Medicare Advantage Plans | AARP Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_2_GlobalCompsUHC @regressionUHC
+    @MedEdPages_2_GlobalCompsUHC
     Examples: 
       | Scenario           | site | path                                             | pageName                          | tfnXpath         | tfnFlag                                                        |      |
       | E2E Scenario 5_UMS | UHC  | medicare-education/medicare-advantage-plans.html | Medicare Advantage (Part C) Plans | UnitedHealthcare | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_3_GlobalCompsAARP @regressionAARP
+    @MedEdPages_3_GlobalCompsAARP
     Examples: 
       | Scenario           | site | path                                                  | pageName                   | tfnXpath            | tfnFlag                                                        |      |
       | E2E Scenario 4_AMP | AARP | medicare-education/medicare-costs.html                | Medicare Cost Basics       | AARP Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
       | E2E Scenario 6_AMP | AARP | medicare-education/enrollment-and-changing-plans.html | Medicare Enrollment Basics | AARP Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
 
-    @MedEdPages_3_GlobalCompsUHC @regressionUHC
+    @MedEdPages_3_GlobalCompsUHC
     Examples: 
       | Scenario           | site | path                                                  | pageName                   | tfnXpath         | tfnFlag                                                        |      |
       | E2E Scenario 4_UMS | UHC  | medicare-education/medicare-costs.html                | Medicare Cost Basics       | UnitedHealthcare | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true |
