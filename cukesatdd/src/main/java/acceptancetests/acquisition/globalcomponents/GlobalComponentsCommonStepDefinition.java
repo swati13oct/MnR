@@ -1035,6 +1035,13 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateEmailSubmissionMessage(expectedMsg);
 	}
+
+	@Then("^the user click on Get a Plan Recommendation Button and gets back to medicare articles page$")
+	public void theuserclickonGetaPlanRecommendationButtonandgetsback() throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickOnPlanRecommendationButton();
+	}
 	
 	@When("^user click on \"([^\"]*)\" link under shop plans$")
 	public void user_click_on_link_under_shop_plan(String linkName) throws Throwable {
