@@ -2462,9 +2462,10 @@ public class DCEStepDefinitionAARP {
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
-	@Then("^the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page$")
+	@Then("^the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page$")
 	public void the_user_validates_correct_Copay_section_view_and_LIS_message_for_LIS_Buydown_Plan_on_DCE_details_Page()
 			throws Throwable {
+        scenario.log("Sneha Dwarakanath - Change made 06/08/2021 - F608087 - DCE | Copay Buydown, Deductible Display Change");
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateLISBuyDown_CopaySection_LISAlert();

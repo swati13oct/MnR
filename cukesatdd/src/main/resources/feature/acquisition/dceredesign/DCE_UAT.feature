@@ -193,7 +193,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     And the user clicks on drug dropdown on plan summary page and navigates to DCE
       | Plan Type | <newplantype> |
       | Plan Name | <newplanname> |
-    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
+    Then the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page
+#    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
     Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
     Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug4> |
