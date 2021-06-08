@@ -2171,7 +2171,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Dec')]")
 	public WebElement BarChart_Dec;
 
-	public void validateDefaultPED() {
+	public void validateDefaultPED(String envYear) {
 		validateNew(PlanEffective_DefaultText);
 		validateNew(ChangePED_DropDown);
 		validateNew(BarChart_Jan);
@@ -2186,15 +2186,16 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(BarChart_Oct);
 		validateNew(BarChart_Nov);
 		validateNew(BarChart_Dec);
-		System.out.println("Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED");
+		Assertion.assertTrue(">>>>>>> Plan Effective Default text does not display current year <<<<<<<<<<<   : "+PlanEffective_DefaultText.getText(),PlanEffective_DefaultText.getText().contains(envYear) );
+		System.out.println("Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED -->>  "+PlanEffective_DefaultText.getText());
 	}
 
 
-	public void validateResetEffectiveDate() {
+	public void validateResetEffectiveDate(String envYear) {
 		validateNew(ResetEffectiveDateLink);
 		ResetEffectiveDateLink.click();
 		CommonUtility.waitForPageLoad(driver, BarChart, 30);
-		validateDefaultPED();
+		validateDefaultPED(envYear);
 	}
 	public String getMonthNameforMonthNo(int envMonth) {
 		String MonthName = "";

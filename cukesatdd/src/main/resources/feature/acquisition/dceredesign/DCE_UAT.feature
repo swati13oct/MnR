@@ -313,6 +313,11 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then the user validates Monthly Drug Costs by Stage Info Modals
     Then the user validates Monthly Drug Costs
     Then the user validates Important information section
+    Then the user validates default view for Plan Effective Date
+    Then the user validates Change effective date Dropdown
+    Then the user validates Change effective date modal and display after changing effective date
+    Then the user validates Reset effective date
+    Then the user validate no bar is displayed for November and December
     Then the user Captures Drug costs on Drug Details Page
     Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
     Then the user closes the Drug Info Modal on Plan Compare page
@@ -320,15 +325,15 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | PlanName | <planname> |
     Then the user validates all added Drugs on Plan Compare
     Then the user clicks on back on all plan linnk in Plan Compare page
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <planname> |
-    Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
-    Then the user navigates to Personal Information Page
-    And the user cancels enrollment and navigates to homepage
+#    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+#      | Plan Name | <planname> |
+#    Then the user validates the Plan details on OLE
+#    Then the user validates TFN in Welcome OLE Right Rail
+#    Then the user validates Learn more modal for Welcome OLE
+#    Then the user validates Leave OLE modal for Welcome OLE
+#    Then the user validates cancellation modal for Welcome OLE
+#    Then the user navigates to Personal Information Page
+#    And the user cancels enrollment and navigates to homepage
 
     @dce_E2E_Scenario1_UAT_AARP @regressionAARP
     Examples: 
