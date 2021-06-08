@@ -801,7 +801,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | State | <state> |
     And user clicks on View all disclaimer information link on the home page
 
-    @footerLinksAARP
+    @footerLinksAARP @vbfGate
     Examples: 
       | site |state|
       | AARP |Alaska|
@@ -919,7 +919,7 @@ Feature: 1.12 ACQ - Global Components Validation
     When user click on "AARP.org" link under more
     Then user should be navigated to respective footer links page
    
-    @Global_Comps_Footer_AARP2 @vbfGate
+    @Global_Comps_Footer_AARP2 
     Examples: 
       | site | path      | pageName           |
       | UHC | shop.html | ShopPlan: Homepage |
