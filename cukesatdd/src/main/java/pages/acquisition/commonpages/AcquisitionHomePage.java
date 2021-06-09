@@ -577,7 +577,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement MedicarePrescriptionDrugPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_5']")
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
 	@FindBy(xpath = "(//*[@id='learn-about-medicare-list-heading']/..//a[contains(@href,'medicare-education')])[1]")

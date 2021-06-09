@@ -33,7 +33,7 @@ Feature: 1.12 UAT - Header and Footer flows
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
     And user clicks on Sign in link
-    #And the user clicks on browser back button
+    And the user clicks on browser back button
     And user clicks on register link
     And the user clicks on browser back button
     Then user validates visitor profile
@@ -52,7 +52,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And the user clicks on Medicare Education Link
     And the user clicks on browser back button
-    And the user clicks on Back to top Link
+    #And the user clicks on Back to top Link
     And user clicks on visit aarp.org link in the footer
 
     @globalfooter_AARP @regressionAARP 
@@ -102,7 +102,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And the user clicks on Medicare Education Link
     And the user clicks on browser back button
-    And the user clicks on Back to top Link
+    #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
     And user clicks on Sign in link
@@ -145,8 +145,8 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
-    And user verifies home link of agents&brokers page
-    And the user clicks on browser back button
+    #And user verifies home link of agents&brokers page
+    #And the user clicks on browser back button
     And the user clicks on Accessibility Link
     And the user clicks on browser back button
     And the user clicks on Medicare Advantage Plans Link
@@ -159,7 +159,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And the user clicks on Medicare Education Link
     And the user clicks on browser back button
-    And the user clicks on Back to top Link
+    #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
     And user clicks on Sign in link
@@ -202,7 +202,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
-    And user verifies home link of agents&brokers page
+    #And user verifies home link of agents&brokers page
     And the user clicks on browser back button
     And the user clicks on Accessibility Link
     And the user clicks on browser back button
@@ -216,7 +216,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And the user clicks on Medicare Education Link
     And the user clicks on browser back button
-    And the user clicks on Back to top Link
+    #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
     And user clicks on Sign in link
@@ -261,7 +261,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And user clicks on agents&brokers link on disclaimers page
     And the user clicks on browser back button
-    And user verifies home link of agents&brokers page
+    #And user verifies home link of agents&brokers page
     And the user clicks on browser back button
     And the user clicks on Accessibility Link
     And the user clicks on browser back button
@@ -275,7 +275,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And the user clicks on Medicare Education Link
     And the user clicks on browser back button
-    And the user clicks on Back to top Link
+    #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
     And user clicks on Sign in link
@@ -512,7 +512,7 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user clicks on browser back button
     And the user clicks on Medicare Education Link
     And the user clicks on browser back button
-    And the user clicks on Back to top Link
+    #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
     And user clicks on Sign in link
