@@ -5343,8 +5343,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}
 
-		driver.close();
-		driver.switchTo().window(parentWindow);
+		//close the window only if a new window is opened
+		if(tabs_windows.size() > 1){
+			driver.close();
+			driver.switchTo().window(parentWindow);
+		}
 
 	}
 
