@@ -160,6 +160,8 @@ public class WelcomePageMobile extends UhcDriver{
 		iosScroll(RightRailTFN);		
 		if(validate(RightRailTFN)){
 			String TFN_OLE = RightRailTFN.getText();
+			System.out.println(TFN);
+			System.out.println(TFN_OLE);
 			if(TFN_OLE.contains(TFN)){
 				System.out.println("TFN is validated in OLE Welcome Page"+TFN);
 				return true;
