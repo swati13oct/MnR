@@ -176,10 +176,12 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(id = "distance")
 	protected WebElement distanceDropDownField;
 
-	@FindBy(xpath="//div[contains(@id,'emptyzipcodeerror') and not(contains(@class,'ng-hide'))]")
+//	@FindBy(xpath="//div[contains(@id,'emptyzipcodeerror') and not(contains(@class,'ng-hide'))]")
+	@FindBy(css = ".desktopErrorMsg #emptyzipcodeerror_id>p")
 	protected WebElement noZipcode;
 
-	@FindBy(xpath="//div[contains(@id,'zipcodeformaterror_id') and not(contains(@class,'ng-hide'))]")
+//	@FindBy(xpath="//div[contains(@id,'zipcodeformaterror_id') and not(contains(@class,'ng-hide'))]")
+	@FindBy(css = ".desktopErrorMsg #zipcodeformaterror_id>p")
 	protected WebElement invalidZip;
 
 	@FindBy(xpath="//div[contains(@id,'modifyYourSearchId')]//li")
