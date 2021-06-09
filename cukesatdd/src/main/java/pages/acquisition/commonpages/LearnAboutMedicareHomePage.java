@@ -509,7 +509,6 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		waitforElementNew(stateGeotargeting, 5);
 		System.out.println("State selected for Geotagging: "+ stateGeotargeting.getText());
 		waitforElementNew(stateGeotargeting, 5);
-		jsClickNew(backToTop);
 	}
 	public void checkInnerPageLinks(String pageName) {
 		
