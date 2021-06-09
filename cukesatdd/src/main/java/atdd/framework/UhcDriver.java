@@ -667,18 +667,11 @@ public abstract class UhcDriver {
 	public boolean scrollToView(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 
-			// // clickAndHold(element);
-			// TouchAction ta = new TouchAction((AppiumDriver)driver);
-			// ta.moveTo(moveToOptions)
-
-			Actions ac = new Actions(driver);
+			/*Actions ac = new Actions(driver);
 			ac.moveToElement(element);
-			// backToTop.isDisplayed();
-			System.out.println("Scroll finished to element on IOS device");
-
-			// JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-			// javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",
-			// element);
+			System.out.println("Scroll finished to element on IOS device");*/
+			
+			iosScroll(element);
 
 		} else {
 			try {

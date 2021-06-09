@@ -42,6 +42,7 @@ import atdd.framework.UhcDriver;
 import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
@@ -5773,23 +5774,65 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public void validateAndClickAddtoCompare(String planType, String planName) throws InterruptedException {
-		// if (planType.contains("MA")) {
-		System.out.println("Choose Plan to Compare : " + planName);
-		WebElement addToCompare = driver.findElement(By.xpath("//*[contains(text(),\'" + planName
-				+ "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"));
-		validateNew(addToCompare);
-		jsClickNew(addToCompare);
 
-		/*
-		 * }else if (planType.equalsIgnoreCase("PDP")) {
-		 * System.out.println("Choose Plan to Compare : "+planName); //WebElement
-		 * addToCompare = driver.findElement(By.xpath("//*[contains(text(), '"
-		 * +planName+"')]/ancestor::div[@class='module-plan-overview module swiper-slide ng-scope']//input[@id='compare-plan-7']"
-		 * )); WebElement addToCompare =
-		 * driver.findElement(By.xpath("//*[contains(text(),\'" + planName +
-		 * "\')]/ancestor::div[contains(@class, 'module-plan-overview')]//div[contains(@class ,'compare-box')]//span[contains(@class ,'ng-scope')]/label"
-		 * )); validateNew(addToCompare); jsClickNew(addToCompare); }
-		 */
+	}
+	
+	@FindBy(id = "findProvidersComponentWrap")
+	public WebElement findProvidersComponentWrap;
+	
+	@FindBy(id = "addDrugComponentWrap")
+	public WebElement addDrugComponentWrap;
+	
+	@FindBy(xpath = "//*[@id='addDrugComponentWrap']//button[text()='Get Started']")
+	public WebElement getStartedAddDrugNBA;
+	
+	
+	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCEFromNBA(String planType, String planName) {
+
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
+			if (validate(addDrugComponentWrap)) {
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
+			} else if (validateNew(findProvidersComponentWrap)) {
+				removeAddedDrugs(planType, planName);
+				validateNew(addDrugComponentWrap);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
+			}
+
+		} else if (planType.equalsIgnoreCase("PDP")) {
+			if (validate(addDrugComponentWrap)) {
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
+			}
+			if (validateNew(findProvidersComponentWrap)) {
+				removeAddedDrugs(planType, planName);
+				validateNew(addDrugComponentWrap);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", getStartedAddDrugNBA);
+			}
+		} else if (planType.equalsIgnoreCase("MS") || planType.equalsIgnoreCase("SNP")) {
+			Assertion.fail("NBA is not available for the Plantype: " + planType);
+
+		}
+		return new pages.mobile.acquisition.dceredesign.GetStartedPageMobile
+				(driver);
+	}
+	
+	public void removeAddedDrugs(String planType, String planName) {
+		List<WebElement> drugLinkDropdown = driver.findElements(By.xpath(
+				"//div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
+
+		if (drugLinkDropdown.size() > 0)
+			drugLinkDropdown.get(0).click();
+
+		List<WebElement> addedDrugs = driver.findElements(By.xpath("//*[contains(text(),\'" + planName
+				+ "\')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'remove-icon')]"));
+		int noOfDrugs = addedDrugs.size();
+
+		if (addedDrugs != null) {
+			for (int i = 0; i < noOfDrugs; i++) {
+				addedDrugs.get(i).click();
+				threadsleep(5);
+				System.out.println("Drug removed:" + (i + 1));
+			}
+		}
 
 	}
 	

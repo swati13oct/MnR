@@ -26,6 +26,7 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -859,8 +860,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return null;
 	}
 
-
-
 	/**
 	 * @author bnaveen4
 	 * @param additionalBenefits
@@ -905,6 +904,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 	}
 
+	public DrugDetailsPageMobile returnToReviewDrugCost() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * @author bnaveen4
 	 * @param medicalBenefits
@@ -931,6 +935,31 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			}
 		}
 	}
+	
+	@FindBy(xpath = "//*[contains(@class,'currentpharmacy')]//*[contains(@ng-show,'pharmacyName') and contains(@class,'ng-binding')]")
+	private WebElement pharmacyPrescriptionDrugTab;
+	
+	public void verifyPharmacyAdded(String pharmacyName) {
+		validateNew(pharmacyPrescriptionDrugTab);
+		if (!pharmacyPrescriptionDrugTab.getText().contains(pharmacyName))
+			Assertion.fail("Pharmacy did not match on plan details page with DCE");
+	}
+
+	
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@ng-repeat,'drug')]//td")
+	private WebElement presDrugTabDrugInfoCell;
+	
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]/span[@ng-show]")
+	private WebElement presDrugTabAnnualCostValueCell;
+	
+	public void validateDrugInfoOnPrescriptionDrugTab(String drug, String drugCost) {
+		if (!presDrugTabDrugInfoCell.getText().contains(drug))
+			Assertion.fail("Drug name not displayed on the prescription drugs tab");
+
+		if (!presDrugTabAnnualCostValueCell.getText().trim().equals(drugCost))
+			Assertion.fail("Drug cost not displayed properly on prescription drugs tab");
+	}
+
 
 	/**
 	 * @author bnaveen4 Navigates to Plan costs tab and validates the Plan premium

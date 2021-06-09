@@ -2,7 +2,9 @@ package pages.mobile.acquisition.dceredesign;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
@@ -602,6 +604,50 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		pharmacyZipcodeSearch.sendKeys(zipcode);
 		jsClickMobile(pharmacySearchBtn);
 	}
+	
+	
+	public DrugSummaryPage verifyMAPDPlanToggle() {
+
+		mapdPlanToggle.click();
+		System.out.println("MAPD Plans Toggle is displayed and is Clicked");
+
+		if (planTypeHeading.getText().contains("Medicare Advantage Plans")) {
+			System.out.println("MAPD Plans displayed for MAPD toggle click");
+			return new DrugSummaryPage(driver);
+		}
+		Assertion.fail("MAPD Plans NOT displayed for MAPD toggle click");
+		return null;
+	}
+
+	public Map<String, String> captureDrugCosts(String planName) {
+		Map<String, String> DrugDetails = new HashMap<String, String>();
+
+		if (planName.contains("PDP"))
+			verifyPDPPlanToggle();
+		else if (planName.contains("SNP"))
+			verifySNPPlanToggle();
+		else
+			verifyMAPDPlanToggle();
+		WebElement drugCosts_AvgMonDrugCost_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]"));
+		WebElement drugCosts_MonthlyPremium_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]"));
+		WebElement drugCosts_AnnualEstTotal_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]"));
+
+		String AVG_MONTHLY = drugCosts_AvgMonDrugCost_Amount.getText();
+		String MONTHLY_PREMIUM = drugCosts_MonthlyPremium_Amount.getText();
+		String ANNUAL_ESTIMATED_TOTAL = drugCosts_AnnualEstTotal_Amount.getText();
+		String COVERED_DRUGS_COUNT = drugsCovered.getText();
+		System.out.println("Covered Drug Text : " + COVERED_DRUGS_COUNT);
+		DrugDetails.put("AVG_MONTHLY", AVG_MONTHLY);
+		DrugDetails.put("MONTHLY_PREMIUM", MONTHLY_PREMIUM);
+		DrugDetails.put("ANNUAL_ESTIMATED_TOTAL", ANNUAL_ESTIMATED_TOTAL);
+		DrugDetails.put("COVERED_DRUGS_COUNT", COVERED_DRUGS_COUNT);
+
+		return DrugDetails;
+	}
+
 
 
 	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
