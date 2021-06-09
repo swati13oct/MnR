@@ -6738,7 +6738,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			for (String s : all) {
 				driver.switchTo().window(s);
 				//sleepBySec(5);
-				flag = driver.getCurrentUrl().contains("connect.werally");
+				flag = driver.getCurrentUrl().contains("werally");
 				if (!base.equals(s)) {
 					driver.close();
 					break;
