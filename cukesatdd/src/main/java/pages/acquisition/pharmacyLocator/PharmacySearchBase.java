@@ -265,13 +265,21 @@ public class PharmacySearchBase extends PharmacySearchWebElements {
 		Thread.sleep(2000); //note: keep this for the page to load
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
 		int noOfWindows = afterClicked_tabs.size();
-		String tab = null;
-		for (int i = 0; i < noOfWindows; i++)
-			if (i == noOfWindows - 1) {
+		for (int i = 0; i < noOfWindows; i++) {
+			String tab = afterClicked_tabs.get(i);
+			driver.switchTo().window(tab);
+			if(!tab.equalsIgnoreCase(winHandleBefore)) {
+				break;
+			}
+			
+			/*if (i == noOfWindows - 1) {
 				tab = afterClicked_tabs.get(i);
-						driver.switchTo().window(tab);
-						break;
-					}
+				driver.switchTo().window(tab);
+				break;
+			}*/
+			
+		}
+		
 
 //		int afterClicked_numTabs=afterClicked_tabs.size();					
 //		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));

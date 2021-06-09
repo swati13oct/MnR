@@ -27,12 +27,12 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Authenticated
       | Drugname | <drug1> |
     Then user delets all the added drugs on visitor profile page
 
-    @visitorProfile_AARP @regressionAARP 
+    @visitorProfile_AARP
     Examples: 
       | site | state    | userName | password   | drug1   | zipCode |
       | AARP | Virginia | mnrqevd5 | Password@1 | Lipitor |   20120 |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC
     Examples: 
       | site | state    | userName | password   | drug1   | zipCode |
       | UHC  | Virginia | mnrqevd5 | Password@1 | Lipitor |   20120 |
@@ -61,12 +61,12 @@ Feature: 1.09. UAT - Legacy Visitor profile UI Authenticated
     And user delets all the added providers on visitor profile page
       | PlanName | <planname> |
 
-    @visitorProfile_AARP @regressionAARP
+    @visitorProfile_AARP
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county        | userName | password   | plantype | planname                             |
       | AARP | Virginia |   20120 | NO              | Beaver County | mnrqevd5 | Password@1 | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
 
-    @visitorProfile_UHC @regressionUHC
+    @visitorProfile_UHC
     Examples: 
       | site | state    | zipcode | isMultutiCounty | county        | userName | password   | plantype | planname                             |
       | UHC  | Virginia |   20120 | NO              | Beaver County | mnrqevd5 | Password@1 | MAPD     | AARP Medicare Advantage Plan 1 (HMO) |
