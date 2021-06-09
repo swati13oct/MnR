@@ -2916,6 +2916,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_default_view_for_Plan_Effective_Date() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		scenario.log("Sneha Dwarakanath - Updated the stepdef to validate current plan year in default PED text. For F628155 - DCE | Plan Effective Null Values for Compare Flows (PRB0982203)");
 		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
 		String currentEnvTime=drugDetailsPage.getAcqTestEnvSysTime(testSiteUrl);
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
@@ -2961,6 +2962,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_Reset_effective_date() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		scenario.log("Sneha Dwarakanath - Updated the stepdef to validate current plan year in default PED text. For F628155 - DCE | Plan Effective Null Values for Compare Flows (PRB0982203)");
 		String envTimeYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
 		drugDetailsPage.validateResetEffectiveDate(envTimeYear);
 	}
