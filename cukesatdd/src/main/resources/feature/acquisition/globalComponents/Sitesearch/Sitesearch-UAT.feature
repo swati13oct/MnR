@@ -153,7 +153,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 1_UMS | UHC  | Medicare    | InvalidCharacter | Unicorn                                                                     |
 
   @SiteSearchULayer @UATRegression
-  Scenario Outline: <Scenario> : Verify provider search third party URL on Visitor profile from homepage
+  Scenario Outline: <Scenario> : Verify provider search third party URL on Visitor profile from homepage -<searchValue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user clicks on the shopping cart icon
