@@ -1859,8 +1859,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
 
-			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
-		}
+			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
+		}//a[contains(text(),  'AARP Medicare Advantage Plan 1 (HMO)')]/following::a[contains(text(),'Enroll in Plan')][3]
 		if (enrollForPlan != null) {
 			iosScroll(enrollForPlan);
 			validateNew(enrollForPlan);
