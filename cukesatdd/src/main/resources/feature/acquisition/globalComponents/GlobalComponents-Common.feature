@@ -746,11 +746,77 @@ Feature: 1.12 ACQ - Global Components Validation
     Examples: 
       | site |
       | UHC  |
-      
-@footerLinks 
+
+  @footerLinks
   Scenario Outline: To verify the links under Shop Plans, Tools & Resources, Learn About Medicare and More on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    When user click on "Medicare Advantage Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Dual Special Needs Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare Supplement Insurance Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare Prescription Drug Plans" link under shop plans
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Plan Recommendation" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Drug Cost Estimator" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Provider Search" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    #Then the user clicks on browser back button
+    When user click on "Introduction to Medicare" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Eligibility" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Coverage Choices" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Medicare FAQ" link under Learn About Medicare
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "About" link under more
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Contact" link under more
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
+    When user click on "Language Assistance" link under more
+    Then user should be navigated to respective footer links page
+    #When user click on "AARP.org" link under more
+    #Then user should be navigated to respective footer links page
+    When user updates the state drop down value on the home page
+      | State | <state> |
+    And user clicks on View all disclaimer information link on the home page
+
+    @footerLinksAARP @vbfGate
+    Examples: 
+      | site | state  |
+      | AARP | Alaska |
+
+    @footerLinksUHC
+    Examples: 
+      | site | state  |
+      | UHC  | Alaska |
+
+  @GlobalComponentsFooterAARPBlogPages
+  Scenario Outline: To verify Global Components Blog pages for the page mentioned on site - <site> -  <pageName> : <path>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Given the user navigates to following medicare acquisition site page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    #Then the user hover over Shop for a Plan and validates zipcode component
+    #Then the user validate ZipCode Components on SubNav using ZipCode "10001"
     When user click on "Medicare Advantage Plans" link under shop plans
     Then user should be navigated to respective footer links page
     Then the user clicks on browser back button
@@ -795,86 +861,15 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the user clicks on browser back button
     When user click on "Language Assistance" link under more
     Then user should be navigated to respective footer links page
-    #When user click on "AARP.org" link under more
-    #Then user should be navigated to respective footer links page
-    When user updates the state drop down value on the home page
-      | State | <state> |
-    And user clicks on View all disclaimer information link on the home page
+    When user click on "AARP.org" link under more
+    Then user should be navigated to respective footer links page
 
-    @footerLinksAARP @vbfGate
-    Examples: 
-      | site |state|
-      | AARP |Alaska|
-      
-      @footerLinksUHC
-    Examples: 
-      | site |state|
-      | UHC |Alaska|
-      
-        
-      
-      @GlobalComponentsFooterAARPBlogPages
-  Scenario Outline: To verify Global Components Blog pages for the page mentioned on site - <site> -  <pageName> : <path>
-    Given the user is on medicare acquisition site landing page
-      | Site | <site> |
-    Given the user navigates to following medicare acquisition site page
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    #Then the user hover over Shop for a Plan and validates zipcode component
-    #Then the user validate ZipCode Components on SubNav using ZipCode "10001"
-     When user click on "Medicare Advantage Plans" link under shop plans
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Dual Special Needs Plans" link under shop plans
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Medicare Supplement Insurance Plans" link under shop plans
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Medicare Prescription Drug Plans" link under shop plans
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Plan Recommendation" link under Tools & Resources
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Drug Cost Estimator" link under Tools & Resources
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Pharmacy Search" link under Tools & Resources
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Provider Search" link under Tools & Resources
-    Then user should be navigated to respective footer links page
-    #Then the user clicks on browser back button
-    When user click on "Introduction to Medicare" link under Learn About Medicare
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Eligibility" link under Learn About Medicare
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Coverage Choices" link under Learn About Medicare
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Medicare FAQ" link under Learn About Medicare
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "About" link under more
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Contact" link under more
-    Then user should be navigated to respective footer links page
-    Then the user clicks on browser back button
-    When user click on "Language Assistance" link under more
-    Then user should be navigated to respective footer links page
-    #When user click on "AARP.org" link under more
-    #Then user should be navigated to respective footer links page
-   
-    @Global_Comps_Footer_AARP 
+    @Global_Comps_Footer_AARP
     Examples: 
       | site | path      | pageName           |
-      | UHC | shop.html | ShopPlan: Homepage |
-      
-       @Global_Comps_Footer_AARP
+      | UHC  | shop.html | ShopPlan: Homepage |
+
+    @Global_Comps_Footer_AARP
     Examples: 
       | site | path                                                                                    | pageName                        |
       | AARP | shop.html                                                                               | ShopPlan: Homepage              |
@@ -908,17 +903,13 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 |
       | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        |
       | AARP | about-us.html                                                                           | About Us Page                   |
-      
-      @Global_Comps_Footer_Visitor_Profile_AARP
 
-     Examples: 
-      | site | path                                                                                    | pageName                        |
-      | AARP | /profile                                                                              | VisitorProfile:Proflie Page             |
-      
-      @Global_Comps_Footer_Visitor_Profile_AARP
+    @Global_Comps_Footer_Visitor_Profile_AARP
+    Examples: 
+      | site | path     | pageName                    |
+      | AARP | /profile | VisitorProfile:Proflie Page |
 
-     Examples: 
-      | site | path                                                                                    | pageName                        |
-      | UHC | /profile                                                                              | VisitorProfile:Proflie Page             |
-      
-      
+    @Global_Comps_Footer_Visitor_Profile_AARP
+    Examples: 
+      | site | path     | pageName                    |
+      | UHC  | /profile | VisitorProfile:Proflie Page |
