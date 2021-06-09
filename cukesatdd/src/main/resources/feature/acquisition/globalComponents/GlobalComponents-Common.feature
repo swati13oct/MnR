@@ -916,8 +916,8 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the user clicks on browser back button
     When user click on "Language Assistance" link under more
     Then user should be navigated to respective footer links page
-    When user click on "AARP.org" link under more
-    Then user should be navigated to respective footer links page
+    #When user click on "AARP.org" link under more
+    #Then user should be navigated to respective footer links page
    
     @Global_Comps_Footer_AARP2 
     Examples: 
