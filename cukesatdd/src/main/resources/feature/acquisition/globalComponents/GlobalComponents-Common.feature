@@ -769,6 +769,9 @@ Feature: 1.12 ACQ - Global Components Validation
     When user click on "Drug Cost Estimator" link under Tools & Resources
     Then user should be navigated to respective footer links page
     Then the user clicks on browser back button
+    When user click on "Pharmacy Search" link under Tools & Resources
+    Then user should be navigated to respective footer links page
+    Then the user clicks on browser back button
     When user click on "Provider Search" link under Tools & Resources
     Then user should be navigated to respective footer links page
     #Then the user clicks on browser back button
