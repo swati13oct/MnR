@@ -207,6 +207,13 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			Assertion.fail("Drug Autocomplete NOT Validated");
 
 	}
+	
+
+	public void clickOnRemoveButton(String drug) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + drug + "')]"));
+		jsClickNew(removeLink);
+
+	}
 
 	public TellUsAboutDrugMobile SelectDrugfromList(String drugName) {
 		validateNew(AutoCompleteList);
@@ -474,6 +481,14 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			return false;
 		}
 		return false;
+	}
+	
+	public void validateDrugRecommendationSectionNOTdisplayed(String druglist) {
+		if(!validate(DrugRecommendationHeader) && DrugRecommendationDrugList.isEmpty()) {
+			System.out.println("Validation PASSED : Drug Recommendation NOT displayed when 25 Drugs added to cabinet ");
+		}
+		else
+			Assertion.fail("Validation FAILED : Drug Recommendation displayed when 25 Drugs added to cabinet");
 	}
 	
 	

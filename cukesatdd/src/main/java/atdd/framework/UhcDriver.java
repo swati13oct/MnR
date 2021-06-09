@@ -604,7 +604,7 @@ public abstract class UhcDriver {
 			js.executeScript(
 					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
 					element);
-			// checkElementisEnabled(element);
+			 //checkElementisEnabled(element);
 			scrollToView(element);
 			element.click();
 			sleepBySec(2);
@@ -613,7 +613,7 @@ public abstract class UhcDriver {
 			if (element.getAttribute("automationTrack") != "true") {
 				// checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
-				iosScroll(element);
+				//iosScroll(element);
 				JavascriptExecutor js1 = (JavascriptExecutor) driver;
 				js1.executeScript("arguments[0].click();", element);
 

@@ -194,7 +194,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[text()='Change Pharmacy']/ancestor::div/div/span']")
 	public WebElement pharmacyName;
-	
+
 	@FindBy(xpath = "//*[@id='editPharmacyLink']")
 	public WebElement editLink;
 
@@ -348,7 +348,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		openAndValidate();
 
 	}
-	
+
 	private String CurrentFlow = "";
 
 	public DrugDetailsPageMobile(WebDriver driver, String Flow) {
@@ -753,10 +753,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		}
 
 	}
-	
+
 	@FindBy(xpath = "//*[@id='milesDropdown']")
 	private WebElement clickDistanceDefaultMile;
-	
+
 	public void clickDistanceMiledropdown() {
 		jsClickNew(clickDistanceDefaultMile);
 
@@ -779,7 +779,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	public void verifyBackToProfileBtnDisplayed() {
 		try {
 			if (((WebElement) backToProfileBtn).isDisplayed()) {
@@ -876,6 +876,134 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion.fail("Catastrophic coverage Modal not displayed");
 		}
 	}
+	
+	public void validateLISBuyDown_NotCoveredDrugCost(String notCoveredDrug) {
+		WebElement DrugYouPay = driver.findElement(
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
+						+ notCoveredDrug + "')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+		String currentDrugYouPay = DrugYouPay.getText().trim();
+		System.out.println("Displayed Not Covered Drug - " + notCoveredDrug + " You Pay : " + currentDrugYouPay);
+		System.out.println("Expected Not Covered Drug - " + notCoveredDrug + " You Pay : Not $0");
+
+		if (validateNew(DrugYouPay) && !currentDrugYouPay.contains("$0")) {
+			System.out.println("DCE Details Page, LIS BuyDown -  Validated Non $0 You Pay for Not Covered Drugs");
+		} else
+			Assertion.fail(
+					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  Non $0 You Pay for Not Covered Drugs NOT Displayed");
+	}
+	
+	public void validateDrugStageInfoModals_LISbuydownPlans() {
+		validateNew(MonthlyDrugStage_InitialCoverageLink);
+		jsClickNew(MonthlyDrugStage_InitialCoverageLink);
+		String LIS_BuyDownText = "pays all of the costs for your covered drugs";
+		validateNew(StageInfo_Modal);
+		WebElement CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Initial")) {
+			System.out.println(
+					"Correct text displayed for Initial Coverage Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assertion.fail(
+					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
+
+		validateNew(MonthlyDrugStage_CoverageGapLink);
+		jsClickNew(MonthlyDrugStage_CoverageGapLink);
+		validateNew(StageInfo_Modal);
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Coverage Gap")) {
+			System.out.println(
+					"Correct text displayed for Coverage Gap Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assertion.fail(
+					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
+
+		validateNew(MonthlyDrugStage_CatastropheLink);
+		jsClickNew(MonthlyDrugStage_CatastropheLink);
+		validateNew(StageInfo_Modal);
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		if (validateNew(CoverageText) && CoverageText.getText().contains("Catastrophic")) {
+			System.out.println(
+					"Correct text displayed for Catastrophic Coverage Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
+			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+		} else
+			Assertion.fail(
+					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+		jsClickNew(StageInfo_Modal_DoneBtn);
+	}
+
+	
+	public void validateLISBuyDown_CoveredDrugCost(String coveredDrug) {
+		WebElement DrugYouPay = driver.findElement(
+				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
+						+ coveredDrug + "')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+		String currentDrugYouPay = DrugYouPay.getText().trim();
+		System.out.println("Displayed Covered Drug - " + coveredDrug + " You Pay : " + currentDrugYouPay);
+		System.out.println("Expected Covered Drug -" + coveredDrug + " You Pay : $0");
+
+		if (validateNew(DrugYouPay) && currentDrugYouPay.contentEquals("$0")) {
+			System.out.println("DCE Details Page, LIS BuyDown -  Validated $0 You Pay for Covered Drugs");
+		} else
+			Assertion.fail(
+					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
+	}
+	
+	@FindBy(xpath = "//button[contains(@dtmname, 'compare')]//*[contains(text(), 'Compare')]")
+	public WebElement DrugCosts_PlanCompareBtn;
+
+	public ComparePlansPageMobile clickViewPlanCompareBtn_ReturnToCompare_ViewDrugModal() {
+		validateNew(DrugCosts_PlanCompareBtn);
+		jsClickNew(DrugCosts_PlanCompareBtn);
+		waitForPageLoadSafari();
+		// CommonUtility.waitForPageLoad(driver, ComparePage_TableHeader, 30);
+		CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
+		// WebElement DrugInfoModal_Header =
+		// driver.findElement(By.xpath("//*[contains(@class,
+		// 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
+		// validateNew(DrugInfoModal_Header);
+
+		validateNew(DrugInfoModal_DrugCostDetailsBtn);
+		validateNew(DrugInfoModal_CloseBtn);
+		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
+		return new ComparePlansPageMobile(driver);
+	}
+
+
+	public void validateDrugListYouPay_FromComparePage(String druglistObject, String drugYouPaylist) {
+		String[] Drugs = druglistObject.split("&");
+		int DrugCount_Total = Drugs.length - 1;
+		String currentAddedDrug;
+		String[] Drugs_YouPay = drugYouPaylist.split("&");
+
+		int i;
+		System.out.println("Total Added Drug Count : " + DrugCount_Total);
+		for (i = 1; i <= DrugCount_Total; i++) {
+			currentAddedDrug = Drugs[i];
+
+			System.out.println("Current Added Drug Name : " + currentAddedDrug);
+			WebElement DrugName = driver.findElement(
+					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
+							+ currentAddedDrug + "')]"));
+			WebElement DrugYouPay = driver.findElement(
+					By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
+							+ currentAddedDrug + "')]//ancestor::td//following-sibling::td//*[contains(text(), '$')]"));
+			String currentDrugYouPay = DrugYouPay.getText().trim().replace(",", "");
+
+			String ExpectedYouPay = Drugs_YouPay[i];
+			System.out.println("Current Added Drug Name : " + currentAddedDrug);
+			System.out.println("Displayed Current Drug You Pay : " + currentDrugYouPay);
+			System.out.println("Expected Current Drug You Pay : " + ExpectedYouPay);
+
+			if (validateNew(DrugName) && validateNew(DrugYouPay) && currentDrugYouPay.contentEquals(ExpectedYouPay)) {
+				System.out.println(
+						"DCE Details Page -  Validated Drug List and You Pay for Drugs Against Compare Page Display");
+			} else
+				Assertion.fail(
+						"DCE Details Page - >>>  Validated FAILED  <<<  Drug List and You Pay for Drugs Against Compare Page Display");
+		}
+	}
 
 	public void validateCoverageGapMessage(String message) {
 		if (validateNew(coverageGap)) {
@@ -918,11 +1046,11 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		viewPlanBtn.click();
 	}
 
-	public PlanDetailsPage clickReturnToDetailsLink() {
+	public PlanDetailsPageMobile clickReturnToDetailsLink() {
 		validateNew(returnToDetailsLink);
 		jsClickNew(returnToDetailsLink);
 
-		return new PlanDetailsPage(driver);
+		return new PlanDetailsPageMobile(driver);
 	}
 
 	public void validatePlanDrugDetails(String planName) {
@@ -1031,14 +1159,14 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
-	
+
 	public void validateResetEffectiveDate() {
 		validateNew(ResetEffectiveDateLink);
 		ResetEffectiveDateLink.click();
 		CommonUtility.waitForPageLoad(driver, BarChart, 30);
 		validateDefaultPED();
 	}
-	
+
 	@FindBy(xpath = "//div[@id='monthlycostdetails']")
 	public WebElement MonthlyDrug_Tbl;
 
@@ -1051,7 +1179,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 				"***** DCE Details Page validation for LIS Buydown, Monthly Cost details is Displayed Passed *****");
 		System.out.println("***** Monthly Cost details Section, graph and Table are not displayed *****");
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]")
 	public WebElement LIS_CopaySection;
 
@@ -1086,37 +1214,41 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion.fail(
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
 	}
-	
+
 	public void validateNoBarChartDisplayforNovDec() {
 		validateNew(ChangePED_DropDown);
 		scrollToView(ChangePED_DropDown);
 		ChangePED_DropDown.click();
 		validateNew(ChangePED_DropDown_List);
-		WebElement NovemberMonthOption = driver.findElement(By.xpath("//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li[contains(text(), 'November')]"));
+		WebElement NovemberMonthOption = driver.findElement(By.xpath(
+				"//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li[contains(text(), 'November')]"));
 		NovemberMonthOption.click();
 		scrollToView(ChangePED_ModalContinueBtn);
 		ChangePED_ModalContinueBtn.click();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		validateNew(ResetEffectiveDateLink);
-		if(validate(BarChart)) {
-			Assert.fail(">>>>>>> Validation Failed <<<<<<<< - Bar Chart is Displayed for November Effective Date Selection");
+		if (validate(BarChart)) {
+			Assert.fail(
+					">>>>>>> Validation Failed <<<<<<<< - Bar Chart is Displayed for November Effective Date Selection");
 		}
 		validateNew(ChangePED_DropDown);
 		scrollToView(ChangePED_DropDown);
 		ChangePED_DropDown.click();
 		validateNew(ChangePED_DropDown_List);
-		WebElement DecemberMonthOption = driver.findElement(By.xpath("//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li[contains(text(), 'December')]"));
+		WebElement DecemberMonthOption = driver.findElement(By.xpath(
+				"//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li[contains(text(), 'December')]"));
 		DecemberMonthOption.click();
 		scrollToView(ChangePED_ModalContinueBtn);
 		ChangePED_ModalContinueBtn.click();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		validateNew(ResetEffectiveDateLink);
-		if(validate(BarChart)) {
-			Assert.fail(">>>>>>> Validation Failed <<<<<<<< - Bar Chart is Displayed for Decembermber Effective Date Selection");
+		if (validate(BarChart)) {
+			Assert.fail(
+					">>>>>>> Validation Failed <<<<<<<< - Bar Chart is Displayed for Decembermber Effective Date Selection");
 		}
 
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@class, 'modal-inner')]")
 	public WebElement ChangePED_Modal;
 
@@ -1137,7 +1269,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Dec 31')]")
 	public WebElement EffectiveDateTextafterChange;
-	
+
 	public void validateChangePEDandModalandChangeDisplay() {
 		validateNew(ChangePED_DropDown);
 		scrollToView(ChangePED_DropDown);
@@ -1148,26 +1280,28 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		String[] MonthYearText = NextMonthOption.getText().trim().split(",");
 		String Year = MonthYearText[1];
 		String Month = MonthYearText[0];
-		System.out.println("Month Year selected from dropdown - "+Month+","+Year);
+		System.out.println("Month Year selected from dropdown - " + Month + "," + Year);
 		jsClickNew(NextMonthOption);
 		validateNew(ChangePED_Modal);
 		validateNew(ChangePED_ModalContinueBtn);
 		validateNew(ChangePED_ModalCloseicon);
 		validateNew(ChangePED_ModalCancelBtn);
-		if(!ChangePED_ModalText.getText().contains(Month) || !ChangePED_ModalText.getText().contains(Year)) {
-			Assert.fail("Change Effective Modal Text validation Failed. DIsplayed Month Year - "+ChangePED_ModalText.getText());
+		if (!ChangePED_ModalText.getText().contains(Month) || !ChangePED_ModalText.getText().contains(Year)) {
+			Assert.fail("Change Effective Modal Text validation Failed. DIsplayed Month Year - "
+					+ ChangePED_ModalText.getText());
 		}
 		scrollToView(ChangePED_ModalContinueBtn);
 		ChangePED_ModalContinueBtn.click();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		validateNew(ResetEffectiveDateLink);
 		Month = Month.substring(0, 3);
-		String ExpectedEffectiveDate= Month+" 1,"+Year;
-		System.out.println("Expected Effective Date Text after Changed Effective Date"+ExpectedEffectiveDate);
+		String ExpectedEffectiveDate = Month + " 1," + Year;
+		System.out.println("Expected Effective Date Text after Changed Effective Date" + ExpectedEffectiveDate);
 
-		System.out.println("Displayed Effective Date Text after Changed Effective Date"+EffectiveDateTextafterChange.getText());
-		if(!EffectiveDateTextafterChange.getText().contains(ExpectedEffectiveDate)) {
-			Assert.fail("Effective Date dispalyed is incorrect after changing to - "+Month);
+		System.out.println(
+				"Displayed Effective Date Text after Changed Effective Date" + EffectiveDateTextafterChange.getText());
+		if (!EffectiveDateTextafterChange.getText().contains(ExpectedEffectiveDate)) {
+			Assert.fail("Effective Date dispalyed is incorrect after changing to - " + Month);
 		}
 
 	}
@@ -1677,9 +1811,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					driver.getCurrentUrl().contains("app/index.html#/login"));
 		}
 	}
-	
 
-	
 	public void vppdetails_clickEditPharmacy() throws InterruptedException {
 		Thread.sleep(6000);
 		validate(prescriptiondrugTab);
@@ -1690,13 +1822,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 
 		// Assertion.assertTrue("Drug not switched to generic", editLink.isDisplayed());
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
 	private WebElement DrugInfoModal_DrugCostDetailsBtn;
-	
+
 	@FindBy(xpath = "//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
 	private WebElement DrugInfoModal_CloseBtn;
-	
+
 	public ComparePlansPageMobile clickViewBackCompareLink_ReturnToCompare_ViewDrugModal() {
 		validateNew(LinktoExitScenario);
 		if (!LinktoExitScenario.getText().contains("Compare"))
@@ -1716,13 +1848,12 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		System.out.println("Returned to Plan Compare Page - Drug Info Modal");
 		return new ComparePlansPageMobile(driver);
 	}
-	
+
 	public void validateDefaultPharmacyName(String defaultPharmacy) {
 		validateNew(pharmacyName);
 		Assertion.assertTrue("Default pharmacy name is not displayed",
 				pharmacyName.getText().contains(defaultPharmacy));
 	}
-	
 
 	@FindBy(xpath = "//h2[contains(text(), 'Monthly Drug Cost Details')]//following::span[contains(text(), 'Annual Period') and contains(text(), '(January 1 Effective Date)')]")
 	public WebElement PlanEffective_DefaultText;
@@ -1784,9 +1915,10 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(BarChart_Oct);
 		validateNew(BarChart_Nov);
 		validateNew(BarChart_Dec);
-		System.out.println("Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED");
+		System.out.println(
+				"Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED");
 	}
-	
+
 	public String getMonthNameforMonthNo(int envMonth) {
 		String MonthName = "";
 		Map<String, String> MonthMap = new LinkedHashMap<String, String>();
@@ -1805,37 +1937,40 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		String month = String.valueOf(envMonth);
 		return MonthMap.get(month);
 	}
-	
+
 	@FindBy(xpath = "//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]")
 	public WebElement ChangePED_DropDown_List;
 
 	@FindBy(xpath = "//button[contains(@dtmname, 'change start date')]//following::ul[contains(@aria-labelledby, 'changeeffective')]/li")
 	private List<WebElement> ChangePED_MonthNames;
-	
+
 	public void validateChangePEDDropDwn(String envMonth, String envTimeYear) {
 		validateNew(ChangePED_DropDown);
 		scrollToView(ChangePED_DropDown);
 		ChangePED_DropDown.click();
-//		jsClickNew(ChangePED_DropDown);
+		// jsClickNew(ChangePED_DropDown);
 		validateNew(ChangePED_DropDown_List);
 		int monthNo = Integer.parseInt(envMonth);
 		String CurrentMonthName = getMonthNameforMonthNo(monthNo);
-		System.out.println("Current System Month Name - "+CurrentMonthName);
-		int nextMonthNo = monthNo+1;
-		int MonthListCount = 12-monthNo;
-		System.out.println("Expected Month count in Change Effective date Dropdown - "+MonthListCount);
-		System.out.println("Number of month selection options dispalyed in CHange Effective date dropdown - "+ChangePED_MonthNames.size());
-		if(ChangePED_MonthNames.size()!=MonthListCount) {
-			Assert.fail("Number of months displayed in dropdown does not match the number of months left in the current year");
+		System.out.println("Current System Month Name - " + CurrentMonthName);
+		int nextMonthNo = monthNo + 1;
+		int MonthListCount = 12 - monthNo;
+		System.out.println("Expected Month count in Change Effective date Dropdown - " + MonthListCount);
+		System.out.println("Number of month selection options dispalyed in CHange Effective date dropdown - "
+				+ ChangePED_MonthNames.size());
+		if (ChangePED_MonthNames.size() != MonthListCount) {
+			Assert.fail(
+					"Number of months displayed in dropdown does not match the number of months left in the current year");
 		}
 		for (WebElement MonthSelection : ChangePED_MonthNames) {
 			scrollToView(MonthSelection);
 			jsMouseOver(MonthSelection);
 			CurrentMonthName = getMonthNameforMonthNo(nextMonthNo);
-			System.out.println("Displayed Month Name - "+CurrentMonthName);
-			if(!MonthSelection.getText().contains(CurrentMonthName)
+			System.out.println("Displayed Month Name - " + CurrentMonthName);
+			if (!MonthSelection.getText().contains(CurrentMonthName)
 					|| !MonthSelection.getText().contains(envTimeYear)) {
-				Assert.fail("Month and Year Displayed in Change Effective Dropdown is Incorrect"+MonthSelection.getText());
+				Assert.fail("Month and Year Displayed in Change Effective Dropdown is Incorrect"
+						+ MonthSelection.getText());
 
 			}
 			nextMonthNo++;

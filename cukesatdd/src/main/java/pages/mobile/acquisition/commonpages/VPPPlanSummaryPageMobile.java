@@ -42,12 +42,14 @@ import atdd.framework.UhcDriver;
 import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
 import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.AepVppPlanSummaryPage;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 
@@ -1400,6 +1402,39 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// jsClickNew(ViewPrescriptionDrugPlans);
 		// Thread.sleep(2000);
 		return SubmitConfirmation;
+	}
+	
+	public DrugDetailsPageMobile navigateToDCEFromDrugDropdown(String planType, String planName) {
+		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("SNP")) {
+			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//a[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
+
+			if (drugLinkDropdown.size() > 0)
+				jsClickNew(drugLinkDropdown.get(0));
+
+			WebElement drugSummaryLinkDropdown = driver.findElement(By.xpath("//a[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'edit-drugs')]/a"));
+
+			jsClickNew(drugSummaryLinkDropdown);
+		} else {
+			WebElement drugSummaryLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'module-plan-overview module swiper-slide pdpPlans ng-scope')]//descendant::a[contains(@class,'edit-drugs-link editLink')]"));
+			jsClickNew(drugSummaryLink);
+
+		}
+		waitForPageLoadSafari();
+		return new DrugDetailsPageMobile(driver);
+
+	}
+	
+	public boolean verifyAddedDrugCost(String planName, String capturedDrugCost) {
+		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
+		System.out.println("Captured drug cost: " + capturedDrugCost);
+		System.out.println("Drug cost on plan summary : " + drugCost.getText());
+		if (drugCost.getText().equals(capturedDrugCost))
+			return true;
+		return false;
 	}
 
 	/**

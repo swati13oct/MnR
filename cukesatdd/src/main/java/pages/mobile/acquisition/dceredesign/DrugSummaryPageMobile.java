@@ -21,6 +21,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.dceredesign.SwitchToGeneric;
 
 public class DrugSummaryPageMobile extends UhcDriver {
 
@@ -234,6 +235,45 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		Assertion.assertTrue("Drug not switched to generic", drugNames.getText().contains(genericDrug));
 	}
 
+	
+	@FindBy(xpath = "//label/span[contains(text(),'Medicare Prescription Drug Plans')]")
+	private WebElement pdpPlan;
+	
+	public void clickOnPdpPlan() throws InterruptedException {
+		Thread.sleep(6000);
+		validateNew(pdpPlan);
+		pdpPlan.click();
+		validateNew(viewProceBtn);
+		viewProceBtn.click();
+	}
+	// Switch to Generic
+
+	@FindBy(xpath = "//h3[contains(text(), 'Drug Pricing')]")
+	public WebElement DrugPricing_Header;
+
+	@FindBy(xpath = "//*[contains(@id, 'cancelicon')]")
+	public WebElement DrugPricing_CloseBtn;
+
+	@FindBy(xpath = "//*[@id='modal-label' and contains(text(), 'Switch to Generic')]")
+	public WebElement SwitchPageHeader;
+
+	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	public WebElement SwitchPageCloseBtn;
+
+	public SwitchToGenericMobile clickSwitchGeneric(String brandDrug) {
+		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
+		validateNew(DrugPricing_Header);
+		WebElement SwitchLink = driver.findElement(
+				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::a[contains(text(), 'Switch ')]"));
+		jsClickNew(SwitchLink);
+		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
+		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
+			return new SwitchToGenericMobile(driver);
+		}
+		Assertion.fail("Did not Navigate to Switch To Generic Page");
+		return null;
+	}
+
 	@FindBy(id = "sign-up-modal-header")
 	private WebElement createProfilePopup;
 
@@ -327,7 +367,6 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//body/div[@id='site-wrapper']/div[3]/div[1]/div[1]/div[1]/app-root[1]/app-dceplansummary[1]/div[1]/div[3]/div[2]/select[1]")
 	public WebElement ToggleDropDown;
 
-	
 	public void validateDefaultDistance() {
 		Select distance = new Select(distanceDrpDown);
 		Assertion.assertTrue("Default distance is not 15 miles",
@@ -383,7 +422,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void clickChangePharmacy() {
-		//changePharmacy.click(); exception thrown for click on saucelabs - org.openqa.selenium.WebDriverException
+		// changePharmacy.click(); exception thrown for click on saucelabs -
+		// org.openqa.selenium.WebDriverException
 		jsClickNew(changePharmacy);
 	}
 
@@ -451,21 +491,20 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			Assertion.fail("Back to profile not displayed for each plan card");
 		}
 	}
-	
+
 	public void sortPharmacies(String sortOption) {
 		Select sort = new Select(sortDrpdown);
 		sort.selectByVisibleText(sortOption);
 	}
-	
+
 	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']/../../following-sibling::div[1]")
 	private WebElement mailOrderPharmacyMsg;
-	
+
 	public void validatePreferredMailOrderPharmacyMessage(String expectedMsg) {
 		waitforElement(mailOrderPharmacyMsg);
 		Assertion.assertTrue("Message for Mail order pharmacy not correct" + expectedMsg + "/n" + mailOrderPharmacyMsg,
 				mailOrderPharmacyMsg.getText().trim().equals(expectedMsg));
 	}
-
 
 	// @FindBy(xpath =
 	// "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare
@@ -542,14 +581,16 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 
 	}
+
 	public void selectPreferredMailOrderPharmacy() {
 		waitforElement(preferredMailPharmacy);
-	//	preferredMailPharmacy.click();
+		// preferredMailPharmacy.click();
 		jsClickMobile(preferredMailPharmacy);
 	}
+
 	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
 	private List<WebElement> pharmacyNameList;
-	
+
 	public void validatePharmaciesAscendingOrder() {
 		List<String> pharmacListAfterSort = new ArrayList<String>();
 		for (WebElement e : pharmacyNameList) {
@@ -559,7 +600,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		Boolean sorted = Ordering.natural().isOrdered(pharmacListAfterSort);
 		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
 	}
-	
+
 	public void validatePharmaciesDescendingOrder() {
 		List<String> pharmacListAfterSort = new ArrayList<String>();
 		for (WebElement e : pharmacyNameList) {
@@ -569,10 +610,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		Boolean sorted = Ordering.natural().reverse().isOrdered(pharmacListAfterSort);
 		Assertion.assertTrue("Pharmacies are not sorted in ascending order", sorted);
 	}
-	
+
 	public void clickNextButton() {
 		jsClickMobile(nextBtn);
 	}
+
 	@FindBy(xpath = "//*[@class='pagination']/../p")
 	private WebElement pageNumber;
 
@@ -585,6 +627,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 		Assertion.assertTrue("Second page not displayed", page.equals("2"));
 	}
+
 	public void clickBackButton() {
 		jsClickMobile(backBtn);
 	}
@@ -598,14 +641,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 		Assertion.assertTrue("First page not displayed", page.equals("1"));
 	}
-	
+
 	public void searchPharmaciesByZipcode(String zipcode) {
 		pharmacyZipcodeSearch.clear();
 		pharmacyZipcodeSearch.sendKeys(zipcode);
 		jsClickMobile(pharmacySearchBtn);
 	}
-	
-	
+
 	public DrugSummaryPage verifyMAPDPlanToggle() {
 
 		mapdPlanToggle.click();
@@ -648,8 +690,6 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		return DrugDetails;
 	}
 
-
-
 	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
@@ -659,57 +699,57 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		System.out.println(expectedMsg);
 		Assertion.assertTrue("No results message not displayed", noResultsMessage.getText().equals(expectedMsg));
 	}
+
 	@FindBy(id = "inValidZipcodeLbl")
 	private WebElement invalidZipCodeMsg;
-
 
 	public void validateInvalidZipCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText().trim());
-		Assertion.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
+		Assertion.assertTrue("Invalid zipcode message not displayed",
+				invalidZipCodeMsg.getText().trim().equals(expectedMsg));
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
 	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
 	public WebElement Pharmacy_SearchBtn;
 
-	
 	public void validateOptumRxConsistentDisplay_PharmacyPage() {
-		//Zip code for No retail pharmacy results
+		// Zip code for No retail pharmacy results
 		String pharmacyZipCode = "89405";
 		clickChangePharmacy();
-		try{
-		validateSelectPharmacyPage();
-		validateNew(Pharmacy_ZipCodeTxt);
-		Pharmacy_ZipCodeTxt.clear();
-		Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
-		validateNew(Pharmacy_SearchBtn);
-		Pharmacy_SearchBtn.click();
-		System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
-				+ Pharmacy_ZipCodeTxt.getText());
-		validateNew(preferredMailPharmacy);
-		validateNew(noResultsMessage);
-		if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
-			System.out.println("OptumRx Pharmacy Displayed for Zip not returning any retail Pharmacy results");
-			System.out.println("No results message displayed : "+noResultsMessage.getText());
-			validateNew(selectPharmacyModalCloseBtn);
-			System.out.println("Closing Pharmacy page");
-			selectPharmacyModalCloseBtn.click();
-			validateDrugSummaryPage();
+		try {
+			validateSelectPharmacyPage();
+			validateNew(Pharmacy_ZipCodeTxt);
+			Pharmacy_ZipCodeTxt.clear();
+			Pharmacy_ZipCodeTxt.sendKeys(pharmacyZipCode);
+			validateNew(Pharmacy_SearchBtn);
+			Pharmacy_SearchBtn.click();
+			System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
+					+ Pharmacy_ZipCodeTxt.getText());
+			validateNew(preferredMailPharmacy);
+			validateNew(noResultsMessage);
+			if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
+				System.out.println("OptumRx Pharmacy Displayed for Zip not returning any retail Pharmacy results");
+				System.out.println("No results message displayed : " + noResultsMessage.getText());
+				validateNew(selectPharmacyModalCloseBtn);
+				System.out.println("Closing Pharmacy page");
+				selectPharmacyModalCloseBtn.click();
+				validateDrugSummaryPage();
+			} else
+				Assertion.fail(
+						"Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
+
+		} catch (InterruptedException e) {
+			System.out.println("Execption occured while validating pharmacy page");
 		}
-		else 
-			Assertion.fail("Validation Failed : OptunRx NOT display and No Retail Pharmacy Error Message NOT displayed");
-	
-	}catch(InterruptedException e) {
-		System.out.println("Execption occured while validating pharmacy page");
 	}
-	}
+
 	public void validateNBAModal() {
 		validateNew(dceNBAModal);
 		validateNew(dceNBAModalBtn);
 	}
 
-	
 }
