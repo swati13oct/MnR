@@ -191,7 +191,7 @@ public class MedicareEligibilityPage extends GlobalWebElements {
 		jsClickNew(lnkIEP);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
-		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
+		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans")||driver.getCurrentUrl().contains("/medicare-education-classic/enrollment-and-changing-plans-classic"))
 		{
 			WebElement pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Enrollment Basics')]"));
 			waitforElementNew(pageHeader);
