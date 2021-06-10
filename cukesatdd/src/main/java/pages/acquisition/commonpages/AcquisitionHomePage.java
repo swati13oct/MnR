@@ -577,7 +577,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement MedicarePrescriptionDrugPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_5']")
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']/..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
 	@FindBy(xpath = "(//*[@id='learn-about-medicare-list-heading']/..//a[contains(@href,'medicare-education')])[1]")
@@ -3641,7 +3641,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			validateNew(aarpOrgLink);
+			// validateNew(aarpOrgLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
@@ -5343,8 +5343,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}
 
-		driver.close();
-		driver.switchTo().window(parentWindow);
+		//close the window only if a new window is opened
+		if(tabs_windows.size() > 1){
+			driver.close();
+			driver.switchTo().window(parentWindow);
+		}
 
 	}
 
@@ -6593,26 +6596,28 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		 */
 		return null;
 	}
+
 	public void selectStateForGeotargeting(String geoState) {
-		//driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL,Keys.END);
+		// driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL,Keys.END);
 		WebElement stateDropDown = driver.findElement(By.id("state-select"));
 		scrollToView(stateDropDown);
 		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
 		stateDropDown.click();
-		System.out.println("State to be Selected: "+geoState);
-		String stateXPath="//select[@id='state-select']//option[contains(@value,'"+geoState+"')]";
+		System.out.println("State to be Selected: " + geoState);
+		String stateXPath = "//select[@id='state-select']//option[contains(@value,'" + geoState + "')]";
 		WebElement stateGeotargeting = driver.findElement(By.xpath(stateXPath));
-//		scrollToView(stateGeotargeting);
+		// scrollToView(stateGeotargeting);
 		stateGeotargeting.click();
-		if(!geoState.equalsIgnoreCase(stateGeotargeting.getText())){
+		if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
 			Assert.fail("Wrong state selected for geotarget");
 		}
-		//jsClickNew(stateGeotargeting);
+		// jsClickNew(stateGeotargeting);
 		waitforElementNew(stateGeotargeting, 5);
-		System.out.println("State selected for Geotargetting: "+ stateGeotargeting.getText());
+		System.out.println("State selected for Geotargetting: " + stateGeotargeting.getText());
 		waitforElementNew(stateGeotargeting, 5);
 
 	}
+
 	public LearnAboutMedicareHomePageNew clickLearnMoreAboutMedicareOnHomePage() {
 
 		validateNew(learnAboutMedicareHomeScreen);
@@ -6626,9 +6631,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			return null;
 		}
 	}
+
 	public void clickOnPlanRecommendationButton() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkPRE = driver.findElement(By.xpath("//a[contains(@href,'/plan-recommendation-engine.html') and @role='button']"));
+		WebElement lnkPRE = driver
+				.findElement(By.xpath("//a[contains(@href,'/plan-recommendation-engine.html') and @role='button']"));
 		jsClickNew(lnkPRE);
 		sleepBySec(5);
 		if (driver.getCurrentUrl().contains("/plan-recommendation-engine.html")) {
@@ -6730,7 +6737,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		case "Provider Search":
 			for (String s : all) {
 				driver.switchTo().window(s);
-				flag = driver.getCurrentUrl().contains("connect.int.werally");
+				//sleepBySec(5);
+				flag = driver.getCurrentUrl().contains("werally");
 				if (!base.equals(s)) {
 					driver.close();
 					break;

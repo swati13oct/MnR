@@ -176,10 +176,12 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(id = "distance")
 	protected WebElement distanceDropDownField;
 
-	@FindBy(xpath="//div[contains(@id,'emptyzipcodeerror') and not(contains(@class,'ng-hide'))]")
+//	@FindBy(xpath="//div[contains(@id,'emptyzipcodeerror') and not(contains(@class,'ng-hide'))]")
+	@FindBy(css = ".desktopErrorMsg #emptyzipcodeerror_id>p")
 	protected WebElement noZipcode;
 
-	@FindBy(xpath="//div[contains(@id,'zipcodeformaterror_id') and not(contains(@class,'ng-hide'))]")
+//	@FindBy(xpath="//div[contains(@id,'zipcodeformaterror_id') and not(contains(@class,'ng-hide'))]")
+	@FindBy(css = ".desktopErrorMsg #zipcodeformaterror_id>p")
 	protected WebElement invalidZip;
 
 	@FindBy(xpath="//div[contains(@id,'modifyYourSearchId')]//li")
@@ -194,10 +196,12 @@ public class PharmacySearchWebElements extends UhcDriver {
 	@FindBy(xpath="//ol[@class='pharmacy-list']//a[contains(@href,'contact-us')]")
 	protected WebElement contactUnitedHealthCare_ol;
 	
-	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
+//	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
+	@FindBy(xpath="//ol[contains(@class,'pharmacy-list')]//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Other.pdf')]")
 	protected WebElement pdf_otherPlans;
 
-	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
+//	@FindBy(xpath="//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
+	@FindBy(xpath="//ol[contains(@class,'pharmacy-list')]//div[not(contains(@class,'ng-hide'))]/p/a[contains(@href,'LTC_HI_ITU_Pharmacies_Walgreens.pdf')]")
 	protected WebElement pdf_WalgreenPlans;
 
 	@FindBy(xpath = "//*[contains(@id,'lang-select')]//option[contains(@id,'spanish')]")
