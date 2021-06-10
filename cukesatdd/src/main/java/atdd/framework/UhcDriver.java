@@ -665,9 +665,10 @@ public abstract class UhcDriver {
 	}
 
 	public boolean scrollToView(WebElement element) {
-		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS") ||
+				driver.getClass().toString().toUpperCase().contains("Android")) {
 
-			// // clickAndHold(element);
+			/*// // clickAndHold(element);
 			// TouchAction ta = new TouchAction((AppiumDriver)driver);
 			// ta.moveTo(moveToOptions)
 
@@ -678,7 +679,9 @@ public abstract class UhcDriver {
 
 			// JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
 			// javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",
-			// element);
+			// element);*/
+			scrollElementInMobileView(element);
+//			iosScroll(element);
 
 		} else {
 			try {
@@ -692,6 +695,15 @@ public abstract class UhcDriver {
 			}
 		}
 		return true;
+	}
+	
+	public void scrollElementInMobileView(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
+		} catch (Exception e) {
+			Assertion.fail("The element " + element + " is not  found");
+		}
 	}
 
 	/***
