@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
+import org.testng.Assert;
 import pages.acquisition.dceredesign.GetStartedPage;
 
 public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
@@ -97,14 +98,14 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
-		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans.html"))
+		if(driver.getCurrentUrl().contains("/medicare-education/enrollment-and-changing-plans")||driver.getCurrentUrl().contains("/medicare-education-classic/enrollment-and-changing-plans-classic"))
 		{
 			//WebElement pageHeader=driver.findElement(By.xpath("//span[contains(text(),'Enrollment Basics') and contains(@class,'heading-1')]"));
 			//waitforElementNew(pageHeader);
 			System.out.println("Annual Enrollment Period Page open correctly");
 			
 		}else {
-			System.out.println("Annual Enrollment Period Page did not open correctly");
+			Assert.fail("Annual Enrollment Period Page did not open correctly");
 		}
 		driver.navigate().back();
 	}

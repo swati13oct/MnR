@@ -776,7 +776,6 @@ public class GlobalComponentsCommonStepDefinition {
 	public void check_the_inner_links_on_Enrollment_Basic() {
 		EnrollmentBasicsPage enrollmentBasicsPage = (EnrollmentBasicsPage) getLoginScenario()
 				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
-		enrollmentBasicsPage.selectStateForGeotargeting();
 		enrollmentBasicsPage.checkInnerLinks();
 	}
 
