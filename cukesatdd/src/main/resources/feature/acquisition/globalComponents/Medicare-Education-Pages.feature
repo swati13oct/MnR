@@ -105,13 +105,13 @@ Feature:Medicare Education Pages flows for New Pages
 
     @avengersRegressionAARP
     Examples:
-      | Scenario           | site | geoState | pageName                       | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 6_AMP | AARP | Alabama  | Initial Enrollment Period Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario               | site | geoState | pageName                       | tfnXpath                                                       | tfnFlag | UHCUrl                      |
+      | UAT E2E Scenario 6_AMP | AARP | Alabama  | Initial Enrollment Period Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC
     Examples:
-      | Scenario           | site | geoState | pageName                       | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 6_AMP | UHC  | Alabama  | Initial Enrollment Period Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario               | site | geoState | pageName                       | tfnXpath                                                       | tfnFlag | UHCUrl                      |
+      | UAT E2E Scenario 6_AMP | UHC  | Alabama  | Initial Enrollment Period Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
   Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -268,8 +268,8 @@ Feature:Medicare Education Pages flows for New Pages
 
     @avengersRegressionAARP
     Examples:
-      | Scenario           | site | geoState | pageName                      | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 5_AMP | AARP | Alabama  | Medicare Supplement Plans New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState | pageName                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 5_AMP | AARP | Alabama  | Medicare Supplement Plans New | //*[contains(@class,'callus')]//div[contains(@ng-show,'medSup')]//a | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC
     Examples:
@@ -450,13 +450,13 @@ Feature:Medicare Education Pages flows for New Pages
 
     @avengersRegressionAARP
     Examples:
-      | Scenario     | site | geoState | pageName             | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | Avengers AMP | AARP | Alabama  | Working Past 65 Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario               | site | geoState | pageName             | tfnXpath                                                       | tfnFlag | UHCUrl                      |
+      | UAT E2E Scenario 6_AMP | AARP | Alabama  | Working Past 65 Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC
     Examples:
-      | Scenario     | site | geoState | pageName             | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | Avengers UMS | UHC  | Alabama  | Working Past 65 Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario               | site | geoState | pageName             | tfnXpath                                                       | tfnFlag | UHCUrl                      |
+      | UAT E2E Scenario 6_UMS | UHC  | Alabama  | Working Past 65 Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
   Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
