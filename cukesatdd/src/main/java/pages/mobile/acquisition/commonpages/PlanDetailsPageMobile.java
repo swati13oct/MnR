@@ -26,7 +26,10 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -431,6 +434,59 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		} else {
 			System.out.println("The user is not on the correct page");
 		}
+	}
+	
+	
+	@FindBy(xpath = "//*[contains(@id,'planCosts')]//tr[not(contains(@class,'ng-hide'))]//p[contains(text(),'Drug')]/ancestor::td/following-sibling::td/p[contains(text(),'Yearly')]/following-sibling::span[not(contains(@class,'ng-hide'))]")
+	private WebElement planCostTabDrugCostValueCell;
+	
+	public void validateDrugInfoOnPlanCostTab(String annualDrugCost) {
+
+		if (!planCostTabDrugCostValueCell.getText().equals(annualDrugCost))
+			Assertion.fail("Drug cost not displayed properly on prescription drugs tab");
+
+	}
+	
+	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
+	private WebElement editDrugLinkPlanCost;
+	
+	public BuildYourDrugListMobile navigateToDCERedesignFromPlanCostTab() {
+
+		validateNew(editDrugLinkPlanCost, 20);
+		jsClickNew(editDrugLinkPlanCost);
+
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugListMobile(driver);
+		}
+		Assertion.fail("Did not Navigate to Build Drug List Page");
+		return null;
+	}
+	public void clickPlanCosts() {
+		jsClickNew(planCostsTab);
+
+	}
+
+	@FindBy(xpath = "//*[contains(@id,'DrugListDetails')]")
+	private WebElement editDrugLink;
+
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement BuildDrugPage_EnterDrugNameTxt;
+
+	public BuildYourDrugListMobile navigateToDCERedesignEditDrug() {
+
+		jsClickNew(presDrugTab.get(0));
+		validateNew(editDrugLink, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugListMobile(driver);
+		}
+		Assertion.fail("Did not Navigate to Build Drug List Page");
+		return null;
 	}
 
 	public void validatePlanCost(String planName) {
@@ -859,8 +915,6 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		return null;
 	}
 
-
-
 	/**
 	 * @author bnaveen4
 	 * @param additionalBenefits
@@ -905,6 +959,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 	}
 
+	public DrugDetailsPageMobile returnToReviewDrugCost() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	/**
 	 * @author bnaveen4
 	 * @param medicalBenefits
@@ -930,6 +989,29 @@ public class PlanDetailsPageMobile extends UhcDriver {
 				Assertion.fail("Proper value not found: " + medicalBenefits.get(i + 1).get(1));
 			}
 		}
+	}
+
+	@FindBy(xpath = "//*[contains(@class,'currentpharmacy')]//*[contains(@ng-show,'pharmacyName') and contains(@class,'ng-binding')]")
+	private WebElement pharmacyPrescriptionDrugTab;
+
+	public void verifyPharmacyAdded(String pharmacyName) {
+		validateNew(pharmacyPrescriptionDrugTab);
+		if (!pharmacyPrescriptionDrugTab.getText().contains(pharmacyName))
+			Assertion.fail("Pharmacy did not match on plan details page with DCE");
+	}
+
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@ng-repeat,'drug')]//td")
+	private WebElement presDrugTabDrugInfoCell;
+
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]/span[@ng-show]")
+	private WebElement presDrugTabAnnualCostValueCell;
+
+	public void validateDrugInfoOnPrescriptionDrugTab(String drug, String drugCost) {
+		if (!presDrugTabDrugInfoCell.getText().contains(drug))
+			Assertion.fail("Drug name not displayed on the prescription drugs tab");
+
+		if (!presDrugTabAnnualCostValueCell.getText().trim().equals(drugCost))
+			Assertion.fail("Drug cost not displayed properly on prescription drugs tab");
 	}
 
 	/**

@@ -604,7 +604,7 @@ public abstract class UhcDriver {
 			js.executeScript(
 					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
 					element);
-			// checkElementisEnabled(element);
+			 //checkElementisEnabled(element);
 			scrollToView(element);
 			element.click();
 			sleepBySec(2);
@@ -613,7 +613,7 @@ public abstract class UhcDriver {
 			if (element.getAttribute("automationTrack") != "true") {
 				// checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
-				iosScroll(element);
+				//iosScroll(element);
 				JavascriptExecutor js1 = (JavascriptExecutor) driver;
 				js1.executeScript("arguments[0].click();", element);
 
@@ -667,19 +667,10 @@ public abstract class UhcDriver {
 	public boolean scrollToView(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("IOS") ||
 				driver.getClass().toString().toUpperCase().contains("Android")) {
-
-			/*// // clickAndHold(element);
-			// TouchAction ta = new TouchAction((AppiumDriver)driver);
-			// ta.moveTo(moveToOptions)
-
-			Actions ac = new Actions(driver);
+			/*Actions ac = new Actions(driver);
 			ac.moveToElement(element);
-			// backToTop.isDisplayed();
-			System.out.println("Scroll finished to element on IOS device");
+			System.out.println("Scroll finished to element on IOS device");*/
 
-			// JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
-			// javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);",
-			// element);*/
 			scrollElementInMobileView(element);
 //			iosScroll(element);
 

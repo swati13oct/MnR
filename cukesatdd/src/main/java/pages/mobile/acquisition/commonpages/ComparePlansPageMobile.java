@@ -34,6 +34,7 @@ import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -956,6 +957,26 @@ public class ComparePlansPageMobile extends UhcDriver {
 		if (validate(addDrug)) {
 			System.out.println("User is on DCE Page");
 			return new pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile(driver);
+		} else
+			return null;
+	}
+	
+	public BuildYourDrugListMobile clickonEdityourDrug() {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(editDrugsLink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
+		jsClickNew(editDrugsLink);
+		waitforElement(addDrug);
+		if (validate(addDrug)) {
+			System.out.println("User is on DCE Page");
+			return new BuildYourDrugListMobile(driver);
 		} else
 			return null;
 	}
