@@ -32,6 +32,7 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;

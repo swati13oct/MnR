@@ -380,8 +380,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		validateNew(zipCodeTextfield);
 		zipCodeTextfield.sendKeys(zipcode);
 		validateNew(continueButton);
-		// continueButton.click();
-		jsClickNew(continueButton);
+		continueButton.click();
 		if (year.contains("current")) {
 			if (validate(currentYrTile)) {
 				currentYrTile.click();
@@ -392,11 +391,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			if (validate(nextYrTile))
 				nextYrTile.click();
 		}
-		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),'" + planName + "')]"));
+		WebElement planNameToBeSelected = driver.findElement(By.xpath("//*[contains(text(),\'" + planName + "\')]"));
 		validateNew(planNameToBeSelected);
-		// planNameToBeSelected.click();
-		jsClickNew(planNameToBeSelected);
-		// TODO Auto-generated method stub
+		planNameToBeSelected.click();
 
 	}
 

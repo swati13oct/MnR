@@ -435,21 +435,20 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			System.out.println("The user is not on the correct page");
 		}
 	}
-	
-	
+
 	@FindBy(xpath = "//*[contains(@id,'planCosts')]//tr[not(contains(@class,'ng-hide'))]//p[contains(text(),'Drug')]/ancestor::td/following-sibling::td/p[contains(text(),'Yearly')]/following-sibling::span[not(contains(@class,'ng-hide'))]")
 	private WebElement planCostTabDrugCostValueCell;
-	
+
 	public void validateDrugInfoOnPlanCostTab(String annualDrugCost) {
 
 		if (!planCostTabDrugCostValueCell.getText().equals(annualDrugCost))
 			Assertion.fail("Drug cost not displayed properly on prescription drugs tab");
 
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
 	private WebElement editDrugLinkPlanCost;
-	
+
 	public BuildYourDrugListMobile navigateToDCERedesignFromPlanCostTab() {
 
 		validateNew(editDrugLinkPlanCost, 20);
@@ -463,6 +462,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		Assertion.fail("Did not Navigate to Build Drug List Page");
 		return null;
 	}
+
 	public void clickPlanCosts() {
 		jsClickNew(planCostsTab);
 
@@ -989,6 +989,14 @@ public class PlanDetailsPageMobile extends UhcDriver {
 				Assertion.fail("Proper value not found: " + medicalBenefits.get(i + 1).get(1));
 			}
 		}
+	}
+
+	@FindBy(xpath = "//*[@class='tab ng-scope active']")
+	private WebElement defaultSelectedTab;
+
+	public void validateDefaultTab(String tabName) {
+		validateNew(defaultSelectedTab);
+		Assertion.assertTrue("Default tab " + tabName + " not displayed", defaultSelectedTab.getText().equals(tabName));
 	}
 
 	@FindBy(xpath = "//*[contains(@class,'currentpharmacy')]//*[contains(@ng-show,'pharmacyName') and contains(@class,'ng-binding')]")
