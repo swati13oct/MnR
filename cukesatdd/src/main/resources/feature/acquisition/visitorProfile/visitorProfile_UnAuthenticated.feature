@@ -7,8 +7,6 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
   Scenario Outline: Verify user is able to add drug information to the unauthenticated visitor profile in <site> site - zip -<zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     And the user clicks on the shopping cart icon
     And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
     Then the user validates Get Started Page
@@ -39,8 +37,6 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
   Scenario Outline: Verify user is able to add drug from DCE to the unauthenticated visitor profile in <site> site - zip -<zipCode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     When I access the acquisition DCE Redesign from home page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -70,8 +66,6 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
   Scenario Outline: Verify user is able to add plans to the unauthenticated visitor profile - zip -<zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     And the user clicks on the shopping cart icon
     And the user clicks on the add plans button in the profile
     When the user enters zipcode on health plans page
@@ -108,8 +102,6 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -152,8 +144,6 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
   Scenario Outline: <UID> - Verify user is save plans from VPP to the unauthenticated visitor profile and complete OLE
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -277,8 +267,6 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
   Scenario Outline: Verify user saves Medsupp plans from VPP to the unauthenticated visitor profile - zipcode - <zipcode>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
@@ -312,8 +300,6 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
   Scenario Outline: Verify Provider Search functional flow for unauthenticated Visitor Profile page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>         |
       | County Name     | <county>          |
@@ -356,8 +342,6 @@ Feature: 1.09. UAT - Visitor profile Un-Authenticated
   Scenario Outline: Verify user is able to Plan compare to the unauthenticated visitor profile
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    And the user selects the state drop down value in home page
-      | State | <state> |
     When the user performs plan search using following information
       | Zip Code        | <zipcode>       |
       | County Name     | <county>        |
