@@ -469,6 +469,22 @@ public class ComparePlansPageMobile extends UhcDriver {
 		return validationFlag;
 	}
 
+	
+	public void validateEstimatedDrugCostForPlan(String PlanName, String expected_Estimated_Drug_Cost2) {
+		int i = findindexofPlan_PlanCompare(PlanName);
+		i +=1;
+		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath("(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["+i+"]"));
+		
+		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();
+		if(validateNew(Plan_Displayed_EstimatedDrugCosts) && Displayed_DrugCostsText.contains(expected_Estimated_Drug_Cost2)) {
+			System.out.println("DIsplayed Estimated Annual Drug Costs Matches the same displayed on DCE details page for the plan : "+PlanName);
+			System.out.println("Expected Estimated Annual Drug Costs  : "+expected_Estimated_Drug_Cost2);
+			System.out.println("Displayed Estimated Annual Drug Costs  : "+Displayed_DrugCostsText);
+		}
+		else
+			Assertion.fail("DIsplayed Estimated Annual Drug Costs DOES NOT Match the same displayed on DCE details page for the plan : "+PlanName);
+		
+	}
 	private int findindexofPlan_PlanCompare(String planName) {
 		int index = 1;
 		List<WebElement> PlanHeadings = driver.findElements(By.xpath("//div[@ng-repeat = 'i in count']"));

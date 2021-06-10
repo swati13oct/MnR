@@ -20,6 +20,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
@@ -28,6 +29,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.VPPTestHarnessPage;
@@ -455,6 +457,91 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			System.out.println("############No Providers##############");
 		}
 	}
+	
+    @FindBy(xpath = "//button[contains(@dtmname, 'Add Drugs')]/span")
+    public WebElement AddDrugsGlobal;
+	
+	/**
+     * click edit drugs globally
+     */
+    public void clickAddDrugsBtn() {
+        AddDrugsGlobal.click();
+    }
+
+
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove Modal:Yes Remove')]")
+	public WebElement ConfirmRemoveProvider;
+
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove')]")
+	public List<WebElement> removeProviders;
+
+	public void clearProvider() {
+		try {
+			/*
+			 * if (expandProvidersPlanCard.isDisplayed()) { expandProvidersPlanCard.click();
+			 */
+
+			while (removeProviders.size() != 0) {
+				/*
+				 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
+				 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
+				 */
+				waitforElementNew(removeProviders.get(0));
+				validateNew(removeProviders.get(0));
+				removeProviders.get(0).click();
+				validateNew(ConfirmRemoveProvider);
+				jsClickNew(ConfirmRemoveProvider);
+
+				System.out.println("Removed provider");
+				// validate(addrugs);
+			}
+			// }
+		} catch (Exception e) {
+			System.out.println("No existing providers found");
+		}
+	}
+
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove Modal:Yes Remove')]")
+	public WebElement ConfirmRemoveDrug;
+
+	@FindBy(xpath = "//a[contains(@dtmname, 'Visitor Profile:Header:Auth:Your Saved Drugs & Pharmacy')]/span[contains(@class, 'uhc-profile-header-nav__item-bottom')]")
+	public WebElement VPHeader_DrugsLinks;
+
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove')]")
+	public List<WebElement> removeDrugs;
+
+	public void clearDrugs() {
+		CommonUtility.waitForPageLoadNew(driver, VPHeader_DrugsLinks, 20);
+		jsClickNew(VPHeader_DrugsLinks);
+		try {
+			/*
+			 * if (expandDrugsPlanCard.isDisplayed()) { expandDrugsPlanCard.click();
+			 */
+			System.out.println(removeDrugs.size());
+			while (removeDrugs.size() != 0) {
+				waitforElementNew(removeDrugs.get(0));
+				validateNew(removeDrugs.get(0));
+				removeDrugs.get(0).click();
+				validateNew(ConfirmRemoveDrug);
+				jsClickNew(ConfirmRemoveDrug);
+				System.out.println(removeDrugs.size());
+				System.out.println("Removed drugs");
+
+			}
+			/*
+			 * while (removeDrugsPlanCard.size() != 0) {
+			 *
+			 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
+			 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
+			 *
+			 * removeDrugsPlanCard.get(0).click(); System.out.println("Removed drugs");
+			 * validate(addrugs); }
+			 */
+			// }
+		} catch (Exception e) {
+			System.out.println("No existing drugs found");
+		}
+	}
 
 	/**
 	 * Sign In with Optum Id credentials
@@ -517,6 +604,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 	}
+	
+	public DrugDetailsPageMobile clickBackToDCELink() {
+        jsClickNew(backToDrugCostEstimatorLink);
+        waitForPageLoadSafari();
+        if (driver.getCurrentUrl().contains("drugdetails")) {
+            return new DrugDetailsPageMobile(driver);
+        } else
+            return null;
+    }
 
 	/**
 	 * Enroll in a plan
