@@ -22,7 +22,7 @@ Feature: 1.12 ACQ - Global Components Validation
     #Then user clicks on back to top link of home page
     @globalfooter
     Examples: 
-      | site | state  | 
+      | site | state  |
       | AARP | Alaska |
 
     @globalfooter
@@ -747,7 +747,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  |
 
   @footerLinks
-  Scenario Outline: To verify the links under Shop Plans, Tools & Resources, Learn About Medicare and More on the <site> site
+  Scenario Outline: To verify the links under Shop Plans, Tools & Resources, Learn About Medicare and More  on Home page on the <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user click on "Medicare Advantage Plans" link under shop plans
@@ -867,90 +867,87 @@ Feature: 1.12 ACQ - Global Components Validation
     Then user should be navigated to respective footer links page
     When user updates the state drop down value on the home page
       | State | <state> |
-    
+
     @Global_Comps_Footer_AARP
     Examples: 
-      | site | path      | pageName           |state|
-      | UHC  | shop.html | ShopPlan: Homepage | Alaska|
+      | site | path      | pageName           | state  |
+      | UHC  | shop.html | ShopPlan: Homepage | Alaska |
 
     @Global_Comps_Footer_UHC
     Examples: 
-      | site | path      | pageName           |state|
-      | UHC  | shop.html | ShopPlan: Homepage | Alaska|
+      | site | path      | pageName           | state  |
+      | UHC  | shop.html | ShopPlan: Homepage | Alaska |
 
     @Global_Comps_Footer_AARP
     Examples: 
-      | site | path                                                                                    | pageName                        |state|
-      | AARP | shop.html                                                                               | ShopPlan: Homepage              |Alaska|
-      | AARP | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          |Alaska|
-      | AARP | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          |Alaska|
-      | AARP | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         |Alaska|
-      | AARP | shop/dual-special-needs-plans.html                                                      | ShopPlan: Shop SNP Plan         |Alaska|
-      | AARP | safe-shopping.html                                                                      | ShopPlan: Safe Shopping         |Alaska|
-      | AARP | shop/compare/compare-ma-ms.html                                                         | ShopPlan: Compare MA-MS         |Alaska|
-      | AARP | shop/compare/compare-ms.html                                                            | ShopPlan: Compare MS            |Alaska|
-      | AARP | enroll.html                                                                             | ShopPlan: Enrollment Homepage   |Alaska|
-      | AARP | enroll/ms-apply.html                                                                    | ShopPlan: MS Enrollment         |Alaska|
-      | AARP | enroll/ma-enrollment.html                                                               | ShopPlan: MA Enrollment         |Alaska|
-      | AARP | enroll/pdp-enrollment.html                                                              | ShopPlan: PDP Enrollment        |Alaska|
-      | AARP | shop/compare.html                                                                       | ShopPlan: Compare Homepage      |Alaska|
-      | AARP | shop/compare/compare-ma.html                                                            | ShopPlan: Compare MA            |Alaska|
-      | AARP | shop/compare/compare-pdp.html                                                           | ShopPlan: Compare PDP           |Alaska|
-      | AARP | shop/estimate.html                                                                      | ShopPlan: Estimate Homepage     |Alaska|
-      | AARP | shop/estimate/ms-costs.html                                                             | ShopPlan: Estimate MS           |Alaska|
-      | AARP | shop/estimate/ma-costs.html                                                             | ShopPlan: Estimate  MA          |Alaska|
-      | AARP | shop/estimate/pdp-costs.html                                                            | ShopPlan: Estimate  PDP         |Alaska|
+      | site | path                                                                                    | pageName                        | state  |
+      | AARP | shop.html                                                                               | ShopPlan: Homepage              | Alaska |
+      | AARP | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          | Alaska |
+      | AARP | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          | Alaska |
+      | AARP | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         | Alaska |
+      | AARP | shop/dual-special-needs-plans.html                                                      | ShopPlan: Shop SNP Plan         | Alaska |
+      | AARP | safe-shopping.html                                                                      | ShopPlan: Safe Shopping         | Alaska |
+      | AARP | shop/compare/compare-ma-ms.html                                                         | ShopPlan: Compare MA-MS         | Alaska |
+      | AARP | shop/compare/compare-ms.html                                                            | ShopPlan: Compare MS            | Alaska |
+      | AARP | enroll.html                                                                             | ShopPlan: Enrollment Homepage   | Alaska |
+      | AARP | enroll/ms-apply.html                                                                    | ShopPlan: MS Enrollment         | Alaska |
+      | AARP | enroll/ma-enrollment.html                                                               | ShopPlan: MA Enrollment         | Alaska |
+      | AARP | enroll/pdp-enrollment.html                                                              | ShopPlan: PDP Enrollment        | Alaska |
+      | AARP | shop/compare.html                                                                       | ShopPlan: Compare Homepage      | Alaska |
+      | AARP | shop/compare/compare-ma.html                                                            | ShopPlan: Compare MA            | Alaska |
+      | AARP | shop/compare/compare-pdp.html                                                           | ShopPlan: Compare PDP           | Alaska |
+      | AARP | shop/estimate.html                                                                      | ShopPlan: Estimate Homepage     | Alaska |
+      | AARP | shop/estimate/ms-costs.html                                                             | ShopPlan: Estimate MS           | Alaska |
+      | AARP | shop/estimate/ma-costs.html                                                             | ShopPlan: Estimate  MA          | Alaska |
+      | AARP | shop/estimate/pdp-costs.html                                                            | ShopPlan: Estimate  PDP         | Alaska |
       #| AARP | shop/switch.html                                                                        | ShopPlan: Switch                |
-      | AARP | resources/mail-order-pharmacy.html                                                      | ShopPlan: Mail ORDER-PHARMACY   |Alaska|
-      | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html                                     | ShopPlan: MA Plan benefits      |Alaska|
-      | AARP | contact-us.html                                                                         | Contact us                      |Alaska|
-      | AARP | shop/renew-active.html                                                                  | ShopPlan: Renew Active          |Alaska|
-      | AARP | shop/medicare-advantage-veteran-plan.html                                               | ShopPlan: MA Veteran Plan       |Alaska|
-      | AARP | medicare-articles.html                                                                  | ShopPlan: Articles              |Alaska|
-      | AARP | medicare-articles/eligibility-and-enrollment.html                                       | ShopPlan: Sample Category Page  |Alaska|
-      | AARP | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             |Alaska|
-      | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 |Alaska|
-      | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        |Alaska|
-      | AARP | about-us.html                                                                           | About Us Page                   |Alaska|
+      | AARP | resources/mail-order-pharmacy.html                                                      | ShopPlan: Mail ORDER-PHARMACY   | Alaska |
+      | AARP | shop/medicare-advantage-plans/ma-plan-benefits.html                                     | ShopPlan: MA Plan benefits      | Alaska |
+      | AARP | contact-us.html                                                                         | Contact us                      | Alaska |
+      | AARP | shop/renew-active.html                                                                  | ShopPlan: Renew Active          | Alaska |
+      | AARP | shop/medicare-advantage-veteran-plan.html                                               | ShopPlan: MA Veteran Plan       | Alaska |
+      | AARP | medicare-articles.html                                                                  | ShopPlan: Articles              | Alaska |
+      | AARP | medicare-articles/eligibility-and-enrollment.html                                       | ShopPlan: Sample Category Page  | Alaska |
+      | AARP | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             | Alaska |
+      | AARP | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 | Alaska |
+      | AARP | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        | Alaska |
+      | AARP | about-us.html                                                                           | About Us Page                   | Alaska |
 
-  @Global_Comps_Footer_UHC
-  
-  Examples:
-      
-      | site | path                                                                                    | pageName                        |Alaska|
-      | UHC  | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          |Alaska|
-      | UHC  | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          |Alaska|
-      | UHC  | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         |Alaska|
-      | UHC  | shop/dual-special-needs-plans.html                                                      | ShopPlan: Shop SNP Plan         |Alaska|
-      | UHC  | safe-shopping.html                                                                      | ShopPlan: Safe Shopping         |Alaska|
-      | UHC  | shop/compare/compare-ma-ms.html                                                         | ShopPlan: Compare MA-MS         |Alaska|
-      | UHC  | shop/compare/compare-ms.html                                                            | ShopPlan: Compare MS            |Alaska|
-      | UHC  | enroll.html                                                                             | ShopPlan: Enrollment Homepage   |Alaska|
-      | UHC  | enroll/ms-apply.html                                                                    | ShopPlan: MS Enrollment         |Alaska|
-      | UHC  | enroll/ma-enrollment.html                                                               | ShopPlan: MA Enrollment         |Alaska|
-      | UHC  | enroll/pdp-enrollment.html                                                              | ShopPlan: PDP Enrollment        |Alaska|
-      | UHC  | shop/compare.html                                                                       | ShopPlan: Compare Homepage      |Alaska|
-      | UHC  | shop/compare/compare-ma.html                                                            | ShopPlan: Compare MA            |Alaska|
-      | UHC  | shop/compare/compare-pdp.html                                                           | ShopPlan: Compare PDP           |Alaska|
-      | UHC  | shop/estimate.html                                                                      | ShopPlan: Estimate Homepage     |Alaska|
-      | UHC  | shop/estimate/ms-costs.html                                                             | ShopPlan: Estimate MS           |Alaska|
-      | UHC  | shop/estimate/ma-costs.html                                                             | ShopPlan: Estimate  MA          |Alaska|
-      | UHC  | shop/estimate/pdp-costs.html                                                            | ShopPlan: Estimate  PDP         |Alaska|
+    @Global_Comps_Footer_UHC
+    Examples: 
+      | site | path                                                                                    | pageName                        | Alaska |
+      | UHC  | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          | Alaska |
+      | UHC  | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          | Alaska |
+      | UHC  | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         | Alaska |
+      | UHC  | shop/dual-special-needs-plans.html                                                      | ShopPlan: Shop SNP Plan         | Alaska |
+      | UHC  | safe-shopping.html                                                                      | ShopPlan: Safe Shopping         | Alaska |
+      | UHC  | shop/compare/compare-ma-ms.html                                                         | ShopPlan: Compare MA-MS         | Alaska |
+      | UHC  | shop/compare/compare-ms.html                                                            | ShopPlan: Compare MS            | Alaska |
+      | UHC  | enroll.html                                                                             | ShopPlan: Enrollment Homepage   | Alaska |
+      | UHC  | enroll/ms-apply.html                                                                    | ShopPlan: MS Enrollment         | Alaska |
+      | UHC  | enroll/ma-enrollment.html                                                               | ShopPlan: MA Enrollment         | Alaska |
+      | UHC  | enroll/pdp-enrollment.html                                                              | ShopPlan: PDP Enrollment        | Alaska |
+      | UHC  | shop/compare.html                                                                       | ShopPlan: Compare Homepage      | Alaska |
+      | UHC  | shop/compare/compare-ma.html                                                            | ShopPlan: Compare MA            | Alaska |
+      | UHC  | shop/compare/compare-pdp.html                                                           | ShopPlan: Compare PDP           | Alaska |
+      | UHC  | shop/estimate.html                                                                      | ShopPlan: Estimate Homepage     | Alaska |
+      | UHC  | shop/estimate/ms-costs.html                                                             | ShopPlan: Estimate MS           | Alaska |
+      | UHC  | shop/estimate/ma-costs.html                                                             | ShopPlan: Estimate  MA          | Alaska |
+      | UHC  | shop/estimate/pdp-costs.html                                                            | ShopPlan: Estimate  PDP         | Alaska |
       #| UHC  | shop/switch.html                                                                        | ShopPlan: Switch                |
-      | UHC  | resources/mail-order-pharmacy.html                                                      | ShopPlan: Mail ORDER-PHARMACY   |Alaska|
-      | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html                                     | ShopPlan: MA Plan benefits      |Alaska|
-      | UHC  | contact-us.html                                                                         | Contact us                      |Alaska|
-      | UHC  | shop/renew-active.html                                                                  | ShopPlan: Renew Active          |Alaska|
-      | UHC  | shop/medicare-advantage-veteran-plan.html                                               | ShopPlan: MA Veteran Plan       |Alaska|
-      | UHC  | medicare-articles.html                                                                  | ShopPlan: Articles              |Alaska|
-      | UHC  | medicare-articles/eligibility-and-enrollment.html                                       | ShopPlan: Sample Category Page  |Alaska|
-      | UHC  | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             |Alaska|
-      | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 |Alaska|
-      | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        |Alaska|
-      | UHC  | about-us.html                                                                           | About Us Page                   |Alaska|
+      | UHC  | resources/mail-order-pharmacy.html                                                      | ShopPlan: Mail ORDER-PHARMACY   | Alaska |
+      | UHC  | shop/medicare-advantage-plans/ma-plan-benefits.html                                     | ShopPlan: MA Plan benefits      | Alaska |
+      | UHC  | contact-us.html                                                                         | Contact us                      | Alaska |
+      | UHC  | shop/renew-active.html                                                                  | ShopPlan: Renew Active          | Alaska |
+      | UHC  | shop/medicare-advantage-veteran-plan.html                                               | ShopPlan: MA Veteran Plan       | Alaska |
+      | UHC  | medicare-articles.html                                                                  | ShopPlan: Articles              | Alaska |
+      | UHC  | medicare-articles/eligibility-and-enrollment.html                                       | ShopPlan: Sample Category Page  | Alaska |
+      | UHC  | medicare-articles/medicare-made-clear.html                                              | ShopPlan: About MMC             | Alaska |
+      | UHC  | medicare-articles/unintended-part-d-gotcha-could-getcha-if-you-enroll-after-age-65.html | ShopPlan: Sample Article Page 1 | Alaska |
+      | UHC  | medicare-articles/what-is-retiree-health-coverage.html                                  | ShopPlan: Retiree Health        | Alaska |
+      | UHC  | about-us.html                                                                           | About Us Page                   | Alaska |
 
-
-@GlobalComponentsFooterAARPBlogPages
+  @GlobalComponentsFooterAARPBlogPages
   Scenario Outline: To verify Global Components for the page mentioned on site - <site> -  <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -1007,12 +1004,12 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @Global_Comps_Footer_AARP
     Examples: 
-      | site | path     | pageName                    |
-      | AARP | profile | VisitorProfile:Proflie Page |
-      | AARP | shop/switch.html                                                                        | ShopPlan: Switch                |
-  
+      | site | path             | pageName                    |
+      | AARP | profile          | VisitorProfile:Proflie Page |
+      | AARP | shop/switch.html | ShopPlan: Switch            |
+
     @Global_Comps_Footer_UHC
     Examples: 
-      | site | path     | pageName                    |
-      | UHC  | profile | VisitorProfile:Proflie Page |
-      | UHC | shop/switch.html                                                                        | ShopPlan: Switch                |
+      | site | path             | pageName                    |
+      | UHC  | profile          | VisitorProfile:Proflie Page |
+      | UHC  | shop/switch.html | ShopPlan: Switch            |

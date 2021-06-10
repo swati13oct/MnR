@@ -664,7 +664,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "(//div[@class='label-icon']/h5)[7]")
 	private WebElement footertextsectionHeadermedsupp;
 
-	@FindBy(xpath = "//div[contains(@class,'calluswidgets')]//p[1]")
+	@FindBy(xpath = "(//div[contains(@class,'calluswidgets')]//p[1])[2]")
 	private WebElement footertextsectioncallusMedsupp;
 
 	// @FindBy(xpath =
