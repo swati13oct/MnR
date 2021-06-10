@@ -88,18 +88,18 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @MedEdPages_2_GlobalCompsAARP @avengersRegressionAARP
     Examples: 
-      | site | path                                              | pageName                              | tfnXpath                                                       | tfnFlag |
-      | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | site | path                                              | pageName                              | tfnXpath                                                            | tfnFlag |
+      | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]      | true    |
       | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[2] | true    |
-      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]      | true    |
 
     #|AARP| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_2_GlobalCompsUHC @sanity @avengersRegressionUHC
     Examples: 
-      | site | path                                              | pageName                            | tfnXpath                                                       | tfnFlag |
-      | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | site | path                                              | pageName                            | tfnXpath                                                            | tfnFlag |
+      | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]      | true    |
       | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[2] | true    |
-      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]      | true    |
 
     #|UHC| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_3_GlobalCompsAARP @avengersRegressionAARP
@@ -871,7 +871,7 @@ Feature: 1.12 ACQ - Global Components Validation
     @Global_Comps_Footer_AARP
     Examples: 
       | site | path      | pageName           | state  |
-      | UHC  | shop.html | ShopPlan: Homepage | Alaska |
+      | AARP | shop.html | ShopPlan: Homepage | Alaska |
 
     @Global_Comps_Footer_UHC
     Examples: 
@@ -1004,12 +1004,16 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @Global_Comps_Footer_AARP
     Examples: 
-      | site | path             | pageName                    |
-      | AARP | profile          | VisitorProfile:Proflie Page |
-      | AARP | shop/switch.html | ShopPlan: Switch            |
+      | site | path                                                      | pageName                    |
+      | AARP | profile                                                   | VisitorProfile:Profile Page |
+      | AARP | shop/switch.html                                          | ShopPlan: Switch            |
+      | AARP | plan-recommendation-engine.html                           | Plan Recommendation Engine  |
+      | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator | Drug Cost Estimator         |
 
     @Global_Comps_Footer_UHC
     Examples: 
-      | site | path             | pageName                    |
-      | UHC  | profile          | VisitorProfile:Proflie Page |
-      | UHC  | shop/switch.html | ShopPlan: Switch            |
+      | site | path                                                      | pageName                    |
+      | UHC  | profile                                                   | VisitorProfile:Proflie Page |
+      | UHC  | shop/switch.html                                          | ShopPlan: Switch            |
+      | UHC  | plan-recommendation-engine.html                           | Plan Recommendation Engine  |
+      | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator | Drug Cost Estimator         |
