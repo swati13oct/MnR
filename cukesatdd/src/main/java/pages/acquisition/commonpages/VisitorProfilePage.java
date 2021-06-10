@@ -1152,8 +1152,8 @@ public class VisitorProfilePage extends UhcDriver {
         Map<String, String> expectedData = data.asMap(String.class, String.class);
         Assertion.assertEquals("welcome, " + expectedData.get("Name").toLowerCase(), profileName.getText().trim().toLowerCase());
         Assertion.assertEquals("Your Saved Insurance Plans (1)", savedInsuredPlans.getText().trim());
-        Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy", yourSavedPharmacyAndDrugs.getText().trim());
-        Assertion.assertEquals("Your Saved Doctors & Providers (1)", yourSavedDoctorsAndProviders.getText().trim());
+        Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs (1) & Pharmacy")));
+        Assertion.assertTrue((yourSavedDoctorsAndProviders.getText().trim().contains("Your Saved Doctors & Providers (1)")));
         Assertion.assertEquals("Your Plan Recommendations", yourRecommendations.getText().trim());
         Assertion.assertEquals("Your Enrollments", yourEnrollments.getText().trim());
         Assertion.assertEquals("Manage Profile", manageProfile.getText().trim());
