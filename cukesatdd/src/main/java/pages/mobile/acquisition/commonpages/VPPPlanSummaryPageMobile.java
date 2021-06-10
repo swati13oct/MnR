@@ -923,8 +923,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void openAndValidate() {
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
 			checkModelPopup(driver, 45);
-		else
-			checkModelPopup(driver, 30);
+		/*else
+			checkModelPopup(driver, 30);*/
 		// handleChatPopup();
 		// validateNew(maPlansCount);
 		// validateNew(msPlansCount);
@@ -1858,10 +1858,12 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
 
-			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
+//			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
+			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
 		}
 		if (enrollForPlan != null) {
-			iosScroll(enrollForPlan);
+//			iosScroll(enrollForPlan);
+			scrollToView(enrollForPlan);
 			validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
 			// enrollForPlan.click();
