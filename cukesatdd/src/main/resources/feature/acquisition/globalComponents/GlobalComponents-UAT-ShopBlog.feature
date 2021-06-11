@@ -712,7 +712,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | UAT E2E Regression Scenario 4_AARP | AARP | enroll.html                                         | Enroll Page                | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
       | Avengers AARP                      | AARP | /medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
-    @avengersRegressionUHC @check
+    @avengersRegressionUHC
     Examples:
       | Scenario                           | site | path                                                | pageName                   | UHCUrl                      | tfnXpath                                                       | tfnFlag |
       | UAT E2E Regression Scenario 1_AARP | UHC  | shop.html                                           | Shop Hub Page              | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
