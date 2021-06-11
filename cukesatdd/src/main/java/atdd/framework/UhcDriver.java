@@ -313,7 +313,7 @@ public abstract class UhcDriver {
 		element.clear();
 		jsClickNew(element);
 		for(int i = 0; i < message.length(); i++) {
-			threadsleep(100); 	//Adding some milliseconds wait
+			threadsleep(50); 	//Adding some milliseconds wait
 			char c = message.charAt(i);
 			StringBuilder s = new StringBuilder().append(c);
 			element.sendKeys(s);
@@ -860,7 +860,7 @@ public abstract class UhcDriver {
 			}
 		} catch (Exception e) {
 
-			Assertion.fail("The element " + element.getText() + "is not  found");
+			Assertion.fail("The element " + element + "is not  found");
 			return false;
 		}
 
