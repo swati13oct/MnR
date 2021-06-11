@@ -1532,22 +1532,20 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
+		planName.trim().replaceAll("\u00A00", " ").trim();
 		if (planName.contains("SNP")) {
-//			WebElement plancardsnp = driver.findElement(By.xpath("//a[contains(text(),'" + planName + "']"));
-//			iosScroll(plancardsnp);
-			System.out.println("$$$$$$$$$$$$$$$$" +snpPlanList.getText().trim());
+			// ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(snpPlanList, planName);
-
+			// element = getSpecificPlanSummary(findChildElements(elementData, snpPlanList),
+			// planName);
 		} else if (planName.contains("HMO")) {
-			
-			//boolean plancardma = driver.findElement(By.xpath("//a[contains(text(),'" + planName + "']")).isDisplayed();
-			System.out.println("$$$$$$$$$$$$$$$$" +maPlanList.getText().trim());
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(maPlanList, planName);
 
 		} else if (planName.contains("PDP")) {
-//			WebElement plancardpdp = driver.findElement(By.xpath("//h3[contains(text(),'" + planName + "']"));
-//			iosScroll(plancardpdp);
+			// ElementData elementData = new ElementData("id", "viewDetailsPDP");
+			// element = getSpecificPlanSummary(findChildElements(elementData, pdpPlanList),
+			// planName);
 			isSpecificPlanInfoPresent = getSpecificPlanSummary(pdpPlanList, planName);
 		}
 
@@ -3900,8 +3898,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		System.out.println("Effective date- year value selected");
 		Thread.sleep(2000);
-		// startDrpDwn.click();
-		jsClickMobile(startDrpDwn);
+		startDrpDwn.click();
 		Thread.sleep(2000);
 		iosScroll(startDrpDwnOption);
 		startDrpDwnOption.click();

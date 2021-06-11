@@ -85,7 +85,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'DrugName-noplan-0')]")
 	private WebElement drugName;
 
-	@FindBy(xpath = "//*[contains(@class,'pharminfo')]")
+	@FindBy(css = "ul.drugs-list>li:last-child>span")
 	private WebElement pharmacyAddress;
 
 	@FindAll({ @FindBy(xpath = "//li[@class='drug']") })
@@ -457,17 +457,16 @@ public class VisitorProfilePageMobile extends UhcDriver {
 			System.out.println("############No Providers##############");
 		}
 	}
-	
-    @FindBy(xpath = "//button[contains(@dtmname, 'Add Drugs')]/span")
-    public WebElement AddDrugsGlobal;
-	
-	/**
-     * click edit drugs globally
-     */
-    public void clickAddDrugsBtn() {
-        AddDrugsGlobal.click();
-    }
 
+	@FindBy(xpath = "//button[contains(@dtmname, 'Add Drugs')]/span")
+	public WebElement AddDrugsGlobal;
+
+	/**
+	 * click edit drugs globally
+	 */
+	public void clickAddDrugsBtn() {
+		AddDrugsGlobal.click();
+	}
 
 	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove Modal:Yes Remove')]")
 	public WebElement ConfirmRemoveProvider;
@@ -604,15 +603,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 
 	}
-	
+
 	public DrugDetailsPageMobile clickBackToDCELink() {
-        jsClickNew(backToDrugCostEstimatorLink);
-        waitForPageLoadSafari();
-        if (driver.getCurrentUrl().contains("drugdetails")) {
-            return new DrugDetailsPageMobile(driver);
-        } else
-            return null;
-    }
+		jsClickNew(backToDrugCostEstimatorLink);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("drugdetails")) {
+			return new DrugDetailsPageMobile(driver);
+		} else
+			return null;
+	}
 
 	/**
 	 * Enroll in a plan
@@ -621,13 +620,16 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @return
 	 */
 	public WelcomePageMobile Enroll_OLE_Plan(String planName) {
+
 		WebElement enrollForPlan = null;
 
-		enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-				+ "')]/ancestor::*[contains(@class,'title-container')]//*[contains(@class,'btn') and contains(@dtmname,'Enroll in Plan')]"));
+		enrollForPlan = driver
+				.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'" + planName
+						+ "')]/following::button[contains(@dtmname,'Enroll in Plan')][1]"));
 		if (enrollForPlan != null) {
 			jsClickNew(enrollForPlan);
 		}
+		waitForPageLoadSafari();
 		validateNew(NextBtn);
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
