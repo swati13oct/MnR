@@ -1043,13 +1043,13 @@ public class AREPlanRankingMobile extends UhcDriver {
 	}
 
 	public void deletePlan(int planIndex) {
-		jsClickMobile(plandeleteButtons.get(planIndex - 1));
+		jsClickNew(plandeleteButtons.get(planIndex - 1));
 		threadsleep(5000);
 	}
 
 	public void addPlan() {
 		System.out.println("Adding Plan....");
-		jsClickMobile(addPlan);
+		jsClickNew(addPlan);
 		threadsleep(5000);
 		plansLoader();
 		for (WebElement elem : vppCompare)

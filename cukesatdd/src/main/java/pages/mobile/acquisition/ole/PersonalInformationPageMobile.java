@@ -214,14 +214,15 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		sendkeysMobile(lastNameField, LastName);
 
 		//sendkeys(DOBtxtFld, DOB);
-		sendkeysMobile(DOBtxtFld, DOB);
+//		sendkeysMobile(DOBtxtFld, DOB);
+		sendKeysByCharacter(DOBtxtFld, DOB);
 		
 		if (Gender.contains("Male")) {
 			// GenderSelectMale.click();
-			jsClickMobile(GenderSelectMale);
+			jsClickNew(GenderSelectMale);
 		} else {
 			// GenderSelectFemale.click();
-			jsClickMobile(GenderSelectFemale);
+			jsClickNew(GenderSelectFemale);
 		}
 		//sendkeys(PermanentAdd_Street, Perm_Street);
 		sendkeysMobile(PermanentAdd_Street, Perm_Street);
@@ -230,7 +231,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		sendkeysMobile(PermanentAdd_City, Perm_city);
 		System.out.println("Mailing Question : " + MailingQuestion);
 		if (MailingQuestion.equalsIgnoreCase("no")) {
-			jsClickMobile(SameMailingAddressNo);
+			jsClickNew(SameMailingAddressNo);
 			// CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
 			//sendkeysNew(MailingAdd_Street, Mailing_Street);
 			sendkeysMobile(MailingAdd_Street, Mailing_Street);
@@ -341,7 +342,8 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			throws InterruptedException {
 
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
+//		jsClickNew(NextBtn);
 		/*
 		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", NextBtn);
@@ -368,7 +370,8 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			if (confirmYourEligibilityPage != null) {
 
 				validateNew(NextBtn);
-				jsClickMobile(NextBtn);
+//				jsClickNew(NextBtn);
+				jsClickNew(NextBtn);
 
 				if (driver.getCurrentUrl().contains("special")) {
 					System.out.println("OLE SEP Page is Displayed");
@@ -389,8 +392,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
-			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
-			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
+			/*sendkeysMobile(partAStartDateField, PartAeffectiveDate);
+			sendkeysMobile(partBStartDateField, PartBeffectiveDate);*/
+			
+			sendKeysByCharacter(partAStartDateField, PartAeffectiveDate);
+			sendKeysByCharacter(partBStartDateField, PartBeffectiveDate);
 		}
 
 		return new ConfirmYourEligibilityPageMobile(driver);
@@ -415,16 +421,16 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		// sendkeysNew(MiddleNameField, MiddleName);
 		sendkeysMobile(MiddleNameField, MiddleName);
 		if (emailConfirmation.equalsIgnoreCase("YES")) {
-			jsClickMobile(emailConfirmationYesBtn); // emailConfirmationYesBtn.click();
+			jsClickNew(emailConfirmationYesBtn); // emailConfirmationYesBtn.click();
 		} else
-			jsClickMobile(emailConfirmationNoBtn); // emailConfirmationNoBtn.click();
+			jsClickNew(emailConfirmationNoBtn); // emailConfirmationNoBtn.click();
 
 		if (goGreen.equalsIgnoreCase("YES")) {
 			// goGreenYesBtn.click();
-			jsClickMobile(goGreenYesBtn);
+			jsClickNew(goGreenYesBtn);
 		} else
 			// goGreenNoBtn.click();
-			jsClickMobile(goGreenNoBtn);
+			jsClickNew(goGreenNoBtn);
 
 		// if(emailConfirmation.equalsIgnoreCase("YES") &&
 		// goGreen.equalsIgnoreCase("YES"))
@@ -462,10 +468,10 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		} else {
 			WebElement StateSelected = driver.findElement(By.xpath("//select[@id='state']"));
 			// StateSelected.click();
-			jsClickMobile(StateSelected);
+			jsClickNew(StateSelected);
 			WebElement StateSelectNC = driver.findElement(By.xpath("//option[@value='" + state + "']"));
 
-			jsClickMobile(StateSelectNC);
+			jsClickNew(StateSelectNC);
 			// StateSelectNC.click();
 			WebElement EnterZip = driver.findElement(By.xpath("//input[contains(@id,'zipCode')]"));
 			// EnterZip.sendKeys(ZipCode);
@@ -567,7 +573,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		validateNew(NextBtn);
 		scrollToView(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("special")) {
@@ -583,7 +589,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			if (confirmYourEligibilityPage != null) {
 
 				scrollToView(NextBtn);
-				jsClickMobile(NextBtn);
+				jsClickNew(NextBtn);
 				// waitForPageLoadSafari();
 				if (driver.getCurrentUrl().contains("special")) {
 					System.out.println("OLE SEP Page is Displayed");
@@ -603,12 +609,12 @@ public class PersonalInformationPageMobile extends UhcDriver {
 	 */
 	public VisitorProfilePageMobile saveAndReturnLater() {
 
-		jsClickMobile(saveandReturn);
-		jsClickMobile(enrollSavedClose);
-		jsClickMobile(aarpLogo);
-		jsClickMobile(enrollProfileYes);
-		jsClickMobile(shoppingCartIcon);
-		jsClickMobile(lnkProfile);
+		jsClickNew(saveandReturn);
+		jsClickNew(enrollSavedClose);
+		jsClickNew(aarpLogo);
+		jsClickNew(enrollProfileYes);
+		jsClickNew(shoppingCartIcon);
+		jsClickNew(lnkProfile);
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePageMobile(driver);

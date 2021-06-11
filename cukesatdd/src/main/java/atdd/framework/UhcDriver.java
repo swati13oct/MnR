@@ -300,11 +300,24 @@ public abstract class UhcDriver {
 			// element.sendKeys(Keys.BACK_SPACE);
 
 		} else {
+			scrollToView(element);
 			jsClickNew(element);
 			// element.clear();
 			element.sendKeys(message);
 		}
 
+	}
+	
+	public void sendKeysByCharacter(WebElement element, String message) {
+		scrollToView(element);
+		element.clear();
+		jsClickNew(element);
+		for(int i = 0; i < message.length(); i++) {
+			threadsleep(100); 	//Adding some milliseconds wait
+			char c = message.charAt(i);
+			StringBuilder s = new StringBuilder().append(c);
+			element.sendKeys(s);
+		}
 	}
 
 	/*
@@ -599,6 +612,7 @@ public abstract class UhcDriver {
 	 */
 	public void iOSClick(WebElement element) {
 
+		boolean seleniumClick = false;  
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			js.executeScript(
@@ -608,9 +622,13 @@ public abstract class UhcDriver {
 			scrollToView(element);
 			element.click();
 			sleepBySec(2);
-			System.out.println("Selenium Click executed........" + element.getAttribute("automationTrack"));
+			String automationTrack = element.getAttribute("automationTrack");
+			if(automationTrack != null) {
+				seleniumClick = Boolean.parseBoolean(automationTrack);
+			}
+			System.out.println("Selenium Click executed........" + seleniumClick);
 
-			if (element.getAttribute("automationTrack") != "true") {
+			if (!seleniumClick) {
 				// checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
 				//iosScroll(element);
@@ -665,13 +683,14 @@ public abstract class UhcDriver {
 	}
 
 	public boolean scrollToView(WebElement element) {
-		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-
+		if (driver.getClass().toString().toUpperCase().contains("IOS") ||
+				driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			/*Actions ac = new Actions(driver);
 			ac.moveToElement(element);
 			System.out.println("Scroll finished to element on IOS device");*/
-			
-			iosScroll(element);
+
+			scrollElementInMobileView(element);
+//			iosScroll(element);
 
 		} else {
 			try {
@@ -683,6 +702,17 @@ public abstract class UhcDriver {
 				Assertion.fail("The element " + element + "is not  found");
 				return false;
 			}
+		}
+		return true;
+	}
+	
+	private boolean scrollElementInMobileView(WebElement element) {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
+		} catch (Exception e) {
+			Assertion.fail("The element " + element + " is not  found");
+			return false;
 		}
 		return true;
 	}
@@ -1241,7 +1271,8 @@ public abstract class UhcDriver {
 			Actions act = new Actions(driver); // Works only for Android driver
 			act.click(element).perform();
 		} else
-			jsClickMobile(element);
+			jsClickNew(element);
+//			jsClickMobile(element);
 	}
 
 	public void mobileactionsendkeys(WebElement element, String keys) {
@@ -1482,7 +1513,7 @@ public abstract class UhcDriver {
 		System.out.println("All");
 	}
 
-	public void jsClickMobile(WebElement element) {
+	/*public void jsClickMobile(WebElement element) {
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
@@ -1494,7 +1525,7 @@ public abstract class UhcDriver {
 
 		}
 
-	}
+	}*/
 
 	public String returnDriverStorageJS(String StorageType, String StorageKey) {
 		String ReturnValue = "";

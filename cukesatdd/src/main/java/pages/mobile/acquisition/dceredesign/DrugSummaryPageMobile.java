@@ -946,7 +946,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void selectPreferredMailOrderPharmacy() {
 		waitforElement(preferredMailPharmacy);
 		// preferredMailPharmacy.click();
-		jsClickMobile(preferredMailPharmacy);
+		jsClickNew(preferredMailPharmacy);
 	}
 
 	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
@@ -973,7 +973,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void clickNextButton() {
-		jsClickMobile(nextBtn);
+		jsClickNew(nextBtn);
 	}
 
 	@FindBy(xpath = "//*[@class='pagination']/../p")
@@ -990,7 +990,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	}
 
 	public void clickBackButton() {
-		jsClickMobile(backBtn);
+		jsClickNew(backBtn);
 	}
 
 	public void validateFirstPageDisplayed() {
@@ -1006,7 +1006,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void searchPharmaciesByZipcode(String zipcode) {
 		pharmacyZipcodeSearch.clear();
 		pharmacyZipcodeSearch.sendKeys(zipcode);
-		jsClickMobile(pharmacySearchBtn);
+		jsClickNew(pharmacySearchBtn);
 	}
 
 	public DrugSummaryPage verifyMAPDPlanToggle() {

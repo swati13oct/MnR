@@ -186,7 +186,7 @@ public class OLEStepDefinitionMobile {
 		} else {
 			VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			// TFN = planSummaryPage.GetTFNforPlanType();
+			 TFN = planSummaryPage.GetTFNforPlanType();
 
 			// PlanPremium = planSummaryPage.getPlanPremium(PlanName);
 			welcomePage = planSummaryPage.Enroll_OLE_Plan(PlanName, PlanType);
@@ -495,7 +495,7 @@ public class OLEStepDefinitionMobile {
 		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
 		if (Validation_Status) {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+//			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
 			Assertion.assertTrue(true);
 		} else {
 			System.out.println("TFN, Wunderman Validation in OLE PAGE : " + Validation_Status);

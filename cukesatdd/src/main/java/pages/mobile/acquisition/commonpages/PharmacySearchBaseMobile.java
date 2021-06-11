@@ -198,7 +198,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		// seletPlandropdown.click();
 
-		// jsClickMobile(seletPlandropdown);
+		// jsClickNew(seletPlandropdown);
 		sleepBySec(1);
 		// selectFromDropDownByText(driver, seletPlandropdown, planName);
 		/* To handle iOS dropdown */
@@ -395,7 +395,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	public void selectsPlanYear(String planYear) {
 		waitTllOptionsAvailableInDropdown(yearDropdown, 45);
 		// yearDropdown.click();
-		jsClickMobile(yearDropdown);
+		jsClickNew(yearDropdown);
 		Select yearList = new Select(yearDropdown);
 		yearList.selectByVisibleText(planYear);
 		System.out.println("Selected year='" + planYear + "' from year dropdown");
@@ -494,7 +494,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		/*
 		 * wd.context("NATIVE_APP");
 		 * wd.findElement(By.xpath(".//android.widget.Button[@text='Allow']")).click();
-		 * jsClickMobile(contactUsLink);
+		 * jsClickNew(contactUsLink);
 		 */
 		// contactUsLink.click();
 		/*
@@ -663,7 +663,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		Assertion.assertTrue("PROBLEM - unable to locate the Online Pharmacy Directory link on VPP page",
 				pharmacyValidate(vpp_onlinePharmacyDirectoryLnk));
 		// vpp_onlinePharmacyDirectoryLnk.click();
-		jsClickMobile(vpp_onlinePharmacyDirectoryLnk);
+		jsClickNew(vpp_onlinePharmacyDirectoryLnk);
 		CommonUtility.checkPageIsReady(driver);
 		// Thread.sleep(2000); //note: keep this for the page to load
 		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());

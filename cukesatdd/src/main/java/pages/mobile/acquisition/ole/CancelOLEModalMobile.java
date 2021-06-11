@@ -51,7 +51,7 @@ public class CancelOLEModalMobile extends UhcDriver {
 		validate(BackBtn);
 		// BackBtn.click();
 
-		jsClickMobile(BackBtn);
+		jsClickNew(BackBtn);
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
