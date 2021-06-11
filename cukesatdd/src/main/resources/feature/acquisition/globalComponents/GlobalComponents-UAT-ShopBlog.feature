@@ -679,7 +679,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PagePath | <path>     |
     Then the user click on Get a Plan Recommendation Button and gets back to medicare articles page
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @featurePass
     Examples:
       | Scenario               | site | path                                              | pageName                                |
       | UAT E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
