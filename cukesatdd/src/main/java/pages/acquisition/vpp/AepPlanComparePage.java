@@ -251,7 +251,7 @@ public class AepPlanComparePage extends UhcDriver {
 
         HashMap<String, String> result = new HashMap<String, String>();
 
-        String planNameXPath = "//table[contains(@id,'compare-table')]//thead/tr/th[2]/div/div";
+        String planNameXPath = "//tr[contains(@id,'printPlans')]/th[3]/div";
         WebElement planNameElement = driver.findElement(By.xpath(planNameXPath));
 
         if (planNameElement == null ) {
@@ -281,7 +281,7 @@ public class AepPlanComparePage extends UhcDriver {
 
         //validateNew(driver.findElement(By.id(tableId)));
 
-        String rowXpath = "//table[contains(@id,'" + tableId + "')]//tbody//tr[contains(@class,'uhc')]";
+        String rowXpath = "//table[contains(@id,'" + tableId + "')][1]//tbody//tr[not(contains(@id,'Hide'))]";
         List<WebElement> listOfRowsInPlanCompareTbl = driver.findElements(By.xpath(rowXpath));
 
         if (listOfRowsInPlanCompareTbl == null || listOfRowsInPlanCompareTbl.size() == 0) {
@@ -296,7 +296,7 @@ public class AepPlanComparePage extends UhcDriver {
                 String key = "";
                 String value = "";
 
-                List<WebElement> headerCellXpathList = (listOfRowsInPlanCompareTbl.get(i).findElements(By.tagName("th")));
+                List<WebElement> headerCellXpathList = (listOfRowsInPlanCompareTbl.get(i).findElements(By.tagName("td")));
                 List<WebElement> planCellXpathList = (listOfRowsInPlanCompareTbl.get(i).findElements(By.tagName("td")));
 
                 if (headerCellXpathList.size() != 0) {
@@ -304,7 +304,7 @@ public class AepPlanComparePage extends UhcDriver {
                 }
 
                 if (planCellXpathList.size() != 0) {
-                    value = planCellXpathList.get(0).getText();
+                    value = planCellXpathList.get(1).getText();
                 }
 
                 result.put(key + keyword, value);
