@@ -1082,6 +1082,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			sleepBySec(2);
 
 			// iosScroll(pdpPlansViewLink);
+			scrollToView(pdpPlansViewLink);
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
 			pageloadcomplete();
@@ -1090,14 +1091,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			pageloadcomplete();
 			validateNew(maPlansViewLink, 10);
-			iosScroll(maPlansViewLink);
+//			iosScroll(maPlansViewLink);
+			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			// CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			pageloadcomplete();
-			iosScroll(msPlansViewLink);
+//			iosScroll(msPlansViewLink);
+			scrollToView(msPlansViewLink);
 			jsClickNew(msPlansViewLink);
 			pageloadcomplete();
 			// CommonUtility.waitForPageLoadNew(driver, medSuppZipCode, 30);
@@ -1107,7 +1110,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			pageloadcomplete();
-			iosScroll(snpPlansViewLink);
+//			iosScroll(snpPlansViewLink);
+			scrollToView(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
 			pageloadcomplete();
 			// CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
@@ -1893,7 +1897,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
-
 //			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
 			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
 		}
@@ -2646,7 +2649,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, RightRail_yourGuide, 30);
 		System.out.println(" Page is displayed : checking if the code reaches here");
 		String parentWindow = driver.getWindowHandle();
-		jsClickMobile(RightRail_yourGuide);
+		jsClickNew(RightRail_yourGuide);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -3482,17 +3485,17 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		System.out.println("Effective date- year value selected");
 		Thread.sleep(2000);
 		// part_B_monthDrpDwn.click();
-		jsClickMobile(part_B_monthDrpDwn);
+		jsClickNew(part_B_monthDrpDwn);
 		Thread.sleep(2000);
 		Part_B_monthDrpDwnOption.click();
 		Thread.sleep(2000);
 		// part_B_yearDrpDwn.click();
-		jsClickMobile(part_B_yearDrpDwn);
+		jsClickNew(part_B_yearDrpDwn);
 		Thread.sleep(2000);
 		Part_B_yearDrpDwnOption.click();
 		Thread.sleep(2000);
 		// startDrpDwn.click();
-		jsClickMobile(startDrpDwn);
+		jsClickNew(startDrpDwn);
 		Thread.sleep(2000);
 		startDrpDwnOption.click();
 		System.out.println("Plan to start date selected");
@@ -3661,7 +3664,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// jsClickNew(Start_ApplicationBtn);
 		CommonUtility.waitForPageLoadNew(driver, resumeApplication, 30);
 		// resumeApplication.click();
-		jsClickMobile(resumeApplication);
+		jsClickNew(resumeApplication);
 		System.out.println("Resume application link clicked successfully");
 	}
 
@@ -3885,7 +3888,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		Thread.sleep(2000);
 		System.out.println("Effective date- month value selected");
 		// medSuppOleMaleCheckbox.click();
-		jsClickMobile(medSuppOleMaleCheckbox);
+		jsClickNew(medSuppOleMaleCheckbox);
 		yearDrpDwnPartA.click();
 		Thread.sleep(2000);
 		yearDrpDwnOptionPartA.click();
@@ -3896,14 +3899,14 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		System.out.println("Effective date- month value selected");
 
 		// yearDrpDwnPartB.click();
-		jsClickMobile(yearDrpDwnPartB);
+		jsClickNew(yearDrpDwnPartB);
 		Thread.sleep(2000);
 		yearDrpDwnOptionPartB.click();
 
 		System.out.println("Effective date- year value selected");
 		Thread.sleep(2000);
 		// startDrpDwn.click();
-		jsClickMobile(startDrpDwn);
+		jsClickNew(startDrpDwn);
 		Thread.sleep(2000);
 		iosScroll(startDrpDwnOption);
 		startDrpDwnOption.click();
@@ -4089,7 +4092,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void enterAddressDetails(String address, String city, String state) {
 		validateNew(searchByAddressButton);
 		// searchByAddressButton.click();
-		jsClickMobile(searchByAddressButton);
+		jsClickNew(searchByAddressButton);
 		System.out.println(" clicking on searchby address button");
 		validateNew(addressInput);
 		sendkeys(addressInput, address);
@@ -4139,7 +4142,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		String mproviderinfo = ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		// ProviderSearchLink.click();
-		jsClickMobile(ProviderSearchLink);
+		jsClickNew(ProviderSearchLink);
 		ArrayList<String> providerNames = new ArrayList<String>();
 		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));

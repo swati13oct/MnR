@@ -110,8 +110,9 @@ public class WelcomePageMobile extends UhcDriver{
 		System.out.println("Validating Welcome Page for OLE");
 		if (MRScenario.environment.equals("offline") || MRScenario.environment.equals("prod"))
 			checkModelPopup(driver,45);
-		else 
-			checkModelPopup(driver,10);
+		//Commenting modal check for stage environment
+		/*else 
+			checkModelPopup(driver,10);*/
 		validateNew(WelcomePageHeader);
 		validateNew(PlanYear_PlanName);
 	}
@@ -182,7 +183,7 @@ public class WelcomePageMobile extends UhcDriver{
 	public PersonalInformationPageMobile navigate_to_Personal_Information_page() {
 		
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Personal')]")))){			
 			System.out.println("OLE Personal Information Page is Displayed");
@@ -206,7 +207,7 @@ public class WelcomePageMobile extends UhcDriver{
 	public LearnMoreModalMobile OpenLearnMore() {
 		checkModelPopup(driver);
 		validate(LearnMoreButton);
-		jsClickMobile(LearnMoreButton);
+		jsClickNew(LearnMoreButton);
 		//LearnMoreButton.click();
 		try {
 			Thread.sleep(6000);
