@@ -242,7 +242,7 @@ Feature: 1.08 UAT-Site Search Flows
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter |         123456 |
       | E2E Scenario 3_AMP | AARP | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | InvalidCharacter | @@@@           |
 
-    @SiteSearch_UHC_03 @regressionUHC @vbfGate
+    @SiteSearch_UHC_03 @regressionUHC
     Examples: 
       | Scenario           | site | TID   | zipcode | isMultutiCounty | county              | plantype | planName                                    | searchValue | Error            | NewSearchValue |
       | E2E Scenario 3_UMS | UHC  | 15652 |   19019 | No              | Philadelphia County | MAPD     | AARP Medicare Advantage Choice Plan 2 (PPO) | Medicare    | Empty            | [blank]        |
