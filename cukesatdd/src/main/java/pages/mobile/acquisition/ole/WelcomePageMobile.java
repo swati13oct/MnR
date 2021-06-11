@@ -158,8 +158,9 @@ public class WelcomePageMobile extends UhcDriver{
 
 
 	public boolean ValidateTFN(String TFN) {
-		iosScroll(RightRailTFN);		
-		if(validate(RightRailTFN)){
+//		iosScroll(RightRailTFN);
+		scrollToView(RightRailTFN);
+		if(validateNew(RightRailTFN)){
 			String TFN_OLE = RightRailTFN.getText();
 			System.out.println(TFN);
 			System.out.println(TFN_OLE);
