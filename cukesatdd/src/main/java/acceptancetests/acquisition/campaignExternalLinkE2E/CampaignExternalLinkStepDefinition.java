@@ -765,5 +765,96 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		Assert.fail("Error Loading VPP plan summary page");
 	}
 }
+
+	@Given("^user is on new campaign external Links page$")
+	public void user_ison_externallinksUAT(DataTable givenAttributes) throws Exception  {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap =  DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String url = memberAttributesMap.get("External Link");
+		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
+
+		campaignExternalLinkspage.openUrl(url);
+
+	}
+
+	@Then("^user validates error messages on request an appointment$")
+	public void user_validates_error_messages_on_request_an_appointment() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateErrorMsg();
+	}
+
+	@Then("^user enters the details on request an appointment$")
+	public void user_enters_the_details_on_request_an_appointment() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.enterdetais();
+
+	}
+
+	@Then("^user clicks on find plans in your area and navigates to shop for a plan$")
+	public void user_clicks_on_find_plans_in_your_area_and_navigates_to_shop_for_a_plan() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateFindPlansInyourArea();
+		campaignExternalLinkspage.naviagteBack();
+	}
+
+	@Then("^user clicks on find a doctor and validates the page$")
+	public void user_clicks_on_find_a_doctor_and_validates_the_page() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateFindADoc();
+		campaignExternalLinkspage.naviagteBack();
+	}
+
+	@Then("^user clicks on privacy policy link$")
+	public void user_clicks_on_privacy_policy_link() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validatePrivacy();
+	}
+
+	@Then("^user clicks on accessibility link$")
+	public void user_clicks_on_accessibility_link() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateAccess();
+	}
+
+	@Then("^user validates error messages on get more information$")
+	public void user_validates_error_messages_on_get_more_information() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateErrorMsgtakeadvantage();
+	}
+	@Then("^user enters the details on get more information$")
+	public void user_enters_the_details_on_get_more_information() throws Throwable {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.enterdetailstakeadvantage();
+
+	}
+
+//	@Then("user validates zipcode component and navigates to VPP")
+//	public void user_validates_zipcode_component_and_navigates_to_vpp() {
+//		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+//				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+//		campaignExternalLinkspage.validatezipcodecomponent();
+//	}
+//
+
 }
 
