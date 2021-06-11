@@ -531,7 +531,7 @@ public class HeaderFooterMobile extends UhcDriver {
 	// Back to Top Function in Footer mobile
 	public void backtoTopFunctionMobile() {
 		//mobileUtils.mobileFindElementBeforeCallBanner(footerBackToTopLink, "50%", 5, true);
-		jsClickMobile(footerBackToTopLink);
+		jsClickNew(footerBackToTopLink);
 		String actualpageurl = driver.getCurrentUrl();
 		if (actualpageurl.contains("aarpmedicare")) {
 			validate(AARPlogoInHeader, 30);

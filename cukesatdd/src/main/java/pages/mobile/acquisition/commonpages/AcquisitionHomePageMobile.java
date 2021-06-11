@@ -810,7 +810,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
 			System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
 			scrollToView(TFNelement);
-			jsClickMobile(TFNelement);
+			jsClickNew(TFNelement);
 			System.out.println("@@@@@@@@@@@@@@@ TFN Clicked @@@@@@@@@@@@@@@");
 			threadsleep(3000);
 			verifyTFNPopUp(TFNelement);
@@ -1443,14 +1443,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public PharmacySearchPageMobile navigateToEnrollMobile() {
 		waitforElement(menu);
 		if (menu.isDisplayed()) {
-			jsClickMobile(menu);
+			jsClickNew(menu);
 			if (OurPlans.isDisplayed()) {
-				jsClickMobile(OurPlans);
+				jsClickNew(OurPlans);
 				while (!enroll.isDisplayed()) {
 					JavascriptExecutor jse = (JavascriptExecutor) driver;
 					jse.executeScript("window.scrollBy(0,100)", "");
 				}
-				jsClickMobile(enroll);
+				jsClickNew(enroll);
 			}
 		}
 
@@ -2307,7 +2307,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacyLocator() {
-		jsClickMobile(Menu);
+		jsClickNew(Menu);
 
 		waitforElement(ShopForaplan);
 		if (ShopForaplan.isDisplayed()) {

@@ -170,15 +170,15 @@ public class EditResponseMobilePage extends GlobalWebElements {
 		inputValues = userInput;
 		String flow = inputValues.get("Plan Type");
 		if (flow.equalsIgnoreCase("pdp")) {
-			jsClickMobile(PDPViewPlansLink);
+			jsClickNew(PDPViewPlansLink);
 			pdpEditResponseButton.click();
 		} else {
 			if (inputValues.get("SNP Options").equalsIgnoreCase("none")) {
-				jsClickMobile(MAViewPlansLink); // Have zip with snp for all flows
+				jsClickNew(MAViewPlansLink); // Have zip with snp for all flows
 				mapdEditResponseButton.click();
 			}
 			else {
-				jsClickMobile(SNPViewPlansLink);
+				jsClickNew(SNPViewPlansLink);
 				snpEditResponseButton.click();
 			}
 		}

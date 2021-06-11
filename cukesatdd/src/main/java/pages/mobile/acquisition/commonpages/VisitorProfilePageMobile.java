@@ -146,7 +146,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public AcquisitionHomePageMobile addPlan() {
 		// addPlans.click();
 		scrollToView(addPlans);
-		jsClickMobile(addPlans);
+		jsClickNew(addPlans);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
@@ -307,7 +307,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public void deletePlans(String plans) {
 		if (validate(profileMultiYear, 10)) {
 			// profileNxtYrPlans.click();
-			jsClickMobile(profileNxtYrPlans);
+			jsClickNew(profileNxtYrPlans);
 			if (driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0)
 				driver.findElement(By.xpath(
 						"//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]"))
@@ -709,7 +709,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		try {
 			// Thread.sleep(10000);
 			// SbackToPlans.click();
-			jsClickMobile(backToPlans);
+			jsClickNew(backToPlans);
 
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/plan-summary")) {

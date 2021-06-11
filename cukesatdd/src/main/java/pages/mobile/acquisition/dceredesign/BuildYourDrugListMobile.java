@@ -172,7 +172,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public void clickReviewDrugCostBtn() {
 
-		jsClickMobile(reviewDrugCost);
+		jsClickNew(reviewDrugCost);
 	}
 
 	@FindBy(xpath = "//label[@id='drug-label']")
