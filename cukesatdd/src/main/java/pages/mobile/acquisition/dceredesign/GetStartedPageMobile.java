@@ -76,7 +76,7 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	public void clickAddDrugsBtn() {
 		validateNew(AddMyDrugsBtn);
-		jsClickMobile(AddMyDrugsBtn);
+		jsClickNew(AddMyDrugsBtn);
 		// AddMyDrugsBtn.click();
 		// return new ZipCodePlanYearCapturePage(driver);
 		/*

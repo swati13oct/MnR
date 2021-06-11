@@ -304,7 +304,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		boolean Validation_Flag = true;
 		scrollToView(ChangingNewMedicareRadio);
 		if (ChangingNewMedicareRadio.isDisplayed()) {
-			jsClickMobile(ChangingNewMedicareRadio);
+			jsClickNew(ChangingNewMedicareRadio);
 			if (!validate(OtherReason) && validate(NoneApply)) {
 				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
 				Validation_Flag = true;
@@ -315,7 +315,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		}
 
 		ChangingCurrentMedicareRadio.isDisplayed();
-		jsClickMobile(ChangingCurrentMedicareRadio);
+		jsClickNew(ChangingCurrentMedicareRadio);
 
 		System.out.println("PlanType : " + planType);
 		try {
@@ -324,7 +324,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		// validateNew(ChangingCurrentMedicareRadio);
-		// jsClickMobile(ChangingCurrentMedicareRadio);
+		// jsClickNew(ChangingCurrentMedicareRadio);
 		// ChangingCurrentMedicareRadio.click();
 		if (planType.contentEquals("MA")) {
 			if (validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer)
@@ -401,7 +401,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public CoverageInformationPageMobile navigate_to_Coverage_Information_page() {
 
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		/*
 		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", NextBtn);
@@ -433,7 +433,8 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 			}*/
 			try {
 				WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
-				currentOptionChkBx.click();
+//				currentOptionChkBx.click();
+				jsClickNew(currentOptionChkBx);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("Not able to select option");
@@ -474,7 +475,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public ProposedEffectiveDatePageMobile navigate_to_Proposed_Effective_Date_Page() {
 
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		waitForPageLoadSafari();
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
@@ -500,11 +501,11 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		Validation_Flag &= NewMedicare.getText().trim()
 				.equalsIgnoreCase("I'm new to Medicare and enrolling for the first time");
 		// System.out.println("SEP plan is Clicked on the " +NewMedicareRadio);
-		jsClickMobile(ChangingNewMedicareRadio);
+		jsClickNew(ChangingNewMedicareRadio);
 
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
 		// validateNew(NextBtn);
-		// jsClickMobile(NextBtn);
+		// jsClickNew(NextBtn);
 
 		return Validation_Flag;
 	}
