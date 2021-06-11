@@ -3958,6 +3958,27 @@ public class VppPlanCompareMobile {
 			break;
 		}
 	}
+	
+	
+	@Then("^user saves all plans as favorite$")
+	public void user_saves_all_plans_as_favorite(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		// Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		String planType = memberAttributesMap.get("Plan Type");
+
+		plansummaryPage.saveAllPlans(savePlanNames, planType);
+	}
 
 	@Then("^user saves all plans as favorite on AARP site$")
 	public void user_saves_all_plans_as_favorite_on_AARP_site(DataTable givenAttributes) {

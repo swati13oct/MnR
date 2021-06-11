@@ -909,7 +909,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	private boolean getSpecificPlanSummary(WebElement element, String planName) {
-		iosScroll(element);
+		scrollToView(element);
 		if (element.getText().trim().contains(planName)) {
 			return true;
 		} else {
@@ -1081,7 +1081,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
 
-			// iosScroll(pdpPlansViewLink);
+			// scrollToView(pdpPlansViewLink);
 			scrollToView(pdpPlansViewLink);
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
@@ -1091,7 +1091,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			pageloadcomplete();
 			validateNew(maPlansViewLink, 10);
-//			iosScroll(maPlansViewLink);
+//			scrollToView(maPlansViewLink);
 			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
@@ -1099,7 +1099,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("MS")) {
 			// CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			pageloadcomplete();
-//			iosScroll(msPlansViewLink);
+//			scrollToView(msPlansViewLink);
 			scrollToView(msPlansViewLink);
 			jsClickNew(msPlansViewLink);
 			pageloadcomplete();
@@ -1110,7 +1110,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			pageloadcomplete();
-//			iosScroll(snpPlansViewLink);
+//			scrollToView(snpPlansViewLink);
 			scrollToView(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
 			pageloadcomplete();
@@ -1154,8 +1154,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
+		
 		validateNew(ProviderSearchLink);
-		iosScroll(ProviderSearchLink);
+		scrollToView(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1777,7 +1778,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		if (allMAPlans != null) {
 			for (int i = 0; i < plansForCompare; i++) {
-				iosScroll(allMAPlans.get(i));
+				scrollToView(allMAPlans.get(i));
 				jsClickNew(allMAPlans.get(i));
 				// allMAPlans.get(i).click();
 				System.out.println("Plan added to compare : " + i);
@@ -1899,7 +1900,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
 		}
 		if (enrollForPlan != null) {
-//			iosScroll(enrollForPlan);
+//			scrollToView(enrollForPlan);
 			scrollToView(enrollForPlan);
 			validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
@@ -2938,7 +2939,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Proceed to click to save plan");
 			// WebDriverWait d = new WebDriverWait(driver, 20);
 			// d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
-			iosScroll(listOfSavePlanIcons.get(0));
+			scrollToView(listOfSavePlanIcons.get(0));
 			scrollToView(listOfSavePlanIcons.get(0));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
@@ -2956,16 +2957,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				if (State.equalsIgnoreCase("Pennsylvania") || State.equalsIgnoreCase("Puerto Rico")
 						|| State.equalsIgnoreCase("Virginia")) {
 					if (validate(closeProfilePopup))
-						iosScroll(closeProfilePopup);
+						scrollToView(closeProfilePopup);
 					jsClickNew(closeProfilePopup);
 				} else {
 					if (validate(keepShoppingBtn))
-						iosScroll(keepShoppingBtn);
+						scrollToView(keepShoppingBtn);
 					jsClickNew(keepShoppingBtn);
 				}
 			} else {
 				if (validate(keepShoppingBtn))
-					iosScroll(keepShoppingBtn);
+					scrollToView(keepShoppingBtn);
 				jsClickNew(keepShoppingBtn);
 			}
 			CommonUtility.checkPageIsReady(driver);
@@ -3907,7 +3908,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		jsClickNew(startDrpDwn);
 
 		Thread.sleep(2000);
-		iosScroll(startDrpDwnOption);
+		scrollToView(startDrpDwnOption);
 		startDrpDwnOption.click();
 
 		System.out.println("Plan to start date selected");
@@ -4947,7 +4948,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public ComparePlansPageMobile clickOnCompareLink() {
 		List<WebElement> compareLinks = driver.findElements(
 				By.xpath("//*[contains(@class,'multiple-added-text')]//button[contains(text(),'Compare plans')]"));
-		iosScroll(compareLinks.get(1));
+		scrollToView(compareLinks.get(1));
 		jsClickNew(compareLinks.get(1));
 		waitForPageLoadSafari();
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
@@ -4969,7 +4970,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			List<WebElement> compareLinks = driver
 					.findElements(By.xpath(".//*[@id='plan-list-1']//button[contains(text(),'Compare plans')]"));
 			moveMouseToElement(compareLinks.get(1));
-			iosScroll(compareLinks.get(1));
+			scrollToView(compareLinks.get(1));
 			jsClickNew(compareLinks.get(1));
 			// compareLinks.get(1).click();
 		} else {
@@ -5392,7 +5393,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public pages.mobile.acquisition.commonpages.ComparePlansPageMobile clickFirstComparePlanBtn(String planType) {
 		// TODO Auto-generated method stub
-		iosScroll(firstComparePlanButton);
+		scrollToView(firstComparePlanButton);
 		jsClickNew(firstComparePlanButton);
 		CommonUtility.waitForPageLoad(driver, comparePgnHeader, 5);
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
