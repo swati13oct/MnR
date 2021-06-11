@@ -1204,7 +1204,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Preferred Mail Pharmacy Modal Text : " + WhyNAText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		if (WhytheseAmountsText.contains("Preferred Mail Service")&& WhyNAText.contains("Tier 5 drugs cannot be filled with a mail service pharmacy")) {
+		if (WhytheseAmountsText.contains("Preferred Mail Service")) {
 			Assertion.assertTrue("Preferred Mail Pharmacy Copay and Modals validated", true);
 		} else
 			Assertion.fail("Preferred Mail Pharmacy Copay and Modals NOT validated");
