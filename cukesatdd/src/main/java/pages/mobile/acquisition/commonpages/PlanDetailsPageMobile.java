@@ -929,8 +929,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		for (int i = 0; i < additionalBenefits.size(); i = i + 2) {
 			if (additionalBenefits.get(i).get(1).contains("Fitness")) {
-				AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"
-						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				AdditionalBenefitType = driver
+						.findElement(By.xpath("//div[contains(text(), '" + additionalBenefits.get(i).get(1)
+								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
 				ActualTextforBenefit = driver.findElement(By.xpath("//div[contains(text(), '"
 						+ additionalBenefits.get(i).get(1)
@@ -942,8 +943,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 					Assertion.fail("Proper value not found");
 				}
 			} else {
-				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"
-						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				AdditionalBenefitType = driver
+						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
+								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
 				ActualTextforBenefit = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)

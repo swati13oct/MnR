@@ -1367,15 +1367,6 @@ public abstract class UhcDriver {
 		javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
 
-	// IOSElement picker= (IOSElement) new
-	// WebDriverWait(driver,60).until(ExpectedConditions.elementToBeClickable(By.xpath("//XCUIElementTypePickerWheel")));
-	// picker.setValue(option);
-
-	// ((IOSDriver)driver).findElement(MobileBy.className("UIAPickerWheel")).sendKeys(option);
-	// ((IOSElement)driver.findElement(By.xpath("//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATextField[7]"))).setValue(option);
-	// ((WebElement) ((IOSDriver)
-	// driver).findElement(MobileBy.xpath("//XCUIElementTypePickerWheel[1]//XCUIElementTypePickerWheel[1]"))).sendKeys(option);
-	// ((IOSDriver)driver).findElement(By.className("XCUIElementTypePickerWheel")).sendKeys(option);
 
 	public void clickTextIOSNative(String text) {
 
