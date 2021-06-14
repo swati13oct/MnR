@@ -1,4 +1,5 @@
 target/
+test-output/
 .settings/
 .project
 .classpath
@@ -9,9 +10,6 @@ target/
 .jquery-1.6.4.min.js
 .style.css
 .bin/
-.reports/
 reports/
 bin/
-cukesatdd/.classpath
-cukesatdd/src/main/resources/config/ci/config.properties
-/cukesatdd/*.classpath
+config.properties

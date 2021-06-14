@@ -8,20 +8,16 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.CommonConstants;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
@@ -258,7 +254,15 @@ public class OLEconfirmationPage extends UhcDriver{
 				   proposedeffectiveDate = proposedeffectiveDate.substring(0, 10);
 				   gpsData.put("Proposed Effective date", proposedeffectiveDate);  					   
 					System.out.println("--------------------Storing Data for Eligibility Page Started----------------------"+proposedeffectiveDate);
-
+					
+				   //Credit Card Details
+				   String creditCardNumber = rs.getString("CREDIT_CARD_NUMBER");
+				   gpsData.put("Credit Card Number", creditCardNumber);
+				   String creditCardNameOnCard = rs.getString("CREDIT_CARD_NAME_ON_CARD");
+				   gpsData.put("Credit Card Name On Card", creditCardNameOnCard);
+				   String creditCardExpirationDate = rs.getString("CREDIT_CARD_EXPIRATION_DATE");
+				   gpsData.put("Credit Card Expiration Date", creditCardExpirationDate);
+				   
 				   //PCP Page
 				   String pcpName = rs.getString("PRIMARY_CARE_PHYSICIAN");
 				   pcpName = pcpName.replaceAll("-", "");
@@ -468,7 +472,7 @@ public Connection createDataBaseConnection() {
 			for (String key : matched.keySet()) {
 				String matchedValue = key + "\t" + matched.get(key);
 			    System.out.println(matchedValue);
-			  Assert.assertTrue(matchedValue, flag);
+			  Assertion.assertTrue(matchedValue, flag);
 			}
 
 			// print out mismatched
@@ -480,7 +484,7 @@ public Connection createDataBaseConnection() {
 			for (String key : mismatched.keySet()) {
 				String mismatchedValue = key + "\t" + mismatched.get(key);
 			    System.out.println(mismatchedValue);
-			  Assert.assertTrue(mismatchedValue, flag);
+			  Assertion.assertTrue(mismatchedValue, flag);
 			}
 		}
 		return flag;

@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommendation Engine
 
   @PRE @planrecommendation @zipcodepage @siglecounty @F372735 @F511315
@@ -39,9 +39,9 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
     Examples: 
       | Zipcode | isMultutiCounty | county       |
       |   78006 | YES             | Bexar County |
-      |   22222 | NO              |              |
-      |    1234 | NO              |              |
-      |     123 | NO              |              |
-      |      12 | NO              |              |
-      |       1 | NO              |              |
-      |         | NO              |              |
+      |   22222 | NO              | [blank]      |
+      |    1234 | NO              | [blank]      |
+      |     123 | NO              | [blank]      |
+      |      12 | NO              | [blank]      |
+      |       1 | NO              | [blank]      |
+      | [blank] | NO              | [blank]      |

@@ -1,33 +1,29 @@
 package acceptancetests.acquisition.globalcomponents;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.EnterZipCodePage;
-import pages.acquisition.ulayer.AboutUsAARPPage;
-import pages.acquisition.ulayer.AcquisitionHomePage;
-import pages.acquisition.ulayer.AgentsnBrokersAARPPage;
-import pages.acquisition.ulayer.ContactUsAARPPage;
-import pages.acquisition.ulayer.DisclaimersAARPPage;
-import pages.acquisition.ulayer.PrivacyPolicyAARPPage;
-import pages.acquisition.ulayer.SiteMapAARPPage;
-import pages.acquisition.ulayer.TermsnConditionsAARPPage;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AboutUsAARPPage;
+import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.AgentsnBrokersAARPPage;
+import pages.acquisition.commonpages.ContactUsAARPPage;
+import pages.acquisition.commonpages.DisclaimersAARPPage;
+import pages.acquisition.commonpages.PrivacyPolicyAARPPage;
+import pages.acquisition.commonpages.SiteMapAARPPage;
+import pages.acquisition.commonpages.TermsnConditionsAARPPage;
 
 /**
  *Functionality:Global Header Footer 
@@ -43,7 +39,7 @@ public class GlobalComponentsStepDefinitionAARP {
 
 	@Given("^user is on acquisition home page of AARP Site$")
 	public void user_is_on_acquisition_home_page_of_AARP_Site() {
-		WebDriver wd = getLoginScenario().getWebDriver();
+		WebDriver wd = getLoginScenario().getWebDriverNew();
 
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
 		
@@ -57,7 +53,7 @@ public class GlobalComponentsStepDefinitionAARP {
 	/**
 	 * @toDo:user accesses global footer
 	 */
-	@When("^user accesses global footer of the AARP Medicare Plans home page$")
+	/*@When("^user accesses global footer of the AARP Medicare Plans home page$")
 	public void access_global_footer_aarp() {
 
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -65,9 +61,9 @@ public class GlobalComponentsStepDefinitionAARP {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateFooterLinks();
 		} else {
-			Assert.fail("Home page not found");
+			Assertion.fail("Home page not found");
 		}
-	}
+	}*/
 	
 //	@Given("^the user is on medicare acquisition site landing page$")
 //	public void the_user_on__medicare_acquisition_Site(DataTable givenAttributes) {
@@ -98,9 +94,9 @@ public class GlobalComponentsStepDefinitionAARP {
 		if(aboutUsAARPPage!= null){
 			getLoginScenario().saveBean(PageConstants.AARP_ABOUT_US_PAGE,
 					aboutUsAARPPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("Aboutus page not found");
+			Assertion.fail("Aboutus page not found");
 		}
 
 
@@ -116,9 +112,9 @@ public class GlobalComponentsStepDefinitionAARP {
 		ContactUsAARPPage contactUsAARPPage = aquisitionhomepage.contactUsFooterClick();
 		if (contactUsAARPPage != null) {
 			getLoginScenario().saveBean(PageConstants.AARP_Contact_US_PAGE, contactUsAARPPage);
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("contactus page not found");
+			Assertion.fail("contactus page not found");
 		}
 	}
 
@@ -134,9 +130,9 @@ public class GlobalComponentsStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.AARP_SITE_MAP_PAGE,
 					siteMapAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("sitemap page not found");
+			Assertion.fail("sitemap page not found");
 		}
 	}
 	
@@ -152,9 +148,9 @@ public class GlobalComponentsStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.AARP_PRIVACY_POLICY_PAGE,
 					privacyPolicyAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("privacypolicy page not found");
+			Assertion.fail("privacypolicy page not found");
 		}
 	}
 
@@ -170,9 +166,9 @@ public class GlobalComponentsStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.AARP_TERMS_AND_CONDITIONS_PAGE,
 					termsnConditionsAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("terms&conditions page not found");
+			Assertion.fail("terms&conditions page not found");
 		}
 	}
 
@@ -188,9 +184,9 @@ public class GlobalComponentsStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.AARP_DISCLAIMERS_PAGE,
 					disclaimersAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("disclaimers page not found");
+			Assertion.fail("disclaimers page not found");
 		}
 	}
 
@@ -206,9 +202,9 @@ public class GlobalComponentsStepDefinitionAARP {
 			getLoginScenario().saveBean(PageConstants.AARP_AGENTS_AND_BROKERS_PAGE,
 					agentsnBrokersAARPPage);
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
-			Assert.fail("agents&brokers page not found");
+			Assertion.fail("agents&brokers page not found");
 		}
 	}
 
@@ -222,7 +218,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		  getLoginScenario() .getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		  AcquisitionHomePage aquisitionHomePageReload =
 		  aquisitionhomepage.homeFooterClick();
-		  //Assert.assertTrue("home page not found", aquisitionHomePageReload!= null); 
+		  //Assertion.assertTrue("home page not found", aquisitionHomePageReload!= null); 
 	  }
 	 	
 	
@@ -230,12 +226,12 @@ public class GlobalComponentsStepDefinitionAARP {
 	/**
 	 * @toDo:user clicks on Request Assistance and validates modal window
 	 */
-	@And("^user clicks on Request Assistance and validates modal window ulayer$")
+	/*@And("^user clicks on Request Assistance and validates modal window ulayer$")
 	public void user_clicks_on_Request_Assistance_and_validates_modal_window_ulayer() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickRequestAsistancce();
-	}
+	}*/
 	
 	@When("^user accesses global header of the AARP Medicare Plans home page$")
 	public void access_global_header_aarp() {
@@ -245,7 +241,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateHeaderLinks();
 		} else {
-			Assert.fail("Home page not found");
+			Assertion.fail("Home page not found");
 		}
 	}
 	
@@ -253,7 +249,7 @@ public class GlobalComponentsStepDefinitionAARP {
 	public void user_verifies_the_AARP_logo_on_home_page() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateAARPlogo();		
+		aquisitionhomepage.validateLogo();		
 	}
 
 	@And("^user clicks on Sign in link on home page in aarp$")
@@ -275,7 +271,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		AcquisitionHomePage aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
-		Assert.assertTrue("home page not found", aquisitionHomePageReload!= null);
+		Assertion.assertTrue("home page not found", aquisitionHomePageReload!= null);
 	}
 
 	@When("^user vaidates the state drop down link on home page$")
@@ -307,12 +303,13 @@ public class GlobalComponentsStepDefinitionAARP {
 	}
 	@Given("^the user navigates to following AARP medicare acquisition site page$")
 	public void the_user_navigates_to_following_AARP_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : "+path);
@@ -331,7 +328,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateGlobalFooterLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 
@@ -342,7 +339,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateSubNavShopPlanLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 
@@ -353,7 +350,7 @@ public class GlobalComponentsStepDefinitionAARP {
 		if (aquisitionhomepage != null) {
 			aquisitionhomepage.validateSubNavMedEdLinks();
 		} else {
-			Assert.fail("Home Page not Loading");
+			Assertion.fail("Home Page not Loading");
 		}
 	}
 
@@ -395,8 +392,8 @@ public class GlobalComponentsStepDefinitionAARP {
 	public void the_user_validates_Pro_active_Chat() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateChatProActive();
-		aquisitionhomepage.validateProActiveChatpopup();	
+	/*	aquisitionhomepage.validateChatProActive();
+		aquisitionhomepage.validateProActiveChatpopup();*/	
 		
 	}
 

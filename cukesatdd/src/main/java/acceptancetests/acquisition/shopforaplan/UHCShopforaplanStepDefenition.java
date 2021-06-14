@@ -1,24 +1,8 @@
 package acceptancetests.acquisition.shopforaplan;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.EnrollmentBasicsPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import pages.acquisition.bluelayer.ShopforaplanUHClayer;
 
 
 public class UHCShopforaplanStepDefenition {
@@ -30,7 +14,7 @@ public class UHCShopforaplanStepDefenition {
 		return loginScenario;
 	}
 
-	@Given("^the user hovesr screen over the shop for a plan drop down$")
+	/*@Given("^the user hovesr screen over the shop for a plan drop down$")
 	public void the_user_hovesr_screen_over_the_shop_for_a_plan_drop_down() throws Throwable {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 //		ShopforaplanUHClayer shopaplan = (ShopforaplanUHClayer) getLoginScenario().getBean(PageConstants.SHOP_FOR_A_PLAN_UHCLAYER);
@@ -40,12 +24,12 @@ public class UHCShopforaplanStepDefenition {
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_UHCLAYER, shop);
 		}
 		else {
-			Assert.fail("Issue in selecting a plan drop down");
+			Assertion.fail("Issue in selecting a plan drop down");
 		}
 
-	}
+	}*/
 
-	@When("^user enters the email address and click on the submit button$")
+	/*@When("^user enters the email address and click on the submit button$")
 	public void user_enters_the_email_address_and_click_on_the_submit_button(DataTable givenAttributes)
 			throws Throwable {
 		if (!MRScenario.environment.equalsIgnoreCase("offline")) {
@@ -61,9 +45,9 @@ public class UHCShopforaplanStepDefenition {
 		} else {
 			System.out.println("Skipping the submit functionality in Offline-Prod environment");
 		}
-	}
+	}*/
 
-	@Then("^user should be able to see the Message on the screen$")
+	/*@Then("^user should be able to see the Message on the screen$")
 	public void user_should_be_able_to_see_the_Message_on_the_screen(DataTable givenAttributes) throws Throwable {
 		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 		String Message = memberAttributesRow.get(0).getCells().get(1);
@@ -74,9 +58,9 @@ public class UHCShopforaplanStepDefenition {
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_UHCLAYER, shopaplanpage);
 		else
 			System.out.println("Message is not displayed ");
-	}
+	}*/
 
-	@When("^user clicks on the plan selector tool from the shop for a plan drop down$")
+	/*@When("^user clicks on the plan selector tool from the shop for a plan drop down$")
 	public void user_clicks_on_the_plan_selector_tool_from_the_shop_for_a_plan_drop_down() throws Throwable {
 		ShopforaplanUHClayer shopaplan = (ShopforaplanUHClayer) getLoginScenario()
 				.getBean(PageConstants.SHOP_FOR_A_PLAN_UHCLAYER);
@@ -206,6 +190,6 @@ public class UHCShopforaplanStepDefenition {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, planyear);
-	}
+	}*/
 
 }

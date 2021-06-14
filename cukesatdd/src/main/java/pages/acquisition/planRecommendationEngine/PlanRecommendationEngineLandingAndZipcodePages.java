@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.HashMap;
@@ -13,11 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
+public class PlanRecommendationEngineLandingAndZipcodePages extends GlobalWebElements {
 
 	public PlanRecommendationEngineLandingAndZipcodePages(WebDriver driver) {
 		super(driver);
@@ -27,7 +22,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 		waitforElementVisibilityInTime(getStartedBtn, 30);
 
@@ -145,7 +140,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 	public void landingpage() {
 		System.out.println("Validating Title: ");
 //		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-//		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
+//		Assertion.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));
 		String ExpectedTitle = "plan";
 		validate(landingpageHeader, 30);
 		String ActualTitle = landingpageHeader.getText();
@@ -204,7 +199,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		threadsleep(5000);
 		jsClickNew(continueBtn);
 		waitforElementVisibilityInTime(coverageTitle, 30);
-//		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+//		Assertion.assertTrue(coverageTitle.getText().contains("coverage"));
 	
 	}
 
@@ -227,22 +222,22 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 		threadsleep(5000);
 		jsClickNew(continueBtn);
 		waitforElementVisibilityInTime(coverageTitle, 30);
-/*		Assert.assertTrue(coverageTitle.getText().contains("coverage"));
+/*		Assertion.assertTrue(coverageTitle.getText().contains("coverage"));
 		waitforElementVisibilityInTime(previousBtn, 45);
 		previousBtn.click();
 		validate(planSelectorPageTilte);
-		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));*/
+		Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));*/
 	}
 	
 	public void zipcodePage() {
 		boolean hidden;
 		System.out.println("Validating ZipcodePage Elements");
 /*		String preBreadcrumbs = (driver.findElement(By.cssSelector("div.breadcrumb"))).getText();
-		Assert.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));*/
+		Assertion.assertTrue(preBreadcrumbs.contains("Home / Plan Recommendation Engine"));*/
 		validate(planSelectorPageTilte);
-//		Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//		Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 		validate(pageStepsNumberName, 30);
-//		Assert.assertTrue(pageStepsNumberName.getText().contains("Step 1: Location"));
+//		Assertion.assertTrue(pageStepsNumberName.getText().contains("Step 1: Location"));
 		validate(pageProgressPercentage, 30);
 		Assert.assertTrue(pageProgressPercentage.getText().contains("0% Complete"));
 		validate(pageRequiredInfo);
@@ -267,7 +262,7 @@ public class PlanRecommendationEngineLandingAndZipcodePages extends UhcDriver {
 			validate(zipcodePageCountyQuestionMark);
 			Assert.assertTrue(zipcodePageCountyQuestionMark.getText().contains("*"));
 			waitforElementVisibilityInTime(PRECounty, 45);
-//			Assert.assertTrue(PRECountyInnerText.getText().contains("Select County "));
+//			Assertion.assertTrue(PRECountyInnerText.getText().contains("Select County "));
 	}
 
 //Error Scenario's	
@@ -360,3 +355,4 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
       threadsleep(5000);
   }
 }
+

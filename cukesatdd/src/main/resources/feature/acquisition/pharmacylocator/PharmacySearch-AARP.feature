@@ -2,7 +2,7 @@
 Feature: 1.11. ACQ-Pharmacy Locator AARP
 
   #------------------------- BEGINNING OF ACQUISITION SMOKE TESTS----
-  @pharmacyLocatorPerformanceUlayer @vbfGate
+  @pharmacyLocatorPerformanceUlayer
   Scenario Outline: To verify available pharmacies
     Given the user is on the Acquisition Site landing page and navigate to pharmacy search page
       | Site Name | <siteName> |
@@ -75,7 +75,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     #------ English -----------------------------------
     And the user validates header section content
     When the user enters following details for pharmacy search
-      | Zip Code |            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in pharmacy locator page
       | Language | English |
@@ -163,7 +163,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     @prodRegression
     Examples: 
       | TID   | siteName | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
-      | 15582 | Ulayer   |   10980 |       15 | None       |        2020 | AARP MedicareRx Preferred (PDP) |        2020 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
+      | 15582 | Ulayer   |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
 
     @pharmacylocatorulayer02b
     Examples: 
@@ -181,7 +181,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     When the user selects Chinese Language
     And the user validates header section content
     When the user enters following details for pharmacy search
-      | Zip Code |            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in pharmacy locator page
       | Language | Chinese |
@@ -268,7 +268,7 @@ Feature: 1.11. ACQ-Pharmacy Locator AARP
     When the user selects Spanish Language
     And the user validates header section content
     When the user enters following details for pharmacy search
-      | Zip Code |            |
+      | Zip Code | [blank]    |
       | Distance | <distance> |
     Then the user verify error messages in pharmacy locator page
       | Language | Spanish |

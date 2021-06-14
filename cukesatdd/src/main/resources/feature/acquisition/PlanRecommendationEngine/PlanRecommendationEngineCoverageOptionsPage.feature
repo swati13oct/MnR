@@ -1,4 +1,4 @@
-@PlanRecommendationEngine
+@planRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify coverage options page in plan Recommendation Engine
 
   @PRE @planrecommendation @coveragepage @elementValidation @F372736
@@ -43,7 +43,7 @@ Feature: Plan Recommendation Engine flow - Verify coverage options page in plan 
 
     Examples: 
       | Zipcode | isMultiCounty | isCoverageOpt |
-      |   45634 | NO            |               |
+      |   45634 | NO            | [blank]       |
 
   @PRE @planrecommendation @coveragepage @previousfunctionafterContinue @F372736
   Scenario Outline: Zipcode: <Zipcode> -MultiCountyOptions: <isMultiCounty> -CoverageOptions: <isCoverageOpt> - To validate Previous Button functionality after Click continue of coverage options page using multi County and CoverageOptions: <isCoverageOpt> in Plan Recommendation Engine
@@ -74,4 +74,4 @@ Feature: Plan Recommendation Engine flow - Verify coverage options page in plan 
     Examples: 
       | Zipcode | isMultiCounty | county       | isCoverageOpt |
       |   78006 | YES           | Bexar County | MAPD          |
-      |   45634 | NO            |              | PDP           |
+      |   45634 | NO            | [blank]      | PDP           |

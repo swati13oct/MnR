@@ -6,38 +6,31 @@ package acceptancetests.acquisition.tfn;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import org.junit.Assert;
-import org.openqa.selenium.By;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
-import acceptancetests.acquisition.pharmacylocator.PharmacySearchCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import gherkin.formatter.model.DataTableRow;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.isdecisionguide.IsDecisionGuideStep1;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
-import pages.acquisition.tfn.CampaignTFNPage;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.ulayer.GlobalWebElements;
-import pages.acquisition.ulayer.UlayerTFNPage;
 //import pages.acquisition.ulayer.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.dceredesign.DrugSummaryPage;
+import pages.acquisition.tfn.CampaignTFNPage;
 
 public class CampaignTFNCommonStepDefinition {
 
@@ -50,15 +43,16 @@ public class CampaignTFNCommonStepDefinition {
 
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
-		List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
+		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
 		for (int i = 0; i < memberAttributesRow.size(); i++) {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0), memberAttributesRow.get(i).getCells().get(1));
-		}
+		}*/
 		return memberAttributesMap;
 	}
 
 	
-	WebDriver driver;
+	private WebDriver driver;
 	@Given("^the user Starts WebDriver$")
 	public void Start_WebDriver() {
 		driver = getLoginScenario().getWebDriverNew();
@@ -71,15 +65,20 @@ public class CampaignTFNCommonStepDefinition {
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
 		getLoginScenario().saveBean(PageConstants.CAMPAIGN_TFN_PAGE, tfnPage);
-		tfnPage.retrieveTFNcookie();
+		HashMap<String,String> tfnCookieValue=tfnPage.retrieveTFNcookie();
+		getLoginScenario().saveBean(CommonConstants.PSC_CODE,tfnCookieValue.get("PSC Code"));
+		getLoginScenario().saveBean(CommonConstants.FED_TFN,tfnCookieValue.get("Fed TFN"));
+		getLoginScenario().saveBean(CommonConstants.MEDSUP_TFN,tfnCookieValue.get("Medsup TFN"));
 	}
-
+WebDriver wd;
 	@Then("^the user validates PSC code$")
 	public void the_user_validates_PSC_code(DataTable inputAttributes) throws Throwable {
 		Map<String, String> inputAttributesMap=parseInputArguments(inputAttributes);
 		String pscCode = inputAttributesMap.get("PSC Code");
-		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
-		tfnPage.validatePSCcode(pscCode);
+		wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE,(new CampaignTFNPage(wd)));
+		String actualPscCode= (String) getLoginScenario().getBean(CommonConstants.PSC_CODE);
+		tfnPage.validatePSCcode(pscCode,actualPscCode);
 	}
 
 
@@ -174,6 +173,7 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		//wd.manage().deleteAllCookies();
 		CampaignTFNPage tfnPage = new CampaignTFNPage(driver);
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, driver);
 		tfnPage.openUrl(url);
 		tfnPage.googleSearchAARP();
 
@@ -296,14 +296,16 @@ public void the_user_is_on_following_acquisition_site_from_Campaign_Traffic(Data
 public void the_user_navigates_to_MA_Plan_Details_Page_and_validates_Federal_TFN(DataTable arg1) throws Throwable {
 	Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
+	String expectedTfnNumber=(String)getLoginScenario().getBean(CommonConstants.FED_TFN);
 	String Zip = inputAttributesMap.get("Zip Code");
-	//tfnPage.HomepagePlanSearch(Zip);
-	tfnPage.HomepagePlanSearchOLE(Zip);
+	tfnPage.HomepagePlanSearch(Zip);
+	//tfnPage.HomepagePlanSearchOLE(Zip);
 	String PlanType = "MA";
 	tfnPage.ViewPlanSummary(PlanType);
 	tfnPage.NavigateToPlanDetails(PlanType);
-	//String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
+	String TFNXpath_PlanDetails = "//a[contains(@class, 'tel')]";
 	//tfnPage.validateFederalTFN(TFNXpath_PlanDetails);
+	tfnPage.validateFederalTFNNo(TFNXpath_PlanDetails, expectedTfnNumber);
 
 }
 
@@ -421,7 +423,7 @@ public void the_user_navigates_to_following_memeber_signin_page_AARP(DataTable a
 	aquisitionhomepage.clickonmemberSignInOfflinelink(memberSignINOFFLINEURL);
 	}
 	else {
-		Assert.fail("Error in loading the UHC Agent Page");
+		Assertion.fail("Error in loading the UHC Agent Page");
 		}
 	//}
 }
@@ -527,13 +529,14 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_MA_Plans(DataTable 
 
 @And("^the user signs in with optum Id credentials for campaign TFN$")
 public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site_campaign_tfn(DataTable credentials) {
-	List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 	Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+	plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
+	/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
 	for (int i = 0; i < plannameAttributesRow.size(); i++) {
 
 		plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
 				plannameAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String username = plannameAttributesMap.get("User Name");
 	String password = plannameAttributesMap.get("Password");
 	
@@ -598,13 +601,14 @@ public void the_user_lands_on_AARP_from_External_Link_Landon_DCE_Page(DataTable 
 @Then("^the user selects View plan details for following plantype and PlanName for DCE Page$")
 public void the_user_selects_View_plan_details_for_following_plantype_and_PlanName_DCE_Page(DataTable attributes)
 		throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String plantype = memberAttributesMap.get("Plan Type");
 	String planName = memberAttributesMap.get("Plan Name");
 	DrugSummaryPage plansummaryPage = (DrugSummaryPage) getLoginScenario()
@@ -688,13 +692,14 @@ public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate
 
 @Then("^the user navigates to plan tab on VPP and validates Federal TFN$")
 public void the_user_navigates_to_plan_tab_on_VPP_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -709,13 +714,14 @@ public void the_user_navigates_to_plan_tab_on_VPP_and_validates_Federal_TFN(Data
 
 @Then("^the user navigates to Plan Details Page for any plan and validates Federal TFN$")
 public void the_user_navigates_to_Plan_Details_Page_any_plan_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -727,13 +733,14 @@ public void the_user_navigates_to_Plan_Details_Page_any_plan_and_validates_Feder
 }
 @Then("^the user navigates to Plan Details Page for any plan for Enroll and validates Federal TFN$")
 public void the_user_navigates_to_Plan_Details_Page_any_plan_Enroll_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -747,12 +754,13 @@ public void the_user_navigates_to_Plan_Details_Page_any_plan_Enroll_and_validate
 
 @When("^the user performs plan search using Shop Pages for campaign Links$")
 public void Standalone_zipcode_details_shop_camapign_TFN(DataTable givenAttributes) throws InterruptedException {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String zipcode = memberAttributesMap.get("Zip Code");
 	String county = memberAttributesMap.get("County Name");
 	String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -772,18 +780,19 @@ public void Standalone_zipcode_details_shop_camapign_TFN(DataTable givenAttribut
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 	} else {
-		Assert.fail("Error Loading VPP plan summary page");
+		Assertion.fail("Error Loading VPP plan summary page");
 	}
 }
 
 @When("^the user performs plan search using Medicare articles pages for campaign Links$")
 public void Standalone_zipcode_details_shop_camapign_TFN_medicare_article(DataTable givenAttributes) throws InterruptedException {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String zipcode = memberAttributesMap.get("Zip Code");
 	String county = memberAttributesMap.get("County Name");
 	String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -802,7 +811,7 @@ public void Standalone_zipcode_details_shop_camapign_TFN_medicare_article(DataTa
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 	} else {
-		Assert.fail("Error Loading VPP plan summary page");
+		Assertion.fail("Error Loading VPP plan summary page");
 	}
 }
 
@@ -818,13 +827,14 @@ public void the_user_validates_TFN(DataTable inputAttributes) throws Throwable {
 
 @Then("^the user navigates to plan tab for any plan$")
 public void the_user_navigates_to_Plan_tab_plan(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -842,13 +852,14 @@ public void the_user_navigates_back_page() throws Throwable {
 
 @Then("^the user enter zipcode in homepage$")
 public void the_user_enter_zipcode(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -860,13 +871,14 @@ public void the_user_enter_zipcode(DataTable attributes) throws Throwable {
 
 @Then("^the user navigates to Plan Details Page for DCE Flow$")
 public void the_user_navigates_to_Plan_Details_Page_DCE_FLOW(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -886,13 +898,14 @@ public void clickonDCELink_Pharmacy_page() throws InterruptedException {
 
 @Then("^the user navigates to Plan Details Page for any SNP plan for Enroll and validates Federal TFN$")
 public void the_user_navigates_to_Plan_Details_Page_any_SNP_plan_Enroll_and_validates_Federal_TFN(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -906,13 +919,14 @@ public void the_user_navigates_to_Plan_Details_Page_any_SNP_plan_Enroll_and_vali
 
 @Then("^the user enter zipcode in homepage for External Links$")
 public void the_user_enter_zipcode_External_Link(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -924,13 +938,14 @@ public void the_user_enter_zipcode_External_Link(DataTable attributes) throws Th
 
 @Then("^the user Enroll for any plan on plan summary page$")
 public void the_user_enroll_for_plan_summary_page(DataTable attributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+	/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String PlanType = memberAttributesMap.get("Plan Type");
 	
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);
@@ -963,13 +978,14 @@ public void the_user_navigates_refresh_page() throws Throwable {
 
 @Then("^the site user fills all the details in MedsuppPage for TFN$")
 public void user_fills_all_details_medsupp_TFN(DataTable givenAttributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 
 	String DateOfBirth = memberAttributesMap.get("DOB");
 
@@ -983,13 +999,14 @@ public void user_fills_all_details_medsupp_TFN(DataTable givenAttributes) throws
 
 @Then("^the site user clicks on Start Application Button and proceed few Pages$")
 public void Start_application_button_proceed_next_few_pages(DataTable givenAttributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 
 	// String DateOfBirth = memberAttributesMap.get("DOB");
 	String FirstName = memberAttributesMap.get("Firstname");
@@ -1041,19 +1058,20 @@ public void User_navigate_through_Medsupp_EBRC(DataTable arg1) throws Interrupte
 	CampaignTFNPage tfnPage = (CampaignTFNPage) getLoginScenario().getBean(PageConstants.CAMPAIGN_TFN_PAGE);	
 	if(myUHCAgentURL!=null){
 		tfnPage.clickonFindanAgentlinkMedsupp(myUHCAgentURL);
-		Assert.assertTrue(true);
+		Assertion.assertTrue(true);
 	}else
-		Assert.fail("Error in loading the UHC Agent Page");
+		Assertion.fail("Error in loading the UHC Agent Page");
 }
 
 @When("^the user performs plan search using Shop Pages for Medsupp Page$")
 public void Shop_Standalone_zipcode_details_MedsuppPage(DataTable givenAttributes) throws InterruptedException {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	String zipcode = memberAttributesMap.get("Zip Code");
 	String county = memberAttributesMap.get("County Name");
 	String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -1073,19 +1091,20 @@ public void Shop_Standalone_zipcode_details_MedsuppPage(DataTable givenAttribute
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 
 	} else {
-		Assert.fail("Error Loading VPP plan summary page");
+		Assertion.fail("Error Loading VPP plan summary page");
 	}
 }
 
 @Then("^the user navigate to Pharmacy page$")
 public void user_navigate_pharmacy_page(DataTable givenAttributes) throws Throwable {
-	List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+	/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
 	for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 		memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 				memberAttributesRow.get(i).getCells().get(1));
-	}
+	}*/
 	
 	String zipcode = memberAttributesMap.get("Zip Code");
 	String distance = memberAttributesMap.get("Distance");
@@ -1124,9 +1143,9 @@ public void the_user_navigates_to_following_memeber_signin_page_UHC(DataTable ar
 	
 	if(memberSignINURL!=null){
 		aquisitionhomepage.clickonmemberSignInlink(memberSignINURL);
-		Assert.assertTrue(true);
+		Assertion.assertTrue(true);
 	}else
-		Assert.fail("Error in loading the UHC Agent Page");
+		Assertion.fail("Error in loading the UHC Agent Page");
 	//tfnPage.validateFederalTFN(TFN_Xpath);
 
 }

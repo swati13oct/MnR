@@ -315,6 +315,8 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
 	private WebElement medicaidNumberField;
 	
+	@FindBy(xpath = "//span[text()='How would you like to pay for your plan?']//following-sibling::span")
+	private WebElement paymentPlanDisplay;
 	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
@@ -575,224 +577,234 @@ public class ReviewSubmitPage extends UhcDriver{
 	}
 	
 	public boolean OnlineEnrollment_Review_Page_details(Map<String, String> detailsMap) {
-
-		String DOB = detailsMap.get("DOB");
-		String Gender = detailsMap.get("Gender");
-		String Perm_Street = detailsMap.get("Perm_Street");
-		String Perm_Aptno = detailsMap.get("Perm_Aptno");
-		String Perm_city = detailsMap.get("Perm_city");
-		String MailingQuestion = detailsMap.get("MAILING_QUESTION");
-		String Mailing_Street = detailsMap.get("Mailing_Street");
-		String Mailing_City = detailsMap.get("Mailing_City");
-		String Mailing_State = detailsMap.get("Mailing_State");
-		String Mailing_Zip = detailsMap.get("Mailing_Zip");
-		String Email_Address = detailsMap.get("Email");
-		String FirstName = detailsMap.get("First Name");
-		String LastName = detailsMap.get("Last Name");
-		String MiddleName = detailsMap.get("Middle Name");
-		String MedicareNumber = detailsMap.get("Medicare Number");
-		String PartAeffectiveDate = detailsMap.get("PartA Date");
-		String PartBeffectiveDate = detailsMap.get("PartB Date");
-		String CardType = detailsMap.get("Card Type");
-		String Expected_PlanName = detailsMap.get("Plan Name");
-		//String Expected_PlanYear = detailsMap.get("Plan Year");
-		String Expected_PlanYear = "2021";
-		String Expected_ZipCode = detailsMap.get("Zip Code");
-		String Expected_County = detailsMap.get("County");
-		String Expected_PlanPremium = detailsMap.get("Plan Premium");
-		String Medicaid_No = detailsMap.get("Medicaid Number");
-		String Mailing_AptNo = detailsMap.get("Mailing Apartment Number");
-		String PrimaryPhoneNumber = detailsMap.get("Home Number");
-		String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
-		//String EmailConfirmationNumber = detailsMap.get("Email Confirmation Number");
-		String Paperless_Delivery = detailsMap.get("Paperless Delivery");
-		//String Email_Address = detailsMap.get("Email Address");
-	/*	HealthInsuranceName
-		HealthInsuranceGroupNo
-		HealthInsuranceMemberNo
-		PrescriptionDrugName
-		PrescriptionDrugGroupNo
-		PrescriptionDrugMemberNo
-		*/
-		
-		String prescriptionDrugName= detailsMap.get("Prescription Name");
-		String prescriptionGroupNumber = detailsMap.get("PD Group Number");
-		String prescriptionMemberNumber = detailsMap.get("PD Member Number");
-		String healthInsuranceName = detailsMap.get("Health Insurance Name");
-		String healthInsuranceGroupNo = detailsMap.get("Group Number");
-		String healthInsuranceMemberNo = detailsMap.get("Member Number");
-		String healthInsurance = detailsMap.get("Health Insurance");
-		String prescriptionDrug= detailsMap.get("Prescription Drug");
-		
-	
-		String PCP_Name = detailsMap.get("PCP Name");
-		String PCP_Number = detailsMap.get("PCP Number");
-		String PCP_recently_visited= detailsMap.get("PCP Recently Visited");
-		String Proposed_Effective_date= detailsMap.get("Proposed Effective date");
-		
-		String AuthFirstNameDisplay= detailsMap.get("Authorization First Name");
-		String AuthLastNameDisplay = detailsMap.get("Authorization last Name");
-		String AuthAddressDisplay = detailsMap.get("Authorization Address");
-		String AuthApartmentSuiteDisplay = detailsMap.get("Authorization Apartment Suite");
-		String AuthCityDisplay = detailsMap.get("Authorization City");
-		String AuthStateDisplay = detailsMap.get("Authorization State");
-		String AuthZipDisplay = detailsMap.get("Auth Zip Display");
-		String AuthPhoneNumberDisplay= detailsMap.get("Authorization Phone No");
-		String AuthAgreeDisplay = detailsMap.get("Authorization Agree");
-		String AuthRelationshipDisplay= detailsMap.get("Authorization Relationship");
-		
-		String DiabetesQuestion1Display= detailsMap.get("Diabetes Question 1");
-		String DiabetesQuestion2Display= detailsMap.get("Diabetes Question 2");
-		String ChronicHeartFailureQuestion1Display= detailsMap.get("Chronic Heart Failure Question 1");
-		String ChronicHeartFailureQuestion2Display= detailsMap.get("Chronic Heart Failure Question 2");
-		String ChronicHeartFailureQuestion3Display= detailsMap.get("Chronic Heart Failure Question 3");
-		String CardioVascularDisorderQuestion1Display= detailsMap.get("Cardio Vascular Disorder Question 1");
-		String CardioVascularDisorderQuestion2Display= detailsMap.get("Cardio Vascular Disorder Question 2");
-		String CardioVascularDisorderQuestion3Display= detailsMap.get("Cardio Vascular Disorder Question 3");
-		String CardioVascularDisorderQuestion4Display= detailsMap.get("Cardio Vascular Disorder Question 4");
-		String CardioVascularDisorderQuestion5Display= detailsMap.get("Cardio Vascular Disorder Question 5");
-		String CardioVascularDisorderQuestion6Display= detailsMap.get("Cardio Vascular Disorder Question 6");
-		
-		String DisclosureCheckboxDisplay= detailsMap.get("Disclosure Checkbox");
-		String DisclosureProviderNameDisplay= detailsMap.get("Disclosure Provider Name");
-		String DisclosureProviderStreetAddressDisplay= detailsMap.get("Disclosure Provider Street Address");
-		String DisclosureProviderCityDisplay= detailsMap.get("Disclosure Provider City");
-		String DisclosureProviderStateDisplay= detailsMap.get("Disclosure Provider State");
-		String DisclosureProviderZipDisplay= detailsMap.get("Disclosure Provider Zip");
-		String DisclosureProviderPhoneNumberDisplay= detailsMap.get("Disclosure Provider PhoneNumber");
-		
-		boolean flag = true;
-		
-		String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
-		flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
-		String Zip = "ZIP: "+Expected_ZipCode;
-		flag&=validateText(PlanZipDisplay,Zip);
-		flag&=validateText(FirstNameDisplay,FirstName);
-		flag&=validateText(LastNameDisplay,LastName);
-		flag&=validateText(MiddleNameDisplay,MiddleName);
-		
-		flag&=validateText(MedicareClaimNumberDisplay,MedicareNumber);
-		flag&=validateText(PartADisplay,PartAeffectiveDate);
-		flag&=validateText(PartBDisplay,PartBeffectiveDate);
-		if(Expected_PlanName.contains("DSNP")) {
-		flag&=validateText(MedicaidNo,Medicaid_No);
-		}
-		flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
-		flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
-		//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
-		flag&=validateText(PaperlessDelivery,Paperless_Delivery);
-		flag&=validateText(EmailAddress,Email_Address);
-		flag&=validateText(DOBDisplay,DOB);
-		flag&=validateText(GenderDisplay,Gender);
-		flag&=validateText(AuthLastName,AuthLastNameDisplay);
-		flag&=validateText(AuthFirstName,AuthFirstNameDisplay);
-		flag&=validateText(AuthAddress,AuthAddressDisplay);
-		flag&=validateText(AuthApartmentSuite,AuthApartmentSuiteDisplay);
-		flag&=validateText(AuthCity,AuthCityDisplay);
-		flag&=validateText(AuthState,AuthStateDisplay);
-		flag&=validateText(AuthZip,AuthZipDisplay);
-		flag&=validateText(AuthPhoneNo,AuthPhoneNumberDisplay);
-		flag&=validateText(AuthAgree,AuthAgreeDisplay);
-		flag&=validateText(AuthRelationship,AuthRelationshipDisplay);
-		flag&=validateText(PrescriptionDrugRadio,prescriptionDrug);
-		if(!Expected_PlanName.contains("PDP")) {
-		flag&=validateText(HealthInsuranceRadio,healthInsurance);
-		flag&=validateText(HealthInsuranceName,healthInsuranceName);
-		flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
-		flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
-		}
-		flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
-		flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
-		flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
-		if(!Expected_PlanName.contains("PDP")) {
-		flag&=validateText(PCPName,PCP_Name);		
-		flag&=validateText(PCPNumber,PCP_Number);
-		flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);
-		}
-		flag&=validateText(ProposedEffectiveDate,Proposed_Effective_date);
-		flag&=validateText(StreetDisplay,Perm_Street);
-		//flag&=validateText(ApartmentDisplay,Perm_Aptno);
-		flag&=validateText(CityDisplay,Perm_city);
-		flag&=validateText(MailingQiuestionDisplay,MailingQuestion);
-		//List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*"));
-		//if(MailStateDisplay.getSize()>1)
-		flag&=validateText(MailStateDisplay,Mailing_State);
-		flag&=validateText(MailZipDisplay,Mailing_Zip);
-		flag&=validateText(MailStreetDisplays,Mailing_Street);		
-		//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
-		flag&=validateText(MailCityDisplay,Mailing_City);	
-		
-		//-------------Adding the Line for CSNP Plans-------------------------//
-		
-		if(Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Gold") ||Expected_PlanName.contains("Silver")) {
-			flag&=validateText(DiabetsQuestion1,DiabetesQuestion1Display);
-			flag&=validateText(DiabetsQuestion2,DiabetesQuestion2Display);
-			flag&=validateText(ChronicHeartQuestion1,ChronicHeartFailureQuestion1Display);
-			flag&=validateText(ChronicHeartQuestion2,ChronicHeartFailureQuestion2Display);
-			flag&=validateText(ChronicHeartQuestion3,ChronicHeartFailureQuestion3Display);
-			flag&=validateText(CardioVascularQuestion1,CardioVascularDisorderQuestion1Display);
-			flag&=validateText(CardioVascularQuestion2,CardioVascularDisorderQuestion2Display);
-			flag&=validateText(CardioVascularQuestion3,CardioVascularDisorderQuestion3Display);
-			flag&=validateText(CardioVascularQuestion4,CardioVascularDisorderQuestion4Display);
-			flag&=validateText(CardioVascularQuestion5,CardioVascularDisorderQuestion5Display);
-			flag&=validateText(CardioVascularQuestion6,CardioVascularDisorderQuestion6Display);
-			flag&=validateText(DisclosureCheckbox,DisclosureCheckboxDisplay);
-			flag&=validateText(DisclosureProviderName,DisclosureProviderNameDisplay);
-			flag&=validateText(DisclosureProviderStreetAddress,DisclosureProviderStreetAddressDisplay);
-			flag&=validateText(DisclosureProviderCity, DisclosureProviderCityDisplay);
-			flag&=validateText(DisclosureProviderState,DisclosureProviderStateDisplay);
-			flag&=validateText(DisclosureProviderZipcode,DisclosureProviderZipDisplay);
-			flag&=validateText(DisclosureProviderPhoneNumber,DisclosureProviderPhoneNumberDisplay);
+		//
+				String DOB = detailsMap.get("DOB");
+				String Gender = detailsMap.get("Gender");
+				String Perm_Street = detailsMap.get("Perm_Street");
+				String Perm_Aptno = detailsMap.get("Perm_Aptno");
+				String Perm_city = detailsMap.get("Perm_city");
+				String MailingQuestion = detailsMap.get("MAILING_QUESTION");
+				String Mailing_Street = detailsMap.get("Mailing_Street");
+				String Mailing_City = detailsMap.get("Mailing_City");
+				String Mailing_State = detailsMap.get("Mailing_State");
+				String Mailing_Zip = detailsMap.get("Mailing_Zip");
+				String Email_Address = detailsMap.get("Email");
+				String FirstName = detailsMap.get("First Name");
+				String LastName = detailsMap.get("Last Name");
+				String MiddleName = detailsMap.get("Middle Name");
+				String MedicareNumber = detailsMap.get("Medicare Number");
+				String PartAeffectiveDate = detailsMap.get("PartA Date");
+				String PartBeffectiveDate = detailsMap.get("PartB Date");
+				String CardType = detailsMap.get("Card Type");
+				String Expected_PlanName = detailsMap.get("Plan Name");
+				//String Expected_PlanYear = detailsMap.get("Plan Year");
+				String Expected_PlanYear = "2021";
+				String Expected_ZipCode = detailsMap.get("Zip Code");
+				String Expected_County = detailsMap.get("County");
+				String Expected_PlanPremium = detailsMap.get("Plan Premium");
+				String Medicaid_No = detailsMap.get("Medicaid Number");
+				String Mailing_AptNo = detailsMap.get("Mailing Apartment Number");
+				String PrimaryPhoneNumber = detailsMap.get("Home Number");
+				String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
+				//String EmailConfirmationNumber = detailsMap.get("Email Confirmation Number");
+				String Paperless_Delivery = detailsMap.get("Paperless Delivery");
+				//String Email_Address = detailsMap.get("Email Address");
+			/*	HealthInsuranceName
+				HealthInsuranceGroupNo
+				HealthInsuranceMemberNo
+				PrescriptionDrugName
+				PrescriptionDrugGroupNo
+				PrescriptionDrugMemberNo
+				*/
+				
+				String prescriptionDrugName= detailsMap.get("Prescription Name");
+				String prescriptionGroupNumber = detailsMap.get("PD Group Number");
+				String prescriptionMemberNumber = detailsMap.get("PD Member Number");
+				String healthInsuranceName = detailsMap.get("Health Insurance Name");
+				String healthInsuranceGroupNo = detailsMap.get("Group Number");
+				String healthInsuranceMemberNo = detailsMap.get("Member Number");
+				String healthInsurance = detailsMap.get("Health Insurance");
+				String prescriptionDrug= detailsMap.get("Prescription Drug");
+				
 			
-			}
+				String PCP_Name = detailsMap.get("PCP Name");
+				String PCP_Number = detailsMap.get("PCP Number");
+				String PCP_recently_visited= detailsMap.get("PCP Recently Visited");
+				String Proposed_Effective_date= detailsMap.get("Proposed Effective date");
+				
+				String AuthFirstNameDisplay= detailsMap.get("Authorization First Name");
+				String AuthLastNameDisplay = detailsMap.get("Authorization last Name");
+				String AuthAddressDisplay = detailsMap.get("Authorization Address");
+				String AuthApartmentSuiteDisplay = detailsMap.get("Authorization Apartment Suite");
+				String AuthCityDisplay = detailsMap.get("Authorization City");
+				String AuthStateDisplay = detailsMap.get("Authorization State");
+				String AuthZipDisplay = detailsMap.get("Auth Zip Display");
+				String AuthPhoneNumberDisplay= detailsMap.get("Authorization Phone No");
+				String AuthAgreeDisplay = detailsMap.get("Authorization Agree");
+				String AuthRelationshipDisplay= detailsMap.get("Authorization Relationship");
+				
+				String DiabetesQuestion1Display= detailsMap.get("Diabetes Question 1");
+				String DiabetesQuestion2Display= detailsMap.get("Diabetes Question 2");
+				String ChronicHeartFailureQuestion1Display= detailsMap.get("Chronic Heart Failure Question 1");
+				String ChronicHeartFailureQuestion2Display= detailsMap.get("Chronic Heart Failure Question 2");
+				String ChronicHeartFailureQuestion3Display= detailsMap.get("Chronic Heart Failure Question 3");
+				String CardioVascularDisorderQuestion1Display= detailsMap.get("Cardio Vascular Disorder Question 1");
+				String CardioVascularDisorderQuestion2Display= detailsMap.get("Cardio Vascular Disorder Question 2");
+				String CardioVascularDisorderQuestion3Display= detailsMap.get("Cardio Vascular Disorder Question 3");
+				String CardioVascularDisorderQuestion4Display= detailsMap.get("Cardio Vascular Disorder Question 4");
+				String CardioVascularDisorderQuestion5Display= detailsMap.get("Cardio Vascular Disorder Question 5");
+				String CardioVascularDisorderQuestion6Display= detailsMap.get("Cardio Vascular Disorder Question 6");
+				
+				String DisclosureCheckboxDisplay= detailsMap.get("Disclosure Checkbox");
+				String DisclosureProviderNameDisplay= detailsMap.get("Disclosure Provider Name");
+				String DisclosureProviderStreetAddressDisplay= detailsMap.get("Disclosure Provider Street Address");
+				String DisclosureProviderCityDisplay= detailsMap.get("Disclosure Provider City");
+				String DisclosureProviderStateDisplay= detailsMap.get("Disclosure Provider State");
+				String DisclosureProviderZipDisplay= detailsMap.get("Disclosure Provider Zip");
+				String DisclosureProviderPhoneNumberDisplay= detailsMap.get("Disclosure Provider PhoneNumber");
+				
+				String expectedText = "0.00";
+				
+				String paymentPlan = detailsMap.get("Payment Plan");
+				
+				boolean flag = true;
+				
+				String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
+				flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
+				String Zip = "ZIP: "+Expected_ZipCode;
+				flag&=validateText(PlanZipDisplay,Zip);
+				flag&=validateText(FirstNameDisplay,FirstName);
+				flag&=validateText(LastNameDisplay,LastName);
+				flag&=validateText(MiddleNameDisplay,MiddleName);
+				
+				flag&=validateText(MedicareClaimNumberDisplay,MedicareNumber);
+				flag&=validateText(PartADisplay,PartAeffectiveDate);
+				flag&=validateText(PartBDisplay,PartBeffectiveDate);
+				if(Expected_PlanName.contains("DSNP")) {
+				flag&=validateText(MedicaidNo,Medicaid_No);
+				}
+				flag&=validateText(MobilePhoneNo,MobilePhoneNumber);
+				flag&=validateText(PrimaryPhoneNo,PrimaryPhoneNumber);
+				//flag&=validateText(EmailConfirmationNo,EmailConfirmationNumber);
+				flag&=validateText(PaperlessDelivery,Paperless_Delivery);
+				flag&=validateText(EmailAddress,Email_Address);
+				flag&=validateText(DOBDisplay,DOB);
+				flag&=validateText(GenderDisplay,Gender);
+				flag&=validateText(AuthLastName,AuthLastNameDisplay);
+				flag&=validateText(AuthFirstName,AuthFirstNameDisplay);
+				flag&=validateText(AuthAddress,AuthAddressDisplay);
+				flag&=validateText(AuthApartmentSuite,AuthApartmentSuiteDisplay);
+				flag&=validateText(AuthCity,AuthCityDisplay);
+				flag&=validateText(AuthState,AuthStateDisplay);
+				flag&=validateText(AuthZip,AuthZipDisplay);
+				flag&=validateText(AuthPhoneNo,AuthPhoneNumberDisplay);
+				flag&=validateText(AuthAgree,AuthAgreeDisplay);
+				flag&=validateText(AuthRelationship,AuthRelationshipDisplay);
+				flag&=validateText(PrescriptionDrugRadio,prescriptionDrug);
+				if(!Expected_PlanName.contains("PDP")) {
+				flag&=validateText(HealthInsuranceRadio,healthInsurance);
+				flag&=validateText(HealthInsuranceName,healthInsuranceName);
+				flag&=validateText(HealthInsuranceGroupNo,healthInsuranceGroupNo);
+				flag&=validateText(HealthInsuranceMemberNo,healthInsuranceMemberNo);
+				}
+				flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
+				flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
+				flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
+				if(!Expected_PlanName.contains("PDP")) {
+				flag&=validateText(PCPName,PCP_Name);		
+				flag&=validateText(PCPNumber,PCP_Number);
+				flag&=validateText(PCPRecentlyVisited,PCP_recently_visited);
+				}
+				flag&=validateText(ProposedEffectiveDate,Proposed_Effective_date);
+				flag&=validateText(StreetDisplay,Perm_Street);
+				//flag&=validateText(ApartmentDisplay,Perm_Aptno);
+				flag&=validateText(CityDisplay,Perm_city);
+				flag&=validateText(MailingQiuestionDisplay,MailingQuestion);
+				//List<WebElement> list = driver.findElements(By.xpath("//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*"));
+				//if(MailStateDisplay.getSize()>1)
+				flag&=validateText(MailStateDisplay,Mailing_State);
+				flag&=validateText(MailZipDisplay,Mailing_Zip);
+				flag&=validateText(MailStreetDisplays,Mailing_Street);		
+				//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
+				flag&=validateText(MailCityDisplay,Mailing_City);
+				
+				
+				if(!expectedText.contains("0.00")) {
+					flag&=validateText(paymentPlanDisplay,paymentPlan);
+					}
+				
+				
+				//-------------Adding the Line for CSNP Plans-------------------------//
+				
+				if(Expected_PlanName.contains("Chronic") || Expected_PlanName.contains("Gold") ||Expected_PlanName.contains("Silver")) {
+					flag&=validateText(DiabetsQuestion1,DiabetesQuestion1Display);
+					flag&=validateText(DiabetsQuestion2,DiabetesQuestion2Display);
+					flag&=validateText(ChronicHeartQuestion1,ChronicHeartFailureQuestion1Display);
+					flag&=validateText(ChronicHeartQuestion2,ChronicHeartFailureQuestion2Display);
+					flag&=validateText(ChronicHeartQuestion3,ChronicHeartFailureQuestion3Display);
+					flag&=validateText(CardioVascularQuestion1,CardioVascularDisorderQuestion1Display);
+					flag&=validateText(CardioVascularQuestion2,CardioVascularDisorderQuestion2Display);
+					flag&=validateText(CardioVascularQuestion3,CardioVascularDisorderQuestion3Display);
+					flag&=validateText(CardioVascularQuestion4,CardioVascularDisorderQuestion4Display);
+					flag&=validateText(CardioVascularQuestion5,CardioVascularDisorderQuestion5Display);
+					flag&=validateText(CardioVascularQuestion6,CardioVascularDisorderQuestion6Display);
+					flag&=validateText(DisclosureCheckbox,DisclosureCheckboxDisplay);
+					flag&=validateText(DisclosureProviderName,DisclosureProviderNameDisplay);
+					flag&=validateText(DisclosureProviderStreetAddress,DisclosureProviderStreetAddressDisplay);
+					flag&=validateText(DisclosureProviderCity, DisclosureProviderCityDisplay);
+					flag&=validateText(DisclosureProviderState,DisclosureProviderStateDisplay);
+					flag&=validateText(DisclosureProviderZipcode,DisclosureProviderZipDisplay);
+					flag&=validateText(DisclosureProviderPhoneNumber,DisclosureProviderPhoneNumberDisplay);
+					
+					}
 
-	
-		//-------------Adding the Line for CSNP Plans-------------------------//
-		
-		/*if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
-			if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
-				//flag = (!flag)?false:true;
-				System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
-			}
-			else flag = false;
-		}else flag = false;
+			
+				//-------------Adding the Line for CSNP Plans-------------------------//
+				
+				/*if(validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)){
+					if(Enrollment_Disclaimer_Text.getText().contains("Submitting your enrollment application electronically")){
+						//flag = (!flag)?false:true;
+						System.out.println("Submit Enrollment Disclaimer is Displayed  : "+flag);
+					}
+					else flag = false;
+				}else flag = false;
 
-		if(validate(SubmitApplicationBtn)){
-			if(SubmitApplicationBtn.isEnabled()){
-				//flag = (!flag)?false:true;
-				System.out.println("Submit Application Button is displayed and Enabled : "+flag);
-			}
-			else flag = false;
-		}else flag = false;
-	*/
-		if (flag) {
-			String expected_EnrollText = "Submitting your enrollment application electronically";
-			String actual_EnrollText = Enrollment_Disclaimer_Text.getText();
-			if (validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)
-					&& actual_EnrollText.contains(expected_EnrollText)) {
-				System.out.println("Submit Enrollment Disclaimer is Displayed  : " + flag);
+				if(validate(SubmitApplicationBtn)){
+					if(SubmitApplicationBtn.isEnabled()){
+						//flag = (!flag)?false:true;
+						System.out.println("Submit Application Button is displayed and Enabled : "+flag);
+					}
+					else flag = false;
+				}else flag = false;
+			*/
 				if (flag) {
-					if (validate(SubmitApplicationBtn)) {
-						if (SubmitApplicationBtn.isEnabled()) {
-							System.out.println("Submit Application Button is displayed and Enabled : " + flag);
+					String expected_EnrollText = "Submitting your enrollment application electronically";
+					String actual_EnrollText = Enrollment_Disclaimer_Text.getText();
+					if (validate(Submit_Disclaimer) && validate(Enrollment_Disclaimer_Text)
+							&& actual_EnrollText.contains(expected_EnrollText)) {
+						System.out.println("Submit Enrollment Disclaimer is Displayed  : " + flag);
+						if (flag) {
+							if (validate(SubmitApplicationBtn)) {
+								if (SubmitApplicationBtn.isEnabled()) {
+									System.out.println("Submit Application Button is displayed and Enabled : " + flag);
+								} else {
+									flag = false;
+								}
+							} else {
+								flag = false;
+							}
 						} else {
 							flag = false;
 						}
-					} else {
-						flag = false;
 					}
-				} else {
-					flag = false;
+					else {
+						flag =false;
+					}
 				}
-			}
-			else {
-				flag =false;
-			}
-		}
 
-		return flag;
-	}
-	
+				return flag;
+			}
+				
 	public boolean validateText(WebElement element,String expectedValue) {
 		boolean result = true;
 		if(!StringUtils.isEmpty(expectedValue)) {

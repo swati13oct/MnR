@@ -1,6 +1,6 @@
 package pages.acquisition.commonpages;
 
-import static org.junit.Assert.assertTrue;
+import static atdd.framework.Assertion.assertTrue;
 
 import java.util.Iterator;
 import java.util.List;
@@ -81,10 +81,11 @@ public class ShopPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
 	private WebElement maLeanHowToEnrollLink;
 	
-	@FindBy(xpath = "//*[contains(@href,'/shop/dual-special-needs-plans.html')and contains(text(),'Shop')]")
+	//@FindBy(xpath = "//*[contains(@href,'/shop/dual-special-needs-plans.html')and contains(text(),'Shop')]")
+	@FindBy(xpath = "//a[contains(@href,'/shop/dual-special-needs-plans')and contains(text(),'Shop')]")
 	private WebElement dsnpShopLink;
 	
-	@FindBy(xpath = "//*[contains(@href,'/shop/prescription-drug-plans.html')and contains(text(),'Shop')]")
+	@FindBy(xpath = "//*[contains(@href,'/shop/prescription-drug-plans')and contains(text(),'Shop')]")
 	private WebElement pdpShopLink;
 	
 	@FindBy(xpath = "//*[contains(@href,'/shop/medicare-advantage-plans') and contains(text(),'Shop')]")
@@ -234,7 +235,7 @@ public class ShopPage extends UhcDriver {
 		jsClickNew(MAShopLink);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
-		if(!driver.getCurrentUrl().contains("shop/medicare-advantage-plans.html")) {
+		if(!driver.getCurrentUrl().contains("shop/medicare-advantage-plans")) {
 			Assert.fail("MA plans page did not load properly");
 		}
 		validateNew(ShopHeader);
@@ -260,7 +261,7 @@ public class ShopPage extends UhcDriver {
 		jsClickNew(dsnpShopLink);
 		waitForPageLoadSafari();
 		validateNew(zipCodeField1);
-		if(!driver.getCurrentUrl().contains("shop/dual-special-needs-plans.html")) {
+		if(!driver.getCurrentUrl().contains("shop/dual-special-needs-plans")) {
 			Assert.fail("SNP plans page did not load properly");
 		}
 		validateNew(ShopHeader);
@@ -427,6 +428,7 @@ public class ShopPage extends UhcDriver {
 		String parentWindow = driver.getWindowHandle();
 		jsClickNew(findAProviderBtn);
 		Thread.sleep(4000);
+		waitForPageLoadSafari();
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
 		while (itr.hasNext()) {
@@ -506,10 +508,10 @@ public class ShopPage extends UhcDriver {
 		if(ExpectedUHCAgentURL.equalsIgnoreCase(CurrentUHCAgentURL)) {
 			System.out.println("****************myuhcagent Page is displayed  ***************");
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else {
-			Assert.fail("****************myuhcagent Page is not loaded ***************");
+			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		String CurrentUHCAgentURL = driver.getCurrentUrl();

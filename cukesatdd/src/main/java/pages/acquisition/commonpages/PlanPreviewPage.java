@@ -1,12 +1,10 @@
 package pages.acquisition.commonpages;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,8 +17,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
-import pages.acquisition.bluelayer.ZipcodeLookupHomePage;
-import pages.acquisition.uhcretiree.Rallytool_Page;
+import atdd.framework.Assertion;
 
 /**
  * @author pgrover1
@@ -118,11 +115,11 @@ public class PlanPreviewPage extends GlobalWebElements {
 		
 		
 		if (getTitle().equalsIgnoreCase("Plan Preview information")) {
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 		else
 		{
-			Assert.assertTrue(false);
+			Assertion.assertTrue(false);
 		}
 		
 
@@ -130,7 +127,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 	}
 
 	
-	public ZipcodeLookupHomePage looksupforZipcodes() {
+	/*public ZipcodeLookupHomePage looksupforZipcodes() {
 		lookzip.click();
 		CommonUtility.waitForPageLoad(driver, zipCodeSearchPopup, CommonConstants.TIMEOUT_30);
 		System.out.println(zipCodeSearchPopupHeading.getText());
@@ -139,7 +136,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 			return new ZipcodeLookupHomePage(driver);
 		}
 		return null;
-	}
+	}*/
 	
 	public void validatesplandropdown(String planname)
 	{
@@ -149,12 +146,12 @@ public class PlanPreviewPage extends GlobalWebElements {
 		if (currentUrl().contains("/plan-documents.html"))
 		{
 			System.out.println("Plan documents page loaded");
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 		else
 		{
-			Assert.fail("Plan document page not found");
+			Assertion.fail("Plan document page not found");
 		}
 			
 	}
@@ -166,33 +163,33 @@ public class PlanPreviewPage extends GlobalWebElements {
 			if (providerLink.isDisplayed() && pharmacyLink.isDisplayed())
 			{
 				System.out.println("Found provider search and pharmacy link");
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			}
 			else
 			{
-				Assert.fail("Issue in validation of provider search and pharmacy link");
+				Assertion.fail("Issue in validation of provider search and pharmacy link");
 			}
 		}
 		else if (plantype.equalsIgnoreCase("MA"))
 		{
 			if (providerLink.isDisplayed())
 			{
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			}
 			else
 			{
-				Assert.fail("Issue in validation of provider search ");
+				Assertion.fail("Issue in validation of provider search ");
 			}
 		}
 		else if (plantype.equalsIgnoreCase("PDP"))
 		{
 			if(pharmacyLink.isDisplayed())
 			{
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			}
 			else
 			{
-				Assert.fail("Issue in validation of pharmacy link ");
+				Assertion.fail("Issue in validation of pharmacy link ");
 			}
 			
 		}
@@ -205,11 +202,11 @@ public class PlanPreviewPage extends GlobalWebElements {
 			pharmacyLink.click();
 			if (getTitle().equalsIgnoreCase("Locate a Pharmacy"))
 			{
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			}
 			else
 			{
-				Assert.fail("Pharmacy page is not loaded");
+				Assertion.fail("Pharmacy page is not loaded");
 			}
 		}
 		
@@ -232,16 +229,16 @@ public class PlanPreviewPage extends GlobalWebElements {
 			Select planyeardropdown = new Select(planyeardropdwn);
 			if (planyeardropdown.getFirstSelectedOption().getText().equals("2017"))
 			{
-				Assert.assertTrue(true);
+				Assertion.assertTrue(true);
 			}
 			else
-				Assert.fail("Issue in 2017 selection");
+				Assertion.fail("Issue in 2017 selection");
 		}
 		else
-			Assert.fail("Plan year dropdown not displayed");
+			Assertion.fail("Plan year dropdown not displayed");
 	}
 	
-	public Rallytool_Page navigatetoRally()
+	/*public Rallytool_Page navigatetoRally()
 	{
 		providerLink.click();
 		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
@@ -253,7 +250,7 @@ public class PlanPreviewPage extends GlobalWebElements {
 	    else
 	    	return null;
 		
-	}
+	}*/
 
 	
 	public JSONObject getActualPdfLinksData() {

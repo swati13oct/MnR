@@ -156,7 +156,7 @@ public class UlayerTFNPage extends UhcDriver {
 	public WebElement MAPlanvpp;
 
 	@FindBy(xpath="//*[contains(@class,'proactive-offer__button ') and contains(@class, 'proactive-offer__close')]")
-	public static WebElement proactiveChatExitBtn;
+	public WebElement proactiveChatExitBtn;
 
 	@FindBy(xpath = "(//*[contains(@class,'wcmAuthorMode geoTargetedContent')])[2]")
 	public WebElement MedSup_2;
@@ -928,13 +928,13 @@ public class UlayerTFNPage extends UhcDriver {
 	public WebElement zipBttnEligiblityPage;
 
 	@FindBy (xpath="(//*[contains(text(),'Shop for 2020 plans')])[3]")
-	private static WebElement planShop2020;
+	private WebElement planShop2020;
 
 	@FindBy (xpath="//*[contains(@id,'GoBtnText')]")
-	private static WebElement GoButton;
+	private WebElement GoButton;
 
 
-	public static void HandleYearSelectionPopUp () {
+	public void HandleYearSelectionPopUp () {
 
 		planShop2020.click();
 		GoButton.click();
@@ -1016,10 +1016,10 @@ public class UlayerTFNPage extends UhcDriver {
 		}
 	}
 	@FindBy(xpath="(//span[contains(text(),'Call UnitedHealthcare')])[1])")
-	public static WebElement TFNLearnAboutMedicare;
+	public WebElement TFNLearnAboutMedicare;
 	
 	@FindBy(xpath="//*[@id='globalContentIdForSkipLink']/div/div/div[6]/div/section/div/div/div[1]/div[1]/div/div/div/div/div/p[1]/span/a")
-	public static WebElement LearnAboutMedicareTFNumber;
+	public WebElement LearnAboutMedicareTFNumber;
 	
 	@FindBy(id = "gfn_lnk_row3_1")
 	 public WebElement learnAboutMedicareLink;
@@ -1028,7 +1028,7 @@ public class UlayerTFNPage extends UhcDriver {
 		//checkChatWindowOnPage();
 		try {
 			CommonUtility.waitForPageLoad(driver, LearnAboutMedicareTFNumber,20);
-			// do not change this to waitForPageLoadNew as we're not trying to fail the test if it isn't found
+			// do not change this to CommonUtility.waitForPageLoadNew as we're not trying to fail the test if it isn't found
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

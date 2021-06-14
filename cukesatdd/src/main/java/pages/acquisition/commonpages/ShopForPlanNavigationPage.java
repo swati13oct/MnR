@@ -1,12 +1,12 @@
 package pages.acquisition.commonpages;
 
-import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
 public class ShopForPlanNavigationPage extends UhcDriver {
@@ -56,13 +56,15 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	@FindBy(xpath = "//button[@type='submit']")
 	private WebElement pcontinue;
 
-	@FindBy(xpath = "//div[@id='planTypesColumn']//a[text()='Enroll']")
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[text()='Enroll']")
 	private WebElement enrollLink;
 	
-	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
+	//@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]")
+	
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//a[contains(text(),'Shop')]")
 	private WebElement shopLink;
 	
-	@FindBy(xpath = "//*[contains(@id,'planTypesColumn')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
+	@FindBy(xpath = "//*[contains(@id,'shop-scroll')]//*[contains(text(),'Shop')]/../following-sibling::p[1]")
 	private WebElement shopLinkMsg;
 
 	@FindBy(xpath = "//a[contains(@href,'ma-enrollment')]")
@@ -76,7 +78,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-advantage-plans')])[2]")
 	private WebElement maLeanHowToshopLink;
 	
-	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[2]")
+	@FindBy(xpath = "(//a[contains(@href,'/shop/medicare-supplement-plans.html')])[3]")
 	private WebElement msLeanHowToshopLink;
 	
 	@FindBy(xpath = "//div[@id='accordion2']//h3[text()='Enrollment']")
@@ -87,6 +89,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 	
 	@FindBy(xpath = "(//a[contains(@href,'/medicare-education/medicare-supplement-plans.html')])[1]")
 	private WebElement MedicareSupplementLink;
+
 	@FindBy(xpath="//a[contains(text(),'Member Resources')]")
 	private WebElement ResourcesLink;
 	
@@ -236,7 +239,7 @@ public class ShopForPlanNavigationPage extends UhcDriver {
 				"Your guide will arrive in your inbox shortly")) {
 			System.out.println("****************Request  information is displayed  ***************");
 
-			Assert.assertTrue(true);
+			Assertion.assertTrue(true);
 		} else {
 			System.out.println("****************Request information is displayed  ***************");
 		}

@@ -94,18 +94,18 @@ public class CoverageOptionsMobilePage extends UhcDriver {
 		mobileUtils.currentPageValidation(page.toUpperCase());
 		validate(pageRequiredInfo, 30);
 		validate(coveragePagePrimaryQuestion, 30);
-		//Assert.assertTrue(coveragePagePrimaryQuestion.getText().contains("coverage"));
+		//Assertion.assertTrue(coveragePagePrimaryQuestion.getText().contains("coverage"));
 		validate(coveragePagePrimaryQuestionAsteriskMark, 30);
 		Assert.assertTrue(coveragePagePrimaryQuestionAsteriskMark.getText().contains("*"));
 		validate(plantypeMAPD, 30);
-		//Assert.assertTrue(plantypeMAPD.getText().contains("and"));
+		//Assertion.assertTrue(plantypeMAPD.getText().contains("and"));
 		mobileswipe("70%", true);
 		validate(plantypeMA, 30);
-		//Assert.assertTrue(plantypeMA.getText().contains("Medical"));
+		//Assertion.assertTrue(plantypeMA.getText().contains("Medical"));
 		validate(plantypePDP, 30);
-		//Assert.assertTrue(plantypePDP.getText().contains("Prescription"));
+		//Assertion.assertTrue(plantypePDP.getText().contains("Prescription"));
 		validate(plantypeNone, 30);
-		//Assert.assertTrue(plantypeNone.getText().contains("don't"));
+		//Assertion.assertTrue(plantypeNone.getText().contains("don't"));
 		validate(continueBtn, 30);
 		validate(previousBtn, 30);
 	}

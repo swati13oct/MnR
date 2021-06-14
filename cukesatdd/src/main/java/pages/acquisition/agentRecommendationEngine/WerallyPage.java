@@ -110,7 +110,7 @@ public class WerallyPage extends UhcDriver {
 //Switch to Werally Window Page
 
 	public ArrayList<String> validateLinksanotherWindow(String primaryWindow, String type, String search) {
-		String browser = MRScenario.browsername;
+		String browser = MRScenario.browserName;
 		String env = MRScenario.environment;
 		threadsleep(2000);
 		ArrayList<String> windows = new ArrayList<String>(driver.getWindowHandles());
@@ -181,7 +181,7 @@ public class WerallyPage extends UhcDriver {
 						for (int i = count - 1; i >= 0; i--) {
 							threadsleep(5000);
 							WebElement saveButton = searchResults.get(i)
-									.findElement(By.cssSelector("div[class*='hidden'] button"));
+									.findElement(By.cssSelector("div[class*='ctaButtonContainer'] button"));
 							saveButton.click();
 							threadsleep(3000);
 							chooseFirstLocation();
@@ -190,6 +190,7 @@ public class WerallyPage extends UhcDriver {
 								newRally = true; */
 							saveModalCloseContinueSearchbutton.click();
 							}
+
 						//desktopLogo.click();
 						jsClickNew(desktopLogo);
 						//viewSavedbutton1.click();
@@ -197,6 +198,7 @@ public class WerallyPage extends UhcDriver {
 						threadsleep(3000);
 						//savedFinishReturnButton.click();
 						jsClickNew(savedFinishReturnButton);
+
 						}
 						try {
 							WebDriverWait wait = new WebDriverWait(driver, 2);

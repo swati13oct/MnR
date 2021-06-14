@@ -179,7 +179,7 @@ public class DCEMobilePage extends UhcDriver {
 //				mobileUtils.mobileLocateElementClick(drugsearchButton);
 //				validate(modalSelcetedDrug, 30);
 //				threadsleep(2000);
-//				Assert.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
+//				Assertion.assertTrue(modalSelcetedDrug.getText().toUpperCase().contains(drugName.toUpperCase()),
 //						"Drug name is not Matched :" + drugName);
 //				// Select modal
 //				modalcontinue.click();

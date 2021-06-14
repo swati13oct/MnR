@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import pages.acquisition.uhcretiree.Rallytool_Page;
 import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 
@@ -22,10 +21,10 @@ import acceptancetests.util.CommonUtility;
 public class SiteMapAARPPage extends GlobalWebElements {
 	 
 	@FindBy(xpath = "//div[@id='medicareTitle']/*")
-	public static WebElement header;
+	public WebElement header;
 	
 	@FindBy(xpath = "//div[contains(@class,'med_cont')]/ul[contains(@class,'bullet_list')]/li")
-	public static List<WebElement> siteMapList;
+	public List<WebElement> siteMapList;
 	
 	
 	public SiteMapAARPPage(WebDriver driver) {
@@ -48,7 +47,7 @@ public class SiteMapAARPPage extends GlobalWebElements {
 	private static String AARP_SITE_MAP_PAGE_URL = MRConstants.AARP_SITE_MAP_PAGE_URL;
 	private static String AARP_SITE_MAP_PAGE_URL_OFFLINE = MRConstants.AARP_SITE_MAP_PAGE_URL_OFFLINE;
 	
-	public Rallytool_Page providerlinkonaarpsitemapClick() {
+	/*public Rallytool_Page providerlinkonaarpsitemapClick() {
 		validate(providerlinkonaarpsitemaplink);
 		
 		providerlinkonaarpsitemaplink.click();
@@ -62,7 +61,7 @@ public class SiteMapAARPPage extends GlobalWebElements {
 		
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	
 

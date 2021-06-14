@@ -173,6 +173,7 @@ public class LandingAndZipcodeMobilePage extends UhcDriver {
 
 	public void zipcodepageValidationmobile(HashMap<String, String> inputdata) {
 		zipCode.clear();
+
 		mobileactionsendkeys(zipCode, inputdata.get("Zip Code"));
 		hidekeypad();
 		if (inputdata.get("Is Multi County").equalsIgnoreCase("no")) {

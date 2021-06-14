@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public static ArrayList<String> DCEDrugsList = new ArrayList<String>();
 	ArrayList<String> druglistPRE;
 	public static ArrayList<String> DrugsList = new ArrayList<String>();
-	static ArrayList<String> vppDrugsResults = new ArrayList<String>();
+	public static ArrayList<String> vppDrugsResults = new ArrayList<String>();
 	static ArrayList<String> DCEDrugsResults = new ArrayList<String>();
 
 	String page = "Drug Cost Estimator";
@@ -271,7 +269,7 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	public void Pharmacytype() {
 		threadsleep(5000);
     	validate(PharmacyType);
-    	Assert.assertTrue(PharmacyType.getText().contains("Preferred Mail Service Pharmacy"), "Pharmacy is not default online");    			
+    	Assert.assertTrue(PharmacyType.getText().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
 	}
 	
 	public void getDruglist(){
@@ -290,3 +288,4 @@ public class ACQDrugCostEstimatorPage extends UhcDriver {
 	}
 
 }
+

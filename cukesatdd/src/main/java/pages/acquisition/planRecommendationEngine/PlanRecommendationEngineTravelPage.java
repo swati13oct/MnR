@@ -8,10 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineTravelPage extends UhcDriver {
+public class PlanRecommendationEngineTravelPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineTravelPage(WebDriver driver) {
 		super(driver);
@@ -21,7 +20,7 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 	String page = "Travel";
@@ -75,7 +74,16 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	@FindBy(css = "#errorMessage>span:nth-child(2)")
 	private WebElement errorMessage;
 	
-	@FindBy(css = "label[for*='checkbox-8-input'] >span:nth-child(1) .checkbox-check")
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(2)>uhc-checkbox.checkbox-checked label>span:nth-child(1)")
+	private WebElement checkedTravelWithinOption;
+	
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(3)>uhc-checkbox.checkbox-checked label>span:nth-child(1)")
+	private WebElement checkedTravelOutsideOption;
+	
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(4)>uhc-checkbox.checkbox-checked label>span:nth-child(1)")
+	private WebElement checkedTravelRegularOption;
+	
+	@FindBy(css = "uhc-checkbox-group>fieldset>div:nth-child(5)>uhc-checkbox.checkbox-checked label>span:nth-child(1)")
 	private WebElement checkedTravelNoneOption;
 
 
@@ -86,20 +94,20 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 			String currentPageUrl = driver.getCurrentUrl();	
 			currentPageUrl.contains("/plan-recommendation-engine.html/");
 			validate(planSelectorPageTilte);
-//			Assert.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
+//			Assertion.assertTrue(planSelectorPageTilte.getText().contains("Get help finding a plan"));
 			validate(pageStepsNumberName, 30);
 			validate(pageProgressPercentage, 30);
 			desktopCommonUtils.currentPageValidation(page.toUpperCase());
 			validate(pageRequiredInfo);
-//			Assert.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
+//			Assertion.assertTrue(pageRequiredInfo.getText().contains("All fields marked with "), " are required");
 			validate(travelWithin);
-//			Assert.assertTrue(travelWithin.getText().contains("within"));
+//			Assertion.assertTrue(travelWithin.getText().contains("within"));
 			validate(travelAnotherpart, 30);
-//			Assert.assertTrue(travelAnotherpart.getText().contains("another"));
+//			Assertion.assertTrue(travelAnotherpart.getText().contains("another"));
 			validate(travelPrimary, 30);
-//			Assert.assertTrue(travelPrimary.getText().contains("primary"));
+//			Assertion.assertTrue(travelPrimary.getText().contains("primary"));
 			validate(travelNone, 30);
-//			Assert.assertTrue(travelNone.getText().contains("None"));
+//			Assertion.assertTrue(travelNone.getText().contains("None"));
 			previousBtn.click();
 			System.out.println("Validationg "+page+" page Previous button functionality");
 			desktopCommonUtils.previousPageValidation(page.toUpperCase());
@@ -167,8 +175,20 @@ public class PlanRecommendationEngineTravelPage extends UhcDriver {
 	}
 	
 	public void edit_travel(String options) {
-		if(checkedTravelNoneOption.isDisplayed())
+		if(validate(checkedTravelWithinOption, 20)) {
+			validate(travelWithin, 30);
+			jsClickNew(travelWithin);	
+		}else if(validate(checkedTravelOutsideOption, 20)) {
+			validate(travelAnotherpart, 30);
+			jsClickNew(travelAnotherpart);
+		}else if(validate(checkedTravelRegularOption, 20)) {
+			validate(travelPrimary, 30);
+			jsClickNew(travelPrimary);	
+		}else if(validate(checkedTravelNoneOption, 20)) {
+			validate(travelNone, 30);
 			jsClickNew(travelNone);
+		}
+		
 		String snpoptions[] = options.split(",");
 		for(String option:snpoptions) {
 			travelpageFunctional(option);

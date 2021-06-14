@@ -4,13 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
+
 import acceptancetests.util.CommonUtility;
+import atdd.framework.Assertion;
 
 public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 
@@ -138,7 +139,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("rani_madadi@optum.com");
 		System.out.println("!!!Entered valid Email ");
 		sendButtonEmailPlanComparePopUp.click();
-		Assert.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));
+		Assertion.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));
 		//Validating email success popup
 		System.out.println("Email has successfull send to user");
 		validateNew(validatesuccesspopup);
@@ -260,7 +261,7 @@ public class PlanCompareEmailAndPrintUtil extends EmailAndPrintUtilBase{
 			}
 		}
 
-		Assert.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , compare_finalResult);
+		Assertion.assertTrue("PROBLEM - original page content and email deeplink page content are not the same. total items mismatch='"+listOfFailure.size()+"'. list of mismatch: "+listOfFailure , compare_finalResult);
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);  
 		return testNote;
 	}

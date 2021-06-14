@@ -18,6 +18,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.acquisition.ole.WelcomePage;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.MRConstants;
@@ -524,6 +525,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 						if(benefitValueUI.contains("footnote2") && benefitValueUI.contains("footnote1")) {
 							benefitValueUI = benefitValueUI.replace("footnote2", "");
 							benefitValueUI = benefitValueUI.replace("footnote1", "");
+							
 						}else if(benefitValueUI.contains("footnote2"))
 							benefitValueUI = benefitValueUI.replace("footnote2", "");
 						else if(benefitValueUI.contains("footnote1"))
@@ -534,7 +536,14 @@ public class AepPlanDetailsPage extends UhcDriver {
 							benefitValueUI = benefitValueUI.replaceAll("2/", "");
 						else if(benefitValueUI.contains("/") &&!benefitValueUI.contains("mydoctor"))
 							benefitValueUI =benefitValueUI.replaceAll("/", "");
-
+						else if(key.equalsIgnoreCase("plan name")) {
+							benefitValueUI = benefitValueUI.substring(0, benefitValueUI.indexOf(")")+1);
+						}
+                        else if(benefitValueUI.contains("monthlyvaries2")) {
+								benefitValueUI = benefitValueUI.replaceAll("monthlyvaries2", "monthlyvaries");	
+						}
+						if(!columnName.contains("doctors/providers"))
+							benefitValueUI = benefitValueUI.replaceAll("/", "");
 						/*if(key.equalsIgnoreCase("Walgreens – Preferred Retail Pharmacy")) {
 							 if(benefitValueUI.contains(".1"))
 								benefitValueUI = benefitValueUI.replace(".1", "");
@@ -620,7 +629,13 @@ public class AepPlanDetailsPage extends UhcDriver {
 			int tabIndex=(tab+1);
 			CommonUtility.checkPageIsReady(driver);
 
-			//System.out.println("Before Tab: "+tabIndex+" "+new Timestamp(System.currentTimeMillis()));
+			WebElement estimatedTotalValue =null;
+			String estimatedTotalXpath = "//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')][1]//table//tr[not(contains(@class,'ng-hide'))]//*[contains(text(),'Estimated')]/ancestor::td//following-sibling::td";
+
+			if(listOfTabHeaders.get(tab).getText().contains("Plan Costs")) {
+				estimatedTotalValue=driver.findElement(By.xpath(estimatedTotalXpath));System.out.println(estimatedTotalValue.getText());
+				result.put("Estimated Annual Total No riders", estimatedTotalValue.getText());
+			}
 			//note: store section table
 			int numSectionTable=listOfSectionHeaderForActiveTab.size();
 			//result.put("Total Sections Per T"+tabIndex,String.valueOf(numSectionTable));
@@ -680,10 +695,12 @@ public class AepPlanDetailsPage extends UhcDriver {
 			
 							
 							WebElement e=driver.findElement(By.xpath(eachCellXpath));
-							if(e.getText().contains("Platinum Dental") && e.getText().contains("Optional Rider"))
+							
+							
+							if(e.getText().contains("Platinum Dental") && e.getText().contains("Optional Rider")) {
 								platinumDentalCheckbox.click();		
-							else if(e.getText().contains("Silver Sneakers"))
-								silverSneakersCheckbox.click();
+								result.put("Estimated Annual Total Platinum Dental",estimatedTotalValue.getText());
+							}
 							
 							if(listOfCellsPerRow.size()==2) {
 								System.out.println(e.getText());
@@ -692,6 +709,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 										key=e.getText();
 										WebElement g = driver.findElement(By.xpath("//div[contains(@id,'detail') and contains(@class,'active')]//div[contains(@class,'plan-benefits')]["+sectionIndex+"]//table//tr[not(contains(@class,'ng-hide'))]["+rowIndex+"]//td["+(cellIndex+1)+"]"));
 										value = g.getText();
+										result.put("Estimated Annual Total High Option Dental",estimatedTotalValue.getText());
 										//optionalDentalCheckbox.click();
 										
 									}else if(cellIndex==1) {
@@ -734,5 +752,25 @@ public class AepPlanDetailsPage extends UhcDriver {
 		return result;
 	}
 	
+	public void navigateToDCEandAddDrug(String drugName) throws InterruptedException {
+		
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
+	
+		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
+		dcePage.addDrug(drugName);
+		dcePage.clickOnReturnLink();
+	}
+
+	public void editDrugListAndRemoveDrug() {
+		validateNew(editDrugListLink);
+		editDrugListLink.click();
+		validateNew(deleteDrugLink);
+		deleteDrugLink.click();
+		validateNew(confirmDeleteDrug);
+		confirmDeleteDrug.click();
+		DrugCostEstimatorPage dcePage = new DrugCostEstimatorPage(driver);
+		dcePage.clickOnReturnLink();
+	}
 
 }

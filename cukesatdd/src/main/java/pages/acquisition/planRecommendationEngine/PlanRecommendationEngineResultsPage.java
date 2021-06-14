@@ -1,6 +1,4 @@
-/**
-* 
- */
+
 package pages.acquisition.planRecommendationEngine;
 
 import java.text.DateFormat;
@@ -30,15 +28,10 @@ import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import acceptancetests.util.CommonUtility;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
 
-public class PlanRecommendationEngineResultsPage extends UhcDriver {
+public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 
 	public PlanRecommendationEngineResultsPage(WebDriver driver) {
 		super(driver);
@@ -48,7 +41,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 	
@@ -556,7 +549,7 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 		if (R1.equalsIgnoreCase("MA")) {
 //			MAViewPlansLink.click();
 			validate(MA1stPlanName, 60);
-//			Assert.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()), "MA Invalid Plan Ranking");
+//			Assertion.assertTrue(MA1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()), "MA Invalid Plan Ranking");
 			//mobileUtils.mobileLocateElementClick(MA1stPlanEnroll);
 //			clickEnrolldesktop(MA1stPlanEnroll);
 		}
@@ -564,21 +557,21 @@ public class PlanRecommendationEngineResultsPage extends UhcDriver {
 //			MSViewPlansLink.click();
 			submitMSform();
 			validate(MS1stPlanName, 60);
-//			Assert.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"MS Invalid Plan Ranking");
+//			Assertion.assertTrue(MS1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"MS Invalid Plan Ranking");
 			//mobileUtils.mobileLocateElementClick(MS1stPlanEnroll);
 			clickEnrolldesktop(MS1stPlanEnroll,needhelptxtMS);
 		}
 		if (R1.equalsIgnoreCase("PDP")) {
 //			PDPViewPlansLink.click();
 			validate(PDP1stPlanName, 60);
-//			Assert.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"PDP Invalid Plan Ranking");
+//			Assertion.assertTrue(PDP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"PDP Invalid Plan Ranking");
 			//mobileUtils.mobileLocateElementClick(PDP1stPlanEnroll);
 //			clickEnrolldesktop(PDP1stPlanEnroll);
 		}
 		if (R1.equalsIgnoreCase("SNP")) {
 //			SNPViewPlansLink.click();
 			validate(SNP1stPlanName, 60);
-//			Assert.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"SNP Invalid Plan Ranking");
+//			Assertion.assertTrue(SNP1stPlanName.getText().toUpperCase().contains(plan.toUpperCase()),"SNP Invalid Plan Ranking");
 			//mobileUtils.mobileLocateElementClick(SNP1stPlanEnroll);
 			if(SNP1stPlanName.getText().toUpperCase().contains("D-SNP")) 
 				clickEnrolldesktop(SNP1stPlanEnroll,needhelptxt);
@@ -1185,18 +1178,21 @@ public void validateUIAPIRankingPlans() {
 	List<String> maAPIRankings = getAPIPlansRanking(rankingJSON,"MA");
 	if(maAPIRankings.size()>0) {
 	validate(MA1stPlanName, 60);
+	click_ViewPlanLink(MAViewPlansLink);
 	verifyAPIRankings(MAPlansId,maAPIRankings);
 	driver.navigate().refresh();
 	plansLoader();
 	}
 	List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON,"PDP");
 	validate(PDP1stPlanName, 60);
+	click_ViewPlanLink(PDPViewPlansLink);
 	verifyAPIRankings(PDPPlansId,pdpAPIRankings);
 	driver.navigate().refresh();
 	plansLoader();
 	List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON,"SNP");
 	if(snpAPIRankings.size()>0) {
 	validate(SNP1stPlanName, 60);
+	click_ViewPlanLink(SNPViewPlansLink);
 	verifyAPIRankings(SNPPlansId,snpAPIRankings);
 	}
 }
@@ -1499,6 +1495,9 @@ public void useraddDrugsVPP(String drugDetails) {
 }
 
 public void userPreDCE() {
+	if(validate(MAViewPlansLink,15) ) {
+		MAViewPlansLink.click();
+	}
 	threadsleep(10000);
 	drugCoveredeVPP = MA1stPlanList.get(0).findElement(By.cssSelector("a[class*='add-drug']"));
 	jsClickNew(drugCoveredeVPP);
@@ -1735,7 +1734,8 @@ public void validateDrugProvider() {
 	ArrayList<String> vpProviders = new ArrayList<String>();
 	DrugsInPRE = PlanRecommendationEngineDrugsPage.drugNames;
 	DocInPRE = PlanRecommendationEngineDoctorsPage.confirmationResults;
-	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("/")[0].split("Drugs")[1].trim());
+	scrollToView(DrugCount);
+	int drgcount =  Integer.parseInt(DrugCount.getText().trim().replace(")", "").replace("(", "").split("&")[0].split("Drugs")[1].trim());
 	for(int i=0; i<drgcount;i++) {
 		vpdrugs.add(Druglist.get(i).findElement(By.cssSelector("div[id*='DrugName-noplan']")).getText().trim()
 				.toUpperCase() + " "
@@ -1744,7 +1744,7 @@ public void validateDrugProvider() {
 	Collections.sort(vpdrugs);
 	System.out.println(vpdrugs);
 	verifyConfirmationmodalResults(drgcount,DrugsInPRE,vpdrugs);
-//	Assert.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
+//	Assertion.assertTrue(vpdrugs.contains(drugs.toUpperCase()), "--- Drug name are not matches---");
 	threadsleep(3000);
 	
 	int prdcount =  Integer.parseInt(ProviderCount.getText().trim().replace(")", "").replace("(", "").split("Providers")[1].trim());
@@ -1754,13 +1754,21 @@ public void validateDrugProvider() {
 	Collections.sort(vpProviders);
 	System.out.println(vpProviders);
 	verifyConfirmationmodalResults(prdcount,DocInPRE,vpProviders);
-//	Assert.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
+//	Assertion.assertTrue(vpProviders.contains(doctors.toUpperCase()), "--- Doctors name are not matches---");
 	threadsleep(3000);
 	System.out.println("Drug and provider details successfully validated in VP ");
+	System.out.println("Validate Pharamacy details in VP ");
+	Pharmacytype();
 	scrollToView(Addplans);
 	jsClickNew(Addplans);
 	threadsleep(8000);
 	Assert.assertTrue(driver.getCurrentUrl().contains("/plan-summary"), "--- VPP Summary not loaded---");
+}
+
+public void Pharmacytype() {
+	threadsleep(5000);
+	int count = Druglist.size();
+	Assert.assertTrue(Druglist.get(count-1).findElement(By.cssSelector("span")).getText().trim().contains("OptumRx Mail Service Pharmacy"), "Pharmacy is not default online");    			
 }
 
 public void navigatePRE(HashMap<String, String> inputdata) {
@@ -1882,4 +1890,17 @@ public String verifyplanNameCompare(WebElement plan,WebElement planCompare) {
     return exceptedplanName;
 }
 
+public boolean click_ViewPlanLink(WebElement plantype) {
+	boolean viewlink_presents = false;
+	System.out.println("Checking viewlink Status...");
+	if(validate(plantype, 20)) {
+		threadsleep(1000);
+		jsClickNew(plantype);
+		threadsleep(1000);
+		viewlink_presents = true;
+	}
+	return viewlink_presents;
 }
+
+}
+

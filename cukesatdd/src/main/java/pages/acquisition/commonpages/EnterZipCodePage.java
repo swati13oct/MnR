@@ -1,6 +1,6 @@
 package pages.acquisition.commonpages;
 
-import static org.junit.Assert.assertTrue;
+import static atdd.framework.Assertion.assertTrue;
 
 import java.util.List;
 import java.util.Set;
@@ -12,7 +12,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.PageTitleConstants;
 
 public class EnterZipCodePage extends UhcDriver {
 
@@ -69,24 +68,27 @@ public class EnterZipCodePage extends UhcDriver {
 
 				System.out.println("Actual : " + vppPageTitle);
 				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+					if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					else if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out
 								.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 					else
 						assertTrue("Not redirected to VPP page",
-								vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+								vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")));
 				} else {
-					if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
+					if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+					if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE);
-					else if (vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE))
+					else if (vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")))
 						System.out
 								.println("Page Title : " + PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_SHOP_MEDICARE);
 					else
 						assertTrue("Not redirected to VPP page",
-								vppPageTitle.contains(PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE));
+								vppPageTitle.replaceAll("[^A-Za-z0-9:.]", "").contains((PageTitleConstants.BLAYER_VPP_PLAN_PAGE_AARP_MEDICARE).replaceAll("[^A-Za-z0-9:.]", "")));
+					}
 				}
+				
 				if (driver.getWindowHandles().size() > 1) {
 					String currentPage = driver.getWindowHandle();
 					Set<String> newWindow = driver.getWindowHandles();
@@ -100,12 +102,14 @@ public class EnterZipCodePage extends UhcDriver {
 				}
 				else {
 					driver.navigate().back();
+					threadsleep(20000);
 				}
 				zipCodeNumber++;
 				/*driver.navigate().refresh();	//Adding refresh since element are not located in Safari browser after using navigate back
 				threadsleep(2000);*/
 			}
-		} catch (Exception e) {
+			
+		}catch (Exception e) {
 			System.out.println(e);
 		}
 	}

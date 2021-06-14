@@ -1,30 +1,10 @@
 
 package acceptancetests.acquisition.providersearch;
 
-import gherkin.formatter.model.DataTableRow;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import pages.acquisition.bluelayer.AcquisitionHomePage;
-import pages.acquisition.bluelayer.VPPPlanSummaryPage;
-import pages.acquisition.bluelayer.VPPTestHarnessPage;
-import pages.acquisition.bluelayer.PlanDetailsPage;
-import pages.acquisition.bluelayer.ProviderSearchPage;
-import acceptancetests.acquisition.vpp.VPPCommonConstants;
-import acceptancetests.data.CommonConstants;
-import acceptancetests.data.PageConstants;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
 
 /**
  * Functionality:ProviderSearch
@@ -43,7 +23,7 @@ public class ProviderSearchStepDefinitionUHC {
 	/**
 	 * @toDo:user is on UMS medicare acquisition site landing page
 	 */
-	@Given("^the user is on UMS medicare acquisition site landing page$")
+	/*@Given("^the user is on UMS medicare acquisition site landing page$")
 	public void user_UMS_Medicare() {
 		WebDriver wd = getLoginScenario().getWebDriver();
 
@@ -53,10 +33,10 @@ public class ProviderSearchStepDefinitionUHC {
 
 	}
 
-	/**
+	*//**
 	 * @toDo:the user performs plan search using following information in the
 	 *           UMS site
-	 */
+	 *//*
 	@When("^the user performs plan search using following information in the UMS site$")
 	public void zipcode_details_in_UMS_site(DataTable givenAttributes) {
 
@@ -80,13 +60,13 @@ public class ProviderSearchStepDefinitionUHC {
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 		} else {
-			Assert.fail("Error Loading VPP plan summary page");
+			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
 
-	/**
+	*//**
 	 * @toDo:the user Click on Show Plans link
-	 */
+	 *//*
 	@When("^the user Click on Show Plans link$")
 	public void clickonshowplans(DataTable planTypeAttribute) {
 
@@ -107,9 +87,9 @@ public class ProviderSearchStepDefinitionUHC {
 		plansummaryPage.viewPlanSummary(planType);
 	}
 
-	/**
+	*//**
 	 * @toDo:user Click on Is my Provider covered link ums
-	 */
+	 *//*
 	@When("^user Click on Is my Provider covered link ums$")
 	public void user_click_on_Providercoveredlink_ums(DataTable Planname) {
 		List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
@@ -131,10 +111,10 @@ public class ProviderSearchStepDefinitionUHC {
 		}
 	}
 
-	/**
+	*//**
 	 * @toDo:Verify X out of Y provider covered information is displayed on Plan
 	 *              Summary page
-	 */
+	 *//*
 	@Then("^Verify X out of Y provider covered information is displayed on Plan Summary page ums$")
 	public void verify_providers_covered_ums(DataTable Planname) {
 
@@ -149,13 +129,13 @@ public class ProviderSearchStepDefinitionUHC {
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assert.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
+		Assertion.assertTrue("Provider coverage Info not updated", plansummaryPage.providerinfo(planName));
 	}
 	
-	/**
+	*//**
 	 * @toDo:Verify provider covered information is displayed on Plan
 	 *              Summary page
-	 */
+	 *//*
 	@Then("^Verify provider name is displayed on Plan Summary page ums$")
 	public void verify_provider_covered_ums(DataTable Planname) {
 
@@ -173,16 +153,16 @@ public class ProviderSearchStepDefinitionUHC {
 		plansummaryPage.verifyproviderName(planName);
 	}
 
-	/**
+	*//**
 	 * @toDo:user user selects a provider
-	 */
+	 *//*
 	@When("^user selects a provider and retuns to VPP page in ums$")
 	public void user_selects_provider_and_return_vpp_page_ums() {
 		{
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsProvider();
-			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
@@ -193,28 +173,28 @@ public class ProviderSearchStepDefinitionUHC {
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPage plansummaryPage = providerSearchPage.selectsHospitals();
-			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
 	
-	/**
+	*//**
 	 * @toDo:user user selects a Multiple providers
-	 */
+	 *//*
 	@When("^user selects a multiple providers and retuns to VPP page in ums$")
 	public void user_selects_a_multiple_providers_and_retuns_to_VPP_page_in_ums() {
 		{
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			VPPPlanSummaryPage plansummaryPage = providerSearchPage.MultipleselectsProvider();
-			Assert.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
+			Assertion.assertTrue("Not able to return to Plan Summary page", plansummaryPage != null);
 
 		}
 	}
 	
-	/**
+	*//**
 	 * @toDo: user performs plan search using following information
-	 */
+	 *//*
 	@When("^the user clicks on Provider Search on the global header on UHC site$")
 	public void zipcode_details_in_uhc_site() {
 		
@@ -226,7 +206,7 @@ public class ProviderSearchStepDefinitionUHC {
 		if (providerSearchPage != null) {
 			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 		} else {
-			Assert.fail("Error Loading Rally tool from Global Header");
+			Assertion.fail("Error Loading Rally tool from Global Header");
 		}
 	}
 	
@@ -254,9 +234,9 @@ public class ProviderSearchStepDefinitionUHC {
 		}
 	}
 		
-		/**
+		*//**
 		 * @toDo:user user selects a provider
-		 */
+		 *//*
 		@When("^user selects a provider and saves it on UHC Site$")
 		public void user_selects_provider_and_saves_it() {
 			{
@@ -267,9 +247,9 @@ public class ProviderSearchStepDefinitionUHC {
 			}
 		}
 		
-		/**
+		*//**
 		 * @toDo: user performs plan search using following information
-		 */
+		 *//*
 		@When("^the user clicks on Provider Search on the Home Page on UHC Site$")
 		
 		public void providerSearch_details_in_Uhc_site_from_HomePage() {
@@ -282,35 +262,35 @@ public class ProviderSearchStepDefinitionUHC {
 			if (providerSearchPage != null) {
 				getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
 			} else {
-				Assert.fail("Error Loading Rally tool from Home Page");
+				Assertion.fail("Error Loading Rally tool from Home Page");
 			}
 		}
 		
 
-		/**
+		*//**
 		 * @toDo:user user selects a provider on Vpp Plan Details page
-		 */
+		 *//*
 		@When("^user selects a provider and retuns to VPP plan details page in blayer$")
 		public void user_selects_provider_and_return_vpp_Plan_details_page_blayer() {
 			{
 				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 				PlanDetailsPage planDetailsPage = providerSearchPage.selectsProviderFromVppPlanDetailsPage();
-				Assert.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
+				Assertion.assertTrue("Not able to return to Plan Details page", planDetailsPage != null);
 
 			}
 		}
 		
-		/**
+		*//**
 		 * @toDo:Verify X out of Y provider covered information is displayed on Plan
 		 *              Summary page
-		 */
+		 *//*
 		@Then("^Verify X out of Y provider covered information is displayed on Plan Details page blayer$")
 		public void verify_providers_covered_blayer_planDetails() {
 			PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 			if(!vppPlanDetailsPage.providerinfo()){
-				Assert.fail("Failed in validating the provider link on plan details page");
+				Assertion.fail("Failed in validating the provider link on plan details page");
 			}
 		}
 		
@@ -320,14 +300,14 @@ public class ProviderSearchStepDefinitionUHC {
 				ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 						.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 				VPPTestHarnessPage vppTestHarnessPage = providerSearchPage.selectsProviderNavigateBacktoTestharness();
-				Assert.assertTrue("Not able to return to Testharness page", vppTestHarnessPage != null);
+				Assertion.assertTrue("Not able to return to Testharness page", vppTestHarnessPage != null);
 
 			}
 		}
 		
-		/**
+		*//**
 		 * @toDo: user Enters a zipcode
-		 */
+		 *//*
 		@Then("^the user enters the zipcode and counts the plan Blayer$")
 		public void user_enters_the_zipcode_and_counts_plan_blayer(DataTable givenAttributes) {
 
@@ -351,7 +331,7 @@ public class ProviderSearchStepDefinitionUHC {
 				 int strplancount = Integer.parseInt(plancount);
 				 System.out.println("expected=="+strplancount +"===actual==" +intPlanCounts);
 				 if(intPlanCounts!=strplancount){
-					Assert.fail("Plan count is not matching");
+					Assertion.fail("Plan count is not matching");
 				 }
 				
 
@@ -376,26 +356,26 @@ public class ProviderSearchStepDefinitionUHC {
 
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			/*
+			
 			ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
 			plansummaryPage.setStringList(providers);
-			Assert.assertFalse("Providers not added",providers.isEmpty());
+			Assertion.assertFalse("Providers not added",providers.isEmpty());
 			
 			//Adding Line for Marketing bullet points
 			VPPPlanSummaryPage plansummaryPage1 = (VPPPlanSummaryPage) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			ArrayList<String> vppmarketingBullets =plansummaryPage1.validate_marketing_details(planName);
 			plansummaryPage1.setStringList(vppmarketingBullets);
-			Assert.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
+			Assertion.assertFalse("Providers not added",vppmarketingBullets.isEmpty());
 			System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
 			// Line End for Marketing bullet points
-			*/
+			
 			
 			ArrayList<String> providers = plansummaryPage.providerinforetreive(planName);
-			Assert.assertFalse("Providers not added",providers.isEmpty());
+			Assertion.assertFalse("Providers not added",providers.isEmpty());
 			System.out.println("List of Providers in OLE page is: " + providers);
 			ArrayList<String> vppmarketingBullets =plansummaryPage.validate_marketing_details(planName);
-			Assert.assertFalse("Marketing Bullets not added",vppmarketingBullets.isEmpty());
+			Assertion.assertFalse("Marketing Bullets not added",vppmarketingBullets.isEmpty());
 			System.out.println("List of MarketingBullets in OLE page is: " + vppmarketingBullets);
 		    Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 		    map.put("Provider", providers);
@@ -408,5 +388,5 @@ public class ProviderSearchStepDefinitionUHC {
 			ProviderSearchPage providerSearchPage = (ProviderSearchPage) getLoginScenario()
 					.getBean(PageConstants.PROVIDER_SEARCH_PAGE);
 			providerSearchPage.verifyProviderSearchRallyPageDisplayed();
-		}
+		}*/
 }

@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 
@@ -25,7 +27,13 @@ public class CancelOLEModal extends UhcDriver{
 	
 	@FindBy(id = "backBtn")
 	private WebElement BackBtn;
-
+	
+	@FindBy(xpath="//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
+	public WebElement proactiveChatExitBtn;
+	
+	@FindBy(xpath="//button[contains(@id,'ip-no')]")
+	public WebElement AccessibilityButton;
+	
 	public CancelOLEModal(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -37,8 +45,28 @@ public class CancelOLEModal extends UhcDriver{
 		validate(CancellationModal);
 		
 	}
-
+	
+	public void CheckiPerseptions() {
+		CommonUtility.waitForPageLoad(driver, AccessibilityButton, 20); // do not change this to waitForPageLoadNew as
+																			// we're not trying to fail the test if it
+																			// isn't found
+		try {
+			if (AccessibilityButton.isDisplayed())
+				jsClickNew(AccessibilityButton);
+		} catch (Exception e) {
+			System.out.println("Accessibility Button popup not displayed");
+		}
+	}	
+	private void CheckPageLoad() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		System.out.println("Current page URL: "+driver.getCurrentUrl());
+		if(MRScenario.environment.equalsIgnoreCase("offline")||MRScenario.environment.equalsIgnoreCase("prod"))
+			checkModelPopup(driver, 10);
+	
+	}
 	public Object returntoOLE() {
+		CheckPageLoad();
+		CheckiPerseptions();
 		validate(BackBtn);
 		BackBtn.click();
 		try {

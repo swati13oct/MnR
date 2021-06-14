@@ -11,6 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
 
+import javax.swing.Scrollable;
+
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -29,8 +31,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import acceptancetests.data.LoginCommonConstants;
 import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
+import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import junit.framework.Assert;
+import atdd.framework.UhcDriver;
 
 /**
  * @author pjaising
@@ -111,10 +114,9 @@ public class CommonUtility {
 				}
 			}
 			System.out.println("The element: " + elementExpected + " is visible");
-			
 
 		} catch (Exception e) {
-			//Assert.fail("Not able to locate this element -- " + element + " on page");
+			//Assertion.fail("Not able to locate this element -- " + element + " on page");
 			System.out.println("error in waiting for page load "+e.getMessage());
 		}
 
@@ -402,11 +404,11 @@ public class CommonUtility {
 				System.out.println("The element: " + elementExpected + " is visible");
 			} else {
 				System.out.println("The element: " + elementExpected + " is not visible");
-				Assert.fail("The element: " + elementExpected + " is not visible");
+				Assertion.fail("The element: " + elementExpected + " is not visible");
 			}
 
 		} catch (Exception e) {
-			Assert.fail("Not able to locate this element -- " + element + " on page");
+			Assertion.fail("Not able to locate this element -- " + element + " on page");
 			System.out.println(e.getMessage());
 		}
 
@@ -421,11 +423,11 @@ public class CommonUtility {
 				System.out.println("The element: " + elementExpected + " is visible");
 			} else {
 				System.out.println("The element: " + elementExpected + " is not visible");
-				Assert.fail("The element: " + elementExpected + " is not visible");
+				Assertion.fail("The element: " + elementExpected + " is not visible");
 			}
 
 		} catch (Exception e) {
-			Assert.fail("Not able to locate this element -- " + element + " on page");
+			Assertion.fail("Not able to locate this element -- " + element + " on page");
 			System.out.println(e.getMessage());
 		}
 
@@ -448,21 +450,21 @@ public class CommonUtility {
 					return true;
 				}
 				try {
-					System.out.println(counter+" of 23 tries - wait 5 sec for document.readyState=complete... ");
+					System.out.println(counter + " of 23 tries - wait 5 sec for document.readyState=complete... ");
 					Thread.sleep(5000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				}			
+				}
 			}
-			Assert.fail("TimeOut!!! Page not loaded");
+			Assertion.fail("TimeOut!!! Page not loaded");
 		} catch (UnhandledAlertException ae) {  //if getting alert error, stop and fail the test
 			Alert alert = driver.switchTo().alert();
-			System.out.println("Alert text="+alert.getText());
+			System.out.println("Alert text=" + alert.getText());
 			if (alert.getText().contains("an error while processing your information")) {
-				Assert.assertTrue("***** Got Alert message: "+alert.getText(), false);
-			} 
+				Assertion.assertTrue("***** Got Alert message: " + alert.getText(), false);
+			}
 		} catch (WebDriverException e) {
-			Assert.assertTrue("PROBLEM - got webdriver exception: "+e, false);
+			Assertion.assertTrue("PROBLEM - got webdriver exception: " + e, false);
 			return false;
 		}
 		return false;

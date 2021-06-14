@@ -3,41 +3,21 @@
  */
 package pages.acquisition.planRecommendationEngine;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
-import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
-import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
-import pages.mobile.acquisition.planrecommendationengine.DoctorsMobilePage;
-import pages.mobile.acquisition.planrecommendationengine.DrugMobilePage;
+import pages.acquisition.commonpages.GlobalWebElements;
 
-public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
+public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements {
 
 	public PlanRecommendationEngineEditResponsePage(WebDriver driver) {
 		super(driver);
@@ -47,7 +27,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		checkModelPopup(driver);
-		clickIfElementPresentInTime(driver, AcquisitionHomePage.proactiveChatExitBtn, 30);
+		clickIfElementPresentInTime(driver, proactiveChatExitBtn, 30);
 		waitTillFrameAvailabeAndSwitch(iframePst, 45);
 	}
 
@@ -187,6 +167,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	}
 
 	public void navigateEditResponsePage(String flow) {
+		waitForPageLoadSafari();
 		if (flow.equalsIgnoreCase("pdp")) {
 			pdpEditResponseButton.click();
 		} else {
@@ -428,7 +409,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 				"Progres Bar does not have required Info");
 		editValue(randomSection);
 		// cancelButton.click();
-		// Assert.assertTrue(validate(returnToPlanLink,10),"Invalid cancel action");
+		// Assertion.assertTrue(validate(returnToPlanLink,10),"Invalid cancel action");
 	}
 
 	public void editValue(String section) {
@@ -562,6 +543,7 @@ public class PlanRecommendationEngineEditResponsePage extends UhcDriver {
 	public void validateSaveResults(String plantype) {
 		System.out.println("Validating Save Results : ");
 		pageloadcomplete();
+		waitForPageLoadSafari();
 		navigateSaveResultsPage(plantype);
 		jsClickNew(ViewProfileButton);
 		threadsleep(5000);

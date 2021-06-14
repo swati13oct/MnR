@@ -70,14 +70,14 @@ public class AepPlanComparePage extends UhcDriver {
 
             benefitValue = benefitValue.trim();
 
-            if (benefitValue.contains("NA") || benefitValue.contains("N/A")) {
+            if (benefitValue.equals("NA") || benefitValue.equals("N/A")) {
                 counter++;
                 if (!key.trim().equals(columnName.trim())) {
                     flag = true;
                     continue;
                 }
 
-                if ((key.trim().equals(columnName.trim())) && benefitValueUI.contains("N/A")) {
+                if ((key.trim().equals(columnName.trim())) && benefitValueUI.equals("N/A")) {
                     flag = true;
                     break;
                 }
@@ -213,7 +213,7 @@ public class AepPlanComparePage extends UhcDriver {
         //Read Plan Summary table
         result.putAll(readBenefitsData("plan-summary-table", planType.equals("PDP") ? "" : "PC"));
 
-        if (planType.startsWith("MA")) {
+        if (planType.startsWith("MA") || planType.startsWith("SNP")) {
 
             //Read INN Benefits data
             result.putAll(readBenefitsData("medical-benefits-table", ""));

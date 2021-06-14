@@ -1,9 +1,9 @@
 #Author: Naveen BK
 #created Date:04/06/2020
-@ShopperProfile
-Feature: 1.08. ACQ- Shopper Profile
+@shopperProfile @regressionAARP
+Feature: 1.09. ACQ- Shopper Profile
 
-  @searchProfileEmail @SanitySP
+  @searchProfileEmail @SanitySP @sanity @test123 
   Scenario Outline: Telesales agent searching for the profile using Email
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -33,7 +33,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | email          | mbi           | dob        | fname | lname | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
       | qavgogine | qavgogine | DAX@MEMBER.COM | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
 
-  @searchProfileName
+  @searchProfileName @sanity
   Scenario Outline: Telesales agent searching for the profile using first name and last name
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -68,7 +68,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | fname | lname | mbi           | dob        | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
       | qavgogine | qavgogine | DAX   | MUNET | 4F78-QY7-CU31 | 08/05/1951 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
 
-  @searchProfileAndAddPlans @SanitySP
+  @searchProfileAndAddPlans @SanitySP @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -106,7 +106,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | email                     | fname  | lname    | mbi           | dob        | plantype | enrolledplanName                  | planName                             | drugNames | providers | testPlans                                                                 |
       | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | CHERRY | KUKOWSKI | 9EX6-WA2-PQ79 | 12/05/1966 | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Plan 1 (HMO) | No        | No        | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
 
-  @searchProfileAndAddDrugs
+  @searchProfileAndAddDrugs @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -136,7 +136,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | username  | password  | email              | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipCode |
       | qavgogine | qavgogine | nynette@MEMBER.COM | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
-  @searchProfileAndProviderFlow
+  @searchProfileAndProviderFlow @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -194,7 +194,7 @@ Feature: 1.08. ACQ- Shopper Profile
       | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        |
 
   @searchProfileAndVPPPlanDetail
-  Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
+  Scenario Outline: Telesales agent searching for the profile using first name and last name and validate additional benefits on Plan Details
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
@@ -301,7 +301,7 @@ Feature: 1.08. ACQ- Shopper Profile
     Examples: 
       | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
       | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
-      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 |               | LEONEL  | DREHMER    |   10010 |                                           | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
+      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | LEONEL  | DREHMER    |   10010 | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>

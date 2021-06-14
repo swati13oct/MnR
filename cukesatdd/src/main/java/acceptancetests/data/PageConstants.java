@@ -44,7 +44,8 @@ public static final String ACCOUNT_HOME_PAGE = "accountHomePage";
 
 
 	public static final String ACQUISITION_HOME_PAGE = "acquisitionHomePage";
-	
+	public static final String CAMPAIGN_EXTERNAL_LINKS_PAGE ="campaignExternalLinkspage";
+
 	public static final String OLE_WELCOME_PAGE = "welcomeOLEPage";
 	
 	public static final String ACQUISITION_PLANPREVIW_PAGE = "planpreviewPage";
@@ -737,10 +738,12 @@ public static final String STAGE_Pharmacy_DEEPLINK_lOGIN_PAGE="pharmacydeeplinkl
 
 	public static final String PLANDOCS_PAGE = "plandocs";
 
+
     public static final String CHECKOUT_SUMMARY_PAGE = "checkoutsummaryPage";
 	public static final String  ORDER_CONFIRMATION_PAGE ="orderConfirmationPage";
 	public static final String CHANGE_SHIPPING_ADDRESS_PAGE = "changeShippingAddressPage";
 	public static final String CHANGE_PAYMENT_METHOD_PAGE = "changePaymentMethodPage";
+
 
 	
 	public static final String EMAIL_AND_PRINT_UTIL = "emailandprintutil";
@@ -751,6 +754,7 @@ public static final String STAGE_Pharmacy_DEEPLINK_lOGIN_PAGE="pharmacydeeplinkl
 
 	public static final String PHARMACY_NAME = "pharmacyName";
 	public static final String Offline_PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE="offlinePRODvirtualVisitdeeplinklogin";
+
 	public static final String Offline_PROD_HWP_DEEPLINK_lOGIN_PAGE="offlinePRODHWPdeeplinklogin";
 	public static final String Offline_PROD_SHIP_healthNwellness="offlinePRODshiphealthwellnessdeeplinklogin";
 	public static final String Offline_PROD_edelivery="offlinePRODedeliverysdeeplinklogin";
@@ -766,7 +770,34 @@ public static final String GUEST_PAYMENTS_HOME_PAGE = "guestPaymentsHomePage";
 
 	public static final String Confirm_OneTime_Guest_Payments_Page = "confirmOneTimeGuestPaymentsPage";
 	public static final String KEEP_CARD_ON_FILE_IND = "keepCardOnFileIndFromGPSDatabase";
+
 	public static final String PROD_VirtualVisit_DEEPLINK_lOGIN_PAGE="PRODvirtualVisitdeeplinklogin";
+
 	public static final String RESOURCE_PAGE = "resourcePage";
+
+	public static final String WHEN_TO_ENROLL_IN_MEDICARE_PAGE="whenToEnrollInMedicarePage";
+
+	public static final String MEDICARE_ADVANTAGE_PART_C_PLANS_PAGE="medicareAdvantagePartCPlansPage";
+
+	public static final String MEDICARE_SUPPLEMENT_PLANS_PAGE="medicareSupplementPlansPage";
+
+	public static final String SPECIAL_NEEDS_PLANS_PAGE="specialNeedsPlansPage";
+
+	public static final String PRESCRIPTION_DRUGS_PLANS_PAGE="prescriptionDrugsPlansPage";
+
+	public static final String OVERVIEW_OF_PLAN_TYPES="overviewOfPlanTypes";
+
+	public static final String INITIAL_ENROLLMENT_PERIOD_PAGE="initialEnrollmentPeriodPage";
+
+	public static final String WORKING_PAST_65_PAGE="workingPast65Page";
+
+	public static final String HOW_TO_ENROLL_IN_MEDICARE_PAGE="howtoEnrollInMedicarePage";
+
+	public static final String ORIGINAL_MEDICARE_PAGE="originalMedicarePage";
+
+	public static final String CHANGING_MEDICARE_PLAN_PAGE="changingMedicarePlanPage";
+
+
+
 }
 

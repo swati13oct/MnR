@@ -1,21 +1,17 @@
 package acceptancetests.acquisition.callChat;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
+import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import cucumber.api.DataTable;
-import cucumber.api.java.en.Then;
-import gherkin.formatter.model.DataTableRow;
-import pages.acquisition.ulayer.AcquisitionHomePage;
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 //import pages.acquisition.commonpages.AcquisitionHomePage;
 /**
  *Functionality:Global Header Footer 
@@ -32,16 +28,17 @@ public class SAMIconsStepDefinitionAARP {
 	@Then("^user opens the page to validate on AARP$")
 	public void the_user_opens_the_page_to_validate(DataTable givenAttributes) throws InterruptedException {
 		
-		List<DataTableRow> memberAttributesRow = givenAttributes
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		/*List<DataTableRow> memberAttributesRow = givenAttributes
 					.getGherkinRows();
-			Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 			for (int i = 0; i < memberAttributesRow.size(); i++) {
 
 				memberAttributesMap.put(memberAttributesRow.get(i).getCells()
 						.get(0), memberAttributesRow.get(i).getCells().get(1));
-			}
+			}*/
 
-			String pagename = memberAttributesMap.get("pagename");
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String pagename = memberAttributesMap.get("pagename");
 		
 		System.out.println(pagename);
 	
@@ -60,8 +57,8 @@ public class SAMIconsStepDefinitionAARP {
 		//aquisitionhomepage.validateCallSamContent();
 		aquisitionhomepage.validateCallpopup();
 		/*
-		 * if(returnval==null){ Assert.fail("No TFN found"); }else{
-		 * Assert.assertTrue(true); }
+		 * if(returnval==null){ Assertion.fail("No TFN found"); }else{
+		 * Assertion.assertTrue(true); }
 		 */
 	}
 	
@@ -92,7 +89,7 @@ public class SAMIconsStepDefinitionAARP {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 	flag=aquisitionhomepage.validateChatNonHours();
 
-		Assert.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
+		Assertion.assertTrue("Chat Icon is visible in Non-Chat Hours",flag);
 		
 	}
 
