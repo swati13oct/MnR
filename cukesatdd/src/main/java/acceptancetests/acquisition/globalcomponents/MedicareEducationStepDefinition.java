@@ -1023,8 +1023,7 @@ public class MedicareEducationStepDefinition {
     }
 
     @Then("^the user navigates to following sub page$")
-    public void theusernavigatestofollowingsubpage(DataTable givenAttributes)
-            throws Throwable {
+    public void theusernavigatestofollowingsubpage(DataTable givenAttributes) throws Throwable {
         Map<String, String> memberAttributesMap = new HashMap<String, String>();
         memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
         String path = memberAttributesMap.get("PagePath");
@@ -1035,4 +1034,28 @@ public class MedicareEducationStepDefinition {
         learnAboutMedicareHomePageNew.navigateToPath(path);
     }
 
+    @Then("^the user validates Download PDF link$")
+    public void theuservalidatesDownloadPDFlink(DataTable givenAttributes) throws Throwable {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String header = memberAttributesMap.get("Header");
+        String pdfName = memberAttributesMap.get("PDFName");
+        LearnAboutMedicareHomePageNew learnAboutMedicareHomePageNew = (LearnAboutMedicareHomePageNew) getLoginScenario()
+                .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+        learnAboutMedicareHomePageNew.validateDownloadLink(header, pdfName);
+    }
+
+    @Then("^the user validates PDF Viewer on the page$")
+    public void theuservalidatesPDFVieweronthepage(DataTable givenAttributes) throws Throwable {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String pdfName = memberAttributesMap.get("PDFName");
+        LearnAboutMedicareHomePageNew learnAboutMedicareHomePageNew = (LearnAboutMedicareHomePageNew) getLoginScenario()
+                .getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+        learnAboutMedicareHomePageNew.validatePDFViewer();
+        learnAboutMedicareHomePageNew.validatePdfMenuDownloadLink(pdfName);
+        learnAboutMedicareHomePageNew.validatePdfMenuPrintLink();
+
+
+    }
 }

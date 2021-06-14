@@ -1,20 +1,18 @@
 package atdd.framework;
 
-import java.awt.KeyboardFocusManager;
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
 import org.apache.commons.collections.CollectionUtils;
-
-import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,6 +23,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,16 +31,14 @@ import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.SessionStorage;
 import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.Keyboard;
-import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.remote.Augmenter;
-import org.openqa.selenium.remote.BrowserType;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.google.common.collect.ImmutableMap;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -49,15 +46,12 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.PerformsTouchActions;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.ios.IOSElement;
-import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
-import io.appium.java_client.touch.offset.ElementOption;
 import io.appium.java_client.touch.offset.PointOption;
+import oracle.net.aso.e;
 
 /**
  * @author pjaising
@@ -313,7 +307,7 @@ public abstract class UhcDriver {
 		element.clear();
 		jsClickNew(element);
 		for(int i = 0; i < message.length(); i++) {
-			threadsleep(100); 	//Adding some milliseconds wait
+			threadsleep(5); 	//Adding some milliseconds wait
 			char c = message.charAt(i);
 			StringBuilder s = new StringBuilder().append(c);
 			element.sendKeys(s);
@@ -612,33 +606,28 @@ public abstract class UhcDriver {
 	 */
 	public void iOSClick(WebElement element) {
 
-		boolean seleniumClick = false;  
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript(
-					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
-					element);
-			 //checkElementisEnabled(element);
+			js.executeScript("var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});", element);
+			//checkElementisEnabled(element);
 			scrollToView(element);
 			element.click();
 			sleepBySec(2);
-			String automationTrack = element.getAttribute("automationTrack");
-			if(automationTrack != null) {
-				seleniumClick = Boolean.parseBoolean(automationTrack);
-			}
+			String seleniumClick = element.getAttribute("automationTrack");
 			System.out.println("Selenium Click executed........" + seleniumClick);
 
-			if (!seleniumClick) {
+			if(!seleniumClick.equalsIgnoreCase("true")) {
 				// checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
 				//iosScroll(element);
-				JavascriptExecutor js1 = (JavascriptExecutor) driver;
-				js1.executeScript("arguments[0].click();", element);
+				//JavascriptExecutor js1 = (JavascriptExecutor) driver;
+				js.executeScript("arguments[0].click();", element);
 
 			}
 
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
+			System.out.println("Selenium click got executed but, " + e.getMessage());
 		} catch (Exception e) {
-
 			System.out.println("Click and JsClick failed");
 
 		}
@@ -860,7 +849,7 @@ public abstract class UhcDriver {
 			}
 		} catch (Exception e) {
 
-			Assertion.fail("The element " + element.getText() + "is not  found");
+			Assertion.fail("The element " + element + "is not  found");
 			return false;
 		}
 
@@ -1652,6 +1641,74 @@ public abstract class UhcDriver {
 	public int countOfNewWindowTab() {
 
 		return driver.getWindowHandles().size();
+	}
+	
+	
+	/**
+	 * Grant memory access on android chrome.
+	 *
+	 * @author amahale
+	 * @param pdfLink the pdf link
+	 */
+	public void grantMemoryAccessOnAndroidChrome(WebElement pdfLink) {
+		AppiumDriver mobileDriver = (AppiumDriver) driver;
+		String webContext = mobileDriver.getContext();
+		
+		jsClickNew(pdfLink);
+		
+		Set<String> contexts = mobileDriver.getContextHandles();
+		
+		for(String context: contexts) {
+			if(context.contains("NATIVE_APP")) {
+				mobileDriver.context(context);
+				try {
+					mobileDriver.findElement(By.id("android:id/button1")).click();
+					mobileDriver.findElement(By.id("com.android.packageinstaller:id/permission_allow_button")).click();
+					break;
+				} catch (NoSuchElementException e) {
+					System.out.println("Memory permission was already granted. File downloaded !");
+				}
+			}
+		}
+		
+		mobileDriver.context(webContext);
+	}
+	
+	
+	/**
+	 * Gets the downloaded pdf file content on android device.
+	 *
+	 * @author amahale
+	 * @param fileName the file name with extension
+	 * @return the downloaded pdf file content android
+	 */
+	
+	public byte[] getDownloadedPdfFileContentAndroid(String fileName) {
+		byte[] content = null;
+		try {
+			if (!fileName.isEmpty()) {
+				AppiumDriver mobileDriver = (AppiumDriver) driver;
+				content = mobileDriver.pullFile("/sdcard/Download/" + fileName);
+			}
+		} catch (Exception e) {
+			Assertion.fail("Unable to read file " + fileName + " from sdcard/Download/");
+		}
+
+		return content;
+	}
+	
+	/**
+	 * Delete downloaded file from Android device.
+	 * 
+	 * @author amahale
+	 * This is not working as of now.
+	 * Since Appium server needs a flag to be set while starting. this isn't possible on saucelabs as of now
+	 */
+	public void deleteDownloadedFile() {
+		AppiumDriver mobileDriver = (AppiumDriver) driver;
+		List<String> removePDFArgs = Arrays.asList("-rf","/sdcard/Download/PreEnrollment_Checklist_EN.pdf");
+		Map<String, Object> removePDFCmd = ImmutableMap.of("command","rm","args", removePDFArgs);
+		mobileDriver.executeScript("mobile: shell", removePDFCmd);
 	}
 
 }

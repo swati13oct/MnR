@@ -1081,7 +1081,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
 
-			// scrollToView(pdpPlansViewLink);
+			// iosScroll(pdpPlansViewLink);
 			scrollToView(pdpPlansViewLink);
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
@@ -1091,7 +1091,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			pageloadcomplete();
 			validateNew(maPlansViewLink, 10);
-//			scrollToView(maPlansViewLink);
+//			iosScroll(maPlansViewLink);
 			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
@@ -1099,7 +1099,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("MS")) {
 			// CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
 			pageloadcomplete();
-//			scrollToView(msPlansViewLink);
+//			iosScroll(msPlansViewLink);
 			scrollToView(msPlansViewLink);
 			jsClickNew(msPlansViewLink);
 			pageloadcomplete();
@@ -1110,7 +1110,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			 */
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			pageloadcomplete();
-//			scrollToView(snpPlansViewLink);
+//			iosScroll(snpPlansViewLink);
 			scrollToView(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
 			pageloadcomplete();
@@ -1154,8 +1154,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
-		
 		validateNew(ProviderSearchLink);
+//		iosScroll(ProviderSearchLink);
 		scrollToView(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
@@ -1900,7 +1900,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
 		}
 		if (enrollForPlan != null) {
-//			scrollToView(enrollForPlan);
+//			iosScroll(enrollForPlan);
 			scrollToView(enrollForPlan);
 			validateNew(enrollForPlan);
 			jsClickNew(enrollForPlan);
@@ -2939,7 +2939,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			System.out.println("Proceed to click to save plan");
 			// WebDriverWait d = new WebDriverWait(driver, 20);
 			// d.until(ExpectedConditions.elementToBeClickable(By.xpath(initial_savePlanIconXpath)));
-			scrollToView(listOfSavePlanIcons.get(0));
+			//iosScroll(listOfSavePlanIcons.get(0));
 			scrollToView(listOfSavePlanIcons.get(0));
 			jsClickNew(listOfSavePlanIcons.get(0));
 
@@ -3906,7 +3906,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		Thread.sleep(2000);
 
 		jsClickNew(startDrpDwn);
-
 		Thread.sleep(2000);
 		scrollToView(startDrpDwnOption);
 		startDrpDwnOption.click();

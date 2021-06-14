@@ -149,7 +149,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'new to Medicare')]/parent::span/input")
 	private WebElement pedHeader1;
 
-	@FindBy(xpath = "(//input[@id='changing']")
+	@FindBy(xpath = "//input[@id='changing']")
 	private WebElement ChangingCurrentMedicareRadio;
 
 	@FindBy(xpath = "//input[@id='new']")
@@ -159,10 +159,10 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	private WebElement medicareInsuranceInformation;
 	
 
-	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]/parent::span/label")
+	@FindBy(xpath = "//input[@name='specialElectionQtsn'])[2]/parent::span/label")
 	private WebElement CurrentMedicare;
 
-	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]/parent::span/label")
+	@FindBy(xpath = "//input[@name='specialElectionQtsn'])[1]/parent::span/label")
 	private WebElement NewMedicare;
 
 	public SpecialElectionPeriodPagemobile(WebDriver driver) {
@@ -295,15 +295,9 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 
 	public boolean validate_SEPoptions_for_planType(String planType) {
 		
-		if(medicareInsuranceInformation.isDisplayed()) {
-			NextBtn.click();
-		}
-		
-		
-			
 		boolean Validation_Flag = true;
-		scrollToView(ChangingNewMedicareRadio);
 		if (ChangingNewMedicareRadio.isDisplayed()) {
+			scrollToView(ChangingNewMedicareRadio);
 			jsClickNew(ChangingNewMedicareRadio);
 			if (!validate(OtherReason) && validate(NoneApply)) {
 				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
@@ -419,6 +413,8 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		String[] optiondata = optionsData.split("/");
 		int i=0;
 		boolean Option_Selected_Flag = true;
+		scrollToView(ChangingCurrentMedicareRadio);
+		jsClickNew(ChangingCurrentMedicareRadio);
 		for(String currentOption : options){
 			System.out.println("Option to select : "+currentOption);
 	/*		if(currentOption.contains("None apply")){
@@ -445,14 +441,14 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 
 				try {
 					WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
-					if(validate(dataTextBx))
+					if(validateNew(dataTextBx))
 						dataTextBx.sendKeys(currentOptionData);
 				} 
 				catch (Exception e) {
 				}
 				try {
 					WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
-					if(validate(dataTextBx))
+					if(validateNew(dataTextBx))
 							dataTextBx.sendKeys(currentOptionData);
 				} catch (Exception e) {
 					System.out.println("No additional data required for Option selected");
