@@ -176,9 +176,6 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
 	public WebElement registerHereLink;
 
-	@FindBy(xpath = "//*[@id=\"site-wrapper\"]//a[contains(text(),'Register')]")
-	public WebElement headerRegisterLink;
-
 	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
 	public WebElement MenuCrossMobile;
 
@@ -230,8 +227,11 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
 	public WebElement medicareSelectHosipitalDirectoryLink;
 
-	@FindBy(xpath = "//*[@id=\"site-wrapper\"]//a[contains(text(),'Sign in')]")
+	@FindBy(xpath = "(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
 	public WebElement headerSignInLink;
+
+	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	public WebElement headerRegisterLink;
 
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/a")
 	public WebElement takeQuizButton;

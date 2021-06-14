@@ -125,38 +125,32 @@ public class PlanCompareEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 	public void validatePlanCompareEmailThankYouMessage() {
 		pageloadcomplete();
 
-		jsClickNew(validateemailbutton);
-		sleepBySec(5);
-		// Validating email popup
+		validateemailbutton.click();
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		//Validating email popup
 		validate(leavingcomapreplansitepopup);
-		System.out.println("!!!Leaving site popup is displayed ===>" + leavingcomapreplansitepopup.isDisplayed());
-		// Validating email cancel button
+		System.out.println("!!!Leaving site popup is displayed ===>"+leavingcomapreplansitepopup.isDisplayed());
+		//Validating email cancel button
 		validate(cancelButtonEmailPlanComparePopUp);
-		System.out.println("!!!Cancel Button is displayed ===>" + cancelButtonEmailPlanComparePopUp.isDisplayed());
-
-		jsClickNew(cancelButtonEmailPlanComparePopUp);
+		System.out.println("!!!Cancel Button is displayed ===>"+cancelButtonEmailPlanComparePopUp.isDisplayed());
+		cancelButtonEmailPlanComparePopUp.click();
 		System.out.println("Success click of cancel email");
-		// Validating email send button
-
-		jsClickNew(validateemailbutton);
+		//Validating email send button
+		validateemailbutton.click();
 		validate(leavingcomapreplansitepopup);
-		System.out.println("!!!Leaving site popup is displayed ===>" + leavingcomapreplansitepopup.isDisplayed());
+		System.out.println("!!!Leaving site popup is displayed ===>"+leavingcomapreplansitepopup.isDisplayed());
 		validate(sendButtonEmailPlanComparePopUp);
-		System.out.println("!!!Cancel Button is displayed ===>" + sendButtonEmailPlanComparePopUp.isDisplayed());
+		System.out.println("!!!Cancel Button is displayed ===>"+sendButtonEmailPlanComparePopUp.isDisplayed());
 		driver.findElement(By.xpath(".//*[@id='email']")).sendKeys("rani_madadi@optum.com");
 		System.out.println("!!!Entered valid Email ");
-		pageloadcomplete();
-
-		jsClickNew(sendButtonEmailPlanComparePopUp);
-		pageloadcomplete();
-		Assertion.assertTrue("PROBLEM - unable to get success message after clicking send",
-				validate(validatesuccesspopup));
-		// Validating email success popup
+		sendButtonEmailPlanComparePopUp.click();
+		Assertion.assertTrue("PROBLEM - unable to get success message after clicking send", validate(validatesuccesspopup));
+		//Validating email success popup
 		System.out.println("Email has successfull send to user");
 		validateNew(validatesuccesspopup);
 		System.out.println("Validated Thank you Message");
-
-		jsClickNew(closeButtonthankyoumessagepopup);
+		
+		closeButtonthankyoumessagepopup.click();
 		System.out.println("Thank you Message pop up is closed");
 	}
 

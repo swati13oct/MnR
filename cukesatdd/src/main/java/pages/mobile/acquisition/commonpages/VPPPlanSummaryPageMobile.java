@@ -438,7 +438,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@ng-show='showSnpPlans']//a[contains(@dtmname,'Email Saved Plan List')]")
 	private WebElement snpEmailOption;
 
-	@FindBy(xpath = "//*[@id=\"Lock-ups\"]")
+	@FindBy(xpath = "//*[@id='Lock-ups']")
 	private WebElement homeBtn;
 
 	@FindBy(xpath = "//ul[contains(@class,'primary-nav')]//a[contains(@href,'health-plans.html')]")

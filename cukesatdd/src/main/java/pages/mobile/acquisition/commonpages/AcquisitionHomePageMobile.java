@@ -436,8 +436,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[@id='search-field']")
 	private WebElement EnterSearch;
 
-	@FindBy(xpath = "//button[@type='submit']")
+	@FindBy(xpath = "//button[contains(text(),'Search')]")
 	private WebElement SubmitBtn;
+	
+	@FindBy(xpath = "//label[contains(text(),'Enter Search')]")
+	private WebElement enterSearchLable;
 
 	@FindBy(xpath = "//h1[contains(text(),'Search Results')]")
 	// @FindBy(xpath = "//h1[contains(@class,'search-results-title')]")
@@ -2047,10 +2050,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void enterSearchtextvalue(String sv) {
 		System.out.println("@@@Inside search text value Method@@@");
 		threadsleep(5);
-		// driver.switchTo().defaultContent();
-		// CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
-		// EnterSearch.sendKeys(sv);
-		jsSendkeys(EnterSearch, sv);
+		MobileMenuSiteSearch();
+
+		sendkeysMobile(EnterSearch, sv);
+		enterSearchLable.click();
 		// CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
 		scrollToView(SubmitBtn);
 		// SubmitBtn.click();
@@ -3153,16 +3156,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerRegisterLinkMobile;
 
 	public void validateHeaderLinks() {
-		MobileMenuMain();
-		scrollToView(headerSigninLinkMobile);
-		// validateNew(headerSigninLinkMobile);
-		// validateNew(headerRegisterLinkMobile);
-		scrollToView(headerRegisterLinkMobile);
-		jsClickNew(headerRegisterLinkMobile);
-		clickBrowserBackButton();
-		MobileMenuMain();
-		validateNew(visitAARPLink);
-		validateNew(AARPlogo);
+		validateNew(headerSignInLink);
+		validateNew(headerRegisterLink);
+		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			validateNew(visitAARPLink);
+		} else {
+			System.out.println("UHC Medicare solutions site loaded");
+		}
+		validateLogo();
 		validateNew(visitorprofileicon);
 	}
 
@@ -3705,10 +3706,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(RightRail_FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
-		JavascriptExecutor js = (JavascriptExecutor)driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(AgentLinkJSPath);
-		
-		//jsClickNew(RightRail_FindAnAgent);
+
+		// jsClickNew(RightRail_FindAnAgent);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
