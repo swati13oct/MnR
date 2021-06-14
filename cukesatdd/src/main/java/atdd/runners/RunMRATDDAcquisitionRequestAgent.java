@@ -24,3 +24,4 @@ public class RunMRATDDAcquisitionRequestAgent extends BaseTestConfig {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
+

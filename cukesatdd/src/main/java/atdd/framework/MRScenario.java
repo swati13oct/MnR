@@ -20,16 +20,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Properties;
-import java.util.WeakHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -60,6 +52,7 @@ import org.springframework.stereotype.Component;
 import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
+import atdd.framework.GlobalBeforeHook;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
@@ -153,7 +146,7 @@ public class MRScenario {
 		}
 	};
 	
-	public void saveBean(String id, Object object) {
+	public synchronized void saveBean(String id, Object object) {
 		scenarioObjectMap.get().put(id, object);
 	}
 
@@ -179,15 +172,20 @@ public class MRScenario {
 			scenarioObjectMap.remove();
 		}
 	}
+
 	private WebDriver webDriver;
 
 	private static final ThreadLocal<WebDriver> threadSafeDriver = new ThreadLocal<>();
+
+	public synchronized void setThreadSafeDriver(WebDriver driver){
+		threadSafeDriver.set(driver);
+	}
 	
 	public static synchronized WebDriver getThreadSafeDriver() {
 		return threadSafeDriver.get();
 	}
 	
-	public void flushThreadSafeDriver() {
+	public synchronized void flushThreadSafeDriver() {
 		threadSafeDriver.remove();
 	}
 	
@@ -360,12 +358,13 @@ public class MRScenario {
 					|| environment.equals("team-acme") || environment.equals("team-voc")
 					|| environment.equals("team-acme") || environment.contains("digital-uat")
 					|| environment.equals("team-chargers") || environment.contains("chargers")
-					|| environment.equals("team-avengers-plm") || environment.contains("team-avengers-plm")
 					|| environment.contains("chargers-qa") || environment.contains("team-uhc-rx"))
 
 				domain = "ocp-elr-core-nonprod.optum.com";
 			else if (environment.contains("mnr-acq"))
 				domain = "origin-elr-dmz.optum.com";
+			else if( environment.equals("team-avengers"))
+				domain = "ocp-ctc-dmz-nonprod.optum.com";
 			else
 				domain = "ocp-ctc-dmz-nonprod.optum.com";
 			System.out.println("env chosen is: " + environment);
@@ -575,7 +574,7 @@ public class MRScenario {
 			saveBean(CommonConstants.WEBDRIVER, getThreadSafeDriver());
 			// return webDriver;
 
-		}  else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
+		} else if (browser.equalsIgnoreCase(CommonConstants.MOBILE_BROWSER)) {
 			Map<String, String> mobileEmulation = new HashMap<String, String>();
 			mobileEmulation.put("deviceName", props.get(CommonConstants.DEVICE_NAME));
 			Map<String, Object> chromeOptions = new HashMap<String, Object>();
@@ -658,14 +657,16 @@ public class MRScenario {
 						+ System.getProperty("environment") + " environment";
 				capabilities.setCapability("name", jobName);
 				try {
-//					webDriver = new RemoteWebDriver(new URL(URL), capabilities);
-					threadSafeDriver.set(new RemoteWebDriver(new URL(URL), capabilities));
-//					setThreadSafeDriver(webDriver);
+					RemoteWebDriver webDriver = new RemoteWebDriver(new URL(URL), capabilities);
+//					threadSafeDriver.set(new RemoteWebDriver(new URL(URL), capabilities));
+					setThreadSafeDriver(webDriver);
 //					setThreadSafeDriver(new RemoteWebDriver(new URL(URL), capabilities));
 					//sessionId = ((RemoteWebDriver) webDriver).getSessionId().toString();
-					sessionId.set(((RemoteWebDriver) getThreadSafeDriver()).getSessionId().toString());
+//					sessionId.set(((RemoteWebDriver) getThreadSafeDriver()).getSessionId().toString());
+					setThreadLocalSessionId(webDriver);
 					System.out.println("Session ID:" + getThreadLocalSessionId());
-					getJobURL(getThreadLocalSessionId());
+//					getJobURL(getThreadLocalSessionId());
+					setJobURL(getThreadLocalSessionId());
 //					saveBean(CommonConstants.WEBDRIVER, webDriver);
 				} catch (MalformedURLException e) {
 					Assert.fail("Invalid Sauce URL: [" + URL + "]");
@@ -676,6 +677,10 @@ public class MRScenario {
 		}
 		// return webDriver;
 		return getThreadSafeDriver();
+	}
+
+	private synchronized void setThreadLocalSessionId(RemoteWebDriver driver){
+		sessionId.set(driver.getSessionId().toString());
 	}
 
 	public synchronized String getThreadLocalSessionId() {
@@ -694,7 +699,18 @@ public class MRScenario {
 		
 	}
 
-	public void getJobURL(String jobID) {
+	public synchronized void setJobURL(String jobID) {
+		String digest = hmacDigest(jobID, USERNAME + ":" + ACCESS_KEY, "HmacMD5");
+		if (mobileDeviceType.equalsIgnoreCase(CommonConstants.MOBILE_DEVICE_TYPE_VIRTUAL) &&
+				getThreadSafeMobileDriver() != null) {
+			JobURLVD.set("https://saucelabs.com/jobs/" + jobID + "?auth=" + digest);
+		} else {
+			JobURL.set("https://saucelabs.com/jobs/" + jobID + "?auth=" + digest);
+		}
+		System.out.println("JobURL ---" + returnJobURL());
+	}
+
+/*	public void getJobURL(String jobID) {
 		String digest = hmacDigest(jobID, USERNAME + ":" + ACCESS_KEY, "HmacMD5");
 //		JobURL = "https://saucelabs.com/jobs/" + jobID + "?auth=" + digest;
 //		System.out.println("JobURL ---" + JobURL);
@@ -708,7 +724,7 @@ public class MRScenario {
 //		System.out.println("JobURL ---" + JobURLVD);
 		JobURLVD.set("https://saucelabs.com/jobs/" + jobID + "?auth=" + digest);
 		System.out.println("JobURL ---" + returnJobURL());
-	}
+	}*/
 
 	public String hmacDigest(String msg, String keyString, String algo) {
 		String digest = null;
@@ -770,7 +786,7 @@ public class MRScenario {
 		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
 		//capabilities.setCapability("AUTOMATION_NAME", "XCUITest");
 		capabilities.setCapability("commandTimeout" , 600);
-		capabilities.setCapability("maxDuration", 10000);
+		capabilities.setCapability("maxDuration", 10800);
 		capabilities.setCapability("idleTimeout", 1000);
 		capabilities.setCapability("priority", 0);
 		capabilities.setCapability("build", System.getenv("JOB_NAME") + "__" + System.getenv("RUNNER_NUMBER"));
@@ -824,8 +840,10 @@ public class MRScenario {
 				sessionId.set(getThreadSafeMobileDriver().getSessionId().toString());
 				System.out.println("Session ID:" + getThreadLocalSessionId());
 //				getVDJobURL(((mobileDriver).getSessionId()).toString());
-				getVDJobURL(getThreadLocalSessionId());
+//				getVDJobURL(getThreadLocalSessionId());
+				setJobURL(getThreadLocalSessionId());
 			}
+
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

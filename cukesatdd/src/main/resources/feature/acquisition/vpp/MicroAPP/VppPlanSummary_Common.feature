@@ -76,7 +76,7 @@ Feature: 1.01.1-Vpp to plan Summary Scenarios
     Then the user validates Is my provider covered link
     Then the user clicks on Enroll Now and validates the Welcome to OLE Page
 
-    @vppPlanSummaryCommonAARP01 @regressionAARP
+    @vppPlanSummaryCommonAARP01 @regressionAARP 
     Examples: 
       | TID   | zipcode | site | isMultutiCounty | county             | plantype | planName                                               | monthlyPremium | primaryCarePhysician | specialist | referralRequired | outOfPocketMaximum | prescriptionDrugsTier1 | annualDeductible                                      | planyear |
       | 00001 |   90210 | AARP | NO              | Los Angeles County | MAPD     | AARP Medicare Advantage SecureHorizons Plan 1 (HMO)    | $0             | $0  copay            | $0  copay  | Yes              | $3,400.00          | $2  copay              |                                                       | future   |

@@ -3,7 +3,7 @@
 Feature: 1.03 Acq-To test Sitesearch results site
 
   #@SiteSearchAARP @SiteSearchRegressionAARP @vbfGate @SiteSearchUHC  @SiteSearchRegressionUHC
-  Scenario Outline: Verify search results in <site> site -search value -<newsearchvalue>
+  Scenario Outline: Verify search results in <site> site -search value - <newsearchvalue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user enter the searchValue in the search text box and hits enter
@@ -26,7 +26,7 @@ Feature: 1.03 Acq-To test Sitesearch results site
       | UHC  | Medicare    | pharmacy       |
 
   #@SiteSearchAARPErrorHandling @SiteSearchRegressionAARP @SiteSearchResultsVPPBlayer    @SiteSearchRegressionUHC
-  Scenario Outline: Verify search results in <site> site - search value -<NewSearchValue>
+  Scenario Outline: Verify search results in <site> site - search value - <newsearchvalue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user enter the searchValue in the search text box and hits enter
@@ -100,7 +100,7 @@ Feature: 1.03 Acq-To test Sitesearch results site
   #| Medicare    |pharmacy|
   #
   # @SiteSearchResultsPharmacyLocatorUlayer @SiteSearchRegressionAARP @SearchResultsPharmacyLocatorBlayer    @SiteSearchRegressionUHC
-  Scenario Outline: To verify search results in pharmacy locator on <site> site
+  Scenario Outline: To verify search results in pharmacy locator on <site> site <newsearchvalue>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user enter the searchValue in the search text box and hits enter

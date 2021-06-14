@@ -24,3 +24,4 @@ public class RunMRATDDAcquisitionPharmacyLocator extends BaseTestConfig {
 		testNGCucumberRunner.runScenario(pickleWrapper.getPickle());
 	}
 }
+
