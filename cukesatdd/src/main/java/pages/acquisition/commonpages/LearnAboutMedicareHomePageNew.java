@@ -3,15 +3,15 @@ package pages.acquisition.commonpages;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import atdd.framework.MRScenario;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.springframework.util.Base64Utils;
 import org.testng.Assert;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -732,4 +732,147 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
     }
 
 
+    public void validateDownloadLink(String headerText, String pdfName) {
+        sleepBySec(2);
+        WebElement header = driver.findElement(By.xpath("//h2//span[contains(@class,'2')]"));
+        if (header.getText().trim().contentEquals(headerText)) {
+            System.out.println(headerText + " PDF Page page opened successfully ");
+        } else {
+            Assert.fail(headerText + " PDF Page page opened successfully ");
+        }
+
+        WebElement lnkDownload = driver.findElement(By.xpath("//a[contains(text(),'Download PDF')]"));
+        switchToNewTabNew(lnkDownload);
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(2);
+        if (driver.getCurrentUrl().contains(pdfName)) {
+            System.out.println(pdfName + " opened Correctly");
+        } else {
+            Assert.fail(pdfName + " not opened Correctly");
+        }
+        driver.close();
+        driver.switchTo().window(CommonConstants.getMainWindowHandle());
+    }
+
+    public void validatePDFViewer() {
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(1);
+        WebElement pdfViewer = driver.findElement(By.xpath("//iframe[contains(@id,'pdfviewer')]"));
+        if (pdfViewer.isDisplayed()) {
+            System.out.println("PDF Viewer is present on the page");
+        } else {
+            Assert.fail("PDF Viewer is not present on the page");
+        }
+        switchToNewIframe(pdfViewer);
+
+        WebElement btnSearch = driver.findElement(By.xpath("//button[contains(@id,'documentSearch')]"));
+        jsClickNew(btnSearch);
+        WebElement txtSearch = driver.findElement(By.xpath("//div[contains(@class,'SearchInputUI')]//input"));
+        WebElement btnSearchCancel = driver.findElement(By.xpath("//div[contains(@class,'SearchInputUI')]//button//span[contains(text(),'Cancel')]"));
+
+        if (txtSearch.isDisplayed() && btnSearchCancel.isDisplayed()) {
+            System.out.println("Search Button clicked Successfully");
+        } else {
+            Assert.fail("Search Button clicked Successfully");
+        }
+        jsClickNew(btnSearchCancel);
+        // driver.switchTo().window(CommonConstants.getMainWindowHandle());
+        driver.switchTo().defaultContent();
+    }
+
+    public void validatePdfMenuDownloadLink(String pdfName) {
+
+        CommonUtility.checkPageIsReadyNew(driver);
+        sleepBySec(1);
+        WebElement pdfViewer = driver.findElement(By.xpath("//iframe[contains(@id,'pdfviewer')]"));
+        if (pdfViewer.isDisplayed()) {
+            System.out.println("PDF Viewer is present on the page");
+        } else {
+            Assert.fail("PDF Viewer is not present on the page");
+        }
+        switchToNewIframe(pdfViewer);
+
+        WebElement btnpdfSideMenu = driver.findElement(By.xpath("//button[contains(@class,'sideMenuButton')]"));
+        jsClickNew(btnpdfSideMenu);
+        WebElement pdfSideMenu = driver.findElement(By.xpath("//div[contains(@class,'spectrum-Dialog-content')]"));
+        if (pdfSideMenu.isDisplayed()) {
+            System.out.println("PDF menu clicked");
+        } else {
+            Assert.fail("PDF menu not clicked");
+        }
+        WebElement btnDownload = driver.findElement(By.xpath("//button[contains(@class,'Button')]//span[contains(text(),'Download PDF')]"));
+        jsClickNew(btnDownload);
+        sleepBySec(2);
+        driver.switchTo().defaultContent();
+        /*driver.navigate().to("chrome://downloads/");
+        sleepBySec(2);
+        //WebElement pdf = driver.findElement(By.xpath("//div[contains(@id,'title-area')]//a//span[contains(text(),'" + pdfName + "')]"));
+        List<WebElement> pdf = driver.findElements(By.cssSelector("//downloads-manager//deep//downloads-item//deep//a[id=\"file-link\"]"));
+
+        if (pdf.get(0).isDisplayed()) {
+            System.out.println("PDF is downloaded");
+        } else {
+            System.out.println("PDF is not downloaded");
+        }
+        driver.navigate().back();*/
+
+
+    }
+
+    public void validatePdfMenuPrintLink() {
+        if (MRScenario.browserName.equalsIgnoreCase("chrome")) {
+            CommonUtility.checkPageIsReadyNew(driver);
+            sleepBySec(1);
+            WebElement pdfViewer = driver.findElement(By.xpath("//iframe[contains(@id,'pdfviewer')]"));
+            if (pdfViewer.isDisplayed()) {
+                System.out.println("PDF Viewer is present on the page");
+            } else {
+                Assert.fail("PDF Viewer is not present on the page");
+            }
+            switchToNewIframe(pdfViewer);
+
+            WebElement btnpdfSideMenu = driver.findElement(By.xpath("//button[contains(@class,'sideMenuButton')]"));
+            jsClickNew(btnpdfSideMenu);
+            WebElement pdfSideMenu = driver.findElement(By.xpath("//div[contains(@class,'spectrum-Dialog-content')]"));
+            if (pdfSideMenu.isDisplayed()) {
+                System.out.println("PDF menu clicked");
+            } else {
+                Assert.fail("PDF menu not clicked");
+            }
+            WebElement btnPrint = driver.findElement(By.xpath("//button[contains(@class,'Button')]//span[contains(text(),'Print PDF')]"));
+            jsClickNew(btnPrint);
+            sleepBySec(2);
+
+            //Switch to Print dialog
+            Set<String> windowHandles = driver.getWindowHandles();
+            if (!windowHandles.isEmpty()) {
+                System.out.println("Size : " + windowHandles.size());
+                driver.switchTo().window((String) windowHandles.toArray()[1]);
+                System.out.println(driver.getCurrentUrl());
+            }
+            WebElement printPreview = driver.findElement(By.tagName("print-preview-app"));
+            if (printPreview.isDisplayed()) {
+                System.out.println("Print Functionality working successfully");
+            } else {
+                Assert.fail("Print Functionality not working successfully");
+            }
+            driver.switchTo().window((String) windowHandles.toArray()[1]);
+            driver.getCurrentUrl();
+            sleepBySec(2);
+            driver.switchTo().defaultContent();
+
+            JavascriptExecutor executor = (JavascriptExecutor) driver;
+            WebElement btnPrintCancel = (WebElement) executor.executeScript("return document.querySelector('print-preview-app').shadowRoot.querySelector('#sidebar').shadowRoot.querySelector('print-preview-button-strip').shadowRoot.querySelector('.cancel-button')");
+
+            if (btnPrintCancel != null) {
+                btnPrintCancel.click();
+                System.out.println("Print Dialog Closed");
+            }else{
+                Assert.fail("Print Dialog not Closed");
+            }
+           driver.switchTo().window((String) windowHandles.toArray()[0]);;
+        } else {
+            System.out.println("Print Validation not available on browser other than Chrome");
+        }
+    }
 }

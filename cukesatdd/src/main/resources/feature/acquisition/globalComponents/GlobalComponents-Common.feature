@@ -239,7 +239,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | resources/ma-resources-materials/ma-information-forms.html | ShopPlan: Resources MA Plans Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | false   |
 
     # Replace any "#" chars in the deeplink with "!"
-    @vpp_Deeplinks_GlobalCompsAARP @regressionAARP
+    @vpp_Deeplinks_GlobalCompsAARP
     Examples: 
       | site | path                                                                                                                                                                                                                                                                                                                          | pageName               | tfnXpath                                                    | tfnFlag |
       | AARP | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD | //a[contains(@class, 'tel')]                                | true    |
@@ -250,7 +250,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | AARP | health-plans/medicare-advantage-plans/available-plans.html?WT.mc_id=897506&zipcode=96795&county=020&state=12&originatingSite=https%3A%2F%2Fwww.myuhcplans.com%2Featon&subdomain=eaton!/plan-summary                                                                                                                           | Connector Modal        | (//a[contains(@href ,'tel') and contains(@class,'tel')])[2] | true    |
 
     # Replace any "#" chars in the deeplink with "!"
-    @vpp_Deeplinks_GlobalCompsUHC @regressionUHC
+    @vpp_Deeplinks_GlobalCompsUHC
     Examples: 
       | site | path                                                                                                                                                                                                                                                                                                                          | pageName               | tfnXpath                                                    | tfnFlag |
       | UHC  | health-plans.html?zipcode=90210&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H0543168000&planYear=2020&systemYear=2020&zipcode=90210&fipsCode=037&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=8016371&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::8016371!/details | VPP: Plan Details MAPD | //a[contains(@class, 'tel')]                                | true    |
@@ -800,7 +800,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | State | <state> |
     And user clicks on View all disclaimer information link on the home page
 
-    @footerLinksAARP @vbfGate
+    @footerLinksAARP
     Examples: 
       | site | state  |
       | AARP | Alaska |
@@ -1004,16 +1004,20 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @Global_Comps_Footer_AARP
     Examples: 
-      | site | path                                                      | pageName                    |
-      | AARP | profile                                                   | VisitorProfile:Profile Page |
-      | AARP | shop/switch.html                                          | ShopPlan: Switch            |
-      | AARP | plan-recommendation-engine.html                           | Plan Recommendation Engine  |
-      | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator | Drug Cost Estimator         |
+      | site | path                                                                                                                                                                                                                       | pageName                    |
+      | AARP | profile                                                                                                                                                                                                                    | VisitorProfile:Profile Page |
+      | AARP | shop/switch.html                                                                                                                                                                                                           | ShopPlan: Switch            |
+      | AARP | plan-recommendation-engine.html                                                                                                                                                                                            | Plan Recommendation Engine  |
+      | AARP | health-plans/estimate-drug-costs.html/drug-cost-estimator                                                                                                                                                                  | Drug Cost Estimator         |
+      | AARP | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary           |
+      | AARP | health-plans/aarp-pharmacy.html/Pharmacy-Search-English                                                                                                                                                                    | Pharmacy Search             |
 
     @Global_Comps_Footer_UHC
     Examples: 
-      | site | path                                                      | pageName                    |
-      | UHC  | profile                                                   | VisitorProfile:Proflie Page |
-      | UHC  | shop/switch.html                                          | ShopPlan: Switch            |
-      | UHC  | plan-recommendation-engine.html                           | Plan Recommendation Engine  |
-      | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator | Drug Cost Estimator         |
+      | site | path                                                                                                                                                                                                                       | pageName                    |
+      | UHC  | profile                                                                                                                                                                                                                    | VisitorProfile:Proflie Page |
+      | UHC  | shop/switch.html                                                                                                                                                                                                           | ShopPlan: Switch            |
+      | UHC  | plan-recommendation-engine.html                                                                                                                                                                                            | Plan Recommendation Engine  |
+      | UHC  | health-plans/estimate-drug-costs.html/drug-cost-estimator                                                                                                                                                                  | Drug Cost Estimator         |
+      | UHC  | health-plans.html?gclid=EAIaIQobChMI3PKJmZKJ3QIVBqZpCh2ROgj7EAAYAiAAEgKDjPD_BwE&mrcid=ps%253Agoogle%253Aportfolio+ma+ma%257CCofund%257CBrand%253AUHC%253A07.26.18%253A8004731&zipcode=63043&WT.mc_id=8004731!/plan-summary | VPP: Plan Summary           |
+      | UHC  | health-plans/aarp-pharmacy.html/Pharmacy-Search-English                                                                                                                                                                    | Pharmacy Search             |
