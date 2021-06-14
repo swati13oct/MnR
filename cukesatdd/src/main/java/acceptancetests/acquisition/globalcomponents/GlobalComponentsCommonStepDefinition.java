@@ -280,7 +280,7 @@ public class GlobalComponentsCommonStepDefinition {
 	public void user_verifies_visit_aarp_org_link_on_home_page_ulayer() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		aquisitionhomepage.validateVisitAarpOrglink();
+		//aquisitionhomepage.validateVisitAarpOrglink();
 	}
 
 	@Then("^user clicks on back to top link of home page$")
@@ -776,7 +776,6 @@ public class GlobalComponentsCommonStepDefinition {
 	public void check_the_inner_links_on_Enrollment_Basic() {
 		EnrollmentBasicsPage enrollmentBasicsPage = (EnrollmentBasicsPage) getLoginScenario()
 				.getBean(PageConstants.ENROLLMENT_BASICS_PAGE);
-		enrollmentBasicsPage.selectStateForGeotargeting();
 		enrollmentBasicsPage.checkInnerLinks();
 	}
 
@@ -1041,6 +1040,46 @@ public class GlobalComponentsCommonStepDefinition {
 		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.clickOnPlanRecommendationButton();
+	}
+	
+	@When("^user click on \"([^\"]*)\" link under shop plans$")
+	public void user_click_on_link_under_shop_plan(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickFooterLinks(linkName);
+		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
+	}
+	
+	@When("^user click on \"([^\"]*)\" link under Tools & Resources$")
+	public void user_click_on_link_under_tools(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickFooterLinks(linkName);
+		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
+	}
+	
+	@When("^user click on \"([^\"]*)\" link under Learn About Medicare$")
+	public void user_click_on_link_under_Learn_About_Medicare(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickFooterLinks(linkName);
+		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
+	}
+	
+	@When("^user click on \"([^\"]*)\" link under more$")
+	public void user_click_on_link_under_more(String linkName) throws Throwable {
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.clickFooterLinks(linkName);
+		getLoginScenario().saveBean(CommonConstants.FOOTER_LINK, linkName);
+	}
+	
+	@Then("^user should be navigated to respective footer links page$")
+	public void user_should_be_navigated_to_footer_links_page() throws Throwable {
+		String linkName=(String) getLoginScenario().getBean(CommonConstants.FOOTER_LINK);
+		AcquisitionHomePage acqusitionHomePage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		acqusitionHomePage.validateFooterLinksNavigation(linkName);
 	}
 }
 

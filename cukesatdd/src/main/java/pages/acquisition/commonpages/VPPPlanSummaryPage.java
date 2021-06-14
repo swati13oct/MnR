@@ -3557,7 +3557,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 	}
 
-	public void closeOriginalTabAndOpenNewTab() {
+	public void closeOriginalTabAndOpenNewTab(String testSiteUrl) {
 
 		// get original tab handler
 		String winHandleBefore = driver.getWindowHandle();
@@ -3579,7 +3579,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		driver.switchTo().window(winHandleTmp);
 		System.out.println("Proceed to open the acquisition url in new tab");
-		js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
+
+//		js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
+		js.executeScript("window.open('" + testSiteUrl + "','_blank');");
 
 		for (String winHandle : driver.getWindowHandles()) {
 			if (!winHandle.equals(winHandleTmp)) {

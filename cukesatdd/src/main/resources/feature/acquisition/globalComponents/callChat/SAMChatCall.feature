@@ -1,7 +1,7 @@
 @globalComponent @samIcons
 Feature: 1.15 ACQ M&R- To test SAM Icons
 
-  Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site>
+  Scenario Outline: 1.19.1.4 To test the SAM icons on Acq site on <site> <pagename>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     And user opens the page to validate M&R Sites
