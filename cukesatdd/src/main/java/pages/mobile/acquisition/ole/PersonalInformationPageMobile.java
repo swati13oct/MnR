@@ -404,7 +404,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
 
-		String EmailAddress = memberDetailsMap.get("Email");
+//		String EmailAddress = memberDetailsMap.get("Email");
 		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
 		String goGreen = memberDetailsMap.get("Go Green");
 		// String email = memberDetailsMap.get("Email");
@@ -413,11 +413,12 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String MiddleName = memberDetailsMap.get("Middle Name");
 
 		validateNew(HomephoneNumberField);
-		// sendkeys(HomephoneNumberField, HomeNumber);
-		sendkeysMobile(HomephoneNumberField, HomeNumber);
+//		sendkeysMobile(HomephoneNumberField, HomeNumber);
+		sendKeysByCharacter(HomephoneNumberField, HomeNumber);
+		
 		validateNew(MobileNumberField);
-		// sendkeys(MobileNumberField, MobileNumber);
-		sendkeysMobile(MobileNumberField, MobileNumber);
+//		sendkeysMobile(MobileNumberField, MobileNumber);
+		sendKeysByCharacter(MobileNumberField, HomeNumber);
 		// sendkeysNew(MiddleNameField, MiddleName);
 		sendkeysMobile(MiddleNameField, MiddleName);
 		if (emailConfirmation.equalsIgnoreCase("YES")) {
@@ -437,7 +438,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		// sendkeysNew(emailAddressField, email);
 
 		// sendkeys(Email, EmailAddress);
-		sendkeysMobile(Email, EmailAddress);
+//		sendkeysMobile(Email, EmailAddress);
 
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");

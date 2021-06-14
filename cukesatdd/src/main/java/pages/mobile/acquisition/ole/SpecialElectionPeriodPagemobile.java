@@ -295,15 +295,9 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 
 	public boolean validate_SEPoptions_for_planType(String planType) {
 		
-		if(medicareInsuranceInformation.isDisplayed()) {
-			NextBtn.click();
-		}
-		
-		
-			
 		boolean Validation_Flag = true;
-		scrollToView(ChangingNewMedicareRadio);
 		if (ChangingNewMedicareRadio.isDisplayed()) {
+			scrollToView(ChangingNewMedicareRadio);
 			jsClickNew(ChangingNewMedicareRadio);
 			if (!validate(OtherReason) && validate(NoneApply)) {
 				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
