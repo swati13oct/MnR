@@ -1,6 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -1957,17 +1958,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateErrorMsg(String inputValue, String newSearchValue) {
 		switch (inputValue) {
 		case "Empty":
-			System.out.println("Varify Error message for " + inputValue + "");
+			System.out.println("Verify Error message for " + inputValue + "");
 			String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
 			Assertion.assertTrue(
 					errMessage.contains("Your search box was empty. Please enter some text in the search box"));
 			break;
 		case "InvalidCharacter":
 			System.out.println("Validating invalid character message");
-			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText();
+			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
+					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			Assertion.assertTrue(
-					invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			Assertion.assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
 			// Assertion.assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
@@ -3832,7 +3833,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// Assertion.assertTrue( "Title mismatch for dental
 		// directory",driver.getTitle().equals(url));
 		if (str.equals(url)) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
