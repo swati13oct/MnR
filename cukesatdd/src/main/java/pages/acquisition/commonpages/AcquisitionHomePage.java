@@ -3417,6 +3417,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 	}
+	
+	
 
 	public void validateProActiveChatpopupconnect() {
 		driver.navigate().refresh();

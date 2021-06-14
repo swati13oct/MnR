@@ -2546,6 +2546,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(MobileMenuCloseNavigationBtn);
 
 	}
+	
+	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
+	public WebElement MenuCrossMobile;
 
 	public void headerRegisterLink() {
 		MobileMenuMain();
