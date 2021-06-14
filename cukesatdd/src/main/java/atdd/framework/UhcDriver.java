@@ -128,7 +128,6 @@ public abstract class UhcDriver {
 		jsClickNew(MenuMobile);
 		jsClickNew(MenuShopForPlanMobile);
 		jsClickNew(toolsToChoosePlan);
-		scrollToView(ProviderSearch);
 		jsClickNew(ProviderSearch);
 	}
 

@@ -70,7 +70,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
 
-	@FindBy(xpath = "//button[@dtmname='Visitor Profile:Save Drugs and Doctors:Add Drugs']")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	private WebElement addDrugsBtn;
 
 	@FindBy(css = "a.add-provider")
@@ -127,7 +127,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//span[contains(text(),'Add Drugs')]")
 	public WebElement AddMyDrugsBtn;
 
 	public VisitorProfilePageMobile(WebDriver driver) {

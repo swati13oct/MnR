@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
@@ -2779,10 +2780,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void validateCallpopup() throws InterruptedException {
 
-		/* Mobile does not show callSam popup hence verifying callSam icon */
+		/* Verifying TFN number on Mobile */
 		validateNew(callsam, 5);
 		// // CommonUtility.checkPageIsReady(driver);
-		// System.out.println(callsam.getText());
+		System.out.println(callsam.getText());
+		System.out.println("@@@@ Call/TFN banner displayed on mobile @@@@");
 		// callsam.click();
 		// System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 		// driver.switchTo().activeElement();
@@ -2790,6 +2792,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// // CallSamTFNClose.click();
 		// // validateNew(callsam);
 		// // return null;
+		
+		if(callsam.getText().contains("1-877-699-5710")) {
+			System.out.println("Correct TFN shown on Mobile view");
+		}
+			
 		// if (CallSamTFN.getText().isEmpty()) {
 		// // return null;
 		// Assert.fail("TFN number was not found on the SAM call Popup");
@@ -2801,17 +2808,20 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateChatSam() throws InterruptedException {
-		boolean present;
-		try {
-			validateNew(chatsam);
-			present = true;
-		} catch (NoSuchElementException e) {
-			present = false;
-		}
-		if (present) {
-			System.out.println("@@@@@@@@@ Able to find Chat TFN widget @@@@@@@@@");
-			// validateChatSamContent();
-		}
+		
+		/*Skipping chat sam verification on mobile as chat does nt displayed on mobile view*/
+		System.out.println("Chat not applicable to mobile view hence skipped...");
+//		boolean present;
+//		try {
+//			validateNew(chatsam);
+//			present = true;
+//		} catch (NoSuchElementException e) {
+//			present = false;
+//		}
+//		if (present) {
+//			System.out.println("@@@@@@@@@ Able to find Chat TFN widget @@@@@@@@@");
+//			// validateChatSamContent();
+//		}
 
 	}
 
