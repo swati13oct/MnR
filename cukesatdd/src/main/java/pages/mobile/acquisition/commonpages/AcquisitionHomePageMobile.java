@@ -2305,26 +2305,30 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			// validateNew(aarpOrgLink);
+			 //validateNew(aarpOrgLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
+		jsClickNew(shopPlansExpander);
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
 		// validateNew(learnAboutMedicareLink);
 
+		jsClickNew(toolsAndResources);
 		validateNew(planRecommendationLink);
 		validateNew(drugCostEstimatorLink);
 		validateNew(pharmacySearchLink);
 		validateNew(providerSearchLink);
 
+		jsClickNew(learnAboutMedicare);
 		validateNew(introductioMedicareLink);
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
 
+		jsClickNew(more);
 		validateNew(aboutLink);
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);
