@@ -870,16 +870,6 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @Global_Comps_Footer_AARP
     Examples: 
-      | site | path      | pageName           | state  |
-      | AARP | shop.html | ShopPlan: Homepage | Alaska |
-
-    @Global_Comps_Footer_UHC
-    Examples: 
-      | site | path      | pageName           | state  |
-      | UHC  | shop.html | ShopPlan: Homepage | Alaska |
-
-    @Global_Comps_Footer_AARP
-    Examples: 
       | site | path                                                                                    | pageName                        | state  |
       | AARP | shop.html                                                                               | ShopPlan: Homepage              | Alaska |
       | AARP | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          | Alaska |
@@ -916,6 +906,7 @@ Feature: 1.12 ACQ - Global Components Validation
     @Global_Comps_Footer_UHC
     Examples: 
       | site | path                                                                                    | pageName                        | Alaska |
+      | UHC  | shop.html                                                                               | ShopPlan: Homepage              | Alaska |
       | UHC  | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          | Alaska |
       | UHC  | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          | Alaska |
       | UHC  | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         | Alaska |
