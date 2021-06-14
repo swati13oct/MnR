@@ -57,6 +57,8 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "//button[contains(text(),'View Plans & Pricing')]")
 	private WebElement submit;
+	
+	
 
 	@FindBy(xpath = "//a[contains(@href,'/medicare-education.html')]")
 	private WebElement LearnAboutMedicareBtn;
@@ -273,14 +275,18 @@ public class CampaignExternalLinks extends UhcDriver {
 //Enter a valid 5-digit ZIP code in the format 12345
 
 
-	@FindBy(xpath = "//span[contains(text(),'View Plans & Pricing')]")
+	@FindBy(xpath = "(//span[contains(text(),'View Plans & Pricing')])[1]")
 	private WebElement viewplanspricing;
+	
+	@FindBy(xpath = "//div[@id='zipErrorMessage-0']")
+	private WebElement ziperrorMsg;
 
-	@FindBy(xpath ="//input[@class='zip-input zip--vertical']")
+	@FindBy(xpath ="//input[@name='zipcodemeded-0']")
 	private WebElement Zipinput;
+	
+	@FindBy(xpath = "(//a[@class='tel ng-binding'])[1]")
+	private WebElement tfn;
 
-	@FindBy(xpath ="//p[contains(text(),'Please enter a valid zip code')]")
-	private WebElement Ziperrormsg;
 
 	@FindBy(xpath="//button[contains(text(),'Get More Information')]")
 	private WebElement GetMoreInformation;
@@ -714,6 +720,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	
 	public void validateAARPExternalPage(String tfnXpath, String expTfnNo, String expWorkingHrs) {
+		threadsleep(5);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
 		if (driver.getCurrentUrl().contains("ma.aarpmedicareplans.com/")) {
@@ -728,9 +735,14 @@ public class CampaignExternalLinks extends UhcDriver {
 		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("UHC External Link Page opens successsfully");
-		} else
+		} 
+		else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/take-advantage.html")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		}else
 			Assertion.fail("AARP/UHC External Link page is not opening up");
-		validateNew(tfnHeader);
+		threadsleep(8);
+		//validateNew(tfnHeader);
 
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
 		String actualTfnNo = TFNelement.getText();
@@ -739,7 +751,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		else
 			Assertion.fail("TFN elemnet is not found / TFN no is not same on page");
 
-		System.out.println(tfnHeader.getText());
+		//System.out.println(tfnHeader.getText());
 		System.out.print(TFNelement.getText());
 		if(validate(workingHrs)) {
 			Assertion.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
@@ -1446,9 +1458,9 @@ public class CampaignExternalLinks extends UhcDriver {
 		threadsleep(8);
 		validateNew(FirstName);
 		FirstName.clear();
-		FirstName.sendKeys("test_MR_optum_R");
+		FirstName.sendKeys("test-MR-optum-R");
 		LastName.clear();
-		LastName.sendKeys("test_MR_optum_M");
+		LastName.sendKeys("test-MR-optum-M");
 		Address1Input.clear();
 		Address1Input.sendKeys("455 Flatbush Ave");
 		Address1Input.sendKeys(Keys.TAB);
@@ -1468,10 +1480,57 @@ public class CampaignExternalLinks extends UhcDriver {
 		driver.findElement(By.xpath("//button[@class='o-modal__close c-button c-button--naked u-text-nowrap']")).click();
 
 	}
+	
+	public void validateAARPExternalPageZipCode(String zipcodeSingle, String zipcodeMulti) {
+		CommonUtility.checkPageIsReadyNew(driver);
+		validateNew(LocationLink);
+		LocationLink.click();
+		threadsleep(5);
+		validateNew(LocationBtn);
+		LocationBtn.click();
+		threadsleep(5);
+		Assert.assertEquals("Please enter valid zip code", EnterValidZipCode.getText());
+		InputZipCode.clear();
+		InputZipCode.sendKeys(zipcodeSingle);
+		jsClickNew(LocationBtn);
+		threadsleep(5);
+		LocationLink.click();
+		threadsleep(8);
+		waitforElementNew(InputZipCode);
+		InputZipCode.clear();
+		InputZipCode.sendKeys(zipcodeMulti);
+		jsClickNew(LocationBtn);
+		FirstZipCode.click();
+		jsClickNew(LocationBtn);
+		
+		
+		
+	}
 
-//	public void validatezipcodecomponent() {
-//
-//
-//	}
+	public void validatezipcodecomponent() {
+		// TODO Auto-generated method stub
+		
+		waitforElementNew(viewplanspricing);
+		viewplanspricing.click();
+		
+		waitforElementNew(ziperrorMsg);
+		System.out.println("@@Zip error Message@@@"+ziperrorMsg.getText());
+		Assert.assertEquals(ziperrorMsg.getText(), "Please enter a valid zip code");
+		
+		Zipinput.clear();
+		Zipinput.sendKeys("33111");
+		viewplanspricing.click();
+		
+		waitforElementNew(tfn);
+		
+		System.out.println("@@tfn@@"+tfn.getText());
+		Assert.assertEquals(tfn.getText(), "1-855-264-3792");
+		
+//		//driver.navigate().back();
+		
+		
+	}
+
+
 
 }

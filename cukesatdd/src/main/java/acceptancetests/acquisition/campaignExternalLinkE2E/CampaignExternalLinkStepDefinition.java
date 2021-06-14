@@ -788,6 +788,25 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		campaignExternalLinkspage.openUrl(url);
 
 	}
+	
+	@Then("^user validates Current location and change location$")
+	public void user_validates_Current_location_and_change_location(DataTable givenAttributes) throws Throwable {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap =  DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String zipcodeSingle = memberAttributesMap.get("zipcodeSingle");
+		String zipcodeMulti = memberAttributesMap.get("zipcodeMulti");
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validateAARPExternalPageZipCode(zipcodeSingle, zipcodeMulti);
+	}
+
 
 	@Then("^user validates error messages on request an appointment$")
 	public void user_validates_error_messages_on_request_an_appointment() throws Throwable {
@@ -848,13 +867,13 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 
 	}
 
-//	@Then("user validates zipcode component and navigates to VPP")
-//	public void user_validates_zipcode_component_and_navigates_to_vpp() {
-//		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
-//				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
-//		campaignExternalLinkspage.validatezipcodecomponent();
-//	}
-//
+	@Then("user validates zipcode component and navigates to VPP")
+	public void user_validates_zipcode_component_and_navigates_to_vpp() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.validatezipcodecomponent();
+	}
+
 
 }
 
