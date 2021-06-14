@@ -181,7 +181,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | site |
       | AARP |
 
-    @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC @vbfGate
+    @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC
     Examples: 
       | site |
       | UHC  |
@@ -203,7 +203,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | site |
       | AARP |
 
-    @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC @vbfGate
+    @breadcrumbPharmacySearch_UHC_Part1 @regressionUHC
     Examples: 
       | site |
       | UHC  |

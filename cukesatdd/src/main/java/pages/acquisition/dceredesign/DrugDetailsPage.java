@@ -1132,12 +1132,6 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//p[contains(@class,'text-normal')]")
 	public WebElement ModalBodyText;
 
-	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), '90-day supply')]")
-	public WebElement Tier5_90Day_Text;
-
-	@FindBy(xpath = "//*[contains(@id, 'coveredtable')]//*[contains(text(), 'Tier 5 drugs cannot be filled with a')][contains(text(), 'mail service pharmacy')]")
-	public WebElement Tier5_MailPharmacy_Text;
-
 	public void validatePreferredRetailCopaySection() {
 		validateNew(CopaySection);
 		validateNew(WhytheseAmountsLink);
@@ -1147,8 +1141,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Preferred Retail Pharmacy Modal Text : " + WhytheseAmountsText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		validateNew(Tier5_90Day_Text);
-		if (WhytheseAmountsText.contains("Preferred Pharmacy Network") && validateNew(Tier5_90Day_Text)) {
+		if (WhytheseAmountsText.contains("Preferred Pharmacy Network")) {
 			Assertion.assertTrue("Preferred Retail Pharmacy Copay and Modals validated", true);
 		} else
 			Assertion.fail("Preferred Retail Pharmacy Copay and Modals NOT validated");
@@ -1163,8 +1156,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Standard Retail Pharmacy Modal Text : " + WhytheseAmountsText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		validateNew(Tier5_90Day_Text);
-		if (WhytheseAmountsText.contains("Standard Pharmacy Network") && validateNew(Tier5_90Day_Text)) {
+		if (WhytheseAmountsText.contains("Standard Pharmacy Network")) {
 			Assertion.assertTrue("Standard Retail Pharmacy Copay and Modals validated", true);
 		} else
 			Assertion.fail("Standard Retail Pharmacy Copay and Modals NOT validated");
@@ -1187,10 +1179,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Standard Mail Pharmacy Modal Text : " + WhyNAText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		validateNew(Tier5_MailPharmacy_Text);
-		if (WhytheseAmountsText.contains("Standard Mail Service")
-				&& WhyNAText.contains("Tier 5 drugs cannot be filled with a mail service pharmacy")
-				&& validateNew(Tier5_MailPharmacy_Text)) {
+		if (WhytheseAmountsText.contains("Standard Mail Service")) {
 			Assertion.assertTrue("Standard Mail Pharmacy Copay and Modals validated", true);
 		} else
 			Assertion.fail("Standard Mail Pharmacy Copay and Modals NOT validated");
@@ -1215,10 +1204,7 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Preferred Mail Pharmacy Modal Text : " + WhyNAText);
 		validateNew(ModalClose);
 		jsClickNew(ModalClose);
-		validateNew(Tier5_MailPharmacy_Text);
-		if (WhytheseAmountsText.contains("Preferred Mail Service")
-				&& WhyNAText.contains("Tier 5 drugs cannot be filled with a mail service pharmacy")
-				&& validateNew(Tier5_MailPharmacy_Text)) {
+		if (WhytheseAmountsText.contains("Preferred Mail Service")) {
 			Assertion.assertTrue("Preferred Mail Pharmacy Copay and Modals validated", true);
 		} else
 			Assertion.fail("Preferred Mail Pharmacy Copay and Modals NOT validated");

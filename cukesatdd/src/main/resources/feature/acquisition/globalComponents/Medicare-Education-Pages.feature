@@ -74,12 +74,12 @@ Feature:Medicare Education Pages flows for New Pages
     @avengersRegressionAARP
     Examples:
       | Scenario           | site | geoState | pageName                 | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 1_AMP | AARP | Alabama  | Medicare Eligibility New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | E2E Scenario 1_AMP | AARP | Arkansas | Medicare Eligibility New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC
     Examples:
       | Scenario           | site | geoState | pageName                 | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 1_UHC | UHC  | Alabama  | Medicare Eligibility New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | E2E Scenario 1_UHC | UHC  | Arkansas | Medicare Eligibility New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
   Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -550,4 +550,46 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario     | site | geoState | path            | pageName                        | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | Avengers UMS | UHC  | Alabama  | iep-guide.html  | Initial Enrollment Period Guide | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
       | Avengers UMS | UHC  | Alabama  | wp65-guide.html | Working Past 65 Guide           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+
+
+  Scenario Outline: <Scenario>To validate components on New Medicare Education Page :<pageName> : <path>:<tfnXpath>
+    Given the user is on medicare acquisition site landing page
+      | Site | <site> |
+    Then the user select state for geotargeting from dropdown
+      | GeoState | <geoState> |
+    Then the user navigates to new Medicare Education homepage
+    Then the user navigates to following sub page
+      | PageName | <pageName> |
+      | PagePath | <path>     |
+    Then the user validates Download PDF link
+      | Header  | <header>  |
+      | PDFName | <pdfName> |
+    Then the user validates PDF Viewer on the page
+      | PDFName | <pdfName> |
+
+    @avengersRegressionAARP
+    Examples:
+      | Scenario     | site | geoState | path                                | pageName                      | header                        | pdfName             |
+      | Avengers AMP | AARP | Alabama  | getting-started-medicare-guide.html | Getting Started with Medicare | Getting Started with Medicare | getting-started.pdf |
+      | Avengers AMP | AARP | Alabama  | medicare-tips.html                  | Medicare Quick Tips                 | Medicare Quick Tips                 | tips.pdf                   |
+      | Avengers AMP | AARP | Alabama  | medicare-while-working-tips.html    | Working Past 65 Medicare Tips       | Working Past 65 Medicare Tips       | medicare-while-working.pdf |
+      | Avengers AMP | AARP | Alabama  | medicare-basics-guide.html          | Learning the Basics                 | Learning the Basics                 | medicare-basics.pdf        |
+      | Avengers AMP | AARP | Alabama  | iep-checklist.html                  | Initial Enrollment Period Checklist | Initial Enrollment Period Checklist | iep-checklist.pdf          |
+      | Avengers AMP | AARP | Alabama  | aep-checklist.html                  | Annual Enrollment Period Checklist  | Annual Enrollment Period Checklist  | aep-checklist.pdf          |
+      | Avengers AMP | AARP | Alabama  | plan-finder-worksheet.html          | Plan Finder Worksheet               | Plan Finder Worksheet               | plan-finder.pdf            |
+      | Avengers AMP | AARP | Alabama  | plan-review-worksheet.html          | Plan Review Worksheet               | Plan Review Worksheet               | review-your-plan.pdf       |
+      | Avengers AMP | AARP | Alabama  | medicare-guide.html                 | Medicare Made Clear Guide           | Medicare Made Clear Guide           | medicare-guide.pdf         |
+
+    @avengersRegressionUHC
+    Examples:
+      | Scenario     | site | geoState | path                                | pageName                            | header                              | pdfName                    |
+      | Avengers AMP | UHC  | Alabama  | getting-started-medicare-guide.html | Getting Started with Medicare       | Getting Started with Medicare       | getting-started.pdf        |
+      | Avengers AMP | UHC  | Alabama  | medicare-tips.html                  | Medicare Quick Tips                 | Medicare Quick Tips                 | tips.pdf                   |
+      | Avengers AMP | UHC  | Alabama  | medicare-while-working-tips.html    | Working Past 65 Medicare Tips       | Working Past 65 Medicare Tips       | medicare-while-working.pdf |
+      | Avengers AMP | UHC  | Alabama  | medicare-basics-guide.html          | Learning the Basics                 | Learning the Basics                 | medicare-basics.pdf        |
+      | Avengers AMP | UHC  | Alabama  | iep-checklist.html                  | Initial Enrollment Period Checklist | Initial Enrollment Period Checklist | iep-checklist.pdf          |
+      | Avengers AMP | UHC  | Alabama  | aep-checklist.html                  | Annual Enrollment Period Checklist  | Annual Enrollment Period Checklist  | aep-checklist.pdf          |
+      | Avengers AMP | UHC  | Alabama  | plan-finder-worksheet.html          | Plan Finder Worksheet               | Plan Finder Worksheet               | plan-finder.pdf            |
+      | Avengers AMP | UHC  | Alabama  | plan-review-worksheet.html          | Plan Review Worksheet               | Plan Review Worksheet               | review-your-plan.pdf       |
+      | Avengers AMP | UHC  | Alabama  | medicare-guide.html                 | Medicare Made Clear Guide           | Medicare Made Clear Guide           | medicare-guide.pdf         |
 
