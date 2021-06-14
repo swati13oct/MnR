@@ -323,13 +323,14 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		//sendkeysMobile(claimNumberField, MedicareNumber);
 		
 //		getkeypad();
-		sendkeysMobile(claimNumberField, MedicareNumber);
+//		sendkeysMobile(claimNumberField, MedicareNumber);
+		sendKeysByCharacter(claimNumberField, MedicareNumber);
 		//wait
 		//mobileactionsendkeys(claimNumberField, MedicareNumber);
 		//claimNumberField.sendKeys(MedicareNumber);
 		//jsClickNew(claimNumberField);
 		//claimNumberField.clear();
-		System.out.println("Medicare number cleared");
+//		System.out.println("Medicare number cleared");
 	//	mobileactionsendkeys(claimNumberField, MedicareNumber);
 	//	System.out.println("Medicare number set again");
 
