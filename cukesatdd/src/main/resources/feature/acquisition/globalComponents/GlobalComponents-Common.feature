@@ -794,13 +794,13 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the user clicks on browser back button
     When user click on "Language Assistance" link under more
     Then user should be navigated to respective footer links page
-    #When user click on "AARP.org" link under more
-    #Then user should be navigated to respective footer links page
+    When user click on "AARP.org" link under more
+    Then user should be navigated to respective footer links page
     When user updates the state drop down value on the home page
       | State | <state> |
     And user clicks on View all disclaimer information link on the home page
 
-    @footerLinksAARP @vbfGate
+    @footerLinksAARP
     Examples: 
       | site | state  |
       | AARP | Alaska |
