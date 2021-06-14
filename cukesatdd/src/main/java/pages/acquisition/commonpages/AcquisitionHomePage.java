@@ -3641,7 +3641,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			// validateNew(aarpOrgLink);
+			validateNew(aarpOrgLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
