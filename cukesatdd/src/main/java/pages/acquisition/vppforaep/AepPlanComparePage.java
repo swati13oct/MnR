@@ -251,7 +251,7 @@ public class AepPlanComparePage extends UhcDriver {
 
         HashMap<String, String> result = new HashMap<String, String>();
 
-        String planNameXPath = "//table[contains(@id,'compare-table')]//thead/tr/th[2]/div/div";
+        String planNameXPath = "//tr[contains(@id,'printPlans')]/th[3]/div";
         WebElement planNameElement = driver.findElement(By.xpath(planNameXPath));
 
         if (planNameElement == null ) {
@@ -281,7 +281,7 @@ public class AepPlanComparePage extends UhcDriver {
 
         //validateNew(driver.findElement(By.id(tableId)));
 
-        String rowXpath = "//table[contains(@id,'" + tableId + "')]//tbody//tr[contains(@class,'uhc')]";
+        String rowXpath = "//table[contains(@id,'" + tableId + "')][1]//tbody//tr[not(contains(@id,'Hide'))]";
         List<WebElement> listOfRowsInPlanCompareTbl = driver.findElements(By.xpath(rowXpath));
 
         if (listOfRowsInPlanCompareTbl == null || listOfRowsInPlanCompareTbl.size() == 0) {
