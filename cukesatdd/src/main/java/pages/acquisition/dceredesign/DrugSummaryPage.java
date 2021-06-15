@@ -788,7 +788,7 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//h3[contains(text(), 'Drug Pricing')]")
+	@FindBy(xpath = "//h2[contains(text(), 'Drug Pricing')]")
 	public WebElement DrugPricing_Header;
 
 	@FindBy(xpath = "//*[contains(@id, 'cancelicon')]")

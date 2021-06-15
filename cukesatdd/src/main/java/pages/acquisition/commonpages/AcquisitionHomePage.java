@@ -3324,17 +3324,13 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// contains(@title, 'prescription drug costs')]"));
 		WebElement DCELink = driver.findElement(By.xpath(
 				"//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
-
+		validateNew(DCELink);
 		String winHandleBefore = driver.getWindowHandle();
-/*
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();
 		driver.switchTo().window(winHandleBefore);
 		driver.close();
 		driver.switchTo().window(winHandleCurrent);
-*/
-	validateNew(DCELink);
-	jsClickNew(DCELink);
 		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 20);
 		if (driver.getCurrentUrl().contains("drug-cost-estimator"))
 			return new GetStartedPage(driver);
@@ -3647,7 +3643,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			// validateNew(aarpOrgLink);
+			validateNew(aarpOrgLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
@@ -4303,7 +4299,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
 					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			assertTrue(invalidSearch.contains("Your search - \"" + newSearchValue + "\" - did not match any documents."));
 			// assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
