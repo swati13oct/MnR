@@ -1489,7 +1489,7 @@ public class ComparePlansPage extends UhcDriver {
 	public void validateEstimatedDrugCostForPlan(String PlanName, String expected_Estimated_Drug_Cost2) {
 		int i = findindexofPlan_PlanCompare(PlanName);
 		i +=1;
-		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath("(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["+i+"]"));
+		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath("(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::td//following-sibling::td//*[contains(text(), '$')])["+i+"]"));
 		
 		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();
 		if(validateNew(Plan_Displayed_EstimatedDrugCosts) && Displayed_DrugCostsText.contains(expected_Estimated_Drug_Cost2)) {
