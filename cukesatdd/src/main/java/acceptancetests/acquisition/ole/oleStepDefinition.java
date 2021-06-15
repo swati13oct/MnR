@@ -19,6 +19,7 @@ import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -67,6 +68,14 @@ public class oleStepDefinition {
 	 * @param planAttributes
 	 * @throws Throwable
 	 */
+	private Scenario scenario;
+	
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
+
+
 	@Given("^the user lands on OLE Welcome Page wity following Plan Details$")
 	public void the_user_lands_on_OLE_Welcome_Page_wity_following_Plan_Details(DataTable planAttributes)
 			throws Throwable {
@@ -448,7 +457,7 @@ public class oleStepDefinition {
 	 */
 	@Then("^the user validates the Plan details on OLE$")
 	public void the_user_validates_the_Plan_details_on_OLE() throws Throwable {
-
+		scenario.log("Sai - Change made 06/15 - Validate planname, year,zipcode,county,premium");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
@@ -470,6 +479,7 @@ public class oleStepDefinition {
 
 	@Then("^the user validates TFN in Welcome OLE Right Rail$")
 	public void the_user_validates_TFN_in_Right_Rail() throws Throwable {
+		scenario.log("Sai - Change made 06/15 - Validate TFN on Welcome OLE Page");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
@@ -483,7 +493,8 @@ public class oleStepDefinition {
 		}
 	}
 
-	@Then("^the user validates Learn more modal for Welcome OLE$")
+/*	<<<<<<<<------------Removed the below step definition as per new OLE Redesign--------------------->>>>>>>>>>>>>>
+ 	@Then("^the user validates Learn more modal for Welcome OLE$")
 	public void the_user_validates_Learn_more_modal_for_OLE() throws Throwable {
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		LearnMoreModal learnMoremodal = welcomePage.OpenLearnMore();
@@ -549,6 +560,8 @@ public class oleStepDefinition {
 			Assertion.fail("Back to OLE Application page - Welcome Page is NOT Displayed");
 
 	}
+
+	<<<<<<<<------------Removed the step definition as per new OLE Redesign--------------------->>>>>>>>>>>>>>*/
 
 	@Then("^the user validates the required fields for CSNP plans on Medicare Information Page$")
 	public void the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable arg1) throws Throwable {
@@ -1304,27 +1317,13 @@ public class oleStepDefinition {
 	@Then("^the user enters following required information in Personal Information Page$")
 	public void the_user_enters_following_required_information_in_Personal_Information_Page(DataTable arg1)
 			throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
+		
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*
-		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
-		 * 0; i < givenAttributesRow.size(); i++) {
-		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String Perm_Aptno = "";
-		String Mailing_Aptno = "";
-		// String middleName="";
+		
+	//	String Perm_Aptno = "155";
+	//	String Mailing_Aptno = "166";
+	//	String Middle_Name="";
 
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details(MemberDetailsMap);
@@ -1337,11 +1336,11 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
 			getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
 			getLoginScenario().saveBean(oleCommonConstants.PERM_STREET, MemberDetailsMap.get("Perm_Street"));
-			getLoginScenario().saveBean(oleCommonConstants.PERM_APARTMENT_NUMBER,Perm_Aptno); 
+			getLoginScenario().saveBean(oleCommonConstants.PERM_APARTMENT_NUMBER,MemberDetailsMap.get("Perm_AptNo")); 
 			getLoginScenario().saveBean(oleCommonConstants.PERM_CITY, MemberDetailsMap.get("Perm_city"));
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_QUESTION, MemberDetailsMap.get("Mailing Address Question"));
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_STREET, MemberDetailsMap.get("Mailing_Street"));
-			getLoginScenario().saveBean(oleCommonConstants.MAILING_APARTMENT_NUMBER,Mailing_Aptno);
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_APARTMENT_NUMBER,MemberDetailsMap.get("Mailing_AptNo"));
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_CITY, MemberDetailsMap.get("Mailing_City"));
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
 			getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
@@ -3879,6 +3878,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 
 	@Then("^the user selects payment type$")
 	public void  the_user_selects_payment_type(DataTable arg1) throws Throwable {
+		scenario.log("Sai - Change made 06/15 - Validate Payment Page on  OLE Page");
 		boolean flag = false;
 		Map<String, String> paymentInformationMap = new HashMap<String, String>();
 		paymentInformationMap = DataTableParser.readDataTableAsMaps(arg1);
@@ -3967,6 +3967,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	
 	@Then("^the user validates Save Return Later modal for OLE Page$")
 	public void the_user_validates_save_return_later_for_OLE_pages() throws Throwable {
+		scenario.log("Sai - Change made 06/15 - Validate Save and Return Later  on OLE Pages");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 	//	MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
 		welcomePage.OpensavereturnOLEPages();
@@ -3975,7 +3976,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	
 	@Then("^the user validates Optional Benefits Page for following plans with available Riders in welcome page$")
 	public void the_user_validate_optional_rider_welcome_OLE_Page(DataTable Flags) {
-		
+		scenario.log("Sai - Added on 06/15 - Validate optional Riders on Welcome OLE Page");
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
 		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
 		String RiderFlag = RiderFlagMap.get("Rider Flag");
@@ -3998,7 +3999,7 @@ public void the_user_validates_the_long_term_questions_in_Medicare_Information_P
 	
 	@Then("^the user validates Statement of Understanding Page$")
 	public void the_user_validates_SOA_Page() throws Throwable {
-		
+		scenario.log("Sai - Added on 06/15 - Validate SOA on OLE Page");
 		AuthorizationPage sOAPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 		boolean Validation_Status = sOAPage.validate_SOA_Page();
 		if(Validation_Status){

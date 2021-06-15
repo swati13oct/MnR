@@ -246,11 +246,11 @@ public class PersonalInformationPage extends UhcDriver{
 		String DOB = memberDetailsMap.get("DOB");
 		String Gender = memberDetailsMap.get("Gender");
 		String Perm_Street = memberDetailsMap.get("Perm_Street");
-		String Perm_Aptno = memberDetailsMap.get("Perm_Aptno");
+		String Perm_Aptno = memberDetailsMap.get("Perm_AptNo");
 		String Perm_city = memberDetailsMap.get("Perm_city");
 		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
 		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
-		String Mailing_Aptno = memberDetailsMap.get("Mailing_Aptno");
+		String Mailing_Aptno = memberDetailsMap.get("Mailing_AptNo");
 		String Mailing_City = memberDetailsMap.get("Mailing_City");
 		String Mailing_State = memberDetailsMap.get("Mailing_State");
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
@@ -284,14 +284,14 @@ public class PersonalInformationPage extends UhcDriver{
 		if(result) {
 		//Code for Personal Information page 2 begin
 		sendkeys(PermanentAdd_Street,Perm_Street);
-		//sendkeys(PermanentAdd_Aptno,Perm_Aptno);
+		sendkeys(PermanentAdd_Aptno,Perm_Aptno);
 		sendkeys(PermanentAdd_City,Perm_city);
 		System.out.println("Mailing Question : "+MailingQuestion);
 		if(MailingQuestion.equalsIgnoreCase("no")){
 			jsClickNew(SameMailingAddressNo);
 			
 			sendkeysNew(MailingAdd_Street,Mailing_Street);
-		//	sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
+			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeys(MailingAdd_City,Mailing_City);
 			Select SelectState = new Select(MailingAdd_State_DropDown);
 			SelectState.selectByValue(Mailing_State);
@@ -320,7 +320,6 @@ public class PersonalInformationPage extends UhcDriver{
 		result= Clickoncontinuebutton("language-preference");
 		
 		if(result) {
-			//result= Clickoncontinuebutton("medicare-information");
 			System.out.println("Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
 		}
 		
@@ -569,7 +568,7 @@ public class PersonalInformationPage extends UhcDriver{
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date"); 
 		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
-		if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Confirm')]")))){
+		if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Please confirm your')]")))){
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 		
 			sendkeysNew(partAStartDateField, PartAeffectiveDate);
