@@ -1118,7 +1118,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plancopaydetail']//button[contains(text(), 'Why These Amounts')]")
 	public WebElement WhytheseAmountsLink;
 
-	@FindBy(xpath = "//h3[contains(text(), 'Copays and Coinsurance')][@id='modal-label']")
+	@FindBy(xpath = "//h2[contains(text(), 'Copays and Coinsurance')][@id='modal-label']")
 	public WebElement WhytheseAmountsModal;
 
 	@FindBy(xpath = "//button[@id='cancelicon']")
@@ -1127,7 +1127,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plancopaydetail']//button[contains(text(), 'Why N/A')]")
 	public WebElement WhyNAlink;
 
-	@FindBy(xpath = "//h3[contains(text(), 'Tier 5 ')][@id='modal-label']")
+	@FindBy(xpath = "//h2[contains(text(), 'Tier 5 ')][@id='modal-label']")
 	public WebElement WhyNAModal;
 
 	@FindBy(xpath = "//p[contains(@class,'text-normal')]")
