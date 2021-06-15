@@ -1061,8 +1061,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	/**
 	 * Validate the Agent Mode Banners and Enrolled Plan overlay
-	 * @param planName
-	 */
+     */
 	public void validateMemberDetails(HashMap<String,String> givenAttributesMap) {
 
 		//Take map as parameter from step definition rather than DataTable
@@ -1150,8 +1149,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	/**
 	 * Validate the Agent Mode Banners and Enrolled Plan overlay
-	 * @param planName
-	 */
+     */
 	public void validateAgentModeBannersForNonMember(HashMap<String, String> givenAttributesMap) {
 
 		//Handled data table from step definition
@@ -1270,6 +1268,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void clickViewDrugInfoLinkForPlan(String planName) {
 		int i = findindexofPlan_PlanCompare(planName);
+		i++;
 		WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-"+i+"')]"));
 		validateNew(DrugInfoLink);
 		jsClickNew(DrugInfoLink);
