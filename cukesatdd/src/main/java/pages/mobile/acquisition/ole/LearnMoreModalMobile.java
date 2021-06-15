@@ -19,7 +19,7 @@ public class LearnMoreModalMobile extends UhcDriver {
 	@FindBy(id = "view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
-	@FindBy(xpath = "//*[@id='returnbtn']")
+	@FindBy(css = "#returnbtn")
 	private WebElement BackBtn;
 
 	public LearnMoreModalMobile(WebDriver driver) {
