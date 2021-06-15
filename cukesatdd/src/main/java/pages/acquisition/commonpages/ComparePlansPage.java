@@ -1268,7 +1268,9 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void clickViewDrugInfoLinkForPlan(String planName) {
 		int i = findindexofPlan_PlanCompare(planName);
-		i++;
+		if(!planName.contains("PDP")){
+            i++;
+        }
 		WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-"+i+"')]"));
 		validateNew(DrugInfoLink);
 		jsClickNew(DrugInfoLink);
