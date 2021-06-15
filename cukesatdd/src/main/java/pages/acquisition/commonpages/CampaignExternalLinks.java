@@ -214,6 +214,9 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath ="(//a[@class='tel ng-binding'])[1]")
 	private WebElement FindPlanTFN;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Find plans']")
+	private WebElement FindPlansLink;
 
 	@FindBy(xpath ="//a[contains(text(),'Find Your Doctor')]")
 	private WebElement FindADoctor;
@@ -290,7 +293,32 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath="//button[contains(text(),'Get More Information')]")
 	private WebElement GetMoreInformation;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Find Plans and Pricing']")
+	private WebElement findPlansPricingtakeadvantage;
+	
+	
+	@FindBy(xpath = "//a[@data-asset-name='View Plans & Pricing ']")
+	private WebElement viewPricingBtn;
+	
+	@FindBy(xpath = "//span[@class='sam__button__text desktop-tfn-text']")
+	private WebElement samTfn;
+	
+	@FindBy(xpath = "//a[@data-asset-name='Estimate Your Prescription Drug Costs ']")
+	private WebElement PrescriptiondrugcostsBtn;
+	
+	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
+	private WebElement EstimateDrugCost;
 
+	
+	@FindBy(xpath = "//a[contains(text(), 'Start Now')]")
+	private WebElement StartNowBtn;
+	
+	
+			
+			@FindBy(xpath = "(//a[contains(text(), 'View Plans & Pricing')])[2]")
+			private WebElement viewPricingBtn2;
+			
 	public String parentWindow;
 	
 	public CampaignExternalLinks(WebDriver driver) {
@@ -735,11 +763,22 @@ public class CampaignExternalLinks extends UhcDriver {
 		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("UHC External Link Page opens successsfully");
-		} 
-		else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/take-advantage.html")) {
+		} else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/take-advantage.html")) {
 			Assertion.assertTrue(true);
 			System.out.println("AARP External Link Page opens successsfully");
-		}else
+		} else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/medicare-advantage-plans.html")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html")) {
+			Assertion.assertTrue(true);
+			System.out.println("UHC External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/medicare-plans.html")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else
 			Assertion.fail("AARP/UHC External Link page is not opening up");
 		threadsleep(8);
 		//validateNew(tfnHeader);
@@ -757,6 +796,7 @@ public class CampaignExternalLinks extends UhcDriver {
 			Assertion.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
 		}
 	}
+	
 	public AcquisitionHomePage clickOnmedicareplans11backLink(String zipcode) {
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
@@ -1531,6 +1571,75 @@ public class CampaignExternalLinks extends UhcDriver {
 		
 	}
 
+	public void clickFindPlansPricingtakeadvantage() {
+		parentWindow = driver.getWindowHandle();
+		findPlansPricingtakeadvantage.click();
+		Set<String> tabs_windows = driver.getWindowHandles();
+		Iterator<String> itr = tabs_windows.iterator();
+		while (itr.hasNext()) {
+			String window = itr.next();
+			if (!parentWindow.equals(window)) {
+				driver.switchTo().window(window);
+			}
+		}
+	}
 
+		public void clickFindPlansLink() {
+			parentWindow = driver.getWindowHandle();
+			FindPlansLink.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+}
 
+		public void clickonViewpricingAndNavigatesToVPP() {
+			
+			waitforElementNew(viewPricingBtn);
+			viewPricingBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void clickonPrescriptionDrugCostAndNavigatesToDCE() {
+			// TODO Auto-generated method stub
+			waitforElementNew(PrescriptiondrugcostsBtn);
+			PrescriptiondrugcostsBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void clickonEstimateDrugCostBtnAndNavigatesToDCE() {
+			waitforElementNew(EstimateDrugCost);
+			EstimateDrugCost.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+		}
+
+		public void clickonStartNowAndNavigatesToPharmacyPage() {
+			// TODO Auto-generated method stub
+			waitforElementNew(StartNowBtn);
+			StartNowBtn.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+		}
+
+		public void clickonViewPlanPricingBtnAndNavigatesToVPP() {
+			waitforElementNew(viewPricingBtn2);
+			viewPricingBtn2.click();
+			threadsleep(4);
+			waitforElementNew(samTfn);
+			
+		}
+
+		public void navigateToPath(String path) {
+			// TODO Auto-generated method stub
+			
+		}
 }

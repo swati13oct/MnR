@@ -3,7 +3,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
 
   @Scenario10 
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
-   Given user is on new campaign external Links page
+   Given user is on campaign external Links page
       | External Link | <externallink> |
    Then user verify TFN on AARP external links page
       | TFN No      | <TFNNo>      |
@@ -17,23 +17,23 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
      Then user validates Current location and change location
       | zipcodeSingle  | <zipcodeSingle>  |
       | zipcodeMulti   | <zipcodeMulti>  |
-   And the user navigates to new Campaign External links
-      | PageName | <pageName> |
-      | PagePath | <path>     |
-    Then user verify TFN on AARP external links page
-      | TFN No      | <TFNNo2>      |
-      | TFN Xpath   | <TFNxpath1>  |
-      | Working hrs | <workingHrs> |
+   #And the user navigates to new Campaign External links
+      #| PageName | <pageName> |
+      #| PagePath | <path>     |
+    #Then user verify TFN on AARP external links page
+      #| TFN No      | <TFNNo2>      |
+      #| TFN Xpath   | <TFNxpath1>  |
+      #| Working hrs | <workingHrs> |
       
     @CampaignExternal_Scenario10_AARP
     Examples:
-      | Scenario                                       | zipcodeMulti |zipcodeSingle| isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                           | defaultPharmacy                                                                           |TFNNo2         |path                                                                                                  |pageName       | externallink |
-      | Campaign External Links - E2E Scenario 10_AMP |   65656      |33111        |Yes            | Stone County | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1]| Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)|1-877-255-0782 |https://www.aarpmedicareplans.com/lp/medicare-advantage-plans.html?wt.mc_id=8014272         |MA Core AMP EN | https://www.aarpmedicareplans.com/lp/medicare-advantage-plans.html   |
+      | Scenario                                       | zipcodeMulti |zipcodeSingle| isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | TFNNo2         |path                                                                                       |pageName       | externallink |
+      | Campaign External Links - E2E Scenario 10_AMP |   65656      |33111        |Yes            | Stone County | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | 1-877-255-0782 |https://www.aarpmedicareplans.com/lp/medicare-advantage-plans.html?wt.mc_id=8014272         |MA Core AMP EN | https://www.aarpmedicareplans.com/lp/medicare-advantage-plans.html   |
 
     @CampaignExternal_Scenario10_UHC
     Examples:
-      | Scenario                                      | zipcodeMulti |zipcodeSingle| isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                           | defaultPharmacy                                                                           |TFNNo2         |path                                                                                                  |pageName       | externallink |
-      | Campaign External Links - E2E Scenario 10_UMS |   65656      |33111        |Yes            | Stone County | MAPD       | 1-877-801-0043 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1]| Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)|1-877-255-0782 |https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html?wt.mc_id=8014272      |MA Core AMP EN | https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html   |
+      | Scenario                                      | zipcodeMulti |zipcodeSingle| isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | TFNNo2         |path                                                                                        |pageName       | externallink |
+      | Campaign External Links - E2E Scenario 10_UMS |   65656      |33111        |Yes            | Stone County | MAPD       | 1-877-801-0043 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | 1-877-255-0782 |https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html?wt.mc_id=8014272      |MA Core AMP EN | https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html   |
       
       
   @Scenario10 
@@ -57,17 +57,20 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+    When verify Call SAM icon is visible
+  And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then the user view plan details of the above selected plan in site vpp
       | Plan Name | <planname> |
       | Plan Type | <plantype> |
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+     Then the user validates TFN Number on Right Rail Plan Details page
     When user clicks on Add to compare checkbox on plan detail page
     And the user clicks on back to all plans link and validates its redirection to Plan Summary
     Then verify the Add to compare checkbox is checked for selected plan
       | Plan index | <planIndex> |
-    When user select "<planIndex1>" plans to compare
+    When user select "2" plans to compare
     And user clicks on compare button
     Then verify plan compare page is loaded
     Then the user validates SAM icons on the page
@@ -77,6 +80,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+      Then the user validates TFN Number on Right Rail OLE page
     Then the user navigates to Personal Information Page
     Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
@@ -98,6 +102,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | County Name     | <county>        |
     When verify Call SAM icon is visible
     And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
+    Then the user validates TFN Number on Right Rail
     And the user views the plans of the below plan type
       | Plan Type | <PDPplantype> |
     And the user selects plan year

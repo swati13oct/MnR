@@ -1,7 +1,7 @@
 @campaignExternalLinksNewLPM
 Feature: 1.08 UAT Scripts Campaign External Links scenario 8 related to New take advantage page
 
-  @Scenario8  @check
+  @Scenario8  
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
     Given user is on campaign external Links page
       | External Link | <externallink> |
@@ -13,7 +13,7 @@ Feature: 1.08 UAT Scripts Campaign External Links scenario 8 related to New take
     Then user enters the details on get more information
     Then user clicks on privacy policy link
     Then user clicks on accessibility link
-	Then user validates Current location and change location
+	  Then user validates Current location and change location
       | zipcodeSingle  | <zipcodeSingle> |
       | zipcodeMulti   | <zipcodeMulti>  |
 	  
