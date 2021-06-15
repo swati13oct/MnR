@@ -503,7 +503,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
 
-	@FindBy(xpath = "//span[text()='Add My Drugs']/parent::button")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
