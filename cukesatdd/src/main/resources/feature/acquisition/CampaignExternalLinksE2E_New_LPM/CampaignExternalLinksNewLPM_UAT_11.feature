@@ -32,6 +32,9 @@ Feature: 1.11 UAT Scripts Campaign External Links scenario 11 related to New Med
 	Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
+    Then the user validates TFN Number on Zipcode component
+      | TFN No    | <TFNNo>     |
+      | TFN Xpath | <TFNxpath3> |
    And the user retrieves TFNSessionCookie and Federal and MedSupp TFN
    Then the user validates PSC code
         |PSC Code|	8012869|
@@ -204,5 +207,5 @@ Feature: 1.11 UAT Scripts Campaign External Links scenario 11 related to New Med
    
     @CampaignExternalLink_E2E_Scenario_11_AARP
     Examples: 
-      | Scenario                              | site | PlanType | externallink                                              | PSC code| zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                        | cardtype | TFNNo          | TFNxpath                                                                                   | TFNxpath1                                          | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 | TFNxpath4                         | 
-      | E2E Scenario 11_aarp-medicare-plans | AARP | MAPD-MBI | https://www.aarpmedicareplans.com/lp/medicare-plans.html | 8012869    |  33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-855-264-3792 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | (//a[contains(@class,'tel tfn desktop')])[1]| PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |         1 |          2 | (//a[contains(@class, 'tel')])[3] | 
+      | Scenario                              | site | PlanType | externallink                                              | PSC code| zipcode | isMultutiCounty | county            | MAplantype | planyear | MAplanName                        | cardtype | TFNNo          | TFNxpath                                                                                    | TFNxpath1                                    | PDPplantype | SNPplantype | MSplantype | PDPplanName                     | SNPplanName                                       | TFNxpath2                         | TFNxpath3                         | planIndex | planIndex1 | TFNxpath4                         | 
+      | E2E Scenario 11_aarp-medicare-plans | AARP | MAPD-MBI | https://www.aarpmedicareplans.com/lp/medicare-plans.html | 8012869    |  33111 | NO              | Miami-Dade County | MAPD       | future   | AARP Medicare Advantage Choice (PPO) | MBI      | 1-855-264-3792 | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')]| (//a[contains(@class,'tel tfn desktop')])[1]| PDP         | SNP         | MS         | AARP MedicareRx Walgreens (PDP) | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //*[contains(@class,'tel right')] | (//a[contains(@class, 'tel')])[1] |         1 |          2 | (//a[contains(@class, 'tel')])[3] | 

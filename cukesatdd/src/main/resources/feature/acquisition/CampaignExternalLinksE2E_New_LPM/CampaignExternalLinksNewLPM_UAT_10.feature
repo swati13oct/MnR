@@ -38,7 +38,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       
   @Scenario10 
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
-   Given user is on new campaign external Links page
+   Given user is on campaign external Links page
       | External Link | <externallink> |   
    Then user verify TFN on AARP external links page
       | TFN No      | <TFNNo>      |
@@ -216,7 +216,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
  @Scenario10 
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
   #DCE
-  Given user is on new campaign external Links page
+  Given user is on campaign external Links page
       | External Link | <externallink> |   
   Then user verify TFN on AARP external links page
       | TFN No      | <TFNNo>      |
@@ -284,7 +284,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
  @Scenario10 
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
     #PRE
-	Given user is on new campaign external Links page
+	Given user is on campaign external Links page
       | External Link | <externallink> |   
    Then user verify TFN on AARP external links page
       | TFN No      | <TFNNo>      |

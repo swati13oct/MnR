@@ -881,7 +881,21 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.validateAccess();
 	}
+	
+	@When ("user clicks on Drug cost estimator from external page")
+	public void user_clicks_on_Drug_cost_estimator_from_external_page_to_open_a_new_tab() {
+			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			campaignExternalLinkspage.navigateToDCERedesignFromExternaltakeadvantagePage();
+	}
 
+	@When("^user clicks on Find Plans and Pricing on take advantage page to open a new tab$")
+	public void user_clicks_on_Find_Plans_and_Pricing_on_take_advantage_page_to_open_a_new_tab() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickFindPlansPricingtakeadvantage();
+	}
+	
 	@Then("^user validates error messages on get more information$")
 	public void user_validates_error_messages_on_get_more_information() throws Throwable {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
@@ -909,7 +923,8 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.clickonViewpricingAndNavigatesToVPP();
 	}
-	@Then("user clicks on estimate your prescrption drug costs and navigates to DCE")
+	
+	@Then("user clicks on estimate your prescription drug costs and navigates to DCE")
 	public void user_clicks_on_estimate_your_prescrption_drug_costs_and_navigates_to_dce() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
@@ -928,11 +943,33 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.clickonStartNowAndNavigatesToPharmacyPage();
 	}
+	
 	@Then("user clicks on view plans and pricing button and navigates to VPP")
 	public void user_clicks_on_view_plans_and_pricing_button_and_navigates_to_vpp() {
 		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.clickonViewPlanPricingBtnAndNavigatesToVPP();
 	}
-}
+	
+	@Then("^user navigate back to external url for prescription drug plan$")
+	public void user_navigate_Back_prescription_drug_plan(DataTable givenAttributes) throws Exception  {
+		wd = getLoginScenario().getWebDriverNew();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+	
+		String url = memberAttributesMap.get("External Link");
+		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
+		
+		campaignExternalLinkspage.navigateBacktoExternalurl(url);
+	
+	}
+	}
 

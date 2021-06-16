@@ -236,6 +236,9 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath ="//input[@id='location']")
 	private WebElement location;
+	
+	@FindBy(xpath = "//a[contains(@data-asset-name,'Drug cost estimator')]")
+	private WebElement dceExternalLinktakeadvantage;
 
 
 //Enter a city that only contains non-numeric characters, apostrophe , hyphen or space
@@ -1640,6 +1643,21 @@ public class CampaignExternalLinks extends UhcDriver {
 
 		public void navigateToPath(String path) {
 			// TODO Auto-generated method stub
+			
+		}
+
+		public void navigateToDCERedesignFromExternaltakeadvantagePage() {
+			// TODO Auto-generated method stub
+			parentWindow = driver.getWindowHandle();
+			dceExternalLinktakeadvantage.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
 			
 		}
 }
