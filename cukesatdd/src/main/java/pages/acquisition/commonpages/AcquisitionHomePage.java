@@ -503,7 +503,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
@@ -3003,7 +3003,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
+		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
+		openAndValidate(true);
 	}
 
 	/**
@@ -3322,7 +3324,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// contains(@title, 'prescription drug costs')]"));
 		WebElement DCELink = driver.findElement(By.xpath(
 				"//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
-
+		validateNew(DCELink);
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();

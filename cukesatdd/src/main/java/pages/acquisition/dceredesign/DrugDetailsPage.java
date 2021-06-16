@@ -984,8 +984,9 @@ public class DrugDetailsPage extends UhcDriver {
 	}
 
 	public void validatePlanDrugDetails(String planName) {
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_ChangePharmacyLnk, 20);
 		System.out.println("Plan Name : " + planName);
-		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
 		// CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		// validateNew(PlanName_PlanDetails);
 
@@ -1117,7 +1118,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plancopaydetail']//button[contains(text(), 'Why These Amounts')]")
 	public WebElement WhytheseAmountsLink;
 
-	@FindBy(xpath = "//h3[contains(text(), 'Copays and Coinsurance')][@id='modal-label']")
+	@FindBy(xpath = "//h2[contains(text(), 'Copays and Coinsurance')][@id='modal-label']")
 	public WebElement WhytheseAmountsModal;
 
 	@FindBy(xpath = "//button[@id='cancelicon']")
@@ -1126,7 +1127,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plancopaydetail']//button[contains(text(), 'Why N/A')]")
 	public WebElement WhyNAlink;
 
-	@FindBy(xpath = "//h3[contains(text(), 'Tier 5 ')][@id='modal-label']")
+	@FindBy(xpath = "//h2[contains(text(), 'Tier 5 ')][@id='modal-label']")
 	public WebElement WhyNAModal;
 
 	@FindBy(xpath = "//p[contains(@class,'text-normal')]")
@@ -1294,9 +1295,9 @@ public class DrugDetailsPage extends UhcDriver {
 
 	// Learn More changes Start
 	public void validatePlanNameLearnMore(String planName) {
-
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_ChangePharmacyLnk, 20);
 		System.out.println("Plan Name : " + planName);
-		WebElement PlanNameElement = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+		WebElement PlanNameElement = driver.findElement(By.xpath("//h2[contains(text(), '" + planName + "')]"));
 		if (validateNew(PlanNameElement)) {
 			Assertion.assertTrue("Plan Name is correct for Learn More Page" + PlanNameElement.getText(), true);
 		} else
@@ -1536,20 +1537,23 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//following::a[contains(text(), 'Learn more about Extra Help')]")
 	public WebElement LIS_DeductibleLISLink;
 
+	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//following::*[contains(text(), '$0')]")
+	public WebElement LIS_ZeroDeductible;
+
 	@FindBy(xpath = "//*[contains(@alt, 'alert')]//following::*[contains(text(), 'level of Extra Help')]")
 	public WebElement LIS_Alert;
 
 	public void validateLISBuyDown_CopaySection_LISAlert() {
 		if (validateNew(LIS_CopaySection) && validateNew(LIS_BuyDown_Copay) &&
 		// !validate(LIS_CopayHeader) &&
-				validateNew(LIS_Deductible) && validateNew(LIS_DeductibleLISLink) && validateNew(LIS_Alert)) {
+				validateNew(LIS_Deductible) && validateNew(LIS_ZeroDeductible) && validateNew(LIS_Alert)) {
 			System.out.println(
 					"***** DCE Details Page validation Passed for LIS BuyDown - Alert and LIS copay Section *****");
 			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Buydown Plan *****");
 			System.out.println(LIS_BuyDown_Copay.getText());
-			System.out.println("***** Deductible for LIS Buydown and LIS link Displayed *****");
+			System.out.println("***** $0 Deductible for LIS Buydown *****");
 			System.out.println(LIS_Deductible.getText());
-			System.out.println("***** Alert Displayed for LIS Buydown *****");
+			System.out.println("***** Page level Alert Displayed for LIS Buydown *****");
 			System.out.println(LIS_Alert.getText());
 		} else
 			Assertion.fail(
@@ -1564,12 +1568,12 @@ public class DrugDetailsPage extends UhcDriver {
 				&& validateNew(LIS_Deductible) && validateNew(LIS_DeductibleLISLink) && validateNew(LIS_Alert)) {
 			System.out.println(
 					"***** DCE Details Page validation Passed for LIS Non BuyDown Plan - Alert and LIS copay Section *****");
-			System.out.println("***** $0 Copay for all Covered Drugs text for LIS Non Buydown Plan *****");
+			System.out.println("***** Copay section LIS and  NonLIS message for Covered Drugs text for LIS Non Buydown Plan *****");
 			System.out.println(NonLIS_CopayHeader.getText());
 			System.out.println(LIS_CopayHeader.getText());
-			System.out.println("***** Deductible for LIS Non Buydown and LIS link Displayed *****");
+			System.out.println("***** Deductible for LIS Non Buydown and LIS link in Deductible Section Displayed *****");
 			System.out.println(LIS_Deductible.getText());
-			System.out.println("***** Alert Displayed for LIS Buydown *****");
+			System.out.println("***** Page level Alert Displayed for LIS Non Buydown Plans *****");
 			System.out.println(LIS_Alert.getText());
 		} else
 			Assertion.fail(
@@ -2153,7 +2157,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'x axis')]//*[contains(text(), 'Dec')]")
 	public WebElement BarChart_Dec;
 
-	public void validateDefaultPED() {
+	public void validateDefaultPED(String envYear) {
 		validateNew(PlanEffective_DefaultText);
 		validateNew(ChangePED_DropDown);
 		validateNew(BarChart_Jan);
@@ -2168,15 +2172,16 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(BarChart_Oct);
 		validateNew(BarChart_Nov);
 		validateNew(BarChart_Dec);
-		System.out.println("Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED");
+		Assertion.assertTrue(">>>>>>> Plan Effective Default text does not display current year <<<<<<<<<<<   : "+PlanEffective_DefaultText.getText(),PlanEffective_DefaultText.getText().contains(envYear) );
+		System.out.println("Default Plan Effective Date View Validation Passed - Bar chart Jan-Dec, Change PED dropdown, Effective date default text are DISPLAYED -->>  "+PlanEffective_DefaultText.getText());
 	}
 
 
-	public void validateResetEffectiveDate() {
+	public void validateResetEffectiveDate(String envYear) {
 		validateNew(ResetEffectiveDateLink);
 		ResetEffectiveDateLink.click();
 		CommonUtility.waitForPageLoad(driver, BarChart, 30);
-		validateDefaultPED();
+		validateDefaultPED(envYear);
 	}
 	public String getMonthNameforMonthNo(int envMonth) {
 		String MonthName = "";
