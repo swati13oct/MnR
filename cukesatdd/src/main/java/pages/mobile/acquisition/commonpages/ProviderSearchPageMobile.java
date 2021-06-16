@@ -572,8 +572,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 
 		//validateNew(zipCodeTextfield);
 		waitforElementVisibilityInTime(zipCodeTextfield, 5);
-		//zipCodeTextfield.sendKeys(zipcode);
-		sendkeysMobile(zipCodeTextfield, zipcode);
+		zipCodeTextfield.sendKeys(zipcode);
+		//sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
 		jsClickNew(continueButton);
 		selectYear(year);

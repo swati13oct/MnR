@@ -69,6 +69,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		String testEmailAddresss="bademailformat";
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 		emailPlanSummarySendButton.click();
+		emailPlanSummaryFieldBox.clear();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryErrorFieldBox));
 		Assertion.assertTrue("PROBLEM - unable to locate error text after email address validation failed",validate(emailPlanSummaryInputErrorText));
@@ -83,6 +84,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 		emailPlanSummarySendButton.click();
+		emailPlanSummaryFieldBox.clear();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryErrorFieldBox));
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryInputErrorText));
@@ -97,6 +99,7 @@ public class PlanSummaryEmailAndPrintUtil extends EmailAndPrintUtilBase{
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
 		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
 		emailPlanSummarySendButton.click();
+		emailPlanSummaryFieldBox.clear();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryErrorFieldBox));
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",validate(emailPlanSummaryInputErrorText));

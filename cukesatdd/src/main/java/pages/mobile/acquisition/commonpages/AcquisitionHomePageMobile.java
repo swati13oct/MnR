@@ -1,6 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
 import static atdd.framework.Assertion.assertTrue;
+import static org.testng.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
@@ -438,8 +440,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//input[@id='search-field']")
 	private WebElement EnterSearch;
 
-	@FindBy(xpath = "//button[@type='submit']")
+	@FindBy(xpath = "//button[contains(text(),'Search')]")
 	private WebElement SubmitBtn;
+	
+	@FindBy(xpath = "//label[contains(text(),'Enter Search')]")
+	private WebElement enterSearchLable;
 
 	@FindBy(xpath = "//h1[contains(text(),'Search Results')]")
 	// @FindBy(xpath = "//h1[contains(@class,'search-results-title')]")
@@ -1957,17 +1962,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void validateErrorMsg(String inputValue, String newSearchValue) {
 		switch (inputValue) {
 		case "Empty":
-			System.out.println("Varify Error message for " + inputValue + "");
+			System.out.println("Verify Error message for " + inputValue + "");
 			String errMessage = driver.findElement(By.id("searchErrorMessage")).getText();
 			Assertion.assertTrue(
 					errMessage.contains("Your search box was empty. Please enter some text in the search box"));
 			break;
 		case "InvalidCharacter":
 			System.out.println("Validating invalid character message");
-			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText();
+			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
+					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			Assertion.assertTrue(
-					invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			Assertion.assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
 			// Assertion.assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
@@ -2050,10 +2055,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void enterSearchtextvalue(String sv) {
 		System.out.println("@@@Inside search text value Method@@@");
 		threadsleep(5);
-		// driver.switchTo().defaultContent();
-		// CommonUtility.waitForPageLoad(driver, EnterSearch, 60);
-		// EnterSearch.sendKeys(sv);
-		jsSendkeys(EnterSearch, sv);
+		MobileMenuSiteSearch();
+
+		sendkeysMobile(EnterSearch, sv);
+		enterSearchLable.click();
 		// CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
 		scrollToView(SubmitBtn);
 		// SubmitBtn.click();
@@ -2292,22 +2297,46 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateGlobalFooterLinks() {
-		validateNew(footerHomeLink);
-		validateNew(footerAboutUsLink);
-		validateNew(footerContactUsLink);
+		scrollToView(footerSiteMapLink);
+		// validateNew(footerHomeLink);
+		// validateNew(footerAboutUsLink);
+		// validateNew(footerContactUsLink);
 		validateNew(footerSiteMapLink);
 		validateNew(footerPrivacyPolicyLink);
 		validateNew(footerTermsnConditionsLink);
 		validateNew(footerDisclaimersLink);
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
-		// validateNew(aarpOrgLink);
+		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			 //validateNew(aarpOrgLink);
+		} else {
+			System.out.println("UHC Medicare solutions site loaded");
+		}
+		jsClickNew(shopPlansExpander);
 		validateNew(medicareAdvantagePlansLink);
 		validateNew(medicareSupplementInsurancePlansLink);
 		validateNew(medicarePrescriptionDrug_PlansLink);
 		validateNew(medicareSpecialNeedsPlansLink);
-		validateNew(learnAboutMedicareLink);
+		// validateNew(learnAboutMedicareLink);
+
+		jsClickNew(toolsAndResources);
+		validateNew(planRecommendationLink);
+		validateNew(drugCostEstimatorLink);
+		validateNew(pharmacySearchLink);
+		validateNew(providerSearchLink);
+
+		jsClickNew(learnAboutMedicare);
+		validateNew(introductioMedicareLink);
+		validateNew(eligibilityLink);
+		validateNew(coverageChoiceLink);
+		validateNew(medicareFaqLink);
+
+		jsClickNew(more);
+		validateNew(aboutLink);
+		validateNew(contactLink);
+		validateNew(languageAssistanceLink);
 	}
+
 
 	public PharmacySearchPageMobile navigateToPharmacyLocator() {
 		jsClickNew(Menu);
@@ -2525,6 +2554,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(MobileMenuCloseNavigationBtn);
 
 	}
+	
+	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
+	public WebElement MenuCrossMobile;
 
 	public void headerRegisterLink() {
 		MobileMenuMain();
@@ -2755,10 +2787,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public void validateCallpopup() throws InterruptedException {
 
-		/* Mobile does not show callSam popup hence verifying callSam icon */
+		/* Verifying TFN number on Mobile */
 		validateNew(callsam, 5);
 		// // CommonUtility.checkPageIsReady(driver);
-		// System.out.println(callsam.getText());
+		System.out.println(callsam.getText());
+		System.out.println("@@@@ Call/TFN banner displayed on mobile @@@@");
 		// callsam.click();
 		// System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
 		// driver.switchTo().activeElement();
@@ -2766,6 +2799,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// // CallSamTFNClose.click();
 		// // validateNew(callsam);
 		// // return null;
+		
+		if(callsam.getText().contains("1-877-699-5710")) {
+			System.out.println("Correct TFN shown on Mobile view");
+		}
+			
 		// if (CallSamTFN.getText().isEmpty()) {
 		// // return null;
 		// Assert.fail("TFN number was not found on the SAM call Popup");
@@ -2777,17 +2815,20 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateChatSam() throws InterruptedException {
-		boolean present;
-		try {
-			validateNew(chatsam);
-			present = true;
-		} catch (NoSuchElementException e) {
-			present = false;
-		}
-		if (present) {
-			System.out.println("@@@@@@@@@ Able to find Chat TFN widget @@@@@@@@@");
-			// validateChatSamContent();
-		}
+		
+		/*Skipping chat sam verification on mobile as chat does nt displayed on mobile view*/
+		System.out.println("Chat not applicable to mobile view hence skipped...");
+//		boolean present;
+//		try {
+//			validateNew(chatsam);
+//			present = true;
+//		} catch (NoSuchElementException e) {
+//			present = false;
+//		}
+//		if (present) {
+//			System.out.println("@@@@@@@@@ Able to find Chat TFN widget @@@@@@@@@");
+//			// validateChatSamContent();
+//		}
 
 	}
 
@@ -3156,16 +3197,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerRegisterLinkMobile;
 
 	public void validateHeaderLinks() {
-		MobileMenuMain();
-		scrollToView(headerSigninLinkMobile);
-		// validateNew(headerSigninLinkMobile);
-		// validateNew(headerRegisterLinkMobile);
-		scrollToView(headerRegisterLinkMobile);
-		jsClickNew(headerRegisterLinkMobile);
-		clickBrowserBackButton();
-		MobileMenuMain();
-		validateNew(visitAARPLink);
-		validateNew(AARPlogo);
+		validateNew(headerSignInLink);
+		validateNew(headerRegisterLink);
+		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
+			validateNew(visitAARPLink);
+		} else {
+			System.out.println("UHC Medicare solutions site loaded");
+		}
+		validateLogo();
 		validateNew(visitorprofileicon);
 	}
 
@@ -3708,10 +3747,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(RightRail_FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
-		JavascriptExecutor js = (JavascriptExecutor)driver;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript(AgentLinkJSPath);
-		
-		//jsClickNew(RightRail_FindAnAgent);
+
+		// jsClickNew(RightRail_FindAnAgent);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();
@@ -3834,7 +3873,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// Assertion.assertTrue( "Title mismatch for dental
 		// directory",driver.getTitle().equals(url));
 		if (str.equals(url)) {
-			assertTrue(true);
+			Assertion.assertTrue(true);
 		}
 
 	}
