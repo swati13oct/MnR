@@ -235,11 +235,13 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	@FindBy(id = "diabetes")
 	private WebElement diabetesQuestion1;
-
-	@FindBy(xpath = "//*[contains(@for,'diabetesQuestionYes')]")
+	
+	@FindBy(xpath="//*[contains(@for,'diabetesQuestionYes')]")
 	private WebElement diabetesQuestions1Yes;
-
-	@FindBy(xpath = "//*[contains(@for,'oralMedicationQuestionNo')]")
+	@FindBy(xpath="//*[contains(@for,'diabetesQuestionNo')]")
+	private WebElement diabetesQuestions1No;
+	
+	@FindBy(xpath="//*[contains(@for,'oralMedicationQuestionNo')]")
 	private WebElement diabetesQuestions2No;
 
 	// ===============================================================================
@@ -282,6 +284,45 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[contains(@for,'heartorlegsQuestionNo')]")
 	private WebElement CardiovascularDisordersQ6No;
+	
+	@FindBy(xpath="//div[contains(@class,'enrollmentAllowed-error-msg ng-star-inserted')]")
+	private WebElement ErrorMessage_CSNP;
+	
+	@FindBy(xpath="//a[contains(@aria-label,'Edit Medicare Insurance Information')]")
+	private WebElement EditMedicareInformation;
+	
+	@FindBy(xpath="//button[contains(text(),'Save Changes')]")
+	private WebElement ReviewEditSavechanges;
+	
+	@FindBy(xpath = "//a[contains(@class,'cancel-button modal-l')]")
+	private WebElement CancelEnrollmentLinkOLE;
+
+	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
+	private WebElement CancellationModalOLE;
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+	private WebElement CreateProfile;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
+	private WebElement SignIn;
+	@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
+	private WebElement LeaveOnlineApplication;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
+	private WebElement closepopup;
+
+	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
+	private WebElement SaveEnrollmentLinkOLE;		
+	@FindBy(xpath = "(//div[contains(@id,'enroll-save-popup')])[1]")
+	private WebElement SaveModalOLE;
+
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[1]")
+	private WebElement CreateProfilesave;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[1]")
+	private WebElement SaveSignIn;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
+	private WebElement Saveclosepopup;
 
 	public MedicareInformationPageMobile(WebDriver driver) {
 		super(driver);
@@ -739,70 +780,119 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 	}
 
-	public boolean validate_Required_Fields_CSNP(String medicaidNumber, String PlanName) {
-		// System.out.println("plantype : "+plantype+" Medicare Number :
-		// "+medicaidNumber);
+	public boolean validate_Required_Fields_CSNP(Map<String, String> MemberDetailsMap, String PlanName) {
 
-		if (PlanName.contains("Chronic") || PlanName.contains("Gold")) {
-			System.out.println("Medicaid Question is displayed for " + PlanName + " : " + validate(MedicaidQuestion));
-			medicaiddno.click();
-			System.out.println("Medicaid question : No clicked" + medicaiddno.isSelected());
+		if (PlanName.contains("Chronic") || PlanName.contains("Gold") || PlanName.contains("Silver")) {
 
-			// Diabetes questions
-			Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
-			validateNew(diabetesQuestions1Yes);
-			jsClickNew(diabetesQuestions1Yes);
-			validateNew(diabetesQuestions2No);
-			jsClickNew(diabetesQuestions2No);
-			Assert.assertTrue(validateNew(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
-			validateNew(chronicHeartFailureQuestion1No);
-			jsClickNew(chronicHeartFailureQuestion1No);
-			validateNew(chronicHeartFailureQuestion2No);
-			jsClickNew(chronicHeartFailureQuestion2No);
-			validateNew(chronicHeartFailureQuestion3No);
-			jsClickNew(chronicHeartFailureQuestion3No);
-			Assert.assertTrue(validateNew(CardiovascularDisordersQuestion1),
-					"Cardiovascular Disorders Question are present");
-			validateNew(CardiovascularDisordersQ1No);
-			jsClickNew(CardiovascularDisordersQ1No);
-			validateNew(CardiovascularDisordersQ2No);
-			jsClickNew(CardiovascularDisordersQ2No);
-			validateNew(CardiovascularDisordersQ3No);
-			jsClickNew(CardiovascularDisordersQ3No);
-			validateNew(CardiovascularDisordersQ4No);
-			jsClickNew(CardiovascularDisordersQ4No);
-			validateNew(CardiovascularDisordersQ5No);
-			jsClickNew(CardiovascularDisordersQ5No);
-			validateNew(CardiovascularDisordersQ6No);
-			jsClickNew(CardiovascularDisordersQ6No);
+			if (validate(diabetesQuestions1No) && validate(diabetesQuestions2No)
+					&& validate(chronicHeartFailureQuestion1No) && validate(chronicHeartFailureQuestion2No)
+					&& validate(chronicHeartFailureQuestion3No) && validate(CardiovascularDisordersQ1No)
+					&& validate(CardiovascularDisordersQ2No) && validate(CardiovascularDisordersQ3No)
+					&& validate(CardiovascularDisordersQ4No) && validate(CardiovascularDisordersQ5No)
+					&& validate(CardiovascularDisordersQ6No)) {
 
-			// waitforElement(disclosureBox);
-			return true;
+				scrollToView(diabetesQuestions1No);
+				jsClickNew(diabetesQuestions1No);
+				
+				scrollToView(diabetesQuestions2No);
+				jsClickNew(diabetesQuestions2No);
+				
+				scrollToView(chronicHeartFailureQuestion1No);
+				jsClickNew(chronicHeartFailureQuestion1No);
+				
+				scrollToView(chronicHeartFailureQuestion2No);
+				jsClickNew(chronicHeartFailureQuestion2No);
+				
+				scrollToView(chronicHeartFailureQuestion3No);
+				jsClickNew(chronicHeartFailureQuestion3No);
+				
+				scrollToView(CardiovascularDisordersQ1No);
+				jsClickNew(CardiovascularDisordersQ1No);
+				
+				scrollToView(CardiovascularDisordersQ2No);
+				jsClickNew(CardiovascularDisordersQ2No);
+				
+				scrollToView(CardiovascularDisordersQ3No);
+				jsClickNew(CardiovascularDisordersQ3No);
+				
+				scrollToView(CardiovascularDisordersQ4No);
+				jsClickNew(CardiovascularDisordersQ4No);
+				
+				scrollToView(CardiovascularDisordersQ5No);
+				jsClickNew(CardiovascularDisordersQ5No);
+				
+				scrollToView(CardiovascularDisordersQ6No);
+				jsClickNew(CardiovascularDisordersQ6No);
 
-		} else if (PlanName.contains("Silver")) {
-			System.out.println("Medicaid Question is displayed for " + PlanName + " : " + validate(MedicaidQuestion));
-			medicaiddno.click();
-			System.out.println("Medicaid question : No clicked" + medicaiddno.isSelected());
+				System.out.println("All the CSNP Preliminary questions are selected as No");
 
-			// Diabetes questions
-			Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
-			validateNew(diabetesQuestions1Yes);
-			jsClickNew(diabetesQuestions1Yes);
-			validateNew(diabetesQuestions2No);
-			jsClickNew(diabetesQuestions2No);
-			Assert.assertTrue(validateNew(chronicHeartFailureQuestion1), "Chromic Heart Failurequestions are present");
-			validateNew(chronicHeartFailureQuestion1No);
-			jsClickNew(chronicHeartFailureQuestion1No);
-			validateNew(chronicHeartFailureQuestion2No);
-			jsClickNew(chronicHeartFailureQuestion2No);
-			validateNew(chronicHeartFailureQuestion3No);
-			jsClickNew(chronicHeartFailureQuestion3No);
-			// waitforElement(disclosureBox);
-			return true;
+				if (validate(ErrorMessage_CSNP) && ErrorMessage_CSNP.isDisplayed()) {
+					if (!ErrorMessage_CSNP.getText()
+							.contains("We're sorry, to enroll in a Chronic Special needs Plan (C-SNP),")) {
+						System.out.println(" Error Message is Not  displayed : " + ErrorMessage_CSNP.getText());
+						return false;
+					}
+					System.out.println("Error Message Error : " + ErrorMessage_CSNP.getText());
+
+				} else {
+					System.out.println("Error Message is not displayed");
+
+				}
+				// Diabetes questions
+				Assert.assertTrue(validateNew(diabetesQuestion1), "diabetes questions are present");
+				scrollToView(diabetesQuestions1Yes);
+				validateNew(diabetesQuestions1Yes);
+				jsClickNew(diabetesQuestions1Yes);
+				
+				scrollToView(diabetesQuestions2No);
+				validateNew(diabetesQuestions2No);
+				jsClickNew(diabetesQuestions2No);
+				
+				Assert.assertTrue(validateNew(chronicHeartFailureQuestion1),
+						"Chromic Heart Failurequestions are present");
+				
+				scrollToView(chronicHeartFailureQuestion1No);
+				validateNew(chronicHeartFailureQuestion1No);
+				jsClickNew(chronicHeartFailureQuestion1No);
+				
+				scrollToView(chronicHeartFailureQuestion2No);
+				validateNew(chronicHeartFailureQuestion2No);
+				jsClickNew(chronicHeartFailureQuestion2No);
+				
+				scrollToView(chronicHeartFailureQuestion3No);
+				validateNew(chronicHeartFailureQuestion3No);
+				jsClickNew(chronicHeartFailureQuestion3No);
+				Assert.assertTrue(validateNew(CardiovascularDisordersQuestion1),
+						"Cardiovascular Disorders Question are present");
+				
+				scrollToView(CardiovascularDisordersQ1No);
+				validateNew(CardiovascularDisordersQ1No);
+				jsClickNew(CardiovascularDisordersQ1No);
+				
+				scrollToView(CardiovascularDisordersQ2No);
+				validateNew(CardiovascularDisordersQ2No);
+				jsClickNew(CardiovascularDisordersQ2No);
+				
+				scrollToView(CardiovascularDisordersQ3No);
+				validateNew(CardiovascularDisordersQ3No);
+				jsClickNew(CardiovascularDisordersQ3No);
+				
+				scrollToView(CardiovascularDisordersQ4No);
+				validateNew(CardiovascularDisordersQ4No);
+				jsClickNew(CardiovascularDisordersQ4No);
+				
+				scrollToView(CardiovascularDisordersQ5No);
+				validateNew(CardiovascularDisordersQ5No);
+				jsClickNew(CardiovascularDisordersQ5No);
+				
+				scrollToView(CardiovascularDisordersQ6No);
+				validateNew(CardiovascularDisordersQ6No);
+				jsClickNew(CardiovascularDisordersQ6No);
+
+				return true;
+			}
 		}
-
-		else
-			return false;
+		return false;
 
 	}
 

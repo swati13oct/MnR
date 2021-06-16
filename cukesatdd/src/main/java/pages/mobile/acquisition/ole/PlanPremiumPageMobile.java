@@ -191,6 +191,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		String expectedText = null;
 		try {
 		if(payByMail.isDisplayed())	{
+			scrollToView(payByMail);
 			jsClickNew(payByMail);
 			Thread.sleep(1000);
 			actualText = payByMailText.getText().trim();
@@ -217,6 +218,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		validateNew(creditCard);
 		try {
 			if(creditCard.isDisplayed())	{
+				scrollToView(creditCard);
 				jsClickNew(creditCard);
 				Thread.sleep(10000);
 				driver.switchTo().frame("ole_credit_payment");
@@ -259,9 +261,10 @@ public class PlanPremiumPageMobile extends UhcDriver{
 						flag = actualText.equalsIgnoreCase(expectedText);
 							if(flag) {
 							System.out.println("Enter Account Information");
-							sendkeysMobile(accountNumber, cardNo);
-							sendkeysMobile(cardExpirationMonth, month);
-							sendkeysMobile(cardExpirationYear, year);
+							sendKeysByCharacter(accountNumber, cardNo);
+							sendKeysByCharacter(cardExpirationMonth, month);
+							sendKeysByCharacter(cardExpirationYear, year);
+							scrollToView(btnSubmit);
 							jsClickNew(btnSubmit);
 							Thread.sleep(5000);
 							System.out.println("Validate card details stored successfully message");
@@ -292,6 +295,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		
 		try {
 			if(socialSecurity.isDisplayed())	{
+				scrollToView(socialSecurity);
 				jsClickNew(socialSecurity);
 				Thread.sleep(1000);
 				actualText = socialSecurityText.getText().trim();
