@@ -112,7 +112,7 @@ public class VisitorProfilePage extends UhcDriver {
     @FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'select-year')][1]")
     private WebElement profileCrntYrPlans;
 
-    @FindBy(xpath = "//button[contains(@id,'addDrug')]")
+    @FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
     public WebElement AddMyDrugsBtn;
 
     // New Shopper profile page objects

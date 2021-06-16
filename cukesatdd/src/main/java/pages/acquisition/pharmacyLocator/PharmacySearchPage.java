@@ -30,7 +30,7 @@ public class PharmacySearchPage extends PharmacySearchBase {
 	@FindBy(xpath = "//a[text()='Estimate your drug costs at a preferred retail pharmacy']")
 	private WebElement DCELink;
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//div[@ng-if='returnLinkText']//a")
