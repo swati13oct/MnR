@@ -393,6 +393,8 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	// application')])[1]")
 	private WebElement Start_ApplicationBtn;
 
+	
+	
 	@FindBy(className = "loading-dialog")
 	public List<WebElement> loadingBlock;
 
@@ -604,6 +606,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//input[@id='msVppZipCode']")
 	private WebElement medSuppZipCode1;
+
+	@FindBy(xpath = "//*[@id='sign-up-modal']")
+	private WebElement planSavedPopup;
 
 	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
 	private WebElement viewPlansBtnMedSupp;
@@ -2961,8 +2966,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 			System.out.println("Proceed to validate 'Save Plan' icon appeared before clicking");
 			if (planType.equalsIgnoreCase("MS")) {
+				plan = plan.replaceAll(" ", "");
 				// initial_savePlanIconXpath="//*[text(),'"+plan+"']/ancestor::*[contains(@class,'module-plan-overview')]//*[contains(@aria-selected,'false')]"+savePlanImgXpath;
-				initial_savePlanIconXpath = "//*[contains(@class,'save-favorite-plan')][contains(@aria-selected,'false')][@aria-describedby='"
+				initial_savePlanIconXpath = "//*[contains(@class,'save-favorite-plan')][@aria-describedby='"
 						+ plan + "']";
 			} else {
 				initial_savePlanIconXpath = "//a[contains(text(),'" + plan
@@ -3271,6 +3277,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	}
 
 	public void validateAbilityToUnSavePlans(String savedPlans, String planType) {
+
 //		scrollToView(backToPlans);
 		String subPath = determineSubpath(planType);
 		String headerPath = determineHeaderPath(planType);
@@ -3603,8 +3610,10 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 		validateNew(DOB, 30);
 		System.out.println("MedSup page form is displayed");
-		DOB.click();
-		DOB.sendKeys(DateOfBirth);
+		jsClickNew(DOB);
+		//sendkeys(, DateOfBirth);
+		jsSendkeys(DOB, DateOfBirth);
+		//.sendKeys(DateOfBirth);
 		System.out.println("Date of birth is entered");
 		Thread.sleep(2000);
 		jsClickNew(MaleGender);
@@ -4613,6 +4622,50 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(ReturntoApplicationButton);
 		Thread.sleep(2000);
 		// jsClickNew(nextButton);
+
+		return LastName;
+
+	}
+
+	public String MSStartApplication(String FirstName, String LastName, String PlanName) throws InterruptedException {
+		Thread.sleep(4000);
+		WebElement start = driver.findElement(By.xpath("(//a[contains(@aria-describedby,'"+PlanName+"') and contains(text(),'Start application')])[1]"));
+		CommonUtility.waitForPageLoadNew(driver, start, 20);
+		//@FindBy(xpath ="(//a[contains(@aria-describedby,'Plan N') and contains(text(),'Start application')])")
+		//private WebElement startApplicationMs;
+		jsClickNew(start);
+		System.out.println("Start application button is clicked on application page");
+		Thread.sleep(4000);
+		/*CommonUtility.waitForPageLoadNew(driver, insuredStatus, 20);
+		insuredStatus.click();
+		*/Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		firstName.sendKeys(FirstName);
+		lastName.sendKeys(LastName);
+		jsClickNew(nextButton);
+		CommonUtility.waitForPageLoadNew(driver, address1, 20);
+		address1.sendKeys("TestAddress1");
+		cityName.sendKeys("TestCity");
+		alternatemailingAddressBtn.click();
+		emailAddress.sendKeys("test123@optum.com");
+		phoneNumber.sendKeys("1234567890");
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(cancelButton);
+		CommonUtility.waitForPageLoad(driver, ReturntoApplicationButton, 30);
+		jsClickNew(ReturntoApplicationButton);
+		Thread.sleep(2000);
+		// jsClickNew(nextButton);
+
 		return LastName;
 
 	}
@@ -5610,6 +5663,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		return flag;
 	}
 
+
+	public void validateKeepShopping() {
+		waitforElement(planSavedPopup);
+		if (planSavedPopup.isDisplayed()) {
+			 keepShoppingBtn.click();
+		}
+
+	}
+
 	public boolean validateAllFieldsEditable() throws InterruptedException {
 		boolean flag = false;
 		Thread.sleep(2000);
@@ -6260,7 +6322,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(id = "sign-up-modal-header")
+	@FindBy(id = "sign-up-modal")
 	private WebElement createProfilePopup;
 
 	public void savePlan(String planName) {
@@ -6795,6 +6857,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		// Gender.click();
 		// jsClickNew(Gender);
 		jsClickNew(nextButton);
+
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
@@ -6803,6 +6866,15 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		jsClickNew(nextButton);
 		Thread.sleep(2000);
 		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+		Thread.sleep(2000);
+		jsClickNew(nextButton);
+
 		jsClickNew(CoverageMedicaid);
 		jsClickNew(nextButton);
 		Thread.sleep(2000);

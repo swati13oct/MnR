@@ -6,10 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import io.cucumber.java.en.Given;
+
 import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.ole.oleCommonConstants;
+import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
@@ -28,6 +32,7 @@ import pages.acquisition.commonpages.VisitorProfileTestHarnessPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
+import pages.acquisition.ole.WelcomePage;
 
 /**
  * @author bnaveen4 Functionality:Visitor Profile for both AAPR and UHC
@@ -46,18 +51,19 @@ public class VisitorProfileStepDefinition {
 	public void the_user_selects_the_state_drop_down_value_in_AARP_home_page(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String state = givenAttributesMap.get("State");
 		AcquisitionHomePage acqHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-//		CommonConstants.SELECTED_STATE = state;
+		// CommonConstants.SELECTED_STATE = state;
 		CommonConstants.setSelectedState(state);
 
 		acqHomePage.selectState(state);
@@ -120,8 +126,10 @@ public class VisitorProfileStepDefinition {
 
 	@And("^the user should be able to see the Drug information in the guest profile page$")
 	public void the_user_should_be_able_to_see_the_Drug_information_in_the_guest_profile_page(DataTable data) {
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String drug = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String drug =
+		 * memberAttributesRow.get(0).getCells().get(1);
+		 */
 		List<List<String>> memberAttributesRow = data.asLists();
 		String drug = memberAttributesRow.get(0).get(1);
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
@@ -133,16 +141,17 @@ public class VisitorProfileStepDefinition {
 	public void user_validates_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
-//		visitorProfile.validateAddedPlans(savePlanNames);
+		// visitorProfile.validateAddedPlans(savePlanNames);
 		visitorProfile.validateAddedPlansNew(savePlanNames);
 	}
 
@@ -150,13 +159,15 @@ public class VisitorProfileStepDefinition {
 	public void user_validates_the_added_Ms_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savePlanNames = givenAttributesMap.get("MS Test Plans");
+		System.out.println(savePlanNames);
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateAddedMsPlans(savePlanNames);
@@ -165,8 +176,10 @@ public class VisitorProfileStepDefinition {
 	@And("^the user should be able to see all the added Drugs information in the guest profile page$")
 	public void the_user_should_be_able_to_see_all_the_added_Drugs_information_in_the_guest_profile_page(
 			DataTable data) {
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String drugList = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
+		 * drugList = memberAttributesRow.get(0).getCells().get(1);
+		 */
 		List<List<String>> memberAttributesRow = data.asLists();
 		String drugList = memberAttributesRow.get(0).get(1);
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
@@ -178,12 +191,13 @@ public class VisitorProfileStepDefinition {
 	public void user_validate_pdf_link_on_AARP_Site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savePlanNames = givenAttributesMap.get("MS Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -201,12 +215,13 @@ public class VisitorProfileStepDefinition {
 	public void user_clicks_on_plan_name_in_AARP(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -218,12 +233,13 @@ public class VisitorProfileStepDefinition {
 	public void user_delets_the_added_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savedPlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -249,12 +265,13 @@ public class VisitorProfileStepDefinition {
 	public void user_delets_all_the_added_providers_on_visitor_profile_page_of_AARP_site(DataTable Planname) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = plannameAttributesMap.get("PlanName");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -266,12 +283,13 @@ public class VisitorProfileStepDefinition {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
@@ -283,12 +301,13 @@ public class VisitorProfileStepDefinition {
 	public void the_user_signs_in_with_optum_Id_credentials_in_AARP_site(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
-		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 
@@ -309,12 +328,13 @@ public class VisitorProfileStepDefinition {
 	public void user_validates_plan_count_on_shopping_cart_Icon_on_AARP_site(DataTable givenAttributes) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planCount = plannameAttributesMap.get("Plans Count");
 		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -333,12 +353,13 @@ public class VisitorProfileStepDefinition {
 			DataTable givenAttributes) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planID = plannameAttributesMap.get("Plan ID");
 		VisitorProfileTestHarnessPage vpTestHarnessPage = (VisitorProfileTestHarnessPage) loginScenario
 				.getBean(PageConstants.VP_TESTHARNESS_PAGE);
@@ -352,12 +373,13 @@ public class VisitorProfileStepDefinition {
 	public void user_clicks_compare_plans_from_visitor_Profile_on_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String comparePlans = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -374,12 +396,13 @@ public class VisitorProfileStepDefinition {
 	public void verify_the_plans_on_plan_compare_page_on_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String comparePlans = givenAttributesMap.get("Test Plans");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -412,12 +435,13 @@ public class VisitorProfileStepDefinition {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(cancelOLEDetails);
-		/*List<DataTableRow> plannameAttributesRow = cancelOLEDetails.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = cancelOLEDetails.getGherkinRows();
+		 * for (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = plannameAttributesMap.get("Plan Name");
 
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
@@ -425,16 +449,74 @@ public class VisitorProfileStepDefinition {
 		visitorProfile.cancelEnrollment(planName);
 	}
 
+	@And("^the user enrolls the plan from VisitorProfile$")
+	public void the_user_enrolls_plan_from_VisitorProfile (DataTable planName) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(planName);
+		/*List<DataTableRow> plannameAttributesRow = cancelOLEDetails.getGherkinRows();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}*/
+		String planName1 = plannameAttributesMap.get("Plan Name");
+		
+
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
+		String PlanPremium = "";
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		WelcomePage welcomePage;
+		if(PlanType.equals("MS")) {
+			welcomePage = visitorProfile.enrollInMSPlan(planName1);
+	
+		}
+		else {
+			welcomePage = visitorProfile.enrollInPlan(planName1);
+			}
+		
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName1);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		//getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		//getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+		System.out.println("Plan Name is : "+planName1);
+		System.out.println("Plan Type is : "+PlanType);
+		System.out.println("Plan Zip Code is : "+ZipCode);
+		System.out.println("Plan County Name is : "+County);
+		System.out.println("Plan Plan Premium is : "+PlanPremium);
+		//System.out.println("TFN for Plan Type is : "+TFN);
+		System.out.println("Plan Year is : "+PlanYear);
+	//	System.out.println("OLE is being started from Acquisition Site : "+SiteName);
+
+		if (welcomePage != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,
+					welcomePage);
+			System.out.println("OLE Welcome Page is Displayed");
+			Assertion.assertTrue(true);
+		}
+		else
+			Assertion.fail("Error in validating the OLE Welcome Page");
+	}
+
 	@And("^user delets the added Ms plans on visitor profile page$")
 	public void user_delets_the_added_ms_plans_on_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savedPlanNames = givenAttributesMap.get("MS_testPlans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -445,12 +527,13 @@ public class VisitorProfileStepDefinition {
 	public void user_validates_the_added_plans_on_new_visitor_profile_page(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -501,12 +584,13 @@ public class VisitorProfileStepDefinition {
 	public void user_validates_the_added_plans_on_new_visitor_profile_page_of_AARP_site(DataTable planNames) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
-		/*List<DataTableRow> givenAttributesRow = planNames.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planNames.getGherkinRows(); for (int
+		 * i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savePlanNames = givenAttributesMap.get("Test Plans");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
@@ -534,12 +618,13 @@ public class VisitorProfileStepDefinition {
 	public void the_user_login_with_optum_Id_credentials(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
-		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 		WebDriver driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -580,17 +665,18 @@ public class VisitorProfileStepDefinition {
 		visitorProfilePage.verifyBreadCrumb(breadcrumb);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
-	
+
 	@Then("^the user deletes all the added drugs from profile page$")
 	public void user_deletes_all_the_added_drugs_from_profile_page(DataTable drugList) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(drugList);
-		/*List<DataTableRow> givenAttributesRow = drugList.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = drugList.getGherkinRows(); for (int i
+		 * = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String drugs = givenAttributesMap.get("DrugName");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
@@ -598,42 +684,76 @@ public class VisitorProfileStepDefinition {
 		visitorProfile.deleteAllDrugs(drugs);
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfile);
 	}
-	
+
 	@Then("^Verify X out of Y provider covered information is displayed on legacy visitor profile page$")
 	public void verify_providers_covered_legacy_visitor_profile(DataTable Planname) {
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = plannameAttributesMap.get("PlanName");
 
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		Assertion.assertTrue(visitorProfile.legacyProviderinfo(planName));
 	}
-	
+
 	@And("^validate the new profile header$")
 	public void validate_the_new_profile_header(DataTable data) {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.validateNewHeader(data);
-		
+
 	}
 
 	@Given("^the user validates Drugs and provides are added or not added on shopper profile page as follows$")
 	public void the_user_validates_drugs_provides_as_per_flag(DataTable attributes) {
-		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
 		String DrugsFlag = memberAttributesMap.get("DrugsFlag");
 		String ProvidersFlag = memberAttributesMap.get("ProvidersFlag");
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.ValidateDrugsProviders(DrugsFlag, ProvidersFlag);
+	}
+
+	@And("^user selects plans to compare from visitor Profile$")
+	public void user_clicks_compare_plans_from_visitor_Profile_on_site(DataTable planNames) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planNames);
+		
+		String comparePlantype = givenAttributesMap.get("Plantype");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		visitorProfile.compareAPlan(comparePlantype);
+		
+	}
+	
+	@Then("^user verify failure message after plan compare clicked$")
+	public void vser_validates_failure_compare_plan(DataTable Plantype) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(Plantype);
+		
+		String planType  = givenAttributesMap.get("Plantype");
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		visitorProfile.validateFailureMsg(planType);
+		
+
+	}
+	@Then("^verify plan compare page is loaded when navigating from profile$")
+	public void verify_plan_compare_page_from_profile_is_loaded_on_AARP() throws Throwable {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validatePlanComparePagefromProfile();
 	}
 
 }

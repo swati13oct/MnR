@@ -857,6 +857,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(backToAllPlansLink);			
 		validateNew(yourDrugsBanner);
 		validateNew(editDrugsLink);
+		scrollToView(editDrugsLink);
 		validateNew(DrugSummaryHeader);
 		validateNew(DrugSummaryCoverageHeader);
 		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
@@ -1597,6 +1598,36 @@ public WelcomePage Enroll_OLE_Plan_Compare_PDP(String planName) throws Interrupt
 		return new WelcomePage(driver);
 	}
 	return null;
+}
+
+
+public void savePlan(String planName) {
+	try {
+		List<String> listOfTestPlans = Arrays.asList(planName.split(","));
+		System.out.println(
+				"Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
+		Thread.sleep(5000);
+		for (String plan : listOfTestPlans) {
+			WebElement savePlan = driver.findElement(By.xpath("//*[@id=\"compare-table-header\"]//*[contains(text(),'"+planName+"')]/../following::button[contains(@id,'headerSavePlan')][1]"));
+			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+			((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+			Thread.sleep(5000);
+		}
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+}
+
+public void validatePlanComparePagefromProfile() {
+	//validateNew(backToAllPlansLink);
+	validateNew(validateprintbutton);
+	validateNew(validateemailbutton);
+	//validateNew(removeLink);
+	//validateNew(viewDetailslink);
+	//validateNew(savePlanIcon);
+	System.out.println("Validated all links plan compare");
+	
 }
 
 }
