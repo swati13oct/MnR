@@ -612,10 +612,13 @@ public abstract class UhcDriver {
 			//checkElementisEnabled(element);
 			scrollToView(element);
 			element.click();
-			sleepBySec(2);
+//			sleepBySec(2);
 			String seleniumClick = element.getAttribute("automationTrack");
 			System.out.println("Selenium Click executed........" + seleniumClick);
 
+			//If automationTrack is null and element is displayed, then selenium click was not successful
+			seleniumClick = (seleniumClick == null && element.isDisplayed()) ? "false" : "true";
+			
 			if(!seleniumClick.equalsIgnoreCase("true")) {
 				// checkElementisEnabled(element);
 				System.out.println("Trying JSClick on IOS ..........");
@@ -892,13 +895,14 @@ public abstract class UhcDriver {
 		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
+		dropdown.selectByValue(value);
+		/*if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")
 				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
 			mobileSelectOption(dropdownElement, value, true);
 		} else {
 			dropdown.selectByValue(value);
-		}
+		}*/
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
 		if (!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
