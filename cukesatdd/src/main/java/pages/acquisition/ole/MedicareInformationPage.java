@@ -1065,8 +1065,9 @@ public boolean answer_following_questions_PrescriptionCoverage(Map<String, Strin
 	try
 	{
 	CommonUtility.checkPageIsReadyNew(driver);
-	if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Prescription Drug Coverage')]")))){			
-		System.out.println("OLE Medicare Information Page is Displayed");
+	//if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Prescription Drug Coverage')]")))){
+		if(validateNew(driver.findElement(By.xpath("//h3/b[contains(text(),'Prescription')]")))){
+			System.out.println("OLE Medicare Information Page is Displayed");
 	}
 	if(PrescriptionCoverageQuestionFlagNo.isDisplayed()) {
 		jsClickNew(PrescriptionCoverageQuestionFlagNo);

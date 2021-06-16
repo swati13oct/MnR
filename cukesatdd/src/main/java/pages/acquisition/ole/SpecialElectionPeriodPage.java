@@ -35,7 +35,8 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	@FindBy(xpath = "//h3[contains(text(),'Other')]")
 	private WebElement SEPPageHeader;
 
 	//Right Rail Elements
