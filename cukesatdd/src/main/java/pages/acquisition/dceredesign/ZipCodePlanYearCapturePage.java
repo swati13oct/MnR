@@ -11,13 +11,15 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
+import java.util.List;
+
 public class ZipCodePlanYearCapturePage extends UhcDriver {
 
 	
 	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = "//span[@id='zipError']")
+	@FindBy(xpath = "//*[@id='zipError']")
 	public WebElement zipCodeErrorMsg;
 	
 	@FindBy(xpath = "//select[@id='county']/option")
@@ -29,7 +31,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='plan-year']")
 	public WebElement planYearDropdown;
 
-	@FindBy(xpath = "//button[contains(@class,'continue-btn')]")
+	@FindBy(xpath = "//button[contains(@dtmname,'review drug costs') and contains(@class, 'uhc-button')]/span")
 	public WebElement continueBtn;
 	
 	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
@@ -52,6 +54,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
+		validateNew(continueBtn);
 		validateNew(zipCodeTxtbox);
 	}
 	public void enterZipCode(String zipcode) {
@@ -167,10 +170,16 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 			if (countyDropdown.isDisplayed()) {
 				countyDropdown.click();
 				CommonUtility.waitForPageLoad(driver,countyRows , 30);
-				driver.findElements(By.xpath("//select[@id='county']/option")).get(1).click();
+				List<WebElement> Counties = driver.findElements(By.xpath("//select[@id='county']/option"));
+				int CountiesCnt = Counties.size();
+				System.out.println("Counties Dropdown count --> "+CountiesCnt);
+				System.out.println("Last Object in counties dropdown --> "+Counties.get(CountiesCnt-1));
+				Counties.get(CountiesCnt-1).click();
+				//driver.findElements(By.xpath("//select[@id='county']/option")).get(0).click();
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
+			Assertion.fail(">>>>> County Dropdown is NOT Dispalyed <<<<<");
 		}
 		validateNew(continueBtn);
 		//continueBtn.click();

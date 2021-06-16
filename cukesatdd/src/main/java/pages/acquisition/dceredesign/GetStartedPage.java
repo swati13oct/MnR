@@ -18,7 +18,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 
 public class GetStartedPage extends UhcDriver {
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
@@ -30,8 +30,8 @@ public class GetStartedPage extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
 
-	@FindBy(xpath = "//*[contains(@id,'get-started')]")
-	public WebElement getStartedTab;
+	@FindBy(xpath = "//*[contains(@dtmname,'get started') and contains(@class, 'disabled')]")
+	public WebElement getStartedStep;
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
@@ -86,7 +86,8 @@ public class GetStartedPage extends UhcDriver {
 			checkModelPopup(driver, 45);
 		/*else
 			checkModelPopup(driver, 10);*/
-		validateNew(getStartedTab);
+		validateNew(getStartedStep);
+        validate(AddMyDrugsBtn);
 	}
 
 	public BuildYourDrugList clickAddsDrugs() {
@@ -232,7 +233,7 @@ public void yahooSearch(String searchParameter) {
 		
 	}
 
-	@FindBy(xpath = "//button[contains(@id, 'importDrug')]/*")
+	@FindBy(xpath = "//*[contains(@class, 'flex')]//button[contains(@dtmname, 'import my drugs')]/*")
 	public WebElement ImportBtn;
 
 	public void ValidateImportOptionDIspalyed() {
