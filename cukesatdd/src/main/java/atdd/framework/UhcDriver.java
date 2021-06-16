@@ -904,14 +904,12 @@ public abstract class UhcDriver {
 		scrollToView(dropdownElement);
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
-		dropdown.selectByValue(value);
-		/*if (driver.getClass().toString().toUpperCase().contains("ANDROID")
-				|| driver.getClass().toString().toUpperCase().contains("IOS")
-				|| MRScenario.mobileDeviceOSName.equalsIgnoreCase("ANDROID")) {
-			mobileSelectOption(dropdownElement, value, true);
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			String dropDownOptionText = dropdownElement.findElement(By.xpath("//option[@value='" + value + "']")).getText().trim();
+			mobileSelectOption(dropdownElement, dropDownOptionText, true);
 		} else {
 			dropdown.selectByValue(value);
-		}*/
+		}
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitUntilSelectOptionsPopulated(dropdown);
 		if (!dropdown.getFirstSelectedOption().getAttribute("value").trim().equalsIgnoreCase(value))
