@@ -24,11 +24,12 @@ Feature: 1.08. UAT- Visitor profile
     And user should be able to see "Medicare Advantage Plans" by default
     Then user saves MAPD plan as favorite on drug summary page AARP site
      | Test Plans | <testPlans> |
+     @regressionAARP
     Examples: 
       | Scenario                                             | externallink                                             | drug1 | drug2   | drug3   | drug4   | zipCode |	testPlans	|
       | Campaign External Links - E2E Scenario 1_AMP_English | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |	Nexium	|	Advair Diskus	|	aripiprazole	|	insulin lispro	|	80243	|	 AARP Medicare Advantage SecureHorizons Plan 1 (HMO)	|
 
-@regressionAARP1234567 @sanity 
+@regressionAARP @sanity 
 Scenario Outline:
 Validate that M&R Prospective client has the ability to Enroll in plans available in Guest Profile - zip -<zipcode> 
 	Given the user is on medicare acquisition site landing page 
@@ -61,10 +62,16 @@ Validate that M&R Prospective client has the ability to Enroll in plans availabl
       	| PlanName	|	<PlanName>	|
 	Then the site user clicks on continue application until confirmaion page
 		| MedicareNumber    | <medicarenumber>    |	
+		
+		@regressionAARP
 	Examples: 
 		| site | state   | planyear | zipcode | isMultiCounty | county          | plantype | testPlans                                                                                              |	PlanName	|cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |MS Test Plans|
 		| AARP | Alabama | future   |   44114 | NO            | Cuyahoga County 	| MS     |	Plan F,Plan N |	Plan N	| MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01/01/1946 | Male   | 001 Morris Rd | New York | No                     | 801 MailingSt | Mailing LA  | NY           |      30342 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true      | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |Plan F,Plan N	|		
-	
+	@regressionUHC
+	Examples: 
+		| site | state   | planyear | zipcode | isMultiCounty | county          | plantype | testPlans                                                                                              |	PlanName	|cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |MS Test Plans|
+		| AARP | Alabama | future   |   44114 | NO            | Cuyahoga County 	| MS     |	Plan F,Plan N |	Plan N	| MBI      | John      | Doe      | 3A33C22YK22    | false   |  01012010 |  01012010 |     0123456789 | false    | 01/01/1946 | Male   | 001 Morris Rd | New York | No                     | 801 MailingSt | Mailing LA  | NY           |      30342 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true      | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |Plan F,Plan N	|		
+
  Scenario Outline: Validate that M&R Prospective client has the ability to Compare plans in Guest profile.
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -117,14 +124,15 @@ Validate that M&R Prospective client has the ability to Enroll in plans availabl
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
 
 
-    @vppPlanCompareCommon_AARP01 @regressionAARP11111111 @prodRegression @vbfGate
+     @regressionAARP 
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |	DrugName	| planName	|	removePlanIndices	|	plantype2	|	testPlans2	|	testPlans3	|
       | 00010 | AARP |   33111 | NO            | Los Angeles County | MAPD     |     2 | future   |	atorvastatin calcium	|	 AARP Medicare Advantage Choice (PPO)	|	3	|	PDP	|	AARP MedicareRx Walgreens (PDP)	|	AARP MedicareRx Preferred (PDP)	|
 
-    @vppPlanCompareCommon_UHC01 @regressionUHC
+     @regressionUHC
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |
-      | 00010 | UHC  |   90210 | NO            | Los Angeles County | MAPD     |     2 | future   |
+      | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |DrugName	| planName	|	removePlanIndices	|	plantype2	|	testPlans2	|	testPlans3	|
+      | 00010 | UHC  |   90210 | NO            | Los Angeles County | MAPD     |     2 | future   |	atorvastatin calcium	|	 AARP Medicare Advantage Choice (PPO)	|	3	|	PDP	|	AARP MedicareRx Walgreens (PDP)	|	AARP MedicareRx Preferred (PDP)	|
+      
 
 	
