@@ -1,6 +1,6 @@
 Feature:Medicare Education Pages flows for New Pages
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -49,7 +49,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Avengers UMS | UHC  | Alabama  | Medicare Education Hub Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
 
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> :  <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> :  <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -81,7 +81,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario           | site | geoState | pageName                 | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 1_UHC | UHC  | Arkansas | Medicare Eligibility New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -113,7 +113,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario               | site | geoState | pageName                       | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | UAT E2E Scenario 6_AMP | UHC  | Alabama  | Initial Enrollment Period Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -144,7 +144,7 @@ Feature:Medicare Education Pages flows for New Pages
       | E2E Scenario 2_UMS | UHC  | Alabama  | Coverage Options New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -165,7 +165,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on Cost Basics link in Read Next Section
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP 
     Examples:
       | Scenario           | site | geoState | pageName                                | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | Alabama  | Prescriptions, Providers & Benefits New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
@@ -176,7 +176,7 @@ Feature:Medicare Education Pages flows for New Pages
       | E2E Scenario 3_UMS | UHC  | Alabama  | Prescriptions, Providers & Benefits New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -215,7 +215,7 @@ Feature:Medicare Education Pages flows for New Pages
       | E2E Scenario 4_UHC | UHC  | Alabama  | Cost Basics Page New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
 
-  Scenario Outline: To validate components on New Medicare Education Page :<pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page :<pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -247,7 +247,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario           | site | geoState | pageName                           | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 5_UHC | UHC  | Alabama  | Medicare Advantage Part C Plan New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page :<pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page :<pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -276,7 +276,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario           | site | geoState | pageName                      | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 5_UHC | UHC  | Alabama  | Medicare Supplement Plans New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page :<pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page :<pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -306,7 +306,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario           | site | geoState | pageName                     | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 5_UHC | UHC  | Alabama  | Prescription Drugs Plans New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -334,7 +334,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario     | site | geoState | pageName                | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | Avengers UHC | UHC  | Alabama  | Special Needs Plans New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -370,7 +370,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario           | site | geoState | pageName                | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 6_UHC | UHC  | Alabama  | When to Enroll Page New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -401,7 +401,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Avengers UMS | UHC  | Alabama  | Original Medicare | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -429,7 +429,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Avengers UMS | UHC  | Alabama  | Overview of Plan Types | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -458,7 +458,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario               | site | geoState | pageName             | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | UAT E2E Scenario 6_UMS | UHC  | Alabama  | Working Past 65 Page | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -489,7 +489,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario           | site | geoState | pageName      | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 6_UMS | UHC  | Alabama  | How to Enroll | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page: <pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -521,7 +521,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Scenario           | site | geoState | pageName                | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 6_UMS | UHC  | Alabama  | Changing Medicare Plans | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
-  Scenario Outline: To validate components on New Medicare Education Page :<pageName> : <path>:<tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page :<pageName> : <path>:<tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown
@@ -552,7 +552,7 @@ Feature:Medicare Education Pages flows for New Pages
       | Avengers UMS | UHC  | Alabama  | wp65-guide.html | Working Past 65 Guide           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
 
 
-  Scenario Outline: <Scenario>To validate components on New Medicare Education Page :<pageName> : <path>:<tfnXpath>
+  Scenario Outline: <Scenario> To validate components on New Medicare Education Page :<pageName> : <path>:<tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     Then the user select state for geotargeting from dropdown

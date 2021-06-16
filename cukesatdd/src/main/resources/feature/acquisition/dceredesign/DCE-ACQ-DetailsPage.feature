@@ -248,7 +248,8 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | Plan Type | <planType> |
       | Plan Name | <planName> |
     Then the user validates planName matches plan Name in VPP
-    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
+    Then the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page
+  #    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
     Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
     Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug1> |
