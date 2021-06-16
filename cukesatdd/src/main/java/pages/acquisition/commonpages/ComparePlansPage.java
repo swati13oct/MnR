@@ -136,8 +136,14 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="(//div[contains(@class,'align-items-lg-start')]//button)[4]")
 	private WebElement Newremove4thplan;
 	
+	@FindBy(xpath="(//div[contains(@class,'align-items-start')]//a)[3]")
+	private WebElement Newremove3rdplan;
+	
 	@FindBy(xpath="(//div[contains(@class,'align-items-lg-start')]//div)[4]")
 	private WebElement Newremove4thplanName;
+	
+	@FindBy(xpath="(//div[contains(@class,'align-items-start')]//span)[3]")
+	private WebElement Newremove3rdplanName;
 	
 	@FindBy(xpath="//a[@id='addanotherplanbutton2']")
 	private WebElement add3Plan;
@@ -259,10 +265,10 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement lnkProfile;
 	
-	@FindBy(xpath="//div[contains(text(),'Available')]")
+	@FindBy(xpath="(//span[contains(text(),'Available')])[3]")
 	public WebElement planComparePlansAvailableLabel;
 	
-	@FindBy(xpath="//button[@id='viewallplansBtnId']")
+	@FindBy(xpath="(//a[@id='viewallplansBtnId'])[3]")
 	public WebElement viewAllplansButton;
 	
 	@FindBy(xpath="//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
@@ -747,10 +753,10 @@ public class ComparePlansPage extends UhcDriver {
 	}
 	
 	public void clickOnNewRemoveLink(){
-		validateNew(Newremove4thplan);
-		String PlanName=Newremove4thplanName.getText();
-		System.out.println("4th plan name is : " + PlanName );
-		jsClickNew(Newremove4thplan);
+		validateNew(Newremove3rdplan);
+		String PlanName=Newremove3rdplanName.getText();
+		System.out.println("3rd plan name is : " + PlanName );
+		jsClickNew(Newremove3rdplan);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 
 	}
@@ -1389,10 +1395,11 @@ public class ComparePlansPage extends UhcDriver {
 		 TreeSet<String> mySet = new TreeSet<String>(Arrays.asList(planIndices.split(","))); 
 		for(String index:(TreeSet<String>)mySet.descendingSet())
 		{
-		ele=driver.findElement(By.xpath("(//button[contains(@class,'removePlan')])["+Integer.parseInt(index)+"]"));
+		ele=driver.findElement(By.xpath("(//a[contains(@dtmname,'Compare:Remove')])["+Integer.parseInt(index)+"]"));
 		validateNew(ele);
 		ele.click();
 		System.out.println("Clicked on Remove Link on plan Compare page");
+		sleepBySec(3);
 		}
 	}
 	
@@ -1404,12 +1411,12 @@ public class ComparePlansPage extends UhcDriver {
 	   	System.out.println(planComparePlansAvailableLabel.getText());
 	   	int planCount=Integer.parseInt(planComparePlansAvailableLabel.getText().substring(0, planComparePlansAvailableLabel.getText().indexOf(" Plans")).trim());
 	    System.out.println("Count of plans Available="+planCount);
-	   System.out.println("Count of plans on compare Before button is clicked"+driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
+	   System.out.println("Count of plans on compare Before button is clicked "+driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
 	   Assertion.assertTrue("View All button should be displayed", viewAllplansButton.isDisplayed());
 	   viewAllplansButton.click();
-	   System.out.println("Count of plans on compare after button is clicked"+driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
+	   System.out.println("Count of plans on compare after button is clicked"+driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
 	   Assertion.assertFalse("View All button should not be displayed", viewAllplansButton.isDisplayed());
-	   Assertion.assertEquals("Plan Counts mismatch", planCount, driver.findElements(By.xpath("//div[contains(@class,'flex-lg-row')]/div")).size());
+	   Assertion.assertEquals("Plan Counts mismatch", planCount, driver.findElements(By.xpath("//span[contains(@class,'headerPlanName')]")).size());
 	    }
 		
 	public void validateOONDDisplayed() throws Exception
