@@ -202,13 +202,13 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="//*[contains(@dtmname,'Edit Drugs')]")
 	private WebElement editDrugsLink;
 
-	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']")
+	@FindBy(xpath="//td//*[normalize-space(text())='Drug Summary']")
 	private WebElement DrugSummaryHeader;
 	
 	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::td[1]")
 	private WebElement DrugSummaryCoverageHeader;
 
-	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//th//span[contains(@class,'drugtext')]")
+	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::*[contains(@id, 'drugs-table')]//following::tr[1]//td//span[contains(@class,'drugtext')]//span")
 	private WebElement DrugName;
 	
 	@FindBy(xpath="//*[normalize-space(text())='Drug Summary']/ancestor::th/following::tr[1]//td[1]")
@@ -862,7 +862,7 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Coverage Header for plan 1 : " + DrugSummaryCoverageHeader.getText());
 		validateNew(DrugName);
 		Assertion.assertTrue("Drug name is not displayed on the plan compare page",DrugName.getText().toLowerCase().contains(drug));
-		validateNew(DrugCoverageText);
+		//validateNew(DrugCoverageText);
 		System.out.println("Covered or not covered text for plan 1 : " + DrugCoverageText.getText());
 		System.out.println("Verified Edit Drugs Section header and Summary section");
 		
@@ -1061,8 +1061,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	/**
 	 * Validate the Agent Mode Banners and Enrolled Plan overlay
-	 * @param planName
-	 */
+     */
 	public void validateMemberDetails(HashMap<String,String> givenAttributesMap) {
 
 		//Take map as parameter from step definition rather than DataTable
@@ -1150,8 +1149,7 @@ public class ComparePlansPage extends UhcDriver {
 	
 	/**
 	 * Validate the Agent Mode Banners and Enrolled Plan overlay
-	 * @param planName
-	 */
+     */
 	public void validateAgentModeBannersForNonMember(HashMap<String, String> givenAttributesMap) {
 
 		//Handled data table from step definition
@@ -1270,6 +1268,9 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public void clickViewDrugInfoLinkForPlan(String planName) {
 		int i = findindexofPlan_PlanCompare(planName);
+		if(!planName.contains("PDP")){
+            i++;
+        }
 		WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-"+i+"')]"));
 		validateNew(DrugInfoLink);
 		jsClickNew(DrugInfoLink);
@@ -1358,7 +1359,7 @@ public class ComparePlansPage extends UhcDriver {
 //		int DrugCount_Total = DrugListItems.length-1; 		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
 		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
-		WebElement TotalDrugCount = driver.findElement(By.xpath("//*[contains(@class, 'drugcoveredalignment')][contains(text(), 'Covered')]"));
+		WebElement TotalDrugCount = driver.findElement(By.xpath("(//*[contains(@class, 'drugcoveredalignment')][contains(text(), 'Covered')])[1]"));
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : "+DrugCount_Total);
@@ -1366,7 +1367,7 @@ public class ComparePlansPage extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : "+currentDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//h2[contains(@id, 'yourdrugsheading')]//following::*[contains(text(), '"+currentDrug+"')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@id, 'yourdrugsheading')]//following::tr/td//*[contains(text(), '"+currentDrug+"')]"));
 
 			if(validateNew(DrugName)) {
 				System.out.println("Plan Compare Page, Validated Drug List for Drug : "+currentDrug);
@@ -1489,7 +1490,7 @@ public class ComparePlansPage extends UhcDriver {
 	public void validateEstimatedDrugCostForPlan(String PlanName, String expected_Estimated_Drug_Cost2) {
 		int i = findindexofPlan_PlanCompare(PlanName);
 		i +=1;
-		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath("(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["+i+"]"));
+		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath("(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::td//following-sibling::td//*[contains(text(), '$')])["+i+"]"));
 		
 		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();
 		if(validateNew(Plan_Displayed_EstimatedDrugCosts) && Displayed_DrugCostsText.contains(expected_Estimated_Drug_Cost2)) {

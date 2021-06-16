@@ -40,10 +40,12 @@ Feature: 1.12 UAT - Medicare Education Pages flows
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site <pageName> : <path> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When the user navigates to Medicare Education Page from homepage
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
+    When the user navigates to Medicare Education Page from homepage
     Then the user navigates to Medicare Eligibility page
+    Then the user select state for geotargeting from dropdown
+      | GeoState | <geoState> |
     Then user check inner page links on the Medicare Education page
       | PageName | <pageName> |
     Then the user gather medicare info through video
