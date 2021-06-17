@@ -3,6 +3,7 @@
  */
 package pages.mobile.acquisition.ole;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -35,9 +36,12 @@ public class LearnMoreModalMobile extends UhcDriver {
 	}
 
 	public Object returntoOLE() {
+		
 		validate(BackBtn);
 		scrollToView(BackBtn);
 		jsClickNew(BackBtn);
+		
+
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {

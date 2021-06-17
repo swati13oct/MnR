@@ -451,7 +451,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//button[contains(text(),'Search')]")
 	private WebElement SubmitBtn;
-	
+
 	@FindBy(xpath = "//label[contains(text(),'Enter Search')]")
 	private WebElement enterSearchLable;
 
@@ -1987,7 +1987,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
 					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			Assertion.assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			Assertion.assertTrue(
+					invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
 			// Assertion.assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
@@ -2323,7 +2324,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			 //validateNew(aarpOrgLink);
+			// validateNew(aarpOrgLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
@@ -2351,7 +2352,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(contactLink);
 		validateNew(languageAssistanceLink);
 	}
-
 
 	public PharmacySearchPageMobile navigateToPharmacyLocator() {
 		jsClickNew(Menu);
@@ -2569,7 +2569,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(MobileMenuCloseNavigationBtn);
 
 	}
-	
+
 	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
 	public WebElement MenuCrossMobile;
 
@@ -2814,11 +2814,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		// // CallSamTFNClose.click();
 		// // validateNew(callsam);
 		// // return null;
-		
-		if(callsam.getText().contains("1-877-699-5710")) {
+
+		if (callsam.getText().contains("1-877-699-5710")) {
 			System.out.println("Correct TFN shown on Mobile view");
 		}
-			
+
 		// if (CallSamTFN.getText().isEmpty()) {
 		// // return null;
 		// Assert.fail("TFN number was not found on the SAM call Popup");
@@ -2830,20 +2830,23 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public void validateChatSam() throws InterruptedException {
-		
-		/*Skipping chat sam verification on mobile as chat does nt displayed on mobile view*/
+
+		/*
+		 * Skipping chat sam verification on mobile as chat does nt displayed on mobile
+		 * view
+		 */
 		System.out.println("Chat not applicable to mobile view hence skipped...");
-//		boolean present;
-//		try {
-//			validateNew(chatsam);
-//			present = true;
-//		} catch (NoSuchElementException e) {
-//			present = false;
-//		}
-//		if (present) {
-//			System.out.println("@@@@@@@@@ Able to find Chat TFN widget @@@@@@@@@");
-//			// validateChatSamContent();
-//		}
+		// boolean present;
+		// try {
+		// validateNew(chatsam);
+		// present = true;
+		// } catch (NoSuchElementException e) {
+		// present = false;
+		// }
+		// if (present) {
+		// System.out.println("@@@@@@@@@ Able to find Chat TFN widget @@@@@@@@@");
+		// // validateChatSamContent();
+		// }
 
 	}
 
@@ -3755,17 +3758,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
-	String AgentLinkJSPath = "document.querySelector(.disableExternalPopup.agentPSC)" + ".click();";
+	
 
 	public void clickonFindanAgentlink(String ExpectedUHCAgentURL) {
-		// threadsleep(10);
+		threadsleep(3);
 		validateNew(RightRail_FindAnAgent);
 		CommonUtility.waitForPageLoadNew(driver, RightRail_FindAnAgent, 30);
 		String parentWindow = driver.getWindowHandle();
-		JavascriptExecutor js = (JavascriptExecutor) driver;
-		js.executeScript(AgentLinkJSPath);
-
-		// jsClickNew(RightRail_FindAnAgent);
+		jsClickNew(RightRail_FindAnAgent);
 		sleepBySec(3);
 		Set<String> tabs_windows = driver.getWindowHandles();
 		Iterator<String> itr = tabs_windows.iterator();

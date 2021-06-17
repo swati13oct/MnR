@@ -624,6 +624,9 @@ public abstract class UhcDriver {
 //			sleepBySec(2);
 			String seleniumClick = element.getAttribute("automationTrack");
 			System.out.println("Selenium Click executed........" + seleniumClick);
+			
+			//If automationTrack is null and element is displayed then selenium click was not successful
+			seleniumClick = (seleniumClick == null && element.isDisplayed())?"false":"true";
 
 			//If automationTrack is null and element is displayed, then selenium click was not successful
 			seleniumClick = (seleniumClick == null && element.isDisplayed()) ? "false" : "true";
