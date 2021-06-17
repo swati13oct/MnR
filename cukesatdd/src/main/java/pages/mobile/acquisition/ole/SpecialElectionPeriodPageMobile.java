@@ -31,7 +31,6 @@ public class SpecialElectionPeriodPageMobile extends UhcDriver {
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
 
-	
 	@FindBy(xpath = "//*[@id='new']")
 	private WebElement trial;
 	
