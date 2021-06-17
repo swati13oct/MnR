@@ -240,7 +240,7 @@ public class PersonalInformationPage extends UhcDriver{
 	
 	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
 		
-		String Expected_PlanType = memberDetailsMap.get("planType");
+
 		String FirstName = memberDetailsMap.get("First Name");
 		String MiddleName = memberDetailsMap.get("Middle Name");
 		String LastName = memberDetailsMap.get("Last Name");	
@@ -306,7 +306,7 @@ public class PersonalInformationPage extends UhcDriver{
 			sendkeys(HomephoneNumberField, HomeNumber);
 			  validateNew(MobileNumberField);
 			sendkeys(MobileNumberField, MobileNumber);
-			if(!Expected_PlanType.contains("SNP")) {
+
 					if(emailConfirmation.equalsIgnoreCase("YES")){
 				jsClickNew(emailConfirmationYesBtn);	
 			}else
@@ -317,9 +317,9 @@ public class PersonalInformationPage extends UhcDriver{
 			}else
 			//	goGreenNoBtn.click();
 			jsClickNew(goGreenNoBtn);
-			}
+
 			sendkeys(Email,EmailAddress);
-		}	
+		}
 		result= Clickoncontinuebutton("language-preference");
 		
 		if(result) {
@@ -348,12 +348,85 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		}
 	
-	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
+	public boolean enter_member_details_SNP_Plans(Map<String, String> memberDetailsMap) throws InterruptedException {
+
+		String FirstName = memberDetailsMap.get("First Name");
+		String MiddleName = memberDetailsMap.get("Middle Name");
+		String LastName = memberDetailsMap.get("Last Name");	
+		String DOB = memberDetailsMap.get("DOB");
+		String Gender = memberDetailsMap.get("Gender");
+		String Perm_Street = memberDetailsMap.get("Perm_Street");
+		String Perm_Aptno = memberDetailsMap.get("Perm_AptNo");
+		String Perm_city = memberDetailsMap.get("Perm_city");
+		String MailingQuestion = memberDetailsMap.get("Mailing Address Question");
+		String Mailing_Street = memberDetailsMap.get("Mailing_Street");
+		String Mailing_Aptno = memberDetailsMap.get("Mailing_AptNo");
+		String Mailing_City = memberDetailsMap.get("Mailing_City");
+		String Mailing_State = memberDetailsMap.get("Mailing_State");
+		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
+		String EmailAddress = memberDetailsMap.get("Email");
+		String HomeNumber = memberDetailsMap.get("Home Number");
+		String MobileNumber =memberDetailsMap.get("Mobile Number");
+		
+		CheckPageLoad();
+		CheckiPerseptions();
+		
+		sendkeysNew(firstNameField, FirstName);
+		sendkeysNew(MiddleNameField, MiddleName);
+		sendkeysNew(lastNameField, LastName);
+		
+		sendkeys(DOBtxtFld,DOB);
+		if(Gender.contains("Male")){
+			jsClickNew(GenderSelectMale);
+		}
+		else{
+			
+			jsClickNew(GenderSelectFemale);
+		}	
+				
+		
+		boolean result = false; 
+		 result= Clickoncontinuebutton("/mailing-address");
+		
+		if(result) {
+		
+		sendkeys(PermanentAdd_Street,Perm_Street);
+		sendkeys(PermanentAdd_Aptno,Perm_Aptno);
+		sendkeys(PermanentAdd_City,Perm_city);
+		System.out.println("Mailing Question : "+MailingQuestion);
+		if(MailingQuestion.equalsIgnoreCase("no")){
+			jsClickNew(SameMailingAddressNo);
+			
+			sendkeysNew(MailingAdd_Street,Mailing_Street);
+			sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
+			sendkeys(MailingAdd_City,Mailing_City);
+			Select SelectState = new Select(MailingAdd_State_DropDown);
+			SelectState.selectByValue(Mailing_State);
+			sendkeysNew(MailingAdd_Zip,Mailing_Zip);
+					}
+		}		
+		result= Clickoncontinuebutton("phone-number");
+		if(result) {
+			validateNew(HomephoneNumberField);
+			sendkeys(HomephoneNumberField, HomeNumber);
+			  validateNew(MobileNumberField);
+			sendkeys(MobileNumberField, MobileNumber);
+
+			sendkeys(Email,EmailAddress);
+		}
+		result= Clickoncontinuebutton("language-preference");
+		
+		if(result) {
+			System.out.println("Continue Button is Enabled : All Required Details are entered in personal Information page and navigating to next OLE Pages");
+		}
+		
+		return result;
+	}
+
+	
+/*	public boolean enter_member_details_Other_dsnp(Map<String, String> memberDetailsMap) throws InterruptedException {
 
 		String EmailAddress = memberDetailsMap.get("Email");
-		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
-		String goGreen = memberDetailsMap.get("Go Green");
-		//String email = memberDetailsMap.get("Email");
 		String HomeNumber = memberDetailsMap.get("Home Number");
 		String MobileNumber =memberDetailsMap.get("Mobile Number");
 		String MiddleName = memberDetailsMap.get("Middle Name");
@@ -363,22 +436,6 @@ public class PersonalInformationPage extends UhcDriver{
 		  validateNew(MobileNumberField);
 		sendkeys(MobileNumberField, MobileNumber);
 		sendkeysNew(MiddleNameField, MiddleName);
-		if(emailConfirmation.equalsIgnoreCase("YES")){
-			jsClickNew(emailConfirmationYesBtn);	//emailConfirmationYesBtn.click();
-		}else
-			jsClickNew(emailConfirmationNoBtn); //emailConfirmationNoBtn.click();
-		
-	if(goGreen.equalsIgnoreCase("YES")){
-		//goGreenYesBtn.click();
-		jsClickNew(goGreenYesBtn);
-	}else
-	//	goGreenNoBtn.click();
-	jsClickNew(goGreenNoBtn);
-	
-	//if(emailConfirmation.equalsIgnoreCase("YES") && goGreen.equalsIgnoreCase("YES"))
-	//sendkeysNew(emailAddressField, email);
-	
-		
 		sendkeys(Email,EmailAddress);
 		
 		if(NextBtn.isEnabled()){
@@ -387,26 +444,7 @@ public class PersonalInformationPage extends UhcDriver{
 		}
 		return false;
 	}
-	public boolean enter_member_details_Other_dsnp(Map<String, String> memberDetailsMap) throws InterruptedException {
-
-		String EmailAddress = memberDetailsMap.get("Email");
-		String HomeNumber = memberDetailsMap.get("Home Number");
-		String MobileNumber =memberDetailsMap.get("Mobile Number");
-		String MiddleName = memberDetailsMap.get("Middle Name");
-		
-		validateNew(HomephoneNumberField);
-		sendkeys(HomephoneNumberField, HomeNumber);
-		  validateNew(MobileNumberField);
-		sendkeys(MobileNumberField, MobileNumber);
-		sendkeysNew(MiddleNameField, MiddleName);
-		sendkeys(Email,EmailAddress);
-		
-		if(NextBtn.isEnabled()){
-			System.out.println("Next Button is Enabled : All Required Details are entered");
-			return true;
-		}
-		return false;
-	}
+	*/
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) {
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();

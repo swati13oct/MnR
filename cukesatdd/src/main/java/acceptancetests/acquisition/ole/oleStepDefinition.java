@@ -1190,7 +1190,7 @@ public class oleStepDefinition {
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		
-		String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+
 	//	String Perm_Aptno = "155";
 	//	String Mailing_Aptno = "166";
 	//	String Middle_Name="";
@@ -1250,37 +1250,40 @@ public class oleStepDefinition {
 		// }
 	}
 */
-	@Then("^the user enters following information in Personal Information Page DSNP$")
-	public void the_user_enters_following__information_in_Personal_Information_Page_DSNP(DataTable arg1)
+	@Then("^the user enters following information in Personal Information Page SNP Plans$")
+	public void the_user_enters_following__information_in_Personal_Information_Page_SNP_plans(DataTable arg1)
 			throws Throwable {
 		
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
-		String EmailConfirmation = "";
-		String GoGreen = "";
+		
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-		boolean isFormFilled = personalInformationPage.enter_member_details_Other_dsnp(MemberDetailsMap);
+		boolean isFormFilled = personalInformationPage.enter_member_details_SNP_Plans(MemberDetailsMap);
 		if (isFormFilled) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 					personalInformationPage);
-			System.out.println("OLE Personal Information Page - All required Member Details are entered");
+			System.out.println("OLE Personal Information Page - All required Member Details are entered for SNP Plans");
+			getLoginScenario().saveBean(oleCommonConstants.FIRST_NAME, MemberDetailsMap.get("First Name"));
+			getLoginScenario().saveBean(oleCommonConstants.LAST_NAME, MemberDetailsMap.get("Last Name"));
+			getLoginScenario().saveBean(oleCommonConstants.DOB, MemberDetailsMap.get("DOB"));
+			getLoginScenario().saveBean(oleCommonConstants.GENDER, MemberDetailsMap.get("Gender"));
+			getLoginScenario().saveBean(oleCommonConstants.PERM_STREET, MemberDetailsMap.get("Perm_Street"));
+			getLoginScenario().saveBean(oleCommonConstants.PERM_APARTMENT_NUMBER,MemberDetailsMap.get("Perm_AptNo")); 
+			getLoginScenario().saveBean(oleCommonConstants.PERM_CITY, MemberDetailsMap.get("Perm_city"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_QUESTION, MemberDetailsMap.get("Mailing Address Question"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_STREET, MemberDetailsMap.get("Mailing_Street"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_APARTMENT_NUMBER,MemberDetailsMap.get("Mailing_AptNo"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_CITY, MemberDetailsMap.get("Mailing_City"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_STATE, MemberDetailsMap.get("Mailing_State"));
+			getLoginScenario().saveBean(oleCommonConstants.MAILING_ZIP, MemberDetailsMap.get("Mailing_Zip"));
 			getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
 			getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Home Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
-			//	getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION, MemberDetailsMap.get("Email Confirmation"));
-			//	getLoginScenario().saveBean(oleCommonConstants.Go_Green, MemberDetailsMap.get("Go Green"));
-			getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION,EmailConfirmation);
-			getLoginScenario().saveBean(oleCommonConstants.Go_Green,GoGreen);          
-			/*	getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION,                            
-						(null != MemberDetailsMap.get("Email Confirmation") && "" != MemberDetailsMap.get("Email Confirmation")) ? MemberDetailsMap.get("Email Confirmation") :  new Object());
-				getLoginScenario().saveBean(oleCommonConstants.Go_Green, 
-						(null != MemberDetailsMap.get("Go Green") && "" != MemberDetailsMap.get("Go Green")) ? MemberDetailsMap.get("Go Green") :  new Object());
-					//	MemberDetailsMap.get("Go Green"));*/
 			Assertion.assertTrue(true);
 		} else
-			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed");
-		// }
+			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed for SNP Plans");
+	
 	}
 
 	@Then("^the user validates the Plan details in Personal Information Page OLE Right Rail$")
@@ -1304,7 +1307,7 @@ public class oleStepDefinition {
 			System.out.println("Plan Details Validation in OLE Personal Information PAGE : "+Validation_Status);
 			Assertion.fail();
 		}
-		// }
+	
 	}
 
 	@Then("^the user validates the Member details dynamic display in Personal Information Page$")
