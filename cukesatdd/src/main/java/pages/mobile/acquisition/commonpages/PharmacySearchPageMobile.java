@@ -923,21 +923,22 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	}
 
 	public boolean validateNoPharmaciesErrorMessage() {
-		//CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
-		// indian_tribal_label_filter.click();
+		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
+
 		jsClickNew(indian_tribal_label_filter);
 		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		if (!noPharmaciesErrorMessage.isDisplayed()) {
 			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
-			// indian_tribal_label_filter.click();
+
 			jsClickNew(indian_tribal_label_filter);
 		}
 		sleepBySec(5);
-		//CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		Assertion.assertTrue("PROBLEM - unable to locate No Pharmacy Error message",
 				pharmacyValidate(noPharmaciesErrorMessage));
 		return true;
 	}
+
 
 	@FindBy(xpath = "//*[contains(@ng-show, 'pharmacyServiceFailure')]/*[contains(@class, 'homefusion')]//p[contains(text(), 'Additional Home Infusion, Indian/Tribal/Urban, and Long-term Care')]")
 	public WebElement ITU_LTC_HS_MessageBox;

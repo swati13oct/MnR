@@ -1542,7 +1542,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
-		planName.trim().replaceAll("\u00A00", " ").trim();
+		//planName.trim().replaceAll("\u00A00", " ").trim();
 		if (planName.contains("SNP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);

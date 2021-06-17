@@ -784,6 +784,7 @@ public class MRScenario {
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
 		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
+		capabilities.setCapability("locationContextEnabled", false);
 		//capabilities.setCapability("AUTOMATION_NAME", "XCUITest");
 		capabilities.setCapability("commandTimeout" , 600);
 		capabilities.setCapability("maxDuration", 10800);

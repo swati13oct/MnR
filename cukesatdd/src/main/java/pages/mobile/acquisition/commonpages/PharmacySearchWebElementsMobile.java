@@ -208,7 +208,7 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	@FindBy(xpath="//*[@id='emptyzipcodeerror_id']/p")
 	protected WebElement noZipcode;
 
-	@FindBy(xpath="//div[contains(@id,'zipcodeformaterror_id') and not(contains(@class,'ng-hide'))]")
+	@FindBy(xpath="//*[@id='zipcodeformaterror_id']/p")
 	protected WebElement invalidZip;
 
 	@FindBy(xpath="//div[contains(@id,'modifyYourSearchId')]//li")
