@@ -21,6 +21,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.ole.ConfirmYourEligibilityPage;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
+import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 
 /**
@@ -208,15 +209,15 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String Mailing_Zip = memberDetailsMap.get("Mailing_Zip");
 		String EmailAddress = memberDetailsMap.get("Email");
 
-		//sendkeysNew(firstNameField, FirstName);
+		// sendkeysNew(firstNameField, FirstName);
 		sendkeysMobile(firstNameField, FirstName);
-		//sendkeysNew(lastNameField, LastName);
+		// sendkeysNew(lastNameField, LastName);
 		sendkeysMobile(lastNameField, LastName);
 
-		//sendkeys(DOBtxtFld, DOB);
-//		sendkeysMobile(DOBtxtFld, DOB);
+		// sendkeys(DOBtxtFld, DOB);
+		// sendkeysMobile(DOBtxtFld, DOB);
 		sendKeysByCharacter(DOBtxtFld, DOB);
-		
+
 		if (Gender.contains("Male")) {
 			// GenderSelectMale.click();
 			jsClickNew(GenderSelectMale);
@@ -224,26 +225,25 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			// GenderSelectFemale.click();
 			jsClickNew(GenderSelectFemale);
 		}
-		//sendkeys(PermanentAdd_Street, Perm_Street);
+		// sendkeys(PermanentAdd_Street, Perm_Street);
 		sendkeysMobile(PermanentAdd_Street, Perm_Street);
 		// sendkeys(PermanentAdd_Aptno,Perm_Aptno);
-		//sendkeys(PermanentAdd_City, Perm_city);
+		// sendkeys(PermanentAdd_City, Perm_city);
 		sendkeysMobile(PermanentAdd_City, Perm_city);
 		System.out.println("Mailing Question : " + MailingQuestion);
 		if (MailingQuestion.equalsIgnoreCase("no")) {
 			jsClickNew(SameMailingAddressNo);
 			// CommonUtility.waitForPageLoadNew(driver,MailingAdd_Street, 30);
-			//sendkeysNew(MailingAdd_Street, Mailing_Street);
+			// sendkeysNew(MailingAdd_Street, Mailing_Street);
 			sendkeysMobile(MailingAdd_Street, Mailing_Street);
 			// sendkeysNew(MailingAdd_Aptno,Mailing_Aptno);
 			sendkeysMobile(MailingAdd_City, Mailing_City);
-			//sendkeys(MailingAdd_City, Mailing_City);
-			Select SelectState = new Select(MailingAdd_State_DropDown);
-			SelectState.selectByValue(Mailing_State);
-			//sendkeysNew(MailingAdd_Zip, Mailing_Zip);
+			// sendkeys(MailingAdd_City, Mailing_City);
+			selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
+			// sendkeysNew(MailingAdd_Zip, Mailing_Zip);
 			sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
 		}
-		//sendkeys(Email, EmailAddress);
+		// sendkeys(Email, EmailAddress);
 		sendkeysMobile(Email, EmailAddress);
 
 		if (NextBtn.isEnabled()) {
@@ -326,12 +326,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	public MedicareInformationPageMobile navigate_to_medicare_info_page() {
 
-
 		validateNew(NextBtn);
-//		NextBtn.click();
+		// NextBtn.click();
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
+		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))) {
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPageMobile(driver);
 		}
@@ -343,7 +342,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
-//		jsClickNew(NextBtn);
+		// jsClickNew(NextBtn);
 		/*
 		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", NextBtn);
@@ -370,7 +369,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			if (confirmYourEligibilityPage != null) {
 
 				validateNew(NextBtn);
-//				jsClickNew(NextBtn);
+				// jsClickNew(NextBtn);
 				jsClickNew(NextBtn);
 
 				if (driver.getCurrentUrl().contains("special")) {
@@ -392,9 +391,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
-			/*sendkeysMobile(partAStartDateField, PartAeffectiveDate);
-			sendkeysMobile(partBStartDateField, PartBeffectiveDate);*/
-			
+			/*
+			 * sendkeysMobile(partAStartDateField, PartAeffectiveDate);
+			 * sendkeysMobile(partBStartDateField, PartBeffectiveDate);
+			 */
+
 			sendKeysByCharacter(partAStartDateField, PartAeffectiveDate);
 			sendKeysByCharacter(partBStartDateField, PartBeffectiveDate);
 		}
@@ -404,7 +405,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	public boolean enter_member_details_Other(Map<String, String> memberDetailsMap) throws InterruptedException {
 
-//		String EmailAddress = memberDetailsMap.get("Email");
+		// String EmailAddress = memberDetailsMap.get("Email");
 		String emailConfirmation = memberDetailsMap.get("Email Confirmation");
 		String goGreen = memberDetailsMap.get("Go Green");
 		// String email = memberDetailsMap.get("Email");
@@ -413,11 +414,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		String MiddleName = memberDetailsMap.get("Middle Name");
 
 		validateNew(HomephoneNumberField);
-//		sendkeysMobile(HomephoneNumberField, HomeNumber);
+		// sendkeysMobile(HomephoneNumberField, HomeNumber);
 		sendKeysByCharacter(HomephoneNumberField, HomeNumber);
-		
+
 		validateNew(MobileNumberField);
-//		sendkeysMobile(MobileNumberField, MobileNumber);
+		// sendkeysMobile(MobileNumberField, MobileNumber);
 		sendKeysByCharacter(MobileNumberField, HomeNumber);
 		// sendkeysNew(MiddleNameField, MiddleName);
 		sendkeysMobile(MiddleNameField, MiddleName);
@@ -438,7 +439,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		// sendkeysNew(emailAddressField, email);
 
 		// sendkeys(Email, EmailAddress);
-//		sendkeysMobile(Email, EmailAddress);
+		// sendkeysMobile(Email, EmailAddress);
 
 		if (NextBtn.isEnabled()) {
 			System.out.println("Next Button is Enabled : All Required Details are entered");
@@ -552,13 +553,14 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		validateNew(HomephoneNumberField);
 		// sendkeys(HomephoneNumberField, HomeNumber);
-		HomephoneNumberField.sendKeys(HomeNumber);
+		sendKeysByCharacter(HomephoneNumberField, HomeNumber);
+		
 		validateNew(MobileNumberField);
 		scrollToView(MobileNumberField);
-		// sendkeys(MobileNumberField, MobileNumber);
-		sendkeysMobile(MobileNumberField, MobileNumber);
-		// sendkeysNew(MiddleNameField, MiddleName);
-		MiddleNameField.sendKeys(MiddleName);
+		sendKeysByCharacter(MobileNumberField, MobileNumber);
+		
+		scrollToView(MiddleNameField);
+		sendkeysMobile(MiddleNameField, MiddleName);
 		// sendkeys(Email, EmailAddress);
 		// Email.sendKeys(EmailAddress);
 
@@ -643,5 +645,54 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		return new ConfirmYourEligibilityPageMobile(driver);
 	}
 
-}
+	public UseAndDisclosureAuthorizationPageMobile navigate_to_SEP_page_CSNP(Map<String, String> MedicareDetailsMap)
+			throws InterruptedException {
 
+		scrollToView(NextBtn);
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+
+		Thread.sleep(3000);
+		if (driver.getCurrentUrl().contains("use")) {
+			Assert.assertTrue(driver.getCurrentUrl().contains("use"),
+					"OLE Use and Disclosure Authorization page is Displayed");
+			return new UseAndDisclosureAuthorizationPageMobile(driver);
+
+		} else if (driver.getCurrentUrl().contains("eligibility")) {
+
+			ConfirmYourEligibilityPageMobile confirmYourEligibilityPage = enterConfirmEligibilityPageDataCSNP(
+					MedicareDetailsMap);
+			if (confirmYourEligibilityPage != null) {
+
+				scrollToView(NextBtn);
+				validateNew(NextBtn);
+				jsClickNew(NextBtn);
+
+				if (driver.getCurrentUrl().contains("use")) {
+					System.out.println("OLE Use and Disclosure Authorization Page is Displayed");
+				} else {
+					System.out.println("OLE Use and Disclosure Authorization Page is not Displayed");
+				}
+				return new UseAndDisclosureAuthorizationPageMobile(driver);
+			}
+		}
+		return null;
+	}
+
+	public ConfirmYourEligibilityPageMobile enterConfirmEligibilityPageDataCSNP(Map<String, String> MedicareDetailsMap) {
+
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
+		// String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber");
+		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
+			System.out.println("OLE Confirm your Eligibility is Displayed");
+
+			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
+			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
+			// sendkeysNew(medicaidNumberField,MedicaidNo);
+		}
+
+		return new ConfirmYourEligibilityPageMobile(driver);
+	}
+
+}

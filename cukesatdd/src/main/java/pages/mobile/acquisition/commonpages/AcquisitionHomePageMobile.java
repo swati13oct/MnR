@@ -48,7 +48,8 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	String CallSamPopupTitle = "Need Help? Call us.";
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
+//	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
@@ -213,7 +214,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
+//	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
+	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -1165,10 +1167,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			jsClickNew(viewPlansButton);
 		}
 
-		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+//		CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
-		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		pageloadcomplete();
+//		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -1177,7 +1180,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile searchPlanOnHealthPlansPage(String zipcode, String county, String isMultiCounty) {
 		CommonUtility.waitForPageLoadNew(driver, healthPlansZipcode, 30);
-		sendkeys(healthPlansZipcode, zipcode);
+		sendkeysMobile(healthPlansZipcode, zipcode);
 		jsClickNew(findPlansBtn);
 		waitForPageLoadSafari();
 		if (isMultiCounty.equalsIgnoreCase("YES")) {
@@ -1195,7 +1198,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public VPPPlanSummaryPageMobile navigateToVpp(String zipcode) {
 		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 3000);
-		sendkeys(zipCodeField, zipcode);
+		sendkeysMobile(zipCodeField, zipcode);
 		viewPlansButton.click();
 		// jsClickNew(viewPlansButton);
 		CommonUtility.waitForPageLoadNew(driver, vppTop, 3000);
@@ -1211,7 +1214,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public VPPPlanSummaryPageMobile enterZipcode(String zipCode, String county, String planYear) {
-		sendkeys(zipCodeField, zipCode);
+		sendkeysMobile(zipCodeField, zipCode);
 		// zipCodebtn.click();
 		jsClickNew(zipCodebtn);
 		return new VPPPlanSummaryPageMobile(driver);

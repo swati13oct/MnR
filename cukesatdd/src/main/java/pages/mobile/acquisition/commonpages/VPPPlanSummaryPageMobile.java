@@ -1155,9 +1155,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
-		validateNew(ProviderSearchLink);
-		// iosScroll(ProviderSearchLink);
 		scrollToView(ProviderSearchLink);
+		validateNew(ProviderSearchLink);
+//		iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1409,7 +1409,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// Thread.sleep(2000);
 		return SubmitConfirmation;
 	}
-
+	
 	public DrugDetailsPageMobile navigateToDCEFromDrugDropdown(String planType, String planName) {
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("SNP")) {
 			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//a[contains(text(),'" + planName
@@ -1432,7 +1432,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return new DrugDetailsPageMobile(driver);
 
 	}
-
+	
 	public boolean verifyAddedDrugCost(String planName, String capturedDrugCost) {
 		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
@@ -1897,10 +1897,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
-			// enrollForPlan = driver.findElement(By.xpath("//a[contains(text(), '" +
-			// planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
-			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName
-					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
+//			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
+			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
 		}
 		if (enrollForPlan != null) {
 			// iosScroll(enrollForPlan);
@@ -5818,18 +5816,18 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void validateAndClickAddtoCompare(String planType, String planName) throws InterruptedException {
 
 	}
-
+	
 	@FindBy(id = "findProvidersComponentWrap")
 	public WebElement findProvidersComponentWrap;
-
+	
 	@FindBy(id = "addDrugComponentWrap")
 	public WebElement addDrugComponentWrap;
-
+	
 	@FindBy(xpath = "//*[@id='addDrugComponentWrap']//button[text()='Get Started']")
 	public WebElement getStartedAddDrugNBA;
-
-	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCEFromNBA(String planType,
-			String planName) {
+	
+	
+	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCEFromNBA(String planType, String planName) {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			if (validate(addDrugComponentWrap)) {
@@ -5855,7 +5853,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		return new pages.mobile.acquisition.dceredesign.GetStartedPageMobile(driver);
 	}
-
+	
 	public void removeAddedDrugs(String planType, String planName) {
 		List<WebElement> drugLinkDropdown = driver.findElements(By.xpath(
 				"//div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
@@ -5876,7 +5874,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 
 	}
-
+	
 	public boolean verifyAddedDrugName(String planName, String drugName) {
 
 		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
