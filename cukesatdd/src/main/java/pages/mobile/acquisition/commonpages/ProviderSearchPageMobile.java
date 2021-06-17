@@ -52,7 +52,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	private List<WebElement> SaveBtns;
 
 	@FindBys(value = {
-			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
+//			@FindBy(xpath = "//div[@class='acquisitionButtons hidden-phone']//button[contains(@class,'saved-provider-button')]") })
+			@FindBy(xpath = "//button[contains(@class,'saved-provider-button')]") })
 	private List<WebElement> MulitpleSaveBtns;
 
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
@@ -71,7 +72,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	private WebElement ViewSavedProvidersLink;
 
 	// @FindBy(xpath = "//*[contains(@id,'label_unsaved_selectedLocation0')]")
-	@FindBy(xpath = "//div[@ng-bind-html='::(tab.mobileTitle || tab.title)'][normalize-space()='Locations']")
+//	@FindBy(xpath = "//div[@ng-bind-html='::(tab.mobileTitle || tab.title)'][normalize-space()='Locations']")
+	@FindBy(xpath = "//label[contains(@id,'unsaved_selectedLocation0')]")
 	private WebElement selectLocationOption;
 
 	@FindBy(xpath = "(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")
@@ -110,7 +112,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'action-btn negative print')]")
 	private WebElement PrintEmailBtn;
 
-	@FindBy(xpath = "//button[@class='saved-provider-button negative']//span[contains(text(),'Save')]")
+//	@FindBy(xpath = "//button[@class='saved-provider-button negative']//span[contains(text(),'Save')]")
+//	@FindBy(xpath = "//span[contains(@ng-switch-when, 'false') and (text()='Save')]")
+	@FindBy(xpath = "//button[@data-test-id='button-update-provider']")
 	private WebElement saveBtn2;
 
 	@FindBy(xpath = "//button[text()='Cancel']//following-sibling::button")

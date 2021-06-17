@@ -708,8 +708,8 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
-			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
-			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
+			sendKeysByCharacter(partAStartDateField, PartAeffectiveDate);
+			sendKeysByCharacter(partBStartDateField, PartBeffectiveDate);
 			// sendkeysNew(medicaidNumberField,MedicaidNo);
 		}
 
