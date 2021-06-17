@@ -36,7 +36,8 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 
 	//Page Header
 	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
-	@FindBy(xpath = "//h3[contains(text(),'Other')]")
+//	@FindBy(xpath = "//h3[contains(text(),'Other')]")
+	@FindBy(xpath = "//*[contains(@id, 'sepRadioFieldSet')]//*[contains(@id,'sepRadio')]")
 	private WebElement SEPPageHeader;
 
 	//Right Rail Elements
@@ -278,8 +279,108 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 	}
 	return null;
 }
+/*
+public SpecialElectionPeriodPage validate_SEPoptions_for_planType(String planType) {
 
-public boolean validate_SEPoptions_for_planType(String planType) {
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+	boolean Validation_Flag = true;
+	if(ChangingNewMedicareRadio.isDisplayed()) {
+		jsClickNew(ChangingNewMedicareRadio);
+		if(!validate(OtherReason) && validate(NoneApply)){
+			System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");	
+			Validation_Flag = true;	
+		}
+		else {
+			System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	
+	ChangingCurrentMedicareRadio.isDisplayed();
+	jsClickNew(ChangingCurrentMedicareRadio);
+	
+	System.out.println("PlanType : "+planType);
+	try {
+		Thread.sleep(3000);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
+	
+	if(planType.contentEquals("MA")){
+		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
+				&& validate(Into_LongTerm) && validate(Disaster) 
+					&& validate(ChangeLIS) && validate(Assignment)){
+			
+			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
+
+			Validation_Flag = true;
+		}
+		else{
+			System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP page OLE flow : Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	if(planType.contentEquals("MAPD")){
+		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
+				&& validate(Into_LongTerm)&& validate(Disaster)
+				  && validate(ChangeLIS) && validate(Assignment) 
+				 ){
+			
+			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
+			Validation_Flag = true;
+		}
+		else{
+			System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP page OLE flow : Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	if(planType.contentEquals("PDP")){
+		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
+				&& validate(Into_LongTerm)  && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
+				 && validate(Disaster) && validate(ChangeLIS) && validate(Assignment)
+				){
+			
+			System.out.println("All Options for PDP Plan are displayed in SEP page OLE flow : Validation Passed");
+			Validation_Flag = true;
+		}
+		else{
+			System.out.println("All Options for PDP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
+			Validation_Flag = false;
+		}
+	}
+	if(planType.contentEquals("SNP")){
+		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)){
+			System.out.println("All Options for SNP Plan are displayed in SEP page OLE flow : Validation Passed");
+			Validation_Flag = true;
+		}
+		else{
+			System.out.println("All Options for SNP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
+			Validation_Flag = false;
+		}
+		return new SpecialElectionPeriodPage(driver);
+	}
+
+	return null;
+	
+}
+*/
+public CoverageInformationPage navigate_to_Coverage_Information_page() {
+	
+	validateNew(NextBtn);
+	jsClickNew(NextBtn);
+	/*JavascriptExecutor executor = (JavascriptExecutor)driver;
+	executor.executeScript("arguments[0].click();", NextBtn);
+*/
+	
+	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Coverage')]")))){
+		System.out.println("OLE Coverage and Health Information page is Displayed");
+		return new CoverageInformationPage(driver);
+	}
+	return null;
+}
+
+public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData, String planType) {
 	
 	boolean Validation_Flag = true;
 	if(ChangingNewMedicareRadio.isDisplayed()) {
@@ -359,27 +460,10 @@ public boolean validate_SEPoptions_for_planType(String planType) {
 		}
 	}
 
-	return Validation_Flag;
-}
-
-public CoverageInformationPage navigate_to_Coverage_Information_page() {
-	
+	//return Validation_Flag;
+	//}
 	validateNew(NextBtn);
-	jsClickNew(NextBtn);
-	/*JavascriptExecutor executor = (JavascriptExecutor)driver;
-	executor.executeScript("arguments[0].click();", NextBtn);
-*/
-	
-	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Coverage')]")))){
-		System.out.println("OLE Coverage and Health Information page is Displayed");
-		return new CoverageInformationPage(driver);
-	}
-	return null;
-}
-
-public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData) {
-	validateNew(NextBtn);
-	jsClickNew(NextBtn);
+	//jsClickNew(NextBtn);
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");
 	int i=0;
@@ -398,9 +482,9 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		}*/
 		try {
 			WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
-			currentOptionChkBx.click();
+			//currentOptionChkBx.click();
+			jsClickNew(currentOptionChkBx);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.out.println("Not able to select option");
 			Option_Selected_Flag = false;
 		}

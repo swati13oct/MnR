@@ -239,7 +239,8 @@ public class PersonalInformationPage extends UhcDriver{
 	}
 	
 	public boolean enter_member_details(Map<String, String> memberDetailsMap) throws InterruptedException {
-
+		
+		String Expected_PlanType = memberDetailsMap.get("planType");
 		String FirstName = memberDetailsMap.get("First Name");
 		String MiddleName = memberDetailsMap.get("Middle Name");
 		String LastName = memberDetailsMap.get("Last Name");	
@@ -305,7 +306,8 @@ public class PersonalInformationPage extends UhcDriver{
 			sendkeys(HomephoneNumberField, HomeNumber);
 			  validateNew(MobileNumberField);
 			sendkeys(MobileNumberField, MobileNumber);
-			if(emailConfirmation.equalsIgnoreCase("YES")){
+			if(!Expected_PlanType.contains("SNP")) {
+					if(emailConfirmation.equalsIgnoreCase("YES")){
 				jsClickNew(emailConfirmationYesBtn);	
 			}else
 				jsClickNew(emailConfirmationNoBtn); 
@@ -315,7 +317,8 @@ public class PersonalInformationPage extends UhcDriver{
 			}else
 			//	goGreenNoBtn.click();
 			jsClickNew(goGreenNoBtn);
-		sendkeys(Email,EmailAddress);
+			}
+			sendkeys(Email,EmailAddress);
 		}	
 		result= Clickoncontinuebutton("language-preference");
 		
@@ -529,7 +532,7 @@ public class PersonalInformationPage extends UhcDriver{
 		return null;
 	}
 
-	public SpecialElectionPeriodPage navigate_to_SEP_page(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+	public ConfirmYourEligibilityPage navigate_to_ConfirmYourEligibility_page(Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
@@ -538,7 +541,7 @@ public class PersonalInformationPage extends UhcDriver{
 		//Updated the get url title SEP Page with Other Health insurance...OLERedesign
 			if(driver.getCurrentUrl().contains("other-health-insurance")){
 			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance"), "OLE Other HealthInsurance Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
+			return new ConfirmYourEligibilityPage(driver);
 			
 			}
 		else if(driver.getCurrentUrl().contains("eligibility"))
@@ -555,7 +558,7 @@ public class PersonalInformationPage extends UhcDriver{
 					 if(driver.getCurrentUrl().contains("other-health-insurance")){
 					  System.out.println("OLE Other HealthInsurance Page is Displayed"); } else {
 					  System.out.println("OLE Other HealthInsurance Page is not Displayed"); }
-					 return new SpecialElectionPeriodPage(driver);	
+					 return new ConfirmYourEligibilityPage(driver);
 				}
 			 }
 		return null;
@@ -579,7 +582,7 @@ public class PersonalInformationPage extends UhcDriver{
 		return new ConfirmYourEligibilityPage(driver);
 	}
 
-	public SpecialElectionPeriodPage navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap) throws InterruptedException {
+	public ConfirmYourEligibilityPage navigate_to_ConfirmYourEligibility_page_Medicaid(Map<String, String> MedicareDetailsMap) throws InterruptedException {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
@@ -589,7 +592,7 @@ public class PersonalInformationPage extends UhcDriver{
 			//if(driver.getCurrentUrl().contains("special")){
 			if(driver.getCurrentUrl().contains("other-health-insurance")){
 			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance"), "OLE otherhealth insurance Page is Displayed");
-			return new SpecialElectionPeriodPage(driver);
+			return new ConfirmYourEligibilityPage(driver);
 			
 			}
 		else if(driver.getCurrentUrl().contains("eligibility"))
@@ -608,7 +611,7 @@ public class PersonalInformationPage extends UhcDriver{
 					  System.out.println("OLE otherhealth insurance Page is Displayed"); } else {
 
 					  System.out.println("OLE otherhealth insurance Page is Displayed"); }
-					 return new SpecialElectionPeriodPage(driver);	
+					 return new ConfirmYourEligibilityPage(driver);
 				}
 			 }
 		return null;
