@@ -23,9 +23,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
@@ -35,8 +32,7 @@ import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
-import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage;
-import pages.mobile.acquisition.commonpages.ShopforaplanAARPlayerMobile;
+import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
@@ -1085,21 +1081,21 @@ public class VppPlanSummaryMobile {
 		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
 	}
 	
-	@Given("^the user hovers screen over the shop for a plan$")
+	/*@Given("^the user hovers screen over the shop for a plan$")
 	public void the_user_hovers_screen_over_the_shop_for_a_plan() throws Throwable {
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ShopforaplanAARPlayerMobile shop = acqusitionHomePage.Hoveronaplan();
+		ShopForPlanNavigationPage shop = acqusitionHomePage.Hoveronaplan();
 		if (shop != null) {
 			System.out.println("Shop for a plan drop down is opened");
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
 		} else {
 			Assertion.fail("Issue in selecting a plan drop down");
 		}
-	}
+	}*/
 	
 	
-	@Given("^the user hovers screen over the learnabout Medicare for a plan$")
+	/*@Given("^the user hovers screen over the learnabout Medicare for a plan$")
 	public void the_user_hovers_screen_over_the_learnabout_Medicare_for_a_plan() throws Throwable {	
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		ShopForPlanNavigationPage shop = acqusitionHomePage.HoveronalearnaboutMedicare();
@@ -1110,7 +1106,7 @@ public class VppPlanSummaryMobile {
 //		else {
 //			Assertion.fail("Issue in selecting a plan drop down");
 //		}
-	}
+	}*/
 	
 	@Then("^the site user validates the RightRails Links on Medsupp Page$")
 	public void user_validate_rightrail_links_medsupp_page() throws Throwable {

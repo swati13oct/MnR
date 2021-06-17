@@ -18,6 +18,7 @@ import org.testng.Assert;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.ConfirmYourEligibilityPage;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
@@ -177,6 +178,24 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement lnkProfile;
+	
+	@FindBy(xpath = "(//*[@class = 'logo']//img)[2]")
+	private WebElement logoimageOLE;
+
+	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
+	private WebElement CancellationModalOLE;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+	private WebElement CreateProfile;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
+	private WebElement SignIn;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
+	private WebElement LeaveOnlineApplication;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[4]")
+	private WebElement closepopup;
 
 	private WebElement specialElectionPage;
 
@@ -337,7 +356,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public SpecialElectionPeriodPagemobile navigate_to_SEP_page(Map<String, String> MedicareDetailsMap)
+	public SpecialElectionPeriodPageMobile navigate_to_SEP_page(Map<String, String> MedicareDetailsMap)
 			throws InterruptedException {
 
 		validateNew(NextBtn);
@@ -358,7 +377,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("special")) {
 			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPagemobile(driver);
+			return new SpecialElectionPeriodPageMobile(driver);
 
 		} else if (driver.getCurrentUrl().contains("eligibility"))
 
@@ -377,7 +396,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				} else {
 					System.out.println("OLE SEP Page is not Displayed");
 				}
-				return new SpecialElectionPeriodPagemobile(driver);
+				return new SpecialElectionPeriodPageMobile(driver);
 			}
 		}
 		return null;
@@ -571,7 +590,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		return false;
 	}
 
-	public SpecialElectionPeriodPagemobile navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap)
+	public SpecialElectionPeriodPageMobile navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap)
 			throws InterruptedException {
 
 		validateNew(NextBtn);
@@ -581,7 +600,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("special")) {
 			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPagemobile(driver);
+			return new SpecialElectionPeriodPageMobile(driver);
 
 		} else if (driver.getCurrentUrl().contains("eligibility"))
 
@@ -599,7 +618,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				} else {
 					System.out.println("OLE SEP Page is not Displayed");
 				}
-				return new SpecialElectionPeriodPagemobile(driver);
+				return new SpecialElectionPeriodPageMobile(driver);
 			}
 		}
 		return null;
@@ -693,6 +712,26 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		}
 
 		return new ConfirmYourEligibilityPageMobile(driver);
+	}
+	
+	public CancelOLEModalMobile OpenLogoOLEPages() {
+		validate(logoimageOLE);
+		jsClickNew(logoimageOLE);
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(CancellationModalOLE)){
+			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+			validate(CreateProfile);
+			validate(SignIn);
+			validate(LeaveOnlineApplication);
+			jsClickNew(closepopup);
+			return new CancelOLEModalMobile(driver);
+		}
+		return null;
 	}
 
 }

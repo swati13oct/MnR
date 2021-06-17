@@ -36,7 +36,6 @@ import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
 import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
-import pages.mobile.acquisition.commonpages.SpecialElectionPeriodPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ole.AuthorizationPageMobile;
@@ -52,7 +51,7 @@ import pages.mobile.acquisition.ole.PlanPremiumPageMobile;
 import pages.mobile.acquisition.ole.PrelimineryQuestionsPageMobile;
 import pages.mobile.acquisition.ole.PrimaryCarePhysicianPageMobile;
 import pages.mobile.acquisition.ole.ReviewSubmitPageMobile;
-import pages.mobile.acquisition.ole.SpecialElectionPeriodPagemobile;
+import pages.mobile.acquisition.ole.SpecialElectionPeriodPageMobile;
 import pages.mobile.acquisition.ole.SupplementalBenefitsPageMobile;
 import pages.mobile.acquisition.ole.UseAndDisclosureAuthorizationPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -1269,7 +1268,7 @@ public class OLEStepDefinitionMobile {
 		getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
 				personalInformationPage);*/
 
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section(MedicareDetailsMap);
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section(MedicareDetailsMap);
 		getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
 				specialElectionPeriodPage);
 
@@ -1866,7 +1865,7 @@ public class OLEStepDefinitionMobile {
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = personalInformationPage
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = personalInformationPage
 				.navigate_to_SEP_page(MedicareDetailsMap);
 		if (specialElectionPeriodPage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
@@ -1892,7 +1891,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
@@ -1927,7 +1926,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		boolean Validation_Status = specialElectionPeriodPage.ValidateTFNMedicareInfo(TFN);
@@ -1955,7 +1954,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		LeavingOLEmodalMobile leaveOLEmodal = specialElectionPeriodPage.OpenLeaveOLEmodal();
 		if (leaveOLEmodal != null) {
@@ -1965,7 +1964,7 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("Leave OLE Modal is NOT Displayed");
 
-		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) leaveOLEmodal.returntoOLE();
+		specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) leaveOLEmodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
@@ -1987,7 +1986,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		LearnMoreModalMobile learnMoremodal = specialElectionPeriodPage.OpenLearnMore();
 		if (learnMoremodal != null) {
@@ -1997,7 +1996,7 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("OLE Learn More Modal is NOT Displayed");
 
-		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) learnMoremodal.returntoOLE();
+		specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) learnMoremodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
@@ -2020,7 +2019,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 
 		CancelOLEModalMobile cancelOLEmodal = specialElectionPeriodPage.OpenCancelOLE();
@@ -2029,7 +2028,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("OLE Cancellation Modal is Displayed");
 		} else
 			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
-		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) cancelOLEmodal.returntoOLE();
+		specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) cancelOLEmodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
@@ -2053,7 +2052,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		boolean Validation_Status = specialElectionPeriodPage.validate_SEPoptions_for_planType(PlanType);
@@ -2092,7 +2091,7 @@ public class OLEStepDefinitionMobile {
 		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
 		String optionsData = SEPoptionsFlagMap.get("Option Data");
 
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
 		if (specialElectionPeriodPage != null) {
@@ -2117,7 +2116,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		CoverageInformationPageMobile coverageInformationPage = specialElectionPeriodPage
 				.navigate_to_Coverage_Information_page();
@@ -2198,7 +2197,7 @@ public class OLEStepDefinitionMobile {
 	@Then("^the user navigates to Proposed Effective Date Page$")
 	public void the_user_navigates_to_Proposed_Effective_Date_Page() throws Throwable {
 
-		SpecialElectionPeriodPagemobile sepPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile sepPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		ProposedEffectiveDatePageMobile proposedEffectiveDatePage = sepPage.navigate_to_Proposed_Effective_Date_Page();
 		if (proposedEffectiveDatePage != null) {
@@ -3134,7 +3133,7 @@ public class OLEStepDefinitionMobile {
 
 	@Then("^the User validates RadioButtons option in SEP Page$")
 	public void the_User_validates_RadioButtons_option_in_SEP_Page() throws Throwable {
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		boolean Validation_Status = specialElectionPeriodPage.validate_SEP_RadioButton_options();
 		if (Validation_Status) {
@@ -4004,7 +4003,7 @@ public class OLEStepDefinitionMobile {
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = personalInformationPage
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = personalInformationPage
 				.navigate_to_SEP_page_Medicaid(MedicareDetailsMap);
 
 		if (specialElectionPeriodPage != null) {
@@ -4117,6 +4116,49 @@ public class OLEStepDefinitionMobile {
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("OLE Use and Disclosure Authorization Page is NOT Displayed");
+	}
+	
+	@Then("^the user validates logo image on OLE Pages$")
+	public void the_user_validates_logo_image_for_OLE_pages() throws Throwable {
+		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		personalInformationPage.OpenLogoOLEPages();
+		System.out.println("OLE logo image is clicked on OLE Pages");
+	}
+	
+	@Then("^the user validates cancellation and Save Return Later modal for OLE Page$")
+	public void the_user_validates_cancellation_save_return_later_for_OLE_pages() throws Throwable {
+		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		medicareInfoPage.OpenCancelOLEPages();
+		medicareInfoPage.OpensavereturnOLEPages();
+		System.out.println("OLE cancellation and Save Return Later modal on OLE Pages");
+	}
+	
+	@Then("^the user validate on Review Page and click on Edit information for Medicare Information Page$")
+	public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_Page(DataTable Medicareoptions)
+			throws Throwable {
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
+
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String MedicareNumber1 = MedicareDetailsMap.get("Medicare Number1");
+		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+
+		boolean medicareInfoPage = reviewSubmitPage.Review_page_enter_required_Medicare_details(MedicareDetailsMap);
+		if (medicareInfoPage) {
+
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number1"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			//getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+			//getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE,
+					reviewSubmitPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and navigated back to Review Page");
+			Assertion.assertTrue(true);
+		}
+		else
+			Assertion.fail("Medicare Info data entry failed and user not navigated back to Review Page");
 	}
 
 }

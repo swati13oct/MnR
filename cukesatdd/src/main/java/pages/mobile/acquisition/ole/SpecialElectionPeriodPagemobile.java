@@ -22,7 +22,7 @@ import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
  * @author sdwaraka
  *
  */
-public class SpecialElectionPeriodPagemobile extends UhcDriver {
+public class SpecialElectionPeriodPageMobile extends UhcDriver {
 
 	// OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']//img")
@@ -165,7 +165,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	@FindBy(xpath = "//input[@name='specialElectionQtsn'])[1]/parent::span/label")
 	private WebElement NewMedicare;
 
-	public SpecialElectionPeriodPagemobile(WebDriver driver) {
+	public SpecialElectionPeriodPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -408,7 +408,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		return null;
 	}
 
-	public SpecialElectionPeriodPagemobile select_option_and_enter_data(String selectoptions, String optionsData) {
+	public SpecialElectionPeriodPageMobile select_option_and_enter_data(String selectoptions, String optionsData) {
 		String[] options = selectoptions.split("/");
 		String[] optiondata = optionsData.split("/");
 		int i=0;
@@ -460,7 +460,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		if(NextBtn.isEnabled()){
 			System.out.println("SEP options selection Status :  "+Option_Selected_Flag);
 			System.out.println("SEP options selected :  Next button is enabled");
-			return new SpecialElectionPeriodPagemobile(driver);
+			return new SpecialElectionPeriodPageMobile(driver);
 		}
 
 		return null;

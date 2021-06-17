@@ -3796,7 +3796,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "ghn_lnk_3")
 	private WebElement learnaboutMedicare;
 
-	public ShopForPlanNavigationPage HoveronalearnaboutMedicare()
+	public ShopForPlanNavigationPageMobile HoveronalearnaboutMedicare()
 			throws InterruptedException {
 		waitforElement(learnaboutMedicare);
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
@@ -3807,15 +3807,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				Actions action = new Actions(driver);
 				action.moveToElement(learnaboutMedicare).build().perform();
 				jsMouseOver(learnaboutMedicare);
-				return new ShopForPlanNavigationPage(driver);
+				return new ShopForPlanNavigationPageMobile(driver);
 			} else {
 				return null;
 			}
 		}
-		return new ShopForPlanNavigationPage(driver);
+		return new ShopForPlanNavigationPageMobile(driver);
 	}
 
-	public ShopForPlanNavigationPage Hoveronaplan() throws InterruptedException {
+	public ShopForPlanNavigationPageMobile Hoveronaplan() throws InterruptedException {
 		// waitforElement(ShopForaplan);
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
@@ -3827,12 +3827,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				// Actions action = new Actions(driver);
 				// action.moveToElement(ShopForaplan).build().perform();
 				jsMouseOver(ShopForaplan);
-				return new ShopForPlanNavigationPage(driver);
+				return new ShopForPlanNavigationPageMobile(driver);
 			} else {
 				return null;
 			}
 		}
-		return new ShopForPlanNavigationPage(driver);
+		return new ShopForPlanNavigationPageMobile(driver);
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
@@ -4129,7 +4129,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = "#subnav_2 .nav-back")
 	public WebElement shopForPlanBackButton;
 	
-	public ShopForPlanNavigationPage openShopForPlanFromMenu() {
+	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
 		scrollToView(MenuMobile);
 		jsClickNew(MenuMobile);
 		
@@ -4138,7 +4138,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(shopForAPlan);
 		jsClickNew(shopForAPlan);
 		if(validate(shopForPlanBackButton)) {
-			return new ShopForPlanNavigationPage(driver);
+			return new ShopForPlanNavigationPageMobile(driver);
 		} 
 		return null;
 	}
