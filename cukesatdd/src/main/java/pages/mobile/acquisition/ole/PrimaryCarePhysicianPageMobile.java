@@ -206,7 +206,9 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 				e1.printStackTrace();
 			}
 			for (String winHandle : driver.getWindowHandles()) {
-				driver.switchTo().window(winHandle);
+				if (!winHandle.equals(PCPWindow)) {
+					driver.switchTo().window(winHandle);
+				}
 			}
 
 			String CurrentURL = driver.getCurrentUrl();
@@ -239,7 +241,6 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 				// if(!planType.contains("SNP")){
 				if (validate(SelectPCPLink)) {
 					System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
-					//SelectPCPLink.click();
 					jsClickNew(SelectPCPLink);
 					try {
 						Thread.sleep(2000);
