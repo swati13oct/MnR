@@ -166,8 +166,6 @@ public class OLEStepDefinitionMobile {
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
-
-		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		// String PlanName = (String)
 		// getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
@@ -176,7 +174,7 @@ public class OLEStepDefinitionMobile {
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-
+		String TFN;
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
@@ -213,7 +211,7 @@ public class OLEStepDefinitionMobile {
 		System.out.println("Plan Zip Code is : " + ZipCode);
 		System.out.println("Plan County Name is : " + County);
 		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		// System.out.println("TFN for Plan Type is : " + TFN);
+		System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 

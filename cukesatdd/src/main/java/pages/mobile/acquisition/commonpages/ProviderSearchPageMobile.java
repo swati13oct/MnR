@@ -120,7 +120,11 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[text()='Cancel']//following-sibling::button")
 	private WebElement NewsaveBtn2;
 
-	@FindBy(xpath = "(//span[contains(@ng-bind-html, 'item.title') and contains(text(),'Saved')])")
+	@FindBy(css = "div[class*='mobile-header'] > button")
+	private WebElement rallyPageHamburgerMenu;
+	
+//	@FindBy(xpath = "(//span[contains(@ng-bind-html, 'item.title') and contains(text(),'Saved')])")
+	@FindBy(css = ".primary-nav a[data-ui-element-name='Saved']")
 	private WebElement Savedproviders;
 
 	@FindBy(xpath = "//*[contains(text(),'Close')]")
@@ -515,7 +519,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 		jsClickNew(Physician);
 
 		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
-		jsClickNew(selectProviderBtn);
+//		jsClickNew(selectProviderBtn);
 
 		int counter = 0;
 		for (WebElement element : MulitpleSaveBtns) {
@@ -523,7 +527,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, element, 10);
 			jsClickNew(element);
 
-			if (validate(selectLocationOption, 10)) {
+			if (validate(selectLocationOption, 5)) {
 				// selectLocationOption.click();
 				jsClickNew(selectLocationOption);
 				validateNew(saveBtn2);
@@ -548,6 +552,9 @@ public class ProviderSearchPageMobile extends UhcDriver {
 			}
 
 		}
+		
+		jsClickNew(rallyPageHamburgerMenu);
+		
 		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		jsClickNew(Savedproviders);
 //		waitForPageLoadSafari();
