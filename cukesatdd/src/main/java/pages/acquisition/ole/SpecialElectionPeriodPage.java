@@ -279,8 +279,8 @@ public LeavingOLEmodal OpenLeaveOLEmodal() {
 	}
 	return null;
 }
-/*
-public SpecialElectionPeriodPage validate_SEPoptions_for_planType(String planType) {
+
+public boolean validate_SEPoptions_for_planType(String planType) {
 
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
@@ -358,13 +358,13 @@ public SpecialElectionPeriodPage validate_SEPoptions_for_planType(String planTyp
 			System.out.println("All Options for SNP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
 			Validation_Flag = false;
 		}
-		return new SpecialElectionPeriodPage(driver);
+		//return new SpecialElectionPeriodPage(driver);
 	}
 
-	return null;
+	return true;
 	
 }
-*/
+
 public CoverageInformationPage navigate_to_Coverage_Information_page() {
 	
 	validateNew(NextBtn);
@@ -462,7 +462,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 
 	//return Validation_Flag;
 	//}
-	validateNew(NextBtn);
+	//validateNew(NextBtn);
 	//jsClickNew(NextBtn);
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");

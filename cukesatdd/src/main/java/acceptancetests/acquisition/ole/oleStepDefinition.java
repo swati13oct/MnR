@@ -1563,21 +1563,17 @@ public class oleStepDefinition {
 
 	@Then("^the user validates SEP options and Required Fields for PlanType in SEP Page$")
 	public void the_user_validates_SEP_options_and_Required_Fields_for_PlanType_in_SEP_Page() throws Throwable {
-		MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario()
-				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-		//SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-	
-		SpecialElectionPeriodPage specialElectionPeriodPage = medicareInfoPage.validate_SEPoptions_for_planType(PlanType);
-		
-		if (specialElectionPeriodPage != null) {
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
-					specialElectionPeriodPage);
-			System.out.println("OLE SEP Page is Displayed");
-		} else 
-			
-			Assertion.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
-
+		boolean Validation_Status = specialElectionPeriodPage.validate_SEPoptions_for_planType(PlanType);
+		if(Validation_Status){
+			System.out.println("Plan Type Options Validation in OLE SEP PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("Plan Type Options in OLE SEP PAGE : " + Validation_Status);
+			Assertion.fail();
+		}
 	}
 
 	@Then("^the user selects the following options for SEP Page$")
