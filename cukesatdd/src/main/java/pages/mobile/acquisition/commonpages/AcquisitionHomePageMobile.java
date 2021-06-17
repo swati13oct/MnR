@@ -60,6 +60,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
 	private WebElement viewShopPlansButton;
+	
+	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
+	private WebElement ShopEnrollButton;
+	
+	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
+	private WebElement ShopdsnpEnrollButton;
+
+	@FindBy(xpath = "//button[contains(@class,'zip-button')]")
+	private WebElement LearnMedicareMedsuppEnrollButton;
 
 	@FindBy(css = "#zipcode")
 	private WebElement healthPlansZipcode;
@@ -494,6 +503,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//span[contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
+	
+	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
+	private WebElement MedSuppClassicUrl;
+
+	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans.html']")
+	private WebElement MedicareSuppUrl;
 
 	// String ChatSamText= "Chat with a Licensed Insurance Agent";
 	String ChatSamText = "Chat Now";
@@ -3781,7 +3796,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "ghn_lnk_3")
 	private WebElement learnaboutMedicare;
 
-	public pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage HoveronalearnaboutMedicare()
+	public ShopForPlanNavigationPage HoveronalearnaboutMedicare()
 			throws InterruptedException {
 		waitforElement(learnaboutMedicare);
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
@@ -3792,15 +3807,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				Actions action = new Actions(driver);
 				action.moveToElement(learnaboutMedicare).build().perform();
 				jsMouseOver(learnaboutMedicare);
-				return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
+				return new ShopForPlanNavigationPage(driver);
 			} else {
 				return null;
 			}
 		}
-		return new pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage(driver);
+		return new ShopForPlanNavigationPage(driver);
 	}
 
-	public ShopforaplanAARPlayerMobile Hoveronaplan() throws InterruptedException {
+	public ShopForPlanNavigationPage Hoveronaplan() throws InterruptedException {
 		// waitforElement(ShopForaplan);
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
@@ -3812,12 +3827,12 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				// Actions action = new Actions(driver);
 				// action.moveToElement(ShopForaplan).build().perform();
 				jsMouseOver(ShopForaplan);
-				return new ShopforaplanAARPlayerMobile(driver);
+				return new ShopForPlanNavigationPage(driver);
 			} else {
 				return null;
 			}
 		}
-		return new ShopforaplanAARPlayerMobile(driver);
+		return new ShopForPlanNavigationPage(driver);
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
@@ -4100,5 +4115,124 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 
+	}
+	
+	@FindBy(xpath = "//b[contains(text(),'MENU')]")
+	private WebElement MenuMobile;
+	
+	@FindBy(css = "#mobile-nav")
+	private WebElement mobileNav;
+	
+	@FindBy(css = "#ghn_lnk_2")
+	private WebElement shopForAPlan;
+	
+	@FindBy(css = "#subnav_2 .nav-back")
+	public WebElement shopForPlanBackButton;
+	
+	public ShopForPlanNavigationPage openShopForPlanFromMenu() {
+		scrollToView(MenuMobile);
+		jsClickNew(MenuMobile);
+		
+		validateNew(mobileNav, 5);
+		
+		scrollToView(shopForAPlan);
+		jsClickNew(shopForAPlan);
+		if(validate(shopForPlanBackButton)) {
+			return new ShopForPlanNavigationPage(driver);
+		} 
+		return null;
+	}
+	
+	public void clickMedSupp(String state) throws InterruptedException {
+//		MobileMenuShopTool();
+		if (state.equalsIgnoreCase("Oregon"))
+			MedSuppClassicUrl.click();
+		else
+			MedicareSuppUrl.click();
+	}
+	
+	public VPPPlanSummaryPageMobile searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
+
+		validate(zipCodeShopField, 30);
+		scrollToView(zipCodeShopField);
+		sendkeysMobile(zipCodeShopField, zipcode);
+		jsClickNew(viewShopPlansButton);
+
+		validate(zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		} else
+			return null;
+	}
+
+	public VPPPlanSummaryPageMobile searchPlansShop(String zipcode, String countyName) {
+		validate(zipCodeShopField, 30);
+		scrollToView(zipCodeShopField);
+		sendkeysMobile(zipCodeShopField, zipcode);
+		jsClickNew(viewShopPlansButton);
+		
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		validate(vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
+	}
+	
+	public VPPPlanSummaryPageMobile searchPlansWithOutCountyShopEnroll(String zipcode) throws InterruptedException {
+
+		validate(zipCodeShopField, 30);
+		scrollToView(zipCodeShopField);
+		sendkeysMobile(zipCodeShopField, zipcode);
+		jsClickNew(ShopEnrollButton);
+
+		validate(zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		} else
+			return null;
+	}
+
+	public VPPPlanSummaryPageMobile searchPlansShopEnroll(String zipcode, String countyName) {
+		validate(zipCodeShopField, 30);
+		scrollToView(zipCodeShopField);
+		sendkeysMobile(zipCodeShopField, zipcode);
+		jsClickNew(ShopEnrollButton);
+
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		validate(vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
+	}
+	
+	public VPPPlanSummaryPageMobile searchPlansWithOutCountyShopDSNPEnroll(String zipcode) throws InterruptedException {
+		validate(zipCodeShopField, 30);
+		scrollToView(zipCodeShopField);
+		sendkeysMobile(zipCodeShopField, zipcode);
+		jsClickNew(ShopdsnpEnrollButton);
+
+		validate(zipcodeChangeLink, 30);
+		if (driver.getCurrentUrl().contains("health-plans")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		} else
+			return null;
+	}
+
+	public VPPPlanSummaryPageMobile searchPlansShopDSNPEnroll(String zipcode, String countyName) {
+		CommonUtility.waitForPageLoadNew(driver, zipCodeShopField, 30);
+		sendkeys(zipCodeShopField, zipcode);
+		jsClickNew(ShopdsnpEnrollButton);
+
+		if (validate(countyModal))
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
+		validate(vppTop, 30);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
 	}
 }
