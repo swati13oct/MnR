@@ -271,16 +271,16 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath="(//a[@id='viewallplansBtnId'])[3]")
 	public WebElement viewAllplansButton;
 	
-	@FindBy(xpath="//h2[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
+	@FindBy(xpath="//div[contains(text(),'Medical Benefits')]/following::span[@class='uhc-switch__slider']")
 	public WebElement medicalBenefitsOONToggle;
 	
-	@FindBy (xpath="//h2[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
+	@FindBy (xpath="//div[contains(text(),'Medical Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
 	public WebElement medicalBenefitsOONLabel;
 	
-	@FindBy(xpath="//h2[contains(text(),'Additional Benefits')]/following::div[@class='uhc-switch__slider']")
+	@FindBy(xpath="//div[contains(text(),'Additional Benefits')]/following::span[@class='uhc-switch__slider']")
 	public WebElement additionalBenefitsOONToggle;
 	
-	@FindBy(xpath="//h2[contains(text(),'Additional Benefits')]/following::div[contains(@class,'uhc-switch__label')]")
+	@FindBy(xpath="//div[contains(text(),'Additional Benefits')]/following::span[contains(@class,'uhc-switch__label')]")
 	public WebElement additionalBenefitsOONLabel;
 	
 	@FindBy(xpath="//td[contains(@class,'show-out-of-network')]")
@@ -802,7 +802,7 @@ public class ComparePlansPage extends UhcDriver {
      }
 		
 	public void validatenewlyAddPlanonNewPlanComapre() {
-	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//div[contains(@class,'align-items-lg-start')]//div"));	
+	   	 List<WebElement> allMAPlans = driver.findElements(By.xpath("//div[contains(@class,'align-items-start')]//span"));	
 			int plansForCompare=allMAPlans.size();
 			if (plansForCompare == 3) {
 				Assertion.assertTrue(true);
