@@ -656,6 +656,55 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.assertTrue(false);
 
 	}
+	
+	public void validateVPPDetailsPage() {
+		Assertion.assertTrue("user not navigated to VPP Details Page",driver.getCurrentUrl().contains("details"));
+	}
+	
+	public ArrayList<String> getDocNameAndLanguage(String colName){
+		String english = "English", spanish = "Spanish", chinese = "Chinese", lang = "", docName = "";
+		ArrayList<String> result=new ArrayList<String>();
+		
+		if(colName.contains("Enrollment")) { lang = english;docName = "Application";	}
+		else if(colName.contains("Summary of Benefits")) { lang = english; docName = "Summary of Benefits";}
+		else if(colName.contains("Evidence of Coverage")) {lang = english;docName = "Evidence of Coverage"; }
+		else if(colName.contains("ANOC")) {lang = english;docName = "ANOC";}
+		else if(colName.contains("UnitedHealth Passport Program")) {lang = english;docName = "Passport";}
+		else if(colName.contains("Star Ratings")) {lang = english;docName = "Star Ratings";}
+		else if(colName.contains("Benefit Highlights")) {lang = english;docName = "Benefit Highlights";}
+		else if(colName.contains("Provider Directory")) {lang = english;docName = "Directory";}
+		else if(colName.contains("Vendor Information Sheet")) {lang = english;docName = "Vendor Information Sheet";}
+		else if(colName.contains("Comprehensive Formulary")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Prior Authorization Criteria")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Step Therapy Criteria")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Formulary Additions")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Formulary Deletions")) {lang = english;docName = "Directory";}
+		else if(colName.contains("Alternative Drugs List")) {lang = english;docName = "Drugs"; }
+		else if(colName.contains("Formulario de InscripciÃƒÆ’Ã‚Â³n")) {lang = spanish;docName = "Application"; }
+		else if(colName.contains("Resumen de Beneficios")) {lang = spanish;docName = "Summary of Benefits"; }
+		else if(colName.contains("Comprobante de Cobertura")) {lang = spanish;docName = "Evidence of Coverage"; }
+		else if(colName.contains("ClasificaciÃƒÆ’Ã‚Â³n de la Calidad del Plan")) {lang = spanish;docName = "Star Ratings"; }
+		else if(colName.contains("Programa UnitedHealth Passport")) {lang = spanish;docName = "Passport"; }
+		else if(colName.contains("Aviso Annual de Cambios")) {lang = spanish;docName = "ANOC"; }
+		else if(colName.contains("Beneficios Importantes")) {lang = spanish;docName = "Benefit Highlights"; }
+		else if(colName.contains("Directorio de Proveedores")) {lang = spanish;docName = "Directory"; }
+		else if(colName.contains("InformaciÃƒÆ’Ã‚Â³n sobre proveedores")) {lang = spanish;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("ÃƒÂ¨Ã‚Â¨Ã‚Â»ÃƒÂ¥Ã¢â‚¬Â Ã…Â ÃƒÂ¨Ã‚Â¡Ã‚Â¨ÃƒÂ¦Ã‚Â Ã‚Â¼")) {lang = chinese;docName = "Application"; }
+		else if(colName.contains("ÃƒÂ§Ã‚Â¦Ã¯Â¿Â½ÃƒÂ¥Ã‹â€ Ã‚Â©ÃƒÂ¦Ã‚Â¦Ã¢â‚¬Å¡ÃƒÂ¨Ã‚Â¦Ã‚Â½")) {lang = chinese;docName = "Summary of Benefits"; }
+		else if(colName.contains("ÃƒÂ¦Ã¢â‚¬Â°Ã‚Â¿ÃƒÂ¤Ã‚Â¿Ã¯Â¿Â½ÃƒÂ¨Ã‚Â­Ã¢â‚¬Â°ÃƒÂ¦Ã¢â‚¬ÂºÃ‚Â¸")) {lang = chinese;docName = "Evidence of Coverage"; }
+		else if(colName.contains("ÃƒÂ¦Ã‹Å“Ã…Â¸ÃƒÂ§Ã‚Â´Ã…Â¡ÃƒÂ¨Ã‚Â©Ã¢â‚¬Â¢ÃƒÂ¥Ã‚Â®Ã…Â¡")) {lang = chinese;docName = "Star Ratings"; }
+		else if(colName.contains("ÃƒÂ¥Ã‚Â¹Ã‚Â´ÃƒÂ¥Ã‚ÂºÃ‚Â¦ÃƒÂ¨Ã‚Â®Ã…Â ÃƒÂ¦Ã¢â‚¬ÂºÃ‚Â´ÃƒÂ©Ã¢â€šÂ¬Ã…Â¡ÃƒÂ§Ã…Â¸Ã‚Â¥")) {lang = chinese;docName = "ANOC"; }
+		else if(colName.contains("ÃƒÂ§Ã‚Â¦Ã¯Â¿Â½ÃƒÂ¥Ã‹â€ Ã‚Â©ÃƒÂ¦Ã¢â‚¬ËœÃ‹Å“ÃƒÂ¨Ã‚Â¦Ã¯Â¿Â½")) {lang = chinese;docName = "Benefit Highlights"; }
+		else if(colName.contains("ÃƒÂ©Ã¢â‚¬Â Ã‚Â«ÃƒÂ§Ã¢â‚¬ï¿½Ã…Â¸ÃƒÂ¥Ã¯Â¿Â½Ã¯Â¿Â½ÃƒÂ¥Ã¢â‚¬Â Ã…Â ")) {lang = chinese;docName = "Directory"; }
+		else if(colName.contains("ÃƒÂ¤Ã‚Â¾Ã¢â‚¬ÂºÃƒÂ¦Ã¢â‚¬Â¡Ã¢â‚¬Â°ÃƒÂ¥Ã¢â‚¬Â¢Ã¢â‚¬Â ÃƒÂ¨Ã‚Â³Ã¢â‚¬Â¡ÃƒÂ¨Ã‚Â¨Ã…Â ÃƒÂ¨Ã‚Â¡Ã‚Â¨")) {lang = chinese;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("ÃƒÂ§Ã‚Â¶Ã…â€œÃƒÂ¥Ã¯Â¿Â½Ã‹â€ ÃƒÂ¨Ã¢â€žÂ¢Ã¢â‚¬Â¢ÃƒÂ¦Ã¢â‚¬â€œÃ‚Â¹ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¤Ã‚Â¸Ã¢â€šÂ¬ÃƒÂ¨Ã‚Â¦Ã‚Â½ÃƒÂ¨Ã‚Â¡Ã‚Â¨")) {lang = chinese;docName = "Formulary"; }
+		else if(colName.contains("ÃƒÂ¦Ã¢â‚¬ÂºÃ‚Â¿ÃƒÂ¤Ã‚Â»Ã‚Â£ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ§Ã¢â‚¬Â°Ã‚Â©ÃƒÂ¦Ã‚Â¸Ã¢â‚¬Â¦ÃƒÂ¥Ã¢â‚¬â€œÃ‚Â®")) {lang = chinese;docName = "Drugs"; }
+			
+		result.add(0, docName);
+		result.add(1,lang);
+		return result;
+	}
+
 
 	public void validatedownbacktoplanslink() throws InterruptedException {
 		validateNew(downbackToPlanslink);
@@ -829,6 +878,48 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		return validationFlag;
 	}
+	
+	public PharmacySearchPageMobile planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
+		WebElement PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-"+language+"')]"));
+		if(language.equalsIgnoreCase("English")){
+			PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
+		}
+		CommonUtility.waitForPageLoad(driver, PharmacyLink, 45);
+		String winHandleBefore = driver.getWindowHandle();
+		switchToNewTabNew(PharmacyLink);
+		String winHandleCurrent = driver.getWindowHandle();
+		driver.switchTo().window(winHandleBefore);
+		driver.close();
+		driver.switchTo().window(winHandleCurrent);
+
+		if (!county.equalsIgnoreCase("None")) {
+			CommonUtility.waitForPageLoad(driver, countyPopOut, 50);
+			try {
+				if (validateNew(countyPopOut)) {
+					for (WebElement webElement : countyList) {
+						if (webElement.getText().contains(county)) {
+							WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
+							countylink.click();
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
+				System.out.println("Exception!!! County does not exists." + e.getMessage());
+				Assertion.fail("Exception!!! County does not exists");
+			}
+		}
+		CommonUtility.waitForPageLoad(driver, distanceDropownID, 45);
+		if (validateNew(distanceDropownID) && driver.getCurrentUrl().contains(language)) {
+			System.out.println("Pharmacy locator page for Language : "+language+" is loaded");
+			System.out.println("Current URL : "+driver.getCurrentUrl());
+			return new PharmacySearchPageMobile(driver);
+		} else 
+			System.out.println("Pharmacy locator page not loaded");
+
+		return null;
+	}
+
 
 	public void validatedAddedDrug(String expectedDrugName) {
 		validateNew(presDrugTab.get(0));

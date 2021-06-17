@@ -2476,6 +2476,25 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(MobileMenuBackBtn);
 
 	}
+	
+	public void validateHomePage() {
+		validate(zipCodeField);
+	}
+
+	public void validatePageNavigated(String path) {
+		if (driver.getCurrentUrl().contains(path)) {
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("User not navigated to correct page");
+		}
+	}
+	
+	@FindBy(xpath = "//a[@id='ghn_lnk_1']")
+	private WebElement homeTab;
+	
+	public void clickHomeTab() {
+		homeTab.click();
+	}
 
 	@FindBy(xpath = "//span[@role='button']")
 	private WebElement MobileMenuBackBtn;

@@ -732,25 +732,24 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion.fail("Dispensing Limits Drug text NOT Displayed in Important Information Section !!!");
 
 	}
-	
+
 	public WebElement standardPharmacyTab;
-	
+
 	public void validateStandardTab() {
 		waitforElement(standardPharmacyTab);
 		validate(standardPharmacyTab);
 		standardPharmacyTab.click();
 	}
 
-	
 	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
 	public WebElement preferredPharmacyTab;
-	
+
 	public void validatePreferredTab() {
 		waitforElement(preferredPharmacyTab);
 		validate(preferredPharmacyTab);
 		preferredPharmacyTab.click();
 	}
-	
+
 	public void ValidatesDrugsList_MonthlyDrugStage(String druglist) {
 		String[] DrugListItems = druglist.split("&");
 		int DrugCount_Total = DrugListItems.length - 1;
@@ -779,53 +778,55 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		jsClickNew(clickDistanceDefaultMile);
 
 	}
-	
+
 	public void validateDrugStageInfoModals_NonLISbuydownPlans() {
 		validateNew(MonthlyDrugStage_InitialCoverageLink);
 		jsClickNew(MonthlyDrugStage_InitialCoverageLink);
 		String LIS_BuyDownText = "will pay a copay or coinsurance";
 		validateNew(StageInfo_Modal);
-		WebElement CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		WebElement CoverageText = driver.findElement(By.xpath("//*[contains(text(), '" + LIS_BuyDownText + "')]"));
 		if (validateNew(CoverageText) && CoverageText.getText().contains("Initial")) {
 			System.out.println(
 					"Correct text displayed for Initial Coverage Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
-			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+			System.out.println("Displaeyd Text >>>>" + CoverageText.getText());
 		} else
 			Assertion.fail(
-					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"
+							+ CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
 		validateNew(MonthlyDrugStage_CoverageGapLink);
 		jsClickNew(MonthlyDrugStage_CoverageGapLink);
 		validateNew(StageInfo_Modal);
 		LIS_BuyDownText = "will pay no more than 25% of the total cost";
-		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '" + LIS_BuyDownText + "')]"));
 		if (validateNew(CoverageText) && CoverageText.getText().contains("Coverage Gap")) {
 			System.out.println(
 					"Correct text displayed for Coverage Gap Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
-			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+			System.out.println("Displaeyd Text >>>>" + CoverageText.getText());
 		} else
 			Assertion.fail(
-					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"
+							+ CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
 		validateNew(MonthlyDrugStage_CatastropheLink);
 		jsClickNew(MonthlyDrugStage_CatastropheLink);
 		validateNew(StageInfo_Modal);
 		LIS_BuyDownText = "$3.70 copay for generic drugs, $9.20 copay for brand name drugs or a 5% coinsurance, whichever is greater";
-		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '" + LIS_BuyDownText + "')]"));
 		if (validateNew(CoverageText) && CoverageText.getText().contains("Catastrophic")) {
 			System.out.println(
 					"Correct text displayed for Catastrophic Coverage Stage Text for NON-LIS-Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
-			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+			System.out.println("Displaeyd Text >>>>" + CoverageText.getText());
 		} else
 			Assertion.fail(
-					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for NON-LIS-Buydown Plan <<<<<<<<< !!!"
+							+ CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
-		
+
 	}
 
-	
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'No LIS')]//parent::div")
 	public WebElement NonLIS_CopayHeader;
 
@@ -846,50 +847,54 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					"***** DCE Details Page validation for LIS BuyDown - Alert and LIS copay Section - FAILED *****");
 
 	}
-	
+
 	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
 	private List<WebElement> pharmacyNameList;
-	
+
 	public void ApplyPharmacyFilter(String filterText) {
 		validateNew(PharmacyFilterTxtBx);
 		PharmacyFilterTxtBx.clear();
 		PharmacyFilterTxtBx.sendKeys(filterText);
-		System.out.println("FIlter text entered : "+filterText);
+		System.out.println("FIlter text entered : " + filterText);
 		validateNew(PharmacyFilterApplyBtn);
 		jsClickNew(PharmacyFilterApplyBtn);
-		System.out.println("Apply button clicked for filter text"+filterText);
+		System.out.println("Apply button clicked for filter text" + filterText);
 		for (WebElement PharmacyName : pharmacyNameList) {
-			System.out.println("Pharmacy Name : "+PharmacyName.getText());
-			if(!PharmacyName.getText().contains(filterText)) {
-				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "+PharmacyName+ "  Filter Text : "+filterText);
+			System.out.println("Pharmacy Name : " + PharmacyName.getText());
+			if (!PharmacyName.getText().contains(filterText)) {
+				Assert.fail("Pharmacy Filter Failed, Pharmacy Name does not match filter text, PharamcyName : "
+						+ PharmacyName + "  Filter Text : " + filterText);
 			}
 		}
 		System.out.println("All Pharmacy have filter text");
 	}
-	
+
 	public void validateXcleartextPharmacyFilter() {
 		validateNew(PharmacyFilterApplyBtn);
 		jsClickNew(PharmacyFilterApplyBtn);
 		System.out.println("Apply button clicked for Blank filter text");
 		validateNew(PharmacyFilterErrorMsg);
-		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> "+PharmacyFilterErrorMsg.getText()+ " <<<<<<<");
-		Assertion.assertTrue("Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<", (validateNew(PharmacyFilterErrorMsg) && PharmacyFilterErrorMsg.getText().contains("least two characters")));
+		System.out.println("Error Message for Pharmacy Filter is Displayed : >>>>>> " + PharmacyFilterErrorMsg.getText()
+				+ " <<<<<<<");
+		Assertion.assertTrue(
+				"Pharmacy Error Message NOT Displayed for blank filter text : >>>>>> Validation Failed <<<<<<<",
+				(validateNew(PharmacyFilterErrorMsg)
+						&& PharmacyFilterErrorMsg.getText().contains("least two characters")));
 	}
 
-	
 	/*
 	 * Adding code for Pharmacy filter validation
 	 */
 
 	@FindBy(xpath = "//label[contains(@for, 'pharmacy-name-filter')]")
 	public WebElement PharmacyFilterLabel;
-	
+
 	@FindBy(xpath = "//input[contains(@id, 'pharmacy-name-filter')]")
 	public WebElement PharmacyFilterTxtBx;
 
 	@FindBy(xpath = "//button[contains(@dtmname, 'search')]/*[contains(text(), 'Apply')]")
 	public WebElement PharmacyFilterApplyBtn;
-	
+
 	@FindBy(xpath = "//*[contains(@class, 'inputGroup')]/button/img")
 	public WebElement PharmacyFilterClearTextX;
 
@@ -906,7 +911,8 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		System.out.println("X button for Filter text clearing is Displayed");
 		jsClickNew(PharmacyFilterClearTextX);
 		System.out.println("Clear Text is clicked for Pharmacy Filter");
-		Assertion.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<", PharmacyFilterTxtBx.getText().isEmpty());
+		Assertion.assertTrue("Pharmacy Filter - Text is not cleared : >>>>>>>>> Validation Failed <<<<<<<<",
+				PharmacyFilterTxtBx.getText().isEmpty());
 	}
 
 	@FindBy(xpath = "//*[contains(@id, 'plancosts')]")
@@ -937,10 +943,6 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		}
 	}
 
-	
-	
-	
-	
 	public Map<String, String> CaptureDrugCosts() {
 		Map<String, String> DrugDetails = new HashMap<String, String>();
 
@@ -973,8 +975,6 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion.fail("Select Pharmacy Modal not displayed");
 		}
 	}
-	
-	
 
 	public void validateSelectPharmacyPage() throws InterruptedException {
 		if (validateNew(selectPharmacyModalCloseBtn) && validateNew(selectedPharmacyLink)
@@ -991,7 +991,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 	public void clickChangePharmacyLinkDetailsPage() {
 		DrugDetails_ChangePharmacyLnk.click();
 	}
-	
+
 	public void updateDistanceDrugDetails(String distanceValue) throws InterruptedException {
 		distanceDrpDown.click();
 		Select distance = new Select(distanceDrpDown);
@@ -1004,13 +1004,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
-	
+
 	@FindBy(id = "aarpSVGLogo")
 	public WebElement aarpLogo;
 
 	@FindBy(id = "uhcSVGLogo")
 	public WebElement uhcLogo;
-	
+
 	public void clickingSiteLogoDrugDetail(String siteName) {
 		System.out.println(siteName);
 		if (siteName.equalsIgnoreCase("AARP")) {
@@ -1032,6 +1032,14 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		validateNew(monthlyValue);
 		assertTrue(monthlyValue.getText() != "");
 		System.out.println("Monthly Value: " + monthlyValue.getText());
+	}
+
+	@FindBy(xpath = "(//a[contains(@class,'uhc-link-button')])[3]")
+	private WebElement breaCrumbLink;
+
+	public void validateBreadCrumb(String breadCrumb) {
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
+				breaCrumbLink.getText().trim().equals(breadCrumb));
 	}
 
 	public void validatePharmacy() {
@@ -1056,7 +1064,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion.fail("Catastrophic coverage Modal not displayed");
 		}
 	}
-	
+
 	public void validateLISBuyDown_NotCoveredDrugCost(String notCoveredDrug) {
 		WebElement DrugYouPay = driver.findElement(
 				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
@@ -1071,50 +1079,52 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion.fail(
 					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  Non $0 You Pay for Not Covered Drugs NOT Displayed");
 	}
-	
+
 	public void validateDrugStageInfoModals_LISbuydownPlans() {
 		validateNew(MonthlyDrugStage_InitialCoverageLink);
 		jsClickNew(MonthlyDrugStage_InitialCoverageLink);
 		String LIS_BuyDownText = "pays all of the costs for your covered drugs";
 		validateNew(StageInfo_Modal);
-		WebElement CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		WebElement CoverageText = driver.findElement(By.xpath("//*[contains(text(), '" + LIS_BuyDownText + "')]"));
 		if (validateNew(CoverageText) && CoverageText.getText().contains("Initial")) {
 			System.out.println(
 					"Correct text displayed for Initial Coverage Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
-			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+			System.out.println("Displaeyd Text >>>>" + CoverageText.getText());
 		} else
 			Assertion.fail(
-					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+					">>>>>>>> Validation FAILED - Initial Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"
+							+ CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
 		validateNew(MonthlyDrugStage_CoverageGapLink);
 		jsClickNew(MonthlyDrugStage_CoverageGapLink);
 		validateNew(StageInfo_Modal);
-		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '" + LIS_BuyDownText + "')]"));
 		if (validateNew(CoverageText) && CoverageText.getText().contains("Coverage Gap")) {
 			System.out.println(
 					"Correct text displayed for Coverage Gap Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
-			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+			System.out.println("Displaeyd Text >>>>" + CoverageText.getText());
 		} else
 			Assertion.fail(
-					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+					">>>>>>>> Validation FAILED - Coverage Gap Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"
+							+ CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
 		validateNew(MonthlyDrugStage_CatastropheLink);
 		jsClickNew(MonthlyDrugStage_CatastropheLink);
 		validateNew(StageInfo_Modal);
-		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '"+LIS_BuyDownText+"')]"));
+		CoverageText = driver.findElement(By.xpath("//*[contains(text(), '" + LIS_BuyDownText + "')]"));
 		if (validateNew(CoverageText) && CoverageText.getText().contains("Catastrophic")) {
 			System.out.println(
 					"Correct text displayed for Catastrophic Coverage Stage Text for LIS Buydown Plan in Monthly Drug Costs by Stage Section - Drug Details Page");
-			System.out.println("Displaeyd Text >>>>"+CoverageText.getText());
+			System.out.println("Displaeyd Text >>>>" + CoverageText.getText());
 		} else
 			Assertion.fail(
-					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"+CoverageText.getText());
+					">>>>>>>> Validation FAILED - Catastrophic Coverage Stage text is incorrect for LIS Buydown Plan <<<<<<<<< !!!"
+							+ CoverageText.getText());
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
 
-	
 	public void validateLISBuyDown_CoveredDrugCost(String coveredDrug) {
 		WebElement DrugYouPay = driver.findElement(
 				By.xpath("//caption[contains(text(), 'Your Drugs')]/ancestor::table//span[contains(text(), '"
@@ -1129,7 +1139,7 @@ public class DrugDetailsPageMobile extends UhcDriver {
 			Assertion.fail(
 					"DCE Details Page - >>>  Validated FAILED  <<<  LIS BuyDown -  $0 You Pay for Covered Drugs NOT Displayed");
 	}
-	
+
 	@FindBy(xpath = "//button[contains(@dtmname, 'compare')]//*[contains(text(), 'Compare')]")
 	public WebElement DrugCosts_PlanCompareBtn;
 
@@ -1150,14 +1160,13 @@ public class DrugDetailsPageMobile extends UhcDriver {
 		return new ComparePlansPageMobile(driver);
 	}
 
-	
 	public void searchPharmaciesByZipcodeDrugDetails(String zipcode) {
 		pharmacyZipcodeSearch.clear();
 		pharmacyZipcodeSearch.sendKeys(zipcode);
 		pharmacySearchBtn.click();
 		waitForPageLoadSafari();
 	}
-	
+
 	public void validateNoResultsMsgDrugDetails(String expectedMsg) {
 		waitforElement(noResultsMessage);
 		System.out.println(noResultsMessage.getText());
@@ -1337,9 +1346,6 @@ public class DrugDetailsPageMobile extends UhcDriver {
 					+ PremiumDisplayed);
 		}
 	}
-	
-	
-	
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-filter')]//*[contains(text(), ' Standard Pharmacies ')]")
 	public WebElement StandardPharmacyFilter;

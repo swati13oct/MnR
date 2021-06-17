@@ -1442,6 +1442,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			return true;
 		return false;
 	}
+	
+	public void validateVPPSummaryPage() {
+		Assertion.assertTrue("user not navigated to VPP Page", driver.getCurrentUrl().contains("plan-summary"));
+	}
 
 	/**
 	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
