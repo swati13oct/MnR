@@ -198,10 +198,10 @@ Feature: 1.12 UAT - Medicare Education Pages flows
 
     @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples:
-      | Scenario           | site | geoState | path                                                  | pageName          | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 6_AMP | AARP | New York | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState | path                                                  | pageName          | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 6_AMP | AARP | New York | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples:
-      | Scenario           | site | geoState | path                                                  | pageName          | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 6_UMS | UHC  | New York | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState | path                                                  | pageName          | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 6_UMS | UHC  | New York | medicare-education/enrollment-and-changing-plans.html | Enrollment Basics | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    | https://www.myuhcagent.com/ |
