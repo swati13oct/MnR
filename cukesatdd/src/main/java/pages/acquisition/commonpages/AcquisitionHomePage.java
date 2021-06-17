@@ -503,7 +503,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//a[@id='proceed-link']")
 	private WebElement proceedLink;
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(xpath = "//a[contains(@href,'https://www.myuhcagent.com/')]")
@@ -3003,7 +3003,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void selectState(String state) {
+		validateNew(stateDropDown);
 		selectFromDropDownByValue(stateDropDown, state);
+		openAndValidate(true);
 	}
 
 	/**
@@ -3322,7 +3324,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// contains(@title, 'prescription drug costs')]"));
 		WebElement DCELink = driver.findElement(By.xpath(
 				"//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
-
+		validateNew(DCELink);
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();
@@ -3643,7 +3645,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		validateNew(footerAgentsnBrokersLink);
 		validateNew(footerAccessibilitylink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			// validateNew(aarpOrgLink);
+			validateNew(aarpOrgLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
@@ -4299,7 +4301,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
 					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
+			assertTrue(invalidSearch.contains("Your search - \"" + newSearchValue + "\" - did not match any documents."));
 			// assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;
@@ -6656,6 +6658,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		if (linkName.equals("Medicare Supplement Insurance Plans")) {
 			link = driver.findElement(
 					By.xpath("//*[@class='uhc-footer']//span[contains(text(),'Medicare Supplement Insurance Plans')]"));
+			waitforElement(link);
+			jsClickNew(link);
+			pageloadcomplete();
 		} else {
 			if (url.contains("uhcmedicaresolutions") && linkName.equals("AARP.org")) {
 				int size = driver.findElements(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
@@ -6669,12 +6674,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			} else {
 				link = driver.findElement(By.xpath("//*[@class='uhc-footer']//a[contains(text(),'" + linkName
 						+ "') and contains(@dtmname,'" + linkName + "')]"));
+				waitforElement(link);
+				jsClickNew(link);
+				pageloadcomplete();
 			}
 		}
-		// String base = driver.getWindowHandle();
-		waitforElement(link);
-		jsClickNew(link);
-		pageloadcomplete();
+		
 	}
 
 	public void validateFooterLinksNavigation(String linkName) {
@@ -6772,6 +6777,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			break;
 
 		case "AARP.org":
+			if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+				System.out.println("AARP.org link not present for UHC site");
+				break;
+			}
+			else {
 			for (String s : all) {
 				driver.switchTo().window(s);
 				flag = driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org");
@@ -6783,6 +6793,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			driver.switchTo().window(base);
 			Assertion.assertTrue("Navigation to AARP.org page failed", flag);
 			break;
+			}
 
 		default:
 			System.out.println("Link not available under Learn about Medicare");

@@ -103,9 +103,9 @@ public class PrescriptionProviderBenefitsPageNew extends GlobalWebElements {
         jsClickNew(DCELink);
         waitForPageLoadSafari();
         CommonUtility.checkPageIsReadyNew(driver);
-        WebElement AddMyDrugsBtn = driver.findElement(By.xpath("//h2[contains(text(),'How much will my drugs cost?')]"));
+        WebElement DCEHeader = driver.findElement(By.xpath("//h1[contains(text(),'Drug Cost Estimator')]"));
         WebElement lnkReturn = driver.findElement(By.xpath("//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]"));
-        if (validateNew(AddMyDrugsBtn) && driver.getCurrentUrl().contains("/drug-cost-estimator")) {
+        if (validateNew(DCEHeader) && driver.getCurrentUrl().contains("/drug-cost-estimator")) {
             System.out.println("Drug Cost Estimator Tool opened successfully.");
             sleepBySec(2);
             jsClickNew(lnkReturn);
