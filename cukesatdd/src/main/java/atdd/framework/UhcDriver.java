@@ -621,7 +621,7 @@ public abstract class UhcDriver {
 			//checkElementisEnabled(element);
 			scrollToView(element);
 			element.click();
-//			sleepBySec(2);
+			sleepBySec(2);
 			String seleniumClick = element.getAttribute("automationTrack");
 			System.out.println("Selenium Click executed........" + seleniumClick);
 			
@@ -650,17 +650,18 @@ public abstract class UhcDriver {
 	}
 
 	public void jsClickNew(WebElement element) {
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
-				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].click();", element);
-		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			/*
 			 * To handle iOS specific click problem By: Harshal Ahire
 			 */
 			iOSClick(element);
-
+		} else {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+				scrollToView(element);
+			}
+			js.executeScript("arguments[0].click();", element);
 		}
 
 	}
