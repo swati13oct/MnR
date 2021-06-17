@@ -354,7 +354,7 @@ public class ProviderSearchPage extends UhcDriver {
 		jsClickNew(continueButton);
 		selectYear(year);
 
-		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li//button[attribute::data-ui-element-name]"));
+		List<WebElement> topicDropDownValues = driver.findElements(By.xpath("//li[@class='sc-pZAOG ixelsw']"));
 
 		return topicDropDownValues.size();
 	}

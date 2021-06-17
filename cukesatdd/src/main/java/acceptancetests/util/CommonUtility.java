@@ -444,7 +444,7 @@ public class CommonUtility {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 
-			for (int counter = 0; counter <= 23; counter++) {
+			for (int counter = 0; counter <= 30; counter++) {
 				if (js.executeScript("return document.readyState").toString().equals("complete")) {
 					System.out.println("Browser Page -- " + driver.getTitle() + " -- Is loaded.");
 					return true;
