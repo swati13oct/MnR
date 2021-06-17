@@ -149,7 +149,8 @@ public class PlanPremiumPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
+//		CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
+		validateNew(ZipCode_County, 30);
 		validateNew(PageHeader);
 		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}

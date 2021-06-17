@@ -170,7 +170,8 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+//		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		validateNew(NextBtn, 30);
 		validateNew(PCPPageHeader);
 		System.out.println("Page header is Displayed" + PCPPageHeader.getText());
 	}

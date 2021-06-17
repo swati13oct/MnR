@@ -1080,7 +1080,6 @@ public class MedicareInformationPageMobile extends UhcDriver {
 		try {
 
 			if (PrescriptionCoverageQuestionFlagNo.isDisplayed()) {
-				scrollToView(PrescriptionCoverageQuestionFlagNo);
 				jsClickNew(PrescriptionCoverageQuestionFlagNo);
 				if (!validate(healthInsuranceNameField) && validate(groupNumberField)) {
 					System.out.println("LongTermQuestion Options is yes : Validation Passed");
@@ -1092,7 +1091,6 @@ public class MedicareInformationPageMobile extends UhcDriver {
 			}
 
 			PrescriptionCoverageQuestionFlagYes.isDisplayed();
-			scrollToView(PrescriptionCoverageQuestionFlagYes);
 			jsClickNew(PrescriptionCoverageQuestionFlagYes);
 
 			String PrescriptionName = memberDetailsMap.get("Prescription Name");

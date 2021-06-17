@@ -172,7 +172,7 @@ public class SpecialElectionPeriodPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, SEPPageHeader, 30);
+		validateNew(SEPPageHeader, 30);
 		System.out.println("Page header is Displayed : " + SEPPageHeader.getText());
 
 	}

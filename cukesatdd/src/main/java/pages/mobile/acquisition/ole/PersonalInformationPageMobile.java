@@ -160,6 +160,9 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]")
 	private WebElement partBStartDateField;
+	
+	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
+	private WebElement medicaidNumberField;
 
 	@FindBy(css = "a#save-return-button")
 	private WebElement saveandReturn;
@@ -594,12 +597,12 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			throws InterruptedException {
 
 		validateNew(NextBtn);
-		scrollToView(NextBtn);
 		jsClickNew(NextBtn);
 
 		Thread.sleep(3000);
-		if (driver.getCurrentUrl().contains("special")) {
-			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
+		// if(driver.getCurrentUrl().contains("special")){
+		if (driver.getCurrentUrl().contains("special-election-period")) {
+			Assert.assertTrue(driver.getCurrentUrl().contains("special-election-period"), "OLE SEP Page is Displayed");
 			return new SpecialElectionPeriodPageMobile(driver);
 
 		} else if (driver.getCurrentUrl().contains("eligibility"))
@@ -610,10 +613,11 @@ public class PersonalInformationPageMobile extends UhcDriver {
 					MedicareDetailsMap);
 			if (confirmYourEligibilityPage != null) {
 
-				scrollToView(NextBtn);
+				validateNew(NextBtn);
 				jsClickNew(NextBtn);
 				// waitForPageLoadSafari();
-				if (driver.getCurrentUrl().contains("special")) {
+
+				if (driver.getCurrentUrl().contains("special-election-period")) {
 					System.out.println("OLE SEP Page is Displayed");
 				} else {
 					System.out.println("OLE SEP Page is not Displayed");
@@ -650,15 +654,13 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
-		// String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber");
+		 String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber");
 		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
-			// sendkeysNew(partAStartDateField, PartAeffectiveDate);
-			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
-			// sendkeysNew(partBStartDateField, PartBeffectiveDate);
-			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
-			// sendkeysNew(medicaidNumberField,MedicaidNo);
+			sendKeysByCharacter(partAStartDateField, PartAeffectiveDate);
+			sendKeysByCharacter(partBStartDateField, PartBeffectiveDate);
+			sendKeysByCharacter(medicaidNumberField,MedicaidNo);
 		}
 
 		return new ConfirmYourEligibilityPageMobile(driver);
