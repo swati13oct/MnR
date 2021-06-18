@@ -91,7 +91,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | path                                              | pageName                              | tfnXpath                                                            | tfnFlag |
       | AARP | medicare-education/medicare-advantage-plans.html  | Learn about Medicare Advantage Plans  | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]      | true    |
       | AARP | medicare-education/medicare-supplement-plans.html | Learn about Medicare Supplement Plans | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[2] | true    |
-      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]      | true    |
+      | AARP | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans      | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    |
 
     #|AARP| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_2_GlobalCompsUHC @sanity @avengersRegressionUHC
@@ -99,7 +99,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | site | path                                              | pageName                            | tfnXpath                                                            | tfnFlag |
       | UHC  | medicare-education/medicare-advantage-plans.html  | Medicare Advantage (Part C) Plans   | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]      | true    |
       | UHC  | medicare-education/medicare-supplement-plans.html | Medicare Supplement Insurance Plans | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[2] | true    |
-      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]      | true    |
+      | UHC  | medicare-education/medicare-part-d.html           | Medicare Prescription Drug Plans    | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[4] | true    |
 
     #|UHC| medicare-education/compare-ma-ms-plans.html|
     @MedEdPages_3_GlobalCompsAARP @avengersRegressionAARP
@@ -794,8 +794,8 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the user clicks on browser back button
     When user click on "Language Assistance" link under more
     Then user should be navigated to respective footer links page
-    #When user click on "AARP.org" link under more
-    #Then user should be navigated to respective footer links page
+    When user click on "AARP.org" link under more
+    Then user should be navigated to respective footer links page
     When user updates the state drop down value on the home page
       | State | <state> |
     And user clicks on View all disclaimer information link on the home page
@@ -870,16 +870,6 @@ Feature: 1.12 ACQ - Global Components Validation
 
     @Global_Comps_Footer_AARP
     Examples: 
-      | site | path      | pageName           | state  |
-      | AARP | shop.html | ShopPlan: Homepage | Alaska |
-
-    @Global_Comps_Footer_UHC
-    Examples: 
-      | site | path      | pageName           | state  |
-      | UHC  | shop.html | ShopPlan: Homepage | Alaska |
-
-    @Global_Comps_Footer_AARP
-    Examples: 
       | site | path                                                                                    | pageName                        | state  |
       | AARP | shop.html                                                                               | ShopPlan: Homepage              | Alaska |
       | AARP | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          | Alaska |
@@ -916,6 +906,7 @@ Feature: 1.12 ACQ - Global Components Validation
     @Global_Comps_Footer_UHC
     Examples: 
       | site | path                                                                                    | pageName                        | Alaska |
+      | UHC  | shop.html                                                                               | ShopPlan: Homepage              | Alaska |
       | UHC  | shop/medicare-advantage-plans.html                                                      | ShopPlan: Shop MA Plan          | Alaska |
       | UHC  | shop/medicare-supplement-plans.html                                                     | ShopPlan: Shop MS Plan          | Alaska |
       | UHC  | shop/prescription-drug-plans.html                                                       | ShopPlan: Shop PDP Plan         | Alaska |

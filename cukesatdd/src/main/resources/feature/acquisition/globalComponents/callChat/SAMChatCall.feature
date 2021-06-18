@@ -10,7 +10,7 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
     #Then the user validates whether chat icon is visible on UHC
     Then the user validates whether chat icon is visible
 
-    @samChatRegressionAARP1
+    @samChatRegressionAARP1 @regressionAARP
     Examples: 
       | pagename                                                   | site |
       | /                                                          | AARP |
@@ -27,7 +27,7 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/medicare-medicaid-dual-eligibility.html | AARP |
       | medicare-education/extra-help-program.html                 | AARP |
 
-    @samChatRegressionAARP2
+    @samChatRegressionAARP2 @regressionAARP
     Examples: 
       | pagename                                                  | site |
       | shop.html                                                 | AARP |
@@ -92,7 +92,7 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | contact-us.html                                                                                                                                                                                                                                                                                                               | AARP |
       | privacy-policy.html                                                                                                                                                                                                                                                                                                           | AARP |
 
-    @samChatRegressionUHC1
+    @samChatRegressionUHC1 @regressionUHC
     Examples: 
       | pagename                                                   | site |
       | /                                                          | UHC  |
@@ -109,7 +109,7 @@ Feature: 1.15 ACQ M&R- To test SAM Icons
       | medicare-education/medicare-medicaid-dual-eligibility.html | UHC  |
       | medicare-education/extra-help-program.html                 | UHC  |
 
-    @samChatRegressionUHC2
+    @samChatRegressionUHC2 @regressionUHC
     Examples: 
       | pagename                                                  | site |
       | shop.html                                                 | UHC  |

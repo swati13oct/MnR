@@ -1775,7 +1775,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	public WebElement AddMyDrugsBtn;
 
 	public GetStartedPage navigateToDCERedesignFromPlanSummary(String plantype) {
