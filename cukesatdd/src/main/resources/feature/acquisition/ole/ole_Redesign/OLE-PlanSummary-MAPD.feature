@@ -95,10 +95,11 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     Then the user navigates to Review and Submit Page
    # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates the OLE Submission Details in GPS
-      | Plan Type                | <plantype>               |
-      | Auth Flag                | <authflag>               |
-      | Mailing Address Question | <mailingaddressquestion> |
+    Then the user Validates Next Steps in Confirmation Page for the Plan Type.
+   # Then the user validates the OLE Submission Details in GPS
+     # | Plan Type                | <plantype>               |
+    #  | Auth Flag                | <authflag>               |
+     # | Mailing Address Question | <mailingaddressquestion> |
   @OLE_Redesign_AARP @OLE_Redesign
     Examples: 
       | TID   | site | PlanType      | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planName                                 | cardtype | firstname              | lastname              | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag     | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber    | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |

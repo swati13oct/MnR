@@ -95,12 +95,12 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
+   # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates the OLE Submission Details in GPS
-      | Plan Type                | <plantype>               |
-      | Auth Flag                | <authflag>               |
-      | Mailing Address Question | <mailingaddressquestion> |
+    #Then the user validates the OLE Submission Details in GPS
+     # | Plan Type                | <plantype>               |
+     # | Auth Flag                | <authflag>               |
+     # | Mailing Address Question | <mailingaddressquestion> |
       
    # @prodRegression_AARP
     Examples: 
@@ -207,12 +207,12 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
+   # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
-    Then the user validates the OLE Submission Details in GPS
-      | Plan Type                | <plantype>               |
-      | Auth Flag                | <authflag>               |
-      | Mailing Address Question | <mailingaddressquestion> |
+   # Then the user validates the OLE Submission Details in GPS
+     # | Plan Type                | <plantype>               |
+     # | Auth Flag                | <authflag>               |
+    #  | Mailing Address Question | <mailingaddressquestion> |
       
   #  @SNP_OLE_AARP_Future @OLE @regressionAARP @OLE @sanity
     Examples: 
