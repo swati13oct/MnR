@@ -51,6 +51,7 @@ public class oleCommonConstants {
 	public static final String PRESCRIPTION_COVERAGE_NAME = "prescriptioncoveragename";
 	public static final String PRESCRIPTION_GROUP_NUMBER = "pdgroupnumber";
 	public static final String PRESCRIPTION_MEMBER_NUMBER = "pdmembernumber";
+	public static final String PRESCRIPTION_RXBIN_NUMBER = "rxbinnumber";
 	
 	public static final String HEALTH_INSURANCE = "healthinsurance";
 	public static final String PRESCRIPTION_DRUG = "prescriptiondrug";

@@ -401,7 +401,7 @@ public class oleStepDefinition {
 	 */
 	@Then("^the user validates the Plan details on OLE$")
 	public void the_user_validates_the_Plan_details_on_OLE() throws Throwable {
-		scenario.log("Sai - Change made 06/15 - Validate planname, year,zipcode,county,premium");
+	//	scenario.log("Sai - Change made 06/15 - Validate planname, year,zipcode,county,premium");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
@@ -1151,7 +1151,7 @@ public class oleStepDefinition {
 
 	@Then("^the user navigates to Personal Information Page$")
 	public void the_user_navigates_to_Personal_Information_Page() throws Throwable {
-		scenario.log("Sai - Change made 06/15 - navigate to personal information OLE Page");
+		//scenario.log("Sai - Change made 06/15 - navigate to personal information OLE Page");
 
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		PersonalInformationPage personalInformationPage = welcomePage.navigate_to_Personal_Information_page();
@@ -1560,23 +1560,25 @@ public class oleStepDefinition {
 
 		// }
 	}
+	
+	@Then("^the user navigates to SEP Page$")
+	public void the_user_navigates_to_SEP_Page(DataTable Flags) {
+		
+	
+		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.validate_SEPPage();
+			if (specialElectionPeriodPage != null) {
 
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,specialElectionPeriodPage);
+				System.out.println("OLE SEP Page is Displayed");
+			} else
+				Assertion.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
+		}
+	
 	@Then("^the user validates SEP options and Required Fields for PlanType in SEP Page$")
 	public void the_user_validates_SEP_options_and_Required_Fields_for_PlanType_in_SEP_Page() throws Throwable {
 		
-		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
-		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-		SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.validate_SEPoptions_for_planType(PlanType);
-		if (specialElectionPeriodPage != null) {
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,specialElectionPeriodPage);
-			System.out.println("OLE SEP Page is Displayed");
-		}else
-				Assertion.fail("Back to OLE Application page - OLE SEP Page is NOT Displayed");
-
-			 }
-		
-		//////////////////
-		/*SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
+		SpecialElectionPeriodPage specialElectionPeriodPage = (SpecialElectionPeriodPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		boolean Validation_Status = specialElectionPeriodPage.validate_SEPoptions_for_planType(PlanType);
 		if(Validation_Status){
@@ -1587,8 +1589,7 @@ public class oleStepDefinition {
 			System.out.println("Plan Type Options in OLE SEP PAGE : " + Validation_Status);
 			Assertion.fail();
 		}
-	}*/
-	
+	}
 
 	@Then("^the user selects the following options for SEP Page$")
 	public void the_user_selects_the_following_options_for_SEP_Page(DataTable SEPoptions) throws Throwable {
@@ -1842,26 +1843,14 @@ public class oleStepDefinition {
 		// }
 	}
 
-	@Then("^the user navigates to Authorization Page for plan as per following rider options$")
+	@Then("^the user navigates to Authorization Page$")
 	public void the_user_navigates_to_authorization(DataTable Flags) {
 		
 		Map<String, String> RiderFlagMap = new HashMap<String, String>();
 		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
 		
-		String RiderFlag = RiderFlagMap.get("Rider Flag");
-		if(RiderFlag.contains("true")){
-			SupplementalBenefitsPage ridersPage = (SupplementalBenefitsPage) getLoginScenario().getBean(OLE_PageConstants.OLE_SUPPLEMENTAL_BENEFITS_PAGE);
-			AuthorizationPage authorizationPage = ridersPage.navigate_to_Authorization_Page();
-			if (authorizationPage != null) {
-
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE,
-						authorizationPage);
-				System.out.println("OLE Authorization page is Displayed for Plan with Rider");
-			} else
-				Assertion.fail("OLE Authorization page is NOT Displayed for Plan with Rider");
-
-		}
-		else{
+		//String RiderFlag = RiderFlagMap.get("Rider Flag");
+		//if(RiderFlag.contains("true")){
 			PlanPremiumPage  planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 			AuthorizationPage authorizationPage = planPremiumPage.navigate_to_Authorization_Page();
 			if (authorizationPage != null) {
@@ -1873,7 +1862,6 @@ public class oleStepDefinition {
 				Assertion.fail("OLE Authorization page is NOT Displayed for Plan without Rider");
 		}
 		// }
-	}
 
 	@Then("^the user validates required fields for Authorization Page$")
 	public void the_user_validates_required_fields_for_Authorization_Page() throws Throwable {
@@ -2561,6 +2549,7 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME, MemberDetailsMap.get("Prescription Name"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER, MemberDetailsMap.get("PD Group Number"));
 			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER, MemberDetailsMap.get("PD Member Number"));
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_RXBIN_NUMBER, MemberDetailsMap.get("RX BIN Number"));
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
@@ -2728,7 +2717,7 @@ public class oleStepDefinition {
 						String pdGroupNumber = (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER);
 						DetailsMap.put("PD Group Number", pdGroupNumber.toUpperCase());
 						DetailsMap.put("PD Member Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));
-
+						DetailsMap.put("RX BIN Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_RXBIN_NUMBER));
 						System.out.println("--------------------Storing Data for Medicare Information Page Ended----------------------");
 
 						// ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -3021,6 +3010,7 @@ public class oleStepDefinition {
 		DetailsMap.put("Health Insurance Name", (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME));
 		DetailsMap.put("Group Number", (String) getLoginScenario().getBean(oleCommonConstants.GROUP_NUMBER));
 		DetailsMap.put("Member Number", (String) getLoginScenario().getBean(oleCommonConstants.MEMBER_NUMBER));
+		DetailsMap.put("RX BIN Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_RXBIN_NUMBER));
 
 		DetailsMap.put("Health Insurance", (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE));
 		DetailsMap.put("Prescription Drug", (String) getLoginScenario().getBean(oleCommonConstants. PRESCRIPTION_DRUG));

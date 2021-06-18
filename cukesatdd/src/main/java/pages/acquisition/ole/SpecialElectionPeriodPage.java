@@ -381,9 +381,23 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 }
 
 public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData, String planType) {
-	
-	
-	validateNew(NextBtn);
+		
+	validateNew(ChangingNewMedicareRadio);
+	  if(ChangingNewMedicareRadio.isDisplayed()) {
+		  jsClickNew(ChangingNewMedicareRadio); 
+		  if(!validate(OtherReason) && validate(NoneApply)){
+			  System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed"); 
+		  
+		 } else { 
+			 
+			 System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+		 } 
+	}
+	  
+	  ChangingCurrentMedicareRadio.isDisplayed();
+	  jsClickNew(ChangingCurrentMedicareRadio);
+	  
+	//validateNew(NextBtn);
 	//jsClickNew(NextBtn);
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");

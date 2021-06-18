@@ -74,7 +74,7 @@ public class SupplementalBenefitsPage extends UhcDriver{
 		System.out.println("Page header is Displayed"+PageHeader.getText());	
 	}
 
-	public AuthorizationPage navigate_to_Authorization_Page() {
+	public AuthorizationPage navigate_to_Authorization_Page_Old() {
 		validateNew(NextBtn);
 		jsClickNew(NextBtn);
 		threadsleep(2000);

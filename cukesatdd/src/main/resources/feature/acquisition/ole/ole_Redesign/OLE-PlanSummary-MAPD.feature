@@ -66,7 +66,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
       |RX BIN Number      |	<rxBinnumber>              |
-    #Then the user validates SEP options and Required Fields for PlanType in SEP Page
+    Then the user navigates to SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
@@ -83,8 +83,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | Card Expiration Year   | <cardexpirationyear>  |
       | Card Holder First Name | <firstname>           |
       | Card Holder Last Name  | <lastname>            |
-    Then the user navigates to Authorization Page for plan as per following rider options
-      | Rider Flag | <riderflag> |
+    Then the user navigates to Authorization Page
     #Then the user validates required fields for Authorization Page
     Then the user validates required fields for Authorization Page Representative
       | authorizationFirstname      | <authorizefirstN>       |
