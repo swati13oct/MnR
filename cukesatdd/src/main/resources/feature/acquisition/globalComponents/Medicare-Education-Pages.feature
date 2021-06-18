@@ -165,7 +165,7 @@ Feature:Medicare Education Pages flows for New Pages
       | UHC Agent URL | <UHCUrl> |
     Then the user clicks on Cost Basics link in Read Next Section
 
-    @avengersRegressionAARP 
+    @avengersRegressionAARP
     Examples:
       | Scenario           | site | geoState | pageName                                | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 3_AMP | AARP | Alabama  | Prescriptions, Providers & Benefits New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
@@ -273,8 +273,8 @@ Feature:Medicare Education Pages flows for New Pages
 
     @avengersRegressionUHC
     Examples:
-      | Scenario           | site | geoState | pageName                      | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 5_UHC | UHC  | Alabama  | Medicare Supplement Plans New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState | pageName                      | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 5_UHC | UHC  | Alabama  | Medicare Supplement Plans New | //*[contains(@class,'callus')]//div[contains(@ng-show,'medSup')]//a | true    | https://www.myuhcagent.com/ |
 
   Scenario Outline: <Scenario> To validate components on New Medicare Education Page :<pageName> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
@@ -569,8 +569,8 @@ Feature:Medicare Education Pages flows for New Pages
 
     @avengersRegressionAARP
     Examples:
-      | Scenario     | site | geoState | path                                | pageName                      | header                        | pdfName             |
-      | Avengers AMP | AARP | Alabama  | getting-started-medicare-guide.html | Getting Started with Medicare | Getting Started with Medicare | getting-started.pdf |
+      | Scenario     | site | geoState | path                                | pageName                            | header                              | pdfName                    |
+      | Avengers AMP | AARP | Alabama  | getting-started-medicare-guide.html | Getting Started with Medicare       | Getting Started with Medicare       | getting-started.pdf        |
       | Avengers AMP | AARP | Alabama  | medicare-tips.html                  | Medicare Quick Tips                 | Medicare Quick Tips                 | tips.pdf                   |
       | Avengers AMP | AARP | Alabama  | medicare-while-working-tips.html    | Working Past 65 Medicare Tips       | Working Past 65 Medicare Tips       | medicare-while-working.pdf |
       | Avengers AMP | AARP | Alabama  | medicare-basics-guide.html          | Learning the Basics                 | Learning the Basics                 | medicare-basics.pdf        |
