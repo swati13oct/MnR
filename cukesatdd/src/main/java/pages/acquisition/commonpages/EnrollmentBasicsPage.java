@@ -279,7 +279,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		jsClickNew(lnkEnrollBasics);
 		System.out.println("Learn About Enrollment link Clicked.");
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("medicare-education/when-to-enroll")) {
+		if(driver.getCurrentUrl().contains("medicare-education/when-to-enroll")||driver.getCurrentUrl().contains("medicare-education-classic/enrollment-and-changing-plans-classic")) {
 			Assertion.assertTrue(true);
 			System.out.println("Learn About Enrollment link opened successfully.\n"+ driver.getCurrentUrl());
 		}else {
