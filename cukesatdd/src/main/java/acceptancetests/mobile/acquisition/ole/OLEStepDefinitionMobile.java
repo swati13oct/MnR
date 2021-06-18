@@ -444,20 +444,41 @@ public class OLEStepDefinitionMobile {
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
-		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-		WelcomePageMobile welcomePage;
-		if (SiteName.contains("UHC_ACQ")) {
+		String PlanType = givenAttributesMap.get("Plan Type");
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 
-			PlanComparePageMobile comparePlansPage = (PlanComparePageMobile) getLoginScenario()
+		String ZipCode = givenAttributesMap.get("Zip Code");
+		// (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = "";
+		// (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanPremium = "";
+		// (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		WelcomePage welcomePage;
+		if (PlanType.contains("MAPD")) {
+			ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
-			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+			welcomePage = comparePlansPage.Enroll_OLE_Plan_Compare_MAPD(PlanName);
 		} else {
 			ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 
-			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+			welcomePage = comparePlansPage.Enroll_OLE_Plan_Compare_PDP(PlanName);
 		}
 
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+
+		System.out.println("Plan Name is : " + PlanName);
+		System.out.println("Plan Type is : " + PlanType);
+		System.out.println("Plan Zip Code is : " + ZipCode);
+		System.out.println("Plan County Name is : " + County);
+		System.out.println("Plan Plan Premium is : " + PlanPremium);
+		System.out.println("Plan Year is : " + PlanYear);
+		// System.out.println("OLE is being started from Acquisition Site : "+SiteName);
 		if (welcomePage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
