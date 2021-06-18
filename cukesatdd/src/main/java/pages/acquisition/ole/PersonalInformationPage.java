@@ -207,6 +207,99 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath="//button[contains(@id,'ip-no')]")
 	public WebElement AccessibilityButton;
 	
+	//Added for SEP Page
+	
+	@FindBy(xpath = "//*[@for = 'losingCoverage']")
+	private WebElement LosingCoverage_Employer;
+
+	@FindBy(xpath = "//*[@for = 'outofServiceArea']")
+	private WebElement MovedOutside_ServiceArea;
+	
+	@FindBy(xpath = "//*[@for = 'otherReason']")
+	private WebElement OtherReason;
+	
+	@FindBy(xpath = "//*[@for = 'noneCheck']")
+	private WebElement NoneApply;
+	
+	// New Additional Options - OEP changes - Dec2018
+	
+	//New ADD - Disaster 
+	@FindBy(xpath = "//*[@for = 'disaster']")
+	private WebElement Disaster;
+
+	// Add Dual SEP
+	@FindBy(xpath = "//*[@for = 'dualSEP']")
+	private WebElement DualSEP;
+
+	// New Add - Leaving MAPD - OEP
+	@FindBy(xpath = "//*[@for = 'oepEffectiveDate']")
+	private WebElement Leaving_MAPD;
+	
+	// New Add - Change Dual
+	@FindBy(xpath = "//*[@for = 'changeDual']")
+	private WebElement ChangeDual;
+
+	// New Add - Change LIS
+	@FindBy(xpath = "//*[@for = 'changeLIS']")
+	private WebElement ChangeLIS;
+	
+	// New Add - CMS / State Assignment 
+	@FindBy(xpath = "//*[@for = 'assignment']")
+	private WebElement Assignment;
+
+	//MA, MAPD, PDP Common Option
+	
+	@FindBy(xpath = "//*[@for = 'moveIn']")
+	private WebElement Into_LongTerm;
+	
+	@FindBy(xpath = "//*[@for = 'moveOut']")
+	private WebElement OutOf_LongTerm;
+	
+	//Removed REMOVE - Maintaining LIS
+	@FindBy(xpath = "//*[@for = 'extrahelp']")
+	private WebElement ExtraHelp_PrescriptionDrug;
+
+	//remove REMOVE - Loss of LIS
+	@FindBy(xpath = "//*[@for = 'notEligible']")
+	private WebElement LoSS_LIS;
+	
+	//remove - REMOVE - Medicaid Eligible
+	@FindBy(xpath = "//*[@for = 'medicarePremiums']")
+	private WebElement Both_Medicare_Medicaid;
+	
+	//PDP only
+	@FindBy(xpath = "//*[@for = 'fiveStarPlan']")
+	private WebElement FiveStar_MAplan;
+	
+	@FindBy(xpath = "//*[@for = 'disEnroll']")
+	private WebElement DisEnrolling_MAPD;
+
+	//DSNP Only
+	//remove - dual eligible
+	@FindBy(xpath = "//*[@for = 'dualeligible']")
+	private WebElement DualEligible_DSNP;
+	
+	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
+	private WebElement pedHeader;
+	
+
+	@FindBy(xpath = "//*[contains(text(),'new to Medicare')]/parent::span/input")
+	private WebElement pedHeader1;
+		
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]")
+	private WebElement ChangingCurrentMedicareRadio;
+	
+	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]")
+	private WebElement ChangingNewMedicareRadio;
+	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]/parent::span/label")
+	private WebElement CurrentMedicare;
+	
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]/parent::span/label")
+	private WebElement NewMedicare;
+	
+	
 	public PersonalInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -844,6 +937,90 @@ public class PersonalInformationPage extends UhcDriver{
 			closepopup.click();
 			return new CancelOLEModal(driver);
 		}
+		return null;
+	}
+	
+	public SpecialElectionPeriodPage validate_SEPoptions_for_planType(String planType) {
+		
+		boolean Validation_Flag = true;
+		if(ChangingNewMedicareRadio.isDisplayed()) {
+			jsClickNew(ChangingNewMedicareRadio);
+			if(!validate(OtherReason) && validate(NoneApply)){
+				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");	
+				Validation_Flag = true;	
+			}
+			else {
+				System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+				Validation_Flag = false;
+			}
+		}
+		
+		ChangingCurrentMedicareRadio.isDisplayed();
+		jsClickNew(ChangingCurrentMedicareRadio);
+		
+		System.out.println("PlanType : "+planType);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		//validateNew(ChangingCurrentMedicareRadio);
+		//jsClickNew(ChangingCurrentMedicareRadio);
+		//ChangingCurrentMedicareRadio.click();
+		if(planType.contentEquals("MA")){
+			if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
+					&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(Disaster) /*&& validate(DualSEP)*/ /*&& validate(ChangeDual)*/
+						&& validate(ChangeLIS) && validate(Assignment) /*&& validate(Both_Medicare_Medicaid)&& validate(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)*/){
+				
+				System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
+
+				Validation_Flag = true;
+			}
+			else{
+				System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP page OLE flow : Validation Failed");
+				Validation_Flag = false;
+			}
+		}
+		if(planType.contentEquals("MAPD")){
+			if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
+					&& validate(Into_LongTerm)/* && validate(OutOf_LongTerm) */&& validate(Disaster)/* && validate(DualSEP)*/ /*&& validate(ChangeDual)*/
+					  && validate(ChangeLIS) && validate(Assignment) 
+					 /*&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug) && validate(LoSS_LIS)*/){
+				
+				System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
+				Validation_Flag = true;
+			}
+			else{
+				System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP page OLE flow : Validation Failed");
+				Validation_Flag = false;
+			}
+		}
+		if(planType.contentEquals("PDP")){
+			if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
+					&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
+					 && validate(Disaster) /*&& validate(DualSEP) && validate(ChangeDual)*/ && validate(ChangeLIS) && validate(Assignment)
+					/*&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug)*/){// && validateNonPresenceOfElement(LoSS_LIS)
+				
+				System.out.println("All Options for PDP Plan are displayed in SEP page OLE flow : Validation Passed");
+				Validation_Flag = true;
+			}
+			else{
+				System.out.println("All Options for PDP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
+				Validation_Flag = false;
+			}
+		}
+		if(planType.contentEquals("SNP")){
+			if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)){
+				System.out.println("All Options for SNP Plan are displayed in SEP page OLE flow : Validation Passed");
+				Validation_Flag = true;
+			}
+			else{
+				System.out.println("All Options for SNP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
+				Validation_Flag = false;
+			}
+			return new SpecialElectionPeriodPage(driver);
+		}
+
 		return null;
 	}
 }

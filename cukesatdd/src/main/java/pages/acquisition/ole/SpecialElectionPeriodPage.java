@@ -382,87 +382,8 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 
 public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData, String planType) {
 	
-	boolean Validation_Flag = true;
-	if(ChangingNewMedicareRadio.isDisplayed()) {
-		jsClickNew(ChangingNewMedicareRadio);
-		if(!validate(OtherReason) && validate(NoneApply)){
-			System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");	
-			Validation_Flag = true;	
-		}
-		else {
-			System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
-			Validation_Flag = false;
-		}
-	}
 	
-	ChangingCurrentMedicareRadio.isDisplayed();
-	jsClickNew(ChangingCurrentMedicareRadio);
-	
-	System.out.println("PlanType : "+planType);
-	try {
-		Thread.sleep(3000);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
-	//validateNew(ChangingCurrentMedicareRadio);
-	//jsClickNew(ChangingCurrentMedicareRadio);
-	//ChangingCurrentMedicareRadio.click();
-	if(planType.contentEquals("MA")){
-		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-				&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(Disaster) /*&& validate(DualSEP)*/ /*&& validate(ChangeDual)*/
-					&& validate(ChangeLIS) && validate(Assignment) /*&& validate(Both_Medicare_Medicaid)&& validate(ExtraHelp_PrescriptionDrug) && validateNonPresenceOfElement(LoSS_LIS)*/){
-			
-			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
-
-			Validation_Flag = true;
-		}
-		else{
-			System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP page OLE flow : Validation Failed");
-			Validation_Flag = false;
-		}
-	}
-	if(planType.contentEquals("MAPD")){
-		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)
-				&& validate(Into_LongTerm)/* && validate(OutOf_LongTerm) */&& validate(Disaster)/* && validate(DualSEP)*/ /*&& validate(ChangeDual)*/
-				  && validate(ChangeLIS) && validate(Assignment) 
-				 /*&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug) && validate(LoSS_LIS)*/){
-			
-			System.out.println("All Options for MA/MAPD Plan are displayed in SEP page OLE flow : Validation Passed");
-			Validation_Flag = true;
-		}
-		else{
-			System.out.println("All Options for MA/MAPD Plan are NOT displayed in SEP page OLE flow : Validation Failed");
-			Validation_Flag = false;
-		}
-	}
-	if(planType.contentEquals("PDP")){
-		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea) 
-				&& validate(Into_LongTerm) /*&& validate(OutOf_LongTerm)*/ && validate(FiveStar_MAplan) && validate(DisEnrolling_MAPD)
-				 && validate(Disaster) /*&& validate(DualSEP) && validate(ChangeDual)*/ && validate(ChangeLIS) && validate(Assignment)
-				/*&& validate(Both_Medicare_Medicaid) && validate(ExtraHelp_PrescriptionDrug)*/){// && validateNonPresenceOfElement(LoSS_LIS)
-			
-			System.out.println("All Options for PDP Plan are displayed in SEP page OLE flow : Validation Passed");
-			Validation_Flag = true;
-		}
-		else{
-			System.out.println("All Options for PDP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
-			Validation_Flag = false;
-		}
-	}
-	if(planType.contentEquals("SNP")){
-		if(validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer) && validate(MovedOutside_ServiceArea)){
-			System.out.println("All Options for SNP Plan are displayed in SEP page OLE flow : Validation Passed");
-			Validation_Flag = true;
-		}
-		else{
-			System.out.println("All Options for SNP Plan are NOT displayed in SEP page OLE flow : Validation Failed");
-			Validation_Flag = false;
-		}
-	}
-
-	//return Validation_Flag;
-	//}
-	//validateNew(NextBtn);
+	validateNew(NextBtn);
 	//jsClickNew(NextBtn);
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");
