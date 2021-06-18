@@ -11,7 +11,7 @@ import io.cucumber.testng.PickleWrapper;
 @CucumberOptions(glue = { "atdd.framework", "acceptancetests.mobile" }, features = {
 		"src/main/resources/feature/acquisition/dceredesign" }, monochrome = true, plugin = { "pretty",
 				"html:reports/test-report.html", "json:target/cucumber-RunMRATDDAcquisitionDCE.json",
-				"timeline:target" }, tags = "@regressionAARP", dryRun = true)
+				"timeline:target" }, tags = "@regressionAARP", dryRun = false)
 
 @RetryCountIfFailed(0)
 public class RunMRATDDAcquisitionDCE extends BaseTestConfig {
