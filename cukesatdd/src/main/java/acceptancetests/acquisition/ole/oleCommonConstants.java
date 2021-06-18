@@ -81,6 +81,7 @@ public class oleCommonConstants {
 	public static final String AUTHORIZATION_RELATIONSHIP = "authorizationrealtionship";
 	public static final String AUTHORIZATION_REPRESENTATIVE_INDICATOR = "authorizationrepresentativeindicator";
 	public static final String PROPOSED_EFF_DATE = "proposedeffectivedate";
+	public static final String SOA_AGREE = "soaagree";
 	
 	
 	public static final String DIABETES_QUESTION_1 = "diabetesquestion1";

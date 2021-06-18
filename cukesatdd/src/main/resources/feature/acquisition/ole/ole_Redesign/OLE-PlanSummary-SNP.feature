@@ -81,9 +81,7 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
       | Card Expiration Year   | <cardexpirationyear>  |
       | Card Holder First Name | <firstname>           |
       | Card Holder Last Name  | <lastname>            |
-    Then the user navigates to Authorization Page for plan as per following rider options
-      | Rider Flag | <riderflag> |
-    #Then the user validates required fields for Authorization Page
+        Then the user navigates to Authorization Page
     Then the user validates required fields for Authorization Page Representative
       | authorizationFirstname      | <authorizefirstN>       |
       | authorizationLastname       | <authorizelastN>        |
@@ -94,10 +92,9 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
       | authorizationPhoneNo        | <authorizephonenumber>  |
       | authorizationRelationship   | <authorizeRelationship> |
       | authorizationStateDisplay   | <authorizestate>        |
-      | authorizationAgree          | <authorizationagree>    |
     Then the user validates Statement of Understanding Page
+      | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    #Then the user validates the Plan and Member details on Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user validates the OLE Submission Details in GPS
@@ -195,9 +192,7 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
       | Card Expiration Year   | <cardexpirationyear>  |
       | Card Holder First Name | <firstname>           |
       | Card Holder Last Name  | <lastname>            |
-    Then the user navigates to Authorization Page for plan as per following rider options
-      | Rider Flag | <riderflag> |
-    #Then the user validates required fields for Authorization Page
+        Then the user navigates to Authorization Page
     Then the user validates required fields for Authorization Page Representative
       | authorizationFirstname      | <authorizefirstN>       |
       | authorizationLastname       | <authorizelastN>        |
@@ -208,10 +203,10 @@ Feature: 1.05.4 OLE common tool flow E2E DSNP
       | authorizationPhoneNo        | <authorizephonenumber>  |
       | authorizationRelationship   | <authorizeRelationship> |
       | authorizationStateDisplay   | <authorizestate>        |
-      | authorizationAgree          | <authorizationagree>    |
+     # | authorizationAgree          | <authorizationagree>    |
     Then the user validates Statement of Understanding Page
+      | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    #Then the user validates the Plan and Member details on Review and Submit Page
     Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user validates the OLE Submission Details in GPS

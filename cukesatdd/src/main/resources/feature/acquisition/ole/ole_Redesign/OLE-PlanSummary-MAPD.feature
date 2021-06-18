@@ -16,7 +16,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
     #Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Save Return Later modal for OLE Page
+    #Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
      | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
@@ -53,10 +53,6 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
-    #Then the user validates the dispalyed sections for the Plan Type in Medicare Information Page
-    #Then the user answers following questions in Medicare Information Page
-     # | PDP Question      | <pdpFlag>      |
-     # | LongTerm Question | <longTermFlag> |
     Then the user validates the long term questions in Medicare Information Page
       | Health Insurance Name | <healthinsurancename> |
       | Group Number          | <groupnumber>         |
@@ -74,7 +70,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user selects payment type
       | Payment Type           | <paymentType>         |
@@ -84,7 +80,6 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | Card Holder First Name | <firstname>           |
       | Card Holder Last Name  | <lastname>            |
     Then the user navigates to Authorization Page
-    #Then the user validates required fields for Authorization Page
     Then the user validates required fields for Authorization Page Representative
       | authorizationFirstname      | <authorizefirstN>       |
       | authorizationLastname       | <authorizelastN>        |
@@ -95,25 +90,22 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | authorizationPhoneNo        | <authorizephonenumber>  |
       | authorizationRelationship   | <authorizeRelationship> |
       | authorizationStateDisplay   | <authorizestate>        |
-      | authorizationAgree          | <authorizationagree>    |
     Then the user validates Statement of Understanding Page
+      | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-    #Then the user validates the Plan and Member details on Review and Submit Page
-    Then the user validates the Online Enrollment details on Review and Submit Page
+   # Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user validates the OLE Submission Details in GPS
       | Plan Type                | <plantype>               |
       | Auth Flag                | <authflag>               |
       | Mailing Address Question | <mailingaddressquestion> |
-    # Then the user validates Plan and Member Details on Confirmation Page
-    # Then the user Validates Next Steps in Confirmation Page for the Plan Type.
   @OLE_Redesign_AARP @OLE_Redesign
     Examples: 
       | TID   | site | PlanType      | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planName                                 | cardtype | firstname              | lastname              | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag     | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber    | inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
       | 15556 | AARP | MAPD-RRID-MBI | future   | future   |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO)     | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK20    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011983 | Male   | 001 Morris Rd | New York    | No                     | 801 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true_yes      | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |123456| Valid         | Test_MiddleName    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
-      | 15557 | AARP | MAPD-PFFS-MBI | future   | future   |   66843 | Yes             | Chase County    | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS)| MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK27    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd   | Los Angeles | No                     | 123 Test      | Edison      | KS           |      66843 | test@test.com | None apply                                                                                                                                                                                                                                          | [blank]                   | yes     | yes          | false         | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |123456| Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+     # | 15557 | AARP | MAPD-PFFS-MBI | future   | future   |   66843 | Yes             | Chase County    | MAPD     | UnitedHealthcare MedicareDirect Rx (PFFS)| MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK27    | false   |  01012010 |  01012010 |     0123456789 | true     | 01011941 | Female | 123 Perm Rd   | Los Angeles | No                     | 123 Test      | Edison      | KS           |      66843 | test@test.com | None apply                                                                                                                                                                                                                                          | [blank]                   | yes     | yes          | false         | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |123456| Valid         | [blank]    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 			
-  @OLE_Redesign_UHC @OLE_Redesign
+ # @OLE_Redesign_UHC @OLE_Redesign
     Examples:
       | TID   | site | PlanType      | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planName                                 | cardtype | firstname              | lastname              | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag     | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber    	|inputdataType | middlename | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
       | 15556 | UHC  | MAPD-RRID-MBI | future   | future   |   10001 | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 1 (HMO)     | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK20    | false   |  01012010 |  01012010 |     0123456789 | false    | 01011983 | Male   | 001 Morris Rd | New York    | No                     | 801 MailingSt | Mailing LA  | NY           |      10001 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / / | yes     | yes          | true_yes      | NO                | NO      | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |123456					| Valid         | SK			    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |

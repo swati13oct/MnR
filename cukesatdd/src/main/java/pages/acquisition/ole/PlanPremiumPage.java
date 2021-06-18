@@ -40,10 +40,11 @@ public class PlanPremiumPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+//	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@class, 'ng-star-inserted')])[1]")
 	private WebElement PageHeader;
 	
-	@FindBy(xpath = "//h1[contains(text(),'Authorization')]")
+	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@id, 'relationshipToEnrolleeInfo')])[1]")
 	private WebElement authPageHeader;
 
 	//Right Rail Elements
@@ -149,7 +150,7 @@ public class PlanPremiumPage extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
+		//CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
 		validateNew(PageHeader);
 		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}

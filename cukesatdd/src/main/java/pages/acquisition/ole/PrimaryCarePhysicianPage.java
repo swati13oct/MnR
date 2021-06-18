@@ -38,7 +38,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+//	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	@FindBy(xpath = "(//*[contains(@id,'primaryCare')])[1]")
 	private WebElement PCPPageHeader;
 
 	//Right Rail Elements
@@ -360,7 +361,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);
 		*/
 		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
+		if(validateNew(driver.findElement(By.xpath("(//*[contains(@id,'planWith')])[1]")))){
 		System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPage(driver);
 		}

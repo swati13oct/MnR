@@ -1562,9 +1562,8 @@ public class oleStepDefinition {
 	}
 	
 	@Then("^the user navigates to SEP Page$")
-	public void the_user_navigates_to_SEP_Page(DataTable Flags) {
+	public void the_user_navigates_to_SEP_Page() {
 		
-	
 		PersonalInformationPage personalInformationPage = (PersonalInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		SpecialElectionPeriodPage specialElectionPeriodPage = personalInformationPage.validate_SEPPage();
 			if (specialElectionPeriodPage != null) {
@@ -1844,13 +1843,8 @@ public class oleStepDefinition {
 	}
 
 	@Then("^the user navigates to Authorization Page$")
-	public void the_user_navigates_to_authorization(DataTable Flags) {
+	public void the_user_navigates_to_authorization() {
 		
-		Map<String, String> RiderFlagMap = new HashMap<String, String>();
-		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
-		
-		//String RiderFlag = RiderFlagMap.get("Rider Flag");
-		//if(RiderFlag.contains("true")){
 			PlanPremiumPage  planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 			AuthorizationPage authorizationPage = planPremiumPage.navigate_to_Authorization_Page();
 			if (authorizationPage != null) {
@@ -1861,7 +1855,7 @@ public class oleStepDefinition {
 			} else
 				Assertion.fail("OLE Authorization page is NOT Displayed for Plan without Rider");
 		}
-		// }
+		
 
 	@Then("^the user validates required fields for Authorization Page$")
 	public void the_user_validates_required_fields_for_Authorization_Page() throws Throwable {
@@ -1904,7 +1898,7 @@ public class oleStepDefinition {
 			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY, MemberDetailsMap.get("authorizationStateDisplay"));
 			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP, MemberDetailsMap.get("authorizationRelationship"));
 
-			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_AGREE, MemberDetailsMap.get("authorizationAgree"));
+			//getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_AGREE, MemberDetailsMap.get("authorizationAgree"));
 
 			Assertion.assertTrue(true);
 		} else {
@@ -3059,6 +3053,7 @@ public class oleStepDefinition {
 		DetailsMap.put("Disclosure Provider State", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE));
 		DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
 		DetailsMap.put("Disclosure Provider PhoneNumber", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER));
+		DetailsMap.put("Optional Rider", (String) getLoginScenario().getBean(oleCommonConstants.OPTIONAL_RIDER_TEXT));
 
 		//--------------------------Added for payment plan--------------------------------------------------------------
 
@@ -3081,7 +3076,7 @@ public class oleStepDefinition {
 	@Then("^the user validates Medicaid Number in OLE Page$")
 	public void the_user_validates_Medicaid_Number_OLE_Page(DataTable arg1) throws Throwable {
 		
-		scenario.log("Sai - Change made 06/17 - Validate Medicaid Number on OLE Page");
+	//	scenario.log("Sai - Change made 06/17 - Validate Medicaid Number on OLE Page");
 
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
@@ -3448,13 +3443,18 @@ public class oleStepDefinition {
 	}
 	
 	@Then("^the user validates Statement of Understanding Page$")
-	public void the_user_validates_SOA_Page() throws Throwable {
+	public void the_user_validates_SOA_Page(DataTable arg1) throws Throwable {
 		scenario.log("Sai - Added on 06/15 - Validate SOA on OLE Page");
+		
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		
 		AuthorizationPage sOAPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
-		boolean Validation_Status = sOAPage.validate_SOA_Page();
+		boolean Validation_Status = sOAPage.validate_SOA_Page(MemberDetailsMap);
 		if(Validation_Status){
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_SOA_PAGE,sOAPage);
-			
+		//	getLoginScenario().saveBean(OLE_PageConstants.OLE_SOA_PAGE,sOAPage);
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_AGREE, MemberDetailsMap.get("soAAgree"));
+			getLoginScenario().saveBean(oleCommonConstants.SOA_AGREE, MemberDetailsMap.get("soAAgree"));
 			Assertion.assertTrue(true);
 		} else {
 			System.out.println("SOA Page : Required fields NOT validated");

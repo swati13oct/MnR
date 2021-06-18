@@ -137,7 +137,8 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	@FindBy(xpath = "//*[@for = 'dualeligible']")
 	private WebElement DualEligible_DSNP;
 	
-	@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
+	//@FindBy(xpath = "//*[contains(text(),'Proposed Effective Date')]")
+	@FindBy(xpath = "//*[contains(@id,'ProposedEffectiveDateFieldSet')]")
 	private WebElement pedHeader;
 	
 
@@ -382,7 +383,7 @@ public CoverageInformationPage navigate_to_Coverage_Information_page() {
 
 public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptions, String optionsData, String planType) {
 		
-	validateNew(ChangingNewMedicareRadio);
+	validate(ChangingNewMedicareRadio);
 	  if(ChangingNewMedicareRadio.isDisplayed()) {
 		  jsClickNew(ChangingNewMedicareRadio); 
 		  if(!validate(OtherReason) && validate(NoneApply)){

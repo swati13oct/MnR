@@ -75,14 +75,14 @@ public class ReviewSubmitPage extends UhcDriver{
 
 	//Member Details Display
 //	@FindBy(xpath = "//*[contains(text(), 'First Name')]//following-sibling::*")
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'First Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'First Name')]//following-sibling::*")
 	private WebElement FirstNameDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Middle Name/Middle Initial')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Middle Name')]//following-sibling::*")
 	private WebElement MiddleNameDisplay;
 	
 	//@FindBy(xpath = "//*[contains(text(), 'Last Name')]//following-sibling::*")
-	@FindBy(xpath = "//*[contains(text(), 'mailing address')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Personal Information')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Last Name')]//following-sibling::*")
 	private WebElement LastNameDisplay;
 
 	@FindBy(xpath = "//*[contains(text(), 'Medicare Number') or contains(text(), 'Medicare (Claim) Number')]//following-sibling::*")
@@ -210,10 +210,10 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Mobile Phone Number')]//following-sibling::*")
 	private WebElement MobilePhoneNo;
 	
-	@FindBy(xpath ="//*[contains(text(), 'Would you like to get email confirmation')]//following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive an email confirmation')]//following-sibling::*")
 	private WebElement EmailConfirmationNo;
 	
-	@FindBy(xpath ="//*[contains(text(), 'Would you like to sign up for paperless delivery of your plan materials?')]/following-sibling::*")
+	@FindBy(xpath ="//*[contains(text(), 'Would you like to receive paperless delivery of your plan materials?')]/following-sibling::*")
 	private WebElement PaperlessDelivery;
 	
 	@FindBy(xpath ="//span[contains(text(),'Email Address') or contains(text(),'Primary Email Address')]//following-sibling::*")
@@ -252,8 +252,12 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Group ID Number')]//following-sibling::*")
 	private WebElement PrescriptionDrugGroupNo;
 	
-	@FindBy(xpath = "//*[contains(text(), ' Member ID Number')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Member ID Number')]//following-sibling::*")
 	private WebElement PrescriptionDrugMemberNo;
+	
+	
+	@FindBy(xpath = "//*[contains(text(), 'Rx BIN')]//following-sibling::*")
+	private WebElement PrescriptionRXBINMemberNo;
 	
 
 	@FindBy(xpath = "//*[contains(text(), 'Provider or PCP Full Name')]//following-sibling::*")
@@ -296,7 +300,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Phone Number') or contains(text(), 'Phone number')]//following-sibling::*")
 	private WebElement AuthPhoneNo;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Authorizations and Approvals')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Have you read and do you agree to the ') or contains(text(), 'Have you read, and do you agree to the Statement')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Statement of Understanding')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Have you read and do you agree to the ') or contains(text(), 'Have you read, and do you agree to the Statement')]//following-sibling::*")
 	private WebElement AuthAgree;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Relationship to Applicant') or contains(text(), 'Relationship to Enrollee')]//following-sibling::*")
@@ -317,6 +321,9 @@ public class ReviewSubmitPage extends UhcDriver{
 	
 	@FindBy(xpath = "//span[text()='How would you like to pay for your plan?']//following-sibling::span")
 	private WebElement paymentPlanDisplay;
+	
+	@FindBy(xpath = "//*[contains(text(), 'Optional Supplemental')]//following-sibling::*")
+	private WebElement OptionalRiders;
 	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
@@ -663,6 +670,9 @@ public class ReviewSubmitPage extends UhcDriver{
 				String DisclosureProviderZipDisplay= detailsMap.get("Disclosure Provider Zip");
 				String DisclosureProviderPhoneNumberDisplay= detailsMap.get("Disclosure Provider PhoneNumber");
 				
+				String OptionalRidersDisplay= detailsMap.get("Optional Rider");
+				String expectedOptionalRidersText = "Dental Platinum";
+				String expectedOptionalHighRidersText = "High Option Dental";
 				String expectedText = "0.00";
 				
 				String paymentPlan = detailsMap.get("Payment Plan");
@@ -728,6 +738,10 @@ public class ReviewSubmitPage extends UhcDriver{
 				//flag&=validateText(MailApartmentSuite,Mailing_AptNo);
 				flag&=validateText(MailCityDisplay,Mailing_City);
 				
+				if(!(expectedText.contains("Dental Platinum") || expectedText.contains("High Option Dental"))) {
+				
+					flag&=validateText(OptionalRiders,OptionalRidersDisplay);
+				}
 				
 				if(!expectedText.contains("0.00")) {
 					flag&=validateText(paymentPlanDisplay,paymentPlan);
