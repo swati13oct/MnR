@@ -453,7 +453,7 @@ public class OLEStepDefinitionMobile {
 		// (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanPremium = "";
 		// (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
-		WelcomePage welcomePage;
+		WelcomePageMobile welcomePage;
 		if (PlanType.contains("MAPD")) {
 			ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);

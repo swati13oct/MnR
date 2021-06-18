@@ -1545,7 +1545,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			Assertion.fail("Plan Compare Page - Total Drug Count Validation FAILED");
 	}
 	
-	public WelcomePage Enroll_OLE_Plan_Compare_MAPD(String planName) throws InterruptedException {
+	public WelcomePageMobile Enroll_OLE_Plan_Compare_MAPD(String planName) throws InterruptedException {
 
 		try {
 			Thread.sleep(10000);
@@ -1576,12 +1576,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 		// if (driver.getCurrentUrl().contains("enrollment"))
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}
 
-	public WelcomePage Enroll_OLE_Plan_Compare_PDP(String planName) throws InterruptedException {
+	public WelcomePageMobile Enroll_OLE_Plan_Compare_PDP(String planName) throws InterruptedException {
 
 		try {
 			if (validate(EnrollinPlanCompare_PDP))
@@ -1598,7 +1598,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 		// if (driver.getCurrentUrl().contains("enrollment"))
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
-			return new WelcomePage(driver);
+			return new WelcomePageMobile(driver);
 		}
 		return null;
 	}
