@@ -158,10 +158,10 @@ public class SpecialElectionPeriodPageMobile extends UhcDriver {
 	private WebElement medicareInsuranceInformation;
 	
 
-	@FindBy(xpath = "//input[@name='specialElectionQtsn'])[2]/parent::span/label")
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[2]/parent::span/label")
 	private WebElement CurrentMedicare;
 
-	@FindBy(xpath = "//input[@name='specialElectionQtsn'])[1]/parent::span/label")
+	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]/parent::span/label")
 	private WebElement NewMedicare;
 
 	public SpecialElectionPeriodPageMobile(WebDriver driver) {

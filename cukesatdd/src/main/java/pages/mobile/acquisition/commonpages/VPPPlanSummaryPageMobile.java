@@ -1922,7 +1922,8 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
-		if (validateNew(RightRail_TFN, 45)) {
+		scrollToView(RightRail_TFN);
+		if (validate(RightRail_TFN, 45)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
 			return TFN_Number;
@@ -4130,7 +4131,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	public ArrayList<String> providerinforetreive(String planName) {
-
+		CommonUtility.checkPageIsReadyNew(driver);
 		try {
 			Thread.sleep(2000);
 		} catch (InterruptedException e) {
@@ -4138,15 +4139,17 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		WebElement ProviderSearchLink = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]"));
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//a[contains(@class,'provider-title')]"));
+		scrollToView(ProviderSearchLink);
 		String mproviderinfo = ProviderSearchLink.getText();
 		System.out.println(mproviderinfo);
 		// ProviderSearchLink.click();
 		jsClickNew(ProviderSearchLink);
 		ArrayList<String> providerNames = new ArrayList<String>();
 		List<WebElement> providers = driver.findElements(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span"));
+				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//*[contains(@class,'provider-list added')]//div[@class='providers-list']//ul//li//span[starts-with(@class,'name')]"));
 		for (WebElement element : providers) {
+			scrollToView(element);
 			String providername = element.getText();
 			providerNames.add(providername);
 		}

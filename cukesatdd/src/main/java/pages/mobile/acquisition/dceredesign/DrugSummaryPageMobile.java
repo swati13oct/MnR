@@ -22,8 +22,10 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
+import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.dceredesign.SwitchToGeneric;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
 
@@ -1111,6 +1113,25 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void validateNBAModal() {
 		validateNew(dceNBAModal);
 		validateNew(dceNBAModalBtn);
+	}
+	
+	@FindBy(xpath = "//select[contains(@dlassetid,'planselect')]")
+	private WebElement planToggleDropdown;
+	
+	public PlanDetailsPageMobile clickViewplanDetailsForPlan(String plantype, String planName) {
+
+		String planType = plantype.toUpperCase();
+		selectFromDropDownByValue(planToggleDropdown, planType);
+		System.out.println(planType + " Plan Toggle Clicked");
+
+		WebElement PlanDetailsLinkforPlan = driver.findElement(By.xpath(
+				"//button[contains(@aria-label, 'View Plan Details') and contains(@aria-label, '" + planName + "')]"));
+		if (validate(PlanDetailsLinkforPlan)) {
+			jsClickNew(PlanDetailsLinkforPlan);
+			System.out.println("View Plan details Clicked for " + planType + " Plan : " + planName);
+		}
+		return new PlanDetailsPageMobile(driver);
+
 	}
 
 }

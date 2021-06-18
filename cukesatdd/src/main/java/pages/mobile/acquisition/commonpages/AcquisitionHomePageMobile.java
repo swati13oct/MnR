@@ -331,9 +331,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
 
-	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+//	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
-
+	
 	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
 	public WebElement EstimateYourDrugCost;
 
@@ -2688,7 +2689,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		shopForPlan.selectOptionFromShopForPlanModal("Plan Types", "PDP", false);
 		WebElement DCELink = driver.findElement(
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
-		validateNew(DCELink, 10);
+		validateNew(DCELink, 5);
 		jsClickNew(DCELink);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
