@@ -1442,6 +1442,10 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			return true;
 		return false;
 	}
+	
+	public void validateVPPSummaryPage() {
+		Assertion.assertTrue("user not navigated to VPP Page", driver.getCurrentUrl().contains("plan-summary"));
+	}
 
 	/**
 	 * This method verifies whether the Compare 3 Plans button is Inactive or NOt
@@ -1538,7 +1542,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
-		planName.trim().replaceAll("\u00A00", " ").trim();
+		//planName.trim().replaceAll("\u00A00", " ").trim();
 		if (planName.contains("SNP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);

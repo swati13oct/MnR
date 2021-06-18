@@ -437,6 +437,14 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
+	
+	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
+	private WebElement breaCrumbLink;
+	
+	public void validateBreadCrumb(String breadCrumb) {
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
+				breaCrumbLink.getText().equals(breadCrumb));
+	}
 
 	public void validateXcleartextPharmacyFilter() {
 		validateNew(PharmacyFilterApplyBtn);
