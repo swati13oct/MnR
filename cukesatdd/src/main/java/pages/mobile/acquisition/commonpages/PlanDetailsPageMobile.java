@@ -798,6 +798,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
+		scrollToView(RightRail_TFN);
 		if (validate(RightRail_TFN)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();

@@ -101,7 +101,9 @@ public class oleCommonStepDefinition {
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		// (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = "";
+		// (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
 		// String SiteName= (String)
@@ -119,7 +121,8 @@ public class oleCommonStepDefinition {
 		TFN = vppPlanDetailsPage.GetTFNforPlanType();
 		WelcomePageMobile welcomePage = vppPlanDetailsPage.Enroll_OLE_Plan(PlanName);
 		// }
-		String PlanPremium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		String PlanPremium = "";
+		// (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
@@ -145,38 +148,34 @@ public class oleCommonStepDefinition {
 
 	}
 
+	/**
+	 * @author sdwaraka To Validate the Plan Details carried forward from VPP on
+	 *         Welcome Page of VPP
+	 * @param planAttributes
+	 * @throws Throwable
+	 */
+	@Then("^the user validates the Plan details on OLE$")
+	public void the_user_validates_the_Plan_details_on_OLE1() throws Throwable {
 
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
 
-		/**
-		 * @author sdwaraka To Validate the Plan Details carried forward from VPP on
-		 *         Welcome Page of VPP
-		 * @param planAttributes
-		 * @throws Throwable
-		 */
-		@Then("^the user validates the Plan details on OLE$")
-		public void the_user_validates_the_Plan_details_on_OLE1() throws Throwable {
-
-			WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-			Map<String, String> PlanDetailsMap = new HashMap<String, String>();
-			PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
-			PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
-			PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
-			PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
-			PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-
-			boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
-			if (Validation_Status) {
-				System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
-				getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
-				Assertion.assertTrue(true);
-			} else {
-				System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
-				Assertion.fail();
-			}
+		boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
+		if (Validation_Status) {
+			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
+			Assertion.fail();
 		}
-
-	
-
+	}
 
 	@Then("^The User validates the Plan details on OLE page$")
 	public void the_user_validates_the_Plan_details_on_OLE() throws Throwable {
@@ -185,7 +184,7 @@ public class oleCommonStepDefinition {
 				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
 		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
-		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		//PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
