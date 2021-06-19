@@ -890,18 +890,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void openAndValidate(String site) {
 		if ("BLayer".equalsIgnoreCase(site) || site.equalsIgnoreCase("UHC") || site.equalsIgnoreCase("UMS")) {
 			if (MRScenario.environment.equals("offline")) {
-				startNew(UMS_ACQISITION_OFFLINE_PAGE_URL);
+				startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_OFFLINE_PAGE_URL;
 				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.equals("prod")) {
-				startNew(UMS_ACQISITION_PROD_PAGE_URL);
+				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PROD_PAGE_URL;
 				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.contains("stage-0")) {
-				startNew(UMS_ACQISITION_PAGE_URL_NEW);
+				startNewMobile(UMS_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
 			} else {
-				startNew(UMS_ACQISITION_PAGE_URL);
+				startNewMobile(UMS_ACQISITION_PAGE_URL);
 				testSiteUrl = UMS_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
 				checkModelPopup(driver, 10);
@@ -925,18 +925,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		} else if (site.equalsIgnoreCase("AARP") || site.equalsIgnoreCase("Ulayer") || site.equalsIgnoreCase("AMP")) {
 			if (MRScenario.environment.equals("offline")) {
-				start(AARP_ACQISITION_OFFLINE_PAGE_URL);
+				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
 				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.equals("prod")) {
-				start(AARP_ACQISITION_PROD_PAGE_URL);
+				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
 				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.contains("stage-0")) {
-				startNew(AARP_ACQISITION_PAGE_URL_NEW);
+				startNewMobile(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
 			} else {
-				start(AARP_ACQISITION_PAGE_URL);
+				startNewMobile(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
 				checkModelPopup(driver, 10);
@@ -2311,6 +2311,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
+	}
+	
+	public VPPPlanSummaryPageMobile navigateToPathNew(String path) {
+
+		String CurrentURL = driver.getCurrentUrl();
+		System.out.println("Current URL : " + CurrentURL);
+
+		String NavigateToURL = CurrentURL + path;
+		System.out.println("Navigating to URL : " + NavigateToURL);
+		driver.navigate().to(NavigateToURL);
+		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
+		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		} else {
+			System.out.println("Navigation to vpp plan summary page is failed");
+			return null;
+		}
 	}
 
 	public void validateGlobalFooterLinks() {

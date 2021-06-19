@@ -120,32 +120,6 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
-	@Given("^the user navigates to following Campaign acquisition site page$")
-	public void the_user_navigates_to_following_medicare_acquisition_site(DataTable givenAttributes) throws Throwable {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String path = memberAttributesMap.get("PagePath");
-		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : " + path);
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		aquisitionhomepage.navigateToPath(path);
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assertion.fail("Error Loading VPP plan summary page");
-		}
-	}
 
 	/**
 	 * @author sdwaraka To start Enroll Now and land on Welcome Page from Plan
@@ -229,20 +203,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
+		// String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
-		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		// String County = "St. Louis County";
+		// String ZipCode = "63043";
+		// String PlanYear = "2020";
 
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 		String PlanPremium = "";
@@ -254,7 +220,6 @@ public class OLEStepDefinitionMobile {
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
 		WelcomePageMobile welcomePage;
-		plansummaryPage.viewPlanSummary(plantype);
 		if (SiteName.contains("UHC_ACQ")) {
 			VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);

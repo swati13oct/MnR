@@ -5277,8 +5277,9 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 					"//*[contains(text(), '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][2]"));
 
 		if (enrollForPlan != null) {
+			scrollToView(enrollForPlan);
 			validateNew(enrollForPlan);
-			enrollForPlan.click();
+			jsClickNew(enrollForPlan);
 		}
 
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);

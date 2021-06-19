@@ -181,35 +181,35 @@ public class MRScenario {
 		threadSafeDriver.set(driver);
 	}
 	
-	public static synchronized WebDriver getThreadSafeDriver() {
+	private static synchronized WebDriver getThreadSafeDriver() {
 		return threadSafeDriver.get();
 	}
 	
-	public synchronized void flushThreadSafeDriver() {
+	private synchronized void flushThreadSafeDriver() {
 		threadSafeDriver.remove();
 	}
 	
 	
 	private static final ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
 	
-	public synchronized AppiumDriver getThreadSafeMobileDriver() {
+	private synchronized AppiumDriver getThreadSafeMobileDriver() {
 		return threadSafeMobileDriver.get();
 	}
 	
-	public void flushThreadSafeMobileDriver() {
+	private void flushThreadSafeMobileDriver() {
 		threadSafeMobileDriver.remove();
 	}
 	
 	
-	public void flushSessionID() {
+	private void flushSessionID() {
 		sessionId.remove();
 	}
 	
-	public void flushJobUrl() {
+	private void flushJobUrl() {
 		JobURL.remove();
 	}
 	
-	public void flushRunnerFileName() {
+	private void flushRunnerFileName() {
 		runnerFileName.remove();
 	}
 	
