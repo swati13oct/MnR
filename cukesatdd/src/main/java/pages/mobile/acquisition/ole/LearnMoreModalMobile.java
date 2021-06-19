@@ -10,6 +10,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
+import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.ole.PersonalInformationPage;
+import pages.acquisition.ole.PrelimineryQuestionsPage;
+import pages.acquisition.ole.SpecialElectionPeriodPage;
+import pages.acquisition.ole.WelcomePage;
 
 /**
  * @author sdwaraka
@@ -36,37 +41,35 @@ public class LearnMoreModalMobile extends UhcDriver {
 	}
 
 	public Object returntoOLE() {
-		
 		validate(BackBtn);
-		scrollToView(BackBtn);
 		jsClickNew(BackBtn);
-		
-
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (driver.getCurrentUrl().contains("welcome")) {
+		if(driver.getCurrentUrl().contains("welcome")){
 			System.out.println("OLE Welcome Page is Displayed");
 			return new WelcomePageMobile(driver);
 		}
-		/*
-		 * else if(driver.getCurrentUrl().contains("medicare-information")){
-		 * System.out.println("OLE Medicare Information Page is Displayed"); return new
-		 * MedicareInformationPage(driver); } else
-		 * if(driver.getCurrentUrl().contains("preliminary-questions")){
-		 * System.out.println("OLE Preliminary Questions Page is Displayed"); return new
-		 * PrelimineryQuestionsPage(driver); } else
-		 * if(driver.getCurrentUrl().contains("personal-information")){
-		 * System.out.println("OLE Personal Information Page is Displayed"); return new
-		 * PersonalInformationPage(driver); } else
-		 * if(driver.getCurrentUrl().contains("special-election-period")){
-		 * System.out.println("OLE Special Election Period Page is Displayed"); return
-		 * new SpecialElectionPeriodPage(driver); }
-		 */
-		return null;
+		else if(driver.getCurrentUrl().contains("medicare-information")){
+			System.out.println("OLE Medicare Information Page is Displayed");
+			return new MedicareInformationPageMobile(driver);
+		}
+		else if(driver.getCurrentUrl().contains("preliminary-questions")){
+			System.out.println("OLE Preliminary Questions Page is Displayed");
+			return new PrelimineryQuestionsPageMobile(driver);
+		}
+		else if(driver.getCurrentUrl().contains("personal-information")){
+			System.out.println("OLE Personal Information Page is Displayed");
+			return new PersonalInformationPageMobile(driver);
+		}
+		else if(driver.getCurrentUrl().contains("special-election-period")){
+			System.out.println("OLE Special Election Period Page is Displayed");
+			return new SpecialElectionPeriodPageMobile(driver);
+		}
+		return null;	
 	}
 
 }
