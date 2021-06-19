@@ -909,9 +909,9 @@ public class VppPlanCompareMobile {
 
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
+		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		if (plansummaryPage.validatePlanNames(planType)) {
+		if (plansummaryPage.validatePlanNames(planType, planCount)) {
 			String SiteName = "AARP_ACQ";
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			Assertion.assertTrue(true);
@@ -3884,7 +3884,8 @@ public class VppPlanCompareMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
-		plansummaryPage.viewPlanSummary(plantype);
+		int planCount = plansummaryPage.viewPlanSummary(plantype);
+		getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
 	}
 
 	@Then("^user fills out medsup form and proceeds to next pages mobile$")

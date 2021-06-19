@@ -839,7 +839,7 @@ public class MRScenario {
 				//
 //				System.out.println("Session ID:" + ((mobileDriver).getSessionId()).toString());
 				sessionId.set(getThreadSafeMobileDriver().getSessionId().toString());
-				System.out.println("Session ID:" + getThreadLocalSessionId());
+//				System.out.println("Session ID:" + getThreadLocalSessionId());
 //				getVDJobURL(((mobileDriver).getSessionId()).toString());
 //				getVDJobURL(getThreadLocalSessionId());
 				setJobURL(getThreadLocalSessionId());
