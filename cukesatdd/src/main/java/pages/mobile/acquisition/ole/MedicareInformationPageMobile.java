@@ -1212,7 +1212,7 @@ public class MedicareInformationPageMobile extends UhcDriver {
 
 			String MedicaidNumber = memberDetailsMap.get("MedicaidNumber");
 
-			sendkeysMobile(medicaidNumberField, MedicaidNumber);
+			sendKeysByCharacter(medicaidNumberField, MedicaidNumber);
 		} catch (Exception e) {
 
 			System.out.println("Failed Due To-------" + e.getMessage());

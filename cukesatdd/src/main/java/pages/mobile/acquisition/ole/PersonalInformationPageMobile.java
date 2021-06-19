@@ -263,7 +263,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			// sendkeys(MailingAdd_City, Mailing_City);
 			selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 			// sendkeysNew(MailingAdd_Zip, Mailing_Zip);
-			sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
+			sendKeysByCharacter(MailingAdd_Zip, Mailing_Zip);
 		}
 		// sendkeys(Email, EmailAddress);
 		sendkeysMobile(Email, EmailAddress);
@@ -294,7 +294,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	public LearnMoreModalMobile OpenLearnMore() {
 		validate(RightRail_LearnMoreLink);
-		RightRail_LearnMoreLink.click();
+		jsClickNew(RightRail_LearnMoreLink);
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -441,7 +441,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		validateNew(MobileNumberField);
 		// sendkeysMobile(MobileNumberField, MobileNumber);
-		sendKeysByCharacter(MobileNumberField, HomeNumber);
+		sendKeysByCharacter(MobileNumberField, MobileNumber);
 		// sendkeysNew(MiddleNameField, MiddleName);
 		sendkeysMobile(MiddleNameField, MiddleName);
 		if (emailConfirmation.equalsIgnoreCase("YES")) {

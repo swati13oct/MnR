@@ -4924,7 +4924,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePageMobile continueAsGuest() {
-		continueAsGuest.click();
+		jsClickNew(continueAsGuest);
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
 			return new VisitorProfilePageMobile(driver);

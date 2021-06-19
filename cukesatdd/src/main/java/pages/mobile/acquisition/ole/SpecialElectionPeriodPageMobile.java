@@ -412,7 +412,6 @@ public class SpecialElectionPeriodPageMobile extends UhcDriver {
 		String[] optiondata = optionsData.split("/");
 		int i=0;
 		boolean Option_Selected_Flag = true;
-		scrollToView(ChangingCurrentMedicareRadio);
 		jsClickNew(ChangingCurrentMedicareRadio);
 		for(String currentOption : options){
 			System.out.println("Option to select : "+currentOption);

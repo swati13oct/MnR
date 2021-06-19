@@ -219,7 +219,6 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		validateNew(creditCard);
 		try {
 			if(creditCard.isDisplayed())	{
-				scrollToView(creditCard);
 				jsClickNew(creditCard);
 				Thread.sleep(10000);
 				driver.switchTo().frame("ole_credit_payment");
@@ -265,7 +264,6 @@ public class PlanPremiumPageMobile extends UhcDriver{
 							sendKeysByCharacter(accountNumber, cardNo);
 							sendKeysByCharacter(cardExpirationMonth, month);
 							sendKeysByCharacter(cardExpirationYear, year);
-							scrollToView(btnSubmit);
 							jsClickNew(btnSubmit);
 							Thread.sleep(5000);
 							System.out.println("Validate card details stored successfully message");
