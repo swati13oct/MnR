@@ -3883,9 +3883,9 @@ public class VppPlanCompareMobile {
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		int planCount = plansummaryPage.viewPlanSummary(plantype);
+		int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
+//		plansummaryPage.viewPlanSummary(plantype);
 	}
 
 	@Then("^user fills out medsup form and proceeds to next pages mobile$")
@@ -4938,7 +4938,10 @@ public class VppPlanCompareMobile {
 		}
 
 		if (plansummaryPage != null) {
+			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(planType);
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
 
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
@@ -4967,7 +4970,10 @@ public class VppPlanCompareMobile {
 		}
 
 		if (plansummaryPage != null) {
+			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(planType);
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
 
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
@@ -5000,7 +5006,10 @@ public class VppPlanCompareMobile {
 		}
 
 		if (plansummaryPage != null) {
+			String planType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
+			int planCount = plansummaryPage.getPlanCountAndViewPlanSummary(planType);
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			getLoginScenario().saveBean(VPPCommonConstants.PLAN_COUNT, planCount);
 
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");

@@ -1078,14 +1078,13 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	}
 
-	public int viewPlanSummary(String planType) {
+	public void viewPlanSummary(String planType) {
 		int planCount = 0;
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
 
 			// iosScroll(pdpPlansViewLink);
 			scrollToView(pdpPlansViewLink);
-			planCount = Integer.valueOf(pdpPlansNumber.getText());
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
 			pageloadcomplete();
@@ -1095,7 +1094,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			pageloadcomplete();
 			validateNew(maPlansViewLink, 10);
 			// iosScroll(maPlansViewLink);
-			planCount = Integer.valueOf(maPlansNumber.getText());
 			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
 			pageloadcomplete();
@@ -1115,7 +1113,6 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		} else if (planType.equalsIgnoreCase("SNP")) {
 			pageloadcomplete();
 			// iosScroll(snpPlansViewLink);
-			planCount = Integer.valueOf(snpPlansNumber.getText());
 			scrollToView(snpPlansViewLink);
 			jsClickNew(snpPlansViewLink);
 			pageloadcomplete();
@@ -1128,6 +1125,44 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			}
 
 		}
+	}
+
+	public int getPlanCountAndViewPlanSummary(String planType) {
+		int planCount = 0;
+		planType = planType.equalsIgnoreCase("mapd") ? "ma" : planType.toLowerCase();
+
+		// Condition for shop plan and enroll plan
+		String expectedUrl = "product=" + planType;
+		if (driver.getCurrentUrl().contains(expectedUrl)) {
+			if (backToPlanResults.isDisplayed()) {
+				jsClickNew(backToPlanResults);
+				pageloadcomplete();
+			}
+		}
+
+		switch (planType) {
+		case "ma":
+			scrollToView(maPlansNumber);
+			planCount = Integer.valueOf(maPlansNumber.getText());
+			break;
+		case "pdp":
+			scrollToView(pdpPlansNumber);
+			planCount = Integer.valueOf(pdpPlansNumber.getText());
+			break;
+		case "medsupp":
+			scrollToView(msPlansNumber);
+			planCount = Integer.valueOf(msPlansNumber.getText());
+			break;
+		case "snp":
+			scrollToView(snpPlansNumber);
+			planCount = Integer.valueOf(snpPlansNumber.getText());
+			break;
+		default:
+			System.out.println("Invalid plantype " + planType);
+			break;
+		}
+
+		viewPlanSummary(planType);
 		return planCount;
 	}
 
@@ -1162,7 +1197,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		scrollToView(ProviderSearchLink);
 		validateNew(ProviderSearchLink);
-//		iosScroll(ProviderSearchLink);
+		// iosScroll(ProviderSearchLink);
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1414,7 +1449,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		// Thread.sleep(2000);
 		return SubmitConfirmation;
 	}
-	
+
 	public DrugDetailsPageMobile navigateToDCEFromDrugDropdown(String planType, String planName) {
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD") || planType.equalsIgnoreCase("SNP")) {
 			List<WebElement> drugLinkDropdown = driver.findElements(By.xpath("//a[contains(text(),'" + planName
@@ -1437,7 +1472,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		return new DrugDetailsPageMobile(driver);
 
 	}
-	
+
 	public boolean verifyAddedDrugCost(String planName, String capturedDrugCost) {
 		WebElement drugCost = driver.findElement(By.xpath("//*[contains(text(),'" + planName
 				+ "')]/ancestor::div[contains(@class, 'module-plan-overview module')]//ul[contains(@class,'benefits-table')]//*[contains(text(),'Estimated Annual')]/following-sibling::span[not(contains(@class,'ng-hide'))]"));
@@ -1447,7 +1482,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			return true;
 		return false;
 	}
-	
+
 	public void validateVPPSummaryPage() {
 		Assertion.assertTrue("user not navigated to VPP Page", driver.getCurrentUrl().contains("plan-summary"));
 	}
@@ -1547,7 +1582,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public boolean getSpecificPlanInfo(String planName) throws InterruptedException {
 		boolean isSpecificPlanInfoPresent = false;
-		//planName.trim().replaceAll("\u00A00", " ").trim();
+		// planName.trim().replaceAll("\u00A00", " ").trim();
 		if (planName.contains("SNP")) {
 			// ElementData elementData = new ElementData("id", "viewDetailsMA");
 			Thread.sleep(4000);
@@ -1582,27 +1617,26 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 
 	public boolean validatePlanNames(String planType, int planCount) {
 
-		/*if (backToPlanResults.isDisplayed()) {
-			jsClickNew(backToPlanResults);
-		}
-*/
+		/*
+		 * if (backToPlanResults.isDisplayed()) { jsClickNew(backToPlanResults); }
+		 */
 		ElementData elementData = new ElementData("className", "module-plan-overview");
 
 		if (planType.equalsIgnoreCase("PDP")) {
 
-//			int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
+			// int pdpPlans = Integer.valueOf(pdpPlansNumber.getText());
 			return planCount == findChildElements(elementData, pdpPlanList).size();
 
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 
-//			int maPlans = Integer.valueOf(maPlansNumber.getText());
+			// int maPlans = Integer.valueOf(maPlansNumber.getText());
 			return planCount == findChildElements(elementData, maPlanList).size();
 		} else if (planType.equalsIgnoreCase("SNP")) {
-//			int snpPlans = Integer.valueOf(snpPlansNumber.getText());
+			// int snpPlans = Integer.valueOf(snpPlansNumber.getText());
 			return planCount == findChildElements(elementData, snpPlanList).size();
 		} else if (planType.equalsIgnoreCase("SNP")) {
 
-//			int snpPlans = Integer.valueOf(snpPlansNumber.getText());
+			// int snpPlans = Integer.valueOf(snpPlansNumber.getText());
 			return planCount == findChildElements(elementData, snpPlanList).size();
 		}
 		return false;
@@ -1901,13 +1935,15 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		WebElement enrollForPlan = null;
 		System.out.println("Enroll in Plan for Plan : " + planName);
 		if (planType.equalsIgnoreCase("PDP")) {
-//			driver.navigate().refresh();
+			// driver.navigate().refresh();
 			Thread.sleep(5000);
 			enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
 					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//*[contains(@class,'enrollment')]//*[contains(@class,'cta-button')]"));
 		} else {
-//			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
-			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName + "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
+			// enrollForPlan = driver.findElement(By.xpath("//a[contains(text(), '" +
+			// planName + "')]/following::a[contains(text(),'Enroll in Plan')][3]"));
+			enrollForPlan = driver.findElement(By.xpath("//a[contains(text(),  '" + planName
+					+ "')]/ancestor::*[contains(@class,'module-plan-overview module')]//div[@class='enroll-details']/a[contains(text(),'Enroll in Plan')]"));
 		}
 		if (enrollForPlan != null) {
 			// iosScroll(enrollForPlan);
@@ -5829,18 +5865,18 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void validateAndClickAddtoCompare(String planType, String planName) throws InterruptedException {
 
 	}
-	
+
 	@FindBy(id = "findProvidersComponentWrap")
 	public WebElement findProvidersComponentWrap;
-	
+
 	@FindBy(id = "addDrugComponentWrap")
 	public WebElement addDrugComponentWrap;
-	
+
 	@FindBy(xpath = "//*[@id='addDrugComponentWrap']//button[text()='Get Started']")
 	public WebElement getStartedAddDrugNBA;
-	
-	
-	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCEFromNBA(String planType, String planName) {
+
+	public pages.mobile.acquisition.dceredesign.GetStartedPageMobile navigateToDCEFromNBA(String planType,
+			String planName) {
 
 		if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			if (validate(addDrugComponentWrap)) {
@@ -5866,7 +5902,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 		return new pages.mobile.acquisition.dceredesign.GetStartedPageMobile(driver);
 	}
-	
+
 	public void removeAddedDrugs(String planType, String planName) {
 		List<WebElement> drugLinkDropdown = driver.findElements(By.xpath(
 				"//div[contains(@class, 'module-plan-overview module')]//*[contains(@id,'drug-list-title-')and contains(@aria-expanded,'false')]"));
@@ -5887,7 +5923,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 		}
 
 	}
-	
+
 	public boolean verifyAddedDrugName(String planName, String drugName) {
 
 		WebElement drugLinkDropdown = driver.findElement(By.xpath("//*[contains(text(),'" + planName
