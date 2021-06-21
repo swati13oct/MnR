@@ -157,7 +157,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// @FindBy(xpath =
 	// ".//*[contains(@id,'colhowdoesthiswork')]//*[@itemprop='significantLink']/*[contains(@class,'cta-button
 	// secondary')and contains(text(),'Get')]")
-	@FindBy(xpath = "//span[text()='Get Started']")
+	@FindBy(xpath = "//*[@id='getstarted']")
 	public WebElement getStarted;
 
 	@FindBy(id = "redirect_content")

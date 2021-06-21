@@ -923,17 +923,17 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	}
 
 	public boolean validateNoPharmaciesErrorMessage() {
-		CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
+		//CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 
 		jsClickNew(indian_tribal_label_filter);
-		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		//CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		if (!noPharmaciesErrorMessage.isDisplayed()) {
-			CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
+			//CommonUtility.waitForPageLoadNewForClick(driver, indian_tribal_label_filter, 60);
 
 			jsClickNew(indian_tribal_label_filter);
 		}
 		sleepBySec(5);
-		CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
+		//CommonUtility.waitForPageLoad(driver, noPharmaciesErrorMessage, 60);
 		Assertion.assertTrue("PROBLEM - unable to locate No Pharmacy Error message",
 				pharmacyValidate(noPharmaciesErrorMessage));
 		return true;

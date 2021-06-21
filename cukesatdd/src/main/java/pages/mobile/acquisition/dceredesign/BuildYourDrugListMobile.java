@@ -23,13 +23,13 @@ import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 
 public class BuildYourDrugListMobile extends UhcDriver {
 
-	@FindBy(xpath = "//input[@id='drugsearch']")
+	@FindBy(xpath = "//input[@id='drugsearchmobile']")
 	public WebElement EnterDrugNameTxt;
 
 	@FindBy(xpath = "//button[@id='addDrug']")
 	public WebElement addMyDrugsBtn;
 
-	@FindBy(xpath = "//span[contains(text(),'Search')]")
+	@FindBy(xpath = "//span[@class='uhc-button__text' and text()='Search']")
 	public WebElement SearchBtn;
 
 	@FindBy(xpath = "//*[@id=\"drug-label\"]")
@@ -108,21 +108,23 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//span[contains(text(),'Build Your Drug List')]")
-	public WebElement addYourDrugHeader;
+	@FindBy(xpath = "//label[text()='Enter Drug  Name']")
+	public WebElement enterYourDrugHeader;
 
 	public void addDrugs(String drugName) throws InterruptedException {
 
 		sendkeysMobile(EnterDrugNameTxt, drugName);
-
+		sleepBySec(3);
 		// scrollToView(addYourDrugHeader);
-		jsClickNew(addYourDrugHeader);
+		// jsClickNew(enterYourDrugHeader);
 
-		// scrollToView(SearchBtn);
+		scrollToView(SearchBtn);
+		// SearchBtn.click();
 		jsClickNew(SearchBtn);
 		pageloadcomplete();
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
+
 		// iosScroll(SelectDrug);
 		jsClickNew(SelectDrug);
 		Thread.sleep(2000);
@@ -207,7 +209,6 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			Assertion.fail("Drug Autocomplete NOT Validated");
 
 	}
-	
 
 	public void clickOnRemoveButton(String drug) {
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + drug + "')]"));
@@ -243,16 +244,20 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) throws InterruptedException {
+		jsClickNew(AddDrugBtn);
+
 		validateNew(EnterDrugNameTxt);
 
 		sendkeysMobile(EnterDrugNameTxt, drugName);
-
-		jsClickNew(addYourDrugHeader);
+		sleepBySec(3);
+		// jsClickNew(enterYourDrugHeader);
 
 		jsClickNew(SearchBtn);
 
+		// SearchBtn.click();
+
 		waitForPageLoadSafari();
-		CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
+		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
 		WebElement SelectDrug = driver
 				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
 		validateNew(SelectDrug);
@@ -438,7 +443,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 					"Drug List Drug Quantity, Frequency and Supply Length Validation FAILED for Drug : " + drugName);
 	}
 
-	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
+	@FindBy(xpath = "//*[text()='Add Drug']")
 	public WebElement AddDrugBtn;
 
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
@@ -452,7 +457,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			validateNew(RecommendedDrug);
 			jsClickNew(RecommendedDrug);
 			waitForPageLoadSafari();
-			CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
+			// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
 			WebElement SelectDrug = driver.findElement(
 					By.xpath("(//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')])[1]"));
 			System.out.println("Drug Search results page is displayed");
@@ -482,16 +487,14 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		}
 		return false;
 	}
-	
+
 	public void validateDrugRecommendationSectionNOTdisplayed(String druglist) {
-		if(!validate(DrugRecommendationHeader) && DrugRecommendationDrugList.isEmpty()) {
+		if (!validate(DrugRecommendationHeader) && DrugRecommendationDrugList.isEmpty()) {
 			System.out.println("Validation PASSED : Drug Recommendation NOT displayed when 25 Drugs added to cabinet ");
-		}
-		else
+		} else
 			Assertion.fail("Validation FAILED : Drug Recommendation displayed when 25 Drugs added to cabinet");
 	}
-	
-	
+
 	public TellUsAboutDrugMobile clickOnEditButton(String drug) {
 
 		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit " + drug + "')]"));
