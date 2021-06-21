@@ -71,7 +71,7 @@ public class BuildYourDrugList extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		// openAndValidate();
+		 openAndValidate();
 	}
 
 	@Override
@@ -284,11 +284,15 @@ public class BuildYourDrugList extends UhcDriver {
 		return new ComparePlansPage(driver);
 	}
 
+	@FindBy(xpath = "//div[contains(@id, 'modal')]//button[contains(@dtmname, 'remove drug:yes')]")
+	public WebElement ConfirmDeleteYesBtn;
+
 	public void deleteDrug(String deleteDrug) {
 		System.out.println("Drug to be removed : " + deleteDrug);
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + deleteDrug + "')]"));
 		jsClickNew(removeLink);
-
+		validateNew(ConfirmDeleteYesBtn);
+		jsClickNew(ConfirmDeleteYesBtn);
 	}
 
 	public TellUsAboutDrug EditDrug(String drugName) {
@@ -317,15 +321,14 @@ public class BuildYourDrugList extends UhcDriver {
 
 		WebElement editLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Edit " + drug + "')]"));
 		jsClickNew(editLink);
-
 		return new TellUsAboutDrug(driver);
-
 	}
 
 	public void clickOnRemoveButton(String drug) {
 		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + drug + "')]"));
 		jsClickNew(removeLink);
-
+		validateNew(ConfirmDeleteYesBtn);
+		jsClickNew(ConfirmDeleteYesBtn);
 	}
 
 	public void validateBuildDrugListPageDisplayed() {

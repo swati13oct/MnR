@@ -210,7 +210,7 @@ public boolean validate_required_field_representative(Map<String, String> Member
 		if(NextBtn.isEnabled()){
 			System.out.println("Next Button is Enabled : Required fields present");
 			//validateNew(SoU_DisagreeRadio);
-			scrollToView(SoU_DisagreeRadio);
+//			scrollToView(SoU_DisagreeRadio);
 			jsClickNew(SoU_DisagreeRadio);
 			if(validateNew(SoU_DisagreeError) && validateNew(CancelEnrollButton)){
 				System.out.println("Error message and Cancel Enrollment Button are displaeyd for Disagree to SoU selection");
@@ -226,10 +226,10 @@ public boolean validate_required_field_representative(Map<String, String> Member
 			if(validate(AuthorizedRepresentativeRadio)){
 				AuthorizedRepresentativeRadio.click();
 			}*/
-			scrollToView(SoU_AgreeRadio);
+//			scrollToView(SoU_AgreeRadio);
 			jsClickNew(SoU_AgreeRadio);
 			
-			scrollToView(AuthorizedRepresentativeRadio);
+//			scrollToView(AuthorizedRepresentativeRadio);
 			jsClickNew(AuthorizedRepresentativeRadio);
 			if(NextBtn.isEnabled() && validate(Authorized_FirstName) && validate(Authorized_LastName) 
 					&& validate(Authorized_Relation) && validate(Authorized_Address) && validate(Authorized_City) && validate(Authorized_State)
@@ -245,33 +245,33 @@ public boolean validate_required_field_representative(Map<String, String> Member
 			Thread.sleep(6000);
 			//jsClickNew(ApplicantRadio);
 			
-			scrollToView(AuthorizedRepresentativeRadio);
+//			scrollToView(AuthorizedRepresentativeRadio);
 			jsClickNew(AuthorizedRepresentativeRadio);
 			
-			scrollToView(Authorized_FirstName);
+//			scrollToView(Authorized_FirstName);
 			sendkeysMobile(Authorized_FirstName, AuthorizationFirstname);
 			
-			scrollToView(Authorized_LastName);
+//			scrollToView(Authorized_LastName);
 			sendkeysMobile(Authorized_LastName, AuthorizationLastname);
 			
-			scrollToView(Authorized_Relation);
+//			scrollToView(Authorized_Relation);
 			sendkeysMobile(Authorized_Relation, AuthorizationRelationship);
 			
-			scrollToView(Authorized_Address);
+//			scrollToView(Authorized_Address);
 			sendkeysMobile(Authorized_Address, AuthorizationAddress);
 			
-			scrollToView(Authorized_City);
+//			scrollToView(Authorized_City);
 			sendkeysMobile(Authorized_City, AuthorizationCity);
 
 			selectFromDropDownByValue(Authorized_State, AuthorizationStateDisplay);
 
-			scrollToView(Authorized_ZipCode);
-			sendkeysMobile(Authorized_ZipCode, AuthorizationZip);
+//			scrollToView(Authorized_ZipCode);
+			sendKeysByCharacter(Authorized_ZipCode, AuthorizationZip);
 			
-			scrollToView(Authorized_PhNo);
+//			scrollToView(Authorized_PhNo);
 			sendKeysByCharacter(Authorized_PhNo, AuthorizationPhoneNo);
 			
-			scrollToView(Authorized_Apartment);
+//			scrollToView(Authorized_Apartment);
 			sendkeysMobile(Authorized_Apartment, AuthorizationApartmentSuite);
 			if(NextBtn.isEnabled()){
 				validation_Flag = (!validation_Flag)?false:true;

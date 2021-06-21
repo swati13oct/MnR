@@ -18,6 +18,7 @@ import org.testng.Assert;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.ole.CancelOLEModal;
 import pages.acquisition.ole.ConfirmYourEligibilityPage;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
@@ -159,6 +160,9 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]")
 	private WebElement partBStartDateField;
+	
+	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
+	private WebElement medicaidNumberField;
 
 	@FindBy(css = "a#save-return-button")
 	private WebElement saveandReturn;
@@ -177,6 +181,24 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	@FindBy(css = "a#visitor-profile-header")
 	private WebElement lnkProfile;
+	
+	@FindBy(xpath = "(//*[@class = 'logo']//img)[2]")
+	private WebElement logoimageOLE;
+
+	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")
+	private WebElement CancellationModalOLE;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Create a Profile')])[2]")
+	private WebElement CreateProfile;
+
+	@FindBy(xpath = "(//a[contains(text(),'Sign In')])[2]")
+	private WebElement SignIn;
+	
+	@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
+	private WebElement LeaveOnlineApplication;
+
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[4]")
+	private WebElement closepopup;
 
 	private WebElement specialElectionPage;
 
@@ -241,7 +263,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 			// sendkeys(MailingAdd_City, Mailing_City);
 			selectFromDropDownByValue(MailingAdd_State_DropDown, Mailing_State);
 			// sendkeysNew(MailingAdd_Zip, Mailing_Zip);
-			sendkeysMobile(MailingAdd_Zip, Mailing_Zip);
+			sendKeysByCharacter(MailingAdd_Zip, Mailing_Zip);
 		}
 		// sendkeys(Email, EmailAddress);
 		sendkeysMobile(Email, EmailAddress);
@@ -272,7 +294,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 	public LearnMoreModalMobile OpenLearnMore() {
 		validate(RightRail_LearnMoreLink);
-		RightRail_LearnMoreLink.click();
+		jsClickNew(RightRail_LearnMoreLink);
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
@@ -337,7 +359,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public SpecialElectionPeriodPagemobile navigate_to_SEP_page(Map<String, String> MedicareDetailsMap)
+	public SpecialElectionPeriodPageMobile navigate_to_SEP_page(Map<String, String> MedicareDetailsMap)
 			throws InterruptedException {
 
 		validateNew(NextBtn);
@@ -358,7 +380,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		Thread.sleep(3000);
 		if (driver.getCurrentUrl().contains("special")) {
 			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPagemobile(driver);
+			return new SpecialElectionPeriodPageMobile(driver);
 
 		} else if (driver.getCurrentUrl().contains("eligibility"))
 
@@ -377,7 +399,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 				} else {
 					System.out.println("OLE SEP Page is not Displayed");
 				}
-				return new SpecialElectionPeriodPagemobile(driver);
+				return new SpecialElectionPeriodPageMobile(driver);
 			}
 		}
 		return null;
@@ -419,7 +441,7 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		validateNew(MobileNumberField);
 		// sendkeysMobile(MobileNumberField, MobileNumber);
-		sendKeysByCharacter(MobileNumberField, HomeNumber);
+		sendKeysByCharacter(MobileNumberField, MobileNumber);
 		// sendkeysNew(MiddleNameField, MiddleName);
 		sendkeysMobile(MiddleNameField, MiddleName);
 		if (emailConfirmation.equalsIgnoreCase("YES")) {
@@ -571,17 +593,17 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		return false;
 	}
 
-	public SpecialElectionPeriodPagemobile navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap)
+	public SpecialElectionPeriodPageMobile navigate_to_SEP_page_Medicaid(Map<String, String> MedicareDetailsMap)
 			throws InterruptedException {
 
 		validateNew(NextBtn);
-		scrollToView(NextBtn);
 		jsClickNew(NextBtn);
 
 		Thread.sleep(3000);
-		if (driver.getCurrentUrl().contains("special")) {
-			Assert.assertTrue(driver.getCurrentUrl().contains("special"), "OLE SEP Page is Displayed");
-			return new SpecialElectionPeriodPagemobile(driver);
+		// if(driver.getCurrentUrl().contains("special")){
+		if (driver.getCurrentUrl().contains("special-election-period")) {
+			Assert.assertTrue(driver.getCurrentUrl().contains("special-election-period"), "OLE SEP Page is Displayed");
+			return new SpecialElectionPeriodPageMobile(driver);
 
 		} else if (driver.getCurrentUrl().contains("eligibility"))
 
@@ -591,15 +613,16 @@ public class PersonalInformationPageMobile extends UhcDriver {
 					MedicareDetailsMap);
 			if (confirmYourEligibilityPage != null) {
 
-				scrollToView(NextBtn);
+				validateNew(NextBtn);
 				jsClickNew(NextBtn);
 				// waitForPageLoadSafari();
-				if (driver.getCurrentUrl().contains("special")) {
+
+				if (driver.getCurrentUrl().contains("special-election-period")) {
 					System.out.println("OLE SEP Page is Displayed");
 				} else {
 					System.out.println("OLE SEP Page is not Displayed");
 				}
-				return new SpecialElectionPeriodPagemobile(driver);
+				return new SpecialElectionPeriodPageMobile(driver);
 			}
 		}
 		return null;
@@ -631,15 +654,13 @@ public class PersonalInformationPageMobile extends UhcDriver {
 
 		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date");
 		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
-		// String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber");
+		 String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber");
 		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
-			// sendkeysNew(partAStartDateField, PartAeffectiveDate);
-			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
-			// sendkeysNew(partBStartDateField, PartBeffectiveDate);
-			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
-			// sendkeysNew(medicaidNumberField,MedicaidNo);
+			sendKeysByCharacter(partAStartDateField, PartAeffectiveDate);
+			sendKeysByCharacter(partBStartDateField, PartBeffectiveDate);
+			sendKeysByCharacter(medicaidNumberField,MedicaidNo);
 		}
 
 		return new ConfirmYourEligibilityPageMobile(driver);
@@ -687,12 +708,32 @@ public class PersonalInformationPageMobile extends UhcDriver {
 		if (validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Confirm')]")))) {
 			System.out.println("OLE Confirm your Eligibility is Displayed");
 
-			sendkeysMobile(partAStartDateField, PartAeffectiveDate);
-			sendkeysMobile(partBStartDateField, PartBeffectiveDate);
+			sendKeysByCharacter(partAStartDateField, PartAeffectiveDate);
+			sendKeysByCharacter(partBStartDateField, PartBeffectiveDate);
 			// sendkeysNew(medicaidNumberField,MedicaidNo);
 		}
 
 		return new ConfirmYourEligibilityPageMobile(driver);
+	}
+	
+	public CancelOLEModalMobile OpenLogoOLEPages() {
+		validate(logoimageOLE);
+		jsClickNew(logoimageOLE);
+
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		if(validate(CancellationModalOLE)){
+			System.out.println("OLE Cancel Enrollment Modal is Displayed");
+			validate(CreateProfile);
+			validate(SignIn);
+			validate(LeaveOnlineApplication);
+			jsClickNew(closepopup);
+			return new CancelOLEModalMobile(driver);
+		}
+		return null;
 	}
 
 }

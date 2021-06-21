@@ -61,7 +61,7 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, disclosureBox, 30);
 	}
 
-	public SpecialElectionPeriodPagemobile Validate_and_Enter_Details_for_YourProvide_Section(
+	public SpecialElectionPeriodPageMobile Validate_and_Enter_Details_for_YourProvide_Section(
 			Map<String, String> MedicareDetailsMap) {
 		String Providername = MedicareDetailsMap.get("Provider Name");
 		String ProviderAddress = MedicareDetailsMap.get("Provider Street Address");
@@ -93,7 +93,7 @@ public class UseAndDisclosureAuthorizationPageMobile extends UhcDriver {
 			System.out.println("Disclosure is not displayed");
 		}
 //		return new PersonalInformationPageMobile(driver);
-		return new SpecialElectionPeriodPagemobile(driver);
+		return new SpecialElectionPeriodPageMobile(driver);
 
 	}
 }

@@ -87,7 +87,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And user clicks on disclaimers link of terms & conditions page
     And user clicks on agents & brokers link of disclaimers page
     #And user clicks on Request Assistance and validates modal window ulayer
-    And user verifies home link of agents & brokers page
+    #And user verifies home link of agents & brokers page
 
     @vppPlanCompareCommon_AARP01 @regressionAARP
     Examples: 
@@ -350,16 +350,16 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
 
     @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @vbfGate
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
-      | 00016 | AARP |   55343 | NO            | Hennepin County | MAPD     |             4,1,2 | future   |           5 |
-      | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |             2,1   | future   |           4 |
+      | TID   | site | zipcode | isMultiCounty | county          		| plantype | removePlanIndices | planyear | planIndices |
+      | 00016 | AARP |   55343 | NO            | Hennepin County 		| MAPD     |             3,1,2 | future   |           5 |
+      | 00016 | AARP |   33111 | NO            | Miami-Dade County 	| SNP    	 |             2,1   | future   |           4 |
 
     @vppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 @regressionUHC @sanity
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
-      | 00016 | UHC  |   55343 | NO            | Hennepin County | MAPD     |               2,1 | future   |           5 |
-      | 00016 | UHC  |   55343 | NO            | Hennepin County | PDP      |               2,1 | future   |           3 |
-      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |             2,1   | future   |           4 |
+      | TID   | site | zipcode | isMultiCounty | county          		| plantype | removePlanIndices | planyear | planIndices |
+      | 00016 | UHC  |   55343 | NO            | Hennepin County 		| MAPD     |               2,1 | future   |           5 |
+      | 00016 | UHC  |   55343 | NO            | Hennepin County 		| PDP      |               2,1 | future   |           3 |
+      | 00016 | UHC  |   33111 | NO            | Miami-Dade County 	| SNP	     |             	 2,1 | future   |           4 |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on OON Toggle for Medical Benefits and Additional Benefits on <site>
     Given the user is on medicare acquisition site landing page
@@ -381,12 +381,12 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     @vppPlanCompareCommon_AARP03 @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | future   |           4 |               4,1 |
+      | 00017 | AARP |   78006 | YES           | Bexar County | MAPD     | future   |           4 |               3,1 |
 
     @vppPlanCompareCommon_UHC03 @regressionUHC @vbfGate
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county       | plantype | planyear | planIndices | removePlanIndices |
-      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | future   |           4 |               1,4 |
+      | 00017 | UHC  |   78006 | YES           | Bexar County | MAPD     | future   |           4 |               1,3 |
 
   Scenario Outline: <TCID> - Plan Type: <plantype> - Navigation for plan comapre to OLE on <site>
     Given the user is on medicare acquisition site landing page

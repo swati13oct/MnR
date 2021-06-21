@@ -264,7 +264,7 @@ public class ConfirmYourEligibilityPageMobile extends UhcDriver{
 	public void openAndValidate() {
 		
 		System.out.println("Validating Medicare Information for OLE");
-		CommonUtility.waitForPageLoadNew(driver, MedicalInfoPageHeader, 30);
+		validateNew(MedicalInfoPageHeader, 30);
 		//validateNew(SelectCardA);
 		//validateNew(SelectCardB);
 	}
