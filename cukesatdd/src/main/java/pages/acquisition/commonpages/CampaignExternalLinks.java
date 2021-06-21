@@ -148,6 +148,9 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "//span[contains(@id,'plans_zip_head')]//h2")
 	private WebElement zipcodeonpage;
+	
+	
+	//Locators for Scenario 10 - New LPM
 
 	@FindBy(xpath = "//*[contains(@href,'#modal--location-change')]")
 	private WebElement LocationLink;
@@ -166,7 +169,6 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath = "(//label[@class='c-input-control__label'])[1]")
 	private WebElement FirstZipCode;
-
 
 
 	@FindBy(xpath ="//button[contains(@id,'drawer')]")
@@ -192,7 +194,7 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath ="//p[@id='field-lname-error-msg']")
 	private WebElement LastNameErroMsg;
 
-//Enter a last name and must contain only letters, spaces, hyphensand apostrophes
+//Enter a last name and must contain only letters, spaces, hyphens and apostrophes
 
 
 	@FindBy(xpath ="//input[@class='uhc-input uhc-input--block mobInput field-lname pac-target-input']")
@@ -200,6 +202,7 @@ public class CampaignExternalLinks extends UhcDriver {
 
 	@FindBy(xpath ="//p[@id='field-address1-error-msg']")
 	private WebElement AddressErroMsg;
+	
 //Enter an address that contains only numbers, letters, apostrophe, comma, hyphen, pound, ampersand, or space
 
 	@FindBy(xpath ="//input[@id='newsletter-input5']")
@@ -239,6 +242,9 @@ public class CampaignExternalLinks extends UhcDriver {
 	
 	@FindBy(xpath = "//a[contains(@data-asset-name,'Drug cost estimator')]")
 	private WebElement dceExternalLinktakeadvantage;
+	
+	@FindBy(xpath = "//a[contains(text(),'Estimate Your Prescription Drug Costs')]")
+	private WebElement dceexternallinkMA;
 
 
 //Enter a city that only contains non-numeric characters, apostrophe , hyphen or space
@@ -766,21 +772,6 @@ public class CampaignExternalLinks extends UhcDriver {
 		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("UHC External Link Page opens successsfully");
-		} else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/take-advantage.html")) {
-			Assertion.assertTrue(true);
-			System.out.println("AARP External Link Page opens successsfully");
-		} else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/medicare-prescription-drug-plans.html")) {
-			Assertion.assertTrue(true);
-			System.out.println("AARP External Link Page opens successsfully");
-		} else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/medicare-advantage-plans.html")) {
-			Assertion.assertTrue(true);
-			System.out.println("AARP External Link Page opens successsfully");
-		} else if (driver.getCurrentUrl().contains("https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html")) {
-			Assertion.assertTrue(true);
-			System.out.println("UHC External Link Page opens successsfully");
-		} else if (driver.getCurrentUrl().contains("https://www.aarpmedicareplans.com/lp/medicare-plans.html")) {
-			Assertion.assertTrue(true);
-			System.out.println("AARP External Link Page opens successsfully");
 		} else
 			Assertion.fail("AARP/UHC External Link page is not opening up");
 		threadsleep(8);
@@ -798,7 +789,8 @@ public class CampaignExternalLinks extends UhcDriver {
 		if(validate(workingHrs)) {
 			Assertion.assertTrue("Working hours Displayed on Page : ", workingHrs.getText().trim().equals(expWorkingHrs));
 		}
-	}
+		}
+	
 	
 	public AcquisitionHomePage clickOnmedicareplans11backLink(String zipcode) {
 		CommonUtility.checkPageIsReadyNew(driver);
@@ -1539,7 +1531,7 @@ public class CampaignExternalLinks extends UhcDriver {
 		threadsleep(5);
 		LocationLink.click();
 		threadsleep(8);
-		waitforElementNew(InputZipCode);
+//		waitforElementNew(InputZipCode);
 		InputZipCode.clear();
 		InputZipCode.sendKeys(zipcodeMulti);
 		jsClickNew(LocationBtn);
@@ -1660,4 +1652,17 @@ public class CampaignExternalLinks extends UhcDriver {
 			}
 			
 		}
+		
+		public void validateDCEExternallinkMA() {
+			parentWindow = driver.getWindowHandle();
+			dceexternallinkMA.click();
+			Set<String> tabs_windows = driver.getWindowHandles();
+			Iterator<String> itr = tabs_windows.iterator();
+			while (itr.hasNext()) {
+				String window = itr.next();
+				if (!parentWindow.equals(window)) {
+					driver.switchTo().window(window);
+				}
+			}
+}
 }

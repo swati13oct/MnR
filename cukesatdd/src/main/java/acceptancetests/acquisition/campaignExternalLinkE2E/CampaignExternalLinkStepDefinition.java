@@ -859,6 +859,14 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		campaignExternalLinkspage.validateFindPlansInyourArea();
 		campaignExternalLinkspage.naviagteBack();
 	}
+	
+	@When ("user clicks on Estimate Your Prescription Drug Costs from MA external page")
+	public void user_clicks_on_Estimate_Prescription_Drug_Costs_MA_External_page() {
+			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+			campaignExternalLinkspage.validateDCEExternallinkMA();
+
+}
 
 	@Then("^user clicks on find a doctor and validates the page$")
 	public void user_clicks_on_find_a_doctor_and_validates_the_page() throws Throwable {
@@ -883,7 +891,7 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 	}
 	
 	@When ("user clicks on Drug cost estimator from external page")
-	public void user_clicks_on_Drug_cost_estimator_from_external_page_to_open_a_new_tab() {
+	public void user_clicks_on_Drug_cost_estimator_from_external_page() {
 			CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
 					.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 			campaignExternalLinkspage.navigateToDCERedesignFromExternaltakeadvantagePage();
@@ -970,6 +978,13 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 		
 		campaignExternalLinkspage.navigateBacktoExternalurl(url);
 	
+	}
+	
+	@When("^user clicks on Find Plans and Pricing to open in same tab$")
+	public void user_clicks_on_Find_Plans_and_Pricing_to_open_in_same_tab() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickFindPlansPricing();
 	}
 	}
 
