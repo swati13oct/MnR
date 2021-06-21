@@ -25,19 +25,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.PrescriptionsProvidersBenefitsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.dceredesign.BuildYourDrugList;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.dceredesign.SwitchToGeneric;
-import pages.acquisition.dceredesign.TellUsAboutDrug;
-import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
+import pages.acquisition.dceredesign.*;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 /**
@@ -53,6 +49,13 @@ public class DCEStepDefinitionAARP {
 	}
 
 	private WebDriver driver;
+
+	private Scenario scenario;
+
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 	@Then("^the user validates Get Started Page$")
 	public void the_user_validates_Get_Started_Page() throws Throwable {
@@ -801,6 +804,8 @@ public class DCEStepDefinitionAARP {
 	public void the_user_navigates_to_Med_Ed_Prescription_Drugs_Page() throws Throwable {
 		AcquisitionHomePage acquisitionHomePage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		System.out.println("Selecting State in Acq Home page so Med ED CLassic page is displayed...");
+		//acquisitionHomePage.selectState("Florida");
 		acquisitionHomePage.navigateToMedEdPresDrugPage();
 
 	}
@@ -2457,9 +2462,10 @@ public class DCEStepDefinitionAARP {
 			Assertion.fail("DCE Redesign page object not loaded");
 	}
 
-	@Then("^the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page$")
+	@Then("^the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page$")
 	public void the_user_validates_correct_Copay_section_view_and_LIS_message_for_LIS_Buydown_Plan_on_DCE_details_Page()
 			throws Throwable {
+        scenario.log("Sneha Dwarakanath - Change made 06/08/2021 - F608087 - DCE | Copay Buydown, Deductible Display Change");
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateLISBuyDown_CopaySection_LISAlert();
@@ -2910,7 +2916,19 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_default_view_for_Plan_Effective_Date() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateDefaultPED();
+		scenario.log("Sneha Dwarakanath - Updated the stepdef to validate current plan year in default PED text. For F628155 - DCE | Plan Effective Null Values for Compare Flows (PRB0982203)");
+		String testSiteUrl=(String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String currentEnvTime=drugDetailsPage.getAcqTestEnvSysTime(testSiteUrl);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
+		String[] tmpDateAndTime=currentEnvTime.split(" ");
+		String[] tmpDate=tmpDateAndTime[0].split("/");
+		String envMonth=tmpDate[0];
+		System.out.println("TEST - sysTimeMonth = "+envMonth);
+		String envTimeYear=tmpDate[tmpDate.length-1];
+		System.out.println("TEST - sysTimeYear = "+envTimeYear);
+		drugDetailsPage.validateDefaultPED(envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_MONTH, envMonth);
 	}
 
 	@Then("^the user validates Change effective date Dropdown$")
@@ -2944,7 +2962,9 @@ public class DCEStepDefinitionAARP {
 	public void the_user_validates_Reset_effective_date() throws Throwable {
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateResetEffectiveDate();
+		scenario.log("Sneha Dwarakanath - Updated the stepdef to validate current plan year in default PED text. For F628155 - DCE | Plan Effective Null Values for Compare Flows (PRB0982203)");
+		String envTimeYear = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR);
+		drugDetailsPage.validateResetEffectiveDate(envTimeYear);
 	}
 
 	@Then("^the user validate no bar is displayed for November and December$")
@@ -3016,5 +3036,43 @@ public class DCEStepDefinitionAARP {
 		getStartedPage.EnterNonMemberDetailsAndImport(NonMember_DOB, NonMember_Zip, NonMember_Gender);
 	}
 
+	/**
+	 * Step Header Flags as follows
+	 * C - Current
+	 * E - Enabled
+	 * D - Disabled
+	 **/
+	@Then("the user validates the Step Header as follows")
+	public void the_user_validates_teh_step_header_as_follows(io.cucumber.datatable.DataTable attributes) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header validation Added --> C for Current, E for Enabled, D for Disabled ");
+		Map<String,String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		String StepHeaderFlag = memberAttributesMap.get("Flags");
+		System.out.println("Flags -->>"+StepHeaderFlag);
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		dceStepHeader.validateStepHeader(StepHeaderFlag);
+	}
+	@Then("the user clicks on Step Header Step {int} to land on Build your drug list Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_build_your_drug_list_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		BuildYourDrugList buildDrugListPage = dceStepHeader.ClickStep2_NavigateDrugListPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);
+	}
 
+	@Then("the user clicks on Step Header Step {int} to land on Drug Details Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_drug_details_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		DrugDetailsPage drugDetailsPage = dceStepHeader.ClickStep3_NavigateDrugDetailsPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+	}
+
+	@Then("the user clicks on Step Header Step {int} to land on Drug Summary Page")
+	public void the_user_clicks_on_step_header_step_to_land_on_drug_summary_page(Integer int1) {
+		scenario.log("Sneha Dwarakanath - Change made 06/07/2021 - Step Header Navigation validation Added ");
+		DCEStepHeader dceStepHeader = new DCEStepHeader(driver);
+		DrugSummaryPage drugSummaryPage = dceStepHeader.ClickStep3_NavigateDrugSummaryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+	}
 }

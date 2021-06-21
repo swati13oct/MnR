@@ -23,11 +23,17 @@ import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 
 public class BuildYourDrugListMobile extends UhcDriver {
 
-	@FindBy(xpath = "//input[@id='drugsearchmobile']")
+	@FindBy(css = "#drugsearchmobile")
 	public WebElement EnterDrugNameTxt;
 
 	@FindBy(xpath = "//button[@id='addDrug']")
 	public WebElement addMyDrugsBtn;
+
+	@FindBy(css = "#adddrug")
+	public WebElement addDrugButton;
+
+	@FindBy(css = "#previousButton")
+	public WebElement getStartedButton;
 
 	@FindBy(xpath = "//span[@class='uhc-button__text' and text()='Search']")
 	public WebElement SearchBtn;
@@ -71,8 +77,16 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	// span[contains(text(),'Add to drug List')]
 
-	@FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
-	public WebElement reviewDrugCost;
+	/*
+	 * @FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
+	 * public WebElement reviewDrugCost;
+	 */
+
+	@FindBy(xpath = "//div[contains(@class,'lg-center')]/button[contains(@dtmname,'review drug')]")
+	public WebElement reviewDrugCostButtonFooter;
+
+	@FindBy(xpath = "//button[contains(@class,'uhc-button') and contains(@dtmname,'review drug costs')]")
+	public WebElement reviewDrugCostButtonHeader;
 
 	@FindBy(css = "#zip-code")
 	public WebElement zipCodeTxtbox;
@@ -84,14 +98,13 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		// CommonUtility.waitForPageLoad(driver, addDrugDetailsPage, 10);
-		// openAndValidate();
+		openAndValidate();
 	}
 
 	@Override
 	public void openAndValidate() {
-		validateNew(EnterDrugNameTxt);
-		validateNew(SearchBtn);
-		validateNew(PreviousBtn);
+		validateNew(addDrugButton);
+		validateNew(getStartedButton);
 	}
 
 	public void validateNoDrug_ErrorMsg() {
@@ -108,24 +121,32 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//label[text()='Enter Drug  Name']")
-	public WebElement enterYourDrugHeader;
+	// @FindBy(xpath = "//span[contains(text(),'Build Your Drug List')]")
+	@FindBy(xpath = "//h2[contains(text(),'Add Drug')]")
+	public WebElement addYourDrugHeader;
 
 	public void addDrugs(String drugName) throws InterruptedException {
 
+		jsClickNew(addDrugButton);
+
 		sendkeysMobile(EnterDrugNameTxt, drugName);
-		sleepBySec(3);
-		// scrollToView(addYourDrugHeader);
-		// jsClickNew(enterYourDrugHeader);
+
+		// jsClickNew(addYourDrugHeader);
 
 		scrollToView(SearchBtn);
 		// SearchBtn.click();
 		jsClickNew(SearchBtn);
 		pageloadcomplete();
-		WebElement SelectDrug = driver
-				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
+		/*
+		 * WebElement SelectDrug = driver .findElement(By.
+		 * xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName +
+		 * "')]"));
+		 */
 
-		// iosScroll(SelectDrug);
+		WebElement SelectDrug = driver
+
+				.findElement(By.xpath("//p[normalize-space()='" + drugName + "']/following-sibling::button"));
+
 		jsClickNew(SelectDrug);
 		Thread.sleep(2000);
 		//
@@ -135,8 +156,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public DrugSummaryPageMobile navigateToDrugSummay() {
-		validateNew(reviewDrugCost);
-		jsClickNew(reviewDrugCost);
+		validateNew(reviewDrugCostButtonHeader);
+		jsClickNew(reviewDrugCostButtonHeader);
 		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoadNew(driver, reviewDrugCostPageHeading, 20);
 		if (validateNew(reviewDrugCostPageHeading)) {
@@ -170,11 +191,6 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		if (currentUrl().contains("/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPageMobile(driver);
 		return null;
-	}
-
-	public void clickReviewDrugCostBtn() {
-
-		jsClickNew(reviewDrugCost);
 	}
 
 	@FindBy(xpath = "//label[@id='drug-label']")
@@ -231,8 +247,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	public ZipCodeAndPlanYearCapturePageMobile navigateToZipEntryPage() {
 		// pageloadcomplete();
-		iosScroll(reviewDrugCost);
-		jsClickNew(reviewDrugCost);
+		// iosScroll(reviewDrugCost);
+		jsClickNew(reviewDrugCostButtonFooter);
 		// CommonUtility.waitForPageLoadNew(driver, zipCodeTxtbox, 20);
 		if (validateNew(zipCodeTxtbox)) {
 			return new ZipCodeAndPlanYearCapturePageMobile(driver);
@@ -244,22 +260,22 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 
 	public TellUsAboutDrugMobile SearchaddDrugs(String drugName) throws InterruptedException {
-		jsClickNew(AddDrugBtn);
+
+		jsClickNew(addDrugButton);
+		CommonUtility.waitForPageLoad(driver, EnterDrugNameTxt, 20);
 
 		validateNew(EnterDrugNameTxt);
-
 		sendkeysMobile(EnterDrugNameTxt, drugName);
-		sleepBySec(3);
-		// jsClickNew(enterYourDrugHeader);
+
+		// jsClickNew(addYourDrugHeader);
 
 		jsClickNew(SearchBtn);
 
-		// SearchBtn.click();
-
-		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
+
 		WebElement SelectDrug = driver
-				.findElement(By.xpath("//uhc-list-item//button[contains(@aria-label, 'Select " + drugName + "')]"));
+				.findElement(By.xpath("//p[normalize-space()='" + drugName + "']/following-sibling::button"));
+
 		validateNew(SelectDrug);
 		jsClickNew(SelectDrug);
 		pageloadcomplete();
@@ -283,8 +299,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public WebElement DrugDetails_DrugCostsHeading;
 
 	public DrugDetailsPageMobile navigateToDrugDetailsPage() {
-		validateNew(reviewDrugCost);
-		jsClickNew(reviewDrugCost);
+		validateNew(reviewDrugCostButtonFooter);
+		jsClickNew(reviewDrugCostButtonFooter);
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
 			return new DrugDetailsPageMobile(driver);

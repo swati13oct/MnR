@@ -213,7 +213,7 @@ public abstract class UhcDriver {
 
 	public void startNewMobile(String url) {
 
-		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.get(url);
 	}
@@ -614,54 +614,57 @@ public abstract class UhcDriver {
 	 * To handle iOS specific click problem By: Harshal Ahire
 	 */
 	public void iOSClick(WebElement element) {
-
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});", element);
-			//checkElementisEnabled(element);
+			js.executeScript(
+					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
+					element);
+			// checkElementisEnabled(element);
 			scrollToView(element);
 			element.click();
-//			sleepBySec(2);
+			sleepBySec(2);
 			String seleniumClick = element.getAttribute("automationTrack");
 			System.out.println("Selenium Click executed........" + seleniumClick);
-			
-			//If automationTrack is null and element is displayed then selenium click was not successful
-			seleniumClick = (seleniumClick == null && element.isDisplayed())?"false":"true";
 
-			//If automationTrack is null and element is displayed, then selenium click was not successful
+			// If automationTrack is null and element is displayed,
+			// then selenium click was not successful
 			seleniumClick = (seleniumClick == null && element.isDisplayed()) ? "false" : "true";
-			
-			if(!seleniumClick.equalsIgnoreCase("true")) {
-				// checkElementisEnabled(element);
+
+			if (!seleniumClick.equalsIgnoreCase("true")) {
 				System.out.println("Trying JSClick on IOS ..........");
-				//iosScroll(element);
-				//JavascriptExecutor js1 = (JavascriptExecutor) driver;
-				js.executeScript("arguments[0].click();", element);
-
+				JavascriptExecutor js1 = (JavascriptExecutor) driver;
+				js1.executeScript("arguments[0].click();", element);
 			}
-
 		} catch (NoSuchElementException | StaleElementReferenceException e) {
 			System.out.println("Selenium click got executed but, " + e.getMessage());
 		} catch (Exception e) {
 			System.out.println("Click and JsClick failed");
-
 		}
-
 	}
 
 	public void jsClickNew(WebElement element) {
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
-				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].click();", element);
-		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+		
 
-			/*
-			 * To handle iOS specific click problem By: Harshal Ahire
-			 */
-			iOSClick(element);
-
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
+				driver.getClass().toString().toUpperCase().contains("IOS")) {
+			scrollToView(element);
 		}
+		js.executeScript("arguments[0].click();", element);
+	
+
+		/*if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+			
+			 * To handle iOS specific click problem By: Harshal Ahire
+			 
+			iOSClick(element);
+		} else {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+				scrollToView(element);
+			}
+			js.executeScript("arguments[0].click();", element);
+		}*/
 
 	}
 

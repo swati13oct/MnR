@@ -101,8 +101,8 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_AMP | AARP | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
       | E2E Scenario 5_AMP | AARP | enroll/ma-enrollment.html                 | MA Enrollment           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
       | E2E Scenario 5_AMP | AARP | enroll/pdp-enrollment.html                | PDP Enrollment          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
+      | E2E Scenario 5_AMP | AARP | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 5_AMP | AARP | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
 
     @avengersRegressionUHC
     Examples:
@@ -112,31 +112,31 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | E2E Scenario 5_UMS | UHC  | shop/medicare-advantage-veteran-plan.html | MA Veteran Plan         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
       | E2E Scenario 5_UMS | UHC  | enroll/ma-enrollment.html                 | MA Enrollment           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
       | E2E Scenario 5_UMS | UHC  | enroll/pdp-enrollment.html                | PDP Enrollment          | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
-      | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
+      | E2E Scenario 5_UMS | UHC  | shop/compare.html                         | ShopPlan: Compare       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 5_UMS | UHC  | enroll/ms-apply.html                      | ShopPlan: MS Enrollment | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
 
     @avengersRegressionAARP
     Examples:
       | Scenario               | site | path                                | pageName                     | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 2_AMP     | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 5_AMP     | AARP | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 4_AMP     | AARP | enroll.html                         | ShopPlan: Enroll             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | UAT E2E Scenario 1_AMP | AARP | shop.html                           | ShopPlan: Shop Hub           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 4_AMP     | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
-      | E2E Scenario 4_AMP     | AARP | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 4_AMP     | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 5_AMP     | AARP | shop/estimate.html                  | Estimate                     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | false   |
+      | E2E Scenario 2_AMP     | AARP | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 5_AMP     | AARP | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 4_AMP     | AARP | enroll.html                         | ShopPlan: Enroll             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Scenario 1_AMP | AARP | shop.html                           | ShopPlan: Shop Hub           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 4_AMP     | AARP | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
+      | E2E Scenario 4_AMP     | AARP | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 4_AMP     | AARP | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 5_AMP     | AARP | shop/estimate.html                  | Estimate                     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | false   |
 
     @avengersRegressionUHC
     Examples:
       | Scenario               | site | path                                | pageName                     | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | E2E Scenario 2_UMS     | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 4_UMS     | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[4] | true    |
-      | E2E Scenario 4_UMS     | UHC  | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 4_UMS     | UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 5_UMS     | UHC  | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | E2E Scenario 4_UMS     | UHC  | enroll.html                         | ShopPlan: Enroll             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
-      | UAT E2E Scenario 1_UMS | UHC  | shop.html                           | ShopPlan: Shop Hub           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[3] | true    |
+      | E2E Scenario 2_UMS     | UHC  | shop/medicare-advantage-plans.html  | ShopPlan: Shop MA Plan       | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 4_UMS     | UHC  | shop/medicare-supplement-plans.html | ShopPlan: Shop Med Supp Plan | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[6] | true    |
+      | E2E Scenario 4_UMS     | UHC  | shop/prescription-drug-plans.html   | ShopPlan: Shop PDP Plan      | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 4_UMS     | UHC  | shop/dual-special-needs-plans.html  | ShopPlan: Shop DSNP Plan     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 5_UMS     | UHC  | shop/compare.html                   | ShopPlan: Compare            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | E2E Scenario 4_UMS     | UHC  | enroll.html                         | ShopPlan: Enroll             | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Scenario 1_UMS | UHC  | shop.html                           | ShopPlan: Shop Hub           | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
       | E2E Scenario 5_UMS     | UHC  | shop/estimate.html                  | Estimate                     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | false   |
 
 
@@ -679,7 +679,7 @@ Feature: 1.13 UAT - Shop Blog Pages flows
       | PagePath | <path>     |
     Then the user click on Get a Plan Recommendation Button and gets back to medicare articles page
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP @featurePass
     Examples:
       | Scenario               | site | path                                              | pageName                                |
       | UAT E2E Scenario 2_AMP | AARP | medicare-articles/eligibility-and-enrollment.html | Eligibility and Enrollment Article page |
@@ -705,19 +705,19 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @avengersRegressionAARP
     Examples:
-      | Scenario                           | site | path                                                | pageName                   | UHCUrl                      | tfnXpath                                                       | tfnFlag |
-      | UAT E2E Regression Scenario 1_AARP | AARP | shop.html                                           | Shop Hub Page              | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UAT E2E Regression Scenario 2_AARP | AARP | shop/medicare-advantage-plans.html                  | Shop MA Plans Page         | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UAT E2E Regression Scenario 3_AARP | AARP | shop/dual-special-needs-plans.html                  | Shop DSNP Plans Page e     | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UAT E2E Regression Scenario 4_AARP | AARP | enroll.html                                         | Enroll Page                | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | Avengers AARP                      | AARP | /medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | Scenario                           | site | path                                                | pageName                   | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | UAT E2E Regression Scenario 1_AARP | AARP | shop.html                                           | Shop Hub Page              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 2_AARP | AARP | shop/medicare-advantage-plans.html                  | Shop MA Plans Page         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 3_AARP | AARP | shop/dual-special-needs-plans.html                  | Shop DSNP Plans Page e     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 4_AARP | AARP | enroll.html                                         | Enroll Page                | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | Avengers AARP                      | AARP | /medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
     @avengersRegressionUHC
     Examples:
-      | Scenario                           | site | path                                                | pageName                   | UHCUrl                      | tfnXpath                                                       | tfnFlag |
-      | UAT E2E Regression Scenario 1_AARP | UHC  | shop.html                                           | Shop Hub Page              | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UAT E2E Regression Scenario 2_AARP | UHC  | shop/medicare-advantage-plans.html                  | Shop MA Plans Page         | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UAT E2E Regression Scenario 3_AARP | UHC  | shop/dual-special-needs-plans.html                  | Shop DSNP Plans Page e     | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | UAT E2E Regression Scenario 4_AARP | UHC  | enroll.html                                         | Enroll Page                | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
-      | Avengers AARP                      | UHC  | /medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples | https://www.myuhcagent.com/ | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    |
+      | Scenario                           | site | path                                                | pageName                   | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | UAT E2E Regression Scenario 1_AARP | UHC  | shop.html                                           | Shop Hub Page              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 2_AARP | UHC  | shop/medicare-advantage-plans.html                  | Shop MA Plans Page         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 3_AARP | UHC  | shop/dual-special-needs-plans.html                  | Shop DSNP Plans Page e     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 4_AARP | UHC  | enroll.html                                         | Enroll Page                | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | Avengers AARP                      | UHC  | /medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 

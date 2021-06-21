@@ -43,6 +43,13 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//button[@dtmid='cta_dce']")
 	public WebElement continueBtn;
+	
+	@FindBy(xpath = "//button[contains(@dtmname,'zip information:review drug costs')]")
+	public WebElement reviewDrugCostsButton;
+	
+	@FindBy(css = "#previousButton2")
+	public WebElement addDrugsButton;
+	
 
 	@FindBy(xpath = "//button[contains(text(),'Return to page')]")
 	public WebElement ReturnToPagePopup;
@@ -113,11 +120,11 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		// sendkeys(zipCodeTxtbox, zipcode);
 		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
-		iosScroll(countyDropdown);
 		try {
 
-			if (countyDropdown.isDisplayed()) {
-				countyDropdown.click();
+			if (validate(countyDropdown)) {
+//				countyDropdown.click();
+				jsClickNew(countyDropdown);
 				//String countyValue = driver.findElements(By.xpath("//*[@id='county']")).get(1).getText().toString();
 				Select sl = new Select(countyDropdown);
 				String countyValue= sl.getOptions().get(1).getText().toString();
@@ -128,15 +135,13 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		validateNew(continueBtn);
+		validateNew(reviewDrugCostsButton);
 
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
-		validateNew(continueBtn);
-		jsClickNew(continueBtn);
+		jsClickNew(reviewDrugCostsButton);
 		pageloadcomplete();
-		waitForPageLoadSafari();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {

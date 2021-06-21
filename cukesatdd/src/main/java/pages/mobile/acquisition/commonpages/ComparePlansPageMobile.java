@@ -260,6 +260,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+	
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']//button//*[text()='Enroll']")
+	private WebElement EnrollinPlanCompare_MAPD;
+	
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
+	private WebElement EnrollinPlanCompare_PDP;
 
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
@@ -1537,5 +1543,63 @@ public class ComparePlansPageMobile extends UhcDriver {
 		}
 		else
 			Assertion.fail("Plan Compare Page - Total Drug Count Validation FAILED");
+	}
+	
+	public WelcomePageMobile Enroll_OLE_Plan_Compare_MAPD(String planName) throws InterruptedException {
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		try {
+			if (validate(EnrollinPlanCompare_MAPD))
+				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+			else
+				System.out.println("Enroll in Plan Button is Not Displayed ");
+
+		} catch (Exception e) {
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+
+		jsClickNew(EnrollinPlanCompare_MAPD);
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// if (driver.getCurrentUrl().contains("enrollment"))
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePageMobile(driver);
+		}
+		return null;
+	}
+
+	public WelcomePageMobile Enroll_OLE_Plan_Compare_PDP(String planName) throws InterruptedException {
+
+		try {
+			if (validate(EnrollinPlanCompare_PDP))
+				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+			else
+				System.out.println("Enroll in Plan Button is Not Displayed ");
+
+		} catch (Exception e) {
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+
+		jsClickNew(EnrollinPlanCompare_PDP);
+		waitForPageLoadSafari();
+		// if (driver.getCurrentUrl().contains("enrollment"))
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePageMobile(driver);
+		}
+		return null;
 	}
 }
