@@ -87,7 +87,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     And user clicks on disclaimers link of terms & conditions page
     And user clicks on agents & brokers link of disclaimers page
     #And user clicks on Request Assistance and validates modal window ulayer
-    And user verifies home link of agents & brokers page
+    #And user verifies home link of agents & brokers page
 
     @vppPlanCompareCommon_AARP01 @regressionAARP
     Examples: 
@@ -346,20 +346,20 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
     Then verify plan compare page is loaded
     Then remove "<removePlanIndices>" plan from new plan compare page
-    Then validate all available plans are shown on click of view all plans
+    #Then validate all available plans are shown on click of view all plans
 
     @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @vbfGate
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
-      | 00016 | AARP |   55343 | NO            | Hennepin County | MAPD     |             3,1,2 | future   |           5 |
-      | 00016 | AARP |   33111 | NO            | Miami-Dade County | SNP      |             2,1   | future   |           4 |
+      | TID   | site | zipcode | isMultiCounty | county          		| plantype | removePlanIndices | planyear | planIndices |
+      | 00016 | AARP |   55343 | NO            | Hennepin County 		| MAPD     |             3,1,2 | future   |           5 |
+      | 00016 | AARP |   33111 | NO            | Miami-Dade County 	| SNP    	 |             2,1   | future   |           4 |
 
     @vppPlanCompareCommon_UHC02 @vppPlanCompareUHC13 @regressionUHC @sanity
     Examples: 
-      | TID   | site | zipcode | isMultiCounty | county          | plantype | removePlanIndices | planyear | planIndices |
-      | 00016 | UHC  |   55343 | NO            | Hennepin County | MAPD     |               2,1 | future   |           5 |
-      | 00016 | UHC  |   55343 | NO            | Hennepin County | PDP      |               2,1 | future   |           3 |
-      | 00016 | UHC  |   33111 | NO            | Miami-Dade County | SNP      |             2,1   | future   |           4 |
+      | TID   | site | zipcode | isMultiCounty | county          		| plantype | removePlanIndices | planyear | planIndices |
+      | 00016 | UHC  |   55343 | NO            | Hennepin County 		| MAPD     |               2,1 | future   |           5 |
+      | 00016 | UHC  |   55343 | NO            | Hennepin County 		| PDP      |               2,1 | future   |           3 |
+      | 00016 | UHC  |   33111 | NO            | Miami-Dade County 	| SNP	     |             	 2,1 | future   |           4 |
 
   Scenario Outline: TID: <TID> - Plan Type: <plantype> - validation of plan compare on OON Toggle for Medical Benefits and Additional Benefits on <site>
     Given the user is on medicare acquisition site landing page

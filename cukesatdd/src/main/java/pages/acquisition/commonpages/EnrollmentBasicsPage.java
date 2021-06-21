@@ -264,7 +264,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		jsClickNew(lnkMedEligibility);
 		System.out.println("Learn About Eligiblity link Clicked.");
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("medicare-education/medicare-eligibility.html")) {
+		if(driver.getCurrentUrl().contains("medicare-education/medicare-eligibility.html")||driver.getCurrentUrl().contains("/medicare-education-classic/medicare-eligibility-classic.html")) {
 			Assertion.assertTrue(true);
 			System.out.println("Learn About Eligiblity link opened successfully.\n "+ driver.getCurrentUrl());
 		}else {
@@ -279,7 +279,7 @@ public class EnrollmentBasicsPage extends GlobalWebElements {
 		jsClickNew(lnkEnrollBasics);
 		System.out.println("Learn About Enrollment link Clicked.");
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("medicare-education/when-to-enroll")) {
+		if(driver.getCurrentUrl().contains("medicare-education/when-to-enroll")||driver.getCurrentUrl().contains("medicare-education-classic/enrollment-and-changing-plans-classic")) {
 			Assertion.assertTrue(true);
 			System.out.println("Learn About Enrollment link opened successfully.\n"+ driver.getCurrentUrl());
 		}else {
