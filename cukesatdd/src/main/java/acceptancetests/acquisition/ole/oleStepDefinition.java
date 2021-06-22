@@ -511,29 +511,6 @@ public class oleStepDefinition {
 	public void the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable arg1) throws Throwable {
 
 
-		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
-		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
-		for (int i = 0; i < personalAttributesRow.size(); i++) {
-			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
-					.getCells().get(0), personalAttributesRow.get(i)
-					.getCells().get(1));
-		}
-			String medicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
-			String planName = (String)getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
-			String diabetesQuestion1 ="";
-			String diabetesQuestion2="";
-			String diabetesQuestion3="";
-			String chronicHeartFailure1="";
-			String chronicHeartFailure2="";
-			String chronicHeartFailure3="";
-			String cardioVasculardisorder1="";
-			String cardioVasculardisorder2="";
-			String cardioVasculardisorder3="";
-			String cardioVasculardisorder4="";
-			String cardioVasculardisorder5="";
-			String cardioVasculardisorder6="";
-
-		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		
@@ -3461,5 +3438,23 @@ public class oleStepDefinition {
 			Assertion.fail("SOA Page : Required fields NOT validated");
 		}
 		// }
+	}
+	
+	@Then("^the user navigate to Use and Disclosure Authorization page for CSNP Plans$")
+	public void the_user_navigate_Use_Disclosure_Page() throws Throwable {
+		scenario.log("Sai - Added on 06/22 - Validate Use and Disclosure Authorization on OLE Page");
+		
+		MedicareInformationPage useanddisclosurePage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		UseAndDisclosureAuthorizationPage useranddisclosure = useanddisclosurePage.navigate_to_usedisclosure_Page();		
+		
+		if (useranddisclosure != null) {
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE, useranddisclosure);
+			System.out.println("OLE Use and Disclosure Page is Displayed");
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("Use and Disclosure Page : Required fields NOT validated");
+			Assertion.fail("Use and Disclosure Page : Required fields NOT validated");
+		}
+	
 	}
 }

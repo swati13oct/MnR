@@ -760,14 +760,10 @@ public class MedicareInformationPage extends UhcDriver {
 	}
 
 	public boolean validate_Required_Fields_CSNP(Map<String, String> MemberDetailsMap, String PlanName) {
-
+		
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
 		if (PlanName.contains("Chronic") || PlanName.contains("Gold") || PlanName.contains("Silver")) {
-			/*
-			 * System.out.println("Medicaid Question is displayed for "+PlanName+" : "
-			 * +validate(MedicaidQuestion)); jsClickNew(medicaiddno);
-			 * System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected())
-			 * ;
-			 */
 
 			if (validate(diabetesQuestions1No) && validate(diabetesQuestions2No)
 					&& validate(chronicHeartFailureQuestion1No) && validate(chronicHeartFailureQuestion2No)
@@ -834,28 +830,7 @@ public class MedicareInformationPage extends UhcDriver {
 				// waitforElement(disclosureBox);
 				return true;
 
-				/*
-				 * ---------------- Removed the lines for silver separately---------------------
-				 * }else if(PlanName.contains("Silver")){
-				 * System.out.println("Medicaid Question is displayed for "+PlanName+" : "
-				 * +validate(MedicaidQuestion)); jsClickNew(medicaiddno);
-				 * System.out.println("Medicaid question : No clicked"+medicaiddno.isSelected())
-				 * ;
-				 * 
-				 * //Diabetes questions Assertion.assertTrue(validateNew(diabetesQuestion1),
-				 * "diabetes questions are present"); validateNew(diabetesQuestions1Yes);
-				 * jsClickNew(diabetesQuestions1Yes); validateNew(diabetesQuestions2No);
-				 * jsClickNew(diabetesQuestions2No);
-				 * Assertion.assertTrue(validateNew(chronicHeartFailureQuestion1),
-				 * "Chromic Heart Failurequestions are present");
-				 * validateNew(chronicHeartFailureQuestion1No);
-				 * jsClickNew(chronicHeartFailureQuestion1No);
-				 * validateNew(chronicHeartFailureQuestion2No);
-				 * jsClickNew(chronicHeartFailureQuestion2No);
-				 * validateNew(chronicHeartFailureQuestion3No);
-				 * jsClickNew(chronicHeartFailureQuestion3No); // waitforElement(disclosureBox);
-				 * return true;
-				 */
+		
 			}
 		}
 		return false;
@@ -1288,5 +1263,15 @@ public class MedicareInformationPage extends UhcDriver {
 		return null;
 	}
 
-	
+	public UseAndDisclosureAuthorizationPage navigate_to_usedisclosure_Page() {
+		validateNew(NextBtn);
+		jsClickNew(NextBtn);
+		
+		if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Use and Disclosure')]")))){
+			return new UseAndDisclosureAuthorizationPage(driver);
+		}
+		else{
+			return null;
+		}
+	}
 }
