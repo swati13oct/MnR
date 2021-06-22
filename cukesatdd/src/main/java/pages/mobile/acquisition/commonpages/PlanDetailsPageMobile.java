@@ -83,6 +83,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='detail-0']/div/div/div[1]")
 	private WebElement medBenefitsSection;
 
+	@FindBy(css = "#detailTabs .title")
+	private List<WebElement> planDetailTabs;
+	
 	@FindBy(xpath = "//a[@id='prescriptiondrug' and contains(@class,'active')]")
 	private List<WebElement> presDrugTab1;
 
@@ -195,16 +198,19 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "distance")
 	WebElement distanceDropownID;
 
-	@FindBy(id = "mapd_gi_div_eng")
+	@FindBy(css = "#englishDocs")
+	private WebElement englishDocs;
+	
+	@FindBy(css = "#mapd_gi_div_eng")
 	WebElement mapdGeneralPlanPDfs;
 
-	@FindBy(id = "mapd_mp_div_eng")
+	@FindBy(css = "#mapd_mp_div_eng")
 	WebElement mapdMedicalProvidersPDfs;
 
-	@FindBy(id = "mapd_pdc_div_eng")
+	@FindBy(css = "#mapd_pdc_div_eng")
 	WebElement mapdDrugCoveragePDfs;
 
-	@FindBy(id = "mapd_pharmacydirectory_div_eng")
+	@FindBy(css = "#mapd_pharmacydirectory_div_eng")
 	WebElement mapdPharmacyDirectoryPDfs;
 
 	@FindBy(id = "mapd_gi_div_otherlang")
@@ -1127,8 +1133,10 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 */
 	public boolean clickAndValidatePlanCosts(String monthlyPremium, String yearlyPremium) throws Exception {
 		boolean bValidation = false;
+		
+		navigateToPlanDetailsTab("Plan Costs");
 
-		scrollToView(prescriptionTab);
+		/*scrollToView(prescriptionTab);
 		jsClickNew(prescriptionTab);
 		
 
@@ -1137,7 +1145,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		
 
 		scrollToView(planCostsTab);
-		jsClickNew(planCostsTab);
+		jsClickNew(planCostsTab);*/
 
 		Thread.sleep(4000);
 		if (monthlyPremium.equals(planMonthlyPremium.getText().trim())
@@ -1146,6 +1154,33 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		else
 			bValidation = false;
 		return bValidation;
+	}
+	
+	public void navigateToPlanDetailsTab(String planDetailTab) {
+		List<String> tabNames = new ArrayList<String>();
+		String activeTab = "";
+		for (WebElement tab : planDetailTabs) {
+			String tabName = tab.getText().trim();
+			tabNames.add(tabName);
+			if(tab.findElement(By.xpath("./ancestor::a")).getAttribute("class").contains("active")) {
+				activeTab = tabName;
+			}
+		}
+		
+		int indexOfTabToSelect = tabNames.indexOf(planDetailTab);
+		int indexOfActiveTab = tabNames.indexOf(activeTab);
+		
+		if(indexOfTabToSelect > indexOfActiveTab) {
+			for(int tabNum = indexOfActiveTab; tabNum <= indexOfTabToSelect; tabNum++) {
+				jsClickNew(planDetailTabs.get(tabNum).findElement(By.xpath("./ancestor::a")));
+			}
+		} else if(indexOfTabToSelect < indexOfActiveTab) {
+			for(int tabNum = indexOfActiveTab; tabNum >= indexOfTabToSelect; tabNum--) {
+				jsClickNew(planDetailTabs.get(tabNum).findElement(By.xpath("./ancestor::a")));
+			}
+		}
+		
+		
 	}
 
 	public void clickAndValidatePrescriptionDrugBenefits() {
@@ -1171,9 +1206,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		WebElement rider = driver.findElement(By.xpath("//h3[text()='" + optionalRider + "']/following::label[1]"));
 		// rider.click();
 		jsClickNew(rider);
-		String optionalRiderPremium = driver
-				.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//strong")).getText()
-				.trim();
+		WebElement optionalRiderValue = driver.findElement(By.xpath("//h3[text()='" + optionalRider + "']/ancestor::div[1]//strong"));
+		scrollToView(optionalRiderValue);
+		String optionalRiderPremium = optionalRiderValue.getText().trim();
 		return optionalRiderPremium;
 	}
 
@@ -1240,18 +1275,34 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void validatePdfSection(String planType) {
-
+//		scrollToView(planDocs);
 		if (planType.contains("MAPD") || planType.contains("MA")) {
 			// validate English PDFs
+			scrollToView(englishDocs);
+			
+			scrollToView(mapdGeneralPlanPDfs);
 			validateNew(mapdGeneralPlanPDfs);
+			
+			scrollToView(mapdMedicalProvidersPDfs);
 			validateNew(mapdMedicalProvidersPDfs);
+			
+			scrollToView(mapdDrugCoveragePDfs);
 			validateNew(mapdDrugCoveragePDfs);
+			
+			scrollToView(mapdPharmacyDirectoryPDfs);
 			validateNew(mapdPharmacyDirectoryPDfs);
 
 			// validate Other lang PDFs
+			scrollToView(mapdGeneralPlanPDfsOtherLang);
 			validateNew(mapdGeneralPlanPDfsOtherLang);
+			
+			scrollToView(mapdMedicalProvidersPDfsOtherLang);
 			validateNew(mapdMedicalProvidersPDfsOtherLang);
+			
+			scrollToView(mapdDrugCoveragePDfsOtherLang);
 			validateNew(mapdDrugCoveragePDfsOtherLang);
+			
+			scrollToView(mapdPharmacyDirectoryPDfsOtherLang);
 			validateNew(mapdPharmacyDirectoryPDfsOtherLang);
 		}
 

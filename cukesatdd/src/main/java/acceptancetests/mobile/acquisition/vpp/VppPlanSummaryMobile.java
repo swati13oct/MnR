@@ -25,6 +25,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
 import pages.mobile.acquisition.commonpages.DisclaimersPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
@@ -168,7 +169,7 @@ public class VppPlanSummaryMobile {
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String PlanPremium = vppPlanSummaryPage.getPlanPremium(PlanName, planType);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
-
+		vppPlanSummaryPage.clickOnViewMoreForPlan(PlanName);
 		PlanDetailsPageMobile vppPlanDetailsPage = vppPlanSummaryPage
 				.navigateToPlanDetails(PlanName, planType);
 		if (vppPlanDetailsPage != null) {
@@ -240,15 +241,15 @@ public class VppPlanSummaryMobile {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			//plansummaryPage.toolTipForPremium0(planName);
-			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.toolTipForPremium0(planName);
+//			plansummaryPage.viewPlanSummary(planType);
 		} else if (planType.equals("PDP")) {
 			VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
-			//plansummaryPage.toolTipForAnnualDeductible(planName);
-			plansummaryPage.viewPlanSummary(planType);
+			plansummaryPage.toolTipForAnnualDeductible(planName);
+//			plansummaryPage.viewPlanSummary(planType);
 		}
 	}
 
@@ -1320,6 +1321,25 @@ public class VppPlanSummaryMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNextBestActionModalForEnrollPlan();
+	}
+	
+	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")
+	public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_AARP(String planType) throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (planType.equals("MAPD")) {
+			plansummaryPage.checkAllMAPlans();
+			System.out.println("Selected All MAPD plans for Plan Compare");
+		} else if (planType.equals("PDP")) {
+			plansummaryPage.checkAllPDPlans();
+			System.out.println("Selected All PDP plans for Plan Compare");
+		}
+		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLink(planType);
+		if (planComparePage != null) {
+			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+		} else
+			Assertion.fail("Error in loading the compare plans page");
 	}
 
 

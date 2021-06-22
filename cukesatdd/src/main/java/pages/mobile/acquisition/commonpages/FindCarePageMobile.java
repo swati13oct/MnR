@@ -1,6 +1,7 @@
 package pages.mobile.acquisition.commonpages;
 
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import acceptancetests.data.CommonConstants;
-import acceptancetests.data.MRConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 
@@ -31,7 +31,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@class='action-btn getStarted']")
 	public WebElement GetstartedButton;
 
-	@FindBy(xpath = "//span[@class='location']")
+	@FindBy(xpath = "//*[@class='location']")
 	public WebElement LocationLink;
 
 	@FindBy(xpath = "//span[text()='Change Location']")
@@ -98,7 +98,7 @@ public class FindCarePageMobile extends UhcDriver {
 	@FindBy(xpath = "//h1[@class='provider-name']")
 	public WebElement ProviderNameHeader;
 
-	@FindBy(xpath = "//header[@class='txtCenter step-header']")
+	@FindBy(xpath = "//header[contains(@class,'txtCenter step-header')]")
 	public WebElement GreatHeaderText;
 
 	@FindBy(xpath = "//button[@data-test-id='button-close']")
@@ -269,24 +269,23 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		System.out.println("In find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
-		PlacesButton.click();
+		jsClickNew(PlacesButton);
 		waitforElement(Whichtypeofplace);
-		ClinicsButton.click();
+		jsClickNew(ClinicsButton);
 		waitforElement(Whichtypeofclinic);
-		PrimaryCareClinicButton.click();
-		waitforElement(ResultsHeader);
+		jsClickNew(PrimaryCareClinicButton);
+		waitforElementNew(ResultsHeader, 20);
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
 		validate(Facilityicon);
-		//selectProviderBtn.click();	
 		jsClickNew(selectProviderBtn);
-		if(validate(addressCheckBox)){
-			addressCheckBox.click();
-			addressSaveButton.click();
+		if (validate(addressCheckBox)) {
+			jsClickNew(addressCheckBox);
+			jsClickNew(addressSaveButton);
 		}
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
-		
+
 		/*
 		 * if(driver.findElements(By.xpath(
 		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
@@ -299,20 +298,24 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		 * 
 		 * }
 		 */
-		
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); // Added because below findelements throws
+																		// timeout exception if element not found
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			ParentWindow = driver.getTitle();
-			CheckProviderCoverageButton.click();
-		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+			jsClickNew(CheckProviderCoverageButton);
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			ParentWindow = driver.getTitle();
-			FinishButton.click();
-		}else
+			jsClickNew(FinishButton);
+		} else
 			System.out.println("Issue with Xpath");
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
@@ -323,54 +326,50 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 	public ComparePlansPageMobile providerfromPrimaryCare() throws Exception {
 		String ParentWindow = null;
 		validate(GetstartedButton);
-		GetstartedButton.click();
+		jsClickNew(GetstartedButton);
 		System.out.println("in find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
-		PeopleButton.click();
+		jsClickNew(PeopleButton);
 		waitforElement(Whoareyoulookingfor);
-		PrimaryCareButton.click();
+		jsClickNew(PrimaryCareButton);
 		waitforElement(Whichtypeofprimarycareprovider);
-		AllPrimaryCareProviders.click();
-		waitforElement(ResultsHeader);
+		jsClickNew(AllPrimaryCareProviders);
+		waitforElementNew(ResultsHeader, 20);
+		
+		scrollToView(FirstHospitalRecord);
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
-		FirstHospitalRecord.click();
+		jsClickNew(FirstHospitalRecord);
+		
+		scrollToView(Providericon);
 		validate(Providericon);
-		selectProviderBtn.click();		
-		if(validate(addressCheckBox)){
-			addressCheckBox.click();
-			addressSaveButton.click();
+		jsClickNew(selectProviderBtn);
+		if (validate(addressCheckBox)) {
+			jsClickNew(addressCheckBox);
+			jsClickNew(addressSaveButton);
 		}
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		
-		/*
-		 * if(driver.findElements(By.xpath(
-		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
-		 * ViewsaveOldbtn.click(); else
-		 * if(driver.findElements(By.xpath("//button[@data-test-id='button-close']")).
-		 * size() > 0){ ViewSavedButton.click();
-		 * if(driver.findElements(By.xpath("//span[text()='Update This Provider']")).
-		 * size() > 0){ ViewSavedProvidersLink.click(); } else
-		 * System.out.println("New Rally page not displayed");
-		 * 
-		 * }
-		 */
-		
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); // Added because below findelements throws
+																		// timeout exception if element not found
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			ParentWindow = driver.getTitle();
-			CheckProviderCoverageButton.click();
-		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]")).size() > 0){
+			jsClickNew(CheckProviderCoverageButton);
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[2]"))
+				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			ParentWindow = driver.getTitle();
-			FinishButton.click();
-		}else
+			jsClickNew(FinishButton);
+		} else
 			System.out.println("Issue with Xpath");
-		
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);
@@ -381,26 +380,26 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 	public ComparePlansPageMobile placesfromHospital() throws Exception {
 		String ParentWindow = null;
 		CommonUtility.waitForPageLoadNew(driver, GetstartedButton, 45);
-		GetstartedButton.click();
+		jsClickNew(GetstartedButton);
 		System.out.println("in find care page");
 		validate(LocationLink);
 		validate(ChangeLocationButton);
-		PlacesButton.click();
+		jsClickNew(PlacesButton);
 		CommonUtility.waitForPageLoadNew(driver, HospitalsButton, 30);
-		HospitalsButton.click();
-		waitforElement(ResultsHeader);
+		jsClickNew(HospitalsButton);
+		waitforElementNew(ResultsHeader, 20);
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
-		FirstHospitalRecord.click();
+		jsClickNew(FirstHospitalRecord);
 		validate(Facilityicon);
-		selectProviderBtn.click();		
-		if(validate(addressCheckBox)){
-			addressCheckBox.click();
-			addressSaveButton.click();
+		jsClickNew(selectProviderBtn);
+		if (validate(addressCheckBox)) {
+			jsClickNew(addressCheckBox);
+			jsClickNew(addressSaveButton);
 		}
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
-		
+
 		/*
 		 * if(driver.findElements(By.xpath(
 		 * "//*[@data-test-id='button-view-saved-provider']")).size() > 0)
@@ -413,20 +412,24 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		 * 
 		 * }
 		 */
-		
-		if(driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0){
+		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); // Added because below findelements throws
+																		// timeout exception if element not found
+		if (driver.findElements(By.xpath("(//button[contains(text(),'Check Provider Coverage')])[1]")).size() > 0) {
 			System.out.println("OLD Rally page displayed");
 			ParentWindow = driver.getTitle();
-			CheckProviderCoverageButton.click();
-		}	
-		else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+			jsClickNew(CheckProviderCoverageButton);
+		} else if (driver.findElements(By.xpath(
+				"(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]"))
+				.size() > 0) {
 			System.out.println("NEW Rally page displayed");
 			ParentWindow = driver.getTitle();
-			FinishButton.click();
-		}else
+			jsClickNew(FinishButton);
+		} else
 			System.out.println("Issue with Xpath");
-	
-//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+		// note: setting the implicit wait back to default value - 10
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		if (currentUrl().contains("/health-plans.html#/plan-compare"))
 			return new ComparePlansPageMobile(driver);

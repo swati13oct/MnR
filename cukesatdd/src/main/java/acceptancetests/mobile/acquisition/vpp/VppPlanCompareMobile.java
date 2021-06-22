@@ -4490,7 +4490,8 @@ public class VppPlanCompareMobile {
 	public void click_home1() {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+//		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeFooterClick();
+		AcquisitionHomePageMobile aquisitionHomePageReload = aquisitionhomepage.homeBreadCrumbClick();
 		Assertion.assertTrue("home page not found", aquisitionHomePageReload != null);
 	}
 
@@ -4652,8 +4653,6 @@ public class VppPlanCompareMobile {
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 
 		planComparePage.validateDoctors();
-		planComparePage.clickPlanAvailableText();
-
 	}
 
 	@And("^click on Edit your doctors link and Navigate to Rally page$")

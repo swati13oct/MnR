@@ -1696,7 +1696,7 @@ public abstract class UhcDriver {
 	 * Gets the downloaded pdf file content on android device.
 	 *
 	 * @author amahale
-	 * @param fileName the file name with extension
+	 * @param fileName the file name without .pdf extension
 	 * @return the downloaded pdf file content android
 	 */
 	
@@ -1705,7 +1705,7 @@ public abstract class UhcDriver {
 		try {
 			if (!fileName.isEmpty()) {
 				AppiumDriver mobileDriver = (AppiumDriver) driver;
-				content = mobileDriver.pullFile("/sdcard/Download/" + fileName);
+				content = mobileDriver.pullFile("/sdcard/Download/" + fileName + ".pdf");
 			}
 		} catch (Exception e) {
 			Assertion.fail("Unable to read file " + fileName + " from sdcard/Download/");

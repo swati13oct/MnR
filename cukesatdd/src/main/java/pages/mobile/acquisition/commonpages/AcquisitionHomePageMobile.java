@@ -282,7 +282,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "medicareTitle")
 	public WebElement siteMapHeader;
 
-	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1') and contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
 
 	@FindBy(xpath = "//h1//*[contains(text(),'Health Insurance Broker & Agent Tools')]")
@@ -995,6 +995,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AgentsnBrokersAARPPageMobile agentsnbrokersFooterClick() {
+		scrollToView(footerAgentsnBrokersLink);
 		validate(footerAgentsnBrokersLink);
 		// footerAgentsnBrokersLink.click();
 		jsClickNew(footerAgentsnBrokersLink);
@@ -1007,6 +1008,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public DisclaimersAARPPageMobile disclaimersFooterClick() {
+		scrollToView(footerDisclaimersLink);
 		validate(footerDisclaimersLink);
 		// footerDisclaimersLink.click();
 		jsClickNew(footerDisclaimersLink);
@@ -1018,6 +1020,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AcquisitionHomePageMobile homeFooterClick() {
+		scrollToView(footerHomeLink);
 		validateNew(footerHomeLink);
 		// footerHomeLink.click();
 		jsClickNew(footerHomeLink);
@@ -1027,11 +1030,24 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
+	
+	public AcquisitionHomePageMobile homeBreadCrumbClick() {
+		scrollToView(breadCrumbHomeLink);
+		validateNew(breadCrumbHomeLink);
+		// footerHomeLink.click();
+		jsClickNew(breadCrumbHomeLink);
+		pageloadcomplete();
+		if (validateNew(zipCodeField)) {
+			return new AcquisitionHomePageMobile(driver);
+		}
+		return null;
+	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
+		/*scrollToView(footerAboutUsLink);
 		validateNew(footerAboutUsLink);
-		iosScroll(footerAboutUsLink);
-		jsClickNew(footerAboutUsLink);
+		jsClickNew(footerAboutUsLink);*/
+		accessFooterLinkFromMore("about");
 		pageloadcomplete();
 		// validateNew(footerLinkHeader, 30);
 		if (getTitle().contains("About UnitedHealthcare")) {
@@ -1056,6 +1072,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public SiteMapAARPPageMobile siteMapFooterClick() {
+		scrollToView(footerSiteMapLink);
 		validateNew(footerSiteMapLink);
 		// footerSiteMapLink.click();
 		jsClickNew(footerSiteMapLink);
@@ -1069,9 +1086,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
+		/*scrollToView(footerContactUsLink);
 		validateNew(footerContactUsLink);
 		// footerContactUsLink.click();
-		jsClickNew(footerContactUsLink);
+		jsClickNew(footerContactUsLink);*/
+		accessFooterLinkFromMore("contact");
 		pageloadcomplete();
 		if (driver.getCurrentUrl().contains("contact-us")) {
 			return new ContactUsAARPPageMobile(driver);
@@ -1080,6 +1099,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PrivacyPolicyUmsPageMobile privacyPolicyClick() {
+		scrollToView(footerPrivacyPolicyLink);
 		validateNew(footerPrivacyPolicyLink);
 		// footerPrivacyPolicyLink.click();
 		jsClickNew(footerPrivacyPolicyLink);
@@ -1092,6 +1112,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public DisclaimersPageMobile disclaimersClick() {
+		scrollToView(footerDisclaimersLink);
 		validateNew(footerDisclaimersLink);
 		// footerDisclaimersLink.click();
 		jsClickNew(footerDisclaimersLink);
@@ -2361,7 +2382,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(providerSearchLink);
 
 		jsClickNew(learnAboutMedicare);
-		validateNew(introductioMedicareLink);
+		validateNew(introductionToMedicareLink);
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
 		validateNew(medicareFaqLink);
