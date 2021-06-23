@@ -125,70 +125,7 @@ public class isInsuranceAgentStepDefenitionUHC    {
 
 	}
 
-		
-	/*@Given("^the user is on the uhcmedicaresolutions site landing page$")
-	public void the_user_on_UHC_Medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	}
-
-	@When("^the user performs plan search using following information in UMS site$")
-	public void zipcode_details_in_UMS_site(DataTable givenAttributes) {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = null;
-		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
-		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-		}
-
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assertion.fail("Error Loading VPP plan summary page");
-		}
-
-	}
-	
-	@And("^the user views plans of the below plan type in UMS site$")
-	public void user_performs_planSearch_in_ums_site(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-
-		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip " + plantype);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		plansummaryPage.viewPlanSummary(plantype);
-	}
-
-*/	@Then("^the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on UHC site$")
+	@Then("^the user clicks on Request a Free Insurance Agent on the Raight Rail on VPP PLan Summary Page for Med Supp Plans on UHC site$")
 	public void the_user_clicks_on_Request_a_Free_Insurance_Agent_on_the_Raight_Rail_on_VPP_PLan_Summary_Page_for_Med_Supp_Plans_on_UHC_site() throws Throwable {
 		/*VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		IsInsuranceAgent InsuranceAgentStep1Page = plansummaryPage.clickOnRequestInsuranceAgent();
@@ -201,68 +138,9 @@ public class isInsuranceAgentStepDefenitionUHC    {
 		}*/
 	}
 
-	/*@Given("^the user is on AARP medicare acquisition site landing page$")
-	public void the_user_on_aarp_medicaresolutions_Site() {
-		WebDriver wd = getLoginScenario().getWebDriverNew();
-		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd);
-
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
-	}
-
-	@When("^the user performs plan search using following information in the AARP site$")
-	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
-		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}
-		String zipcode = memberAttributesMap.get("Zip Code");
-		String county = memberAttributesMap.get("County Name");
-		String isMultiCounty = memberAttributesMap.get("Is Multi County");
-		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
-		getLoginScenario().saveBean(VPPCommonConstants.COUNTY, county);
-		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
-
-		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		VPPPlanSummaryPage plansummaryPage = null;
-		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
-			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
-		} else {
-			plansummaryPage = aquisitionhomepage.searchPlans(zipcode, county);
-		}
-		
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assertion.fail("Error Loading VPP plan summary page");
-		}
-	}
-
-	@And("^the user views the plans of the below plan type in AARP site$")
-	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
-		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}
-
-		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		plansummaryPage.viewPlanSummary(plantype);
-		//plansummaryPage.handlePlanYearSelectionPopup(plantype);
 	
-	}
-*/	
+
+
 	@Then("^the user enters and  saves the entered information in Pre-entry page for validation on Licensed InsuranceAgent forms for UHC$")
 	public void the_user_saves_the_entered_information_in_Pre_entry_page_for_validation_on_Licensed_Insurance_Agent_forms_for_UHC(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();

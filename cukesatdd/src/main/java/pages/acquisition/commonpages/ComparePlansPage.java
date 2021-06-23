@@ -38,7 +38,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "backtoplansummarypage")
+	@FindBy(xpath= ".//*[contains(@id,'backtoplansummarypage')]")
 	private WebElement backToAllPlansLink;
 	
 	@FindBy(id = "backtoprofilepage")
@@ -363,17 +363,16 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public VPPPlanSummaryPage backToVPPPage(){
 		backToAllPlansLink.click();
-		try {
+		/*try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		if(currentUrl().contains("#/plan-summary"))
+		}*/
+		//if(currentUrl().contains("#/plan-summary"))
 			return new VPPPlanSummaryPage(driver);
-		return null;
+		
 	}
-
 
 	/**
 	 * @author sdwaraka
