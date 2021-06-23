@@ -321,13 +321,16 @@ public class PlanPremiumPage extends UhcDriver{
 		
 		}
 	
-	public boolean validatePremiumValue() {
+	public boolean validatePremiumValue(Map<String, String> paymentInformationMap) {
+	
 		boolean flag = false;
-		String actualText = null;
-		String expectedText = "0.00";
+		//String actualText = null;
+		
 		try {
-			actualText = premium.getText();
-			flag = actualText.contains(expectedText);
+			String Actual_Premium = paymentInformationMap.get("Plan Premium");
+			String expectedText = "0.00";
+			//actualText = premium.getText();
+			flag = Actual_Premium.contains(expectedText);
 			if(!flag) {
 			System.out.println("=====Premium is greater than 0=====");
 			}
@@ -377,7 +380,9 @@ public class PlanPremiumPage extends UhcDriver{
 									if(flag) {
 										System.out.println("Validate partdirmaa tex");
 										actualText = partdirmaa.getText();
+										System.out.println("Validate partdirmaa tex"+actualText);
 										expectedText = CommonConstants.PARTDIRMAA_TEXT;
+										System.out.println("Validate partdirmaa tex"+expectedText);
 										flag = actualText.contains(expectedText);
 							
 									}

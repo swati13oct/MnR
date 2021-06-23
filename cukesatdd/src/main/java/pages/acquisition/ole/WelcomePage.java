@@ -178,6 +178,7 @@ public class WelcomePage extends UhcDriver{
 		System.out.println("Monthly Premium for Plan Displayed on OLE : "+Premium);
 		String Expected_PlanName = planDetailsMap.get("Plan Name");
 		String Expected_ZipCode = planDetailsMap.get("Zip Code");
+		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		if(validateNew(ViewPlanDetails)){
 			ViewPlanDetails.click();
 			Thread.sleep(500);
@@ -190,35 +191,13 @@ public class WelcomePage extends UhcDriver{
 				flag = driver.getCurrentUrl().contains("welcome");
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
-							&& Zip_County_Text.contains(Expected_ZipCode);
+							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium);
 				}
 
 			}
 		}
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
-		/*if(PlanYear_PlanName_Text.contains(Expected_PlanName)){
-			flag = true;
-			System.out.println("Plan Name is Validated : "+flag);
-		}else flag =false;*/
-
-		//Plan Year commented for AEP validation
-		/*		if(PlanYear_PlanName_Text.contains(Expected_PlanYear)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan Year is Validated : "+flag);
-		}else flag =false;*/
-		/*if(Zip_County_Text.contains(Expected_County)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan County is Validated : "+flag);
-		}else flag =false;*/
-		/*if(Zip_County_Text.contains(Expected_ZipCode)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan ZIP CODE is Validated : "+flag);
-		}else flag =false;*/
-		/*		if(Premium.contains(Expected_PlanPremium)){
-			flag = (flag==false)?false:true;
-			System.out.println("Plan Premium is Validated : "+flag);
-		}else flag =false;*/
 	}
 
 
@@ -596,5 +575,18 @@ public class WelcomePage extends UhcDriver{
 		}
 		map.put(flag,riderText);
 		return map;
+	}
+	
+	public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
+
+		return null;
 	}
 }

@@ -409,11 +409,16 @@ public class oleStepDefinition {
 		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
-
+		//String Premium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		String Premium;
+	
 		boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
+		Premium = welcomePage.GetMonthlyPremiumValue();
 		if (Validation_Status) {
 			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		//	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanDetailsMap.get("Plan Premium"));
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, Premium);
 			Assertion.assertTrue(true);
 		} else {
 			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
@@ -3324,8 +3329,9 @@ public class oleStepDefinition {
 		PlanPremiumPage planPremiumPage = (PlanPremiumPage) getLoginScenario().getBean(OLE_PageConstants.OLE_PLAN_PREMIUM_PAGE);
 		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_PLAN, payType);
 		getLoginScenario().saveBean(oleCommonConstants.PAYMENT_METHOD, payType);
+		paymentInformationMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
 		System.out.println("validate premium value");
-		boolean result = planPremiumPage.validatePremiumValue();
+		boolean result = planPremiumPage.validatePremiumValue(paymentInformationMap);
 		if(!result)	{
 			if(payType.equalsIgnoreCase("Pay by Mail")) {
 				flag = planPremiumPage.validatePayByMail();
