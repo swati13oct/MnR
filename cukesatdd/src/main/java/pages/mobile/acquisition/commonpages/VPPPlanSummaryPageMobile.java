@@ -1135,14 +1135,30 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			}
 
 		}
+		
+		clickBackToViewAllPlans();
 	}
 
+	/**
+	 * Click back to view all plans.
+	 * 
+	 * Created to avoid failures because of AB testing 
+	 */
+	public void clickBackToViewAllPlans() {
+		if (MRScenario.environment.equalsIgnoreCase("prod") && validate(backToAllPlansLnk)) {
+			jsClickNew(backToAllPlansLnk);
+		}
+	}
+	
 	public int getPlanCountAndViewPlanSummary(String planType) {
 		int planCount = 0;
 		planType = planType.equalsIgnoreCase("mapd") ? "ma" : planType.toLowerCase();
 
 		// Condition for shop plan and enroll plan
 		String expectedUrl = "product=" + planType;
+		
+		clickBackToViewAllPlans();
+		
 		if (driver.getCurrentUrl().contains(expectedUrl)) {
 			if (backToPlanResults.isDisplayed()) {
 				jsClickNew(backToPlanResults);
