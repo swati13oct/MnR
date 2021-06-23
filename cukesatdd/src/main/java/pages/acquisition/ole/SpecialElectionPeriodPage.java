@@ -37,8 +37,8 @@ public class SpecialElectionPeriodPage extends UhcDriver{
 	//Page Header
 	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
 //	@FindBy(xpath = "//h3[contains(text(),'Other')]")
-	@FindBy(xpath = "//*[contains(@id, 'sepRadioFieldSet')]//*[contains(@id,'sepRadio')]")
-	//@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
+	//@FindBy(xpath = "//*[contains(@id, 'sepRadioFieldSet')]//*[contains(@id,'sepRadio')]")
+	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement SEPPageHeader;
 
 	//Right Rail Elements

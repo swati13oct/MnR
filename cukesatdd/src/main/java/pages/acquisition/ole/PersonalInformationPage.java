@@ -633,8 +633,8 @@ public class PersonalInformationPage extends UhcDriver{
 		
 		Thread.sleep(3000);
 			//if(driver.getCurrentUrl().contains("special")){
-			if(driver.getCurrentUrl().contains("other-health-insurance")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance"), "OLE otherhealth insurance Page is Displayed");
+			if(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions")){
+			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions"), "OLE otherhealth insurance Page or Chronic Page is Displayed");
 			return new ConfirmYourEligibilityPage(driver);
 			
 			}
@@ -650,10 +650,10 @@ public class PersonalInformationPage extends UhcDriver{
 					 jsClickNew(NextBtn);
 					 waitForPageLoadSafari();
 
-					 if(driver.getCurrentUrl().contains("other-health-insurance")){
-					  System.out.println("OLE otherhealth insurance Page is Displayed"); } else {
+					 if(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions")){
+					  System.out.println("OLE otherhealth insurance Page  or Chronic Page is Displayed"); } else {
 
-					  System.out.println("OLE otherhealth insurance Page is Displayed"); }
+					  System.out.println("OLE otherhealth insurance Page or Chronic Page is Displayed"); }
 					 return new ConfirmYourEligibilityPage(driver);
 				}
 			 }
