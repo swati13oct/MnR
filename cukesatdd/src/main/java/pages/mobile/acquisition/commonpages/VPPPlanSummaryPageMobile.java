@@ -58,7 +58,7 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
  * @author
  *
  */
-public class VPPPlanSummaryPageMobile extends UhcDriver {
+public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "(//*[text()='View plan details'])[1]")
 	WebElement viewPlanDetailsBtn;
@@ -1791,7 +1791,7 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public void clickonBackToAllPlans() {
 		Assertion.assertTrue("PROBLEM - unable to locate the 'Back to all plans' link on Compare page",
 				validate(backToAllPlansLnk));
-		backToAllPlansLnk.click();
+		jsClickNew(backToAllPlansLnk);
 		CommonUtility.checkPageIsReady(driver);
 		try {
 			Thread.sleep(3000);
@@ -1799,6 +1799,21 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 	}
+	
+	public void clickonBackToPlanResults() {
+		scrollToView(backToPlans);
+		Assertion.assertTrue("PROBLEM - unable to locate the 'Back to plan results' link on plan summary page",
+				validate(backToPlans));
+		jsClickNew(backToPlans);
+		CommonUtility.checkPageIsReady(driver);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 
 	public void clickOnPDPPlans() {
 		try {
@@ -3137,18 +3152,18 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 			String isMultiCounty) {
 		System.out.println("Proceed to go to top menu to select 'Shop A Plan' option and enter zipcode '" + zipcode
 				+ "' to find plan");
-		Actions builder = new Actions(driver);
-		Action mouseOverButton = builder.moveToElement(topMenushopForAPlanOption).build();
-		mouseOverButton.perform();
-		// shopForAPlanOptionZipcodeFieldBox.sendKeys(zipcode);
-		jsSendkeys(shopForAPlanOptionZipcodeFieldBox, zipcode);
-		sleepBySec(1);
-		// shopForAPlanOptionFindPlanButton.click();
-		jsClickNew(shopForAPlanOptionFindPlanButton);
+		
+		ShopForPlanNavigationPageMobile shopPlanNavigationPage = openShopForPlanFromMenu();
+		if(shopPlanNavigationPage != null) {
+			shopPlanNavigationPage.searchPlanForZipcodeFromShopMenu(zipcode);
+		} else {
+			Assertion.fail("Shop for plan navigation menu did not open");
+		}
+		
 		if (isMultiCounty.equalsIgnoreCase("yes")) {
 			System.out.println("Handle mutliple county");
 			CommonUtility.waitForPageLoad(driver, countyModal, 45);
-			driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")).click();
+			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 			CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 
 		} else {
@@ -3162,24 +3177,16 @@ public class VPPPlanSummaryPageMobile extends UhcDriver {
 	public VPPPlanSummaryPageMobile navagateToChangeZipcodeOptionToChangeZipcode(String zipcode, String countyName,
 			String isMultiCounty) {
 		System.out.println("Proceed to go to plan overview section to enter zipcode '" + zipcode + "' to find plan'");
-		// Actions action = new Actions(driver);
-		// action.moveToElement(planOverviewChangeZipCodeLink).build().perform();
 		try {
-			// if change zip code link is there then click it, once you used it then it will
-			// only display field box going forward.
+			if(backToPlans.isDisplayed()) {
+				clickonBackToPlanResults();
+			}
 			jsClickNew(planOverviewChangeZipCodeLink);
 		} catch (Exception e) {
 			System.out.println(
 					"Change ZipCode link already not on the page, proceed to update zipcode for search directly");
 		}
-		// if field box already there then clear it if left over text from prior run
-		// Commenting since there is no Control key on a Mac machine
-		/*
-		 * planOverviewZipCodeFieldBox.sendKeys(Keys.CONTROL + "a");
-		 * planOverviewZipCodeFieldBox.sendKeys(Keys.DELETE);
-		 */
 		scrollToView(planOverviewZipCodeFieldBox);
-		// planOverviewZipCodeFieldBox.clear();
 
 		// enter zipcode
 		sendkeysMobile(planOverviewZipCodeFieldBox, zipcode);

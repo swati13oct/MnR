@@ -303,9 +303,10 @@ public abstract class UhcDriver {
 			// element.sendKeys(Keys.BACK_SPACE);
 
 		} else {
-			scrollToView(element);
+//			scrollToView(element);
 			jsClickNew(element);
-			// element.clear();
+			threadsleep(5);  //Adding 5ms wait
+			element.clear();
 			element.sendKeys(message);
 		}
 

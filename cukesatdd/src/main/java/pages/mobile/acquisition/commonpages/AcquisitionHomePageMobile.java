@@ -2381,7 +2381,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		validateNew(pharmacySearchLink);
 		validateNew(providerSearchLink);
 
-		jsClickNew(learnAboutMedicare);
+		jsClickNew(learnAboutMedicareFooterButton);
 		validateNew(introductionToMedicareLink);
 		validateNew(eligibilityLink);
 		validateNew(coverageChoiceLink);
@@ -4181,7 +4181,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 	
-	@FindBy(xpath = "//b[contains(text(),'MENU')]")
+	/*@FindBy(xpath = "//b[contains(text(),'MENU')]")
 	private WebElement MenuMobile;
 	
 	@FindBy(css = "#mobile-nav")
@@ -4206,7 +4206,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} 
 		return null;
 	}
-	
+	*/
 	public void clickMedSupp(String state) throws InterruptedException {
 //		MobileMenuShopTool();
 		if (state.equalsIgnoreCase("Oregon"))

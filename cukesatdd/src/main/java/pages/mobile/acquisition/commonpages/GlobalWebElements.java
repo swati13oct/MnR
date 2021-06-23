@@ -72,7 +72,7 @@ public class GlobalWebElements extends UhcDriver {
 	public WebElement toolsAndResources;
 
 	@FindBy(css = "#accordion-3-button")
-	public WebElement learnAboutMedicare;
+	public WebElement learnAboutMedicareFooterButton;
 
 	@FindBy(xpath = "//div[contains(text(),'More')]")
 	public WebElement more;
@@ -310,6 +310,33 @@ public class GlobalWebElements extends UhcDriver {
 
 	@FindBy(xpath = "//*[@id='accordion-4-content']//a[contains(@href,'aarp.org')]")
 	public WebElement footerAARPLink;
+	
+	
+//	@FindBy(xpath = "//b[contains(text(),'MENU')]")
+	@FindBy(css = "div[aria-label='menu navigation']")
+	public WebElement MenuMobile;
+	
+	@FindBy(css = "#mobile-nav")
+	public WebElement mobileNav;
+	
+	@FindBy(css = "#ghn_lnk_2")
+	public WebElement shopForAPlan;
+	
+	@FindBy(css = "#subnav_2 .nav-back")
+	public WebElement shopForPlanBackButton;
+	
+	@FindBy(css = "#ghn_lnk_1")
+	public WebElement home;
+	
+	@FindBy(css = "form[class*='zipCompForm-0'] button[class*='zip-button']")
+	private WebElement getStartedButton;
+	
+	@FindBy(css = "#ghn_lnk_3")
+	public WebElement learnAboutMedicareNavButton;
+	
+	@FindBy(css = "#subnav_3 .nav-back")
+	private WebElement learnAboutMedicareBackButton;
+	
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);
@@ -383,7 +410,7 @@ public class GlobalWebElements extends UhcDriver {
 		WebElement shopPlansTab = driver.findElement(By.cssSelector("#accordion-3-button"));
 		boolean expanded = Boolean.parseBoolean(shopPlansTab.getAttribute("aria-expanded"));
 		if (!expanded) {
-			jsClickNew(learnAboutMedicare);
+			jsClickNew(learnAboutMedicareFooterButton);
 		}
 
 		option = option.toLowerCase();
@@ -436,4 +463,40 @@ public class GlobalWebElements extends UhcDriver {
 		pageloadcomplete();
 	}
 
+	public AcquisitionHomePageMobile openHomeFromMenu() {
+		jsClickNew(MenuMobile);
+		
+		validateNew(mobileNav, 5);
+		
+		jsClickNew(home);
+		if(validate(getStartedButton)) {
+			return new AcquisitionHomePageMobile(driver);
+		} 
+		return null;
+	}
+	
+	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
+		jsClickNew(MenuMobile);
+		
+		validateNew(mobileNav, 5);
+		
+		jsClickNew(shopForAPlan);
+		if(validate(shopForPlanBackButton)) {
+			return new ShopForPlanNavigationPageMobile(driver);
+		} 
+		return null;
+	}
+	
+	public LearnAboutMedicareHomePageMobile openLearnAboutMedicareFromMenu() {
+		jsClickNew(MenuMobile);
+		
+		validateNew(mobileNav, 5);
+		
+		jsClickNew(learnAboutMedicareNavButton);
+		if(validate(learnAboutMedicareBackButton)) {
+			return new LearnAboutMedicareHomePageMobile(driver);
+		} 
+		return null;
+	}
+	
 }

@@ -12,7 +12,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 
-public class ShopForPlanNavigationPageMobile extends UhcDriver {
+public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[@id='ghn_lnk_2']")
 	private WebElement ShopForaplan;
@@ -89,7 +89,6 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
 	private WebElement MedSuppClassicUrl;
 	
-	
 	@FindBy(css = "a[dtmname='NavLinks:Shop for a Plan:Plan Types:Get a Plan Recommendation']")
 	private WebElement getPlanRecommendation;
 	
@@ -110,6 +109,12 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//a[contains(text(),'Member Resources')]")
 	private WebElement ResourcesLink;
+	
+	@FindBy(css = "#nav-zipcode")
+	private WebElement zipcodeField;
+	
+	@FindBy(xpath = "//*[contains(text(),'Find Plans')]/parent::button")
+	private WebElement findPlansButton;
 
 	public ShopForPlanNavigationPageMobile(WebDriver driver) {
 		super(driver);
@@ -345,6 +350,12 @@ public class ShopForPlanNavigationPageMobile extends UhcDriver {
 			throw new IllegalArgumentException("Parent tab " + parentTab + " is not a tab from 'Shop for a Plan' menu");
 		}
 	}
+	
+	public void searchPlanForZipcodeFromShopMenu(String zipcode) {
+		sendkeysMobile(zipcodeField, zipcode);
+		jsClickNew(findPlansButton);
+	}
+	
 	
 	public boolean checkForClassicURL(String state) {
 		//This list can be a constant rather than updating in each page class 

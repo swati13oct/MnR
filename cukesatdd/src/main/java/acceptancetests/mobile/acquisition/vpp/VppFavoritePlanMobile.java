@@ -16,6 +16,7 @@ import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
@@ -144,13 +145,16 @@ public class VppFavoritePlanMobile {
 
 		//plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
 		System.out.println("Proceed to click Home button to enter zip code again");
-		plansummaryPage.clickHomeButton();
+//		plansummaryPage.clickHomeButton();
+		aquisitionhomepage.openHomeFromMenu();
 
 		System.out.println("First go to a totally different zipcode = 90210");
 		plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty("90210");
 
 		System.out.println("Then go back to the test zipcode");
-		plansummaryPage.clickHomeButton();
+//		plansummaryPage.clickHomeButton();
+		aquisitionhomepage.openHomeFromMenu();
+
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
@@ -173,7 +177,7 @@ public class VppFavoritePlanMobile {
 
 		//----- PDP plan type --------------------------
 		planType="PDP";
-		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.clickonBackToPlanResults();
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
@@ -181,7 +185,7 @@ public class VppFavoritePlanMobile {
 
 		//----- SNP plan type --------------------------
 		planType="SNP";
-		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.clickonBackToPlanResults();
 		System.out.println("Proceed to validate "+planType+" saved plan(s) are still saved");
 		plansummaryPage.viewPlanSummary(planType);
 		//plansummaryPage.handlePlanYearSelectionPopup(planYear);
@@ -200,7 +204,7 @@ public class VppFavoritePlanMobile {
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		
 		if(plansummaryPage.backToPlans.isDisplayed()) {
-			plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+			plansummaryPage.clickonBackToPlanResults();
 		}
 		// note: the second plan in the list will be unsaved
 		String planType="MA";
@@ -210,14 +214,16 @@ public class VppFavoritePlanMobile {
 		plansummaryPage.validateAbilityToUnSavePlans(ma_plans, planType);
 
 		planType="PDP";
-		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+//		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.clickonBackToPlanResults();
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
 		plansummaryPage.validateAbilityToUnSavePlans(pdp_plans, planType);
 
 		planType="SNP";
-		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+//		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.clickonBackToPlanResults();
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
 		System.out.println("Proceed to unsave the "+planType+" second plan from the input");
@@ -241,13 +247,15 @@ public class VppFavoritePlanMobile {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		System.out.println("Proceed to click Home button to enter zip code again");
-		plansummaryPage.clickHomeButton();
+//		plansummaryPage.clickHomeButton();
+		aquisitionhomepage.openHomeFromMenu();
 
 		System.out.println("First go to a totally different zipcode = 90210");
 		plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty("90210");
 
 		System.out.println("Then go back to the test zipcode");
-		plansummaryPage.clickHomeButton();
+//		plansummaryPage.clickHomeButton();
+		aquisitionhomepage.openHomeFromMenu();
 		if (("NO").equalsIgnoreCase(isMultiCounty.trim())) {
 			plansummaryPage = aquisitionhomepage.searchPlansWithOutCounty(zipcode);
 		} else {
@@ -262,7 +270,7 @@ public class VppFavoritePlanMobile {
 		}
 		
 		if(plansummaryPage.backToPlans.isDisplayed()) {
-			plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+			plansummaryPage.clickonBackToPlanResults();
 		}
 
 		//----- MA plan type ---------------------------
@@ -275,7 +283,8 @@ public class VppFavoritePlanMobile {
 		//----- PDP plan type --------------------------
 		planType="PDP";
 		
-		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+//		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.clickonBackToPlanResults();
 		System.out.println("Proceed to validate "+planType+" unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
@@ -284,7 +293,8 @@ public class VppFavoritePlanMobile {
 		//----- SNP plan type --------------------------
 		planType="SNP";
 		
-		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+//		plansummaryPage.jsClickNew(plansummaryPage.backToPlans);
+		plansummaryPage.clickonBackToPlanResults();
 		System.out.println("Proceed to validate "+planType+" unsaved plan(s) are still unsaved");
 		plansummaryPage.viewPlanSummary(planType);
 		plansummaryPage.handlePlanYearSelectionPopup(planYear);
@@ -408,7 +418,8 @@ public class VppFavoritePlanMobile {
 		String planYear = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_YEAR);
 		
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		plansummaryPage=plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("80001","Jefferson County","NO");
+		plansummaryPage=plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode("90210", "Los Angeles County",
+				"NO");
 
 		if (plansummaryPage != null) {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");

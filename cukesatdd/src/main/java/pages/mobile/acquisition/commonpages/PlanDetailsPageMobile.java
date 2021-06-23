@@ -1160,6 +1160,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		List<String> tabNames = new ArrayList<String>();
 		String activeTab = "";
 		for (WebElement tab : planDetailTabs) {
+			scrollToView(tab);
 			String tabName = tab.getText().trim();
 			tabNames.add(tabName);
 			if(tab.findElement(By.xpath("./ancestor::a")).getAttribute("class").contains("active")) {
@@ -1167,10 +1168,18 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			}
 		}
 		
+		scrollToView(planDetailTabs.get(0));
+		
 		int indexOfTabToSelect = tabNames.indexOf(planDetailTab);
 		int indexOfActiveTab = tabNames.indexOf(activeTab);
 		
-		if(indexOfTabToSelect > indexOfActiveTab) {
+		if(indexOfTabToSelect == -1) {
+			Assertion.fail(planDetailTab + " is not present in " + tabNames);
+		} else {
+			jsClickNew(planDetailTabs.get(indexOfTabToSelect));
+		}
+		
+		/*if(indexOfTabToSelect > indexOfActiveTab) {
 			for(int tabNum = indexOfActiveTab; tabNum <= indexOfTabToSelect; tabNum++) {
 				jsClickNew(planDetailTabs.get(tabNum).findElement(By.xpath("./ancestor::a")));
 			}
@@ -1178,7 +1187,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			for(int tabNum = indexOfActiveTab; tabNum >= indexOfTabToSelect; tabNum--) {
 				jsClickNew(planDetailTabs.get(tabNum).findElement(By.xpath("./ancestor::a")));
 			}
-		}
+		}*/
 		
 		
 	}
@@ -1539,7 +1548,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		try {
 			Thread.sleep(5000);
 			if (optionalRider)
-				dentalPopupOptionalRidersLink.click();
+				jsClickNew(dentalPopupOptionalRidersLink);
 			else {
 				JavascriptExecutor jse = (JavascriptExecutor) driver;
 				jse.executeScript("arguments[0].click()", dentalPopupLink);
@@ -1548,7 +1557,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.assertTrue("Expected=" + planName + " Actual=" + dentalPopupPlanLabel.getText(),
 					dentalPopupPlanLabel.getText().contains(planName));
 			String parentWindow = driver.getWindowHandle();
-			dentalCoverPopupContinue.click();
+			jsClickNew(dentalCoverPopupContinue);
 			Thread.sleep(5000);
 			System.out.println("Moved to dental directoy rally page");
 
@@ -1557,7 +1566,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.assertTrue("Title mismatch for dental directory", driver.getTitle().equals("Dental | Find Care"));
 			driver.close();
 			driver.switchTo().window(parentWindow);
-			dentalCoverPopupCancel.click();
+			jsClickNew(dentalCoverPopupCancel);
 
 		} catch (InterruptedException e) {
 			e.printStackTrace();
