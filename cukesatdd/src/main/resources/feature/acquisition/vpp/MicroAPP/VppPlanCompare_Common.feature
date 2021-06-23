@@ -346,7 +346,7 @@ Feature: 1.01.3-Vpp to plan Compare Scenarios
     Then I select "<plantype>" plans and "<planIndices>" plans to compare and click on compare plan link
     Then verify plan compare page is loaded
     Then remove "<removePlanIndices>" plan from new plan compare page
-    Then validate all available plans are shown on click of view all plans
+    #Then validate all available plans are shown on click of view all plans
 
     @vppPlanCompareCommon_AARP02 @vppPlanCompareAARP13 @regressionAARP @prodRegression @sanity @vbfGate
     Examples: 
