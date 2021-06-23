@@ -411,7 +411,8 @@ public class oleStepDefinition {
 		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
 		//String Premium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		String Premium;
-	
+		//String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsMap.put("Plan Type", (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE));
 		boolean Validation_Status = welcomePage.validate_plan_details(PlanDetailsMap);
 		Premium = welcomePage.GetMonthlyPremiumValue();
 		if (Validation_Status) {
@@ -3462,5 +3463,33 @@ public class oleStepDefinition {
 			Assertion.fail("Use and Disclosure Page : Required fields NOT validated");
 		}
 	
+	}
+	
+	@Then("^the user validates the Plan details on OLE_CSNP Plans$")
+	public void the_user_validates_the_Plan_details_on_OLE_CSNP() throws Throwable {
+	//	scenario.log("Sai - Change made 06/15 - Validate planname, year,zipcode,county,premium");
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		//String Premium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		String Premium;
+		//String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsMap.put("Plan Type", (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE));
+		boolean Validation_Status = welcomePage.validate_plan_details_CSNP(PlanDetailsMap);
+		Premium = welcomePage.GetMonthlyPremiumValue();
+		if (Validation_Status) {
+			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		//	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanDetailsMap.get("Plan Premium"));
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, Premium);
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
+			Assertion.fail();
+		}
 	}
 }
