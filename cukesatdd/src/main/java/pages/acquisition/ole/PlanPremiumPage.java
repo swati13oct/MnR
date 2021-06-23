@@ -44,7 +44,7 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@class, 'ng-star-inserted')])[1]")
 	private WebElement PageHeader;
 	
-	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@id, 'relationshipToEnrolleeInfo')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement authPageHeader;
 
 	//Right Rail Elements

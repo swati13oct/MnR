@@ -37,7 +37,8 @@ public class AuthorizationPage extends UhcDriver{
 
 	//Page Header
 	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
-	@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@id, 'relationshipToEnrolleeInfo')])[1]")
+	//@FindBy(xpath = "(//*[contains(@class, 'formset')]//*[contains(@id, 'relationshipToEnrolleeInfo')])[1]")
+	@FindBy(xpath = "(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement PageHeader;
 
 	//Right Rail Elements

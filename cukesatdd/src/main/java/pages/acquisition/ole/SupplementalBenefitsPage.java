@@ -32,7 +32,8 @@ public class SupplementalBenefitsPage extends UhcDriver{
 	private WebElement CancelEnrollmentLink;
 
 	//Page Header
-	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	//@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class,'only-prelim')]")
+	@FindBy(xpath = "(//*[contains(@class,'form-row no-border ng-s')]//*[contains(@class,'sub-header')])[1]")
 	private WebElement PageHeader;
 
 	//Right Rail Elements

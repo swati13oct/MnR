@@ -207,7 +207,8 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(xpath="//button[contains(@id,'ip-no')]")
 	public WebElement AccessibilityButton;
 	
-	@FindBy(xpath="//*[contains(@id, 'sepRadioFieldSet')]//*[contains(@id, 'sepRadio')]")
+//	@FindBy(xpath="//*[contains(@id, 'sepRadioFieldSet')]//*[contains(@id, 'sepRadio')]")
+	@FindBy(xpath="(//*[contains(@class,'form-row no-border ng-s')]//*[contains(@class,'sub-header')])[1]")
 	public WebElement SEPPageHeader;
 	
 	
