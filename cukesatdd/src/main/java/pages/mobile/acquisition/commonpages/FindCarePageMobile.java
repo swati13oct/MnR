@@ -341,14 +341,19 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 		String HospName = FirstHospitalRecord.getText();
 		System.out.println("Text is :: " + HospName);
 		jsClickNew(FirstHospitalRecord);
+		pageloadcomplete();
 		
 		scrollToView(Providericon);
 		validate(Providericon);
 		jsClickNew(selectProviderBtn);
+		pageloadcomplete();
+		
 		if (validate(addressCheckBox)) {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
 		}
+		
+		pageloadcomplete();
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 		
@@ -397,6 +402,9 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
 		}
+		
+		WebElement GreatHeaderText = driver.findElement(By.xpath("//header[contains(@class,'txtCenter step-header')]"));
+		scrollToView(GreatHeaderText);
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 
