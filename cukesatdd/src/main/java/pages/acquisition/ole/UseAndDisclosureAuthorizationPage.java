@@ -97,13 +97,14 @@ public class UseAndDisclosureAuthorizationPage extends UhcDriver{
 		    disclosureBox.click();
 		    System.out.println("Disclosure is displayed and clicked");
 		    	    
-		//    validate(NextButton);
-		 //   NextButton.click();
+		    validate(NextButton);
+		    	jsClickNew(NextButton);
 	}
 		  else{
 			  System.out.println("Disclosure is not displayed"); 
 		  }
 	//	return new PersonalInformationPage(driver);
+		  
 		  return new SpecialElectionPeriodPage(driver);
 
 	}
