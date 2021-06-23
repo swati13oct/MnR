@@ -395,8 +395,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		}*/
 		try {
 			WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
-			scrollToView(currentOptionChkBx);
-			jsClickNew(currentOptionChkBx);
+			currentOptionChkBx.click();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Not able to select option");
@@ -407,20 +406,15 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 
 			try {
 				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
-				if(validate(dataTextBx)) {
-					scrollToView(dataTextBx);
-//					dataTextBx.sendKeys(currentOptionData);
-					sendKeysByCharacter(dataTextBx, currentOptionData);		//All date fields are of input tag and sometime enter incorrect values hence sending keys a character at a time
-				}
+				if(validate(dataTextBx))
+					dataTextBx.sendKeys(currentOptionData);
 			} 
 			catch (Exception e) {
 			}
 			try {
 				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
-				if(validate(dataTextBx)) {
-					scrollToView(dataTextBx);
-					dataTextBx.sendKeys(currentOptionData);
-				}
+				if(validate(dataTextBx))
+						dataTextBx.sendKeys(currentOptionData);
 			} catch (Exception e) {
 				System.out.println("No additional data required for Option selected");
 			}
