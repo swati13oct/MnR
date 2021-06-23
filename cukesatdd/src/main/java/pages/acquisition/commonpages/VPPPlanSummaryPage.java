@@ -3043,6 +3043,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "']/following::div[contains(@class,'save-icon')][1]//img[contains(@src,'unsaved-icon.png')]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				threadsleep(2);
 			}
 
 		} catch (Exception e) {
@@ -4420,7 +4421,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	public void verifyPlanComapreCheckboxIsUnchecked() {
 		validate(planCompareCheckBox);
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-4').checked;").toString();
+		String CheckStatus = js.executeScript("return document.getElementById('compare-plan-3').checked;").toString();
 		System.out.println("Plan compare checkbox status:" + CheckStatus);
 		Assertion.assertEquals("false", CheckStatus.trim());
 		System.out.println("Verified Plan Compare checkbox is unchecked");
