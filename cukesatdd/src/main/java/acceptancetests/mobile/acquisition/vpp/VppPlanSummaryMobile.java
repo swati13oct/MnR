@@ -23,8 +23,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
@@ -34,8 +32,7 @@ import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
-import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPage;
-import pages.mobile.acquisition.commonpages.ShopforaplanAARPlayerMobile;
+import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
@@ -64,6 +61,25 @@ public class VppPlanSummaryMobile {
 	public void user_should_be_able_to_see_the_NBA_modal_to_add_drugs_on_the_VPP_summary_page() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario().getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNextBestActionModalForDrugCost();
+	}
+	
+	@Then("^the user validates the added drug name on plan summary page for the selected plan$")
+	public void verify_drugs_covered_AARP(DataTable Planname) {
+
+		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
+		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
+		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
+		for (int i = 0; i < plannameAttributesRow.size(); i++) {
+
+			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+					plannameAttributesRow.get(i).getCells().get(1));
+		}*/
+		String planName = plannameAttributesMap.get("Plan Name");
+		String drugName = plannameAttributesMap.get("DrugName");
+
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		Assertion.assertTrue("Drugs coverage Info not updated", plansummaryPage.verifyAddedDrugName(planName, drugName));
 	}
 
 	
@@ -105,8 +121,8 @@ public class VppPlanSummaryMobile {
 			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
 					givenAttributesRow.get(i).getCells().get(1));
 		}*/
-
-		String planName = givenAttributesMap.get("Plan Name");
+		getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+		String planName = givenAttributesMap.get("Plan Name").trim();
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -133,9 +149,9 @@ public class VppPlanSummaryMobile {
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 			String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-			plansummaryPage.validateAndClickAddtoCompareinAARP(planType, planName);
+			plansummaryPage.validateAndClickAddtoCompare(planType, planName);
 			plansummaryPage.compareTextAfterclickingAddtoCompareinAARP(planName);
-			plansummaryPage.deselectAddToCompareinAARP(planName);
+			plansummaryPage.deselectAddToCompare(planName);
 
 		}
 	}
@@ -169,10 +185,10 @@ public class VppPlanSummaryMobile {
 		PlanDetailsPageMobile planDetailsPage = (PlanDetailsPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		VPPPlanSummaryPageMobile plansummaryPage = planDetailsPage.navigateBackToPlanSummaryPageFromDetailsPage();
-		if (plansummaryPage != null) {
-			Assertion.assertTrue(true);
-		} else
-			Assertion.fail("Error in validating the Plan Summary Page");
+//		if (plansummaryPage != null) {
+//			Assertion.assertTrue(true);
+//		} else
+//			Assertion.fail("Error in validating the Plan Summary Page");
 
 	}
 
@@ -188,6 +204,8 @@ public class VppPlanSummaryMobile {
 			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
+		
+		String plantype = memberAttributesMap.get("Plan Type");
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
 		String specialist = memberAttributesMap.get("Specialist");
@@ -197,6 +215,8 @@ public class VppPlanSummaryMobile {
 		String annualDeductible = memberAttributesMap.get("Annual Deductible");
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.viewPlanSummary(plantype);		
+		
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		plansummaryPage.clickOnViewMoreForPlan(planName);
 		plansummaryPage.validatePlanPremium(planName, monthlyPremium);
@@ -268,7 +288,6 @@ public class VppPlanSummaryMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-
 		WelcomePageMobile welcomeOLEPage = plansummaryPage.Enroll_OLE_Plan(planName, planType);
 		if (welcomeOLEPage != null) {
 			getLoginScenario().saveBean(PageConstants.OLE_WELCOME_PAGE, welcomeOLEPage);
@@ -1062,21 +1081,21 @@ public class VppPlanSummaryMobile {
 		planSummaryPage.peopleLearnMoreButtonandValidate(planName);
 	}
 	
-	@Given("^the user hovers screen over the shop for a plan$")
+	/*@Given("^the user hovers screen over the shop for a plan$")
 	public void the_user_hovers_screen_over_the_shop_for_a_plan() throws Throwable {
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		ShopforaplanAARPlayerMobile shop = acqusitionHomePage.Hoveronaplan();
+		ShopForPlanNavigationPage shop = acqusitionHomePage.Hoveronaplan();
 		if (shop != null) {
 			System.out.println("Shop for a plan drop down is opened");
 			getLoginScenario().saveBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER, shop);
 		} else {
 			Assertion.fail("Issue in selecting a plan drop down");
 		}
-	}
+	}*/
 	
 	
-	@Given("^the user hovers screen over the learnabout Medicare for a plan$")
+	/*@Given("^the user hovers screen over the learnabout Medicare for a plan$")
 	public void the_user_hovers_screen_over_the_learnabout_Medicare_for_a_plan() throws Throwable {	
 		AcquisitionHomePageMobile acqusitionHomePage = (AcquisitionHomePageMobile) getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		ShopForPlanNavigationPage shop = acqusitionHomePage.HoveronalearnaboutMedicare();
@@ -1087,7 +1106,7 @@ public class VppPlanSummaryMobile {
 //		else {
 //			Assertion.fail("Issue in selecting a plan drop down");
 //		}
-	}
+	}*/
 	
 	@Then("^the site user validates the RightRails Links on Medsupp Page$")
 	public void user_validate_rightrail_links_medsupp_page() throws Throwable {
@@ -1171,7 +1190,7 @@ public class VppPlanSummaryMobile {
 
 	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
 	public void the_user__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		AppiumDriver wd = getLoginScenario().getMobileDriver();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
@@ -1190,6 +1209,35 @@ public class VppPlanSummaryMobile {
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
 		if (site.equalsIgnoreCase("AARP")) 
 		aquisitionhomepage.validateSubtitle();
+	}
+	
+	@Given("^the user navigates to following Campaign acquisition site page$")
+	public void the_user_navigates_to_following_medicare_acquisition_site(DataTable givenAttributes) throws Throwable {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String path = memberAttributesMap.get("PagePath");
+		// String plantype = memberAttributesMap.get("Plan Type");
+		path = path.replace("!", "#");
+		System.out.print("Path to Acq page : " + path);
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+
+		VPPPlanSummaryPageMobile plansummaryPage = aquisitionhomepage.navigateToPathNew(path);
+		// Thread.sleep(5000);
+		// VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		if (plansummaryPage != null) {
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+			// getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+
+		} else {
+			Assertion.fail("Error Loading VPP plan summary page");
+		}
 	}
 	
 	@Then("^the user clicks on the united health care medicare solutions link$")

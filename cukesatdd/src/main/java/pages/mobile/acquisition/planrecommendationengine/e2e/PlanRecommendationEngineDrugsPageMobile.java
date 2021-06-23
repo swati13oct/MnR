@@ -558,7 +558,7 @@ public class PlanRecommendationEngineDrugsPageMobile extends GlobalWebElements {
 	public void clickSwitchdrug() {
 		modalGenericSwitchLabel.click();
 		threadsleep(2000);
-		jsClickMobile(modalGenericSwitch);
+		jsClickNew(modalGenericSwitch);
 	}
 
 	// Validate Added Drug Name

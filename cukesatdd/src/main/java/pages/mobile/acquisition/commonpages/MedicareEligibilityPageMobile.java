@@ -215,7 +215,7 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 		WebElement lnkMededNavMobile=driver.findElement(By.xpath("//a[contains(@class,'meded-article-nav__title')]"));
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		jsClickMobile(lnkMededNavMobile);
+		jsClickNew(lnkMededNavMobile);
 		sleepBySec(2);
 		System.out.println("Med Ed Navigation Opened Successfully");
 		if(plan=="MA") {

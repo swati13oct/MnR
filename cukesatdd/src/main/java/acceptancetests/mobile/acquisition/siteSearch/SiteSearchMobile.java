@@ -46,7 +46,7 @@ public class SiteSearchMobile {
 	public void validateUserIsOnAcquisitionSiteNavToPharmacySearch(DataTable inputAttributes) {
 		Map<String, String> inputAttributesMap = parseInputArguments(inputAttributes);
 		String siteName = inputAttributesMap.get("Site Name");
-		WebDriver wd = getLoginScenario().getWebDriverNew();
+		WebDriver wd = getLoginScenario().getMobileDriver();
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, siteName);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		System.out.println("TEST - testSiteUrl=" + testSiteUrl);

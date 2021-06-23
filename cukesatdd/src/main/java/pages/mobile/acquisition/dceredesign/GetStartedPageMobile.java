@@ -25,10 +25,19 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class GetStartedPageMobile extends UhcDriver {
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	// @FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
+	@FindBy(css = "#addDrug")
+
 	public WebElement AddMyDrugsBtn;
 
-	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	@FindBy(css = "#adddrug")
+	public WebElement addDrugButton;
+
+	@FindBy(css = "#previousButton")
+	public WebElement getStartedButton;
+
+	// @FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	@FindBy(css = "#drugsearchmobile")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
 
 	@FindBy(xpath = "//h3[contains(text(), 'Almost there')]")
@@ -37,7 +46,8 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
 
-	@FindBy(xpath = "//span[contains(text(),'Get Started')]")
+	@FindBy(xpath = "//h2[contains(text(),'Get Started')]")
+
 	public WebElement getStartedTab;
 
 	@FindBy(xpath = "//body/div[@id='overlay']")
@@ -63,11 +73,11 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	public BuildYourDrugListMobile clickAddsDrugs() {
 		if (validate(AddMyDrugsBtn))
-			jsClickMobile(AddMyDrugsBtn);
-		// AddMyDrugsBtn.click();
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 40);
-		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
-			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+			jsClickNew(AddMyDrugsBtn);
+
+		if (validateNew(addDrugButton)) {
+			Assertion.assertTrue("Navigated to Build Drug List Page", true);
+
 			return new BuildYourDrugListMobile(driver);
 		}
 		Assertion.fail("Did not Navigate to Build Drug List Page");
@@ -76,7 +86,7 @@ public class GetStartedPageMobile extends UhcDriver {
 
 	public void clickAddDrugsBtn() {
 		validateNew(AddMyDrugsBtn);
-		jsClickMobile(AddMyDrugsBtn);
+		jsClickNew(AddMyDrugsBtn);
 		// AddMyDrugsBtn.click();
 		// return new ZipCodePlanYearCapturePage(driver);
 		/*
@@ -109,7 +119,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	}
 
 	public VisitorProfilePageMobile clickOnShoppingCart() {
-		//shoppingCartIcon.click();
+		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
@@ -118,7 +128,7 @@ public class GetStartedPageMobile extends UhcDriver {
 			return null;
 		}
 	}
-	
+
 	public PrescriptionsProvidersBenefitsPageMobile clickReturnToAcqHomePAge() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
