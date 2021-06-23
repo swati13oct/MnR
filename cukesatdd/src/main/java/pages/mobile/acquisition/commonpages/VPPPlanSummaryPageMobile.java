@@ -3509,7 +3509,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 				originalPageTitle.equals(pageTitleAfterClosingPrintPreview));
 	}
 
-	public void closeOriginalTabAndOpenNewTab() {
+	public void closeOriginalTabAndOpenNewTab(String testSiteUrl) {
 
 		// get original tab handler
 		String winHandleBefore = driver.getWindowHandle();
@@ -3519,7 +3519,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('about:blank','_blank');");
 		for (String winHandle : driver.getWindowHandles()) {
-			driver.switchTo().window(winHandle);
+			if (!winHandle.equals(winHandleBefore)) {
+				driver.switchTo().window(winHandle);
+			}
 		}
 		String winHandleTmp = driver.getWindowHandle();
 		System.out.println(
@@ -3529,10 +3531,14 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		driver.switchTo().window(winHandleTmp);
 		System.out.println("Proceed to open the acquisition url in new tab");
-		js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
+
+//		js.executeScript("window.open('" + AARP_ACQISITION_PAGE_URL + "','_blank');");
+		js.executeScript("window.open('" + testSiteUrl + "','_blank');");
 
 		for (String winHandle : driver.getWindowHandles()) {
-			driver.switchTo().window(winHandle);
+			if (!winHandle.equals(winHandleTmp)) {
+				driver.switchTo().window(winHandle);
+			}
 		}
 		String winHandleNew = driver.getWindowHandle();
 
@@ -3543,6 +3549,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		System.out.println("Proceed to use this newly opened tab for remaining validation");
 		driver.switchTo().window(winHandleNew);
 	}
+	
 	// ^^^ note: added for US1598162
 
 	public void MedSupFormValidation(String DateOfBirth) throws InterruptedException {

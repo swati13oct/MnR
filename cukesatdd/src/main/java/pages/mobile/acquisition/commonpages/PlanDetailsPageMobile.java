@@ -201,29 +201,32 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(css = "#englishDocs")
 	private WebElement englishDocs;
 	
+	@FindBy(css = "#otherDocs")
+	private WebElement otherDocs;
+	
 	@FindBy(css = "#mapd_gi_div_eng")
-	WebElement mapdGeneralPlanPDfs;
+	private WebElement mapdGeneralPlanPDfs;
 
 	@FindBy(css = "#mapd_mp_div_eng")
-	WebElement mapdMedicalProvidersPDfs;
+	private WebElement mapdMedicalProvidersPDfs;
 
 	@FindBy(css = "#mapd_pdc_div_eng")
-	WebElement mapdDrugCoveragePDfs;
+	private WebElement mapdDrugCoveragePDfs;
 
 	@FindBy(css = "#mapd_pharmacydirectory_div_eng")
-	WebElement mapdPharmacyDirectoryPDfs;
+	private WebElement mapdPharmacyDirectoryPDfs;
 
 	@FindBy(id = "mapd_gi_div_otherlang")
-	WebElement mapdGeneralPlanPDfsOtherLang;
+	private WebElement mapdGeneralPlanPDfsOtherLang;
 
 	@FindBy(id = "mapd_gi_div_otherlang")
-	WebElement mapdMedicalProvidersPDfsOtherLang;
+	private WebElement mapdMedicalProvidersPDfsOtherLang;
 
 	@FindBy(id = "mapd_gi_div_otherlang")
-	WebElement mapdDrugCoveragePDfsOtherLang;
+	private WebElement mapdDrugCoveragePDfsOtherLang;
 
 	@FindBy(id = "mapd_pharmacydirectory_div_otherlang")
-	WebElement mapdPharmacyDirectoryPDfsOtherLang;
+	private WebElement mapdPharmacyDirectoryPDfsOtherLang;
 
 	@FindBy(id = "selectmultycounty_box")
 	private WebElement countyPopOut;
@@ -1289,19 +1292,22 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			// validate English PDFs
 			scrollToView(englishDocs);
 			
-			scrollToView(mapdGeneralPlanPDfs);
+//			scrollToView(mapdGeneralPlanPDfs);
 			validateNew(mapdGeneralPlanPDfs);
 			
-			scrollToView(mapdMedicalProvidersPDfs);
+//			scrollToView(mapdMedicalProvidersPDfs);
 			validateNew(mapdMedicalProvidersPDfs);
 			
-			scrollToView(mapdDrugCoveragePDfs);
+//			scrollToView(mapdDrugCoveragePDfs);
 			validateNew(mapdDrugCoveragePDfs);
 			
-			scrollToView(mapdPharmacyDirectoryPDfs);
+//			scrollToView(mapdPharmacyDirectoryPDfs);
 			validateNew(mapdPharmacyDirectoryPDfs);
 
 			// validate Other lang PDFs
+			
+			scrollToView(otherDocs);
+			
 			scrollToView(mapdGeneralPlanPDfsOtherLang);
 			validateNew(mapdGeneralPlanPDfsOtherLang);
 			
