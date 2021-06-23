@@ -1801,15 +1801,17 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 	
 	public void clickonBackToPlanResults() {
-		scrollToView(backToPlans);
-		Assertion.assertTrue("PROBLEM - unable to locate the 'Back to plan results' link on plan summary page",
-				validate(backToPlans));
-		jsClickNew(backToPlans);
-		CommonUtility.checkPageIsReady(driver);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (backToPlans.isDisplayed()) {
+			scrollToView(backToPlans);
+			Assertion.assertTrue("PROBLEM - unable to locate the 'Back to plan results' link on plan summary page",
+					validate(backToPlans));
+			jsClickNew(backToPlans);
+			CommonUtility.checkPageIsReady(driver);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
