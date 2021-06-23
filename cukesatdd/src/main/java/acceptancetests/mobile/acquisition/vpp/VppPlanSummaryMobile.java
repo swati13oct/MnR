@@ -575,7 +575,7 @@ public class VppPlanSummaryMobile {
 
 		// note: if email is successfully sent, deepLink info should be available, save
 		// it for later use
-		String deepLinkStr = util.getEmailDeepLink();
+		String deepLinkStr = util.getEmailDeepLink(wd);
 		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_DEEPLINK, deepLinkStr);
 		getLoginScenario().saveBean(PageConstants.SUMMARY_PAGE_INFO, vppSummaryPgInfo);
 	}
