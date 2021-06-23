@@ -927,11 +927,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
-				checkModelPopup(driver, 45);
+//				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
-				checkModelPopup(driver, 45);
+//				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL_NEW);
 				checkModelPopup(driver, 20);
@@ -939,7 +939,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-				checkModelPopup(driver, 10);
+//				checkModelPopup(driver, 10);
 			}
 		} else if (site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE")) {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
