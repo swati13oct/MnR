@@ -802,19 +802,26 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         }
         WebElement btnDownload = driver.findElement(By.xpath("//button[contains(@class,'Button')]//span[contains(text(),'Download PDF')]"));
         jsClickNew(btnDownload);
+        System.out.println("Download Button Clicked");
         sleepBySec(2);
         driver.switchTo().defaultContent();
-        /*driver.navigate().to("chrome://downloads/");
+        driver.navigate().to("chrome://downloads/");
         sleepBySec(2);
-        //WebElement pdf = driver.findElement(By.xpath("//div[contains(@id,'title-area')]//a//span[contains(text(),'" + pdfName + "')]"));
-        List<WebElement> pdf = driver.findElements(By.cssSelector("//downloads-manager//deep//downloads-item//deep//a[id=\"file-link\"]"));
+        driver.switchTo().defaultContent();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        WebElement pdfDownload = (WebElement) executor.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#mainContainer').querySelector('downloads-item').shadowRoot.querySelector('#content.is-active').querySelector('#details')");
 
-        if (pdf.get(0).isDisplayed()) {
-            System.out.println("PDF is downloaded");
-        } else {
-            System.out.println("PDF is not downloaded");
+
+        if (pdfDownload!=null){
+            String downloadedPDFName=(pdfDownload.getText().split("\n"))[0].trim();
+            if (downloadedPDFName.equalsIgnoreCase(pdfName))
+            System.out.println("PDF Downloaded:\n"+downloadedPDFName);
+        }else{
+            Assert.fail("Correct PDF not downloaded");
         }
-        driver.navigate().back();*/
+
+        driver.navigate().back();
+        driver.switchTo().defaultContent();
 
 
     }
@@ -822,7 +829,9 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
     public void validatePdfMenuPrintLink() {
         if (MRScenario.browserName.equalsIgnoreCase("chrome")) {
             CommonUtility.checkPageIsReadyNew(driver);
-            sleepBySec(1);
+            driver.switchTo().defaultContent();
+            sleepBySec(5);
+
             WebElement pdfViewer = driver.findElement(By.xpath("//iframe[contains(@id,'pdfviewer')]"));
             if (pdfViewer.isDisplayed()) {
                 System.out.println("PDF Viewer is present on the page");
@@ -831,6 +840,7 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
             }
             switchToNewIframe(pdfViewer);
 
+            sleepBySec(3);
             WebElement btnpdfSideMenu = driver.findElement(By.xpath("//button[contains(@class,'sideMenuButton')]"));
             jsClickNew(btnpdfSideMenu);
             WebElement pdfSideMenu = driver.findElement(By.xpath("//div[contains(@class,'spectrum-Dialog-content')]"));
