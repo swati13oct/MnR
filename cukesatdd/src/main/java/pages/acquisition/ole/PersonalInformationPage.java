@@ -583,7 +583,7 @@ public class PersonalInformationPage extends UhcDriver{
 		Thread.sleep(3000);
 		//Updated the get url title SEP Page with Other Health insurance...OLERedesign
 			if(driver.getCurrentUrl().contains("other-health-insurance")){
-			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance"), "OLE Other HealthInsurance Page is Displayed");
+			Assert.assertTrue(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions"), "OLE Other HealthInsurance or Chronic Page Page is Displayed");
 			return new ConfirmYourEligibilityPage(driver);
 			
 			}
@@ -598,9 +598,9 @@ public class PersonalInformationPage extends UhcDriver{
 					 validateNew(NextBtn); 
 					 jsClickNew(NextBtn);
 					
-					 if(driver.getCurrentUrl().contains("other-health-insurance")){
-					  System.out.println("OLE Other HealthInsurance Page is Displayed"); } else {
-					  System.out.println("OLE Other HealthInsurance Page is not Displayed"); }
+					 if(driver.getCurrentUrl().contains("other-health-insurance") || driver.getCurrentUrl().contains("chronic-questions")){
+					  System.out.println("OLE Other HealthInsurance or Chronic  Page is Displayed"); } else {
+					  System.out.println("OLE Other HealthInsurance  or Chronic  Page is not Displayed"); }
 					 return new ConfirmYourEligibilityPage(driver);
 				}
 			 }
