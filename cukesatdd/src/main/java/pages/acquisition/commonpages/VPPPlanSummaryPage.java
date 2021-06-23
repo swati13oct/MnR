@@ -3023,6 +3023,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "']/following::div[contains(@class,'save-icon')][1]//img[contains(@src,'unsaved-icon.png')]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				threadsleep(2);
 			}
 
 		} catch (Exception e) {
