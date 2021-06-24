@@ -464,7 +464,7 @@ public class CommonutilitiesMobile extends UhcDriver {
 		threadsleep(1000);
 		validate(continueBtn);
 		mobileLocateElement(continueBtn);
-		jsClickMobile(continueBtn);
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		if(percentageValidation)
 			nextPageValidation(page.toUpperCase());

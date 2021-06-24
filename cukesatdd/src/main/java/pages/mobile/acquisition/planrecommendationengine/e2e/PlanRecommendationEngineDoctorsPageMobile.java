@@ -473,7 +473,7 @@ public class PlanRecommendationEngineDoctorsPageMobile extends GlobalWebElements
 			providerlookup(doctorsName, 1);
 		System.out.println("Validating " + page + " page Continue button functionality");
 		// modalContinuedoctors.click();
-		jsClickMobile(modalContinuedoctors);
+		jsClickNew(modalContinuedoctors);
 		// jsClickNew(finishandReturnBtn);
 
 		// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);

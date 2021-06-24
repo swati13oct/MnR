@@ -64,7 +64,7 @@ public class LeavingOLEmodalMobile extends UhcDriver{
 		}
 		else if(driver.getCurrentUrl().contains("special-election-period")){
 			System.out.println("OLE Special Election Period Page is Displayed");
-			return new SpecialElectionPeriodPagemobile(driver);
+			return new SpecialElectionPeriodPageMobile(driver);
 		}
 		return null;	
 	}
