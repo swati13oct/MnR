@@ -26,7 +26,10 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -92,7 +95,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "estimateYourDrugsLink")
 	private WebElement estimateDrugBtn;
 
-	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
+//	@FindBy(xpath = "//span[contains(text(),'Plan Costs')]")
+	@FindBy(css = "#plancosts")
 	private WebElement planCostsTab;
 
 	@FindBy(xpath = "//*[contains(text(),'Prescription Drug Benefits')]")
@@ -143,7 +147,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[2]/td/strong")
 	private WebElement addedDrug;
 
-	@FindBy(xpath = "//a[text()='Look up my Doctor/Provider']")
+	@FindBy(id = "po7links")
 	private WebElement lookUpYourProviderButton;
 
 	@FindBy(xpath = "//p[contains(text(),'See if your Doctor/Provider is covered in your ZIP')]")
@@ -169,6 +173,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Monthly']/following-sibling::strong[1]")
 	private WebElement planMonthlyPremium;
+
 	@FindBy(xpath = "//div[@id='planCosts']//td//p[text()='Plan Premium']/ancestor::td/following-sibling::td/p[text()='Yearly']/following-sibling::strong[1]")
 	private WebElement planYearlyPremium;
 
@@ -432,6 +437,59 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 	}
 
+	@FindBy(xpath = "//*[contains(@id,'planCosts')]//tr[not(contains(@class,'ng-hide'))]//p[contains(text(),'Drug')]/ancestor::td/following-sibling::td/p[contains(text(),'Yearly')]/following-sibling::span[not(contains(@class,'ng-hide'))]")
+	private WebElement planCostTabDrugCostValueCell;
+
+	public void validateDrugInfoOnPlanCostTab(String annualDrugCost) {
+
+		if (!planCostTabDrugCostValueCell.getText().equals(annualDrugCost))
+			Assertion.fail("Drug cost not displayed properly on prescription drugs tab");
+
+	}
+
+	@FindBy(xpath = "//*[contains(@class,'edit-drugs-link')]")
+	private WebElement editDrugLinkPlanCost;
+
+	public BuildYourDrugListMobile navigateToDCERedesignFromPlanCostTab() {
+
+		validateNew(editDrugLinkPlanCost, 20);
+		jsClickNew(editDrugLinkPlanCost);
+
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugListMobile(driver);
+		}
+		Assertion.fail("Did not Navigate to Build Drug List Page");
+		return null;
+	}
+
+	public void clickPlanCosts() {
+		jsClickNew(planCostsTab);
+
+	}
+
+	@FindBy(xpath = "//*[contains(@id,'DrugListDetails')]")
+	private WebElement editDrugLink;
+
+	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+	public WebElement BuildDrugPage_EnterDrugNameTxt;
+
+	public BuildYourDrugListMobile navigateToDCERedesignEditDrug() {
+
+		jsClickNew(presDrugTab.get(0));
+		validateNew(editDrugLink, 20);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", editDrugLink);
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", editDrugLink);
+		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
+			return new BuildYourDrugListMobile(driver);
+		}
+		Assertion.fail("Did not Navigate to Build Drug List Page");
+		return null;
+	}
+
 	public void validatePlanCost(String planName) {
 		String pName = planName.toString();
 		String pCost1 = planCost1.getText();
@@ -507,7 +565,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		// presDrugTab.get(0).click();
-		jsClickMobile(presDrugTab.get(0));
+		jsClickNew(presDrugTab.get(0));
 		CommonUtility.waitForPageLoad(driver, estimateDrugBtn, 20);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", estimateDrugBtn);
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", estimateDrugBtn);
@@ -599,6 +657,55 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.assertTrue(false);
 
 	}
+	
+	public void validateVPPDetailsPage() {
+		Assertion.assertTrue("user not navigated to VPP Details Page",driver.getCurrentUrl().contains("details"));
+	}
+	
+	public ArrayList<String> getDocNameAndLanguage(String colName){
+		String english = "English", spanish = "Spanish", chinese = "Chinese", lang = "", docName = "";
+		ArrayList<String> result=new ArrayList<String>();
+		
+		if(colName.contains("Enrollment")) { lang = english;docName = "Application";	}
+		else if(colName.contains("Summary of Benefits")) { lang = english; docName = "Summary of Benefits";}
+		else if(colName.contains("Evidence of Coverage")) {lang = english;docName = "Evidence of Coverage"; }
+		else if(colName.contains("ANOC")) {lang = english;docName = "ANOC";}
+		else if(colName.contains("UnitedHealth Passport Program")) {lang = english;docName = "Passport";}
+		else if(colName.contains("Star Ratings")) {lang = english;docName = "Star Ratings";}
+		else if(colName.contains("Benefit Highlights")) {lang = english;docName = "Benefit Highlights";}
+		else if(colName.contains("Provider Directory")) {lang = english;docName = "Directory";}
+		else if(colName.contains("Vendor Information Sheet")) {lang = english;docName = "Vendor Information Sheet";}
+		else if(colName.contains("Comprehensive Formulary")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Prior Authorization Criteria")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Step Therapy Criteria")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Formulary Additions")) {lang = english;docName = "Formulary";}
+		else if(colName.contains("Formulary Deletions")) {lang = english;docName = "Directory";}
+		else if(colName.contains("Alternative Drugs List")) {lang = english;docName = "Drugs"; }
+		else if(colName.contains("Formulario de InscripciÃƒÆ’Ã‚Â³n")) {lang = spanish;docName = "Application"; }
+		else if(colName.contains("Resumen de Beneficios")) {lang = spanish;docName = "Summary of Benefits"; }
+		else if(colName.contains("Comprobante de Cobertura")) {lang = spanish;docName = "Evidence of Coverage"; }
+		else if(colName.contains("ClasificaciÃƒÆ’Ã‚Â³n de la Calidad del Plan")) {lang = spanish;docName = "Star Ratings"; }
+		else if(colName.contains("Programa UnitedHealth Passport")) {lang = spanish;docName = "Passport"; }
+		else if(colName.contains("Aviso Annual de Cambios")) {lang = spanish;docName = "ANOC"; }
+		else if(colName.contains("Beneficios Importantes")) {lang = spanish;docName = "Benefit Highlights"; }
+		else if(colName.contains("Directorio de Proveedores")) {lang = spanish;docName = "Directory"; }
+		else if(colName.contains("InformaciÃƒÆ’Ã‚Â³n sobre proveedores")) {lang = spanish;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("ÃƒÂ¨Ã‚Â¨Ã‚Â»ÃƒÂ¥Ã¢â‚¬Â Ã…Â ÃƒÂ¨Ã‚Â¡Ã‚Â¨ÃƒÂ¦Ã‚Â Ã‚Â¼")) {lang = chinese;docName = "Application"; }
+		else if(colName.contains("ÃƒÂ§Ã‚Â¦Ã¯Â¿Â½ÃƒÂ¥Ã‹â€ Ã‚Â©ÃƒÂ¦Ã‚Â¦Ã¢â‚¬Å¡ÃƒÂ¨Ã‚Â¦Ã‚Â½")) {lang = chinese;docName = "Summary of Benefits"; }
+		else if(colName.contains("ÃƒÂ¦Ã¢â‚¬Â°Ã‚Â¿ÃƒÂ¤Ã‚Â¿Ã¯Â¿Â½ÃƒÂ¨Ã‚Â­Ã¢â‚¬Â°ÃƒÂ¦Ã¢â‚¬ÂºÃ‚Â¸")) {lang = chinese;docName = "Evidence of Coverage"; }
+		else if(colName.contains("ÃƒÂ¦Ã‹Å“Ã…Â¸ÃƒÂ§Ã‚Â´Ã…Â¡ÃƒÂ¨Ã‚Â©Ã¢â‚¬Â¢ÃƒÂ¥Ã‚Â®Ã…Â¡")) {lang = chinese;docName = "Star Ratings"; }
+		else if(colName.contains("ÃƒÂ¥Ã‚Â¹Ã‚Â´ÃƒÂ¥Ã‚ÂºÃ‚Â¦ÃƒÂ¨Ã‚Â®Ã…Â ÃƒÂ¦Ã¢â‚¬ÂºÃ‚Â´ÃƒÂ©Ã¢â€šÂ¬Ã…Â¡ÃƒÂ§Ã…Â¸Ã‚Â¥")) {lang = chinese;docName = "ANOC"; }
+		else if(colName.contains("ÃƒÂ§Ã‚Â¦Ã¯Â¿Â½ÃƒÂ¥Ã‹â€ Ã‚Â©ÃƒÂ¦Ã¢â‚¬ËœÃ‹Å“ÃƒÂ¨Ã‚Â¦Ã¯Â¿Â½")) {lang = chinese;docName = "Benefit Highlights"; }
+		else if(colName.contains("ÃƒÂ©Ã¢â‚¬Â Ã‚Â«ÃƒÂ§Ã¢â‚¬ï¿½Ã…Â¸ÃƒÂ¥Ã¯Â¿Â½Ã¯Â¿Â½ÃƒÂ¥Ã¢â‚¬Â Ã…Â ")) {lang = chinese;docName = "Directory"; }
+		else if(colName.contains("ÃƒÂ¤Ã‚Â¾Ã¢â‚¬ÂºÃƒÂ¦Ã¢â‚¬Â¡Ã¢â‚¬Â°ÃƒÂ¥Ã¢â‚¬Â¢Ã¢â‚¬Â ÃƒÂ¨Ã‚Â³Ã¢â‚¬Â¡ÃƒÂ¨Ã‚Â¨Ã…Â ÃƒÂ¨Ã‚Â¡Ã‚Â¨")) {lang = chinese;docName = "Vendor Information Sheet"; }
+		else if(colName.contains("ÃƒÂ§Ã‚Â¶Ã…â€œÃƒÂ¥Ã¯Â¿Â½Ã‹â€ ÃƒÂ¨Ã¢â€žÂ¢Ã¢â‚¬Â¢ÃƒÂ¦Ã¢â‚¬â€œÃ‚Â¹ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ¤Ã‚Â¸Ã¢â€šÂ¬ÃƒÂ¨Ã‚Â¦Ã‚Â½ÃƒÂ¨Ã‚Â¡Ã‚Â¨")) {lang = chinese;docName = "Formulary"; }
+		else if(colName.contains("ÃƒÂ¦Ã¢â‚¬ÂºÃ‚Â¿ÃƒÂ¤Ã‚Â»Ã‚Â£ÃƒÂ¨Ã¢â‚¬â€�Ã‚Â¥ÃƒÂ§Ã¢â‚¬Â°Ã‚Â©ÃƒÂ¦Ã‚Â¸Ã¢â‚¬Â¦ÃƒÂ¥Ã¢â‚¬â€œÃ‚Â®")) {lang = chinese;docName = "Drugs"; }
+			
+		result.add(0, docName);
+		result.add(1,lang);
+		return result;
+	}
+
 
 	public void validatedownbacktoplanslink() throws InterruptedException {
 		validateNew(downbackToPlanslink);
@@ -670,7 +777,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 
 		// EnrollinPlan.click();
-		scrollToView(EnrollinPlan);
+//		scrollToView(EnrollinPlan);
 		jsClickNew(EnrollinPlan);
 
 		try {
@@ -691,6 +798,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	 * @return
 	 */
 	public String GetTFNforPlanType() {
+		scrollToView(RightRail_TFN);
 		if (validate(RightRail_TFN)) {
 			System.out.println("TFN is displayed in Right Rail");
 			String TFN_Number = RightRail_TFN.getText();
@@ -772,6 +880,48 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 		return validationFlag;
 	}
+	
+	public PharmacySearchPageMobile planDetails_ClickPharmacyDirectoryforLanguage(String language, String county) {
+		WebElement PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-"+language+"')]"));
+		if(language.equalsIgnoreCase("English")){
+			PharmacyLink = driver.findElement(By.xpath("//a[contains(@href, 'Pharmacy-Search-English') and contains(text(), 'pharmacy directory')]"));
+		}
+		CommonUtility.waitForPageLoad(driver, PharmacyLink, 45);
+		String winHandleBefore = driver.getWindowHandle();
+		switchToNewTabNew(PharmacyLink);
+		String winHandleCurrent = driver.getWindowHandle();
+		driver.switchTo().window(winHandleBefore);
+		driver.close();
+		driver.switchTo().window(winHandleCurrent);
+
+		if (!county.equalsIgnoreCase("None")) {
+			CommonUtility.waitForPageLoad(driver, countyPopOut, 50);
+			try {
+				if (validateNew(countyPopOut)) {
+					for (WebElement webElement : countyList) {
+						if (webElement.getText().contains(county)) {
+							WebElement countylink = driver.findElement(By.linkText(webElement.getText()));
+							countylink.click();
+							break;
+						}
+					}
+				}
+			} catch (Exception e) {
+				System.out.println("Exception!!! County does not exists." + e.getMessage());
+				Assertion.fail("Exception!!! County does not exists");
+			}
+		}
+		CommonUtility.waitForPageLoad(driver, distanceDropownID, 45);
+		if (validateNew(distanceDropownID) && driver.getCurrentUrl().contains(language)) {
+			System.out.println("Pharmacy locator page for Language : "+language+" is loaded");
+			System.out.println("Current URL : "+driver.getCurrentUrl());
+			return new PharmacySearchPageMobile(driver);
+		} else 
+			System.out.println("Pharmacy locator page not loaded");
+
+		return null;
+	}
+
 
 	public void validatedAddedDrug(String expectedDrugName) {
 		validateNew(presDrugTab.get(0));
@@ -847,8 +997,8 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
-		validateNew(getLnkBackToAllPlans());
-		jsClickNew(getLnkBackToAllPlans());
+		validateNew(lnkBackToAllPlans);
+		jsClickNew(lnkBackToAllPlans);
 
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			jsClickNew(ReturnToMainPlanList);
@@ -872,8 +1022,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 		for (int i = 0; i < additionalBenefits.size(); i = i + 2) {
 			if (additionalBenefits.get(i).get(1).contains("Fitness")) {
-				AdditionalBenefitType = driver.findElement(By.xpath("//div[contains(text(), '"
-						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				AdditionalBenefitType = driver
+						.findElement(By.xpath("//div[contains(text(), '" + additionalBenefits.get(i).get(1)
+								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
 				ActualTextforBenefit = driver.findElement(By.xpath("//div[contains(text(), '"
 						+ additionalBenefits.get(i).get(1)
@@ -885,8 +1036,9 @@ public class PlanDetailsPageMobile extends UhcDriver {
 					Assertion.fail("Proper value not found");
 				}
 			} else {
-				AdditionalBenefitType = driver.findElement(By.xpath("//p[contains(text(), '"
-						+ additionalBenefits.get(i).get(1) + "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
+				AdditionalBenefitType = driver
+						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
+								+ "')]/ancestor::td[(not (contains(@class, 'ng-hide')))]"));
 				System.out.println("The additional Benefit to Valuidate : " + AdditionalBenefitType.getText());
 				ActualTextforBenefit = driver
 						.findElement(By.xpath("//p[contains(text(), '" + additionalBenefits.get(i).get(1)
@@ -900,6 +1052,11 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			}
 
 		}
+	}
+
+	public DrugDetailsPageMobile returnToReviewDrugCost() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
@@ -929,6 +1086,37 @@ public class PlanDetailsPageMobile extends UhcDriver {
 		}
 	}
 
+	@FindBy(xpath = "//*[@class='tab ng-scope active']")
+	private WebElement defaultSelectedTab;
+
+	public void validateDefaultTab(String tabName) {
+		validateNew(defaultSelectedTab);
+		Assertion.assertTrue("Default tab " + tabName + " not displayed", defaultSelectedTab.getText().equals(tabName));
+	}
+
+	@FindBy(xpath = "//*[contains(@class,'currentpharmacy')]//*[contains(@ng-show,'pharmacyName') and contains(@class,'ng-binding')]")
+	private WebElement pharmacyPrescriptionDrugTab;
+
+	public void verifyPharmacyAdded(String pharmacyName) {
+		validateNew(pharmacyPrescriptionDrugTab);
+		if (!pharmacyPrescriptionDrugTab.getText().contains(pharmacyName))
+			Assertion.fail("Pharmacy did not match on plan details page with DCE");
+	}
+
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@ng-repeat,'drug')]//td")
+	private WebElement presDrugTabDrugInfoCell;
+
+	@FindBy(xpath = "//table[contains(@class,'drug-list-table')]//tr[contains(@class,'totals')]//td[2]/span[@ng-show]")
+	private WebElement presDrugTabAnnualCostValueCell;
+
+	public void validateDrugInfoOnPrescriptionDrugTab(String drug, String drugCost) {
+		if (!presDrugTabDrugInfoCell.getText().contains(drug))
+			Assertion.fail("Drug name not displayed on the prescription drugs tab");
+
+		if (!presDrugTabAnnualCostValueCell.getText().trim().equals(drugCost))
+			Assertion.fail("Drug cost not displayed properly on prescription drugs tab");
+	}
+
 	/**
 	 * @author bnaveen4 Navigates to Plan costs tab and validates the Plan premium
 	 *         both monthly and yearly.
@@ -940,17 +1128,16 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	public boolean clickAndValidatePlanCosts(String monthlyPremium, String yearlyPremium) throws Exception {
 		boolean bValidation = false;
 
-		scrollToView(prescriptiondrugTab);
+		scrollToView(prescriptionTab);
 		jsClickNew(prescriptionTab);
-		pageloadcomplete();
 		
+
 		scrollToView(optionalServicesTab);
 		jsClickNew(optionalServicesTab);
-		pageloadcomplete();
 		
+
 		scrollToView(planCostsTab);
 		jsClickNew(planCostsTab);
-		pageloadcomplete();
 
 		Thread.sleep(4000);
 		if (monthlyPremium.equals(planMonthlyPremium.getText().trim())
