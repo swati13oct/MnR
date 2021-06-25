@@ -208,8 +208,11 @@ public class PersonalInformationPage extends UhcDriver{
 	public WebElement AccessibilityButton;
 	
 //	@FindBy(xpath="//*[contains(@id, 'sepRadioFieldSet')]//*[contains(@id, 'sepRadio')]")
-	@FindBy(xpath="(//*[contains(@class,'form-row no-border ng-s')]//*[contains(@class,'sub-header')])[1]")
+	@FindBy(xpath="(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")
 	public WebElement SEPPageHeader;
+	
+	@FindBy(xpath = "(//a[contains(text(),'No thanks, leave online application')])[1]")
+	private WebElement LeaveOnlineApplicationforLogo;
 	
 	
 	public PersonalInformationPage(WebDriver driver) {
@@ -844,8 +847,8 @@ public class PersonalInformationPage extends UhcDriver{
 			CreateProfile.isDisplayed();
 			validate(SignIn);
 			SignIn.isDisplayed();
-			validate(LeaveOnlineApplication);
-			LeaveOnlineApplication.isDisplayed();
+			validate(LeaveOnlineApplicationforLogo);
+			LeaveOnlineApplicationforLogo.isDisplayed();
 			closepopup.click();
 			return new CancelOLEModal(driver);
 		}

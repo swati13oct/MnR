@@ -18,6 +18,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user validates the Plan details on OLE
     #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Save Return Later modal for OLE Page
+    Then the user validates Logo Image on Welcome OLE
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
      | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
@@ -132,7 +133,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
       | Plan Name | <planName> |
 Then the user validates the Plan details on OLE
     #Then the user validates TFN in Welcome OLE Right Rail
-   Then the user validates logo image on OLE Pages
+   Then the user validates Logo Image on Welcome OLE
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
      | Rider Flag | <riderflag> |
@@ -179,6 +180,7 @@ Then the user validates the Plan details on OLE
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
       |RX BIN Number      |	<rxBinnumber>              |
+     Then the user navigates to SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
@@ -399,7 +401,7 @@ Then the user validates the Plan details on OLE
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the Prescription drug coverage questions in Medicare Information Page
+    Then the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
@@ -539,6 +541,7 @@ Then the user validates the Plan details on OLE
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
       |RX BIN Number      |	<rxBinnumber>              |
+     Then the user navigates to SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |

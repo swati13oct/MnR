@@ -245,7 +245,8 @@ public class AuthorizationPage extends UhcDriver{
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Review & Submit Application')]")))){
+		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Review & Submit Application')]")))){
+			if(validateNew(driver.findElement(By.xpath("//*[contains(@class,'ole-form')]//*[contains(@class,'only-review ')]")))){
 			return new ReviewSubmitPage(driver);
 		}
 		else{

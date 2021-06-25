@@ -53,7 +53,7 @@ Feature: 1.05.3 OLE common tool flow E2E PDP Plan Details Page
       | PartA Date     | <partadate>      |
       | PartB Date     | <partbdate>      |
       | MedicaidNumber | <medicaidnumber> |
-    Then the user validates the Prescription drug coverage questions in Medicare Information Page
+    Then the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans
       | Prescription Name | <prescriptioncoveragename> |
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |

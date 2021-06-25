@@ -1272,4 +1272,47 @@ public class MedicareInformationPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public boolean answer_following_questions_PrescriptionCoverage_PDP_Plans(Map<String, String> memberDetailsMap) {
+		boolean Validation_Flag = true;
+
+			CommonUtility.checkPageIsReadyNew(driver);
+			// if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Prescription
+			// Drug Coverage')]")))){
+		//	if (validateNew(driver.findElement(By.xpath("//h3/b[contains(text(),'Prescription')]")))) {
+			if (validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
+				System.out.println("OLE Medicare Information Page is Displayed");
+			}
+			if (PrescriptionCoverageQuestionFlagNo.isDisplayed()) {
+				jsClickNew(PrescriptionCoverageQuestionFlagNo);
+				if (!validate(healthInsuranceNameField) && validate(groupNumberField)) {
+					System.out.println("LongTermQuestion Options is yes : Validation Passed");
+					Validation_Flag = true;
+				} else {
+					System.out.println("LongTermQuestion Options  :Validation Failed");
+					Validation_Flag = false;
+				}
+			}
+
+			PrescriptionCoverageQuestionFlagYes.isDisplayed();
+			jsClickNew(PrescriptionCoverageQuestionFlagYes);
+
+			String PrescriptionName = memberDetailsMap.get("Prescription Name");
+			String PDGroupNumber = memberDetailsMap.get("PD Group Number");
+			String PDMemberNumber = memberDetailsMap.get("PD Member Number");
+			String RXBINNumber = memberDetailsMap.get("RX BIN Number");
+
+			sendkeysNew(PrescriptionCoverageNameField, PrescriptionName);
+			sendkeysNew(PrescriptionCoveragegroupNumberField, PDGroupNumber);
+			sendkeysNew(PrescriptionCoveragememberNumberField, PDMemberNumber);
+			sendkeysNew(PrescriptionCoveragerRXBINNumberField, RXBINNumber);
+
+		
+		if (NextBtn.isEnabled()) {
+			System.out.println("SEP options selected :  Next button is enabled");
+			// return new SpecialElectionPeriodPage(driver);
+		}
+		return true;
+	}
+
 }

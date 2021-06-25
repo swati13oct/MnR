@@ -60,6 +60,7 @@ Feature: 1.05.4 OLE common tool flow E2E for SNP Plans
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
       |RX BIN Number      |	<rxBinnumber>              |
+     Then the user navigates to SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
@@ -188,6 +189,7 @@ Feature: 1.05.4 OLE common tool flow E2E for SNP Plans
       | PD Group Number   | <pdgroupnumber>            |
       | PD Member Number  | <pdmembernumber>           |
       |RX BIN Number      |	<rxBinnumber>              |
+     Then the user navigates to SEP Page
     Then the user selects the following options for SEP Page
       | Select Options | <selectoptions> |
       | Option Data    | <optiondata>    |
