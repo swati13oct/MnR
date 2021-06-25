@@ -283,6 +283,9 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 			jsClickNew(addressCheckBox);
 			jsClickNew(addressSaveButton);
 		}
+		pageloadcomplete();
+		WebElement GreatHeaderText = driver.findElement(By.xpath("//header[contains(@class,'txtCenter step-header')]"));
+		scrollToView(GreatHeaderText);
 		String GreatText = GreatHeaderText.getText();
 		System.out.println("Text is :: " + GreatText);
 
@@ -403,6 +406,7 @@ public ComparePlansPageMobile providerfromMedicalGroup() throws Exception {
 			jsClickNew(addressSaveButton);
 		}
 		
+		pageloadcomplete();
 		WebElement GreatHeaderText = driver.findElement(By.xpath("//header[contains(@class,'txtCenter step-header')]"));
 		scrollToView(GreatHeaderText);
 		String GreatText = GreatHeaderText.getText();
