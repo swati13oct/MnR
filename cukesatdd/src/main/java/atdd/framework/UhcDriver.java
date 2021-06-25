@@ -646,17 +646,17 @@ public abstract class UhcDriver {
 	public void jsClickNew(WebElement element) {
 		
 
-		JavascriptExecutor js = (JavascriptExecutor) driver;
+		/*JavascriptExecutor js = (JavascriptExecutor) driver;
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
 				driver.getClass().toString().toUpperCase().contains("IOS")) {
 			scrollToView(element);
 		}
-		js.executeScript("arguments[0].click();", element);
+		js.executeScript("arguments[0].click();", element);*/
 	
 
-		/*if (driver.getClass().toString().toUpperCase().contains("IOS")) {
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			
-			 * To handle iOS specific click problem By: Harshal Ahire
+			/* To handle iOS specific click problem By: Harshal Ahire*/
 			 
 			iOSClick(element);
 		} else {
@@ -665,7 +665,7 @@ public abstract class UhcDriver {
 				scrollToView(element);
 			}
 			js.executeScript("arguments[0].click();", element);
-		}*/
+		}
 
 	}
 
