@@ -310,7 +310,7 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(xpath = "(//a[contains(text(),'Leave Online Application')])[2]")
 	private WebElement LeaveOnlineApplication;
 
-	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[3]")
+	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[4]")
 	private WebElement closepopup;
 
 	@FindBy(xpath = "(//a[contains(@id,'save-return-button')])[1]")
@@ -327,7 +327,12 @@ public class MedicareInformationPage extends UhcDriver {
 	@FindBy(xpath = "(//a[contains(@class,'oleClose')])[1]")
 	private WebElement Saveclosepopup;
 
-
+	@FindBy(xpath = "(//a[contains(text(),'No thanks, cancel')])[1]")
+	private WebElement CancelEnrollmentApplication;
+	
+	@FindBy(xpath = "//a[contains(text(),'Return to Enrollment')]")
+	private WebElement ReturntoEnrollment;
+	
 	public MedicareInformationPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1021,7 +1026,8 @@ public class MedicareInformationPage extends UhcDriver {
 			CommonUtility.checkPageIsReadyNew(driver);
 			// if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Prescription
 			// Drug Coverage')]")))){
-			if (validateNew(driver.findElement(By.xpath("//h3/b[contains(text(),'Prescription')]")))) {
+		//	if (validateNew(driver.findElement(By.xpath("//h3/b[contains(text(),'Prescription')]")))) {
+			if (validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
 				System.out.println("OLE Medicare Information Page is Displayed");
 			}
 			if (PrescriptionCoverageQuestionFlagNo.isDisplayed()) {
@@ -1187,9 +1193,9 @@ public class MedicareInformationPage extends UhcDriver {
 			validate(CreateProfile);
 			CreateProfile.isDisplayed();
 			validate(SignIn);
-			SignIn.isDisplayed();
-			validate(LeaveOnlineApplication);
-			LeaveOnlineApplication.isDisplayed();
+			SignIn.isDisplayed();		
+			validate(CancelEnrollmentApplication);
+			CancelEnrollmentApplication.isDisplayed();
 			// closepopup.click();
 			jsClickNew(closepopup);
 			return new CancelOLEModal(driver);
@@ -1219,6 +1225,7 @@ public class MedicareInformationPage extends UhcDriver {
 			SaveSignIn.isDisplayed();
 			Saveclosepopup.isDisplayed();
 			// Saveclosepopup.click();
+			ReturntoEnrollment.isDisplayed();
 			jsClickNew(Saveclosepopup);
 			return new SaveandReturnOLEModal(driver);
 		}

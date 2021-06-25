@@ -138,6 +138,17 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath = "(//input[contains(@id,'N_selectedRiders')]/../label)[1]")
 	private WebElement Ridersoption_No;
 	
+	@FindBy(xpath = "(//a[contains(@class,'sitelogo')])[1]")
+	private WebElement LogoImage;
+	
+	@FindBy(xpath = "//button[contains(@id,'proceed')]")
+	private WebElement LeaveOnlineApplication;
+	
+	@FindBy(xpath = "//button[contains(@id,'leaveOleAlertBack')]")
+	private WebElement OLEImageBackButton;
+	
+	@FindBy(xpath = "(//div[contains(@id,'leavingSite')])[1]")
+	private WebElement LogoModalOLE;
 	
 	public WelcomePage(WebDriver driver) {
 
@@ -615,5 +626,28 @@ public class WelcomePage extends UhcDriver{
 		return flag;
 			
 	}
+	public WelcomePage ValidateLogoonWelcomeOLE() {
+		validate(LogoImage);
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		executor.executeScript("arguments[0].click();", LogoImage);
+		
+		
+		try {
+			Thread.sleep(6000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
+		if(validate(LogoModalOLE)){
+			System.out.println("OLE logo modalis Displayed");
+			validate(LeaveOnlineApplication);
+			LeaveOnlineApplication.isDisplayed();
+			validate(OLEImageBackButton);
+			OLEImageBackButton.isDisplayed();			
+			jsClickNew(OLEImageBackButton);
+			
+			return new WelcomePage(driver);
+		}
+		return null;
+	}
 }

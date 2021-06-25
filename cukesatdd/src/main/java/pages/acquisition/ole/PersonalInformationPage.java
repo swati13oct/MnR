@@ -186,7 +186,7 @@ public class PersonalInformationPage extends UhcDriver{
 	@FindBy(css="a#visitor-profile-header")
     private WebElement lnkProfile;
 	
-	@FindBy(xpath = "(//*[@class = 'logo']//img)[2]")
+	@FindBy(xpath = "(//*[@class = 'logo']//img)[1]")
 	private WebElement logoimageOLE;
 
 	@FindBy(xpath = "(//div[contains(@id,'enroll-cancel-profile')])[1]")

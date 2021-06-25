@@ -3492,4 +3492,11 @@ public class oleStepDefinition {
 			Assertion.fail();
 		}
 	}
-}
+	
+	@Then("^the user validates Logo Image on Welcome OLE$")
+	public void the_user_validates_Leave_OLE_modal_for_OLE() throws Throwable {
+		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		welcomePage.ValidateLogoonWelcomeOLE();
+		System.out.println("Click on LogoImage ->> Leave Online Application Back Buttons are displayed on welcome Pages");
+		}
+	}
