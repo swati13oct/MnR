@@ -199,34 +199,42 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	@FindBy(id = "distance")
 	WebElement distanceDropownID;
 
-	@FindBy(css = "#englishDocs")
+	@FindBy(id = "englishDocs")
 	private WebElement englishDocs;
 	
-	@FindBy(css = "#otherDocs")
+	@FindBy(id = "otherDocs")
 	private WebElement otherDocs;
 	
-	@FindBy(css = "#mapd_gi_div_eng")
+//	@FindBy(id = "mapd_gi_div_eng")		Not working on mobile
+	@FindBy(xpath = "//div[@id='englishDocs']//h5[text()='General Plan Information']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdGeneralPlanPDfs;
 
-	@FindBy(css = "#mapd_mp_div_eng")
+//	@FindBy(id = "mapd_mp_div_eng") 	Not working on mobile
+	@FindBy(xpath = "//div[@id='englishDocs']//h5[text()='Medical Providers']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdMedicalProvidersPDfs;
 
-	@FindBy(css = "#mapd_pdc_div_eng")
+//	@FindBy(id = "mapd_pdc_div_eng")	Not working on mobile
+	@FindBy(xpath = "//div[@id='englishDocs']//h5[text()='Prescription Drug Coverage']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdDrugCoveragePDfs;
 
-	@FindBy(css = "#mapd_pharmacydirectory_div_eng")
+//	@FindBy(id = "mapd_pharmacydirectory_div_eng")		Not working on mobile
+	@FindBy(xpath = "//div[@id='englishDocs']//h5[text()='Pharmacy Directory']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdPharmacyDirectoryPDfs;
 
-	@FindBy(id = "mapd_gi_div_otherlang")
+//	@FindBy(id = "mapd_gi_div_otherlang")
+	@FindBy(xpath = "//div[@id='otherDocs']//h5[text()='General Plan Information']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdGeneralPlanPDfsOtherLang;
 
-	@FindBy(id = "mapd_gi_div_otherlang")
+//	@FindBy(id = "mapd_gi_div_otherlang")
+	@FindBy(xpath = "//div[@id='otherDocs']//h5[text()='Medical Providers']/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdMedicalProvidersPDfsOtherLang;
 
-	@FindBy(id = "mapd_gi_div_otherlang")
+//	@FindBy(id = "mapd_gi_div_otherlang")
+	@FindBy(xpath = "//div[@id='otherDocs']//strong[text()='Prescription Drug Coverage']/parent::p/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdDrugCoveragePDfsOtherLang;
 
-	@FindBy(id = "mapd_pharmacydirectory_div_otherlang")
+//	@FindBy(id = "mapd_pharmacydirectory_div_otherlang")
+	@FindBy(xpath = "//div[@id='otherDocs']//strong[text()='Pharmacy Directory']/parent::p/following-sibling::ul[@class='doc-list']")
 	private WebElement mapdPharmacyDirectoryPDfsOtherLang;
 
 	@FindBy(id = "selectmultycounty_box")
@@ -1007,6 +1015,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public VPPPlanSummaryPageMobile navigateBackToPlanSummaryPageFromDetailsPage() {
+		scrollToView(lnkBackToAllPlans);
 		validateNew(lnkBackToAllPlans);
 		jsClickNew(lnkBackToAllPlans);
 
@@ -1289,25 +1298,22 @@ public class PlanDetailsPageMobile extends UhcDriver {
 
 	public void validatePdfSection(String planType) {
 //		scrollToView(planDocs);
-		if (planType.contains("MAPD") || planType.contains("MA")) {
+		if (planType.contains("MAPD")) {
 			// validate English PDFs
-			scrollToView(englishDocs);
 			
-//			scrollToView(mapdGeneralPlanPDfs);
+			scrollToView(mapdGeneralPlanPDfs);
 			validateNew(mapdGeneralPlanPDfs);
 			
-//			scrollToView(mapdMedicalProvidersPDfs);
+			scrollToView(mapdMedicalProvidersPDfs);
 			validateNew(mapdMedicalProvidersPDfs);
 			
-//			scrollToView(mapdDrugCoveragePDfs);
+			scrollToView(mapdDrugCoveragePDfs);
 			validateNew(mapdDrugCoveragePDfs);
 			
-//			scrollToView(mapdPharmacyDirectoryPDfs);
+			scrollToView(mapdPharmacyDirectoryPDfs);
 			validateNew(mapdPharmacyDirectoryPDfs);
 
 			// validate Other lang PDFs
-			
-			scrollToView(otherDocs);
 			
 			scrollToView(mapdGeneralPlanPDfsOtherLang);
 			validateNew(mapdGeneralPlanPDfsOtherLang);
@@ -1475,6 +1481,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 	}
 
 	public void clickCompareBox() {
+		scrollToView(compareBox);
 		validateNew(compareBox);
 		jsClickNew(compareBox);
 	}
