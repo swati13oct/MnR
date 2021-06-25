@@ -45,6 +45,9 @@ public class ProfileSearch extends UhcDriver {
 	@FindBy(id = "aarpSVGLogo")
 	public WebElement AARPlogo;
 	
+	@FindBy(id = "shopperZipCode")
+	private WebElement zipcode;
+	
 	@FindBy(css="input#visitorsEmail+div.invalid-field")
 	private WebElement emailError;
 	
@@ -95,6 +98,7 @@ public class ProfileSearch extends UhcDriver {
 		
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
 		sendkeys(visitorEmail, email);
+		waitforElement(btnSearchShopper);
 		btnSearchShopper.click();
 		validateSearchProfileResults();
 	}
@@ -276,5 +280,17 @@ public class ProfileSearch extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 20);
 			System.out.println("########No user found########");
 		}
+	}
+	
+	public CloakProfile cloakProfile() {
+		btnCloakIn.click();
+		CommonUtility.waitForPageLoadNew(driver, zipcode, 20);
+		if(driver.getCurrentUrl().contains("cloak-profile")) {
+			return new CloakProfile(driver);
+		}else {
+			System.out.println("Cloak In failed. No user found");
+			return null;
+		}
+		
 	}
 }

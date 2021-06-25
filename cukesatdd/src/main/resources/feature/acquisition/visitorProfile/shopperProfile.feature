@@ -3,7 +3,7 @@
 @shopperProfile @regressionAARP
 Feature: 1.09. ACQ- Shopper Profile
 
-  @searchProfileEmail @SanitySP @sanity @test123 
+  @searchProfileEmail @SanitySP @sanity @test123
   Scenario Outline: Telesales agent searching for the profile using Email
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -11,6 +11,14 @@ Feature: 1.09. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
     Then I land on the plan compare page
       | Enrolled Plan Name | <enrolledplanName> |
       | Plan Name          | <planName>         |
@@ -20,6 +28,9 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name          | <lname>            |
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
@@ -29,9 +40,15 @@ Feature: 1.09. ACQ- Shopper Profile
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
 
+    @team-e
     Examples: 
-      | username  | password  | email          | mbi           | dob        | fname | lname | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
-      | qavgogine | qavgogine | DAX@MEMBER.COM | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
+      | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
+
+    @stage123
+    Examples: 
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
+      | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 91dccf82-0c8c-4b1c-9d97-300b34fab4e9 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
 
   @searchProfileName @sanity
   Scenario Outline: Telesales agent searching for the profile using first name and last name
@@ -42,6 +59,14 @@ Feature: 1.09. ACQ- Shopper Profile
       | First Name | <fname> |
       | Last Name  | <lname> |
     And the profile is found and i click on the CLOAK IN button
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
     Then I land on the plan compare page
       | Enrolled Plan Name | <enrolledplanName> |
       | Plan Name          | <planName>         |
@@ -51,10 +76,9 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name          | <lname>            |
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
-    Then the user clicks on View Drug Information link for the following Plan and lands on DCE details
-      | PlanName | <planName> |
-    Then the user clicks on Back to Compare link and validates Plan Compare page, Drug Info Modal
-    Then the user closes the Drug Info Modal on Plan Compare page
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
@@ -64,9 +88,15 @@ Feature: 1.09. ACQ- Shopper Profile
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
 
+    @team-e
     Examples: 
-      | username  | password  | fname | lname | mbi           | dob        | enrolledplanName                                  | planName                             | drugNames        | providers                                                                                                                  |
-      | qavgogine | qavgogine | DAX   | MUNET | 4F78-QY7-CU31 | 08/05/1951 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) | Lipitor TAB 10MG | Margaret S Miklic:3686 Grandview Pkwy Ste 300, Jefferson, AL, 35243;David J Knapp:1245 E South Blvd, Montgomery, AL, 36116 |
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
+      | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
+
+    @stage123
+    Examples: 
+      | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
+      | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 91dccf82-0c8c-4b1c-9d97-300b34fab4e9 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
 
   @searchProfileAndAddPlans @SanitySP @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Adding the plans for user
@@ -76,6 +106,14 @@ Feature: 1.09. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
     Then I land on the plan compare page
       | Enrolled Plan Name | <enrolledplanName> |
       | Plan Name          | <planName>         |
@@ -85,26 +123,27 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name          | <lname>            |
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
-    Then the user clicks on back on all plan linnk in Plan Compare page
-    Then I land on the plan summary page of VPP
-      | Enrolled Plan Name | <enrolledplanName> |
-      | Plan Name          | <planName>         |
-      | Drugs              | <drugNames>        |
-      | Providers          | <providers>        |
-      | First Name         | <fname>            |
-      | Last Name          | <lname>            |
-    Then agent saves two plans as favorite for user
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
+    Then agent saves two plans as favorite for user on plan compare page
       | Plan Type  | <plantype>  |
       | Test Plans | <testPlans> |
-    Then Navigate to Visitor Profile page
+    Then Navigate to Visitor Profile page from compare page
     And user validates the added plans on visitor profile page
       | Test Plans | <testPlans> |
     And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
+    @team-e_AddPlans
     Examples: 
-      | username  | password  | email                     | fname  | lname    | mbi           | dob        | plantype | enrolledplanName                  | planName                             | drugNames | providers | testPlans                                                                 |
-      | qavgogine | qavgogine | LXAGFOFOAPWXK6@MASKED.COM | CHERRY | KUKOWSKI | 9EX6-WA2-PQ79 | 12/05/1966 | MAPD     | AARP Medicare Advantage (HMO-POS) | AARP Medicare Advantage Plan 1 (HMO) | No        | No        | AARP Medicare Advantage Plan 1 (HMO),AARP Medicare Advantage Plan 2 (HMO) |
+      | username | password     | email                     | mbi           | dob        | fname  | lname    | uuid                                 | enrolledplanName                  | plantype | planName                             | testPlans                                                                      | zipcode | county          | drugNames | providers |
+      | ocpuser  | Password@123 | LXAGFOFOAPWXK6@MASKED.COM | 9EX6-WA2-PQ79 | 12/05/1966 | CHERRY | KUKOWSKI | 5015274f-416c-4ec9-9dcf-e5c3557c3465 | AARP Medicare Advantage (HMO-POS) | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) (HMO) |   10010 | New York County | no        | no        |
+
+    @stage_AddPlans
+    Examples: 
+      | username | password     | email                     | mbi           | dob        | fname  | lname    | uuid                                 | enrolledplanName                  | plantype | planName                             | testPlans                                                                | zipcode | county          | drugNames | providers |
+      | ocpuser  | Password@123 | LXAGFOFOAPWXK6@MASKED.COM | 9EX6-WA2-PQ79 | 12/05/1966 | CHERRY | KUKOWSKI | 4d22d293-9f5f-43d8-a159-62e602d8036b | AARP Medicare Advantage (HMO-POS) | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | no        | no        |
 
   @searchProfileAndAddDrugs @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Adding drugs for user

@@ -17,6 +17,7 @@ import io.cucumber.java.en.Then;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.shopperprofile.CloakProfile;
 import pages.acquisition.shopperprofile.MemberCreateProfile;
 import pages.acquisition.shopperprofile.NonMemberCreateProfile;
 import pages.acquisition.shopperprofile.ProfileSearch;
@@ -81,13 +82,19 @@ public class ShopperProfileStepDefinition {
 	}
 
 	@Then("^the profile is found and i click on the CLOAK IN button$")
-	public void the_profile_is_found_and_i_click_on_the_CLOAK_IN_button(){
+	public void the_profile_is_found_and_i_click_on_the_CLOAK_IN_button(DataTable email){
 		
 		try {
+			HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
+			givenAttributesMap = DataTableParser.readDataTableAsMaps(email);
+			
 			ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 					.getBean(PageConstants.PROFILE_SEARCH);
 			
-			ComparePlansPage comparePlansPage = profileSeacrh.doCloakIn();
+			CloakProfile cloakProfile = profileSeacrh.cloakProfile();
+			
+			ComparePlansPage comparePlansPage = cloakProfile.doCloakIn(givenAttributesMap);
+			
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
