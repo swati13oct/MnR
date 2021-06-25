@@ -1092,7 +1092,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 			throws Throwable {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.verifySelectPlanForEnrollModalForallPlans(allPlanNames);
+		plansummaryPage.verifySelectPlanForEnrollModalForAllPlans(allPlanNames);
 	}
 	
 	@Then("^user clicks on Select by Address and Enter fileds$")

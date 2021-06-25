@@ -2203,4 +2203,17 @@ public class DrugDetailsPageMobile extends UhcDriver {
 							+ drugName);
 
 	}
+	
+	
+	public PlanDetailsPageMobile clickViewPlanDetailsBtn() {
+		validateNew(DrugCosts_PlanDetailsBtn);
+		jsClickNew(DrugCosts_PlanDetailsBtn);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("details")) {
+			System.out.println("Plan Details Page displayed ");
+			return new PlanDetailsPageMobile(driver);
+		} else {
+			return null;
+		}
+	}
 }

@@ -467,20 +467,17 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'component_title')]")
 	private List<WebElement> nextBestActionModalMsg;
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Get Started']")
-	private WebElement getStartedBtn;
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//a[contains(@dtmname,'Get Started')]")
+	private WebElement nextBestActionModalGetStartedBtn;
 
-	// @FindBy(xpath =
-	// "//div[contains(@class,'component_info_wrap')]//button[text()='Find My
-	// Doctors ']")
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//a[contains(@dtmname,'Find a Provider')]")
 	private WebElement nextBestActionModalFindMyDoctorsBtn;
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
-	// @FindBy(xpath =
-	// "//div[contains(@class,'component_info_wrap')]//button[text()='Continue
-	// Enrollment']")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//a[contains(@dtmname,'Continue to enrollment')]")
 	private WebElement nextBestActionModalContinueEnrollmentBtn;
+	
+	@FindBy(css = "#enrollModalCloseBtn")
+	private WebElement selectPlanForEnrollCloseButton;
 
 	@FindBy(xpath = "(//button[contains(text(),'View plan details')])[1]")
 	private WebElement viewplandetails;
@@ -490,12 +487,27 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//h3[contains(text(),'Medicare Part B: Medical Services per Calendar Year')]")
 	private WebElement PartB;
+	
+	@FindBy(xpath = "//*[contains(@id,'drug-list-title')]")
+	private WebElement drugListPlanCard;
 
-	@FindBy(xpath = "button[ng-click='getProviders()']")
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-icon']")
+	private List<WebElement> removeDrugListPlanCard;
+
+	@FindBy(xpath = "//*[contains(@id,'provider-title')]")
+	private WebElement providerListPlanCard;
+
+	@FindBy(xpath = "//*[@aria-expanded='true']//*[@class='remove-provider']/parent::button")
+	private List<WebElement> removeProviderListPlanCard;
+	
+	@FindBy(xpath = "//*[contains(@id,'drug-list-title') and contains(@aria-expanded,'true')]")
+	private WebElement expandedDruglistPlanCard;
+
+	/*@FindBy(xpath = "button[ng-click='getProviders()']")
 	private WebElement findMyDoctorBtn;
 
 	@FindBy(xpath = "//button[contains(text(),'Select a Plan')]")
-	private WebElement contEnrollmentBtn;
+	private WebElement contEnrollmentBtn;*/
 
 	private String savePlanLinkTextXpath = "//span[contains(text(),'Save Plan')]";
 	private String savePlanImgXpath = "//img[contains(@src,'ic_favorite-unfilled.png')]";
@@ -959,29 +971,30 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return validatePopup;
 	}
 
-	public void validateButton(String BtnName) {
+	public void validateNBAButton(String BtnName) {
 		if (BtnName.equalsIgnoreCase("Get Started")) {
-			validate(getStartedBtn);
+			validate(nextBestActionModalGetStartedBtn);
 		} else if (BtnName.equalsIgnoreCase("Find a Provider")) {
-			validate(findMyDoctorBtn);
+			validate(nextBestActionModalFindMyDoctorsBtn);
 		} else if (BtnName.equalsIgnoreCase("Continue to enrollment")) {
-			validate(contEnrollmentBtn);
+			validate(nextBestActionModalContinueEnrollmentBtn);
 		}
 	}
 
 	public void clickOnButtonInPlanSummaryPage(String BtnName) {
 		if (BtnName.equalsIgnoreCase("Get Started")) {
-			getStartedBtn.click();
+			jsClickNew(nextBestActionModalGetStartedBtn);
 		} else if (BtnName.equalsIgnoreCase("Find a Provider")) {
-			waitTillElementClickableInTime(findMyDoctorBtn, 5);
-			findMyDoctorBtn.click();
+			waitTillElementClickableInTime(nextBestActionModalFindMyDoctorsBtn, 5);
+			jsClickNew(nextBestActionModalFindMyDoctorsBtn);
 		} else if (BtnName.equalsIgnoreCase("Continue to enrollment")) {
-			waitTillElementClickableInTime(contEnrollmentBtn, 5);
-			contEnrollmentBtn.click();
+			waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 5);
+			jsClickNew(nextBestActionModalContinueEnrollmentBtn);
 		}
 	}
 
 	public void verifyNextBestActionModalForProviderSearch() {
+		scrollToView(nextBestActionModalFindMyDoctorsBtn);
 		waitforElementVisibilityInTime(nextBestActionModalFindMyDoctorsBtn, 30);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
@@ -1018,7 +1031,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//button[text()='Select a Plan']")
+	@FindBy(xpath = "//div[contains(@class,'component_info_wrap')]//a[contains(@dtmname,'Continue to enrollment') and contains(@dtmname,'NBA')]")
 	private WebElement nextBestActionModalSelectPlanBtn;
 
 	public void verifyNextBestActionModalForEnrollPlan() {
@@ -1046,7 +1059,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void clickContinueEnrollmentBtn() {
 		waitTillElementClickableInTime(nextBestActionModalContinueEnrollmentBtn, 15);
-		nextBestActionModalContinueEnrollmentBtn.click();
+		jsClickNew(nextBestActionModalContinueEnrollmentBtn);
 	}
 
 	public String StartApplication(String FirstName, String LastName) throws InterruptedException {
@@ -1089,7 +1102,6 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void viewPlanSummary(String planType) {
-		int planCount = 0;
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
 
@@ -1102,7 +1114,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			// CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
 			pageloadcomplete();
-			validateNew(maPlansViewLink, 10);
+			validate(maPlansViewLink, 10);
 			// iosScroll(maPlansViewLink);
 			scrollToView(maPlansViewLink);
 			jsClickNew(maPlansViewLink);
@@ -1159,12 +1171,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		
 		clickBackToViewAllPlans();
 		
-		if (driver.getCurrentUrl().contains(expectedUrl)) {
+//		if (driver.getCurrentUrl().contains(expectedUrl)) {
 			if (backToPlanResults.isDisplayed()) {
 				jsClickNew(backToPlanResults);
 				pageloadcomplete();
 			}
-		}
+//		}
 
 		switch (planType) {
 		case "ma":
@@ -4361,6 +4373,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			List<String> actualPlanNames = new ArrayList<String>();
 			if (selectPlanForEnrolModal.isDisplayed()) {
 				for (WebElement plan : plansInPopup) {
+					scrollToView(plan);
 					String text = plan.getText();
 					for (WebElement child : plan.findElements(By.xpath("./*"))) {
 						text = text.replaceFirst(child.getText(), "");
@@ -4387,11 +4400,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		return allPlanNames;
 	}
 
-	public void verifySelectPlanForEnrollModalForallPlans(List<String> allPlanNames) {
+	public void verifySelectPlanForEnrollModalForAllPlans(List<String> allPlanNames) {
 		try {
 			List<String> actualPlanNames = new ArrayList<String>();
 			if (selectPlanForEnrolModal.isDisplayed()) {
 				for (WebElement plan : plansInPopup) {
+					scrollToView(plan);
 					String text = plan.getText();
 					for (WebElement child : plan.findElements(By.xpath("./*"))) {
 						text = text.replaceFirst(child.getText(), "");
@@ -5851,13 +5865,12 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath = "//*[@id=\"addDrugComponentWrap\"]/div/a/img")
-	private WebElement nextBestActionModalGetStartedBtn;
 
 	/**
 	 * @author rravind8 This method verifies the NBA Modal for Drug Cost
 	 */
 	public void verifyNextBestActionModalForDrugCost() {
+		scrollToView(nextBestActionModalGetStartedBtn);
 		waitforElementVisibilityInTime(nextBestActionModalGetStartedBtn, 20);
 		try {
 			if (nextBestActionModal.isDisplayed()) {
@@ -5885,8 +5898,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 	public void verifyNextBestActionModalForDrugCostAuthenticated() {
 		try {
+			scrollToView(nextBestActionModal);
 			if (nextBestActionModal.isDisplayed()) {
-				validate(getStartedBtn);
+				validate(nextBestActionModalGetStartedBtn);
 				if (nextBestActionModalMsg.size() > 1) {
 					Assertion.assertTrue(
 							"The Drug cost message is not displayed on NBA.../n Expected Message"
@@ -6015,5 +6029,92 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		}
 		return false;
 	}
+	
+	
+	public void clickGetStartedBtnOnNba() {
+		nextBestActionModalGetStartedBtn.click();
+	}
 
+	public void validateProviderNBA() {
+		try {
+			if (nextBestActionModal.isDisplayed()) {
+				validate(nextBestActionModalFindMyDoctorsBtn);
+				if (nextBestActionModalMsg.size() > 1) {
+					Assertion.assertTrue(
+							"The Provider NBA message is not displayed on NBA.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
+									+ nextBestActionModalMsg.get(1).getText().trim(),
+							nextBestActionModalMsg.get(1).getText().trim()
+									.equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+				} else {
+					Assertion.assertTrue(
+							"The Provider NBA message is not displayed on NBA.../n Expected Message"
+									+ NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH + "\n Actual message"
+									+ nextBestActionModalMsg.get(0).getText().trim(),
+							nextBestActionModalMsg.get(0).getText().trim()
+									.equals(NEXT_ACTION_MODAL_MSG_PROVIDER_SEARCH));
+				}
+			}
+		} catch (Exception ex) {
+			System.out.println("NBA modal not found");
+		}
+	}
+	
+	public List<String> getAllPlanNames(String planType) {
+		List<String> allPlanNames = new ArrayList<String>();
+		for (WebElement plan : planNames) {
+			scrollToView(plan);
+			if (planType.equals("PDP") && MRScenario.browserName.equalsIgnoreCase("Safari")) {
+				allPlanNames.add(plan.findElement(By.xpath("./text()")).getText().trim());
+			} else {
+				allPlanNames.add(plan.getText().trim());
+			}
+
+		}
+		return allPlanNames;
+	}
+	
+	public void clickSelectPlanButton() {
+		scrollToView(nextBestActionModalSelectPlanBtn);
+		waitTillElementClickableInTime(nextBestActionModalSelectPlanBtn, 15);
+		jsClickNew(nextBestActionModalSelectPlanBtn);
+	}
+	
+	
+	@FindBy(xpath = "//span[text()='Enroll in Plan']/..")
+	private WebElement enrollInPlanBtn;
+
+	public WelcomePageMobile clickEnrollPlanBtnOnSelectPlanModal() {
+		scrollToView(enrollInPlanBtn);
+		validateNew(enrollInPlanBtn);
+		// enrollInPlanBtn.click();
+		jsClickNew(enrollInPlanBtn);
+
+		return new WelcomePageMobile(driver);
+	}
+	
+	public void validateNavigatedToOle() {
+		if (driver.getCurrentUrl().contains("welcome")) {
+			Assertion.assertTrue("Navigation to OLE failed", driver.getTitle().contains("Online Enrollment"));
+		}
+	}
+	
+	public void removeDrugsFromPlanCard() {
+		try {
+			validate(drugListPlanCard);
+			jsClickNew(drugListPlanCard);
+			validate(expandedDruglistPlanCard);
+			while (removeDrugListPlanCard.size() != 0) {
+				jsClickNew(removeDrugListPlanCard.get(0));
+				System.out.println("Removed drugs in plan card");
+			}
+		} catch (Exception e) {
+			System.out.println("No drugs in plan card");
+		}
+	}
+	
+	public void verifyNBAModalNotDisplayed() {
+		Assertion.assertTrue("NBA modal should not be displayed", validateNonPresenceOfElement(nextBestActionModal));
+	}
+	
 }

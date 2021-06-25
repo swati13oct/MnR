@@ -26,6 +26,7 @@ import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import pages.acquisition.commonpages.PageTitleConstants;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
 import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
@@ -1686,6 +1687,20 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.fail("Drug Details Page is NOT Displayed");
 			return null;
 		}
+	}
+	
+	
+	@FindBy(xpath = "//button[(@ng-click='backToPlanSummary()') or (text()='View Plan Summary')]")
+	public WebElement backtoVPPSummaryBtn;
+	
+	public VPPPlanSummaryPageMobile clickViewPlanSummaryBtn() {
+		scrollToView(backtoVPPSummaryBtn);
+		validateNew(backtoVPPSummaryBtn);
+		jsClickNew(backtoVPPSummaryBtn);
+		if (driver.getCurrentUrl().contains("plan-summary")) {
+			return new VPPPlanSummaryPageMobile(driver);
+		}
+		return null;
 	}
 
 }

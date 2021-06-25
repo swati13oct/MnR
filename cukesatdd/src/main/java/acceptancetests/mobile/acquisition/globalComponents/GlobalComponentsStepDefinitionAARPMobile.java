@@ -346,7 +346,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		if (aquisitionhomepage != null) {
-			aquisitionhomepage.validateSubNavShopPlanLinks();
+//			aquisitionhomepage.validateSubNavShopPlanLinks();
 		} else {
 			Assertion.fail("Home Page not Loading");
 		}

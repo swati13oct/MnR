@@ -168,6 +168,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// secondary')and contains(text(),'Get')]")
 	@FindBy(xpath = "//*[@id='getstarted']")
 	public WebElement getStarted;
+	
+	@FindBy(xpath = "//a[contains(@href,'drug-cost-estimator') and contains(@title, 'Drug Cost Estimator Tool')]")
+	private WebElement DCEToolLink;
+	
 
 	@FindBy(id = "redirect_content")
 	private WebElement leaveAARPMedicarePlansDialog;
@@ -934,7 +938,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 //				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL_NEW);
-				checkModelPopup(driver, 20);
+//				checkModelPopup(driver, 20);
 			} else {
 				startNewMobile(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
@@ -2448,89 +2452,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	// }
 	//
 
-	public void validateSubNavShopPlanLinks() {
-		CheckPageLoad();
-		// CheckiPerseptions();
-
-		// waitforElement(ShopForaplan);
-
-		MobileMenuShopTool();
-
-		// MobileMenuMain();
-		// scrollToView(ShopForaplan);
-		// validateNew(ShopForaplan, 5);
-		// if (ShopForaplan.isDisplayed()) {
-		// Actions actions = new Actions(driver);
-		// actions.moveToElement(ShopForaplan);
-		// actions.build().perform();
-		// System.out.println("Hover over Shop for a Plan completed");
-		//
-		// //
-		// waitforElementNew(driver.findElement(By.xpath("//input[@id='nav-zipcode']")));
-		// // System.out.println("Submit button is displayed");
-		// }
-		WebElement ZipCodeTxt = driver.findElement(By.xpath("//input[@id='nav-zipcode']"));
-		WebElement FindPlansBtn = driver.findElement(By.xpath("//button[@dtmid='acq_top_nav']"));
-		WebElement RequestMoreInfoLink = driver
-				.findElement(By.xpath("//a[@dtmname='Top Nav:Our Plans:Request More Help']"));
-		WebElement EnrollLink = driver.findElement(By.xpath("//a[contains(@href,'enroll.html')]"));
-		WebElement ShopLink = driver.findElement(By.xpath("//a[contains(@href,'shop.html')]"));
-		WebElement ResourceLink = driver.findElement(By.xpath("//a[contains(@href,'resources.html')]"));
-
-		WebElement MAplansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-advantage-plans.html')]"));
-		WebElement MedSuppPlansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'medicare-supplement-plans.html')]"));
-		WebElement PDPplansLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'prescription-drug-plans.html')]"));
-		WebElement SNPplansLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'special-needs-plans.html')]"));
-
-		WebElement PlanSelectorLink = driver.findElement(By.xpath(
-				"//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'plan-recommendation-engine.html')]"));
-		WebElement DCELink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'drug-cost-estimator')]"));
-		WebElement PharmacySearchLink = driver.findElement(
-				By.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@href,'aarp-pharmacy.html')]"));
-		WebElement ProviderSearchLink = driver.findElement(By
-				.xpath("//*[contains(@class, 'nav-col nav-col-1')]//a[contains(@onclick,'loadCachedProviderSearch')]"));
-
-		validateNew(ZipCodeTxt);
-		validateNew(FindPlansBtn);
-		validateNew(RequestMoreInfoLink);
-
-		validateNew(EnrollLink);
-		validateNew(ShopLink);
-		validateNew(ResourceLink);
-
-		validateNew(MAplansLink);
-		validateNew(MedSuppPlansLink);
-		validateNew(PDPplansLink);
-		validateNew(SNPplansLink);
-
-		validateNew(PlanSelectorLink);
-		validateNew(DCELink);
-		validateNew(PharmacySearchLink);
-		validateNew(ProviderSearchLink);
-
-		if (ZipCodeTxt.isDisplayed() && FindPlansBtn.isDisplayed() && RequestMoreInfoLink.isDisplayed()
-				&& EnrollLink.isDisplayed() && ShopLink.isDisplayed() && ResourceLink.isDisplayed()
-				&& MAplansLink.isDisplayed() && MedSuppPlansLink.isDisplayed() && PDPplansLink.isDisplayed()
-				&& SNPplansLink.isDisplayed() && PlanSelectorLink.isDisplayed() && DCELink.isDisplayed()
-				&& PharmacySearchLink.isDisplayed() && ProviderSearchLink.isDisplayed()) {
-			Assert.assertTrue(true);
-			System.out.println("Sub Nav - Shop for a Plan - All links and element displayed on Page : ");
-			Actions actions = new Actions(driver);
-			// actions.moveToElement(AARPlogo);
-			actions.build().perform();
-		} else {
-			Assert.fail("Sub Nav - Shop for a Plan - All links and element not found / displayed on page : ");
-		}
-
-		// MobileMenuBackBtn.click();
-		jsClickNew(MobileMenuBackBtn);
-
-	}
 	
 	public void validateHomePage() {
 		validate(zipCodeField);
@@ -2744,7 +2665,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public GetStartedPageMobile clickDCERedesignLinkonShopPDPpage() {
 		ShopForPlanNavigationPageMobile shopForPlan = openShopForPlanFromMenu();
-		shopForPlan.selectOptionFromShopForPlanModal("Plan Types", "PDP", false);
+		shopForPlan.selectPlanTypeOption("pdp", false);
 		WebElement DCELink = driver.findElement(
 				By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(text(), 'Prescription Drug Costs')]"));
 		validateNew(DCELink, 5);
@@ -2774,9 +2695,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile navigateToDCERedesignFromHome() throws InterruptedException {
-		MobileMenuAccessDCE();
+		/*MobileMenuAccessDCE();
 		validateNew(getStarted);
-		// jsClickNew(getStarted);
+		jsClickNew(getStarted);*/
+
+		scrollToView(DCEToolLink);
+		validateNew(DCEToolLink);
+		jsClickNew(DCEToolLink);
 
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
@@ -3314,7 +3239,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public DrugCostEstimatorPageMobile navigateToDCEToolFromHome() {
+	/*public DrugCostEstimatorPageMobile navigateToDCEToolFromHome() {
 		MobileMenuAccessDCE();
 		validateNew(getStarted);
 		jsClickNew(getStarted);
@@ -3322,7 +3247,17 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new DrugCostEstimatorPageMobile(driver);
 		return null;
-	}
+		
+		scrollToView(DCEToolLink);
+		validateNew(DCEToolLink);
+		jsClickNew(DCEToolLink);
+		validateNew(getStarted);
+		// jsClickNew(getStarted);
+
+		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
+			return new DrugCostEstimatorPageMobile(driver);
+		return null;
+	}*/
 
 	public void sleepBySec(int sec) {
 		try {

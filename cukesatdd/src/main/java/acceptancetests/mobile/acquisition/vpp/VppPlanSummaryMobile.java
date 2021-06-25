@@ -12,6 +12,7 @@ import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.acquisition.vpp.VPPCommonConstants;
 import acceptancetests.data.CommonConstants;
+import acceptancetests.data.OLE_PageConstants;
 import acceptancetests.data.PageConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
@@ -33,7 +34,6 @@ import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyUmsPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
-import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
@@ -1341,6 +1341,112 @@ public class VppPlanSummaryMobile {
 		} else
 			Assertion.fail("Error in loading the compare plans page");
 	}
+	
+	@And("^user validate Find a Provider NBA on VPP|user be able to see the Find a Provider NBA on VPP$")
+	public void user_validate_Find_a_Provider_NBA_on_VPP() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateProviderNBA();
+	}
+	
+	
+	@When("^user clicks on Find a Provider button on NBA$")
+	public void user_clicks_on_Find_a_provider_button_on_NBA() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) plansummaryPage
+				.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
 
 
+	@Then("^user should be able to see the NBA modal to add providers on the VPP summary page$")
+	public void user_should_be_able_to_see_the_NBA_modal_to_add_providers_on_the_VPP_summary_page() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForProviderSearch();
+	}
+	
+	@When("^user clicks on Find My Doctor button$")
+	public void user_clicks_on_Find_My_Doctor_button() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		ProviderSearchPageMobile providerSearchPage = (ProviderSearchPageMobile) plansummaryPage
+				.clickNextBestActionModalFindMyDoctorsBtn();
+		if (providerSearchPage != null) {
+			getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE, providerSearchPage);
+		}
+	}
+	
+	List<String> allPlanNames = null;
+	
+	@When("^user clicks on Select a plan button on NBA$")
+	public void user_clicks_on_select_a_plan_button_on_NBA() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("plan ytpe" +planType);
+		allPlanNames = plansummaryPage.getAllPlanNames(planType);
+		plansummaryPage.clickSelectPlanButton();
+	}
+	
+	@Then("^user should be able to see the Select Plan for Enroll Modal with saved plans$")
+	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans(DataTable givenAttributes) {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
+		String PlanName = givenAttributes.cell(0, 1);
+		System.out.println("Plan name" + PlanName);
+		plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
+	}
+	
+	@When("^user clicks on Enroll in plan button on the select plan modal on vpp summary page$")
+	public void user_clicks_on_Enroll_in_plan_button_on_the_select_plan_modal() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		WelcomePageMobile welcomepage = (WelcomePageMobile) plansummaryPage.clickEnrollPlanBtnOnSelectPlanModal();
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,welcomepage);
+	}
+	
+	@Then("^user should be navigated to OLE page$")
+	public void user_should_be_navigated_to_OLE_page() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validateNavigatedToOle();
+	}
+	
+	@Then("^user should be able to see the Select Plan for Enroll Modal with all plans on vpp summary page$")
+	public void user_should_be_able_to_see_the_Select_Plan_for_Enroll_Modal_with_all_plans_in_UMS_site()
+			throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifySelectPlanForEnrollModalForAllPlans(allPlanNames);
+
+	}
+	
+	@When("^user removes drugs from plan card$")
+	public void user_removes_drugs_from_plan_card() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.removeDrugsFromPlanCard();
+	}
+	
+	@Then("^user should see the Get started NBA on VPP$")
+	public void user_should_see_the_Get_started_NBA() throws Throwable {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNextBestActionModalForDrugCostAuthenticated();
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
+	}
+	
+	
+	@Then("^user verify NBA is not displayed on the VPP page$")
+	public void user_verify_NBA_is_not_displayed_on_the_VPP_page() {
+		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.verifyNBAModalNotDisplayed();
+	}
 }

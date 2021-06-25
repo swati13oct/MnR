@@ -72,8 +72,10 @@ public class DCEACQVPPPlanCompareMobile {
 	public void user_clicks_view_drug_cost_button_in_AARP() throws InterruptedException {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		drugSummaryPage.clickViewDrugCostBtn();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		/*drugSummaryPage.clickViewDrugCostBtn();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);*/
+		DrugDetailsPageMobile drugDetailsPage = drugSummaryPage.clickViewDrugCostBtn();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Given("^user is on AARP site$")
