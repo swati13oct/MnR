@@ -642,6 +642,53 @@ public abstract class UhcDriver {
 			System.out.println("Click and JsClick failed");
 		}
 	}
+	
+	
+	public void iOSClickNew(WebElement element) {
+		try {
+			
+			String previousPage = driver.getPageSource();
+			
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript(
+					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
+					element);
+			// checkElementisEnabled(element);
+			scrollToView(element);
+			element.click();
+			sleepBySec(2);
+			String seleniumClick = element.getAttribute("automationTrack");
+			System.out.println("Selenium Click executed........" + seleniumClick);
+			
+			int count = 0;
+			boolean newPageLoaded = false;
+			while(count < 2) {
+				String newPage = driver.getPageSource();
+				if(!previousPage.equals(newPage)) {
+					newPageLoaded = true;
+					break;
+				}
+				sleepBySec(2);
+				count ++;
+			}
+			System.out.println("Page loaded : " + newPageLoaded + ", took : " + count + " retries");
+			
+			// If automationTrack is null and element is displayed,
+			// then selenium click was not successful
+			seleniumClick = (seleniumClick == null && element.isDisplayed()) ? "false" : "true";
+
+			if(!seleniumClick.equalsIgnoreCase("true") || !newPageLoaded) {
+				System.out.println("Trying JSClick on IOS ..........");
+				JavascriptExecutor js1 = (JavascriptExecutor) driver;
+				js1.executeScript("arguments[0].click();", element);
+			}
+		} catch (NoSuchElementException | StaleElementReferenceException e) {
+			System.out.println("Selenium click got executed but, " + e.getMessage());
+		} catch (Exception e) {
+			System.out.println("Click and JsClick failed");
+		}
+	}
+	 
 
 	public void jsClickNew(WebElement element) {
 		
@@ -658,7 +705,7 @@ public abstract class UhcDriver {
 			
 			/* To handle iOS specific click problem By: Harshal Ahire*/
 			 
-			iOSClick(element);
+			iOSClickNew(element);
 		} else {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
