@@ -94,6 +94,8 @@ public class DCEACQHomeMobile {
 		String site = memberAttributesMap.get("Site");
 		AcquisitionHomePageMobile aquisitionhomepage = new AcquisitionHomePageMobile(wd, site);
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		
+		aquisitionhomepage.fixPrivateConnectionMobile();
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
 		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
 
