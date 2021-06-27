@@ -401,6 +401,23 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 	  
 	//validateNew(NextBtn);
 	//jsClickNew(NextBtn);
+	validate(ChangingNewMedicareRadio);
+	if(ChangingNewMedicareRadio.isDisplayed()) {
+		jsClickNew(ChangingNewMedicareRadio);
+		if(!validate(OtherReason) && validate(NoneApply)){
+			System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
+
+		} else {
+
+			System.out.println("New Medicare Options is not working in SEP page OLE flow :Validation Failed");
+		}
+	}
+
+	ChangingCurrentMedicareRadio.isDisplayed();
+	jsClickNew(ChangingCurrentMedicareRadio);
+
+	//validateNew(NextBtn);
+	//jsClickNew(NextBtn);
 	String[] options = selectoptions.split("/");
 	String[] optiondata = optionsData.split("/");
 	int i=0;
@@ -428,29 +445,29 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		String currentOptionData = optiondata[i];
 		System.out.println("Entering data for option : "+currentOptionData);
 
-			try {
-				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
-				if(validate(dataTextBx)) {
-					scrollToView(dataTextBx);
+		try {
+			WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
+			if(validate(dataTextBx)) {
+				scrollToView(dataTextBx);
 //					dataTextBx.sendKeys(currentOptionData);
-					sendKeysByCharacter(dataTextBx, currentOptionData);		//All date fields are of input tag and sometime enter incorrect values hence sending keys a character at a time
-				}
-			} 
-			catch (Exception e) {
+				sendKeysByCharacter(dataTextBx, currentOptionData);		//All date fields are of input tag and sometime enter incorrect values hence sending keys a character at a time
 			}
-			try {
-				WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
-				if(validate(dataTextBx)) {
-					scrollToView(dataTextBx);
-					dataTextBx.sendKeys(currentOptionData);
-				}
-			} catch (Exception e) {
-				System.out.println("No additional data required for Option selected");
+		}
+		catch (Exception e) {
+		}
+		try {
+			WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
+			if(validate(dataTextBx)) {
+				scrollToView(dataTextBx);
+				dataTextBx.sendKeys(currentOptionData);
 			}
+		} catch (Exception e) {
+			System.out.println("No additional data required for Option selected");
+		}
 
 		i++;
 	}
-	
+
 	if(NextBtn.isEnabled()){
 		System.out.println("SEP options selection Status :  "+Option_Selected_Flag);
 		System.out.println("SEP options selected :  Next button is enabled");
