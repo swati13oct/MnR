@@ -153,7 +153,15 @@ Feature: 1.09. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
-    Then Navigate to Visitor Profile page from compare page
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |  
+    Then All set and Navigate to Visitor Profile page from compare page
     And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
     Then the user validates Get Started Page
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
@@ -171,9 +179,15 @@ Feature: 1.09. ACQ- Shopper Profile
     Then the user clicks on Remove button on Drug List page on DCE to delete drug
       | DrugName | <drug1> |
 
+    @team-e_AddDrugs
     Examples: 
-      | username  | password  | email              | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipCode |
-      | qavgogine | qavgogine | nynette@MEMBER.COM | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
+      | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
+      | ocpuser  | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | fe104731-5236-4d0e-9e8d-8b5dec69e56d | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
+
+    @stage_AddDrugs
+    Examples: 
+      | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
+      | ocpuser  | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | fe104731-5236-4d0e-9e8d-8b5dec69e56d | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
   @searchProfileAndProviderFlow @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user

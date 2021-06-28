@@ -1298,6 +1298,28 @@ public class ComparePlansPage extends UhcDriver {
 			return null;
 		}
 	}
+	
+	/**
+	 * Navigate to Visitor Profile Page
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePage allSetAndNavigateToVisitorProfilePage() {
+		allSet("no", "no");
+		//jsClickNew(shoppingCartIcon);
+		scrollToView(shoppingCartIcon);
+		shoppingCartIcon.click();
+		//jsClickNew(lnkProfile);
+		lnkProfile.click();
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
 
 	// START >>>>> F&F - Added Code for DCE flow - View Drug COsts from View Drug
 	// Info Modal

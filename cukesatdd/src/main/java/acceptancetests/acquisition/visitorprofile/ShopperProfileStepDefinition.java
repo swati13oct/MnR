@@ -347,4 +347,12 @@ public class ShopperProfileStepDefinition {
 		VisitorProfilePage visitorProfilePage = comparePlansPage.navigateToVisitorProfilePage();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
+	
+	@Then("^All set and Navigate to Visitor Profile page from compare page$")
+	public void all_set_and_navigate_to_Visitor_Profile_page_on_AARP_site() {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		VisitorProfilePage visitorProfilePage = comparePlansPage.allSetAndNavigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
 } 

@@ -30,7 +30,7 @@ public class ProfileSearch extends UhcDriver {
 	@FindBy(id = "authLastName")
 	private WebElement lastName;
 	
-	@FindBy(xpath = "//button[text()='Search Shopper']")
+	@FindBy(xpath = "//button[contains(text(),'Search Shopper')]")
 	private WebElement btnSearchShopper;
 	
 	@FindBy(xpath = "//button[contains(text(),'Profile')]")
@@ -39,7 +39,7 @@ public class ProfileSearch extends UhcDriver {
 	@FindAll({@FindBy(xpath = "//table/tbody/tr")})
 	private List<WebElement> searchResults;
 	
-	@FindBy(xpath="//table//button")
+	@FindBy(xpath="//i[@title='Cloak In']")
 	private WebElement btnCloakIn;
 	
 	@FindBy(id = "aarpSVGLogo")
