@@ -265,11 +265,6 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         }
 
         CommonUtility.checkPageIsReadyNew(driver);
-        if(siteLeavingPopupProceddButton.isDisplayed()){
-            jsClickNew(siteLeavingPopupProceddButton);
-        }
-        sleepBySec(3);
-        CommonUtility.checkPageIsReadyNew(driver);
         String CurrentUHCAgentURL = driver.getCurrentUrl();
         String ActualCurrentUHCAgentURL = CurrentUHCAgentURL.substring(0, 27).trim();
         System.out.println("myuhcagent Page is displayed : " + ActualCurrentUHCAgentURL);

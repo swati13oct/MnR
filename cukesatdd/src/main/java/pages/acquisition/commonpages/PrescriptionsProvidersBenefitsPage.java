@@ -116,10 +116,6 @@ public class PrescriptionsProvidersBenefitsPage extends GlobalWebElements {
 	
 		switchToNewTabNew(providerSearchFromMedEd);
 
-		if(siteLeavingPopupProceddButton.isDisplayed()){
-			jsClickNew(siteLeavingPopupProceddButton);
-		}
-		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
 	
