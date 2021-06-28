@@ -775,28 +775,29 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 	}
 }
 
-//	@Given("^user is on new campaign external Links page$")
-//	public void user_ison_externallinksUAT(DataTable givenAttributes) throws Exception  {
-//		WebDriver wd = getLoginScenario().getWebDriverNew();
-//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-//		memberAttributesMap =  DataTableParser.readDataTableAsMaps(givenAttributes);
-//		/*wd = getLoginScenario().getWebDriverNew();
-//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-//		for (int i = 0; i < memberAttributesRow.size(); i++) {
-//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-//					memberAttributesRow.get(i).getCells().get(1));
-//		}*/
-//
-//		String url = memberAttributesMap.get("External Link");
-//		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
-//
-//		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-//		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
-//
-//		campaignExternalLinkspage.openUrl(url);
-//
-//	}
+	@Given("^user is on new campaign external Links page$")
+	public void user_ison_externallinksUAT(DataTable givenAttributes) throws Exception  {
+		WebDriver wd = getLoginScenario().getWebDriverNew();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap =  DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*wd = getLoginScenario().getWebDriverNew();
+		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+
+		String url = memberAttributesMap.get("External Link");
+		System.out.println("@@Url@@@"+url);
+		CampaignExternalLinks campaignExternalLinkspage = new CampaignExternalLinks(wd);
+
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+		getLoginScenario().saveBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE, campaignExternalLinkspage);
+
+		campaignExternalLinkspage.openUrl(url);
+
+	}
 //
 //@Given("^the user navigates to new Campaign External links$")
 //public void the_user_navigates_to_new_Campaign_External_links(DataTable givenAttributes)
@@ -986,5 +987,14 @@ public void the_user_performs_plan_search_using_following_information_on_Morgan_
 				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
 		campaignExternalLinkspage.clickFindPlansPricing();
 	}
+	
+	@When("^user clicks on Find Plans in your area on MA page$")
+	public void user_clicks_on_Find_Plans_in_your_area_on_MA_page() {
+		CampaignExternalLinks campaignExternalLinkspage = (CampaignExternalLinks) getLoginScenario()
+				.getBean(PageConstants.CAMPAIGN_EXTERNAL_LINKS_PAGE);
+		campaignExternalLinkspage.clickFindPlansinyourArea();
+	}
+	
+	
 	}
 

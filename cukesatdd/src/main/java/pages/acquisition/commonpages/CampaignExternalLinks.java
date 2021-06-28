@@ -299,6 +299,8 @@ public class CampaignExternalLinks extends UhcDriver {
 	@FindBy(xpath = "(//a[@class='tel ng-binding'])[1]")
 	private WebElement tfn;
 
+	@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
+	private WebElement clickFindPlansinyourArea;
 
 	@FindBy(xpath="//button[contains(text(),'Get More Information')]")
 	private WebElement GetMoreInformation;
@@ -760,6 +762,8 @@ public class CampaignExternalLinks extends UhcDriver {
 		threadsleep(5);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("Current page URL: " + driver.getCurrentUrl());
+		threadsleep(5);
+		
 		if (driver.getCurrentUrl().contains("ma.aarpmedicareplans.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("AARP External Link Page opens successsfully");
@@ -772,11 +776,16 @@ public class CampaignExternalLinks extends UhcDriver {
 		} else if (driver.getCurrentUrl().contains("uhcmedicaresolutions.com/")) {
 			Assertion.assertTrue(true);
 			System.out.println("UHC External Link Page opens successsfully");
-		} else
+		} else if (driver.getCurrentUrl().contains("stage-aarpmedicareplans.uhc.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("AARP External Link Page opens successsfully");
+		} else if (driver.getCurrentUrl().contains("stage-uhcmedicaresolutions.uhc.com/")) {
+			Assertion.assertTrue(true);
+			System.out.println("UHC External Link Page opens successsfully");
+		}else
 			Assertion.fail("AARP/UHC External Link page is not opening up");
 		threadsleep(8);
 		//validateNew(tfnHeader);
-
 		WebElement TFNelement = driver.findElement(By.xpath(tfnXpath));
 		String actualTfnNo = TFNelement.getText();
 		if (validateNew(TFNelement) && actualTfnNo.equals(expTfnNo))
@@ -875,8 +884,6 @@ public class CampaignExternalLinks extends UhcDriver {
 		start(url);
 	}
 	
-	@FindBy(xpath = "//a[contains(@data-asset-name,'Find Plans in Your Area')]")
-	private WebElement clickFindPlansinyourArea;
 	
 	public void clickFindPlansinyourArea() {
 		String parentWindow = driver.getWindowHandle();
@@ -1527,19 +1534,20 @@ public class CampaignExternalLinks extends UhcDriver {
 		Assert.assertEquals("Please enter valid zip code", EnterValidZipCode.getText());
 		InputZipCode.clear();
 		InputZipCode.sendKeys(zipcodeSingle);
-		jsClickNew(LocationBtn);
-		threadsleep(5);
+		threadsleep(8);
+		LocationBtn.click();
+		threadsleep(8);
+		driver.navigate().refresh();
+		CommonUtility.waitForPageLoad(driver, LocationLink, 30);
 		LocationLink.click();
 		threadsleep(8);
-//		waitforElementNew(InputZipCode);
 		InputZipCode.clear();
 		InputZipCode.sendKeys(zipcodeMulti);
 		jsClickNew(LocationBtn);
 		FirstZipCode.click();
 		jsClickNew(LocationBtn);
 		
-		
-		
+			
 	}
 
 	public void validatezipcodecomponent() {
