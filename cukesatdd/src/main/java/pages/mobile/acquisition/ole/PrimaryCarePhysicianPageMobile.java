@@ -170,7 +170,8 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+//		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		validateNew(NextBtn, 30);
 		validateNew(PCPPageHeader);
 		System.out.println("Page header is Displayed" + PCPPageHeader.getText());
 	}
@@ -205,7 +206,9 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 				e1.printStackTrace();
 			}
 			for (String winHandle : driver.getWindowHandles()) {
-				driver.switchTo().window(winHandle);
+				if (!winHandle.equals(PCPWindow)) {
+					driver.switchTo().window(winHandle);
+				}
 			}
 
 			String CurrentURL = driver.getCurrentUrl();
@@ -238,8 +241,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 				// if(!planType.contains("SNP")){
 				if (validate(SelectPCPLink)) {
 					System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
-					//SelectPCPLink.click();
-					jsClickMobile(SelectPCPLink);
+					jsClickNew(SelectPCPLink);
 					try {
 						Thread.sleep(2000);
 					} catch (InterruptedException e1) {
@@ -253,16 +255,16 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 					}
 					WebElement firstPCP = AssinPCPLinks.get(0);
 					scrollToView(firstPCP);
-					jsClickMobile(firstPCP);
+					jsClickNew(firstPCP);
 					CommonUtility.waitForPageLoadNew(driver, SelectPCPAddress, 30);
 					// firstPCP.click();
 					// SelectPCPAddress.click();
-					jsClickMobile(SelectPCPAddress);
+					jsClickNew(SelectPCPAddress);
 					executor = (JavascriptExecutor) driver;
 					executor.executeScript("arguments[0].click();", SelectPCPContinueBtn);
 					/*
 					 * try { Thread.sleep(2000); if(validate(ReviewPCPButton)){
-					 * jsClickMobile(ReviewPCPButton);
+					 * jsClickNew(ReviewPCPButton);
 					 * 
 					 * }
 					 * 
@@ -276,7 +278,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 						Thread.sleep(2000);
 						if (validate(SelectMedicalGrp)) {
 							// SelectMedicalGrp.click();
-							jsClickMobile(SelectMedicalGrp);
+							jsClickNew(SelectMedicalGrp);
 							executor = (JavascriptExecutor) driver;
 							executor.executeScript("arguments[0].click();", MedicalGrpContinueBtn);
 
@@ -296,7 +298,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 					try {
 						Thread.sleep(2000);
 						if (validate(ReviewPCPButton)) {
-							jsClickMobile(ReviewPCPButton);
+							jsClickNew(ReviewPCPButton);
 
 						}
 
@@ -351,7 +353,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 		String pcp_name = ProviderNameDisplay_PCPpage.getText().replaceAll("-", "").trim();
 		String pcp_number = ProviderNumberDisplay_PCPpage.getText().trim();
 		//CurrentPCP_Question_Yes.click();
-		jsClickMobile(CurrentPCP_Question_Yes);
+		jsClickNew(CurrentPCP_Question_Yes);
 		String pcp_question_text = "Yes";
 		pcp.add(pcp_name);
 		pcp.add(pcp_number);
@@ -362,13 +364,13 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 	public PlanPremiumPageMobile navigate_to_Plan_Premium_Page() {
 
 		validateNew(NextBtn);
-		scrollToView(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
+		pageloadcomplete();
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
 		*/
 		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
+		if(validate(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
 		System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPageMobile(driver);
 		}
@@ -385,7 +387,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 		String mPCPinfo = PCPSearchLink.getText();
 		System.out.println(mPCPinfo);
 	//	PCPSearchLink.click();
-		jsClickMobile(PCPSearchLink);
+		jsClickNew(PCPSearchLink);
 		ArrayList<String> PCPproviderNames = new ArrayList<String>();
 		List<WebElement> pcpproviders = driver.findElements(By.xpath(
 				"//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//div[@class='provider-desc']//p[2]"));
@@ -401,7 +403,7 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 		boolean flag;
 		WebElement PCPSearchLink = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]"));
 	//	PCPSearchLink.click();
-		jsClickMobile(PCPSearchLink);
+		jsClickNew(PCPSearchLink);
 		try {
 			Thread.sleep(5000);
 		} catch (InterruptedException e) {
@@ -429,8 +431,8 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 		// expectedProvider, actualProvider);
 		Assertion.assertTrue("PCP selected is not shown in blue box", actualProvider.contains(expectedProvider));
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
-		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+//		validateNew(NextBtn);
+//		jsClickNew(NextBtn);
 
 		return null;
 

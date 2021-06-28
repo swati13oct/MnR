@@ -119,7 +119,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 	@FindBy(xpath="//p[contains(text(),'enrollment penality')]")
 	private WebElement lastEnrollmentPenalty;
 	
-	@FindBy(xpath="//p[contains(text(),'Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA)')]")
+	@FindBy(xpath="//p[contains(text(),'Part D-Income Related Monthly Adjustment Amount (Part D-IRMAA)')]")
 	private WebElement partdincome;
 	
 	@FindBy(xpath="//ul[@class='zeroPremium']/li[1]")
@@ -142,16 +142,17 @@ public class PlanPremiumPageMobile extends UhcDriver{
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
+//		CommonUtility.waitForPageLoadNew(driver, ZipCode_County, 30);
+		validateNew(ZipCode_County, 30);
 		validateNew(PageHeader);
 		System.out.println("Page header is Displayed : "+PageHeader.getText());	
 	}
 
 	public SupplementalBenefitsPageMobile navigate_to_Supplemental_Riders_Page() {
 	//	agreeBtn.click();
-		//jsClickMobile(agreeBtn);
+		//jsClickNew(agreeBtn);
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
@@ -169,9 +170,10 @@ public class PlanPremiumPageMobile extends UhcDriver{
 
 	public AuthorizationPageMobile navigate_to_Authorization_Page() {
 		//agreeBtn.click();
-		jsClickMobile(agreeBtn);
+//		jsClickNew(agreeBtn);
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
+//		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		if(validateNew(authPageHeader,45)){
@@ -190,7 +192,8 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		String expectedText = null;
 		try {
 		if(payByMail.isDisplayed())	{
-			jsClickMobile(payByMail);
+			scrollToView(payByMail);
+			jsClickNew(payByMail);
 			Thread.sleep(1000);
 			actualText = payByMailText.getText().trim();
 			expectedText = CommonConstants.PAY_BY_MAIL_TEXT;
@@ -216,7 +219,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		validateNew(creditCard);
 		try {
 			if(creditCard.isDisplayed())	{
-				jsClickMobile(creditCard);
+				jsClickNew(creditCard);
 				Thread.sleep(10000);
 				driver.switchTo().frame("ole_credit_payment");
 				actualText = creditCardText.getText();
@@ -258,10 +261,10 @@ public class PlanPremiumPageMobile extends UhcDriver{
 						flag = actualText.equalsIgnoreCase(expectedText);
 							if(flag) {
 							System.out.println("Enter Account Information");
-							sendkeysMobile(accountNumber, cardNo);
-							sendkeysMobile(cardExpirationMonth, month);
-							sendkeysMobile(cardExpirationYear, year);
-							jsClickMobile(btnSubmit);
+							sendKeysByCharacter(accountNumber, cardNo);
+							sendKeysByCharacter(cardExpirationMonth, month);
+							sendKeysByCharacter(cardExpirationYear, year);
+							jsClickNew(btnSubmit);
 							Thread.sleep(5000);
 							System.out.println("Validate card details stored successfully message");
 							driver.switchTo().defaultContent();
@@ -291,7 +294,8 @@ public class PlanPremiumPageMobile extends UhcDriver{
 		
 		try {
 			if(socialSecurity.isDisplayed())	{
-				jsClickMobile(socialSecurity);
+				scrollToView(socialSecurity);
+				jsClickNew(socialSecurity);
 				Thread.sleep(1000);
 				actualText = socialSecurityText.getText().trim();
 				expectedText = CommonConstants.SOCIAL_SECURITY_TEXT;
@@ -359,7 +363,7 @@ public class PlanPremiumPageMobile extends UhcDriver{
 								flag = actualText.contains(expectedText);
 								if(flag) {
 									System.out.println("Validate railroad text");
-									actualText = raildroad.getText();
+									actualText = raildroad.getText().replaceAll("\u00A00", " ").trim();
 									expectedText = CommonConstants.RAILROAD_TEXT;
 									flag = actualText.contains(expectedText);
 									if(flag) {

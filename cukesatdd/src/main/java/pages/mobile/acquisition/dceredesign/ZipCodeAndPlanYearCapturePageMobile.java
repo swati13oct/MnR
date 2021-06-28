@@ -1,6 +1,9 @@
 package pages.mobile.acquisition.dceredesign;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -29,14 +32,24 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 	@FindBy(xpath = "//select[@id='county']/option")
 	public WebElement countyRows;
 
-	@FindBy(css = "#county")
+	@FindBy(xpath = "//select[@id='county']")
 	public WebElement countyDropdown;
+
+	@FindBy(xpath = "//label[contains(text(),'County')]")
+	public WebElement countyTitle;
 
 	@FindBy(xpath = "//*[@id='plan-year']")
 	public WebElement planYearDropdown;
 
 	@FindBy(xpath = "//button[@dtmid='cta_dce']")
 	public WebElement continueBtn;
+	
+	@FindBy(xpath = "//button[contains(@dtmname,'zip information:review drug costs')]")
+	public WebElement reviewDrugCostsButton;
+	
+	@FindBy(css = "#previousButton2")
+	public WebElement addDrugsButton;
+	
 
 	@FindBy(xpath = "//button[contains(text(),'Return to page')]")
 	public WebElement ReturnToPagePopup;
@@ -102,38 +115,34 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//span[text()='Find Plans' and @xpath=\"1\"]")
-	public WebElement FindPlans;
-
-	@FindBy(xpath = "//*[@id=\"county\"]/option[2]")
-	public WebElement firstCounty;
-
 	public void enterZipCodeandcounty(String zipcode) throws InterruptedException {
 		validateNew(zipCodeTxtbox);
 		// sendkeys(zipCodeTxtbox, zipcode);
 		sendkeysMobile(zipCodeTxtbox, zipcode);
 		Thread.sleep(3000);
-		iosScroll(countyDropdown);
 		try {
 
-			if (countyDropdown.isDisplayed()) {
-				String countyValue = driver.findElements(By.cssSelector("#county")).get(1).getText().toString();
-				sleepBySec(5);
+			if (validate(countyDropdown)) {
+//				countyDropdown.click();
+				jsClickNew(countyDropdown);
+				//String countyValue = driver.findElements(By.xpath("//*[@id='county']")).get(1).getText().toString();
+				Select sl = new Select(countyDropdown);
+				String countyValue= sl.getOptions().get(1).getText().toString();
+				//countyDropdown.getTagName().contains("value=1");
+
 				mobileSelectOption(countyDropdown, countyValue, true);
 			}
 		} catch (Exception e) {
 			System.out.println("county box not found");
 		}
-		validateNew(continueBtn);
-		// continueBtn.click();
+		validateNew(reviewDrugCostsButton);
+
 	}
 
 	public DrugSummaryPageMobile clickContinueBtn() {
-		validateNew(continueBtn);
-		jsClickNew(continueBtn);
+		jsClickNew(reviewDrugCostsButton);
 		pageloadcomplete();
-//		waitForPageLoadSafari();
-		// CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPageMobile(driver);

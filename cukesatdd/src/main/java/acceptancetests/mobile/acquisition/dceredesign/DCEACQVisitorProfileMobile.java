@@ -87,7 +87,6 @@ public class DCEACQVisitorProfileMobile {
 					memberAttributesRow.get(i).getCells().get(1));
 		}*/
 		
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String drugName = memberAttributesMap.get("DrugName");
 		System.out.println(drugName);
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()

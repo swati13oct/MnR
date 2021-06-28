@@ -151,7 +151,7 @@ public class WerallyMobilePage extends UhcDriver {
 		else {
 			try {
 				validate(welcomeTilte, 30);
-				jsClickMobile(getStarted);
+				jsClickNew(getStarted);
 			} catch (Exception e) {
 				System.out.println("No Get Started button available in werally");
 			}
@@ -167,7 +167,7 @@ public class WerallyMobilePage extends UhcDriver {
 				/*
 				 * Clicking is not navigating to search results //mobileswipe("50%",2, false);
 				 * searchBox.click(); clickTextIOSNative("return"); //searchButton.click();
-				 * //jsClickMobile(searchButton); //pageloadcomplete(); //mobileswipe("50%",1,
+				 * //jsClickNew(searchButton); //pageloadcomplete(); //mobileswipe("50%",1,
 				 * true); WebElement elem = null; try {
 				 * //elem=driver.findElement(By.cssSelector(
 				 * "button[name='primary-search-box-action']>span"));
@@ -177,7 +177,7 @@ public class WerallyMobilePage extends UhcDriver {
 				 * "//button[@name='primary-search-box-action']"));
 				 * //elem=driver.findElement(By.xpath(
 				 * "//button[@name='primary-search-box-action']//i")); }catch(Exception e){
-				 * System.out.println("No"); } jsClickMobile(elem); elem.click();
+				 * System.out.println("No"); } jsClickNew(elem); elem.click();
 				 * System.out.println(driver.getCurrentUrl()); //mobileswipe("50%",3, false);
 				 */
 				// Alternative :)
@@ -201,23 +201,23 @@ public class WerallyMobilePage extends UhcDriver {
 										.getText().trim());
 						WebElement save = searchResults.get(i)
 								.findElement(By.cssSelector(".acquisitionButtons.visible-phone>button"));
-						jsClickMobile(save);
+						jsClickNew(save);
 						threadsleep(1000);
 						String text = saveModalCloseContinueSearchbutton.getText();
 						if (text.toUpperCase().contains("CONTINUE"))
 							newRally = true;
 						if (i == 0) {
 							if (newRally)
-								jsClickMobile(finishReturnButton);
+								jsClickNew(finishReturnButton);
 							else
-								jsClickMobile(viewSavedbutton);
+								jsClickNew(viewSavedbutton);
 						} else {
-							jsClickMobile(saveModalCloseContinueSearchbutton);
+							jsClickNew(saveModalCloseContinueSearchbutton);
 						}
 					}
 					threadsleep(1000);
 					if (!newRally)
-						jsClickMobile(checkProviderCoveragebutton);
+						jsClickNew(checkProviderCoveragebutton);
 				} else {
 					System.out.println("Required search Results is not Returned");
 					Assert.assertTrue(false);
@@ -233,7 +233,7 @@ public class WerallyMobilePage extends UhcDriver {
 		if (validate(firstLocation, 5)) {
 			firstLocation.click();
 			threadsleep(1000);
-			jsClickMobile(locationSave);
+			jsClickNew(locationSave);
 			threadsleep(2000);
 		}
 	}

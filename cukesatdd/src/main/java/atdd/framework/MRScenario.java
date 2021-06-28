@@ -182,35 +182,35 @@ public class MRScenario {
 		threadSafeDriver.set(driver);
 	}
 	
-	public static synchronized WebDriver getThreadSafeDriver() {
+	private static synchronized WebDriver getThreadSafeDriver() {
 		return threadSafeDriver.get();
 	}
 	
-	public synchronized void flushThreadSafeDriver() {
+	private synchronized void flushThreadSafeDriver() {
 		threadSafeDriver.remove();
 	}
 	
 	
 	private static final ThreadLocal<AppiumDriver> threadSafeMobileDriver = new ThreadLocal<>();
 	
-	public synchronized AppiumDriver getThreadSafeMobileDriver() {
+	private synchronized AppiumDriver getThreadSafeMobileDriver() {
 		return threadSafeMobileDriver.get();
 	}
 	
-	public void flushThreadSafeMobileDriver() {
+	private void flushThreadSafeMobileDriver() {
 		threadSafeMobileDriver.remove();
 	}
 	
 	
-	public void flushSessionID() {
+	private void flushSessionID() {
 		sessionId.remove();
 	}
 	
-	public void flushJobUrl() {
+	private void flushJobUrl() {
 		JobURL.remove();
 	}
 	
-	public void flushRunnerFileName() {
+	private void flushRunnerFileName() {
 		runnerFileName.remove();
 	}
 	
@@ -786,6 +786,7 @@ public class MRScenario {
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
 		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
+		capabilities.setCapability("locationContextEnabled", false);
 		//capabilities.setCapability("AUTOMATION_NAME", "XCUITest");
 		capabilities.setCapability("commandTimeout" , 600);
 		capabilities.setCapability("maxDuration", 10800);
@@ -840,7 +841,7 @@ public class MRScenario {
 				//
 //				System.out.println("Session ID:" + ((mobileDriver).getSessionId()).toString());
 				sessionId.set(getThreadSafeMobileDriver().getSessionId().toString());
-				System.out.println("Session ID:" + getThreadLocalSessionId());
+//				System.out.println("Session ID:" + getThreadLocalSessionId());
 //				getVDJobURL(((mobileDriver).getSessionId()).toString());
 //				getVDJobURL(getThreadLocalSessionId());
 				setJobURL(getThreadLocalSessionId());

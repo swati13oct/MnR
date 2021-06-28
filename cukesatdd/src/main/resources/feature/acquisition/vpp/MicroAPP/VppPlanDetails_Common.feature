@@ -31,7 +31,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
       | TCID  | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | pdfType               | docCode                  | planyear |
       | 00001 | UHC  |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | Step Therapy Criteria | Step_Therapy_MCOREE_2021 | future   |
 
-	#1a
+  #1a
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Plan costs tab in Plan Details for provided plan on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -58,7 +58,8 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county      | plantype | planName                                  | monthlyPremium | yearlyPremium | planyear |
       | 00002 | UHC  |   53503 | No              | Iowa County | MAPD     | AARP Medicare Advantage Open Plan 2 (PPO) | $29            | $348          | future   |
-	#1b
+
+  #1b
   Scenario Outline: UserStory: <TID> -plan type: <plantype> - Verify Optional Services tab in Plan Details for provided plan on <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -88,7 +89,7 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
     Examples: 
       | TID   | site | zipcode | isMultutiCounty | county        | plantype | planName                                                   | optionalRider   | monthlyPremium | yearlyPremium | planyear |
       | 00003 | UHC  |   11516 | No              | Nassau County | MA       | UnitedHealthcare Medicare Advantage Patriot (Regional PPO) | Dental Platinum | $0             | $0            | future   |
-	
+
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - To click Back to all plans from Top and bottom of the plan deatils page and verify redirection back to the VPP-Summary page <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -178,13 +179,13 @@ Feature: 1.01.2-Vpp to plan Details AARP Scenarios
 
     @vppPlanDetailsCommon_AARP02 @prodRegression @regressionAARP @sanity
     Examples: 
-      | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
-      | 00009 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
+      | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                             | planyear |
+      | 00009 | AARP |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Choice (PPO) | future   |
 
     @vppPlanDetailsCommon_UHC02 @regressionUHC @sanity
     Examples: 
-      | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                              | planyear |
-      | 00009 | UHC  |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Patriot (HMO) | future   |
+      | TCID  | site | zipcode | isMultutiCounty | county       | plantype | planName                             | planyear |
+      | 00009 | UHC  |   78006 | YES             | Bexar County | MA       | AARP Medicare Advantage Choice (PPO) | future   |
 
   Scenario Outline: UserStory: <TCID> -plan type: <plantype> - Verify Prescription Drug Benefits tab in Plan Details for provided plan
     Given the user is on medicare acquisition site landing page

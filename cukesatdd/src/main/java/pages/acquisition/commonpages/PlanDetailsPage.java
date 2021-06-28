@@ -958,9 +958,12 @@ public class PlanDetailsPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editProviderButtonOnPlanDetails);
 		String editProviderButtonText = editProviderButtonOnPlanDetails.getText();
 		System.out.println(editProviderButtonText);
-		if (editProviderButtonText.contains("Edit my Doctor")) {
+		if (editProviderButtonText.contains("Edit my Doctors")) {
 			return true;
 		}
 		return false;
