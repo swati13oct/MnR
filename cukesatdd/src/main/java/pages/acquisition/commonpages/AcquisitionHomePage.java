@@ -709,6 +709,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
 	private WebElement CallSamTFNMember_Medsup;
+	
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
+	private WebElement planMemberLink;
+	
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
+	private WebElement goToMemberSiteLink;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -3478,15 +3484,21 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void validateHeaderLinks() {
-		validateNew(headerSignInLink);
-		validateNew(headerRegisterLink);
+		//validateNew(headerSignInLink);
+		jsMouseOver(planMemberLink);
+		//validateNew(headerRegisterLink);
+		validateNew(goToMemberSiteLink);
+		jsMouseOut(planMemberLink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
+		validateNew(searchTxtbox);
+		validateNew(headerTfn);
 		validateNew(visitorprofileicon);
+		validateVisitorProfileIcon();
 	}
 
 	public void signInheader() {
@@ -6797,5 +6809,16 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		default:
 			System.out.println("Link not available under Learn about Medicare");
 		}
+	}
+	
+	public void validateVisitorProfileIcon() {
+		jsMouseOver(visitorprofileicon);
+		validateNew(visitorProfileFlyoutTitle);
+		if(!driver.getCurrentUrl().contains("profile")) {
+		validateNew(visitorProfileFlyoutViewSavedItemBtn);
+		}
+		validateNew(visitorProfileFlyoutAddDrugBtn);
+		validateNew(visitorProfileFlyoutAddPlansBtn);
+		validateNew(visitorProfileFlyoutSignInLink);
 	}
 }
