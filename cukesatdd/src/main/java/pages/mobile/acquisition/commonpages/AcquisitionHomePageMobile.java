@@ -4308,4 +4308,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			return null;
 		}
 	}
+	public void clickOnPlanRecommendationButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement lnkPRE = driver
+				.findElement(By.xpath("//a[contains(@href,'/plan-recommendation-engine.html') and @role='button']"));
+		jsClickNew(lnkPRE);
+		sleepBySec(5);
+		if (driver.getCurrentUrl().contains("/plan-recommendation-engine.html")) {
+			System.out.println("Plan Recommendation Engine open successfully");
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("Plan Recommendation Engine did not open successfully");
+		}
+		driver.navigate().back();
+	}
 }

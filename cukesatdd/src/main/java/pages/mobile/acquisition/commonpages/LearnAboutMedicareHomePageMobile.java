@@ -345,13 +345,13 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		
 	}
 	public CostBasicsPageMobile navigatetoMedicareCostBasic() {
-		
+
 		WebElement lnkMedCostBasic= driver.findElement(By.xpath("(//a[contains(@href,'medicare-cost')])[3]"));
 		validateNew(lnkMedCostBasic);
 		jsClickNew(lnkMedCostBasic);
 		waitForPageLoadSafari();
 		String checkUrl=driver.getCurrentUrl();
-		if(checkUrl.contains("medicare-education/medicare-costs.html")) {
+		if(checkUrl.contains("medicare-education/medicare-costs.html")||checkUrl.contains("/medicare-education-classic/medicare-costs-classic.html")) {
 			return new CostBasicsPageMobile(driver);
 		}else
 		{
@@ -359,13 +359,13 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		}
 	}
 	public MedicareEligibilityPageMobile selectMedicareEligibility() {
-		WebElement lnkMedEligibility= driver.findElement(By.xpath("//a[contains(@href,'medicare-eligibility') and contains(@class,'card')]"));
+		WebElement lnkMedEligibility= driver.findElement(By.xpath("//span[contains(text(),'Medicare Eligibility')]"));
 		validateNew(lnkMedEligibility);
 		jsClickNew(lnkMedEligibility);
 		
 		waitForPageLoadSafari();
 		String checkUrl=driver.getCurrentUrl();
-		if(checkUrl.contains("medicare-education/medicare-eligibility.html")) {
+		if(checkUrl.contains("medicare-education/medicare-eligibility.html")||checkUrl.contains("/medicare-education-classic/medicare-eligibility-classic.html")) {
 			return new MedicareEligibilityPageMobile(driver);
 		}else
 		{
@@ -374,14 +374,14 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		
 	}
 	public CoverageChoicesPageMobile clickonCoverageChoicesLink() {
-		WebElement lnkcvrgChoice=driver.findElement(By.xpath("//a[contains(@href,'medicare-parts')]//span[contains(text(),'Coverage') and contains(@class,'card')]"));
+		WebElement lnkcvrgChoice=driver.findElement(By.xpath("//a[contains(@href,'medicare-parts')]//span[contains(text(),'Coverage')]"));
 		validateNew(lnkcvrgChoice);
 		jsClickNew(lnkcvrgChoice);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		String checkUrl=driver.getCurrentUrl();
-		if(checkUrl.contains("medicare-education/medicare-parts-and-medigap-plans.html")) {
+		if(checkUrl.contains("medicare-education/medicare-parts-and-medigap-plans.html")||checkUrl.contains("/medicare-education-classic/medicare-parts-and-medigap-plans-classic.html")) {
 			return new CoverageChoicesPageMobile(driver);
 		}else
 		{
@@ -580,8 +580,6 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 
 	public void clickVideoTransciptLink() {
 		WebElement lnkVideoTranscipt=driver.findElement(By.xpath("//*[contains(text(),'video transcript')]"));
-
-		validateNew(lnkVideoTranscipt);
 		jsClickNew(lnkVideoTranscipt);
 		sleepBySec(1);
 		if(driver.findElement(By.xpath("//h4[contains(text(),'Video transcript')]")).isDisplayed()) {
@@ -618,7 +616,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 	}
 	public void clickOnSeePlanLink() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkPlansAvailableInYourArea=driver.findElement(By.xpath("//p[@class='icon-link-box__text']"));
+		WebElement lnkPlansAvailableInYourArea=driver.findElement(By.xpath("//span//a[contains(@href,'/health-plans')]"));
 		scrollToView(lnkPlansAvailableInYourArea);
 		Assertion.assertTrue("Plans Available link isn't present", lnkPlansAvailableInYourArea.isDisplayed());
 		switchToNewTabNew(lnkPlansAvailableInYourArea);
@@ -628,6 +626,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 			Assertion.assertTrue(true);
 			System.out.println("Plan Details page displayed Successfully");
 			driver.close();
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		}else {
 			Assertion.fail("Plan Details page did not displayed Successfully");
@@ -641,7 +640,7 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		CommonUtility.checkPageIsReadyNew(driver);
 		
 		String checkUrl=driver.getCurrentUrl();
-		if(checkUrl.contains("medicare-education/enrollment-and-changing-plans.html")) {
+		if(checkUrl.contains("medicare-education-classic/enrollment-and-changing-plans-classic")) {
 			return new EnrollmentBasicsPageMobile(driver);
 		}else
 		{
@@ -650,13 +649,22 @@ public class LearnAboutMedicareHomePageMobile extends GlobalWebElements {
 		
 	}
 	public void hoverToPlanPage(String plantype) {
+		WebElement navBar=driver.findElement(By.xpath("//div[contains(@class,'nav-toggle')]"));
+		jsClickNew(navBar);
+		sleepBySec(2);
+		WebElement lnkMeded=driver.findElement(By.xpath("//a[@id='ghn_lnk_3']"));
+		jsClickNew(lnkMeded);
+		sleepBySec(2);
+		WebElement lnkplanType=driver.findElement(By.xpath("//p[contains(text(),'Types of Plans')]"));
+		jsClickNew(lnkplanType);
+		sleepBySec(2);
 		WebElement lnkPlan=null;
 		if(plantype.equalsIgnoreCase("MA")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col')]//span[contains(text(),'Advantage')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Advantage')])[4]"));
 		}else if(plantype.equalsIgnoreCase("MS")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col')]//span[contains(text(),'Supplement')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Supplement')])[2]"));
 		}else if(plantype.equalsIgnoreCase("PDP")) {
-			lnkPlan=driver.findElement(By.xpath("//a[contains(@class,'nav-col') and contains(text(),'Prescription Drug')]"));
+			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Prescription Drug')])[4]"));
 		}
 		navigateToMedicareMenuLinks(lnkPlan);
 		CommonUtility.checkPageIsReadyNew(driver);
