@@ -24,6 +24,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.ole.AuthorizationPage;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.OLEconfirmationPage;
 import pages.acquisition.ole.PersonalInformationPage;
@@ -4165,4 +4166,129 @@ public class OLEStepDefinitionMobile {
 		}
 	}
 
-}
+	
+	@Then("^the user validates Save Return Later modal for OLE Page$")
+	public void the_user_validates_save_return_later_for_OLE_pages() throws Throwable {
+		
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		welcomePage.OpensavereturnOLEPages();
+		System.out.println("OLE cancellation and Save Return Later modal on OLE Pages");
+	}
+	
+	@Then("^the user validates Optional Benefits Page for following plans with available Riders in welcome page$")
+	public void the_user_validate_optional_rider_welcome_OLE_Page(DataTable Flags) {
+		
+		Map<String, String> RiderFlagMap = new HashMap<String, String>();
+		RiderFlagMap = DataTableParser.readDataTableAsMaps(Flags);
+		String RiderFlag = RiderFlagMap.get("Rider Flag");
+		if(RiderFlag.contains("true_yes") || RiderFlag.contains("true_no")){
+			WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+			HashMap outputmap = new HashMap<Boolean,String>();
+			outputmap = (HashMap) welcomePage.validate_Supplemental_Riders(RiderFlag);
+			if (outputmap.containsKey(true)) {
+				String optionalRider = outputmap.get(true).toString();
+				getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+				getLoginScenario().saveBean(oleCommonConstants.OPTIONAL_RIDER_TEXT, optionalRider);
+				Assertion.assertTrue(true);
+				System.out.println("OLE Supplemental Benefits are displayed on welcome OLE Page");
+			} else
+				Assertion.fail("OLE Supplemental Benefits are not displayed on welcome OLE Page");
+
+			}
+	
+	}
+	
+	@Then("^the user validates Statement of Understanding Page$")
+	public void the_user_validates_SOA_Page(DataTable arg1) throws Throwable {
+		
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		
+		AuthorizationPageMobile sOAPage = (AuthorizationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
+		boolean Validation_Status = sOAPage.validate_SOA_Page(MemberDetailsMap);
+		if(Validation_Status){
+		//	getLoginScenario().saveBean(OLE_PageConstants.OLE_SOA_PAGE,sOAPage);
+			getLoginScenario().saveBean(oleCommonConstants.AUTHORIZATION_AGREE, MemberDetailsMap.get("soAAgree"));
+			getLoginScenario().saveBean(oleCommonConstants.SOA_AGREE, MemberDetailsMap.get("soAAgree"));
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("SOA Page : Required fields NOT validated");
+			Assertion.fail("SOA Page : Required fields NOT validated");
+		}
+		// }
+	}
+	
+	@Then("^the user navigate to Use and Disclosure Authorization page for CSNP Plans$")
+	public void the_user_navigate_Use_Disclosure_Page() throws Throwable {
+		
+		MedicareInformationPageMobile useanddisclosurePage = (MedicareInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		UseAndDisclosureAuthorizationPage useranddisclosure = useanddisclosurePage.navigate_to_usedisclosure_Page();		
+		
+		if (useranddisclosure != null) {
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE, useranddisclosure);
+			System.out.println("OLE Use and Disclosure Page is Displayed");
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("Use and Disclosure Page : Required fields NOT validated");
+			Assertion.fail("Use and Disclosure Page : Required fields NOT validated");
+		}
+	
+	}
+	
+	@Then("^the user validates the Plan details on OLE_CSNP Plans$")
+	public void the_user_validates_the_Plan_details_on_OLE_CSNP() throws Throwable {
+	
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
+		PlanDetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
+		PlanDetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
+		PlanDetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		PlanDetailsMap.put("County", (String) getLoginScenario().getBean(oleCommonConstants.OLE_COUNTY));
+		PlanDetailsMap.put("Plan Premium", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM));
+		//String Premium = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		String Premium;
+		//String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		PlanDetailsMap.put("Plan Type", (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE));
+		boolean Validation_Status = welcomePage.validate_plan_details_CSNP(PlanDetailsMap);
+		Premium = welcomePage.GetMonthlyPremiumValue();
+		if (Validation_Status) {
+			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status + " - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+		//	getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanDetailsMap.get("Plan Premium"));
+			getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, Premium);
+			Assertion.assertTrue(true);
+		} else {
+			System.out.println("Plan Details Validation in OLE PAGE : " + Validation_Status);
+			Assertion.fail();
+		}
+	}
+	
+	@Then("^the user validates Logo Image on Welcome OLE$")
+	public void the_user_validates_Logo_modal_for_OLE() throws Throwable {
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		welcomePage.ValidateLogoonWelcomeOLE();
+		System.out.println("Click on LogoImage ->> Leave Online Application Back Buttons are displayed on welcome Pages");
+		}
+	
+	@Then("^the user validates the Prescription drug coverage questions in Medicare Information Page for PDP Plans$")
+	public void the_user_validates_the_Prescription_drugcoverage_questions_in_Medicare_Information_Page_PDP_Plans(DataTable arg1)
+			throws Throwable {
+
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		
+		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		boolean medicareInfoPageLongTerm = medicareInfoPage.answer_following_questions_PrescriptionCoverage_PDP_Plans(MemberDetailsMap);
+		if (medicareInfoPageLongTerm) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			System.out.println("OLE Prescription drug coverage Questions in Medicare Information Page - All required Member Details are entered");
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME, MemberDetailsMap.get("Prescription Name"));
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER, MemberDetailsMap.get("PD Group Number"));
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER, MemberDetailsMap.get("PD Member Number"));
+			getLoginScenario().saveBean(oleCommonConstants.PRESCRIPTION_RXBIN_NUMBER, MemberDetailsMap.get("RX BIN Number"));
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("OLE Other Insurance Questions in Medicare Information Page - Adding Member Details Failed");
+	}
+	}
