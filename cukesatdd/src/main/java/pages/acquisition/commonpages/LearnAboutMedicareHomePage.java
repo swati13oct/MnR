@@ -682,7 +682,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 	}
 	public void clickOnSeePlanLink() {
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkPlansAvailableInYourArea=driver.findElement(By.xpath("//a[contains(@href,'/health-plans/medicare-advantage-plans/available-plans.html#/zipcode')]"));
+		WebElement lnkPlansAvailableInYourArea=driver.findElement(By.xpath("//span//a[contains(@href,'/health-plans')]"));
 		scrollToView(lnkPlansAvailableInYourArea);
 		Assertion.assertTrue("Plans Available link isn't present", lnkPlansAvailableInYourArea.isDisplayed());
 		switchToNewTabNew(lnkPlansAvailableInYourArea);
@@ -715,6 +715,7 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		
 	}
 	public void hoverToPlanPage(String plantype) {
+		WebElement learnAbtMedicare=driver.findElement(By.xpath("//a[@id='ghn_lnk_3']"));
 		WebElement lnkPlan=null;
 		if(plantype.equalsIgnoreCase("MA")) {
 			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Advantage')])[3]"));
@@ -723,8 +724,9 @@ public class LearnAboutMedicareHomePage extends GlobalWebElements {
 		}else if(plantype.equalsIgnoreCase("PDP")) {
 			lnkPlan=driver.findElement(By.xpath("(//a[contains(text(),'Prescription Drug')])[3]"));
 		}
-		scrollToView(lnkPlan);
-		navigateToMedicareMenuLinks(lnkPlan);
+		scrollToView(learnAbtMedicare);
+		navigateToMedicareMenuLinks(learnAbtMedicare);
+		jsClickNew(lnkPlan);
 		CommonUtility.checkPageIsReadyNew(driver);
 		System.out.println("PlanType: "+ plantype);
 		System.out.println(""+driver.getCurrentUrl());
