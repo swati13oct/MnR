@@ -68,11 +68,16 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 	//Rally - ProviderLookup
 	
 	@FindBy(xpath = "//*[contains(text(),'All Primary Care')]")
+	//@FindBy(xpath = "//button[contains(text(), 'Select PCP')]")
 	private WebElement SelectPCPLink;
 
 	@FindBy(xpath = "//span[@class='pcp']//button")
+	//@FindBy(xpath = "//button[contains(text(), 'Select PCP')]")
 	private List <WebElement> AssinPCPLinks;
 
+	@FindBy(xpath = "//button[contains(text(), 'Assign PCP')]")
+	private WebElement AssinPCP;
+	
 	@FindBy(xpath = ".//*[@id='label_selectedLocation0_acceptingExistingPatientsOnly' or @id = 'label_selectedLocation0_accepting']")
 	private WebElement SelectPCPAddress;
 	
@@ -190,21 +195,22 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			validation_Flag = false;
 		return validation_Flag;
 	}
-	public boolean validate_provider_Lookup(String planType) {
+	public boolean validate_provider_Lookup(String planType) throws InterruptedException {
 		boolean validation_Flag = true;
 		if(validate(LookUpProviderBtn)){
 			String PCPWindow = driver.getWindowHandle();
-			
+			jsClickNew(LookUpProviderBtn);
 			JavascriptExecutor executor = (JavascriptExecutor)driver;
-			executor.executeScript("arguments[0].click();", LookUpProviderBtn);
+		//	executor.executeScript("arguments[0].click();", LookUpProviderBtn);
 			//LookUpProviderBtn.click();
 			//driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-			try {
+		/*	try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+			}*/
+			Thread.sleep(10000);
 			for(String winHandle : driver.getWindowHandles()){
 				if(!winHandle.equals(PCPWindow)) {
 					driver.switchTo().window(winHandle);
@@ -276,7 +282,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						//button[contains(text(),'Submit')]
 
 						//SelectPCPContinueBtn.click();
-						try {
+			/*			try {
 							Thread.sleep(2000);
 							if(validate(SelectMedicalGrp)){
 //								SelectMedicalGrp.click();
@@ -289,7 +295,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+						}*/
 						try {
 							Thread.sleep(3000);
 						} catch (InterruptedException e) {
@@ -297,8 +303,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 							e.printStackTrace();
 						}
 						
-						
-						try {
+				/*		
+					try {
 							Thread.sleep(2000);
 							if(validate(ReviewPCPButton)){				
 								jsClickNew(ReviewPCPButton);
@@ -308,19 +314,18 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
+						}*/
 						String PCPname = ProviderName.getText();					
-						executor = (JavascriptExecutor)driver;
-						executor.executeScript("arguments[0].click();", AddProvider);
-							
+				//		executor = (JavascriptExecutor)driver;
+				//		executor.executeScript("arguments[0].click();", AddProvider);
+						if(validate(AddProvider)){				
+							jsClickNew(AddProvider);
+
+						}
 						//AddProvider.click();
 						System.out.println("PCP selected : "+PCPname);
-						try {
-							Thread.sleep(2000);
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						
+						Thread.sleep(2000);
 						driver.switchTo().window(PCPWindow);
 						if(driver.getCurrentUrl().contains("provider-search")){
 							System.out.println("OLE PCP Page is displayed : Provider Look up is Complete");
