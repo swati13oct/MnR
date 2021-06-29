@@ -55,7 +55,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | Campaign External Links - E2E Scenario 10_UMS | https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html| 33111        |65656       |Yes            | Stone County |1-877-801-0043 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | 1-877-322-0782 |https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html?wt.mc_id=8014272  |
       
   @Scenario10
-  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
+  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages - VPP
    Given user is on campaign external Links page
       | External Link | <externallink> |   
    Then user verify TFN on AARP external links page
@@ -63,15 +63,19 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | TFN Xpath   | <TFNxpath1>  |
       | Working hrs | <workingHrs> |
     #VPP
-     Then user validates Current location and change location
+    Then user validates Current location and change location
       | zipcodeSingle  | <zipcodeSingle>  |
       | zipcodeMulti   | <zipcodeMulti>  |
     When user clicks on Find Plans and Pricing to open in same tab
     Then user should be navigated on Shop for a plan page
-    Then the user validates SAM icons on the page
+      Then the user validates SAM icons on the page
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    When verify Call SAM icon is visible
+    When the user performs plan search using following information using external link
+      | Zip Code        | <zipcode>       |
+      | Is Multi County | <isMultiCounty> |
+      | County Name     | <county>        |
+  When verify Call SAM icon is visible
   And verify call SAM roll out and contain the text Call a Licensed Insurance Agent
     Then the user view plan details of the above selected plan in site vpp
       | Plan Name | <planname> |
@@ -219,7 +223,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
 	
 	@CampaignExternal_Scenario10_AARP @StageLP
     Examples:
-      | Scenario                                      | zipcode| isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                           | defaultPharmacy                                                                           | externallink |
+      | Scenario                                      | zipcodeSingle| isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                           | defaultPharmacy                                                                           | externallink |
       | Campaign External Links - E2E Scenario 10_AMP |   33111 |No           | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1]| Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)| https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-advantage-plans.html   |
 
   @CampaignExternal_Scenario10_UHC  @StageLP
@@ -250,7 +254,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
  
  
  @Scenario10  
-  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
+  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages- DC
   #DCE
   Given user is on campaign external Links page
       | External Link | <externallink> |   
@@ -307,7 +311,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | TFN Xpath | <TFNxpath> |
    
 	
-	@CampaignExternal_Scenario10_AARP @StageLP
+	@CampaignExternal_Scenario10_AARP @StageLP 
     Examples:
       | Scenario                                       | zipcode| isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                           | defaultPharmacy                                                                           | externallink |
       | Campaign External Links - E2E Scenario 10_AMP  |33111        |No        | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1]| Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)| https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-advantage-plans.html   |
@@ -337,7 +341,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | Scenario                                      | zipcode| isMultiCounty | county            | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                           | defaultPharmacy                                                                           | externallink |
       | Campaign External Links - E2E Scenario 10_UMS |   33111        |No     | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1]| Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)| https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html   |
 
- @Scenario10 
+ @Scenario10
   Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
     #PRE
 	Given user is on campaign external Links page
@@ -386,12 +390,12 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | TFN Xpath | <TFNxpath4> |
     And user closes current tab and navigate to previous tab
     
-    @CampaignExternal_Scenario10_AARP  @StageLP
+    @CampaignExternal_Scenario10_AARP  @StageLP   
     Examples:
       | Scenario                                       | zipcode| isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                           | defaultPharmacy                                                                               | externallink                                                                   |
       | Campaign External Links - E2E Scenario 10_AMP |   33111 |No            | Miami-Dade County | MAPD       | 1-855-264-3792 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1]| Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)| https://www.stage-aarpmedicareplans.uhc.com/lp/medicare-advantage-plans.html   |
 
-    @CampaignExternal_Scenario10_UHC  @StageLP
+    @CampaignExternal_Scenario10_UHC  @StageLP  
     Examples:
       | Scenario                                      | zipcode| isMultiCounty | county       | MAplantype | TFNNo          | TFNxpath1                   | workingHrs                              | plantype | planname                             | TFNxpath                                                                                   | planIndex | planIndex1 | PDPplantype | PDPplanname                     | planyear | TFNxpath3                         | Medsupplantype | SNPPlanName | testPlans                                         | TFNxpath2                                                                                          | drug1 | drug2   | drug3   | drug4   | zipCode | TFNNo1         | pscCode | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch                                         | specialNeeds | isCoverageOpt | TFNxpath4             | TFNxpath5                           | defaultPharmacy                                                                               | externallink                                                                      |
       | Campaign External Links - E2E Scenario 10_UMS |  33111 |No            | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1]| Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)| https://www.stage-uhcmedicaresolutions.uhc.com/lp/medicare-advantage-plans.html   |
