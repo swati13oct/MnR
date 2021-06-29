@@ -96,7 +96,7 @@ public class EnterZipCodePage extends UhcDriver{
 					}
 				}
 
-				System.out.println("Actual : " + vppPageTitle);
+				System.out.println("Actual : " + vppPageTitle.trim());
 				if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 					if (vppPageTitle.contains(PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE))
 						System.out.println("Page Title : " + PageTitleConstants.ULAYER_VPP_PLAN_PAGE_AARP_MEDICARE);

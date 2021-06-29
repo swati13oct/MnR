@@ -97,7 +97,7 @@ public class ProposedEffectiveDatePagemobile extends UhcDriver{
 	public Object navigate_to_PCP_Page(String planType) {
 
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
