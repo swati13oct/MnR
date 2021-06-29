@@ -3485,7 +3485,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void validateHeaderLinks() {
 		//validateNew(headerSignInLink);
-		jsMouseOver(planMemberLink);
+		//jsMouseOver(planMemberLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
 		//validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsMouseOut(planMemberLink);
@@ -3581,7 +3583,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	public void validatevisitorprofile() {
 		if (visitorprofileicon.isDisplayed()) {
-			scrollToView(visitorprofileicon);
 			Actions actions = new Actions(driver);
 			actions.moveToElement(visitorprofileicon).perform();
 			// jsMouseOver(visitorprofileicon);
@@ -3590,11 +3591,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 		// WebElement CreateProfile = driver.findElement(By.xpath("//a[contains(text(),
 		// 'Create Profile')]"));
-		WebElement CreateProfile = driver.findElement(By.xpath("//h3[@id='guest-profile']"));
+		WebElement CreateProfile = driver.findElement(By.xpath("//button[@id='guest-saved-items-button']"));
 		WebElement VPSignIn = driver.findElement(
 				By.xpath("//a[contains(text(), 'Sign In') and not(contains(@aria-labelledby ,'VPSignIn'))]"));
-		validateNew(CreateProfile);
-		validateNew(VPSignIn);
+		validate(CreateProfile);
+		validate(VPSignIn);
 		if (CreateProfile.isEnabled() && VPSignIn.isEnabled()) {
 			Assertion.assertTrue(true);
 			System.out.println("Visitor Profile elements are present on home page");
@@ -6812,7 +6813,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 	
 	public void validateVisitorProfileIcon() {
-		jsMouseOver(visitorprofileicon);
+		//jsMouseOver(visitorprofileicon);
+		Actions action = new Actions(driver);
+		action.moveToElement(visitorprofileicon).perform();
 		validateNew(visitorProfileFlyoutTitle);
 		if(!driver.getCurrentUrl().contains("profile")) {
 		validateNew(visitorProfileFlyoutViewSavedItemBtn);
