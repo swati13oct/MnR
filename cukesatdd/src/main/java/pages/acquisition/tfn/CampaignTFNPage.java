@@ -751,9 +751,9 @@ public class CampaignTFNPage extends UhcDriver {
 				}
 	}
 
-	@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	//@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo')])[1]")
 	private WebElement HomeLogo;
-
 
 	@FindBy(xpath="//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
 	private WebElement LeaveOLE;
