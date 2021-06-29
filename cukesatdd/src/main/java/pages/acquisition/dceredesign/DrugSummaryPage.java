@@ -201,7 +201,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@class='pagination']/../p")
 	private WebElement pageNumber;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
 	@FindBy(xpath = "//*[text()='Return to plan summary']")
@@ -475,18 +475,12 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='PDP']")
-	private WebElement clickPdpplan;
-
-	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]/input[@name='plans-filter' and @value='SNP']")
-	private WebElement clickSnpplan;
-
 	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
 	private WebElement alertTextImg;
 
 	public void clickOnPDPPlan() {
-		validateNew(clickPdpplan);
-		jsClickNew(clickPdpplan);
+		validateNew(pdpPlanToggle);
+		jsClickNew(pdpPlanToggle);
 	}
 	public void clickOnMAPDPlan() {
 		validateNew(mapdPlanToggle);
@@ -556,9 +550,9 @@ public class DrugSummaryPage extends UhcDriver {
 			e.printStackTrace();
 		}
 
-		validateNew(clickSnpplan);
+		validateNew(snpPlanToggle);
 		JavascriptExecutor je = (JavascriptExecutor) driver;
-		je.executeScript("arguments[0].click()", clickSnpplan);
+		je.executeScript("arguments[0].click()", snpPlanToggle);
 	}
 
 	@FindBy(xpath = "//button[@id='changePharmacyLink']")
@@ -701,7 +695,7 @@ public class DrugSummaryPage extends UhcDriver {
 			System.out.println("SNP Plan Toggle Clicked");
 		}
 		WebElement PremiumforPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-				+ "')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+				+ "')]//ancestor::*[contains(@class, 'uhc-card__header')]//following-sibling::*//*[contains(text(), 'Monthly Premium')]//following-sibling::h6[contains(text(), '$')]"));
 		validateNew(PremiumforPlan);
 		String PremiumDisplayed = PremiumforPlan.getText();
 		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
@@ -813,7 +807,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")

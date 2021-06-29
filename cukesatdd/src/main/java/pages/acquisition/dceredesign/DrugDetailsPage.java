@@ -1088,7 +1088,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-filter')]//*[contains(text(), ' Standard Pharmacies ')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-radio-tab')]//*[contains(text(), ' Standard Pharmacies')]")
 	public WebElement StandardPharmacyFilter;
 
 	public void SelectStandardPharmacy(String standardPharmacytoSelect) {
@@ -1408,7 +1408,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
