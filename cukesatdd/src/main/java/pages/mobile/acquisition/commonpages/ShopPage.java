@@ -165,7 +165,7 @@ public class ShopPage extends UhcDriver {
 	@Override
 	public void openAndValidate() {
 		validateNew(MAShopLink);
-		validateNew(ShopForaplan);
+//		validateNew(ShopForaplan);		//This option is under Menu navigation
 		if(!driver.getCurrentUrl().contains("shop.html")) {
 			Assert.fail("Shop page did not load properly");
 		}
@@ -200,30 +200,34 @@ public class ShopPage extends UhcDriver {
 	public void clickONEnrollShopLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("SNP")){
 			waitforElement(dsnpShopLink);
+			scrollToView(dsnpShopLink);
 			jsClickNew(dsnpShopLink);
 			//Thread.sleep(5000);
 		
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpShopLink);
+			scrollToView(pdpShopLink);
 			jsClickNew(pdpShopLink);
 			//Thread.sleep(5000);
 		}	
 		
 		else if(plantype.equals("MAPD") || plantype.equals("MA")){
 			waitforElement(MAShopLink);
+			scrollToView(MAShopLink);
 			jsClickNew(MAShopLink);
 			//Thread.sleep(5000);
 		}
-		waitForPageLoadSafari();
 	}
 
 	public ShopPage ShopLinkOnMedsuppPlan() throws Exception {
 		waitforElement(enrollShopLink);
-		enrollShopLink.click();
+		scrollToView(enrollShopLink);
+		jsClickNew(enrollShopLink);
 		//Thread.sleep(4000);
 		if (validate(medSupShopLink)) {
 			//waitforElement(medSupShopLink);
+			scrollToView(medSupShopLink);
 			jsClickNew(medSupShopLink);
 			System.out.println("Shop Page Medsupp Plan is Displayed");
 			return new ShopPage(driver);

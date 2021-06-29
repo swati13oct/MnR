@@ -170,7 +170,8 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+//		CommonUtility.waitForPageLoadNew(driver, NextBtn, 30);
+		validateNew(NextBtn, 30);
 		validateNew(PCPPageHeader);
 		System.out.println("Page header is Displayed" + PCPPageHeader.getText());
 	}
@@ -205,7 +206,9 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 				e1.printStackTrace();
 			}
 			for (String winHandle : driver.getWindowHandles()) {
-				driver.switchTo().window(winHandle);
+				if (!winHandle.equals(PCPWindow)) {
+					driver.switchTo().window(winHandle);
+				}
 			}
 
 			String CurrentURL = driver.getCurrentUrl();
@@ -238,7 +241,6 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 				// if(!planType.contains("SNP")){
 				if (validate(SelectPCPLink)) {
 					System.out.println("PCP selection is Displayed in Rally Page : Selecting PCP");
-					//SelectPCPLink.click();
 					jsClickNew(SelectPCPLink);
 					try {
 						Thread.sleep(2000);
@@ -362,13 +364,13 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 	public PlanPremiumPageMobile navigate_to_Plan_Premium_Page() {
 
 		validateNew(NextBtn);
-		scrollToView(NextBtn);
 		jsClickNew(NextBtn);
+		pageloadcomplete();
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);
 		*/
 		//if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
-		if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
+		if(validate(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
 		System.out.println("OLE Monthly Plan Premium Page is Displayed");
 			return new PlanPremiumPageMobile(driver);
 		}
@@ -429,8 +431,8 @@ public class PrimaryCarePhysicianPageMobile extends UhcDriver {
 		// expectedProvider, actualProvider);
 		Assertion.assertTrue("PCP selected is not shown in blue box", actualProvider.contains(expectedProvider));
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
-		validateNew(NextBtn);
-		jsClickNew(NextBtn);
+//		validateNew(NextBtn);
+//		jsClickNew(NextBtn);
 
 		return null;
 

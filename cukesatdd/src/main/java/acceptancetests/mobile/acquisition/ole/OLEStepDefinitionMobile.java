@@ -26,14 +26,16 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.acquisition.ole.MedicareInformationPage;
 import pages.acquisition.ole.OLEconfirmationPage;
+import pages.acquisition.ole.PersonalInformationPage;
+import pages.acquisition.ole.ReviewSubmitPage;
 import pages.acquisition.ole.SpecialElectionPeriodPage;
+import pages.acquisition.ole.UseAndDisclosureAuthorizationPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ComparePlansPageMobile;
 import pages.mobile.acquisition.commonpages.PlanComparePageMobile;
 import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
-import pages.mobile.acquisition.commonpages.SpecialElectionPeriodPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.ole.AuthorizationPageMobile;
@@ -49,7 +51,7 @@ import pages.mobile.acquisition.ole.PlanPremiumPageMobile;
 import pages.mobile.acquisition.ole.PrelimineryQuestionsPageMobile;
 import pages.mobile.acquisition.ole.PrimaryCarePhysicianPageMobile;
 import pages.mobile.acquisition.ole.ReviewSubmitPageMobile;
-import pages.mobile.acquisition.ole.SpecialElectionPeriodPagemobile;
+import pages.mobile.acquisition.ole.SpecialElectionPeriodPageMobile;
 import pages.mobile.acquisition.ole.SupplementalBenefitsPageMobile;
 import pages.mobile.acquisition.ole.UseAndDisclosureAuthorizationPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
@@ -118,32 +120,6 @@ public class OLEStepDefinitionMobile {
 			Assertion.fail("Error in validating the OLE Welcome Page");
 	}
 
-	@Given("^the user navigates to following Campaign acquisition site page$")
-	public void the_user_navigates_to_following_medicare_acquisition_site(DataTable givenAttributes) throws Throwable {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String path = memberAttributesMap.get("PagePath");
-		path = path.replace("!", "#");
-		System.out.print("Path to Acq page : " + path);
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		aquisitionhomepage.navigateToPath(path);
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if (plansummaryPage != null) {
-			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-
-		} else {
-			Assertion.fail("Error Loading VPP plan summary page");
-		}
-	}
 
 	/**
 	 * @author sdwaraka To start Enroll Now and land on Welcome Page from Plan
@@ -164,8 +140,6 @@ public class OLEStepDefinitionMobile {
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
-
-		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		// String PlanName = (String)
 		// getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
@@ -174,7 +148,7 @@ public class OLEStepDefinitionMobile {
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-
+		String TFN;
 		String SiteName;
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
@@ -211,7 +185,7 @@ public class OLEStepDefinitionMobile {
 		System.out.println("Plan Zip Code is : " + ZipCode);
 		System.out.println("Plan County Name is : " + County);
 		System.out.println("Plan Plan Premium is : " + PlanPremium);
-		// System.out.println("TFN for Plan Type is : " + TFN);
+		System.out.println("TFN for Plan Type is : " + TFN);
 		System.out.println("Plan Year is : " + PlanYear);
 		System.out.println("OLE is being started from Acquisition Site : " + SiteName);
 
@@ -229,20 +203,12 @@ public class OLEStepDefinitionMobile {
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*
-		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
+		// String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
 
-		String plantype = givenAttributesMap.get("Plan Type");
-		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
-		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		// String County = "St. Louis County";
+		// String ZipCode = "63043";
+		// String PlanYear = "2020";
 
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 		String PlanPremium = "";
@@ -254,7 +220,6 @@ public class OLEStepDefinitionMobile {
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		// -----------------------------------------------------------------------------------------------------
 		WelcomePageMobile welcomePage;
-		plansummaryPage.viewPlanSummary(plantype);
 		if (SiteName.contains("UHC_ACQ")) {
 			VPPPlanSummaryPageMobile planSummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -444,20 +409,41 @@ public class OLEStepDefinitionMobile {
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
 		String PlanName = givenAttributesMap.get("Plan Name");
-		String SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-		WelcomePageMobile welcomePage;
-		if (SiteName.contains("UHC_ACQ")) {
+		String PlanType = givenAttributesMap.get("Plan Type");
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 
-			PlanComparePageMobile comparePlansPage = (PlanComparePageMobile) getLoginScenario()
+		String ZipCode = givenAttributesMap.get("Zip Code");
+		// (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = "";
+		// (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanPremium = "";
+		// (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
+		WelcomePageMobile welcomePage;
+		if (PlanType.contains("MAPD")) {
+			ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
-			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+			welcomePage = comparePlansPage.Enroll_OLE_Plan_Compare_MAPD(PlanName);
 		} else {
 			ComparePlansPageMobile comparePlansPage = (ComparePlansPageMobile) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 
-			welcomePage = comparePlansPage.Enroll_OLE_Plan(PlanName);
+			welcomePage = comparePlansPage.Enroll_OLE_Plan_Compare_PDP(PlanName);
 		}
 
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
+		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
+
+		System.out.println("Plan Name is : " + PlanName);
+		System.out.println("Plan Type is : " + PlanType);
+		System.out.println("Plan Zip Code is : " + ZipCode);
+		System.out.println("Plan County Name is : " + County);
+		System.out.println("Plan Plan Premium is : " + PlanPremium);
+		System.out.println("Plan Year is : " + PlanYear);
+		// System.out.println("OLE is being started from Acquisition Site : "+SiteName);
 		if (welcomePage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
@@ -478,14 +464,14 @@ public class OLEStepDefinitionMobile {
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		// if (plansummaryPage.validatePlanNames(planType)) {
-		String SiteName = "AARP_ACQ";
-		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
-		// Assertion.assertTrue(true);
-		// } else {
-		// Assertion.fail("Error validating availables plans for selected plantype in
-		// VPP plan summary page");
-		// }
+		int planCount = (int) getLoginScenario().getBean(VPPCommonConstants.PLAN_COUNT); 
+		if (plansummaryPage.validatePlanNames(planType, planCount)) {
+			String SiteName = "AARP_ACQ";
+			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
+		}
 	}
 
 	@Then("^the user validates TFN in Welcome OLE Right Rail$")
@@ -632,22 +618,61 @@ public class OLEStepDefinitionMobile {
 	}
 
 	@Then("^the user validates the required fields for CSNP plans on Medicare Information Page$")
-	public void the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable Flags)
+	public void the_user_validates_requierd_fields_for_Medicare_Information_Page_CSNP(DataTable arg1)
 			throws Throwable {
 
+
+		/*List<DataTableRow> personalAttributesRow = Flags.getGherkinRows();
 		Map<String, String> PreliminaryFlagsMap = new HashMap<String, String>();
-		PreliminaryFlagsMap = DataTableParser.readDataTableAsMaps(Flags);
-		/*
-		 * List<DataTableRow> personalAttributesRow = Flags.getGherkinRows(); for (int i
-		 * = 0; i < personalAttributesRow.size(); i++) {
-		 * PreliminaryFlagsMap.put(personalAttributesRow.get(i).getCells().get(0),
-		 * personalAttributesRow.get(i).getCells().get(1)); }
+		for (int i = 0; i < personalAttributesRow.size(); i++) {
+			PreliminaryFlagsMap.put(personalAttributesRow.get(i)
+					.getCells().get(0), personalAttributesRow.get(i)
+					.getCells().get(1));
+		}
+			String medicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
+			String planName = (String)getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+			String diabetesQuestion1 ="";
+			String diabetesQuestion2="";
+			String diabetesQuestion3="";
+			String chronicHeartFailure1="";
+			String chronicHeartFailure2="";
+			String chronicHeartFailure3="";
+			String cardioVasculardisorder1="";
+			String cardioVasculardisorder2="";
+			String cardioVasculardisorder3="";
+			String cardioVasculardisorder4="";
+			String cardioVasculardisorder5="";
+			String cardioVasculardisorder6="";
+
 		 */
-		String medicaidNumber = PreliminaryFlagsMap.get("MedicaidNumber");
-		String planName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
-		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario()
-				.getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
-		medicareInfoPage.validate_Required_Fields_CSNP(medicaidNumber, planName);
+		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
+		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
+		/*
+		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
+		 * 0; i < givenAttributesRow.size(); i++) {
+		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
+		String PlanName = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME);
+		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		medicareInfoPage.validate_Required_Fields_CSNP(MemberDetailsMap, PlanName);
+
+		//------------Added for CSNP plans-------
+
+		getLoginScenario().saveBean(oleCommonConstants.DIABETES_QUESTION_1, MemberDetailsMap.get("diabetesQuestion1"));
+		getLoginScenario().saveBean(oleCommonConstants.DIABETES_QUESTION_2, MemberDetailsMap.get("diabetesQuestion2"));
+		getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_1, MemberDetailsMap.get("chronicHeartFailure1"));
+		getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2, MemberDetailsMap.get("chronicHeartFailure2"));
+		getLoginScenario().saveBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3, MemberDetailsMap.get("chronicHeartFailure3"));
+		getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1,MemberDetailsMap.get("cardioVasculardisorder1"));
+		getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2,MemberDetailsMap.get("cardioVasculardisorder2"));
+		getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3,MemberDetailsMap.get("cardioVasculardisorder3"));
+		getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4,MemberDetailsMap.get("cardioVasculardisorder4"));
+		getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5,MemberDetailsMap.get("cardioVasculardisorder5"));
+		getLoginScenario().saveBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6,MemberDetailsMap.get("cardioVasculardisorder6"));
+		Assertion.assertTrue(true);
+
+		// ------------Added for CSNP plans-------
 	}
 
 	@Then("^the user navigates to Medicare Information Page$")
@@ -1211,18 +1236,34 @@ public class OLEStepDefinitionMobile {
 		 * MedicareDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
 		 * givenAttributesRow.get(i).getCells().get(1)); }
 		 */
+
+		String diclsoureCheckbox="true";
+		//	String diclsourestate ="AK";
+
 		UseAndDisclosureAuthorizationPageMobile useranddisclosure = (UseAndDisclosureAuthorizationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE);
 		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
-		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_ADDRESS,
-				MedicareDetailsMap.get("Provider Street Address"));
+		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_ADDRESS, MedicareDetailsMap.get("Provider Street Address"));
 		getLoginScenario().saveBean(OLE_PageConstants.CITY, MedicareDetailsMap.get("City"));
 		getLoginScenario().saveBean(OLE_PageConstants.ZIP, MedicareDetailsMap.get("Zip"));
 		getLoginScenario().saveBean(OLE_PageConstants.PROVIDER_NUMBER, MedicareDetailsMap.get("Provider Phone Number"));
 
-		PersonalInformationPageMobile personalInformationPage = useranddisclosure
-				.Validate_and_Enter_Details_for_YourProvide_Section(MedicareDetailsMap);
-		getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
+		/*	PersonalInformationPage personalInformationPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section( MedicareDetailsMap);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+				personalInformationPage);*/
+
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = useranddisclosure.Validate_and_Enter_Details_for_YourProvide_Section(MedicareDetailsMap);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE,
+				specialElectionPeriodPage);
+
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_CHECKBOX, diclsoureCheckbox);
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME, MedicareDetailsMap.get("Provider Name"));
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS, MedicareDetailsMap.get("Provider Street Address"));
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY, MedicareDetailsMap.get("City"));
+		//getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, diclsourestate);
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP, MedicareDetailsMap.get("Zip"));
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER, MedicareDetailsMap.get("Provider Phone Number"));
+		getLoginScenario().saveBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE, MedicareDetailsMap.get("Mailing_State"));
 	}
 
 	/**
@@ -1543,26 +1584,47 @@ public class OLEStepDefinitionMobile {
 	@Then("^the user enters following information in Personal Information Page DSNP$")
 	public void the_user_enters_following__information_in_Personal_Information_Page_DSNP(DataTable arg1)
 			throws Throwable {
-
+		/*
+		 * String alreadyEnrolled = (String)
+		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
+		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
+		 * if(alreadyEnrolled_Flag){ System.out.
+		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
+		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
+		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
+		 * Assertion.assertTrue(true); } else{
+		 */
 		Map<String, String> MemberDetailsMap = new HashMap<String, String>();
 		MemberDetailsMap = DataTableParser.readDataTableAsMaps(arg1);
 		/*
 		 * List<DataTableRow> givenAttributesRow = arg1.getGherkinRows(); for (int i =
 		 * 0; i < givenAttributesRow.size(); i++) {
 		 * MemberDetailsMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 * givenAttributesRow.get(i).getCells().get(1));
+		 * 
+		 * }
 		 */
-		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
-				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		String EmailConfirmation = "";
+		String GoGreen = "";
+		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
 		boolean isFormFilled = personalInformationPage.enter_member_details_Other_dsnp(MemberDetailsMap);
 		if (isFormFilled) {
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE, personalInformationPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE,
+					personalInformationPage);
 			System.out.println("OLE Personal Information Page - All required Member Details are entered");
 			getLoginScenario().saveBean(oleCommonConstants.EMAIL, MemberDetailsMap.get("Email"));
-			getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Phone Number"));
+			getLoginScenario().saveBean(oleCommonConstants.PRIMARY_PHONE_NUMBER, MemberDetailsMap.get("Home Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MOBILE_NUMBER, MemberDetailsMap.get("Mobile Number"));
 			getLoginScenario().saveBean(oleCommonConstants.MIDDLE_NAME, MemberDetailsMap.get("Middle Name"));
-
+			//	getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION, MemberDetailsMap.get("Email Confirmation"));
+			//	getLoginScenario().saveBean(oleCommonConstants.Go_Green, MemberDetailsMap.get("Go Green"));
+			getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION,EmailConfirmation);
+			getLoginScenario().saveBean(oleCommonConstants.Go_Green,GoGreen);          
+			/*	getLoginScenario().saveBean(oleCommonConstants.EMAIL_CONFIRMATION,                            
+						(null != MemberDetailsMap.get("Email Confirmation") && "" != MemberDetailsMap.get("Email Confirmation")) ? MemberDetailsMap.get("Email Confirmation") :  new Object());
+				getLoginScenario().saveBean(oleCommonConstants.Go_Green, 
+						(null != MemberDetailsMap.get("Go Green") && "" != MemberDetailsMap.get("Go Green")) ? MemberDetailsMap.get("Go Green") :  new Object());
+					//	MemberDetailsMap.get("Go Green"));*/
 			Assertion.assertTrue(true);
 		} else
 			Assertion.fail("OLE Personal Information Page - Adding Member Details Failed");
@@ -1787,7 +1849,7 @@ public class OLEStepDefinitionMobile {
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = personalInformationPage
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = personalInformationPage
 				.navigate_to_SEP_page(MedicareDetailsMap);
 		if (specialElectionPeriodPage != null) {
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
@@ -1813,7 +1875,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 
 		Map<String, String> PlanDetailsMap = new HashMap<String, String>();
@@ -1848,7 +1910,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 		boolean Validation_Status = specialElectionPeriodPage.ValidateTFNMedicareInfo(TFN);
@@ -1876,7 +1938,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		LeavingOLEmodalMobile leaveOLEmodal = specialElectionPeriodPage.OpenLeaveOLEmodal();
 		if (leaveOLEmodal != null) {
@@ -1886,7 +1948,7 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("Leave OLE Modal is NOT Displayed");
 
-		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) leaveOLEmodal.returntoOLE();
+		specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) leaveOLEmodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
@@ -1908,7 +1970,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		LearnMoreModalMobile learnMoremodal = specialElectionPeriodPage.OpenLearnMore();
 		if (learnMoremodal != null) {
@@ -1918,7 +1980,7 @@ public class OLEStepDefinitionMobile {
 		} else
 			Assertion.fail("OLE Learn More Modal is NOT Displayed");
 
-		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) learnMoremodal.returntoOLE();
+		specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) learnMoremodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
@@ -1941,7 +2003,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 
 		CancelOLEModalMobile cancelOLEmodal = specialElectionPeriodPage.OpenCancelOLE();
@@ -1950,7 +2012,7 @@ public class OLEStepDefinitionMobile {
 			System.out.println("OLE Cancellation Modal is Displayed");
 		} else
 			Assertion.fail("OLE Cancellation Modal is NOT Displayed");
-		specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) cancelOLEmodal.returntoOLE();
+		specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) cancelOLEmodal.returntoOLE();
 		if (specialElectionPeriodPage != null) {
 
 			getLoginScenario().saveBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE, specialElectionPeriodPage);
@@ -1974,7 +2036,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		String PlanType = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_TYPE);
 		boolean Validation_Status = specialElectionPeriodPage.validate_SEPoptions_for_planType(PlanType);
@@ -2013,7 +2075,7 @@ public class OLEStepDefinitionMobile {
 		String Selectoptions = SEPoptionsFlagMap.get("Select Options");
 		String optionsData = SEPoptionsFlagMap.get("Option Data");
 
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		specialElectionPeriodPage = specialElectionPeriodPage.select_option_and_enter_data(Selectoptions, optionsData);
 		if (specialElectionPeriodPage != null) {
@@ -2038,7 +2100,7 @@ public class OLEStepDefinitionMobile {
 		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
 		 * Assertion.assertTrue(true); } else{
 		 */
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		CoverageInformationPageMobile coverageInformationPage = specialElectionPeriodPage
 				.navigate_to_Coverage_Information_page();
@@ -2119,7 +2181,7 @@ public class OLEStepDefinitionMobile {
 	@Then("^the user navigates to Proposed Effective Date Page$")
 	public void the_user_navigates_to_Proposed_Effective_Date_Page() throws Throwable {
 
-		SpecialElectionPeriodPagemobile sepPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile sepPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		ProposedEffectiveDatePageMobile proposedEffectiveDatePage = sepPage.navigate_to_Proposed_Effective_Date_Page();
 		if (proposedEffectiveDatePage != null) {
@@ -2542,16 +2604,7 @@ public class OLEStepDefinitionMobile {
 
 	@Then("^the user clicks on Submit Enrollment to complete enrollment$")
 	public void the_user_clicks_on_Submit_Enrollment_to_complete_enrollment() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true")) ? true :
-		 * false; if (alreadyEnrolled_Flag) { System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * + alreadyEnrolled + "  :  " + alreadyEnrolled_Flag + " - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,
-		 * "true"); Assertion.assertTrue(true); } else {
-		 */
+		String ConfirmationNumber = "";
 		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
 			ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario()
 					.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
@@ -2559,9 +2612,15 @@ public class OLEStepDefinitionMobile {
 			if (oleConfirmationPage != null) {
 
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+				getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER, ConfirmationNumber);
+				getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER, ConfirmationNumber);
+
 				System.out.println("OLE Confirmation Page is Displayed");
 			} else {
 				getLoginScenario().saveBean(OLE_PageConstants.OLE_CONFIRMATION_PAGE, oleConfirmationPage);
+				getLoginScenario().saveBean(OLE_PageConstants.CONFIRMATION_NUMBER, ConfirmationNumber);
+				getLoginScenario().saveBean(oleCommonConstants.CONFIRMATION_NUMBER, ConfirmationNumber);
+
 				System.out.println("OLE Confirmation Page is NOT Displayed : OLE Submission Failed");
 			}
 		} else {
@@ -3058,7 +3117,7 @@ public class OLEStepDefinitionMobile {
 
 	@Then("^the User validates RadioButtons option in SEP Page$")
 	public void the_User_validates_RadioButtons_option_in_SEP_Page() throws Throwable {
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = (SpecialElectionPeriodPagemobile) getLoginScenario()
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = (SpecialElectionPeriodPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_SPECIAL_ELECTION_PERIOD_PAGE);
 		boolean Validation_Status = specialElectionPeriodPage.validate_SEP_RadioButton_options();
 		if (Validation_Status) {
@@ -3490,7 +3549,7 @@ public class OLEStepDefinitionMobile {
 				// ------------------------------------------------------------------------------------------------------------------------------------------------
 
 				System.out
-				.println("--------------------Storing Data for Eligibility Page Started----------------------");
+						.println("--------------------Storing Data for Eligibility Page Started----------------------");
 
 				// Eligibility Page
 				String partAEffective = (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE);
@@ -3791,18 +3850,7 @@ public class OLEStepDefinitionMobile {
 
 	@Then("^the user validates the Online Enrollment details on Review and Submit Page$")
 	public void the_user_validates_the_online_Enrollment_details_on_Review_and_Submit_Page() throws Throwable {
-		/*
-		 * String alreadyEnrolled = (String)
-		 * getLoginScenario().getBean(oleCommonConstants.ALREADY_ENROLLED_FLAG); boolean
-		 * alreadyEnrolled_Flag = (alreadyEnrolled.contentEquals("true"))?true:false;
-		 * if(alreadyEnrolled_Flag){ System.out.
-		 * println("Already Enrolled Error message is Displayed in OLE Medicare Information  PAGE : "
-		 * +alreadyEnrolled+"  :  "+alreadyEnrolled_Flag+" - Validation Passed");
-		 * getLoginScenario().saveBean(oleCommonConstants.ALREADY_ENROLLED_FLAG,"true");
-		 * Assertion.assertTrue(true); } else{
-		 */
-		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario()
-				.getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 		Map<String, String> DetailsMap = new HashMap<String, String>();
 		DetailsMap.put("Plan Name", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_NAME));
 		DetailsMap.put("Plan Year", (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR));
@@ -3817,7 +3865,7 @@ public class OLEStepDefinitionMobile {
 		DetailsMap.put("PartA Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTA_EFFECTIVE));
 		DetailsMap.put("PartB Date", (String) getLoginScenario().getBean(oleCommonConstants.PARTB_EFFECTIVE));
 
-		DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
+		//DetailsMap.put("Zip Code", (String) getLoginScenario().getBean(oleCommonConstants.OLE_ZIPCODE));
 		DetailsMap.put("DOB", (String) getLoginScenario().getBean(oleCommonConstants.DOB));
 		DetailsMap.put("Gender", (String) getLoginScenario().getBean(oleCommonConstants.GENDER));
 		DetailsMap.put("Perm_Street", (String) getLoginScenario().getBean(oleCommonConstants.PERM_STREET));
@@ -3830,61 +3878,73 @@ public class OLEStepDefinitionMobile {
 		DetailsMap.put("Mailing_Zip", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_ZIP));
 		DetailsMap.put("Email", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL));
 
-		DetailsMap.put("Prescription Name",
-				(String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME));
-		DetailsMap.put("PD Group Number",
-				(String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER));
-		DetailsMap.put("PD Member Number",
-				(String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));
-		DetailsMap.put("Health Insurance Name",
-				(String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME));
+		DetailsMap.put("Prescription Name", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_COVERAGE_NAME));
+		DetailsMap.put("PD Group Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_GROUP_NUMBER));
+		DetailsMap.put("PD Member Number", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_MEMBER_NUMBER));
+		DetailsMap.put("Health Insurance Name", (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE_NAME));
 		DetailsMap.put("Group Number", (String) getLoginScenario().getBean(oleCommonConstants.GROUP_NUMBER));
 		DetailsMap.put("Member Number", (String) getLoginScenario().getBean(oleCommonConstants.MEMBER_NUMBER));
 
 		DetailsMap.put("Health Insurance", (String) getLoginScenario().getBean(oleCommonConstants.HEALTH_INSURANCE));
-		DetailsMap.put("Prescription Drug", (String) getLoginScenario().getBean(oleCommonConstants.PRESCRIPTION_DRUG));
+		DetailsMap.put("Prescription Drug", (String) getLoginScenario().getBean(oleCommonConstants. PRESCRIPTION_DRUG));
 		DetailsMap.put("PCP Name", (String) getLoginScenario().getBean(oleCommonConstants.PCP_NAME));
 		DetailsMap.put("PCP Number", (String) getLoginScenario().getBean(oleCommonConstants.PCP_NUMBER));
-		DetailsMap.put("PCP Recently Visited",
-				(String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED));
-		DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(oleCommonConstants.MEDICAID_NUMBER));
+		DetailsMap.put("PCP Recently Visited", (String) getLoginScenario().getBean(oleCommonConstants.PCP_RECENTLY_VISITED));
+		DetailsMap.put("Medicaid Number", (String) getLoginScenario().getBean(OLE_PageConstants.MEDICAID_NUMBER));
 
-		DetailsMap.put("Proposed Effective date",
-				(String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE));
-		DetailsMap.put("Mailing Apartment Number",
-				(String) getLoginScenario().getBean(oleCommonConstants.MAILING_APARTMENT_NUMBER));
-		DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants.PRIMARY_PHONE_NUMBER));
+		DetailsMap.put("Proposed Effective date", (String) getLoginScenario().getBean(oleCommonConstants.PROPOSED_EFF_DATE));
+		DetailsMap.put("Mailing Apartment Number", (String) getLoginScenario().getBean(oleCommonConstants.MAILING_APARTMENT_NUMBER));
+		DetailsMap.put("Home Number", (String) getLoginScenario().getBean(oleCommonConstants. PRIMARY_PHONE_NUMBER));
 		DetailsMap.put("Mobile Number", (String) getLoginScenario().getBean(oleCommonConstants.MOBILE_NUMBER));
-		DetailsMap.put("Email Confirmation",
-				(String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION));
+		DetailsMap.put("Email Confirmation", (String) getLoginScenario().getBean(oleCommonConstants.EMAIL_CONFIRMATION));
 		DetailsMap.put("Paperless Delivery", (String) getLoginScenario().getBean(oleCommonConstants.Go_Green));
 
-		DetailsMap.put("Authorization First Name",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME));
-		DetailsMap.put("Authorization last Name",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME));
-		DetailsMap.put("Authorization Address",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_ADDRESS));
-		DetailsMap.put("Authorization Apartment Suite",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_APARTMENT_SUITE));
-		DetailsMap.put("Authorization City",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_CITY));
-		DetailsMap.put("Authorization Phone No",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO));
-		DetailsMap.put("Authorization Agree",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_AGREE));
-		DetailsMap.put("Authorization Relationship",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP));
-		DetailsMap.put("Authorization State",
-				(String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY));
+		DetailsMap.put("Authorization First Name", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_FIRST_NAME));
+		DetailsMap.put("Authorization last Name", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_LAST_NAME));
+		DetailsMap.put("Authorization Address", (String) getLoginScenario().getBean(oleCommonConstants. AUTHORIZATION_ADDRESS));
+		DetailsMap.put("Authorization Apartment Suite", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_APARTMENT_SUITE));
+		DetailsMap.put("Authorization City", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_CITY));
+		DetailsMap.put("Authorization Phone No", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_PHONE_NO));
+		DetailsMap.put("Authorization Agree", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_AGREE));
+		DetailsMap.put("Authorization Relationship", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_RELATIONSHIP));
+		DetailsMap.put("Authorization State", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_STATE_DISPLAY));
 		DetailsMap.put("Auth Zip Display", (String) getLoginScenario().getBean(oleCommonConstants.AUTHORIZATION_ZIP));
 
+
+		//-----------------Added for CSNP validation-----------------//
+		DetailsMap.put("Diabetes Question 1", (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_1));
+		DetailsMap.put("Diabetes Question 2", (String) getLoginScenario().getBean(oleCommonConstants.DIABETES_QUESTION_2));
+		DetailsMap.put("Chronic Heart Failure Question 1", (String) getLoginScenario().getBean(oleCommonConstants. CHRONIC_HEART_FAILURE_QUESTION_1 ));
+		DetailsMap.put("Chronic Heart Failure Question 2", (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_2));
+		DetailsMap.put("Chronic Heart Failure Question 3", (String) getLoginScenario().getBean(oleCommonConstants.CHRONIC_HEART_FAILURE_QUESTION_3));
+		DetailsMap.put("Cardio Vascular Disorder Question 1", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_1));
+		DetailsMap.put("Cardio Vascular Disorder Question 2", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_2));
+		DetailsMap.put("Cardio Vascular Disorder Question 3", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_3));
+		DetailsMap.put("Cardio Vascular Disorder Question 4", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_4));
+		DetailsMap.put("Cardio Vascular Disorder Question 5", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_5));
+		DetailsMap.put("Cardio Vascular Disorder Question 6", (String) getLoginScenario().getBean(oleCommonConstants.CARDIO_VASCULAR_DISORDER_QUESTION_6));
+
+
+		DetailsMap.put("Disclosure Checkbox", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_CHECKBOX));
+		DetailsMap.put("Disclosure Provider Name", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_NAME));
+		DetailsMap.put("Disclosure Provider Street Address", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STREET_ADDRESS));
+		DetailsMap.put("Disclosure Provider City", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_CITY));
+		DetailsMap.put("Disclosure Provider State", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_STATE));
+		DetailsMap.put("Disclosure Provider Zip", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_ZIP));
+		DetailsMap.put("Disclosure Provider PhoneNumber", (String) getLoginScenario().getBean(oleCommonConstants.DISCLOSURE_PROVIDER_PHONENUMBER));
+
+		//--------------------------Added for payment plan--------------------------------------------------------------
+
+		DetailsMap.put("Payment Plan", (String) getLoginScenario().getBean(oleCommonConstants.PAYMENT_PLAN));
+
 		boolean Validation_Status = reviewSubmitPage.OnlineEnrollment_Review_Page_details(DetailsMap);
-		if (Validation_Status) {
+		if(Validation_Status){
 			System.out.println("Review and Submit Page : All Plan and Member Details Validated");
-			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE, reviewSubmitPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE,
+					reviewSubmitPage);
 			Assertion.assertTrue(true);
-		} else {
+		}
+		else{
 			System.out.println("Review and Submit Page : All Plan and Member Details  NOT validated");
 			Assertion.fail();
 		}
@@ -3927,7 +3987,7 @@ public class OLEStepDefinitionMobile {
 		 */
 		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario()
 				.getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
-		SpecialElectionPeriodPagemobile specialElectionPeriodPage = personalInformationPage
+		SpecialElectionPeriodPageMobile specialElectionPeriodPage = personalInformationPage
 				.navigate_to_SEP_page_Medicaid(MedicareDetailsMap);
 
 		if (specialElectionPeriodPage != null) {
@@ -4019,6 +4079,89 @@ public class OLEStepDefinitionMobile {
 			// String TFN = (String) getLoginScenario().getBean(oleCommonConstants.OLE_TFN);
 			welcomePage.ValidateFooterEnrollmentChecklistLink();
 			welcomePage.ValidateFooterListaVerificationLink();
+		}
+	}
+	
+	@Then("^the user navigates to Disclosure Authorization Page for Medicaid and Effective date CSNP Plans$")
+	public void the_user_navigates_to_Disclosure_Authorization_Page_Medicaid_Effective_Date_CSNP_Plans(
+			DataTable Medicareoptions) throws Throwable {
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
+		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		UseAndDisclosureAuthorizationPageMobile useranddisclosure = personalInformationPage.navigate_to_SEP_page_CSNP(MedicareDetailsMap);
+		if (useranddisclosure != null) {
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_User_And_Disclosure_PAGE,
+					useranddisclosure );
+			System.out.println("OLE Use and Disclosure Authorization Page is Displayed");
+
+			getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+			getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+			//getLoginScenario().saveBean(oleCommonConstants.MEDICAID_NUMBER, MedicareDetailsMap.get("MedicaidNumber"));
+			Assertion.assertTrue(true);
+		} else
+			Assertion.fail("OLE Use and Disclosure Authorization Page is NOT Displayed");
+	}
+	
+	@Then("^the user validates logo image on OLE Pages$")
+	public void the_user_validates_logo_image_for_OLE_pages() throws Throwable {
+		PersonalInformationPageMobile personalInformationPage = (PersonalInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_PERSONAL_INFO_PAGE);
+		personalInformationPage.OpenLogoOLEPages();
+		System.out.println("OLE logo image is clicked on OLE Pages");
+	}
+	
+	@Then("^the user validates cancellation and Save Return Later modal for OLE Page$")
+	public void the_user_validates_cancellation_save_return_later_for_OLE_pages() throws Throwable {
+		MedicareInformationPageMobile medicareInfoPage = (MedicareInformationPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);
+		medicareInfoPage.OpenCancelOLEPages();
+		medicareInfoPage.OpensavereturnOLEPages();
+		System.out.println("OLE cancellation and Save Return Later modal on OLE Pages");
+	}
+	
+	@Then("^the user validate on Review Page and click on Edit information for Medicare Information Page$")
+	public void the_user_navigates_to_Review_and_Submit_Page_clickon_Edit_Medicare_Page(DataTable Medicareoptions)
+			throws Throwable {
+		Map<String, String> MedicareDetailsMap = new HashMap<String, String>();
+		MedicareDetailsMap = DataTableParser.readDataTableAsMaps(Medicareoptions);
+
+		String CardType = MedicareDetailsMap.get("Card Type");
+		String MedicareNumber1 = MedicareDetailsMap.get("Medicare Number1");
+		ReviewSubmitPageMobile reviewSubmitPage = (ReviewSubmitPageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
+
+		boolean medicareInfoPage = reviewSubmitPage.Review_page_enter_required_Medicare_details(MedicareDetailsMap);
+		if (medicareInfoPage) {
+
+			getLoginScenario().saveBean(oleCommonConstants.MEDICARE_NUMBER, MedicareDetailsMap.get("Medicare Number1"));
+			getLoginScenario().saveBean(oleCommonConstants.CARD_TYPE, MedicareDetailsMap.get("Card Type"));
+			//getLoginScenario().saveBean(oleCommonConstants.PARTA_EFFECTIVE, MedicareDetailsMap.get("PartA Date"));
+			//getLoginScenario().saveBean(oleCommonConstants.PARTB_EFFECTIVE, MedicareDetailsMap.get("PartB Date"));
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE,
+					medicareInfoPage);
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE,
+					reviewSubmitPage);
+			System.out.println("OLE Medicare Information Page, Medicare Info is entered and navigated back to Review Page");
+			Assertion.assertTrue(true);
+		}
+		else
+			Assertion.fail("Medicare Info data entry failed and user not navigated back to Review Page");
+	}
+	
+	
+	@Then("^the user validates TFN in Welcome OLE Right Rail PlanCompare$")
+	public void the_user_validates_TFN_in_Right_Rail_PlanCompare() throws Throwable {
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		String TFN ="";
+		boolean Validation_Status = welcomePage.ValidateTFN(TFN);
+
+		getLoginScenario().saveBean(oleCommonConstants.OLE_TFN, TFN);
+
+		if(Validation_Status){
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status+" - Validation Passed");
+			getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomePage);
+			Assertion.assertTrue(true);
+		}
+		else{
+			System.out.println("TFN, Wunderman Validation in OLE PAGE : "+Validation_Status);
+			Assertion.fail();
 		}
 	}
 

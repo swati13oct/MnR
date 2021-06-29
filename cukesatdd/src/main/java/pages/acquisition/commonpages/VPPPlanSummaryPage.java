@@ -45,6 +45,7 @@ import pages.acquisition.isinsuranceagent.IsInsuranceAgent;
 import pages.acquisition.medsuppole.MedSuppOLEPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.AepVppPlanSummaryPage;
+import pages.acquisition.commonpages.ComparePlansPage;
 
 /**
  * @author
@@ -648,6 +649,9 @@ public class VPPPlanSummaryPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[contains(@class,'closeBg')]/*[contains (text() , 'Thank you for your interest')]")
 	private WebElement medicareGuidePopup;
+	
+	@FindBy(xpath= ".//*[contains(@id,'backtoplansummarypage')]")
+	private WebElement backToAllPlansLinkPlanCompare;
 
 	// @FindBy(xpath = "//input[@class='nextButton']")
 	// @FindBy(xpath="//button[contains(text(),'Sign In')]")
@@ -1108,8 +1112,21 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		return validatePopup;
 	}
+	public void bypassABTest() {
 
+			if(MRScenario.environment.equalsIgnoreCase("Prod") && validate(backToAllPlansLinkPlanCompare)) {
+				ComparePlansPage planComparePage = new ComparePlansPage(driver);
+				planComparePage.backToVPPPage();
+				List<WebElement> compareCheckBoxes = driver.findElements(By.xpath("//div[contains(@class,'compare-box')]//label"));;
+
+				for(int i = 1; i<=compareCheckBoxes.size(); i++) {
+					jsClickNew(driver.findElement(By.xpath("(//div[contains(@class,'compare-box')]//label)["+i+"]")));
+				}
+			}
+	}
+	
 	public void viewPlanSummary(String planType) {
+		
 		if (planType.equalsIgnoreCase("PDP")) {
 			// sleepBySec(2);
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", pdpPlansViewLink);
@@ -1120,6 +1137,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(pdpPlansViewLink);
 			System.out.println("PDP Plan Type Clicked");
 			waitForPageLoadSafari();
+			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MA") || planType.equalsIgnoreCase("MAPD")) {
 			CommonUtility.waitForPageLoadNew(driver, maPlansViewLink, 30);
@@ -1127,6 +1145,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			jsClickNew(maPlansViewLink);
 			// sleepBySec(2);
 			waitForPageLoadSafari();
+			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 		} else if (planType.equalsIgnoreCase("MS")) {
 			CommonUtility.waitForPageLoadNew(driver, msPlansViewLink, 30);
@@ -1143,6 +1162,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, snpPlansViewLink, 30);
 			jsClickNew(snpPlansViewLink);
 			waitForPageLoadSafari();
+			bypassABTest(); //Adding this plan compare logic for Prod env AB testing workaround
 			CommonUtility.waitForPageLoadNew(driver, planListContainer, 30);
 			/*
 			 * try { Thread.sleep(5000); } catch (InterruptedException e) { // TODO
@@ -3029,6 +3049,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 						+ "']/following::div[contains(@class,'save-icon')][1]//img[contains(@src,'unsaved-icon.png')]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				threadsleep(2);
 			}
 
 		} catch (Exception e) {

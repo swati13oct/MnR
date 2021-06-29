@@ -38,7 +38,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 	
-	@FindBy(id = "backtoplansummarypage")
+	@FindBy(xpath= ".//*[contains(@id,'backtoplansummarypage')]")
 	private WebElement backToAllPlansLink;
 	
 	@FindBy(id = "backtoprofilepage")
@@ -177,6 +177,9 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath="//*[@id='your-hospitals-table']/tbody/tr[4]/td[1]/span")
 	private WebElement HospitalProviderName;
+	
+	@FindBy(xpath="//*[@id='your-hospitals-table']/tbody/tr[5]/td[1]/span")
+	private WebElement HospitalProviderName1;
 	
 	@FindBy(xpath="//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement HospitalProviderCoverageText;	
@@ -363,17 +366,16 @@ public class ComparePlansPage extends UhcDriver {
 	
 	public VPPPlanSummaryPage backToVPPPage(){
 		backToAllPlansLink.click();
-		try {
+		/*try {
 			Thread.sleep(4000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		if(currentUrl().contains("#/plan-summary"))
+		}*/
+		//if(currentUrl().contains("#/plan-summary"))
 			return new VPPPlanSummaryPage(driver);
-		return null;
+		
 	}
-
 
 	/**
 	 * @author sdwaraka
@@ -851,8 +853,10 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(HospitalSummaryHeader);
 		validateNew(HospitalSummaryCoverageHeader);
 		System.out.println("Coverage Header for plan 1 : " + HospitalSummaryCoverageHeader.getText());
-		validateNew(HospitalProviderName);
-		System.out.println("Added Hospital Name : " + HospitalProviderName.getText());
+		if(validate(HospitalProviderName))
+			System.out.println("Added Hospital Name : " + HospitalProviderName.getText());
+		else if (validate(HospitalProviderName1))
+			System.out.println("Added Hospital Name : " + HospitalProviderName1.getText());
 		validateNew(HospitalProviderCoverageText);
 		System.out.println("Covered or not covered text for plan 1 : " + HospitalProviderCoverageText.getText());
 		System.out.println("Verified Edit Hospitals Section header and Summary section");
@@ -925,10 +929,11 @@ public class ComparePlansPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(editHospitalsLink);
-		String ParentWindow = driver.getTitle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", editHospitalsLink);
+		
+		validateNew(editHospitalsLink);
+		String ParentWindow = driver.getTitle();
 		
 //		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 //		CommonConstants.setMainWindowHandle(driver.getWindowHandle());

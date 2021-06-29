@@ -12,6 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
@@ -79,9 +80,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	}
 
 	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
-		
+
 		sendkeysMobile(zipcodeField, zipcode);
-		//planTypeDropDownTitle.click();
+		// planTypeDropDownTitle.click();
 		System.out.println("zipcode entered");
 		jsClickNew(planTypeDropDownTitle);
 		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
@@ -89,7 +90,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(zipcode);
-		Assertion.assertTrue("PROBLEM - unable to locate distance dropdown option", pharmacyValidate(distanceDropownID));
+		Assertion.assertTrue("PROBLEM - unable to locate distance dropdown option",
+				pharmacyValidate(distanceDropownID));
 		if (distance.equals("1"))
 			distance = distance + " mile";
 		else
@@ -141,7 +143,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		scrollToView(zipcodeField);
 		zipcodeField.sendKeys(zipcode);
 		System.out.println("checking for the second time while entering zipcode");
-		//mobileactionsendkeys(zipcodeField, zipcode);
+		// mobileactionsendkeys(zipcodeField, zipcode);
 		// if(zipcode.length()!=5){
 		// distanceOption_15miles.click();
 		jsClickNew(distanceOption_15miles);
@@ -178,8 +180,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 * 
 	 * timeStr = (String) sysTimeJsonObj.get("systemtime"); } catch (ParseException
 	 * e) { e.printStackTrace();
-	 * Assertion.assertTrue("PROBLEM - unable to find out the system time", false); }
-	 * driver.close(); driver.switchTo().window(winHandleBefore); return timeStr; }
+	 * Assertion.assertTrue("PROBLEM - unable to find out the system time", false);
+	 * } driver.close(); driver.switchTo().window(winHandleBefore); return timeStr;
+	 * }
 	 */
 
 	public List<String> getListOfAvailablePlanNames() {
@@ -203,7 +206,7 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// selectFromDropDownByText(driver, seletPlandropdown, planName);
 		/* To handle iOS dropdown */
 		jsClickNew(planTypeDropDownTitle);
-		//planTypeDropDownTitle.click();
+		// planTypeDropDownTitle.click();
 		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 
@@ -265,7 +268,8 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			if (total > 10) {
 				Assertion.assertTrue("PROBLEM - unable to locate the pagination element", pharmacyValidate(pagination));
 				Assertion.assertTrue("PROBLEM - unable to locate the left arrow element", pharmacyValidate(leftArrow));
-				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element", pharmacyValidate(rightArrow));
+				Assertion.assertTrue("PROBLEM - unable to locate the right arrow element",
+						pharmacyValidate(rightArrow));
 				try {
 					rightArrow.click();
 					CommonUtility.checkPageIsReady(driver);
@@ -635,14 +639,14 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	}
 
 	public void vppSelectFirstPlanViewDetail(String planType) {
-		WebElement testElementList = listOfMaPlans;
+		List<WebElement> testElementList = listOfMaPlans;
 		if (planType.equalsIgnoreCase("PDP"))
 			testElementList = listOfPdpPlans;
 		else if (planType.equalsIgnoreCase("SNP"))
 			testElementList = listOfSnpPlans;
 		Assertion.assertTrue("PROBLEM - unable to locate plan for planType='" + planType + "'",
-				testElementList.isDisplayed());
-		jsClickNew(testElementList);
+				testElementList.size() > 0);
+		jsClickNew(testElementList.get(0));
 		CommonUtility.checkPageIsReady(driver);
 		waitForPageLoadSafari();
 	}

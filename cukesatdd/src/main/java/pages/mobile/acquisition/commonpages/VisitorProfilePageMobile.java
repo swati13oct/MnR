@@ -250,6 +250,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(xpath = "//*[@id='navLinks']/a[1]")
+	private WebElement breadCrumbLink;
+
+	public void verifyBreadCrumb(String breadCrumb) {
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + "not displayed",
+				breadCrumbLink.getText().equals(breadCrumb));
+	}
+
 	@FindBy(xpath = "//button[contains(text(),'Remove')]")
 	private WebElement remove;
 

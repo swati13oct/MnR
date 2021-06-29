@@ -27,6 +27,7 @@ import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumDriver;
 import pages.acquisition.ole.MedicareInformationPage;
+import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 
 public class WelcomePageMobile extends UhcDriver {
 
@@ -368,26 +369,25 @@ public class WelcomePageMobile extends UhcDriver {
 		return null;
 	}
 
-
 	public void ValidateFooterEnrollmentChecklistLink() throws InterruptedException, IOException {
 		PDDocument document;
 		validateNew(EnrollmentChecklistLink);
 		scrollToView(EnrollmentChecklistLink);
-//		jsClickNew(EnrollmentChecklistLink);
-		
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+		// jsClickNew(EnrollmentChecklistLink);
+
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			String fileHref = EnrollmentChecklistLink.getAttribute("href").trim();
 			String fileName = fileHref.substring(fileHref.lastIndexOf("/") + 1);
 			grantMemoryAccessOnAndroidChrome(EnrollmentChecklistLink);
 			byte[] pdfContent = getDownloadedPdfFileContentAndroid(fileName);
 			document = PDDocument.load(pdfContent);
 		} else {
-//			String parentWindow = driver.getWindowHandle();
+			// String parentWindow = driver.getWindowHandle();
 			switchToNewTabNew(EnrollmentChecklistLink);
 			URL TestURL = new URL(driver.getCurrentUrl());
 			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 			document = PDDocument.load(TestFile);
-			
+
 		}
 		String PDFText = new PDFTextStripper().getText(document);
 		String ExpectedPDFText = "Enrollment Checklist";
@@ -402,27 +402,39 @@ public class WelcomePageMobile extends UhcDriver {
 
 			}
 		}
-		
-		
-		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			driver.close();
 			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		} else {
-			//Not working as of now since it requires appium server flag to be set which isn't possible on saucelabs as of now
-//			deleteDownloadedFile();
-			
-		}
-		
-		
+			// Not working as of now since it requires appium server flag to be set which
+			// isn't possible on saucelabs as of now
+			// deleteDownloadedFile();
 
+		}
+
+	}
+
+	@FindBy(xpath = "//*[@id='ole-form-content']//a[contains(@href,'pharmacy.html')]")
+	private WebElement pharmacyLink;
+
+	public PharmacySearchPage clickPharamcyLinkAndSwitchTab() {
+		/*
+		 * pharmacyLink.click(); switchToNewTab();
+		 */
+		switchToNewTabNew(pharmacyLink);
+		if (driver.getCurrentUrl().contains("health-plans/aarp-pharmacy.html#/Pharmacy-Search-English")) {
+			return new PharmacySearchPage(driver);
+		}
+		return null;
 	}
 
 	public void ValidateFooterListaVerificationLink() throws InterruptedException, IOException {
 		PDDocument document;
 		validateNew(ListaVerificationLink);
 		scrollToView(ListaVerificationLink);
-		
-		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			String fileHref = ListaVerificationLink.getAttribute("href").trim();
 			String fileName = fileHref.substring(fileHref.lastIndexOf("/") + 1);
 			grantMemoryAccessOnAndroidChrome(ListaVerificationLink);
@@ -433,7 +445,7 @@ public class WelcomePageMobile extends UhcDriver {
 			URL TestURL = new URL(driver.getCurrentUrl());
 			BufferedInputStream TestFile = new BufferedInputStream(TestURL.openStream());
 			document = PDDocument.load(TestFile);
-			
+
 		}
 		/*
 		 * PDFParser TestPDF = new PDFParser(document); TestPDF.parse();
@@ -454,14 +466,15 @@ public class WelcomePageMobile extends UhcDriver {
 
 			}
 		}
-		
-		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+
+		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
 			driver.close();
 			driver.switchTo().window(CommonConstants.getMainWindowHandle());
 		} else {
-			//Not working as of now since it requires appium server flag to be set which isn't possible on saucelabs as of now
-//			deleteDownloadedFile();
-			
+			// Not working as of now since it requires appium server flag to be set which
+			// isn't possible on saucelabs as of now
+			// deleteDownloadedFile();
+
 		}
 	}
 
