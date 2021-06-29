@@ -23,51 +23,66 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id = "gf_lnk_1")
 	public WebElement footerHomeLink;
 
-	@FindBy(xpath = "//*[@id=\"gf_lnk_2\"]/div")
+	// @FindBy(id = "gf_lnk_2")
+	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
 	public WebElement footerAboutUsLink;
 
-	@FindBy(id = "gf_lnk_3")
+	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'contact-us')]")
 	public WebElement footerContactUsLink;
 
-	@FindBy(id = "gf_lnk_4")
+	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'sitemap')]")
 	public WebElement footerSiteMapLink;
 
-	@FindBy(id = "gf_lnk_5")
+	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'privacy-policy')]")
 	public WebElement footerPrivacyPolicyLink;
 
-	@FindBy(id = "gf_lnk_6")
+	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'terms-of-use')]")
 	public WebElement footerTermsnConditionsLink;
 
-	@FindBy(id = "gf_lnk_7")
+	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'disclaimer')]")
 	public WebElement footerDisclaimersLink;
 
-	@FindBy(id = "gf_lnk_8")
+	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'insurance-brokers')]")
 	public WebElement footerAgentsnBrokersLink;
 
 	/** Request for assistance link **/
 	@FindBy(id = "gf_lnk_10")
 	public WebElement footerRequestforAssistancelink;
 
-	@FindBy(id = "gf_lnk_9")
+	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'accessibility')]")
 	public WebElement footerAccessibilitylink;
 
-	@FindBys(value = {
-			@FindBy(xpath = "//div[contains(@class,'globalfooternav')]//a[contains(text(),'Visit AARP.org')]") })
+	@FindBys(value = { @FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'aarp.org')]") })
 	public WebElement aarpOrgLink;
 
 	@FindBys(value = { @FindBy(id = "footnotes1") })
 	public WebElement footnotesContent;
 
-	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Medicare Advantage')]")
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'medicare-advantage-plans')]")
 	public WebElement medicareAdvantagePlansLink;
 
-	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@dtmname, 'Special Needs')]")
+	@FindBy(xpath = "//div[contains(text(),'Shop Plans')]")
+	public WebElement shopPlansExpander;
+
+	@FindBy(xpath = "//div[contains(text(),'Tools & Resources')]")
+	public WebElement toolsAndResources;
+
+	@FindBy(css = "#accordion-3-button")
+	public WebElement learnAboutMedicare;
+
+	@FindBy(xpath = "//div[contains(text(),'More')]")
+	public WebElement more;
+
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'dual-special-needs-plans')]")
 	public WebElement medicareSpecialNeedsPlansLink;
 
-	@FindBy(xpath = "//li[contains(@class,'liheight') and not(contains(@class,'hide'))]//*[contains(@id, 'gfn_lnk_row2_')]//*[contains(text(), 'Medicare Supplement')]")
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'medicare-supplement-plans')]")
 	public WebElement medicareSupplementInsurancePlansLink;
 
-	@FindBy(xpath = "//a[contains(@id, 'gfn_lnk_row2') and contains(@href, 'prescription-drug')]")
+	@FindBy(xpath = "//span[@class='meded-article-header__title' and contains(text(),'Medicare Supplement')]")
+	public WebElement medicareSupplementInsurancePlansHeader;
+
+	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'prescription-drug-plans')]")
 	public WebElement medicarePrescriptionDrug_PlansLink;
 
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -85,32 +100,12 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(linkText = "Back to Top")
 	public WebElement footerNavigationBackToTopLink;
 
-	@FindBy(xpath = ".//*[contains(@class, 'viewLink disclaimer')]")
+	@FindBy(xpath = ".//*[contains(@class, 'viewdisclaimerstext')]")
 	public WebElement viewAllDisclaimerInformationLink;
 
-	@FindBy(linkText = "Hide disclaimer information")
+	// @FindBy(linkText = "Hide disclaimer information")
+	@FindBy(xpath = ".//*[contains(@class, 'hidedisclaimerstext')]")
 	public WebElement hideDiscliamerInformation;
-
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
-	private WebElement MedicareAdvantagePlans;
-
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
-	private WebElement DualSpecialNeedsPlans;
-
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
-	private WebElement MedicareSupplementInsurancePlans;
-
-	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
-	private WebElement MedicarePrescriptionDrugPlans;
-
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_5']")
-	private WebElement footerMedicarePrescriptionDrugPlans;
-
-	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
-	private WebElement MedicareEducation;
-
-	@FindBy(xpath = "//a[@class='back-to-top']")
-	private WebElement BackToTop;
 
 	@FindBy(css = "a.backtotop1.hideLink")
 	public WebElement disclaimerBackToTopLink;
@@ -130,18 +125,9 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(id = "gfn_lnk_row2_5")
 	public WebElement medicareSpecialNeedPlansLink;
 
-	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
-	public WebElement visitorprofileicon;
-
-	@FindBy(xpath = "//button[text()='Register']")
-	public WebElement register;
-
 	// @FindBy(xpath = "//h1[@class='logo']/a")
 	@FindBy(id = "logo")
 	public WebElement logoLink;
-
-	@FindBy(id = "aarpSVGLogo")
-	public WebElement AARPlogo;
 
 	@FindBy(xpath = "//ul[@class='menu-links']/li[2]/a")
 	public WebElement importantDisclosuresLink;
@@ -176,12 +162,6 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='menu-dropdown active']/div[2]/div/span[2]/a")
 	public WebElement registerHereLink;
 
-	@FindBy(xpath = "//*[@id=\"site-wrapper\"]//a[contains(text(),'Register')]")
-	public WebElement headerRegisterLink;
-
-	@FindBy(xpath = "//header/div[1]/div[2]/div[1]/div[1]/a[1]")
-	public WebElement MenuCrossMobile;
-
 	@FindBy(className = "not-registered-text")
 	public WebElement notRegisteredText;
 
@@ -212,9 +192,6 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@class='top-menu']/div/div[2]/div/form/button")
 	public WebElement signInButton;
 
-	@FindBy(xpath = "//h1[contains(text(),'Sign In')]")
-	public WebElement signIn;
-
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[1]/div[1]/div[2]/p[2]/a")
 	public WebElement prescriptiondrugPlansRequestMoreHelpLink;
 
@@ -230,14 +207,8 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div/div[2]/div/p[2]/a[2]/span")
 	public WebElement medicareSelectHosipitalDirectoryLink;
 
-	@FindBy(xpath = "//*[@id=\"site-wrapper\"]//a[contains(text(),'Sign in')]")
-	public WebElement headerSignInLink;
-
 	@FindBy(xpath = "//div[@id='subnav_2']/div/div/div[2]/a")
 	public WebElement takeQuizButton;
-
-	@FindBy(css = "button[onclick=\"jumpToHSIDRegistration('header')\"]")
-	public WebElement registerLink;
 
 	@FindBy(id = "nav-zipcode")
 	public WebElement zipcodeField;
@@ -258,8 +229,66 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__close')]")
 	public WebElement proactiveChatExitBtn;
 
+	@FindBy(xpath = "//button[contains(@class,'button-primary proactive-offer__button main-background-color second-color proactive-offer__button_type_chat')]")
+	public WebElement proactiveChatChatBtn;
+
 	@FindBy(xpath = "//*[@id='subnav_2']//*[contains(@href,'estimate')]")
 	public WebElement headerDrugCostEstimatorLink;
+
+	@FindBy(xpath = "(//a[contains(@dtmid, 'acq_top_nav') and contains(text(), 'Sign in')])[1]")
+	public WebElement headerSignInLink;
+
+	@FindBy(xpath = "(//a[contains(@href, 'healthsafe-id')])[1]")
+	public WebElement headerRegisterLink;
+
+	@FindBy(id = "aarpSVGLogo")
+	public WebElement AARPlogo;
+
+	@FindBy(xpath = "//*[contains(@id,'uhcSVGLogo')]")
+	public WebElement UHCLogo;
+
+	@FindBy(xpath = "//img[contains(@dtmid,'acq_visitor_profile')]")
+	public WebElement visitorprofileicon;
+
+	// @FindBy(xpath = "//*[contains(@onclick,'jumpToHSIDSignIn()')]")
+	@FindBy(xpath = "//*[contains(@onclick,\"jumpToHSIDSignIn('body')\")]")
+	public WebElement signIn;
+
+	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[3]/a")
+	public WebElement menuShop;
+
+	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'plan-recommendation')]")
+	public WebElement planRecommendationLink;
+
+	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'estimate-drug-costs')]")
+	public WebElement drugCostEstimatorLink;
+
+	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'Pharmacy-Search-English')]")
+	public WebElement pharmacySearchLink;
+
+	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@onclick,'loadCachedProviderSearch();')]")
+	public WebElement providerSearchLink;
+
+	@FindBy(xpath = "(//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-education')])[1]")
+	public WebElement introductioMedicareLink;
+
+	@FindBy(xpath = "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-eligibility')]")
+	public WebElement eligibilityLink;
+
+	@FindBy(xpath = "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-parts-and-medigap-plans')]")
+	public WebElement coverageChoiceLink;
+
+	@FindBy(xpath = "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-faq')]")
+	public WebElement medicareFaqLink;
+
+	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
+	public WebElement aboutLink;
+
+	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'contact-us')]")
+	public WebElement contactLink;
+
+	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'language-assistance')]")
+	public WebElement languageAssistanceLink;
 
 	public void ourPlansHover() {
 		Actions actions = new Actions(driver);

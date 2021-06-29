@@ -26,22 +26,22 @@ Feature: 1.08. ACQ- Visitor Profile Authenticated NBA AARP
     @getStartedNBA_MAPD_AARP @authenticatedNBAMAPDAARP01 @sanity
     Examples: 
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@23 | Password@11 | NO            |   10001 | New York County | MAPD     |
+      | AARP | chargersqa@23 | Password@12 | NO            |   10001 | New York County | MAPD     |
 
     @getStartedNBA_PDP_AARP @authenticatedNBAPDPAARP01 
     Examples: 
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | AARP | chargersqa@23 | Password@11 | NO            |   10001 | New York County | PDP      |
+      | AARP | chargersqa@23 | Password@12 | NO            |   10001 | New York County | PDP      |
 
     @getStartedNBA_MAPD_UHC01 @authenticatedNBAMAPDUHC01 
     Examples:  
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@23 | Password@11 | NO            |   10001 | New York County | MAPD     |
+      | UHC  | chargersqa@23 | Password@12 | NO            |   10001 | New York County | MAPD     |
 
     @getStartedNBA_PDP_UHC02 @authenticatedNBAPDPUHC02 @sanity
     Examples: 
       | site | userName      | password    | isMultiCounty | zipcode | county          | plantype |
-      | UHC  | chargersqa@23 | Password@11 | NO            |   10001 | New York County | PDP      |
+      | UHC  | chargersqa@23 | Password@12 | NO            |   10001 | New York County | PDP      |
 
   @NBAAuthenticatedMAPD @authenticated @decRelease
   Scenario Outline: Verify NBA for authenticated Visitor Profile VPP summary page for <plantype> plantype

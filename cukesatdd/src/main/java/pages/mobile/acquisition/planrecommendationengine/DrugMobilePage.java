@@ -284,7 +284,7 @@ public class DrugMobilePage extends UhcDriver {
 		//mobileUtils.mobileLocateElementClick(continueBtn);
 		mobileUtils.mobileLocateElement(continueBtn);
 		//mobileactiontap(continueBtn);
-		jsClickMobile(continueBtn);
+		jsClickNew(continueBtn);
 		System.out.println("Validating " + page + " page Continue button functionality");
 	}
 
@@ -394,7 +394,7 @@ public class DrugMobilePage extends UhcDriver {
 		threadsleep(2000);
 		//modalGenericSwitchRadio.click();
 		//mobileactiontap(modalGenericSwitch);
-		jsClickMobile(modalGenericSwitch);
+		jsClickNew(modalGenericSwitch);
 	}
 
 	public void checkRemove(int count) {
@@ -440,7 +440,7 @@ public class DrugMobilePage extends UhcDriver {
 		WebElement remove = drugsList.get(1).findElement(By.cssSelector("button[class*='secondary']"));
 		//mobileUtils.mobileLocateElementClick(remove);
 		mobileUtils.mobileLocateElement(remove);
-		jsClickMobile(remove);
+		jsClickNew(remove);
 		threadsleep(3000);
 		int afterRemove = drugsList.size();
 		if (beforeRemove == afterRemove) {

@@ -105,15 +105,17 @@ public class EnrollmentBasicsPageMobile extends GlobalWebElements {
 	public void clickONEnrollLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("MAPD") || plantype.equals("MA") || plantype.equals("SNP")){
 			waitforElement(maLeanHowToEnrollLink);
-			maLeanHowToEnrollLink.click();
+			scrollToView(maLeanHowToEnrollLink);
+			jsClickNew(maLeanHowToEnrollLink);
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+//			jsClickNew(EnrollmentLink);
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpLeanHowToEnrollLink);
-			pdpLeanHowToEnrollLink.click();
+			scrollToView(pdpLeanHowToEnrollLink);
+			jsClickNew(pdpLeanHowToEnrollLink);
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+//			jsClickNew(EnrollmentLink);
 		}		
 	}
 	

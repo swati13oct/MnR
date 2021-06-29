@@ -2,18 +2,21 @@
 package acceptancetests.mobile.acquisition.dceredesign;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
+import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
-import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
 import pages.mobile.acquisition.dceredesign.DrugSummaryPageMobile;
 //import pages.mobile.acquisition.ulayer.GetStartedPageMobile;
@@ -218,6 +221,33 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 		aquisitionhomepage.validateChatSam();
 		aquisitionhomepage.verifyChatpopup();
 		// aquisitionhomepage.validateChatpopupconnect();
+
+	}
+	
+	@Then("^the user selects View plan details for following plantype and PlanName$")
+	public void the_user_selects_View_plan_details_for_following_plantype_and_PlanName(DataTable attributes)
+			throws Throwable {
+		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String plantype = memberAttributesMap.get("Plan Type");
+		String planName = memberAttributesMap.get("Plan Name");
+		DrugSummaryPageMobile plansummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
+		PlanDetailsPageMobile plandetailspage = plansummaryPage.clickViewplanDetailsForPlan(plantype, planName);
+		// getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE,
+		// plandetailspage);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, plantype);
+		getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, planName);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, plantype);
+
+		getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 
 	}
 

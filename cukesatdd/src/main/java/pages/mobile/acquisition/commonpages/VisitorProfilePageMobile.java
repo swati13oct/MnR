@@ -20,6 +20,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 import pages.acquisition.commonpages.AcquisitionHomePage;
@@ -28,6 +29,7 @@ import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.vpp.VPPTestHarnessPage;
@@ -68,7 +70,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "a.addrugs")
 	private WebElement addrugs;
 
-	@FindBy(xpath = "//button[@dtmname='Visitor Profile:Save Drugs and Doctors:Add Drugs']")
+	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	private WebElement addDrugsBtn;
 
 	@FindBy(css = "a.add-provider")
@@ -83,7 +85,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'DrugName-noplan-0')]")
 	private WebElement drugName;
 
-	@FindBy(xpath = "//*[contains(@class,'pharminfo')]")
+	@FindBy(css = "ul.drugs-list>li:last-child>span")
 	private WebElement pharmacyAddress;
 
 	@FindAll({ @FindBy(xpath = "//li[@class='drug']") })
@@ -125,7 +127,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//span[contains(text(),'Add Drugs')]")
 	public WebElement AddMyDrugsBtn;
 
 	public VisitorProfilePageMobile(WebDriver driver) {
@@ -144,7 +146,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public AcquisitionHomePageMobile addPlan() {
 		// addPlans.click();
 		scrollToView(addPlans);
-		jsClickMobile(addPlans);
+		jsClickNew(addPlans);
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			String page = "health-plans";
@@ -248,6 +250,14 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		return null;
 	}
 
+	@FindBy(xpath = "//*[@id='navLinks']/a[1]")
+	private WebElement breadCrumbLink;
+
+	public void verifyBreadCrumb(String breadCrumb) {
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + "not displayed",
+				breadCrumbLink.getText().equals(breadCrumb));
+	}
+
 	@FindBy(xpath = "//button[contains(text(),'Remove')]")
 	private WebElement remove;
 
@@ -305,7 +315,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	public void deletePlans(String plans) {
 		if (validate(profileMultiYear, 10)) {
 			// profileNxtYrPlans.click();
-			jsClickMobile(profileNxtYrPlans);
+			jsClickNew(profileNxtYrPlans);
 			if (driver.findElements(By.xpath("//div[@class='title dropdown-open']")).size() > 0)
 				driver.findElement(By.xpath(
 						"//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][2]/following::button[2]"))
@@ -456,6 +466,90 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		}
 	}
 
+	@FindBy(xpath = "//button[contains(@dtmname, 'Add Drugs')]/span")
+	public WebElement AddDrugsGlobal;
+
+	/**
+	 * click edit drugs globally
+	 */
+	public void clickAddDrugsBtn() {
+		AddDrugsGlobal.click();
+	}
+
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove Modal:Yes Remove')]")
+	public WebElement ConfirmRemoveProvider;
+
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Doctors/Providers:Remove')]")
+	public List<WebElement> removeProviders;
+
+	public void clearProvider() {
+		try {
+			/*
+			 * if (expandProvidersPlanCard.isDisplayed()) { expandProvidersPlanCard.click();
+			 */
+
+			while (removeProviders.size() != 0) {
+				/*
+				 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
+				 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
+				 */
+				waitforElementNew(removeProviders.get(0));
+				validateNew(removeProviders.get(0));
+				removeProviders.get(0).click();
+				validateNew(ConfirmRemoveProvider);
+				jsClickNew(ConfirmRemoveProvider);
+
+				System.out.println("Removed provider");
+				// validate(addrugs);
+			}
+			// }
+		} catch (Exception e) {
+			System.out.println("No existing providers found");
+		}
+	}
+
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove Modal:Yes Remove')]")
+	public WebElement ConfirmRemoveDrug;
+
+	@FindBy(xpath = "//a[contains(@dtmname, 'Visitor Profile:Header:Auth:Your Saved Drugs & Pharmacy')]/span[contains(@class, 'uhc-profile-header-nav__item-bottom')]")
+	public WebElement VPHeader_DrugsLinks;
+
+	@FindBy(xpath = "//button[contains(@dtmname,'Visitor Profile:Saved Drugs/Pharmacy:Remove')]")
+	public List<WebElement> removeDrugs;
+
+	public void clearDrugs() {
+		CommonUtility.waitForPageLoadNew(driver, VPHeader_DrugsLinks, 20);
+		jsClickNew(VPHeader_DrugsLinks);
+		try {
+			/*
+			 * if (expandDrugsPlanCard.isDisplayed()) { expandDrugsPlanCard.click();
+			 */
+			System.out.println(removeDrugs.size());
+			while (removeDrugs.size() != 0) {
+				waitforElementNew(removeDrugs.get(0));
+				validateNew(removeDrugs.get(0));
+				removeDrugs.get(0).click();
+				validateNew(ConfirmRemoveDrug);
+				jsClickNew(ConfirmRemoveDrug);
+				System.out.println(removeDrugs.size());
+				System.out.println("Removed drugs");
+
+			}
+			/*
+			 * while (removeDrugsPlanCard.size() != 0) {
+			 *
+			 * for(int i=0;i<editDrugs.size();i++) { totalDrugs.get(0).click();
+			 * validate(editDrugs.get(i)); editDrugs.get(i).click(); }
+			 *
+			 * removeDrugsPlanCard.get(0).click(); System.out.println("Removed drugs");
+			 * validate(addrugs); }
+			 */
+			// }
+		} catch (Exception e) {
+			System.out.println("No existing drugs found");
+		}
+	}
+
 	/**
 	 * Sign In with Optum Id credentials
 	 * 
@@ -518,6 +612,15 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 
+	public DrugDetailsPageMobile clickBackToDCELink() {
+		jsClickNew(backToDrugCostEstimatorLink);
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("drugdetails")) {
+			return new DrugDetailsPageMobile(driver);
+		} else
+			return null;
+	}
+
 	/**
 	 * Enroll in a plan
 	 * 
@@ -525,13 +628,16 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	 * @return
 	 */
 	public WelcomePageMobile Enroll_OLE_Plan(String planName) {
+
 		WebElement enrollForPlan = null;
 
-		enrollForPlan = driver.findElement(By.xpath("//*[contains(text(), '" + planName
-				+ "')]/ancestor::*[contains(@class,'title-container')]//*[contains(@class,'btn') and contains(@dtmname,'Enroll in Plan')]"));
+		enrollForPlan = driver
+				.findElement(By.xpath("//button[contains(@class,'remove')]/following::h3[contains(text(),'" + planName
+						+ "')]/following::button[contains(@dtmname,'Enroll in Plan')][1]"));
 		if (enrollForPlan != null) {
 			jsClickNew(enrollForPlan);
 		}
+		waitForPageLoadSafari();
 		validateNew(NextBtn);
 		if (driver.getCurrentUrl().contains("welcome")) {
 			System.out.println("OLE Welcome Page is Displayed");
@@ -613,7 +719,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		try {
 			// Thread.sleep(10000);
 			// SbackToPlans.click();
-			jsClickMobile(backToPlans);
+			jsClickNew(backToPlans);
 
 			CommonUtility.checkPageIsReadyNew(driver);
 			if (driver.getCurrentUrl().contains("#/plan-summary")) {

@@ -31,7 +31,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	@FindBy(xpath = "//input[@id= 'drugquantity']")
 	public WebElement DrugQuantityTxtBx;
 
-	@FindBy(xpath = "//span[contains(text(),'Add to drug List')]")
+	@FindBy(xpath = "//button//*[contains(text(),'Add to drug List')]")
 	public WebElement AddDrugBtn;
 
 	@FindBy(xpath = "//*[@id='quantitycontainer']//*[contains(@class, ' errtext')]")
@@ -39,6 +39,12 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 
 	@FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
 	public WebElement BuildDrugPage_EnterDrugNameTxt;
+	
+	@FindBy(xpath = "//button[contains(@class,'uhc-button') and contains(@dtmname,'review drug costs')]")
+	public WebElement reviewDrugCostButtonHeader;
+	
+	@FindBy(xpath = "//div[contains(@class,'lg-center')]/button[contains(@dtmname,'review drug')]")
+	public WebElement reviewDrugCostButtonFooter;
 	
 	@FindBy(xpath = "//select[contains(@id, 'selectdosage')]")
 	public WebElement SelectDosageDrpDwn;
@@ -51,7 +57,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	
 //	@FindBy(xpath = "//select[contains(@id, 'new-drug-frequency')]")
 	@FindBy(id="selectdosage")
-	public WebElement FrequentyDrpDwn;
+	public WebElement FrequencyDrpDwn;
 	
 	@FindBy(xpath = "//select[contains(@id, 'new-drug-refill')]")
 	public WebElement supplyLengthDrpDwn;
@@ -69,7 +75,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 		scrollToView(AddDrugBtn);
 		
 		validateNew(supplyLengthDrpDwn);
-		validateNew(FrequentyDrpDwn);
+		validateNew(FrequencyDrpDwn);
 		validateNew(QuantityTxt);
 	}
 
@@ -120,8 +126,9 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	public BuildYourDrugListMobile ClickAddDrug() {
 		
 		jsClickNew(AddDrugBtn);
-		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
-		if (validateNew(BuildDrugPage_EnterDrugNameTxt)) {
+//		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostButtonHeader, 30);
+		if (validateNew(reviewDrugCostButtonHeader)) {
 			Assertion.assertTrue("Naviagted to Build Drug List Page", true);
 			return new BuildYourDrugListMobile(driver);
 		}
@@ -151,8 +158,8 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	}
 
 	public void selectFrequency(String Frequency) {
-		validateNew(FrequentyDrpDwn);
-		jsClickNew(FrequentyDrpDwn);
+		validateNew(FrequencyDrpDwn);
+		jsClickNew(FrequencyDrpDwn);
 		WebElement element = driver.findElement(By.xpath("//select[@id='drugfrequency']//option[contains(text(), '"+Frequency+"')]"));
 		jsClickNew(element);
 	}

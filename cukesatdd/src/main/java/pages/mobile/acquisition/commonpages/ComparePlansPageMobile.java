@@ -26,12 +26,16 @@ import com.mysql.jdbc.StringUtils;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
+import atdd.framework.MRScenario;
 import atdd.framework.UhcDriver;
 import io.cucumber.datatable.DataTable;
+import pages.acquisition.dceredesign.DrugDetailsPage;
 import pages.acquisition.dceredesign.GetStartedPage;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.VisitorProfilePageMobile;
 import pages.mobile.acquisition.dce.bluelayer.DrugCostEstimatorPageMobile;
+import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
+import pages.mobile.acquisition.dceredesign.DrugDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
@@ -256,6 +260,12 @@ public class ComparePlansPageMobile extends UhcDriver {
 
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
+	
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']//button//*[text()='Enroll']")
+	private WebElement EnrollinPlanCompare_MAPD;
+	
+	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
+	private WebElement EnrollinPlanCompare_PDP;
 
 	public ComparePlansPageMobile(WebDriver driver) {
 		super(driver);
@@ -465,6 +475,22 @@ public class ComparePlansPageMobile extends UhcDriver {
 		return validationFlag;
 	}
 
+	
+	public void validateEstimatedDrugCostForPlan(String PlanName, String expected_Estimated_Drug_Cost2) {
+		int i = findindexofPlan_PlanCompare(PlanName);
+		i +=1;
+		WebElement Plan_Displayed_EstimatedDrugCosts = driver.findElement(By.xpath("(//*[contains(text(), 'Estimated Annual Drug Cost')]/ancestor::th//following-sibling::td//*[contains(text(), '$')])["+i+"]"));
+		
+		String Displayed_DrugCostsText = Plan_Displayed_EstimatedDrugCosts.getText().trim();
+		if(validateNew(Plan_Displayed_EstimatedDrugCosts) && Displayed_DrugCostsText.contains(expected_Estimated_Drug_Cost2)) {
+			System.out.println("DIsplayed Estimated Annual Drug Costs Matches the same displayed on DCE details page for the plan : "+PlanName);
+			System.out.println("Expected Estimated Annual Drug Costs  : "+expected_Estimated_Drug_Cost2);
+			System.out.println("Displayed Estimated Annual Drug Costs  : "+Displayed_DrugCostsText);
+		}
+		else
+			Assertion.fail("DIsplayed Estimated Annual Drug Costs DOES NOT Match the same displayed on DCE details page for the plan : "+PlanName);
+		
+	}
 	private int findindexofPlan_PlanCompare(String planName) {
 		int index = 1;
 		List<WebElement> PlanHeadings = driver.findElements(By.xpath("//div[@ng-repeat = 'i in count']"));
@@ -956,6 +982,26 @@ public class ComparePlansPageMobile extends UhcDriver {
 		} else
 			return null;
 	}
+	
+	public BuildYourDrugListMobile clickonEdityourDrug() {
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		validate(editDrugsLink);
+		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
+		jsClickNew(editDrugsLink);
+		waitforElement(addDrug);
+		if (validate(addDrug)) {
+			System.out.println("User is on DCE Page");
+			return new BuildYourDrugListMobile(driver);
+		} else
+			return null;
+	}
 
 	public void validateViewMoreplansComparePage() {
 		validateNew(backToAllPlansLink);
@@ -1376,5 +1422,184 @@ public class ComparePlansPageMobile extends UhcDriver {
 			}
 		}
 
+	}
+	
+	// START >>>>>  F&F - Added Code for DCE flow - View Drug COsts from View Drug Info Modal
+
+		@FindBy(xpath="//*[contains(@ng-click, 'launchDCEfromDrugPopup')]//*[contains(text(), 'Drug')]")
+		private WebElement DrugInfoModal_DrugCostDetailsBtn;
+
+		
+		public void clickViewDrugInfoLinkForPlan(String planName) {
+			int i = findindexofPlan_PlanCompare(planName);
+			WebElement DrugInfoLink = driver.findElement(By.xpath("//a[contains(@id, 'viewDrugInfoLink-"+i+"')]"));
+			validateNew(DrugInfoLink);
+			jsClickNew(DrugInfoLink);
+			
+			CommonUtility.waitForPageLoadNew(driver, DrugInfoModal_DrugCostDetailsBtn, 30);
+			WebElement DrugInfoModal_Header = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+planName+"')]"));
+			validateNew(DrugInfoModal_Header);
+			validateNew(DrugInfoModal_DrugCostDetailsBtn);
+
+		}
+		
+		@FindBy(xpath="//*[contains(@ng-click, 'closeDrugInfopopup')]//*[contains(text(), 'Close')]")
+		private WebElement DrugInfoModal_CloseBtn;
+
+		public void CloseDrugInfoModal() {
+			validateNew(DrugInfoModal_CloseBtn);
+			jsClickNew(DrugInfoModal_CloseBtn);
+			CommonUtility.waitForPageLoadNew(driver, editDrugsLink, 30);
+			validateNew(yourDrugsBanner);
+			validateNew(editDrugsLink);
+			validateNew(DrugSummaryHeader);
+			validateNew(DrugSummaryCoverageHeader);
+			System.out.println("Drug Info Modal Closed - Plan Compare page displayed");
+		}
+		
+		
+	
+		@FindBy(xpath = "//button[@id='changePharmacyLink']")
+		public WebElement DrugDetails_ChangePharmacyLnk;
+
+		@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
+		public WebElement DrugDetails_DrugCostsHeading;
+
+
+		public DrugDetailsPageMobile clickDrugCostDetails_DrugInfoModal() {
+			validateNew(DrugInfoModal_DrugCostDetailsBtn);
+			jsClickNew(DrugInfoModal_DrugCostDetailsBtn);
+			waitForPageLoadSafari();
+			CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+			if(validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading))
+			{
+				return new DrugDetailsPageMobile(driver, "Compare");
+			}
+			else {
+				Assertion.fail("Drug Details Page is NOT Displayed");
+				return null;
+			}
+		}
+		
+		public String validateDrugListCaptureDrugYouPay(String druglistObject) {
+			String[] Drugs = druglistObject.split("&");
+			int DrugCount_Total = Drugs.length-1;
+			String currentAddedDrug;
+			String drugYouPaylist = "";
+			String drugYouPay;
+			int i;
+			System.out.println("Total Added Drug Count : "+DrugCount_Total);
+			for(i=1; i<=DrugCount_Total; i++) {
+				currentAddedDrug = Drugs[i];
+				System.out.println("Current Added Drug Name : "+currentAddedDrug);
+				WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]"));
+				WebElement DrugYouPay = driver.findElement(By.xpath("//*[contains(@class, 'vpp-modal')]//*[contains(text(), '"+currentAddedDrug+"')]//following::*[contains(@class, 'initial-coverage')]//following::*[contains(text(), '$')]"));
+				//DrugYouPay.getText will get child element text as well in Safari browser which fails the scripts ahead
+				if (!MRScenario.browserName.equalsIgnoreCase("Safari")) {
+					drugYouPay = DrugYouPay.getText().trim();
+				} else {
+					drugYouPay = DrugYouPay.findElement(By.xpath("./text()")).getText().trim();
+				}
+				drugYouPaylist = drugYouPaylist + "&" + drugYouPay;
+				System.out.println("Current Added Drug Name : "+currentAddedDrug);
+				System.out.println("Current Drug You Pay : "+drugYouPay);
+
+				if(validateNew(DrugName) && validateNew(DrugYouPay)) {
+					System.out.println("Plan Compare Page - View Drug Info Modal -  Validated Drug List for Drug and Captured Drug You Pay : "+currentAddedDrug);
+				}
+				else
+					Assertion.fail("Plan Compare Page - View Drug Info Modal -  Validation FAILED for Drug List for Drug and Captured Drug You Pay : "+currentAddedDrug);
+			}	
+			System.out.println("Drug You Pay List : "+drugYouPaylist);
+			System.out.println("Drug List : "+druglistObject);
+
+			return drugYouPaylist;
+		}
+
+	
+	public void ValidatesAddedDrugsList(String druglist) {
+		String[] DrugListItems = druglist.split("&");
+//		int DrugCount_Total = DrugListItems.length-1; 		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
+		int DrugCount_Total = DrugListItems.length;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+		WebElement TotalDrugCount = driver.findElement(By.xpath("//*[contains(@class, 'drugcoveredalignment')][contains(text(), 'Covered')]"));
+		int i;
+		String currentDrug;
+		System.out.println("Total Added Drug Count : "+DrugCount_Total);
+//		for(i=1; i<=DrugCount_Total; i++) {					//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
+		for (i = 0; i < DrugCount_Total; i++) {
+			currentDrug = DrugListItems[i];
+			System.out.println("Current Added Drug Name : "+currentDrug);
+			WebElement DrugName = driver.findElement(By.xpath("//h2[contains(@id, 'yourdrugsheading')]//following::*[contains(text(), '"+currentDrug+"')]"));
+
+			if(validateNew(DrugName)) {
+				System.out.println("Plan Compare Page, Validated Drug List for Drug : "+currentDrug);
+			}
+			else
+				Assertion.fail("Plan Compare Page, Validation FAILED for Drug : "+currentDrug);
+		}		
+		if(validateNew(TotalDrugCount) && TotalDrugCount.getText().contains(DrugCount_Total+" Covered")) {
+			System.out.println("Plan Compare Page - Total Drug Count Validation Passed");
+		}
+		else
+			Assertion.fail("Plan Compare Page - Total Drug Count Validation FAILED");
+	}
+	
+	public WelcomePageMobile Enroll_OLE_Plan_Compare_MAPD(String planName) throws InterruptedException {
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Enroll in Plan for Plan : " + planName);
+		try {
+			if (validate(EnrollinPlanCompare_MAPD))
+				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+			else
+				System.out.println("Enroll in Plan Button is Not Displayed ");
+
+		} catch (Exception e) {
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+
+		jsClickNew(EnrollinPlanCompare_MAPD);
+
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// if (driver.getCurrentUrl().contains("enrollment"))
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePageMobile(driver);
+		}
+		return null;
+	}
+
+	public WelcomePageMobile Enroll_OLE_Plan_Compare_PDP(String planName) throws InterruptedException {
+
+		try {
+			if (validate(EnrollinPlanCompare_PDP))
+				System.out.println("Found Enroll IN Plan Button for the Plan : " + planName);
+			else
+				System.out.println("Enroll in Plan Button is Not Displayed ");
+
+		} catch (Exception e) {
+			System.out.println("Enroll in Plan Button is Not Displayed ");
+		}
+
+		jsClickNew(EnrollinPlanCompare_PDP);
+		waitForPageLoadSafari();
+		// if (driver.getCurrentUrl().contains("enrollment"))
+		if (driver.getCurrentUrl().contains("welcome")) {
+			System.out.println("OLE Welcome Page is Displayed");
+			return new WelcomePageMobile(driver);
+		}
+		return null;
 	}
 }
