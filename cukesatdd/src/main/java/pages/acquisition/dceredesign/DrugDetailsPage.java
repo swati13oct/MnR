@@ -209,14 +209,14 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement Disclaimer_Accordian;
 
 	// @FindBy(id = "selectaPharmacyHeader")
-	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
+	@FindBy(xpath = "//h2[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 
 	// @FindBy(id = "selectPharmcyModalCloseLink")
 	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 
-	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
+	@FindBy(xpath = "//*[contains(@class,'modal__content')]//*[contains(text(),'Current Pharmacy')]")
 	public WebElement selectedPharmacyLink;
 
 	@FindBy(id = "milesDropdown")
@@ -225,7 +225,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
 
-	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'Search')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement pharmacySearchBtn;
 
 	@FindBy(id = "mailSelectPharmacyBtn0")
@@ -249,7 +249,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
 
-	@FindBy(xpath = "//a[text()='Keep using this pharmacy.']")
+	@FindBy(xpath = "//a[contains(@class, 'keepPharmacyLink')]")
 	public WebElement keepUsingPharmBtn;
 
 	@FindBy(xpath = "//button[text()='Change Pharmacy']/ancestor::div/div/span")

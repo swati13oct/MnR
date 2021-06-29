@@ -65,7 +65,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button/span[contains(text(),'View Drug Costs')])[1]")
 	public WebElement viewDrugCostBtn;
 
-	@FindBy(xpath = "(//button/span[contains(text(),'View Plan Details ')])[1]")
+	@FindBy(xpath = "(//button/span[contains(text(),'View Plan Details')])[1]")
 	public WebElement viewPlanDetailsBtn;
 
 	@FindBy(xpath = "(//button//span[contains(text(),'Save')])[1]")
@@ -99,7 +99,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 
-	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
+	@FindBy(xpath = "//*[contains(@class,'modal__content')]//*[contains(text(),'Current Pharmacy')]")
 	public WebElement selectedPharmacyLink;
 
 	@FindBy(id = "milesDropdown")
@@ -108,7 +108,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
 
-	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'Search')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement pharmacySearchBtn;
 
 	@FindBy(xpath = "//*[contains(@id, 'mailSelectPharmacyBtn')]")
