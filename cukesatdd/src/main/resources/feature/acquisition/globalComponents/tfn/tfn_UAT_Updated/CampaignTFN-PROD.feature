@@ -40,7 +40,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    Then the user navigates back to page
+    #Then the user navigates back to page
     Then the user navigates to homepage validates Federal TFN
     Then the user enter zipcode in homepage
       | Zip Code  | <zipcode>    |
