@@ -100,27 +100,28 @@ public void clickMedicareAnnualEnrollment() {
 		
 	}
 	public ProviderSearchPageMobile clicksOnRallyToolFromMedEdPage() {
-		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//p[contains(text(),'Look up your providers')]"));
+		WebElement providerSearchFromMedEd= driver.findElement(By.xpath("//a//span[contains(text(),'Look up your providers')]"));
 		validateNew(providerSearchFromMedEd);
-	
+
 		switchToNewTabNew(providerSearchFromMedEd);
-	
+
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (driver.getCurrentUrl().contains("werally")) {
-	
+
 			return new ProviderSearchPageMobile(driver);
 		}
 		return null;
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
-		WebElement DCELink = driver.findElement(By.xpath("//a[contains(@href,'drug-cost-estimator') and contains(@class,'contentRow__mededcontainer')]"));
+		WebElement DCELink=driver.findElement(By.xpath("(//a[contains(@href,'drug-cost-estimator')])[3]"));
 		validateNew(DCELink);
 		jsClickNew(DCELink);
 		waitForPageLoadSafari();
+		sleepBySec(2);
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement AddMyDrugsBtn=driver.findElement(By.xpath("//button[contains(@id,'addDrug')]"));
-		if (validateNew(AddMyDrugsBtn))
+		//WebElement DCEHeader=driver.findElement(By.xpath("//h1[contains(text(),'Drug Cost Estimator')]"));
+		if (driver.getCurrentUrl().contains("health-plans/estimate-drug-costs.html"))
 			return new GetStartedPageMobile(driver);
 		return null;
 	}
