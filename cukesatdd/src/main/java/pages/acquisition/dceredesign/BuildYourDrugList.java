@@ -64,7 +64,7 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "(//button[contains(@class,'uhc-button')]//*[contains(text(),'Return to Compare')])[2]")
 	public WebElement returnToCompareBtn;
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public BuildYourDrugList(WebDriver driver) {

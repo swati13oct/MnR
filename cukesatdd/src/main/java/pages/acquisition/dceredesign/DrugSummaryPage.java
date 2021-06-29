@@ -32,33 +32,25 @@ public class DrugSummaryPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
-	@FindBy(xpath = "//*[@class='uhc-filter-group']")
+	@FindBy(xpath = "//div[contains(@class, 'uhc-radio-tabs') and contains(@role, 'group')]")
 	public WebElement planTypeToggle;
 
-	@FindBy(xpath = "//*[text()='Pharmacy:']/..")
-	public WebElement pharmacyLink;
-
-	@FindBy(xpath = "//*[@class='column column-12']//*[@class='uhc-select uhc-select--block']")
-	public WebElement sortDropdown;
-
-	@FindBy(xpath = "//*[@class='uhc-card__header']//h4")
+	@FindBy(xpath = "(//*[@class='uhc-card__header']//h4)[1]")
 	public WebElement planCardHeader;
 
-	@FindBy(xpath = "//*[text()='Average Monthly Drug Cost']/following-sibling::div")
+	@FindBy(xpath = "(//*[contains(text(),'Average Monthly Drug Cost')]/following-sibling::h6[contains(text(), '$')])[1]")
 	public WebElement avgMonthlyDrugCost;
 
-	@FindBy(xpath = "//*[text()='Monthly Premium']/following-sibling::div")
+	@FindBy(xpath = "(//*[contains(text(),'Monthly Premium')]/following-sibling::h6[contains(text(), '$')])[1]")
 	public WebElement monthlyPremium;
 
-	// @FindBy(xpath = "//h5[contains(text(), 'Annual
-	// Estimated')]//following-sibling::div")
-	@FindBy(xpath = "(//div//h5[contains(text(), 'Annual Estimated')])[1]")
+	@FindBy(xpath = "(//*[contains(text(),'Annual Estimated')]/following-sibling::h6[contains(text(), '$')])[1]")
 	public WebElement annualEstimatedTotal;
 
-	@FindBy(xpath = "//*[text()='Drugs Covered']/following-sibling::div")
+	@FindBy(xpath = "(//*[contains(text(),'Drugs Covered')]/following-sibling::h6[contains(text(), 'of')])[1]")
 	public WebElement drugsCovered;
 
 	@FindBy(xpath = "//*[contains(@id,'averageLinkBtn')]/following-sibling::button")
@@ -67,50 +59,39 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'includeLinkBtn')]/following-sibling::button")
 	public WebElement whatsIncludedLink;
 
-	@FindBy(xpath = "//*[contains(@id,'priceLinkBtn')]")
+	@FindBy(xpath = "(//*[contains(@id,'priceLinkBtn')])[1]")
 	public WebElement drugPricingLink;
 
-	@FindBy(xpath = "//button/span[text()='View Drug Costs']")
+	@FindBy(xpath = "(//button/span[contains(text(),'View Drug Costs')])[1]")
 	public WebElement viewDrugCostBtn;
 
-	@FindBy(xpath = "//button/span[text()='View Plan Details']")
+	@FindBy(xpath = "(//button/span[contains(text(),'View Plan Details ')])[1]")
 	public WebElement viewPlanDetailsBtn;
 
-	@FindBy(xpath = "//button//span[contains(text(),'Save')]")
+	@FindBy(xpath = "(//button//span[contains(text(),'Save')])[1]")
 	public WebElement saveBtn;
 
-	@FindBy(xpath = "//*[@id='accordion-1-button']")
+	@FindBy(xpath = "//*[@id='accordion-1-button' and contains(text(), 'Disclaimer')]")
 	public WebElement disclaimer;
 
-	@FindBy(xpath = "//*[@class='heading-4 mb-10 ng-star-inserted']")
+	@FindBy(xpath = "(//*[contains(@class,'uhc-card__header')]//p)[1]")
 	public WebElement planTypeHeading;
 
 	@FindBy(xpath = "//button/span[text()='View Plan Details']")
 	public WebElement viewPlanButton;
 
-//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Advantage Plans')]")
-//	public WebElement mapdPlanToggle;
-//
-//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Prescription Drug Plans')]")
-//	public WebElement pdpPlanToggle;
-//
-//	@FindBy(xpath = "//label[contains(@class,'uhc-filter')]//span[contains(text(),'Medicare Special Needs Plans')]")
-//	public WebElement snpPlanToggle;
-	
-	@FindBy(xpath = "//label[@for='ma-plans-radio']//span[contains(text(),'Medicare Advantage Plans')]")
+	@FindBy(xpath = "//input[@id='mapd-plans-radio']//parent::label")
 	public WebElement mapdPlanToggle;
 
-	@FindBy(xpath = "//label[@for='pdp-plans-radio']//span[contains(text(),'Medicare Prescription Drug Plans')]")
+	@FindBy(xpath = "//input[@id='pdp-plans-radio']//parent::label")
 	public WebElement pdpPlanToggle;
 
-	@FindBy(xpath = "//label[@for='snp-plans-radio']//span[contains(text(),'Medicare Special Needs Plans')]")
+	@FindBy(xpath = "//input[@id='snp-plans-radio']//parent::label")
 	public WebElement snpPlanToggle;
 
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacy;
 
-//	@FindBy(id = "selectaPharmacyHeader")
-//	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
 	@FindBy(xpath = "//*[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 
@@ -133,9 +114,6 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'mailSelectPharmacyBtn')]")
 	public WebElement preferredMailPharmacy;
 
-	@FindBy(xpath = "//img[contains(@alt, 'OptumRX')]")
-	public WebElement optumRxMsg;
-
 	@FindBy(xpath = "//*[@role='list']")
 	public WebElement pharmacyListSection;
 
@@ -151,16 +129,13 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
 
-	@FindBy(id = "changePharmacyLink")
-	public WebElement changePharmacyLinkDetailsPage;
-
 	@FindBy(xpath = "//*[text()='Return to Profile']")
 	public WebElement returnToProfileLink;
 
 	@FindBy(xpath = "//button//span[text()='Back to Profile']")
 	public List<WebElement> backToProfileBtn;
 
-	@FindBy(xpath = "//*[@class='plane-name-block']")
+	@FindBy(xpath = "//h4/span[contains(@class,'heading-5')]")
 	public List<WebElement> planNames;
 
 	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
@@ -262,7 +237,7 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public DrugSummaryPage validateDrugSummaryPage() {
-		if (validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) && validateNew(pharmacyLink)
+		if (validateNew(reviewDrugCostPageHeading) && validateNew(planTypeToggle) && validateNew(changePharmacy)
 				&& validateNew(planCardHeader) && validateNew(avgMonthlyDrugCost) && validateNew(monthlyPremium)
 				&& validateNew(annualEstimatedTotal) && validateNew(drugsCovered) && validateNew(whyAverageLink)
 				&& validateNew(whatsIncludedLink) && validateNew(drugPricingLink) && validateNew(viewDrugCostBtn)
@@ -290,13 +265,13 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 
 	public void validatePlanDrugDetails(String planName) {
-		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h1[contains(text(), '" + planName + "')]"));
+		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h4/span[contains(text(), '" + planName + "')]"));
 		CommonUtility.waitForPageLoadNew(driver, PlanName_PlanDetails, 20);
 		validateNew(PlanName_PlanDetails);
 	}
 	
 	public void captureFunctionalToolTips(String planName) {
-		WebElement WhyAverage = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
+		WebElement WhyAverage = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhyAverage);
 /*
 		scrollToView(WhyAverage);
@@ -311,7 +286,7 @@ public class DrugSummaryPage extends UhcDriver {
 			Assertion.fail("Why Average ToolTip text is not present");
 		jsMouseOut(WhyAverageContent);
 		*/
-		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
+		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhatsIncluded);
 		scrollToView(WhyAverage);
 /*		jsMouseOver(WhatsIncluded);
@@ -393,13 +368,13 @@ public class DrugSummaryPage extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(id = "priceLinkBtn_0")
+	@FindBy(xpath = "//*[@id='priceLinkBtn_0' and contains(@class, 'ng-star-inserted')]")
 	private WebElement viewProceBtn;
 
-	@FindBy(xpath = "//a[contains(text(),'Switch to Generic')]")
+	@FindBy(xpath = "(//button[contains(text(),'Switch to Generic')])[1]")
 	private WebElement switchToGenericBtn;
 
-	@FindBy(xpath = "//span[contains(text(),'Lipitor')]/following::a[contains(@id,'switchToGenericLink')]")
+	@FindBy(xpath = "//p[contains(text(),'Lipitor')]/following::button[contains(@id,'switchToGenericLink')]")
 	private WebElement lipitorSwitchToGenericBtn;
 
 	@FindBy(xpath = "//button[contains(@type,'submit')]//*[contains(text(),'Switch to Generic')]")
@@ -746,11 +721,11 @@ public class DrugSummaryPage extends UhcDriver {
 		else
 			verifyMAPDPlanToggle();
 		WebElement drugCosts_AvgMonDrugCost_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::div[contains(text(), '$')]"));
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Average Monthly Drug Cost')]//following-sibling::h6[contains(text(), '$')]"));
 		WebElement drugCosts_MonthlyPremium_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Monthly Premium')]//following-sibling::div[contains(text(), '$')]"));
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Monthly Premium')]//following-sibling::h6[contains(text(), '$')]"));
 		WebElement drugCosts_AnnualEstTotal_Amount = driver.findElement(By.xpath("//*[contains(text(),'" + planName
-				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Annual Estimated')]//following-sibling::div[contains(text(), '$')]"));
+				+ "')]/ancestor::*[contains(@class,'uhc-card__header')]//following-sibling::*[contains(@class,'uhc-card__content')]//*[contains(text(), 'Annual Estimated')]//following-sibling::h6[contains(text(), '$')]"));
 
 		String AVG_MONTHLY = drugCosts_AvgMonDrugCost_Amount.getText();
 		String MONTHLY_PREMIUM = drugCosts_MonthlyPremium_Amount.getText();
@@ -807,9 +782,9 @@ public class DrugSummaryPage extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {	
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//span[contains(text(), '" + currentAddedDrug + "')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '" + currentAddedDrug + "')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath(
-					"//span[contains(text(), '" + currentAddedDrug + "')]//following::*[contains(text(), '$')]"));
+					"//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '" + currentAddedDrug + "')]//following-sibling::p[contains(text(), '$')]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out
