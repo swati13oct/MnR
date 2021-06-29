@@ -1,7 +1,7 @@
 @dce_planbenefits @dce
 Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deductible on DCE
 
-  @dce_PlanBenefits_MAPD
+  @dce_PlanBenefits_Standard
   Scenario Outline: To verify DCE REDESIGN page Plan Benefits
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
