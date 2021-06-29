@@ -2,7 +2,7 @@
 Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deductible on DCE
 
   @dce_PlanBenefits_Standard
-  Scenario Outline: To verify DCE REDESIGN page Plan Benefits
+  Scenario Outline: To verify DCE REDESIGN page <site> site - Plan Benefits for Standard network plans - MAPD and SNP
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -78,7 +78,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
 
 
   @dce_PlanBenefits_Preferred
-  Scenario Outline: To verify DCE REDESIGN page Plan Benefits
+  Scenario Outline: To verify DCE REDESIGN page <site> site -  Plan Benefits for Preferred Newwork plans - PDP and MAPD Walgreen Plans
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -205,7 +205,7 @@ Feature: 1.10.1 DCE-REDISIGN - To test Plan Benefits - Premium, copays and deduc
       | Fanapt | Lipitor | 10001   | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  | $0      |
 
   @dce_PlanBenefits_DefinedStandard
-  Scenario Outline: To verify DCE Details Page  <site> site - for LIS Non Buydown Plans
+  Scenario Outline: To verify DCE Details Page <site> site - for LIS Non Buydown - Defined Standard Plans
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
