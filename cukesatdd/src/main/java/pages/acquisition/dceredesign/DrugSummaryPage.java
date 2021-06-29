@@ -335,7 +335,7 @@ public class DrugSummaryPage extends UhcDriver {
 		pdpPlanToggle.click();
 		System.out.println("PDP Plans Toggle is displayed and is Clicked");
 
-		if (planTypeHeading.getText().contains("Medicare Prescription Drug Plans")) {
+		if (planTypeHeading.getText().contains("Medicare Prescription Drug Plan")) {
 			System.out.println("PDP Plans displayed for PDP toggle click");
 			return new DrugSummaryPage(driver);
 		}
@@ -348,7 +348,7 @@ public class DrugSummaryPage extends UhcDriver {
 		mapdPlanToggle.click();
 		System.out.println("MAPD Plans Toggle is displayed and is Clicked");
 
-		if (planTypeHeading.getText().contains("Medicare Advantage Plans")) {
+		if (planTypeHeading.getText().contains("Medicare Advantage Plan")) {
 			System.out.println("MAPD Plans displayed for MAPD toggle click");
 			return new DrugSummaryPage(driver);
 		}
@@ -360,7 +360,7 @@ public class DrugSummaryPage extends UhcDriver {
 		snpPlanToggle.click();
 		System.out.println("SNP Plans Toggle is displayed and is Clicked");
 
-		if (planTypeHeading.getText().contains("Medicare Special Needs Plans")) {
+		if (planTypeHeading.getText().contains("Medicare Special Needs Plan")) {
 			System.out.println("SNP Plans displayed for SNP toggle click");
 			return new DrugSummaryPage(driver);
 		}

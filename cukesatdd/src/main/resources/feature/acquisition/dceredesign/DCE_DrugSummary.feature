@@ -1,5 +1,5 @@
-@dce_redesign_Drug_summary_AARP @dce
-Feature: 1.10.1 DCE-REDESIGN AARP - To test Drug summary page in New DCE flow
+@dce_redesign_Drug_summary @dce
+Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
 
   ############# DCE Summary Regression Scenario #################
   ############# Validate - Summary Page validation, Switch to generic, Change Pharmacy, Covered Drugs view for Not Covered Pharmacy

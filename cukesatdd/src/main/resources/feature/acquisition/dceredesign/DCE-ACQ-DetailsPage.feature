@@ -1,5 +1,5 @@
-@dce @dce_redesign_DrugDetailsValidation1
-Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Details Page Flows
+@dce @dce_redesign_DrugDetailsValidation
+Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Page Flows
 
   @dce_DrugDetailsValidation
   Scenario Outline: To verify DCE Details Page  <site> site - All Sections, Switch, Edit Drug, Learm more link from VPP Details and Insulin Savings model info on DCE Details Page
