@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
@@ -12,34 +9,32 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-/**
- * @author skothap1
- *
- */
-public class PfizerFindaProviderPage extends UhcDriver{
+public class CalperFindaProviderPageMobile extends UhcDriver {
 	
 	@Override
 	public void openAndValidate(){
 	}
 	
-	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/p[2]/a")
+	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[2]/a")
 	
-	private WebElement findaphysicianpfizerlink;
+	private WebElement findaphysiciancaliperslink;
 	
 	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[6]/div/div/div/div[1]/ul/li[3]/a")
 	
-	private WebElement pfizersitemaplink;
+	private WebElement calperssitemaplink;
 		
-		public PfizerFindaProviderPage(WebDriver driver) {
+		public CalperFindaProviderPageMobile(WebDriver driver) {
 			super(driver);
 			PageFactory.initElements(driver, this);
 			openAndValidate();
 	}
-public Rallytool_PageMobile findaphysicianpfizerclick() {
+
+
+		public Rallytool_PageMobile findaphysiciancalipersclick() {
 			
-			validate(findaphysicianpfizerlink);
+			validate(findaphysiciancaliperslink);
 			
-			findaphysicianpfizerlink.click();
+			findaphysiciancaliperslink.click();
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));
 			
@@ -50,18 +45,20 @@ public Rallytool_PageMobile findaphysicianpfizerclick() {
 			// TODO Auto-generated method stub
 			return null;
 		}
-public PfizerSiteMapPage pfizersitemapclick() {
-	validate(pfizersitemaplink);
-	
-	pfizersitemaplink.click();
+
+
+		public CalpersSiteMapPageMobile calpersitemapclick() {
 			
+			validate(calperssitemaplink);
 			
-     if (getTitle().equalsIgnoreCase("Pfizer Retirees - Site Map")) {
-		return new PfizerSiteMapPage(driver);
+			calperssitemaplink.click();
+					
+					
+		     if (getTitle().equalsIgnoreCase(
+							"CalPERS Retirees – Site map")) {
+				return new CalpersSiteMapPageMobile(driver);
+				}
+			// TODO Auto-generated method stub
+			return null;
 		}
-	// TODO Auto-generated method stub
-	return null;
-}
-
-
 }

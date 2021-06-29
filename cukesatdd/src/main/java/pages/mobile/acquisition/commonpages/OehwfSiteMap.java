@@ -32,7 +32,7 @@ public class OehwfSiteMap extends UhcDriver {
 
 
 
-       public Rallytool_Page oehwfsitemapproviderclick() {
+       public Rallytool_PageMobile oehwfsitemapproviderclick() {
               
               validate(oehwpsitemapfindaproviderlink);
               
@@ -42,7 +42,7 @@ public class OehwfSiteMap extends UhcDriver {
               
               if (getTitle().equalsIgnoreCase(
                            "Enter Zip")) {
-       return new Rallytool_Page(driver);
+       return new Rallytool_PageMobile(driver);
               }
        
               // TODO Auto-generated method stub

@@ -38,7 +38,7 @@ public class UawHomePage extends UhcDriver {
 		openAndValidate();
 }
 
-	public Rallytool_Page uawfindaproviderclick()  {
+	public Rallytool_PageMobile uawfindaproviderclick()  {
 		
 		validate(uawhomepagefindaproviderlink);
 		
@@ -52,7 +52,7 @@ public class UawHomePage extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 	}
 		
 	

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package pages.mobile.acquisition.commonpages;
 
 import java.util.ArrayList;
@@ -12,31 +9,29 @@ import org.openqa.selenium.support.PageFactory;
 
 import atdd.framework.UhcDriver;
 
-/**
- * @author skothap1
- *
- */
-public class PfizerSiteMapPage extends UhcDriver{
+public class CalpersSiteMapPageMobile extends UhcDriver {
+	
 	@Override
 	public void openAndValidate(){
 	}
 	
 	@FindBy(xpath=".//*[@id='main']/div/div[1]/div/div[4]/div[1]/div/div[1]/div[1]/ul/li[4]/a")
 	
-	private WebElement pfizersitemappagefindaproviderlink;
+	private WebElement calperssitemappagefindaproviderlink;
 	
 
-	public PfizerSiteMapPage(WebDriver driver) {
+	public CalpersSiteMapPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
 
 
-	public Rallytool_PageMobile findaproviderpfizersitemapclick() {
-validate(pfizersitemappagefindaproviderlink);
+	public Rallytool_PageMobile findaprovidercalpersitemapclick() {
 		
-            pfizersitemappagefindaproviderlink.click();
+		validate(calperssitemappagefindaproviderlink);
+		
+		calperssitemappagefindaproviderlink.click();
 			ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));
 			
@@ -47,5 +42,4 @@ validate(pfizersitemappagefindaproviderlink);
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

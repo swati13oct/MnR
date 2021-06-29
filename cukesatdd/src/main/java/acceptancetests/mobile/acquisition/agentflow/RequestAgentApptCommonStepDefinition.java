@@ -15,9 +15,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.LearnAboutMedicareHomePage;
-import pages.mobile.acquisition.commonpages.RequestAgentAppointmentPage;
-import pages.mobile.acquisition.commonpages.RequestHelpAndInformationPage;
+import pages.mobile.acquisition.commonpages.LearnAboutMedicareHomePageMobile;
+import pages.mobile.acquisition.commonpages.RequestAgentAppointmentPageMobile;
+import pages.mobile.acquisition.commonpages.RequestHelpAndInformationPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
 
@@ -82,7 +82,7 @@ public class RequestAgentApptCommonStepDefinition {
 	public void navigates_request_more_help_information()
 	{
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile)getLoginScenario().getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		RequestHelpAndInformationPage requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
+		RequestHelpAndInformationPageMobile requestHelpAndInformationPage = aquisitionhomepage.navigateToMaMoreHelpAndInfo();
 		
 		if(requestHelpAndInformationPage!=null){
 			getLoginScenario().saveBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE, requestHelpAndInformationPage);
@@ -98,8 +98,8 @@ public class RequestAgentApptCommonStepDefinition {
 	@And("^the user navigates to request appointment with an agent and validates page is loaded$")
 	public void request_appointment()
 	{
-		RequestHelpAndInformationPage requestHelpAndInformationPage = (RequestHelpAndInformationPage) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
-		RequestAgentAppointmentPage requestAgentAppointmentPage = requestHelpAndInformationPage.navigateToAgentAppointmentRequest();
+		RequestHelpAndInformationPageMobile requestHelpAndInformationPage = (RequestHelpAndInformationPageMobile) getLoginScenario().getBean(PageConstants.REQUEST_MORE_HELP_INFORMATION_PAGE);
+		RequestAgentAppointmentPageMobile requestAgentAppointmentPage = requestHelpAndInformationPage.navigateToAgentAppointmentRequest();
 		if(requestAgentAppointmentPage!=null){
 			getLoginScenario().saveBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE, requestAgentAppointmentPage);
 		}else{
@@ -112,7 +112,7 @@ public class RequestAgentApptCommonStepDefinition {
 	@Then("^the user fills the form out and submits the agent appointment$")
 	public void fillOutAndSubmitFormappointment(DataTable attributes) {
 		
-			RequestAgentAppointmentPage requestAgentAppointmentPage = (RequestAgentAppointmentPage) getLoginScenario()
+		RequestAgentAppointmentPageMobile requestAgentAppointmentPage = (RequestAgentAppointmentPageMobile) getLoginScenario()
 					.getBean(PageConstants.REQUEST_AGENT_APPOINTMENT_PAGE);
 			Map<String, String> givenAttributesMap = new HashMap<String, String>();
 			/*List<DataTableRow> givenAttributesRow = attributes.getGherkinRows();
@@ -150,7 +150,7 @@ public class RequestAgentApptCommonStepDefinition {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
 		
-		LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage=(LearnAboutMedicareHomePageMobile)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
 		if(myUHCAgentURL!=null){
 			learnAboutMedicareHomePage.clickonFindanAgentlinkfromMedEd(myUHCAgentURL);
 			Assertion.assertTrue(true);

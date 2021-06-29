@@ -32,9 +32,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PageTitleConstants;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
@@ -1091,13 +1089,13 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	public DisclaimersPageMobile disclaimersClick() {
+	public DisclaimersAARPPageMobile disclaimersClick() {
 		validateNew(footerDisclaimersLink);
 		// footerDisclaimersLink.click();
 		jsClickNew(footerDisclaimersLink);
 		pageloadcomplete();
 		if (driver.getCurrentUrl().contains("disclaimer")) {
-			return new DisclaimersPageMobile(driver);
+			return new DisclaimersAARPPageMobile(driver);
 		}
 		return null;
 
@@ -3085,8 +3083,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public EnterZipCodePage enterZipCode() {
-		return new EnterZipCodePage(driver);
+	public EnterZipCodePageMobile enterZipCode() {
+		return new EnterZipCodePageMobile(driver);
 	}
 
 	public void validateAARPlogo() {
@@ -3776,7 +3774,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'uhc-tempo-button') and contains(text(),'Find an Agent')]")
 	private WebElement requestAgentBtn;
 
-	public pages.mobile.acquisition.commonpages.RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
+	public RequestHelpAndInformationPageMobile navigateToMaMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -3787,7 +3785,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentBtn)) {
-			return new pages.mobile.acquisition.commonpages.RequestHelpAndInformationPage(driver);
+			return new RequestHelpAndInformationPageMobile(driver);
 		}
 		return null;
 	}
@@ -3948,7 +3946,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div//p[contains(text(),'Already a member?')]")
 	private WebElement CallSamTFNMember_Medsup;
 
-	public AcquisitionHomePage validateTFNCallpopup() throws InterruptedException {
+	public AcquisitionHomePageMobile validateTFNCallpopup() throws InterruptedException {
 		driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();

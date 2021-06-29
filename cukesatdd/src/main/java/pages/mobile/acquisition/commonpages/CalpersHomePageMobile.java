@@ -10,34 +10,34 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.MRConstants;
 import atdd.framework.UhcDriver;
 
-public class SdceraHomePage extends UhcDriver {
+public class CalpersHomePageMobile extends UhcDriver {
 	
 	@Override
 	public void openAndValidate(){
-		start(SDCERA_HOME_PAGE_URL);
+		start(CALPERS_HOME_PAGE_URL);
 	}
 	
-	@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/sdcera/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
+	@FindBy(xpath=".//*[@id='cq-events-jsp-/content/gr/en/calpers/home/jcr:content/parsys/events']/div/div[1]/div[3]/div/div[1]/div[1]/p[3]/a")
 	
-	private WebElement sdcerafindaproviderlink;
+	private WebElement calpersfindaproviderlink;
 	
-	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/sdcera/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
+	@FindBy(xpath=".//*[@id='cq-imagebutton-jsp-/content/gr/en/calpers/header/jcr:content/parsys/textbgimage/parsys/imagebutton_1']")
 	
-	private WebElement sdcerafindaprovidertab;
+	private WebElement calpersfindaprovidertab;
 	
 	
-	private static String SDCERA_HOME_PAGE_URL= MRConstants.SDCERA_HOME_PAGE_URL;
+	private static String CALPERS_HOME_PAGE_URL= MRConstants.CALPERS_HOME_PAGE_URL;
 	
-	public SdceraHomePage(WebDriver driver) {
+	public CalpersHomePageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 }
 
-	public Rallytool_PageMobile sdcerahomepageproviderclick() {
-	validate(sdcerafindaproviderlink);
+	public Rallytool_PageMobile calpershomepageproviderclick() {
+	validate(calpersfindaproviderlink);
 		
-	sdcerafindaproviderlink.click();
+	calpersfindaproviderlink.click();
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		
@@ -49,17 +49,17 @@ public class SdceraHomePage extends UhcDriver {
 		return null;
 	}
 
-	public SdceraFindaProviderPage sdceraprovidertabclick() {
+	public CalperFindaProviderPageMobile calperprovidertabclick() {
 		
-		validate(sdcerafindaprovidertab);
+		validate(calpersfindaprovidertab);
 		
-		sdcerafindaprovidertab.click();
+		calpersfindaprovidertab.click();
 			/*ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 			driver.switchTo().window(tabs.get(1));*/
 			
 			if (getTitle().equalsIgnoreCase(
-					"SDCERA Group Retiree – Find a provider")) {
-		return new SdceraFindaProviderPage(driver);
+					"CalPERS Retirees – Find a provider")) {
+		return new CalperFindaProviderPageMobile(driver);
 		}
 		
 		
