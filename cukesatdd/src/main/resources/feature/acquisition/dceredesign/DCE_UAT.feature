@@ -206,8 +206,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | NotCoveredDrug | <drug2> |
     Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
       | NotCoveredDrug | <drug3> |
-    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
-      | NotCoveredDrug | <drug7> |
+    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
+      | CoveredDrug | <drug7> |
     Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
       | NotCoveredDrug | <drug6> |
     And the user validates link to Drug Summary Page

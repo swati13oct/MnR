@@ -1,7 +1,7 @@
 @UATRegression @providerSearch
 Feature: 1.07.2 UAT-Provider Search Flows
 
-	@sanity
+  @sanity
   Scenario Outline: <Scenario> : Verify Provider Search  in <site> site from Home Page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -17,7 +17,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
 
-    @ProviderSearchCommon_UHC @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @regressionUHC
+    @ProviderSearchCommon_UHC @ProviderSearchFromHomePageBlayer @ProviderSearchFromHomePageNextYrBlayerSmoke @regressionUHC @vbfGate
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year     |
       | Provider Search - E2E Scenario 1_UHC |   10001 | UHC  | AARP Medicare Advantage Plan 2 (HMO) | nextYear |
@@ -39,13 +39,13 @@ Feature: 1.07.2 UAT-Provider Search Flows
     When user selects a provider and retuns to VPP plan details page
     Then Verify X out of Y provider covered information is displayed on Plan Details page
 
-    @ProviderSearchCommon_AARP @ProviderSearchFromVppPlanDetailsPageUlayer @regressionAARP 
+    @ProviderSearchCommon_AARP @ProviderSearchFromVppPlanDetailsPageUlayer @regressionAARP
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                                   | planyear |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO)        | future   |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | future   |
- 
- 		@sanity @prodRegression 
+
+    @sanity @prodRegression
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planName                            | planyear |
       | Provider Search - E2E Scenario 2_AMP |   10001 | AARP | NO              | New York County | MA       | AARP Medicare Advantage Prime (HMO) | future   |
@@ -71,7 +71,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Year      | <year>     |
     When user select a provider and save it
 
-    @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @regressionAARP @sanity 
+    @ProviderSearchCommon_AARP @ProviderSearchFromGlobalHeaderUlayer @regressionAARP @sanity @vbfGate
     Examples: 
       | Scenario                             | zipcode | site | planname                             | year |
       | Provider Search - E2E Scenario 4_AMP |   10001 | AARP | AARP Medicare Advantage Plan 2 (HMO) | next |
@@ -122,7 +122,7 @@ Feature: 1.07.2 UAT-Provider Search Flows
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode |
       | Provider Search - E2E Scenario 5_AMP |   10001 | AARP | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |
 
-    @ProviderSearchCommon_UHC @ProviderSearchFromVppPlanSummaryPageBlayer @regressionUHC 
+    @ProviderSearchCommon_UHC @ProviderSearchFromVppPlanSummaryPageBlayer @regressionUHC
     Examples: 
       | Scenario                             | zipcode | site | isMultutiCounty | county          | plantype | planname                             | planyear | NewZipCode |
       | Provider Search - E2E Scenario 5_UHC |   10001 | UHC  | NO              | New York County | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | future   |      10010 |
