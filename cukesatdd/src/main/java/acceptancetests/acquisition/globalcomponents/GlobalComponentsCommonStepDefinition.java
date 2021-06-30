@@ -1081,5 +1081,17 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acqusitionHomePage.validateFooterLinksNavigation(linkName);
 	}
+	
+	@When("^user hover over for plan member to click to go to member site$")
+	public void hover_plan_Member_to_Click_membersite() {
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (aquisitionhomepage != null) {
+			aquisitionhomepage.clickMemberSiteLink();
+		} else {
+			Assertion.fail("Home page not found");
+		}
+	}
+
 }
 

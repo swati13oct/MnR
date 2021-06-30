@@ -41,7 +41,6 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
@@ -709,10 +708,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//div[@style='']//p[contains(text(),'Already a member?')]")
 	private WebElement CallSamTFNMember_Medsup;
-	
+
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
 	private WebElement planMemberLink;
-	
+
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
 	private WebElement goToMemberSiteLink;
 
@@ -3424,8 +3423,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 	}
-	
-	
 
 	public void validateProActiveChatpopupconnect() {
 		driver.navigate().refresh();
@@ -3484,11 +3481,11 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	}
 
 	public void validateHeaderLinks() {
-		//validateNew(headerSignInLink);
-		//jsMouseOver(planMemberLink);
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
 		Actions action = new Actions(driver);
 		action.moveToElement(planMemberLink).perform();
-		//validateNew(headerRegisterLink);
+		// validateNew(headerRegisterLink);
 		validateNew(goToMemberSiteLink);
 		jsMouseOut(planMemberLink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
@@ -5359,8 +5356,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("****************myuhcagent Page is not loaded ***************");
 		}
 
-		//close the window only if a new window is opened
-		if(tabs_windows.size() > 1){
+		// close the window only if a new window is opened
+		if (tabs_windows.size() > 1) {
 			driver.close();
 			driver.switchTo().window(parentWindow);
 		}
@@ -6691,7 +6688,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				pageloadcomplete();
 			}
 		}
-		
+
 	}
 
 	public void validateFooterLinksNavigation(String linkName) {
@@ -6756,7 +6753,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		case "Provider Search":
 			for (String s : all) {
 				driver.switchTo().window(s);
-				//sleepBySec(5);
+				// sleepBySec(5);
 				flag = driver.getCurrentUrl().contains("werally");
 				if (!base.equals(s)) {
 					driver.close();
@@ -6789,39 +6786,61 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			break;
 
 		case "AARP.org":
-			if(driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
+			if (driver.getCurrentUrl().contains("uhcmedicaresolutions")) {
 				System.out.println("AARP.org link not present for UHC site");
 				break;
-			}
-			else {
-			for (String s : all) {
-				driver.switchTo().window(s);
-				flag = driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org");
-				if (!base.equals(s)) {
-					driver.close();
-					break;
+			} else {
+				for (String s : all) {
+					driver.switchTo().window(s);
+					flag = driver.getCurrentUrl().contains("leaving.intermediatepage.html?https://www.aarp.org");
+					if (!base.equals(s)) {
+						driver.close();
+						break;
+					}
 				}
-			}
-			driver.switchTo().window(base);
-			Assertion.assertTrue("Navigation to AARP.org page failed", flag);
-			break;
+				driver.switchTo().window(base);
+				Assertion.assertTrue("Navigation to AARP.org page failed", flag);
+				break;
 			}
 
 		default:
 			System.out.println("Link not available under Learn about Medicare");
 		}
 	}
-	
+
 	public void validateVisitorProfileIcon() {
-		//jsMouseOver(visitorprofileicon);
+		// jsMouseOver(visitorprofileicon);
 		Actions action = new Actions(driver);
 		action.moveToElement(visitorprofileicon).perform();
 		validateNew(visitorProfileFlyoutTitle);
-		if(!driver.getCurrentUrl().contains("profile")) {
-		validateNew(visitorProfileFlyoutViewSavedItemBtn);
+		if (!driver.getCurrentUrl().contains("profile")) {
+			validateNew(visitorProfileFlyoutViewSavedItemBtn);
 		}
 		validateNew(visitorProfileFlyoutAddDrugBtn);
 		validateNew(visitorProfileFlyoutAddPlansBtn);
 		validateNew(visitorProfileFlyoutSignInLink);
 	}
+
+	public void clickMemberSiteLink() {
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		validateNew(goToMemberSiteLink);
+		jsClickNew(goToMemberSiteLink);
+		String base = driver.getWindowHandle();
+		Set<String> all = driver.getWindowHandles();
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+				driver.close();
+			}
+		}
+		driver.switchTo().window(base);
+	}
+
 }

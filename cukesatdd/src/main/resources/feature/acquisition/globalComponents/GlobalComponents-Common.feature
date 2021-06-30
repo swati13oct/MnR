@@ -36,6 +36,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | Site | <site> |
     When user accesses global header of the Medicare Plans home page
     When user verifies the logo
+    And user hover over for plan member to click to go to member site
     #And user clicks on Sign in link
     #And user clicks on register link
     #Then the user clicks on browser back button
