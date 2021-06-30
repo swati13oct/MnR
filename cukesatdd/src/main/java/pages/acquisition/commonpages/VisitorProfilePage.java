@@ -540,7 +540,7 @@ public class VisitorProfilePage extends UhcDriver {
             Thread.sleep(2000);
             String mproviderinfo = driver
                     .findElement(By.xpath(
-                            "//table//td/div/div/div[@id='ProviderName-noplan-undefined']"))
+                            "(//div[@id='ProviderName-noplan-0'])[1]"))
                     .getText().trim();
 
             String rallyProviderName = MRConstants.PROV_NAME;
