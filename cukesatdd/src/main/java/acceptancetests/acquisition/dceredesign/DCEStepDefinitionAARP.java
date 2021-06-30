@@ -764,7 +764,7 @@ public class DCEStepDefinitionAARP {
 		
 	}
 	@Then("^the user clicks on return to compare link on build drug list page to returns to plan compare$")
-	public void the_user_Clicks_button_to_VPP_Plan_Compare_Page_from_Drug_details_Page() throws Throwable {
+	public void the_user_Clicks_button_to_VPP_Plan_Compare_Page_from_Druglist_page() throws Throwable {
 		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
 		ComparePlansPage planComparePage = buildDrugListPage.returnToPlanComparePage();
