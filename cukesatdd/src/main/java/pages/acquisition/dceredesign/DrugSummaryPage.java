@@ -198,7 +198,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
 	private List<WebElement> pharmacyNameList;
 
-	@FindBy(xpath = "//*[@class='pagination']/../p")
+	@FindBy(xpath = "//*[contains(@class,'pagination')]/p[contains(text(), 'Page')]")
 	private WebElement pageNumber;
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//*[@class='field-error-msgfordceui']")
@@ -210,7 +210,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[text()='Return to home page']")
 	public WebElement returnToHomePageLink;
 
-	@FindBy(id = "inValidZipcodeLbl")
+	@FindBy(xpath = "//*[contains(@id, 'inValidZipcodeLbl')]")
 	private WebElement invalidZipCodeMsg;
 
 	@FindBy(xpath = "//*[contains(@class,'keepPharmacyLink')]")
@@ -271,6 +271,7 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 	
 	public void captureFunctionalToolTips(String planName) {
+		CommonUtility.waitForPageLoadNew(driver, planTypeHeading,20);
 		WebElement WhyAverage = driver.findElement(By.xpath("//h4/span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhyAverage);
 /*
@@ -671,7 +672,7 @@ public class DrugSummaryPage extends UhcDriver {
 		}	}
 	
 	public void viewDrugPricingModal(String planName){
-	  WebElement viewDrugPricingLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'priceLinkBtn')]"));
+	  WebElement viewDrugPricingLink = driver.findElement(By.xpath("//button[contains(@aria-label, 'View Drug Pricing') and contains(@aria-label,'"+planName+"') and contains(@class, 'ng-star-inserted')]"));
 	  validateNew(viewDrugPricingLink);
 	  jsClickNew(viewDrugPricingLink);
 	  validateNew(DrugPricing_Header);
@@ -747,7 +748,7 @@ public class DrugSummaryPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
 		validateNew(DrugPricing_Header);
 		WebElement SwitchLink = driver.findElement(
-				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::a[contains(text(), 'Switch ')]"));
+				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::button[contains(text(), 'Switch ')]"));
 		jsClickNew(SwitchLink);
 		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
 		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
@@ -1126,7 +1127,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public void validateInvalidZipCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText().trim());
-		Assertion.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().equals(expectedMsg));
+		Assertion.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().contains(expectedMsg));
 	}
 
 	public void updateDistance(String distanceValue) throws InterruptedException {

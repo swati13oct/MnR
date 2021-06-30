@@ -277,7 +277,7 @@ public class BuildYourDrugList extends UhcDriver {
 	}
 
 	public ComparePlansPage returnToPlanComparePage() {
-
+        pageloadcomplete();
 		validateNew(returnToCompareBtn);
 		jsClickNew(returnToCompareBtn);
 		waitForPageLoadSafari();
