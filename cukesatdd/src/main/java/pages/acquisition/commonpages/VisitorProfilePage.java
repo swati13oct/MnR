@@ -247,6 +247,10 @@ public class VisitorProfilePage extends UhcDriver {
 
     @FindBy(css = "nav.uhc-profile-header-nav ul li:last-child>div>a:last-child")
     private WebElement signOutText;
+    
+    @FindBy(xpath = "//span[contains(text(),'Add Doctors')]/parent::button")
+    private WebElement addDoctor;
+    
 
     public VisitorProfilePage(WebDriver driver) {
         super(driver);
@@ -1183,4 +1187,14 @@ public class VisitorProfilePage extends UhcDriver {
             Assertion.assertTrue(">>>>>> Validation Failed for Providers NOT Added <<<<<<<<< - Providers Added ", removeProviders.size() == 0);
         }
     }
+    
+    public ProviderSearchPage addDoctor() {
+		switchToNewTabNew(addDoctor);
+		sleepBySec(15);
+		if (driver.getCurrentUrl().contains("werally")) {
+			return new ProviderSearchPage(driver);
+		}
+		return null;
+    }
+    
 }

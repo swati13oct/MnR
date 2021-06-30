@@ -205,25 +205,8 @@ Feature: 1.09. ACQ- Shopper Profile
       | ZipCode      | <zipcode> |
       | County       | <county>  |
       | Profile UUID | <uuid>    |
-    Then I land on the plan compare page
-      | Enrolled Plan Name | <enrolledplanName> |
-      | Plan Name          | <planname>         |
-      | Drugs              | <drugNames>        |
-      | Providers          | <providers>        |
-      | First Name         | <fname>            |
-      | Last Name          | <lname>            |
-      | DOB                | <dob>              |
-      | MBI                | <mbi>              |
-      | Email              | <email>            |
-      | ZipCode            | <zipcode>          |
-      | County             | <county>           |
-    Then the user clicks on back on all plan linnk in Plan Compare page
-    When the user Click on Is my Provider covered link
-      | PlanName | <planname> |
-    When user selects a provider and retuns to VPP page
-    Then Verify X out of Y provider covered information is displayed on Plan Summary page
-      | PlanName | <planname> |
-    Then Navigate to Visitor Profile page
+    Then All set and Navigate to Visitor Profile page from compare page
+    When user selects a provider and retuns to Profile page
     Then Verify X out of Y provider covered information is displayed on visitor profile page
       | PlanName | <planname> |
     And user delets all the added providers on visitor profile page
