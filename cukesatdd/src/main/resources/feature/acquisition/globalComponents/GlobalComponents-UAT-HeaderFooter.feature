@@ -1,7 +1,7 @@
 @UATRegression @F513647 @globalComponent @headerfooter @GlobalHeaderFooter
 Feature: 1.12 UAT - Header and Footer flows
 
-  @globalfooterULayer @UATRegression123
+  @globalfooterULayer @UATRegression
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on home page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -105,10 +105,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
+    And user hover over for plan member to click to go to member site
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -162,10 +163,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -219,10 +221,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -278,10 +281,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
@@ -515,10 +519,11 @@ Feature: 1.12 UAT - Header and Footer flows
     #And the user clicks on Back to top Link
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
     #And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header

@@ -41,7 +41,8 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-1')]")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -5035,7 +5036,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			Assertion.fail("Error Clicking Contact( " + language + " ) link");
 		}
 		// driver.navigate().back();
-		WebElement headLogo = driver.findElement(By.xpath("//div[contains(@class,'logo aarplogo')]"));
+		WebElement headLogo = driver.findElement(By.xpath("//a[contains(@class,'uhc-header__logo') and not(contains(@style,'display'))]"));
 		scrollToView(headLogo);
 		headLogo.click();
 		CommonUtility.checkPageIsReadyNew(driver);
