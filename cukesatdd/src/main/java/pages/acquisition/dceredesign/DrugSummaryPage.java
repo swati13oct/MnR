@@ -1208,6 +1208,7 @@ public class DrugSummaryPage extends UhcDriver {
 		Pharmacy_SearchBtn.click();
 		System.out.println("Pharmacy Seach for Zip Expected - " + pharmacyZipCode + "  : Entered : "
 				+ Pharmacy_ZipCodeTxt.getText());
+		pageloadcomplete();
 		validateNew(preferredMailPharmacy);
 		validateNew(noResultsMessage);
 		if (validateNew(Pharmacy_SearchBtn) && validateNew(noResultsMessage)) {
