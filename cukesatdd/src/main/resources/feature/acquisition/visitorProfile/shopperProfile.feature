@@ -3,7 +3,7 @@
 @shopperProfile @regressionAARP
 Feature: 1.09. ACQ- Shopper Profile
 
-  @searchProfileEmail @SanitySP @sanity @test123
+  @searchProfileEmail @SanitySP @sanity @regressionSP
   Scenario Outline: Telesales agent searching for the profile using Email
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -40,12 +40,12 @@ Feature: 1.09. ACQ- Shopper Profile
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
 
-    @team-e
+    @team-e @regressionSPTeamE
     Examples: 
       | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
       | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
 
-    @stage123
+    @stage123 @regressionSPStage
     Examples: 
       | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
       | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 91dccf82-0c8c-4b1c-9d97-300b34fab4e9 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
@@ -88,12 +88,12 @@ Feature: 1.09. ACQ- Shopper Profile
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
 
-    @team-e
+    @team-e @regressionSPTeamE
     Examples: 
       | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
       | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
 
-    @stage123
+    @stage123 @regressionSPStage
     Examples: 
       | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
       | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 91dccf82-0c8c-4b1c-9d97-300b34fab4e9 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
@@ -135,12 +135,12 @@ Feature: 1.09. ACQ- Shopper Profile
     And user delets the added plans on visitor profile page
       | Test Plans | <testPlans> |
 
-    @team-e_AddPlans
+    @team-e_AddPlans @regressionSPTeamE
     Examples: 
       | username | password     | email                     | mbi           | dob        | fname  | lname    | uuid                                 | enrolledplanName                  | plantype | planName                             | testPlans                                                                      | zipcode | county          | drugNames | providers |
       | ocpuser  | Password@123 | LXAGFOFOAPWXK6@MASKED.COM | 9EX6-WA2-PQ79 | 12/05/1966 | CHERRY | KUKOWSKI | 5015274f-416c-4ec9-9dcf-e5c3557c3465 | AARP Medicare Advantage (HMO-POS) | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) (HMO) |   10010 | New York County | no        | no        |
 
-    @stage_AddPlans
+    @stage_AddPlans @regressionSPStage
     Examples: 
       | username | password     | email                     | mbi           | dob        | fname  | lname    | uuid                                 | enrolledplanName                  | plantype | planName                             | testPlans                                                                | zipcode | county          | drugNames | providers |
       | ocpuser  | Password@123 | LXAGFOFOAPWXK6@MASKED.COM | 9EX6-WA2-PQ79 | 12/05/1966 | CHERRY | KUKOWSKI | 4d22d293-9f5f-43d8-a159-62e602d8036b | AARP Medicare Advantage (HMO-POS) | MAPD     | AARP Medicare Advantage Plan 1 (HMO) | AARP Medicare Advantage Prime (HMO),AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | no        | no        |
@@ -160,7 +160,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | Email        | <email>   |
       | ZipCode      | <zipcode> |
       | County       | <county>  |
-      | Profile UUID | <uuid>    |  
+      | Profile UUID | <uuid>    |
     Then All set and Navigate to Visitor Profile page from compare page
     And the user clicks on the add drugs button to navigate to DCE Redesign on the profile page
     Then the user validates Get Started Page
@@ -179,15 +179,15 @@ Feature: 1.09. ACQ- Shopper Profile
     Then the user clicks on Remove button on Drug List page on DCE to delete drug
       | DrugName | <drug1> |
 
-    @team-e_AddDrugs
+    @team-e_AddDrugs @regressionSPTeamE
     Examples: 
       | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
       | ocpuser  | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | fe104731-5236-4d0e-9e8d-8b5dec69e56d | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
-    @stage_AddDrugs
+    @stage_AddDrugs @regressionSPStage
     Examples: 
       | username | password     | email              | mbi           | dob        | fname   | lname    | uuid                                 | plan                                               | plantype | drug1   | dosage   | quantity | frequency     | branded | zipcode |
-      | ocpuser  | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | fe104731-5236-4d0e-9e8d-8b5dec69e56d | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
+      | ocpuser  | Password@123 | nynette@MEMBER.COM | 2WG7-Q78-WE76 | 08/26/1954 | nynette | washnock | 5240993c-4ca5-41f2-8e16-f05272590b43 | AARP Medicare Advantage SecureHorizons Focus (HMO) | MA       | Lipitor | TAB 10MG |       30 | Every 1 month | yes     |   94019 |
 
   @searchProfileAndProviderFlow @sanity
   Scenario Outline: Telesales agent searching for the profile using Email and Add a provider for user
@@ -197,15 +197,26 @@ Feature: 1.09. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
     Then I land on the plan compare page
       | Enrolled Plan Name | <enrolledplanName> |
-      | Plan Name          | <planName>         |
+      | Plan Name          | <planname>         |
       | Drugs              | <drugNames>        |
       | Providers          | <providers>        |
       | First Name         | <fname>            |
       | Last Name          | <lname>            |
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
     Then the user clicks on back on all plan linnk in Plan Compare page
     When the user Click on Is my Provider covered link
       | PlanName | <planname> |
@@ -218,9 +229,15 @@ Feature: 1.09. ACQ- Shopper Profile
     And user delets all the added providers on visitor profile page
       | PlanName | <planname> |
 
+    @team-e_AddProvider @regressionSPTeamE
     Examples: 
-      | username  | password  | email             | fname  | lname   | mbi           | dob        | plantype | enrolledplanName                                    | planname                                            | drugNames | providers |
-      | qavgogine | qavgogine | nanine@member.com | NANINE | SLOVICK | 3XQ9-C41-RQ43 | 03/10/1949 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | No        | No        |
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname   | uuid                                 | enrolledplanName                                    | planname                                            | plantype | drugNames | providers |
+      | ocpuser  | Password@123 | nanine@member.com | 3XQ9-C41-RQ43 | 03/10/1949 |   80229 | NANINE | SLOVICK | 473768c6-466d-4a32-9c3b-2c66b712aaf4 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | MAPD     | No        | No        |
+
+    @stage_AddProvider @regressionSPStage
+    Examples: 
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname   | uuid                                 | enrolledplanName                                    | planname                                            | plantype | drugNames | providers |
+      | ocpuser  | Password@123 | nanine@member.com | 3XQ9-C41-RQ43 | 03/10/1949 |   80229 | NANINE | SLOVICK | 4463d5a0-0b79-477e-a3cc-b2e3d19aa5a9 | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | MAPD     | No        | No        |
 
   @searchProfileAndEnroll
   Scenario Outline: Telesales agent searching for the profile using first name and last name and validate OLE flow is not allowed
@@ -230,21 +247,26 @@ Feature: 1.09. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
-    Then I land on the plan compare page
-      | Enrolled Plan Name | <enrolledplanName> |
-      | Plan Name          | <planName>         |
-      | Drugs              | <drugNames>        |
-      | Providers          | <providers>        |
-      | First Name         | <fname>            |
-      | Last Name          | <lname>            |
-      | DOB                | <dob>              |
-      | MBI                | <mbi>              |
-    Then Navigate to Visitor Profile page from compare page
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
+    Then All set and Navigate to Visitor Profile page from compare page
     And enroll In Plan should not be clickable on Visitor Profile page in Agent mode
 
+    @team-e_searchProfileAndEnroll @regressionSPTeamE
     Examples: 
-      | username  | password  | email             | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers |
-      | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        |
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planname                                | plantype | drugNames | providers |
+      | ocpuser  | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | 473768c6-466d-4a32-9c3b-2c66b712aaf4 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        |
+
+    @stage_searchProfileAndEnroll @regressionSPStage
+    Examples: 
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planname                                | plantype | drugNames | providers |
+      | ocpuser  | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        |
 
   @searchProfileAndVPPPlanDetail
   Scenario Outline: Telesales agent searching for the profile using first name and last name and validate additional benefits on Plan Details
@@ -254,16 +276,15 @@ Feature: 1.09. ACQ- Shopper Profile
     Then I ask the shopper calling in to provide me with the Email Address and Search
       | Email | <email> |
     And the profile is found and i click on the CLOAK IN button
-    Then I land on the plan compare page
-      | Enrolled Plan Name | <enrolledplanName> |
-      | Plan Name          | <planName>         |
-      | Drugs              | <drugNames>        |
-      | Providers          | <providers>        |
-      | First Name         | <fname>            |
-      | Last Name          | <lname>            |
-      | DOB                | <dob>              |
-      | MBI                | <mbi>              |
-    Then Navigate to Visitor Profile page from compare page
+      | First Name   | <fname>   |
+      | Last Name    | <lname>   |
+      | DOB          | <dob>     |
+      | MBI          | <mbi>     |
+      | Email        | <email>   |
+      | ZipCode      | <zipcode> |
+      | County       | <county>  |
+      | Profile UUID | <uuid>    |
+    Then All set and Navigate to Visitor Profile page from compare page
     And user clicks on plan name
       | Test Plans | <planName> |
     Then the user validates the following Additional Benefits of Plan for the plan
@@ -276,9 +297,15 @@ Feature: 1.09. ACQ- Shopper Profile
       | Hearing Exam Benefit Type       | <hearingExamBenefitType>      |
       | Hearing Exam Expected Text      | <hearingExamExpectedText>     |
 
+    @team-e_searchProfileAndVPPPlanDetail @regressionSPTeamE
     Examples: 
-      | username  | password  | email             | fname  | lname  | mbi           | dob        | plantype | enrolledplanName                     | planName                                | drugNames | providers | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
-      | qavgogine | qavgogine | tyrone@member.com | TYRONE | QUARRY | 3C36-J24-EH68 | 01/06/1950 | MAPD     | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | No        | No        | Eyewear            | $0 copay every 2 years; up to $150 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | ocpuser  | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | Eyewear            | $0 copay every 2 years; up to $150 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
+
+    @stage_searchProfileAndVPPPlanDetail @regressionSPStage
+    Examples: 
+      | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
+      | ocpuser  | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | Eyewear            | $0 copay every 2 years; up to $150 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
   @searchProfileEmptyFields
   Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname

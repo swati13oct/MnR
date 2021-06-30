@@ -404,6 +404,7 @@ public class VisitorProfilePage extends UhcDriver {
 				|| StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {*/
 //		if (StringUtils.equalsIgnoreCase(CommonConstants.SELECTED_STATE, "Virginia")) {
             jsClickNew(addDrugsBtn);
+            addDrugsBtn.click();
         waitForPageLoadSafari();
         if (validateNew(AddMyDrugsBtn))
             return new GetStartedPage(driver);

@@ -1178,6 +1178,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 				+ "')]/ancestor::div[contains(@class,'module-plan-overview')]//*[contains(@dtmname,'Provider Search')]"));
 		validateNew(ProviderSearchLink);
 		scrollToView(ProviderSearchLink);
+		ProviderSearchLink.click();
 		switchToNewTabNew(ProviderSearchLink);
 		sleepBySec(15);
 		if (driver.getCurrentUrl().contains("werally")) {
