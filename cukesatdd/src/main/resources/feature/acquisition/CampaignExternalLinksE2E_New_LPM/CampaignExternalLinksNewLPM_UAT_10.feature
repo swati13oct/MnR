@@ -281,7 +281,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | TFN Xpath | <TFNxpath> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
-      | ZipCode | <zipcode> |
+      | ZipCode         | <zipcode> |
       | Is Multi County | <isMultiCounty> |
       | CountyDropDown  | <county>        |
     And user clicks on continue button in Zip Entry Page
