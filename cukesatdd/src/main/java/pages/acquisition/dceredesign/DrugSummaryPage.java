@@ -459,7 +459,7 @@ public class DrugSummaryPage extends UhcDriver {
 				// WebElement savePlan =
 				// driver.findElement(By.xpath("//*[contains(text(),'"+plan+"')]/following::div[contains(@class,'favorite-plan-container')][1]//img[contains(@src,'unfilled.png')]"));
 				WebElement savePlan = driver
-						.findElement(By.xpath("//button[contains(@id,'saveBtn') and @aria-label='Save " + plan + "']"));
+						.findElement(By.xpath("//button[contains(@id,'saveBtn') and contains(@aria-label,'Save') and contains(@aria-label, '"+ planName +"')]"));
 				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
 				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
 			}
@@ -798,7 +798,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public WebElement DrugsCoveredText;
 
 	public void ValidateNCPharmacyCoveredDrugs() {
-		CommonUtility.waitForPageLoadNew(driver,planCardHeader, 20 );
+		CommonUtility.waitForPageLoadNew(driver,planCardHeader, 30 );
 		if (validateNew(DrugsCoveredText)) {
 			System.out.println("Drug Summary Page, Drug Covered Text Displayed for Not Covered Pharmacy");
 		} else
@@ -1127,7 +1127,9 @@ public class DrugSummaryPage extends UhcDriver {
 	public void validateInvalidZipCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
 		System.out.println(invalidZipCodeMsg.getText());
-		Assertion.assertTrue(">>>>>> Invalid zipcode message not displayed : "+invalidZipCodeMsg.getText()+"<<<<< ; Expected - "+expectedMsg, invalidZipCodeMsg.getText().contains(expectedMsg));
+		if(!invalidZipCodeMsg.getText().contains(expectedMsg)) {
+			Assertion.fail(">>>>>> Invalid zipcode message not displayed : " + invalidZipCodeMsg.getText() + "<<<<< ; Expected - " + expectedMsg);
+		}
 	}
 
 	public void updateDistance(String distanceValue) throws InterruptedException {
