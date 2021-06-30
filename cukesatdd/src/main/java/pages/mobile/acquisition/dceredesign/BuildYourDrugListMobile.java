@@ -272,11 +272,14 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		jsClickNew(SearchBtn);
 
 		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
-
+		sleepBySec(2);
+		drugName.replaceAll("\u00A00", " ").trim();
+		
 		WebElement SelectDrug = driver
-				.findElement(By.xpath("//p[normalize-space()='" + drugName + "']/following-sibling::button"));
+				.findElement(By.xpath("//span[normalize-space()='" + drugName + "']/following-sibling::button"));
 
-		validateNew(SelectDrug);
+		scrollToView(SelectDrug);
+		
 		jsClickNew(SelectDrug);
 		pageloadcomplete();
 

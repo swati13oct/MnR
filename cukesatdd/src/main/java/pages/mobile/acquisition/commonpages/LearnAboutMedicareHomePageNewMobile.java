@@ -1,23 +1,25 @@
-package pages.acquisition.commonpages;
+package pages.mobile.acquisition.commonpages;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.springframework.util.Base64Utils;
 import org.testng.Assert;
+import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.commonpages.*;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
-    public LearnAboutMedicareHomePageNew(WebDriver driver) {
+public class LearnAboutMedicareHomePageNewMobile extends GlobalWebElements {
+    public LearnAboutMedicareHomePageNewMobile(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
         openAndValidate();
@@ -87,61 +89,61 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
 
     //Note: Links under 'Let's Get to Know Medicare' Section
 
-    public MedicareEligibilityPageNew clickOnMedicareEligibility() {
+    public MedicareEligibilityPageNewMobile clickOnMedicareEligibility() {
         scrollToView(lnkMedicareEligibility);
         jsClickNew(lnkMedicareEligibility);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("medicare-education/medicare-eligibility.html")) {
-            return new MedicareEligibilityPageNew(driver);
+            return new MedicareEligibilityPageNewMobile(driver);
         } else {
             return null;
         }
     }
 
-    public CoverageChoicesPageNew clickOnCoverageChoices() {
+    public CoverageChoicesPageNewMobile clickOnCoverageChoices() {
         scrollToView(lnkCoverageChoices);
         jsClickNew(lnkCoverageChoices);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/medicare-education/medicare-parts-and-medigap-plans.html")) {
-            return new CoverageChoicesPageNew(driver);
+            return new CoverageChoicesPageNewMobile(driver);
         } else {
             return null;
         }
     }
 
-    public PrescriptionProviderBenefitsPageNew clickOnBenefitsLink() {
+    public PrescriptionProviderBenefitsPageNewMobile clickOnBenefitsLink() {
         scrollToView(lnkBenefits);
         jsClickNew(lnkBenefits);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("medicare-education/medicare-benefits.html")) {
-            return new PrescriptionProviderBenefitsPageNew(driver);
+            return new PrescriptionProviderBenefitsPageNewMobile(driver);
         } else {
             return null;
         }
     }
 
-    public CostBasicsPageNew clickOnCostBasics() {
+    public CostBasicsPageNewMobile clickOnCostBasics() {
         scrollToView(lnkCostBasics);
         jsClickNew(lnkCostBasics);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/medicare-education/medicare-costs.html")) {
-            return new CostBasicsPageNew(driver);
+            return new CostBasicsPageNewMobile(driver);
         } else {
             return null;
         }
     }
 
-    public WhentoEnrollinMedicarePage clickOnEnrollment() {
+    public WhentoEnrollinMedicarePageMobile clickOnEnrollment() {
         scrollToView(lnkEnrollment);
         jsClickNew(lnkEnrollment);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/medicare-education/when-to-enroll.html")) {
-            return new WhentoEnrollinMedicarePage(driver);
+            return new WhentoEnrollinMedicarePageMobile(driver);
         } else {
             return null;
         }
@@ -149,67 +151,67 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
 
     //Note: Links under 'Types of Medicare and Medigap Plans' Section
 
-    public OriginalMedicarePage clickOnOriginalMedicare() {
+    public OriginalMedicarePageMobile clickOnOriginalMedicare() {
         jsClickNew(lnkOriginalMedicare);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("medicare-education/original-medicare.html")) {
-            return new OriginalMedicarePage(driver);
+            return new OriginalMedicarePageMobile(driver);
         } else {
             return null;
         }
     }
 
-    public MedicareAdvantagePartCPlansPageNew clickOnMAPlans() {
+    public MedicareAdvantagePartCPlansPageNewMobile clickOnMAPlans() {
         jsClickNew(lnkMAPlans);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("medicare-education/medicare-advantage-plans.html")) {
-            return new MedicareAdvantagePartCPlansPageNew(driver);
+            return new MedicareAdvantagePartCPlansPageNewMobile(driver);
         } else {
             return null;
         }
     }
 
-    public MedicareSupplementInsurancePlansPageNew clickOnMedSupp() {
+    public MedicareSupplementInsurancePlansPageNewMobile clickOnMedSupp() {
         jsClickNew(lnkMedSuppPlans);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/medicare-education/medicare-supplement-plans.html")) {
-            return new MedicareSupplementInsurancePlansPageNew(driver);
+            return new MedicareSupplementInsurancePlansPageNewMobile(driver);
         } else {
             return null;
         }
     }
 
-    public MedicarePrescriptionDrugPartDPlansPageNew clickOnPDPPlans() {
+    public MedicarePrescriptionDrugPartDPlansPageNewMobile clickOnPDPPlans() {
         jsClickNew(lnkPDPPlans);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/medicare-education/medicare-part-d.html")) {
-            return new MedicarePrescriptionDrugPartDPlansPageNew(driver);
+            return new MedicarePrescriptionDrugPartDPlansPageNewMobile(driver);
         } else {
             return null;
         }
     }
 
-    public SpecialNeedsPlansPage clickOnSNPPlans() {
+    public SpecialNeedsPlansPageMobile clickOnSNPPlans() {
         jsClickNew(lnkSNPPlans);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/medicare-education/special-needs-plans.html")) {
-            return new SpecialNeedsPlansPage(driver);
+            return new SpecialNeedsPlansPageMobile(driver);
         } else {
             return null;
         }
     }
 
-    public OverviewofPlanTypesPage clickOnOverviewOfPlanTypes() {
+    public OverviewofPlanTypesPageMobile clickOnOverviewOfPlanTypes() {
         jsClickNew(lnkOverviewOfPlans);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("/medicare-education/medicare-plans-overview")) {
-            return new OverviewofPlanTypesPage(driver);
+            return new OverviewofPlanTypesPageMobile(driver);
         } else {
             return null;
         }
@@ -217,23 +219,23 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
 
     //Note: Links under 'Getting Medicare the First Time' Section
 
-    public InitialEnrollmentPeriodPage clickOnLearnMoreAboutIEP() {
+    public InitialEnrollmentPeriodPageMobile clickOnLearnMoreAboutIEP() {
         jsClickNew(lnkLearnMoreMedicareIEP);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("medicare-education/medicare-initial-enrollment-period.html")) {
-            return new InitialEnrollmentPeriodPage(driver);
+            return new InitialEnrollmentPeriodPageMobile(driver);
         } else {
             return null;
         }
     }
 
-    public WorkingPast65Page clickOnLearnMoreAboutWP65() {
+    public WorkingPast65PageMobile clickOnLearnMoreAboutWP65() {
         jsClickNew(lnkLearnMoreMedicareWP65);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("medicare-education/medicare-while-working.html")) {
-            return new WorkingPast65Page(driver);
+            return new WorkingPast65PageMobile(driver);
         } else {
             return null;
         }
@@ -315,7 +317,9 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         WebElement EDC = driver.findElement(By.xpath("//div[contains(@class,'enrollmentcalc')]"));
         scrollToView(EDC);
         sleepBySec(2);
-        WebElement tabTurning65 = driver.findElement(By.xpath("//button[contains(@class,'tab1')]"));
+        WebElement selectToolDropDown = driver.findElement(By.xpath("//button[contains(@class,'edcMobileMenu__button')]"));
+        jsClickNew(selectToolDropDown);
+        WebElement tabTurning65 = driver.findElement(By.xpath("//div[contains(@class,'uhc-menu__list-item mobileTab1')]"));
         jsClickNew(tabTurning65);
         System.out.println("Turning 65 tab opened");
         WebElement tab1Heading = driver.findElement(By.xpath("//h3[contains(text(),'Enter your date of birth')]"));
@@ -375,7 +379,9 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         WebElement EDC = driver.findElement(By.xpath("//div[contains(@class,'enrollmentcalc')]"));
         scrollToView(EDC);
         sleepBySec(2);
-        WebElement tabRetirement = driver.findElement(By.xpath("//button[contains(@class,'tab2')]"));
+        WebElement selectToolDropDown = driver.findElement(By.xpath("//button[contains(@class,'edcMobileMenu__button')]"));
+        jsClickNew(selectToolDropDown);
+        WebElement tabRetirement = driver.findElement(By.xpath("//div[contains(@class,'uhc-menu__list-item mobileTab2')]"));
         jsClickNew(tabRetirement);
         System.out.println("Retirement tab opened");
         WebElement tab2Heading = driver.findElement(By.xpath("//h3[contains(text(),'Enter your retirement')]"));
@@ -445,7 +451,9 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         WebElement EDC = driver.findElement(By.xpath("//div[contains(@class,'enrollmentcalc')]"));
         scrollToView(EDC);
         sleepBySec(2);
-        WebElement tabDisability = driver.findElement(By.xpath("//button[contains(@class,'tab3')]"));
+        WebElement selectToolDropDown = driver.findElement(By.xpath("//button[contains(@class,'edcMobileMenu__button')]"));
+        jsClickNew(selectToolDropDown);
+        WebElement tabDisability = driver.findElement(By.xpath("//div[contains(@class,'uhc-menu__list-item mobileTab3')]"));
         jsClickNew(tabDisability);
         System.out.println("Disability tab opened");
         WebElement tab3Heading = driver.findElement(By.xpath("//h3[contains(text(),'radio button')]"));
@@ -742,7 +750,11 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         }
 
         WebElement lnkDownload = driver.findElement(By.xpath("//a[contains(text(),'Download PDF')]"));
-        switchToNewTabNew(lnkDownload);
+        if (validateNew(lnkDownload) && lnkDownload.isDisplayed()) {
+            System.out.println("Download PDF link present on Page");
+        } else {
+            Assert.fail("Download PDF link present on Page");
+        }/*switchToNewTabNew(lnkDownload);
         CommonUtility.checkPageIsReadyNew(driver);
         sleepBySec(2);
         if (driver.getCurrentUrl().contains(pdfName)) {
@@ -751,7 +763,9 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
             Assert.fail(pdfName + " not opened Correctly");
         }
         driver.close();
-        driver.switchTo().window(CommonConstants.getMainWindowHandle());
+        driver.switchTo().window(CommonConstants.getMainWindowHandle());*/
+
+
     }
 
     public void validatePDFViewer() {
@@ -766,17 +780,12 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
         switchToNewIframe(pdfViewer);
 
         WebElement btnSearch = driver.findElement(By.xpath("//button[contains(@id,'documentSearch')]"));
-        jsClickNew(btnSearch);
-        WebElement txtSearch = driver.findElement(By.xpath("//div[contains(@class,'SearchInputUI')]//input"));
-        WebElement btnSearchCancel = driver.findElement(By.xpath("//div[contains(@class,'SearchInputUI')]//button//span[contains(text(),'Cancel')]"));
 
-        if (txtSearch.isDisplayed() && btnSearchCancel.isDisplayed()) {
-            System.out.println("Search Button clicked Successfully");
+        if (btnSearch.isDisplayed()) {
+            System.out.println("Search Button is displayed");
         } else {
-            Assert.fail("Search Button clicked Successfully");
+            Assert.fail("Search Button is not displayed");
         }
-        jsClickNew(btnSearchCancel);
-        // driver.switchTo().window(CommonConstants.getMainWindowHandle());
         driver.switchTo().defaultContent();
     }
 
@@ -801,39 +810,33 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
             Assert.fail("PDF menu not clicked");
         }
         WebElement btnDownload = driver.findElement(By.xpath("//button[contains(@class,'Button')]//span[contains(text(),'Download PDF')]"));
-        if (MRScenario.browserName.equalsIgnoreCase("chrome")) {
-            jsClickNew(btnDownload);
-            System.out.println("Download Button Clicked");
-            sleepBySec(2);
-            driver.switchTo().defaultContent();
-            driver.navigate().to("chrome://downloads/");
-            sleepBySec(2);
-            driver.switchTo().defaultContent();
-            JavascriptExecutor executor = (JavascriptExecutor) driver;
-            WebElement pdfDownload = (WebElement) executor.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#mainContainer').querySelector('downloads-item').shadowRoot.querySelector('#content.is-active').querySelector('#details')");
-
-
-            if (pdfDownload != null) {
-                String downloadedPDFName = (pdfDownload.getText().split("\n"))[0].trim();
-                if (downloadedPDFName.equalsIgnoreCase(pdfName))
-                    System.out.println("PDF Downloaded:\n" + downloadedPDFName);
-            } else {
-                Assert.fail("Correct PDF not downloaded");
-            }
-
-            driver.navigate().back();
-            driver.switchTo().defaultContent();
+        if (btnDownload.isDisplayed()) {
+            System.out.println("Download option present in PDF Viewer");
         } else {
-            if (!btnDownload.isDisplayed()) {
-                Assert.fail("Download link not present");
-            }
-            System.out.println("Download Validation not available on browser other than Chrome");
+            Assert.fail("Download option is not present in PDF Viewer");
+        }
+        /*jsClickNew(btnDownload);
+        System.out.println("Download Button Clicked");
+        sleepBySec(2);
+        driver.switchTo().defaultContent();
+        driver.navigate().to("chrome://downloads/");
+        sleepBySec(2);
+        driver.switchTo().defaultContent();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        WebElement pdfDownload = (WebElement) executor.executeScript("return document.querySelector('downloads-manager').shadowRoot.querySelector('#mainContainer').querySelector('downloads-item').shadowRoot.querySelector('#content.is-active').querySelector('#details')");
+        if (pdfDownload != null) {
+            String downloadedPDFName = (pdfDownload.getText().split("\n"))[0].trim();
+            if (downloadedPDFName.equalsIgnoreCase(pdfName))
+                System.out.println("PDF Downloaded:\n" + downloadedPDFName);
+        } else {
+            Assert.fail("Correct PDF not downloaded");
         }
 
-
+        driver.navigate().back();
+        driver.switchTo().defaultContent();*/
     }
 
-    public void validatePdfMenuPrintLink() {
+    /*public void validatePdfMenuPrintLink() {
         if (MRScenario.browserName.equalsIgnoreCase("chrome")) {
             CommonUtility.checkPageIsReadyNew(driver);
             driver.switchTo().defaultContent();
@@ -888,8 +891,9 @@ public class LearnAboutMedicareHomePageNew extends GlobalWebElements {
                 Assert.fail("Print Dialog not Closed");
             }
             driver.switchTo().window((String) windowHandles.toArray()[0]);
+            ;
         } else {
             System.out.println("Print Validation not available on browser other than Chrome");
         }
-    }
+    }*/
 }
