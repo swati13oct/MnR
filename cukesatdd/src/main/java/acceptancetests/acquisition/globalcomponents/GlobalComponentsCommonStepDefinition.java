@@ -97,6 +97,7 @@ public class GlobalComponentsCommonStepDefinition {
 		else
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, "AARP_ACQ");
 
+		if (site.equalsIgnoreCase("AARP")) 
 		aquisitionhomepage.validateSubtitle();
 		
 	}

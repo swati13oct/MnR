@@ -2,7 +2,7 @@
 Feature: 1.12 ACQ - Global Components Validation
 
   @globalfooterULayer
-  Scenario Outline: To verify links displayed in the global footer of AARP site
+  Scenario Outline: To verify links displayed in the global footer of <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user accesses global footer of the Medicare Plans All page
@@ -31,7 +31,7 @@ Feature: 1.12 ACQ - Global Components Validation
       | UHC  | Alaska | AK   |
 
   @globalheaderULayer
-  Scenario Outline: To verify links displayed in the global header of AARP site
+  Scenario Outline: To verify links displayed in the global header of <site> site
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
     When user accesses global header of the Medicare Plans home page

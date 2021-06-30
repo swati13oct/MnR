@@ -4502,7 +4502,6 @@ public class AcquisitionHomePage extends GlobalWebElements {
 				Assertion.assertTrue(true);
 			}
 		}
-
 	}
 
 	public void headerRegisterLink() {
