@@ -317,6 +317,11 @@ Feature: ACQ-Plan benefits validation
       | workSheet      |
       | PDPSheet2021_3 |
 
+    @2021MCARECompareAARP
+    Examples: 
+      | workSheet       |
+      | Sheet2021_MCARE |
+
   @2021_AARP @current_year @2021CompareProd
   Scenario Outline: 2021 AARP Plan Compare Benefits Validation - Sheet : <workSheet>
     Given the user navigates to plan compare page and compares benefits value from excel to UI and reports into excel
@@ -485,6 +490,11 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | workSheet      |
       | PDPSheet2021_3 |
+
+    @2021MCARECompareUHC
+    Examples: 
+      | workSheet       |
+      | Sheet2021_MCARE |
 
   @2021_AARP @current_year @2021CompareProd
   Scenario Outline: 2020 AARP Plan Compare Benefits Validation - Sheet : <workSheet>

@@ -279,6 +279,11 @@ Feature: ACQ-Plan benefits validation
       | excelPath                  | workSheet      | site |
       | Plan Details Benefits_Data | PDPSheet2021_2 | AARP |
 
+    @2021MCAREDetailsAARP
+    Examples: 
+      | excelPath                  | workSheet       | site |
+      | Plan Details Benefits_Data | Sheet2021_MCARE | AARP |
+
   # 2021 UHC
   @PlanDetails_ExcelValidation @2021PlanDetialsUHC
   Scenario Outline: Verify plan benefits on the Plan Details Page for provided plan provided in Excel : <excelPath> and Sheet : <workSheet>
@@ -381,6 +386,11 @@ Feature: ACQ-Plan benefits validation
     Examples: 
       | excelPath                  | workSheet      | site |
       | Plan Details Benefits_Data | PDPSheet2021_2 | UHC  |
+
+    @2021MCAREDetailsUHC
+    Examples: 
+      | excelPath                  | workSheet       | site |
+      | Plan Details Benefits_Data | Sheet2021_MCARE | UHC  |
 
   # PROD NIGHT RUN SCENARIOS
   @PlanDetails_ExcelValidation @2021PlanDetialsProd
