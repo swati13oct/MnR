@@ -446,7 +446,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		System.out.println("Entering data for option : "+currentOptionData);
 
 		try {
-			WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
+			WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//..//*[@class='subquestionfield']//input"));
 			if(validate(dataTextBx)) {
 				scrollToView(dataTextBx);
 //					dataTextBx.sendKeys(currentOptionData);
@@ -456,7 +456,7 @@ public SpecialElectionPeriodPage select_option_and_enter_data(String selectoptio
 		catch (Exception e) {
 		}
 		try {
-			WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
+			WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//..//*[@class='subquestionfield']//textarea"));
 			if(validate(dataTextBx)) {
 				scrollToView(dataTextBx);
 				dataTextBx.sendKeys(currentOptionData);

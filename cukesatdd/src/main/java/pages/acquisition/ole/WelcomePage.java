@@ -114,7 +114,8 @@ public class WelcomePage extends UhcDriver{
 	@FindBy(xpath="//button[contains(@id,'ip-no')]")
 	public WebElement AccessibilityButton;
 	
-	@FindBy(xpath="//*[contains(text(),'Return to View Plan Details')]")
+	//@FindBy(xpath="//*[contains(text(),'View Plan Details')]")
+	@FindBy(xpath="//*[contains(@class,'view-plan-link')]")
 	public WebElement ViewPlanDetails;
 	
 	

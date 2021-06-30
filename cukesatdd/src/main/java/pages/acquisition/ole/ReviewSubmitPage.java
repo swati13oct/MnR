@@ -67,10 +67,12 @@ public class ReviewSubmitPage extends UhcDriver{
 	private WebElement PremiumDisplay;
 
 	//Plan Details Display
-	@FindBy(xpath = "//*[contains(@class, 'plan-information')]//h3")
+	//@FindBy(xpath = "//*[contains(@class, 'plan-information')]//h3")
+	@FindBy(xpath = "//*[contains(@class, 'h3-welcome-class')]")
 	private WebElement PlanYear_NameDisplay;
 
-	@FindBy(xpath = "//*[contains(@class, 'plan-information')]//li")
+	//@FindBy(xpath = "//*[contains(@class, 'plan-information')]//li")
+	@FindBy(xpath = "//*[contains(@class, 'premium-zip')]//*[contains(@class, 'review-premium-zip-second')]")
 	private WebElement PlanZipDisplay;
 
 	//Member Details Display
@@ -201,7 +203,8 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'mailing address')]//..//following-sibling::*//*[contains(text(), 'State')]//following-sibling::*")
 	private WebElement MailStateDisplay;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
+//	@FindBy(xpath = "//*[contains(text(), 'Zip Code')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'ZIP Code')]//following-sibling::*")
 	private WebElement MailZipDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Primary Phone Number') or contains(text(), 'Main Phone Number')]//following-sibling::*")
@@ -324,6 +327,9 @@ public class ReviewSubmitPage extends UhcDriver{
 	
 	@FindBy(xpath = "//*[contains(text(), 'Optional Supplemental')]//following-sibling::*")
 	private WebElement OptionalRiders;
+	
+	@FindBy(xpath = "//*[contains(@class, 'premium-zip')]//*[contains(@class, 'review-premium-zip-first')]")
+	private WebElement MonthlyPremium;
 	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
@@ -615,14 +621,6 @@ public class ReviewSubmitPage extends UhcDriver{
 				String MobilePhoneNumber = detailsMap.get("Mobile Phone Number");
 				//String EmailConfirmationNumber = detailsMap.get("Email Confirmation Number");
 				String Paperless_Delivery = detailsMap.get("Paperless Delivery");
-				//String Email_Address = detailsMap.get("Email Address");
-			/*	HealthInsuranceName
-				HealthInsuranceGroupNo
-				HealthInsuranceMemberNo
-				PrescriptionDrugName
-				PrescriptionDrugGroupNo
-				PrescriptionDrugMemberNo
-				*/
 				
 				String prescriptionDrugName= detailsMap.get("Prescription Name");
 				String prescriptionGroupNumber = detailsMap.get("PD Group Number");
@@ -669,7 +667,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				String DisclosureProviderStateDisplay= detailsMap.get("Disclosure Provider State");
 				String DisclosureProviderZipDisplay= detailsMap.get("Disclosure Provider Zip");
 				String DisclosureProviderPhoneNumberDisplay= detailsMap.get("Disclosure Provider PhoneNumber");
-				
+
 				String OptionalRidersDisplay= detailsMap.get("Optional Rider");
 				String expectedOptionalRidersText = "Dental Platinum";
 				String expectedOptionalHighRidersText = "High Option Dental";
@@ -681,8 +679,8 @@ public class ReviewSubmitPage extends UhcDriver{
 				
 				String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
 				flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
-				String Zip = "ZIP: "+Expected_ZipCode;
-				flag&=validateText(PlanZipDisplay,Zip);
+				String Zip = "ZIP Code: "+Expected_ZipCode+" ("+Expected_County+")";
+				flag&=validateTextPlanName(PlanZipDisplay,Zip);
 				flag&=validateText(FirstNameDisplay,FirstName);
 				flag&=validateText(LastNameDisplay,LastName);
 				flag&=validateText(MiddleNameDisplay,MiddleName);
@@ -739,8 +737,8 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(MailCityDisplay,Mailing_City);
 				
 				if(!(expectedText.contains("Dental Platinum") || expectedText.contains("High Option Dental"))) {
-				
-					flag&=validateText(OptionalRiders,OptionalRidersDisplay);
+					String OptionalRidersdisplay = OptionalRidersDisplay+".";
+					flag&=validateText(OptionalRiders,OptionalRidersdisplay);
 				}
 				
 				if(!expectedText.contains("0.00")) {
