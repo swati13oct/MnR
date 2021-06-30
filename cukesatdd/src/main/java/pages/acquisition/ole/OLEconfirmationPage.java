@@ -55,7 +55,7 @@ public class OLEconfirmationPage extends UhcDriver{
 	private WebElement lnkProfile;
 
 	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
-	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
+	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//span[@class='confirmation-number']")
 	private WebElement confirmationNumber;
 	
 	public OLEconfirmationPage(WebDriver driver) {

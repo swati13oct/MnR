@@ -737,7 +737,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(MailCityDisplay,Mailing_City);
 				
 				if(!(expectedText.contains("Dental Platinum") || expectedText.contains("High Option Dental"))) {
-					String OptionalRidersdisplay = OptionalRidersDisplay+".";
+					String OptionalRidersdisplay = OptionalRidersDisplay.replace(".", "");
 					flag&=validateText(OptionalRiders,OptionalRidersdisplay);
 				}
 				
