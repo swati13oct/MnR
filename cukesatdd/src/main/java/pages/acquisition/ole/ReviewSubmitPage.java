@@ -553,7 +553,7 @@ public class ReviewSubmitPage extends UhcDriver{
 		
 
 		validateNew(SubmitApplicationBtn);
-		scrollToView(SubmitApplicationBtn);
+		//scrollToView(SubmitApplicationBtn);
 		jsClickNew(SubmitApplicationBtn);
 		//SubmitApplicationBtn.click();
 		threadsleep(3000);
