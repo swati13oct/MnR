@@ -494,7 +494,6 @@ public class DrugSummaryPage extends UhcDriver {
 	public void verifyTheTextAlert() {
 
 		validateNew(alertTextImg);
-		validateNew(viewProceBtn);
 
 	}
 
