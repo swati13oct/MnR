@@ -65,7 +65,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "(//button/span[contains(text(),'View Drug Costs')])[1]")
 	public WebElement viewDrugCostBtn;
 
-	@FindBy(xpath = "(//button/span[contains(text(),'View Plan Details')])[1]")
+	@FindBy(xpath = "(//button[contains(@aria-label,'View Plan Details') and contains(@class, 'uhc-button--outlined')])[1]")
 	public WebElement viewPlanDetailsBtn;
 
 	@FindBy(xpath = "(//button//span[contains(text(),'Save')])[1]")
@@ -192,7 +192,7 @@ public class DrugSummaryPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='changePharmacyLink0']")
 	public WebElement changePharmacyCoverPrescription;
 
-	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']/../../following-sibling::div[1]")
+	@FindBy(xpath = "//*[@id='mailSelectPharmacyBtn0']//parent::div//following-sibling::div[contains(text(), 'OptumRx Home')]")
 	private WebElement mailOrderPharmacyMsg;
 
 	@FindBy(xpath = "//*[contains(@id,'selectPharmacyBtn')]/../div//span[1]")
@@ -475,7 +475,7 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 	}
 
-	@FindBy(xpath = "//div[@class='d-flex align-items-lg-center flex-lg-row']")
+	@FindBy(xpath = "(//div[contains(@class,'d-flex align-items-lg-center')]//p[contains(text(), ' level of Extra Help')])[1]")
 	private WebElement alertTextImg;
 
 	public void clickOnPDPPlan() {
@@ -487,7 +487,7 @@ public class DrugSummaryPage extends UhcDriver {
 		jsClickNew(mapdPlanToggle);
 	}
 
-	@FindBy(xpath = "//div[contains(text(),'If you receive')]")
+	@FindBy(xpath = "//span[contains(text(),'If you receive')]")
 	public WebElement drugPricingDeductText;
 
 	public void verifyTheTextAlert() {
