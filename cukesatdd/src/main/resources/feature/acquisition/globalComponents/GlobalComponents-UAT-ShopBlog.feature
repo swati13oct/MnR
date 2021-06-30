@@ -692,6 +692,8 @@ Feature: 1.13 UAT - Shop Blog Pages flows
   Scenario Outline: <Scenario>- To verify 3 Pack CTA page mentioned on <site> site <pageName> : <path>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
+    Then the user select state for geotargeting from dropdown
+      | GeoState | <geoState> |
     And the user navigates to following medicare acquisition site page
       | PageName | <pageName> |
       | PagePath | <path>     |
@@ -705,19 +707,21 @@ Feature: 1.13 UAT - Shop Blog Pages flows
 
     @avengersRegressionAARP
     Examples:
-      | Scenario                           | site | path                                                | pageName                   | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | UAT E2E Regression Scenario 1_AARP | AARP | shop.html                                           | Shop Hub Page              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
-      | UAT E2E Regression Scenario 2_AARP | AARP | shop/medicare-advantage-plans.html                  | Shop MA Plans Page         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
-      | UAT E2E Regression Scenario 3_AARP | AARP | shop/dual-special-needs-plans.html                  | Shop DSNP Plans Page e     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
-      | UAT E2E Regression Scenario 4_AARP | AARP | enroll.html                                         | Enroll Page                | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
-      | Avengers AARP                      | AARP | /medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | Scenario                           | site | geoState | path                                               | pageName                      | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | UAT E2E Regression Scenario 1_AARP | AARP | Alabama  | shop.html                                          | Shop Hub Page                 | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 2_AARP | AARP | Alabama  | shop/medicare-advantage-plans.html                 | Shop MA Plans Page            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 2_AARP | AARP | Alabama  | shop/medicare-advantage-plans/california.html      | Shop MA Plans California Page | https://www.myuhcagent.com/ | //*[contains(@class,'tel tfn')]                                    | true    |
+      | UAT E2E Regression Scenario 3_AARP | AARP | Alabama  | shop/dual-special-needs-plans.html                 | Shop DSNP Plans Page e        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 4_AARP | AARP | Alabama  | enroll.html                                        | Enroll Page                   | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | Avengers AARP                      | AARP | Alabama  | medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples    | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
     @avengersRegressionUHC
     Examples:
-      | Scenario                           | site | path                                                | pageName                   | UHCUrl                      | tfnXpath                                                           | tfnFlag |
-      | UAT E2E Regression Scenario 1_AARP | UHC  | shop.html                                           | Shop Hub Page              | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
-      | UAT E2E Regression Scenario 2_AARP | UHC  | shop/medicare-advantage-plans.html                  | Shop MA Plans Page         | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
-      | UAT E2E Regression Scenario 3_AARP | UHC  | shop/dual-special-needs-plans.html                  | Shop DSNP Plans Page e     | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
-      | UAT E2E Regression Scenario 4_AARP | UHC  | enroll.html                                         | Enroll Page                | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
-      | Avengers AARP                      | UHC  | /medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
+      | Scenario                           | site | geoState | path                                               | pageName                      | UHCUrl                      | tfnXpath                                                           | tfnFlag |
+      | UAT E2E Regression Scenario 1_AARP | UHC  | Alabama  | shop.html                                          | Shop Hub Page                 | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 2_AARP | UHC  | Alabama  | shop/medicare-advantage-plans.html                 | Shop MA Plans Page            | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 2_AARP | UHC  | Alabama  | shop/medicare-advantage-plans/california.html      | Shop MA Plans California Page | https://www.myuhcagent.com/ | //*[contains(@class,'tel tfn')]                                    | true    |
+      | UAT E2E Regression Scenario 3_AARP | UHC  | Alabama  | shop/dual-special-needs-plans.html                 | Shop DSNP Plans Page e        | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | UAT E2E Regression Scenario 4_AARP | UHC  | Alabama  | enroll.html                                        | Enroll Page                   | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[5] | true    |
+      | Avengers AARP                      | UHC  | Alabama  | medicare-education/medicare-coverage-examples.html | Medicare Coverage Examples    | https://www.myuhcagent.com/ | (//*[contains(@class,'callus')]//*[contains(@class,'tel tfn')])[1] | true    |
 
