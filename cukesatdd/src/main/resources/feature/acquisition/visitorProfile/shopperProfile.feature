@@ -169,7 +169,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | DrugName | <drug1> |
     Then the user clicks on Review Drug Costs to Land on Zip Entry Page
     When user enters valid zipcode and county
-      | ZipCode | <zipCode> |
+      | ZipCode | <zipcode> |
     And user selects plan year
     And user clicks on continue button in Zip Entry Page
     And the user clicks on the shopping cart icon on DCE page

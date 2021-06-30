@@ -1143,8 +1143,8 @@ public class VisitorProfilePage extends UhcDriver {
                 driver.findElement(By.xpath("//div[contains(text(),'" + provider.getText().trim() + "')]/following::button[text()='Remove']")).click();
                 removeDrugBtn.click();
             }
-            CommonUtility.waitForPageLoadNew(driver, importLnk, 45);
-            Assertion.assertTrue(importLnk.isDisplayed());
+            CommonUtility.waitForPageLoadNew(driver, addDoctor, 45);
+            Assertion.assertTrue(addDoctor.isDisplayed());
     }
 
     /**
