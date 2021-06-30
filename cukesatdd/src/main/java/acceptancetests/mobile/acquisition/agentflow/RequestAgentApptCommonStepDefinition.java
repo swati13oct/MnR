@@ -14,11 +14,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.LearnAboutMedicareHomePage;
-import pages.mobile.acquisition.commonpages.RequestAgentAppointmentPage;
-import pages.mobile.acquisition.commonpages.RequestHelpAndInformationPage;
-import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
+import pages.mobile.acquisition.commonpages.*;
 
 
 //import pages.acquisition.ulayer.VPPPlanSummaryPageMobile;
@@ -150,7 +146,7 @@ public class RequestAgentApptCommonStepDefinition {
 		Map<String, String> inputAttributesMap=parseInputArguments(arg1);
 		String myUHCAgentURL = inputAttributesMap.get("UHC Agent URL");
 		
-		LearnAboutMedicareHomePage learnAboutMedicareHomePage=(LearnAboutMedicareHomePage)getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);		
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage=(LearnAboutMedicareHomePageMobile) getLoginScenario().getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
 		if(myUHCAgentURL!=null){
 			learnAboutMedicareHomePage.clickonFindanAgentlinkfromMedEd(myUHCAgentURL);
 			Assertion.assertTrue(true);

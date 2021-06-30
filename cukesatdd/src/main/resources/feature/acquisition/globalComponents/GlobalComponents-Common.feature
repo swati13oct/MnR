@@ -500,7 +500,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the user clicks on browser back button
     Then the user clicks on Find a Provider button and navigate to Werally Page
     Then the user validate ZipCode Components on Shop pages using ZipCode "10001"
-    Then the user clicks on Agent link and validates the correct URL is loaded from shop page
+    Then the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |

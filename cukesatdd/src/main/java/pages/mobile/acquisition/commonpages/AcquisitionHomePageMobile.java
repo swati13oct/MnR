@@ -3890,7 +3890,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(learnAboutMedicareHomeScreen);
 		waitForPageLoadSafari();
 		String urlCheck = driver.getCurrentUrl();
-		if (urlCheck.contains("medicare-education.html")) {
+		if (urlCheck.contains("medicare-education-classic.html")) {
 			return new LearnAboutMedicareHomePageMobile(driver);
 		} else {
 			return null;
@@ -4277,5 +4277,49 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
 		return null;
+	}
+
+	public void selectStateForGeotargeting(String geoState) {
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
+		System.out.println("State to be Selected: " + geoState);
+		String stateXPath = "//select[@id='state-select']//option[contains(@value,'" + geoState + "')]";
+		WebElement stateGeotargeting = driver.findElement(By.xpath(stateXPath));
+		selectFromDropDownByValue(stateDropDown,geoState);
+		if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
+			Assert.fail("Wrong state selected for geotarget");
+		}
+		// jsClickNew(stateGeotargeting);
+		waitforElementNew(stateGeotargeting, 5);
+		System.out.println("State selected for Geotargetting: " + stateGeotargeting.getText());
+		waitforElementNew(stateGeotargeting, 5);
+
+	}
+	public LearnAboutMedicareHomePageNewMobile clickLearnMoreAboutMedicareOnHomePage() {
+
+		validateNew(learnAboutMedicareHomeScreen);
+		scrollToView(learnAboutMedicareHomeScreen);
+		jsClickNew(learnAboutMedicareHomeScreen);
+		waitForPageLoadSafari();
+		String urlCheck = driver.getCurrentUrl();
+		if (urlCheck.contains("medicare-education.html")) {
+			return new LearnAboutMedicareHomePageNewMobile(driver);
+		} else {
+			return null;
+		}
+	}
+	public void clickOnPlanRecommendationButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement lnkPRE = driver
+				.findElement(By.xpath("//a[contains(@href,'/plan-recommendation-engine.html') and @role='button']"));
+		jsClickNew(lnkPRE);
+		sleepBySec(5);
+		if (driver.getCurrentUrl().contains("/plan-recommendation-engine.html")) {
+			System.out.println("Plan Recommendation Engine open successfully");
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("Plan Recommendation Engine did not open successfully");
+		}
+		driver.navigate().back();
 	}
 }

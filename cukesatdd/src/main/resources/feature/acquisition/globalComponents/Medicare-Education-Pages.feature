@@ -360,7 +360,7 @@ Feature:Medicare Education Pages flows for New Pages
     Then the user validates the Learn how to change Medicare plans link on new Enrollment page
 
 
-    @avengersRegressionAARP
+    @avengersRegressionAARP 
     Examples:
       | Scenario           | site | geoState | pageName                | tfnXpath                                                       | tfnFlag | UHCUrl                      |
       | E2E Scenario 6_AMP | AARP | Alabama  | When to Enroll Page New | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
