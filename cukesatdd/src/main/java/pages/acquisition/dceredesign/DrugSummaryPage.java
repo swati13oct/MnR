@@ -627,7 +627,7 @@ public class DrugSummaryPage extends UhcDriver {
 		saveDrugBtn.click();
 	}
  
-	@FindBy(xpath = "//*[contains(@class, 'pharmacy-plan-desc')]")
+	@FindBy(xpath = "//*[contains(@id, 'changePharmacyLink')]//preceding-sibling::span")
 	private WebElement PharmacyNameText;
 
 	public void validatePharmacyName(String PharmacyName) {
@@ -779,7 +779,7 @@ public class DrugSummaryPage extends UhcDriver {
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
 			WebElement DrugName = driver.findElement(By.xpath("//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '" + currentAddedDrug + "')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath(
-					"//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '" + currentAddedDrug + "')]//following-sibling::p[contains(text(), '$')]"));
+					"(//*[contains(@class, 'uhc-modal__content')]//p[contains(text(), '"+ currentAddedDrug +"')]//following::span[contains(text(), 'Initial Coverage')]//following-sibling::span[contains(text(), '$')])[1]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out
@@ -1126,8 +1126,8 @@ public class DrugSummaryPage extends UhcDriver {
 
 	public void validateInvalidZipCodeMsg(String expectedMsg) {
 		waitforElement(invalidZipCodeMsg);
-		System.out.println(invalidZipCodeMsg.getText().trim());
-		Assertion.assertTrue("Invalid zipcode message not displayed", invalidZipCodeMsg.getText().trim().contains(expectedMsg));
+		System.out.println(invalidZipCodeMsg.getText());
+		Assertion.assertTrue(">>>>>> Invalid zipcode message not displayed : "+invalidZipCodeMsg.getText()+"<<<<< ; Expected - "+expectedMsg, invalidZipCodeMsg.getText().contains(expectedMsg));
 	}
 
 	public void updateDistance(String distanceValue) throws InterruptedException {
