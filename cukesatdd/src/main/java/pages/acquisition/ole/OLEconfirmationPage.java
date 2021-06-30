@@ -30,7 +30,7 @@ import pages.acquisition.commonpages.VisitorProfilePage;
 public class OLEconfirmationPage extends UhcDriver{
 	
 	//@FindBy(xpath = "//*[contains(@class,'confirmation-number')]")
-	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//p[@class='confirmation-number']")
+	@FindBy(xpath = "//*[contains(@class,'confirmation-number')]//span[@class='confirmation-number']")
 	private WebElement PlanYear_PlanName;
 	
 	@FindBy(xpath = "//*[contains(text(), 'ZIP:')]/..")
