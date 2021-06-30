@@ -501,7 +501,7 @@ Feature: 1.12 ACQ - Global Components Validation
     Then the user clicks on browser back button
     Then the user clicks on Find a Provider button and navigate to Werally Page
     Then the user validate ZipCode Components on Shop pages using ZipCode "10001"
-    Then the user clicks on Agent link and validates the correct URL is loaded from shop page
+    Then the user clicks on Agent link and validates the correct URL is loaded from article page
       | UHC Agent URL | <UHCUrl> |
     Then the user validates TFN on the page
       | TFNxpath | <tfnXpath> |
@@ -866,8 +866,8 @@ Feature: 1.12 ACQ - Global Components Validation
     Then user should be navigated to respective footer links page
     When user click on "AARP.org" link under more
     Then user should be navigated to respective footer links page
-    When user updates the state drop down value on the home page
-      | State | <state> |
+    #When user updates the state drop down value on the home page
+      #| State | <state> |
 
     @Global_Comps_Footer_AARP
     Examples: 
@@ -993,6 +993,7 @@ Feature: 1.12 ACQ - Global Components Validation
     When user click on "Language Assistance" link under more
     Then user should be navigated to respective footer links page
     When user click on "AARP.org" link under more
+    Then user should be navigated to respective footer links page
 
     @Global_Comps_Footer_AARP
     Examples: 
