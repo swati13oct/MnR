@@ -170,20 +170,20 @@ Feature: 1.12 UAT - Medicare Education Pages flows
 
     @avengersRegressionAARP @MedEdPages_1_GlobalCompsAARP @regressionAARP
     Examples:
-      | Scenario           | site | geoState | plantype | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 5_AMP | AARP | New York | MA       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState | plantype | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 5_AMP | AARP | New York | MA       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
     @avengersRegressionUHC @MedEdPages_1_GlobalCompsUHC @regressionUHC
     Examples:
-      | Scenario           | site | geoState | plantype | tfnXpath                                                       | tfnFlag | UHCUrl                      |
-      | E2E Scenario 5_UMS | UHC  | New York | MA       | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')] | true    | https://www.myuhcagent.com/ |
+      | Scenario           | site | geoState | plantype | tfnXpath                                                            | tfnFlag | UHCUrl                      |
+      | E2E Scenario 5_UMS | UHC  | New York | MA       | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[3] | true    | https://www.myuhcagent.com/ |
 
   Scenario Outline: <Scenario> : To verify Global Components for the page mentioned of AARP site for plantype <plantype> : <tfnXpath>
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
-    When the user navigates to Medicare Education Page from homepage
     Then the user select state for geotargeting from dropdown
       | GeoState | <geoState> |
+    When the user navigates to Medicare Education Page from homepage
     Then the user navigates to Enrollment Basics Page
     Then the user check Social Security link on Enrollment Basic Page
     Then the user click on see all plan link on Enrollment Basic Page

@@ -1,4 +1,4 @@
-package pages.acquisition.commonpages;
+package pages.mobile.acquisition.commonpages;
 
 import acceptancetests.util.CommonUtility;
 import org.openqa.selenium.By;
@@ -7,11 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import pages.acquisition.commonpages.GlobalWebElements;
+import pages.acquisition.commonpages.WorkingPast65Page;
 
 import java.util.List;
 
-public class ChangingMedicarePlansPage extends GlobalWebElements {
-    public ChangingMedicarePlansPage(WebDriver driver) {
+public class ChangingMedicarePlansPageMobile extends GlobalWebElements {
+    public ChangingMedicarePlansPageMobile(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
         openAndValidate();
@@ -38,10 +40,9 @@ public class ChangingMedicarePlansPage extends GlobalWebElements {
     @Override
     public void openAndValidate() {
         Assert.assertEquals(header.getText(), "Changing Medicare Plans");
-        checkInpageNavigation();
     }
 
-    public void checkInpageNavigation() {
+    /*public void checkInpageNavigation() {
         String lnkText = "";
         for (int i = 0; i < inPageNavigationLinks.size(); i++) {
             if (i != 3)
@@ -54,7 +55,7 @@ public class ChangingMedicarePlansPage extends GlobalWebElements {
         } else {
             Assert.fail("All links not present: " + lnkText);
         }
-    }
+    }*/
 
     public void checkInnerLinks() {
         WebElement lnkWhenChange = driver.findElement(By.xpath("//span[contains(text(),'When can I change Medicare plans?')]"));
@@ -103,13 +104,13 @@ public class ChangingMedicarePlansPage extends GlobalWebElements {
         }
     }
 
-    public WorkingPast65Page clickOnLearnMoreAboutWP65() {
+    public WorkingPast65PageMobile clickOnLearnMoreAboutWP65() {
 
         jsClickNew(lnkLearnMoreMedicareWP65);
         CommonUtility.checkPageIsReadyNew(driver);
         waitForPageLoadSafari();
         if (driver.getCurrentUrl().contains("medicare-education/medicare-while-working.html")) {
-            return new WorkingPast65Page(driver);
+            return new WorkingPast65PageMobile(driver);
         } else {
             return null;
         }
