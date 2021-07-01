@@ -337,7 +337,13 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath = "//img[(@alt='save')]/parent::span")
 	private WebElement saveAPlan;
-
+	
+	@FindBy(xpath = "//button[text()='Save to Mira']")
+	private WebElement btnSaveToMira;
+	
+	@FindBy(xpath = "//button[text()='Import Drugs & Doctors']")
+	private WebElement btnImportDrugsAndDoctors;
+	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -1165,6 +1171,7 @@ public class ComparePlansPage extends UhcDriver {
 			System.out.println("#########No Drugs available for this member#########");
 		}
 
+		Assertion.assertTrue(btnSaveToMira.isDisplayed());
 	}
 
 	/**
@@ -1240,6 +1247,8 @@ public class ComparePlansPage extends UhcDriver {
 		} else {
 			System.out.println("#########No Drugs available for this member#########");
 		}
+		Assertion.assertTrue(btnSaveToMira.isDisplayed());
+		Assertion.assertTrue(btnImportDrugsAndDoctors.isDisplayed());
 	}
 
 	public void allSet(String providers, String drugs) {

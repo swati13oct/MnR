@@ -167,11 +167,6 @@ Feature: 1.09. ACQ- Shopper Profile
     Then the user clicks on Build Drug List to navigate to Build Drug List Page
     Then the user searches and adds the following Drug to Drug List
       | DrugName | <drug1> |
-    Then the user clicks on Review Drug Costs to Land on Zip Entry Page
-    When user enters valid zipcode and county
-      | ZipCode | <zipcode> |
-    And user selects plan year
-    And user clicks on continue button in Zip Entry Page
     And the user clicks on the shopping cart icon on DCE page
     Then the user should be able to see the Drug information in the guest profile page
       | Drugname | <drug1> |
