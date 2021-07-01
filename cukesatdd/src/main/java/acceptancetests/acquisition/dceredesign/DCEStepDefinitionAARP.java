@@ -1662,11 +1662,7 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String Premium = memberAttributesMap.get("Premium");
 		drugDetailsPage.validatePremium(Premium);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
