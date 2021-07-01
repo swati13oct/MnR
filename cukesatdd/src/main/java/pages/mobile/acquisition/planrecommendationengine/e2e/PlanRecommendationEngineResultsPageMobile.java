@@ -1226,7 +1226,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
 		mobileUtils.mobileLocateElement(PDPViewPlansLink);
-		jsClickMobile(PDPViewPlansLink);
+		jsClickNew(PDPViewPlansLink);
 		validate(PDP1stPlanName, 60);
 		mobileUtils.mobileLocateElement(PDP1stPlanEnroll);
 		verifyAPIRankings(PDPPlansId, pdpAPIRankings);
@@ -1238,7 +1238,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
 			mobileUtils.mobileLocateElement(SNPViewPlansLink);
-			jsClickMobile(SNPViewPlansLink);
+			jsClickNew(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
 			mobileUtils.mobileLocateElement(SNP1stPlanEnroll);
 			verifyAPIRankings(SNPPlansId, snpAPIRankings);
@@ -1256,7 +1256,7 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 		if (!checkElemPosition)
 			mobileUtils.mobileLocateElement(footerBackToTopLink);
 		try {//This single JSclick line is enough instead of this method
-			jsClickMobile(footerBackToTopLink);
+			jsClickNew(footerBackToTopLink);
 			//footerBackToTopLink.click();
 			threadsleep(2000);
 		} catch (Exception e) {

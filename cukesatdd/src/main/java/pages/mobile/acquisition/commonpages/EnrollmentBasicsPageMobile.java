@@ -59,7 +59,7 @@ public class EnrollmentBasicsPageMobile extends GlobalWebElements {
 	@FindBy(xpath="//a[contains(@class, 'back-to-top')]")
     private WebElement backToTop;
 	
-	@FindBy(xpath="//a[contains(text(),'Social Security website')]")
+	@FindBy(xpath="//a//span[contains(text(),'Social Security website')]")
 	private WebElement lnkSocialSecurity;
 	
 	@FindBy(xpath = "//a[contains(@href,'ms-apply')]")
@@ -105,15 +105,17 @@ public class EnrollmentBasicsPageMobile extends GlobalWebElements {
 	public void clickONEnrollLink(String plantype, String planName) throws Exception{
 		if(plantype.equals("MAPD") || plantype.equals("MA") || plantype.equals("SNP")){
 			waitforElement(maLeanHowToEnrollLink);
-			maLeanHowToEnrollLink.click();
+			scrollToView(maLeanHowToEnrollLink);
+			jsClickNew(maLeanHowToEnrollLink);
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+//			jsClickNew(EnrollmentLink);
 		}
 		else if(plantype.equals("PDP")){
 			waitforElement(pdpLeanHowToEnrollLink);
-			pdpLeanHowToEnrollLink.click();
+			scrollToView(pdpLeanHowToEnrollLink);
+			jsClickNew(pdpLeanHowToEnrollLink);
 			Thread.sleep(5000);
-			EnrollmentLink.click();
+//			jsClickNew(EnrollmentLink);
 		}		
 	}
 	
@@ -178,19 +180,19 @@ public class EnrollmentBasicsPageMobile extends GlobalWebElements {
 		validateNew(lnkSocialSecurity);
 		scrollToView(lnkSocialSecurity);
 		switchToNewTabNew(lnkSocialSecurity);
-		
 		if(driver.getCurrentUrl().contains("https://www.ssa.gov/benefits/medicare/")) {
 			Assertion.assertTrue(true);
 			System.out.println("Social Security Link open Successfully\tURL: "+driver.getCurrentUrl());
 			sleepBySec(5);
 			driver.close();
+//			driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 			driver.switchTo().window(CommonConstants.getMainWindowHandle());
-			
+
 		}else {
 			Assertion.fail("Social Security Link did not open Successfully");
-		}	
+		}
 	}
-	@FindBy(xpath="//p[contains(text(),'See plans available in your area')]")
+	@FindBy(xpath="//*[contains(text(),'plans available in your area')]")
 	private WebElement lnkSeePlans;
 	
 	public void clickSeePlans() {

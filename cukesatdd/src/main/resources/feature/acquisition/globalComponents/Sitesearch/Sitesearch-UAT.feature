@@ -14,7 +14,7 @@ Feature: 1.08 UAT-Site Search Flows
       | NewSearchValue | <newsearchvalue> |
     Then the user validates pagination and results displayed
 
-    @SiteSearch_AARP_01 @regressionAARP
+    @SiteSearch_AARP_01 @regressionAARP 
     Examples: 
       | Scenario           | site | searchValue     | newsearchvalue                  |
       | E2E Scenario 1_AMP | AARP | Medicare        | Pharmacy                        |

@@ -421,7 +421,7 @@ public class ResultsMobilePage extends UhcDriver {
 					 */
 					// This method is temporary solution
 					try {
-					jsClickMobile(enrollButton);
+					jsClickNew(enrollButton);
 					click = true;
 					}catch(Exception e1) {
 						System.out.println("Warning while clicking Enroll using JS");
@@ -555,7 +555,7 @@ public class ResultsMobilePage extends UhcDriver {
 		System.out.println("Navigate from VPP to PRE using Startnow : ");
 		plansLoader();
 		mobileUtils.mobileLocateElement(SNPPlansTitle);
-		jsClickMobile(PDPViewPlansLink);
+		jsClickNew(PDPViewPlansLink);
 		mobileUtils.mobileLocateElement(startnowButton);
 		mobileUtils.mobileLocateElementClick(startnowButton);
 		pageloadcomplete();
@@ -566,7 +566,7 @@ public class ResultsMobilePage extends UhcDriver {
 		System.out.println("Navigate from VPP to PRE using StartOver : ");
 		plansLoader();
 		mobileUtils.mobileLocateElement(SNPPlansTitle);
-		jsClickMobile(PDPViewPlansLink);
+		jsClickNew(PDPViewPlansLink);
 		mobileUtils.mobileLocateElement(pdpstartoverButton);
 		mobileUtils.mobileLocateElementClick(pdpstartoverButton);
 		modalstartoverButton.click();
@@ -808,7 +808,7 @@ public class ResultsMobilePage extends UhcDriver {
 		}
 		List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON, "PDP");
 		mobileUtils.mobileLocateElement(PDPViewPlansLink);
-		jsClickMobile(PDPViewPlansLink);
+		jsClickNew(PDPViewPlansLink);
 		validate(PDP1stPlanName, 60);
 		mobileUtils.mobileLocateElement(PDP1stPlanEnroll);
 		verifyAPIRankings(PDPPlansId, pdpAPIRankings);
@@ -820,7 +820,7 @@ public class ResultsMobilePage extends UhcDriver {
 		List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON, "SNP");
 		if (snpAPIRankings.size() > 0) {
 			mobileUtils.mobileLocateElement(SNPViewPlansLink);
-			jsClickMobile(SNPViewPlansLink);
+			jsClickNew(SNPViewPlansLink);
 			validate(SNP1stPlanName, 60);
 			mobileUtils.mobileLocateElement(SNP1stPlanEnroll);
 			verifyAPIRankings(SNPPlansId, snpAPIRankings);
@@ -992,7 +992,7 @@ public class ResultsMobilePage extends UhcDriver {
 		if (!checkElemPosition)
 			mobileUtils.mobileLocateElement(footerBackToTopLink);
 		try {//This single JSclick line is enough instead of this method
-			jsClickMobile(footerBackToTopLink);
+			jsClickNew(footerBackToTopLink);
 			//footerBackToTopLink.click();
 			threadsleep(2000);
 		} catch (Exception e) {

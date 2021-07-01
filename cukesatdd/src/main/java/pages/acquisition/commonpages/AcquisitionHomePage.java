@@ -41,8 +41,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	// @FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
-	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
+	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
@@ -3419,6 +3418,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 	}
+	
+	
 
 	public void validateProActiveChatpopupconnect() {
 		driver.navigate().refresh();

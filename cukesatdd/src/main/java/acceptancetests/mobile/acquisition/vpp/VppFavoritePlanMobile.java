@@ -16,6 +16,7 @@ import atdd.framework.UhcDriver;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
+import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 
@@ -43,6 +44,33 @@ public class VppFavoritePlanMobile {
 				plansummaryPage.validateVPPPlanSummaryPage());
 		String SiteName = "AARP_ACQ";
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
+	}
+	
+	@Then("^I land on the plan summary page of VPP$")
+	public void i_land_on_the_plan_summary_page_of_VPP(DataTable planName){
+		
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(planName);
+		/*List<DataTableRow> givenAttributesRow = planName.getGherkinRows();
+		for (int i = 0; i < givenAttributesRow.size(); i++) {
+
+			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+					givenAttributesRow.get(i).getCells().get(1));
+		}*/
+		String plan = givenAttributesMap.get("Plan Name");
+		
+		String enrolledPlan = givenAttributesMap.get("Enrolled Plan Name");
+		
+		String drugs = givenAttributesMap.get("Drugs");
+		String providers = givenAttributesMap.get("Providers");
+		String fname = givenAttributesMap.get("First Name");
+		String lname = givenAttributesMap.get("Last Name");
+		
+	    
+		VPPPlanSummaryPageMobile vppPlanSumamry = (VPPPlanSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		
+		vppPlanSumamry.validateAgentModeBanners(enrolledPlan, drugs, providers, plan,fname,lname);
 	}
 
 	@Then("^user validates selected plans can be saved as favorite$")
@@ -263,6 +291,7 @@ public class VppFavoritePlanMobile {
 		plansummaryPage.validateOnePlanSavedOnePlanUnsaved(snp_savePlanNames, planType);
 	}
 
+	
 	
 	@Then("^user validates saved favorite plans will be stored within same session after zipcode change from Shop For a Plan Page$")
 	public void user_validates_saved_favorite_plans_will_be_stored_within_same_session_after_zipcode_change_from_Shop_For_a_Plan_Page(DataTable givenAttributes) {

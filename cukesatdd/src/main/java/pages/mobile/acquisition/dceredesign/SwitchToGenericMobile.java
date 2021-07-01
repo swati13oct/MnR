@@ -10,6 +10,7 @@ import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
 import pages.acquisition.dceredesign.BuildYourDrugList;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 
 
 public class SwitchToGenericMobile extends UhcDriver {
@@ -141,6 +142,22 @@ public class SwitchToGenericMobile extends UhcDriver {
 		WebElement Drug = driver
 				.findElement(By.xpath("//select[@id='selectdosage']//option[contains(text(), '" + Dosage + "')]"));
 		jsClickNew(Drug);
+	}
+	
+	
+	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	public WebElement reviewDrugCostPageHeading;
+
+	public DrugSummaryPageMobile ClickSwitch_ReturnSummaryPage() {
+		validateNew(AddDrugBtn);
+		jsClickNew(AddDrugBtn);
+		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
+
+		if(validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPageMobile(driver);
+		}
+		Assertion.fail("DCE - Drug Summary Page is not displayed");
+		return null;
 	}
 
 	public void selectPackage(String Package) {

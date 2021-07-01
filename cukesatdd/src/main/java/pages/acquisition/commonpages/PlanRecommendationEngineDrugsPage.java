@@ -244,7 +244,8 @@ public class PlanRecommendationEngineDrugsPage extends GlobalWebElements {
 //		modalGenericSwitchLabel.click();
 		jsClickNew(modalGenericSwitchLabel);
 		threadsleep(2000);
-		jsClickMobile(modalGenericSwitch);
+//		jsClickMobile(modalGenericSwitch);
+		jsClickNew(modalGenericSwitch);
 	}
     
   //Validate Added Drug Name

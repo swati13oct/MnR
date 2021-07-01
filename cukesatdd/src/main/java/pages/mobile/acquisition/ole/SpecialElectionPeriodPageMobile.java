@@ -22,7 +22,7 @@ import pages.mobile.acquisition.commonpages.ProposedEffectiveDatePageMobile;
  * @author sdwaraka
  *
  */
-public class SpecialElectionPeriodPagemobile extends UhcDriver {
+public class SpecialElectionPeriodPageMobile extends UhcDriver {
 
 	// OLE Common Elements
 	@FindBy(xpath = "//*[@class = 'logo']//img")
@@ -31,7 +31,6 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	@FindBy(id = "ole-form-next-button")
 	private WebElement NextBtn;
 
-	
 	@FindBy(xpath = "//*[@id='new']")
 	private WebElement trial;
 	
@@ -149,7 +148,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(text(),'new to Medicare')]/parent::span/input")
 	private WebElement pedHeader1;
 
-	@FindBy(xpath = "(//input[@id='changing']")
+	@FindBy(xpath = "//input[@id='changing']")
 	private WebElement ChangingCurrentMedicareRadio;
 
 	@FindBy(xpath = "//input[@id='new']")
@@ -165,7 +164,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	@FindBy(xpath = "(//input[@name='specialElectionQtsn'])[1]/parent::span/label")
 	private WebElement NewMedicare;
 
-	public SpecialElectionPeriodPagemobile(WebDriver driver) {
+	public SpecialElectionPeriodPageMobile(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
 		openAndValidate();
@@ -173,7 +172,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 
 	@Override
 	public void openAndValidate() {
-		CommonUtility.waitForPageLoadNew(driver, SEPPageHeader, 30);
+		validateNew(SEPPageHeader, 30);
 		System.out.println("Page header is Displayed : " + SEPPageHeader.getText());
 
 	}
@@ -295,16 +294,10 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 
 	public boolean validate_SEPoptions_for_planType(String planType) {
 		
-		if(medicareInsuranceInformation.isDisplayed()) {
-			NextBtn.click();
-		}
-		
-		
-			
 		boolean Validation_Flag = true;
-		scrollToView(ChangingNewMedicareRadio);
 		if (ChangingNewMedicareRadio.isDisplayed()) {
-			jsClickMobile(ChangingNewMedicareRadio);
+			scrollToView(ChangingNewMedicareRadio);
+			jsClickNew(ChangingNewMedicareRadio);
 			if (!validate(OtherReason) && validate(NoneApply)) {
 				System.out.println("New Medicare Options is working in SEP page OLE flow : Validation Passed");
 				Validation_Flag = true;
@@ -315,7 +308,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		}
 
 		ChangingCurrentMedicareRadio.isDisplayed();
-		jsClickMobile(ChangingCurrentMedicareRadio);
+		jsClickNew(ChangingCurrentMedicareRadio);
 
 		System.out.println("PlanType : " + planType);
 		try {
@@ -324,7 +317,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 			e.printStackTrace();
 		}
 		// validateNew(ChangingCurrentMedicareRadio);
-		// jsClickMobile(ChangingCurrentMedicareRadio);
+		// jsClickNew(ChangingCurrentMedicareRadio);
 		// ChangingCurrentMedicareRadio.click();
 		if (planType.contentEquals("MA")) {
 			if (validate(OtherReason) && validate(NoneApply) && validate(LosingCoverage_Employer)
@@ -401,7 +394,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public CoverageInformationPageMobile navigate_to_Coverage_Information_page() {
 
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		/*
 		 * JavascriptExecutor executor = (JavascriptExecutor)driver;
 		 * executor.executeScript("arguments[0].click();", NextBtn);
@@ -414,11 +407,12 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		return null;
 	}
 
-	public SpecialElectionPeriodPagemobile select_option_and_enter_data(String selectoptions, String optionsData) {
+	public SpecialElectionPeriodPageMobile select_option_and_enter_data(String selectoptions, String optionsData) {
 		String[] options = selectoptions.split("/");
 		String[] optiondata = optionsData.split("/");
 		int i=0;
 		boolean Option_Selected_Flag = true;
+		jsClickNew(ChangingCurrentMedicareRadio);
 		for(String currentOption : options){
 			System.out.println("Option to select : "+currentOption);
 	/*		if(currentOption.contains("None apply")){
@@ -433,7 +427,8 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 			}*/
 			try {
 				WebElement currentOptionChkBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//preceding-sibling::input"));
-				currentOptionChkBx.click();
+//				currentOptionChkBx.click();
+				jsClickNew(currentOptionChkBx);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("Not able to select option");
@@ -445,14 +440,15 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 				try {
 					WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//input"));
 					if(validate(dataTextBx))
-						dataTextBx.sendKeys(currentOptionData);
+						sendkeysMobile(dataTextBx, currentOptionData);
+//						dataTextBx.sendKeys(currentOptionData);
 				} 
 				catch (Exception e) {
 				}
 				try {
 					WebElement dataTextBx = driver.findElement(By.xpath("//*[contains(text(), '"+currentOption+"')]//..//*[@class='subquestionfield']//textarea"));
 					if(validate(dataTextBx))
-							dataTextBx.sendKeys(currentOptionData);
+						sendkeysMobile(dataTextBx, currentOptionData);
 				} catch (Exception e) {
 					System.out.println("No additional data required for Option selected");
 				}
@@ -463,7 +459,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		if(NextBtn.isEnabled()){
 			System.out.println("SEP options selection Status :  "+Option_Selected_Flag);
 			System.out.println("SEP options selected :  Next button is enabled");
-			return new SpecialElectionPeriodPagemobile(driver);
+			return new SpecialElectionPeriodPageMobile(driver);
 		}
 
 		return null;
@@ -474,7 +470,7 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 	public ProposedEffectiveDatePageMobile navigate_to_Proposed_Effective_Date_Page() {
 
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		waitForPageLoadSafari();
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
@@ -500,11 +496,11 @@ public class SpecialElectionPeriodPagemobile extends UhcDriver {
 		Validation_Flag &= NewMedicare.getText().trim()
 				.equalsIgnoreCase("I'm new to Medicare and enrolling for the first time");
 		// System.out.println("SEP plan is Clicked on the " +NewMedicareRadio);
-		jsClickMobile(ChangingNewMedicareRadio);
+		jsClickNew(ChangingNewMedicareRadio);
 
 		CommonUtility.waitForPageLoadNew(driver, NextBtn, 10);
 		// validateNew(NextBtn);
-		// jsClickMobile(NextBtn);
+		// jsClickNew(NextBtn);
 
 		return Validation_Flag;
 	}
