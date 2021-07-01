@@ -312,7 +312,7 @@ public class VisitorProfilePage extends UhcDriver {
 					savedDrugsAndDoctorsHeader.getText().trim());
 			Assertion.assertTrue(pharmacyAddress.isDisplayed());
 		}*/
-        CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
+        //CommonUtility.waitForPageLoad(driver, pharmacyAddress, 10);
         Assertion.assertTrue((drugHeader.getText().trim().contains("Your Saved Drugs (1) & Pharmacy")));
         //Assertion.assertEquals("Your Saved Drugs (1) & Pharmacy §", drugHeader.getText().trim());
         jsClickNew(drugHeader);
