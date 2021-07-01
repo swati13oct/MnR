@@ -74,7 +74,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user selects payment type
       | Payment Type           | <paymentType>         |
@@ -97,7 +97,7 @@ Feature: 1.10 <----UAT Scripts OLE common tool flow E2E- MA,MAPD,DSNP,ExternalLi
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-   # Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
    # Then the user validates the OLE Submission Details in GPS
@@ -211,7 +211,7 @@ Then the user validates the Plan details on OLE
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-   # Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
    #Then the user validate on Review Page and click on Edit information for Medicare Information Page
      # | Medicare Number1 | <medicarenumber1> |
     #  | Card Type        | <cardtype>        |
@@ -309,7 +309,7 @@ Then the user validates the Plan details on OLE
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user selects payment type
       | Payment Type           | <paymentType>         |
@@ -332,7 +332,7 @@ Then the user validates the Plan details on OLE
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-   # Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
     Then the user Validates Next Steps in Confirmation Page for the Plan Type.
    # Then the user validates the OLE Submission Details in GPS
@@ -343,7 +343,7 @@ Then the user validates the Plan details on OLE
   @OLE_Redesign
     Examples: 
       | Scenario                                        | site | PlanType | path                                                                                                                                                                                                                                   | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planyear | planName                              | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | emailConfirmation | goGreen | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber | rxBinnumber|inputdataType | medicarenumber1 |middlename         | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
-      | E2E Scenario_UMS External Link (Deep link ) PST | UHC  | MA-MBI   | /health-plans/medicare-advantage-plans/available-plans.html?zipcode=55344&WT.mc_id=8002977&county=260&state=27&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary | future   | future   |   55344 | NO              | Hennepin County | MA       | future   | AARP Medicare Advantage Patriot (PPO) | MBI      | TEST_PORTALS_GOTTFRIED | TEST_PORTALS_GARRAND  | 5N69QY6ET21    | false   |  09011997 |  11012002 |     0123456789 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | Yes                    | [blank]       | [blank]     | MN           |      55344 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | false     | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |567890| Valid         | 5N69QY6ET32     |Test_MiddleName    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+      | E2E Scenario_UMS External Link (Deep link ) PST | UHC  | MA-MBI   | /health-plans/medicare-advantage-plans/available-plans.html?zipcode=55344&WT.mc_id=8002977&county=260&state=27&coveragePerson=M&originatingSite=https%253A%252F%252Fwww.myuhcplans.com%252Fmorganstanley&subdomain=group#/plan-summary | future   | future   |   55344 | NO              | Hennepin County | MA       | future   | AARP Medicare Advantage Patriot (PPO) | MBI      | TEST_PORTALS_GOTTFRIED | TEST_PORTALS_GARRAND  | 5N69QY6ET21    | false   |  09011997 |  11012002 |     0123456789 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                    | 155 2nd ave	       | Minneapolis    | MN           |      55344 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | yes          | false     | NO                | NO      | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |567890| Valid         | 5N69QY6ET32     |Test_MiddleName    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 
   Scenario Outline: TID: <Scenario> -OLE End to end from VPP Plan Summary for <plantype> Plans
     Given the user is on medicare acquisition site landing page
@@ -414,7 +414,7 @@ Then the user validates the Plan details on OLE
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
     Then the user validates PCP page for MA and MAPD PFFS plans
-    #Then the user validates Look up Provider for MA MAPD and DSNP plans.
+    Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user selects payment type
       | Payment Type           | <paymentType>         |
@@ -437,7 +437,7 @@ Then the user validates the Plan details on OLE
     Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-   # Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
       #Then the user validate on Review Page and click on Edit information for Medicare Information Page
      # | Medicare Number1 | <medicarenumber1> |
      # | Card Type        | <cardtype>        |
@@ -451,12 +451,12 @@ Then the user validates the Plan details on OLE
   @OLE_Redesign
     Examples: 
       | Scenario                 | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county             | plantype | planName                        | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen | prescriptioncoveragename | pdgroupnumber | pdmembernumber | rxBinnumber|inputdataType | medicarenumber1 | middlename         | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno |authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
-      | PDP- E2E Scenario 1_AARP | AARP | PDP-MBI  | future   | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK10    | false   |  11012015 |  11012015 |     0123456789 | false    | 01011988 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |567890| InValid       | 5N69QY6ET32     |Test_MiddleName    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+      | PDP- E2E Scenario 1_AARP | AARP | PDP-MBI  | future   | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK10    | false   |  11012015 |  11012015 |     0123456789 | false    | 01011988 | Female | 002 Morris Rd | Los Angeles | No                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      | PrescriptionCoverage     | PD5646136     | BCD12345EFG    |567890| InValid       | 5N69QY6ET32     |Test_MiddleName    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 
   @OLE_Redesign
     Examples: 
       | Scenario                | site | PlanType | planyear | planYear | zipcode | isMultutiCounty | county             | plantype | planName                        | cardtype | firstname | lastname | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata              | pdpFlag | longTermFlag | riderflag | DentalFlag | VisionFlag | FitnessFlag | HearingFlag | emailConfirmation | goGreen | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber| inputdataType | medicarenumber1 |middlename         | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
-      | PDP- E2E Scenario 1_UHC | UHC  | PDP-MBI  | future   | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK11    | false   |  11012015 |  11012015 |     0123456789 | false    | 01011988 | Female | 002 Morris Rd | Los Angeles | Yes                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 357456|InValid       | 5N69QY6ET32     |Test_MiddleName    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
+      | PDP- E2E Scenario 1_UHC | UHC  | PDP-MBI  | future   | future   |   90210 | NO              | Los Angeles County | PDP      | AARP MedicareRx Walgreens (PDP) | MBI      | TEST_PORTALS_John      | TEST_PORTALS_Doe      | 3A33C22YK11    | false   |  11012015 |  11012015 |     0123456789 | false    | 01011988 | Female | 002 Morris Rd | Los Angeles | No                    | 802 MailingSt | Mailing LA  | CA           |      90210 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / / | yes     | no           | false     | NA         | NA         | NA          | NA          | NO                | NO      | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 357456|InValid       | 5N69QY6ET32     |Test_MiddleName    | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | Pay By Mail | [blank] | [blank]             | [blank]            |
 
   Scenario Outline: TID: <Scenario> -OLE End to end from VPP Plan Summary for <plantype> Plans
     Given the user is on medicare acquisition site landing page
@@ -572,7 +572,7 @@ Then the user validates the Plan details on OLE
 	   Then the user validates Statement of Understanding Page
       | soAAgree          | <authorizationagree>    |
     Then the user navigates to Review and Submit Page
-   # Then the user validates the Online Enrollment details on Review and Submit Page
+    Then the user validates the Online Enrollment details on Review and Submit Page
     Then the user clicks on Submit Enrollment to complete enrollment
    # Then the user validates the OLE Submission Details in GPS
      # | Plan Type                | <plantype>               |
