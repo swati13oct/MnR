@@ -120,12 +120,12 @@ Feature: 1.12 ACQ - Global Components Validation
     @ShopPlan_Shop1_GlobalCompsAARP @avengersRegressionAARP
     Examples: 
       | site | path                            | pageName                    | tfnXpath                                                                                  | tfnFlag |
-      | AARP | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]                       | true    |
-      | AARP | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5]                       | true    |
-      | AARP | shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]                            | true    |
-      | AARP | shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]                            | false   |
-      | AARP | shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]                            | false   |
-      | AARP | shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]                            | false   |
+      | AARP | shop.html                       | ShopPlan: Shop              | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                     | true    |
+      | AARP | shop.html                       | ShopPlan: Shop              | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                          | true    |
+      | AARP | shop/connect                    | ShopPlan: Request more Info | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                               | true    |
+      | AARP | shop/compare.html               | ShopPlan: Compare           | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                              | false   |
+      | AARP | shop/estimate.html              | ShopPlan: Estimate          | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                             | false   |
+      | AARP | shop/switch.html                | ShopPlan: Switch            | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                               | false   |
       | AARP | shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//div[@ng-show='medSupTfn']//a[contains(@class, 'tel tfn')] | true    |
       | AARP | shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//div[@ng-show='medSupTfn']//a[contains(@class, 'tel tfn')] | true    |
       | AARP | shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//div[@ng-show='fedTfn']//a[contains(@class, 'tel tfn')]    | true    |
@@ -134,12 +134,12 @@ Feature: 1.12 ACQ - Global Components Validation
     @ShopPlan_Shop1_GlobalCompsUHC @avengersRegressionUHC
     Examples: 
       | site | path                            | pageName                    | tfnXpath                                                                                  | tfnFlag |
-      | UHC  | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[1]                       | true    |
-      | UHC  | shop.html                       | ShopPlan: Shop              | (//*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')])[5]                       | true    |
-      | UHC  | shop/connect                    | ShopPlan: Request more Info | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]                            | true    |
-      | UHC  | shop/compare.html               | ShopPlan: Compare           | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]                            | false   |
-      | UHC  | shop/estimate.html              | ShopPlan: Estimate          | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]                            | false   |
-      | UHC  | shop/switch.html                | ShopPlan: Switch            | //*[contains(@class,'callus')]//a[contains(@class, 'tel tfn')]                            | false   |
+      | UHC  | shop.html                       | ShopPlan: Shop              | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                        | true    |
+      | UHC  | shop.html                       | ShopPlan: Shop              | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                     | true    |
+      | UHC  | shop/connect                    | ShopPlan: Request more Info | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                             | true    |
+      | UHC  | shop/compare.html               | ShopPlan: Compare           | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                            | false   |
+      | UHC  | shop/estimate.html              | ShopPlan: Estimate          | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                            | false   |
+      | UHC  | shop/switch.html                | ShopPlan: Switch            | //*[@id='sam-call-button']//*[contains(@class, 'desktop-tfn')]                           | false   |
       | UHC  | shop/compare/compare-ms.html    | ShopPlan: Compare           | //*[contains(@class,'callus')]//div[@ng-show='medSupTfn']//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | shop/estimate/ms-costs.html     | ShopPlan: Estimate          | //*[contains(@class,'callus')]//div[@ng-show='medSupTfn']//a[contains(@class, 'tel tfn')] | true    |
       | UHC  | shop/compare/compare-ma-ms.html | ShopPlan: Compare           | //*[contains(@class,'callus')]//div[@ng-show='fedTfn']//a[contains(@class, 'tel tfn')]    | true    |
