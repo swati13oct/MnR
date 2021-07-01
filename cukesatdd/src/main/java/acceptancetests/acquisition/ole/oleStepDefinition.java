@@ -3417,7 +3417,7 @@ public class oleStepDefinition {
 	
 	}
 	
-	@Then("^the user validates the Plan details on OLE_CSNP Plans$")
+	@Then("^the user validates the Plan details on OLE CSNP Plans$")
 	public void the_user_validates_the_Plan_details_on_OLE_CSNP() throws Throwable {
 	//	scenario.log("Sai - Change made 06/15 - Validate planname, year,zipcode,county,premium");
 		WelcomePage welcomePage = (WelcomePage) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
