@@ -75,7 +75,7 @@ public class ProposedEffectiveDatePage extends UhcDriver{
 	public boolean validate_proposed_effective_date_options(){
 		boolean validation_Flag = true;
 		validate(ProposedEffectiveDatePageHeader);
-		jsClickNew(ProposedEffectiveDatePageHeader);
+	//	jsClickNew(ProposedEffectiveDatePageHeader);
 		try {
 			Thread.sleep(6000);
 		} catch (InterruptedException e) {
