@@ -864,6 +864,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
+		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
@@ -964,11 +965,13 @@ public class DrugDetailsPage extends UhcDriver {
 	public void clickOnvppPlan() {
 		validateNew(backtoSummaryBtn);
 		backtoSummaryBtn.click();
+        pageloadcomplete();
 	}
 
 	public void clickOnvppPlanDetails() {
 		validateNew(viewPlanBtn);
 		viewPlanBtn.click();
+        pageloadcomplete();
 
 		validate(backToPlan);
 		assertTrue("Drug Cost Estimator is Displaying", !backtoDrugEstBtn.isDisplayed());
@@ -978,6 +981,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public PlanDetailsPage clickReturnToDetailsLink() {
 		validateNew(returnToDetailsLink);
 		jsClickNew(returnToDetailsLink);
+        pageloadcomplete();
 
 		return new PlanDetailsPage(driver);
 	}
