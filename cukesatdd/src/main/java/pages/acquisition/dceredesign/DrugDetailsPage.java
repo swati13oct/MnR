@@ -374,8 +374,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "inValidZipcodeLbl")
 	private WebElement invalidZipCodeMsg;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
-
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
 	@FindBy(xpath = "(//a[contains(@class,'uhc-link-button')])[3]")
@@ -1504,8 +1503,8 @@ public class DrugDetailsPage extends UhcDriver {
 		List<WebElement> PharmacyName = driver
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
-
-		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
+		jsClickNew(PharmacyName.get(0));
+//		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
