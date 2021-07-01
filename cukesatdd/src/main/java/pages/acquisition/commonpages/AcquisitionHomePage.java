@@ -43,7 +43,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 
 //	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(xpath = "//div[contains(@style, 'display: block;')]//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 
 	private WebElement zipCodeField;
 
@@ -233,7 +233,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// contains(@id,'zipcodebtn')]"
 
 //	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
-	@FindBy(xpath = "//*[contains(@style, 'display: block;')]//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
