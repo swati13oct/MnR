@@ -1171,9 +1171,10 @@ public class DrugSummaryPage extends UhcDriver {
 	}
 	
     public void validateLISBanner_LISBuydownPlan_DrugSummary(String planName) {
-    	WebElement LISBanner = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'level of Extra Help')]"));
+		pageloadcomplete();
+    	WebElement LISBanner = driver.findElement(By.xpath("//h4//span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'level of Extra Help')]"));
     	if(validateNew(LISBanner)){
-    		WebElement ExtraHelpLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'Learn more')]"));
+    		WebElement ExtraHelpLink = driver.findElement(By.xpath("//h4//span[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'Learn more')]"));
     		System.out.println("Clicking on learn more about extra help link");
     		switchToNewTabNew(ExtraHelpLink);
     		CommonUtility.checkPageIsReadyNew(driver);
