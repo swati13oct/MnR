@@ -35,6 +35,8 @@ import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -81,6 +83,12 @@ public class VppCommonStepDefinition {
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
 	 */
+private Scenario scenario;
+	
+	@Before
+	public void before(Scenario scenario) {
+		this.scenario = scenario;
+	}
 
 //	@Given("^the user is on medicare acquisition site landing page$")
 //	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
@@ -106,6 +114,7 @@ public class VppCommonStepDefinition {
 
 	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
 	public void the_user_on__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
+		scenario.log("Sai - 06/15------Need to remove  line 135 later");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
@@ -123,8 +132,10 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
 
 		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+		if (!(MRScenario.environment.equalsIgnoreCase("team-acme"))){
 		if (site.equalsIgnoreCase("AARP")) 
 		aquisitionhomepage.validateSubtitle();
+		}
 	}
 	@When("^the user performs plan search using following information$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
