@@ -620,8 +620,8 @@ public class DrugSummaryPage extends UhcDriver {
 		List<WebElement> PharmacyName = driver
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
-
-		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
+		jsClickNew(PharmacyName.get(0));
+//		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
@@ -1287,4 +1287,26 @@ public class DrugSummaryPage extends UhcDriver {
 		}
 		System.out.println("All Pharmacy have filter text");
 	}
+
+    @FindBy(xpath = "//button[contains(@dtmname, 'drug pricing:edit drug list')]")
+    public WebElement DrugPricingModal_EditDrugs;
+
+    @FindBy(xpath = "//input[contains(@id, 'drugsearch')]")
+    public WebElement EnterDrugNameTxt;
+
+    @FindBy(xpath = "//button[(@id= 'search')]")
+    public WebElement SearchBtn;
+
+    public BuildYourDrugList clickEditDrugs_DrugPricingModal() {
+        pageloadcomplete();
+        validateNew(DrugPricingModal_EditDrugs);
+        jsClickNew(DrugPricingModal_EditDrugs);
+        waitForPageLoadSafari();
+        CommonUtility.waitForPageLoadNew(driver, EnterDrugNameTxt, 20);
+        if (validateNew(EnterDrugNameTxt) && validateNew(SearchBtn)) {
+            return new BuildYourDrugList(driver);
+        }
+        Assertion.fail("Did not Navigate to Build Drug List Page");
+        return null;
+    }
 }

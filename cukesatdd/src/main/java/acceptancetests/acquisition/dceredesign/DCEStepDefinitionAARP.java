@@ -2653,13 +2653,7 @@ public class DCEStepDefinitionAARP {
 	public void the_user_applies_pharmacy_filter_for_following_text_on_Summary_page_Change_Pharmacy_Page(DataTable attributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		String FilterText = memberAttributesMap.get("PharmacyFilterText");		
+		String FilterText = memberAttributesMap.get("PharmacyFilterText");
 		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
 		drugSummaryPage.ApplyPharmacyFilter(FilterText);
 	}
@@ -2739,12 +2733,6 @@ public class DCEStepDefinitionAARP {
 	throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow =attributes.getGherkinRows();
-		for(int i=0 ; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0) ,
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		
 		GetStartedPage drugDetailsPage = new GetStartedPage(driver);
 		boolean isDrugDetails = drugDetailsPage.homeLinkIsVisibleAndClicked();
 		if(isDrugDetails)
@@ -2758,12 +2746,6 @@ public class DCEStepDefinitionAARP {
 	public void user_is_on_Yahoo_and_search_AARP_Medicare_Advantage_Plan_to_navigate_to_AARP_page(DataTable attributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
-		/*List<DataTableRow> memberAttributesRow = attributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
 		String searchParameter = memberAttributesMap.get("searchParameter");
 		String searchengine = memberAttributesMap.get("searchengine");
 		WebDriver wd = getLoginScenario().getWebDriverNew();
@@ -2779,10 +2761,7 @@ public class DCEStepDefinitionAARP {
 			dcepage.openUrl(url);
 			dcepage.googleSearch(searchParameter);
 		}
-		
-
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, dcepage);
-
 	}
 
 	@Then("^the user validates default view for Plan Effective Date$")
@@ -2949,6 +2928,25 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
+    @Then("the user clicks on Edit Drug list link on View Drug pricing modal")
+    public void the_user_clicks_on_edit_drug_list_link_on_view_drug_pricing_modal() {
+		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
+		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
+
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+        BuildYourDrugList buildDrugListPage = drugSummaryPage.clickEditDrugs_DrugPricingModal();
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugListPage);
+    }
+    @Then("the user clicks on Review Button on Build Drug Page to land on DCE Summary page")
+    public void the_user_clicks_on_review_button_on_build_drug_page_to_land_on_dce_summary_page() {
+		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
+		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: step added to @dce_DrugSummary_Page or @dce_MedEdPage_E2E_Scenario4_UAT");
+		BuildYourDrugList buildDrugListPage = (BuildYourDrugList) getLoginScenario().getBean(PageConstants.DCE_Redesign_BuildDrugList);
+        DrugSummaryPage drugSummaryPage = buildDrugListPage.navigateToDrugSummaryPage();
+        drugSummaryPage.validateDrugSummaryPage();
+        getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+    }
+
 	@When("user enters valid zipcode and county for Multi county as follows")
 	public void user_enters_valid_zipcode_and_county_for_multi_county_as_follows(io.cucumber.datatable.DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
@@ -3028,7 +3026,5 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDefStandard_Deductible(deductible);
 	}
-
-
 
 }

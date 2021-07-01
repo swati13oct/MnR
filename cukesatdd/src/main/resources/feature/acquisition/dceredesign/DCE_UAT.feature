@@ -93,6 +93,18 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     Then the user validates PLan Toggle on Drug Summary Page
+    And user click on View Drug Pricing Modal
+    And the user clicks on Edit Drug list link on View Drug pricing modal
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user clicks on Review Button on Build Drug Page to land on DCE Summary page
+    And user click on PDP plan to view drug pricing
+    And the user clicks on Edit Drug list link on View Drug pricing modal
+    Then the user deletes the following drug from Drug list
+      | DrugName | <drug2> |
+    Then the user clicks on Review Button on Build Drug Page to land on DCE Summary page
+    And user click on View Drug Pricing Modal
+    And user verifies Drug List on DCE Summary Page - Drug Pricing Modal
     And user clicks on change pharmacy link from summary page
     Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
       | PharmacyZipCode | <pharmacyZipCode> |
@@ -119,13 +131,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
     @dce_MedEdPage_E2E_Scenario4_UAT_AARP @regressionAARP
     Examples: 
-      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
-      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
+      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
+      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt | Emsam |  80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
     @dce_MedEdPage_E2E_Scenario4_UAT_UHC @regressionUHC
     Examples: 
-      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
-      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
+      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
+      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam |  80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
   @dce_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link
