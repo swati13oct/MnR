@@ -148,7 +148,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'State')]//following-sibling::*")
 	private WebElement DisclosureProviderState;
 	
-	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'Zip')]//following-sibling::*")
+	@FindBy(xpath = "//*[contains(text(), 'Use and Disclosure Authorization')]/ancestor::*[contains(@class, 'review-step')]//*[contains(text(), 'ZIP')]//following-sibling::*")
 	private WebElement DisclosureProviderZipcode;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Provider Phone Number')]//following-sibling::*")
