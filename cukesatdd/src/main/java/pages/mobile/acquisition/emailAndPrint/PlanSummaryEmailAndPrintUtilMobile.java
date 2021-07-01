@@ -64,7 +64,7 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 				"PROBLEM - header text for the email popup screen is not as expected.  Expecte='"
 						+ expectedEmailBoxHeader + "' | Actual='" + actualEmailBoxHeader + "'",
 				expectedEmailBoxHeader.equals(actualEmailBoxHeader));
-		iosScroll(emailPlanSummaryFieldBox);
+		scrollToView(emailPlanSummaryFieldBox);
 		Assertion.assertTrue(
 				"PROBLEM - unable to locate email field box on email popup screen after email link is clicked",
 				validate(emailPlanSummaryFieldBox));
@@ -83,7 +83,8 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		System.out.println("Proceed to validate email popup screen for send option for failure case 1");
 		emailButton.click();
 		String testEmailAddresss = "bademailformat";
-		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		//emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
 		emailPlanSummarySendButton.click();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
@@ -100,7 +101,8 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		testEmailAddresss = "bademailformat@";
 		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
-		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		//emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
 		emailPlanSummarySendButton.click();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
@@ -117,7 +119,8 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		testEmailAddresss = "bademailformat@test.";
 		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
-		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		//emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
 		emailPlanSummarySendButton.click();
 
 		Assertion.assertTrue("PROBLEM - unable to locate email field box after email address validation failed",
@@ -135,7 +138,8 @@ public class PlanSummaryEmailAndPrintUtilMobile extends EmailAndPrintUtilBaseMob
 		testEmailAddresss = "test@optum.com";
 		emailPlanSummaryFieldBox.sendKeys(Keys.CONTROL + "a");
 		emailPlanSummaryFieldBox.sendKeys(Keys.DELETE);
-		emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		//emailPlanSummaryFieldBox.sendKeys(testEmailAddresss);
+		sendkeysMobile(emailPlanSummaryFieldBox, testEmailAddresss);
 		jsClickNew(emailPlanSummarySendButton);
 		Assertion.assertTrue("PROBLEM - uable to locate success message after clicking send button",
 				validate(emailPlanSummarySuccessText, 15));

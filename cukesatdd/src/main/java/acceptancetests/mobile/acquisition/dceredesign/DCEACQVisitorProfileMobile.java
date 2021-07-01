@@ -81,7 +81,7 @@ public class DCEACQVisitorProfileMobile {
 	
 	@Then("^the user searches and adds the following Drug to Drug List$")
 	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+	Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
