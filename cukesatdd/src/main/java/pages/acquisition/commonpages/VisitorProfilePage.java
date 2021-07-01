@@ -320,7 +320,7 @@ public class VisitorProfilePage extends UhcDriver {
         Assertion.assertEquals("Drugs (1) & Pharmacy", savedDrugsHeader.getText().trim());
         Assertion.assertEquals("Saved Drugs (1) & Pharmacy | Doctors & Providers (0)",
                 savedDrugsAndDoctorsHeader.getText().trim());
-        Assertion.assertTrue(pharmacyAddress.isDisplayed());
+        //Assertion.assertTrue(pharmacyAddress.isDisplayed());
     }
     
 
