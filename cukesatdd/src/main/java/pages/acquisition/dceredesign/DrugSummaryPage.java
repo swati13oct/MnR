@@ -901,11 +901,13 @@ public class DrugSummaryPage extends UhcDriver {
 //		returnToPlanSummaryLink.click();
 		jsClickNew(returnToPlanSummaryLink);
 		waitForPageLoadSafari();
+		pageloadcomplete();
 	}
 
 	public void clickReturnToHomePage() {
 //		returnToHomePageLink.click();
 		jsClickNew(returnToHomePageLink);
+		pageloadcomplete();
 		waitForPageLoadSafari();
 	}
 
@@ -997,6 +999,7 @@ public class DrugSummaryPage extends UhcDriver {
 	public static String selectedPharmacyName;
 
 	public void saveAndUpdatePharmacy() {
+	    pageloadcomplete();
 		firstPharmacySelectBtn.click();
 		selectedPharmacyName = pharmacyNameSelected.getText();
 		System.out.println(selectedPharmacyName);
@@ -1114,6 +1117,7 @@ public class DrugSummaryPage extends UhcDriver {
 		pharmacyZipcodeSearch.clear();
 		pharmacyZipcodeSearch.sendKeys(zipcode);
 		pharmacySearchBtn.click();
+		pageloadcomplete();
 	}
 
 	public void validateNoResultsMsg(String expectedMsg) {
