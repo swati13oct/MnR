@@ -346,15 +346,20 @@ public class oleStepDefinition {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
 		
-		String PlanName = givenAttributesMap.get("Plan Name");
+		String PlanName = givenAttributesMap.get("Plan Name");		
+		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
+		String PlanPremium = "";
+		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
+		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		/*	String PlanName = givenAttributesMap.get("Plan Name");
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
-
 		String ZipCode = givenAttributesMap.get("Zip Code");
+		
 		//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = "";
-		//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
-		String PlanPremium = "";
+		String County =(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		String PlanPremium = "";*/
 		//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		WelcomePage welcomePage;
 		if(PlanType.contains("MAPD")){
@@ -375,7 +380,8 @@ public class oleStepDefinition {
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
 		// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
-
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		
 		System.out.println("Plan Name is : " + PlanName);
 		System.out.println("Plan Type is : " + PlanType);
 		System.out.println("Plan Zip Code is : " + ZipCode);
