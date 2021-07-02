@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
+import org.testng.Assert;
 
 public class CostBasicsPageMobile extends GlobalWebElements {
 
@@ -82,40 +83,41 @@ public class CostBasicsPageMobile extends GlobalWebElements {
 	}
 
 	public void navigatesExtraLinks() {
-		WebElement lnkDrugCost=driver.findElement(By.xpath("(//a[contains(@href,'extra-help-program')])[4]"));
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement lnkDrugCost=driver.findElement(By.xpath("//a[contains(@href,'extra-help-program')]"));
 		validateNew(lnkDrugCost);
 		jsClickNew(lnkDrugCost);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("medicare-education/extra-help-program.html")) {
+		if(driver.getCurrentUrl().contains("medicare-education-classic/extra-help-program-classic")) {
 			System.out.println("Extra Help with Medicare Prescription Drug Costs Page Displayed");
 		}else{
-			System.out.println("Extra Help with Medicare Prescription Drug Costs Page Not Displayed");
+			Assert.fail("Extra Help with Medicare Prescription Drug Costs Page Not Displayed");
 		}
 		driver.navigate().back();
-		
+
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkMedicaid=driver.findElement(By.xpath("(//a[contains(@href,'medicaid-dual')])[3]"));
+		WebElement lnkMedicaid=driver.findElement(By.xpath("//a[contains(@href,'medicaid-dual')]"));
 		validateNew(lnkMedicaid);
 		jsClickNew(lnkMedicaid);
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		if(driver.getCurrentUrl().contains("medicare-education/medicare-medicaid-dual-eligibility.html")) {
+		if(driver.getCurrentUrl().contains("medicare-education-classic/medicare-medicaid-dual-eligibility-classic")) {
 			System.out.println("Medicare, Medicaid and Dual Eligibility Page Displayed");
 		}else{
-			System.out.println("Medicare, Medicaid and Dual Eligibility Page Not Displayed");
+			Assert.fail("Medicare, Medicaid and Dual Eligibility Page Not Displayed");
 		}
 		driver.navigate().back();
-		
+
 	}
 
 	public void navigatesToMedicareSaving() {
-		
+
 		CommonUtility.checkPageIsReadyNew(driver);
-		WebElement lnkSavings=driver.findElement(By.xpath("//a[contains(text(),'Find out if you qualify for a Medicare Savings Pro')]"));
+		WebElement lnkSavings=driver.findElement(By.xpath("//span[contains(text(),'Find out if you qualify for Medicare Savings Pro')]"));
 		validateNew(lnkSavings);
-		switchToNewTabNew(lnkSavings);		
+		switchToNewTabNew(lnkSavings);
 		CommonUtility.checkPageIsReadyNew(driver);
 		sleepBySec(5);
 		String urlCheck="https://www.medicare.gov/your-medicare-costs/get-help-paying-costs/medicare-savings-programs";
@@ -128,6 +130,7 @@ public class CostBasicsPageMobile extends GlobalWebElements {
 			Assertion.fail("Medicare Saving Link did not open successfully");
 		}
 		driver.close();
+//		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 		driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
 	}		
