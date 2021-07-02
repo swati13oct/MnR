@@ -1,9 +1,10 @@
-@planRecommendationEngine
+@PlanRecommendationEngine
 Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommendation Engine
 
-  @PRE @planrecommendation @resultspage @resultspageselection @F384284
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <Drug Selection> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Elements of Results Page in Plan Recommendation Engine
-    Given the user is on UHC medicare acquisition site landing page
+  @PRE @resultspage @resultspageselection @F384284
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <isCoverageOpt> , <specialNeeds> , <doctors> , <Drug Selection>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Elements of Results Page in Plan Recommendation Engine
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
@@ -13,8 +14,6 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
       | Plan Type | <isCoverageOpt> |
     And user selects SNP options in Special Needs Page
       | SNP Options | <specialNeeds> |
-    And user selects Travel options in Care Away From Home Page
-      | Travel Options | <travel> |
     And user selects doctors in doctors page
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
@@ -28,13 +27,20 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
     And verify continue function on "Priorities" page
     Then user validate elements in loading results page
 
+    @regressionAARP
     Examples: 
-      | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | AARP |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
 
-  @PRE @planrecommendation @MAPDFlow @Performance @F471404
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <travel> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> , <pharmacyoption> , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Plan Names in VPP Summary vs Details Pages using MAPD flow in PRE
-    Given the user is on UHC medicare acquisition site landing page
+    @regressionUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | doctors         | DoctorsName | isMultiDoctor | Drug Selection | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | UHC  |   10001 | NO            | [blank] | MAPD          | Medicaid,nursing | AcceptsMedicare | [blank]     | [blank]       | No             | Yes,No,No,No                  | Higher               |
+
+  @PRE @MAPDFlow @Performance @F471404
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds> , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate Plan Names in VPP Summary vs Details Pages using MAPD flow in PRE
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
@@ -44,8 +50,6 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
       | Plan Type | <isCoverageOpt> |
     And user selects SNP options in Special Needs Page
       | SNP Options | <specialNeeds> |
-    And user selects Travel options in Care Away From Home Page
-      | Travel Options | <travel> |
     And user selects doctors in doctors page
       | Doctors             | <doctors>       |
       | Doctors Search Text | <DoctorsName>   |
@@ -53,8 +57,6 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
     Then user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
-    #    And user selects pharmacy option in pharmacy page
-    #      | Pharmacy Type | <pharmacyoption> |
     And user selects additional services option in additional services page
       | Additional Option | <Dental-Hearing-Vision-Fitness> |
     Then user selects cost preferences option in cost preferences page
@@ -65,13 +67,20 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
     Then user validate PDP Plan Names in VPP Summary VS Details in results page
     Then user validate SNP Plan Names in VPP Summary VS Details in results page
 
+    @regressionAARP
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | travel  | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | pharmacyoption | Dental-Hearing-Vision-Fitness | costPreferenceOption |
-      |   10003 | NO            | New York | MAPD          | None         | regular | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Retail         | Yes,No,No,Yes                 | Lower                |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | AARP |   10003 | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,No,No,Yes                 | Lower                |
 
-  @PRE @planrecommandonation @SaveResult @F543314 @PRERegression8
+    @regressionUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | specialNeeds | doctors         | DoctorsName | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch | Dental-Hearing-Vision-Fitness | costPreferenceOption |
+      | UHC  |   10003 | NO            | New York | MAPD          | None         | AcceptsMedicare | [blank]     | [blank]       | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO                                   | Yes,No,No,Yes                 | Lower                |
+
+  @PRE @SaveResult @F543314 
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt>  , <Drug Selection>  - To validate Email Plan List PDP plans in PRE
-    Given the user is on UHC medicare acquisition site landing page
+    Given the user is on UHC medicare acquisition site PRE landing page
+      | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
     And clicks on get started button and runs questionnaire
       | Zip Code        | <Zipcode>       |
@@ -85,6 +94,12 @@ Feature: Plan Recommendation Engine flow - Verify Results page in plan Recommend
     Then user save recommendation results and validate in VP
       | Plan Type | <isCoverageOpt> |
 
+    @regressionAARP
     Examples: 
-      | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
-      |   10003 | NO            | New York | PDP           | No             |
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
+      | AARP |   10003 | NO            | New York | PDP           | No             |
+
+    @regressionUHC
+    Examples: 
+      | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
+      | UHC  |   10003 | NO            | New York | PDP           | No             |

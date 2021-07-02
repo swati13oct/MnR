@@ -28,6 +28,7 @@ import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
 import acceptancetests.util.CommonUtility;
+import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.GlobalWebElements;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
@@ -51,14 +52,15 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	ArrayList<String> DrugsInDCE;
 	ArrayList<String> DrugsList = new ArrayList<String>();
 	ArrayList<String> ModelDrugsList = new ArrayList<String>();
-	static ArrayList<String> werallyResults = new ArrayList<String>();
-	static ArrayList<String> vppResults = new ArrayList<String>();		
-	static ArrayList<String> vppProviderResults = new ArrayList<String>();
-	static ArrayList<String> confirmationResults = new ArrayList<String>();
-	static ArrayList<String> confirmationResults1 = new ArrayList<String>();
-	static ArrayList<String> confirmationProviderResults = new ArrayList<String>();
+	ArrayList<String> werallyResults = new ArrayList<String>();
+	ArrayList<String> vppResults = new ArrayList<String>();		
+	ArrayList<String> vppProviderResults = new ArrayList<String>();
+	ArrayList<String> confirmationResults = new ArrayList<String>();
+	ArrayList<String> confirmationResults1 = new ArrayList<String>();
+	ArrayList<String> confirmationProviderResults = new ArrayList<String>();
 	public WebElement drugCoveredeVPP;
 	PlanRecommendationEngineDrugsPage drug = new PlanRecommendationEngineDrugsPage(driver);
+	PlanRecommendationEngineEditResponsePage editRes = new PlanRecommendationEngineEditResponsePage(driver);
 
 	PlanRecommendationEngineCommonutility desktopCommonUtils = new PlanRecommendationEngineCommonutility(driver);
 
@@ -77,6 +79,19 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	private WebElement loadingImage;
 
 //Result Page Elements
+	String Browsername = MRScenario.browsername;
+	
+	@FindBy(css = "a[dtmname*='Shop For a Plan']")
+	private WebElement headerNavigationBarShopForaPlanTab;
+	
+	@FindBy(linkText = "Drug Cost Estimator")
+    private WebElement headerDrugcostLink;
+	
+	@FindBy(linkText = "Provider Search")
+    private WebElement headerProvidersearchLink;
+	
+	@FindBy(xpath = "//a[contains(text(),'Get a Plan Recommendation')]")
+    private WebElement headerGetaPlanRecommendationLink;
 	
 	@FindBy(css = "#selectCounty p>a")
     private List<WebElement> selectMultiZip;
@@ -399,28 +414,94 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = "button#enrollment-next-button")
 	private WebElement nxtBtnOLEPage;
 	
-// Visitor profile elements
-	
-	@FindBy(css = "div h3[class*='plan-name']")
-	private List<WebElement> planNamesVisitorPrf;
-	
-	@FindBy(css = "#navLinks a:nth-child(1)")
-	private WebElement BacktoPlansLink;
-	
-	@FindBy(css = "#saved-drugs")
-	private WebElement DrugCount;
-	
-	@FindBy(css = "#saved-doctors h3")
-	private WebElement ProviderCount;
-	
-	@FindBy(css = ".drugs-list li")
-	private List<WebElement> Druglist;
-	
-	@FindBy(css = ".doctors-list li")
-	private List<WebElement> Providerlist;
-	
-	@FindBy(css = ".callout-find-plans button[class*='uhc-button--secondary']>span")
-	private WebElement Addplans;
+	// Visitor profile elements
+
+		@FindBy(css = "div h3[class*='plan-name']")
+		private List<WebElement> planNamesVisitorPrf;
+
+		@FindBy(css = ".planTileSection .visitingProfileContainer h3")
+		private WebElement MSPlanSection;
+
+		@FindBy(css = ".planTileSection .userProfileMedSuppPlan")
+		private List<WebElement> MSPlansCount;
+
+		@FindBy(css = ".planTileSection .userProfileMedSuppPlan .saved-plancard-title h2")
+		private List<WebElement> MSPlanName;
+
+		@FindBy(css = ".planTileSection .userProfileMedSuppPlan .saved-plancard-title button.remove-icon")
+		private List<WebElement> MSPlanRemoveIcon;
+
+		@FindBy(css = "#navLinks a:nth-child(1)")
+		private WebElement BacktoPlansLink;
+
+		@FindBy(css = "#saved-drugs")
+		private WebElement DrugCount;
+
+		@FindBy(css = "#saved-doctors h3")
+		private WebElement ProviderCount;
+
+		@FindBy(css = ".drugs-list li")
+		private List<WebElement> Druglist;
+
+		@FindBy(css = "button[aria-describedby*='removeDrugName']")
+		private WebElement DrugRemove;
+
+		@FindBy(css = ".doctors-list li")
+		private List<WebElement> Providerlist;
+
+		@FindBy(css = ".callout-find-plans button[class*='uhc-button--secondary']>span")
+		private WebElement Addplans;
+
+		@FindBy(css = ".uhc-profile-header-nav li:nth-child(4) span:nth-of-type(2)")
+		private WebElement PRESection;
+
+		@FindBy(css = "#saved-plan-recommendations h2")
+		private WebElement SavedRecomTitle;
+
+		@FindBy(css = "#saved-plan-recommendations h3")
+		private WebElement PRETitleinVP;
+
+		@FindBy(css = "#saved-plan-recommendations button")
+		private WebElement GetStartedButton;
+
+		@FindBy(css = "#saved-plan-recommendations img")
+		private WebElement PREImage;
+
+		@FindBy(css = ".subheading-text a")
+		private WebElement EditMyResponsesLink;
+
+		@FindBy(css = "div.uhc-pre-card")
+		private List<WebElement> RecommendationSection;
+		
+		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) p#planType")
+		private WebElement FirstRecommendationSectionPlanType;
+
+		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card .uhc-pre-card__label")
+		private WebElement FirstRecommendationSectionTag;
+
+		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card h3")
+		private WebElement FirstRecommendationSectionPlanName;
+
+		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) a[class*='plan-details-link']")
+		private WebElement FirstRecommendationSectionViewPlanDetails;
+		
+		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(1) .uhc-pre-card button")
+		private WebElement FirstRecommendationSectionEnrollToPlanButton;
+
+		@FindBy(css = "div[class*='row-collapse']:nth-child(4) div:nth-child(2) a.pre-action-link")
+		private WebElement ViewRankedListOfPlanLinks;
+
+		@FindBy(css = "#saved-plan-recommendations p:nth-child(1)")
+		private WebElement PREWidgetParaTalktoExpert;
+
+		@FindBy(css = "#saved-plan-recommendations p:nth-child(3) span")
+		private WebElement PREWidgetCallNum;
+		
+		@FindBy(css = ".segment h2")
+		private WebElement planNameinOLE;
+		
+		@FindBy(css = ".planNameMinHeight h2")
+		private WebElement planNameinPlanDetailsPage;
 	
 // External page elements
 	
@@ -475,6 +556,59 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			 }
 		}
 	}
+	
+	public void recomPREWidget() {
+		System.out.println("Validating Recommendation on UI Page: ");
+		pageloadcomplete();
+		String R1 = "";
+		String R1PlanType = editRes.planType;
+		String R1PlanName = editRes.firstRecomPlanName;
+		if(R1PlanType.contains("Prescription Drug Plans")) 
+			R1 = "PDP";
+		else if(R1PlanType.contains("Advantage Plans"))
+			R1 = "MA";
+		else if(R1PlanType.contains("Special Needs Plans"))
+			R1 = "SNP";
+		else
+			R1 = "MS";
+		waitForPageLoadSafari();
+		String recom1 = "#1 Recommendation";
+			validateRecommVP(R1, recom1, R1PlanName);
+
+	}
+
+	public void validateRecommVP(String R1, String rcom1, String R1PlanName) {
+		System.out.println("Validating Recommendations in Visitor Profile Page");
+		
+		// Verify 1st Recommendation in PRE Widget
+		if (R1.equalsIgnoreCase("MA")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"MA Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "MA PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("PDP")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"PDP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "PDP PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("SNP")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"SNP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
+		}
+		if (R1.equalsIgnoreCase("MS")) {
+			Assert.assertTrue(FirstRecommendationSectionTag.getText().trim().equalsIgnoreCase(rcom1),
+					"SNP Invalid Recommendations");
+			Assert.assertTrue(FirstRecommendationSectionPlanName.getText().trim()
+					.equalsIgnoreCase(R1PlanName), "SNP PlanName Invalid");
+		}
+	}
+		
+		
+	
 	
 	public void validateRecommendations(String R1, String rcom1, String R2, String rcom2) {
 		System.out.println("Validating Recommendations in Results Page");
@@ -709,24 +843,25 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
 			validate(MAViewPlansLink, 60);
 			jsClickNew(MAViewPlansLink);
-			DrugsInDCE = dce.vppDrugsResults;
+			DrugsInDCE = dce.getDrugNamesDCE();
 			int count =DrugsInDCE.size();
-			DrugsList = drugsCoveredInVPP(count);
-			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
-			System.out.println("Validating Drugs Details from VPP to PRE Drug Page: ");
-//			vppToPre();
+			DCEtoPRE();
 		}
 		
-		public void DrugsDetailsVPPtoDCE() {
+		public void DrugsDetailsVPPtoDCE(String drugsList) {
 			ACQDrugCostEstimatorPage dce = new ACQDrugCostEstimatorPage(driver);
-			System.out.println("Validating Pharmacy Details in DCE Page: ");
-			dce.Pharmacytype();
+			System.out.println("Navigating to DCE Page: ");
+			vppToDCE();
+			dce.clickDCEAddDrugBtn();
 			System.out.println("Validating Drugs Details from VPP to DCE Page: ");
-			DrugsInDCE = dce.DCEDrugsResults;
+			DrugsInDCE = dce.getDrugNamesDCE();
 			int count =DrugsInDCE.size();
-			verifyConfirmationmodalResults(count,DrugsInDCE,DrugsList);
+			String[] strSplit = drugsList.split(":");
+			ArrayList<String> drugsName = new ArrayList<String>(Arrays.asList(strSplit));
+			verifyConfirmationmodalResults(count,DrugsInDCE,drugsName);
 		}
 		
+	
 		public void removeDrugs(int count) {
 			// By default removing 2nd drug
     		int beforeRemove = DrugsList.size();
@@ -798,15 +933,18 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 		
 		public void vppToDCE() {
 			System.out.println("Validating VPP to DCE Page");
-			WebElement drugSummary = MA1stPlanList.get(0).findElement(By.cssSelector("a.add-drug"));
-			validate(drugSummary,20);
-			Assert.assertTrue(drugSummary.getText().contains("Enter drug information"), "Enter drug information link is not available");
-			jsClickNew(drugSummary);
+			desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+			headerDrugcostLink.click();
 			pageloadcomplete();
-			Assert.assertTrue(driver.getCurrentUrl().contains("drug-cost-estimator"),
-					"Page is not navigated to DCE");
-			
+			Assert.assertTrue(driver.getCurrentUrl().contains("/health-plans/estimate-drug-costs.html"), "Page is not navigated to DCE");		
+		}
 		
+		public void DCEtoPRE() {
+			System.out.println("Navigating to PRE Page");
+			desktopCommonUtils.MouseOver(headerNavigationBarShopForaPlanTab, Browsername);
+			headerGetaPlanRecommendationLink.click();
+			pageloadcomplete();
+			Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html#/get-started"), "Page is not navigated to PRE");		
 		}
 		
 	public void vppToPre() {
@@ -1902,5 +2040,31 @@ public boolean click_ViewPlanLink(WebElement plantype) {
 	return viewlink_presents;
 }
 
+public void validateLinks(String function) {
+	if(function.equalsIgnoreCase("EditMyResponse button")) {
+	validate(EditMyResponsesLink, 10);
+	EditMyResponsesLink.click();
+	Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html/editMyPreferences"), "***Edit My Response Page Not Opened***");
+	}else if(function.equalsIgnoreCase("Enroll In Plan")) {
+		String planName = FirstRecommendationSectionPlanName.getText().trim();
+		validate(FirstRecommendationSectionEnrollToPlanButton, 10);
+		FirstRecommendationSectionEnrollToPlanButton.click();
+		Assert.assertTrue(driver.getCurrentUrl().contains("online-application.html/welcome"), "***OLE Page Not Opened***");
+		Assert.assertTrue(planNameinOLE.getText().trim().contains(planName), "PlanName Invalid in OLE");
+	}else if(function.equalsIgnoreCase("View Plan Details")) {
+		String planName = FirstRecommendationSectionPlanName.getText().trim();
+		validate(FirstRecommendationSectionViewPlanDetails, 10);
+		FirstRecommendationSectionViewPlanDetails.click();
+		Assert.assertTrue(driver.getCurrentUrl().contains("/details"), "***Plan Details Page Not Opened***");
+		Assert.assertTrue(planNameinPlanDetailsPage.getText().trim().contains(planName), "PlanName Invalid in PlanDetailsPage");
+	}else if(function.equalsIgnoreCase("View ranked list of plans")) {
+		validate(ViewRankedListOfPlanLinks, 10);
+		ViewRankedListOfPlanLinks.click();
+		Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html#/result"), "***PRE-Result Page Not Opened***");
+	}
 }
+
+
+}
+
 

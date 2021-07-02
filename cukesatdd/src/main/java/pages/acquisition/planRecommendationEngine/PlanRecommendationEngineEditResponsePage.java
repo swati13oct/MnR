@@ -58,26 +58,14 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	@FindBy(css = "button[class*='button-primary']")
 	private WebElement saveButton;
-
-	@FindBy(css = "#plan-list-1 button#editMyAnswers")
-	private WebElement mapdEditResponseButton;
-
-	@FindBy(css = "#plan-list-3 button#editMyAnswers")
-	private WebElement pdpEditResponseButton;
-
-	@FindBy(css = "#plan-list-4 button#editMyAnswers")
-	private WebElement snpEditResponseButton;
 	
+	@FindBy(css = ".editPref button")
+	private WebElement editYourResponse;
+
 	//Save Results elements
 	
-	@FindBy(css = "#plan-list-1 button#updateSaveRecommendationBtn")
-	private WebElement mapdSaveResultsButton;
-
-	@FindBy(css = "#plan-list-3 button#updateSaveRecommendationBtn")
-	private WebElement pdpSaveResultsButton;
-
-	@FindBy(css = "#plan-list-4 button#updateSaveRecommendationBtn")
-	private WebElement snpSaveResultsButton;
+	@FindBy(css = ".saveRes button")
+	private WebElement saveYourResults;
 	
 	@FindBy(css = "#saveResultConfirmationTitle")
 	private WebElement saveResultsTitle;
@@ -90,6 +78,9 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	
 	@FindBy(css = "button#viewPlanBtn")
 	private WebElement ViewProfileButton;
+	
+	@FindBy(css = "li.planTileGrid")
+	private List<WebElement> plantiles;
 
 	// Edit Responses page Elements
 
@@ -168,31 +159,25 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 
 	public void navigateEditResponsePage(String flow) {
 		waitForPageLoadSafari();
-		if (flow.equalsIgnoreCase("pdp")) {
-			pdpEditResponseButton.click();
-		} else {
-			if (validate(mapdEditResponseButton, 10))
-				mapdEditResponseButton.click();
-			else
-				snpEditResponseButton.click();
-		}
+		validate(editYourResponse, 10);
+		editYourResponse.click();
 		validate(editResponseTitle);
 		validate(returnToPlanLink, 30);
 	}
 	
-	public void navigateSaveResultsPage(String flow) {
-		if (flow.equalsIgnoreCase("pdp")) {
-			pdpSaveResultsButton.click();
-		} else {
-			if (validate(mapdSaveResultsButton, 10))
-				mapdSaveResultsButton.click();
-			else
-				snpSaveResultsButton.click();
-		}
+	
+	String firstRecomPlanName = "";
+	String planType = "";
+	public String navigateSaveResultsPage() {
+		firstRecomPlanName = plantiles.get(0).findElement(By.cssSelector("h2>a")).getText().trim();
+		planType = plantiles.get(0).findElement(By.cssSelector("p[class*='planNameType']")).getText().trim();
+		validate(saveYourResults, 10);
+		saveYourResults.click();
 		validate(saveResultsTitle);
 		validate(saveResultsPopupClose, 30);
 		validate(KeepShoppingPlansButton, 30);
 		validate(ViewProfileButton, 30);
+		return firstRecomPlanName;
 	}
 
 	public void checkContent(String section) {
@@ -540,11 +525,11 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		editValue("drugs");
 	}
 	
-	public void validateSaveResults(String plantype) {
+	public void validateSaveResults() {
 		System.out.println("Validating Save Results : ");
 		pageloadcomplete();
 		waitForPageLoadSafari();
-		navigateSaveResultsPage(plantype);
+		navigateSaveResultsPage();
 		jsClickNew(ViewProfileButton);
 		threadsleep(5000);
 //		savedrecommendationVP();
