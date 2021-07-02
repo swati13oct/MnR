@@ -3942,11 +3942,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 								|| MRScenario.environment.equalsIgnoreCase("offline-stage-origin"))
-							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html")
-									.replace("www.", ""), browser);
+							startNewPRE(AARP_ACQISITION_PAGE_URL.replace(".com/", ".com/plan-recommendation-engine.html#/get-started").replace("www.", ""), browser);
 						else
 							startNewPRE(
-									AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html"),
+									AARP_ACQISITION_PAGE_URL.replace(".com", ".com/plan-recommendation-engine.html#/get-started"),
 									browser);
 					}
 					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC")) {
