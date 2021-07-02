@@ -25,9 +25,7 @@ import pages.acquisition.commonpages.VPPPlanSummaryPage;
 
 public class GetStartedPageMobile extends UhcDriver {
 
-	// @FindBy(xpath = "//span[contains(text(),'Add My Drugs')]")
-	@FindBy(css = "#addDrug")
-
+	@FindBy(xpath = "//span[contains(text(),'Add Drug')]")
 	public WebElement AddMyDrugsBtn;
 
 	@FindBy(css = "#adddrug")

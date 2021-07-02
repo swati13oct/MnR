@@ -29,7 +29,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='addDrug']")
 	public WebElement addMyDrugsBtn;
 
-	@FindBy(css = "#adddrug")
+	@FindBy(xpath = "//span[contains(text(),'Add Drug')]")
 	public WebElement addDrugButton;
 
 	@FindBy(css = "#previousButton")

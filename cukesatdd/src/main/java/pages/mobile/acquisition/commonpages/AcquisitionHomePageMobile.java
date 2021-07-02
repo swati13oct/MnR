@@ -46,7 +46,7 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	String CallSamPopupTitle = "Need Help? Call us.";
-//	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
+	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
@@ -58,10 +58,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')][1]//following-sibling::button//*[contains(text(),'Shop Plans')]")
 	private WebElement viewShopPlansButton;
-	
+
 	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')][1]//following-sibling::button)[1]")
 	private WebElement ShopEnrollButton;
-	
+
 	@FindBy(xpath = "//button//span[contains(text(), 'Shop')]")
 	private WebElement ShopdsnpEnrollButton;
 
@@ -221,7 +221,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-//	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
+	// @FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
 	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
@@ -329,10 +329,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
 
-//	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+	// @FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
-	
+
 	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
 	public WebElement EstimateYourDrugCost;
 
@@ -502,7 +502,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "//span[contains(text(),'Learn More About Medicare')]")
 	private WebElement learnAboutMedicareHomeScreen;
-	
+
 	@FindBy(xpath = "//a[@href='/shop/medicare-supplement-plans-classic.html']")
 	private WebElement MedSuppClassicUrl;
 
@@ -596,6 +596,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public DCETestHarnessPageMobile GetDCEtestHarnessPage() {
 		return new DCETestHarnessPageMobile(driver);
+	}
+
+	public void openMobileURL() {
+		if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		} else
+			startNewMobile(AARP_ACQISITION_PAGE_URL);
+		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
 	public void openPRE() {
@@ -1181,11 +1191,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			jsClickNew(viewPlansButton);
 		}
 
-//		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		// CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		pageloadcomplete();
-//		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -1747,6 +1757,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public GetStartedPageMobile clickDCERedesignLinkonMedEdPage() {
+		scrollToView(EstimateYourDrugCost);
 		jsClickNew(EstimateYourDrugCost);
 		if (validateNew(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
@@ -2310,7 +2321,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
 	}
-	
+
 	public VPPPlanSummaryPageMobile navigateToPathNew(String path) {
 
 		String CurrentURL = driver.getCurrentUrl();
@@ -2508,7 +2519,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(MobileMenuBackBtn);
 
 	}
-	
+
 	public void validateHomePage() {
 		validate(zipCodeField);
 	}
@@ -2520,10 +2531,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			Assertion.fail("User not navigated to correct page");
 		}
 	}
-	
+
 	@FindBy(xpath = "//a[@id='ghn_lnk_1']")
 	private WebElement homeTab;
-	
+
 	public void clickHomeTab() {
 		homeTab.click();
 	}
@@ -2637,16 +2648,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		} catch (Exception e) {
 			System.out.println("No SSL error / Exception");
 		}
-	}
-
-	public void openMobileURL() {
-		if (MRScenario.environment.equalsIgnoreCase("prod")) {
-			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
-		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
-			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
-		} else
-			startNewMobile(AARP_ACQISITION_PAGE_URL);
-		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
 	public void openTelesalesAgentPortal() {
@@ -3799,8 +3800,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
 
-	
-
 	public void clickonFindanAgentlink(String ExpectedUHCAgentURL) {
 		threadsleep(3);
 		validateNew(RightRail_FindAnAgent);
@@ -3837,8 +3836,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "ghn_lnk_3")
 	private WebElement learnaboutMedicare;
 
-	public ShopForPlanNavigationPageMobile HoveronalearnaboutMedicare()
-			throws InterruptedException {
+	public ShopForPlanNavigationPageMobile HoveronalearnaboutMedicare() throws InterruptedException {
 		waitforElement(learnaboutMedicare);
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
@@ -4157,41 +4155,41 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 
 	}
-	
+
 	@FindBy(xpath = "//b[contains(text(),'MENU')]")
 	private WebElement MenuMobile;
-	
+
 	@FindBy(css = "#mobile-nav")
 	private WebElement mobileNav;
-	
+
 	@FindBy(css = "#ghn_lnk_2")
 	private WebElement shopForAPlan;
-	
+
 	@FindBy(css = "#subnav_2 .nav-back")
 	public WebElement shopForPlanBackButton;
-	
+
 	public ShopForPlanNavigationPageMobile openShopForPlanFromMenu() {
 		scrollToView(MenuMobile);
 		jsClickNew(MenuMobile);
-		
+
 		validateNew(mobileNav, 5);
-		
+
 		scrollToView(shopForAPlan);
 		jsClickNew(shopForAPlan);
-		if(validate(shopForPlanBackButton)) {
+		if (validate(shopForPlanBackButton)) {
 			return new ShopForPlanNavigationPageMobile(driver);
-		} 
+		}
 		return null;
 	}
-	
+
 	public void clickMedSupp(String state) throws InterruptedException {
-//		MobileMenuShopTool();
+		// MobileMenuShopTool();
 		if (state.equalsIgnoreCase("Oregon"))
 			MedSuppClassicUrl.click();
 		else
 			MedicareSuppUrl.click();
 	}
-	
+
 	public VPPPlanSummaryPageMobile searchPlansWithOutCountyShop(String zipcode) throws InterruptedException {
 
 		validate(zipCodeShopField, 30);
@@ -4211,7 +4209,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		scrollToView(zipCodeShopField);
 		sendkeysMobile(zipCodeShopField, zipcode);
 		jsClickNew(viewShopPlansButton);
-		
+
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		validate(vppTop, 30);
@@ -4220,7 +4218,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
-	
+
 	public VPPPlanSummaryPageMobile searchPlansWithOutCountyShopEnroll(String zipcode) throws InterruptedException {
 
 		validate(zipCodeShopField, 30);
@@ -4249,7 +4247,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		return null;
 	}
-	
+
 	public VPPPlanSummaryPageMobile searchPlansWithOutCountyShopDSNPEnroll(String zipcode) throws InterruptedException {
 		validate(zipCodeShopField, 30);
 		scrollToView(zipCodeShopField);
@@ -4283,7 +4281,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("State to be Selected: " + geoState);
 		String stateXPath = "//select[@id='state-select']//option[contains(@value,'" + geoState + "')]";
 		WebElement stateGeotargeting = driver.findElement(By.xpath(stateXPath));
-		selectFromDropDownByValue(stateDropDown,geoState);
+		selectFromDropDownByValue(stateDropDown, geoState);
 		if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
 			Assert.fail("Wrong state selected for geotarget");
 		}
@@ -4293,6 +4291,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitforElementNew(stateGeotargeting, 5);
 
 	}
+
 	public LearnAboutMedicareHomePageNewMobile clickLearnMoreAboutMedicareOnHomePage() {
 
 		validateNew(learnAboutMedicareHomeScreen);
@@ -4306,6 +4305,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			return null;
 		}
 	}
+
 	public void clickOnPlanRecommendationButton() {
 		CommonUtility.checkPageIsReadyNew(driver);
 		WebElement lnkPRE = driver
