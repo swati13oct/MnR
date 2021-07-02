@@ -42,7 +42,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 public class AcquisitionHomePage extends GlobalWebElements {
 
 	//@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
-	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-1')]")
+	@FindBy(xpath = "(//*[contains(@id,'zipcodemeded')])[1]")
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -229,7 +229,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// contains(@id,'zipcodebtn')])[2]")
 	// @FindBy(xpath = "//*[contains(@class,'zip-button') or
 	// contains(@id,'zipcodebtn')]"
-	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
+	@FindBy(xpath = "(//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')])[1]")
 	private WebElement viewPlansButton;
 
 	@FindBy(xpath = "//form[@id='zip-form']//button[@class='zip-button']")
@@ -321,7 +321,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//*[@id='more-list-heading']/..//a[contains(@href,'aarp.org')]")
 	private WebElement visitAARPFooterLink;
 
-	@FindBy(xpath = "//*[contains(@id, 'aarplink')]")
+	@FindBy(xpath = "//*[contains(@class, 'aarp-link')]")
 	private WebElement visitAARPHeaderLink;
 
 	@FindBy(xpath = "//a[contains(@class, 'back-to-top')]")
@@ -4883,13 +4883,25 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		// threadsleep(6);
 		threadsleep(5000);
 		// Accessibility.click();
+		String base = driver.getWindowHandle();
 		jsClickNew(Accessibility);
 		threadsleep(5000);
 		// Assertion.assertEquals(driver.getCurrentUrl(),
 		// "https://www.uhc.com/legal/accessibility");
-		if (driver.getCurrentUrl().contains("accessibility")) {
-			assertTrue(true);
+		Set<String> all = driver.getWindowHandles();
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains("accessibility"));
+				driver.close();
+			}
 		}
+		driver.switchTo().window(base);
+		/*if (driver.getCurrentUrl().contains("accessibility")) {
+			assertTrue(true);
+		}*/
 	}
 
 	public void clickUnitedHealthcareMedicareSolutions() {
