@@ -177,8 +177,8 @@ public class oleStepDefinition {
 		
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
 		String PlanPremium = "";
-		String ZipCode = "";
-		String County = "";
+		String ZipCode = givenAttributesMap.get("Zip Code");
+		String County = givenAttributesMap.get("County Name");
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
 		String SiteName;
