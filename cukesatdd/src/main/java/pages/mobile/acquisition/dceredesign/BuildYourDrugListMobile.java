@@ -290,6 +290,35 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			return null;
 		}
 	}
+	
+	public TellUsAboutDrugMobile SearchaddDrug(String drugName) throws InterruptedException {
+
+		validateNew(EnterDrugNameTxt);
+		sendkeysMobile(EnterDrugNameTxt, drugName);
+
+		jsClickNew(SearchBtn);
+		sleepBySec(5);
+		waitForPageLoadSafari();
+		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
+		WebElement SelectDrug = driver
+				.findElement(By.xpath("//p[normalize-space()='" + drugName +"']/following-sibling::button"));
+
+		scrollToView(SelectDrug);
+
+		jsClickNew(SelectDrug);
+		pageloadcomplete();
+
+		threadsleep(2000);
+		// waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+		// CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
+		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+			return new TellUsAboutDrugMobile(driver);
+		} else {
+			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
+			return null;
+		}
+	}
 
 	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
 	public WebElement DrugDetails_ChangePharmacyLnk;

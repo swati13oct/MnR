@@ -79,37 +79,7 @@ public class DCEACQVisitorProfileMobile {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, DCEbuildDrugList);
 	}
 	
-	@Then("^the user searches and adds the following Drug to Drug List$")
-	public void the_user_searches_and_adds_the_following_Drug_to_Drug_List(DataTable givenAttributes) throws Throwable {
-	Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		String drugName = memberAttributesMap.get("DrugName");
-		System.out.println(drugName);
-		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		TellUsAboutDrugMobile tellUsAboutDrug = buildDrugList.SearchaddDrugs(drugName);
-		buildDrugList = tellUsAboutDrug.ClickAddDrug();
-		String druglist = (String) getLoginScenario().getBean(DCERedesignCommonConstants.DRUGLIST);
-		
-		 
-		System.out.println("Drugs List : " + druglist);
-
-//		if (druglist.isEmpty()) {
-		if(StringUtils.isEmpty(druglist)) {
-			druglist = drugName;
-		} else {
-			druglist = druglist + "&" + drugName;
-		}
-		System.out.println("Drugs List after Drug " + drugName + " , Added : " + druglist);
-		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, druglist);
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_BuildDrugList, buildDrugList);
-	}
+	
 	
 	@Then("^enduser land on ZipEntry page by clicking on Review Drung Costs$")
 	public void the_user_clicks_on_Add_Drug() throws Throwable {
