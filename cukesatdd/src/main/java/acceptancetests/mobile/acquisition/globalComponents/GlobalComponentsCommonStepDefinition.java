@@ -796,5 +796,18 @@ public class GlobalComponentsCommonStepDefinition {
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickOnPlanRecommendationButton();
 	}
+	
+	@When("^user hover over for plan member to click to go to member site$")
+	public void hover_plan_Member_to_Click_membersite() {
+		//scenario.log("Changes made on 6/30- Step added for new Header redesign");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		if (aquisitionhomepage != null) {
+			aquisitionhomepage.clickMemberSiteLink();
+		} else {
+			Assertion.fail("Home page not found");
+		}
+	}
+
 
 }

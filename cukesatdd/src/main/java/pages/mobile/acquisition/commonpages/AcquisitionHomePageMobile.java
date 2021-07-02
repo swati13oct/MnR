@@ -3258,8 +3258,9 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerRegisterLinkMobile;
 
 	public void validateHeaderLinks() {
-		validateNew(headerSignInLink);
-		validateNew(headerRegisterLink);
+		//validateNew(headerSignInLink);
+		//validateNew(headerRegisterLink);
+		
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
 			validateNew(visitAARPLink);
 		} else {
@@ -4322,4 +4323,32 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 		driver.navigate().back();
 	}
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//button")
+	private WebElement planMemberLink;
+	
+	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
+	private WebElement goToMemberSiteLink;
+
+	
+	public void clickMemberSiteLink() {
+		// validateNew(headerSignInLink);
+		// jsMouseOver(planMemberLink);
+		Actions action = new Actions(driver);
+		action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		validateNew(goToMemberSiteLink);
+		jsClickNew(goToMemberSiteLink);
+		String base = driver.getWindowHandle();
+		Set<String> all = driver.getWindowHandles();
+		Iterator<String> I = all.iterator();
+		while (I.hasNext()) {
+			String childWindow = I.next();
+			if (!base.equals(childWindow)) {
+				driver.switchTo().window(childWindow);
+				Assert.assertTrue(driver.getCurrentUrl().contains("medicare.uhc.com"));
+				driver.close();
+			}
+		}
+		driver.switchTo().window(base);
+}
 }
