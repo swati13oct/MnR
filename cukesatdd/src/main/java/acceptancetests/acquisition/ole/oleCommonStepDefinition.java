@@ -109,20 +109,10 @@ public class oleCommonStepDefinition {
 
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 				//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County = "";
-				//(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
+		//String County = "";
+		String County =(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		String TFN;
-		// String SiteName= (String)
-		// getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
-
-		/*
-		 * WelcomePage welcomePage; if(SiteName.contains("UHC_ACQ")){ PlanDetailsPage
-		 * vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
-		 * .getBean(PageConstants.VPP_PLAN_DETAILS_PAGE); TFN =
-		 * vppPlanDetailsPage.GetTFNforPlanType(); welcomePage =
-		 * vppPlanDetailsPage.Enroll_OLE_Plan(PlanName); } else{
-		 */
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		TFN = vppPlanDetailsPage.GetTFNforPlanType();
