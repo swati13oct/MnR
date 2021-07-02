@@ -3686,8 +3686,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,document.body.scrollHeight)");
 		jse.executeScript("window.scrollBy(0,-500)");
-		validateNew(TFNelement, 45);
-		if (validateNew(TFNelement) && TFNelement.isDisplayed()) {
+		validate(TFNelement, 45);
+		System.out.println(">>>>>>>>>>>>> :"+TFNelement.getText());
+		if (TFNelement.isDisplayed()) {
 			System.out.println("TFN is Displayed on Page : " + TFNelement.getText());
 		} else {
 			Assertion.fail("TFN elemnet is not found / displayed on page : " + tfnXpath);
