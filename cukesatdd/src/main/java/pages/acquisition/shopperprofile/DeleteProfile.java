@@ -2,6 +2,7 @@ package pages.acquisition.shopperprofile;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -23,7 +24,7 @@ public class DeleteProfile extends UhcDriver {
 	@FindBy(id = "dob")
 	private WebElement dob;
 	
-	@FindBy(xpath="//button[text()='Delete']")
+	@FindBy(xpath="//i[@title='Delete Profile']")
 	private WebElement btnDelete;
 
 	@FindBy(xpath="//button/preceding-sibling::p")
@@ -50,8 +51,14 @@ public class DeleteProfile extends UhcDriver {
 	@FindAll({@FindBy(xpath = "//table/tbody/tr")})
 	private List<WebElement> searchResults;
 	
-	@FindBy(css="p.failure.text-danger")
+	@FindBy(xpath ="//div[contains(text(),'No')]")
 	private WebElement messageNoUserFound;
+	
+	@FindBy(xpath="//a[contains(@href,'delete')]")
+	private WebElement deleteProfile;
+	
+	@FindBy(xpath = "//li/a[contains(@href,'search-profile')]")
+	private WebElement searchProfileTab;
 	
 	public static final String DELETE_PROFILE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/delete-profile";
 	
@@ -65,14 +72,13 @@ public class DeleteProfile extends UhcDriver {
 	
 	@Override
 	public void openAndValidate() {
-		if (MRScenario.environment.equals("offline")) {
-		}
-		else if (MRScenario.environment.equals("stage")) {
-			start(DELETE_PROFILE_URL_STAGE);
-		}else {
-			start(DELETE_PROFILE_URL);
-		}
-
+		/*
+		 * if (MRScenario.environment.equals("offline")) { } else if
+		 * (MRScenario.environment.equals("stage")) { start(DELETE_PROFILE_URL_STAGE);
+		 * }else { start(DELETE_PROFILE_URL); }
+		 */
+		//jsClickNew(deleteProfile);
+		deleteProfile.click();
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 15);
 	}
 	
@@ -86,9 +92,12 @@ public class DeleteProfile extends UhcDriver {
 		try {
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, emailID);
-			btnSearchShopper.click();
+			//btnSearchShopper.click();
+			jsClickNew(driver.findElement(By.xpath("//button")));
 			if(searchResults.size()>0) {
 				btnDelete.click();
+				sleepBySec(4);
+				btnSearchShopper.click();
 				CommonUtility.waitForPageLoadNew(driver, messageNoUserFound, 15);
 				System.out.println("##################"+"Deleted user "+emailID+" ##################");
 			}

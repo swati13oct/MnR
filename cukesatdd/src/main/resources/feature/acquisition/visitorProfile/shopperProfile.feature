@@ -31,6 +31,8 @@ Feature: 1.09. ACQ- Shopper Profile
       | Email              | <email>            |
       | ZipCode            | <zipcode>          |
       | County             | <county>           |
+    Then the user validates the view drug information on Plan Compare page
+      | Drugs | <drugNames> |
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
@@ -45,7 +47,7 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
       | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 596eaafb-d234-4214-8676-7a16f4e73408 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
 
-    @stage123 @regressionSPStage
+    @stageSearchProfileEmail @regressionSPStage
     Examples: 
       | username | password     | email          | mbi           | dob        | fname | lname | uuid                                 | enrolledplanName                                  | planName                             | zipcode | county          | drugNames        | providers                                                                                                                                                                |
       | ocpuser  | Password@123 | dax@member.com | 4F78-QY7-CU31 | 08/05/1951 | DAX   | MUNET | 11a702c8-7313-4b76-9f3d-0c1932a25740 | UnitedHealthcare Dual Complete Plan 1 (HMO D-SNP) | AARP Medicare Advantage Plan 1 (HMO) |   10010 | New York County | Lipitor TAB 10MG | David Joiner Knapp MD:1245 E South Blvd, Montgomery, AL, 36116, +1 334-281-3130;Margaret S Miklic MD:3686 Grandview Pkwy Ste 300, Birmingham, AL, 35243, +1 205-536-7676 |
@@ -285,43 +287,43 @@ Feature: 1.09. ACQ- Shopper Profile
       | username | password     | email             | mbi           | dob        | zipcode | fname  | lname  | uuid                                 | enrolledplanName                     | planName                                | plantype | drugNames | providers | eyeWearBenefitType | eyeWearExpectedText                                                                                                                             | eyeExamBenefitType | eyeExamExpectedText    | footCareRoutineBenefitType | footCareRoutineExpectedText | hearingExamBenefitType | hearingExamExpectedText |
       | ocpuser  | Password@123 | tyrone@member.com | 3C36-J24-EH68 | 01/06/1950 |   97426 | TYRONE | QUARRY | b726de44-ee3e-4696-90f4-5c1b00f0d972 | AARP Medicare Advantage Plan 2 (HMO) | AARP Medicare Advantage Walgreens (PPO) | MAPD     | No        | No        | Eyewear            | $0 copay every 2 years; up to $150 for frames or contact lenses. Standard single, bifocal, trifocal, or progressive lenses are covered in full. | Eye Exam           | $0 copay; 1 every year | Foot Care - Routine        | $45 copay                   | Hearing Exam           | $0 copay                |
 
-  @searchProfileEmptyFields
-  Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
-    Given I am an agent logged into the cloak in tool
-      | User Name | <username> |
-      | Password  | <password> |
-    Then validate empty email firstname and lastname
+  #@searchProfileEmptyFields
+  #Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
+    #Given I am an agent logged into the cloak in tool
+      #| User Name | <username> |
+      #| Password  | <password> |
+    #Then validate empty email firstname and lastname
+#
+    #Examples: 
+      #| username  | password  |
+      #| qavgogine | qavgogine |
+#
+  #@searchProfileInvalidEmail
+  #Scenario Outline: Telesales agent searching for the profile using invalid Email
+    #Given I am an agent logged into the cloak in tool
+      #| User Name | <username> |
+      #| Password  | <password> |
+    #Then validate invalid email
+      #| Email | <email> |
+#
+    #Examples: 
+      #| username  | password  | email     |
+      #| qavgogine | qavgogine | yy!ue.com |
+#
+  #@searchProfileInvalidFnameLname
+  #Scenario Outline: Telesales agent searching for the profile using invalid first name and lastname
+    #Given I am an agent logged into the cloak in tool
+      #| User Name | <username> |
+      #| Password  | <password> |
+    #Then validate invalid first name and last name
+      #| First Name | <fname> |
+      #| Last Name  | <lname> |
+#
+    #Examples: 
+      #| username  | password  | fname    | lname     |
+      #| qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
 
-    Examples: 
-      | username  | password  |
-      | qavgogine | qavgogine |
-
-  @searchProfileInvalidEmail
-  Scenario Outline: Telesales agent searching for the profile using invalid Email
-    Given I am an agent logged into the cloak in tool
-      | User Name | <username> |
-      | Password  | <password> |
-    Then validate invalid email
-      | Email | <email> |
-
-    Examples: 
-      | username  | password  | email     |
-      | qavgogine | qavgogine | yy!ue.com |
-
-  @searchProfileInvalidFnameLname
-  Scenario Outline: Telesales agent searching for the profile using invalid first name and lastname
-    Given I am an agent logged into the cloak in tool
-      | User Name | <username> |
-      | Password  | <password> |
-    Then validate invalid first name and last name
-      | First Name | <fname> |
-      | Last Name  | <lname> |
-
-    Examples: 
-      | username  | password  | fname    | lname     |
-      | qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
-
-  @createProfileMember
+  @createProfileMemberSP
   Scenario Outline: Telesales agent searching for the Creating a profile - email - <email>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
@@ -347,6 +349,9 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name          | <lname>            |
       | DOB                | <dob>              |
       | MBI                | <mbi>              |
+      | Email              | <email>            |
+      | ZipCode            | <zipcode>          |
+      | County             | <county>           |
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP
       | Enrolled Plan Name | <enrolledplanName> |
@@ -358,8 +363,8 @@ Feature: 1.09. ACQ- Shopper Profile
 
     Examples: 
       | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
-      | qavgogine | qavgogine | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
-      | qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | LEONEL  | DREHMER    |   10010 | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
+      | ocpuser | Password@123 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
+      #| qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | LEONEL  | DREHMER    |   10010 | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
 
   @createProfileNonMember
   Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>

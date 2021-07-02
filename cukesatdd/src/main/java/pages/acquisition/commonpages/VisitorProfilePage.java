@@ -463,7 +463,7 @@ public class VisitorProfilePage extends UhcDriver {
                 for (String plan : listOfTestPlans) {
                     jsClickNew(driver.findElement(By.xpath(
                             "//h3[contains(text(),'" + plan + "')]/preceding::button[contains(@class,'remove')][1]")));
-                    Thread.sleep(5000);
+                    sleepBySec(7);
                 }
             } else
                 System.out.println("##############No saved plans available here##############");

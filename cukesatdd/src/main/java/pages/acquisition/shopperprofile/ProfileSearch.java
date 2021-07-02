@@ -65,6 +65,12 @@ public class ProfileSearch extends UhcDriver {
 	
 	@FindBy(xpath="//a[text()='Non Member']")
 	private WebElement nonMemberTab;
+	
+	@FindBy(xpath="//a[contains(@href,'delete')]")
+	private WebElement deleteProfile;
+	
+	@FindBy(xpath = "//li/a[contains(@href,'search-profile')]")
+	private WebElement searchProfileTab;
 
 	public static final String DELETE_PROFILE_URL = "http://digital-checkout-team-e.ocp-elr-core-nonprod.optum.com/digital-checkout/guest/profile";
 	
@@ -118,8 +124,7 @@ public class ProfileSearch extends UhcDriver {
 		if(searchResults.size()>0) {
 			DeleteProfile deleteProfile = new DeleteProfile(driver);
 			deleteProfile.deleteAProfile(email);
-			backToProfileSearch.click();
-			CommonUtility.checkPageIsReadyNew(driver);
+			jsClickNew(searchProfileTab);
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, email);
 			btnSearchShopper.click();

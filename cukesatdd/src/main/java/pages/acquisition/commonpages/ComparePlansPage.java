@@ -341,8 +341,20 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//button[text()='Save to Mira']")
 	private WebElement btnSaveToMira;
 	
+	@FindBy(css = "a#viewDrugInfoLink-0")
+	private WebElement viewDrugInfoBtn;
+	
+	@FindBy(xpath = "//div[@class='vpp-drug-name']/strong")
+	private WebElement drugNameOnDrugInfoPopup;
+	
+	@FindBy(xpath = "//div[text()='Drug Cost Details']/parent::button")
+	private WebElement drugCostDetailsBtn;
+	
 	@FindBy(xpath = "//button[text()='Import Drugs & Doctors']")
 	private WebElement btnImportDrugsAndDoctors;
+
+	@FindBy(xpath = "//div[text()='Close']/parent::button")
+	private WebElement closeBtn;
 	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -1722,6 +1734,21 @@ public class ComparePlansPage extends UhcDriver {
 		} catch (Exception ex) {
 
 		}
+	}
+	
+	public void validateViewDrugInformation(String drugName) {
+		scrollToView(viewDrugInfoBtn);
+		jsClickNew(viewDrugInfoBtn);
+		//viewDrugInfoBtn.click();
+		Assertion.assertEquals(drugName, drugNameOnDrugInfoPopup.getText().trim());
+		//drugCostDetailsBtn.click();
+		jsClickNew(drugCostDetailsBtn);
+		Assertion.assertEquals(drugName, driver.findElement(By.xpath("//div[@id='drugtable']//span[1]")).getText().trim());
+		jsClickNew(driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")));
+		//driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")).click();
+		waitforElement(drugCostDetailsBtn);
+		//closeBtn.click();
+		jsClickNew(closeBtn);
 	}
 
 }

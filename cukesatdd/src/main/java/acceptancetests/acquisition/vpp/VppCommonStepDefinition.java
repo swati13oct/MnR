@@ -4468,4 +4468,15 @@ public class VppCommonStepDefinition {
 		comparePlansPage.save2Plans(savePlanNames);
 	}
 
+	@Then("^the user validates the view drug information on Plan Compare page")
+	public void user_clicks_validates_view_drug_info_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String drugName = givenAttributesMap.get("Drugs");
+		planComparePage.validateViewDrugInformation(drugName);
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+	}
 }
