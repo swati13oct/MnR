@@ -1233,8 +1233,8 @@ public class DrugDetailsPage extends UhcDriver {
 		String PremiumDisplayed = PremiumforPlan.getText();
 		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
 		if (!PremiumDisplayed.contains(premium)) {
-			Assertion.fail("Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
-					+ PremiumDisplayed);
+			Assertion.fail(">>>>> Expected Premium not displayed, Expected : " + premium + "    Actual Displayed : "
+					+ PremiumDisplayed+" <<<<<");
 		}
 	}
 
@@ -1249,7 +1249,7 @@ public class DrugDetailsPage extends UhcDriver {
 			Assertion.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "
 					+ CopaySection_InsulinTier.getText(), true);
 		} else {
-			Assertion.fail("Copay Section - Incorrect Copay Displayed;  Expected Copay: " + insulinCopay);
+			Assertion.fail(">>>>> Insulin Copay Failed; Expected - "+insulinCopay+" ; Actual - " + CopaySection_InsulinTier.getText() +" <<<<<");
 		}
 	}
 
@@ -2342,7 +2342,8 @@ public class DrugDetailsPage extends UhcDriver {
  		validateNew(CopayText);
  		System.out.println("Copay Amount Displayed for Tier - "+CopayText.getText());
  		if(!CopayText.getText().contains(tierCopay)){
- 			Assertion.fail(">>>>> Validation FAILED - Copay Amount does not match Expected <<<<<");
+			Assertion.fail(
+					">>>>> Expected Copay for Tier"+tierNo+" In Copay and Co-Ins Section - "+tierCopay+"; Actual - "+CopayText.getText()+" <<<<<");
 		}
     }
 
@@ -2353,7 +2354,8 @@ public class DrugDetailsPage extends UhcDriver {
 			validateNew(YourDrugs_TierCopay);
 			System.out.println("Copay Amount Displayed for Tier - " + YourDrugs_TierCopay.getText());
 			if (YourDrugs_TierCopay.getText().contains("$") || YourDrugs_TierCopay.getText().contains("%")) {
-				Assertion.fail(">>>>> Validation FAILED - Copay Amount $ or CoInsurance % Should not be Displayed for Mail pharmacy, Tier 5 <<<<<"+ YourDrugs_TierCopay.getText());
+				Assertion.fail(
+						">>>>> Expected Copay for Tier"+tierNo+" In Your Drugs Section - "+tierCopay+"; Actual - "+YourDrugs_TierCopay.getText()+" <<<<<");
 			}
 		}
 		else if(tierCopay.contains("%")){
@@ -2361,21 +2363,25 @@ public class DrugDetailsPage extends UhcDriver {
 			validateNew(YourDrugs_TierCopay);
 			System.out.println("Copay Amount Displayed for Tier - " + YourDrugs_TierCopay.getText());
 			if (!YourDrugs_TierCopay.getText().contains(tierCopay)) {
-				Assertion.fail(">>>>> Validation FAILED - Copay Amount does not match Expected <<<<<");
+				Assertion.fail(
+				">>>>> Expected for Copay for Tier"+tierNo+" In Your Drugs Section - "+tierCopay+"; Actual - "+YourDrugs_TierCopay.getText()+" <<<<<");
 			}
 		}
 		else if(tierNo.contains("3")){
 			List<WebElement> Tier3Copays = driver.findElements(By.xpath("//div[@id='drugtable']//ul[contains(@class, 'yourdrugs')]//li[contains(text(), '" + tierNo + "')]/span"));
 			boolean flag = false;
+			String Actual = "";
 			for (WebElement Tier3text:Tier3Copays) {
 				validateNew(Tier3text);
+				Actual = Actual + Tier3text.getText();
 				System.out.println("Copay Amount Displayed for Tier - "+tierNo+" : " + Tier3text.getText());
 				if (Tier3text.getText().contains(tierCopay)) {
 					flag = true;
 				}
 			}
 			if(flag==false){
-				Assertion.fail(">>>>> Validation FAILED - Copay Amount does not match Expected <<<<<");
+				Assertion.fail(
+						">>>>> Expected for Copay for Tier"+tierNo+" In Your Drugs Section - "+tierCopay+"; Actual - "+Actual+" <<<<<");
 			}
 		}
 		else {
@@ -2385,7 +2391,8 @@ public class DrugDetailsPage extends UhcDriver {
 			validateNew(CopayText);
 			System.out.println("Copay Amount Displayed for Tier - "+tierNo+" : " + CopayText.getText());
 			if (!CopayText.getText().contains(tierCopay)) {
-				Assertion.fail(">>>>> Validation FAILED - Copay Amount does not match Expected <<<<<");
+				Assertion.fail(
+						">>>>> Expected Copay for Tier"+tierNo+" In Your Drugs Section - "+tierCopay+"; Actual - "+CopayText.getText()+" <<<<<");
 			}
 		}
 	}
@@ -2400,7 +2407,10 @@ public class DrugDetailsPage extends UhcDriver {
 		String[] DeductibleTexts = deductible.split(";");
 		int len = DeductibleTexts.length;
 		boolean flag = false;
+		String Actual = "";
 		if(DeductibleTexts.length==1){
+			validateNew(SingleDeductible_Text);
+			Actual = SingleDeductible_Text.getText();
 			if(SingleDeductible_Text.getText().contains(deductible)){
 				flag = true;
 			}
@@ -2408,6 +2418,8 @@ public class DrugDetailsPage extends UhcDriver {
 		else {
 			int i = 0;
 			for (String text : DeductibleTexts) {
+				validateNew(SplitDeductible_Text.get(i));
+				Actual = Actual + SplitDeductible_Text.get(i).getText();
 				System.out.println("Expected Deductible text -- " + text);
 				System.out.println("Deductible displayed -- " + SplitDeductible_Text.get(i).getText());
 				if (SplitDeductible_Text.get(i).getText().contains(text)) {
@@ -2418,14 +2430,15 @@ public class DrugDetailsPage extends UhcDriver {
 			}
 		}
 		if(flag==false){
-			Assertion.fail(">>>>> Validation FAILED - Deductible Amount does not match Expected <<<<<");
+			Assertion.fail(
+					">>>>> Expected Deductible - "+deductible+"; Actual - "+Actual+" <<<<<");
 		}
 	}
 
 	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//p[contains(@class, 'normal')]")
 	private WebElement CoverageStage_Modal_Text;
 
-	private static String INITIAL_COVERAGE_TEXT = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs--paid by you (or others on your behalf) and the plan--reach $4,130 you then move to the Coverage Gap Stage.";
+    private static String INITIAL_COVERAGE_TEXT = "In the Initial Coverage Stage, you (or others on your behalf) will pay a copay or coinsurance each time you fill a prescription, and the plan pays the rest. When your total drug costs--paid by you (or others on your behalf) and the plan--reach $4,130 you then move to the Coverage Gap Stage.";
 	private static String COVERAGE_GAP_TEXT = "During the Coverage Gap Stage, you (or others on your behalf) will pay no more than 25% of the total cost for generic drugs or 25% of the total cost for brand name drugs, for any drug tier until the total amount you (or others on your behalf) and the drug manufacturer have paid reaches $6,550 in year-to-date out-of-pocket costs.";
 	private static String CATASTROPHIC_TEXT = "You enter the Catastrophic Coverage Stage after $6,550 is reached (excluding premiums), you will have to pay only one of the following through the end of the year: $3.70 copay for generic drugs, $9.20 copay for brand name drugs or a 5% coinsurance, whichever is greater.";
 
@@ -2440,7 +2453,8 @@ public class DrugDetailsPage extends UhcDriver {
 				&& validateNew(InitialCoverage_Modal_Header)) {
 			System.out.println("Correct Modal Text displayed for Initial Coverage Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
 		} else {
-			Assertion.fail("Correct Modal Text NOT Displayed for Initial Coverage Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page !!!");
+			Assertion.fail(
+					">>>>> Expected Initial Coverage Stage Text - "+INITIAL_COVERAGE_TEXT+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
 		}
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
@@ -2454,7 +2468,7 @@ public class DrugDetailsPage extends UhcDriver {
 					"Correct Modal Text displayed for Coverage Gap Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
 		} else
 			Assertion.fail(
-					"Correct Modal Text NOT Displayed for Coverage Gap Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page !!!");
+					">>>>> Expected Coverage Gap Stage text - "+COVERAGE_GAP_TEXT+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
 		jsClickNew(StageInfo_Modal_DoneBtn);
 
 		validateNew(MonthlyDrugStage_CatastropheLink);
@@ -2467,7 +2481,7 @@ public class DrugDetailsPage extends UhcDriver {
 					"Correct Modal Text displayed for Catastrophic Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page");
 		} else
 			Assertion.fail(
-					"Correct Modal Text NOT Displayed for Catastrophic Stage link Info in Monthly Drug Costs by Stage Section - Drug Details Page !!!");
+					">>>>> Expected Catastrophic Stage text - "+CATASTROPHIC_TEXT+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
 		jsClickNew(StageInfo_Modal_DoneBtn);
 	}
 
@@ -2477,16 +2491,18 @@ public class DrugDetailsPage extends UhcDriver {
 	public void validateDefStandard_LIScopay(String liScopay) {
 		boolean flag = false;
 		System.out.println("Expected LIS Copay- "+liScopay);
+		String ActualLISCopay = "";
 		for (WebElement CopayText: DefStPlan_LISCopayTexts) {
 			validateNew(CopayText);
 			System.out.println("Displayed LIS Copay for Defined Standard Plan- "+CopayText.getText());
+			ActualLISCopay = ActualLISCopay + CopayText.getText();
 			if(CopayText.getText().trim().contains(liScopay)){
 				System.out.println("Displayed LIS Copay as Expected for Defined Standard Plan - "+CopayText.getText());
 				flag = true;
 			}
 		}
 		if(flag==false)
-			Assertion.fail(">>>>> Displayed LIS Copay NOT as Expected for Defined Standard Plan <<<<<");
+			Assertion.fail(">>>>> Expected LIS Copay for Defined Standard Plan - "+liScopay+"; Actual - "+ActualLISCopay+" <<<<<");
 	}
 
 	@FindBy(xpath = "//*[contains(@id,'plancopaydetail')]//h3[contains(text(), 'No LIS')]//following-sibling::div//strong")
@@ -2494,17 +2510,19 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void validateDefStandard_nonLIScopay(String nonliScopay) {
 		boolean flag = false;
+		String ActualLISCopay = "";
 		System.out.println("Expected Non-LIS Copay- "+nonliScopay);
 		for (WebElement CopayText: DefStPlan_nonLISCopayTexts) {
 			validateNew(CopayText);
 			System.out.println("Displayed NON-LIS Copay for Defined Standard Plan- "+CopayText.getText());
+			ActualLISCopay = ActualLISCopay + CopayText.getText();
 			if(CopayText.getText().trim().contains(nonliScopay)){
 				System.out.println("Displayed NON-LIS Copay as Expected for Defined Standard Plan - "+CopayText.getText());
 				flag = true;
 			}
 		}
 		if(flag==false)
-			Assertion.fail(">>>>> Displayed NON-LIS Copay NOT as Expected for Defined Standard Plan <<<<<");
+			Assertion.fail(">>>>> Expected NON-LIS Copay for Defined Standard Plan - "+nonliScopay+"; Actual - "+ActualLISCopay+" <<<<<");
 	}
 
 	@FindBy(xpath = "//h3[contains(text(), 'Deductible')]//following-sibling::div[contains(text(),'$')]")
@@ -2515,7 +2533,29 @@ public class DrugDetailsPage extends UhcDriver {
 		System.out.println("Expected Deductible for Defined Standard plan - "+deductible);
 		System.out.println("Displayed Deductible for Defined Standard plans - "+DefStd_Deductible.getText());
 		if(!DefStd_Deductible.getText().contains(deductible)){
-			Assertion.fail(">>>>> Displayed Deductible does not match Expected Deductible for defined standard plan <<<<< "+DefStd_Deductible.getText());
+			Assertion.fail(">>>>> Expected Defined Standard Plan Deductible - "+deductible+"; Actual - "+DefStd_Deductible.getText()+" <<<<<");
 		}
 	}
+
+	@FindBy(xpath = "//button[@id= 'deductible']")
+	private WebElement MonthlyCosts_DeductibleLink;
+
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal')]//*[contains(@id, 'modal-label')][contains(text(), 'Deductible')]")
+	public WebElement Deductible_Modal_Header;
+
+	private static String DEDUCTIBLE_TEXT = "In the Deductible Coverage Stage, you (or others on your behalf) will pay the full price for your prescription drugs until you reach the deductible amount. For some plans, this deductible will be $0 and you will enter the Initial Coverage Stage (below) with the first prescription you fill.";
+
+	public void validateModalText_DeductibleStage(String deductibleFlag) {
+		validateNew(MonthlyCosts_DeductibleLink);
+		jsClickNew(MonthlyCosts_DeductibleLink);
+		validateNew(CoverageStage_Modal_Text);
+		System.out.println("Deductible Stage Modal PopUp Text - "+CoverageStage_Modal_Text.getText().trim());
+		if (CoverageStage_Modal_Text.getText().trim().equalsIgnoreCase(DEDUCTIBLE_TEXT)
+				&& validateNew(Deductible_Modal_Header)) {
+			System.out.println(
+					"Correct Modal Text displayed for Deductible Stage link Info in Monthly Drug Costs Section - Drug Details Page");
+		} else
+			Assertion.fail(
+					">>>>> Expected Deductible Stage text - "+DEDUCTIBLE_TEXT+"; Actual - "+CoverageStage_Modal_Text.getText()+" <<<<<");
+		jsClickNew(StageInfo_Modal_DoneBtn);	}
 }

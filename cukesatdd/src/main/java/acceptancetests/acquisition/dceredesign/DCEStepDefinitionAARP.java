@@ -1572,11 +1572,7 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String Premium = memberAttributesMap.get("Premium");
 		drugDetailsPage.validatePremium(Premium);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
@@ -1587,11 +1583,7 @@ public class DCEStepDefinitionAARP {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String Premium = memberAttributesMap.get("Premium");
 		String PlanType = memberAttributesMap.get("Plan Type");
 		String PlanName = memberAttributesMap.get("Plan Name");
@@ -1721,11 +1713,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-/*		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String planName = memberAttributesMap.get("PlanName");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -1746,11 +1734,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String planName = memberAttributesMap.get("PlanName");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -2395,11 +2379,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String CoveredDrug = memberAttributesMap.get("CoveredDrug");
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -3026,5 +3006,19 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		drugDetailsPage.validateDefStandard_Deductible(deductible);
 	}
+
+
+    @Then("the user validates the deductible stage modal text for plans having deductible as follows")
+    public void the_user_validates_the_deductible_stage_modal_text_for_plans_having_deductible_as_follows(io.cucumber.datatable.DataTable givenAttributes) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String deductibleFlag = memberAttributesMap.get("DeductibleFlag");
+        System.out.println("Plan has a deductible and will show the deductible stage modal link : "+deductibleFlag);
+        DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        if(deductibleFlag.equalsIgnoreCase("true") || deductibleFlag.equalsIgnoreCase("yes"))
+            drugDetailsPage.validateModalText_DeductibleStage(deductibleFlag);
+    }
+
 
 }
