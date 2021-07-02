@@ -472,7 +472,7 @@ Then the user validates the Plan details on OLE
     And the user validates the available plans for selected plan types
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
-    Then the user validates the Plan details on OLE_CSNP Plans
+    Then the user validates the Plan details on OLE CSNP Plans
     #Then the user validates TFN in Welcome OLE Right Rail
     Then the user validates Save Return Later modal for OLE Page
     Then the user validates Logo Image on Welcome OLE

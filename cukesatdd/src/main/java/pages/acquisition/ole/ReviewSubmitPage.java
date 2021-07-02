@@ -258,7 +258,6 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(text(), 'Member ID Number')]//following-sibling::*")
 	private WebElement PrescriptionDrugMemberNo;
 	
-	
 	@FindBy(xpath = "//*[contains(text(), 'Rx BIN')]//following-sibling::*")
 	private WebElement PrescriptionRXBINMemberNo;
 	
@@ -322,7 +321,7 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@id, 'medicaidNumber')]/parent::span/input")
 	private WebElement medicaidNumberField;
 	
-	@FindBy(xpath = "//span[text()='How would you like to pay for your plan?']//following-sibling::span")
+	@FindBy(xpath = "//span[contains(text(),'How would you like to pay for your plan?')]//following-sibling::span")
 	private WebElement paymentPlanDisplay;
 	
 	@FindBy(xpath = "//*[contains(text(), 'Optional Supplemental')]//following-sibling::*")
@@ -423,6 +422,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				String prescriptionDrugName= detailsMap.get("Prescription Name");
 				String prescriptionGroupNumber = detailsMap.get("PD Group Number");
 				String prescriptionMemberNumber = detailsMap.get("PD Member Number");
+				String rxBINNumber = detailsMap.get("RX BIN Number");
 				String healthInsuranceName = detailsMap.get("Health Insurance Name");
 				String healthInsuranceGroupNo = detailsMap.get("Group Number");
 				String healthInsuranceMemberNo = detailsMap.get("Member Number");
@@ -478,7 +478,7 @@ public class ReviewSubmitPage extends UhcDriver{
 				String Expected_PlanYear_PlanName = Expected_PlanYear+" "+Expected_PlanName;
 				flag=validateTextPlanName(PlanYear_NameDisplay,Expected_PlanYear_PlanName);
 				String Zip = "ZIP Code: "+Expected_ZipCode+" ("+Expected_County+")";
-				flag&=validateTextPlanName(PlanZipDisplay,Zip);
+				flag&=validateText(PlanZipDisplay,Zip);
 				flag&=validateText(FirstNameDisplay,FirstName);
 				flag&=validateText(LastNameDisplay,LastName);
 				flag&=validateText(MiddleNameDisplay,MiddleName);
@@ -516,6 +516,8 @@ public class ReviewSubmitPage extends UhcDriver{
 				flag&=validateText(PrescriptionDrugName,prescriptionDrugName);
 				flag&=validateText(PrescriptionDrugGroupNo,prescriptionGroupNumber);		
 				flag&=validateText(PrescriptionDrugMemberNo,prescriptionMemberNumber);
+				flag&=validateText(PrescriptionRXBINMemberNo,rxBINNumber);
+				
 				if(!Expected_PlanName.contains("PDP")) {
 				flag&=validateText(PCPName,PCP_Name);		
 				flag&=validateText(PCPNumber,PCP_Number);
@@ -539,7 +541,7 @@ public class ReviewSubmitPage extends UhcDriver{
 					flag&=validateText(OptionalRiders,OptionalRidersdisplay);
 				}
 				
-				if(!(expectedText.contains("0.00"))) {
+				if(!expectedText.contains("0.00")) {
 					flag&=validateText(paymentPlanDisplay,paymentPlan);
 					}
 				
@@ -647,6 +649,16 @@ public class ReviewSubmitPage extends UhcDriver{
 		}
 		return result;
 	}
+	
+	public String converttoReviewDate(String intputDate) {
+		String date = intputDate.substring(2, 4);
+		String month = intputDate.substring(0, 2);;
+		String year = intputDate.substring(4,8);      
+		String outputDate= month+"/"+date+"/"+year; 
+		System.out.println("Output Date====================== "+outputDate);
+		return outputDate;	
+	}
+	
 	public boolean Review_page_enter_required_Medicare_details(Map<String, String> MedicareDetailsMap) throws InterruptedException{
 		
 		boolean result = true;
