@@ -1246,7 +1246,7 @@ public class DrugDetailsPage extends UhcDriver {
 			Assertion.assertTrue("Copay Section - Insulin Tier and correct Copay is Displayed : "
 					+ CopaySection_InsulinTier.getText(), true);
 		} else {
-			Assertion.fail(">>>>> Insulin Copay Failed; Expected - "+insulinCopay+" ; Actual - " + insulinCopay +" <<<<<");
+			Assertion.fail(">>>>> Insulin Copay Failed; Expected - "+insulinCopay+" ; Actual - " + CopaySection_InsulinTier.getText() +" <<<<<");
 		}
 	}
 
