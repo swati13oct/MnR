@@ -273,7 +273,7 @@ public class VppPlanValidationStepDefinition {
 
 				TreeMap<String, String> benefitsDetailMapSorted = new TreeMap<String, String>();
 				 //Looping over total rows with values
-				 for(int rowIndex=0; rowIndex<=3; rowIndex++)
+				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
 		            {
 						int failureCounter = 0;int cellIndex = 0;System.out.println("INSIDE Row");
 					 	
