@@ -112,14 +112,13 @@ public class ProfileSearch extends UhcDriver {
 	/**
 	 * Search Profile and Delete for a member
 	 * @param email
-	 * @param dob
-	 * @param mbi
 	 */
-	public void searchProfileAndDelete(String email,String dob,String mbi) {
+	public void searchProfileAndDelete(String email) {
 		
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		sendkeys(visitorEmail, email);
-		btnSearchShopper.click();
+		//btnSearchShopper.click();
+		jsClickNew(btnSearchShopper);
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
 			DeleteProfile deleteProfile = new DeleteProfile(driver);
@@ -127,7 +126,8 @@ public class ProfileSearch extends UhcDriver {
 			jsClickNew(searchProfileTab);
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, email);
-			btnSearchShopper.click();
+			//btnSearchShopper.click();
+			jsClickNew(btnSearchShopper);
 		}else {
 			CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 20);
 			System.out.println("########No user found########");
@@ -140,8 +140,9 @@ public class ProfileSearch extends UhcDriver {
 	 */
 	public MemberCreateProfile clickOnCreateProfile() {
 			try {
-				btnCreateProfile.click();
-				Thread.sleep(5000);
+				//btnCreateProfile.click();
+				jsClickNew(btnCreateProfile);
+				sleepBySec(5);
 				if(driver.getCurrentUrl().contains("create-profile")) {
 					return new MemberCreateProfile(driver);
 				}else {
@@ -262,13 +263,6 @@ public class ProfileSearch extends UhcDriver {
 	 */
 	public void searchProfileAndDeleteNonMember(HashMap<String,String> givenAttributesMap) {
 		
-		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		List<DataTableRow> givenAttributesRow = nonMemberDetails.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
 		String emailID = givenAttributesMap.get("Email");
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		sendkeys(visitorEmail, emailID);

@@ -289,49 +289,46 @@ Feature: 1.09. ACQ- Shopper Profile
 
   #@searchProfileEmptyFields
   #Scenario Outline: Telesales agent searching for the profile using empty Email,firstname and lastname
-    #Given I am an agent logged into the cloak in tool
-      #| User Name | <username> |
-      #| Password  | <password> |
-    #Then validate empty email firstname and lastname
-#
-    #Examples: 
-      #| username  | password  |
-      #| qavgogine | qavgogine |
-#
+  #Given I am an agent logged into the cloak in tool
+  #| User Name | <username> |
+  #| Password  | <password> |
+  #Then validate empty email firstname and lastname
+  #
+  #Examples:
+  #| username  | password  |
+  #| qavgogine | qavgogine |
+  #
   #@searchProfileInvalidEmail
   #Scenario Outline: Telesales agent searching for the profile using invalid Email
-    #Given I am an agent logged into the cloak in tool
-      #| User Name | <username> |
-      #| Password  | <password> |
-    #Then validate invalid email
-      #| Email | <email> |
-#
-    #Examples: 
-      #| username  | password  | email     |
-      #| qavgogine | qavgogine | yy!ue.com |
-#
+  #Given I am an agent logged into the cloak in tool
+  #| User Name | <username> |
+  #| Password  | <password> |
+  #Then validate invalid email
+  #| Email | <email> |
+  #
+  #Examples:
+  #| username  | password  | email     |
+  #| qavgogine | qavgogine | yy!ue.com |
+  #
   #@searchProfileInvalidFnameLname
   #Scenario Outline: Telesales agent searching for the profile using invalid first name and lastname
-    #Given I am an agent logged into the cloak in tool
-      #| User Name | <username> |
-      #| Password  | <password> |
-    #Then validate invalid first name and last name
-      #| First Name | <fname> |
-      #| Last Name  | <lname> |
-#
-    #Examples: 
-      #| username  | password  | fname    | lname     |
-      #| qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
-
-  @createProfileMemberSP
+  #Given I am an agent logged into the cloak in tool
+  #| User Name | <username> |
+  #| Password  | <password> |
+  #Then validate invalid first name and last name
+  #| First Name | <fname> |
+  #| Last Name  | <lname> |
+  #
+  #Examples:
+  #| username  | password  | fname    | lname     |
+  #| qavgogine | qavgogine | !!AURORA | SHEPLEY__ |
+  @createProfileMemberSP @regressionSPStage
   Scenario Outline: Telesales agent searching for the Creating a profile - email - <email>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
     Then I ask the shopper calling in to provide me with the Email Address
       | Email | <email> |
-      | DOB   | <dob>   |
-      | MBI   | <mbi>   |
     And click on Create Profile button
     Then create a profile with the following details
       | Email      | <email>   |
@@ -362,29 +359,26 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name          | <lname>            |
 
     Examples: 
-      | username  | password  | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
-      | ocpuser | Password@123 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
-      #| qavgogine | qavgogine | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | LEONEL  | DREHMER    |   10010 | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
+      | username | password     | email                    | dob        | mbi           | fname   | lname      | zipCode | enrolledplanName                          | planName                                                         | drugNames | providers                                                       |
+      | ocpuser  | Password@123 | TESTMAINTAINDEMO@GPS.COM | 06/04/1938 | 7GE4-FF9-HG07 | MANISHA | BOOKWALTER |   33134 | Medica HealthCare Plans MedicareMax (HMO) | Medica HealthCare Plans MedicareMax (HMO)                        | No        | Luis Plasencia:8420 W Flagler St Ste 120, Miami-Dade, FL, 33144 |
+      | ocpuser  | Password@123 | LEONEL@MEMBER.COM        | 08/23/1940 | [blank]       | LEONEL  | DREHMER    |   10010 | [blank]                                   | UnitedHealthcare Medicare Advantage Choice Plan 1 (Regional PPO) | No        | No                                                              |
 
-  @createProfileNonMember
+  @createProfileNonMemberSP @regressionSPStage
   Scenario Outline: Telesales agent Creating a Non Member Profile - email - <email>
     Given I am an agent logged into the cloak in tool
       | User Name | <username> |
       | Password  | <password> |
-    Then I ask the shopper calling in to provide me with the Email Address for NonMember
-      | Email      | <email> |
-      | DOB        | <dob>   |
-      | First Name | <fname> |
-      | Last Name  | <lname> |
-    And click on Create Profile button for NonMember
-    Then create a profile with the following details for NonMember
+    Then I ask the shopper calling in to provide me with the Email Address
+      | Email | <email> |
+    And click on Create Profile button
+    Then create a profile with the following details
       | Email      | <email>   |
       | DOB        | <dob>     |
-      | Gender     | <gender>  |
+      | MBI        | <mbi>     |
       | First Name | <fname>   |
       | Last Name  | <lname>   |
       | Zipcode    | <zipCode> |
-      | Consent    | <consent> |
+      | Gender     | <gender>  |
     Then I land on the plan compare page for NonMember
       | Plan Name  | <planName>  |
       | Drugs      | <drugNames> |
@@ -392,7 +386,6 @@ Feature: 1.09. ACQ- Shopper Profile
       | First Name | <fname>     |
       | Last Name  | <lname>     |
       | DOB        | <dob>       |
-      | MBI        | <mbi>       |
     Then the user clicks on back on all plan linnk in Plan Compare page
     Then I land on the plan summary page of VPP for NonMember
       | Plan Name  | <planName>  |
@@ -402,6 +395,5 @@ Feature: 1.09. ACQ- Shopper Profile
       | Last Name  | <lname>     |
 
     Examples: 
-      | username  | password  | email                  | dob        | gender | fname    | lname    | zipCode | consent | planName                             | drugNames                                                                                                                                                                                 | providers                                                                                                                                                                                     |
-      | qavgogine | qavgogine | DFONNMUF@NONMEMBER.COM | 08/20/1946 | F      | DFONNMUF | DFONNMUL |   10010 | YES     | AARP Medicare Advantage Plan 1 (HMO) | nifedipine TAB 60MG ER Osmotic,simvastatin TAB 20MG,trazodone hcl TAB 50MG,levothyroxine sodium TAB 100MCG,nitrofurantoin monohydrate/macrocrystals CAP 100MG,ciprofloxacin hcl TAB 500MG | Maria S Neri-Nixon:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:850 Columbia Rd Ste 130, Cuyahoga, OH, 44145 |
-      | qavgogine | qavgogine | DFPIXROF@NONMEMBER.COM | 11/03/1943 | F      | DFPIXROF | DFPIXROL |   10010 | NO      | AARP Medicare Advantage Plan 1 (HMO) | No                                                                                                                                                                                        | No                                                                                                                                                                                            |
+      | username | password     | email                  | dob        | mbi | gender | fname    | lname    | zipCode | planName                             | drugNames                                                                                                                                                                                 | providers                                                                                                                                                                                     |
+      | ocpuser  | Password@123 | DFONNMUF@NONMEMBER.COM | 08/20/1946 |     | female | DFONNMUF | DFONNMUL |   10010 | AARP Medicare Advantage Plan 1 (HMO) | nifedipine TAB 60MG ER Osmotic,simvastatin TAB 20MG,trazodone hcl TAB 50MG,levothyroxine sodium TAB 100MCG,nitrofurantoin monohydrate/macrocrystals CAP 100MG,ciprofloxacin hcl TAB 500MG | Maria S Neri-Nixon:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:33100 Cleveland Clinic Blvd, Lorain, OH, 44011;Ronald L Garcia:850 Columbia Rd Ste 130, Cuyahoga, OH, 44145 |

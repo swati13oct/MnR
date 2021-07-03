@@ -54,11 +54,14 @@ public class MemberCreateProfile extends UhcDriver {
 	@FindBy(xpath = "//h5")
 	private WebElement shopperProfileCreationHeader;
 	
-	@FindBy(css="p.success.text-success")
+	@FindBy(xpath="//div[@role='alertdialog']")
 	private WebElement successMessage;
 	
 	@FindBy(xpath = "//span[text()='Male']/parent::label")
 	private WebElement genderMale;
+	
+	@FindBy(xpath = "//span[text()='Female']/parent::label")
+	private WebElement genderFeMale;
 	
 	public MemberCreateProfile(WebDriver driver) {
 		super(driver);
@@ -95,6 +98,8 @@ public class MemberCreateProfile extends UhcDriver {
 		
 		String zipcode = givenAttributesMap.get("Zipcode");
 		
+		String gender = givenAttributesMap.get("Gender");
+		
 		try {
 			CommonUtility.waitForPageLoadNew(driver, email, 20);
 			sendkeys(email, emailID);
@@ -102,13 +107,22 @@ public class MemberCreateProfile extends UhcDriver {
 			sendkeys(lastName, lname);
 			sendkeys(dateOfBirth, DOB);
 			sendkeys(shopperZipcode, zipcode);
-			sendkeys(shopperMbi, MBI);
-			selectFromDropDownByText(driver, consumerType, "Member");
-			genderMale.click();
+			if(Strings.isNullOrEmpty(MBI)) {
+				System.out.println("Creating a Non member");
+				if(gender.equalsIgnoreCase("male"))
+					genderMale.click();
+				else
+					genderFeMale.click();
+			}else {
+				sendkeys(shopperMbi, MBI);
+				selectFromDropDownByText(driver, consumerType, "Member");
+				genderMale.click();
+			}
+			
 			String winHandleBefore = driver.getWindowHandle();
 			btnCreateProfile.click();
 			waitforElementNew(successMessage);
-			Thread.sleep(2000);
+			sleepBySec(10);
 			Set<String> tabs = driver.getWindowHandles();
 			for(String tab : tabs) {
 				if(!tab.equals(winHandleBefore)) {
@@ -116,7 +130,6 @@ public class MemberCreateProfile extends UhcDriver {
 					break;
 				}
 			}
-			
 			CommonUtility.checkPageIsReadyNew(driver);
 			if(driver.getCurrentUrl().contains("health-plans.html")) {
 				return new ComparePlansPage(driver);

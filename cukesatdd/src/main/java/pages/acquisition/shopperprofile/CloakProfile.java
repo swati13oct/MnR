@@ -109,7 +109,8 @@ public class CloakProfile extends UhcDriver {
 			validateCloakInForm(userData);
 			String winBeforeClick = driver.getWindowHandle();
 			Thread.sleep(5000);
-			btnCloakIn.click();
+			//btnCloakIn.click();
+			jsClickNew(btnCloakIn);
 			Thread.sleep(15000);
 			ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 			for (String tab : tabs) {

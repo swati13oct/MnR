@@ -231,13 +231,11 @@ public class ShopperProfileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}*/
 		String emailID = givenAttributesMap.get("Email");
-		String dob = givenAttributesMap.get("DOB");
-		String mbi = givenAttributesMap.get("MBI");
 		
 		ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 				.getBean(PageConstants.PROFILE_SEARCH);
 		
-		profileSeacrh.searchProfileAndDelete(emailID, dob, mbi);
+		profileSeacrh.searchProfileAndDelete(emailID);
 		
 	}
 	

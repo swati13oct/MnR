@@ -45,7 +45,7 @@ public class DeleteProfile extends UhcDriver {
 	@FindBy(xpath="//app-tab[@tabtitle='Non Member']//button")
 	private WebElement btnDeleteNonMember;
 	
-	@FindBy(xpath = "//button")
+	@FindBy(xpath = "//button[contains(text(),'Search Shopper')]")
 	private WebElement btnSearchShopper;
 	
 	@FindAll({@FindBy(xpath = "//table/tbody/tr")})
@@ -90,10 +90,11 @@ public class DeleteProfile extends UhcDriver {
 	 */
 	public void deleteAProfile(String emailID) {
 		try {
+			sleepBySec(2);
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, emailID);
 			//btnSearchShopper.click();
-			jsClickNew(driver.findElement(By.xpath("//button")));
+			driver.findElement(By.xpath("//button[contains(text(),'Search Shopper')]")).click();
 			if(searchResults.size()>0) {
 				btnDelete.click();
 				sleepBySec(4);

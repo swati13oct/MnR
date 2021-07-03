@@ -246,7 +246,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'Status')]/following::div[contains(text(),'DOB')]")
 	private WebElement nonMemberDOB;
 
-	@FindBy(css = "#changes-submitted button")
+	@FindBy(xpath = "//button[text()='Continue']")
 	private WebElement popupAccept;
 
 	@FindBy(css = "input.uhc-switch__input")
@@ -304,9 +304,9 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[@id='viewLocationTitle']")
 	private WebElement viewLocationPopupProviderName;
 
-	@FindBy(xpath = "//div[@class='modal-body']/span")
+	@FindBy(xpath = "//div[@class='modal-title']/following-sibling::div")
 	private WebElement allSetDrugsProvidersInfo;
-
+	
 	@FindBy(xpath = "//*[text()='View Plan Details']")
 	private WebElement viewPlanDetailslink;
 
@@ -355,6 +355,16 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath = "//div[text()='Close']/parent::button")
 	private WebElement closeBtn;
+	
+	@FindBy(css = "div.consent-body input")
+	private WebElement termsCheck;
+	
+	@FindBy(xpath = "//button[contains(text(),'Applicant Agrees;')]")
+	private WebElement btnAgreeToConsent;
+	
+	@FindBy(css = "div.meter.animate")
+	private WebElement progressBar;
+	
 	
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -1112,8 +1122,13 @@ public class ComparePlansPage extends UhcDriver {
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
 		String mbi = givenAttributesMap.get("MBI");
-
-		allSet(providers, drugs);
+		
+		if (Strings.isNullOrEmpty(mbi)) {
+			System.out.println("#########Empty Profile#########");
+		}else {
+			allSet(providers, drugs);
+		}
+		
 
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
 		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
@@ -1155,7 +1170,7 @@ public class ComparePlansPage extends UhcDriver {
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(1).findElement(By.xpath("td/span")).getText().trim()));
+						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
 				System.out.println("#########" + providersList.get(1).findElement(By.xpath("td/span")).getText().trim()
 						+ "#########");
 			}
@@ -1185,21 +1200,26 @@ public class ComparePlansPage extends UhcDriver {
 
 		Assertion.assertTrue(btnSaveToMira.isDisplayed());
 	}
+	
+	/**
+	 * Import Drugs for non-member
+	 */
+	public void importDrugsForNonMember() {
+		jsClickNew(btnImportDrugsAndDoctors);
+		jsClickNew(termsCheck);
+		jsClickNew(btnAgreeToConsent);
+		/*
+		 * btnImportDrugsAndDoctors.click(); termsCheck.click();
+		 * btnAgreeToConsent.click();
+		 */
+		waitforElementDisapper(By.cssSelector("div.meter.animate"), 120);
+	}
 
 	/**
 	 * Validate the Agent Mode Banners and Enrolled Plan overlay
 	 */
 	public void validateAgentModeBannersForNonMember(HashMap<String, String> givenAttributesMap) {
 
-		// Handled data table from step definition
-		/*
-		 * List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
-		 * Map<String, String> givenAttributesMap = new HashMap<String, String>(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
 		String plan = givenAttributesMap.get("Plan Name");
 		String drugs = givenAttributesMap.get("Drugs");
 		String providers = givenAttributesMap.get("Providers");
@@ -1207,11 +1227,18 @@ public class ComparePlansPage extends UhcDriver {
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
 
-		allSet(providers, drugs);
+		
 
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
 		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
 				agentModeBanner.getText().trim());
+		
+		Assertion.assertTrue(btnSaveToMira.isDisplayed());
+		Assertion.assertTrue(btnImportDrugsAndDoctors.isDisplayed());
+		
+		importDrugsForNonMember();
+		
+		allSet(providers, drugs);
 
 		// Validate Providers
 		if (!providers.equalsIgnoreCase("no")) {
@@ -1220,26 +1247,24 @@ public class ComparePlansPage extends UhcDriver {
 			validate(editDoctorsLink);
 			if (providers.contains(";")) {
 				String[] provider = providers.split(";");
-				for (int i = 0; i < providersList.size() - 1; i++) {
+				for (int i = 0; i < provider.length-1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
-						Assertion.assertTrue(provider[i].split(":")[0].contains(
-								providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+						Assertion.assertTrue(provider[i].split(":")[0]
+								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
 						System.out.println("#########"
-								+ providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
-								+ "#########");
+								+ providersList.get(i).findElement(By.xpath("td/span")).getText().trim() + "#########");
 					}
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()));
-				System.out.println(
-						"#########" + providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()
-								+ "#########");
+						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
+				System.out.println("#########" + providersList.get(1).findElement(By.xpath("td/span")).getText().trim()
+						+ "#########");
 			}
 
 		} else {
 
-			System.out.println("#########No Providers for this member#########");
+			System.out.println("#########No Providers for this non-member#########");
 		}
 
 		if (!drugs.equalsIgnoreCase("no")) {
@@ -1249,18 +1274,16 @@ public class ComparePlansPage extends UhcDriver {
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
-					Assertion.assertTrue(drugs.contains(
-							drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+					Assertion.assertTrue(drugName[i]
+							.contains(drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()));
 					System.out.println("#########"
-							+ drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
-							+ "#########");
+							+ drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim() + "#########");
 				}
 			}
+
 		} else {
-			System.out.println("#########No Drugs available for this member#########");
+			System.out.println("#########No Drugs available for this non-member#########");
 		}
-		Assertion.assertTrue(btnSaveToMira.isDisplayed());
-		Assertion.assertTrue(btnImportDrugsAndDoctors.isDisplayed());
 	}
 
 	public void allSet(String providers, String drugs) {
@@ -1271,22 +1294,22 @@ public class ComparePlansPage extends UhcDriver {
 			if (!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("no")) {
 				String[] provider = providers.split(";");
 				String[] drugName = drugs.split(",");
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("Number of providers loaded: " + provider.length));
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("Number of drugs loaded: " + drugName.length));
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
+						.contains("number of providers loaded: " + provider.length));
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
+						.contains("number of drugs loaded: " + drugName.length));
 			} else if (!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("yes")) {
 				String[] provider = providers.split(";");
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("Number of providers loaded: " + provider.length));
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
+						.contains("number of providers loaded: " + provider.length));
 				Assertion.assertTrue(
-						allSetDrugsProvidersInfo.getText().trim().contains("Number of drugs loaded: " + "0"));
+						allSetDrugsProvidersInfo.getText().trim().toLowerCase().contains("number of drugs loaded: " + "0"));
 			} else if (!providers.equalsIgnoreCase("yes") && !drugs.equalsIgnoreCase("no")) {
 				String[] drugName = drugs.split(",");
 				Assertion.assertTrue(
-						allSetDrugsProvidersInfo.getText().trim().contains("Number of providers loaded: " + "0"));
+						allSetDrugsProvidersInfo.getText().trim().toLowerCase().contains("number of providers loaded: " + "0"));
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("Number of drugs loaded: " + drugName.length));
+						.contains("number of drugs loaded: " + drugName.length));
 			} else {
 				Assertion.assertEquals("No data within 12 months of order date.",
 						allSetDrugsProvidersInfo.getText().trim());
@@ -1327,11 +1350,11 @@ public class ComparePlansPage extends UhcDriver {
 	 */
 	public VisitorProfilePage allSetAndNavigateToVisitorProfilePage() {
 		allSet("no", "no");
-		//jsClickNew(shoppingCartIcon);
 		scrollToView(shoppingCartIcon);
-		shoppingCartIcon.click();
-		//jsClickNew(lnkProfile);
-		lnkProfile.click();
+		jsClickNew(shoppingCartIcon);
+		//shoppingCartIcon.click();
+		jsClickNew(lnkProfile);
+		//lnkProfile.click();
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
