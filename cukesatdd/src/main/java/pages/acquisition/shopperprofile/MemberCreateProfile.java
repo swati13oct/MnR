@@ -123,6 +123,7 @@ public class MemberCreateProfile extends UhcDriver {
 			String winHandleBefore = driver.getWindowHandle();
 			/* btnCreateProfile.click(); */
 			scrollToView(btnCreateProfile);
+			sleepBySec(2);
 			jsClickNew(driver.findElement(By.xpath("//input[@id='shopperZipCode']/following::button[contains(text(),'Profile')][1]")));
 			waitforElementNew(successMessage);
 			sleepBySec(10);
