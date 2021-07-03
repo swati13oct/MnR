@@ -626,6 +626,7 @@ public class AepPlanDetailsPage extends UhcDriver {
 				
 		for (int tab=0; tab<listOfTabHeaders.size(); tab++) { //note: loop through each table and store info
 			listOfTabHeaders.get(tab).click();
+			sleepBySec(2);
 			int tabIndex=(tab+1);
 			CommonUtility.checkPageIsReady(driver);
 
