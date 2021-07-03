@@ -1311,8 +1311,8 @@ public class ComparePlansPage extends UhcDriver {
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
 						.contains("number of drugs loaded: " + drugName.length));
 			} else {
-				Assertion.assertEquals("No data within 12 months of order date.",
-						allSetDrugsProvidersInfo.getText().trim());
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
+						.contains("No data within 12 months of order date."));
 			}
 			CommonUtility.waitForPageLoad(driver, popupAccept, 100);
 			popupAccept.click();

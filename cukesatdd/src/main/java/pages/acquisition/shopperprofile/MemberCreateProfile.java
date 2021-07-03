@@ -120,7 +120,8 @@ public class MemberCreateProfile extends UhcDriver {
 			}
 			
 			String winHandleBefore = driver.getWindowHandle();
-			btnCreateProfile.click();
+			/* btnCreateProfile.click(); */
+			jsClickNew(btnCreateProfile);
 			waitforElementNew(successMessage);
 			sleepBySec(10);
 			Set<String> tabs = driver.getWindowHandles();
