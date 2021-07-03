@@ -44,17 +44,18 @@ public class oleCommonStepDefinition {
 		String PlanType = givenAttributesMap.get("Plan Type");
 		String ZipCode = givenAttributesMap.get("Zip Code");
 		String County = givenAttributesMap.get("County Name");
-		String premium = givenAttributesMap.get("Monthly Premium");
+		//String premium = givenAttributesMap.get("Monthly Premium");
+		String SiteName;
+		String PlanPremium = "";
 		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR); 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, premium);
+		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 
-		String SiteName;
-		String PlanPremium = "";
+		
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
 		System.out.println("Site Name is : " + SiteName);
 		//-----------------------------------------------------------------------------------------------------
