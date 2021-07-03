@@ -3,6 +3,7 @@ package pages.acquisition.shopperprofile;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -121,7 +122,8 @@ public class MemberCreateProfile extends UhcDriver {
 			
 			String winHandleBefore = driver.getWindowHandle();
 			/* btnCreateProfile.click(); */
-			jsClickNew(btnCreateProfile);
+			scrollToView(btnCreateProfile);
+			jsClickNew(driver.findElement(By.xpath("//input[@id='shopperZipCode']/following::button[contains(text(),'Profile')][1]")));
 			waitforElementNew(successMessage);
 			sleepBySec(10);
 			Set<String> tabs = driver.getWindowHandles();

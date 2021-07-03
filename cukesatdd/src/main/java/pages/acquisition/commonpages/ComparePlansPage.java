@@ -1171,7 +1171,7 @@ public class ComparePlansPage extends UhcDriver {
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
 						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
-				System.out.println("#########" + providersList.get(1).findElement(By.xpath("td/span")).getText().trim()
+				System.out.println("#########" + providersList.get(0).findElement(By.xpath("td/span")).getText().trim()
 						+ "#########");
 			}
 
