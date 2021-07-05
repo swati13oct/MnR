@@ -32,10 +32,11 @@ Feature: 1.12 UAT - Header and Footer flows
     And the user validates Language assistance links
     When user accesses global header of the Medicare Plans home page
     And user verifies the logo
-    And user clicks on Sign in link
-    And the user clicks on browser back button
-    And user clicks on register link
-    And the user clicks on browser back button
+    And user hover over for plan member to click to go to member site
+    #And user clicks on Sign in link
+    #And the user clicks on browser back button
+    #And user clicks on register link
+    #And the user clicks on browser back button
     Then user validates visitor profile
     And the user clicks on browser back button
     And user clicks on visit aarp.org link in the header
