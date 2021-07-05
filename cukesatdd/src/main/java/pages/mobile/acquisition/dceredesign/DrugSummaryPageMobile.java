@@ -193,7 +193,7 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void SelectPharmacy(String PharmacytoSelect) {
 
 		List<WebElement> PharmacyName = driver
-				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
+				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn2') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
 
 		jsClickNew(PharmacyName.get(PharmacyName.size() - 1));
@@ -235,9 +235,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentAddedDrug = Drugs[i];
 			System.out.println("Current Added Drug Name : " + currentAddedDrug);
-			WebElement DrugName = driver.findElement(By.xpath("//span[contains(text(), '" + currentAddedDrug + "')]"));
+			WebElement DrugName = driver.findElement(By.xpath("//div/p[contains(text(), '" + currentAddedDrug + "')]"));
 			WebElement DrugYouPay = driver.findElement(By.xpath(
-					"//span[contains(text(), '" + currentAddedDrug + "')]//following::*[contains(text(), '$')]"));
+					"//div/p[contains(text(), '" + currentAddedDrug + "')]//following::*[contains(text(), '$')]"));
 
 			if (validateNew(DrugName) && validateNew(DrugYouPay)) {
 				System.out
@@ -364,69 +364,73 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		System.out.println("Default Pharmacy Count for Zip - " + pharmacyZipCode + "  : " + PharmacyCountTxt.getText());
 
 	}
-	
+
 	public void validateLISBanner_LISBuydownPlan_DrugSummary(String planName) {
-    	WebElement LISBanner = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'level of Extra Help')]"));
-    	if(validateNew(LISBanner)){
-    		WebElement ExtraHelpLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'Learn more')]"));
-    		System.out.println("Clicking on learn more about extra help link");
-    		switchToNewTabNew(ExtraHelpLink);
-    		CommonUtility.checkPageIsReadyNew(driver);
-    		if(driver.getCurrentUrl().contains("extra-help")){
-    			WebElement ExtraHelpText = driver.findElement(By.xpath("(//h2//*[contains(text(),'Extra Help')])[1]"));
-                validateNew(ExtraHelpText);
-                System.out.println("Extra Help page is displayed");
-    		}
-    		driver.close();
-//    		driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
-    		driver.switchTo().window(CommonConstants.getMainWindowHandle());
-    		System.out.println("Navigated back to drug summary page");
-    	}
-		
+		WebElement LISBanner = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'level of Extra Help')]"));
+		if (validateNew(LISBanner)) {
+			WebElement ExtraHelpLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
+					+ "')]/ancestor::div[contains(@class, 'uhc-card_')]/following-sibling::div//*[contains(text(), 'Learn more')]"));
+			System.out.println("Clicking on learn more about extra help link");
+			switchToNewTabNew(ExtraHelpLink);
+			CommonUtility.checkPageIsReadyNew(driver);
+			if (driver.getCurrentUrl().contains("extra-help")) {
+				WebElement ExtraHelpText = driver.findElement(By.xpath("(//h2//*[contains(text(),'Extra Help')])[1]"));
+				validateNew(ExtraHelpText);
+				System.out.println("Extra Help page is displayed");
+			}
+			driver.close();
+			// driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
+			driver.switchTo().window(CommonConstants.getMainWindowHandle());
+			System.out.println("Navigated back to drug summary page");
+		}
+
 	}
 
-	
-	public void viewDrugPricingModal(String planName){
-		  WebElement viewDrugPricingLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName + "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'priceLinkBtn')]"));
-		  validateNew(viewDrugPricingLink);
-		  jsClickNew(viewDrugPricingLink);
-		  validateNew(DrugPricing_Header);
-		  validateNew(DrugPricing_CloseBtn);
-		  jsClickNew(DrugPricing_CloseBtn);
-		  
-		}
-	
+	public void viewDrugPricingModal(String planName) {
+		WebElement viewDrugPricingLink = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'priceLinkBtn')]"));
+		validateNew(viewDrugPricingLink);
+		jsClickNew(viewDrugPricingLink);
+		validateNew(DrugPricing_Header);
+		validateNew(DrugPricing_CloseBtn);
+		jsClickNew(DrugPricing_CloseBtn);
+
+	}
+
 	public void captureFunctionalToolTips(String planName) {
-		WebElement WhyAverage = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
+		WebElement WhyAverage = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'averageTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhyAverage);
-/*
-		scrollToView(WhyAverage);
-		jsMouseOver(WhyAverage);
-		jsClickNew(WhyAverage);
-		WebElement WhyAverageContent = driver.findElement(By.xpath("//h4[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'averageLinkBtn')]/following-sibling::*[contains(@id , 'averageTooltipContent')]"));
-		validateNew(WhyAverageContent);
-		String WhyAverageContentText = WhyAverageContent.getText().trim();
-		if (validateNew(WhyAverageContent)) {
-			System.out.println("Why Average ToolTip text is present"+WhyAverageContentText);
-		} else
-			Assertion.fail("Why Average ToolTip text is not present");
-		jsMouseOut(WhyAverageContent);
-		*/
-		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4[contains(text(),'" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
+		/*
+		 * scrollToView(WhyAverage); jsMouseOver(WhyAverage); jsClickNew(WhyAverage);
+		 * WebElement WhyAverageContent =
+		 * driver.findElement(By.xpath("//h4[contains(text(), '" + planName+
+		 * "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'averageLinkBtn')]/following-sibling::*[contains(@id , 'averageTooltipContent')]"
+		 * )); validateNew(WhyAverageContent); String WhyAverageContentText =
+		 * WhyAverageContent.getText().trim(); if (validateNew(WhyAverageContent)) {
+		 * System.out.println("Why Average ToolTip text is present"
+		 * +WhyAverageContentText); } else
+		 * Assertion.fail("Why Average ToolTip text is not present");
+		 * jsMouseOut(WhyAverageContent);
+		 */
+		WebElement WhatsIncluded = driver.findElement(By.xpath("//h4[contains(text(),'" + planName
+				+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@aria-describedby , 'includeTooltipContent') and contains(@class , 'link-desk')]"));
 		validateNew(WhatsIncluded);
 		scrollToView(WhyAverage);
-/*		jsMouseOver(WhatsIncluded);
-		jsClickNew(WhatsIncluded);
-		WebElement WhatsIncludedContent = driver.findElement(By.xpath("//h4[contains(text(), '" + planName+ "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'includeLinkBtn')]/following-sibling::*[contains(@id , 'TooltipContent')]"));
-		validateNew(WhatsIncludedContent);
-		String WhatsIncludedContentText = WhatsIncludedContent.getText().trim();
-		if (validateNew(WhatsIncludedContent)) {
-			System.out.println("Whats Included ToolTip text is present"+WhatsIncludedContentText);
-		} else
-			Assertion.fail("Whats Included ToolTip text is not present");
-		jsMouseOut(WhatsIncludedContent);
-		*/
-		
+		/*
+		 * jsMouseOver(WhatsIncluded); jsClickNew(WhatsIncluded); WebElement
+		 * WhatsIncludedContent = driver.findElement(By.xpath("//h4[contains(text(), '"
+		 * + planName+
+		 * "')]/ancestor::div[contains(@class,'uhc-card_')]/following-sibling::div//*[contains(@id , 'includeLinkBtn')]/following-sibling::*[contains(@id , 'TooltipContent')]"
+		 * )); validateNew(WhatsIncludedContent); String WhatsIncludedContentText =
+		 * WhatsIncludedContent.getText().trim(); if (validateNew(WhatsIncludedContent))
+		 * { System.out.println("Whats Included ToolTip text is present"
+		 * +WhatsIncludedContentText); } else
+		 * Assertion.fail("Whats Included ToolTip text is not present");
+		 * jsMouseOut(WhatsIncludedContent);
+		 */
+
 	}
 
 	@FindBy(xpath = "//button[contains(@id, 'mailSelectPharmacy')][contains(@aria-label, 'OptumRx Mail Service Pharmacy')]")
@@ -437,10 +441,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
-	
+
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
 	private WebElement breaCrumbLink;
-	
+
 	public void validateBreadCrumb(String breadCrumb) {
 		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
 				breaCrumbLink.getText().equals(breadCrumb));
@@ -458,9 +462,6 @@ public class DrugSummaryPageMobile extends UhcDriver {
 				(validateNew(PharmacyFilterErrorMsg)
 						&& PharmacyFilterErrorMsg.getText().contains("least two characters")));
 	}
-	
-	
-	
 
 	public void ApplyPharmacyFilter(String filterText) {
 		validateNew(PharmacyFilterTxtBx);
@@ -610,16 +611,23 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	@FindBy(xpath = "//label/span[contains(text(),'Medicare Prescription Drug Plans')]")
 	private WebElement pdpPlan;
 
+	@FindBy(xpath = "//select[@dlassetid='rd_planselect_mob']")
+	private WebElement planDropDown;
+
 	public void clickOnPdpPlan() throws InterruptedException {
-		Thread.sleep(6000);
-		validateNew(pdpPlan);
-		pdpPlan.click();
+		Thread.sleep(3000);
+		jsClickNew(planDropDown);
+
+		Select sl = new Select(planDropDown);
+		String countyValue = sl.getOptions().get(2).getText().toString();
+		mobileSelectOption(planDropDown, countyValue, true);
 		validateNew(viewProceBtn);
-		viewProceBtn.click();
+		
+		jsClickNew(viewProceBtn);
 	}
 	// Switch to Generic
 
-	@FindBy(xpath = "//h3[contains(text(), 'Drug Pricing')]")
+	@FindBy(xpath = "//h2[contains(text(), 'Drug Pricing')]")
 	public WebElement DrugPricing_Header;
 
 	@FindBy(xpath = "//*[contains(@id, 'cancelicon')]")
@@ -724,9 +732,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(clickSnpplan);
-		JavascriptExecutor je = (JavascriptExecutor) driver;
-		je.executeScript("arguments[0].click()", clickSnpplan);
+		jsClickNew(planDropDown);
+
+		Select sl = new Select(planDropDown);
+		String countyValue = sl.getOptions().get(2).getText().toString();
+		mobileSelectOption(planDropDown, countyValue, true);
 	}
 
 	@FindBy(xpath = "//*[contains(text(), 'Change Pharmacy') or @id='changePharmacyLink']")
@@ -1122,10 +1132,10 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		validateNew(dceNBAModal);
 		validateNew(dceNBAModalBtn);
 	}
-	
+
 	@FindBy(xpath = "//select[contains(@dlassetid,'planselect')]")
 	private WebElement planToggleDropdown;
-	
+
 	public PlanDetailsPageMobile clickViewplanDetailsForPlan(String plantype, String planName) {
 
 		String planType = plantype.toUpperCase();
