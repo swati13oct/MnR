@@ -336,10 +336,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(id = "search-field")
 	private WebElement searchfield;
 
-	@FindBy(id = "dupIconFlyOut")
+	//@FindBy(id = "dupIconFlyOut")
+	@FindBy(xpath = "//*[contains(@class,'saved_items')]")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(css = "a#visitor-profile-header")
+	//@FindBy(css = "a#visitor-profile-header")
+	@FindBy(xpath = "//*[contains(@id,'saved-items-button') and contains(@class,'show-element')]")
 	private WebElement lnkProfile;
 
 	@FindBy(xpath = "//button[@id='sam-call-button']//*[contains(@class,'sam__button__text desktop')]")
