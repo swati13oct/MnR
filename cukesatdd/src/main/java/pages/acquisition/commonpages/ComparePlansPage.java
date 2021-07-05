@@ -1,5 +1,6 @@
 package pages.acquisition.commonpages;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -1220,14 +1221,12 @@ public class ComparePlansPage extends UhcDriver {
 	 */
 	public void validateAgentModeBannersForNonMember(HashMap<String, String> givenAttributesMap) {
 
-		String plan = givenAttributesMap.get("Plan Name");
 		String drugs = givenAttributesMap.get("Drugs");
 		String providers = givenAttributesMap.get("Providers");
 		String fname = givenAttributesMap.get("First Name");
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
-
-		
+		String actualDrugs = "";
 
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
 		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
@@ -1273,11 +1272,12 @@ public class ComparePlansPage extends UhcDriver {
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
+				actualDrugs = actualDrugs+drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()+",";
+			}
+			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
-					Assertion.assertTrue(drugName[i]
-							.contains(drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()));
-					System.out.println("#########"
-							+ drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim() + "#########");
+					Assertion.assertTrue(actualDrugs.contains(drugName[i]));
+					System.out.println("#########"+ actualDrugs.split(",")[i] + "#########");
 				}
 			}
 
