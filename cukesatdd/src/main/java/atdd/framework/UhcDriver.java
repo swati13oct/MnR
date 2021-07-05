@@ -642,56 +642,8 @@ public abstract class UhcDriver {
 			System.out.println("Click and JsClick failed");
 		}
 	}
-	
-	
-	public void iOSClickNew(WebElement element) {
-		try {
-			
-			String previousPage = driver.getPageSource();
-			
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript(
-					"var ele = arguments[0];ele.addEventListener('click', function() {ele.setAttribute('automationTrack','true');});",
-					element);
-			// checkElementisEnabled(element);
-			scrollToView(element);
-			element.click();
-			sleepBySec(2);
-			String seleniumClick = element.getAttribute("automationTrack");
-			System.out.println("Selenium Click executed........" + seleniumClick);
-			
-			int count = 0;
-			boolean newPageLoaded = false;
-			while(count < 2) {
-				String newPage = driver.getPageSource();
-				if(!previousPage.equals(newPage)) {
-					newPageLoaded = true;
-					break;
-				}
-				sleepBySec(2);
-				count ++;
-			}
-			System.out.println("Page loaded : " + newPageLoaded + ", took : " + count + " retries");
-			
-			// If automationTrack is null and element is displayed,
-			// then selenium click was not successful
-			seleniumClick = (seleniumClick == null && element.isDisplayed()) ? "false" : "true";
-
-			if(!seleniumClick.equalsIgnoreCase("true") || !newPageLoaded) {
-				System.out.println("Trying JSClick on IOS ..........");
-				JavascriptExecutor js1 = (JavascriptExecutor) driver;
-				js1.executeScript("arguments[0].click();", element);
-			}
-		} catch (NoSuchElementException | StaleElementReferenceException e) {
-			System.out.println("Selenium click got executed but, " + e.getMessage());
-		} catch (Exception e) {
-			System.out.println("Click and JsClick failed");
-		}
-	}
-	 
 
 	public void jsClickNew(WebElement element) {
-		
 
 		/*JavascriptExecutor js = (JavascriptExecutor) driver;
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
@@ -705,7 +657,7 @@ public abstract class UhcDriver {
 			
 			/* To handle iOS specific click problem By: Harshal Ahire*/
 			 
-			iOSClickNew(element);
+			iOSClick(element);
 		} else {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
@@ -738,14 +690,13 @@ public abstract class UhcDriver {
 	}
 
 	public boolean scrollToView(WebElement element) {
-		if (driver.getClass().toString().toUpperCase().contains("IOS") ||
-				driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-			/*Actions ac = new Actions(driver);
+		if (driver.getClass().toString().toUpperCase().contains("IOS")
+				|| driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			ac.moveToElement(element);
 			System.out.println("Scroll finished to element on IOS device");*/
 
 			scrollElementInMobileView(element);
-//			iosScroll(element);
+			// iosScroll(element);
 
 		} else {
 			try {
@@ -959,7 +910,8 @@ public abstract class UhcDriver {
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			String dropDownOptionText = dropdownElement.findElement(By.xpath("//option[@value='" + value + "']")).getText().trim();
+			String dropDownOptionText = dropdownElement.findElement(By.xpath("//option[@value='" + value + "']"))
+					.getText().trim();
 			mobileSelectOption(dropdownElement, dropDownOptionText, true);
 		} else {
 			dropdown.selectByValue(value);
@@ -1326,7 +1278,7 @@ public abstract class UhcDriver {
 			act.click(element).perform();
 		} else
 			jsClickNew(element);
-//			jsClickMobile(element);
+		// jsClickMobile(element);
 	}
 
 	public void mobileactionsendkeys(WebElement element, String keys) {
@@ -1377,7 +1329,7 @@ public abstract class UhcDriver {
 
 	/**
 	 * @author Murali - mmurugas This method will select option from dropdown based
-	 *         on visible text mobile
+	 *         on visible text mobile Updated By - Harshal Ahire
 	 */
 	public void mobileSelectOption(WebElement selectElement, String option, boolean clickElement) {
 
@@ -1722,9 +1674,9 @@ public abstract class UhcDriver {
 		jsClickNew(pdfLink);
 		
 		Set<String> contexts = mobileDriver.getContextHandles();
-		
-		for(String context: contexts) {
-			if(context.contains("NATIVE_APP")) {
+
+		for (String context : contexts) {
+			if (context.contains("NATIVE_APP")) {
 				mobileDriver.context(context);
 				try {
 					mobileDriver.findElement(By.id("android:id/button1")).click();

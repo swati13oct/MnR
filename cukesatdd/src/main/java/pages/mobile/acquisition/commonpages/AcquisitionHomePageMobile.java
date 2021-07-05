@@ -48,7 +48,7 @@ import pages.mobile.acquisition.planrecommendationengine.CommonutilitiesMobile;
 public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	String CallSamPopupTitle = "Need Help? Call us.";
-//	@FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
+	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
@@ -227,7 +227,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[@class='container meded-article-header']/h1']")
 	private WebElement MALandingHeading;
 
-//	@FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
+	// @FindBy(xpath = "//*[contains(@class,'uhc-zip-button')]")
 	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
@@ -335,7 +335,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
 
-//	@FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
+	// @FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
 	@FindBy(css = "#addDrug")
 	public WebElement AddMyDrugsBtn;
 	
@@ -602,6 +602,16 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	public DCETestHarnessPageMobile GetDCEtestHarnessPage() {
 		return new DCETestHarnessPageMobile(driver);
+	}
+
+	public void openMobileURL() {
+		if (MRScenario.environment.equalsIgnoreCase("prod")) {
+			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
+		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
+			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
+		} else
+			startNewMobile(AARP_ACQISITION_PAGE_URL);
+		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
 	}
 
 	public void openPRE() {
@@ -931,19 +941,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			if (MRScenario.environment.equals("offline")) {
 				startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_OFFLINE_PAGE_URL;
-//				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.equals("prod")) {
 				startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PROD_PAGE_URL;
-//				checkModelPopup(driver, 45);
+				checkModelPopup(driver, 45);
 			} else if (MRScenario.environment.contains("stage-0")) {
 				startNewMobile(AARP_ACQISITION_PAGE_URL_NEW);
-//				checkModelPopup(driver, 20);
+				checkModelPopup(driver, 20);
 			} else {
 				startNewMobile(AARP_ACQISITION_PAGE_URL);
 				testSiteUrl = AARP_ACQISITION_PAGE_URL;
 				checkForSecurityPage();
-//				checkModelPopup(driver, 10);
+				checkModelPopup(driver, 10);
 			}
 		} else if (site.equalsIgnoreCase("PRE") || site.equalsIgnoreCase("ARE")) {
 			System.out.println("Temporary condition added to bypass openAndValidate for PRE/ARE"); // added on 3/3/21 as
@@ -1208,11 +1218,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			jsClickNew(viewPlansButton);
 		}
 
-//		CommonUtility.waitForPageLoad(driver, countyModal, 45);
+		// CommonUtility.waitForPageLoad(driver, countyModal, 45);
 		if (validate(countyModal))
 			jsClickNew(driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + countyName + "']")));
 		pageloadcomplete();
-//		CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
+		// CommonUtility.waitForPageLoadNew(driver, vppTop, 30);
 		if (driver.getCurrentUrl().contains("plan-summary")) {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
@@ -2583,16 +2593,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	public void openMobileURL() {
-		if (MRScenario.environment.equalsIgnoreCase("prod")) {
-			startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
-		} else if (MRScenario.environment.equalsIgnoreCase("offline")) {
-			startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
-		} else
-			startNewMobile(AARP_ACQISITION_PAGE_URL);
-		System.out.println("Current mobile page URL: " + driver.getCurrentUrl());
-	}
-
 	public void openTelesalesAgentPortal() {
 		if (MRScenario.environment.equalsIgnoreCase("team-c")) {
 			startNewMobile(AARP_TELESALES_AGENT_PAGE_URL);
@@ -3031,8 +3031,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return null;
 	}
 
-	public EnterZipCodePage enterZipCode() {
-		return new EnterZipCodePage(driver);
+	public EnterZipCodePageMobile enterZipCode() {
+		return new EnterZipCodePageMobile(driver);
 	}
 
 	public void validateAARPlogo() {
@@ -3680,7 +3680,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	@FindBy(xpath = "//*[contains(text(),'UnitedHealthcare Insurance Company or an affiliate')]")
+	@FindBy(xpath = "//div[contains(@class,'companyNameHeader')]//*[contains(text(),'UnitedHealthcare Insurance Company')]")
 	private WebElement UHCICSubTitle;
 
 	public void validateSubtitle() {
@@ -3732,7 +3732,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//*[contains(@class,'uhc-tempo-button') and contains(text(),'Find an Agent')]")
 	private WebElement requestAgentBtn;
 
-	public pages.mobile.acquisition.commonpages.RequestHelpAndInformationPage navigateToMaMoreHelpAndInfo() {
+	public RequestHelpAndInformationPageMobile navigateToMaMoreHelpAndInfo() {
 
 		Actions actions = new Actions(driver);
 		PageFactory.initElements(driver, this);
@@ -3743,7 +3743,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		pageloadcomplete();
 		// CommonUtility.waitForPageLoadNew(driver, requestAgentApptDropdown, 60);
 		if (validateNew(requestAgentBtn)) {
-			return new pages.mobile.acquisition.commonpages.RequestHelpAndInformationPage(driver);
+			return new RequestHelpAndInformationPageMobile(driver);
 		}
 		return null;
 	}
@@ -3756,8 +3756,6 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	@FindBy(xpath = "(//a[contains(@href,'https://www.myuhcagent.com/')])[1]")
 	private WebElement RightRail_FindAnAgentMedsupp;
-
-	
 
 	public void clickonFindanAgentlink(String ExpectedUHCAgentURL) {
 		threadsleep(3);
@@ -3795,8 +3793,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "ghn_lnk_3")
 	private WebElement learnaboutMedicare;
 
-	public ShopForPlanNavigationPageMobile HoveronalearnaboutMedicare()
-			throws InterruptedException {
+	public ShopForPlanNavigationPageMobile HoveronalearnaboutMedicare() throws InterruptedException {
 		waitforElement(learnaboutMedicare);
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
 				|| driver.getClass().toString().toUpperCase().contains("IOS")) {
@@ -3846,7 +3843,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		jsClickNew(learnAboutMedicareHomeScreen);
 		waitForPageLoadSafari();
 		String urlCheck = driver.getCurrentUrl();
-		if (urlCheck.contains("medicare-education.html")) {
+		if (urlCheck.contains("medicare-education-classic.html")) {
 			return new LearnAboutMedicareHomePageMobile(driver);
 		} else {
 			return null;
@@ -3904,7 +3901,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//div//p[contains(text(),'Already a member?')]")
 	private WebElement CallSamTFNMember_Medsup;
 
-	public AcquisitionHomePage validateTFNCallpopup() throws InterruptedException {
+	public AcquisitionHomePageMobile validateTFNCallpopup() throws InterruptedException {
 		driver.navigate().refresh();
 		CommonUtility.checkPageIsReady(driver);
 		CheckiPerseptions();
@@ -4233,5 +4230,51 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			return new VPPPlanSummaryPageMobile(driver);
 		}
 		return null;
+	}
+
+	public void selectStateForGeotargeting(String geoState) {
+		WebElement stateDropDown = driver.findElement(By.id("state-select"));
+		waitTllOptionsAvailableInDropdown(stateDropDown, 5);
+		System.out.println("State to be Selected: " + geoState);
+		String stateXPath = "//select[@id='state-select']//option[contains(@value,'" + geoState + "')]";
+		WebElement stateGeotargeting = driver.findElement(By.xpath(stateXPath));
+		selectFromDropDownByValue(stateDropDown, geoState);
+		if (!geoState.equalsIgnoreCase(stateGeotargeting.getText())) {
+			Assert.fail("Wrong state selected for geotarget");
+		}
+		// jsClickNew(stateGeotargeting);
+		waitforElementNew(stateGeotargeting, 5);
+		System.out.println("State selected for Geotargetting: " + stateGeotargeting.getText());
+		waitforElementNew(stateGeotargeting, 5);
+
+	}
+
+	public LearnAboutMedicareHomePageNewMobile clickLearnMoreAboutMedicareOnHomePage() {
+
+		validateNew(learnAboutMedicareHomeScreen);
+		scrollToView(learnAboutMedicareHomeScreen);
+		jsClickNew(learnAboutMedicareHomeScreen);
+		waitForPageLoadSafari();
+		String urlCheck = driver.getCurrentUrl();
+		if (urlCheck.contains("medicare-education.html")) {
+			return new LearnAboutMedicareHomePageNewMobile(driver);
+		} else {
+			return null;
+		}
+	}
+
+	public void clickOnPlanRecommendationButton() {
+		CommonUtility.checkPageIsReadyNew(driver);
+		WebElement lnkPRE = driver
+				.findElement(By.xpath("//a[contains(@href,'/plan-recommendation-engine.html') and @role='button']"));
+		jsClickNew(lnkPRE);
+		sleepBySec(5);
+		if (driver.getCurrentUrl().contains("/plan-recommendation-engine.html")) {
+			System.out.println("Plan Recommendation Engine open successfully");
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("Plan Recommendation Engine did not open successfully");
+		}
+		driver.navigate().back();
 	}
 }

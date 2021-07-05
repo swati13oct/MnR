@@ -34,7 +34,7 @@ public class MetlifeSiteMapPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	public Rallytool_Page findaprovidermetlifesitemapclick() {
+	public Rallytool_PageMobile findaprovidermetlifesitemapclick() {
 		
 		validate(metlifesitemappagefindaproviderlink);
 		
@@ -44,7 +44,7 @@ public class MetlifeSiteMapPage extends UhcDriver {
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;
