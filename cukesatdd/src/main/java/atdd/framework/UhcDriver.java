@@ -692,9 +692,6 @@ public abstract class UhcDriver {
 	public boolean scrollToView(WebElement element) {
 		if (driver.getClass().toString().toUpperCase().contains("IOS")
 				|| driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-			ac.moveToElement(element);
-			System.out.println("Scroll finished to element on IOS device");*/
-
 			scrollElementInMobileView(element);
 			// iosScroll(element);
 

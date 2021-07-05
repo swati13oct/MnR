@@ -1,15 +1,11 @@
 package pages.mobile.acquisition.commonpages;
 
-import static atdd.framework.Assertion.assertTrue;
-import static org.testng.Assert.assertTrue;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.poi.util.SystemOutLogger;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.openqa.selenium.Alert;
@@ -32,9 +28,7 @@ import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.PageTitleConstants;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.mobile.acquisition.dce.bluelayer.DCETestHarnessPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 import pages.mobile.acquisition.ole.OLETestHarnessPageMobile;
@@ -1125,14 +1119,14 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 
 	}
 
-	public DisclaimersPageMobile disclaimersClick() {
+	public DisclaimersAARPPageMobile disclaimersClick() {
 		scrollToView(footerDisclaimersLink);
 		validateNew(footerDisclaimersLink);
 		// footerDisclaimersLink.click();
 		jsClickNew(footerDisclaimersLink);
 		pageloadcomplete();
 		if (driver.getCurrentUrl().contains("disclaimer")) {
-			return new DisclaimersPageMobile(driver);
+			return new DisclaimersAARPPageMobile(driver);
 		}
 		return null;
 
