@@ -13,7 +13,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.List;
 
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.GlobalWebElements;
@@ -233,6 +236,23 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
     @FindBy(css = "div a[class*='uhc-tempo-button--primary']")
 	private WebElement HeaderGetStartedMedicareArticles;
     
+//Inside Medicare Education Menu
+    
+    @FindBy(css = "div[class*='NewCustomRTE parsys'] span[class*='heading-2']")
+	private List<WebElement> PREWidegetTitle;
+    
+    @FindBy(css = "div[class*='aem-Grid aem-Grid--12'] div[class*='layout-container'] a[href*='/plan-recommendation-engine.html']")
+	private WebElement GetaPlanRecommBtn;
+    
+    @FindBy(css = "ul[class*='uhc-side-nav--secondary'] li:nth-child(3) a")
+	private WebElement CoverageOptionsLink;
+    
+    @FindBy(css = "ul[class*='uhc-side-nav--secondary'] li:nth-child(5) a")
+	private WebElement MedicareCostBasicsLink;
+    
+    @FindBy(css = "ul[class*='uhc-side-nav--secondary'] li:nth-child(6) a")
+	private WebElement OriginalMedicareLink;       
+    
 //'Get Help Choosing' is Inside Shop Menu
     
     @FindBy(css = "div[class*='aem-GridColumn'] a[title='Learn More']")
@@ -299,6 +319,9 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 	
 	@FindBy(css = ".footer-middle>p:nth-of-type(2)")
 	public WebElement footerLastUpdated;
+	
+	@FindBy(css = "select#state-select")
+	public WebElement selectState;
         
 // DCE elements
 	
@@ -739,6 +762,64 @@ public class PlanRecommendationEngineHeaderAndFooter extends GlobalWebElements {
 		validate(dceTitle, 30);
 		Assert.assertTrue(dceTitle.getText().contains("Drug Cost Estimator"));
 	}
+	
+//	Navigating Plan RecommendationEngine via Learning About Medicare --> Medicare Education -> PRE Widget
+			public void navigationToPlanRecommendationEngineViaMedicareEducation() {
+				System.out.println("Validating PRE Widget in Medicare Education pages");
+				state();
+				validate(headerNavigationBarLearnAboutMedicareTab, 45);
+//				desktopCommonUtils.MouseOver(headerNavigationBarLearnAboutMedicareTab, Browsername);
+				jsMouseOver(headerNavigationBarLearnAboutMedicareTab);
+//				jsClickNew(headerNavigationBarLearnAboutMedicareTab);
+				headerEligibilityLink.click();
+				validate(HeaderBreadcrumb, 30);
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Medicare Eligibility"), "Medicare Eligibility page not opened");
+				PRE();
+				scrollToView(CoverageOptionsLink);
+				validate(CoverageOptionsLink);
+				CoverageOptionsLink.click();
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Coverage Options"), "Coverage Choices page not opened");
+				PRE();
+				scrollToView(MedicareCostBasicsLink);
+				validate(MedicareCostBasicsLink);
+				MedicareCostBasicsLink.click();
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Medicare Cost Basics"), "Medicare Cost Basics page not opened");
+				PRE();
+				scrollToView(OriginalMedicareLink);
+				validate(OriginalMedicareLink);
+				OriginalMedicareLink.click();
+				Assert.assertTrue(HeaderBreadcrumb.getText().trim().contains("Home / Introduction to Medicare / Original Medicare"), "Original Medicare page not opened");
+				PRE();
+			}	
+			
+			//PRE Widget Validation and Navigation to PRE
+			public void PRE() {
+				int count = PREWidegetTitle.size();
+				for(int i=0;i<count;i++) {
+					if(PREWidegetTitle.get(i).getText().equalsIgnoreCase("Get a Plan Recommendation") || PREWidegetTitle.get(i).getText().equalsIgnoreCase("Need Help Finding a Plan?")){
+						System.out.println("PRE Widget is Available in Medicare Education");
+						scrollToView(GetaPlanRecommBtn);
+						validate(GetaPlanRecommBtn);
+						GetaPlanRecommBtn.click();
+						Assert.assertTrue(driver.getCurrentUrl().contains("/plan-recommendation-engine.html"),"PRE Not opened");
+						browserBack();
+						threadsleep(2000);
+						waitForPageLoadSafari();
+						break;
+					}
+					else
+						System.out.println("PRE Widget is not Available");
+				}
+			}			
+			
+//Reseting State to Select State
+			public void state() {
+				headerNavigationBarHomeTab.click();
+				scrollToView(selectState);
+				Select dropdown = new Select(selectState);
+				waitUntilSelectOptionsPopulated(dropdown);
+				dropdown.selectByVisibleText("Select State");
+			}
 	
 //ZipCode Function inside Shop for a Plan
 	public void zipcodeFunctionInShopforaplan(String zipcode) throws InterruptedException {

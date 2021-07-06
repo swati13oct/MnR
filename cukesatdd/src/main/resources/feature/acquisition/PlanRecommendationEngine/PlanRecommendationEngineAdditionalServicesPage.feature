@@ -23,7 +23,7 @@ Feature: Plan Recommendation Engine flow - Verify Additional Services page in pl
     Then user validate elements in additional services page
       | Drug Selection | <Drug Selection> |
 		
-		@FunctionalAARP
+		@FunctionalAARP @regressionAARPmobile
     Examples: 
        | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds     | travel            | doctors         | DoctorsName | isMultiDoctor | Drug Selection |
      	 | AARP |   10001 | NO            | [blank] | None          | Medicaid,nursing | outsideUS,regular | AcceptsMedicare | [blank]     | [blank]       | No             |

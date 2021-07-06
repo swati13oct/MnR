@@ -2028,6 +2028,22 @@ public String verifyplanNameCompare(WebElement plan,WebElement planCompare) {
     return exceptedplanName;
 }
 
+public void ValidatePREWithoutMSPlan(String userType) {
+	System.out.println("Checking PRE widget in VP without MS Plan saving...");
+	validate(PRESection, 30);
+	PRESection.click();
+	if (userType.equalsIgnoreCase("Guest")) {
+		validate(SavedRecomTitle, 30);
+		validate(PRETitleinVP, 30);
+		validate(GetStartedButton, 30);
+		validate(PREImage, 30);
+	} else {
+		validate(SavedRecomTitle, 30);
+		validate(PREImage, 30);
+		validate(EditMyResponsesLink, 30);
+	}
+}
+
 public boolean click_ViewPlanLink(WebElement plantype) {
 	boolean viewlink_presents = false;
 	System.out.println("Checking viewlink Status...");

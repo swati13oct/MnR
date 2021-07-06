@@ -600,7 +600,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		return new DCETestHarnessPageMobile(driver);
 	}
 
-	public void openPRE() {
+	public void openPRE(String site) {
 		if (!(MRScenario.getProps() == null)) {// If running from local
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2-aarp")) {
 				startNewMobile(
@@ -628,20 +628,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
 			}
 		} else { // For jenkins job
-			String jenkinsRunnerFiles = MRScenario.getRunnerFileName();
+			String jenkinsTagLists = MRScenario.getTagLists();
 			if (MRScenario.environment.equalsIgnoreCase("digital-uatv2")
 					|| MRScenario.environment.equalsIgnoreCase("stage")
 					|| MRScenario.environment.equalsIgnoreCase("offline-stage")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("ULAYER")) {
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
 							startNewMobile(AARP_ACQISITION_PAGE_URL.replace("www.", ""));
 						else
 							startNewMobile(AARP_ACQISITION_PAGE_URL);
 					}
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("BLAYER")) {
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC")) {
 						if (MRScenario.environment.equalsIgnoreCase("digital-uatv2"))
 							startNewMobile(UMS_ACQISITION_PAGE_URL.replace("www.", ""));
 						else
@@ -650,22 +648,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 				}
 			}
 			if (MRScenario.environment.equalsIgnoreCase("offline")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("ULAYER"))
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
 						startNewMobile(AARP_ACQISITION_OFFLINE_PAGE_URL);
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("BLAYER"))
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
 						startNewMobile(UMS_ACQISITION_OFFLINE_PAGE_URL);
 				}
 			}
 			if (MRScenario.environment.equalsIgnoreCase("prod")) {
-				for (String rname : jenkinsRunnerFiles.split(",")) {
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("ULAYER"))
+				for (String rname : jenkinsTagLists.split(",")) {
+					if (rname.toUpperCase().contains("AARP") || site.toUpperCase().contains("AARP"))
 						startNewMobile(AARP_ACQISITION_PROD_PAGE_URL);
-					if (rname.toUpperCase().contains("PLANRECOMMENDATIONENGINE")
-							&& rname.toUpperCase().contains("BLAYER"))
+					if (rname.toUpperCase().contains("UHC") || site.toUpperCase().contains("UHC"))
 						startNewMobile(UMS_ACQISITION_PROD_PAGE_URL);
 				}
 			}

@@ -11,6 +11,7 @@ import java.util.Random;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -61,6 +62,21 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	
 	@FindBy(css = ".editPref button")
 	private WebElement editYourResponse;
+	
+	@FindBy(css = "div[data-rel='#plan-list-1'] a")
+	private WebElement MAViewPlansLink;
+	
+	@FindBy(css = "div[data-rel='#plan-list-3'] a")
+	private WebElement PDPViewPlansLink;
+	
+	@FindBy(css = "div[data-rel='#plan-list-4'] a")
+	private WebElement SNPViewPlansLink;
+	
+	@FindBy(css = "div[data-rel='#plan-list-1'] span.ng-binding")
+	private WebElement MAPlanCount;
+	
+	@FindBy(css = "div[data-rel='#plan-list-4'] span.ng-binding")
+	private WebElement SNPPlanCount;
 
 	//Save Results elements
 	
@@ -73,6 +89,12 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	@FindBy(css = "#saveResultPopupClose")
 	private WebElement saveResultsPopupClose;
 	
+	@FindBy(xpath = "//button[contains(text(),'Sign In')]")
+	private WebElement SignInButton;
+	
+	@FindBy(css = "#cancelButton")
+	private WebElement cancelLink;
+	
 	@FindBy(css = "button#keepShoppingBtn")
 	private WebElement KeepShoppingPlansButton;
 	
@@ -81,6 +103,25 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 	
 	@FindBy(css = "li.planTileGrid")
 	private List<WebElement> plantiles;
+	
+	@FindBy(xpath = "//button[contains(text(),'Create Profile')]")
+	private WebElement CreateProfileButton;
+	
+	//Shopping Cart elements
+		@FindBy(css = "img[alt*='Shopping Cart']")
+		private WebElement ShoppingCartImg;
+		
+		@FindBy(css = "h3#guest-profile")
+		private WebElement guestProfileLink;
+		
+		@FindBy(css = "h3#auth-profile")
+		private WebElement AuthProfileLink;
+		
+		@FindBy(xpath = "(//a[contains(text(),'Sign Out')])[2]")
+		private WebElement signOut;
+		
+		@FindBy(xpath = "//a[contains(text(),'Sign In')]")
+		private WebElement signInLink;
 
 	// Edit Responses page Elements
 
@@ -175,9 +216,88 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		saveYourResults.click();
 		validate(saveResultsTitle);
 		validate(saveResultsPopupClose, 30);
-		validate(KeepShoppingPlansButton, 30);
-		validate(ViewProfileButton, 30);
 		return firstRecomPlanName;
+	}
+	
+	public void ValidatePREWidget(String userType,String plantype, String username, String password) {
+		if(userType.equalsIgnoreCase("Guest")){
+			cancelLink.click();
+			shoppingcartNavigation(userType,plantype, username, password);
+		}else {
+			if(validate(SignInButton)) {
+				SignInButton.click();
+				signIn(username, password);
+			}else
+				System.out.println("Authenciated profile already Signed In");
+		}
+		
+		
+	}
+	
+	Actions actions = new Actions(driver);
+	public void shoppingcartNavigation(String userType, String plantype, String username, String password) {
+		if(userType.equalsIgnoreCase("Guest")){
+			scrollToView(ShoppingCartImg);
+			actions.clickAndHold(ShoppingCartImg).build().perform();
+//			desktopCommonUtils.MouseOver(ShoppingCartImg, Browsername);
+			guestProfileLink.click();
+			threadsleep(3000);
+		}else {
+			navigatePlanTypeFromMS(plantype);
+			navigateSaveResultsPage();
+			validateSaveResultModel(userType);
+			SignInButton.click();
+			signIn(username, password);
+			threadsleep(3000);
+		}
+	}
+	
+	public void navigatePlanTypeFromMS(String flow) {
+		if(flow.equalsIgnoreCase("pdp")) 
+			PDPViewPlansLink.click();
+		else if(flow.equalsIgnoreCase("pdp"))
+				MAViewPlansLink.click();
+		else
+				SNPViewPlansLink.click();
+		threadsleep(3000);
+	}
+	
+
+	
+	public void validateSaveResultModel(String usertype) {
+		if(usertype.equalsIgnoreCase("Authenticated")) {
+			validate(saveResultsTitle, 30);
+			validate(saveResultsPopupClose, 30);
+			validate(KeepShoppingPlansButton, 30);
+			if (validate(ViewProfileButton, 30))
+				ViewProfileButton.click();
+		}else {
+			validate(saveResultsTitle, 30);
+			validate(saveResultsPopupClose, 30);
+			validate(SignInButton, 30);
+			validate(CreateProfileButton, 30);
+			validate(cancelLink, 30);
+		}
+	}
+	
+	public void PRESaveResultModelBtn() {
+		SignInButton.click();
+		threadsleep(2000);
+		Assert.assertTrue(driver.getCurrentUrl().contains("/app/index.html#/login"), "***Sign In With Your One Healthcare ID Page Not Opened***");
+		browserBack();
+		waitForPageLoadSafari();
+		navigateSaveResultsPage();
+		CreateProfileButton.click();
+		threadsleep(2000);
+		Assert.assertTrue(driver.getCurrentUrl().contains("/app/index.html#/registration"),"***Create One Healthcare ID Page Not Opened***");
+		browserBack();
+		waitForPageLoadSafari();
+		navigateSaveResultsPage();
+	}
+	
+	public void browserBack() {
+		driver.navigate().back();
+		threadsleep(2000);
 	}
 
 	public void checkContent(String section) {
@@ -530,9 +650,41 @@ public class PlanRecommendationEngineEditResponsePage extends GlobalWebElements 
 		pageloadcomplete();
 		waitForPageLoadSafari();
 		navigateSaveResultsPage();
-		jsClickNew(ViewProfileButton);
 		threadsleep(5000);
-//		savedrecommendationVP();
+	}
+	
+	public void signIn(String username, String password) {
+		try {
+			Thread.sleep(3000);
+			waitForPageLoadSafari();
+			driver.findElement(By.xpath("//input[contains(@id,'userNameId_input')]")).sendKeys(username);
+			driver.findElement(By.cssSelector("input#passwdId_input")).sendKeys(password);
+			jsClickNew(driver.findElement(By.cssSelector("input#SignIn")));
+			waitForPageLoadSafari();
+			Thread.sleep(3000);
+			String Question = driver.findElement(By.cssSelector("span#challengeQuestionLabelId")).getText().trim();
+			WebElement securityAnswer = driver.findElement(By.cssSelector("input#UnrecognizedSecAns_input"));
+			waitforElement(securityAnswer);
+			if (Question.equalsIgnoreCase("What is your best friend's name?")) {
+				System.out.println("Question is related to friendname");
+				securityAnswer.sendKeys("name1");
+			}
+
+			else if (Question.equalsIgnoreCase("What is your favorite color?")) {
+				System.out.println("Question is related to color");
+				securityAnswer.sendKeys("color1");
+			} else {
+				System.out.println("Question is related to phone");
+				securityAnswer.sendKeys("number1");
+			}
+			jsClickNew(driver.findElement(By.cssSelector("input#authQuesSubmitButton")));
+			waitForPageLoadSafari();
+//			CommonUtility.waitForPageLoadNew(driver, signOut, 15);
+
+		} catch (Exception e) {
+			Assert.fail("###############Optum Id Sign In failed###############");
+		}
+
 	}
 
 }

@@ -50,20 +50,3 @@ Feature: Plan Recommendation Engine flow - Verify landing page in plan Recommend
       Examples: 
       | site |
       | UHC  |
-  
-  @PRE @planrecommendation @PRENavigationViaGetPlanRecommendationEngine @landingpage @F372697 @F500238  @F524066
-  Scenario: - To validate user able to navigate to Plan Recommendation Engine via Shop For a Plan-->Get a Plan Recommendations and Validate Landing Page Elements
-    Given the user is on UHC medicare acquisition site PRE landing page
-    	| Site | <site> |
-    When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
-    Then user validate elements on landing page of Plan Recommendation Engine
-    
-    @FunctionalAARP
-     Examples: 
-      | site |
-      | AARP |  
-      
-      @FunctionalUHC
-      Examples: 
-      | site |
-      | UHC  |

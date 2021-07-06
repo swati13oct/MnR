@@ -70,7 +70,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     Then user validate SNP Plan in Enroll page
     When user adds Drugs in vpp summary page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
-    Then user validate drugs details from DCE to VPP and PRE page
+    Then user validate drugs details from DCE to VPP and PRE page //deleted in PRE stepdefinition
     When user navigates to Zip Code page from vpp plans
     And verify continue function on "Location" page
     And user selects plan type in coverage options page
@@ -105,7 +105,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
     And user selects add drug option in Drug page
       | Drug Selection | <Drug Selection>                                                               |
       | Drug Details   | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch> |
-    Then user validate PDP Plan Names in VPP Details and Click Enroll Button in Plan Details page
+    Then user validate PDP Plan Names in VPP Details and Click Enroll button in Plan Details page
 
     @uatE2EAARP @uatE2EUHC
     Examples: 
@@ -207,7 +207,7 @@ Feature: PRE_UAT - Verify UAT Scenarios in PRE
       | Multi Doctor        | <isMultiDoctor> |
     When user adds Drugs in vpp summary page
       | Drug Details | <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-IsNotgeneric-Switch> |
-    Then user validate drugs details from DCE to VPP and PRE page
+    Then user validate drugs details from DCE to VPP and PRE page //deleted in PRE stepdefinition
     When user navigates to Zip Code page from vpp plans
     And verify continue function on "Location" page
     And user selects plan type in coverage options page

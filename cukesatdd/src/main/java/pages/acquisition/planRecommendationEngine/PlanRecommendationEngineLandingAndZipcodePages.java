@@ -3,6 +3,7 @@ package pages.acquisition.planRecommendationEngine;
 import java.util.HashMap;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -354,5 +355,51 @@ public void getStartedAndRunzipcodeWithCounty(String zip_code, String County) th
       continueBtn.click();
       threadsleep(5000);
   }
+  
+//Added for Benefits Validation
+  
+ public void navigateToCoveragePage(String zip_code, String County) {
+	  	pageloadcomplete();
+		waitTillElementClickableInTime(getStartedBtn, 45);
+		jsClickNew(getStartedBtn);
+		threadsleep(1000);
+		waitforElementVisibilityInTime(zipCode, 45);
+		zipCode.clear();
+		threadsleep(1000);
+		sendkeys(zipCode, zip_code);
+		threadsleep(2000);
+		if(validate(PRECounty,5))
+			selectFromDropDownByText(driver, PRECounty, County);
+		threadsleep(3000);
+		jsClickNew(continueBtn);
+		waitforElementVisibilityInTime(coverageTitle, 30);
+	}
+ 
+ public String getSessionValue(String type,String key) {
+	  return returnDriverStorageJS(type, key);
+ }
+ 
+ //String sampleJson = "{\"preferences\":[{\"questionId\":\"planType\",\"answers\":[{\"id\":\"co_ma\"}]},{\"questionId\":\"snpType\",\"answers\":[{\"id\":\"snp_none\"}]},{\"questionId\":\"doctorPref\",\"answers\":[{\"id\":\"doctor_accepts_medicare\"}]},{\"questionId\":\"additional-dental\",\"answers\":[{\"id\":\"as_dental_no\"}]},{\"questionId\":\"additional-hearing\",\"answers\":[{\"id\":\"as_hearing_no\"}]},{\"questionId\":\"additional-vision\",\"answers\":[{\"id\":\"as_vision_no\"}]},{\"questionId\":\"additional-fitness membership\",\"answers\":[{\"id\":\"as_fitness_no\"}]},{\"questionId\":\"healthCarePref\",\"answers\":[{\"id\":\"cs_low\"}]}],\"planYear\":2021,\"location\":{\"zipcode\":\"10001\",\"selectedCounty\":{\"fipsCountyCode\":\"061\",\"fipsCountyName\":\"New York County\",\"fipsStateCode\":\"36\",\"stateCode\":\"NY\",\"cmsCountyCodes\":[\"420\"]}}}";
+
+	public void setSession(String type, String StorageKey,String value) {
+		System.out.println("Setting session values.....");
+		//String StorageKey = "ucp_planRecommendationObj", value = sampleJson;
+		JavascriptExecutor js = ((JavascriptExecutor) driver);
+		threadsleep(5000);
+		try {
+			if(type.toLowerCase().contains("session"))
+				js.executeScript(String.format("window.sessionStorage.setItem('%s','%s');", StorageKey, value));			
+		} catch (Exception e1) {
+			System.out.println("data");
+		}
+	}
+ 
+ public void navigateToPREResultsPage() {
+	 String url = driver.getCurrentUrl();
+	 url = url.split("#/")[0]+"#/result";
+	 driver.get(url);
+	 threadsleep(3000);
+	 waitForPageLoadSafari();
+ }  
 }
 
