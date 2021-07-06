@@ -520,7 +520,7 @@ public class MRConstants {
 			+ "-aarpmedicareplans.ocp-ctc-dmz-nonprod.optum.com/admin/shopper-profile.html/login";
 
 	public static final String AARP_TELESALES_AGENT_PAGE_URL_STAGE = "https://" + MRScenario.environment
-			+ "-generic.uhc.com/admin/shopper-profile.html/login";
+			+ "-aarpmedicareplans.uhc.com/admin/shopper-profile.html/login";
 
 	public static final String AARP_TELESALES_AGENT_TEAM_E_PAGE_URL = "https://www.team-e-aarpmedicareplans.ocp-elr-core-nonprod.optum.com/admin/shopper-profile.html/login";
 

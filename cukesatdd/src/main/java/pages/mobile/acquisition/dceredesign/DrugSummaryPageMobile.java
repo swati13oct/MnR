@@ -194,12 +194,13 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public void SelectPharmacy(String PharmacytoSelect) {
 
 		List<WebElement> PharmacyName = driver
-				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn2') and contains(@aria-label, 'Select "
+				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
 
-		jsClickNew(PharmacyName.get(PharmacyName.size() - 1));
+		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
 		validateNew(saveDrugBtn);
-		saveDrugBtn.click();
+		jsClickNew(saveDrugBtn);
+		//saveDrugBtn.click();
 	}
 
 	@FindBy(xpath = "//*[@class='pharmacy-plan-desc']")
