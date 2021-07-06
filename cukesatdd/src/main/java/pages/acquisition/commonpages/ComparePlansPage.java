@@ -240,7 +240,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(css = "div#CSRLoginAlert>div")
 	private WebElement agentModeBanner;
 
-	@FindBy(xpath = "//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
+	@FindBy(xpath = "(//span[contains(@class,'headerPlan')])[1]")
 	private WebElement enrolledPlanName;
 
 	@FindBy(xpath = "//div[contains(text(),'Status')]/preceding-sibling::div/span[1]")
@@ -307,7 +307,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[@id='viewLocationTitle']")
 	private WebElement viewLocationPopupProviderName;
 
-	@FindBy(xpath = "//div[@class='modal-body']/span")
+	@FindBy(xpath = "//div[@class='modal-title']/following-sibling::div")
 	private WebElement allSetDrugsProvidersInfo;
 
 	@FindBy(xpath = "//*[text()='View Plan Details']")
