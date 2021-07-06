@@ -33,7 +33,7 @@ Feature: 1.10.1 DCE-REDISIGN AARP - To test Acq Home to NEW DCE Flows
     #Then the user validates Disclaimers section
     Then the user validates link to Drug Summary Page
 
-    @dce_HomeIcon_AEP_AARP @prodRegression_AARP @prodRegression @regressionAARP
+    @dce_HomeIcon_AEP_AARP @prodRegression_AARP @prodRegression @regressionAARP 
     Examples: 
       | drug1   | drug2  | drug3   | drug4    | zipCode | planType | planName                                            | site |
       | Orkambi | Fanapt | Humalog | Adderall |   80002 | MAPD     | AARP Medicare Advantage SecureHorizons Plan 2 (HMO) | AARP |

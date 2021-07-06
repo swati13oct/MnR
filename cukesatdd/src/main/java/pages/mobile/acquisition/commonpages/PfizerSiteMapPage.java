@@ -33,7 +33,7 @@ public class PfizerSiteMapPage extends UhcDriver{
 	}
 
 
-	public Rallytool_Page findaproviderpfizersitemapclick() {
+	public Rallytool_PageMobile findaproviderpfizersitemapclick() {
 validate(pfizersitemappagefindaproviderlink);
 		
             pfizersitemappagefindaproviderlink.click();
@@ -42,7 +42,7 @@ validate(pfizersitemappagefindaproviderlink);
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

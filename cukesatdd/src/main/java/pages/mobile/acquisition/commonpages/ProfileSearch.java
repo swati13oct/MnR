@@ -112,7 +112,7 @@ public class ProfileSearch extends UhcDriver {
 		btnSearchShopper.click();
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
-			DeleteProfile deleteProfile = new DeleteProfile(driver);
+			DeleteProfileMobile deleteProfile = new DeleteProfileMobile(driver);
 			deleteProfile.deleteAProfile(email);
 			backToProfileSearch.click();
 			CommonUtility.checkPageIsReadyNew(driver);
@@ -266,7 +266,7 @@ public class ProfileSearch extends UhcDriver {
 		btnSearchShopper.click();
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
-			DeleteProfile deleteProfile = new DeleteProfile(driver);
+			DeleteProfileMobile deleteProfile = new DeleteProfileMobile(driver);
 			deleteProfile.deleteAProfile(emailID);
 			backToProfileSearch.click();
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);

@@ -18,7 +18,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.EnterZipCodePage;
+import pages.mobile.acquisition.commonpages.EnterZipCodePageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 
@@ -388,7 +388,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 		// EnterZipCodePageMobile enterZipCodePage= new EnterZipCodePageMobile(driver);
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		EnterZipCodePage enterZipCodePage = aquisitionhomepage.enterZipCode();
+		EnterZipCodePageMobile enterZipCodePage = aquisitionhomepage.enterZipCode();
 		enterZipCodePage.validateZipComp(zipCode);
 	}
 

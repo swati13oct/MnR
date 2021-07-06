@@ -22,6 +22,7 @@ import pages.acquisition.commonpages.AcquisitionHomePage;
 import pages.acquisition.commonpages.ComparePlansPage;
 import pages.acquisition.commonpages.DrugCostEstimatorPage;
 import pages.acquisition.commonpages.PlanDetailsPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
 import pages.acquisition.commonpages.VisitorProfileTestHarnessPage;
@@ -634,6 +635,16 @@ public class VisitorProfileStepDefinition {
 		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.ValidateDrugsProviders(DrugsFlag, ProvidersFlag);
+	}
+	
+	@When("^user selects a provider and retuns to Profile page$")
+	public void user_selects_provider_and_return_vpp_page_ulayer() {
+		VisitorProfilePage visitorProfile = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+		ProviderSearchPage providerSearchPage = visitorProfile.addDoctor();
+		getLoginScenario().saveBean(PageConstants.PROVIDER_SEARCH_PAGE,providerSearchPage);
+		visitorProfile = providerSearchPage.selectsProviderAndBackToVP();
+		Assertion.assertTrue("Not able to return to Plan Summary page", visitorProfile != null);
 	}
 
 }
