@@ -41,8 +41,12 @@ Feature: 1.12 ACQ - Global Components Validation
     #And user clicks on register link
     #Then the user clicks on browser back button
     Then user validates visitor profile
+    And the user clicks on browser back button
+    And user clicks on visit aarp.org link in the header
+    And the user clicks on browser back button
+    Then user validates TFN in header
 
-    @globalheader
+    @globalheader123
     Examples: 
       | site |
       | AARP |

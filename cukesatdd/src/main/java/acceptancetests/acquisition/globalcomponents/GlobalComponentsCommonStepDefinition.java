@@ -1094,6 +1094,14 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Home page not found");
 		}
 	}
+	
+	@When("user validates TFN in header")
+	public void user_clicks_on_tfn_in_header() throws InterruptedException {
+		scenario.log("Changes made on 7/06- Step added for new Header redesign");
+		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.validateTfnInHeader();
+	}
 
 }
 

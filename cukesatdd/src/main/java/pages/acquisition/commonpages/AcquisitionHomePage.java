@@ -717,6 +717,9 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	@FindBy(xpath = "//*[contains(@class,'plan-mem-linkwrap')]//a[contains(text(),'Go to the Member Site')]")
 	private WebElement goToMemberSiteLink;
+	
+	@FindBy(id = "header-tfn-link")
+	private WebElement tfnHeaderLink;
 
 	String ChatSamText = "Chat with a Licensed Insurance Agent";
 
@@ -6856,6 +6859,30 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			}
 		}
 		driver.switchTo().window(base);
+	}
+	
+	public void validateTfnInHeader() throws InterruptedException {
+		CommonUtility.checkPageIsReady(driver);
+		CheckiPerseptions();
+		validateNew(tfnHeaderLink);
+		String ActualCallSAMTFN = tfnHeaderLink.getText().trim();
+		System.out.println("TFN No displayed on the Page" + ActualCallSAMTFN);
+		jsClickNew(tfnHeaderLink);
+		System.out.println("@@@@@@@@@@@@@@@ Call Icon Clicked @@@@@@@@@@@@@@@");
+		driver.switchTo().activeElement();
+		validate(CallSamTFN);
+		String ExpectedCallSAMTFN = CallSamTFN.getText();
+		System.out.println("TFN No displayed on the Modal" + ExpectedCallSAMTFN);
+		if (ExpectedCallSAMTFN.contains(ActualCallSAMTFN)) {
+			System.out
+					.println("****************TFN number was  found macthing with the SAM call Popup  ***************");
+
+			Assertion.assertTrue(true);
+		} else {
+			Assertion.fail("*****************TFN number was  not found macthing with the SAM call Popup ***************"
+					+ ExpectedCallSAMTFN);
+		}
+		
 	}
 
 }
