@@ -29,7 +29,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@id='addDrug']")
 	public WebElement addMyDrugsBtn;
 
-	@FindBy(css = "#adddrug")
+	@FindBy(xpath = "//span[contains(text(),'Add Drug')]")
 	public WebElement addDrugButton;
 
 	@FindBy(css = "#previousButton")
@@ -65,7 +65,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(id = "modal-label")
 	public WebElement TellUsABoutHeader;
 
-	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close ng-tns-c35-8')]")
 	public WebElement TellUsABoutCloseBtn;
 
 	// uhc-menu-item
@@ -267,16 +267,15 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		validateNew(EnterDrugNameTxt);
 		sendkeysMobile(EnterDrugNameTxt, drugName);
 
-		// jsClickNew(addYourDrugHeader);
-
 		jsClickNew(SearchBtn);
-
+		sleepBySec(5);
+		waitForPageLoadSafari();
 		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
-
 		WebElement SelectDrug = driver
-				.findElement(By.xpath("//p[normalize-space()='" + drugName + "']/following-sibling::button"));
+				.findElement(By.xpath("//p[normalize-space()='" + drugName +"']/following-sibling::button"));
 
-		validateNew(SelectDrug);
+		scrollToView(SelectDrug);
+
 		jsClickNew(SelectDrug);
 		pageloadcomplete();
 
@@ -285,6 +284,39 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		CommonUtility.checkPageIsReadyNew(driver);
 		// CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+			return new TellUsAboutDrugMobile(driver);
+		} else {
+			Assertion.fail("Tell Us About Drug Page is NOT Displayed");
+			return null;
+		}
+	}
+	
+	public TellUsAboutDrugMobile SearchaddDrug(String drugName) throws InterruptedException {
+		
+		if(addDrugButton.isDisplayed()) {
+			jsClickNew(addDrugButton);
+		}
+
+		validateNew(EnterDrugNameTxt);
+		sendkeysMobile(EnterDrugNameTxt, drugName);
+
+		jsClickNew(SearchBtn);
+		sleepBySec(5);
+		waitForPageLoadSafari();
+		// CommonUtility.waitForPageLoad(driver, DrugSearchBackClick, 20);
+		WebElement SelectDrug = driver
+				.findElement(By.xpath("//p[normalize-space()='" + drugName +"']/following-sibling::button"));
+
+		scrollToView(SelectDrug);
+
+		jsClickNew(SelectDrug);
+		pageloadcomplete();
+
+		threadsleep(2000);
+		// waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
+		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
+		if (validateNew(TellUsABoutHeader)) {
 			return new TellUsAboutDrugMobile(driver);
 		} else {
 			Assertion.fail("Tell Us About Drug Page is NOT Displayed");

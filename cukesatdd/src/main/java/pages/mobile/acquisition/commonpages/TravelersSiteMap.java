@@ -32,7 +32,7 @@ public class TravelersSiteMap extends UhcDriver {
 
 
 
-       public Rallytool_Page travelerssitemapproviderclick() {
+       public Rallytool_PageMobile travelerssitemapproviderclick() {
               
               validate(travelerssitemapfindaproviderlink);
               
@@ -42,7 +42,7 @@ public class TravelersSiteMap extends UhcDriver {
               
               if (getTitle().equalsIgnoreCase(
                            "Enter Zip")) {
-       return new Rallytool_Page(driver);
+       return new Rallytool_PageMobile(driver);
               }
        
               // TODO Auto-generated method stub

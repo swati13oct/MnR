@@ -27,19 +27,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.acquisition.commonpages.AcquisitionHomePage;
-import pages.acquisition.commonpages.PlanDetailsPage;
-import pages.acquisition.commonpages.VPPPlanSummaryPage;
-import pages.acquisition.commonpages.VisitorProfilePage;
-import pages.acquisition.dceredesign.DrugDetailsPage;
-import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.ole.WelcomePage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
-import pages.mobile.acquisition.commonpages.GetStartedPage;
 import pages.mobile.acquisition.commonpages.GetStartedPageMobile;
-import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.PharmacySearchPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
@@ -463,7 +453,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void clickonDCELink() throws InterruptedException {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		GetStartedPage getStartedPage = pharmacySearchPage.navigateToDCE();
+		GetStartedPageMobile getStartedPage = pharmacySearchPage.navigateToDCE();
 		if (null != getStartedPage) {
 			getLoginScenario().saveBean(PageConstants.DCE_Redesign_GetStarted, getStartedPage);
 		} else
@@ -652,7 +642,6 @@ public class PharmacyLocatorStepDefinitionMobile {
 		pharmacySearchPage.validatePharmacyWidgets(hasPrefRetailPharmacy, hasWalgreens, hasPrefMailServ, inputMap,
 				testSiteUrl);
 	}
-	
 
 	@Then("^user verify breadcrumb \"([^\"]*)\" on get started page$")
 	public void user_verify_breadcrumb_on_get_started_page(String breadCrumb) {
@@ -660,32 +649,35 @@ public class PharmacyLocatorStepDefinitionMobile {
 				.getBean(PageConstants.DCE_Redesign_GetStarted);
 		DCEgetStarted.validateBreadCrumb(breadCrumb);
 	}
-	
+
 	@When("^user clicks on pharmacy link on OLE page$")
 	public void user_clicks_on_pharmacy_link_on_OLE_page() throws Throwable {
-		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario().getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
-		PharmacySearchPage pharmacySearchPage=welcomePage.clickPharamcyLinkAndSwitchTab();
+		WelcomePageMobile welcomePage = (WelcomePageMobile) getLoginScenario()
+				.getBean(OLE_PageConstants.OLE_WELCOME_PAGE);
+		PharmacySearchPage pharmacySearchPage = welcomePage.clickPharamcyLinkAndSwitchTab();
 		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
 	}
-	
+
 	@And("^the user validates map section content$")
 	public void verifyMapSectionContent1() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage.validateMapSectionContent();
 	}
-	
-	/** Verifying show on map link clickable for pharmacies appearing in the search results */
+
+	/**
+	 * Verifying show on map link clickable for pharmacies appearing in the search
+	 * results
+	 */
 	@Then("^the user validates show on map link$")
 	public void viewsShowOnMapResult1() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
-		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed",
-				pharmacySearchPage != null);
+		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed", pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
-	
+
 	@Then("^the user validates get direction link$")
 	public void getDirectionResult1() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
@@ -693,7 +685,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 		pharmacySearchPage.validateGetDirectionLinks();
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
-	
+
 	/** Verify search results based on plan type */
 	@And("^the user validates more information content based on plan type$")
 	public void validateMoreInformationContent1() {
@@ -703,10 +695,11 @@ public class PharmacyLocatorStepDefinitionMobile {
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("More Info Disclaimer is Displayed");
 	}
-	
+
 	/**
 	 * Verify Create a PDF in pharmacy search page
-	 * @throws InterruptedException 
+	 * 
+	 * @throws InterruptedException
 	 */
 	@Then("^the user validates view search PDF link$")
 	public void viewsSearchResultPdf1() throws InterruptedException {
@@ -714,8 +707,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 		String testPlanName = (String) getLoginScenario().getBean(PharmacySearchCommonConstants.PLAN_NAME);
 		pharmacySearchPage = pharmacySearchPage.ValidateSearchPdfResults(testPlanName);
-		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed", 
-				pharmacySearchPage != null);
+		Assertion.assertTrue("PROBLEM - PDF Results Page Not Displayed", pharmacySearchPage != null);
 		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 		System.out.println("PDF Result Page is Displayed");
 	}

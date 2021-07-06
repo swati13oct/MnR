@@ -35,7 +35,7 @@ public class MetlifeFindaProviderPage extends UhcDriver {
 		openAndValidate();
 	}
 	
-	public Rallytool_Page findaphysicianmetlifeclick() {
+	public Rallytool_PageMobile findaphysicianmetlifeclick() {
 		
 		validate(findaphysicianmetlifelink);
 		
@@ -45,7 +45,7 @@ public class MetlifeFindaProviderPage extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

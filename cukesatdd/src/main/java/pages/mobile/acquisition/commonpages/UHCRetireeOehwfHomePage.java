@@ -52,7 +52,7 @@ public class UHCRetireeOehwfHomePage extends UhcDriver {
 		return null;
 	} 
 
-	public Rallytool_Page Findaproviderclick() {
+	public Rallytool_PageMobile Findaproviderclick() {
 		validate(FindaProviderlink);
 		FindaProviderlink.click();
 		
@@ -61,7 +61,7 @@ public class UHCRetireeOehwfHomePage extends UhcDriver {
 		
 			if (getTitle().equalsIgnoreCase(
 		"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 			return null;
 	}	
