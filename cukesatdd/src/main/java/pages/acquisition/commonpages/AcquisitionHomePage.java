@@ -300,7 +300,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 
 	// @FindBy(xpath = "//a[@title='Provider Search
 	// Tool']/span[contains(text(),'Find a Provider')]")
-	@FindBy(xpath = "//a[@title = 'Provider Search Tool']")
+	@FindBy(xpath = "//div[@class='d-none d-lg-block']//a[normalize-space()='Pharmacy Search']")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
