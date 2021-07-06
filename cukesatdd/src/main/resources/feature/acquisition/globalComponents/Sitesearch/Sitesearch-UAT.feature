@@ -90,7 +90,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC_03 @prodSanity_UHC @regressionUHC
+    @SiteSearch_UHC_03 @prodSanity_UHC @regressionUHC @vbfGate
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
@@ -167,7 +167,7 @@ Feature: 1.08 UAT-Site Search Flows
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_AMP | AARP | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
 
-    @SiteSearch_UHC @regressionUHC @vbfGate @sanity
+    @SiteSearch_UHC @regressionUHC @sanity
     Examples: 
       | Scenario           | site | searchValue     | url                                                           |
       | E2E Scenario 1_UMS | UHC  | Provider search | https://connect.werally.com/county-plan-selection/uhc.mnr/zip |
