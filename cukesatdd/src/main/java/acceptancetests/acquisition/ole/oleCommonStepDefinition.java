@@ -53,7 +53,7 @@ public class oleCommonStepDefinition {
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_ZIPCODE, ZipCode);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_COUNTY, County);
-		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
+		//getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 
 		
 		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
