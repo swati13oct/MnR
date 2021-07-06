@@ -36,7 +36,7 @@ public class JohnsonAndJohnsonProviderPage extends UhcDriver {
 		
 	}
 
-	public Rallytool_Page jnJFindPhyscianClick() {
+	public Rallytool_PageMobile jnJFindPhyscianClick() {
 		validate(johnsonAndJohnsonPhysicianLink);
 		
 		johnsonAndJohnsonPhysicianLink.click();
@@ -45,7 +45,7 @@ public class JohnsonAndJohnsonProviderPage extends UhcDriver {
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		return null;
 	}
