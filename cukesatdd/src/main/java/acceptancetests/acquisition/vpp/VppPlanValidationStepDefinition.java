@@ -117,7 +117,7 @@ public class VppPlanValidationStepDefinition {
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
 				 
 				 //Looping over total rows with values
-				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
+				 for(int rowIndex=0; rowIndex<=5; rowIndex++)
 		            {
 					 	int failureCounter = 0;
 					 	int cellIndex = 0;
