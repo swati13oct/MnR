@@ -42,7 +42,7 @@ public class JohnsonAndJohnsonHomePage extends UhcDriver{
 		openAndValidate();
 	}
 
-	public Rallytool_Page johnsonAndJohnsonProviderClick() {
+	public Rallytool_PageMobile johnsonAndJohnsonProviderClick() {
 		validate(johnsonAndJohnsonFindAProviderLink);
 		
 		johnsonAndJohnsonFindAProviderLink.click();
@@ -51,7 +51,7 @@ public class JohnsonAndJohnsonHomePage extends UhcDriver{
 			validate(rallyPageElement);
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		return null;
 	}

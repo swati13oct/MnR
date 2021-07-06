@@ -26,7 +26,7 @@ import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AboutUsPageMobile;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.ContactUsUmsPageMobile;
-import pages.mobile.acquisition.commonpages.DisclaimersPageMobile;
+import pages.mobile.acquisition.commonpages.DisclaimersAARPPageMobile;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
@@ -479,7 +479,7 @@ public class VppPlanSummaryMobile {
 
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		DisclaimersPageMobile disclaimersPage = aquisitionhomepage.disclaimersClick();
+		DisclaimersAARPPageMobile disclaimersPage = aquisitionhomepage.disclaimersClick();
 		if (disclaimersPage != null) {
 			getLoginScenario().saveBean(PageConstants.DISCLAIMERS_PAGE, disclaimersPage);
 			Assertion.assertTrue(true);

@@ -33,7 +33,7 @@ public class JohnsonAndJohnsonSiteMapPage extends UhcDriver {
 		
 	}
 
-	public Rallytool_Page jnJSiteMapProviderLinkClick() {
+	public Rallytool_PageMobile jnJSiteMapProviderLinkClick() {
 		validate(siteMapFindAProviderLink);
 		
 		siteMapFindAProviderLink.click();
@@ -42,7 +42,7 @@ public class JohnsonAndJohnsonSiteMapPage extends UhcDriver {
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		return null;
 	}

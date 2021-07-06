@@ -1,7 +1,7 @@
 @UATRegression @F513647 @globalComponent @headerfooter @GlobalHeaderFooter
 Feature: 1.12 UAT - Header and Footer flows
 
-  @globalfooterULayer @UATRegression123
+  @globalfooterULayer @UATRegression123 
   Scenario Outline: <Scenario> : To verify links displayed in the global header and footer on home page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
