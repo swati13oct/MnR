@@ -42,14 +42,14 @@ public class KTRSHomePage extends UhcDriver{
 	
 	private static String KTRS_HOME_PAGE_URL= MRConstants.KTRS_HOME_PAGE_URL;
 	
-	public Rallytool_Page ktrshomepageproviderclick() {
+	public Rallytool_PageMobile ktrshomepageproviderclick() {
 		validate(ktrsfindaproviderlink);
 		ktrsfindaproviderlink.click();
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase( 
 				"Enter Zip")) {
-	     return new Rallytool_Page(driver);
+	     return new Rallytool_PageMobile(driver);
 	    }
 		
 		return null;

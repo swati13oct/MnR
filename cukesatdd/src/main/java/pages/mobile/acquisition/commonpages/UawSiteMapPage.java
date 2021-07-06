@@ -24,7 +24,7 @@ public class UawSiteMapPage extends UhcDriver {
 		openAndValidate();
 }
 
-	public Rallytool_Page uawsitemapfindaproviderclick() {
+	public Rallytool_PageMobile uawsitemapfindaproviderclick() {
 		
 		validate(uawsitemapfindaproviderlink);
 		ArrayList<String> tabs = new ArrayList<String> (driver.getWindowHandles());
@@ -32,7 +32,7 @@ public class UawSiteMapPage extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 	}
 		
 	

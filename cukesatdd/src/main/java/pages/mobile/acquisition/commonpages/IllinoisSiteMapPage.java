@@ -27,7 +27,7 @@ public class IllinoisSiteMapPage extends UhcDriver {
 	}
 
 
-	public Rallytool_Page findaproviderillinoissitemapclick() {
+	public Rallytool_PageMobile findaproviderillinoissitemapclick() {
 		
 		validate(illinoissitemappagefindaproviderlink);
 		
@@ -37,7 +37,7 @@ public class IllinoisSiteMapPage extends UhcDriver {
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

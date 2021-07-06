@@ -118,11 +118,12 @@ private Scenario scenario;
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String site = memberAttributesMap.get("Site");
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 
@@ -137,15 +138,17 @@ private Scenario scenario;
 		aquisitionhomepage.validateSubtitle();
 		}
 	}
+
 	@When("^the user performs plan search using following information$")
 	public void zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -174,16 +177,18 @@ private Scenario scenario;
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
 			throws Throwable {
 //		wd.manage().window().maximize(); //Can be handled from MRScenario
-		//Remove the commented code
-		/*List<DataTableRow> memberAttributesRow = data.getGherkinRows();
-		String planType = memberAttributesRow.get(0).getCells().get(1);
-		String planName = memberAttributesRow.get(1).getCells().get(1);*/
-		
-		//Value from a datatable column can be fetched using asLists approach
+		// Remove the commented code
+		/*
+		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
+		 * planType = memberAttributesRow.get(0).getCells().get(1); String planName =
+		 * memberAttributesRow.get(1).getCells().get(1);
+		 */
+
+		// Value from a datatable column can be fetched using asLists approach
 		List<List<String>> memberAttributesRow = data.asLists();
 		String planType = memberAttributesRow.get(0).get(1);
 		String planName = memberAttributesRow.get(1).get(1);
-		
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// plansummaryPage.viewPlanSummary(planType);
@@ -199,12 +204,13 @@ private Scenario scenario;
 	public void user_performs_planSearch_in_aarp_site(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
@@ -222,12 +228,13 @@ private Scenario scenario;
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planYear = givenAttributesMap.get("Plan Year");
 
@@ -258,7 +265,7 @@ private Scenario scenario;
 		} else
 			Assertion.fail("Error in loading the compare plans page");
 	}
-	
+
 	@Given("^I select \"([^\"]*)\" plans to compare$")
 	public void i_select_plans_to_compare(String planType) throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -270,7 +277,7 @@ private Scenario scenario;
 			plansummaryPage.checkAllPDPlans();
 			System.out.println("Selected All PDP plans for Plan Compare");
 		}
-		
+
 	}
 
 	@Then("^verify plan compare page is loaded$")
@@ -284,12 +291,13 @@ private Scenario scenario;
 	public void user_performs_planSearch_in_aarp_site_next_year(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
@@ -306,12 +314,13 @@ private Scenario scenario;
 	public void user_validates_plan_summary(DataTable planAttributes) throws InterruptedException {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -355,8 +364,10 @@ private Scenario scenario;
 	 */
 	@Then("^the user views plan details of the above selected plan and validates$")
 	public void user_views_plandetails_selected_plan_aarp(DataTable givenAttributes) {
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		 */
 		String PlanName = givenAttributes.cell(0, 1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
 
@@ -394,12 +405,13 @@ private Scenario scenario;
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String primaryCarePhysician = memberAttributesMap.get("Primary Care Physician");
 		String specialist = memberAttributesMap.get("Specialist");
@@ -471,12 +483,13 @@ private Scenario scenario;
 	public void Start_application_button(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
@@ -494,12 +507,13 @@ private Scenario scenario;
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -512,12 +526,13 @@ private Scenario scenario;
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
 		int total_plans = Integer.parseInt(totalPlans);
@@ -549,12 +564,13 @@ private Scenario scenario;
 			throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String totalPlans = givenAttributesMap.get("No Of Plans To Compare");
 		int total_plans = Integer.parseInt(totalPlans);
@@ -590,12 +606,13 @@ private Scenario scenario;
 	public void user_clicks_on_Save_icon_for_all_the_plans_and_match_count(DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String noOfPlansSavedOnComparePage = givenAttributesMap.get("No Of Saved Plans On Compare Page");
 		int savedPlanCountOfComparePage = Integer.parseInt(noOfPlansSavedOnComparePage);
@@ -621,12 +638,13 @@ private Scenario scenario;
 		// Write code here that turns the phrase above into concrete actions
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planCount = memberAttributesMap.get("No Of Plans To Save");
 		int number = Integer.parseInt(planCount);
@@ -696,12 +714,13 @@ private Scenario scenario;
 	public void click_resume_application(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 		String FirstName = memberAttributesMap.get("Firstname");
@@ -720,12 +739,13 @@ private Scenario scenario;
 	public void the_user_signs_in_with_optum_Id(DataTable credentials) {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(credentials);
-		/*List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = credentials.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String username = plannameAttributesMap.get("User Name");
 		String password = plannameAttributesMap.get("Password");
 
@@ -752,11 +772,12 @@ private Scenario scenario;
 	public Map<String, String> parseInputArguments(DataTable memberAttributes) {
 		Map<String, String> memberAttributesMap = new LinkedHashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(memberAttributes);
-		/*List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = memberAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		return memberAttributesMap;
 	}
 
@@ -794,11 +815,12 @@ private Scenario scenario;
 	public void enters_zipcode_details_in_aarp_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -825,11 +847,12 @@ private Scenario scenario;
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String savePlanNames = memberAttributesMap.get("Test Plans");
 		String planType = memberAttributesMap.get("Plan Type");
 
@@ -902,12 +925,13 @@ private Scenario scenario;
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		plansummaryPage.enterRequiredFieldsForMedicareGuide(memberAttributesMap);
 
 	}
@@ -931,12 +955,13 @@ private Scenario scenario;
 			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String zipcode = memberAttributesMap.get("Zip Code");
 		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
@@ -970,11 +995,12 @@ private Scenario scenario;
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		// Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String ms_savePlanNames = memberAttributesMap.get("MS Test Plans");
@@ -999,11 +1025,12 @@ private Scenario scenario;
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		// Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String savePlanNames = memberAttributesMap.get("Test Plans");
@@ -1016,11 +1043,12 @@ private Scenario scenario;
 	public void Standalone_zipcode_details(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -1049,11 +1077,12 @@ private Scenario scenario;
 	public void Standalone_Shop_details_in_aarp_site_Enroll(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -1083,12 +1112,13 @@ private Scenario scenario;
 		{
 			Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 			plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-			/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-			for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-				plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-						plannameAttributesRow.get(i).getCells().get(1));
-			}*/
+			/*
+			 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+			 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+			 * 
+			 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+			 * plannameAttributesRow.get(i).getCells().get(1)); }
+			 */
 			String planName = plannameAttributesMap.get("PlanName");
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -1117,11 +1147,12 @@ private Scenario scenario;
 	public void the_user_navigates_to_medicare_acquisition_site_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String path = memberAttributesMap.get("PagePath");
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : " + path);
@@ -1135,12 +1166,13 @@ private Scenario scenario;
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("PlanName");
 
@@ -1178,24 +1210,25 @@ private Scenario scenario;
 	public void the_user_navigates_to_following_medicare_acquisition_site(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String path = memberAttributesMap.get("PagePath");
-		//String plantype = memberAttributesMap.get("Plan Type");
+		// String plantype = memberAttributesMap.get("Plan Type");
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : " + path);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		VPPPlanSummaryPage plansummaryPage = aquisitionhomepage.navigateToPathNew(path);
-		//Thread.sleep(5000);
-		//VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
+		// Thread.sleep(5000);
+		// VPPPlanSummaryPage plansummaryPage = new VPPPlanSummaryPage(wd);
 		if (plansummaryPage != null) {
 			getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
-		//	getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
+			// getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
 
 		} else {
 			Assertion.fail("Error Loading VPP plan summary page");
@@ -1207,11 +1240,12 @@ private Scenario scenario;
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planYear = givenAttributesMap.get("Plan Year");
 		// VPPPlanSummaryPage plansummaryPage = null;
@@ -1233,17 +1267,18 @@ private Scenario scenario;
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = givenAttributesMap.get("Plan Type");
 		String site = givenAttributesMap.get("Site");
-		
+
 		// String planType = (String)
 		// getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
 		if (plansummaryPage.validatePlanNames(planType)) {
@@ -1251,7 +1286,7 @@ private Scenario scenario;
 			// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, SiteName);
 			getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, planType);
 			getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
-			
+
 			Assertion.assertTrue(true);
 		} else {
 			Assertion.fail("Error validating availables plans for selected plantype in  VPP plan summary page");
@@ -1398,12 +1433,13 @@ private Scenario scenario;
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -1417,12 +1453,13 @@ private Scenario scenario;
 
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(planAttributes);
-		/*List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = planAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String planName = givenAttributesMap.get("Plan Name");
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
@@ -1436,12 +1473,13 @@ private Scenario scenario;
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String PDFtype = memberAttributesMap.get("PDF type");
 		String DocumentCode = memberAttributesMap.get("DocumentCode");
@@ -1459,31 +1497,34 @@ private Scenario scenario;
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		String PDFtype = memberAttributesMap.get("PDF type");
 
 		String DocumentCode = memberAttributesMap.get("DocumentCode");
 		boolean validationFlag = vppPlanDetailsPage.ClickValidatePDFlink(PDFtype, DocumentCode);
-		Assertion.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ", validationFlag);
+		Assertion.assertTrue("Validation failed : Expected Document Code is not Present in the PDF URL ",
+				validationFlag);
 	}
 
 	@Then("^the user click on Plan costs tab and validates on site$")
 	public void the_user_click_on_Plan_costs_tab_and_validates_in_site(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String yearlyPremium = memberAttributesMap.get("Yearly Premium");
@@ -1500,12 +1541,13 @@ private Scenario scenario;
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String optionalRider = memberAttributesMap.get("Optional Rider");
 
@@ -1530,15 +1572,18 @@ private Scenario scenario;
 
 	@Then("^the user view plan details of the above selected plan in site vpp$")
 	public void the_user_view_plan_details_of_the_above_selected_plan_in_UMS_site_vpp(DataTable givenAttributes) {
-		//Remove the commented code 
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String planName = memberAttributesRow.get(0).getCells().get(1);
-		String planType = memberAttributesRow.get(1).getCells().get(1);*/
-		
-		//Add code to fetch the value of a DataTable column directly using cell(rowNum, columnNum)
-		String planName = givenAttributes.cell(0, 1);		//row 0, column 1
-		String planType = givenAttributes.cell(1, 1);		//row 1, column 1
-		
+		// Remove the commented code
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String planName = memberAttributesRow.get(0).getCells().get(1); String
+		 * planType = memberAttributesRow.get(1).getCells().get(1);
+		 */
+
+		// Add code to fetch the value of a DataTable column directly using cell(rowNum,
+		// columnNum)
+		String planName = givenAttributes.cell(0, 1); // row 0, column 1
+		String planType = givenAttributes.cell(1, 1); // row 1, column 1
+
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, planName);
 		VPPPlanSummaryPage vppPlanSummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
@@ -1606,12 +1651,13 @@ private Scenario scenario;
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = memberAttributesMap.get("Plan Name");
 
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
@@ -1629,8 +1675,10 @@ private Scenario scenario;
 
 	@When("^the user navigates to the plan details page$")
 	public void user_navigates_to_plan_details_page(DataTable givenAttributes) {
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		 */
 		String PlanName = givenAttributes.cell(0, 1);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_NAME, PlanName);
 
@@ -1666,12 +1714,13 @@ private Scenario scenario;
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String monthlyPremium = memberAttributesMap.get("Monthly Premium");
 		String yearlyPremium = memberAttributesMap.get("Yearly Premium");
@@ -1688,18 +1737,20 @@ private Scenario scenario;
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planName = plannameAttributesMap.get("Plan Name");
 		String drugName = plannameAttributesMap.get("DrugName");
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		Assertion.assertTrue("Drugs coverage Info not updated", plansummaryPage.verifyAddedDrugName(planName, drugName));
+		Assertion.assertTrue("Drugs coverage Info not updated",
+				plansummaryPage.verifyAddedDrugName(planName, drugName));
 	}
 
 	@Then("^the user clicks on drug dropdown on plan summary page and navigates to DCE$")
@@ -1707,12 +1758,13 @@ private Scenario scenario;
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planType = plannameAttributesMap.get("Plan Type");
 		String planName = plannameAttributesMap.get("Plan Name");
 
@@ -1727,12 +1779,13 @@ private Scenario scenario;
 
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Planname);
-		/*List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Planname.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String annualDrugCost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
 		String planName = plannameAttributesMap.get("Plan Name");
 
@@ -1747,12 +1800,13 @@ private Scenario scenario;
 
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planType = memberAttributesMap.get("Plan Type");
 		String planName = memberAttributesMap.get("Plan Name");
 		String drugName = memberAttributesMap.get("DrugName");
@@ -1780,12 +1834,13 @@ private Scenario scenario;
 	public void the_user_verifies_drug_info_Prescription_Drug(DataTable Attributes) throws Throwable {
 		Map<String, String> plannameAttributesMap = new HashMap<String, String>();
 		plannameAttributesMap = DataTableParser.readDataTableAsMaps(Attributes);
-		/*List<DataTableRow> plannameAttributesRow = Attributes.getGherkinRows();
-		for (int i = 0; i < plannameAttributesRow.size(); i++) {
-
-			plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
-					plannameAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> plannameAttributesRow = Attributes.getGherkinRows(); for
+		 * (int i = 0; i < plannameAttributesRow.size(); i++) {
+		 * 
+		 * plannameAttributesMap.put(plannameAttributesRow.get(i).getCells().get(0),
+		 * plannameAttributesRow.get(i).getCells().get(1)); }
+		 */
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		String annualDrugCost = (String) getLoginScenario().getBean(DCERedesignCommonConstants.ANNUAL_ESTIMATED_TOTAL);
@@ -1911,8 +1966,8 @@ private Scenario scenario;
 //			System.out.println("Selected All MAPD plans for Plan Compare");
 //		}
 //		else
-		plansummaryPage.checkPlansForCompare(Counter,planType);
-		
+		plansummaryPage.checkPlansForCompare(Counter, planType);
+
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
 		if (planComparePage != null) {
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
@@ -2142,11 +2197,12 @@ private Scenario scenario;
 	public Map<String, String> prepareTestInput(DataTable givenAttributes) {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		return memberAttributesMap;
 	}
 
@@ -2552,12 +2608,14 @@ private Scenario scenario;
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
-		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		 * 
+		 * for (int i = 0; i < AttributesRow.size(); i++) {
+		 * 
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
 		String InputValue = urlAttributesMap.get("search Value");
 		System.out.println("Search value" + InputValue);
 		Thread.sleep(3000);
@@ -2596,11 +2654,13 @@ private Scenario scenario;
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
-		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); for (int i =
+		 * 0; i < AttributesRow.size(); i++) {
+		 * 
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
 		String InputValue = urlAttributesMap.get("NewSearchValue");
 		System.out.println("NewSearchValue" + InputValue);
 		Thread.sleep(3000);
@@ -2616,12 +2676,14 @@ private Scenario scenario;
 
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
-		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
+		 * 
+		 * for (int i = 0; i < AttributesRow.size(); i++) {
+		 * 
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
 		String InputValue = urlAttributesMap.get("New Search Value");
 		System.out.println("New Search Value" + InputValue);
 		Thread.sleep(3000);
@@ -2636,11 +2698,13 @@ private Scenario scenario;
 
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
-		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); for (int i =
+		 * 0; i < AttributesRow.size(); i++) {
+		 * 
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
 		String error = urlAttributesMap.get("Error");
 		String newSearchValue = urlAttributesMap.get("NewSearchValue");
 		System.out.println("Error : " + error);
@@ -2671,11 +2735,13 @@ private Scenario scenario;
 
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
-		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); for (int i =
+		 * 0; i < AttributesRow.size(); i++) {
+		 * 
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
 		String error = urlAttributesMap.get("Error");
 		String newSearchValue = urlAttributesMap.get("NewSearchValue");
 		System.out.println("Error : " + error);
@@ -2689,11 +2755,12 @@ private Scenario scenario;
 		WebDriver wd = getLoginScenario().getWebDriverNew();
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String site = memberAttributesMap.get("Site");
 		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
 		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
@@ -2715,11 +2782,12 @@ private Scenario scenario;
 	public void the_user_clicks_on_NBA_to_navigate_to_DCE_Redesign_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String planType = memberAttributesMap.get("Plan Type");
 		String planName = memberAttributesMap.get("Plan Name");
 
@@ -2733,19 +2801,20 @@ private Scenario scenario;
 	public void user_fills_all_details_medsupp(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String DateOfBirth = memberAttributesMap.get("DOB");
 
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.MedSupFormValidation(DateOfBirth);
-		
+
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, plansummaryPage);
 	}
 
@@ -2753,20 +2822,20 @@ private Scenario scenario;
 	public void conitnue_application_until_confirmation_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
-		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
-		String DateOfBirth = memberAttributesMap.get("DOB");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
-		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			String Medicarenumber = memberAttributesMap.get("MedicareNumber");
+			String DateOfBirth = memberAttributesMap.get("DOB");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPage(Medicarenumber);
+			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 		}
 	}
 
@@ -2791,11 +2860,11 @@ private Scenario scenario;
 		// if(urGuideURL!=null){
 		plansummaryPage.medsuppOLERightRail();
 		plansummaryPage.medsuppOLERightRailGuideourhealth();
-	//	plansummaryPage.medsuppOLERightRailoutlinecoverage();
+		// plansummaryPage.medsuppOLERightRailoutlinecoverage();
 		plansummaryPage.medsuppOLERightRailplanoverview();
 		plansummaryPage.medsuppOLERightRailRulesDisclose();
 		plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
-		//plansummaryPage.medsuppOLERightRailLearnmore();
+		// plansummaryPage.medsuppOLERightRailLearnmore();
 
 		// Assertion.assertTrue(true);
 		// }else
@@ -2807,14 +2876,13 @@ private Scenario scenario;
 	public void Start_application_button_proceed_next(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
-		String FirstName = memberAttributesMap.get("Firstname");
-		String LastName = memberAttributesMap.get("Lastname");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
-		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			String FirstName = memberAttributesMap.get("Firstname");
+			String LastName = memberAttributesMap.get("Lastname");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String submitconfirmation = plansummaryPage.StartApplication(FirstName, LastName);
+			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 		}
 	}
 
@@ -2831,7 +2899,7 @@ private Scenario scenario;
 		plansummaryPage.medsuppOLERightRailplanoverview();
 		plansummaryPage.medsuppOLERightRailRulesDisclose();
 		plansummaryPage.medsuppOLERightRailEnrollmentDiscount();
-	//	plansummaryPage.medsuppOLERightRailLearnmore();
+		// plansummaryPage.medsuppOLERightRailLearnmore();
 	}
 
 	@Then("^agent saves two plans as favorite for user$")
@@ -2868,12 +2936,13 @@ private Scenario scenario;
 	public void user_view_plans_of_plantype(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String plantype = givenAttributesMap.get("Plan Type");
 
@@ -2919,7 +2988,7 @@ private Scenario scenario;
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		WelcomePage welcomepage = (WelcomePage) plansummaryPage.clickEnrollPlanBtnOnSelectPlanModal();
-		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE,welcomepage);
+		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
 	}
 
 	@Then("^user should be navigated to OLE page$")
@@ -2933,8 +3002,10 @@ private Scenario scenario;
 	public void user_saves_plan_as_favorite_on_UMS_site(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		 */
 		String PlanName = givenAttributes.cell(0, 1);
 		System.out.println("Plan name" + PlanName);
 		plansummaryPage.savePlan(PlanName);
@@ -3008,11 +3079,12 @@ private Scenario scenario;
 	public void the_user_performs_plan_search_from_home_page(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -3058,15 +3130,15 @@ private Scenario scenario;
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		
-			// String DateOfBirth = memberAttributesMap.get("DOB");
-			String FirstName = memberAttributesMap.get("Firstname");
-			String LastName = memberAttributesMap.get("Lastname");
-			String EmailAddress = memberAttributesMap.get("Email");
-			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
-		
+
+		// String DateOfBirth = memberAttributesMap.get("DOB");
+		String FirstName = memberAttributesMap.get("Firstname");
+		String LastName = memberAttributesMap.get("Lastname");
+		String EmailAddress = memberAttributesMap.get("Email");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
+
 	}
 
 	@Then("^the user clicks on back on all plan linnk in Plan Compare page")
@@ -3148,7 +3220,7 @@ private Scenario scenario;
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		String planType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		System.out.println("plan ytpe" +planType);
+		System.out.println("plan ytpe" + planType);
 		allPlanNames = plansummaryPage.getAllPlanNames(planType);
 		plansummaryPage.clickSelectPlanButton();
 	}
@@ -3164,8 +3236,10 @@ private Scenario scenario;
 	public void user_saves_plan_as_favorite_on_VPP(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		 */
 		String PlanName = givenAttributes.cell(0, 1);
 		System.out.println("Plan name" + PlanName);
 		plansummaryPage.savePlan(PlanName);
@@ -3175,8 +3249,10 @@ private Scenario scenario;
 	public void user_should_be_able_to_see_Select_Plan_for_Enroll_Modal_with_Saved_plans(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		String PlanName = memberAttributesRow.get(0).getCells().get(1);*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * String PlanName = memberAttributesRow.get(0).getCells().get(1);
+		 */
 		String PlanName = givenAttributes.cell(0, 1);
 		System.out.println("Plan name" + PlanName);
 		plansummaryPage.verifySelectPlanForEnrollModalForSavedPlans(PlanName);
@@ -3282,12 +3358,13 @@ private Scenario scenario;
 	public void clickonDentalFlyerLink(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String PDFtype = memberAttributesMap.get("PDF LINK");
 		String DocCode = memberAttributesMap.get("DocumentCode");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
@@ -3308,35 +3385,35 @@ private Scenario scenario;
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.removeProvidersFromPlanCard();
 	}
-	
+
 	@Then("^the user validate on medsupp plans confirmation page$")
 	public void User_validate_medsupp_plans_confirmation_page() throws Throwable {
-		
-		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	
-		plansummaryPage.medsuppOLEPlanOverview();
-		plansummaryPage.medsuppOLEBenefitsTable();
-		plansummaryPage.medsuppOLERulesandDisclosures();
-		plansummaryPage.medsuppOLEHealthInsurance();
-		plansummaryPage.medsuppOLEAARPSupplementPlans();
-	//	plansummaryPage.medsuppOLEPrintandSaveApplication();
-		plansummaryPage.medsuppOLEViewPrescriptionDrugPlans();
-	
+
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			plansummaryPage.medsuppOLEPlanOverview();
+			plansummaryPage.medsuppOLEBenefitsTable();
+			plansummaryPage.medsuppOLERulesandDisclosures();
+			plansummaryPage.medsuppOLEHealthInsurance();
+			plansummaryPage.medsuppOLEAARPSupplementPlans();
+			// plansummaryPage.medsuppOLEPrintandSaveApplication();
+			plansummaryPage.medsuppOLEViewPrescriptionDrugPlans();
+
 		}
 	}
-	
+
 	@When("^the user performs plan search using learn about medicare Pages$")
 	public void learn_about_medicare_zipcode_details(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -3359,16 +3436,18 @@ private Scenario scenario;
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
-	
+
 	@Given("^the user navigates to following Campaign acquisition site page for External Links$")
-	public void the_user_navigates_to_following_medicare_acquisition_site_for_External_Links(DataTable givenAttributes) throws Throwable {
+	public void the_user_navigates_to_following_medicare_acquisition_site_for_External_Links(DataTable givenAttributes)
+			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String path = memberAttributesMap.get("PagePath");
 		String plantype = memberAttributesMap.get("Plan Type");
 		String zipcode = memberAttributesMap.get("Zip Code");
@@ -3393,37 +3472,40 @@ private Scenario scenario;
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
-	
+
 	@Then("^the user enters following information in Request Plan Information Guide through Shop Pages$")
-	public void the_user_enters_following__information_in_Request_Plan_Information_Guide_through_shop_pages(DataTable givenAttributes)
-			throws Throwable {
+	public void the_user_enters_following__information_in_Request_Plan_Information_Guide_through_shop_pages(
+			DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/		
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String EmailAddress = memberAttributesMap.get("Email");
 		ShopForPlanNavigationPage shopaplan = (ShopForPlanNavigationPage) getLoginScenario()
 				.getBean(PageConstants.SHOP_FOR_A_PLAN_AARPLAYER);
-		//ShopPage shopPage = 
-				shopaplan.RequestPlanIInformationshoppages(EmailAddress);
-		//getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
+		// ShopPage shopPage =
+		shopaplan.RequestPlanIInformationshoppages(EmailAddress);
+		// getLoginScenario().saveBean(PageConstants.SHOP_PAGE, shopPage);
 
 	}
+
 	@Then("^user changes zipcode within VPP page$")
 	public void User_Change_ZipCode_VPP_page(DataTable givenAttributes) {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -3432,7 +3514,7 @@ private Scenario scenario;
 		getLoginScenario().saveBean(VPPCommonConstants.IS_MULTICOUNTY, isMultiCounty);
 
 		System.out.println("Proceed to click 'Change Zipcode' and enter different zip code");
-		
+
 		if (plansummaryPage != null) {
 			System.out.println("Proceed to click 'Change Zipcode' and enter original zip code");
 			plansummaryPage.navagateToChangeZipcodeOptionToChangeZipcode(zipcode, county, isMultiCounty);
@@ -3440,15 +3522,17 @@ private Scenario scenario;
 			Assertion.assertTrue("PROBLEM - plansummaryPage is null", false);
 		}
 	}
+
 	@When("^the user performs plan search using Shop Pages for DSNP Plans$")
 	public void Standalone_zipcode_details_dsnp_plans(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -3472,317 +3556,358 @@ private Scenario scenario;
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
+
 	@Then("^the user picks each example from excel to validate Plan Document PDFs and reports into excel$")
-	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(DataTable givenAttributes) throws Throwable {
+	public void the_user_ExceldataValidation_PDF_link_and_validates_document_code_in_PDFtext_URL(
+			DataTable givenAttributes) throws Throwable {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes
-				.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes .getGherkinRows();
+		 * for (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String ExcelName = givenAttributesMap.get("ExcelFile");
 		String ExcelNameDocLog = givenAttributesMap.get("ExcelFileDocLog");
 		String sheetName = givenAttributesMap.get("WorkSheetName");
 		String sheetNameDocLog = "Doc Log";
 		String siteType = givenAttributesMap.get("Site");
-		System.out.println("Set of TFNs from Sheet : "+sheetName);
-		
+		System.out.println("Set of TFNs from Sheet : " + sheetName);
+
 		WebDriver wd = getLoginScenario().getWebDriverNew();
-		 getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		
-		//Getting Date
+		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+
+		// Getting Date
 		DateFormat dateFormat = new SimpleDateFormat("MMddyyyy");
 		Date RunDate = new Date();
 		String DateCreated = dateFormat.format(RunDate);
 		String parentDirectory = null;
 		Sheet sheetDocLog = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
-		String InputFilePath = parentDirectory+"/src/main/resources/database/PlanDocs/"+ExcelName+".xls";
-		String InputFilePathDocLog = parentDirectory+"/src/main/resources/database/PlanDocs/MADocLog.xls";
-		String InputFilePathDocLogPDP = parentDirectory+"/src/main/resources/database/PlanDocs/PDPDocLog.xls";
+		String InputFilePath = parentDirectory + "/src/main/resources/database/PlanDocs/" + ExcelName + ".xls";
+		String InputFilePathDocLog = parentDirectory + "/src/main/resources/database/PlanDocs/MADocLog.xls";
+		String InputFilePathDocLogPDP = parentDirectory + "/src/main/resources/database/PlanDocs/PDPDocLog.xls";
 
-		String OutputFilePath = parentDirectory+"/target/PDFvalidation_Results_"+sheetName+"_"+siteType+"_"+DateCreated+".xls";
-		
-		//Reading the input file
+		String OutputFilePath = parentDirectory + "/target/PDFvalidation_Results_" + sheetName + "_" + siteType + "_"
+				+ DateCreated + ".xls";
+
+		// Reading the input file
 		File InputFile = new File(InputFilePath);
 		FileInputStream inputStream = new FileInputStream(InputFile);
 		Workbook workbook = new HSSFWorkbook(inputStream);
 		Sheet sheet = workbook.getSheet(sheetName);
 		int lastRow = sheet.getLastRowNum();
-		
-		//Reading the MADocLog file
+
+		// Reading the MADocLog file
 		File InputFileDocLog = new File(InputFilePathDocLog);
 		FileInputStream inputStreamDocLog = new FileInputStream(InputFileDocLog);
 		Workbook workbookDocLog = new HSSFWorkbook(inputStreamDocLog);
 		Sheet sheetDocLogMA = workbookDocLog.getSheet(sheetNameDocLog);
 		int lastRowDocLogMA = sheetDocLogMA.getLastRowNum();
-		
-		//Reading the PDPDocLog file
+
+		// Reading the PDPDocLog file
 		File InputFileDocLogPDP = new File(InputFilePathDocLogPDP);
 		FileInputStream inputStreamDocLogPDP = new FileInputStream(InputFileDocLogPDP);
 		Workbook workbookDocLogPDP = new HSSFWorkbook(inputStreamDocLogPDP);
 		Sheet sheetDocLogPDP = workbookDocLogPDP.getSheet(sheetNameDocLog);
 		int lastRowDocLogPDP = sheetDocLogPDP.getLastRowNum();
-		
-		//Creating the results excel book
+
+		// Creating the results excel book
 		Workbook ResultWorkbook = new HSSFWorkbook();
 		Sheet ResultsSheet = ResultWorkbook.createSheet(sheetName);
-		
-		
-		//Creating styles to use to highlight cells with colors
+
+		// Creating styles to use to highlight cells with colors
 		CellStyle stylePassed = ResultWorkbook.createCellStyle();
 		stylePassed.setFillForegroundColor(IndexedColors.GREEN.getIndex());
 		stylePassed.setFillPattern(CellStyle.SOLID_FOREGROUND);
-		
+
 		CellStyle styleFailed = ResultWorkbook.createCellStyle();
 		styleFailed.setFillForegroundColor(IndexedColors.RED.getIndex());
 		styleFailed.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		try {
-			 PlanDetailsPage planDetailsPage = null;
-			 String currentCellValue = "";
-			 String currentColName = "";
-			 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
-			 HashMap <String, Integer> colNamesMapMA = new HashMap<String, Integer>(); 
-			 HashMap <String, Integer> colNamesMapPDP = new HashMap<String, Integer>(); 
-			 
-			
-			
-				 HSSFRow rowDocLog1 = (HSSFRow) sheetDocLogMA.getRow(0);
-				 Iterator<Cell> cellIteratorDocLog = rowDocLog1.cellIterator();
-				 HSSFRow rowDocLogPDP = (HSSFRow) sheetDocLogPDP.getRow(0);
-				 Iterator<Cell> cellIteratorDocLogPDP = rowDocLog1.cellIterator();
-				 
-				 String header = "";
-	             int ci =0, ci1=0;
-	             //loops around column headers for MADoclog file and puts the header names in a map with an integer for each
-	             while(cellIteratorDocLog.hasNext()) {
-	            	 HSSFCell cell = (HSSFCell) cellIteratorDocLog.next();
-	            	 if(cell.getStringCellValue()!=null)
-	            		 header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
-	            	 try {
-	            		 //System.out.println("header "+ci+" : "+header);
-	            	 colNamesMapMA.put(header, ci);
-	            	 }catch (Exception e) {
-	            		 System.out.println("Error in getting cell values from Doc log headers");
-	            	 }
-	            	 ci++;
-	             }
-	             //loops around column headers for PDPDoclog file and puts the header names in a map with an integer for each
-	             header = "";
-	             while(cellIteratorDocLogPDP.hasNext()) {
-	            	 HSSFCell cell = (HSSFCell) cellIteratorDocLogPDP.next();
-	            	 if(cell.getStringCellValue()!=null)
-	            		 header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
-	            	 try {
-	            		 //System.out.println("header "+ci+" : "+header);
-	            	 colNamesMapPDP.put(header, ci1);
-	            	 }catch (Exception e) {
-	            		 System.out.println("Error in getting cell values from Doc log headers");
-	            	 }
-	            	 ci1++;
-	             }
-	             
-	             
-	             int docTypeColIndex = 0;
-	             int langColIndex = 0;
-	             int componentCodeIndex =0;
-	             int planIDIndexDocLog = 0;
-	             int planNameIndexDocLog = 0;
-	             int yearIndexDocLog = 0;
-	             
-	         //getting the respective col numbers for the following headers in MADocLog
-             int docTypeColIndexMA = colNamesMapMA.get("DocType");
-             int langColIndexMA = colNamesMapMA.get("OCP/ODP");
-             int componentCodeIndexMA = colNamesMapMA.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
-             int planIDIndexDocLogMA = colNamesMapMA.get("Contract-PBP-SegmentID");
-             int planNameIndexDocLogMA = colNamesMapMA.get("DocumentDescription");
-             int yearIndexDocLogMA = colNamesMapMA.get("Year");
-             
-             //getting the respective col numbers for the following headers in PDPDocLog
-             int docTypeColIndexPDP = colNamesMapPDP.get("DocType");
-             int langColIndexPDP = colNamesMapPDP.get("OCP/ODP");
-             int componentCodeIndexPDP = colNamesMapPDP.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
-             int planIDIndexDocLogPDP = colNamesMapPDP.get("Contract-PBP-SegmentID");
-             int planNameIndexDocLogPDP = colNamesMapPDP.get("DocumentDescription");
-             int yearIndexDocLogPDP = colNamesMapMA.get("Year");
-			 String  planType = "";
-			 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
-	            {
-				 
-				 	int cellIndex = 0;
-				 	
-				 	HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
-	                Iterator<Cell> cellIterator = row.cellIterator();
-	                HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
-	              
-	                //looping through columns until an empty column is found
-	                while (cellIterator.hasNext()) 
-	                {
-	                	 HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
-	                	 boolean valueMatches = true; 
-	                	 
-	                	 HSSFCell cell = (HSSFCell) cellIterator.next();
-			             
-	                	 try {
-	                		 currentCellValue = cell.getStringCellValue();
-	                		 currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
-	                	 }catch (Exception e) {
-	                		 System.out.println("Error getting value for "+sheetName+ " Row "+rowIndex +" Cell "+cell);
-	                		 System.out.println(e);
-	                	 }
-		                 HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex); 
-						 if(rowIndex==0) {
-							 newCell.setCellValue(cell.getStringCellValue()); 
-							 
-						 }
-						 if(rowIndex!=0) { //skip the header row
-							 if(cellIndex==0) { 
-								 
-								  System.out.println("Validating "+sheetName+ " Row "+rowIndex+" ************************************************************");
-								  new VppCommonPage(wd,siteType,currentCellValue);  //gets the partial deeplink fromt the excel and appends it with the environment URL and navigates to plan details page	
-								  planDetailsPage = new PlanDetailsPage(wd);
-							 }
-							 
-							 //based on the column headers, determines the equivalent name of the pdf in the doclog file and the language for that pdf to match in the doclog file
-							 ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
-							 int rowIndexOfDocCode = 0; String planId= "", planYear ="", planName = "";
-							 
-							 if(currentColName.equalsIgnoreCase("plan id"))
-								 planId = cell.getStringCellValue();
-							 else if(currentColName.equalsIgnoreCase("plan type"))
-								 planType = cell.getStringCellValue();
-							 else if(currentColName.equalsIgnoreCase("year"))
-								 planYear = cell.getStringCellValue();
-							 else if(currentColName.equalsIgnoreCase("plan name"))
-								 planName = cell.getStringCellValue();
-								 
-							 boolean flag = false; String failedMessage = "";
-							 if(!(currentColName.contains("Link")||currentColName.contains("Year")||currentColName.equalsIgnoreCase("zipcode")||currentColName.equalsIgnoreCase("county")||currentColName.equalsIgnoreCase("plan name")||currentColName.equalsIgnoreCase("fips")||currentColName.equalsIgnoreCase("plan type")||currentColName.equalsIgnoreCase("plan id"))){ 
-							  resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName); //method returns true/false value along with the document code in hashmap
-							   
-							  	if(resultMap.containsKey(true) && (resultMap.get(true).equalsIgnoreCase("NA")||currentColName.contains("Step Therapy") || currentColName.contains("Prior Auth") ||currentColName.contains("Formulary Additions")||currentColName.contains("Formulary Deletions"))) {
-							  		newCell.setCellStyle(stylePassed);
-							  		newCell.setCellValue(resultMap.get(true));
-							  	}else if (resultMap.containsKey(true)) {// if the validatePDF returns True
-							  	
-							  		int lastRowDocLog = 0;
-							  		String compCode = resultMap.get(true);
-									  		if(planType.equalsIgnoreCase("PDP")) {
-									  			lastRowDocLog = lastRowDocLogPDP;
-									  			sheetDocLog = sheetDocLogPDP;
-									  			docTypeColIndex = docTypeColIndexPDP;
-									  			langColIndex = langColIndexPDP;
-									  			componentCodeIndex = componentCodeIndexPDP;
-									  			planIDIndexDocLog = planIDIndexDocLogPDP;
-									  			planNameIndexDocLog = planNameIndexDocLogPDP;
-									  			yearIndexDocLog = yearIndexDocLogPDP;
-									  		}else {
-									  			lastRowDocLog = lastRowDocLogMA;
-									  			sheetDocLog = sheetDocLogMA; 
-									  			docTypeColIndex = docTypeColIndexMA;
-									  			langColIndex = langColIndexMA;
-									  			componentCodeIndex = componentCodeIndexMA;
-									  			planIDIndexDocLog = planIDIndexDocLogMA;
-									  			planNameIndexDocLog = planNameIndexDocLogMA;
-									  			yearIndexDocLog = yearIndexDocLogMA;
-									  		}
-	
-							  				
-											//loops through all of the rows in the DOCLog (either PDP or MA based on plantype) excel file for the column that contains the component code and checks if the code exists. if it does, then it returns the index of that row 
-									  		for(int rowIndexDocLog=1; rowIndexDocLog<=lastRowDocLog ; rowIndexDocLog++) {
-									  			 String cellValueOfCompCode = sheetDocLog.getRow(rowIndexDocLog).getCell(componentCodeIndex).getStringCellValue();
-									  			if(cellValueOfCompCode.contains(compCode)){
-									  				rowIndexOfDocCode = rowIndexDocLog;break;
-									  			}		
-											  }
-									  		double yearDocLog=0; String planYearDocLog = "";
-									  		String docTypeDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex).getStringCellValue(); // document type value from the doclog file
-									  		String langDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex).getStringCellValue(); //language value from doclog file
-									  		String planIDDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog).getStringCellValue(); //plan id from the doclog file
-									  		String planNameDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planNameIndexDocLog).getStringCellValue(); //plan name from the doclog file
-									  		
-									  		// if plan year cell contains a numeric value then converts to a string 
-									  		if(sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getCellType() == Cell.CELL_TYPE_NUMERIC) {
-									  			yearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getNumericCellValue(); //plan year from the doclog file
-									  			planYearDocLog = String.valueOf(yearDocLog);
-									  			planYearDocLog = planYearDocLog.substring(0, planYearDocLog.indexOf("."));
-									  		}else {
-									  			planYearDocLog  = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog).getStringCellValue();
-									  		}
-									  		//checks if the doc type matches for this component code
-									  		 if(docTypeDocLog.contains(docLangList.get(0))){
-									  			 //checks if the language matches for this component code
-										  			if(langDocLog.contains(docLangList.get(1))){
-										  				//checks if plan id matches for the component code
-											  				if(planIDDocLog.contains(planId)) {
-											  					//checks if plan name matches for the component code
-											  						if(planNameDocLog.contains(planName)) {
-											  							//checks if plan year matches the component code
-											  								if(planYearDocLog.contains(planYear)) {
-											  									flag = true;
-															  					newCell.setCellStyle(stylePassed);
-																				newCell.setCellValue(resultMap.get(true));
-											  								}else {
-											  									failedMessage = "Failed to match the component code with the plan year: "+planYearDocLog;
-															  					newCell.setCellStyle(styleFailed);
-															  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
-											  								}
-											  						}else {
-											  							failedMessage = "Failed to match the component code with the plan name: "+planNameDocLog;
-													  					newCell.setCellStyle(styleFailed);
-													  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
-											  						}
-											  					
-													  		 }else{// else for plan id check
-													  			 failedMessage = "Failed to match the component code with the plan ID: "+planIDDocLog;
-											  					newCell.setCellStyle(styleFailed);
-											  					newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
-													  		 }
-												  	}else { //else for language check in the DOclog
-												  		failedMessage =  "Failed to match the component code with the Language: "+langDocLog;
-										  				newCell.setCellStyle(styleFailed);
-										  				newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
-												  	}
-									  		 }else { //else for document code check in the doclog
-									  			 failedMessage = "Failed to match the component code with the document type: "+docTypeDocLog;
-									  		 	newCell.setCellStyle(styleFailed);
-									  		 	newCell.setCellValue(resultMap.get(true)+ ": "+failedMessage);
-									  		 }
-									  		 
-									  		 if(failedMessage!= "")
-									  			 System.out.println("Excel comparison Failed: "+failedMessage);
-									  		 else
-									  			 System.out.println("Excel comparison Passed for "+ resultMap.get(true));
-									  		 
-								  	} else { //else for if the valiatePDF method returns false
-								  		newCell.setCellStyle(styleFailed);
-								  		newCell.setCellValue(resultMap.get(false));
-								  	}
-							  /*if (resultMap.containsKey(true)) {
-									newCell.setCellStyle(stylePassed);
-									newCell.setCellValue(resultMap.get(true));
+			PlanDetailsPage planDetailsPage = null;
+			String currentCellValue = "";
+			String currentColName = "";
+			System.out.println(sheetName + " SAUCE URL: " + getLoginScenario().returnJobURL());
+			HashMap<String, Integer> colNamesMapMA = new HashMap<String, Integer>();
+			HashMap<String, Integer> colNamesMapPDP = new HashMap<String, Integer>();
+
+			HSSFRow rowDocLog1 = (HSSFRow) sheetDocLogMA.getRow(0);
+			Iterator<Cell> cellIteratorDocLog = rowDocLog1.cellIterator();
+			HSSFRow rowDocLogPDP = (HSSFRow) sheetDocLogPDP.getRow(0);
+			Iterator<Cell> cellIteratorDocLogPDP = rowDocLog1.cellIterator();
+
+			String header = "";
+			int ci = 0, ci1 = 0;
+			// loops around column headers for MADoclog file and puts the header names in a
+			// map with an integer for each
+			while (cellIteratorDocLog.hasNext()) {
+				HSSFCell cell = (HSSFCell) cellIteratorDocLog.next();
+				if (cell.getStringCellValue() != null)
+					header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
+				try {
+					// System.out.println("header "+ci+" : "+header);
+					colNamesMapMA.put(header, ci);
+				} catch (Exception e) {
+					System.out.println("Error in getting cell values from Doc log headers");
+				}
+				ci++;
+			}
+			// loops around column headers for PDPDoclog file and puts the header names in a
+			// map with an integer for each
+			header = "";
+			while (cellIteratorDocLogPDP.hasNext()) {
+				HSSFCell cell = (HSSFCell) cellIteratorDocLogPDP.next();
+				if (cell.getStringCellValue() != null)
+					header = cell.getStringCellValue().replaceAll("\n", "").replaceAll("\\s+", "");
+				try {
+					// System.out.println("header "+ci+" : "+header);
+					colNamesMapPDP.put(header, ci1);
+				} catch (Exception e) {
+					System.out.println("Error in getting cell values from Doc log headers");
+				}
+				ci1++;
+			}
+
+			int docTypeColIndex = 0;
+			int langColIndex = 0;
+			int componentCodeIndex = 0;
+			int planIDIndexDocLog = 0;
+			int planNameIndexDocLog = 0;
+			int yearIndexDocLog = 0;
+
+			// getting the respective col numbers for the following headers in MADocLog
+			int docTypeColIndexMA = colNamesMapMA.get("DocType");
+			int langColIndexMA = colNamesMapMA.get("OCP/ODP");
+			int componentCodeIndexMA = colNamesMapMA
+					.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+			int planIDIndexDocLogMA = colNamesMapMA.get("Contract-PBP-SegmentID");
+			int planNameIndexDocLogMA = colNamesMapMA.get("DocumentDescription");
+			int yearIndexDocLogMA = colNamesMapMA.get("Year");
+
+			// getting the respective col numbers for the following headers in PDPDocLog
+			int docTypeColIndexPDP = colNamesMapPDP.get("DocType");
+			int langColIndexPDP = colNamesMapPDP.get("OCP/ODP");
+			int componentCodeIndexPDP = colNamesMapPDP
+					.get("ComponentorKitCode(MA/PDP/OCPMA&PDP);FileNameorKitCode(MS/OCPMS)");
+			int planIDIndexDocLogPDP = colNamesMapPDP.get("Contract-PBP-SegmentID");
+			int planNameIndexDocLogPDP = colNamesMapPDP.get("DocumentDescription");
+			int yearIndexDocLogPDP = colNamesMapMA.get("Year");
+			String planType = "";
+			for (int rowIndex = 0; rowIndex <= lastRow; rowIndex++) {
+
+				int cellIndex = 0;
+
+				HSSFRow row = (HSSFRow) sheet.getRow(rowIndex);
+				Iterator<Cell> cellIterator = row.cellIterator();
+				HSSFRow resultsRow = (HSSFRow) ResultsSheet.createRow(rowIndex);
+
+				// looping through columns until an empty column is found
+				while (cellIterator.hasNext()) {
+					HashMap<Boolean, String> resultMap = new HashMap<Boolean, String>();
+					boolean valueMatches = true;
+
+					HSSFCell cell = (HSSFCell) cellIterator.next();
+
+					try {
+						currentCellValue = cell.getStringCellValue();
+						currentColName = sheet.getRow(0).getCell(cellIndex).getStringCellValue();
+					} catch (Exception e) {
+						System.out
+								.println("Error getting value for " + sheetName + " Row " + rowIndex + " Cell " + cell);
+						System.out.println(e);
+					}
+					HSSFCell newCell = (HSSFCell) resultsRow.createCell(cellIndex);
+					if (rowIndex == 0) {
+						newCell.setCellValue(cell.getStringCellValue());
+
+					}
+					if (rowIndex != 0) { // skip the header row
+						if (cellIndex == 0) {
+
+							System.out.println("Validating " + sheetName + " Row " + rowIndex
+									+ " ************************************************************");
+							new VppCommonPage(wd, siteType, currentCellValue); // gets the partial deeplink fromt the
+																				// excel and appends it with the
+																				// environment URL and navigates to plan
+																				// details page
+							planDetailsPage = new PlanDetailsPage(wd);
+						}
+
+						// based on the column headers, determines the equivalent name of the pdf in the
+						// doclog file and the language for that pdf to match in the doclog file
+						ArrayList<String> docLangList = planDetailsPage.getDocNameAndLanguage(currentColName);
+						int rowIndexOfDocCode = 0;
+						String planId = "", planYear = "", planName = "";
+
+						if (currentColName.equalsIgnoreCase("plan id"))
+							planId = cell.getStringCellValue();
+						else if (currentColName.equalsIgnoreCase("plan type"))
+							planType = cell.getStringCellValue();
+						else if (currentColName.equalsIgnoreCase("year"))
+							planYear = cell.getStringCellValue();
+						else if (currentColName.equalsIgnoreCase("plan name"))
+							planName = cell.getStringCellValue();
+
+						boolean flag = false;
+						String failedMessage = "";
+						if (!(currentColName.contains("Link") || currentColName.contains("Year")
+								|| currentColName.equalsIgnoreCase("zipcode")
+								|| currentColName.equalsIgnoreCase("county")
+								|| currentColName.equalsIgnoreCase("plan name")
+								|| currentColName.equalsIgnoreCase("fips")
+								|| currentColName.equalsIgnoreCase("plan type")
+								|| currentColName.equalsIgnoreCase("plan id"))) {
+							resultMap = planDetailsPage.clickAndValidatePDFText_URL(currentColName); // method returns
+																										// true/false
+																										// value along
+																										// with the
+																										// document code
+																										// in hashmap
+
+							if (resultMap.containsKey(true) && (resultMap.get(true).equalsIgnoreCase("NA")
+									|| currentColName.contains("Step Therapy") || currentColName.contains("Prior Auth")
+									|| currentColName.contains("Formulary Additions")
+									|| currentColName.contains("Formulary Deletions"))) {
+								newCell.setCellStyle(stylePassed);
+								newCell.setCellValue(resultMap.get(true));
+							} else if (resultMap.containsKey(true)) {// if the validatePDF returns True
+
+								int lastRowDocLog = 0;
+								String compCode = resultMap.get(true);
+								if (planType.equalsIgnoreCase("PDP")) {
+									lastRowDocLog = lastRowDocLogPDP;
+									sheetDocLog = sheetDocLogPDP;
+									docTypeColIndex = docTypeColIndexPDP;
+									langColIndex = langColIndexPDP;
+									componentCodeIndex = componentCodeIndexPDP;
+									planIDIndexDocLog = planIDIndexDocLogPDP;
+									planNameIndexDocLog = planNameIndexDocLogPDP;
+									yearIndexDocLog = yearIndexDocLogPDP;
 								} else {
+									lastRowDocLog = lastRowDocLogMA;
+									sheetDocLog = sheetDocLogMA;
+									docTypeColIndex = docTypeColIndexMA;
+									langColIndex = langColIndexMA;
+									componentCodeIndex = componentCodeIndexMA;
+									planIDIndexDocLog = planIDIndexDocLogMA;
+									planNameIndexDocLog = planNameIndexDocLogMA;
+									yearIndexDocLog = yearIndexDocLogMA;
+								}
+
+								// loops through all of the rows in the DOCLog (either PDP or MA based on
+								// plantype) excel file for the column that contains the component code and
+								// checks if the code exists. if it does, then it returns the index of that row
+								for (int rowIndexDocLog = 1; rowIndexDocLog <= lastRowDocLog; rowIndexDocLog++) {
+									String cellValueOfCompCode = sheetDocLog.getRow(rowIndexDocLog)
+											.getCell(componentCodeIndex).getStringCellValue();
+									if (cellValueOfCompCode.contains(compCode)) {
+										rowIndexOfDocCode = rowIndexDocLog;
+										break;
+									}
+								}
+								double yearDocLog = 0;
+								String planYearDocLog = "";
+								String docTypeDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(docTypeColIndex)
+										.getStringCellValue(); // document type value from the doclog file
+								String langDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(langColIndex)
+										.getStringCellValue(); // language value from doclog file
+								String planIDDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(planIDIndexDocLog)
+										.getStringCellValue(); // plan id from the doclog file
+								String planNameDocLog = sheetDocLog.getRow(rowIndexOfDocCode)
+										.getCell(planNameIndexDocLog).getStringCellValue(); // plan name from the doclog
+																							// file
+
+								// if plan year cell contains a numeric value then converts to a string
+								if (sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog)
+										.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+									yearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog)
+											.getNumericCellValue(); // plan year from the doclog file
+									planYearDocLog = String.valueOf(yearDocLog);
+									planYearDocLog = planYearDocLog.substring(0, planYearDocLog.indexOf("."));
+								} else {
+									planYearDocLog = sheetDocLog.getRow(rowIndexOfDocCode).getCell(yearIndexDocLog)
+											.getStringCellValue();
+								}
+								// checks if the doc type matches for this component code
+								if (docTypeDocLog.contains(docLangList.get(0))) {
+									// checks if the language matches for this component code
+									if (langDocLog.contains(docLangList.get(1))) {
+										// checks if plan id matches for the component code
+										if (planIDDocLog.contains(planId)) {
+											// checks if plan name matches for the component code
+											if (planNameDocLog.contains(planName)) {
+												// checks if plan year matches the component code
+												if (planYearDocLog.contains(planYear)) {
+													flag = true;
+													newCell.setCellStyle(stylePassed);
+													newCell.setCellValue(resultMap.get(true));
+												} else {
+													failedMessage = "Failed to match the component code with the plan year: "
+															+ planYearDocLog;
+													newCell.setCellStyle(styleFailed);
+													newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+												}
+											} else {
+												failedMessage = "Failed to match the component code with the plan name: "
+														+ planNameDocLog;
+												newCell.setCellStyle(styleFailed);
+												newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+											}
+
+										} else {// else for plan id check
+											failedMessage = "Failed to match the component code with the plan ID: "
+													+ planIDDocLog;
+											newCell.setCellStyle(styleFailed);
+											newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+										}
+									} else { // else for language check in the DOclog
+										failedMessage = "Failed to match the component code with the Language: "
+												+ langDocLog;
+										newCell.setCellStyle(styleFailed);
+										newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+									}
+								} else { // else for document code check in the doclog
+									failedMessage = "Failed to match the component code with the document type: "
+											+ docTypeDocLog;
 									newCell.setCellStyle(styleFailed);
-									newCell.setCellValue(resultMap.get(false));
-								
-								}*/
-							 }else { //else for if the columns are the first few columns where validation is not needed. e.x link, plan name, etc.
-								 newCell.setCellValue(cell.getStringCellValue());
-							 }
-						 }
-						 
-						 cellIndex++;
-	                
-	                }// while loop end
-	            }// for loop end
+									newCell.setCellValue(resultMap.get(true) + ": " + failedMessage);
+								}
+
+								if (failedMessage != "")
+									System.out.println("Excel comparison Failed: " + failedMessage);
+								else
+									System.out.println("Excel comparison Passed for " + resultMap.get(true));
+
+							} else { // else for if the valiatePDF method returns false
+								newCell.setCellStyle(styleFailed);
+								newCell.setCellValue(resultMap.get(false));
+							}
+							/*
+							 * if (resultMap.containsKey(true)) { newCell.setCellStyle(stylePassed);
+							 * newCell.setCellValue(resultMap.get(true)); } else {
+							 * newCell.setCellStyle(styleFailed);
+							 * newCell.setCellValue(resultMap.get(false));
+							 * 
+							 * }
+							 */
+						} else { // else for if the columns are the first few columns where validation is not
+									// needed. e.x link, plan name, etc.
+							newCell.setCellValue(cell.getStringCellValue());
+						}
+					}
+
+					cellIndex++;
+
+				} // while loop end
+			} // for loop end
 			File OutputFile = new File(OutputFilePath);
 			FileOutputStream outputStream = new FileOutputStream(OutputFile);
 			ResultWorkbook.write(outputStream);
 			inputStream.close();
-			outputStream.flush();			
+			outputStream.flush();
 			outputStream.close();
 		} catch (Exception e) {
 			File OutputFile = new File(OutputFilePath);
@@ -3795,84 +3920,85 @@ private Scenario scenario;
 		}
 
 	}
-	
+
 	@Then("^the user clicks on compare plans button on plan details page and navigate to compare page$")
 	public void clicks__compare_plans_button_on_plan_details_page_and_navigate_to_compare_page() throws Throwable {
 		PlanDetailsPage planDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		ComparePlansPage planComparePage = planDetailsPage.navigateToPlanCompare();
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-		
+
 	}
-	
+
 	@Then("^the user quits the session$")
 	public void user_ends_current_session() throws Throwable {
-		WebDriver wd  =(WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		wd.quit();
 	}
-	
+
 	@Then("^user should be navigated to VPP summary page$")
 	public void user_should_be_navigated_to_VPP_summary_page() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateVPPSummaryPage();
 	}
+
 	@Then("^user should be navigated to VPP detail page$")
 	public void user_should_be_navigated_to_VPP_details_page() throws Throwable {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validateVPPDetailsPage();
 	}
-	
+
 	@Then("^user should be able to see the NBA modal to add drugs on the VPP summary page$")
 	public void user_should_be_able_to_see_the_NBA_modal_to_add_drugs_on_the_VPP_summary_page() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNextBestActionModalForDrugCost();
 	}
-	
+
 	@Then("^user verify NBA is not displayed on the VPP page$")
 	public void user_verify_NBA_is_not_displayed_on_the_VPP_page() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.verifyNBAModalNotDisplayed();
 	}
-	
+
 	@Then("^the site user clicks on continue application until confirmaion page for vpp pages$")
 	public void conitnue_application_until_confirmation_page_vpp_page(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
-		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod"))) {
-		String Medicarenumber = memberAttributesMap.get("MedicareNumber");
-		String DateOfBirth = memberAttributesMap.get("DOB");
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPagevpppages(Medicarenumber);
-		getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
+			String Medicarenumber = memberAttributesMap.get("MedicareNumber");
+			String DateOfBirth = memberAttributesMap.get("DOB");
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+			String submitconfirmation = plansummaryPage.continueApplicationuntilSubmitPagevpppages(Medicarenumber);
+			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
 		}
 	}
-	
+
 	@Then("^verify all links on plan compare page is loaded$")
 	public void verify_alllinks_on_plan_compare_page_is_loaded_on_AARP() throws Throwable {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateALLFiledsPlanComparePage();
 	}
-	
+
 	@Then("^verify view all plan button is not displayed$")
 	public void verifyviewallplanbuttonisnotdisplayed() throws Throwable {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateViewALLplanButtonNotDisplayed();
 	}
-	
+
 	@And("^I click on Add Places from Hospitals find care page$")
 	public void I_click_on_Add_Hospitals_on_plan_compare_and_Add_PlacesfromHospitals_find_care_page() throws Exception {
 		FindCarePage findCarePage = (FindCarePage) getLoginScenario().getBean(PageConstants.FIND_CARE_PAGE);
@@ -3889,21 +4015,21 @@ private Scenario scenario;
 		} else
 			Assertion.fail("Error in loading the compare plans page");
 	}
-	
+
 	@Then("^user click on close button on Drug info Modal popup")
 	public void user_clicks_close_plan_PlanCompare_page() throws InterruptedException {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.dceModelClosepopup();
 	}
-	
+
 	@Then("^validate all subtabs displayed on plan details$")
 	public void validateplandetaillinks() throws Throwable {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.validatealllinksonPlanDetails();
 	}
-	
+
 	@Then("^User click on provider link on Medical tab and navigates to rally page$")
 	public void user_EditProvider_on_PlanDetailsPage() {
 
@@ -3925,15 +4051,16 @@ private Scenario scenario;
 	}
 
 	@When("^the user clicks on Find plans on vpp using following information$")
-	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information(
-			DataTable givenAttributes) throws Throwable {
+	public void the_user_clicks_on_Find_plans_on_vpp_using_following_information(DataTable givenAttributes)
+			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String county2 = memberAttributesMap.get("County Name2");
 		String isMultiCounty2 = memberAttributesMap.get("Is Multi County2");
 
@@ -3951,92 +4078,97 @@ private Scenario scenario;
 
 		}
 	}
-	
+
 	@Then("^the user click the Email Plan List envelope icon or text on Plan summary page")
-	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_summary_page() throws InterruptedException {
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_summary_page()
+			throws InterruptedException {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.clickOnEmailField();
 	}
-	
+
 	@Then("^user want the email address associated to my profile prepopulated in the text box on plan summary page")
-	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_summary_page(DataTable givenAttributes) throws InterruptedException {
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_summary_page(
+			DataTable givenAttributes) throws InterruptedException {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		
+
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String email = memberAttributesMap.get("User Name");
 		plansummaryPage.validatePrepopulatedEmail(email);
 	}
-	
+
 	@Then("^the user click the Email Plan List envelope icon or text on Plan details page")
-	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_details_page() throws InterruptedException {
-		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_details_page()
+			throws InterruptedException {
+		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		planDetails.clickOnEmailField();
 	}
-	
+
 	@Then("^user want the email address associated to my profile prepopulated in the text box on plan detail page")
-	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_detail_page(DataTable givenAttributes) throws InterruptedException {
-		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
-		
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_detail_page(
+			DataTable givenAttributes) throws InterruptedException {
+		PlanDetailsPage planDetails = (PlanDetailsPage) getLoginScenario().getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
+
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String email = memberAttributesMap.get("User Name");
 		planDetails.validatePrepopulatedEmail(email);
 	}
-	
+
 	@Then("^the user click the Email Plan List envelope icon or text on Plan compare page")
-	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_compare_page() throws InterruptedException {
-		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+	public void the_user_click_the_Email_Plan_List_envelope_icon_or_text_on_Plan_compare_page()
+			throws InterruptedException {
+		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planCompare.clickOnEmailField();
 	}
-	
+
 	@Then("^user want the email address associated to my profile prepopulated in the text box on plan compare page")
-	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_compare_page(DataTable givenAttributes) throws InterruptedException {
-		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario()
-				.getBean(PageConstants.PLAN_COMPARE_PAGE);
-		
+	public void user_want_the_email_address_associated_to_my_profile_prepopulated_in_the_text_box_on_plan_compare_page(
+			DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planCompare = (ComparePlansPage) getLoginScenario().getBean(PageConstants.PLAN_COMPARE_PAGE);
+
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * 
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String email = memberAttributesMap.get("User Name");
 		planCompare.validatePrepopulatedEmail(email);
 	}
-	
+
 	@Then("^user clicks on Select by Address and Enter fileds$")
-	public void user_clicks_on_Select_by_Address_and_Enter_fileds(DataTable givenAttributes)
-			throws Throwable {
+	public void user_clicks_on_Select_by_Address_and_Enter_fileds(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String address = memberAttributesMap.get("Address");
 		String city = memberAttributesMap.get("City");
 		String state = memberAttributesMap.get("State");
@@ -4047,42 +4179,44 @@ private Scenario scenario;
 	}
 
 	@Then("^I save \"([^\"]*)\" plans and \"([^\"]*)\" plans and verify the count update on shopping cart$")
-	public void i_save_plans_and_verify_plan_count(String planType, String Counter)
-			throws Throwable {
+	public void i_save_plans_and_verify_plan_count(String planType, String Counter) throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		switch(planType.toUpperCase()){
+		switch (planType.toUpperCase()) {
 		case "MAPD":
 		case "MA":
-			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,"MA");break;
-			default: plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter,planType.toUpperCase());break;
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter, "MA");
+			break;
+		default:
+			plansummaryPage.savePlansOnSummaryAndVerifyCountOnCart(Counter, planType.toUpperCase());
+			break;
 		}
-	}	
+	}
+
 	@Then("^I validate view more and view less links on plan summary$")
-	public void i_validate_viewMore_and_viewLess()
-			throws Throwable {
+	public void i_validate_viewMore_and_viewLess() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		plansummaryPage.validateViewMoreAndLessLinks();
-	}	
-	
-	@Then("^I validate \"([^\"]*)\" plans with names \"([^\"]*)\" are listed correctly on summary page")
-	public void I_validate_planNames_on_planSummary(String planType, String planNames)
-	throws Throwable {
-	VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-	.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-	plansummaryPage.validatePlanNames(planType,planNames) ;
 	}
-	
+
+	@Then("^I validate \"([^\"]*)\" plans with names \"([^\"]*)\" are listed correctly on summary page")
+	public void I_validate_planNames_on_planSummary(String planType, String planNames) throws Throwable {
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.validatePlanNames(planType, planNames);
+	}
+
 	@When("^the user performs plan search using following information using external link$")
 	public void zipcode_details_in_aarp_external_site(DataTable givenAttributes) throws InterruptedException {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
+		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+		 * memberAttributesRow.get(i).getCells().get(1)); }
+		 */
 		String zipcode = memberAttributesMap.get("Zip Code");
 		String county = memberAttributesMap.get("County Name");
 		String isMultiCounty = memberAttributesMap.get("Is Multi County");
@@ -4106,14 +4240,14 @@ private Scenario scenario;
 			Assertion.fail("Error Loading VPP plan summary page");
 		}
 	}
-	
+
 	@When("^user clicks on Add to compare checkbox on plan detail page$")
 	public void user_clicks_on_compare_checknox_on_plan_details_page() throws Throwable {
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_DETAILS_PAGE);
 		vppPlanDetailsPage.clickCompareBox();
 	}
-	
+
 	@Then("^verify the Add to compare checkbox is checked for selected plan$")
 	public void verify_the_Add_to_compare_checkbox_is_checked_for_selected_plan(DataTable givenAttributes) {
 
@@ -4122,24 +4256,24 @@ private Scenario scenario;
 
 		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
 		String planIndex = memberAttributesMap.get("Plan index");
-		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		System.out.println("plan type"+plantype);
-		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex,plantype);
+		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		System.out.println("plan type" + plantype);
+		plansummaryPage.verifyPlanCompareCheckboxIsChecked(planIndex, plantype);
 	}
 
 	@When("^user select \"([^\"]*)\" plans to compare$")
-	public void user_select_plans_to_compare(String planIndex)  {		
-		
+	public void user_select_plans_to_compare(String planIndex) {
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		String plantype=(String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		plansummaryPage.addPlanToCompareByIndex(planIndex,plantype);
-		
+		String plantype = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
+		plansummaryPage.addPlanToCompareByIndex(planIndex, plantype);
+
 	}
-	
+
 	@Then("^user clicks on compare button$")
 	public void user_clicks_on_compare_button() {
-		
+
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		ComparePlansPage planComparePage = plansummaryPage.clickCompareButton();
@@ -4149,26 +4283,27 @@ private Scenario scenario;
 		} else
 			Assertion.fail("Error in loading the compare plans page");
 	}
-	
+
 	@Then("^the user enter the searchValue in the search text box$")
-	public void the_user_enter_the_searchValue_in_the_search_text_box(DataTable inputvalue)
-			throws Throwable {
+	public void the_user_enter_the_searchValue_in_the_search_text_box(DataTable inputvalue) throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
-		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); for (int i =
+		 * 0; i < AttributesRow.size(); i++) {
+		 * 
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
 		String InputValue = urlAttributesMap.get("search Value");
 		System.out.println("Search value" + InputValue);
 		Thread.sleep(3000);
 		aquisitionhomepage.enterSiteSearchValue(InputValue);
 
 	}
-	
+
 	@Then("^the user should see the auto complete suggestions$")
 	public void the_user_should_see_the_auto_complete_suggestions() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -4177,40 +4312,41 @@ private Scenario scenario;
 	}
 
 	@Then("^the user clicks on the first auto complete suggestion$")
-	public void the_user_clicks_on_the_first_auto_complete_suggestion(){
+	public void the_user_clicks_on_the_first_auto_complete_suggestion() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickFirstSuggestion();
 	}
-	
+
 	@Then("^the user enter the secondary searchValue in the search text box$")
-	public void the_user_enter_the_secondary_searchValue_in_the_search_text_box(
-			DataTable inputvalue) throws Throwable {
+	public void the_user_enter_the_secondary_searchValue_in_the_search_text_box(DataTable inputvalue) throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		Map<String, String> urlAttributesMap = new HashMap<String, String>();
 		urlAttributesMap = DataTableParser.readDataTableAsMaps(inputvalue);
-		/*List<DataTableRow> AttributesRow = inputvalue.getGherkinRows();
-		for (int i = 0; i < AttributesRow.size(); i++) {
-
-			urlAttributesMap.put(AttributesRow.get(i).getCells().get(0), AttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> AttributesRow = inputvalue.getGherkinRows(); for (int i =
+		 * 0; i < AttributesRow.size(); i++) {
+		 * 
+		 * urlAttributesMap.put(AttributesRow.get(i).getCells().get(0),
+		 * AttributesRow.get(i).getCells().get(1)); }
+		 */
 		String InputValue = urlAttributesMap.get("NewSearchValue");
 		System.out.println("NewSearchValue" + InputValue);
 		Thread.sleep(3000);
 
 		aquisitionhomepage.enterSecondarySiteSearchValue(InputValue);
 	}
-	
+
 	@Then("^the user should see the auto complete suggestions site search page$")
 	public void the_user_should_see_the_auto_complete_suggestions_site_search_page() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.validateAutoCompleteSuggestionSiteSearchPage();
 	}
-	
+
 	@Then("^the user clicks on the first auto complete suggestion site search page$")
-	public void the_user_clicks_on_the_first_auto_complete_suggestion_site_search_page(){
+	public void the_user_clicks_on_the_first_auto_complete_suggestion_site_search_page() {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		aquisitionhomepage.clickFirstSuggestionSiteSearch();
@@ -4220,41 +4356,43 @@ private Scenario scenario;
 	public void user_performs_planSearch_in_aarp_sites_on_shop_pages(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
 		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
+		/*
+		 * List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows(); for
+		 * (int i = 0; i < givenAttributesRow.size(); i++) {
+		 * 
+		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
+		 * givenAttributesRow.get(i).getCells().get(1)); }
+		 */
 
 		String plantype = givenAttributesMap.get("Plan Type");
 		System.out.println("Select PlanType to view Plans for entered Zip" + plantype);
 		getLoginScenario().saveBean(VPPCommonConstants.PLAN_TYPE, plantype);
-		if (!(MRScenario.environment.equalsIgnoreCase("offline")
-				|| MRScenario.environment.equalsIgnoreCase("prod") || MRScenario.environment.equalsIgnoreCase("stage") || MRScenario.environment.equalsIgnoreCase("team-acme"))) {
-			
-		
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod")
+				|| MRScenario.environment.equalsIgnoreCase("stage")
+				|| MRScenario.environment.equalsIgnoreCase("team-acme"))) {
 
-		plansummaryPage.viewPlanSummary(plantype);
-		if (!plantype.equalsIgnoreCase("MS"))
-			plansummaryPage.handlePlanYearSelectionPopup();
+			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+
+			plansummaryPage.viewPlanSummary(plantype);
+			if (!plantype.equalsIgnoreCase("MS"))
+				plansummaryPage.handlePlanYearSelectionPopup();
 		}
 	}
-	
+
 	@Given("^the user directly navigates to welcome OLE page$")
 	public void the_user_navigates_to_Welcome_OLE_Pages(DataTable givenAttributes) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 		String path = memberAttributesMap.get("PagePath");
-		
+
 		String PlanName = memberAttributesMap.get("Plan Name");
-		//String PlanName = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
-		
-		//String County = "St. Louis County";
-		//String ZipCode = "63043";
-		//String PlanYear = "2020"; 
+		// String PlanName = (String)
+		// getLoginScenario().getBean(VPPCommonConstants.PLAN_NAME);
+
+		// String County = "St. Louis County";
+		// String ZipCode = "63043";
+		// String PlanYear = "2020";
 
 		String PlanYear = memberAttributesMap.get("Plan Year");
 		String PlanPremium = "";
@@ -4262,15 +4400,15 @@ private Scenario scenario;
 		String County = "";
 		String PlanType = memberAttributesMap.get("Plan Type");
 		String SiteName;
-		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);	
-		//String plantype = memberAttributesMap.get("Plan Type");
+		SiteName = (String) getLoginScenario().getBean(oleCommonConstants.ACQ_SITE_NAME);
+		// String plantype = memberAttributesMap.get("Plan Type");
 		path = path.replace("!", "#");
 		System.out.print("Path to Acq page : " + path);
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
 		WelcomePage welcomepage = aquisitionhomepage.navigateToPathOLE(path);
-		
+
 		getLoginScenario().saveBean(OLE_PageConstants.OLE_WELCOME_PAGE, welcomepage);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_TYPE, PlanType);
@@ -4280,6 +4418,7 @@ private Scenario scenario;
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_YEAR, PlanYear);
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_PREMIUM, PlanPremium);
 	}
+
 	@Then("^user clicks on Learn About Medicare$")
 	public void user_clicks_on_Learn_About_Medicare() throws Throwable {
 		AcquisitionHomePage aquisitionhomepage = (AcquisitionHomePage) getLoginScenario()
@@ -4301,22 +4440,22 @@ private Scenario scenario;
 	public void navigate_back_to_previous_window() throws Throwable {
 		WebDriver wd = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		String originalHandle = wd.getWindowHandle();
-		    for(String handle : wd.getWindowHandles()) {
-		        if (!handle.equals(originalHandle)) {
-		            wd.switchTo().window(handle);
-		            wd.close();
-		        }
-		    }
-		    wd.switchTo().window(originalHandle);
+		for (String handle : wd.getWindowHandles()) {
+			if (!handle.equals(originalHandle)) {
+				wd.switchTo().window(handle);
+				wd.close();
+			}
+		}
+		wd.switchTo().window(originalHandle);
 	}
 
 	@Then("^validate group plan marketting Bullets$")
 	public void validate_group_plans_markettingBullets() throws Throwable {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-				plansummaryPage.validateGroupPlanMArkettingBullets() ;
+		plansummaryPage.validateGroupPlanMArkettingBullets();
 	}
-	
+
 	@And("^the user views the plans for below plan type$")
 	public void user_view_plans_of_plan_type(DataTable givenAttributes) {
 		Map<String, String> givenAttributesMap = new HashMap<String, String>();
@@ -4330,4 +4469,25 @@ private Scenario scenario;
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 
+	@Then("^agent saves two plans as favorite for user on plan compare page$")
+	public void agent_saves_two_plans_as_favorite_on_plan_compare_page(DataTable givenAttributes) {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		comparePlansPage.save2Plans(savePlanNames);
+	}
+
+	@Then("^the user validates the view drug information on Plan Compare page")
+	public void user_clicks_validates_view_drug_info_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String drugName = givenAttributesMap.get("Drugs");
+		planComparePage.validateViewDrugInformation(drugName);
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
+
+	}
 }

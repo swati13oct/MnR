@@ -32,7 +32,7 @@ public class VerizonSiteMap extends UhcDriver {
 
 
 
-	public Rallytool_Page verizonsitemapproviderclick() {
+	public Rallytool_PageMobile verizonsitemapproviderclick() {
 		
 		validate(versitemapfindaproviderlink);
 		versitemapfindaproviderlink.click();
@@ -42,7 +42,7 @@ public class VerizonSiteMap extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 		}
 	
 		// TODO Auto-generated method stub
