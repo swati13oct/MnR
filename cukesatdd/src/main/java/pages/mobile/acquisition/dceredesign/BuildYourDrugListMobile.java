@@ -65,7 +65,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(id = "modal-label")
 	public WebElement TellUsABoutHeader;
 
-	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close')]")
+	@FindBy(xpath = "//img[contains(@class,'uhc-modal__close ng-tns-c35-8')]")
 	public WebElement TellUsABoutCloseBtn;
 
 	// uhc-menu-item
@@ -292,6 +292,10 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	}
 	
 	public TellUsAboutDrugMobile SearchaddDrug(String drugName) throws InterruptedException {
+		
+		if(addDrugButton.isDisplayed()) {
+			jsClickNew(addDrugButton);
+		}
 
 		validateNew(EnterDrugNameTxt);
 		sendkeysMobile(EnterDrugNameTxt, drugName);
@@ -311,8 +315,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 		threadsleep(2000);
 		// waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		// CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
-		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
+		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 30);
+		if (validateNew(TellUsABoutHeader)) {
 			return new TellUsAboutDrugMobile(driver);
 		} else {
 			Assertion.fail("Tell Us About Drug Page is NOT Displayed");

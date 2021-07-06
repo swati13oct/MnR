@@ -741,7 +741,9 @@ public class DCEACQHomeMobile {
 	@And("^user clicks on change pharmacy link on alert message from plan card on drug summary page$")
 	public void user_clicks_on_change_pharmacy_link_on_alert_message_from_plan_card_on_drug_summary_page()
 			throws InterruptedException {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		//DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.clickChangePharmacyFromAltMsg();
 	}
 
@@ -889,7 +891,9 @@ public class DCEACQHomeMobile {
 
 	@When("^user should verify the Extra help on SNP plan type$")
 	public void user_should_verify_the_Extra_help_in_AARP() {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		//DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.clickOnSNPPlan();
 		drugSummaryPage.verifyTheTextAlert();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -897,7 +901,9 @@ public class DCEACQHomeMobile {
 
 	@When("^user click on PDP plan to view drug pricing$")
 	public void User_click_on_PDP_plan_in_AARP() throws Throwable {
-		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		//DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
+		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugSummary);
 		drugSummaryPage.clickOnPdpPlan();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
