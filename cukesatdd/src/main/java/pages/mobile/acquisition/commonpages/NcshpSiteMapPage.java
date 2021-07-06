@@ -30,7 +30,7 @@ public class NcshpSiteMapPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public Rallytool_Page findaproviderncshpsitemapclick() {
+	public Rallytool_PageMobile findaproviderncshpsitemapclick() {
 		validate(ncshpsitemappagefindaproviderlink);
 
 		ncshpsitemappagefindaproviderlink.click();
@@ -39,7 +39,7 @@ public class NcshpSiteMapPage extends UhcDriver {
 		driver.switchTo().window(tabs.get(1));
 
 		if (getTitle().equalsIgnoreCase("Enter Zip")) {
-			return new Rallytool_Page(driver);
+			return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

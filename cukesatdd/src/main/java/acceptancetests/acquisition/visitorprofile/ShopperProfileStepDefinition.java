@@ -9,14 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import acceptancetests.acquisition.dceredesign.DCERedesignCommonConstants;
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageConstants;
+import atdd.framework.Assertion;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import pages.acquisition.commonpages.ComparePlansPage;
+import pages.acquisition.commonpages.ProviderSearchPage;
 import pages.acquisition.commonpages.VPPPlanSummaryPage;
 import pages.acquisition.commonpages.VisitorProfilePage;
+import pages.acquisition.shopperprofile.CloakProfile;
 import pages.acquisition.shopperprofile.MemberCreateProfile;
 import pages.acquisition.shopperprofile.NonMemberCreateProfile;
 import pages.acquisition.shopperprofile.ProfileSearch;
@@ -81,13 +85,19 @@ public class ShopperProfileStepDefinition {
 	}
 
 	@Then("^the profile is found and i click on the CLOAK IN button$")
-	public void the_profile_is_found_and_i_click_on_the_CLOAK_IN_button(){
+	public void the_profile_is_found_and_i_click_on_the_CLOAK_IN_button(DataTable email){
 		
 		try {
+			HashMap<String, String> givenAttributesMap = new HashMap<String, String>();
+			givenAttributesMap = DataTableParser.readDataTableAsMaps(email);
+			
 			ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 					.getBean(PageConstants.PROFILE_SEARCH);
 			
-			ComparePlansPage comparePlansPage = profileSeacrh.doCloakIn();
+			CloakProfile cloakProfile = profileSeacrh.cloakProfile();
+			
+			ComparePlansPage comparePlansPage = cloakProfile.doCloakIn(givenAttributesMap);
+			
 			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, comparePlansPage);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -221,13 +231,11 @@ public class ShopperProfileStepDefinition {
 					givenAttributesRow.get(i).getCells().get(1));
 		}*/
 		String emailID = givenAttributesMap.get("Email");
-		String dob = givenAttributesMap.get("DOB");
-		String mbi = givenAttributesMap.get("MBI");
 		
 		ProfileSearch profileSeacrh = (ProfileSearch) getLoginScenario()
 				.getBean(PageConstants.PROFILE_SEARCH);
 		
-		profileSeacrh.searchProfileAndDelete(emailID, dob, mbi);
+		profileSeacrh.searchProfileAndDelete(emailID);
 		
 	}
 	
@@ -338,6 +346,14 @@ public class ShopperProfileStepDefinition {
 		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		VisitorProfilePage visitorProfilePage = comparePlansPage.navigateToVisitorProfilePage();
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+	
+	@Then("^All set and Navigate to Visitor Profile page from compare page$")
+	public void all_set_and_navigate_to_Visitor_Profile_page_on_AARP_site() {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		VisitorProfilePage visitorProfilePage = comparePlansPage.allSetAndNavigateToVisitorProfilePage();
 		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 } 

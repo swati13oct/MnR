@@ -22,10 +22,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
+import pages.mobile.acquisition.commonpages.KeywordSearchAARPMobile;
 import pages.mobile.acquisition.commonpages.MultiCountyModalPageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
-import pages.mobile.acquisition.commonpages.keywordSearchAARP;
+
 import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
 import pages.mobile.acquisition.ole.WelcomePageMobile;
 
@@ -1017,7 +1018,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 		AcquisitionHomePageMobile acquisitionHomePage = (AcquisitionHomePageMobile) loginScenario
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 		acquisitionHomePage.searchfield();
-		keywordSearchAARP newkeywordsearchpage = new keywordSearchAARP(acquisitionHomePage.driver);
+		KeywordSearchAARPMobile newkeywordsearchpage = new KeywordSearchAARPMobile(acquisitionHomePage.driver);
 		getLoginScenario().saveBean(PageConstants.Keyword_Search, newkeywordsearchpage);
 	}
 
@@ -1025,7 +1026,7 @@ public class VppPlanSummaryStepDefinitionAARPMobile {
 	public void I_land_on_result_page() {
 		{
 
-			keywordSearchAARP newkeywordsearchpage = (keywordSearchAARP) loginScenario
+			KeywordSearchAARPMobile newkeywordsearchpage = (KeywordSearchAARPMobile) loginScenario
 					.getBean(PageConstants.Keyword_Search);
 			newkeywordsearchpage.url();
 			if (newkeywordsearchpage != null)

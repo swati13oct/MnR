@@ -30,7 +30,7 @@ public class SanfranciscoFindaProviderPage extends UhcDriver{
 	}
 
 
-		public Rallytool_Page findaphysiciansanfranciscoclick() {
+		public Rallytool_PageMobile findaphysiciansanfranciscoclick() {
 			
 			validate(findaphysiciansanfranciscolink);
 			
@@ -40,7 +40,7 @@ public class SanfranciscoFindaProviderPage extends UhcDriver{
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 			}
 			// TODO Auto-generated method stub
 			return null;

@@ -19,7 +19,7 @@ import acceptancetests.data.MRConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
-import pages.mobile.acquisition.commonpages.Rallytool_Page;
+import pages.mobile.acquisition.commonpages.Rallytool_PageMobile;
 import pages.mobile.acquisition.commonpages.ZipcodeLookupHomePageMobile;
 
 /**
@@ -241,14 +241,14 @@ public class PlanPreviewPageMobile extends GlobalWebElements {
 			Assertion.fail("Plan year dropdown not displayed");
 	}
 	
-	public Rallytool_Page navigatetoRally()
+	public Rallytool_PageMobile navigatetoRally()
 	{
 		providerLink.click();
 		ArrayList<String> tabs2 = new ArrayList<String> (driver.getWindowHandles());
 	    driver.switchTo().window(tabs2.get(1));
 	    if (getTitle().contains("Rally"))
 	    {
-	    	return new Rallytool_Page(driver);
+	    	return new Rallytool_PageMobile(driver);
 	    }
 	    else
 	    	return null;

@@ -18,7 +18,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.mobile.acquisition.commonpages.Rallytool_Page;
+import pages.mobile.acquisition.commonpages.Rallytool_PageMobile;
 
 /**
  * @author saduri
@@ -92,7 +92,7 @@ public JSONObject siteMap() {
 
 
 
-public Rallytool_Page lookupproviderclick() {
+public Rallytool_PageMobile lookupproviderclick() {
 	validate(SearchforaProviderFacility);
 	SearchforaProviderFacility.click();
 	ArrayList<String> tabs = new ArrayList<String>(
@@ -100,7 +100,7 @@ public Rallytool_Page lookupproviderclick() {
 			driver.switchTo().window(tabs.get(1));
 	if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 	}
 	
 	// TODO Auto-generated method stub

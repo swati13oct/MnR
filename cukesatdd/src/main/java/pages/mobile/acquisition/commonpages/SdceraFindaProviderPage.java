@@ -30,7 +30,7 @@ public class SdceraFindaProviderPage extends UhcDriver {
 	}
 
 
-		public Rallytool_Page findaphysiciansdceraclick() {
+		public Rallytool_PageMobile findaphysiciansdceraclick() {
 			
 			validate(findaphysiciansdceralink);
 			
@@ -40,7 +40,7 @@ public class SdceraFindaProviderPage extends UhcDriver {
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 			}
 			// TODO Auto-generated method stub
 			return null;

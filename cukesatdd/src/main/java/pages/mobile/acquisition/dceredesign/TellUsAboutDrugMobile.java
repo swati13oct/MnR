@@ -124,9 +124,7 @@ public class TellUsAboutDrugMobile extends UhcDriver {
 	}
 
 	public BuildYourDrugListMobile ClickAddDrug() {
-		
 		jsClickNew(AddDrugBtn);
-//		CommonUtility.waitForPageLoad(driver, BuildDrugPage_EnterDrugNameTxt, 30);
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostButtonHeader, 30);
 		if (validateNew(reviewDrugCostButtonHeader)) {
 			Assertion.assertTrue("Naviagted to Build Drug List Page", true);

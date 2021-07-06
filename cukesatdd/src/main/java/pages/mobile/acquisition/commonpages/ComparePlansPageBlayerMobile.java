@@ -15,12 +15,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
 import pages.acquisition.ole.WelcomePage;
 import pages.mobile.acquisition.commonpages.DrugCostEstimatorPageMobile;
-import pages.mobile.acquisition.commonpages.FindCarePage;
+
 import pages.mobile.acquisition.commonpages.FindCarePageMobile;
 import pages.mobile.acquisition.commonpages.VPPPlanSummaryPageMobile;
 //import pages.mobile.acquisition.dce.ulayer.DrugCostEstimatorPageMobile;
