@@ -751,12 +751,17 @@ public class CampaignTFNPage extends UhcDriver {
 				}
 	}
 
-	@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	//@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	@FindBy(xpath="//a[contains(@dtmname, 'Top Nav:Logo') and (contains(@style, 'display: block'))]")
 	private WebElement HomeLogo;
 
-
-	@FindBy(xpath="//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
+	//@FindBy(xpath="//button[(contains(text(), 'Leave Online') )or (contains(@id, 'proceed'))]")
+	@FindBy(xpath="//div[contains(@id,'enroll-cancel')]//a[(contains(text(), 'Leave Online'))]")
 	private WebElement LeaveOLE;
+	
+	@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo') and not(contains(@style, 'display:'))])[1]")
+	//@FindBy(xpath="(//a[contains(@dtmname, 'Top Nav:Logo')])[1]")
+	private WebElement HomeLogoOle;
 	
 	public void NavigateToHomeFromPlanDetails() {
 		CheckPageLoad();
@@ -774,15 +779,18 @@ public class CampaignTFNPage extends UhcDriver {
 	public void NavigateToHome() {
 		//CheckPageLoad();
 		//CheckiPerseptions();
-		CommonUtility.waitForPageLoadNew(driver, HomeLogo, 10);
-		jsClickNew(HomeLogo);
-		System.out.println("Home Logo is clicked to navigate to Home Page");
 		if(driver.getCurrentUrl().contains("online-application")) {
+			CommonUtility.waitForPageLoadNew(driver, HomeLogoOle, 10);
+			jsClickNew(HomeLogoOle);
 			if(validate(LeaveOLE,10)) {
 				jsClickNew(LeaveOLE);
 				System.out.println("Leave OLE is clicked to navigate to Home Page");
 			}
-		} 
+		} else {
+			CommonUtility.waitForPageLoadNew(driver, HomeLogo, 10);
+			jsClickNew(HomeLogo);
+			System.out.println("Home Logo is clicked to navigate to Home Page");
+		}
 		//CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		if(!validateNew(zipCodeField)){
 			Assertion.assertTrue("Home Page NOT Displayed", false);
