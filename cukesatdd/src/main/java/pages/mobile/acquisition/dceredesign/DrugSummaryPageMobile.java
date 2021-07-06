@@ -1166,5 +1166,27 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		jsClickNew(returnToPlanSummaryLink);
 		waitForPageLoadSafari();
 	}
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
+	
+	@FindBy(xpath = "//*[@class='back-to-view-all-pla']")
+	public WebElement returnToHomeBtn;
+
+	public void clickOnReturnToHome() {
+		try {
+			if (savedPlansPopup.isDisplayed()) {
+				jsClickNew(savedPlansPopupCloseIcon);
+			}
+		} catch (Exception e) {
+			System.out.println("Saved Plans modal not displayed");
+		}
+		scrollToView(returnToHomeBtn);
+		validateNew(returnToHomeBtn);
+		jsClickNew(returnToHomeBtn);
+	}
 
 }

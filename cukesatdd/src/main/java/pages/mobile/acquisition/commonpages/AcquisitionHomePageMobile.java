@@ -2402,8 +2402,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public PharmacySearchPageMobile navigateToPharmacyLocator() {
-		jsClickNew(Menu);
+		ShopForPlanNavigationPageMobile shopForPlan = openShopForPlanFromMenu();
+		shopForPlan.selectTool("Pharmacy Search");
 
+		/*jsClickNew(Menu);
 		waitforElement(ShopForaplan);
 		if (ShopForaplan.isDisplayed()) {
 			jsClickNew(ShopForaplan);
@@ -2416,7 +2418,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			waitforElement(pharmacylocator);
 			jsClickNew(pharmacylocator);
 			System.out.println("navigating to pharmacy locator page");
-		}
+		}*/
 
 		if (driver.getTitle().toLowerCase()
 				.contains((PageTitleConstants.BLAYER_LOCATE_A_PHARMACY_UNITEDHEALTHCARE).toLowerCase())) {
