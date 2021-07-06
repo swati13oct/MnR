@@ -27,7 +27,7 @@ public class SdceraSiteMapPage extends UhcDriver {
 	}
 
 
-	public Rallytool_Page findaprovidersdcerasitemapclick() {
+	public Rallytool_PageMobile findaprovidersdcerasitemapclick() {
 		
 		validate(sdcerasitemappagefindaproviderlink);
 		
@@ -37,7 +37,7 @@ public class SdceraSiteMapPage extends UhcDriver {
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

@@ -32,7 +32,7 @@ public class VerizonUhcretireePage extends UhcDriver {
 
 		
 		
-		public Rallytool_Page findaphysicianverizonclick() {
+		public Rallytool_PageMobile findaphysicianverizonclick() {
 			
 			validate(findaphysicianlink);
 		
@@ -42,7 +42,7 @@ public class VerizonUhcretireePage extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 		}
 			// TODO Auto-generated method stub
 			return null;

@@ -34,7 +34,7 @@ public class KTRSFindaProviderPage extends UhcDriver {
 		PageFactory.initElements(driver, this);
 		openAndValidate();
 	}
-	public Rallytool_Page findaphysicianktrsclick() {
+	public Rallytool_PageMobile findaphysicianktrsclick() {
 		
 		validate(findaphysicianktrslink);
 		
@@ -44,7 +44,7 @@ public class KTRSFindaProviderPage extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

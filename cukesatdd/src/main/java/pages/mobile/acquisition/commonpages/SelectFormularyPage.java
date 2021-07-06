@@ -61,12 +61,12 @@ public class SelectFormularyPage extends UhcDriver {
 		formularyListJson = jsonObject;
 	}
 	
-	public EnterDrugPage specificDrugFLowLink(String drugName) {
+	public EnterDrugPageMobile specificDrugFLowLink(String drugName) {
 		driver.findElement(By.linkText(drugName)).click();
 		if (driver.findElement(By.className("newsearch_h2")).getText()
 				.equalsIgnoreCase(
 						"Enter drug name")) {
-			return new EnterDrugPage(driver, false, drugName);
+			return new EnterDrugPageMobile(driver, false, drugName);
 		}
 		return null;
 	}

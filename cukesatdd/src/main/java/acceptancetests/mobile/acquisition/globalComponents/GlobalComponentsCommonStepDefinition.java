@@ -228,7 +228,7 @@ public class GlobalComponentsCommonStepDefinition {
 		// EnterZipCodePage enterZipCodePage= new EnterZipCodePage(driver);
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		pages.mobile.acquisition.commonpages.EnterZipCodePage enterZipCodePage = aquisitionhomepage.enterZipCode();
+		pages.mobile.acquisition.commonpages.EnterZipCodePageMobile enterZipCodePage = aquisitionhomepage.enterZipCode();
 		enterZipCodePage.validateZipComp(zipCode);
 	}
 
@@ -808,6 +808,5 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Home page not found");
 		}
 	}
-
 
 }

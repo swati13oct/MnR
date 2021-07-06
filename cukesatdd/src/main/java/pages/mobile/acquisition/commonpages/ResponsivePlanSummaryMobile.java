@@ -538,7 +538,7 @@ public void comparePlanslnk() throws InterruptedException{
 			 }
 			 return null;	 
 		}
-		public Rallytool_Page navigateToRallyPage(String planName) { 
+		public Rallytool_PageMobile navigateToRallyPage(String planName) { 
 			//driver.manage().window().maximize(); 
 			//a[contains(text(),'Is my provider covered?')]
 			int i=0;
@@ -567,7 +567,7 @@ public void comparePlanslnk() throws InterruptedException{
 							driver.switchTo().window(tabs.get(1));
 							System.out.println(driver.getTitle());
 							if (driver.getTitle().equalsIgnoreCase("Welcome")) {
-							return new Rallytool_Page(driver);
+							return new Rallytool_PageMobile(driver);
 							}
 							else{
 
