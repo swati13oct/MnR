@@ -2083,13 +2083,15 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		threadsleep(5);
 		MobileMenuSiteSearch();
 
-		sendkeysMobile(EnterSearch, sv);
-		enterSearchLable.click();
-		// CommonUtility.waitForPageLoadNewForClick(driver, SubmitBtn, 60);
+		// sendkeysMobile(EnterSearch, sv);
+		sendKeysByCharacter(EnterSearch, sv);
+
+		jsClickNew(enterSearchLable);
+
 		scrollToView(SubmitBtn);
-		// SubmitBtn.click();
+
 		jsClickNew(SubmitBtn);
-		// CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
+		CommonUtility.waitForPageLoadNew(driver, SearchResults, 60);
 
 	}
 
