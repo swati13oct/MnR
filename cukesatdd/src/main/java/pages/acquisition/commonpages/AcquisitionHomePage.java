@@ -41,8 +41,7 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	// @FindBy(xpath = "//*[contains(@id,'cta-zipcode')]")
-	// @FindBy(xpath = "//*[contains(@id,'zipcodemeded')]")
+	
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	private WebElement zipCodeField;
 
@@ -3419,6 +3418,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		}
 
 	}
+	
+	
 
 	public void validateProActiveChatpopupconnect() {
 		driver.navigate().refresh();
@@ -4299,7 +4300,7 @@ public class AcquisitionHomePage extends GlobalWebElements {
 			String invalidSearch = driver.findElement(By.xpath("//div[@class='invalid-search']")).getText()
 					.replaceAll("\\s+", " ");
 			System.out.println("invalidSearch : >>>>> " + invalidSearch);
-			assertTrue(invalidSearch.contains("Your search - \"" + newSearchValue + "\" - did not match any documents."));
+			assertTrue(invalidSearch.contains("Your search - " + newSearchValue + " - did not match any documents."));
 			// assertTrue(invalidSearch.contains("No pages were found containing
 			// "+newSearchValue+"."));
 			break;

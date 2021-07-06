@@ -776,4 +776,25 @@ public class GlobalComponentsCommonStepDefinition {
 		learnAboutMedicareHomePage.chechStillHaveQues();
 	}
 
+	@Then("^the user hover over and select plan page link$")
+	public void the_user_hover_over_and_select_MS_plan_page_link(DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String plantype = memberAttributesMap.get("nextplanType");
+		LearnAboutMedicareHomePageMobile learnAboutMedicareHomePage = (LearnAboutMedicareHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.LEARN_ABOUT_MEDICARE_PAGE);
+		learnAboutMedicareHomePage.hoverToPlanPage(plantype);
+	}
+	@Then("^the user click on Get a Plan Recommendation Button and gets back to medicare articles page$")
+	public void theuserclickonGetaPlanRecommendationButtonandgetsback() throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		aquisitionhomepage.clickOnPlanRecommendationButton();
+	}
+
 }

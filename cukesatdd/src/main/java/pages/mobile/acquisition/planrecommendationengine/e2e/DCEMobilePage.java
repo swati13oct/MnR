@@ -214,7 +214,7 @@ public class DCEMobilePage extends UhcDriver {
 			dosage = dos.getFirstSelectedOption().getText().trim().split(" ")[1] + " "
 					+ dos.getFirstSelectedOption().getText().trim().split(" ")[2];
 			threadsleep(2000);
-			jsClickMobile(addDrugButton);
+			jsClickNew(addDrugButton);
 			threadsleep(2000);
 //			Not Covered switch generic as it is not DD scope in DCE page
 		} catch (Exception e) {

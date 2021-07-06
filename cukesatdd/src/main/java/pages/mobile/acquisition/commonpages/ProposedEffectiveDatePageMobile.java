@@ -14,7 +14,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.data.PageData;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.UhcDriver;
-import pages.acquisition.ole.PlanPremiumPage;
+import pages.mobile.acquisition.ole.PlanPremiumPageMobile;
 import pages.mobile.acquisition.ole.PrimaryCarePhysicianPageMobile;
 
 public class ProposedEffectiveDatePageMobile extends UhcDriver{
@@ -105,15 +105,15 @@ public class ProposedEffectiveDatePageMobile extends UhcDriver{
 	public Object navigate_to_PCP_Page(String planType) {
 
 		validateNew(NextBtn);
-		jsClickMobile(NextBtn);
+		jsClickNew(NextBtn);
 		threadsleep(2000);
 		/*JavascriptExecutor executor = (JavascriptExecutor)driver;
 		executor.executeScript("arguments[0].click();", NextBtn);*/
 		
 		if(planType.contentEquals("PDP")){
-			if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Premium')]")))){
+			if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Plan Payment Information')]")))){
 				System.out.println("OLE Monthly Plan Premium Page is Displayed");
-				return new PlanPremiumPage(driver);
+				return new PlanPremiumPageMobile(driver);
 			}
 			else{
 				System.out.println("OLE Monthly Plan Premium Page is Not Displayed");

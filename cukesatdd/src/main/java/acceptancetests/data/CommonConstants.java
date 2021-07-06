@@ -870,7 +870,7 @@ public class CommonConstants {
 	public static final String CONNECTION_URL_STAGE = "jdbc:oracle:thin:qaread/testreadonly@es08-scan01:1521/gpsst04_1svc_trn.uhc.com";
 	
 	
-	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "Optum-Prd";// or Optum-Prd;
+	public static final String SAUCELABS_DEFAULT_MOBILE_TUNNEL = "";// or Optum-Prd;
 	public static final String SAUCELABS_MOBILE_TUNNEL_IDENTIFIER = "SAUCELABS_MOBILE_TUNNEL_IDENTIFIER"; // Parameter name from Jenkins run
 	
 	public static final String APPIUM_DEFAULT_VERSION = "1.17.0";
@@ -890,7 +890,9 @@ public class CommonConstants {
 	//public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@orass0464:1521/gpsst04svc_trn.uhc.com";
 	
 	public static final String CONNECTION_URL = "jdbc:oracle:thin:qaread/testreadonly@dbslt0102:1521/gpsts18";
-	public static final String GPS_QUERY = "Select MEDICAID_IND,\n" + 
+	
+	//GPS Query cannot be final variable, since a stage id is to be appended at runtime
+	public static String GPS_QUERY = "Select MEDICAID_IND,\n" + 
 			"MEDICAID_NUMBER,\n" + 
 			"MAILING_ZIP_CD,\n" + 
 			"MAILING_STATE_CD,\n" + 
@@ -986,13 +988,13 @@ public class CommonConstants {
 	
 	public static String LAST_ENROLLMENT_PENALITY_TEXT = "If you need to pay a late enrollment penality (LEP) you will receive a bill in the email.";
 	
-	public static String PART_D_INCOME_TEXT = "If you must pay a Part D-Income Related Monthly Adjustment Amount(Part D-IRMAA) Social Security(SS) will send you a letter and ask you how you want to pay it:";
+	public static String PART_D_INCOME_TEXT = "If you must pay a Part D-Income Related Monthly Adjustment Amount (Part D-IRMAA) Social Security (SS) will send you a letter and ask you how you want to pay it:";
 	
 	public static String SS_TEXT  = "You can pay it from your SS check";
 	
 	public static String MEDICARE_TEXT  = "Medicare can bill you";
 	
-	public static String RAILROAD_TEXT   = "The Railroad Retirement Board(RRB) can bill you";
+	public static String RAILROAD_TEXT   = "The Railroad Retirement Board (RRB) can bill you";
 	//
 	public static String PARTDIRMAA_TEXT    = "Please DO NOT pay the plan the Part D-IRMAA at this time.";
 	

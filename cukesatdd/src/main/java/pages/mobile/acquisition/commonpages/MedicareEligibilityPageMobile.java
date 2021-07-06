@@ -191,9 +191,9 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 		jsClickNew(lnkIEP);
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
-		if(driver.getCurrentUrl().contains("medicare-education/enrollment-and-changing-plans.html"))
+		if(driver.getCurrentUrl().contains("/medicare-education-classic/enrollment-and-changing-plans-classic.html"))
 		{
-			WebElement pageHeader=driver.findElement(By.xpath("//h1[contains(text(),'Enrollment Basics')]"));
+			WebElement pageHeader=driver.findElement(By.xpath("//h1//span[contains(text(),'Enrollment Basics')]"));
 			waitforElementNew(pageHeader);
 			Assertion.assertTrue(true);
 			System.out.println("Initial Enrollment Period Page open correctly");
@@ -215,7 +215,7 @@ public class MedicareEligibilityPageMobile extends GlobalWebElements {
 		WebElement lnkMededNavMobile=driver.findElement(By.xpath("//a[contains(@class,'meded-article-nav__title')]"));
 		waitForPageLoadSafari();
 		CommonUtility.checkPageIsReadyNew(driver);
-		jsClickMobile(lnkMededNavMobile);
+		jsClickNew(lnkMededNavMobile);
 		sleepBySec(2);
 		System.out.println("Med Ed Navigation Opened Successfully");
 		if(plan=="MA") {

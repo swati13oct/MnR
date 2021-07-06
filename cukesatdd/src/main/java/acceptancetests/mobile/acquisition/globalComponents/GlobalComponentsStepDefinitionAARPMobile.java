@@ -536,22 +536,7 @@ public class GlobalComponentsStepDefinitionAARPMobile {
 	// aquisitionhomepage.navigateToPath(path);
 	// }
 
-	/** user is on the AARP Medicare Site landing page */
-	@And("^the user navigate to pharmacy search page from the navigation bar$")
-	public void userNavigatesToPharmacySearchPage() {
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
-		// aquisitionhomepage.selectState("Select State"); // note: default it to no
-		// state selected for predictable result
-		System.out.println("Unselected state on home page for more predictable result");
-		String testSiteUrl = aquisitionhomepage.getTestSiteUrl();
-		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-		PharmacySearchPageMobile pharmacySearchPage = aquisitionhomepage.navigateToPharmacyLocator();
-		getLoginScenario().saveBean(PageConstants.TEST_SITE_URL, testSiteUrl);
-		getLoginScenario().saveBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE, pharmacySearchPage);
-
-	}
+	
 
 	@When("^the user clicks on Medicare Advantage Plans Link$")
 	public void the_user_clicks_on_Medicare_Advantage_Plans_Link() throws Throwable {

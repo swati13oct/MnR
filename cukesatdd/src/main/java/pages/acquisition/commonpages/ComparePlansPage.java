@@ -1,6 +1,5 @@
 package pages.acquisition.commonpages;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +39,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(id = "enrollment-next-button")
 	private WebElement NextBtn;
 
-	@FindBy(id = "backtoplansummarypage")
+	@FindBy(xpath = ".//*[contains(@id,'backtoplansummarypage')]")
 	private WebElement backToAllPlansLink;
 
 	@FindBy(id = "backtoprofilepage")
@@ -178,6 +177,9 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[4]/td[1]/span")
 	private WebElement HospitalProviderName;
 
+	@FindBy(xpath = "//*[@id='your-hospitals-table']/tbody/tr[5]/td[1]/span")
+	private WebElement HospitalProviderName1;
+
 	@FindBy(xpath = "//*[normalize-space(text())='Hospital Summary']/ancestor::th/following::tr[1]//td[1]")
 	private WebElement HospitalProviderCoverageText;
 
@@ -196,10 +198,10 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[2]/td[2]/div")
 	private WebElement providerSumamryHeaderCount;
 
-	@FindBy(xpath = "//th//*[contains(@class,'provider-name')]")
+	@FindBy(xpath = "//*[@id='your-doctors-table']/tbody/tr[4]/td[1]/span")
 	private WebElement FirstProviderName;
 
-	@FindBy(xpath = "//*[contains(@id,'viewLocationLink-0')]")
+	@FindBy(linkText = "View Locations")
 	private WebElement viewlocationsLink;
 
 	@FindBy(xpath = "//*[contains(@id,'yourdrugsheading')]")
@@ -238,7 +240,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(css = "div#CSRLoginAlert>div")
 	private WebElement agentModeBanner;
 
-	@FindBy(xpath = "(//span[contains(@class,'headerPlan')])[1]")
+	@FindBy(xpath = "//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
 	private WebElement enrolledPlanName;
 
 	@FindBy(xpath = "//div[contains(text(),'Status')]/preceding-sibling::div/span[1]")
@@ -305,9 +307,9 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[@id='viewLocationTitle']")
 	private WebElement viewLocationPopupProviderName;
 
-	@FindBy(xpath = "//div[@class='modal-title']/following-sibling::div")
+	@FindBy(xpath = "//div[@class='modal-body']/span")
 	private WebElement allSetDrugsProvidersInfo;
-	
+
 	@FindBy(xpath = "//*[text()='View Plan Details']")
 	private WebElement viewPlanDetailslink;
 
@@ -338,35 +340,34 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(xpath = "//img[(@alt='save')]/parent::span")
 	private WebElement saveAPlan;
-	
+
 	@FindBy(xpath = "//button[text()='Save to Mira']")
 	private WebElement btnSaveToMira;
-	
+
 	@FindBy(css = "a#viewDrugInfoLink-0")
 	private WebElement viewDrugInfoBtn;
-	
+
 	@FindBy(xpath = "//div[@class='vpp-drug-name']/strong")
 	private WebElement drugNameOnDrugInfoPopup;
-	
+
 	@FindBy(xpath = "//div[text()='Drug Cost Details']/parent::button")
 	private WebElement drugCostDetailsBtn;
-	
+
 	@FindBy(xpath = "//button[text()='Import Drugs & Doctors']")
 	private WebElement btnImportDrugsAndDoctors;
 
 	@FindBy(xpath = "//div[text()='Close']/parent::button")
 	private WebElement closeBtn;
-	
+
 	@FindBy(css = "div.consent-body input")
 	private WebElement termsCheck;
-	
+
 	@FindBy(xpath = "//button[contains(text(),'Applicant Agrees;')]")
 	private WebElement btnAgreeToConsent;
-	
+
 	@FindBy(css = "div.meter.animate")
 	private WebElement progressBar;
-	
-	
+
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -394,15 +395,13 @@ public class ComparePlansPage extends UhcDriver {
 
 	public VPPPlanSummaryPage backToVPPPage() {
 		backToAllPlansLink.click();
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (currentUrl().contains("#/plan-summary"))
-			return new VPPPlanSummaryPage(driver);
-		return null;
+		/*
+		 * try { Thread.sleep(4000); } catch (InterruptedException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
+		// if(currentUrl().contains("#/plan-summary"))
+		return new VPPPlanSummaryPage(driver);
+
 	}
 
 	/**
@@ -881,8 +880,10 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(HospitalSummaryHeader);
 		validateNew(HospitalSummaryCoverageHeader);
 		System.out.println("Coverage Header for plan 1 : " + HospitalSummaryCoverageHeader.getText());
-		validateNew(HospitalProviderName);
-		System.out.println("Added Hospital Name : " + HospitalProviderName.getText());
+		if (validate(HospitalProviderName))
+			System.out.println("Added Hospital Name : " + HospitalProviderName.getText());
+		else if (validate(HospitalProviderName1))
+			System.out.println("Added Hospital Name : " + HospitalProviderName1.getText());
 		validateNew(HospitalProviderCoverageText);
 		System.out.println("Covered or not covered text for plan 1 : " + HospitalProviderCoverageText.getText());
 		System.out.println("Verified Edit Hospitals Section header and Summary section");
@@ -955,10 +956,11 @@ public class ComparePlansPage extends UhcDriver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		validate(editHospitalsLink);
-		String ParentWindow = driver.getTitle();
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", editHospitalsLink);
+
+		validateNew(editHospitalsLink);
+		String ParentWindow = driver.getTitle();
 
 //		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
 //		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
@@ -1738,6 +1740,10 @@ public class ComparePlansPage extends UhcDriver {
 		return null;
 	}
 
+	/**
+	 * Save 2 plans 
+	 * @param plans
+	 */
 	public void save2Plans(String plans) {
 		try {
 			String[] planNames = plans.split(",");
@@ -1746,31 +1752,37 @@ public class ComparePlansPage extends UhcDriver {
 			for (int i = 1; i <= planNames.length; i++) {
 				WebElement moreOptions = driver
 						.findElement(By.xpath("(//button//span[text()='More Options'])[" + i + "]"));
-				moreOptions.click();
-				// jsClickNew(moreOptions);
+				//moreOptions.click();
+				jsClickNew(moreOptions);
 				waitforElement(saveAPlan);
-				Thread.sleep(4000);
-				saveAPlan.click();
-				// jsClickNew(saveAPlan);
+				sleepBySec(4);
+				//saveAPlan.click();
+				jsClickNew(saveAPlan);
 
 			}
 		} catch (Exception ex) {
 
 		}
 	}
-	
+
+	/**
+	 * Validate the drug Information
+	 * @param drugName
+	 */
 	public void validateViewDrugInformation(String drugName) {
 		scrollToView(viewDrugInfoBtn);
 		jsClickNew(viewDrugInfoBtn);
-		//viewDrugInfoBtn.click();
+		// viewDrugInfoBtn.click();
 		Assertion.assertEquals(drugName, drugNameOnDrugInfoPopup.getText().trim());
-		//drugCostDetailsBtn.click();
+		// drugCostDetailsBtn.click();
 		jsClickNew(drugCostDetailsBtn);
-		Assertion.assertEquals(drugName, driver.findElement(By.xpath("//div[@id='drugtable']//span[1]")).getText().trim());
+		Assertion.assertEquals(drugName,
+				driver.findElement(By.xpath("//div[@id='drugtable']//span[1]")).getText().trim());
 		jsClickNew(driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")));
-		//driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")).click();
+		// driver.findElement(By.xpath("//span[text()='Return to
+		// Compare']/parent::button")).click();
 		waitforElement(drugCostDetailsBtn);
-		//closeBtn.click();
+		// closeBtn.click();
 		jsClickNew(closeBtn);
 	}
 
