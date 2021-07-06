@@ -24,7 +24,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import acceptancetests.acquisition.planRecommendationEngine.PlanRecommendationEngineStepDefinition;
-import acceptancetests.mobile.acquisition.planrecommendationengine.e2e.PlanRecommendationStepDefinitionMobile;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.MRScenario;
 import pages.acquisition.commonpages.GlobalWebElements;
@@ -672,9 +671,9 @@ public class PlanRecommendationEngineResultsPageMobile extends GlobalWebElements
 
 	public void removedDrugsDetailsVPPtoPRE() {
 		System.out.println("Validating removed Drugs Details from VPP to PRE Drug Page: ");
-		String plantype = PlanRecommendationStepDefinitionMobile.PlanType;
+		String plantype = "MA";
 
-		flow = PlanRecommendationStepDefinitionMobile.PREflow;
+		flow = "MAPD";
 		DrugsInPRE = PlanRecommendationEngineDrugsPageMobile.drugNames;
 		boolean remove = true;
 		int count = DrugsInPRE.size();
