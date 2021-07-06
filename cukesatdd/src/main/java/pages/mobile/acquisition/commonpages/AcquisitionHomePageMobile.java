@@ -3259,15 +3259,20 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public WebElement headerRegisterLinkMobile;
 
 	public void validateHeaderLinks() {
-		validateNew(headerSignInLink);
-		validateNew(headerRegisterLink);
+		//validateNew(headerSignInLink);
+		//validateNew(headerRegisterLink);
+		//Actions action = new Actions(driver);
+		//action.moveToElement(planMemberLink).perform();
+		// validateNew(headerRegisterLink);
+		jsMouseOver(navigationSectionHomeLink);
+		validate(goToMemberSiteLink);
 		if (driver.getCurrentUrl().contains("aarpmedicareplans")) {
-			validateNew(visitAARPLink);
+			validate(visitAARPLink);
 		} else {
 			System.out.println("UHC Medicare solutions site loaded");
 		}
 		validateLogo();
-		validateNew(visitorprofileicon);
+		validate(visitorprofileicon);
 	}
 
 	public void clickRequestAsistancce() {
@@ -4333,10 +4338,11 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	public void clickMemberSiteLink() {
 		// validateNew(headerSignInLink);
 		// jsMouseOver(planMemberLink);
-		Actions action = new Actions(driver);
-		action.moveToElement(planMemberLink).perform();
+		//Actions action = new Actions(driver);
+		//action.moveToElement(planMemberLink).perform();
 		// validateNew(headerRegisterLink);
-		validateNew(goToMemberSiteLink);
+		jsMouseOver(navigationSectionHomeLink);
+		validate(goToMemberSiteLink);
 		jsClickNew(goToMemberSiteLink);
 		String base = driver.getWindowHandle();
 		Set<String> all = driver.getWindowHandles();
