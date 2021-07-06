@@ -254,7 +254,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
  
  
  @Scenario10  
-  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages- DC
+  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages- DCE
   #DCE
   Given user is on campaign external Links page
       | External Link | <externallink> |   
@@ -342,7 +342,7 @@ Feature: 1.10 ACQ - UAT Scripts Campaign External Links scenario 10 related to N
       | Campaign External Links - E2E Scenario 10_UMS |   33111        |No     | Miami-Dade County | MAPD       | 1-877-801-0043 | //a[@data-asset-name='TFN'] | Hours: 8 a.m. to 8 p.m., 7 days a week* | MAPD     | AARP Medicare Advantage Choice (PPO) | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] |         1 |          2 | PDP         | AARP MedicareRx Walgreens (PDP) | future   | (//a[contains(@class, 'tel')])[1] | MS             | SNP         | UnitedHealthcare Dual Complete Choice (PPO D-SNP) | //span[contains(@class,'sam__button__container')]//*[contains(@class,'sam__button__text desktop')] | Emsam | Lipitor | Orfadin | Humalog |   27053 | 1-866-408-5545 | 8012871 | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Month,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Week,1,NO,NO | None         | PDP           | //*[@id='tty-number'] | (//span[contains(@class, 'tel')])[1]| Retail Chain Pharmacy (Pricing is based off of a Preferred Pharmacy for applicable plans.)| https://www.uhcmedicaresolutions.com/lp/medicare-advantage-plans.html   |
 
  @Scenario10
-  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages
+  Scenario Outline: TID: <Scenario> Validate that M&R Prospective client has the ability to land into the portal pages via New Landing pages-PRE
     #PRE
 	Given user is on campaign external Links page
       | External Link | <externallink> |   
