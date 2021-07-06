@@ -323,7 +323,7 @@ public class PlanPremiumPage extends UhcDriver{
 	
 	public boolean validatePremiumValue(Map<String, String> paymentInformationMap) {
 	
-		/*
+		
 		boolean flag = false;
 		//String actualText = null;
 		
@@ -342,8 +342,8 @@ public class PlanPremiumPage extends UhcDriver{
 			
     return flag;
 	
-	}*/
-		
+	}
+		/*
 		boolean flag = false;
 		String actualText = null;
 		String expectedText = "$0.00";
@@ -360,7 +360,7 @@ public class PlanPremiumPage extends UhcDriver{
 			
     return flag;
 	
-	}
+	}*/
 	
 	public boolean validateNoMonthlyPremium() {
 		boolean flag = false;
