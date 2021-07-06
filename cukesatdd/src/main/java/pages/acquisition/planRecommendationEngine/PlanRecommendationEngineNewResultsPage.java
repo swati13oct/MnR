@@ -348,7 +348,7 @@ public class PlanRecommendationEngineNewResultsPage extends UhcDriver {
 			// 3 plans per page
 			for (int k = 0; k < 3; k++) {
 				String planName = plantiles.get(planIndex).findElement(By.cssSelector("h2>a")).getText().trim();
-				if (planName.contains(uniqueName)) {
+				if (planName.contains(uniqueName.trim())) {
 					planAvailable = true;
 					break;
 				}
