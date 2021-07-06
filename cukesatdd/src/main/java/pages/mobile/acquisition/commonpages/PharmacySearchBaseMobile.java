@@ -789,7 +789,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// validate(element, timeoutInSec)
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
-			scrollToView(element);
+			//steps for scrolling element in mobile view
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
+			
 			if (element.isDisplayed()) {
 				System.out.println("Element '" + element.toString() + "' found!!!!");
 				return true;
