@@ -39,7 +39,7 @@ public class IllinoisHomePage extends UhcDriver {
 		openAndValidate();
 }
 
-	public Rallytool_Page illinoishomepageproviderclick() {
+	public Rallytool_PageMobile illinoishomepageproviderclick() {
 	validate(illinoisfindaproviderlink);
 		
 	illinoisfindaproviderlink.click();
@@ -48,7 +48,7 @@ public class IllinoisHomePage extends UhcDriver {
 		
 		if (getTitle().equalsIgnoreCase(
 				"Enter Zip")) {
-	return new Rallytool_Page(driver);
+	return new Rallytool_PageMobile(driver);
 	}
 		// TODO Auto-generated method stub
 		return null;
