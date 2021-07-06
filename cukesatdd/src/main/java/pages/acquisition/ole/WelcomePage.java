@@ -193,7 +193,7 @@ public class WelcomePage extends UhcDriver{
 		String Expected_Premium = planDetailsMap.get("Plan Premium");
 		String Expected_PlanType = planDetailsMap.get("Plan Type");
 		
-	/*	if(validateNew(ViewPlanDetails)){
+		if(validateNew(ViewPlanDetails)){
 			ViewPlanDetails.click();
 			Thread.sleep(500);
 			flag = driver.getCurrentUrl().contains("details");
@@ -209,7 +209,7 @@ public class WelcomePage extends UhcDriver{
 				}
 
 			}
-		}*/
+		}
 
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
