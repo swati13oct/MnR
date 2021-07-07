@@ -71,11 +71,9 @@ public abstract class UhcDriver {
 
 	@FindBy(xpath = "//b[contains(text(),'MENU')]")
 	public WebElement MenuMobile;
-	
-	
+
 	@FindBy(xpath = "//button[@class='icon-mob-btn dropdown-btn']")
 	public WebElement siteSearchTextBox;
-	
 
 	@FindBy(xpath = "//span[contains(text(),'Learn About Medicare')]")
 	public WebElement LearnAboutMedicare;
@@ -191,7 +189,7 @@ public abstract class UhcDriver {
 		jsClickNew(toolsToChoosePlan);
 		jsClickNew(DCERedesignLink);
 	}
-	
+
 	public void MobileMenuSiteSearch() {
 		jsClickNew(MenuMobile);
 		jsClickNew(siteSearchTextBox);
@@ -310,13 +308,13 @@ public abstract class UhcDriver {
 		}
 
 	}
-	
+
 	public void sendKeysByCharacter(WebElement element, String message) {
 		scrollToView(element);
 		element.clear();
 		jsClickNew(element);
-		for(int i = 0; i < message.length(); i++) {
-			threadsleep(5); 	//Adding some milliseconds wait
+		for (int i = 0; i < message.length(); i++) {
+			threadsleep(5); // Adding some milliseconds wait
 			char c = message.charAt(i);
 			StringBuilder s = new StringBuilder().append(c);
 			element.sendKeys(s);
@@ -643,20 +641,18 @@ public abstract class UhcDriver {
 	}
 
 	public void jsClickNew(WebElement element) {
-		
 
-		/*JavascriptExecutor js = (JavascriptExecutor) driver;
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
-				driver.getClass().toString().toUpperCase().contains("IOS")) {
-			scrollToView(element);
-		}
-		js.executeScript("arguments[0].click();", element);*/
-	
+		/*
+		 * JavascriptExecutor js = (JavascriptExecutor) driver; if
+		 * (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
+		 * driver.getClass().toString().toUpperCase().contains("IOS")) {
+		 * scrollToView(element); } js.executeScript("arguments[0].click();", element);
+		 */
 
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			
-			/* To handle iOS specific click problem By: Harshal Ahire*/
-			 
+
+			/* To handle iOS specific click problem By: Harshal Ahire */
+
 			iOSClick(element);
 		} else {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -690,14 +686,15 @@ public abstract class UhcDriver {
 	}
 
 	public boolean scrollToView(WebElement element) {
-		if (driver.getClass().toString().toUpperCase().contains("IOS") ||
-				driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-			/*Actions ac = new Actions(driver);
-			ac.moveToElement(element);
-			System.out.println("Scroll finished to element on IOS device");*/
+		if (driver.getClass().toString().toUpperCase().contains("IOS")
+				|| driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			/*
+			 * Actions ac = new Actions(driver); ac.moveToElement(element);
+			 * System.out.println("Scroll finished to element on IOS device");
+			 */
 
 			scrollElementInMobileView(element);
-//			iosScroll(element);
+			// iosScroll(element);
 
 		} else {
 			try {
@@ -712,11 +709,13 @@ public abstract class UhcDriver {
 		}
 		return true;
 	}
-	
+
 	private boolean scrollElementInMobileView(WebElement element) {
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
+			js.executeScript(
+					"arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});",
+					element);
 		} catch (Exception e) {
 			Assertion.fail("The element " + element + " is not  found");
 			return false;
@@ -911,7 +910,8 @@ public abstract class UhcDriver {
 		Select dropdown = new Select(dropdownElement);
 		waitUntilSelectOptionsPopulated(dropdown);
 		if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-			String dropDownOptionText = dropdownElement.findElement(By.xpath("//option[@value='" + value + "']")).getText().trim();
+			String dropDownOptionText = dropdownElement.findElement(By.xpath("//option[@value='" + value + "']"))
+					.getText().trim();
 			mobileSelectOption(dropdownElement, dropDownOptionText, true);
 		} else {
 			dropdown.selectByValue(value);
@@ -1278,7 +1278,7 @@ public abstract class UhcDriver {
 			act.click(element).perform();
 		} else
 			jsClickNew(element);
-//			jsClickMobile(element);
+		// jsClickMobile(element);
 	}
 
 	public void mobileactionsendkeys(WebElement element, String keys) {
@@ -1329,7 +1329,7 @@ public abstract class UhcDriver {
 
 	/**
 	 * @author Murali - mmurugas This method will select option from dropdown based
-	 *         on visible text mobile
+	 *         on visible text mobile Updated By - Harshal Ahire
 	 */
 	public void mobileSelectOption(WebElement selectElement, String option, boolean clickElement) {
 
@@ -1372,7 +1372,6 @@ public abstract class UhcDriver {
 		JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
 		javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
 	}
-
 
 	public void clickTextIOSNative(String text) {
 
@@ -1519,19 +1518,21 @@ public abstract class UhcDriver {
 		System.out.println("All");
 	}
 
-	/*public void jsClickMobile(WebElement element) {
-
-		if (driver.getClass().toString().toUpperCase().contains("ANDROID")
-				|| driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			js.executeScript("arguments[0].click();", element);
-		} else if (driver.getClass().toString().toUpperCase().contains("IOS")) {
-
-			iOSClick(element);
-
-		}
-
-	}*/
+	/*
+	 * public void jsClickMobile(WebElement element) {
+	 * 
+	 * if (driver.getClass().toString().toUpperCase().contains("ANDROID") ||
+	 * driver.getClass().toString().toUpperCase().contains("WEBDRIVER")) {
+	 * JavascriptExecutor js = (JavascriptExecutor) driver;
+	 * js.executeScript("arguments[0].click();", element); } else if
+	 * (driver.getClass().toString().toUpperCase().contains("IOS")) {
+	 * 
+	 * iOSClick(element);
+	 * 
+	 * }
+	 * 
+	 * }
+	 */
 
 	public String returnDriverStorageJS(String StorageType, String StorageKey) {
 		String ReturnValue = "";
@@ -1659,24 +1660,24 @@ public abstract class UhcDriver {
 
 		return driver.getWindowHandles().size();
 	}
-	
-	
+
 	/**
 	 * Grant memory access on android chrome.
 	 *
 	 * @author amahale
-	 * @param pdfLink the pdf link
+	 * @param pdfLink
+	 *            the pdf link
 	 */
 	public void grantMemoryAccessOnAndroidChrome(WebElement pdfLink) {
 		AppiumDriver mobileDriver = (AppiumDriver) driver;
 		String webContext = mobileDriver.getContext();
-		
+
 		jsClickNew(pdfLink);
-		
+
 		Set<String> contexts = mobileDriver.getContextHandles();
-		
-		for(String context: contexts) {
-			if(context.contains("NATIVE_APP")) {
+
+		for (String context : contexts) {
+			if (context.contains("NATIVE_APP")) {
 				mobileDriver.context(context);
 				try {
 					mobileDriver.findElement(By.id("android:id/button1")).click();
@@ -1687,19 +1688,19 @@ public abstract class UhcDriver {
 				}
 			}
 		}
-		
+
 		mobileDriver.context(webContext);
 	}
-	
-	
+
 	/**
 	 * Gets the downloaded pdf file content on android device.
 	 *
 	 * @author amahale
-	 * @param fileName the file name with extension
+	 * @param fileName
+	 *            the file name with extension
 	 * @return the downloaded pdf file content android
 	 */
-	
+
 	public byte[] getDownloadedPdfFileContentAndroid(String fileName) {
 		byte[] content = null;
 		try {
@@ -1713,18 +1714,18 @@ public abstract class UhcDriver {
 
 		return content;
 	}
-	
+
 	/**
 	 * Delete downloaded file from Android device.
 	 * 
-	 * @author amahale
-	 * This is not working as of now.
-	 * Since Appium server needs a flag to be set while starting. this isn't possible on saucelabs as of now
+	 * @author amahale This is not working as of now. Since Appium server needs a
+	 *         flag to be set while starting. this isn't possible on saucelabs as of
+	 *         now
 	 */
 	public void deleteDownloadedFile() {
 		AppiumDriver mobileDriver = (AppiumDriver) driver;
-		List<String> removePDFArgs = Arrays.asList("-rf","/sdcard/Download/PreEnrollment_Checklist_EN.pdf");
-		Map<String, Object> removePDFCmd = ImmutableMap.of("command","rm","args", removePDFArgs);
+		List<String> removePDFArgs = Arrays.asList("-rf", "/sdcard/Download/PreEnrollment_Checklist_EN.pdf");
+		Map<String, Object> removePDFCmd = ImmutableMap.of("command", "rm", "args", removePDFArgs);
 		mobileDriver.executeScript("mobile: shell", removePDFCmd);
 	}
 

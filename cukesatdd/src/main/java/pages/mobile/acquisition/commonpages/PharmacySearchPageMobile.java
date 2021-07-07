@@ -291,7 +291,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
 	public WebElement AddMyDrugsBtn;
 
-	public pages.mobile.acquisition.commonpages.GetStartedPage navigateToDCE() {
+	public GetStartedPageMobile navigateToDCE() {
 		scrollToView(DCELink);
 		validateNew(DCELink);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -299,7 +299,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		DCELink.click();
 		CommonUtility.checkPageIsReadyNew(driver);
 		if (validateNew(AddMyDrugsBtn))
-			return new pages.mobile.acquisition.commonpages.GetStartedPage(driver);
+			return new GetStartedPageMobile(driver);
 		return null;
 	}
 	
