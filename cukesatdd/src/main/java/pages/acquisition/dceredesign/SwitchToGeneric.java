@@ -90,8 +90,8 @@ public class SwitchToGeneric extends UhcDriver {
 		Assertion.fail("Did not Navigate to DCE Drug Details Page");
 		return null;
 	}
-	
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+
+	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPage ClickSwitch_ReturnSummaryPage() {

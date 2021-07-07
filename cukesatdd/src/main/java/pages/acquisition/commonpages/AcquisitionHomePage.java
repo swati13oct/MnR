@@ -41,8 +41,10 @@ import pages.acquisition.pharmacyLocator.PharmacySearchPage;
  */
 public class AcquisitionHomePage extends GlobalWebElements {
 
-	
+
+//	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded') or contains(@id,'cta-zipcode')]")
+
 	private WebElement zipCodeField;
 
 	@FindBy(xpath = "//*[contains(@id,'zipcodemeded-0')]")
@@ -229,6 +231,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	// contains(@id,'zipcodebtn')])[2]")
 	// @FindBy(xpath = "//*[contains(@class,'zip-button') or
 	// contains(@id,'zipcodebtn')]"
+
+//	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	@FindBy(xpath = "//*[contains(@class,'zip-button') or contains(@id,'zipcodebtn')]")
 	private WebElement viewPlansButton;
 
@@ -1240,9 +1244,12 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public VPPPlanSummaryPage searchPlansWithOutCounty(String zipcode) throws InterruptedException {
 
 		waitForPageLoadSafari();
-		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
+		pageloadcomplete();
+		validateNew(zipCodeField);
+//		CommonUtility.waitForPageLoadNew(driver, zipCodeField, 30);
 		// sendkeys(zipCodeField, zipcode);
 		sendkeysNew(zipCodeField, zipcode);
+		//viewPlansButton.click();
 		jsClickNew(viewPlansButton);
 		// }
 		// while(validate(overlayFilm, 10)) {/**wait*/}
@@ -3324,12 +3331,15 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		WebElement DCELink = driver.findElement(By.xpath(
 				"//a[contains(@href,'drug-cost-estimator') and (contains(@title, 'prescription drug costs') or @onkeydown)]"));
 		validateNew(DCELink);
+		jsClickNew(DCELink);
+/*
 		String winHandleBefore = driver.getWindowHandle();
 		switchToNewTabNew(DCELink);
 		String winHandleCurrent = driver.getWindowHandle();
 		driver.switchTo().window(winHandleBefore);
 		driver.close();
 		driver.switchTo().window(winHandleCurrent);
+*/
 		CommonUtility.waitForPageLoadNew(driver, AddMyDrugsBtn, 20);
 		if (driver.getCurrentUrl().contains("drug-cost-estimator"))
 			return new GetStartedPage(driver);

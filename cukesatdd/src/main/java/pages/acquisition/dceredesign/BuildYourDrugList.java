@@ -278,6 +278,7 @@ public class BuildYourDrugList extends UhcDriver {
 
 	public ComparePlansPage returnToPlanComparePage() {
 
+        pageloadcomplete();
 		validateNew(returnToCompareBtn);
 		jsClickNew(returnToCompareBtn);
 		waitForPageLoadSafari();
@@ -341,8 +342,15 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
 		waitForPageLoadSafari();
-		
-		return new DrugSummaryPage(driver);
+		threadsleep(2000);
+		pageloadcomplete();
+		CommonUtility.waitForPageLoadNew(driver, reviewDrugCostPageHeading, 20);
+		if (validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPage(driver);
+		} else {
+			Assertion.fail("Drug Summary Page is not loaded");
+			return null;
+		}
 	}
 
 	public void validateDetailsForDrug(String drugName, String drugQuantity, String drugFrequency,
