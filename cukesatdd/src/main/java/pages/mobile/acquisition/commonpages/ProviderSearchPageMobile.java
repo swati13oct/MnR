@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import acceptancetests.data.CommonConstants;
 import acceptancetests.data.ElementData;
@@ -581,7 +582,7 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	}
 
 	public void verifyProviderSearchRallyPageDisplayed() {
-		org.testng.Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
+		Assert.assertTrue(driver.getCurrentUrl().contains("werally"),
 				"Provider Search Rally Page is not displayed");
 	}
 	

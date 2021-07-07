@@ -22,9 +22,7 @@ import acceptancetests.data.CommonConstants;
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.UhcDriver;
-import pages.acquisition.commonpages.PlanDetailsPage;
 import pages.acquisition.dceredesign.DrugSummaryPage;
-import pages.acquisition.dceredesign.SwitchToGeneric;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 
 public class DrugSummaryPageMobile extends UhcDriver {
@@ -145,6 +143,9 @@ public class DrugSummaryPageMobile extends UhcDriver {
 
 	@FindBy(id = "changePharmacyLink")
 	public WebElement changePharmacyLinkDetailsPage;
+	
+	@FindBy(xpath = "//*[text()='Return to plan summary']")
+	public WebElement returnToPlanSummaryLink;
 
 	@Override
 	public void openAndValidate() {
@@ -829,8 +830,15 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public void clickViewDrugCostBtn() {
-		viewDrugCostBtn.click();
+	public DrugDetailsPageMobile clickViewDrugCostBtn() {
+		jsClickNew(viewDrugCostBtn);
+		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
+		if (validateNew(changePharmacy) && validateNew(DrugDetails_DrugCostsHeading)) {
+			return new DrugDetailsPageMobile(driver);
+		} else {
+			Assertion.fail("Drug Details Page is NOT Displayed");
+			return null;
+		}
 	}
 
 	@FindBy(xpath = "//button//span[text()='Back to Profile']")
@@ -1151,6 +1159,35 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		}
 		return new PlanDetailsPageMobile(driver);
 
+	}
+	
+	
+	public void clickReturnToPlanSummary() {
+//		returnToPlanSummaryLink.click();
+		jsClickNew(returnToPlanSummaryLink);
+		waitForPageLoadSafari();
+	}
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..")
+	private WebElement savedPlansPopup;
+	
+	@FindBy(xpath = "//*[@id='enrollmentPopup']/..//*[@class='uhc-modal__close']")
+	private WebElement savedPlansPopupCloseIcon;
+	
+	@FindBy(xpath = "//*[@class='back-to-view-all-pla']")
+	public WebElement returnToHomeBtn;
+
+	public void clickOnReturnToHome() {
+		try {
+			if (savedPlansPopup.isDisplayed()) {
+				jsClickNew(savedPlansPopupCloseIcon);
+			}
+		} catch (Exception e) {
+			System.out.println("Saved Plans modal not displayed");
+		}
+		scrollToView(returnToHomeBtn);
+		validateNew(returnToHomeBtn);
+		jsClickNew(returnToHomeBtn);
 	}
 
 }

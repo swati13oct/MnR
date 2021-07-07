@@ -27,6 +27,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.dceredesign.DrugSummaryPage;
 import pages.acquisition.pharmacyLocator.PharmacySearchPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.GetStartedPageMobile;
@@ -230,28 +231,23 @@ public class PharmacyLocatorStepDefinitionMobile {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
 
-		/*
-		 * List<String> noteList=new ArrayList<String>(); noteList.add(""); noteList.
-		 * add("===== TEST NOTE ================================================");
-		 * String testSiteUrl=(String)
-		 * getLoginScenario().getBean(PageConstants.TEST_SITE_URL); String
-		 * currentEnvTime=pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
-		 * noteList.add("test run at stage time ="+currentEnvTime);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME,
-		 * currentEnvTime); String[] tmpDateAndTime=currentEnvTime.split(" "); String[]
-		 * tmpDate=tmpDateAndTime[0].split("/"); String
-		 * envTimeYear=tmpDate[tmpDate.length-1];
-		 * System.out.println("TEST - sysTimeYear="+envTimeYear);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR,
-		 * envTimeYear);
-		 */
-		pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+		List<String> noteList = new ArrayList<String>();
+		noteList.add("");
+		noteList.add("===== TEST NOTE ================================================");
+		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		String currentEnvTime = pharmacySearchPage.getAcqTestEnvSysTime(testSiteUrl);
+		noteList.add("test run at stage time =" + currentEnvTime);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_TIME, currentEnvTime);
+		String[] tmpDateAndTime = currentEnvTime.split(" ");
+		String[] tmpDate = tmpDateAndTime[0].split("/");
+		String envTimeYear = tmpDate[tmpDate.length - 1];
+		System.out.println("TEST - sysTimeYear=" + envTimeYear);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_SYSTEM_YEAR, envTimeYear);
 
-		/*
-		 * noteList.addAll(testNote);
-		 * getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE,
-		 * noteList);
-		 */
+		List<String> testNote = pharmacySearchPage.enterZipDistanceDetails(zipcode, distance, county);
+
+		noteList.addAll(testNote);
+		getLoginScenario().saveBean(PharmacySearchCommonConstants.TEST_RESULT_NOTE, noteList);
 
 	}
 
@@ -375,19 +371,19 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void verifyPharmacyWidgets(DataTable inputData) throws InterruptedException {
 		Map<String, String> inputDataMap = parseInputArguments(inputData);
 		String tmp = inputDataMap.get("Has Preferred Retail Pharmacy network plan").trim();
-		AssertJUnit.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - input 'Has Preferred Retail Pharmacy network plan' should be True or False. \nActual='" + tmp
 						+ "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasPrefRetailPharmacy = Boolean.parseBoolean(tmp);
 
 		tmp = inputDataMap.get("Has Walgreens plan").trim();
-		AssertJUnit.assertTrue("PROBLEM - input 'Has Walgreens plan' should be True or False. Actual='" + tmp + "'",
+		Assertion.assertTrue("PROBLEM - input 'Has Walgreens plan' should be True or False. Actual='" + tmp + "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
 		boolean hasWalgreens = Boolean.parseBoolean(tmp);
 
 		tmp = inputDataMap.get("Has Preferred Mail Service Pharmacy plan").trim();
-		AssertJUnit.assertTrue(
+		Assertion.assertTrue(
 				"PROBLEM - input 'Has Preferred Mail Service Pharmacy plan' should be True or False. Actual='" + tmp
 						+ "'",
 				tmp.equalsIgnoreCase("true") || tmp.equalsIgnoreCase("false"));
@@ -474,9 +470,9 @@ public class PharmacyLocatorStepDefinitionMobile {
 
 	@And("^user click on return to home on drug summary in AARP site$")
 	public void user_click_on_return_to_home_on_drug_summary_in_AARP_site() throws Throwable {
-		DrugSummaryPageMobile drugSummaryPage = (DrugSummaryPageMobile) getLoginScenario()
-				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		// drugSummaryPage.clickOnReturnToHome();
+		AppiumDriver driver = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(driver);
+		drugSummaryPage.clickOnReturnToHome();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 

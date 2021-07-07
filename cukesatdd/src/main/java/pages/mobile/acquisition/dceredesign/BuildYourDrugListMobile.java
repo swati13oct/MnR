@@ -333,8 +333,8 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	public DrugDetailsPageMobile navigateToDrugDetailsPage() {
 		validateNew(reviewDrugCostButtonFooter);
 		jsClickNew(reviewDrugCostButtonFooter);
-		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
-		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
+//		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
+		if (validateNew(DrugDetails_ChangePharmacyLnk)) {
 			return new DrugDetailsPageMobile(driver);
 		} else {
 			Assertion.fail("Drug Details is NOT Displayed");
@@ -550,5 +550,9 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 		return new TellUsAboutDrugMobile(driver);
 
+	}
+	
+	public void clickReviewDrugCostBtn() {
+		jsClickNew(reviewDrugCostButtonFooter);
 	}
 }

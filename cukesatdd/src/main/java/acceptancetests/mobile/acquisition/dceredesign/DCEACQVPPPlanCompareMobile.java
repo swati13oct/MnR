@@ -72,8 +72,10 @@ public class DCEACQVPPPlanCompareMobile {
 	public void user_clicks_view_drug_cost_button_in_AARP() throws InterruptedException {
 		AppiumDriver wd = (AppiumDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
 		DrugSummaryPageMobile drugSummaryPage = new DrugSummaryPageMobile(wd);
-		drugSummaryPage.clickViewDrugCostBtn();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
+		/*drugSummaryPage.clickViewDrugCostBtn();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);*/
+		DrugDetailsPageMobile drugDetailsPage = drugSummaryPage.clickViewDrugCostBtn();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 	}
 
 	@Given("^user is on AARP site$")
@@ -98,25 +100,6 @@ public class DCEACQVPPPlanCompareMobile {
 	
 		
 		
-	}
-
-	@Given("^I select \"([^\"]*)\" plans to compare and click on compare plan link$")
-	public void i_select_plans_to_compare_and_click_on_compare_plan_link_in_AARP(String planType) throws Throwable {
-		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		if (planType.equals("MAPD")) {
-			plansummaryPage.checkAllMAPlans();
-			System.out.println("Selected All MAPD plans for Plan Compare");
-		} else if (planType.equals("PDP")) {
-			plansummaryPage.checkAllPDPlans();
-			System.out.println("Selected All PDP plans for Plan Compare");
-		}
-		ComparePlansPageMobile planComparePage = plansummaryPage.clickOnCompareLinkAARP(planType);
-		if (planComparePage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
-
-		} else
-			Assertion.fail("Error in loading the compare plans page");
 	}
 
 	@When("^I access the DCE Redesign from Plan compare page$")
