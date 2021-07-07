@@ -351,37 +351,37 @@ public class PlanPremiumPage extends UhcDriver{
 		String expectedText = null;
 		try {
 			System.out.println("Validate no monthly premium text");
-			actualText = noMonthlyPremium.getText();
+			actualText = noMonthlyPremium.getText().replaceAll("\u00A0"," ").trim();
 			expectedText = CommonConstants.NO_MONTHLY_PREMIUM_TEXT;
 			flag = actualText.contains(expectedText);
 				if(flag) {
 					System.out.println("Validate last enrollment penalty text");
-					actualText = lastEnrollmentPenalty.getText();
+					actualText = lastEnrollmentPenalty.getText().replaceAll("\u00A0"," ").trim();
 					expectedText = CommonConstants.LAST_ENROLLMENT_PENALITY_TEXT;
 					flag = actualText.contains(expectedText);
 					if(flag) {
 						System.out.println("Validate part d income text");
-						actualText = partdincome.getText();
+						actualText = partdincome.getText().replaceAll("\u00A0"," ").trim();
 						expectedText = CommonConstants.PART_D_INCOME_TEXT;
 						flag = actualText.contains(expectedText);
 						if(flag) {
 							System.out.println("Validate ss text");
-							actualText = ss.getText();
+							actualText = ss.getText().replaceAll("\u00A0"," ").trim();
 							expectedText = CommonConstants.SS_TEXT;
 							flag = actualText.contains(expectedText);
 							if(flag) {
 								System.out.println("Validate medicare text");
-								actualText = medicare.getText();
+								actualText = medicare.getText().replaceAll("\u00A0"," ").trim();
 								expectedText = CommonConstants.MEDICARE_TEXT;
 								flag = actualText.contains(expectedText);
 								if(flag) {
 									System.out.println("Validate railroad text");
-									actualText = raildroad.getText();
+									actualText = raildroad.getText().replaceAll("\u00A0"," ").trim();
 									expectedText = CommonConstants.RAILROAD_TEXT;
 									flag = actualText.contains(expectedText);
 									if(flag) {
 										System.out.println("Validate partdirmaa tex");
-										actualText = partdirmaa.getText();
+										actualText = partdirmaa.getText().replaceAll("\u00A0"," ").trim();
 										System.out.println("Validate partdirmaa tex"+actualText);
 										expectedText = CommonConstants.PARTDIRMAA_TEXT;
 										System.out.println("Validate partdirmaa tex"+expectedText);

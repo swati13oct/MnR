@@ -367,6 +367,9 @@ public class ComparePlansPage extends UhcDriver {
 
 	@FindBy(css = "div.meter.animate")
 	private WebElement progressBar;
+	
+	@FindBy(xpath = "//strong[contains(text(),'Monthly Premium:')]/..")
+	private WebElement PremiumDisplay;
 
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -1785,5 +1788,16 @@ public class ComparePlansPage extends UhcDriver {
 		// closeBtn.click();
 		jsClickNew(closeBtn);
 	}
+public String GetMonthlyPremiumValue() {
+		
+		if (validateNew(PremiumDisplay, 45)) {
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
+		}
+		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
 
+		return null;
+	}
 }

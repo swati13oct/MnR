@@ -354,26 +354,18 @@ public class oleStepDefinition {
 		String ZipCode = (String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
 		String County = (String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
 		String PlanType = (String) getLoginScenario().getBean(VPPCommonConstants.PLAN_TYPE);
-		/*	String PlanName = givenAttributesMap.get("Plan Name");
-		String PlanType = givenAttributesMap.get("Plan Type");
-		String PlanYear = (String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_YEAR);
-		String ZipCode = givenAttributesMap.get("Zip Code");
-		
-		//(String) getLoginScenario().getBean(VPPCommonConstants.ZIPCODE);
-		String County =(String) getLoginScenario().getBean(VPPCommonConstants.COUNTY);
-		String PlanPremium = "";*/
-		//(String) getLoginScenario().getBean(oleCommonConstants.OLE_PLAN_PREMIUM);
 		WelcomePage welcomePage;
 		if(PlanType.contains("MAPD")){
 			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 			welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare_MAPD(PlanName);
+			PlanPremium=comparePlansPage.GetMonthlyPremiumValue();
 		}else {
 			ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 					.getBean(PageConstants.PLAN_COMPARE_PAGE);
 
 			welcomePage  = comparePlansPage.Enroll_OLE_Plan_Compare_PDP(PlanName);
-
+			PlanPremium=comparePlansPage.GetMonthlyPremiumValue();
 		}
 
 		getLoginScenario().saveBean(oleCommonConstants.OLE_PLAN_NAME, PlanName);
@@ -3323,14 +3315,14 @@ public class oleStepDefinition {
 		}
 		else {
 			flag = planPremiumPage.validateNoMonthlyPremium();
-			/*if (flag) {
+			if (flag) {
 				System.out.println("No Monthly Premium validation is passed");
 				Assertion.assertTrue(true);
 			}
 			else {
 				System.out.println("No Monthly Premium validation is failed");
 				Assertion.fail("No Monthly Premium validation is failed");
-			}*/
+			}
 		}
 	}
 
