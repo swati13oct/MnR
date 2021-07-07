@@ -1499,7 +1499,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			scrollToView(DentalFlyerLink);
 			
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-				grantMemoryAccessOnAndroidChrome(DentalFlyerLink);
+				grantPermissionOnAndroidChrome(DentalFlyerLink);
 				byte[] pdfContent = getDownloadedPdfFileContentAndroid(Documentcode);
 				document = PDDocument.load(pdfContent);
 				String PDFText = new PDFTextStripper().getText(document);
@@ -1529,7 +1529,7 @@ public class ComparePlansPageMobile extends UhcDriver {
 			scrollToView(DentalFlyerLink);
 			
 			if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
-				grantMemoryAccessOnAndroidChrome(DentalFlyerLink);
+				grantPermissionOnAndroidChrome(DentalFlyerLink);
 				byte[] pdfContent = getDownloadedPdfFileContentAndroid(Documentcode);
 				document = PDDocument.load(pdfContent);
 				String PDFText = new PDFTextStripper().getText(document);

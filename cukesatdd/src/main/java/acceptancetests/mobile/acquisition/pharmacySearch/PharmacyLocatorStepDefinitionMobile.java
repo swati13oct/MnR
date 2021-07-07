@@ -415,8 +415,7 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void verifyMapSectionContent() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		// pharmacySearchPage.validateMapSectionContent();
-		System.out.println("***Skipping step to verify map section on Mobile as we cannot handle maps on Saucelabs***");
+		 pharmacySearchPage.validateMapSectionContent();
 	}
 
 	/**
@@ -427,14 +426,10 @@ public class PharmacyLocatorStepDefinitionMobile {
 	public void viewsShowOnMapResult() {
 		PharmacySearchPageMobile pharmacySearchPage = (PharmacySearchPageMobile) getLoginScenario()
 				.getBean(PharmacySearchCommonConstants.PHARMACY_LOCATOR_PAGE);
-		/*
-		 * pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
-		 * Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed",
-		 * pharmacySearchPage != null);
-		 * getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE,
-		 * pharmacySearchPage);
-		 */System.out.println(
-				"***Skipping step to Validate show on map section on Mobile as we cannot handle maps on Saucelabs***");
+
+		pharmacySearchPage = pharmacySearchPage.validateShowOnMapLinks();
+		Assertion.assertTrue("PROBLEM - SHOW ON MAP Links Not Displayed", pharmacySearchPage != null);
+		getLoginScenario().saveBean(PageConstantsMnR.PHARMACY_RESULT_PAGE, pharmacySearchPage);
 	}
 
 	@Then("^the user validate get direction link$")

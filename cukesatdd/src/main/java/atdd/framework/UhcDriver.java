@@ -1158,12 +1158,20 @@ public abstract class UhcDriver {
 		// open new tab
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.open('" + urlGetSysTime + "','_blank');");
+		
+		if(driver.getClass().toString().toUpperCase().contains("IOS")) {
+			System.out.println("Waiting for accepting the open new window alert on iOS device");
+			threadsleep(5000);
+			waitForCountIncrement(1);
+		}
+		
 		for (String winHandle : driver.getWindowHandles()) {
 			if (!winHandle.equals(winHandleBefore)) {
 				driver.switchTo().window(winHandle);
 				break;
 			}
 		}
+		waitForPageLoadSafari();
 		threadsleep(2000);
 		WebElement currentSysTimeElement = timeJson;
 		String currentSysTimeStr = currentSysTimeElement.getText();
@@ -1561,8 +1569,7 @@ public abstract class UhcDriver {
 	public boolean waitForPageLoadSafari() {
 		boolean ready = false;
 
-		if (MRScenario.browserName.equalsIgnoreCase("Safari")
-				&& driver.getClass().getSimpleName().contains("WebDriver")) {
+		if (MRScenario.browserName.equalsIgnoreCase("Safari")) {
 			// Sets FluentWait Setup
 			List<WebElement> loadingScreen = null;
 			FluentWait<WebDriver> fwait = new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(10))
@@ -1664,7 +1671,7 @@ public abstract class UhcDriver {
 	 * @author amahale
 	 * @param pdfLink the pdf link
 	 */
-	public void grantMemoryAccessOnAndroidChrome(WebElement pdfLink) {
+	public void grantPermissionOnAndroidChrome(WebElement pdfLink) {
 		AppiumDriver mobileDriver = (AppiumDriver) driver;
 		String webContext = mobileDriver.getContext();
 		

@@ -221,7 +221,12 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		if (!loadingBlock.isEmpty()) // note: if still not done, give it another 30 second
 			waitforElementDisapper(By.className("loading-block"), 30);
 		sleepBySec(1); // note: let the page settle down
-		searchbtn.click();
+//		searchbtn.click();
+		if(driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			grantPermissionOnAndroidChrome(searchbtn);
+		} else {
+			jsClickNew(searchbtn);
+		}
 		sleepBySec(50);
 		Assertion.assertTrue("PROBLEM - Pharmacies not displayed", pharmacyValidate(pharmacyCount));
 		if (!pharmacyValidate(pharmacyCount)) {
