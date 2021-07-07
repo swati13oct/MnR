@@ -85,10 +85,9 @@ public class PREBenefitsValidationStepDefinition {
 		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
 
 		// Getting Date
-        DateFormat dateFormat = new SimpleDateFormat("MMddyyyy HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("MMddyyyyHHmmss");
         Date RunDate = new Date();
         String DateCreated = dateFormat.format(RunDate);
-        DateCreated = DateCreated.replace(" ", "").replace(":", "");
 		String parentDirectory = null;
 		parentDirectory = new java.io.File(".").getCanonicalPath();
 		String InputFilePath = parentDirectory + "/src/main/resources/database/PREPlanDocs/" + ExcelName + ".xlsx";
