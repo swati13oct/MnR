@@ -10,12 +10,12 @@ Feature: Plan Recommendation Engine flow - Verify zipcode page in Plan Recommend
       | Zip Code        | <Zipcode>         |
       | Is Multi County | <isMultutiCounty> |
 
-    @FunctionalAARP @F527982 @F552923 @F629148 @F612267
+    @FunctionalAARP @F568452
     Examples: 
       | site | Zipcode | isMultutiCounty |
       | AARP |   90210 | NO              |
 
-    @FunctionalUHC @F636785 @F617636 @F627093 @F608034 @F610807
+    @FunctionalUHC
     Examples: 
       | site | Zipcode | isMultutiCounty |
       | UHC  |   90210 | NO              |

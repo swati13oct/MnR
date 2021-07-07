@@ -1,7 +1,7 @@
 @PlanRecommendationEngine
 Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities with recommendation and Ranking with API results
 
-  @PRE @APIRanking @MAPDFlowRanking 
+  @PRE @APIRanking @MAPDFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>  , <doctors> , <DoctorsName> , <isMultiDoctor> , <Drug Selection> , <DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch>  , <Dental-Hearing-Vision-Fitness> , <costPreferenceOption> - To validate API Ranking for MA plans in PRE
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
@@ -33,15 +33,15 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
 
     @regressionAARP @sanity
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
-      | AARP |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | Lookup  | David B. Auerbach | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Travel, Vision |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
+      | AARP |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | Lookup  | David B. Auerbach | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
 
     @regressionUHC
     Examples: 
-      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities     |
-      | UHC  |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | Lookup  | David B. Auerbach | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Travel, Vision |
+      | site | Zipcode | isMultiCounty | county  | isCoverageOpt | specialNeeds    | doctors | DoctorsName       | isMultiDoctor | Drug Selection | DrugName-AutoSearch-Dosage-Package-Qty-Frequency-SLength-IsNotgeneric-Switch                                | Dental-Hearing-Vision-Fitness | costPreferenceOption | priorityOption | priorities      |
+      | UHC  |   32115 | NO            | Volusia | MAPD          | Chronic,Nursing | Lookup  | David B. Auerbach | NO            | Yes            | Lipitor,NO,Lipitor TAB 20MG,,,Day,1,YES,NO:morphine sulfate,NO,morphine sulfate CAP 10MG ER,,,Month,1,NO,NO | No,No,Yes,No                  | Lower                | both           | Doctors, Vision |
 
-  @PRE @APIRanking @MAPDFlowRanking 
+  @PRE @APIRanking @MAPDFlowRanking
   Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <specialNeeds>, <doctors>, <DoctorsName>, <Drug Selection> , <Dental-Hearing-Vision-Fitness>, <costPreferenceOption> - To validate SNP API ranking plans in PRE
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
