@@ -329,11 +329,10 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(css = ".icon-search")
 	private WebElement searchbutton;
 
-	// @FindBy(xpath = "//button[contains(@dtmname,'add my drugs')]")
-	@FindBy(css = "#addDrug")
+	@FindBy(xpath = "//*[@id='addDrug']")
 	public WebElement AddMyDrugsBtn;
 	
-	@FindBy(xpath = "//a[contains(text(),'Estimate Your Drug Costs')]")
+	@FindBy(xpath = "//a[normalize-space()='Estimate Your Drug Costs']")
 	public WebElement EstimateYourDrugCost;
 
 	@FindBy(id = "search-field")
@@ -445,7 +444,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//form[@name='zipcodeform']//button[contains(@class,'zip-button')]")
 	private WebElement GoBtnHealthPlans;
 
-	@FindBy(xpath = "//input[@id='search-field']")
+	@FindBy(xpath = "//*[@id='search-field']")
 	private WebElement EnterSearch;
 
 	@FindBy(xpath = "//button[contains(text(),'Search')]")

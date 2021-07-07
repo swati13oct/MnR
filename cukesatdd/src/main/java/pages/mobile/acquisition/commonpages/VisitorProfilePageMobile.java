@@ -67,7 +67,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//button[@class='uhc-button uhc-button--outlined uhc-button--secondary mt-20']")
 	private WebElement addPlans;
 
-	@FindBy(css = "a.addrugs")
+	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
 	private WebElement addrugs;
 
 	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
@@ -127,7 +127,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//div[@class='multi-year-select']/button[contains(@class,'js-select-year select-year')][1]")
 	private WebElement profileCrntYrPlans;
 
-	@FindBy(xpath = "//span[contains(text(),'Add Drugs')]")
+	@FindBy(xpath = "//*[@id='addDrug']")
 	public WebElement AddMyDrugsBtn;
 
 	public VisitorProfilePageMobile(WebDriver driver) {
@@ -295,10 +295,10 @@ public class VisitorProfilePageMobile extends UhcDriver {
 		 */
 		if (StringUtils.equalsIgnoreCase(State, "Pennsylvania") || StringUtils.equalsIgnoreCase(State, "Puerto Rico")
 				|| StringUtils.equalsIgnoreCase(State, "Virginia")) {
-			iosScroll(addrugs);
+			scrollToView(addrugs);
 			jsClickNew(addrugs);
 		} else {
-			iosScroll(addDrugsBtn);
+			scrollToView(addDrugsBtn);
 			jsClickNew(addDrugsBtn);
 		}
 		waitForPageLoadSafari();
@@ -438,7 +438,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//h3[@id='saved-drugs']/following::button[contains(@dtmname,'Add Drugs')]")
+	@FindBy(xpath = "//button[normalize-space()='Edit']")
 	public WebElement editDrugsPharmacy;
 
 	public BuildYourDrugListMobile clickOnEditDrugAndPharmacy() {
@@ -802,23 +802,37 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	}
 
 	public void validateAddedPlansNew(String planNames) {
-		List<String> listOfTestPlans = Arrays.asList(planNames.split(","));
-		CommonUtility.checkPageIsReadyNew(driver);
-		for (String plan : listOfTestPlans) {
-			System.out.println(plan);/*
-										 * System.out.println(driver.findElement(By.xpath(
-										 * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
-										 * + plan + "')]")) .getText());
-										 */
-			Assertion.assertEquals(plan, driver.findElement(By.xpath(
-					"//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"))
-					.getText());
-			Assertion.assertTrue(driver
-					.findElement(By.xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
-							+ plan + "')]/following::button[1]"))
-					.isDisplayed());
-			System.out.println("Verified plans are added on visitior profile page");
-		}
+	       String[] listOfTestPlans = planNames.split(",");
+	        CommonUtility.checkPageIsReadyNew(driver);
+	        for (String plan : listOfTestPlans) {
+	            System.out.println("Checking Saved Plan on VP for : " + plan);
+	            WebElement addedPlan = driver
+	                    .findElement(By.xpath("//*[contains(@id,'planName') and contains(text(),'" + plan + "')]"));
+	            validateNew(addedPlan);
+	            /*
+	             * System.out.println(driver.findElement(By.xpath(
+	             * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+	             * + plan + "')]")) .getText());
+	             */
+	            System.out.println(addedPlan.getText());
+	            /*
+	             * Assertion.assertEquals(plan, driver.findElement(By.xpath(
+	             * "//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+	             * + plan + "')]")) .getText().trim());
+	             */
+	            Assertion.assertEquals(plan, addedPlan.getText().trim());
+	            /*
+	             * Assertion.assertTrue(driver .findElement(By.
+	             * xpath("//h2[@id='saved-plans']/..//*[contains(@id,'planName') and contains(text(),'"
+	             * + plan + "')]/following::button[1]")) .isDisplayed());
+	             */
+	/*			Assertion.assertTrue(driver
+						.findElement(By.xpath(
+								"//*[contains(@id,'planName') and contains(text(),'" + plan + "')]/./following::button[1]"))
+						.isDisplayed());
+	*/
+	            System.out.println("Verified plans are added on visitior profile page");
+	        }
 	}
 
 	public void validateAddedMsPlans(String planNames) {

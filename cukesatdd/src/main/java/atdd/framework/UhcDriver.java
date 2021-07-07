@@ -69,7 +69,7 @@ public abstract class UhcDriver {
 	@FindBy(xpath = "//*[contains(@class,'btn-no')]")
 	public WebElement IPerceptionNoBtn;
 
-	@FindBy(xpath = "//b[contains(text(),'MENU')]")
+	@FindBy(xpath = "//div[@aria-label='menu navigation']")
 	public WebElement MenuMobile;
 	
 	

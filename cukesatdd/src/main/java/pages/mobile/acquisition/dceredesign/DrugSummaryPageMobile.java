@@ -439,9 +439,11 @@ public class DrugSummaryPageMobile extends UhcDriver {
 	public WebElement MailPharmacy;
 
 	public void selectMailOrderPharmacy() {
+		iosScroll(MailPharmacy);
 		jsClickNew(MailPharmacy);
 		validateNew(saveDrugBtn);
-		saveDrugBtn.click();
+		jsClickNew(saveDrugBtn);
+		//saveDrugBtn.click();
 	}
 
 	@FindBy(xpath = "//a[@class='uhc-link-button']/span")

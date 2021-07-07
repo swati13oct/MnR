@@ -49,7 +49,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 	@FindBy(xpath = "//*[@id='Lipitor']/div")
 	public WebElement selectdrug;
 
-	@FindBy(xpath = "//*[(@id= 'err_2') or contains(@class, 'errtext')]")
+	@FindBy(xpath = "//div[@class='column column-12']/p[@id='drugError']")
 	public WebElement NoDrugError;
 
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button') and contains(text(), 'Back')]")
@@ -297,6 +297,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			jsClickNew(addDrugButton);
 		}
 
+		pageloadcomplete();
 		validateNew(EnterDrugNameTxt);
 		sendkeysMobile(EnterDrugNameTxt, drugName);
 
