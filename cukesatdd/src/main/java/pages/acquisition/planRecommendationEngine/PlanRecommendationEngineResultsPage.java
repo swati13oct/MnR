@@ -1242,7 +1242,7 @@ public String getplanName(WebElement plan) {
 
 public void sendEmail(String plan, String email) {
 	System.out.println("Email Plan list from VPP : ");
-	plansLoader();
+//	plansLoader();
 	if (plan.equalsIgnoreCase("PDP")) {
 		jsClickNew(pdpemailList);
 	} else if (plan.equalsIgnoreCase("MA")) {
@@ -1262,7 +1262,7 @@ public void sendEmail(String plan, String email) {
 
 public void validateUIAPIRecommendations() {
 	System.out.println("Validating UI vs API Plans Recommendation : ");
-	plansLoader();
+//	plansLoader();
 
 	String rankingJSON = returnDriverStorageJS("Session Storage", "ucp_planRecommendationResults");
 	String MAPriority = getAPIPlansRecommendation(rankingJSON, "MA");
