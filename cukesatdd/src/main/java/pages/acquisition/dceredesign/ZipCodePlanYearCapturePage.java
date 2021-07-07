@@ -68,6 +68,12 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 			county.selectByIndex(1);
 		}
 	}
+	public void selectCounty(String CountyName) {
+		Select county = new Select(countyDropdown);
+		validateNew(countyDropdown);
+		countyDropdown.click();
+		county.selectByVisibleText(CountyName);
+	}
 
 	public DrugSummaryPage clickContinueBtn() {
 		validateNew(continueBtn);
