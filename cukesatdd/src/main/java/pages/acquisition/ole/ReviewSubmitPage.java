@@ -330,6 +330,13 @@ public class ReviewSubmitPage extends UhcDriver{
 	@FindBy(xpath = "//*[contains(@class, 'premium-zip')]//*[contains(@class, 'review-premium-zip-first')]")
 	private WebElement MonthlyPremium;
 	
+	@FindBy(xpath = "//*[(contains(@id,'partAEffectiveDate') or contains(@id,'partAdate')) and contains(@class,'input-element')]")
+	private WebElement partAStartDateField;
+
+	@FindBy(xpath = "//*[(contains(@id,'partBEffectiveDate') or contains(@id,'partBdate')) and contains(@class,'input-element')]")
+	private WebElement partBStartDateField;
+	
+	
 	public ReviewSubmitPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(driver, this);
@@ -667,6 +674,8 @@ public class ReviewSubmitPage extends UhcDriver{
 //		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date");
 		String CardType = MedicareDetailsMap.get("Card Type");
 		//String MedicaidNo = MedicareDetailsMap.get("MedicaidNumber"); 
+		String PartAeffectiveDate = MedicareDetailsMap.get("PartA Date1");
+		String PartBeffectiveDate = MedicareDetailsMap.get("PartB Date1"); 
 		
 		validate(EditMedicareInformation);
 		jsClickNew(EditMedicareInformation);
@@ -675,14 +684,19 @@ public class ReviewSubmitPage extends UhcDriver{
 		claimNumberField.clear();
 		validateNew(claimNumberField);
 		sendkeysNew(claimNumberField, MedicareNumber1);
-		Thread.sleep(2000);
-		sendkeysNew(medicaidNumberField,"12345876");
-		Thread.sleep(2000);
-		jsClickNew(ReviewEditSavechanges);
+		Thread.sleep(5000);
 		validateNew(ReviewEditSavechanges);
 		jsClickNew(ReviewEditSavechanges);
+	//	sendkeysNew(medicaidNumberField,"12345876");
+		Thread.sleep(5000);
+		sendkeysNew(partAStartDateField, PartAeffectiveDate);
+		sendkeysNew(partBStartDateField, PartBeffectiveDate);
+		Thread.sleep(2000);
+		//jsClickNew(ReviewEditSavechanges);
+		//validateNew(ReviewEditSavechanges);
+		jsClickNew(ReviewEditSavechanges);
 
-		System.out.println(" MedicareNumber Details are entered");
+		System.out.println(" MedicareNumber Details are edited from Review Page");
 		/*
 		if(ReviewEditSavechanges.isEnabled()){
 			System.out.println("User navigate back to Review Page");

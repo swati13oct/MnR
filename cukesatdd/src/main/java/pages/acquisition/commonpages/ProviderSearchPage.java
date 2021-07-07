@@ -606,8 +606,8 @@ public class ProviderSearchPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, Physician, 10);
 		jsClickNew(Physician);
 		
-		CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
-		jsClickNew(selectProviderBtn);
+	//	CommonUtility.waitForPageLoadNew(driver, selectProviderBtn, 30);
+	//	jsClickNew(selectProviderBtn);
 		
 		int counter =0;
 		for (WebElement element : MulitpleSaveBtns) {

@@ -3174,6 +3174,7 @@ public class oleStepDefinition {
 		String CardType = MedicareDetailsMap.get("Card Type");
 		
 		String MedicareNumber1 = MedicareDetailsMap.get("Medicare Number1");
+		
 		ReviewSubmitPage reviewSubmitPage = (ReviewSubmitPage) getLoginScenario().getBean(OLE_PageConstants.OLE_REVIEW_SUBMIT_PAGE);
 		//AuthorizationPage authorizationPage = (AuthorizationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_AUTHORIZATION_PAGE);
 		//MedicareInformationPage medicareInfoPage = (MedicareInformationPage) getLoginScenario().getBean(OLE_PageConstants.OLE_MEDICARE_INFO_PAGE);

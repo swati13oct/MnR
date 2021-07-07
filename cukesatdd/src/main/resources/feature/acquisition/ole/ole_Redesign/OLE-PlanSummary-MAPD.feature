@@ -15,10 +15,10 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     Then the user clicks on Enroll Now for AARP site to start the OLE flow
       | Plan Name | <planName> |
     Then the user validates the Plan details on OLE
-    #Then the user validates TFN in Welcome OLE Right Rail
-   # Then the user validates Save Return Later modal for OLE Page
-   # Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
-     #| Rider Flag | <riderflag> |
+   # Then the user validates TFN in Welcome OLE Right Rail
+    Then the user validates Save Return Later modal for OLE Page
+    Then the user validates Optional Benefits Page for following plans with available Riders in welcome page
+     | Rider Flag | <riderflag> |
     Then the user navigates to Personal Information Page
     Then the user enters following required information in Personal Information Page
       | First Name               | <firstname>              |
@@ -63,14 +63,14 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
       | PD Member Number  | <pdmembernumber>           |
       |RX BIN Number      |	<rxBinnumber>              |
     Then the user navigates to SEP Page
-   # Then the user selects the following options for SEP Page
-     # | Select Options | <selectoptions> |
-    #  | Option Data    | <optiondata>    |
+    Then the user selects the following options for SEP Page
+      | Select Options | <selectoptions> |
+     | Option Data    | <optiondata>    |
     Then the user navigates to Proposed Effective Date Page
     Then the user validates Proposed Effective Date is Displayed
     Then the user navigates to PCP Page and validates PCP page is not displayed for PDP
-  #  Then the user validates PCP page for MA and MAPD PFFS plans
-   # Then the user validates Look up Provider for MA MAPD and DSNP plans.
+   Then the user validates PCP page for MA and MAPD PFFS plans
+   Then the user validates Look up Provider for MA MAPD and DSNP plans.
     Then the user navigates to Monthly Plan Premium Page
     Then the user selects payment type
       | Payment Type           | <paymentType>         |
@@ -221,7 +221,7 @@ Feature: 1.05.2 OLE common tool flow E2E MAPD
     #  | Auth Flag                | <authflag>               |
      # | Mailing Address Question | <mailingaddressquestion> |
  
-  @MA_OLE_Ulayer_Future @prodRegression @regressionAARP @OLE @OLE_Redesign
+  @MA_OLE_Ulayer_Future @prodRegression @regressionAARP @OLE @OLE_Redesign @OLE_Redesign_MAPD1
     Examples: 
       | TID   | site | PlanType      | planyear | planYear | zipcode | isMultutiCounty | county          | plantype | planName                                            | cardtype | firstname              | lastname              | medicarenumber | ssnflag | partadate | partbdate | medicaidnumber | esrdflag | dob      | gender | permstreet    | permcity    | mailingaddressquestion | mailingstreet | mailingcity | mailingstate | mailingzip | email         | selectoptions                                                                                                                                                                                                                                       | optiondata                | pdpFlag | longTermFlag | riderflag     | emailConfirmation | goGreen | phoneno    | mobileno   | healthinsurancename | groupnumber | membernumber | prescriptioncoveragename | pdgroupnumber | pdmembernumber |rxBinnumber    | inputdataType | middlename         | authorizefirstN | authorizelastN | authorizeaddress | authorizeapartment | authorizecity | authorizezip | authorizephonenumber | authorizeRelationship | authorizestate | authorizationagree | permaptno | mailingaptno | authflag | paymentType | cardno  | cardexpirationmonth | cardexpirationyear |
       | 15503 | AARP | MA-MBI        | future   | future   |   33112 | NO              | Miami-Dade County| MA      |  AARP Medicare Advantage Patriot (Regional PPO)     | MBI      | TEST_PORTALS_GOTTFRIED | TEST_PORTALS_GARRAND  | 5N69QY6ET31    | false   |  09011997 |  11012002 |     0123456789 | true     | 04261944 | Male   | 003 Morris Rd | Los Angeles | No                     | 123 Test      | Edison      | FL           |      33112 | test@test.com | Medicare Advantage Open Enrollment Period (MA OEP)/change in my Medicaid (newly got Medicaid)/Medicare (or my state)/(or my state helps pay for my Medicare premiums)/major disaster (as declared by the Federal Emergency Management Agency (FEMA) | /12202018/12202018/ / /   |  yes    | yes          | false         | yes               | yes     | 1234567890 | 2345678901 | HealthInsurance     | HI1562759   | ABC12345DEF  | PrescriptionCoverage     | PD5646136     | BCD12345EFG    | 123456        |Valid          | [blank]            | Test_K          | Test_M         | 122 2ND AVE      |                655 | MINNEAPOLIS   |        55455 |           1235678901 | FRIEND                | MN             | Agree              |       566 |          677 | true     | [blank]     | [blank] | [blank]             | [blank]            |
