@@ -1102,6 +1102,9 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	}
 
 	public void viewPlanSummary(String planType) {
+		
+		clickonBackToPlanResults();	//navigate back to plan type selection page if not already
+		
 		if (planType.equalsIgnoreCase("PDP")) {
 			sleepBySec(2);
 
@@ -1148,6 +1151,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 
 		}
 		
+		//For prod checkout only
 		clickBackToViewAllPlans();
 	}
 
@@ -1658,7 +1662,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 		/*
 		 * if (backToPlanResults.isDisplayed()) { jsClickNew(backToPlanResults); }
 		 */
-		ElementData elementData = new ElementData("className", "module-plan-overview");
+//		ElementData elementData = new ElementData("className", "module-plan-overview");
+		ElementData elementData = new ElementData("xpath", "//*[contains(@class,'module-plan-overview')]");
 
 		if (planType.equalsIgnoreCase("PDP")) {
 
@@ -2004,8 +2009,8 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 			// iosScroll(enrollForPlan);
 			scrollToView(enrollForPlan);
 			validateNew(enrollForPlan);
-			jsClickNew(enrollForPlan);
-			// enrollForPlan.click();
+//			jsClickNew(enrollForPlan);
+			enrollForPlan.click();
 		}
 		sleepBySec(3);
 		CommonUtility.checkPageIsReadyNew(driver);
