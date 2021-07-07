@@ -564,6 +564,18 @@ public class PlanRecommendationEngineDoctorsPage extends GlobalWebElements {
 		validateLinksanotherWindow(curWindow, "Doctors", search, 1, locationCount);
 		threadsleep(5000);
 	}
+	
+	public void addZeroProviders(String doctorsName) {
+		jsClickNew(doctorLookupOption);
+		System.out.println("Lookup Type Clicked");
+		jsClickNew(continueBtn);
+		providerlookup(doctorsName, 1);
+		System.out.println("Validating " + page + " page Continue button functionality");
+		jsClickNew(modalDoctorsList.get(0).findElement(By.cssSelector("button[class*='secondary']")));
+		threadsleep(2000);
+		jsClickNew(modalContinuedoctors);
+		//desktopCommonUtils.nextPageValidation(page.toUpperCase());
+	}
 
 }
 

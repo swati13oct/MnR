@@ -100,6 +100,7 @@ public class PREBenefitsValidationStepDefinition {
 		XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
 		XSSFSheet sheet = workbook.getSheet(sheetName);
 		int lastRow = sheet.getLastRowNum();
+		System.out.println("Total Number of rows in " +sheetName +": " +lastRow);
 
 		//lastRow = 2;
 
