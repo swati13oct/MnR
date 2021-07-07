@@ -327,8 +327,9 @@ public class PlanPremiumPage extends UhcDriver{
 		//String actualText = null;
 		
 		try {
-			String Actual_Premium = paymentInformationMap.get("Plan Premium");
-			String expectedText = "0.00";
+			String Actual_Premium = paymentInformationMap.get("PlanPremium");
+			System.out.println("=====Premium value from Welcome OLE Page: "+Actual_Premium);
+			String expectedText = "$0.00";
 			//actualText = premium.getText();
 			flag = Actual_Premium.contains(expectedText);
 			if(!flag) {
