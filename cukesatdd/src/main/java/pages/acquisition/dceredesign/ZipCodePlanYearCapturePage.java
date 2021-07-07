@@ -34,7 +34,7 @@ public class ZipCodePlanYearCapturePage extends UhcDriver {
 	@FindBy(xpath = "//button[contains(@dtmname,'review drug costs') and contains(@class, 'uhc-button')]/span")
 	public WebElement continueBtn;
 	
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	@FindBy(css = "#site-wrapper > div.content-section > div > div.dceclient.parbase.section > app-root > app-dceplansummary > div.loading > app-loader > div > div > div:nth-child(2) > div > div > svg > circle.uhc-spinner__inner-circle")
