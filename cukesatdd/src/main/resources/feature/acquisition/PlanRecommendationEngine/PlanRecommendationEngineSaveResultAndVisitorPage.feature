@@ -176,7 +176,6 @@ Feature: Plan Recommendation Engine flow - Verify Save Results functionality and
       | User Name | <userName>      |
       | Password  | <password>      |
     Then user validate recommendation section in PRE Widget on VP
-    And user delete added drug in visitor profile
     Then user validate a "View ranked list of plans" buttons from PRE
 
     @regressionAARP

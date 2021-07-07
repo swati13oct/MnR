@@ -20,12 +20,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.planRecommendationEngine.ACQDrugCostEstimatorPage;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCommonutility;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineCoverageOptionPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDoctorsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineDrugsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineEditResponsePage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineHeaderAndFooter;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineLandingAndZipcodePages;
+import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineNewResultsPage;
 import pages.acquisition.planRecommendationEngine.PlanRecommendationEngineResultsPage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.planrecommendationengine.AdditionalServicesMobilePage;
@@ -41,6 +44,7 @@ import pages.mobile.acquisition.planrecommendationengine.LoadingMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PharmacyMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.PrioritiesMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.ResultsMobilePage;
+import pages.mobile.acquisition.planrecommendationengine.NewResultsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.SpecialNeedsMobilePage;
 import pages.mobile.acquisition.planrecommendationengine.TravelMobilePage;
 
@@ -625,6 +629,114 @@ public class PlanRecommendationStepDefinitionMobile {
 		prioritiesMobile.prioritiesElementsMobile();
 	}
 	
+/////////////////////////////////////////////////////// New Results Page //////////////////////////////
+	
+@Then("^user validate elements in PRE results page$")
+public void elements_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.preResultsUI(inputValues.get("Zip Code"),inputValues.get("CountyDropDown"));
+}
+
+@Then("^user validate pagination in PRE results page$")
+public void pagination_new_results_page_mobile() {
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validatePagination();
+}
+
+@Then("^user validate drugDetails in PRE results page$")
+public void drugDetails_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDrugInfo(inputValues.get("DrugInfo"),"tile");
+}
+
+@Then("^user validate doctors info in PRE results page$")
+	public void doctorDetails_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDoctorInfo(inputValues.get("DoctorsInfo"),"tile");
+	}
+
+@Then("^user validate snp info in PRE results page$")
+	public void snpDetails_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateSNPInfo(inputValues.get("SNPInfo"));
+	}
+
+@Then("^user views plan details from results page$")
+	public void viewDetails_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.viewPlanInfo(inputValues.get("planInfo"));
+	}
+
+@Then("^user views learn more from results page$")
+	public void learnMore_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.learnMore(inputValues.get("Learn More"));
+	}
+
+@Then("^user validate drugCostModal in PRE results page$")
+	public void drugDetailsModel_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDrugInfo(inputValues.get("DrugInfo"),"model");
+	}
+
+@Then("^user validate showmoreDrug in PRE results page$")
+	public void drugShowMore_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDrugInfo(inputValues.get("DrugInfo"),"show");
+	}
+
+@Then("^user validate showmoreDoctor in PRE results page$")
+	public void doctorShowMore_new_results_page_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	NewResultsMobilePage newResultpage =  new NewResultsMobilePage(wd);
+	newResultpage.validateDoctorInfo(inputValues.get("DoctorsInfo"),"show");
+	}
+
+@Then("^user clicks on GetStarted button in PRE page$")
+	public void PRE_GetStarted_mobile() {
+	LandingAndZipcodeMobilePage prelandingpage = new LandingAndZipcodeMobilePage(wd);
+	prelandingpage.navigatezipcodepagemobile();
+}
+
+@Then("^user navigate to PRE from vpp page$")
+	public void PRE_VPP_page_mobile() {
+	ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+	resultpage.navigatePRE();
+	}
+
+@Then("^user save recommendation results and validate in VP$")
+	public void save_results_mobile(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+	preEditMobile.validateSaveResults();
+}
+
+@Then("^user navigate to visitor profile and open PRE Widget$")
+public void pre_Widget_open(DataTable givenAttributes) {
+	readfeaturedataMobile(givenAttributes);
+	EditResponseMobilePage preEditMobile =  new EditResponseMobilePage(wd);
+	preEditMobile.ValidatePREWidget(inputValues.get("User Type"),inputValues.get("Plan Type"), inputValues.get("User Name"),inputValues.get("Password"));
+}
+
+@Then("^user validate recommendation section in PRE Widget on VP$")
+public void pre_Widget_recom() {
+	ResultsMobilePage resultpage =  new ResultsMobilePage(wd);
+	resultpage.recomPREWidget();
+}
+
+@Then("^user do browser back from current page$")
+	public void browser_back_mobile() {
+	System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
 	@When("^user navigate Plan Recommendation Engine Using Get Started From Medicare Articles$")
 	public void navigate_PRE_tool_MedicareArticles_mobile() {
 		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
@@ -713,5 +825,32 @@ public class PlanRecommendationStepDefinitionMobile {
    	public void verify_Plans_compare_page_mobile() {
 		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
 	}
+	
+	@When("^user navigate to Drug Cost Estimator page$")
+	public void navigate_DCE_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@And("^user validate druglist in Drug Cost Estimator page$")
+	public void Druglist_DCE_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate drugs details from VPP to DCE page$")
+	public void drugs_VPP_DCE_page_mobile(DataTable givenAttributes) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate drugs details from DCE to PRE page$")
+	public void drugs_DCE_VPP_PRE_page_mobile() {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+	}
+	
+	@Then("^user validate a \"([^\"]*)\" buttons from PRE$")
+   	public void btn_tab_mobile(String tabtype) {
+		System.out.println("This Step is specifically for Desktop.. Ignoring in Mobile Execution");
+   	}
+	
+	
 
 }
