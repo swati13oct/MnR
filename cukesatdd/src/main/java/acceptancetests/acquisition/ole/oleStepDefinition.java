@@ -3319,8 +3319,8 @@ public class oleStepDefinition {
 				Assertion.fail("Payment is failed");
 			}
 
-		}
 
+		}
 		else {
 			flag = planPremiumPage.validateNoMonthlyPremium();
 			/*if (flag) {

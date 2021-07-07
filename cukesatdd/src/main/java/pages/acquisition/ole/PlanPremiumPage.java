@@ -85,13 +85,13 @@ public class PlanPremiumPage extends UhcDriver{
 	@FindBy(xpath = "(//label[contains(@for, 'premiumPaymentQstnSSRRB')])[1]")
 	private WebElement socialSecurity;
 	
-	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
+	@FindBy(xpath="//div[contains(@id,'premiumPaymentQstn')]/div/p")
 	private WebElement payByMailText;
 	
 	@FindBy(id = "div_cardInfo")
 	private WebElement creditCardText;
 	
-	@FindBy(xpath="//div[@id='premiumPaymentQstn']/div/p")
+	@FindBy(xpath="//div[contains(@id,'premiumPaymentQstn')]/div/p")
 	private WebElement socialSecurityText;
 	
 	@FindBy(xpath="//span[@id='acceptedCardsSpan']")
@@ -202,11 +202,14 @@ public class PlanPremiumPage extends UhcDriver{
 		String expectedText = null;
 		try {
 		if(payByMail.isDisplayed())	{
+			System.out.println("Pay By Mail radio button is diplayed or not" +payByMail.isDisplayed());
 			jsClickNew(payByMail);
 			Thread.sleep(1000);
-			actualText = payByMailText.getText().trim();
+			actualText = payByMailText.getText().replaceAll("\u00A0"," ").trim();
+			System.out.println("Actual text for pay by mail is " +actualText);			
 			expectedText = CommonConstants.PAY_BY_MAIL_TEXT;
-			flag = actualText.equalsIgnoreCase(expectedText);
+			System.out.println("expected text for pay by mail is " +expectedText);
+			flag = actualText.contains(expectedText);
 			
 		}
 			
@@ -307,7 +310,7 @@ public class PlanPremiumPage extends UhcDriver{
 				Thread.sleep(1000);
 				actualText = socialSecurityText.getText().replaceAll("\u00A0"," ").trim();
 				expectedText = CommonConstants.SOCIAL_SECURITY_TEXT;
-				flag = actualText.equalsIgnoreCase(expectedText);
+				flag = actualText.contains(expectedText);
 				
 			}
 				
@@ -326,7 +329,7 @@ public class PlanPremiumPage extends UhcDriver{
 		boolean flag = false;
 		//String actualText = null;
 		
-		try {
+	//	try {
 			String Actual_Premium = paymentInformationMap.get("PlanPremium");
 			System.out.println("=====Premium value from Welcome OLE Page: "+Actual_Premium);
 			String expectedText = "$0.00";
@@ -334,12 +337,10 @@ public class PlanPremiumPage extends UhcDriver{
 			flag = Actual_Premium.contains(expectedText);
 			if(!flag) {
 			System.out.println("=====Premium is greater than 0=====");
-			}
-		} catch (Exception e) {
-			
 		}
-
+			//	} catch (Exception e) {
 			
+	//	}		
     return flag;
 	
 	}
