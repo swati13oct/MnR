@@ -209,7 +209,7 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 					driver.switchTo().window(winHandle);
 				}
 			}
-			
+			CommonUtility.checkPageIsReadyNew(driver);
 			String CurrentURL = driver.getCurrentUrl();
 			System.out.println("Currnt URL - "+CurrentURL);
 			if(CurrentURL.contains("post-error")){

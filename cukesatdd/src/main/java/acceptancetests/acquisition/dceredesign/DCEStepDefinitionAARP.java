@@ -1662,11 +1662,7 @@ public class DCEStepDefinitionAARP {
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String Premium = memberAttributesMap.get("Premium");
 		drugDetailsPage.validatePremium(Premium);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
@@ -1677,11 +1673,7 @@ public class DCEStepDefinitionAARP {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String Premium = memberAttributesMap.get("Premium");
 		String PlanType = memberAttributesMap.get("Plan Type");
 		String PlanName = memberAttributesMap.get("Plan Name");
@@ -1782,20 +1774,21 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String InsulinCopay = memberAttributesMap.get("InsulinCopay");
 		String InsulinDrug = memberAttributesMap.get("Insulin Drug");
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
-		drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
-		drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug, InsulinCopay);
-		drugDetailsPage.validateInsulinText_ImportantInfo();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
+		if(null==InsulinCopay || InsulinCopay.isEmpty()) {
+			System.out.println("Insulin Benefit not available for the plan");
+		}
+		else{
+			drugDetailsPage.validateInsulinTier_CopaySection(InsulinCopay);
+			drugDetailsPage.validateInsulinDrug_YourDrugs(InsulinDrug, InsulinCopay);
+			drugDetailsPage.validateInsulinText_ImportantInfo();
+			getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugDetails, drugDetailsPage);
 
+		}
 	}
 
 	@Then("^the user validates Covered Drug display for NC Pharmacy selection$")
@@ -1810,11 +1803,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-/*		List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String planName = memberAttributesMap.get("PlanName");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -1835,11 +1824,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String planName = memberAttributesMap.get("PlanName");
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
@@ -2514,11 +2499,7 @@ public class DCEStepDefinitionAARP {
 			DataTable arg1) throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(arg1);
-		/*List<DataTableRow> memberAttributesRow = arg1.getGherkinRows();
-		for (int i = 0; i < memberAttributesRow.size(); i++) {
-			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-					memberAttributesRow.get(i).getCells().get(1));
-		}*/
+
 		String CoveredDrug = memberAttributesMap.get("CoveredDrug");
 		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_DrugDetails);
@@ -3075,4 +3056,99 @@ public class DCEStepDefinitionAARP {
 		DrugSummaryPage drugSummaryPage = dceStepHeader.ClickStep3_NavigateDrugSummaryPage();
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
+
+	@When("user enters valid zipcode and county for Multi county as follows")
+	public void user_enters_valid_zipcode_and_county_for_multi_county_as_follows(io.cucumber.datatable.DataTable givenAttributes) throws InterruptedException {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+
+		String zipcode = memberAttributesMap.get("ZipCode");
+		String County = memberAttributesMap.get("County");
+		getLoginScenario().saveBean(VPPCommonConstants.ZIPCODE, zipcode);
+		ZipCodePlanYearCapturePage zipCodePlanYearPage = (ZipCodePlanYearCapturePage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		zipCodePlanYearPage.enterZipCodeandcounty(zipcode);
+		zipCodePlanYearPage.selectCounty(County);
+	}
+
+	@Then("the user validates Tier {int} Copay in copay section and in Your Drugs section")
+	public void the_user_validates_tier_copay_in_copay_section_and_in_your_drugs_section(Integer int1, io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String TierNo = "Tier "+String.valueOf(int1);
+		String TierCopay = memberAttributesMap.get("TierCopay");
+		System.out.println("Expected Tier - Copay : "+TierNo+" - "+TierCopay);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateTierCopay_CopaySection(TierNo,TierCopay);
+		drugDetailsPage.validateTierCopay_YourDrugsSection(TierNo,TierCopay);
+	}
+
+	@Then("the user validates the deductible as follows")
+	public void the_user_validates_the_deductible_as_follows(io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String Deductible = memberAttributesMap.get("Deductible");
+		System.out.println("Expected Deductible : "+Deductible);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDeductible_CopaySection(Deductible);
+	}
+
+	@Then("the user validates the text for coverage stages modal popups for Non-LIS Plans")
+	public void the_user_validates_the_text_for_coverage_stages_modal_popups_for_NonLIS() {
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateCoveragestagePopUpText();
+	}
+
+
+	@Then("the user validates Copay Section for LIS for defined standard plan for following")
+	public void the_user_validates_copay_section_for_lis_for_defined_standard_plan_for_following(io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String LIScopay = memberAttributesMap.get("LIScopay");
+		System.out.println("Expected LIS Copay for Defined Standard plan : "+LIScopay);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDefStandard_LIScopay(LIScopay);
+	}
+
+	@Then("the user validates Copay Section for non-LIS for defined standard plan for following")
+	public void the_user_validates_copay_section_for_non_lis_for_defined_standard_plan_for_following(io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String nonLIScopay = memberAttributesMap.get("NonLIScopay");
+		System.out.println("Expected LIS Copay for Defined Standard plan : "+nonLIScopay);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDefStandard_nonLIScopay(nonLIScopay);
+
+	}
+
+	@Then("the user validates deductible as follows for Defined Standard plans")
+	public void the_user_validates_deductible_as_follows_for_defined_standard_plans(io.cucumber.datatable.DataTable givenAttributes) {
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String deductible = memberAttributesMap.get("Deductible");
+		System.out.println("Expected Deductible for Defined Standard plan : "+deductible);
+		DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+				.getBean(PageConstants.DCE_Redesign_DrugDetails);
+		drugDetailsPage.validateDefStandard_Deductible(deductible);
+	}
+
+
+    @Then("the user validates the deductible stage modal text for plans having deductible as follows")
+    public void the_user_validates_the_deductible_stage_modal_text_for_plans_having_deductible_as_follows(io.cucumber.datatable.DataTable givenAttributes) {
+        Map<String, String> memberAttributesMap = new HashMap<String, String>();
+        memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+        String deductibleFlag = memberAttributesMap.get("DeductibleFlag");
+        System.out.println("Plan has a deductible and will show the deductible stage modal link : "+deductibleFlag);
+        DrugDetailsPage drugDetailsPage = (DrugDetailsPage) getLoginScenario()
+                .getBean(PageConstants.DCE_Redesign_DrugDetails);
+        if(deductibleFlag.equalsIgnoreCase("true") || deductibleFlag.equalsIgnoreCase("yes"))
+            drugDetailsPage.validateModalText_DeductibleStage(deductibleFlag);
+    }
+
+
 }
