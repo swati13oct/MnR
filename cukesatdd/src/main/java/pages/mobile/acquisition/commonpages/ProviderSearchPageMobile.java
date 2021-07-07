@@ -587,8 +587,8 @@ public class ProviderSearchPageMobile extends UhcDriver {
 	
 	public int entersZipcodeAndPlancount(String zipcode, String year) {
 
-		//validateNew(zipCodeTextfield);
-		waitforElementVisibilityInTime(zipCodeTextfield, 5);
+		pageloadcomplete();
+		waitforElementVisibilityInTime(zipCodeTextfield, 10);
 		zipCodeTextfield.sendKeys(zipcode);
 		//sendkeysMobile(zipCodeTextfield, zipcode);
 		validateNew(continueButton);
