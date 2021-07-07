@@ -249,7 +249,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
 
-	@FindBy(xpath = "//a[contains(@class, 'keepPharmacyLink')]")
+	@FindBy(xpath = "//button[contains(@class, 'keepPharmacyLink')]")
 	public WebElement keepUsingPharmBtn;
 
 	@FindBy(xpath = "//button[text()='Change Pharmacy']/ancestor::div/div/span")
@@ -1689,7 +1689,7 @@ public class DrugDetailsPage extends UhcDriver {
 		switchToGenericSubmitBtn.click();
 	}
 
-	@FindBy(xpath = "//table/tbody/tr/td[1]/div/div/img[contains(@src,'check-icon@2x.png')]")
+	@FindBy(xpath = "//*[contains(@id, 'drugtable')]//img[contains(@alt, 'Covered')]")
 	private WebElement switchToGenericIcon;
 
 	@FindBy(id = "cancelicon")

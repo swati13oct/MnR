@@ -35,7 +35,7 @@ public class PfizerFindaProviderPage extends UhcDriver{
 			PageFactory.initElements(driver, this);
 			openAndValidate();
 	}
-public Rallytool_Page findaphysicianpfizerclick() {
+public Rallytool_PageMobile findaphysicianpfizerclick() {
 			
 			validate(findaphysicianpfizerlink);
 			
@@ -45,7 +45,7 @@ public Rallytool_Page findaphysicianpfizerclick() {
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 			}
 			// TODO Auto-generated method stub
 			return null;

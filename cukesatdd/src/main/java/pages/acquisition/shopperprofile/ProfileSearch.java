@@ -30,7 +30,7 @@ public class ProfileSearch extends UhcDriver {
 	@FindBy(id = "authLastName")
 	private WebElement lastName;
 	
-	@FindBy(xpath = "//button[text()='Search Shopper']")
+	@FindBy(xpath = "//button[contains(text(),'Search Shopper')]")
 	private WebElement btnSearchShopper;
 	
 	@FindBy(xpath = "//button[contains(text(),'Profile')]")
@@ -39,11 +39,14 @@ public class ProfileSearch extends UhcDriver {
 	@FindAll({@FindBy(xpath = "//table/tbody/tr")})
 	private List<WebElement> searchResults;
 	
-	@FindBy(xpath="//table//button")
+	@FindBy(xpath="//i[@title='Cloak In']")
 	private WebElement btnCloakIn;
 	
 	@FindBy(id = "aarpSVGLogo")
 	public WebElement AARPlogo;
+	
+	@FindBy(id = "shopperZipCode")
+	private WebElement zipcode;
 	
 	@FindBy(css="input#visitorsEmail+div.invalid-field")
 	private WebElement emailError;
@@ -62,6 +65,12 @@ public class ProfileSearch extends UhcDriver {
 	
 	@FindBy(xpath="//a[text()='Non Member']")
 	private WebElement nonMemberTab;
+	
+	@FindBy(xpath="//a[contains(@href,'delete')]")
+	private WebElement deleteProfile;
+	
+	@FindBy(xpath = "//li/a[contains(@href,'search-profile')]")
+	private WebElement searchProfileTab;
 
 	public static final String DELETE_PROFILE_URL = "http://digital-checkout-team-e.ocp-elr-core-nonprod.optum.com/digital-checkout/guest/profile";
 	
@@ -95,6 +104,7 @@ public class ProfileSearch extends UhcDriver {
 		
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 45);
 		sendkeys(visitorEmail, email);
+		waitforElement(btnSearchShopper);
 		btnSearchShopper.click();
 		validateSearchProfileResults();
 	}
@@ -102,23 +112,22 @@ public class ProfileSearch extends UhcDriver {
 	/**
 	 * Search Profile and Delete for a member
 	 * @param email
-	 * @param dob
-	 * @param mbi
 	 */
-	public void searchProfileAndDelete(String email,String dob,String mbi) {
+	public void searchProfileAndDelete(String email) {
 		
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		sendkeys(visitorEmail, email);
-		btnSearchShopper.click();
+		//btnSearchShopper.click();
+		jsClickNew(btnSearchShopper);
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		if(searchResults.size()>0) {
 			DeleteProfile deleteProfile = new DeleteProfile(driver);
 			deleteProfile.deleteAProfile(email);
-			backToProfileSearch.click();
-			CommonUtility.checkPageIsReadyNew(driver);
+			jsClickNew(searchProfileTab);
 			CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 			sendkeys(visitorEmail, email);
-			btnSearchShopper.click();
+			//btnSearchShopper.click();
+			jsClickNew(btnSearchShopper);
 		}else {
 			CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 20);
 			System.out.println("########No user found########");
@@ -131,8 +140,9 @@ public class ProfileSearch extends UhcDriver {
 	 */
 	public MemberCreateProfile clickOnCreateProfile() {
 			try {
-				btnCreateProfile.click();
-				Thread.sleep(5000);
+				//btnCreateProfile.click();
+				jsClickNew(btnCreateProfile);
+				sleepBySec(5);
 				if(driver.getCurrentUrl().contains("create-profile")) {
 					return new MemberCreateProfile(driver);
 				}else {
@@ -253,13 +263,6 @@ public class ProfileSearch extends UhcDriver {
 	 */
 	public void searchProfileAndDeleteNonMember(HashMap<String,String> givenAttributesMap) {
 		
-		/*Map<String, String> givenAttributesMap = new HashMap<String, String>();
-		List<DataTableRow> givenAttributesRow = nonMemberDetails.getGherkinRows();
-		for (int i = 0; i < givenAttributesRow.size(); i++) {
-
-			givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-					givenAttributesRow.get(i).getCells().get(1));
-		}*/
 		String emailID = givenAttributesMap.get("Email");
 		CommonUtility.waitForPageLoadNew(driver, visitorEmail, 20);
 		sendkeys(visitorEmail, emailID);
@@ -276,5 +279,17 @@ public class ProfileSearch extends UhcDriver {
 			CommonUtility.waitForPageLoadNew(driver, btnCreateProfile, 20);
 			System.out.println("########No user found########");
 		}
+	}
+	
+	public CloakProfile cloakProfile() {
+		btnCloakIn.click();
+		CommonUtility.waitForPageLoadNew(driver, zipcode, 20);
+		if(driver.getCurrentUrl().contains("cloak-profile")) {
+			return new CloakProfile(driver);
+		}else {
+			System.out.println("Cloak In failed. No user found");
+			return null;
+		}
+		
 	}
 }

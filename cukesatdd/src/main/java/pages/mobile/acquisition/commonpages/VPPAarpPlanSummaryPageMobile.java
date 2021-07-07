@@ -394,11 +394,11 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 	}
 
 	
-	public GetStartedPage navigateToSummaryPage(String planType) {
+	public GetStartedPageMobile navigateToSummaryPage(String planType) {
 		if (planType.equalsIgnoreCase("PDP")) {
 			showPdpPlans.click();
 		} 
-		return new GetStartedPage(driver);
+		return new GetStartedPageMobile(driver);
 	}
 
     public ManageDrugPageMobile navigateToEditDrugList(String planName) {
@@ -430,7 +430,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 		return null;
 	}
 
-	public ProviderSearchPage clicksOnIsProviderCovered(String planName) {
+	public ProviderSearchPageMobile clicksOnIsProviderCovered(String planName) {
 		
 		ElementData elementData = new ElementData("id", "doctorCoverMA");
 		for (WebElement plan : maPlanElement) {
@@ -449,7 +449,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 		switchToNewIframe("providerSearchFrame");
 		if (pageHeader.getText().equalsIgnoreCase("Find a Physician, Medical Group, Clinic or Facility"))
 		{
-			return new ProviderSearchPage(driver);
+			return new ProviderSearchPageMobile(driver);
 		}
 		return null;
 		/*for (WebElement physcianSearchType : physcianSearchTypes) {
@@ -602,7 +602,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 		return false;
 	}
 	
-	public GetStartedPage clicksOnEnterDrugInformationLink(String planName) {
+	public GetStartedPageMobile clicksOnEnterDrugInformationLink(String planName) {
 		if (planName.contains("HMO")) {
 			for (WebElement plan : maPlanElement) {
 			if (plan.getText().contains(planName)) {
@@ -624,7 +624,7 @@ public class VPPAarpPlanSummaryPageMobile extends UhcDriver {
 			
 			if (driver.getTitle().equalsIgnoreCase(
 			"Our Medicare Plan Types | AARP® Medicare Plans from UnitedHealthcare®")) {
-			return new GetStartedPage(driver);
+			return new GetStartedPageMobile(driver);
 			}
 		
 	

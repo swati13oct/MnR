@@ -34,7 +34,7 @@ public class NcshpFindaProviderPage extends UhcDriver {
 		openAndValidate();
 	}
 
-	public Rallytool_Page findaphysicianncshpclick() {
+	public Rallytool_PageMobile findaphysicianncshpclick() {
 
 		validate(findaphysicianncshplink);
 
@@ -44,7 +44,7 @@ public class NcshpFindaProviderPage extends UhcDriver {
 		driver.switchTo().window(tabs.get(1));
 
 		if (getTitle().equalsIgnoreCase("Enter Zip")) {
-			return new Rallytool_Page(driver);
+			return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

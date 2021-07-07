@@ -31,7 +31,7 @@ public class KTRSSiteMapPage extends UhcDriver{
 	
 	private WebElement ktrssitemappagefindaproviderlink;
 	
-	public Rallytool_Page findaproviderktrssitemapclick() {
+	public Rallytool_PageMobile findaproviderktrssitemapclick() {
 		
 		validate(ktrssitemappagefindaproviderlink);
 		
@@ -41,7 +41,7 @@ public class KTRSSiteMapPage extends UhcDriver{
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;
