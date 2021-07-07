@@ -181,7 +181,7 @@ public class WelcomePage extends UhcDriver{
 	}
 
 	public boolean validate_plan_details(Map<String, String> planDetailsMap) throws InterruptedException {
-		boolean flag = true;
+		boolean flag = false;
 		String PlanYear_PlanName_Text = PlanYear_PlanName.getText();
 		String Zip_County_Text = ZipCode_County.getText();
 		String Premium = PremiumDisplay.getText();
@@ -205,12 +205,12 @@ public class WelcomePage extends UhcDriver{
 				flag = driver.getCurrentUrl().contains("welcome");
 				if (flag){
 					flag = PlanYear_PlanName_Text.contains(Expected_PlanName)
-							&& Zip_County_Text.contains(Expected_ZipCode);
+							&& Zip_County_Text.contains(Expected_ZipCode) && Premium.contains(Expected_Premium);
 				}
 
 			}
 		}
-
+		
 		System.out.println("Plan Details are Validated : "+flag);
 		return flag;
 			
@@ -594,17 +594,16 @@ public class WelcomePage extends UhcDriver{
 	}
 	
 	public String GetMonthlyPremiumValue() {
-		String premiumValue = null;
+		
 		if (validateNew(PremiumDisplay, 45)) {
-	
-			 premiumValue = PremiumDisplay.getText();
-			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +premiumValue );
-			
+		//	System.out.println("Monthly Premium is displayed on Welcome OLE Page");
+			String Monthly_Premium = PremiumDisplay.getText();
+			System.out.println("Monthly Premium is displayed on Welcome OLE Page" +Monthly_Premium );
+			return Monthly_Premium;
 		}
-		else {
 		System.out.println("Monthly Premium is not displayed on Welcome OLE Page");
-		}
-		return premiumValue;
+
+		return null;
 	}
 	public boolean validate_plan_details_CSNP(Map<String, String> planDetailsMap) throws InterruptedException {
 		boolean flag = false;
