@@ -13,13 +13,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
 
 import acceptancetests.util.CommonUtility;
 import atdd.framework.Assertion;
 import atdd.framework.MRScenario;
-import pages.acquisition.dceredesign.GetStartedPage;
-import pages.acquisition.pharmacyLocator.PharmacySearchPage;
+import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
 
 public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 

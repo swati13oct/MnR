@@ -142,5 +142,13 @@ public class GetStartedPageMobile extends UhcDriver {
 		return null;
 
 	}
+	
+	@FindBy(xpath = "//a[@class='uhc-link-button']/span")
+	private WebElement breadCrumbLink;
+
+	public void validateBreadCrumb(String breadCrumb) {
+		Assertion.assertTrue("Expected breadcrumb " + breadCrumb + " is not displayed",
+				breadCrumbLink.getText().equals(breadCrumb));
+	}
 
 }
