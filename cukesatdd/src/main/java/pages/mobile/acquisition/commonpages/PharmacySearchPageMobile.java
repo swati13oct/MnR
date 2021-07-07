@@ -309,7 +309,13 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		waitForPageLoadSafari();
 		scrollToView(mapToggleElement);
 //		moveMouseToElement(mapToggleElement);
-		jsMouseOver(mapToggleElement);
+//		jsMouseOver(mapToggleElement);
+		
+		boolean isFilterExpanded = Boolean.parseBoolean(CommonUtility.getElementAttribute(filterToggle,"aria-expanded"));
+		
+		if(!isFilterExpanded) {
+			jsClickNew(filterToggle);
+		}
 
 		String targetTooltipName = "Standard Network Pharmacy";
 		String testXpath = "//input[@id='pharmacy-standard']/../span//*[local-name() = 'svg']";
@@ -408,7 +414,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		System.out.println("Proceed to mouse over '" + targetTooltipName + "' element...");
 		scrollToView(testTooltip);
 
-/*//		moveMouseToElement(testTooltip);//note: then move mouse over to target element
+//		moveMouseToElement(testTooltip);//note: then move mouse over to target element
 
 		jsMouseOver(testTooltip); // note: then move mouse over to target element
 
@@ -423,7 +429,7 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 		}
 
 //		moveMouseToElement(moveAwayFromTooltip); //note: move away for tooltip to disappear
-		jsMouseOut(testTooltip);*/
+		jsMouseOut(testTooltip);
 
 	}
 	
