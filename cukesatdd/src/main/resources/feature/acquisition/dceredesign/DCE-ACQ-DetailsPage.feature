@@ -1,4 +1,4 @@
-@dce @dce_redesign_DrugDetailsValidation1
+@dce @dce_redesign_DrugDetailsValidation
 Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Details Page Flows
 
   @dce_DrugDetailsValidation
@@ -187,7 +187,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | vigabatrin | Fanapt |   33111 | SNP      | Preferred Special Care Miami-Dade (HMO C-SNP) | UHC  | Standard Retail | Standard Mail    |           78006 | ROCK PHARMACY  | insulin lispro | $15          | $45           |
 
   @dce_DrugDetailsPremiumValidation
-  Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium for plantype-<plantype> for premium - <premium>
+  Scenario Outline: To verify DCE Details Page  <site> site - for MS dollor Zero or Range Premium for plantype-<planType> for premium - <premium>
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |
@@ -249,7 +249,6 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | Plan Name | <planName> |
     Then the user validates planName matches plan Name in VPP
     Then the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page
-  #    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
     Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
     Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug1> |
@@ -268,7 +267,7 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | Fanapt | Lipitor |   10001 | SNP      | UnitedHealthcare Dual Complete (HMO D-SNP) | UHC  |
 
   @dce_DrugDetailsNonBuyDownLIS
-  Scenario Outline: To verify DCE Details Page  <site> site - for LIS Non Buydown Plans
+  Scenario Outline: To verify DCE Details Page  <site> site - for LIS Non Buydown Defined Standard Plans
     #Given the user is on AARP medicare acquisition site landing page
     Given the user is on medicare acquisition site landing page
       | Site | <site> |

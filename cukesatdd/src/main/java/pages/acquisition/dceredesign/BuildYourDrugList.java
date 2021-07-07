@@ -61,7 +61,7 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = " (//button[contains(@dtmname,'Return to Compare') and not(contains(@class, 'ng-star-inserted'))]//*[contains(text(),'Return to Compare')])[1]")
+	@FindBy(xpath = "//button[contains(@dtmname, 'search')]//following-sibling::button[contains(@dtmname,'Return to Compare')]")
 	public WebElement returnToCompareBtn;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
