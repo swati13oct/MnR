@@ -808,5 +808,22 @@ public class GlobalComponentsCommonStepDefinition {
 			Assertion.fail("Home page not found");
 		}
 	}
+	
+	@When("^user updates the state drop down value on the home page$")
+	public void user_vaidates_the_state_drop_down_link_on_home_page(DataTable givenAttributes) throws Throwable {
+		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
+				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		/*List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+		for (int i = 0; i < memberAttributesRow.size(); i++) {
+			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+					memberAttributesRow.get(i).getCells().get(1));
+		}*/
+		String state = memberAttributesMap.get("State");
+		String code = memberAttributesMap.get("Code");
+		aquisitionhomepage.validatestatedropDown(state,code);
+		getLoginScenario().saveBean(CommonConstants.STATE_SELECTED, state);
+	}
 
 }

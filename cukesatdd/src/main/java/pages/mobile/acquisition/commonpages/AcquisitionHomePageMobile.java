@@ -280,7 +280,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "medicareTitle")
 	public WebElement siteMapHeader;
 
-	@FindBy(xpath = "//*[contains(@dtmname,'Privacy')]//*[contains(text(),'Privacy Policy')]")
+	@FindBy(xpath = "//*[contains(@class,'heading-1') and contains(text(),'Privacy Policy')]")
 	public WebElement privacyHeader;
 
 	@FindBy(xpath = "//h1//*[contains(text(),'Health Insurance Broker & Agent Tools')]")
@@ -1037,6 +1037,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public AboutUsAARPPageMobile aboutUsFooterClick() {
+		//jsClickNew(more);
 		validateNew(footerAboutUsLink);
 		iosScroll(footerAboutUsLink);
 		jsClickNew(footerAboutUsLink);
@@ -1077,6 +1078,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	}
 
 	public ContactUsAARPPageMobile contactUsFooterClick() {
+		jsClickNew(more);
 		validateNew(footerContactUsLink);
 		// footerContactUsLink.click();
 		jsClickNew(footerContactUsLink);
@@ -3406,7 +3408,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//div[contains(text(),'Accessibility')]")
+	@FindBy(xpath = "//*[contains(text(),'Accessibility')]")
 	private WebElement Accessibility;
 
 	public void Accessibility() {
@@ -3463,19 +3465,19 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		}
 	}
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_1']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-advantage-plans')]")
 	private WebElement MedicareAdvantagePlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_2']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'dual-special-needs-plans')]")
 	private WebElement DualSpecialNeedsPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_3']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-supplement-plans')]")
 	private WebElement MedicareSupplementInsurancePlans;
 
-	@FindBy(xpath = "//span[contains(text(),'Medicare Prescription Drug Plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement MedicarePrescriptionDrugPlans;
 
-	@FindBy(xpath = "//a[@id='gfn_lnk_row2_5']")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
 	private WebElement footerMedicarePrescriptionDrugPlans;
 
 	@FindBy(xpath = "//span[contains(text(),'Medicare Education')]")
@@ -4356,6 +4358,18 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 			}
 		}
 		driver.switchTo().window(base);
+	}
+	
+	public void validatestatedropDown(String state, String code) {
+		validateNew(stateDropDown);
+		selectFromDropDownByValue(stateDropDown, state);
+		/*
+		 * String StateSessionStorage = returnDriverStorageJS("sessionStorage",
+		 * "ucp_geotrackingState"); System.out.println("State selected : " + state);
+		 * System.out.println("State GeoSessionStorage value : " + StateSessionStorage);
+		 * Assertion.assertTrue("Gesolocation State validation Failed ",
+		 * StateSessionStorage.equalsIgnoreCase(code));
+		 */
 	}
 
 }

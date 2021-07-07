@@ -24,10 +24,10 @@ public class GlobalWebElements extends UhcDriver {
 	public WebElement footerHomeLink;
 
 	// @FindBy(id = "gf_lnk_2")
-	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'about-us')]")
 	public WebElement footerAboutUsLink;
 
-	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'contact-us')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'contact-us')]")
 	public WebElement footerContactUsLink;
 
 	@FindBy(xpath = "//*[@class='footer-bottom']//a[contains(@href,'sitemap')]")
@@ -58,7 +58,8 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBys(value = { @FindBy(id = "footnotes1") })
 	public WebElement footnotesContent;
 
-	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'medicare-advantage-plans')]")
+	//@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'medicare-advantage-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-advantage-plans')]")
 	public WebElement medicareAdvantagePlansLink;
 
 	@FindBy(xpath = "//div[contains(text(),'Shop Plans')]")
@@ -73,16 +74,16 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'More')]")
 	public WebElement more;
 
-	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'dual-special-needs-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'dual-special-needs-plans')]")
 	public WebElement medicareSpecialNeedsPlansLink;
 
-	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'medicare-supplement-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'medicare-supplement-plans')]")
 	public WebElement medicareSupplementInsurancePlansLink;
 
 	@FindBy(xpath = "//span[@class='meded-article-header__title' and contains(text(),'Medicare Supplement')]")
 	public WebElement medicareSupplementInsurancePlansHeader;
 
-	@FindBy(xpath = "//*[@id='shop-plans-list-heading']//..//a[contains(@href,'prescription-drug-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-1-content']//..//a[contains(@href,'prescription-drug-plans')]")
 	public WebElement medicarePrescriptionDrug_PlansLink;
 
 	@FindBy(id = "gfn_lnk_row3_1")
@@ -259,37 +260,37 @@ public class GlobalWebElements extends UhcDriver {
 	@FindBy(xpath = "//*[@id='planTypesColumn']/h3[3]/a")
 	public WebElement menuShop;
 
-	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'plan-recommendation')]")
+	@FindBy(xpath = "//*[@id='accordion-2-content']//..//a[contains(@href,'plan-recommendation')]")
 	public WebElement planRecommendationLink;
 
-	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'estimate-drug-costs')]")
+	@FindBy(xpath = "//*[@id='accordion-2-content']//..//a[contains(@href,'estimate-drug-costs')]")
 	public WebElement drugCostEstimatorLink;
 
-	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@href,'Pharmacy-Search-English')]")
+	@FindBy(xpath = "//*[@id='accordion-2-content']//..//a[contains(@href,'Pharmacy-Search-English')]")
 	public WebElement pharmacySearchLink;
 
-	@FindBy(xpath = "//*[@id='tools-resources-list-heading']//..//a[contains(@onclick,'loadCachedProviderSearch();')]")
+	@FindBy(xpath = "//*[@id='accordion-2-content']//..//a[contains(@onclick,'loadCachedProviderSearch();')]")
 	public WebElement providerSearchLink;
 
-	@FindBy(xpath = "(//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-education')])[1]")
+	@FindBy(xpath = "(//*[@id='accordion-3-content']//..//a[contains(@href,'medicare-education')])[1]")
 	public WebElement introductioMedicareLink;
 
-	@FindBy(xpath = "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-eligibility')]")
+	@FindBy(xpath = "//*[@id='accordion-3-content']//..//a[contains(@href,'medicare-eligibility')]")
 	public WebElement eligibilityLink;
 
-	@FindBy(xpath = "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-parts-and-medigap-plans')]")
+	@FindBy(xpath = "//*[@id='accordion-3-content']//..//a[contains(@href,'medicare-parts-and-medigap-plans')]")
 	public WebElement coverageChoiceLink;
 
-	@FindBy(xpath = "//*[@id='learn-about-medicare-list-heading']//..//a[contains(@href,'medicare-faq')]")
+	@FindBy(xpath = "//*[@id='accordion-3-content']//..//a[contains(@href,'medicare-faq')]")
 	public WebElement medicareFaqLink;
 
-	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'about-us')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'about-us')]")
 	public WebElement aboutLink;
 
-	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'contact-us')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'contact-us')]")
 	public WebElement contactLink;
 
-	@FindBy(xpath = "//*[@id='more-list-heading']//..//a[contains(@href,'language-assistance')]")
+	@FindBy(xpath = "//*[@id='accordion-4-content']//..//a[contains(@href,'language-assistance')]")
 	public WebElement languageAssistanceLink;
 
 	public void ourPlansHover() {
