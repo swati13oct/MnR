@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.WeakHashMap;
+import java.util.HashMap;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -113,7 +113,7 @@ public class VppPlanValidationStepDefinition {
 				 String currentCellValue = "";
 				 String currentColName = "";
 				  
-				 WeakHashMap <String, String> benefitsMap = new WeakHashMap<String, String>();
+				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
 				 
 				 //Looping over total rows with values
@@ -129,7 +129,7 @@ public class VppPlanValidationStepDefinition {
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
-		                	WeakHashMap <Boolean, String> resultMap = new WeakHashMap<Boolean, String>(); 
+		                	HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
 		                	 boolean valueMatches = true;
 		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 				             
@@ -268,8 +268,8 @@ public class VppPlanValidationStepDefinition {
 				 String currentCellValue = "";
 				 String currentColName = "";
 				 
-				 WeakHashMap <String, String> benefitsMap = new WeakHashMap<String, String>();
-				 WeakHashMap <String, String> benefitsDetailMap = new WeakHashMap<String, String>();
+				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
+				 HashMap <String, String> benefitsDetailMap = new HashMap<String, String>();
 
 				TreeMap<String, String> benefitsDetailMapSorted = new TreeMap<String, String>();
 				 //Looping over total rows with values
@@ -284,7 +284,7 @@ public class VppPlanValidationStepDefinition {
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
-		                	WeakHashMap <Boolean, String> resultMap = new WeakHashMap<Boolean, String>(); 
+		                	HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
 		                	 boolean valueMatches = true;
 		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 				             
@@ -362,7 +362,7 @@ public class VppPlanValidationStepDefinition {
 											else {
 												newCell.setCellStyle(styleFailed);
 
-												WeakHashMap<Boolean, String> resultDetailMap = new WeakHashMap<Boolean, String>();
+												HashMap<Boolean, String> resultDetailMap = new HashMap<Boolean, String>();
 												String formatedCellValue = currentCellValue;
 												String existingUIValue, OONValue, INNValue = "";
 
@@ -518,7 +518,7 @@ public class VppPlanValidationStepDefinition {
 				// int countyCellNum = 8, planYearCellNum = 10, planNameCellNum = 6; //to be used when running a random row number
 				// int countyCellNum =3, planYearCellNum = 5, planNameCellNum = 2; // to be used for PDP sheets when running a random row number on local
 				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0;
-				 WeakHashMap <String, String> benefitsMap = new WeakHashMap<String, String>();
+				 HashMap <String, String> benefitsMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
@@ -532,7 +532,7 @@ public class VppPlanValidationStepDefinition {
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) 
 		                {
-		                	WeakHashMap <Boolean, String> resultMap = new WeakHashMap<Boolean, String>(); 
+		                	HashMap <Boolean, String> resultMap = new HashMap<Boolean, String>(); 
 		                	boolean valueMatches = true;
 		                	 HSSFCell cell = (HSSFCell) cellIterator.next();
 				             
@@ -671,7 +671,7 @@ public class VppPlanValidationStepDefinition {
 				 String currentCellValue = "";
 				 String currentColName = "";
 				 int countyCellNum = 0, planYearCellNum =0, planNameCellNum = 0, planTypeCellNum = 0;
-				 WeakHashMap <String, String> premiumMap = new WeakHashMap<String, String>();
+				 HashMap <String, String> premiumMap = new HashMap<String, String>();
 				 System.out.println(sheetName+ " SAUCE URL: "+ getLoginScenario().returnJobURL());
 				 //Looping over total rows with values
 				 for(int rowIndex=0; rowIndex<=lastRow; rowIndex++)
@@ -684,7 +684,7 @@ public class VppPlanValidationStepDefinition {
 
 		                //looping through columns until an empty column is found
 		                while (cellIterator.hasNext()) {
-							WeakHashMap<Boolean, String> resultMap = new WeakHashMap<Boolean, String>();
+							HashMap<Boolean, String> resultMap = new HashMap<Boolean, String>();
 							boolean valueMatches = true;
 							HSSFCell cell = (HSSFCell) cellIterator.next();
 
