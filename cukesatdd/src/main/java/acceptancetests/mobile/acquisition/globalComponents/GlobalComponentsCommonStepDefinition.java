@@ -38,6 +38,7 @@ import pages.mobile.acquisition.commonpages.MedicareSupplementInsurancePlansPage
 import pages.mobile.acquisition.commonpages.PrescriptionsProvidersBenefitsPageMobile;
 import pages.mobile.acquisition.commonpages.PrivacyPolicyAARPPageMobile;
 import pages.mobile.acquisition.commonpages.ProviderSearchPageMobile;
+import pages.mobile.acquisition.commonpages.ShopForPlanNavigationPageMobile;
 import pages.mobile.acquisition.commonpages.SiteMapAARPPageMobile;
 import pages.mobile.acquisition.commonpages.TermsnConditionsAARPPageMobile;
 import pages.mobile.acquisition.dceredesign.GetStartedPageMobile;
@@ -182,12 +183,13 @@ public class GlobalComponentsCommonStepDefinition {
 	public void the_USer_validates_Shop_for_a_Plan_Navigation_links() throws Throwable {
 		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		if (aquisitionhomepage != null) {
-
-			aquisitionhomepage.validateSubNavShopPlanLinks();
+		ShopForPlanNavigationPageMobile shopPlanNavigation = aquisitionhomepage.openShopForPlanFromMenu();
+		if (shopPlanNavigation != null) {
+			Assert.assertTrue(shopPlanNavigation.validateShopForPlanMenu(), "Shop for plan menu validation failed");
+			Assert.assertTrue(shopPlanNavigation.validatePlanTypeMenu(), "Plan Type menu validation failed");
+			Assert.assertTrue(shopPlanNavigation.validateToolsMenu(), "Tools menu validation failed");
 		} else {
-			Assertion.fail("Home Page not Loading");
+			Assertion.fail("Shop for plan sub nav did not open");
 		}
 	}
 

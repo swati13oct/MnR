@@ -377,7 +377,7 @@ public class WelcomePageMobile extends UhcDriver {
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			String fileHref = EnrollmentChecklistLink.getAttribute("href").trim();
-			String fileName = fileHref.substring(fileHref.lastIndexOf("/") + 1);
+			String fileName = fileHref.substring(fileHref.lastIndexOf("/") + 1).split("\\.")[0];
 			grantMemoryAccessOnAndroidChrome(EnrollmentChecklistLink);
 			byte[] pdfContent = getDownloadedPdfFileContentAndroid(fileName);
 			document = PDDocument.load(pdfContent);
@@ -436,7 +436,7 @@ public class WelcomePageMobile extends UhcDriver {
 
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			String fileHref = ListaVerificationLink.getAttribute("href").trim();
-			String fileName = fileHref.substring(fileHref.lastIndexOf("/") + 1);
+			String fileName = fileHref.substring(fileHref.lastIndexOf("/") + 1).split("\\.")[0];
 			grantMemoryAccessOnAndroidChrome(ListaVerificationLink);
 			byte[] pdfContent = getDownloadedPdfFileContentAndroid(fileName);
 			document = PDDocument.load(pdfContent);

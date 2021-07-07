@@ -41,8 +41,9 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 	public void clicks_on_Review_drug_cost_button() {
 		BuildYourDrugListMobile buildDrugList = (BuildYourDrugListMobile) getLoginScenario()
 				.getBean(PageConstants.DCE_Redesign_BuildDrugList);
-		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = buildDrugList.navigateToZipEntryPage();
-		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
+		/*ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = buildDrugList.navigateToZipEntryPage();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);*/
+		buildDrugList.clickReviewDrugCostBtn();
 	}
 
 	@Then("^user should be navigated to zipcode and plan year capture page for AEP on UHC$")

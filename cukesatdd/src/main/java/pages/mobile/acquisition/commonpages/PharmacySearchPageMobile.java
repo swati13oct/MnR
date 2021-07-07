@@ -294,11 +294,12 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	public GetStartedPageMobile navigateToDCE() {
 		scrollToView(DCELink);
 		validateNew(DCELink);
-		JavascriptExecutor executor = (JavascriptExecutor) driver;
+		jsClickNew(DCELink);
+		/*JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", DCELink);
-		DCELink.click();
+		DCELink.click();*/
 		CommonUtility.checkPageIsReadyNew(driver);
-		if (validateNew(AddMyDrugsBtn))
+		if (validate(AddMyDrugsBtn))
 			return new GetStartedPageMobile(driver);
 		return null;
 	}
@@ -758,12 +759,13 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	}
 
 	public void selectsPlanName(String planName, String testSiteUrl) {
-		scrollToView(seletPlandropdown);
+		/*scrollToView(seletPlandropdown);
 		waitTllOptionsAvailableInDropdown(seletPlandropdown, 45);
 		// seletPlandropdown.click();
 		jsClickNew(seletPlandropdown);
 		sleepBySec(1);
-		selectFromDropDownByText(driver, seletPlandropdown, planName);
+		selectFromDropDownByText(driver, seletPlandropdown, planName);*/
+		mobileSelectOption(seletPlandropdown, planName, true);
 		sleepBySec(2);
 		if (!loadingBlock.isEmpty())
 			// waitforElementDisapper(By.className("loading-block"), 90);

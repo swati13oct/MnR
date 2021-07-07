@@ -79,14 +79,9 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		return null;
 	}
 
-	public void enterZipDistanceDetails(String zipcode, String distance, String county) {
-
-		sendkeysMobile(zipcodeField, zipcode);
-		// planTypeDropDownTitle.click();
-		System.out.println("zipcode entered");
-		jsClickNew(planTypeDropDownTitle);
+	public List<String> enterZipDistanceDetails(String zipcode, String distance, String county) {
 		CommonUtility.waitForPageLoad(driver, distanceDropownID, 5);
-		// List<String> testNote=new ArrayList<String>();
+		List<String> testNote = new ArrayList<String>();
 		String regex = "^[0-9]{5}(?:-[0-9]{4})?$";
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(zipcode);
@@ -98,14 +93,16 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 			distance = distance + " miles";
 		sleepBySec(3);
 		CommonUtility.waitForPageLoadNew(driver, distanceDropownID, 60);
+		scrollToView(distanceDropownID);
 		// selectFromDropDownByText(driver, distanceDropownID, distance);
 		mobileSelectOption(distanceDropownID, distance, true);
 		sleepBySec(3);
 		String initialZipVal = zipcodeField.getAttribute("value");
+		System.out.println("initialZipVal is : " + initialZipVal);
 		CommonUtility.waitForPageLoadNew(driver, zipcodeField, 60);
 		validateNoresultsZipcodeError(zipcode);
 		CommonUtility.waitForPageLoadNewForClick(driver, searchbtn, 60);
-		// searchbtn.click();
+
 		if (matcher.matches()) {
 			CommonUtility.waitForPageLoad(driver, countyModal, 10);
 			if (county.equalsIgnoreCase("None")) {
@@ -120,7 +117,15 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 							"PROBLEM - expects zipcode '" + zipcode
 									+ "' with multi-county but county selection popup is NOT showing",
 							pharmacyValidate(countyModal));
-					driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']")).click();
+					WebElement countyOption = driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+					jsClickNew(countyOption);
+					CommonUtility.checkPageIsReadyNew(driver);
+					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
+																							// afterward
+				} else if (validate(countyModal)) {
+					pharmacyValidate(countyModal);
+					WebElement countyOption = driver.findElement(By.xpath("//div[@id='selectCounty']//a[text()='" + county + "']"));
+					jsClickNew(countyOption);
 					CommonUtility.checkPageIsReadyNew(driver);
 					CommonUtility.waitForPageLoadNew(driver, pharmacylocatorheader, 10); // note: should be on vpp page
 																							// afterward
@@ -130,28 +135,29 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 							!pharmacyValidate(countyModal));
 				}
 			}
-			System.out.println("*****Zipcode, distance and County details are entered******");
+			System.out.println("*****County details are entered******");
 		} else {
-			System.out.println("*****Zipcode, distance details are entered but zip format is not right******");
+			System.out.println("*****Zip format is not right******");
 		}
-		// return testNote;
+		return testNote;
 	}
 
 	public void validateNoresultsZipcodeError(String zipcode) {
 		zipcodeField.clear();
 		sleepBySec(8);
-		scrollToView(zipcodeField);
-		zipcodeField.sendKeys(zipcode);
-		System.out.println("checking for the second time while entering zipcode");
-		// mobileactionsendkeys(zipcodeField, zipcode);
-		// if(zipcode.length()!=5){
-		// distanceOption_15miles.click();
-		jsClickNew(distanceOption_15miles);
-		// }
-		// searchbtn.click();
-		// CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
-		// Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message",
-		// pharmacyValidate(zipcodeErrorMessage));
+
+		sendkeysMobile(zipcodeField, zipcode);
+		if(zipcode.length()!=5){
+//			jsClickNew(zipCodeFieldLabel);
+			zipCodeFieldLabel.click();
+			sleepBySec(2);
+			/*jsMouseOver(distanceDropDownField);
+			distanceDropDownField.click();
+			distanceOption_15miles.click();*/
+		}
+		//searchbtn.click();
+		//CommonUtility.waitForPageLoadNew(driver, zipcodeErrorMessage, 10);
+		//Assertion.assertTrue("PROBLEM - unable to locate Zipcode Error message", pharmacyValidate(zipcodeErrorMessage));
 	}
 
 	/**
@@ -767,7 +773,6 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 	 */
 	public boolean pharmacyValidate(WebElement element) {
 		long timeoutInSec = 20;
-		scrollToView(element);
 		return pharmacyValidate(element, timeoutInSec);
 	}
 
@@ -784,6 +789,10 @@ public class PharmacySearchBaseMobile extends PharmacySearchWebElementsMobile {
 		// validate(element, timeoutInSec)
 		driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 		try {
+			//steps for scrolling element in mobile view
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].scrollIntoView({behavior: \"auto\", block: \"center\", inline: \"center\"});", element);
+			
 			if (element.isDisplayed()) {
 				System.out.println("Element '" + element.toString() + "' found!!!!");
 				return true;

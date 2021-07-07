@@ -2029,7 +2029,9 @@ public class VppPlanDetailMobile {
 	public void user_closes_the_original_tab_and_open_new_tab_for_AARP_site() {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-		plansummaryPage.closeOriginalTabAndOpenNewTab();
+//		plansummaryPage.closeOriginalTabAndOpenNewTab();
+		String testSiteUrl = (String) getLoginScenario().getBean(PageConstants.TEST_SITE_URL);
+		plansummaryPage.closeOriginalTabAndOpenNewTab(testSiteUrl);
 	}
 
 	@Then("^user validates plans remain saved within same session for UHC site$")
