@@ -26,7 +26,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
     Then the user validates TFN Number
-      | TFN No    | <TFNNo>           |
+      | TFN No    | <MedSupTFN>           |
       | TFN Xpath | <MedsuppTFNxpath> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
@@ -40,11 +40,13 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user validates TFN Number
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
-    #Then the user navigates back to page
-    Then the user navigates to homepage validates Federal TFN
-    Then the user enter zipcode in homepage
-      | Zip Code  | <zipcode>    |
-      | Plan Type | <MAplantype> |
+    Then the user navigates back to page
+    Then the user navigates to plan tab for any plan
+    | Plan Type | <MAplantype> |
+    #Then the user navigates to homepage validates Federal TFN
+    #Then the user enter zipcode in homepage
+      #| Zip Code  | <zipcode>    |
+     # | Plan Type | <MAplantype> |
     And the user clicks on the shopping cart icon
     #And the user clicks on the shsopping cart icon in AARP site
     Then the user validates TFN Number
@@ -64,8 +66,8 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     #| PSC Code | <Precedence2PSC> |
     @campaignTFNProd
     Examples: 
-      | scenario         | site | zipcode | TFNNo          | memberTFNNo    | memberSignIn                  | memberSignInstage               | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                                                | MSplantype | userName        | password      |
-      | Scenario 1 - AMP | AARP |   90210 | 1-877-699-5710 | 1-855-349-3447 | https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[1] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | TiggerOptumID39 | TiggerTigger1 |
+      | scenario         | site | zipcode | TFNNo          | memberTFNNo    |MedSupTFN| memberSignIn                  | memberSignInstage               | memberSignInOffline               | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                                                | MSplantype | userName        | password      |
+      | Scenario 1 - AMP | AARP |   90210 | 1-877-699-5710 | 1-855-349-3447 |1-866-408-5545 |https://www.medicare.uhc.com/ | https://stage-medicare.uhc.com/ | https://offline.medicare.uhc.com/ |  810027 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[1] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | TiggerOptumID39 | TiggerTigger1 |
 
   #######################Script 9: External Link Plan 11########################################
   @Scenario_9_External_Link_UAT_PROD @UATRegression @prodRegression_UAT
@@ -134,7 +136,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
     Then the user navigates to plan tab for any plan
       | Plan Type | <MSplantype> |
     Then the user validates TFN Number
-      | TFN No    | <TFNNo>           |
+      | TFN No    | <MedSupTFN>           |
       | TFN Xpath | <MedsuppTFNxpath> |
     Then the user navigates to plan tab for any plan
       | Plan Type | <PDPplantype> |
@@ -160,8 +162,8 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
 
 		@campaignTFNProd
     Examples: 
-      | scenario         | site | zipcode | TFNNo          | isMultutiCounty | county         | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                                                | MSplantype | EnrollTFNxpath                    | userName        | password      |
-      | Scenario 1 - UMS | UHC  |   90210 | 1-877-596-3258 | NO              | Baldwin County |  880180 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[1] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | (//a[contains(@class, 'tel')])[3] | TiggerOptumID39 | TiggerTigger1 |
+      | scenario         | site | zipcode | TFNNo          |MedSupTFN| isMultutiCounty | county         | pscCode | maUrl                     | pdpUrl                       | snpUrl                                                                                                                                                                                                                                                                                                                      | medSuppUrl                                                                | medicareUrl             | site   | zipcode | plantype | isMultutiCounty | planyear | dceUrl                                                     | Precedence2PSC | PDPplantype | MAplantype | TFNxpath                          | MedsuppTFNxpath                   | DCETFNxpath                                                                                | MSplantype | EnrollTFNxpath                    | userName        | password      |
+      | Scenario 1 - UMS | UHC  |   90210 | 1-877-596-3258 |1-888-378-0254| NO              | Baldwin County |  880180 | enroll/ma-enrollment.html | shop/estimate/pdp-costs.html | health-plans.html?zipcode=28035&deepLink=favPlansDeepLink&plantype=MA&year=2020&planId=H5253041000&planYear=2020&systemYear=2020&zipcode=28035&fipsCode=119&product=MAPD&yearDisclaimer=undefined&month=2&yearToggle=undefined&deepLink=plandetail&WT.mc_id=897749&mrcid=em:Acq:MR%7cFederal%7cEGEM3011%7c::897749!/details | health-plans/medicare-supplement-plans/medicare-information.html?vpp=true | medicare-education.html | Ulayer |   80001 | MA       | No              | current  | health-plans/estimate-drug-costs.html#/drug-cost-estimator |        8009508 | PDP         | MA         | (//a[contains(@class, 'tel')])[1] | //*[contains(@class,'tel right')] | //button[contains(@id,'sam-call-button')]//*[contains(@class,'sam__button__text desktop')] | MS         | (//a[contains(@class, 'tel')])[3] | TiggerOptumID39 | TiggerTigger1 |
 
   #######################Script 6: External Link########################################
   @Scenario_6_External_Link_UHC_UAT_PROD @UATRegression
