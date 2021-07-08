@@ -389,7 +389,8 @@ public class PrimaryCarePhysicianPage extends UhcDriver{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
+		//WebElement radioBtn = driver.findElement(By.xpath("//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[@class='active']"));
+			WebElement radioBtn = driver.findElement(By.xpath("	//*[contains(@class,'ole-provider-list')]//ul[@class='ul-pcp-list']//li[contains(@class,'ng-star-inserted active')]"));
 		flag = radioBtn.getAttribute("class").equalsIgnoreCase("Active");
 		Assertion.assertTrue("PCP is not highlighted by blue colour", flag);
 		String actualProvider = driver.findElement(By.xpath("(//*[@class='inputradio'])[1]//following-sibling::label/span")).getText();
