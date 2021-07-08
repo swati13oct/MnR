@@ -82,6 +82,7 @@ public class SwitchToGeneric extends UhcDriver {
 	public DrugDetailsPage ClickSwitch_ReturnDetailsPage() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
+		pageloadcomplete();
 		CommonUtility.waitForPageLoad(driver, DrugDetails_ChangePharmacyLnk, 30);
 		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(LinktoExitScenario)) {
 			Assertion.assertTrue("Naviagted to DCE Drug Details Page", true);
@@ -97,6 +98,7 @@ public class SwitchToGeneric extends UhcDriver {
 	public DrugSummaryPage ClickSwitch_ReturnSummaryPage() {
 		validateNew(AddDrugBtn);
 		jsClickNew(AddDrugBtn);
+		pageloadcomplete();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if(validateNew(reviewDrugCostPageHeading)) {

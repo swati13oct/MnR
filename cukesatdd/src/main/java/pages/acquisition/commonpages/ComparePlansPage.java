@@ -1414,6 +1414,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(DrugInfoModal_DrugCostDetailsBtn);
 		jsClickNew(DrugInfoModal_DrugCostDetailsBtn);
 		waitForPageLoadSafari();
+        pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 30);
 		if (validateNew(DrugDetails_ChangePharmacyLnk) && validateNew(DrugDetails_DrugCostsHeading)) {
 			return new DrugDetailsPage(driver, "Compare");

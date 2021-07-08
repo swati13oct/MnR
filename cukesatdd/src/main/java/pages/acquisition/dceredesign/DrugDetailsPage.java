@@ -588,6 +588,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public DrugSummaryPage ClickLinktoNavigatetoDrugSummary() {
 		validateNew(LinkToDrugSummary);
 		jsClickNew(LinkToDrugSummary);
+        pageloadcomplete();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 
 		if (validateNew(reviewDrugCostPageHeading)) {
@@ -1014,6 +1015,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public VPPPlanSummaryPage ClickReturnToBtnToVPPSummary() {
 		validateNew(LinktoExitScenario);
 		jsClickNew(LinktoExitScenario);
+        pageloadcomplete();
 		CommonUtility.checkPageIsReadyNew(driver);
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("plan-summary")) {
@@ -1025,8 +1027,8 @@ public class DrugDetailsPage extends UhcDriver {
 	public BuildYourDrugList clickOnEditDrugListLink() {
 
 		jsClickNew(editDrugListLink);
+        pageloadcomplete();
 		waitForPageLoadSafari();
-
 		return new BuildYourDrugList(driver);
 	}
 

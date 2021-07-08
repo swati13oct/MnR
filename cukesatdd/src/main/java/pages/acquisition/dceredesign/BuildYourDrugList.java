@@ -139,6 +139,7 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(AutoCompleteList);
 		WebElement Drug = driver.findElement(By.xpath("//*[@id='" + drugName + "']"));
 		jsClickNew(Drug);
+		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, TellUsABoutHeader, 20);
 		if (validateNew(TellUsABoutHeader) && validateNew(TellUsABoutCloseBtn)) {
 			return new TellUsAboutDrug(driver);
@@ -166,6 +167,7 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
 		waitForPageLoadSafari();
+		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, reviewDrugCostPageHeading, 20);
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);
@@ -210,6 +212,7 @@ public class BuildYourDrugList extends UhcDriver {
 		jsClickNew(reviewDrugCost);
 		waitForPageLoadSafari();
 		threadsleep(2000);
+		pageloadcomplete();
 		//CommonUtility.waitForPageLoadNew(driver, DrugDetails_DrugCostsHeading, 20);
 		if(validateNew(DrugDetails_ChangePharmacyLnk))
 		{
@@ -309,6 +312,7 @@ public class BuildYourDrugList extends UhcDriver {
 	}
 
 	public DrugSummaryPage verifyReviewDrugCostPage() {
+		pageloadcomplete();
 		CommonUtility.waitForPageLoad(driver, reviewDrugCostPageHeading, 30);
 		if (validateNew(reviewDrugCostPageHeading)) {
 			return new DrugSummaryPage(driver);
