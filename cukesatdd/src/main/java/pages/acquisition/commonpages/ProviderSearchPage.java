@@ -635,13 +635,13 @@ public class ProviderSearchPage extends UhcDriver {
 
 		
 		counter++;
-		if(counter==9)
+		if(counter==2)
 			{
 			break;			
 			}
 
 		}
-		CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
+		/*	CommonUtility.waitForPageLoadNew(driver, Savedproviders, 10);
 		jsClickNew(Savedproviders); 	
 		waitForPageLoadSafari();
 		
@@ -650,16 +650,19 @@ public class ProviderSearchPage extends UhcDriver {
 		System.out.println("OLD Rally page displayed");
 		Checkcoverage.click();
 	}	
-	else if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
+	else
+		if(driver.findElements(By.xpath("(//form[@data-ui-element-name='check-provider-coverage']//button[contains(@class,'action-btn')])[1]")).size() > 0){
 		System.out.println("NEW Rally page displayed");
 		//FinishButton.click();
 		validateNew(FinishButton);
 		jsClickNew(FinishButton);
 	}else
 		System.out.println("Issue with Xpath");
-
+*/
+		validateNew(FinishButton);
+		jsClickNew(FinishButton);
 	threadsleep(3);
-	waitForCountDecrement(2);
+	//waitForCountDecrement(2);
 //	driver.switchTo().window(CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION);
 	driver.switchTo().window(CommonConstants.getMainWindowHandle());
 
