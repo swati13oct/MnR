@@ -70,7 +70,7 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
 	private WebElement addrugs;
 
-	@FindBy(xpath = "//button[contains(@id,'addDrug')]")
+	@FindBy(xpath = "//span[normalize-space()='Add Drugs']")
 	private WebElement addDrugsBtn;
 
 	@FindBy(css = "a.add-provider")

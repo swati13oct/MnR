@@ -47,7 +47,7 @@ public class GetStartedPageMobile extends UhcDriver {
 	@FindBy(xpath = "//a[contains(@class, 'uhc-link-button')]//*[contains(text(),'Return')]")
 	public WebElement LinktoExitScenario;
 
-	@FindBy(xpath = "//*[@id='previousButton']/span")
+	@FindBy(xpath = "//div/h2[text()='Get Started ']")
 	public WebElement getStartedTab;
 
 	@FindBy(xpath = "//body/div[@id='overlay']")

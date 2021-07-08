@@ -61,7 +61,7 @@ public class BuildYourDrugList extends UhcDriver {
 	@FindBy(xpath = "//input[@id='zip-code']")
 	public WebElement zipCodeTxtbox;
 
-	@FindBy(xpath = " (//button[contains(@dtmname,'Return to Compare') and not(contains(@class, 'ng-star-inserted'))]//*[contains(text(),'Return to Compare')])[1]")
+	@FindBy(xpath = "//button[contains(@dtmname, 'search')]//following-sibling::button[contains(@dtmname,'Return to Compare')]")
 	public WebElement returnToCompareBtn;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
@@ -278,6 +278,7 @@ public class BuildYourDrugList extends UhcDriver {
 
 	public ComparePlansPage returnToPlanComparePage() {
 
+        pageloadcomplete();
 		validateNew(returnToCompareBtn);
 		jsClickNew(returnToCompareBtn);
 		waitForPageLoadSafari();
@@ -341,8 +342,15 @@ public class BuildYourDrugList extends UhcDriver {
 		validateNew(reviewDrugCost);
 		jsClickNew(reviewDrugCost);
 		waitForPageLoadSafari();
-		
-		return new DrugSummaryPage(driver);
+		threadsleep(2000);
+		pageloadcomplete();
+		CommonUtility.waitForPageLoadNew(driver, reviewDrugCostPageHeading, 20);
+		if (validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPage(driver);
+		} else {
+			Assertion.fail("Drug Summary Page is not loaded");
+			return null;
+		}
 	}
 
 	public void validateDetailsForDrug(String drugName, String drugQuantity, String drugFrequency,
