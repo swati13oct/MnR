@@ -571,7 +571,7 @@ public class PersonalInformationPage extends UhcDriver{
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 	//	if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){			
-			if(validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Please Provide Your Medicare Insurance Information')]")))){		
+			if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){		
 			System.out.println("OLE Medicare Information Page is Displayed");
 			return new MedicareInformationPage(driver);
 		}

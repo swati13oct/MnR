@@ -261,7 +261,8 @@ public boolean validate_SOA_Page(Map<String, String> MemberDetailsMap) throws In
 		jsClickNew(NextBtn);
 		
 	//	if(validateNew(driver.findElement(By.xpath("(//*[contains(@class, 'formset')]//*[contains(@id, 'StatementOfUnderstandingCheck')])[1]")))){
-			if(validateNew(driver.findElement(By.xpath("(//*[contains(text(),'Statement of Understanding')])[1]")))){
+			//if(validateNew(driver.findElement(By.xpath("(//*[contains(text(),'Statement of Understanding')])[1]")))){
+				if(validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form-row')]//*[contains(@class,'sub-header')])[1]")))){
 			System.out.println("SOA page is Displayed");
 		
 			if(NextBtn.isEnabled()){

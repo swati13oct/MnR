@@ -1139,7 +1139,7 @@ public class MedicareInformationPage extends UhcDriver {
 		jsClickNew(NextBtn);
 		CommonUtility.checkPageIsReadyNew(driver);
 		// if(validateNew(driver.findElement(By.xpath("//h1[contains(text(),'Medicare')]")))){
-		if (validateNew(driver.findElement(By.xpath("//h3[contains(text(),'Medicaid')]")))) {
+		if (validateNew(driver.findElement(By.xpath("(//*[contains(@class,'form')]//*[contains(@class,'sub-header')])[1]")))) {
 			System.out.println("OLE Medicare Information Page is Displayed");
 
 		}
