@@ -52,21 +52,18 @@ public class PREBenefitsValidationStepDefinition {
 	HashMap<String, String> inputValues;
 	public static String PREflow = "";
 
-	/*public void readfeaturedata(DataTable data) {
-		inputRow = new ArrayList(data.getGherkinRows());
+	boolean if_offline_prod = false, popup_clicked = false;
+	
+	public void readfeaturedata(DataTable data) {
 		inputValues = new HashMap<String, String>();
-		for (int i = 0; i < inputRow.size(); i++) {
-			inputValues.put(inputRow.get(i).getCells().get(0), inputRow.get(i).getCells().get(1));
-		}
-//		String temp = inputValues.get("Plan Type");
+		inputValues = DataTableParser.readDataTableAsMaps(data);
+		String temp = inputValues.get("Plan Type");
 		if (temp != null && PREflow != temp) {
 			PREflow = temp;
-			System.out.println("Current PRE Flow : " + PREflow);
+			System.out.println("Current PRE Flow : "+PREflow);
 		}
 	}
 
-	boolean if_offline_prod = false, popup_clicked = false;
-*/
 	@Then("^the user navigates to PRE results page and compares plan benefits value from excel to UI and reports into excel$")
 	public void preResults_exceldataValidation(DataTable givenAttributes) throws Throwable {
 //		List<DataTableRow> givenAttributesRow = givenAttributes.getGherkinRows();
@@ -172,8 +169,13 @@ public class PREBenefitsValidationStepDefinition {
 
 							AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, "PRE");
 
+							System.out.println(siteType);
+							
 							wd.get("https://digital-uatv2-uhcmedicaresolutions.ocp-elr-core-nonprod.optum.com/plan-recommendation-engine.html#/get-started");
-							//aquisitionhomepage.openPRE();
+							
+							//if_offline_prod = aquisitionhomepage.openPRE(siteType);
+							//checkpopup();
+							
 							aquisitionhomepage.fixPrivateConnection();
 
 							PlanRecommendationEngineLandingAndZipcodePages zip = new PlanRecommendationEngineLandingAndZipcodePages(
@@ -296,6 +298,13 @@ public class PREBenefitsValidationStepDefinition {
 
 		//System.out.println(preferencePRE + pYear + locationObj + locationValues + "}");
 		return preferencePRE + pYear + locationObj + locationValues + "}";
+	}
+	
+	public void checkpopup() {
+		if(if_offline_prod && !popup_clicked) {
+			PlanRecommendationEngineLandingAndZipcodePages planSelectorhomepage =  new PlanRecommendationEngineLandingAndZipcodePages((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
+			popup_clicked = planSelectorhomepage.close_Popup();
+		}
 	}
 
 }
