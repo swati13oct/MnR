@@ -1,4 +1,4 @@
-@UATRegression @visitorProfile 
+@UATRegression @visitorProfile @visitorProfileUpdated
 Feature: 1.08. UAT- Visitor profile 
 
 @sanity
