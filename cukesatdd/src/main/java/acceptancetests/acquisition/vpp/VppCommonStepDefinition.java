@@ -4479,4 +4479,15 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}
+	
+	@Then("^agent saves a plans as favorite for user on plan compare page$")
+	public void agent_saves_a_plans_as_favorite_on_plan_compare_page(DataTable givenAttributes) {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanName = memberAttributesMap.get("PlanName");
+		comparePlansPage.saveaPlan(savePlanName);
+	}
+
 }

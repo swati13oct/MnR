@@ -1818,4 +1818,25 @@ public void validatePlanComparePagefromProfile() {
 	
 }
 
+public void saveaPlan(String plans) {
+	try {
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,200)");
+		
+			WebElement moreOptions = driver
+					.findElement(By.xpath("(//button//span[text()='More Options'])[1]"));
+			//moreOptions.click();
+			jsClickNew(moreOptions);
+			waitforElement(saveAPlan);
+			sleepBySec(4);
+			//saveAPlan.click();
+			jsClickNew(saveAPlan);
+
+		
+	} catch (Exception ex) {
+
+	}
+}
+
 }
