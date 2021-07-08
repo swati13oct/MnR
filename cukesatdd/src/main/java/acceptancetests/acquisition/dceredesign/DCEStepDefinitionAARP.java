@@ -1162,6 +1162,7 @@ public class DCEStepDefinitionAARP {
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
 		String PharmacytoSelect = memberAttributesMap.get("SelectPharmacy");
+		System.out.println(PharmacytoSelect);
 		drugSummaryPage.SelectPharmacy(PharmacytoSelect);
 		drugSummaryPage.validatePharmacyName(PharmacytoSelect);
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
@@ -2908,6 +2909,7 @@ public class DCEStepDefinitionAARP {
 		getLoginScenario().saveBean(PageConstants.DCE_Redesign_DrugSummary, drugSummaryPage);
 	}
 
+
     @Then("the user clicks on Edit Drug list link on View Drug pricing modal")
     public void the_user_clicks_on_edit_drug_list_link_on_view_drug_pricing_modal() {
 		scenario.log("Sneha Dwarakanath - Change made for July Release - F603797: DCE | Mobile First Optimization | Edit Drug List from Summary | Desktop & Mobile");
@@ -3020,5 +3022,40 @@ public class DCEStepDefinitionAARP {
             drugDetailsPage.validateModalText_DeductibleStage(deductibleFlag);
     }
 
+	
+	@When("^user should be able to click on plan and view drug cost$")
+	public void user_should_be_able_to_click_plantype_and_view_drugcost_for_plan(DataTable givenAttributes) throws Throwable {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
+		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
 
+		String planType = memberAttributesMap.get("planType");
+		String planName = memberAttributesMap.get("planName");
+		DrugSummaryPage drugSummaryPage = new DrugSummaryPage(driver);
+		
+		drugSummaryPage.selectAndVerifyPlanType(planType, planName);
+		
+	}
+	
+	@Then("^user should be able to save drugs$")
+	public void user_saves_drud_cost(){
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		DrugDetailsPage drugDetailPage = new DrugDetailsPage(driver);
+		
+		drugDetailPage.saveDrug();
+				
+	}
+
+	@And("^the user clicks on the shopping cart icon from DCE$")
+	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
+		driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		
+		AcquisitionHomePage acqHomePage = new AcquisitionHomePage(driver);
+
+		VisitorProfilePage visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
+	}
+    
 }

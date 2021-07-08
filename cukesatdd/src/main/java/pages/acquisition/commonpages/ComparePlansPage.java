@@ -1787,6 +1787,26 @@ public class ComparePlansPage extends UhcDriver {
 	}
 
 
+	public void savePlan(String planName) {
+		try {
+			List<String> listOfTestPlans = Arrays.asList(planName.split(","));
+			System.out.println(
+					"Going to mark the following " + listOfTestPlans.size() + " number of test plans as favorite");
+			Thread.sleep(5000);
+			for (String plan : listOfTestPlans) {
+				WebElement savePlan = driver.findElement(By.xpath("//*[@id=\"compare-table-header\"]//*[contains(text(),'"+planName+"')]/../following::button[contains(@id,'headerSavePlan')][1]"));
+				((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(false);", savePlan);
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", savePlan);
+				Thread.sleep(5000);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+
 public void validatePlanComparePagefromProfile() {
 	//validateNew(backToAllPlansLink);
 	validateNew(validateprintbutton);

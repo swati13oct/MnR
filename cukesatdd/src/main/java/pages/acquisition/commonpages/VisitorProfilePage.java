@@ -1281,6 +1281,27 @@ public class VisitorProfilePage extends UhcDriver {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	  /**
+     * Back to VPP
+     */
+	
+	@FindBy(xpath = "//*[contains(dlassetid(),'pd_lnk_1')]")
+	private WebElement backtoProfile;
+
+    public void selectPlan(String planName) {
+        
+        	WebElement plan = driver.findElement(
+    				By.xpath("//*[contains(@dtmname,'"+planName+"')]"));
+			
+        	plan.click();
+
+            waitForPageLoadSafari();
+            CommonUtility.checkPageIsReadyNew(driver);
+            backtoProfile.click();
+           
+    }
+
 }
 
 

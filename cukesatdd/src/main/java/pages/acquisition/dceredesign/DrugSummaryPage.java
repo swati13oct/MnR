@@ -1288,6 +1288,7 @@ public class DrugSummaryPage extends UhcDriver {
 		System.out.println("All Pharmacy have filter text");
 	}
 
+
     @FindBy(xpath = "//button[contains(@dtmname, 'drug pricing:edit drug list')]")
     public WebElement DrugPricingModal_EditDrugs;
 
@@ -1309,4 +1310,41 @@ public class DrugSummaryPage extends UhcDriver {
         Assertion.fail("Did not Navigate to Build Drug List Page");
         return null;
     }
+
+	
+	@FindBy(xpath = "//*[@id='pdp-plans-radio']")
+	public WebElement pdpTabHeading;
+	
+	@FindBy(xpath = "//*[@id='snp-plans-radio']")
+	public WebElement snpTabHeading;
+	
+	@FindBy(xpath = "//*[@class='heading-4 mb-10']")
+	public WebElement headingPlantype;
+	
+	public void selectAndVerifyPlanType(String planType, String PlanName) {
+		
+		if(planType.contains("Medicare Prescription Drug Plans")) 
+		{
+			validateNew(pdpTabHeading);
+			jsClickNew(pdpTabHeading);
+			
+		}else if(planType.contains("Medicare Special Needs Plans")) 
+		{
+			validateNew(snpTabHeading);
+			jsClickNew(snpTabHeading);
+		}
+		
+	//	validateNew(headingPlantype);
+		
+		WebElement DrugCost;
+		if (planTypeHeading.getText().contains(planType)) {
+			DrugCost = driver.findElement(By.xpath("//button[contains(@aria-label,'View Drug Costs "+PlanName+"')]"));
+            validateNew(DrugCost);
+            jsClickNew(DrugCost);
+
+		}else 
+			Assertion.fail();
+		}
+
+
 }

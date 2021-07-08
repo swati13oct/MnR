@@ -767,4 +767,16 @@ public class VisitorProfileStepDefinition {
 		planComparePage.validatePlanComparePagefromProfile();
 	}
 
+	@And("^the user selects plan and navigates back to profile$")
+	public void the_user_select_plan_in_aarp(DataTable attributes) {
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(attributes);
+		
+		String planName = givenAttributesMap.get("PlanName");
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		 visitorProfilePage.selectPlan(planName);
+
+			}
 }
