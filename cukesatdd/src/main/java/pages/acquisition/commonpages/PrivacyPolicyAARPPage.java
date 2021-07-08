@@ -22,7 +22,7 @@ public class PrivacyPolicyAARPPage extends GlobalWebElements{
 	public WebElement header;
 	
 	//@FindBy(xpath = "(//section[contains(@class,'meded-article-content')]//p)[1]")
-	@FindBy(xpath="(//h2//span[contains(@class,'paragraph')])[2]")
+	@FindBy(xpath="//h2//span[contains(@class,'paragraph')]")
 	public WebElement pageContent_Para1;
 	
 	public PrivacyPolicyAARPPage(WebDriver driver) {
