@@ -171,10 +171,10 @@ public class PREBenefitsValidationStepDefinition {
 
 							System.out.println(siteType);
 							
-							wd.get("https://digital-uatv2-uhcmedicaresolutions.ocp-elr-core-nonprod.optum.com/plan-recommendation-engine.html#/get-started");
+							//wd.get("https://digital-uatv2-uhcmedicaresolutions.ocp-elr-core-nonprod.optum.com/plan-recommendation-engine.html#/get-started");
 							
-							//if_offline_prod = aquisitionhomepage.openPRE(siteType);
-							//checkpopup();
+							if_offline_prod = aquisitionhomepage.openPRE(siteType);
+							checkpopup();
 							
 							aquisitionhomepage.fixPrivateConnection();
 
