@@ -1996,7 +1996,14 @@ private Scenario scenario;
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 		planComparePage.validateDoctors();
 	}
-
+	
+	@Then("^verify Your doctors is loaded with all added doctor summary on Plan Compare page$")
+	public void verify_all_doctors_covered() {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		planComparePage.validateAllDoctors();
+	}
+	
 	@And("^click on Edit your doctors link and Navigate to Rally page$")
 	public void clickONEdityourdocits() throws Exception {
 		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()

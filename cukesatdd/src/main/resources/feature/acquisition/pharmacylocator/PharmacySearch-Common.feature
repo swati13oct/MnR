@@ -132,7 +132,7 @@ Feature: 1.11.a ACQ-Pharmacy Locator Test Scripts
       | 15582 | UHC  |   85215 |       15 | None           |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
       | 15582 | UHC  |   78006 |       15 | Kendall County |        2021 | AARP MedicareRx Walgreens (PDP) |        2021 | AARP MedicareRx Walgreens (PDP) | Open 24 hours | True                  | True             | True                 |
 
-    @PharmacyLocatorCommonProd_UHC @prodRegression @sanity @vbfGate
+    @PharmacyLocatorCommonProd_UHC @prodRegression @sanity  #@vbfGate
     Examples: 
       | TID   | site | zipcode | distance | countyName | cy_planYear | cy_planName                     | ny_planYear | ny_planName                     | pharmacyType  | hasPrefRetailPharPlan | hasWalgreensPlan | hasPrefdMailServPlan |
       | 15582 | UHC  |   10980 |       15 | None       |        2021 | AARP MedicareRx Preferred (PDP) |        2021 | AARP MedicareRx Preferred (PDP) | E-Prescribing | True                  | False            | True                 |
