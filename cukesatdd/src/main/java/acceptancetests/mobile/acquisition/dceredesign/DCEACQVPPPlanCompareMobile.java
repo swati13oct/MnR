@@ -89,19 +89,6 @@ public class DCEACQVPPPlanCompareMobile {
 		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
 	}
 
-	@And("^the user clicks on the shopping cart icon$")
-	public void the_user_clicks_on_the_shopping_cart_icon_on_DCE_page_in_AARP() {
-		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-
-		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
-		
-		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
-	
-		
-		
-	}
-
 	@When("^I access the DCE Redesign from Plan compare page$")
 	public void the_user_navigates_to_dce_from_plan_compare_site() throws Throwable {
 		ComparePlansPageMobile planComparepage = (ComparePlansPageMobile) getLoginScenario()

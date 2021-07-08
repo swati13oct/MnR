@@ -377,7 +377,8 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	public WebElement breadCrumbLink;
 	
 	public void clickBreadCrumb() {
-		breadCrumbLink.click();
+//		breadCrumbLink.click();
+		jsClickNew(breadCrumbLink);
 		waitForPageLoadSafari();
 	}
 
@@ -580,59 +581,73 @@ public class PharmacySearchPageMobile extends PharmacySearchBaseMobile {
 	public PharmacySearchPageMobile ValidateSearchPdfResults(String testPlanName) throws InterruptedException {
 		CommonUtility.checkPageIsReady(driver);
 		CommonUtility.waitForPageLoad(driver, viewsearchpdf, 20);
+		scrollToView(viewsearchpdf);
 		Assertion.assertTrue("PROBLEM - View Results as PDF link is NOT DISPLAYED", pharmacyValidate(viewsearchpdf));
-		String winHandleBefore = driver.getWindowHandle();
-		ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-//		viewsearchpdf.click();
-		jsClickNew(viewsearchpdf);
-		Thread.sleep(5000); // note: keep this for the page to load
-		ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		int i = 0;
-		while (i < 3) {
-			if (beforeClicked_tabs.size() == afterClicked_tabs.size()) {
-				System.out.println(i + " give it extra 3 seconds for pdf to load");
-				Thread.sleep(3000); // note: keep this for the page to load
-				afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-				i = i++;
-				i = i++;
-			} else
-				break;
-		}
-		afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
-		i = i++;
-		int afterClicked_numTabs = afterClicked_tabs.size();
-		System.out.println("TEST - afterClicked_numTabs=" + afterClicked_numTabs);
-		// note: no point to continue if tab for pdf didn't show
-		Assertion.assertTrue("PROBLEM - expect more browser tabs after clicking pdf. " + "Before="
-				+ beforeClicked_tabs.size() + " | After=" + afterClicked_numTabs,
-				beforeClicked_tabs.size() < afterClicked_numTabs);
-		String tab = null;
-		for (int j = 0; j < afterClicked_numTabs; j++) {
-			if (j == afterClicked_numTabs - 1) {
-				tab = afterClicked_tabs.get(j);
-				driver.switchTo().window(tab);
-				break;
-			}
-		}
-		/*
-		 * for (String tab : afterClicked_tabs) { if (!tab.equals(winHandleBefore)) {
-		 * driver.switchTo().window(tab); break; } }
-		 */
-//		driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
-		System.out.println("New window = " + driver.getTitle());
-		String currentURL = driver.getCurrentUrl();
-		System.out.println("Current URL is : " + currentURL);
-		
 
-		String expectedURL = "member/pharmacy-locator";
-		Assertion.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, " + "URL should not contain '"
-				+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
-		driver.close();
-		driver.switchTo().window(winHandleBefore);
-		CommonUtility.checkPageIsReadyNew(driver);
-		System.out.println("TEST - driver.getTitle()=" + driver.getTitle());
-		if (driver.getTitle().toLowerCase().contains("locate a pharmacy"))
-			return new PharmacySearchPageMobile(driver);
+		// A new browser tab is only opened for ios device, in case of android a pdf is
+		// downloaded with dynamic name.
+		// Hence only validating that the view search pdf link is present for an android
+		// device.
+		// For iOS device, the validation is same as for desktop
+		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
+			if (pharmacyValidate(viewsearchpdf))
+				return new PharmacySearchPageMobile(driver);
+		} else {
+
+			String winHandleBefore = driver.getWindowHandle();
+			ArrayList<String> beforeClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			// viewsearchpdf.click();
+			jsClickNew(viewsearchpdf);
+			Thread.sleep(5000); // note: keep this for the page to load
+			ArrayList<String> afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			int i = 0;
+			while (i < 3) {
+				if (beforeClicked_tabs.size() == afterClicked_tabs.size()) {
+					System.out.println(i + " give it extra 3 seconds for pdf to load");
+					Thread.sleep(3000); // note: keep this for the page to load
+					afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+					i = i++;
+					i = i++;
+				} else
+					break;
+			}
+			afterClicked_tabs = new ArrayList<String>(driver.getWindowHandles());
+			i = i++;
+			int afterClicked_numTabs = afterClicked_tabs.size();
+			System.out.println("TEST - afterClicked_numTabs=" + afterClicked_numTabs);
+			// note: no point to continue if tab for pdf didn't show
+			Assertion
+					.assertTrue(
+							"PROBLEM - expect more browser tabs after clicking pdf. " + "Before="
+									+ beforeClicked_tabs.size() + " | After=" + afterClicked_numTabs,
+							beforeClicked_tabs.size() < afterClicked_numTabs);
+			String tab = null;
+			for (int j = 0; j < afterClicked_numTabs; j++) {
+				if (j == afterClicked_numTabs - 1) {
+					tab = afterClicked_tabs.get(j);
+					driver.switchTo().window(tab);
+					break;
+				}
+			}
+			/*
+			 * for (String tab : afterClicked_tabs) { if (!tab.equals(winHandleBefore)) {
+			 * driver.switchTo().window(tab); break; } }
+			 */
+			// driver.switchTo().window(afterClicked_tabs.get(afterClicked_numTabs-1));
+			System.out.println("New window = " + driver.getTitle());
+			String currentURL = driver.getCurrentUrl();
+			System.out.println("Current URL is : " + currentURL);
+
+			String expectedURL = "member/pharmacy-locator";
+			Assertion.assertTrue("PROBLEM - Pharmacy Results PDF Page  is not opening, " + "URL should not contain '"
+					+ expectedURL + "' | Actual URL='" + currentURL + "'", !currentURL.contains(expectedURL));
+			driver.close();
+			driver.switchTo().window(winHandleBefore);
+			CommonUtility.checkPageIsReadyNew(driver);
+			System.out.println("TEST - driver.getTitle()=" + driver.getTitle());
+			if (driver.getTitle().toLowerCase().contains("locate a pharmacy"))
+				return new PharmacySearchPageMobile(driver);
+		}
 		return null;
 	}
 

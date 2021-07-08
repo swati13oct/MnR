@@ -365,6 +365,7 @@ public class PlanDetailsPageMobile extends UhcDriver {
 			Assertion.assertTrue("Medical Benefit tab not displayed for SNP plans",
 					medBenefitsTab.get(0).isDisplayed());
 		} /* Added for SNP as well */
+		scrollToView(planCostsTab);
 		validate(planCostsTab);
 
 	}
