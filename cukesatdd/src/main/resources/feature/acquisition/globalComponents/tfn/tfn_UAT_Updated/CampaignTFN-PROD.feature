@@ -41,6 +41,7 @@ Feature: UAT Scripts-To test Campaign TFN through all the flows in Prod
       | TFN No    | <TFNNo>    |
       | TFN Xpath | <TFNxpath> |
     Then the user navigates back to page
+    When user clicks on back to plans link to navigate plan summary
     Then the user navigates to plan tab for any plan
     | Plan Type | <MAplantype> |
     #Then the user navigates to homepage validates Federal TFN
