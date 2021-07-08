@@ -7130,4 +7130,17 @@ public class VPPPlanSummaryPage extends UhcDriver {
 		}
 		validateNew(groupPlanMarkettingBullets);
 	}
+
+	
+	@FindBy(id = "savePlanheading")
+	private WebElement savedplanHeading;
+	
+	@FindBy(xpath = "(//*[contains(@dtmname,'Keep Shopping")
+	private WebElement keepshopping;
+	
+	public void keepShopping() {
+		// TODO Auto-generated method stub
+		validateNew(savedplanHeading);
+		jsClickNew(keepshopping);
+	}
 }
