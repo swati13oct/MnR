@@ -302,9 +302,8 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	@FindBy(xpath = "//h3//*[contains(@onclick,'loadCachedProviderSearch')]")
 	private WebElement providerSearchFromGlobalHeader;
 
-	// @FindBy(xpath = "//a[@title='Provider Search
-	// Tool']/span[contains(text(),'Find a Provider')]")
-	@FindBy(xpath = "//div[@class='d-none d-lg-block']//nav[@aria-label='Footer tools and resources navigation']//p[4]")
+	// @FindBy(xpath = "//a[contains(text(),'Find a Provider')]")
+	@FindBy(xpath = "//div[@class='d-none d-lg-block']//nav[@aria-label='Footer tools and resources navigation']//p[4]/a")
 	private WebElement providerSearchFromHomeScreen;
 
 	@FindBy(id = "ghn_lnk_2")
@@ -2914,9 +2913,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 	public ProviderSearchPage clicksOnRallyToolFromHomePage() {
 
 		validateNew(providerSearchFromHomeScreen);
+		scrollToView(providerSearchFromHomeScreen);
 
-		// switchToNewTabNew(providerSearchFromHomeScreen);
-		jsClickNew(providerSearchFromHomeScreen);
+		switchToNewTabNew(providerSearchFromHomeScreen);
+//		jsClickNew(providerSearchFromHomeScreen);
 		waitForPageLoadSafari();
 
 		CommonUtility.checkPageIsReadyNew(driver);
