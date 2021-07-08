@@ -1404,7 +1404,7 @@ public class ComparePlansPage extends UhcDriver {
 		System.out.println("Drug Info Modal Closed - Plan Compare page displayed");
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")

@@ -129,7 +129,7 @@ public class DCEStepHeader extends UhcDriver {
 		return null;
 	}
 
-	@FindBy(xpath = "//*[contains(@id,'changePharmacyLink')]")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	public DrugDetailsPage ClickStep3_NavigateDrugDetailsPage() {
