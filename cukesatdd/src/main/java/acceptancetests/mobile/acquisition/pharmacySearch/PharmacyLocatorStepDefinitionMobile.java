@@ -560,21 +560,6 @@ public class PharmacyLocatorStepDefinitionMobile {
 		vppPlanDetailsPage.validateVPPDetailsPage();
 	}
 
-	@Then("^user should be navigated to the previous page$")
-	public void user_should_be_navigated_to_the_previous_page(DataTable givenAttributes) throws Throwable {
-		AcquisitionHomePageMobile aquisitionhomepage = (AcquisitionHomePageMobile) getLoginScenario()
-				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		/*
-		 * List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-		 * for (int i = 0; i < memberAttributesRow.size(); i++) {
-		 * memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-		 * memberAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String path = memberAttributesMap.get("PagePath");
-		aquisitionhomepage.validatePageNavigated(path);
-	}
 
 	@And("^the user validates header section content$")
 	public void verifyHeaderSection1() {

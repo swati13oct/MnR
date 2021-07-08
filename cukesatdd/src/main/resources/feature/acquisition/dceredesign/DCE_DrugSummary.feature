@@ -65,22 +65,15 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
       | PDP Plans  | <pdptestPlans> |
       | SNP Plans  | <snptestPlans> |
 
-<<<<<<< HEAD
     @dce_DrugSummary_Page_AARP @regressionAARP @prodRegression
     Examples: 
-      | site | zipCode | drug1   | drug2     | drug3 | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
-      | AARP |   78006 | Lipitor | Lopressor | Emsam | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
-=======
-  @dce_DrugSummary_Page_AARP @regressionAARP @prodRegression @MHJ
-    Examples:
       | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
-      | AARP | 78006   | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
->>>>>>> branch 'develop' of https://github.optum.com/gov-prog-digital/mratdd/
+      | AARP |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
-  @dce_DrugSummary_Page_UHC @regressionUHC @sanity
-    Examples:
+    @dce_DrugSummary_Page_UHC @regressionUHC @sanity
+    Examples: 
       | site | zipCode | drug1   | drug2     | drug3 | drug4  | genericDrug1         | genericDrug2        | SelectPharmacy | testPlans                            | pdptestPlans                    | snptestPlans                               |
-      | UHC  | 78006   | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
+      | UHC  |   78006 | Lipitor | Lopressor | Emsam | Fanapt | atorvastatin calcium | metoprolol tartrate | ROCK PHARMACY  | AARP Medicare Advantage Choice (PPO) | AARP MedicareRx Preferred (PDP) | UnitedHealthcare Dual Complete (HMO D-SNP) |
 
   ############# END - DCE Summary Regression Scenario #################
   @dceRedesign_ChangePharmacyModal @F426569 @F535368 @decRelease
@@ -123,12 +116,12 @@ Feature: 1.10.1 DCE-REDESIGN - To test Drug summary page in New DCE flow
       | ZipCode | <zipCode2> |
     Then error message "Please enter a valid ZIP code" should be displayed on change pharmacy modal
 
-  @dceRedesign_ChangePharmacyModal_AARP @regressionAARP
-    Examples:
+    @dceRedesign_ChangePharmacyModal_AARP @regressionAARP
+    Examples: 
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
-      | AARP | Lipitor | 90001   | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | 96799    | 78456    |
+      | AARP | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |
 
-  @dceRedesign_ChangePharmacyModal_UHC @regressionUHC @vbfGate
-    Examples:
+    @dceRedesign_ChangePharmacyModal_UHC @regressionUHC @vbfGate
+    Examples: 
       | site | drug1   | zipCode | message                                                                                                                                            | zipCode1 | zipCode2 |
-      | UHC  | Lipitor | 90001   | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. | 96799    | 78456    |
+      | UHC  | Lipitor |   90001 | Broadening your search criteria (for example, changing the pharmacy type, search radius and/or your ZIP code) may help you get a different result. |    96799 |    78456 |

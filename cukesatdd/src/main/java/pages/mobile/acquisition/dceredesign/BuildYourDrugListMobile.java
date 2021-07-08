@@ -226,11 +226,7 @@ public class BuildYourDrugListMobile extends UhcDriver {
 
 	}
 
-	public void clickOnRemoveButton(String drug) {
-		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + drug + "')]"));
-		jsClickNew(removeLink);
 
-	}
 
 	public TellUsAboutDrugMobile SelectDrugfromList(String drugName) {
 		validateNew(AutoCompleteList);
@@ -535,6 +531,42 @@ public class BuildYourDrugListMobile extends UhcDriver {
 			return false;
 		}
 		return false;
+	}
+	
+	@FindBy(xpath = "//div[contains(@id, 'modal')]//button[contains(@dtmname, 'remove drug:yes')]")
+	public WebElement ConfirmDeleteYesBtn;
+	
+	public void clickOnRemoveButton(String drug) {
+		WebElement removeLink = driver.findElement(By.xpath("//*[contains(@aria-label,'Remove " + drug + "')]"));
+		jsClickNew(removeLink);
+		validateNew(ConfirmDeleteYesBtn);
+		jsClickNew(ConfirmDeleteYesBtn);
+	}
+
+	public void validateBuildDrugListPageDisplayed() {
+		validateNew(EnterDrugNameTxt);
+		validateNew(SearchBtn);
+		validateNew(PreviousBtn);
+	}
+
+	
+	
+	@FindBy(xpath = "(//button//span[contains(text(),'Review Drug Costs')])[1]")
+	public WebElement reviewDrugCost;
+	
+	public DrugSummaryPageMobile navigateToDrugSummaryPage() {
+		validateNew(reviewDrugCost);
+		jsClickNew(reviewDrugCost);
+		waitForPageLoadSafari();
+		threadsleep(2000);
+		pageloadcomplete();
+		CommonUtility.waitForPageLoadNew(driver, reviewDrugCostPageHeading, 20);
+		if (validateNew(reviewDrugCostPageHeading)) {
+			return new DrugSummaryPageMobile(driver);
+		} else {
+			Assertion.fail("Drug Summary Page is not loaded");
+			return null;
+		}
 	}
 
 	public void validateDrugRecommendationSectionNOTdisplayed(String druglist) {
