@@ -722,7 +722,6 @@ public class PlanRecommendationEngineStepDefinition {
    	public void verify_UI_API_rankings_results_page() {
 		checkpopup();
 		PlanRecommendationEngineResultsPage planSelectorResultspage =  new PlanRecommendationEngineResultsPage((WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER));
-		planSelectorResultspage.validateUIAPIRecommendations();
 		planSelectorResultspage.validateUIAPIRankingPlans();
    	}
 	

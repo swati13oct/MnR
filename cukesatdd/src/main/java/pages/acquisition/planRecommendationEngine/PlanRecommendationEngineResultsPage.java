@@ -514,6 +514,11 @@ public class PlanRecommendationEngineResultsPage extends GlobalWebElements {
 	@FindBy(css = ".c-banner__cta>a")
 	private WebElement startNowBtn;
 	
+	
+	// New Results Page
+		@FindBy(css = "uhc-plan-info a")
+		private List<WebElement> allPlansID;
+		
 //Result Loading Page Element Verification Method 
 
 	public void resultsloadingpage() {
@@ -1310,29 +1315,48 @@ public void validateUIAPIRecommendations() {
 }	
 
 public void validateUIAPIRankingPlans() {
-	System.out.println("Validating UI vs API Plans Ranking : ");
-	plansLoader();
-	String rankingJSON = returnDriverStorageJS("Session Storage", "ucp_planRecommendationResults");
-	List<String> maAPIRankings = getAPIPlansRanking(rankingJSON,"MA");
-	if(maAPIRankings.size()>0) {
-	validate(MA1stPlanName, 60);
-	click_ViewPlanLink(MAViewPlansLink);
-	verifyAPIRankings(MAPlansId,maAPIRankings);
-	driver.navigate().refresh();
-	plansLoader();
+	System.out.println("Validating UI vs API Plans Ranking on PRE results page: ");
+	waitforResultsPage();
+	String rankingJSON = returnDriverStorageJS("Session Storage", "ucp_planRecommendationObj");
+	List<String> APIRankings = getAPIPlansRanking(rankingJSON);
+	if (APIRankings.size() > 0) {
+		verifyAPIRankings(allPlansID, APIRankings);
 	}
-	List<String> pdpAPIRankings = getAPIPlansRanking(rankingJSON,"PDP");
-	validate(PDP1stPlanName, 60);
-	click_ViewPlanLink(PDPViewPlansLink);
-	verifyAPIRankings(PDPPlansId,pdpAPIRankings);
-	driver.navigate().refresh();
-	plansLoader();
-	List<String> snpAPIRankings = getAPIPlansRanking(rankingJSON,"SNP");
-	if(snpAPIRankings.size()>0) {
-	validate(SNP1stPlanName, 60);
-	click_ViewPlanLink(SNPViewPlansLink);
-	verifyAPIRankings(SNPPlansId,snpAPIRankings);
+}
+
+public void waitforResultsPage() {
+	pageloadcomplete();
+	waitForPageLoadSafari();
+	validate(planZipInfo, 60);
+	threadsleep(3000);
+}
+
+public List<String> getAPIPlansRanking(String rankingJSON) {
+	List<String> rankingOrder = new ArrayList<String>();
+	JSONParser parser = new JSONParser();
+	JSONArray jarray = new JSONArray();
+	JSONObject jsonObject = null;
+	try {
+		jarray = (JSONArray) parser.parse(rankingJSON);
+		jsonObject = (JSONObject) jarray.get(0);
+	} catch (ParseException e) {
+		e.printStackTrace();
 	}
+	JSONObject jsonObj = new JSONObject();
+	System.out.println(jarray.size());
+	for (int i = 0; i < jarray.size(); i++) {
+		// System.out.println(jarray.get(i));
+		jsonObj = (JSONObject) jarray.get(i);
+		//String playtype = (String) jsonObj.get("planType");
+		// System.out.println("playtype : " + playtype);
+		//String apiRank = (String) jsonObj.get("rank");
+		// System.out.println("Rank : " + apiRank);
+		//String planID = (String) jsonObj.get("planId");
+		// System.out.println(planID);
+		rankingOrder.add((String) jsonObj.get("planId"));
+	}
+	Assert.assertTrue(rankingOrder.size() == jarray.size(), "API ranking count is not in sync with plans count");
+	return rankingOrder;
 }
 
 
