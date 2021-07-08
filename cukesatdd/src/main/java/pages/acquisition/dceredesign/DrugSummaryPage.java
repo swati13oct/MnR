@@ -555,7 +555,7 @@ public class DrugSummaryPage extends UhcDriver {
 		je.executeScript("arguments[0].click()", snpPlanToggle);
 	}
 
-	@FindBy(xpath = "//button[@id='changePharmacyLink']")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//button[@id='changePharmacyLink']")
 	public WebElement DrugDetails_ChangePharmacyLnk;
 
 	@FindBy(xpath = "//h2[contains(text(), 'Drug Cost Details')]")
@@ -747,7 +747,7 @@ public class DrugSummaryPage extends UhcDriver {
 		CommonUtility.waitForPageLoadNew(driver, DrugPricing_CloseBtn, 20);
 		validateNew(DrugPricing_Header);
 		WebElement SwitchLink = driver.findElement(
-				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::button[contains(text(), 'Switch ')]"));
+				By.xpath("//*[contains(text(), '" + brandDrug + "')]//following::*[contains(@id, 'switchToGenericLink')]"));
 		jsClickNew(SwitchLink);
 		CommonUtility.waitForPageLoadNew(driver, SwitchPageHeader, 20);
 		if (validateNew(SwitchPageHeader) && validateNew(SwitchPageCloseBtn)) {
