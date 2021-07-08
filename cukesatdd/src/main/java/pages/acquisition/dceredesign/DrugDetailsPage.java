@@ -209,14 +209,14 @@ public class DrugDetailsPage extends UhcDriver {
 	public WebElement Disclaimer_Accordian;
 
 	// @FindBy(id = "selectaPharmacyHeader")
-	@FindBy(xpath = "//h3[@id='modal-label'][text()='Select a Pharmacy']")
+	@FindBy(xpath = "//h2[@id='modal-label'][text()='Select a Pharmacy']")
 	public WebElement selectPharmacyHeader;
 
 	// @FindBy(id = "selectPharmcyModalCloseLink")
 	@FindBy(id = "cancelicon")
 	public WebElement selectPharmacyModalCloseBtn;
 
-	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'We are currently')]")
+	@FindBy(xpath = "//*[contains(@class,'modal__content')]//*[contains(text(),'Current Pharmacy')]")
 	public WebElement selectedPharmacyLink;
 
 	@FindBy(id = "milesDropdown")
@@ -225,7 +225,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "pharmacy-zip-filter")
 	public WebElement pharmacyZipcodeSearch;
 
-	@FindBy(xpath = "//*[@class='uhc-card__content']//*[contains(text(),'Search')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement pharmacySearchBtn;
 
 	@FindBy(id = "mailSelectPharmacyBtn0")
@@ -249,7 +249,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "paginationNextBtn")
 	public WebElement nextBtn;
 
-	@FindBy(xpath = "//a[text()='Keep using this pharmacy.']")
+	@FindBy(xpath = "//button[contains(@class, 'keepPharmacyLink')]")
 	public WebElement keepUsingPharmBtn;
 
 	@FindBy(xpath = "//button[text()='Change Pharmacy']/ancestor::div/div/span")
@@ -374,8 +374,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(id = "inValidZipcodeLbl")
 	private WebElement invalidZipCodeMsg;
 
-	@FindBy(xpath = "//*[@id='selectaPharmacy-overlay']//*[@class='field-error-msgfordceui']")
-
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//*[@class='field-error-msgfordceui']")
 	private WebElement noResultsMessage;
 
 	@FindBy(xpath = "(//a[contains(@class,'uhc-link-button')])[3]")
@@ -583,7 +582,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(), 'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	public DrugSummaryPage ClickLinktoNavigatetoDrugSummary() {
@@ -865,6 +864,7 @@ public class DrugDetailsPage extends UhcDriver {
 		validateNew(DrugCosts_PlanDetailsBtn);
 		jsClickNew(DrugCosts_PlanDetailsBtn);
 		waitForPageLoadSafari();
+		pageloadcomplete();
 		CommonUtility.waitForPageLoadNew(driver, planCostsTab, 20);
 		WebElement PlanName_PlanDetails = driver.findElement(By.xpath("//h2[contains(text(), '"+planName+"')]"));
 		if (driver.getCurrentUrl().contains("details") && validateNew(PlanName_PlanDetails)) {
@@ -965,11 +965,13 @@ public class DrugDetailsPage extends UhcDriver {
 	public void clickOnvppPlan() {
 		validateNew(backtoSummaryBtn);
 		backtoSummaryBtn.click();
+        pageloadcomplete();
 	}
 
 	public void clickOnvppPlanDetails() {
 		validateNew(viewPlanBtn);
 		viewPlanBtn.click();
+        pageloadcomplete();
 
 		validate(backToPlan);
 		assertTrue("Drug Cost Estimator is Displaying", !backtoDrugEstBtn.isDisplayed());
@@ -979,6 +981,7 @@ public class DrugDetailsPage extends UhcDriver {
 	public PlanDetailsPage clickReturnToDetailsLink() {
 		validateNew(returnToDetailsLink);
 		jsClickNew(returnToDetailsLink);
+        pageloadcomplete();
 
 		return new PlanDetailsPage(driver);
 	}
@@ -1088,7 +1091,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	}
 
-	@FindBy(xpath = "//*[contains(@class, 'uhc-filter')]//*[contains(text(), ' Standard Pharmacies ')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-radio-tab')]//*[contains(text(), ' Standard Pharmacies')]")
 	public WebElement StandardPharmacyFilter;
 
 	public void SelectStandardPharmacy(String standardPharmacytoSelect) {
@@ -1408,7 +1411,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'pharmacy-zip-filter') or contains(@name, 'zipCode')]")
 	public WebElement Pharmacy_ZipCodeTxt;
 
-	@FindBy(xpath = "//*[contains(@id,'selectaPharmacy')]//*[contains(@class, 'uhc-button')][contains(text(), 'Search')]")
+	@FindBy(xpath = "//*[contains(@class, 'uhc-modal__content')]//button[contains(@type, 'submit')]/span[contains(text(), 'Search')]")
 	public WebElement Pharmacy_SearchBtn;
 
 	@FindBy(xpath = "//select[contains(@id, 'milesDropdown')]")
@@ -1504,8 +1507,8 @@ public class DrugDetailsPage extends UhcDriver {
 		List<WebElement> PharmacyName = driver
 				.findElements(By.xpath("//button[contains(@id, 'selectPharmacyBtn') and contains(@aria-label, 'Select "
 						+ PharmacytoSelect + "')]"));
-
-		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
+		jsClickNew(PharmacyName.get(0));
+//		jsClickNew(PharmacyName.get(PharmacyName.size()-1));
 		validateNew(saveDrugBtn);
 		saveDrugBtn.click();
 	}
@@ -1686,7 +1689,7 @@ public class DrugDetailsPage extends UhcDriver {
 		switchToGenericSubmitBtn.click();
 	}
 
-	@FindBy(xpath = "//table/tbody/tr/td[1]/div/div/img[contains(@src,'check-icon@2x.png')]")
+	@FindBy(xpath = "//*[contains(@id, 'drugtable')]//img[contains(@alt, 'Covered')]")
 	private WebElement switchToGenericIcon;
 
 	@FindBy(id = "cancelicon")
@@ -1825,12 +1828,12 @@ public class DrugDetailsPage extends UhcDriver {
 
 	// @FindBy(xpath =
 	// "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[1]/span")
-	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
+	@FindBy(xpath = "//span[contains(text(),'Preferred Pharmacies')]/parent::label[contains(@class,'uhc-radio-tab')]")
 	public WebElement preferredPharmacyTab;
 
 	// @FindBy(xpath =
 	// "//*[@id='selectaPharmacy-overlay']/div/div[2]/div/div[5]/div/div/fieldset/div/label[2]/span")
-	@FindBy(xpath = "//span[contains(text(),'Standard Pharmacies')]/parent::label[contains(@class,'uhc-filter')]")
+	@FindBy(xpath = "//span[contains(text(),'Standard Pharmacies')]/parent::label[contains(@class,'uhc-radio-tab')]")
 
 	public WebElement standardPharmacyTab;
 
