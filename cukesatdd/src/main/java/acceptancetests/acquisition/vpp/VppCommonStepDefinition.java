@@ -1,3 +1,4 @@
+
 package acceptancetests.acquisition.vpp;
 
 import java.io.File;
@@ -74,36 +75,34 @@ public class VppCommonStepDefinition {
 		return loginScenario;
 	}
 
-	// WebDriver wd;
+//	WebDriver wd;
 	public String PREflow = "";
 
 	/**
 	 * @toDo:user is on medicare acquisition site landing page
 	 */
 
-	// @Given("^the user is on medicare acquisition site landing page$")
-	// public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
-	// wd = getLoginScenario().getWebDriverNew();
-	// List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
-	// Map<String, String> memberAttributesMap = new HashMap<String, String>();
-	// for (int i = 0; i < memberAttributesRow.size(); i++) {
-	// memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
-	// memberAttributesRow.get(i).getCells().get(1));
-	// }
-	// String site = memberAttributesMap.get("Site");
-	// AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
-	//
-	// getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
-	// getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE,
-	// aquisitionhomepage);
-	// getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
-	// getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, "
-	// ");
-	//
-	// getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
-	// if (site.equalsIgnoreCase("AARP"))
-	// aquisitionhomepage.validateSubtitle();
-	// }
+//	@Given("^the user is on medicare acquisition site landing page$")
+//	public void the_user_on__medicaresolutions_Site(DataTable givenAttributes) {
+//		wd = getLoginScenario().getWebDriverNew();
+//		List<DataTableRow> memberAttributesRow = givenAttributes.getGherkinRows();
+//		Map<String, String> memberAttributesMap = new HashMap<String, String>();
+//		for (int i = 0; i < memberAttributesRow.size(); i++) {
+//			memberAttributesMap.put(memberAttributesRow.get(i).getCells().get(0),
+//					memberAttributesRow.get(i).getCells().get(1));
+//		}
+//		String site = memberAttributesMap.get("Site");
+//		AcquisitionHomePage aquisitionhomepage = new AcquisitionHomePage(wd, site);
+//
+//		getLoginScenario().saveBean(CommonConstants.WEBDRIVER, wd);
+//		getLoginScenario().saveBean(PageConstants.ACQUISITION_HOME_PAGE, aquisitionhomepage);
+//		getLoginScenario().saveBean(DCERedesignCommonConstants.DRUGLIST, " ");
+//		getLoginScenario().saveBean(DCERedesignCommonConstants.YOUPAYLIST_ALLDRUGS, " ");
+//
+//		getLoginScenario().saveBean(oleCommonConstants.ACQ_SITE_NAME, site);
+//		if (site.equalsIgnoreCase("AARP"))
+//			aquisitionhomepage.validateSubtitle();
+//	}
 
 	@Given("^the user is on medicare acquisition site landing page fro campaign Traffic$")
 	public void the_user_on__medicaresolutions_Site_campaign_Traffic(DataTable givenAttributes) {
@@ -166,7 +165,7 @@ public class VppCommonStepDefinition {
 	@Then("^the user navigates to the plan details for the given plan type$")
 	public void the_user_navigates_to_the_plan_details_for_the_given_plan_type_in_AARP_site(DataTable data)
 			throws Throwable {
-		// wd.manage().window().maximize(); //Can be handled from MRScenario
+//		wd.manage().window().maximize(); //Can be handled from MRScenario
 		// Remove the commented code
 		/*
 		 * List<DataTableRow> memberAttributesRow = data.getGherkinRows(); String
@@ -849,14 +848,6 @@ public class VppCommonStepDefinition {
 		plansummaryPage.savePlans(savePlanNames, planType);
 	}
 
-	@Then("^user selects keepshopping on the pop-up$")
-	public void user_selects_keepshopping_on_popup() {
-		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-
-		plansummaryPage.validateKeepShopping();
-	}
-
 	@Then("^user gets a create profile prompt$")
 	public void user_saves_two_plans_as_favorite_on_AARP_site() {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
@@ -978,7 +969,7 @@ public class VppCommonStepDefinition {
 	@Then("^the user validates the following Additional Benefits of Plan for the plan$")
 	public void the_user_validates_the_following_Additional_Benefits_of_Plan_for_the_plan_in_AARP(
 			DataTable givenAttributes) throws Throwable {
-		// List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
+//		List<DataTableRow> additionalBenefits = givenAttributes.getGherkinRows();
 		List<List<String>> additionalBenefits = givenAttributes.asLists();
 
 		PlanDetailsPage vppPlanDetailsPage = (PlanDetailsPage) getLoginScenario()
@@ -1958,12 +1949,12 @@ public class VppCommonStepDefinition {
 		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		// int counter = Integer.parseInt(Counter);
-		// if (planType.equals("MAPD")) {
-		// // plansummaryPage.clickonViewPlans();
-		// plansummaryPage.checkMAPlansOnly(Counter);
-		// System.out.println("Selected All MAPD plans for Plan Compare");
-		// }
-		// else
+//		if (planType.equals("MAPD")) {
+//			// plansummaryPage.clickonViewPlans();
+//			plansummaryPage.checkMAPlansOnly(Counter);
+//			System.out.println("Selected All MAPD plans for Plan Compare");
+//		}
+//		else
 		plansummaryPage.checkPlansForCompare(Counter, planType);
 
 		ComparePlansPage planComparePage = plansummaryPage.clickOnCompareLink();
@@ -2884,21 +2875,6 @@ public class VppCommonStepDefinition {
 		}
 	}
 
-	@Then("^the site user clicks on MS Start Application Button and proceed Next$")
-	public void Start_application_button_proceed_next_ms(DataTable givenAttributes) throws Throwable {
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
-			String FirstName = memberAttributesMap.get("First Name");
-			String LastName = memberAttributesMap.get("Last Name");
-			String PlanName = memberAttributesMap.get("PlanName");
-			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			String submitconfirmation = plansummaryPage.MSStartApplication(FirstName, LastName, PlanName);
-			getLoginScenario().saveBean(VPPCommonConstants.SUBMITCONFIRMATION, submitconfirmation);
-		}
-	}
-
 	@Then("^user validate the plandetails on medsupp plans$")
 	public void user_validate_plandetails_medsupp_page() throws Throwable {
 
@@ -3143,15 +3119,15 @@ public class VppCommonStepDefinition {
 			throws Throwable {
 		Map<String, String> memberAttributesMap = new HashMap<String, String>();
 		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-		if (!(MRScenario.environment.equalsIgnoreCase("offline") || MRScenario.environment.equalsIgnoreCase("prod"))) {
-			// String DateOfBirth = memberAttributesMap.get("DOB");
-			String FirstName = memberAttributesMap.get("Firstname");
-			String LastName = memberAttributesMap.get("Lastname");
-			String EmailAddress = memberAttributesMap.get("Email");
-			VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
-					.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
-			plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
-		}
+
+		// String DateOfBirth = memberAttributesMap.get("DOB");
+		String FirstName = memberAttributesMap.get("Firstname");
+		String LastName = memberAttributesMap.get("Lastname");
+		String EmailAddress = memberAttributesMap.get("Email");
+		VPPPlanSummaryPage plansummaryPage = (VPPPlanSummaryPage) getLoginScenario()
+				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
+		plansummaryPage.RequestPlanIInformation(FirstName, LastName, EmailAddress);
+
 	}
 
 	@Then("^the user clicks on back on all plan linnk in Plan Compare page")
@@ -4482,21 +4458,25 @@ public class VppCommonStepDefinition {
 		getLoginScenario().saveBean(PageConstants.VPP_PLAN_SUMMARY_PAGE, plansummaryPage);
 	}
 
-	@And("^user clicks on heart icon and save plan on Plan Compare$")
-	public void user_saves_plan_on_plan_compare(DataTable givenAttributes) throws Throwable {
-
-		Map<String, String> memberAttributesMap = new HashMap<String, String>();
-		memberAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
-
-		String plan = memberAttributesMap.get("PlanName");
-		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+	@Then("^agent saves two plans as favorite for user on plan compare page$")
+	public void agent_saves_two_plans_as_favorite_on_plan_compare_page(DataTable givenAttributes) {
+		ComparePlansPage comparePlansPage = (ComparePlansPage) getLoginScenario()
 				.getBean(PageConstants.PLAN_COMPARE_PAGE);
 
-		planComparePage.savePlan(plan);
-		// Assertion.assertTrue("user saved two heart icon plans", result);
-		System.out.println("user saved heart icon plans");
+		Map<String, String> memberAttributesMap = prepareTestInput(givenAttributes);
+		String savePlanNames = memberAttributesMap.get("Test Plans");
+		comparePlansPage.save2Plans(savePlanNames);
+	}
+
+	@Then("^the user validates the view drug information on Plan Compare page")
+	public void user_clicks_validates_view_drug_info_on_PlanCompare_AARP(DataTable givenAttributes) throws InterruptedException {
+		ComparePlansPage planComparePage = (ComparePlansPage) getLoginScenario()
+				.getBean(PageConstants.PLAN_COMPARE_PAGE);
+		Map<String, String> givenAttributesMap = new HashMap<String, String>();
+		givenAttributesMap = DataTableParser.readDataTableAsMaps(givenAttributes);
+		String drugName = givenAttributesMap.get("Drugs");
+		planComparePage.validateViewDrugInformation(drugName);
+		getLoginScenario().saveBean(PageConstants.PLAN_COMPARE_PAGE, planComparePage);
 
 	}
-	
-
 }

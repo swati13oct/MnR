@@ -120,13 +120,13 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 		return new RetireesOfSelectedPlans(driver);
 	}
 
-	public Rallytool_Page lookupproviderclick() {
+	public Rallytool_PageMobile lookupproviderclick() {
 		validate(lookupproviderLink);
 		lookupproviderLink.click();
 		ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
 		driver.switchTo().window(tabs.get(1));
 		if (getTitle().equalsIgnoreCase("Enter Zip")) {
-			return new Rallytool_Page(driver);
+			return new Rallytool_PageMobile(driver);
 		}
 		return null;
 
@@ -204,12 +204,12 @@ public class RetireeAcquisitionHomePage extends UhcDriver {
 		waitforElement(element);
 	}
 
-	public DrugLookUpPage navigateToDrugLookUp() {
+	public DrugLookUpPageMobile navigateToDrugLookUp() {
 		druglookuplink.click();
 		impliciWait(searchForaDrugHeader, 10);
 		// waitforElement(searchForaDrugHeader);
 		Assertion.assertTrue("Header Displayed", searchForaDrugHeader.isDisplayed());
-		return new DrugLookUpPage(driver);
+		return new DrugLookUpPageMobile(driver);
 	}
 
 	public ProviderSearchPageUhcRetiree navigateToProviderSearchTool() {

@@ -1276,6 +1276,11 @@ public class VisitorProfilePage extends UhcDriver {
             Assertion.assertTrue(">>>>>> Validation Failed for Providers NOT Added <<<<<<<<< - Providers Added ", removeProviders.size() == 0);
         }
     }
+
+	public ProviderSearchPage addDoctor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 

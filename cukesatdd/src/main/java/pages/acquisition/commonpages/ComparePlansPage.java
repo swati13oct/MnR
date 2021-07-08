@@ -240,7 +240,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(css = "div#CSRLoginAlert>div")
 	private WebElement agentModeBanner;
 
-	@FindBy(xpath = "//div[contains(text(),'Current')]/preceding::div[contains(@class,'text-dark')]")
+	@FindBy(xpath = "(//span[contains(@class,'headerPlan')])[1]")
 	private WebElement enrolledPlanName;
 
 	@FindBy(xpath = "//div[contains(text(),'Status')]/preceding-sibling::div/span[1]")
@@ -249,16 +249,17 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//div[contains(text(),'Status')]/following::div[contains(text(),'DOB')]")
 	private WebElement nonMemberDOB;
 
-	@FindBy(css = "#changes-submitted button")
+	@FindBy(xpath = "//button[text()='Continue']")
 	private WebElement popupAccept;
 
 	@FindBy(css = "input.uhc-switch__input")
 	private WebElement currentPlanToggle;
 
-	@FindBys(value = { @FindBy(css = "table#your-doctors-table tbody>tr") })
+	@FindBys(value = {
+			@FindBy(xpath = "//table[@id='your-doctors-table']//td[contains(@ng-class,'Agent')]/parent::tr") })
 	private List<WebElement> providersList;
 
-	@FindBys(value = { @FindBy(css = "table#your-drugs-table tbody>tr") })
+	@FindBys(value = { @FindBy(xpath = "//table[@id='your-drugs-table']//td[contains(@ng-class,'Agent')]/parent::tr") })
 	private List<WebElement> drugList;
 
 	@FindBy(id = "dupIconFlyOut")
@@ -306,7 +307,7 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//h2[@id='viewLocationTitle']")
 	private WebElement viewLocationPopupProviderName;
 
-	@FindBy(xpath = "//div[@class='modal-body']/span")
+	@FindBy(xpath = "//div[@class='modal-title']/following-sibling::div")
 	private WebElement allSetDrugsProvidersInfo;
 
 	@FindBy(xpath = "//*[text()='View Plan Details']")
@@ -330,13 +331,42 @@ public class ComparePlansPage extends UhcDriver {
 	@FindBy(xpath = "//input[@id='email']")
 	private WebElement emailPlanSummaryFieldBox;
 
-	// @FindBy(xpath =
-	// "//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']")
+//	@FindBy(xpath = "//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']")
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare3']//button//*[text()='Enroll']")
 	private WebElement EnrollinPlanCompare_MAPD;
 
 	@FindBy(xpath = "//*[@id='enrollbtnplancompare2']//button//*[text()='Enroll']")
 	private WebElement EnrollinPlanCompare_PDP;
+
+	@FindBy(xpath = "//img[(@alt='save')]/parent::span")
+	private WebElement saveAPlan;
+
+	@FindBy(xpath = "//button[text()='Save to Mira']")
+	private WebElement btnSaveToMira;
+
+	@FindBy(css = "a#viewDrugInfoLink-0")
+	private WebElement viewDrugInfoBtn;
+
+	@FindBy(xpath = "//div[@class='vpp-drug-name']/strong")
+	private WebElement drugNameOnDrugInfoPopup;
+
+	@FindBy(xpath = "//div[text()='Drug Cost Details']/parent::button")
+	private WebElement drugCostDetailsBtn;
+
+	@FindBy(xpath = "//button[text()='Import Drugs & Doctors']")
+	private WebElement btnImportDrugsAndDoctors;
+
+	@FindBy(xpath = "//div[text()='Close']/parent::button")
+	private WebElement closeBtn;
+
+	@FindBy(css = "div.consent-body input")
+	private WebElement termsCheck;
+
+	@FindBy(xpath = "//button[contains(text(),'Applicant Agrees;')]")
+	private WebElement btnAgreeToConsent;
+
+	@FindBy(css = "div.meter.animate")
+	private WebElement progressBar;
 
 	public ComparePlansPage(WebDriver driver) {
 		super(driver);
@@ -604,7 +634,7 @@ public class ComparePlansPage extends UhcDriver {
 		enrollForPlan = driver.findElement(By.xpath("//*[@id='enrollbtnplancompare0']//button//*[text()='Enroll']"));
 		if (enrollForPlan != null) {
 			// validateNew(enrollForPlan);
-			// enrollForPlan.click();
+//  			enrollForPlan.click();
 			jsClickNew(enrollForPlan);
 			waitForPageLoadSafari();
 		}
@@ -622,7 +652,7 @@ public class ComparePlansPage extends UhcDriver {
 		WebElement PlanDetailsLink = driver
 				.findElement(By.xpath("(//div//a[contains(text(),'View Plan Details')])[1]"));
 		CommonUtility.waitForPageLoadNew(driver, PlanDetailsLink, 30);
-		// PlanDetailsLink.click();
+//				PlanDetailsLink.click();
 		jsClickNew(PlanDetailsLink);
 		System.out.println("View Plan Details Link is clicked");
 		waitForPageLoadSafari();
@@ -668,9 +698,9 @@ public class ComparePlansPage extends UhcDriver {
 
 	public void validateCallSamContent() throws InterruptedException {
 
-		// Actions action = new Actions(driver);
-		// WebElement element = callsam;
-		// action.moveToElement(element).perform();
+//		Actions action = new Actions(driver);
+//		WebElement element = callsam;
+//		action.moveToElement(element).perform();
 		jsMouseOver(callsam);
 		String toolTipText = callsamtooltip.getText();
 		System.out.println("====================================================================");
@@ -773,7 +803,7 @@ public class ComparePlansPage extends UhcDriver {
 				"//th[contains(@ng-repeat,'plan in count')][" + counter + "]//div[contains(@ng-if,'planName')]"));
 		String PlanName = removePlanName.getText();
 		System.out.println("3rd plan name is : " + PlanName);
-		// removelink.click();
+//		removelink.click();
 		jsClickNew(removelink);
 		System.out.println("Clicked on Remove Link on plan Compare page");
 
@@ -896,8 +926,8 @@ public class ComparePlansPage extends UhcDriver {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", editDoctorsLink);
 
-		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 
 		switchToNewTabNew(editDoctorsLink);
 
@@ -932,8 +962,8 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(editHospitalsLink);
 		String ParentWindow = driver.getTitle();
 
-		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(editHospitalsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -967,8 +997,8 @@ public class ComparePlansPage extends UhcDriver {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addDoctorsLink);
 
-		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(addDoctorsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1001,8 +1031,8 @@ public class ComparePlansPage extends UhcDriver {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].scrollIntoView(true);", addHospitalsLink);
 
-		// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-		// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+//		CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//		CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 		switchToNewTabNew(addHospitalsLink);
 
 		if (driver.getCurrentUrl().contains("werally")) {
@@ -1062,7 +1092,7 @@ public class ComparePlansPage extends UhcDriver {
 				.findElement(By.xpath("//*[@id='plan-compare-table-header']/div/div[2]/div[1]/button"));
 		WebDriverWait wait = new WebDriverWait(driver, 60);
 		for (int i = 0; viewLess.isEnabled();) {
-			// viewLess.click();
+//			viewLess.click();
 			jsClickNew(viewLess);
 			System.out.println("Clicked no. of times : " + i);
 			i++;
@@ -1095,8 +1125,13 @@ public class ComparePlansPage extends UhcDriver {
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
 		String mbi = givenAttributesMap.get("MBI");
-
-		allSet(providers, drugs);
+		
+		if (Strings.isNullOrEmpty(mbi)) {
+			System.out.println("#########Empty Profile#########");
+		}else {
+			allSet(providers, drugs);
+		}
+		
 
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
 		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
@@ -1130,19 +1165,17 @@ public class ComparePlansPage extends UhcDriver {
 				String[] provider = providers.split(";");
 				for (int i = 0; i < provider.length; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
-						Assertion.assertTrue(provider[i].split(":")[0].contains(
-								providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+						Assertion.assertTrue(provider[i].split(":")[0]
+								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
 						System.out.println("#########"
-								+ providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
-								+ "#########");
+								+ providersList.get(i).findElement(By.xpath("td/span")).getText().trim() + "#########");
 					}
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()));
-				System.out.println(
-						"#########" + providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()
-								+ "#########");
+						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
+				System.out.println("#########" + providersList.get(0).findElement(By.xpath("td/span")).getText().trim()
+						+ "#########");
 			}
 
 		} else {
@@ -1157,11 +1190,10 @@ public class ComparePlansPage extends UhcDriver {
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
-					Assertion.assertTrue(drugName[i].contains(
-							drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+					Assertion.assertTrue(drugName[i]
+							.contains(drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()));
 					System.out.println("#########"
-							+ drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
-							+ "#########");
+							+ drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim() + "#########");
 				}
 			}
 
@@ -1169,6 +1201,21 @@ public class ComparePlansPage extends UhcDriver {
 			System.out.println("#########No Drugs available for this member#########");
 		}
 
+		Assertion.assertTrue(btnSaveToMira.isDisplayed());
+	}
+	
+	/**
+	 * Import Drugs for non-member
+	 */
+	public void importDrugsForNonMember() {
+		jsClickNew(btnImportDrugsAndDoctors);
+		jsClickNew(termsCheck);
+		jsClickNew(btnAgreeToConsent);
+		/*
+		 * btnImportDrugsAndDoctors.click(); termsCheck.click();
+		 * btnAgreeToConsent.click();
+		 */
+		waitforElementDisapper(By.cssSelector("div.meter.animate"), 120);
 	}
 
 	/**
@@ -1176,27 +1223,23 @@ public class ComparePlansPage extends UhcDriver {
 	 */
 	public void validateAgentModeBannersForNonMember(HashMap<String, String> givenAttributesMap) {
 
-		// Handled data table from step definition
-		/*
-		 * List<DataTableRow> givenAttributesRow = userData.getGherkinRows();
-		 * Map<String, String> givenAttributesMap = new HashMap<String, String>(); for
-		 * (int i = 0; i < givenAttributesRow.size(); i++) {
-		 * 
-		 * givenAttributesMap.put(givenAttributesRow.get(i).getCells().get(0),
-		 * givenAttributesRow.get(i).getCells().get(1)); }
-		 */
-		String plan = givenAttributesMap.get("Plan Name");
 		String drugs = givenAttributesMap.get("Drugs");
 		String providers = givenAttributesMap.get("Providers");
 		String fname = givenAttributesMap.get("First Name");
 		String lname = givenAttributesMap.get("Last Name");
 		String dob = givenAttributesMap.get("DOB");
-
-		allSet(providers, drugs);
+		String actualDrugs = "";
 
 		System.out.println("######### " + agentModeBanner.getText().trim() + "#########");
 		Assertion.assertEquals("You are in Agent mode viewing " + fname + " " + lname + " profile",
 				agentModeBanner.getText().trim());
+		
+		Assertion.assertTrue(btnSaveToMira.isDisplayed());
+		Assertion.assertTrue(btnImportDrugsAndDoctors.isDisplayed());
+		
+		importDrugsForNonMember();
+		
+		allSet(providers, drugs);
 
 		// Validate Providers
 		if (!providers.equalsIgnoreCase("no")) {
@@ -1205,26 +1248,24 @@ public class ComparePlansPage extends UhcDriver {
 			validate(editDoctorsLink);
 			if (providers.contains(";")) {
 				String[] provider = providers.split(";");
-				for (int i = 0; i < providersList.size() - 1; i++) {
+				for (int i = 0; i < provider.length-1; i++) {
 					if (!StringUtils.isNullOrEmpty(providers)) {
-						Assertion.assertTrue(provider[i].split(":")[0].contains(
-								providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
+						Assertion.assertTrue(provider[i].split(":")[0]
+								.contains(providersList.get(i).findElement(By.xpath("td/span")).getText().trim()));
 						System.out.println("#########"
-								+ providersList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
-								+ "#########");
+								+ providersList.get(i).findElement(By.xpath("td/span")).getText().trim() + "#########");
 					}
 				}
 			} else {
 				Assertion.assertTrue(providers.split(":")[0]
-						.contains(providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()));
-				System.out.println(
-						"#########" + providersList.get(1).findElement(By.cssSelector("th>span>span")).getText().trim()
-								+ "#########");
+						.contains(providersList.get(0).findElement(By.xpath("td/span")).getText().trim()));
+				System.out.println("#########" + providersList.get(1).findElement(By.xpath("td/span")).getText().trim()
+						+ "#########");
 			}
 
 		} else {
 
-			System.out.println("#########No Providers for this member#########");
+			System.out.println("#########No Providers for this non-member#########");
 		}
 
 		if (!drugs.equalsIgnoreCase("no")) {
@@ -1233,16 +1274,17 @@ public class ComparePlansPage extends UhcDriver {
 			executor.executeScript("arguments[0].scrollIntoView(true);", editDrugsLink);
 			String[] drugName = drugs.split(",");
 			for (int i = 0; i < drugName.length; i++) {
+				actualDrugs = actualDrugs+drugList.get(i).findElement(By.xpath("td/span/span")).getText().trim()+",";
+			}
+			for (int i = 0; i < drugName.length; i++) {
 				if (!StringUtils.isNullOrEmpty(drugs)) {
-					Assertion.assertTrue(drugs.contains(
-							drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()));
-					System.out.println("#########"
-							+ drugList.get(i + 1).findElement(By.cssSelector("th>span>span")).getText().trim()
-							+ "#########");
+					Assertion.assertTrue(actualDrugs.contains(drugName[i]));
+					System.out.println("#########"+ actualDrugs.split(",")[i] + "#########");
 				}
 			}
+
 		} else {
-			System.out.println("#########No Drugs available for this member#########");
+			System.out.println("#########No Drugs available for this non-member#########");
 		}
 	}
 
@@ -1254,29 +1296,29 @@ public class ComparePlansPage extends UhcDriver {
 			if (!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("no")) {
 				String[] provider = providers.split(";");
 				String[] drugName = drugs.split(",");
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("Number of providers loaded: " + provider.length));
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("Number of drugs loaded: " + drugName.length));
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
+						.contains("number of providers loaded: " + provider.length));
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
+						.contains("number of drugs loaded: " + drugName.length));
 			} else if (!providers.equalsIgnoreCase("no") && !drugs.equalsIgnoreCase("yes")) {
 				String[] provider = providers.split(";");
-				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("Number of providers loaded: " + provider.length));
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim().toLowerCase()
+						.contains("number of providers loaded: " + provider.length));
 				Assertion.assertTrue(
-						allSetDrugsProvidersInfo.getText().trim().contains("Number of drugs loaded: " + "0"));
+						allSetDrugsProvidersInfo.getText().trim().toLowerCase().contains("number of drugs loaded: " + "0"));
 			} else if (!providers.equalsIgnoreCase("yes") && !drugs.equalsIgnoreCase("no")) {
 				String[] drugName = drugs.split(",");
 				Assertion.assertTrue(
-						allSetDrugsProvidersInfo.getText().trim().contains("Number of providers loaded: " + "0"));
+						allSetDrugsProvidersInfo.getText().trim().toLowerCase().contains("number of providers loaded: " + "0"));
 				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
-						.contains("Number of drugs loaded: " + drugName.length));
+						.contains("number of drugs loaded: " + drugName.length));
 			} else {
-				Assertion.assertEquals("No data within 12 months of order date.",
-						allSetDrugsProvidersInfo.getText().trim());
+				Assertion.assertTrue(allSetDrugsProvidersInfo.getText().trim()
+						.contains("No data within 12 months of order date."));
 			}
 			CommonUtility.waitForPageLoad(driver, popupAccept, 100);
 			popupAccept.click();
-			Thread.sleep(30000);
+			Thread.sleep(35000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -1288,8 +1330,33 @@ public class ComparePlansPage extends UhcDriver {
 	 * @return
 	 */
 	public VisitorProfilePage navigateToVisitorProfilePage() {
+		//jsClickNew(shoppingCartIcon);
+		scrollToView(shoppingCartIcon);
+		shoppingCartIcon.click();
+		//jsClickNew(lnkProfile);
+		lnkProfile.click();
+		waitForPageLoadSafari();
+		if (driver.getCurrentUrl().contains("profile")) {
+			CommonUtility.checkPageIsReadyNew(driver);
+			return new VisitorProfilePage(driver);
+		} else {
+			System.out.println("Navigation to visitor profile is failed");
+			return null;
+		}
+	}
+	
+	/**
+	 * Navigate to Visitor Profile Page
+	 * 
+	 * @return
+	 */
+	public VisitorProfilePage allSetAndNavigateToVisitorProfilePage() {
+		allSet("no", "no");
+		scrollToView(shoppingCartIcon);
 		jsClickNew(shoppingCartIcon);
+		//shoppingCartIcon.click();
 		jsClickNew(lnkProfile);
+		//lnkProfile.click();
 		waitForPageLoadSafari();
 		if (driver.getCurrentUrl().contains("profile")) {
 			CommonUtility.checkPageIsReadyNew(driver);
@@ -1400,9 +1467,7 @@ public class ComparePlansPage extends UhcDriver {
 
 	public void ValidatesAddedDrugsList(String druglist) {
 		String[] DrugListItems = druglist.split("&");
-		// int DrugCount_Total = DrugListItems.length-1; //Commenting because null is
-		// handled when drugs are added to druglist array, thus array will only have
-		// drug names.
+//		int DrugCount_Total = DrugListItems.length-1; 		//Commenting because null is handled when drugs are added to druglist array, thus array will only have drug names.
 		int DrugCount_Total = DrugListItems.length;
 		System.out.println("Total Added Drug Count : " + DrugCount_Total);
 		WebElement TotalDrugCount = driver.findElement(
@@ -1410,8 +1475,7 @@ public class ComparePlansPage extends UhcDriver {
 		int i;
 		String currentDrug;
 		System.out.println("Total Added Drug Count : " + DrugCount_Total);
-		// for(i=1; i<=DrugCount_Total; i++) { //Druglist array does not have null and
-		// only has drug names, hence starting from 0 to array length - 1.
+//		for(i=1; i<=DrugCount_Total; i++) {					//Druglist array does not have null and only has drug names, hence starting from 0 to array length - 1.
 		for (i = 0; i < DrugCount_Total; i++) {
 			currentDrug = DrugListItems[i];
 			System.out.println("Current Added Drug Name : " + currentDrug);
@@ -1489,12 +1553,12 @@ public class ComparePlansPage extends UhcDriver {
 				additionalBenefitsOONToggle.isDisplayed());
 		Assertion.assertEquals("OON Toggle default Text should be displayed as View Out-of-Network Benefits",
 				"View Out-of-Network Benefits", additionalBenefitsOONLabel.getText().trim());
-		// additionalBenefitsOONToggle.click();
+//		additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 		Assertion.assertEquals("OON Toggle Text should be changed to View In-Network Benefits",
 				"View In-Network Benefits", additionalBenefitsOONLabel.getText().trim());
 		Assertion.assertTrue("OON Toggle Style should be changed", outOfNetworkStyle.isDisplayed());
-		// additionalBenefitsOONToggle.click();
+//		additionalBenefitsOONToggle.click();
 		jsClickNew(additionalBenefitsOONToggle);
 	}
 
@@ -1523,10 +1587,10 @@ public class ComparePlansPage extends UhcDriver {
 		if (counter.equals("1023")) {
 			DentalFlyerLink = driver.findElement(By.xpath("//td[1]//*[text()='Click here for details']"));
 			System.out.println("Dental Flyer link is 1023 Displayed");
-			// jsClickNew(DentalFlyerLink);
+//			jsClickNew(DentalFlyerLink);
 			System.out.println("Clicking on 1023 DentalFlyer on plan Compare page");
-			// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-			// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+//			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			switchToNewTabNew(DentalFlyerLink);
 			if (driver.getCurrentUrl().contains(Documentcode)) {
 				System.out.println("We able to 1023  Document loaded");
@@ -1539,10 +1603,10 @@ public class ComparePlansPage extends UhcDriver {
 		} else if (counter.equals("1025")) {
 			DentalFlyerLink = driver.findElement(By.xpath("//td[2]//*[text()='Click here for details']"));
 			System.out.println("Dental Flyer link is 1025 Displayed");
-			// jsClickNew(DentalFlyerLink);
+//			jsClickNew(DentalFlyerLink);
 			System.out.println("Clicking on 1025 DentalFlyer on plan Compare page");
-			// CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
-			// CommonConstants.setMainWindowHandle(driver.getWindowHandle());
+//			CommonConstants.MAIN_WINDOW_HANDLE_ACQUISITION = driver.getWindowHandle();
+//			CommonConstants.setMainWindowHandle(driver.getWindowHandle());
 			switchToNewTabNew(DentalFlyerLink);
 
 			if (driver.getCurrentUrl().contains(Documentcode)) {
@@ -1585,7 +1649,7 @@ public class ComparePlansPage extends UhcDriver {
 		validateNew(validateemailbutton);
 		validateNew(removeLink);
 		validateNew(viewPlanDetailslink);
-		// validateNew(viewUnSaveIcon);
+//		validateNew(viewUnSaveIcon);
 		validateNew(ViewAllPlans);
 		validateNew(addPlanButton);
 		System.out.println("Validated all links plan compare");
@@ -1675,5 +1739,63 @@ public class ComparePlansPage extends UhcDriver {
 		}
 		return null;
 	}
+
+	/**
+	 * Save 2 plans 
+	 * @param plans
+	 */
+	public void save2Plans(String plans) {
+		try {
+			String[] planNames = plans.split(",");
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(0,200)");
+			for (int i = 1; i <= planNames.length; i++) {
+				WebElement moreOptions = driver
+						.findElement(By.xpath("(//button//span[text()='More Options'])[" + i + "]"));
+				//moreOptions.click();
+				jsClickNew(moreOptions);
+				waitforElement(saveAPlan);
+				sleepBySec(4);
+				//saveAPlan.click();
+				jsClickNew(saveAPlan);
+
+			}
+		} catch (Exception ex) {
+
+		}
+	}
+
+	/**
+	 * Validate the drug Information
+	 * @param drugName
+	 */
+	public void validateViewDrugInformation(String drugName) {
+		scrollToView(viewDrugInfoBtn);
+		jsClickNew(viewDrugInfoBtn);
+		// viewDrugInfoBtn.click();
+		Assertion.assertEquals(drugName, drugNameOnDrugInfoPopup.getText().trim());
+		// drugCostDetailsBtn.click();
+		jsClickNew(drugCostDetailsBtn);
+		Assertion.assertEquals(drugName,
+				driver.findElement(By.xpath("//div[@id='drugtable']//span[1]")).getText().trim());
+		jsClickNew(driver.findElement(By.xpath("//span[text()='Return to Compare']/parent::button")));
+		// driver.findElement(By.xpath("//span[text()='Return to
+		// Compare']/parent::button")).click();
+		waitforElement(drugCostDetailsBtn);
+		// closeBtn.click();
+		jsClickNew(closeBtn);
+	}
+
+
+public void validatePlanComparePagefromProfile() {
+	//validateNew(backToAllPlansLink);
+	validateNew(validateprintbutton);
+	validateNew(validateemailbutton);
+	//validateNew(removeLink);
+	//validateNew(viewDetailslink);
+	//validateNew(savePlanIcon);
+	System.out.println("Validated all links plan compare");
+	
+}
 
 }

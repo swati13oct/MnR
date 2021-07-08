@@ -27,7 +27,7 @@ public class SannFranciscoSiteMapPage extends UhcDriver{
 	}
 
 
-	public Rallytool_Page findaprovidersanfranciscositemapclick() {
+	public Rallytool_PageMobile findaprovidersanfranciscositemapclick() {
 		
 		validate(sanfranciscositemappagefindaproviderlink);
 		
@@ -37,7 +37,7 @@ public class SannFranciscoSiteMapPage extends UhcDriver{
 			
 			if (getTitle().equalsIgnoreCase(
 					"Enter Zip")) {
-		return new Rallytool_Page(driver);
+		return new Rallytool_PageMobile(driver);
 		}
 		// TODO Auto-generated method stub
 		return null;

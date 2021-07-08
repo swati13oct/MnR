@@ -86,12 +86,12 @@ public class AddDrugDetailsMobile extends UhcDriver {
 		return new DrugCostEstimatorPageMobile(driver);
 		}
 	
-	public SavingsOppurtunity continueAddDrugDetails(){
+	public SavingsOppurtunityMobile continueAddDrugDetails(){
 		
 		waitforElement(continueButton);
 		continueButton.click();
 		if (driver.getTitle().equalsIgnoreCase(PageTitleConstants.BLAYER_SAVINGS_OPPORTUNITY)) {
-			return new SavingsOppurtunity(driver);
+			return new SavingsOppurtunityMobile(driver);
 		}
 		return null;
 	}

@@ -93,6 +93,18 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | ZipCode | <zipCode> |
     And user clicks on continue button in Zip Entry Page
     Then the user validates PLan Toggle on Drug Summary Page
+    And user click on View Drug Pricing Modal
+    And the user clicks on Edit Drug list link on View Drug pricing modal
+    Then the user searches and adds the following Drug to Drug List
+      | DrugName | <drug3> |
+    Then the user clicks on Review Button on Build Drug Page to land on DCE Summary page
+    And user click on PDP plan to view drug pricing
+    And the user clicks on Edit Drug list link on View Drug pricing modal
+    Then the user deletes the following drug from Drug list
+      | DrugName | <drug2> |
+    Then the user clicks on Review Button on Build Drug Page to land on DCE Summary page
+    And user click on View Drug Pricing Modal
+    And user verifies Drug List on DCE Summary Page - Drug Pricing Modal
     And user clicks on change pharmacy link from summary page
     Then the user validates distance dropdown and Zipcode change on Summary page - Change Pharmacy Page
       | PharmacyZipCode | <pharmacyZipCode> |
@@ -119,13 +131,13 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
 
     @dce_MedEdPage_E2E_Scenario4_UAT_AARP @regressionAARP
     Examples: 
-      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
-      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
+      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
+      | E2E Scenario 4_AMP | AARP | Orkambi | Fanapt | Emsam |  80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
     @dce_MedEdPage_E2E_Scenario4_UAT_UHC @regressionUHC
     Examples: 
-      | Scenario           | site | drug1   | drug2  | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
-      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt |   80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
+      | Scenario           | site | drug1   | drug2  | drug3 | zipCode | pharmacyZipCode | SelectPharmacy | planType | planName                        | PharmacyFilterPreferred |
+      | E2E Scenario 4_UMS | UHC  | Orkambi | Fanapt | Emsam |  80002 |           10001 | CVS PHARMACY   | PDP      | AARP MedicareRx Walgreens (PDP) | DUANE READE             |
 
   @dce_E2E_Scenario6_UAT
   Scenario Outline: <Scenario> : To verify DCE REDESIGN flow from External Link
@@ -206,8 +218,8 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | NotCoveredDrug | <drug2> |
     Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
       | NotCoveredDrug | <drug3> |
-    Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
-      | CoveredDrug | <drug7> |
+    Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
+      | NotCoveredDrug | <drug7> |
     Then the user validates non zero costs for Not covered Drugs for LIS Buydown on DCE details Page
       | NotCoveredDrug | <drug6> |
     And the user validates link to Drug Summary Page
@@ -325,15 +337,15 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
       | PlanName | <planname> |
     Then the user validates all added Drugs on Plan Compare
     Then the user clicks on back on all plan linnk in Plan Compare page
-    Then the user clicks on Enroll Now for AARP site to start the OLE flow
-      | Plan Name | <planname> |
-    Then the user validates the Plan details on OLE
-    Then the user validates TFN in Welcome OLE Right Rail
-    Then the user validates Learn more modal for Welcome OLE
-    Then the user validates Leave OLE modal for Welcome OLE
-    Then the user validates cancellation modal for Welcome OLE
-    Then the user navigates to Personal Information Page
-    And the user cancels enrollment and navigates to homepage
+#    Then the user clicks on Enroll Now for AARP site to start the OLE flow
+#      | Plan Name | <planname> |
+#    Then the user validates the Plan details on OLE
+#    Then the user validates TFN in Welcome OLE Right Rail
+#    Then the user validates Learn more modal for Welcome OLE
+#    Then the user validates Leave OLE modal for Welcome OLE
+#    Then the user validates cancellation modal for Welcome OLE
+#    Then the user navigates to Personal Information Page
+#    And the user cancels enrollment and navigates to homepage
 
     @dce_E2E_Scenario1_UAT_AARP @regressionAARP
     Examples: 
@@ -418,7 +430,7 @@ Feature: 1.10.4 UAT-DCE-To test UAT DCE E2E Regression Scenarios
     Then user should be navigated to first page of pharmacy list
     When user search with incorrect zipcode
       | ZipCode | <zipCode2> |
-    Then error message "Please enter a valid ZIP code." should be displayed on change pharmacy modal
+    Then error message "Please enter a valid ZIP code" should be displayed on change pharmacy modal
     When user search with correct zipcode
       | ZipCode | <zipCode3> |
     When user saves and updates pharmacy from list
