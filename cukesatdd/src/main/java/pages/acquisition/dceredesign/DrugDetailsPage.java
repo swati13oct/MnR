@@ -1216,7 +1216,7 @@ public class DrugDetailsPage extends UhcDriver {
 			Assertion.fail("Preferred Mail Pharmacy Copay and Modals NOT validated");
 	}
 
-	@FindBy(xpath = "//*[contains(text(), 'Pharmacy:')]/span")
+	@FindBy(xpath = "//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Pharmacy:')]//following-sibling::span")
 	private WebElement PharmacyNameText;
 
 	public void validatePharmacyName(String PharmacyName) {
@@ -1545,7 +1545,7 @@ public class DrugDetailsPage extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@id, 'plancopaydetail')]//h3[contains(text(), 'Deductible')]//following::*[contains(text(), '$0')]")
 	public WebElement LIS_ZeroDeductible;
 
-	@FindBy(xpath = "//*[contains(@alt, 'alert')]//following::*[contains(text(), 'level of Extra Help')]")
+	@FindBy(xpath = "//img[contains(@class, 'd-lg-block')]//following::*[contains(text(), 'level of Extra Help')]")
 	public WebElement LIS_Alert;
 
 	public void validateLISBuyDown_CopaySection_LISAlert() {
