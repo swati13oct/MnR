@@ -1,4 +1,4 @@
-@UATRegression @visitorProfile 
+@UATRegression @visitorProfile @visitorProfileUpdated
 Feature: 1.08. UAT- Visitor profile 
 
 @sanity
@@ -35,8 +35,11 @@ Feature: 1.08. UAT- Visitor profile
     Then the user signs in with optum Id credentials
       | User Name | <userName> |
       | Password  | <password> |
-     
-    @regressionAARP111
+      And the user selects plan and navigates back to profile
+    |	PlanName	|	<testPlan>	|
+    And the user views the drugs added
+    
+    @regressionAARP
     Examples: 
       | Scenario                                             | externallink                                             | drug1 | drug2   | drug3   | drug4   | zipCode |	testPlans	|	planName	|	planType	|	SelectPharmacy	| userName  | password   |
       | Scenario 4 | https://ma.aarpmedicareplans.com/aarp-medicare-advantage |	Nexium	|	Advair Diskus	|	aripiprazole	|	insulin lispro	|	80243	|	 AARP Medicare Advantage SecureHorizons Plan 1 (HMO),AARP Medicare Advantage SecureHorizons Plan 2 (HMO)	|	UnitedHealthcare Dual Complete (HMO D-SNP)	|	Medicare Special Needs Plans	|	UCHEALTH OUTPATIENT PHARMACY CCM	|	vdatdd_06 | Password@1 |

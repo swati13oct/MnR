@@ -7135,7 +7135,7 @@ public class VPPPlanSummaryPage extends UhcDriver {
 	@FindBy(id = "savePlanheading")
 	private WebElement savedplanHeading;
 	
-	@FindBy(xpath = "(//*[contains(@dtmname,'Keep Shopping")
+	@FindBy(xpath = "//*[contains(@dtmname,'Keep Shopping')]")
 	private WebElement keepshopping;
 	
 	public void keepShopping() {

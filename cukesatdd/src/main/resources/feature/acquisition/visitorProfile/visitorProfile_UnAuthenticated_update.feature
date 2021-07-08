@@ -1,4 +1,4 @@
-@UATRegression @visitorProfile 
+@UATRegression @visitorProfile @visitorProfileUpdated
 Feature: 1.08. UAT- Visitor profile 
 
 
@@ -54,7 +54,7 @@ Feature: 1.08. UAT- Visitor profile
     Then the user clicks on Enroll in plan and validates the Welcome to OLE Page on new Plan Compare
 
 
-     @regressionAARP 
+     @regressionAARP
     Examples: 
       | TID   | site | zipcode | isMultiCounty | county             | plantype | count | planyear |	DrugName	| planName	|	removePlanIndices	|	plantype2	|	testPlans2	|	testPlans3	|
       | 00010 | AARP |   33111 | NO            | Los Angeles County | MAPD     |     2 | future   |	atorvastatin calcium	|	 AARP Medicare Advantage Choice (PPO)	|	3	|	PDP	|	AARP MedicareRx Walgreens (PDP)	|	AARP MedicareRx Preferred (PDP)	|
