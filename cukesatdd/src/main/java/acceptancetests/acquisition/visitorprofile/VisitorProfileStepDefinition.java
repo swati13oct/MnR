@@ -779,4 +779,15 @@ public class VisitorProfileStepDefinition {
 		 visitorProfilePage.selectPlan(planName);
 
 			}
+
+	@And("^the user views the drugs added$")
+	public void the_user_views_drug_added() {
+		//driver = (WebDriver) getLoginScenario().getBean(CommonConstants.WEBDRIVER);
+		VisitorProfilePage visitorProfilePage = (VisitorProfilePage) getLoginScenario()
+				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
+
+		 visitorProfilePage.viewDrugs();
+
+			}
+
 }

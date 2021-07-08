@@ -1301,7 +1301,16 @@ public class VisitorProfilePage extends UhcDriver {
             backtoProfile.click();
            
     }
+    
+    @FindBy(xpath = "//*[contains(@dtmname,'Your Saved Drugs & Pharmacy')]")
+	private WebElement viewDrugs;
 
+    
+    public void viewDrugs() {
+        
+    viewDrugs.click();
+    }
+    
 }
 
 
