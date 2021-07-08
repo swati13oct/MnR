@@ -1,5 +1,5 @@
-@dce @dce_redesign_DrugDetailsValidation1
-Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Details Page Flows
+@dce @dce_redesign_DrugDetailsValidation
+Feature: 1.10.5 DCE-REDISIGN DCE Details Page Scenarios - To test DCE Details Page Flows
 
   @dce_DrugDetailsValidation
   Scenario Outline: To verify DCE Details Page  <site> site - All Sections, Switch, Edit Drug, Learm more link from VPP Details and Insulin Savings model info on DCE Details Page
@@ -249,7 +249,6 @@ Feature: 1.10.5 DCE-REDISIGN AARP DCE Details Page Scenarios - To test DCE Detai
       | Plan Name | <planName> |
     Then the user validates planName matches plan Name in VPP
     Then the user validates correct Copay section view and LIS message Not Displayed and zero deductible for LIS Buydown Plan on DCE details Page
-  #    Then the user validates correct Copay section view and LIS message for LIS Buydown Plan on DCE details Page
     Then the user validates Monthly Costs are not displayed for LIS Buydown plan on DCE details Page
     Then the user validates zero costs for following Covered generic drug for LIS Buydown on DCE details Page
       | CoveredDrug | <drug1> |
