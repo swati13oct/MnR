@@ -1228,7 +1228,7 @@ public class DrugDetailsPage extends UhcDriver {
 
 	public void validatePremium(String premium) {
 		WebElement PremiumforPlan = driver.findElement(
-				By.xpath("//div[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
+				By.xpath("//*[contains(@class, 'd-lg-block')]//*[contains(text(), 'Monthly Premium')]//following-sibling::*[contains(text(), '$')]"));
 		validateNew(PremiumforPlan);
 		String PremiumDisplayed = PremiumforPlan.getText();
 		System.out.println("Premium Displayed for Plan : " + PremiumDisplayed);
