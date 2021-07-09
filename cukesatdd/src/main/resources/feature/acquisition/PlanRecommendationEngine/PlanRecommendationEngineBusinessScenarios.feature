@@ -121,7 +121,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
       | UHC  |   30012 | YES           | Walton County | MA            | Medicaid,Nursing | Lookup     | Emily Adams, NP | NO            | Yes,Yes,Yes,Yes               | Lower                | both           | Vision, Hearing              |
 
   @PRE @APIRanking @PDPFlowRanking
-  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> , <primaryRecommendation> , <RankingplansOrder> - To validate PDP ranking plans in PRE
+  Scenario Outline: <Zipcode>, <isMultiCounty> , <county> , <isCoverageOpt> , <Drug Selection> - To validate PDP ranking plans in PRE
     Given the user is on UHC medicare acquisition site PRE landing page
       | Site | <site> |
     When user navigate to Plan Recommendation Engine and Checking Breadcrumbs
@@ -136,7 +136,7 @@ Feature: Plan Recommendation Engine Ranking - Verify PRE flows functionalities w
     Then user validate elements in loading results page
     Then user validate UI and API recommendation rankings in results page
 
-    @regressionAARP
+    @regressionAARP @PDPFlowRanking1234
     Examples: 
       | site | Zipcode | isMultiCounty | county   | isCoverageOpt | Drug Selection |
       | AARP |   10001 | NO            | New York | PDP           | No             |

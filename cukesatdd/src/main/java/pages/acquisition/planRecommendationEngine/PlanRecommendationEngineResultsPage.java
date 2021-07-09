@@ -1337,24 +1337,31 @@ public List<String> getAPIPlansRanking(String rankingJSON) {
 	JSONArray jarray = new JSONArray();
 	JSONObject jsonObject = null;
 	try {
-		jarray = (JSONArray) parser.parse(rankingJSON);
-		jsonObject = (JSONObject) jarray.get(0);
+		//jarray = (JSONArray) parser.parse(rankingJSON);
+		jsonObject = (JSONObject) parser.parse(rankingJSON);;
+		jarray = (JSONArray) jsonObject.get("plans");
+		System.out.println("API Plans Count "+jarray.size());
+		for (int i = 0; i < jarray.size(); i++) {
+			// System.out.println(jarray.get(i));
+			for(int j=0;j< jarray.size();j++)
+			{
+			JSONObject jsonObj = (JSONObject) jarray.get(j);
+			// String playtype = (String) jsonObj.get("planType");
+			// System.out.println("playtype : " + playtype);
+			// String apiRank = (String) jsonObj.get("rank");
+			// System.out.println("Rank : " + apiRank);
+			// String planID = (String) jsonObj.get("planId");
+			// System.out.println(planID);
+			if(((String)jsonObj.get("rank")).equalsIgnoreCase(String.valueOf(i+1))) {
+				rankingOrder.add((String) jsonObj.get("planId"));
+				break;
+			}
+			}
+		}
 	} catch (ParseException e) {
 		e.printStackTrace();
 	}
-	JSONObject jsonObj = new JSONObject();
-	System.out.println(jarray.size());
-	for (int i = 0; i < jarray.size(); i++) {
-		// System.out.println(jarray.get(i));
-		jsonObj = (JSONObject) jarray.get(i);
-		//String playtype = (String) jsonObj.get("planType");
-		// System.out.println("playtype : " + playtype);
-		//String apiRank = (String) jsonObj.get("rank");
-		// System.out.println("Rank : " + apiRank);
-		//String planID = (String) jsonObj.get("planId");
-		// System.out.println(planID);
-		rankingOrder.add((String) jsonObj.get("planId"));
-	}
+	System.out.println(rankingOrder);
 	Assert.assertTrue(rankingOrder.size() == jarray.size(), "API ranking count is not in sync with plans count");
 	return rankingOrder;
 }
@@ -1464,16 +1471,9 @@ public void verifyAPIRankings(List<WebElement> plansId, List<String> APIRankings
 public String getplanId(WebElement plan) {
 	String planName = "";
 	String planId="";
-	int i = 0;
-	while (i < 5) {
-		planName = plan.getText().trim();
-		planId = plan.getAttribute("id");
-		System.out.println(planName);
-		if (planName.isEmpty()) {
-			i++;
-		} else
-			break;
-	}
+	planName = plan.getText().trim();
+	planId = plan.getAttribute("href").split("planId=")[1].split("&")[0].trim();
+	//System.out.println("UI Plan Name : "+planName);
 	Assert.assertTrue(planId.length()>1, "--- Unable to get the Plan Id ---");
 	System.out.println("UI Plan ID : "+planId);
 	return planId;
