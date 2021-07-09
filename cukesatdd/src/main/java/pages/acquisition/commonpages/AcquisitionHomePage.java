@@ -4864,10 +4864,10 @@ public class AcquisitionHomePage extends GlobalWebElements {
 		jsClickNew(MedicareEducation);
 		threadsleep(5);
 		if (driver.getCurrentUrl().contains("medicare-education")) {
-			Assertion.assertTrue(true);
+			Assert.assertTrue(true);
 			System.out.println("Medicare Education Homepage open: URL-->" + driver.getCurrentUrl());
 		} else {
-			Assertion.fail("Error loading Medicare Education Homepage link");
+			Assert.fail("Error loading Medicare Education Homepage link");
 		}
 		// Assertion.assertEquals(driver.getCurrentUrl(),
 		// "https://www.stage-aarpmedicareplans.uhc.com/medicare-education.html");
