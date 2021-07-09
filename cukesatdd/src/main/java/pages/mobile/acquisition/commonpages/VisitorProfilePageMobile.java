@@ -61,7 +61,8 @@ public class VisitorProfilePageMobile extends UhcDriver {
 	@FindBy(css = "div.signupCTA a.signin-font")
 	private WebElement signInLegacy;
 
-	@FindBy(css = "div.signupCTA a.profileBtn")
+//	@FindBy(css = "div.signupCTA a.profileBtn")
+	@FindBy(css = "header[class*='profile-header-mobile'] a[dtmname*='Create Profile']")
 	private WebElement btnCreateProfile;
 
 	@FindBy(xpath = "//button[@class='uhc-button uhc-button--outlined uhc-button--secondary mt-20']")

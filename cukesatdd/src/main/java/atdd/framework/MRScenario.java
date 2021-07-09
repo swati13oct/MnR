@@ -783,7 +783,7 @@ public class MRScenario {
 		capabilities.setCapability("deviceName", mobileDeviceName);
 		capabilities.setCapability("platformName", mobileDeviceOSName);
 		capabilities.setCapability("platformVersion", mobileDeviceOSVersion);
-		capabilities.setCapability("locationContextEnabled", false);
+//		capabilities.setCapability("locationContextEnabled", "false");
 		//capabilities.setCapability("AUTOMATION_NAME", "XCUITest");
 		capabilities.setCapability("commandTimeout" , 600);
 		capabilities.setCapability("maxDuration", 10800);
@@ -812,6 +812,10 @@ public class MRScenario {
 
 			} else {
 				capabilities.setCapability("browserName", "Safari");
+				capabilities.setCapability("autoAcceptAlerts", "true");
+				capabilities.setCapability("safariAllowPopups", "true");
+				capabilities.setCapability("locationServicesEnabled", "true");
+				capabilities.setCapability("locationServicesAuthorized", "true");
 				browserName="Safari";
 //				mobileDriver = new IOSDriver(new URL(SauceLabsURL), capabilities);
 				threadSafeMobileDriver.set(new IOSDriver(new URL(SauceLabsURL), capabilities));

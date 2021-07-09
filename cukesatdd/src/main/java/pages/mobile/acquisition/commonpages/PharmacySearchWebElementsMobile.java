@@ -164,10 +164,18 @@ public class PharmacySearchWebElementsMobile extends UhcDriver {
 	 * indian_tribal_label_filter;
 	 */
 
-	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
+	@FindBy(css = "#filter_toggle_id")
+	protected WebElement filterToggle;
+	
+//	@FindBy(xpath = "//*[contains(@id,'indian-tribal-label')]")
+	@FindBy(css = "[id*='indian-tribal-label']")
 	protected WebElement indian_tribal_label_filter;
+	
+	@FindBy(css = "#indian-tribal")
+	protected WebElement indian_tribal_filter;
 
-	@FindBy(id = "noResultsFoundErrorMessage")
+//	@FindBy(id = "noResultsFoundErrorMessage")
+	@FindBy(css = "#noResultsFoundErrorMessage")
 	protected WebElement noPharmaciesErrorMessage;
 
 	@FindBy(xpath = "//*[@id='modifyYourSearchId']//li")

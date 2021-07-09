@@ -46,7 +46,8 @@ public class WelcomePageMobile extends UhcDriver {
 	@FindBy(xpath = "//*[contains(@class, 'ole-form-header')]//*[contains(@class, 'only-intro')]")
 	private WebElement WelcomePageHeader;
 
-	@FindBy(id = "view-learn-enrollment")
+//	@FindBy(id = "view-learn-enrollment")
+	@FindBy(css = "#view-learn-enrollment")
 	private WebElement LearnMore_Modal;
 
 	@FindBy(id = "ole-cancel-confirm")
@@ -81,7 +82,8 @@ public class WelcomePageMobile extends UhcDriver {
 
 	// Right Rail Elements
 
-	@FindBy(id = "tty-number")
+//	@FindBy(id = "tty-number")
+	@FindBy(css = "#tty-number")
 	private WebElement RightRailTFN;
 
 	@FindBy(xpath = "//*[text()='Coverage Details']")
@@ -378,7 +380,7 @@ public class WelcomePageMobile extends UhcDriver {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			String fileHref = EnrollmentChecklistLink.getAttribute("href").trim();
 			String fileName = fileHref.substring(fileHref.lastIndexOf("/") + 1).split("\\.")[0];
-			grantMemoryAccessOnAndroidChrome(EnrollmentChecklistLink);
+			grantPermissionOnAndroidChrome(EnrollmentChecklistLink);
 			byte[] pdfContent = getDownloadedPdfFileContentAndroid(fileName);
 			document = PDDocument.load(pdfContent);
 		} else {
@@ -437,7 +439,7 @@ public class WelcomePageMobile extends UhcDriver {
 		if (driver.getClass().toString().toUpperCase().contains("ANDROID")) {
 			String fileHref = ListaVerificationLink.getAttribute("href").trim();
 			String fileName = fileHref.substring(fileHref.lastIndexOf("/") + 1).split("\\.")[0];
-			grantMemoryAccessOnAndroidChrome(ListaVerificationLink);
+			grantPermissionOnAndroidChrome(ListaVerificationLink);
 			byte[] pdfContent = getDownloadedPdfFileContentAndroid(fileName);
 			document = PDDocument.load(pdfContent);
 		} else {

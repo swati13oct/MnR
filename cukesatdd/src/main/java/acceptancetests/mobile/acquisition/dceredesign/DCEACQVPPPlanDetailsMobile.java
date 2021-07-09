@@ -241,10 +241,10 @@ public class DCEACQVPPPlanDetailsMobile {
 		VPPPlanSummaryPageMobile plansummaryPage = (VPPPlanSummaryPageMobile) getLoginScenario()
 				.getBean(PageConstants.VPP_PLAN_SUMMARY_PAGE);
 		System.out.println("plan details ");
-		plansummaryPage.viewPlanSummary(planType);
+//		plansummaryPage.viewPlanSummary(planType);
 		PlanDetailsPageMobile plandetailspage = plansummaryPage.navigateToPlanDetails(planName, planType);
 		if (plandetailspage != null) {
-			getLoginScenario().saveBean(PageConstants.PLAN_DETAILS_PAGE, plandetailspage);
+			getLoginScenario().saveBean(PageConstants.VPP_PLAN_DETAILS_PAGE, plandetailspage);
 			System.out.println("plan details "+plandetailspage);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANTYPE, planType);
 			getLoginScenario().saveBean(DCERedesignCommonConstants.PLANNAME, planName);

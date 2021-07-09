@@ -341,7 +341,8 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 	@FindBy(id = "dupIconFlyOut")
 	private WebElement shoppingCartIcon;
 
-	@FindBy(xpath = "//h3[@id='guest-profile']")
+//	@FindBy(xpath = "//h3[@id='guest-profile']")
+	@FindBy(css = "a#visitor-profile-header")
 	private WebElement guestProfileLink;
 
 	@FindBy(xpath = "//a[@id='ctc-sam-mobile']")
@@ -2339,6 +2340,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		System.out.println("Navigating to URL : " + NavigateToURL);
 		driver.navigate().to(NavigateToURL);
 		waitForPageLoadSafari();
+		CommonUtility.checkPageIsReadyNew(driver);
 		CommonUtility.waitForPageLoad(driver, driver.findElement(By.xpath("//header[contains(@class,'header')]")), 30);
 		System.out.println("Page Title : " + (driver.findElement(By.xpath("//title")).getText()));
 
@@ -2919,7 +2921,7 @@ public class AcquisitionHomePageMobile extends GlobalWebElements {
 		waitforElement(shoppingCartIcon);
 		// shoppingCartIcon.click();
 		jsClickNew(shoppingCartIcon);
-		jsClickNew(guestProfileLink);
+//		jsClickNew(guestProfileLink);	//This locator is seen after we hover on heart icon
 		if (driver.getCurrentUrl().contains("profile")) {
 			return new VisitorProfilePageMobile(driver);
 		} else {

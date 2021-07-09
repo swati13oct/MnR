@@ -322,6 +322,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 			throw new IllegalArgumentException(
 					"Option " + shopOption + " is not available under 'Shop for a Plan' menu");
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void selectPlanTypeOption(String planType, boolean classicUrl) {
@@ -351,6 +352,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 		default:
 			throw new IllegalArgumentException("Plan type " + planType + " is not available under 'Plan Types' menu");
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 
 	public void selectTool(String tool) {
@@ -374,6 +376,7 @@ public class ShopForPlanNavigationPageMobile extends GlobalWebElements {
 			throw new IllegalArgumentException(
 					"Tool " + tool + " is not available under 'Tools to help you choose a plan' menu");
 		}
+		CommonUtility.checkPageIsReadyNew(driver);
 	}
 	
 	public boolean validateShopForPlanMenu() {

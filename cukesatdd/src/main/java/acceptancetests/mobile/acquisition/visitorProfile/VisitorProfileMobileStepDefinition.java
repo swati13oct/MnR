@@ -136,15 +136,15 @@ public class VisitorProfileMobileStepDefinition {
 				.getBean(PageConstants.VISITOR_PROFILE_PAGE);
 		visitorProfile.deletePlans(savedPlanNames);
 	}
-
-	@And("^the user clicks on the shopping cart icon mobile$")
+	
+	@And("^the user clicks on the shopping cart icon$")
 	public void the_user_clicks_on_the_shopping_cart_icon_in_AARP_site() {
 		AcquisitionHomePageMobile acqHomePage = (AcquisitionHomePageMobile) getLoginScenario()
 				.getBean(PageConstants.ACQUISITION_HOME_PAGE);
 
-		VisitorProfilePageMobile VisitorProfilePageMobile = acqHomePage.navigateToVisitorProfilePage();
-
-		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, VisitorProfilePageMobile);
+		VisitorProfilePageMobile visitorProfilePage = acqHomePage.navigateToVisitorProfilePage();
+		
+		getLoginScenario().saveBean(PageConstants.VISITOR_PROFILE_PAGE, visitorProfilePage);
 	}
 
 	@And("^the user clicks on the add drugs button to navigate to DCE Redesign on the profile page mobile$")

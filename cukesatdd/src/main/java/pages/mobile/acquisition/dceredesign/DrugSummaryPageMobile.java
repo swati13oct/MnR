@@ -34,7 +34,8 @@ public class DrugSummaryPageMobile extends UhcDriver {
 		openAndValidate();
 	}
 
-	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+//	@FindBy(xpath = "//h2[contains(text(),'Your estimated')]")
+	@FindBy(xpath = "//h2[contains(text(),'Review Drug Costs')]")
 	public WebElement reviewDrugCostPageHeading;
 
 	@FindBy(xpath = "//*[@id='guest-flow-widget-head']/../..")
