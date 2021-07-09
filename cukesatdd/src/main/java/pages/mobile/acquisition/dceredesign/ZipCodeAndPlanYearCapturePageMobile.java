@@ -146,19 +146,15 @@ public class ZipCodeAndPlanYearCapturePageMobile extends UhcDriver {
 		return null;
 	}
 
-	public ZipCodeAndPlanYearCapturePageMobile validateZipCodePlanYearCapturePageNonAEP() {
-		try {
-
-			mobileUtils.mobileLocateElement(zipCodeTxtbox);
-			mobileUtils.mobileLocateElement(countyDropdown);
-			// mobileUtils.mobileLocateElement(planYearDropdown);
-			mobileUtils.mobileLocateElement(continueBtn);
-			return new ZipCodeAndPlanYearCapturePageMobile(driver);
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Element not found");
+	public void validateZipCodePlanYearCapturePageNonAEP() {
+		CommonUtility.waitForPageLoad(driver, zipCodeTxtbox, 30);
+		if(validateNew(zipCodeTxtbox)&&validateNew(countyDropdown)&&validateNew(continueBtn)) {
+			Assertion.assertTrue("Navigated to ZipCode and Plan year capture Page", true);
 		}
-		return null;
+		else {
+		Assertion.fail("Did not Navigate to ZipCode and Plan year capture Page");
+		}
+		
 	}
 
 	public ZipCodeAndPlanYearCapturePageMobile validatePlanYearDrpDownNonAEP() {

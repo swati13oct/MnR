@@ -314,8 +314,8 @@ public abstract class UhcDriver {
 		scrollToView(element);
 		element.clear();
 		jsClickNew(element);
-		for(int i = 0; i < message.length(); i++) {
-			threadsleep(5); 	//Adding some milliseconds wait
+		for (int i = 0; i < message.length(); i++) {
+			threadsleep(5); // Adding some milliseconds wait
 			char c = message.charAt(i);
 			StringBuilder s = new StringBuilder().append(c);
 			element.sendKeys(s);

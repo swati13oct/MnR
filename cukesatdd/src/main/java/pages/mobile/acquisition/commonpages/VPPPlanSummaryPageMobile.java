@@ -587,7 +587,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(xpath = "//select[@id='mpbed-year']//option[contains(text(),'2019')]")
 	private WebElement yearDrpDwnOptionPartB;
 
-	@FindBy(xpath = "//select[@id='msVppdpsd']")
+	@FindBy(xpath = "//*[@id='msVppdpsd']")
 	private WebElement startDrpDwn;
 
 	@FindBy(id = "sign-up-modal-header")
@@ -780,7 +780,7 @@ public class VPPPlanSummaryPageMobile extends GlobalWebElements {
 	@FindBy(id = "msVppZipCode")
 	private WebElement medSuppZipCode;
 
-	@FindBy(xpath = "//button[contains(@class,'viewPlans')]")
+	@FindBy(xpath = "//button[text()='View Plans']")
 	private WebElement viewPlansBtnMedSupp;
 
 	@FindBy(id = "mpaed-month")

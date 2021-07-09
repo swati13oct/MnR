@@ -12,9 +12,11 @@ import acceptancetests.acquisition.ole.oleCommonConstants;
 import acceptancetests.data.PageConstants;
 import atdd.framework.DataTableParser;
 import atdd.framework.MRScenario;
+import io.appium.java_client.AppiumDriver;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.acquisition.dceredesign.ZipCodePlanYearCapturePage;
 import pages.mobile.acquisition.commonpages.AcquisitionHomePageMobile;
 import pages.mobile.acquisition.commonpages.PlanDetailsPageMobile;
 import pages.mobile.acquisition.dceredesign.BuildYourDrugListMobile;
@@ -35,7 +37,7 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 		return loginScenario;
 	}
 
-	//AppiumDriver wd;
+	AppiumDriver wd;
 
 	@When("^clicks on Review drug cost button$")
 	public void clicks_on_Review_drug_cost_button() {
@@ -116,9 +118,9 @@ public class DCEACQZipAndPlanYearCaptureMobile {
 	@Then("^user should be navigated to zipcode and plan year capture page for AEP$")
 	public void user_should_be_navigated_to_zipcode_and_plan_year_capture_page_for_AEP_in_AARP() {
 
-		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = (ZipCodeAndPlanYearCapturePageMobile) getLoginScenario()
-				.getBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture);
+		ZipCodeAndPlanYearCapturePageMobile zipCodePlanYearPage = new ZipCodeAndPlanYearCapturePageMobile(wd);
 		zipCodePlanYearPage.validateZipCodePlanYearCapturePageNonAEP();
+		getLoginScenario().saveBean(PageConstants.DCE_Redesign_ZipCodePlanYearCapture, zipCodePlanYearPage);
 	}
 
 	@Then("^plan year dropdown should be displayed during AEP$")
